@@ -1,0 +1,107 @@
+# Copyright (C) 1991-2005 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#		RefCounter_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name FAMILY Cyclone
+set_global_assignment -name DEVICE EP1C3T100C8
+set_global_assignment -name TOP_LEVEL_ENTITY RefCounter
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "19:38:40  JANUARY 01, 2006"
+set_global_assignment -name LAST_QUARTUS_VERSION 5.1
+set_global_assignment -name USER_LIBRARIES "E:\\wjt\\radio\\projects\\Xylo\\wjt-wolfson\\db\\/"
+set_instance_assignment -name CLOCK_SETTINGS fx2mclk -to FX2_CLK
+set_location_assignment PIN_10 -to FX2_CLK
+set_location_assignment PIN_54 -to FX2_FD[0]
+set_location_assignment PIN_55 -to FX2_FD[1]
+set_location_assignment PIN_56 -to FX2_FD[2]
+set_location_assignment PIN_57 -to FX2_FD[3]
+set_location_assignment PIN_49 -to FX2_FD[4]
+set_location_assignment PIN_48 -to FX2_FD[5]
+set_location_assignment PIN_47 -to FX2_FD[6]
+set_location_assignment PIN_42 -to FX2_FD[7]
+set_location_assignment PIN_41 -to FX2_flags[0]
+set_location_assignment PIN_40 -to FX2_flags[1]
+set_location_assignment PIN_39 -to FX2_flags[2]
+set_location_assignment PIN_38 -to FX2_PA[0]
+set_location_assignment PIN_37 -to FX2_PA[1]
+set_location_assignment PIN_36 -to FX2_PA[2]
+set_location_assignment PIN_35 -to FX2_PA[3]
+set_location_assignment PIN_29 -to FX2_PA[4]
+set_location_assignment PIN_28 -to FX2_PA[5]
+set_location_assignment PIN_27 -to FX2_PA[6]
+set_location_assignment PIN_26 -to FX2_PA[7]
+set_location_assignment PIN_50 -to FX2_SLRD
+set_location_assignment PIN_53 -to FX2_SLWR
+set_location_assignment PIN_72 -to BCLK
+set_location_assignment PIN_74 -to DOUT
+set_location_assignment PIN_71 -to LRCLK
+set_location_assignment PIN_100 -to LED[0]
+set_location_assignment PIN_25 -to LED[1]
+set_location_assignment PIN_97 -to PB
+set_location_assignment PIN_66 -to AD_CLK
+set_location_assignment PIN_34 -to alt_clk_i
+set_location_assignment PIN_69 -to alt_clk_o
+set_location_assignment PIN_89 -to dbgout
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_CLK
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_FD[0]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_FD[1]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_FD[2]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_FD[3]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_FD[4]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_FD[5]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_FD[6]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_FD[7]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_flags[0]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_flags[1]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_flags[2]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PA[0]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PA[1]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PA[2]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PA[3]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PA[4]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PA[5]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PA[6]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PA[7]
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_SLRD
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_SLWR
+set_instance_assignment -name IO_STANDARD LVTTL -to BCLK
+set_instance_assignment -name IO_STANDARD LVTTL -to DOUT
+set_instance_assignment -name IO_STANDARD LVTTL -to LRCLK
+set_instance_assignment -name IO_STANDARD LVTTL -to LED[0]
+set_instance_assignment -name IO_STANDARD LVTTL -to LED[1]
+set_instance_assignment -name IO_STANDARD LVTTL -to PB
+set_instance_assignment -name IO_STANDARD LVTTL -to AD_CLK
+set_instance_assignment -name IO_STANDARD LVTTL -to alt_clk_i
+set_instance_assignment -name IO_STANDARD LVTTL -to alt_clk_o
+set_instance_assignment -name IO_STANDARD LVTTL -to dbgout
+set_location_assignment PIN_87 -to one_pps_i
+set_global_assignment -name GENERATE_RBF_FILE ON
+set_global_assignment -name AUTO_RAM_RECOGNITION OFF
+set_global_assignment -name FMAX_REQUIREMENT "24 MHz" -section_id fx2mclk
+set_global_assignment -name VERILOG_FILE dc_fifo.v
+set_global_assignment -name VERILOG_FILE CounterToFifo.v
+set_global_assignment -name VERILOG_FILE RefCount.v
+set_global_assignment -name VERILOG_FILE RefCounter.v
+set_global_assignment -name VERILOG_FILE usb_pipe.v
+set_global_assignment -name VECTOR_WAVEFORM_FILE RefCounter.vwf

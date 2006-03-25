@@ -1,0 +1,769 @@
+Analysis & Synthesis report for RefCounter
+Fri Jan 13 08:38:18 2006
+Version 5.1 Build 176 10/26/2005 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Analysis & Synthesis Source Files Read
+  5. Analysis & Synthesis Resource Usage Summary
+  6. Analysis & Synthesis Resource Utilization by Entity
+  7. Analysis & Synthesis RAM Summary
+  8. State Machine - |RefCounter|state
+  9. State Machine - |RefCounter|CounterToFifo:comb_10|state
+ 10. State Machine - |RefCounter|CounterToFifo:comb_10|post_strobe_state
+ 11. State Machine - |RefCounter|fx2_usb_pipe:usb_pipe|state
+ 12. State Machine - |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|sm_emptyfull
+ 13. General Register Statistics
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component
+ 16. Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated
+ 17. Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram
+ 18. Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers
+ 19. Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10
+ 20. Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers
+ 21. Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14
+ 22. Parameter Settings for User Entity Instance: dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component
+ 23. Parameter Settings for User Entity Instance: dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel
+ 24. dcfifo Parameter Settings by Entity Instance
+ 25. scfifo Parameter Settings by Entity Instance
+ 26. Analysis & Synthesis Equations
+ 27. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2005 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                          ;
++-----------------------------+-----------------------------------------+
+; Analysis & Synthesis Status ; Successful - Fri Jan 13 08:38:18 2006   ;
+; Quartus II Version          ; 5.1 Build 176 10/26/2005 SJ Web Edition ;
+; Revision Name               ; RefCounter                              ;
+; Top-level Entity Name       ; RefCounter                              ;
+; Family                      ; Cyclone                                 ;
+; Total logic elements        ; 493                                     ;
+; Total pins                  ; 33                                      ;
+; Total virtual pins          ; 0                                       ;
+; Total memory bits           ; 512                                     ;
+; Total PLLs                  ; 0                                       ;
++-----------------------------+-----------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                ;
++--------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                             ; Setting            ; Default Value      ;
++--------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                             ; EP1C3T100C8        ;                    ;
+; Top-level entity name                                              ; RefCounter         ; RefCounter         ;
+; Family name                                                        ; Cyclone            ; Stratix            ;
+; Auto RAM Replacement                                               ; Off                ; On                 ;
+; Use smart compilation                                              ; Off                ; Off                ;
+; Restructure Multiplexers                                           ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                ; Off                ; Off                ;
+; Preserve fewer node names                                          ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                          ; Off                ; Off                ;
+; Verilog Version                                                    ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                       ; VHDL93             ; VHDL93             ;
+; State Machine Processing                                           ; Auto               ; Auto               ;
+; Extract Verilog State Machines                                     ; On                 ; On                 ;
+; Extract VHDL State Machines                                        ; On                 ; On                 ;
+; Add Pass-Through Logic to Inferred RAMs                            ; On                 ; On                 ;
+; NOT Gate Push-Back                                                 ; On                 ; On                 ;
+; Power-Up Don't Care                                                ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                       ; Off                ; Off                ;
+; Remove Duplicate Registers                                         ; On                 ; On                 ;
+; Ignore CARRY Buffers                                               ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                             ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                              ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                          ; Off                ; Off                ;
+; Ignore LCELL Buffers                                               ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                     ; Off                ; Off                ;
+; Optimization Technique -- Cyclone                                  ; Balanced           ; Balanced           ;
+; Carry Chain Length -- Stratix/Stratix GX/Cyclone/MAX II/Cyclone II ; 70                 ; 70                 ;
+; Auto Carry Chains                                                  ; On                 ; On                 ;
+; Auto Open-Drain Pins                                               ; On                 ; On                 ;
+; Remove Duplicate Logic                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                              ; Off                ; Off                ;
+; Perform gate-level register retiming                               ; Off                ; Off                ;
+; Allow register retiming to trade off Tsu/Tco with Fmax             ; On                 ; On                 ;
+; Auto ROM Replacement                                               ; On                 ; On                 ;
+; Auto Shift Register Replacement                                    ; On                 ; On                 ;
+; Auto Clock Enable Replacement                                      ; On                 ; On                 ;
+; Allow Synchronous Control Signals                                  ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                             ; Off                ; Off                ;
+; Auto RAM Block Balancing                                           ; On                 ; On                 ;
+; Auto Resource Sharing                                              ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                 ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                 ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                      ; Off                ; Off                ;
+; Maximum Number of M512 Memory Blocks                               ; -1                 ; -1                 ;
+; Maximum Number of M4K Memory Blocks                                ; -1                 ; -1                 ;
+; Maximum Number of M-RAM Memory Blocks                              ; -1                 ; -1                 ;
+; Ignore translate_off and translate_on Synthesis Directives         ; Off                ; Off                ;
+; Show Parameter Settings Tables in Synthesis Report                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                 ; Off                ; Off                ;
+; Retiming Meta-Stability Register Sequence Length                   ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                       ; Normal compilation ; Normal compilation ;
+; HDL message level                                                  ; Level2             ; Level2             ;
++--------------------------------------------------------------------+--------------------+--------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                          ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------+
+; dc_fifo.v                        ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/dc_fifo.v                 ;
+; CounterToFifo.v                  ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/CounterToFifo.v           ;
+; RefCount.v                       ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCount.v                ;
+; RefCounter.v                     ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.v              ;
+; usb_pipe.v                       ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/usb_pipe.v                ;
+; dcfifo.tdf                       ; yes             ; Megafunction                 ; g:/altera/quartus51/libraries/megafunctions/dcfifo.tdf                      ;
+; lpm_counter.inc                  ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/lpm_counter.inc                 ;
+; lpm_add_sub.inc                  ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/lpm_add_sub.inc                 ;
+; altdpram.inc                     ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/altdpram.inc                    ;
+; a_graycounter.inc                ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/a_graycounter.inc               ;
+; a_fefifo.inc                     ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/a_fefifo.inc                    ;
+; a_gray2bin.inc                   ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/a_gray2bin.inc                  ;
+; dffpipe.inc                      ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/dffpipe.inc                     ;
+; alt_sync_fifo.inc                ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/alt_sync_fifo.inc               ;
+; lpm_compare.inc                  ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/lpm_compare.inc                 ;
+; altsyncram_fifo.inc              ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/altsyncram_fifo.inc             ;
+; aglobal51.inc                    ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/aglobal51.inc                   ;
+; db/dcfifo_ui41.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/dcfifo_ui41.tdf        ;
+; db/a_gray2bin_n4b.tdf            ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/a_gray2bin_n4b.tdf     ;
+; db/a_graycounter_g06.tdf         ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/a_graycounter_g06.tdf  ;
+; db/a_graycounter_h06.tdf         ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/a_graycounter_h06.tdf  ;
+; db/altsyncram_h0v.tdf            ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/altsyncram_h0v.tdf     ;
+; db/alt_synch_pipe_lc8.tdf        ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/alt_synch_pipe_lc8.tdf ;
+; db/dffpipe_fd9.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/dffpipe_fd9.tdf        ;
+; db/alt_synch_pipe_mc8.tdf        ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/alt_synch_pipe_mc8.tdf ;
+; db/dffpipe_gd9.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/dffpipe_gd9.tdf        ;
+; db/add_sub_dub.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/add_sub_dub.tdf        ;
+; db/cntr_su7.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/cntr_su7.tdf           ;
+; scfifo.tdf                       ; yes             ; Megafunction                 ; g:/altera/quartus51/libraries/megafunctions/scfifo.tdf                      ;
+; a_regfifo.inc                    ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/a_regfifo.inc                   ;
+; a_dpfifo.inc                     ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/a_dpfifo.inc                    ;
+; a_i2fifo.inc                     ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/a_i2fifo.inc                    ;
+; a_fffifo.inc                     ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/a_fffifo.inc                    ;
+; a_f2fifo.inc                     ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/a_f2fifo.inc                    ;
+; a_fffifo.tdf                     ; yes             ; Megafunction                 ; g:/altera/quartus51/libraries/megafunctions/a_fffifo.tdf                    ;
+; lpm_mux.inc                      ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/lpm_mux.inc                     ;
+; lpm_ff.inc                       ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/lpm_ff.inc                      ;
+; lpm_ff.tdf                       ; yes             ; Megafunction                 ; g:/altera/quartus51/libraries/megafunctions/lpm_ff.tdf                      ;
+; lpm_constant.inc                 ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/lpm_constant.inc                ;
+; lpm_mux.tdf                      ; yes             ; Megafunction                 ; g:/altera/quartus51/libraries/megafunctions/lpm_mux.tdf                     ;
+; muxlut.inc                       ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/muxlut.inc                      ;
+; bypassff.inc                     ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/bypassff.inc                    ;
+; altshift.inc                     ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/altshift.inc                    ;
+; db/mux_afc.tdf                   ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/mux_afc.tdf            ;
+; lpm_counter.tdf                  ; yes             ; Megafunction                 ; g:/altera/quartus51/libraries/megafunctions/lpm_counter.tdf                 ;
+; lpm_decode.inc                   ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/lpm_decode.inc                  ;
+; cmpconst.inc                     ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/cmpconst.inc                    ;
+; dffeea.inc                       ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/dffeea.inc                      ;
+; alt_synch_counter.inc            ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/alt_synch_counter.inc           ;
+; alt_synch_counter_f.inc          ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/alt_synch_counter_f.inc         ;
+; alt_counter_f10ke.inc            ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/alt_counter_f10ke.inc           ;
+; alt_counter_stratix.inc          ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/alt_counter_stratix.inc         ;
+; db/cntr_e0b.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/cntr_e0b.tdf           ;
+; a_fefifo.tdf                     ; yes             ; Megafunction                 ; g:/altera/quartus51/libraries/megafunctions/a_fefifo.tdf                    ;
+; lpm_compare.tdf                  ; yes             ; Megafunction                 ; g:/altera/quartus51/libraries/megafunctions/lpm_compare.tdf                 ;
+; comptree.inc                     ; yes             ; Other                        ; g:/altera/quartus51/libraries/megafunctions/comptree.inc                    ;
+; db/cmpr_33g.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/cmpr_33g.tdf           ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------+
+
+
++-------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary           ;
++---------------------------------------------+---------+
+; Resource                                    ; Usage   ;
++---------------------------------------------+---------+
+; Total logic elements                        ; 493     ;
+;     -- Combinational with no register       ; 125     ;
+;     -- Register only                        ; 176     ;
+;     -- Combinational with a register        ; 192     ;
+;                                             ;         ;
+; Logic element usage by number of LUT inputs ;         ;
+;     -- 4 input functions                    ; 60      ;
+;     -- 3 input functions                    ; 99      ;
+;     -- 2 input functions                    ; 150     ;
+;     -- 1 input functions                    ; 8       ;
+;     -- 0 input functions                    ; 0       ;
+;         -- Combinational cells for routing  ; 0       ;
+;                                             ;         ;
+; Logic elements by mode                      ;         ;
+;     -- normal mode                          ; 357     ;
+;     -- arithmetic mode                      ; 136     ;
+;     -- qfbk mode                            ; 0       ;
+;     -- register cascade mode                ; 0       ;
+;     -- synchronous clear/load mode          ; 8       ;
+;     -- asynchronous clear/load mode         ; 0       ;
+;                                             ;         ;
+; Total registers                             ; 368     ;
+; Total logic cells in carry chains           ; 146     ;
+; I/O pins                                    ; 33      ;
+; Total memory bits                           ; 512     ;
+; Maximum fan-out node                        ; FX2_CLK ;
+; Maximum fan-out                             ; 376     ;
+; Total fan-out                               ; 1779    ;
+; Average fan-out                             ; 3.33    ;
++---------------------------------------------+---------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                                   ;
++--------------------------------------------------------+-------------+--------------+-------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Compilation Hierarchy Node                             ; Logic Cells ; LC Registers ; Memory Bits ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                                                                                                    ;
++--------------------------------------------------------+-------------+--------------+-------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; |RefCounter                                            ; 493 (55)    ; 368          ; 512         ; 33   ; 0            ; 125 (1)      ; 176 (36)          ; 192 (18)         ; 146 (16)        ; 0 (0)      ; |RefCounter                                                                                                                                                            ;
+;    |CounterToFifo:comb_10|                             ; 111 (111)   ; 82           ; 0           ; 0    ; 0            ; 29 (29)      ; 2 (2)             ; 80 (80)          ; 0 (0)           ; 0 (0)      ; |RefCounter|CounterToFifo:comb_10                                                                                                                                      ;
+;    |RefCount:CountFX2via1PPS|                          ; 178 (178)   ; 101          ; 0           ; 0    ; 0            ; 77 (77)      ; 68 (68)           ; 33 (33)          ; 95 (95)         ; 0 (0)      ; |RefCounter|RefCount:CountFX2via1PPS                                                                                                                                   ;
+;    |dc_fifo:SyncFifoToFX2|                             ; 136 (0)     ; 121          ; 512         ; 0    ; 0            ; 15 (0)       ; 69 (0)            ; 52 (0)           ; 35 (0)          ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2                                                                                                                                      ;
+;       |dcfifo:dcfifo_component|                        ; 136 (0)     ; 121          ; 512         ; 0    ; 0            ; 15 (0)       ; 69 (0)            ; 52 (0)           ; 35 (0)          ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component                                                                                                              ;
+;          |dcfifo_ui41:auto_generated|                  ; 136 (28)    ; 121          ; 512         ; 0    ; 0            ; 15 (7)       ; 69 (9)            ; 52 (12)          ; 35 (6)          ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated                                                                                   ;
+;             |a_gray2bin_n4b:write_side_gray_converter| ; 1 (1)       ; 0            ; 0           ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_gray2bin_n4b:write_side_gray_converter                                          ;
+;             |a_graycounter_g06:rdptr_g|                ; 7 (7)       ; 7            ; 0           ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 7 (7)            ; 7 (7)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g                                                         ;
+;             |a_graycounter_g06:wrptr_g|                ; 7 (7)       ; 7            ; 0           ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 7 (7)            ; 7 (7)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g                                                         ;
+;             |a_graycounter_h06:read_counter_for_write| ; 7 (7)       ; 7            ; 0           ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 7 (7)            ; 7 (7)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write                                          ;
+;             |alt_synch_pipe_lc8:read_sync_registers|   ; 18 (0)      ; 18           ; 0           ; 0    ; 0            ; 0 (0)        ; 18 (0)            ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers                                            ;
+;                |dffpipe_fd9:dffpipe10|                 ; 18 (18)     ; 18           ; 0           ; 0    ; 0            ; 0 (0)        ; 18 (18)           ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10                      ;
+;             |alt_synch_pipe_mc8:write_sync_registers|  ; 18 (0)      ; 18           ; 0           ; 0    ; 0            ; 0 (0)        ; 18 (0)            ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers                                           ;
+;                |dffpipe_gd9:dffpipe14|                 ; 18 (18)     ; 18           ; 0           ; 0    ; 0            ; 0 (0)        ; 18 (18)           ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14                     ;
+;             |altsyncram_h0v:fifo_ram|                  ; 0 (0)       ; 0            ; 512         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram                                                           ;
+;             |cntr_su7:wrptr_b|                         ; 6 (6)       ; 6            ; 0           ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 6 (6)            ; 6 (6)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b                                                                  ;
+;             |scfifo:output_channel|                    ; 44 (0)      ; 37           ; 0           ; 0    ; 0            ; 7 (0)        ; 24 (0)            ; 13 (0)           ; 2 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel                                                             ;
+;                |a_fffifo:subfifo|                      ; 44 (3)      ; 37           ; 0           ; 0    ; 0            ; 7 (3)        ; 24 (0)            ; 13 (0)           ; 2 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo                                            ;
+;                   |a_fefifo:fifo_state|                ; 7 (7)       ; 3            ; 0           ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 3 (3)            ; 0 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state                        ;
+;                   |lpm_counter:rd_ptr|                 ; 2 (0)       ; 2            ; 0           ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (0)            ; 2 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_counter:rd_ptr                         ;
+;                      |cntr_e0b:auto_generated|         ; 2 (2)       ; 2            ; 0           ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; 2 (2)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_counter:rd_ptr|cntr_e0b:auto_generated ;
+;                   |lpm_ff:data_node[0][0]|             ; 8 (8)       ; 8            ; 0           ; 0    ; 0            ; 0 (0)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]                     ;
+;                   |lpm_ff:last_data_node[0]|           ; 8 (8)       ; 8            ; 0           ; 0    ; 0            ; 0 (0)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[0]                   ;
+;                   |lpm_ff:last_data_node[1]|           ; 8 (8)       ; 8            ; 0           ; 0    ; 0            ; 0 (0)        ; 8 (8)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[1]                   ;
+;                   |lpm_ff:output_buffer|               ; 8 (8)       ; 8            ; 0           ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 8 (8)            ; 0 (0)           ; 0 (0)      ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:output_buffer                       ;
+;    |fx2_usb_pipe:usb_pipe|                             ; 13 (13)     ; 10           ; 0           ; 0    ; 0            ; 3 (3)        ; 1 (1)             ; 9 (9)            ; 0 (0)           ; 0 (0)      ; |RefCounter|fx2_usb_pipe:usb_pipe                                                                                                                                      ;
++--------------------------------------------------------+-------------+--------------+-------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                ;
++-------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; Name                                                                                                        ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF  ;
++-------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 64           ; 8            ; 64           ; 8            ; 512  ; None ;
++-------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+
+
++---------------------------------------------------+
+; State Machine - |RefCounter|state                 ;
++------------+------------+------------+------------+
+; Name       ; state.0000 ; state.0010 ; state.0001 ;
++------------+------------+------------+------------+
+; state.0000 ; 0          ; 0          ; 0          ;
+; state.0010 ; 1          ; 1          ; 0          ;
+; state.0001 ; 1          ; 0          ; 1          ;
++------------+------------+------------+------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |RefCounter|CounterToFifo:comb_10|state                                                                                                                ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
+; Name       ; state.0001 ; state.1011 ; state.0010 ; state.0011 ; state.0100 ; state.0101 ; state.0110 ; state.0111 ; state.1000 ; state.1001 ; state.1010 ; state.0000 ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
+; state.0000 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ;
+; state.1010 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 1          ;
+; state.1001 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 1          ;
+; state.1000 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 1          ;
+; state.0111 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 1          ;
+; state.0110 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; state.0101 ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; state.0100 ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; state.0011 ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; state.0010 ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; state.1011 ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; state.0001 ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |RefCounter|CounterToFifo:comb_10|post_strobe_state                                                                                                                                                            ;
++------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+
+; Name                   ; post_strobe_state.0100 ; post_strobe_state.0101 ; post_strobe_state.0110 ; post_strobe_state.0111 ; post_strobe_state.1000 ; post_strobe_state.1001 ; post_strobe_state.1010 ; post_strobe_state.1011 ;
++------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+
+; post_strobe_state.1011 ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ;
+; post_strobe_state.1010 ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ; 1                      ; 1                      ;
+; post_strobe_state.1001 ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ; 1                      ; 0                      ; 1                      ;
+; post_strobe_state.1000 ; 0                      ; 0                      ; 0                      ; 0                      ; 1                      ; 0                      ; 0                      ; 1                      ;
+; post_strobe_state.0111 ; 0                      ; 0                      ; 0                      ; 1                      ; 0                      ; 0                      ; 0                      ; 1                      ;
+; post_strobe_state.0110 ; 0                      ; 0                      ; 1                      ; 0                      ; 0                      ; 0                      ; 0                      ; 1                      ;
+; post_strobe_state.0101 ; 0                      ; 1                      ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ; 1                      ;
+; post_strobe_state.0100 ; 1                      ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ; 1                      ;
++------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+
+
+
++-----------------------------------------------------------------------------+
+; State Machine - |RefCounter|fx2_usb_pipe:usb_pipe|state                     ;
++------------+------------+------------+------------+------------+------------+
+; Name       ; state.0010 ; state.0011 ; state.0001 ; state.0000 ; state.0101 ;
++------------+------------+------------+------------+------------+------------+
+; state.0000 ; 0          ; 0          ; 0          ; 0          ; 0          ;
+; state.0001 ; 0          ; 0          ; 1          ; 1          ; 0          ;
+; state.0011 ; 0          ; 1          ; 0          ; 1          ; 0          ;
+; state.0010 ; 1          ; 0          ; 0          ; 1          ; 0          ;
+; state.0101 ; 0          ; 0          ; 0          ; 1          ; 1          ;
++------------+------------+------------+------------+------------+------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|sm_emptyfull ;
++--------------+--------------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
+; Name         ; state_middle ; state_full ; state_empty                                                                                                                       ;
++--------------+--------------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
+; state_empty  ; 0            ; 0          ; 0                                                                                                                                 ;
+; state_middle ; 1            ; 0          ; 1                                                                                                                                 ;
+; state_full   ; 0            ; 1          ; 1                                                                                                                                 ;
++--------------+--------------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 368   ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 8     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 237   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                                                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; 4:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |RefCounter|CounterToFifo:comb_10|local_count[20]                                                                                                        ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |RefCounter|fx2_usb_pipe:usb_pipe|read_strobe_count[0]                                                                                                   ;
+; 8:1                ; 8 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; Yes        ; |RefCounter|CounterToFifo:comb_10|fifo_in_o[0]                                                                                                           ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:output_buffer|dffs[0] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; No         ; |RefCounter|CounterToFifo:comb_10|state~8                                                                                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------+
+; Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component ;
++---------------------------------+-------+------+---------------------+
+; Assignment                      ; Value ; from ; to                  ;
++---------------------------------+-------+------+---------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                   ;
++---------------------------------+-------+------+---------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated                                         ;
++---------------------------------+-------+------------------------------------------------------+----------------------------------------+
+; Assignment                      ; Value ; from                                                 ; to                                     ;
++---------------------------------+-------+------------------------------------------------------+----------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -                                                    ; -                                      ;
+; SUPPRESS_DA_RULE_INTERNAL       ; d102  ; -                                                    ; -                                      ;
+; SUPPRESS_DA_RULE_INTERNAL       ; d101  ; -                                                    ; -                                      ;
+; CUT                             ; ON    ; read_counter_for_write|power_modified_counter_values ; write_sync_registers|dffpipe14|dffe15a ;
+; CUT                             ; ON    ; delayed_wrptr_g                                      ; read_sync_registers|dffpipe10|dffe11a  ;
++---------------------------------+-------+------------------------------------------------------+----------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram ;
++---------------------------------+--------------------+------+-----------------------------------------------------------+
+; Assignment                      ; Value              ; from ; to                                                        ;
++---------------------------------+--------------------+------+-----------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                         ;
++---------------------------------+--------------------+------+-----------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers ;
++-----------------------+-------+------+-------------------------------------------------------------------------------------------------+
+; Assignment            ; Value ; from ; to                                                                                              ;
++-----------------------+-------+------+-------------------------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                               ;
++-----------------------+-------+------+-------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10 ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; from ; to                                                                                                          ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                                           ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers ;
++-----------------------+-------+------+--------------------------------------------------------------------------------------------------+
+; Assignment            ; Value ; from ; to                                                                                               ;
++-----------------------+-------+------+--------------------------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                                ;
++-----------------------+-------+------+--------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14 ;
++---------------------------------+-------+------+--------------------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; from ; to                                                                                                           ;
++---------------------------------+-------+------+--------------------------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                                            ;
++---------------------------------+-------+------+--------------------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component ;
++-------------------------+-------------+----------------------------------------------------+
+; Parameter Name          ; Value       ; Type                                               ;
++-------------------------+-------------+----------------------------------------------------+
+; AUTO_CARRY_CHAINS       ; ON          ; AUTO_CARRY                                         ;
+; IGNORE_CARRY_BUFFERS    ; OFF         ; IGNORE_CARRY                                       ;
+; AUTO_CASCADE_CHAINS     ; ON          ; AUTO_CASCADE                                       ;
+; IGNORE_CASCADE_BUFFERS  ; OFF         ; IGNORE_CASCADE                                     ;
+; LPM_WIDTH               ; 8           ; Integer                                            ;
+; LPM_NUMWORDS            ; 64          ; Integer                                            ;
+; LPM_WIDTHU              ; 6           ; Integer                                            ;
+; LPM_SHOWAHEAD           ; OFF         ; Untyped                                            ;
+; UNDERFLOW_CHECKING      ; ON          ; Untyped                                            ;
+; OVERFLOW_CHECKING       ; ON          ; Untyped                                            ;
+; USE_EAB                 ; ON          ; Untyped                                            ;
+; ADD_RAM_OUTPUT_REGISTER ; ON          ; Untyped                                            ;
+; DELAY_RDUSEDW           ; 1           ; Untyped                                            ;
+; DELAY_WRUSEDW           ; 1           ; Untyped                                            ;
+; RDSYNC_DELAYPIPE        ; 3           ; Untyped                                            ;
+; WRSYNC_DELAYPIPE        ; 3           ; Untyped                                            ;
+; CLOCKS_ARE_SYNCHRONIZED ; FALSE       ; Untyped                                            ;
+; DEVICE_FAMILY           ; Cyclone     ; Untyped                                            ;
+; CBXI_PARAMETER          ; dcfifo_ui41 ; Untyped                                            ;
++-------------------------+-------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel ;
++-------------------------+---------+---------------------------------------------------------------------------------------------------------+
+; Parameter Name          ; Value   ; Type                                                                                                    ;
++-------------------------+---------+---------------------------------------------------------------------------------------------------------+
+; AUTO_CARRY_CHAINS       ; ON      ; AUTO_CARRY                                                                                              ;
+; IGNORE_CARRY_BUFFERS    ; OFF     ; IGNORE_CARRY                                                                                            ;
+; AUTO_CASCADE_CHAINS     ; ON      ; AUTO_CASCADE                                                                                            ;
+; IGNORE_CASCADE_BUFFERS  ; OFF     ; IGNORE_CASCADE                                                                                          ;
+; lpm_width               ; 8       ; Untyped                                                                                                 ;
+; LPM_NUMWORDS            ; 3       ; Untyped                                                                                                 ;
+; LPM_WIDTHU              ; 2       ; Untyped                                                                                                 ;
+; LPM_SHOWAHEAD           ; OFF     ; Untyped                                                                                                 ;
+; UNDERFLOW_CHECKING      ; ON      ; Untyped                                                                                                 ;
+; OVERFLOW_CHECKING       ; ON      ; Untyped                                                                                                 ;
+; ALLOW_RWCYCLE_WHEN_FULL ; OFF     ; Untyped                                                                                                 ;
+; ADD_RAM_OUTPUT_REGISTER ; ON      ; Untyped                                                                                                 ;
+; ALMOST_FULL_VALUE       ; 0       ; Untyped                                                                                                 ;
+; ALMOST_EMPTY_VALUE      ; 0       ; Untyped                                                                                                 ;
+; USE_EAB                 ; OFF     ; Untyped                                                                                                 ;
+; MAXIMIZE_SPEED          ; 5       ; Untyped                                                                                                 ;
+; DEVICE_FAMILY           ; Cyclone ; Untyped                                                                                                 ;
+; OPTIMIZE_FOR_SPEED      ; 5       ; Untyped                                                                                                 ;
+; CBXI_PARAMETER          ; NOTHING ; Untyped                                                                                                 ;
++-------------------------+---------+---------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------+
+; dcfifo Parameter Settings by Entity Instance                               ;
++----------------------------+-----------------------------------------------+
+; Name                       ; Value                                         ;
++----------------------------+-----------------------------------------------+
+; Number of entity instances ; 1                                             ;
+; Entity Instance            ; dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component ;
+;     -- FIFO Type           ; Dual Clock                                    ;
+;     -- LPM_WIDTH           ; 8                                             ;
+;     -- LPM_NUMWORDS        ; 64                                            ;
+;     -- LPM_SHOWAHEAD       ; OFF                                           ;
+;     -- USE_EAB             ; ON                                            ;
++----------------------------+-----------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; scfifo Parameter Settings by Entity Instance                                                                                ;
++----------------------------+------------------------------------------------------------------------------------------------+
+; Name                       ; Value                                                                                          ;
++----------------------------+------------------------------------------------------------------------------------------------+
+; Number of entity instances ; 1                                                                                              ;
+; Entity Instance            ; dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel ;
+;     -- FIFO Type           ; Single Clock                                                                                   ;
+;     -- lpm_width           ; 8                                                                                              ;
+;     -- LPM_NUMWORDS        ; 3                                                                                              ;
+;     -- LPM_SHOWAHEAD       ; OFF                                                                                            ;
+;     -- USE_EAB             ; OFF                                                                                            ;
++----------------------------+------------------------------------------------------------------------------------------------+
+
+
++--------------------------------+
+; Analysis & Synthesis Equations ;
++--------------------------------+
+The equations can be found in E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.map.eqn.
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 5.1 Build 176 10/26/2005 SJ Web Edition
+    Info: Processing started: Fri Jan 13 08:37:59 2006
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off RefCounter -c RefCounter
+Info: Found 1 design units, including 1 entities, in source file dc_fifo.v
+    Info: Found entity 1: dc_fifo
+Info: Found 1 design units, including 1 entities, in source file CounterToFifo.v
+    Info: Found entity 1: CounterToFifo
+Info: Found 1 design units, including 1 entities, in source file RefCount.v
+    Info: Found entity 1: RefCount
+Info: Found 1 design units, including 1 entities, in source file RefCounter.v
+    Info: Found entity 1: RefCounter
+Info: Found 1 design units, including 1 entities, in source file usb_pipe.v
+    Info: Found entity 1: fx2_usb_pipe
+Info: Elaborating entity "RefCounter" for the top level hierarchy
+Info (10035): Verilog HDL or VHDL information at RefCounter.v(13): object "AD_CLK" declared but not used
+Info (10035): Verilog HDL or VHDL information at RefCounter.v(15): object "BCLK" declared but not used
+Info (10035): Verilog HDL or VHDL information at RefCounter.v(15): object "DOUT" declared but not used
+Info (10035): Verilog HDL or VHDL information at RefCounter.v(15): object "LRCLK" declared but not used
+Info (10035): Verilog HDL or VHDL information at RefCounter.v(28): object "tenk_pps_i" declared but not used
+Warning (10230): Verilog HDL assignment warning at RefCounter.v(36): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at RefCounter.v(43): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at RefCounter.v(137): truncated value with size 32 to match size of target (16)
+Info: Elaborating entity "RefCount" for hierarchy "RefCount:CountFX2via1PPS"
+Warning (10271): Verilog HDL Case Statement warning at RefCount.v(34): size of case item expression (32) exceeds the size of the case expression (1)
+Warning (10271): Verilog HDL Case Statement warning at RefCount.v(47): size of case item expression (32) exceeds the size of the case expression (1)
+Info: Elaborating entity "dc_fifo" for hierarchy "dc_fifo:SyncFifoToFX2"
+Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus51/libraries/megafunctions/dcfifo.tdf
+    Info: Found entity 1: dcfifo
+Info: Elaborating entity "dcfifo" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_ui41.tdf
+    Info: Found entity 1: dcfifo_ui41
+Info: Elaborating entity "dcfifo_ui41" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_n4b.tdf
+    Info: Found entity 1: a_gray2bin_n4b
+Info: Elaborating entity "a_gray2bin_n4b" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_gray2bin_n4b:read_side_gray_converter"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_g06.tdf
+    Info: Found entity 1: a_graycounter_g06
+Info: Elaborating entity "a_graycounter_g06" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_h06.tdf
+    Info: Found entity 1: a_graycounter_h06
+Info: Elaborating entity "a_graycounter_h06" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_h0v.tdf
+    Info: Found entity 1: altsyncram_h0v
+Info: Elaborating entity "altsyncram_h0v" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_lc8.tdf
+    Info: Found entity 1: alt_synch_pipe_lc8
+Info: Elaborating entity "alt_synch_pipe_lc8" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_fd9.tdf
+    Info: Found entity 1: dffpipe_fd9
+Info: Elaborating entity "dffpipe_fd9" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_mc8.tdf
+    Info: Found entity 1: alt_synch_pipe_mc8
+Info: Elaborating entity "alt_synch_pipe_mc8" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_gd9.tdf
+    Info: Found entity 1: dffpipe_gd9
+Info: Elaborating entity "dffpipe_gd9" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14"
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_dub.tdf
+    Info: Found entity 1: add_sub_dub
+Info: Elaborating entity "add_sub_dub" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|add_sub_dub:rdusedw_subtractor"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_su7.tdf
+    Info: Found entity 1: cntr_su7
+Info: Elaborating entity "cntr_su7" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:rdptr_b"
+Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus51/libraries/megafunctions/scfifo.tdf
+    Info: Found entity 1: scfifo
+Info: Elaborating entity "scfifo" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel"
+Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus51/libraries/megafunctions/a_fffifo.tdf
+    Info: Found entity 1: a_fffifo
+Info: Elaborating entity "a_fffifo" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo"
+Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus51/libraries/megafunctions/lpm_ff.tdf
+    Info: Found entity 1: lpm_ff
+Info: Elaborating entity "lpm_ff" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][1]"
+Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus51/libraries/megafunctions/lpm_mux.tdf
+    Info: Found entity 1: lpm_mux
+Info: Elaborating entity "lpm_mux" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_mux:row_data_out_mux[0]"
+Info: Found 1 design units, including 1 entities, in source file db/mux_afc.tdf
+    Info: Found entity 1: mux_afc
+Info: Elaborating entity "mux_afc" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_mux:row_data_out_mux[0]|mux_afc:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus51/libraries/megafunctions/lpm_counter.tdf
+    Info: Found entity 1: lpm_counter
+Info: Elaborating entity "lpm_counter" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_counter:rd_ptr"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_e0b.tdf
+    Info: Found entity 1: cntr_e0b
+Info: Elaborating entity "cntr_e0b" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_counter:rd_ptr|cntr_e0b:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus51/libraries/megafunctions/a_fefifo.tdf
+    Info: Found entity 1: a_fefifo
+Info: Elaborating entity "a_fefifo" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state"
+Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus51/libraries/megafunctions/lpm_compare.tdf
+    Info: Found entity 1: lpm_compare
+Info: Elaborating entity "lpm_compare" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|lpm_compare:is_almost_empty_compare"
+Info: Found 1 design units, including 1 entities, in source file db/cmpr_33g.tdf
+    Info: Found entity 1: cmpr_33g
+Info: Elaborating entity "cmpr_33g" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|lpm_compare:is_almost_empty_compare|cmpr_33g:auto_generated"
+Info: Elaborating entity "lpm_compare" for hierarchy "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|lpm_compare:is_almost_full_compare"
+Info: Elaborating entity "fx2_usb_pipe" for hierarchy "fx2_usb_pipe:usb_pipe"
+Info: Elaborating entity "CounterToFifo" for hierarchy "CounterToFifo:comb_10"
+Warning (10230): Verilog HDL assignment warning at CounterToFifo.v(60): truncated value with size 32 to match size of target (4)
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][1]|dffs[7]" merged to single register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[7]"
+    Info: Duplicate register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][1]|dffs[6]" merged to single register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[6]"
+    Info: Duplicate register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][1]|dffs[5]" merged to single register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[5]"
+    Info: Duplicate register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][1]|dffs[4]" merged to single register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[4]"
+    Info: Duplicate register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][1]|dffs[3]" merged to single register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[3]"
+    Info: Duplicate register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][1]|dffs[2]" merged to single register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[2]"
+    Info: Duplicate register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][1]|dffs[1]" merged to single register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[1]"
+    Info: Duplicate register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][1]|dffs[0]" merged to single register "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[0]"
+Info: State machine "|RefCounter|state" contains 3 states
+Info: State machine "|RefCounter|CounterToFifo:comb_10|state" contains 12 states
+Info: State machine "|RefCounter|CounterToFifo:comb_10|post_strobe_state" contains 8 states
+Info: State machine "|RefCounter|fx2_usb_pipe:usb_pipe|state" contains 5 states
+Info: State machine "|RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|sm_emptyfull" contains 3 states and 2 state bits
+Info: Selected Auto state machine encoding method for state machine "|RefCounter|state"
+Info: Encoding result for state machine "|RefCounter|state"
+    Info: Completed encoding using 3 state bits
+        Info: Encoded state bit "state.0000"
+        Info: Encoded state bit "state.0010"
+        Info: Encoded state bit "state.0001"
+    Info: State "|RefCounter|state.0000" uses code string "000"
+    Info: State "|RefCounter|state.0010" uses code string "110"
+    Info: State "|RefCounter|state.0001" uses code string "101"
+Info: Selected Auto state machine encoding method for state machine "|RefCounter|CounterToFifo:comb_10|state"
+Info: Encoding result for state machine "|RefCounter|CounterToFifo:comb_10|state"
+    Info: Completed encoding using 12 state bits
+        Info: Encoded state bit "CounterToFifo:comb_10|state.0001"
+        Info: Encoded state bit "CounterToFifo:comb_10|state.1011"
+        Info: Encoded state bit "CounterToFifo:comb_10|state.0010"
+        Info: Encoded state bit "CounterToFifo:comb_10|state.0011"
+        Info: Encoded state bit "CounterToFifo:comb_10|state.0100"
+        Info: Encoded state bit "CounterToFifo:comb_10|state.0101"
+        Info: Encoded state bit "CounterToFifo:comb_10|state.0110"
+        Info: Encoded state bit "CounterToFifo:comb_10|state.0111"
+        Info: Encoded state bit "CounterToFifo:comb_10|state.1000"
+        Info: Encoded state bit "CounterToFifo:comb_10|state.1001"
+        Info: Encoded state bit "CounterToFifo:comb_10|state.1010"
+        Info: Encoded state bit "CounterToFifo:comb_10|state.0000"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.0000" uses code string "000000000000"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.1010" uses code string "000000000011"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.1001" uses code string "000000000101"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.1000" uses code string "000000001001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.0111" uses code string "000000010001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.0110" uses code string "000000100001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.0101" uses code string "000001000001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.0100" uses code string "000010000001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.0011" uses code string "000100000001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.0010" uses code string "001000000001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.1011" uses code string "010000000001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|state.0001" uses code string "100000000001"
+Info: Selected Auto state machine encoding method for state machine "|RefCounter|CounterToFifo:comb_10|post_strobe_state"
+Info: Encoding result for state machine "|RefCounter|CounterToFifo:comb_10|post_strobe_state"
+    Info: Completed encoding using 8 state bits
+        Info: Encoded state bit "CounterToFifo:comb_10|post_strobe_state.0100"
+        Info: Encoded state bit "CounterToFifo:comb_10|post_strobe_state.0101"
+        Info: Encoded state bit "CounterToFifo:comb_10|post_strobe_state.0110"
+        Info: Encoded state bit "CounterToFifo:comb_10|post_strobe_state.0111"
+        Info: Encoded state bit "CounterToFifo:comb_10|post_strobe_state.1000"
+        Info: Encoded state bit "CounterToFifo:comb_10|post_strobe_state.1001"
+        Info: Encoded state bit "CounterToFifo:comb_10|post_strobe_state.1010"
+        Info: Encoded state bit "CounterToFifo:comb_10|post_strobe_state.1011"
+    Info: State "|RefCounter|CounterToFifo:comb_10|post_strobe_state.1011" uses code string "00000000"
+    Info: State "|RefCounter|CounterToFifo:comb_10|post_strobe_state.1010" uses code string "00000011"
+    Info: State "|RefCounter|CounterToFifo:comb_10|post_strobe_state.1001" uses code string "00000101"
+    Info: State "|RefCounter|CounterToFifo:comb_10|post_strobe_state.1000" uses code string "00001001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|post_strobe_state.0111" uses code string "00010001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|post_strobe_state.0110" uses code string "00100001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|post_strobe_state.0101" uses code string "01000001"
+    Info: State "|RefCounter|CounterToFifo:comb_10|post_strobe_state.0100" uses code string "10000001"
+Info: Selected Auto state machine encoding method for state machine "|RefCounter|fx2_usb_pipe:usb_pipe|state"
+Info: Encoding result for state machine "|RefCounter|fx2_usb_pipe:usb_pipe|state"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "fx2_usb_pipe:usb_pipe|state.0010"
+        Info: Encoded state bit "fx2_usb_pipe:usb_pipe|state.0011"
+        Info: Encoded state bit "fx2_usb_pipe:usb_pipe|state.0001"
+        Info: Encoded state bit "fx2_usb_pipe:usb_pipe|state.0000"
+        Info: Encoded state bit "fx2_usb_pipe:usb_pipe|state.0101"
+    Info: State "|RefCounter|fx2_usb_pipe:usb_pipe|state.0000" uses code string "00000"
+    Info: State "|RefCounter|fx2_usb_pipe:usb_pipe|state.0001" uses code string "00110"
+    Info: State "|RefCounter|fx2_usb_pipe:usb_pipe|state.0011" uses code string "01010"
+    Info: State "|RefCounter|fx2_usb_pipe:usb_pipe|state.0010" uses code string "10010"
+    Info: State "|RefCounter|fx2_usb_pipe:usb_pipe|state.0101" uses code string "00011"
+Info: Selected Auto state machine encoding method for state machine "|RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|sm_emptyfull"
+Info: Encoding result for state machine "|RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|sm_emptyfull"
+    Info: Completed encoding using 3 state bits
+        Info: Encoded state bit "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_middle"
+        Info: Encoded state bit "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_full"
+        Info: Encoded state bit "dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_empty"
+    Info: State "|RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_empty" uses code string "000"
+    Info: State "|RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_middle" uses code string "101"
+    Info: State "|RefCounter|dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_full" uses code string "011"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "fx2_usb_pipe:usb_pipe|state.0101" merged to single register "fx2_usb_pipe:usb_pipe|read_strobe_o"
+Warning: Replaced VCC or GND feeding tri-state bus FX2_PA[0]~7 with an always-enabled tri-state buffer
+Warning: Replaced VCC or GND feeding tri-state bus FX2_PA[1]~6 with an always-enabled tri-state buffer
+Warning: Replaced VCC or GND feeding tri-state bus FX2_PA[2]~5 with an always-enabled tri-state buffer
+Warning: Replaced VCC or GND feeding tri-state bus FX2_PA[3]~4 with an always-enabled tri-state buffer
+Warning: Replaced VCC or GND feeding tri-state bus FX2_PA[4]~3 with an always-enabled tri-state buffer
+Warning: Replaced VCC or GND feeding tri-state bus FX2_PA[5]~2 with an always-enabled tri-state buffer
+Warning: Replaced VCC or GND feeding tri-state bus FX2_PA[6]~1 with an always-enabled tri-state buffer
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "fx2_usb_pipe:usb_pipe|state.0010" merged to single register "fx2_usb_pipe:usb_pipe|slwr_o", power-up level changed
+Warning: TRI or OPNDRN buffers permanently enabled
+    Warning: Node "FX2_PA[0]~9"
+    Warning: Node "FX2_PA[1]~10"
+    Warning: Node "FX2_PA[2]~11"
+    Warning: Node "FX2_PA[3]~12"
+    Warning: Node "FX2_PA[5]~14"
+    Warning: Node "FX2_PA[6]~15"
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "FX2_SLRD" stuck at VCC
+Warning: Design contains 7 input pin(s) that do not drive logic
+    Warning: No output dependent on input pin "AD_CLK"
+    Warning: No output dependent on input pin "FX2_flags[0]"
+    Warning: No output dependent on input pin "FX2_flags[1]"
+    Warning: No output dependent on input pin "BCLK"
+    Warning: No output dependent on input pin "DOUT"
+    Warning: No output dependent on input pin "LRCLK"
+    Warning: No output dependent on input pin "tenk_pps_i"
+Info: Implemented 534 device resources after synthesis - the final resource count might be different
+    Info: Implemented 11 input pins
+    Info: Implemented 14 output pins
+    Info: Implemented 8 bidirectional pins
+    Info: Implemented 493 logic cells
+    Info: Implemented 8 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 30 warnings
+    Info: Processing ended: Fri Jan 13 08:38:18 2006
+    Info: Elapsed time: 00:00:20
+
+

@@ -1,0 +1,4559 @@
+-- Copyright (C) 1991-2005 Altera Corporation
+-- Your use of Altera Corporation's design tools, logic functions 
+-- and other software and tools, and its AMPP partner logic 
+-- functions, and any output files any of the foregoing 
+-- (including device programming or simulation files), and any 
+-- associated documentation or information are expressly subject 
+-- to the terms and conditions of the Altera Program License 
+-- Subscription Agreement, Altera MegaCore Function License 
+-- Agreement, or other applicable license agreement, including, 
+-- without limitation, that your use is for the sole purpose of 
+-- programming logic devices manufactured by Altera and sold by 
+-- Altera or its authorized distributors.  Please refer to the 
+-- applicable agreement for further details.
+--E1_slwr_o is fx2_usb_pipe:usb_pipe|slwr_o
+--operation mode is normal
+
+E1_slwr_o_lut_out = !E1_state.0001 # !FX2_flags[2];
+E1_slwr_o = DFFEAS(E1_slwr_o_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_err is RefCount:CountFX2via1PPS|err
+--operation mode is normal
+
+B1_err_lut_out = B1L2 # B1L129 # B1L133 # B1L138;
+B1_err = DFFEAS(B1_err_lut_out, FX2_CLK, VCC, , B1_state, , , , );
+
+
+--A1L37Q is dbgout~reg0
+--operation mode is normal
+
+A1L37Q_lut_out = E1_read_strobe_o;
+A1L37Q = DFFEAS(A1L37Q_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--U8_dffs[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:output_buffer|dffs[0]
+--operation mode is normal
+
+U8_dffs[0]_lut_out = AB1_safe_q[0] & (U6_dffs[0]) # !AB1_safe_q[0] & U7_dffs[0];
+U8_dffs[0] = DFFEAS(U8_dffs[0]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, U4_dffs[0], , , !AB1_safe_q[1]);
+
+
+--U8_dffs[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:output_buffer|dffs[1]
+--operation mode is normal
+
+U8_dffs[1]_lut_out = AB1_safe_q[0] & (U6_dffs[1]) # !AB1_safe_q[0] & U7_dffs[1];
+U8_dffs[1] = DFFEAS(U8_dffs[1]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, U4_dffs[1], , , !AB1_safe_q[1]);
+
+
+--U8_dffs[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:output_buffer|dffs[2]
+--operation mode is normal
+
+U8_dffs[2]_lut_out = AB1_safe_q[0] & (U6_dffs[2]) # !AB1_safe_q[0] & U7_dffs[2];
+U8_dffs[2] = DFFEAS(U8_dffs[2]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, U4_dffs[2], , , !AB1_safe_q[1]);
+
+
+--U8_dffs[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:output_buffer|dffs[3]
+--operation mode is normal
+
+U8_dffs[3]_lut_out = AB1_safe_q[0] & (U6_dffs[3]) # !AB1_safe_q[0] & U7_dffs[3];
+U8_dffs[3] = DFFEAS(U8_dffs[3]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, U4_dffs[3], , , !AB1_safe_q[1]);
+
+
+--U8_dffs[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:output_buffer|dffs[4]
+--operation mode is normal
+
+U8_dffs[4]_lut_out = AB1_safe_q[0] & (U6_dffs[4]) # !AB1_safe_q[0] & U7_dffs[4];
+U8_dffs[4] = DFFEAS(U8_dffs[4]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, U4_dffs[4], , , !AB1_safe_q[1]);
+
+
+--U8_dffs[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:output_buffer|dffs[5]
+--operation mode is normal
+
+U8_dffs[5]_lut_out = AB1_safe_q[0] & (U6_dffs[5]) # !AB1_safe_q[0] & U7_dffs[5];
+U8_dffs[5] = DFFEAS(U8_dffs[5]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, U4_dffs[5], , , !AB1_safe_q[1]);
+
+
+--U8_dffs[6] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:output_buffer|dffs[6]
+--operation mode is normal
+
+U8_dffs[6]_lut_out = AB1_safe_q[0] & (U6_dffs[6]) # !AB1_safe_q[0] & U7_dffs[6];
+U8_dffs[6] = DFFEAS(U8_dffs[6]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, U4_dffs[6], , , !AB1_safe_q[1]);
+
+
+--U8_dffs[7] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:output_buffer|dffs[7]
+--operation mode is normal
+
+U8_dffs[7]_lut_out = AB1_safe_q[0] & (U6_dffs[7]) # !AB1_safe_q[0] & U7_dffs[7];
+U8_dffs[7] = DFFEAS(U8_dffs[7]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, U4_dffs[7], , , !AB1_safe_q[1]);
+
+
+--E1_state.0001 is fx2_usb_pipe:usb_pipe|state.0001
+--operation mode is normal
+
+E1_state.0001_lut_out = E1_state.0011 # E1_state.0001 & (!FX2_flags[2]);
+E1_state.0001 = DFFEAS(E1_state.0001_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_delta[6] is RefCount:CountFX2via1PPS|delta[6]
+--operation mode is arithmetic
+
+B1_delta[6]_carry_eqn = B1L217;
+B1_delta[6]_lut_out = B1L3 $ (B1_delta[6]_carry_eqn);
+B1_delta[6] = DFFEAS(B1_delta[6]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L219 is RefCount:CountFX2via1PPS|delta[6]~544
+--operation mode is arithmetic
+
+B1L219 = CARRY(!B1L217 # !B1L3);
+
+
+--B1_delta[7] is RefCount:CountFX2via1PPS|delta[7]
+--operation mode is arithmetic
+
+B1_delta[7]_carry_eqn = B1L219;
+B1_delta[7]_lut_out = B1L5 $ (!B1_delta[7]_carry_eqn);
+B1_delta[7] = DFFEAS(B1_delta[7]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L221 is RefCount:CountFX2via1PPS|delta[7]~548
+--operation mode is arithmetic
+
+B1L221 = CARRY(B1L5 & (!B1L219));
+
+
+--B1_delta[2] is RefCount:CountFX2via1PPS|delta[2]
+--operation mode is arithmetic
+
+B1_delta[2]_carry_eqn = B1L209;
+B1_delta[2]_lut_out = B1L7 $ (B1_delta[2]_carry_eqn);
+B1_delta[2] = DFFEAS(B1_delta[2]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L211 is RefCount:CountFX2via1PPS|delta[2]~552
+--operation mode is arithmetic
+
+B1L211 = CARRY(!B1L209 # !B1L7);
+
+
+--B1_delta[3] is RefCount:CountFX2via1PPS|delta[3]
+--operation mode is arithmetic
+
+B1_delta[3]_carry_eqn = B1L211;
+B1_delta[3]_lut_out = B1L9 $ (!B1_delta[3]_carry_eqn);
+B1_delta[3] = DFFEAS(B1_delta[3]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L213 is RefCount:CountFX2via1PPS|delta[3]~556
+--operation mode is arithmetic
+
+B1L213 = CARRY(B1L9 & (!B1L211));
+
+
+--B1L1 is RefCount:CountFX2via1PPS|LessThan~575
+--operation mode is normal
+
+B1L1 = !B1_delta[3] # !B1_delta[2] # !B1_delta[7] # !B1_delta[6];
+
+
+--B1_delta[4] is RefCount:CountFX2via1PPS|delta[4]
+--operation mode is arithmetic
+
+B1_delta[4]_carry_eqn = B1L213;
+B1_delta[4]_lut_out = B1L11 $ (B1_delta[4]_carry_eqn);
+B1_delta[4] = DFFEAS(B1_delta[4]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L215 is RefCount:CountFX2via1PPS|delta[4]~560
+--operation mode is arithmetic
+
+B1L215 = CARRY(!B1L213 # !B1L11);
+
+
+--B1_delta[5] is RefCount:CountFX2via1PPS|delta[5]
+--operation mode is arithmetic
+
+B1_delta[5]_carry_eqn = B1L215;
+B1_delta[5]_lut_out = B1L13 $ (!B1_delta[5]_carry_eqn);
+B1_delta[5] = DFFEAS(B1_delta[5]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L217 is RefCount:CountFX2via1PPS|delta[5]~564
+--operation mode is arithmetic
+
+B1L217 = CARRY(B1L13 & (!B1L215));
+
+
+--B1_delta[8] is RefCount:CountFX2via1PPS|delta[8]
+--operation mode is arithmetic
+
+B1_delta[8]_carry_eqn = B1L221;
+B1_delta[8]_lut_out = B1L15 $ (B1_delta[8]_carry_eqn);
+B1_delta[8] = DFFEAS(B1_delta[8]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L223 is RefCount:CountFX2via1PPS|delta[8]~568
+--operation mode is arithmetic
+
+B1L223 = CARRY(!B1L221 # !B1L15);
+
+
+--B1L2 is RefCount:CountFX2via1PPS|LessThan~576
+--operation mode is normal
+
+B1L2 = !B1_delta[8] & (B1L1 # !B1_delta[5] # !B1_delta[4]);
+
+
+--B1_delta[12] is RefCount:CountFX2via1PPS|delta[12]
+--operation mode is arithmetic
+
+B1_delta[12]_carry_eqn = B1L229;
+B1_delta[12]_lut_out = B1L17 $ (B1_delta[12]_carry_eqn);
+B1_delta[12] = DFFEAS(B1_delta[12]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L231 is RefCount:CountFX2via1PPS|delta[12]~572
+--operation mode is arithmetic
+
+B1L231 = CARRY(!B1L229 # !B1L17);
+
+
+--B1_delta[13] is RefCount:CountFX2via1PPS|delta[13]
+--operation mode is arithmetic
+
+B1_delta[13]_carry_eqn = B1L231;
+B1_delta[13]_lut_out = B1L19 $ (!B1_delta[13]_carry_eqn);
+B1_delta[13] = DFFEAS(B1_delta[13]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L233 is RefCount:CountFX2via1PPS|delta[13]~576
+--operation mode is arithmetic
+
+B1L233 = CARRY(B1L19 & (!B1L231));
+
+
+--B1_delta[14] is RefCount:CountFX2via1PPS|delta[14]
+--operation mode is arithmetic
+
+B1_delta[14]_carry_eqn = B1L233;
+B1_delta[14]_lut_out = B1L21 $ (B1_delta[14]_carry_eqn);
+B1_delta[14] = DFFEAS(B1_delta[14]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L235 is RefCount:CountFX2via1PPS|delta[14]~580
+--operation mode is arithmetic
+
+B1L235 = CARRY(!B1L233 # !B1L21);
+
+
+--B1_delta[15] is RefCount:CountFX2via1PPS|delta[15]
+--operation mode is arithmetic
+
+B1_delta[15]_carry_eqn = B1L235;
+B1_delta[15]_lut_out = B1L23 $ (!B1_delta[15]_carry_eqn);
+B1_delta[15] = DFFEAS(B1_delta[15]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L237 is RefCount:CountFX2via1PPS|delta[15]~584
+--operation mode is arithmetic
+
+B1L237 = CARRY(B1L23 & (!B1L235));
+
+
+--B1L129 is RefCount:CountFX2via1PPS|always0~270
+--operation mode is normal
+
+B1L129 = B1_delta[12] # B1_delta[13] # B1_delta[14] # B1_delta[15];
+
+
+--B1_delta[16] is RefCount:CountFX2via1PPS|delta[16]
+--operation mode is arithmetic
+
+B1_delta[16]_carry_eqn = B1L237;
+B1_delta[16]_lut_out = B1L25 $ (B1_delta[16]_carry_eqn);
+B1_delta[16] = DFFEAS(B1_delta[16]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L239 is RefCount:CountFX2via1PPS|delta[16]~588
+--operation mode is arithmetic
+
+B1L239 = CARRY(!B1L237 # !B1L25);
+
+
+--B1_delta[17] is RefCount:CountFX2via1PPS|delta[17]
+--operation mode is arithmetic
+
+B1_delta[17]_carry_eqn = B1L239;
+B1_delta[17]_lut_out = B1L27 $ (!B1_delta[17]_carry_eqn);
+B1_delta[17] = DFFEAS(B1_delta[17]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L241 is RefCount:CountFX2via1PPS|delta[17]~592
+--operation mode is arithmetic
+
+B1L241 = CARRY(B1L27 & (!B1L239));
+
+
+--B1_delta[18] is RefCount:CountFX2via1PPS|delta[18]
+--operation mode is arithmetic
+
+B1_delta[18]_carry_eqn = B1L241;
+B1_delta[18]_lut_out = B1L29 $ (B1_delta[18]_carry_eqn);
+B1_delta[18] = DFFEAS(B1_delta[18]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L243 is RefCount:CountFX2via1PPS|delta[18]~596
+--operation mode is arithmetic
+
+B1L243 = CARRY(!B1L241 # !B1L29);
+
+
+--B1_delta[19] is RefCount:CountFX2via1PPS|delta[19]
+--operation mode is arithmetic
+
+B1_delta[19]_carry_eqn = B1L243;
+B1_delta[19]_lut_out = B1L31 $ (!B1_delta[19]_carry_eqn);
+B1_delta[19] = DFFEAS(B1_delta[19]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L245 is RefCount:CountFX2via1PPS|delta[19]~600
+--operation mode is arithmetic
+
+B1L245 = CARRY(B1L31 & (!B1L243));
+
+
+--B1L130 is RefCount:CountFX2via1PPS|always0~271
+--operation mode is normal
+
+B1L130 = B1_delta[16] # B1_delta[17] # B1_delta[18] # B1_delta[19];
+
+
+--B1_delta[1] is RefCount:CountFX2via1PPS|delta[1]
+--operation mode is arithmetic
+
+B1_delta[1]_lut_out = !B1L33;
+B1_delta[1] = DFFEAS(B1_delta[1]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L209 is RefCount:CountFX2via1PPS|delta[1]~604
+--operation mode is arithmetic
+
+B1L209 = CARRY(B1L33);
+
+
+--B1_delta[0] is RefCount:CountFX2via1PPS|delta[0]
+--operation mode is normal
+
+B1_delta[0]_lut_out = B1L35;
+B1_delta[0] = DFFEAS(B1_delta[0]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1L131 is RefCount:CountFX2via1PPS|always0~272
+--operation mode is normal
+
+B1L131 = B1_delta[5] # B1_delta[2] & (B1_delta[1] # B1_delta[0]);
+
+
+--B1L132 is RefCount:CountFX2via1PPS|always0~273
+--operation mode is normal
+
+B1L132 = B1_delta[7] & (B1_delta[3] # B1_delta[4] # B1L131);
+
+
+--B1L133 is RefCount:CountFX2via1PPS|always0~274
+--operation mode is normal
+
+B1L133 = B1L130 # B1_delta[6] & B1_delta[8] & B1L132;
+
+
+--B1_delta[20] is RefCount:CountFX2via1PPS|delta[20]
+--operation mode is arithmetic
+
+B1_delta[20]_carry_eqn = B1L245;
+B1_delta[20]_lut_out = B1L37 $ (B1_delta[20]_carry_eqn);
+B1_delta[20] = DFFEAS(B1_delta[20]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L247 is RefCount:CountFX2via1PPS|delta[20]~608
+--operation mode is arithmetic
+
+B1L247 = CARRY(!B1L245 # !B1L37);
+
+
+--B1_delta[21] is RefCount:CountFX2via1PPS|delta[21]
+--operation mode is arithmetic
+
+B1_delta[21]_carry_eqn = B1L247;
+B1_delta[21]_lut_out = B1L39 $ (!B1_delta[21]_carry_eqn);
+B1_delta[21] = DFFEAS(B1_delta[21]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L249 is RefCount:CountFX2via1PPS|delta[21]~612
+--operation mode is arithmetic
+
+B1L249 = CARRY(B1L39 & (!B1L247));
+
+
+--B1_delta[22] is RefCount:CountFX2via1PPS|delta[22]
+--operation mode is arithmetic
+
+B1_delta[22]_carry_eqn = B1L249;
+B1_delta[22]_lut_out = B1L41 $ (B1_delta[22]_carry_eqn);
+B1_delta[22] = DFFEAS(B1_delta[22]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L251 is RefCount:CountFX2via1PPS|delta[22]~616
+--operation mode is arithmetic
+
+B1L251 = CARRY(!B1L249 # !B1L41);
+
+
+--B1_delta[23] is RefCount:CountFX2via1PPS|delta[23]
+--operation mode is arithmetic
+
+B1_delta[23]_carry_eqn = B1L251;
+B1_delta[23]_lut_out = B1L43 $ (!B1_delta[23]_carry_eqn);
+B1_delta[23] = DFFEAS(B1_delta[23]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L253 is RefCount:CountFX2via1PPS|delta[23]~620
+--operation mode is arithmetic
+
+B1L253 = CARRY(B1L43 & (!B1L251));
+
+
+--B1L134 is RefCount:CountFX2via1PPS|always0~275
+--operation mode is normal
+
+B1L134 = B1_delta[20] # B1_delta[21] # B1_delta[22] # B1_delta[23];
+
+
+--B1_delta[24] is RefCount:CountFX2via1PPS|delta[24]
+--operation mode is arithmetic
+
+B1_delta[24]_carry_eqn = B1L253;
+B1_delta[24]_lut_out = B1L45 $ (B1_delta[24]_carry_eqn);
+B1_delta[24] = DFFEAS(B1_delta[24]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L255 is RefCount:CountFX2via1PPS|delta[24]~624
+--operation mode is arithmetic
+
+B1L255 = CARRY(!B1L253 # !B1L45);
+
+
+--B1_delta[25] is RefCount:CountFX2via1PPS|delta[25]
+--operation mode is arithmetic
+
+B1_delta[25]_carry_eqn = B1L255;
+B1_delta[25]_lut_out = B1L47 $ (!B1_delta[25]_carry_eqn);
+B1_delta[25] = DFFEAS(B1_delta[25]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L257 is RefCount:CountFX2via1PPS|delta[25]~628
+--operation mode is arithmetic
+
+B1L257 = CARRY(B1L47 & (!B1L255));
+
+
+--B1_delta[26] is RefCount:CountFX2via1PPS|delta[26]
+--operation mode is arithmetic
+
+B1_delta[26]_carry_eqn = B1L257;
+B1_delta[26]_lut_out = B1L49 $ (B1_delta[26]_carry_eqn);
+B1_delta[26] = DFFEAS(B1_delta[26]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L259 is RefCount:CountFX2via1PPS|delta[26]~632
+--operation mode is arithmetic
+
+B1L259 = CARRY(!B1L257 # !B1L49);
+
+
+--B1_delta[27] is RefCount:CountFX2via1PPS|delta[27]
+--operation mode is arithmetic
+
+B1_delta[27]_carry_eqn = B1L259;
+B1_delta[27]_lut_out = B1L51 $ (!B1_delta[27]_carry_eqn);
+B1_delta[27] = DFFEAS(B1_delta[27]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L261 is RefCount:CountFX2via1PPS|delta[27]~636
+--operation mode is arithmetic
+
+B1L261 = CARRY(B1L51 & (!B1L259));
+
+
+--B1L135 is RefCount:CountFX2via1PPS|always0~276
+--operation mode is normal
+
+B1L135 = B1_delta[24] # B1_delta[25] # B1_delta[26] # B1_delta[27];
+
+
+--B1_delta[28] is RefCount:CountFX2via1PPS|delta[28]
+--operation mode is arithmetic
+
+B1_delta[28]_carry_eqn = B1L261;
+B1_delta[28]_lut_out = B1L53 $ (B1_delta[28]_carry_eqn);
+B1_delta[28] = DFFEAS(B1_delta[28]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L263 is RefCount:CountFX2via1PPS|delta[28]~640
+--operation mode is arithmetic
+
+B1L263 = CARRY(!B1L261 # !B1L53);
+
+
+--B1_delta[29] is RefCount:CountFX2via1PPS|delta[29]
+--operation mode is arithmetic
+
+B1_delta[29]_carry_eqn = B1L263;
+B1_delta[29]_lut_out = B1L55 $ (!B1_delta[29]_carry_eqn);
+B1_delta[29] = DFFEAS(B1_delta[29]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L265 is RefCount:CountFX2via1PPS|delta[29]~644
+--operation mode is arithmetic
+
+B1L265 = CARRY(B1L55 & (!B1L263));
+
+
+--B1_delta[30] is RefCount:CountFX2via1PPS|delta[30]
+--operation mode is arithmetic
+
+B1_delta[30]_carry_eqn = B1L265;
+B1_delta[30]_lut_out = B1L57 $ (B1_delta[30]_carry_eqn);
+B1_delta[30] = DFFEAS(B1_delta[30]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L267 is RefCount:CountFX2via1PPS|delta[30]~648
+--operation mode is arithmetic
+
+B1L267 = CARRY(!B1L265 # !B1L57);
+
+
+--B1_delta[31] is RefCount:CountFX2via1PPS|delta[31]
+--operation mode is normal
+
+B1_delta[31]_carry_eqn = B1L267;
+B1_delta[31]_lut_out = B1L59 $ (!B1_delta[31]_carry_eqn);
+B1_delta[31] = DFFEAS(B1_delta[31]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1L136 is RefCount:CountFX2via1PPS|always0~277
+--operation mode is normal
+
+B1L136 = B1_delta[28] # B1_delta[29] # B1_delta[30] # B1_delta[31];
+
+
+--B1_delta[9] is RefCount:CountFX2via1PPS|delta[9]
+--operation mode is arithmetic
+
+B1_delta[9]_carry_eqn = B1L223;
+B1_delta[9]_lut_out = B1L60 $ (!B1_delta[9]_carry_eqn);
+B1_delta[9] = DFFEAS(B1_delta[9]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L225 is RefCount:CountFX2via1PPS|delta[9]~656
+--operation mode is arithmetic
+
+B1L225 = CARRY(B1L60 & (!B1L223));
+
+
+--B1_delta[10] is RefCount:CountFX2via1PPS|delta[10]
+--operation mode is arithmetic
+
+B1_delta[10]_carry_eqn = B1L225;
+B1_delta[10]_lut_out = B1L62 $ (B1_delta[10]_carry_eqn);
+B1_delta[10] = DFFEAS(B1_delta[10]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L227 is RefCount:CountFX2via1PPS|delta[10]~660
+--operation mode is arithmetic
+
+B1L227 = CARRY(!B1L225 # !B1L62);
+
+
+--B1_delta[11] is RefCount:CountFX2via1PPS|delta[11]
+--operation mode is arithmetic
+
+B1_delta[11]_carry_eqn = B1L227;
+B1_delta[11]_lut_out = B1L64 $ (!B1_delta[11]_carry_eqn);
+B1_delta[11] = DFFEAS(B1_delta[11]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+--B1L229 is RefCount:CountFX2via1PPS|delta[11]~664
+--operation mode is arithmetic
+
+B1L229 = CARRY(B1L64 & (!B1L227));
+
+
+--B1L137 is RefCount:CountFX2via1PPS|always0~278
+--operation mode is normal
+
+B1L137 = B1_delta[9] # B1_delta[10] # !B1_delta[11];
+
+
+--B1L138 is RefCount:CountFX2via1PPS|always0~279
+--operation mode is normal
+
+B1L138 = B1L134 # B1L135 # B1L136 # B1L137;
+
+
+--B1_state is RefCount:CountFX2via1PPS|state
+--operation mode is normal
+
+B1_state_lut_out = B1L269;
+B1_state = DFFEAS(B1_state_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--E1_read_strobe_o is fx2_usb_pipe:usb_pipe|read_strobe_o
+--operation mode is normal
+
+E1_read_strobe_o_lut_out = E1_read_strobe_o & (E1_syncd_drdy & !E1_state.0000 # !E1L13) # !E1_read_strobe_o & E1_syncd_drdy & (!E1_state.0000);
+E1_read_strobe_o = DFFEAS(E1_read_strobe_o_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--U7_dffs[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[0]|dffs[0]
+--operation mode is normal
+
+U7_dffs[0]_lut_out = U4_dffs[0];
+U7_dffs[0] = DFFEAS(U7_dffs[0]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U6_dffs[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[1]|dffs[0]
+--operation mode is normal
+
+U6_dffs[0]_lut_out = U7_dffs[0];
+U6_dffs[0] = DFFEAS(U6_dffs[0]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U4_dffs[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[0]
+--operation mode is normal
+
+U4_dffs[0]_lut_out = H1_q_b[0];
+U4_dffs[0] = DFFEAS(U4_dffs[0]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--AB1_safe_q[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_counter:rd_ptr|cntr_e0b:auto_generated|safe_q[0]
+--operation mode is arithmetic
+
+AB1_safe_q[0]_lut_out = !AB1_safe_q[0];
+AB1_safe_q[0] = DFFEAS(AB1_safe_q[0]_lut_out, FX2_CLK, VCC, , S1L1, , , , );
+
+--AB1L2 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_counter:rd_ptr|cntr_e0b:auto_generated|counter_cella0~COUT
+--operation mode is arithmetic
+
+AB1L2 = CARRY(AB1_safe_q[0] $ !S1_valid_wreq);
+
+
+--AB1_safe_q[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_counter:rd_ptr|cntr_e0b:auto_generated|safe_q[1]
+--operation mode is normal
+
+AB1_safe_q[1]_carry_eqn = AB1L2;
+AB1_safe_q[1]_lut_out = AB1_safe_q[1] $ (AB1_safe_q[1]_carry_eqn);
+AB1_safe_q[1] = DFFEAS(AB1_safe_q[1]_lut_out, FX2_CLK, VCC, , S1L1, , , , );
+
+
+--V1_state_empty is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_empty
+--operation mode is normal
+
+V1_state_empty_lut_out = G1_fifo_wreq_pipe[1] # V1_state_empty & (!V1L3 # !V1_state_middle);
+V1_state_empty = DFFEAS(V1_state_empty_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--S1_valid_rreq is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|valid_rreq
+--operation mode is normal
+
+S1_valid_rreq = E1_read_strobe_o & V1_state_empty;
+
+
+--U7_dffs[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[0]|dffs[1]
+--operation mode is normal
+
+U7_dffs[1]_lut_out = U4_dffs[1];
+U7_dffs[1] = DFFEAS(U7_dffs[1]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U6_dffs[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[1]|dffs[1]
+--operation mode is normal
+
+U6_dffs[1]_lut_out = U7_dffs[1];
+U6_dffs[1] = DFFEAS(U6_dffs[1]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U4_dffs[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[1]
+--operation mode is normal
+
+U4_dffs[1]_lut_out = H1_q_b[1];
+U4_dffs[1] = DFFEAS(U4_dffs[1]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U7_dffs[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[0]|dffs[2]
+--operation mode is normal
+
+U7_dffs[2]_lut_out = U4_dffs[2];
+U7_dffs[2] = DFFEAS(U7_dffs[2]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U6_dffs[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[1]|dffs[2]
+--operation mode is normal
+
+U6_dffs[2]_lut_out = U7_dffs[2];
+U6_dffs[2] = DFFEAS(U6_dffs[2]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U4_dffs[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[2]
+--operation mode is normal
+
+U4_dffs[2]_lut_out = H1_q_b[2];
+U4_dffs[2] = DFFEAS(U4_dffs[2]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U7_dffs[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[0]|dffs[3]
+--operation mode is normal
+
+U7_dffs[3]_lut_out = U4_dffs[3];
+U7_dffs[3] = DFFEAS(U7_dffs[3]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U6_dffs[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[1]|dffs[3]
+--operation mode is normal
+
+U6_dffs[3]_lut_out = U7_dffs[3];
+U6_dffs[3] = DFFEAS(U6_dffs[3]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U4_dffs[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[3]
+--operation mode is normal
+
+U4_dffs[3]_lut_out = H1_q_b[3];
+U4_dffs[3] = DFFEAS(U4_dffs[3]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U7_dffs[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[0]|dffs[4]
+--operation mode is normal
+
+U7_dffs[4]_lut_out = U4_dffs[4];
+U7_dffs[4] = DFFEAS(U7_dffs[4]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U6_dffs[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[1]|dffs[4]
+--operation mode is normal
+
+U6_dffs[4]_lut_out = U7_dffs[4];
+U6_dffs[4] = DFFEAS(U6_dffs[4]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U4_dffs[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[4]
+--operation mode is normal
+
+U4_dffs[4]_lut_out = H1_q_b[4];
+U4_dffs[4] = DFFEAS(U4_dffs[4]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U7_dffs[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[0]|dffs[5]
+--operation mode is normal
+
+U7_dffs[5]_lut_out = U4_dffs[5];
+U7_dffs[5] = DFFEAS(U7_dffs[5]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U6_dffs[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[1]|dffs[5]
+--operation mode is normal
+
+U6_dffs[5]_lut_out = U7_dffs[5];
+U6_dffs[5] = DFFEAS(U6_dffs[5]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U4_dffs[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[5]
+--operation mode is normal
+
+U4_dffs[5]_lut_out = H1_q_b[5];
+U4_dffs[5] = DFFEAS(U4_dffs[5]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U7_dffs[6] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[0]|dffs[6]
+--operation mode is normal
+
+U7_dffs[6]_lut_out = U4_dffs[6];
+U7_dffs[6] = DFFEAS(U7_dffs[6]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U6_dffs[6] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[1]|dffs[6]
+--operation mode is normal
+
+U6_dffs[6]_lut_out = U7_dffs[6];
+U6_dffs[6] = DFFEAS(U6_dffs[6]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U4_dffs[6] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[6]
+--operation mode is normal
+
+U4_dffs[6]_lut_out = H1_q_b[6];
+U4_dffs[6] = DFFEAS(U4_dffs[6]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U7_dffs[7] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[0]|dffs[7]
+--operation mode is normal
+
+U7_dffs[7]_lut_out = U4_dffs[7];
+U7_dffs[7] = DFFEAS(U7_dffs[7]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U6_dffs[7] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:last_data_node[1]|dffs[7]
+--operation mode is normal
+
+U6_dffs[7]_lut_out = U7_dffs[7];
+U6_dffs[7] = DFFEAS(U6_dffs[7]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--U4_dffs[7] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|lpm_ff:data_node[0][0]|dffs[7]
+--operation mode is normal
+
+U4_dffs[7]_lut_out = H1_q_b[7];
+U4_dffs[7] = DFFEAS(U4_dffs[7]_lut_out, FX2_CLK, VCC, , S1_valid_wreq, , , , );
+
+
+--E1_state.0011 is fx2_usb_pipe:usb_pipe|state.0011
+--operation mode is normal
+
+E1_state.0011_lut_out = E1_read_strobe_o & E1L13;
+E1_state.0011 = DFFEAS(E1_state.0011_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1L3 is RefCount:CountFX2via1PPS|add~1352
+--operation mode is arithmetic
+
+B1L3_carry_eqn = B1L14;
+B1L3 = B1_count_o[6] $ B1_count_reg[6] $ B1L3_carry_eqn;
+
+--B1L4 is RefCount:CountFX2via1PPS|add~1354
+--operation mode is arithmetic
+
+B1L4 = CARRY(B1_count_o[6] & B1_count_reg[6] & !B1L14 # !B1_count_o[6] & (B1_count_reg[6] # !B1L14));
+
+
+--B1_sync_refclk is RefCount:CountFX2via1PPS|sync_refclk
+--operation mode is normal
+
+B1_sync_refclk_lut_out = one_pps_i;
+B1_sync_refclk = DFFEAS(B1_sync_refclk_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_last_refclk is RefCount:CountFX2via1PPS|last_refclk
+--operation mode is normal
+
+B1_last_refclk_lut_out = B1_sync_refclk;
+B1_last_refclk = DFFEAS(B1_last_refclk_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1L269 is RefCount:CountFX2via1PPS|delta[31]~667
+--operation mode is normal
+
+B1L269 = B1_sync_refclk & (!B1_state & !B1_last_refclk);
+
+
+--B1L5 is RefCount:CountFX2via1PPS|add~1357
+--operation mode is arithmetic
+
+B1L5_carry_eqn = B1L4;
+B1L5 = B1_count_o[7] $ B1_count_reg[7] $ !B1L5_carry_eqn;
+
+--B1L6 is RefCount:CountFX2via1PPS|add~1359
+--operation mode is arithmetic
+
+B1L6 = CARRY(B1_count_o[7] & (!B1L4 # !B1_count_reg[7]) # !B1_count_o[7] & !B1_count_reg[7] & !B1L4);
+
+
+--B1L7 is RefCount:CountFX2via1PPS|add~1362
+--operation mode is arithmetic
+
+B1L7_carry_eqn = B1L34;
+B1L7 = B1_count_o[2] $ B1_count_reg[2] $ B1L7_carry_eqn;
+
+--B1L8 is RefCount:CountFX2via1PPS|add~1364
+--operation mode is arithmetic
+
+B1L8 = CARRY(B1_count_o[2] & B1_count_reg[2] & !B1L34 # !B1_count_o[2] & (B1_count_reg[2] # !B1L34));
+
+
+--B1L9 is RefCount:CountFX2via1PPS|add~1367
+--operation mode is arithmetic
+
+B1L9_carry_eqn = B1L8;
+B1L9 = B1_count_o[3] $ B1_count_reg[3] $ !B1L9_carry_eqn;
+
+--B1L10 is RefCount:CountFX2via1PPS|add~1369
+--operation mode is arithmetic
+
+B1L10 = CARRY(B1_count_o[3] & (!B1L8 # !B1_count_reg[3]) # !B1_count_o[3] & !B1_count_reg[3] & !B1L8);
+
+
+--B1L11 is RefCount:CountFX2via1PPS|add~1372
+--operation mode is arithmetic
+
+B1L11_carry_eqn = B1L10;
+B1L11 = B1_count_o[4] $ B1_count_reg[4] $ B1L11_carry_eqn;
+
+--B1L12 is RefCount:CountFX2via1PPS|add~1374
+--operation mode is arithmetic
+
+B1L12 = CARRY(B1_count_o[4] & B1_count_reg[4] & !B1L10 # !B1_count_o[4] & (B1_count_reg[4] # !B1L10));
+
+
+--B1L13 is RefCount:CountFX2via1PPS|add~1377
+--operation mode is arithmetic
+
+B1L13_carry_eqn = B1L12;
+B1L13 = B1_count_o[5] $ B1_count_reg[5] $ !B1L13_carry_eqn;
+
+--B1L14 is RefCount:CountFX2via1PPS|add~1379
+--operation mode is arithmetic
+
+B1L14 = CARRY(B1_count_o[5] & (!B1L12 # !B1_count_reg[5]) # !B1_count_o[5] & !B1_count_reg[5] & !B1L12);
+
+
+--B1L15 is RefCount:CountFX2via1PPS|add~1382
+--operation mode is arithmetic
+
+B1L15_carry_eqn = B1L6;
+B1L15 = B1_count_o[8] $ B1_count_reg[8] $ B1L15_carry_eqn;
+
+--B1L16 is RefCount:CountFX2via1PPS|add~1384
+--operation mode is arithmetic
+
+B1L16 = CARRY(B1_count_o[8] & B1_count_reg[8] & !B1L6 # !B1_count_o[8] & (B1_count_reg[8] # !B1L6));
+
+
+--B1L17 is RefCount:CountFX2via1PPS|add~1387
+--operation mode is arithmetic
+
+B1L17_carry_eqn = B1L65;
+B1L17 = B1_count_o[12] $ B1_count_reg[12] $ B1L17_carry_eqn;
+
+--B1L18 is RefCount:CountFX2via1PPS|add~1389
+--operation mode is arithmetic
+
+B1L18 = CARRY(B1_count_o[12] & B1_count_reg[12] & !B1L65 # !B1_count_o[12] & (B1_count_reg[12] # !B1L65));
+
+
+--B1L19 is RefCount:CountFX2via1PPS|add~1392
+--operation mode is arithmetic
+
+B1L19_carry_eqn = B1L18;
+B1L19 = B1_count_o[13] $ B1_count_reg[13] $ !B1L19_carry_eqn;
+
+--B1L20 is RefCount:CountFX2via1PPS|add~1394
+--operation mode is arithmetic
+
+B1L20 = CARRY(B1_count_o[13] & (!B1L18 # !B1_count_reg[13]) # !B1_count_o[13] & !B1_count_reg[13] & !B1L18);
+
+
+--B1L21 is RefCount:CountFX2via1PPS|add~1397
+--operation mode is arithmetic
+
+B1L21_carry_eqn = B1L20;
+B1L21 = B1_count_o[14] $ B1_count_reg[14] $ B1L21_carry_eqn;
+
+--B1L22 is RefCount:CountFX2via1PPS|add~1399
+--operation mode is arithmetic
+
+B1L22 = CARRY(B1_count_o[14] & B1_count_reg[14] & !B1L20 # !B1_count_o[14] & (B1_count_reg[14] # !B1L20));
+
+
+--B1L23 is RefCount:CountFX2via1PPS|add~1402
+--operation mode is arithmetic
+
+B1L23_carry_eqn = B1L22;
+B1L23 = B1_count_o[15] $ B1_count_reg[15] $ !B1L23_carry_eqn;
+
+--B1L24 is RefCount:CountFX2via1PPS|add~1404
+--operation mode is arithmetic
+
+B1L24 = CARRY(B1_count_o[15] & (!B1L22 # !B1_count_reg[15]) # !B1_count_o[15] & !B1_count_reg[15] & !B1L22);
+
+
+--B1L25 is RefCount:CountFX2via1PPS|add~1407
+--operation mode is arithmetic
+
+B1L25_carry_eqn = B1L24;
+B1L25 = B1_count_o[16] $ B1_count_reg[16] $ B1L25_carry_eqn;
+
+--B1L26 is RefCount:CountFX2via1PPS|add~1409
+--operation mode is arithmetic
+
+B1L26 = CARRY(B1_count_o[16] & B1_count_reg[16] & !B1L24 # !B1_count_o[16] & (B1_count_reg[16] # !B1L24));
+
+
+--B1L27 is RefCount:CountFX2via1PPS|add~1412
+--operation mode is arithmetic
+
+B1L27_carry_eqn = B1L26;
+B1L27 = B1_count_o[17] $ B1_count_reg[17] $ !B1L27_carry_eqn;
+
+--B1L28 is RefCount:CountFX2via1PPS|add~1414
+--operation mode is arithmetic
+
+B1L28 = CARRY(B1_count_o[17] & (!B1L26 # !B1_count_reg[17]) # !B1_count_o[17] & !B1_count_reg[17] & !B1L26);
+
+
+--B1L29 is RefCount:CountFX2via1PPS|add~1417
+--operation mode is arithmetic
+
+B1L29_carry_eqn = B1L28;
+B1L29 = B1_count_o[18] $ B1_count_reg[18] $ B1L29_carry_eqn;
+
+--B1L30 is RefCount:CountFX2via1PPS|add~1419
+--operation mode is arithmetic
+
+B1L30 = CARRY(B1_count_o[18] & B1_count_reg[18] & !B1L28 # !B1_count_o[18] & (B1_count_reg[18] # !B1L28));
+
+
+--B1L31 is RefCount:CountFX2via1PPS|add~1422
+--operation mode is arithmetic
+
+B1L31_carry_eqn = B1L30;
+B1L31 = B1_count_o[19] $ B1_count_reg[19] $ !B1L31_carry_eqn;
+
+--B1L32 is RefCount:CountFX2via1PPS|add~1424
+--operation mode is arithmetic
+
+B1L32 = CARRY(B1_count_o[19] & (!B1L30 # !B1_count_reg[19]) # !B1_count_o[19] & !B1_count_reg[19] & !B1L30);
+
+
+--B1L33 is RefCount:CountFX2via1PPS|add~1427
+--operation mode is arithmetic
+
+B1L33_carry_eqn = B1L36;
+B1L33 = B1_count_o[1] $ B1_count_reg[1] $ !B1L33_carry_eqn;
+
+--B1L34 is RefCount:CountFX2via1PPS|add~1429
+--operation mode is arithmetic
+
+B1L34 = CARRY(B1_count_o[1] & (!B1L36 # !B1_count_reg[1]) # !B1_count_o[1] & !B1_count_reg[1] & !B1L36);
+
+
+--B1L35 is RefCount:CountFX2via1PPS|add~1432
+--operation mode is arithmetic
+
+B1L35 = B1_count_o[0] $ !B1_count_reg[0];
+
+--B1L36 is RefCount:CountFX2via1PPS|add~1434
+--operation mode is arithmetic
+
+B1L36 = CARRY(!B1_count_o[0] & B1_count_reg[0]);
+
+
+--B1L37 is RefCount:CountFX2via1PPS|add~1437
+--operation mode is arithmetic
+
+B1L37_carry_eqn = B1L32;
+B1L37 = B1_count_o[20] $ B1_count_reg[20] $ B1L37_carry_eqn;
+
+--B1L38 is RefCount:CountFX2via1PPS|add~1439
+--operation mode is arithmetic
+
+B1L38 = CARRY(B1_count_o[20] & B1_count_reg[20] & !B1L32 # !B1_count_o[20] & (B1_count_reg[20] # !B1L32));
+
+
+--B1L39 is RefCount:CountFX2via1PPS|add~1442
+--operation mode is arithmetic
+
+B1L39_carry_eqn = B1L38;
+B1L39 = B1_count_o[21] $ B1_count_reg[21] $ !B1L39_carry_eqn;
+
+--B1L40 is RefCount:CountFX2via1PPS|add~1444
+--operation mode is arithmetic
+
+B1L40 = CARRY(B1_count_o[21] & (!B1L38 # !B1_count_reg[21]) # !B1_count_o[21] & !B1_count_reg[21] & !B1L38);
+
+
+--B1L41 is RefCount:CountFX2via1PPS|add~1447
+--operation mode is arithmetic
+
+B1L41_carry_eqn = B1L40;
+B1L41 = B1_count_o[22] $ B1_count_reg[22] $ B1L41_carry_eqn;
+
+--B1L42 is RefCount:CountFX2via1PPS|add~1449
+--operation mode is arithmetic
+
+B1L42 = CARRY(B1_count_o[22] & B1_count_reg[22] & !B1L40 # !B1_count_o[22] & (B1_count_reg[22] # !B1L40));
+
+
+--B1L43 is RefCount:CountFX2via1PPS|add~1452
+--operation mode is arithmetic
+
+B1L43_carry_eqn = B1L42;
+B1L43 = B1_count_o[23] $ B1_count_reg[23] $ !B1L43_carry_eqn;
+
+--B1L44 is RefCount:CountFX2via1PPS|add~1454
+--operation mode is arithmetic
+
+B1L44 = CARRY(B1_count_o[23] & (!B1L42 # !B1_count_reg[23]) # !B1_count_o[23] & !B1_count_reg[23] & !B1L42);
+
+
+--B1L45 is RefCount:CountFX2via1PPS|add~1457
+--operation mode is arithmetic
+
+B1L45_carry_eqn = B1L44;
+B1L45 = B1_count_o[24] $ B1_count_reg[24] $ B1L45_carry_eqn;
+
+--B1L46 is RefCount:CountFX2via1PPS|add~1459
+--operation mode is arithmetic
+
+B1L46 = CARRY(B1_count_o[24] & B1_count_reg[24] & !B1L44 # !B1_count_o[24] & (B1_count_reg[24] # !B1L44));
+
+
+--B1L47 is RefCount:CountFX2via1PPS|add~1462
+--operation mode is arithmetic
+
+B1L47_carry_eqn = B1L46;
+B1L47 = B1_count_o[25] $ B1_count_reg[25] $ !B1L47_carry_eqn;
+
+--B1L48 is RefCount:CountFX2via1PPS|add~1464
+--operation mode is arithmetic
+
+B1L48 = CARRY(B1_count_o[25] & (!B1L46 # !B1_count_reg[25]) # !B1_count_o[25] & !B1_count_reg[25] & !B1L46);
+
+
+--B1L49 is RefCount:CountFX2via1PPS|add~1467
+--operation mode is arithmetic
+
+B1L49_carry_eqn = B1L48;
+B1L49 = B1_count_o[26] $ B1_count_reg[26] $ B1L49_carry_eqn;
+
+--B1L50 is RefCount:CountFX2via1PPS|add~1469
+--operation mode is arithmetic
+
+B1L50 = CARRY(B1_count_o[26] & B1_count_reg[26] & !B1L48 # !B1_count_o[26] & (B1_count_reg[26] # !B1L48));
+
+
+--B1L51 is RefCount:CountFX2via1PPS|add~1472
+--operation mode is arithmetic
+
+B1L51_carry_eqn = B1L50;
+B1L51 = B1_count_o[27] $ B1_count_reg[27] $ !B1L51_carry_eqn;
+
+--B1L52 is RefCount:CountFX2via1PPS|add~1474
+--operation mode is arithmetic
+
+B1L52 = CARRY(B1_count_o[27] & (!B1L50 # !B1_count_reg[27]) # !B1_count_o[27] & !B1_count_reg[27] & !B1L50);
+
+
+--B1L53 is RefCount:CountFX2via1PPS|add~1477
+--operation mode is arithmetic
+
+B1L53_carry_eqn = B1L52;
+B1L53 = B1_count_o[28] $ B1_count_reg[28] $ B1L53_carry_eqn;
+
+--B1L54 is RefCount:CountFX2via1PPS|add~1479
+--operation mode is arithmetic
+
+B1L54 = CARRY(B1_count_o[28] & B1_count_reg[28] & !B1L52 # !B1_count_o[28] & (B1_count_reg[28] # !B1L52));
+
+
+--B1L55 is RefCount:CountFX2via1PPS|add~1482
+--operation mode is arithmetic
+
+B1L55_carry_eqn = B1L54;
+B1L55 = B1_count_o[29] $ B1_count_reg[29] $ !B1L55_carry_eqn;
+
+--B1L56 is RefCount:CountFX2via1PPS|add~1484
+--operation mode is arithmetic
+
+B1L56 = CARRY(B1_count_o[29] & (!B1L54 # !B1_count_reg[29]) # !B1_count_o[29] & !B1_count_reg[29] & !B1L54);
+
+
+--B1L57 is RefCount:CountFX2via1PPS|add~1487
+--operation mode is arithmetic
+
+B1L57_carry_eqn = B1L56;
+B1L57 = B1_count_o[30] $ B1_count_reg[30] $ B1L57_carry_eqn;
+
+--B1L58 is RefCount:CountFX2via1PPS|add~1489
+--operation mode is arithmetic
+
+B1L58 = CARRY(B1_count_o[30] & B1_count_reg[30] & !B1L56 # !B1_count_o[30] & (B1_count_reg[30] # !B1L56));
+
+
+--B1L59 is RefCount:CountFX2via1PPS|add~1492
+--operation mode is normal
+
+B1L59_carry_eqn = B1L58;
+B1L59 = B1_count_reg[31] $ B1_count_o[31] $ !B1L59_carry_eqn;
+
+
+--B1L60 is RefCount:CountFX2via1PPS|add~1497
+--operation mode is arithmetic
+
+B1L60_carry_eqn = B1L16;
+B1L60 = B1_count_o[9] $ B1_count_reg[9] $ !B1L60_carry_eqn;
+
+--B1L61 is RefCount:CountFX2via1PPS|add~1499
+--operation mode is arithmetic
+
+B1L61 = CARRY(B1_count_o[9] & (!B1L16 # !B1_count_reg[9]) # !B1_count_o[9] & !B1_count_reg[9] & !B1L16);
+
+
+--B1L62 is RefCount:CountFX2via1PPS|add~1502
+--operation mode is arithmetic
+
+B1L62_carry_eqn = B1L61;
+B1L62 = B1_count_o[10] $ B1_count_reg[10] $ B1L62_carry_eqn;
+
+--B1L63 is RefCount:CountFX2via1PPS|add~1504
+--operation mode is arithmetic
+
+B1L63 = CARRY(B1_count_o[10] & B1_count_reg[10] & !B1L61 # !B1_count_o[10] & (B1_count_reg[10] # !B1L61));
+
+
+--B1L64 is RefCount:CountFX2via1PPS|add~1507
+--operation mode is arithmetic
+
+B1L64_carry_eqn = B1L63;
+B1L64 = B1_count_o[11] $ B1_count_reg[11] $ !B1L64_carry_eqn;
+
+--B1L65 is RefCount:CountFX2via1PPS|add~1509
+--operation mode is arithmetic
+
+B1L65 = CARRY(B1_count_o[11] & (!B1L63 # !B1_count_reg[11]) # !B1_count_o[11] & !B1_count_reg[11] & !B1L63);
+
+
+--E1_syncd_drdy is fx2_usb_pipe:usb_pipe|syncd_drdy
+--operation mode is normal
+
+E1_syncd_drdy_lut_out = V1_state_empty;
+E1_syncd_drdy = DFFEAS(E1_syncd_drdy_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--E1_read_strobe_count[3] is fx2_usb_pipe:usb_pipe|read_strobe_count[3]
+--operation mode is normal
+
+E1_read_strobe_count[3]_lut_out = E1_read_strobe_o & (E1_read_strobe_count[3] $ (!E1_read_strobe_count[2] & E1L1));
+E1_read_strobe_count[3] = DFFEAS(E1_read_strobe_count[3]_lut_out, FX2_CLK, VCC, , E1L4, , , , );
+
+
+--E1_read_strobe_count[2] is fx2_usb_pipe:usb_pipe|read_strobe_count[2]
+--operation mode is normal
+
+E1_read_strobe_count[2]_lut_out = E1_read_strobe_o & (E1_read_strobe_count[2] $ (!E1_read_strobe_count[1] & !E1_read_strobe_count[0]));
+E1_read_strobe_count[2] = DFFEAS(E1_read_strobe_count[2]_lut_out, FX2_CLK, VCC, , E1L4, , , , );
+
+
+--E1_read_strobe_count[1] is fx2_usb_pipe:usb_pipe|read_strobe_count[1]
+--operation mode is normal
+
+E1_read_strobe_count[1]_lut_out = E1_read_strobe_o & (E1_read_strobe_count[1] $ !E1_read_strobe_count[0]);
+E1_read_strobe_count[1] = DFFEAS(E1_read_strobe_count[1]_lut_out, FX2_CLK, VCC, , E1L4, , , , );
+
+
+--E1_read_strobe_count[0] is fx2_usb_pipe:usb_pipe|read_strobe_count[0]
+--operation mode is normal
+
+E1_read_strobe_count[0]_lut_out = !E1_read_strobe_count[0] & (E1_read_strobe_o);
+E1_read_strobe_count[0] = DFFEAS(E1_read_strobe_count[0]_lut_out, FX2_CLK, VCC, , E1L4, , , , );
+
+
+--E1L13 is fx2_usb_pipe:usb_pipe|state~38
+--operation mode is normal
+
+E1L13 = !E1_read_strobe_count[3] & !E1_read_strobe_count[2] & !E1_read_strobe_count[1] & !E1_read_strobe_count[0];
+
+
+--E1_state.0000 is fx2_usb_pipe:usb_pipe|state.0000
+--operation mode is normal
+
+E1_state.0000_lut_out = E1_slwr_o & (E1_syncd_drdy # E1_state.0000);
+E1_state.0000 = DFFEAS(E1_state.0000_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1_fifo_wreq_pipe[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|fifo_wreq_pipe[1]
+--operation mode is normal
+
+G1_fifo_wreq_pipe[1]_lut_out = G1_fifo_wreq_pipe[0];
+G1_fifo_wreq_pipe[1] = DFFEAS(G1_fifo_wreq_pipe[1]_lut_out, FX2_CLK, VCC, , G1_stall_pipeline, , , , );
+
+
+--V1_state_full is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_full
+--operation mode is normal
+
+V1_state_full_lut_out = !E1_read_strobe_o & (V1_state_full # V1_state_middle & V1L1);
+V1_state_full = DFFEAS(V1_state_full_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--S1_valid_wreq is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|valid_wreq
+--operation mode is normal
+
+S1_valid_wreq = G1_fifo_wreq_pipe[1] & (!V1_state_full);
+
+
+--H1_q_b[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram|q_b[0]
+--RAM Block Operation Mode: Simple Dual-Port
+--Port A Depth: 64, Port A Width: 1, Port B Depth: 64, Port B Width: 1
+--Port A Logical Depth: 64, Port A Logical Width: 8, Port B Logical Depth: 64, Port B Logical Width: 8
+--Port A Input: Registered, Port B Input: Registered, Port B Output: Registered
+H1_q_b[0]_PORT_A_data_in = D1_fifo_in_o[0];
+H1_q_b[0]_PORT_A_data_in_reg = DFFE(H1_q_b[0]_PORT_A_data_in, H1_q_b[0]_clock_0, , , H1_q_b[0]_clock_enable_0);
+H1_q_b[0]_PORT_A_address = BUS(L2_power_modified_counter_values[0], L2_power_modified_counter_values[1], L2_power_modified_counter_values[2], L2_power_modified_counter_values[3], L2_power_modified_counter_values[4], L2_power_modified_counter_values[5]);
+H1_q_b[0]_PORT_A_address_reg = DFFE(H1_q_b[0]_PORT_A_address, H1_q_b[0]_clock_0, , , H1_q_b[0]_clock_enable_0);
+H1_q_b[0]_PORT_B_address = BUS(L1_power_modified_counter_values[0], L1_power_modified_counter_values[1], L1_power_modified_counter_values[2], L1_power_modified_counter_values[3], L1_power_modified_counter_values[4], L1_power_modified_counter_values[5]);
+H1_q_b[0]_PORT_B_address_reg = DFFE(H1_q_b[0]_PORT_B_address, H1_q_b[0]_clock_1, , , H1_q_b[0]_clock_enable_1);
+H1_q_b[0]_PORT_A_write_enable = VCC;
+H1_q_b[0]_PORT_A_write_enable_reg = DFFE(H1_q_b[0]_PORT_A_write_enable, H1_q_b[0]_clock_0, , , H1_q_b[0]_clock_enable_0);
+H1_q_b[0]_PORT_B_read_enable = VCC;
+H1_q_b[0]_PORT_B_read_enable_reg = DFFE(H1_q_b[0]_PORT_B_read_enable, H1_q_b[0]_clock_1, , , H1_q_b[0]_clock_enable_1);
+H1_q_b[0]_clock_0 = FX2_CLK;
+H1_q_b[0]_clock_1 = FX2_CLK;
+H1_q_b[0]_clock_enable_0 = G1_valid_wrreq;
+H1_q_b[0]_clock_enable_1 = G1_stall_pipeline;
+H1_q_b[0]_PORT_B_data_out = MEMORY(H1_q_b[0]_PORT_A_data_in_reg, , H1_q_b[0]_PORT_A_address_reg, H1_q_b[0]_PORT_B_address_reg, H1_q_b[0]_PORT_A_write_enable_reg, H1_q_b[0]_PORT_B_read_enable_reg, , , H1_q_b[0]_clock_0, H1_q_b[0]_clock_1, H1_q_b[0]_clock_enable_0, H1_q_b[0]_clock_enable_1, , );
+H1_q_b[0]_PORT_B_data_out_reg = DFFE(H1_q_b[0]_PORT_B_data_out, H1_q_b[0]_clock_1, , , H1_q_b[0]_clock_enable_1);
+H1_q_b[0] = H1_q_b[0]_PORT_B_data_out_reg[0];
+
+
+--S1L1 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|_~0
+--operation mode is normal
+
+S1L1 = E1_read_strobe_o & (V1_state_empty $ (!V1_state_full & G1_fifo_wreq_pipe[1])) # !E1_read_strobe_o & (!V1_state_full & G1_fifo_wreq_pipe[1]);
+
+
+--V1_state_middle is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_middle
+--operation mode is normal
+
+V1_state_middle_lut_out = V1L6 # V1L7 & (E1_read_strobe_o # !V1L1);
+V1_state_middle = DFFEAS(V1_state_middle_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--V1L3 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_empty~39
+--operation mode is normal
+
+V1L3 = AB1_safe_q[0] & E1_read_strobe_o & (!AB1_safe_q[1]);
+
+
+--H1_q_b[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram|q_b[1]
+--RAM Block Operation Mode: Simple Dual-Port
+--Port A Depth: 64, Port A Width: 1, Port B Depth: 64, Port B Width: 1
+--Port A Logical Depth: 64, Port A Logical Width: 8, Port B Logical Depth: 64, Port B Logical Width: 8
+--Port A Input: Registered, Port B Input: Registered, Port B Output: Registered
+H1_q_b[1]_PORT_A_data_in = D1_fifo_in_o[1];
+H1_q_b[1]_PORT_A_data_in_reg = DFFE(H1_q_b[1]_PORT_A_data_in, H1_q_b[1]_clock_0, , , H1_q_b[1]_clock_enable_0);
+H1_q_b[1]_PORT_A_address = BUS(L2_power_modified_counter_values[0], L2_power_modified_counter_values[1], L2_power_modified_counter_values[2], L2_power_modified_counter_values[3], L2_power_modified_counter_values[4], L2_power_modified_counter_values[5]);
+H1_q_b[1]_PORT_A_address_reg = DFFE(H1_q_b[1]_PORT_A_address, H1_q_b[1]_clock_0, , , H1_q_b[1]_clock_enable_0);
+H1_q_b[1]_PORT_B_address = BUS(L1_power_modified_counter_values[0], L1_power_modified_counter_values[1], L1_power_modified_counter_values[2], L1_power_modified_counter_values[3], L1_power_modified_counter_values[4], L1_power_modified_counter_values[5]);
+H1_q_b[1]_PORT_B_address_reg = DFFE(H1_q_b[1]_PORT_B_address, H1_q_b[1]_clock_1, , , H1_q_b[1]_clock_enable_1);
+H1_q_b[1]_PORT_A_write_enable = VCC;
+H1_q_b[1]_PORT_A_write_enable_reg = DFFE(H1_q_b[1]_PORT_A_write_enable, H1_q_b[1]_clock_0, , , H1_q_b[1]_clock_enable_0);
+H1_q_b[1]_PORT_B_read_enable = VCC;
+H1_q_b[1]_PORT_B_read_enable_reg = DFFE(H1_q_b[1]_PORT_B_read_enable, H1_q_b[1]_clock_1, , , H1_q_b[1]_clock_enable_1);
+H1_q_b[1]_clock_0 = FX2_CLK;
+H1_q_b[1]_clock_1 = FX2_CLK;
+H1_q_b[1]_clock_enable_0 = G1_valid_wrreq;
+H1_q_b[1]_clock_enable_1 = G1_stall_pipeline;
+H1_q_b[1]_PORT_B_data_out = MEMORY(H1_q_b[1]_PORT_A_data_in_reg, , H1_q_b[1]_PORT_A_address_reg, H1_q_b[1]_PORT_B_address_reg, H1_q_b[1]_PORT_A_write_enable_reg, H1_q_b[1]_PORT_B_read_enable_reg, , , H1_q_b[1]_clock_0, H1_q_b[1]_clock_1, H1_q_b[1]_clock_enable_0, H1_q_b[1]_clock_enable_1, , );
+H1_q_b[1]_PORT_B_data_out_reg = DFFE(H1_q_b[1]_PORT_B_data_out, H1_q_b[1]_clock_1, , , H1_q_b[1]_clock_enable_1);
+H1_q_b[1] = H1_q_b[1]_PORT_B_data_out_reg[0];
+
+
+--H1_q_b[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram|q_b[2]
+--RAM Block Operation Mode: Simple Dual-Port
+--Port A Depth: 64, Port A Width: 1, Port B Depth: 64, Port B Width: 1
+--Port A Logical Depth: 64, Port A Logical Width: 8, Port B Logical Depth: 64, Port B Logical Width: 8
+--Port A Input: Registered, Port B Input: Registered, Port B Output: Registered
+H1_q_b[2]_PORT_A_data_in = D1_fifo_in_o[2];
+H1_q_b[2]_PORT_A_data_in_reg = DFFE(H1_q_b[2]_PORT_A_data_in, H1_q_b[2]_clock_0, , , H1_q_b[2]_clock_enable_0);
+H1_q_b[2]_PORT_A_address = BUS(L2_power_modified_counter_values[0], L2_power_modified_counter_values[1], L2_power_modified_counter_values[2], L2_power_modified_counter_values[3], L2_power_modified_counter_values[4], L2_power_modified_counter_values[5]);
+H1_q_b[2]_PORT_A_address_reg = DFFE(H1_q_b[2]_PORT_A_address, H1_q_b[2]_clock_0, , , H1_q_b[2]_clock_enable_0);
+H1_q_b[2]_PORT_B_address = BUS(L1_power_modified_counter_values[0], L1_power_modified_counter_values[1], L1_power_modified_counter_values[2], L1_power_modified_counter_values[3], L1_power_modified_counter_values[4], L1_power_modified_counter_values[5]);
+H1_q_b[2]_PORT_B_address_reg = DFFE(H1_q_b[2]_PORT_B_address, H1_q_b[2]_clock_1, , , H1_q_b[2]_clock_enable_1);
+H1_q_b[2]_PORT_A_write_enable = VCC;
+H1_q_b[2]_PORT_A_write_enable_reg = DFFE(H1_q_b[2]_PORT_A_write_enable, H1_q_b[2]_clock_0, , , H1_q_b[2]_clock_enable_0);
+H1_q_b[2]_PORT_B_read_enable = VCC;
+H1_q_b[2]_PORT_B_read_enable_reg = DFFE(H1_q_b[2]_PORT_B_read_enable, H1_q_b[2]_clock_1, , , H1_q_b[2]_clock_enable_1);
+H1_q_b[2]_clock_0 = FX2_CLK;
+H1_q_b[2]_clock_1 = FX2_CLK;
+H1_q_b[2]_clock_enable_0 = G1_valid_wrreq;
+H1_q_b[2]_clock_enable_1 = G1_stall_pipeline;
+H1_q_b[2]_PORT_B_data_out = MEMORY(H1_q_b[2]_PORT_A_data_in_reg, , H1_q_b[2]_PORT_A_address_reg, H1_q_b[2]_PORT_B_address_reg, H1_q_b[2]_PORT_A_write_enable_reg, H1_q_b[2]_PORT_B_read_enable_reg, , , H1_q_b[2]_clock_0, H1_q_b[2]_clock_1, H1_q_b[2]_clock_enable_0, H1_q_b[2]_clock_enable_1, , );
+H1_q_b[2]_PORT_B_data_out_reg = DFFE(H1_q_b[2]_PORT_B_data_out, H1_q_b[2]_clock_1, , , H1_q_b[2]_clock_enable_1);
+H1_q_b[2] = H1_q_b[2]_PORT_B_data_out_reg[0];
+
+
+--H1_q_b[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram|q_b[3]
+--RAM Block Operation Mode: Simple Dual-Port
+--Port A Depth: 64, Port A Width: 1, Port B Depth: 64, Port B Width: 1
+--Port A Logical Depth: 64, Port A Logical Width: 8, Port B Logical Depth: 64, Port B Logical Width: 8
+--Port A Input: Registered, Port B Input: Registered, Port B Output: Registered
+H1_q_b[3]_PORT_A_data_in = D1_fifo_in_o[3];
+H1_q_b[3]_PORT_A_data_in_reg = DFFE(H1_q_b[3]_PORT_A_data_in, H1_q_b[3]_clock_0, , , H1_q_b[3]_clock_enable_0);
+H1_q_b[3]_PORT_A_address = BUS(L2_power_modified_counter_values[0], L2_power_modified_counter_values[1], L2_power_modified_counter_values[2], L2_power_modified_counter_values[3], L2_power_modified_counter_values[4], L2_power_modified_counter_values[5]);
+H1_q_b[3]_PORT_A_address_reg = DFFE(H1_q_b[3]_PORT_A_address, H1_q_b[3]_clock_0, , , H1_q_b[3]_clock_enable_0);
+H1_q_b[3]_PORT_B_address = BUS(L1_power_modified_counter_values[0], L1_power_modified_counter_values[1], L1_power_modified_counter_values[2], L1_power_modified_counter_values[3], L1_power_modified_counter_values[4], L1_power_modified_counter_values[5]);
+H1_q_b[3]_PORT_B_address_reg = DFFE(H1_q_b[3]_PORT_B_address, H1_q_b[3]_clock_1, , , H1_q_b[3]_clock_enable_1);
+H1_q_b[3]_PORT_A_write_enable = VCC;
+H1_q_b[3]_PORT_A_write_enable_reg = DFFE(H1_q_b[3]_PORT_A_write_enable, H1_q_b[3]_clock_0, , , H1_q_b[3]_clock_enable_0);
+H1_q_b[3]_PORT_B_read_enable = VCC;
+H1_q_b[3]_PORT_B_read_enable_reg = DFFE(H1_q_b[3]_PORT_B_read_enable, H1_q_b[3]_clock_1, , , H1_q_b[3]_clock_enable_1);
+H1_q_b[3]_clock_0 = FX2_CLK;
+H1_q_b[3]_clock_1 = FX2_CLK;
+H1_q_b[3]_clock_enable_0 = G1_valid_wrreq;
+H1_q_b[3]_clock_enable_1 = G1_stall_pipeline;
+H1_q_b[3]_PORT_B_data_out = MEMORY(H1_q_b[3]_PORT_A_data_in_reg, , H1_q_b[3]_PORT_A_address_reg, H1_q_b[3]_PORT_B_address_reg, H1_q_b[3]_PORT_A_write_enable_reg, H1_q_b[3]_PORT_B_read_enable_reg, , , H1_q_b[3]_clock_0, H1_q_b[3]_clock_1, H1_q_b[3]_clock_enable_0, H1_q_b[3]_clock_enable_1, , );
+H1_q_b[3]_PORT_B_data_out_reg = DFFE(H1_q_b[3]_PORT_B_data_out, H1_q_b[3]_clock_1, , , H1_q_b[3]_clock_enable_1);
+H1_q_b[3] = H1_q_b[3]_PORT_B_data_out_reg[0];
+
+
+--H1_q_b[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram|q_b[4]
+--RAM Block Operation Mode: Simple Dual-Port
+--Port A Depth: 64, Port A Width: 1, Port B Depth: 64, Port B Width: 1
+--Port A Logical Depth: 64, Port A Logical Width: 8, Port B Logical Depth: 64, Port B Logical Width: 8
+--Port A Input: Registered, Port B Input: Registered, Port B Output: Registered
+H1_q_b[4]_PORT_A_data_in = D1_fifo_in_o[4];
+H1_q_b[4]_PORT_A_data_in_reg = DFFE(H1_q_b[4]_PORT_A_data_in, H1_q_b[4]_clock_0, , , H1_q_b[4]_clock_enable_0);
+H1_q_b[4]_PORT_A_address = BUS(L2_power_modified_counter_values[0], L2_power_modified_counter_values[1], L2_power_modified_counter_values[2], L2_power_modified_counter_values[3], L2_power_modified_counter_values[4], L2_power_modified_counter_values[5]);
+H1_q_b[4]_PORT_A_address_reg = DFFE(H1_q_b[4]_PORT_A_address, H1_q_b[4]_clock_0, , , H1_q_b[4]_clock_enable_0);
+H1_q_b[4]_PORT_B_address = BUS(L1_power_modified_counter_values[0], L1_power_modified_counter_values[1], L1_power_modified_counter_values[2], L1_power_modified_counter_values[3], L1_power_modified_counter_values[4], L1_power_modified_counter_values[5]);
+H1_q_b[4]_PORT_B_address_reg = DFFE(H1_q_b[4]_PORT_B_address, H1_q_b[4]_clock_1, , , H1_q_b[4]_clock_enable_1);
+H1_q_b[4]_PORT_A_write_enable = VCC;
+H1_q_b[4]_PORT_A_write_enable_reg = DFFE(H1_q_b[4]_PORT_A_write_enable, H1_q_b[4]_clock_0, , , H1_q_b[4]_clock_enable_0);
+H1_q_b[4]_PORT_B_read_enable = VCC;
+H1_q_b[4]_PORT_B_read_enable_reg = DFFE(H1_q_b[4]_PORT_B_read_enable, H1_q_b[4]_clock_1, , , H1_q_b[4]_clock_enable_1);
+H1_q_b[4]_clock_0 = FX2_CLK;
+H1_q_b[4]_clock_1 = FX2_CLK;
+H1_q_b[4]_clock_enable_0 = G1_valid_wrreq;
+H1_q_b[4]_clock_enable_1 = G1_stall_pipeline;
+H1_q_b[4]_PORT_B_data_out = MEMORY(H1_q_b[4]_PORT_A_data_in_reg, , H1_q_b[4]_PORT_A_address_reg, H1_q_b[4]_PORT_B_address_reg, H1_q_b[4]_PORT_A_write_enable_reg, H1_q_b[4]_PORT_B_read_enable_reg, , , H1_q_b[4]_clock_0, H1_q_b[4]_clock_1, H1_q_b[4]_clock_enable_0, H1_q_b[4]_clock_enable_1, , );
+H1_q_b[4]_PORT_B_data_out_reg = DFFE(H1_q_b[4]_PORT_B_data_out, H1_q_b[4]_clock_1, , , H1_q_b[4]_clock_enable_1);
+H1_q_b[4] = H1_q_b[4]_PORT_B_data_out_reg[0];
+
+
+--H1_q_b[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram|q_b[5]
+--RAM Block Operation Mode: Simple Dual-Port
+--Port A Depth: 64, Port A Width: 1, Port B Depth: 64, Port B Width: 1
+--Port A Logical Depth: 64, Port A Logical Width: 8, Port B Logical Depth: 64, Port B Logical Width: 8
+--Port A Input: Registered, Port B Input: Registered, Port B Output: Registered
+H1_q_b[5]_PORT_A_data_in = D1_fifo_in_o[5];
+H1_q_b[5]_PORT_A_data_in_reg = DFFE(H1_q_b[5]_PORT_A_data_in, H1_q_b[5]_clock_0, , , H1_q_b[5]_clock_enable_0);
+H1_q_b[5]_PORT_A_address = BUS(L2_power_modified_counter_values[0], L2_power_modified_counter_values[1], L2_power_modified_counter_values[2], L2_power_modified_counter_values[3], L2_power_modified_counter_values[4], L2_power_modified_counter_values[5]);
+H1_q_b[5]_PORT_A_address_reg = DFFE(H1_q_b[5]_PORT_A_address, H1_q_b[5]_clock_0, , , H1_q_b[5]_clock_enable_0);
+H1_q_b[5]_PORT_B_address = BUS(L1_power_modified_counter_values[0], L1_power_modified_counter_values[1], L1_power_modified_counter_values[2], L1_power_modified_counter_values[3], L1_power_modified_counter_values[4], L1_power_modified_counter_values[5]);
+H1_q_b[5]_PORT_B_address_reg = DFFE(H1_q_b[5]_PORT_B_address, H1_q_b[5]_clock_1, , , H1_q_b[5]_clock_enable_1);
+H1_q_b[5]_PORT_A_write_enable = VCC;
+H1_q_b[5]_PORT_A_write_enable_reg = DFFE(H1_q_b[5]_PORT_A_write_enable, H1_q_b[5]_clock_0, , , H1_q_b[5]_clock_enable_0);
+H1_q_b[5]_PORT_B_read_enable = VCC;
+H1_q_b[5]_PORT_B_read_enable_reg = DFFE(H1_q_b[5]_PORT_B_read_enable, H1_q_b[5]_clock_1, , , H1_q_b[5]_clock_enable_1);
+H1_q_b[5]_clock_0 = FX2_CLK;
+H1_q_b[5]_clock_1 = FX2_CLK;
+H1_q_b[5]_clock_enable_0 = G1_valid_wrreq;
+H1_q_b[5]_clock_enable_1 = G1_stall_pipeline;
+H1_q_b[5]_PORT_B_data_out = MEMORY(H1_q_b[5]_PORT_A_data_in_reg, , H1_q_b[5]_PORT_A_address_reg, H1_q_b[5]_PORT_B_address_reg, H1_q_b[5]_PORT_A_write_enable_reg, H1_q_b[5]_PORT_B_read_enable_reg, , , H1_q_b[5]_clock_0, H1_q_b[5]_clock_1, H1_q_b[5]_clock_enable_0, H1_q_b[5]_clock_enable_1, , );
+H1_q_b[5]_PORT_B_data_out_reg = DFFE(H1_q_b[5]_PORT_B_data_out, H1_q_b[5]_clock_1, , , H1_q_b[5]_clock_enable_1);
+H1_q_b[5] = H1_q_b[5]_PORT_B_data_out_reg[0];
+
+
+--H1_q_b[6] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram|q_b[6]
+--RAM Block Operation Mode: Simple Dual-Port
+--Port A Depth: 64, Port A Width: 1, Port B Depth: 64, Port B Width: 1
+--Port A Logical Depth: 64, Port A Logical Width: 8, Port B Logical Depth: 64, Port B Logical Width: 8
+--Port A Input: Registered, Port B Input: Registered, Port B Output: Registered
+H1_q_b[6]_PORT_A_data_in = D1_fifo_in_o[6];
+H1_q_b[6]_PORT_A_data_in_reg = DFFE(H1_q_b[6]_PORT_A_data_in, H1_q_b[6]_clock_0, , , H1_q_b[6]_clock_enable_0);
+H1_q_b[6]_PORT_A_address = BUS(L2_power_modified_counter_values[0], L2_power_modified_counter_values[1], L2_power_modified_counter_values[2], L2_power_modified_counter_values[3], L2_power_modified_counter_values[4], L2_power_modified_counter_values[5]);
+H1_q_b[6]_PORT_A_address_reg = DFFE(H1_q_b[6]_PORT_A_address, H1_q_b[6]_clock_0, , , H1_q_b[6]_clock_enable_0);
+H1_q_b[6]_PORT_B_address = BUS(L1_power_modified_counter_values[0], L1_power_modified_counter_values[1], L1_power_modified_counter_values[2], L1_power_modified_counter_values[3], L1_power_modified_counter_values[4], L1_power_modified_counter_values[5]);
+H1_q_b[6]_PORT_B_address_reg = DFFE(H1_q_b[6]_PORT_B_address, H1_q_b[6]_clock_1, , , H1_q_b[6]_clock_enable_1);
+H1_q_b[6]_PORT_A_write_enable = VCC;
+H1_q_b[6]_PORT_A_write_enable_reg = DFFE(H1_q_b[6]_PORT_A_write_enable, H1_q_b[6]_clock_0, , , H1_q_b[6]_clock_enable_0);
+H1_q_b[6]_PORT_B_read_enable = VCC;
+H1_q_b[6]_PORT_B_read_enable_reg = DFFE(H1_q_b[6]_PORT_B_read_enable, H1_q_b[6]_clock_1, , , H1_q_b[6]_clock_enable_1);
+H1_q_b[6]_clock_0 = FX2_CLK;
+H1_q_b[6]_clock_1 = FX2_CLK;
+H1_q_b[6]_clock_enable_0 = G1_valid_wrreq;
+H1_q_b[6]_clock_enable_1 = G1_stall_pipeline;
+H1_q_b[6]_PORT_B_data_out = MEMORY(H1_q_b[6]_PORT_A_data_in_reg, , H1_q_b[6]_PORT_A_address_reg, H1_q_b[6]_PORT_B_address_reg, H1_q_b[6]_PORT_A_write_enable_reg, H1_q_b[6]_PORT_B_read_enable_reg, , , H1_q_b[6]_clock_0, H1_q_b[6]_clock_1, H1_q_b[6]_clock_enable_0, H1_q_b[6]_clock_enable_1, , );
+H1_q_b[6]_PORT_B_data_out_reg = DFFE(H1_q_b[6]_PORT_B_data_out, H1_q_b[6]_clock_1, , , H1_q_b[6]_clock_enable_1);
+H1_q_b[6] = H1_q_b[6]_PORT_B_data_out_reg[0];
+
+
+--H1_q_b[7] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|altsyncram_h0v:fifo_ram|q_b[7]
+--RAM Block Operation Mode: Simple Dual-Port
+--Port A Depth: 64, Port A Width: 1, Port B Depth: 64, Port B Width: 1
+--Port A Logical Depth: 64, Port A Logical Width: 8, Port B Logical Depth: 64, Port B Logical Width: 8
+--Port A Input: Registered, Port B Input: Registered, Port B Output: Registered
+H1_q_b[7]_PORT_A_data_in = D1_fifo_in_o[7];
+H1_q_b[7]_PORT_A_data_in_reg = DFFE(H1_q_b[7]_PORT_A_data_in, H1_q_b[7]_clock_0, , , H1_q_b[7]_clock_enable_0);
+H1_q_b[7]_PORT_A_address = BUS(L2_power_modified_counter_values[0], L2_power_modified_counter_values[1], L2_power_modified_counter_values[2], L2_power_modified_counter_values[3], L2_power_modified_counter_values[4], L2_power_modified_counter_values[5]);
+H1_q_b[7]_PORT_A_address_reg = DFFE(H1_q_b[7]_PORT_A_address, H1_q_b[7]_clock_0, , , H1_q_b[7]_clock_enable_0);
+H1_q_b[7]_PORT_B_address = BUS(L1_power_modified_counter_values[0], L1_power_modified_counter_values[1], L1_power_modified_counter_values[2], L1_power_modified_counter_values[3], L1_power_modified_counter_values[4], L1_power_modified_counter_values[5]);
+H1_q_b[7]_PORT_B_address_reg = DFFE(H1_q_b[7]_PORT_B_address, H1_q_b[7]_clock_1, , , H1_q_b[7]_clock_enable_1);
+H1_q_b[7]_PORT_A_write_enable = VCC;
+H1_q_b[7]_PORT_A_write_enable_reg = DFFE(H1_q_b[7]_PORT_A_write_enable, H1_q_b[7]_clock_0, , , H1_q_b[7]_clock_enable_0);
+H1_q_b[7]_PORT_B_read_enable = VCC;
+H1_q_b[7]_PORT_B_read_enable_reg = DFFE(H1_q_b[7]_PORT_B_read_enable, H1_q_b[7]_clock_1, , , H1_q_b[7]_clock_enable_1);
+H1_q_b[7]_clock_0 = FX2_CLK;
+H1_q_b[7]_clock_1 = FX2_CLK;
+H1_q_b[7]_clock_enable_0 = G1_valid_wrreq;
+H1_q_b[7]_clock_enable_1 = G1_stall_pipeline;
+H1_q_b[7]_PORT_B_data_out = MEMORY(H1_q_b[7]_PORT_A_data_in_reg, , H1_q_b[7]_PORT_A_address_reg, H1_q_b[7]_PORT_B_address_reg, H1_q_b[7]_PORT_A_write_enable_reg, H1_q_b[7]_PORT_B_read_enable_reg, , , H1_q_b[7]_clock_0, H1_q_b[7]_clock_1, H1_q_b[7]_clock_enable_0, H1_q_b[7]_clock_enable_1, , );
+H1_q_b[7]_PORT_B_data_out_reg = DFFE(H1_q_b[7]_PORT_B_data_out, H1_q_b[7]_clock_1, , , H1_q_b[7]_clock_enable_1);
+H1_q_b[7] = H1_q_b[7]_PORT_B_data_out_reg[0];
+
+
+--B1_count_o[6] is RefCount:CountFX2via1PPS|count_o[6]
+--operation mode is normal
+
+B1_count_o[6]_lut_out = B1L66;
+B1_count_o[6] = DFFEAS(B1_count_o[6]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[6] is RefCount:CountFX2via1PPS|count_reg[6]
+--operation mode is normal
+
+B1_count_reg[6]_lut_out = B1L66;
+B1_count_reg[6] = DFFEAS(B1_count_reg[6]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[7] is RefCount:CountFX2via1PPS|count_o[7]
+--operation mode is normal
+
+B1_count_o[7]_lut_out = B1L68;
+B1_count_o[7] = DFFEAS(B1_count_o[7]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[7] is RefCount:CountFX2via1PPS|count_reg[7]
+--operation mode is normal
+
+B1_count_reg[7]_lut_out = B1L68;
+B1_count_reg[7] = DFFEAS(B1_count_reg[7]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[2] is RefCount:CountFX2via1PPS|count_o[2]
+--operation mode is normal
+
+B1_count_o[2]_lut_out = B1L70;
+B1_count_o[2] = DFFEAS(B1_count_o[2]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[2] is RefCount:CountFX2via1PPS|count_reg[2]
+--operation mode is normal
+
+B1_count_reg[2]_lut_out = B1L70;
+B1_count_reg[2] = DFFEAS(B1_count_reg[2]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[3] is RefCount:CountFX2via1PPS|count_o[3]
+--operation mode is normal
+
+B1_count_o[3]_lut_out = B1L72;
+B1_count_o[3] = DFFEAS(B1_count_o[3]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[3] is RefCount:CountFX2via1PPS|count_reg[3]
+--operation mode is normal
+
+B1_count_reg[3]_lut_out = B1L72;
+B1_count_reg[3] = DFFEAS(B1_count_reg[3]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[4] is RefCount:CountFX2via1PPS|count_o[4]
+--operation mode is normal
+
+B1_count_o[4]_lut_out = B1L74;
+B1_count_o[4] = DFFEAS(B1_count_o[4]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[4] is RefCount:CountFX2via1PPS|count_reg[4]
+--operation mode is normal
+
+B1_count_reg[4]_lut_out = B1L74;
+B1_count_reg[4] = DFFEAS(B1_count_reg[4]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[5] is RefCount:CountFX2via1PPS|count_o[5]
+--operation mode is normal
+
+B1_count_o[5]_lut_out = B1L76;
+B1_count_o[5] = DFFEAS(B1_count_o[5]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[5] is RefCount:CountFX2via1PPS|count_reg[5]
+--operation mode is normal
+
+B1_count_reg[5]_lut_out = B1L76;
+B1_count_reg[5] = DFFEAS(B1_count_reg[5]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[8] is RefCount:CountFX2via1PPS|count_o[8]
+--operation mode is normal
+
+B1_count_o[8]_lut_out = B1L78;
+B1_count_o[8] = DFFEAS(B1_count_o[8]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[8] is RefCount:CountFX2via1PPS|count_reg[8]
+--operation mode is normal
+
+B1_count_reg[8]_lut_out = B1L78;
+B1_count_reg[8] = DFFEAS(B1_count_reg[8]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[12] is RefCount:CountFX2via1PPS|count_o[12]
+--operation mode is normal
+
+B1_count_o[12]_lut_out = B1L80;
+B1_count_o[12] = DFFEAS(B1_count_o[12]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[12] is RefCount:CountFX2via1PPS|count_reg[12]
+--operation mode is normal
+
+B1_count_reg[12]_lut_out = B1L80;
+B1_count_reg[12] = DFFEAS(B1_count_reg[12]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[13] is RefCount:CountFX2via1PPS|count_o[13]
+--operation mode is normal
+
+B1_count_o[13]_lut_out = B1L82;
+B1_count_o[13] = DFFEAS(B1_count_o[13]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[13] is RefCount:CountFX2via1PPS|count_reg[13]
+--operation mode is normal
+
+B1_count_reg[13]_lut_out = B1L82;
+B1_count_reg[13] = DFFEAS(B1_count_reg[13]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[14] is RefCount:CountFX2via1PPS|count_o[14]
+--operation mode is normal
+
+B1_count_o[14]_lut_out = B1L84;
+B1_count_o[14] = DFFEAS(B1_count_o[14]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[14] is RefCount:CountFX2via1PPS|count_reg[14]
+--operation mode is normal
+
+B1_count_reg[14]_lut_out = B1L84;
+B1_count_reg[14] = DFFEAS(B1_count_reg[14]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[15] is RefCount:CountFX2via1PPS|count_o[15]
+--operation mode is normal
+
+B1_count_o[15]_lut_out = B1L86;
+B1_count_o[15] = DFFEAS(B1_count_o[15]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[15] is RefCount:CountFX2via1PPS|count_reg[15]
+--operation mode is normal
+
+B1_count_reg[15]_lut_out = B1L86;
+B1_count_reg[15] = DFFEAS(B1_count_reg[15]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[16] is RefCount:CountFX2via1PPS|count_o[16]
+--operation mode is normal
+
+B1_count_o[16]_lut_out = B1L88;
+B1_count_o[16] = DFFEAS(B1_count_o[16]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[16] is RefCount:CountFX2via1PPS|count_reg[16]
+--operation mode is normal
+
+B1_count_reg[16]_lut_out = B1L88;
+B1_count_reg[16] = DFFEAS(B1_count_reg[16]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[17] is RefCount:CountFX2via1PPS|count_o[17]
+--operation mode is normal
+
+B1_count_o[17]_lut_out = B1L90;
+B1_count_o[17] = DFFEAS(B1_count_o[17]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[17] is RefCount:CountFX2via1PPS|count_reg[17]
+--operation mode is normal
+
+B1_count_reg[17]_lut_out = B1L90;
+B1_count_reg[17] = DFFEAS(B1_count_reg[17]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[18] is RefCount:CountFX2via1PPS|count_o[18]
+--operation mode is normal
+
+B1_count_o[18]_lut_out = B1L92;
+B1_count_o[18] = DFFEAS(B1_count_o[18]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[18] is RefCount:CountFX2via1PPS|count_reg[18]
+--operation mode is normal
+
+B1_count_reg[18]_lut_out = B1L92;
+B1_count_reg[18] = DFFEAS(B1_count_reg[18]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[19] is RefCount:CountFX2via1PPS|count_o[19]
+--operation mode is normal
+
+B1_count_o[19]_lut_out = B1L94;
+B1_count_o[19] = DFFEAS(B1_count_o[19]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[19] is RefCount:CountFX2via1PPS|count_reg[19]
+--operation mode is normal
+
+B1_count_reg[19]_lut_out = B1L94;
+B1_count_reg[19] = DFFEAS(B1_count_reg[19]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[1] is RefCount:CountFX2via1PPS|count_o[1]
+--operation mode is normal
+
+B1_count_o[1]_lut_out = B1L96;
+B1_count_o[1] = DFFEAS(B1_count_o[1]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[1] is RefCount:CountFX2via1PPS|count_reg[1]
+--operation mode is normal
+
+B1_count_reg[1]_lut_out = B1L96;
+B1_count_reg[1] = DFFEAS(B1_count_reg[1]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[0] is RefCount:CountFX2via1PPS|count_o[0]
+--operation mode is normal
+
+B1_count_o[0]_lut_out = B1L98;
+B1_count_o[0] = DFFEAS(B1_count_o[0]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[0] is RefCount:CountFX2via1PPS|count_reg[0]
+--operation mode is normal
+
+B1_count_reg[0]_lut_out = B1L98;
+B1_count_reg[0] = DFFEAS(B1_count_reg[0]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[20] is RefCount:CountFX2via1PPS|count_o[20]
+--operation mode is normal
+
+B1_count_o[20]_lut_out = B1L100;
+B1_count_o[20] = DFFEAS(B1_count_o[20]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[20] is RefCount:CountFX2via1PPS|count_reg[20]
+--operation mode is normal
+
+B1_count_reg[20]_lut_out = B1L100;
+B1_count_reg[20] = DFFEAS(B1_count_reg[20]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[21] is RefCount:CountFX2via1PPS|count_o[21]
+--operation mode is normal
+
+B1_count_o[21]_lut_out = B1L102;
+B1_count_o[21] = DFFEAS(B1_count_o[21]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[21] is RefCount:CountFX2via1PPS|count_reg[21]
+--operation mode is normal
+
+B1_count_reg[21]_lut_out = B1L102;
+B1_count_reg[21] = DFFEAS(B1_count_reg[21]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[22] is RefCount:CountFX2via1PPS|count_o[22]
+--operation mode is normal
+
+B1_count_o[22]_lut_out = B1L104;
+B1_count_o[22] = DFFEAS(B1_count_o[22]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[22] is RefCount:CountFX2via1PPS|count_reg[22]
+--operation mode is normal
+
+B1_count_reg[22]_lut_out = B1L104;
+B1_count_reg[22] = DFFEAS(B1_count_reg[22]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[23] is RefCount:CountFX2via1PPS|count_o[23]
+--operation mode is normal
+
+B1_count_o[23]_lut_out = B1L106;
+B1_count_o[23] = DFFEAS(B1_count_o[23]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[23] is RefCount:CountFX2via1PPS|count_reg[23]
+--operation mode is normal
+
+B1_count_reg[23]_lut_out = B1L106;
+B1_count_reg[23] = DFFEAS(B1_count_reg[23]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[24] is RefCount:CountFX2via1PPS|count_o[24]
+--operation mode is normal
+
+B1_count_o[24]_lut_out = B1L108;
+B1_count_o[24] = DFFEAS(B1_count_o[24]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[24] is RefCount:CountFX2via1PPS|count_reg[24]
+--operation mode is normal
+
+B1_count_reg[24]_lut_out = B1L108;
+B1_count_reg[24] = DFFEAS(B1_count_reg[24]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[25] is RefCount:CountFX2via1PPS|count_o[25]
+--operation mode is normal
+
+B1_count_o[25]_lut_out = B1L110;
+B1_count_o[25] = DFFEAS(B1_count_o[25]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[25] is RefCount:CountFX2via1PPS|count_reg[25]
+--operation mode is normal
+
+B1_count_reg[25]_lut_out = B1L110;
+B1_count_reg[25] = DFFEAS(B1_count_reg[25]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[26] is RefCount:CountFX2via1PPS|count_o[26]
+--operation mode is normal
+
+B1_count_o[26]_lut_out = B1L112;
+B1_count_o[26] = DFFEAS(B1_count_o[26]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[26] is RefCount:CountFX2via1PPS|count_reg[26]
+--operation mode is normal
+
+B1_count_reg[26]_lut_out = B1L112;
+B1_count_reg[26] = DFFEAS(B1_count_reg[26]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[27] is RefCount:CountFX2via1PPS|count_o[27]
+--operation mode is normal
+
+B1_count_o[27]_lut_out = B1L114;
+B1_count_o[27] = DFFEAS(B1_count_o[27]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[27] is RefCount:CountFX2via1PPS|count_reg[27]
+--operation mode is normal
+
+B1_count_reg[27]_lut_out = B1L114;
+B1_count_reg[27] = DFFEAS(B1_count_reg[27]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[28] is RefCount:CountFX2via1PPS|count_o[28]
+--operation mode is normal
+
+B1_count_o[28]_lut_out = B1L116;
+B1_count_o[28] = DFFEAS(B1_count_o[28]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[28] is RefCount:CountFX2via1PPS|count_reg[28]
+--operation mode is normal
+
+B1_count_reg[28]_lut_out = B1L116;
+B1_count_reg[28] = DFFEAS(B1_count_reg[28]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[29] is RefCount:CountFX2via1PPS|count_o[29]
+--operation mode is normal
+
+B1_count_o[29]_lut_out = B1L118;
+B1_count_o[29] = DFFEAS(B1_count_o[29]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[29] is RefCount:CountFX2via1PPS|count_reg[29]
+--operation mode is normal
+
+B1_count_reg[29]_lut_out = B1L118;
+B1_count_reg[29] = DFFEAS(B1_count_reg[29]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[30] is RefCount:CountFX2via1PPS|count_o[30]
+--operation mode is normal
+
+B1_count_o[30]_lut_out = B1L120;
+B1_count_o[30] = DFFEAS(B1_count_o[30]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[30] is RefCount:CountFX2via1PPS|count_reg[30]
+--operation mode is normal
+
+B1_count_reg[30]_lut_out = B1L120;
+B1_count_reg[30] = DFFEAS(B1_count_reg[30]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_reg[31] is RefCount:CountFX2via1PPS|count_reg[31]
+--operation mode is normal
+
+B1_count_reg[31]_lut_out = B1L122;
+B1_count_reg[31] = DFFEAS(B1_count_reg[31]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[31] is RefCount:CountFX2via1PPS|count_o[31]
+--operation mode is normal
+
+B1_count_o[31]_lut_out = B1L122;
+B1_count_o[31] = DFFEAS(B1_count_o[31]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_o[9] is RefCount:CountFX2via1PPS|count_o[9]
+--operation mode is normal
+
+B1_count_o[9]_lut_out = B1L123;
+B1_count_o[9] = DFFEAS(B1_count_o[9]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[9] is RefCount:CountFX2via1PPS|count_reg[9]
+--operation mode is normal
+
+B1_count_reg[9]_lut_out = B1L123;
+B1_count_reg[9] = DFFEAS(B1_count_reg[9]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[10] is RefCount:CountFX2via1PPS|count_o[10]
+--operation mode is normal
+
+B1_count_o[10]_lut_out = B1L125;
+B1_count_o[10] = DFFEAS(B1_count_o[10]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[10] is RefCount:CountFX2via1PPS|count_reg[10]
+--operation mode is normal
+
+B1_count_reg[10]_lut_out = B1L125;
+B1_count_reg[10] = DFFEAS(B1_count_reg[10]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_o[11] is RefCount:CountFX2via1PPS|count_o[11]
+--operation mode is normal
+
+B1_count_o[11]_lut_out = B1L127;
+B1_count_o[11] = DFFEAS(B1_count_o[11]_lut_out, FX2_CLK, VCC, , B1L269, , , , );
+
+
+--B1_count_reg[11] is RefCount:CountFX2via1PPS|count_reg[11]
+--operation mode is normal
+
+B1_count_reg[11]_lut_out = B1L127;
+B1_count_reg[11] = DFFEAS(B1_count_reg[11]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--E1L1 is fx2_usb_pipe:usb_pipe|add~116
+--operation mode is normal
+
+E1L1 = !E1_read_strobe_count[1] & !E1_read_strobe_count[0];
+
+
+--E1L4 is fx2_usb_pipe:usb_pipe|read_strobe_count[0]~84
+--operation mode is normal
+
+E1L4 = E1_state.0000 & E1_read_strobe_o # !E1_state.0000 & (E1_syncd_drdy);
+
+
+--G1_fifo_wreq_pipe[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|fifo_wreq_pipe[0]
+--operation mode is normal
+
+G1_fifo_wreq_pipe[0]_lut_out = !G1L4 # !G1L3 # !G1L2;
+G1_fifo_wreq_pipe[0] = DFFEAS(G1_fifo_wreq_pipe[0]_lut_out, FX2_CLK, VCC, , G1_stall_pipeline, , , , );
+
+
+--G1_stall_pipeline is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|stall_pipeline
+--operation mode is normal
+
+G1_stall_pipeline = !V1_state_full # !G1_fifo_wreq_pipe[1];
+
+
+--V1L1 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|_~76
+--operation mode is normal
+
+V1L1 = AB1_safe_q[1] & G1_fifo_wreq_pipe[1] & (!AB1_safe_q[0]);
+
+
+--D1_fifo_write_strobe_o is CounterToFifo:comb_10|fifo_write_strobe_o
+--operation mode is normal
+
+D1_fifo_write_strobe_o_lut_out = D1_state.0011 & (!D1L1) # !D1_state.0011 & (D1_fifo_write_strobe_o # D1_state.0010);
+D1_fifo_write_strobe_o = DFFEAS(D1_fifo_write_strobe_o_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1_wrfull_delay is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|wrfull_delay
+--operation mode is normal
+
+G1_wrfull_delay_lut_out = G1_dffe3a[4] & G1_dffe3a[5] & G1L36;
+G1_wrfull_delay = DFFEAS(G1_wrfull_delay_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1_valid_wrreq is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|valid_wrreq
+--operation mode is normal
+
+G1_valid_wrreq = D1_fifo_write_strobe_o & (!G1_wrfull_delay);
+
+
+--D1_fifo_in_o[0] is CounterToFifo:comb_10|fifo_in_o[0]
+--operation mode is normal
+
+D1_fifo_in_o[0]_lut_out = D1L2 & D1L3 & D1L4;
+D1_fifo_in_o[0] = DFFEAS(D1_fifo_in_o[0]_lut_out, FX2_CLK, VCC, , D1L103, , , , );
+
+
+--L2_power_modified_counter_values[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|power_modified_counter_values[0]
+--operation mode is arithmetic
+
+L2_power_modified_counter_values[0]_carry_eqn = L2L13;
+L2_power_modified_counter_values[0]_lut_out = L2_power_modified_counter_values[0] $ !L2_power_modified_counter_values[0]_carry_eqn;
+L2_power_modified_counter_values[0] = DFFEAS(L2_power_modified_counter_values[0]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+--L2L2 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|countera0~COUT
+--operation mode is arithmetic
+
+L2L2 = CARRY(!L2L13);
+
+
+--L2_power_modified_counter_values[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|power_modified_counter_values[1]
+--operation mode is arithmetic
+
+L2_power_modified_counter_values[1]_carry_eqn = L2L2;
+L2_power_modified_counter_values[1]_lut_out = L2_power_modified_counter_values[1] $ (L2_power_modified_counter_values[0] & !L2_power_modified_counter_values[1]_carry_eqn);
+L2_power_modified_counter_values[1] = DFFEAS(L2_power_modified_counter_values[1]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+--L2L4 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|countera1~COUT
+--operation mode is arithmetic
+
+L2L4 = CARRY(!L2_power_modified_counter_values[0] & (!L2L2));
+
+
+--L2_power_modified_counter_values[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|power_modified_counter_values[2]
+--operation mode is arithmetic
+
+L2_power_modified_counter_values[2]_carry_eqn = L2L4;
+L2_power_modified_counter_values[2]_lut_out = L2_power_modified_counter_values[2] $ (L2_power_modified_counter_values[1] & L2_power_modified_counter_values[2]_carry_eqn);
+L2_power_modified_counter_values[2] = DFFEAS(L2_power_modified_counter_values[2]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+--L2L6 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|countera2~COUT
+--operation mode is arithmetic
+
+L2L6 = CARRY(L2_power_modified_counter_values[1] # !L2L4);
+
+
+--L2_power_modified_counter_values[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|power_modified_counter_values[3]
+--operation mode is arithmetic
+
+L2_power_modified_counter_values[3]_carry_eqn = L2L6;
+L2_power_modified_counter_values[3]_lut_out = L2_power_modified_counter_values[3] $ (L2_power_modified_counter_values[2] & !L2_power_modified_counter_values[3]_carry_eqn);
+L2_power_modified_counter_values[3] = DFFEAS(L2_power_modified_counter_values[3]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+--L2L8 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|countera3~COUT
+--operation mode is arithmetic
+
+L2L8 = CARRY(!L2_power_modified_counter_values[2] & (!L2L6));
+
+
+--L2_power_modified_counter_values[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|power_modified_counter_values[4]
+--operation mode is arithmetic
+
+L2_power_modified_counter_values[4]_carry_eqn = L2L8;
+L2_power_modified_counter_values[4]_lut_out = L2_power_modified_counter_values[4] $ (L2_power_modified_counter_values[3] & L2_power_modified_counter_values[4]_carry_eqn);
+L2_power_modified_counter_values[4] = DFFEAS(L2_power_modified_counter_values[4]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+--L2L10 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|countera4~COUT
+--operation mode is arithmetic
+
+L2L10 = CARRY(L2_power_modified_counter_values[3] # !L2L8);
+
+
+--L2_power_modified_counter_values[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|power_modified_counter_values[5]
+--operation mode is normal
+
+L2_power_modified_counter_values[5]_carry_eqn = L2L10;
+L2_power_modified_counter_values[5]_lut_out = L2_power_modified_counter_values[5] $ (!L2_power_modified_counter_values[5]_carry_eqn);
+L2_power_modified_counter_values[5] = DFFEAS(L2_power_modified_counter_values[5]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+
+--L1_power_modified_counter_values[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|power_modified_counter_values[0]
+--operation mode is arithmetic
+
+L1_power_modified_counter_values[0]_carry_eqn = L1L13;
+L1_power_modified_counter_values[0]_lut_out = L1_power_modified_counter_values[0] $ !L1_power_modified_counter_values[0]_carry_eqn;
+L1_power_modified_counter_values[0] = DFFEAS(L1_power_modified_counter_values[0]_lut_out, FX2_CLK, VCC, , G1L1, , , , );
+
+--L1L2 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|countera0~COUT
+--operation mode is arithmetic
+
+L1L2 = CARRY(!L1L13);
+
+
+--L1_power_modified_counter_values[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|power_modified_counter_values[1]
+--operation mode is arithmetic
+
+L1_power_modified_counter_values[1]_carry_eqn = L1L2;
+L1_power_modified_counter_values[1]_lut_out = L1_power_modified_counter_values[1] $ (L1_power_modified_counter_values[0] & !L1_power_modified_counter_values[1]_carry_eqn);
+L1_power_modified_counter_values[1] = DFFEAS(L1_power_modified_counter_values[1]_lut_out, FX2_CLK, VCC, , G1L1, , , , );
+
+--L1L4 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|countera1~COUT
+--operation mode is arithmetic
+
+L1L4 = CARRY(!L1_power_modified_counter_values[0] & (!L1L2));
+
+
+--L1_power_modified_counter_values[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|power_modified_counter_values[2]
+--operation mode is arithmetic
+
+L1_power_modified_counter_values[2]_carry_eqn = L1L4;
+L1_power_modified_counter_values[2]_lut_out = L1_power_modified_counter_values[2] $ (L1_power_modified_counter_values[1] & L1_power_modified_counter_values[2]_carry_eqn);
+L1_power_modified_counter_values[2] = DFFEAS(L1_power_modified_counter_values[2]_lut_out, FX2_CLK, VCC, , G1L1, , , , );
+
+--L1L6 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|countera2~COUT
+--operation mode is arithmetic
+
+L1L6 = CARRY(L1_power_modified_counter_values[1] # !L1L4);
+
+
+--L1_power_modified_counter_values[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|power_modified_counter_values[3]
+--operation mode is arithmetic
+
+L1_power_modified_counter_values[3]_carry_eqn = L1L6;
+L1_power_modified_counter_values[3]_lut_out = L1_power_modified_counter_values[3] $ (L1_power_modified_counter_values[2] & !L1_power_modified_counter_values[3]_carry_eqn);
+L1_power_modified_counter_values[3] = DFFEAS(L1_power_modified_counter_values[3]_lut_out, FX2_CLK, VCC, , G1L1, , , , );
+
+--L1L8 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|countera3~COUT
+--operation mode is arithmetic
+
+L1L8 = CARRY(!L1_power_modified_counter_values[2] & (!L1L6));
+
+
+--L1_power_modified_counter_values[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|power_modified_counter_values[4]
+--operation mode is arithmetic
+
+L1_power_modified_counter_values[4]_carry_eqn = L1L8;
+L1_power_modified_counter_values[4]_lut_out = L1_power_modified_counter_values[4] $ (L1_power_modified_counter_values[3] & L1_power_modified_counter_values[4]_carry_eqn);
+L1_power_modified_counter_values[4] = DFFEAS(L1_power_modified_counter_values[4]_lut_out, FX2_CLK, VCC, , G1L1, , , , );
+
+--L1L10 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|countera4~COUT
+--operation mode is arithmetic
+
+L1L10 = CARRY(L1_power_modified_counter_values[3] # !L1L8);
+
+
+--L1_power_modified_counter_values[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|power_modified_counter_values[5]
+--operation mode is normal
+
+L1_power_modified_counter_values[5]_carry_eqn = L1L10;
+L1_power_modified_counter_values[5]_lut_out = L1_power_modified_counter_values[5] $ (!L1_power_modified_counter_values[5]_carry_eqn);
+L1_power_modified_counter_values[5] = DFFEAS(L1_power_modified_counter_values[5]_lut_out, FX2_CLK, VCC, , G1L1, , , , );
+
+
+--V1L6 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_middle~204
+--operation mode is normal
+
+V1L6 = E1_read_strobe_o & (V1_state_full # G1_fifo_wreq_pipe[1] & !V1_state_empty) # !E1_read_strobe_o & (G1_fifo_wreq_pipe[1] & !V1_state_empty);
+
+
+--V1L7 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|scfifo:output_channel|a_fffifo:subfifo|a_fefifo:fifo_state|state_middle~205
+--operation mode is normal
+
+V1L7 = V1_state_middle & (G1_fifo_wreq_pipe[1] # !V1L3);
+
+
+--D1_fifo_in_o[1] is CounterToFifo:comb_10|fifo_in_o[1]
+--operation mode is normal
+
+D1_fifo_in_o[1]_lut_out = D1L5 & D1L6 & D1L7;
+D1_fifo_in_o[1] = DFFEAS(D1_fifo_in_o[1]_lut_out, FX2_CLK, VCC, , D1L103, , , , );
+
+
+--D1_fifo_in_o[2] is CounterToFifo:comb_10|fifo_in_o[2]
+--operation mode is normal
+
+D1_fifo_in_o[2]_lut_out = D1L8 & D1L9 & D1L10;
+D1_fifo_in_o[2] = DFFEAS(D1_fifo_in_o[2]_lut_out, FX2_CLK, VCC, , D1L103, , , , );
+
+
+--D1_fifo_in_o[3] is CounterToFifo:comb_10|fifo_in_o[3]
+--operation mode is normal
+
+D1_fifo_in_o[3]_lut_out = D1L11 & D1L12 & D1L13;
+D1_fifo_in_o[3] = DFFEAS(D1_fifo_in_o[3]_lut_out, FX2_CLK, VCC, , D1L103, , , , );
+
+
+--D1_fifo_in_o[4] is CounterToFifo:comb_10|fifo_in_o[4]
+--operation mode is normal
+
+D1_fifo_in_o[4]_lut_out = D1L14 & D1L15 & D1L16;
+D1_fifo_in_o[4] = DFFEAS(D1_fifo_in_o[4]_lut_out, FX2_CLK, VCC, , D1L103, , , , );
+
+
+--D1_fifo_in_o[5] is CounterToFifo:comb_10|fifo_in_o[5]
+--operation mode is normal
+
+D1_fifo_in_o[5]_lut_out = D1L17 & D1L18 & D1L19;
+D1_fifo_in_o[5] = DFFEAS(D1_fifo_in_o[5]_lut_out, FX2_CLK, VCC, , D1L103, , , , );
+
+
+--D1_fifo_in_o[6] is CounterToFifo:comb_10|fifo_in_o[6]
+--operation mode is normal
+
+D1_fifo_in_o[6]_lut_out = D1L20 & D1L21 & D1L22;
+D1_fifo_in_o[6] = DFFEAS(D1_fifo_in_o[6]_lut_out, FX2_CLK, VCC, , D1L103, , , , );
+
+
+--D1_fifo_in_o[7] is CounterToFifo:comb_10|fifo_in_o[7]
+--operation mode is normal
+
+D1_fifo_in_o[7]_lut_out = D1L23 & D1L24 & D1L25;
+D1_fifo_in_o[7] = DFFEAS(D1_fifo_in_o[7]_lut_out, FX2_CLK, VCC, , D1L103, , , , );
+
+
+--B1L66 is RefCount:CountFX2via1PPS|add~1512
+--operation mode is arithmetic
+
+B1L66_carry_eqn = B1L77;
+B1L66 = B1_count_reg[6] $ (!B1L66_carry_eqn);
+
+--B1L67 is RefCount:CountFX2via1PPS|add~1514
+--operation mode is arithmetic
+
+B1L67 = CARRY(B1_count_reg[6] & (!B1L77));
+
+
+--B1L68 is RefCount:CountFX2via1PPS|add~1517
+--operation mode is arithmetic
+
+B1L68_carry_eqn = B1L67;
+B1L68 = B1_count_reg[7] $ (B1L68_carry_eqn);
+
+--B1L69 is RefCount:CountFX2via1PPS|add~1519
+--operation mode is arithmetic
+
+B1L69 = CARRY(!B1L67 # !B1_count_reg[7]);
+
+
+--B1L70 is RefCount:CountFX2via1PPS|add~1522
+--operation mode is arithmetic
+
+B1L70_carry_eqn = B1L97;
+B1L70 = B1_count_reg[2] $ (!B1L70_carry_eqn);
+
+--B1L71 is RefCount:CountFX2via1PPS|add~1524
+--operation mode is arithmetic
+
+B1L71 = CARRY(B1_count_reg[2] & (!B1L97));
+
+
+--B1L72 is RefCount:CountFX2via1PPS|add~1527
+--operation mode is arithmetic
+
+B1L72_carry_eqn = B1L71;
+B1L72 = B1_count_reg[3] $ (B1L72_carry_eqn);
+
+--B1L73 is RefCount:CountFX2via1PPS|add~1529
+--operation mode is arithmetic
+
+B1L73 = CARRY(!B1L71 # !B1_count_reg[3]);
+
+
+--B1L74 is RefCount:CountFX2via1PPS|add~1532
+--operation mode is arithmetic
+
+B1L74_carry_eqn = B1L73;
+B1L74 = B1_count_reg[4] $ (!B1L74_carry_eqn);
+
+--B1L75 is RefCount:CountFX2via1PPS|add~1534
+--operation mode is arithmetic
+
+B1L75 = CARRY(B1_count_reg[4] & (!B1L73));
+
+
+--B1L76 is RefCount:CountFX2via1PPS|add~1537
+--operation mode is arithmetic
+
+B1L76_carry_eqn = B1L75;
+B1L76 = B1_count_reg[5] $ (B1L76_carry_eqn);
+
+--B1L77 is RefCount:CountFX2via1PPS|add~1539
+--operation mode is arithmetic
+
+B1L77 = CARRY(!B1L75 # !B1_count_reg[5]);
+
+
+--B1L78 is RefCount:CountFX2via1PPS|add~1542
+--operation mode is arithmetic
+
+B1L78_carry_eqn = B1L69;
+B1L78 = B1_count_reg[8] $ (!B1L78_carry_eqn);
+
+--B1L79 is RefCount:CountFX2via1PPS|add~1544
+--operation mode is arithmetic
+
+B1L79 = CARRY(B1_count_reg[8] & (!B1L69));
+
+
+--B1L80 is RefCount:CountFX2via1PPS|add~1547
+--operation mode is arithmetic
+
+B1L80_carry_eqn = B1L128;
+B1L80 = B1_count_reg[12] $ (!B1L80_carry_eqn);
+
+--B1L81 is RefCount:CountFX2via1PPS|add~1549
+--operation mode is arithmetic
+
+B1L81 = CARRY(B1_count_reg[12] & (!B1L128));
+
+
+--B1L82 is RefCount:CountFX2via1PPS|add~1552
+--operation mode is arithmetic
+
+B1L82_carry_eqn = B1L81;
+B1L82 = B1_count_reg[13] $ (B1L82_carry_eqn);
+
+--B1L83 is RefCount:CountFX2via1PPS|add~1554
+--operation mode is arithmetic
+
+B1L83 = CARRY(!B1L81 # !B1_count_reg[13]);
+
+
+--B1L84 is RefCount:CountFX2via1PPS|add~1557
+--operation mode is arithmetic
+
+B1L84_carry_eqn = B1L83;
+B1L84 = B1_count_reg[14] $ (!B1L84_carry_eqn);
+
+--B1L85 is RefCount:CountFX2via1PPS|add~1559
+--operation mode is arithmetic
+
+B1L85 = CARRY(B1_count_reg[14] & (!B1L83));
+
+
+--B1L86 is RefCount:CountFX2via1PPS|add~1562
+--operation mode is arithmetic
+
+B1L86_carry_eqn = B1L85;
+B1L86 = B1_count_reg[15] $ (B1L86_carry_eqn);
+
+--B1L87 is RefCount:CountFX2via1PPS|add~1564
+--operation mode is arithmetic
+
+B1L87 = CARRY(!B1L85 # !B1_count_reg[15]);
+
+
+--B1L88 is RefCount:CountFX2via1PPS|add~1567
+--operation mode is arithmetic
+
+B1L88_carry_eqn = B1L87;
+B1L88 = B1_count_reg[16] $ (!B1L88_carry_eqn);
+
+--B1L89 is RefCount:CountFX2via1PPS|add~1569
+--operation mode is arithmetic
+
+B1L89 = CARRY(B1_count_reg[16] & (!B1L87));
+
+
+--B1L90 is RefCount:CountFX2via1PPS|add~1572
+--operation mode is arithmetic
+
+B1L90_carry_eqn = B1L89;
+B1L90 = B1_count_reg[17] $ (B1L90_carry_eqn);
+
+--B1L91 is RefCount:CountFX2via1PPS|add~1574
+--operation mode is arithmetic
+
+B1L91 = CARRY(!B1L89 # !B1_count_reg[17]);
+
+
+--B1L92 is RefCount:CountFX2via1PPS|add~1577
+--operation mode is arithmetic
+
+B1L92_carry_eqn = B1L91;
+B1L92 = B1_count_reg[18] $ (!B1L92_carry_eqn);
+
+--B1L93 is RefCount:CountFX2via1PPS|add~1579
+--operation mode is arithmetic
+
+B1L93 = CARRY(B1_count_reg[18] & (!B1L91));
+
+
+--B1L94 is RefCount:CountFX2via1PPS|add~1582
+--operation mode is arithmetic
+
+B1L94_carry_eqn = B1L93;
+B1L94 = B1_count_reg[19] $ (B1L94_carry_eqn);
+
+--B1L95 is RefCount:CountFX2via1PPS|add~1584
+--operation mode is arithmetic
+
+B1L95 = CARRY(!B1L93 # !B1_count_reg[19]);
+
+
+--B1L96 is RefCount:CountFX2via1PPS|add~1587
+--operation mode is arithmetic
+
+B1L96_carry_eqn = B1L99;
+B1L96 = B1_count_reg[1] $ (B1L96_carry_eqn);
+
+--B1L97 is RefCount:CountFX2via1PPS|add~1589
+--operation mode is arithmetic
+
+B1L97 = CARRY(!B1L99 # !B1_count_reg[1]);
+
+
+--B1L98 is RefCount:CountFX2via1PPS|add~1592
+--operation mode is arithmetic
+
+B1L98 = !B1_count_reg[0];
+
+--B1L99 is RefCount:CountFX2via1PPS|add~1594
+--operation mode is arithmetic
+
+B1L99 = CARRY(B1_count_reg[0]);
+
+
+--B1L100 is RefCount:CountFX2via1PPS|add~1597
+--operation mode is arithmetic
+
+B1L100_carry_eqn = B1L95;
+B1L100 = B1_count_reg[20] $ (!B1L100_carry_eqn);
+
+--B1L101 is RefCount:CountFX2via1PPS|add~1599
+--operation mode is arithmetic
+
+B1L101 = CARRY(B1_count_reg[20] & (!B1L95));
+
+
+--B1L102 is RefCount:CountFX2via1PPS|add~1602
+--operation mode is arithmetic
+
+B1L102_carry_eqn = B1L101;
+B1L102 = B1_count_reg[21] $ (B1L102_carry_eqn);
+
+--B1L103 is RefCount:CountFX2via1PPS|add~1604
+--operation mode is arithmetic
+
+B1L103 = CARRY(!B1L101 # !B1_count_reg[21]);
+
+
+--B1L104 is RefCount:CountFX2via1PPS|add~1607
+--operation mode is arithmetic
+
+B1L104_carry_eqn = B1L103;
+B1L104 = B1_count_reg[22] $ (!B1L104_carry_eqn);
+
+--B1L105 is RefCount:CountFX2via1PPS|add~1609
+--operation mode is arithmetic
+
+B1L105 = CARRY(B1_count_reg[22] & (!B1L103));
+
+
+--B1L106 is RefCount:CountFX2via1PPS|add~1612
+--operation mode is arithmetic
+
+B1L106_carry_eqn = B1L105;
+B1L106 = B1_count_reg[23] $ (B1L106_carry_eqn);
+
+--B1L107 is RefCount:CountFX2via1PPS|add~1614
+--operation mode is arithmetic
+
+B1L107 = CARRY(!B1L105 # !B1_count_reg[23]);
+
+
+--B1L108 is RefCount:CountFX2via1PPS|add~1617
+--operation mode is arithmetic
+
+B1L108_carry_eqn = B1L107;
+B1L108 = B1_count_reg[24] $ (!B1L108_carry_eqn);
+
+--B1L109 is RefCount:CountFX2via1PPS|add~1619
+--operation mode is arithmetic
+
+B1L109 = CARRY(B1_count_reg[24] & (!B1L107));
+
+
+--B1L110 is RefCount:CountFX2via1PPS|add~1622
+--operation mode is arithmetic
+
+B1L110_carry_eqn = B1L109;
+B1L110 = B1_count_reg[25] $ (B1L110_carry_eqn);
+
+--B1L111 is RefCount:CountFX2via1PPS|add~1624
+--operation mode is arithmetic
+
+B1L111 = CARRY(!B1L109 # !B1_count_reg[25]);
+
+
+--B1L112 is RefCount:CountFX2via1PPS|add~1627
+--operation mode is arithmetic
+
+B1L112_carry_eqn = B1L111;
+B1L112 = B1_count_reg[26] $ (!B1L112_carry_eqn);
+
+--B1L113 is RefCount:CountFX2via1PPS|add~1629
+--operation mode is arithmetic
+
+B1L113 = CARRY(B1_count_reg[26] & (!B1L111));
+
+
+--B1L114 is RefCount:CountFX2via1PPS|add~1632
+--operation mode is arithmetic
+
+B1L114_carry_eqn = B1L113;
+B1L114 = B1_count_reg[27] $ (B1L114_carry_eqn);
+
+--B1L115 is RefCount:CountFX2via1PPS|add~1634
+--operation mode is arithmetic
+
+B1L115 = CARRY(!B1L113 # !B1_count_reg[27]);
+
+
+--B1L116 is RefCount:CountFX2via1PPS|add~1637
+--operation mode is arithmetic
+
+B1L116_carry_eqn = B1L115;
+B1L116 = B1_count_reg[28] $ (!B1L116_carry_eqn);
+
+--B1L117 is RefCount:CountFX2via1PPS|add~1639
+--operation mode is arithmetic
+
+B1L117 = CARRY(B1_count_reg[28] & (!B1L115));
+
+
+--B1L118 is RefCount:CountFX2via1PPS|add~1642
+--operation mode is arithmetic
+
+B1L118_carry_eqn = B1L117;
+B1L118 = B1_count_reg[29] $ (B1L118_carry_eqn);
+
+--B1L119 is RefCount:CountFX2via1PPS|add~1644
+--operation mode is arithmetic
+
+B1L119 = CARRY(!B1L117 # !B1_count_reg[29]);
+
+
+--B1L120 is RefCount:CountFX2via1PPS|add~1647
+--operation mode is arithmetic
+
+B1L120_carry_eqn = B1L119;
+B1L120 = B1_count_reg[30] $ (!B1L120_carry_eqn);
+
+--B1L121 is RefCount:CountFX2via1PPS|add~1649
+--operation mode is arithmetic
+
+B1L121 = CARRY(B1_count_reg[30] & (!B1L119));
+
+
+--B1L122 is RefCount:CountFX2via1PPS|add~1652
+--operation mode is normal
+
+B1L122_carry_eqn = B1L121;
+B1L122 = B1_count_reg[31] $ (B1L122_carry_eqn);
+
+
+--B1L123 is RefCount:CountFX2via1PPS|add~1657
+--operation mode is arithmetic
+
+B1L123_carry_eqn = B1L79;
+B1L123 = B1_count_reg[9] $ (B1L123_carry_eqn);
+
+--B1L124 is RefCount:CountFX2via1PPS|add~1659
+--operation mode is arithmetic
+
+B1L124 = CARRY(!B1L79 # !B1_count_reg[9]);
+
+
+--B1L125 is RefCount:CountFX2via1PPS|add~1662
+--operation mode is arithmetic
+
+B1L125_carry_eqn = B1L124;
+B1L125 = B1_count_reg[10] $ (!B1L125_carry_eqn);
+
+--B1L126 is RefCount:CountFX2via1PPS|add~1664
+--operation mode is arithmetic
+
+B1L126 = CARRY(B1_count_reg[10] & (!B1L124));
+
+
+--B1L127 is RefCount:CountFX2via1PPS|add~1667
+--operation mode is arithmetic
+
+B1L127_carry_eqn = B1L126;
+B1L127 = B1_count_reg[11] $ (B1L127_carry_eqn);
+
+--B1L128 is RefCount:CountFX2via1PPS|add~1669
+--operation mode is arithmetic
+
+B1L128 = CARRY(!B1L126 # !B1_count_reg[11]);
+
+
+--BB1_dffe13a[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe13a[3]
+--operation mode is normal
+
+BB1_dffe13a[3]_lut_out = BB1_dffe12a[3];
+BB1_dffe13a[3] = DFFEAS(BB1_dffe13a[3]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe13a[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe13a[0]
+--operation mode is normal
+
+BB1_dffe13a[0]_lut_out = BB1_dffe12a[0];
+BB1_dffe13a[0] = DFFEAS(BB1_dffe13a[0]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1L2 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|address_comparer_aeb_int~40
+--operation mode is normal
+
+G1L2 = L1_power_modified_counter_values[0] & BB1_dffe13a[0] & (L1_power_modified_counter_values[3] $ !BB1_dffe13a[3]) # !L1_power_modified_counter_values[0] & !BB1_dffe13a[0] & (L1_power_modified_counter_values[3] $ !BB1_dffe13a[3]);
+
+
+--BB1_dffe13a[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe13a[5]
+--operation mode is normal
+
+BB1_dffe13a[5]_lut_out = BB1_dffe12a[5];
+BB1_dffe13a[5] = DFFEAS(BB1_dffe13a[5]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe13a[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe13a[4]
+--operation mode is normal
+
+BB1_dffe13a[4]_lut_out = BB1_dffe12a[4];
+BB1_dffe13a[4] = DFFEAS(BB1_dffe13a[4]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1L3 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|address_comparer_aeb_int~41
+--operation mode is normal
+
+G1L3 = L1_power_modified_counter_values[4] & BB1_dffe13a[4] & (L1_power_modified_counter_values[5] $ !BB1_dffe13a[5]) # !L1_power_modified_counter_values[4] & !BB1_dffe13a[4] & (L1_power_modified_counter_values[5] $ !BB1_dffe13a[5]);
+
+
+--BB1_dffe13a[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe13a[2]
+--operation mode is normal
+
+BB1_dffe13a[2]_lut_out = BB1_dffe12a[2];
+BB1_dffe13a[2] = DFFEAS(BB1_dffe13a[2]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe13a[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe13a[1]
+--operation mode is normal
+
+BB1_dffe13a[1]_lut_out = BB1_dffe12a[1];
+BB1_dffe13a[1] = DFFEAS(BB1_dffe13a[1]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1L4 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|address_comparer_aeb_int~42
+--operation mode is normal
+
+G1L4 = L1_power_modified_counter_values[1] & BB1_dffe13a[1] & (L1_power_modified_counter_values[2] $ !BB1_dffe13a[2]) # !L1_power_modified_counter_values[1] & !BB1_dffe13a[1] & (L1_power_modified_counter_values[2] $ !BB1_dffe13a[2]);
+
+
+--D1_state.0010 is CounterToFifo:comb_10|state.0010
+--operation mode is normal
+
+D1_state.0010_lut_out = D1L103;
+D1_state.0010 = DFFEAS(D1_state.0010_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_state.0011 is CounterToFifo:comb_10|state.0011
+--operation mode is normal
+
+D1_state.0011_lut_out = D1_state.0010 # D1_state.0011 & (!D1L1);
+D1_state.0011 = DFFEAS(D1_state.0011_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_fifo_write_strobe_count[3] is CounterToFifo:comb_10|fifo_write_strobe_count[3]
+--operation mode is normal
+
+D1_fifo_write_strobe_count[3]_lut_out = D1_state.0011 & (D1_fifo_write_strobe_count[3] $ D1L26) # !D1_state.0011 & !D1_state.0010 & D1_fifo_write_strobe_count[3];
+D1_fifo_write_strobe_count[3] = DFFEAS(D1_fifo_write_strobe_count[3]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_fifo_write_strobe_count[2] is CounterToFifo:comb_10|fifo_write_strobe_count[2]
+--operation mode is normal
+
+D1_fifo_write_strobe_count[2]_lut_out = D1_state.0011 & (D1_fifo_write_strobe_count[2] $ D1L27) # !D1_state.0011 & !D1_state.0010 & D1_fifo_write_strobe_count[2];
+D1_fifo_write_strobe_count[2] = DFFEAS(D1_fifo_write_strobe_count[2]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_fifo_write_strobe_count[1] is CounterToFifo:comb_10|fifo_write_strobe_count[1]
+--operation mode is normal
+
+D1_fifo_write_strobe_count[1]_lut_out = D1_state.0011 & (D1_fifo_write_strobe_count[1] $ !D1_fifo_write_strobe_count[0]) # !D1_state.0011 & D1_fifo_write_strobe_count[1] & (!D1_state.0010);
+D1_fifo_write_strobe_count[1] = DFFEAS(D1_fifo_write_strobe_count[1]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_fifo_write_strobe_count[0] is CounterToFifo:comb_10|fifo_write_strobe_count[0]
+--operation mode is normal
+
+D1_fifo_write_strobe_count[0]_lut_out = D1_state.0011 & (!D1_fifo_write_strobe_count[0]) # !D1_state.0011 & !D1_state.0010 & D1_fifo_write_strobe_count[0];
+D1_fifo_write_strobe_count[0] = DFFEAS(D1_fifo_write_strobe_count[0]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1L1 is CounterToFifo:comb_10|Select~1662
+--operation mode is normal
+
+D1L1 = !D1_fifo_write_strobe_count[3] & !D1_fifo_write_strobe_count[2] & !D1_fifo_write_strobe_count[1] & !D1_fifo_write_strobe_count[0];
+
+
+--G1_dffe3a[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe3a[4]
+--operation mode is arithmetic
+
+G1_dffe3a[4]_carry_eqn = G1L27;
+G1_dffe3a[4]_lut_out = K2_safe_q[4] $ G1_dffe2a[4] $ G1_dffe3a[4]_carry_eqn;
+G1_dffe3a[4] = DFFEAS(G1_dffe3a[4]_lut_out, FX2_CLK, VCC, , , , , , );
+
+--G1L29 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe3a[4]~60
+--operation mode is arithmetic
+
+G1L29 = CARRY(K2_safe_q[4] & (!G1L27 # !G1_dffe2a[4]) # !K2_safe_q[4] & !G1_dffe2a[4] & !G1L27);
+
+
+--G1_dffe3a[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe3a[5]
+--operation mode is normal
+
+G1_dffe3a[5]_carry_eqn = G1L29;
+G1_dffe3a[5]_lut_out = K2_safe_q[5] $ G1_dffe2a[5] $ !G1_dffe3a[5]_carry_eqn;
+G1_dffe3a[5] = DFFEAS(G1_dffe3a[5]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1_dffe3a[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe3a[2]
+--operation mode is arithmetic
+
+G1_dffe3a[2]_carry_eqn = G1L23;
+G1_dffe3a[2]_lut_out = K2_safe_q[2] $ G1_dffe2a[2] $ G1_dffe3a[2]_carry_eqn;
+G1_dffe3a[2] = DFFEAS(G1_dffe3a[2]_lut_out, FX2_CLK, VCC, , , , , , );
+
+--G1L25 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe3a[2]~68
+--operation mode is arithmetic
+
+G1L25 = CARRY(K2_safe_q[2] & (!G1L23 # !G1_dffe2a[2]) # !K2_safe_q[2] & !G1_dffe2a[2] & !G1L23);
+
+
+--G1_dffe3a[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe3a[3]
+--operation mode is arithmetic
+
+G1_dffe3a[3]_carry_eqn = G1L25;
+G1_dffe3a[3]_lut_out = K2_safe_q[3] $ G1_dffe2a[3] $ !G1_dffe3a[3]_carry_eqn;
+G1_dffe3a[3] = DFFEAS(G1_dffe3a[3]_lut_out, FX2_CLK, VCC, , , , , , );
+
+--G1L27 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe3a[3]~72
+--operation mode is arithmetic
+
+G1L27 = CARRY(K2_safe_q[3] & G1_dffe2a[3] & !G1L25 # !K2_safe_q[3] & (G1_dffe2a[3] # !G1L25));
+
+
+--G1_dffe3a[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe3a[0]
+--operation mode is arithmetic
+
+G1_dffe3a[0]_lut_out = K2_safe_q[0] $ G1_dffe2a[0];
+G1_dffe3a[0] = DFFEAS(G1_dffe3a[0]_lut_out, FX2_CLK, VCC, , , , , , );
+
+--G1L21 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe3a[0]~76
+--operation mode is arithmetic
+
+G1L21 = CARRY(K2_safe_q[0] # !G1_dffe2a[0]);
+
+
+--G1_dffe3a[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe3a[1]
+--operation mode is arithmetic
+
+G1_dffe3a[1]_carry_eqn = G1L21;
+G1_dffe3a[1]_lut_out = K2_safe_q[1] $ G1_dffe2a[1] $ !G1_dffe3a[1]_carry_eqn;
+G1_dffe3a[1] = DFFEAS(G1_dffe3a[1]_lut_out, FX2_CLK, VCC, , , , , , );
+
+--G1L23 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe3a[1]~80
+--operation mode is arithmetic
+
+G1L23 = CARRY(K2_safe_q[1] & G1_dffe2a[1] & !G1L21 # !K2_safe_q[1] & (G1_dffe2a[1] # !G1L21));
+
+
+--G1L36 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|wrfull_comparison_ageb~44
+--operation mode is normal
+
+G1L36 = G1_dffe3a[2] & G1_dffe3a[3] & (G1_dffe3a[0] # G1_dffe3a[1]);
+
+
+--D1_local_count[16] is CounterToFifo:comb_10|local_count[16]
+--operation mode is normal
+
+D1_local_count[16]_lut_out = D1_state.1011 # fx2_1_pps_count_local[16];
+D1_local_count[16] = DFFEAS(D1_local_count[16]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[8] is CounterToFifo:comb_10|local_sernum[8]
+--operation mode is normal
+
+D1_local_sernum[8]_lut_out = sernum[8] # D1_state.1011;
+D1_local_sernum[8] = DFFEAS(D1_local_sernum[8]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_state.0101 is CounterToFifo:comb_10|state.0101
+--operation mode is normal
+
+D1_state.0101_lut_out = D1_state.0011 & D1L1 & D1_post_strobe_state.0101;
+D1_state.0101 = DFFEAS(D1_state.0101_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_state.1000 is CounterToFifo:comb_10|state.1000
+--operation mode is normal
+
+D1_state.1000_lut_out = D1_state.0011 & D1L1 & D1_post_strobe_state.1000;
+D1_state.1000 = DFFEAS(D1_state.1000_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1L2 is CounterToFifo:comb_10|Select~1664
+--operation mode is normal
+
+D1L2 = D1_local_count[16] & (D1_local_sernum[8] # !D1_state.0101) # !D1_local_count[16] & !D1_state.1000 & (D1_local_sernum[8] # !D1_state.0101);
+
+
+--D1_local_count[8] is CounterToFifo:comb_10|local_count[8]
+--operation mode is normal
+
+D1_local_count[8]_lut_out = D1_state.1011 # fx2_1_pps_count_local[8];
+D1_local_count[8] = DFFEAS(D1_local_count[8]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_count[0] is CounterToFifo:comb_10|local_count[0]
+--operation mode is normal
+
+D1_local_count[0]_lut_out = D1_state.1011 # fx2_1_pps_count_local[0];
+D1_local_count[0] = DFFEAS(D1_local_count[0]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_state.1010 is CounterToFifo:comb_10|state.1010
+--operation mode is normal
+
+D1_state.1010_lut_out = D1_state.0011 & D1L1 & D1_post_strobe_state.1010;
+D1_state.1010 = DFFEAS(D1_state.1010_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_state.1001 is CounterToFifo:comb_10|state.1001
+--operation mode is normal
+
+D1_state.1001_lut_out = D1_state.0011 & D1L1 & D1_post_strobe_state.1001;
+D1_state.1001 = DFFEAS(D1_state.1001_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1L3 is CounterToFifo:comb_10|Select~1665
+--operation mode is normal
+
+D1L3 = D1_local_count[8] & (D1_local_count[0] # !D1_state.1010) # !D1_local_count[8] & !D1_state.1001 & (D1_local_count[0] # !D1_state.1010);
+
+
+--D1_local_count[24] is CounterToFifo:comb_10|local_count[24]
+--operation mode is normal
+
+D1_local_count[24]_lut_out = D1_state.1011 # fx2_1_pps_count_local[24];
+D1_local_count[24] = DFFEAS(D1_local_count[24]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[0] is CounterToFifo:comb_10|local_sernum[0]
+--operation mode is normal
+
+D1_local_sernum[0]_lut_out = sernum[0] # D1_state.1011;
+D1_local_sernum[0] = DFFEAS(D1_local_sernum[0]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_state.0110 is CounterToFifo:comb_10|state.0110
+--operation mode is normal
+
+D1_state.0110_lut_out = D1_state.0011 & D1L1 & D1_post_strobe_state.0110;
+D1_state.0110 = DFFEAS(D1_state.0110_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_state.0111 is CounterToFifo:comb_10|state.0111
+--operation mode is normal
+
+D1_state.0111_lut_out = D1_state.0011 & D1L1 & D1_post_strobe_state.0111;
+D1_state.0111 = DFFEAS(D1_state.0111_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1L4 is CounterToFifo:comb_10|Select~1666
+--operation mode is normal
+
+D1L4 = D1_local_count[24] & (D1_local_sernum[0] # !D1_state.0110) # !D1_local_count[24] & !D1_state.0111 & (D1_local_sernum[0] # !D1_state.0110);
+
+
+--D1_state.1011 is CounterToFifo:comb_10|state.1011
+--operation mode is normal
+
+D1_state.1011_lut_out = !D1_post_strobe_state.1011 & (D1_state.0011 & D1L1);
+D1_state.1011 = DFFEAS(D1_state.1011_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_state.0000 is CounterToFifo:comb_10|state.0000
+--operation mode is normal
+
+D1_state.0000_lut_out = !D1_state.1011 & (D1_state.0000 # !D1_last_write_strobe & counter_to_fifo_strobe);
+D1_state.0000 = DFFEAS(D1_state.0000_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1L103 is CounterToFifo:comb_10|reduce_or~32
+--operation mode is normal
+
+D1L103 = !D1_state.0011 & !D1_state.0010 & !D1_state.1011 & D1_state.0000;
+
+
+--L2_parity is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|parity
+--operation mode is arithmetic
+
+L2_parity_lut_out = !L2_parity;
+L2_parity = DFFEAS(L2_parity_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+--L2L13 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:wrptr_g|parity~COUT
+--operation mode is arithmetic
+
+L2L13 = CARRY(L2_parity);
+
+
+--G1L1 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|_~2
+--operation mode is normal
+
+G1L1 = G1_stall_pipeline & (!G1L4 # !G1L3 # !G1L2);
+
+
+--L1_parity is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|parity
+--operation mode is arithmetic
+
+L1_parity_lut_out = !L1_parity;
+L1_parity = DFFEAS(L1_parity_lut_out, FX2_CLK, VCC, , G1L1, , , , );
+
+--L1L13 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_g06:rdptr_g|parity~COUT
+--operation mode is arithmetic
+
+L1L13 = CARRY(L1_parity);
+
+
+--D1_local_count[17] is CounterToFifo:comb_10|local_count[17]
+--operation mode is normal
+
+D1_local_count[17]_lut_out = D1_state.1011 # fx2_1_pps_count_local[17];
+D1_local_count[17] = DFFEAS(D1_local_count[17]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[9] is CounterToFifo:comb_10|local_sernum[9]
+--operation mode is normal
+
+D1_local_sernum[9]_lut_out = sernum[9] # D1_state.1011;
+D1_local_sernum[9] = DFFEAS(D1_local_sernum[9]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L5 is CounterToFifo:comb_10|Select~1668
+--operation mode is normal
+
+D1L5 = D1_local_count[17] & (D1_local_sernum[9] # !D1_state.0101) # !D1_local_count[17] & !D1_state.1000 & (D1_local_sernum[9] # !D1_state.0101);
+
+
+--D1_local_count[9] is CounterToFifo:comb_10|local_count[9]
+--operation mode is normal
+
+D1_local_count[9]_lut_out = D1_state.1011 # fx2_1_pps_count_local[9];
+D1_local_count[9] = DFFEAS(D1_local_count[9]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_count[1] is CounterToFifo:comb_10|local_count[1]
+--operation mode is normal
+
+D1_local_count[1]_lut_out = D1_state.1011 # fx2_1_pps_count_local[1];
+D1_local_count[1] = DFFEAS(D1_local_count[1]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L6 is CounterToFifo:comb_10|Select~1669
+--operation mode is normal
+
+D1L6 = D1_local_count[9] & (D1_local_count[1] # !D1_state.1010) # !D1_local_count[9] & !D1_state.1001 & (D1_local_count[1] # !D1_state.1010);
+
+
+--D1_local_count[25] is CounterToFifo:comb_10|local_count[25]
+--operation mode is normal
+
+D1_local_count[25]_lut_out = D1_state.1011 # fx2_1_pps_count_local[25];
+D1_local_count[25] = DFFEAS(D1_local_count[25]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[1] is CounterToFifo:comb_10|local_sernum[1]
+--operation mode is normal
+
+D1_local_sernum[1]_lut_out = sernum[1] # D1_state.1011;
+D1_local_sernum[1] = DFFEAS(D1_local_sernum[1]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L7 is CounterToFifo:comb_10|Select~1670
+--operation mode is normal
+
+D1L7 = D1_local_count[25] & (D1_local_sernum[1] # !D1_state.0110) # !D1_local_count[25] & !D1_state.0111 & (D1_local_sernum[1] # !D1_state.0110);
+
+
+--D1_local_count[18] is CounterToFifo:comb_10|local_count[18]
+--operation mode is normal
+
+D1_local_count[18]_lut_out = D1_state.1011 # fx2_1_pps_count_local[18];
+D1_local_count[18] = DFFEAS(D1_local_count[18]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[10] is CounterToFifo:comb_10|local_sernum[10]
+--operation mode is normal
+
+D1_local_sernum[10]_lut_out = sernum[10] # D1_state.1011;
+D1_local_sernum[10] = DFFEAS(D1_local_sernum[10]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L8 is CounterToFifo:comb_10|Select~1672
+--operation mode is normal
+
+D1L8 = D1_local_count[18] & (D1_local_sernum[10] # !D1_state.0101) # !D1_local_count[18] & !D1_state.1000 & (D1_local_sernum[10] # !D1_state.0101);
+
+
+--D1_local_count[10] is CounterToFifo:comb_10|local_count[10]
+--operation mode is normal
+
+D1_local_count[10]_lut_out = D1_state.1011 # fx2_1_pps_count_local[10];
+D1_local_count[10] = DFFEAS(D1_local_count[10]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_count[2] is CounterToFifo:comb_10|local_count[2]
+--operation mode is normal
+
+D1_local_count[2]_lut_out = D1_state.1011 # fx2_1_pps_count_local[2];
+D1_local_count[2] = DFFEAS(D1_local_count[2]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L9 is CounterToFifo:comb_10|Select~1673
+--operation mode is normal
+
+D1L9 = D1_local_count[10] & (D1_local_count[2] # !D1_state.1010) # !D1_local_count[10] & !D1_state.1001 & (D1_local_count[2] # !D1_state.1010);
+
+
+--D1_local_count[26] is CounterToFifo:comb_10|local_count[26]
+--operation mode is normal
+
+D1_local_count[26]_lut_out = D1_state.1011 # fx2_1_pps_count_local[26];
+D1_local_count[26] = DFFEAS(D1_local_count[26]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[2] is CounterToFifo:comb_10|local_sernum[2]
+--operation mode is normal
+
+D1_local_sernum[2]_lut_out = sernum[2] # D1_state.1011;
+D1_local_sernum[2] = DFFEAS(D1_local_sernum[2]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L10 is CounterToFifo:comb_10|Select~1674
+--operation mode is normal
+
+D1L10 = D1_local_count[26] & (D1_local_sernum[2] # !D1_state.0110) # !D1_local_count[26] & !D1_state.0111 & (D1_local_sernum[2] # !D1_state.0110);
+
+
+--D1_local_count[19] is CounterToFifo:comb_10|local_count[19]
+--operation mode is normal
+
+D1_local_count[19]_lut_out = D1_state.1011 # fx2_1_pps_count_local[19];
+D1_local_count[19] = DFFEAS(D1_local_count[19]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[11] is CounterToFifo:comb_10|local_sernum[11]
+--operation mode is normal
+
+D1_local_sernum[11]_lut_out = sernum[11] # D1_state.1011;
+D1_local_sernum[11] = DFFEAS(D1_local_sernum[11]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L11 is CounterToFifo:comb_10|Select~1676
+--operation mode is normal
+
+D1L11 = D1_local_count[19] & (D1_local_sernum[11] # !D1_state.0101) # !D1_local_count[19] & !D1_state.1000 & (D1_local_sernum[11] # !D1_state.0101);
+
+
+--D1_local_count[11] is CounterToFifo:comb_10|local_count[11]
+--operation mode is normal
+
+D1_local_count[11]_lut_out = D1_state.1011 # fx2_1_pps_count_local[11];
+D1_local_count[11] = DFFEAS(D1_local_count[11]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_count[3] is CounterToFifo:comb_10|local_count[3]
+--operation mode is normal
+
+D1_local_count[3]_lut_out = D1_state.1011 # fx2_1_pps_count_local[3];
+D1_local_count[3] = DFFEAS(D1_local_count[3]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L12 is CounterToFifo:comb_10|Select~1677
+--operation mode is normal
+
+D1L12 = D1_local_count[11] & (D1_local_count[3] # !D1_state.1010) # !D1_local_count[11] & !D1_state.1001 & (D1_local_count[3] # !D1_state.1010);
+
+
+--D1_local_count[27] is CounterToFifo:comb_10|local_count[27]
+--operation mode is normal
+
+D1_local_count[27]_lut_out = D1_state.1011 # fx2_1_pps_count_local[27];
+D1_local_count[27] = DFFEAS(D1_local_count[27]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[3] is CounterToFifo:comb_10|local_sernum[3]
+--operation mode is normal
+
+D1_local_sernum[3]_lut_out = sernum[3] # D1_state.1011;
+D1_local_sernum[3] = DFFEAS(D1_local_sernum[3]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L13 is CounterToFifo:comb_10|Select~1678
+--operation mode is normal
+
+D1L13 = D1_local_count[27] & (D1_local_sernum[3] # !D1_state.0110) # !D1_local_count[27] & !D1_state.0111 & (D1_local_sernum[3] # !D1_state.0110);
+
+
+--D1_local_count[20] is CounterToFifo:comb_10|local_count[20]
+--operation mode is normal
+
+D1_local_count[20]_lut_out = D1_state.1011 # fx2_1_pps_count_local[20];
+D1_local_count[20] = DFFEAS(D1_local_count[20]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[12] is CounterToFifo:comb_10|local_sernum[12]
+--operation mode is normal
+
+D1_local_sernum[12]_lut_out = sernum[12] # D1_state.1011;
+D1_local_sernum[12] = DFFEAS(D1_local_sernum[12]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L14 is CounterToFifo:comb_10|Select~1680
+--operation mode is normal
+
+D1L14 = D1_local_count[20] & (D1_local_sernum[12] # !D1_state.0101) # !D1_local_count[20] & !D1_state.1000 & (D1_local_sernum[12] # !D1_state.0101);
+
+
+--D1_local_count[12] is CounterToFifo:comb_10|local_count[12]
+--operation mode is normal
+
+D1_local_count[12]_lut_out = D1_state.1011 # fx2_1_pps_count_local[12];
+D1_local_count[12] = DFFEAS(D1_local_count[12]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_count[4] is CounterToFifo:comb_10|local_count[4]
+--operation mode is normal
+
+D1_local_count[4]_lut_out = D1_state.1011 # fx2_1_pps_count_local[4];
+D1_local_count[4] = DFFEAS(D1_local_count[4]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L15 is CounterToFifo:comb_10|Select~1681
+--operation mode is normal
+
+D1L15 = D1_local_count[12] & (D1_local_count[4] # !D1_state.1010) # !D1_local_count[12] & !D1_state.1001 & (D1_local_count[4] # !D1_state.1010);
+
+
+--D1_local_count[28] is CounterToFifo:comb_10|local_count[28]
+--operation mode is normal
+
+D1_local_count[28]_lut_out = D1_state.1011 # fx2_1_pps_count_local[28];
+D1_local_count[28] = DFFEAS(D1_local_count[28]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[4] is CounterToFifo:comb_10|local_sernum[4]
+--operation mode is normal
+
+D1_local_sernum[4]_lut_out = sernum[4] # D1_state.1011;
+D1_local_sernum[4] = DFFEAS(D1_local_sernum[4]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L16 is CounterToFifo:comb_10|Select~1682
+--operation mode is normal
+
+D1L16 = D1_local_count[28] & (D1_local_sernum[4] # !D1_state.0110) # !D1_local_count[28] & !D1_state.0111 & (D1_local_sernum[4] # !D1_state.0110);
+
+
+--D1_local_count[21] is CounterToFifo:comb_10|local_count[21]
+--operation mode is normal
+
+D1_local_count[21]_lut_out = D1_state.1011 # fx2_1_pps_count_local[21];
+D1_local_count[21] = DFFEAS(D1_local_count[21]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[13] is CounterToFifo:comb_10|local_sernum[13]
+--operation mode is normal
+
+D1_local_sernum[13]_lut_out = sernum[13] # D1_state.1011;
+D1_local_sernum[13] = DFFEAS(D1_local_sernum[13]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L17 is CounterToFifo:comb_10|Select~1684
+--operation mode is normal
+
+D1L17 = D1_local_count[21] & (D1_local_sernum[13] # !D1_state.0101) # !D1_local_count[21] & !D1_state.1000 & (D1_local_sernum[13] # !D1_state.0101);
+
+
+--D1_local_count[13] is CounterToFifo:comb_10|local_count[13]
+--operation mode is normal
+
+D1_local_count[13]_lut_out = D1_state.1011 # fx2_1_pps_count_local[13];
+D1_local_count[13] = DFFEAS(D1_local_count[13]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_count[5] is CounterToFifo:comb_10|local_count[5]
+--operation mode is normal
+
+D1_local_count[5]_lut_out = D1_state.1011 # fx2_1_pps_count_local[5];
+D1_local_count[5] = DFFEAS(D1_local_count[5]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L18 is CounterToFifo:comb_10|Select~1685
+--operation mode is normal
+
+D1L18 = D1_local_count[13] & (D1_local_count[5] # !D1_state.1010) # !D1_local_count[13] & !D1_state.1001 & (D1_local_count[5] # !D1_state.1010);
+
+
+--D1_local_count[29] is CounterToFifo:comb_10|local_count[29]
+--operation mode is normal
+
+D1_local_count[29]_lut_out = D1_state.1011 # fx2_1_pps_count_local[29];
+D1_local_count[29] = DFFEAS(D1_local_count[29]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[5] is CounterToFifo:comb_10|local_sernum[5]
+--operation mode is normal
+
+D1_local_sernum[5]_lut_out = sernum[5] # D1_state.1011;
+D1_local_sernum[5] = DFFEAS(D1_local_sernum[5]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L19 is CounterToFifo:comb_10|Select~1686
+--operation mode is normal
+
+D1L19 = D1_local_count[29] & (D1_local_sernum[5] # !D1_state.0110) # !D1_local_count[29] & !D1_state.0111 & (D1_local_sernum[5] # !D1_state.0110);
+
+
+--D1_local_count[22] is CounterToFifo:comb_10|local_count[22]
+--operation mode is normal
+
+D1_local_count[22]_lut_out = D1_state.1011 # fx2_1_pps_count_local[22];
+D1_local_count[22] = DFFEAS(D1_local_count[22]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[14] is CounterToFifo:comb_10|local_sernum[14]
+--operation mode is normal
+
+D1_local_sernum[14]_lut_out = sernum[14] # D1_state.1011;
+D1_local_sernum[14] = DFFEAS(D1_local_sernum[14]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L20 is CounterToFifo:comb_10|Select~1688
+--operation mode is normal
+
+D1L20 = D1_local_count[22] & (D1_local_sernum[14] # !D1_state.0101) # !D1_local_count[22] & !D1_state.1000 & (D1_local_sernum[14] # !D1_state.0101);
+
+
+--D1_local_count[14] is CounterToFifo:comb_10|local_count[14]
+--operation mode is normal
+
+D1_local_count[14]_lut_out = D1_state.1011 # fx2_1_pps_count_local[14];
+D1_local_count[14] = DFFEAS(D1_local_count[14]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_count[6] is CounterToFifo:comb_10|local_count[6]
+--operation mode is normal
+
+D1_local_count[6]_lut_out = D1_state.1011 # fx2_1_pps_count_local[6];
+D1_local_count[6] = DFFEAS(D1_local_count[6]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L21 is CounterToFifo:comb_10|Select~1689
+--operation mode is normal
+
+D1L21 = D1_local_count[14] & (D1_local_count[6] # !D1_state.1010) # !D1_local_count[14] & !D1_state.1001 & (D1_local_count[6] # !D1_state.1010);
+
+
+--D1_local_count[30] is CounterToFifo:comb_10|local_count[30]
+--operation mode is normal
+
+D1_local_count[30]_lut_out = D1_state.1011 # fx2_1_pps_count_local[30];
+D1_local_count[30] = DFFEAS(D1_local_count[30]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[6] is CounterToFifo:comb_10|local_sernum[6]
+--operation mode is normal
+
+D1_local_sernum[6]_lut_out = sernum[6] # D1_state.1011;
+D1_local_sernum[6] = DFFEAS(D1_local_sernum[6]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L22 is CounterToFifo:comb_10|Select~1690
+--operation mode is normal
+
+D1L22 = D1_local_count[30] & (D1_local_sernum[6] # !D1_state.0110) # !D1_local_count[30] & !D1_state.0111 & (D1_local_sernum[6] # !D1_state.0110);
+
+
+--D1_local_count[23] is CounterToFifo:comb_10|local_count[23]
+--operation mode is normal
+
+D1_local_count[23]_lut_out = D1_state.1011 # fx2_1_pps_count_local[23];
+D1_local_count[23] = DFFEAS(D1_local_count[23]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[15] is CounterToFifo:comb_10|local_sernum[15]
+--operation mode is normal
+
+D1_local_sernum[15]_lut_out = sernum[15] # D1_state.1011;
+D1_local_sernum[15] = DFFEAS(D1_local_sernum[15]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L23 is CounterToFifo:comb_10|Select~1692
+--operation mode is normal
+
+D1L23 = D1_local_count[23] & (D1_local_sernum[15] # !D1_state.0101) # !D1_local_count[23] & !D1_state.1000 & (D1_local_sernum[15] # !D1_state.0101);
+
+
+--D1_local_count[15] is CounterToFifo:comb_10|local_count[15]
+--operation mode is normal
+
+D1_local_count[15]_lut_out = D1_state.1011 # fx2_1_pps_count_local[15];
+D1_local_count[15] = DFFEAS(D1_local_count[15]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_count[7] is CounterToFifo:comb_10|local_count[7]
+--operation mode is normal
+
+D1_local_count[7]_lut_out = D1_state.1011 # fx2_1_pps_count_local[7];
+D1_local_count[7] = DFFEAS(D1_local_count[7]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L24 is CounterToFifo:comb_10|Select~1693
+--operation mode is normal
+
+D1L24 = D1_local_count[15] & (D1_local_count[7] # !D1_state.1010) # !D1_local_count[15] & !D1_state.1001 & (D1_local_count[7] # !D1_state.1010);
+
+
+--D1_local_count[31] is CounterToFifo:comb_10|local_count[31]
+--operation mode is normal
+
+D1_local_count[31]_lut_out = D1_state.1011 # fx2_1_pps_count_local[31];
+D1_local_count[31] = DFFEAS(D1_local_count[31]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1_local_sernum[7] is CounterToFifo:comb_10|local_sernum[7]
+--operation mode is normal
+
+D1_local_sernum[7]_lut_out = sernum[7] # D1_state.1011;
+D1_local_sernum[7] = DFFEAS(D1_local_sernum[7]_lut_out, FX2_CLK, VCC, , D1L66, , , , );
+
+
+--D1L25 is CounterToFifo:comb_10|Select~1694
+--operation mode is normal
+
+D1L25 = D1_local_count[31] & (D1_local_sernum[7] # !D1_state.0110) # !D1_local_count[31] & !D1_state.0111 & (D1_local_sernum[7] # !D1_state.0110);
+
+
+--BB1_dffe12a[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe12a[3]
+--operation mode is normal
+
+BB1_dffe12a[3]_lut_out = BB1_dffe11a[3];
+BB1_dffe12a[3] = DFFEAS(BB1_dffe12a[3]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe12a[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe12a[0]
+--operation mode is normal
+
+BB1_dffe12a[0]_lut_out = BB1_dffe11a[0];
+BB1_dffe12a[0] = DFFEAS(BB1_dffe12a[0]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe12a[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe12a[5]
+--operation mode is normal
+
+BB1_dffe12a[5]_lut_out = BB1_dffe11a[5];
+BB1_dffe12a[5] = DFFEAS(BB1_dffe12a[5]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe12a[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe12a[4]
+--operation mode is normal
+
+BB1_dffe12a[4]_lut_out = BB1_dffe11a[4];
+BB1_dffe12a[4] = DFFEAS(BB1_dffe12a[4]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe12a[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe12a[2]
+--operation mode is normal
+
+BB1_dffe12a[2]_lut_out = BB1_dffe11a[2];
+BB1_dffe12a[2] = DFFEAS(BB1_dffe12a[2]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe12a[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe12a[1]
+--operation mode is normal
+
+BB1_dffe12a[1]_lut_out = BB1_dffe11a[1];
+BB1_dffe12a[1] = DFFEAS(BB1_dffe12a[1]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1L26 is CounterToFifo:comb_10|Select~1697
+--operation mode is normal
+
+D1L26 = !D1_fifo_write_strobe_count[2] & !D1_fifo_write_strobe_count[1] & !D1_fifo_write_strobe_count[0];
+
+
+--D1L27 is CounterToFifo:comb_10|add~116
+--operation mode is normal
+
+D1L27 = !D1_fifo_write_strobe_count[1] & !D1_fifo_write_strobe_count[0];
+
+
+--K2_safe_q[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b|safe_q[4]
+--operation mode is arithmetic
+
+K2_safe_q[4]_carry_eqn = K2L8;
+K2_safe_q[4]_lut_out = K2_safe_q[4] $ (!K2_safe_q[4]_carry_eqn);
+K2_safe_q[4] = DFFEAS(K2_safe_q[4]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+--K2L10 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b|counter_cella4~COUT
+--operation mode is arithmetic
+
+K2L10 = CARRY(K2_safe_q[4] & (!K2L8));
+
+
+--G1_dffe2a[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe2a[4]
+--operation mode is normal
+
+G1_dffe2a[4]_lut_out = CB1_dffe17a[5] $ CB1_dffe17a[4];
+G1_dffe2a[4] = DFFEAS(G1_dffe2a[4]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--K2_safe_q[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b|safe_q[5]
+--operation mode is normal
+
+K2_safe_q[5]_carry_eqn = K2L10;
+K2_safe_q[5]_lut_out = K2_safe_q[5] $ (K2_safe_q[5]_carry_eqn);
+K2_safe_q[5] = DFFEAS(K2_safe_q[5]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+
+--G1_dffe2a[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe2a[5]
+--operation mode is normal
+
+G1_dffe2a[5]_lut_out = CB1_dffe17a[5];
+G1_dffe2a[5] = DFFEAS(G1_dffe2a[5]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--K2_safe_q[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b|safe_q[2]
+--operation mode is arithmetic
+
+K2_safe_q[2]_carry_eqn = K2L4;
+K2_safe_q[2]_lut_out = K2_safe_q[2] $ (!K2_safe_q[2]_carry_eqn);
+K2_safe_q[2] = DFFEAS(K2_safe_q[2]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+--K2L6 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b|counter_cella2~COUT
+--operation mode is arithmetic
+
+K2L6 = CARRY(K2_safe_q[2] & (!K2L4));
+
+
+--G1_dffe2a[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe2a[2]
+--operation mode is normal
+
+G1_dffe2a[2]_lut_out = P2_xor2;
+G1_dffe2a[2] = DFFEAS(G1_dffe2a[2]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--K2_safe_q[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b|safe_q[3]
+--operation mode is arithmetic
+
+K2_safe_q[3]_carry_eqn = K2L6;
+K2_safe_q[3]_lut_out = K2_safe_q[3] $ (K2_safe_q[3]_carry_eqn);
+K2_safe_q[3] = DFFEAS(K2_safe_q[3]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+--K2L8 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b|counter_cella3~COUT
+--operation mode is arithmetic
+
+K2L8 = CARRY(!K2L6 # !K2_safe_q[3]);
+
+
+--G1_dffe2a[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe2a[3]
+--operation mode is normal
+
+G1_dffe2a[3]_lut_out = CB1_dffe17a[3] $ CB1_dffe17a[5] $ CB1_dffe17a[4];
+G1_dffe2a[3] = DFFEAS(G1_dffe2a[3]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--K2_safe_q[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b|safe_q[0]
+--operation mode is arithmetic
+
+K2_safe_q[0]_lut_out = !K2_safe_q[0];
+K2_safe_q[0] = DFFEAS(K2_safe_q[0]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+--K2L2 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b|counter_cella0~COUT
+--operation mode is arithmetic
+
+K2L2 = CARRY(K2_safe_q[0]);
+
+
+--G1_dffe2a[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe2a[0]
+--operation mode is normal
+
+G1_dffe2a[0]_lut_out = CB1_dffe17a[0] $ CB1_dffe17a[1] $ P2_xor2;
+G1_dffe2a[0] = DFFEAS(G1_dffe2a[0]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--K2_safe_q[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b|safe_q[1]
+--operation mode is arithmetic
+
+K2_safe_q[1]_carry_eqn = K2L2;
+K2_safe_q[1]_lut_out = K2_safe_q[1] $ (K2_safe_q[1]_carry_eqn);
+K2_safe_q[1] = DFFEAS(K2_safe_q[1]_lut_out, FX2_CLK, VCC, , G1_valid_wrreq, , , , );
+
+--K2L4 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|cntr_su7:wrptr_b|counter_cella1~COUT
+--operation mode is arithmetic
+
+K2L4 = CARRY(!K2L2 # !K2_safe_q[1]);
+
+
+--G1_dffe2a[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|dffe2a[1]
+--operation mode is normal
+
+G1_dffe2a[1]_lut_out = CB1_dffe17a[1] $ P2_xor2;
+G1_dffe2a[1] = DFFEAS(G1_dffe2a[1]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--fx2_1_pps_count_local[16] is fx2_1_pps_count_local[16]
+--operation mode is normal
+
+fx2_1_pps_count_local[16]_lut_out = B1_count_o[16];
+fx2_1_pps_count_local[16] = DFFEAS(fx2_1_pps_count_local[16]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--counter_to_fifo_strobe is counter_to_fifo_strobe
+--operation mode is normal
+
+counter_to_fifo_strobe_lut_out = state.0001 # counter_to_fifo_strobe & (!state.0000);
+counter_to_fifo_strobe = DFFEAS(counter_to_fifo_strobe_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_last_write_strobe is CounterToFifo:comb_10|last_write_strobe
+--operation mode is normal
+
+D1_last_write_strobe_lut_out = counter_to_fifo_strobe;
+D1_last_write_strobe = DFFEAS(D1_last_write_strobe_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1L66 is CounterToFifo:comb_10|local_count[20]~361
+--operation mode is normal
+
+D1L66 = D1_state.0000 & D1_state.1011 # !D1_state.0000 & (counter_to_fifo_strobe & !D1_last_write_strobe);
+
+
+--sernum[8] is sernum[8]
+--operation mode is arithmetic
+
+sernum[8]_carry_eqn = A1L90;
+sernum[8]_lut_out = sernum[8] $ (!sernum[8]_carry_eqn);
+sernum[8] = DFFEAS(sernum[8]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L92 is sernum[8]~305
+--operation mode is arithmetic
+
+A1L92 = CARRY(sernum[8] & (!A1L90));
+
+
+--D1_post_strobe_state.0101 is CounterToFifo:comb_10|post_strobe_state.0101
+--operation mode is normal
+
+D1_post_strobe_state.0101_lut_out = D1_state.0100 # !D1L103 & D1_post_strobe_state.0101;
+D1_post_strobe_state.0101 = DFFEAS(D1_post_strobe_state.0101_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_post_strobe_state.1000 is CounterToFifo:comb_10|post_strobe_state.1000
+--operation mode is normal
+
+D1_post_strobe_state.1000_lut_out = D1_state.0111 # !D1L103 & D1_post_strobe_state.1000;
+D1_post_strobe_state.1000 = DFFEAS(D1_post_strobe_state.1000_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--fx2_1_pps_count_local[8] is fx2_1_pps_count_local[8]
+--operation mode is normal
+
+fx2_1_pps_count_local[8]_lut_out = B1_count_o[8];
+fx2_1_pps_count_local[8] = DFFEAS(fx2_1_pps_count_local[8]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[0] is fx2_1_pps_count_local[0]
+--operation mode is normal
+
+fx2_1_pps_count_local[0]_lut_out = B1_count_o[0];
+fx2_1_pps_count_local[0] = DFFEAS(fx2_1_pps_count_local[0]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--D1_post_strobe_state.1010 is CounterToFifo:comb_10|post_strobe_state.1010
+--operation mode is normal
+
+D1_post_strobe_state.1010_lut_out = D1_state.1001 # !D1L103 & D1_post_strobe_state.1010;
+D1_post_strobe_state.1010 = DFFEAS(D1_post_strobe_state.1010_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_post_strobe_state.1001 is CounterToFifo:comb_10|post_strobe_state.1001
+--operation mode is normal
+
+D1_post_strobe_state.1001_lut_out = D1_state.1000 # !D1L103 & D1_post_strobe_state.1001;
+D1_post_strobe_state.1001 = DFFEAS(D1_post_strobe_state.1001_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--fx2_1_pps_count_local[24] is fx2_1_pps_count_local[24]
+--operation mode is normal
+
+fx2_1_pps_count_local[24]_lut_out = B1_count_o[24];
+fx2_1_pps_count_local[24] = DFFEAS(fx2_1_pps_count_local[24]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[0] is sernum[0]
+--operation mode is arithmetic
+
+sernum[0]_lut_out = !sernum[0];
+sernum[0] = DFFEAS(sernum[0]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L76 is sernum[0]~309
+--operation mode is arithmetic
+
+A1L76 = CARRY(sernum[0]);
+
+
+--D1_post_strobe_state.0110 is CounterToFifo:comb_10|post_strobe_state.0110
+--operation mode is normal
+
+D1_post_strobe_state.0110_lut_out = D1_state.0101 # !D1L103 & D1_post_strobe_state.0110;
+D1_post_strobe_state.0110 = DFFEAS(D1_post_strobe_state.0110_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_post_strobe_state.0111 is CounterToFifo:comb_10|post_strobe_state.0111
+--operation mode is normal
+
+D1_post_strobe_state.0111_lut_out = D1_state.0110 # !D1L103 & D1_post_strobe_state.0111;
+D1_post_strobe_state.0111 = DFFEAS(D1_post_strobe_state.0111_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_post_strobe_state.1011 is CounterToFifo:comb_10|post_strobe_state.1011
+--operation mode is normal
+
+D1_post_strobe_state.1011_lut_out = !D1_state.1010 & (D1L103 # D1_post_strobe_state.1011);
+D1_post_strobe_state.1011 = DFFEAS(D1_post_strobe_state.1011_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--fx2_1_pps_count_local[17] is fx2_1_pps_count_local[17]
+--operation mode is normal
+
+fx2_1_pps_count_local[17]_lut_out = B1_count_o[17];
+fx2_1_pps_count_local[17] = DFFEAS(fx2_1_pps_count_local[17]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[9] is sernum[9]
+--operation mode is arithmetic
+
+sernum[9]_carry_eqn = A1L92;
+sernum[9]_lut_out = sernum[9] $ (sernum[9]_carry_eqn);
+sernum[9] = DFFEAS(sernum[9]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L94 is sernum[9]~313
+--operation mode is arithmetic
+
+A1L94 = CARRY(!A1L92 # !sernum[9]);
+
+
+--fx2_1_pps_count_local[9] is fx2_1_pps_count_local[9]
+--operation mode is normal
+
+fx2_1_pps_count_local[9]_lut_out = B1_count_o[9];
+fx2_1_pps_count_local[9] = DFFEAS(fx2_1_pps_count_local[9]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[1] is fx2_1_pps_count_local[1]
+--operation mode is normal
+
+fx2_1_pps_count_local[1]_lut_out = B1_count_o[1];
+fx2_1_pps_count_local[1] = DFFEAS(fx2_1_pps_count_local[1]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[25] is fx2_1_pps_count_local[25]
+--operation mode is normal
+
+fx2_1_pps_count_local[25]_lut_out = B1_count_o[25];
+fx2_1_pps_count_local[25] = DFFEAS(fx2_1_pps_count_local[25]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[1] is sernum[1]
+--operation mode is arithmetic
+
+sernum[1]_carry_eqn = A1L76;
+sernum[1]_lut_out = sernum[1] $ (sernum[1]_carry_eqn);
+sernum[1] = DFFEAS(sernum[1]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L78 is sernum[1]~317
+--operation mode is arithmetic
+
+A1L78 = CARRY(!A1L76 # !sernum[1]);
+
+
+--fx2_1_pps_count_local[18] is fx2_1_pps_count_local[18]
+--operation mode is normal
+
+fx2_1_pps_count_local[18]_lut_out = B1_count_o[18];
+fx2_1_pps_count_local[18] = DFFEAS(fx2_1_pps_count_local[18]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[10] is sernum[10]
+--operation mode is arithmetic
+
+sernum[10]_carry_eqn = A1L94;
+sernum[10]_lut_out = sernum[10] $ (!sernum[10]_carry_eqn);
+sernum[10] = DFFEAS(sernum[10]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L96 is sernum[10]~321
+--operation mode is arithmetic
+
+A1L96 = CARRY(sernum[10] & (!A1L94));
+
+
+--fx2_1_pps_count_local[10] is fx2_1_pps_count_local[10]
+--operation mode is normal
+
+fx2_1_pps_count_local[10]_lut_out = B1_count_o[10];
+fx2_1_pps_count_local[10] = DFFEAS(fx2_1_pps_count_local[10]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[2] is fx2_1_pps_count_local[2]
+--operation mode is normal
+
+fx2_1_pps_count_local[2]_lut_out = B1_count_o[2];
+fx2_1_pps_count_local[2] = DFFEAS(fx2_1_pps_count_local[2]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[26] is fx2_1_pps_count_local[26]
+--operation mode is normal
+
+fx2_1_pps_count_local[26]_lut_out = B1_count_o[26];
+fx2_1_pps_count_local[26] = DFFEAS(fx2_1_pps_count_local[26]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[2] is sernum[2]
+--operation mode is arithmetic
+
+sernum[2]_carry_eqn = A1L78;
+sernum[2]_lut_out = sernum[2] $ (!sernum[2]_carry_eqn);
+sernum[2] = DFFEAS(sernum[2]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L80 is sernum[2]~325
+--operation mode is arithmetic
+
+A1L80 = CARRY(sernum[2] & (!A1L78));
+
+
+--fx2_1_pps_count_local[19] is fx2_1_pps_count_local[19]
+--operation mode is normal
+
+fx2_1_pps_count_local[19]_lut_out = B1_count_o[19];
+fx2_1_pps_count_local[19] = DFFEAS(fx2_1_pps_count_local[19]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[11] is sernum[11]
+--operation mode is arithmetic
+
+sernum[11]_carry_eqn = A1L96;
+sernum[11]_lut_out = sernum[11] $ (sernum[11]_carry_eqn);
+sernum[11] = DFFEAS(sernum[11]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L98 is sernum[11]~329
+--operation mode is arithmetic
+
+A1L98 = CARRY(!A1L96 # !sernum[11]);
+
+
+--fx2_1_pps_count_local[11] is fx2_1_pps_count_local[11]
+--operation mode is normal
+
+fx2_1_pps_count_local[11]_lut_out = B1_count_o[11];
+fx2_1_pps_count_local[11] = DFFEAS(fx2_1_pps_count_local[11]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[3] is fx2_1_pps_count_local[3]
+--operation mode is normal
+
+fx2_1_pps_count_local[3]_lut_out = B1_count_o[3];
+fx2_1_pps_count_local[3] = DFFEAS(fx2_1_pps_count_local[3]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[27] is fx2_1_pps_count_local[27]
+--operation mode is normal
+
+fx2_1_pps_count_local[27]_lut_out = B1_count_o[27];
+fx2_1_pps_count_local[27] = DFFEAS(fx2_1_pps_count_local[27]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[3] is sernum[3]
+--operation mode is arithmetic
+
+sernum[3]_carry_eqn = A1L80;
+sernum[3]_lut_out = sernum[3] $ (sernum[3]_carry_eqn);
+sernum[3] = DFFEAS(sernum[3]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L82 is sernum[3]~333
+--operation mode is arithmetic
+
+A1L82 = CARRY(!A1L80 # !sernum[3]);
+
+
+--fx2_1_pps_count_local[20] is fx2_1_pps_count_local[20]
+--operation mode is normal
+
+fx2_1_pps_count_local[20]_lut_out = B1_count_o[20];
+fx2_1_pps_count_local[20] = DFFEAS(fx2_1_pps_count_local[20]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[12] is sernum[12]
+--operation mode is arithmetic
+
+sernum[12]_carry_eqn = A1L98;
+sernum[12]_lut_out = sernum[12] $ (!sernum[12]_carry_eqn);
+sernum[12] = DFFEAS(sernum[12]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L100 is sernum[12]~337
+--operation mode is arithmetic
+
+A1L100 = CARRY(sernum[12] & (!A1L98));
+
+
+--fx2_1_pps_count_local[12] is fx2_1_pps_count_local[12]
+--operation mode is normal
+
+fx2_1_pps_count_local[12]_lut_out = B1_count_o[12];
+fx2_1_pps_count_local[12] = DFFEAS(fx2_1_pps_count_local[12]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[4] is fx2_1_pps_count_local[4]
+--operation mode is normal
+
+fx2_1_pps_count_local[4]_lut_out = B1_count_o[4];
+fx2_1_pps_count_local[4] = DFFEAS(fx2_1_pps_count_local[4]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[28] is fx2_1_pps_count_local[28]
+--operation mode is normal
+
+fx2_1_pps_count_local[28]_lut_out = B1_count_o[28];
+fx2_1_pps_count_local[28] = DFFEAS(fx2_1_pps_count_local[28]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[4] is sernum[4]
+--operation mode is arithmetic
+
+sernum[4]_carry_eqn = A1L82;
+sernum[4]_lut_out = sernum[4] $ (!sernum[4]_carry_eqn);
+sernum[4] = DFFEAS(sernum[4]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L84 is sernum[4]~341
+--operation mode is arithmetic
+
+A1L84 = CARRY(sernum[4] & (!A1L82));
+
+
+--fx2_1_pps_count_local[21] is fx2_1_pps_count_local[21]
+--operation mode is normal
+
+fx2_1_pps_count_local[21]_lut_out = B1_count_o[21];
+fx2_1_pps_count_local[21] = DFFEAS(fx2_1_pps_count_local[21]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[13] is sernum[13]
+--operation mode is arithmetic
+
+sernum[13]_carry_eqn = A1L100;
+sernum[13]_lut_out = sernum[13] $ (sernum[13]_carry_eqn);
+sernum[13] = DFFEAS(sernum[13]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L102 is sernum[13]~345
+--operation mode is arithmetic
+
+A1L102 = CARRY(!A1L100 # !sernum[13]);
+
+
+--fx2_1_pps_count_local[13] is fx2_1_pps_count_local[13]
+--operation mode is normal
+
+fx2_1_pps_count_local[13]_lut_out = B1_count_o[13];
+fx2_1_pps_count_local[13] = DFFEAS(fx2_1_pps_count_local[13]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[5] is fx2_1_pps_count_local[5]
+--operation mode is normal
+
+fx2_1_pps_count_local[5]_lut_out = B1_count_o[5];
+fx2_1_pps_count_local[5] = DFFEAS(fx2_1_pps_count_local[5]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[29] is fx2_1_pps_count_local[29]
+--operation mode is normal
+
+fx2_1_pps_count_local[29]_lut_out = B1_count_o[29];
+fx2_1_pps_count_local[29] = DFFEAS(fx2_1_pps_count_local[29]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[5] is sernum[5]
+--operation mode is arithmetic
+
+sernum[5]_carry_eqn = A1L84;
+sernum[5]_lut_out = sernum[5] $ (sernum[5]_carry_eqn);
+sernum[5] = DFFEAS(sernum[5]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L86 is sernum[5]~349
+--operation mode is arithmetic
+
+A1L86 = CARRY(!A1L84 # !sernum[5]);
+
+
+--fx2_1_pps_count_local[22] is fx2_1_pps_count_local[22]
+--operation mode is normal
+
+fx2_1_pps_count_local[22]_lut_out = B1_count_o[22];
+fx2_1_pps_count_local[22] = DFFEAS(fx2_1_pps_count_local[22]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[14] is sernum[14]
+--operation mode is arithmetic
+
+sernum[14]_carry_eqn = A1L102;
+sernum[14]_lut_out = sernum[14] $ (!sernum[14]_carry_eqn);
+sernum[14] = DFFEAS(sernum[14]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L104 is sernum[14]~353
+--operation mode is arithmetic
+
+A1L104 = CARRY(sernum[14] & (!A1L102));
+
+
+--fx2_1_pps_count_local[14] is fx2_1_pps_count_local[14]
+--operation mode is normal
+
+fx2_1_pps_count_local[14]_lut_out = B1_count_o[14];
+fx2_1_pps_count_local[14] = DFFEAS(fx2_1_pps_count_local[14]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[6] is fx2_1_pps_count_local[6]
+--operation mode is normal
+
+fx2_1_pps_count_local[6]_lut_out = B1_count_o[6];
+fx2_1_pps_count_local[6] = DFFEAS(fx2_1_pps_count_local[6]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[30] is fx2_1_pps_count_local[30]
+--operation mode is normal
+
+fx2_1_pps_count_local[30]_lut_out = B1_count_o[30];
+fx2_1_pps_count_local[30] = DFFEAS(fx2_1_pps_count_local[30]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[6] is sernum[6]
+--operation mode is arithmetic
+
+sernum[6]_carry_eqn = A1L86;
+sernum[6]_lut_out = sernum[6] $ (!sernum[6]_carry_eqn);
+sernum[6] = DFFEAS(sernum[6]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L88 is sernum[6]~357
+--operation mode is arithmetic
+
+A1L88 = CARRY(sernum[6] & (!A1L86));
+
+
+--fx2_1_pps_count_local[23] is fx2_1_pps_count_local[23]
+--operation mode is normal
+
+fx2_1_pps_count_local[23]_lut_out = B1_count_o[23];
+fx2_1_pps_count_local[23] = DFFEAS(fx2_1_pps_count_local[23]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[15] is sernum[15]
+--operation mode is normal
+
+sernum[15]_carry_eqn = A1L104;
+sernum[15]_lut_out = sernum[15] $ (sernum[15]_carry_eqn);
+sernum[15] = DFFEAS(sernum[15]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[15] is fx2_1_pps_count_local[15]
+--operation mode is normal
+
+fx2_1_pps_count_local[15]_lut_out = B1_count_o[15];
+fx2_1_pps_count_local[15] = DFFEAS(fx2_1_pps_count_local[15]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[7] is fx2_1_pps_count_local[7]
+--operation mode is normal
+
+fx2_1_pps_count_local[7]_lut_out = B1_count_o[7];
+fx2_1_pps_count_local[7] = DFFEAS(fx2_1_pps_count_local[7]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--fx2_1_pps_count_local[31] is fx2_1_pps_count_local[31]
+--operation mode is normal
+
+fx2_1_pps_count_local[31]_lut_out = B1_count_o[31];
+fx2_1_pps_count_local[31] = DFFEAS(fx2_1_pps_count_local[31]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+
+--sernum[7] is sernum[7]
+--operation mode is arithmetic
+
+sernum[7]_carry_eqn = A1L88;
+sernum[7]_lut_out = sernum[7] $ (sernum[7]_carry_eqn);
+sernum[7] = DFFEAS(sernum[7]_lut_out, FX2_CLK, VCC, , A1L64, , , , );
+
+--A1L90 is sernum[7]~365
+--operation mode is arithmetic
+
+A1L90 = CARRY(!A1L88 # !sernum[7]);
+
+
+--BB1_dffe11a[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe11a[3]
+--operation mode is normal
+
+BB1_dffe11a[3]_lut_out = G1_delayed_wrptr_g[3];
+BB1_dffe11a[3] = DFFEAS(BB1_dffe11a[3]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe11a[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe11a[0]
+--operation mode is normal
+
+BB1_dffe11a[0]_lut_out = G1_delayed_wrptr_g[0];
+BB1_dffe11a[0] = DFFEAS(BB1_dffe11a[0]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe11a[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe11a[5]
+--operation mode is normal
+
+BB1_dffe11a[5]_lut_out = G1_delayed_wrptr_g[5];
+BB1_dffe11a[5] = DFFEAS(BB1_dffe11a[5]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe11a[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe11a[4]
+--operation mode is normal
+
+BB1_dffe11a[4]_lut_out = G1_delayed_wrptr_g[4];
+BB1_dffe11a[4] = DFFEAS(BB1_dffe11a[4]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe11a[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe11a[2]
+--operation mode is normal
+
+BB1_dffe11a[2]_lut_out = G1_delayed_wrptr_g[2];
+BB1_dffe11a[2] = DFFEAS(BB1_dffe11a[2]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--BB1_dffe11a[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_lc8:read_sync_registers|dffpipe_fd9:dffpipe10|dffe11a[1]
+--operation mode is normal
+
+BB1_dffe11a[1]_lut_out = G1_delayed_wrptr_g[1];
+BB1_dffe11a[1] = DFFEAS(BB1_dffe11a[1]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe17a[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe17a[5]
+--operation mode is normal
+
+CB1_dffe17a[5]_lut_out = CB1_dffe16a[5];
+CB1_dffe17a[5] = DFFEAS(CB1_dffe17a[5]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe17a[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe17a[4]
+--operation mode is normal
+
+CB1_dffe17a[4]_lut_out = CB1_dffe16a[4];
+CB1_dffe17a[4] = DFFEAS(CB1_dffe17a[4]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe17a[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe17a[2]
+--operation mode is normal
+
+CB1_dffe17a[2]_lut_out = CB1_dffe16a[2];
+CB1_dffe17a[2] = DFFEAS(CB1_dffe17a[2]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe17a[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe17a[3]
+--operation mode is normal
+
+CB1_dffe17a[3]_lut_out = CB1_dffe16a[3];
+CB1_dffe17a[3] = DFFEAS(CB1_dffe17a[3]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--P2_xor2 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_gray2bin_n4b:write_side_gray_converter|xor2
+--operation mode is normal
+
+P2_xor2 = CB1_dffe17a[2] $ CB1_dffe17a[3] $ CB1_dffe17a[5] $ CB1_dffe17a[4];
+
+
+--CB1_dffe17a[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe17a[0]
+--operation mode is normal
+
+CB1_dffe17a[0]_lut_out = CB1_dffe16a[0];
+CB1_dffe17a[0] = DFFEAS(CB1_dffe17a[0]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe17a[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe17a[1]
+--operation mode is normal
+
+CB1_dffe17a[1]_lut_out = CB1_dffe16a[1];
+CB1_dffe17a[1] = DFFEAS(CB1_dffe17a[1]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--last_fx2_1_pps_count_status is last_fx2_1_pps_count_status
+--operation mode is normal
+
+last_fx2_1_pps_count_status_lut_out = B1_count_avail_o;
+last_fx2_1_pps_count_status = DFFEAS(last_fx2_1_pps_count_status_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--B1_count_avail_o is RefCount:CountFX2via1PPS|count_avail_o
+--operation mode is normal
+
+B1_count_avail_o_lut_out = !B1_count_avail_o;
+B1_count_avail_o = DFFEAS(B1_count_avail_o_lut_out, FX2_CLK, VCC, , B1_state, , , , );
+
+
+--state.0000 is state.0000
+--operation mode is normal
+
+state.0000_lut_out = !state.0010 & (state.0000 # last_fx2_1_pps_count_status $ B1_count_avail_o);
+state.0000 = DFFEAS(state.0000_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--A1L64 is fx2_1_pps_count_local[24]~469
+--operation mode is normal
+
+A1L64 = !state.0000 & (last_fx2_1_pps_count_status $ B1_count_avail_o);
+
+
+--state.0001 is state.0001
+--operation mode is normal
+
+state.0001_lut_out = A1L64;
+state.0001 = DFFEAS(state.0001_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_state.0100 is CounterToFifo:comb_10|state.0100
+--operation mode is normal
+
+D1_state.0100_lut_out = D1_state.0011 & D1L1 & D1_post_strobe_state.0100;
+D1_state.0100 = DFFEAS(D1_state.0100_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1_delayed_wrptr_g[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|delayed_wrptr_g[3]
+--operation mode is normal
+
+G1_delayed_wrptr_g[3]_lut_out = L2_power_modified_counter_values[3];
+G1_delayed_wrptr_g[3] = DFFEAS(G1_delayed_wrptr_g[3]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1_delayed_wrptr_g[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|delayed_wrptr_g[0]
+--operation mode is normal
+
+G1_delayed_wrptr_g[0]_lut_out = L2_power_modified_counter_values[0];
+G1_delayed_wrptr_g[0] = DFFEAS(G1_delayed_wrptr_g[0]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1_delayed_wrptr_g[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|delayed_wrptr_g[5]
+--operation mode is normal
+
+G1_delayed_wrptr_g[5]_lut_out = L2_power_modified_counter_values[5];
+G1_delayed_wrptr_g[5] = DFFEAS(G1_delayed_wrptr_g[5]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1_delayed_wrptr_g[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|delayed_wrptr_g[4]
+--operation mode is normal
+
+G1_delayed_wrptr_g[4]_lut_out = L2_power_modified_counter_values[4];
+G1_delayed_wrptr_g[4] = DFFEAS(G1_delayed_wrptr_g[4]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1_delayed_wrptr_g[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|delayed_wrptr_g[2]
+--operation mode is normal
+
+G1_delayed_wrptr_g[2]_lut_out = L2_power_modified_counter_values[2];
+G1_delayed_wrptr_g[2] = DFFEAS(G1_delayed_wrptr_g[2]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--G1_delayed_wrptr_g[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|delayed_wrptr_g[1]
+--operation mode is normal
+
+G1_delayed_wrptr_g[1]_lut_out = L2_power_modified_counter_values[1];
+G1_delayed_wrptr_g[1] = DFFEAS(G1_delayed_wrptr_g[1]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe16a[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe16a[5]
+--operation mode is normal
+
+CB1_dffe16a[5]_lut_out = CB1_dffe15a[5];
+CB1_dffe16a[5] = DFFEAS(CB1_dffe16a[5]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe16a[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe16a[4]
+--operation mode is normal
+
+CB1_dffe16a[4]_lut_out = CB1_dffe15a[4];
+CB1_dffe16a[4] = DFFEAS(CB1_dffe16a[4]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe16a[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe16a[2]
+--operation mode is normal
+
+CB1_dffe16a[2]_lut_out = CB1_dffe15a[2];
+CB1_dffe16a[2] = DFFEAS(CB1_dffe16a[2]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe16a[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe16a[3]
+--operation mode is normal
+
+CB1_dffe16a[3]_lut_out = CB1_dffe15a[3];
+CB1_dffe16a[3] = DFFEAS(CB1_dffe16a[3]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe16a[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe16a[0]
+--operation mode is normal
+
+CB1_dffe16a[0]_lut_out = CB1_dffe15a[0];
+CB1_dffe16a[0] = DFFEAS(CB1_dffe16a[0]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe16a[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe16a[1]
+--operation mode is normal
+
+CB1_dffe16a[1]_lut_out = CB1_dffe15a[1];
+CB1_dffe16a[1] = DFFEAS(CB1_dffe16a[1]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--state.0010 is state.0010
+--operation mode is normal
+
+state.0010_lut_out = state.0001;
+state.0010 = DFFEAS(state.0010_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_post_strobe_state.0100 is CounterToFifo:comb_10|post_strobe_state.0100
+--operation mode is normal
+
+D1_post_strobe_state.0100_lut_out = D1_state.0001 # !D1L103 & D1_post_strobe_state.0100;
+D1_post_strobe_state.0100 = DFFEAS(D1_post_strobe_state.0100_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe15a[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe15a[5]
+--operation mode is normal
+
+CB1_dffe15a[5]_lut_out = N1_power_modified_counter_values[5];
+CB1_dffe15a[5] = DFFEAS(CB1_dffe15a[5]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe15a[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe15a[4]
+--operation mode is normal
+
+CB1_dffe15a[4]_lut_out = N1_power_modified_counter_values[4];
+CB1_dffe15a[4] = DFFEAS(CB1_dffe15a[4]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe15a[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe15a[2]
+--operation mode is normal
+
+CB1_dffe15a[2]_lut_out = N1_power_modified_counter_values[2];
+CB1_dffe15a[2] = DFFEAS(CB1_dffe15a[2]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe15a[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe15a[3]
+--operation mode is normal
+
+CB1_dffe15a[3]_lut_out = N1_power_modified_counter_values[3];
+CB1_dffe15a[3] = DFFEAS(CB1_dffe15a[3]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe15a[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe15a[0]
+--operation mode is normal
+
+CB1_dffe15a[0]_lut_out = N1_power_modified_counter_values[0];
+CB1_dffe15a[0] = DFFEAS(CB1_dffe15a[0]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--CB1_dffe15a[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|alt_synch_pipe_mc8:write_sync_registers|dffpipe_gd9:dffpipe14|dffe15a[1]
+--operation mode is normal
+
+CB1_dffe15a[1]_lut_out = N1_power_modified_counter_values[1];
+CB1_dffe15a[1] = DFFEAS(CB1_dffe15a[1]_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--D1_state.0001 is CounterToFifo:comb_10|state.0001
+--operation mode is normal
+
+D1_state.0001_lut_out = counter_to_fifo_strobe & (!D1_state.0000 & !D1_last_write_strobe);
+D1_state.0001 = DFFEAS(D1_state.0001_lut_out, FX2_CLK, VCC, , , , , , );
+
+
+--N1_power_modified_counter_values[5] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|power_modified_counter_values[5]
+--operation mode is normal
+
+N1_power_modified_counter_values[5]_carry_eqn = N1L10;
+N1_power_modified_counter_values[5]_lut_out = N1_power_modified_counter_values[5] $ (!N1_power_modified_counter_values[5]_carry_eqn);
+N1_power_modified_counter_values[5] = DFFEAS(N1_power_modified_counter_values[5]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, , , , );
+
+
+--N1_power_modified_counter_values[4] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|power_modified_counter_values[4]
+--operation mode is arithmetic
+
+N1_power_modified_counter_values[4]_carry_eqn = N1L8;
+N1_power_modified_counter_values[4]_lut_out = N1_power_modified_counter_values[4] $ (N1_power_modified_counter_values[3] & N1_power_modified_counter_values[4]_carry_eqn);
+N1_power_modified_counter_values[4] = DFFEAS(N1_power_modified_counter_values[4]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, , , , );
+
+--N1L10 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|countera4~COUT
+--operation mode is arithmetic
+
+N1L10 = CARRY(N1_power_modified_counter_values[3] # !N1L8);
+
+
+--N1_power_modified_counter_values[2] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|power_modified_counter_values[2]
+--operation mode is arithmetic
+
+N1_power_modified_counter_values[2]_carry_eqn = N1L4;
+N1_power_modified_counter_values[2]_lut_out = N1_power_modified_counter_values[2] $ (N1_power_modified_counter_values[1] & N1_power_modified_counter_values[2]_carry_eqn);
+N1_power_modified_counter_values[2] = DFFEAS(N1_power_modified_counter_values[2]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, , , , );
+
+--N1L6 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|countera2~COUT
+--operation mode is arithmetic
+
+N1L6 = CARRY(N1_power_modified_counter_values[1] # !N1L4);
+
+
+--N1_power_modified_counter_values[3] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|power_modified_counter_values[3]
+--operation mode is arithmetic
+
+N1_power_modified_counter_values[3]_carry_eqn = N1L6;
+N1_power_modified_counter_values[3]_lut_out = N1_power_modified_counter_values[3] $ (N1_power_modified_counter_values[2] & !N1_power_modified_counter_values[3]_carry_eqn);
+N1_power_modified_counter_values[3] = DFFEAS(N1_power_modified_counter_values[3]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, , , , );
+
+--N1L8 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|countera3~COUT
+--operation mode is arithmetic
+
+N1L8 = CARRY(!N1_power_modified_counter_values[2] & (!N1L6));
+
+
+--N1_power_modified_counter_values[0] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|power_modified_counter_values[0]
+--operation mode is arithmetic
+
+N1_power_modified_counter_values[0]_carry_eqn = N1L13;
+N1_power_modified_counter_values[0]_lut_out = N1_power_modified_counter_values[0] $ !N1_power_modified_counter_values[0]_carry_eqn;
+N1_power_modified_counter_values[0] = DFFEAS(N1_power_modified_counter_values[0]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, , , , );
+
+--N1L2 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|countera0~COUT
+--operation mode is arithmetic
+
+N1L2 = CARRY(!N1L13);
+
+
+--N1_power_modified_counter_values[1] is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|power_modified_counter_values[1]
+--operation mode is arithmetic
+
+N1_power_modified_counter_values[1]_carry_eqn = N1L2;
+N1_power_modified_counter_values[1]_lut_out = N1_power_modified_counter_values[1] $ (N1_power_modified_counter_values[0] & !N1_power_modified_counter_values[1]_carry_eqn);
+N1_power_modified_counter_values[1] = DFFEAS(N1_power_modified_counter_values[1]_lut_out, FX2_CLK, VCC, , S1_valid_rreq, , , , );
+
+--N1L4 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|countera1~COUT
+--operation mode is arithmetic
+
+N1L4 = CARRY(!N1_power_modified_counter_values[0] & (!N1L2));
+
+
+--N1_parity is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|parity
+--operation mode is arithmetic
+
+N1_parity_lut_out = !N1_parity;
+N1_parity = DFFEAS(N1_parity_lut_out, FX2_CLK, VCC, , S1_valid_rreq, , , , );
+
+--N1L13 is dc_fifo:SyncFifoToFX2|dcfifo:dcfifo_component|dcfifo_ui41:auto_generated|a_graycounter_h06:read_counter_for_write|parity~COUT
+--operation mode is arithmetic
+
+N1L13 = CARRY(N1_parity);
+
+
+--AD_CLK is AD_CLK
+--operation mode is input
+
+AD_CLK = INPUT();
+
+
+--FX2_flags[0] is FX2_flags[0]
+--operation mode is input
+
+FX2_flags[0] = INPUT();
+
+
+--FX2_flags[1] is FX2_flags[1]
+--operation mode is input
+
+FX2_flags[1] = INPUT();
+
+
+--BCLK is BCLK
+--operation mode is input
+
+BCLK = INPUT();
+
+
+--DOUT is DOUT
+--operation mode is input
+
+DOUT = INPUT();
+
+
+--LRCLK is LRCLK
+--operation mode is input
+
+LRCLK = INPUT();
+
+
+--tenk_pps_i is tenk_pps_i
+--operation mode is input
+
+tenk_pps_i = INPUT();
+
+
+--FX2_flags[2] is FX2_flags[2]
+--operation mode is input
+
+FX2_flags[2] = INPUT();
+
+
+--alt_clk_i is alt_clk_i
+--operation mode is input
+
+alt_clk_i = INPUT();
+
+
+--FX2_CLK is FX2_CLK
+--operation mode is input
+
+FX2_CLK = INPUT();
+
+
+--one_pps_i is one_pps_i
+--operation mode is input
+
+one_pps_i = INPUT();
+
+
+--FX2_FD[0] is FX2_FD[0]
+--operation mode is output
+
+FX2_FD[0]_tri_out = TRI(U8_dffs[0], !E1_slwr_o);
+FX2_FD[0] = OUTPUT(FX2_FD[0]_tri_out);
+
+
+--FX2_FD[1] is FX2_FD[1]
+--operation mode is output
+
+FX2_FD[1]_tri_out = TRI(U8_dffs[1], !E1_slwr_o);
+FX2_FD[1] = OUTPUT(FX2_FD[1]_tri_out);
+
+
+--FX2_FD[2] is FX2_FD[2]
+--operation mode is output
+
+FX2_FD[2]_tri_out = TRI(U8_dffs[2], !E1_slwr_o);
+FX2_FD[2] = OUTPUT(FX2_FD[2]_tri_out);
+
+
+--FX2_FD[3] is FX2_FD[3]
+--operation mode is output
+
+FX2_FD[3]_tri_out = TRI(U8_dffs[3], !E1_slwr_o);
+FX2_FD[3] = OUTPUT(FX2_FD[3]_tri_out);
+
+
+--FX2_FD[4] is FX2_FD[4]
+--operation mode is output
+
+FX2_FD[4]_tri_out = TRI(U8_dffs[4], !E1_slwr_o);
+FX2_FD[4] = OUTPUT(FX2_FD[4]_tri_out);
+
+
+--FX2_FD[5] is FX2_FD[5]
+--operation mode is output
+
+FX2_FD[5]_tri_out = TRI(U8_dffs[5], !E1_slwr_o);
+FX2_FD[5] = OUTPUT(FX2_FD[5]_tri_out);
+
+
+--FX2_FD[6] is FX2_FD[6]
+--operation mode is output
+
+FX2_FD[6]_tri_out = TRI(U8_dffs[6], !E1_slwr_o);
+FX2_FD[6] = OUTPUT(FX2_FD[6]_tri_out);
+
+
+--FX2_FD[7] is FX2_FD[7]
+--operation mode is output
+
+FX2_FD[7]_tri_out = TRI(U8_dffs[7], !E1_slwr_o);
+FX2_FD[7] = OUTPUT(FX2_FD[7]_tri_out);
+
+
+--FX2_SLRD is FX2_SLRD
+--operation mode is output
+
+FX2_SLRD = OUTPUT(VCC);
+
+
+--FX2_SLWR is FX2_SLWR
+--operation mode is output
+
+FX2_SLWR = OUTPUT(E1_slwr_o);
+
+
+--LED[0] is LED[0]
+--operation mode is output
+
+LED[0] = OUTPUT(FX2_flags[2]);
+
+
+--LED[1] is LED[1]
+--operation mode is output
+
+LED[1] = OUTPUT(B1_err);
+
+
+--alt_clk_o is alt_clk_o
+--operation mode is output
+
+alt_clk_o = OUTPUT(alt_clk_i);
+
+
+--dbgout is dbgout
+--operation mode is output
+
+dbgout = OUTPUT(A1L37Q);
+
+
+--FX2_PA[0] is FX2_PA[0]
+--operation mode is bidir
+
+FX2_PA[0]_tri_out = TRI(VCC, VCC);
+FX2_PA[0] = BIDIR(FX2_PA[0]_tri_out);
+
+
+--FX2_PA[1] is FX2_PA[1]
+--operation mode is bidir
+
+FX2_PA[1]_tri_out = TRI(VCC, VCC);
+FX2_PA[1] = BIDIR(FX2_PA[1]_tri_out);
+
+
+--FX2_PA[2] is FX2_PA[2]
+--operation mode is bidir
+
+FX2_PA[2]_tri_out = TRI(VCC, VCC);
+FX2_PA[2] = BIDIR(FX2_PA[2]_tri_out);
+
+
+--FX2_PA[3] is FX2_PA[3]
+--operation mode is bidir
+
+FX2_PA[3]_tri_out = TRI(VCC, VCC);
+FX2_PA[3] = BIDIR(FX2_PA[3]_tri_out);
+
+
+--FX2_PA[4] is FX2_PA[4]
+--operation mode is bidir
+
+FX2_PA[4] = BIDIR(OPNDRN(GND));
+
+
+--FX2_PA[5] is FX2_PA[5]
+--operation mode is bidir
+
+FX2_PA[5]_tri_out = TRI(VCC, VCC);
+FX2_PA[5] = BIDIR(FX2_PA[5]_tri_out);
+
+
+--FX2_PA[6] is FX2_PA[6]
+--operation mode is bidir
+
+FX2_PA[6]_tri_out = TRI(VCC, VCC);
+FX2_PA[6] = BIDIR(FX2_PA[6]_tri_out);
+
+
+--FX2_PA[7] is FX2_PA[7]
+--operation mode is bidir
+
+FX2_PA[7] = BIDIR(OPNDRN(VCC));
+
+
