@@ -1,11 +1,11 @@
 EESchema Schematic File Version 1
-LIBS:power,msp430,o_zilog,o_user,o_ttl,o_tilsi,o_shapes,o_school,o_rf,o_national,o_moto,o_memory,o_ladder,o_intel,o_ecl,o_cmos,o_device,o_assembly,o_analog,HPSDR,device,conn,linear,regul,74xx,cmos4000,adc-dac,memory,xilinx,special,microcontrollers,microchip,analog_switches,motorola,intel,audio,interface,digital-audio,philips,display,cypress,siliconi,contrib,.\fpga_usb.cache
+LIBS:power,o_device,o_assembly,o_analog,HPSDR,device,conn,linear,regul,74xx,cmos4000,adc-dac,memory,xilinx,special,microcontrollers,microchip,analog_switches,motorola,intel,audio,interface,digital-audio,philips,display,cypress,siliconi,contrib,.\fpga_usb.cache
 EELAYER 23  0
 EELAYER END
 $Descr C 22000 16000
 Sheet 1 1
 Title "FPGA-USB BOARD - EP2C5_208"
-Date "23 mar 2006"
+Date "24 mar 2006"
 Rev "None"
 Comp "OPEN HIGH PERFORMANCE SDR PROJECT"
 Comment1 ""
@@ -13,22 +13,246 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Wire Wire Line
+	13200 8150 13200 8900
+Text GLabel 13200 8900 1    60   Input
+1.2VPLL
+Text GLabel 18200 1500 3    60   Input
+1.2VPLL
+Wire Wire Line
+	18200 2250 18200 1500
+$Comp
+L +1.2V #PWR?
+U 1 1 442449F6
+P 19900 2750
+F 0 "#PWR?" H 19900 2890 20  0001 C C
+F 1 "+1.2V" V 19900 2950 30  0000 C C
+	1    19900 2750
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	19150 2750 19900 2750
+$Comp
+L +1.2V #PWR?
+U 1 1 442449CA
+P 11600 7650
+F 0 "#PWR?" H 11600 7790 20  0001 C C
+F 1 "+1.2V" V 11600 7850 30  0000 C C
+	1    11600 7650
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	12250 7650 11600 7650
+Connection ~ 18100 1750
+Wire Wire Line
+	18100 2250 18100 1750
+Connection ~ 11800 7750
+Wire Wire Line
+	12250 7750 11800 7750
+Connection ~ 11800 7550
+Wire Wire Line
+	12250 7550 11800 7550
+Connection ~ 13300 8350
+Wire Wire Line
+	13300 8150 13300 8350
+Connection ~ 19750 2650
+Wire Wire Line
+	19150 2650 19750 2650
+Connection ~ 19750 2850
+Wire Wire Line
+	19150 2850 19750 2850
+Wire Wire Line
+	900  4850 1200 4850
+Wire Wire Line
+	1900 4850 1600 4850
+Wire Wire Line
+	1900 5000 1900 4450
+Wire Wire Line
+	1900 5450 1900 5300
+Wire Wire Line
+	900  5450 900  5300
+Wire Wire Line
+	900  4350 900  5000
+Wire Wire Line
+	1700 14250 1700 14400
+Wire Wire Line
+	1700 13950 1700 13700
+Wire Wire Line
+	11150 7350 12250 7350
+Wire Wire Line
+	12250 7250 11150 7250
+Wire Wire Line
+	11150 7150 12250 7150
+$Comp
+L CONN_3 K?
+U 1 1 442446A8
+P 10800 7250
+F 0 "K?" V 10750 7250 50  0000 C C
+F 1 "CONN_3" V 10850 7250 40  0000 C C
+	1    10800 7250
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	13600 850  13600 2250
+Wire Wire Line
+	12900 850  13600 850 
+Wire Wire Line
+	13400 950  12900 950 
+Wire Wire Line
+	13400 2250 13400 950 
+Wire Wire Line
+	13300 1050 13300 2250
+Wire Wire Line
+	12900 1050 13300 1050
+Wire Wire Line
+	13200 1150 12900 1150
+Wire Wire Line
+	13200 2250 13200 1150
+Wire Wire Line
+	13100 1250 13100 2250
+Wire Wire Line
+	12900 1250 13100 1250
+$Comp
+L CONN_5 P?
+U 1 1 4424466D
+P 12500 1050
+F 0 "P?" V 12450 1050 50  0000 C C
+F 1 "CONN_5" V 12550 1050 50  0000 C C
+	1    12500 1050
+	-1   0    0    -1  
+$EndComp
+$Comp
+L DGND #PWR?
+U 1 1 44244644
+P 18500 11250
+F 0 "#PWR?" H 18500 11250 40  0001 C C
+F 1 "DGND" H 18500 11180 40  0000 C C
+	1    18500 11250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	18500 11050 18500 11250
+Wire Wire Line
+	18800 11050 18500 11050
+Wire Wire Line
+	18800 10850 15900 10850
+Wire Wire Line
+	15800 10950 18800 10950
+Wire Wire Line
+	15800 8150 15800 10950
+Wire Wire Line
+	15900 10850 15900 8150
+Wire Wire Line
+	16000 10750 18800 10750
+Wire Wire Line
+	16000 8150 16000 10750
+Wire Wire Line
+	16200 10650 18800 10650
+Wire Wire Line
+	16200 8150 16200 10650
+Wire Wire Line
+	16400 10550 18800 10550
+Wire Wire Line
+	16400 8150 16400 10550
+Wire Wire Line
+	16500 10450 18800 10450
+Wire Wire Line
+	16500 8150 16500 10450
+Wire Wire Line
+	16600 10350 18800 10350
+Wire Wire Line
+	16600 8150 16600 10350
+Wire Wire Line
+	16700 10250 18800 10250
+Wire Wire Line
+	16700 8150 16700 10250
+Wire Wire Line
+	16800 10150 18800 10150
+Wire Wire Line
+	16800 8150 16800 10150
+Wire Wire Line
+	17000 10050 18800 10050
+Wire Wire Line
+	17000 8150 17000 10050
+Wire Wire Line
+	17200 9950 18800 9950
+Wire Wire Line
+	17200 8150 17200 9950
+Wire Wire Line
+	17300 9850 18800 9850
+Wire Wire Line
+	17300 8150 17300 9850
+Wire Wire Line
+	17400 9750 18800 9750
+Wire Wire Line
+	17400 8150 17400 9750
+Wire Wire Line
+	17500 9650 17500 8150
+Wire Wire Line
+	17500 9650 18800 9650
+Wire Wire Line
+	17700 9550 18800 9550
+Wire Wire Line
+	17700 8150 17700 9550
+Wire Wire Line
+	17900 9450 18800 9450
+Wire Wire Line
+	17900 8150 17900 9450
+Wire Wire Line
+	18000 9350 18800 9350
+Wire Wire Line
+	18000 8150 18000 9350
+Wire Wire Line
+	18100 9250 18800 9250
+Wire Wire Line
+	18100 8150 18100 9250
+Wire Wire Line
+	18200 9150 18800 9150
+Wire Wire Line
+	18200 8150 18200 9150
+$Comp
+L CONN_20 P?
+U 1 1 442445C9
+P 19150 10100
+F 0 "P?" V 19100 10100 60  0000 C C
+F 1 "CONN_20" V 19200 10100 60  0000 C C
+	1    19150 10100
+	1    0    0    -1  
+$EndComp
+Text GLabel 11600 7050 0    60   BiDi
+FX2_PE7
+Text GLabel 11600 6950 0    60   BiDi
+FX2_PE6
+Text GLabel 11600 6850 0    60   BiDi
+FX2_PE5/INT6
+Text GLabel 11600 6650 0    60   BiDi
+FX2_PE4
+Text GLabel 11600 6550 0    60   BiDi
+FX2_PE3
+Text GLabel 11600 6450 0    60   BiDi
+FX2_PE2
+Text GLabel 11600 6250 0    60   BiDi
+FX2_PE1
+Text GLabel 11600 6150 0    60   BiDi
+FX2_PE0
+Text GLabel 11600 6050 0    60   BiDi
+RDY5
+Text GLabel 11600 5950 0    60   BiDi
+RDY4
+Text GLabel 11600 5850 0    60   BiDi
+RDY3
+Text GLabel 11600 5750 0    60   BiDi
+RDY2
+Text GLabel 11600 5650 0    60   BiDi
+RDY1/SLWR
+Text GLabel 11600 5550 0    60   BiDi
+RDY0/SLRD
 Text GLabel 13800 1500 3    60   BiDi
 FX2_PC0
 Text GLabel 13900 1500 3    60   Output
 FX2_INT5
 Text GLabel 14000 1500 3    60   Output
 FX2_INT4
-Wire Wire Line
-	13100 2250 13100 1500
-Wire Wire Line
-	13200 2250 13200 1500
-Wire Wire Line
-	13300 2250 13300 1500
-Wire Wire Line
-	13400 2250 13400 1500
-Wire Wire Line
-	13600 2250 13600 1500
 Wire Wire Line
 	13800 2250 13800 1500
 Wire Wire Line
@@ -117,12 +341,6 @@ Wire Wire Line
 	12250 3550 11600 3550
 Wire Wire Line
 	11800 1900 11800 8850
-Wire Wire Line
-	12250 7350 11600 7350
-Wire Wire Line
-	12250 7250 11600 7250
-Wire Wire Line
-	12250 7150 11600 7150
 Wire Wire Line
 	12250 7050 11600 7050
 Wire Wire Line
@@ -1136,8 +1354,8 @@ $Comp
 L R R?
 U 1 1 4422F104
 P 6000 13500
-F 0 "R?" V 6080 13500 50  0000 C C
-F 1 "1K" V 6000 13500 50  0000 C C
+F 0 "R?" V 5900 13400 50  0000 C C
+F 1 "1K" V 5900 13550 50  0000 C C
 	1    6000 13500
 	1    0    0    -1  
 $EndComp
@@ -1145,8 +1363,8 @@ $Comp
 L R R?
 U 1 1 4422F100
 P 6150 13500
-F 0 "R?" V 6230 13500 50  0000 C C
-F 1 "1K" V 6150 13500 50  0000 C C
+F 0 "R?" V 6100 13400 50  0000 C C
+F 1 "1K" V 6100 13550 50  0000 C C
 	1    6150 13500
 	1    0    0    -1  
 $EndComp
@@ -1154,8 +1372,8 @@ $Comp
 L R R?
 U 1 1 4422F0F8
 P 6300 13500
-F 0 "R?" V 6380 13500 50  0000 C C
-F 1 "1K" V 6300 13500 50  0000 C C
+F 0 "R?" V 6250 13400 50  0000 C C
+F 1 "1K" V 6250 13550 50  0000 C C
 	1    6300 13500
 	1    0    0    -1  
 $EndComp
@@ -1228,8 +1446,8 @@ $Comp
 L R R?
 U 1 1 4421C5AF
 P 2850 13450
-F 0 "R?" V 2930 13450 50  0000 C C
-F 1 "10K" V 2850 13450 50  0000 C C
+F 0 "R?" V 2750 13350 50  0000 C C
+F 1 "10K" V 2750 13550 50  0000 C C
 	1    2850 13450
 	1    0    0    -1  
 $EndComp
@@ -1237,8 +1455,8 @@ $Comp
 L R R?
 U 1 1 4421C5A9
 P 2600 13450
-F 0 "R?" V 2680 13450 50  0000 C C
-F 1 "10K" V 2600 13450 50  0000 C C
+F 0 "R?" V 2500 13350 50  0000 C C
+F 1 "10K" V 2500 13550 50  0000 C C
 	1    2600 13450
 	1    0    0    -1  
 $EndComp
@@ -1246,8 +1464,8 @@ $Comp
 L R R?
 U 1 1 4421C5A5
 P 2350 13450
-F 0 "R?" V 2430 13450 50  0000 C C
-F 1 "10K" V 2350 13450 50  0000 C C
+F 0 "R?" V 2250 13350 50  0000 C C
+F 1 "10K" V 2250 13550 50  0000 C C
 	1    2350 13450
 	1    0    0    -1  
 $EndComp
@@ -1674,8 +1892,8 @@ $Comp
 L R R?
 U 1 1 4421AA1C
 P 3100 6500
-F 0 "R?" V 3180 6500 50  0000 C C
-F 1 "2.2K" V 3100 6500 50  0000 C C
+F 0 "R?" V 3200 6400 50  0000 C C
+F 1 "2.2K" V 3200 6600 50  0000 C C
 	1    3100 6500
 	1    0    0    -1  
 $EndComp
@@ -1683,8 +1901,8 @@ $Comp
 L R R?
 U 1 1 4421AA15
 P 2900 6500
-F 0 "R?" V 2980 6500 50  0000 C C
-F 1 "2.2K" V 2900 6500 50  0000 C C
+F 0 "R?" V 2800 6400 50  0000 C C
+F 1 "2.2K" V 2800 6600 50  0000 C C
 	1    2900 6500
 	1    0    0    -1  
 $EndComp
@@ -1817,10 +2035,6 @@ F 1 "AGND" H 4100 8080 50  0000 C C
 	1    4100 8150
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	900  5350 900  5450
-Wire Wire Line
-	1900 5350 1900 5450
 $Comp
 L DGND #PWR?
 U 1 1 4421A48D
@@ -1840,11 +2054,7 @@ F 1 "DGND" H 900 5380 40  0000 C C
 	1    0    0    -1  
 $EndComp
 Connection ~ 1900 4850
-Wire Wire Line
-	1900 4950 1900 4450
 Connection ~ 900  4850
-Wire Wire Line
-	900  4950 900  4350
 $Comp
 L C C?
 U 1 1 4421A477
@@ -1863,10 +2073,6 @@ F 1 "12p" H 950 5050 50  0000 L C
 	1    900  5150
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1700 4850 1900 4850
-Wire Wire Line
-	900  4850 1100 4850
 $Comp
 L CRYSTAL X?
 U 1 1 4421A3E2
@@ -1938,8 +2144,6 @@ Wire Wire Line
 	1550 13800 1700 13800
 Text GLabel 1550 13800 0    60   Input
 /RESET
-Wire Wire Line
-	1700 14400 1700 14300
 $Comp
 L DGND #PWR?
 U 1 1 4421A1DE
@@ -1958,8 +2162,6 @@ F 1 "VDD" H 1700 13010 30  0000 C C
 	1    1700 12900
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1700 13900 1700 13700
 $Comp
 L C C?
 U 1 1 4421A164
@@ -1973,8 +2175,8 @@ $Comp
 L R R?
 U 1 1 4421A152
 P 1700 13450
-F 0 "R?" V 1780 13450 50  0000 C C
-F 1 "100K" V 1700 13450 50  0000 C C
+F 0 "R?" V 1600 13350 50  0000 C C
+F 1 "100K" V 1600 13550 50  0000 C C
 	1    1700 13450
 	1    0    0    -1  
 $EndComp
