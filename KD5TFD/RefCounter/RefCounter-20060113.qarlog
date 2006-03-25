@@ -1,0 +1,65 @@
+Quartus II Archive log --	E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter-20060113.qarlog
+
+Archive:	E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter-20060113.qar
+Date:		Fri Jan 13 08:48:28 2006
+Quartus II		5.1 Build 176 10/26/2005 SJ Web Edition
+
+	=========== Files Selected: ===========
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/CounterToFifo.v
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCount.v
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.asm.rpt
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.done
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.dpf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.fit.eqn
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.fit.rpt
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.fit.summary
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.fld
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.flow.rpt
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.map.eqn
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.map.rpt
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.map.summary
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.pin
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.pof
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.qsf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.qws
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.rbf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.sim.rpt
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.sof
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.tan.rpt
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.tan.summary
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.v
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/RefCounter.vwf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/RefCounter.cbx.xml
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/RefCounter.qpf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/RefCounter.sim.vwf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/a_gray2bin_n4b.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/a_graycounter_g06.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/a_graycounter_h06.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/add_sub_dub.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/alt_synch_pipe_lc8.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/alt_synch_pipe_mc8.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/altsyncram_h0v.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/altsyncram_nf71.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/altsyncram_tn71.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/cmpr_33g.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/cntr_e0b.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/cntr_su7.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/dcfifo_ui41.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/dffpipe_fd9.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/dffpipe_gd9.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/db/mux_afc.tdf
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/dc_fifo.v
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/dc_fifo_bb.v
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/procdata.c
+E:/wjt/radio/projects/Xylo/wjtProjects/RefCounter/usb_pipe.v
+g:/altera/quartus51/bin/assignment_defaults.qdf
+talkback/RefCounter.asm.talkback.xml
+talkback/RefCounter.fit.talkback.xml
+talkback/RefCounter.map.talkback.xml
+talkback/RefCounter.rpp.talkback.xml
+talkback/RefCounter.sim.talkback.xml
+talkback/RefCounter.tan.talkback.xml
+	======= Total: 54 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

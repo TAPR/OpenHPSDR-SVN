@@ -1,0 +1,2209 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+
+/*
+Copyright (C) 1991-2005 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+
+HEADER
+{
+	VERSION = 1;
+	TIME_UNIT = ns;
+	SIMULATION_TIME = 0.0;
+	GRID_PHASE = 0.0;
+	GRID_PERIOD = 10.0;
+	GRID_DUTY_CYCLE = 50;
+}
+
+SIGNAL("FX2_CLK")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("one_pps_i")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("last_fx2_1_pps_count_status")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "";
+}
+
+SIGNAL("counter_to_fifo_strobe")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "";
+}
+
+SIGNAL("sernum")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 16;
+	LSB_INDEX = 0;
+	DIRECTION = REGISTERED;
+	PARENT = "";
+}
+
+SIGNAL("sernum[15]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[14]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[13]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[12]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[11]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[10]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[9]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[8]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[7]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[6]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[5]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[4]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sernum[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "sernum";
+}
+
+SIGNAL("sync_fifo_data_avail")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "";
+}
+
+SIGNAL("fx2_usb_pipe:usb_pipe|data_avail_i")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "";
+}
+
+SIGNAL("FX2_flags[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("fx2_1_pps_count_local")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 32;
+	LSB_INDEX = 0;
+	DIRECTION = REGISTERED;
+	PARENT = "";
+}
+
+SIGNAL("fx2_1_pps_count_local[31]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[30]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[29]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[28]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[27]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[26]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[25]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[24]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[23]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[22]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[21]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[20]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[19]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[18]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[17]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[16]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[15]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[14]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[13]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[12]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[11]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[10]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[9]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[8]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[7]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[6]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[5]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[4]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_1_pps_count_local[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "fx2_1_pps_count_local";
+}
+
+SIGNAL("fx2_usb_pipe:usb_pipe|data_i")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 8;
+	LSB_INDEX = 0;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "";
+}
+
+SIGNAL("fx2_usb_pipe:usb_pipe|data_i[7]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "fx2_usb_pipe:usb_pipe|data_i";
+}
+
+SIGNAL("fx2_usb_pipe:usb_pipe|data_i[6]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "fx2_usb_pipe:usb_pipe|data_i";
+}
+
+SIGNAL("fx2_usb_pipe:usb_pipe|data_i[5]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "fx2_usb_pipe:usb_pipe|data_i";
+}
+
+SIGNAL("fx2_usb_pipe:usb_pipe|data_i[4]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "fx2_usb_pipe:usb_pipe|data_i";
+}
+
+SIGNAL("fx2_usb_pipe:usb_pipe|data_i[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "fx2_usb_pipe:usb_pipe|data_i";
+}
+
+SIGNAL("fx2_usb_pipe:usb_pipe|data_i[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "fx2_usb_pipe:usb_pipe|data_i";
+}
+
+SIGNAL("fx2_usb_pipe:usb_pipe|data_i[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "fx2_usb_pipe:usb_pipe|data_i";
+}
+
+SIGNAL("fx2_usb_pipe:usb_pipe|data_i[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "fx2_usb_pipe:usb_pipe|data_i";
+}
+
+SIGNAL("sync_fifo_in")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 8;
+	LSB_INDEX = 0;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "";
+}
+
+SIGNAL("sync_fifo_in[7]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "sync_fifo_in";
+}
+
+SIGNAL("sync_fifo_in[6]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "sync_fifo_in";
+}
+
+SIGNAL("sync_fifo_in[5]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "sync_fifo_in";
+}
+
+SIGNAL("sync_fifo_in[4]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "sync_fifo_in";
+}
+
+SIGNAL("sync_fifo_in[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "sync_fifo_in";
+}
+
+SIGNAL("sync_fifo_in[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "sync_fifo_in";
+}
+
+SIGNAL("sync_fifo_in[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "sync_fifo_in";
+}
+
+SIGNAL("sync_fifo_in[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "sync_fifo_in";
+}
+
+SIGNAL("sync_fifo_write_strobe")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = COMBINATORIAL;
+	PARENT = "";
+}
+
+TRANSITION_LIST("FX2_CLK")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 24000;
+			LEVEL 0 FOR 20.833;
+			LEVEL 1 FOR 20.833;
+		}
+		LEVEL 0 FOR 16.0;
+	}
+}
+
+TRANSITION_LIST("one_pps_i")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 10;
+			LEVEL 0 FOR 50000.0;
+			LEVEL 1 FOR 50000.0;
+		}
+	}
+}
+
+TRANSITION_LIST("last_fx2_1_pps_count_status")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("counter_to_fifo_strobe")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[15]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[14]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[13]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[12]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[11]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[10]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[9]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[8]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[7]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[6]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[5]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[4]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sernum[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sync_fifo_data_avail")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_usb_pipe:usb_pipe|data_avail_i")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("FX2_flags[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 1 FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[31]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[30]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[29]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[28]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[27]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[26]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[25]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[24]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[23]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[22]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[21]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[20]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[19]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[18]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[17]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[16]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[15]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[14]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[13]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[12]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[11]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[10]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[9]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[8]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[7]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[6]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[5]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[4]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_1_pps_count_local[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_usb_pipe:usb_pipe|data_i[7]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_usb_pipe:usb_pipe|data_i[6]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_usb_pipe:usb_pipe|data_i[5]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_usb_pipe:usb_pipe|data_i[4]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_usb_pipe:usb_pipe|data_i[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_usb_pipe:usb_pipe|data_i[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_usb_pipe:usb_pipe|data_i[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("fx2_usb_pipe:usb_pipe|data_i[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sync_fifo_in[7]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sync_fifo_in[6]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sync_fifo_in[5]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sync_fifo_in[4]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sync_fifo_in[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sync_fifo_in[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sync_fifo_in[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sync_fifo_in[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+TRANSITION_LIST("sync_fifo_write_strobe")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000000.0;
+	}
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "FX2_CLK";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 0;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "one_pps_i";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 1;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "last_fx2_1_pps_count_status";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 2;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "counter_to_fifo_strobe";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 3;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 4;
+	TREE_LEVEL = 0;
+	CHILDREN = 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[15]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 5;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[14]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 6;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[13]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 7;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[12]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 8;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[11]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 9;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[10]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 10;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[9]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 11;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[8]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 12;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[7]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 13;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[6]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 14;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[5]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 15;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[4]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 16;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[3]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 17;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 18;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 19;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sernum[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 20;
+	TREE_LEVEL = 1;
+	PARENT = 4;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sync_fifo_data_avail";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 21;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_usb_pipe:usb_pipe|data_avail_i";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 22;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "FX2_flags[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 23;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 24;
+	TREE_LEVEL = 0;
+	CHILDREN = 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[31]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 25;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[30]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 26;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[29]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 27;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[28]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 28;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[27]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 29;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[26]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 30;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[25]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 31;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[24]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 32;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[23]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 33;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[22]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 34;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[21]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 35;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[20]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 36;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[19]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 37;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[18]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 38;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[17]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 39;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[16]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 40;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[15]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 41;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[14]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 42;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[13]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 43;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[12]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 44;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[11]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 45;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[10]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 46;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[9]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 47;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[8]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 48;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[7]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 49;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[6]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 50;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[5]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 51;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[4]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 52;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[3]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 53;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 54;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 55;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_1_pps_count_local[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 56;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_usb_pipe:usb_pipe|data_i";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 57;
+	TREE_LEVEL = 0;
+	CHILDREN = 58, 59, 60, 61, 62, 63, 64, 65;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_usb_pipe:usb_pipe|data_i[7]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 58;
+	TREE_LEVEL = 1;
+	PARENT = 57;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_usb_pipe:usb_pipe|data_i[6]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 59;
+	TREE_LEVEL = 1;
+	PARENT = 57;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_usb_pipe:usb_pipe|data_i[5]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 60;
+	TREE_LEVEL = 1;
+	PARENT = 57;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_usb_pipe:usb_pipe|data_i[4]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 61;
+	TREE_LEVEL = 1;
+	PARENT = 57;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_usb_pipe:usb_pipe|data_i[3]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 62;
+	TREE_LEVEL = 1;
+	PARENT = 57;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_usb_pipe:usb_pipe|data_i[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 63;
+	TREE_LEVEL = 1;
+	PARENT = 57;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_usb_pipe:usb_pipe|data_i[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 64;
+	TREE_LEVEL = 1;
+	PARENT = 57;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "fx2_usb_pipe:usb_pipe|data_i[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 65;
+	TREE_LEVEL = 1;
+	PARENT = 57;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sync_fifo_in";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 66;
+	TREE_LEVEL = 0;
+	CHILDREN = 67, 68, 69, 70, 71, 72, 73, 74;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sync_fifo_in[7]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 67;
+	TREE_LEVEL = 1;
+	PARENT = 66;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sync_fifo_in[6]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 68;
+	TREE_LEVEL = 1;
+	PARENT = 66;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sync_fifo_in[5]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 69;
+	TREE_LEVEL = 1;
+	PARENT = 66;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sync_fifo_in[4]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 70;
+	TREE_LEVEL = 1;
+	PARENT = 66;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sync_fifo_in[3]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 71;
+	TREE_LEVEL = 1;
+	PARENT = 66;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sync_fifo_in[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 72;
+	TREE_LEVEL = 1;
+	PARENT = 66;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sync_fifo_in[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 73;
+	TREE_LEVEL = 1;
+	PARENT = 66;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sync_fifo_in[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 74;
+	TREE_LEVEL = 1;
+	PARENT = 66;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "sync_fifo_write_strobe";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 75;
+	TREE_LEVEL = 0;
+}
+
+TIME_BAR
+{
+	TIME = 21650;
+	MASTER = TRUE;
+}
+;

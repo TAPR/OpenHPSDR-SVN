@@ -1,0 +1,10 @@
+atlasL1.pho - Top component side, layer 1
+atlasL2.pho - Inner signal, layer 2
+atlasL3.pho - Inner power mixed, layer 3
+atlasL4.pho - Bottom signal, layer 4
+atlasDDG.pho - Drill drawing
+atlasTSK.pho - Top silkscreen
+atlasTSM.pho - Top soldermask
+atlasBSM.pho - Bottom soldermask
+atlasASY.pho - Top assembly drawing w/ board outline
+atlasNCD.drl - NC drill file
