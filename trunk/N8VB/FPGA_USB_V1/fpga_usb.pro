@@ -1,4 +1,4 @@
-update=29/3/2006-20:05:01
+update=30/3/2006-00:25:48
 last_client=eeschema
 [general]
 version=1
@@ -38,8 +38,8 @@ PenMin=20
 SimCmd=
 UseNetN=0
 [eeschema/libraries]
-LibName1=E:/HPSDR/trunk/N8VB/KICAD/Libraries/HPSDR
-LibName2=power
+LibName1=power
+LibName2=HPSDR
 LibName3=device
 LibName4=conn
 LibName5=linear
