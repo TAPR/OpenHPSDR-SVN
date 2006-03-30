@@ -1,5 +1,5 @@
 EESchema Schematic File Version 1
-LIBS:E:/HPSDR/trunk/N8VB/KICAD/Libraries/HPSDR,power,device,conn,linear,regul,74xx,cmos4000,adc-dac,memory,xilinx,special,microcontrollers,microchip,analog_switches,motorola,intel,audio,interface,digital-audio,philips,display,cypress,siliconi,contrib,.\fpga_usb.cache
+LIBS:HPSDR,power,device,conn,linear,regul,74xx,cmos4000,adc-dac,memory,xilinx,special,microcontrollers,microchip,analog_switches,motorola,intel,audio,interface,digital-audio,philips,display,cypress,siliconi,contrib,.\fpga_usb.cache
 EELAYER 23  0
 EELAYER END
 $Descr C 22000 16000
