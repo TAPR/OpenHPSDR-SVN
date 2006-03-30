@@ -13,6 +13,112 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Wire Wire Line
+	3150 1000 2200 1000
+Wire Wire Line
+	2900 1250 3150 1250
+$Comp
+L LED D?
+U 1 1 442C275F
+P 2700 1250
+F 0 "D?" H 2700 1350 50  0000 C C
+F 1 "LED" H 2700 1150 50  0000 C C
+	1    2700 1250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	18500 8450 18100 8450
+Wire Wire Line
+	18200 8300 18500 8300
+Connection ~ 17700 8900
+Wire Wire Line
+	18500 8900 17700 8900
+Connection ~ 17900 8750
+Wire Wire Line
+	18500 8750 17900 8750
+Connection ~ 18000 8600
+Wire Wire Line
+	18500 8600 18000 8600
+Text GLabel 18500 8900 2    60   BiDi
+FX2_T2
+Text GLabel 18500 8750 2    60   BiDi
+FX2_T1
+Text GLabel 18500 8600 2    60   BiDi
+FX2_T0
+Connection ~ 18100 8450
+Connection ~ 18200 8300
+Text Notes 16250 12550 0    60   ~
+OPTIONAL ADDITIONAL I/O
+Text Notes 16250 11750 0    60   ~
+OPTIONAL EXTERNAL CLOCKS
+Wire Wire Line
+	16300 12400 16600 12400
+Wire Wire Line
+	16600 12300 16300 12300
+Wire Wire Line
+	16300 12200 16600 12200
+Wire Wire Line
+	16600 12100 16300 12100
+Text GLabel 16600 12400 2    60   BiDi
+FX2_RDY5
+Text GLabel 16600 12300 2    60   BiDi
+FX2_RDY4
+Text GLabel 16600 12100 2    60   BiDi
+FX2_RDY2
+Text GLabel 16600 12200 2    60   BiDi
+FX2_RDY3
+$Comp
+L CONN_4_1 J?
+U 1 1 442C230E
+P 16000 12100
+F 0 "J?" H 16050 12250 60  0000 C C
+F 1 "CONN_4_1" H 16050 11650 60  0000 C C
+	1    16000 12100
+	-1   0    0    -1  
+$EndComp
+Text GLabel 18500 8450 2    60   BiDi
+FX2_SCL
+Text GLabel 18500 8300 2    60   BiDi
+FX2_SDA
+Text GLabel 3200 7300 2    60   BiDi
+FX2_SCL
+Text GLabel 3200 7150 2    60   BiDi
+FX2_SDA
+Wire Wire Line
+	2900 7300 3200 7300
+Wire Wire Line
+	2900 6750 2900 7300
+Wire Wire Line
+	3100 7150 3200 7150
+Wire Wire Line
+	3100 6750 3100 7150
+Text Notes 10250 8450 0    60   ~
+SERIAL DATA
+Wire Wire Line
+	9750 8550 9250 8550
+Wire Wire Line
+	9250 8450 9750 8450
+Wire Wire Line
+	9750 8350 9250 8350
+Wire Wire Line
+	9250 8250 9750 8250
+Text GLabel 9250 8550 0    60   BiDi
+FX2_RxD1
+Text GLabel 9250 8450 0    60   BiDi
+FX2_TxD1
+Text GLabel 9250 8350 0    60   BiDi
+FX2_RxD0
+Text GLabel 9250 8250 0    60   BiDi
+FX2_TxD0
+$Comp
+L CONN_4_1 J?
+U 1 1 442C1EED
+P 10050 8250
+F 0 "J?" H 10100 8400 60  0000 C C
+F 1 "CONN_4_1" H 10100 7800 60  0000 C C
+	1    10050 8250
+	1    0    0    -1  
+$EndComp
 Text Notes 6450 12950 0    60   ~
 MODE SELECT
 Text Notes 6450 12850 0    60   ~
@@ -22,20 +128,20 @@ OPTIONAL XTAL OSC #2
 Text Notes 5350 15400 0    60   ~
 OPTIONAL XTAL OSC #1
 Wire Wire Line
-	16550 11550 16250 11550
+	16600 11600 16300 11600
 Wire Wire Line
-	16250 11450 16550 11450
-Text GLabel 16550 11550 2    60   Output
+	16300 11500 16600 11500
+Text GLabel 16600 11600 2    60   Output
 FPGA_CLK7IN
-Text GLabel 16550 11450 2    60   Output
+Text GLabel 16600 11500 2    60   Output
 FPGA_CLK6IN
 $Comp
 L CONN_2_1 J?
 U 1 1 442C0F21
-P 15950 11350
-F 0 "J?" H 16000 11400 60  0000 C C
-F 1 "CONN_2_1" H 16050 11000 60  0000 C C
-	1    15950 11350
+P 16000 11400
+F 0 "J?" H 16050 11450 60  0000 C C
+F 1 "CONN_2_1" H 16100 11050 60  0000 C C
+	1    16000 11400
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
@@ -315,7 +421,7 @@ F 1 "XTAL_OSC_GEN" H 5700 14250 60  0000 C C
 $EndComp
 Text GLabel 11600 2850 0    60   BiDi
 FX2_PC6
-Text GLabel 2500 1250 2    60   BiDi
+Text GLabel 3150 1250 2    60   BiDi
 INIT_DONE
 Wire Wire Line
 	2200 1250 2500 1250
@@ -329,12 +435,10 @@ L R R?
 U 1 1 442B017F
 P 1950 1250
 F 0 "R?" V 2030 1250 50  0000 C C
-F 1 "10K" V 1950 1250 50  0000 C C
+F 1 "1K" V 1950 1250 50  0000 C C
 	1    1950 1250
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	2200 1000 2500 1000
 Connection ~ 1300 1000
 Wire Wire Line
 	1700 1000 1300 1000
@@ -1688,13 +1792,13 @@ FX2_PE1
 Text GLabel 11600 6150 0    60   BiDi
 FX2_PE0
 Text GLabel 11600 6050 0    60   BiDi
-RDY5
+FX2_RDY5
 Text GLabel 11600 5950 0    60   BiDi
-RDY4
+FX2_RDY4
 Text GLabel 11600 5850 0    60   BiDi
-RDY3
+FX2_RDY3
 Text GLabel 11600 5750 0    60   BiDi
-RDY2
+FX2_RDY2
 Text GLabel 11600 5650 0    60   BiDi
 RDY1/SLWR
 Text GLabel 11600 5550 0    60   BiDi
@@ -2683,7 +2787,7 @@ Wire Wire Line
 	2150 10850 2300 10850
 Wire Wire Line
 	2300 10050 2150 10050
-Text GLabel 2500 1000 2    60   BiDi
+Text GLabel 3150 1000 2    60   BiDi
 nStatus
 Wire Wire Line
 	11800 3450 12250 3450
@@ -2942,11 +3046,11 @@ Wire Wire Line
 Wire Wire Line
 	6000 7450 6000 8100
 Text GLabel 3950 6350 0    60   Output
-T2
+FX2_T2
 Text GLabel 3950 6250 0    60   Output
-T1
+FX2_T1
 Text GLabel 3950 6150 0    60   Output
-T0
+FX2_T0
 Wire Wire Line
 	4700 6350 3950 6350
 Wire Wire Line
@@ -3001,13 +3105,13 @@ Wire Wire Line
 Wire Wire Line
 	4700 4350 900  4350
 Text GLabel 3500 4150 0    60   Input
-RDY5
+FX2_RDY5
 Text GLabel 3500 4050 0    60   Input
-RDY4
+FX2_RDY4
 Text GLabel 3500 3950 0    60   Input
-RDY3
+FX2_RDY3
 Text GLabel 3500 3850 0    60   Input
-RDY2
+FX2_RDY2
 Text GLabel 3500 3750 0    60   Input
 RDY1/SLWR
 Text GLabel 3500 3650 0    60   Input
@@ -3052,11 +3156,7 @@ Wire Wire Line
 Wire Wire Line
 	2900 6150 3100 6150
 Connection ~ 3100 6950
-Wire Wire Line
-	3100 6750 3100 6950
 Connection ~ 2900 6850
-Wire Wire Line
-	2900 6750 2900 6850
 $Comp
 L R R?
 U 1 1 4421AA1C
