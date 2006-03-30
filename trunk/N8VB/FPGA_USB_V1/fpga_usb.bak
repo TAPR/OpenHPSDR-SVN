@@ -13,6 +13,47 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Text GLabel 11600 2850 0    60   BiDi
+FX2_PC7
+Text GLabel 2500 1250 2    60   BiDi
+INIT_DONE
+Wire Wire Line
+	2200 1250 2500 1250
+Connection ~ 1550 1000
+Wire Wire Line
+	1550 1250 1550 1000
+Wire Wire Line
+	1700 1250 1550 1250
+$Comp
+L R R?
+U 1 1 442B017F
+P 1950 1250
+F 0 "R?" V 2030 1250 50  0000 C C
+F 1 "10K" V 1950 1250 50  0000 C C
+	1    1950 1250
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2200 1000 2500 1000
+Connection ~ 1300 1000
+Wire Wire Line
+	1700 1000 1300 1000
+Wire Wire Line
+	5250 12050 6600 12050
+Wire Wire Line
+	5250 11650 5250 12050
+Connection ~ 5250 10650
+Wire Wire Line
+	5250 11150 5250 10650
+$Comp
+L R R?
+U 1 1 442B011B
+P 5250 11400
+F 0 "R?" V 5150 11400 50  0000 C C
+F 1 "10K" V 5250 11400 50  0000 C C
+	1    5250 11400
+	1    0    0    -1  
+$EndComp
 Text Notes 12550 9850 0    60   ~
 ATLAS BUS
 Wire Notes Line
@@ -245,18 +286,14 @@ F 1 "100K" V 1300 1400 50  0000 C C
 	1    1300 1400
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1850 1650 1850 1750
-Wire Wire Line
-	1850 1150 1850 1000
 $Comp
 L R R?
 U 1 1 442AD1CA
-P 1850 1400
-F 0 "R?" V 1930 1400 50  0000 C C
-F 1 "10K" V 1850 1400 50  0000 C C
-	1    1850 1400
-	1    0    0    -1  
+P 1950 1000
+F 0 "R?" V 2030 1000 50  0000 C C
+F 1 "10K" V 1950 1000 50  0000 C C
+	1    1950 1000
+	0    -1   -1   0   
 $EndComp
 Connection ~ 900  4850
 Wire Wire Line
@@ -360,8 +397,6 @@ Connection ~ 5700 10150
 Wire Wire Line
 	5700 10150 5700 12300
 Connection ~ 6300 12050
-Wire Wire Line
-	6600 12050 6300 12050
 Connection ~ 7900 11750
 Wire Wire Line
 	7900 11850 7900 11500
@@ -414,7 +449,7 @@ $Comp
 L R R?
 U 1 1 442AA3EF
 P 5600 9700
-F 0 "R?" V 5500 9500 60  0000 C C
+F 0 "R?" V 5500 9700 60  0000 C C
 F 1 "10K" V 5600 9700 60  0000 C C
 	1    5600 9700
 	1    0    0    -1  
@@ -423,7 +458,7 @@ $Comp
 L R R?
 U 1 1 442AA3E4
 P 5250 9700
-F 0 "R?" V 5150 9500 60  0000 C C
+F 0 "R?" V 5150 9700 60  0000 C C
 F 1 "10K" V 5250 9700 60  0000 C C
 	1    5250 9700
 	1    0    0    -1  
@@ -1384,7 +1419,7 @@ RDY1/SLWR
 Text GLabel 11600 5550 0    60   BiDi
 RDY0/SLRD
 Text GLabel 13800 1500 3    60   BiDi
-FX2_PC0
+FX2_PC6
 Text GLabel 13900 1500 3    60   Output
 FX2_INT5
 Text GLabel 14000 1500 3    60   Output
@@ -2367,13 +2402,8 @@ Wire Wire Line
 	2450 11050 2600 11050
 Wire Wire Line
 	2600 10250 2450 10250
-Text GLabel 2000 1750 2    60   BiDi
+Text GLabel 2500 1000 2    60   BiDi
 nStatus
-Wire Wire Line
-	1850 1750 2000 1750
-Connection ~ 1300 1000
-Wire Wire Line
-	1850 1000 1300 1000
 Wire Wire Line
 	11800 3450 12250 3450
 $Comp
@@ -2532,20 +2562,20 @@ Wire Wire Line
 	8800 5350 9500 5350
 Text GLabel 9500 5650 2    60   BiDi
 FX2_PC7
-Text GLabel 9500 5750 2    60   BiDi
-nCE
 Text GLabel 9500 5850 2    60   BiDi
-nSTATUS
+nCE
 Text GLabel 9500 5950 2    60   BiDi
-CONFIG_DONE
+nSTATUS
 Text GLabel 9500 6050 2    60   BiDi
-DCLK
+CONFIG_DONE
 Text GLabel 9500 6150 2    60   BiDi
-nCONFIG
+DCLK
 Text GLabel 9500 6250 2    60   BiDi
-DATA0
+nCONFIG
 Text GLabel 9500 6350 2    60   BiDi
-FX2_PC0
+DATA0
+Text GLabel 9500 5750 2    60   BiDi
+FX2_PC6
 Text GLabel 9500 6450 2    60   BiDi
 FX2_CTL2/FLAGC
 Text GLabel 9500 6550 2    60   BiDi
