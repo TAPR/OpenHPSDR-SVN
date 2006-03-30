@@ -1,0 +1,193 @@
+                              1 ;/*
+                              2 ; * Copyright (c) 2005 Philip A Covington, N8VB
+                              3 ; *
+                              4 ; * This program is free software; you can redistribute it and/or modify
+                              5 ; * it under the terms of the GNU General Public License as published by
+                              6 ; * the Free Software Foundation; either version 2 of the License, or
+                              7 ; * (at your option) any later version.
+                              8 ; *
+                              9 ; * This program is distributed in the hope that it will be useful,
+                             10 ; * but WITHOUT ANY WARRANTY; without even the implied warranty of
+                             11 ; * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                             12 ; * GNU General Public License for more details.
+                             13 ; *
+                             14 ; * You should have received a copy of the GNU General Public License
+                             15 ; * along with this program; if not, write to the Free Software
+                             16 ; * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+                             17 ; *
+                             18 ; */
+                             19 
+                             20 ; Descriptor table for HPSDR_FPGA_USB_VER1
+                             21 
+                             22 .module dscr
+                             23    
+                    0001     24 DSCR_DEVICE   		=   1   ; Descriptor type: Device
+                    0002     25 DSCR_CONFIG   		=   2   ; Descriptor type: Configuration
+                    0003     26 DSCR_STRING   		=   3   ; Descriptor type: String
+                    0004     27 DSCR_INTRFC   		=   4   ; Descriptor type: Interface
+                    0005     28 DSCR_ENDPNT   		=   5   ; Descriptor type: Endpoint
+                    0006     29 DSCR_DEVQUAL  		=   6   ; Descriptor type: Device Qualifier
+                             30 
+                    0012     31 DSCR_DEVICE_LEN		=   18
+                    0009     32 DSCR_CONFIG_LEN 	=    9
+                    0009     33 DSCR_INTRFC_LEN 	=    9
+                    0007     34 DSCR_ENDPNT_LEN 	=    7
+                    000A     35 DSCR_DEVQUAL_LEN	=   10
+                             36 
+                    0000     37 ET_CONTROL   		=   0   ; Endpoint type: Control
+                    0001     38 ET_ISO       		=   1   ; Endpoint type: Isochronous
+                    0002     39 ET_BULK      		=   2   ; Endpoint type: Bulk
+                    0003     40 ET_INT       		=   3   ; Endpoint type: Interrupt
+                             41 
+                    04B4     42 VEND_ID	     		=   0x04b4
+                    1005     43 PROD_ID      		=   0x1005
+                             44 
+                             45 ; Note we need to tell the linker where to start the descriptor
+                             46 ; table.  Use asx8051 -plosgff dscr.asm
+                             47 ; Then compile like this: 
+                             48 ; sdcc --code-loc 0x0200 --code-size 0x2200 --xram-loc 0x2200 --xram-size 0x1800 -Wl -bDESCR_SEG=0xE000
+                             49 ; -Wl -bVECT=0x0000 HPSDR_firmware_1_0_0.rel dscr.rel vectors.rel
+                             50 ; to start code at 0x0200, VECT at 0x0000 in code, and DESCR_SEG at 0xE000 in code
+                             51 
+                             52 .area DESCR_SEG	(XDATA)
+                             53 
+                             54 ; Tell linker 2-byte align the table, otherwise SUDPTRL:H won't work.
+   0000                      55 .even
+   0000                      56 _DeviceDscr::   
+   0000 12                   57 	.db   DSCR_DEVICE_LEN	; Descriptor length
+   0001 01                   58 	.db   DSCR_DEVICE   	; Decriptor type
+   0002 02                   59 	.db   0x02		; Specification Version LSB
+   0003 00                   60 	.db   0x00		; Specification Version MSB
+   0004 00                   61         .db   0x00        	; Device class
+   0005 00                   62 	.db   0x00         	; Device sub-class
+   0006 00                   63 	.db   0x00         	; Device sub-sub-class
+   0007 40                   64 	.db   0x40		; Maximum packet size
+   0008 B4                   65 	.db   <VEND_ID  	; Vendor ID LSB
+   0009 04                   66 	.db   >VEND_ID  	; Vendor ID MSB
+   000A 05                   67 	.db   <PROD_ID		; Product ID LSB
+   000B 10                   68 	.db   >PROD_ID		; Product ID MSB
+   000C 01                   69 	.db   0x01		; Product version LSB
+   000D 00                   70 	.db   0x00		; Product version MSB
+   000E 01                   71 	.db   0x01      	; Manufacturer string index
+   000F 02                   72 	.db   0x02         	; Product string index
+   0010 00                   73 	.db   0x00         	; Serial number string index
+   0011 01                   74 	.db   0x01         	; Number of configurations
+                             75 
+   0012                      76 .even
+   0012                      77 _DeviceQualDscr::
+   0012 0A                   78 	.db   DSCR_DEVQUAL_LEN  ; Descriptor length
+   0013 06                   79 	.db   DSCR_DEVQUAL   	; Decriptor type
+   0014 02                   80 	.db   0x02		; Specification Version LSB
+   0015 00                   81 	.db   0x00		; Specification Version MSB
+   0016 00                   82 	.db   0x00        	; Device class
+   0017 00                   83 	.db   0x00         	; Device sub-class
+   0018 00                   84 	.db   0x00         	; Device sub-sub-class
+   0019 40                   85 	.db   0x40   		; Maximum packet size
+   001A 01                   86 	.db   0x01      	; Number of configurations
+   001B 00                   87 	.db   0x00      	; Reserved
+                             88 
+   001C                      89 .even
+   001C                      90 _HighSpeedConfigDscr::
+   001C                      91 _FullSpeedConfigDscr::  
+   001C 09                   92 	.db   DSCR_CONFIG_LEN   ; Descriptor length
+   001D 02                   93 	.db   DSCR_CONFIG       ; Descriptor type
+   001E 20                   94 	.db   <(_HighSpeedConfigDscrEnd-_HighSpeedConfigDscr) ;; Total Length (LSB)
+   001F 00                   95 	.db   >(_HighSpeedConfigDscrEnd-_HighSpeedConfigDscr) ;; Total Length (MSB)
+   0020 01                   96 	.db   0x01      	; Number of interfaces
+   0021 01                   97 	.db   0x01      	; Configuration number
+   0022 00                   98 	.db   0x00      	; Configuration string
+   0023 A0                   99 	.db   0xA0   		; Attributes (b7 - buspwr, b6 - selfpwr, b5 - rwu)
+   0024 32                  100 	.db   50      		; Power requirement (div 2 ma)
+                            101 
+                            102 ; Interface Descriptor
+   0025 09                  103 	.db   DSCR_INTRFC_LEN   ; Descriptor length
+   0026 04                  104 	.db   DSCR_INTRFC       ; Descriptor type
+   0027 00                  105 	.db   0x00              ; Zero-based index of this interface
+   0028 00                  106 	.db   0x00              ; Alternate setting
+   0029 02                  107 	.db   0x02              ; Number of end points 
+   002A FF                  108 	.db   0xff            	; Interface class
+   002B 00                  109 	.db   0x00              ; Interface sub class
+   002C 00                  110 	.db   0x00              ; Interface sub sub class
+   002D 00                  111 	.db   0x00              ; Interface descriptor string index
+                            112       
+                            113 ; Endpoint Descriptor
+   002E 07                  114 	.db   DSCR_ENDPNT_LEN   ; Descriptor length
+   002F 05                  115 	.db   DSCR_ENDPNT       ; Descriptor type
+   0030 01                  116 	.db   0x01              ; Endpoint number, and direction
+   0031 02                  117 	.db   ET_BULK           ; Endpoint type
+   0032 40                  118 	.db   0x40              ; Maximun packet size LSB
+   0033 00                  119 	.db   0x00              ; Max packect size MSB
+   0034 00                  120 	.db   0x00              ; Polling interval
+                            121 
+                            122 ; Endpoint Descriptor
+   0035 07                  123 	.db   DSCR_ENDPNT_LEN   ; Descriptor length
+   0036 05                  124 	.db   DSCR_ENDPNT       ; Descriptor type
+   0037 81                  125 	.db   0x81              ; Endpoint number, and direction
+   0038 02                  126 	.db   ET_BULK           ; Endpoint type
+   0039 40                  127 	.db   0x40              ; Maximun packet size LSB
+   003A 00                  128 	.db   0x00              ; Max packect size MSB
+   003B 00                  129 	.db   0x00              ; Polling interval
+                            130 
+   003C                     131 _HighSpeedConfigDscrEnd:   
+                            132 
+   003C                     133 .even
+   003C                     134 _StringDscr::
+   003C                     135 _StringDscr0::   
+   003C 04                  136 	.db   _StringDscr0End-_StringDscr0      ; String descriptor length
+   003D 03                  137 	.db   DSCR_STRING
+   003E 02                  138 	.db   0x02
+   003F 00                  139 	.db   0x00
+   0040                     140 _StringDscr0End:
+                            141 
+   0040                     142 .even
+   0040                     143 _StringDscr1::   
+   0040 0C                  144 	.db   _StringDscr1End-_StringDscr1      ; String descriptor length
+   0041 03                  145 	.db   DSCR_STRING
+   0042 48                  146 	.db   'H
+   0043 00                  147 	.db   0x00
+   0044 50                  148 	.db   'P
+   0045 00                  149 	.db   0x00
+   0046 53                  150 	.db   'S
+   0047 00                  151 	.db   0x00
+   0048 44                  152 	.db   'D
+   0049 00                  153 	.db   0x00
+   004A 52                  154 	.db   'R
+   004B 00                  155 	.db   0x00
+   004C                     156 _StringDscr1End:
+                            157 
+   004C                     158 .even
+   004C                     159 _StringDscr2::   
+   004C 1C                  160 	.db   _StringDscr2End-_StringDscr2      ; Descriptor length
+   004D 03                  161 	.db   DSCR_STRING
+   004E 46                  162 	.db   'F
+   004F 00                  163 	.db   0x00
+   0050 50                  164 	.db   'P
+   0051 00                  165 	.db   0x00
+   0052 47                  166 	.db   'G
+   0053 00                  167 	.db   0x00
+   0054 41                  168 	.db   'A
+   0055 00                  169 	.db   0x00
+   0056 5F                  170 	.db   '_
+   0057 00                  171 	.db   0x00
+   0058 55                  172 	.db   'U
+   0059 00                  173 	.db   0x00
+   005A 53                  174 	.db   'S
+   005B 00                  175 	.db   0x00
+   005C 42                  176 	.db   'B
+   005D 00                  177 	.db   0x00
+   005E 5F                  178 	.db   '_
+   005F 00                  179 	.db   0x00
+   0060 56                  180 	.db   'V
+   0061 00                  181 	.db   0x00
+   0062 45                  182 	.db   'E
+   0063 00                  183 	.db   0x00
+   0064 52                  184 	.db   'R
+   0065 00                  185 	.db   0x00
+   0066 31                  186 	.db   '1
+   0067 00                  187 	.db   0x00
+   0068                     188 _StringDscr2End:
+                            189 
+   0068                     190 .even
+   0068                     191 _UserDscr::      
+   0068 00                  192 	.db   0x00
+   0069 00                  193 	.db   0x00
