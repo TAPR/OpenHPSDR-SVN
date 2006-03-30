@@ -1,0 +1,27 @@
+[Global]
+CurrentProject=HPDSDR_FPGA_USB_firmware_rev1_0_0.vpj
+[ProjectDates]
+HPDSDR_FPGA_USB_firmware_rev1_0_0.vpj=20051006205253093
+[ActiveConfig]
+HPDSDR_FPGA_USB_firmware_rev1_0_0.vpj=,Release
+[TreeExpansion2]
+- HPDSDR_FPGA_USB_firmware_rev1_0_0.vpj
+  - Source Files
+  - Header Files
+  + Resource Files
+  + Bitmaps
+  + Other Files
+scroll:0
+[State]
+SCREEN: 1280 1024 110 145 960 719 0 0 M 0 0 0 0 1087 585
+CWD: ..\HPDSDR_FPGA_USB_firmware_rev1_0_0
+FILEHIST: 9
+fx2regs.h
+vectors.asm
+dscr.asm
+fx2_descr.h
+fx2_macros.h
+fx2_utils.h
+hpsdr.h
+fx2_types.h
+HPSDR_firmware_1_0_0.c

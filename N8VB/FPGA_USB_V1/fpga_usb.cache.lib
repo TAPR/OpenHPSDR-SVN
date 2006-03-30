@@ -1,4 +1,4 @@
-EESchema-LIBRARY Version  29/3/2006-20:25:20
+EESchema-LIBRARY Version  30/3/2006-00:53:45
 #
 #
 # +1.2V
@@ -824,12 +824,12 @@ DEF GNDPWR #PWR 0 40 Y Y 1 F N
 F0 "#PWR" 0 0 40 H I C C
 F1 "GNDPWR" 0 -80 40 H V C C
 DRAW
-P 3 0 1 0  20 -20  10 -50  10 -50 F
 P 3 0 1 0  0 -20  -10 -50  -10 -50 F
 P 3 0 1 0  -20 -20  -30 -50  -30 -50 F
 P 3 0 1 0  -40 -20  -50 -50  -50 -50 F
 S -40 0 40 -20 0 1 0 F
 P 4 0 1 0  40 -20  30 -50  30 -50  30 -50 F
+P 3 0 1 0  20 -20  10 -50  10 -50 F
 X GNDPWR 1 0 0 0 U 40 40 1 1 W N
 ENDDRAW
 ENDDEF
