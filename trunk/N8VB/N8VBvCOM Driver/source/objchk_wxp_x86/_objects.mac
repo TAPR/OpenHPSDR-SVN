@@ -1,0 +1,52 @@
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\vcom.res \
+    $(_OBJ_DIR)\i386\vcom_init.obj \
+    $(_OBJ_DIR)\i386\vcom_device.obj \
+    $(_OBJ_DIR)\i386\vcom_pnp.obj \
+    $(_OBJ_DIR)\i386\vcom_dispatch.obj \
+    $(_OBJ_DIR)\i386\vcom_readthread.obj \
+    $(_OBJ_DIR)\i386\vcom_writethread.obj \
+    $(_OBJ_DIR)\i386\vcom_csq.obj \
+    $(_OBJ_DIR)\i386\vcom_transferthread.obj
+
+PASS0_386_OBJECTS=
+
+IA64_OBJECTS= \
+    $(_OBJ_DIR)\ia64\vcom.res \
+    $(_OBJ_DIR)\ia64\vcom_init.obj \
+    $(_OBJ_DIR)\ia64\vcom_device.obj \
+    $(_OBJ_DIR)\ia64\vcom_pnp.obj \
+    $(_OBJ_DIR)\ia64\vcom_dispatch.obj \
+    $(_OBJ_DIR)\ia64\vcom_readthread.obj \
+    $(_OBJ_DIR)\ia64\vcom_writethread.obj \
+    $(_OBJ_DIR)\ia64\vcom_csq.obj \
+    $(_OBJ_DIR)\ia64\vcom_transferthread.obj
+
+PASS0_IA64_OBJECTS=
+
+AMD64_OBJECTS= \
+    $(_OBJ_DIR)\amd64\vcom.res \
+    $(_OBJ_DIR)\amd64\vcom_init.obj \
+    $(_OBJ_DIR)\amd64\vcom_device.obj \
+    $(_OBJ_DIR)\amd64\vcom_pnp.obj \
+    $(_OBJ_DIR)\amd64\vcom_dispatch.obj \
+    $(_OBJ_DIR)\amd64\vcom_readthread.obj \
+    $(_OBJ_DIR)\amd64\vcom_writethread.obj \
+    $(_OBJ_DIR)\amd64\vcom_csq.obj \
+    $(_OBJ_DIR)\amd64\vcom_transferthread.obj
+
+PASS0_AMD64_OBJECTS=
+
+ARM_OBJECTS= \
+    $(_OBJ_DIR)\arm\vcom.res \
+    $(_OBJ_DIR)\arm\vcom_init.obj \
+    $(_OBJ_DIR)\arm\vcom_device.obj \
+    $(_OBJ_DIR)\arm\vcom_pnp.obj \
+    $(_OBJ_DIR)\arm\vcom_dispatch.obj \
+    $(_OBJ_DIR)\arm\vcom_readthread.obj \
+    $(_OBJ_DIR)\arm\vcom_writethread.obj \
+    $(_OBJ_DIR)\arm\vcom_csq.obj \
+    $(_OBJ_DIR)\arm\vcom_transferthread.obj
+
+PASS0_ARM_OBJECTS=
+
