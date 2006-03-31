@@ -1,0 +1,176 @@
+; Copyright 2005 Philip A Covington N8VB
+;
+;inf file for vCOM Virtual Serial Ports Driver
+
+[Version] 
+Signature = "$Windows NT$" 
+Class=MultiportSerial
+ClassGUID={50906cb8-ba12-11d1-bf5d-0000f805f530} 
+Provider=%N8VB% 
+DriverVer= 7/09/2005, 1.0.0.4
+
+[DestinationDirs] 
+N8VBvCOM.Files.x86_12 = 12 
+
+[SourceDisksNames.x86]
+0=%Desc_x860%
+
+[SourceDisksNames.ia64]
+
+[SourceDisksFiles.x86]
+vCOM.sys=0 
+
+[SourceDisksFiles.ia64]
+
+[Manufacturer] 
+%N8VB%=N8VB
+
+[N8VB]
+%N8VBvCOMDesc%=N8VBvCOM_Inst,N8VBvCOM 
+
+[N8VBvCOM_Inst.ntx86] 
+CopyFiles = N8VBvCOM.Files.x86_12 
+
+[N8VBvCOM_Inst.ntx86.Services] 
+AddService = vCOM,0x00000002,N8VBvCOM_Service_Instx86, 
+
+[N8VBvCOM_Service_Instx86] 
+ServiceType = %SERVICE_KERNEL_DRIVER% 
+StartType = %SERVICE_DEMAND_START% 
+ErrorControl = %SERVICE_ERROR_IGNORE% 
+ServiceBinary = %12%\vCOM.sys 
+
+[N8VBvCOM.Files.x86_12] 
+vCOM.sys
+
+[N8VBvCOM_inst.ntx86.HW]
+AddReg=N8VBvCOMHwAddReg
+
+[N8VBvCOMHwAddReg]
+
+;this sets the number of pairs created
+;do not edit the following
+;******************************
+HKR,,NumberOfPairs,%REG_DWORD%,%PAIRS%
+
+;do not edit the following
+;******************************
+HKR,,PortNumber1,,%PORT1%
+HKR,,PortNumber2,,%PORT2%
+HKR,,PortNumber3,,%PORT3%
+HKR,,PortNumber4,,%PORT4%
+HKR,,PortNumber5,,%PORT5%
+HKR,,PortNumber6,,%PORT6%
+HKR,,PortNumber7,,%PORT7%
+HKR,,PortNumber8,,%PORT8%
+HKR,,PortNumber9,,%PORT9%
+HKR,,PortNumber10,,%PORT10%
+HKR,,PortNumber11,,%PORT11%
+HKR,,PortNumber12,,%PORT12%
+HKR,,PortNumber13,,%PORT13%
+HKR,,PortNumber14,,%PORT14%
+HKR,,PortNumber15,,%PORT15%
+HKR,,PortNumber16,,%PORT16%
+HKR,,PortNumber17,,%PORT17%
+HKR,,PortNumber18,,%PORT18%
+HKR,,PortNumber19,,%PORT19%
+HKR,,PortNumber20,,%PORT20%
+
+[N8VBvCOM_EventLog_Inst] 
+AddReg = N8VBvCOM_EventLog_Inst.AddReg 
+ 
+[N8VBvCOM_EventLog_Inst.AddReg] 
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll" 
+HKR,,TypesSupported,%REG_DWORD%,7
+
+[Strings] 
+
+;  *******Localizable Strings******* 
+N8VB= "N8VB vCOM" 
+Desc_x860= "N8VB vCOM MultiportSerialdrivers" 
+N8VBvCOMDesc= "N8VB vCOM Virtual Serial Port Driver" 
+
+;NOTE: Edit the following to change com port number and amount of paired ports
+
+;Number Of Pairs
+;************
+;PAIRS=0x01
+;PAIRS=0x02  
+;PAIRS=0x03
+;PAIRS=0x04
+;PAIRS=0x05
+;PAIRS=0x06
+;PAIRS=0x07  
+;PAIRS=0x08
+;PAIRS=0x09
+;PAIRS=0x0A
+;NOTE:  MAX is 10 pairs
+
+PAIRS=0x04
+
+;Pair 1
+;************
+PORT1="COM6"
+PORT2="COM16"
+
+;Pair 2
+;************
+PORT3="COM7"
+PORT4="COM17"
+
+;Pair 3
+;************
+PORT5="COM8"
+PORT6="COM18"
+
+;Pair 4
+;************
+PORT7="COM9"
+PORT8="COM19"
+
+;Pair 5
+;************
+PORT9="COM10"
+PORT10="COM20"
+
+;Pair 6
+;************
+PORT11="COM11"
+PORT12="COM21"
+
+;Pair 7
+;************
+PORT13="COM12"
+PORT14="COM22"
+
+;Pair 8
+;************
+PORT15="COM13"
+PORT16="COM23"
+
+;Pair 9
+;************
+PORT17="COM14"
+PORT18="COM24"
+
+;Pair 10
+;************
+PORT19="COM15"
+PORT20="COM25"
+
+;  *******Non Localizable Strings******* 
+
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+REG_EXPAND_SZ = 0x00020000 
+REG_DWORD = 0x00010001 

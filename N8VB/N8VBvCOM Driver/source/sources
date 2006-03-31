@@ -1,0 +1,17 @@
+TARGETNAME	= vCOM
+TARGETPATH	= obj
+TARGETTYPE	= DRIVER
+DRIVERTYPE	= WDM
+
+TARGETLIBS= \
+  $(DDK_LIB_PATH)\csq.lib
+ 
+SOURCES			= vCOM_init.c \
+							vCOM_device.c \
+							vCOM_pnp.c \
+							vCOM_dispatch.c \
+							vCOM_readthread.c \
+							vCOM_writethread.c \
+							vCOM_csq.c \
+							vCOM.rc \
+							vCOM_transferthread.c

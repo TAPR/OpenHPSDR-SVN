@@ -1,0 +1,60 @@
+BUILD: Examining f:\driverdev\n8vb_vcomdriverbuild224 directory for files to compile.
+Compiling f:\driverdev\n8vb_vcomdriverbuild224 directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 386=1'
+    rc -l 409 -DSXS_ASSEMBLY_NAME=""""""  -DSXS_ASSEMBLY_VERSION=""""""  -DSXS_ASSEMBLY_LANGUAGE=""""""  -DSXS_PROCESSOR_ARCHITECTURE="""x86"""  -DSXS_TARGET="""vCOM.sys"""   -DSYSTEM_COMPATIBLE_ASSEMBLY_NAME="""Microsoft.Windows.SystemCompatible"""  -DLSYSTEM_COMPATIBLE_ASSEMBLY_NAME=L"""Microsoft.Windows.SystemCompatible"""   -z "MS Sans Serif,Helv/MS Shell Dlg"  -r -fo objfre_wxp_x86\i386\vcom.res -D_X86_=1 -Di386=1  -DSTD_CALL -DCONDITION_HANDLING=1   -DNT_INST=0 -DWIN32=100 -D_NT1X_=100 -DWINNT=1 -D_WIN32_WINNT=0x0501 /DWINVER=0x0501 -D_WIN32_IE=0x0600    -DWIN32_LEAN_AND_MEAN=1 -DDEVL=1 -D__BUILDMACHINE__=WinDDK -DFPO=1  -DNDEBUG -D_DLL=1    -IF:\WINDDK\3790\inc\mfc42 -Iobjfre_wxp_x86\i386 -IF:\WINDDK\3790\inc\wxp -IF:\WINDDK\3790\inc\wxp -IF:\WINDDK\3790\inc\ddk\wdm\wxp -IF:\WINDDK\3790\inc\crt .\vcom.rc
+cl -nologo -Ii386\ -I. -IF:\WINDDK\3790\inc\mfc42 -Iobjfre_wxp_x86\i386 -IF:\WINDDK\3790\inc\wxp -IF:\WINDDK\3790\inc\wxp -IF:\WINDDK\3790\inc\ddk\wdm\wxp -IF:\WINDDK\3790\inc\crt -D_X86_=1 -Di386=1  -DSTD_CALL -DCONDITION_HANDLING=1   -DNT_INST=0 -DWIN32=100 -D_NT1X_=100 -DWINNT=1 -D_WIN32_WINNT=0x0501 /DWINVER=0x0501 -D_WIN32_IE=0x0600    -DWIN32_LEAN_AND_MEAN=1 -DDEVL=1 -D__BUILDMACHINE__=WinDDK -DFPO=1  -DNDEBUG -D_DLL=1      /c /Zel /Zp8 /Gy /Gi- /Gm- -cbstring /W3 /WX /Gz  /QIfdiv- /G6 /GX-  /GR- /GF  -Z7 /Oxs  /Oy   -FIF:\WINDDK\3790\inc\wxp\warning.h   .\vcom_init.c .\vcom_device.c .\vcom_pnp.c .\vcom_dispatch.c .\vcom_readthread.c .\vcom_writethread.c .\vcom_csq.c .\vcom_transferthread.c 
+vcom_init.c
+vcom_device.c
+vcom_pnp.c
+vcom_dispatch.c
+vcom_readthread.c
+vcom_writethread.c
+vcom_csq.c
+vcom_transferthread.c
+Generating Code...
+
+Stop.
+Linking f:\driverdev\n8vb_vcomdriverbuild224 directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= 386=1'
+	link -out:objfre_wxp_x86\i386\vCOM.sys -machine:ix86 @F:\DOCUME~1\Phil\LOCALS~1\Temp\nm30.tmp
+Microsoft (R) Incremental Linker Version 7.10.2179
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-OPT:ICF 
+-IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221 
+-INCREMENTAL:NO 
+-FULLBUILD 
+/release 
+-NODEFAULTLIB 
+/WX 
+-debug:FULL 
+-debugtype:cv 
+-version:5.1 
+-osversion:5.1 
+-STACK:0x40000,0x1000 
+-driver -driver:wdm 
+-base:0x10000 
+-align:0x80 /stub:F:\WINDDK\3790\lib\wxp\stub512.com 
+-subsystem:native,1.10 
+-entry:DriverEntry@8 
+-out:objfre_wxp_x86\i386\vCOM.sys 
+objfre_wxp_x86\i386\vcom.res 
+objfre_wxp_x86\i386\vcom_init.obj 
+objfre_wxp_x86\i386\vcom_device.obj 
+objfre_wxp_x86\i386\vcom_pnp.obj 
+objfre_wxp_x86\i386\vcom_dispatch.obj 
+objfre_wxp_x86\i386\vcom_readthread.obj 
+objfre_wxp_x86\i386\vcom_writethread.obj 
+objfre_wxp_x86\i386\vcom_csq.obj 
+objfre_wxp_x86\i386\vcom_transferthread.obj 
+F:\WINDDK\3790\lib\wxp\i386\wdm.lib 
+F:\WINDDK\3790\lib\wxp\i386\csq.lib 
+F:\WINDDK\3790\lib\wxp\i386\sehupd.lib 
+	echo Skip Binplace:
+Skip Binplace:
+
+Stop.
