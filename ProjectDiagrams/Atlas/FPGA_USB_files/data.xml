@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisioDocument>
+	<DocumentProperties>
+		<Title></Title>
+		<HyperlinkBase href=""></HyperlinkBase>
+	</DocumentProperties>
+	<Pages>
+		<Page ID="0" Name="Page-1" NameU="Page-1">
+			<Layer IX="0">
+				<Name>Connector</Name>
+				<NameUniv>Connector</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Shapes>
+				<Shape ID="1" UniqueID="{4A8E25A4-BC06-419D-BFB1-5208C92460DB}" Name="Rectangle" NameU="Rectangle" Master="0">
+					<Text>FX2
+CY7C68013A</Text>
+					<XForm>
+						<PinX Unit="IN">2.549999999999999</PinX>
+						<PinY Unit="IN">4.500000000000002</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="2" UniqueID="{49DD8AE4-C09F-457E-B226-716265FE38D9}" Name="Rectangle.2" NameU="Rectangle.2" Master="0">
+					<Text>FPGA
+Cyclone II
+EP2C5-208</Text>
+					<XForm>
+						<PinX Unit="IN">6.899999999999999</PinX>
+						<PinY Unit="IN">4.499999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="3" UniqueID="{08B999E7-A975-42EF-987D-75466FE0F8D7}" Name="Rectangle.3" NameU="Rectangle.3" Master="0">
+					<Text>EEPROM
+24LC128</Text>
+					<XForm>
+						<PinX Unit="IN">2.549999999999997</PinX>
+						<PinY Unit="IN">1.500000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="4" UniqueID="{5B10BA91-A3CE-4FC5-A59A-0282E6077E59}" Name="45 degree double" NameU="45 degree double" Master="2">
+					<Text>I2C</Text>
+					<XForm>
+						<PinX Unit="IN">2.549999999999998</PinX>
+						<PinY Unit="IN">2.200000000000001</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="5" UniqueID="{2545BEFF-06E8-4ED4-8259-55D7D1CAE0D7}" Name="Rectangle.5" NameU="Rectangle.5" Master="0">
+					<Text>USB</Text>
+					<XForm>
+						<PinX Unit="IN">0.699999999999999</PinX>
+						<PinY Unit="IN">5.900000000000001</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="6" UniqueID="{94A5A4C2-59E4-407F-8F8C-A3EC478E91CB}" Name="45 degree double.6" NameU="45 degree double.6" Master="2">
+					<XForm>
+						<PinX Unit="IN">1.449999999999999</PinX>
+						<PinY Unit="IN">5.900000000000002</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="7" UniqueID="{9201A985-2566-42D8-A2B5-73F6E27FB18D}" Name="45 degree double.7" NameU="45 degree double.7" Master="2">
+					<Text>PORT B – FD[0:7]</Text>
+					<XForm>
+						<PinX Unit="IN">4.199999999999999</PinX>
+						<PinY Unit="IN">6.240000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="8" UniqueID="{2F0A6A7E-F27F-4054-8180-680A3E9BF892}" Name="45 degree double.8" NameU="45 degree double.8" Master="2">
+					<Text>PORT D - FD[8:15]</Text>
+					<XForm>
+						<PinX Unit="IN">4.199999999999999</PinX>
+						<PinY Unit="IN">5.705000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="9" UniqueID="{E939934A-1EDF-48B9-9F90-F049E1FC73F1}" Name="Rectangle.9" NameU="Rectangle.9" Master="0">
+					<Text>FIFO</Text>
+					<XForm>
+						<PinX Unit="IN">3.049999999999999</PinX>
+						<PinY Unit="IN">5.750000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="10" UniqueID="{9E04181C-F848-4D5F-9FD7-F13847C481B2}" Name="45 degree double.10" NameU="45 degree double.10" Master="2">
+					<Text>PORT C[0:5] – FPGA CONFIG</Text>
+					<XForm>
+						<PinX Unit="IN">4.199999999999999</PinX>
+						<PinY Unit="IN">4.830000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="11" UniqueID="{CB8749EE-BBA7-46E1-B09B-5E14EA4AF50F}" Name="45 degree double.11" NameU="45 degree double.11" Master="2">
+					<Text>PORT E[0:7]</Text>
+					<XForm>
+						<PinX Unit="IN">4.199999999999999</PinX>
+						<PinY Unit="IN">4.300000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="12" UniqueID="{153045BE-6BAD-4310-9CA7-1C992091B9D4}" Name="Rectangle.12" NameU="Rectangle.12" Master="0">
+					<Text>ATLAS CONNECTOR</Text>
+					<XForm>
+						<PinX Unit="IN">10.475000000000000</PinX>
+						<PinY Unit="IN">5.400000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="13" UniqueID="{A16FAF57-C055-4AD1-8492-77E888DD1F05}" Name="45 degree double.13" NameU="45 degree double.13" Master="2">
+					<Text>XBUS[0:24]</Text>
+					<XForm>
+						<PinX Unit="IN">9.375000000000000</PinX>
+						<PinY Unit="IN">6.000000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="14" UniqueID="{72777EC2-5391-4F19-BCB8-6B9341F26EB2}" Name="45 degree double.14" NameU="45 degree double.14" Master="2">
+					<Text>YBUS[0:24]</Text>
+					<XForm>
+						<PinX Unit="IN">9.375000000000000</PinX>
+						<PinY Unit="IN">5.400000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="15" UniqueID="{D7B50C25-5F1E-4F84-A2D7-C98894077558}" Name="45 degree double.15" NameU="45 degree double.15" Master="2">
+					<Text>DAISY CHAIN</Text>
+					<XForm>
+						<PinX Unit="IN">9.375000000000000</PinX>
+						<PinY Unit="IN">4.800000000000001</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="16" UniqueID="{952E3C6B-043D-4A1A-AC90-9CA0D22672D9}" Name="Rectangle.16" NameU="Rectangle.16" Master="0">
+					<Text>20 PIN HEADER</Text>
+					<XForm>
+						<PinX Unit="IN">10.500000000000002</PinX>
+						<PinY Unit="IN">3.900000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="17" UniqueID="{0931EB58-17E0-4C1A-B015-7964C7B5E8C3}" Name="45 degree double.17" NameU="45 degree double.17" Master="2">
+					<Text>GPIO</Text>
+					<XForm>
+						<PinX Unit="IN">9.400000000000000</PinX>
+						<PinY Unit="IN">3.900000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="18" UniqueID="{4E68D000-E055-4149-9FEF-F55D02C22659}" Name="Rectangle.18" NameU="Rectangle.18" Master="0">
+					<Text>SERIAL DATA HEADER</Text>
+					<XForm>
+						<PinX Unit="IN">0.699999999999999</PinX>
+						<PinY Unit="IN">4.850000000000001</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="20" UniqueID="{2E1590ED-2B48-4FF8-A3F1-548247D15B0C}" Name="Rectangle.20" NameU="Rectangle.20" Master="0">
+					<Text>JTAG
+10 PIN HEADER</Text>
+					<XForm>
+						<PinX Unit="IN">4.274999999999999</PinX>
+						<PinY Unit="IN">2.200000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="21" UniqueID="{FD1267C9-C50C-4BEC-B6B4-F53DAF16ADCE}" Name="Dynamic connector" NameU="Dynamic connector" Master="3">
+					<XForm>
+						<PinX Unit="IN">4.687499999999998</PinX>
+						<PinY Unit="IN">2.675000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="22" UniqueID="{48CBDC3A-C1A9-42BB-87E6-1E924EABF692}" Name="Rectangle.22" NameU="Rectangle.22" Master="0">
+					<Text>BYTEBLASTER
+10 PIN HEADER</Text>
+					<XForm>
+						<PinX Unit="IN">4.275000000000000</PinX>
+						<PinY Unit="IN">1.450000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="23" UniqueID="{3464DAE4-7B28-4656-ADA5-A32C9F2FAD48}" Name="Dynamic connector.23" NameU="Dynamic connector.23" Master="3">
+					<XForm>
+						<PinX Unit="IN">5.275000000000000</PinX>
+						<PinY Unit="IN">2.750000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="24" UniqueID="{D783C03B-E4D0-400A-A312-4370AA188952}" Name="Rectangle.24" NameU="Rectangle.24" Master="0">
+					<Text>CONFIG EEPROM
+EPCS1</Text>
+					<XForm>
+						<PinX Unit="IN">4.275000000000000</PinX>
+						<PinY Unit="IN">0.700000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="25" UniqueID="{8BE92A63-46A6-4A73-9B5F-9CDAD50C415B}" Name="Dynamic connector.25" NameU="Dynamic connector.25" Master="3">
+					<XForm>
+						<PinX Unit="IN">4.275000000000000</PinX>
+						<PinY Unit="IN">1.100000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="26" UniqueID="{C60F922D-0666-4CD2-A82B-DBD153CF8794}" Name="Dynamic connector.26" NameU="Dynamic connector.26" Master="3">
+					<XForm>
+						<PinX Unit="IN">5.275000000000000</PinX>
+						<PinY Unit="IN">1.425000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="27" UniqueID="{B4A7CAFD-591E-4E93-A51C-4CAEE2758662}" Name="Dynamic connector.27" NameU="Dynamic connector.27" Master="3">
+					<XForm>
+						<PinX Unit="IN">5.399999999999999</PinX>
+						<PinY Unit="IN">4.820000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="28" UniqueID="{4097D8C6-DA55-44C7-944F-25C94C9590B2}" Name="Rectangle.28" NameU="Rectangle.28" Master="0">
+					<Text>5 PIN HEADER W/LEDS</Text>
+					<XForm>
+						<PinX Unit="IN">10.499999999999998</PinX>
+						<PinY Unit="IN">3.000000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="29" UniqueID="{30345604-4569-4AB9-9503-AE48E8154536}" Name="45 degree double.29" NameU="45 degree double.29" Master="2">
+					<Text>GPIO</Text>
+					<XForm>
+						<PinX Unit="IN">9.399999999999999</PinX>
+						<PinY Unit="IN">3.000000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="30" UniqueID="{AAEFF8EC-93FC-4050-93DC-DB32319A4BD9}" Name="Rectangle.30" NameU="Rectangle.30" Master="0">
+					<Text>LVDS CLK IN #1</Text>
+					<XForm>
+						<PinX Unit="IN">6.099999999999999</PinX>
+						<PinY Unit="IN">1.750000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="31" UniqueID="{3945C60A-FBFD-48A4-B60C-772D36B88DE4}" Name="Rectangle.31" NameU="Rectangle.31" Master="0">
+					<Text>LVDS CLK IN #2</Text>
+					<XForm>
+						<PinX Unit="IN">6.800000000000000</PinX>
+						<PinY Unit="IN">1.750000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="34" UniqueID="{CBA2FF8F-2878-48B2-ACD9-99A4486484A3}" Name="Rectangle.34" NameU="Rectangle.34" Master="0">
+					<Text>FPGA CLKX OUT</Text>
+					<XForm>
+						<PinX Unit="IN">7.300000000000001</PinX>
+						<PinY Unit="IN">7.250000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="35" UniqueID="{304216B6-A3F7-4D47-9CE0-8BB93692DAE1}" Name="Rectangle.35" NameU="Rectangle.35" Master="0">
+					<Text>FPGA CLKY OUT</Text>
+					<XForm>
+						<PinX Unit="IN">8.100000000000001</PinX>
+						<PinY Unit="IN">7.250000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="38" UniqueID="{C09B9568-8F7E-4FEC-881E-C7B116A6CB5E}" Name="Rectangle.38" NameU="Rectangle.38" Master="0">
+					<Text>2 PIN HEADER</Text>
+					<XForm>
+						<PinX Unit="IN">7.299999999999999</PinX>
+						<PinY Unit="IN">7.949999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="39" UniqueID="{7836A271-6F31-4B60-B797-A1DEFD9B180E}" Name="Rectangle.39" NameU="Rectangle.39" Master="0">
+					<Text>2 PIN HEADER</Text>
+					<XForm>
+						<PinX Unit="IN">8.100000000000000</PinX>
+						<PinY Unit="IN">7.950000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="40" UniqueID="{6353CC24-42D1-4882-BB39-3062E1B01EAE}" Name="Rectangle.40" NameU="Rectangle.40" Master="0">
+					<Text>2 PIN HEADER</Text>
+					<XForm>
+						<PinX Unit="IN">6.100000000000000</PinX>
+						<PinY Unit="IN">1.049999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="41" UniqueID="{61570E79-66D2-4A55-AB16-039572E2C025}" Name="Rectangle.41" NameU="Rectangle.41" Master="0">
+					<Text>2 PIN HEADER</Text>
+					<XForm>
+						<PinX Unit="IN">6.800000000000000</PinX>
+						<PinY Unit="IN">1.050000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="42" UniqueID="{216C9A6A-F724-4F88-89E8-E68B8F6EB0AE}" Name="45 degree single" NameU="45 degree single" Master="4">
+					<XForm>
+						<PinX Unit="IN">7.300000000000000</PinX>
+						<PinY Unit="IN">7.650000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="43" UniqueID="{8DAEC285-0BE7-4874-8CA1-830F28AB58B3}" Name="45 degree single.43" NameU="45 degree single.43" Master="4">
+					<XForm>
+						<PinX Unit="IN">8.100000000000001</PinX>
+						<PinY Unit="IN">7.650000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="36" UniqueID="{9A666FDB-16AA-4AC7-BA42-CF47C739431D}" Name="45 degree single.36" NameU="45 degree single.36" Master="4">
+					<XForm>
+						<PinX Unit="IN">7.300000000000000</PinX>
+						<PinY Unit="IN">6.699999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="37" UniqueID="{07551FE8-E30C-411E-8F9C-93C700AFCD2C}" Name="45 degree single.37" NameU="45 degree single.37" Master="4">
+					<XForm>
+						<PinX Unit="IN">8.100000000000001</PinX>
+						<PinY Unit="IN">6.699999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="32" UniqueID="{E7E43197-16AF-47E1-BBC3-58589BDF99D5}" Name="45 degree single.32" NameU="45 degree single.32" Master="4">
+					<Text>CLK2</Text>
+					<XForm>
+						<PinX Unit="IN">6.100000000000000</PinX>
+						<PinY Unit="IN">2.300000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="33" UniqueID="{B8DA2C31-44DF-4E9B-A116-E3CBDEC51BFD}" Name="45 degree single.33" NameU="45 degree single.33" Master="4">
+					<Text>CLK3</Text>
+					<XForm>
+						<PinX Unit="IN">6.800000000000000</PinX>
+						<PinY Unit="IN">2.300000000000001</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="44" UniqueID="{14C87A88-F63A-4DFC-A2DF-46655EF1300B}" Name="45 degree single.44" NameU="45 degree single.44" Master="4">
+					<XForm>
+						<PinX Unit="IN">6.100000000000000</PinX>
+						<PinY Unit="IN">1.349999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="45" UniqueID="{57188A8A-0436-450D-BA24-02CBB551A5B9}" Name="45 degree single.45" NameU="45 degree single.45" Master="4">
+					<XForm>
+						<PinX Unit="IN">6.799999999999999</PinX>
+						<PinY Unit="IN">1.350000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="19" UniqueID="{1148064E-5315-44B0-B2B4-45E843BEF34F}" Name="45 degree double.19" NameU="45 degree double.19" Master="2">
+					<XForm>
+						<PinX Unit="IN">1.449999999999999</PinX>
+						<PinY Unit="IN">4.849999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="46" UniqueID="{4AEC6597-2545-43EE-94D9-FB098107DEF2}" Name="Rectangle.46" NameU="Rectangle.46" Master="0">
+					<Text>XTAL OSC #1</Text>
+					<XForm>
+						<PinX Unit="IN">5.600000000000001</PinX>
+						<PinY Unit="IN">7.250000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="47" UniqueID="{88074A5F-5D68-4B65-B7AB-29942816DC23}" Name="Rectangle.47" NameU="Rectangle.47" Master="0">
+					<Text>XTAL OSC #2</Text>
+					<XForm>
+						<PinX Unit="IN">6.500000000000000</PinX>
+						<PinY Unit="IN">7.250000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="48" UniqueID="{1D1CB2F5-BD51-4E7A-87F3-47DF1499C1F7}" Name="45 degree single.48" NameU="45 degree single.48" Master="4">
+					<Text>CLK4</Text>
+					<XForm>
+						<PinX Unit="IN">5.600000000000001</PinX>
+						<PinY Unit="IN">6.699999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="49" UniqueID="{7871A62B-6823-4D7F-A924-CA774858ACFE}" Name="45 degree single.49" NameU="45 degree single.49" Master="4">
+					<Text>CLK5</Text>
+					<XForm>
+						<PinX Unit="IN">6.500000000000000</PinX>
+						<PinY Unit="IN">6.699999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="50" UniqueID="{624E4BBD-A1FF-40A4-990B-D4E8DB6821C6}" Name="Dynamic connector.50" NameU="Dynamic connector.50" Master="3">
+					<XForm>
+						<PinX Unit="IN">7.300000000000001</PinX>
+						<PinY Unit="IN">6.800000000000001</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="51" UniqueID="{5480A52C-229F-44AB-B72A-2D75698BC1DB}" Name="Dynamic connector.51" NameU="Dynamic connector.51" Master="3">
+					<XForm>
+						<PinX Unit="IN">6.700000000000000</PinX>
+						<PinY Unit="IN">6.900000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="52" UniqueID="{0745097D-6A27-4883-AE63-E912C9B8A044}" Name="Dynamic connector.52" NameU="Dynamic connector.52" Master="3">
+					<XForm>
+						<PinX Unit="IN">7.910000000000002</PinX>
+						<PinY Unit="IN">6.900000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="53" UniqueID="{FB849FBB-54A3-4DC9-81F9-EC2590906C5A}" Name="Dynamic connector.53" NameU="Dynamic connector.53" Master="3">
+					<XForm>
+						<PinX Unit="IN">6.050000000000001</PinX>
+						<PinY Unit="IN">6.850000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="54" UniqueID="{3FF3AD4A-61CA-4196-B7F7-F78F457803F7}" Name="Dynamic connector.54" NameU="Dynamic connector.54" Master="3">
+					<XForm>
+						<PinX Unit="IN">7.250000000000000</PinX>
+						<PinY Unit="IN">6.850000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="55" UniqueID="{A8E33799-CB22-4C14-8D82-03228F6D859F}" Name="Dynamic connector.55" NameU="Dynamic connector.55" Master="3">
+					<XForm>
+						<PinX Unit="IN">6.600000000000000</PinX>
+						<PinY Unit="IN">6.700000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>0</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="56" UniqueID="{E6453F22-9141-4A43-8080-7AD3AEA72B8B}" Name="45 degree double.56" NameU="45 degree double.56" Master="2">
+					<Text>FX2_IFCLK – CLK1</Text>
+					<XForm>
+						<PinX Unit="IN">4.199999999999999</PinX>
+						<PinY Unit="IN">3.060000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="57" UniqueID="{0A5E20CE-51AE-4FFD-922D-3BB64CDF5F9D}" Name="45 degree double.57" NameU="45 degree double.57" Master="2">
+					<Text>FX2_CLK – CLK0</Text>
+					<XForm>
+						<PinX Unit="IN">4.199999999999999</PinX>
+						<PinY Unit="IN">3.450000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="58" UniqueID="{7F8A52C9-F374-4943-8835-66CC242A97C9}" Name="Rectangle.58" NameU="Rectangle.58" Master="0">
+					<Text>CLK6/7
+2 PIN HEADER</Text>
+					<XForm>
+						<PinX Unit="IN">7.480000000000000</PinX>
+						<PinY Unit="IN">1.150000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="59" UniqueID="{56ADF570-A591-4560-8118-20E755D2A99F}" Name="45 degree single.59" NameU="45 degree single.59" Master="4">
+					<Text>CLK6/7</Text>
+					<XForm>
+						<PinX Unit="IN">7.480000000000000</PinX>
+						<PinY Unit="IN">2.000000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="60" UniqueID="{D3D1A59D-D72D-48E9-932F-F266992E0190}" Name="45 degree double.60" NameU="45 degree double.60" Master="2">
+					<Text>MISC</Text>
+					<XForm>
+						<PinX Unit="IN">4.199999999999999</PinX>
+						<PinY Unit="IN">3.840000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="61" UniqueID="{831BF0B8-5A19-41D5-9B85-04CD5E14C700}" Name="45 degree double.61" NameU="45 degree double.61" Master="2">
+					<Text>FIFO CTRL</Text>
+					<XForm>
+						<PinX Unit="IN">4.199999999999999</PinX>
+						<PinY Unit="IN">5.260000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="62" UniqueID="{B79F807A-6B39-4B2E-BE5C-DCF7ECCBD493}" Name="Sheet.62" NameU="Sheet.62">
+					<Text>FPGA_USB BOARD</Text>
+					<XForm>
+						<PinX Unit="IN">2.200000000000000</PinX>
+						<PinY Unit="IN">7.900000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="63" UniqueID="{3A403382-F2A3-4214-B8F2-447AFE0A6D52}" Name="Sheet.63" NameU="Sheet.63">
+					<Text>April 7, 2006</Text>
+					<XForm>
+						<PinX Unit="IN">2.200000000000000</PinX>
+						<PinY Unit="IN">7.611111111111111</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="64" UniqueID="{5136B39B-705D-430E-B295-B56E2AF98B32}" Name="Sheet.64" NameU="Sheet.64">
+					<XForm>
+						<PinX Unit="IN">7.650000000000000</PinX>
+						<PinY Unit="IN">7.900000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="65" UniqueID="{810BFA50-5192-410C-A0DB-9A181D8B2332}" Name="Sheet.65" NameU="Sheet.65">
+					<XForm>
+						<PinX Unit="IN">6.949999999999999</PinX>
+						<PinY Unit="IN">1.100000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="66" UniqueID="{CAF5513A-408F-475F-B128-A6A56FF57F15}" Name="Sheet.66" NameU="Sheet.66">
+					<XForm>
+						<PinX Unit="IN">10.500000000000000</PinX>
+						<PinY Unit="IN">4.500000000000000</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+	</Pages>
+</VisioDocument>
