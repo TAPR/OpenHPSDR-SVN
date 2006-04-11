@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisioDocument>
+	<DocumentProperties>
+		<Title></Title>
+		<HyperlinkBase href=""></HyperlinkBase>
+	</DocumentProperties>
+	<Pages>
+		<Page ID="0" Name="Page-1" NameU="Page-1">
+			<Layer IX="0">
+				<Name>Connector</Name>
+				<NameUniv>Connector</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Layer IX="1">
+				<Name>Electrical</Name>
+				<NameUniv>Electrical</NameUniv>
+				<Visible>1</Visible>
+			</Layer>
+			<Value Unit="STR">TRUE</Value>
+			<Label>Ask On Drop</Label>
+			<Shapes>
+				<Shape ID="5" UniqueID="{8E819EBA-A5ED-4464-B238-0A027BABDAE1}" Name="Sheet.5" NameU="Sheet.5">
+					<XForm>
+						<PinX Unit="MM">11.023622047244093</PinX>
+						<PinY Unit="MM">3.700787401574804</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="131" UniqueID="{9693ACEA-B58D-4386-8381-7B9F2852E9B5}" Name="Sheet.131" NameU="Sheet.131">
+					<XForm>
+						<PinX Unit="MM">7.283464566929133</PinX>
+						<PinY Unit="MM">0.688976377952756</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="111" UniqueID="{EB2777F7-0F6B-4FF8-B996-9A9E319CC493}" Name="1-D single" NameU="1-D single" Master="14">
+					<XForm>
+						<PinX Unit="MM">5.393700787401575</PinX>
+						<PinY Unit="MM">6.488954505686788</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="90" UniqueID="{36B0629F-E19D-4043-954C-E06C3D69F03C}" Name="1-D double.90" NameU="1-D double.90" Master="13">
+					<XForm>
+						<PinX Unit="MM">3.435039370078740</PinX>
+						<PinY Unit="MM">0.986548556430449</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="14" UniqueID="{570757BC-43A8-4F15-BC91-090869AFFE3F}" Name="1-D double.14" NameU="1-D double.14" Master="13">
+					<Text>Tx_I2S</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157480</PinX>
+						<PinY Unit="MM">5.644685039370078</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="34" UniqueID="{09EB75E5-385E-4DF4-BB90-F5D59D3434BA}" Name="1-D double.34" NameU="1-D double.34" Master="13">
+					<XForm>
+						<PinX Unit="MM">8.021653543307089</PinX>
+						<PinY Unit="MM">5.905511811023621</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="1" UniqueID="{69BB49D3-F6AC-436B-B642-CCE550A91BE7}" Name="Sheet.1" NameU="Sheet.1">
+					<Text>Altera FPGA
+EP2C5T144</Text>
+					<XForm>
+						<PinX Unit="MM">5.167322834645670</PinX>
+						<PinY Unit="MM">3.742454068241472</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="2" UniqueID="{A68F6501-5030-464D-8030-E0B53DA717DE}" Name="Sheet.2" NameU="Sheet.2">
+					<XForm>
+						<PinX Unit="MM">0.787401574803149</PinX>
+						<PinY Unit="MM">3.897637795275591</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="3" UniqueID="{9E45719B-AF64-48AB-8FB7-5C31595B16EB}" Name="Sheet.3" NameU="Sheet.3">
+					<Text>DIN41612  Connector</Text>
+					<XForm>
+						<PinX Unit="MM">0.787401574803149</PinX>
+						<PinY Unit="MM">7.484908136482940</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="9" UniqueID="{CE08D23A-B314-4963-A38A-55A7BF76D872}" Name="Sheet.9" NameU="Sheet.9">
+					<Text>0v</Text>
+					<XForm>
+						<PinX Unit="MM">1.181102362204724</PinX>
+						<PinY Unit="MM">6.447506561679788</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="48" UniqueID="{55E6DA29-14CF-49EF-A65D-4D363095D8A0}" Name="Chassis" NameU="Chassis" Master="8">
+					<XForm>
+						<PinX Unit="MM">1.230158730158731</PinX>
+						<PinY Unit="MM">6.205380577427820</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="6" UniqueID="{0E32CFC9-6A3C-4D61-A2A0-1FCC7420CE53}" Name="Sheet.6" NameU="Sheet.6">
+					<XForm>
+						<PinX Unit="MM">1.008780152480940</PinX>
+						<PinY Unit="MM">6.303805774278214</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="104" UniqueID="{725E1C4E-7E68-44FC-91BF-2DEC3EBBD197}" Name="Sheet.104" NameU="Sheet.104">
+					<Text>FAN1112</Text>
+					<XForm>
+						<PinX Unit="MM">4.488188976377953</PinX>
+						<PinY Unit="MM">6.889763779527558</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="105" UniqueID="{F553C940-E81C-4D03-AD59-EF97F0866EC7}" Name="Sheet.105" NameU="Sheet.105">
+					<XForm>
+						<PinX Unit="MM">4.488188976377953</PinX>
+						<PinY Unit="MM">6.498359580052496</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="10" UniqueID="{78CC7183-2DDB-4178-87B1-C2B988AD12EF}" Name="Straight bus" NameU="Straight bus" Master="9">
+					<Text>Rx_I2S</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157479</PinX>
+						<PinY Unit="MM">5.905511811023621</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+					<Prop ID="1" Name="Label" NameU="Label">
+						<Value></Value>
+						<Label>Label</Label>
+					</Prop>
+				</Shape>
+				<Shape ID="18" UniqueID="{7932E2AC-C8CB-4C85-8AA7-C06B226FE52F}" Name="Bus width" NameU="Bus width" Master="10">
+					<Text>3</Text>
+					<XForm>
+						<PinX Unit="MM">1.505905511811024</PinX>
+						<PinY Unit="MM">5.905511811023621</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="12" UniqueID="{2126EC16-E73D-4399-850B-0582009D971E}" Name="Bus width.12" NameU="Bus width.12" Master="10">
+					<Text>4</Text>
+					<XForm>
+						<PinX Unit="MM">1.446850393700787</PinX>
+						<PinY Unit="MM">5.639763779527559</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="16" UniqueID="{DADEC84B-9EE4-4A34-BDB6-9F1603C1394F}" Name="Straight bus.16" NameU="Straight bus.16" Master="9">
+					<Text>I/Q PWM Audio</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157480</PinX>
+						<PinY Unit="MM">5.009842519685039</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+					<Prop ID="1" Name="Label" NameU="Label">
+						<Value></Value>
+						<Label>Label</Label>
+					</Prop>
+				</Shape>
+				<Shape ID="26" UniqueID="{A09576FD-9C66-48E4-8C22-E8B1B404E0B1}" Name="Bus width.26" NameU="Bus width.26" Master="10">
+					<Text>2</Text>
+					<XForm>
+						<PinX Unit="MM">1.377952755905512</PinX>
+						<PinY Unit="MM">4.990157480314959</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="32" UniqueID="{F91011B2-CAF7-4AD9-BE18-E69EE2D26321}" Name="Sheet.32" NameU="Sheet.32">
+					<Text>UNL2003AD</Text>
+					<XForm>
+						<PinX Unit="MM">8.464566929133859</PinX>
+						<PinY Unit="MM">1.574803149606299</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="45" UniqueID="{19F56970-4D99-4B1D-A8BD-511540E09E7A}" Name="Straight bus.45" NameU="Straight bus.45" Master="9">
+					<XForm>
+						<PinX Unit="MM">7.726377952755906</PinX>
+						<PinY Unit="MM">1.574803149606299</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+					<Prop ID="1" Name="Label" NameU="Label">
+						<Value></Value>
+						<Label>Label</Label>
+					</Prop>
+				</Shape>
+				<Shape ID="46" UniqueID="{66847DE3-F645-4D39-ACBD-CBB01E338B11}" Name="Bus width.46" NameU="Bus width.46" Master="10">
+					<Text>8</Text>
+					<XForm>
+						<PinX Unit="MM">7.677165354330709</PinX>
+						<PinY Unit="MM">1.574803149606299</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="47" UniqueID="{1AEAFAD5-C097-488A-A156-834B920A62F4}" Name="Sheet.47" NameU="Sheet.47">
+					<XForm>
+						<PinX Unit="MM">9.934656605424323</PinX>
+						<PinY Unit="MM">1.771653543307087</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="49" UniqueID="{65EE273C-EF88-40A6-BDE7-C197C9B9C489}" Name="Sheet.49" NameU="Sheet.49">
+					<XForm>
+						<PinX Unit="MM">9.940944881889763</PinX>
+						<PinY Unit="MM">1.377952755905512</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="52" UniqueID="{4A27BFA8-59EB-4949-B763-D0BEEBD21044}" Name="Sheet.52" NameU="Sheet.52">
+					<Text>1</Text>
+					<XForm>
+						<PinX Unit="MM">11.122047244094487</PinX>
+						<PinY Unit="MM">1.786745406824147</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="53" UniqueID="{258F67FF-4743-429B-935F-C5EC55152EAF}" Name="Sheet.53" NameU="Sheet.53">
+					<Text>8</Text>
+					<XForm>
+						<PinX Unit="MM">11.123797025371827</PinX>
+						<PinY Unit="MM">1.362860892388451</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="54" UniqueID="{FA6C3A19-1626-4283-B49A-02997F5632C7}" Name="Sheet.54" NameU="Sheet.54">
+					<Text>External Control Out</Text>
+					<XForm>
+						<PinX Unit="MM">9.842519685039369</PinX>
+						<PinY Unit="MM">1.574803149606299</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="55" UniqueID="{95BE5AA2-9174-43B6-8CAA-BB7E192E0048}" Name="Sheet.55" NameU="Sheet.55">
+					<Text>Buffers</Text>
+					<XForm>
+						<PinX Unit="MM">8.464566929133859</PinX>
+						<PinY Unit="MM">2.263779527559056</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="56" UniqueID="{EF3985A1-AE49-4BD9-93B3-01DD673D5656}" Name="Straight bus.56" NameU="Straight bus.56" Master="9">
+					<XForm>
+						<PinX Unit="MM">7.726377952755906</PinX>
+						<PinY Unit="MM">2.263779527559055</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+					<Prop ID="1" Name="Label" NameU="Label">
+						<Value></Value>
+						<Label>Label</Label>
+					</Prop>
+				</Shape>
+				<Shape ID="57" UniqueID="{19393B5B-E5A6-4B08-8A5B-BA0A1EB4F3D0}" Name="Bus width.57" NameU="Bus width.57" Master="10">
+					<Text>8</Text>
+					<XForm>
+						<PinX Unit="MM">7.746062992125984</PinX>
+						<PinY Unit="MM">2.234251968503937</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="58" UniqueID="{1367A6D0-4C10-4A05-B2A2-B85C70101940}" Name="Sheet.58" NameU="Sheet.58">
+					<XForm>
+						<PinX Unit="MM">9.940944881889763</PinX>
+						<PinY Unit="MM">2.460629921259842</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="59" UniqueID="{88D7300B-F62B-450A-832A-894C63C1A60C}" Name="Sheet.59" NameU="Sheet.59">
+					<XForm>
+						<PinX Unit="MM">9.940944881889763</PinX>
+						<PinY Unit="MM">2.066929133858268</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="60" UniqueID="{A1507B99-CCEE-4C34-AFC9-05075989919B}" Name="Sheet.60" NameU="Sheet.60">
+					<Text>1</Text>
+					<XForm>
+						<PinX Unit="MM">11.134623797025371</PinX>
+						<PinY Unit="MM">2.445538057742782</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="61" UniqueID="{7920B177-C52B-4EB8-926B-5B53531E16B5}" Name="Sheet.61" NameU="Sheet.61">
+					<Text>8</Text>
+					<XForm>
+						<PinX Unit="MM">11.123797025371827</PinX>
+						<PinY Unit="MM">2.051837270341207</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="62" UniqueID="{E1A8CE1F-B0E7-4391-B477-427658C3CFE1}" Name="Sheet.62" NameU="Sheet.62">
+					<Text>External Control In</Text>
+					<XForm>
+						<PinX Unit="MM">9.842519685039369</PinX>
+						<PinY Unit="MM">2.248687664041994</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="66" UniqueID="{6AB989AE-0A26-4344-9993-FF45402921CE}" Name="Sheet.66" NameU="Sheet.66">
+					<Text>JTAG</Text>
+					<XForm>
+						<PinX Unit="MM">3.444881889763780</PinX>
+						<PinY Unit="MM">0.688976377952756</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="70" UniqueID="{56EBD18D-4E5E-4E54-A48E-1207EEE558B8}" Name="Shielded jack/plug" NameU="Shielded jack/plug" Master="6">
+					<XForm>
+						<PinX Unit="MM">11.023622047244093</PinX>
+						<PinY Unit="MM">3.750000000000000</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+					<Prop ID="1" Name="Label" NameU="Label">
+						<Value></Value>
+						<Label>Label</Label>
+					</Prop>
+				</Shape>
+				<Shape ID="73" UniqueID="{559CBAC9-E983-43A0-9F32-2FC416C35960}" Name="Sheet.73" NameU="Sheet.73">
+					<Text>LVDS
+200MHz 
+DDS Clock in </Text>
+					<XForm>
+						<PinX Unit="MM">7.874015748031496</PinX>
+						<PinY Unit="MM">0.704068241469816</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="74" UniqueID="{E96E76BB-2F31-4F46-8F09-DE9D13E09180}" Name="Sheet.74" NameU="Sheet.74">
+					<Text>DS90LV018</Text>
+					<XForm>
+						<PinX Unit="MM">6.692913385826770</PinX>
+						<PinY Unit="MM">0.787401574803149</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="75" UniqueID="{C3E1ABC7-3F37-4F1B-AD57-7EB0B50A240A}" Name="Sheet.75" NameU="Sheet.75">
+					<XForm>
+						<PinX Unit="MM">6.102362204724409</PinX>
+						<PinY Unit="MM">0.984251968503937</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="76" UniqueID="{8A38FA0F-AEFB-4DFA-8515-E4F455D2CE07}" Name="Sheet.76" NameU="Sheet.76">
+					<XForm>
+						<PinX Unit="MM">6.200787401574802</PinX>
+						<PinY Unit="MM">0.787401574803150</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="79" UniqueID="{DFB5E33B-411C-452C-BF96-8DE57B1120F3}" Name="Sheet.79" NameU="Sheet.79">
+					<Text>16 bit RAM
+IS61LV25616</Text>
+					<XForm>
+						<PinX Unit="MM">5.787401574803150</PinX>
+						<PinY Unit="MM">6.981080489938757</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="81" UniqueID="{AD1290F5-7315-4BD5-BE25-ADBB77176798}" Name="Sheet.81" NameU="Sheet.81">
+					<Text>EPCS1</Text>
+					<XForm>
+						<PinX Unit="MM">4.527559055118109</PinX>
+						<PinY Unit="MM">0.590551181102363</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="83" UniqueID="{20C9DCFA-D04B-46C7-86C3-796E60EA21D0}" Name="Sheet.83" NameU="Sheet.83">
+					<Text>FX2LP</Text>
+					<XForm>
+						<PinX Unit="MM">9.251968503937007</PinX>
+						<PinY Unit="MM">5.118110236220471</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="91" UniqueID="{9492CADD-404E-4A8A-8CE1-465B05A4870E}" Name="Bus width.91" NameU="Bus width.91" Master="10">
+					<Text>2</Text>
+					<XForm>
+						<PinX Unit="MM">7.775590551181102</PinX>
+						<PinY Unit="MM">5.905511811023621</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="93" UniqueID="{7AA10453-21AE-4D0D-A2C6-AEBF8E6309D9}" Name="Sheet.93" NameU="Sheet.93">
+					<Text>USB</Text>
+					<XForm>
+						<PinX Unit="MM">11.023622047244094</PinX>
+						<PinY Unit="MM">5.314960629921259</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="13" UniqueID="{5D9A889D-14AB-4740-8209-CEB016E23586}" Name="Photodiode" NameU="Photodiode" Master="12">
+					<XForm>
+						<PinX Unit="MM">11.023622047244093</PinX>
+						<PinY Unit="MM">2.952755905511806</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+					<Prop ID="1" Name="Envelope" NameU="Envelope">
+						<Value Unit="STR">Invisible</Value>
+						<Label>Envelope</Label>
+					</Prop>
+					<Prop ID="2" Name="Subtype" NameU="Subtype">
+						<Value Unit="STR">Light emitting</Value>
+						<Label>Type</Label>
+					</Prop>
+				</Shape>
+				<Shape ID="96" UniqueID="{1053123E-A3E9-4E44-8490-2031CFC50C93}" Name="Straight bus.96" NameU="Straight bus.96" Master="9">
+					<Text>LEDs</Text>
+					<XForm>
+						<PinX Unit="MM">9.178149606299215</PinX>
+						<PinY Unit="MM">2.952755905511811</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+					<Prop ID="1" Name="Label" NameU="Label">
+						<Value></Value>
+						<Label>Label</Label>
+					</Prop>
+				</Shape>
+				<Shape ID="99" UniqueID="{80FD3104-87E5-4467-AF42-0B759029FFA3}" Name="Bus width.99" NameU="Bus width.99" Master="10">
+					<Text>8</Text>
+					<XForm>
+						<PinX Unit="MM">7.677165354330708</PinX>
+						<PinY Unit="MM">2.952755905511811</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="101" UniqueID="{EEAC990C-1295-4C63-9316-7A30FA29FB91}" Name="Sheet.101" NameU="Sheet.101">
+					<Text>Lionheart Block Diagram</Text>
+					<XForm>
+						<PinX Unit="MM">6.003937007874015</PinX>
+						<PinY Unit="MM">7.874015748031496</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="89" UniqueID="{E578DE26-658A-4B96-9B06-0776322257BB}" Name="Sheet.89" NameU="Sheet.89">
+					<Text>Pre-amp</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157479</PinX>
+						<PinY Unit="MM">3.444881889763779</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="42" UniqueID="{FBC7F032-F973-4C27-BFE4-3567A1A3ECFD}" Name="Sheet.42" NameU="Sheet.42">
+					<Text>10dB Attenuator</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157479</PinX>
+						<PinY Unit="MM">3.636811023622047</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="33" UniqueID="{491A3CAE-55F7-4C95-AA1B-C4D2D211BD04}" Name="Sheet.33" NameU="Sheet.33">
+					<Text>Tx/Rx</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157479</PinX>
+						<PinY Unit="MM">3.838582677165354</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="38" UniqueID="{DE450281-E593-4DF0-9DC5-191C5DD7A5E3}" Name="Sheet.38" NameU="Sheet.38">
+					<Text>PTT</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157479</PinX>
+						<PinY Unit="MM">4.429133858267716</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="41" UniqueID="{610FCA5B-D6CE-4D09-A309-CA4A8E81349E}" Name="Sheet.41" NameU="Sheet.41">
+					<Text>Dot Key</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157479</PinX>
+						<PinY Unit="MM">4.232283464566929</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="43" UniqueID="{20EA5203-A995-4920-BF4C-068FC5A1C45B}" Name="Sheet.43" NameU="Sheet.43">
+					<Text>Dash Key</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157479</PinX>
+						<PinY Unit="MM">4.035433070866142</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="28" UniqueID="{54599699-3CAE-404C-97DA-AAFEB8AAAB52}" Name="Sheet.28" NameU="Sheet.28">
+					<Text>AD_CLK (24.576MHz)</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157479</PinX>
+						<PinY Unit="MM">1.574803149606299</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="29" UniqueID="{4E07AA64-9DA0-4293-AAE9-D8ED63B979BB}" Name="Sheet.29" NameU="Sheet.29">
+					<Text>AD_CLK/2</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157479</PinX>
+						<PinY Unit="MM">1.377952755905512</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="30" UniqueID="{1A9C8450-A6D3-4F02-BE44-BDE545856920}" Name="Sheet.30" NameU="Sheet.30">
+					<Text> +5v</Text>
+					<XForm>
+						<PinX Unit="MM">1.574803149606299</PinX>
+						<PinY Unit="MM">6.889763779527558</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="4" UniqueID="{8824912B-143C-4CF6-B413-E9E4CBFD1ABE}" Name="Sheet.4" NameU="Sheet.4">
+					<Text> +12v</Text>
+					<XForm>
+						<PinX Unit="MM">1.279527559055117</PinX>
+						<PinY Unit="MM">7.086614173228346</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="31" UniqueID="{3879BBF1-2961-4F83-AFC1-14E2DFB24564}" Name="1-D double.31" NameU="1-D double.31" Master="13">
+					<Text>?????</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157479</PinX>
+						<PinY Unit="MM">2.736220472440945</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="15" UniqueID="{131CEFE4-88CB-4AFF-AEB2-49FE577A0D5B}" Name="1-D double.15" NameU="1-D double.15" Master="13">
+					<Text>I2C</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157480</PinX>
+						<PinY Unit="MM">5.314960629921259</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="25" UniqueID="{302C06C5-3001-4FC3-B5AD-CDB4096F0F6B}" Name="Bus width.25" NameU="Bus width.25" Master="10">
+					<Text>2</Text>
+					<XForm>
+						<PinX Unit="MM">1.446850393700788</PinX>
+						<PinY Unit="MM">5.314960629921259</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="35" UniqueID="{5D9A841F-5792-47A6-9104-FD4B6140C32B}" Name="Sheet.35" NameU="Sheet.35">
+					<Text> -12v</Text>
+					<XForm>
+						<PinX Unit="MM">1.279527559055117</PinX>
+						<PinY Unit="MM">7.283464566929133</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="36" UniqueID="{B6C4A35E-8728-4E94-8F80-D054DE8E40C7}" Name="Sheet.36" NameU="Sheet.36">
+					<Text>V1.4  28th Jan 2006</Text>
+					<XForm>
+						<PinX Unit="MM">10.236220472440944</PinX>
+						<PinY Unit="MM">0.295275590551181</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="37" UniqueID="{2B085F70-F6C1-4EE4-A4C3-C53412681F0A}" Name="Sheet.37" NameU="Sheet.37">
+					<XForm>
+						<PinX Unit="MM">9.251968503937007</PinX>
+						<PinY Unit="MM">6.299212598425196</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="39" UniqueID="{4716069A-2B2B-4020-B648-8E33FBC09DE8}" Name="Sheet.39" NameU="Sheet.39">
+					<XForm>
+						<PinX Unit="MM">9.251968503937007</PinX>
+						<PinY Unit="MM">6.496062992125983</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="40" UniqueID="{E00DF554-BD19-4958-91B4-A66FEBBF25BC}" Name="Sheet.40" NameU="Sheet.40">
+					<Text>3.3v</Text>
+					<XForm>
+						<PinX Unit="MM">9.251968503937007</PinX>
+						<PinY Unit="MM">6.609580052493437</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="44" UniqueID="{AB27BDFB-6BCC-485B-8878-8318915A1E23}" Name="1-D double.44" NameU="1-D double.44" Master="13">
+					<XForm>
+						<PinX Unit="MM">4.527559055118110</PinX>
+						<PinY Unit="MM">0.986548556430449</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="64" UniqueID="{106C192C-06AD-46BE-A3F4-A51952465255}" Name="1-D double.64" NameU="1-D double.64" Master="13">
+					<XForm>
+						<PinX Unit="MM">8.021653543307089</PinX>
+						<PinY Unit="MM">5.118110236220472</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="65" UniqueID="{69C432AA-8B98-4BA0-944A-3072869DFAA1}" Name="1-D double.65" NameU="1-D double.65" Master="13">
+					<XForm>
+						<PinX Unit="MM">8.021653543307089</PinX>
+						<PinY Unit="MM">4.724409448818897</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="69" UniqueID="{62FF05D6-5738-4CAF-AD86-C1687B0BC466}" Name="Bus width.69" NameU="Bus width.69" Master="10">
+					<Text>4</Text>
+					<XForm>
+						<PinX Unit="MM">4.529403440408323</PinX>
+						<PinY Unit="MM">0.996942645187208</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="80" UniqueID="{BC3B32B1-5954-4955-B4A5-ACBADBE8E3F2}" Name="Bus width.80" NameU="Bus width.80" Master="10">
+					<Text>8</Text>
+					<XForm>
+						<PinX Unit="MM">7.726377952755906</PinX>
+						<PinY Unit="MM">5.118110236220473</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="82" UniqueID="{E30FF000-C15F-42B8-A857-01C8935E0D17}" Name="Bus width.82" NameU="Bus width.82" Master="10">
+					<Text>8</Text>
+					<XForm>
+						<PinX Unit="MM">7.716535433070867</PinX>
+						<PinY Unit="MM">4.734251968503938</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="67" UniqueID="{6291A683-229E-496F-87E7-FE026E793031}" Name="Bus width.67" NameU="Bus width.67" Master="10">
+					<Text>4</Text>
+					<XForm>
+						<PinX Unit="MM">3.423352465103488</PinX>
+						<PinY Unit="MM">0.984251968503937</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="103" UniqueID="{C53DFA10-C126-4A4E-A527-0C842E8CDACB}" Name="1-D double.103" NameU="1-D double.103" Master="13">
+					<Text>JTAG</Text>
+					<XForm>
+						<PinX Unit="MM">1.870078740157480</PinX>
+						<PinY Unit="MM">4.724409448818897</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="68" UniqueID="{9900C3EF-1AF5-4CA5-88CA-85FA2592F1FF}" Name="Bus width.68" NameU="Bus width.68" Master="10">
+					<Text>4</Text>
+					<XForm>
+						<PinX Unit="MM">1.399482180565804</PinX>
+						<PinY Unit="MM">4.731403811505706</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="106" UniqueID="{315476EA-CDCD-4C5E-86A2-E318AE596861}" Name="1-D double.106" NameU="1-D double.106" Master="13">
+					<XForm>
+						<PinX Unit="MM">5.787401574803150</PinX>
+						<PinY Unit="MM">6.491251093613300</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="107" UniqueID="{FB39E2DA-2A38-4339-9B7B-9967E0DCC82A}" Name="1-D double.107" NameU="1-D double.107" Master="13">
+					<XForm>
+						<PinX Unit="MM">6.181102362204725</PinX>
+						<PinY Unit="MM">6.491251093613300</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="108" UniqueID="{F2DECA5D-B451-4A47-A825-CEB650B34535}" Name="Bus width.108" NameU="Bus width.108" Master="10">
+					<Text>17</Text>
+					<XForm>
+						<PinX Unit="MM">5.393700787401575</PinX>
+						<PinY Unit="MM">6.488954505686788</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="109" UniqueID="{7CF6D78E-F1C0-44AE-A2AD-E79D399436A9}" Name="Bus width.109" NameU="Bus width.109" Master="10">
+					<Text>16</Text>
+					<XForm>
+						<PinX Unit="MM">5.787401574803149</PinX>
+						<PinY Unit="MM">6.488954505686788</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="110" UniqueID="{B4CE888A-0BB0-4326-A40F-BF981628D207}" Name="Bus width.110" NameU="Bus width.110" Master="10">
+					<Text>5</Text>
+					<XForm>
+						<PinX Unit="MM">6.181102362204725</PinX>
+						<PinY Unit="MM">6.488954505686788</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="8" UniqueID="{D4BBDFB2-7460-4E1D-B2BB-9466BBC77589}" Name="1-D double.8" NameU="1-D double.8" Master="13">
+					<XForm>
+						<PinX Unit="MM">10.334645669291337</PinX>
+						<PinY Unit="MM">5.314960629921259</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="94" UniqueID="{AD04EDA1-73E0-4016-A081-9A9BAFAE8993}" Name="Bus width.94" NameU="Bus width.94" Master="10">
+					<Text>2</Text>
+					<XForm>
+						<PinX Unit="MM">10.137795275590550</PinX>
+						<PinY Unit="MM">5.285433070866142</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="95" UniqueID="{3316CD46-1623-4215-B798-86D98CD5EEBF}" Name="1-D double.95" NameU="1-D double.95" Master="13">
+					<Text>Config FPGA</Text>
+					<XForm>
+						<PinX Unit="MM">8.021653543307087</PinX>
+						<PinY Unit="MM">4.330708661417323</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="115" UniqueID="{8B8F5BD6-6A67-4DE1-B27B-B2007C52B0C6}" Name="Bus width.115" NameU="Bus width.115" Master="10">
+					<Text>5</Text>
+					<XForm>
+						<PinX Unit="MM">7.647637795275592</PinX>
+						<PinY Unit="MM">4.340551181102363</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="116" UniqueID="{8B89A62A-7476-4E0C-85B8-7A6CD43DD124}" Name="Sheet.116" NameU="Sheet.116">
+					<Text>Address</Text>
+					<XForm>
+						<PinX Unit="MM">5.358923884514437</PinX>
+						<PinY Unit="MM">6.011592300962380</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="117" UniqueID="{80755372-419C-4CF5-B9AC-EC5288583A1C}" Name="Sheet.117" NameU="Sheet.117">
+					<Text>Data</Text>
+					<XForm>
+						<PinX Unit="MM">5.752624671916011</PinX>
+						<PinY Unit="MM">6.062992125984253</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="118" UniqueID="{37ED2975-6153-4431-8F61-6E7CBF89745E}" Name="Sheet.118" NameU="Sheet.118">
+					<Text>Control</Text>
+					<XForm>
+						<PinX Unit="MM">6.181102362204725</PinX>
+						<PinY Unit="MM">6.043307086614173</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="120" UniqueID="{573EBB6B-24E4-40B1-8CD9-91ABB6E37526}" Name="Sheet.120" NameU="Sheet.120">
+					<Text>I2C</Text>
+					<XForm>
+						<PinX Unit="MM">8.851159230096236</PinX>
+						<PinY Unit="MM">5.890419947506561</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="121" UniqueID="{CAD5C68C-ED61-44F9-B95D-D71FC1C388C4}" Name="Sheet.121" NameU="Sheet.121">
+					<Text>Port B</Text>
+					<XForm>
+						<PinX Unit="MM">8.890529308836396</PinX>
+						<PinY Unit="MM">5.118110236220472</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="122" UniqueID="{2673412D-4F72-4A3E-8328-48FFE898D97A}" Name="Sheet.122" NameU="Sheet.122">
+					<Text>Port D</Text>
+					<XForm>
+						<PinX Unit="MM">8.858267716535432</PinX>
+						<PinY Unit="MM">4.724409448818896</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="123" UniqueID="{529E563E-44A6-4EC0-81B1-783810FD3E22}" Name="Sheet.123" NameU="Sheet.123">
+					<Text>Port A</Text>
+					<XForm>
+						<PinX Unit="MM">8.885608048993875</PinX>
+						<PinY Unit="MM">4.330708661417323</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="124" UniqueID="{1C4A267F-89F5-4C4E-AE07-4579D7EFF46A}" Name="Sheet.124" NameU="Sheet.124">
+					<Text>LM1086</Text>
+					<XForm>
+						<PinX Unit="MM">2.755905511811024</PinX>
+						<PinY Unit="MM">6.889763779527558</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="127" UniqueID="{CFC9C40D-4F87-4675-BF5B-009B9CC5898C}" Name="Sheet.127" NameU="Sheet.127">
+					<Text>3.3v Regulator</Text>
+					<XForm>
+						<PinX Unit="MM">2.755358705161855</PinX>
+						<PinY Unit="MM">7.169947506561679</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="128" UniqueID="{5887EE3E-A953-4235-95E2-FBC6126E34A7}" Name="Sheet.128" NameU="Sheet.128">
+					<Text>1.2v Regulator</Text>
+					<XForm>
+						<PinX Unit="MM">4.431867891513561</PinX>
+						<PinY Unit="MM">7.169947506561679</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="87" UniqueID="{845E4443-AB3C-480F-9B20-BBCEF6B682FC}" Name="Sheet.87" NameU="Sheet.87">
+					<Text>xtal_in</Text>
+					<XForm>
+						<PinX Unit="MM">9.604111986001749</PinX>
+						<PinY Unit="MM">5.890419947506561</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="19" UniqueID="{0C938C53-F300-439B-AA67-8A8FA4FD2FB6}" Name="Sheet.19" NameU="Sheet.19">
+					<XForm>
+						<PinX Unit="MM">3.248031496062992</PinX>
+						<PinY Unit="MM">6.889763779527558</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="7" UniqueID="{9842F318-E506-4E36-80C8-6D68BF080682}" Name="Sheet.7" NameU="Sheet.7">
+					<XForm>
+						<PinX Unit="MM">3.346456692913386</PinX>
+						<PinY Unit="MM">6.596784776902890</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="21" UniqueID="{E892170A-23AF-47C3-9E2E-F586E7347C36}" Name="Sheet.21" NameU="Sheet.21">
+					<XForm>
+						<PinX Unit="MM">3.917322834645669</PinX>
+						<PinY Unit="MM">6.889763779527558</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="22" UniqueID="{ABF692AA-7703-40F1-BD31-F497B9E83896}" Name="Sheet.22" NameU="Sheet.22">
+					<Text>+5v</Text>
+					<XForm>
+						<PinX Unit="MM">3.740157480314960</PinX>
+						<PinY Unit="MM">7.003280839895012</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="24" UniqueID="{ED9016A7-8F1C-4011-8AA3-73EDB29C8471}" Name="Crystal" NameU="Crystal" Master="11">
+					<Text>24MHz</Text>
+					<XForm>
+						<PinX Unit="MM">10.137795275590552</PinX>
+						<PinY Unit="MM">5.708661417322833</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="86" UniqueID="{4F9CECF1-5AD8-4F83-B461-95C3E3BBB590}" Name="Sheet.86" NameU="Sheet.86">
+					<XForm>
+						<PinX Unit="MM">9.990157480314959</PinX>
+						<PinY Unit="MM">5.826771653543307</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="88" UniqueID="{CEE46C48-7EFF-4181-ADE7-8A0E63F90F2A}" Name="Sheet.88" NameU="Sheet.88">
+					<XForm>
+						<PinX Unit="MM">9.990157480314959</PinX>
+						<PinY Unit="MM">5.590551181102361</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="119" UniqueID="{5DAB252B-5EAB-47BC-B735-69F04B5152AC}" Name="Sheet.119" NameU="Sheet.119">
+					<Text>xtal_out</Text>
+					<XForm>
+						<PinX Unit="MM">9.597003499562554</PinX>
+						<PinY Unit="MM">5.511811023622046</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="63" UniqueID="{14369D55-E6EB-4915-BBB6-E69A267E1A06}" Name="Sheet.63" NameU="Sheet.63">
+					<Text>48MHz</Text>
+					<XForm>
+						<PinX Unit="MM">8.021653543307089</PinX>
+						<PinY Unit="MM">5.511811023622046</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="125" UniqueID="{B31E8A26-55EE-4329-95FF-B416970BAFCA}" Name="Sheet.125" NameU="Sheet.125">
+					<Text>clk_out</Text>
+					<XForm>
+						<PinX Unit="MM">8.899825021872264</PinX>
+						<PinY Unit="MM">5.511811023622046</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="133" UniqueID="{F67587C0-38FE-45A0-B86E-BE3BB7FF6332}" Name="Sheet.133" NameU="Sheet.133">
+					<Text>24LC64</Text>
+					<XForm>
+						<PinX Unit="MM">8.120078740157478</PinX>
+						<PinY Unit="MM">6.299212598425196</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="134" UniqueID="{85DBC03E-5F08-4E5D-996A-D3778E4223EB}" Name="Sheet.134" NameU="Sheet.134">
+					<XForm>
+						<PinX Unit="MM">8.070866141732283</PinX>
+						<PinY Unit="MM">6.023622047244094</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="135" UniqueID="{8FCD52BE-CFA1-4C4A-9BE5-0BBCA1F7275F}" Name="Sheet.135" NameU="Sheet.135">
+					<XForm>
+						<PinX Unit="MM">8.169291338582676</PinX>
+						<PinY Unit="MM">6.023622047244094</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="27" UniqueID="{B4C4116D-C865-4A4F-9AD0-11EDE9885213}" Name="Sheet.27" NameU="Sheet.27">
+					<Text>Front edge
+ of PCB</Text>
+					<XForm>
+						<PinX Unit="MM">11.023622047244093</PinX>
+						<PinY Unit="MM">6.889763779527558</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="11" UniqueID="{3A4E1C49-C95F-4458-B274-8E14784084C5}" Name="Chassis.11" NameU="Chassis.11" Master="8">
+					<XForm>
+						<PinX Unit="MM">7.283464566929133</PinX>
+						<PinY Unit="MM">0.295275590551181</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="85" UniqueID="{4070FF94-BB08-4BEB-A82D-6ADE06D5FBF2}" Name="Circle" NameU="Circle" Master="15">
+					<XForm>
+						<PinX Unit="MM">7.277066929133859</PinX>
+						<PinY Unit="MM">0.892224409448817</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="97" UniqueID="{BEC7A06C-E0DE-4A8C-B827-A4A4904C339A}" Name="Circle.97" NameU="Circle.97" Master="15">
+					<XForm>
+						<PinX Unit="MM">7.283464566929133</PinX>
+						<PinY Unit="MM">0.492125984251969</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="98" UniqueID="{05BF0939-6556-41C0-A5D3-245DFC988742}" Name="Circle.98" NameU="Circle.98" Master="15">
+					<XForm>
+						<PinX Unit="MM">7.283464566929133</PinX>
+						<PinY Unit="MM">0.688976377952756</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="102" UniqueID="{8C0E8DB1-0C9C-428C-B624-8464B1913CD9}" Name="Sheet.102" NameU="Sheet.102">
+					<XForm>
+						<PinX Unit="MM">7.181840551181103</PinX>
+						<PinY Unit="MM">0.889025590551180</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="129" UniqueID="{2167D3E3-20AC-4DFC-AD42-1832D60A9937}" Name="Sheet.129" NameU="Sheet.129">
+					<XForm>
+						<PinX Unit="MM">7.185039370078740</PinX>
+						<PinY Unit="MM">0.688976377952756</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="130" UniqueID="{FE93A2E0-3428-4B7C-A757-DC484924693B}" Name="Sheet.130" NameU="Sheet.130">
+					<XForm>
+						<PinX Unit="MM">7.283464566929133</PinX>
+						<PinY Unit="MM">0.442913385826772</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="126" UniqueID="{11005CE2-5229-4A56-8449-A96754C7D1A6}" Name="Sheet.126" NameU="Sheet.126">
+					<Text>MCP120T</Text>
+					<XForm>
+						<PinX Unit="MM">1.968503937007874</PinX>
+						<PinY Unit="MM">6.614173228346457</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="132" UniqueID="{B36755D7-ABB6-49CE-A8F7-53C643BB79EB}" Name="Sheet.132" NameU="Sheet.132">
+					<XForm>
+						<PinX Unit="MM">1.968503937007874</PinX>
+						<PinY Unit="MM">6.811023622047244</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="136" UniqueID="{A805163C-48F4-42DB-8212-52777FF2024F}" Name="Sheet.136" NameU="Sheet.136">
+					<Text>Reset</Text>
+					<XForm>
+						<PinX Unit="MM">1.318897637795276</PinX>
+						<PinY Unit="MM">6.614173228346457</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="137" UniqueID="{AB4198A8-8589-4F8D-8A35-812893E1E1FF}" Name="Chassis.137" NameU="Chassis.137" Master="8">
+					<XForm>
+						<PinX Unit="MM">1.978346456692914</PinX>
+						<PinY Unit="MM">6.397637795275590</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+				</Shape>
+				<Shape ID="141" UniqueID="{E8B441F4-80EB-41C8-B01B-D08DAF065A96}" Name="Sheet.141" NameU="Sheet.141">
+					<XForm>
+						<PinX Unit="MM">2.303149606299213</PinX>
+						<PinY Unit="MM">6.141732283464567</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="142" UniqueID="{9D39CCCA-BC5A-4F66-A6B0-DB0CF199646D}" Name="Sheet.142" NameU="Sheet.142">
+					<XForm>
+						<PinX Unit="MM">1.653543307086614</PinX>
+						<PinY Unit="MM">6.377952755905511</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="143" UniqueID="{FEEFA7AA-58DD-45F1-A191-9344CFB51293}" Name="Sheet.143" NameU="Sheet.143">
+					<Text>Reset</Text>
+					<XForm>
+						<PinX Unit="MM">10.157480314960630</PinX>
+						<PinY Unit="MM">4.566929133858268</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="140" UniqueID="{7537D6FD-86A5-4888-A0AC-F51EF9E3B8AA}" Name="Sheet.140" NameU="Sheet.140">
+					<Text>reset</Text>
+					<XForm>
+						<PinX Unit="MM">9.660870516185474</PinX>
+						<PinY Unit="MM">4.562335958005249</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="144" UniqueID="{DDC6003D-FDB1-4721-BCCE-D167BA839702}" Name="Resistor" NameU="Resistor" Master="16">
+					<XForm>
+						<PinX Unit="MM">2.559055118110235</PinX>
+						<PinY Unit="MM">6.397637795275589</PinY>
+					</XForm>
+					<LayerMem>
+						<LayerMember>1</LayerMember>
+					</LayerMem>
+					<Prop ID="1" Name="Label" NameU="Label">
+						<Value></Value>
+						<Label>Label</Label>
+					</Prop>
+					<Prop ID="2" Name="Slider_Position" NameU="Slider_Position">
+						<Value Unit="STR">.5</Value>
+						<Label>Slider position (0-1)</Label>
+					</Prop>
+				</Shape>
+				<Shape ID="147" UniqueID="{6418EA8D-10EC-443D-B21F-523538333A82}" Name="Sheet.147" NameU="Sheet.147">
+					<XForm>
+						<PinX Unit="MM">2.559055118110236</PinX>
+						<PinY Unit="MM">6.220472440944880</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="148" UniqueID="{D2C7AF50-8C9D-4DE1-A747-B8474EFEA3A2}" Name="Sheet.148" NameU="Sheet.148">
+					<XForm>
+						<PinX Unit="MM">2.952755905511811</PinX>
+						<PinY Unit="MM">6.574803149606299</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="149" UniqueID="{F6CACF47-95D2-4FAB-B4C1-B7E203022486}" Name="Sheet.149" NameU="Sheet.149">
+					<XForm>
+						<PinX Unit="MM">2.559055118110236</PinX>
+						<PinY Unit="MM">6.535433070866141</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="150" UniqueID="{EE288DC2-F481-43AE-8E38-8A4C55C032F8}" Name="Sheet.150" NameU="Sheet.150">
+					<Text>????</Text>
+					<XForm>
+						<PinX Unit="MM">3.151793525809274</PinX>
+						<PinY Unit="MM">6.102362204724409</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="71" UniqueID="{8EFB45E5-4A51-4602-B7CD-A40570DAA459}" Name="Sheet.71" NameU="Sheet.71">
+					<Text>1Hz/10KHz from GPS</Text>
+					<XForm>
+						<PinX Unit="MM">9.202755905511811</PinX>
+						<PinY Unit="MM">3.745078740157480</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+	</Pages>
+</VisioDocument>
