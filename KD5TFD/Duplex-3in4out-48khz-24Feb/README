@@ -1,0 +1,13 @@
+This is the Verilog source for the 48 khz 3 in 4 out FPGA code.  
+It's a Quartus project and should be buildable by anyone with the 
+Quartus II toolset.  I'm using Quartus II 5.1 Web Edition Build 176 
+
+To build this all you should have to do is open Duplex.qpf with Quartus
+and select Processing -> Start Compilation.  It should produce a 
+Duplex.rbf file  -- with about 38 warnings. 
+
+This code is based on Phil Harman's (VK6APH) 24Feb Duplex Pre Janus 
+.qar archive.  I've modified it slightly to work with my work 
+PowerSDR code supporting 3in 4out. 
+
+Bill Tracey (kd5tfd) 15 April 2006 (bill@ewjt.com) 
