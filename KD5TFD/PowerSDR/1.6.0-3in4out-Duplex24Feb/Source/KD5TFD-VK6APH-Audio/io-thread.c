@@ -541,7 +541,7 @@ void IOThreadMainLoop(void) {
 						break; 
 
 					case STATE_SAMPLE_MIC_HI: 
-						this_num = ((unsigned char)read_buf[i]) << 8;  // read hi word of sample 
+						this_num = ((int)read_buf[i]) << 8;  // read hi word of sample - preserve sign moron! 
 						state = STATE_SAMPLE_MIC_LO; 
 						break;
 
