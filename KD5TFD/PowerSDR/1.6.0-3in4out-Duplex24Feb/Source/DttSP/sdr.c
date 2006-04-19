@@ -547,8 +547,16 @@ do_rx_spectrum (int k, CXB buf, int type)
 {
   if (uni.spec.flag && k == uni.spec.rxk && type == uni.spec.type)
     {
-      memcpy ((char *) &CXBdata (uni.spec.accum, uni.spec.fill),
-	      (char *) CXBbase (buf), CXBsize (buf) * sizeof (COMPLEX));
+		if ((uni.spec.type == SPEC_POST_DET) && (!rx[k].bin.flag)) {
+			int i;
+			for (i=0; i<CXBhave(rx[k].buf.o);i++)
+				CXBdata(uni.spec.accum, uni.spec.fill+i) = Cmplx(CXBreal(rx[k].buf.o,i)*1.414f,0.0);
+		}
+		else
+		{
+			memcpy ((char *) &CXBdata (uni.spec.accum, uni.spec.fill),
+				(char *) CXBbase (buf), CXBsize (buf) * sizeof (COMPLEX));
+		}
       uni.spec.fill = (uni.spec.fill + CXBsize (buf)) & uni.spec.mask;
     }
 }
@@ -556,8 +564,16 @@ do_rx_spectrum (int k, CXB buf, int type)
 PRIVATE void
 do_tx_spectrum (CXB buf)
 {
-  memcpy ((char *) &CXBdata (uni.spec.accum, uni.spec.fill),
-	  (char *) CXBbase (buf), CXBsize (buf) * sizeof (COMPLEX));
+		if (uni.spec.type == SPEC_PREMOD) {
+			int i;
+			for (i=0; i<CXBhave(tx.buf.i);i++)
+				CXBdata(uni.spec.accum, uni.spec.fill+i) = Cmplx(CXBreal(tx.buf.i,i),0.0);
+		}
+		else
+		{
+			memcpy ((char *) &CXBdata (uni.spec.accum, uni.spec.fill),
+				(char *) CXBbase (buf), CXBsize (buf) * sizeof (COMPLEX));
+		}
   uni.spec.fill = (uni.spec.fill + CXBsize (buf)) & uni.spec.mask;
 }
 
@@ -762,6 +778,7 @@ do_rx_post (int k)
       if (rx[k].grapheq.flag)
 	graphiceq (rx[k].grapheq.gen);
     }
+	do_rx_spectrum(k, rx[k].buf.o, SPEC_POST_DET);
   // not binaural?
   // position in stereo field
 

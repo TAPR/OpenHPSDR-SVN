@@ -1,0 +1,8 @@
+This is seutp for 3 in 4 out at 48 khz
+and uses the 24 Feb FPGA DuplexPreJanus from VK6APH
+
+PowerSDR must be set to 4 channels for the mic to work
+
+This is currently based on the 447 level from the PowerSDR mainline.
+
+Bill Tracey (kd5tfd) 19 May 2006

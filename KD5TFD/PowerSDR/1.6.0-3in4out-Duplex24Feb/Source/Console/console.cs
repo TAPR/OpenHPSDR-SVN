@@ -5768,6 +5768,17 @@ namespace PowerSDR
 		{
 			try 
 			{
+				if(!File.Exists(Application.StartupPath+"\\wisdom"))
+				{
+					Process p = Process.Start(Application.StartupPath+"\\fftw_wisdom.exe");
+					MessageBox.Show("Running one time optimization.  Please wait patiently for "+
+						"this process to finish.\nTypically the optimization takes no more than 3-5 minutes.",
+						"Optimizing...",
+						MessageBoxButtons.OK,
+						MessageBoxIcon.Information);
+					p.WaitForExit();
+				}
+
 				try
 				{
 					if(!CheckForOpenProcesses())
@@ -8285,8 +8296,8 @@ namespace PowerSDR
 			int offset = (int)(200.0/ freq * diff);
 
 			int current_clock = SetupForm.ClockOffset;
-			if((Math.Max(current_clock + offset, current_clock - offset) > 40000) ||
-				(Math.Min(current_clock + offset, current_clock - offset) < -40000))
+			if(((current_clock + offset) > 40000) ||
+				((current_clock + offset) < -40000))
 			{
 				MessageBox.Show("Peak is outside valid range.",
 					"Calibration Error - Range",
@@ -8296,8 +8307,8 @@ namespace PowerSDR
 				goto end;
 			}
 
-			if((Math.Max(current_clock + offset, current_clock - offset) > 20000) ||
-				(Math.Min(current_clock + offset, current_clock - offset) < -20000))
+			if(((current_clock + offset) > 20000) ||
+				((current_clock + offset) < -20000))
 			{
 				DialogResult dr = MessageBox.Show("This value is outside the specifications of the oscillator.  " +
 					"Do you want to use this value?",
@@ -8438,7 +8449,7 @@ namespace PowerSDR
 			}
 			else
 			{
-				CurrentPreampMode = PreampMode.HIGH;
+				CurrentPreampMode = PreampMode.MED;
 				Thread.Sleep(100);
 
 				// get the value of the signal strength meter
@@ -8456,7 +8467,7 @@ namespace PowerSDR
 
 				float gain_offset = avg2 - avg;
 
-				preamp_offset[(int)PreampMode.MED] = gain_offset;
+				preamp_offset[(int)PreampMode.MED] = -gain_offset;
 				preamp_offset[(int)PreampMode.HIGH] = 0.0f;
 			}
 
@@ -11568,6 +11579,8 @@ namespace PowerSDR
 			{
 				sample_rate1 = value;
 				Audio.SampleRate1 = value;
+				if(current_dsp_mode == DSPMode.SPEC)
+					SetMode(DSPMode.SPEC);
 			}
 		}
 
@@ -11596,6 +11609,7 @@ namespace PowerSDR
 			set
 			{
 				block_size1 = value;
+				Audio.BlockSize = value;
 				CWForm.CWBlockSize = block_size1;
 			}
 		}
@@ -11604,7 +11618,10 @@ namespace PowerSDR
 		public int BlockSize2
 		{
 			get { return block_size2; }
-			set { block_size2 = value; }
+			set { 
+				block_size2 = value; 
+				Audio.BlockSizeVAC = value;
+			}
 		}
 
 		private bool cw_key_mode = false;
@@ -12110,17 +12127,26 @@ namespace PowerSDR
 			}
 		}
 
-		private static PerformanceCounter cpu_usage;
-		public static float CpuUsage
+		private PerformanceCounter cpu_usage;
+		public float CpuUsage
 		{
 			get
 			{
-				if (cpu_usage == null)
+				try
 				{
-					cpu_usage = new PerformanceCounter(
-						"Processor", "% Processor Time", "_Total", true);
+					if (cpu_usage == null)
+					{
+						cpu_usage = new PerformanceCounter(
+							"Processor", "% Processor Time", "_Total", true);
+					}
+					return cpu_usage.NextValue(); 
 				}
-				return cpu_usage.NextValue(); 
+				catch(Exception)
+				{
+					timer_cpu_meter.Enabled = false;
+					lblCPUMeter.Visible = false;
+					return 0.0f;
+				}
 			}
 		}
 
@@ -13347,8 +13373,9 @@ namespace PowerSDR
 			return;
             
 			atu_error:
-				chkTUN.Checked = false;
+			chkTUN.Checked = false;
 			chkTUN.Enabled = true;
+			comboTuneMode.Enabled = true;
 			MessageBox.Show("Error communicating with the ATU",
 				"ATU Error",
 				MessageBoxButtons.OK,
@@ -14275,6 +14302,7 @@ namespace PowerSDR
 		private void chkPower_CheckedChanged(object sender, System.EventArgs e)
 		{
 			DttSP.AudioReset();
+			Audio.VACRBReset = true;
 			if(chkPower.Checked)
 			{
 				chkPower.Text = "On";
@@ -15255,6 +15283,7 @@ namespace PowerSDR
 		{
 			Audio.MOX = chkMOX.Checked;
 			DttSP.AudioReset();
+			Audio.VACRBReset = true;
 			const int NUM_SWITCH_BUFFERS = 2;
 			bool cw = (current_dsp_mode == DSPMode.CWL) ||
 					  (current_dsp_mode == DSPMode.CWU);

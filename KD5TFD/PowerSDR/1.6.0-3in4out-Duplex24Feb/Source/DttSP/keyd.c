@@ -63,7 +63,7 @@ BOOLEAN HiPerformance = FALSE;
 // # samples generated during 1 clock tick at RTC_RATE
 //#define TONE_SIZE (SAMP_RATE / RTC_RATE)
 unsigned int TONE_SIZE = 48;
-unsigned int SIZEBUF = 512;
+unsigned int SIZEBUF = 1024;
 // ring buffer size; > 1 sec at this sr
 //#define RING_SIZE (1<<020)
 //#define RING_SIZE (1<<017)
@@ -95,9 +95,10 @@ CWtoneExchange (float *bufl, float *bufr, int nframes)
   size_t numsamps, bytesize = sizeof (float) * nframes;
   if (cw_ring_reset)
     {
+	  size_t reset_size = max(SIZEBUF,nframes);
       cw_ring_reset = FALSE;
-      ringb_float_restart (lring, SIZEBUF);
-      ringb_float_restart (rring, SIZEBUF);
+      ringb_float_restart (lring, reset_size);
+      ringb_float_restart (rring, reset_size);
       memset (bufl, 0, nframes * sizeof (REAL));
       memset (bufr, 0, nframes * sizeof (REAL));
       return;

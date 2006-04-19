@@ -21,13 +21,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0F4107342B43B2AC2F60A22D1A2C683F"
-        "OwnerKey" = "8:_13AD2D6E1EE04F3094D7D373DBE7AE10"
+        "MsmKey" = "8:_13AD2D6E1EE04F3094D7D373DBE7AE10"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_13AD2D6E1EE04F3094D7D373DBE7AE10"
+        "MsmKey" = "8:_145F455E010341DFB7257E1D8D60DDCE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -41,6 +41,30 @@
         {
         "MsmKey" = "8:_3B52A44DAF5D4DDEB3F83F543DB75D09"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_52E5852398F6449BAC1569FFE98FB7D6"
+        "OwnerKey" = "8:_6D8EC92A8ED3BE26666B53E90635BDA2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_52E5852398F6449BAC1569FFE98FB7D6"
+        "OwnerKey" = "8:_A91C6990B5B22CAEAE2886E39B5BAEDE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_52E5852398F6449BAC1569FFE98FB7D6"
+        "OwnerKey" = "8:_60687AF34907D2D78BBD5B121FE4521A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_52E5852398F6449BAC1569FFE98FB7D6"
+        "OwnerKey" = "8:_13AD2D6E1EE04F3094D7D373DBE7AE10"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -59,6 +83,12 @@
         {
         "MsmKey" = "8:_6A1364D904C44961854C699FB1567921"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6D8EC92A8ED3BE26666B53E90635BDA2"
+        "OwnerKey" = "8:_13AD2D6E1EE04F3094D7D373DBE7AE10"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -93,38 +123,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_ACB987D08CD24773939847143E92AB29"
-        "OwnerKey" = "8:_0F4107342B43B2AC2F60A22D1A2C683F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_ACB987D08CD24773939847143E92AB29"
-        "OwnerKey" = "8:_A91C6990B5B22CAEAE2886E39B5BAEDE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_ACB987D08CD24773939847143E92AB29"
-        "OwnerKey" = "8:_60687AF34907D2D78BBD5B121FE4521A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_ACB987D08CD24773939847143E92AB29"
-        "OwnerKey" = "8:_13AD2D6E1EE04F3094D7D373DBE7AE10"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B6A1A5C02C5FFD0F093AF1E6795E7876"
-        "OwnerKey" = "8:_0F4107342B43B2AC2F60A22D1A2C683F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CC9988059B4944BEAB0A721ED4527FD3"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_6D8EC92A8ED3BE26666B53E90635BDA2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -224,20 +224,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_0F4107342B43B2AC2F60A22D1A2C683F"
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_13AD2D6E1EE04F3094D7D373DBE7AE10"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Interop.ADOX, Version=2.8.0.0, Culture=neutral"
+            "AssemblyAsmDisplayName" = "8:PowerSDR, Version=1.6.1.0, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_0F4107342B43B2AC2F60A22D1A2C683F"
+                    "_13AD2D6E1EE04F3094D7D373DBE7AE10"
                     {
-                    "Name" = "8:Interop.ADOX.DLL"
+                    "Name" = "8:PowerSDR.exe"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Interop.ADOX.DLL"
+            "SourcePath" = "8:..\\..\\bin\\Release\\PowerSDR.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_25D0B75A0D034BC793456BD6A7FF8277"
@@ -252,24 +252,13 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_13AD2D6E1EE04F3094D7D373DBE7AE10"
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_145F455E010341DFB7257E1D8D60DDCE"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:PowerSDR, Version=1.4.4.19, Culture=neutral"
-                "ScatterAssemblies"
-                {
-                    "_13AD2D6E1EE04F3094D7D373DBE7AE10"
-                    {
-                    "Name" = "8:PowerSDR.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\..\\bin\\Release\\PowerSDR.exe"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\..\\bin\\Release\\libfftw3f-3.dll"
+            "TargetName" = "8:libfftw3f-3.dll"
             "Tag" = "8:"
             "Folder" = "8:_25D0B75A0D034BC793456BD6A7FF8277"
             "Condition" = "8:"
@@ -395,6 +384,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_6D8EC92A8ED3BE26666B53E90635BDA2"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Interop.ADOX, Version=2.8.0.0, Culture=neutral"
+                "ScatterAssemblies"
+                {
+                    "_6D8EC92A8ED3BE26666B53E90635BDA2"
+                    {
+                    "Name" = "8:Interop.ADOX.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Interop.ADOX.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_25D0B75A0D034BC793456BD6A7FF8277"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_78D7E69A5CC249039EE0BDE7018D9E9D"
@@ -539,26 +559,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_CC9988059B4944BEAB0A721ED4527FD3"
-            {
-            "SourcePath" = "8:..\\..\\bin\\Release\\fftw3.dll"
-            "TargetName" = "8:fftw3.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_25D0B75A0D034BC793456BD6A7FF8277"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_F29E1A04B26E46CEAAB843E34AB3162F"
             {
             "SourcePath" = "8:..\\..\\bin\\Release\\PA19.dll"
@@ -701,14 +701,14 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:PowerSDR v1.6.0"
-        "ProductCode" = "8:{58281845-7F50-42C0-B3E9-C089F8CBC4A9}"
-        "PackageCode" = "8:{5050B23A-D3B4-43D3-96D1-E95659A21BD4}"
+        "ProductName" = "8:PowerSDR v1.6.1"
+        "ProductCode" = "8:{5B23BBD7-3BF7-4FFB-B581-69613181B6A7}"
+        "PackageCode" = "8:{B57939C2-001A-4BA7-923B-465917BC6A31}"
         "UpgradeCode" = "8:{303C929F-BB4B-47D0-A111-0D8BCE591E44}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:FALSE"
-        "ProductVersion" = "8:1.6.0"
+        "ProductVersion" = "8:1.6.1"
         "Manufacturer" = "8:FlexRadio Systems"
         "ARPHELPTELEPHONE" = "8:512-250-8595"
         "ARPHELPLINK" = "8:www.flex-radio.com"
@@ -907,7 +907,7 @@
         {
             "{478F747B-8505-45D1-9AAE-8C3B645C26E3}:_15C91C4ECF764DFBA47F029036B64F8D"
             {
-            "Name" = "8:PowerSDR v1.6.0"
+            "Name" = "8:PowerSDR v1.6.1"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -921,7 +921,7 @@
             }
             "{478F747B-8505-45D1-9AAE-8C3B645C26E3}:_8EA996EF35C347E99D0F34A8811976A9"
             {
-            "Name" = "8:PowerSDR v1.6.0"
+            "Name" = "8:PowerSDR v1.6.1"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1422,7 +1422,7 @@
         }
         "MergeModule"
         {
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_ACB987D08CD24773939847143E92AB29"
+            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_52E5852398F6449BAC1569FFE98FB7D6"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"

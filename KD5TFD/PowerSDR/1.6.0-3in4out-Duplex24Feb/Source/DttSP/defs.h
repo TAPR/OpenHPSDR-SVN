@@ -34,11 +34,11 @@ Bridgewater, NJ 08807
 #ifndef _defs_h
 #define _defs_h
 
-#define RINGMULT (4)
+#define RINGMULT (2)
 #define METERMULT (20)
 #define SPECMULT (4)
 #define DEFRATE (48000.0)
-#define DEFSIZE (512)
+#define DEFSIZE (1024)
 #define DEFMODE (SAM)
 #define DEFSPEC (4096)
 #define DEFCOMP (512)
