@@ -4561,7 +4561,7 @@ namespace PowerSDR
 			this.comboDSPBufSize.Size = new System.Drawing.Size(64, 21);
 			this.comboDSPBufSize.TabIndex = 18;
 			this.toolTip1.SetToolTip(this.comboDSPBufSize, "Sets DSP internal Buffer Size -- larger yields sharper filters, more latency");
-			this.comboDSPBufSize.ValueMember = "2048";
+			this.comboDSPBufSize.ValueMember = "1024";
 			this.comboDSPBufSize.SelectedIndexChanged += new System.EventHandler(this.comboDSPBufSize_SelectedIndexChanged);
 			// 
 			// grpDSPNB
@@ -13182,6 +13182,7 @@ namespace PowerSDR
 			set { comboAudioSoundCard.SelectedIndex = value; }
 		}
 
+		private bool force_model = false;
 		public Model CurrentModel
 		{
 			set
@@ -13189,15 +13190,15 @@ namespace PowerSDR
 				switch(value)
 				{
 					case Model.SDR1000:
-						radGenModelSDR1000.Focus();
+						force_model = true;
 						radGenModelSDR1000.Checked = true;
 						break;
 					case Model.SOFTROCK40:
-						radGenModelSoftRock40.Focus();
+						force_model = true;
 						radGenModelSoftRock40.Checked = true;
 						break;
 					case Model.DEMO:
-						radGenModelDemoNone.Focus();
+						force_model = true;
 						radGenModelDemoNone.Checked = true;
 						break;
 				}
@@ -13553,10 +13554,11 @@ namespace PowerSDR
 			if(radGenModelSDR1000.Checked)
 			{
 				console.CurrentModel = Model.SDR1000;
-				if(radGenModelSDR1000.Focused)
+				if(radGenModelSDR1000.Focused || force_model)
 				{
 					chkGeneralRXOnly.Checked = false;
 					chkGeneralDisablePTT.Checked = false;
+					force_model = false;
 				}
 				chkGeneralRXOnly.Enabled = true;
 			}
@@ -13568,10 +13570,11 @@ namespace PowerSDR
 			{
 				chkGeneralDisablePTT.Checked = true;
 				console.CurrentModel = Model.SOFTROCK40;
-				if(radGenModelSoftRock40.Focused)
+				if(radGenModelSoftRock40.Focused || force_model)
 				{
 					chkGeneralRXOnly.Checked = true;
 					chkGeneralDisablePTT.Checked = true;
+					force_model = false;
 				}
 				chkGeneralRXOnly.Enabled = false;
 			}
@@ -13583,7 +13586,7 @@ namespace PowerSDR
 			if(radGenModelDemoNone.Checked)
 			{
 				console.CurrentModel = Model.DEMO;
-				if(radGenModelDemoNone.Focused)
+				if(radGenModelDemoNone.Focused || force_model)
 				{
 					chkGeneralRXOnly.Checked = true;
 					chkGeneralDisablePTT.Checked = true;
@@ -13595,6 +13598,7 @@ namespace PowerSDR
 						"Demo/Test Drive Mode Welcome",
 						MessageBoxButtons.OK,
 						MessageBoxIcon.Information);
+					force_model = false;
 				}
 				chkGeneralRXOnly.Enabled = true;
 			}
@@ -14126,25 +14130,31 @@ namespace PowerSDR
 	
 		private void comboAudioBuffer1_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
-			console.BlockSize1 = Int32.Parse(comboAudioBuffer1.Text);
 			if(console.PowerOn)
 			{
 				console.PowerOn = false;
 				Thread.Sleep(100);
+				console.BlockSize1 = Int32.Parse(comboAudioBuffer1.Text);
 				DttSP.SetAudioSize(console.BlockSize1);
+				DttSP.SetKeyerResetSize(console.BlockSize1);
 				console.PowerOn = true;
 			}
-			else DttSP.SetAudioSize(console.BlockSize1);
-			DttSP.SetKeyerResetSize(console.BlockSize1);
+			else 
+			{
+				console.BlockSize1 = Int32.Parse(comboAudioBuffer1.Text);
+				DttSP.SetAudioSize(console.BlockSize1);
+				DttSP.SetKeyerResetSize(console.BlockSize1);
+			}
+			
 		}
 
 		private void comboAudioBuffer2_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
-			console.BlockSize2 = Int32.Parse(comboAudioBuffer2.Text);
 			if(console.PowerOn && chkAudioEnableVAC.Checked)
 			{
 				console.PowerOn = false;
 				Thread.Sleep(100);
+				console.BlockSize2 = Int32.Parse(comboAudioBuffer2.Text);
 				console.PowerOn = true;
 			}
 		}

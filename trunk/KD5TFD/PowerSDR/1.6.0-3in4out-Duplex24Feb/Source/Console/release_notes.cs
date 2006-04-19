@@ -22,6 +22,50 @@
 // Paper mail may be sent to: 
 //    FlexRadio Systems, 8900 Marybank Dr., Austin, TX  78750, USA.
 //=================================================================
+#region v1.6.1 Released ? SVN rev ?
+//v1.6.1 Released ? SVN rev ?
+//
+// Bug Fixes 
+//
+//		Issue:			Ring Buffer settings
+//		Description:	The default ring buffer settings in the dsp, keyer
+//						were set incorrectly.  This led to occasional
+//						burps which were most evident if using VAC on
+//						a mode giving a display.  More work is likely
+//						needed to understand all cases.
+//		Reported By:	W4TME, N4HY
+//		Fixed By:		N4HY
+//
+//		Issue:			Level calibration is broken on 3-board stacks.
+//		Description:	The rewritten level calibration routine had a problem
+//						with the 3-board stack algorithm.  It had both a sign
+//						error (+ instead of -) and a comparison flaw in the
+//						algorithm.  These have both been fixed and the
+//						calibration should now be accurate for all
+//						configurations of the radio.
+//		Reported by:	VK6APH
+//		Fixed By:		KE5DTO
+//
+//		Issue:			VAC reset, and PTT handling faulty.
+//		Description:	Just as with the regular IF path ring buffers, one must
+//						be careful about attempting asynch operations on the
+//						ring buffers associated	with Virtual Audio Cables
+//						operation.  In addition, no attempt at all was made to
+//						keep the depth/latency constant from one push to talk
+//						to the next.  So, this is handled by the rb resets and
+//						they are implemented in the	fashion developed for DttSP
+//						(done only in the callback).
+//		Reported By:	IK3VIG, W4TME
+//		Fixed By:		N4HY
+//
+//		Issue:			Audio start request wrong in audio.cs.
+//		Description:	Irrespective of the buffer size setting on the setup
+//						form, the actual value submitted to portaudio was being
+//						set to 2048.  This has been in all versions since the
+//						big audio cleanup.
+//		Reported by:	KD5TFD
+//		Fixed By:		N4HY
+#endregion
 
 #region v1.6.0 Released 03/28/06 SVN rev 383
 //v1.6.0 Released 03/28/06 SVN rev 383

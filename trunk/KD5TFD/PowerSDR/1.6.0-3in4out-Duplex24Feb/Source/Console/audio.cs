@@ -154,28 +154,6 @@ namespace PowerSDR
 			set	{ high_swr_scale = value; } 
 		}
 
-		private static double vac_preamp = 1.0;
-		public static double VACPreamp
-		{
-			get { return vac_preamp; }
-			set
-			{
-				//Debug.WriteLine("vac_preamp: "+value.ToString("f3"));
-				vac_preamp = value;
-			}
-		}
-
-		private static double vac_rx_scale = 1.0;
-		public static double VACRXScale
-		{
-			get { return vac_rx_scale; }
-			set
-			{
-				//Debug.WriteLine("vac_rx_scale: "+value.ToString("f3"));
-				vac_rx_scale = value;
-			}
-		}
-
 		private static double mic_preamp = 1.0;
 		public static double MicPreamp
 		{
@@ -264,7 +242,6 @@ namespace PowerSDR
 		public static CW cw_form = null;
 		public static Console console = null;
 		unsafe private static void *stream1;
-		private static int block_size1 = 1024;
 		unsafe private static void *stream2;
 		private static int block_size2 = 2048;
 		public static float[] phase_buf_l = new float[block_size1];
@@ -327,6 +304,38 @@ namespace PowerSDR
 			get { return vac_enabled; }
 		}
 
+		private static bool vac_rb_reset = false;
+		public static bool VACRBReset
+		{
+			set
+			{
+				vac_rb_reset = value;
+			}
+			get { return vac_rb_reset; }
+		}
+
+		private static double vac_preamp = 1.0;
+		public static double VACPreamp
+		{
+			get { return vac_preamp; }
+			set
+			{
+				//Debug.WriteLine("vac_preamp: "+value.ToString("f3"));
+				vac_preamp = value;
+			}
+		}
+
+		private static double vac_rx_scale = 1.0;
+		public static double VACRXScale
+		{
+			get { return vac_rx_scale; }
+			set
+			{
+				//Debug.WriteLine("vac_rx_scale: "+value.ToString("f3"));
+				vac_rx_scale = value;
+			}
+		}
+
 		private static DSPMode dsp_mode = DSPMode.LSB;
 		public static DSPMode CurDSPMode
 		{
@@ -353,6 +362,26 @@ namespace PowerSDR
 				if(vac_enabled) InitVAC();
 			}
 			get { return sample_rate2; }
+		}
+
+		private static int block_size1 = 1024;
+		public static int BlockSize
+		{
+			set 
+			{
+				block_size1 = value; 
+			}
+			get { return block_size1; }
+		}
+
+		private static int block_size_vac = 2048;
+		public static int BlockSizeVAC
+		{
+			set 
+			{
+				block_size_vac = value; 
+			}
+			get { return block_size_vac; }
 		}
 
 		private static bool vac_stereo = false;
@@ -609,7 +638,20 @@ namespace PowerSDR
 					if(next_audio_state1 == AudioState.SWITCH) 
 					{
 						MSCVRT.memset(in_l_ptr1, 0, frameCount*sizeof(float));
-						MSCVRT.memset(in_r_ptr1, 0, frameCount*sizeof(float));						
+						MSCVRT.memset(in_r_ptr1, 0, frameCount*sizeof(float));	
+						if (vac_enabled) 
+						{
+							if((rb_vacIN_l.ReadSpace() >= frameCount)&&(rb_vacIN_r.ReadSpace() >= frameCount))
+							{
+								rb_vacIN_l.ReadPtr(in_l_ptr1,frameCount);
+								rb_vacIN_r.ReadPtr(in_r_ptr1,frameCount);
+							}
+							else
+							{
+								VACDebug("rb_vacIN_l underflow 4inTX");
+							}
+						}
+
 						DttSP.ExchangeSamples(in_l_ptr1, in_r_ptr1, out_l_ptr1, out_r_ptr1, frameCount);
 						if (switch_count == 0) next_audio_state1 = AudioState.CW;
 						switch_count--;
@@ -701,6 +743,19 @@ namespace PowerSDR
 				case AudioState.SWITCH:
 					ClearBuffer(in_l_ptr1, frameCount);
 					ClearBuffer(in_r_ptr1, frameCount);
+					if(vac_enabled)
+					{
+						if((rb_vacIN_l.ReadSpace() >= frameCount)&&(rb_vacIN_r.ReadSpace() >= frameCount))
+						{
+							rb_vacIN_l.ReadPtr(in_l_ptr1,frameCount);
+							rb_vacIN_r.ReadPtr(in_r_ptr1,frameCount);
+						}
+						else
+						{
+							VACDebug("rb_vacIN_l underflow 4inTX");
+						}
+					}
+
 					DttSP.ExchangeSamples(in_l_ptr1, in_r_ptr1, out_l_ptr1, out_r_ptr1, frameCount);
 					ClearBuffer(out_l_ptr1, frameCount);
 					ClearBuffer(out_r_ptr1, frameCount);
@@ -976,13 +1031,13 @@ namespace PowerSDR
 							else
 							{
 								ClearBuffer(in_l,frameCount);
-								VACDebug("rb_vacIN_l underflow");
+								VACDebug("rb_vacIN_l underflow 4inTX");
 							}
 							if(rb_vacIN_r.ReadSpace() >= frameCount) rb_vacIN_r.ReadPtr(in_r,frameCount);
 							else
 							{
 								ClearBuffer(in_r,frameCount);
-								VACDebug("rb_vacIN_r underflow");
+								VACDebug("rb_vacIN_r underflow 4inTX");
 							}
 							ScaleBuffer(in_l, in_l, frameCount, (float)vac_preamp);
 							ScaleBuffer(in_r, in_r, frameCount, (float)vac_preamp);						
@@ -992,17 +1047,16 @@ namespace PowerSDR
 						{
 							DttSP.ExchangeSamples(in_l, in_r, out_l_ptr1, out_r_ptr1, frameCount);
 
-							if(rb_vacIN_l.ReadSpace() >= frameCount) rb_vacIN_l.ReadPtr(in_l,frameCount);
+							if ((rb_vacIN_l.ReadSpace() >= frameCount)&&(rb_vacIN_r.ReadSpace() >= frameCount))
+							{
+								rb_vacIN_l.ReadPtr(in_l,frameCount);
+								rb_vacIN_r.ReadPtr(in_r,frameCount);
+							}
 							else
 							{
 								ClearBuffer(in_l,frameCount);
-								VACDebug("rb_vacIN_l underflow");
-							}
-							if(rb_vacIN_r.ReadSpace() >= frameCount) rb_vacIN_r.ReadPtr(in_r,frameCount);
-							else
-							{
 								ClearBuffer(in_r,frameCount);
-								VACDebug("rb_vacIN_r underflow");
+								VACDebug("rb_vacIN_l underflow 4inRX");
 							}
 						}
 					} 
@@ -1044,6 +1098,18 @@ namespace PowerSDR
 					{
 						ClearBuffer(in_l_ptr1, frameCount);
 						ClearBuffer(in_r_ptr1, frameCount);
+						if (vac_enabled) 
+						{
+							if((rb_vacIN_l.ReadSpace() >= frameCount)&&(rb_vacIN_r.ReadSpace() >= frameCount))
+							{
+								rb_vacIN_l.ReadPtr(in_l_ptr1,frameCount);
+								rb_vacIN_r.ReadPtr(in_r_ptr1,frameCount);
+							}
+							else
+							{
+								VACDebug("rb_vacIN_l underflow 4inTX");
+							}
+						}
 						DttSP.ExchangeSamples(in_l_ptr1, in_r_ptr1, out_l_ptr1, out_r_ptr1, frameCount);
 						if (switch_count == 0) next_audio_state1 = AudioState.CW;
 						switch_count--;
@@ -1155,6 +1221,18 @@ namespace PowerSDR
 				case AudioState.SWITCH:
 					ClearBuffer(in_l_ptr1, frameCount);
 					ClearBuffer(in_r_ptr1, frameCount);
+					if(vac_enabled)
+					{
+						if((rb_vacIN_l.ReadSpace() >= frameCount)&&(rb_vacIN_r.ReadSpace() >= frameCount))
+						{
+							rb_vacIN_l.ReadPtr(in_l_ptr1,frameCount);
+							rb_vacIN_r.ReadPtr(in_r_ptr1,frameCount);
+						}
+						else
+						{
+							VACDebug("rb_vacIN_l underflow 4inTX");
+						}
+					}
 					DttSP.ExchangeSamples(in_l_ptr1, in_r_ptr1, out_l_ptr1, out_r_ptr1, frameCount);
 					ClearBuffer(out_l_ptr1, frameCount);
 					ClearBuffer(out_r_ptr1, frameCount);
@@ -1187,10 +1265,16 @@ namespace PowerSDR
 
 				if (sample_rate2 == sample_rate1) 
 				{
-					if (rb_vacOUT_l.WriteSpace()>=frameCount) rb_vacOUT_l.WritePtr(out_l2,frameCount);
-					else VACDebug("rb_vacOUT_l overflow");
-					if (rb_vacOUT_r.WriteSpace()>=frameCount) rb_vacOUT_r.WritePtr(out_r2,frameCount);
-					else VACDebug("rb_vacOUT_r overflow");
+					if ((rb_vacOUT_l.WriteSpace()>=frameCount)&&(rb_vacOUT_r.WriteSpace()>=frameCount))
+					{
+						rb_vacOUT_l.WritePtr(out_l2,frameCount);
+						rb_vacOUT_r.WritePtr(out_r2,frameCount);
+					}
+					else 
+					{
+						VACDebug("rb_vacOUT_l overflow ");
+						vac_rb_reset = true;
+					}
 				} 
 				else 
 				{
@@ -1202,10 +1286,16 @@ namespace PowerSDR
 								int outsamps;
 								DttSP.DoResamplerF(out_l2,res_outl_ptr,frameCount,&outsamps, resampPtrOut_l);
 								DttSP.DoResamplerF(out_r2,res_outr_ptr,frameCount,&outsamps, resampPtrOut_r);
-								if (rb_vacOUT_l.WriteSpace()>=outsamps) rb_vacOUT_l.WritePtr(res_outl_ptr,outsamps);
-								else VACDebug("rb_vacOUT_l overflow");
-								if (rb_vacOUT_r.WriteSpace()>=outsamps) rb_vacOUT_r.WritePtr(res_outr_ptr,outsamps);
-								else VACDebug("rb_vacOUT_r overflow");
+								if ((rb_vacOUT_l.WriteSpace()>=outsamps)&&(rb_vacOUT_r.WriteSpace()>=outsamps))
+								{
+									rb_vacOUT_l.WritePtr(res_outl_ptr,outsamps);
+									rb_vacOUT_r.WritePtr(res_outr_ptr,outsamps);
+								}
+								else
+								{
+									vac_rb_reset = true;
+									VACDebug("rb_vacOUT_l overflow");
+								}
 							}
 					}
 					else 
@@ -1214,10 +1304,16 @@ namespace PowerSDR
 						{
 							int outsamps;
 							DttSP.DoResamplerF(out_l2,res_outl_ptr,frameCount,&outsamps, resampPtrOut_l);
-							if(rb_vacOUT_l.WriteSpace() >= outsamps) rb_vacOUT_l.WritePtr(res_outl_ptr,outsamps);
-							else VACDebug("rb_vacOUT_l overflow");
-							if(rb_vacOUT_r.WriteSpace() >= outsamps) rb_vacOUT_r.WritePtr(res_outl_ptr,outsamps);
-							else VACDebug("rb_vacOUT_r overflow");
+							if ((rb_vacOUT_l.WriteSpace() >= outsamps)&&(rb_vacOUT_r.WriteSpace() >= outsamps))
+							{
+								rb_vacOUT_l.WritePtr(res_outl_ptr,outsamps);
+								rb_vacOUT_r.WritePtr(res_outl_ptr,outsamps);
+							}
+							else
+							{
+								vac_rb_reset = true;
+								VACDebug("rb_vacOUT_l overflow");
+							}
 						}
 					}
 				}
@@ -1334,6 +1430,19 @@ namespace PowerSDR
 			float* out_r_ptr1 = null;
 			if(vac_stereo) out_r_ptr1 = (float *)array_ptr[1];
 
+			if (vac_rb_reset)
+			{
+				vac_rb_reset = false;
+				ClearBuffer(out_l_ptr1,frameCount);
+				if (vac_stereo) ClearBuffer(out_r_ptr1,frameCount);
+				rb_vacIN_l.Restart((block_size1*Audio.SampleRate1)/(block_size_vac*Audio.SampleRate2));
+				rb_vacIN_r.Restart((block_size1*Audio.SampleRate1)/(block_size_vac*Audio.SampleRate2));
+				rb_vacOUT_l.Restart(block_size_vac*2);
+				rb_vacOUT_r.Restart(block_size_vac*2);
+				int tmp = 2*block_size_vac;
+				Debug.WriteLine(tmp.ToString());
+				return 0;
+			}
 			if (vac_stereo)
 			{
 				if (vac_resample) 
@@ -1343,32 +1452,43 @@ namespace PowerSDR
 						fixed(float *res_inr_ptr = &(res_inr[0])) 
 						{
 							DttSP.DoResamplerF(in_l_ptr1, res_inl_ptr,frameCount,&outsamps, resampPtrIn_l);
-							if (rb_vacIN_l.WriteSpace() >= outsamps)  rb_vacIN_l.WritePtr(res_inl_ptr,outsamps);
-							else VACDebug("rb_vacIN_l overflow");
 							DttSP.DoResamplerF(in_r_ptr1, res_inr_ptr,frameCount,&outsamps, resampPtrIn_r);
-							if (rb_vacIN_r.WriteSpace() >= outsamps) rb_vacIN_r.WritePtr(res_inr_ptr,outsamps);
-							else VACDebug("rb_vacIN_r overflow");
+							if ((rb_vacIN_l.WriteSpace() >= outsamps)&&(rb_vacIN_r.WriteSpace() >= outsamps))
+							{
+								rb_vacIN_l.WritePtr(res_inl_ptr,outsamps);
+								rb_vacIN_r.WritePtr(res_inr_ptr,outsamps);
+							}
+							else 
+							{
+								vac_rb_reset = true;
+								VACDebug("rb_vacIN overflow stereo CBvac");
+							}
 						}
 				} 
 				else 
 				{
-					if (rb_vacIN_l.WriteSpace() >= frameCount) rb_vacIN_l.WritePtr(in_l_ptr1,frameCount);
-					else VACDebug("rb_vacIN_l overflow");
-					if (rb_vacIN_r.WriteSpace() >= frameCount) rb_vacIN_r.WritePtr(in_r_ptr1,frameCount);
-					else VACDebug("rb_vacIN_r overflow");
+					if ((rb_vacIN_l.WriteSpace() >= frameCount)&&(rb_vacIN_r.WriteSpace() >= frameCount))
+					{
+						rb_vacIN_l.WritePtr(in_l_ptr1,frameCount);
+						rb_vacIN_r.WritePtr(in_r_ptr1,frameCount);
+					}
+					else
+					{
+						vac_rb_reset = true;
+                        VACDebug("rb_vacIN overflow mono CBvac");
+					}
 				}
 				
-				if (rb_vacOUT_l.ReadSpace() >= frameCount) rb_vacOUT_l.ReadPtr(out_l_ptr1,frameCount);
+				if ((rb_vacOUT_l.ReadSpace() >= frameCount)&&(rb_vacOUT_r.ReadSpace() >= frameCount))
+				{
+					rb_vacOUT_l.ReadPtr(out_l_ptr1,frameCount);
+					rb_vacOUT_r.ReadPtr(out_r_ptr1,frameCount);
+				}
 				else
 				{
 					ClearBuffer(out_l_ptr1,frameCount);
-					VACDebug("rb_vacOUT_l underflow");
-				}
-				if (rb_vacOUT_r.ReadSpace() >= frameCount) rb_vacOUT_r.ReadPtr(out_r_ptr1,frameCount);
-				else
-				{
 					ClearBuffer(out_r_ptr1,frameCount);
-					VACDebug("rb_vacOUT_r underflow");
+					VACDebug("rb_vacOUT underflow");
 				}
 			} 
 			else 
@@ -1379,30 +1499,40 @@ namespace PowerSDR
 					fixed(float *res_inl_ptr = &(res_inl[0]))
 					{
 						DttSP.DoResamplerF(in_l_ptr1, res_inl_ptr,frameCount,&outsamps, resampPtrIn_l);
-						if (rb_vacIN_l.WriteSpace() >= outsamps) rb_vacIN_l.WritePtr(res_inl_ptr,outsamps);
-						else VACDebug("rb_vacIN_l overflow");
-						if (rb_vacIN_r.WriteSpace() >= outsamps) rb_vacIN_r.WritePtr(res_inl_ptr,outsamps);
-						else VACDebug("rb_vacIN_r overflow");
+						if ((rb_vacIN_l.WriteSpace() >= outsamps)&&(rb_vacIN_r.WriteSpace() >= outsamps))
+						{
+							rb_vacIN_l.WritePtr(res_inl_ptr,outsamps);
+							rb_vacIN_r.WritePtr(res_inl_ptr,outsamps);
+						}
+						else 
+						{
+							//vac_rb_reset = true;
+							VACDebug("rb_vacIN_l overflow");
+						}
 					}
 				} 
 				else 
 				{
-					if (rb_vacIN_l.WriteSpace() >= frameCount) rb_vacIN_l.WritePtr(in_l_ptr1,frameCount);
-					else VACDebug("rb_vacIN_l overflow");
-					if (rb_vacIN_r.WriteSpace() >= frameCount) rb_vacIN_r.WritePtr(in_l_ptr1,frameCount);
-					else VACDebug("rb_vacIN_r overflow");
+					if ((rb_vacIN_l.WriteSpace() >= frameCount)&& (rb_vacIN_r.WriteSpace() >= frameCount))
+					{
+						rb_vacIN_l.WritePtr(in_l_ptr1,frameCount);
+						rb_vacIN_r.WritePtr(in_l_ptr1,frameCount);
+					}
+					else
+					{
+						//vac_rb_reset = true;
+						VACDebug("rb_vacIN_l overflow");
+					}
 				}
-				if (rb_vacOUT_l.ReadSpace() >= frameCount) rb_vacOUT_l.ReadPtr(out_l_ptr1,frameCount);
+				if ((rb_vacOUT_l.ReadSpace() >= frameCount)&&(rb_vacOUT_r.ReadSpace() >= frameCount))
+				{
+					rb_vacOUT_l.ReadPtr(out_l_ptr1,frameCount);
+					rb_vacOUT_r.ReadPtr(out_l_ptr1,frameCount);
+				}
 				else 
 				{
 					ClearBuffer(out_l_ptr1,frameCount);
 					VACDebug("rb_vacOUT_l underflow");
-				}
-				if (rb_vacOUT_r.ReadSpace() >= frameCount) rb_vacOUT_r.ReadPtr(out_l_ptr1,frameCount);
-				else
-				{
-					ClearBuffer(out_l_ptr1,frameCount);
-					VACDebug("rb_vacOUT_r underflow");
 				}
 			}
 
@@ -3941,25 +4071,25 @@ namespace PowerSDR
 
 		unsafe private static void InitVAC()
 		{
-			if(rb_vacOUT_l == null) rb_vacOUT_l = new RingBuffer(8192);
+			if(rb_vacOUT_l == null) rb_vacOUT_l = new RingBuffer(65536);
 			rb_vacOUT_l.Restart(block_size2);
 			
-			if(rb_vacOUT_r == null) rb_vacOUT_r = new RingBuffer(8192);
+			if(rb_vacOUT_r == null) rb_vacOUT_r = new RingBuffer(65536);
 			rb_vacOUT_r.Restart(block_size2);
 
-			if(rb_vacIN_l == null) rb_vacIN_l = new RingBuffer(65536);
+			if(rb_vacIN_l == null) rb_vacIN_l = new RingBuffer(4*65536);
 			rb_vacIN_l.Restart(block_size2);
 
-			if(rb_vacIN_r == null) rb_vacIN_r = new RingBuffer(65536);
+			if(rb_vacIN_r == null) rb_vacIN_r = new RingBuffer(4*65536);
 			rb_vacIN_r.Restart(block_size2);
 
 			if (sample_rate2 != sample_rate1) 
 			{
 				vac_resample = true;
-				if(res_outl == null) res_outl = new float [32768];
-				if(res_outr == null) res_outr = new float [32768];
-				if(res_inl == null) res_inl  = new float [32768];
-				if(res_inr == null) res_inr  = new float [32768];
+				if(res_outl == null) res_outl = new float [65536];
+				if(res_outr == null) res_outr = new float [65536];
+				if(res_inl == null) res_inl  = new float [4*65536];
+				if(res_inr == null) res_inr  = new float [4*65536];
 
 				resampPtrIn_l  = DttSP.NewResamplerF(sample_rate2,sample_rate1);
 				resampPtrIn_r  = DttSP.NewResamplerF(sample_rate2,sample_rate1);

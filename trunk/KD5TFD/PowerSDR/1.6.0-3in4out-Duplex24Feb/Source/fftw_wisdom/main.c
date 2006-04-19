@@ -127,5 +127,5 @@ int main(int argc, char **argv) {
 
 	} else 
 		fprintf(stderr,"Could not open the wisdom file in the\n");
-	fprintf(stderr,"Strike any key when ready"),gets(dummy);
+	fprintf(stderr,"Strike the enter key when ready"),gets(dummy);
 }

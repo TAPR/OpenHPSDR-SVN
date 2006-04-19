@@ -17,7 +17,7 @@
                 DelaySign = "false"
                 OutputType = "WinExe"
                 PreBuildEvent = ""
-                PostBuildEvent = 'copy "$(ProjectDir)CAT\CATStructs.xml" "$(OutDir)"; &#xd;&#xa;copy "$(ProjectDir)..\FFTW\fftw3.dll" "$(OutDir)"'
+                PostBuildEvent = 'copy "$(ProjectDir)CAT\CATStructs.xml" "$(OutDir)"; &#xd;&#xa;copy "$(ProjectDir)..\FFTW\libfftw3f-3.dll" "$(OutDir)"'
                 RootNamespace = "PowerSDR"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = "PowerSDR.Console"
@@ -269,7 +269,7 @@
                 />
                 <File
                     RelPath = "memory.cs"
-                    SubType = "Component"
+                    SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File

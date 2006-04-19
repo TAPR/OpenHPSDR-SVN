@@ -585,7 +585,13 @@ namespace PowerSDR
 			if(chkRecord.Checked)
 			{
 				chkRecord.BackColor = console.ButtonSelectedColor;
-				Audio.wave_file_writer = new WaveFileWriter(console.BlockSize1, 2, (int)DttSP.SampleRate);
+				string file_name = console.CurrentDSPMode.ToString()+" ";
+				file_name += console.VFOAFreq.ToString("f6")+"MHz ";
+				file_name += DateTime.Now.ToString()+".wav";
+				file_name = file_name.Replace("/", "-");
+				file_name = file_name.Replace(":", " ");
+				file_name = Application.StartupPath+"\\"+file_name;
+				Audio.wave_file_writer = new WaveFileWriter(console.BlockSize1, 2, (int)DttSP.SampleRate, file_name);
 			}
 			else
 			{
@@ -972,7 +978,7 @@ namespace PowerSDR
 		private const int RB_BLOCK = 2048;
 		private string filename;
 
-		public WaveFileWriter(int frames, short chan, int samp_rate)
+		public WaveFileWriter(int frames, short chan, int samp_rate, string file)
 		{
 			rb = new RingBuffer(RB_BLOCK*16);
 			frames_per_buffer = frames;
@@ -984,12 +990,8 @@ namespace PowerSDR
 			length_counter = 0;
 			record = true;
 
-			string file_name = DateTime.Now.ToString()+".wav";
-			file_name = file_name.Replace("/", "-");
-			file_name = file_name.Replace(":", " ");
-			file_name = Application.StartupPath+"\\"+file_name;
-			writer = new BinaryWriter(File.Open(file_name, FileMode.Create));
-			filename = file_name;
+			writer = new BinaryWriter(File.Open(file, FileMode.Create));
+			filename = file;
 
 			Thread t = new Thread(new ThreadStart(ProcessRecordBuffers));
 			t.Name = "Wave File Write Thread";

@@ -64,6 +64,8 @@ Bridgewater, NJ 08807
 #define SPEC_PRE_FILT	(1)
 #define SPEC_POST_FILT	(2)
 #define SPEC_POST_AGC	(3)
+#define SPEC_POST_DET	(4)
+#define SPEC_PREMOD		(4)
 
 typedef struct _spec_block
 {

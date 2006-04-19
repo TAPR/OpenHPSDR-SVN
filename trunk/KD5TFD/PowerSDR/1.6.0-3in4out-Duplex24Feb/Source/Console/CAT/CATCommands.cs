@@ -813,7 +813,7 @@ namespace PowerSDR
 		// Reads the CPU Usage
 		public string ZZCU()
 		{
-			return Console.CpuUsage.ToString("f").PadLeft(6,'0');
+			return console.CpuUsage.ToString("f").PadLeft(6,'0');
 		}
 
 		// Sets or reads the Display Average status

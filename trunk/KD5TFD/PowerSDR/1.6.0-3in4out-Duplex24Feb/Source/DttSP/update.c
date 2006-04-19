@@ -2149,13 +2149,15 @@ SetPWSmode (int setit)
       break;
     case 2:
       sprintf (buffer, "!setSpectrumType %d\n", SPEC_SEMI_RAW);
+	  break;
+	case 4:
+      sprintf (buffer, "!setSpectrumType %d\n", SPEC_POST_DET);
       break;
     default:
       break;
     }
   sendcommand (buffer);
 }
-
 
 DttSP_EXP void
 SetWindow (Windowtype Windowset)

@@ -37,7 +37,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="winMM.lib ../FFTW/fftw3.lib"
+				AdditionalDependencies="winMM.lib ../FFTW/libfftw3f-3.lib"
 				OutputFile="../../bin/Debug/DttSP.dll"
 				LinkIncremental="2"
 				ModuleDefinitionFile="./DttSP.def"
@@ -97,7 +97,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Winmm.lib ../FFTW/fftw3.lib"
+				AdditionalDependencies="winMM.lib ../FFTW/libfftw3f-3.lib"
 				OutputFile="../../bin/Release/DttSP.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"

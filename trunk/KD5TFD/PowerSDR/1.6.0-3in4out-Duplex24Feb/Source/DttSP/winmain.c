@@ -1065,6 +1065,7 @@ reset_for_buflen (int new_buflen)
   safefree ((char *) top.hold.aux.l);
 
   uni.buflen = new_buflen;
+  top.jack.reset_size = new_buflen;
   destroy_workspace ();
   loc.def.size = new_buflen;
   setup_workspace (loc.def.rate,

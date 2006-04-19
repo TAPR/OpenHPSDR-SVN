@@ -176,7 +176,7 @@
     <value>txtVFOAFreq</value>
   </data>
   <data name="&gt;&gt;txtVFOAFreq.Type">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOAFreq.Parent">
     <value>grpVFOA</value>
@@ -251,7 +251,7 @@
     <value>grpVFOA</value>
   </data>
   <data name="&gt;&gt;grpVFOA.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpVFOA.Parent">
     <value>$this</value>
@@ -422,7 +422,7 @@
     <value>txtWheelTune</value>
   </data>
   <data name="&gt;&gt;txtWheelTune.Type">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtWheelTune.Parent">
     <value>grpVFOA</value>
@@ -509,7 +509,7 @@
     <value>txtVFOABand</value>
   </data>
   <data name="&gt;&gt;txtVFOABand.Type">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOABand.Parent">
     <value>grpVFOA</value>
@@ -590,7 +590,7 @@
     <value>btnHidden</value>
   </data>
   <data name="&gt;&gt;btnHidden.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnHidden.Parent">
     <value>grpVFOA</value>
@@ -665,7 +665,7 @@
     <value>grpVFOB</value>
   </data>
   <data name="&gt;&gt;grpVFOB.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpVFOB.Parent">
     <value>$this</value>
@@ -836,7 +836,7 @@
     <value>txtVFOBBand</value>
   </data>
   <data name="&gt;&gt;txtVFOBBand.Type">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOBBand.Parent">
     <value>grpVFOB</value>
@@ -923,7 +923,7 @@
     <value>txtVFOBFreq</value>
   </data>
   <data name="&gt;&gt;txtVFOBFreq.Type">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOBFreq.Parent">
     <value>grpVFOB</value>
@@ -998,7 +998,7 @@
     <value>grpDisplay</value>
   </data>
   <data name="&gt;&gt;grpDisplay.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpDisplay.Parent">
     <value>$this</value>
@@ -1085,7 +1085,7 @@
     <value>txtDisplayCurPos</value>
   </data>
   <data name="&gt;&gt;txtDisplayCurPos.Type">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtDisplayCurPos.Parent">
     <value>grpDisplay</value>
@@ -1172,7 +1172,7 @@
     <value>txtDisplayPeak</value>
   </data>
   <data name="&gt;&gt;txtDisplayPeak.Type">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtDisplayPeak.Parent">
     <value>grpDisplay</value>
@@ -1319,7 +1319,7 @@
     <value>grpBandVHF</value>
   </data>
   <data name="&gt;&gt;grpBandVHF.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpBandVHF.Parent">
     <value>$this</value>
@@ -1400,7 +1400,7 @@
     <value>btnBandVHF13</value>
   </data>
   <data name="&gt;&gt;btnBandVHF13.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF13.Parent">
     <value>grpBandVHF</value>
@@ -1481,7 +1481,7 @@
     <value>btnBandVHF12</value>
   </data>
   <data name="&gt;&gt;btnBandVHF12.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF12.Parent">
     <value>grpBandVHF</value>
@@ -1562,7 +1562,7 @@
     <value>btnBandHF</value>
   </data>
   <data name="&gt;&gt;btnBandHF.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandHF.Parent">
     <value>grpBandVHF</value>
@@ -1643,7 +1643,7 @@
     <value>btnBandVHF11</value>
   </data>
   <data name="&gt;&gt;btnBandVHF11.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF11.Parent">
     <value>grpBandVHF</value>
@@ -1724,7 +1724,7 @@
     <value>btnBandVHF10</value>
   </data>
   <data name="&gt;&gt;btnBandVHF10.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF10.Parent">
     <value>grpBandVHF</value>
@@ -1805,7 +1805,7 @@
     <value>btnBandVHF9</value>
   </data>
   <data name="&gt;&gt;btnBandVHF9.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF9.Parent">
     <value>grpBandVHF</value>
@@ -1886,7 +1886,7 @@
     <value>btnBandVHF8</value>
   </data>
   <data name="&gt;&gt;btnBandVHF8.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF8.Parent">
     <value>grpBandVHF</value>
@@ -1967,7 +1967,7 @@
     <value>btnBandVHF7</value>
   </data>
   <data name="&gt;&gt;btnBandVHF7.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF7.Parent">
     <value>grpBandVHF</value>
@@ -2048,7 +2048,7 @@
     <value>btnBandVHF6</value>
   </data>
   <data name="&gt;&gt;btnBandVHF6.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF6.Parent">
     <value>grpBandVHF</value>
@@ -2129,7 +2129,7 @@
     <value>btnBandVHF5</value>
   </data>
   <data name="&gt;&gt;btnBandVHF5.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF5.Parent">
     <value>grpBandVHF</value>
@@ -2210,7 +2210,7 @@
     <value>btnBandVHF4</value>
   </data>
   <data name="&gt;&gt;btnBandVHF4.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF4.Parent">
     <value>grpBandVHF</value>
@@ -2291,7 +2291,7 @@
     <value>btnBandVHF3</value>
   </data>
   <data name="&gt;&gt;btnBandVHF3.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF3.Parent">
     <value>grpBandVHF</value>
@@ -2372,7 +2372,7 @@
     <value>btnBandVHF2</value>
   </data>
   <data name="&gt;&gt;btnBandVHF2.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF2.Parent">
     <value>grpBandVHF</value>
@@ -2453,7 +2453,7 @@
     <value>btnBandVHF1</value>
   </data>
   <data name="&gt;&gt;btnBandVHF1.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF1.Parent">
     <value>grpBandVHF</value>
@@ -2534,7 +2534,7 @@
     <value>btnBandVHF0</value>
   </data>
   <data name="&gt;&gt;btnBandVHF0.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF0.Parent">
     <value>grpBandVHF</value>
@@ -2768,7 +2768,7 @@
     <value>grpMode</value>
   </data>
   <data name="&gt;&gt;grpMode.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpMode.Parent">
     <value>$this</value>
@@ -2855,7 +2855,7 @@
     <value>radModeAM</value>
   </data>
   <data name="&gt;&gt;radModeAM.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeAM.Parent">
     <value>grpMode</value>
@@ -2942,7 +2942,7 @@
     <value>radModeSAM</value>
   </data>
   <data name="&gt;&gt;radModeSAM.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeSAM.Parent">
     <value>grpMode</value>
@@ -3029,7 +3029,7 @@
     <value>radModeDSB</value>
   </data>
   <data name="&gt;&gt;radModeDSB.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeDSB.Parent">
     <value>grpMode</value>
@@ -3116,7 +3116,7 @@
     <value>radModeCWU</value>
   </data>
   <data name="&gt;&gt;radModeCWU.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeCWU.Parent">
     <value>grpMode</value>
@@ -3203,7 +3203,7 @@
     <value>radModeDIGU</value>
   </data>
   <data name="&gt;&gt;radModeDIGU.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeDIGU.Parent">
     <value>grpMode</value>
@@ -3290,7 +3290,7 @@
     <value>radModeDIGL</value>
   </data>
   <data name="&gt;&gt;radModeDIGL.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeDIGL.Parent">
     <value>grpMode</value>
@@ -3377,7 +3377,7 @@
     <value>radModeLSB</value>
   </data>
   <data name="&gt;&gt;radModeLSB.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeLSB.Parent">
     <value>grpMode</value>
@@ -3464,7 +3464,7 @@
     <value>radModeSPEC</value>
   </data>
   <data name="&gt;&gt;radModeSPEC.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeSPEC.Parent">
     <value>grpMode</value>
@@ -3551,7 +3551,7 @@
     <value>radModeDRM</value>
   </data>
   <data name="&gt;&gt;radModeDRM.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeDRM.Parent">
     <value>grpMode</value>
@@ -3638,7 +3638,7 @@
     <value>radModeFMN</value>
   </data>
   <data name="&gt;&gt;radModeFMN.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeFMN.Parent">
     <value>grpMode</value>
@@ -3725,7 +3725,7 @@
     <value>radModeUSB</value>
   </data>
   <data name="&gt;&gt;radModeUSB.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeUSB.Parent">
     <value>grpMode</value>
@@ -3812,7 +3812,7 @@
     <value>radModeCWL</value>
   </data>
   <data name="&gt;&gt;radModeCWL.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeCWL.Parent">
     <value>grpMode</value>
@@ -3887,7 +3887,7 @@
     <value>grpBandHF</value>
   </data>
   <data name="&gt;&gt;grpBandHF.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpBandHF.Parent">
     <value>$this</value>
@@ -3968,7 +3968,7 @@
     <value>btnBandGEN</value>
   </data>
   <data name="&gt;&gt;btnBandGEN.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandGEN.Parent">
     <value>grpBandHF</value>
@@ -4049,7 +4049,7 @@
     <value>btnBandWWV</value>
   </data>
   <data name="&gt;&gt;btnBandWWV.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandWWV.Parent">
     <value>grpBandHF</value>
@@ -4130,7 +4130,7 @@
     <value>btnBandVHF</value>
   </data>
   <data name="&gt;&gt;btnBandVHF.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF.Parent">
     <value>grpBandHF</value>
@@ -4211,7 +4211,7 @@
     <value>btnBand2</value>
   </data>
   <data name="&gt;&gt;btnBand2.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand2.Parent">
     <value>grpBandHF</value>
@@ -4292,7 +4292,7 @@
     <value>btnBand6</value>
   </data>
   <data name="&gt;&gt;btnBand6.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand6.Parent">
     <value>grpBandHF</value>
@@ -4373,7 +4373,7 @@
     <value>btnBand10</value>
   </data>
   <data name="&gt;&gt;btnBand10.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand10.Parent">
     <value>grpBandHF</value>
@@ -4454,7 +4454,7 @@
     <value>btnBand12</value>
   </data>
   <data name="&gt;&gt;btnBand12.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand12.Parent">
     <value>grpBandHF</value>
@@ -4535,7 +4535,7 @@
     <value>btnBand15</value>
   </data>
   <data name="&gt;&gt;btnBand15.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand15.Parent">
     <value>grpBandHF</value>
@@ -4616,7 +4616,7 @@
     <value>btnBand17</value>
   </data>
   <data name="&gt;&gt;btnBand17.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand17.Parent">
     <value>grpBandHF</value>
@@ -4697,7 +4697,7 @@
     <value>btnBand20</value>
   </data>
   <data name="&gt;&gt;btnBand20.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand20.Parent">
     <value>grpBandHF</value>
@@ -4778,7 +4778,7 @@
     <value>btnBand30</value>
   </data>
   <data name="&gt;&gt;btnBand30.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand30.Parent">
     <value>grpBandHF</value>
@@ -4859,7 +4859,7 @@
     <value>btnBand40</value>
   </data>
   <data name="&gt;&gt;btnBand40.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand40.Parent">
     <value>grpBandHF</value>
@@ -4940,7 +4940,7 @@
     <value>btnBand60</value>
   </data>
   <data name="&gt;&gt;btnBand60.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand60.Parent">
     <value>grpBandHF</value>
@@ -4951,10 +4951,10 @@
   <data name="btnBand80.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </data>
-  <data name="btnBand80.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="btnBand80.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>Private</value>
   </data>
-  <data name="btnBand80.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="btnBand80.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>Private</value>
   </data>
   <data name="btnBand80.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -5021,7 +5021,7 @@
     <value>btnBand80</value>
   </data>
   <data name="&gt;&gt;btnBand80.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand80.Parent">
     <value>grpBandHF</value>
@@ -5102,7 +5102,7 @@
     <value>btnBand160</value>
   </data>
   <data name="&gt;&gt;btnBand160.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBand160.Parent">
     <value>grpBandHF</value>
@@ -5177,7 +5177,7 @@
     <value>grpFilter</value>
   </data>
   <data name="&gt;&gt;grpFilter.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpFilter.Parent">
     <value>$this</value>
@@ -5246,7 +5246,7 @@
     <value>tbFilterWidth</value>
   </data>
   <data name="&gt;&gt;tbFilterWidth.Type">
-    <value>System.Windows.Forms.TrackBarTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TrackBarTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tbFilterWidth.Parent">
     <value>grpFilter</value>
@@ -5324,7 +5324,7 @@
     <value>lblFilterWidth</value>
   </data>
   <data name="&gt;&gt;lblFilterWidth.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblFilterWidth.Parent">
     <value>grpFilter</value>
@@ -5405,7 +5405,7 @@
     <value>btnFilterShiftReset</value>
   </data>
   <data name="&gt;&gt;btnFilterShiftReset.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnFilterShiftReset.Parent">
     <value>grpFilter</value>
@@ -5474,7 +5474,7 @@
     <value>tbFilterShift</value>
   </data>
   <data name="&gt;&gt;tbFilterShift.Type">
-    <value>System.Windows.Forms.TrackBarTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TrackBarTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tbFilterShift.Parent">
     <value>grpFilter</value>
@@ -5552,7 +5552,7 @@
     <value>lblFilterShift</value>
   </data>
   <data name="&gt;&gt;lblFilterShift.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblFilterShift.Parent">
     <value>grpFilter</value>
@@ -5639,7 +5639,7 @@
     <value>radFilter6000</value>
   </data>
   <data name="&gt;&gt;radFilter6000.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter6000.Parent">
     <value>grpFilter</value>
@@ -5726,7 +5726,7 @@
     <value>radFilter4000</value>
   </data>
   <data name="&gt;&gt;radFilter4000.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter4000.Parent">
     <value>grpFilter</value>
@@ -5813,7 +5813,7 @@
     <value>radFilter2600</value>
   </data>
   <data name="&gt;&gt;radFilter2600.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter2600.Parent">
     <value>grpFilter</value>
@@ -5900,7 +5900,7 @@
     <value>radFilter2100</value>
   </data>
   <data name="&gt;&gt;radFilter2100.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter2100.Parent">
     <value>grpFilter</value>
@@ -5987,7 +5987,7 @@
     <value>radFilter1000</value>
   </data>
   <data name="&gt;&gt;radFilter1000.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter1000.Parent">
     <value>grpFilter</value>
@@ -6074,7 +6074,7 @@
     <value>radFilter500</value>
   </data>
   <data name="&gt;&gt;radFilter500.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter500.Parent">
     <value>grpFilter</value>
@@ -6161,7 +6161,7 @@
     <value>radFilter250</value>
   </data>
   <data name="&gt;&gt;radFilter250.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter250.Parent">
     <value>grpFilter</value>
@@ -6248,7 +6248,7 @@
     <value>radFilter100</value>
   </data>
   <data name="&gt;&gt;radFilter100.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter100.Parent">
     <value>grpFilter</value>
@@ -6335,7 +6335,7 @@
     <value>radFilter50</value>
   </data>
   <data name="&gt;&gt;radFilter50.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter50.Parent">
     <value>grpFilter</value>
@@ -6422,7 +6422,7 @@
     <value>radFilter25</value>
   </data>
   <data name="&gt;&gt;radFilter25.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter25.Parent">
     <value>grpFilter</value>
@@ -6509,7 +6509,7 @@
     <value>radFilterVar1</value>
   </data>
   <data name="&gt;&gt;radFilterVar1.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilterVar1.Parent">
     <value>grpFilter</value>
@@ -6596,7 +6596,7 @@
     <value>radFilterVar2</value>
   </data>
   <data name="&gt;&gt;radFilterVar2.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilterVar2.Parent">
     <value>grpFilter</value>
@@ -6674,7 +6674,7 @@
     <value>lblFilterHigh</value>
   </data>
   <data name="&gt;&gt;lblFilterHigh.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblFilterHigh.Parent">
     <value>$this</value>
@@ -6752,7 +6752,7 @@
     <value>lblFilterLow</value>
   </data>
   <data name="&gt;&gt;lblFilterLow.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblFilterLow.Parent">
     <value>$this</value>
@@ -6821,7 +6821,7 @@
     <value>udFilterHigh</value>
   </data>
   <data name="&gt;&gt;udFilterHigh.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udFilterHigh.Parent">
     <value>$this</value>
@@ -6890,7 +6890,7 @@
     <value>udFilterLow</value>
   </data>
   <data name="&gt;&gt;udFilterLow.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udFilterLow.Parent">
     <value>$this</value>
@@ -6977,7 +6977,7 @@
     <value>chkPower</value>
   </data>
   <data name="&gt;&gt;chkPower.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkPower.Parent">
     <value>$this</value>
@@ -7055,7 +7055,7 @@
     <value>comboDisplayMode</value>
   </data>
   <data name="&gt;&gt;comboDisplayMode.Type">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboDisplayMode.Parent">
     <value>grpDisplay2</value>
@@ -7133,7 +7133,7 @@
     <value>lblCPUMeter</value>
   </data>
   <data name="&gt;&gt;lblCPUMeter.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblCPUMeter.Parent">
     <value>$this</value>
@@ -7217,7 +7217,7 @@
     <value>grpDSP</value>
   </data>
   <data name="&gt;&gt;grpDSP.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpDSP.Parent">
     <value>$this</value>
@@ -7304,7 +7304,7 @@
     <value>chkDSPCompander</value>
   </data>
   <data name="&gt;&gt;chkDSPCompander.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkDSPCompander.Parent">
     <value>grpDSP</value>
@@ -7391,7 +7391,7 @@
     <value>chkDSPNB2</value>
   </data>
   <data name="&gt;&gt;chkDSPNB2.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkDSPNB2.Parent">
     <value>grpDSP</value>
@@ -7478,7 +7478,7 @@
     <value>chkDSPComp</value>
   </data>
   <data name="&gt;&gt;chkDSPComp.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkDSPComp.Parent">
     <value>grpDSP</value>
@@ -7565,7 +7565,7 @@
     <value>chkNB</value>
   </data>
   <data name="&gt;&gt;chkNB.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkNB.Parent">
     <value>grpDSP</value>
@@ -7652,7 +7652,7 @@
     <value>chkANF</value>
   </data>
   <data name="&gt;&gt;chkANF.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkANF.Parent">
     <value>grpDSP</value>
@@ -7739,7 +7739,7 @@
     <value>chkNR</value>
   </data>
   <data name="&gt;&gt;chkNR.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkNR.Parent">
     <value>grpDSP</value>
@@ -7817,7 +7817,7 @@
     <value>lblAGC</value>
   </data>
   <data name="&gt;&gt;lblAGC.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblAGC.Parent">
     <value>grpSoundControls</value>
@@ -7895,7 +7895,7 @@
     <value>comboAGC</value>
   </data>
   <data name="&gt;&gt;comboAGC.Type">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboAGC.Parent">
     <value>grpSoundControls</value>
@@ -7982,7 +7982,7 @@
     <value>chkBIN</value>
   </data>
   <data name="&gt;&gt;chkBIN.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkBIN.Parent">
     <value>grpOptions</value>
@@ -8066,7 +8066,7 @@
     <value>comboPreamp</value>
   </data>
   <data name="&gt;&gt;comboPreamp.Type">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboPreamp.Parent">
     <value>grpSoundControls</value>
@@ -8144,7 +8144,7 @@
     <value>lblPreamp</value>
   </data>
   <data name="&gt;&gt;lblPreamp.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblPreamp.Parent">
     <value>grpSoundControls</value>
@@ -8213,7 +8213,7 @@
     <value>udXIT</value>
   </data>
   <data name="&gt;&gt;udXIT.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udXIT.Parent">
     <value>grpVFO</value>
@@ -8300,7 +8300,7 @@
     <value>chkMON</value>
   </data>
   <data name="&gt;&gt;chkMON.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkMON.Parent">
     <value>grpOptions</value>
@@ -8387,7 +8387,7 @@
     <value>chkTUN</value>
   </data>
   <data name="&gt;&gt;chkTUN.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkTUN.Parent">
     <value>grpOptions</value>
@@ -8474,7 +8474,7 @@
     <value>chkMOX</value>
   </data>
   <data name="&gt;&gt;chkMOX.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkMOX.Parent">
     <value>grpOptions</value>
@@ -8543,7 +8543,7 @@
     <value>udRIT</value>
   </data>
   <data name="&gt;&gt;udRIT.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udRIT.Parent">
     <value>grpVFO</value>
@@ -8630,7 +8630,7 @@
     <value>chkMUT</value>
   </data>
   <data name="&gt;&gt;chkMUT.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkMUT.Parent">
     <value>grpOptions</value>
@@ -8717,7 +8717,7 @@
     <value>chkXIT</value>
   </data>
   <data name="&gt;&gt;chkXIT.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkXIT.Parent">
     <value>grpVFO</value>
@@ -8804,7 +8804,7 @@
     <value>chkRIT</value>
   </data>
   <data name="&gt;&gt;chkRIT.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRIT.Parent">
     <value>grpVFO</value>
@@ -8882,7 +8882,7 @@
     <value>lblPWR</value>
   </data>
   <data name="&gt;&gt;lblPWR.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblPWR.Parent">
     <value>grpSoundControls</value>
@@ -8951,7 +8951,7 @@
     <value>udPWR</value>
   </data>
   <data name="&gt;&gt;udPWR.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udPWR.Parent">
     <value>grpSoundControls</value>
@@ -8959,11 +8959,11 @@
   <data name="&gt;&gt;udPWR.ZOrder">
     <value>2</value>
   </data>
-  <data name="lblAF.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </data>
   <data name="lblAF.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>Private</value>
+  </data>
+  <data name="lblAF.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </data>
   <data name="lblAF.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>Private</value>
@@ -9029,7 +9029,7 @@
     <value>lblAF</value>
   </data>
   <data name="&gt;&gt;lblAF.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblAF.Parent">
     <value>grpSoundControls</value>
@@ -9098,7 +9098,7 @@
     <value>udAF</value>
   </data>
   <data name="&gt;&gt;udAF.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udAF.Parent">
     <value>grpSoundControls</value>
@@ -9176,7 +9176,7 @@
     <value>lblMIC</value>
   </data>
   <data name="&gt;&gt;lblMIC.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblMIC.Parent">
     <value>grpSoundControls</value>
@@ -9245,7 +9245,7 @@
     <value>udMIC</value>
   </data>
   <data name="&gt;&gt;udMIC.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udMIC.Parent">
     <value>grpSoundControls</value>
@@ -9332,7 +9332,7 @@
     <value>chkPipe</value>
   </data>
   <data name="&gt;&gt;chkPipe.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkPipe.Parent">
     <value>$this</value>
@@ -9407,7 +9407,7 @@
     <value>grpMultimeter</value>
   </data>
   <data name="&gt;&gt;grpMultimeter.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpMultimeter.Parent">
     <value>$this</value>
@@ -9418,11 +9418,11 @@
   <data name="comboMeterTXMode.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>Private</value>
   </data>
-  <data name="comboMeterTXMode.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>Private</value>
-  </data>
   <data name="comboMeterTXMode.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
+  </data>
+  <data name="comboMeterTXMode.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>Private</value>
   </data>
   <data name="comboMeterTXMode.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value />
@@ -9485,7 +9485,7 @@
     <value>comboMeterTXMode</value>
   </data>
   <data name="&gt;&gt;comboMeterTXMode.Type">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboMeterTXMode.Parent">
     <value>grpMultimeter</value>
@@ -9635,7 +9635,7 @@
     <value>lblMultiSMeter</value>
   </data>
   <data name="&gt;&gt;lblMultiSMeter.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblMultiSMeter.Parent">
     <value>grpMultimeter</value>
@@ -9643,11 +9643,11 @@
   <data name="&gt;&gt;lblMultiSMeter.ZOrder">
     <value>2</value>
   </data>
-  <data name="comboMeterRXMode.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>Private</value>
-  </data>
   <data name="comboMeterRXMode.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
+  </data>
+  <data name="comboMeterRXMode.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>Private</value>
   </data>
   <data name="comboMeterRXMode.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>Private</value>
@@ -9713,7 +9713,7 @@
     <value>comboMeterRXMode</value>
   </data>
   <data name="&gt;&gt;comboMeterRXMode.Type">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboMeterRXMode.Parent">
     <value>grpMultimeter</value>
@@ -9800,7 +9800,7 @@
     <value>txtMultiText</value>
   </data>
   <data name="&gt;&gt;txtMultiText.Type">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtMultiText.Parent">
     <value>grpMultimeter</value>
@@ -9947,7 +9947,7 @@
     <value>grpVFO</value>
   </data>
   <data name="&gt;&gt;grpVFO.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpVFO.Parent">
     <value>$this</value>
@@ -10028,7 +10028,7 @@
     <value>btnZeroBeat</value>
   </data>
   <data name="&gt;&gt;btnZeroBeat.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnZeroBeat.Parent">
     <value>grpVFO</value>
@@ -10109,7 +10109,7 @@
     <value>btnRITReset</value>
   </data>
   <data name="&gt;&gt;btnRITReset.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnRITReset.Parent">
     <value>grpVFO</value>
@@ -10190,7 +10190,7 @@
     <value>btnXITReset</value>
   </data>
   <data name="&gt;&gt;btnXITReset.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnXITReset.Parent">
     <value>grpVFO</value>
@@ -10271,7 +10271,7 @@
     <value>btnIFtoVFO</value>
   </data>
   <data name="&gt;&gt;btnIFtoVFO.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnIFtoVFO.Parent">
     <value>grpVFO</value>
@@ -10352,7 +10352,7 @@
     <value>btnVFOSwap</value>
   </data>
   <data name="&gt;&gt;btnVFOSwap.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnVFOSwap.Parent">
     <value>grpVFO</value>
@@ -10433,7 +10433,7 @@
     <value>btnVFOBtoA</value>
   </data>
   <data name="&gt;&gt;btnVFOBtoA.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnVFOBtoA.Parent">
     <value>grpVFO</value>
@@ -10514,7 +10514,7 @@
     <value>btnVFOAtoB</value>
   </data>
   <data name="&gt;&gt;btnVFOAtoB.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnVFOAtoB.Parent">
     <value>grpVFO</value>
@@ -10601,7 +10601,7 @@
     <value>chkVFOSplit</value>
   </data>
   <data name="&gt;&gt;chkVFOSplit.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkVFOSplit.Parent">
     <value>grpVFO</value>
@@ -10676,7 +10676,7 @@
     <value>grpSoundControls</value>
   </data>
   <data name="&gt;&gt;grpSoundControls.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpSoundControls.Parent">
     <value>$this</value>
@@ -10745,7 +10745,7 @@
     <value>udSquelch</value>
   </data>
   <data name="&gt;&gt;udSquelch.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udSquelch.Parent">
     <value>grpSoundControls</value>
@@ -10832,7 +10832,7 @@
     <value>chkSquelch</value>
   </data>
   <data name="&gt;&gt;chkSquelch.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkSquelch.Parent">
     <value>grpSoundControls</value>
@@ -10907,7 +10907,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;grpOptions.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpOptions.Parent">
     <value>$this</value>
@@ -10994,7 +10994,7 @@
     <value>comboTuneMode</value>
   </data>
   <data name="&gt;&gt;comboTuneMode.Type">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboTuneMode.Parent">
     <value>grpOptions</value>
@@ -11069,7 +11069,7 @@
     <value>grpDisplay2</value>
   </data>
   <data name="&gt;&gt;grpDisplay2.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpDisplay2.Parent">
     <value>$this</value>
@@ -11156,7 +11156,7 @@
     <value>chkDisplayPeak</value>
   </data>
   <data name="&gt;&gt;chkDisplayPeak.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkDisplayPeak.Parent">
     <value>grpDisplay2</value>
@@ -11243,7 +11243,7 @@
     <value>chkDisplayAVG</value>
   </data>
   <data name="&gt;&gt;chkDisplayAVG.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkDisplayAVG.Parent">
     <value>grpDisplay2</value>
@@ -11318,7 +11318,7 @@
     <value>grpMemory</value>
   </data>
   <data name="&gt;&gt;grpMemory.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpMemory.Parent">
     <value>$this</value>
@@ -11399,7 +11399,7 @@
     <value>btnMemoryQuickRestore</value>
   </data>
   <data name="&gt;&gt;btnMemoryQuickRestore.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnMemoryQuickRestore.Parent">
     <value>grpMemory</value>
@@ -11480,7 +11480,7 @@
     <value>btnMemoryQuickSave</value>
   </data>
   <data name="&gt;&gt;btnMemoryQuickSave.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnMemoryQuickSave.Parent">
     <value>grpMemory</value>
@@ -11567,7 +11567,7 @@
     <value>txtMemoryQuick</value>
   </data>
   <data name="&gt;&gt;txtMemoryQuick.Type">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtMemoryQuick.Parent">
     <value>grpMemory</value>
@@ -11645,7 +11645,7 @@
     <value>labelScannerDelay</value>
   </data>
   <data name="&gt;&gt;labelScannerDelay.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;labelScannerDelay.Parent">
     <value>grpMemory</value>
@@ -11714,7 +11714,7 @@
     <value>udScannerDelay</value>
   </data>
   <data name="&gt;&gt;udScannerDelay.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udScannerDelay.Parent">
     <value>grpMemory</value>
@@ -11792,7 +11792,7 @@
     <value>lblMemoryStep</value>
   </data>
   <data name="&gt;&gt;lblMemoryStep.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblMemoryStep.Parent">
     <value>grpMemory</value>
@@ -11870,7 +11870,7 @@
     <value>lblMemoryHigh</value>
   </data>
   <data name="&gt;&gt;lblMemoryHigh.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblMemoryHigh.Parent">
     <value>grpMemory</value>
@@ -11948,7 +11948,7 @@
     <value>lblMemoryLow</value>
   </data>
   <data name="&gt;&gt;lblMemoryLow.Type">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblMemoryLow.Parent">
     <value>grpMemory</value>
@@ -11959,11 +11959,11 @@
   <data name="udScannerStep.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>Private</value>
   </data>
-  <data name="udScannerStep.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </data>
   <data name="udScannerStep.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>Private</value>
+  </data>
+  <data name="udScannerStep.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
   </data>
   <data name="udScannerStep.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value />
@@ -12017,7 +12017,7 @@
     <value>udScannerStep</value>
   </data>
   <data name="&gt;&gt;udScannerStep.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udScannerStep.Parent">
     <value>grpMemory</value>
@@ -12025,14 +12025,14 @@
   <data name="&gt;&gt;udScannerStep.ZOrder">
     <value>8</value>
   </data>
+  <data name="udScannerHigh.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </data>
   <data name="udScannerHigh.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>Private</value>
   </data>
   <data name="udScannerHigh.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>Private</value>
-  </data>
-  <data name="udScannerHigh.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
   </data>
   <data name="udScannerHigh.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value />
@@ -12086,7 +12086,7 @@
     <value>udScannerHigh</value>
   </data>
   <data name="&gt;&gt;udScannerHigh.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udScannerHigh.Parent">
     <value>grpMemory</value>
@@ -12155,7 +12155,7 @@
     <value>udScannerLow</value>
   </data>
   <data name="&gt;&gt;udScannerLow.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udScannerLow.Parent">
     <value>grpMemory</value>
@@ -12242,7 +12242,7 @@
     <value>chkMemoryScanner</value>
   </data>
   <data name="&gt;&gt;chkMemoryScanner.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkMemoryScanner.Parent">
     <value>grpMemory</value>
@@ -12329,7 +12329,7 @@
     <value>radScannerFreq</value>
   </data>
   <data name="&gt;&gt;radScannerFreq.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radScannerFreq.Parent">
     <value>grpMemory</value>
@@ -12416,7 +12416,7 @@
     <value>radScannerChannel</value>
   </data>
   <data name="&gt;&gt;radScannerChannel.Type">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radScannerChannel.Parent">
     <value>grpMemory</value>
@@ -12497,7 +12497,7 @@
     <value>btnSave</value>
   </data>
   <data name="&gt;&gt;btnSave.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnSave.Parent">
     <value>grpMemory</value>
@@ -12578,7 +12578,7 @@
     <value>btnMemoryRecall</value>
   </data>
   <data name="&gt;&gt;btnMemoryRecall.Type">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnMemoryRecall.Parent">
     <value>grpMemory</value>
@@ -12680,7 +12680,7 @@
     <value>grpDateTime</value>
   </data>
   <data name="&gt;&gt;grpDateTime.Type">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpDateTime.Parent">
     <value>$this</value>
@@ -12767,7 +12767,7 @@
     <value>txtTime</value>
   </data>
   <data name="&gt;&gt;txtTime.Type">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtTime.Parent">
     <value>grpDateTime</value>
@@ -12854,7 +12854,7 @@
     <value>txtDate</value>
   </data>
   <data name="&gt;&gt;txtDate.Type">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtDate.Parent">
     <value>grpDateTime</value>
@@ -12941,7 +12941,7 @@
     <value>chkVFOLock</value>
   </data>
   <data name="&gt;&gt;chkVFOLock.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkVFOLock.Parent">
     <value>$this</value>
@@ -13088,7 +13088,7 @@
     <value>udCWSpeed</value>
   </data>
   <data name="&gt;&gt;udCWSpeed.Type">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udCWSpeed.Parent">
     <value>$this</value>
@@ -13130,7 +13130,7 @@
     <value>True</value>
   </data>
   <data name="chkDDSLock.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>Standard</value>
+    <value>Flat</value>
   </data>
   <data name="chkDDSLock.Font" type="System.Resources.ResXNullRef, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value />
@@ -13148,19 +13148,19 @@
     <value>NoControl</value>
   </data>
   <data name="chkDDSLock.Location" type="System.Drawing.Point, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>24, 544</value>
+    <value>24, 536</value>
   </data>
   <data name="chkDDSLock.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>No</value>
   </data>
   <data name="chkDDSLock.Size" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>72, 24</value>
+    <value>72, 32</value>
   </data>
   <data name="chkDDSLock.TabIndex" type="System.Int32, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>0</value>
   </data>
   <data name="chkDDSLock.Text">
-    <value>DDSLock</value>
+    <value>DDS Lock</value>
   </data>
   <data name="chkDDSLock.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>MiddleCenter</value>
@@ -13175,7 +13175,7 @@
     <value>chkDDSLock</value>
   </data>
   <data name="&gt;&gt;chkDDSLock.Type">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkDDSLock.Parent">
     <value>$this</value>
@@ -13208,7 +13208,7 @@
     <value>None</value>
   </data>
   <data name="label_DttSP_osc.Enabled" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="label_DttSP_osc.Font" type="System.Drawing.Font, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -13226,13 +13226,13 @@
     <value>NoControl</value>
   </data>
   <data name="label_DttSP_osc.Location" type="System.Drawing.Point, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>288, 544</value>
+    <value>312, 544</value>
   </data>
   <data name="label_DttSP_osc.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>No</value>
   </data>
   <data name="label_DttSP_osc.Size" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>136, 24</value>
+    <value>120, 24</value>
   </data>
   <data name="label_DttSP_osc.TabIndex" type="System.Int32, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>0</value>
@@ -13304,13 +13304,13 @@
     <value>NoControl</value>
   </data>
   <data name="label_DDStune.Location" type="System.Drawing.Point, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>144, 544</value>
+    <value>160, 544</value>
   </data>
   <data name="label_DDStune.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>No</value>
   </data>
   <data name="label_DDStune.Size" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>112, 24</value>
+    <value>128, 24</value>
   </data>
   <data name="label_DDStune.TabIndex" type="System.Int32, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>0</value>
@@ -13400,7 +13400,7 @@
     <value />
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>766, 585</value>
+    <value>766, 577</value>
   </data>
   <data name="$this.Enabled" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -13469,7 +13469,7 @@
     <value>WindowsDefaultLocation</value>
   </data>
   <data name="$this.Text">
-    <value>PowerSDR Console v1.6.0 (KD5TFD Experimental 20060330)</value>
+    <value>PowerSDR Console v1.6.1 (KD5TFD 20060417  svn-447, 3i4o)</value>
   </data>
   <data name="$this.ToolTip">
     <value />
