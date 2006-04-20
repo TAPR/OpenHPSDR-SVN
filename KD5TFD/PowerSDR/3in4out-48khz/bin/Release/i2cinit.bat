@@ -13,19 +13,11 @@ rem             - 36 10 40 - Clock/2, 48k, Normal mode
 rem             - 36 0A 00 - turn D/A mute off
 
 i2c-cmd 34 00 25
-sleep 1
 i2c-cmd 34 02 00
-sleep 1
 i2c-cmd 36 1e 00
-sleep 1
 i2c-cmd 36 12 01
-sleep 1
 i2c-cmd 36 08 15
-sleep 1
 i2c-cmd 36 0c 00
-sleep 1
 i2c-cmd 36 0e 01
-sleep 1
 i2c-cmd 36 10 40
-sleep 1
 i2c-cmd 36 0a 00
