@@ -70,7 +70,6 @@ set_location_assignment PIN_79 -to RX_DIN
 set_location_assignment PIN_84 -to RX_INLRCLK
 set_location_assignment PIN_90 -to I_PWM_out
 set_location_assignment PIN_88 -to Q_PWM_out
-set_global_assignment -name USER_LIBRARIES "e:/wjt/radio/projects/Xylo/Duplex-4port-24Feb/megafunctions/;e:/wjt/radio/projects/Xylo/Duplex-4port-24Feb/db/"
 set_global_assignment -name VERILOG_FILE DigAudioOut48k16bLeftJ.v
 set_global_assignment -name VERILOG_FILE debounce.v
 set_global_assignment -name VERILOG_FILE Duplex.v
