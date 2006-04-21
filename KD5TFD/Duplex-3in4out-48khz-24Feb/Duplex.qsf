@@ -81,3 +81,5 @@ set_location_assignment PIN_89 -to dbgout
 set_location_assignment PIN_34 -to alt_clk_i
 set_location_assignment PIN_69 -to alt_clk_o
 set_location_assignment PIN_70 -to ad_reset
+set_location_assignment PIN_73 -to dot
+set_location_assignment PIN_75 -to dash
