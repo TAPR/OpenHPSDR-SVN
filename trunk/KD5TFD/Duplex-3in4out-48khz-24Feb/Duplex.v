@@ -117,9 +117,14 @@
 //   alt_clk_i       - pin 34 (hardwired to alt osc socket on xylo)
 //   alt_clk_o       - pin 70 - pass alt osc clock thru to wolson board, & send it back on 66
 //   dbgout          - pin 89
-//	 dot			 - pin 69 - CW dot key - active low 
-//	 dash			 - pin 70 - CW dash key - active low 
+//	 dot			 - pin 73 - CW dot key - active low 
+//	 dash			 - pin 75 - CW dash key - active low 
+//   ad_reset        - pin 70
 //
+//   Pins 87 and 85 are reserved for ref counter
+
+
+
 //   Pins 87 and 85 are reserved for ref counter
 //
 /////////////////////////////////////////////////////
@@ -511,8 +516,6 @@ Rx_fifo	Rx_fifo(.wrclk (FX2_SLRD),.rdreq (fifo_enable),.rdclk (BCLK),.wrreq (1'b
 reg [4:0] state_PWM;			// state for PWM  counts 0 to 18  
 reg [15:0] Left_PWM; 			// Left 16 bit PWM data for D/A converter
 reg [15:0] Right_PWM;			// Right 16 bit PWM data for D/A converter
-reg [15:0] Left_PWM_holding;    // holding reg for next Left PWM sample  // kd5tfd 
-reg [15:0] Right_PWM_holding;   // holdign reg for next right PWN sample // kd5tfd 
 reg [15:0] I_PWM;				// I 16 bit PWM data for D/A conveter
 reg [15:0] Q_PWM;				// Q 16 bit PWM data for D/A conveter
 reg fifo_enable;				// controls reading of dual clock fifo
@@ -523,34 +526,6 @@ reg [7:0] Rx_control_1; 		// control 1 from PC
 reg [7:0] Rx_control_2; 		// control 2 from PC
 reg [7:0] Rx_control_3; 		// control 3 from PC
 reg [7:0] Rx_control_4; 		// control 4 from PC
-
-
-
-
-// kd5tfd added begins 
-// this block copies the last left and right pwn samples into the TLV 
-// at the appropriate time in the lrclk/bclk cycle (right before LRCLCK goes high) 
-// 
-// count bclks to know when to setup left and right samples headed to the TLV 
-reg last_lr;   // state of last LRCLCK on last cycle 
-reg reg_lr;    // registered LRCLK 
-reg [5:0] bcount; // BCLCK count 
-// 
-always @ (posedge BCLK ) begin
-        reg_lr = LRCLK;  // register the clock locally 
-        if ( last_lr == 0 && reg_lr) begin //  leading edge of lrclk
-                bcount <= 0;
-        end
-        else begin
-                bcount <= bcount + 6'd1;  // just count it 
-        end
-        if ( bcount ==  62 ) begin
-				Left_PWM <= Left_PWM_holding; 
-				Right_PWM <= Right_PWM_holding; 
-        end
-        last_lr <= reg_lr;
-end
-// kd5tfd added ends 
 
 
 
@@ -609,22 +584,22 @@ begin
 // state 8 - get MSB of Left audio
   8: begin
 		fifo_enable <= 1'b1;						// enable Rx_fifo
-		Left_PWM_holding[15:8] <= Rx_data[7:0];
+		Left_PWM[15:8] <= Rx_data[7:0];
 		state_PWM <= 9;
 		end
 // state 9 - get LSB of Left audio amd combine with MSB to form 16 bit PWM data 
   9: begin
-		Left_PWM_holding[7:0] <= Rx_data[7:0];
+		Left_PWM[7:0] <= Rx_data[7:0];
 		state_PWM <= 10;	
 		end
 // state 10 - get MSB of Right audio
   10: begin
-		Right_PWM_holding[15:8] <= Rx_data[7:0];
+		Right_PWM[15:8] <= Rx_data[7:0];
 		state_PWM <= 11;
 		end
 // state 11 - get LSB of Right audio and combine with MSB to form 16 bit PWM data 
   11: begin
-		Right_PWM_holding[7:0] <= Rx_data[7:0];
+		Right_PWM[7:0] <= Rx_data[7:0];
 		state_PWM <= 12;							
 		end
 		
@@ -668,8 +643,6 @@ begin
 			byte_count <= byte_count + 1'b1;
 			I_Data[15:0] <=  I_PWM[15:0];  	// set up I D/A data 
 			Q_Data[15:0] <=  Q_PWM[15:0];  	// set up Q D/A data 
-			// Left_PWM <= Left_PWM_holding; 
-			// Right_PWM <= Right_PWM_holding; 
 			state_PWM <= 18;  
 		end
 		else state_PWM <= 17;
