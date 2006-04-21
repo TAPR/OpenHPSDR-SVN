@@ -21,6 +21,7 @@
 // extern KD5TFDVK6APHAUDIO_API int StartAudio(int block_size); 
 extern KD5TFDVK6APHAUDIO_API int StartAudio(int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata));
 extern KD5TFDVK6APHAUDIO_API void StopAudio(void); 
+extern KD5TFDVK6APHAUDIO_API int GetDotDashBits(void); 
 
 #if 0 
 extern KD5TFDVK6APHAUDIO_API int StartAudio_4port(int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata));
@@ -83,6 +84,7 @@ extern HLA_COUNTER InConvertHLA;
 extern HLA_COUNTER OutConvertHLA; 
 extern HLA_COUNTER CallbackHLA; 
 #endif 
+extern int DotDashBits; 
 
 #ifdef GLOBAL_DECL
 #undef extern

@@ -3325,7 +3325,7 @@ namespace PowerSDR
 			this.comboAudioSampleRate1.Name = "comboAudioSampleRate1";
 			this.comboAudioSampleRate1.Size = new System.Drawing.Size(64, 21);
 			this.comboAudioSampleRate1.TabIndex = 4;
-			this.toolTip1.SetToolTip(this.comboAudioSampleRate1, "Sample Rate -- Currently locked to 48kHz");
+			this.toolTip1.SetToolTip(this.comboAudioSampleRate1, "Sample Rate -- Range is dependent on selected sound card! ");
 			this.comboAudioSampleRate1.SelectedIndexChanged += new System.EventHandler(this.comboAudioSampleRate1_SelectedIndexChanged);
 			// 
 			// tpVAC
@@ -5399,7 +5399,8 @@ namespace PowerSDR
 			this.comboKeyerConnPrimary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboKeyerConnPrimary.DropDownWidth = 64;
 			this.comboKeyerConnPrimary.Items.AddRange(new object[] {
-																	   "SDR"});
+																	   "SDR",
+																	   "FPGA"});
 			this.comboKeyerConnPrimary.Location = new System.Drawing.Point(104, 24);
 			this.comboKeyerConnPrimary.Name = "comboKeyerConnPrimary";
 			this.comboKeyerConnPrimary.Size = new System.Drawing.Size(64, 21);
@@ -12356,6 +12357,7 @@ namespace PowerSDR
 
 			comboKeyerConnPrimary.Items.Clear();
 			comboKeyerConnPrimary.Items.Add("SDR");
+			comboKeyerConnPrimary.Items.Add("FPGA");
 
 			comboKeyerConnSecondary.Items.Clear();
 			comboKeyerConnSecondary.Items.Add("None");
@@ -13576,7 +13578,7 @@ namespace PowerSDR
 					chkGeneralDisablePTT.Checked = true;
 					force_model = false;
 				}
-				// kd5tfd - hack chkGeneralRXOnly.Enabled = false;
+				chkGeneralRXOnly.Enabled = false;
 			}
 			grpHWSoftRock.Visible = radGenModelSoftRock40.Checked;
 		}

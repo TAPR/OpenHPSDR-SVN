@@ -385,6 +385,9 @@ void IOThreadMainLoop(void) {
 	int sample_is_left; 
 	int buf_num = 0; 
 	int RxOverrun = 0; 
+#if 0 
+	int dbggate = 0; 
+#endif 
 
 	sample_bufp_size = 4*sizeof(int)*BlockSize; 	
 	outbuflen = 4 * sizeof(short) * BlockSize; 
@@ -462,7 +465,15 @@ void IOThreadMainLoop(void) {
 
 					case STATE_CONTROL0: 
 						// printf(" C0"); 
-						ControlBytes[0] = read_buf[i]; 
+						ControlBytes[0] = read_buf[i]; 						
+						DotDashBits = read_buf[i] & 0x3; 
+#if 0 
+						++dbggate; 
+						if ( dbggate == 1000 ) { 
+							printf("cb0: %d ddb: %d\n", ControlBytes[0], DotDashBits); fflush(stdout);
+							dbggate = 0; 
+						} 
+#endif 
 						state = STATE_CONTROL1; // look for 2nd control byte 
 						break; 
 					case STATE_CONTROL1: 

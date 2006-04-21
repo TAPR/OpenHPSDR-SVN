@@ -27,6 +27,29 @@
 //
 // Bug Fixes 
 //
+//		Issue:			TUN always USB
+//		Description:	Tune signal was only generating USB.  THIS MAY NOT HAVE
+//						FIXED IT. TEST CAREFULLY.  This is the correct approach
+//						but SINL_COSR generator to make the tone has not been
+//						checked to make sure this is done correctly with
+//						negative frequencies.
+//		Reported By:	K1RQG  BugID:  	  292
+//		Fixed By:		N4HY SVN: 454
+//		
+//		Issue:			Tortoise SVN Settings for Putty Problems
+//		Description:	Tortoise SVN may, or may not successfully
+//						communicate when using Putty.exe.  Use Putty.exe
+//						as normal to set up your sessions.  BUT then
+//						in the explorer (not Internet Explorer) right click
+//						on the folder of interest,  click on TortoiseSVN,
+//						Settings, Network and REMOVE the entire contents
+//						of the SSH client box.  Leave it blank.  This will
+//						cause the internal SSH mechanism to run
+//						(TortoisePlink).  I have been unable to find a fix
+//						until
+//						http://www.svnforum.org/2017/viewtopic.php?p=3619#3619
+//		Reported By:	N4HY
+//
 //		Issue:			Ring Buffer settings
 //		Description:	The default ring buffer settings in the dsp, keyer
 //						were set incorrectly.  This led to occasional
@@ -65,6 +88,33 @@
 //						big audio cleanup.
 //		Reported by:	KD5TFD
 //		Fixed By:		N4HY
+//
+//		Issue:			SemiBreakin disable did NOT disable keyer PTT
+//		Description:	SemiBreakin check box was not checked in the PollPTT
+//						routine, so SemiBreakin was forced.  The only thing
+//						this did was stop the semi breakin timer from being
+//						used
+//		Reported By:	VE6IB  BugID:  	  280
+//		Fixed By:		N4HY SVN: 449
+//
+//		Issue:			Tooltip on Audio Sample Rate on setup form wrong
+//		Description:	The Tooltip still read "locked to 48000 samples per
+//						second even though this rate may now be changed.
+//		Reported By:	NJ1H BugID: 251
+//		Fixed By:		N4HY  SVN: 450
+//
+//		Issue:			Phase2 causes segment violation
+//		Description:	The phase2 process uses an ugly interface using mutexes
+//						in the callback.  This will be replaced with ring buffers
+//						and the consumption of points will be down on the other
+//						end of the ring buffer in a non blocking operation  that
+//						does not require a mutex.
+//						The bug reported by KD5TFD allowed us to escape the poor
+//						code because all Start() calls were made with the same
+//						size.  The new for the buffers is now done in the Start()
+//						function in audio.cs
+//		Reported By:	WA6AHL  BugID:  	  283
+//		Fixed By:		N4HY SVN: 451
 #endregion
 
 #region v1.6.0 Released 03/28/06 SVN rev 383
