@@ -142,6 +142,8 @@ namespace PowerSDR
 					case "SDR":
 						if (sp.IsOpen) sp.Close();	
 						break;
+					case "FPGA":  // fpga does not need to be opened or closed 
+						break; 
 					default:
 						if (sp.IsOpen) sp.Close();
 						sp.PortName = primary_conn_port;
@@ -276,6 +278,14 @@ namespace PowerSDR
 							extkey_dash = (byte)(((b & (byte)StatusPin.Dash ) != 0) ? 1:0);
 							extkey_dot  = (byte)(((b & (byte)StatusPin.Dot ) != 0) ? 1:0);
 							break;
+
+						case "FPGA": 
+							int tmp = TFDAPHaudio.GetDotDash(); 
+							// System.Console.WriteLine("dd: " + tmp); 
+							extkey_dot = (byte)(tmp & 0x1); 
+							extkey_dash = (byte)((tmp & 0x2) != 0 ? 1:0); 
+							break; 
+
 						default: // COM port
 							extkey_dash = System.Convert.ToByte(sp.CtsHolding);
 							extkey_dot  = System.Convert.ToByte(sp.DsrHolding);

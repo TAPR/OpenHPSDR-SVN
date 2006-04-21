@@ -146,7 +146,9 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int samples_per_block,
 			XyloH = NULL; 
 		} 		
 	} 
+	DotDashBits = 0; 
 	return myrc; 
+	
 }
 
 
@@ -184,9 +186,15 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
 		XyloH = NULL; 
 	} 
 	printf("xylo closed\n");   fflush(stdout); 
+	DotDashBits = 0; 
 	return;
 }
 
+
+
+KD5TFDVK6APHAUDIO_API int GetDotDash() { 
+	return DotDashBits & 0x3; 
+}
 
 
 ///

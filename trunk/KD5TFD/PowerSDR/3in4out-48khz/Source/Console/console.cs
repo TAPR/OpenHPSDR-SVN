@@ -12974,9 +12974,9 @@ namespace PowerSDR
 						if(chkMUT.Checked != mute) chkMUT.Checked = mute;
 					}
                     
-					bool mic_ptt = (b & (byte)StatusPin.Dot) != 0;
+					bool mic_ptt = (b & (byte)StatusPin.Dot) != 0;					
 					bool x2_ptt = (b & (byte)StatusPin.PIN_11) != 0;
-					bool cw_ptt = (DttSP.KeyerPlaying() != 0) | Keyer.KeyerPTT | Keyer.MemoryPTT;
+					bool cw_ptt = (CWSemiBreakInEnabled &(DttSP.KeyerPlaying() != 0)) | Keyer.KeyerPTT | Keyer.MemoryPTT; 
 					bool cat_ptt = false;
 					bool vox_ptt = Audio.VOXActive;
 					if(usb_present) x2_ptt = !x2_ptt;
@@ -13054,7 +13054,7 @@ namespace PowerSDR
 							}
 							else
 							{
-								if(Keyer.PrimaryConnPort == "SDR" &&
+								if ( ( Keyer.PrimaryConnPort == "SDR" || Keyer.PrimaryConnPort == "FPGA" )  &&
 									Keyer.SecondaryConnPort == "None" &&
 									!cw_semi_break_in_enabled)
 								{
@@ -15647,6 +15647,7 @@ namespace PowerSDR
 					meter_text_history[i] = 0.0f;
 			}	
 
+			comboPreamp.Enabled = !chkMOX.Checked;
 			SetupForm.MOX = chkMOX.Checked;
 			//Display.ResetDisplayAverage();
 			ResetMultiMeterPeak();
@@ -16668,6 +16669,7 @@ namespace PowerSDR
 				case DSPMode.LSB:
 					radModeLSB.BackColor = button_selected_color;
 					grpMode.Text = "Mode - LSB";
+					Audio.UpperSidebandTune = false;
 					DttSP.SetTXOsc(0.0);
 					if(!rx_only && chkPower.Checked)
 						chkMOX.Enabled = true;
@@ -16676,6 +16678,7 @@ namespace PowerSDR
 				case DSPMode.USB:
 					radModeUSB.BackColor = button_selected_color;
 					grpMode.Text = "Mode - USB";
+					Audio.UpperSidebandTune = true;
 					DttSP.SetTXOsc(0.0);
 					if(!rx_only && chkPower.Checked)
 						chkMOX.Enabled = true;
@@ -16684,6 +16687,7 @@ namespace PowerSDR
 				case DSPMode.DSB:
 					radModeDSB.BackColor = button_selected_color;
 					grpMode.Text = "Mode - DSB";
+					Audio.UpperSidebandTune = true;
 					DttSP.SetTXOsc(0.0);
 					if(!rx_only && chkPower.Checked)
 						chkMOX.Enabled = true;
@@ -16692,6 +16696,7 @@ namespace PowerSDR
 				case DSPMode.CWL:
 					radModeCWL.BackColor = button_selected_color;
 					grpMode.Text = "Mode - CWL";
+					Audio.UpperSidebandTune = false;
 					DttSP.SetTXOsc(0.0);
 					DttSP.SetKeyerFreq(cw_pitch);
 					if(!rx_only && chkPower.Checked)
@@ -16722,6 +16727,7 @@ namespace PowerSDR
 				case DSPMode.CWU:
 					radModeCWU.BackColor = button_selected_color;
 					grpMode.Text = "Mode - CWU";
+					Audio.UpperSidebandTune = true;
 					DttSP.SetTXOsc(0.0);
 					DttSP.SetKeyerFreq(-cw_pitch);
 					if(!rx_only && chkPower.Checked)
@@ -16752,6 +16758,7 @@ namespace PowerSDR
 				case DSPMode.FMN:
 					radModeFMN.BackColor = button_selected_color;
 					grpMode.Text = "Mode - FMN";
+					Audio.UpperSidebandTune = true;
 					int pwr = (int)udPWR.Value;
 					udPWR.Value = pwr/4;
 					udPWR.Maximum = 25;					
@@ -16767,6 +16774,7 @@ namespace PowerSDR
 				case DSPMode.AM:
 					radModeAM.BackColor = button_selected_color;
 					grpMode.Text = "Mode - AM";
+					Audio.UpperSidebandTune = true;
 					if(!rx_only && chkPower.Checked)
 						chkMOX.Enabled = true;
 					chkMON.Checked = false;
@@ -16779,6 +16787,7 @@ namespace PowerSDR
 				case DSPMode.SAM:
 					radModeSAM.BackColor = button_selected_color;
 					grpMode.Text = "Mode - SAM";
+					Audio.UpperSidebandTune = true;
 					if(!rx_only && chkPower.Checked)
 						chkMOX.Enabled = true;
 					chkMON.Checked = false;
@@ -16811,6 +16820,7 @@ namespace PowerSDR
 				case DSPMode.DIGL:
 					radModeDIGL.BackColor = button_selected_color;
 					grpMode.Text = "Mode - DIGL";
+					Audio.UpperSidebandTune = false;
 					DttSP.SetTXFilters(tx_filter_low, tx_filter_high);
 					if(vac_auto_enable)
 						SetupForm.VACEnable = true;
@@ -16818,6 +16828,7 @@ namespace PowerSDR
 				case DSPMode.DIGU:
 					radModeDIGU.BackColor = button_selected_color;
 					grpMode.Text = "Mode - DIGU";
+					Audio.UpperSidebandTune = true;
 					DttSP.SetTXFilters(tx_filter_low, tx_filter_high);
 					if(vac_auto_enable)
 						SetupForm.VACEnable = true;
@@ -16827,6 +16838,7 @@ namespace PowerSDR
 					vfo_offset = -0.012;
 					radModeDRM.BackColor = button_selected_color;
 					grpMode.Text = "Mode - DRM";
+					Audio.UpperSidebandTune = true;
 					if(vac_auto_enable)
 						SetupForm.VACEnable = true;
 					chkMOX.Enabled = false;

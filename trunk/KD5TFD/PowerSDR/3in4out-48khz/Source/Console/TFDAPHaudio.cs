@@ -21,5 +21,18 @@ namespace PowerSDR
 
 		[DllImport("KD5TFD-VK6APH-Audio.dll")]
 		unsafe public static extern int StopAudio(); 
+
+		[DllImport("KD5TFD-VK6APH-Audio.dll")]
+		unsafe public static extern int GetDotDash();  // bit 0 = dot asserted, bit 1 = dash asserted 
+
+//		public static bool CWptt() 
+//		{ 			
+//			if ( ( GetDotDash() & 0x3 ) != 0  ) 
+//			{
+//				return true; 
+//			}
+//			/* else */ 
+//			return false; 									 									 
+//		} 
 	}
 }

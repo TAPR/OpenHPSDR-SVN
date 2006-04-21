@@ -244,8 +244,8 @@ namespace PowerSDR
 		unsafe private static void *stream1;
 		unsafe private static void *stream2;
 		private static int block_size2 = 2048;
-		public static float[] phase_buf_l = new float[block_size1];
-		public static float[] phase_buf_r = new float[block_size1];
+		public static float[] phase_buf_l;
+		public static float[] phase_buf_r;
 		public static bool phase = false;
 		public static bool wave_record = false;
 		public static bool wave_playback = false;
@@ -291,6 +291,13 @@ namespace PowerSDR
 		public static bool NewKeyer
 		{
 			set { new_keyer = value; }
+		}
+
+		private static bool upper_usb_tune = true;
+		public static bool UpperSidebandTune 
+		{
+			set { upper_usb_tune = value; }
+			get { return upper_usb_tune; }
 		}
 
 		private static bool vac_enabled = false;
@@ -1134,10 +1141,14 @@ namespace PowerSDR
 					if(two_tone)
 					{
 						double dump;
-						SineWave2Tone(out_l1, frameCount,
+						if (upper_usb_tune) SineWave2Tone(out_l1, frameCount,
 							phase_accumulator1, phase_accumulator2,
 							sine_freq1, sine_freq2,
 							out dump, out dump);
+						else SineWave2Tone(out_l1, frameCount,
+								 phase_accumulator1, phase_accumulator2,
+								 -sine_freq2, -sine_freq1,
+								 out dump, out dump);
 
 						CosineWave2Tone(out_r1, frameCount,
 							phase_accumulator1, phase_accumulator2,
@@ -1146,7 +1157,8 @@ namespace PowerSDR
 					}
 					else
 					{
-						SineWave(out_l1, frameCount, phase_accumulator1, sine_freq1);
+						if (upper_usb_tune) SineWave(out_l1, frameCount, phase_accumulator1, sine_freq1);
+						else SineWave(out_l1, frameCount, phase_accumulator1, -sine_freq1);
 						phase_accumulator1 = CosineWave(out_r1, frameCount, phase_accumulator1, sine_freq1);
 					}
 					break;					
@@ -4176,6 +4188,8 @@ namespace PowerSDR
 		public static bool Start()
 		{
 			bool retval = false;
+			phase_buf_l = new float[block_size1];
+			phase_buf_r = new float[block_size1];
 			if(num_channels == 2)
 				retval = StartAudio(ref callback1, (uint)block_size1, sample_rate1, host1, input_dev1, output_dev1, num_channels, 0, latency1);
 			else
