@@ -12975,6 +12975,14 @@ namespace PowerSDR
 					}
                     
 					bool mic_ptt = (b & (byte)StatusPin.Dot) != 0;					
+
+					if ( !mic_ptt ) 
+					{ 
+						if ( (TFDAPHaudio.GetDotDash() & 0x1) != 0 ) 
+						{ 
+							mic_ptt = true; 
+						} 
+					} 
 					bool x2_ptt = (b & (byte)StatusPin.PIN_11) != 0;
 					bool cw_ptt = (CWSemiBreakInEnabled &(DttSP.KeyerPlaying() != 0)) | Keyer.KeyerPTT | Keyer.MemoryPTT; 
 					bool cat_ptt = false;
@@ -18691,8 +18699,6 @@ namespace PowerSDR
 				dds_lock = value;
 				txtVFOAFreq_LostFocus(this, EventArgs.Empty); // go thru a retune cycle
 			}
-		}
-
-		
+		}		
 	}
 }

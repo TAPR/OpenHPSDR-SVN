@@ -385,7 +385,7 @@ void IOThreadMainLoop(void) {
 	int sample_is_left; 
 	int buf_num = 0; 
 	int RxOverrun = 0; 
-#if 0 
+#if 0
 	int dbggate = 0; 
 #endif 
 
@@ -466,7 +466,9 @@ void IOThreadMainLoop(void) {
 					case STATE_CONTROL0: 
 						// printf(" C0"); 
 						ControlBytes[0] = read_buf[i]; 						
-						DotDashBits = read_buf[i] & 0x3; 
+						DotDashBits = read_buf[i] & 0x3; 						
+													
+
 #if 0 
 						++dbggate; 
 						if ( dbggate == 1000 ) { 
