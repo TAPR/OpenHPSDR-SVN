@@ -119,7 +119,7 @@
 //   dbgout          - pin 89
 //	 dot			 - pin 73 - CW dot key - active low 
 //	 dash			 - pin 75 - CW dash key - active low 
-//   ad_reset        - pin 70
+//   ad_reset        - pin 70 - reset pin on a/d chip - active low (chip held in reset while low)    
 //
 //   Pins 87 and 85 are reserved for ref counter
 
@@ -131,7 +131,8 @@
 
 module Duplex(
 	FX2_CLK, AD_CLK, FX2_FD, FX2_SLRD, FX2_SLWR, FX2_flags, FX2_PA, BCLK, DOUT, LRCLK, LED, TxD, I_PWM_out,
-	Q_PWM_out, button, TX_BCLK, TX_LRCLK, TX_DOUT, RX_DIN, RX_INLRCLK, alt_clk_i, alt_clk_o, dbgout, dot, dash);
+	Q_PWM_out, button, TX_BCLK, TX_LRCLK, TX_DOUT, RX_DIN, RX_INLRCLK, alt_clk_i, alt_clk_o, 
+    dbgout, dot, dash, ad_reset);
 
 input AD_CLK; 				// From A/D converter 24.576MHz 
 input FX2_CLK; 				// FX2 clock - 24MHz
@@ -157,6 +158,10 @@ output dbgout;   			// wjt added -- tied to 89
 reg dbgout;
 input dot; 					// CW dot key, active low
 input dash;					// CW dash key, active low
+output ad_reset;
+reg ad_reset;
+
+
 
 assign alt_clk_o = alt_clk_i; // pass thru alt osc clock
 
@@ -201,6 +206,21 @@ reg [6:0] loop_counter;		// counts number of times round loop
 reg [11:0] sync_Rx_used; 	// holds # of bytes in Rx_fifo for use by PC
 reg [11:0] rx_avail;  		// kd5tfd -- how much space is avail in the rx fifo
 
+
+// hold the A/D chip in reset until 2**24 (16.6 million) ad_clocks have passed - about 3/4 a second
+// kd5tfd added
+reg ad_enabled;
+reg [23:0] ad_count;
+
+always @ (posedge AD_CLK) begin
+        ad_count <= ad_count + 1;
+        if ( ad_enabled == 0 && ad_count[23] ) begin
+                        ad_enabled <= 1;
+                        ad_reset <= 1;  // turn on the ad_converter
+        end
+end
+
+
 //////////////////////////////////////////////////////////////
 //
 //  			Clocks for TLV320AIC23B
@@ -216,7 +236,6 @@ reg [11:0] rx_avail;  		// kd5tfd -- how much space is avail in the rx fifo
 assign 	TX_BCLK = BCLK;
 assign  TX_LRCLK = LRCLK;
 assign  RX_INLRCLK = LRCLK; 
-
 
 //////////////////////////////////////////////////////////////
 //
