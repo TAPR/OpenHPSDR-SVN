@@ -196,6 +196,16 @@ KD5TFDVK6APHAUDIO_API int GetDotDash() {
 	return DotDashBits & 0x3; 
 }
 
+KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmit) {   // bit xmitbit ==0, recv mode, != 0, xmit mode
+	if ( xmit == 0 ) { 
+		XmitBit = 0; 
+	} 
+	else { 
+		XmitBit = 1; 
+	} 	
+}
+
+
 
 ///
 /// Obsolete 2 channel versions of the code 
