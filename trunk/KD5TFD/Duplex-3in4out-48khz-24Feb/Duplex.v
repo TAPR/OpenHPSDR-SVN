@@ -781,7 +781,8 @@ assign FX2_FD[7:0] = FX2_SLWR ? 8'bZ : Tx_register[7:0];
 
 //assign LED[0] = Rx_control_0[0]; // C&C test, simulates PTT. Red LED ON when button pressed.
 
-assign LED[0] = write_full; // Red LED lights when Rx fifo is full. 
+// assign LED[0] = write_full; // Red LED lights when Rx fifo is full. 
+assign LED[0] = Rx_control_0[0];  // RED led on for xmit 
 assign LED[1] = FX2_flags[2];	// Green LED on when we can write to FX2 FIFO
 
 endmodule
