@@ -333,6 +333,10 @@ int IsOkToSendDataToFPGA(void) {
 	} 
 }
 
+#if 0 
+int last_xmit_bit = 0; 
+#endif 
+
 // main loop of the iothread -- real work happens here 
 // read data out of the xylo, block it, and put it into a fifo  to go to the callback thread 
 // 
@@ -685,7 +689,14 @@ void IOThreadMainLoop(void) {
 
 						case OUT_STATE_CONTROL0:
 							out_state = OUT_STATE_CONTROL1;
-							write_buf[writebufpos] = ControlBytes[0]; 
+							// write_buf[writebufpos] = ControlBytes[0]; 
+#if 0 
+							if ( XmitBit != last_xmit_bit ) { 
+								last_xmit_bit = XmitBit; 
+								printf("XmitBit changed to: %d\n", XmitBit); fflush(stdout); 
+							} 
+#endif 
+							write_buf[writebufpos] = (unsigned char)XmitBit; 
 							break; 
 
 						case OUT_STATE_CONTROL1: 

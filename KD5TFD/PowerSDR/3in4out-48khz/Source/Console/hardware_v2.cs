@@ -416,10 +416,17 @@ namespace PowerSDR
 //			get { return pio_ic1.GetBit(TR); }
 			set 
 			{
-				if(value)
+				if(value) 
+				{ 
+					TFDAPHaudio.SetXmitBit(1); 
 					pio_ic1.SetBit(TR);
-				else
+					
+				}
+				else 
+				{
+					TFDAPHaudio.SetXmitBit(0); 
 					pio_ic1.ClearBit(TR);
+				}
 			}
 		}
 
