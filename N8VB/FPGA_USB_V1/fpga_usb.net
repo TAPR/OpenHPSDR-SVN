@@ -1,0 +1,1874 @@
+# EESchema Netlist Version 1.0 generee le  24/4/2006-18:19:57
+(
+ ( 444CFFD4 $noname  XO2 XTAL_OSC_HALF {Lib=XTAL_OSC_HALF}
+  (    1 +3.3VD )
+  (    4 GND_DIGITAL )
+  (    5 FPGA_CLK5IN_1 )
+  (    8 +3.3VD )
+ )
+ ( 444CFFB7 $noname  XO1 XTAL_OSC_HALF {Lib=XTAL_OSC_HALF}
+  (    1 +3.3VD )
+  (    4 GND_DIGITAL )
+  (    5 FPGA_CLK4IN_1 )
+  (    8 +3.3VD )
+ )
+ ( 44354A87 $noname  C41 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354A86 $noname  C40 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354A85 $noname  C39 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354A84 $noname  C38 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354A83 $noname  C37 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354A82 $noname  C36 0.1u {Lib=C}
+  (    1 +3.3VA )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354A81 $noname  C35 0.1u {Lib=C}
+  (    1 +3.3VA )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354A80 $noname  C34 0.1u {Lib=C}
+  (    1 +3.3VA )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354A7F $noname  C33 0.1u {Lib=C}
+  (    1 +3.3VA )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354A7E $noname  C32 0.1u {Lib=C}
+  (    1 +3.3VA )
+  (    2 GND_DIGITAL )
+ )
+ ( 4435483E $noname  C31 0.1u {Lib=C}
+  (    1 +1.2VA )
+  (    2 GND_DIGITAL )
+ )
+ ( 4435483D $noname  C30 0.1u {Lib=C}
+  (    1 +1.2VA )
+  (    2 GND_DIGITAL )
+ )
+ ( 4435483C $noname  C29 0.1u {Lib=C}
+  (    1 +1.2VA )
+  (    2 GND_DIGITAL )
+ )
+ ( 4435483B $noname  C28 0.1u {Lib=C}
+  (    1 +1.2VA )
+  (    2 GND_DIGITAL )
+ )
+ ( 4435483A $noname  C27 0.1u {Lib=C}
+  (    1 +1.2VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354839 $noname  C26 0.1u {Lib=C}
+  (    1 +1.2VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354838 $noname  C25 0.1u {Lib=C}
+  (    1 +1.2VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354837 $noname  C24 0.1u {Lib=C}
+  (    1 +1.2VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354836 $noname  C23 0.1u {Lib=C}
+  (    1 +1.2VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354835 $noname  C22 0.1u {Lib=C}
+  (    1 +1.2VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354366 $noname  C21 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354365 $noname  C20 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354364 $noname  C19 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354363 $noname  C18 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354362 $noname  C17 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354361 $noname  C16 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354360 $noname  C15 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 4435435F $noname  C14 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 4435435E $noname  C13 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 4435435D $noname  C12 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354338 $noname  C11 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354335 $noname  C10 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354331 $noname  C9 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 4435432B $noname  C8 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354328 $noname  C7 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354322 $noname  C6 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 4435431D $noname  C5 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354313 $noname  C4 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 4435430C $noname  C3 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 44354306 $noname  C2 0.1u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+ )
+ ( 442C275F $noname  D6 LED {Lib=LED}
+  (    1 N-000007 )
+  (    2 INIT_DONE_1 )
+ )
+ ( 442C230E $noname  J10 CONN_4_1 {Lib=CONN_4_1}
+  (    1 FX2_RDY2_1 )
+  (    2 FX2_RDY3_1 )
+  (    3 FX2_RDY4_1 )
+  (    4 FX2_RDY5_1 )
+ )
+ ( 442C1EED $noname  J9 CONN_4_1 {Lib=CONN_4_1}
+  (    1 FX2_TXD0_1 )
+  (    2 FX2_RXD0_1 )
+  (    3 FX2_TXD1_1 )
+  (    4 FX2_RXD1_1 )
+ )
+ ( 442C0F21 $noname  J7 CONN_2_1 {Lib=CONN_2_1}
+  (    1 FPGA_CLK6IN_1 )
+  (    2 FPGA_CLK7IN_1 )
+ )
+ ( 442C0E28 $noname  J8 CONN_4_1 {Lib=CONN_4_1}
+  (    1 FPGA_CLK4IN_1 )
+  (    2 FPGA_CLKXOUT_1 )
+  (    3 FPGA_CLK5IN_1 )
+  (    4 FPGA_CLKYOUT_1 )
+ )
+ ( 442C0B0B $noname  J6 CONN_2_1 {Lib=CONN_2_1}
+  (    1 N-000023 )
+  (    2 N-000022 )
+ )
+ ( 442C0B08 $noname  U6 DS92LV010 {Lib=DS92LV010}
+  (    1 +3.3VD )
+  (    2 FPGA_CLKYOUT_1 )
+  (    3  ? )
+  (    4 GND_DIGITAL )
+  (    5 +3.3VD )
+  (    6 N-000022 )
+  (    7 N-000023 )
+  (    8 +3.3VD )
+ )
+ ( 442C0A73 $noname  J5 CONN_2_1 {Lib=CONN_2_1}
+  (    1 N-000026 )
+  (    2 N-000025 )
+ )
+ ( 442C09BF $noname  U5 DS92LV010 {Lib=DS92LV010}
+  (    1 +3.3VD )
+  (    2 FPGA_CLKXOUT_1 )
+  (    3  ? )
+  (    4 GND_DIGITAL )
+  (    5 +3.3VD )
+  (    6 N-000025 )
+  (    7 N-000026 )
+  (    8 +3.3VD )
+ )
+ ( 442B017F $noname  R14 1K {Lib=R}
+  (    1 +3.3VD )
+  (    2 N-000007 )
+ )
+ ( 442B011B $noname  R5 10K {Lib=R}
+  (    1 nCE_1 )
+  (    2 GND_DIGITAL )
+ )
+ ( 442AEA94 $noname  JP1 3.3V_SELECT {Lib=SOLDER_JUMP3}
+  (    1 +3.3VBUS )
+  (    2 +3.3VD )
+  (    3 N-000032 )
+ )
+ ( 442AE9AD $noname  J4 CONN_2_1 {Lib=CONN_2_1}
+  (    1 N-000034 )
+  (    2 N-000033 )
+ )
+ ( 442AE973 $noname  U4 DS92LV010 {Lib=DS92LV010}
+  (    1 GND_DIGITAL )
+  (    2 GND_DIGITAL )
+  (    3 FPGA_CLK3IN_1 )
+  (    4 GND_DIGITAL )
+  (    5 GND_DIGITAL )
+  (    6 N-000033 )
+  (    7 N-000034 )
+  (    8 +3.3VD )
+ )
+ ( 442AE952 $noname  J3 CONN_2_1 {Lib=CONN_2_1}
+  (    1 N-000037 )
+  (    2 N-000036 )
+ )
+ ( 442AE774 $noname  U3 DS92LV010 {Lib=DS92LV010}
+  (    1 GND_DIGITAL )
+  (    2 GND_DIGITAL )
+  (    3 FPGA_CLK2IN_1 )
+  (    4 GND_DIGITAL )
+  (    5 GND_DIGITAL )
+  (    6 N-000036 )
+  (    7 N-000037 )
+  (    8 +3.3VD )
+ )
+ ( 4422F104 $noname  R8 1K {Lib=R}
+  (    1 +3.3VD )
+  (    2 FPGA_TDI_1 )
+ )
+ ( 442AD21A $noname  R1 100K {Lib=R}
+  (    1 +3.3VD )
+  (    2 /RESET_1 )
+ )
+ ( 442AD1CA $noname  R4 10K {Lib=R}
+  (    1 +3.3VD )
+  (    2 nSTATUS_1 )
+ )
+ ( 442ACFB6 $noname  C46 1u {Lib=C}
+  (    1 N-000032 )
+  (    2 GNDPWR )
+ )
+ ( 442ACFAC $noname  C43 10u {Lib=C}
+  (    1 +5VBUS )
+  (    2 GNDPWR )
+ )
+ ( 442AA3EF $noname  R3 10K {Lib=R}
+  (    1 +3.3VD )
+  (    2 CONFIG_DONE_1 )
+ )
+ ( 442AA3E4 $noname  R2 10K {Lib=R}
+  (    1 +3.3VD )
+  (    2 nCONFIG_1 )
+ )
+ ( 442A9E59 $noname  U8 EPCS1 {Lib=EPCS1}
+  (    1 nCSO_1 )
+  (    2 DATA0_1 )
+  (    3 +3.3VD )
+  (    4 GND_DIGITAL )
+  (    5 ASDO_1 )
+  (    6 DCLK_1 )
+  (    7 +3.3VD )
+  (    8 +3.3VD )
+ )
+ ( 442A9C6E $noname  J2 ALTERA_BYTEBLASTER {Lib=ALTERA_BYTEBLASTER}
+  (    1 DCLK_1 )
+  (    2 GND_DIGITAL )
+  (    3 CONFIG_DONE_1 )
+  (    4 +3.3VD )
+  (    5 nCONFIG_1 )
+  (    6 nCE_1 )
+  (    7 DATA0_1 )
+  (    8 nCSO_1 )
+  (    9 ASDO_1 )
+  (   10 GND_DIGITAL )
+ )
+ ( 442A9C68 $noname  J1 ALTERA_BYTEBLASTER {Lib=ALTERA_BYTEBLASTER}
+  (    1 FPGA_TCK_1 )
+  (    2 GND_DIGITAL )
+  (    3 FPGA_TDO_1 )
+  (    4 +3.3VD )
+  (    5 FPGA_TMS_1 )
+  (    6  ? )
+  (    7  ? )
+  (    8  ? )
+  (    9 FPGA_TDI_1 )
+  (   10 GND_DIGITAL )
+ )
+ ( 442A99F1 $noname  P1 CONN_20_1 {Lib=CONN_20_1}
+  (    1 FX2_SDA_1 )
+  (    2 FX2_SCL_1 )
+  (    3 FX2_T0_1 )
+  (    4 FX2_T1_1 )
+  (    5 FX2_T2_1 )
+  (    6 N-000087 )
+  (    7 N-000070 )
+  (    8 N-000069 )
+  (    9 N-000068 )
+  (   10 N-000067 )
+  (   11 N-000066 )
+  (   12 N-000065 )
+  (   13 N-000064 )
+  (   14 N-000063 )
+  (   15 N-000062 )
+  (   16 N-000061 )
+  (   17 N-000060 )
+  (   18 N-000059 )
+  (   19 N-000058 )
+  (   20 GND_DIGITAL )
+ )
+ ( 442A99D7 $noname  P2 CONN_5_1 {Lib=CONN_5_1}
+  (    1 N-000082 )
+  (    2 N-000081 )
+  (    3 N-000080 )
+  (    4 N-000079 )
+  (    5 N-000078 )
+ )
+ ( 442A9416 $noname  JP3 SOLDER_JUMP3 {Lib=SOLDER_JUMP3}
+  (    1 +3.3VD )
+  (    2 MSEL1_1 )
+  (    3 GND_DIGITAL )
+ )
+ ( 442A9407 $noname  JP2 SOLDER_JUMP3 {Lib=SOLDER_JUMP3}
+  (    1 +3.3VD )
+  (    2 MSEL0_1 )
+  (    3 GND_DIGITAL )
+ )
+ ( 4426BEE0 $noname  D5 LED {Lib=LED}
+  (    1 N-000040 )
+  (    2 N-000078 )
+ )
+ ( 4426BEDB $noname  D4 LED {Lib=LED}
+  (    1 N-000041 )
+  (    2 N-000079 )
+ )
+ ( 4426BED2 $noname  D3 LED {Lib=LED}
+  (    1 N-000039 )
+  (    2 N-000080 )
+ )
+ ( 4426BECA $noname  D2 LED {Lib=LED}
+  (    1 N-000042 )
+  (    2 N-000081 )
+ )
+ ( 4426BEBF $noname  D1 LED {Lib=LED}
+  (    1 N-000043 )
+  (    2 N-000082 )
+ )
+ ( 4426BE38 $noname  R13 1K {Lib=R}
+  (    1 +3.3VD )
+  (    2 N-000040 )
+ )
+ ( 4426BE2E $noname  R12 1K {Lib=R}
+  (    1 +3.3VD )
+  (    2 N-000041 )
+ )
+ ( 4426BE25 $noname  R11 1K {Lib=R}
+  (    1 +3.3VD )
+  (    2 N-000039 )
+ )
+ ( 4426BE17 $noname  R10 1K {Lib=R}
+  (    1 +3.3VD )
+  (    2 N-000042 )
+ )
+ ( 4426BE02 $noname  R9 1K {Lib=R}
+  (    1 +3.3VD )
+  (    2 N-000043 )
+ )
+ ( 4426B979 $noname  C49 22u {Lib=C}
+  (    1 +1.2VA )
+  (    2 GND_DIGITAL )
+ )
+ ( 4426B968 $noname  R18 22 {Lib=R}
+  (    1 +1.2VD )
+  (    2 +1.2VA )
+ )
+ ( 4426B55F $noname  U10 LD1117-3.3 {Lib=LD1117-3.3}
+  (    1 GNDPWR )
+  (    2 N-000032 )
+  (    3 +5VBUS )
+ )
+ ( 4426B1CB $noname  C48 22u {Lib=C}
+  (    1 +3.3VA )
+  (    2 GND_DIGITAL )
+ )
+ ( 4426B1B6 $noname  R17 22 {Lib=R}
+  (    1 +3.3VD )
+  (    2 +3.3VA )
+ )
+ ( 4426AA44 $noname  C47 22u {Lib=C}
+  (    1 +1.2VD )
+  (    2 GNDPWR )
+ )
+ ( 4426AA3E $noname  C42 10u {Lib=C}
+  (    1 +3.3VD )
+  (    2 GNDPWR )
+ )
+ ( 4426AA2B $noname  U9 FAN1112 {Lib=FAN1112}
+  (    1 GNDPWR )
+  (    2 +1.2VD )
+  (    3 +3.3VD )
+ )
+ ( 4422FAEB $noname  J11 DIN41612_96 {Lib=DIN41612_96}
+  (    1 +12VBUS )
+  (    2 X0A0_1 )
+  (    3 X1A1_1 )
+  (    4 X2A2_1 )
+  (    5 X3A3_1 )
+  (    6 X4A4_1 )
+  (    7 X5A5_1 )
+  (    8 X6A6_1 )
+  (    9 X7A7_1 )
+  (   10 X8B0_1 )
+  (   11 X9B1_1 )
+  (   12 X10B2_1 )
+  (   13 X11B3_1 )
+  (   14 X12B4_1 )
+  (   15 X13B5_1 )
+  (   16 X14B6_1 )
+  (   17 X15B7_1 )
+  (   18 X16C0_1 )
+  (   19 X17C1_1 )
+  (   20 X18C2_1 )
+  (   21 X19C3_1 )
+  (   22 X20C4_1 )
+  (   23 X21C5_1 )
+  (   24 X22C6_1 )
+  (   25 X23C7_1 )
+  (   26 -12VBUS )
+  (   27 X24DC_1 )
+  (   28 -5VBUS )
+  (   29 X25DC_1 )
+  (   30 +3.3VBUS )
+  (   31 X26DC_1 )
+  (   32 +5VBUS )
+  (   33 +12VBUS )
+  (   34 GND_DIGITAL )
+  (   35 GND_DIGITAL )
+  (   36 GND_DIGITAL )
+  (   37 GND_DIGITAL )
+  (   38 GND_DIGITAL )
+  (   39 GND_DIGITAL )
+  (   40 GND_DIGITAL )
+  (   41 GND_DIGITAL )
+  (   42 GND_DIGITAL )
+  (   43 GND_DIGITAL )
+  (   44 GND_DIGITAL )
+  (   45 GND_DIGITAL )
+  (   46 GND_DIGITAL )
+  (   47 GND_DIGITAL )
+  (   48 GND_DIGITAL )
+  (   49 GND_DIGITAL )
+  (   50 GND_DIGITAL )
+  (   51 GND_DIGITAL )
+  (   52 GND_DIGITAL )
+  (   53 GND_DIGITAL )
+  (   54 GND_DIGITAL )
+  (   55 GND_DIGITAL )
+  (   56 GND_DIGITAL )
+  (   57 GND_DIGITAL )
+  (   58 -12VBUS )
+  (   59 GND_DIGITAL )
+  (   60 -5VBUS )
+  (   61 GND_DIGITAL )
+  (   62 +3.3VBUS )
+  (   63 GND_DIGITAL )
+  (   64 +5VBUS )
+  (   65 +12VBUS )
+  (   66 Y0A0_1 )
+  (   67 Y1A1_1 )
+  (   68 Y2A2_1 )
+  (   69 Y3A3_1 )
+  (   70 Y4A4_1 )
+  (   71 Y5A5_1 )
+  (   72 Y6A6_1 )
+  (   73 Y7A7_1 )
+  (   74 Y8B0_1 )
+  (   75 Y9B1_1 )
+  (   76 Y10B2_1 )
+  (   77 Y11B3_1 )
+  (   78 Y12B4_1 )
+  (   79 Y13B5_1 )
+  (   80 Y14B6_1 )
+  (   81 Y15B7_1 )
+  (   82 Y16C0_1 )
+  (   83 Y17C1_1 )
+  (   84 Y18C2_1 )
+  (   85 Y19C3_1 )
+  (   86 Y20C4_1 )
+  (   87 Y21C5_1 )
+  (   88 Y22C6_1 )
+  (   89 Y23C7_1 )
+  (   90 -12VBUS )
+  (   91 Y24DC_1 )
+  (   92 -5VBUS )
+  (   93 Y25DC_1 )
+  (   94 +3.3VBUS )
+  (   95 Y26DC_1 )
+  (   96 +5VBUS )
+ )
+ ( 4422F100 $noname  R7 1K {Lib=R}
+  (    1 +3.3VD )
+  (    2 FPGA_TMS_1 )
+ )
+ ( 4422F0F8 $noname  R6 1K {Lib=R}
+  (    1 +3.3VD )
+  (    2 FPGA_TCK_1 )
+ )
+ ( 4421AA1C $noname  R16 2.2K {Lib=R}
+  (    1 +3.3VD )
+  (    2 FX2_SDA_1 )
+ )
+ ( 4421AA15 $noname  R15 2.2K {Lib=R}
+  (    1 +3.3VD )
+  (    2 FX2_SCL_1 )
+ )
+ ( 4421A9F3 $noname  U1 24LC128 {Lib=24LC128}
+  (    1 +3.3VD )
+  (    2 GND_DIGITAL )
+  (    3 GND_DIGITAL )
+  (    4 GND_DIGITAL )
+  (    5 FX2_SDA_1 )
+  (    6 FX2_SCL_1 )
+  (    7  ? )
+  (    8 +3.3VD )
+ )
+ ( 4421A80D $noname  USBC1 USB {Lib=USB}
+  (    1  ? )
+  (    2 N-000192 )
+  (    3 N-000194 )
+  (    4 GND_DIGITAL )
+ )
+ ( 4421A477 $noname  C45 12p {Lib=C}
+  (    1 N-000045 )
+  (    2 GND_DIGITAL )
+ )
+ ( 4421A473 $noname  C44 12p {Lib=C}
+  (    1 N-000044 )
+  (    2 GND_DIGITAL )
+ )
+ ( 4421A3E2 $noname  X1 24_MHz {Lib=CRYSTAL}
+  (    1 N-000044 )
+  (    2 N-000045 )
+ )
+ ( 4421A164 $noname  C1 0.1u {Lib=C}
+  (    1 /RESET_1 )
+  (    2 GND_DIGITAL )
+ )
+ ( 4420647D $noname  U2 CY7C68013A_128 {Lib=CY7C68013A_128}
+  (    1 FX2_CLK_1 )
+  (    2 +3.3VD )
+  (    3 GND_DIGITAL )
+  (    4 RDY0/SLRD_1 )
+  (    5 RDY1/SLWR_1 )
+  (    6 FX2_RDY2_1 )
+  (    7 FX2_RDY3_1 )
+  (    8 FX2_RDY4_1 )
+  (    9 FX2_RDY5_1 )
+  (   10 +3.3VA )
+  (   11 N-000044 )
+  (   12 N-000045 )
+  (   13 GND_DIGITAL )
+  (   14  ? )
+  (   15  ? )
+  (   16  ? )
+  (   17 +3.3VA )
+  (   18 N-000194 )
+  (   19 N-000192 )
+  (   20 GND_DIGITAL )
+  (   21  ? )
+  (   22  ? )
+  (   23  ? )
+  (   24  ? )
+  (   25  ? )
+  (   26 +3.3VD )
+  (   27 GND_DIGITAL )
+  (   28 FX2_INT4_1 )
+  (   29 FX2_T0_1 )
+  (   30 FX2_T1_1 )
+  (   31 FX2_T2_1 )
+  (   32 FX2_IFCLK_1 )
+  (   33 GND_DIGITAL )
+  (   34  ? )
+  (   35  ? )
+  (   36 FX2_SCL_1 )
+  (   37 FX2_SDA_1 )
+  (   38  ? )
+  (   39  ? )
+  (   40  ? )
+  (   41  ? )
+  (   42  ? )
+  (   43 +3.3VD )
+  (   44 FX2_FD0_1 )
+  (   45 FX2_FD1_1 )
+  (   46 FX2_FD2_1 )
+  (   47 FX2_FD3_1 )
+  (   48 +3.3VD )
+  (   49 GND_DIGITAL )
+  (   50 FX2_TXD0_1 )
+  (   51 FX2_RXD0_1 )
+  (   52 FX2_TXD1_1 )
+  (   53 FX2_RXD1_1 )
+  (   54 FX2_FD4_1 )
+  (   55 FX2_FD5_1 )
+  (   56 FX2_FD6_1 )
+  (   57 FX2_FD7_1 )
+  (   58 GND_DIGITAL )
+  (   59  ? )
+  (   60  ? )
+  (   61  ? )
+  (   62  ? )
+  (   63  ? )
+  (   64 +3.3VD )
+  (   65 GND_DIGITAL )
+  (   66 FX2_CTL3_1 )
+  (   67 FX2_CTL4_1 )
+  (   68 +3.3VD )
+  (   69 FX2_CTL0/FLAGA_1 )
+  (   70 FX2_CTL1/FLAGB_1 )
+  (   71 FX2_CTL2/FLAGC_1 )
+  (   72 DATA0_1 )
+  (   73 nCONFIG_1 )
+  (   74 DCLK_1 )
+  (   75 CONFIG_DONE_1 )
+  (   76 nSTATUS_1 )
+  (   77 nCE_1 )
+  (   78 FX2_PC6_1 )
+  (   79 FX2_PC7_1 )
+  (   80 GND_DIGITAL )
+  (   81 +3.3VD )
+  (   82 FX2_PA0_1 )
+  (   83 FX2_PA1_1 )
+  (   84 FX2_PA2/SLOE_1 )
+  (   85 FX2_PA3_1 )
+  (   86  ? )
+  (   87  ? )
+  (   88  ? )
+  (   89 FX2_PA4/FIFOADR0_1 )
+  (   90 FX2_PA5/FIFOADR1_1 )
+  (   91 FX2_PA6/PKTEND_1 )
+  (   92 FX2_PA7/FLAGD/SLCS_1 )
+  (   93 GND_DIGITAL )
+  (   94  ? )
+  (   95  ? )
+  (   96  ? )
+  (   97  ? )
+  (   98 FX2_CTL5_1 )
+  (   99 /RESET_1 )
+  (  100 +3.3VD )
+  (  101  ? )
+  (  102 FX2_FD8_1 )
+  (  103 FX2_FD9_1 )
+  (  104 FX2_FD10_1 )
+  (  105 FX2_FD11_1 )
+  (  106 FX2_INT5_1 )
+  (  107 +3.3VD )
+  (  108 FX2_PE0_1 )
+  (  109 FX2_PE1_1 )
+  (  110 FX2_PE2_1 )
+  (  111 FX2_PE3_1 )
+  (  112 FX2_PE4_1 )
+  (  113 FX2_PE5/INT6_1 )
+  (  114 FX2_PE6_1 )
+  (  115 FX2_PE7_1 )
+  (  116 GND_DIGITAL )
+  (  117  ? )
+  (  118  ? )
+  (  119  ? )
+  (  120  ? )
+  (  121 FX2_FD12_1 )
+  (  122 FX2_FD13_1 )
+  (  123  ? )
+  (  124 FX2_FD15_1 )
+  (  125 GND_DIGITAL )
+  (  126  ? )
+  (  127  ? )
+  (  128  ? )
+ )
+ ( 44206463 $noname  U7 EP2C5-208 {Lib=EP2C5-208}
+  (    1 ASDO_1 )
+  (    2 nCSO_1 )
+  (    3 FX2_PC6_1 )
+  (    4 FX2_CTL3_1 )
+  (    5 FX2_CTL2/FLAGC_1 )
+  (    6 FX2_PA7/FLAGD/SLCS_1 )
+  (    7 +3.3VD )
+  (    8 FX2_PA6/PKTEND_1 )
+  (    9 GND_DIGITAL )
+  (   10 FX2_PA5/FIFOADR1_1 )
+  (   11 FX2_PA4/FIFOADR0_1 )
+  (   12 FX2_PA3_1 )
+  (   13 FX2_PA2/SLOE_1 )
+  (   14 FX2_PA1_1 )
+  (   15 FX2_PA0_1 )
+  (   16 FPGA_TDO_1 )
+  (   17 FPGA_TMS_1 )
+  (   18 FPGA_TCK_1 )
+  (   19 FPGA_TDI_1 )
+  (   20 DATA0_1 )
+  (   21 DCLK_1 )
+  (   22 nCE_1 )
+  (   23 FX2_CLK_1 )
+  (   24 FX2_IFCLK_1 )
+  (   25 GND_DIGITAL )
+  (   26 nCONFIG_1 )
+  (   27 FPGA_CLK2IN_1 )
+  (   28 FPGA_CLK3IN_1 )
+  (   29 +3.3VD )
+  (   30 RDY0/SLRD_1 )
+  (   31 RDY1/SLWR_1 )
+  (   32 FX2_RDY2_1 )
+  (   33 FX2_RDY3_1 )
+  (   34 FX2_RDY4_1 )
+  (   35 FX2_RDY5_1 )
+  (   36 FX2_PE0_1 )
+  (   37 FX2_PE1_1 )
+  (   38 GND_DIGITAL )
+  (   39 FX2_PE2_1 )
+  (   40 FX2_PE3_1 )
+  (   41 FX2_PE4_1 )
+  (   42 +3.3VD )
+  (   43 FX2_PE5/INT6_1 )
+  (   44 FX2_PE6_1 )
+  (   45 FX2_PE7_1 )
+  (   46 FX2_IFCLK_1 )
+  (   47 FPGA_CLKXOUT_1 )
+  (   48 FPGA_CLKYOUT_1 )
+  (   49 GND_DIGITAL )
+  (   50 GND_DIGITAL )
+  (   51 +1.2VD )
+  (   52 GND_DIGITAL )
+  (   53 +1.2VA )
+  (   54 GND_DIGITAL )
+  (   55 GND_DIGITAL )
+  (   56 FX2_FD0_1 )
+  (   57 FX2_FD1_1 )
+  (   58 FX2_FD2_1 )
+  (   59 FX2_FD3_1 )
+  (   60 FX2_FD4_1 )
+  (   61 FX2_FD5_1 )
+  (   62 +3.3VD )
+  (   63 FX2_FD6_1 )
+  (   64 FX2_FD7_1 )
+  (   65 GND_DIGITAL )
+  (   66 +1.2VD )
+  (   67 FX2_FD8_1 )
+  (   68 FX2_FD9_1 )
+  (   69 FX2_FD10_1 )
+  (   70 FX2_FD11_1 )
+  (   71 +3.3VD )
+  (   72 FX2_FD12_1 )
+  (   73 GND_DIGITAL )
+  (   75 FX2_FD13_1 )
+  (   76  ? )
+  (   77 FX2_FD15_1 )
+  (   78 GND_DIGITAL )
+  (   79 +1.2VD )
+  (   80 N-000058 )
+  (   81 N-000059 )
+  (   82 N-000060 )
+  (   83 +3.3VD )
+  (   84 N-000061 )
+  (   85 GND_DIGITAL )
+  (   86 N-000062 )
+  (   87 N-000063 )
+  (   88 N-000064 )
+  (   89 N-000065 )
+  (   90 N-000066 )
+  (   91 +3.3VD )
+  (   92 N-000067 )
+  (   93 GND_DIGITAL )
+  (   94 N-000068 )
+  (   95 N-000069 )
+  (   96 N-000070 )
+  (   97 N-000087 )
+  (   98 +3.3VD )
+  (   99 FX2_T2_1 )
+  (  100 GND_DIGITAL )
+  (  101 FX2_T1_1 )
+  (  102 FX2_T0_1 )
+  (  103 FX2_SCL_1 )
+  (  104 FX2_SDA_1 )
+  (  105 FX2_CTL5_1 )
+  (  106 FX2_CTL4_1 )
+  (  107 INIT_DONE_1 )
+  (  108  ? )
+  (  109 +3.3VD )
+  (  110 FX2_CTL1/FLAGB_1 )
+  (  111 GND_DIGITAL )
+  (  112 FX2_CTL0/FLAGA_1 )
+  (  113 X26DC_1 )
+  (  114 X25DC_1 )
+  (  115 X24DC_1 )
+  (  116 X23C7_1 )
+  (  117 X22C6_1 )
+  (  118 X21C5_1 )
+  (  119 X20C4_1 )
+  (  120 X19C3_1 )
+  (  121 nSTATUS_1 )
+  (  122 +3.3VD )
+  (  123 CONFIG_DONE_1 )
+  (  124 GND_DIGITAL )
+  (  125 MSEL1_1 )
+  (  126 MSEL0_1 )
+  (  127 X18C2_1 )
+  (  128 X17C1_1 )
+  (  129 FPGA_CLK7IN_1 )
+  (  130 FPGA_CLK6IN_1 )
+  (  131 FPGA_CLK5IN_1 )
+  (  132 FPGA_CLK4IN_1 )
+  (  133 X16C0_1 )
+  (  134 X15B7_1 )
+  (  135 X14B6_1 )
+  (  136 +3.3VD )
+  (  137 X13B5_1 )
+  (  138 X12B4_1 )
+  (  139 X11B3_1 )
+  (  140 GND_DIGITAL )
+  (  141 X10B2_1 )
+  (  142 X9B1_1 )
+  (  143 X8B0_1 )
+  (  144 X7A7_1 )
+  (  145 X6A6_1 )
+  (  146 X5A5_1 )
+  (  147 X4A4_1 )
+  (  148 +3.3VD )
+  (  149 X3A3_1 )
+  (  150 X2A2_1 )
+  (  151 X1A1_1 )
+  (  152 X0A0_1 )
+  (  153 GND_DIGITAL )
+  (  154 +3.3VD )
+  (  155 +1.2VD )
+  (  156 +3.3VD )
+  (  157 +1.2VA )
+  (  158 +3.3VD )
+  (  159 GND_DIGITAL )
+  (  160 Y0A0_1 )
+  (  161 Y1A1_1 )
+  (  162 Y2A2_1 )
+  (  163 Y3A3_1 )
+  (  164 Y4A4_1 )
+  (  165 Y5A5_1 )
+  (  166 +3.3VD )
+  (  167 GND_DIGITAL )
+  (  168 Y6A6_1 )
+  (  169 Y7A7_1 )
+  (  170 Y8B0_1 )
+  (  171 Y9B1_1 )
+  (  172 +3.3VD )
+  (  173 Y10B2_1 )
+  (  174 GND_DIGITAL )
+  (  175 Y11B3_1 )
+  (  176 Y12B4_1 )
+  (  177 GND_DIGITAL )
+  (  178 +1.2VD )
+  (  179 Y13B5_1 )
+  (  180 Y14B6_1 )
+  (  181 Y15B7_1 )
+  (  182 Y16C0_1 )
+  (  183 +3.3VD )
+  (  184 GND_DIGITAL )
+  (  185 Y17C1_1 )
+  (  186 GND_DIGITAL )
+  (  187 Y18C2_1 )
+  (  188 Y19C3_1 )
+  (  189 Y20C4_1 )
+  (  190 +1.2VD )
+  (  191 Y21C5_1 )
+  (  192 Y22C6_1 )
+  (  193 Y23C7_1 )
+  (  194 +3.3VD )
+  (  195 Y24DC_1 )
+  (  196 GND_DIGITAL )
+  (  197 Y25DC_1 )
+  (  198 Y26DC_1 )
+  (  199 FX2_INT4_1 )
+  (  200 FX2_INT5_1 )
+  (  201 FX2_PC7_1 )
+  (  202 +3.3VD )
+  (  203 N-000082 )
+  (  204 GND_DIGITAL )
+  (  205 N-000081 )
+  (  206 N-000080 )
+  (  207 N-000079 )
+  (  208 N-000078 )
+ )
+)
+*
+{ Pin List by Nets
+Net 2 "+1.2VD"
+ U9 2
+ C47 1
+ U7 190
+ U7 178
+ R18 1
+ U7 155
+ U7 51
+ C22 1
+ C23 1
+ C24 1
+ C25 1
+ C26 1
+ C27 1
+ #PWR5 1
+ #PWR6 1
+ #PWR7 1
+ #PWR8 1
+ #PWR9 1
+ U7 66
+ U7 79
+ #PWR10 1
+Net 3 "+3.3VA"
+ U2 10
+ #PWR14 1
+ R17 2
+ C48 1
+ U2 17
+ #PWR15 1
+ C32 1
+ C33 1
+ C34 1
+ C35 1
+ C36 1
+ #PWR16 1
+Net 4 "+3.3VD"
+ U7 83
+ U7 71
+ U7 62
+ XO1 8
+ C41 1
+ C40 1
+ C39 1
+ C38 1
+ JP3 1
+ C37 1
+ XO1 1
+ U7 91
+ XO2 1
+ JP2 1
+ XO2 8
+ #PWR29 1
+ U7 7
+ J1 4
+ J2 4
+ #PWR28 1
+ U7 29
+ U8 3
+ U8 8
+ U8 7
+ R7 1
+ R13 1
+ R6 1
+ R12 1
+ R11 1
+ U7 42
+ #PWR39 1
+ R10 1
+ R9 1
+ U7 156
+ U7 154
+ U7 136
+ U7 122
+ R2 1
+ R3 1
+ #PWR27 1
+ U7 109
+ U7 158
+ U7 166
+ U7 172
+ #PWR30 1
+ U7 183
+ C21 1
+ C20 1
+ C19 1
+ U7 194
+ C18 1
+ C17 1
+ C16 1
+ #PWR26 1
+ C15 1
+ C14 1
+ U7 98
+ C13 1
+ C12 1
+ U7 202
+ C11 1
+ C10 1
+ C9 1
+ C8 1
+ C7 1
+ C6 1
+ U2 64
+ C5 1
+ C4 1
+ C3 1
+ C2 1
+ U1 1
+ U2 107
+ U1 8
+ R17 1
+ #PWR25 1
+ R4 1
+ R1 1
+ #PWR24 1
+ R8 1
+ #PWR23 1
+ U2 68
+ #PWR22 1
+ U3 8
+ #PWR21 1
+ U2 81
+ C42 1
+ #PWR31 1
+ U9 3
+ U4 8
+ U2 100
+ R15 1
+ R16 1
+ U2 26
+ #PWR32 1
+ JP1 2
+ #PWR38 1
+ U6 5
+ U7 148
+ U6 8
+ U2 48
+ U6 1
+ R14 1
+ #PWR33 1
+ #PWR34 1
+ #PWR37 1
+ U5 5
+ #PWR35 1
+ U2 2
+ U5 8
+ U2 43
+ U5 1
+ #PWR36 1
+Net 5 "+1.2VA"
+ #PWR2 1
+ U7 53
+ #PWR4 1
+ #PWR1 1
+ C28 1
+ U7 157
+ C29 1
+ R18 2
+ C49 1
+ C31 1
+ C30 1
+ #PWR3 1
+Net 6 "INIT_DONE_1"
+ U7 107
+ D6 2
+Net 7 ""
+ R14 2
+ D6 1
+Net 8 "FX2_RDY5_1"
+ U2 9
+ U7 35
+ J10 4
+Net 9 "FX2_RDY4_1"
+ J10 3
+ U2 8
+ U7 34
+Net 10 "FX2_RDY3_1"
+ U7 33
+ U2 7
+ J10 2
+Net 11 "FX2_RDY2_1"
+ U7 32
+ J10 1
+ U2 6
+Net 12 "FX2_RXD1_1"
+ U2 53
+ J9 4
+Net 13 "FX2_TXD1_1"
+ U2 52
+ J9 3
+Net 14 "FX2_RXD0_1"
+ J9 2
+ U2 51
+Net 15 "FX2_TXD0_1"
+ U2 50
+ J9 1
+Net 16 "FPGA_CLK7IN_1"
+ J7 2
+ U7 129
+Net 17 "FPGA_CLK6IN_1"
+ U7 130
+ J7 1
+Net 18 "FPGA_CLKYOUT_1"
+ U7 48
+ U6 2
+ J8 4
+Net 19 "FPGA_CLK5IN_1"
+ XO2 5
+ U7 131
+ J8 3
+Net 20 "FPGA_CLKXOUT_1"
+ J8 2
+ U7 47
+ U5 2
+Net 21 "FPGA_CLK4IN_1"
+ XO1 5
+ J8 1
+ U7 132
+Net 22 ""
+ J6 2
+ U6 6
+Net 23 ""
+ J6 1
+ U6 7
+Net 25 ""
+ J5 2
+ U5 6
+Net 26 ""
+ U5 7
+ J5 1
+Net 28 "FX2_IFCLK_1"
+ U2 32
+ U7 46
+ U7 24
+Net 29 "FX2_PC6_1"
+ U2 78
+ U7 3
+Net 30 "nCE_1"
+ U7 22
+ R5 1
+ U2 77
+ J2 6
+Net 31 "+3.3VBUS"
+ JP1 1
+ #PWR17 1
+ J11 30
+ #PWR19 1
+ J11 94
+ #PWR18 1
+ J11 62
+ #PWR20 1
+Net 32 ""
+ JP1 3
+ C46 1
+ U10 2
+Net 33 ""
+ U4 6
+ J4 2
+Net 34 ""
+ U4 7
+ J4 1
+Net 35 "FPGA_CLK3IN_1"
+ U4 3
+ U7 28
+Net 36 ""
+ U3 6
+ J3 2
+Net 37 ""
+ J3 1
+ U3 7
+Net 38 "FPGA_CLK2IN_1"
+ U7 27
+ U3 3
+Net 39 ""
+ D3 1
+ R11 2
+Net 40 ""
+ D5 1
+ R13 2
+Net 41 ""
+ R12 2
+ D4 1
+Net 42 ""
+ R10 2
+ D2 1
+Net 43 ""
+ D1 1
+ R9 2
+Net 44 ""
+ U2 11
+ C44 1
+ X1 1
+Net 45 ""
+ C45 1
+ X1 2
+ U2 12
+Net 46 "GNDPWR"
+ U10 1
+ #PWR79 1
+ U9 1
+ C42 2
+ C47 2
+ C43 2
+ C46 2
+ #PWR78 1
+Net 47 "DCLK_1"
+ J2 1
+ U8 6
+ U2 74
+ U7 21
+Net 48 "DATA0_1"
+ U8 2
+ U2 72
+ J2 7
+ U7 20
+Net 49 "nCSO_1"
+ J2 8
+ U8 1
+ U7 2
+Net 50 "CONFIG_DONE_1"
+ J2 3
+ U2 75
+ R3 2
+ U7 123
+Net 51 "nCONFIG_1"
+ U2 73
+ R2 2
+ J2 5
+ U7 26
+Net 53 "ASDO_1"
+ U7 1
+ J2 9
+ U8 5
+Net 54 "nSTATUS_1"
+ U7 121
+ U2 76
+ R4 2
+Net 58 ""
+ U7 80
+ P1 19
+Net 59 ""
+ P1 18
+ U7 81
+Net 60 ""
+ U7 82
+ P1 17
+Net 61 ""
+ P1 16
+ U7 84
+Net 62 ""
+ P1 15
+ U7 86
+Net 63 ""
+ U7 87
+ P1 14
+Net 64 ""
+ P1 13
+ U7 88
+Net 65 ""
+ P1 12
+ U7 89
+Net 66 ""
+ P1 11
+ U7 90
+Net 67 ""
+ U7 92
+ P1 10
+Net 68 ""
+ P1 9
+ U7 94
+Net 69 ""
+ P1 8
+ U7 95
+Net 70 ""
+ U7 96
+ P1 7
+Net 71 "FX2_T2_1"
+ P1 5
+ U7 99
+ U2 31
+Net 72 "FX2_T1_1"
+ P1 4
+ U2 30
+ U7 101
+Net 73 "FX2_T0_1"
+ P1 3
+ U7 102
+ U2 29
+Net 74 "FX2_SCL_1"
+ U2 36
+ R15 2
+ U1 6
+ P1 2
+ U7 103
+Net 75 "FX2_SDA_1"
+ P1 1
+ U1 5
+ U2 37
+ R16 2
+ U7 104
+Net 76 "MSEL1_1"
+ U7 125
+ JP3 2
+Net 77 "MSEL0_1"
+ U7 126
+ JP2 2
+Net 78 ""
+ D5 2
+ P2 5
+ U7 208
+Net 79 ""
+ U7 207
+ P2 4
+ D4 2
+Net 80 ""
+ D3 2
+ P2 3
+ U7 206
+Net 81 ""
+ U7 205
+ D2 2
+ P2 2
+Net 82 ""
+ U7 203
+ D1 2
+ P2 1
+Net 83 "+5VBUS"
+ U10 3
+ #PWR41 1
+ #PWR42 1
+ #PWR43 1
+ #PWR40 1
+ J11 64
+ J11 32
+ J11 96
+ C43 1
+Net 84 "-5VBUS"
+ #PWR47 1
+ #PWR48 1
+ J11 60
+ #PWR49 1
+ J11 92
+ J11 28
+Net 85 "-12VBUS"
+ #PWR44 1
+ J11 26
+ #PWR45 1
+ J11 90
+ J11 58
+ #PWR46 1
+Net 86 "+12VBUS"
+ #PWR12 1
+ J11 33
+ J11 1
+ J11 65
+ #PWR13 1
+ #PWR11 1
+Net 87 ""
+ P1 6
+ U7 97
+Net 88 "FX2_PE7_1"
+ U7 45
+ U2 115
+Net 89 "FX2_PE6_1"
+ U7 44
+ U2 114
+Net 90 "FX2_PE5/INT6_1"
+ U7 43
+ U2 113
+Net 91 "FX2_PE4_1"
+ U7 41
+ U2 112
+Net 92 "FX2_PE3_1"
+ U7 40
+ U2 111
+Net 93 "FX2_PE2_1"
+ U2 110
+ U7 39
+Net 94 "FX2_PE1_1"
+ U2 109
+ U7 37
+Net 95 "FX2_PE0_1"
+ U7 36
+ U2 108
+Net 96 "RDY1/SLWR_1"
+ U2 5
+ U7 31
+Net 97 "RDY0/SLRD_1"
+ U7 30
+ U2 4
+Net 98 "FX2_PC7_1"
+ U2 79
+ U7 201
+Net 99 "FX2_INT5_1"
+ U7 200
+ U2 106
+Net 100 "FX2_INT4_1"
+ U2 28
+ U7 199
+Net 101 "FX2_CTL5_1"
+ U2 98
+ U7 105
+Net 102 "FX2_CTL4_1"
+ U7 106
+ U2 67
+Net 103 "FX2_CTL3_1"
+ U7 4
+ U2 66
+Net 104 "FX2_CTL1/FLAGB_1"
+ U7 110
+ U2 70
+Net 105 "FX2_CTL2/FLAGC_1"
+ U2 71
+ U7 5
+Net 106 "FX2_CTL0/FLAGA_1"
+ U2 69
+ U7 112
+Net 107 "X26DC_1"
+ J11 31
+ U7 113
+Net 108 "X25DC_1"
+ J11 29
+ U7 114
+Net 109 "X24DC_1"
+ J11 27
+ U7 115
+Net 110 "X23C7_1"
+ U7 116
+ J11 25
+Net 111 "FX2_PA0_1"
+ U2 82
+ U7 15
+Net 112 "FX2_PA1_1"
+ U7 14
+ U2 83
+Net 113 "FX2_PA2/SLOE_1"
+ U7 13
+ U2 84
+Net 114 "FX2_PA3_1"
+ U7 12
+ U2 85
+Net 115 "FX2_PA4/FIFOADR0_1"
+ U7 11
+ U2 89
+Net 116 "FX2_PA5/FIFOADR1_1"
+ U7 10
+ U2 90
+Net 117 "FX2_PA6/PKTEND_1"
+ U2 91
+ U7 8
+Net 118 "FX2_PA7/FLAGD/SLCS_1"
+ U7 6
+ U2 92
+Net 119 "FX2_FD15_1"
+ U7 77
+ U2 124
+Net 121 "FX2_FD13_1"
+ U2 122
+ U7 75
+Net 122 "FX2_FD12_1"
+ U2 121
+ U7 72
+Net 123 "FX2_FD11_1"
+ U7 70
+ U2 105
+Net 124 "FX2_FD10_1"
+ U2 104
+ U7 69
+Net 125 "FX2_FD9_1"
+ U7 68
+ U2 103
+Net 126 "FX2_FD8_1"
+ U7 67
+ U2 102
+Net 127 "FX2_FD7_1"
+ U7 64
+ U2 57
+Net 128 "FX2_FD6_1"
+ U2 56
+ U7 63
+Net 129 "FX2_FD5_1"
+ U2 55
+ U7 61
+Net 130 "FX2_FD4_1"
+ U2 54
+ U7 60
+Net 131 "FX2_FD3_1"
+ U7 59
+ U2 47
+Net 132 "FX2_FD2_1"
+ U2 46
+ U7 58
+Net 133 "FX2_FD1_1"
+ U2 45
+ U7 57
+Net 134 "FX2_FD0_1"
+ U7 56
+ U2 44
+Net 135 "Y21C5_1"
+ U7 191
+ J11 87
+Net 136 "Y22C6_1"
+ U7 192
+ J11 88
+Net 137 "Y23C7_1"
+ J11 89
+ U7 193
+Net 138 "Y24DC_1"
+ J11 91
+ U7 195
+Net 139 "Y25DC_1"
+ U7 197
+ J11 93
+Net 140 "Y26DC_1"
+ J11 95
+ U7 198
+Net 141 "Y20C4_1"
+ U7 189
+ J11 86
+Net 142 "Y19C3_1"
+ J11 85
+ U7 188
+Net 143 "Y18C2_1"
+ J11 84
+ U7 187
+Net 144 "Y17C1_1"
+ U7 185
+ J11 83
+Net 145 "Y16C0_1"
+ J11 82
+ U7 182
+Net 146 "Y14B6_1"
+ J11 80
+ U7 180
+Net 147 "Y13B5_1"
+ U7 179
+ J11 79
+Net 148 "Y12B4_1"
+ J11 78
+ U7 176
+Net 149 "Y11B3_1"
+ U7 175
+ J11 77
+Net 150 "Y10B2_1"
+ U7 173
+ J11 76
+Net 151 "Y9B1_1"
+ U7 171
+ J11 75
+Net 152 "Y8B0_1"
+ U7 170
+ J11 74
+Net 153 "Y7A7_1"
+ U7 169
+ J11 73
+Net 154 "Y6A6_1"
+ U7 168
+ J11 72
+Net 155 "Y5A5_1"
+ J11 71
+ U7 165
+Net 156 "Y4A4_1"
+ J11 70
+ U7 164
+Net 157 "Y3A3_1"
+ U7 163
+ J11 69
+Net 158 "Y2A2_1"
+ U7 162
+ J11 68
+Net 159 "Y1A1_1"
+ J11 67
+ U7 161
+Net 160 "Y0A0_1"
+ U7 160
+ J11 66
+Net 161 "X22C6_1"
+ J11 24
+ U7 117
+Net 162 "X21C5_1"
+ J11 23
+ U7 118
+Net 163 "X20C4_1"
+ U7 119
+ J11 22
+Net 164 "X19C3_1"
+ J11 21
+ U7 120
+Net 165 "X18C2_1"
+ U7 127
+ J11 20
+Net 166 "X17C1_1"
+ J11 19
+ U7 128
+Net 167 "X16C0_1"
+ J11 18
+ U7 133
+Net 168 "X15B7_1"
+ U7 134
+ J11 17
+Net 169 "X14B6_1"
+ U7 135
+ J11 16
+Net 170 "X13B5_1"
+ U7 137
+ J11 15
+Net 171 "X12B4_1"
+ J11 14
+ U7 138
+Net 172 "X11B3_1"
+ J11 13
+ U7 139
+Net 173 "X10B2_1"
+ U7 141
+ J11 12
+Net 174 "X9B1_1"
+ J11 11
+ U7 142
+Net 175 "X8B0_1"
+ J11 10
+ U7 143
+Net 176 "X7A7_1"
+ U7 144
+ J11 9
+Net 177 "X6A6_1"
+ U7 145
+ J11 8
+Net 178 "X5A5_1"
+ J11 7
+ U7 146
+Net 179 "X4A4_1"
+ J11 6
+ U7 147
+Net 180 "X3A3_1"
+ U7 149
+ J11 5
+Net 181 "X2A2_1"
+ U7 150
+ J11 4
+Net 182 "X1A1_1"
+ U7 151
+ J11 3
+Net 183 "X0A0_1"
+ U7 152
+ J11 2
+Net 184 "Y15B7_1"
+ J11 81
+ U7 181
+Net 185 "GND_DIGITAL"
+ U7 100
+ #PWR51 1
+ #PWR72 1
+ #PWR56 1
+ #PWR73 1
+ #PWR74 1
+ #PWR75 1
+ #PWR76 1
+ XO1 4
+ XO2 4
+ #PWR57 1
+ #PWR77 1
+ #PWR52 1
+ #PWR50 1
+ #PWR70 1
+ #PWR69 1
+ U7 93
+ C48 2
+ U1 4
+ U1 3
+ U1 2
+ #PWR68 1
+ #PWR67 1
+ USBC1 4
+ U7 85
+ #PWR55 1
+ U7 78
+ #PWR53 1
+ C49 2
+ #PWR54 1
+ JP2 3
+ JP3 3
+ #PWR58 1
+ P1 20
+ U7 73
+ J1 2
+ U7 65
+ C40 2
+ C39 2
+ U7 55
+ U7 54
+ C45 2
+ C38 2
+ C44 2
+ J1 10
+ J2 2
+ C37 2
+ C36 2
+ C35 2
+ C34 2
+ C33 2
+ C32 2
+ U7 9
+ C1 2
+ U2 125
+ J2 10
+ U8 4
+ U7 25
+ U2 116
+ #PWR59 1
+ U2 65
+ U3 1
+ U3 2
+ U3 4
+ U3 5
+ U2 80
+ #PWR60 1
+ U4 1
+ U4 2
+ U4 4
+ U4 5
+ U2 93
+ C31 2
+ C30 2
+ C29 2
+ U7 38
+ C28 2
+ C27 2
+ C26 2
+ U2 33
+ U2 27
+ #PWR61 1
+ C25 2
+ C24 2
+ C23 2
+ C22 2
+ U2 20
+ R5 2
+ U7 49
+ U7 50
+ #PWR66 1
+ U2 13
+ #PWR62 1
+ U2 3
+ #PWR63 1
+ U7 52
+ U7 153
+ U5 4
+ #PWR64 1
+ U6 4
+ U2 49
+ #PWR65 1
+ C2 2
+ C3 2
+ C4 2
+ C5 2
+ U2 58
+ C6 2
+ C7 2
+ C8 2
+ C9 2
+ C10 2
+ U7 204
+ C11 2
+ C12 2
+ C13 2
+ C14 2
+ C15 2
+ C16 2
+ C17 2
+ U7 196
+ C18 2
+ C19 2
+ C20 2
+ C21 2
+ U7 186
+ U7 184
+ C41 2
+ U7 177
+ J11 34
+ U7 174
+ J11 35
+ J11 36
+ J11 37
+ J11 38
+ J11 39
+ U7 167
+ J11 40
+ J11 41
+ J11 42
+ J11 43
+ J11 44
+ J11 45
+ U7 159
+ U7 111
+ J11 46
+ J11 47
+ J11 48
+ U7 124
+ J11 49
+ J11 50
+ J11 51
+ J11 52
+ J11 53
+ J11 54
+ J11 55
+ J11 56
+ U7 140
+ J11 57
+ J11 59
+ J11 61
+ J11 63
+ #PWR71 1
+Net 186 "FX2_CLK_1"
+ U7 23
+ U2 1
+Net 187 "FPGA_TDI_1"
+ R8 2
+ J1 9
+ U7 19
+Net 188 "FPGA_TCK_1"
+ J1 1
+ R6 2
+ U7 18
+Net 189 "FPGA_TMS_1"
+ R7 2
+ U7 17
+ J1 5
+Net 190 "FPGA_TDO_1"
+ U7 16
+ J1 3
+Net 192 ""
+ USBC1 2
+ U2 19
+Net 194 ""
+ U2 18
+ USBC1 3
+Net 231 "/RESET_1"
+ U2 99
+ R1 2
+ C1 1
+}
+#End
