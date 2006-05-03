@@ -19,7 +19,7 @@
 
 // PowerSDR interface routines 
 // extern KD5TFDVK6APHAUDIO_API int StartAudio(int block_size); 
-extern KD5TFDVK6APHAUDIO_API int StartAudio(int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata));
+extern KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata));
 extern KD5TFDVK6APHAUDIO_API void StopAudio(void); 
 extern KD5TFDVK6APHAUDIO_API int GetDotDashBits(void); 
 extern KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
@@ -87,6 +87,8 @@ extern HLA_COUNTER CallbackHLA;
 #endif 
 extern int DotDashBits; 
 extern int XmitBit; 
+extern int SampleRate; 
+extern unsigned char SampleRateIn2Bits; // value of sample rate to send to fpga 
 
 #ifdef GLOBAL_DECL
 #undef extern

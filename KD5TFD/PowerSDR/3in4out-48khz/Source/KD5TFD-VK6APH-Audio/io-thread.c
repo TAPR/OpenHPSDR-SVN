@@ -421,7 +421,7 @@ void IOThreadMainLoop(void) {
 			++buf_num; 
 
 #ifdef SAVE_READS_TO_BUFFER 
-				memcpy(ReadSaveBuf[SaveReadsIdx], write_buf, INBUF_SIZE); 
+				memcpy(ReadSaveBuf[SaveReadsIdx], read_buf, INBUF_SIZE); 
 				++SaveReadsIdx; 
 				if ( SaveReadsIdx >= NUM_READ_BUFS_TO_SAVE ) { 
 					SaveReadsIdx = 0; 
@@ -701,7 +701,13 @@ void IOThreadMainLoop(void) {
 
 						case OUT_STATE_CONTROL1: 
 							out_state = OUT_STATE_CONTROL2;
-							write_buf[writebufpos] = ControlBytes[1]; 
+							if ( (ControlBytes[0] & 0xfe) == 0 ) { 
+								// send sample rate in C1 low 2 bits 
+								write_buf[writebufpos] = ((ControlBytes[1] & 0xfd) | (SampleRateIn2Bits & 3));
+							} 
+							else { 
+								write_buf[writebufpos] = ControlBytes[1]; 
+							}
 							break; 
 
 						case OUT_STATE_CONTROL2: 

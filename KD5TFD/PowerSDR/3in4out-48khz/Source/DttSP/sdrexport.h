@@ -339,7 +339,7 @@ extern struct _top
     {
       struct
       {
-	ringb_float_t *l, *r;
+        ringb_float_t *l, *r;
       } i, o;
     } ring;
 
@@ -347,7 +347,7 @@ extern struct _top
     {
       struct
       {
-	ringb_float_t *l, *r;
+        ringb_float_t *l, *r;
       } i, o;
     } auxr;
 
@@ -360,10 +360,19 @@ extern struct _top
       int cb;
       struct
       {
-	int i, o;
+        int i, o;
       } rb;
       int xr;
     } blow;
+
+    struct
+    {
+      int rx_count; /* -1, 0, or 1 -1, left leads by 1 sample, 0 same, +1 right leads by 1 sample */
+      int tx_count;
+      float rx_save;
+      float tx_save;
+    } sample_offset;
+
   } jack;
 
   // update io
