@@ -116,6 +116,7 @@
                     VersionMinor = "8"
                     Lcid = "0"
                     WrapperTool = "tlbimp"
+                    Private = "True"
                 />
                 <Reference
                     Name = "adodb1"

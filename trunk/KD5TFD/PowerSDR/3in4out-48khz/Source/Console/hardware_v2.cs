@@ -1109,7 +1109,7 @@ namespace PowerSDR
 			if(usb_present)
 				return (byte)USB.Sdr1kGetStatusPort();
 			else
-				return Parallel.inport((ushort)(lpt_addr+1));
+				return /* 0; kd5tfd hack */   Parallel.inport((ushort)(lpt_addr+1)); 
 		}
 
 		public void Impulse()

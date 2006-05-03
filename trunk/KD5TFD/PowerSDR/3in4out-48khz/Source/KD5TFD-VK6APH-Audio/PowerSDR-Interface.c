@@ -14,7 +14,7 @@
 //
 // this is the 4 in 4 out (actually 3 in 4 out) version of start audio 
 // 
-KD5TFDVK6APHAUDIO_API int StartAudio(int samples_per_block, 
+KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block, 
 									 int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata))
 { 
 	int rc; 
@@ -22,6 +22,21 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int samples_per_block,
 	int *in_sample_bufp = NULL; 
 	float *bufp = NULL; 
 
+	SampleRate = sample_rate; 
+	switch ( SampleRate ) { 
+		case 48000: 
+			SampleRateIn2Bits = 0; 
+			break; 
+		case 96000: 
+			SampleRateIn2Bits = 1; 
+			break; 
+		case 192000: 
+			SampleRateIn2Bits = 2; 
+			break; 
+		default: 
+			SampleRateIn2Bits = 3; 
+			break;
+	} 
 	BlockSize = samples_per_block; 
 	Callback = callbackp;
 
