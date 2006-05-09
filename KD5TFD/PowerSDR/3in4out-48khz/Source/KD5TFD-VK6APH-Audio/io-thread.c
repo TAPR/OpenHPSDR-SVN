@@ -389,7 +389,7 @@ void IOThreadMainLoop(void) {
 	int sample_is_left; 
 	int buf_num = 0; 
 	int RxOverrun = 0; 
-#if 0
+#if 1
 	int dbggate = 0; 
 #endif 
 
@@ -703,11 +703,17 @@ void IOThreadMainLoop(void) {
 							out_state = OUT_STATE_CONTROL2;
 							if ( (ControlBytes[0] & 0xfe) == 0 ) { 
 								// send sample rate in C1 low 2 bits 
-								write_buf[writebufpos] = ((ControlBytes[1] & 0xfd) | (SampleRateIn2Bits & 3));
+								write_buf[writebufpos] = ((ControlBytes[1] & 0xfc) | (SampleRateIn2Bits & 3));
 							} 
 							else { 
 								write_buf[writebufpos] = ControlBytes[1]; 
 							}
+							++dbggate; 
+							if ( dbggate == 1000 ) { 
+								dbggate = 0; 
+								printf("c1: 0x%x\n", write_buf[writebufpos]);  fflush(stdout); 
+							} 
+							
 							break; 
 
 						case OUT_STATE_CONTROL2: 
