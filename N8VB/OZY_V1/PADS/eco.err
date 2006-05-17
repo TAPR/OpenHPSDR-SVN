@@ -1,11 +1,9 @@
 ** ECO In Report **
 
-Tue May 16 14:53:19 2006
+Wed May 17 14:00:24 2006
 
 Input  File : C:\PADS Projects\eco2pcb.eco
-Current Job : OZY_REVXA3_05162006.pcb
+Current Job : OZY_REVXA4_05172006.pcb
 
 
-* Warning: deleting single-pin signal FPGA_NCEO
-* Warning: deleting single-pin signal FX2_INT5
-* Warning: deleting single-pin signal FX2_T1
+No errors found
