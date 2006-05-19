@@ -270,7 +270,7 @@
                 />
                 <File
                     RelPath = "memory.cs"
-                    SubType = "Form"
+                    SubType = "Component"
                     BuildAction = "Compile"
                 />
                 <File

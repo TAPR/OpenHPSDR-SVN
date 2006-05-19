@@ -5721,6 +5721,7 @@ namespace PowerSDR
 			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WheelTune_MouseDown);
 			this.Closing += new System.ComponentModel.CancelEventHandler(this.Console_Closing);
 			this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Console_KeyPress);
+			this.Load += new System.EventHandler(this.Console_Load);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Console_KeyUp);
 			this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Console_MouseWheel);
 			this.grpVFOA.ResumeLayout(false);
@@ -18661,6 +18662,11 @@ namespace PowerSDR
 		private bool saved_spur_reduction = true;
 		private double saved_min_freq;
 		private double saved_max_freq;
+
+		private void Console_Load(object sender, System.EventArgs e)
+		{
+		
+		}
 
 		public bool DDSLock
 

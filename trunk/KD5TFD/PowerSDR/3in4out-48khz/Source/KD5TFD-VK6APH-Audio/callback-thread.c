@@ -214,6 +214,8 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	int i; 
 	float *callback_in[4]; 
 	float *callback_out[4]; 
+	int out_sample_incr;  
+	int outidx; 
 	
 
 #ifdef PERF_DEBUG 
@@ -307,9 +309,44 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	} 
 #endif 
 
-	// ok now take the output buffer, int it and interleave it and put it on the fifo to the IO thread 
+#define LIMIT_SAMPLE(x)  (x) = (float)(( (x) > 1.0 ? 1.0 : ( (x) < -1.0 ? -1.0 : (x) ) ))
+
+	// ok now take the output buffer 
+	// convert to 48khz sampleing by skipping samples as needed 
+	// limt it to +/- 1.0, conver to ints 
+	// interleave it and put it on the fifo to the IO thread 
 	// 
-	for ( i = 0; i < BlockSize; i++ ) { 
+	switch ( SampleRate ) {
+		case 48000: 
+			out_sample_incr = 1; 
+			// out_sample_count = BlockSize; 
+			break; 
+
+		case 96000: 
+			out_sample_incr = 2; 
+			// out_sample_count = BlockSize/2; 
+			break; 
+
+		case 192000: 
+			out_sample_incr = 4; 
+			// out_sample_count = BlockSize/4; 
+			break;
+
+		default:
+			fprintf(stderr, "Mayday Mayday - bad sample rate in callback-thread.c"); 
+	} 
+
+	for ( i = 0, outidx = 0 ; i < BlockSize; i += out_sample_incr, outidx++ ) { 
+#if 1
+		LIMIT_SAMPLE(CallbackOutRbufp[i]);
+		LIMIT_SAMPLE(CallbackOutRbufp[i]); 
+		LIMIT_SAMPLE(CallbackOutLbufp[i]);
+		LIMIT_SAMPLE(CallbackOutLbufp[i]); 
+		LIMIT_SAMPLE(CallbackMonOutLbufp[i]);
+		LIMIT_SAMPLE(CallbackMonOutLbufp[i]);
+		LIMIT_SAMPLE(CallbackMonOutRbufp[i]); 
+		LIMIT_SAMPLE(CallbackMonOutRbufp[i]);  
+#else 
 		// limit data to +/- 1.0 
 		if ( CallbackOutRbufp[i] > 1.0 ) { 
 			CallbackOutRbufp[i] = 1.0; 
@@ -335,15 +372,16 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 		else if ( CallbackMonOutRbufp[i] < -1.0 ) { 
 			CallbackMonOutRbufp[i] = -1.0; 
 		}
-		CBSampleOutBufp[4*i] = (short)(CallbackOutLbufp[i] * 32767.0); 
-		CBSampleOutBufp[(4*i)+1] = (short)(CallbackOutRbufp[i] * 32767.0); 
+#endif 
+		CBSampleOutBufp[4*outidx] = (short)(CallbackOutLbufp[i] * 32767.0); 
+		CBSampleOutBufp[(4*outidx)+1] = (short)(CallbackOutRbufp[i] * 32767.0); 
 #if 1 
-		CBSampleOutBufp[(4*i)+2] = (short)(CallbackMonOutLbufp[i] * 32767.0); 
-		CBSampleOutBufp[(4*i)+3] = (short)(CallbackMonOutRbufp[i] * 32767.0); 
+		CBSampleOutBufp[(4*outidx)+2] = (short)(CallbackMonOutLbufp[i] * 32767.0); 
+		CBSampleOutBufp[(4*outidx)+3] = (short)(CallbackMonOutRbufp[i] * 32767.0); 
 #else
 		// put same sigs on LR and IQ for diagnostic purposes 
-		CBSampleOutBufp[(4*i)+2] =  CBSampleOutBufp[4*i];
-		CBSampleOutBufp[(4*i)+3] =  CBSampleOutBufp[(4*i)+1];
+		CBSampleOutBufp[(4*outidx)+2] =  CBSampleOutBufp[4*outidx];
+		CBSampleOutBufp[(4*outidx)+3] =  CBSampleOutBufp[(4*outidx)+1];
 #endif 
 	}
 #ifdef PERF_DEBUG 
@@ -354,7 +392,7 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 #endif 
 
 	// ok buf is built - put it in the outbound fifo 
-	rc = putFIFO(OutSampleFIFOp, CBSampleOutBufp, 4 * sizeof(short) * BlockSize ); 
+	rc = putFIFO(OutSampleFIFOp, CBSampleOutBufp, 4 * sizeof(short) * (BlockSize/out_sample_incr) ); 
 	// printf("cb: putFifo rc=%d\n", rc); fflush(stdout); 
 
 	if ( rc != 0 ) { 

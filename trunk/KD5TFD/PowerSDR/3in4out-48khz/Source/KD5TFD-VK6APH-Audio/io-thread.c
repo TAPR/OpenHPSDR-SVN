@@ -274,18 +274,26 @@ void swapBytesShort(short *sp, int count) {
 unsigned char *getNewOutBufFromFIFO() { 
 	int outbuflen; 
 	unsigned char *outbufp; 
+	int out_buf_len_needed; 
 	
 	outbufp = (char *)getFIFO(OutSampleFIFOp, &outbuflen, 0); // don't wait 
 	if ( outbufp == NULL ) { 
 		return NULL; 
 	} 
 	/* else */ 
-	if ( outbuflen != BlockSize * 4 * sizeof(short) ) { 
+	out_buf_len_needed = BlockSize * 4 * sizeof(short); 
+	if  ( SampleRate == 96000 ) { 
+		out_buf_len_needed /= 2; 
+	} 
+	else { 
+		out_buf_len_needed /= 4; 
+	}
+	if ( outbuflen != out_buf_len_needed  ) { 
 		printf("Warning: IOThread short block from getFIFO on output, frame dropped\n"); 
 		freeFIFOdata(outbufp); 
 		return NULL; 
 	} 
-	swapBytesShort((short *)outbufp, 4*BlockSize); 	
+	swapBytesShort((short *)outbufp, outbuflen/sizeof(short)); 	
 	return outbufp; 
 }
 
@@ -301,8 +309,9 @@ typedef struct zperf_record {
 		__int64 dwt; 
 		__int64 ticks; 
 		int cb; 
+		int sync_lost; 
 		unsigned char RxOverrun; 
-		unsigned char frame_sending; 		
+		unsigned char frame_sending; 			
 } PERF_RECORD; 
 
 #define PERF_DATA_COUNT (50000)
@@ -389,12 +398,20 @@ void IOThreadMainLoop(void) {
 	int sample_is_left; 
 	int buf_num = 0; 
 	int RxOverrun = 0; 
-#if 1
+#if 0
 	int dbggate = 0; 
 #endif 
 
 	sample_bufp_size = 4*sizeof(int)*BlockSize; 	
+
+	// how big is outbuf ... account for us being fixed at 48 khz on output side 
 	outbuflen = 4 * sizeof(short) * BlockSize; 
+	if ( SampleRate == 96000 ) { 
+		outbuflen /= 2; 
+	} 
+	else if ( SampleRate == 192000 ) { 
+		outbuflen /= 4; 
+	} 
 	
 	// printf("iot: main loop starting\n"); fflush(stdout); 
 	// main loop - read a buffer, processe it and then write a buffer if we have one to write 
@@ -708,12 +725,13 @@ void IOThreadMainLoop(void) {
 							else { 
 								write_buf[writebufpos] = ControlBytes[1]; 
 							}
+#if 0 
 							++dbggate; 
 							if ( dbggate == 1000 ) { 
 								dbggate = 0; 
 								printf("c1: 0x%x\n", write_buf[writebufpos]);  fflush(stdout); 
 							} 
-							
+#endif 							
 							break; 
 
 						case OUT_STATE_CONTROL2: 
@@ -821,6 +839,8 @@ void IOThreadMainLoop(void) {
 			if ( writebufpos >= OUTBUF_SIZE ) {  // write the buffer if we've filled it. 
 				wrote_frame = 1; 
 				numwritten = XyloBulkWrite(XyloH, 2, write_buf, OUTBUF_SIZE); 
+				// numwritten = OUTBUF_SIZE; 
+
 #ifdef SAVE_WRITES_TO_BUFFER 
 				memcpy(WriteSaveBuf[SaveWritesIdx], write_buf, OUTBUF_SIZE); 
 				++SaveWritesIdx; 
@@ -873,6 +893,7 @@ void IOThreadMainLoop(void) {
 			pdp->cb = complete_blocks; 
 			pdp->RxOverrun = RxOverrun; 
 			pdp->frame_sending = out_frame_idx; 
+			pdp->sync_lost = lost_sync_count; 
 		} 
 
 
@@ -1037,8 +1058,8 @@ void *IOThreadMain(void *argp) {
 				for ( i = 0; i < PerfDataIdx; i++ ) { 
 					pdp = &(PerfData[i]); 				
 					now_nanos = perfTicksToNanos(pdp->ticks); 
-					fprintf(f,"i: %d fa: %d fp: %d fs: %d or: %d w: %d okw: %d rt: %I64d wt: %I64d drt: %I64d dwt: %I64d cb: %d t: %I64d dt: %I64d\n",  i, 
-					pdp->RxFifoAvail, pdp->RxFramePlaying, pdp->frame_sending, pdp->RxOverrun, pdp->wrote_frame, pdp->ok_to_write, perfTicksToNanos(pdp->rt), perfTicksToNanos(pdp->wt), 
+					fprintf(f,"i: %d fa: %d fp: %d fs: %d sl: %d or: %d w: %d okw: %d rt: %I64u wt: %I64d drt: %I64u dwt: %I64u cb: %d t: %I64u dt: %I64u\n",  i, 
+					pdp->RxFifoAvail, pdp->RxFramePlaying, pdp->frame_sending, pdp->sync_lost, pdp->RxOverrun, pdp->wrote_frame, pdp->ok_to_write, perfTicksToNanos(pdp->rt), perfTicksToNanos(pdp->wt), 
 					perfTicksToNanos(pdp->drt), perfTicksToNanos(pdp->dwt), pdp->cb, now_nanos, now_nanos-last_nanos ); 
 					last_nanos = now_nanos; 
 				} 
