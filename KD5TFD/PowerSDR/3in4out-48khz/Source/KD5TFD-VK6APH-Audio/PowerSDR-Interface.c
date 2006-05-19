@@ -299,7 +299,7 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int samples_per_block, int (__stdcall *call
 			myrc = 7; 
 			break; 
 		} 
-
+		// and a fifo for the outbound stuff 
 		OutSampleFIFOp = createFIFO(); 
 		if ( OutSampleFIFOp == NULL ) { 
 			myrc = 8; 
