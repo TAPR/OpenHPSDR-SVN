@@ -285,11 +285,11 @@ unsigned char *getNewOutBufFromFIFO() {
 	if  ( SampleRate == 96000 ) { 
 		out_buf_len_needed /= 2; 
 	} 
-	else { 
+	else if ( SampleRate == 192000 )  { 
 		out_buf_len_needed /= 4; 
 	}
 	if ( outbuflen != out_buf_len_needed  ) { 
-		printf("Warning: IOThread short block from getFIFO on output, frame dropped\n"); 
+		printf("Warning: IOThread short block from getFIFO on output, frame dropped obl=%d obln=%d\n", outbuflen, out_buf_len_needed); 
 		freeFIFOdata(outbufp); 
 		return NULL; 
 	} 
@@ -917,7 +917,7 @@ void IOThreadMainLoop(void) {
 int IOThreadStop() { 
 	int rc; 
 	void *junk; 
-
+	
 	if ( io_keep_running == 0 ) {  // not running 
 		return 1; 
 	} 

@@ -310,26 +310,22 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 #endif 
 
 #define LIMIT_SAMPLE(x)  (x) = (float)(( (x) > 1.0 ? 1.0 : ( (x) < -1.0 ? -1.0 : (x) ) ))
-
 	// ok now take the output buffer 
-	// convert to 48khz sampleing by skipping samples as needed 
-	// limt it to +/- 1.0, conver to ints 
+	// convert to 48khz sampling by skipping samples as needed 
+	// limt it to +/- 1.0, convert to ints 
 	// interleave it and put it on the fifo to the IO thread 
 	// 
 	switch ( SampleRate ) {
 		case 48000: 
-			out_sample_incr = 1; 
-			// out_sample_count = BlockSize; 
+			out_sample_incr = 1;	
 			break; 
 
 		case 96000: 
 			out_sample_incr = 2; 
-			// out_sample_count = BlockSize/2; 
 			break; 
 
 		case 192000: 
-			out_sample_incr = 4; 
-			// out_sample_count = BlockSize/4; 
+			out_sample_incr = 4; 	
 			break;
 
 		default:
