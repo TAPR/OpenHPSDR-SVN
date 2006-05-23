@@ -4,6 +4,15 @@
 // this header includes declarations for private functions -- that is stuff that should not be called from outside 
 // the dll 
 
+// incldue dttsp stuff 
+#include <common.h> 
+
+
+#pragma message("Using explict externs for resamplers")
+extern DttSP_EXP void *NewResamplerF (int samplerate_in, int samplerate_out);
+extern DttSP_EXP void DoResamplerF (float *input, float *output, int numsamps, int *outsamps, /*ResStF*/ void *ptr);
+extern DttSP_EXP void DelPolyPhaseFIRF (/*ResSt*/ void * resst);
+
 #ifndef KD5TFDVK6APHAUDIO_PRIVATE_INCLUDED 
 #define KD5TFDVK6APHAUDIO_PRIVATE_INCLUDED 
 #include "KD5TFD-VK6APH-Audio.h"
@@ -15,6 +24,8 @@
 // includes for pthread things 
 #include <pthread.h> 
 #include <semaphore.h> 
+
+
 
 
 // PowerSDR interface routines 
@@ -77,6 +88,7 @@ extern float *CallbackOutLbufp; // left buffer for samples headed to the audio d
 extern float *CallbackOutRbufp; // right buffer for samples header to the audio device  (iq) 
 extern float *CallbackMonOutLbufp;  // left for monitor out 
 extern float *CallbackMonOutRbufp;  // right for monitor out 
+extern float *MicResampleBufp; // buffer for mic resampling -- holds pre resample data 
 // buffer for the IO Thread 
 extern int *IOSampleInBufp;  // samples in iothread coming from audio device 
 extern short *CBSampleOutBufp; // sample in iothread headed for the audio device 
@@ -89,6 +101,7 @@ extern int DotDashBits;
 extern int XmitBit; 
 extern int SampleRate; 
 extern unsigned char SampleRateIn2Bits; // value of sample rate to send to fpga 
+extern void *MicResamplerP; // Mic resampler filter 
 
 #ifdef GLOBAL_DECL
 #undef extern

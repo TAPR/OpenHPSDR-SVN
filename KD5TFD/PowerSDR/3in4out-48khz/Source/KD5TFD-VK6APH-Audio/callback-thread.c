@@ -9,6 +9,9 @@
 #define PERF_DEBUG 1 
 #include "private.h" 
 
+
+
+
 // #define TEST_TONE (1) 
 #ifdef TEST_TONE 
 int TestToneIdx = 0; 
@@ -253,9 +256,39 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	for ( i = 0; i < BlockSize; i++ ) { 
 		CallbackInLbufp[i] = ((float)(bufp[3*i]))/(float)8388607.0;  // (2**23) - 1			
 		CallbackInRbufp[i] =  ((float)(bufp[(3*i)+1]))/(float)8388607.0; 
+
+		// wjt -- todo!! -- this should be in the resampler loop below -- we're converting more samples to 
+		// floats than we need to for 96000 and 192000 sample rates -- should downsample first, convert to float 
+		// and then resample 
 		CallbackMicLbufp[i] = ((float)(bufp[(3*i)+2]))/(float)32767.0;  // (2**15) - 1  (mic samples are 16 bits) 
-		CallbackMicRbufp[i] = CallbackMicLbufp[i];   // copy left to right so it does not matter which PowerSDR is actually looking at 
-	} 	
+		
+	} 
+
+	if ( MicResamplerP != NULL && MicResampleBufp != NULL ) {  // we need to resample mic data 
+		int out_sample_count; 
+		int sample_incr; 
+		int j; 
+		int outidx; 
+		switch ( SampleRate ) { 
+			case 96000: 
+				sample_incr = 2; 
+				break; 
+			case 192000:
+				sample_incr = 4; 
+				break; 
+			default: 
+				fprintf(stderr, "Warning: callback_thread.c: unsupported sampled rate: %d\n", SampleRate); 
+				break; 
+		} 
+		// copy every sample_incr sample over to sample rate input buf and resample 
+		for ( j = 0, outidx = 0; j < BlockSize; j += sample_incr, outidx++ ) { 
+			MicResampleBufp[outidx] = CallbackMicLbufp[j]; 
+		} 
+		DoResamplerF(MicResampleBufp, CallbackMicLbufp, BlockSize/sample_incr, &out_sample_count, MicResamplerP); 		
+	} 
+
+	memcpy(CallbackMicRbufp, CallbackMicLbufp, sizeof(float) * BlockSize); // copy left to right so it does not matter which PowerSDR is actually looking at 
+	
 #ifdef PERF_DEBUG 
 	stop_t = getPerfTicks(); 
 	delta_t = stop_t - start_t; 

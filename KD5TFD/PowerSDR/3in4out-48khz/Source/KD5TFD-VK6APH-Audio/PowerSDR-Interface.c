@@ -26,12 +26,21 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 	switch ( SampleRate ) { 
 		case 48000: 
 			SampleRateIn2Bits = 0; 
+			MicResamplerP = NULL; 
 			break; 
 		case 96000: 
-			SampleRateIn2Bits = 1; 
+			SampleRateIn2Bits = 1;
+			MicResamplerP = NewResamplerF(48000, 96000); 
+			if ( MicResamplerP == NULL ) { 
+				fprintf(stderr, "Warning NewResamplerF failed in PowerSDR-Interface.c\n"); 
+			} 
 			break; 
 		case 192000: 
 			SampleRateIn2Bits = 2; 
+			MicResamplerP = NewResamplerF(48000, 192000); 
+			if ( MicResamplerP == NULL ) { 
+				fprintf(stderr, "Warning NewResamplerF failed in PowerSDR-Interface.c\n"); 
+			} 
 			break; 
 		default: 
 			SampleRateIn2Bits = 3; 
@@ -39,6 +48,8 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 	} 
 	BlockSize = samples_per_block; 
 	Callback = callbackp;
+
+
 
 	printf("sa: samples_per_block: %d\n", samples_per_block); fflush(stdout); 
 
@@ -72,14 +83,22 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 			break; 
 		} 
 		IOSampleInBufp = in_sample_bufp; 
-		printf("IOSample buffer at: 0x%08x, len=%d\n", (unsigned long)in_sample_bufp, 4*BlockSize*sizeof(int)); 
+		// printf("IOSample buffer at: 0x%08x, len=%d\n", (unsigned long)in_sample_bufp, 4*BlockSize*sizeof(int)); 
 
 		CBSampleOutBufp = (short *)malloc(sizeof(short) * BlockSize * 4); 
 		if ( CBSampleOutBufp == NULL ) { 
 			myrc = 10; 
 			break; 
 		} 
-		printf("CBSampleOut buffer at: 0x%08x, len=%d\n", (unsigned long)CBSampleOutBufp, 4*BlockSize*sizeof(short));  fflush(stdout); 
+		// printf("CBSampleOut buffer at: 0x%08x, len=%d\n", (unsigned long)CBSampleOutBufp, 4*BlockSize*sizeof(short));  fflush(stdout); 
+
+		if ( MicResamplerP != NULL ) {  // we're going to resample mic data - need a buffer for it 
+			MicResampleBufp = (float *)malloc(samples_per_block * sizeof(float)); 
+			if ( MicResampleBufp == NULL ) { 
+				myrc = 13; 
+				break; 
+			} 
+		} 
 		
 		// go open the xylo usb device 
 		XyloH = XyloOpen(); 
@@ -201,6 +220,10 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
 		XyloH = NULL; 
 	} 
 	printf("xylo closed\n");   fflush(stdout); 
+	if ( MicResamplerP != NULL ) { 
+		DelPolyPhaseFIRF(MicResamplerP); 
+		MicResamplerP = NULL; 
+	} 
 	DotDashBits = 0; 
 	return;
 }
