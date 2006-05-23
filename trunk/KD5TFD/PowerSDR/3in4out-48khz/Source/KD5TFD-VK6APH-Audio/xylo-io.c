@@ -5,7 +5,7 @@
 // Sample code for Xylo's USB-2  interface
 // (c) fpga4fun.com KNJN LLC - 2005
 
-#include <windows.h>
+// #include <windows.h>
 #include <assert.h>
 #include <stdio.h>
 #include "private.h"
