@@ -39,7 +39,7 @@ void *createFIFO(void) {
 	fifop = (FIFO *)malloc(sizeof(FIFO)); 
 	if ( fifop == NULL ) return NULL; 
 
-	printf("fifo created @ 0x%08x len=%d\n", (unsigned long)fifop, sizeof(FIFO)); fflush(stdout); 
+	// printf("fifo created @ 0x%08x len=%d\n", (unsigned long)fifop, sizeof(FIFO)); fflush(stdout); 
 
 	sem_init(&(fifop->wait_sem),0,0); 
 	pthread_mutex_init(&(fifop->mutex), NULL); 

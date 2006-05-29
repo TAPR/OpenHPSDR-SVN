@@ -1036,6 +1036,14 @@ namespace PowerSDR
 			}
 		}
 
+		private bool ignore_ptt = false; 
+
+		public void ignorePTT(bool v) 
+		{ 
+			ignore_ptt = v; 
+			return;
+		}
+
 		public void StandBy()
 		{
 			UpdateHardware = false;
@@ -1108,8 +1116,17 @@ namespace PowerSDR
 		{
 			if(usb_present)
 				return (byte)USB.Sdr1kGetStatusPort();
-			else
-				return  /* 0;  kd5tfd hack */    Parallel.inport((ushort)(lpt_addr+1));  
+			else 
+			{ 
+				if ( ignore_ptt ) 
+				{
+					return 0; /* kd5tfd hack */ 
+				}
+				else 
+				{
+					return  Parallel.inport((ushort)(lpt_addr+1));  
+				}
+			}
 		}
 
 		public void Impulse()

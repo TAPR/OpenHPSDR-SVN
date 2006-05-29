@@ -8,7 +8,7 @@
 #include <common.h> 
 
 
-#pragma message("Using explict externs for resamplers")
+#pragma message("info: Using explict externs for resamplers - should be in a DttSP header!")
 extern DttSP_EXP void *NewResamplerF (int samplerate_in, int samplerate_out);
 extern DttSP_EXP void DoResamplerF (float *input, float *output, int numsamps, int *outsamps, /*ResStF*/ void *ptr);
 extern DttSP_EXP void DelPolyPhaseFIRF (/*ResSt*/ void * resst);
@@ -102,6 +102,12 @@ extern int XmitBit;
 extern int SampleRate; 
 extern unsigned char SampleRateIn2Bits; // value of sample rate to send to fpga 
 extern void *MicResamplerP; // Mic resampler filter 
+
+// buffers to handle variable size buffers to/from FPGA 
+int FPGAReadBufSize; 
+int FPGAWriteBufSize; 
+char *FPGAReadBufp; 
+char *FPGAWriteBufp; 
 
 #ifdef GLOBAL_DECL
 #undef extern
