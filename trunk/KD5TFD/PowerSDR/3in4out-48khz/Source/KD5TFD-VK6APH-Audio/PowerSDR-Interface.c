@@ -10,10 +10,29 @@
 #include "private.h" 
 
 
-
+//
+// StartAudio -- called when we need to start reading audio and passing it to PowerSDR via the callback. 
+// 
+// This rountine allocates needed buffers, resamplers, and opens the device to read from.  
+// If it fails it cleans up and return non zero, returns 0 on success 
+// Things allocated/created/opened here need to be freed/destroyed/closed in StopAudio 
+// 
+// error returns: 
+//	2 - could not open Xylo 
+//  3 - bad state - already started 
+//  4 - failed creating IOThread
+//  5 - failed to alloc mem for callback input buffer 
+//  6 - failed to alloc mem for input buffers 
+//  7 - failed creating fifo for io -> callback 
+//  8 - failed creating callback -> io fifo 
+//  9 - failed creating callback thread 
+// 10 - failed alloc of callback return buffer 
+// 13 - failed creating resampler 
+// 14 - failed alloc of low level USB buffers 
 //
 // this is the 4 in 4 out (actually 3 in 4 out) version of start audio 
 // 
+
 KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block, 
 									 int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata))
 { 
@@ -22,14 +41,32 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 	int *in_sample_bufp = NULL; 
 	float *bufp = NULL; 
 
+
+	// 
+	// DttSP runs at a single sampling rate - the IQ in sampling rate.  The Janus hardware supports selection of (192,96,48) 
+	// khz on IQ in, 48 khz on mic in and IQ and LR output. 
+	// 
+	// what's our sampling rate?  The code is setup to read IQ and 192, 96 or 48 khz.  Samples on the mic input match 
+	// the IQ sample rate, but only the 1st of (4/2/1) sample is valid others are duplicated because the mic is always sampled 
+	// at 48 khz.  If the IQ rate does not equal 48 khz the mic data is resampled to match the IQ rate. 
+	// 
+	// Output (xmit IQ, and LR audio) is always at 48 khz - downsampled by dropping samples 
+	//
 	SampleRate = sample_rate; 
+	FPGAWriteBufSize = 512; 
+	FPGAReadBufp = NULL; 
+	FPGAWriteBufp = NULL; 
+
+	// setup sampling rate, create resampler if needed 
 	switch ( SampleRate ) { 
 		case 48000: 
 			SampleRateIn2Bits = 0; 
+			FPGAReadBufSize = 512;
 			MicResamplerP = NULL; 
 			break; 
 		case 96000: 
 			SampleRateIn2Bits = 1;
+			FPGAReadBufSize = 1024;
 			MicResamplerP = NewResamplerF(48000, 96000); 
 			if ( MicResamplerP == NULL ) { 
 				fprintf(stderr, "Warning NewResamplerF failed in PowerSDR-Interface.c\n"); 
@@ -37,6 +74,7 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 			break; 
 		case 192000: 
 			SampleRateIn2Bits = 2; 
+			FPGAReadBufSize = 2048;
 			MicResamplerP = NewResamplerF(48000, 192000); 
 			if ( MicResamplerP == NULL ) { 
 				fprintf(stderr, "Warning NewResamplerF failed in PowerSDR-Interface.c\n"); 
@@ -48,8 +86,6 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 	} 
 	BlockSize = samples_per_block; 
 	Callback = callbackp;
-
-
 
 	printf("sa: samples_per_block: %d\n", samples_per_block); fflush(stdout); 
 
@@ -66,7 +102,7 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 			myrc = 5; 
 			break; 
 		} 
-		printf("callback buffers at: 0x%08x, len=%d\n", (unsigned long)bufp, 8*BlockSize*sizeof(float)); 
+		// printf("callback buffers at: 0x%08x, len=%d\n", (unsigned long)bufp, 8*BlockSize*sizeof(float)); 
 		CallbackInLbufp = bufp; 
 		CallbackInRbufp = bufp + BlockSize; 
 		CallbackMicLbufp = bufp + (2*BlockSize); 
@@ -99,6 +135,15 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 				break; 
 			} 
 		} 
+
+		// allocate buffer for low level USB I/O 
+		FPGAReadBufp = (char *)malloc( sizeof(char) * (FPGAReadBufSize + FPGAWriteBufSize)); 
+		if ( FPGAReadBufp == NULL ) { 
+			myrc = 14; 
+			break; 
+		}
+		/*else*/
+		FPGAWriteBufp = FPGAReadBufp + FPGAReadBufSize; 
 		
 		// go open the xylo usb device 
 		XyloH = XyloOpen(); 
@@ -157,6 +202,10 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 			free(bufp); 
 		} 
 
+		if ( FPGAReadBufp != NULL ) { 
+			free(FPGAReadBufp); 
+		} 
+
 		if ( in_sample_bufp != NULL ) { 
 			IOSampleInBufp = NULL; 
 			CBSampleOutBufp = NULL; 
@@ -186,6 +235,10 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 }
 
 
+
+// 
+// StopAudio -- undo what start audio did.  Close/Free/Destroy that which StartAudio Opened/Alloc'd/Created. 
+// 
 KD5TFDVK6APHAUDIO_API void StopAudio() { 
 	int rc; 
 	printf("stop audio called\n");  fflush(stdout); 
@@ -199,6 +252,7 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
 		InSampleFIFOp = NULL; 
 	}
 	printf("fifo destroyted\n");   fflush(stdout); 
+
 
 
 	if ( IOSampleInBufp != NULL ) { 
@@ -224,6 +278,13 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
 		DelPolyPhaseFIRF(MicResamplerP); 
 		MicResamplerP = NULL; 
 	} 
+
+	if ( FPGAReadBufp != NULL ) { 
+		free(FPGAReadBufp); 
+		FPGAReadBufp = NULL; 
+		FPGAWriteBufp = NULL; 
+	} 
+
 	DotDashBits = 0; 
 	return;
 }

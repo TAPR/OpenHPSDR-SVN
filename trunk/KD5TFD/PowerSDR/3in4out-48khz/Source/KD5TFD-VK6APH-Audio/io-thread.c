@@ -17,11 +17,15 @@ HLA_COUNTER ReadHLA;
 HLA_COUNTER WriteHLA; 
 #endif 
 
-#define INBUF_SIZE (512)  // size of fpga buffers - incoming 
-#define OUTBUF_SIZE (512) // size of fpga buffers - outgoing 
-char read_buf[INBUF_SIZE];
-char write_buf[OUTBUF_SIZE]; 
+// #define INBUF_SIZE (512)  // size of fpga buffers - incoming 
+// #define OUTBUF_SIZE (512) // size of fpga buffers - outgoing 
+// char read_buf[INBUF_SIZE];
+// char write_buf[OUTBUF_SIZE]; 
 int io_keep_running; 
+
+#define MAX_INBUF_SIZE (2048)  // max size of fpga buffers - incoming  - only used for debugging 
+#define MAX_OUTBUF_SIZE (512) // max size of fpga buffers - outgoing  - only used for debugging 
+
 
 // obsoloete - fpga tells us free space in fifo now #define FPGA_INPUT_FIFO_SIZE (2048) 
 
@@ -29,7 +33,7 @@ int io_keep_running;
 #define SAVE_WRITES_TO_BUFFER  (1) 
 #ifdef SAVE_WRITES_TO_BUFFER 
 #define NUM_WRITE_BUFS_TO_SAVE (300)
-char WriteSaveBuf[NUM_WRITE_BUFS_TO_SAVE][OUTBUF_SIZE]; 	
+char WriteSaveBuf[NUM_WRITE_BUFS_TO_SAVE][MAX_OUTBUF_SIZE]; 	
 int SaveWritesIdx = 0;  // idx of next buffer to be written 
 #endif 
 
@@ -37,7 +41,7 @@ int SaveWritesIdx = 0;  // idx of next buffer to be written
 #define SAVE_READS_TO_BUFFER (1) 
 #ifdef SAVE_READS_TO_BUFFER 
 #define NUM_READ_BUFS_TO_SAVE (300) 
-char ReadSaveBuf[NUM_READ_BUFS_TO_SAVE][INBUF_SIZE]; 
+char ReadSaveBuf[NUM_READ_BUFS_TO_SAVE][MAX_INBUF_SIZE]; 
 int SaveReadsIdx = 0; // idx of next buf to write to 
 #endif 
 
@@ -311,6 +315,7 @@ typedef struct zperf_record {
 		int cb; 
 		int sync_lost; 
 		unsigned char RxOverrun; 
+		unsigned char TxOverrun;
 		unsigned char frame_sending; 			
 } PERF_RECORD; 
 
@@ -397,7 +402,8 @@ void IOThreadMainLoop(void) {
 	int sample_bufp_size;
 	int sample_is_left; 
 	int buf_num = 0; 
-	int RxOverrun = 0; 
+	unsigned char RxOverrun = 0; 
+	unsigned char TxOverrun = 0; 
 #if 0
 	int dbggate = 0; 
 #endif 
@@ -433,12 +439,13 @@ void IOThreadMainLoop(void) {
 			read_start_t = getPerfTicks(); 
 #endif 
 #ifndef TEST_READ 
-			numread = XyloBulkRead(XyloH, 4, read_buf, sizeof(read_buf)); 
+			// numread = XyloBulkRead(XyloH, 4, read_buf, sizeof(read_buf)); 
+			numread = XyloBulkRead(XyloH, 4, FPGAReadBufp, FPGAReadBufSize); 
 			// printf("iot: read %d bytes\n", numread); fflush(stdout); 
 			++buf_num; 
 
 #ifdef SAVE_READS_TO_BUFFER 
-				memcpy(ReadSaveBuf[SaveReadsIdx], read_buf, INBUF_SIZE); 
+				memcpy(ReadSaveBuf[SaveReadsIdx], FPGAReadBufp, FPGAReadBufSize); 
 				++SaveReadsIdx; 
 				if ( SaveReadsIdx >= NUM_READ_BUFS_TO_SAVE ) { 
 					SaveReadsIdx = 0; 
@@ -449,12 +456,12 @@ void IOThreadMainLoop(void) {
 #if 0 
 			if ( read_dump_count < 5 ) { 
 				++read_dump_count; 
-				Dump(stdout, read_buf, sizeof(read_buf), "Input Buffer from Xylo");  fflush(stdout); 
+				Dump(stdout, FPGAReadBufp, FPGAReadBufSize, "Input Buffer from Xylo");  fflush(stdout); 
 			} 
 #endif 
 			// XyloBulkWrite(XyloH, 2, read_buf, numread); 
 #else 
-			numread = testRead(read_buf, sizeof(read_buf)); 
+			numread = testRead(FPGAReadBuf, FPGAReadBufSize); 
 #endif 
 #ifdef PERF_DEBUG 
 			read_stop_t = getPerfTicks();
@@ -468,13 +475,13 @@ void IOThreadMainLoop(void) {
 				++bytes_processed; 
 
 #if 0 
-				if ( state != STATE_NOSYNC && second_last_byte == 0x80 && last_byte == 0x00 && read_buf[i] == 0x00 ) { 
+				if ( state != STATE_NOSYNC && second_last_byte == 0x80 && last_byte == 0x00 && FPGAReadBufp[i] == 0x00 ) { 
 					printf("\nsync in data bufnum: %d i: %d samples_this_sync: %d\n", buf_num, i, samples_this_sync); 
 				}
 #endif 
 				switch ( state ) { 
 					case STATE_NOSYNC: 
-						if ( second_last_byte == 0x80 && last_byte == 0x00 && read_buf[i] == 0x00 ) {  // found sync 
+						if ( second_last_byte == 0x80 && last_byte == 0x00 && FPGAReadBufp[i] == 0x00 ) {  // found sync 
 							// in_stream_sync_count = 2; // we've consumed 3 bytes already, it will bump at bottom of loop to make 3 
 							state = STATE_CONTROL0; 
 							samples_this_sync = 0; 
@@ -486,8 +493,8 @@ void IOThreadMainLoop(void) {
 
 					case STATE_CONTROL0: 
 						// printf(" C0"); 
-						ControlBytes[0] = read_buf[i]; 						
-						DotDashBits = read_buf[i] & 0x3; 						
+						ControlBytes[0] = FPGAReadBufp[i]; 						
+						DotDashBits = FPGAReadBufp[i] & 0x3; 						
 													
 
 #if 0 
@@ -501,42 +508,43 @@ void IOThreadMainLoop(void) {
 						break; 
 					case STATE_CONTROL1: 
 						// printf(" C1");
-						ControlBytes[1] = read_buf[i]; 
+						ControlBytes[1] = FPGAReadBufp[i]; 
+						TxOverrun = FPGAReadBufp[i]; 
 						state = STATE_CONTROL2; // look for 3rd control byte 
 						break; 
 					case STATE_CONTROL2: 
 						// printf(" C2");
-						ControlBytes[2] = read_buf[i];
-						RxOverrun = read_buf[i]; 
+						ControlBytes[2] = FPGAReadBufp[i];
+						RxOverrun = FPGAReadBufp[i]; 
 						state = STATE_CONTROL3; // look for 4th control byte 
 						break; 
 					case STATE_CONTROL3:  // 
 						// printf(" C3");
-						ControlBytes[3] = read_buf[i]; 
-						RxFifoAvail = ((unsigned char)read_buf[i]) << 4; 
+						ControlBytes[3] = FPGAReadBufp[i]; 
+						RxFifoAvail = ((unsigned char)FPGAReadBufp[i]) << 4; 
 						state = STATE_CONTROL4;  // look for 5th and last control byte 
 						break; 
 					case STATE_CONTROL4: 
 						// printf(" C4");
-						ControlBytes[4] = read_buf[i]; 
-						RxFramePlaying = (unsigned char)read_buf[i]; 
+						ControlBytes[4] = FPGAReadBufp[i]; 
+						RxFramePlaying = (unsigned char)FPGAReadBufp[i]; 
 						state = STATE_SAMPLE_HI; 
 						sample_is_left = 1; 
 						// printf("fa: %d fp: %d\n", RxFifoAvail, RxFramePlaying); 
 						break;
 					case STATE_SAMPLE_HI:
 						// printf(" HI");
-						this_num = ((int)read_buf[i]) << 16; // start new sample, preserve the sign bit!
+						this_num = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
 						state = STATE_SAMPLE_MID; 
 						break;
 					case STATE_SAMPLE_MID: 
 						// printf(" MI");
-						this_num = (((unsigned char)read_buf[i]) <<8) | this_num;  // add in middle part of sample -- unsigned! 
+						this_num = (((unsigned char)FPGAReadBufp[i]) <<8) | this_num;  // add in middle part of sample -- unsigned! 
 						state = STATE_SAMPLE_LO; 
 						break; 
 					case STATE_SAMPLE_LO: 
 						// printf(" LO");
-						this_num = ((unsigned char)read_buf[i]) | this_num; // add in last part of sample 
+						this_num = ((unsigned char)FPGAReadBufp[i]) | this_num; // add in last part of sample 
 						IOSampleInBufp[sample_count] = this_num; 
 						++sample_count; 
 #if 0 
@@ -575,12 +583,12 @@ void IOThreadMainLoop(void) {
 						break; 
 
 					case STATE_SAMPLE_MIC_HI: 
-						this_num = ((int)read_buf[i]) << 8;  // read hi word of sample - preserve sign moron! 
+						this_num = ((int)FPGAReadBufp[i]) << 8;  // read hi word of sample - preserve sign moron! 
 						state = STATE_SAMPLE_MIC_LO; 
 						break;
 
 					case STATE_SAMPLE_MIC_LO: 
-						this_num = ((unsigned char)read_buf[i]) | this_num; // add in last part of sample 
+						this_num = ((unsigned char)FPGAReadBufp[i]) | this_num; // add in last part of sample 
 						IOSampleInBufp[sample_count] = this_num; 
 						++sample_count; 
 						if ( sample_count >= 3*BlockSize ) {   // only 3 channels on input (i,q,nic), although buffer is sized for 4 
@@ -604,7 +612,7 @@ void IOThreadMainLoop(void) {
 					case STATE_SYNC_HI: 
 						// printf("\nSH");
 						samples_this_sync = 0; 
-						if ( (unsigned char)read_buf[i] != 0x80 ) { // argh did not find sync 
+						if ( (unsigned char)FPGAReadBufp[i] != 0x80 ) { // argh did not find sync 
 							++lost_sync_count; 
 							state = STATE_NOSYNC; 
 						} 
@@ -614,7 +622,7 @@ void IOThreadMainLoop(void) {
 						break;
 					case STATE_SYNC_MID: 
 						// printf(" SM");
-						if ( read_buf[i] != 0x00 ) { // argh did not find sync 
+						if ( FPGAReadBufp[i] != 0x00 ) { // argh did not find sync 
 							++lost_sync_count; 
 							state = STATE_NOSYNC; 
 						} 
@@ -624,7 +632,7 @@ void IOThreadMainLoop(void) {
 						break;
 					case STATE_SYNC_LO: 
 						// printf(" SL");
-						if ( read_buf[i] != 0x00 ) { // argh did not find sync 
+						if ( FPGAReadBufp[i] != 0x00 ) { // argh did not find sync 
 							++lost_sync_count; 
 							state = STATE_NOSYNC; 
 						} 
@@ -644,7 +652,7 @@ void IOThreadMainLoop(void) {
 				//	in_stream_sync_count = 0; 
 				//} 
 				second_last_byte = last_byte; 
-				last_byte = read_buf[i];
+				last_byte = FPGAReadBufp[i];
 				
 			} /* for numread = ... */
 #ifdef WRITE_MULTI_PER_READ 
@@ -674,34 +682,34 @@ void IOThreadMainLoop(void) {
 		if ( have_out_buf && ok_to_write  ) { 
 			// printf("enter out loop /w buf: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout); 
 			// while we have space in the output buffer put data in it 				
-			while ( writebufpos < OUTBUF_SIZE ) { 					
+			while ( writebufpos < FPGAWriteBufSize /*OUTBUF_SIZE*/ ) { 					
 				switch ( out_state ) { 
 						case OUT_STATE_SYNC_HI_NEEDED:
 							out_sample_pairs_this_sync = 0; 
 							out_state = OUT_STATE_SYNC_MID_NEEDED; 
-							write_buf[writebufpos] = 0x80; 
+							FPGAWriteBufp[writebufpos] = 0x80; 
 							break; 
 
 						case OUT_STATE_SYNC_MID_NEEDED: 
 							out_state = OUT_STATE_SYNC_LO_NEEDED; 
-							write_buf[writebufpos] = 0x00; 
+							FPGAWriteBufp[writebufpos] = 0x00; 
 							break; 
 
 						case OUT_STATE_LEFT_HI_NEEDED:
 							out_state = OUT_STATE_LEFT_LO_NEEDED; 
-							write_buf[writebufpos] = outbufp[outbufpos]; 							
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos]; 							
 							++outbufpos; 
 							break; 
 
 						case OUT_STATE_RIGHT_HI_NEEDED:
 							out_state = OUT_STATE_RIGHT_LO_NEEDED; 
-							write_buf[writebufpos] = outbufp[outbufpos]; 							
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos]; 							
 							++outbufpos; 
 							break; 
 
 						case OUT_STATE_SYNC_LO_NEEDED: 							
 							out_state = OUT_STATE_CONTROL0; 
-							write_buf[writebufpos] = 0x00;
+							FPGAWriteBufp[writebufpos] = 0x00;
 							break; 
 
 						case OUT_STATE_CONTROL0:
@@ -713,47 +721,47 @@ void IOThreadMainLoop(void) {
 								printf("XmitBit changed to: %d\n", XmitBit); fflush(stdout); 
 							} 
 #endif 
-							write_buf[writebufpos] = (unsigned char)XmitBit; 
+							FPGAWriteBufp[writebufpos] = (unsigned char)XmitBit; 
 							break; 
 
 						case OUT_STATE_CONTROL1: 
 							out_state = OUT_STATE_CONTROL2;
 							if ( (ControlBytes[0] & 0xfe) == 0 ) { 
 								// send sample rate in C1 low 2 bits 
-								write_buf[writebufpos] = ((ControlBytes[1] & 0xfc) | (SampleRateIn2Bits & 3));
+								FPGAWriteBufp[writebufpos] = ((ControlBytes[1] & 0xfc) | (SampleRateIn2Bits & 3));
 							} 
 							else { 
-								write_buf[writebufpos] = ControlBytes[1]; 
+								FPGAWriteBufp[writebufpos] = ControlBytes[1]; 
 							}
 #if 0 
 							++dbggate; 
 							if ( dbggate == 1000 ) { 
 								dbggate = 0; 
-								printf("c1: 0x%x\n", write_buf[writebufpos]);  fflush(stdout); 
+								printf("c1: 0x%x\n", FPGAWriteBufp[writebufpos]);  fflush(stdout); 
 							} 
 #endif 							
 							break; 
 
 						case OUT_STATE_CONTROL2: 
 							out_state = OUT_STATE_CONTROL3;
-							write_buf[writebufpos] = ControlBytes[2]; 
+							FPGAWriteBufp[writebufpos] = ControlBytes[2]; 
 							break; 
 
 						case OUT_STATE_CONTROL3: 
 							out_state = OUT_STATE_CONTROL4;
-							write_buf[writebufpos] = ControlBytes[3]; 
+							FPGAWriteBufp[writebufpos] = ControlBytes[3]; 
 							break; 
 
 						case OUT_STATE_CONTROL4: 
 							out_state = OUT_STATE_LEFT_HI_NEEDED; 
 							// write_buf[writebufpos] = ControlBytes[4]; 
-							write_buf[writebufpos] = out_frame_idx; 
+							FPGAWriteBufp[writebufpos] = out_frame_idx; 
 							++out_frame_idx; 
 							break; 
 
 						case OUT_STATE_LEFT_LO_NEEDED: 
 							out_state = OUT_STATE_RIGHT_HI_NEEDED; 
-							write_buf[writebufpos] = outbufp[outbufpos]; 							
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos]; 							
 							++outbufpos; 
 							break; 
 
@@ -764,7 +772,7 @@ void IOThreadMainLoop(void) {
 							//else { 
 							//	out_state = OUT_STATE_LEFT_HI_NEEDED; 
 							//}
-								write_buf[writebufpos] = outbufp[outbufpos]; 							
+								FPGAWriteBufp[writebufpos] = outbufp[outbufpos]; 							
 								++outbufpos; 
 #if 0 
 								++out_sample_pairs_this_sync; 
@@ -781,24 +789,24 @@ void IOThreadMainLoop(void) {
 
 						case OUT_STATE_MON_LEFT_HI_NEEDED: 
 							out_state = OUT_STATE_MON_LEFT_LO_NEEDED; 
-							write_buf[writebufpos] = outbufp[outbufpos]; 							
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos]; 							
 							++outbufpos; 
 							break; 
 
 						case OUT_STATE_MON_LEFT_LO_NEEDED: 
 							out_state = OUT_STATE_MON_RIGHT_HI_NEEDED; 
-							write_buf[writebufpos] = outbufp[outbufpos]; 							
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos]; 							
 							++outbufpos; 
 							break; 
 
 						case OUT_STATE_MON_RIGHT_HI_NEEDED: 
 							out_state = OUT_STATE_MON_RIGHT_LO_NEEDED; 
-							write_buf[writebufpos] = outbufp[outbufpos]; 							
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos]; 							
 							++outbufpos; 
 							break; 
 
 						case OUT_STATE_MON_RIGHT_LO_NEEDED: 
-							write_buf[writebufpos] = outbufp[outbufpos]; 							
+							FPGAWriteBufp[writebufpos] = outbufp[outbufpos]; 							
 							++outbufpos; 
 							++out_sample_pairs_this_sync; 	
 							if ( out_sample_pairs_this_sync == 63 ) { 
@@ -834,15 +842,15 @@ void IOThreadMainLoop(void) {
 						// printf("new buffer: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout); 
 					} 
 				} 
-			}  /* while writebufpos < OUTBUF_SIZE */
+			}  /* while writebufpos < FPGAWriteBufSize */
 			
-			if ( writebufpos >= OUTBUF_SIZE ) {  // write the buffer if we've filled it. 
+			if ( writebufpos >= FPGAWriteBufSize ) {  // write the buffer if we've filled it. 
 				wrote_frame = 1; 
-				numwritten = XyloBulkWrite(XyloH, 2, write_buf, OUTBUF_SIZE); 
+				numwritten = XyloBulkWrite(XyloH, 2, FPGAWriteBufp, FPGAWriteBufSize); 
 				// numwritten = OUTBUF_SIZE; 
 
 #ifdef SAVE_WRITES_TO_BUFFER 
-				memcpy(WriteSaveBuf[SaveWritesIdx], write_buf, OUTBUF_SIZE); 
+				memcpy(WriteSaveBuf[SaveWritesIdx], FPGAWriteBufp, FPGAWriteBufSize); 
 				++SaveWritesIdx; 
 				if ( SaveWritesIdx >= NUM_WRITE_BUFS_TO_SAVE ) { 
 					SaveWritesIdx = 0; 
@@ -868,7 +876,7 @@ void IOThreadMainLoop(void) {
 #endif 
 //				printf("buffer write: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout); 
 
-				if ( numwritten != OUTBUF_SIZE ) { 
+				if ( numwritten != FPGAWriteBufSize ) { 
 					printf("warning: iothread short write!\n"); 
 				} 
 				writebufpos = 0; 						
@@ -891,7 +899,8 @@ void IOThreadMainLoop(void) {
 			pdp->dwt = write_bottom_t - last_write_t; 
 			pdp->ticks = now_t; 
 			pdp->cb = complete_blocks; 
-			pdp->RxOverrun = RxOverrun; 
+			pdp->RxOverrun = RxOverrun;
+			pdp->TxOverrun = TxOverrun; 
 			pdp->frame_sending = out_frame_idx; 
 			pdp->sync_lost = lost_sync_count; 
 		} 
@@ -986,7 +995,7 @@ void *IOThreadMain(void *argp) {
 					curridx = 0; 
 				} 
 				while ( curridx != SaveWritesIdx ) { 
-					fwrite(WriteSaveBuf[curridx], 1, OUTBUF_SIZE, buf_file); 
+					fwrite(WriteSaveBuf[curridx], 1, FPGAWriteBufSize /*OUTBUF_SIZE*/, buf_file); 
 					++curridx; 
 					if ( curridx >= NUM_WRITE_BUFS_TO_SAVE ) { 
 						curridx = 0; 
@@ -1013,7 +1022,7 @@ void *IOThreadMain(void *argp) {
 					curridx = 0; 
 				} 
 				while ( curridx != SaveReadsIdx ) { 
-					fwrite(ReadSaveBuf[curridx], 1, INBUF_SIZE, buf_file); 
+					fwrite(ReadSaveBuf[curridx], 1, FPGAReadBufSize /*INBUF_SIZE*/ , buf_file); 
 					++curridx; 
 					if ( curridx >= NUM_READ_BUFS_TO_SAVE ) { 
 						curridx = 0; 
@@ -1058,8 +1067,8 @@ void *IOThreadMain(void *argp) {
 				for ( i = 0; i < PerfDataIdx; i++ ) { 
 					pdp = &(PerfData[i]); 				
 					now_nanos = perfTicksToNanos(pdp->ticks); 
-					fprintf(f,"i: %d fa: %d fp: %d fs: %d sl: %d or: %d w: %d okw: %d rt: %I64u wt: %I64d drt: %I64u dwt: %I64u cb: %d t: %I64u dt: %I64u\n",  i, 
-					pdp->RxFifoAvail, pdp->RxFramePlaying, pdp->frame_sending, pdp->sync_lost, pdp->RxOverrun, pdp->wrote_frame, pdp->ok_to_write, perfTicksToNanos(pdp->rt), perfTicksToNanos(pdp->wt), 
+					fprintf(f,"i: %d fa: %d fp: %3d fs: %3d sl: %d txo: %3d rxo: %3d w: %d okw: %d rt: %8I64u wt: %8I64d drt: %8I64u dwt: %8I64u cb: %d t: %I64u dt: %8I64u\n",  i, 
+					pdp->RxFifoAvail, pdp->RxFramePlaying, pdp->frame_sending, pdp->sync_lost, pdp->TxOverrun, pdp->RxOverrun, pdp->wrote_frame, pdp->ok_to_write, perfTicksToNanos(pdp->rt), perfTicksToNanos(pdp->wt), 
 					perfTicksToNanos(pdp->drt), perfTicksToNanos(pdp->dwt), pdp->cb, now_nanos, now_nanos-last_nanos ); 
 					last_nanos = now_nanos; 
 				} 

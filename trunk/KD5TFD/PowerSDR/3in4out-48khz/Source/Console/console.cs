@@ -5986,6 +5986,11 @@ namespace PowerSDR
 							Audio.high_pwr_am = true;
 							MessageBox.Show("high power am");
 							break;
+
+						case "--ignore-pp-ptt":
+							Hdw.ignorePTT(true); 
+							this.Text = this.Text + " *** PP PTT disabled ***";
+							break;
 					}
 				}
 			}
