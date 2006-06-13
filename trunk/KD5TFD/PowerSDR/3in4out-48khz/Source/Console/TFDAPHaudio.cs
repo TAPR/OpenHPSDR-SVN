@@ -17,7 +17,7 @@ namespace PowerSDR
 			//
 		}
 		[DllImport("KD5TFD-VK6APH-Audio.dll")]
-		unsafe public static extern int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb); 
+		unsafe public static extern int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits); 
 
 		[DllImport("KD5TFD-VK6APH-Audio.dll")]
 		unsafe public static extern int StopAudio(); 

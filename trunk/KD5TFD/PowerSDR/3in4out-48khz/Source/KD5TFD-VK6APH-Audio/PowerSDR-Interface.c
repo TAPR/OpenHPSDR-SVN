@@ -34,7 +34,8 @@
 // 
 
 KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block, 
-									 int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata))
+									 int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata), 
+									 int sample_bits)
 { 
 	int rc; 
 	int myrc = 0; 
@@ -56,6 +57,11 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 	FPGAWriteBufSize = 512; 
 	FPGAReadBufp = NULL; 
 	FPGAWriteBufp = NULL; 
+	SampleBits = sample_bits; 
+	IQConversionDivisor = (float)8388607.0;  // (2**23)-1
+	if ( SampleBits == 16 ) { 
+		IQConversionDivisor = (float)32767.0;
+	} 
 
 	// setup sampling rate, create resampler if needed 
 	switch ( SampleRate ) { 
