@@ -5991,6 +5991,12 @@ namespace PowerSDR
 							Hdw.ignorePTT(true); 
 							this.Text = this.Text + " *** PP PTT disabled ***";
 							break;
+
+						case "--force-16bit-IQ":
+							Force16bitIQ = true; 
+							this.Text = this.Text + " *** 16 bit IQ ***"; 
+							break; 
+
 					}
 				}
 			}
@@ -5999,6 +6005,8 @@ namespace PowerSDR
 				comboMeterTXMode.SelectedIndex = 0;
 			chkMOX.Enabled = false;
 		}
+
+		public bool Force16bitIQ = false; 
 
 		public void ExitConsole()
 		{

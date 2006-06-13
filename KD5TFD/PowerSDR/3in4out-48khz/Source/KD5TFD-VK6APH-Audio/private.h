@@ -30,7 +30,7 @@ extern DttSP_EXP void DelPolyPhaseFIRF (/*ResSt*/ void * resst);
 
 // PowerSDR interface routines 
 // extern KD5TFDVK6APHAUDIO_API int StartAudio(int block_size); 
-extern KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata));
+extern KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata), int sample_bits);
 extern KD5TFDVK6APHAUDIO_API void StopAudio(void); 
 extern KD5TFDVK6APHAUDIO_API int GetDotDashBits(void); 
 extern KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
@@ -102,12 +102,14 @@ extern int XmitBit;
 extern int SampleRate; 
 extern unsigned char SampleRateIn2Bits; // value of sample rate to send to fpga 
 extern void *MicResamplerP; // Mic resampler filter 
+extern int SampleBits;  // how many bits in a sample 
+extern float IQConversionDivisor;  // divisor to use converting sample ints to floats 
 
 // buffers to handle variable size buffers to/from FPGA 
-int FPGAReadBufSize; 
-int FPGAWriteBufSize; 
-char *FPGAReadBufp; 
-char *FPGAWriteBufp; 
+extern int FPGAReadBufSize; 
+extern int FPGAWriteBufSize; 
+extern char *FPGAReadBufp; 
+extern char *FPGAWriteBufp; 
 
 #ifdef GLOBAL_DECL
 #undef extern

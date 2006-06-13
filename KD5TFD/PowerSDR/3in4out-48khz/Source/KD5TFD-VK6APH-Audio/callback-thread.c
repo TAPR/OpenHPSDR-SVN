@@ -219,6 +219,9 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	float *callback_out[4]; 
 	int out_sample_incr;  
 	int outidx; 
+
+
+
 	
 
 #ifdef PERF_DEBUG 
@@ -254,8 +257,8 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 	start_t = getPerfTicks(); 
 #endif 
 	for ( i = 0; i < BlockSize; i++ ) { 
-		CallbackInLbufp[i] = ((float)(bufp[3*i]))/(float)8388607.0;  // (2**23) - 1			
-		CallbackInRbufp[i] =  ((float)(bufp[(3*i)+1]))/(float)8388607.0; 
+		CallbackInLbufp[i] = ((float)(bufp[3*i]))/IQConversionDivisor;  
+		CallbackInRbufp[i] =  ((float)(bufp[(3*i)+1]))/IQConversionDivisor; 
 
 		// wjt -- todo!! -- this should be in the resampler loop below -- we're converting more samples to 
 		// floats than we need to for 96000 and 192000 sample rates -- should downsample first, convert to float 

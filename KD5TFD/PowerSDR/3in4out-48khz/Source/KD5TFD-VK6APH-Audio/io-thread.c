@@ -40,7 +40,7 @@ int SaveWritesIdx = 0;  // idx of next buffer to be written
 // save buffers read from the fpga 
 #define SAVE_READS_TO_BUFFER (1) 
 #ifdef SAVE_READS_TO_BUFFER 
-#define NUM_READ_BUFS_TO_SAVE (300) 
+#define NUM_READ_BUFS_TO_SAVE (1000) 
 char ReadSaveBuf[NUM_READ_BUFS_TO_SAVE][MAX_INBUF_SIZE]; 
 int SaveReadsIdx = 0; // idx of next buf to write to 
 #endif 
@@ -547,7 +547,7 @@ void IOThreadMainLoop(void) {
 						this_num = ((unsigned char)FPGAReadBufp[i]) | this_num; // add in last part of sample 
 						IOSampleInBufp[sample_count] = this_num; 
 						++sample_count; 
-#if 0 
+#if 1 
 						if ( sample_count >= 2*BlockSize ) { 
 							sample_count = 0; 
 							// putFIFO(InSampleFIFOp, IOSampleInBufp, sample_bufp_size); 
@@ -594,7 +594,9 @@ void IOThreadMainLoop(void) {
 						if ( sample_count >= 3*BlockSize ) {   // only 3 channels on input (i,q,nic), although buffer is sized for 4 
 							sample_count = 0; 
 							// printf("iot: calling proc buf\n"); fflush(stdout); 
+#if 0 
 							Callback_ProcessBuffer(IOSampleInBufp, sample_bufp_size); 
+#endif 
 							// printf("iot: proc buf returned\n"); fflush(stdout); 
 							++complete_blocks; 
 						}
@@ -946,7 +948,7 @@ int IOThreadStop() {
 void *IOThreadMain(void *argp) {		
 		io_keep_running = 1; 
 		IOThreadRunning = 1; 
-		SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_TIME_CRITICAL /*THREAD_PRIORITY_HIGHEST */ ); 
+		SetThreadPriority(GetCurrentThread(), /* THREAD_PRIORITY_ABOVE_NORMAL */  THREAD_PRIORITY_TIME_CRITICAL /* THREAD_PRIORITY_HIGHEST  */ ); 
 	    sem_post(&IOThreadInitSem); // tell launching thread we're rockin and rollin 				
 		complete_blocks = 0; 
 		lost_sync_count = 0; 
