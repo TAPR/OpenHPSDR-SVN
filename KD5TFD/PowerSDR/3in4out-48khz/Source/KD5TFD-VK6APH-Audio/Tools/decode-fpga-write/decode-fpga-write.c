@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h> 
 
 #define FRAME_SIZE (512)
 
@@ -25,7 +26,7 @@ void dumpFrame(unsigned char *framep) {
         i = getShortFromFrame(framep, ofs);
         q = getShortFromFrame(framep, ofs+2);
         ml = getShortFromFrame(framep, ofs+4);
-        mr = getShortFromFrame(framep, ofs+4);
+        mr = getShortFromFrame(framep, ofs+6);
         printf("%06d %06d %06d %06d\n", i, q, ml, mr);
         ofs += 8;
     }
@@ -35,7 +36,7 @@ void dumpFrame(unsigned char *framep) {
 int main(int argc, char *argv[]) {
     FILE *ifile;
     unsigned char ibuf[FRAME_SIZE];
-    int numread;
+    size_t numread;
 
     if ( argc != 2 ) {
         printf("need input filename!\n");

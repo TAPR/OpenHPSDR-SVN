@@ -44,6 +44,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "i2c-cmd", "i2c-cmd\i2c-cmd.
 		{501522F9-17B4-4259-973D-0CEB6341A64B} = {501522F9-17B4-4259-973D-0CEB6341A64B}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "decode-fpga-write", "KD5TFD-VK6APH-Audio\Tools\decode-fpga-write\decode-fpga-write.vcproj", "{079161AC-9F76-45E8-BF97-3DE2F6955517}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "decode-fpga-read", "KD5TFD-VK6APH-Audio\Tools\decode-fpga-read\decode-fpga-read.vcproj", "{9F0B7269-887A-49DB-B1F1-E09EEC725616}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -86,6 +94,14 @@ Global
 		{9A97A492-605A-4323-935D-FCA5A5B2F826}.Debug.Build.0 = Debug|Win32
 		{9A97A492-605A-4323-935D-FCA5A5B2F826}.Release.ActiveCfg = Release|Win32
 		{9A97A492-605A-4323-935D-FCA5A5B2F826}.Release.Build.0 = Release|Win32
+		{079161AC-9F76-45E8-BF97-3DE2F6955517}.Debug.ActiveCfg = Debug|Win32
+		{079161AC-9F76-45E8-BF97-3DE2F6955517}.Debug.Build.0 = Debug|Win32
+		{079161AC-9F76-45E8-BF97-3DE2F6955517}.Release.ActiveCfg = Release|Win32
+		{079161AC-9F76-45E8-BF97-3DE2F6955517}.Release.Build.0 = Release|Win32
+		{9F0B7269-887A-49DB-B1F1-E09EEC725616}.Debug.ActiveCfg = Debug|Win32
+		{9F0B7269-887A-49DB-B1F1-E09EEC725616}.Debug.Build.0 = Debug|Win32
+		{9F0B7269-887A-49DB-B1F1-E09EEC725616}.Release.ActiveCfg = Release|Win32
+		{9F0B7269-887A-49DB-B1F1-E09EEC725616}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
