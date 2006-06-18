@@ -118,9 +118,10 @@ namespace PowerSDR
 			// 
 			this.lblStatus.BackColor = System.Drawing.Color.Transparent;
 			this.lblStatus.ForeColor = System.Drawing.Color.White;
-			this.lblStatus.Location = new System.Drawing.Point(0, 230);
+			this.lblStatus.Image = null;
+			this.lblStatus.Location = new System.Drawing.Point(168, 230);
 			this.lblStatus.Name = "lblStatus";
-			this.lblStatus.Size = new System.Drawing.Size(400, 16);
+			this.lblStatus.Size = new System.Drawing.Size(128, 16);
 			this.lblStatus.TabIndex = 0;
 			this.lblStatus.Text = "Status";
 			this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -129,9 +130,10 @@ namespace PowerSDR
 			// 
 			this.lblTimeRemaining.BackColor = System.Drawing.Color.Transparent;
 			this.lblTimeRemaining.ForeColor = System.Drawing.Color.White;
-			this.lblTimeRemaining.Location = new System.Drawing.Point(296, 232);
+			this.lblTimeRemaining.Image = null;
+			this.lblTimeRemaining.Location = new System.Drawing.Point(320, 232);
 			this.lblTimeRemaining.Name = "lblTimeRemaining";
-			this.lblTimeRemaining.Size = new System.Drawing.Size(100, 16);
+			this.lblTimeRemaining.Size = new System.Drawing.Size(72, 16);
 			this.lblTimeRemaining.TabIndex = 1;
 			this.lblTimeRemaining.Text = "Time";
 			// 
