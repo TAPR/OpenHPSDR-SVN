@@ -547,7 +547,7 @@ void IOThreadMainLoop(void) {
 						this_num = ((unsigned char)FPGAReadBufp[i]) | this_num; // add in last part of sample 
 						IOSampleInBufp[sample_count] = this_num; 
 						++sample_count; 
-#if 1 
+#if 0
 						if ( sample_count >= 2*BlockSize ) { 
 							sample_count = 0; 
 							// putFIFO(InSampleFIFOp, IOSampleInBufp, sample_bufp_size); 
@@ -594,7 +594,7 @@ void IOThreadMainLoop(void) {
 						if ( sample_count >= 3*BlockSize ) {   // only 3 channels on input (i,q,nic), although buffer is sized for 4 
 							sample_count = 0; 
 							// printf("iot: calling proc buf\n"); fflush(stdout); 
-#if 0 
+#if 1 
 							Callback_ProcessBuffer(IOSampleInBufp, sample_bufp_size); 
 #endif 
 							// printf("iot: proc buf returned\n"); fflush(stdout); 
