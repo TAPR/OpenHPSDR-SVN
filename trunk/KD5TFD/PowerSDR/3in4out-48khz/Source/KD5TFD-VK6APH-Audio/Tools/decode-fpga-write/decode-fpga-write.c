@@ -1,3 +1,5 @@
+/* Copyright (c) 2006  Bill Tracey (bill@ejwt.com) */ 
+
 #include <stdio.h>
 #include <stdlib.h> 
 
