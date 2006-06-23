@@ -24,15 +24,15 @@
 // reset - reset the cordic stages
 // Iin - I data in, width depends on CORDIC_WIDTH parameter, default = 16
 // Qin - Q data in, width depends on CORDIC_WIDTH parameter, default = 16
-// PHin - phase data in, width depends on PHASE_WIDTH parameter, default = 16
+// PhaseIn - phase data in, width depends on PHASE_WIDTH parameter, default = 16
 // coeff - arc tan coefficients
 //
 // Outputs:
 // Iout - I data out, width depends on CORDIC_WIDTH parameter, default = 16
 // Qout - Q data out, width depends on CORDIC_WIDTH parameter, default = 16
-// PHout - phase data out, width depends on CORDIC_WIDTH parameter, default = 16
+// PhaseOut - phase data out, width depends on PHASE_WIDTH parameter, default = 16
 
-module cordic_stage(clk,reset,Iin,Qin,PHin,coeff,Iout,Qout,PHout);
+module cordic_stage(clk,reset,Iin,Qin,PhaseIn,coeff,Iout,Qout,PhaseOut);
 	parameter CORDIC_WIDTH = 16;
 	parameter PHASE_WIDTH = 16;
 	parameter SHIFT = 1;
@@ -41,25 +41,25 @@ module cordic_stage(clk,reset,Iin,Qin,PHin,coeff,Iout,Qout,PHout);
 	input	reset;
 	input	[CORDIC_WIDTH-1:0] Iin;
 	input	[CORDIC_WIDTH-1:0] Qin;
-	input 	[PHASE_WIDTH-1:0] PHin;
+	input 	[PHASE_WIDTH-1:0] PhaseIn;
 	input	[PHASE_WIDTH-1:0] coeff;
 	
 	output	[CORDIC_WIDTH-1:0] Iout;
 	output	[CORDIC_WIDTH-1:0] Qout;
-	output	[PHASE_WIDTH-1:0] PHout;
+	output	[PHASE_WIDTH-1:0] PhaseOut;
 	
-	wire	phase_positive = -PHin[PHASE_WIDTH-1]; // test for positive phase, flag
+	wire	phase_positive = -PhaseIn[PHASE_WIDTH-1]; // test for positive phase, flag
 	
 	reg		[CORDIC_WIDTH-1:0] Iout;
 	reg		[CORDIC_WIDTH-1:0] Qout;
-	reg		[PHASE_WIDTH-1:0] PHout;
+	reg		[PHASE_WIDTH-1:0] PhaseOut;
 	
 	always @(posedge clk)
 		if(reset)
 			begin
 				Iout <= #1 0;
 				Qout <= #1 0;
-				PHout <= #1 0;
+				PhaseOut <= #1 0;
 			end
 		else
 			begin
@@ -67,10 +67,10 @@ module cordic_stage(clk,reset,Iin,Qin,PHin,coeff,Iout,Qout,PHout);
 					Iin - {{SHIFT+1{Qin[CORDIC_WIDTH-1]}},Qin[CORDIC_WIDTH-2:SHIFT]} :
 					Iin + {{SHIFT+1{Qin[CORDIC_WIDTH-1]}},Qin[CORDIC_WIDTH-2:SHIFT]};
 				Qout <= #1 phase_positive ?
-					Qin - {{SHIFT+1{Iin[CORDIC_WIDTH-1]}},Iin[CORDIC_WIDTH-2:SHIFT]} :
-					Qin + {{SHIFT+1{Iin[CORDIC_WIDTH-1]}},Iin[CORDIC_WIDTH-2:SHIFT]};
-				PHout <= #1 phase_positive ?
-					PHin - coeff :
-					PHin + coeff ;
+					Qin + {{SHIFT+1{Iin[CORDIC_WIDTH-1]}},Iin[CORDIC_WIDTH-2:SHIFT]} :
+					Qin - {{SHIFT+1{Iin[CORDIC_WIDTH-1]}},Iin[CORDIC_WIDTH-2:SHIFT]};
+				PhaseOut <= #1 phase_positive ?
+					PhaseIn - coeff :
+					PhaseIn + coeff ;
 			end	
 endmodule
