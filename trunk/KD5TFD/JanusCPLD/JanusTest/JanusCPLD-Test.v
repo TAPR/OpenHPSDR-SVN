@@ -113,11 +113,17 @@ module JanusTestTop(
 
 
 reg [19:0] clock_reg; 
+reg alt_clock_by_3; 
   
 always @ ( posedge  CLK_24MHZ) begin 
 	clock_reg <= clock_reg + 1;
+	if ( clock_reg % 3 == 0 ) begin
+		alt_clock_by_3 <= ~alt_clock_by_3; 
+	end 
 end 
 
+
+// 24.576 / 3 clock 
 reg clock_by_3; 
 reg[1:0] clock_by_3_reg; 
  
@@ -129,9 +135,13 @@ always @ ( posedge CLK_24MHZ) begin
 	else begin 
 		clock_by_3_reg <= clock_by_3_reg + 1; 
 	end 			
+	
+
 end 
 
 
+//
+// generate 24.576 /5 clock 
 reg clock_by_5; 
 reg[2:0] clock_by_5_reg; 
  
@@ -146,16 +156,35 @@ always @ ( posedge CLK_24MHZ) begin
 end 
 
 
+// produce 2/3 and 1/3 duty cycle waveforms 
+// 
+reg[3:0] duty_cycle_clock_reg; 
+reg two_third_duty_cycle; 
+assign one_third_duty_cycle = ~two_third_duty_cycle; 
 
+always @ ( posedge CLK_24MHZ ) begin 
+	if ( duty_cycle_clock_reg < 6 ) begin   // 0-5 
+		two_third_duty_cycle <= 1; 
+	end 
+	else if ( duty_cycle_clock_reg < 9 ) begin 
+	    two_third_duty_cycle <= 0; 
+	end 
+	if ( duty_cycle_clock_reg == 8 ) begin 
+		duty_cycle_clock_reg <= 0; 		
+	end 
+	else begin 
+		duty_cycle_clock_reg <= duty_cycle_clock_reg + 1; 
+	end 
+end 
 
 // put clocks on the pins 
 
 assign CAL = clock_reg[00];
-assign CBCLK = clock_by_3; // clock_reg[01];
-assign CDIN = clock_by_5;  // clock_reg[02];
-assign CDOUT = clock_reg[03];
-assign CLRCIN = clock_reg[04];
-assign CLRCOUT = clock_reg[05];
+assign CBCLK = clock_by_3;            // clock_reg[01];
+assign CDIN = alt_clock_by_3;         // clock_reg[02];
+assign CDOUT = clock_by_5;            // clock_reg[03];
+assign CLRCIN = two_third_duty_cycle; // clock_reg[04];
+assign CLRCOUT = one_third_duty_cycle; //clock_reg[05];
 assign CMCLK = clock_reg[06];
 assign CMODE = clock_reg[07];
 assign DFS0 = clock_reg[08];
