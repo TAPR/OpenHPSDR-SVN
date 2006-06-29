@@ -54,7 +54,7 @@ module JanusTestTop(
    output XB7,
    output XC0,
    output XC1,
-   output XC2_ISCSCK,
+   output XC2_I2CSCK,
    output XC3_I2CSDA,
    output XC4,
    output XDC6,
@@ -226,7 +226,7 @@ assign XB6 = clock_reg[03];
 assign XB7 = clock_reg[04];
 assign XC0 = clock_reg[05];
 assign XC1 = clock_reg[06];
-assign XC2_ISCSCK = clock_reg[07];
+assign XC2_I2CSCK = clock_reg[07];
 assign XC3_I2CSDA = clock_reg[08];
 assign XC4 = clock_reg[09];
 assign XDC6 = clock_reg[10];
