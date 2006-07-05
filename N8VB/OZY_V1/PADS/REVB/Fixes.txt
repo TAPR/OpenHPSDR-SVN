@@ -8,3 +8,4 @@ OZY Revision List
 07052006-2: Pin 101 of CY7C68013A needs to be tied to +3.3VD - Done 07/05/2006
 07052006-3: Add HPSDR and TAPR logos
 07052006-4: Add scope grounding loop
+07052006-5: Modify for possible use with EP2C8 device?
