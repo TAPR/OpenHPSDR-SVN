@@ -1,0 +1,180 @@
+
+<!--
+This XML file (created on Thu Jul 06 13:47:36 2006) contains limited information
+from the compilation of logic designs using Quartus II software (BUT NOT THE
+LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
+operation of the "TalkBack" feature.  To enable/disable this feature, run
+qtb_install.exe located in your quartus/bin folder.  For more information, go
+to license.txt.
+-->
+<talkback>
+<ver>6.0</ver>
+<schema>quartus_version_6.0_build_178.xsd</schema>
+<license>
+	<host_id>00a0cc694f79</host_id>
+	<nic_id>00123f7b788f</nic_id>
+	<cdrive_id>dc2f6d33</cdrive_id>
+</license>
+<tool>
+	<name>Quartus II</name>
+	<version>6.0</version>
+	<build>Build 178</build>
+	<binary_type>32</binary_type>
+	<module>quartus_asm</module>
+	<edition>Full Version</edition>
+	<eval>Licensed</eval>
+	<compilation_end_time>Thu Jul 06 13:47:36 2006</compilation_end_time>
+</tool>
+<machine>
+	<os>Windows XP</os>
+	<cpu>
+		<proc_count>2</proc_count>
+		<cpu_freq units="MHz">3391</cpu_freq>
+	</cpu>
+	<ram units="MB">1023</ram>
+</machine>
+<project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Basic/basic</project>
+<revision>basic</revision>
+<compilation_summary>
+	<flow_status>Successful - Thu Jul 06 13:47:36 2006</flow_status>
+	<quartus_ii_version>6.0 Build 178 04/27/2006 SJ Web Edition</quartus_ii_version>
+	<revision_name>basic</revision_name>
+	<top_level_entity_name>basic</top_level_entity_name>
+	<family>Cyclone II</family>
+	<device>EP2C5Q208C8</device>
+	<timing_models>Final</timing_models>
+	<met_timing_requirements>N/A</met_timing_requirements>
+	<total_logic_elements>0 / 4,608 ( 0 % )</total_logic_elements>
+	<total_registers>0</total_registers>
+	<total_pins>4 / 142 ( 3 % )</total_pins>
+	<total_virtual_pins>0</total_virtual_pins>
+	<total_memory_bits>0 / 119,808 ( 0 % )</total_memory_bits>
+	<embedded_multiplier_9_bit_elements>0 / 26 ( 0 % )</embedded_multiplier_9_bit_elements>
+	<total_plls>0 / 2 ( 0 % )</total_plls>
+</compilation_summary>
+<mep_data>
+	<command_line>quartus_asm --read_settings_files=off --write_settings_files=off basic -c basic</command_line>
+</mep_data>
+<software_data>
+	<smart_recompile>off</smart_recompile>
+</software_data>
+<messages>
+	<info>Info: Quartus II Assembler was successful. 0 errors, 0 warnings</info>
+	<info>Info: Elapsed time: 00:00:03</info>
+	<info>Info: Processing ended: Thu Jul 06 13:47:36 2006</info>
+	<info>Info: Assembler is generating device programming files</info>
+	<info>Info: Writing out detailed assembly data for power analysis</info>
+</messages>
+<assembler_settings>
+	<row>
+		<option>Generate Raw Binary File (.rbf) For Target Device</option>
+		<setting>On</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Use smart compilation</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate Serial Vector Format File (.svf) for Target Device</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate a JEDEC STAPL Format File (.jam) for Target Device</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate an uncompressed Jam STAPL Byte Code 2.0 File (.jbc) for Target Device</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate a compressed Jam STAPL Byte Code 2.0 File (.jbc) for Target Device</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Generate compressed bitstreams</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Compression mode</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Clock source for configuration device</option>
+		<setting>Internal</setting>
+		<default_value>Internal</default_value>
+	</row>
+	<row>
+		<option>Clock frequency of the configuration device</option>
+		<setting units="MHz">10</setting>
+		<default_value units="MHz">10</default_value>
+	</row>
+	<row>
+		<option>Divide clock frequency by</option>
+		<setting>1</setting>
+		<default_value>1</default_value>
+	</row>
+	<row>
+		<option>JTAG user code for target device</option>
+		<setting>Ffffffff</setting>
+		<default_value>Ffffffff</default_value>
+	</row>
+	<row>
+		<option>Configuration device</option>
+		<setting>Auto</setting>
+		<default_value>Auto</default_value>
+	</row>
+	<row>
+		<option>JTAG user code for configuration device</option>
+		<setting>Ffffffff</setting>
+		<default_value>Ffffffff</default_value>
+	</row>
+	<row>
+		<option>Configuration device auto user code</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate Tabular Text File (.ttf) For Target Device</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate Hexadecimal (Intel-Format) Output File (.hexout) for Target Device</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Hexadecimal Output File start address</option>
+		<setting>0</setting>
+		<default_value>0</default_value>
+	</row>
+	<row>
+		<option>Hexadecimal Output File count direction</option>
+		<setting>Up</setting>
+		<default_value>Up</default_value>
+	</row>
+	<row>
+		<option>Release clears before tri-states</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Auto-restart configuration after error</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Maintain Compatibility with All Cyclone II M4K Versions</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+</assembler_settings>
+</talkback>

@@ -1,0 +1,765 @@
+
+<!--
+This XML file (created on Thu Jul 06 14:18:26 2006) contains limited information
+from the compilation of logic designs using Quartus II software (BUT NOT THE
+LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
+operation of the "TalkBack" feature.  To enable/disable this feature, run
+qtb_install.exe located in your quartus/bin folder.  For more information, go
+to license.txt.
+-->
+<talkback>
+<ver>6.0</ver>
+<schema>quartus_version_6.0_build_178.xsd</schema>
+<license>
+	<host_id>00a0cc694f79</host_id>
+	<nic_id>00123f7b788f</nic_id>
+	<cdrive_id>dc2f6d33</cdrive_id>
+</license>
+<tool>
+	<name>Quartus II</name>
+	<version>6.0</version>
+	<build>Build 178</build>
+	<binary_type>32</binary_type>
+	<module>quartus_fit</module>
+	<edition>Full Version</edition>
+	<eval>Licensed</eval>
+	<compilation_end_time>Thu Jul 06 14:18:26 2006</compilation_end_time>
+</tool>
+<machine>
+	<os>Windows XP</os>
+	<cpu>
+		<proc_count>2</proc_count>
+		<cpu_freq units="MHz">3391</cpu_freq>
+	</cpu>
+	<ram units="MB">1023</ram>
+</machine>
+<project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity</project>
+<revision>blinkity</revision>
+<compilation_summary>
+	<flow_status>Successful - Thu Jul 06 14:18:26 2006</flow_status>
+	<quartus_ii_version>6.0 Build 178 04/27/2006 SJ Web Edition</quartus_ii_version>
+	<revision_name>blinkity</revision_name>
+	<top_level_entity_name>blinkity</top_level_entity_name>
+	<family>Cyclone II</family>
+	<device>EP2C5Q208C8</device>
+	<timing_models>Final</timing_models>
+	<met_timing_requirements>N/A</met_timing_requirements>
+	<total_logic_elements>30 / 4,608 ( &lt; 1 % )</total_logic_elements>
+	<total_registers>30</total_registers>
+	<total_pins>9 / 142 ( 6 % )</total_pins>
+	<total_virtual_pins>0</total_virtual_pins>
+	<total_memory_bits>0 / 119,808 ( 0 % )</total_memory_bits>
+	<embedded_multiplier_9_bit_elements>0 / 26 ( 0 % )</embedded_multiplier_9_bit_elements>
+	<total_plls>0 / 2 ( 0 % )</total_plls>
+</compilation_summary>
+<resource_usage_summary>
+	<rsc name="Total logic elements" util="1" max=" 4608 " type="int">30 </rsc>
+	<rsc name="-- Combinational with no register" type="int">0</rsc>
+	<rsc name="-- Register only" type="int">0</rsc>
+	<rsc name="-- Combinational with a register" type="int">30</rsc>
+	<rsc name="Logic element usage by number of LUT inputs" type="text"></rsc>
+	<rsc name="-- 4 input functions" type="int">0</rsc>
+	<rsc name="-- 3 input functions" type="int">1</rsc>
+	<rsc name="-- &lt;=2 input functions" type="int">29</rsc>
+	<rsc name="-- Register only" type="int">0</rsc>
+	<rsc name="Logic elements by mode" type="text"></rsc>
+	<rsc name="-- normal mode" type="int">2</rsc>
+	<rsc name="-- arithmetic mode" type="int">28</rsc>
+	<rsc name="Total registers" util="1" max=" 4608 " type="int">30 </rsc>
+	<rsc name="Total LABs" util="1" max=" 288 " type="int">2 </rsc>
+	<rsc name="User inserted logic elements" type="int">0</rsc>
+	<rsc name="Virtual pins" type="int">0</rsc>
+	<rsc name="I/O pins" util="6" max=" 142 " type="int">9 </rsc>
+	<rsc name="-- Clock pins" util="25" max=" 4 " type="int">1 </rsc>
+	<rsc name="Global signals" type="int">1</rsc>
+	<rsc name="M4Ks" util="0" max=" 26 " type="int">0 </rsc>
+	<rsc name="Total memory bits" util="0" max=" 119808 " type="int">0 </rsc>
+	<rsc name="Total RAM block bits" util="0" max=" 119808 " type="int">0 </rsc>
+	<rsc name="Embedded Multiplier 9-bit elements" util="0" max=" 26 " type="int">0 </rsc>
+	<rsc name="PLLs" util="0" max=" 2 " type="int">0 </rsc>
+	<rsc name="Global clocks" util="13" max=" 8 " type="int">1 </rsc>
+	<rsc name="Maximum fan-out node" type="text">fx2_clk~clkctrl</rsc>
+	<rsc name="Maximum fan-out" type="int">30</rsc>
+	<rsc name="Highest non-global fan-out signal" type="text">COUNTER[22]</rsc>
+	<rsc name="Highest non-global fan-out" type="int">2</rsc>
+	<rsc name="Total fan-out" type="int">128</rsc>
+	<rsc name="Average fan-out" type="float">1.75</rsc>
+</resource_usage_summary>
+<control_signals>
+	<row>
+		<name>fx2_clk</name>
+		<location>PIN_23</location>
+		<fan_out>30</fan_out>
+		<usage>Clock</usage>
+		<global>yes</global>
+		<global_resource_used>Global clock</global_resource_used>
+		<global_line_name>GCLK2</global_line_name>
+	</row>
+</control_signals>
+<non_global_high_fan_out_signals>
+	<row>
+		<name>COUNTER[22]</name>
+		<fan_out>2</fan_out>
+	</row>
+	<row>
+		<name>COUNTER[23]</name>
+		<fan_out>2</fan_out>
+	</row>
+	<row>
+		<name>COUNTER[24]</name>
+		<fan_out>2</fan_out>
+	</row>
+	<row>
+		<name>COUNTER[25]</name>
+		<fan_out>2</fan_out>
+	</row>
+	<row>
+		<name>COUNTER[26]</name>
+		<fan_out>2</fan_out>
+	</row>
+	<row>
+		<name>COUNTER[27]</name>
+		<fan_out>2</fan_out>
+	</row>
+	<row>
+		<name>COUNTER[28]</name>
+		<fan_out>2</fan_out>
+	</row>
+	<row>
+		<name>COUNTER[29]</name>
+		<fan_out>2</fan_out>
+	</row>
+	<row>
+		<name>COUNTER[21]</name>
+		<fan_out>1</fan_out>
+	</row>
+	<row>
+		<name>COUNTER[20]</name>
+		<fan_out>1</fan_out>
+	</row>
+</non_global_high_fan_out_signals>
+<interconnect_usage_summary>
+	<rsc name="Local interconnects" util="1" max=" 4608 " type="int">25 </rsc>
+	<rsc name="Block interconnects" util="1" max=" 15666 " type="int">13 </rsc>
+	<rsc name="R4 interconnects" util="1" max=" 13328 " type="int">7 </rsc>
+	<rsc name="R24 interconnects" util="0" max=" 652 " type="int">0 </rsc>
+	<rsc name="C4 interconnects" util="1" max=" 11424 " type="int">8 </rsc>
+	<rsc name="C16 interconnects" util="0" max=" 812 " type="int">0 </rsc>
+	<rsc name="Global clocks" util="13" max=" 8 " type="int">1 </rsc>
+	<rsc name="Direct links" util="1" max=" 15666 " type="int">5 </rsc>
+</interconnect_usage_summary>
+<mep_data>
+	<command_line>quartus_fit --read_settings_files=off --write_settings_files=off blinkity -c blinkity</command_line>
+</mep_data>
+<software_data>
+	<smart_recompile>off</smart_recompile>
+</software_data>
+<messages>
+	<warning>Warning: Found 8 output pins without output pin load capacitance assignment</warning>
+	<info>Info: Generated suppressed messages file C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity.fit.smsg</info>
+	<info>Info: Quartus II Fitter was successful. 0 errors, 1 warning</info>
+	<info>Info: Elapsed time: 00:00:03</info>
+	<info>Info: Processing ended: Thu Jul 06 14:18:26 2006</info>
+	<info>Info: Delay annotation completed successfully</info>
+</messages>
+<fitter_settings>
+	<row>
+		<option>Device</option>
+		<setting>EP2C5Q208C8</setting>
+	</row>
+	<row>
+		<option>Use smart compilation</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Router Timing Optimization Level</option>
+		<setting>Normal</setting>
+		<default_value>Normal</default_value>
+	</row>
+	<row>
+		<option>Placement Effort Multiplier</option>
+		<setting>1.0</setting>
+		<default_value>1.0</default_value>
+	</row>
+	<row>
+		<option>Router Effort Multiplier</option>
+		<setting>1.0</setting>
+		<default_value>1.0</default_value>
+	</row>
+	<row>
+		<option>Optimize Hold Timing</option>
+		<setting>IO Paths and Minimum TPD Paths</setting>
+		<default_value>IO Paths and Minimum TPD Paths</default_value>
+	</row>
+	<row>
+		<option>Optimize Fast-Corner Timing</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>PowerPlay Power Optimization</option>
+		<setting>Normal compilation</setting>
+		<default_value>Normal compilation</default_value>
+	</row>
+	<row>
+		<option>Optimize Timing</option>
+		<setting>Normal compilation</setting>
+		<default_value>Normal compilation</default_value>
+	</row>
+	<row>
+		<option>Optimize IOC Register Placement for Timing</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Limit to One Fitting Attempt</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Final Placement Optimizations</option>
+		<setting>Automatically</setting>
+		<default_value>Automatically</default_value>
+	</row>
+	<row>
+		<option>Fitter Aggressive Routability Optimizations</option>
+		<setting>Automatically</setting>
+		<default_value>Automatically</default_value>
+	</row>
+	<row>
+		<option>Fitter Initial Placement Seed</option>
+		<setting>1</setting>
+		<default_value>1</default_value>
+	</row>
+	<row>
+		<option>PCI I/O</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Weak Pull-Up Resistor</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Enable Bus-Hold Circuitry</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Auto Global Memory Control Signals</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Auto Packed Registers -- Stratix II/Cyclone II</option>
+		<setting>Auto</setting>
+		<default_value>Auto</default_value>
+	</row>
+	<row>
+		<option>Auto Delay Chains</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Merge PLLs</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Ignore PLL Mode When Merging PLLs</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Fitter Effort</option>
+		<setting>Auto Fit</setting>
+		<default_value>Auto Fit</default_value>
+	</row>
+	<row>
+		<option>Physical Synthesis Effort Level</option>
+		<setting>Normal</setting>
+		<default_value>Normal</default_value>
+	</row>
+	<row>
+		<option>Auto Global Clock</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Global Register Control Signals</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Always Enable Input Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+</fitter_settings>
+<fitter_device_options>
+	<row>
+		<option>Enable user-supplied start-up clock (CLKUSR)</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Enable device-wide reset (DEV_CLRn)</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Enable device-wide output enable (DEV_OE)</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Enable INIT_DONE output</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Configuration scheme</option>
+		<setting>Active Serial</setting>
+	</row>
+	<row>
+		<option>Error detection CRC</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Reserve nCEO pin after configuration</option>
+		<setting>As output driving ground</setting>
+	</row>
+	<row>
+		<option>Reserve all unused pins</option>
+		<setting>As input tri-stated</setting>
+	</row>
+	<row>
+		<option>Base pin-out file on sameframe device</option>
+		<setting>Off</setting>
+	</row>
+</fitter_device_options>
+<input_pins>
+	<row>
+		<name>fx2_clk</name>
+		<pin__>23</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>6</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+</input_pins>
+<output_pins>
+	<row>
+		<name>Pin67</name>
+		<pin__>67</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>7</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>2</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>Pin68</name>
+		<pin__>68</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>7</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>Pin69</name>
+		<pin__>69</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>7</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>Pin70</name>
+		<pin__>70</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>9</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>Pin72</name>
+		<pin__>72</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>9</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>Pin74</name>
+		<pin__>74</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>12</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>Pin75</name>
+		<pin__>75</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>12</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>Pin76</name>
+		<pin__>76</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>14</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+</output_pins>
+<i_o_bank_usage>
+	<row>
+		<i_o_bank>1</i_o_bank>
+		<usage>3 / 34 ( 9 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+	<row>
+		<i_o_bank>2</i_o_bank>
+		<usage>0 / 35 ( 0 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+	<row>
+		<i_o_bank>3</i_o_bank>
+		<usage>1 / 37 ( 3 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+	<row>
+		<i_o_bank>4</i_o_bank>
+		<usage>8 / 36 ( 22 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+</i_o_bank_usage>
+<advanced_data___general>
+	<row>
+		<name>Status Code</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Desired User Slack</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Fit Attempts</name>
+		<value>1</value>
+	</row>
+</advanced_data___general>
+<advanced_data___placement_preparation>
+	<row>
+		<name>Auto Fit Point 1 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Mid Wire Use - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Mid Slack - Fit Attempt 1</name>
+		<value>-7186</value>
+	</row>
+	<row>
+		<name>Internal Atom Count - Fit Attempt 1</name>
+		<value>61</value>
+	</row>
+	<row>
+		<name>LE/ALM Count - Fit Attempt 1</name>
+		<value>31</value>
+	</row>
+	<row>
+		<name>LAB Count - Fit Attempt 1</name>
+		<value>3</value>
+	</row>
+	<row>
+		<name>Outputs per Lab - Fit Attempt 1</name>
+		<value>2.667</value>
+	</row>
+	<row>
+		<name>Inputs per LAB - Fit Attempt 1</name>
+		<value>0.000</value>
+	</row>
+	<row>
+		<name>Global Inputs per LAB - Fit Attempt 1</name>
+		<value>0.667</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;non-global clock + sync load&apos; - Fit Attempt 1</name>
+		<value>0:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;non-global controls&apos; - Fit Attempt 1</name>
+		<value>0:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;non-global + aclr&apos; - Fit Attempt 1</name>
+		<value>0:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;global non-clock non-aclr&apos; - Fit Attempt 1</name>
+		<value>0:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;global controls&apos; - Fit Attempt 1</name>
+		<value>0:1;1:2</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;deterministic LABSMUXA/LABXMUXB&apos; - Fit Attempt 1</name>
+		<value>0:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;deterministic LABSMUXC/LABXMUXD&apos; - Fit Attempt 1</name>
+		<value>0:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;clock / ce pair constraint&apos; - Fit Attempt 1</name>
+		<value>0:1;1:2</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;aclr constraint&apos; - Fit Attempt 1</name>
+		<value>0:1;1:2</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;true sload_sclear pair&apos; - Fit Attempt 1</name>
+		<value>0:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;constant sload_sclear pair&apos; - Fit Attempt 1</name>
+		<value>0:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;has placement constraint&apos; - Fit Attempt 1</name>
+		<value>0:1;1:2</value>
+	</row>
+	<row>
+		<name>LEs in Chains - Fit Attempt 1</name>
+		<value>29</value>
+	</row>
+	<row>
+		<name>LEs in Long Chains - Fit Attempt 1</name>
+		<value>29</value>
+	</row>
+	<row>
+		<name>LABs with Chains - Fit Attempt 1</name>
+		<value>2</value>
+	</row>
+	<row>
+		<name>LABs with Multiple Chains - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Time - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+</advanced_data___placement_preparation>
+<advanced_data___placement>
+	<row>
+		<name>Auto Fit Point 2 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Early Wire Use - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Early Slack - Fit Attempt 1</name>
+		<value>-4827</value>
+	</row>
+	<row>
+		<name>Auto Fit Point 3 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Auto Fit Point 4 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Mid Wire Use - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Mid Slack - Fit Attempt 1</name>
+		<value>-4827</value>
+	</row>
+	<row>
+		<name>Late Wire Use - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Late Slack - Fit Attempt 1</name>
+		<value>-4827</value>
+	</row>
+	<row>
+		<name>Auto Fit Point 5 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Time - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+</advanced_data___placement>
+<advanced_data___routing>
+	<row>
+		<name>Early Slack - Fit Attempt 1</name>
+		<value>-3635</value>
+	</row>
+	<row>
+		<name>Mid Slack - Fit Attempt 1</name>
+		<value>-3974</value>
+	</row>
+	<row>
+		<name>Late Slack - Fit Attempt 1</name>
+		<value>-3974</value>
+	</row>
+	<row>
+		<name>Late Slack - Fit Attempt 1</name>
+		<value>-3974</value>
+	</row>
+	<row>
+		<name>Late Wire Use - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Time - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
+		<value>0.016</value>
+	</row>
+</advanced_data___routing>
+<files>
+	<top>C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity.v</top>
+	<extensions>
+		<ext ext_name="v">1</ext>
+	</extensions>
+	<sub_files>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity.v</sub_file>
+	</sub_files>
+</files>
+<architecture>
+	<family>Cyclone II</family>
+	<auto_device>OFF</auto_device>
+	<device>EP2C5Q208C8</device>
+</architecture>
+<pkg_io>
+	<pin_std count="12">LVTTL</pin_std>
+</pkg_io>
+</talkback>

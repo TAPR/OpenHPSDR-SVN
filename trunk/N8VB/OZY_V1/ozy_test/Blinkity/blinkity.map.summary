@@ -1,0 +1,12 @@
+Analysis & Synthesis Status : Successful - Thu Jul 06 14:18:21 2006
+Quartus II Version : 6.0 Build 178 04/27/2006 SJ Web Edition
+Revision Name : blinkity
+Top-level Entity Name : blinkity
+Family : Cyclone II
+Total logic elements : 30
+Total registers : 30
+Total pins : 9
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
