@@ -1,0 +1,386 @@
+Timing Analyzer report for blinkity
+Thu Jul 06 14:18:31 2006
+Version 6.0 Build 178 04/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Clock Setup: 'fx2_clk'
+  6. tco
+  7. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                    ;
++------------------------------+-------+---------------+----------------------------------+-------------+-------------+------------+----------+--------------+
+; Type                         ; Slack ; Required Time ; Actual Time                      ; From        ; To          ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+-------+---------------+----------------------------------+-------------+-------------+------------+----------+--------------+
+; Worst-case tco               ; N/A   ; None          ; 8.060 ns                         ; COUNTER[29] ; Pin76       ; fx2_clk    ; --       ; 0            ;
+; Clock Setup: 'fx2_clk'       ; N/A   ; None          ; 205.42 MHz ( period = 4.868 ns ) ; COUNTER[0]  ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; 0            ;
+; Total number of failed paths ;       ;               ;                                  ;             ;             ;            ;          ; 0            ;
++------------------------------+-------+---------------+----------------------------------+-------------+-------------+------------+----------+--------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                ; Setting            ; From ; To ; Entity Name ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                           ; EP2C5Q208C8        ;      ;    ;             ;
+; Timing Models                                         ; Final              ;      ;    ;             ;
+; Number of source nodes to report per destination node ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                 ; 10                 ;      ;    ;             ;
+; Number of paths to report                             ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                          ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                            ; Off                ;      ;    ;             ;
+; Default hold multicycle                               ; Same As Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains             ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                        ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                      ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                 ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements               ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                      ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                  ; Off                ;      ;    ;             ;
+; Use TimeQuest Timing Analyzer                         ; Off                ;      ;    ;             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                             ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type     ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset ; Phase offset ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; fx2_clk         ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'fx2_clk'                                                                                                                                                                                                                ;
++-----------------------------------------+-----------------------------------------------------+-------------+-------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack                                   ; Actual fmax (period)                                ; From        ; To          ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-----------------------------------------+-----------------------------------------------------+-------------+-------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A                                     ; 205.42 MHz ( period = 4.868 ns )                    ; COUNTER[0]  ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.607 ns                ;
+; N/A                                     ; 209.12 MHz ( period = 4.782 ns )                    ; COUNTER[0]  ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.521 ns                ;
+; N/A                                     ; 212.95 MHz ( period = 4.696 ns )                    ; COUNTER[0]  ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.435 ns                ;
+; N/A                                     ; 216.92 MHz ( period = 4.610 ns )                    ; COUNTER[0]  ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.349 ns                ;
+; N/A                                     ; 219.30 MHz ( period = 4.560 ns )                    ; COUNTER[4]  ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.299 ns                ;
+; N/A                                     ; 220.80 MHz ( period = 4.529 ns )                    ; COUNTER[1]  ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.268 ns                ;
+; N/A                                     ; 221.04 MHz ( period = 4.524 ns )                    ; COUNTER[0]  ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.263 ns                ;
+; N/A                                     ; 223.16 MHz ( period = 4.481 ns )                    ; COUNTER[2]  ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.220 ns                ;
+; N/A                                     ; 223.31 MHz ( period = 4.478 ns )                    ; COUNTER[5]  ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.217 ns                ;
+; N/A                                     ; 223.51 MHz ( period = 4.474 ns )                    ; COUNTER[4]  ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.213 ns                ;
+; N/A                                     ; 225.07 MHz ( period = 4.443 ns )                    ; COUNTER[1]  ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.182 ns                ;
+; N/A                                     ; 225.33 MHz ( period = 4.438 ns )                    ; COUNTER[0]  ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.177 ns                ;
+; N/A                                     ; 227.53 MHz ( period = 4.395 ns )                    ; COUNTER[2]  ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.134 ns                ;
+; N/A                                     ; 227.69 MHz ( period = 4.392 ns )                    ; COUNTER[5]  ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.131 ns                ;
+; N/A                                     ; 227.89 MHz ( period = 4.388 ns )                    ; COUNTER[4]  ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.127 ns                ;
+; N/A                                     ; 229.46 MHz ( period = 4.358 ns )                    ; COUNTER[3]  ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.097 ns                ;
+; N/A                                     ; 229.52 MHz ( period = 4.357 ns )                    ; COUNTER[1]  ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.096 ns                ;
+; N/A                                     ; 229.78 MHz ( period = 4.352 ns )                    ; COUNTER[0]  ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.091 ns                ;
+; N/A                                     ; 232.07 MHz ( period = 4.309 ns )                    ; COUNTER[2]  ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.048 ns                ;
+; N/A                                     ; 232.23 MHz ( period = 4.306 ns )                    ; COUNTER[5]  ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.045 ns                ;
+; N/A                                     ; 232.45 MHz ( period = 4.302 ns )                    ; COUNTER[4]  ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.041 ns                ;
+; N/A                                     ; 234.08 MHz ( period = 4.272 ns )                    ; COUNTER[3]  ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.011 ns                ;
+; N/A                                     ; 234.14 MHz ( period = 4.271 ns )                    ; COUNTER[1]  ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 4.010 ns                ;
+; N/A                                     ; 236.80 MHz ( period = 4.223 ns )                    ; COUNTER[2]  ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.962 ns                ;
+; N/A                                     ; 236.97 MHz ( period = 4.220 ns )                    ; COUNTER[5]  ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.959 ns                ;
+; N/A                                     ; 237.19 MHz ( period = 4.216 ns )                    ; COUNTER[4]  ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.955 ns                ;
+; N/A                                     ; 238.89 MHz ( period = 4.186 ns )                    ; COUNTER[3]  ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.925 ns                ;
+; N/A                                     ; 238.95 MHz ( period = 4.185 ns )                    ; COUNTER[1]  ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.924 ns                ;
+; N/A                                     ; 240.27 MHz ( period = 4.162 ns )                    ; COUNTER[0]  ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.901 ns                ;
+; N/A                                     ; 241.72 MHz ( period = 4.137 ns )                    ; COUNTER[2]  ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.876 ns                ;
+; N/A                                     ; 241.90 MHz ( period = 4.134 ns )                    ; COUNTER[5]  ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.873 ns                ;
+; N/A                                     ; 242.13 MHz ( period = 4.130 ns )                    ; COUNTER[4]  ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.869 ns                ;
+; N/A                                     ; 243.55 MHz ( period = 4.106 ns )                    ; COUNTER[6]  ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.845 ns                ;
+; N/A                                     ; 243.90 MHz ( period = 4.100 ns )                    ; COUNTER[3]  ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.839 ns                ;
+; N/A                                     ; 243.96 MHz ( period = 4.099 ns )                    ; COUNTER[1]  ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.838 ns                ;
+; N/A                                     ; 245.34 MHz ( period = 4.076 ns )                    ; COUNTER[0]  ; COUNTER[21] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.815 ns                ;
+; N/A                                     ; 246.85 MHz ( period = 4.051 ns )                    ; COUNTER[2]  ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.790 ns                ;
+; N/A                                     ; 247.04 MHz ( period = 4.048 ns )                    ; COUNTER[5]  ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.787 ns                ;
+; N/A                                     ; 247.28 MHz ( period = 4.044 ns )                    ; COUNTER[4]  ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.783 ns                ;
+; N/A                                     ; 248.26 MHz ( period = 4.028 ns )                    ; COUNTER[9]  ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.767 ns                ;
+; N/A                                     ; 248.76 MHz ( period = 4.020 ns )                    ; COUNTER[6]  ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.759 ns                ;
+; N/A                                     ; 249.13 MHz ( period = 4.014 ns )                    ; COUNTER[3]  ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.753 ns                ;
+; N/A                                     ; 249.19 MHz ( period = 4.013 ns )                    ; COUNTER[1]  ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.752 ns                ;
+; N/A                                     ; 250.63 MHz ( period = 3.990 ns )                    ; COUNTER[0]  ; COUNTER[20] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.729 ns                ;
+; N/A                                     ; 252.21 MHz ( period = 3.965 ns )                    ; COUNTER[2]  ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.704 ns                ;
+; N/A                                     ; 252.40 MHz ( period = 3.962 ns )                    ; COUNTER[5]  ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.701 ns                ;
+; N/A                                     ; 253.42 MHz ( period = 3.946 ns )                    ; COUNTER[7]  ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.685 ns                ;
+; N/A                                     ; 253.68 MHz ( period = 3.942 ns )                    ; COUNTER[9]  ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.681 ns                ;
+; N/A                                     ; 254.19 MHz ( period = 3.934 ns )                    ; COUNTER[6]  ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.673 ns                ;
+; N/A                                     ; 254.58 MHz ( period = 3.928 ns )                    ; COUNTER[3]  ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.667 ns                ;
+; N/A                                     ; 256.15 MHz ( period = 3.904 ns )                    ; COUNTER[0]  ; COUNTER[19] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.643 ns                ;
+; N/A                                     ; 259.07 MHz ( period = 3.860 ns )                    ; COUNTER[7]  ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.599 ns                ;
+; N/A                                     ; 259.34 MHz ( period = 3.856 ns )                    ; COUNTER[9]  ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.595 ns                ;
+; N/A                                     ; 259.47 MHz ( period = 3.854 ns )                    ; COUNTER[4]  ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.593 ns                ;
+; N/A                                     ; 259.47 MHz ( period = 3.854 ns )                    ; COUNTER[11] ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.593 ns                ;
+; N/A                                     ; 259.88 MHz ( period = 3.848 ns )                    ; COUNTER[6]  ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.587 ns                ;
+; N/A                                     ; 260.28 MHz ( period = 3.842 ns )                    ; COUNTER[3]  ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.581 ns                ;
+; N/A                                     ; 261.57 MHz ( period = 3.823 ns )                    ; COUNTER[1]  ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.562 ns                ;
+; N/A                                     ; 261.85 MHz ( period = 3.819 ns )                    ; COUNTER[8]  ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.558 ns                ;
+; N/A                                     ; 261.92 MHz ( period = 3.818 ns )                    ; COUNTER[0]  ; COUNTER[18] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.557 ns                ;
+; N/A                                     ; 264.90 MHz ( period = 3.775 ns )                    ; COUNTER[2]  ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.514 ns                ;
+; N/A                                     ; 264.97 MHz ( period = 3.774 ns )                    ; COUNTER[7]  ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.513 ns                ;
+; N/A                                     ; 265.11 MHz ( period = 3.772 ns )                    ; COUNTER[5]  ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.511 ns                ;
+; N/A                                     ; 265.25 MHz ( period = 3.770 ns )                    ; COUNTER[9]  ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.509 ns                ;
+; N/A                                     ; 265.39 MHz ( period = 3.768 ns )                    ; COUNTER[4]  ; COUNTER[21] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.507 ns                ;
+; N/A                                     ; 265.39 MHz ( period = 3.768 ns )                    ; COUNTER[11] ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.507 ns                ;
+; N/A                                     ; 265.82 MHz ( period = 3.762 ns )                    ; COUNTER[6]  ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.501 ns                ;
+; N/A                                     ; 267.59 MHz ( period = 3.737 ns )                    ; COUNTER[1]  ; COUNTER[21] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.476 ns                ;
+; N/A                                     ; 267.88 MHz ( period = 3.733 ns )                    ; COUNTER[8]  ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.472 ns                ;
+; N/A                                     ; 267.95 MHz ( period = 3.732 ns )                    ; COUNTER[0]  ; COUNTER[17] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.471 ns                ;
+; N/A                                     ; 271.08 MHz ( period = 3.689 ns )                    ; COUNTER[2]  ; COUNTER[21] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.428 ns                ;
+; N/A                                     ; 271.15 MHz ( period = 3.688 ns )                    ; COUNTER[7]  ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.427 ns                ;
+; N/A                                     ; 271.30 MHz ( period = 3.686 ns )                    ; COUNTER[5]  ; COUNTER[21] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.425 ns                ;
+; N/A                                     ; 271.44 MHz ( period = 3.684 ns )                    ; COUNTER[9]  ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.423 ns                ;
+; N/A                                     ; 271.59 MHz ( period = 3.682 ns )                    ; COUNTER[4]  ; COUNTER[20] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.421 ns                ;
+; N/A                                     ; 271.59 MHz ( period = 3.682 ns )                    ; COUNTER[11] ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.421 ns                ;
+; N/A                                     ; 272.03 MHz ( period = 3.676 ns )                    ; COUNTER[6]  ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.415 ns                ;
+; N/A                                     ; 273.82 MHz ( period = 3.652 ns )                    ; COUNTER[3]  ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.391 ns                ;
+; N/A                                     ; 273.90 MHz ( period = 3.651 ns )                    ; COUNTER[1]  ; COUNTER[20] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.390 ns                ;
+; N/A                                     ; 274.20 MHz ( period = 3.647 ns )                    ; COUNTER[8]  ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.386 ns                ;
+; N/A                                     ; 274.20 MHz ( period = 3.647 ns )                    ; COUNTER[10] ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.386 ns                ;
+; N/A                                     ; 274.27 MHz ( period = 3.646 ns )                    ; COUNTER[0]  ; COUNTER[16] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.385 ns                ;
+; N/A                                     ; 277.55 MHz ( period = 3.603 ns )                    ; COUNTER[2]  ; COUNTER[20] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.342 ns                ;
+; N/A                                     ; 277.62 MHz ( period = 3.602 ns )                    ; COUNTER[7]  ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.341 ns                ;
+; N/A                                     ; 277.78 MHz ( period = 3.600 ns )                    ; COUNTER[5]  ; COUNTER[20] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.339 ns                ;
+; N/A                                     ; 277.93 MHz ( period = 3.598 ns )                    ; COUNTER[9]  ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.337 ns                ;
+; N/A                                     ; 278.09 MHz ( period = 3.596 ns )                    ; COUNTER[4]  ; COUNTER[19] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.335 ns                ;
+; N/A                                     ; 278.09 MHz ( period = 3.596 ns )                    ; COUNTER[11] ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.335 ns                ;
+; N/A                                     ; 278.55 MHz ( period = 3.590 ns )                    ; COUNTER[6]  ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.329 ns                ;
+; N/A                                     ; 280.43 MHz ( period = 3.566 ns )                    ; COUNTER[3]  ; COUNTER[21] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.305 ns                ;
+; N/A                                     ; 280.50 MHz ( period = 3.565 ns )                    ; COUNTER[1]  ; COUNTER[19] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.304 ns                ;
+; N/A                                     ; 280.82 MHz ( period = 3.561 ns )                    ; COUNTER[8]  ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.300 ns                ;
+; N/A                                     ; 280.82 MHz ( period = 3.561 ns )                    ; COUNTER[10] ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.300 ns                ;
+; N/A                                     ; 280.90 MHz ( period = 3.560 ns )                    ; COUNTER[0]  ; COUNTER[15] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.299 ns                ;
+; N/A                                     ; 284.33 MHz ( period = 3.517 ns )                    ; COUNTER[2]  ; COUNTER[19] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.256 ns                ;
+; N/A                                     ; 284.41 MHz ( period = 3.516 ns )                    ; COUNTER[7]  ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.255 ns                ;
+; N/A                                     ; 284.58 MHz ( period = 3.514 ns )                    ; COUNTER[5]  ; COUNTER[19] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.253 ns                ;
+; N/A                                     ; 284.74 MHz ( period = 3.512 ns )                    ; COUNTER[9]  ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.251 ns                ;
+; N/A                                     ; 284.90 MHz ( period = 3.510 ns )                    ; COUNTER[4]  ; COUNTER[18] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.249 ns                ;
+; N/A                                     ; 284.90 MHz ( period = 3.510 ns )                    ; COUNTER[11] ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.249 ns                ;
+; N/A                                     ; 287.36 MHz ( period = 3.480 ns )                    ; COUNTER[3]  ; COUNTER[20] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.219 ns                ;
+; N/A                                     ; 287.36 MHz ( period = 3.480 ns )                    ; COUNTER[12] ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.219 ns                ;
+; N/A                                     ; 287.44 MHz ( period = 3.479 ns )                    ; COUNTER[1]  ; COUNTER[18] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.218 ns                ;
+; N/A                                     ; 287.77 MHz ( period = 3.475 ns )                    ; COUNTER[8]  ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.214 ns                ;
+; N/A                                     ; 287.77 MHz ( period = 3.475 ns )                    ; COUNTER[10] ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.214 ns                ;
+; N/A                                     ; 291.46 MHz ( period = 3.431 ns )                    ; COUNTER[2]  ; COUNTER[18] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.170 ns                ;
+; N/A                                     ; 291.55 MHz ( period = 3.430 ns )                    ; COUNTER[7]  ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.169 ns                ;
+; N/A                                     ; 291.72 MHz ( period = 3.428 ns )                    ; COUNTER[5]  ; COUNTER[18] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.167 ns                ;
+; N/A                                     ; 292.06 MHz ( period = 3.424 ns )                    ; COUNTER[4]  ; COUNTER[17] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.163 ns                ;
+; N/A                                     ; 292.06 MHz ( period = 3.424 ns )                    ; COUNTER[11] ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.163 ns                ;
+; N/A                                     ; 294.12 MHz ( period = 3.400 ns )                    ; COUNTER[6]  ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.139 ns                ;
+; N/A                                     ; 294.64 MHz ( period = 3.394 ns )                    ; COUNTER[3]  ; COUNTER[19] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.133 ns                ;
+; N/A                                     ; 294.64 MHz ( period = 3.394 ns )                    ; COUNTER[12] ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.133 ns                ;
+; N/A                                     ; 294.64 MHz ( period = 3.394 ns )                    ; COUNTER[13] ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.133 ns                ;
+; N/A                                     ; 294.72 MHz ( period = 3.393 ns )                    ; COUNTER[1]  ; COUNTER[17] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.132 ns                ;
+; N/A                                     ; 295.07 MHz ( period = 3.389 ns )                    ; COUNTER[8]  ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.128 ns                ;
+; N/A                                     ; 295.07 MHz ( period = 3.389 ns )                    ; COUNTER[10] ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.128 ns                ;
+; N/A                                     ; 295.16 MHz ( period = 3.388 ns )                    ; COUNTER[0]  ; COUNTER[14] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.124 ns                ;
+; N/A                                     ; 298.95 MHz ( period = 3.345 ns )                    ; COUNTER[2]  ; COUNTER[17] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.084 ns                ;
+; N/A                                     ; 299.22 MHz ( period = 3.342 ns )                    ; COUNTER[5]  ; COUNTER[17] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.081 ns                ;
+; N/A                                     ; 299.58 MHz ( period = 3.338 ns )                    ; COUNTER[4]  ; COUNTER[16] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.077 ns                ;
+; N/A                                     ; 299.58 MHz ( period = 3.338 ns )                    ; COUNTER[11] ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.077 ns                ;
+; N/A                                     ; 300.48 MHz ( period = 3.328 ns )                    ; COUNTER[14] ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.067 ns                ;
+; N/A                                     ; 301.02 MHz ( period = 3.322 ns )                    ; COUNTER[9]  ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.061 ns                ;
+; N/A                                     ; 301.75 MHz ( period = 3.314 ns )                    ; COUNTER[6]  ; COUNTER[21] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.053 ns                ;
+; N/A                                     ; 302.30 MHz ( period = 3.308 ns )                    ; COUNTER[3]  ; COUNTER[18] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.047 ns                ;
+; N/A                                     ; 302.30 MHz ( period = 3.308 ns )                    ; COUNTER[12] ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.047 ns                ;
+; N/A                                     ; 302.30 MHz ( period = 3.308 ns )                    ; COUNTER[13] ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.047 ns                ;
+; N/A                                     ; 302.39 MHz ( period = 3.307 ns )                    ; COUNTER[1]  ; COUNTER[16] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.046 ns                ;
+; N/A                                     ; 302.76 MHz ( period = 3.303 ns )                    ; COUNTER[8]  ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.042 ns                ;
+; N/A                                     ; 302.76 MHz ( period = 3.303 ns )                    ; COUNTER[10] ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.042 ns                ;
+; N/A                                     ; 302.85 MHz ( period = 3.302 ns )                    ; COUNTER[0]  ; COUNTER[13] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 3.038 ns                ;
+; N/A                                     ; 306.84 MHz ( period = 3.259 ns )                    ; COUNTER[2]  ; COUNTER[16] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.998 ns                ;
+; N/A                                     ; 307.13 MHz ( period = 3.256 ns )                    ; COUNTER[5]  ; COUNTER[16] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.995 ns                ;
+; N/A                                     ; 307.50 MHz ( period = 3.252 ns )                    ; COUNTER[4]  ; COUNTER[15] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.991 ns                ;
+; N/A                                     ; 308.45 MHz ( period = 3.242 ns )                    ; COUNTER[14] ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.981 ns                ;
+; N/A                                     ; 308.64 MHz ( period = 3.240 ns )                    ; COUNTER[7]  ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.979 ns                ;
+; N/A                                     ; 309.02 MHz ( period = 3.236 ns )                    ; COUNTER[9]  ; COUNTER[21] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.975 ns                ;
+; N/A                                     ; 309.79 MHz ( period = 3.228 ns )                    ; COUNTER[6]  ; COUNTER[20] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.967 ns                ;
+; N/A                                     ; 310.37 MHz ( period = 3.222 ns )                    ; COUNTER[3]  ; COUNTER[17] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.961 ns                ;
+; N/A                                     ; 310.37 MHz ( period = 3.222 ns )                    ; COUNTER[12] ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.961 ns                ;
+; N/A                                     ; 310.37 MHz ( period = 3.222 ns )                    ; COUNTER[13] ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.961 ns                ;
+; N/A                                     ; 310.46 MHz ( period = 3.221 ns )                    ; COUNTER[1]  ; COUNTER[15] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.960 ns                ;
+; N/A                                     ; 310.85 MHz ( period = 3.217 ns )                    ; COUNTER[10] ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.956 ns                ;
+; N/A                                     ; 310.95 MHz ( period = 3.216 ns )                    ; COUNTER[0]  ; COUNTER[12] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.952 ns                ;
+; N/A                                     ; 315.16 MHz ( period = 3.173 ns )                    ; COUNTER[2]  ; COUNTER[15] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.912 ns                ;
+; N/A                                     ; 315.46 MHz ( period = 3.170 ns )                    ; COUNTER[5]  ; COUNTER[15] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.909 ns                ;
+; N/A                                     ; 316.86 MHz ( period = 3.156 ns )                    ; COUNTER[14] ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.895 ns                ;
+; N/A                                     ; 317.06 MHz ( period = 3.154 ns )                    ; COUNTER[7]  ; COUNTER[21] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.893 ns                ;
+; N/A                                     ; 317.46 MHz ( period = 3.150 ns )                    ; COUNTER[9]  ; COUNTER[20] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.889 ns                ;
+; N/A                                     ; 317.66 MHz ( period = 3.148 ns )                    ; COUNTER[11] ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.887 ns                ;
+; N/A                                     ; 318.27 MHz ( period = 3.142 ns )                    ; COUNTER[6]  ; COUNTER[19] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.881 ns                ;
+; N/A                                     ; 318.88 MHz ( period = 3.136 ns )                    ; COUNTER[3]  ; COUNTER[16] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.875 ns                ;
+; N/A                                     ; 318.88 MHz ( period = 3.136 ns )                    ; COUNTER[12] ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.875 ns                ;
+; N/A                                     ; 318.88 MHz ( period = 3.136 ns )                    ; COUNTER[13] ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.875 ns                ;
+; N/A                                     ; 319.39 MHz ( period = 3.131 ns )                    ; COUNTER[10] ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.870 ns                ;
+; N/A                                     ; 319.49 MHz ( period = 3.130 ns )                    ; COUNTER[0]  ; COUNTER[11] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.866 ns                ;
+; N/A                                     ; 320.00 MHz ( period = 3.125 ns )                    ; COUNTER[15] ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.861 ns                ;
+; N/A                                     ; 321.23 MHz ( period = 3.113 ns )                    ; COUNTER[8]  ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.852 ns                ;
+; N/A                                     ; 324.68 MHz ( period = 3.080 ns )                    ; COUNTER[4]  ; COUNTER[14] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.816 ns                ;
+; N/A                                     ; 325.73 MHz ( period = 3.070 ns )                    ; COUNTER[14] ; COUNTER[26] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.809 ns                ;
+; N/A                                     ; 325.95 MHz ( period = 3.068 ns )                    ; COUNTER[7]  ; COUNTER[20] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.807 ns                ;
+; N/A                                     ; 326.37 MHz ( period = 3.064 ns )                    ; COUNTER[9]  ; COUNTER[19] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.803 ns                ;
+; N/A                                     ; 326.58 MHz ( period = 3.062 ns )                    ; COUNTER[11] ; COUNTER[21] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.801 ns                ;
+; N/A                                     ; 327.23 MHz ( period = 3.056 ns )                    ; COUNTER[6]  ; COUNTER[18] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.795 ns                ;
+; N/A                                     ; 327.87 MHz ( period = 3.050 ns )                    ; COUNTER[3]  ; COUNTER[15] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.789 ns                ;
+; N/A                                     ; 327.87 MHz ( period = 3.050 ns )                    ; COUNTER[12] ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.789 ns                ;
+; N/A                                     ; 327.87 MHz ( period = 3.050 ns )                    ; COUNTER[13] ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.789 ns                ;
+; N/A                                     ; 327.98 MHz ( period = 3.049 ns )                    ; COUNTER[1]  ; COUNTER[14] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.785 ns                ;
+; N/A                                     ; 328.08 MHz ( period = 3.048 ns )                    ; COUNTER[16] ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.784 ns                ;
+; N/A                                     ; 328.52 MHz ( period = 3.044 ns )                    ; COUNTER[0]  ; COUNTER[10] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.780 ns                ;
+; N/A                                     ; 329.06 MHz ( period = 3.039 ns )                    ; COUNTER[15] ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.775 ns                ;
+; N/A                                     ; 330.36 MHz ( period = 3.027 ns )                    ; COUNTER[8]  ; COUNTER[21] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.766 ns                ;
+; N/A                                     ; 333.22 MHz ( period = 3.001 ns )                    ; COUNTER[2]  ; COUNTER[14] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.737 ns                ;
+; N/A                                     ; 333.56 MHz ( period = 2.998 ns )                    ; COUNTER[5]  ; COUNTER[14] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.734 ns                ;
+; N/A                                     ; 334.00 MHz ( period = 2.994 ns )                    ; COUNTER[4]  ; COUNTER[13] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.730 ns                ;
+; N/A                                     ; 335.12 MHz ( period = 2.984 ns )                    ; COUNTER[14] ; COUNTER[25] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.723 ns                ;
+; N/A                                     ; 335.35 MHz ( period = 2.982 ns )                    ; COUNTER[7]  ; COUNTER[19] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.721 ns                ;
+; N/A                                     ; 335.80 MHz ( period = 2.978 ns )                    ; COUNTER[9]  ; COUNTER[18] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.717 ns                ;
+; N/A                                     ; 336.02 MHz ( period = 2.976 ns )                    ; COUNTER[11] ; COUNTER[20] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.715 ns                ;
+; N/A                                     ; 336.70 MHz ( period = 2.970 ns )                    ; COUNTER[6]  ; COUNTER[17] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.709 ns                ;
+; N/A                                     ; 337.38 MHz ( period = 2.964 ns )                    ; COUNTER[12] ; COUNTER[23] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.703 ns                ;
+; N/A                                     ; 337.38 MHz ( period = 2.964 ns )                    ; COUNTER[13] ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.703 ns                ;
+; N/A                                     ; 337.50 MHz ( period = 2.963 ns )                    ; COUNTER[1]  ; COUNTER[13] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.699 ns                ;
+; N/A                                     ; 337.50 MHz ( period = 2.963 ns )                    ; COUNTER[17] ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.699 ns                ;
+; N/A                                     ; 337.61 MHz ( period = 2.962 ns )                    ; COUNTER[16] ; COUNTER[28] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.698 ns                ;
+; N/A                                     ; 338.07 MHz ( period = 2.958 ns )                    ; COUNTER[0]  ; COUNTER[9]  ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.694 ns                ;
+; N/A                                     ; 338.64 MHz ( period = 2.953 ns )                    ; COUNTER[15] ; COUNTER[27] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.689 ns                ;
+; N/A                                     ; 340.02 MHz ( period = 2.941 ns )                    ; COUNTER[10] ; COUNTER[22] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.680 ns                ;
+; N/A                                     ; 340.02 MHz ( period = 2.941 ns )                    ; COUNTER[8]  ; COUNTER[20] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.680 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; COUNTER[18] ; COUNTER[29] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.663 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; COUNTER[2]  ; COUNTER[13] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.651 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; COUNTER[5]  ; COUNTER[13] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.648 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; COUNTER[4]  ; COUNTER[12] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.644 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; COUNTER[14] ; COUNTER[24] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.637 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; COUNTER[7]  ; COUNTER[18] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.635 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; COUNTER[9]  ; COUNTER[17] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.631 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; COUNTER[11] ; COUNTER[19] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.629 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; COUNTER[6]  ; COUNTER[16] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.623 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; COUNTER[3]  ; COUNTER[14] ; fx2_clk    ; fx2_clk  ; None                        ; None                      ; 2.614 ns                ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;             ;             ;            ;          ;                             ;                           ;                         ;
++-----------------------------------------+-----------------------------------------------------+-------------+-------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++----------------------------------------------------------------------+
+; tco                                                                  ;
++-------+--------------+------------+-------------+-------+------------+
+; Slack ; Required tco ; Actual tco ; From        ; To    ; From Clock ;
++-------+--------------+------------+-------------+-------+------------+
+; N/A   ; None         ; 8.060 ns   ; COUNTER[29] ; Pin76 ; fx2_clk    ;
+; N/A   ; None         ; 7.674 ns   ; COUNTER[22] ; Pin67 ; fx2_clk    ;
+; N/A   ; None         ; 7.662 ns   ; COUNTER[28] ; Pin75 ; fx2_clk    ;
+; N/A   ; None         ; 7.653 ns   ; COUNTER[27] ; Pin74 ; fx2_clk    ;
+; N/A   ; None         ; 7.653 ns   ; COUNTER[23] ; Pin68 ; fx2_clk    ;
+; N/A   ; None         ; 7.646 ns   ; COUNTER[24] ; Pin69 ; fx2_clk    ;
+; N/A   ; None         ; 7.292 ns   ; COUNTER[25] ; Pin70 ; fx2_clk    ;
+; N/A   ; None         ; 7.272 ns   ; COUNTER[26] ; Pin72 ; fx2_clk    ;
++-------+--------------+------------+-------------+-------+------------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Timing Analyzer
+    Info: Version 6.0 Build 178 04/27/2006 SJ Web Edition
+    Info: Processing started: Thu Jul 06 14:18:31 2006
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off blinkity -c blinkity --timing_analysis_only
+Warning: Found pins functioning as undefined clocks and/or memory enables
+    Info: Assuming node "fx2_clk" is an undefined clock
+Info: Clock "fx2_clk" has Internal fmax of 205.42 MHz between source register "COUNTER[0]" and destination register "COUNTER[29]" (period= 4.868 ns)
+    Info: + Longest register to register delay is 4.607 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X10_Y2_N3; Fanout = 3; REG Node = 'COUNTER[0]'
+        Info: 2: + IC(0.753 ns) + CELL(0.621 ns) = 1.374 ns; Loc. = LCCOMB_X10_Y2_N4; Fanout = 2; COMB Node = 'COUNTER[1]~159'
+        Info: 3: + IC(0.000 ns) + CELL(0.086 ns) = 1.460 ns; Loc. = LCCOMB_X10_Y2_N6; Fanout = 2; COMB Node = 'COUNTER[2]~160'
+        Info: 4: + IC(0.000 ns) + CELL(0.086 ns) = 1.546 ns; Loc. = LCCOMB_X10_Y2_N8; Fanout = 2; COMB Node = 'COUNTER[3]~161'
+        Info: 5: + IC(0.000 ns) + CELL(0.086 ns) = 1.632 ns; Loc. = LCCOMB_X10_Y2_N10; Fanout = 2; COMB Node = 'COUNTER[4]~162'
+        Info: 6: + IC(0.000 ns) + CELL(0.086 ns) = 1.718 ns; Loc. = LCCOMB_X10_Y2_N12; Fanout = 2; COMB Node = 'COUNTER[5]~163'
+        Info: 7: + IC(0.000 ns) + CELL(0.190 ns) = 1.908 ns; Loc. = LCCOMB_X10_Y2_N14; Fanout = 2; COMB Node = 'COUNTER[6]~164'
+        Info: 8: + IC(0.000 ns) + CELL(0.086 ns) = 1.994 ns; Loc. = LCCOMB_X10_Y2_N16; Fanout = 2; COMB Node = 'COUNTER[7]~165'
+        Info: 9: + IC(0.000 ns) + CELL(0.086 ns) = 2.080 ns; Loc. = LCCOMB_X10_Y2_N18; Fanout = 2; COMB Node = 'COUNTER[8]~166'
+        Info: 10: + IC(0.000 ns) + CELL(0.086 ns) = 2.166 ns; Loc. = LCCOMB_X10_Y2_N20; Fanout = 2; COMB Node = 'COUNTER[9]~167'
+        Info: 11: + IC(0.000 ns) + CELL(0.086 ns) = 2.252 ns; Loc. = LCCOMB_X10_Y2_N22; Fanout = 2; COMB Node = 'COUNTER[10]~168'
+        Info: 12: + IC(0.000 ns) + CELL(0.086 ns) = 2.338 ns; Loc. = LCCOMB_X10_Y2_N24; Fanout = 2; COMB Node = 'COUNTER[11]~169'
+        Info: 13: + IC(0.000 ns) + CELL(0.086 ns) = 2.424 ns; Loc. = LCCOMB_X10_Y2_N26; Fanout = 2; COMB Node = 'COUNTER[12]~170'
+        Info: 14: + IC(0.000 ns) + CELL(0.086 ns) = 2.510 ns; Loc. = LCCOMB_X10_Y2_N28; Fanout = 2; COMB Node = 'COUNTER[13]~171'
+        Info: 15: + IC(0.000 ns) + CELL(0.175 ns) = 2.685 ns; Loc. = LCCOMB_X10_Y2_N30; Fanout = 2; COMB Node = 'COUNTER[14]~172'
+        Info: 16: + IC(0.000 ns) + CELL(0.086 ns) = 2.771 ns; Loc. = LCCOMB_X10_Y1_N0; Fanout = 2; COMB Node = 'COUNTER[15]~173'
+        Info: 17: + IC(0.000 ns) + CELL(0.086 ns) = 2.857 ns; Loc. = LCCOMB_X10_Y1_N2; Fanout = 2; COMB Node = 'COUNTER[16]~174'
+        Info: 18: + IC(0.000 ns) + CELL(0.086 ns) = 2.943 ns; Loc. = LCCOMB_X10_Y1_N4; Fanout = 2; COMB Node = 'COUNTER[17]~175'
+        Info: 19: + IC(0.000 ns) + CELL(0.086 ns) = 3.029 ns; Loc. = LCCOMB_X10_Y1_N6; Fanout = 2; COMB Node = 'COUNTER[18]~176'
+        Info: 20: + IC(0.000 ns) + CELL(0.086 ns) = 3.115 ns; Loc. = LCCOMB_X10_Y1_N8; Fanout = 2; COMB Node = 'COUNTER[19]~177'
+        Info: 21: + IC(0.000 ns) + CELL(0.086 ns) = 3.201 ns; Loc. = LCCOMB_X10_Y1_N10; Fanout = 2; COMB Node = 'COUNTER[20]~178'
+        Info: 22: + IC(0.000 ns) + CELL(0.086 ns) = 3.287 ns; Loc. = LCCOMB_X10_Y1_N12; Fanout = 2; COMB Node = 'COUNTER[21]~179'
+        Info: 23: + IC(0.000 ns) + CELL(0.190 ns) = 3.477 ns; Loc. = LCCOMB_X10_Y1_N14; Fanout = 2; COMB Node = 'COUNTER[22]~180'
+        Info: 24: + IC(0.000 ns) + CELL(0.086 ns) = 3.563 ns; Loc. = LCCOMB_X10_Y1_N16; Fanout = 2; COMB Node = 'COUNTER[23]~181'
+        Info: 25: + IC(0.000 ns) + CELL(0.086 ns) = 3.649 ns; Loc. = LCCOMB_X10_Y1_N18; Fanout = 2; COMB Node = 'COUNTER[24]~182'
+        Info: 26: + IC(0.000 ns) + CELL(0.086 ns) = 3.735 ns; Loc. = LCCOMB_X10_Y1_N20; Fanout = 2; COMB Node = 'COUNTER[25]~183'
+        Info: 27: + IC(0.000 ns) + CELL(0.086 ns) = 3.821 ns; Loc. = LCCOMB_X10_Y1_N22; Fanout = 2; COMB Node = 'COUNTER[26]~184'
+        Info: 28: + IC(0.000 ns) + CELL(0.086 ns) = 3.907 ns; Loc. = LCCOMB_X10_Y1_N24; Fanout = 2; COMB Node = 'COUNTER[27]~185'
+        Info: 29: + IC(0.000 ns) + CELL(0.086 ns) = 3.993 ns; Loc. = LCCOMB_X10_Y1_N26; Fanout = 1; COMB Node = 'COUNTER[28]~186'
+        Info: 30: + IC(0.000 ns) + CELL(0.506 ns) = 4.499 ns; Loc. = LCCOMB_X10_Y1_N28; Fanout = 1; COMB Node = 'COUNTER[29]~137'
+        Info: 31: + IC(0.000 ns) + CELL(0.108 ns) = 4.607 ns; Loc. = LCFF_X10_Y1_N29; Fanout = 2; REG Node = 'COUNTER[29]'
+        Info: Total cell delay = 3.854 ns ( 83.66 % )
+        Info: Total interconnect delay = 0.753 ns ( 16.34 % )
+    Info: - Smallest clock skew is 0.003 ns
+        Info: + Shortest clock path from clock "fx2_clk" to destination register is 2.794 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'fx2_clk'
+            Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 30; COMB Node = 'fx2_clk~clkctrl'
+            Info: 3: + IC(0.845 ns) + CELL(0.666 ns) = 2.794 ns; Loc. = LCFF_X10_Y1_N29; Fanout = 2; REG Node = 'COUNTER[29]'
+            Info: Total cell delay = 1.806 ns ( 64.64 % )
+            Info: Total interconnect delay = 0.988 ns ( 35.36 % )
+        Info: - Longest clock path from clock "fx2_clk" to source register is 2.791 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'fx2_clk'
+            Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 30; COMB Node = 'fx2_clk~clkctrl'
+            Info: 3: + IC(0.842 ns) + CELL(0.666 ns) = 2.791 ns; Loc. = LCFF_X10_Y2_N3; Fanout = 3; REG Node = 'COUNTER[0]'
+            Info: Total cell delay = 1.806 ns ( 64.71 % )
+            Info: Total interconnect delay = 0.985 ns ( 35.29 % )
+    Info: + Micro clock to output delay of source is 0.304 ns
+    Info: + Micro setup delay of destination is -0.040 ns
+Info: tco from clock "fx2_clk" to destination pin "Pin76" through register "COUNTER[29]" is 8.060 ns
+    Info: + Longest clock path from clock "fx2_clk" to source register is 2.794 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'fx2_clk'
+        Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 30; COMB Node = 'fx2_clk~clkctrl'
+        Info: 3: + IC(0.845 ns) + CELL(0.666 ns) = 2.794 ns; Loc. = LCFF_X10_Y1_N29; Fanout = 2; REG Node = 'COUNTER[29]'
+        Info: Total cell delay = 1.806 ns ( 64.64 % )
+        Info: Total interconnect delay = 0.988 ns ( 35.36 % )
+    Info: + Micro clock to output delay of source is 0.304 ns
+    Info: + Longest register to pin delay is 4.962 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X10_Y1_N29; Fanout = 2; REG Node = 'COUNTER[29]'
+        Info: 2: + IC(1.686 ns) + CELL(3.276 ns) = 4.962 ns; Loc. = PIN_76; Fanout = 0; PIN Node = 'Pin76'
+        Info: Total cell delay = 3.276 ns ( 66.02 % )
+        Info: Total interconnect delay = 1.686 ns ( 33.98 % )
+Info: Quartus II Timing Analyzer was successful. 0 errors, 1 warning
+    Info: Processing ended: Thu Jul 06 14:18:31 2006
+    Info: Elapsed time: 00:00:00
+
+
