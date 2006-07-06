@@ -9,3 +9,7 @@ OZY Revision List
 07052006-3: Add HPSDR and TAPR logos
 07052006-4: Add scope grounding loop
 07052006-5: Modify for possible use with EP2C8 device?
+
+07062006-1: Add jumper for USB power thru diode
+07062006-2: Renumber/rename D1, D3-13 so they are sequential
+07062006-3: Increase line width on S/N area and other silk items

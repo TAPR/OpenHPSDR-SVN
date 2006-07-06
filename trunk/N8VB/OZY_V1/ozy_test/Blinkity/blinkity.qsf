@@ -42,3 +42,4 @@ set_location_assignment PIN_74 -to Pin74
 set_location_assignment PIN_75 -to Pin75
 set_location_assignment PIN_76 -to Pin76
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
