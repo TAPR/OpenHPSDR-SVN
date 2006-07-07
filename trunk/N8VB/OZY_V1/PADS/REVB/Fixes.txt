@@ -13,3 +13,5 @@ OZY Revision List
 07062006-1: Add jumper for USB power thru diode
 07062006-2: Renumber/rename D1, D3-13 so they are sequential
 07062006-3: Increase line width on S/N area and other silk items
+
+07072006-1: Review OSC1, OSC2 footprints
