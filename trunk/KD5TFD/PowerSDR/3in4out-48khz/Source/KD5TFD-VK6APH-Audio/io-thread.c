@@ -723,7 +723,11 @@ void IOThreadMainLoop(void) {
 								printf("XmitBit changed to: %d\n", XmitBit); fflush(stdout); 
 							} 
 #endif 
+
+
 							FPGAWriteBufp[writebufpos] = (unsigned char)XmitBit; 
+							FPGAWriteBufp[writebufpos] &= 1; 
+
 							break; 
 
 						case OUT_STATE_CONTROL1: 
