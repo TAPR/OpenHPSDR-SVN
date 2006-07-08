@@ -111,6 +111,11 @@ extern int FPGAWriteBufSize;
 extern char *FPGAReadBufp; 
 extern char *FPGAWriteBufp; 
 
+#if 0 
+// dbg buffer 
+extern char wjtDbgBuf[80]; 
+#endif 
+
 #ifdef GLOBAL_DECL
 #undef extern
 #endif
