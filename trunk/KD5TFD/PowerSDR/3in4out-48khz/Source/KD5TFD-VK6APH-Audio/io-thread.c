@@ -731,14 +731,10 @@ void IOThreadMainLoop(void) {
 							break; 
 
 						case OUT_STATE_CONTROL1: 
-							out_state = OUT_STATE_CONTROL2;
-							if ( (ControlBytes[0] & 0xfe) == 0 ) { 
-								// send sample rate in C1 low 2 bits 
-								FPGAWriteBufp[writebufpos] = ((ControlBytes[1] & 0xfc) | (SampleRateIn2Bits & 3));
-							} 
-							else { 
-								FPGAWriteBufp[writebufpos] = ControlBytes[1]; 
-							}
+							out_state = OUT_STATE_CONTROL2;							
+							// send sample rate in C1 low 2 bits 
+							FPGAWriteBufp[writebufpos] = ((ControlBytes[1] & 0xfc) | (SampleRateIn2Bits & 3));
+							
 #if 0 
 							++dbggate; 
 							if ( dbggate == 1000 ) { 

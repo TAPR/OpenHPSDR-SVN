@@ -677,6 +677,7 @@ namespace PowerSDR
 		private System.Windows.Forms.CheckBoxTS chkDDSLock;
 		public System.Windows.Forms.Label label_DttSP_osc;
 		public System.Windows.Forms.Label label_DDStune;
+		public System.Windows.Forms.Label wjtDbg;
 
 		private System.ComponentModel.IContainer components;
 
@@ -1068,6 +1069,7 @@ namespace PowerSDR
 			this.label_DttSP_osc = new System.Windows.Forms.Label();
 			this.label_DDStune = new System.Windows.Forms.Label();
 			this.timer_clock = new System.Windows.Forms.Timer(this.components);
+			this.wjtDbg = new System.Windows.Forms.Label();
 			this.grpVFOA.SuspendLayout();
 			this.grpVFOB.SuspendLayout();
 			this.grpDisplay.SuspendLayout();
@@ -5663,6 +5665,29 @@ namespace PowerSDR
 			this.timer_clock.Enabled = true;
 			this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
 			// 
+			// wjtDbg
+			// 
+			this.wjtDbg.AccessibleDescription = resources.GetString("wjtDbg.AccessibleDescription");
+			this.wjtDbg.AccessibleName = resources.GetString("wjtDbg.AccessibleName");
+			this.wjtDbg.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("wjtDbg.Anchor")));
+			this.wjtDbg.AutoSize = ((bool)(resources.GetObject("wjtDbg.AutoSize")));
+			this.wjtDbg.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("wjtDbg.Dock")));
+			this.wjtDbg.Enabled = ((bool)(resources.GetObject("wjtDbg.Enabled")));
+			this.wjtDbg.Font = ((System.Drawing.Font)(resources.GetObject("wjtDbg.Font")));
+			this.wjtDbg.Image = ((System.Drawing.Image)(resources.GetObject("wjtDbg.Image")));
+			this.wjtDbg.ImageAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("wjtDbg.ImageAlign")));
+			this.wjtDbg.ImageIndex = ((int)(resources.GetObject("wjtDbg.ImageIndex")));
+			this.wjtDbg.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("wjtDbg.ImeMode")));
+			this.wjtDbg.Location = ((System.Drawing.Point)(resources.GetObject("wjtDbg.Location")));
+			this.wjtDbg.Name = "wjtDbg";
+			this.wjtDbg.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("wjtDbg.RightToLeft")));
+			this.wjtDbg.Size = ((System.Drawing.Size)(resources.GetObject("wjtDbg.Size")));
+			this.wjtDbg.TabIndex = ((int)(resources.GetObject("wjtDbg.TabIndex")));
+			this.wjtDbg.Text = resources.GetString("wjtDbg.Text");
+			this.wjtDbg.TextAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("wjtDbg.TextAlign")));
+			this.toolTip1.SetToolTip(this.wjtDbg, resources.GetString("wjtDbg.ToolTip"));
+			this.wjtDbg.Visible = ((bool)(resources.GetObject("wjtDbg.Visible")));
+			// 
 			// Console
 			// 
 			this.AccessibleDescription = resources.GetString("$this.AccessibleDescription");
@@ -5674,6 +5699,7 @@ namespace PowerSDR
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.ClientSize = ((System.Drawing.Size)(resources.GetObject("$this.ClientSize")));
+			this.Controls.Add(this.wjtDbg);
 			this.Controls.Add(this.label_DDStune);
 			this.Controls.Add(this.label_DttSP_osc);
 			this.Controls.Add(this.chkDDSLock);
