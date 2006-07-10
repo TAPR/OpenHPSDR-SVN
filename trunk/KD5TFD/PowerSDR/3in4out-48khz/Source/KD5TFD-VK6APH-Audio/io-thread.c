@@ -475,13 +475,13 @@ void IOThreadMainLoop(void) {
 				++bytes_processed; 
 
 #if 0 
-				if ( state != STATE_NOSYNC && second_last_byte == 0x80 && last_byte == 0x00 && FPGAReadBufp[i] == 0x00 ) { 
+				if ( state != STATE_NOSYNC && second_last_byte == 0x7f && last_byte == 0x7f && FPGAReadBufp[i] == 0x7f ) { 
 					printf("\nsync in data bufnum: %d i: %d samples_this_sync: %d\n", buf_num, i, samples_this_sync); 
 				}
 #endif 
 				switch ( state ) { 
 					case STATE_NOSYNC: 
-						if ( second_last_byte == 0x80 && last_byte == 0x00 && FPGAReadBufp[i] == 0x00 ) {  // found sync 
+						if ( second_last_byte == 0x7f && last_byte == 0x7f && FPGAReadBufp[i] == 0x7f ) {  // found sync 
 							// in_stream_sync_count = 2; // we've consumed 3 bytes already, it will bump at bottom of loop to make 3 
 							state = STATE_CONTROL0; 
 							samples_this_sync = 0; 
@@ -614,7 +614,7 @@ void IOThreadMainLoop(void) {
 					case STATE_SYNC_HI: 
 						// printf("\nSH");
 						samples_this_sync = 0; 
-						if ( (unsigned char)FPGAReadBufp[i] != 0x80 ) { // argh did not find sync 
+						if ( (unsigned char)FPGAReadBufp[i] != 0x7f ) { // argh did not find sync 
 							++lost_sync_count; 
 							state = STATE_NOSYNC; 
 						} 
@@ -624,7 +624,7 @@ void IOThreadMainLoop(void) {
 						break;
 					case STATE_SYNC_MID: 
 						// printf(" SM");
-						if ( FPGAReadBufp[i] != 0x00 ) { // argh did not find sync 
+						if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync 
 							++lost_sync_count; 
 							state = STATE_NOSYNC; 
 						} 
@@ -634,7 +634,7 @@ void IOThreadMainLoop(void) {
 						break;
 					case STATE_SYNC_LO: 
 						// printf(" SL");
-						if ( FPGAReadBufp[i] != 0x00 ) { // argh did not find sync 
+						if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync 
 							++lost_sync_count; 
 							state = STATE_NOSYNC; 
 						} 
@@ -689,12 +689,12 @@ void IOThreadMainLoop(void) {
 						case OUT_STATE_SYNC_HI_NEEDED:
 							out_sample_pairs_this_sync = 0; 
 							out_state = OUT_STATE_SYNC_MID_NEEDED; 
-							FPGAWriteBufp[writebufpos] = 0x80; 
+							FPGAWriteBufp[writebufpos] = 0x7f; 
 							break; 
 
 						case OUT_STATE_SYNC_MID_NEEDED: 
 							out_state = OUT_STATE_SYNC_LO_NEEDED; 
-							FPGAWriteBufp[writebufpos] = 0x00; 
+							FPGAWriteBufp[writebufpos] = 0x7f; 
 							break; 
 
 						case OUT_STATE_LEFT_HI_NEEDED:
@@ -711,7 +711,7 @@ void IOThreadMainLoop(void) {
 
 						case OUT_STATE_SYNC_LO_NEEDED: 							
 							out_state = OUT_STATE_CONTROL0; 
-							FPGAWriteBufp[writebufpos] = 0x00;
+							FPGAWriteBufp[writebufpos] = 0x7f;
 							break; 
 
 						case OUT_STATE_CONTROL0:
