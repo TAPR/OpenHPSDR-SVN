@@ -1068,8 +1068,8 @@ namespace PowerSDR
 			this.chkDDSLock = new System.Windows.Forms.CheckBoxTS();
 			this.label_DttSP_osc = new System.Windows.Forms.Label();
 			this.label_DDStune = new System.Windows.Forms.Label();
-			this.timer_clock = new System.Windows.Forms.Timer(this.components);
 			this.wjtDbg = new System.Windows.Forms.Label();
+			this.timer_clock = new System.Windows.Forms.Timer(this.components);
 			this.grpVFOA.SuspendLayout();
 			this.grpVFOB.SuspendLayout();
 			this.grpDisplay.SuspendLayout();
@@ -5660,11 +5660,6 @@ namespace PowerSDR
 			this.toolTip1.SetToolTip(this.label_DDStune, resources.GetString("label_DDStune.ToolTip"));
 			this.label_DDStune.Visible = ((bool)(resources.GetObject("label_DDStune.Visible")));
 			// 
-			// timer_clock
-			// 
-			this.timer_clock.Enabled = true;
-			this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
-			// 
 			// wjtDbg
 			// 
 			this.wjtDbg.AccessibleDescription = resources.GetString("wjtDbg.AccessibleDescription");
@@ -5687,6 +5682,11 @@ namespace PowerSDR
 			this.wjtDbg.TextAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("wjtDbg.TextAlign")));
 			this.toolTip1.SetToolTip(this.wjtDbg, resources.GetString("wjtDbg.ToolTip"));
 			this.wjtDbg.Visible = ((bool)(resources.GetObject("wjtDbg.Visible")));
+			// 
+			// timer_clock
+			// 
+			this.timer_clock.Enabled = true;
+			this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
 			// 
 			// Console
 			// 

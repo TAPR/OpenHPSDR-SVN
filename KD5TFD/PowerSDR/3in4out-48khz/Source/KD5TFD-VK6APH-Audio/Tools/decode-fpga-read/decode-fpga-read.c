@@ -61,7 +61,7 @@ void dumpFrame(unsigned char *framep) {
     sync = framep[0] << 16;
     sync |= framep[1] << 8;
     sync |= framep[2];
-    if ( sync != 0x800000 ) {
+    if ( sync != 0x7f7f7f ) {
         printf("bad sync\n");
     }
     while ( ofs < FRAME_SIZE ) {
@@ -110,8 +110,8 @@ int main(int argc, char *argv[]) {
 	while ( 1 ) { 
 		numread = fread(ibuf, 1, 1, ifile); 
 		if ( numread != 1 ) break; // short read or end of file 
-		if ( l0 == 0x80 && l1 == 0 && ibuf[0] == 0 ) {  // gained sync 
-			fbuf[0] = 0x80; fbuf[1] = 0x00; fbuf[2] = 0x00; 
+		if ( l0 == 0x7f && l1 == 0x7f && ibuf[0] == 0x7f ) {  // gained sync 
+			fbuf[0] = 0x74; fbuf[1] = 0x7f; fbuf[2] = 0x7f; 
 			numread = fread(fbuf+3, 1, FRAME_SIZE-3, ifile); 
 			if ( numread != FRAME_SIZE-3 ) break; // no more data 
 			dumpFrame(fbuf); 

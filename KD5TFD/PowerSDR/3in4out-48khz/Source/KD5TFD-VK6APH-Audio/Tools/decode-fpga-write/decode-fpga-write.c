@@ -21,7 +21,7 @@ void dumpFrame(unsigned char *framep) {
     sync = framep[0] << 16;
     sync |= framep[1] << 8;
     sync |= framep[2];
-    if ( sync != 0x800000 ) {
+    if ( sync != 0x7f7f7f ) {
         printf("bad sync\n");
     }
     while ( ofs < FRAME_SIZE ) {
