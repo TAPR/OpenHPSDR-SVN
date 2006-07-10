@@ -1,5 +1,7 @@
-/* 
- * USRP - Universal Software Radio Peripheral
+/*
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
  *
  * Copyright (C) 2003 Free Software Foundation, Inc.
  *
@@ -26,16 +28,7 @@
  * Define to 0 for normal use of port A, i.e., FPGA control bus.
  * Define to 1 to write trace to port A for scoping with logic analyzer.
  */
-#define	UC_TRACE_USING_PORT_A			0
-
-
-/*
- * Define to 0 for normal use of low 3 bits of port E, i.e., A/D, D/A SLEEP bits.
- * Define to 1 to enable by default driving the GPIF state to the
- * low three bits of port E.
- */
-#define UC_START_WITH_GSTATE_OUTPUT_ENABLED	0
-
+#define	UC_TRACE_USING_PORT_A	0
 
 /*
  * Define to 1 for normal use (the board really has an FPGA on it).

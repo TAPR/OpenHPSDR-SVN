@@ -1,5 +1,8 @@
-/* -*- c++ -*- */
 /*
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
+ *
  * Copyright 2003 Free Software Foundation, Inc.
  * 
  * This file is part of GNU Radio
@@ -19,14 +22,14 @@
  * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
-#ifndef _USRP_GLOBALS_H_
-#define _USRP_GLOBALS_H_
+#ifndef _HPSDR_GLOBALS_H_
+#define _HPSDR_GLOBALS_H_
 
-extern unsigned char g_tx_enable;
-extern unsigned char g_rx_enable;
-extern unsigned char g_fpga_reset;
-extern unsigned char g_rx_overrun;
-extern unsigned char g_tx_underrun;
+//extern unsigned char g_tx_enable;
+//extern unsigned char g_rx_enable;
+//extern unsigned char g_fpga_reset;
+//extern unsigned char g_rx_overrun;
+//extern unsigned char g_tx_underrun;
 
 
-#endif /* _USRP_GLOBALS_H_ */
+#endif /* _HPSDR_GLOBALS_H_ */

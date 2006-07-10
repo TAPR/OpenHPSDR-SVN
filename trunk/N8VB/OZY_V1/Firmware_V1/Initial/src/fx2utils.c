@@ -1,5 +1,8 @@
-/* -*- c++ -*- */
 /*
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
+ *
  * Copyright 2003 Free Software Foundation, Inc.
  * 
  * This file is part of GNU Radio
@@ -42,8 +45,7 @@ fx2_renumerate (void)
 {
   USBCS |= bmDISCON | bmRENUM;
 
-  // mdelay (1500);		// FIXME why 1.5 seconds?
-  mdelay (250);			// FIXME why 1.5 seconds?
+  mdelay (250);			
   
   USBIRQ = 0xff;		// clear any pending USB irqs...
   EPIRQ =  0xff;		//   they're from before the renumeration

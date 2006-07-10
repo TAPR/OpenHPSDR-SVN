@@ -1,5 +1,7 @@
-/* 
- * USRP - Universal Software Radio Peripheral
+/*
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
  *
  * Copyright (C) 2003 Free Software Foundation, Inc.
  *

@@ -1,5 +1,7 @@
-/* 
- * USRP - Universal Software Radio Peripheral
+/*
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
  *
  * Copyright (C) 2003 Free Software Foundation, Inc.
  *
@@ -36,20 +38,21 @@
 unsigned char
 fpga_load_begin (void)
 {
-  USRP_ALTERA_CONFIG &= ~bmALTERA_BITS;		// clear all bits (NCONFIG low)
-  udelay (40);					// wait 40 us
-  USRP_ALTERA_CONFIG |= bmALTERA_NCONFIG;	// set NCONFIG high
+	HPSDR_ALTERA_CONFIG &= ~bmALTERA_BITS;		// clear all bits (NCONFIG low)
+  	udelay (40);					// wait 40 us
+  	HPSDR_ALTERA_CONFIG |= bmALTERA_NCONFIG;	// set NCONFIG high
 
-  if (UC_BOARD_HAS_FPGA){
-    // FIXME should really cap this loop with a counter so we
-    //   don't hang forever on a hardware failure.
-    while ((USRP_ALTERA_CONFIG & bmALTERA_NSTATUS) == 0) // wait for NSTATUS to go high
-      ;
-  }
+  	if (UC_BOARD_HAS_FPGA)
+	{
+    		// FIXME should really cap this loop with a counter so we
+    		//   don't hang forever on a hardware failure.
+    		while ((HPSDR_ALTERA_CONFIG & bmALTERA_NSTATUS) == 0) // wait for NSTATUS to go high
+      			;
+  	}
 
-  // ready to xfer now
+  	// ready to xfer now
 
-  return 1;
+  	return 1;
 }
 
 /*
@@ -66,27 +69,6 @@ fpga_load_begin (void)
  *	ALTERA_NSTATUS = 1 (input)
  */
 
-
-#if 0
-
-static void
-clock_out_config_byte (unsigned char bits)
-{
-  unsigned char i;
-
-  // clock out configuration byte, least significant bit first
-
-  for (i = 0; i < 8; i++){
-
-    USRP_ALTERA_CONFIG = ((USRP_ALTERA_CONFIG & ~bmALTERA_DATA0) | ((bits & 1) ? bmALTERA_DATA0 : 0));
-    USRP_ALTERA_CONFIG |= bmALTERA_DCLK;		/* set DCLK to 1 */
-    USRP_ALTERA_CONFIG &= ~bmALTERA_DCLK;		/* set DCLK to 0 */
-
-    bits = bits >> 1;
-  }
-}
-	
-#else
 
 static void 
 clock_out_config_byte (unsigned char bits) _naked
@@ -138,8 +120,6 @@ clock_out_config_byte (unsigned char bits) _naked
 
     _endasm;
 }
-
-#endif
 
 static void
 clock_out_bytes (unsigned char bytecount,

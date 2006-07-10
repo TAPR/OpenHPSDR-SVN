@@ -1,5 +1,8 @@
-/* -*- c++ -*- */
 /*
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
+ *
  * Copyright 2003 Free Software Foundation, Inc.
  * 
  * This file is part of GNU Radio
@@ -20,28 +23,26 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef _USRP_INTERFACES_H_
-#define _USRP_INTERFACES_H_
+#ifndef _HPSDR_INTERFACES_H_
+#define _HPSDR_INTERFACES_H_
 
 /*
- * We've now split the USRP into 3 separate interfaces.
- *
  * Interface 0 contains only ep0 and is used for command and status.
  * Interface 1 is the Tx path and it uses ep2 OUT BULK.
  * Interface 2 is the Rx path and it uses ep6 IN BULK.
  */
  
-#define	USRP_CMD_INTERFACE		0
-#define	USRP_CMD_ALTINTERFACE		0
-#define	USRP_CMD_ENDPOINT		0
+#define	HPSDR_CMD_INTERFACE		0
+#define	HPSDR_CMD_ALTINTERFACE	0
+#define	HPSDR_CMD_ENDPOINT		0
 
-#define	USRP_TX_INTERFACE		1
-#define	USRP_TX_ALTINTERFACE		0
-#define	USRP_TX_ENDPOINT		2	// streaming data from host to FPGA
+#define	HPSDR_TX_INTERFACE		1
+#define	HPSDR_TX_ALTINTERFACE	0
+#define	HPSDR_TX_ENDPOINT		2	// streaming data from host to FPGA
 
-#define	USRP_RX_INTERFACE		2
-#define	USRP_RX_ALTINTERFACE		0
-#define	USRP_RX_ENDPOINT		6	// streaming data from FPGA to host
+#define	HPSDR_RX_INTERFACE		2
+#define	HPSDR_RX_ALTINTERFACE	0
+#define	HPSDR_RX_ENDPOINT		6	// streaming data from FPGA to host
 
 
-#endif /* _USRP_INTERFACES_H_ */
+#endif /* _HPSDR_INTERFACES_H_ */

@@ -1,5 +1,7 @@
 /*
- * USRP - Universal Software Radio Peripheral
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
  *
  * Copyright (C) 2003 Free Software Foundation, Inc.
  *
@@ -33,9 +35,9 @@ init_hpsdr (void)
   CPUCS = bmCLKSPD1;	// CPU runs @ 48 MHz
   CKCON = 0;		// MOVX takes 2 cycles
 
-  // IFCLK is generated internally and runs at 48 MHz; GPIF "master mode"
+  // IFCLK is generated internally and runs at 48 MHz; Slave FIFO mode - PAC 07/10/2006
 
-  IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFCLKPOL | bmIFGPIF;
+  IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFCLKPOL | bmIFFIFO;
   SYNCDELAY;
 
   // configure IO ports (B and D are used by FIFO)
@@ -93,8 +95,8 @@ init_hpsdr (void)
 
   EP1OUTBC = 0;			SYNCDELAY;
 
-  EP2GPIFFLGSEL = 0x01;		SYNCDELAY; // For EP2OUT, GPIF uses EF flag
-  EP6GPIFFLGSEL = 0x02;		SYNCDELAY; // For EP6IN,  GPIF uses FF flag
+  // EP2GPIFFLGSEL = 0x01;		SYNCDELAY; // For EP2OUT, GPIF uses EF flag - not usubg GPIF PAC 07/10/2006
+  // EP6GPIFFLGSEL = 0x02;		SYNCDELAY; // For EP6IN,  GPIF uses FF flag
 
   // set autoin length for EP6
   // FIXME should be f(enumeration)

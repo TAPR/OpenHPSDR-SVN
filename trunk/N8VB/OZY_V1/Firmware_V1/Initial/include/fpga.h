@@ -1,5 +1,8 @@
-/* -*- c++ -*- */
 /*
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
+ *
  * Copyright 2004 Free Software Foundation, Inc.
  * 
  * This file is part of GNU Radio
@@ -23,9 +26,5 @@
 #define INCLUDED_FPGA_H
 
 #include "fpga_load.h"
-
-#if defined(HAVE_USRP2)
-#include "fpga_rev2.h"
-#endif
 
 #endif /* INCLUDED_FPGA_H */

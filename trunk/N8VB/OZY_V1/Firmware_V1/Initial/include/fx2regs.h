@@ -1,5 +1,8 @@
-/* -*- c++ -*- */
 /*
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
+ *
  * Copyright 2003 Free Software Foundation, Inc.
  * 
  * This file is part of GNU Radio
@@ -654,6 +657,7 @@ sfr at 0xF8 EIP; // EIP Bit Values differ from Reg320
 #define bmIFCFG0      bmBIT0
 #define bmIFCFGMASK   (bmIFCFG0 | bmIFCFG1)
 #define bmIFGPIF      bmIFCFG1
+#define bmIFFIFO      (bmIFCFG1 | bmIFCFG0) // PAC 07/10/2006
 
 /* EP 2468 FIFO Configuration bits (EP2FIFOCFG,EP4FIFOCFG,EP6FIFOCFG,EP8FIFOCFG) */
 #define bmINFM       bmBIT6

@@ -1,5 +1,7 @@
-/* 
- * USRP - Universal Software Radio Peripheral
+/*
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
  *
  * Copyright (C) 2003,2006 Free Software Foundation, Inc.
  *
@@ -29,8 +31,8 @@
 #ifndef _HPSDRCOMMON_H_
 #define _HPSDRCOMMON_H_
 
-#include <usrp_config.h>
-#include <usrp_rev2_regs.h>
+#include <hpsdr_config.h>
+#include <hpsdr_rev1_regs.h>
 #include <syncdelay.h>
 
 /*
@@ -73,6 +75,4 @@ void set_led_1 (unsigned char on);
 void toggle_led_0 (void);
 void toggle_led_1 (void);
 
-#define la_trace(v)
-
-#endif /* _USRPCOMMON_H_ */
+#endif /* _HPSDRCOMMON_H_ */
