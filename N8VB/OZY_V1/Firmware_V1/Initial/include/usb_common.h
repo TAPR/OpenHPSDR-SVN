@@ -1,5 +1,8 @@
-/* -*- c -*- */
 /*
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
+ *
  * Copyright 2003 Free Software Foundation, Inc.
  * 
  * This file is part of GNU Radio
@@ -31,6 +34,13 @@ unsigned char app_vendor_cmd (void);
 
 void usb_install_handlers (void);
 void usb_handle_setup_packet (void);
+void usb_handle_set_feature(void);
+void usb_handle_clear_feature(void);
+void usb_handle_get_status(void);
+void usb_handle_get_descriptor(void);
+void usb_handle_IN_std_requests(void);
+void usb_handle_OUT_std_requests(void);
+void usb_handle_std_requests(void);
 
 #define usb_setup_packet_avail()	_usb_got_SUDAV
 

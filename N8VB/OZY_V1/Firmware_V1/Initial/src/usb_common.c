@@ -1,5 +1,8 @@
-/* -*- c++ -*- */
 /*
+ * HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+ *
+ * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
+ *
  * Copyright 2003 Free Software Foundation, Inc.
  * 
  * This file is part of GNU Radio
@@ -37,13 +40,13 @@ extern xdata char str5[];
 
 
 #define	bRequestType	SETUPDAT[0]
-#define	bRequest	SETUPDAT[1]
-#define	wValueL		SETUPDAT[2]
-#define	wValueH		SETUPDAT[3]
-#define	wIndexL		SETUPDAT[4]
+#define	bRequest		SETUPDAT[1]
+#define	wValueL			SETUPDAT[2]
+#define	wValueH			SETUPDAT[3]
+#define	wIndexL			SETUPDAT[4]
 #define	wIndexH		SETUPDAT[5]
-#define	wLengthL	SETUPDAT[6]
-#define	wLengthH	SETUPDAT[7]
+#define	wLengthL		SETUPDAT[6]
+#define	wLengthH		SETUPDAT[7]
 
 #define MSB(x)	(((unsigned short) x) >> 8)
 #define LSB(x)	(((unsigned short) x) & 0xff)
@@ -61,23 +64,20 @@ xdata unsigned char *other_config_descr;
 static void
 setup_descriptors (void)
 {
-  if (USBCS & bmHSM){		// high speed mode
-    current_device_descr  = high_speed_device_descr;
-    current_devqual_descr = high_speed_devqual_descr;
-    current_config_descr  = high_speed_config_descr;
-    other_config_descr    = full_speed_config_descr;
-  }
-  else {
-    current_device_descr  = full_speed_device_descr;
-    current_devqual_descr = full_speed_devqual_descr;
-    current_config_descr  = full_speed_config_descr;
-    other_config_descr    = high_speed_config_descr;
-  }
-
-  // whack the type fields
-  // FIXME, may not be required.
-  // current_config_descr[1] = DT_CONFIG;
-  // other_config_descr[1]   = DT_OTHER_SPEED;
+  	if (USBCS & bmHSM)
+	{		// high speed mode
+    		current_device_descr  = high_speed_device_descr;
+    		current_devqual_descr = high_speed_devqual_descr;
+    		current_config_descr  = high_speed_config_descr;
+    		other_config_descr    = full_speed_config_descr;
+  	}
+  	else 
+	{		// full speed mode
+    		current_device_descr  = full_speed_device_descr;
+    		current_devqual_descr = full_speed_devqual_descr;
+    		current_config_descr  = full_speed_config_descr;
+    		other_config_descr    = high_speed_config_descr;
+  	}  
 }
 
 static void
@@ -150,236 +150,260 @@ epcs (unsigned char ep)
   return EP2CS + (ep >> 1);	// 2, 4, 6, 8 are consecutive
 }
 
+void usb_handle_set_feature(void)
+{
+	switch (bRequestType & bmRT_RECIP_MASK)
+		{
+			case bmRT_RECIP_DEVICE:
+		  		switch (wValueL)
+				{
+  					case FS_TEST_MODE:
+    						// hardware handles this after we complete SETUP phase handshake
+    						break;
+
+  					case FS_DEV_REMOTE_WAKEUP:
+  					default:
+    						fx2_stall_ep0 ();
+    						break;
+  				}
+		
+  				case bmRT_RECIP_ENDPOINT:
+				switch (wValueL)
+				{
+					case FS_ENDPOINT_HALT:
+  						if (plausible_endpoint (wIndexL))
+    							*epcs (wIndexL) |= bmEPSTALL;
+  						else
+    							fx2_stall_ep0 ();
+  					break;
+				}
+
+			default:
+  				fx2_stall_ep0 ();
+  				break;
+		}
+}
+
+void usb_handle_clear_feature(void)
+{
+	switch (bRequestType & bmRT_RECIP_MASK)
+		{
+
+			case bmRT_RECIP_DEVICE:
+  				switch (wValueL)
+				{
+  					case FS_DEV_REMOTE_WAKEUP:
+  					default:
+    						fx2_stall_ep0 ();
+  				}
+ 				 break;
+
+			case bmRT_RECIP_ENDPOINT:
+  				if (wValueL == FS_ENDPOINT_HALT && plausible_endpoint (wIndexL))
+				{
+    					*epcs (wIndexL) &= ~bmEPSTALL;
+    					fx2_reset_data_toggle (wIndexL);
+  				}
+  				else
+    					fx2_stall_ep0 ();
+  				break;
+
+			default:
+  				fx2_stall_ep0 ();
+  				break;
+		}
+}
+
+void usb_handle_get_status(void)
+{
+	switch (bRequestType & bmRT_RECIP_MASK)
+		{
+			case bmRT_RECIP_DEVICE:
+  				EP0BUF[0] = bmGSDA_SELF_POWERED;	// FIXME app should handle
+  				EP0BUF[1] = 0;
+  				EP0BCH = 0;
+  				EP0BCL = 2;
+  				break;
+
+			case bmRT_RECIP_INTERFACE:
+  				EP0BUF[0] = 0;
+  				EP0BUF[1] = 0;
+  				EP0BCH = 0;
+  				EP0BCL = 2;
+  				break;
+
+			case bmRT_RECIP_ENDPOINT:
+  				if (plausible_endpoint (wIndexL))
+					{
+    						EP0BUF[0] = *epcs (wIndexL) & bmEPSTALL;
+    						EP0BUF[1] = 0;
+    						EP0BCH = 0;
+    						EP0BCL = 2;
+  					}
+  				else
+    					fx2_stall_ep0 ();
+  				break;
+
+			default:
+  				fx2_stall_ep0 ();
+  				break;
+		}
+}
+
+void usb_handle_get_descriptor(void)
+{
+	switch (wValueH)
+		{
+
+			case DT_DEVICE:
+				SUDPTRH = MSB (current_device_descr);
+				SUDPTRL = LSB (current_device_descr);
+				break;
+
+			case DT_DEVQUAL:
+				SUDPTRH = MSB (current_devqual_descr);
+				SUDPTRL = LSB (current_devqual_descr);
+				break;
+
+			case DT_CONFIG:
+				if (0 && wValueL != 1)	// FIXME only a single configuration
+					fx2_stall_ep0 ();
+				else 
+				{
+					SUDPTRH = MSB (current_config_descr);
+					SUDPTRL = LSB (current_config_descr);
+				}
+				break;
+
+			case DT_OTHER_SPEED:
+				if (0 && wValueL != 1)	// FIXME only a single configuration
+					fx2_stall_ep0 ();
+				else 
+				{
+					SUDPTRH = MSB (other_config_descr);
+					SUDPTRL = LSB (other_config_descr);
+				}
+				break;
+
+			case DT_STRING:
+				if (wValueL >= nstring_descriptors)
+					fx2_stall_ep0 ();
+				else 
+				{
+					xdata char *p = string_descriptors[wValueL];
+					SUDPTRH = MSB (p);
+					SUDPTRL = LSB (p);
+				}
+				break;
+
+			default:
+				fx2_stall_ep0 ();	// invalid request
+				break;
+		}
+}
+
+void usb_handle_IN_std_requests(void)
+{
+	switch (bRequest)
+	{
+
+		case RQ_GET_CONFIG:
+			EP0BUF[0] = _usb_config;	// FIXME app should handle
+			EP0BCH = 0;
+			EP0BCL = 1;
+			break;	
+      				
+		case RQ_GET_INTERFACE:
+			EP0BUF[0] = _usb_alt_setting;	// FIXME app should handle
+			EP0BCH = 0;
+			EP0BCL = 1;
+			break;      			
+
+		case RQ_GET_DESCR:
+			usb_handle_get_descriptor();
+			break;
+	
+      		case RQ_GET_STATUS:
+			usb_handle_get_status();
+			break;
+
+      		case RQ_SYNCH_FRAME:	// not implemented
+      		default:
+			fx2_stall_ep0 ();
+			break;
+      	}		
+}
+
+void usb_handle_OUT_std_requests(void)
+{
+	switch (bRequest)
+	{
+
+		case RQ_SET_CONFIG:
+			_usb_config = wValueL;		// FIXME app should handle
+			break;
+
+      		case RQ_SET_INTERFACE:
+			_usb_alt_setting = wValueL;	// FIXME app should handle
+			break;
+
+      		case RQ_CLEAR_FEATURE:
+			usb_handle_clear_feature();
+			break;
+
+      		case RQ_SET_FEATURE:
+			usb_handle_set_feature();
+			break;
+
+		case RQ_SET_ADDRESS:	// handled by fx2 hardware
+		case RQ_SET_DESCR:	// not implemented
+      		default:
+			fx2_stall_ep0 ();
+      }  
+}
+
+void usb_handle_std_requests(void)
+{
+	if ((bRequestType & bmRT_DIR_MASK) == bmRT_DIR_IN)
+		//handle IN requests
+		usb_handle_IN_std_requests();		
+	else
+		//handle OUT requests
+		usb_handle_OUT_std_requests();	
+}
+
 void
 usb_handle_setup_packet (void)
 {
-  _usb_got_SUDAV = 0;
+  	_usb_got_SUDAV = 0;
 
-  // handle the standard requests...
+  	// handle the standard requests...
 
-  switch (bRequestType & bmRT_TYPE_MASK){
-
-  case bmRT_TYPE_CLASS:
-  case bmRT_TYPE_RESERVED:
-    fx2_stall_ep0 ();		// we don't handle these.  indicate error
-    break;
+  	switch (bRequestType & bmRT_TYPE_MASK)
+	{
+	
+  		case bmRT_TYPE_CLASS:
+  		case bmRT_TYPE_RESERVED:
+    			fx2_stall_ep0 ();		// we don't handle these.  indicate error
+   			break;
     
-  case bmRT_TYPE_VENDOR:
-    // call the application code.
-    // If it handles the command it returns non-zero
+  		case bmRT_TYPE_VENDOR:
+			// call the application code, if it handles the command it returns non-zero
+	    		if (!app_vendor_cmd ())	
+	      			fx2_stall_ep0 ();
+	    		break;
 
-    if (!app_vendor_cmd ())	
-      fx2_stall_ep0 ();
-    break;
+  		case bmRT_TYPE_STD:
+    			// these are the standard requests...
+			usb_handle_std_requests();
+			break;    
 
-  case bmRT_TYPE_STD:
-    // these are the standard requests...
+		default:
+			fx2_stall_ep0 ();		// indicate error
+   			break;
 
-    if ((bRequestType & bmRT_DIR_MASK) == bmRT_DIR_IN){
+  	}	
 
-      ////////////////////////////////////
-      //    handle the IN requests
-      ////////////////////////////////////
-
-      switch (bRequest){
-
-      case RQ_GET_CONFIG:
-	EP0BUF[0] = _usb_config;	// FIXME app should handle
-	EP0BCH = 0;
-	EP0BCL = 1;
-	break;
-	
-      // --------------------------------
-
-      case RQ_GET_INTERFACE:
-	EP0BUF[0] = _usb_alt_setting;	// FIXME app should handle
-	EP0BCH = 0;
-	EP0BCL = 1;
-	break;
-
-      // --------------------------------
-
-      case RQ_GET_DESCR:
-	switch (wValueH){
-
-	case DT_DEVICE:
-	  SUDPTRH = MSB (current_device_descr);
-	  SUDPTRL = LSB (current_device_descr);
-	  break;
-	  
-	case DT_DEVQUAL:
-	  SUDPTRH = MSB (current_devqual_descr);
-	  SUDPTRL = LSB (current_devqual_descr);
-	  break;
-
-	case DT_CONFIG:
-	  if (0 && wValueL != 1)	// FIXME only a single configuration
-	    fx2_stall_ep0 ();
-	  else {
-	    SUDPTRH = MSB (current_config_descr);
-	    SUDPTRL = LSB (current_config_descr);
-	  }
-	  break;
-
-	case DT_OTHER_SPEED:
-	  if (0 && wValueL != 1)	// FIXME only a single configuration
-	    fx2_stall_ep0 ();
-	  else {
-	    SUDPTRH = MSB (other_config_descr);
-	    SUDPTRL = LSB (other_config_descr);
-	  }
-	  break;
-
-	case DT_STRING:
-	  if (wValueL >= nstring_descriptors)
-	    fx2_stall_ep0 ();
-	  else {
-	    xdata char *p = string_descriptors[wValueL];
-	    SUDPTRH = MSB (p);
-	    SUDPTRL = LSB (p);
-	  }
-	  break;
-
-	default:
-	  fx2_stall_ep0 ();	// invalid request
-	  break;
-	}
-	break;
-	
-      // --------------------------------
-
-      case RQ_GET_STATUS:
-	switch (bRequestType & bmRT_RECIP_MASK){
-	case bmRT_RECIP_DEVICE:
-	  EP0BUF[0] = bmGSDA_SELF_POWERED;	// FIXME app should handle
-	  EP0BUF[1] = 0;
-	  EP0BCH = 0;
-	  EP0BCL = 2;
-	  break;
-
-	case bmRT_RECIP_INTERFACE:
-	  EP0BUF[0] = 0;
-	  EP0BUF[1] = 0;
-	  EP0BCH = 0;
-	  EP0BCL = 2;
-	  break;
-
-	case bmRT_RECIP_ENDPOINT:
-	  if (plausible_endpoint (wIndexL)){
-	    EP0BUF[0] = *epcs (wIndexL) & bmEPSTALL;
-	    EP0BUF[1] = 0;
-	    EP0BCH = 0;
-	    EP0BCL = 2;
-	  }
-	  else
-	    fx2_stall_ep0 ();
-	  break;
-
-	default:
-	  fx2_stall_ep0 ();
-	  break;
-	}
-
-      // --------------------------------
-
-      case RQ_SYNCH_FRAME:	// not implemented
-      default:
-	fx2_stall_ep0 ();
-	break;
-      }
-    }
-
-    else {
-
-      ////////////////////////////////////
-      //    handle the OUT requests
-      ////////////////////////////////////
-
-      switch (bRequest){
-
-      case RQ_SET_CONFIG:
-	_usb_config = wValueL;		// FIXME app should handle
-	break;
-
-      case RQ_SET_INTERFACE:
-	_usb_alt_setting = wValueL;	// FIXME app should handle
-	break;
-
-      // --------------------------------
-
-      case RQ_CLEAR_FEATURE:
-	switch (bRequestType & bmRT_RECIP_MASK){
-
-	case bmRT_RECIP_DEVICE:
-	  switch (wValueL){
-	  case FS_DEV_REMOTE_WAKEUP:
-	  default:
-	    fx2_stall_ep0 ();
-	  }
-	  break;
-
-	case bmRT_RECIP_ENDPOINT:
-	  if (wValueL == FS_ENDPOINT_HALT && plausible_endpoint (wIndexL)){
-	    *epcs (wIndexL) &= ~bmEPSTALL;
-	    fx2_reset_data_toggle (wIndexL);
-	  }
-	  else
-	    fx2_stall_ep0 ();
-	  break;
-
-	default:
-	  fx2_stall_ep0 ();
-	  break;
-	}
-	break;
-
-      // --------------------------------
-
-      case RQ_SET_FEATURE:
-	switch (bRequestType & bmRT_RECIP_MASK){
-
-	case bmRT_RECIP_DEVICE:
-	  switch (wValueL){
-	  case FS_TEST_MODE:
-	    // hardware handles this after we complete SETUP phase handshake
-	    break;
-
-	  case FS_DEV_REMOTE_WAKEUP:
-	  default:
-	    fx2_stall_ep0 ();
-	    break;
-	  }
-	}
-	break;
-
-      case bmRT_RECIP_ENDPOINT:
-	switch (wValueL){
-	case FS_ENDPOINT_HALT:
-	  if (plausible_endpoint (wIndexL))
-	    *epcs (wIndexL) |= bmEPSTALL;
-	  else
-	    fx2_stall_ep0 ();
-	  break;
-
-	default:
-	  fx2_stall_ep0 ();
-	  break;
-	}
-	break;
-
-      // --------------------------------
-
-      case RQ_SET_ADDRESS:	// handled by fx2 hardware
-      case RQ_SET_DESCR:	// not implemented
-      default:
-	fx2_stall_ep0 ();
-      }
-
-    }
-    break;
-
-  }	// bmRT_TYPE_MASK
-
-  // ack handshake phase of device request
-  EP0CS |= bmHSNAK;
+  	// ack handshake phase of device request
+  	EP0CS |= bmHSNAK;
 }
