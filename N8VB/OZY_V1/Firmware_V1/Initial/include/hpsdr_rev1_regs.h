@@ -50,7 +50,9 @@ sbit at 0x80+3 bitS_IN;			// in from FX2 point of view
 
 /* all outputs except S_DATA_FROM_PERIPH, FX2_2, FX2_3 */
 
-#define	bmPORT_A_OUTPUTS  (bmPA_S_CLK  | bmPA_S_DATA_TO_PERIPH)
+#define bmPORT_A_OUTPUTS  (bmPA_S_CLK  | bmPA_S_DATA_TO_PERIPH)
+
+#define bmPORT_A_INITIAL	(bmPA_S_DATA_TO_PERIPH)
 
 //-------------------------------------------------------------
 /* Port B: FIFO FD[7:0]	*/
@@ -79,7 +81,7 @@ sbit at 0xA0+2 bitALTERA_DCLK;
 #define bmALTERA_BITS	(bmALTERA_DATA0 			\
 				 | bmALTERA_NCONFIG	 				\
 				 | bmALTERA_DCLK 					\
-				 | bmALTERA_CONF_DONE				\	
+				 | bmALTERA_CONF_DONE				\
 				 | bmALTERA_NSTATUS | bmALTERA_NCE	\
 				 )
 

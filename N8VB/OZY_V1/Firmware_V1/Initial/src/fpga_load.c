@@ -155,7 +155,7 @@ fpga_load_xfer (xdata unsigned char *p, unsigned char bytecount)
 unsigned char
 fpga_load_end (void)
 {
-  unsigned char status = USRP_ALTERA_CONFIG;
+  unsigned char status = HPSDR_ALTERA_CONFIG;
 
   if (!UC_BOARD_HAS_FPGA)			// always true if we don't have FPGA
     return 1;

@@ -195,8 +195,7 @@ patch_usb_descriptors(void)
 {	
 	static xdata unsigned char hw_rev;
 	static xdata unsigned char serial_no[8];
-	unsigned char i;
-
+	
 	eeprom_read(I2C_ADDR_BOOT, HW_REV_OFFSET, &hw_rev, 1);	// LSB of device id
   
 	usb_desc_hw_rev_binary_patch_location_0[0] = hw_rev;

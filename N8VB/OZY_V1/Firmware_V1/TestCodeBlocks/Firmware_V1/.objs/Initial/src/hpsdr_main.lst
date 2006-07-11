@@ -1,0 +1,1421 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.5.0 #1020 (May  8 2005)
+                              4 ; This file generated Tue Jul 11 16:41:58 2006
+                              5 ;--------------------------------------------------------
+                              6 	.module hpsdr_main
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _main
+                             13 	.globl _patch_usb_descriptors
+                             14 	.globl _isr_tick
+                             15 	.globl _app_vendor_IN_cmd
+                             16 	.globl _app_vendor_OUT_cmd
+                             17 	.globl _bitALTERA_DCLK
+                             18 	.globl _bitALTERA_DATA0
+                             19 	.globl _bitS_IN
+                             20 	.globl _bitS_OUT
+                             21 	.globl _bitS_CLK
+                             22 	.globl _EIPX6
+                             23 	.globl _EIPX5
+                             24 	.globl _EIPX4
+                             25 	.globl _PI2C
+                             26 	.globl _PUSB
+                             27 	.globl _EIEX6
+                             28 	.globl _EIEX5
+                             29 	.globl _EIEX4
+                             30 	.globl _EI2C
+                             31 	.globl _EIUSB
+                             32 	.globl _SMOD1
+                             33 	.globl _ERESI
+                             34 	.globl _RESI
+                             35 	.globl _INT6
+                             36 	.globl _CY
+                             37 	.globl _AC
+                             38 	.globl _F0
+                             39 	.globl _RS1
+                             40 	.globl _RS0
+                             41 	.globl _OV
+                             42 	.globl _FL
+                             43 	.globl _P
+                             44 	.globl _TF2
+                             45 	.globl _EXF2
+                             46 	.globl _RCLK
+                             47 	.globl _TCLK
+                             48 	.globl _EXEN2
+                             49 	.globl _TR2
+                             50 	.globl _C_T2
+                             51 	.globl _CP_RL2
+                             52 	.globl _SM01
+                             53 	.globl _SM11
+                             54 	.globl _SM21
+                             55 	.globl _REN1
+                             56 	.globl _TB81
+                             57 	.globl _RB81
+                             58 	.globl _TI1
+                             59 	.globl _RI1
+                             60 	.globl _PS1
+                             61 	.globl _PT2
+                             62 	.globl _PS0
+                             63 	.globl _PT1
+                             64 	.globl _PX1
+                             65 	.globl _PT0
+                             66 	.globl _PX0
+                             67 	.globl _EA
+                             68 	.globl _ES1
+                             69 	.globl _ET2
+                             70 	.globl _ES0
+                             71 	.globl _ET1
+                             72 	.globl _EX1
+                             73 	.globl _ET0
+                             74 	.globl _EX0
+                             75 	.globl _SM0
+                             76 	.globl _SM1
+                             77 	.globl _SM2
+                             78 	.globl _REN
+                             79 	.globl _TB8
+                             80 	.globl _RB8
+                             81 	.globl _TI
+                             82 	.globl _RI
+                             83 	.globl _TF1
+                             84 	.globl _TR1
+                             85 	.globl _TF0
+                             86 	.globl _TR0
+                             87 	.globl _IE1
+                             88 	.globl _IT1
+                             89 	.globl _IE0
+                             90 	.globl _IT0
+                             91 	.globl _SEL
+                             92 	.globl _EIP
+                             93 	.globl _B
+                             94 	.globl _EIE
+                             95 	.globl _ACC
+                             96 	.globl _EICON
+                             97 	.globl _PSW
+                             98 	.globl _TH2
+                             99 	.globl _TL2
+                            100 	.globl _RCAP2H
+                            101 	.globl _RCAP2L
+                            102 	.globl _T2CON
+                            103 	.globl _SBUF1
+                            104 	.globl _SCON1
+                            105 	.globl _GPIFSGLDATLNOX
+                            106 	.globl _GPIFSGLDATLX
+                            107 	.globl _GPIFSGLDATH
+                            108 	.globl _GPIFTRIG
+                            109 	.globl _EP01STAT
+                            110 	.globl _IP
+                            111 	.globl _OEE
+                            112 	.globl _OED
+                            113 	.globl _OEC
+                            114 	.globl _OEB
+                            115 	.globl _OEA
+                            116 	.globl _IOE
+                            117 	.globl _IOD
+                            118 	.globl _AUTOPTRSETUP
+                            119 	.globl _EP68FIFOFLGS
+                            120 	.globl _EP24FIFOFLGS
+                            121 	.globl _EP2468STAT
+                            122 	.globl _IE
+                            123 	.globl _INT4CLR
+                            124 	.globl _INT2CLR
+                            125 	.globl _IOC
+                            126 	.globl _AUTODAT2
+                            127 	.globl _AUTOPTRL2
+                            128 	.globl _AUTOPTRH2
+                            129 	.globl _AUTODAT1
+                            130 	.globl _APTR1L
+                            131 	.globl _APTR1H
+                            132 	.globl _SBUF0
+                            133 	.globl _SCON0
+                            134 	.globl _MPAGE
+                            135 	.globl _EXIF
+                            136 	.globl _IOB
+                            137 	.globl _CKCON
+                            138 	.globl _TH1
+                            139 	.globl _TH0
+                            140 	.globl _TL1
+                            141 	.globl _TL0
+                            142 	.globl _TMOD
+                            143 	.globl _TCON
+                            144 	.globl _PCON
+                            145 	.globl _DPS
+                            146 	.globl _DPH1
+                            147 	.globl _DPL1
+                            148 	.globl _DPH
+                            149 	.globl _DPL
+                            150 	.globl _SP
+                            151 	.globl _IOA
+                            152 	.globl _EP8FIFOBUF
+                            153 	.globl _EP6FIFOBUF
+                            154 	.globl _EP4FIFOBUF
+                            155 	.globl _EP2FIFOBUF
+                            156 	.globl _EP1INBUF
+                            157 	.globl _EP1OUTBUF
+                            158 	.globl _EP0BUF
+                            159 	.globl _CT4
+                            160 	.globl _CT3
+                            161 	.globl _CT2
+                            162 	.globl _CT1
+                            163 	.globl _USBTEST
+                            164 	.globl _TESTCFG
+                            165 	.globl _DBUG
+                            166 	.globl _UDMACRCQUAL
+                            167 	.globl _UDMACRCL
+                            168 	.globl _UDMACRCH
+                            169 	.globl _GPIFHOLDAMOUNT
+                            170 	.globl _FLOWSTBHPERIOD
+                            171 	.globl _FLOWSTBEDGE
+                            172 	.globl _FLOWSTB
+                            173 	.globl _FLOWHOLDOFF
+                            174 	.globl _FLOWEQ1CTL
+                            175 	.globl _FLOWEQ0CTL
+                            176 	.globl _FLOWLOGIC
+                            177 	.globl _FLOWSTATE
+                            178 	.globl _GPIFABORT
+                            179 	.globl _GPIFREADYSTAT
+                            180 	.globl _GPIFREADYCFG
+                            181 	.globl _XGPIFSGLDATLNOX
+                            182 	.globl _XGPIFSGLDATLX
+                            183 	.globl _XGPIFSGLDATH
+                            184 	.globl _EP8GPIFTRIG
+                            185 	.globl _EP8GPIFPFSTOP
+                            186 	.globl _EP8GPIFFLGSEL
+                            187 	.globl _EP6GPIFTRIG
+                            188 	.globl _EP6GPIFPFSTOP
+                            189 	.globl _EP6GPIFFLGSEL
+                            190 	.globl _EP4GPIFTRIG
+                            191 	.globl _EP4GPIFPFSTOP
+                            192 	.globl _EP4GPIFFLGSEL
+                            193 	.globl _EP2GPIFTRIG
+                            194 	.globl _EP2GPIFPFSTOP
+                            195 	.globl _EP2GPIFFLGSEL
+                            196 	.globl _GPIFTCB0
+                            197 	.globl _GPIFTCB1
+                            198 	.globl _GPIFTCB2
+                            199 	.globl _GPIFTCB3
+                            200 	.globl _GPIFADRL
+                            201 	.globl _GPIFADRH
+                            202 	.globl _GPIFCTLCFG
+                            203 	.globl _GPIFIDLECTL
+                            204 	.globl _GPIFIDLECS
+                            205 	.globl _GPIFWFSELECT
+                            206 	.globl _SETUPDAT
+                            207 	.globl _SUDPTRCTL
+                            208 	.globl _SUDPTRL
+                            209 	.globl _SUDPTRH
+                            210 	.globl _EP8FIFOBCL
+                            211 	.globl _EP8FIFOBCH
+                            212 	.globl _EP6FIFOBCL
+                            213 	.globl _EP6FIFOBCH
+                            214 	.globl _EP4FIFOBCL
+                            215 	.globl _EP4FIFOBCH
+                            216 	.globl _EP2FIFOBCL
+                            217 	.globl _EP2FIFOBCH
+                            218 	.globl _EP8FIFOFLGS
+                            219 	.globl _EP6FIFOFLGS
+                            220 	.globl _EP4FIFOFLGS
+                            221 	.globl _EP2FIFOFLGS
+                            222 	.globl _EP8CS
+                            223 	.globl _EP6CS
+                            224 	.globl _EP4CS
+                            225 	.globl _EP2CS
+                            226 	.globl _EP1INCS
+                            227 	.globl _EP1OUTCS
+                            228 	.globl _EP0CS
+                            229 	.globl _EP8BCL
+                            230 	.globl _EP8BCH
+                            231 	.globl _EP6BCL
+                            232 	.globl _EP6BCH
+                            233 	.globl _EP4BCL
+                            234 	.globl _EP4BCH
+                            235 	.globl _EP2BCL
+                            236 	.globl _EP2BCH
+                            237 	.globl _EP1INBC
+                            238 	.globl _EP1OUTBC
+                            239 	.globl _EP0BCL
+                            240 	.globl _EP0BCH
+                            241 	.globl _FNADDR
+                            242 	.globl _MICROFRAME
+                            243 	.globl _USBFRAMEL
+                            244 	.globl _USBFRAMEH
+                            245 	.globl _TOGCTL
+                            246 	.globl _WAKEUPCS
+                            247 	.globl _SUSPEND
+                            248 	.globl _USBCS
+                            249 	.globl _XAUTODAT2
+                            250 	.globl _XAUTODAT1
+                            251 	.globl _I2CTL
+                            252 	.globl _I2DAT
+                            253 	.globl _I2CS
+                            254 	.globl _PORTECFG
+                            255 	.globl _PORTCCFG
+                            256 	.globl _PORTACFG
+                            257 	.globl _INTSETUP
+                            258 	.globl _INT4IVEC
+                            259 	.globl _INT2IVEC
+                            260 	.globl _CLRERRCNT
+                            261 	.globl _ERRCNTLIM
+                            262 	.globl _USBERRIRQ
+                            263 	.globl _USBERRIE
+                            264 	.globl _GPIFIRQ
+                            265 	.globl _GPIFIE
+                            266 	.globl _EPIRQ
+                            267 	.globl _EPIE
+                            268 	.globl _USBIRQ
+                            269 	.globl _USBIE
+                            270 	.globl _NAKIRQ
+                            271 	.globl _NAKIE
+                            272 	.globl _IBNIRQ
+                            273 	.globl _IBNIE
+                            274 	.globl _EP8FIFOIRQ
+                            275 	.globl _EP8FIFOIE
+                            276 	.globl _EP6FIFOIRQ
+                            277 	.globl _EP6FIFOIE
+                            278 	.globl _EP4FIFOIRQ
+                            279 	.globl _EP4FIFOIE
+                            280 	.globl _EP2FIFOIRQ
+                            281 	.globl _EP2FIFOIE
+                            282 	.globl _OUTPKTEND
+                            283 	.globl _INPKTEND
+                            284 	.globl _EP8ISOINPKTS
+                            285 	.globl _EP6ISOINPKTS
+                            286 	.globl _EP4ISOINPKTS
+                            287 	.globl _EP2ISOINPKTS
+                            288 	.globl _EP8FIFOPFL
+                            289 	.globl _EP8FIFOPFH
+                            290 	.globl _EP6FIFOPFL
+                            291 	.globl _EP6FIFOPFH
+                            292 	.globl _EP4FIFOPFL
+                            293 	.globl _EP4FIFOPFH
+                            294 	.globl _EP2FIFOPFL
+                            295 	.globl _EP2FIFOPFH
+                            296 	.globl _EP8AUTOINLENL
+                            297 	.globl _EP8AUTOINLENH
+                            298 	.globl _EP6AUTOINLENL
+                            299 	.globl _EP6AUTOINLENH
+                            300 	.globl _EP4AUTOINLENL
+                            301 	.globl _EP4AUTOINLENH
+                            302 	.globl _EP2AUTOINLENL
+                            303 	.globl _EP2AUTOINLENH
+                            304 	.globl _EP8FIFOCFG
+                            305 	.globl _EP6FIFOCFG
+                            306 	.globl _EP4FIFOCFG
+                            307 	.globl _EP2FIFOCFG
+                            308 	.globl _EP8CFG
+                            309 	.globl _EP6CFG
+                            310 	.globl _EP4CFG
+                            311 	.globl _EP2CFG
+                            312 	.globl _EP1INCFG
+                            313 	.globl _EP1OUTCFG
+                            314 	.globl _REVCTL
+                            315 	.globl _REVID
+                            316 	.globl _FIFOPINPOLAR
+                            317 	.globl _UART230
+                            318 	.globl _BPADDRL
+                            319 	.globl _BPADDRH
+                            320 	.globl _BREAKPT
+                            321 	.globl _FIFORESET
+                            322 	.globl _PINFLAGSCD
+                            323 	.globl _PINFLAGSAB
+                            324 	.globl _IFCONFIG
+                            325 	.globl _CPUCS
+                            326 	.globl _RES_WAVEDATA_END
+                            327 	.globl _GPIF_WAVE_DATA
+                            328 	.globl _app_vendor_cmd
+                            329 ;--------------------------------------------------------
+                            330 ; special function registers
+                            331 ;--------------------------------------------------------
+                            332 	.area RSEG    (DATA)
+                    0080    333 _IOA	=	0x0080
+                    0081    334 _SP	=	0x0081
+                    0082    335 _DPL	=	0x0082
+                    0083    336 _DPH	=	0x0083
+                    0084    337 _DPL1	=	0x0084
+                    0085    338 _DPH1	=	0x0085
+                    0086    339 _DPS	=	0x0086
+                    0087    340 _PCON	=	0x0087
+                    0088    341 _TCON	=	0x0088
+                    0089    342 _TMOD	=	0x0089
+                    008A    343 _TL0	=	0x008a
+                    008B    344 _TL1	=	0x008b
+                    008C    345 _TH0	=	0x008c
+                    008D    346 _TH1	=	0x008d
+                    008E    347 _CKCON	=	0x008e
+                    0090    348 _IOB	=	0x0090
+                    0091    349 _EXIF	=	0x0091
+                    0092    350 _MPAGE	=	0x0092
+                    0098    351 _SCON0	=	0x0098
+                    0099    352 _SBUF0	=	0x0099
+                    009A    353 _APTR1H	=	0x009a
+                    009B    354 _APTR1L	=	0x009b
+                    009C    355 _AUTODAT1	=	0x009c
+                    009D    356 _AUTOPTRH2	=	0x009d
+                    009E    357 _AUTOPTRL2	=	0x009e
+                    009F    358 _AUTODAT2	=	0x009f
+                    00A0    359 _IOC	=	0x00a0
+                    00A1    360 _INT2CLR	=	0x00a1
+                    00A2    361 _INT4CLR	=	0x00a2
+                    00A8    362 _IE	=	0x00a8
+                    00AA    363 _EP2468STAT	=	0x00aa
+                    00AB    364 _EP24FIFOFLGS	=	0x00ab
+                    00AC    365 _EP68FIFOFLGS	=	0x00ac
+                    00AF    366 _AUTOPTRSETUP	=	0x00af
+                    00B0    367 _IOD	=	0x00b0
+                    00B1    368 _IOE	=	0x00b1
+                    00B2    369 _OEA	=	0x00b2
+                    00B3    370 _OEB	=	0x00b3
+                    00B4    371 _OEC	=	0x00b4
+                    00B5    372 _OED	=	0x00b5
+                    00B6    373 _OEE	=	0x00b6
+                    00B8    374 _IP	=	0x00b8
+                    00BA    375 _EP01STAT	=	0x00ba
+                    00BB    376 _GPIFTRIG	=	0x00bb
+                    00BD    377 _GPIFSGLDATH	=	0x00bd
+                    00BE    378 _GPIFSGLDATLX	=	0x00be
+                    00BF    379 _GPIFSGLDATLNOX	=	0x00bf
+                    00C0    380 _SCON1	=	0x00c0
+                    00C1    381 _SBUF1	=	0x00c1
+                    00C8    382 _T2CON	=	0x00c8
+                    00CA    383 _RCAP2L	=	0x00ca
+                    00CB    384 _RCAP2H	=	0x00cb
+                    00CC    385 _TL2	=	0x00cc
+                    00CD    386 _TH2	=	0x00cd
+                    00D0    387 _PSW	=	0x00d0
+                    00D8    388 _EICON	=	0x00d8
+                    00E0    389 _ACC	=	0x00e0
+                    00E8    390 _EIE	=	0x00e8
+                    00F0    391 _B	=	0x00f0
+                    00F8    392 _EIP	=	0x00f8
+                            393 ;--------------------------------------------------------
+                            394 ; special function bits 
+                            395 ;--------------------------------------------------------
+                            396 	.area RSEG    (DATA)
+                    0086    397 _SEL	=	0x0086
+                    0088    398 _IT0	=	0x0088
+                    0089    399 _IE0	=	0x0089
+                    008A    400 _IT1	=	0x008a
+                    008B    401 _IE1	=	0x008b
+                    008C    402 _TR0	=	0x008c
+                    008D    403 _TF0	=	0x008d
+                    008E    404 _TR1	=	0x008e
+                    008F    405 _TF1	=	0x008f
+                    0098    406 _RI	=	0x0098
+                    0099    407 _TI	=	0x0099
+                    009A    408 _RB8	=	0x009a
+                    009B    409 _TB8	=	0x009b
+                    009C    410 _REN	=	0x009c
+                    009D    411 _SM2	=	0x009d
+                    009E    412 _SM1	=	0x009e
+                    009F    413 _SM0	=	0x009f
+                    00A8    414 _EX0	=	0x00a8
+                    00A9    415 _ET0	=	0x00a9
+                    00AA    416 _EX1	=	0x00aa
+                    00AB    417 _ET1	=	0x00ab
+                    00AC    418 _ES0	=	0x00ac
+                    00AD    419 _ET2	=	0x00ad
+                    00AE    420 _ES1	=	0x00ae
+                    00AF    421 _EA	=	0x00af
+                    00B8    422 _PX0	=	0x00b8
+                    00B9    423 _PT0	=	0x00b9
+                    00BA    424 _PX1	=	0x00ba
+                    00BB    425 _PT1	=	0x00bb
+                    00BC    426 _PS0	=	0x00bc
+                    00BD    427 _PT2	=	0x00bd
+                    00BE    428 _PS1	=	0x00be
+                    00C0    429 _RI1	=	0x00c0
+                    00C1    430 _TI1	=	0x00c1
+                    00C2    431 _RB81	=	0x00c2
+                    00C3    432 _TB81	=	0x00c3
+                    00C4    433 _REN1	=	0x00c4
+                    00C5    434 _SM21	=	0x00c5
+                    00C6    435 _SM11	=	0x00c6
+                    00C7    436 _SM01	=	0x00c7
+                    00C8    437 _CP_RL2	=	0x00c8
+                    00C9    438 _C_T2	=	0x00c9
+                    00CA    439 _TR2	=	0x00ca
+                    00CB    440 _EXEN2	=	0x00cb
+                    00CC    441 _TCLK	=	0x00cc
+                    00CD    442 _RCLK	=	0x00cd
+                    00CE    443 _EXF2	=	0x00ce
+                    00CF    444 _TF2	=	0x00cf
+                    00D0    445 _P	=	0x00d0
+                    00D1    446 _FL	=	0x00d1
+                    00D2    447 _OV	=	0x00d2
+                    00D3    448 _RS0	=	0x00d3
+                    00D4    449 _RS1	=	0x00d4
+                    00D5    450 _F0	=	0x00d5
+                    00D6    451 _AC	=	0x00d6
+                    00D7    452 _CY	=	0x00d7
+                    00DB    453 _INT6	=	0x00db
+                    00DC    454 _RESI	=	0x00dc
+                    00DD    455 _ERESI	=	0x00dd
+                    00DF    456 _SMOD1	=	0x00df
+                    00E8    457 _EIUSB	=	0x00e8
+                    00E9    458 _EI2C	=	0x00e9
+                    00EA    459 _EIEX4	=	0x00ea
+                    00EB    460 _EIEX5	=	0x00eb
+                    00EC    461 _EIEX6	=	0x00ec
+                    00F8    462 _PUSB	=	0x00f8
+                    00F9    463 _PI2C	=	0x00f9
+                    00FA    464 _EIPX4	=	0x00fa
+                    00FB    465 _EIPX5	=	0x00fb
+                    00FC    466 _EIPX6	=	0x00fc
+                    0080    467 _bitS_CLK	=	0x0080
+                    0081    468 _bitS_OUT	=	0x0081
+                    0083    469 _bitS_IN	=	0x0083
+                    00A0    470 _bitALTERA_DATA0	=	0x00a0
+                    00A2    471 _bitALTERA_DCLK	=	0x00a2
+                            472 ;--------------------------------------------------------
+                            473 ; overlayable register banks 
+                            474 ;--------------------------------------------------------
+                            475 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     476 	.ds 8
+                            477 ;--------------------------------------------------------
+                            478 ; internal ram data
+                            479 ;--------------------------------------------------------
+                            480 	.area DSEG    (DATA)
+   0000                     481 _isr_tick_count_1_1:
+   0000                     482 	.ds 1
+                            483 ;--------------------------------------------------------
+                            484 ; overlayable items in internal ram 
+                            485 ;--------------------------------------------------------
+                            486 	.area OSEG    (OVR,DATA)
+                            487 ;--------------------------------------------------------
+                            488 ; Stack segment in internal ram 
+                            489 ;--------------------------------------------------------
+                            490 	.area	SSEG	(DATA)
+   0000                     491 __start__stack:
+   0000                     492 	.ds	1
+                            493 
+                            494 ;--------------------------------------------------------
+                            495 ; indirectly addressable internal ram data
+                            496 ;--------------------------------------------------------
+                            497 	.area ISEG    (DATA)
+                            498 ;--------------------------------------------------------
+                            499 ; bit data
+                            500 ;--------------------------------------------------------
+                            501 	.area BSEG    (BIT)
+                            502 ;--------------------------------------------------------
+                            503 ; paged external ram data
+                            504 ;--------------------------------------------------------
+                            505 	.area PSEG    (PAG,XDATA)
+                            506 ;--------------------------------------------------------
+                            507 ; external ram data
+                            508 ;--------------------------------------------------------
+                            509 	.area XSEG    (XDATA)
+                    E400    510 _GPIF_WAVE_DATA	=	0xe400
+                    E480    511 _RES_WAVEDATA_END	=	0xe480
+                    E600    512 _CPUCS	=	0xe600
+                    E601    513 _IFCONFIG	=	0xe601
+                    E602    514 _PINFLAGSAB	=	0xe602
+                    E603    515 _PINFLAGSCD	=	0xe603
+                    E604    516 _FIFORESET	=	0xe604
+                    E605    517 _BREAKPT	=	0xe605
+                    E606    518 _BPADDRH	=	0xe606
+                    E607    519 _BPADDRL	=	0xe607
+                    E608    520 _UART230	=	0xe608
+                    E609    521 _FIFOPINPOLAR	=	0xe609
+                    E60A    522 _REVID	=	0xe60a
+                    E60B    523 _REVCTL	=	0xe60b
+                    E610    524 _EP1OUTCFG	=	0xe610
+                    E611    525 _EP1INCFG	=	0xe611
+                    E612    526 _EP2CFG	=	0xe612
+                    E613    527 _EP4CFG	=	0xe613
+                    E614    528 _EP6CFG	=	0xe614
+                    E615    529 _EP8CFG	=	0xe615
+                    E618    530 _EP2FIFOCFG	=	0xe618
+                    E619    531 _EP4FIFOCFG	=	0xe619
+                    E61A    532 _EP6FIFOCFG	=	0xe61a
+                    E61B    533 _EP8FIFOCFG	=	0xe61b
+                    E620    534 _EP2AUTOINLENH	=	0xe620
+                    E621    535 _EP2AUTOINLENL	=	0xe621
+                    E622    536 _EP4AUTOINLENH	=	0xe622
+                    E623    537 _EP4AUTOINLENL	=	0xe623
+                    E624    538 _EP6AUTOINLENH	=	0xe624
+                    E625    539 _EP6AUTOINLENL	=	0xe625
+                    E626    540 _EP8AUTOINLENH	=	0xe626
+                    E627    541 _EP8AUTOINLENL	=	0xe627
+                    E630    542 _EP2FIFOPFH	=	0xe630
+                    E631    543 _EP2FIFOPFL	=	0xe631
+                    E632    544 _EP4FIFOPFH	=	0xe632
+                    E633    545 _EP4FIFOPFL	=	0xe633
+                    E634    546 _EP6FIFOPFH	=	0xe634
+                    E635    547 _EP6FIFOPFL	=	0xe635
+                    E636    548 _EP8FIFOPFH	=	0xe636
+                    E637    549 _EP8FIFOPFL	=	0xe637
+                    E640    550 _EP2ISOINPKTS	=	0xe640
+                    E641    551 _EP4ISOINPKTS	=	0xe641
+                    E642    552 _EP6ISOINPKTS	=	0xe642
+                    E643    553 _EP8ISOINPKTS	=	0xe643
+                    E648    554 _INPKTEND	=	0xe648
+                    E649    555 _OUTPKTEND	=	0xe649
+                    E650    556 _EP2FIFOIE	=	0xe650
+                    E651    557 _EP2FIFOIRQ	=	0xe651
+                    E652    558 _EP4FIFOIE	=	0xe652
+                    E653    559 _EP4FIFOIRQ	=	0xe653
+                    E654    560 _EP6FIFOIE	=	0xe654
+                    E655    561 _EP6FIFOIRQ	=	0xe655
+                    E656    562 _EP8FIFOIE	=	0xe656
+                    E657    563 _EP8FIFOIRQ	=	0xe657
+                    E658    564 _IBNIE	=	0xe658
+                    E659    565 _IBNIRQ	=	0xe659
+                    E65A    566 _NAKIE	=	0xe65a
+                    E65B    567 _NAKIRQ	=	0xe65b
+                    E65C    568 _USBIE	=	0xe65c
+                    E65D    569 _USBIRQ	=	0xe65d
+                    E65E    570 _EPIE	=	0xe65e
+                    E65F    571 _EPIRQ	=	0xe65f
+                    E660    572 _GPIFIE	=	0xe660
+                    E661    573 _GPIFIRQ	=	0xe661
+                    E662    574 _USBERRIE	=	0xe662
+                    E663    575 _USBERRIRQ	=	0xe663
+                    E664    576 _ERRCNTLIM	=	0xe664
+                    E665    577 _CLRERRCNT	=	0xe665
+                    E666    578 _INT2IVEC	=	0xe666
+                    E667    579 _INT4IVEC	=	0xe667
+                    E668    580 _INTSETUP	=	0xe668
+                    E670    581 _PORTACFG	=	0xe670
+                    E671    582 _PORTCCFG	=	0xe671
+                    E672    583 _PORTECFG	=	0xe672
+                    E678    584 _I2CS	=	0xe678
+                    E679    585 _I2DAT	=	0xe679
+                    E67A    586 _I2CTL	=	0xe67a
+                    E67B    587 _XAUTODAT1	=	0xe67b
+                    E67C    588 _XAUTODAT2	=	0xe67c
+                    E680    589 _USBCS	=	0xe680
+                    E681    590 _SUSPEND	=	0xe681
+                    E682    591 _WAKEUPCS	=	0xe682
+                    E683    592 _TOGCTL	=	0xe683
+                    E684    593 _USBFRAMEH	=	0xe684
+                    E685    594 _USBFRAMEL	=	0xe685
+                    E686    595 _MICROFRAME	=	0xe686
+                    E687    596 _FNADDR	=	0xe687
+                    E68A    597 _EP0BCH	=	0xe68a
+                    E68B    598 _EP0BCL	=	0xe68b
+                    E68D    599 _EP1OUTBC	=	0xe68d
+                    E68F    600 _EP1INBC	=	0xe68f
+                    E690    601 _EP2BCH	=	0xe690
+                    E691    602 _EP2BCL	=	0xe691
+                    E694    603 _EP4BCH	=	0xe694
+                    E695    604 _EP4BCL	=	0xe695
+                    E698    605 _EP6BCH	=	0xe698
+                    E699    606 _EP6BCL	=	0xe699
+                    E69C    607 _EP8BCH	=	0xe69c
+                    E69D    608 _EP8BCL	=	0xe69d
+                    E6A0    609 _EP0CS	=	0xe6a0
+                    E6A1    610 _EP1OUTCS	=	0xe6a1
+                    E6A2    611 _EP1INCS	=	0xe6a2
+                    E6A3    612 _EP2CS	=	0xe6a3
+                    E6A4    613 _EP4CS	=	0xe6a4
+                    E6A5    614 _EP6CS	=	0xe6a5
+                    E6A6    615 _EP8CS	=	0xe6a6
+                    E6A7    616 _EP2FIFOFLGS	=	0xe6a7
+                    E6A8    617 _EP4FIFOFLGS	=	0xe6a8
+                    E6A9    618 _EP6FIFOFLGS	=	0xe6a9
+                    E6AA    619 _EP8FIFOFLGS	=	0xe6aa
+                    E6AB    620 _EP2FIFOBCH	=	0xe6ab
+                    E6AC    621 _EP2FIFOBCL	=	0xe6ac
+                    E6AD    622 _EP4FIFOBCH	=	0xe6ad
+                    E6AE    623 _EP4FIFOBCL	=	0xe6ae
+                    E6AF    624 _EP6FIFOBCH	=	0xe6af
+                    E6B0    625 _EP6FIFOBCL	=	0xe6b0
+                    E6B1    626 _EP8FIFOBCH	=	0xe6b1
+                    E6B2    627 _EP8FIFOBCL	=	0xe6b2
+                    E6B3    628 _SUDPTRH	=	0xe6b3
+                    E6B4    629 _SUDPTRL	=	0xe6b4
+                    E6B5    630 _SUDPTRCTL	=	0xe6b5
+                    E6B8    631 _SETUPDAT	=	0xe6b8
+                    E6C0    632 _GPIFWFSELECT	=	0xe6c0
+                    E6C1    633 _GPIFIDLECS	=	0xe6c1
+                    E6C2    634 _GPIFIDLECTL	=	0xe6c2
+                    E6C3    635 _GPIFCTLCFG	=	0xe6c3
+                    E6C4    636 _GPIFADRH	=	0xe6c4
+                    E6C5    637 _GPIFADRL	=	0xe6c5
+                    E6CE    638 _GPIFTCB3	=	0xe6ce
+                    E6CF    639 _GPIFTCB2	=	0xe6cf
+                    E6D0    640 _GPIFTCB1	=	0xe6d0
+                    E6D1    641 _GPIFTCB0	=	0xe6d1
+                    E6D2    642 _EP2GPIFFLGSEL	=	0xe6d2
+                    E6D3    643 _EP2GPIFPFSTOP	=	0xe6d3
+                    E6D4    644 _EP2GPIFTRIG	=	0xe6d4
+                    E6DA    645 _EP4GPIFFLGSEL	=	0xe6da
+                    E6DB    646 _EP4GPIFPFSTOP	=	0xe6db
+                    E6DC    647 _EP4GPIFTRIG	=	0xe6dc
+                    E6E2    648 _EP6GPIFFLGSEL	=	0xe6e2
+                    E6E3    649 _EP6GPIFPFSTOP	=	0xe6e3
+                    E6E4    650 _EP6GPIFTRIG	=	0xe6e4
+                    E6EA    651 _EP8GPIFFLGSEL	=	0xe6ea
+                    E6EB    652 _EP8GPIFPFSTOP	=	0xe6eb
+                    E6EC    653 _EP8GPIFTRIG	=	0xe6ec
+                    E6F0    654 _XGPIFSGLDATH	=	0xe6f0
+                    E6F1    655 _XGPIFSGLDATLX	=	0xe6f1
+                    E6F2    656 _XGPIFSGLDATLNOX	=	0xe6f2
+                    E6F3    657 _GPIFREADYCFG	=	0xe6f3
+                    E6F4    658 _GPIFREADYSTAT	=	0xe6f4
+                    E6F5    659 _GPIFABORT	=	0xe6f5
+                    E6C6    660 _FLOWSTATE	=	0xe6c6
+                    E6C7    661 _FLOWLOGIC	=	0xe6c7
+                    E6C8    662 _FLOWEQ0CTL	=	0xe6c8
+                    E6C9    663 _FLOWEQ1CTL	=	0xe6c9
+                    E6CA    664 _FLOWHOLDOFF	=	0xe6ca
+                    E6CB    665 _FLOWSTB	=	0xe6cb
+                    E6CC    666 _FLOWSTBEDGE	=	0xe6cc
+                    E6CD    667 _FLOWSTBHPERIOD	=	0xe6cd
+                    E60C    668 _GPIFHOLDAMOUNT	=	0xe60c
+                    E67D    669 _UDMACRCH	=	0xe67d
+                    E67E    670 _UDMACRCL	=	0xe67e
+                    E67F    671 _UDMACRCQUAL	=	0xe67f
+                    E6F8    672 _DBUG	=	0xe6f8
+                    E6F9    673 _TESTCFG	=	0xe6f9
+                    E6FA    674 _USBTEST	=	0xe6fa
+                    E6FB    675 _CT1	=	0xe6fb
+                    E6FC    676 _CT2	=	0xe6fc
+                    E6FD    677 _CT3	=	0xe6fd
+                    E6FE    678 _CT4	=	0xe6fe
+                    E740    679 _EP0BUF	=	0xe740
+                    E780    680 _EP1OUTBUF	=	0xe780
+                    E7C0    681 _EP1INBUF	=	0xe7c0
+                    F000    682 _EP2FIFOBUF	=	0xf000
+                    F400    683 _EP4FIFOBUF	=	0xf400
+                    F800    684 _EP6FIFOBUF	=	0xf800
+                    FC00    685 _EP8FIFOBUF	=	0xfc00
+   0000                     686 _patch_usb_descriptors_hw_rev_1_1:
+   0000                     687 	.ds 1
+   0001                     688 _patch_usb_descriptors_serial_no_1_1:
+   0001                     689 	.ds 8
+                            690 ;--------------------------------------------------------
+                            691 ; external initialized ram data
+                            692 ;--------------------------------------------------------
+                            693 	.area XISEG   (XDATA)
+                            694 	.area CSEG    (CODE)
+                            695 	.area GSINIT0 (CODE)
+                            696 	.area GSINIT1 (CODE)
+                            697 	.area GSINIT2 (CODE)
+                            698 	.area GSINIT3 (CODE)
+                            699 	.area GSINIT4 (CODE)
+                            700 	.area GSINIT5 (CODE)
+                            701 ;--------------------------------------------------------
+                            702 ; interrupt vector 
+                            703 ;--------------------------------------------------------
+                            704 	.area CSEG    (CODE)
+   0000                     705 __interrupt_vect:
+   0000 02s00r00            706 	ljmp	__sdcc_gsinit_startup
+                            707 ;--------------------------------------------------------
+                            708 ; global & static initialisations
+                            709 ;--------------------------------------------------------
+                            710 	.area CSEG    (CODE)
+                            711 	.area GSINIT  (CODE)
+                            712 	.area GSFINAL (CODE)
+                            713 	.area GSINIT  (CODE)
+                            714 	.globl __sdcc_gsinit_startup
+                            715 	.globl __sdcc_program_startup
+                            716 	.globl __start__stack
+                            717 	.globl __mcs51_genXINIT
+                            718 	.globl __mcs51_genXRAMCLEAR
+                            719 	.globl __mcs51_genRAMCLEAR
+                            720 ;------------------------------------------------------------
+                            721 ;Allocation info for local variables in function 'isr_tick'
+                            722 ;------------------------------------------------------------
+                            723 ;count                     Allocated with name '_isr_tick_count_1_1'
+                            724 ;------------------------------------------------------------
+                            725 ;Initial/src/hpsdr_main.c:180: static unsigned char	count = 1;
+                            726 ;     genAssign
+   0000 75*00 01            727 	mov	_isr_tick_count_1_1,#0x01
+                            728 	.area GSFINAL (CODE)
+   0000 02s00r03            729 	ljmp	__sdcc_program_startup
+                            730 ;--------------------------------------------------------
+                            731 ; Home
+                            732 ;--------------------------------------------------------
+                            733 	.area HOME    (CODE)
+                            734 	.area CSEG    (CODE)
+                            735 ;--------------------------------------------------------
+                            736 ; code
+                            737 ;--------------------------------------------------------
+                            738 	.area CSEG    (CODE)
+   0003                     739 __sdcc_program_startup:
+   0003 12s01rC6            740 	lcall	_main
+                            741 ;	return from main will lock up
+   0006 80 FE               742 	sjmp .
+                            743 ;------------------------------------------------------------
+                            744 ;Allocation info for local variables in function 'get_ep0_data'
+                            745 ;------------------------------------------------------------
+                            746 ;------------------------------------------------------------
+                            747 ;Initial/src/hpsdr_main.c:53: get_ep0_data (void)
+                            748 ;	-----------------------------------------
+                            749 ;	 function get_ep0_data
+                            750 ;	-----------------------------------------
+   0008                     751 _get_ep0_data:
+                    0002    752 	ar2 = 0x02
+                    0003    753 	ar3 = 0x03
+                    0004    754 	ar4 = 0x04
+                    0005    755 	ar5 = 0x05
+                    0006    756 	ar6 = 0x06
+                    0007    757 	ar7 = 0x07
+                    0000    758 	ar0 = 0x00
+                    0001    759 	ar1 = 0x01
+                            760 ;Initial/src/hpsdr_main.c:55: EP0BCL = 0;			// arm EP0 for OUT xfer.  This sets the busy bit
+                            761 ;     genAssign
+   0008 90 E6 8B            762 	mov	dptr,#_EP0BCL
+                            763 ;	Peephole 181	changed mov to clr
+   000B E4                  764 	clr	a
+   000C F0                  765 	movx	@dptr,a
+                            766 ;Initial/src/hpsdr_main.c:56: while (EP0CS & bmEPBUSY);	// wait for busy to clear
+   000D                     767 00101$:
+                            768 ;     genAssign
+   000D 90 E6 A0            769 	mov	dptr,#_EP0CS
+   0010 E0                  770 	movx	a,@dptr
+                            771 ;     genAnd
+                            772 ;	Peephole 105	removed redundant mov
+   0011 FA                  773 	mov	r2,a
+                            774 ;     genIfxJump
+                            775 ;	Peephole 112.a	removed ljmp by inverse jump logic
+   0012 20 E1 F8            776 	jb	acc.1,00101$
+   0015                     777 00107$:
+   0015                     778 00104$:
+   0015 22                  779 	ret
+                            780 ;------------------------------------------------------------
+                            781 ;Allocation info for local variables in function 'app_vendor_OUT_cmd'
+                            782 ;------------------------------------------------------------
+                            783 ;------------------------------------------------------------
+                            784 ;Initial/src/hpsdr_main.c:64: unsigned char app_vendor_OUT_cmd(void)
+                            785 ;	-----------------------------------------
+                            786 ;	 function app_vendor_OUT_cmd
+                            787 ;	-----------------------------------------
+   0016                     788 _app_vendor_OUT_cmd:
+                            789 ;Initial/src/hpsdr_main.c:66: switch (bRequest)
+                            790 ;     genPointerGet
+                            791 ;     genFarPointerGet
+   0016 90 E6 B9            792 	mov	dptr,#(_SETUPDAT + 0x0001)
+   0019 E0                  793 	movx	a,@dptr
+   001A FA                  794 	mov	r2,a
+                            795 ;     genCmpEq
+   001B BA 01 02            796 	cjne	r2,#0x01,00133$
+                            797 ;	Peephole 112.b	changed ljmp to sjmp
+   001E 80 14               798 	sjmp	00101$
+   0020                     799 00133$:
+                            800 ;     genCmpEq
+   0020 BA 02 02            801 	cjne	r2,#0x02,00134$
+                            802 ;	Peephole 112.b	changed ljmp to sjmp
+   0023 80 39               803 	sjmp	00106$
+   0025                     804 00134$:
+                            805 ;     genCmpEq
+   0025 BA 08 03            806 	cjne	r2,#0x08,00135$
+   0028 02s00r88            807 	ljmp	00112$
+   002B                     808 00135$:
+                            809 ;     genCmpEq
+   002B BA 09 03            810 	cjne	r2,#0x09,00136$
+   002E 02s00rA8            811 	ljmp	00115$
+   0031                     812 00136$:
+   0031 02s00rDA            813 	ljmp	00118$
+                            814 ;Initial/src/hpsdr_main.c:69: case VRQ_SET_LED:
+   0034                     815 00101$:
+                            816 ;Initial/src/hpsdr_main.c:71: switch (wIndexL)
+                            817 ;     genPointerGet
+                            818 ;     genFarPointerGet
+   0034 90 E6 BC            819 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0037 E0                  820 	movx	a,@dptr
+                            821 ;     genCmpEq
+                            822 ;	Peephole 112.b	changed ljmp to sjmp
+                            823 ;	Peephole 115.b	jump optimization
+   0038 FA                  824 	mov	r2,a
+   0039 60 05               825 	jz	00102$
+   003B                     826 00137$:
+                            827 ;     genCmpEq
+                            828 ;	Peephole 112.b	changed ljmp to sjmp
+                            829 ;Initial/src/hpsdr_main.c:73: case 0:
+                            830 ;	Peephole 112.b	changed ljmp to sjmp
+                            831 ;	Peephole 199	optimized misc jump sequence
+   003B BA 01 1C            832 	cjne	r2,#0x01,00104$
+   003E 80 0D               833 	sjmp	00103$
+                            834 ;00138$:
+   0040                     835 00102$:
+                            836 ;Initial/src/hpsdr_main.c:74: set_led_0 (wValueL);
+                            837 ;     genPointerGet
+                            838 ;     genFarPointerGet
+   0040 90 E6 BA            839 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0043 E0                  840 	movx	a,@dptr
+                            841 ;     genCall
+                            842 ;	Peephole 244.c	loading dpl from a instead of r2
+   0044 FA                  843 	mov	r2,a
+   0045 F5 82               844 	mov	dpl,a
+   0047 12s00r00            845 	lcall	_set_led_0
+                            846 ;Initial/src/hpsdr_main.c:75: break;
+   004A 02s00rDE            847 	ljmp	00119$
+                            848 ;Initial/src/hpsdr_main.c:77: case 1:
+   004D                     849 00103$:
+                            850 ;Initial/src/hpsdr_main.c:78: set_led_1 (wValueL);
+                            851 ;     genPointerGet
+                            852 ;     genFarPointerGet
+   004D 90 E6 BA            853 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0050 E0                  854 	movx	a,@dptr
+                            855 ;     genCall
+                            856 ;	Peephole 244.c	loading dpl from a instead of r2
+   0051 FA                  857 	mov	r2,a
+   0052 F5 82               858 	mov	dpl,a
+   0054 12s00r00            859 	lcall	_set_led_1
+                            860 ;Initial/src/hpsdr_main.c:79: break;
+   0057 02s00rDE            861 	ljmp	00119$
+                            862 ;Initial/src/hpsdr_main.c:81: default:
+   005A                     863 00104$:
+                            864 ;Initial/src/hpsdr_main.c:82: return 0;
+                            865 ;     genRet
+   005A 75 82 00            866 	mov	dpl,#0x00
+                            867 ;	Peephole 251.a	replaced ljmp to ret with ret
+   005D 22                  868 	ret
+                            869 ;Initial/src/hpsdr_main.c:86: case VRQ_FPGA_LOAD:
+   005E                     870 00106$:
+                            871 ;Initial/src/hpsdr_main.c:88: switch (wIndexL)			// sub-command
+                            872 ;     genPointerGet
+                            873 ;     genFarPointerGet
+   005E 90 E6 BC            874 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0061 E0                  875 	movx	a,@dptr
+                            876 ;     genCmpEq
+                            877 ;	Peephole 112.b	changed ljmp to sjmp
+                            878 ;	Peephole 115.b	jump optimization
+   0062 FA                  879 	mov	r2,a
+   0063 60 0A               880 	jz	00107$
+   0065                     881 00139$:
+                            882 ;     genCmpEq
+   0065 BA 01 02            883 	cjne	r2,#0x01,00140$
+                            884 ;	Peephole 112.b	changed ljmp to sjmp
+   0068 80 08               885 	sjmp	00108$
+   006A                     886 00140$:
+                            887 ;     genCmpEq
+                            888 ;	Peephole 112.b	changed ljmp to sjmp
+                            889 ;Initial/src/hpsdr_main.c:90: case FL_BEGIN:
+                            890 ;	Peephole 112.b	changed ljmp to sjmp
+                            891 ;	Peephole 199	optimized misc jump sequence
+   006A BA 02 17            892 	cjne	r2,#0x02,00110$
+   006D 80 12               893 	sjmp	00109$
+                            894 ;00141$:
+   006F                     895 00107$:
+                            896 ;Initial/src/hpsdr_main.c:91: return fpga_load_begin ();
+                            897 ;     genCall
+                            898 ;     genRet
+                            899 ;	Peephole 251.a	replaced ljmp to ret with ret
+                            900 ;	Peephole 253.a	replaced lcall/ret with ljmp
+   006F 02s00r00            901 	ljmp	_fpga_load_begin
+                            902 ;Initial/src/hpsdr_main.c:93: case FL_XFER:
+   0072                     903 00108$:
+                            904 ;Initial/src/hpsdr_main.c:94: get_ep0_data ();
+                            905 ;     genCall
+   0072 12s00r08            906 	lcall	_get_ep0_data
+                            907 ;Initial/src/hpsdr_main.c:95: return fpga_load_xfer (EP0BUF, EP0BCL);
+                            908 ;     genAssign
+   0075 90 E6 8B            909 	mov	dptr,#_EP0BCL
+   0078 E0                  910 	movx	a,@dptr
+   0079 F5*00               911 	mov	_fpga_load_xfer_PARM_2,a
+                            912 ;     genCall
+                            913 ;	Peephole 182.a	used 16 bit load of DPTR
+   007B 90 E7 40            914 	mov	dptr,#_EP0BUF
+                            915 ;     genRet
+                            916 ;Initial/src/hpsdr_main.c:97: case FL_END:
+                            917 ;	Peephole 112.b	changed ljmp to sjmp
+                            918 ;	Peephole 251.b	replaced sjmp to ret with ret
+                            919 ;	Peephole 253.a	replaced lcall/ret with ljmp
+   007E 02s00r00            920 	ljmp	_fpga_load_xfer
+   0081                     921 00109$:
+                            922 ;Initial/src/hpsdr_main.c:98: return fpga_load_end ();
+                            923 ;     genCall
+                            924 ;     genRet
+                            925 ;Initial/src/hpsdr_main.c:100: default:
+                            926 ;	Peephole 112.b	changed ljmp to sjmp
+                            927 ;	Peephole 251.b	replaced sjmp to ret with ret
+                            928 ;	Peephole 253.a	replaced lcall/ret with ljmp
+   0081 02s00r00            929 	ljmp	_fpga_load_end
+   0084                     930 00110$:
+                            931 ;Initial/src/hpsdr_main.c:101: return 0;
+                            932 ;     genRet
+   0084 75 82 00            933 	mov	dpl,#0x00
+                            934 ;Initial/src/hpsdr_main.c:105: case VRQ_I2C_WRITE:
+                            935 ;	Peephole 112.b	changed ljmp to sjmp
+                            936 ;	Peephole 251.b	replaced sjmp to ret with ret
+   0087 22                  937 	ret
+   0088                     938 00112$:
+                            939 ;Initial/src/hpsdr_main.c:107: get_ep0_data ();
+                            940 ;     genCall
+   0088 12s00r08            941 	lcall	_get_ep0_data
+                            942 ;Initial/src/hpsdr_main.c:108: if (!i2c_write (wValueL, EP0BUF, EP0BCL))
+                            943 ;     genPointerGet
+                            944 ;     genFarPointerGet
+   008B 90 E6 BA            945 	mov	dptr,#(_SETUPDAT + 0x0002)
+   008E E0                  946 	movx	a,@dptr
+   008F FA                  947 	mov	r2,a
+                            948 ;     genAddrOf
+   0090 75*00 40            949 	mov	_i2c_write_PARM_2,#_EP0BUF
+   0093 75*01 E7            950 	mov	(_i2c_write_PARM_2 + 1),#(_EP0BUF >> 8)
+                            951 ;     genAssign
+   0096 90 E6 8B            952 	mov	dptr,#_EP0BCL
+   0099 E0                  953 	movx	a,@dptr
+   009A F5*00               954 	mov	_i2c_write_PARM_3,a
+                            955 ;     genCall
+   009C 8A 82               956 	mov	dpl,r2
+   009E 12s00r00            957 	lcall	_i2c_write
+   00A1 E5 82               958 	mov	a,dpl
+                            959 ;     genIfx
+                            960 ;     genIfxJump
+                            961 ;	Peephole 109	removed ljmp by inverse jump logic
+                            962 ;Initial/src/hpsdr_main.c:109: return 0;
+                            963 ;     genRet
+                            964 ;	Peephole 256.c	loading dpl with zero from a
+   00A3 70 39               965 	jnz	00119$
+   00A5                     966 00142$:
+   00A5 F5 82               967 	mov	dpl,a
+                            968 ;Initial/src/hpsdr_main.c:112: case VRQ_SPI_WRITE:
+                            969 ;	Peephole 112.b	changed ljmp to sjmp
+                            970 ;	Peephole 251.b	replaced sjmp to ret with ret
+   00A7 22                  971 	ret
+   00A8                     972 00115$:
+                            973 ;Initial/src/hpsdr_main.c:114: get_ep0_data ();
+                            974 ;     genCall
+   00A8 12s00r08            975 	lcall	_get_ep0_data
+                            976 ;Initial/src/hpsdr_main.c:115: if (!spi_write (wValueH, wValueL, wIndexH, wIndexL, EP0BUF, EP0BCL))
+                            977 ;     genPointerGet
+                            978 ;     genFarPointerGet
+   00AB 90 E6 BB            979 	mov	dptr,#(_SETUPDAT + 0x0003)
+   00AE E0                  980 	movx	a,@dptr
+   00AF FA                  981 	mov	r2,a
+                            982 ;     genPointerGet
+                            983 ;     genFarPointerGet
+   00B0 90 E6 BA            984 	mov	dptr,#(_SETUPDAT + 0x0002)
+   00B3 E0                  985 	movx	a,@dptr
+   00B4 F5*00               986 	mov	_spi_write_PARM_2,a
+                            987 ;     genPointerGet
+                            988 ;     genFarPointerGet
+   00B6 90 E6 BD            989 	mov	dptr,#(_SETUPDAT + 0x0005)
+   00B9 E0                  990 	movx	a,@dptr
+   00BA F5*00               991 	mov	_spi_write_PARM_3,a
+                            992 ;     genPointerGet
+                            993 ;     genFarPointerGet
+   00BC 90 E6 BC            994 	mov	dptr,#(_SETUPDAT + 0x0004)
+   00BF E0                  995 	movx	a,@dptr
+   00C0 F5*00               996 	mov	_spi_write_PARM_4,a
+                            997 ;     genAddrOf
+   00C2 75*00 40            998 	mov	_spi_write_PARM_5,#_EP0BUF
+   00C5 75*01 E7            999 	mov	(_spi_write_PARM_5 + 1),#(_EP0BUF >> 8)
+                           1000 ;     genAssign
+   00C8 90 E6 8B           1001 	mov	dptr,#_EP0BCL
+   00CB E0                 1002 	movx	a,@dptr
+   00CC F5*00              1003 	mov	_spi_write_PARM_6,a
+                           1004 ;     genCall
+   00CE 8A 82              1005 	mov	dpl,r2
+   00D0 12s00r00           1006 	lcall	_spi_write
+   00D3 E5 82              1007 	mov	a,dpl
+                           1008 ;     genIfx
+                           1009 ;     genIfxJump
+                           1010 ;	Peephole 109	removed ljmp by inverse jump logic
+                           1011 ;Initial/src/hpsdr_main.c:116: return 0;
+                           1012 ;     genRet
+                           1013 ;	Peephole 256.c	loading dpl with zero from a
+   00D5 70 07              1014 	jnz	00119$
+   00D7                    1015 00143$:
+   00D7 F5 82              1016 	mov	dpl,a
+                           1017 ;Initial/src/hpsdr_main.c:119: default:
+                           1018 ;	Peephole 112.b	changed ljmp to sjmp
+                           1019 ;	Peephole 251.b	replaced sjmp to ret with ret
+   00D9 22                 1020 	ret
+   00DA                    1021 00118$:
+                           1022 ;Initial/src/hpsdr_main.c:120: return 0;
+                           1023 ;     genRet
+   00DA 75 82 00           1024 	mov	dpl,#0x00
+                           1025 ;Initial/src/hpsdr_main.c:121: }
+                           1026 ;	Peephole 112.b	changed ljmp to sjmp
+                           1027 ;Initial/src/hpsdr_main.c:122: return 1;
+                           1028 ;     genRet
+                           1029 ;	Peephole 237.a	removed sjmp to ret
+   00DD 22                 1030 	ret
+   00DE                    1031 00119$:
+   00DE 75 82 01           1032 	mov	dpl,#0x01
+   00E1                    1033 00120$:
+   00E1 22                 1034 	ret
+                           1035 ;------------------------------------------------------------
+                           1036 ;Allocation info for local variables in function 'app_vendor_IN_cmd'
+                           1037 ;------------------------------------------------------------
+                           1038 ;------------------------------------------------------------
+                           1039 ;Initial/src/hpsdr_main.c:125: unsigned char app_vendor_IN_cmd(void)
+                           1040 ;	-----------------------------------------
+                           1041 ;	 function app_vendor_IN_cmd
+                           1042 ;	-----------------------------------------
+   00E2                    1043 _app_vendor_IN_cmd:
+                           1044 ;Initial/src/hpsdr_main.c:127: switch (bRequest)
+                           1045 ;     genPointerGet
+                           1046 ;     genFarPointerGet
+   00E2 90 E6 B9           1047 	mov	dptr,#(_SETUPDAT + 0x0001)
+   00E5 E0                 1048 	movx	a,@dptr
+   00E6 FA                 1049 	mov	r2,a
+                           1050 ;     genCmpEq
+   00E7 BA 81 02           1051 	cjne	r2,#0x81,00115$
+                           1052 ;	Peephole 112.b	changed ljmp to sjmp
+   00EA 80 05              1053 	sjmp	00101$
+   00EC                    1054 00115$:
+                           1055 ;     genCmpEq
+                           1056 ;	Peephole 112.b	changed ljmp to sjmp
+                           1057 ;Initial/src/hpsdr_main.c:129: case VRQ_I2C_READ:
+                           1058 ;	Peephole 112.b	changed ljmp to sjmp
+                           1059 ;	Peephole 199	optimized misc jump sequence
+   00EC BA 82 6E           1060 	cjne	r2,#0x82,00107$
+   00EF 80 2D              1061 	sjmp	00104$
+                           1062 ;00116$:
+   00F1                    1063 00101$:
+                           1064 ;Initial/src/hpsdr_main.c:130: if (!i2c_read (wValueL, EP0BUF, wLengthL))
+                           1065 ;     genPointerGet
+                           1066 ;     genFarPointerGet
+   00F1 90 E6 BA           1067 	mov	dptr,#(_SETUPDAT + 0x0002)
+   00F4 E0                 1068 	movx	a,@dptr
+   00F5 FA                 1069 	mov	r2,a
+                           1070 ;     genAddrOf
+   00F6 75*00 40           1071 	mov	_i2c_read_PARM_2,#_EP0BUF
+   00F9 75*01 E7           1072 	mov	(_i2c_read_PARM_2 + 1),#(_EP0BUF >> 8)
+                           1073 ;     genPointerGet
+                           1074 ;     genFarPointerGet
+   00FC 90 E6 BE           1075 	mov	dptr,#(_SETUPDAT + 0x0006)
+   00FF E0                 1076 	movx	a,@dptr
+   0100 F5*00              1077 	mov	_i2c_read_PARM_3,a
+                           1078 ;     genCall
+   0102 8A 82              1079 	mov	dpl,r2
+   0104 12s00r00           1080 	lcall	_i2c_read
+   0107 E5 82              1081 	mov	a,dpl
+                           1082 ;     genIfx
+                           1083 ;     genIfxJump
+                           1084 ;	Peephole 109	removed ljmp by inverse jump logic
+                           1085 ;Initial/src/hpsdr_main.c:131: return 0;
+                           1086 ;     genRet
+                           1087 ;	Peephole 256.c	loading dpl with zero from a
+   0109 70 03              1088 	jnz	00103$
+   010B                    1089 00117$:
+   010B F5 82              1090 	mov	dpl,a
+                           1091 ;	Peephole 112.b	changed ljmp to sjmp
+                           1092 ;	Peephole 251.b	replaced sjmp to ret with ret
+   010D 22                 1093 	ret
+   010E                    1094 00103$:
+                           1095 ;Initial/src/hpsdr_main.c:132: EP0BCH = 0;
+                           1096 ;     genAssign
+   010E 90 E6 8A           1097 	mov	dptr,#_EP0BCH
+                           1098 ;	Peephole 181	changed mov to clr
+   0111 E4                 1099 	clr	a
+   0112 F0                 1100 	movx	@dptr,a
+                           1101 ;Initial/src/hpsdr_main.c:133: EP0BCL = wLengthL;
+                           1102 ;     genPointerGet
+                           1103 ;     genFarPointerGet
+   0113 90 E6 BE           1104 	mov	dptr,#(_SETUPDAT + 0x0006)
+   0116 E0                 1105 	movx	a,@dptr
+                           1106 ;     genAssign
+                           1107 ;	Peephole 100	removed redundant mov
+   0117 FA                 1108 	mov	r2,a
+   0118 90 E6 8B           1109 	mov	dptr,#_EP0BCL
+   011B F0                 1110 	movx	@dptr,a
+                           1111 ;Initial/src/hpsdr_main.c:134: break;
+                           1112 ;Initial/src/hpsdr_main.c:136: case VRQ_SPI_READ:
+                           1113 ;	Peephole 112.b	changed ljmp to sjmp
+   011C 80 43              1114 	sjmp	00108$
+   011E                    1115 00104$:
+                           1116 ;Initial/src/hpsdr_main.c:137: if (!spi_read (wValueH, wValueL, wIndexH, wIndexL, EP0BUF, wLengthL))
+                           1117 ;     genPointerGet
+                           1118 ;     genFarPointerGet
+   011E 90 E6 BB           1119 	mov	dptr,#(_SETUPDAT + 0x0003)
+   0121 E0                 1120 	movx	a,@dptr
+   0122 FA                 1121 	mov	r2,a
+                           1122 ;     genPointerGet
+                           1123 ;     genFarPointerGet
+   0123 90 E6 BA           1124 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0126 E0                 1125 	movx	a,@dptr
+   0127 F5*00              1126 	mov	_spi_read_PARM_2,a
+                           1127 ;     genPointerGet
+                           1128 ;     genFarPointerGet
+   0129 90 E6 BD           1129 	mov	dptr,#(_SETUPDAT + 0x0005)
+   012C E0                 1130 	movx	a,@dptr
+   012D F5*00              1131 	mov	_spi_read_PARM_3,a
+                           1132 ;     genPointerGet
+                           1133 ;     genFarPointerGet
+   012F 90 E6 BC           1134 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0132 E0                 1135 	movx	a,@dptr
+   0133 F5*00              1136 	mov	_spi_read_PARM_4,a
+                           1137 ;     genAddrOf
+   0135 75*00 40           1138 	mov	_spi_read_PARM_5,#_EP0BUF
+   0138 75*01 E7           1139 	mov	(_spi_read_PARM_5 + 1),#(_EP0BUF >> 8)
+                           1140 ;     genPointerGet
+                           1141 ;     genFarPointerGet
+   013B 90 E6 BE           1142 	mov	dptr,#(_SETUPDAT + 0x0006)
+   013E E0                 1143 	movx	a,@dptr
+   013F F5*00              1144 	mov	_spi_read_PARM_6,a
+                           1145 ;     genCall
+   0141 8A 82              1146 	mov	dpl,r2
+   0143 12s00r00           1147 	lcall	_spi_read
+   0146 E5 82              1148 	mov	a,dpl
+                           1149 ;     genIfx
+                           1150 ;     genIfxJump
+                           1151 ;	Peephole 109	removed ljmp by inverse jump logic
+                           1152 ;Initial/src/hpsdr_main.c:138: return 0;
+                           1153 ;     genRet
+                           1154 ;	Peephole 256.c	loading dpl with zero from a
+   0148 70 03              1155 	jnz	00106$
+   014A                    1156 00118$:
+   014A F5 82              1157 	mov	dpl,a
+                           1158 ;	Peephole 112.b	changed ljmp to sjmp
+                           1159 ;	Peephole 251.b	replaced sjmp to ret with ret
+   014C 22                 1160 	ret
+   014D                    1161 00106$:
+                           1162 ;Initial/src/hpsdr_main.c:139: EP0BCH = 0;
+                           1163 ;     genAssign
+   014D 90 E6 8A           1164 	mov	dptr,#_EP0BCH
+                           1165 ;	Peephole 181	changed mov to clr
+   0150 E4                 1166 	clr	a
+   0151 F0                 1167 	movx	@dptr,a
+                           1168 ;Initial/src/hpsdr_main.c:140: EP0BCL = wLengthL;
+                           1169 ;     genPointerGet
+                           1170 ;     genFarPointerGet
+   0152 90 E6 BE           1171 	mov	dptr,#(_SETUPDAT + 0x0006)
+   0155 E0                 1172 	movx	a,@dptr
+                           1173 ;     genAssign
+                           1174 ;	Peephole 100	removed redundant mov
+   0156 FA                 1175 	mov	r2,a
+   0157 90 E6 8B           1176 	mov	dptr,#_EP0BCL
+   015A F0                 1177 	movx	@dptr,a
+                           1178 ;Initial/src/hpsdr_main.c:141: break;
+                           1179 ;Initial/src/hpsdr_main.c:143: default:
+                           1180 ;	Peephole 112.b	changed ljmp to sjmp
+   015B 80 04              1181 	sjmp	00108$
+   015D                    1182 00107$:
+                           1183 ;Initial/src/hpsdr_main.c:144: return 0;
+                           1184 ;     genRet
+   015D 75 82 00           1185 	mov	dpl,#0x00
+                           1186 ;Initial/src/hpsdr_main.c:145: }
+                           1187 ;	Peephole 112.b	changed ljmp to sjmp
+                           1188 ;Initial/src/hpsdr_main.c:146: return 1;
+                           1189 ;     genRet
+                           1190 ;	Peephole 237.a	removed sjmp to ret
+   0160 22                 1191 	ret
+   0161                    1192 00108$:
+   0161 75 82 01           1193 	mov	dpl,#0x01
+   0164                    1194 00109$:
+   0164 22                 1195 	ret
+                           1196 ;------------------------------------------------------------
+                           1197 ;Allocation info for local variables in function 'app_vendor_cmd'
+                           1198 ;------------------------------------------------------------
+                           1199 ;------------------------------------------------------------
+                           1200 ;Initial/src/hpsdr_main.c:150: app_vendor_cmd (void)
+                           1201 ;	-----------------------------------------
+                           1202 ;	 function app_vendor_cmd
+                           1203 ;	-----------------------------------------
+   0165                    1204 _app_vendor_cmd:
+                           1205 ;Initial/src/hpsdr_main.c:152: if (bRequestType == VRT_VENDOR_IN)
+                           1206 ;     genPointerGet
+                           1207 ;     genFarPointerGet
+   0165 90 E6 B8           1208 	mov	dptr,#_SETUPDAT
+   0168 E0                 1209 	movx	a,@dptr
+   0169 FA                 1210 	mov	r2,a
+                           1211 ;     genCmpEq
+                           1212 ;	Peephole 112.b	changed ljmp to sjmp
+                           1213 ;	Peephole 199	optimized misc jump sequence
+   016A BA C0 03           1214 	cjne	r2,#0xC0,00105$
+                           1215 ;00111$:
+                           1216 ;	Peephole 200	removed redundant sjmp
+   016D                    1217 00112$:
+                           1218 ;Initial/src/hpsdr_main.c:153: return app_vendor_IN_cmd();
+                           1219 ;     genCall
+                           1220 ;     genRet
+                           1221 ;	Peephole 112.b	changed ljmp to sjmp
+                           1222 ;	Peephole 251.b	replaced sjmp to ret with ret
+                           1223 ;	Peephole 253.a	replaced lcall/ret with ljmp
+   016D 02s00rE2           1224 	ljmp	_app_vendor_IN_cmd
+   0170                    1225 00105$:
+                           1226 ;Initial/src/hpsdr_main.c:154: else if (bRequestType == VRT_VENDOR_OUT)
+                           1227 ;     genPointerGet
+                           1228 ;     genFarPointerGet
+   0170 90 E6 B8           1229 	mov	dptr,#_SETUPDAT
+   0173 E0                 1230 	movx	a,@dptr
+   0174 FA                 1231 	mov	r2,a
+                           1232 ;     genCmpEq
+                           1233 ;	Peephole 112.b	changed ljmp to sjmp
+                           1234 ;	Peephole 199	optimized misc jump sequence
+   0175 BA 40 03           1235 	cjne	r2,#0x40,00102$
+                           1236 ;00113$:
+                           1237 ;	Peephole 200	removed redundant sjmp
+   0178                    1238 00114$:
+                           1239 ;Initial/src/hpsdr_main.c:155: return app_vendor_OUT_cmd();
+                           1240 ;     genCall
+                           1241 ;     genRet
+                           1242 ;	Peephole 112.b	changed ljmp to sjmp
+                           1243 ;Initial/src/hpsdr_main.c:157: return 0;    // invalid bRequestType
+                           1244 ;     genRet
+                           1245 ;	Peephole 237.a	removed sjmp to ret
+                           1246 ;	Peephole 253.a	replaced lcall/ret with ljmp
+   0178 02s00r16           1247 	ljmp	_app_vendor_OUT_cmd
+   017B                    1248 00102$:
+   017B 75 82 00           1249 	mov	dpl,#0x00
+   017E                    1250 00107$:
+   017E 22                 1251 	ret
+                           1252 ;------------------------------------------------------------
+                           1253 ;Allocation info for local variables in function 'main_loop'
+                           1254 ;------------------------------------------------------------
+                           1255 ;------------------------------------------------------------
+                           1256 ;Initial/src/hpsdr_main.c:161: main_loop (void)
+                           1257 ;	-----------------------------------------
+                           1258 ;	 function main_loop
+                           1259 ;	-----------------------------------------
+   017F                    1260 _main_loop:
+                           1261 ;Initial/src/hpsdr_main.c:164: while (1)
+   017F                    1262 00104$:
+                           1263 ;Initial/src/hpsdr_main.c:166: if (usb_setup_packet_avail ())
+                           1264 ;     genIfx
+                           1265 ;     genIfxJump
+                           1266 ;	Peephole 111	removed ljmp by inverse jump logic
+   017F 30*00 FD           1267 	jnb	__usb_got_SUDAV,00104$
+   0182                    1268 00110$:
+                           1269 ;Initial/src/hpsdr_main.c:167: usb_handle_setup_packet ();
+                           1270 ;     genCall
+   0182 12s00r00           1271 	lcall	_usb_handle_setup_packet
+                           1272 ;	Peephole 112.b	changed ljmp to sjmp
+   0185 80 F8              1273 	sjmp	00104$
+   0187                    1274 00106$:
+   0187 22                 1275 	ret
+                           1276 ;------------------------------------------------------------
+                           1277 ;Allocation info for local variables in function 'isr_tick'
+                           1278 ;------------------------------------------------------------
+                           1279 ;count                     Allocated with name '_isr_tick_count_1_1'
+                           1280 ;------------------------------------------------------------
+                           1281 ;Initial/src/hpsdr_main.c:178: isr_tick (void) interrupt
+                           1282 ;	-----------------------------------------
+                           1283 ;	 function isr_tick
+                           1284 ;	-----------------------------------------
+   0188                    1285 _isr_tick:
+   0188 C0 E0              1286 	push	acc
+                           1287 ;Initial/src/hpsdr_main.c:181: if (--count == 0)
+                           1288 ;     genMinus
+                           1289 ;     genMinusDec
+   018A 15*00              1290 	dec	_isr_tick_count_1_1
+                           1291 ;     genCmpEq
+   018C E5*00              1292 	mov	a,_isr_tick_count_1_1
+                           1293 ;	Peephole 162	removed sjmp by inverse jump logic
+   018E 60 02              1294 	jz	00107$
+   0190                    1295 00106$:
+                           1296 ;	Peephole 112.b	changed ljmp to sjmp
+   0190 80 06              1297 	sjmp	00102$
+   0192                    1298 00107$:
+                           1299 ;Initial/src/hpsdr_main.c:183: count = 50;
+                           1300 ;     genAssign
+   0192 75*00 32           1301 	mov	_isr_tick_count_1_1,#0x32
+                           1302 ;Initial/src/hpsdr_main.c:184: HPSDR_LED_REG ^= bmLED0;
+                           1303 ;     genXor
+   0195 63 A0 40           1304 	xrl	_IOC,#0x40
+   0198                    1305 00102$:
+                           1306 ;Initial/src/hpsdr_main.c:186: clear_timer_irq ();
+                           1307 ;     genAssign
+   0198 C2 CF              1308 	clr	_TF2
+   019A                    1309 00103$:
+   019A D0 E0              1310 	pop	acc
+   019C 32                 1311 	reti
+                           1312 ;	eliminated unneeded push/pop psw
+                           1313 ;	eliminated unneeded push/pop dpl
+                           1314 ;	eliminated unneeded push/pop dph
+                           1315 ;	eliminated unneeded push/pop b
+                           1316 ;------------------------------------------------------------
+                           1317 ;Allocation info for local variables in function 'patch_usb_descriptors'
+                           1318 ;------------------------------------------------------------
+                           1319 ;hw_rev                    Allocated with name '_patch_usb_descriptors_hw_rev_1_1'
+                           1320 ;serial_no                 Allocated with name '_patch_usb_descriptors_serial_no_1_1'
+                           1321 ;------------------------------------------------------------
+                           1322 ;Initial/src/hpsdr_main.c:194: patch_usb_descriptors(void)
+                           1323 ;	-----------------------------------------
+                           1324 ;	 function patch_usb_descriptors
+                           1325 ;	-----------------------------------------
+   019D                    1326 _patch_usb_descriptors:
+                           1327 ;Initial/src/hpsdr_main.c:199: eeprom_read(I2C_ADDR_BOOT, HW_REV_OFFSET, &hw_rev, 1);	// LSB of device id
+                           1328 ;     genAddrOf
+   019D 75*00r00           1329 	mov	_eeprom_read_PARM_3,#_patch_usb_descriptors_hw_rev_1_1
+   01A0 75*01s00           1330 	mov	(_eeprom_read_PARM_3 + 1),#(_patch_usb_descriptors_hw_rev_1_1 >> 8)
+                           1331 ;     genAssign
+   01A3 75*00 05           1332 	mov	_eeprom_read_PARM_2,#0x05
+                           1333 ;     genAssign
+   01A6 75*00 01           1334 	mov	_eeprom_read_PARM_4,#0x01
+                           1335 ;     genCall
+   01A9 75 82 51           1336 	mov	dpl,#0x51
+   01AC 12s00r00           1337 	lcall	_eeprom_read
+                           1338 ;Initial/src/hpsdr_main.c:201: usb_desc_hw_rev_binary_patch_location_0[0] = hw_rev;
+                           1339 ;     genAssign
+   01AF 90s00r00           1340 	mov	dptr,#_patch_usb_descriptors_hw_rev_1_1
+   01B2 E0                 1341 	movx	a,@dptr
+                           1342 ;     genPointerSet
+                           1343 ;     genFarPointerSet
+                           1344 ;	Peephole 100	removed redundant mov
+   01B3 FA                 1345 	mov	r2,a
+   01B4 90s00r00           1346 	mov	dptr,#_usb_desc_hw_rev_binary_patch_location_0
+   01B7 F0                 1347 	movx	@dptr,a
+                           1348 ;Initial/src/hpsdr_main.c:202: usb_desc_hw_rev_binary_patch_location_1[0] = hw_rev;
+                           1349 ;     genPointerSet
+                           1350 ;     genFarPointerSet
+   01B8 90s00r00           1351 	mov	dptr,#_usb_desc_hw_rev_binary_patch_location_1
+   01BB EA                 1352 	mov	a,r2
+   01BC F0                 1353 	movx	@dptr,a
+                           1354 ;Initial/src/hpsdr_main.c:203: usb_desc_hw_rev_ascii_patch_location_0[0] = hw_rev + '0';     // FIXME if we get > 9
+                           1355 ;     genPlus
+   01BD 74 30              1356 	mov	a,#0x30
+                           1357 ;	Peephole 236.a	used r2 instead of ar2
+   01BF 2A                 1358 	add	a,r2
+                           1359 ;     genPointerSet
+                           1360 ;     genFarPointerSet
+                           1361 ;	Peephole 100	removed redundant mov
+   01C0 FA                 1362 	mov	r2,a
+   01C1 90s00r00           1363 	mov	dptr,#_usb_desc_hw_rev_ascii_patch_location_0
+   01C4 F0                 1364 	movx	@dptr,a
+   01C5                    1365 00101$:
+   01C5 22                 1366 	ret
+                           1367 ;------------------------------------------------------------
+                           1368 ;Allocation info for local variables in function 'main'
+                           1369 ;------------------------------------------------------------
+                           1370 ;------------------------------------------------------------
+                           1371 ;Initial/src/hpsdr_main.c:207: main (void)
+                           1372 ;	-----------------------------------------
+                           1373 ;	 function main
+                           1374 ;	-----------------------------------------
+   01C6                    1375 _main:
+                           1376 ;Initial/src/hpsdr_main.c:209: init_hpsdr();
+                           1377 ;     genCall
+   01C6 12s00r00           1378 	lcall	_init_hpsdr
+                           1379 ;Initial/src/hpsdr_main.c:211: set_led_0 (0);
+                           1380 ;     genCall
+   01C9 75 82 00           1381 	mov	dpl,#0x00
+   01CC 12s00r00           1382 	lcall	_set_led_0
+                           1383 ;Initial/src/hpsdr_main.c:212: set_led_1 (0);
+                           1384 ;     genCall
+   01CF 75 82 00           1385 	mov	dpl,#0x00
+   01D2 12s00r00           1386 	lcall	_set_led_1
+                           1387 ;Initial/src/hpsdr_main.c:214: EA = 0;		// disable all interrupts
+                           1388 ;     genAssign
+   01D5 C2 AF              1389 	clr	_EA
+                           1390 ;Initial/src/hpsdr_main.c:216: patch_usb_descriptors();
+                           1391 ;     genCall
+   01D7 12s01r9D           1392 	lcall	_patch_usb_descriptors
+                           1393 ;Initial/src/hpsdr_main.c:218: setup_autovectors ();
+                           1394 ;     genCall
+   01DA 12s00r00           1395 	lcall	_setup_autovectors
+                           1396 ;Initial/src/hpsdr_main.c:219: usb_install_handlers ();
+                           1397 ;     genCall
+   01DD 12s00r00           1398 	lcall	_usb_install_handlers
+                           1399 ;Initial/src/hpsdr_main.c:220: hook_timer_tick ((unsigned short) isr_tick);
+                           1400 ;     genCast
+   01E0 7Ar88              1401 	mov	r2,#_isr_tick
+   01E2 7Bs01              1402 	mov	r3,#(_isr_tick >> 8)
+                           1403 ;     genCall
+   01E4 8A 82              1404 	mov	dpl,r2
+   01E6 8B 83              1405 	mov	dph,r3
+   01E8 12s00r00           1406 	lcall	_hook_timer_tick
+                           1407 ;Initial/src/hpsdr_main.c:222: EIEX4 = 1;	// disable INT4 FIXME
+                           1408 ;     genAssign
+   01EB D2 EA              1409 	setb	_EIEX4
+                           1410 ;Initial/src/hpsdr_main.c:223: EA = 1;			// global interrupt enable
+                           1411 ;     genAssign
+   01ED D2 AF              1412 	setb	_EA
+                           1413 ;Initial/src/hpsdr_main.c:225: fx2_renumerate ();	// simulates disconnect / reconnect
+                           1414 ;     genCall
+   01EF 12s00r00           1415 	lcall	_fx2_renumerate
+                           1416 ;Initial/src/hpsdr_main.c:227: main_loop ();
+                           1417 ;     genCall
+                           1418 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   01F2 02s01r7F           1419 	ljmp	_main_loop
+                           1420 	.area CSEG    (CODE)
+                           1421 	.area XINIT   (CODE)

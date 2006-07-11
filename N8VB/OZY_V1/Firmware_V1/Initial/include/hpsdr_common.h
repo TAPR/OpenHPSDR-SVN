@@ -31,9 +31,9 @@
 #ifndef _HPSDRCOMMON_H_
 #define _HPSDRCOMMON_H_
 
-#include <hpsdr_config.h>
-#include <hpsdr_rev1_regs.h>
-#include <syncdelay.h>
+#include "hpsdr_config.h"
+#include "hpsdr_rev1_regs.h"
+#include "syncdelay.h"
 
 /*
  * From TRM page 15-105:

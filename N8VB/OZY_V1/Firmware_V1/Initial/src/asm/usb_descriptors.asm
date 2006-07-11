@@ -1,5 +1,9 @@
 ;;; -*- asm -*-
 ;;;
+;;; HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+;;;
+;;; Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
+;;;
 ;;; Copyright 2003 Free Software Foundation, Inc.
 ;;; 
 ;;; This file is part of GNU Radio
@@ -20,7 +24,7 @@
 ;;; Boston, MA 02111-1307, USA.
 ;;;
 	
-;;; USB Descriptor table for the USRP
+;;; USB Descriptor table for the HPSDR
 ;;; 
 ;;; We're a high-speed only device (480 Mb/sec) with 1 configuration
 ;;; and 3 interfaces.  
@@ -32,7 +36,7 @@
 	.module usb_descriptors
 	
 	VID_FREE	 = 0xfffe	; Free Software Folks
-	PID_USRP	 = 0x0002	; USRP
+	PID_USRP	 = 0x0007	; HPSDR
 
 	;; We distinguish configured from unconfigured USRPs using the Device ID.
 	;; If the MSB of the DID is 0, the device is unconfigured.
@@ -315,10 +319,11 @@ str1_end:
 	.even
 str2:	.db	str2_end - str2
 	.db	DSCR_STRING
-	.db	'U, 0
-	.db	'S, 0
-	.db	'R, 0
+	.db	'H, 0
 	.db	'P, 0
+	.db	'S, 0
+	.db	'D, 0
+	.db	'R, 0
 	.db	' , 0
 	.db	'R, 0
 	.db	'e, 0

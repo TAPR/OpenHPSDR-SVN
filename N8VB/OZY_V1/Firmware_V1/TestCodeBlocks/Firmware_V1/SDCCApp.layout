@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE CodeBlocks_layout_file>
+<CodeBlocks_layout_file>
+	<File name="Initial\src\fpga_load.c" open="1" top="0">
+		<Cursor position="2723" topLine="85"/>
+	</File>
+	<File name="Initial\src\lib\usb_common.c" open="1" top="1">
+		<Cursor position="4849" topLine="151"/>
+	</File>
+	<Expand folder="/Sources"/>
+	<Expand folder="/Headers"/>
+	<Expand folder="/Others/Initial/src/asm"/>
+	<Expand folder="/Others/Initial/src"/>
+	<Expand folder="/Others/Initial"/>
+	<Expand folder="/Others"/>
+</CodeBlocks_layout_file>
