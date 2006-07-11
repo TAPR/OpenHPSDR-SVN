@@ -4,27 +4,27 @@
  * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
  *
  * Copyright 2004,2006 Free Software Foundation, Inc.
- * 
+ *
  * This file is part of GNU Radio
- * 
+ *
  * GNU Radio is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- * 
+ *
  * GNU Radio is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with GNU Radio; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
 
-#include "spi.h"
-#include "hpsdr_rev2_regs.h"
+#include "../../include/spi.h"
+#include "../../include/hpsdr_rev1_regs.h"
 
 static void
 setup_enables (unsigned char enables)
@@ -37,8 +37,8 @@ setup_enables (unsigned char enables)
 
   // KLUDGE: This code is fragile, but reasonably fast...
   // low three bits of enables go into port A
-  USRP_PA = USRP_PA | (0x7 << 3);	// disable FPGA, CODEC_A, CODEC_B
-  USRP_PA ^= (enables & 0x7) << 3;	// enable specified devs
+  HPSDR_PA = HPSDR_PA | (0x7 << 3);	// disable FPGA, CODEC_A, CODEC_B
+  HPSDR_PA ^= (enables & 0x7) << 3;	// enable specified devs
 
   // high four bits of enables go into port E
   USRP_PE = USRP_PE | (0xf << 4);	// disable TX_A, RX_A, TX_B, RX_B
@@ -106,7 +106,7 @@ write_bytes_msb (const xdata unsigned char *buf, unsigned char len);
 static void
 read_bytes_msb (xdata unsigned char *buf, unsigned char len);
 
-  
+
 // returns non-zero if successful, else 0
 unsigned char
 spi_read (unsigned char header_hi, unsigned char header_lo,

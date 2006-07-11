@@ -23,8 +23,8 @@
 #ifndef _HPSDR_COMMANDS_H_
 #define _HPSDR_COMMANDS_H_
 
-#include <hpsdr_interfaces.h>
-#include <hpsdr_spi_defs.h>
+#include "hpsdr_interfaces.h"
+#include "hpsdr_spi_defs.h"
 
 #define	MAX_EP0_PKTSIZE		       64	// max size of EP0 packet on FX2
 
