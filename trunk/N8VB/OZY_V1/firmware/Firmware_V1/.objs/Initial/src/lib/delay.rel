@@ -1,0 +1,75 @@
+XH
+H 13 areas 2 global symbols
+M delay
+O -mmcs51 --model-small
+A _CODE size 0 flags 0
+A RSEG size 0 flags 0
+A REG_BANK_0 size 8 flags 4
+A DSEG size 0 flags 0
+A OSEG size 0 flags 4
+A ISEG size 0 flags 0
+A BSEG size 0 flags 80
+A PSEG size 0 flags 50
+A XSEG size 0 flags 40
+A CSEG size 27 flags 20
+S _mdelay Def0014
+S _udelay Def0001
+A GSINIT0 size 0 flags 20
+A GSINIT1 size 0 flags 20
+A GSINIT2 size 0 flags 20
+A GSINIT3 size 0 flags 20
+A GSINIT4 size 0 flags 20
+A GSINIT5 size 0 flags 20
+A GSINIT size 0 flags 20
+A GSFINAL size 0 flags 20
+A HOME size 0 flags 20
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 09
+T 00 00 22
+R 00 00 00 09
+T 00 01
+R 00 00 00 09
+T 00 01
+R 00 00 00 09
+T 00 01 AA 82
+R 00 00 00 09
+T 00 03
+R 00 00 00 09
+T 00 03 12 00 00 DA FB
+R 00 00 00 09 00 03 00 09
+T 00 08
+R 00 00 00 09
+T 00 08
+R 00 00 00 09
+T 00 08 22
+R 00 00 00 09
+T 00 09
+R 00 00 00 09
+T 00 09 90 FB 50
+R 00 00 00 09
+T 00 0C
+R 00 00 00 09
+T 00 0C A3 E5 82 45 83 70 F9 22
+R 00 00 00 09
+T 00 14
+R 00 00 00 09
+T 00 14
+R 00 00 00 09
+T 00 14 AA 82 AB 83
+R 00 00 00 09
+T 00 18
+R 00 00 00 09
+T 00 18 12 00 09 1A BA FF 01 1B
+R 00 00 00 09 00 03 00 09
+T 00 20
+R 00 00 00 09
+T 00 20 BA 00 F5 BB 00 F2
+R 00 00 00 09
+T 00 26
+R 00 00 00 09
+T 00 26
+R 00 00 00 09
+T 00 26 22
+R 00 00 00 09
