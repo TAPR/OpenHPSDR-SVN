@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
 		numread = fread(ibuf, 1, 1, ifile); 
 		if ( numread != 1 ) break; // short read or end of file 
 		if ( l0 == 0x7f && l1 == 0x7f && ibuf[0] == 0x7f ) {  // gained sync 
-			fbuf[0] = 0x74; fbuf[1] = 0x7f; fbuf[2] = 0x7f; 
+			fbuf[0] = 0x7f; fbuf[1] = 0x7f; fbuf[2] = 0x7f; 
 			numread = fread(fbuf+3, 1, FRAME_SIZE-3, ifile); 
 			if ( numread != FRAME_SIZE-3 ) break; // no more data 
 			dumpFrame(fbuf); 
