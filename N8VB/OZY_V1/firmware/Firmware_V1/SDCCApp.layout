@@ -1,11 +1,23 @@
 <?xml version="1.0"?>
 <!DOCTYPE CodeBlocks_layout_file>
 <CodeBlocks_layout_file>
-	<File name="Initial\src\asm\usb_descriptors.asm" open="1" top="0">
+	<File name="Initial\include\hpsdr_commands.h" open="1" top="1">
+		<Cursor position="0" topLine="8"/>
+	</File>
+	<File name="Initial\include\hpsdr_config.h" open="1" top="0">
 		<Cursor position="0" topLine="0"/>
 	</File>
-	<File name="Initial\src\hpsdr_main.c" open="1" top="1">
-		<Cursor position="5150" topLine="0"/>
+	<File name="Initial\include\hpsdr_globals.h" open="1" top="0">
+		<Cursor position="0" topLine="0"/>
+	</File>
+	<File name="Initial\include\hpsdr_interfaces.h" open="1" top="0">
+		<Cursor position="0" topLine="0"/>
+	</File>
+	<File name="Initial\include\hpsdr_spi_defs.h" open="1" top="0">
+		<Cursor position="0" topLine="0"/>
+	</File>
+	<File name="Initial\include\usb_common.h" open="1" top="0">
+		<Cursor position="0" topLine="0"/>
 	</File>
 	<Expand folder="/Sources/Initial/src"/>
 	<Expand folder="/Sources/Initial"/>
@@ -13,8 +25,5 @@
 	<Expand folder="/Headers/Initial/include"/>
 	<Expand folder="/Headers/Initial"/>
 	<Expand folder="/Headers"/>
-	<Expand folder="/Others/Initial/src/asm"/>
-	<Expand folder="/Others/Initial/src"/>
-	<Expand folder="/Others/Initial"/>
 	<Expand folder="/Others"/>
 </CodeBlocks_layout_file>

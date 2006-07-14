@@ -74,11 +74,11 @@ unsigned char app_vendor_OUT_cmd(void)
 							set_led_0 (wValueL);
 							break;
 
-					      	case 1:
+                        case 1:
 							set_led_1 (wValueL);
 							break;
 
-					      	default:
+                        default:
 							return 0;
 		  			}
 		  		break;
@@ -90,11 +90,11 @@ unsigned char app_vendor_OUT_cmd(void)
 						case FL_BEGIN:
 							return fpga_load_begin ();
 
-					      	case FL_XFER:
+                        case FL_XFER:
 							get_ep0_data ();
 							return fpga_load_xfer (EP0BUF, EP0BCL);
 
-					      	case FL_END:
+                        case FL_END:
 							return fpga_load_end ();
 
   						default:
@@ -127,18 +127,18 @@ unsigned char app_vendor_IN_cmd(void)
 	switch (bRequest)
 		{
 			case VRQ_I2C_READ:
-      				if (!i2c_read (wValueL, EP0BUF, wLengthL))
-					return 0;
-      				EP0BCH = 0;
-      				EP0BCL = wLengthL;
-      				break;
+                if (!i2c_read (wValueL, EP0BUF, wLengthL))
+                    return 0;
+                EP0BCH = 0;
+                EP0BCL = wLengthL;
+                break;
 
 			case VRQ_SPI_READ:
   				if (!spi_read (wValueH, wValueL, wIndexH, wIndexL, EP0BUF, wLengthL))
 					return 0;
-			      EP0BCH = 0;
-			      EP0BCL = wLengthL;
-			      break;
+                EP0BCH = 0;
+                EP0BCL = wLengthL;
+                break;
 
 		    	default:
 		      		return 0;
@@ -154,7 +154,7 @@ app_vendor_cmd (void)
   	else if (bRequestType == VRT_VENDOR_OUT)
 		return app_vendor_OUT_cmd();
 	else
-    		return 0;    // invalid bRequestType
+        return 0;    // invalid bRequestType
 }
 
 static void
