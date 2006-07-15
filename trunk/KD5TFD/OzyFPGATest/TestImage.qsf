@@ -1,0 +1,211 @@
+# Copyright (C) 1991-2005 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions
+# and other software and tools, and its AMPP partner logic
+# functions, and any output files any of the foregoing
+# (including device programming or simulation files), and any
+# associated documentation or information are expressly subject
+# to the terms and conditions of the Altera Program License
+# Subscription Agreement, Altera MegaCore Function License
+# Agreement, or other applicable license agreement, including,
+# without limitation, that your use is for the sole purpose of
+# programming logic devices manufactured by Altera and sold by
+# Altera or its authorized distributors.  Please refer to the
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#               TestImage_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#               assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name FAMILY "Cyclone II"
+set_global_assignment -name DEVICE EP2C5Q208C8
+set_global_assignment -name TOP_LEVEL_ENTITY OzyTestImageTop
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "09:27:29  JULY 15, 2006"
+set_global_assignment -name LAST_QUARTUS_VERSION 5.1
+set_global_assignment -name USER_LIBRARIES "E:\\wjt\\radio\\projects\\Xylo\\wjt-wolfson\\db\\/"
+set_global_assignment -name DEVICE_FILTER_PACKAGE PQFP
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 208
+set_location_assignment PIN_3 -to FX2_PC6
+set_location_assignment PIN_4 -to FX2_CTL3
+set_location_assignment PIN_5 -to FX2_CTL2
+set_location_assignment PIN_6 -to FX2_PA7
+set_location_assignment PIN_8 -to FX2_PA6
+set_location_assignment PIN_10 -to FX2_PA5
+set_location_assignment PIN_11 -to FX2_PA4
+set_location_assignment PIN_12 -to FX2_PA3
+set_location_assignment PIN_13 -to FX2_PA2
+set_location_assignment PIN_14 -to FX2_PA1
+set_location_assignment PIN_15 -to FX2_PA0
+set_location_assignment PIN_30 -to FX2_RDY0
+set_location_assignment PIN_31 -to FX2_RDY1
+set_location_assignment PIN_32 -to FX2_RDY2
+set_location_assignment PIN_33 -to FX2_RDY3
+set_location_assignment PIN_34 -to FX2_RDY4
+set_location_assignment PIN_35 -to FX2_RDY5
+set_location_assignment PIN_36 -to FX2_PE0
+set_location_assignment PIN_37 -to FX2_PE1
+set_location_assignment PIN_39 -to FX2_PE2
+set_location_assignment PIN_40 -to FX2_PE3
+set_location_assignment PIN_41 -to FX2_PE4
+set_location_assignment PIN_43 -to FX2_PE5
+set_location_assignment PIN_45 -to FX2_PE6
+set_location_assignment PIN_46 -to FX2_PE7
+set_location_assignment PIN_47 -to FPGA_CLKXOUT
+set_location_assignment PIN_48 -to FPGA_CLKYOUT
+
+set_location_assignment PIN_56 -to FX2_PB0
+set_location_assignment PIN_57 -to FX2_PB1
+set_location_assignment PIN_58 -to FX2_PB2
+set_location_assignment PIN_59 -to FX2_PB3
+set_location_assignment PIN_60 -to FX2_PB4
+set_location_assignment PIN_61 -to FX2_PB5
+set_location_assignment PIN_63 -to FX2_PB6
+set_location_assignment PIN_64 -to FX2_PB7
+
+set_location_assignment PIN_67 -to FPGA_GPIO1
+set_location_assignment PIN_68 -to FPGA_GPIO2
+set_location_assignment PIN_69 -to FPGA_GPIO3
+set_location_assignment PIN_70 -to FPGA_GPIO4
+set_location_assignment PIN_72 -to FPGA_GPIO5
+set_location_assignment PIN_74 -to FPGA_GPIO6
+set_location_assignment PIN_75 -to FPGA_GPIO7
+set_location_assignment PIN_76 -to FPGA_GPIO8
+set_location_assignment PIN_77 -to FPGA_GPIO9
+set_location_assignment PIN_87 -to FPGA_GPIO15
+set_location_assignment PIN_88 -to FPGA_GPIO16
+set_location_assignment PIN_89 -to FPGA_GPIO17
+set_location_assignment PIN_90 -to FPGA_GPIO18
+set_location_assignment PIN_92 -to FPGA_GPIO19
+set_location_assignment PIN_94 -to FPGA_GPIO10
+set_location_assignment PIN_95 -to FPGA_GPIO11
+set_location_assignment PIN_96 -to FPGA_GPIO12
+set_location_assignment PIN_97 -to FPGA_GPIO13
+set_location_assignment PIN_99 -to FPGA_GPIO14
+
+
+set_location_assignment PIN_101 -to FX2_INT4
+set_location_assignment PIN_102 -to FX2_TO
+set_location_assignment PIN_103 -to FPGA_TXD
+set_location_assignment PIN_104 -to FPGA_RXD
+
+
+set_location_assignment PIN_105 -to ATLAS_X26DC
+set_location_assignment PIN_106 -to ATLAS_X25DC
+set_location_assignment PIN_107 -to FPGA_INIT_DONE
+
+
+
+set_location_assignment PIN_110 -to ATLAS_X24DC
+
+set_location_assignment PIN_112 -to ATLAS_X23C7
+set_location_assignment PIN_113 -to ATLAS_X22C6
+set_location_assignment PIN_114 -to ATLAS_X21C5
+set_location_assignment PIN_115 -to ATLAS_X20C4
+set_location_assignment PIN_116 -to ATLAS_X19C3
+set_location_assignment PIN_117 -to ATLAS_X18C2
+set_location_assignment PIN_118 -to ATLAS_X17C1
+set_location_assignment PIN_119 -to ATLAS_X16C0
+set_location_assignment PIN_120 -to ATLAS_X15B7
+
+
+
+
+set_location_assignment PIN_127 -to ATLAS_X14B6
+set_location_assignment PIN_128 -to ATLAS_X13B5
+
+set_location_assignment PIN_130 -to FPGA_CLK6IN
+
+
+
+set_location_assignment PIN_133 -to ATLAS_X12B4
+set_location_assignment PIN_134 -to ATLAS_X11B3
+set_location_assignment PIN_135 -to ATLAS_X10B2
+
+set_location_assignment PIN_137 -to ATLAS_X9B1
+set_location_assignment PIN_138 -to ATLAS_X8B0
+set_location_assignment PIN_139 -to ATLAS_X7A7
+
+set_location_assignment PIN_141 -to ATLAS_X6A6
+set_location_assignment PIN_142 -to ATLAS_X5A5
+set_location_assignment PIN_143 -to ATLAS_X4A4
+set_location_assignment PIN_144 -to ATLAS_X3A3
+set_location_assignment PIN_145 -to ATLAS_X2A2
+set_location_assignment PIN_146 -to ATLAS_X1A1
+set_location_assignment PIN_147 -to ATLAS_X0A0
+
+set_location_assignment PIN_149 -to ATLAS_Y0A0
+set_location_assignment PIN_150 -to ATLAS_Y1A1
+set_location_assignment PIN_151 -to ATLAS_Y2A2
+set_location_assignment PIN_152 -to ATLAS_Y3A3
+
+
+
+set_location_assignment PIN_160 -to ATLAS_Y4A4
+set_location_assignment PIN_161 -to ATLAS_Y5A5
+set_location_assignment PIN_162 -to ATLAS_Y6A6
+set_location_assignment PIN_163 -to ATLAS_Y7A7
+set_location_assignment PIN_164 -to ATLAS_Y8B0
+set_location_assignment PIN_165 -to ATLAS_Y9B1
+
+
+
+set_location_assignment PIN_168 -to ATLAS_Y10B2
+set_location_assignment PIN_169 -to ATLAS_Y11B3
+set_location_assignment PIN_170 -to ATLAS_Y12B4
+set_location_assignment PIN_171 -to ATLAS_Y13B5
+
+
+set_location_assignment PIN_173 -to ATLAS_Y14B6
+
+
+set_location_assignment PIN_175 -to ATLAS_Y15B7
+set_location_assignment PIN_176 -to ATLAS_Y16C0
+
+
+set_location_assignment PIN_179 -to ATLAS_Y17C1
+set_location_assignment PIN_180 -to ATLAS_Y18C2
+set_location_assignment PIN_181 -to ATLAS_Y19C3
+set_location_assignment PIN_182 -to ATLAS_Y20C4
+
+
+set_location_assignment PIN_185 -to ATLAS_Y21C5
+
+
+set_location_assignment PIN_187 -to ATLAS_Y22C6
+set_location_assignment PIN_188 -to ATLAS_Y23C7
+set_location_assignment PIN_189 -to ATLAS_Y24DC
+
+
+set_location_assignment PIN_191 -to ATLAS_Y25DC
+set_location_assignment PIN_192 -to ATLAS_Y26DC
+
+
+set_location_assignment PIN_197 -to FX2_CTL1
+set_location_assignment PIN_198 -to FX2_CTL0
+set_location_assignment PIN_199 -to FX2_PD7
+set_location_assignment PIN_200 -to FX2_PD6
+set_location_assignment PIN_201 -to FX2_PD5
+
+
+set_location_assignment PIN_203 -to FX2_PD4
+
+
+set_location_assignment PIN_205 -to FX2_PD3
+set_location_assignment PIN_206 -to FX2_PD2
+set_location_assignment PIN_207 -to FX2_PD1
+set_location_assignment PIN_208 -to FX2_PD0
+
+set_location_assignment PIN_108 -to FX2_T1
+set_global_assignment -name VERILOG_FILE OzyTestImage.v
+set_global_assignment -name AUTO_RESTART_CONFIGURATION OFF
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
