@@ -10,14 +10,14 @@ namespace HPSDR_USB_LIB_V1
     {   
         // FROM USB.H in libUSB
 
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public struct usb_descriptor_header
         {
             public byte bLength;
             public byte bDescriptorType;
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public struct usb_string_descriptor
         {
             public byte bLength;
@@ -25,7 +25,7 @@ namespace HPSDR_USB_LIB_V1
             public ushort wData0;
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public struct usb_hid_descriptor
         {
             public byte bLength;
@@ -36,7 +36,7 @@ namespace HPSDR_USB_LIB_V1
         }
         
         public const byte USB_MAXENDPOINTS = 32;
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public struct usb_endpoint_descriptor
         {
             public byte bLength;
@@ -61,7 +61,7 @@ namespace HPSDR_USB_LIB_V1
         public const byte USB_ENDPOINT_TYPE_INTERRUPT = 3;
 
         public const byte USB_MAXINTERFACES = 32;
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public struct usb_interface_descriptor
         {
             public byte bLength;
@@ -81,7 +81,7 @@ namespace HPSDR_USB_LIB_V1
         }
 
         public const byte USB_MAXALTSETTING = 128;	/* Hard limit */
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public struct usb_interface
         {
             public IntPtr altsetting;
@@ -89,7 +89,8 @@ namespace HPSDR_USB_LIB_V1
         }
 
         public const byte USB_MAXCONFIG = 8;
-        [StructLayout(LayoutKind.Sequential)]
+        // Note Pack = 1 is needed here!
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct usb_config_descriptor
         {
             public byte bLength;
@@ -101,13 +102,13 @@ namespace HPSDR_USB_LIB_V1
             public byte bmAttributes;
             public byte MaxPower;
 
-            public IntPtr Interface;
+            public IntPtr uinterface;
 
-            IntPtr extra;	/* Extra descriptors */
+            public IntPtr extra;	/* Extra descriptors */
             public int extralen;
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public struct usb_device_descriptor
         {
             public byte bLength;
@@ -126,7 +127,7 @@ namespace HPSDR_USB_LIB_V1
             public byte bNumConfigurations;            
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public struct usb_ctrl_setup 
         {
             public byte bRequestType;
@@ -171,7 +172,8 @@ namespace HPSDR_USB_LIB_V1
         public const int USB_ERROR_BEGIN = 500000;
 
         const int LIBUSB_PATH_MAX = 512;
-        [StructLayout(LayoutKind.Sequential)]
+        // Note Pack = 2 is needed to prevent a invalid memory access
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public class usb_device
         {
             public IntPtr next;
@@ -183,10 +185,9 @@ namespace HPSDR_USB_LIB_V1
             public IntPtr bus;
             
             public usb_device_descriptor descriptor;
-            public Int16 foo; //why??????????????????????????
 
             public IntPtr config;
-            
+                                      
             public IntPtr dev;		/* Darwin support */
             
             public byte devnum;
@@ -242,7 +243,7 @@ namespace HPSDR_USB_LIB_V1
             //}
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public class usb_bus
         {
             public IntPtr next = IntPtr.Zero;
@@ -292,7 +293,7 @@ namespace HPSDR_USB_LIB_V1
             //}
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public struct usb_dll_version
         {
             public int major;
@@ -301,7 +302,7 @@ namespace HPSDR_USB_LIB_V1
             public int nano;
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public struct usb_driver_version
         {
             public int major;
@@ -310,7 +311,7 @@ namespace HPSDR_USB_LIB_V1
             public int nano;
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
         public struct usb_version
         {
             public IntPtr dll_ver;
