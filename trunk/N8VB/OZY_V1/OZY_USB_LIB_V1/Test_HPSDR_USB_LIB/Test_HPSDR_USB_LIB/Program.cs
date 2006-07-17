@@ -10,6 +10,23 @@ namespace Test_HPSDR_USB_LIB
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Getting structure sizes...");
+            libUSB_Interface.usb_bus usb_bus = new libUSB_Interface.usb_bus();
+            Console.WriteLine("Sizeof usb_bus_struct: " + usb_bus.Size());
+            libUSB_Interface.usb_device usb_device = new libUSB_Interface.usb_device();
+            Console.WriteLine("Sizeof usb_device_struct: " + usb_device.Size());
+            libUSB_Interface.usb_config_descriptor usb_conf_descr = new libUSB_Interface.usb_config_descriptor();
+            Console.WriteLine("Sizeof usb_config_desriptior_struct: " + usb_conf_descr.Size());
+            libUSB_Interface.usb_device_descriptor usb_dev_descr = new libUSB_Interface.usb_device_descriptor();
+            Console.WriteLine("Sizeof usb_device_desriptior_struct: " + usb_dev_descr.Size());
+            libUSB_Interface.usb_interface usb_interface = new libUSB_Interface.usb_interface();
+            Console.WriteLine("Sizeof usb_interface_struct: " + usb_interface.Size());
+            libUSB_Interface.usb_interface_descriptor usb_interface_descr = new libUSB_Interface.usb_interface_descriptor();
+            Console.WriteLine("Sizeof usb_interface_descriptor_struct: " + usb_interface_descr.Size());
+            libUSB_Interface.usb_endpoint_descriptor usb_endpoint_descr = new libUSB_Interface.usb_endpoint_descriptor();
+            Console.WriteLine("Sizeof usb_endpoint_descriptor_struct: " + usb_endpoint_descr.Size());
+
+            Console.WriteLine("");
             Console.WriteLine("Initializing libUSB");
             libUSB_Interface.usb_init();
             Console.WriteLine("finding busses...");
@@ -19,13 +36,25 @@ namespace Test_HPSDR_USB_LIB
             Console.WriteLine("usb_get_busses...");
             libUSB_Interface.usb_bus bus = libUSB_Interface.usb_get_busses();
             Console.WriteLine("bus location: " + bus.location.ToString());
-            libUSB_Interface.usb_bus next_bus;
-            Console.WriteLine("checking next bus...");
-            if (bus.next != IntPtr.Zero)
-                next_bus = (libUSB_Interface.usb_bus)Marshal.PtrToStructure(bus.next, typeof(libUSB_Interface.usb_bus));
+
+            USB usb = new USB();
+            
+            Console.WriteLine("Checking for VID=0xFFFE, PID=0x0007, DID=0, SN=0...");
+            libUSB_Interface.usb_device fdev = usb.FindDevice(bus, 0xFFFE, 0x0007, 0, 0);
+            if (fdev != null)
+                Console.WriteLine("found VID PID DID SN...");
             else
-                Console.WriteLine("oops bus is null! No next bus...");
-            libUSB_Interface.usb_device dev = (libUSB_Interface.usb_device)Marshal.PtrToStructure(bus.devices, typeof(libUSB_Interface.usb_device)); ;
+                Console.WriteLine("did not find VID PID DID SN...");
+
+            Console.WriteLine("checking next bus...");
+
+            libUSB_Interface.usb_bus next_bus = bus.NextBus;
+            if (next_bus != null)
+                Console.WriteLine(bus.dirname);
+            else
+                Console.WriteLine("oops no next bus!...");
+
+            libUSB_Interface.usb_device dev = bus.GetDevices();
             if (dev == null)
             {
                 Console.WriteLine("Dev is null, done...");
@@ -43,6 +72,8 @@ namespace Test_HPSDR_USB_LIB
                 Console.WriteLine("iManufacturer: " + "0x" + dev.descriptor.iManufacturer.ToString("x") + "h");
                 Console.WriteLine("idVendor: " + "0x" + dev.descriptor.idVendor.ToString("x") + "h");
                 Console.WriteLine("idProduct: " + "0x" + dev.descriptor.idProduct.ToString("x") + "h");
+                Console.WriteLine("iProduct: " + dev.descriptor.iProduct.ToString());
+                Console.WriteLine("iSerialNumber: " + dev.descriptor.iSerialNumber.ToString());
                 Console.WriteLine("bNumConfigurations: " +  dev.descriptor.bNumConfigurations.ToString());
                 Console.WriteLine("bLength: " + dev.descriptor.bLength.ToString());
                 Console.WriteLine("bDescriptorType: " + dev.descriptor.bDescriptorType.ToString());
@@ -59,9 +90,9 @@ namespace Test_HPSDR_USB_LIB
             }
             else
             {
-                libUSB_Interface.usb_config_descriptor config_descr = (libUSB_Interface.usb_config_descriptor)Marshal.PtrToStructure(dev.config, typeof(libUSB_Interface.usb_config_descriptor));
                 for (int i = 0; i < dev.descriptor.bNumConfigurations; i++)
                 {
+                    libUSB_Interface.usb_config_descriptor config_descr = dev.GetConfig(i);
                     Console.WriteLine("wTotalLength: " + config_descr.wTotalLength.ToString());
                     Console.WriteLine("bNumInterfaces: " + config_descr.bNumInterfaces.ToString());
                     Console.WriteLine("bConfigurationValue: " + config_descr.bConfigurationValue.ToString());
@@ -70,27 +101,82 @@ namespace Test_HPSDR_USB_LIB
                     Console.WriteLine("MaxPower: " + config_descr.MaxPower.ToString());
 
                     Console.WriteLine("");
-                    libUSB_Interface.usb_interface uinterface = (libUSB_Interface.usb_interface)Marshal.PtrToStructure(config_descr.uinterface, typeof(libUSB_Interface.usb_interface));
-                    Console.WriteLine("num_altsetting: " + uinterface.num_altsetting.ToString());
-                    IntPtr ptr_to_altsetting;
-                    for (int j = 0; j < uinterface.num_altsetting; j++)
+
+                    for (int q = 0; q < config_descr.bNumInterfaces; q++)
                     {
-                        int foo = (int)uinterface.altsetting;
-                        foo = foo + j * 4;
-                        ptr_to_altsetting = (IntPtr)foo;
-                        libUSB_Interface.usb_interface_descriptor altsetting = (libUSB_Interface.usb_interface_descriptor)Marshal.PtrToStructure(ptr_to_altsetting, typeof(libUSB_Interface.usb_interface_descriptor));
-                        Console.WriteLine("bLength: " + altsetting.bLength.ToString());
-                        Console.WriteLine("bInterfaceNumber: " + altsetting.bInterfaceNumber.ToString());
-                        Console.WriteLine("bAlternateSetting: " + altsetting.bAlternateSetting.ToString());
-                        Console.WriteLine("bNumEndpoints: " + altsetting.bNumEndpoints.ToString());
-                        Console.WriteLine("bInterfaceClass: " + altsetting.bInterfaceClass.ToString());
-                        Console.WriteLine("bInterfaceSubClass: " + altsetting.bInterfaceSubClass.ToString());
-                        Console.WriteLine("bInterfaceProtocol: " + altsetting.bInterfaceProtocol.ToString());
-                        Console.WriteLine("iInterface: " + altsetting.iInterface.ToString());
+                        libUSB_Interface.usb_interface uinterface = config_descr.GetInterface(q);
+
+                        Console.WriteLine("num_altsetting: " + uinterface.num_altsetting.ToString());
+
+                        for (int j = 0; j < uinterface.num_altsetting; j++)
+                        {
+                            libUSB_Interface.usb_interface_descriptor altsetting = uinterface.GetAltSetting(j);
+                            Console.WriteLine("");
+                            Console.WriteLine("*******Interface Descr*******");
+                            Console.WriteLine("bLength: " + altsetting.bLength.ToString());
+                            Console.WriteLine("bInterfaceNumber: " + altsetting.bInterfaceNumber.ToString());
+                            Console.WriteLine("bAlternateSetting: " + altsetting.bAlternateSetting.ToString());
+                            Console.WriteLine("bNumEndpoints: " + altsetting.bNumEndpoints.ToString());
+                            Console.WriteLine("bInterfaceClass: " + altsetting.bInterfaceClass.ToString());
+                            Console.WriteLine("bInterfaceSubClass: " + altsetting.bInterfaceSubClass.ToString());
+                            Console.WriteLine("bInterfaceProtocol: " + altsetting.bInterfaceProtocol.ToString());
+                            Console.WriteLine("iInterface: " + altsetting.iInterface.ToString());
+                            Console.WriteLine("");
+
+                            for (int h = 0; h < altsetting.bNumEndpoints; h++)
+                            {
+                                libUSB_Interface.usb_endpoint_descriptor endpoint_descr = altsetting.GetEndpoint(h);
+                                Console.WriteLine("");
+                                Console.WriteLine("-------EndPoint Descr---------");
+                                Console.WriteLine("bEndpointAddress: " + endpoint_descr.bEndpointAddress.ToString("x"));
+                                Console.WriteLine("bmAttributes: " + endpoint_descr.bmAttributes.ToString("x"));
+                                Console.WriteLine("wMaxPacketSize: " + endpoint_descr.wMaxPacketSize.ToString());
+                                Console.WriteLine("bInterval: " + endpoint_descr.bInterval.ToString());
+                                Console.WriteLine("bRefresh: " + endpoint_descr.bRefresh.ToString());
+                                Console.WriteLine("bSynchAddress: " + endpoint_descr.bSynchAddress.ToString());
+                            }
+                        }
                     }
                 }
             }
 
+            int wrt_size = 200;
+            int rd_size = 200;
+
+            Console.WriteLine("Resetting CPU...Reset ON...");
+            Console.WriteLine("Result: " + usb.Reset_CPU(usb_dev_handle, true).ToString());
+            
+            //Console.WriteLine("Attempting to upload RAM at 0xE000...");
+            //byte[] input_buf = new byte[wrt_size];
+            //for (int i = 0; i < wrt_size; i++)
+            //    input_buf[i] = (byte)(i);
+
+            //int a = usb.Write_RAM(usb_dev_handle, 0xE000, input_buf);
+            //if (a < 0)
+            //    Console.WriteLine("Upload failed...");
+            //else
+            //    Console.WriteLine("Wrote: " + a.ToString() + " bytes to 0xE000...");
+
+                       
+            //Console.WriteLine("Attempting to dump RAM starting at 0xE000...");
+            //byte[] read_buffer = new byte[rd_size];
+
+            //int a1 = usb.Read_RAM(usb_dev_handle, 0xE000, ref read_buffer);
+            //if (a1 < 0)
+            //    Console.WriteLine("Download failed...");
+            //else
+            //    Console.WriteLine("Read: " + a1.ToString() + " bytes from 0xE000...");
+
+
+            //for (int i = 0; i < read_buffer.Length; i++)
+            //    Console.WriteLine(read_buffer[i].ToString());
+
+            Console.WriteLine("Trying to open intel hex file...");
+            Console.WriteLine("Result: " + usb.Upload_Firmware(usb_dev_handle, "c:\\testfw.hex").ToString());
+
+            Console.WriteLine("Taking CPU out of reset...");
+            Console.WriteLine("Result: " + usb.Reset_CPU(usb_dev_handle, false).ToString());
+            
             libUSB_Interface.usb_close(usb_dev_handle);
             Console.WriteLine("done...");
             Console.ReadKey();            
