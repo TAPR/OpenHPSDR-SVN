@@ -144,10 +144,13 @@ module OzyTestImageTop(
     output FX2_PD3,
     output FX2_PD2,
     output FX2_PD1,
-    output FX2_PD0
-);
-
-
+    output FX2_PD0,
+    output FPGA_GPIO20,
+    output FPGA_GPIO21,
+    output FPGA_GPIO22,
+    output FPGA_GPIO23,
+    output FPGA_GPIO24
+); 
 
         // divided down clock signals
 
@@ -179,10 +182,6 @@ always @ ( posedge  FPGA_CLK6IN ) begin
         clock_reg <= clock_reg + 1;
 end
 
-
-
-// assign FPGA_ASD0 = clock_reg[0];              // 0 12.288 Mhz
-// assign FPGA_NCS0 = clock_reg[1];              // 1 6.144 Mhz
 assign FX2_PC6 = clock_reg[2];                // 2 3.072 Mhz
 assign FX2_CTL3 = clock_reg[3];               // 3 1.536
 assign FX2_CTL2 = clock_reg[4];               // 4 768 khz
@@ -194,10 +193,6 @@ assign FX2_PA3 = clock_reg[9];                // 9 24khz
 assign FX2_PA2 = clock_reg[10];               // 10 12khz
 assign FX2_PA1 = clock_reg[11];               // 11 6khz
 assign FX2_PA0 = clock_reg[12];               // 12 3khz
-assign FX2_CLK = clock_reg[13];               // 13 1.5khz
-assign FX2_IFCLK = clock_reg[14];             // 14  750hz
-assign FPGA_CLK2IN = clock_reg[15];           // 15 375hz
-assign FPGA_CLK3IN = clock_reg[16];           // 16 187.5hz
 assign FX2_RDY0 = clock_reg[17];              // 17 93.75hz
 assign FX2_RDY1 = clock_reg[18];              // 18 46.875hz
 assign FX2_RDY2 = clock_reg[19];              // 19 23.4375 hz
@@ -259,13 +254,8 @@ assign ATLAS_X18C2 = clock_reg[14];           // 14  750hz
 assign ATLAS_X17C1 = clock_reg[15];           // 15 375hz
 assign ATLAS_X16C0 = clock_reg[16];           // 16 187.5hz
 assign ATLAS_X15B7 = clock_reg[17];           // 17 93.75hz
-// assign FPGA_NSTATUS = clock_reg[18];          // 18 46.875hz
-// assign FPGA_CONFIG_DONE = clock_reg[19];      // 19 23.4375 hz
-// assign FPGA_MSEL1 = clock_reg[0];             // 0 12.288 Mhz
-// assign FPGA_MSEL0 = clock_reg[1];             // 1 6.144 Mhz
 assign ATLAS_X14B6 = clock_reg[2];            // 2 3.072 Mhz
 assign ATLAS_X13B5 = clock_reg[3];            // 3 1.536
-assign FPGA_CLK7IN = clock_reg[4];            // 4 768 khz
 // assign FPGA_CLK6IN = clock_reg[5];            // 5 384 khz
 assign FPGA_CLK5IN = clock_reg[6];            // 6 192khz
 assign FPGA_CLK4IN = clock_reg[7];            // 7  96khz
@@ -319,6 +309,16 @@ assign FX2_PD3 = clock_reg[14];               // 14  750hz
 assign FX2_PD2 = clock_reg[15];               // 15 375hz
 assign FX2_PD1 = clock_reg[16];               // 16 187.5hz
 assign FX2_PD0 = clock_reg[17];               // 17 93.75hz
+assign FPGA_GPIO20 = clock_reg[18];           // 18 46.875hz
+assign FPGA_GPIO21 = clock_reg[19];           // 19 23.4375 hz
+assign FPGA_GPIO22 = clock_reg[00];           // 0 12.288 Mhz
+assign FPGA_GPIO23 = clock_reg[01];           // 1 6.144 Mhz
+assign FPGA_GPIO24 = clock_reg[02];           // 2 3.072 Mhz
+
+
+
+
+
 
 
 endmodule
