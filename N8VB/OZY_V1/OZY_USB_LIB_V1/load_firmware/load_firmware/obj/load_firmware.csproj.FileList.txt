@@ -1,0 +1,14 @@
+obj\Debug\load_firmware.exe
+obj\Debug\load_firmware.pdb
+bin\Release\load_firmware.exe
+bin\Release\load_firmware.pdb
+bin\Release\HPSDR_USB_LIB_V1.dll
+bin\Release\HPSDR_USB_LIB_V1.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\load_firmware.exe
+obj\Release\load_firmware.pdb
+bin\Debug\load_firmware.exe
+bin\Debug\load_firmware.pdb
+bin\Debug\HPSDR_USB_LIB_V1.dll
+bin\Debug\HPSDR_USB_LIB_V1.pdb
+obj\Debug\ResolveAssemblyReference.cache
