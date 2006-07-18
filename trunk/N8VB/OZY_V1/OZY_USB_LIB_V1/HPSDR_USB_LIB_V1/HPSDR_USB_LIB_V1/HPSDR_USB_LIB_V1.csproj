@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="libUSB_Interface.cs" />
+    <Compile Include="OZY.cs" />
     <Compile Include="USB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

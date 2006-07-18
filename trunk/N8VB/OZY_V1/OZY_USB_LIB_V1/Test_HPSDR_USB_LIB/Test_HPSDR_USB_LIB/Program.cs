@@ -39,12 +39,12 @@ namespace Test_HPSDR_USB_LIB
 
             USB usb = new USB();
             
-            Console.WriteLine("Checking for VID=0xFFFE, PID=0x0007, DID=0, SN=0...");
-            libUSB_Interface.usb_device fdev = usb.FindDevice(bus, 0xFFFE, 0x0007, 0, 0);
+            Console.WriteLine("Checking for VID=0xFFFE, PID=0x0007...");
+            libUSB_Interface.usb_device fdev = usb.FindDevice(bus, 0xFFFE, 0x0007);
             if (fdev != null)
-                Console.WriteLine("found VID PID DID SN...");
+                Console.WriteLine("found VID PID...");
             else
-                Console.WriteLine("did not find VID PID DID SN...");
+                Console.WriteLine("did not find VID PID...");
 
             Console.WriteLine("checking next bus...");
 
@@ -69,17 +69,43 @@ namespace Test_HPSDR_USB_LIB
             Console.WriteLine(""); 
             if (usb_dev_handle != IntPtr.Zero)
             {
-                Console.WriteLine("iManufacturer: " + "0x" + dev.descriptor.iManufacturer.ToString("x") + "h");
+                Console.WriteLine("bLength: " + dev.descriptor.bLength.ToString());
+                Console.WriteLine("bDescriptorType: " + dev.descriptor.bDescriptorType.ToString());
+                Console.WriteLine("bcdUSB: " + dev.descriptor.bcdUSB.ToString("x") + "h");
+                Console.WriteLine("bDeviceClass: " + dev.descriptor.bDeviceClass.ToString());
+                Console.WriteLine("bDeviceSubClass: " + dev.descriptor.bDeviceSubClass.ToString());
+                Console.WriteLine("bDeviceProtocol: " + dev.descriptor.bDeviceProtocol.ToString());
+                Console.WriteLine("bMaxPacketSize0: " + dev.descriptor.bMaxPacketSize0.ToString());
                 Console.WriteLine("idVendor: " + "0x" + dev.descriptor.idVendor.ToString("x") + "h");
                 Console.WriteLine("idProduct: " + "0x" + dev.descriptor.idProduct.ToString("x") + "h");
+                Console.WriteLine("bcdDevice: " + "0x" + dev.descriptor.bcdDevice.ToString("x") + "h");
+                Console.WriteLine("iManufacturer: " + "0x" + dev.descriptor.iManufacturer.ToString("x") + "h");
                 Console.WriteLine("iProduct: " + dev.descriptor.iProduct.ToString());
                 Console.WriteLine("iSerialNumber: " + dev.descriptor.iSerialNumber.ToString());
                 Console.WriteLine("bNumConfigurations: " +  dev.descriptor.bNumConfigurations.ToString());
-                Console.WriteLine("bLength: " + dev.descriptor.bLength.ToString());
-                Console.WriteLine("bDescriptorType: " + dev.descriptor.bDescriptorType.ToString());
-                Console.WriteLine("bDeviceClass: " + dev.descriptor.bDeviceClass.ToString());
-                Console.WriteLine("bDeviceProtocol: " + dev.descriptor.bDeviceProtocol.ToString());
-                Console.WriteLine("bDeviceSubClass: " + dev.descriptor.bDeviceSubClass.ToString());
+                
+                StringBuilder buf = new StringBuilder(32);
+                int ret;
+                if (dev.descriptor.iManufacturer != 0)
+                {
+                    ret = libUSB_Interface.usb_get_string_simple(usb_dev_handle, dev.descriptor.iManufacturer, buf);
+                    if (ret > 0)
+                        Console.WriteLine("Manufacturer String: " + buf);
+                }
+                StringBuilder buf2 = new StringBuilder(32);
+                if (dev.descriptor.iProduct != 0)
+                {
+                    ret = libUSB_Interface.usb_get_string_simple(usb_dev_handle, dev.descriptor.iProduct, buf2);
+                    if (ret > 0)
+                        Console.WriteLine("Product String: " + buf2);
+                }
+                StringBuilder buf3 = new StringBuilder(32);
+                if (dev.descriptor.iSerialNumber != 0)
+                {
+                    ret = libUSB_Interface.usb_get_string_simple(usb_dev_handle, dev.descriptor.iSerialNumber, buf3);
+                    if (ret > 0)
+                        Console.WriteLine("S/N String: " + buf3);
+                }
             }
             Console.WriteLine("");                       
             if (dev.config == IntPtr.Zero)
@@ -140,11 +166,11 @@ namespace Test_HPSDR_USB_LIB
                 }
             }
 
-            int wrt_size = 200;
-            int rd_size = 200;
+            //int wrt_size = 200;
+            //int rd_size = 200;
 
-            Console.WriteLine("Resetting CPU...Reset ON...");
-            Console.WriteLine("Result: " + usb.Reset_CPU(usb_dev_handle, true).ToString());
+            //Console.WriteLine("Resetting CPU...Reset ON...");
+            //Console.WriteLine("Result: " + usb.Reset_CPU(usb_dev_handle, true).ToString());
             
             //Console.WriteLine("Attempting to upload RAM at 0xE000...");
             //byte[] input_buf = new byte[wrt_size];
@@ -171,12 +197,27 @@ namespace Test_HPSDR_USB_LIB
             //for (int i = 0; i < read_buffer.Length; i++)
             //    Console.WriteLine(read_buffer[i].ToString());
 
-            Console.WriteLine("Trying to open intel hex file...");
-            Console.WriteLine("Result: " + usb.Upload_Firmware(usb_dev_handle, "c:\\testfw.hex").ToString());
+            //Console.WriteLine("Trying to open intel hex file...");
+            //Console.WriteLine("Result: " + usb.Upload_Firmware(usb_dev_handle, "c:\\testfw.hex").ToString());
 
-            Console.WriteLine("Taking CPU out of reset...");
-            Console.WriteLine("Result: " + usb.Reset_CPU(usb_dev_handle, false).ToString());
-            
+            //Console.WriteLine("Taking CPU out of reset...");
+            //Console.WriteLine("Result: " + usb.Reset_CPU(usb_dev_handle, false).ToString());
+
+            //OZY.Set_LED(usb_dev_handle, 1, true);
+            //System.Threading.Thread.Sleep(3000);
+            //OZY.Set_LED(usb_dev_handle, 1, false);
+
+            byte[] bbuf = new byte[64];
+            if ((OZY.Read_I2C(usb_dev_handle, 0x51, ref bbuf)))
+            {
+                for (int i = 0; i < bbuf.Length; i++)
+                    Console.Write(bbuf[i].ToString("x") + ":");
+            }
+            else
+                Console.WriteLine("Failed I2C Read...");
+
+
+            Console.WriteLine("");
             libUSB_Interface.usb_close(usb_dev_handle);
             Console.WriteLine("done...");
             Console.ReadKey();            

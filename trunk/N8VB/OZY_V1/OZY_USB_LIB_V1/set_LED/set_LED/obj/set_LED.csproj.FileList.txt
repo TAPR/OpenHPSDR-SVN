@@ -1,0 +1,7 @@
+obj\Release\set_LED.exe
+obj\Release\set_LED.pdb
+bin\Release\set_LED.exe
+bin\Release\set_LED.pdb
+bin\Release\HPSDR_USB_LIB_V1.dll
+bin\Release\HPSDR_USB_LIB_V1.pdb
+obj\Release\ResolveAssemblyReference.cache
