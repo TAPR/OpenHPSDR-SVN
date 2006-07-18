@@ -1,23 +1,38 @@
 <?xml version="1.0"?>
 <!DOCTYPE CodeBlocks_layout_file>
 <CodeBlocks_layout_file>
-	<File name="Initial\include\hpsdr_commands.h" open="1" top="1">
-		<Cursor position="0" topLine="8"/>
-	</File>
-	<File name="Initial\include\hpsdr_config.h" open="1" top="0">
+	<File name="Initial\include\eeprom_io.h" open="1" top="0">
 		<Cursor position="0" topLine="0"/>
 	</File>
-	<File name="Initial\include\hpsdr_globals.h" open="1" top="0">
+	<File name="Initial\include\fpga.h" open="1" top="0">
 		<Cursor position="0" topLine="0"/>
 	</File>
-	<File name="Initial\include\hpsdr_interfaces.h" open="1" top="0">
+	<File name="Initial\include\fpga_load.h" open="1" top="0">
 		<Cursor position="0" topLine="0"/>
 	</File>
-	<File name="Initial\include\hpsdr_spi_defs.h" open="1" top="0">
+	<File name="Initial\include\fpga_regs_common.h" open="1" top="0">
+		<Cursor position="0" topLine="98"/>
+	</File>
+	<File name="Initial\include\hpsdr_i2c_addr.h" open="1" top="0">
+		<Cursor position="1562" topLine="0"/>
+	</File>
+	<File name="Initial\include\i2c.h" open="1" top="0">
 		<Cursor position="0" topLine="0"/>
 	</File>
-	<File name="Initial\include\usb_common.h" open="1" top="0">
+	<File name="Initial\src\eeprom_io.c" open="1" top="1">
+		<Cursor position="1804" topLine="16"/>
+	</File>
+	<File name="Initial\src\fpga_load.c" open="1" top="0">
 		<Cursor position="0" topLine="0"/>
+	</File>
+	<File name="Initial\src\hpsdr_common.c" open="1" top="0">
+		<Cursor position="0" topLine="58"/>
+	</File>
+	<File name="Initial\src\hpsdr_main.c" open="1" top="0">
+		<Cursor position="4540" topLine="174"/>
+	</File>
+	<File name="Initial\src\lib\i2c.c" open="1" top="0">
+		<Cursor position="1774" topLine="28"/>
 	</File>
 	<Expand folder="/Sources/Initial/src"/>
 	<Expand folder="/Sources/Initial"/>
@@ -25,5 +40,6 @@
 	<Expand folder="/Headers/Initial/include"/>
 	<Expand folder="/Headers/Initial"/>
 	<Expand folder="/Headers"/>
+	<Expand folder="/Others/Initial"/>
 	<Expand folder="/Others"/>
 </CodeBlocks_layout_file>

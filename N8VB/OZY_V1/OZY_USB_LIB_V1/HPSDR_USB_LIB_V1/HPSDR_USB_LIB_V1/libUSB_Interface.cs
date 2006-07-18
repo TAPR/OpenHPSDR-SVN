@@ -69,7 +69,7 @@ namespace HPSDR_USB_LIB_V1
 
         /* Error codes */
         public const int USB_ERROR_BEGIN = 500000;
-
+        
         // FROM USB.H in libUSB
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -468,6 +468,13 @@ namespace HPSDR_USB_LIB_V1
         public static int usb_get_string(IntPtr dev, int index, int langid, StringBuilder buf)
         {
             return usb_get_string(dev, index, langid, buf, buf == null ? 0 : buf.Capacity);
+        }
+
+        [DllImport(LIBUSB_NATIVE_LIBRARY, CallingConvention = CALLING_CONVENTION, ExactSpelling = true), SuppressUnmanagedCodeSecurity]
+        public static extern int usb_get_string_simple(IntPtr dev, int index, StringBuilder buf, int buflen);
+        public static int usb_get_string_simple(IntPtr dev, int index, StringBuilder buf)
+        {
+            return usb_get_string_simple(dev, index, buf, buf == null ? 0 : buf.Capacity);
         }
 
         // descriptors.c 
