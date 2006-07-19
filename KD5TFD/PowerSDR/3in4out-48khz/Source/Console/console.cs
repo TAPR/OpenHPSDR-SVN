@@ -15467,7 +15467,26 @@ namespace PowerSDR
 				spur_reduction = false;
 				if_shift = false;
 
-				DDSFreq = freq;
+				// kd5tfd soft rock xmit hack 
+				if ( current_model != Model.SOFTROCK40 && current_model != Model.SDR1000_DDSLOCKED )  
+				{ 
+					DDSFreq = freq;
+				}
+				else  // soft rock style tuning 
+				{ 					
+
+					// need to add checking in here to make sure we're in tuning range 
+					System.Console.WriteLine("Freq: " + freq); 
+					System.Console.WriteLine("SR Center: " + soft_rock_center_freq); 
+					
+					double osc_freq = soft_rock_center_freq*1e6 - freq*1e6;
+					osc_freq = -osc_freq; 
+					DttSP.SetOsc(osc_freq);  
+					DttSP.SetTXOsc(osc_freq);
+					tuned_freq = freq; 
+					System.Console.WriteLine("osc_freq: " + osc_freq); 
+				} 
+
 				if(num_channels == 2) Hdw.MuteRelay = !chkMON.Checked;
 
 				if(ext_ctrl_enabled)
