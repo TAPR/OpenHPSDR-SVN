@@ -13578,7 +13578,7 @@ namespace PowerSDR
 					chkGeneralDisablePTT.Checked = true;
 					force_model = false;
 				}
-				chkGeneralRXOnly.Enabled = false;
+				// -- don't disable this wjt hack chkGeneralRXOnly.Enabled = false;
 			}
 			grpHWSoftRock.Visible = radGenModelSoftRock40.Checked;
 		}
