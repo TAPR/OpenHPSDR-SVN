@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Wed Jul 12 14:50:25 2006
+                              4 ; This file generated Wed Jul 19 12:32:15 2006
                               5 ;--------------------------------------------------------
                               6 	.module fx2utils
                               7 	.optsdcc -mmcs51 --model-small
@@ -695,7 +695,7 @@
                             695 ;	-----------------------------------------
                             696 ;	 function fx2_stall_ep0
                             697 ;	-----------------------------------------
-   0547                     698 _fx2_stall_ep0:
+   0564                     698 _fx2_stall_ep0:
                     0002    699 	ar2 = 0x02
                     0003    700 	ar3 = 0x03
                     0004    701 	ar4 = 0x04
@@ -708,13 +708,13 @@
                             708 ;     genAssign
                             709 ;     genOr
                             710 ;	Peephole 248.a	optimized or to xdata
-   0547 90 E6 A0            711 	mov	dptr,#_EP0CS
-   054A E0                  712 	movx	a,@dptr
-   054B FA                  713 	mov	r2,a
-   054C 44 01               714 	orl	a,#0x01
-   054E F0                  715 	movx	@dptr,a
-   054F                     716 00101$:
-   054F 22                  717 	ret
+   0564 90 E6 A0            711 	mov	dptr,#_EP0CS
+   0567 E0                  712 	movx	a,@dptr
+   0568 FA                  713 	mov	r2,a
+   0569 44 01               714 	orl	a,#0x01
+   056B F0                  715 	movx	@dptr,a
+   056C                     716 00101$:
+   056C 22                  717 	ret
                             718 ;------------------------------------------------------------
                             719 ;Allocation info for local variables in function 'fx2_reset_data_toggle'
                             720 ;------------------------------------------------------------
@@ -724,40 +724,40 @@
                             724 ;	-----------------------------------------
                             725 ;	 function fx2_reset_data_toggle
                             726 ;	-----------------------------------------
-   0550                     727 _fx2_reset_data_toggle:
+   056D                     727 _fx2_reset_data_toggle:
                             728 ;     genReceive
-   0550 AA 82               729 	mov	r2,dpl
+   056D AA 82               729 	mov	r2,dpl
                             730 ;Initial/src/lib/fx2utils.c:39: TOGCTL = ((ep & 0x80) >> 3 | (ep & 0x0f));
                             731 ;     genAnd
-   0552 74 80               732 	mov	a,#0x80
-   0554 5A                  733 	anl	a,r2
+   056F 74 80               732 	mov	a,#0x80
+   0571 5A                  733 	anl	a,r2
                             734 ;     genRightShift
                             735 ;     genRightShiftLiteral
                             736 ;     genrshOne
                             737 ;	Peephole 105	removed redundant mov
-   0555 FB                  738 	mov	r3,a
-   0556 C4                  739 	swap	a
-   0557 23                  740 	rl	a
-   0558 54 1F               741 	anl	a,#0x1f
-   055A FB                  742 	mov	r3,a
+   0572 FB                  738 	mov	r3,a
+   0573 C4                  739 	swap	a
+   0574 23                  740 	rl	a
+   0575 54 1F               741 	anl	a,#0x1f
+   0577 FB                  742 	mov	r3,a
                             743 ;     genAnd
-   055B 74 0F               744 	mov	a,#0x0F
-   055D 5A                  745 	anl	a,r2
+   0578 74 0F               744 	mov	a,#0x0F
+   057A 5A                  745 	anl	a,r2
                             746 ;     genOr
-   055E 90 E6 83            747 	mov	dptr,#_TOGCTL
-   0561 4B                  748 	orl	a,r3
-   0562 F0                  749 	movx	@dptr,a
+   057B 90 E6 83            747 	mov	dptr,#_TOGCTL
+   057E 4B                  748 	orl	a,r3
+   057F F0                  749 	movx	@dptr,a
                             750 ;Initial/src/lib/fx2utils.c:40: TOGCTL |= bmRESETTOGGLE;
                             751 ;     genAssign
                             752 ;     genOr
                             753 ;	Peephole 248.a	optimized or to xdata
-   0563 90 E6 83            754 	mov	dptr,#_TOGCTL
-   0566 E0                  755 	movx	a,@dptr
-   0567 FA                  756 	mov	r2,a
-   0568 44 20               757 	orl	a,#0x20
-   056A F0                  758 	movx	@dptr,a
-   056B                     759 00101$:
-   056B 22                  760 	ret
+   0580 90 E6 83            754 	mov	dptr,#_TOGCTL
+   0583 E0                  755 	movx	a,@dptr
+   0584 FA                  756 	mov	r2,a
+   0585 44 20               757 	orl	a,#0x20
+   0587 F0                  758 	movx	@dptr,a
+   0588                     759 00101$:
+   0588 22                  760 	ret
                             761 ;------------------------------------------------------------
                             762 ;Allocation info for local variables in function 'fx2_renumerate'
                             763 ;------------------------------------------------------------
@@ -766,43 +766,43 @@
                             766 ;	-----------------------------------------
                             767 ;	 function fx2_renumerate
                             768 ;	-----------------------------------------
-   056C                     769 _fx2_renumerate:
+   0589                     769 _fx2_renumerate:
                             770 ;Initial/src/lib/fx2utils.c:46: USBCS |= bmDISCON | bmRENUM;
                             771 ;     genAssign
                             772 ;     genOr
                             773 ;	Peephole 248.a	optimized or to xdata
-   056C 90 E6 80            774 	mov	dptr,#_USBCS
-   056F E0                  775 	movx	a,@dptr
-   0570 FA                  776 	mov	r2,a
-   0571 44 0A               777 	orl	a,#0x0A
-   0573 F0                  778 	movx	@dptr,a
+   0589 90 E6 80            774 	mov	dptr,#_USBCS
+   058C E0                  775 	movx	a,@dptr
+   058D FA                  776 	mov	r2,a
+   058E 44 0A               777 	orl	a,#0x0A
+   0590 F0                  778 	movx	@dptr,a
                             779 ;Initial/src/lib/fx2utils.c:48: mdelay (250);
                             780 ;     genCall
                             781 ;	Peephole 182.b	used 16 bit load of dptr
-   0574 90 00 FA            782 	mov	dptr,#0x00FA
-   0577 12 05 34            783 	lcall	_mdelay
+   0591 90 00 FA            782 	mov	dptr,#0x00FA
+   0594 12 05 51            783 	lcall	_mdelay
                             784 ;Initial/src/lib/fx2utils.c:50: USBIRQ = 0xff;		// clear any pending USB irqs...
                             785 ;     genAssign
-   057A 90 E6 5D            786 	mov	dptr,#_USBIRQ
-   057D 74 FF               787 	mov	a,#0xFF
-   057F F0                  788 	movx	@dptr,a
+   0597 90 E6 5D            786 	mov	dptr,#_USBIRQ
+   059A 74 FF               787 	mov	a,#0xFF
+   059C F0                  788 	movx	@dptr,a
                             789 ;Initial/src/lib/fx2utils.c:51: EPIRQ =  0xff;		//   they're from before the renumeration
                             790 ;     genAssign
-   0580 90 E6 5F            791 	mov	dptr,#_EPIRQ
-   0583 74 FF               792 	mov	a,#0xFF
-   0585 F0                  793 	movx	@dptr,a
+   059D 90 E6 5F            791 	mov	dptr,#_EPIRQ
+   05A0 74 FF               792 	mov	a,#0xFF
+   05A2 F0                  793 	movx	@dptr,a
                             794 ;Initial/src/lib/fx2utils.c:53: EXIF &= ~bmEXIF_USBINT;
                             795 ;     genAnd
-   0586 53 91 EF            796 	anl	_EXIF,#0xEF
+   05A3 53 91 EF            796 	anl	_EXIF,#0xEF
                             797 ;Initial/src/lib/fx2utils.c:55: USBCS &= ~bmDISCON;		// reconnect USB
                             798 ;     genAssign
                             799 ;     genAnd
                             800 ;	Peephole 248.b	optimized and to xdata
-   0589 90 E6 80            801 	mov	dptr,#_USBCS
-   058C E0                  802 	movx	a,@dptr
-   058D FA                  803 	mov	r2,a
-   058E 54 F7               804 	anl	a,#0xF7
-   0590 F0                  805 	movx	@dptr,a
-   0591                     806 00101$:
-   0591 22                  807 	ret
+   05A6 90 E6 80            801 	mov	dptr,#_USBCS
+   05A9 E0                  802 	movx	a,@dptr
+   05AA FA                  803 	mov	r2,a
+   05AB 54 F7               804 	anl	a,#0xF7
+   05AD F0                  805 	movx	@dptr,a
+   05AE                     806 00101$:
+   05AE 22                  807 	ret
                             808 	.area CSEG    (CODE)

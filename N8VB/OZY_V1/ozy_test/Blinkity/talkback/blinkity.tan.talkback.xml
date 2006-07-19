@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Thu Jul 06 14:18:31 2006) contains limited information
+This XML file (created on Tue Jul 18 19:52:42 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -23,7 +23,7 @@ to license.txt.
 	<module>quartus_tan</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Thu Jul 06 14:18:32 2006</compilation_end_time>
+	<compilation_end_time>Tue Jul 18 19:52:42 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -36,7 +36,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity</project>
 <revision>blinkity</revision>
 <compilation_summary>
-	<flow_status>Successful - Thu Jul 06 14:18:31 2006</flow_status>
+	<flow_status>Successful - Tue Jul 18 19:52:42 2006</flow_status>
 	<quartus_ii_version>6.0 Build 178 04/27/2006 SJ Web Edition</quartus_ii_version>
 	<revision_name>blinkity</revision_name>
 	<top_level_entity_name>blinkity</top_level_entity_name>
@@ -61,8 +61,8 @@ to license.txt.
 <messages>
 	<warning>Warning: Found pins functioning as undefined clocks and/or memory enables</warning>
 	<info>Info: Quartus II Timing Analyzer was successful. 0 errors, 1 warning</info>
-	<info>Info: Elapsed time: 00:00:00</info>
-	<info>Info: Processing ended: Thu Jul 06 14:18:31 2006</info>
+	<info>Info: Elapsed time: 00:00:01</info>
+	<info>Info: Processing ended: Tue Jul 18 19:52:42 2006</info>
 	<info>Info: tco from clock &quot;fx2_clk&quot; to destination pin &quot;Pin76&quot; through register &quot;COUNTER[29]&quot; is 8.060 ns</info>
 	<info>Info: + Longest register to pin delay is 4.962 ns</info>
 </messages>

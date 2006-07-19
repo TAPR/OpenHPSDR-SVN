@@ -49,7 +49,7 @@
                              49 	;; a known good state for uninitialized variables.
                              50 
                              51 ;	_mcs51_genRAMCLEAR() start
-   0180 78 0A                52 	mov	r0,#l_XSEG
+   0180 78 0B                52 	mov	r0,#l_XSEG
    0182 E8                   53 	mov	a,r0
    0183 44 00                54 	orl	a,#(l_XSEG >> 8)
    0185 60 0C                55 	jz	00002$

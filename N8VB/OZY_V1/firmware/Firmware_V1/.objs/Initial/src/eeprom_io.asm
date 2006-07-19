@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Wed Jul 12 14:50:24 2006
+; This file generated Wed Jul 19 12:32:14 2006
 ;--------------------------------------------------------
 	.module eeprom_io
 	.optsdcc -mmcs51 --model-small
@@ -57,7 +57,7 @@ _eeprom_read_PARM_4::
 ;--------------------------------------------------------
 	.area XSEG    (XDATA)
 _eeprom_read_cmd_1_1:
-	.ds 1
+	.ds 2
 ;--------------------------------------------------------
 ; external initialized ram data
 ;--------------------------------------------------------
@@ -108,18 +108,25 @@ _eeprom_read:
 	ar1 = 0x01
 ;     genReceive
 	mov	r2,dpl
-;Initial/src/eeprom_io.c:39: cmd[0] = eeprom_offset;
+;Initial/src/eeprom_io.c:41: cmd[0] = 0; // <-- address high byte, set to 0 since we are going to always
 ;     genPointerSet
 ;     genFarPointerSet
 	mov	dptr,#_eeprom_read_cmd_1_1
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;Initial/src/eeprom_io.c:43: cmd[1] = eeprom_offset; // <-- address low byte
+;     genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_eeprom_read_cmd_1_1 + 0x0001)
 	mov	a,_eeprom_read_PARM_2
 	movx	@dptr,a
-;Initial/src/eeprom_io.c:40: if (!i2c_write(i2c_addr, cmd, 1))
+;Initial/src/eeprom_io.c:44: if (!i2c_write(i2c_addr, cmd, 2))
 ;     genAssign
 	mov	_i2c_write_PARM_2,#_eeprom_read_cmd_1_1
 	mov	(_i2c_write_PARM_2 + 1),#(_eeprom_read_cmd_1_1 >> 8)
 ;     genAssign
-	mov	_i2c_write_PARM_3,#0x01
+	mov	_i2c_write_PARM_3,#0x02
 ;     genCall
 	mov	dpl,r2
 	push	ar2
@@ -129,7 +136,7 @@ _eeprom_read:
 ;     genIfx
 ;     genIfxJump
 ;	Peephole 109	removed ljmp by inverse jump logic
-;Initial/src/eeprom_io.c:41: return 0;
+;Initial/src/eeprom_io.c:45: return 0;
 ;     genRet
 ;	Peephole 256.c	loading dpl with zero from a
 	jnz	00102$
@@ -139,7 +146,7 @@ _eeprom_read:
 ;	Peephole 251.b	replaced sjmp to ret with ret
 	ret
 00102$:
-;Initial/src/eeprom_io.c:43: return i2c_read(i2c_addr, buf, len);
+;Initial/src/eeprom_io.c:47: return i2c_read(i2c_addr, buf, len);
 ;     genAssign
 	mov	_i2c_read_PARM_2,_eeprom_read_PARM_3
 	mov	(_i2c_read_PARM_2 + 1),(_eeprom_read_PARM_3 + 1)

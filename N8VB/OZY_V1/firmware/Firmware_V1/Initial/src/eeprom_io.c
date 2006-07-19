@@ -34,10 +34,14 @@ eeprom_read (unsigned char i2c_addr, unsigned char eeprom_offset,
 {
   // We setup a random read by first doing a "zero byte write".
   // Writes carry an address.  Reads use an implicit address.
+  // HPSDR uses a 24LC128 EEPROM so two bytes are used
+  // to set the address 07/19/2006 PAC N8VB
 
-  static xdata unsigned char cmd[1];
-  cmd[0] = eeprom_offset;
-  if (!i2c_write(i2c_addr, cmd, 1))
+  static xdata unsigned char cmd[2];
+  cmd[0] = 0; // <-- address high byte, set to 0 since we are going to always
+                    // read addresses less than 256 for now...
+  cmd[1] = eeprom_offset; // <-- address low byte
+  if (!i2c_write(i2c_addr, cmd, 2))
     return 0;
 
   return i2c_read(i2c_addr, buf, len);

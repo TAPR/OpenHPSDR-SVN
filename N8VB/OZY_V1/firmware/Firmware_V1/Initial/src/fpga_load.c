@@ -38,20 +38,22 @@
 unsigned char
 fpga_load_begin (void)
 {
+    unsigned char counter = 0;
+
 	HPSDR_ALTERA_CONFIG &= ~bmALTERA_BITS;		// clear all bits (NCONFIG low)
   	udelay (40);					// wait 40 us
   	HPSDR_ALTERA_CONFIG |= bmALTERA_NCONFIG;	// set NCONFIG high
 
-  	if (UC_BOARD_HAS_FPGA)
-	{
-    		// FIXME should really cap this loop with a counter so we
-    		//   don't hang forever on a hardware failure.
-    		while ((HPSDR_ALTERA_CONFIG & bmALTERA_NSTATUS) == 0) // wait for NSTATUS to go high
-      			;
-  	}
-
+  	while ((HPSDR_ALTERA_CONFIG & bmALTERA_NSTATUS) == 0)
+    {
+        counter++;
+        udelay(50);
+        if (counter  >= 255)
+        {
+            return 0;
+        }
+    } // wait for NSTATUS to go high
   	// ready to xfer now
-
   	return 1;
 }
 
@@ -156,9 +158,6 @@ unsigned char
 fpga_load_end (void)
 {
   unsigned char status = HPSDR_ALTERA_CONFIG;
-
-  if (!UC_BOARD_HAS_FPGA)			// always true if we don't have FPGA
-    return 1;
 
   if ((status & bmALTERA_NSTATUS) == 0)		// failed to program
     return 0;

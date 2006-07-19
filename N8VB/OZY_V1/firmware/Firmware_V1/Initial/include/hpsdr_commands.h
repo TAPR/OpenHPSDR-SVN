@@ -62,6 +62,8 @@
 #define	FL_END					2	// wIndexL: end programming cycle, check for success.
 									//stalls endpoint if trouble.
 
+#define VRQ_FPGA_SET_RESET		0x04		// wValueL: {0,1}
+
 #define	VRQ_I2C_WRITE			0x08		// wValueL: i2c address; data: data
 
 #define	VRQ_SPI_WRITE			0x09		// wValue: optional header bytes

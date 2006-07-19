@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Wed Jul 12 14:50:24 2006
+; This file generated Wed Jul 19 12:32:14 2006
 ;--------------------------------------------------------
 	.module fpga_load
 	.optsdcc -mmcs51 --model-small
@@ -707,6 +707,7 @@ _EP8FIFOBUF	=	0xfc00
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'fpga_load_begin'
 ;------------------------------------------------------------
+;counter                   Allocated to registers r2 
 ;------------------------------------------------------------
 ;Initial/src/fpga_load.c:39: fpga_load_begin (void)
 ;	-----------------------------------------
@@ -721,29 +722,60 @@ _fpga_load_begin:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;Initial/src/fpga_load.c:41: HPSDR_ALTERA_CONFIG &= ~bmALTERA_BITS;		// clear all bits (NCONFIG low)
+;Initial/src/fpga_load.c:43: HPSDR_ALTERA_CONFIG &= ~bmALTERA_BITS;		// clear all bits (NCONFIG low)
 ;     genAnd
 	anl	_IOC,#0xC0
-;Initial/src/fpga_load.c:42: udelay (40);					// wait 40 us
+;Initial/src/fpga_load.c:44: udelay (40);					// wait 40 us
 ;     genCall
 	mov	dpl,#0x28
 	lcall	_udelay
-;Initial/src/fpga_load.c:43: HPSDR_ALTERA_CONFIG |= bmALTERA_NCONFIG;	// set NCONFIG high
+;Initial/src/fpga_load.c:45: HPSDR_ALTERA_CONFIG |= bmALTERA_NCONFIG;	// set NCONFIG high
 ;     genOr
 	orl	_IOC,#0x02
-;Initial/src/fpga_load.c:49: while ((HPSDR_ALTERA_CONFIG & bmALTERA_NSTATUS) == 0) // wait for NSTATUS to go high
-00101$:
+;Initial/src/fpga_load.c:47: while ((HPSDR_ALTERA_CONFIG & bmALTERA_NSTATUS) == 0)
+;     genAssign
+	mov	r2,#0x00
+00103$:
 ;     genAnd
 	mov	a,#0x10
 	anl	a,_IOC
 ;     genCmpEq
-;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 115.b	jump optimization
-	mov	r2,a
-	jz	00101$
-00110$:
-;Initial/src/fpga_load.c:55: return 1;
+	mov	r3,a
+	jz	00112$
+00111$:
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00105$
+00112$:
+;Initial/src/fpga_load.c:49: counter++;
+;     genPlus
+;     genPlusIncr
+	inc	r2
+;Initial/src/fpga_load.c:50: udelay(50);
+;     genCall
+	mov	dpl,#0x32
+	push	ar2
+	lcall	_udelay
+	pop	ar2
+;Initial/src/fpga_load.c:51: if (counter  >= 255)
+;     genCmpLt
+;     genCmp
+	cjne	r2,#0xFF,00113$
+00113$:
+;     genIfxJump
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 160	removed sjmp by inverse jump logic
+	jc	00103$
+00114$:
+;Initial/src/fpga_load.c:53: return 0;
 ;     genRet
+	mov	dpl,#0x00
+;	Peephole 112.b	changed ljmp to sjmp
+;Initial/src/fpga_load.c:57: return 1;
+;     genRet
+;	Peephole 237.a	removed sjmp to ret
+	ret
+00105$:
 	mov	dpl,#0x01
 00106$:
 	ret
@@ -752,13 +784,13 @@ _fpga_load_begin:
 ;------------------------------------------------------------
 ;bits                      Allocated to registers 
 ;------------------------------------------------------------
-;Initial/src/fpga_load.c:74: clock_out_config_byte (unsigned char bits) _naked
+;Initial/src/fpga_load.c:76: clock_out_config_byte (unsigned char bits) _naked
 ;	-----------------------------------------
 ;	 function clock_out_config_byte
 ;	-----------------------------------------
 _clock_out_config_byte:
 ;	naked function: no prologue.
-;Initial/src/fpga_load.c:121: _endasm;
+;Initial/src/fpga_load.c:123: _endasm;
 ;     genInline
 	        mov a, dpl
 	        rrc a
@@ -802,14 +834,14 @@ _clock_out_config_byte:
 ;p                         Allocated with name '_clock_out_bytes_PARM_2'
 ;bytecount                 Allocated to registers r2 
 ;------------------------------------------------------------
-;Initial/src/fpga_load.c:125: clock_out_bytes (unsigned char bytecount,
+;Initial/src/fpga_load.c:127: clock_out_bytes (unsigned char bytecount,
 ;	-----------------------------------------
 ;	 function clock_out_bytes
 ;	-----------------------------------------
 _clock_out_bytes:
 ;     genReceive
 	mov	r2,dpl
-;Initial/src/fpga_load.c:128: while (bytecount-- > 0)
+;Initial/src/fpga_load.c:130: while (bytecount-- > 0)
 ;     genAssign
 	mov	r3,_clock_out_bytes_PARM_2
 	mov	r4,(_clock_out_bytes_PARM_2 + 1)
@@ -829,7 +861,7 @@ _clock_out_bytes:
 	add	a,#0xff - 0x00
 	jnc	00104$
 00108$:
-;Initial/src/fpga_load.c:129: clock_out_config_byte (*p++);
+;Initial/src/fpga_load.c:131: clock_out_config_byte (*p++);
 ;     genPointerGet
 ;     genFarPointerGet
 	mov	dpl,r3
@@ -852,7 +884,7 @@ _clock_out_bytes:
 ;bytecount                 Allocated with name '_fpga_load_xfer_PARM_2'
 ;p                         Allocated to registers 
 ;------------------------------------------------------------
-;Initial/src/fpga_load.c:146: fpga_load_xfer (xdata unsigned char *p, unsigned char bytecount)
+;Initial/src/fpga_load.c:148: fpga_load_xfer (xdata unsigned char *p, unsigned char bytecount)
 ;	-----------------------------------------
 ;	 function fpga_load_xfer
 ;	-----------------------------------------
@@ -860,11 +892,11 @@ _fpga_load_xfer:
 ;     genReceive
 	mov	_clock_out_bytes_PARM_2,dpl
 	mov	(_clock_out_bytes_PARM_2 + 1),dph
-;Initial/src/fpga_load.c:148: clock_out_bytes (bytecount, p);
+;Initial/src/fpga_load.c:150: clock_out_bytes (bytecount, p);
 ;     genCall
 	mov	dpl,_fpga_load_xfer_PARM_2
 	lcall	_clock_out_bytes
-;Initial/src/fpga_load.c:149: return 1;
+;Initial/src/fpga_load.c:151: return 1;
 ;     genRet
 	mov	dpl,#0x01
 00101$:
@@ -874,53 +906,53 @@ _fpga_load_xfer:
 ;------------------------------------------------------------
 ;status                    Allocated to registers r2 
 ;------------------------------------------------------------
-;Initial/src/fpga_load.c:156: fpga_load_end (void)
+;Initial/src/fpga_load.c:158: fpga_load_end (void)
 ;	-----------------------------------------
 ;	 function fpga_load_end
 ;	-----------------------------------------
 _fpga_load_end:
-;Initial/src/fpga_load.c:158: unsigned char status = HPSDR_ALTERA_CONFIG;
+;Initial/src/fpga_load.c:160: unsigned char status = HPSDR_ALTERA_CONFIG;
 ;     genAssign
 	mov	r2,_IOC
-;Initial/src/fpga_load.c:163: if ((status & bmALTERA_NSTATUS) == 0)		// failed to program
+;Initial/src/fpga_load.c:162: if ((status & bmALTERA_NSTATUS) == 0)		// failed to program
 ;     genAnd
 	mov	a,#0x10
 	anl	a,r2
 ;     genCmpEq
 ;	Peephole 115.b	jump optimization
 	mov	r3,a
-	jz	00112$
-00111$:
+	jz	00110$
+00109$:
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00104$
-00112$:
-;Initial/src/fpga_load.c:164: return 0;
+	sjmp	00102$
+00110$:
+;Initial/src/fpga_load.c:163: return 0;
 ;     genRet
 	mov	dpl,#0x00
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 251.b	replaced sjmp to ret with ret
 	ret
-00104$:
-;Initial/src/fpga_load.c:166: if ((status & bmALTERA_CONF_DONE) == bmALTERA_CONF_DONE)
+00102$:
+;Initial/src/fpga_load.c:165: if ((status & bmALTERA_CONF_DONE) == bmALTERA_CONF_DONE)
 ;     genAnd
 	anl	ar2,#0x08
 ;     genCmpEq
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 199	optimized misc jump sequence
-	cjne	r2,#0x08,00106$
-;00113$:
+	cjne	r2,#0x08,00104$
+;00111$:
 ;	Peephole 200	removed redundant sjmp
-00114$:
-;Initial/src/fpga_load.c:167: return 1;					// everything's cool
+00112$:
+;Initial/src/fpga_load.c:166: return 1;					// everything's cool
 ;     genRet
 	mov	dpl,#0x01
 ;	Peephole 112.b	changed ljmp to sjmp
-;Initial/src/fpga_load.c:172: return 0;
+;Initial/src/fpga_load.c:171: return 0;
 ;     genRet
 ;	Peephole 237.a	removed sjmp to ret
 	ret
-00106$:
+00104$:
 	mov	dpl,#0x00
-00107$:
+00105$:
 	ret
 	.area CSEG    (CODE)
