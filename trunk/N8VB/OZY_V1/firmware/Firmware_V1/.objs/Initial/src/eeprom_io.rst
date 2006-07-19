@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Wed Jul 12 14:50:24 2006
+                              4 ; This file generated Wed Jul 19 12:32:14 2006
                               5 ;--------------------------------------------------------
                               6 	.module eeprom_io
                               7 	.optsdcc -mmcs51 --model-small
@@ -57,7 +57,7 @@
                              57 ;--------------------------------------------------------
                              58 	.area XSEG    (XDATA)
    2009                      59 _eeprom_read_cmd_1_1:
-   2009                      60 	.ds 1
+   2009                      60 	.ds 2
                              61 ;--------------------------------------------------------
                              62 ; external initialized ram data
                              63 ;--------------------------------------------------------
@@ -108,46 +108,53 @@
                     0001    108 	ar1 = 0x01
                             109 ;     genReceive
    0397 AA 82               110 	mov	r2,dpl
-                            111 ;Initial/src/eeprom_io.c:39: cmd[0] = eeprom_offset;
+                            111 ;Initial/src/eeprom_io.c:41: cmd[0] = 0; // <-- address high byte, set to 0 since we are going to always
                             112 ;     genPointerSet
                             113 ;     genFarPointerSet
    0399 90 20 09            114 	mov	dptr,#_eeprom_read_cmd_1_1
-   039C E5 09               115 	mov	a,_eeprom_read_PARM_2
-   039E F0                  116 	movx	@dptr,a
-                            117 ;Initial/src/eeprom_io.c:40: if (!i2c_write(i2c_addr, cmd, 1))
-                            118 ;     genAssign
-   039F 75 2B 09            119 	mov	_i2c_write_PARM_2,#_eeprom_read_cmd_1_1
-   03A2 75 2C 20            120 	mov	(_i2c_write_PARM_2 + 1),#(_eeprom_read_cmd_1_1 >> 8)
-                            121 ;     genAssign
-   03A5 75 2D 01            122 	mov	_i2c_write_PARM_3,#0x01
-                            123 ;     genCall
-   03A8 8A 82               124 	mov	dpl,r2
-   03AA C0 02               125 	push	ar2
-   03AC 12 06 69            126 	lcall	_i2c_write
-   03AF E5 82               127 	mov	a,dpl
-   03B1 D0 02               128 	pop	ar2
-                            129 ;     genIfx
-                            130 ;     genIfxJump
-                            131 ;	Peephole 109	removed ljmp by inverse jump logic
-                            132 ;Initial/src/eeprom_io.c:41: return 0;
-                            133 ;     genRet
-                            134 ;	Peephole 256.c	loading dpl with zero from a
-   03B3 70 03               135 	jnz	00102$
-   03B5                     136 00106$:
-   03B5 F5 82               137 	mov	dpl,a
-                            138 ;	Peephole 112.b	changed ljmp to sjmp
-                            139 ;	Peephole 251.b	replaced sjmp to ret with ret
-   03B7 22                  140 	ret
-   03B8                     141 00102$:
-                            142 ;Initial/src/eeprom_io.c:43: return i2c_read(i2c_addr, buf, len);
-                            143 ;     genAssign
-   03B8 85 0A 2B            144 	mov	_i2c_read_PARM_2,_eeprom_read_PARM_3
-   03BB 85 0B 2C            145 	mov	(_i2c_read_PARM_2 + 1),(_eeprom_read_PARM_3 + 1)
-                            146 ;     genAssign
-   03BE 85 0C 2D            147 	mov	_i2c_read_PARM_3,_eeprom_read_PARM_4
-                            148 ;     genCall
-   03C1 8A 82               149 	mov	dpl,r2
-                            150 ;     genRet
-                            151 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   03C3 02 05 92            152 	ljmp	_i2c_read
-                            153 	.area CSEG    (CODE)
+                            115 ;	Peephole 181	changed mov to clr
+   039C E4                  116 	clr	a
+   039D F0                  117 	movx	@dptr,a
+                            118 ;Initial/src/eeprom_io.c:43: cmd[1] = eeprom_offset; // <-- address low byte
+                            119 ;     genPointerSet
+                            120 ;     genFarPointerSet
+   039E 90 20 0A            121 	mov	dptr,#(_eeprom_read_cmd_1_1 + 0x0001)
+   03A1 E5 09               122 	mov	a,_eeprom_read_PARM_2
+   03A3 F0                  123 	movx	@dptr,a
+                            124 ;Initial/src/eeprom_io.c:44: if (!i2c_write(i2c_addr, cmd, 2))
+                            125 ;     genAssign
+   03A4 75 2B 09            126 	mov	_i2c_write_PARM_2,#_eeprom_read_cmd_1_1
+   03A7 75 2C 20            127 	mov	(_i2c_write_PARM_2 + 1),#(_eeprom_read_cmd_1_1 >> 8)
+                            128 ;     genAssign
+   03AA 75 2D 02            129 	mov	_i2c_write_PARM_3,#0x02
+                            130 ;     genCall
+   03AD 8A 82               131 	mov	dpl,r2
+   03AF C0 02               132 	push	ar2
+   03B1 12 06 86            133 	lcall	_i2c_write
+   03B4 E5 82               134 	mov	a,dpl
+   03B6 D0 02               135 	pop	ar2
+                            136 ;     genIfx
+                            137 ;     genIfxJump
+                            138 ;	Peephole 109	removed ljmp by inverse jump logic
+                            139 ;Initial/src/eeprom_io.c:45: return 0;
+                            140 ;     genRet
+                            141 ;	Peephole 256.c	loading dpl with zero from a
+   03B8 70 03               142 	jnz	00102$
+   03BA                     143 00106$:
+   03BA F5 82               144 	mov	dpl,a
+                            145 ;	Peephole 112.b	changed ljmp to sjmp
+                            146 ;	Peephole 251.b	replaced sjmp to ret with ret
+   03BC 22                  147 	ret
+   03BD                     148 00102$:
+                            149 ;Initial/src/eeprom_io.c:47: return i2c_read(i2c_addr, buf, len);
+                            150 ;     genAssign
+   03BD 85 0A 2B            151 	mov	_i2c_read_PARM_2,_eeprom_read_PARM_3
+   03C0 85 0B 2C            152 	mov	(_i2c_read_PARM_2 + 1),(_eeprom_read_PARM_3 + 1)
+                            153 ;     genAssign
+   03C3 85 0C 2D            154 	mov	_i2c_read_PARM_3,_eeprom_read_PARM_4
+                            155 ;     genCall
+   03C6 8A 82               156 	mov	dpl,r2
+                            157 ;     genRet
+                            158 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   03C8 02 05 AF            159 	ljmp	_i2c_read
+                            160 	.area CSEG    (CODE)

@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Wed Jul 12 14:50:24 2006
+; This file generated Wed Jul 19 12:32:14 2006
 ;--------------------------------------------------------
 	.module hpsdr_main
 	.optsdcc -mmcs51 --model-small
@@ -1365,35 +1365,35 @@ _patch_usb_descriptors:
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;Initial/src/hpsdr_main.c:207: main (void)
+;Initial/src/hpsdr_main.c:214: main (void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;Initial/src/hpsdr_main.c:209: init_hpsdr();
+;Initial/src/hpsdr_main.c:216: init_hpsdr();
 ;     genCall
 	lcall	_init_hpsdr
-;Initial/src/hpsdr_main.c:211: set_led_0 (1);
+;Initial/src/hpsdr_main.c:218: set_led_0 (1);
 ;     genCall
 	mov	dpl,#0x01
 	lcall	_set_led_0
-;Initial/src/hpsdr_main.c:212: set_led_1 (0);
+;Initial/src/hpsdr_main.c:219: set_led_1 (0);
 ;     genCall
 	mov	dpl,#0x00
 	lcall	_set_led_1
-;Initial/src/hpsdr_main.c:214: EA = 0;		// disable all interrupts
+;Initial/src/hpsdr_main.c:221: EA = 0;		// disable all interrupts
 ;     genAssign
 	clr	_EA
-;Initial/src/hpsdr_main.c:216: patch_usb_descriptors();
+;Initial/src/hpsdr_main.c:223: patch_usb_descriptors();
 ;     genCall
 	lcall	_patch_usb_descriptors
-;Initial/src/hpsdr_main.c:218: setup_autovectors ();
+;Initial/src/hpsdr_main.c:225: setup_autovectors ();
 ;     genCall
 	lcall	_setup_autovectors
-;Initial/src/hpsdr_main.c:219: usb_install_handlers ();
+;Initial/src/hpsdr_main.c:226: usb_install_handlers ();
 ;     genCall
 	lcall	_usb_install_handlers
-;Initial/src/hpsdr_main.c:220: hook_timer_tick ((unsigned short) isr_tick);
+;Initial/src/hpsdr_main.c:227: hook_timer_tick ((unsigned short) isr_tick);
 ;     genCast
 	mov	r2,#_isr_tick
 	mov	r3,#(_isr_tick >> 8)
@@ -1401,16 +1401,16 @@ _main:
 	mov	dpl,r2
 	mov	dph,r3
 	lcall	_hook_timer_tick
-;Initial/src/hpsdr_main.c:222: EIEX4 = 1;	// disable INT4 FIXME
+;Initial/src/hpsdr_main.c:229: EIEX4 = 1;	// disable INT4 FIXME
 ;     genAssign
 	setb	_EIEX4
-;Initial/src/hpsdr_main.c:223: EA = 1;			// global interrupt enable
+;Initial/src/hpsdr_main.c:230: EA = 1;			// global interrupt enable
 ;     genAssign
 	setb	_EA
-;Initial/src/hpsdr_main.c:225: fx2_renumerate ();	// simulates disconnect / reconnect
+;Initial/src/hpsdr_main.c:232: fx2_renumerate ();	// simulates disconnect / reconnect
 ;     genCall
 	lcall	_fx2_renumerate
-;Initial/src/hpsdr_main.c:227: main_loop ();
+;Initial/src/hpsdr_main.c:234: main_loop ();
 ;     genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_main_loop

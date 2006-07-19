@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Wed Jul 12 14:50:24 2006
+                              4 ; This file generated Wed Jul 19 12:32:14 2006
                               5 ;--------------------------------------------------------
                               6 	.module hpsdr_main
                               7 	.optsdcc -mmcs51 --model-small
@@ -1365,35 +1365,35 @@
                            1365 ;Allocation info for local variables in function 'main'
                            1366 ;------------------------------------------------------------
                            1367 ;------------------------------------------------------------
-                           1368 ;Initial/src/hpsdr_main.c:207: main (void)
+                           1368 ;Initial/src/hpsdr_main.c:214: main (void)
                            1369 ;	-----------------------------------------
                            1370 ;	 function main
                            1371 ;	-----------------------------------------
    01C6                    1372 _main:
-                           1373 ;Initial/src/hpsdr_main.c:209: init_hpsdr();
+                           1373 ;Initial/src/hpsdr_main.c:216: init_hpsdr();
                            1374 ;     genCall
    01C6 12s00r00           1375 	lcall	_init_hpsdr
-                           1376 ;Initial/src/hpsdr_main.c:211: set_led_0 (1);
+                           1376 ;Initial/src/hpsdr_main.c:218: set_led_0 (1);
                            1377 ;     genCall
    01C9 75 82 01           1378 	mov	dpl,#0x01
    01CC 12s00r00           1379 	lcall	_set_led_0
-                           1380 ;Initial/src/hpsdr_main.c:212: set_led_1 (0);
+                           1380 ;Initial/src/hpsdr_main.c:219: set_led_1 (0);
                            1381 ;     genCall
    01CF 75 82 00           1382 	mov	dpl,#0x00
    01D2 12s00r00           1383 	lcall	_set_led_1
-                           1384 ;Initial/src/hpsdr_main.c:214: EA = 0;		// disable all interrupts
+                           1384 ;Initial/src/hpsdr_main.c:221: EA = 0;		// disable all interrupts
                            1385 ;     genAssign
    01D5 C2 AF              1386 	clr	_EA
-                           1387 ;Initial/src/hpsdr_main.c:216: patch_usb_descriptors();
+                           1387 ;Initial/src/hpsdr_main.c:223: patch_usb_descriptors();
                            1388 ;     genCall
    01D7 12s01r9D           1389 	lcall	_patch_usb_descriptors
-                           1390 ;Initial/src/hpsdr_main.c:218: setup_autovectors ();
+                           1390 ;Initial/src/hpsdr_main.c:225: setup_autovectors ();
                            1391 ;     genCall
    01DA 12s00r00           1392 	lcall	_setup_autovectors
-                           1393 ;Initial/src/hpsdr_main.c:219: usb_install_handlers ();
+                           1393 ;Initial/src/hpsdr_main.c:226: usb_install_handlers ();
                            1394 ;     genCall
    01DD 12s00r00           1395 	lcall	_usb_install_handlers
-                           1396 ;Initial/src/hpsdr_main.c:220: hook_timer_tick ((unsigned short) isr_tick);
+                           1396 ;Initial/src/hpsdr_main.c:227: hook_timer_tick ((unsigned short) isr_tick);
                            1397 ;     genCast
    01E0 7Ar88              1398 	mov	r2,#_isr_tick
    01E2 7Bs01              1399 	mov	r3,#(_isr_tick >> 8)
@@ -1401,16 +1401,16 @@
    01E4 8A 82              1401 	mov	dpl,r2
    01E6 8B 83              1402 	mov	dph,r3
    01E8 12s00r00           1403 	lcall	_hook_timer_tick
-                           1404 ;Initial/src/hpsdr_main.c:222: EIEX4 = 1;	// disable INT4 FIXME
+                           1404 ;Initial/src/hpsdr_main.c:229: EIEX4 = 1;	// disable INT4 FIXME
                            1405 ;     genAssign
    01EB D2 EA              1406 	setb	_EIEX4
-                           1407 ;Initial/src/hpsdr_main.c:223: EA = 1;			// global interrupt enable
+                           1407 ;Initial/src/hpsdr_main.c:230: EA = 1;			// global interrupt enable
                            1408 ;     genAssign
    01ED D2 AF              1409 	setb	_EA
-                           1410 ;Initial/src/hpsdr_main.c:225: fx2_renumerate ();	// simulates disconnect / reconnect
+                           1410 ;Initial/src/hpsdr_main.c:232: fx2_renumerate ();	// simulates disconnect / reconnect
                            1411 ;     genCall
    01EF 12s00r00           1412 	lcall	_fx2_renumerate
-                           1413 ;Initial/src/hpsdr_main.c:227: main_loop ();
+                           1413 ;Initial/src/hpsdr_main.c:234: main_loop ();
                            1414 ;     genCall
                            1415 ;	Peephole 253.b	replaced lcall/ret with ljmp
    01F2 02s01r7F           1416 	ljmp	_main_loop

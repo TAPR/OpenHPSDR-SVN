@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Wed Jul 12 14:50:26 2006
+; This file generated Wed Jul 19 12:32:16 2006
 ;--------------------------------------------------------
 	.module usb_common
 	.optsdcc -mmcs51 --model-small
