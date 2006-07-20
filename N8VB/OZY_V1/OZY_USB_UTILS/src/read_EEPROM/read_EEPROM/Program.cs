@@ -36,7 +36,7 @@ namespace read_EEPROM
         {
             if ((args.Length != 5) || (args.Length == 0))
             {
-                Console.WriteLine("usage: read_EEPROM <VID> <PID> <i2c_address in hex> <start_pos in hex> <length in decimal>");
+                Console.WriteLine("usage: read_EEPROM <VID> <PID> <i2c_address in hex> <start_pos in hex> <length in hex>");
                 return;
             }
 
@@ -113,7 +113,7 @@ namespace read_EEPROM
                 return;
             }
 
-            int start = int.Parse(args[4], NumberStyles.HexNumber);
+            int start = int.Parse(args[3], NumberStyles.HexNumber);
 
             if (args[4].Length > 2)
             {

@@ -154,12 +154,15 @@ namespace HPSDR_USB_LIB_V1
             for (int i = 0; i < buffer.Length; i++)
             {
                 cmd[0] = 0; // < -- this is the high byte of the address in EEPROM
-                cmd[1] = (byte)offset++; // < -- this is the low byte of the address in EEPROM
+                cmd[1] = (byte)offset; // < -- this is the low byte of the address in EEPROM
                 cmd[2] = buffer[i]; // <-- this is the value to be written
                 if (!(Write_I2C(hdev, i2c_addr, cmd)))
                 {
+                    Console.WriteLine("Programming failed at offset: " + offset);
                     return false;
                 }
+                System.Threading.Thread.Sleep(50);
+                offset++;
             }
             return true;
         }
@@ -203,7 +206,7 @@ namespace HPSDR_USB_LIB_V1
                     buffer.Length,
                     1000
                     );
-                if (ret == buffer.Length)
+                if (ret > 0)
                     return true;
                 else
                     return false;
