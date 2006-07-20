@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5626B787-CDBC-4D87-B2BA-429DC539E513}</ProjectGuid>
+    <ProjectGuid>{88E050A5-378C-4007-97B6-CB11D1CD0AC8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>write_EEPROM</RootNamespace>
-    <AssemblyName>write_EEPROM</AssemblyName>
+    <RootNamespace>program_OZYEEPROM</RootNamespace>
+    <AssemblyName>program_OZYEEPROM</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
