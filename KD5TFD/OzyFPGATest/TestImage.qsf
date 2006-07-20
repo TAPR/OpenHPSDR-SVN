@@ -55,8 +55,8 @@ set_location_assignment PIN_39 -to FX2_PE2
 set_location_assignment PIN_40 -to FX2_PE3
 set_location_assignment PIN_41 -to FX2_PE4
 set_location_assignment PIN_43 -to FX2_PE5
-set_location_assignment PIN_45 -to FX2_PE6
-set_location_assignment PIN_46 -to FX2_PE7
+set_location_assignment PIN_44 -to FX2_PE6
+set_location_assignment PIN_45 -to FX2_PE7
 set_location_assignment PIN_47 -to FPGA_CLKXOUT
 set_location_assignment PIN_48 -to FPGA_CLKYOUT
 
