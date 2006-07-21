@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Wed Jul 19 12:32:14 2006
+; This file generated Fri Jul 21 16:22:52 2006
 ;--------------------------------------------------------
 	.module hpsdr_common
 	.optsdcc -mmcs51 --model-small
@@ -888,7 +888,22 @@ _init_hpsdr:
 ;Initial/src/hpsdr_common.c:128: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:130: init_board ();
+;Initial/src/hpsdr_common.c:132: SCON0 = 0x50;
+;     genAssign
+	mov	_SCON0,#0x50
+;Initial/src/hpsdr_common.c:133: TMOD |= 0x20;
+;     genOr
+	orl	_TMOD,#0x20
+;Initial/src/hpsdr_common.c:134: TH1 = 0xB2;
+;     genAssign
+	mov	_TH1,#0xB2
+;Initial/src/hpsdr_common.c:135: TR1 = 1;
+;     genAssign
+	setb	_TR1
+;Initial/src/hpsdr_common.c:136: TI = 1;
+;     genAssign
+	setb	_TI
+;Initial/src/hpsdr_common.c:138: init_board ();
 ;     genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_init_board

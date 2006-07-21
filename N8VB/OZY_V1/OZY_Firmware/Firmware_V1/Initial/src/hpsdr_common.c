@@ -127,6 +127,14 @@ init_hpsdr (void)
   EP6AUTOINLENL = (512) & 0xff;
   SYNCDELAY;
 
+  // init serial
+
+SCON0 = 0x50;
+TMOD |= 0x20;
+TH1 = 0xB2;
+TR1 = 1;
+TI = 1;
+
   init_board ();
 
 }

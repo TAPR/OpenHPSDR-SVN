@@ -481,26 +481,26 @@ Symbol Table
     _bitS_CLK                                                   =  0080 G
     _bitS_IN                                                    =  0083 G
     _bitS_OUT                                                   =  0081 G
-  9 _count_bits8                                                   0025 R
-  9 _init_spi                                                      001C GR
-  9 _read_byte_msb                                                 019B R
-  9 _read_bytes_msb                                                01D7 R
+  9 _count_bits8                                                   000A R
+  9 _init_spi                                                      0001 GR
+  9 _read_byte_msb                                                 0180 R
+  9 _read_bytes_msb                                                01BC R
   3 _read_bytes_msb_PARM_2                                         000D GR
   9 _setup_enables                                                 0000 R
-  9 _spi_read                                                      0055 GR
+  9 _spi_read                                                      003A GR
   3 _spi_read_PARM_2                                               0000 GR
   3 _spi_read_PARM_3                                               0001 GR
   3 _spi_read_PARM_4                                               0002 GR
   3 _spi_read_PARM_5                                               0003 GR
   3 _spi_read_PARM_6                                               0005 GR
-  9 _spi_write                                                     00C3 GR
+  9 _spi_write                                                     00A8 GR
   3 _spi_write_PARM_2                                              0006 GR
   3 _spi_write_PARM_3                                              0007 GR
   3 _spi_write_PARM_4                                              0008 GR
   3 _spi_write_PARM_5                                              0009 GR
   3 _spi_write_PARM_6                                              000B GR
-  9 _write_byte_msb                                                011C R
-  9 _write_bytes_msb                                               016F R
+  9 _write_byte_msb                                                0101 R
+  9 _write_bytes_msb                                               0154 R
   3 _write_bytes_msb_PARM_2                                        000C GR
     a                                                              00D6 
     ac                                                             00D6 
@@ -692,7 +692,7 @@ Area Table
    6 BSEG                                                                               size    0   flags 80
    7 PSEG                                                                               size    0   flags 50
    8 XSEG                                                                               size    0   flags 40
-   9 CSEG                                                                               size  1F7   flags 20
+   9 CSEG                                                                               size  1DC   flags 20
    A GSINIT0                                                                            size    0   flags 20
    B GSINIT1                                                                            size    0   flags 20
    C GSINIT2                                                                            size    0   flags 20

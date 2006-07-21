@@ -1,5 +1,5 @@
 Flow report for blinkity
-Tue Jul 18 19:52:42 2006
+Fri Jul 21 13:43:50 2006
 Version 6.0 Build 178 04/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Tue Jul 18 19:52:42 2006   ;
+; Flow Status                        ; Successful - Fri Jul 21 13:43:50 2006   ;
 ; Quartus II Version                 ; 6.0 Build 178 04/27/2006 SJ Web Edition ;
 ; Revision Name                      ; blinkity                                ;
 ; Top-level Entity Name              ; blinkity                                ;
@@ -60,7 +60,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/18/2006 19:52:26 ;
+; Start date & time ; 07/21/2006 13:43:35 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; blinkity            ;
 +-------------------+---------------------+
@@ -78,11 +78,11 @@ applicable agreement for further details.
 +----------------------+--------------+
 ; Module Name          ; Elapsed Time ;
 +----------------------+--------------+
-; Analysis & Synthesis ; 00:00:03     ;
+; Analysis & Synthesis ; 00:00:02     ;
 ; Fitter               ; 00:00:06     ;
-; Assembler            ; 00:00:04     ;
+; Assembler            ; 00:00:03     ;
 ; Timing Analyzer      ; 00:00:01     ;
-; Total                ; 00:00:14     ;
+; Total                ; 00:00:12     ;
 +----------------------+--------------+
 
 

@@ -23,8 +23,24 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include "../include/fx2regs.h"
 #include "../include/hpsdr_common.h"
 #include "../include/spi.h"
+
+void
+putchar(char c)
+{
+    while(!TI);
+    TI=0;
+    SBUF0 = c;
+}
+
+void putstr(char *s)
+{
+    char i=0;
+    char c;
+    while ((c=*(s+(i++)))!=0) putchar(c);
+}
 
 void
 set_led_0 (unsigned char on)

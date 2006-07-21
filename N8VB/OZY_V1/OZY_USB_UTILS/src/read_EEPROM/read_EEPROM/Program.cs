@@ -177,6 +177,9 @@ namespace read_EEPROM
                 Console.WriteLine("Failed to read address " + i2c_addr);
             }
 
+            Console.WriteLine("EEPROM TYPE: " + OZY.Read_EEPROM_Type(usb_dev_handle).ToString());
+            Console.WriteLine("I2C SPEED: " + OZY.Read_I2C_Speed(usb_dev_handle).ToString());
+
             Console.WriteLine("Closing device...");
             libUSB_Interface.usb_close(usb_dev_handle);
             Console.WriteLine("done...");

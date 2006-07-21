@@ -116,6 +116,13 @@ unsigned char app_vendor_OUT_cmd(void)
 					return 0;
 		  		break;
 
+            case VRQ_I2C_SPEED_SET:
+                if (wValueL == 1)
+                    I2CTL |= bm400KHZ;
+                else
+                    I2CTL &= ~bm400KHZ;
+                break;
+
 			default:
 		  		return 0;
 	 }
@@ -140,7 +147,19 @@ unsigned char app_vendor_IN_cmd(void)
                 EP0BCL = wLengthL;
                 break;
 
-		    	default:
+            case VRQ_EEPROM_TYPE_READ:
+                EP0BUF[0] = I2CS & bmID; // 16 = 2 byte, 8 = 1 byte
+                EP0BCH = 0;
+                EP0BCL = 1;
+                break;
+
+            case VRQ_I2C_SPEED_READ:
+                EP0BUF[0] = I2CTL & bm400KHZ; // 0 = 100 kHz, 1 = 400 kHz
+                EP0BCH = 0;
+                EP0BCL = 1;
+                break;
+
+            default:
 		      		return 0;
 		}
 	return 1;
@@ -165,6 +184,8 @@ main_loop (void)
   	{
     		if (usb_setup_packet_avail ())
       			usb_handle_setup_packet ();
+            else
+                putchar(32);
   	}
 }
 

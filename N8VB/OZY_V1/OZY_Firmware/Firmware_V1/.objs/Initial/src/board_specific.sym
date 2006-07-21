@@ -476,17 +476,20 @@ Symbol Table
     _XGPIFSGLDATH                                               =  E6F0 G
     _XGPIFSGLDATLNOX                                            =  E6F2 G
     _XGPIFSGLDATLX                                              =  E6F1 G
+    __gptrget                                                      **** GX
     _bitALTERA_DATA0                                            =  00A0 G
     _bitALTERA_DCLK                                             =  00A2 G
     _bitS_CLK                                                   =  0080 G
     _bitS_IN                                                    =  0083 G
     _bitS_OUT                                                   =  0081 G
-  9 _init_board                                                    0022 GR
+  9 _init_board                                                    0067 GR
     _init_spi                                                      **** GX
-  9 _set_led_0                                                     0000 GR
-  9 _set_led_1                                                     000D GR
-  9 _toggle_led_0                                                  001A GR
-  9 _toggle_led_1                                                  001E GR
+  9 _putchar                                                       0000 GR
+  9 _putstr                                                        000A GR
+  9 _set_led_0                                                     0045 GR
+  9 _set_led_1                                                     0052 GR
+  9 _toggle_led_0                                                  005F GR
+  9 _toggle_led_1                                                  0063 GR
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -677,7 +680,7 @@ Area Table
    6 BSEG                                                                               size    0   flags 80
    7 PSEG                                                                               size    0   flags 50
    8 XSEG                                                                               size    0   flags 40
-   9 CSEG                                                                               size   25   flags 20
+   9 CSEG                                                                               size   6A   flags 20
    A GSINIT0                                                                            size    0   flags 20
    B GSINIT1                                                                            size    0   flags 20
    C GSINIT2                                                                            size    0   flags 20

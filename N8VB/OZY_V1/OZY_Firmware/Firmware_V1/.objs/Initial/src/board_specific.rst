@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Wed Jul 19 12:32:14 2006
+                              4 ; This file generated Fri Jul 21 16:22:52 2006
                               5 ;--------------------------------------------------------
                               6 	.module board_specific
                               7 	.optsdcc -mmcs51 --model-small
@@ -321,496 +321,594 @@
                             321 	.globl _CPUCS
                             322 	.globl _RES_WAVEDATA_END
                             323 	.globl _GPIF_WAVE_DATA
-                            324 	.globl _set_led_0
-                            325 	.globl _set_led_1
-                            326 	.globl _toggle_led_0
-                            327 	.globl _toggle_led_1
-                            328 ;--------------------------------------------------------
-                            329 ; special function registers
+                            324 	.globl _putchar
+                            325 	.globl _putstr
+                            326 	.globl _set_led_0
+                            327 	.globl _set_led_1
+                            328 	.globl _toggle_led_0
+                            329 	.globl _toggle_led_1
                             330 ;--------------------------------------------------------
-                            331 	.area RSEG    (DATA)
-                    0080    332 _IOA	=	0x0080
-                    0081    333 _SP	=	0x0081
-                    0082    334 _DPL	=	0x0082
-                    0083    335 _DPH	=	0x0083
-                    0084    336 _DPL1	=	0x0084
-                    0085    337 _DPH1	=	0x0085
-                    0086    338 _DPS	=	0x0086
-                    0087    339 _PCON	=	0x0087
-                    0088    340 _TCON	=	0x0088
-                    0089    341 _TMOD	=	0x0089
-                    008A    342 _TL0	=	0x008a
-                    008B    343 _TL1	=	0x008b
-                    008C    344 _TH0	=	0x008c
-                    008D    345 _TH1	=	0x008d
-                    008E    346 _CKCON	=	0x008e
-                    0090    347 _IOB	=	0x0090
-                    0091    348 _EXIF	=	0x0091
-                    0092    349 _MPAGE	=	0x0092
-                    0098    350 _SCON0	=	0x0098
-                    0099    351 _SBUF0	=	0x0099
-                    009A    352 _APTR1H	=	0x009a
-                    009B    353 _APTR1L	=	0x009b
-                    009C    354 _AUTODAT1	=	0x009c
-                    009D    355 _AUTOPTRH2	=	0x009d
-                    009E    356 _AUTOPTRL2	=	0x009e
-                    009F    357 _AUTODAT2	=	0x009f
-                    00A0    358 _IOC	=	0x00a0
-                    00A1    359 _INT2CLR	=	0x00a1
-                    00A2    360 _INT4CLR	=	0x00a2
-                    00A8    361 _IE	=	0x00a8
-                    00AA    362 _EP2468STAT	=	0x00aa
-                    00AB    363 _EP24FIFOFLGS	=	0x00ab
-                    00AC    364 _EP68FIFOFLGS	=	0x00ac
-                    00AF    365 _AUTOPTRSETUP	=	0x00af
-                    00B0    366 _IOD	=	0x00b0
-                    00B1    367 _IOE	=	0x00b1
-                    00B2    368 _OEA	=	0x00b2
-                    00B3    369 _OEB	=	0x00b3
-                    00B4    370 _OEC	=	0x00b4
-                    00B5    371 _OED	=	0x00b5
-                    00B6    372 _OEE	=	0x00b6
-                    00B8    373 _IP	=	0x00b8
-                    00BA    374 _EP01STAT	=	0x00ba
-                    00BB    375 _GPIFTRIG	=	0x00bb
-                    00BD    376 _GPIFSGLDATH	=	0x00bd
-                    00BE    377 _GPIFSGLDATLX	=	0x00be
-                    00BF    378 _GPIFSGLDATLNOX	=	0x00bf
-                    00C0    379 _SCON1	=	0x00c0
-                    00C1    380 _SBUF1	=	0x00c1
-                    00C8    381 _T2CON	=	0x00c8
-                    00CA    382 _RCAP2L	=	0x00ca
-                    00CB    383 _RCAP2H	=	0x00cb
-                    00CC    384 _TL2	=	0x00cc
-                    00CD    385 _TH2	=	0x00cd
-                    00D0    386 _PSW	=	0x00d0
-                    00D8    387 _EICON	=	0x00d8
-                    00E0    388 _ACC	=	0x00e0
-                    00E8    389 _EIE	=	0x00e8
-                    00F0    390 _B	=	0x00f0
-                    00F8    391 _EIP	=	0x00f8
-                            392 ;--------------------------------------------------------
-                            393 ; special function bits 
+                            331 ; special function registers
+                            332 ;--------------------------------------------------------
+                            333 	.area RSEG    (DATA)
+                    0080    334 _IOA	=	0x0080
+                    0081    335 _SP	=	0x0081
+                    0082    336 _DPL	=	0x0082
+                    0083    337 _DPH	=	0x0083
+                    0084    338 _DPL1	=	0x0084
+                    0085    339 _DPH1	=	0x0085
+                    0086    340 _DPS	=	0x0086
+                    0087    341 _PCON	=	0x0087
+                    0088    342 _TCON	=	0x0088
+                    0089    343 _TMOD	=	0x0089
+                    008A    344 _TL0	=	0x008a
+                    008B    345 _TL1	=	0x008b
+                    008C    346 _TH0	=	0x008c
+                    008D    347 _TH1	=	0x008d
+                    008E    348 _CKCON	=	0x008e
+                    0090    349 _IOB	=	0x0090
+                    0091    350 _EXIF	=	0x0091
+                    0092    351 _MPAGE	=	0x0092
+                    0098    352 _SCON0	=	0x0098
+                    0099    353 _SBUF0	=	0x0099
+                    009A    354 _APTR1H	=	0x009a
+                    009B    355 _APTR1L	=	0x009b
+                    009C    356 _AUTODAT1	=	0x009c
+                    009D    357 _AUTOPTRH2	=	0x009d
+                    009E    358 _AUTOPTRL2	=	0x009e
+                    009F    359 _AUTODAT2	=	0x009f
+                    00A0    360 _IOC	=	0x00a0
+                    00A1    361 _INT2CLR	=	0x00a1
+                    00A2    362 _INT4CLR	=	0x00a2
+                    00A8    363 _IE	=	0x00a8
+                    00AA    364 _EP2468STAT	=	0x00aa
+                    00AB    365 _EP24FIFOFLGS	=	0x00ab
+                    00AC    366 _EP68FIFOFLGS	=	0x00ac
+                    00AF    367 _AUTOPTRSETUP	=	0x00af
+                    00B0    368 _IOD	=	0x00b0
+                    00B1    369 _IOE	=	0x00b1
+                    00B2    370 _OEA	=	0x00b2
+                    00B3    371 _OEB	=	0x00b3
+                    00B4    372 _OEC	=	0x00b4
+                    00B5    373 _OED	=	0x00b5
+                    00B6    374 _OEE	=	0x00b6
+                    00B8    375 _IP	=	0x00b8
+                    00BA    376 _EP01STAT	=	0x00ba
+                    00BB    377 _GPIFTRIG	=	0x00bb
+                    00BD    378 _GPIFSGLDATH	=	0x00bd
+                    00BE    379 _GPIFSGLDATLX	=	0x00be
+                    00BF    380 _GPIFSGLDATLNOX	=	0x00bf
+                    00C0    381 _SCON1	=	0x00c0
+                    00C1    382 _SBUF1	=	0x00c1
+                    00C8    383 _T2CON	=	0x00c8
+                    00CA    384 _RCAP2L	=	0x00ca
+                    00CB    385 _RCAP2H	=	0x00cb
+                    00CC    386 _TL2	=	0x00cc
+                    00CD    387 _TH2	=	0x00cd
+                    00D0    388 _PSW	=	0x00d0
+                    00D8    389 _EICON	=	0x00d8
+                    00E0    390 _ACC	=	0x00e0
+                    00E8    391 _EIE	=	0x00e8
+                    00F0    392 _B	=	0x00f0
+                    00F8    393 _EIP	=	0x00f8
                             394 ;--------------------------------------------------------
-                            395 	.area RSEG    (DATA)
-                    0086    396 _SEL	=	0x0086
-                    0088    397 _IT0	=	0x0088
-                    0089    398 _IE0	=	0x0089
-                    008A    399 _IT1	=	0x008a
-                    008B    400 _IE1	=	0x008b
-                    008C    401 _TR0	=	0x008c
-                    008D    402 _TF0	=	0x008d
-                    008E    403 _TR1	=	0x008e
-                    008F    404 _TF1	=	0x008f
-                    0098    405 _RI	=	0x0098
-                    0099    406 _TI	=	0x0099
-                    009A    407 _RB8	=	0x009a
-                    009B    408 _TB8	=	0x009b
-                    009C    409 _REN	=	0x009c
-                    009D    410 _SM2	=	0x009d
-                    009E    411 _SM1	=	0x009e
-                    009F    412 _SM0	=	0x009f
-                    00A8    413 _EX0	=	0x00a8
-                    00A9    414 _ET0	=	0x00a9
-                    00AA    415 _EX1	=	0x00aa
-                    00AB    416 _ET1	=	0x00ab
-                    00AC    417 _ES0	=	0x00ac
-                    00AD    418 _ET2	=	0x00ad
-                    00AE    419 _ES1	=	0x00ae
-                    00AF    420 _EA	=	0x00af
-                    00B8    421 _PX0	=	0x00b8
-                    00B9    422 _PT0	=	0x00b9
-                    00BA    423 _PX1	=	0x00ba
-                    00BB    424 _PT1	=	0x00bb
-                    00BC    425 _PS0	=	0x00bc
-                    00BD    426 _PT2	=	0x00bd
-                    00BE    427 _PS1	=	0x00be
-                    00C0    428 _RI1	=	0x00c0
-                    00C1    429 _TI1	=	0x00c1
-                    00C2    430 _RB81	=	0x00c2
-                    00C3    431 _TB81	=	0x00c3
-                    00C4    432 _REN1	=	0x00c4
-                    00C5    433 _SM21	=	0x00c5
-                    00C6    434 _SM11	=	0x00c6
-                    00C7    435 _SM01	=	0x00c7
-                    00C8    436 _CP_RL2	=	0x00c8
-                    00C9    437 _C_T2	=	0x00c9
-                    00CA    438 _TR2	=	0x00ca
-                    00CB    439 _EXEN2	=	0x00cb
-                    00CC    440 _TCLK	=	0x00cc
-                    00CD    441 _RCLK	=	0x00cd
-                    00CE    442 _EXF2	=	0x00ce
-                    00CF    443 _TF2	=	0x00cf
-                    00D0    444 _P	=	0x00d0
-                    00D1    445 _FL	=	0x00d1
-                    00D2    446 _OV	=	0x00d2
-                    00D3    447 _RS0	=	0x00d3
-                    00D4    448 _RS1	=	0x00d4
-                    00D5    449 _F0	=	0x00d5
-                    00D6    450 _AC	=	0x00d6
-                    00D7    451 _CY	=	0x00d7
-                    00DB    452 _INT6	=	0x00db
-                    00DC    453 _RESI	=	0x00dc
-                    00DD    454 _ERESI	=	0x00dd
-                    00DF    455 _SMOD1	=	0x00df
-                    00E8    456 _EIUSB	=	0x00e8
-                    00E9    457 _EI2C	=	0x00e9
-                    00EA    458 _EIEX4	=	0x00ea
-                    00EB    459 _EIEX5	=	0x00eb
-                    00EC    460 _EIEX6	=	0x00ec
-                    00F8    461 _PUSB	=	0x00f8
-                    00F9    462 _PI2C	=	0x00f9
-                    00FA    463 _EIPX4	=	0x00fa
-                    00FB    464 _EIPX5	=	0x00fb
-                    00FC    465 _EIPX6	=	0x00fc
-                    0080    466 _bitS_CLK	=	0x0080
-                    0081    467 _bitS_OUT	=	0x0081
-                    0083    468 _bitS_IN	=	0x0083
-                    00A0    469 _bitALTERA_DATA0	=	0x00a0
-                    00A2    470 _bitALTERA_DCLK	=	0x00a2
-                            471 ;--------------------------------------------------------
-                            472 ; overlayable register banks 
+                            395 ; special function bits 
+                            396 ;--------------------------------------------------------
+                            397 	.area RSEG    (DATA)
+                    0086    398 _SEL	=	0x0086
+                    0088    399 _IT0	=	0x0088
+                    0089    400 _IE0	=	0x0089
+                    008A    401 _IT1	=	0x008a
+                    008B    402 _IE1	=	0x008b
+                    008C    403 _TR0	=	0x008c
+                    008D    404 _TF0	=	0x008d
+                    008E    405 _TR1	=	0x008e
+                    008F    406 _TF1	=	0x008f
+                    0098    407 _RI	=	0x0098
+                    0099    408 _TI	=	0x0099
+                    009A    409 _RB8	=	0x009a
+                    009B    410 _TB8	=	0x009b
+                    009C    411 _REN	=	0x009c
+                    009D    412 _SM2	=	0x009d
+                    009E    413 _SM1	=	0x009e
+                    009F    414 _SM0	=	0x009f
+                    00A8    415 _EX0	=	0x00a8
+                    00A9    416 _ET0	=	0x00a9
+                    00AA    417 _EX1	=	0x00aa
+                    00AB    418 _ET1	=	0x00ab
+                    00AC    419 _ES0	=	0x00ac
+                    00AD    420 _ET2	=	0x00ad
+                    00AE    421 _ES1	=	0x00ae
+                    00AF    422 _EA	=	0x00af
+                    00B8    423 _PX0	=	0x00b8
+                    00B9    424 _PT0	=	0x00b9
+                    00BA    425 _PX1	=	0x00ba
+                    00BB    426 _PT1	=	0x00bb
+                    00BC    427 _PS0	=	0x00bc
+                    00BD    428 _PT2	=	0x00bd
+                    00BE    429 _PS1	=	0x00be
+                    00C0    430 _RI1	=	0x00c0
+                    00C1    431 _TI1	=	0x00c1
+                    00C2    432 _RB81	=	0x00c2
+                    00C3    433 _TB81	=	0x00c3
+                    00C4    434 _REN1	=	0x00c4
+                    00C5    435 _SM21	=	0x00c5
+                    00C6    436 _SM11	=	0x00c6
+                    00C7    437 _SM01	=	0x00c7
+                    00C8    438 _CP_RL2	=	0x00c8
+                    00C9    439 _C_T2	=	0x00c9
+                    00CA    440 _TR2	=	0x00ca
+                    00CB    441 _EXEN2	=	0x00cb
+                    00CC    442 _TCLK	=	0x00cc
+                    00CD    443 _RCLK	=	0x00cd
+                    00CE    444 _EXF2	=	0x00ce
+                    00CF    445 _TF2	=	0x00cf
+                    00D0    446 _P	=	0x00d0
+                    00D1    447 _FL	=	0x00d1
+                    00D2    448 _OV	=	0x00d2
+                    00D3    449 _RS0	=	0x00d3
+                    00D4    450 _RS1	=	0x00d4
+                    00D5    451 _F0	=	0x00d5
+                    00D6    452 _AC	=	0x00d6
+                    00D7    453 _CY	=	0x00d7
+                    00DB    454 _INT6	=	0x00db
+                    00DC    455 _RESI	=	0x00dc
+                    00DD    456 _ERESI	=	0x00dd
+                    00DF    457 _SMOD1	=	0x00df
+                    00E8    458 _EIUSB	=	0x00e8
+                    00E9    459 _EI2C	=	0x00e9
+                    00EA    460 _EIEX4	=	0x00ea
+                    00EB    461 _EIEX5	=	0x00eb
+                    00EC    462 _EIEX6	=	0x00ec
+                    00F8    463 _PUSB	=	0x00f8
+                    00F9    464 _PI2C	=	0x00f9
+                    00FA    465 _EIPX4	=	0x00fa
+                    00FB    466 _EIPX5	=	0x00fb
+                    00FC    467 _EIPX6	=	0x00fc
+                    0080    468 _bitS_CLK	=	0x0080
+                    0081    469 _bitS_OUT	=	0x0081
+                    0083    470 _bitS_IN	=	0x0083
+                    00A0    471 _bitALTERA_DATA0	=	0x00a0
+                    00A2    472 _bitALTERA_DCLK	=	0x00a2
                             473 ;--------------------------------------------------------
-                            474 	.area REG_BANK_0	(REL,OVR,DATA)
-   0000                     475 	.ds 8
-                            476 ;--------------------------------------------------------
-                            477 ; internal ram data
+                            474 ; overlayable register banks 
+                            475 ;--------------------------------------------------------
+                            476 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     477 	.ds 8
                             478 ;--------------------------------------------------------
-                            479 	.area DSEG    (DATA)
+                            479 ; internal ram data
                             480 ;--------------------------------------------------------
-                            481 ; overlayable items in internal ram 
+                            481 	.area DSEG    (DATA)
                             482 ;--------------------------------------------------------
-                            483 	.area	OSEG    (OVR,DATA)
-                            484 	.area	OSEG    (OVR,DATA)
-                            485 ;--------------------------------------------------------
-                            486 ; indirectly addressable internal ram data
-                            487 ;--------------------------------------------------------
-                            488 	.area ISEG    (DATA)
-                            489 ;--------------------------------------------------------
-                            490 ; bit data
-                            491 ;--------------------------------------------------------
-                            492 	.area BSEG    (BIT)
-                            493 ;--------------------------------------------------------
-                            494 ; paged external ram data
-                            495 ;--------------------------------------------------------
-                            496 	.area PSEG    (PAG,XDATA)
-                            497 ;--------------------------------------------------------
-                            498 ; external ram data
-                            499 ;--------------------------------------------------------
-                            500 	.area XSEG    (XDATA)
-                    E400    501 _GPIF_WAVE_DATA	=	0xe400
-                    E480    502 _RES_WAVEDATA_END	=	0xe480
-                    E600    503 _CPUCS	=	0xe600
-                    E601    504 _IFCONFIG	=	0xe601
-                    E602    505 _PINFLAGSAB	=	0xe602
-                    E603    506 _PINFLAGSCD	=	0xe603
-                    E604    507 _FIFORESET	=	0xe604
-                    E605    508 _BREAKPT	=	0xe605
-                    E606    509 _BPADDRH	=	0xe606
-                    E607    510 _BPADDRL	=	0xe607
-                    E608    511 _UART230	=	0xe608
-                    E609    512 _FIFOPINPOLAR	=	0xe609
-                    E60A    513 _REVID	=	0xe60a
-                    E60B    514 _REVCTL	=	0xe60b
-                    E610    515 _EP1OUTCFG	=	0xe610
-                    E611    516 _EP1INCFG	=	0xe611
-                    E612    517 _EP2CFG	=	0xe612
-                    E613    518 _EP4CFG	=	0xe613
-                    E614    519 _EP6CFG	=	0xe614
-                    E615    520 _EP8CFG	=	0xe615
-                    E618    521 _EP2FIFOCFG	=	0xe618
-                    E619    522 _EP4FIFOCFG	=	0xe619
-                    E61A    523 _EP6FIFOCFG	=	0xe61a
-                    E61B    524 _EP8FIFOCFG	=	0xe61b
-                    E620    525 _EP2AUTOINLENH	=	0xe620
-                    E621    526 _EP2AUTOINLENL	=	0xe621
-                    E622    527 _EP4AUTOINLENH	=	0xe622
-                    E623    528 _EP4AUTOINLENL	=	0xe623
-                    E624    529 _EP6AUTOINLENH	=	0xe624
-                    E625    530 _EP6AUTOINLENL	=	0xe625
-                    E626    531 _EP8AUTOINLENH	=	0xe626
-                    E627    532 _EP8AUTOINLENL	=	0xe627
-                    E630    533 _EP2FIFOPFH	=	0xe630
-                    E631    534 _EP2FIFOPFL	=	0xe631
-                    E632    535 _EP4FIFOPFH	=	0xe632
-                    E633    536 _EP4FIFOPFL	=	0xe633
-                    E634    537 _EP6FIFOPFH	=	0xe634
-                    E635    538 _EP6FIFOPFL	=	0xe635
-                    E636    539 _EP8FIFOPFH	=	0xe636
-                    E637    540 _EP8FIFOPFL	=	0xe637
-                    E640    541 _EP2ISOINPKTS	=	0xe640
-                    E641    542 _EP4ISOINPKTS	=	0xe641
-                    E642    543 _EP6ISOINPKTS	=	0xe642
-                    E643    544 _EP8ISOINPKTS	=	0xe643
-                    E648    545 _INPKTEND	=	0xe648
-                    E649    546 _OUTPKTEND	=	0xe649
-                    E650    547 _EP2FIFOIE	=	0xe650
-                    E651    548 _EP2FIFOIRQ	=	0xe651
-                    E652    549 _EP4FIFOIE	=	0xe652
-                    E653    550 _EP4FIFOIRQ	=	0xe653
-                    E654    551 _EP6FIFOIE	=	0xe654
-                    E655    552 _EP6FIFOIRQ	=	0xe655
-                    E656    553 _EP8FIFOIE	=	0xe656
-                    E657    554 _EP8FIFOIRQ	=	0xe657
-                    E658    555 _IBNIE	=	0xe658
-                    E659    556 _IBNIRQ	=	0xe659
-                    E65A    557 _NAKIE	=	0xe65a
-                    E65B    558 _NAKIRQ	=	0xe65b
-                    E65C    559 _USBIE	=	0xe65c
-                    E65D    560 _USBIRQ	=	0xe65d
-                    E65E    561 _EPIE	=	0xe65e
-                    E65F    562 _EPIRQ	=	0xe65f
-                    E660    563 _GPIFIE	=	0xe660
-                    E661    564 _GPIFIRQ	=	0xe661
-                    E662    565 _USBERRIE	=	0xe662
-                    E663    566 _USBERRIRQ	=	0xe663
-                    E664    567 _ERRCNTLIM	=	0xe664
-                    E665    568 _CLRERRCNT	=	0xe665
-                    E666    569 _INT2IVEC	=	0xe666
-                    E667    570 _INT4IVEC	=	0xe667
-                    E668    571 _INTSETUP	=	0xe668
-                    E670    572 _PORTACFG	=	0xe670
-                    E671    573 _PORTCCFG	=	0xe671
-                    E672    574 _PORTECFG	=	0xe672
-                    E678    575 _I2CS	=	0xe678
-                    E679    576 _I2DAT	=	0xe679
-                    E67A    577 _I2CTL	=	0xe67a
-                    E67B    578 _XAUTODAT1	=	0xe67b
-                    E67C    579 _XAUTODAT2	=	0xe67c
-                    E680    580 _USBCS	=	0xe680
-                    E681    581 _SUSPEND	=	0xe681
-                    E682    582 _WAKEUPCS	=	0xe682
-                    E683    583 _TOGCTL	=	0xe683
-                    E684    584 _USBFRAMEH	=	0xe684
-                    E685    585 _USBFRAMEL	=	0xe685
-                    E686    586 _MICROFRAME	=	0xe686
-                    E687    587 _FNADDR	=	0xe687
-                    E68A    588 _EP0BCH	=	0xe68a
-                    E68B    589 _EP0BCL	=	0xe68b
-                    E68D    590 _EP1OUTBC	=	0xe68d
-                    E68F    591 _EP1INBC	=	0xe68f
-                    E690    592 _EP2BCH	=	0xe690
-                    E691    593 _EP2BCL	=	0xe691
-                    E694    594 _EP4BCH	=	0xe694
-                    E695    595 _EP4BCL	=	0xe695
-                    E698    596 _EP6BCH	=	0xe698
-                    E699    597 _EP6BCL	=	0xe699
-                    E69C    598 _EP8BCH	=	0xe69c
-                    E69D    599 _EP8BCL	=	0xe69d
-                    E6A0    600 _EP0CS	=	0xe6a0
-                    E6A1    601 _EP1OUTCS	=	0xe6a1
-                    E6A2    602 _EP1INCS	=	0xe6a2
-                    E6A3    603 _EP2CS	=	0xe6a3
-                    E6A4    604 _EP4CS	=	0xe6a4
-                    E6A5    605 _EP6CS	=	0xe6a5
-                    E6A6    606 _EP8CS	=	0xe6a6
-                    E6A7    607 _EP2FIFOFLGS	=	0xe6a7
-                    E6A8    608 _EP4FIFOFLGS	=	0xe6a8
-                    E6A9    609 _EP6FIFOFLGS	=	0xe6a9
-                    E6AA    610 _EP8FIFOFLGS	=	0xe6aa
-                    E6AB    611 _EP2FIFOBCH	=	0xe6ab
-                    E6AC    612 _EP2FIFOBCL	=	0xe6ac
-                    E6AD    613 _EP4FIFOBCH	=	0xe6ad
-                    E6AE    614 _EP4FIFOBCL	=	0xe6ae
-                    E6AF    615 _EP6FIFOBCH	=	0xe6af
-                    E6B0    616 _EP6FIFOBCL	=	0xe6b0
-                    E6B1    617 _EP8FIFOBCH	=	0xe6b1
-                    E6B2    618 _EP8FIFOBCL	=	0xe6b2
-                    E6B3    619 _SUDPTRH	=	0xe6b3
-                    E6B4    620 _SUDPTRL	=	0xe6b4
-                    E6B5    621 _SUDPTRCTL	=	0xe6b5
-                    E6B8    622 _SETUPDAT	=	0xe6b8
-                    E6C0    623 _GPIFWFSELECT	=	0xe6c0
-                    E6C1    624 _GPIFIDLECS	=	0xe6c1
-                    E6C2    625 _GPIFIDLECTL	=	0xe6c2
-                    E6C3    626 _GPIFCTLCFG	=	0xe6c3
-                    E6C4    627 _GPIFADRH	=	0xe6c4
-                    E6C5    628 _GPIFADRL	=	0xe6c5
-                    E6CE    629 _GPIFTCB3	=	0xe6ce
-                    E6CF    630 _GPIFTCB2	=	0xe6cf
-                    E6D0    631 _GPIFTCB1	=	0xe6d0
-                    E6D1    632 _GPIFTCB0	=	0xe6d1
-                    E6D2    633 _EP2GPIFFLGSEL	=	0xe6d2
-                    E6D3    634 _EP2GPIFPFSTOP	=	0xe6d3
-                    E6D4    635 _EP2GPIFTRIG	=	0xe6d4
-                    E6DA    636 _EP4GPIFFLGSEL	=	0xe6da
-                    E6DB    637 _EP4GPIFPFSTOP	=	0xe6db
-                    E6DC    638 _EP4GPIFTRIG	=	0xe6dc
-                    E6E2    639 _EP6GPIFFLGSEL	=	0xe6e2
-                    E6E3    640 _EP6GPIFPFSTOP	=	0xe6e3
-                    E6E4    641 _EP6GPIFTRIG	=	0xe6e4
-                    E6EA    642 _EP8GPIFFLGSEL	=	0xe6ea
-                    E6EB    643 _EP8GPIFPFSTOP	=	0xe6eb
-                    E6EC    644 _EP8GPIFTRIG	=	0xe6ec
-                    E6F0    645 _XGPIFSGLDATH	=	0xe6f0
-                    E6F1    646 _XGPIFSGLDATLX	=	0xe6f1
-                    E6F2    647 _XGPIFSGLDATLNOX	=	0xe6f2
-                    E6F3    648 _GPIFREADYCFG	=	0xe6f3
-                    E6F4    649 _GPIFREADYSTAT	=	0xe6f4
-                    E6F5    650 _GPIFABORT	=	0xe6f5
-                    E6C6    651 _FLOWSTATE	=	0xe6c6
-                    E6C7    652 _FLOWLOGIC	=	0xe6c7
-                    E6C8    653 _FLOWEQ0CTL	=	0xe6c8
-                    E6C9    654 _FLOWEQ1CTL	=	0xe6c9
-                    E6CA    655 _FLOWHOLDOFF	=	0xe6ca
-                    E6CB    656 _FLOWSTB	=	0xe6cb
-                    E6CC    657 _FLOWSTBEDGE	=	0xe6cc
-                    E6CD    658 _FLOWSTBHPERIOD	=	0xe6cd
-                    E60C    659 _GPIFHOLDAMOUNT	=	0xe60c
-                    E67D    660 _UDMACRCH	=	0xe67d
-                    E67E    661 _UDMACRCL	=	0xe67e
-                    E67F    662 _UDMACRCQUAL	=	0xe67f
-                    E6F8    663 _DBUG	=	0xe6f8
-                    E6F9    664 _TESTCFG	=	0xe6f9
-                    E6FA    665 _USBTEST	=	0xe6fa
-                    E6FB    666 _CT1	=	0xe6fb
-                    E6FC    667 _CT2	=	0xe6fc
-                    E6FD    668 _CT3	=	0xe6fd
-                    E6FE    669 _CT4	=	0xe6fe
-                    E740    670 _EP0BUF	=	0xe740
-                    E780    671 _EP1OUTBUF	=	0xe780
-                    E7C0    672 _EP1INBUF	=	0xe7c0
-                    F000    673 _EP2FIFOBUF	=	0xf000
-                    F400    674 _EP4FIFOBUF	=	0xf400
-                    F800    675 _EP6FIFOBUF	=	0xf800
-                    FC00    676 _EP8FIFOBUF	=	0xfc00
-                            677 ;--------------------------------------------------------
-                            678 ; external initialized ram data
-                            679 ;--------------------------------------------------------
-                            680 	.area CSEG    (CODE)
-                            681 	.area GSINIT0 (CODE)
-                            682 	.area GSINIT1 (CODE)
-                            683 	.area GSINIT2 (CODE)
-                            684 	.area GSINIT3 (CODE)
-                            685 	.area GSINIT4 (CODE)
-                            686 	.area GSINIT5 (CODE)
-                            687 ;--------------------------------------------------------
-                            688 ; global & static initialisations
-                            689 ;--------------------------------------------------------
-                            690 	.area CSEG    (CODE)
-                            691 	.area GSINIT  (CODE)
-                            692 	.area GSFINAL (CODE)
-                            693 	.area GSINIT  (CODE)
-                            694 ;--------------------------------------------------------
-                            695 ; Home
-                            696 ;--------------------------------------------------------
-                            697 	.area HOME    (CODE)
-                            698 	.area CSEG    (CODE)
+                            483 ; overlayable items in internal ram 
+                            484 ;--------------------------------------------------------
+                            485 	.area	OSEG    (OVR,DATA)
+                            486 	.area	OSEG    (OVR,DATA)
+                            487 	.area	OSEG    (OVR,DATA)
+                            488 ;--------------------------------------------------------
+                            489 ; indirectly addressable internal ram data
+                            490 ;--------------------------------------------------------
+                            491 	.area ISEG    (DATA)
+                            492 ;--------------------------------------------------------
+                            493 ; bit data
+                            494 ;--------------------------------------------------------
+                            495 	.area BSEG    (BIT)
+                            496 ;--------------------------------------------------------
+                            497 ; paged external ram data
+                            498 ;--------------------------------------------------------
+                            499 	.area PSEG    (PAG,XDATA)
+                            500 ;--------------------------------------------------------
+                            501 ; external ram data
+                            502 ;--------------------------------------------------------
+                            503 	.area XSEG    (XDATA)
+                    E400    504 _GPIF_WAVE_DATA	=	0xe400
+                    E480    505 _RES_WAVEDATA_END	=	0xe480
+                    E600    506 _CPUCS	=	0xe600
+                    E601    507 _IFCONFIG	=	0xe601
+                    E602    508 _PINFLAGSAB	=	0xe602
+                    E603    509 _PINFLAGSCD	=	0xe603
+                    E604    510 _FIFORESET	=	0xe604
+                    E605    511 _BREAKPT	=	0xe605
+                    E606    512 _BPADDRH	=	0xe606
+                    E607    513 _BPADDRL	=	0xe607
+                    E608    514 _UART230	=	0xe608
+                    E609    515 _FIFOPINPOLAR	=	0xe609
+                    E60A    516 _REVID	=	0xe60a
+                    E60B    517 _REVCTL	=	0xe60b
+                    E610    518 _EP1OUTCFG	=	0xe610
+                    E611    519 _EP1INCFG	=	0xe611
+                    E612    520 _EP2CFG	=	0xe612
+                    E613    521 _EP4CFG	=	0xe613
+                    E614    522 _EP6CFG	=	0xe614
+                    E615    523 _EP8CFG	=	0xe615
+                    E618    524 _EP2FIFOCFG	=	0xe618
+                    E619    525 _EP4FIFOCFG	=	0xe619
+                    E61A    526 _EP6FIFOCFG	=	0xe61a
+                    E61B    527 _EP8FIFOCFG	=	0xe61b
+                    E620    528 _EP2AUTOINLENH	=	0xe620
+                    E621    529 _EP2AUTOINLENL	=	0xe621
+                    E622    530 _EP4AUTOINLENH	=	0xe622
+                    E623    531 _EP4AUTOINLENL	=	0xe623
+                    E624    532 _EP6AUTOINLENH	=	0xe624
+                    E625    533 _EP6AUTOINLENL	=	0xe625
+                    E626    534 _EP8AUTOINLENH	=	0xe626
+                    E627    535 _EP8AUTOINLENL	=	0xe627
+                    E630    536 _EP2FIFOPFH	=	0xe630
+                    E631    537 _EP2FIFOPFL	=	0xe631
+                    E632    538 _EP4FIFOPFH	=	0xe632
+                    E633    539 _EP4FIFOPFL	=	0xe633
+                    E634    540 _EP6FIFOPFH	=	0xe634
+                    E635    541 _EP6FIFOPFL	=	0xe635
+                    E636    542 _EP8FIFOPFH	=	0xe636
+                    E637    543 _EP8FIFOPFL	=	0xe637
+                    E640    544 _EP2ISOINPKTS	=	0xe640
+                    E641    545 _EP4ISOINPKTS	=	0xe641
+                    E642    546 _EP6ISOINPKTS	=	0xe642
+                    E643    547 _EP8ISOINPKTS	=	0xe643
+                    E648    548 _INPKTEND	=	0xe648
+                    E649    549 _OUTPKTEND	=	0xe649
+                    E650    550 _EP2FIFOIE	=	0xe650
+                    E651    551 _EP2FIFOIRQ	=	0xe651
+                    E652    552 _EP4FIFOIE	=	0xe652
+                    E653    553 _EP4FIFOIRQ	=	0xe653
+                    E654    554 _EP6FIFOIE	=	0xe654
+                    E655    555 _EP6FIFOIRQ	=	0xe655
+                    E656    556 _EP8FIFOIE	=	0xe656
+                    E657    557 _EP8FIFOIRQ	=	0xe657
+                    E658    558 _IBNIE	=	0xe658
+                    E659    559 _IBNIRQ	=	0xe659
+                    E65A    560 _NAKIE	=	0xe65a
+                    E65B    561 _NAKIRQ	=	0xe65b
+                    E65C    562 _USBIE	=	0xe65c
+                    E65D    563 _USBIRQ	=	0xe65d
+                    E65E    564 _EPIE	=	0xe65e
+                    E65F    565 _EPIRQ	=	0xe65f
+                    E660    566 _GPIFIE	=	0xe660
+                    E661    567 _GPIFIRQ	=	0xe661
+                    E662    568 _USBERRIE	=	0xe662
+                    E663    569 _USBERRIRQ	=	0xe663
+                    E664    570 _ERRCNTLIM	=	0xe664
+                    E665    571 _CLRERRCNT	=	0xe665
+                    E666    572 _INT2IVEC	=	0xe666
+                    E667    573 _INT4IVEC	=	0xe667
+                    E668    574 _INTSETUP	=	0xe668
+                    E670    575 _PORTACFG	=	0xe670
+                    E671    576 _PORTCCFG	=	0xe671
+                    E672    577 _PORTECFG	=	0xe672
+                    E678    578 _I2CS	=	0xe678
+                    E679    579 _I2DAT	=	0xe679
+                    E67A    580 _I2CTL	=	0xe67a
+                    E67B    581 _XAUTODAT1	=	0xe67b
+                    E67C    582 _XAUTODAT2	=	0xe67c
+                    E680    583 _USBCS	=	0xe680
+                    E681    584 _SUSPEND	=	0xe681
+                    E682    585 _WAKEUPCS	=	0xe682
+                    E683    586 _TOGCTL	=	0xe683
+                    E684    587 _USBFRAMEH	=	0xe684
+                    E685    588 _USBFRAMEL	=	0xe685
+                    E686    589 _MICROFRAME	=	0xe686
+                    E687    590 _FNADDR	=	0xe687
+                    E68A    591 _EP0BCH	=	0xe68a
+                    E68B    592 _EP0BCL	=	0xe68b
+                    E68D    593 _EP1OUTBC	=	0xe68d
+                    E68F    594 _EP1INBC	=	0xe68f
+                    E690    595 _EP2BCH	=	0xe690
+                    E691    596 _EP2BCL	=	0xe691
+                    E694    597 _EP4BCH	=	0xe694
+                    E695    598 _EP4BCL	=	0xe695
+                    E698    599 _EP6BCH	=	0xe698
+                    E699    600 _EP6BCL	=	0xe699
+                    E69C    601 _EP8BCH	=	0xe69c
+                    E69D    602 _EP8BCL	=	0xe69d
+                    E6A0    603 _EP0CS	=	0xe6a0
+                    E6A1    604 _EP1OUTCS	=	0xe6a1
+                    E6A2    605 _EP1INCS	=	0xe6a2
+                    E6A3    606 _EP2CS	=	0xe6a3
+                    E6A4    607 _EP4CS	=	0xe6a4
+                    E6A5    608 _EP6CS	=	0xe6a5
+                    E6A6    609 _EP8CS	=	0xe6a6
+                    E6A7    610 _EP2FIFOFLGS	=	0xe6a7
+                    E6A8    611 _EP4FIFOFLGS	=	0xe6a8
+                    E6A9    612 _EP6FIFOFLGS	=	0xe6a9
+                    E6AA    613 _EP8FIFOFLGS	=	0xe6aa
+                    E6AB    614 _EP2FIFOBCH	=	0xe6ab
+                    E6AC    615 _EP2FIFOBCL	=	0xe6ac
+                    E6AD    616 _EP4FIFOBCH	=	0xe6ad
+                    E6AE    617 _EP4FIFOBCL	=	0xe6ae
+                    E6AF    618 _EP6FIFOBCH	=	0xe6af
+                    E6B0    619 _EP6FIFOBCL	=	0xe6b0
+                    E6B1    620 _EP8FIFOBCH	=	0xe6b1
+                    E6B2    621 _EP8FIFOBCL	=	0xe6b2
+                    E6B3    622 _SUDPTRH	=	0xe6b3
+                    E6B4    623 _SUDPTRL	=	0xe6b4
+                    E6B5    624 _SUDPTRCTL	=	0xe6b5
+                    E6B8    625 _SETUPDAT	=	0xe6b8
+                    E6C0    626 _GPIFWFSELECT	=	0xe6c0
+                    E6C1    627 _GPIFIDLECS	=	0xe6c1
+                    E6C2    628 _GPIFIDLECTL	=	0xe6c2
+                    E6C3    629 _GPIFCTLCFG	=	0xe6c3
+                    E6C4    630 _GPIFADRH	=	0xe6c4
+                    E6C5    631 _GPIFADRL	=	0xe6c5
+                    E6CE    632 _GPIFTCB3	=	0xe6ce
+                    E6CF    633 _GPIFTCB2	=	0xe6cf
+                    E6D0    634 _GPIFTCB1	=	0xe6d0
+                    E6D1    635 _GPIFTCB0	=	0xe6d1
+                    E6D2    636 _EP2GPIFFLGSEL	=	0xe6d2
+                    E6D3    637 _EP2GPIFPFSTOP	=	0xe6d3
+                    E6D4    638 _EP2GPIFTRIG	=	0xe6d4
+                    E6DA    639 _EP4GPIFFLGSEL	=	0xe6da
+                    E6DB    640 _EP4GPIFPFSTOP	=	0xe6db
+                    E6DC    641 _EP4GPIFTRIG	=	0xe6dc
+                    E6E2    642 _EP6GPIFFLGSEL	=	0xe6e2
+                    E6E3    643 _EP6GPIFPFSTOP	=	0xe6e3
+                    E6E4    644 _EP6GPIFTRIG	=	0xe6e4
+                    E6EA    645 _EP8GPIFFLGSEL	=	0xe6ea
+                    E6EB    646 _EP8GPIFPFSTOP	=	0xe6eb
+                    E6EC    647 _EP8GPIFTRIG	=	0xe6ec
+                    E6F0    648 _XGPIFSGLDATH	=	0xe6f0
+                    E6F1    649 _XGPIFSGLDATLX	=	0xe6f1
+                    E6F2    650 _XGPIFSGLDATLNOX	=	0xe6f2
+                    E6F3    651 _GPIFREADYCFG	=	0xe6f3
+                    E6F4    652 _GPIFREADYSTAT	=	0xe6f4
+                    E6F5    653 _GPIFABORT	=	0xe6f5
+                    E6C6    654 _FLOWSTATE	=	0xe6c6
+                    E6C7    655 _FLOWLOGIC	=	0xe6c7
+                    E6C8    656 _FLOWEQ0CTL	=	0xe6c8
+                    E6C9    657 _FLOWEQ1CTL	=	0xe6c9
+                    E6CA    658 _FLOWHOLDOFF	=	0xe6ca
+                    E6CB    659 _FLOWSTB	=	0xe6cb
+                    E6CC    660 _FLOWSTBEDGE	=	0xe6cc
+                    E6CD    661 _FLOWSTBHPERIOD	=	0xe6cd
+                    E60C    662 _GPIFHOLDAMOUNT	=	0xe60c
+                    E67D    663 _UDMACRCH	=	0xe67d
+                    E67E    664 _UDMACRCL	=	0xe67e
+                    E67F    665 _UDMACRCQUAL	=	0xe67f
+                    E6F8    666 _DBUG	=	0xe6f8
+                    E6F9    667 _TESTCFG	=	0xe6f9
+                    E6FA    668 _USBTEST	=	0xe6fa
+                    E6FB    669 _CT1	=	0xe6fb
+                    E6FC    670 _CT2	=	0xe6fc
+                    E6FD    671 _CT3	=	0xe6fd
+                    E6FE    672 _CT4	=	0xe6fe
+                    E740    673 _EP0BUF	=	0xe740
+                    E780    674 _EP1OUTBUF	=	0xe780
+                    E7C0    675 _EP1INBUF	=	0xe7c0
+                    F000    676 _EP2FIFOBUF	=	0xf000
+                    F400    677 _EP4FIFOBUF	=	0xf400
+                    F800    678 _EP6FIFOBUF	=	0xf800
+                    FC00    679 _EP8FIFOBUF	=	0xfc00
+                            680 ;--------------------------------------------------------
+                            681 ; external initialized ram data
+                            682 ;--------------------------------------------------------
+                            683 	.area CSEG    (CODE)
+                            684 	.area GSINIT0 (CODE)
+                            685 	.area GSINIT1 (CODE)
+                            686 	.area GSINIT2 (CODE)
+                            687 	.area GSINIT3 (CODE)
+                            688 	.area GSINIT4 (CODE)
+                            689 	.area GSINIT5 (CODE)
+                            690 ;--------------------------------------------------------
+                            691 ; global & static initialisations
+                            692 ;--------------------------------------------------------
+                            693 	.area CSEG    (CODE)
+                            694 	.area GSINIT  (CODE)
+                            695 	.area GSFINAL (CODE)
+                            696 	.area GSINIT  (CODE)
+                            697 ;--------------------------------------------------------
+                            698 ; Home
                             699 ;--------------------------------------------------------
-                            700 ; code
-                            701 ;--------------------------------------------------------
-                            702 	.area CSEG    (CODE)
-                            703 ;------------------------------------------------------------
-                            704 ;Allocation info for local variables in function 'set_led_0'
-                            705 ;------------------------------------------------------------
-                            706 ;on                        Allocated to registers r2 
-                            707 ;------------------------------------------------------------
-                            708 ;Initial/src/board_specific.c:30: set_led_0 (unsigned char on)
-                            709 ;	-----------------------------------------
-                            710 ;	 function set_led_0
-                            711 ;	-----------------------------------------
-   0518                     712 _set_led_0:
-                    0002    713 	ar2 = 0x02
-                    0003    714 	ar3 = 0x03
-                    0004    715 	ar4 = 0x04
-                    0005    716 	ar5 = 0x05
-                    0006    717 	ar6 = 0x06
-                    0007    718 	ar7 = 0x07
-                    0000    719 	ar0 = 0x00
-                    0001    720 	ar1 = 0x01
-                            721 ;     genReceive
-                            722 ;Initial/src/board_specific.c:32: if (!on)			// active low
-                            723 ;     genIfx
-                            724 ;	peephole 177.g	optimized mov sequence
-   0518 E5 82               725 	mov	a,dpl
-   051A FA                  726 	mov	r2,a
-                            727 ;     genIfxJump
-                            728 ;	Peephole 109	removed ljmp by inverse jump logic
-   051B 70 04               729 	jnz	00102$
-   051D                     730 00107$:
-                            731 ;Initial/src/board_specific.c:33: HPSDR_PC |= bmPC_LED0;
-                            732 ;     genOr
-   051D 43 A0 40            733 	orl	_IOC,#0x40
-                            734 ;	Peephole 112.b	changed ljmp to sjmp
-                            735 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0520 22                  736 	ret
-   0521                     737 00102$:
-                            738 ;Initial/src/board_specific.c:35: HPSDR_PC &= ~bmPC_LED0;
-                            739 ;     genAnd
-   0521 53 A0 BF            740 	anl	_IOC,#0xBF
-   0524                     741 00104$:
-   0524 22                  742 	ret
-                            743 ;------------------------------------------------------------
-                            744 ;Allocation info for local variables in function 'set_led_1'
-                            745 ;------------------------------------------------------------
-                            746 ;on                        Allocated to registers r2 
-                            747 ;------------------------------------------------------------
-                            748 ;Initial/src/board_specific.c:39: set_led_1 (unsigned char on)
-                            749 ;	-----------------------------------------
-                            750 ;	 function set_led_1
-                            751 ;	-----------------------------------------
-   0525                     752 _set_led_1:
-                            753 ;     genReceive
-                            754 ;Initial/src/board_specific.c:41: if (!on)			// active low
-                            755 ;     genIfx
-                            756 ;	peephole 177.g	optimized mov sequence
-   0525 E5 82               757 	mov	a,dpl
-   0527 FA                  758 	mov	r2,a
-                            759 ;     genIfxJump
-                            760 ;	Peephole 109	removed ljmp by inverse jump logic
-   0528 70 04               761 	jnz	00102$
-   052A                     762 00107$:
-                            763 ;Initial/src/board_specific.c:42: HPSDR_PC |= bmPC_LED1;
-                            764 ;     genOr
-   052A 43 A0 80            765 	orl	_IOC,#0x80
-                            766 ;	Peephole 112.b	changed ljmp to sjmp
-                            767 ;	Peephole 251.b	replaced sjmp to ret with ret
-   052D 22                  768 	ret
-   052E                     769 00102$:
-                            770 ;Initial/src/board_specific.c:44: HPSDR_PC &= ~bmPC_LED1;
-                            771 ;     genAnd
-   052E 53 A0 7F            772 	anl	_IOC,#0x7F
-   0531                     773 00104$:
-   0531 22                  774 	ret
-                            775 ;------------------------------------------------------------
-                            776 ;Allocation info for local variables in function 'toggle_led_0'
-                            777 ;------------------------------------------------------------
-                            778 ;------------------------------------------------------------
-                            779 ;Initial/src/board_specific.c:48: toggle_led_0 (void)
-                            780 ;	-----------------------------------------
-                            781 ;	 function toggle_led_0
-                            782 ;	-----------------------------------------
-   0532                     783 _toggle_led_0:
-                            784 ;Initial/src/board_specific.c:50: HPSDR_PC ^= bmPC_LED0;
-                            785 ;     genXor
-   0532 63 A0 40            786 	xrl	_IOC,#0x40
-   0535                     787 00101$:
-   0535 22                  788 	ret
-                            789 ;------------------------------------------------------------
-                            790 ;Allocation info for local variables in function 'toggle_led_1'
-                            791 ;------------------------------------------------------------
-                            792 ;------------------------------------------------------------
-                            793 ;Initial/src/board_specific.c:54: toggle_led_1 (void)
-                            794 ;	-----------------------------------------
-                            795 ;	 function toggle_led_1
-                            796 ;	-----------------------------------------
-   0536                     797 _toggle_led_1:
-                            798 ;Initial/src/board_specific.c:56: HPSDR_PC ^= bmPC_LED1;
-                            799 ;     genXor
-   0536 63 A0 80            800 	xrl	_IOC,#0x80
-   0539                     801 00101$:
-   0539 22                  802 	ret
-                            803 ;------------------------------------------------------------
-                            804 ;Allocation info for local variables in function 'init_board'
-                            805 ;------------------------------------------------------------
-                            806 ;------------------------------------------------------------
-                            807 ;Initial/src/board_specific.c:60: init_board (void)
-                            808 ;	-----------------------------------------
-                            809 ;	 function init_board
-                            810 ;	-----------------------------------------
-   053A                     811 _init_board:
-                            812 ;Initial/src/board_specific.c:62: init_spi();
-                            813 ;     genCall
-                            814 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   053A 02 08 F6            815 	ljmp	_init_spi
-                            816 	.area CSEG    (CODE)
+                            700 	.area HOME    (CODE)
+                            701 	.area CSEG    (CODE)
+                            702 ;--------------------------------------------------------
+                            703 ; code
+                            704 ;--------------------------------------------------------
+                            705 	.area CSEG    (CODE)
+                            706 ;------------------------------------------------------------
+                            707 ;Allocation info for local variables in function 'putchar'
+                            708 ;------------------------------------------------------------
+                            709 ;c                         Allocated to registers r2 
+                            710 ;------------------------------------------------------------
+                            711 ;Initial/src/board_specific.c:31: putchar(char c)
+                            712 ;	-----------------------------------------
+                            713 ;	 function putchar
+                            714 ;	-----------------------------------------
+   0593                     715 _putchar:
+                    0002    716 	ar2 = 0x02
+                    0003    717 	ar3 = 0x03
+                    0004    718 	ar4 = 0x04
+                    0005    719 	ar5 = 0x05
+                    0006    720 	ar6 = 0x06
+                    0007    721 	ar7 = 0x07
+                    0000    722 	ar0 = 0x00
+                    0001    723 	ar1 = 0x01
+                            724 ;     genReceive
+   0593 AA 82               725 	mov	r2,dpl
+                            726 ;Initial/src/board_specific.c:33: while(!TI);
+   0595                     727 00101$:
+                            728 ;     genIfx
+                            729 ;     genIfxJump
+                            730 ;	Peephole 111	removed ljmp by inverse jump logic
+                            731 ;Initial/src/board_specific.c:34: TI=0;
+                            732 ;     genAssign
+                            733 ;	Peephole 250.a	using atomic test and clear
+   0595 10 99 02            734 	jbc	_TI,00108$
+   0598 80 FB               735 	sjmp	00101$
+   059A                     736 00108$:
+                            737 ;Initial/src/board_specific.c:35: SBUF0 = c;
+                            738 ;     genAssign
+   059A 8A 99               739 	mov	_SBUF0,r2
+   059C                     740 00104$:
+   059C 22                  741 	ret
+                            742 ;------------------------------------------------------------
+                            743 ;Allocation info for local variables in function 'putstr'
+                            744 ;------------------------------------------------------------
+                            745 ;s                         Allocated to registers r2 r3 r4 
+                            746 ;i                         Allocated to registers r5 
+                            747 ;c                         Allocated to registers r7 
+                            748 ;------------------------------------------------------------
+                            749 ;Initial/src/board_specific.c:38: void putstr(char *s)
+                            750 ;	-----------------------------------------
+                            751 ;	 function putstr
+                            752 ;	-----------------------------------------
+   059D                     753 _putstr:
+                            754 ;     genReceive
+   059D AA 82               755 	mov	r2,dpl
+   059F AB 83               756 	mov	r3,dph
+   05A1 AC F0               757 	mov	r4,b
+                            758 ;Initial/src/board_specific.c:42: while ((c=*(s+(i++)))!=0) putchar(c);
+                            759 ;     genAssign
+   05A3 7D 00               760 	mov	r5,#0x00
+   05A5                     761 00101$:
+                            762 ;     genAssign
+   05A5 8D 06               763 	mov	ar6,r5
+                            764 ;     genPlus
+                            765 ;     genPlusIncr
+   05A7 0D                  766 	inc	r5
+                            767 ;     genPlus
+                            768 ;	Peephole 236.g	used r6 instead of ar6
+   05A8 EE                  769 	mov	a,r6
+                            770 ;	Peephole 236.a	used r2 instead of ar2
+   05A9 2A                  771 	add	a,r2
+   05AA FE                  772 	mov	r6,a
+                            773 ;	Peephole 181	changed mov to clr
+   05AB E4                  774 	clr	a
+                            775 ;	Peephole 236.b	used r3 instead of ar3
+   05AC 3B                  776 	addc	a,r3
+   05AD FF                  777 	mov	r7,a
+   05AE 8C 00               778 	mov	ar0,r4
+                            779 ;     genPointerGet
+                            780 ;     genGenPointerGet
+   05B0 8E 82               781 	mov	dpl,r6
+   05B2 8F 83               782 	mov	dph,r7
+   05B4 88 F0               783 	mov	b,r0
+   05B6 12 0F C3            784 	lcall	__gptrget
+   05B9 FE                  785 	mov	r6,a
+                            786 ;     genAssign
+   05BA 8E 07               787 	mov	ar7,r6
+                            788 ;     genCmpEq
+   05BC BE 00 01            789 	cjne	r6,#0x00,00108$
+                            790 ;	Peephole 112.b	changed ljmp to sjmp
+                            791 ;	Peephole 251.b	replaced sjmp to ret with ret
+   05BF 22                  792 	ret
+   05C0                     793 00108$:
+                            794 ;     genCall
+   05C0 8F 82               795 	mov	dpl,r7
+   05C2 C0 02               796 	push	ar2
+   05C4 C0 03               797 	push	ar3
+   05C6 C0 04               798 	push	ar4
+   05C8 C0 05               799 	push	ar5
+   05CA 12 05 93            800 	lcall	_putchar
+   05CD D0 05               801 	pop	ar5
+   05CF D0 04               802 	pop	ar4
+   05D1 D0 03               803 	pop	ar3
+   05D3 D0 02               804 	pop	ar2
+                            805 ;	Peephole 112.b	changed ljmp to sjmp
+   05D5 80 CE               806 	sjmp	00101$
+   05D7                     807 00104$:
+   05D7 22                  808 	ret
+                            809 ;------------------------------------------------------------
+                            810 ;Allocation info for local variables in function 'set_led_0'
+                            811 ;------------------------------------------------------------
+                            812 ;on                        Allocated to registers r2 
+                            813 ;------------------------------------------------------------
+                            814 ;Initial/src/board_specific.c:46: set_led_0 (unsigned char on)
+                            815 ;	-----------------------------------------
+                            816 ;	 function set_led_0
+                            817 ;	-----------------------------------------
+   05D8                     818 _set_led_0:
+                            819 ;     genReceive
+                            820 ;Initial/src/board_specific.c:48: if (!on)			// active low
+                            821 ;     genIfx
+                            822 ;	peephole 177.g	optimized mov sequence
+   05D8 E5 82               823 	mov	a,dpl
+   05DA FA                  824 	mov	r2,a
+                            825 ;     genIfxJump
+                            826 ;	Peephole 109	removed ljmp by inverse jump logic
+   05DB 70 04               827 	jnz	00102$
+   05DD                     828 00107$:
+                            829 ;Initial/src/board_specific.c:49: HPSDR_PC |= bmPC_LED0;
+                            830 ;     genOr
+   05DD 43 A0 40            831 	orl	_IOC,#0x40
+                            832 ;	Peephole 112.b	changed ljmp to sjmp
+                            833 ;	Peephole 251.b	replaced sjmp to ret with ret
+   05E0 22                  834 	ret
+   05E1                     835 00102$:
+                            836 ;Initial/src/board_specific.c:51: HPSDR_PC &= ~bmPC_LED0;
+                            837 ;     genAnd
+   05E1 53 A0 BF            838 	anl	_IOC,#0xBF
+   05E4                     839 00104$:
+   05E4 22                  840 	ret
+                            841 ;------------------------------------------------------------
+                            842 ;Allocation info for local variables in function 'set_led_1'
+                            843 ;------------------------------------------------------------
+                            844 ;on                        Allocated to registers r2 
+                            845 ;------------------------------------------------------------
+                            846 ;Initial/src/board_specific.c:55: set_led_1 (unsigned char on)
+                            847 ;	-----------------------------------------
+                            848 ;	 function set_led_1
+                            849 ;	-----------------------------------------
+   05E5                     850 _set_led_1:
+                            851 ;     genReceive
+                            852 ;Initial/src/board_specific.c:57: if (!on)			// active low
+                            853 ;     genIfx
+                            854 ;	peephole 177.g	optimized mov sequence
+   05E5 E5 82               855 	mov	a,dpl
+   05E7 FA                  856 	mov	r2,a
+                            857 ;     genIfxJump
+                            858 ;	Peephole 109	removed ljmp by inverse jump logic
+   05E8 70 04               859 	jnz	00102$
+   05EA                     860 00107$:
+                            861 ;Initial/src/board_specific.c:58: HPSDR_PC |= bmPC_LED1;
+                            862 ;     genOr
+   05EA 43 A0 80            863 	orl	_IOC,#0x80
+                            864 ;	Peephole 112.b	changed ljmp to sjmp
+                            865 ;	Peephole 251.b	replaced sjmp to ret with ret
+   05ED 22                  866 	ret
+   05EE                     867 00102$:
+                            868 ;Initial/src/board_specific.c:60: HPSDR_PC &= ~bmPC_LED1;
+                            869 ;     genAnd
+   05EE 53 A0 7F            870 	anl	_IOC,#0x7F
+   05F1                     871 00104$:
+   05F1 22                  872 	ret
+                            873 ;------------------------------------------------------------
+                            874 ;Allocation info for local variables in function 'toggle_led_0'
+                            875 ;------------------------------------------------------------
+                            876 ;------------------------------------------------------------
+                            877 ;Initial/src/board_specific.c:64: toggle_led_0 (void)
+                            878 ;	-----------------------------------------
+                            879 ;	 function toggle_led_0
+                            880 ;	-----------------------------------------
+   05F2                     881 _toggle_led_0:
+                            882 ;Initial/src/board_specific.c:66: HPSDR_PC ^= bmPC_LED0;
+                            883 ;     genXor
+   05F2 63 A0 40            884 	xrl	_IOC,#0x40
+   05F5                     885 00101$:
+   05F5 22                  886 	ret
+                            887 ;------------------------------------------------------------
+                            888 ;Allocation info for local variables in function 'toggle_led_1'
+                            889 ;------------------------------------------------------------
+                            890 ;------------------------------------------------------------
+                            891 ;Initial/src/board_specific.c:70: toggle_led_1 (void)
+                            892 ;	-----------------------------------------
+                            893 ;	 function toggle_led_1
+                            894 ;	-----------------------------------------
+   05F6                     895 _toggle_led_1:
+                            896 ;Initial/src/board_specific.c:72: HPSDR_PC ^= bmPC_LED1;
+                            897 ;     genXor
+   05F6 63 A0 80            898 	xrl	_IOC,#0x80
+   05F9                     899 00101$:
+   05F9 22                  900 	ret
+                            901 ;------------------------------------------------------------
+                            902 ;Allocation info for local variables in function 'init_board'
+                            903 ;------------------------------------------------------------
+                            904 ;------------------------------------------------------------
+                            905 ;Initial/src/board_specific.c:76: init_board (void)
+                            906 ;	-----------------------------------------
+                            907 ;	 function init_board
+                            908 ;	-----------------------------------------
+   05FA                     909 _init_board:
+                            910 ;Initial/src/board_specific.c:78: init_spi();
+                            911 ;     genCall
+                            912 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   05FA 02 09 9B            913 	ljmp	_init_spi
+                            914 	.area CSEG    (CODE)

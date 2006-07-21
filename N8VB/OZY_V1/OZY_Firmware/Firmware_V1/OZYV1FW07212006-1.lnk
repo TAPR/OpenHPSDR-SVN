@@ -1,0 +1,33 @@
+-myuxi
+-Y
+-v 0x2000
+-w 0x2000
+-b CSEG = 0x0000
+-b XSEG = 0x2000
+-b ISEG = 0x0080
+-b BSEG = 0x0000
+-b USBDESCSEG = 0xE000
+-k C:\Program Files\SDCC\lib
+-k C:\Program Files\SDCC\bin\..\lib\small
+-l mcs51
+-l libsdcc
+-l libint
+-l liblong
+-l libfloat
+.objs\Initial\src\asm\vectors.rel
+.objs\Initial\src\asm\_startup.rel
+.objs\Initial\src\asm\usb_descriptors.rel
+.objs\Initial\src\hpsdr_main.rel
+.objs\Initial\src\eeprom_io.rel
+.objs\Initial\src\fpga_load.rel
+.objs\Initial\src\hpsdr_common.rel
+.objs\Initial\src\board_specific.rel
+.objs\Initial\src\lib\delay.rel
+.objs\Initial\src\lib\fx2utils.rel
+.objs\Initial\src\lib\i2c.rel
+.objs\Initial\src\lib\isr.rel
+.objs\Initial\src\lib\spi.rel
+.objs\Initial\src\lib\timer.rel
+.objs\Initial\src\lib\usb_common.rel
+
+-e

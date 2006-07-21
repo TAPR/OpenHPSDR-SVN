@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Tue Jul 18 19:52:46 2006) contains limited information
+This XML file (created on Fri Jul 21 15:32:22 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -23,7 +23,7 @@ to license.txt.
 	<module>quartus</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Tue Jul 18 19:52:46 2006</compilation_end_time>
+	<compilation_end_time>Fri Jul 21 15:32:23 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -33,15 +33,15 @@ to license.txt.
 	</cpu>
 	<ram units="MB">1023</ram>
 </machine>
-<project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity</project>
+<project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/Blinkity/blinkity</project>
 <revision>blinkity</revision>
 <gui_actions>
-	<action time="Tue Jul 18 19:52:07 2006" type="project_open">C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity</action>
-	<action time="Tue Jul 18 19:52:08 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity.v</action>
-	<action time="Tue Jul 18 19:52:24 2006" type="editor_open" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
-	<action time="Tue Jul 18 19:52:46 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity.v</action>
-	<action time="Tue Jul 18 19:52:46 2006" type="editor_close" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
-	<action time="Tue Jul 18 19:52:46 2006" type="project_close">C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity</action>
+	<action time="Fri Jul 21 15:30:05 2006" type="project_open">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/Blinkity/blinkity</action>
+	<action time="Fri Jul 21 15:30:05 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/Blinkity/blinkity.v</action>
+	<action time="Fri Jul 21 15:31:00 2006" type="editor_open" clsid="AFC_CLSID_PPL_DEFAULT_DOC">c:/altera/quartus60/win/pin_planner.ppl</action>
+	<action time="Fri Jul 21 15:31:02 2006" type="editor_close" clsid="AFC_CLSID_PPL_DEFAULT_DOC">c:/altera/quartus60/win/pin_planner.ppl</action>
+	<action time="Fri Jul 21 15:32:22 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/Blinkity/blinkity.v</action>
+	<action time="Fri Jul 21 15:32:22 2006" type="project_close">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/Blinkity/blinkity</action>
 </gui_actions>
 <gui_summary>
 	<editor_count clsid="AFC_CLSID_ACV_DEFAULT_DOC">0</editor_count>
@@ -75,14 +75,14 @@ to license.txt.
 	<editor_count clsid="AFC_CLSID_PJM_QPF">0</editor_count>
 	<editor_count clsid="AFC_CLSID_PJM_SSF">0</editor_count>
 	<editor_count clsid="AFC_CLSID_PJN_DEFAULT_DOC">0</editor_count>
-	<editor_count clsid="AFC_CLSID_PPL_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PPL_DEFAULT_DOC">1</editor_count>
 	<editor_count clsid="AFC_CLSID_PTW_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_QIS_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RED_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_REQC_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RPW_CHART_TYPE">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RPW_CMP_SUMMARY_TYPE">0</editor_count>
-	<editor_count clsid="AFC_CLSID_RPW_DEFAULT_DOC">1</editor_count>
+	<editor_count clsid="AFC_CLSID_RPW_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RPW_GAUGES_TYPE">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RPW_HTML_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RPW_HTML_TYPE">0</editor_count>

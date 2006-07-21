@@ -1,45 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE CodeBlocks_layout_file>
 <CodeBlocks_layout_file>
-	<File name="Initial\include\fx2regs.h" open="1" top="0">
-		<Cursor position="26995" topLine="508"/>
-	</File>
-	<File name="Initial\include\hpsdr_interfaces.h" open="1" top="0">
-		<Cursor position="0" topLine="0"/>
-	</File>
-	<File name="Initial\include\hpsdr_rev1_regs.h" open="1" top="1">
-		<Cursor position="0" topLine="94"/>
-	</File>
 	<File name="Initial\src\board_specific.c" open="1" top="0">
-		<Cursor position="1476" topLine="12"/>
+		<Cursor position="0" topLine="17"/>
 	</File>
-	<File name="Initial\src\eeprom_io.c" open="1" top="0">
-		<Cursor position="0" topLine="0"/>
+	<File name="Initial\src\hpsdr_main.c" open="1" top="1">
+		<Cursor position="4662" topLine="167"/>
 	</File>
-	<File name="Initial\src\fpga_load.c" open="1" top="0">
-		<Cursor position="0" topLine="19"/>
-	</File>
-	<File name="Initial\src\hpsdr_common.c" open="1" top="0">
-		<Cursor position="1059" topLine="0"/>
-	</File>
-	<File name="Initial\src\hpsdr_main.c" open="1" top="0">
-		<Cursor position="5431" topLine="183"/>
-	</File>
-	<File name="Initial\src\lib\fx2utils.c" open="1" top="0">
-		<Cursor position="1281" topLine="4"/>
-	</File>
-	<File name="Initial\src\lib\spi.c" open="1" top="0">
-		<Cursor position="1667" topLine="0"/>
-	</File>
-	<File name="Initial\src\lib\usb_common.c" open="1" top="0">
-		<Cursor position="0" topLine="0"/>
-	</File>
-	<Expand folder="/Sources/Initial/src/lib"/>
 	<Expand folder="/Sources/Initial/src"/>
 	<Expand folder="/Sources/Initial"/>
 	<Expand folder="/Sources"/>
 	<Expand folder="/Headers/Initial/include"/>
 	<Expand folder="/Headers/Initial"/>
 	<Expand folder="/Headers"/>
+	<Expand folder="/Others/Initial"/>
 	<Expand folder="/Others"/>
 </CodeBlocks_layout_file>
