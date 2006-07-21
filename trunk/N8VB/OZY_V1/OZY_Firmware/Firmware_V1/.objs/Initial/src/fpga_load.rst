@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Wed Jul 19 12:32:14 2006
+                              4 ; This file generated Fri Jul 21 16:22:51 2006
                               5 ;--------------------------------------------------------
                               6 	.module fpga_load
                               7 	.optsdcc -mmcs51 --model-small
@@ -713,7 +713,7 @@
                             713 ;	-----------------------------------------
                             714 ;	 function fpga_load_begin
                             715 ;	-----------------------------------------
-   03CB                     716 _fpga_load_begin:
+   0439                     716 _fpga_load_begin:
                     0002    717 	ar2 = 0x02
                     0003    718 	ar3 = 0x03
                     0004    719 	ar4 = 0x04
@@ -724,61 +724,61 @@
                     0001    724 	ar1 = 0x01
                             725 ;Initial/src/fpga_load.c:43: HPSDR_ALTERA_CONFIG &= ~bmALTERA_BITS;		// clear all bits (NCONFIG low)
                             726 ;     genAnd
-   03CB 53 A0 C0            727 	anl	_IOC,#0xC0
+   0439 53 A0 C0            727 	anl	_IOC,#0xC0
                             728 ;Initial/src/fpga_load.c:44: udelay (40);					// wait 40 us
                             729 ;     genCall
-   03CE 75 82 28            730 	mov	dpl,#0x28
-   03D1 12 05 3E            731 	lcall	_udelay
+   043C 75 82 28            730 	mov	dpl,#0x28
+   043F 12 05 FE            731 	lcall	_udelay
                             732 ;Initial/src/fpga_load.c:45: HPSDR_ALTERA_CONFIG |= bmALTERA_NCONFIG;	// set NCONFIG high
                             733 ;     genOr
-   03D4 43 A0 02            734 	orl	_IOC,#0x02
+   0442 43 A0 02            734 	orl	_IOC,#0x02
                             735 ;Initial/src/fpga_load.c:47: while ((HPSDR_ALTERA_CONFIG & bmALTERA_NSTATUS) == 0)
                             736 ;     genAssign
-   03D7 7A 00               737 	mov	r2,#0x00
-   03D9                     738 00103$:
+   0445 7A 00               737 	mov	r2,#0x00
+   0447                     738 00103$:
                             739 ;     genAnd
-   03D9 74 10               740 	mov	a,#0x10
-   03DB 55 A0               741 	anl	a,_IOC
+   0447 74 10               740 	mov	a,#0x10
+   0449 55 A0               741 	anl	a,_IOC
                             742 ;     genCmpEq
                             743 ;	Peephole 115.b	jump optimization
-   03DD FB                  744 	mov	r3,a
-   03DE 60 02               745 	jz	00112$
-   03E0                     746 00111$:
+   044B FB                  744 	mov	r3,a
+   044C 60 02               745 	jz	00112$
+   044E                     746 00111$:
                             747 ;	Peephole 112.b	changed ljmp to sjmp
-   03E0 80 14               748 	sjmp	00105$
-   03E2                     749 00112$:
+   044E 80 14               748 	sjmp	00105$
+   0450                     749 00112$:
                             750 ;Initial/src/fpga_load.c:49: counter++;
                             751 ;     genPlus
                             752 ;     genPlusIncr
-   03E2 0A                  753 	inc	r2
+   0450 0A                  753 	inc	r2
                             754 ;Initial/src/fpga_load.c:50: udelay(50);
                             755 ;     genCall
-   03E3 75 82 32            756 	mov	dpl,#0x32
-   03E6 C0 02               757 	push	ar2
-   03E8 12 05 3E            758 	lcall	_udelay
-   03EB D0 02               759 	pop	ar2
+   0451 75 82 32            756 	mov	dpl,#0x32
+   0454 C0 02               757 	push	ar2
+   0456 12 05 FE            758 	lcall	_udelay
+   0459 D0 02               759 	pop	ar2
                             760 ;Initial/src/fpga_load.c:51: if (counter  >= 255)
                             761 ;     genCmpLt
                             762 ;     genCmp
-   03ED BA FF 00            763 	cjne	r2,#0xFF,00113$
-   03F0                     764 00113$:
+   045B BA FF 00            763 	cjne	r2,#0xFF,00113$
+   045E                     764 00113$:
                             765 ;     genIfxJump
                             766 ;	Peephole 112.b	changed ljmp to sjmp
                             767 ;	Peephole 160	removed sjmp by inverse jump logic
-   03F0 40 E7               768 	jc	00103$
-   03F2                     769 00114$:
+   045E 40 E7               768 	jc	00103$
+   0460                     769 00114$:
                             770 ;Initial/src/fpga_load.c:53: return 0;
                             771 ;     genRet
-   03F2 75 82 00            772 	mov	dpl,#0x00
+   0460 75 82 00            772 	mov	dpl,#0x00
                             773 ;	Peephole 112.b	changed ljmp to sjmp
                             774 ;Initial/src/fpga_load.c:57: return 1;
                             775 ;     genRet
                             776 ;	Peephole 237.a	removed sjmp to ret
-   03F5 22                  777 	ret
-   03F6                     778 00105$:
-   03F6 75 82 01            779 	mov	dpl,#0x01
-   03F9                     780 00106$:
-   03F9 22                  781 	ret
+   0463 22                  777 	ret
+   0464                     778 00105$:
+   0464 75 82 01            779 	mov	dpl,#0x01
+   0467                     780 00106$:
+   0467 22                  781 	ret
                             782 ;------------------------------------------------------------
                             783 ;Allocation info for local variables in function 'clock_out_config_byte'
                             784 ;------------------------------------------------------------
@@ -788,45 +788,45 @@
                             788 ;	-----------------------------------------
                             789 ;	 function clock_out_config_byte
                             790 ;	-----------------------------------------
-   03FA                     791 _clock_out_config_byte:
+   0468                     791 _clock_out_config_byte:
                             792 ;	naked function: no prologue.
                             793 ;Initial/src/fpga_load.c:123: _endasm;
                             794 ;     genInline
-   03FA E5 82               795 	        mov a, dpl
-   03FC 13                  796 	        rrc a
-   03FD 92 A0               797 	        mov _bitALTERA_DATA0,c
-   03FF D2 A2               798 	        setb _bitALTERA_DCLK
-   0401 C2 A2               799 	        clr _bitALTERA_DCLK
-   0403 13                  800 	        rrc a
-   0404 92 A0               801 	        mov _bitALTERA_DATA0,c
-   0406 D2 A2               802 	        setb _bitALTERA_DCLK
-   0408 C2 A2               803 	        clr _bitALTERA_DCLK
-   040A 13                  804 	        rrc a
-   040B 92 A0               805 	        mov _bitALTERA_DATA0,c
-   040D D2 A2               806 	        setb _bitALTERA_DCLK
-   040F C2 A2               807 	        clr _bitALTERA_DCLK
-   0411 13                  808 	        rrc a
-   0412 92 A0               809 	        mov _bitALTERA_DATA0,c
-   0414 D2 A2               810 	        setb _bitALTERA_DCLK
-   0416 C2 A2               811 	        clr _bitALTERA_DCLK
-   0418 13                  812 	        rrc a
-   0419 92 A0               813 	        mov _bitALTERA_DATA0,c
-   041B D2 A2               814 	        setb _bitALTERA_DCLK
-   041D C2 A2               815 	        clr _bitALTERA_DCLK
-   041F 13                  816 	        rrc a
-   0420 92 A0               817 	        mov _bitALTERA_DATA0,c
-   0422 D2 A2               818 	        setb _bitALTERA_DCLK
-   0424 C2 A2               819 	        clr _bitALTERA_DCLK
-   0426 13                  820 	        rrc a
-   0427 92 A0               821 	        mov _bitALTERA_DATA0,c
-   0429 D2 A2               822 	        setb _bitALTERA_DCLK
-   042B C2 A2               823 	        clr _bitALTERA_DCLK
-   042D 13                  824 	        rrc a
-   042E 92 A0               825 	        mov _bitALTERA_DATA0,c
-   0430 D2 A2               826 	        setb _bitALTERA_DCLK
-   0432 C2 A2               827 	        clr _bitALTERA_DCLK
-   0434 22                  828 	        ret
-   0435                     829 00101$:
+   0468 E5 82               795 	        mov a, dpl
+   046A 13                  796 	        rrc a
+   046B 92 A0               797 	        mov _bitALTERA_DATA0,c
+   046D D2 A2               798 	        setb _bitALTERA_DCLK
+   046F C2 A2               799 	        clr _bitALTERA_DCLK
+   0471 13                  800 	        rrc a
+   0472 92 A0               801 	        mov _bitALTERA_DATA0,c
+   0474 D2 A2               802 	        setb _bitALTERA_DCLK
+   0476 C2 A2               803 	        clr _bitALTERA_DCLK
+   0478 13                  804 	        rrc a
+   0479 92 A0               805 	        mov _bitALTERA_DATA0,c
+   047B D2 A2               806 	        setb _bitALTERA_DCLK
+   047D C2 A2               807 	        clr _bitALTERA_DCLK
+   047F 13                  808 	        rrc a
+   0480 92 A0               809 	        mov _bitALTERA_DATA0,c
+   0482 D2 A2               810 	        setb _bitALTERA_DCLK
+   0484 C2 A2               811 	        clr _bitALTERA_DCLK
+   0486 13                  812 	        rrc a
+   0487 92 A0               813 	        mov _bitALTERA_DATA0,c
+   0489 D2 A2               814 	        setb _bitALTERA_DCLK
+   048B C2 A2               815 	        clr _bitALTERA_DCLK
+   048D 13                  816 	        rrc a
+   048E 92 A0               817 	        mov _bitALTERA_DATA0,c
+   0490 D2 A2               818 	        setb _bitALTERA_DCLK
+   0492 C2 A2               819 	        clr _bitALTERA_DCLK
+   0494 13                  820 	        rrc a
+   0495 92 A0               821 	        mov _bitALTERA_DATA0,c
+   0497 D2 A2               822 	        setb _bitALTERA_DCLK
+   0499 C2 A2               823 	        clr _bitALTERA_DCLK
+   049B 13                  824 	        rrc a
+   049C 92 A0               825 	        mov _bitALTERA_DATA0,c
+   049E D2 A2               826 	        setb _bitALTERA_DCLK
+   04A0 C2 A2               827 	        clr _bitALTERA_DCLK
+   04A2 22                  828 	        ret
+   04A3                     829 00101$:
                             830 ;	naked function: no epilogue.
                             831 ;------------------------------------------------------------
                             832 ;Allocation info for local variables in function 'clock_out_bytes'
@@ -838,46 +838,46 @@
                             838 ;	-----------------------------------------
                             839 ;	 function clock_out_bytes
                             840 ;	-----------------------------------------
-   0435                     841 _clock_out_bytes:
+   04A3                     841 _clock_out_bytes:
                             842 ;     genReceive
-   0435 AA 82               843 	mov	r2,dpl
+   04A3 AA 82               843 	mov	r2,dpl
                             844 ;Initial/src/fpga_load.c:130: while (bytecount-- > 0)
                             845 ;     genAssign
-   0437 AB 0D               846 	mov	r3,_clock_out_bytes_PARM_2
-   0439 AC 0E               847 	mov	r4,(_clock_out_bytes_PARM_2 + 1)
+   04A5 AB 0D               846 	mov	r3,_clock_out_bytes_PARM_2
+   04A7 AC 0E               847 	mov	r4,(_clock_out_bytes_PARM_2 + 1)
                             848 ;     genAssign
-   043B                     849 00101$:
+   04A9                     849 00101$:
                             850 ;     genAssign
-   043B 8A 05               851 	mov	ar5,r2
+   04A9 8A 05               851 	mov	ar5,r2
                             852 ;     genMinus
                             853 ;     genMinusDec
-   043D 1A                  854 	dec	r2
+   04AB 1A                  854 	dec	r2
                             855 ;     genCmpGt
                             856 ;     genCmp
                             857 ;     genIfxJump
                             858 ;	Peephole 108	removed ljmp by inverse jump logic
                             859 ;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
-   043E ED                  860 	mov	a,r5
-   043F 24 FF               861 	add	a,#0xff - 0x00
-   0441 50 12               862 	jnc	00104$
-   0443                     863 00108$:
+   04AC ED                  860 	mov	a,r5
+   04AD 24 FF               861 	add	a,#0xff - 0x00
+   04AF 50 12               862 	jnc	00104$
+   04B1                     863 00108$:
                             864 ;Initial/src/fpga_load.c:131: clock_out_config_byte (*p++);
                             865 ;     genPointerGet
                             866 ;     genFarPointerGet
-   0443 8B 82               867 	mov	dpl,r3
-   0445 8C 83               868 	mov	dph,r4
-   0447 E0                  869 	movx	a,@dptr
-   0448 FD                  870 	mov	r5,a
-   0449 A3                  871 	inc	dptr
-   044A AB 82               872 	mov	r3,dpl
-   044C AC 83               873 	mov	r4,dph
+   04B1 8B 82               867 	mov	dpl,r3
+   04B3 8C 83               868 	mov	dph,r4
+   04B5 E0                  869 	movx	a,@dptr
+   04B6 FD                  870 	mov	r5,a
+   04B7 A3                  871 	inc	dptr
+   04B8 AB 82               872 	mov	r3,dpl
+   04BA AC 83               873 	mov	r4,dph
                             874 ;     genCall
-   044E 8D 82               875 	mov	dpl,r5
-   0450 12 03 FA            876 	lcall	_clock_out_config_byte
+   04BC 8D 82               875 	mov	dpl,r5
+   04BE 12 04 68            876 	lcall	_clock_out_config_byte
                             877 ;	Peephole 112.b	changed ljmp to sjmp
-   0453 80 E6               878 	sjmp	00101$
-   0455                     879 00104$:
-   0455 22                  880 	ret
+   04C1 80 E6               878 	sjmp	00101$
+   04C3                     879 00104$:
+   04C3 22                  880 	ret
                             881 ;------------------------------------------------------------
                             882 ;Allocation info for local variables in function 'fpga_load_xfer'
                             883 ;------------------------------------------------------------
@@ -888,19 +888,19 @@
                             888 ;	-----------------------------------------
                             889 ;	 function fpga_load_xfer
                             890 ;	-----------------------------------------
-   0456                     891 _fpga_load_xfer:
+   04C4                     891 _fpga_load_xfer:
                             892 ;     genReceive
-   0456 85 82 0D            893 	mov	_clock_out_bytes_PARM_2,dpl
-   0459 85 83 0E            894 	mov	(_clock_out_bytes_PARM_2 + 1),dph
+   04C4 85 82 0D            893 	mov	_clock_out_bytes_PARM_2,dpl
+   04C7 85 83 0E            894 	mov	(_clock_out_bytes_PARM_2 + 1),dph
                             895 ;Initial/src/fpga_load.c:150: clock_out_bytes (bytecount, p);
                             896 ;     genCall
-   045C 85 0F 82            897 	mov	dpl,_fpga_load_xfer_PARM_2
-   045F 12 04 35            898 	lcall	_clock_out_bytes
+   04CA 85 0F 82            897 	mov	dpl,_fpga_load_xfer_PARM_2
+   04CD 12 04 A3            898 	lcall	_clock_out_bytes
                             899 ;Initial/src/fpga_load.c:151: return 1;
                             900 ;     genRet
-   0462 75 82 01            901 	mov	dpl,#0x01
-   0465                     902 00101$:
-   0465 22                  903 	ret
+   04D0 75 82 01            901 	mov	dpl,#0x01
+   04D3                     902 00101$:
+   04D3 22                  903 	ret
                             904 ;------------------------------------------------------------
                             905 ;Allocation info for local variables in function 'fpga_load_end'
                             906 ;------------------------------------------------------------
@@ -910,49 +910,49 @@
                             910 ;	-----------------------------------------
                             911 ;	 function fpga_load_end
                             912 ;	-----------------------------------------
-   0466                     913 _fpga_load_end:
+   04D4                     913 _fpga_load_end:
                             914 ;Initial/src/fpga_load.c:160: unsigned char status = HPSDR_ALTERA_CONFIG;
                             915 ;     genAssign
-   0466 AA A0               916 	mov	r2,_IOC
+   04D4 AA A0               916 	mov	r2,_IOC
                             917 ;Initial/src/fpga_load.c:162: if ((status & bmALTERA_NSTATUS) == 0)		// failed to program
                             918 ;     genAnd
-   0468 74 10               919 	mov	a,#0x10
-   046A 5A                  920 	anl	a,r2
+   04D6 74 10               919 	mov	a,#0x10
+   04D8 5A                  920 	anl	a,r2
                             921 ;     genCmpEq
                             922 ;	Peephole 115.b	jump optimization
-   046B FB                  923 	mov	r3,a
-   046C 60 02               924 	jz	00110$
-   046E                     925 00109$:
+   04D9 FB                  923 	mov	r3,a
+   04DA 60 02               924 	jz	00110$
+   04DC                     925 00109$:
                             926 ;	Peephole 112.b	changed ljmp to sjmp
-   046E 80 04               927 	sjmp	00102$
-   0470                     928 00110$:
+   04DC 80 04               927 	sjmp	00102$
+   04DE                     928 00110$:
                             929 ;Initial/src/fpga_load.c:163: return 0;
                             930 ;     genRet
-   0470 75 82 00            931 	mov	dpl,#0x00
+   04DE 75 82 00            931 	mov	dpl,#0x00
                             932 ;	Peephole 112.b	changed ljmp to sjmp
                             933 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0473 22                  934 	ret
-   0474                     935 00102$:
+   04E1 22                  934 	ret
+   04E2                     935 00102$:
                             936 ;Initial/src/fpga_load.c:165: if ((status & bmALTERA_CONF_DONE) == bmALTERA_CONF_DONE)
                             937 ;     genAnd
-   0474 53 02 08            938 	anl	ar2,#0x08
+   04E2 53 02 08            938 	anl	ar2,#0x08
                             939 ;     genCmpEq
                             940 ;	Peephole 112.b	changed ljmp to sjmp
                             941 ;	Peephole 199	optimized misc jump sequence
-   0477 BA 08 04            942 	cjne	r2,#0x08,00104$
+   04E5 BA 08 04            942 	cjne	r2,#0x08,00104$
                             943 ;00111$:
                             944 ;	Peephole 200	removed redundant sjmp
-   047A                     945 00112$:
+   04E8                     945 00112$:
                             946 ;Initial/src/fpga_load.c:166: return 1;					// everything's cool
                             947 ;     genRet
-   047A 75 82 01            948 	mov	dpl,#0x01
+   04E8 75 82 01            948 	mov	dpl,#0x01
                             949 ;	Peephole 112.b	changed ljmp to sjmp
                             950 ;Initial/src/fpga_load.c:171: return 0;
                             951 ;     genRet
                             952 ;	Peephole 237.a	removed sjmp to ret
-   047D 22                  953 	ret
-   047E                     954 00104$:
-   047E 75 82 00            955 	mov	dpl,#0x00
-   0481                     956 00105$:
-   0481 22                  957 	ret
+   04EB 22                  953 	ret
+   04EC                     954 00104$:
+   04EC 75 82 00            955 	mov	dpl,#0x00
+   04EF                     956 00105$:
+   04EF 22                  957 	ret
                             958 	.area CSEG    (CODE)

@@ -1,5 +1,5 @@
 Fitter report for blinkity
-Tue Jul 18 19:52:35 2006
+Fri Jul 21 13:43:43 2006
 Version 6.0 Build 178 04/27/2006 SJ Web Edition
 
 
@@ -60,7 +60,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Fitter Summary                                                               ;
 +------------------------------------+-----------------------------------------+
-; Fitter Status                      ; Successful - Tue Jul 18 19:52:35 2006   ;
+; Fitter Status                      ; Successful - Fri Jul 21 13:43:43 2006   ;
 ; Quartus II Version                 ; 6.0 Build 178 04/27/2006 SJ Web Edition ;
 ; Revision Name                      ; blinkity                                ;
 ; Top-level Entity Name              ; blinkity                                ;
@@ -115,7 +115,7 @@ applicable agreement for further details.
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity.pin.
+The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/Blinkity/blinkity.pin.
 
 
 +--------------------------------------------------------------------+
@@ -156,7 +156,7 @@ The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinki
 ; Highest non-global fan-out signal           ; COUNTER[22]          ;
 ; Highest non-global fan-out                  ; 2                    ;
 ; Total fan-out                               ; 128                  ;
-; Average fan-out                             ; 1.75                 ;
+; Average fan-out                             ; 1.73                 ;
 +---------------------------------------------+----------------------+
 
 
@@ -192,7 +192,7 @@ The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinki
 +----------+-----------------+---------------+--------------+
 ; 1        ; 3 / 34 ( 9 % )  ; 3.3V          ; --           ;
 ; 2        ; 0 / 35 ( 0 % )  ; 3.3V          ; --           ;
-; 3        ; 1 / 37 ( 3 % )  ; 3.3V          ; --           ;
+; 3        ; 2 / 37 ( 5 % )  ; 3.3V          ; --           ;
 ; 4        ; 8 / 36 ( 22 % ) ; 3.3V          ; --           ;
 +----------+-----------------+---------------+--------------+
 
@@ -308,7 +308,7 @@ The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinki
 ; 104      ; 83         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 105      ; 84         ; 3        ; RESERVED_INPUT                            ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 106      ; 85         ; 3        ; RESERVED_INPUT                            ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
-; 107      ; 86         ; 3        ; RESERVED_INPUT                            ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 107      ; 86         ; 3        ; *~LVDS41n/INIT_DONE~ / RESERVED           ; output ; LVTTL        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; 108      ; 87         ; 3        ; *~LVDS41p/nCEO~ / GND*                    ; output ; LVTTL        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; 109      ;            ; 3        ; VCCIO3                                    ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 110      ; 89         ; 3        ; RESERVED_INPUT                            ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
@@ -686,7 +686,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Enable user-supplied start-up clock (CLKUSR) ; Off                      ;
 ; Enable device-wide reset (DEV_CLRn)          ; Off                      ;
 ; Enable device-wide output enable (DEV_OE)    ; Off                      ;
-; Enable INIT_DONE output                      ; Off                      ;
+; Enable INIT_DONE output                      ; On                       ;
 ; Configuration scheme                         ; Active Serial            ;
 ; Error detection CRC                          ; Off                      ;
 ; Reserve nCEO pin after configuration         ; As output driving ground ;
@@ -738,26 +738,28 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; LABs with Chains - Fit Attempt 1                                 ; 2       ;
 ; LABs with Multiple Chains - Fit Attempt 1                        ; 0       ;
 ; Time - Fit Attempt 1                                             ; 0       ;
+; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.016   ;
 +------------------------------------------------------------------+---------+
 
 
-+------------------------------------------+
-; Advanced Data - Placement                ;
-+----------------------------------+-------+
-; Name                             ; Value ;
-+----------------------------------+-------+
-; Auto Fit Point 2 - Fit Attempt 1 ; ff    ;
-; Early Wire Use - Fit Attempt 1   ; 0     ;
-; Early Slack - Fit Attempt 1      ; -4827 ;
-; Auto Fit Point 3 - Fit Attempt 1 ; ff    ;
-; Auto Fit Point 4 - Fit Attempt 1 ; ff    ;
-; Mid Wire Use - Fit Attempt 1     ; 0     ;
-; Mid Slack - Fit Attempt 1        ; -4827 ;
-; Late Wire Use - Fit Attempt 1    ; 0     ;
-; Late Slack - Fit Attempt 1       ; -4827 ;
-; Auto Fit Point 5 - Fit Attempt 1 ; ff    ;
-; Time - Fit Attempt 1             ; 0     ;
-+----------------------------------+-------+
++---------------------------------------------+
+; Advanced Data - Placement                   ;
++-------------------------------------+-------+
+; Name                                ; Value ;
++-------------------------------------+-------+
+; Auto Fit Point 2 - Fit Attempt 1    ; ff    ;
+; Early Wire Use - Fit Attempt 1      ; 0     ;
+; Early Slack - Fit Attempt 1         ; -4827 ;
+; Auto Fit Point 3 - Fit Attempt 1    ; ff    ;
+; Auto Fit Point 4 - Fit Attempt 1    ; ff    ;
+; Mid Wire Use - Fit Attempt 1        ; 0     ;
+; Mid Slack - Fit Attempt 1           ; -4827 ;
+; Late Wire Use - Fit Attempt 1       ; 0     ;
+; Late Slack - Fit Attempt 1          ; -4827 ;
+; Auto Fit Point 5 - Fit Attempt 1    ; ff    ;
+; Time - Fit Attempt 1                ; 0     ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.015 ;
++-------------------------------------+-------+
 
 
 +---------------------------------------------+
@@ -771,7 +773,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Late Slack - Fit Attempt 1          ; -3974 ;
 ; Late Wire Use - Fit Attempt 1       ; 0     ;
 ; Time - Fit Attempt 1                ; 0     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.048 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.047 ;
 +-------------------------------------+-------+
 
 
@@ -781,7 +783,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.0 Build 178 04/27/2006 SJ Web Edition
-    Info: Processing started: Tue Jul 18 19:52:30 2006
+    Info: Processing started: Fri Jul 21 13:43:38 2006
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off blinkity -c blinkity
 Info: Selected device EP2C5Q208C8 for design "blinkity"
 Info: Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
@@ -851,13 +853,13 @@ Warning: Found 8 output pins without output pin load capacitance assignment
     Info: Pin "Pin76" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
 Info: Delay annotation completed successfully
 Info: Quartus II Fitter was successful. 0 errors, 1 warning
-    Info: Processing ended: Tue Jul 18 19:52:35 2006
+    Info: Processing ended: Fri Jul 21 13:43:43 2006
     Info: Elapsed time: 00:00:06
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity.fit.smsg.
+The suppressed messages can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/Blinkity/blinkity.fit.smsg.
 
 

@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Wed Jul 19 12:32:15 2006
+                              4 ; This file generated Fri Jul 21 16:22:53 2006
                               5 ;--------------------------------------------------------
                               6 	.module spi
                               7 	.optsdcc -mmcs51 --model-small
@@ -738,13 +738,13 @@
                             738 ;------------------------------------------------------------
                             739 ;Allocation info for local variables in function 'setup_enables'
                             740 ;------------------------------------------------------------
-                            741 ;enables                   Allocated to registers r2 
+                            741 ;enables                   Allocated to registers 
                             742 ;------------------------------------------------------------
                             743 ;Initial/src/lib/spi.c:30: setup_enables (unsigned char enables)
                             744 ;	-----------------------------------------
                             745 ;	 function setup_enables
                             746 ;	-----------------------------------------
-   08DA                     747 _setup_enables:
+   099A                     747 _setup_enables:
                     0002    748 	ar2 = 0x02
                     0003    749 	ar3 = 0x03
                     0004    750 	ar4 = 0x04
@@ -753,708 +753,676 @@
                     0007    753 	ar7 = 0x07
                     0000    754 	ar0 = 0x00
                     0001    755 	ar1 = 0x01
-                            756 ;     genReceive
-   08DA AA 82               757 	mov	r2,dpl
-                            758 ;Initial/src/lib/spi.c:36: enables ^= SPI_ENABLE_FPGA;
-                            759 ;     genXor
-   08DC 63 02 01            760 	xrl	ar2,#0x01
-                            761 ;Initial/src/lib/spi.c:40: HPSDR_PA = HPSDR_PA | (0x7 << 3);	// disable FPGA, CODEC_A, CODEC_B
-                            762 ;     genOr
-   08DF 43 80 38            763 	orl	_IOA,#0x38
-                            764 ;Initial/src/lib/spi.c:41: HPSDR_PA ^= (enables & 0x7) << 3;	// enable specified devs
-                            765 ;     genAnd
-   08E2 74 07               766 	mov	a,#0x07
-   08E4 5A                  767 	anl	a,r2
-                            768 ;     genLeftShift
-                            769 ;     genLeftShiftLiteral
-                            770 ;     genlshOne
-                            771 ;	Peephole 105	removed redundant mov
-   08E5 FB                  772 	mov	r3,a
-   08E6 C4                  773 	swap	a
-   08E7 03                  774 	rr	a
-   08E8 54 F8               775 	anl	a,#0xf8
-                            776 ;     genXor
-                            777 ;	Peephole 105	removed redundant mov
-   08EA FB                  778 	mov	r3,a
-   08EB 62 80               779 	xrl	_IOA,a
-                            780 ;Initial/src/lib/spi.c:44: USRP_PE = USRP_PE | (0xf << 4);	// disable TX_A, RX_A, TX_B, RX_B
-                            781 ;     genOr
-   08ED 43 B1 F0            782 	orl	_IOE,#0xF0
-                            783 ;Initial/src/lib/spi.c:45: USRP_PE ^= (enables & 0xf0);		// enable specified devs
-                            784 ;     genAnd
-   08F0 74 F0               785 	mov	a,#0xF0
-   08F2 5A                  786 	anl	a,r2
-                            787 ;     genXor
-   08F3 62 B1               788 	xrl	_IOE,a
-   08F5                     789 00101$:
-   08F5 22                  790 	ret
-                            791 ;------------------------------------------------------------
-                            792 ;Allocation info for local variables in function 'init_spi'
-                            793 ;------------------------------------------------------------
-                            794 ;------------------------------------------------------------
-                            795 ;Initial/src/lib/spi.c:51: init_spi (void)
-                            796 ;	-----------------------------------------
-                            797 ;	 function init_spi
-                            798 ;	-----------------------------------------
-   08F6                     799 _init_spi:
-                            800 ;Initial/src/lib/spi.c:53: disable_all ();		/* disable all devs	  */
-                            801 ;     genCall
-   08F6 75 82 00            802 	mov	dpl,#0x00
-   08F9 12 08 DA            803 	lcall	_setup_enables
-                            804 ;Initial/src/lib/spi.c:54: bitS_OUT = 0;			/* idle state has CLK = 0 */
-                            805 ;     genAssign
-   08FC C2 81               806 	clr	_bitS_OUT
-   08FE                     807 00101$:
-   08FE 22                  808 	ret
-                            809 ;------------------------------------------------------------
-                            810 ;Allocation info for local variables in function 'count_bits8'
-                            811 ;------------------------------------------------------------
-                            812 ;v                         Allocated to registers r2 
-                            813 ;count                     Allocated to registers r3 
-                            814 ;------------------------------------------------------------
-                            815 ;Initial/src/lib/spi.c:85: count_bits8 (unsigned char v)
-                            816 ;	-----------------------------------------
-                            817 ;	 function count_bits8
-                            818 ;	-----------------------------------------
-   08FF                     819 _count_bits8:
-                            820 ;     genReceive
-   08FF AA 82               821 	mov	r2,dpl
-                            822 ;Initial/src/lib/spi.c:87: unsigned char count = 0;
-                            823 ;     genAssign
-   0901 7B 00               824 	mov	r3,#0x00
-                            825 ;Initial/src/lib/spi.c:88: if (v & (1 << 0)) count++;
+                            756 ;Initial/src/lib/spi.c:46: }
+   099A                     757 00101$:
+   099A 22                  758 	ret
+                            759 ;------------------------------------------------------------
+                            760 ;Allocation info for local variables in function 'init_spi'
+                            761 ;------------------------------------------------------------
+                            762 ;------------------------------------------------------------
+                            763 ;Initial/src/lib/spi.c:51: init_spi (void)
+                            764 ;	-----------------------------------------
+                            765 ;	 function init_spi
+                            766 ;	-----------------------------------------
+   099B                     767 _init_spi:
+                            768 ;Initial/src/lib/spi.c:53: disable_all ();		/* disable all devs	  */
+                            769 ;     genCall
+   099B 75 82 00            770 	mov	dpl,#0x00
+   099E 12 09 9A            771 	lcall	_setup_enables
+                            772 ;Initial/src/lib/spi.c:54: bitS_OUT = 0;			/* idle state has CLK = 0 */
+                            773 ;     genAssign
+   09A1 C2 81               774 	clr	_bitS_OUT
+   09A3                     775 00101$:
+   09A3 22                  776 	ret
+                            777 ;------------------------------------------------------------
+                            778 ;Allocation info for local variables in function 'count_bits8'
+                            779 ;------------------------------------------------------------
+                            780 ;v                         Allocated to registers r2 
+                            781 ;count                     Allocated to registers r3 
+                            782 ;------------------------------------------------------------
+                            783 ;Initial/src/lib/spi.c:85: count_bits8 (unsigned char v)
+                            784 ;	-----------------------------------------
+                            785 ;	 function count_bits8
+                            786 ;	-----------------------------------------
+   09A4                     787 _count_bits8:
+                            788 ;     genReceive
+   09A4 AA 82               789 	mov	r2,dpl
+                            790 ;Initial/src/lib/spi.c:87: unsigned char count = 0;
+                            791 ;     genAssign
+   09A6 7B 00               792 	mov	r3,#0x00
+                            793 ;Initial/src/lib/spi.c:88: if (v & (1 << 0)) count++;
+                            794 ;     genAnd
+   09A8 EA                  795 	mov	a,r2
+                            796 ;     genIfxJump
+                            797 ;	Peephole 111	removed ljmp by inverse jump logic
+   09A9 30 E0 02            798 	jnb	acc.0,00102$
+   09AC                     799 00127$:
+                            800 ;     genAssign
+   09AC 7B 01               801 	mov	r3,#0x01
+   09AE                     802 00102$:
+                            803 ;Initial/src/lib/spi.c:89: if (v & (1 << 1)) count++;
+                            804 ;     genAnd
+   09AE EA                  805 	mov	a,r2
+                            806 ;     genIfxJump
+                            807 ;	Peephole 111	removed ljmp by inverse jump logic
+   09AF 30 E1 01            808 	jnb	acc.1,00104$
+   09B2                     809 00128$:
+                            810 ;     genPlus
+                            811 ;     genPlusIncr
+   09B2 0B                  812 	inc	r3
+   09B3                     813 00104$:
+                            814 ;Initial/src/lib/spi.c:90: if (v & (1 << 2)) count++;
+                            815 ;     genAnd
+   09B3 EA                  816 	mov	a,r2
+                            817 ;     genIfxJump
+                            818 ;	Peephole 111	removed ljmp by inverse jump logic
+   09B4 30 E2 01            819 	jnb	acc.2,00106$
+   09B7                     820 00129$:
+                            821 ;     genPlus
+                            822 ;     genPlusIncr
+   09B7 0B                  823 	inc	r3
+   09B8                     824 00106$:
+                            825 ;Initial/src/lib/spi.c:91: if (v & (1 << 3)) count++;
                             826 ;     genAnd
-   0903 EA                  827 	mov	a,r2
+   09B8 EA                  827 	mov	a,r2
                             828 ;     genIfxJump
                             829 ;	Peephole 111	removed ljmp by inverse jump logic
-   0904 30 E0 02            830 	jnb	acc.0,00102$
-   0907                     831 00127$:
-                            832 ;     genAssign
-   0907 7B 01               833 	mov	r3,#0x01
-   0909                     834 00102$:
-                            835 ;Initial/src/lib/spi.c:89: if (v & (1 << 1)) count++;
-                            836 ;     genAnd
-   0909 EA                  837 	mov	a,r2
-                            838 ;     genIfxJump
-                            839 ;	Peephole 111	removed ljmp by inverse jump logic
-   090A 30 E1 01            840 	jnb	acc.1,00104$
-   090D                     841 00128$:
-                            842 ;     genPlus
-                            843 ;     genPlusIncr
-   090D 0B                  844 	inc	r3
-   090E                     845 00104$:
-                            846 ;Initial/src/lib/spi.c:90: if (v & (1 << 2)) count++;
-                            847 ;     genAnd
-   090E EA                  848 	mov	a,r2
-                            849 ;     genIfxJump
-                            850 ;	Peephole 111	removed ljmp by inverse jump logic
-   090F 30 E2 01            851 	jnb	acc.2,00106$
-   0912                     852 00129$:
-                            853 ;     genPlus
-                            854 ;     genPlusIncr
-   0912 0B                  855 	inc	r3
-   0913                     856 00106$:
-                            857 ;Initial/src/lib/spi.c:91: if (v & (1 << 3)) count++;
-                            858 ;     genAnd
-   0913 EA                  859 	mov	a,r2
-                            860 ;     genIfxJump
-                            861 ;	Peephole 111	removed ljmp by inverse jump logic
-   0914 30 E3 01            862 	jnb	acc.3,00108$
-   0917                     863 00130$:
-                            864 ;     genPlus
-                            865 ;     genPlusIncr
-   0917 0B                  866 	inc	r3
-   0918                     867 00108$:
-                            868 ;Initial/src/lib/spi.c:92: if (v & (1 << 4)) count++;
-                            869 ;     genAnd
-   0918 EA                  870 	mov	a,r2
-                            871 ;     genIfxJump
-                            872 ;	Peephole 111	removed ljmp by inverse jump logic
-   0919 30 E4 01            873 	jnb	acc.4,00110$
-   091C                     874 00131$:
-                            875 ;     genPlus
-                            876 ;     genPlusIncr
-   091C 0B                  877 	inc	r3
-   091D                     878 00110$:
-                            879 ;Initial/src/lib/spi.c:93: if (v & (1 << 5)) count++;
-                            880 ;     genAnd
-   091D EA                  881 	mov	a,r2
-                            882 ;     genIfxJump
-                            883 ;	Peephole 111	removed ljmp by inverse jump logic
-   091E 30 E5 01            884 	jnb	acc.5,00112$
-   0921                     885 00132$:
-                            886 ;     genPlus
-                            887 ;     genPlusIncr
-   0921 0B                  888 	inc	r3
-   0922                     889 00112$:
-                            890 ;Initial/src/lib/spi.c:94: if (v & (1 << 6)) count++;
-                            891 ;     genAnd
-   0922 EA                  892 	mov	a,r2
-                            893 ;     genIfxJump
-                            894 ;	Peephole 111	removed ljmp by inverse jump logic
-   0923 30 E6 01            895 	jnb	acc.6,00114$
-   0926                     896 00133$:
-                            897 ;     genPlus
-                            898 ;     genPlusIncr
-   0926 0B                  899 	inc	r3
-   0927                     900 00114$:
-                            901 ;Initial/src/lib/spi.c:95: if (v & (1 << 7)) count++;
-                            902 ;     genAnd
-   0927 EA                  903 	mov	a,r2
-                            904 ;     genIfxJump
-                            905 ;	Peephole 111	removed ljmp by inverse jump logic
-   0928 30 E7 01            906 	jnb	acc.7,00116$
-   092B                     907 00134$:
-                            908 ;     genPlus
-                            909 ;     genPlusIncr
-   092B 0B                  910 	inc	r3
-   092C                     911 00116$:
-                            912 ;Initial/src/lib/spi.c:96: return count;
-                            913 ;     genRet
-   092C 8B 82               914 	mov	dpl,r3
-   092E                     915 00117$:
-   092E 22                  916 	ret
-                            917 ;------------------------------------------------------------
-                            918 ;Allocation info for local variables in function 'spi_read'
-                            919 ;------------------------------------------------------------
-                            920 ;header_lo                 Allocated with name '_spi_read_PARM_2'
-                            921 ;enables                   Allocated with name '_spi_read_PARM_3'
-                            922 ;format                    Allocated with name '_spi_read_PARM_4'
-                            923 ;buf                       Allocated with name '_spi_read_PARM_5'
-                            924 ;len                       Allocated with name '_spi_read_PARM_6'
-                            925 ;header_hi                 Allocated to registers r2 
-                            926 ;------------------------------------------------------------
-                            927 ;Initial/src/lib/spi.c:112: spi_read (unsigned char header_hi, unsigned char header_lo,
-                            928 ;	-----------------------------------------
-                            929 ;	 function spi_read
-                            930 ;	-----------------------------------------
-   092F                     931 _spi_read:
-                            932 ;     genReceive
-   092F AA 82               933 	mov	r2,dpl
-                            934 ;Initial/src/lib/spi.c:116: if (count_bits8 (enables) > 1)
-                            935 ;     genCall
-   0931 85 11 82            936 	mov	dpl,_spi_read_PARM_3
-   0934 C0 02               937 	push	ar2
-   0936 12 08 FF            938 	lcall	_count_bits8
-   0939 AB 82               939 	mov	r3,dpl
-   093B D0 02               940 	pop	ar2
-                            941 ;     genCmpGt
-                            942 ;     genCmp
-                            943 ;     genIfxJump
-                            944 ;	Peephole 108	removed ljmp by inverse jump logic
-                            945 ;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
-   093D EB                  946 	mov	a,r3
-   093E 24 FE               947 	add	a,#0xff - 0x01
-   0940 50 04               948 	jnc	00102$
-   0942                     949 00121$:
-                            950 ;Initial/src/lib/spi.c:117: return 0;		// error, too many enables set
-                            951 ;     genRet
-   0942 75 82 00            952 	mov	dpl,#0x00
-                            953 ;	Peephole 112.b	changed ljmp to sjmp
-                            954 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0945 22                  955 	ret
-   0946                     956 00102$:
-                            957 ;Initial/src/lib/spi.c:119: setup_enables (enables);
-                            958 ;     genCall
-   0946 85 11 82            959 	mov	dpl,_spi_read_PARM_3
-   0949 C0 02               960 	push	ar2
-   094B 12 08 DA            961 	lcall	_setup_enables
-   094E D0 02               962 	pop	ar2
-                            963 ;Initial/src/lib/spi.c:121: if (format & SPI_FMT_LSB){		// order: LSB
-                            964 ;     genAnd
-   0950 E5 12               965 	mov	a,_spi_read_PARM_4
-                            966 ;     genIfxJump
-                            967 ;	Peephole 111	removed ljmp by inverse jump logic
-   0952 30 E7 04            968 	jnb	acc.7,00111$
-   0955                     969 00122$:
-                            970 ;Initial/src/lib/spi.c:123: return 0;		// error, not implemented
-                            971 ;     genRet
-   0955 75 82 00            972 	mov	dpl,#0x00
-                            973 ;	Peephole 112.b	changed ljmp to sjmp
-                            974 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0958 22                  975 	ret
-   0959                     976 00111$:
-                            977 ;Initial/src/lib/spi.c:145: switch (format & SPI_FMT_HDR_MASK){
-                            978 ;     genAnd
-   0959 74 60               979 	mov	a,#0x60
-   095B 55 12               980 	anl	a,_spi_read_PARM_4
-                            981 ;     genCmpEq
-                            982 ;	Peephole 112.b	changed ljmp to sjmp
-                            983 ;	Peephole 115.b	jump optimization
-   095D FB                  984 	mov	r3,a
-   095E 60 23               985 	jz	00107$
-   0960                     986 00123$:
-                            987 ;     genCmpEq
-   0960 BB 20 02            988 	cjne	r3,#0x20,00124$
-                            989 ;	Peephole 112.b	changed ljmp to sjmp
-   0963 80 05               990 	sjmp	00104$
-   0965                     991 00124$:
-                            992 ;     genCmpEq
-                            993 ;	Peephole 112.b	changed ljmp to sjmp
-                            994 ;Initial/src/lib/spi.c:148: case SPI_FMT_HDR_1:
+   09B9 30 E3 01            830 	jnb	acc.3,00108$
+   09BC                     831 00130$:
+                            832 ;     genPlus
+                            833 ;     genPlusIncr
+   09BC 0B                  834 	inc	r3
+   09BD                     835 00108$:
+                            836 ;Initial/src/lib/spi.c:92: if (v & (1 << 4)) count++;
+                            837 ;     genAnd
+   09BD EA                  838 	mov	a,r2
+                            839 ;     genIfxJump
+                            840 ;	Peephole 111	removed ljmp by inverse jump logic
+   09BE 30 E4 01            841 	jnb	acc.4,00110$
+   09C1                     842 00131$:
+                            843 ;     genPlus
+                            844 ;     genPlusIncr
+   09C1 0B                  845 	inc	r3
+   09C2                     846 00110$:
+                            847 ;Initial/src/lib/spi.c:93: if (v & (1 << 5)) count++;
+                            848 ;     genAnd
+   09C2 EA                  849 	mov	a,r2
+                            850 ;     genIfxJump
+                            851 ;	Peephole 111	removed ljmp by inverse jump logic
+   09C3 30 E5 01            852 	jnb	acc.5,00112$
+   09C6                     853 00132$:
+                            854 ;     genPlus
+                            855 ;     genPlusIncr
+   09C6 0B                  856 	inc	r3
+   09C7                     857 00112$:
+                            858 ;Initial/src/lib/spi.c:94: if (v & (1 << 6)) count++;
+                            859 ;     genAnd
+   09C7 EA                  860 	mov	a,r2
+                            861 ;     genIfxJump
+                            862 ;	Peephole 111	removed ljmp by inverse jump logic
+   09C8 30 E6 01            863 	jnb	acc.6,00114$
+   09CB                     864 00133$:
+                            865 ;     genPlus
+                            866 ;     genPlusIncr
+   09CB 0B                  867 	inc	r3
+   09CC                     868 00114$:
+                            869 ;Initial/src/lib/spi.c:95: if (v & (1 << 7)) count++;
+                            870 ;     genAnd
+   09CC EA                  871 	mov	a,r2
+                            872 ;     genIfxJump
+                            873 ;	Peephole 111	removed ljmp by inverse jump logic
+   09CD 30 E7 01            874 	jnb	acc.7,00116$
+   09D0                     875 00134$:
+                            876 ;     genPlus
+                            877 ;     genPlusIncr
+   09D0 0B                  878 	inc	r3
+   09D1                     879 00116$:
+                            880 ;Initial/src/lib/spi.c:96: return count;
+                            881 ;     genRet
+   09D1 8B 82               882 	mov	dpl,r3
+   09D3                     883 00117$:
+   09D3 22                  884 	ret
+                            885 ;------------------------------------------------------------
+                            886 ;Allocation info for local variables in function 'spi_read'
+                            887 ;------------------------------------------------------------
+                            888 ;header_lo                 Allocated with name '_spi_read_PARM_2'
+                            889 ;enables                   Allocated with name '_spi_read_PARM_3'
+                            890 ;format                    Allocated with name '_spi_read_PARM_4'
+                            891 ;buf                       Allocated with name '_spi_read_PARM_5'
+                            892 ;len                       Allocated with name '_spi_read_PARM_6'
+                            893 ;header_hi                 Allocated to registers r2 
+                            894 ;------------------------------------------------------------
+                            895 ;Initial/src/lib/spi.c:112: spi_read (unsigned char header_hi, unsigned char header_lo,
+                            896 ;	-----------------------------------------
+                            897 ;	 function spi_read
+                            898 ;	-----------------------------------------
+   09D4                     899 _spi_read:
+                            900 ;     genReceive
+   09D4 AA 82               901 	mov	r2,dpl
+                            902 ;Initial/src/lib/spi.c:116: if (count_bits8 (enables) > 1)
+                            903 ;     genCall
+   09D6 85 11 82            904 	mov	dpl,_spi_read_PARM_3
+   09D9 C0 02               905 	push	ar2
+   09DB 12 09 A4            906 	lcall	_count_bits8
+   09DE AB 82               907 	mov	r3,dpl
+   09E0 D0 02               908 	pop	ar2
+                            909 ;     genCmpGt
+                            910 ;     genCmp
+                            911 ;     genIfxJump
+                            912 ;	Peephole 108	removed ljmp by inverse jump logic
+                            913 ;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
+   09E2 EB                  914 	mov	a,r3
+   09E3 24 FE               915 	add	a,#0xff - 0x01
+   09E5 50 04               916 	jnc	00102$
+   09E7                     917 00121$:
+                            918 ;Initial/src/lib/spi.c:117: return 0;		// error, too many enables set
+                            919 ;     genRet
+   09E7 75 82 00            920 	mov	dpl,#0x00
+                            921 ;	Peephole 112.b	changed ljmp to sjmp
+                            922 ;	Peephole 251.b	replaced sjmp to ret with ret
+   09EA 22                  923 	ret
+   09EB                     924 00102$:
+                            925 ;Initial/src/lib/spi.c:119: setup_enables (enables);
+                            926 ;     genCall
+   09EB 85 11 82            927 	mov	dpl,_spi_read_PARM_3
+   09EE C0 02               928 	push	ar2
+   09F0 12 09 9A            929 	lcall	_setup_enables
+   09F3 D0 02               930 	pop	ar2
+                            931 ;Initial/src/lib/spi.c:121: if (format & SPI_FMT_LSB){		// order: LSB
+                            932 ;     genAnd
+   09F5 E5 12               933 	mov	a,_spi_read_PARM_4
+                            934 ;     genIfxJump
+                            935 ;	Peephole 111	removed ljmp by inverse jump logic
+   09F7 30 E7 04            936 	jnb	acc.7,00111$
+   09FA                     937 00122$:
+                            938 ;Initial/src/lib/spi.c:123: return 0;		// error, not implemented
+                            939 ;     genRet
+   09FA 75 82 00            940 	mov	dpl,#0x00
+                            941 ;	Peephole 112.b	changed ljmp to sjmp
+                            942 ;	Peephole 251.b	replaced sjmp to ret with ret
+   09FD 22                  943 	ret
+   09FE                     944 00111$:
+                            945 ;Initial/src/lib/spi.c:145: switch (format & SPI_FMT_HDR_MASK){
+                            946 ;     genAnd
+   09FE 74 60               947 	mov	a,#0x60
+   0A00 55 12               948 	anl	a,_spi_read_PARM_4
+                            949 ;     genCmpEq
+                            950 ;	Peephole 112.b	changed ljmp to sjmp
+                            951 ;	Peephole 115.b	jump optimization
+   0A02 FB                  952 	mov	r3,a
+   0A03 60 23               953 	jz	00107$
+   0A05                     954 00123$:
+                            955 ;     genCmpEq
+   0A05 BB 20 02            956 	cjne	r3,#0x20,00124$
+                            957 ;	Peephole 112.b	changed ljmp to sjmp
+   0A08 80 05               958 	sjmp	00104$
+   0A0A                     959 00124$:
+                            960 ;     genCmpEq
+                            961 ;	Peephole 112.b	changed ljmp to sjmp
+                            962 ;Initial/src/lib/spi.c:148: case SPI_FMT_HDR_1:
+                            963 ;	Peephole 112.b	changed ljmp to sjmp
+                            964 ;	Peephole 199	optimized misc jump sequence
+   0A0A BB 40 17            965 	cjne	r3,#0x40,00106$
+   0A0D 80 08               966 	sjmp	00105$
+                            967 ;00125$:
+   0A0F                     968 00104$:
+                            969 ;Initial/src/lib/spi.c:149: write_byte_msb (header_lo);
+                            970 ;     genCall
+   0A0F 85 10 82            971 	mov	dpl,_spi_read_PARM_2
+   0A12 12 0A 9B            972 	lcall	_write_byte_msb
+                            973 ;Initial/src/lib/spi.c:150: break;
+                            974 ;Initial/src/lib/spi.c:151: case SPI_FMT_HDR_2:
+                            975 ;	Peephole 112.b	changed ljmp to sjmp
+   0A15 80 11               976 	sjmp	00107$
+   0A17                     977 00105$:
+                            978 ;Initial/src/lib/spi.c:152: write_byte_msb (header_hi);
+                            979 ;     genCall
+   0A17 8A 82               980 	mov	dpl,r2
+   0A19 12 0A 9B            981 	lcall	_write_byte_msb
+                            982 ;Initial/src/lib/spi.c:153: write_byte_msb (header_lo);
+                            983 ;     genCall
+   0A1C 85 10 82            984 	mov	dpl,_spi_read_PARM_2
+   0A1F 12 0A 9B            985 	lcall	_write_byte_msb
+                            986 ;Initial/src/lib/spi.c:154: break;
+                            987 ;Initial/src/lib/spi.c:155: default:
+                            988 ;	Peephole 112.b	changed ljmp to sjmp
+   0A22 80 04               989 	sjmp	00107$
+   0A24                     990 00106$:
+                            991 ;Initial/src/lib/spi.c:156: return 0;		// error
+                            992 ;     genRet
+   0A24 75 82 00            993 	mov	dpl,#0x00
+                            994 ;Initial/src/lib/spi.c:157: }
                             995 ;	Peephole 112.b	changed ljmp to sjmp
-                            996 ;	Peephole 199	optimized misc jump sequence
-   0965 BB 40 17            997 	cjne	r3,#0x40,00106$
-   0968 80 08               998 	sjmp	00105$
-                            999 ;00125$:
-   096A                    1000 00104$:
-                           1001 ;Initial/src/lib/spi.c:149: write_byte_msb (header_lo);
-                           1002 ;     genCall
-   096A 85 10 82           1003 	mov	dpl,_spi_read_PARM_2
-   096D 12 09 F6           1004 	lcall	_write_byte_msb
-                           1005 ;Initial/src/lib/spi.c:150: break;
-                           1006 ;Initial/src/lib/spi.c:151: case SPI_FMT_HDR_2:
-                           1007 ;	Peephole 112.b	changed ljmp to sjmp
-   0970 80 11              1008 	sjmp	00107$
-   0972                    1009 00105$:
-                           1010 ;Initial/src/lib/spi.c:152: write_byte_msb (header_hi);
-                           1011 ;     genCall
-   0972 8A 82              1012 	mov	dpl,r2
-   0974 12 09 F6           1013 	lcall	_write_byte_msb
-                           1014 ;Initial/src/lib/spi.c:153: write_byte_msb (header_lo);
-                           1015 ;     genCall
-   0977 85 10 82           1016 	mov	dpl,_spi_read_PARM_2
-   097A 12 09 F6           1017 	lcall	_write_byte_msb
-                           1018 ;Initial/src/lib/spi.c:154: break;
-                           1019 ;Initial/src/lib/spi.c:155: default:
-                           1020 ;	Peephole 112.b	changed ljmp to sjmp
-   097D 80 04              1021 	sjmp	00107$
-   097F                    1022 00106$:
-                           1023 ;Initial/src/lib/spi.c:156: return 0;		// error
-                           1024 ;     genRet
-   097F 75 82 00           1025 	mov	dpl,#0x00
-                           1026 ;Initial/src/lib/spi.c:157: }
-                           1027 ;	Peephole 112.b	changed ljmp to sjmp
-                           1028 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0982 22                 1029 	ret
-   0983                    1030 00107$:
-                           1031 ;Initial/src/lib/spi.c:158: if (len != 0)
-                           1032 ;     genCmpEq
-   0983 E5 15              1033 	mov	a,_spi_read_PARM_6
-                           1034 ;	Peephole 110	removed ljmp by inverse jump logic
-   0985 60 0C              1035 	jz	00112$
-   0987                    1036 00126$:
-                           1037 ;Initial/src/lib/spi.c:159: read_bytes_msb (buf, len);
-                           1038 ;     genAssign
-   0987 85 15 1D           1039 	mov	_read_bytes_msb_PARM_2,_spi_read_PARM_6
+                            996 ;	Peephole 251.b	replaced sjmp to ret with ret
+   0A27 22                  997 	ret
+   0A28                     998 00107$:
+                            999 ;Initial/src/lib/spi.c:158: if (len != 0)
+                           1000 ;     genCmpEq
+   0A28 E5 15              1001 	mov	a,_spi_read_PARM_6
+                           1002 ;	Peephole 110	removed ljmp by inverse jump logic
+   0A2A 60 0C              1003 	jz	00112$
+   0A2C                    1004 00126$:
+                           1005 ;Initial/src/lib/spi.c:159: read_bytes_msb (buf, len);
+                           1006 ;     genAssign
+   0A2C 85 15 1D           1007 	mov	_read_bytes_msb_PARM_2,_spi_read_PARM_6
+                           1008 ;     genCall
+   0A2F 85 13 82           1009 	mov	dpl,_spi_read_PARM_5
+   0A32 85 14 83           1010 	mov	dph,(_spi_read_PARM_5 + 1)
+   0A35 12 0B 56           1011 	lcall	_read_bytes_msb
+   0A38                    1012 00112$:
+                           1013 ;Initial/src/lib/spi.c:162: disable_all ();
+                           1014 ;     genCall
+   0A38 75 82 00           1015 	mov	dpl,#0x00
+   0A3B 12 09 9A           1016 	lcall	_setup_enables
+                           1017 ;Initial/src/lib/spi.c:163: return 1;		// success
+                           1018 ;     genRet
+   0A3E 75 82 01           1019 	mov	dpl,#0x01
+   0A41                    1020 00113$:
+   0A41 22                 1021 	ret
+                           1022 ;------------------------------------------------------------
+                           1023 ;Allocation info for local variables in function 'spi_write'
+                           1024 ;------------------------------------------------------------
+                           1025 ;header_lo                 Allocated with name '_spi_write_PARM_2'
+                           1026 ;enables                   Allocated with name '_spi_write_PARM_3'
+                           1027 ;format                    Allocated with name '_spi_write_PARM_4'
+                           1028 ;buf                       Allocated with name '_spi_write_PARM_5'
+                           1029 ;len                       Allocated with name '_spi_write_PARM_6'
+                           1030 ;header_hi                 Allocated to registers r2 
+                           1031 ;------------------------------------------------------------
+                           1032 ;Initial/src/lib/spi.c:169: spi_write (unsigned char header_hi, unsigned char header_lo,
+                           1033 ;	-----------------------------------------
+                           1034 ;	 function spi_write
+                           1035 ;	-----------------------------------------
+   0A42                    1036 _spi_write:
+                           1037 ;     genReceive
+   0A42 AA 82              1038 	mov	r2,dpl
+                           1039 ;Initial/src/lib/spi.c:173: setup_enables (enables);
                            1040 ;     genCall
-   098A 85 13 82           1041 	mov	dpl,_spi_read_PARM_5
-   098D 85 14 83           1042 	mov	dph,(_spi_read_PARM_5 + 1)
-   0990 12 0A B1           1043 	lcall	_read_bytes_msb
-   0993                    1044 00112$:
-                           1045 ;Initial/src/lib/spi.c:162: disable_all ();
-                           1046 ;     genCall
-   0993 75 82 00           1047 	mov	dpl,#0x00
-   0996 12 08 DA           1048 	lcall	_setup_enables
-                           1049 ;Initial/src/lib/spi.c:163: return 1;		// success
-                           1050 ;     genRet
-   0999 75 82 01           1051 	mov	dpl,#0x01
-   099C                    1052 00113$:
-   099C 22                 1053 	ret
-                           1054 ;------------------------------------------------------------
-                           1055 ;Allocation info for local variables in function 'spi_write'
-                           1056 ;------------------------------------------------------------
-                           1057 ;header_lo                 Allocated with name '_spi_write_PARM_2'
-                           1058 ;enables                   Allocated with name '_spi_write_PARM_3'
-                           1059 ;format                    Allocated with name '_spi_write_PARM_4'
-                           1060 ;buf                       Allocated with name '_spi_write_PARM_5'
-                           1061 ;len                       Allocated with name '_spi_write_PARM_6'
-                           1062 ;header_hi                 Allocated to registers r2 
-                           1063 ;------------------------------------------------------------
-                           1064 ;Initial/src/lib/spi.c:169: spi_write (unsigned char header_hi, unsigned char header_lo,
-                           1065 ;	-----------------------------------------
-                           1066 ;	 function spi_write
-                           1067 ;	-----------------------------------------
-   099D                    1068 _spi_write:
-                           1069 ;     genReceive
-   099D AA 82              1070 	mov	r2,dpl
-                           1071 ;Initial/src/lib/spi.c:173: setup_enables (enables);
-                           1072 ;     genCall
-   099F 85 17 82           1073 	mov	dpl,_spi_write_PARM_3
-   09A2 C0 02              1074 	push	ar2
-   09A4 12 08 DA           1075 	lcall	_setup_enables
-   09A7 D0 02              1076 	pop	ar2
-                           1077 ;Initial/src/lib/spi.c:175: if (format & SPI_FMT_LSB){		// order: LSB
-                           1078 ;     genAnd
-   09A9 E5 18              1079 	mov	a,_spi_write_PARM_4
-                           1080 ;     genIfxJump
-                           1081 ;	Peephole 111	removed ljmp by inverse jump logic
-   09AB 30 E7 04           1082 	jnb	acc.7,00109$
-   09AE                    1083 00118$:
-                           1084 ;Initial/src/lib/spi.c:177: return 0;		// error, not implemented
-                           1085 ;     genRet
-   09AE 75 82 00           1086 	mov	dpl,#0x00
-                           1087 ;	Peephole 112.b	changed ljmp to sjmp
-                           1088 ;	Peephole 251.b	replaced sjmp to ret with ret
-   09B1 22                 1089 	ret
-   09B2                    1090 00109$:
-                           1091 ;Initial/src/lib/spi.c:199: switch (format & SPI_FMT_HDR_MASK){
-                           1092 ;     genAnd
-   09B2 74 60              1093 	mov	a,#0x60
-   09B4 55 18              1094 	anl	a,_spi_write_PARM_4
-                           1095 ;     genCmpEq
-                           1096 ;	Peephole 112.b	changed ljmp to sjmp
-                           1097 ;	Peephole 115.b	jump optimization
-   09B6 FB                 1098 	mov	r3,a
-   09B7 60 23              1099 	jz	00105$
-   09B9                    1100 00119$:
-                           1101 ;     genCmpEq
-   09B9 BB 20 02           1102 	cjne	r3,#0x20,00120$
-                           1103 ;	Peephole 112.b	changed ljmp to sjmp
-   09BC 80 05              1104 	sjmp	00102$
-   09BE                    1105 00120$:
-                           1106 ;     genCmpEq
-                           1107 ;	Peephole 112.b	changed ljmp to sjmp
-                           1108 ;Initial/src/lib/spi.c:202: case SPI_FMT_HDR_1:
+   0A44 85 17 82           1041 	mov	dpl,_spi_write_PARM_3
+   0A47 C0 02              1042 	push	ar2
+   0A49 12 09 9A           1043 	lcall	_setup_enables
+   0A4C D0 02              1044 	pop	ar2
+                           1045 ;Initial/src/lib/spi.c:175: if (format & SPI_FMT_LSB){		// order: LSB
+                           1046 ;     genAnd
+   0A4E E5 18              1047 	mov	a,_spi_write_PARM_4
+                           1048 ;     genIfxJump
+                           1049 ;	Peephole 111	removed ljmp by inverse jump logic
+   0A50 30 E7 04           1050 	jnb	acc.7,00109$
+   0A53                    1051 00118$:
+                           1052 ;Initial/src/lib/spi.c:177: return 0;		// error, not implemented
+                           1053 ;     genRet
+   0A53 75 82 00           1054 	mov	dpl,#0x00
+                           1055 ;	Peephole 112.b	changed ljmp to sjmp
+                           1056 ;	Peephole 251.b	replaced sjmp to ret with ret
+   0A56 22                 1057 	ret
+   0A57                    1058 00109$:
+                           1059 ;Initial/src/lib/spi.c:199: switch (format & SPI_FMT_HDR_MASK){
+                           1060 ;     genAnd
+   0A57 74 60              1061 	mov	a,#0x60
+   0A59 55 18              1062 	anl	a,_spi_write_PARM_4
+                           1063 ;     genCmpEq
+                           1064 ;	Peephole 112.b	changed ljmp to sjmp
+                           1065 ;	Peephole 115.b	jump optimization
+   0A5B FB                 1066 	mov	r3,a
+   0A5C 60 23              1067 	jz	00105$
+   0A5E                    1068 00119$:
+                           1069 ;     genCmpEq
+   0A5E BB 20 02           1070 	cjne	r3,#0x20,00120$
+                           1071 ;	Peephole 112.b	changed ljmp to sjmp
+   0A61 80 05              1072 	sjmp	00102$
+   0A63                    1073 00120$:
+                           1074 ;     genCmpEq
+                           1075 ;	Peephole 112.b	changed ljmp to sjmp
+                           1076 ;Initial/src/lib/spi.c:202: case SPI_FMT_HDR_1:
+                           1077 ;	Peephole 112.b	changed ljmp to sjmp
+                           1078 ;	Peephole 199	optimized misc jump sequence
+   0A63 BB 40 17           1079 	cjne	r3,#0x40,00104$
+   0A66 80 08              1080 	sjmp	00103$
+                           1081 ;00121$:
+   0A68                    1082 00102$:
+                           1083 ;Initial/src/lib/spi.c:203: write_byte_msb (header_lo);
+                           1084 ;     genCall
+   0A68 85 16 82           1085 	mov	dpl,_spi_write_PARM_2
+   0A6B 12 0A 9B           1086 	lcall	_write_byte_msb
+                           1087 ;Initial/src/lib/spi.c:204: break;
+                           1088 ;Initial/src/lib/spi.c:205: case SPI_FMT_HDR_2:
+                           1089 ;	Peephole 112.b	changed ljmp to sjmp
+   0A6E 80 11              1090 	sjmp	00105$
+   0A70                    1091 00103$:
+                           1092 ;Initial/src/lib/spi.c:206: write_byte_msb (header_hi);
+                           1093 ;     genCall
+   0A70 8A 82              1094 	mov	dpl,r2
+   0A72 12 0A 9B           1095 	lcall	_write_byte_msb
+                           1096 ;Initial/src/lib/spi.c:207: write_byte_msb (header_lo);
+                           1097 ;     genCall
+   0A75 85 16 82           1098 	mov	dpl,_spi_write_PARM_2
+   0A78 12 0A 9B           1099 	lcall	_write_byte_msb
+                           1100 ;Initial/src/lib/spi.c:208: break;
+                           1101 ;Initial/src/lib/spi.c:209: default:
+                           1102 ;	Peephole 112.b	changed ljmp to sjmp
+   0A7B 80 04              1103 	sjmp	00105$
+   0A7D                    1104 00104$:
+                           1105 ;Initial/src/lib/spi.c:210: return 0;		// error
+                           1106 ;     genRet
+   0A7D 75 82 00           1107 	mov	dpl,#0x00
+                           1108 ;Initial/src/lib/spi.c:211: }
                            1109 ;	Peephole 112.b	changed ljmp to sjmp
-                           1110 ;	Peephole 199	optimized misc jump sequence
-   09BE BB 40 17           1111 	cjne	r3,#0x40,00104$
-   09C1 80 08              1112 	sjmp	00103$
-                           1113 ;00121$:
-   09C3                    1114 00102$:
-                           1115 ;Initial/src/lib/spi.c:203: write_byte_msb (header_lo);
-                           1116 ;     genCall
-   09C3 85 16 82           1117 	mov	dpl,_spi_write_PARM_2
-   09C6 12 09 F6           1118 	lcall	_write_byte_msb
-                           1119 ;Initial/src/lib/spi.c:204: break;
-                           1120 ;Initial/src/lib/spi.c:205: case SPI_FMT_HDR_2:
-                           1121 ;	Peephole 112.b	changed ljmp to sjmp
-   09C9 80 11              1122 	sjmp	00105$
-   09CB                    1123 00103$:
-                           1124 ;Initial/src/lib/spi.c:206: write_byte_msb (header_hi);
-                           1125 ;     genCall
-   09CB 8A 82              1126 	mov	dpl,r2
-   09CD 12 09 F6           1127 	lcall	_write_byte_msb
-                           1128 ;Initial/src/lib/spi.c:207: write_byte_msb (header_lo);
-                           1129 ;     genCall
-   09D0 85 16 82           1130 	mov	dpl,_spi_write_PARM_2
-   09D3 12 09 F6           1131 	lcall	_write_byte_msb
-                           1132 ;Initial/src/lib/spi.c:208: break;
-                           1133 ;Initial/src/lib/spi.c:209: default:
-                           1134 ;	Peephole 112.b	changed ljmp to sjmp
-   09D6 80 04              1135 	sjmp	00105$
-   09D8                    1136 00104$:
-                           1137 ;Initial/src/lib/spi.c:210: return 0;		// error
-                           1138 ;     genRet
-   09D8 75 82 00           1139 	mov	dpl,#0x00
-                           1140 ;Initial/src/lib/spi.c:211: }
-                           1141 ;	Peephole 112.b	changed ljmp to sjmp
-                           1142 ;	Peephole 251.b	replaced sjmp to ret with ret
-   09DB 22                 1143 	ret
-   09DC                    1144 00105$:
-                           1145 ;Initial/src/lib/spi.c:212: if (len != 0)
-                           1146 ;     genCmpEq
-   09DC E5 1B              1147 	mov	a,_spi_write_PARM_6
-                           1148 ;	Peephole 110	removed ljmp by inverse jump logic
-   09DE 60 0C              1149 	jz	00110$
-   09E0                    1150 00122$:
-                           1151 ;Initial/src/lib/spi.c:213: write_bytes_msb (buf, len);
-                           1152 ;     genAssign
-   09E0 85 1B 1C           1153 	mov	_write_bytes_msb_PARM_2,_spi_write_PARM_6
-                           1154 ;     genCall
-   09E3 85 19 82           1155 	mov	dpl,_spi_write_PARM_5
-   09E6 85 1A 83           1156 	mov	dph,(_spi_write_PARM_5 + 1)
-   09E9 12 0A 49           1157 	lcall	_write_bytes_msb
-   09EC                    1158 00110$:
-                           1159 ;Initial/src/lib/spi.c:216: disable_all ();
-                           1160 ;     genCall
-   09EC 75 82 00           1161 	mov	dpl,#0x00
-   09EF 12 08 DA           1162 	lcall	_setup_enables
-                           1163 ;Initial/src/lib/spi.c:217: return 1;		// success
-                           1164 ;     genRet
-   09F2 75 82 01           1165 	mov	dpl,#0x01
-   09F5                    1166 00111$:
-   09F5 22                 1167 	ret
-                           1168 ;------------------------------------------------------------
-                           1169 ;Allocation info for local variables in function 'write_byte_msb'
-                           1170 ;------------------------------------------------------------
-                           1171 ;v                         Allocated to registers r2 
-                           1172 ;------------------------------------------------------------
-                           1173 ;Initial/src/lib/spi.c:223: write_byte_msb (unsigned char v)
-                           1174 ;	-----------------------------------------
-                           1175 ;	 function write_byte_msb
-                           1176 ;	-----------------------------------------
-   09F6                    1177 _write_byte_msb:
-                           1178 ;     genReceive
-                           1179 ;Initial/src/lib/spi.c:225: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
-                           1180 ;     genRLC
-                           1181 ;	peephole 177.g	optimized mov sequence
-   09F6 E5 82              1182 	mov	a,dpl
-   09F8 FA                 1183 	mov	r2,a
-   09F9 23                 1184 	rl	a
-                           1185 ;Initial/src/lib/spi.c:226: bitS_OUT = v & 0x1;
+                           1110 ;	Peephole 251.b	replaced sjmp to ret with ret
+   0A80 22                 1111 	ret
+   0A81                    1112 00105$:
+                           1113 ;Initial/src/lib/spi.c:212: if (len != 0)
+                           1114 ;     genCmpEq
+   0A81 E5 1B              1115 	mov	a,_spi_write_PARM_6
+                           1116 ;	Peephole 110	removed ljmp by inverse jump logic
+   0A83 60 0C              1117 	jz	00110$
+   0A85                    1118 00122$:
+                           1119 ;Initial/src/lib/spi.c:213: write_bytes_msb (buf, len);
+                           1120 ;     genAssign
+   0A85 85 1B 1C           1121 	mov	_write_bytes_msb_PARM_2,_spi_write_PARM_6
+                           1122 ;     genCall
+   0A88 85 19 82           1123 	mov	dpl,_spi_write_PARM_5
+   0A8B 85 1A 83           1124 	mov	dph,(_spi_write_PARM_5 + 1)
+   0A8E 12 0A EE           1125 	lcall	_write_bytes_msb
+   0A91                    1126 00110$:
+                           1127 ;Initial/src/lib/spi.c:216: disable_all ();
+                           1128 ;     genCall
+   0A91 75 82 00           1129 	mov	dpl,#0x00
+   0A94 12 09 9A           1130 	lcall	_setup_enables
+                           1131 ;Initial/src/lib/spi.c:217: return 1;		// success
+                           1132 ;     genRet
+   0A97 75 82 01           1133 	mov	dpl,#0x01
+   0A9A                    1134 00111$:
+   0A9A 22                 1135 	ret
+                           1136 ;------------------------------------------------------------
+                           1137 ;Allocation info for local variables in function 'write_byte_msb'
+                           1138 ;------------------------------------------------------------
+                           1139 ;v                         Allocated to registers r2 
+                           1140 ;------------------------------------------------------------
+                           1141 ;Initial/src/lib/spi.c:223: write_byte_msb (unsigned char v)
+                           1142 ;	-----------------------------------------
+                           1143 ;	 function write_byte_msb
+                           1144 ;	-----------------------------------------
+   0A9B                    1145 _write_byte_msb:
+                           1146 ;     genReceive
+                           1147 ;Initial/src/lib/spi.c:225: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+                           1148 ;     genRLC
+                           1149 ;	peephole 177.g	optimized mov sequence
+   0A9B E5 82              1150 	mov	a,dpl
+   0A9D FA                 1151 	mov	r2,a
+   0A9E 23                 1152 	rl	a
+                           1153 ;Initial/src/lib/spi.c:226: bitS_OUT = v & 0x1;
+                           1154 ;     genAnd
+                           1155 ;	Peephole 105	removed redundant mov
+   0A9F FA                 1156 	mov	r2,a
+   0AA0 13                 1157 	rrc	a
+   0AA1 92 81              1158 	mov	_bitS_OUT,c
+                           1159 ;Initial/src/lib/spi.c:227: bitS_CLK = 1;
+                           1160 ;     genAssign
+   0AA3 D2 80              1161 	setb	_bitS_CLK
+                           1162 ;Initial/src/lib/spi.c:228: bitS_CLK = 0;
+                           1163 ;     genAssign
+   0AA5 C2 80              1164 	clr	_bitS_CLK
+                           1165 ;Initial/src/lib/spi.c:230: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+                           1166 ;     genRLC
+   0AA7 EA                 1167 	mov	a,r2
+   0AA8 23                 1168 	rl	a
+                           1169 ;Initial/src/lib/spi.c:231: bitS_OUT = v & 0x1;
+                           1170 ;     genAnd
+                           1171 ;	Peephole 105	removed redundant mov
+   0AA9 FA                 1172 	mov	r2,a
+   0AAA 13                 1173 	rrc	a
+   0AAB 92 81              1174 	mov	_bitS_OUT,c
+                           1175 ;Initial/src/lib/spi.c:232: bitS_CLK = 1;
+                           1176 ;     genAssign
+   0AAD D2 80              1177 	setb	_bitS_CLK
+                           1178 ;Initial/src/lib/spi.c:233: bitS_CLK = 0;
+                           1179 ;     genAssign
+   0AAF C2 80              1180 	clr	_bitS_CLK
+                           1181 ;Initial/src/lib/spi.c:235: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+                           1182 ;     genRLC
+   0AB1 EA                 1183 	mov	a,r2
+   0AB2 23                 1184 	rl	a
+                           1185 ;Initial/src/lib/spi.c:236: bitS_OUT = v & 0x1;
                            1186 ;     genAnd
                            1187 ;	Peephole 105	removed redundant mov
-   09FA FA                 1188 	mov	r2,a
-   09FB 13                 1189 	rrc	a
-   09FC 92 81              1190 	mov	_bitS_OUT,c
-                           1191 ;Initial/src/lib/spi.c:227: bitS_CLK = 1;
+   0AB3 FA                 1188 	mov	r2,a
+   0AB4 13                 1189 	rrc	a
+   0AB5 92 81              1190 	mov	_bitS_OUT,c
+                           1191 ;Initial/src/lib/spi.c:237: bitS_CLK = 1;
                            1192 ;     genAssign
-   09FE D2 80              1193 	setb	_bitS_CLK
-                           1194 ;Initial/src/lib/spi.c:228: bitS_CLK = 0;
+   0AB7 D2 80              1193 	setb	_bitS_CLK
+                           1194 ;Initial/src/lib/spi.c:238: bitS_CLK = 0;
                            1195 ;     genAssign
-   0A00 C2 80              1196 	clr	_bitS_CLK
-                           1197 ;Initial/src/lib/spi.c:230: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+   0AB9 C2 80              1196 	clr	_bitS_CLK
+                           1197 ;Initial/src/lib/spi.c:240: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
                            1198 ;     genRLC
-   0A02 EA                 1199 	mov	a,r2
-   0A03 23                 1200 	rl	a
-                           1201 ;Initial/src/lib/spi.c:231: bitS_OUT = v & 0x1;
+   0ABB EA                 1199 	mov	a,r2
+   0ABC 23                 1200 	rl	a
+                           1201 ;Initial/src/lib/spi.c:241: bitS_OUT = v & 0x1;
                            1202 ;     genAnd
                            1203 ;	Peephole 105	removed redundant mov
-   0A04 FA                 1204 	mov	r2,a
-   0A05 13                 1205 	rrc	a
-   0A06 92 81              1206 	mov	_bitS_OUT,c
-                           1207 ;Initial/src/lib/spi.c:232: bitS_CLK = 1;
+   0ABD FA                 1204 	mov	r2,a
+   0ABE 13                 1205 	rrc	a
+   0ABF 92 81              1206 	mov	_bitS_OUT,c
+                           1207 ;Initial/src/lib/spi.c:242: bitS_CLK = 1;
                            1208 ;     genAssign
-   0A08 D2 80              1209 	setb	_bitS_CLK
-                           1210 ;Initial/src/lib/spi.c:233: bitS_CLK = 0;
+   0AC1 D2 80              1209 	setb	_bitS_CLK
+                           1210 ;Initial/src/lib/spi.c:243: bitS_CLK = 0;
                            1211 ;     genAssign
-   0A0A C2 80              1212 	clr	_bitS_CLK
-                           1213 ;Initial/src/lib/spi.c:235: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+   0AC3 C2 80              1212 	clr	_bitS_CLK
+                           1213 ;Initial/src/lib/spi.c:245: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
                            1214 ;     genRLC
-   0A0C EA                 1215 	mov	a,r2
-   0A0D 23                 1216 	rl	a
-                           1217 ;Initial/src/lib/spi.c:236: bitS_OUT = v & 0x1;
+   0AC5 EA                 1215 	mov	a,r2
+   0AC6 23                 1216 	rl	a
+                           1217 ;Initial/src/lib/spi.c:246: bitS_OUT = v & 0x1;
                            1218 ;     genAnd
                            1219 ;	Peephole 105	removed redundant mov
-   0A0E FA                 1220 	mov	r2,a
-   0A0F 13                 1221 	rrc	a
-   0A10 92 81              1222 	mov	_bitS_OUT,c
-                           1223 ;Initial/src/lib/spi.c:237: bitS_CLK = 1;
+   0AC7 FA                 1220 	mov	r2,a
+   0AC8 13                 1221 	rrc	a
+   0AC9 92 81              1222 	mov	_bitS_OUT,c
+                           1223 ;Initial/src/lib/spi.c:247: bitS_CLK = 1;
                            1224 ;     genAssign
-   0A12 D2 80              1225 	setb	_bitS_CLK
-                           1226 ;Initial/src/lib/spi.c:238: bitS_CLK = 0;
+   0ACB D2 80              1225 	setb	_bitS_CLK
+                           1226 ;Initial/src/lib/spi.c:248: bitS_CLK = 0;
                            1227 ;     genAssign
-   0A14 C2 80              1228 	clr	_bitS_CLK
-                           1229 ;Initial/src/lib/spi.c:240: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+   0ACD C2 80              1228 	clr	_bitS_CLK
+                           1229 ;Initial/src/lib/spi.c:250: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
                            1230 ;     genRLC
-   0A16 EA                 1231 	mov	a,r2
-   0A17 23                 1232 	rl	a
-                           1233 ;Initial/src/lib/spi.c:241: bitS_OUT = v & 0x1;
+   0ACF EA                 1231 	mov	a,r2
+   0AD0 23                 1232 	rl	a
+                           1233 ;Initial/src/lib/spi.c:251: bitS_OUT = v & 0x1;
                            1234 ;     genAnd
                            1235 ;	Peephole 105	removed redundant mov
-   0A18 FA                 1236 	mov	r2,a
-   0A19 13                 1237 	rrc	a
-   0A1A 92 81              1238 	mov	_bitS_OUT,c
-                           1239 ;Initial/src/lib/spi.c:242: bitS_CLK = 1;
+   0AD1 FA                 1236 	mov	r2,a
+   0AD2 13                 1237 	rrc	a
+   0AD3 92 81              1238 	mov	_bitS_OUT,c
+                           1239 ;Initial/src/lib/spi.c:252: bitS_CLK = 1;
                            1240 ;     genAssign
-   0A1C D2 80              1241 	setb	_bitS_CLK
-                           1242 ;Initial/src/lib/spi.c:243: bitS_CLK = 0;
+   0AD5 D2 80              1241 	setb	_bitS_CLK
+                           1242 ;Initial/src/lib/spi.c:253: bitS_CLK = 0;
                            1243 ;     genAssign
-   0A1E C2 80              1244 	clr	_bitS_CLK
-                           1245 ;Initial/src/lib/spi.c:245: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+   0AD7 C2 80              1244 	clr	_bitS_CLK
+                           1245 ;Initial/src/lib/spi.c:255: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
                            1246 ;     genRLC
-   0A20 EA                 1247 	mov	a,r2
-   0A21 23                 1248 	rl	a
-                           1249 ;Initial/src/lib/spi.c:246: bitS_OUT = v & 0x1;
+   0AD9 EA                 1247 	mov	a,r2
+   0ADA 23                 1248 	rl	a
+                           1249 ;Initial/src/lib/spi.c:256: bitS_OUT = v & 0x1;
                            1250 ;     genAnd
                            1251 ;	Peephole 105	removed redundant mov
-   0A22 FA                 1252 	mov	r2,a
-   0A23 13                 1253 	rrc	a
-   0A24 92 81              1254 	mov	_bitS_OUT,c
-                           1255 ;Initial/src/lib/spi.c:247: bitS_CLK = 1;
+   0ADB FA                 1252 	mov	r2,a
+   0ADC 13                 1253 	rrc	a
+   0ADD 92 81              1254 	mov	_bitS_OUT,c
+                           1255 ;Initial/src/lib/spi.c:257: bitS_CLK = 1;
                            1256 ;     genAssign
-   0A26 D2 80              1257 	setb	_bitS_CLK
-                           1258 ;Initial/src/lib/spi.c:248: bitS_CLK = 0;
+   0ADF D2 80              1257 	setb	_bitS_CLK
+                           1258 ;Initial/src/lib/spi.c:258: bitS_CLK = 0;
                            1259 ;     genAssign
-   0A28 C2 80              1260 	clr	_bitS_CLK
-                           1261 ;Initial/src/lib/spi.c:250: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+   0AE1 C2 80              1260 	clr	_bitS_CLK
+                           1261 ;Initial/src/lib/spi.c:260: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
                            1262 ;     genRLC
-   0A2A EA                 1263 	mov	a,r2
-   0A2B 23                 1264 	rl	a
-                           1265 ;Initial/src/lib/spi.c:251: bitS_OUT = v & 0x1;
+   0AE3 EA                 1263 	mov	a,r2
+   0AE4 23                 1264 	rl	a
+                           1265 ;Initial/src/lib/spi.c:261: bitS_OUT = v & 0x1;
                            1266 ;     genAnd
                            1267 ;	Peephole 105	removed redundant mov
-   0A2C FA                 1268 	mov	r2,a
-   0A2D 13                 1269 	rrc	a
-   0A2E 92 81              1270 	mov	_bitS_OUT,c
-                           1271 ;Initial/src/lib/spi.c:252: bitS_CLK = 1;
+   0AE5 FA                 1268 	mov	r2,a
+   0AE6 13                 1269 	rrc	a
+   0AE7 92 81              1270 	mov	_bitS_OUT,c
+                           1271 ;Initial/src/lib/spi.c:262: bitS_CLK = 1;
                            1272 ;     genAssign
-   0A30 D2 80              1273 	setb	_bitS_CLK
-                           1274 ;Initial/src/lib/spi.c:253: bitS_CLK = 0;
+   0AE9 D2 80              1273 	setb	_bitS_CLK
+                           1274 ;Initial/src/lib/spi.c:263: bitS_CLK = 0;
                            1275 ;     genAssign
-   0A32 C2 80              1276 	clr	_bitS_CLK
-                           1277 ;Initial/src/lib/spi.c:255: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
-                           1278 ;     genRLC
-   0A34 EA                 1279 	mov	a,r2
-   0A35 23                 1280 	rl	a
-                           1281 ;Initial/src/lib/spi.c:256: bitS_OUT = v & 0x1;
-                           1282 ;     genAnd
-                           1283 ;	Peephole 105	removed redundant mov
-   0A36 FA                 1284 	mov	r2,a
-   0A37 13                 1285 	rrc	a
-   0A38 92 81              1286 	mov	_bitS_OUT,c
-                           1287 ;Initial/src/lib/spi.c:257: bitS_CLK = 1;
-                           1288 ;     genAssign
-   0A3A D2 80              1289 	setb	_bitS_CLK
-                           1290 ;Initial/src/lib/spi.c:258: bitS_CLK = 0;
-                           1291 ;     genAssign
-   0A3C C2 80              1292 	clr	_bitS_CLK
-                           1293 ;Initial/src/lib/spi.c:260: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
-                           1294 ;     genRLC
-   0A3E EA                 1295 	mov	a,r2
-   0A3F 23                 1296 	rl	a
-                           1297 ;Initial/src/lib/spi.c:261: bitS_OUT = v & 0x1;
-                           1298 ;     genAnd
-                           1299 ;	Peephole 105	removed redundant mov
-   0A40 FA                 1300 	mov	r2,a
-   0A41 13                 1301 	rrc	a
-   0A42 92 81              1302 	mov	_bitS_OUT,c
-                           1303 ;Initial/src/lib/spi.c:262: bitS_CLK = 1;
-                           1304 ;     genAssign
-   0A44 D2 80              1305 	setb	_bitS_CLK
-                           1306 ;Initial/src/lib/spi.c:263: bitS_CLK = 0;
-                           1307 ;     genAssign
-   0A46 C2 80              1308 	clr	_bitS_CLK
-   0A48                    1309 00101$:
-   0A48 22                 1310 	ret
-                           1311 ;------------------------------------------------------------
-                           1312 ;Allocation info for local variables in function 'write_bytes_msb'
-                           1313 ;------------------------------------------------------------
-                           1314 ;len                       Allocated with name '_write_bytes_msb_PARM_2'
-                           1315 ;buf                       Allocated to registers r2 r3 
-                           1316 ;------------------------------------------------------------
-                           1317 ;Initial/src/lib/spi.c:267: write_bytes_msb (const xdata unsigned char *buf, unsigned char len)
-                           1318 ;	-----------------------------------------
-                           1319 ;	 function write_bytes_msb
-                           1320 ;	-----------------------------------------
-   0A49                    1321 _write_bytes_msb:
-                           1322 ;     genReceive
-   0A49 AA 82              1323 	mov	r2,dpl
-   0A4B AB 83              1324 	mov	r3,dph
-                           1325 ;Initial/src/lib/spi.c:269: while (len-- != 0){
-                           1326 ;     genAssign
-                           1327 ;     genAssign
-   0A4D AC 1C              1328 	mov	r4,_write_bytes_msb_PARM_2
-   0A4F                    1329 00101$:
-                           1330 ;     genAssign
-   0A4F 8C 05              1331 	mov	ar5,r4
-                           1332 ;     genMinus
-                           1333 ;     genMinusDec
-   0A51 1C                 1334 	dec	r4
-                           1335 ;     genCmpEq
-   0A52 BD 00 01           1336 	cjne	r5,#0x00,00108$
-                           1337 ;	Peephole 112.b	changed ljmp to sjmp
-                           1338 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0A55 22                 1339 	ret
-   0A56                    1340 00108$:
-                           1341 ;Initial/src/lib/spi.c:270: write_byte_msb (*buf++);
-                           1342 ;     genPointerGet
-                           1343 ;     genFarPointerGet
-   0A56 8A 82              1344 	mov	dpl,r2
-   0A58 8B 83              1345 	mov	dph,r3
-   0A5A E0                 1346 	movx	a,@dptr
-   0A5B FD                 1347 	mov	r5,a
-   0A5C A3                 1348 	inc	dptr
-   0A5D AA 82              1349 	mov	r2,dpl
-   0A5F AB 83              1350 	mov	r3,dph
-                           1351 ;     genCall
-   0A61 8D 82              1352 	mov	dpl,r5
-   0A63 C0 02              1353 	push	ar2
-   0A65 C0 03              1354 	push	ar3
-   0A67 C0 04              1355 	push	ar4
-   0A69 12 09 F6           1356 	lcall	_write_byte_msb
-   0A6C D0 04              1357 	pop	ar4
-   0A6E D0 03              1358 	pop	ar3
-   0A70 D0 02              1359 	pop	ar2
-                           1360 ;	Peephole 112.b	changed ljmp to sjmp
-   0A72 80 DB              1361 	sjmp	00101$
-   0A74                    1362 00104$:
-   0A74 22                 1363 	ret
-                           1364 ;------------------------------------------------------------
-                           1365 ;Allocation info for local variables in function 'read_byte_msb'
-                           1366 ;------------------------------------------------------------
-                           1367 ;------------------------------------------------------------
-                           1368 ;Initial/src/lib/spi.c:326: read_byte_msb (void) _naked
-                           1369 ;	-----------------------------------------
-                           1370 ;	 function read_byte_msb
-                           1371 ;	-----------------------------------------
-   0A75                    1372 _read_byte_msb:
-                           1373 ;	naked function: no prologue.
-                           1374 ;Initial/src/lib/spi.c:373: _endasm;
-                           1375 ;     genInline
-   0A75 E4                 1376 	        clr a
-   0A76 D2 80              1377 	        setb _bitS_CLK
-   0A78 A2 83              1378 	        mov c, _bitS_IN
-   0A7A 33                 1379 	        rlc a
-   0A7B C2 80              1380 	        clr _bitS_CLK
-   0A7D D2 80              1381 	        setb _bitS_CLK
-   0A7F A2 83              1382 	        mov c, _bitS_IN
-   0A81 33                 1383 	        rlc a
-   0A82 C2 80              1384 	        clr _bitS_CLK
-   0A84 D2 80              1385 	        setb _bitS_CLK
-   0A86 A2 83              1386 	        mov c, _bitS_IN
-   0A88 33                 1387 	        rlc a
-   0A89 C2 80              1388 	        clr _bitS_CLK
-   0A8B D2 80              1389 	        setb _bitS_CLK
-   0A8D A2 83              1390 	        mov c, _bitS_IN
-   0A8F 33                 1391 	        rlc a
-   0A90 C2 80              1392 	        clr _bitS_CLK
-   0A92 D2 80              1393 	        setb _bitS_CLK
-   0A94 A2 83              1394 	        mov c, _bitS_IN
-   0A96 33                 1395 	        rlc a
-   0A97 C2 80              1396 	        clr _bitS_CLK
-   0A99 D2 80              1397 	        setb _bitS_CLK
-   0A9B A2 83              1398 	        mov c, _bitS_IN
-   0A9D 33                 1399 	        rlc a
-   0A9E C2 80              1400 	        clr _bitS_CLK
-   0AA0 D2 80              1401 	        setb _bitS_CLK
-   0AA2 A2 83              1402 	        mov c, _bitS_IN
-   0AA4 33                 1403 	        rlc a
-   0AA5 C2 80              1404 	        clr _bitS_CLK
-   0AA7 D2 80              1405 	        setb _bitS_CLK
-   0AA9 A2 83              1406 	        mov c, _bitS_IN
-   0AAB 33                 1407 	        rlc a
-   0AAC C2 80              1408 	        clr _bitS_CLK
-   0AAE F5 82              1409 	        mov dpl,a
-   0AB0 22                 1410 	        ret
-   0AB1                    1411 00101$:
-                           1412 ;	naked function: no epilogue.
-                           1413 ;------------------------------------------------------------
-                           1414 ;Allocation info for local variables in function 'read_bytes_msb'
-                           1415 ;------------------------------------------------------------
-                           1416 ;len                       Allocated with name '_read_bytes_msb_PARM_2'
-                           1417 ;buf                       Allocated to registers r2 r3 
-                           1418 ;------------------------------------------------------------
-                           1419 ;Initial/src/lib/spi.c:378: read_bytes_msb (xdata unsigned char *buf, unsigned char len)
-                           1420 ;	-----------------------------------------
-                           1421 ;	 function read_bytes_msb
-                           1422 ;	-----------------------------------------
-   0AB1                    1423 _read_bytes_msb:
-                           1424 ;     genReceive
-   0AB1 AA 82              1425 	mov	r2,dpl
-   0AB3 AB 83              1426 	mov	r3,dph
-                           1427 ;Initial/src/lib/spi.c:380: while (len-- != 0){
-                           1428 ;     genAssign
-                           1429 ;     genAssign
-   0AB5 AC 1D              1430 	mov	r4,_read_bytes_msb_PARM_2
-   0AB7                    1431 00101$:
-                           1432 ;     genAssign
-   0AB7 8C 05              1433 	mov	ar5,r4
-                           1434 ;     genMinus
-                           1435 ;     genMinusDec
-   0AB9 1C                 1436 	dec	r4
-                           1437 ;     genCmpEq
-   0ABA BD 00 01           1438 	cjne	r5,#0x00,00108$
-                           1439 ;	Peephole 112.b	changed ljmp to sjmp
-                           1440 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0ABD 22                 1441 	ret
-   0ABE                    1442 00108$:
-                           1443 ;Initial/src/lib/spi.c:381: *buf++ = read_byte_msb ();
-                           1444 ;     genCall
-   0ABE 12 0A 75           1445 	lcall	_read_byte_msb
-   0AC1 AD 82              1446 	mov	r5,dpl
-                           1447 ;     genPointerSet
-                           1448 ;     genFarPointerSet
-   0AC3 8A 82              1449 	mov	dpl,r2
-   0AC5 8B 83              1450 	mov	dph,r3
-   0AC7 ED                 1451 	mov	a,r5
-   0AC8 F0                 1452 	movx	@dptr,a
-   0AC9 A3                 1453 	inc	dptr
-   0ACA AA 82              1454 	mov	r2,dpl
-   0ACC AB 83              1455 	mov	r3,dph
-                           1456 ;	Peephole 112.b	changed ljmp to sjmp
-   0ACE 80 E7              1457 	sjmp	00101$
-   0AD0                    1458 00104$:
-   0AD0 22                 1459 	ret
-                           1460 	.area CSEG    (CODE)
+   0AEB C2 80              1276 	clr	_bitS_CLK
+   0AED                    1277 00101$:
+   0AED 22                 1278 	ret
+                           1279 ;------------------------------------------------------------
+                           1280 ;Allocation info for local variables in function 'write_bytes_msb'
+                           1281 ;------------------------------------------------------------
+                           1282 ;len                       Allocated with name '_write_bytes_msb_PARM_2'
+                           1283 ;buf                       Allocated to registers r2 r3 
+                           1284 ;------------------------------------------------------------
+                           1285 ;Initial/src/lib/spi.c:267: write_bytes_msb (const xdata unsigned char *buf, unsigned char len)
+                           1286 ;	-----------------------------------------
+                           1287 ;	 function write_bytes_msb
+                           1288 ;	-----------------------------------------
+   0AEE                    1289 _write_bytes_msb:
+                           1290 ;     genReceive
+   0AEE AA 82              1291 	mov	r2,dpl
+   0AF0 AB 83              1292 	mov	r3,dph
+                           1293 ;Initial/src/lib/spi.c:269: while (len-- != 0){
+                           1294 ;     genAssign
+                           1295 ;     genAssign
+   0AF2 AC 1C              1296 	mov	r4,_write_bytes_msb_PARM_2
+   0AF4                    1297 00101$:
+                           1298 ;     genAssign
+   0AF4 8C 05              1299 	mov	ar5,r4
+                           1300 ;     genMinus
+                           1301 ;     genMinusDec
+   0AF6 1C                 1302 	dec	r4
+                           1303 ;     genCmpEq
+   0AF7 BD 00 01           1304 	cjne	r5,#0x00,00108$
+                           1305 ;	Peephole 112.b	changed ljmp to sjmp
+                           1306 ;	Peephole 251.b	replaced sjmp to ret with ret
+   0AFA 22                 1307 	ret
+   0AFB                    1308 00108$:
+                           1309 ;Initial/src/lib/spi.c:270: write_byte_msb (*buf++);
+                           1310 ;     genPointerGet
+                           1311 ;     genFarPointerGet
+   0AFB 8A 82              1312 	mov	dpl,r2
+   0AFD 8B 83              1313 	mov	dph,r3
+   0AFF E0                 1314 	movx	a,@dptr
+   0B00 FD                 1315 	mov	r5,a
+   0B01 A3                 1316 	inc	dptr
+   0B02 AA 82              1317 	mov	r2,dpl
+   0B04 AB 83              1318 	mov	r3,dph
+                           1319 ;     genCall
+   0B06 8D 82              1320 	mov	dpl,r5
+   0B08 C0 02              1321 	push	ar2
+   0B0A C0 03              1322 	push	ar3
+   0B0C C0 04              1323 	push	ar4
+   0B0E 12 0A 9B           1324 	lcall	_write_byte_msb
+   0B11 D0 04              1325 	pop	ar4
+   0B13 D0 03              1326 	pop	ar3
+   0B15 D0 02              1327 	pop	ar2
+                           1328 ;	Peephole 112.b	changed ljmp to sjmp
+   0B17 80 DB              1329 	sjmp	00101$
+   0B19                    1330 00104$:
+   0B19 22                 1331 	ret
+                           1332 ;------------------------------------------------------------
+                           1333 ;Allocation info for local variables in function 'read_byte_msb'
+                           1334 ;------------------------------------------------------------
+                           1335 ;------------------------------------------------------------
+                           1336 ;Initial/src/lib/spi.c:326: read_byte_msb (void) _naked
+                           1337 ;	-----------------------------------------
+                           1338 ;	 function read_byte_msb
+                           1339 ;	-----------------------------------------
+   0B1A                    1340 _read_byte_msb:
+                           1341 ;	naked function: no prologue.
+                           1342 ;Initial/src/lib/spi.c:373: _endasm;
+                           1343 ;     genInline
+   0B1A E4                 1344 	        clr a
+   0B1B D2 80              1345 	        setb _bitS_CLK
+   0B1D A2 83              1346 	        mov c, _bitS_IN
+   0B1F 33                 1347 	        rlc a
+   0B20 C2 80              1348 	        clr _bitS_CLK
+   0B22 D2 80              1349 	        setb _bitS_CLK
+   0B24 A2 83              1350 	        mov c, _bitS_IN
+   0B26 33                 1351 	        rlc a
+   0B27 C2 80              1352 	        clr _bitS_CLK
+   0B29 D2 80              1353 	        setb _bitS_CLK
+   0B2B A2 83              1354 	        mov c, _bitS_IN
+   0B2D 33                 1355 	        rlc a
+   0B2E C2 80              1356 	        clr _bitS_CLK
+   0B30 D2 80              1357 	        setb _bitS_CLK
+   0B32 A2 83              1358 	        mov c, _bitS_IN
+   0B34 33                 1359 	        rlc a
+   0B35 C2 80              1360 	        clr _bitS_CLK
+   0B37 D2 80              1361 	        setb _bitS_CLK
+   0B39 A2 83              1362 	        mov c, _bitS_IN
+   0B3B 33                 1363 	        rlc a
+   0B3C C2 80              1364 	        clr _bitS_CLK
+   0B3E D2 80              1365 	        setb _bitS_CLK
+   0B40 A2 83              1366 	        mov c, _bitS_IN
+   0B42 33                 1367 	        rlc a
+   0B43 C2 80              1368 	        clr _bitS_CLK
+   0B45 D2 80              1369 	        setb _bitS_CLK
+   0B47 A2 83              1370 	        mov c, _bitS_IN
+   0B49 33                 1371 	        rlc a
+   0B4A C2 80              1372 	        clr _bitS_CLK
+   0B4C D2 80              1373 	        setb _bitS_CLK
+   0B4E A2 83              1374 	        mov c, _bitS_IN
+   0B50 33                 1375 	        rlc a
+   0B51 C2 80              1376 	        clr _bitS_CLK
+   0B53 F5 82              1377 	        mov dpl,a
+   0B55 22                 1378 	        ret
+   0B56                    1379 00101$:
+                           1380 ;	naked function: no epilogue.
+                           1381 ;------------------------------------------------------------
+                           1382 ;Allocation info for local variables in function 'read_bytes_msb'
+                           1383 ;------------------------------------------------------------
+                           1384 ;len                       Allocated with name '_read_bytes_msb_PARM_2'
+                           1385 ;buf                       Allocated to registers r2 r3 
+                           1386 ;------------------------------------------------------------
+                           1387 ;Initial/src/lib/spi.c:378: read_bytes_msb (xdata unsigned char *buf, unsigned char len)
+                           1388 ;	-----------------------------------------
+                           1389 ;	 function read_bytes_msb
+                           1390 ;	-----------------------------------------
+   0B56                    1391 _read_bytes_msb:
+                           1392 ;     genReceive
+   0B56 AA 82              1393 	mov	r2,dpl
+   0B58 AB 83              1394 	mov	r3,dph
+                           1395 ;Initial/src/lib/spi.c:380: while (len-- != 0){
+                           1396 ;     genAssign
+                           1397 ;     genAssign
+   0B5A AC 1D              1398 	mov	r4,_read_bytes_msb_PARM_2
+   0B5C                    1399 00101$:
+                           1400 ;     genAssign
+   0B5C 8C 05              1401 	mov	ar5,r4
+                           1402 ;     genMinus
+                           1403 ;     genMinusDec
+   0B5E 1C                 1404 	dec	r4
+                           1405 ;     genCmpEq
+   0B5F BD 00 01           1406 	cjne	r5,#0x00,00108$
+                           1407 ;	Peephole 112.b	changed ljmp to sjmp
+                           1408 ;	Peephole 251.b	replaced sjmp to ret with ret
+   0B62 22                 1409 	ret
+   0B63                    1410 00108$:
+                           1411 ;Initial/src/lib/spi.c:381: *buf++ = read_byte_msb ();
+                           1412 ;     genCall
+   0B63 12 0B 1A           1413 	lcall	_read_byte_msb
+   0B66 AD 82              1414 	mov	r5,dpl
+                           1415 ;     genPointerSet
+                           1416 ;     genFarPointerSet
+   0B68 8A 82              1417 	mov	dpl,r2
+   0B6A 8B 83              1418 	mov	dph,r3
+   0B6C ED                 1419 	mov	a,r5
+   0B6D F0                 1420 	movx	@dptr,a
+   0B6E A3                 1421 	inc	dptr
+   0B6F AA 82              1422 	mov	r2,dpl
+   0B71 AB 83              1423 	mov	r3,dph
+                           1424 ;	Peephole 112.b	changed ljmp to sjmp
+   0B73 80 E7              1425 	sjmp	00101$
+   0B75                    1426 00104$:
+   0B75 22                 1427 	ret
+                           1428 	.area CSEG    (CODE)

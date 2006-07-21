@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Wed Jul 19 12:32:15 2006
+                              4 ; This file generated Fri Jul 21 16:22:53 2006
                               5 ;--------------------------------------------------------
                               6 	.module isr
                               7 	.optsdcc -mmcs51 --model-small
@@ -715,7 +715,7 @@
                             715 ;	-----------------------------------------
                             716 ;	 function hook_sv
                             717 ;	-----------------------------------------
-   0715                     718 _hook_sv:
+   07D5                     718 _hook_sv:
                     0002    719 	ar2 = 0x02
                     0003    720 	ar3 = 0x03
                     0004    721 	ar4 = 0x04
@@ -725,146 +725,146 @@
                     0000    725 	ar0 = 0x00
                     0001    726 	ar1 = 0x01
                             727 ;     genReceive
-   0715 AA 82               728 	mov	r2,dpl
+   07D5 AA 82               728 	mov	r2,dpl
                             729 ;Initial/src/lib/isr.c:49: if (vector_number < SV_MIN || vector_number > SV_MAX)
                             730 ;     genCmpLt
                             731 ;     genCmp
-   0717 BA 03 00            732 	cjne	r2,#0x03,00112$
-   071A                     733 00112$:
+   07D7 BA 03 00            732 	cjne	r2,#0x03,00112$
+   07DA                     733 00112$:
                             734 ;     genIfxJump
                             735 ;	Peephole 112.b	changed ljmp to sjmp
                             736 ;	Peephole 160	removed sjmp by inverse jump logic
-   071A 40 05               737 	jc	00101$
-   071C                     738 00113$:
+   07DA 40 05               737 	jc	00101$
+   07DC                     738 00113$:
                             739 ;     genCmpGt
                             740 ;     genCmp
                             741 ;     genIfxJump
                             742 ;	Peephole 108	removed ljmp by inverse jump logic
                             743 ;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
-   071C EA                  744 	mov	a,r2
-   071D 24 9C               745 	add	a,#0xff - 0x63
-   071F 50 01               746 	jnc	00102$
-   0721                     747 00114$:
-   0721                     748 00101$:
+   07DC EA                  744 	mov	a,r2
+   07DD 24 9C               745 	add	a,#0xff - 0x63
+   07DF 50 01               746 	jnc	00102$
+   07E1                     747 00114$:
+   07E1                     748 00101$:
                             749 ;Initial/src/lib/isr.c:50: return;
                             750 ;     genRet
                             751 ;	Peephole 112.b	changed ljmp to sjmp
                             752 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0721 22                  753 	ret
-   0722                     754 00102$:
+   07E1 22                  753 	ret
+   07E2                     754 00102$:
                             755 ;Initial/src/lib/isr.c:52: if ((vector_number & 0x0f) != 0x03 && (vector_number & 0x0f) != 0x0b)
                             756 ;     genAnd
-   0722 74 0F               757 	mov	a,#0x0F
-   0724 5A                  758 	anl	a,r2
-   0725 FB                  759 	mov	r3,a
+   07E2 74 0F               757 	mov	a,#0x0F
+   07E4 5A                  758 	anl	a,r2
+   07E5 FB                  759 	mov	r3,a
                             760 ;     genCmpEq
-   0726 BB 03 02            761 	cjne	r3,#0x03,00115$
+   07E6 BB 03 02            761 	cjne	r3,#0x03,00115$
                             762 ;	Peephole 112.b	changed ljmp to sjmp
-   0729 80 07               763 	sjmp	00105$
-   072B                     764 00115$:
+   07E9 80 07               763 	sjmp	00105$
+   07EB                     764 00115$:
                             765 ;     genAnd
-   072B 74 0F               766 	mov	a,#0x0F
-   072D 5A                  767 	anl	a,r2
-   072E FB                  768 	mov	r3,a
+   07EB 74 0F               766 	mov	a,#0x0F
+   07ED 5A                  767 	anl	a,r2
+   07EE FB                  768 	mov	r3,a
                             769 ;     genCmpEq
                             770 ;	Peephole 112.b	changed ljmp to sjmp
                             771 ;Initial/src/lib/isr.c:53: return;
                             772 ;     genRet
                             773 ;	Peephole 112.b	changed ljmp to sjmp
                             774 ;	Peephole 199	optimized misc jump sequence
-   072F BB 0B 47            775 	cjne	r3,#0x0B,00107$
+   07EF BB 0B 47            775 	cjne	r3,#0x0B,00107$
                             776 ;00116$:
                             777 ;	Peephole 200	removed redundant sjmp
-   0732                     778 00105$:
+   07F2                     778 00105$:
                             779 ;Initial/src/lib/isr.c:55: t = EA;
                             780 ;     genAssign
-   0732 A2 AF               781 	mov	c,_EA
-   0734 92 00               782 	mov	_hook_sv_t_1_1,c
+   07F2 A2 AF               781 	mov	c,_EA
+   07F4 92 00               782 	mov	_hook_sv_t_1_1,c
                             783 ;Initial/src/lib/isr.c:56: EA = 0;
                             784 ;     genAssign
-   0736 C2 AF               785 	clr	_EA
+   07F6 C2 AF               785 	clr	_EA
                             786 ;Initial/src/lib/isr.c:57: _standard_interrupt_vector[vector_number] = LJMP_OPCODE;
                             787 ;     genPlus
                             788 ;	Peephole 236.g	used r2 instead of ar2
-   0738 EA                  789 	mov	a,r2
-   0739 24 00               790 	add	a,#__standard_interrupt_vector
-   073B F5 82               791 	mov	dpl,a
+   07F8 EA                  789 	mov	a,r2
+   07F9 24 00               790 	add	a,#__standard_interrupt_vector
+   07FB F5 82               791 	mov	dpl,a
                             792 ;	Peephole 181	changed mov to clr
-   073D E4                  793 	clr	a
-   073E 34 00               794 	addc	a,#(__standard_interrupt_vector >> 8)
-   0740 F5 83               795 	mov	dph,a
+   07FD E4                  793 	clr	a
+   07FE 34 00               794 	addc	a,#(__standard_interrupt_vector >> 8)
+   0800 F5 83               795 	mov	dph,a
                             796 ;     genPointerSet
                             797 ;     genFarPointerSet
-   0742 74 02               798 	mov	a,#0x02
-   0744 F0                  799 	movx	@dptr,a
+   0802 74 02               798 	mov	a,#0x02
+   0804 F0                  799 	movx	@dptr,a
                             800 ;Initial/src/lib/isr.c:58: _standard_interrupt_vector[vector_number + 1] = addr >> 8;
                             801 ;     genCast
-   0745 7B 00               802 	mov	r3,#0x00
+   0805 7B 00               802 	mov	r3,#0x00
                             803 ;     genPlus
                             804 ;     genPlusIncr
-   0747 74 01               805 	mov	a,#0x01
+   0807 74 01               805 	mov	a,#0x01
                             806 ;	Peephole 236.a	used r2 instead of ar2
-   0749 2A                  807 	add	a,r2
-   074A FC                  808 	mov	r4,a
+   0809 2A                  807 	add	a,r2
+   080A FC                  808 	mov	r4,a
                             809 ;	Peephole 181	changed mov to clr
-   074B E4                  810 	clr	a
+   080B E4                  810 	clr	a
                             811 ;	Peephole 236.b	used r3 instead of ar3
-   074C 3B                  812 	addc	a,r3
-   074D FD                  813 	mov	r5,a
+   080C 3B                  812 	addc	a,r3
+   080D FD                  813 	mov	r5,a
                             814 ;     genPlus
                             815 ;	Peephole 236.g	used r4 instead of ar4
-   074E EC                  816 	mov	a,r4
-   074F 24 00               817 	add	a,#__standard_interrupt_vector
-   0751 F5 82               818 	mov	dpl,a
+   080E EC                  816 	mov	a,r4
+   080F 24 00               817 	add	a,#__standard_interrupt_vector
+   0811 F5 82               818 	mov	dpl,a
                             819 ;	Peephole 236.g	used r5 instead of ar5
-   0753 ED                  820 	mov	a,r5
-   0754 34 00               821 	addc	a,#(__standard_interrupt_vector >> 8)
-   0756 F5 83               822 	mov	dph,a
+   0813 ED                  820 	mov	a,r5
+   0814 34 00               821 	addc	a,#(__standard_interrupt_vector >> 8)
+   0816 F5 83               822 	mov	dph,a
                             823 ;     genRightShift
                             824 ;     genRightShiftLiteral
                             825 ;     genrshTwo
-   0758 AC 2C               826 	mov	r4,(_hook_sv_PARM_2 + 1)
-   075A 7D 00               827 	mov	r5,#0x00
+   0818 AC 2C               826 	mov	r4,(_hook_sv_PARM_2 + 1)
+   081A 7D 00               827 	mov	r5,#0x00
                             828 ;     genCast
                             829 ;     genPointerSet
                             830 ;     genFarPointerSet
-   075C EC                  831 	mov	a,r4
-   075D F0                  832 	movx	@dptr,a
+   081C EC                  831 	mov	a,r4
+   081D F0                  832 	movx	@dptr,a
                             833 ;Initial/src/lib/isr.c:59: _standard_interrupt_vector[vector_number + 2] = addr & 0xff;
                             834 ;     genPlus
                             835 ;     genPlusIncr
-   075E 74 02               836 	mov	a,#0x02
+   081E 74 02               836 	mov	a,#0x02
                             837 ;	Peephole 236.a	used r2 instead of ar2
-   0760 2A                  838 	add	a,r2
-   0761 FA                  839 	mov	r2,a
+   0820 2A                  838 	add	a,r2
+   0821 FA                  839 	mov	r2,a
                             840 ;	Peephole 181	changed mov to clr
-   0762 E4                  841 	clr	a
+   0822 E4                  841 	clr	a
                             842 ;	Peephole 236.b	used r3 instead of ar3
-   0763 3B                  843 	addc	a,r3
-   0764 FB                  844 	mov	r3,a
+   0823 3B                  843 	addc	a,r3
+   0824 FB                  844 	mov	r3,a
                             845 ;     genPlus
                             846 ;	Peephole 236.g	used r2 instead of ar2
-   0765 EA                  847 	mov	a,r2
-   0766 24 00               848 	add	a,#__standard_interrupt_vector
-   0768 F5 82               849 	mov	dpl,a
+   0825 EA                  847 	mov	a,r2
+   0826 24 00               848 	add	a,#__standard_interrupt_vector
+   0828 F5 82               849 	mov	dpl,a
                             850 ;	Peephole 236.g	used r3 instead of ar3
-   076A EB                  851 	mov	a,r3
-   076B 34 00               852 	addc	a,#(__standard_interrupt_vector >> 8)
-   076D F5 83               853 	mov	dph,a
+   082A EB                  851 	mov	a,r3
+   082B 34 00               852 	addc	a,#(__standard_interrupt_vector >> 8)
+   082D F5 83               853 	mov	dph,a
                             854 ;     genAnd
-   076F AA 2B               855 	mov	r2,_hook_sv_PARM_2
-   0771 7B 00               856 	mov	r3,#0x00
+   082F AA 2B               855 	mov	r2,_hook_sv_PARM_2
+   0831 7B 00               856 	mov	r3,#0x00
                             857 ;     genCast
                             858 ;     genPointerSet
                             859 ;     genFarPointerSet
-   0773 EA                  860 	mov	a,r2
-   0774 F0                  861 	movx	@dptr,a
+   0833 EA                  860 	mov	a,r2
+   0834 F0                  861 	movx	@dptr,a
                             862 ;Initial/src/lib/isr.c:60: EA = t;
                             863 ;     genAssign
-   0775 A2 00               864 	mov	c,_hook_sv_t_1_1
-   0777 92 AF               865 	mov	_EA,c
-   0779                     866 00107$:
-   0779 22                  867 	ret
+   0835 A2 00               864 	mov	c,_hook_sv_t_1_1
+   0837 92 AF               865 	mov	_EA,c
+   0839                     866 00107$:
+   0839 22                  867 	ret
                             868 ;------------------------------------------------------------
                             869 ;Allocation info for local variables in function 'hook_uv'
                             870 ;------------------------------------------------------------
@@ -875,140 +875,140 @@
                             875 ;	-----------------------------------------
                             876 ;	 function hook_uv
                             877 ;	-----------------------------------------
-   077A                     878 _hook_uv:
+   083A                     878 _hook_uv:
                             879 ;     genReceive
-   077A AA 82               880 	mov	r2,dpl
+   083A AA 82               880 	mov	r2,dpl
                             881 ;Initial/src/lib/isr.c:76: if (vector_number < UV_MIN || vector_number > UV_MAX)
                             882 ;     genCmpLt
                             883 ;     genCmp
-   077C BA 00 00            884 	cjne	r2,#0x00,00110$
-   077F                     885 00110$:
+   083C BA 00 00            884 	cjne	r2,#0x00,00110$
+   083F                     885 00110$:
                             886 ;     genIfxJump
                             887 ;	Peephole 112.b	changed ljmp to sjmp
                             888 ;	Peephole 160	removed sjmp by inverse jump logic
-   077F 40 05               889 	jc	00101$
-   0781                     890 00111$:
+   083F 40 05               889 	jc	00101$
+   0841                     890 00111$:
                             891 ;     genCmpGt
                             892 ;     genCmp
                             893 ;     genIfxJump
                             894 ;	Peephole 108	removed ljmp by inverse jump logic
                             895 ;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
-   0781 EA                  896 	mov	a,r2
-   0782 24 83               897 	add	a,#0xff - 0x7C
-   0784 50 01               898 	jnc	00102$
-   0786                     899 00112$:
-   0786                     900 00101$:
+   0841 EA                  896 	mov	a,r2
+   0842 24 83               897 	add	a,#0xff - 0x7C
+   0844 50 01               898 	jnc	00102$
+   0846                     899 00112$:
+   0846                     900 00101$:
                             901 ;Initial/src/lib/isr.c:77: return;
                             902 ;     genRet
                             903 ;	Peephole 112.b	changed ljmp to sjmp
                             904 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0786 22                  905 	ret
-   0787                     906 00102$:
+   0846 22                  905 	ret
+   0847                     906 00102$:
                             907 ;Initial/src/lib/isr.c:79: if ((vector_number & 0x3) != 0)
                             908 ;     genAnd
-   0787 74 03               909 	mov	a,#0x03
-   0789 5A                  910 	anl	a,r2
+   0847 74 03               909 	mov	a,#0x03
+   0849 5A                  910 	anl	a,r2
                             911 ;     genCmpEq
                             912 ;	Peephole 112.b	changed ljmp to sjmp
                             913 ;	Peephole 115.b	jump optimization
-   078A FB                  914 	mov	r3,a
-   078B 60 01               915 	jz	00105$
-   078D                     916 00113$:
+   084A FB                  914 	mov	r3,a
+   084B 60 01               915 	jz	00105$
+   084D                     916 00113$:
                             917 ;Initial/src/lib/isr.c:80: return;
                             918 ;     genRet
                             919 ;	Peephole 112.b	changed ljmp to sjmp
                             920 ;	Peephole 251.b	replaced sjmp to ret with ret
-   078D 22                  921 	ret
-   078E                     922 00105$:
+   084D 22                  921 	ret
+   084E                     922 00105$:
                             923 ;Initial/src/lib/isr.c:82: t = EA;
                             924 ;     genAssign
-   078E A2 AF               925 	mov	c,_EA
-   0790 92 01               926 	mov	_hook_uv_t_1_1,c
+   084E A2 AF               925 	mov	c,_EA
+   0850 92 01               926 	mov	_hook_uv_t_1_1,c
                             927 ;Initial/src/lib/isr.c:83: EA = 0;
                             928 ;     genAssign
-   0792 C2 AF               929 	clr	_EA
+   0852 C2 AF               929 	clr	_EA
                             930 ;Initial/src/lib/isr.c:84: _usb_autovector[vector_number] = LJMP_OPCODE;
                             931 ;     genPlus
                             932 ;	Peephole 236.g	used r2 instead of ar2
-   0794 EA                  933 	mov	a,r2
-   0795 24 00               934 	add	a,#__usb_autovector
-   0797 F5 82               935 	mov	dpl,a
+   0854 EA                  933 	mov	a,r2
+   0855 24 00               934 	add	a,#__usb_autovector
+   0857 F5 82               935 	mov	dpl,a
                             936 ;	Peephole 181	changed mov to clr
-   0799 E4                  937 	clr	a
-   079A 34 01               938 	addc	a,#(__usb_autovector >> 8)
-   079C F5 83               939 	mov	dph,a
+   0859 E4                  937 	clr	a
+   085A 34 01               938 	addc	a,#(__usb_autovector >> 8)
+   085C F5 83               939 	mov	dph,a
                             940 ;     genPointerSet
                             941 ;     genFarPointerSet
-   079E 74 02               942 	mov	a,#0x02
-   07A0 F0                  943 	movx	@dptr,a
+   085E 74 02               942 	mov	a,#0x02
+   0860 F0                  943 	movx	@dptr,a
                             944 ;Initial/src/lib/isr.c:85: _usb_autovector[vector_number + 1] = addr >> 8;
                             945 ;     genCast
-   07A1 7B 00               946 	mov	r3,#0x00
+   0861 7B 00               946 	mov	r3,#0x00
                             947 ;     genPlus
                             948 ;     genPlusIncr
-   07A3 74 01               949 	mov	a,#0x01
+   0863 74 01               949 	mov	a,#0x01
                             950 ;	Peephole 236.a	used r2 instead of ar2
-   07A5 2A                  951 	add	a,r2
-   07A6 FC                  952 	mov	r4,a
+   0865 2A                  951 	add	a,r2
+   0866 FC                  952 	mov	r4,a
                             953 ;	Peephole 181	changed mov to clr
-   07A7 E4                  954 	clr	a
+   0867 E4                  954 	clr	a
                             955 ;	Peephole 236.b	used r3 instead of ar3
-   07A8 3B                  956 	addc	a,r3
-   07A9 FD                  957 	mov	r5,a
+   0868 3B                  956 	addc	a,r3
+   0869 FD                  957 	mov	r5,a
                             958 ;     genPlus
                             959 ;	Peephole 236.g	used r4 instead of ar4
-   07AA EC                  960 	mov	a,r4
-   07AB 24 00               961 	add	a,#__usb_autovector
-   07AD F5 82               962 	mov	dpl,a
+   086A EC                  960 	mov	a,r4
+   086B 24 00               961 	add	a,#__usb_autovector
+   086D F5 82               962 	mov	dpl,a
                             963 ;	Peephole 236.g	used r5 instead of ar5
-   07AF ED                  964 	mov	a,r5
-   07B0 34 01               965 	addc	a,#(__usb_autovector >> 8)
-   07B2 F5 83               966 	mov	dph,a
+   086F ED                  964 	mov	a,r5
+   0870 34 01               965 	addc	a,#(__usb_autovector >> 8)
+   0872 F5 83               966 	mov	dph,a
                             967 ;     genRightShift
                             968 ;     genRightShiftLiteral
                             969 ;     genrshTwo
-   07B4 AC 2C               970 	mov	r4,(_hook_uv_PARM_2 + 1)
-   07B6 7D 00               971 	mov	r5,#0x00
+   0874 AC 2C               970 	mov	r4,(_hook_uv_PARM_2 + 1)
+   0876 7D 00               971 	mov	r5,#0x00
                             972 ;     genCast
                             973 ;     genPointerSet
                             974 ;     genFarPointerSet
-   07B8 EC                  975 	mov	a,r4
-   07B9 F0                  976 	movx	@dptr,a
+   0878 EC                  975 	mov	a,r4
+   0879 F0                  976 	movx	@dptr,a
                             977 ;Initial/src/lib/isr.c:86: _usb_autovector[vector_number + 2] = addr & 0xff;
                             978 ;     genPlus
                             979 ;     genPlusIncr
-   07BA 74 02               980 	mov	a,#0x02
+   087A 74 02               980 	mov	a,#0x02
                             981 ;	Peephole 236.a	used r2 instead of ar2
-   07BC 2A                  982 	add	a,r2
-   07BD FA                  983 	mov	r2,a
+   087C 2A                  982 	add	a,r2
+   087D FA                  983 	mov	r2,a
                             984 ;	Peephole 181	changed mov to clr
-   07BE E4                  985 	clr	a
+   087E E4                  985 	clr	a
                             986 ;	Peephole 236.b	used r3 instead of ar3
-   07BF 3B                  987 	addc	a,r3
-   07C0 FB                  988 	mov	r3,a
+   087F 3B                  987 	addc	a,r3
+   0880 FB                  988 	mov	r3,a
                             989 ;     genPlus
                             990 ;	Peephole 236.g	used r2 instead of ar2
-   07C1 EA                  991 	mov	a,r2
-   07C2 24 00               992 	add	a,#__usb_autovector
-   07C4 F5 82               993 	mov	dpl,a
+   0881 EA                  991 	mov	a,r2
+   0882 24 00               992 	add	a,#__usb_autovector
+   0884 F5 82               993 	mov	dpl,a
                             994 ;	Peephole 236.g	used r3 instead of ar3
-   07C6 EB                  995 	mov	a,r3
-   07C7 34 01               996 	addc	a,#(__usb_autovector >> 8)
-   07C9 F5 83               997 	mov	dph,a
+   0886 EB                  995 	mov	a,r3
+   0887 34 01               996 	addc	a,#(__usb_autovector >> 8)
+   0889 F5 83               997 	mov	dph,a
                             998 ;     genAnd
-   07CB AA 2B               999 	mov	r2,_hook_uv_PARM_2
-   07CD 7B 00              1000 	mov	r3,#0x00
+   088B AA 2B               999 	mov	r2,_hook_uv_PARM_2
+   088D 7B 00              1000 	mov	r3,#0x00
                            1001 ;     genCast
                            1002 ;     genPointerSet
                            1003 ;     genFarPointerSet
-   07CF EA                 1004 	mov	a,r2
-   07D0 F0                 1005 	movx	@dptr,a
+   088F EA                 1004 	mov	a,r2
+   0890 F0                 1005 	movx	@dptr,a
                            1006 ;Initial/src/lib/isr.c:87: EA = t;
                            1007 ;     genAssign
-   07D1 A2 01              1008 	mov	c,_hook_uv_t_1_1
-   07D3 92 AF              1009 	mov	_EA,c
-   07D5                    1010 00106$:
-   07D5 22                 1011 	ret
+   0891 A2 01              1008 	mov	c,_hook_uv_t_1_1
+   0893 92 AF              1009 	mov	_EA,c
+   0895                    1010 00106$:
+   0895 22                 1011 	ret
                            1012 ;------------------------------------------------------------
                            1013 ;Allocation info for local variables in function 'hook_fgv'
                            1014 ;------------------------------------------------------------
@@ -1019,140 +1019,140 @@
                            1019 ;	-----------------------------------------
                            1020 ;	 function hook_fgv
                            1021 ;	-----------------------------------------
-   07D6                    1022 _hook_fgv:
+   0896                    1022 _hook_fgv:
                            1023 ;     genReceive
-   07D6 AA 82              1024 	mov	r2,dpl
+   0896 AA 82              1024 	mov	r2,dpl
                            1025 ;Initial/src/lib/isr.c:103: if (vector_number < FGV_MIN || vector_number > FGV_MAX)
                            1026 ;     genCmpLt
                            1027 ;     genCmp
-   07D8 BA 80 00           1028 	cjne	r2,#0x80,00110$
-   07DB                    1029 00110$:
+   0898 BA 80 00           1028 	cjne	r2,#0x80,00110$
+   089B                    1029 00110$:
                            1030 ;     genIfxJump
                            1031 ;	Peephole 112.b	changed ljmp to sjmp
                            1032 ;	Peephole 160	removed sjmp by inverse jump logic
-   07DB 40 05              1033 	jc	00101$
-   07DD                    1034 00111$:
+   089B 40 05              1033 	jc	00101$
+   089D                    1034 00111$:
                            1035 ;     genCmpGt
                            1036 ;     genCmp
                            1037 ;     genIfxJump
                            1038 ;	Peephole 108	removed ljmp by inverse jump logic
                            1039 ;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
-   07DD EA                 1040 	mov	a,r2
-   07DE 24 4B              1041 	add	a,#0xff - 0xB4
-   07E0 50 01              1042 	jnc	00102$
-   07E2                    1043 00112$:
-   07E2                    1044 00101$:
+   089D EA                 1040 	mov	a,r2
+   089E 24 4B              1041 	add	a,#0xff - 0xB4
+   08A0 50 01              1042 	jnc	00102$
+   08A2                    1043 00112$:
+   08A2                    1044 00101$:
                            1045 ;Initial/src/lib/isr.c:104: return;
                            1046 ;     genRet
                            1047 ;	Peephole 112.b	changed ljmp to sjmp
                            1048 ;	Peephole 251.b	replaced sjmp to ret with ret
-   07E2 22                 1049 	ret
-   07E3                    1050 00102$:
+   08A2 22                 1049 	ret
+   08A3                    1050 00102$:
                            1051 ;Initial/src/lib/isr.c:106: if ((vector_number & 0x3) != 0)
                            1052 ;     genAnd
-   07E3 74 03              1053 	mov	a,#0x03
-   07E5 5A                 1054 	anl	a,r2
+   08A3 74 03              1053 	mov	a,#0x03
+   08A5 5A                 1054 	anl	a,r2
                            1055 ;     genCmpEq
                            1056 ;	Peephole 112.b	changed ljmp to sjmp
                            1057 ;	Peephole 115.b	jump optimization
-   07E6 FB                 1058 	mov	r3,a
-   07E7 60 01              1059 	jz	00105$
-   07E9                    1060 00113$:
+   08A6 FB                 1058 	mov	r3,a
+   08A7 60 01              1059 	jz	00105$
+   08A9                    1060 00113$:
                            1061 ;Initial/src/lib/isr.c:107: return;
                            1062 ;     genRet
                            1063 ;	Peephole 112.b	changed ljmp to sjmp
                            1064 ;	Peephole 251.b	replaced sjmp to ret with ret
-   07E9 22                 1065 	ret
-   07EA                    1066 00105$:
+   08A9 22                 1065 	ret
+   08AA                    1066 00105$:
                            1067 ;Initial/src/lib/isr.c:109: t = EA;
                            1068 ;     genAssign
-   07EA A2 AF              1069 	mov	c,_EA
-   07EC 92 02              1070 	mov	_hook_fgv_t_1_1,c
+   08AA A2 AF              1069 	mov	c,_EA
+   08AC 92 02              1070 	mov	_hook_fgv_t_1_1,c
                            1071 ;Initial/src/lib/isr.c:110: EA = 0;
                            1072 ;     genAssign
-   07EE C2 AF              1073 	clr	_EA
+   08AE C2 AF              1073 	clr	_EA
                            1074 ;Initial/src/lib/isr.c:111: _fifo_gpif_autovector[vector_number] = LJMP_OPCODE;
                            1075 ;     genPlus
                            1076 ;	Peephole 236.g	used r2 instead of ar2
-   07F0 EA                 1077 	mov	a,r2
-   07F1 24 80              1078 	add	a,#__fifo_gpif_autovector
-   07F3 F5 82              1079 	mov	dpl,a
+   08B0 EA                 1077 	mov	a,r2
+   08B1 24 80              1078 	add	a,#__fifo_gpif_autovector
+   08B3 F5 82              1079 	mov	dpl,a
                            1080 ;	Peephole 181	changed mov to clr
-   07F5 E4                 1081 	clr	a
-   07F6 34 00              1082 	addc	a,#(__fifo_gpif_autovector >> 8)
-   07F8 F5 83              1083 	mov	dph,a
+   08B5 E4                 1081 	clr	a
+   08B6 34 00              1082 	addc	a,#(__fifo_gpif_autovector >> 8)
+   08B8 F5 83              1083 	mov	dph,a
                            1084 ;     genPointerSet
                            1085 ;     genFarPointerSet
-   07FA 74 02              1086 	mov	a,#0x02
-   07FC F0                 1087 	movx	@dptr,a
+   08BA 74 02              1086 	mov	a,#0x02
+   08BC F0                 1087 	movx	@dptr,a
                            1088 ;Initial/src/lib/isr.c:112: _fifo_gpif_autovector[vector_number + 1] = addr >> 8;
                            1089 ;     genCast
-   07FD 7B 00              1090 	mov	r3,#0x00
+   08BD 7B 00              1090 	mov	r3,#0x00
                            1091 ;     genPlus
                            1092 ;     genPlusIncr
-   07FF 74 01              1093 	mov	a,#0x01
+   08BF 74 01              1093 	mov	a,#0x01
                            1094 ;	Peephole 236.a	used r2 instead of ar2
-   0801 2A                 1095 	add	a,r2
-   0802 FC                 1096 	mov	r4,a
+   08C1 2A                 1095 	add	a,r2
+   08C2 FC                 1096 	mov	r4,a
                            1097 ;	Peephole 181	changed mov to clr
-   0803 E4                 1098 	clr	a
+   08C3 E4                 1098 	clr	a
                            1099 ;	Peephole 236.b	used r3 instead of ar3
-   0804 3B                 1100 	addc	a,r3
-   0805 FD                 1101 	mov	r5,a
+   08C4 3B                 1100 	addc	a,r3
+   08C5 FD                 1101 	mov	r5,a
                            1102 ;     genPlus
                            1103 ;	Peephole 236.g	used r4 instead of ar4
-   0806 EC                 1104 	mov	a,r4
-   0807 24 80              1105 	add	a,#__fifo_gpif_autovector
-   0809 F5 82              1106 	mov	dpl,a
+   08C6 EC                 1104 	mov	a,r4
+   08C7 24 80              1105 	add	a,#__fifo_gpif_autovector
+   08C9 F5 82              1106 	mov	dpl,a
                            1107 ;	Peephole 236.g	used r5 instead of ar5
-   080B ED                 1108 	mov	a,r5
-   080C 34 00              1109 	addc	a,#(__fifo_gpif_autovector >> 8)
-   080E F5 83              1110 	mov	dph,a
+   08CB ED                 1108 	mov	a,r5
+   08CC 34 00              1109 	addc	a,#(__fifo_gpif_autovector >> 8)
+   08CE F5 83              1110 	mov	dph,a
                            1111 ;     genRightShift
                            1112 ;     genRightShiftLiteral
                            1113 ;     genrshTwo
-   0810 AC 2C              1114 	mov	r4,(_hook_fgv_PARM_2 + 1)
-   0812 7D 00              1115 	mov	r5,#0x00
+   08D0 AC 2C              1114 	mov	r4,(_hook_fgv_PARM_2 + 1)
+   08D2 7D 00              1115 	mov	r5,#0x00
                            1116 ;     genCast
                            1117 ;     genPointerSet
                            1118 ;     genFarPointerSet
-   0814 EC                 1119 	mov	a,r4
-   0815 F0                 1120 	movx	@dptr,a
+   08D4 EC                 1119 	mov	a,r4
+   08D5 F0                 1120 	movx	@dptr,a
                            1121 ;Initial/src/lib/isr.c:113: _fifo_gpif_autovector[vector_number + 2] = addr & 0xff;
                            1122 ;     genPlus
                            1123 ;     genPlusIncr
-   0816 74 02              1124 	mov	a,#0x02
+   08D6 74 02              1124 	mov	a,#0x02
                            1125 ;	Peephole 236.a	used r2 instead of ar2
-   0818 2A                 1126 	add	a,r2
-   0819 FA                 1127 	mov	r2,a
+   08D8 2A                 1126 	add	a,r2
+   08D9 FA                 1127 	mov	r2,a
                            1128 ;	Peephole 181	changed mov to clr
-   081A E4                 1129 	clr	a
+   08DA E4                 1129 	clr	a
                            1130 ;	Peephole 236.b	used r3 instead of ar3
-   081B 3B                 1131 	addc	a,r3
-   081C FB                 1132 	mov	r3,a
+   08DB 3B                 1131 	addc	a,r3
+   08DC FB                 1132 	mov	r3,a
                            1133 ;     genPlus
                            1134 ;	Peephole 236.g	used r2 instead of ar2
-   081D EA                 1135 	mov	a,r2
-   081E 24 80              1136 	add	a,#__fifo_gpif_autovector
-   0820 F5 82              1137 	mov	dpl,a
+   08DD EA                 1135 	mov	a,r2
+   08DE 24 80              1136 	add	a,#__fifo_gpif_autovector
+   08E0 F5 82              1137 	mov	dpl,a
                            1138 ;	Peephole 236.g	used r3 instead of ar3
-   0822 EB                 1139 	mov	a,r3
-   0823 34 00              1140 	addc	a,#(__fifo_gpif_autovector >> 8)
-   0825 F5 83              1141 	mov	dph,a
+   08E2 EB                 1139 	mov	a,r3
+   08E3 34 00              1140 	addc	a,#(__fifo_gpif_autovector >> 8)
+   08E5 F5 83              1141 	mov	dph,a
                            1142 ;     genAnd
-   0827 AA 2B              1143 	mov	r2,_hook_fgv_PARM_2
-   0829 7B 00              1144 	mov	r3,#0x00
+   08E7 AA 2B              1143 	mov	r2,_hook_fgv_PARM_2
+   08E9 7B 00              1144 	mov	r3,#0x00
                            1145 ;     genCast
                            1146 ;     genPointerSet
                            1147 ;     genFarPointerSet
-   082B EA                 1148 	mov	a,r2
-   082C F0                 1149 	movx	@dptr,a
+   08EB EA                 1148 	mov	a,r2
+   08EC F0                 1149 	movx	@dptr,a
                            1150 ;Initial/src/lib/isr.c:114: EA = t;
                            1151 ;     genAssign
-   082D A2 02              1152 	mov	c,_hook_fgv_t_1_1
-   082F 92 AF              1153 	mov	_EA,c
-   0831                    1154 00106$:
-   0831 22                 1155 	ret
+   08ED A2 02              1152 	mov	c,_hook_fgv_t_1_1
+   08EF 92 AF              1153 	mov	_EA,c
+   08F1                    1154 00106$:
+   08F1 22                 1155 	ret
                            1156 ;------------------------------------------------------------
                            1157 ;Allocation info for local variables in function 'setup_autovectors'
                            1158 ;------------------------------------------------------------
@@ -1161,183 +1161,183 @@
                            1161 ;	-----------------------------------------
                            1162 ;	 function setup_autovectors
                            1163 ;	-----------------------------------------
-   0832                    1164 _setup_autovectors:
+   08F2                    1164 _setup_autovectors:
                            1165 ;Initial/src/lib/isr.c:128: EIUSB = 0;
                            1166 ;     genAssign
-   0832 C2 E8              1167 	clr	_EIUSB
+   08F2 C2 E8              1167 	clr	_EIUSB
                            1168 ;Initial/src/lib/isr.c:129: EIEX4 = 0;
                            1169 ;     genAssign
-   0834 C2 EA              1170 	clr	_EIEX4
+   08F4 C2 EA              1170 	clr	_EIEX4
                            1171 ;Initial/src/lib/isr.c:131: hook_sv (SV_INT_2, (unsigned short) _usb_autovector);
                            1172 ;     genCast
-   0836 75 2B 00           1173 	mov	_hook_sv_PARM_2,#__usb_autovector
-   0839 75 2C 01           1174 	mov	(_hook_sv_PARM_2 + 1),#(__usb_autovector >> 8)
+   08F6 75 2B 00           1173 	mov	_hook_sv_PARM_2,#__usb_autovector
+   08F9 75 2C 01           1174 	mov	(_hook_sv_PARM_2 + 1),#(__usb_autovector >> 8)
                            1175 ;     genCall
-   083C 75 82 43           1176 	mov	dpl,#0x43
-   083F 12 07 15           1177 	lcall	_hook_sv
+   08FC 75 82 43           1176 	mov	dpl,#0x43
+   08FF 12 07 D5           1177 	lcall	_hook_sv
                            1178 ;Initial/src/lib/isr.c:132: hook_sv (SV_INT_4, (unsigned short) _fifo_gpif_autovector);
                            1179 ;     genCast
-   0842 75 2B 80           1180 	mov	_hook_sv_PARM_2,#__fifo_gpif_autovector
-   0845 75 2C 00           1181 	mov	(_hook_sv_PARM_2 + 1),#(__fifo_gpif_autovector >> 8)
+   0902 75 2B 80           1180 	mov	_hook_sv_PARM_2,#__fifo_gpif_autovector
+   0905 75 2C 00           1181 	mov	(_hook_sv_PARM_2 + 1),#(__fifo_gpif_autovector >> 8)
                            1182 ;     genCall
-   0848 75 82 53           1183 	mov	dpl,#0x53
-   084B 12 07 15           1184 	lcall	_hook_sv
+   0908 75 82 53           1183 	mov	dpl,#0x53
+   090B 12 07 D5           1184 	lcall	_hook_sv
                            1185 ;Initial/src/lib/isr.c:135: SYNCDELAY;
                            1186 ;     genInline
-   084E 00                 1187 	 nop; nop; nop; 
+   090E 00                 1187 	 nop; nop; nop; 
                            1188 ;Initial/src/lib/isr.c:136: EP2FIFOIE = 0;	SYNCDELAY;
                            1189 ;     genAssign
-   084F 90 E6 50           1190 	mov	dptr,#_EP2FIFOIE
+   090F 90 E6 50           1190 	mov	dptr,#_EP2FIFOIE
                            1191 ;	Peephole 181	changed mov to clr
-   0852 E4                 1192 	clr	a
-   0853 F0                 1193 	movx	@dptr,a
+   0912 E4                 1192 	clr	a
+   0913 F0                 1193 	movx	@dptr,a
                            1194 ;     genInline
-   0854 00                 1195 	 nop; nop; nop; 
+   0914 00                 1195 	 nop; nop; nop; 
                            1196 ;Initial/src/lib/isr.c:137: EP4FIFOIE = 0;	SYNCDELAY;
                            1197 ;     genAssign
-   0855 90 E6 52           1198 	mov	dptr,#_EP4FIFOIE
+   0915 90 E6 52           1198 	mov	dptr,#_EP4FIFOIE
                            1199 ;	Peephole 181	changed mov to clr
-   0858 E4                 1200 	clr	a
-   0859 F0                 1201 	movx	@dptr,a
+   0918 E4                 1200 	clr	a
+   0919 F0                 1201 	movx	@dptr,a
                            1202 ;     genInline
-   085A 00                 1203 	 nop; nop; nop; 
+   091A 00                 1203 	 nop; nop; nop; 
                            1204 ;Initial/src/lib/isr.c:138: EP6FIFOIE = 0;	SYNCDELAY;
                            1205 ;     genAssign
-   085B 90 E6 54           1206 	mov	dptr,#_EP6FIFOIE
+   091B 90 E6 54           1206 	mov	dptr,#_EP6FIFOIE
                            1207 ;	Peephole 181	changed mov to clr
-   085E E4                 1208 	clr	a
-   085F F0                 1209 	movx	@dptr,a
+   091E E4                 1208 	clr	a
+   091F F0                 1209 	movx	@dptr,a
                            1210 ;     genInline
-   0860 00                 1211 	 nop; nop; nop; 
+   0920 00                 1211 	 nop; nop; nop; 
                            1212 ;Initial/src/lib/isr.c:139: EP8FIFOIE = 0;	SYNCDELAY;
                            1213 ;     genAssign
-   0861 90 E6 56           1214 	mov	dptr,#_EP8FIFOIE
+   0921 90 E6 56           1214 	mov	dptr,#_EP8FIFOIE
                            1215 ;	Peephole 181	changed mov to clr
-   0864 E4                 1216 	clr	a
-   0865 F0                 1217 	movx	@dptr,a
+   0924 E4                 1216 	clr	a
+   0925 F0                 1217 	movx	@dptr,a
                            1218 ;     genInline
-   0866 00                 1219 	 nop; nop; nop; 
+   0926 00                 1219 	 nop; nop; nop; 
                            1220 ;Initial/src/lib/isr.c:142: EP2FIFOIRQ = 0xff;	SYNCDELAY;
                            1221 ;     genAssign
-   0867 90 E6 51           1222 	mov	dptr,#_EP2FIFOIRQ
-   086A 74 FF              1223 	mov	a,#0xFF
-   086C F0                 1224 	movx	@dptr,a
+   0927 90 E6 51           1222 	mov	dptr,#_EP2FIFOIRQ
+   092A 74 FF              1223 	mov	a,#0xFF
+   092C F0                 1224 	movx	@dptr,a
                            1225 ;     genInline
-   086D 00                 1226 	 nop; nop; nop; 
+   092D 00                 1226 	 nop; nop; nop; 
                            1227 ;Initial/src/lib/isr.c:143: EP4FIFOIRQ = 0xff;	SYNCDELAY;
                            1228 ;     genAssign
-   086E 90 E6 53           1229 	mov	dptr,#_EP4FIFOIRQ
-   0871 74 FF              1230 	mov	a,#0xFF
-   0873 F0                 1231 	movx	@dptr,a
+   092E 90 E6 53           1229 	mov	dptr,#_EP4FIFOIRQ
+   0931 74 FF              1230 	mov	a,#0xFF
+   0933 F0                 1231 	movx	@dptr,a
                            1232 ;     genInline
-   0874 00                 1233 	 nop; nop; nop; 
+   0934 00                 1233 	 nop; nop; nop; 
                            1234 ;Initial/src/lib/isr.c:144: EP6FIFOIRQ = 0xff;	SYNCDELAY;
                            1235 ;     genAssign
-   0875 90 E6 55           1236 	mov	dptr,#_EP6FIFOIRQ
-   0878 74 FF              1237 	mov	a,#0xFF
-   087A F0                 1238 	movx	@dptr,a
+   0935 90 E6 55           1236 	mov	dptr,#_EP6FIFOIRQ
+   0938 74 FF              1237 	mov	a,#0xFF
+   093A F0                 1238 	movx	@dptr,a
                            1239 ;     genInline
-   087B 00                 1240 	 nop; nop; nop; 
+   093B 00                 1240 	 nop; nop; nop; 
                            1241 ;Initial/src/lib/isr.c:145: EP8FIFOIRQ = 0xff;	SYNCDELAY;
                            1242 ;     genAssign
-   087C 90 E6 57           1243 	mov	dptr,#_EP8FIFOIRQ
-   087F 74 FF              1244 	mov	a,#0xFF
-   0881 F0                 1245 	movx	@dptr,a
+   093C 90 E6 57           1243 	mov	dptr,#_EP8FIFOIRQ
+   093F 74 FF              1244 	mov	a,#0xFF
+   0941 F0                 1245 	movx	@dptr,a
                            1246 ;     genInline
-   0882 00                 1247 	 nop; nop; nop; 
+   0942 00                 1247 	 nop; nop; nop; 
                            1248 ;Initial/src/lib/isr.c:147: IBNIE  = 0;
                            1249 ;     genAssign
-   0883 90 E6 58           1250 	mov	dptr,#_IBNIE
+   0943 90 E6 58           1250 	mov	dptr,#_IBNIE
                            1251 ;	Peephole 181	changed mov to clr
-   0886 E4                 1252 	clr	a
-   0887 F0                 1253 	movx	@dptr,a
+   0946 E4                 1252 	clr	a
+   0947 F0                 1253 	movx	@dptr,a
                            1254 ;Initial/src/lib/isr.c:148: IBNIRQ = 0xff;
                            1255 ;     genAssign
-   0888 90 E6 59           1256 	mov	dptr,#_IBNIRQ
-   088B 74 FF              1257 	mov	a,#0xFF
-   088D F0                 1258 	movx	@dptr,a
+   0948 90 E6 59           1256 	mov	dptr,#_IBNIRQ
+   094B 74 FF              1257 	mov	a,#0xFF
+   094D F0                 1258 	movx	@dptr,a
                            1259 ;Initial/src/lib/isr.c:149: NAKIE  = 0;
                            1260 ;     genAssign
-   088E 90 E6 5A           1261 	mov	dptr,#_NAKIE
+   094E 90 E6 5A           1261 	mov	dptr,#_NAKIE
                            1262 ;	Peephole 181	changed mov to clr
-   0891 E4                 1263 	clr	a
-   0892 F0                 1264 	movx	@dptr,a
+   0951 E4                 1263 	clr	a
+   0952 F0                 1264 	movx	@dptr,a
                            1265 ;Initial/src/lib/isr.c:150: NAKIRQ = 0xff;
                            1266 ;     genAssign
-   0893 90 E6 5B           1267 	mov	dptr,#_NAKIRQ
-   0896 74 FF              1268 	mov	a,#0xFF
-   0898 F0                 1269 	movx	@dptr,a
+   0953 90 E6 5B           1267 	mov	dptr,#_NAKIRQ
+   0956 74 FF              1268 	mov	a,#0xFF
+   0958 F0                 1269 	movx	@dptr,a
                            1270 ;Initial/src/lib/isr.c:151: USBIE  = 0;
                            1271 ;     genAssign
-   0899 90 E6 5C           1272 	mov	dptr,#_USBIE
+   0959 90 E6 5C           1272 	mov	dptr,#_USBIE
                            1273 ;	Peephole 181	changed mov to clr
-   089C E4                 1274 	clr	a
-   089D F0                 1275 	movx	@dptr,a
+   095C E4                 1274 	clr	a
+   095D F0                 1275 	movx	@dptr,a
                            1276 ;Initial/src/lib/isr.c:152: USBIRQ = 0xff;
                            1277 ;     genAssign
-   089E 90 E6 5D           1278 	mov	dptr,#_USBIRQ
-   08A1 74 FF              1279 	mov	a,#0xFF
-   08A3 F0                 1280 	movx	@dptr,a
+   095E 90 E6 5D           1278 	mov	dptr,#_USBIRQ
+   0961 74 FF              1279 	mov	a,#0xFF
+   0963 F0                 1280 	movx	@dptr,a
                            1281 ;Initial/src/lib/isr.c:153: EPIE   = 0;
                            1282 ;     genAssign
-   08A4 90 E6 5E           1283 	mov	dptr,#_EPIE
+   0964 90 E6 5E           1283 	mov	dptr,#_EPIE
                            1284 ;	Peephole 181	changed mov to clr
-   08A7 E4                 1285 	clr	a
-   08A8 F0                 1286 	movx	@dptr,a
+   0967 E4                 1285 	clr	a
+   0968 F0                 1286 	movx	@dptr,a
                            1287 ;Initial/src/lib/isr.c:154: EPIRQ  = 0xff;
                            1288 ;     genAssign
-   08A9 90 E6 5F           1289 	mov	dptr,#_EPIRQ
-   08AC 74 FF              1290 	mov	a,#0xFF
-   08AE F0                 1291 	movx	@dptr,a
+   0969 90 E6 5F           1289 	mov	dptr,#_EPIRQ
+   096C 74 FF              1290 	mov	a,#0xFF
+   096E F0                 1291 	movx	@dptr,a
                            1292 ;Initial/src/lib/isr.c:155: SYNCDELAY;	GPIFIE = 0;
                            1293 ;     genInline
-   08AF 00                 1294 	 nop; nop; nop; 
+   096F 00                 1294 	 nop; nop; nop; 
                            1295 ;     genAssign
-   08B0 90 E6 60           1296 	mov	dptr,#_GPIFIE
+   0970 90 E6 60           1296 	mov	dptr,#_GPIFIE
                            1297 ;	Peephole 181	changed mov to clr
-   08B3 E4                 1298 	clr	a
-   08B4 F0                 1299 	movx	@dptr,a
+   0973 E4                 1298 	clr	a
+   0974 F0                 1299 	movx	@dptr,a
                            1300 ;Initial/src/lib/isr.c:156: SYNCDELAY;	GPIFIRQ = 0xff;
                            1301 ;     genInline
-   08B5 00                 1302 	 nop; nop; nop; 
+   0975 00                 1302 	 nop; nop; nop; 
                            1303 ;     genAssign
-   08B6 90 E6 61           1304 	mov	dptr,#_GPIFIRQ
-   08B9 74 FF              1305 	mov	a,#0xFF
-   08BB F0                 1306 	movx	@dptr,a
+   0976 90 E6 61           1304 	mov	dptr,#_GPIFIRQ
+   0979 74 FF              1305 	mov	a,#0xFF
+   097B F0                 1306 	movx	@dptr,a
                            1307 ;Initial/src/lib/isr.c:157: USBERRIE = 0;
                            1308 ;     genAssign
-   08BC 90 E6 62           1309 	mov	dptr,#_USBERRIE
+   097C 90 E6 62           1309 	mov	dptr,#_USBERRIE
                            1310 ;	Peephole 181	changed mov to clr
-   08BF E4                 1311 	clr	a
-   08C0 F0                 1312 	movx	@dptr,a
+   097F E4                 1311 	clr	a
+   0980 F0                 1312 	movx	@dptr,a
                            1313 ;Initial/src/lib/isr.c:158: USBERRIRQ = 0xff;
                            1314 ;     genAssign
-   08C1 90 E6 63           1315 	mov	dptr,#_USBERRIRQ
-   08C4 74 FF              1316 	mov	a,#0xFF
-   08C6 F0                 1317 	movx	@dptr,a
+   0981 90 E6 63           1315 	mov	dptr,#_USBERRIRQ
+   0984 74 FF              1316 	mov	a,#0xFF
+   0986 F0                 1317 	movx	@dptr,a
                            1318 ;Initial/src/lib/isr.c:159: CLRERRCNT = 0;
                            1319 ;     genAssign
-   08C7 90 E6 65           1320 	mov	dptr,#_CLRERRCNT
+   0987 90 E6 65           1320 	mov	dptr,#_CLRERRCNT
                            1321 ;	Peephole 181	changed mov to clr
-   08CA E4                 1322 	clr	a
-   08CB F0                 1323 	movx	@dptr,a
+   098A E4                 1322 	clr	a
+   098B F0                 1323 	movx	@dptr,a
                            1324 ;Initial/src/lib/isr.c:161: INTSETUP = bmAV2EN | bmAV4EN | bmINT4IN;
                            1325 ;     genAssign
-   08CC 90 E6 68           1326 	mov	dptr,#_INTSETUP
-   08CF 74 0B              1327 	mov	a,#0x0B
-   08D1 F0                 1328 	movx	@dptr,a
+   098C 90 E6 68           1326 	mov	dptr,#_INTSETUP
+   098F 74 0B              1327 	mov	a,#0x0B
+   0991 F0                 1328 	movx	@dptr,a
                            1329 ;Initial/src/lib/isr.c:164: EXIF &= ~bmEXIF_USBINT;
                            1330 ;     genAnd
                            1331 ;Initial/src/lib/isr.c:165: EXIF &= ~bmEXIF_IE4;
                            1332 ;     genAnd
                            1333 ;	Peephole 183	avoided anl during execution
-   08D2 53 91 AF           1334 	anl	_EXIF,#(0xEF & 0xBF)
+   0992 53 91 AF           1334 	anl	_EXIF,#(0xEF & 0xBF)
                            1335 ;Initial/src/lib/isr.c:168: EIUSB = 1;
                            1336 ;     genAssign
-   08D5 D2 E8              1337 	setb	_EIUSB
+   0995 D2 E8              1337 	setb	_EIUSB
                            1338 ;Initial/src/lib/isr.c:169: EIEX4 = 1;
                            1339 ;     genAssign
-   08D7 D2 EA              1340 	setb	_EIEX4
-   08D9                    1341 00101$:
-   08D9 22                 1342 	ret
+   0997 D2 EA              1340 	setb	_EIEX4
+   0999                    1341 00101$:
+   0999 22                 1342 	ret
                            1343 	.area CSEG    (CODE)

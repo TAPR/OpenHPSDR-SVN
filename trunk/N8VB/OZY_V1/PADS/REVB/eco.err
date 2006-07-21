@@ -1,9 +1,16 @@
 ** ECO In Report **
 
-Mon Jul 03 09:46:53 2006
+Fri Jul 21 17:38:10 2006
 
 Input  File : C:\PADS Projects\eco2pcb.eco
-Current Job : OZY_REVB_07032006_blz.pcb
+Current Job : OZY_REVB_07212006_blz.pcb
 
 
-No errors found
+
+Line 9 , Section *SPLITNET*
+* WARNING: Splitting a Net +5VBUS in desired fashion requires deletion of more than one connection
+* Deleting connection C12.2-C34.1 ...
+* Deleting connection C42.1-J31.64 ...
+* Deleting connection U14.3-J31.96 ...
+* WARNING: Added connection between J32.1 U7.16 to keep continuity of net +5VBUS
+* WARNING: Added connection between C34.1 C42.1 to keep continuity of net +5VSEL

@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Wed Jul 19 12:32:15 2006
+; This file generated Fri Jul 21 16:22:53 2006
 ;--------------------------------------------------------
 	.module spi
 	.optsdcc -mmcs51 --model-small
@@ -738,7 +738,7 @@ _EP8FIFOBUF	=	0xfc00
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'setup_enables'
 ;------------------------------------------------------------
-;enables                   Allocated to registers r2 
+;enables                   Allocated to registers 
 ;------------------------------------------------------------
 ;Initial/src/lib/spi.c:30: setup_enables (unsigned char enables)
 ;	-----------------------------------------
@@ -753,39 +753,7 @@ _setup_enables:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;     genReceive
-	mov	r2,dpl
-;Initial/src/lib/spi.c:36: enables ^= SPI_ENABLE_FPGA;
-;     genXor
-	xrl	ar2,#0x01
-;Initial/src/lib/spi.c:40: HPSDR_PA = HPSDR_PA | (0x7 << 3);	// disable FPGA, CODEC_A, CODEC_B
-;     genOr
-	orl	_IOA,#0x38
-;Initial/src/lib/spi.c:41: HPSDR_PA ^= (enables & 0x7) << 3;	// enable specified devs
-;     genAnd
-	mov	a,#0x07
-	anl	a,r2
-;     genLeftShift
-;     genLeftShiftLiteral
-;     genlshOne
-;	Peephole 105	removed redundant mov
-	mov	r3,a
-	swap	a
-	rr	a
-	anl	a,#0xf8
-;     genXor
-;	Peephole 105	removed redundant mov
-	mov	r3,a
-	xrl	_IOA,a
-;Initial/src/lib/spi.c:44: USRP_PE = USRP_PE | (0xf << 4);	// disable TX_A, RX_A, TX_B, RX_B
-;     genOr
-	orl	_IOE,#0xF0
-;Initial/src/lib/spi.c:45: USRP_PE ^= (enables & 0xf0);		// enable specified devs
-;     genAnd
-	mov	a,#0xF0
-	anl	a,r2
-;     genXor
-	xrl	_IOE,a
+;Initial/src/lib/spi.c:46: }
 00101$:
 	ret
 ;------------------------------------------------------------

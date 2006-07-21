@@ -9,7 +9,7 @@
 		<Option compiler="5"/>
 		<Build>
 			<Target title="default">
-				<Option output="OZYV1FW.hex"/>
+				<Option output="OZYV1FW07212006-1.hex"/>
 				<Option working_dir="."/>
 				<Option object_output=".objs"/>
 				<Option deps_output=".deps"/>

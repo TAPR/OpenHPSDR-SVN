@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Wed Jul 19 12:32:14 2006
+                              4 ; This file generated Fri Jul 21 16:22:52 2006
                               5 ;--------------------------------------------------------
                               6 	.module hpsdr_common
                               7 	.optsdcc -mmcs51 --model-small
@@ -888,8 +888,23 @@
                             888 ;Initial/src/hpsdr_common.c:128: SYNCDELAY;
                             889 ;     genInline
    0092 00                  890 	 nop; nop; nop; 
-                            891 ;Initial/src/hpsdr_common.c:130: init_board ();
-                            892 ;     genCall
-                            893 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0093 02s00r00            894 	ljmp	_init_board
-                            895 	.area CSEG    (CODE)
+                            891 ;Initial/src/hpsdr_common.c:132: SCON0 = 0x50;
+                            892 ;     genAssign
+   0093 75 98 50            893 	mov	_SCON0,#0x50
+                            894 ;Initial/src/hpsdr_common.c:133: TMOD |= 0x20;
+                            895 ;     genOr
+   0096 43 89 20            896 	orl	_TMOD,#0x20
+                            897 ;Initial/src/hpsdr_common.c:134: TH1 = 0xB2;
+                            898 ;     genAssign
+   0099 75 8D B2            899 	mov	_TH1,#0xB2
+                            900 ;Initial/src/hpsdr_common.c:135: TR1 = 1;
+                            901 ;     genAssign
+   009C D2 8E               902 	setb	_TR1
+                            903 ;Initial/src/hpsdr_common.c:136: TI = 1;
+                            904 ;     genAssign
+   009E D2 99               905 	setb	_TI
+                            906 ;Initial/src/hpsdr_common.c:138: init_board ();
+                            907 ;     genCall
+                            908 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   00A0 02s00r00            909 	ljmp	_init_board
+                            910 	.area CSEG    (CODE)

@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Tue Jul 18 19:52:35 2006) contains limited information
+This XML file (created on Fri Jul 21 13:43:43 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -23,7 +23,7 @@ to license.txt.
 	<module>quartus_fit</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Tue Jul 18 19:52:35 2006</compilation_end_time>
+	<compilation_end_time>Fri Jul 21 13:43:43 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -33,10 +33,10 @@ to license.txt.
 	</cpu>
 	<ram units="MB">1023</ram>
 </machine>
-<project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity</project>
+<project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/Blinkity/blinkity</project>
 <revision>blinkity</revision>
 <compilation_summary>
-	<flow_status>Successful - Tue Jul 18 19:52:35 2006</flow_status>
+	<flow_status>Successful - Fri Jul 21 13:43:43 2006</flow_status>
 	<quartus_ii_version>6.0 Build 178 04/27/2006 SJ Web Edition</quartus_ii_version>
 	<revision_name>blinkity</revision_name>
 	<top_level_entity_name>blinkity</top_level_entity_name>
@@ -83,7 +83,7 @@ to license.txt.
 	<rsc name="Highest non-global fan-out signal" type="text">COUNTER[22]</rsc>
 	<rsc name="Highest non-global fan-out" type="int">2</rsc>
 	<rsc name="Total fan-out" type="int">128</rsc>
-	<rsc name="Average fan-out" type="float">1.75</rsc>
+	<rsc name="Average fan-out" type="float">1.73</rsc>
 </resource_usage_summary>
 <control_signals>
 	<row>
@@ -156,10 +156,10 @@ to license.txt.
 </software_data>
 <messages>
 	<warning>Warning: Found 8 output pins without output pin load capacitance assignment</warning>
-	<info>Info: Generated suppressed messages file C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity.fit.smsg</info>
+	<info>Info: Generated suppressed messages file C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/Blinkity/blinkity.fit.smsg</info>
 	<info>Info: Quartus II Fitter was successful. 0 errors, 1 warning</info>
 	<info>Info: Elapsed time: 00:00:06</info>
-	<info>Info: Processing ended: Tue Jul 18 19:52:35 2006</info>
+	<info>Info: Processing ended: Fri Jul 21 13:43:43 2006</info>
 	<info>Info: Delay annotation completed successfully</info>
 </messages>
 <fitter_settings>
@@ -313,7 +313,7 @@ to license.txt.
 	</row>
 	<row>
 		<option>Enable INIT_DONE output</option>
-		<setting>Off</setting>
+		<setting>On</setting>
 	</row>
 	<row>
 		<option>Configuration scheme</option>
@@ -544,7 +544,7 @@ to license.txt.
 	</row>
 	<row>
 		<i_o_bank>3</i_o_bank>
-		<usage>1 / 37 ( 3 % )</usage>
+		<usage>2 / 37 ( 5 % )</usage>
 		<vccio_voltage>3.3V</vccio_voltage>
 	</row>
 	<row>
@@ -672,6 +672,10 @@ to license.txt.
 		<name>Time - Fit Attempt 1</name>
 		<value>0</value>
 	</row>
+	<row>
+		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
+		<value>0.016</value>
+	</row>
 </advanced_data___placement_preparation>
 <advanced_data___placement>
 	<row>
@@ -718,6 +722,10 @@ to license.txt.
 		<name>Time - Fit Attempt 1</name>
 		<value>0</value>
 	</row>
+	<row>
+		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
+		<value>0.015</value>
+	</row>
 </advanced_data___placement>
 <advanced_data___routing>
 	<row>
@@ -746,16 +754,16 @@ to license.txt.
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>0.048</value>
+		<value>0.047</value>
 	</row>
 </advanced_data___routing>
 <files>
-	<top>C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity.v</top>
+	<top>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/Blinkity/blinkity.v</top>
 	<extensions>
 		<ext ext_name="v">1</ext>
 	</extensions>
 	<sub_files>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/ozy_test/Blinkity/blinkity.v</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/Blinkity/blinkity.v</sub_file>
 	</sub_files>
 </files>
 <architecture>
@@ -764,6 +772,6 @@ to license.txt.
 	<device>EP2C5Q208C8</device>
 </architecture>
 <pkg_io>
-	<pin_std count="12">LVTTL</pin_std>
+	<pin_std count="13">LVTTL</pin_std>
 </pkg_io>
 </talkback>

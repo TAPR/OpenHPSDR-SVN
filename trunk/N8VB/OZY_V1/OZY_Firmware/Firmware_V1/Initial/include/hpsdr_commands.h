@@ -52,6 +52,11 @@
 											// wIndexL:	format
 											// len: how much to read
 
+#define VRQ_RS232_READ      0x83
+
+#define VRQ_EEPROM_TYPE_READ  0x84
+#define VRQ_I2C_SPEED_READ      0x85
+
 // OUT commands
 
 #define	VRQ_SET_LED			0x01		// wValueL off/on {0,1}; wIndexL: which {0,1}
@@ -70,5 +75,10 @@
 							// wIndexH:	enables
 							// wIndexL:	format
 							// len: how much to write
+
+#define VRQ_RS232_WRITE     0x0A
+
+#define VRQ_I2C_SPEED_SET  0x0B  // wValueL: {0,1}
+
 
 #endif /* _HPSDR_COMMANDS_H_ */

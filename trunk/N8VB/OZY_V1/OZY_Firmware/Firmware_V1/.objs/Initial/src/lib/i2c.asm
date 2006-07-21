@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Wed Jul 19 12:32:15 2006
+; This file generated Fri Jul 21 16:22:52 2006
 ;--------------------------------------------------------
 	.module i2c
 	.optsdcc -mmcs51 --model-small

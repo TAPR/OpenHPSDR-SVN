@@ -52,6 +52,46 @@ namespace HPSDR_USB_LIB_V1
             return null;
         }
 
+        static public IntPtr InitFindAndOpenDevice(int VID, int PID)
+        {
+            try
+            {
+                libUSB_Interface.usb_init();
+                Console.WriteLine("finding busses...");
+                libUSB_Interface.usb_find_busses();
+                Console.WriteLine("finding devices...");
+                libUSB_Interface.usb_find_devices();
+                Console.WriteLine("usb_get_busses...");
+                libUSB_Interface.usb_bus bus = libUSB_Interface.usb_get_busses();
+                Console.WriteLine("bus location: " + bus.location.ToString());
+                libUSB_Interface.usb_device dev = bus.GetDevices();
+
+                for (int i = 0; i < MAX_DEVICES; i++)
+                {
+                    if ((dev != null) && (dev.descriptor.idVendor == VID))
+                    {
+                        if (dev.descriptor.idProduct == PID)
+                        {
+                            Console.WriteLine("Found VID PID: " + VID.ToString("x") + " " + PID.ToString("x"));
+                            return libUSB_Interface.usb_open(dev);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("did not find VID PID: " + VID.ToString("x") + " " + PID.ToString("x"));
+                        dev = dev.NextDevice;
+                        continue;
+                    }
+                }
+                return IntPtr.Zero;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: " + e.Message);
+                return IntPtr.Zero;
+            }
+        }
+
         static public bool Reset_CPU(IntPtr hdev, bool reset)
         {
             byte[] write_buffer = new byte[1];

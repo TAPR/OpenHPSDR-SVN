@@ -23,6 +23,9 @@ namespace HPSDR_USB_LIB_V1
                                                         // wIndexH:	enables
                                                         // wIndexL:	format
                                                         // len: how much to read
+        public const int VENDOR_REQ_RS232_READ = 0x83;
+        public const int VENDOR_REQ_EEPROM_TYPE_READ = 0x84;
+        public const int VENDOR_REQ_I2C_SPEED_READ = 0x85;
 
         /* Vendor Out Commands */
         public const int VENDOR_REQ_SET_LED = 0x01;     // wValueL off/on {0,1}; wIndexL: which {0,1}
@@ -38,6 +41,8 @@ namespace HPSDR_USB_LIB_V1
 							                            // wIndexH:	enables
 							                            // wIndexL:	format
 							                            // len: how much to write
+
+        public const int VENDOR_REQ_I2C_SPEED_SET = 0x0B; // wValueL 100kHz/400kHz {0,1}
 
         static public bool Load_FPGA(IntPtr hdev, string filename)
         {
@@ -143,6 +148,24 @@ namespace HPSDR_USB_LIB_V1
             
         }
 
+        static public int Read_EEPROM_Type(IntPtr hdev)
+        {
+            byte[] ans = new byte[1];
+
+            libUSB_Interface.usb_control_msg
+                (
+                hdev,
+                VENDOR_REQ_TYPE_IN,
+                VENDOR_REQ_EEPROM_TYPE_READ,
+                0x00,
+                0x00,
+                ans,
+                1,
+                1000
+                );
+            return (int)ans[0];
+        }
+
         static public bool Write_EEPROM(IntPtr hdev, int i2c_addr, int offset, byte[] buffer)
         {
             // Each write to EEPROM consists of two address bytes followed by the value to 
@@ -165,6 +188,49 @@ namespace HPSDR_USB_LIB_V1
                 offset++;
             }
             return true;
+        }
+
+        static public int Read_I2C_Speed(IntPtr hdev)
+        {
+            byte[] ans = new byte[1];
+
+            libUSB_Interface.usb_control_msg
+                (
+                hdev,
+                VENDOR_REQ_TYPE_IN,
+                VENDOR_REQ_I2C_SPEED_READ,
+                0x00,
+                0x00,
+                ans,
+                1,
+                1000
+                );
+            return (int)ans[0];
+        }
+
+        static public bool Set_I2C_Speed(IntPtr hdev, int value)
+        {
+            if (value < 0 || value > 1)
+            {
+                Console.WriteLine("Value must be 0 or 1");
+                return false;
+            }
+                        
+            int ret = libUSB_Interface.usb_control_msg
+                (
+                hdev,
+                VENDOR_REQ_TYPE_OUT,
+                VENDOR_REQ_I2C_SPEED_SET,
+                value,
+                0x00,
+                new byte[0],
+                0,
+                1000
+                );
+            if (ret < 0)
+                return false;
+            else
+                return true;
         }
 
         static public bool Read_I2C(IntPtr hdev, int i2c_addr, ref byte[] buffer)

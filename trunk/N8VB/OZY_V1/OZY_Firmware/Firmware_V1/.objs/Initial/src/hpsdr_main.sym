@@ -482,9 +482,9 @@ Symbol Table
   A __sdcc_program_startup                                         0003 GR
   5 __start__stack                                                 0000 GR
     __usb_got_SUDAV                                                **** GX
-  A _app_vendor_IN_cmd                                             00E2 GR
+  A _app_vendor_IN_cmd                                             0104 GR
   A _app_vendor_OUT_cmd                                            0016 GR
-  A _app_vendor_cmd                                                0165 GR
+  A _app_vendor_cmd                                                01CB GR
     _bitALTERA_DATA0                                            =  00A0 G
     _bitALTERA_DCLK                                             =  00A2 G
     _bitS_CLK                                                   =  0080 G
@@ -508,13 +508,14 @@ Symbol Table
     _i2c_write_PARM_2                                              **** GX
     _i2c_write_PARM_3                                              **** GX
     _init_hpsdr                                                    **** GX
-  A _isr_tick                                                      0188 GR
+  A _isr_tick                                                      01F6 GR
   3 _isr_tick_count_1_1                                            0000 R
-  A _main                                                          01C6 GR
-  A _main_loop                                                     017F R
-  A _patch_usb_descriptors                                         019D GR
+  A _main                                                          0234 GR
+  A _main_loop                                                     01E5 R
+  A _patch_usb_descriptors                                         020B GR
   9 _patch_usb_descriptors_hw_rev_1_1                              0000 R
   9 _patch_usb_descriptors_serial_no_1_1                           0001 R
+    _putchar                                                       **** GX
     _set_led_0                                                     **** GX
     _set_led_1                                                     **** GX
     _setup_autovectors                                             **** GX
@@ -726,7 +727,7 @@ Area Table
    7 BSEG                                                                               size    0   flags 80
    8 PSEG                                                                               size    0   flags 50
    9 XSEG                                                                               size    9   flags 40
-   A CSEG                                                                               size  1F5   flags 20
+   A CSEG                                                                               size  263   flags 20
    B GSINIT0                                                                            size    0   flags 20
    C GSINIT1                                                                            size    0   flags 20
    D GSINIT2                                                                            size    0   flags 20

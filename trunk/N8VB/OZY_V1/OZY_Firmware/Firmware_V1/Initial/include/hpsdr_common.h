@@ -42,10 +42,10 @@
  * registers must be separated by a "synchronization delay".  The
  * delay is necessary only under the following conditions:
  *
- *   - between a write to any register in the 0xE600 - 0xE6FF range 
+ *   - between a write to any register in the 0xE600 - 0xE6FF range
  *     and a write to one of the registers listed below.
  *
- *   - between a write to one of the registers listed below and a read 
+ *   - between a write to one of the registers listed below and a read
  *     from any register in the 0xE600 - 0xE6FF range.
  *
  *   Registers which require a synchronization delay:
@@ -70,6 +70,8 @@
 
 void init_hpsdr (void);
 
+void putchar(char c);
+void putstr(char *s);
 void set_led_0 (unsigned char on);
 void set_led_1 (unsigned char on);
 void toggle_led_0 (void);
