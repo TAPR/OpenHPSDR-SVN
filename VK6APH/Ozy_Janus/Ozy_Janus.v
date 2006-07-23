@@ -674,9 +674,11 @@ Rx_fifo	Rx_fifo(.wrclk (FX2_SLRD),.rdreq (fifo_enable),.rdclk (BCLK),.wrreq (1'b
 	The code loops until there are at least 1024 bytes in the Rx_FIFO.  
 	The code then loops looking for a sync sequence (0x7F7F7F). Once located it
 	sleeps for 512 bytes (256 words) and then looks for the sync sequence again. If located
-	it contiunes, if not it restarts. 	
+	it contiunes, if not it restarts. 
 	
-	After successfully finding sync it  stores the next 5 bytes 
+	Whilst sync is being detected,or restarted, then all logic outputs are set to safe values.	
+	
+	After successfully finding sync it  reads the next 5 bytes 
 	which are control bytes C0-C4. The next word is the Left audio and the following the 
 	Right audio which are sent to the TLV320 D/A converters. 
     The next worid is the  I data and the following the Q data. 
@@ -729,9 +731,9 @@ always @ (negedge BCLK)
 begin
 	synced_Rx_used <= Rx_used;							// sync Rx_used to BCLK since this runs of FX2 clock
 case(state_PWM)
-// IMPORTANT:  We are looking for,or have lost sync,at this point - use this state to set all 
-// outputs etc to a safe value. 
   0: begin
+// IMPORTANT:  We are looking for, or have lost sync, at this point - use this state to set all 
+// outputs etc to a safe value. 
 		LED_sync <= 1'b0; 								// turn sync LED off
 	 	if(synced_Rx_used > 1023)begin					// wait until we have at lease 1024 bytes to check
 			byte_count <= 0;							// reset byte count
@@ -757,8 +759,6 @@ case(state_PWM)
 	 end
 	
 // state 2 - loop until the next sync is due and check we receive it
-// IMPORTANT:  We are looking for,or have lost sync,at this point - use this state to set all 
-// outputs etc to a safe value. 
   2: begin
 		if(sync_count == 255)begin  // we are counting words so this is actually 511 bytes
 			state_PWM <= 3; 
