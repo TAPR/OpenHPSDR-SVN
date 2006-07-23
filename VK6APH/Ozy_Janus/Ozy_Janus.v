@@ -1,4 +1,4 @@
-// V1.0 22nd  July 2006
+// V1.1 23rd  July 2006
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH 
 //
