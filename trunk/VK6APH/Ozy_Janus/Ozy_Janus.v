@@ -35,7 +35,7 @@
 
 // The format for data TO the PC is:-
 //
-//  <0x7F><0x7F><0x7F><C0><C1><C2><C3><C4><Left MSB><Left><Left LSB><Right MSB><Right><Right LSB><Mic MSB><Mic LSB>... etc 
+//  <0x7F7F><0x7F,C0><C1,C2><C3,C4><Left><Left LSB,Right MSB><Right LSW><Mic data >... etc 
 //
 // where Cn is a control byte - see protocol design document for full description. 
 //
@@ -47,23 +47,21 @@
 // etc....see protocol design document for full C&C format.
 
 //               Left                             Right 
-//0---------------------------------31--------------------------------------63
-//0        8        16       24                40        48         56 58 59  BCLK counter (AD_state)
-//<   MSB  ><       ><  LSB  > 	     <   MSB   ><        ><   LSB   >       - AK5394A 
+//0-------------------------------------------------------------------------63
+//0                 16       24                          35         51 52    BCLK counter (AD_state)
+//<   Left data     ><  LSB  > 	     <   Right data      ><   LSB   >       - AK5394A 
 //<Mic MSB ><Mic LSB> 	     								                - TLV320 
 
 
 // Sync and control bytes are sent as follows:
 
-// 0     1     2     3   4   5   6   7  BCLK counter (AD_state)
-//<0x7F><0x7F><0x7F><C0><C1><C2><C3><C4> 
+// 0            2         4        5      6     BCLK counter (AD_state)
+//      <0x7F7F>  <0x7F,C0> <C1,C2> <C3,C4> 
 
 
-// The format for data FROM the PC is the same control sequence followed by  48k/16 bit data:-
-
-//
-//                                            Left      Right      I         Q
-//   <0x7F><0x7F><0x7F><C0><C1><C2><C3><C4><MSB><LSB><MSB><LSB><MSB><LSB><MSB><LSB> etc...
+// The format for data FROM the PC is the same sync & control sequence followed by 48k/16 bit data:-
+//                                                       
+//   <0x7F7F><0x7F,C0><C1,C2><C3,C4>< Left data >< Right data >< I data >< Q data > etc...
 
 // Control bytes are as follows:
 //
@@ -94,10 +92,12 @@
 //			- 36 0C 00 - All chip power on
 //			- 36 0E 02 - Slave, 16 bit, I2S 
 //			- 36 10 00 - Clock/2, 48k, Normal mode
+//
+//		I2C address for TLV320 is 0x36 
 
 
 
-// AK5394A and TLV320 MCLK clock is 12.288MHz and is generated in the Janus board CPLD
+// AK5394A and TLV320 MCLK clock is 12.288MHz and is generated on the Janus board CPLD
 // This version uses 2 state machines, one to manage A/D
 // and one to manage the FX2 USB interface. The two are needed
 // since the FX2 USB must run off the FX2 24MHz clock and the
@@ -108,7 +108,8 @@
 // 
 // Built with Quartus II v5.1 
 //
-// Change log: 	Ported from Duplex.v 22 July 2006
+// Change log: 	Ported from Duplex.v  22 July 2006
+//				Code comments updated 23 July 2006
 //
 // 	
 ////////////////////////////////////////////////////////////
@@ -185,9 +186,20 @@
 ////////////////////////////////////////////////////////////
 
 
+//////////////////////////////////////////////////////////////
+//
+//		TODO list 
+//
+//////////////////////////////////////////////////////////////
 
-
-// TODO:  replace SO, S1, 
+//  replace SO, S1 with DFS0 and DFS1.  
+// 	combine states in Rx code where indicated 
+//	check pin names are consistent all the way through
+//	activate dot, dash and PTT inputs with debounce
+//  decode C&C data 
+//	encode C&C data
+//  make output data/levels safe when sync is lost 
+//
 
 module Ozy_Janus(
 	FX2_CLK, CLK_24MHZ, FX2_FD, FX2_SLRD, FX2_SLWR, FX2_flags, FX2_PA, BCLK, DOUT, LRCLK, LED, I_PWM_out,
@@ -274,12 +286,13 @@ reg strobe;					// set when we want to send data to the Tx FIFO
 //
 //////////////////////////////////////////////////////////////
 
-/*	The following code provides CBCLK and CLRCLK clocks as required for the TLV320 when 
-	operating at 48kHz. Note the phase relationship required betweeen LRCLK and BCLK.
+/*	The following code provides CBCLK and CLRCLK clocks as required for the TLV320
+	and PWM D/A converters since these always operate at 48kHz.
+	Note the phase relationship required betweeen LRCLK and BCLK.
 	LRCLK must change state on the negative edge of BCLK. 
 */
 
-// divide  CLK_24MHZ (24.576MHz) from Janus to give clocks for the TLV320
+// divide  CLK_24MHZ (24.576MHz) from Janus to give clocks for the TLV320 and PWM -
 // using Altera Megafunction
 
 wire [8:0]clock_out; 
@@ -338,6 +351,18 @@ end
 assign S0 = DFS0;  
 assign S1 = DFS1;
 
+//////////////////////////////////////////////////////////////
+//
+//		Decode Command & Control data  
+//
+//////////////////////////////////////////////////////////////
+
+/*
+	Add code here to decode C0-C5. NOTE: decode on the
+	positive edge of CLRCLK since the data is stable then
+	
+*/
+
 	
 //////////////////////////////////////////////////////////////
 //
@@ -349,7 +374,7 @@ assign S1 = DFS1;
 	The following  code sends the sync bytes, control bytes and A/D samples. 
 	
 	The code is structured round counting the number of BCLKs that occur following 
-	the negative edge of the LRCLK. At the negative edge a state counter (AD_state) 
+	the negative edge of the LRCLK. At the positive edge of BCLK a state counter (AD_state) 
 	increments.  At each state we determine what data needs to to be latched into a 2048 word Tx FIFO. 
 	
 	We need to loop through the following code 62 times. The first time though
@@ -364,11 +389,11 @@ assign S1 = DFS1;
 	since the counter is incremented before we read it we actually test for 
 	the loop counter to be 63. 
 	
-	If PTT/dot or dash inputs are acitve they are sent in C0
+	If PTT, dot or dash inputs are acitve they are sent in C & C byte C0
 */
 
 wire [7:0]C0;
-assign C0 = 8'd0; // this needs to hold C&C address in the future
+assign C0 = 8'd0; // temps value, this needs to hold C&C data  in the future
 
 reg [6:0] AD_state;
 	
@@ -377,8 +402,8 @@ begin
 		q[15:0] <= {q[14:0],DOUT};				// shift current AK5394A data left and add next bit
 		sync_Rx_used[11:0] <= Rx_used_rdside; 	 
 		strobe <= 1'b0;							// reset Tx FIFO strobe
-		if (loop_counter == 63) loop_counter <= 0; // count how many times through the loop to see if sync is to be sent
-case (AD_state)
+		if (loop_counter == 63) loop_counter <= 0; // count how many times through the loop to 
+case (AD_state)									   // see if sync is to be sent
 6'd0: 	begin
 		if(!LRCLK) AD_state <= 6'd0;			// loop until LRCLK is high
 		else AD_state <= 6'd1;
@@ -394,6 +419,8 @@ case (AD_state)
 			end
 		AD_state <= AD_state + 1'b1;
 		end
+//**** TODO: once working combine states 3 and 4 now we are using 16 bits to FX2		
+
 6'd3:	begin
 		if(loop_counter == 0) begin  			// load remainder of sync 
 			register[15:8] <= 8'h7F;
@@ -540,7 +567,7 @@ reg  [10:0] syncd_write_used; 	// ditto but synced to FX2 clock
 //////////////////////////////////////////////////////////////
 /*
 	The state machine checks if there are characters to be read
-	in the FX2 Rx FIFO by checking 'fifo_data_available'  If set it loads the byte
+	in the FX2 Rx FIFO by checking 'fifo_data_available'  If set it loads the word
 	read into the Rx_register. On the next clock it  checks if the Tx_data_fag is set
 	 - if so it sends the data in 'register'to the Tx FIFO. After the Tx data has been sent 
 	it checks 'fifo_data_available' in round robin fashion.
@@ -558,7 +585,7 @@ reg [7:0]RX_wait;							// increments when there is no receive data	(C2)
 always @ (posedge FX2_CLK)
 begin
 	syncd_write_used <= write_used;
-	case(state_FX)
+case(state_FX)
 // state 0 - check for Rx data
   3'h0: begin
         FX2_SLWR <= 1;								// reset FX2 FIFO write stobe
@@ -643,10 +670,10 @@ Rx_fifo	Rx_fifo(.wrclk (FX2_SLRD),.rdreq (fifo_enable),.rdclk (BCLK),.wrreq (1'b
 //
 //////////////////////////////////////////////////////////////
 /*
-	The state machine changes state on the negative  edge of BCLK.
+	The state machine changes state on the negative edge of BCLK.
 	The code loops until there are at least 1024 bytes in the Rx_FIFO.  
-	The code loops looking for a sync sequence (0x7F7F7F). Once located it
-	sleeps for 512 bytes and then looks for the sync sequence again. If located
+	The code then loops looking for a sync sequence (0x7F7F7F). Once located it
+	sleeps for 512 bytes (256 words) and then looks for the sync sequence again. If located
 	it contiunes, if not it restarts. 	
 	
 	After successfully finding sync it  stores the next 5 bytes 
@@ -671,7 +698,7 @@ Rx_fifo	Rx_fifo(.wrclk (FX2_SLRD),.rdreq (fifo_enable),.rdclk (BCLK),.wrreq (1'b
 	since the counter is incremented before we read it we actually test for 
 	the byte counter to be 63. 
 	
-	At the end of loop the next 3 bytes should be the sync sequence (state 4).
+	At the end of the loop the next 3 bytes should be the sync sequence (state 3).
 	If the sync sequence is found then we continue otherwise we revert to the beginning 
 	(state 0) and try to gain sync again. 
 	
@@ -702,6 +729,8 @@ always @ (negedge BCLK)
 begin
 	synced_Rx_used <= Rx_used;							// sync Rx_used to BCLK since this runs of FX2 clock
 case(state_PWM)
+// IMPORTANT:  We are looking for,or have lost sync,at this point - use this state to set all 
+// outputs etc to a safe value. 
   0: begin
 		LED_sync <= 1'b0; 								// turn sync LED off
 	 	if(synced_Rx_used > 1023)begin					// wait until we have at lease 1024 bytes to check
@@ -720,15 +749,15 @@ case(state_PWM)
 	 end
 // state 1 - check for 0x7F  sync character
   1: begin
-		if (Rx_data[15:8] == 8'h7F)begin 					// have middle of sync
+		if (Rx_data[15:8] == 8'h7F)begin 				// have middle of sync
 			sync_count <= sync_count + 9'b1;
 			state_PWM <= 2; 
 		end		
-		else state_PWM <= 0;						// not sync, restart
+		else state_PWM <= 0;							// not sync, restart
 	 end
 	
 // state 2 - loop until the next sync is due and check we receive it
-// IMPORTANT:  We are looking for or have lost it at this point - use this state to set all 
+// IMPORTANT:  We are looking for,or have lost sync,at this point - use this state to set all 
 // outputs etc to a safe value. 
   2: begin
 		if(sync_count == 255)begin  // we are counting words so this is actually 511 bytes
