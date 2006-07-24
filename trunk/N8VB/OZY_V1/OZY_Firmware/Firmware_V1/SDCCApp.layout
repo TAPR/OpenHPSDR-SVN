@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE CodeBlocks_layout_file>
 <CodeBlocks_layout_file>
-	<File name="Initial\src\board_specific.c" open="1" top="0">
-		<Cursor position="0" topLine="17"/>
+	<File name="Initial\include\fx2regs.h" open="1" top="0">
+		<Cursor position="24636" topLine="0"/>
 	</File>
-	<File name="Initial\src\hpsdr_main.c" open="1" top="1">
-		<Cursor position="4662" topLine="167"/>
+	<File name="Initial\src\hpsdr_common.c" open="1" top="1">
+		<Cursor position="3315" topLine="27"/>
 	</File>
 	<Expand folder="/Sources/Initial/src"/>
 	<Expand folder="/Sources/Initial"/>
@@ -13,6 +13,4 @@
 	<Expand folder="/Headers/Initial/include"/>
 	<Expand folder="/Headers/Initial"/>
 	<Expand folder="/Headers"/>
-	<Expand folder="/Others/Initial"/>
-	<Expand folder="/Others"/>
 </CodeBlocks_layout_file>

@@ -4,19 +4,19 @@
  * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
  *
  * Copyright 2004 Free Software Foundation, Inc.
- * 
+ *
  * This file is part of GNU Radio
- * 
+ *
  * GNU Radio is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- * 
+ *
  * GNU Radio is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with GNU Radio; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
@@ -70,20 +70,13 @@
  * definitions of these.  They are related to usrp_rev1_regs.h]
  */
 #define	SPI_ENABLE_FPGA		0x01	// select FPGA
-#define	SPI_ENABLE_CODEC_A	0x02	// select AD9862 A
-#define	SPI_ENABLE_CODEC_B	0x04	// select AD9862 B
-#define	SPI_ENABLE_reserved	0x08
-#define	SPI_ENABLE_TX_A		0x10	// select d'board TX A
-#define	SPI_ENABLE_RX_A		0x20	// select d'board RX A
-#define	SPI_ENABLE_TX_B		0x40	// select d'board TX B
-#define	SPI_ENABLE_RX_B		0x80	// select d'board RX B
 
 /*
  * If there's one header byte, it goes in wValueL.
  *
  * If there are two header bytes, they go in wValueH | wValueL.
- * The transmit order of the bytes (and bits within them) is 
+ * The transmit order of the bytes (and bits within them) is
  * determined by SPI_FMT_*SB
  */
- 
+
 #endif /* INCLUDED_USRP_SPI_DEFS_H */

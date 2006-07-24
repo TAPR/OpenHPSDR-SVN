@@ -119,3 +119,26 @@
 
 1152562020 c:\data\hpsdr\trunk\n8vb\ozy_v1\firmware\firmware_v1\initial\include\usb_requests.h
 
+1153337895 c:\data\hpsdr\trunk\n8vb\ozy_v1\ozy_firmware\firmware_v1\initial\src\fpga_load.c
+	"../include/hpsdr_common.h"
+	"../include/fpga_load.h"
+	"../include/delay.h"
+
+1153512011 c:\data\hpsdr\trunk\n8vb\ozy_v1\ozy_firmware\firmware_v1\initial\include\hpsdr_common.h
+	"hpsdr_config.h"
+	"hpsdr_rev1_regs.h"
+	"syncdelay.h"
+
+1153337894 c:\data\hpsdr\trunk\n8vb\ozy_v1\ozy_firmware\firmware_v1\initial\include\hpsdr_config.h
+
+1153525690 c:\data\hpsdr\trunk\n8vb\ozy_v1\ozy_firmware\firmware_v1\initial\include\hpsdr_rev1_regs.h
+	"fx2regs.h"
+
+1153337894 c:\data\hpsdr\trunk\n8vb\ozy_v1\ozy_firmware\firmware_v1\initial\include\fx2regs.h
+
+1153337894 c:\data\hpsdr\trunk\n8vb\ozy_v1\ozy_firmware\firmware_v1\initial\include\syncdelay.h
+
+1153337894 c:\data\hpsdr\trunk\n8vb\ozy_v1\ozy_firmware\firmware_v1\initial\include\fpga_load.h
+
+1153337894 c:\data\hpsdr\trunk\n8vb\ozy_v1\ozy_firmware\firmware_v1\initial\include\delay.h
+

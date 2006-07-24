@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Fri Jul 21 16:22:53 2006
+; This file generated Mon Jul 24 15:01:48 2006
 ;--------------------------------------------------------
 	.module spi
 	.optsdcc -mmcs51 --model-small

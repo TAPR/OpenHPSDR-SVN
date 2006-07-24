@@ -9,7 +9,7 @@
 		<Option compiler="5"/>
 		<Build>
 			<Target title="default">
-				<Option output="OZYV1FW07212006-1.hex"/>
+				<Option output="OZYV1FW07242006-1.hex"/>
 				<Option working_dir="."/>
 				<Option object_output=".objs"/>
 				<Option deps_output=".deps"/>
@@ -171,7 +171,7 @@
 			<Option weight="1"/>
 			<Option target="default"/>
 		</Unit>
-		<Unit filename="Initial\src\asm\usb_descriptors.asm">
+		<Unit filename="Initial\src\asm\usb_descriptors_X1.asm">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
 			<Option weight="2"/>
