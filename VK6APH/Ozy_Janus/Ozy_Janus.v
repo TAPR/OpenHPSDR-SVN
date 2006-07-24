@@ -123,30 +123,30 @@
 //
 //   AK5394A and LTV320AIC23B connections to OZY FPGA pins
 //
-//   24.576MHZ clock - pin 175 - (CLK_24MHZ)
-//   BCLK			 - pin 173 - AK5394A (SCLK)
-//   DOUT 			 - pin 171 - AK5394A
-//   LRCLK 		     - pin 170 - AK5394A
-//   I_PWM_out	 	 - pin 152
-//   Q_PWM_out		 - pin 187
-//   PTT	 		 - pin 165 
-//   CBCLK			 - pin 163 - TLV320
-//   CDOUT			 - pin 180 - TLV320
-//   CDIN			 - pin 181 - TLV320
-//   CLRCLK			 - pin 162 - TLV320 
-//   S0		      	 - pin 169 - AK5394A speed setting
-//   S1				 - pin 179 - AK5394A speed setting 
+//   24.576MHZ clock - pin 120 - (CLK_24MHZ)
+//   BCLK			 - pin 127 - AK5394A (SCLK)
+//   DOUT 			 - pin 128 - AK5394A
+//   LRCLK 		     - pin 133 - AK5394A
+//   I_PWM_out	 	 - pin 144
+//   Q_PWM_out		 - pin 113
+//   PTT	 		 - pin 137
+//   CBCLK			 - pin 139 - TLV320
+//   CDOUT			 - pin 117 - TLV320
+//   CDIN			 - pin 116 - TLV320
+//   CLRCLK			 - pin 141 - TLV320 
+//   S0		      	 - pin 134 - AK5394A speed setting
+//   S1				 - pin 118 - AK5394A speed setting 
 //
 //
 //	 FX2 pin    to   FPGA pin connections
 //
 //   FX2_CLK		- pin 23
-//	 FX2_FD[0]		- pin 57
-//	 FX2_FD[1]		- pin 58
-//	 FX2_FD[2]		- pin 59
-//	 FX2_FD[3]		- pin 60
-//	 FX2_FD[4]		- pin 61
-//	 FX2_FD[5]		- pin 62
+//	 FX2_FD[0]		- pin 56
+//	 FX2_FD[1]		- pin 57
+//	 FX2_FD[2]		- pin 58
+//	 FX2_FD[3]		- pin 59
+//	 FX2_FD[4]		- pin 60
+//	 FX2_FD[5]		- pin 61
 //	 FX2_FD[6]		- pin 63
 //	 FX2_FD[7]		- pin 64
 //	 FX2_FD[8]		- pin 208
@@ -929,12 +929,17 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(FX2_CLK));
 
 assign FX2_FD[15:0] = FX2_SLWR ? 16'bZ : Tx_register[15:0];
 
-// Flash the LEDs to show something is working!
+// Flash the LEDs to show something is working! - LEDs are active low
 
-assign LED[0] = write_full; 	// LED D1 on when Rx fifo is full. 
-assign LED[1] = FX2_flags[2];	// LED D3 on when we can write to FX2 FIFO
+assign LED[0] = ~write_full; 	// LED D1 on when Rx fifo is full. 
+assign LED[1] = ~FX2_flags[2];	// LED D3 on when we can write to FX2 FIFO
 
-assign LED[2] = LED_sync; 		// LED D4 toggles each time we get sync
+assign LED[2] = ~LED_sync; 		// LED D4 toggles each time we get sync
+assign LED[3] = 1'b1;
+assign LED[4] = 1'b1;
+assign LED[5] = CLRCLK;
+assign LED[6] = CBCLK;
+assign LED[7] = CLK_24MHZ;
 
 
 endmodule
