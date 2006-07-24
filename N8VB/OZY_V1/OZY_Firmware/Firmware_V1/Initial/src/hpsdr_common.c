@@ -43,6 +43,21 @@ init_hpsdr (void)
   IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFCLKPOL | bmIFFIFO;
   SYNCDELAY;
 
+//Clear and reset all FIFOs see pg. 15-20 of TRM V2.1
+  SYNCDELAY;
+  FIFORESET = 0x80;
+  SYNCDELAY;
+  FIFORESET = 0x02;
+  SYNCDELAY;
+  FIFORESET = 0x04;
+  SYNCDELAY;
+  FIFORESET = 0x06;
+  SYNCDELAY;
+  FIFORESET = 0x08;
+  SYNCDELAY;
+  FIFORESET = 0x00;
+  SYNCDELAY;
+
   // configure IO ports (B and D are used by FIFO)
 
   IOA = bmPORT_A_INITIAL;	// Port A initial state
@@ -57,58 +72,123 @@ init_hpsdr (void)
 
   // configure end points
 
+// we are just using the default values, yes this is not necessary...
   EP1OUTCFG = bmVALID | bmBULK;
+  EP1INCFG = bmVALID | bmBULK;
   SYNCDELAY;
-  EP1INCFG  = bmVALID | bmBULK | bmIN;
+  EP2CFG = bmVALID | bmBULK | bmDOUBLEBUF;
   SYNCDELAY;
-  EP2CFG    = bmVALID | bmBULK | bmQUADBUF; // 512 quad bulk OUT
+  EP4CFG = bmVALID | bmBULK;
   SYNCDELAY;
-  EP4CFG    = 0; // disabled
+  EP6CFG = bmVALID | bmBULK | bmDOUBLEBUF | bmIN;
   SYNCDELAY;
-  EP6CFG    = bmVALID | bmBULK | bmQUADBUF | bmIN;	// 512 quad bulk IN
-  SYNCDELAY;
-  EP8CFG    = 0; // disabled
-  SYNCDELAY;
-
-  // reset FIFOs
-
-  FIFORESET = bmNAKALL;
-  SYNCDELAY;
-  FIFORESET = 2;
-  SYNCDELAY;
-  // FIFORESET = 4;
-  //SYNCDELAY;
-  FIFORESET = 6;
-  SYNCDELAY;
-  // FIFORESET = 8;
-  //SYNCDELAY;
-  FIFORESET = 0;
+  EP8CFG = bmVALID | bmBULK | bmIN;
   SYNCDELAY;
 
-  // configure end point FIFOs
+  FIFOPINPOLAR=0x00; //default polarities: SLWR active low
+                                    // see pg 15-22 TRM V2.1
 
-  // let core see 0 to 1 transistion of autoout bit
+  //EP2
 
-  EP2FIFOCFG =             bmWORDWIDE;
-  SYNCDELAY;
   EP2FIFOCFG = bmAUTOOUT | bmWORDWIDE;
   SYNCDELAY;
-  EP6FIFOCFG = bmAUTOIN  | bmWORDWIDE;
+  EP2AUTOINLENH = 0x02; //MSB
+  SYNCDELAY;
+  EP2AUTOINLENL = 0x00; //LSB
   SYNCDELAY;
 
+  //EP4
 
-  // prime the pump
+  EP4FIFOCFG = bmAUTOOUT | bmWORDWIDE;
+  SYNCDELAY;
+  EP4AUTOINLENH = 0x02; //MSB
+  SYNCDELAY;
+  EP4AUTOINLENL = 0x00; //LSB
+  SYNCDELAY;
+  //EP6
 
-#if 0
-  EP2BCL  = 0x80;
+  EP6FIFOCFG = bmAUTOIN | bmWORDWIDE;
   SYNCDELAY;
-  EP2BCL  = 0x80;
+  EP6AUTOINLENH = 0x02; //MSB
   SYNCDELAY;
-  EP2BCL  = 0x80;
+  EP6AUTOINLENL = 0x00; //LSB
   SYNCDELAY;
-  EP2BCL  = 0x80;
+
+  //EP8
+
+  EP8FIFOCFG = bmAUTOIN | bmWORDWIDE;
   SYNCDELAY;
-#endif
+  EP8AUTOINLENH = 0x02; //MSB
+  SYNCDELAY;
+  EP8AUTOINLENL = 0x00; //LSB
+
+  // out endpoints do not come up armed
+
+  // since the defaults are double buffered we must write dummy byte counts twice
+  SYNCDELAY;
+  EP2BCL = 0x80;                // arm EP2OUT by writing byte count w/skip.
+  SYNCDELAY;
+  EP2BCL = 0x80;
+  SYNCDELAY;
+  EP4BCL = 0x80;                // arm EP4OUT by writing byte count w/skip.
+  SYNCDELAY;
+  EP4BCL = 0x80;
+
+  // enable dual autopointer feature
+  AUTOPTRSETUP |= 0x01;
+
+//  EP1OUTCFG = bmVALID | bmBULK;
+//  SYNCDELAY;
+//  EP1INCFG  = bmVALID | bmBULK | bmIN;
+//  SYNCDELAY;
+//  EP2CFG    = bmVALID | bmBULK | bmQUADBUF; // 512 quad bulk OUT
+//  SYNCDELAY;
+//  EP4CFG    = 0; // disabled
+//  SYNCDELAY;
+//  EP6CFG    = bmVALID | bmBULK | bmQUADBUF | bmIN;	// 512 quad bulk IN
+//  SYNCDELAY;
+//  EP8CFG    = 0; // disabled
+//  SYNCDELAY;
+//
+//  // reset FIFOs
+//
+//  FIFORESET = bmNAKALL;
+//  SYNCDELAY;
+//  FIFORESET = 2;
+//  SYNCDELAY;
+//  // FIFORESET = 4;
+//  //SYNCDELAY;
+//  FIFORESET = 6;
+//  SYNCDELAY;
+//  // FIFORESET = 8;
+//  //SYNCDELAY;
+//  FIFORESET = 0;
+//  SYNCDELAY;
+//
+//  // configure end point FIFOs
+//
+//  // let core see 0 to 1 transistion of autoout bit
+//
+//  EP2FIFOCFG =             bmWORDWIDE;
+//  SYNCDELAY;
+//  EP2FIFOCFG = bmAUTOOUT | bmWORDWIDE;
+//  SYNCDELAY;
+//  EP6FIFOCFG = bmAUTOIN  | bmWORDWIDE;
+//  SYNCDELAY;
+//
+//
+//  // prime the pump
+//
+//#if 0
+//  EP2BCL  = 0x80;
+//  SYNCDELAY;
+//  EP2BCL  = 0x80;
+//  SYNCDELAY;
+//  EP2BCL  = 0x80;
+//  SYNCDELAY;
+//  EP2BCL  = 0x80;
+//  SYNCDELAY;
+//#endif
 
   EP0BCH = 0;
   SYNCDELAY;
@@ -119,13 +199,13 @@ init_hpsdr (void)
   SYNCDELAY;
 
 
-  // set autoin length for EP6
-  // FIXME should be f(enumeration)
-
-  EP6AUTOINLENH = (512) >> 8;	 // this is the length for high speed
-  SYNCDELAY;
-  EP6AUTOINLENL = (512) & 0xff;
-  SYNCDELAY;
+//  // set autoin length for EP6
+//  // FIXME should be f(enumeration)
+//
+//  EP6AUTOINLENH = (512) >> 8;	 // this is the length for high speed
+//  SYNCDELAY;
+//  EP6AUTOINLENL = (512) & 0xff;
+//  SYNCDELAY;
 
   // init serial
 

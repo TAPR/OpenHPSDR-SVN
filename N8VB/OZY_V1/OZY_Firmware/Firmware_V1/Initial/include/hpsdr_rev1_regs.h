@@ -107,10 +107,10 @@ sbit at 0xA0+2 bitALTERA_DCLK;
 //-------------------------------------------------------------
 /* Port E: not bit addressible		*/
 
-#define USRP_PE			IOE		// Port E
-#define USRP_PE_OE		OEE		// Port E direction register
+#define HPSDR_PE			IOE		// Port E
+#define HPSDR_PE_OE	OEE		// Port E direction register
 
-#define bmPA_CS_FPGA		bmPE_PE0
+#define bmPA_CS_FPGA		bmPE_PE7
 
 #define bmPE_PE0			bmBIT0		//
 #define bmPE_PE1			bmBIT1		//

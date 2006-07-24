@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Fri Jul 21 16:22:52 2006
+                              4 ; This file generated Mon Jul 24 15:01:47 2006
                               5 ;--------------------------------------------------------
                               6 	.module eeprom_io
                               7 	.optsdcc -mmcs51 --model-small
@@ -130,7 +130,7 @@
                             130 ;     genCall
    041B 8A 82               131 	mov	dpl,r2
    041D C0 02               132 	push	ar2
-   041F 12 07 46            133 	lcall	_i2c_write
+   041F 12 07 A7            133 	lcall	_i2c_write
    0422 E5 82               134 	mov	a,dpl
    0424 D0 02               135 	pop	ar2
                             136 ;     genIfx
@@ -156,5 +156,5 @@
    0434 8A 82               156 	mov	dpl,r2
                             157 ;     genRet
                             158 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0436 02 06 6F            159 	ljmp	_i2c_read
+   0436 02 06 D0            159 	ljmp	_i2c_read
                             160 	.area CSEG    (CODE)

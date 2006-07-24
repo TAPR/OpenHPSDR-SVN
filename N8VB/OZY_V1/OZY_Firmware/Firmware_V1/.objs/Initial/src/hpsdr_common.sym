@@ -673,7 +673,7 @@ Area Table
    6 BSEG                                                                               size    0   flags 80
    7 PSEG                                                                               size    0   flags 50
    8 XSEG                                                                               size    0   flags 40
-   9 CSEG                                                                               size   A3   flags 20
+   9 CSEG                                                                               size  104   flags 20
    A GSINIT0                                                                            size    0   flags 20
    B GSINIT1                                                                            size    0   flags 20
    C GSINIT2                                                                            size    0   flags 20

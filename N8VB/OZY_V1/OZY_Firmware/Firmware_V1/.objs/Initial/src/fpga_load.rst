@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Fri Jul 21 16:22:51 2006
+                              4 ; This file generated Mon Jul 24 15:01:46 2006
                               5 ;--------------------------------------------------------
                               6 	.module fpga_load
                               7 	.optsdcc -mmcs51 --model-small
@@ -728,7 +728,7 @@
                             728 ;Initial/src/fpga_load.c:44: udelay (40);					// wait 40 us
                             729 ;     genCall
    043C 75 82 28            730 	mov	dpl,#0x28
-   043F 12 05 FE            731 	lcall	_udelay
+   043F 12 06 5F            731 	lcall	_udelay
                             732 ;Initial/src/fpga_load.c:45: HPSDR_ALTERA_CONFIG |= bmALTERA_NCONFIG;	// set NCONFIG high
                             733 ;     genOr
    0442 43 A0 02            734 	orl	_IOC,#0x02
@@ -755,7 +755,7 @@
                             755 ;     genCall
    0451 75 82 32            756 	mov	dpl,#0x32
    0454 C0 02               757 	push	ar2
-   0456 12 05 FE            758 	lcall	_udelay
+   0456 12 06 5F            758 	lcall	_udelay
    0459 D0 02               759 	pop	ar2
                             760 ;Initial/src/fpga_load.c:51: if (counter  >= 255)
                             761 ;     genCmpLt
