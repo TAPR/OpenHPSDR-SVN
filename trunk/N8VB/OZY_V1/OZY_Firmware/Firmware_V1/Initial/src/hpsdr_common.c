@@ -32,15 +32,17 @@ void init_board (void);
 void
 init_hpsdr (void)
 {
-  CPUCS = bmCLKSPD1 | bmCLKOE;	// CPU runs @ 48 MHz
+  CPUCS = bmCLKSPD0 | bmCLKOE;	// CPU runs @ 24 MHz  Changed 07/25/2006
                                                         // CLKOUT is Enabled!
                                                         // CLKOUT is the FPGA CLK1
+                                                        // bmCLKSPD0 = 24 MHz
+                                                        // bmCLKSPD1 = 48 MHz
 
   CKCON = 0;		// MOVX takes 2 cycles
 
   // IFCLK is generated internally and runs at 48 MHz; Slave FIFO mode - PAC 07/10/2006
-
-  IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFCLKPOL | bmIFFIFO;
+  // bmASYNC added 07/25/2006 PAC
+  IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFCLKPOL | bmIFFIFO | bmASYNC;
   SYNCDELAY;
 
 //Clear and reset all FIFOs see pg. 15-20 of TRM V2.1
