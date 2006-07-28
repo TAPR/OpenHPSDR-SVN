@@ -21,7 +21,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 // 
-// CPLD code for Janus board to interface with a Xylo board.
+// CPLD code for Janus board to interface with an OZY board.
 // Sets I/O pins on ADC and DAC chips plus provides clocks.
 //
 // TLV320 is in slave mode and AK5394A is Master. Note that both devices are fed from 
@@ -96,7 +96,7 @@ always @ ( posedge  CLK_24MHZ) begin
 /////////////////////////////////////////////////////////////
 
 /*
-	 hold the A/D chip in reset until 2^25 CLL_24MHZ have passed - about 1.5 seconds. This
+	 hold the A/D chip in reset until 2^25 CLK_24MHZ have passed - about 1.5 seconds. This
 	 is to allow the AK4593A to calibrate correctly.
 */
 
