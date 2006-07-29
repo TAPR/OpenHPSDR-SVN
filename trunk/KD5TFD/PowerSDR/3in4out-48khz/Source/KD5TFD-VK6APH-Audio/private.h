@@ -28,6 +28,7 @@ extern DttSP_EXP void DelPolyPhaseFIRF (/*ResSt*/ void * resst);
 
 
 
+
 // PowerSDR interface routines 
 // extern KD5TFDVK6APHAUDIO_API int StartAudio(int block_size); 
 extern KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata), int sample_bits);
@@ -40,11 +41,23 @@ extern KD5TFDVK6APHAUDIO_API int StartAudio_4port(int samples_per_block, int (__
 extern KD5TFDVK6APHAUDIO_API void StopAudio_4port(void); 
 #endif 
 
-// Xylo IO routines 
+// Xylo IO routines  - now obsolete 
 extern HANDLE *XyloOpen(void); 
 extern void XyloClose(HANDLE *h); 
 extern int XyloBulkWrite(HANDLE *h, ULONG pipe, void* buffer, ULONG buffersize);
 extern WORD XyloBulkRead(HANDLE *h, ULONG pipe, void* buffer, ULONG buffersize);
+
+// Ozy IO Routines 
+struct OzyHandle {
+	struct usb_device *devp; 
+	struct usb_dev_handle *h; 
+}; 
+
+extern struct OzyHandle *OzyOpen(void); 
+extern void OzyClose(struct OzyHandle *h); 
+extern int OzyBulkWrite(struct OzyHandle *h, ULONG pipe, void* buffer, ULONG buffersize);
+extern int OzyBulkRead(struct OzyHandle *h, ULONG pipe, void* buffer, ULONG buffersize);
+
 
 // IOThread rountines 
 extern void *IOThreadMain(void *argp); 
