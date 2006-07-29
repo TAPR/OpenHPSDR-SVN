@@ -440,7 +440,19 @@ void IOThreadMainLoop(void) {
 #endif 
 #ifndef TEST_READ 
 			// numread = XyloBulkRead(XyloH, 4, read_buf, sizeof(read_buf)); 
+#ifdef XYLO
 			numread = XyloBulkRead(XyloH, 4, FPGAReadBufp, FPGAReadBufSize); 
+#endif 
+#ifdef OZY 
+			numread = OzyBulkRead(OzyH, 0x86, FPGAReadBufp, FPGAReadBufSize); 
+			if ( numread <= 0 ) { 
+				int trc; 
+				char tbuf[512]; 
+				fprintf(stderr, "OzyBulkRead failed rc=%d\n", numread);  fflush(stderr); 
+				trc = OzyBulkWrite(OzyH, 0x02, tbuf, sizeof(tbuf)); 
+				fprintf(stderr, "OzyBulkWrite trc=%d\n", trc);  fflush(stderr);		
+			} 
+#endif 
 			// printf("iot: read %d bytes\n", numread); fflush(stdout); 
 			++buf_num; 
 
@@ -848,7 +860,12 @@ void IOThreadMainLoop(void) {
 			
 			if ( writebufpos >= FPGAWriteBufSize ) {  // write the buffer if we've filled it. 
 				wrote_frame = 1; 
+#ifdef XYLO
 				numwritten = XyloBulkWrite(XyloH, 2, FPGAWriteBufp, FPGAWriteBufSize); 
+#endif 
+#ifdef OZY 
+				numwritten = OzyBulkWrite(OzyH, 0x02, FPGAWriteBufp, FPGAWriteBufSize); 
+#endif 
 				// numwritten = OUTBUF_SIZE; 
 
 #ifdef SAVE_WRITES_TO_BUFFER 

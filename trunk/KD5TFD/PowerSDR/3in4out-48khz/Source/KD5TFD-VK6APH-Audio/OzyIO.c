@@ -9,6 +9,9 @@
 #define OZY_PID (0x0007) 
 #define OZY_VID (0xfffe) 
 
+/* IO Timeout - in msecs */ 
+#define OZY_IO_TIMEOUT (1000) 
+
 // returns non zero if devp match vid and pid passed 
 int doesDevMatchVIDPID(struct usb_device *devp, int vid, int pid) { 
 	if ( devp->descriptor.bDescriptorType == USB_DT_DEVICE  && devp->descriptor.idVendor == vid &&  devp->descriptor.idProduct == pid )  {	
@@ -125,13 +128,17 @@ void OzyClose(struct OzyHandle *h)
 
 ///////////////////////////////////////////////////
 // USB functions to send and receive bulk packets
-int OzyBulkWrite(struct OzyHandle *h, ULONG pipe, void* buffer, ULONG buffersize)
+int OzyBulkWrite(struct OzyHandle *h, int ep, void* buffer, int buffersize)
 {
-	return 0; 
+	int rc; 
+	rc = usb_bulk_write(h->h, ep, (char *)buffer, buffersize, OZY_IO_TIMEOUT); 
+	return rc; 	
 }
 
 
-int  OzyBulkRead(struct OzyHandle *h, ULONG pipe, void* buffer, ULONG buffersize)
+int  OzyBulkRead(struct OzyHandle *h, int ep, void* buffer, int buffersize)
 { 
-	return 0; 
+	int rc; 
+	rc = usb_bulk_read(h->h, ep, (char *)buffer,  buffersize, OZY_IO_TIMEOUT);
+	return rc; 
 }
