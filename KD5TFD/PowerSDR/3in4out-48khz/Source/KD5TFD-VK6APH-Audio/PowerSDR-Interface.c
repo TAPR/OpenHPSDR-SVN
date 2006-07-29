@@ -97,7 +97,12 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 
 	// make sure we're not already opened 
 	// 
+#ifdef XYLO 
 	if ( XyloH != NULL || IOThreadRunning ) { 
+#endif 
+#ifdef OZY 
+	if ( OzyH != NULL || IOThreadRunning ) { 
+#endif 
 		return 3; 
 	} 
 
@@ -150,14 +155,22 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 		}
 		/*else*/
 		FPGAWriteBufp = FPGAReadBufp + FPGAReadBufSize; 
-		
+#ifdef XYLO		
 		// go open the xylo usb device 
 		XyloH = XyloOpen(); 
 		if ( XyloH == NULL ) { 
 			myrc =  2; 
 			break; 
 		} 
-
+#endif 
+#ifdef OZY 
+		// go open the ozy
+		OzyH = OzyOpen(); 
+		if ( OzyH == NULL ) { 
+			myrc =  2; 
+			break; 
+		} 
+#endif 
 		// create FIFO for inbound samples 
 		InSampleFIFOp = createFIFO();
 		if ( InSampleFIFOp == NULL ) { 
@@ -230,10 +243,18 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 			destroyFIFO(OutSampleFIFOp); 
 			OutSampleFIFOp = NULL; 
 		} 
+#ifdef XYLO
 		if ( XyloH != NULL ) { 
 			XyloClose(XyloH); 
 			XyloH = NULL; 
-		} 		
+		} 
+#endif 
+#ifdef OZY 
+		if ( OzyH != NULL ) { 
+			OzyClose(OzyH); 
+			OzyH = NULL; 
+		}
+#endif 
 	} 
 	DotDashBits = 0; 
 	return myrc; 
@@ -275,11 +296,21 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
 			CallbackInLbufp = NULL;
 	} 
 	printf("call back buf freed\n");   fflush(stdout); 
+#ifdef XYLO
 	if ( XyloH != NULL ) { 
 		XyloClose(XyloH); 
 		XyloH = NULL; 
 	} 
 	printf("xylo closed\n");   fflush(stdout); 
+#endif 
+#ifdef OZY
+	if ( OzyH != NULL ) { 
+		OzyClose(OzyH); 
+		OzyH = NULL; 
+	} 
+	printf("Ozy closed\n");   fflush(stdout); 
+#endif 
+
 	if ( MicResamplerP != NULL ) { 
 		DelPolyPhaseFIRF(MicResamplerP); 
 		MicResamplerP = NULL; 

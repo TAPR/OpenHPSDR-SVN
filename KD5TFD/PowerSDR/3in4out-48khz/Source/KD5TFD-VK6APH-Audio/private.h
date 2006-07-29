@@ -7,6 +7,9 @@
 // incldue dttsp stuff 
 #include <common.h> 
 
+#undef XYLO 
+#define OZY 1 
+
 
 #pragma message("info: Using explict externs for resamplers - should be in a DttSP header!")
 extern DttSP_EXP void *NewResamplerF (int samplerate_in, int samplerate_out);
@@ -41,22 +44,27 @@ extern KD5TFDVK6APHAUDIO_API int StartAudio_4port(int samples_per_block, int (__
 extern KD5TFDVK6APHAUDIO_API void StopAudio_4port(void); 
 #endif 
 
+#ifdef XYLO
 // Xylo IO routines  - now obsolete 
 extern HANDLE *XyloOpen(void); 
 extern void XyloClose(HANDLE *h); 
 extern int XyloBulkWrite(HANDLE *h, ULONG pipe, void* buffer, ULONG buffersize);
 extern WORD XyloBulkRead(HANDLE *h, ULONG pipe, void* buffer, ULONG buffersize);
+#endif 
 
+#ifdef OZY 
 // Ozy IO Routines 
 struct OzyHandle {
 	struct usb_device *devp; 
 	struct usb_dev_handle *h; 
 }; 
 
+
 extern struct OzyHandle *OzyOpen(void); 
 extern void OzyClose(struct OzyHandle *h); 
-extern int OzyBulkWrite(struct OzyHandle *h, ULONG pipe, void* buffer, ULONG buffersize);
-extern int OzyBulkRead(struct OzyHandle *h, ULONG pipe, void* buffer, ULONG buffersize);
+extern int OzyBulkWrite(struct OzyHandle *h, int ep, void* buffer, int buffersize);
+extern int OzyBulkRead(struct OzyHandle *h, int ep, void* buffer, int buffersize);
+#endif 
 
 
 // IOThread rountines 
@@ -81,7 +89,12 @@ extern void destroyFIFO(void *fifoh);
 #ifdef GLOBAL_DECL 
 #define extern 
 #endif 
+#ifdef XYLO
 extern HANDLE *XyloH;         // handle to the Xylo 
+#endif 
+#ifdef OZY 
+extern struct OzyHandle *OzyH; 
+#endif 
 extern int BlockSize;         // num samples in a block -- total sample count in block is number of channels time this 
 extern pthread_t IOThreadID;  // tid of IOthread 
 extern pthread_t CallbackThreadID; // tid of callback thread 
