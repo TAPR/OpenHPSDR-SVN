@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\nanotimer;..\DttSP;..\pthread;..\FFTW"
+				AdditionalIncludeDirectories="..\nanotimer;..\DttSP;..\pthread;..\FFTW;libusb"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;KD5TFDVK6APHAUDIO_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -34,6 +34,7 @@
 				Name="VCLinkerTool"
 				OutputFile="../../bin/Debug/KD5TFD-VK6APH-Audio.dll"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="libusb"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/KD5TFD-VK6APH-Audio.pdb"
 				SubSystem="2"
@@ -68,7 +69,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\nanotimer;..\DttSP;..\pthread;..\FFTW"
+				AdditionalIncludeDirectories="..\nanotimer;..\DttSP;..\pthread;..\FFTW;libusb"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;KD5TFDVK6APHAUDIO_EXPORTS"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
@@ -79,8 +80,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="libusb.lib"
 				OutputFile="../../bin/Release/KD5TFD-VK6APH-Audio.dll"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="libusb"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -138,6 +141,9 @@
 				RelativePath=".\KD5TFD-VK6APH-Audio.cpp">
 			</File>
 			<File
+				RelativePath=".\OzyIO.c">
+			</File>
+			<File
 				RelativePath=".\PowerSDR-Interface.c">
 			</File>
 			<File
@@ -177,6 +183,13 @@
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+		</Filter>
+		<Filter
+			Name="libusb"
+			Filter="">
+			<File
+				RelativePath=".\libusb\usb.h">
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt">
