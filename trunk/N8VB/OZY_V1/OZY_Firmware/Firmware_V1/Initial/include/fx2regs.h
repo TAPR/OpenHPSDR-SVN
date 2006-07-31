@@ -4,19 +4,19 @@
  * Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
  *
  * Copyright 2003 Free Software Foundation, Inc.
- * 
+ *
  * This file is part of GNU Radio
- * 
+ *
  * GNU Radio is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- * 
+ *
  * GNU Radio is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with GNU Radio; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
@@ -48,18 +48,18 @@
 // FX2 Related Register Assignments
 //-----------------------------------------------------------------------------
 
-// The Ez-USB FX2 registers are defined here. We use FX2regs.h for register 
-// address allocation by using "#define ALLOCATE_EXTERN". 
-// When using "#define ALLOCATE_EXTERN", you get (for instance): 
+// The Ez-USB FX2 registers are defined here. We use FX2regs.h for register
+// address allocation by using "#define ALLOCATE_EXTERN".
+// When using "#define ALLOCATE_EXTERN", you get (for instance):
 // xdata volatile BYTE OUT7BUF[64]   _at_   0x7B40;
-// Such lines are created from FX2.h by using the preprocessor. 
-// Incidently, these lines will not generate any space in the resulting hex 
-// file; they just bind the symbols to the addresses for compilation. 
-// You just need to put "#define ALLOCATE_EXTERN" in your main program file; 
-// i.e. fw.c or a stand-alone C source file. 
-// Without "#define ALLOCATE_EXTERN", you just get the external reference: 
+// Such lines are created from FX2.h by using the preprocessor.
+// Incidently, these lines will not generate any space in the resulting hex
+// file; they just bind the symbols to the addresses for compilation.
+// You just need to put "#define ALLOCATE_EXTERN" in your main program file;
+// i.e. fw.c or a stand-alone C source file.
+// Without "#define ALLOCATE_EXTERN", you just get the external reference:
 // extern xdata volatile BYTE OUT7BUF[64]   ;//   0x7B40;
-// This uses the concatenation operator "##" to insert a comment "//" 
+// This uses the concatenation operator "##" to insert a comment "//"
 // to cut off the end of the line, "_at_   0x7B40;", which is not wanted.
 */
 
@@ -276,10 +276,10 @@ EXTERN xdata _AT_(0xE6C7) volatile BYTE FLOWLOGIC         ; //Defines flow/hold 
 EXTERN xdata _AT_(0xE6C8) volatile BYTE FLOWEQ0CTL        ; //CTL states during active flow state
 EXTERN xdata _AT_(0xE6C9) volatile BYTE FLOWEQ1CTL        ; //CTL states during hold flow state
 EXTERN xdata _AT_(0xE6CA) volatile BYTE FLOWHOLDOFF       ;
-EXTERN xdata _AT_(0xE6CB) volatile BYTE FLOWSTB           ; //CTL/RDY Signal to use as master data strobe 
+EXTERN xdata _AT_(0xE6CB) volatile BYTE FLOWSTB           ; //CTL/RDY Signal to use as master data strobe
 EXTERN xdata _AT_(0xE6CC) volatile BYTE FLOWSTBEDGE       ; //Defines active master strobe edge
 EXTERN xdata _AT_(0xE6CD) volatile BYTE FLOWSTBHPERIOD    ; //Half Period of output master strobe
-EXTERN xdata _AT_(0xE60C) volatile BYTE GPIFHOLDAMOUNT    ; //Data delay shift 
+EXTERN xdata _AT_(0xE60C) volatile BYTE GPIFHOLDAMOUNT    ; //Data delay shift
 EXTERN xdata _AT_(0xE67D) volatile BYTE UDMACRCH          ; //CRC Upper byte
 EXTERN xdata _AT_(0xE67E) volatile BYTE UDMACRCL          ; //CRC Lower byte
 EXTERN xdata _AT_(0xE67F) volatile BYTE UDMACRCQUAL       ; //UDMA In only, host terminated use only
@@ -311,8 +311,8 @@ EXTERN xdata _AT_(0xFC00) volatile BYTE EP8FIFOBUF[1024]  ;  // 512 byte EP8 buf
 /*-----------------------------------------------------------------------------
    Special Function Registers (SFRs)
    The byte registers and bits defined in the following list are based
-   on the Synopsis definition of the 8051 Special Function Registers for EZ-USB. 
-    If you modify the register definitions below, please regenerate the file 
+   on the Synopsis definition of the 8051 Special Function Registers for EZ-USB.
+    If you modify the register definitions below, please regenerate the file
     "ezregs.inc" which includes the same basic information for assembly inclusion.
 -----------------------------------------------------------------------------*/
 
@@ -388,9 +388,9 @@ sfr at 0x99 SBUF0;
 
 sfr at 0x9A APTR1H;
 sfr at 0x9B APTR1L;
-sfr at 0x9C AUTODAT1; 
+sfr at 0x9C AUTODAT1;
 sfr at 0x9D AUTOPTRH2;
-sfr at 0x9E AUTOPTRL2; 
+sfr at 0x9E AUTOPTRL2;
 sfr at 0x9F AUTODAT2;
 sfr at 0xA0 IOC;
 sfr at 0xA1 INT2CLR;
@@ -449,7 +449,7 @@ sfr at 0xB8 IP;
 
 sfr at 0xBA EP01STAT;
 sfr at 0xBB GPIFTRIG;
-                
+
 sfr at 0xBD GPIFSGLDATH;
 sfr at 0xBE GPIFSGLDATLX;
 sfr at 0xBF GPIFSGLDATLNOX;
@@ -670,7 +670,7 @@ sfr at 0xF8 EIP; // EIP Bit Values differ from Reg320
 
 /*
  * Chip Revision Control Bits (REVCTL) - used to ebable/disable revision specific features
- */ 
+ */
 #define bmNOAUTOARM    bmBIT1	// these don't match the docs
 #define bmSKIPCOMMIT   bmBIT0	// these don't match the docs
 
@@ -680,6 +680,26 @@ sfr at 0xF8 EIP; // EIP Bit Values differ from Reg320
 
 /* Fifo Reset bits (FIFORESET) */
 #define bmNAKALL       bmBIT7
+
+/* Slave Fifo FLAGA-FLAGB Pin Configuration (PINFLAGSAB) */
+#define bmFLAGB3    bmBIT7
+#define bmFLAGB2    bmBIT6
+#define bmFLAGB1    bmBIT5
+#define bmFLAGB0    bmBIT4
+#define bmFLAGA3    bmBIT3
+#define bmFLAGA2    bmBIT2
+#define bmFLAGA1    bmBIT1
+#define bmFLAGA0    bmBIT0
+
+/* Slave Fifo FLAGC-FLAGD Pin Configuration (PINFLAGSCD) */
+#define bmFLAGD3    bmBIT7
+#define bmFLAGD2    bmBIT6
+#define bmFLAGD1    bmBIT5
+#define bmFLAGD0    bmBIT4
+#define bmFLAGC3    bmBIT3
+#define bmFLAGC2    bmBIT2
+#define bmFLAGC1    bmBIT1
+#define bmFLAGC0    bmBIT0
 
 /* Endpoint Configuration (EPxCFG) */
 #define	bmVALID		bmBIT7

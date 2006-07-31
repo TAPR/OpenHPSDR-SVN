@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Tue Jul 25 10:05:47 2006
+                              4 ; This file generated Mon Jul 31 08:57:52 2006
                               5 ;--------------------------------------------------------
                               6 	.module fpga_load
                               7 	.optsdcc -mmcs51 --model-small

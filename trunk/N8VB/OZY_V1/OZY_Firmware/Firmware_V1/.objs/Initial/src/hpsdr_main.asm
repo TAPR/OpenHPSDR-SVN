@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Tue Jul 25 10:05:46 2006
+; This file generated Mon Jul 31 08:57:51 2006
 ;--------------------------------------------------------
 	.module hpsdr_main
 	.optsdcc -mmcs51 --model-small
