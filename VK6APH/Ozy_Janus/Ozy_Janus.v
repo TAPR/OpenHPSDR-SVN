@@ -631,7 +631,7 @@ case(state_FX)
             end
             else begin                  			// otherwise, hang out here until fifo is ready
                 FX2_SLWR <= 1;
-                state_FX <= 3'h3;
+                state_FX <= 0; //3'h3;	*******
 				TX_wait <= TX_wait + 1'b1; 			// increment TX_wait counter
             end
         end
@@ -935,8 +935,8 @@ assign LED[0] = ~write_full; 	// LED D1 on when Rx fifo is full.
 assign LED[1] = ~FX2_flags[2];	// LED D3 on when we can write to FX2 FIFO
 
 assign LED[2] = ~LED_sync; 		// LED D4 toggles each time we get sync
-assign LED[3] = 1'b1;
-assign LED[4] = 1'b1;
+assign LED[3] = ~fifo_data_available; //1'b1;
+assign LED[4] = ~fifo_ready; //1'b1;
 assign LED[5] = CLRCLK;
 assign LED[6] = CBCLK;
 assign LED[7] = CLK_24MHZ;

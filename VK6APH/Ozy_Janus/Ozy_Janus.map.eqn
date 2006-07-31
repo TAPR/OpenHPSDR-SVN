@@ -172,11 +172,11 @@ B1_outbit_o = DFFEAS(B1L21, !LB1_safe_q[2],  ,  , B1L76,  ,  ,  ,  );
 
 
 --DFS0 is DFS0
-DFS0 = DFFEAS(A1L711, LB1_safe_q[8],  ,  , A1L712,  ,  ,  ,  );
+DFS0 = DFFEAS(A1L710, LB1_safe_q[8],  ,  , A1L711,  ,  ,  ,  );
 
 
 --DFS1 is DFS1
-DFS1 = DFFEAS(A1L713, LB1_safe_q[8],  ,  , A1L712,  ,  ,  ,  );
+DFS1 = DFFEAS(A1L712, LB1_safe_q[8],  ,  , A1L711,  ,  ,  ,  );
 
 
 --state_FX.010 is state_FX.010
@@ -184,14 +184,14 @@ state_FX.010 = DFFEAS(A1L411, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --state_FX.011 is state_FX.011
-state_FX.011 = DFFEAS(A1L412, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+state_FX.011 = DFFEAS(A1L753, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --state_FX.000 is state_FX.000
-state_FX.000 = DFFEAS(A1L413, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+state_FX.000 = DFFEAS(A1L412, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L408 is Select~5640
+--A1L408 is Select~5607
 A1L408 = state_FX.010 # A1L78Q & (state_FX.011 # !state_FX.000);
 
 
@@ -199,7 +199,7 @@ A1L408 = state_FX.010 # A1L78Q & (state_FX.011 # !state_FX.000);
 state_FX.001 = DFFEAS(A1L754, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L409 is Select~5641
+--A1L409 is Select~5608
 A1L409 = A1L80Q & (!state_FX.011 # !FX2_flags[2]) # !A1L80Q & !state_FX.001 & (!state_FX.011 # !FX2_flags[2]);
 
 
@@ -344,7 +344,7 @@ H1_rdptr_g[8] = DFFEAS(K1_power_modified_counter_values[8], BCLK,  ,  , H1_valid
 
 
 --state_PWM.00000 is state_PWM.00000
-state_PWM.00000 = DFFEAS(A1L416, !BCLK,  ,  ,  ,  ,  ,  ,  );
+state_PWM.00000 = DFFEAS(A1L415, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --state_PWM.00100 is state_PWM.00100
@@ -451,8 +451,8 @@ S1_q_a[15]_PORT_A_data_out_reg = DFFE(S1_q_a[15]_PORT_A_data_out, S1_q_a[15]_clo
 S1_q_a[15] = S1_q_a[15]_PORT_A_data_out_reg[0];
 
 
---A1L717 is rtl~356
-A1L717 = S1_q_a[14] & !S1_q_a[15];
+--A1L716 is rtl~356
+A1L716 = S1_q_a[14] & !S1_q_a[15];
 
 
 --S1_q_a[11] is Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|q_a[11]
@@ -555,16 +555,16 @@ S1_q_a[8]_PORT_A_data_out_reg = DFFE(S1_q_a[8]_PORT_A_data_out, S1_q_a[8]_clock_
 S1_q_a[8] = S1_q_a[8]_PORT_A_data_out_reg[0];
 
 
---A1L718 is rtl~357
-A1L718 = S1_q_a[11] & S1_q_a[10] & S1_q_a[9] & S1_q_a[8];
+--A1L717 is rtl~357
+A1L717 = S1_q_a[11] & S1_q_a[10] & S1_q_a[9] & S1_q_a[8];
 
 
---A1L719 is rtl~358
-A1L719 = S1_q_a[13] & S1_q_a[12] & A1L717 & A1L718;
+--A1L718 is rtl~358
+A1L718 = S1_q_a[13] & S1_q_a[12] & A1L716 & A1L717;
 
 
---A1L410 is Select~5642
-A1L410 = state_PWM.00100 & (LED_sync $ A1L719) # !state_PWM.00100 & state_PWM.00000 & LED_sync;
+--A1L410 is Select~5609
+A1L410 = state_PWM.00100 & (LED_sync $ A1L718) # !state_PWM.00100 & state_PWM.00000 & LED_sync;
 
 
 --LB1_safe_q[7] is clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[7]
@@ -1391,8 +1391,8 @@ Rx_control_1[0] = DFFEAS(S1_q_a[8], !BCLK,  ,  , state_PWM.00101,  ,  ,  ,  );
 Rx_control_1[1] = DFFEAS(S1_q_a[9], !BCLK,  ,  , state_PWM.00101,  ,  ,  ,  );
 
 
---A1L711 is rtl~1
-A1L711 = Rx_control_1[0] & !Rx_control_1[1];
+--A1L710 is rtl~1
+A1L710 = Rx_control_1[0] & !Rx_control_1[1];
 
 
 --Rx_control_0[7] is Rx_control_0[7]
@@ -1411,8 +1411,8 @@ Rx_control_0[5] = DFFEAS(S1_q_a[5], !BCLK,  ,  , A1L376,  ,  ,  ,  );
 Rx_control_0[4] = DFFEAS(S1_q_a[4], !BCLK,  ,  , A1L376,  ,  ,  ,  );
 
 
---A1L720 is rtl~359
-A1L720 = !Rx_control_0[7] & !Rx_control_0[6] & !Rx_control_0[5] & !Rx_control_0[4];
+--A1L719 is rtl~359
+A1L719 = !Rx_control_0[7] & !Rx_control_0[6] & !Rx_control_0[5] & !Rx_control_0[4];
 
 
 --Rx_control_0[3] is Rx_control_0[3]
@@ -1427,31 +1427,31 @@ Rx_control_0[2] = DFFEAS(S1_q_a[2], !BCLK,  ,  , A1L376,  ,  ,  ,  );
 Rx_control_0[1] = DFFEAS(S1_q_a[1], !BCLK,  ,  , A1L376,  ,  ,  ,  );
 
 
---A1L712 is rtl~2
-A1L712 = A1L720 & !Rx_control_0[3] & !Rx_control_0[2] & !Rx_control_0[1];
+--A1L711 is rtl~2
+A1L711 = A1L719 & !Rx_control_0[3] & !Rx_control_0[2] & !Rx_control_0[1];
 
 
---A1L713 is rtl~3
-A1L713 = Rx_control_1[1] & !Rx_control_1[0];
+--A1L712 is rtl~3
+A1L712 = Rx_control_1[1] & !Rx_control_1[0];
 
 
---A1L411 is Select~5643
-A1L411 = state_FX.001 # !state_FX.000 & !FX2_flags[0];
+--A1L411 is Select~5610
+A1L411 = state_FX.001 # !FX2_flags[0] & !state_FX.000;
 
 
 --syncd_write_used[10] is syncd_write_used[10]
 syncd_write_used[10] = DFFEAS(A1L857, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L412 is Select~5644
-A1L412 = state_FX.010 & (syncd_write_used[10] # state_FX.011 & !FX2_flags[2]) # !state_FX.010 & (state_FX.011 & !FX2_flags[2]);
+--A1L753 is state_FX~49
+A1L753 = state_FX.010 & syncd_write_used[10];
 
 
---A1L413 is Select~5645
-A1L413 = FX2_flags[2] & !state_FX.011 & (syncd_write_used[10] # !state_FX.010) # !FX2_flags[2] & (syncd_write_used[10] # !state_FX.010);
+--A1L412 is Select~5611
+A1L412 = !state_FX.011 & (syncd_write_used[10] # !state_FX.010);
 
 
---A1L754 is state_FX~33
+--A1L754 is state_FX~50
 A1L754 = FX2_flags[0] & !state_FX.000;
 
 
@@ -1460,7 +1460,7 @@ K1_power_modified_counter_values[11] = DFFEAS(K1_countera11, BCLK, H1_rdaclr,  ,
 
 
 --fifo_enable is fifo_enable
-fifo_enable = DFFEAS(A1L418, !BCLK,  ,  ,  ,  ,  ,  ,  );
+fifo_enable = DFFEAS(A1L417, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --T1_dffe6a[6] is Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[6]
@@ -1599,8 +1599,8 @@ synced_Rx_used[10] = DFFEAS(A1L887, !BCLK,  ,  ,  ,  ,  ,  ,  );
 synced_Rx_used[11] = DFFEAS(A1L890, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L414 is Select~5646
-A1L414 = !synced_Rx_used[10] & !synced_Rx_used[11];
+--A1L413 is Select~5612
+A1L413 = !synced_Rx_used[10] & !synced_Rx_used[11];
 
 
 --S1_q_a[7] is Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|q_a[7]
@@ -1703,8 +1703,8 @@ S1_q_a[4]_PORT_A_data_out_reg = DFFE(S1_q_a[4]_PORT_A_data_out, S1_q_a[4]_clock_
 S1_q_a[4] = S1_q_a[4]_PORT_A_data_out_reg[0];
 
 
---A1L721 is rtl~360
-A1L721 = S1_q_a[7] # !S1_q_a[4] # !S1_q_a[5] # !S1_q_a[6];
+--A1L720 is rtl~360
+A1L720 = S1_q_a[7] # !S1_q_a[4] # !S1_q_a[5] # !S1_q_a[6];
 
 
 --S1_q_a[3] is Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|q_a[3]
@@ -1807,28 +1807,28 @@ S1_q_a[0]_PORT_A_data_out_reg = DFFE(S1_q_a[0]_PORT_A_data_out, S1_q_a[0]_clock_
 S1_q_a[0] = S1_q_a[0]_PORT_A_data_out_reg[0];
 
 
---A1L722 is rtl~361
-A1L722 = !S1_q_a[0] # !S1_q_a[1] # !S1_q_a[2] # !S1_q_a[3];
+--A1L721 is rtl~361
+A1L721 = !S1_q_a[0] # !S1_q_a[1] # !S1_q_a[2] # !S1_q_a[3];
 
 
---A1L723 is rtl~362
-A1L723 = A1L721 # A1L722 # !A1L719;
+--A1L722 is rtl~362
+A1L722 = A1L720 # A1L721 # !A1L718;
 
 
 --state_PWM.00011 is state_PWM.00011
-state_PWM.00011 = DFFEAS(A1L420, !BCLK,  ,  ,  ,  ,  ,  ,  );
+state_PWM.00011 = DFFEAS(A1L419, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L415 is Select~5647
-A1L415 = state_PWM.00000 & (A1L723 & state_PWM.00011) # !state_PWM.00000 & (A1L414 # A1L723);
+--A1L414 is Select~5613
+A1L414 = state_PWM.00000 & (A1L722 & state_PWM.00011) # !state_PWM.00000 & (A1L413 # A1L722);
 
 
---A1L416 is Select~5648
-A1L416 = !A1L415 & (A1L719 # !state_PWM.00100 & !state_PWM.00001);
+--A1L415 is Select~5614
+A1L415 = !A1L414 & (A1L718 # !state_PWM.00100 & !state_PWM.00001);
 
 
 --A1L769 is state_PWM~124
-A1L769 = !A1L721 & !A1L722 & A1L719 & state_PWM.00011;
+A1L769 = !A1L720 & !A1L721 & A1L718 & state_PWM.00011;
 
 
 --H1_p0addr is Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|p0addr
@@ -1920,131 +1920,131 @@ Rx_register[8] = DFFEAS(A1L53, FX2_CLK,  ,  , state_FX.001,  ,  ,  ,  );
 
 
 --I_Data[15] is I_Data[15]
-I_Data[15] = DFFEAS(I_PWM[15], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[15] = DFFEAS(I_PWM[15], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[14] is I_Data[14]
-I_Data[14] = DFFEAS(I_PWM[14], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[14] = DFFEAS(I_PWM[14], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[13] is I_Data[13]
-I_Data[13] = DFFEAS(I_PWM[13], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[13] = DFFEAS(I_PWM[13], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[12] is I_Data[12]
-I_Data[12] = DFFEAS(I_PWM[12], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[12] = DFFEAS(I_PWM[12], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[11] is I_Data[11]
-I_Data[11] = DFFEAS(I_PWM[11], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[11] = DFFEAS(I_PWM[11], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[10] is I_Data[10]
-I_Data[10] = DFFEAS(I_PWM[10], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[10] = DFFEAS(I_PWM[10], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[9] is I_Data[9]
-I_Data[9] = DFFEAS(I_PWM[9], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[9] = DFFEAS(I_PWM[9], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[8] is I_Data[8]
-I_Data[8] = DFFEAS(I_PWM[8], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[8] = DFFEAS(I_PWM[8], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[7] is I_Data[7]
-I_Data[7] = DFFEAS(I_PWM[7], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[7] = DFFEAS(I_PWM[7], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[6] is I_Data[6]
-I_Data[6] = DFFEAS(I_PWM[6], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[6] = DFFEAS(I_PWM[6], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[5] is I_Data[5]
-I_Data[5] = DFFEAS(I_PWM[5], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[5] = DFFEAS(I_PWM[5], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[4] is I_Data[4]
-I_Data[4] = DFFEAS(I_PWM[4], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[4] = DFFEAS(I_PWM[4], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[3] is I_Data[3]
-I_Data[3] = DFFEAS(I_PWM[3], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[3] = DFFEAS(I_PWM[3], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[2] is I_Data[2]
-I_Data[2] = DFFEAS(I_PWM[2], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[2] = DFFEAS(I_PWM[2], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[1] is I_Data[1]
-I_Data[1] = DFFEAS(I_PWM[1], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[1] = DFFEAS(I_PWM[1], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --I_Data[0] is I_Data[0]
-I_Data[0] = DFFEAS(I_PWM[0], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+I_Data[0] = DFFEAS(I_PWM[0], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[15] is Q_Data[15]
-Q_Data[15] = DFFEAS(Q_PWM[15], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[15] = DFFEAS(Q_PWM[15], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[14] is Q_Data[14]
-Q_Data[14] = DFFEAS(Q_PWM[14], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[14] = DFFEAS(Q_PWM[14], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[13] is Q_Data[13]
-Q_Data[13] = DFFEAS(Q_PWM[13], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[13] = DFFEAS(Q_PWM[13], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[12] is Q_Data[12]
-Q_Data[12] = DFFEAS(Q_PWM[12], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[12] = DFFEAS(Q_PWM[12], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[11] is Q_Data[11]
-Q_Data[11] = DFFEAS(Q_PWM[11], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[11] = DFFEAS(Q_PWM[11], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[10] is Q_Data[10]
-Q_Data[10] = DFFEAS(Q_PWM[10], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[10] = DFFEAS(Q_PWM[10], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[9] is Q_Data[9]
-Q_Data[9] = DFFEAS(Q_PWM[9], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[9] = DFFEAS(Q_PWM[9], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[8] is Q_Data[8]
-Q_Data[8] = DFFEAS(Q_PWM[8], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[8] = DFFEAS(Q_PWM[8], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[7] is Q_Data[7]
-Q_Data[7] = DFFEAS(Q_PWM[7], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[7] = DFFEAS(Q_PWM[7], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[6] is Q_Data[6]
-Q_Data[6] = DFFEAS(Q_PWM[6], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[6] = DFFEAS(Q_PWM[6], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[5] is Q_Data[5]
-Q_Data[5] = DFFEAS(Q_PWM[5], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[5] = DFFEAS(Q_PWM[5], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[4] is Q_Data[4]
-Q_Data[4] = DFFEAS(Q_PWM[4], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[4] = DFFEAS(Q_PWM[4], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[3] is Q_Data[3]
-Q_Data[3] = DFFEAS(Q_PWM[3], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[3] = DFFEAS(Q_PWM[3], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[2] is Q_Data[2]
-Q_Data[2] = DFFEAS(Q_PWM[2], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[2] = DFFEAS(Q_PWM[2], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[1] is Q_Data[1]
-Q_Data[1] = DFFEAS(Q_PWM[1], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[1] = DFFEAS(Q_PWM[1], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Q_Data[0] is Q_Data[0]
-Q_Data[0] = DFFEAS(Q_PWM[0], !BCLK,  ,  , A1L421,  ,  ,  ,  );
+Q_Data[0] = DFFEAS(Q_PWM[0], !BCLK,  ,  , A1L420,  ,  ,  ,  );
 
 
 --Left_PWM[5] is Left_PWM[5]
@@ -2199,12 +2199,12 @@ Right_PWM[15] = DFFEAS(S1_q_a[15], !BCLK,  ,  , state_PWM.01000,  ,  ,  ,  );
 B1_TLV_state.001 = DFFEAS(B1L77, !LB1_safe_q[2],  ,  ,  ,  ,  , !LB1_safe_q[8],  );
 
 
---A1L714 is rtl~5
-A1L714 = !B1_bit_count[0] & !B1_bit_count[1] & !B1_bit_count[2] & !B1_bit_count[3];
+--A1L713 is rtl~5
+A1L713 = !B1_bit_count[0] & !B1_bit_count[1] & !B1_bit_count[2] & !B1_bit_count[3];
 
 
 --B1L22 is I2SAudioOut:I2SAO|Select~168
-B1L22 = B1_TLV_state.001 & (B1_TLV_state.010 & !A1L714 # !LB1_safe_q[8]) # !B1_TLV_state.001 & B1_TLV_state.010 & (!A1L714);
+B1L22 = B1_TLV_state.001 & (B1_TLV_state.010 & !A1L713 # !LB1_safe_q[8]) # !B1_TLV_state.001 & B1_TLV_state.010 & (!A1L713);
 
 
 --B1_TLV_state.011 is I2SAudioOut:I2SAO|TLV_state.011
@@ -2212,7 +2212,7 @@ B1_TLV_state.011 = DFFEAS(B1L25, !LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 
 
 --B1L23 is I2SAudioOut:I2SAO|Select~169
-B1L23 = LB1_safe_q[8] & (B1_TLV_state.011 # B1_TLV_state.100 & !A1L714) # !LB1_safe_q[8] & (B1_TLV_state.100 & !A1L714);
+B1L23 = LB1_safe_q[8] & (B1_TLV_state.011 # B1_TLV_state.100 & !A1L713) # !LB1_safe_q[8] & (B1_TLV_state.100 & !A1L713);
 
 
 --state_PWM.00101 is state_PWM.00101
@@ -2220,7 +2220,7 @@ state_PWM.00101 = DFFEAS(A1L376, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --A1L376 is Rx_control_0[7]~0
-A1L376 = state_PWM.00100 & A1L719;
+A1L376 = state_PWM.00100 & A1L718;
 
 
 --FB1_q_a[0] is Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|altsyncram_0kp:fifo_ram|altsyncram_6p41:altsyncram4|q_a[0]
@@ -2624,7 +2624,7 @@ FB1_q_a[15] = FB1_q_a[15]_PORT_A_data_out_reg[0];
 
 
 --FIFO_DATA_OUTPUT_ENABLE is FIFO_DATA_OUTPUT_ENABLE
-FIFO_DATA_OUTPUT_ENABLE = DFFEAS(A1L422, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+FIFO_DATA_OUTPUT_ENABLE = DFFEAS(A1L421, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --DB1_dffe7a[10] is Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|dffpipe_a09:ws_brp|dffe7a[10]
@@ -2856,19 +2856,19 @@ H1_rdaclr = DFFEAS(VCC, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --state_PWM.00111 is state_PWM.00111
-state_PWM.00111 = DFFEAS(A1L423, !BCLK,  ,  ,  ,  ,  ,  ,  );
+state_PWM.00111 = DFFEAS(A1L422, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --state_PWM.01011 is state_PWM.01011
-state_PWM.01011 = DFFEAS(A1L424, !BCLK,  ,  ,  ,  ,  ,  ,  );
+state_PWM.01011 = DFFEAS(A1L423, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L417 is Select~5649
-A1L417 = state_PWM.00111 # state_PWM.00000 & fifo_enable & !state_PWM.01011;
+--A1L416 is Select~5615
+A1L416 = state_PWM.00111 # state_PWM.00000 & fifo_enable & !state_PWM.01011;
 
 
---A1L418 is Select~5650
-A1L418 = state_PWM.00011 # A1L417 # !state_PWM.00000 & !A1L414;
+--A1L417 is Select~5616
+A1L417 = state_PWM.00011 # A1L416 # !state_PWM.00000 & !A1L413;
 
 
 --H1_delayed_wrptr_g[6] is Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|delayed_wrptr_g[6]
@@ -3112,8 +3112,44 @@ Rx_register[1] = DFFEAS(A1L39, FX2_CLK,  ,  , state_FX.001,  ,  ,  ,  );
 Rx_register[0] = DFFEAS(A1L37, FX2_CLK,  ,  , state_FX.001,  ,  ,  ,  );
 
 
+--byte_count[0] is byte_count[0]
+byte_count[0] = DFFEAS(A1L607, !BCLK,  ,  , A1L609,  ,  , !state_PWM.01100,  );
+
+
+--byte_count[1] is byte_count[1]
+byte_count[1] = DFFEAS(A1L611, !BCLK,  ,  , A1L609,  ,  , !state_PWM.01100,  );
+
+
+--byte_count[2] is byte_count[2]
+byte_count[2] = DFFEAS(A1L614, !BCLK,  ,  , A1L609,  ,  , !state_PWM.01100,  );
+
+
+--byte_count[3] is byte_count[3]
+byte_count[3] = DFFEAS(A1L617, !BCLK,  ,  , A1L609,  ,  , !state_PWM.01100,  );
+
+
+--A1L723 is rtl~363
+A1L723 = byte_count[0] & byte_count[1] & byte_count[2] & byte_count[3];
+
+
+--byte_count[4] is byte_count[4]
+byte_count[4] = DFFEAS(A1L620, !BCLK,  ,  , A1L609,  ,  , !state_PWM.01100,  );
+
+
+--byte_count[5] is byte_count[5]
+byte_count[5] = DFFEAS(A1L623, !BCLK,  ,  , A1L609,  ,  , !state_PWM.01100,  );
+
+
+--byte_count[6] is byte_count[6]
+byte_count[6] = DFFEAS(A1L626, !BCLK,  ,  , A1L609,  ,  , !state_PWM.01100,  );
+
+
+--A1L714 is rtl~6
+A1L714 = A1L723 & byte_count[4] & byte_count[5] & !byte_count[6];
+
+
 --state_PWM.00010 is state_PWM.00010
-state_PWM.00010 = DFFEAS(A1L425, !BCLK,  ,  ,  ,  ,  ,  ,  );
+state_PWM.00010 = DFFEAS(A1L424, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --sync_count[0] is sync_count[0]
@@ -3132,7 +3168,7 @@ sync_count[2] = DFFEAS(A1L813, !BCLK,  ,  , A1L834,  ,  , A1L831,  );
 sync_count[3] = DFFEAS(A1L816, !BCLK,  ,  , A1L834,  ,  , A1L831,  );
 
 
---A1L724 is rtl~363
+--A1L724 is rtl~364
 A1L724 = sync_count[0] & sync_count[1] & sync_count[2] & sync_count[3];
 
 
@@ -3152,7 +3188,7 @@ sync_count[6] = DFFEAS(A1L825, !BCLK,  ,  , A1L834,  ,  , A1L831,  );
 sync_count[7] = DFFEAS(A1L828, !BCLK,  ,  , A1L834,  ,  , A1L831,  );
 
 
---A1L725 is rtl~364
+--A1L725 is rtl~365
 A1L725 = sync_count[4] & sync_count[5] & sync_count[6] & sync_count[7];
 
 
@@ -3160,48 +3196,12 @@ A1L725 = sync_count[4] & sync_count[5] & sync_count[6] & sync_count[7];
 sync_count[8] = DFFEAS(A1L832, !BCLK,  ,  , A1L834,  ,  , A1L831,  );
 
 
---A1L419 is Select~5651
-A1L419 = state_PWM.00010 & A1L724 & A1L725 & !sync_count[8];
-
-
---byte_count[0] is byte_count[0]
-byte_count[0] = DFFEAS(A1L608, !BCLK,  ,  , A1L626,  ,  , !state_PWM.01100,  );
-
-
---byte_count[1] is byte_count[1]
-byte_count[1] = DFFEAS(A1L611, !BCLK,  ,  , A1L626,  ,  , !state_PWM.01100,  );
-
-
---byte_count[2] is byte_count[2]
-byte_count[2] = DFFEAS(A1L614, !BCLK,  ,  , A1L626,  ,  , !state_PWM.01100,  );
-
-
---byte_count[3] is byte_count[3]
-byte_count[3] = DFFEAS(A1L617, !BCLK,  ,  , A1L626,  ,  , !state_PWM.01100,  );
-
-
---A1L726 is rtl~365
-A1L726 = byte_count[0] & byte_count[1] & byte_count[2] & byte_count[3];
-
-
---byte_count[4] is byte_count[4]
-byte_count[4] = DFFEAS(A1L620, !BCLK,  ,  , A1L626,  ,  , !state_PWM.01100,  );
-
-
---byte_count[5] is byte_count[5]
-byte_count[5] = DFFEAS(A1L623, !BCLK,  ,  , A1L626,  ,  , !state_PWM.01100,  );
-
-
---byte_count[6] is byte_count[6]
-byte_count[6] = DFFEAS(A1L627, !BCLK,  ,  , A1L626,  ,  , !state_PWM.01100,  );
-
-
---A1L715 is rtl~6
-A1L715 = A1L726 & byte_count[4] & byte_count[5] & !byte_count[6];
+--A1L726 is rtl~366
+A1L726 = A1L724 & A1L725 & !sync_count[8];
 
 
 --state_PWM.01101 is state_PWM.01101
-state_PWM.01101 = DFFEAS(A1L426, !BCLK,  ,  ,  ,  ,  ,  ,  );
+state_PWM.01101 = DFFEAS(A1L425, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --synced_Rx_used[4] is synced_Rx_used[4]
@@ -3233,11 +3233,15 @@ A1L218 = synced_Rx_used[6] # synced_Rx_used[7] # synced_Rx_used[8] # synced_Rx_u
 
 
 --A1L219 is LessThan~239
-A1L219 = synced_Rx_used[4] # synced_Rx_used[5] # A1L218 # !A1L414;
+A1L219 = synced_Rx_used[4] # synced_Rx_used[5] # A1L218 # !A1L413;
 
 
---A1L420 is Select~5652
-A1L420 = A1L419 # A1L715 & state_PWM.01101 & A1L219;
+--A1L418 is Select~5617
+A1L418 = state_PWM.01101 & A1L219;
+
+
+--A1L419 is Select~5618
+A1L419 = A1L714 & (A1L418 # state_PWM.00010 & A1L726) # !A1L714 & state_PWM.00010 & A1L726;
 
 
 --I_PWM[15] is I_PWM[15]
@@ -3245,11 +3249,11 @@ I_PWM[15] = DFFEAS(S1_q_a[15], !BCLK,  ,  , state_PWM.01001,  ,  ,  ,  );
 
 
 --state_PWM.01100 is state_PWM.01100
-state_PWM.01100 = DFFEAS(A1L673, !BCLK,  ,  ,  ,  ,  , LB1_safe_q[8],  );
+state_PWM.01100 = DFFEAS(A1L672, !BCLK,  ,  ,  ,  ,  , LB1_safe_q[8],  );
 
 
---A1L421 is Select~5653
-A1L421 = LB1_safe_q[8] & state_PWM.01100;
+--A1L420 is Select~5619
+A1L420 = LB1_safe_q[8] & state_PWM.01100;
 
 
 --I_PWM[14] is I_PWM[14]
@@ -3377,7 +3381,7 @@ Q_PWM[0] = DFFEAS(S1_q_a[0], !BCLK,  ,  , state_PWM.01010,  ,  ,  ,  );
 
 
 --B1L24 is I2SAudioOut:I2SAO|Select~170
-B1L24 = B1_TLV_state.100 & !A1L714 & (LB1_safe_q[8] # B1_TLV_state.000) # !B1_TLV_state.100 & (LB1_safe_q[8] # B1_TLV_state.000);
+B1L24 = B1_TLV_state.100 & !A1L713 & (LB1_safe_q[8] # B1_TLV_state.000) # !B1_TLV_state.100 & (LB1_safe_q[8] # B1_TLV_state.000);
 
 
 --state_PWM.01000 is state_PWM.01000
@@ -3389,7 +3393,7 @@ B1L77 = B1_TLV_state.001 # !B1_TLV_state.000;
 
 
 --B1L25 is I2SAudioOut:I2SAO|Select~171
-B1L25 = B1_TLV_state.010 & (A1L714 # B1_TLV_state.011 & !LB1_safe_q[8]) # !B1_TLV_state.010 & (B1_TLV_state.011 & !LB1_safe_q[8]);
+B1L25 = B1_TLV_state.010 & (A1L713 # B1_TLV_state.011 & !LB1_safe_q[8]) # !B1_TLV_state.010 & (B1_TLV_state.011 & !LB1_safe_q[8]);
 
 
 --V1_p0addr is Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|p0addr
@@ -3633,7 +3637,7 @@ V1L35 = V1L40 & V1L41 & (JB1_dffe13a[5] $ !AB1_power_modified_counter_values[5])
 
 
 --Tx_read_clock is Tx_read_clock
-Tx_read_clock = DFFEAS(A1L428, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+Tx_read_clock = DFFEAS(A1L427, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --data_flag is data_flag
@@ -3685,7 +3689,7 @@ X1_power_modified_counter_values[10] = DFFEAS(X1_countera10, Tx_read_clock, V1_r
 
 
 --register[0] is register[0]
-register[0] = DFFEAS(A1L441, BCLK,  ,  , A1L442,  ,  ,  ,  );
+register[0] = DFFEAS(A1L437, BCLK,  ,  , A1L438,  ,  ,  ,  );
 
 
 --V1_wrptr_g[0] is Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|wrptr_g[0]
@@ -3733,67 +3737,67 @@ V1_wrptr_g[10] = DFFEAS(AB1_power_modified_counter_values[10], data_flag,  ,  , 
 
 
 --register[1] is register[1]
-register[1] = DFFEAS(A1L445, BCLK,  ,  , A1L685,  ,  ,  ,  );
+register[1] = DFFEAS(A1L441, BCLK,  ,  , A1L684,  ,  ,  ,  );
 
 
 --register[2] is register[2]
-register[2] = DFFEAS(A1L448, BCLK,  ,  , A1L685,  ,  ,  ,  );
+register[2] = DFFEAS(A1L444, BCLK,  ,  , A1L684,  ,  ,  ,  );
 
 
 --register[3] is register[3]
-register[3] = DFFEAS(A1L451, BCLK,  ,  , A1L685,  ,  ,  ,  );
+register[3] = DFFEAS(A1L447, BCLK,  ,  , A1L684,  ,  ,  ,  );
 
 
 --register[4] is register[4]
-register[4] = DFFEAS(A1L454, BCLK,  ,  , A1L685,  ,  ,  ,  );
+register[4] = DFFEAS(A1L450, BCLK,  ,  , A1L684,  ,  ,  ,  );
 
 
 --register[5] is register[5]
-register[5] = DFFEAS(A1L457, BCLK,  ,  , A1L685,  ,  ,  ,  );
+register[5] = DFFEAS(A1L453, BCLK,  ,  , A1L684,  ,  ,  ,  );
 
 
 --register[6] is register[6]
-register[6] = DFFEAS(A1L460, BCLK,  ,  , A1L685,  ,  ,  ,  );
+register[6] = DFFEAS(A1L456, BCLK,  ,  , A1L684,  ,  ,  ,  );
 
 
 --register[7] is register[7]
-register[7] = DFFEAS(A1L471, BCLK,  ,  , A1L442,  ,  ,  ,  );
+register[7] = DFFEAS(A1L467, BCLK,  ,  , A1L438,  ,  ,  ,  );
 
 
 --register[8] is register[8]
-register[8] = DFFEAS(A1L473, BCLK,  ,  , A1L709,  ,  ,  ,  );
+register[8] = DFFEAS(A1L469, BCLK,  ,  , A1L706,  ,  ,  ,  );
 
 
 --register[9] is register[9]
-register[9] = DFFEAS(A1L476, BCLK,  ,  , A1L709,  ,  ,  ,  );
+register[9] = DFFEAS(A1L472, BCLK,  ,  , A1L706,  ,  ,  ,  );
 
 
 --register[10] is register[10]
-register[10] = DFFEAS(A1L478, BCLK,  ,  , A1L709,  ,  ,  ,  );
+register[10] = DFFEAS(A1L474, BCLK,  ,  , A1L706,  ,  ,  ,  );
 
 
 --register[11] is register[11]
-register[11] = DFFEAS(A1L480, BCLK,  ,  , A1L709,  ,  ,  ,  );
+register[11] = DFFEAS(A1L476, BCLK,  ,  , A1L706,  ,  ,  ,  );
 
 
 --register[12] is register[12]
-register[12] = DFFEAS(A1L482, BCLK,  ,  , A1L709,  ,  ,  ,  );
+register[12] = DFFEAS(A1L478, BCLK,  ,  , A1L706,  ,  ,  ,  );
 
 
 --register[13] is register[13]
-register[13] = DFFEAS(A1L484, BCLK,  ,  , A1L709,  ,  ,  ,  );
+register[13] = DFFEAS(A1L480, BCLK,  ,  , A1L706,  ,  ,  ,  );
 
 
 --register[14] is register[14]
-register[14] = DFFEAS(A1L486, BCLK,  ,  , A1L709,  ,  ,  ,  );
+register[14] = DFFEAS(A1L482, BCLK,  ,  , A1L706,  ,  ,  ,  );
 
 
 --register[15] is register[15]
-register[15] = DFFEAS(A1L488, BCLK,  ,  , A1L709,  ,  ,  ,  );
+register[15] = DFFEAS(A1L484, BCLK,  ,  , A1L706,  ,  ,  ,  );
 
 
---A1L422 is Select~5654
-A1L422 = state_FX.010 & (syncd_write_used[10] # FIFO_DATA_OUTPUT_ENABLE & !A1L754) # !state_FX.010 & (FIFO_DATA_OUTPUT_ENABLE & !A1L754);
+--A1L421 is Select~5620
+A1L421 = A1L753 # FIFO_DATA_OUTPUT_ENABLE & (state_FX.000 # !FX2_flags[0]);
 
 
 --BB1_xor9 is Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|a_gray2bin_ldb:wrptr_g_gray2bin|xor9
@@ -3880,16 +3884,16 @@ BB2_xor0 = JB1_dffe13a[0] $ BB2_xor1;
 state_PWM.00110 = DFFEAS(state_PWM.00101, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L423 is Select~5655
-A1L423 = state_PWM.00110 # state_PWM.01101 & A1L219 & !A1L715;
+--A1L422 is Select~5621
+A1L422 = state_PWM.00110 # state_PWM.01101 & A1L219 & !A1L714;
 
 
 --state_PWM.01010 is state_PWM.01010
 state_PWM.01010 = DFFEAS(state_PWM.01001, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L424 is Select~5656
-A1L424 = state_PWM.01010 # LB1_safe_q[8] & state_PWM.01011;
+--A1L423 is Select~5622
+A1L423 = state_PWM.01010 # LB1_safe_q[8] & state_PWM.01011;
 
 
 --L3_xor10 is Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_gray2bin_mdb:wrptr_g_gray2bin|xor10
@@ -3980,12 +3984,58 @@ L3_xor0 = H1_wrptr_g[0] $ H1_wrptr_g[1] $ L3_xor2;
 L4_xor0 = U1_dffe8a[1] $ U1_dffe8a[0] $ L4_xor2;
 
 
---A1L727 is rtl~366
-A1L727 = A1L724 & A1L725 & !sync_count[8];
+--A1L607 is byte_count[0]~97
+A1L607 = LB1_safe_q[8] & (byte_count[0] $ VCC) # !LB1_safe_q[8] & byte_count[0] & VCC;
+
+--A1L608 is byte_count[0]~98
+A1L608 = CARRY(LB1_safe_q[8] & byte_count[0]);
 
 
---A1L425 is Select~5657
-A1L425 = A1L727 & (A1L719 & state_PWM.00001) # !A1L727 & (state_PWM.00010 # A1L719 & state_PWM.00001);
+--A1L609 is byte_count[0]~99
+A1L609 = state_PWM.00000 & (state_PWM.00011 # state_PWM.01100) # !state_PWM.00000 & !A1L413;
+
+
+--A1L611 is byte_count[1]~100
+A1L611 = byte_count[1] & !A1L608 # !byte_count[1] & (A1L608 # GND);
+
+--A1L612 is byte_count[1]~101
+A1L612 = CARRY(!A1L608 # !byte_count[1]);
+
+
+--A1L614 is byte_count[2]~102
+A1L614 = byte_count[2] & (A1L612 $ GND) # !byte_count[2] & !A1L612 & VCC;
+
+--A1L615 is byte_count[2]~103
+A1L615 = CARRY(byte_count[2] & !A1L612);
+
+
+--A1L617 is byte_count[3]~104
+A1L617 = byte_count[3] & !A1L615 # !byte_count[3] & (A1L615 # GND);
+
+--A1L618 is byte_count[3]~105
+A1L618 = CARRY(!A1L615 # !byte_count[3]);
+
+
+--A1L620 is byte_count[4]~106
+A1L620 = byte_count[4] & (A1L618 $ GND) # !byte_count[4] & !A1L618 & VCC;
+
+--A1L621 is byte_count[4]~107
+A1L621 = CARRY(byte_count[4] & !A1L618);
+
+
+--A1L623 is byte_count[5]~108
+A1L623 = byte_count[5] & !A1L621 # !byte_count[5] & (A1L621 # GND);
+
+--A1L624 is byte_count[5]~109
+A1L624 = CARRY(!A1L621 # !byte_count[5]);
+
+
+--A1L626 is byte_count[6]~110
+A1L626 = byte_count[6] $ !A1L624;
+
+
+--A1L424 is Select~5623
+A1L424 = A1L726 & (A1L718 & state_PWM.00001) # !A1L726 & (state_PWM.00010 # A1L718 & state_PWM.00001);
 
 
 --A1L807 is sync_count[0]~243
@@ -3996,7 +4046,7 @@ A1L808 = CARRY(sync_count[0]);
 
 
 --A1L831 is sync_count[8]~245
-A1L831 = !state_PWM.00000 & (A1L721 # A1L722 # !A1L719);
+A1L831 = !state_PWM.00000 & (A1L720 # A1L721 # !A1L718);
 
 
 --A1L810 is sync_count[1]~246
@@ -4052,66 +4102,16 @@ A1L829 = CARRY(!A1L826 # !sync_count[7]);
 A1L832 = sync_count[8] $ !A1L829;
 
 
---A1L608 is byte_count[0]~97
-A1L608 = LB1_safe_q[8] & (byte_count[0] $ VCC) # !LB1_safe_q[8] & byte_count[0] & VCC;
-
---A1L609 is byte_count[0]~98
-A1L609 = CARRY(LB1_safe_q[8] & byte_count[0]);
-
-
---A1L626 is byte_count[6]~99
-A1L626 = state_PWM.00000 & (state_PWM.00011 # state_PWM.01100) # !state_PWM.00000 & !A1L414;
-
-
---A1L611 is byte_count[1]~100
-A1L611 = byte_count[1] & !A1L609 # !byte_count[1] & (A1L609 # GND);
-
---A1L612 is byte_count[1]~101
-A1L612 = CARRY(!A1L609 # !byte_count[1]);
-
-
---A1L614 is byte_count[2]~102
-A1L614 = byte_count[2] & (A1L612 $ GND) # !byte_count[2] & !A1L612 & VCC;
-
---A1L615 is byte_count[2]~103
-A1L615 = CARRY(byte_count[2] & !A1L612);
-
-
---A1L617 is byte_count[3]~104
-A1L617 = byte_count[3] & !A1L615 # !byte_count[3] & (A1L615 # GND);
-
---A1L618 is byte_count[3]~105
-A1L618 = CARRY(!A1L615 # !byte_count[3]);
-
-
---A1L620 is byte_count[4]~106
-A1L620 = byte_count[4] & (A1L618 $ GND) # !byte_count[4] & !A1L618 & VCC;
-
---A1L621 is byte_count[4]~107
-A1L621 = CARRY(byte_count[4] & !A1L618);
-
-
---A1L623 is byte_count[5]~108
-A1L623 = byte_count[5] & !A1L621 # !byte_count[5] & (A1L621 # GND);
-
---A1L624 is byte_count[5]~109
-A1L624 = CARRY(!A1L621 # !byte_count[5]);
-
-
---A1L627 is byte_count[6]~110
-A1L627 = byte_count[6] $ !A1L624;
-
-
---A1L426 is Select~5658
-A1L426 = LB1_safe_q[8] & (state_PWM.01100 # state_PWM.01101 & !A1L219) # !LB1_safe_q[8] & (state_PWM.01101 & !A1L219);
+--A1L425 is Select~5624
+A1L425 = LB1_safe_q[8] & (state_PWM.01100 # state_PWM.01101 & !A1L219) # !LB1_safe_q[8] & (state_PWM.01101 & !A1L219);
 
 
 --state_PWM.01001 is state_PWM.01001
 state_PWM.01001 = DFFEAS(state_PWM.01000, !BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L673 is reduce_or~244
-A1L673 = state_PWM.01011 # state_PWM.01100;
+--A1L672 is reduce_or~244
+A1L672 = state_PWM.01011 # state_PWM.01100;
 
 
 --V1_rdaclr is Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|rdaclr
@@ -4291,16 +4291,16 @@ JB1_dffe12a[1] = DFFEAS(V1_rdptr_g[1], data_flag,  ,  ,  ,  ,  ,  ,  );
 JB1_dffe12a[5] = DFFEAS(V1_rdptr_g[5], data_flag,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L427 is Select~5659
-A1L427 = state_FX.010 # state_FX.001 # state_FX.011 & !FX2_flags[2];
+--A1L426 is Select~5625
+A1L426 = state_FX.010 # state_FX.001 # state_FX.011 & !FX2_flags[2];
 
 
---A1L428 is Select~5660
-A1L428 = state_FX.010 & (syncd_write_used[10] # Tx_read_clock & A1L427) # !state_FX.010 & Tx_read_clock & A1L427;
+--A1L427 is Select~5626
+A1L427 = state_FX.010 & (syncd_write_used[10] # Tx_read_clock & A1L426) # !state_FX.010 & Tx_read_clock & A1L426;
 
 
 --strobe is strobe
-strobe = DFFEAS(A1L492, BCLK,  ,  ,  ,  ,  ,  ,  );
+strobe = DFFEAS(A1L488, BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --X1_parity_ff is Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|a_graycounter_p96:rdptr_g1p|parity_ff
@@ -4389,7 +4389,7 @@ X1_countera10 = X1_power_modified_counter_values[10] $ X1L32;
 
 
 --AD_state[2] is AD_state[2]
-AD_state[2] = DFFEAS(A1L495, BCLK,  ,  ,  ,  ,  ,  ,  );
+AD_state[2] = DFFEAS(A1L491, BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --q[0] is q[0]
@@ -4397,123 +4397,111 @@ q[0] = DFFEAS(DOUT, BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --AD_state[0] is AD_state[0]
-AD_state[0] = DFFEAS(A1L498, BCLK,  ,  ,  ,  ,  ,  ,  );
+AD_state[0] = DFFEAS(A1L494, BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --AD_state[1] is AD_state[1]
-AD_state[1] = DFFEAS(A1L501, BCLK,  ,  ,  ,  ,  ,  ,  );
+AD_state[1] = DFFEAS(A1L497, BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --AD_state[5] is AD_state[5]
-AD_state[5] = DFFEAS(A1L503, BCLK,  ,  ,  ,  ,  ,  ,  );
+AD_state[5] = DFFEAS(A1L499, BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L429 is Select~5661
-A1L429 = AD_state[2] & (AD_state[5]) # !AD_state[2] & (AD_state[0] & (!AD_state[5] # !AD_state[1]) # !AD_state[0] & (AD_state[1] # AD_state[5]));
+--A1L428 is Select~5627
+A1L428 = AD_state[2] & (AD_state[5]) # !AD_state[2] & (AD_state[0] & (!AD_state[5] # !AD_state[1]) # !AD_state[0] & (AD_state[1] # AD_state[5]));
 
 
---A1L430 is Select~5662
-A1L430 = AD_state[2] & (A1L429) # !AD_state[2] & (A1L429 & (register[0]) # !A1L429 & q[0]);
+--A1L429 is Select~5628
+A1L429 = AD_state[2] & (A1L428) # !AD_state[2] & (A1L428 & (register[0]) # !A1L428 & q[0]);
 
 
 --Tx_data[0] is Tx_data[0]
 Tx_data[0] = DFFEAS(Tx_q[0], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
---A1L431 is Select~5663
-A1L431 = AD_state[0] & register[0] # !AD_state[0] & (AD_state[1] & register[0] # !AD_state[1] & (Tx_data[0]));
+--A1L430 is Select~5629
+A1L430 = AD_state[0] & register[0] # !AD_state[0] & (AD_state[1] & register[0] # !AD_state[1] & (Tx_data[0]));
 
 
---A1L432 is Select~5664
-A1L432 = AD_state[2] & (A1L430 & (A1L431) # !A1L430 & register[0]) # !AD_state[2] & (A1L430);
+--A1L431 is Select~5630
+A1L431 = AD_state[2] & (A1L429 & (A1L430) # !A1L429 & register[0]) # !AD_state[2] & (A1L429);
 
 
---A1L433 is Select~5665
-A1L433 = AD_state[0] & (AD_state[1] & q[0] # !AD_state[1] & (register[0])) # !AD_state[0] & (register[0]);
+--A1L432 is Select~5631
+A1L432 = AD_state[0] & (AD_state[1] & q[0] # !AD_state[1] & (register[0])) # !AD_state[0] & (register[0]);
+
+
+--TX_wait[0] is TX_wait[0]
+TX_wait[0] = DFFEAS(A1L525, FX2_CLK,  ,  , A1L524,  ,  ,  ,  );
 
 
 --loop_counter[0] is loop_counter[0]
-loop_counter[0] = DFFEAS(A1L633, BCLK,  ,  , A1L638,  ,  , A1L31,  );
+loop_counter[0] = DFFEAS(A1L632, BCLK,  ,  , A1L652,  ,  , A1L31,  );
 
 
 --loop_counter[1] is loop_counter[1]
-loop_counter[1] = DFFEAS(A1L639, BCLK,  ,  , A1L638,  ,  , A1L31,  );
+loop_counter[1] = DFFEAS(A1L635, BCLK,  ,  , A1L652,  ,  , A1L31,  );
 
 
 --loop_counter[2] is loop_counter[2]
-loop_counter[2] = DFFEAS(A1L642, BCLK,  ,  , A1L638,  ,  , A1L31,  );
+loop_counter[2] = DFFEAS(A1L638, BCLK,  ,  , A1L652,  ,  , A1L31,  );
 
 
 --loop_counter[3] is loop_counter[3]
-loop_counter[3] = DFFEAS(A1L645, BCLK,  ,  , A1L638,  ,  , A1L31,  );
+loop_counter[3] = DFFEAS(A1L641, BCLK,  ,  , A1L652,  ,  , A1L31,  );
 
 
---A1L728 is rtl~367
-A1L728 = loop_counter[0] # loop_counter[1] # loop_counter[2] # loop_counter[3];
+--A1L727 is rtl~367
+A1L727 = loop_counter[0] # loop_counter[1] # loop_counter[2] # loop_counter[3];
 
 
 --loop_counter[4] is loop_counter[4]
-loop_counter[4] = DFFEAS(A1L648, BCLK,  ,  , A1L638,  ,  , A1L31,  );
+loop_counter[4] = DFFEAS(A1L644, BCLK,  ,  , A1L652,  ,  , A1L31,  );
 
 
 --loop_counter[5] is loop_counter[5]
-loop_counter[5] = DFFEAS(A1L651, BCLK,  ,  , A1L638,  ,  , A1L31,  );
+loop_counter[5] = DFFEAS(A1L647, BCLK,  ,  , A1L652,  ,  , A1L31,  );
 
 
 --loop_counter[6] is loop_counter[6]
-loop_counter[6] = DFFEAS(A1L654, BCLK,  ,  , A1L638,  ,  , A1L31,  );
+loop_counter[6] = DFFEAS(A1L653, BCLK,  ,  , A1L652,  ,  , A1L31,  );
 
 
---A1L729 is rtl~368
-A1L729 = loop_counter[4] # loop_counter[5] # loop_counter[6];
+--A1L715 is rtl~8
+A1L715 = A1L727 # loop_counter[4] # loop_counter[5] # loop_counter[6];
 
 
 --Rx_control_4[0] is Rx_control_4[0]
 Rx_control_4[0] = DFFEAS(S1_q_a[0], !BCLK,  ,  , state_PWM.00110,  ,  ,  ,  );
 
 
---TX_wait[0] is TX_wait[0]
-TX_wait[0] = DFFEAS(A1L526, FX2_CLK,  ,  , A1L504,  ,  ,  ,  );
-
-
 --F1_clean_pb is debounce:de_PTT|clean_pb
 F1_clean_pb = DFFEAS(F1L3, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L434 is Select~5666
-A1L434 = AD_state[0] & (AD_state[1] # !TX_wait[0]) # !AD_state[0] & (F1_clean_pb & !AD_state[1]);
+--A1L433 is Select~5632
+A1L433 = AD_state[0] & (AD_state[1]) # !AD_state[0] & (AD_state[1] & !Rx_control_4[0] # !AD_state[1] & (F1_clean_pb));
 
 
---A1L435 is Select~5667
-A1L435 = AD_state[1] & (A1L434 & !register[0] # !A1L434 & (!Rx_control_4[0])) # !AD_state[1] & (A1L434);
+--A1L434 is Select~5633
+A1L434 = AD_state[1] & !AD_state[0];
 
 
---A1L436 is Select~5668
-A1L436 = A1L728 & (register[0]) # !A1L728 & (A1L729 & register[0] # !A1L729 & (!A1L435));
+--A1L435 is Select~5634
+A1L435 = AD_state[5] & (AD_state[2]) # !AD_state[5] & (AD_state[2] & A1L512 # !AD_state[2] & (A1L509));
 
 
---A1L437 is Select~5669
-A1L437 = AD_state[1] & !AD_state[0];
-
-
---A1L438 is Select~5670
-A1L438 = register[0] # A1L437 & !A1L728 & !A1L729;
-
-
---A1L439 is Select~5671
-A1L439 = AD_state[5] & (AD_state[2]) # !AD_state[5] & (AD_state[2] & A1L436 # !AD_state[2] & (A1L438));
-
-
---A1L440 is Select~5672
-A1L440 = AD_state[5] & (A1L439 & (register[0]) # !A1L439 & A1L433) # !AD_state[5] & (A1L439);
+--A1L436 is Select~5635
+A1L436 = AD_state[5] & (A1L435 & (register[0]) # !A1L435 & A1L432) # !AD_state[5] & (A1L435);
 
 
 --AD_state[4] is AD_state[4]
-AD_state[4] = DFFEAS(A1L506, BCLK,  ,  ,  ,  ,  ,  ,  );
+AD_state[4] = DFFEAS(A1L501, BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L441 is Select~5673
-A1L441 = AD_state[4] & A1L432 # !AD_state[4] & (A1L440);
+--A1L437 is Select~5636
+A1L437 = AD_state[4] & A1L431 # !AD_state[4] & (A1L436);
 
 
 --AD_state[3] is AD_state[3]
@@ -4524,68 +4512,64 @@ AD_state[3] = DFFEAS(A1L6, BCLK,  ,  ,  ,  ,  ,  ,  );
 AD_state[6] = DFFEAS(A1L18, BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L442 is Select~5674
-A1L442 = !AD_state[3] & !AD_state[6];
+--A1L438 is Select~5637
+A1L438 = !AD_state[3] & !AD_state[6];
 
 
 --Tx_data[1] is Tx_data[1]
 Tx_data[1] = DFFEAS(Tx_q[1], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
---A1L680 is register[1]~2398
-A1L680 = AD_state[0] & (!AD_state[2]) # !AD_state[0] & (AD_state[4] # AD_state[5]);
+--A1L679 is register[1]~2416
+A1L679 = AD_state[0] & (!AD_state[2]) # !AD_state[0] & (AD_state[4] # AD_state[5]);
 
 
 --TX_wait[1] is TX_wait[1]
-TX_wait[1] = DFFEAS(A1L529, FX2_CLK,  ,  , A1L504,  ,  ,  ,  );
+TX_wait[1] = DFFEAS(A1L528, FX2_CLK,  ,  , A1L524,  ,  ,  ,  );
 
 
---A1L681 is register[1]~2399
-A1L681 = AD_state[0] # AD_state[4] & !AD_state[5];
+--A1L680 is register[1]~2417
+A1L680 = AD_state[0] # AD_state[4] & !AD_state[5];
 
 
 --Rx_control_4[1] is Rx_control_4[1]
 Rx_control_4[1] = DFFEAS(S1_q_a[1], !BCLK,  ,  , state_PWM.00110,  ,  ,  ,  );
 
 
---A1L443 is Select~5675
-A1L443 = AD_state[1] & (Rx_control_4[1] # !AD_state[2]);
+--A1L439 is Select~5638
+A1L439 = AD_state[1] & (Rx_control_4[1] # !AD_state[2]);
 
 
---A1L444 is Select~5676
-A1L444 = A1L680 & (A1L681) # !A1L680 & (A1L681 & TX_wait[1] # !A1L681 & (A1L443));
+--A1L440 is Select~5639
+A1L440 = A1L679 & (A1L680) # !A1L679 & (A1L680 & TX_wait[1] # !A1L680 & (A1L439));
 
 
 --q[1] is q[1]
 q[1] = DFFEAS(q[0], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L445 is Select~5677
-A1L445 = A1L680 & (A1L444 & (q[1]) # !A1L444 & Tx_data[1]) # !A1L680 & (A1L444);
+--A1L441 is Select~5640
+A1L441 = A1L679 & (A1L440 & (q[1]) # !A1L440 & Tx_data[1]) # !A1L679 & (A1L440);
 
 
---A1L682 is register[1]~2400
-A1L682 = AD_state[1] & (AD_state[0] & !AD_state[2] & AD_state[5] # !AD_state[0] & (!AD_state[5])) # !AD_state[1] & (AD_state[2] & !AD_state[5]);
+--A1L681 is register[1]~2418
+A1L681 = AD_state[1] & (AD_state[0] & !AD_state[2] & AD_state[5] # !AD_state[0] & (!AD_state[5])) # !AD_state[1] & (AD_state[2] & !AD_state[5]);
 
 
---A1L716 is rtl~8
-A1L716 = A1L728 # loop_counter[4] # loop_counter[5] # loop_counter[6];
+--A1L682 is register[1]~2419
+A1L682 = AD_state[0] & (AD_state[1] # AD_state[5] # !AD_state[2]) # !AD_state[0] & AD_state[5] & (AD_state[1] # !AD_state[2]);
 
 
---A1L683 is register[1]~2401
-A1L683 = AD_state[0] & (AD_state[1] # AD_state[5] # !AD_state[2]) # !AD_state[0] & AD_state[5] & (AD_state[1] # !AD_state[2]);
+--A1L683 is register[1]~2420
+A1L683 = AD_state[4] & (A1L682) # !AD_state[4] & A1L715 & !A1L682;
 
 
---A1L684 is register[1]~2402
-A1L684 = AD_state[4] & (A1L683) # !AD_state[4] & A1L716 & !A1L683;
-
-
---A1L685 is register[1]~2403
-A1L685 = A1L442 & (A1L682 & (AD_state[4] $ !A1L684) # !A1L682 & AD_state[4] & !A1L684);
+--A1L684 is register[1]~2421
+A1L684 = A1L438 & (A1L681 & (AD_state[4] $ !A1L683) # !A1L681 & AD_state[4] & !A1L683);
 
 
 --TX_wait[2] is TX_wait[2]
-TX_wait[2] = DFFEAS(A1L532, FX2_CLK,  ,  , A1L504,  ,  ,  ,  );
+TX_wait[2] = DFFEAS(A1L531, FX2_CLK,  ,  , A1L524,  ,  ,  ,  );
 
 
 --Tx_data[2] is Tx_data[2]
@@ -4596,20 +4580,20 @@ Tx_data[2] = DFFEAS(Tx_q[2], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 Rx_control_4[2] = DFFEAS(S1_q_a[2], !BCLK,  ,  , state_PWM.00110,  ,  ,  ,  );
 
 
---A1L446 is Select~5678
-A1L446 = AD_state[1] & (Rx_control_4[2] # !AD_state[2]);
+--A1L442 is Select~5641
+A1L442 = AD_state[1] & (Rx_control_4[2] # !AD_state[2]);
 
 
---A1L447 is Select~5679
-A1L447 = A1L681 & (A1L680) # !A1L681 & (A1L680 & Tx_data[2] # !A1L680 & (A1L446));
+--A1L443 is Select~5642
+A1L443 = A1L680 & (A1L679) # !A1L680 & (A1L679 & Tx_data[2] # !A1L679 & (A1L442));
 
 
 --q[2] is q[2]
 q[2] = DFFEAS(q[1], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L448 is Select~5680
-A1L448 = A1L681 & (A1L447 & (q[2]) # !A1L447 & TX_wait[2]) # !A1L681 & (A1L447);
+--A1L444 is Select~5643
+A1L444 = A1L680 & (A1L443 & (q[2]) # !A1L443 & TX_wait[2]) # !A1L680 & (A1L443);
 
 
 --Tx_data[3] is Tx_data[3]
@@ -4617,31 +4601,31 @@ Tx_data[3] = DFFEAS(Tx_q[3], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
 --TX_wait[3] is TX_wait[3]
-TX_wait[3] = DFFEAS(A1L535, FX2_CLK,  ,  , A1L504,  ,  ,  ,  );
+TX_wait[3] = DFFEAS(A1L534, FX2_CLK,  ,  , A1L524,  ,  ,  ,  );
 
 
 --Rx_control_4[3] is Rx_control_4[3]
 Rx_control_4[3] = DFFEAS(S1_q_a[3], !BCLK,  ,  , state_PWM.00110,  ,  ,  ,  );
 
 
---A1L449 is Select~5681
-A1L449 = AD_state[1] & (Rx_control_4[3] # !AD_state[2]);
+--A1L445 is Select~5644
+A1L445 = AD_state[1] & (Rx_control_4[3] # !AD_state[2]);
 
 
---A1L450 is Select~5682
-A1L450 = A1L680 & (A1L681) # !A1L680 & (A1L681 & TX_wait[3] # !A1L681 & (A1L449));
+--A1L446 is Select~5645
+A1L446 = A1L679 & (A1L680) # !A1L679 & (A1L680 & TX_wait[3] # !A1L680 & (A1L445));
 
 
 --q[3] is q[3]
 q[3] = DFFEAS(q[2], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L451 is Select~5683
-A1L451 = A1L680 & (A1L450 & (q[3]) # !A1L450 & Tx_data[3]) # !A1L680 & (A1L450);
+--A1L447 is Select~5646
+A1L447 = A1L679 & (A1L446 & (q[3]) # !A1L446 & Tx_data[3]) # !A1L679 & (A1L446);
 
 
 --TX_wait[4] is TX_wait[4]
-TX_wait[4] = DFFEAS(A1L538, FX2_CLK,  ,  , A1L504,  ,  ,  ,  );
+TX_wait[4] = DFFEAS(A1L537, FX2_CLK,  ,  , A1L524,  ,  ,  ,  );
 
 
 --Tx_data[4] is Tx_data[4]
@@ -4652,20 +4636,20 @@ Tx_data[4] = DFFEAS(Tx_q[4], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 Rx_control_4[4] = DFFEAS(S1_q_a[4], !BCLK,  ,  , state_PWM.00110,  ,  ,  ,  );
 
 
---A1L452 is Select~5684
-A1L452 = AD_state[1] & (Rx_control_4[4] # !AD_state[2]);
+--A1L448 is Select~5647
+A1L448 = AD_state[1] & (Rx_control_4[4] # !AD_state[2]);
 
 
---A1L453 is Select~5685
-A1L453 = A1L681 & (A1L680) # !A1L681 & (A1L680 & Tx_data[4] # !A1L680 & (A1L452));
+--A1L449 is Select~5648
+A1L449 = A1L680 & (A1L679) # !A1L680 & (A1L679 & Tx_data[4] # !A1L679 & (A1L448));
 
 
 --q[4] is q[4]
 q[4] = DFFEAS(q[3], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L454 is Select~5686
-A1L454 = A1L681 & (A1L453 & (q[4]) # !A1L453 & TX_wait[4]) # !A1L681 & (A1L453);
+--A1L450 is Select~5649
+A1L450 = A1L680 & (A1L449 & (q[4]) # !A1L449 & TX_wait[4]) # !A1L680 & (A1L449);
 
 
 --Tx_data[5] is Tx_data[5]
@@ -4673,31 +4657,31 @@ Tx_data[5] = DFFEAS(Tx_q[5], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
 --TX_wait[5] is TX_wait[5]
-TX_wait[5] = DFFEAS(A1L541, FX2_CLK,  ,  , A1L504,  ,  ,  ,  );
+TX_wait[5] = DFFEAS(A1L540, FX2_CLK,  ,  , A1L524,  ,  ,  ,  );
 
 
 --Rx_control_4[5] is Rx_control_4[5]
 Rx_control_4[5] = DFFEAS(S1_q_a[5], !BCLK,  ,  , state_PWM.00110,  ,  ,  ,  );
 
 
---A1L455 is Select~5687
-A1L455 = AD_state[1] & (Rx_control_4[5] # !AD_state[2]);
+--A1L451 is Select~5650
+A1L451 = AD_state[1] & (Rx_control_4[5] # !AD_state[2]);
 
 
---A1L456 is Select~5688
-A1L456 = A1L680 & (A1L681) # !A1L680 & (A1L681 & TX_wait[5] # !A1L681 & (A1L455));
+--A1L452 is Select~5651
+A1L452 = A1L679 & (A1L680) # !A1L679 & (A1L680 & TX_wait[5] # !A1L680 & (A1L451));
 
 
 --q[5] is q[5]
 q[5] = DFFEAS(q[4], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L457 is Select~5689
-A1L457 = A1L680 & (A1L456 & (q[5]) # !A1L456 & Tx_data[5]) # !A1L680 & (A1L456);
+--A1L453 is Select~5652
+A1L453 = A1L679 & (A1L452 & (q[5]) # !A1L452 & Tx_data[5]) # !A1L679 & (A1L452);
 
 
 --TX_wait[6] is TX_wait[6]
-TX_wait[6] = DFFEAS(A1L544, FX2_CLK,  ,  , A1L504,  ,  ,  ,  );
+TX_wait[6] = DFFEAS(A1L543, FX2_CLK,  ,  , A1L524,  ,  ,  ,  );
 
 
 --Tx_data[6] is Tx_data[6]
@@ -4708,80 +4692,80 @@ Tx_data[6] = DFFEAS(Tx_q[6], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 Rx_control_4[6] = DFFEAS(S1_q_a[6], !BCLK,  ,  , state_PWM.00110,  ,  ,  ,  );
 
 
---A1L458 is Select~5690
-A1L458 = AD_state[1] & (Rx_control_4[6] # !AD_state[2]);
+--A1L454 is Select~5653
+A1L454 = AD_state[1] & (Rx_control_4[6] # !AD_state[2]);
 
 
---A1L459 is Select~5691
-A1L459 = A1L681 & (A1L680) # !A1L681 & (A1L680 & Tx_data[6] # !A1L680 & (A1L458));
+--A1L455 is Select~5654
+A1L455 = A1L680 & (A1L679) # !A1L680 & (A1L679 & Tx_data[6] # !A1L679 & (A1L454));
 
 
 --q[6] is q[6]
 q[6] = DFFEAS(q[5], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L460 is Select~5692
-A1L460 = A1L681 & (A1L459 & (q[6]) # !A1L459 & TX_wait[6]) # !A1L681 & (A1L459);
+--A1L456 is Select~5655
+A1L456 = A1L680 & (A1L455 & (q[6]) # !A1L455 & TX_wait[6]) # !A1L680 & (A1L455);
 
 
 --q[7] is q[7]
 q[7] = DFFEAS(q[6], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L461 is Select~5693
-A1L461 = AD_state[2] & (A1L429) # !AD_state[2] & (A1L429 & (register[7]) # !A1L429 & q[7]);
+--A1L457 is Select~5656
+A1L457 = AD_state[2] & (A1L428) # !AD_state[2] & (A1L428 & (register[7]) # !A1L428 & q[7]);
 
 
 --Tx_data[7] is Tx_data[7]
 Tx_data[7] = DFFEAS(Tx_q[7], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
---A1L462 is Select~5694
-A1L462 = AD_state[0] & register[7] # !AD_state[0] & (AD_state[1] & register[7] # !AD_state[1] & (Tx_data[7]));
+--A1L458 is Select~5657
+A1L458 = AD_state[0] & register[7] # !AD_state[0] & (AD_state[1] & register[7] # !AD_state[1] & (Tx_data[7]));
 
 
---A1L463 is Select~5695
-A1L463 = AD_state[2] & (A1L461 & (A1L462) # !A1L461 & register[7]) # !AD_state[2] & (A1L461);
+--A1L459 is Select~5658
+A1L459 = AD_state[2] & (A1L457 & (A1L458) # !A1L457 & register[7]) # !AD_state[2] & (A1L457);
 
 
 --TX_wait[7] is TX_wait[7]
-TX_wait[7] = DFFEAS(A1L547, FX2_CLK,  ,  , A1L504,  ,  ,  ,  );
+TX_wait[7] = DFFEAS(A1L546, FX2_CLK,  ,  , A1L524,  ,  ,  ,  );
 
 
---A1L464 is Select~5696
-A1L464 = AD_state[2] & !AD_state[1];
+--A1L460 is Select~5659
+A1L460 = AD_state[2] & !AD_state[1];
 
 
---A1L465 is Select~5697
-A1L465 = A1L464 & (A1L716 & register[7] # !A1L716 & (TX_wait[7])) # !A1L464 & register[7];
+--A1L461 is Select~5660
+A1L461 = A1L460 & (A1L715 & register[7] # !A1L715 & (TX_wait[7])) # !A1L460 & register[7];
 
 
 --Rx_control_4[7] is Rx_control_4[7]
 Rx_control_4[7] = DFFEAS(S1_q_a[7], !BCLK,  ,  , state_PWM.00110,  ,  ,  ,  );
 
 
---A1L466 is Select~5698
-A1L466 = AD_state[1] & (Rx_control_4[7] # !AD_state[2]);
+--A1L462 is Select~5661
+A1L462 = AD_state[1] & (Rx_control_4[7] # !AD_state[2]);
 
 
---A1L467 is Select~5699
-A1L467 = A1L716 & register[7] # !A1L716 & (AD_state[2] & (A1L466) # !AD_state[2] & register[7] & !A1L466);
+--A1L463 is Select~5662
+A1L463 = A1L715 & register[7] # !A1L715 & (AD_state[2] & (A1L462) # !AD_state[2] & register[7] & !A1L462);
 
 
---A1L468 is Select~5700
-A1L468 = AD_state[0] & (AD_state[5]) # !AD_state[0] & (AD_state[5] & register[7] # !AD_state[5] & (A1L467));
+--A1L464 is Select~5663
+A1L464 = AD_state[0] & (AD_state[5]) # !AD_state[0] & (AD_state[5] & register[7] # !AD_state[5] & (A1L463));
 
 
---A1L469 is Select~5701
-A1L469 = AD_state[1] & (AD_state[2] & register[7] # !AD_state[2] & (q[7])) # !AD_state[1] & register[7];
+--A1L465 is Select~5664
+A1L465 = AD_state[1] & (AD_state[2] & register[7] # !AD_state[2] & (q[7])) # !AD_state[1] & register[7];
 
 
---A1L470 is Select~5702
-A1L470 = AD_state[0] & (A1L468 & (A1L469) # !A1L468 & A1L465) # !AD_state[0] & (A1L468);
+--A1L466 is Select~5665
+A1L466 = AD_state[0] & (A1L464 & (A1L465) # !A1L464 & A1L461) # !AD_state[0] & (A1L464);
 
 
---A1L471 is Select~5703
-A1L471 = AD_state[4] & A1L463 # !AD_state[4] & (A1L470);
+--A1L467 is Select~5666
+A1L467 = AD_state[4] & A1L459 # !AD_state[4] & (A1L466);
 
 
 --Tx_data[8] is Tx_data[8]
@@ -4789,11 +4773,11 @@ Tx_data[8] = DFFEAS(Tx_q[8], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
 --rx_avail[4] is rx_avail[4]
-rx_avail[4] = DFFEAS(A1L735, BCLK,  ,  , A1L732,  ,  ,  ,  );
+rx_avail[4] = DFFEAS(A1L734, BCLK,  ,  , A1L731,  ,  ,  ,  );
 
 
---A1L700 is register[15]~2404
-A1L700 = AD_state[0] # !AD_state[2];
+--A1L699 is register[15]~2422
+A1L699 = AD_state[0] # !AD_state[2];
 
 
 --q[8] is q[8]
@@ -4801,59 +4785,55 @@ q[8] = DFFEAS(q[7], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --RX_wait[0] is RX_wait[0]
-RX_wait[0] = DFFEAS(A1L328, FX2_CLK,  ,  , A1L507,  ,  ,  ,  );
+RX_wait[0] = DFFEAS(A1L328, FX2_CLK,  ,  , A1L502,  ,  ,  ,  );
 
 
---A1L733 is rx_avail[4]~67
-A1L733 = !AD_state[4] & !AD_state[3];
+--A1L732 is rx_avail[4]~67
+A1L732 = !AD_state[4] & !AD_state[3];
 
 
---A1L701 is register[15]~2405
-A1L701 = AD_state[2] & (AD_state[0] # AD_state[1]);
+--A1L700 is register[15]~2423
+A1L700 = AD_state[2] & (AD_state[0] # AD_state[1]);
 
 
---A1L472 is Select~5704
-A1L472 = A1L710 & (A1L701 & (RX_wait[0]) # !A1L701 & q[8]) # !A1L710 & (!A1L701);
+--A1L468 is Select~5667
+A1L468 = A1L707 & (A1L700 & (RX_wait[0]) # !A1L700 & q[8]) # !A1L707 & (!A1L700);
 
 
---A1L473 is Select~5705
-A1L473 = A1L700 & (A1L472) # !A1L700 & (A1L472 & Tx_data[8] # !A1L472 & (rx_avail[4]));
+--A1L469 is Select~5668
+A1L469 = A1L699 & (A1L468) # !A1L699 & (A1L468 & Tx_data[8] # !A1L468 & (rx_avail[4]));
 
 
---A1L702 is register[15]~2406
-A1L702 = AD_state[0] & (AD_state[1] & !AD_state[5] # !AD_state[1] & (AD_state[4])) # !AD_state[0] & (AD_state[5] & (AD_state[4]) # !AD_state[5] & AD_state[1]);
+--A1L701 is register[15]~2424
+A1L701 = AD_state[0] & (!AD_state[5] # !AD_state[1]) # !AD_state[0] & (AD_state[1] # AD_state[5]);
 
 
---A1L703 is register[15]~2407
-A1L703 = AD_state[4] & (!A1L702) # !AD_state[4] & !A1L728 & !A1L729 & A1L702;
+--A1L728 is rtl~368
+A1L728 = loop_counter[5] # loop_counter[6];
 
 
---A1L704 is register[15]~2408
-A1L704 = !AD_state[2] & !AD_state[3] & !A1L703;
+--A1L470 is Select~5669
+A1L470 = !AD_state[5] & !A1L727 & !loop_counter[4] & !A1L728;
 
 
---A1L705 is register[15]~2409
-A1L705 = AD_state[4] & !AD_state[2] & !AD_state[1] & !AD_state[5];
+--A1L702 is register[15]~2425
+A1L702 = AD_state[4] & A1L701 # !AD_state[4] & (!A1L470 # !AD_state[1]);
 
 
---A1L706 is register[15]~2410
-A1L706 = AD_state[6] # AD_state[3] & (AD_state[0] # !A1L705);
+--A1L703 is register[15]~2426
+A1L703 = A1L702 & !AD_state[2] & !AD_state[3];
 
 
---A1L474 is Select~5706
-A1L474 = !AD_state[5] & !A1L728 & !A1L729;
+--A1L704 is register[15]~2427
+A1L704 = AD_state[4] & !AD_state[2] & !AD_state[1] & !AD_state[5];
 
 
---A1L707 is register[15]~2411
-A1L707 = AD_state[4] & !AD_state[1] & AD_state[5] # !AD_state[4] & AD_state[1];
+--A1L705 is register[15]~2428
+A1L705 = AD_state[6] # AD_state[3] & (AD_state[0] # !A1L704);
 
 
---A1L708 is register[15]~2412
-A1L708 = AD_state[4] & (AD_state[0] # !A1L707) # !AD_state[4] & (AD_state[0] $ !A1L707 # !A1L474);
-
-
---A1L709 is register[15]~2413
-A1L709 = !A1L704 & !A1L706 & (!A1L708 # !AD_state[2]);
+--A1L706 is register[15]~2429
+A1L706 = !A1L703 & !A1L705 & (!A1L709 # !AD_state[2]);
 
 
 --Tx_data[9] is Tx_data[9]
@@ -4861,7 +4841,7 @@ Tx_data[9] = DFFEAS(Tx_q[9], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
 --rx_avail[5] is rx_avail[5]
-rx_avail[5] = DFFEAS(A1L737, BCLK,  ,  , A1L732,  ,  ,  ,  );
+rx_avail[5] = DFFEAS(A1L736, BCLK,  ,  , A1L731,  ,  ,  ,  );
 
 
 --q[9] is q[9]
@@ -4869,15 +4849,15 @@ q[9] = DFFEAS(q[8], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --RX_wait[1] is RX_wait[1]
-RX_wait[1] = DFFEAS(A1L331, FX2_CLK,  ,  , A1L507,  ,  ,  ,  );
+RX_wait[1] = DFFEAS(A1L331, FX2_CLK,  ,  , A1L502,  ,  ,  ,  );
 
 
---A1L475 is Select~5707
-A1L475 = A1L710 & (A1L701 & (RX_wait[1]) # !A1L701 & q[9]) # !A1L710 & (!A1L701);
+--A1L471 is Select~5670
+A1L471 = A1L707 & (A1L700 & (RX_wait[1]) # !A1L700 & q[9]) # !A1L707 & (!A1L700);
 
 
---A1L476 is Select~5708
-A1L476 = A1L700 & (A1L475) # !A1L700 & (A1L475 & Tx_data[9] # !A1L475 & (rx_avail[5]));
+--A1L472 is Select~5671
+A1L472 = A1L699 & (A1L471) # !A1L699 & (A1L471 & Tx_data[9] # !A1L471 & (rx_avail[5]));
 
 
 --Tx_data[10] is Tx_data[10]
@@ -4885,7 +4865,7 @@ Tx_data[10] = DFFEAS(Tx_q[10], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
 --rx_avail[6] is rx_avail[6]
-rx_avail[6] = DFFEAS(A1L739, BCLK,  ,  , A1L732,  ,  ,  ,  );
+rx_avail[6] = DFFEAS(A1L738, BCLK,  ,  , A1L731,  ,  ,  ,  );
 
 
 --q[10] is q[10]
@@ -4893,15 +4873,15 @@ q[10] = DFFEAS(q[9], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --RX_wait[2] is RX_wait[2]
-RX_wait[2] = DFFEAS(A1L334, FX2_CLK,  ,  , A1L507,  ,  ,  ,  );
+RX_wait[2] = DFFEAS(A1L334, FX2_CLK,  ,  , A1L502,  ,  ,  ,  );
 
 
---A1L477 is Select~5709
-A1L477 = A1L710 & (A1L701 & (RX_wait[2]) # !A1L701 & q[10]) # !A1L710 & (!A1L701);
+--A1L473 is Select~5672
+A1L473 = A1L707 & (A1L700 & (RX_wait[2]) # !A1L700 & q[10]) # !A1L707 & (!A1L700);
 
 
---A1L478 is Select~5710
-A1L478 = A1L700 & (A1L477) # !A1L700 & (A1L477 & Tx_data[10] # !A1L477 & (rx_avail[6]));
+--A1L474 is Select~5673
+A1L474 = A1L699 & (A1L473) # !A1L699 & (A1L473 & Tx_data[10] # !A1L473 & (rx_avail[6]));
 
 
 --Tx_data[11] is Tx_data[11]
@@ -4909,7 +4889,7 @@ Tx_data[11] = DFFEAS(Tx_q[11], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
 --rx_avail[7] is rx_avail[7]
-rx_avail[7] = DFFEAS(A1L741, BCLK,  ,  , A1L732,  ,  ,  ,  );
+rx_avail[7] = DFFEAS(A1L740, BCLK,  ,  , A1L731,  ,  ,  ,  );
 
 
 --q[11] is q[11]
@@ -4917,15 +4897,15 @@ q[11] = DFFEAS(q[10], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --RX_wait[3] is RX_wait[3]
-RX_wait[3] = DFFEAS(A1L337, FX2_CLK,  ,  , A1L507,  ,  ,  ,  );
+RX_wait[3] = DFFEAS(A1L337, FX2_CLK,  ,  , A1L502,  ,  ,  ,  );
 
 
---A1L479 is Select~5711
-A1L479 = A1L710 & (A1L701 & (RX_wait[3]) # !A1L701 & q[11]) # !A1L710 & (!A1L701);
+--A1L475 is Select~5674
+A1L475 = A1L707 & (A1L700 & (RX_wait[3]) # !A1L700 & q[11]) # !A1L707 & (!A1L700);
 
 
---A1L480 is Select~5712
-A1L480 = A1L700 & (A1L479) # !A1L700 & (A1L479 & Tx_data[11] # !A1L479 & (rx_avail[7]));
+--A1L476 is Select~5675
+A1L476 = A1L699 & (A1L475) # !A1L699 & (A1L475 & Tx_data[11] # !A1L475 & (rx_avail[7]));
 
 
 --Tx_data[12] is Tx_data[12]
@@ -4933,7 +4913,7 @@ Tx_data[12] = DFFEAS(Tx_q[12], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
 --rx_avail[8] is rx_avail[8]
-rx_avail[8] = DFFEAS(A1L743, BCLK,  ,  , A1L732,  ,  ,  ,  );
+rx_avail[8] = DFFEAS(A1L742, BCLK,  ,  , A1L731,  ,  ,  ,  );
 
 
 --q[12] is q[12]
@@ -4941,15 +4921,15 @@ q[12] = DFFEAS(q[11], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --RX_wait[4] is RX_wait[4]
-RX_wait[4] = DFFEAS(A1L340, FX2_CLK,  ,  , A1L507,  ,  ,  ,  );
+RX_wait[4] = DFFEAS(A1L340, FX2_CLK,  ,  , A1L502,  ,  ,  ,  );
 
 
---A1L481 is Select~5713
-A1L481 = A1L710 & (A1L701 & (RX_wait[4]) # !A1L701 & q[12]) # !A1L710 & (!A1L701);
+--A1L477 is Select~5676
+A1L477 = A1L707 & (A1L700 & (RX_wait[4]) # !A1L700 & q[12]) # !A1L707 & (!A1L700);
 
 
---A1L482 is Select~5714
-A1L482 = A1L700 & (A1L481) # !A1L700 & (A1L481 & Tx_data[12] # !A1L481 & (rx_avail[8]));
+--A1L478 is Select~5677
+A1L478 = A1L699 & (A1L477) # !A1L699 & (A1L477 & Tx_data[12] # !A1L477 & (rx_avail[8]));
 
 
 --Tx_data[13] is Tx_data[13]
@@ -4957,7 +4937,7 @@ Tx_data[13] = DFFEAS(Tx_q[13], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
 --rx_avail[9] is rx_avail[9]
-rx_avail[9] = DFFEAS(A1L745, BCLK,  ,  , A1L732,  ,  ,  ,  );
+rx_avail[9] = DFFEAS(A1L744, BCLK,  ,  , A1L731,  ,  ,  ,  );
 
 
 --q[13] is q[13]
@@ -4965,15 +4945,15 @@ q[13] = DFFEAS(q[12], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --RX_wait[5] is RX_wait[5]
-RX_wait[5] = DFFEAS(A1L343, FX2_CLK,  ,  , A1L507,  ,  ,  ,  );
+RX_wait[5] = DFFEAS(A1L343, FX2_CLK,  ,  , A1L502,  ,  ,  ,  );
 
 
---A1L483 is Select~5715
-A1L483 = A1L710 & (A1L701 & (RX_wait[5]) # !A1L701 & q[13]) # !A1L710 & (!A1L701);
+--A1L479 is Select~5678
+A1L479 = A1L707 & (A1L700 & (RX_wait[5]) # !A1L700 & q[13]) # !A1L707 & (!A1L700);
 
 
---A1L484 is Select~5716
-A1L484 = A1L700 & (A1L483) # !A1L700 & (A1L483 & Tx_data[13] # !A1L483 & (rx_avail[9]));
+--A1L480 is Select~5679
+A1L480 = A1L699 & (A1L479) # !A1L699 & (A1L479 & Tx_data[13] # !A1L479 & (rx_avail[9]));
 
 
 --Tx_data[14] is Tx_data[14]
@@ -4981,7 +4961,7 @@ Tx_data[14] = DFFEAS(Tx_q[14], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
 --rx_avail[10] is rx_avail[10]
-rx_avail[10] = DFFEAS(A1L747, BCLK,  ,  , A1L732,  ,  ,  ,  );
+rx_avail[10] = DFFEAS(A1L746, BCLK,  ,  , A1L731,  ,  ,  ,  );
 
 
 --q[14] is q[14]
@@ -4989,15 +4969,15 @@ q[14] = DFFEAS(q[13], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --RX_wait[6] is RX_wait[6]
-RX_wait[6] = DFFEAS(A1L346, FX2_CLK,  ,  , A1L507,  ,  ,  ,  );
+RX_wait[6] = DFFEAS(A1L346, FX2_CLK,  ,  , A1L502,  ,  ,  ,  );
 
 
---A1L485 is Select~5717
-A1L485 = A1L710 & (A1L701 & (RX_wait[6]) # !A1L701 & q[14]) # !A1L710 & (!A1L701);
+--A1L481 is Select~5680
+A1L481 = A1L707 & (A1L700 & (RX_wait[6]) # !A1L700 & q[14]) # !A1L707 & (!A1L700);
 
 
---A1L486 is Select~5718
-A1L486 = A1L700 & (A1L485) # !A1L700 & (A1L485 & Tx_data[14] # !A1L485 & (rx_avail[10]));
+--A1L482 is Select~5681
+A1L482 = A1L699 & (A1L481) # !A1L699 & (A1L481 & Tx_data[14] # !A1L481 & (rx_avail[10]));
 
 
 --Tx_data[15] is Tx_data[15]
@@ -5005,7 +4985,7 @@ Tx_data[15] = DFFEAS(Tx_q[15], LB1_safe_q[2],  ,  , A1L30,  ,  ,  ,  );
 
 
 --rx_avail[11] is rx_avail[11]
-rx_avail[11] = DFFEAS(A1L749, BCLK,  ,  , A1L732,  ,  ,  ,  );
+rx_avail[11] = DFFEAS(A1L748, BCLK,  ,  , A1L731,  ,  ,  ,  );
 
 
 --q[15] is q[15]
@@ -5013,15 +4993,15 @@ q[15] = DFFEAS(q[14], BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
 --RX_wait[7] is RX_wait[7]
-RX_wait[7] = DFFEAS(A1L349, FX2_CLK,  ,  , A1L507,  ,  ,  ,  );
+RX_wait[7] = DFFEAS(A1L349, FX2_CLK,  ,  , A1L502,  ,  ,  ,  );
 
 
---A1L487 is Select~5719
-A1L487 = A1L710 & (A1L701 & (RX_wait[7]) # !A1L701 & q[15]) # !A1L710 & (A1L701);
+--A1L483 is Select~5682
+A1L483 = A1L707 & (A1L700 & (RX_wait[7]) # !A1L700 & q[15]) # !A1L707 & (A1L700);
 
 
---A1L488 is Select~5720
-A1L488 = A1L700 & (A1L487) # !A1L700 & (A1L487 & (rx_avail[11]) # !A1L487 & Tx_data[15]);
+--A1L484 is Select~5683
+A1L484 = A1L699 & (A1L483) # !A1L699 & (A1L483 & (rx_avail[11]) # !A1L483 & Tx_data[15]);
 
 
 --V1_delayed_wrptr_g[4] is Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|delayed_wrptr_g[4]
@@ -5064,38 +5044,38 @@ V1_delayed_wrptr_g[3] = DFFEAS(V1_wrptr_g[3], data_flag,  ,  ,  ,  ,  ,  ,  );
 V1_delayed_wrptr_g[5] = DFFEAS(V1_wrptr_g[5], data_flag,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L489 is Select~5721
-A1L489 = AD_state[0] & AD_state[1] & AD_state[5] & !AD_state[2];
+--A1L485 is Select~5684
+A1L485 = AD_state[0] & AD_state[1] & AD_state[5] & !AD_state[2];
 
 
---A1L490 is Select~5722
-A1L490 = A1L489 # A1L474 & (A1L437 # A1L464);
+--A1L486 is Select~5685
+A1L486 = A1L485 # A1L470 & (A1L434 # A1L460);
 
 
---A1L491 is Select~5723
-A1L491 = AD_state[0] & (AD_state[2] # !AD_state[5] # !AD_state[1]) # !AD_state[0] & (AD_state[1] # AD_state[2] $ AD_state[5]);
+--A1L487 is Select~5686
+A1L487 = AD_state[0] & (AD_state[2] # !AD_state[5] # !AD_state[1]) # !AD_state[0] & (AD_state[1] # AD_state[2] $ AD_state[5]);
 
 
---A1L492 is Select~5724
-A1L492 = A1L442 & (AD_state[4] & (!A1L491) # !AD_state[4] & A1L490);
+--A1L488 is Select~5687
+A1L488 = A1L438 & (AD_state[4] & (!A1L487) # !AD_state[4] & A1L486);
 
 
---A1L584 is add~1059
-A1L584 = AD_state[0] $ VCC;
+--A1L583 is add~1059
+A1L583 = AD_state[0] $ VCC;
 
---A1L585 is add~1060
-A1L585 = CARRY(AD_state[0]);
-
-
---A1L587 is add~1062
-A1L587 = CARRY(!A1L585 # !AD_state[1]);
+--A1L584 is add~1060
+A1L584 = CARRY(AD_state[0]);
 
 
---A1L588 is add~1063
-A1L588 = AD_state[2] & (A1L587 $ GND) # !AD_state[2] & !A1L587 & VCC;
+--A1L586 is add~1062
+A1L586 = CARRY(!A1L584 # !AD_state[1]);
 
---A1L589 is add~1064
-A1L589 = CARRY(AD_state[2] & !A1L587);
+
+--A1L587 is add~1063
+A1L587 = AD_state[2] & (A1L586 $ GND) # !AD_state[2] & !A1L586 & VCC;
+
+--A1L588 is add~1064
+A1L588 = CARRY(AD_state[2] & !A1L586);
 
 
 --A1L9 is AD_state[5]~1418
@@ -5122,73 +5102,73 @@ A1L13 = AD_state[4] & (A1L12 & !AD_state[5]) # !AD_state[4] & AD_state[3];
 A1L14 = AD_state[6] # A1L10 # A1L11 # A1L13;
 
 
---A1L493 is Select~5725
-A1L493 = AD_state[1] & (AD_state[2] # AD_state[4] # AD_state[0]) # !AD_state[1] & AD_state[2] & (!AD_state[0] # !AD_state[4]);
+--A1L489 is Select~5688
+A1L489 = AD_state[1] & (AD_state[2] # AD_state[4] # AD_state[0]) # !AD_state[1] & AD_state[2] & (!AD_state[0] # !AD_state[4]);
 
 
---A1L494 is Select~5726
-A1L494 = A1L493 # AD_state[5] & !AD_state[4];
+--A1L490 is Select~5689
+A1L490 = A1L489 # AD_state[5] & !AD_state[4];
 
 
---A1L495 is Select~5727
-A1L495 = A1L14 & A1L588 # !A1L14 & (A1L494 & !AD_state[3]);
+--A1L491 is Select~5690
+A1L491 = A1L14 & A1L587 # !A1L14 & (A1L490 & !AD_state[3]);
 
 
---A1L496 is Select~5728
-A1L496 = AD_state[2] # AD_state[1] # AD_state[5];
+--A1L492 is Select~5691
+A1L492 = AD_state[2] # AD_state[1] # AD_state[5];
 
 
---A1L497 is Select~5729
-A1L497 = AD_state[6] & A1L584 & A1L733 # !AD_state[6] & (A1L514);
+--A1L493 is Select~5692
+A1L493 = AD_state[6] & A1L583 & A1L732 # !AD_state[6] & (A1L510);
 
 
---A1L498 is Select~5730
-A1L498 = A1L496 & !AD_state[0] # !A1L496 & (A1L497 # !AD_state[0] & !A1L733);
+--A1L494 is Select~5693
+A1L494 = A1L492 & !AD_state[0] # !A1L492 & (A1L493 # !AD_state[0] & !A1L732);
 
 
 --A1L28 is Decoder~628
 A1L28 = AD_state[4] & AD_state[2] & AD_state[5] & !AD_state[3];
 
 
---A1L499 is Select~5731
-A1L499 = AD_state[4] & AD_state[3] & !LRCLK # !AD_state[4] & !AD_state[3] & LRCLK;
+--A1L495 is Select~5694
+A1L495 = AD_state[4] & AD_state[3] & !LRCLK # !AD_state[4] & !AD_state[3] & LRCLK;
 
 
---A1L500 is Select~5732
-A1L500 = A1L28 # A1L499 & !AD_state[2] & !AD_state[5];
+--A1L496 is Select~5695
+A1L496 = A1L28 # A1L495 & !AD_state[2] & !AD_state[5];
 
 
---A1L501 is Select~5733
-A1L501 = AD_state[0] & !AD_state[1] & (AD_state[6] # !A1L500) # !AD_state[0] & AD_state[1];
+--A1L497 is Select~5696
+A1L497 = AD_state[0] & !AD_state[1] & (AD_state[6] # !A1L496) # !AD_state[0] & AD_state[1];
 
 
---A1L590 is add~1065
-A1L590 = AD_state[3] & !A1L589 # !AD_state[3] & (A1L589 # GND);
+--A1L589 is add~1065
+A1L589 = AD_state[3] & !A1L588 # !AD_state[3] & (A1L588 # GND);
 
---A1L591 is add~1066
-A1L591 = CARRY(!A1L589 # !AD_state[3]);
-
-
---A1L592 is add~1067
-A1L592 = AD_state[4] & (A1L591 $ GND) # !AD_state[4] & !A1L591 & VCC;
-
---A1L593 is add~1068
-A1L593 = CARRY(AD_state[4] & !A1L591);
+--A1L590 is add~1066
+A1L590 = CARRY(!A1L588 # !AD_state[3]);
 
 
---A1L594 is add~1069
-A1L594 = AD_state[5] & !A1L593 # !AD_state[5] & (A1L593 # GND);
+--A1L591 is add~1067
+A1L591 = AD_state[4] & (A1L590 $ GND) # !AD_state[4] & !A1L590 & VCC;
 
---A1L595 is add~1070
-A1L595 = CARRY(!A1L593 # !AD_state[5]);
-
-
---A1L502 is Select~5734
-A1L502 = AD_state[4] & (AD_state[1] # !A1L700) # !AD_state[4] & (AD_state[5]);
+--A1L592 is add~1068
+A1L592 = CARRY(AD_state[4] & !A1L590);
 
 
---A1L503 is Select~5735
-A1L503 = A1L14 & A1L594 # !A1L14 & (A1L502 & !AD_state[3]);
+--A1L593 is add~1069
+A1L593 = AD_state[5] & !A1L592 # !AD_state[5] & (A1L592 # GND);
+
+--A1L594 is add~1070
+A1L594 = CARRY(!A1L592 # !AD_state[5]);
+
+
+--A1L498 is Select~5697
+A1L498 = AD_state[4] & (AD_state[1] # !A1L699) # !AD_state[4] & (AD_state[5]);
+
+
+--A1L499 is Select~5698
+A1L499 = A1L14 & A1L593 # !A1L14 & (A1L498 & !AD_state[3]);
 
 
 --Tx_q[0] is Tx_q[0]
@@ -5196,19 +5176,19 @@ Tx_q[0] = DFFEAS(CDOUT, LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 
 
 --TX_state[1] is TX_state[1]
-TX_state[1] = DFFEAS(A1L510, LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
+TX_state[1] = DFFEAS(A1L505, LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 
 
 --TX_state[4] is TX_state[4]
-TX_state[4] = DFFEAS(A1L521, LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
+TX_state[4] = DFFEAS(A1L519, LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 
 
 --TX_state[3] is TX_state[3]
-TX_state[3] = DFFEAS(A1L522, LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
+TX_state[3] = DFFEAS(A1L520, LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 
 
 --TX_state[2] is TX_state[2]
-TX_state[2] = DFFEAS(A1L523, LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
+TX_state[2] = DFFEAS(A1L521, LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 
 
 --A1L29 is Decoder~629
@@ -5216,84 +5196,84 @@ A1L29 = TX_state[4] & !TX_state[3] & !TX_state[2];
 
 
 --TX_state[0] is TX_state[0]
-TX_state[0] = DFFEAS(A1L513, LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
+TX_state[0] = DFFEAS(A1L508, LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 
 
 --A1L30 is Decoder~630
 A1L30 = TX_state[1] & A1L29 & !TX_state[0];
 
 
---A1L633 is loop_counter[0]~254
-A1L633 = loop_counter[0] $ VCC;
+--A1L525 is TX_wait[0]~87
+A1L525 = TX_wait[0] $ VCC;
 
---A1L634 is loop_counter[0]~255
-A1L634 = CARRY(loop_counter[0]);
+--A1L526 is TX_wait[0]~88
+A1L526 = CARRY(TX_wait[0]);
+
+
+--A1L524 is TX_wait[0]~7
+A1L524 = state_FX.011 & !FX2_flags[2];
+
+
+--A1L632 is loop_counter[0]~254
+A1L632 = loop_counter[0] $ VCC;
+
+--A1L633 is loop_counter[0]~255
+A1L633 = CARRY(loop_counter[0]);
 
 
 --A1L31 is Decoder~631
 A1L31 = AD_state[1] # AD_state[6] # !A1L28 # !AD_state[0];
 
 
---A1L636 is loop_counter[1]~256
-A1L636 = !loop_counter[3] # !loop_counter[2] # !loop_counter[1] # !loop_counter[0];
+--A1L650 is loop_counter[6]~256
+A1L650 = !loop_counter[3] # !loop_counter[2] # !loop_counter[1] # !loop_counter[0];
 
 
---A1L637 is loop_counter[1]~257
-A1L637 = loop_counter[6] # !loop_counter[5];
+--A1L651 is loop_counter[6]~257
+A1L651 = loop_counter[6] # !loop_counter[5];
 
 
---A1L638 is loop_counter[1]~258
-A1L638 = !A1L636 & !A1L637 & loop_counter[4] # !A1L31;
+--A1L652 is loop_counter[6]~258
+A1L652 = !A1L650 & !A1L651 & loop_counter[4] # !A1L31;
 
 
---A1L639 is loop_counter[1]~259
-A1L639 = loop_counter[1] & !A1L634 # !loop_counter[1] & (A1L634 # GND);
+--A1L635 is loop_counter[1]~259
+A1L635 = loop_counter[1] & !A1L633 # !loop_counter[1] & (A1L633 # GND);
 
---A1L640 is loop_counter[1]~260
-A1L640 = CARRY(!A1L634 # !loop_counter[1]);
-
-
---A1L642 is loop_counter[2]~261
-A1L642 = loop_counter[2] & (A1L640 $ GND) # !loop_counter[2] & !A1L640 & VCC;
-
---A1L643 is loop_counter[2]~262
-A1L643 = CARRY(loop_counter[2] & !A1L640);
+--A1L636 is loop_counter[1]~260
+A1L636 = CARRY(!A1L633 # !loop_counter[1]);
 
 
---A1L645 is loop_counter[3]~263
-A1L645 = loop_counter[3] & !A1L643 # !loop_counter[3] & (A1L643 # GND);
+--A1L638 is loop_counter[2]~261
+A1L638 = loop_counter[2] & (A1L636 $ GND) # !loop_counter[2] & !A1L636 & VCC;
 
---A1L646 is loop_counter[3]~264
-A1L646 = CARRY(!A1L643 # !loop_counter[3]);
-
-
---A1L648 is loop_counter[4]~265
-A1L648 = loop_counter[4] & (A1L646 $ GND) # !loop_counter[4] & !A1L646 & VCC;
-
---A1L649 is loop_counter[4]~266
-A1L649 = CARRY(loop_counter[4] & !A1L646);
+--A1L639 is loop_counter[2]~262
+A1L639 = CARRY(loop_counter[2] & !A1L636);
 
 
---A1L651 is loop_counter[5]~267
-A1L651 = loop_counter[5] & !A1L649 # !loop_counter[5] & (A1L649 # GND);
+--A1L641 is loop_counter[3]~263
+A1L641 = loop_counter[3] & !A1L639 # !loop_counter[3] & (A1L639 # GND);
 
---A1L652 is loop_counter[5]~268
-A1L652 = CARRY(!A1L649 # !loop_counter[5]);
-
-
---A1L654 is loop_counter[6]~269
-A1L654 = loop_counter[6] $ !A1L652;
+--A1L642 is loop_counter[3]~264
+A1L642 = CARRY(!A1L639 # !loop_counter[3]);
 
 
---A1L526 is TX_wait[0]~80
-A1L526 = TX_wait[0] $ VCC;
+--A1L644 is loop_counter[4]~265
+A1L644 = loop_counter[4] & (A1L642 $ GND) # !loop_counter[4] & !A1L642 & VCC;
 
---A1L527 is TX_wait[0]~81
-A1L527 = CARRY(TX_wait[0]);
+--A1L645 is loop_counter[4]~266
+A1L645 = CARRY(loop_counter[4] & !A1L642);
 
 
---A1L504 is Select~5736
-A1L504 = state_FX.011 & !FX2_flags[2];
+--A1L647 is loop_counter[5]~267
+A1L647 = loop_counter[5] & !A1L645 # !loop_counter[5] & (A1L645 # GND);
+
+--A1L648 is loop_counter[5]~268
+A1L648 = CARRY(!A1L645 # !loop_counter[5]);
+
+
+--A1L653 is loop_counter[6]~269
+A1L653 = loop_counter[6] $ !A1L648;
 
 
 --F1_pb_history[3] is debounce:de_PTT|pb_history[3]
@@ -5312,58 +5292,58 @@ F1_count[18] = DFFEAS(F1L60, FX2_CLK,  ,  ,  ,  ,  , F1L1,  );
 F1L3 = F1_clean_pb & (F1_pb_history[3] # F1_pb_history[2] # !F1_count[18]) # !F1_clean_pb & F1_pb_history[3] & F1_pb_history[2] & F1_count[18];
 
 
---A1L505 is Select~5737
-A1L505 = AD_state[4] & (AD_state[1] # !AD_state[0]);
+--A1L500 is Select~5699
+A1L500 = AD_state[4] & (AD_state[1] # !AD_state[0]);
 
 
---A1L506 is Select~5738
-A1L506 = A1L14 & A1L592 # !A1L14 & (AD_state[3] # A1L505);
+--A1L501 is Select~5700
+A1L501 = A1L14 & A1L591 # !A1L14 & (AD_state[3] # A1L500);
 
 
 --A1L6 is AD_state[3]~1424
-A1L6 = A1L14 & A1L590 # !A1L14 & (AD_state[3]);
+A1L6 = A1L14 & A1L589 # !A1L14 & (AD_state[3]);
 
 
---A1L596 is add~1071
-A1L596 = AD_state[6] $ !A1L595;
+--A1L595 is add~1071
+A1L595 = AD_state[6] $ !A1L594;
 
 
---A1L674 is reduce_or~245
-A1L674 = AD_state[0] & (AD_state[4] # AD_state[1] & AD_state[2]) # !AD_state[0] & AD_state[4] & (AD_state[1] # AD_state[2]);
+--A1L673 is reduce_or~245
+A1L673 = AD_state[0] & (AD_state[4] # AD_state[1] & AD_state[2]) # !AD_state[0] & AD_state[4] & (AD_state[1] # AD_state[2]);
 
 
 --A1L16 is AD_state~1425
-A1L16 = A1L674 & !AD_state[3];
+A1L16 = A1L673 & !AD_state[3];
 
 
---A1L675 is reduce_or~246
-A1L675 = AD_state[1] & AD_state[0] & !AD_state[2] # !AD_state[1] & (AD_state[2] & AD_state[4]);
+--A1L674 is reduce_or~246
+A1L674 = AD_state[1] & AD_state[0] & !AD_state[2] # !AD_state[1] & (AD_state[2] & AD_state[4]);
 
 
 --A1L17 is AD_state~1426
-A1L17 = AD_state[6] # AD_state[5] & (!A1L675) # !AD_state[5] & A1L16;
+A1L17 = AD_state[6] # AD_state[5] & (!A1L674) # !AD_state[5] & A1L16;
 
 
 --A1L18 is AD_state~1427
-A1L18 = A1L596 & (A1L17 # AD_state[3] & !A1L705);
+A1L18 = A1L595 & (A1L17 # AD_state[3] & !A1L704);
 
 
 --Tx_q[1] is Tx_q[1]
 Tx_q[1] = DFFEAS(Tx_q[0], LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 
 
---A1L529 is TX_wait[1]~82
-A1L529 = TX_wait[1] & !A1L527 # !TX_wait[1] & (A1L527 # GND);
+--A1L528 is TX_wait[1]~89
+A1L528 = TX_wait[1] & !A1L526 # !TX_wait[1] & (A1L526 # GND);
 
---A1L530 is TX_wait[1]~83
-A1L530 = CARRY(!A1L527 # !TX_wait[1]);
+--A1L529 is TX_wait[1]~90
+A1L529 = CARRY(!A1L526 # !TX_wait[1]);
 
 
---A1L532 is TX_wait[2]~84
-A1L532 = TX_wait[2] & (A1L530 $ GND) # !TX_wait[2] & !A1L530 & VCC;
+--A1L531 is TX_wait[2]~91
+A1L531 = TX_wait[2] & (A1L529 $ GND) # !TX_wait[2] & !A1L529 & VCC;
 
---A1L533 is TX_wait[2]~85
-A1L533 = CARRY(TX_wait[2] & !A1L530);
+--A1L532 is TX_wait[2]~92
+A1L532 = CARRY(TX_wait[2] & !A1L529);
 
 
 --Tx_q[2] is Tx_q[2]
@@ -5374,18 +5354,18 @@ Tx_q[2] = DFFEAS(Tx_q[1], LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 Tx_q[3] = DFFEAS(Tx_q[2], LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 
 
---A1L535 is TX_wait[3]~86
-A1L535 = TX_wait[3] & !A1L533 # !TX_wait[3] & (A1L533 # GND);
+--A1L534 is TX_wait[3]~93
+A1L534 = TX_wait[3] & !A1L532 # !TX_wait[3] & (A1L532 # GND);
 
---A1L536 is TX_wait[3]~87
-A1L536 = CARRY(!A1L533 # !TX_wait[3]);
+--A1L535 is TX_wait[3]~94
+A1L535 = CARRY(!A1L532 # !TX_wait[3]);
 
 
---A1L538 is TX_wait[4]~88
-A1L538 = TX_wait[4] & (A1L536 $ GND) # !TX_wait[4] & !A1L536 & VCC;
+--A1L537 is TX_wait[4]~95
+A1L537 = TX_wait[4] & (A1L535 $ GND) # !TX_wait[4] & !A1L535 & VCC;
 
---A1L539 is TX_wait[4]~89
-A1L539 = CARRY(TX_wait[4] & !A1L536);
+--A1L538 is TX_wait[4]~96
+A1L538 = CARRY(TX_wait[4] & !A1L535);
 
 
 --Tx_q[4] is Tx_q[4]
@@ -5396,18 +5376,18 @@ Tx_q[4] = DFFEAS(Tx_q[3], LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 Tx_q[5] = DFFEAS(Tx_q[4], LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 
 
---A1L541 is TX_wait[5]~90
-A1L541 = TX_wait[5] & !A1L539 # !TX_wait[5] & (A1L539 # GND);
+--A1L540 is TX_wait[5]~97
+A1L540 = TX_wait[5] & !A1L538 # !TX_wait[5] & (A1L538 # GND);
 
---A1L542 is TX_wait[5]~91
-A1L542 = CARRY(!A1L539 # !TX_wait[5]);
+--A1L541 is TX_wait[5]~98
+A1L541 = CARRY(!A1L538 # !TX_wait[5]);
 
 
---A1L544 is TX_wait[6]~92
-A1L544 = TX_wait[6] & (A1L542 $ GND) # !TX_wait[6] & !A1L542 & VCC;
+--A1L543 is TX_wait[6]~99
+A1L543 = TX_wait[6] & (A1L541 $ GND) # !TX_wait[6] & !A1L541 & VCC;
 
---A1L545 is TX_wait[6]~93
-A1L545 = CARRY(TX_wait[6] & !A1L542);
+--A1L544 is TX_wait[6]~100
+A1L544 = CARRY(TX_wait[6] & !A1L541);
 
 
 --Tx_q[6] is Tx_q[6]
@@ -5418,8 +5398,8 @@ Tx_q[6] = DFFEAS(Tx_q[5], LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 Tx_q[7] = DFFEAS(Tx_q[6], LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 
 
---A1L547 is TX_wait[7]~94
-A1L547 = TX_wait[7] $ A1L545;
+--A1L546 is TX_wait[7]~101
+A1L546 = TX_wait[7] $ A1L544;
 
 
 --Tx_q[8] is Tx_q[8]
@@ -5430,12 +5410,12 @@ Tx_q[8] = DFFEAS(Tx_q[7], LB1_safe_q[2],  ,  ,  ,  ,  ,  ,  );
 sync_Rx_used[4] = DFFEAS(A1L782, BCLK,  ,  ,  ,  ,  ,  ,  );
 
 
---A1L734 is rx_avail[4]~68
-A1L734 = !AD_state[4] & !AD_state[0] & !AD_state[5] & !AD_state[3];
+--A1L733 is rx_avail[4]~68
+A1L733 = !AD_state[4] & !AD_state[0] & !AD_state[5] & !AD_state[3];
 
 
---A1L732 is rx_avail[4]~7
-A1L732 = A1L464 & A1L734 & !A1L716 & !AD_state[6];
+--A1L731 is rx_avail[4]~7
+A1L731 = A1L460 & A1L733 & !A1L715 & !AD_state[6];
 
 
 --A1L328 is RX_wait[0]~80
@@ -5445,8 +5425,8 @@ A1L328 = RX_wait[0] $ VCC;
 A1L329 = CARRY(RX_wait[0]);
 
 
---A1L507 is Select~5739
-A1L507 = !state_FX.000 & !FX2_flags[0];
+--A1L502 is Select~5701
+A1L502 = !FX2_flags[0] & !state_FX.000;
 
 
 --Tx_q[9] is Tx_q[9]
@@ -5551,73 +5531,73 @@ sync_Rx_used[11] = DFFEAS(A1L803, BCLK,  ,  ,  ,  ,  ,  ,  );
 A1L349 = RX_wait[7] $ A1L347;
 
 
---A1L598 is add~1073
-A1L598 = TX_state[0] & (TX_state[1] $ VCC) # !TX_state[0] & TX_state[1] & VCC;
+--A1L597 is add~1073
+A1L597 = TX_state[0] & (TX_state[1] $ VCC) # !TX_state[0] & TX_state[1] & VCC;
 
---A1L599 is add~1074
-A1L599 = CARRY(TX_state[0] & TX_state[1]);
+--A1L598 is add~1074
+A1L598 = CARRY(TX_state[0] & TX_state[1]);
 
 
---A1L508 is Select~5740
-A1L508 = !LB1_safe_q[8] & !TX_state[1];
+--A1L503 is Select~5702
+A1L503 = !LB1_safe_q[8] & !TX_state[1];
 
 
 --A1L32 is Decoder~632
 A1L32 = !TX_state[3] & !TX_state[2];
 
 
---A1L509 is Select~5741
-A1L509 = A1L598 & (!TX_state[4] & !A1L508 # !A1L32);
+--A1L504 is Select~5703
+A1L504 = A1L597 & (!TX_state[4] & !A1L503 # !A1L32);
 
 
---A1L510 is Select~5742
-A1L510 = A1L509 # TX_state[0] & A1L29 & !TX_state[1];
+--A1L505 is Select~5704
+A1L505 = A1L504 # TX_state[0] & A1L29 & !TX_state[1];
 
 
---A1L600 is add~1075
-A1L600 = TX_state[2] & !A1L599 # !TX_state[2] & (A1L599 # GND);
+--A1L599 is add~1075
+A1L599 = TX_state[2] & !A1L598 # !TX_state[2] & (A1L598 # GND);
 
---A1L601 is add~1076
-A1L601 = CARRY(!A1L599 # !TX_state[2]);
-
-
---A1L602 is add~1077
-A1L602 = TX_state[3] & (A1L601 $ GND) # !TX_state[3] & !A1L601 & VCC;
-
---A1L603 is add~1078
-A1L603 = CARRY(TX_state[3] & !A1L601);
+--A1L600 is add~1076
+A1L600 = CARRY(!A1L598 # !TX_state[2]);
 
 
---A1L604 is add~1079
-A1L604 = TX_state[4] $ A1L603;
+--A1L601 is add~1077
+A1L601 = TX_state[3] & (A1L600 $ GND) # !TX_state[3] & !A1L600 & VCC;
+
+--A1L602 is add~1078
+A1L602 = CARRY(TX_state[3] & !A1L600);
 
 
---A1L676 is reduce_or~247
-A1L676 = TX_state[2] # TX_state[1] & (TX_state[0] # !TX_state[4]) # !TX_state[1] & (TX_state[4]);
+--A1L603 is add~1079
+A1L603 = TX_state[4] $ A1L602;
 
 
---A1L521 is TX_state~114
-A1L521 = A1L604 & (TX_state[3] # A1L676);
+--A1L675 is reduce_or~247
+A1L675 = TX_state[2] # TX_state[1] & (TX_state[0] # !TX_state[4]) # !TX_state[1] & (TX_state[4]);
 
 
---A1L522 is TX_state~115
-A1L522 = A1L602 & (TX_state[3] # A1L676);
+--A1L519 is TX_state~114
+A1L519 = A1L603 & (TX_state[3] # A1L675);
 
 
---A1L523 is TX_state~116
-A1L523 = A1L600 & (TX_state[3] # A1L676);
+--A1L520 is TX_state~115
+A1L520 = A1L601 & (TX_state[3] # A1L675);
 
 
---A1L511 is Select~5743
-A1L511 = TX_state[1] & (!TX_state[4]) # !TX_state[1] & (TX_state[4] # !LB1_safe_q[8]) # !A1L32;
+--A1L521 is TX_state~116
+A1L521 = A1L599 & (TX_state[3] # A1L675);
 
 
---A1L512 is Select~5744
-A1L512 = !LB1_safe_q[8] & !TX_state[1] & !TX_state[3] & !TX_state[2];
+--A1L506 is Select~5705
+A1L506 = TX_state[1] & (!TX_state[4]) # !TX_state[1] & (TX_state[4] # !LB1_safe_q[8]) # !A1L32;
 
 
---A1L513 is Select~5745
-A1L513 = A1L511 & (A1L512 & !TX_state[4] # !TX_state[0]) # !A1L511 & A1L512 & (!TX_state[4]);
+--A1L507 is Select~5706
+A1L507 = !LB1_safe_q[8] & !TX_state[1] & !TX_state[3] & !TX_state[2];
+
+
+--A1L508 is Select~5707
+A1L508 = A1L506 & (A1L507 & !TX_state[4] # !TX_state[0]) # !A1L506 & A1L507 & (!TX_state[4]);
 
 
 --F1_pb_history[1] is debounce:de_PTT|pb_history[1]
@@ -6088,19 +6068,39 @@ L1_xor10 = H1_rdptr_g[11] $ H1_rdptr_g[10];
 
 
 --A1L770 is state_PWM~125
-A1L770 = !state_PWM.00000 & !A1L723 & (synced_Rx_used[10] # synced_Rx_used[11]);
+A1L770 = !state_PWM.00000 & !A1L722 & (synced_Rx_used[10] # synced_Rx_used[11]);
 
 
 --A1L834 is sync_count[8]~262
-A1L834 = A1L425 # !state_PWM.00000 & (synced_Rx_used[10] # synced_Rx_used[11]);
+A1L834 = A1L424 # !state_PWM.00000 & (synced_Rx_used[10] # synced_Rx_used[11]);
 
 
---A1L710 is register[15]~2414
-A1L710 = AD_state[2] & (AD_state[0]) # !AD_state[2] & (AD_state[4] # AD_state[3]);
+--A1L509 is Select~5708
+A1L509 = register[0] # AD_state[1] & !AD_state[0] & !A1L715;
 
 
---A1L514 is Select~5746
-A1L514 = AD_state[4] & AD_state[3] & !LRCLK # !AD_state[4] & !AD_state[3] & LRCLK;
+--A1L707 is register[15]~2430
+A1L707 = AD_state[2] & (AD_state[0]) # !AD_state[2] & (AD_state[4] # AD_state[3]);
+
+
+--A1L510 is Select~5709
+A1L510 = AD_state[4] & AD_state[3] & !LRCLK # !AD_state[4] & !AD_state[3] & LRCLK;
+
+
+--A1L708 is register[15]~2431
+A1L708 = AD_state[4] & (AD_state[1] # AD_state[0] # !AD_state[5]) # !AD_state[4] & (AD_state[1] $ !AD_state[0]);
+
+
+--A1L709 is register[15]~2432
+A1L709 = A1L708 # !AD_state[4] & !A1L470;
+
+
+--A1L511 is Select~5710
+A1L511 = A1L715 & (register[0]) # !A1L715 & (A1L433 & register[0] & AD_state[0] # !A1L433 & (!AD_state[0]));
+
+
+--A1L512 is Select~5711
+A1L512 = A1L511 # !A1L433 & !A1L715 & TX_wait[0];
 
 
 --A1L119 is I_Data_in[15]~32
@@ -6123,36 +6123,36 @@ H1L49 = !Q1_counter_ffa[0];
 V1L44 = !AB1_counter_ffa[0];
 
 
---A1L735 is rx_avail[4]~69
-A1L735 = !sync_Rx_used[4];
+--A1L734 is rx_avail[4]~69
+A1L734 = !sync_Rx_used[4];
 
 
---A1L737 is rx_avail[5]~70
-A1L737 = !sync_Rx_used[5];
+--A1L736 is rx_avail[5]~70
+A1L736 = !sync_Rx_used[5];
 
 
---A1L739 is rx_avail[6]~71
-A1L739 = !sync_Rx_used[6];
+--A1L738 is rx_avail[6]~71
+A1L738 = !sync_Rx_used[6];
 
 
---A1L741 is rx_avail[7]~72
-A1L741 = !sync_Rx_used[7];
+--A1L740 is rx_avail[7]~72
+A1L740 = !sync_Rx_used[7];
 
 
---A1L743 is rx_avail[8]~73
-A1L743 = !sync_Rx_used[8];
+--A1L742 is rx_avail[8]~73
+A1L742 = !sync_Rx_used[8];
 
 
---A1L745 is rx_avail[9]~74
-A1L745 = !sync_Rx_used[9];
+--A1L744 is rx_avail[9]~74
+A1L744 = !sync_Rx_used[9];
 
 
---A1L747 is rx_avail[10]~75
-A1L747 = !sync_Rx_used[10];
+--A1L746 is rx_avail[10]~75
+A1L746 = !sync_Rx_used[10];
 
 
---A1L749 is rx_avail[11]~76
-A1L749 = !sync_Rx_used[11];
+--A1L748 is rx_avail[11]~76
+A1L748 = !sync_Rx_used[11];
 
 
 --FX2_flags[1] is FX2_flags[1]
@@ -6165,6 +6165,12 @@ FX2_flags[1] = INPUT();
 --operation mode is input
 
 FX2_flags[2] = INPUT();
+
+
+--FX2_flags[0] is FX2_flags[0]
+--operation mode is input
+
+FX2_flags[0] = INPUT();
 
 
 --CLK_24MHZ is CLK_24MHZ
@@ -6183,12 +6189,6 @@ FX2_CLK = INPUT();
 --operation mode is input
 
 BCLK = INPUT();
-
-
---FX2_flags[0] is FX2_flags[0]
---operation mode is input
-
-FX2_flags[0] = INPUT();
 
 
 --DOUT is DOUT
@@ -6248,13 +6248,13 @@ LED[2] = OUTPUT(!LED_sync);
 --LED[3] is LED[3]
 --operation mode is output
 
-LED[3] = OUTPUT(VCC);
+LED[3] = OUTPUT(!FX2_flags[0]);
 
 
 --LED[4] is LED[4]
 --operation mode is output
 
-LED[4] = OUTPUT(VCC);
+LED[4] = OUTPUT(!FX2_flags[2]);
 
 
 --LED[5] is LED[5]
