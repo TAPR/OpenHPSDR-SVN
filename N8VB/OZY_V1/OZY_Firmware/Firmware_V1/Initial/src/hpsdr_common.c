@@ -136,6 +136,14 @@ init_hpsdr (void)
   SYNCDELAY;
   EP4BCL = 0x80;
 
+  // Set up FIFO FLAGS A through D
+  SYNCDELAY;
+  PINFLAGSAB = bmFLAGB3 | bmFLAGB0 | bmFLAGA3;
+  SYNCDELAY;
+  PINFLAGSCD = bmFLAGD3 | bmFLAGD2 | bmFLAGD1
+                        | bmFLAGD0 | bmFLAGC3 | bmFLAGC2
+                        | bmFLAGC1;
+
   // enable dual autopointer feature
   AUTOPTRSETUP |= 0x01;
 

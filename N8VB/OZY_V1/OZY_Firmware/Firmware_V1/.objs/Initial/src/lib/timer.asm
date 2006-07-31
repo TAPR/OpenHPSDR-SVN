@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Tue Jul 25 10:05:48 2006
+; This file generated Mon Jul 31 08:58:05 2006
 ;--------------------------------------------------------
 	.module timer
 	.optsdcc -mmcs51 --model-small

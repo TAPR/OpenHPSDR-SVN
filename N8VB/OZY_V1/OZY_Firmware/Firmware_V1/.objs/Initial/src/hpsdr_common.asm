@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Tue Jul 25 10:05:47 2006
+; This file generated Mon Jul 31 08:57:53 2006
 ;--------------------------------------------------------
 	.module hpsdr_common
 	.optsdcc -mmcs51 --model-small
@@ -978,43 +978,59 @@ _init_hpsdr:
 	mov	dptr,#_EP4BCL
 	mov	a,#0x80
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:140: AUTOPTRSETUP |= 0x01;
+;Initial/src/hpsdr_common.c:140: SYNCDELAY;
+;     genInline
+	 nop; nop; nop; 
+;Initial/src/hpsdr_common.c:141: PINFLAGSAB = bmFLAGB3 | bmFLAGB0 | bmFLAGA3;
+;     genAssign
+	mov	dptr,#_PINFLAGSAB
+	mov	a,#0x98
+	movx	@dptr,a
+;Initial/src/hpsdr_common.c:142: SYNCDELAY;
+;     genInline
+	 nop; nop; nop; 
+;Initial/src/hpsdr_common.c:145: | bmFLAGC1;
+;     genAssign
+	mov	dptr,#_PINFLAGSCD
+	mov	a,#0xFE
+	movx	@dptr,a
+;Initial/src/hpsdr_common.c:148: AUTOPTRSETUP |= 0x01;
 ;     genOr
 	orl	_AUTOPTRSETUP,#0x01
-;Initial/src/hpsdr_common.c:195: EP0BCH = 0;
+;Initial/src/hpsdr_common.c:203: EP0BCH = 0;
 ;     genAssign
 	mov	dptr,#_EP0BCH
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:196: SYNCDELAY;
+;Initial/src/hpsdr_common.c:204: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:200: EP1OUTBC = 0;
+;Initial/src/hpsdr_common.c:208: EP1OUTBC = 0;
 ;     genAssign
 	mov	dptr,#_EP1OUTBC
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:201: SYNCDELAY;
+;Initial/src/hpsdr_common.c:209: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:214: SCON0 = 0x50;
+;Initial/src/hpsdr_common.c:222: SCON0 = 0x50;
 ;     genAssign
 	mov	_SCON0,#0x50
-;Initial/src/hpsdr_common.c:215: TMOD |= 0x20;
+;Initial/src/hpsdr_common.c:223: TMOD |= 0x20;
 ;     genOr
 	orl	_TMOD,#0x20
-;Initial/src/hpsdr_common.c:216: TH1 = 0xB2;
+;Initial/src/hpsdr_common.c:224: TH1 = 0xB2;
 ;     genAssign
 	mov	_TH1,#0xB2
-;Initial/src/hpsdr_common.c:217: TR1 = 1;
+;Initial/src/hpsdr_common.c:225: TR1 = 1;
 ;     genAssign
 	setb	_TR1
-;Initial/src/hpsdr_common.c:218: TI = 1;
+;Initial/src/hpsdr_common.c:226: TI = 1;
 ;     genAssign
 	setb	_TI
-;Initial/src/hpsdr_common.c:220: init_board ();
+;Initial/src/hpsdr_common.c:228: init_board ();
 ;     genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_init_board
