@@ -1,11 +1,13 @@
 Quartus II Archive log --	C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.qarlog
 
 Archive:	C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.qar
-Date:		Sat Jul 22 18:55:34 2006
+Date:		Mon Jul 31 21:02:39 2006
 Quartus II		5.1 Build 176 10/26/2005 SJ Web Edition
 
 	=========== Files Selected: ===========
 C:/HPDSDR/trunk/VK6APH/Ozy_Janus/DigAudioOut48k16bI2S.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/OZYV1FW.hex
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/OZYV1FW07252006-1.hex
 C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.asm.rpt
 C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.done
 C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.fit.eqn
@@ -17,7 +19,9 @@ C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.map.rpt
 C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.map.summary
 C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pin
 C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pof
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.qarlog
 C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.qsf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.qws
 C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.rbf
 C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.sim.rpt
 C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.sof
@@ -113,7 +117,7 @@ c:/altera/quartus51/libraries/megafunctions/lpm_constant.inc
 c:/altera/quartus51/libraries/megafunctions/lpm_counter.inc
 c:/altera/quartus51/libraries/megafunctions/lpm_counter.tdf
 c:/altera/quartus51/libraries/megafunctions/lpm_decode.inc
-	======= Total: 108 files to archive =======
+	======= Total: 112 files to archive =======
 
 	================ Status: ===============
 All files archived successfully.

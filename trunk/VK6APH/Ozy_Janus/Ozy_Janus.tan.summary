@@ -5,17 +5,17 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 8.333 ns
-From           : FX2_flags[0]
-To             : RX_wait[3]
+Actual Time    : 7.635 ns
+From           : LRCLK
+To             : AD_state[1]
 From Clock     : --
-To Clock       : FX2_CLK
+To Clock       : BCLK
 Failed Paths   : 0
 
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 17.276 ns
+Actual Time    : 17.232 ns
 From           : I2SAudioOut:I2SAO|outbit_o
 To             : CDIN
 From Clock     : CLK_24MHZ
@@ -25,9 +25,9 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.626 ns
+Actual Time    : 12.079 ns
 From           : FX2_flags[2]
-To             : LED[1]
+To             : LED[4]
 From Clock     : --
 To Clock       : --
 Failed Paths   : 0
@@ -35,7 +35,7 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : 4.795 ns
+Actual Time    : 4.360 ns
 From           : CDOUT
 To             : Tx_q[0]
 From Clock     : --
@@ -43,7 +43,7 @@ To Clock       : CLK_24MHZ
 Failed Paths   : 0
 
 Type           : Clock Setup: 'CLK_24MHZ'
-Slack          : 20.673 ns
+Slack          : 20.826 ns
 Required Time  : 24.58 MHz ( period = 40.690 ns )
 Actual Time    : N/A
 From           : clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[8]
@@ -53,21 +53,21 @@ To Clock       : CLK_24MHZ
 Failed Paths   : 0
 
 Type           : Clock Setup: 'BCLK'
-Slack          : 33.425 ns
+Slack          : 33.779 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
-Actual Time    : 68.82 MHz ( period = 14.530 ns )
-From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|q_a[9]
-To             : sync_count[8]
+Actual Time    : 72.35 MHz ( period = 13.822 ns )
+From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|q_a[0]
+To             : state_PWM.00000
 From Clock     : BCLK
 To Clock       : BCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'FX2_CLK'
-Slack          : 34.696 ns
+Slack          : 34.551 ns
 Required Time  : 24.00 MHz ( period = 41.666 ns )
-Actual Time    : 143.47 MHz ( period = 6.970 ns )
-From           : Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|rdptr_g[8]
-To             : Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[10]
+Actual Time    : 140.55 MHz ( period = 7.115 ns )
+From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_jk6:wrptr_g1p|power_modified_counter_values[7]
+To             : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_jk6:wrptr_g1p|power_modified_counter_values[11]
 From Clock     : FX2_CLK
 To Clock       : FX2_CLK
 Failed Paths   : 0
@@ -76,8 +76,8 @@ Type           : Clock Hold: 'BCLK'
 Slack          : 0.499 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
 Actual Time    : N/A
-From           : AD_state[0]
-To             : AD_state[0]
+From           : AD_state[3]
+To             : AD_state[3]
 From Clock     : BCLK
 To Clock       : BCLK
 Failed Paths   : 0
@@ -93,11 +93,11 @@ To Clock       : CLK_24MHZ
 Failed Paths   : 0
 
 Type           : Clock Hold: 'FX2_CLK'
-Slack          : 0.722 ns
+Slack          : 0.668 ns
 Required Time  : 24.00 MHz ( period = 41.666 ns )
 Actual Time    : N/A
-From           : Rx_register[13]
-To             : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a13~portb_datain_reg0
+From           : Rx_register[10]
+To             : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a10~portb_datain_reg0
 From Clock     : FX2_CLK
 To Clock       : FX2_CLK
 Failed Paths   : 0
