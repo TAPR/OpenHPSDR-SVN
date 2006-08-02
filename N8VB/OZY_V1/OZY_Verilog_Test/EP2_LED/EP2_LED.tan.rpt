@@ -1,0 +1,253 @@
+Timing Analyzer report for EP2_LED
+Wed Aug 02 17:03:31 2006
+Version 6.0 Build 178 04/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Clock Setup: 'IFCLK'
+  6. tsu
+  7. tco
+  8. th
+  9. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                                    ;
++------------------------------+-------+---------------+------------------------------------------------+--------------+--------------+------------+----------+--------------+
+; Type                         ; Slack ; Required Time ; Actual Time                                    ; From         ; To           ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+-------+---------------+------------------------------------------------+--------------+--------------+------------+----------+--------------+
+; Worst-case tsu               ; N/A   ; None          ; 5.616 ns                                       ; FLAGA        ; SLOE~reg0    ; --         ; IFCLK    ; 0            ;
+; Worst-case tco               ; N/A   ; None          ; 8.362 ns                                       ; LEDS[7]~reg0 ; LEDS[7]      ; IFCLK      ; --       ; 0            ;
+; Worst-case th                ; N/A   ; None          ; -3.935 ns                                      ; FX2_FD[7]    ; LEDS[7]~reg0 ; --         ; IFCLK    ; 0            ;
+; Clock Setup: 'IFCLK'         ; N/A   ; None          ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.100    ; LEDS[7]~reg0 ; IFCLK      ; IFCLK    ; 0            ;
+; Total number of failed paths ;       ;               ;                                                ;              ;              ;            ;          ; 0            ;
++------------------------------+-------+---------------+------------------------------------------------+--------------+--------------+------------+----------+--------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                ; Setting            ; From ; To ; Entity Name ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                           ; EP2C5Q208C8        ;      ;    ;             ;
+; Timing Models                                         ; Final              ;      ;    ;             ;
+; Number of source nodes to report per destination node ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                 ; 10                 ;      ;    ;             ;
+; Number of paths to report                             ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                          ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                            ; Off                ;      ;    ;             ;
+; Default hold multicycle                               ; Same As Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains             ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                        ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                      ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                 ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements               ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                      ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                  ; Off                ;      ;    ;             ;
+; Use TimeQuest Timing Analyzer                         ; Off                ;      ;    ;             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                             ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type     ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset ; Phase offset ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; IFCLK           ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'IFCLK'                                                                                                                                                                          ;
++-------+------------------------------------------------+-----------+--------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack ; Actual fmax (period)                           ; From      ; To           ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-------+------------------------------------------------+-----------+--------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.100 ; LEDS[7]~reg0 ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.462 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.000 ; SLOE~reg0    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.330 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.100 ; LEDS[0]~reg0 ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.266 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.100 ; LEDS[1]~reg0 ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.266 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.100 ; LEDS[2]~reg0 ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.266 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.100 ; LEDS[3]~reg0 ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.266 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.100 ; LEDS[4]~reg0 ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.266 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.100 ; LEDS[5]~reg0 ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.266 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.100 ; LEDS[6]~reg0 ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.266 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.000 ; SLRD~reg0    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.235 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.000 ; state.001    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.220 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.101 ; SLRD~reg0    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.185 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.010 ; SLOE~reg0    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.175 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.110 ; state.000    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.138 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.110 ; SLOE~reg0    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 1.076 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.100 ; state.101    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 0.922 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.101 ; state.110    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 0.915 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.010 ; state.011    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 0.756 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.001 ; state.010    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 0.752 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.011 ; state.100    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 0.749 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.011 ; SLRD~reg0    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 0.747 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; SLRD~reg0 ; SLRD~reg0    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; state.010 ; state.010    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; SLOE~reg0 ; SLOE~reg0    ; IFCLK      ; IFCLK    ; None                        ; None                      ; 0.501 ns                ;
++-------+------------------------------------------------+-----------+--------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++-------------------------------------------------------------------------+
+; tsu                                                                     ;
++-------+--------------+------------+-----------+--------------+----------+
+; Slack ; Required tsu ; Actual tsu ; From      ; To           ; To Clock ;
++-------+--------------+------------+-----------+--------------+----------+
+; N/A   ; None         ; 5.616 ns   ; FLAGA     ; SLOE~reg0    ; IFCLK    ;
+; N/A   ; None         ; 5.183 ns   ; FLAGA     ; state.010    ; IFCLK    ;
+; N/A   ; None         ; 4.964 ns   ; FLAGA     ; state.011    ; IFCLK    ;
+; N/A   ; None         ; 4.706 ns   ; FX2_FD[2] ; LEDS[2]~reg0 ; IFCLK    ;
+; N/A   ; None         ; 4.550 ns   ; FX2_FD[1] ; LEDS[1]~reg0 ; IFCLK    ;
+; N/A   ; None         ; 4.538 ns   ; FX2_FD[0] ; LEDS[0]~reg0 ; IFCLK    ;
+; N/A   ; None         ; 4.229 ns   ; FX2_FD[4] ; LEDS[4]~reg0 ; IFCLK    ;
+; N/A   ; None         ; 4.227 ns   ; FX2_FD[3] ; LEDS[3]~reg0 ; IFCLK    ;
+; N/A   ; None         ; 4.223 ns   ; FX2_FD[5] ; LEDS[5]~reg0 ; IFCLK    ;
+; N/A   ; None         ; 4.207 ns   ; FX2_FD[6] ; LEDS[6]~reg0 ; IFCLK    ;
+; N/A   ; None         ; 4.201 ns   ; FX2_FD[7] ; LEDS[7]~reg0 ; IFCLK    ;
++-------+--------------+------------+-----------+--------------+----------+
+
+
++-------------------------------------------------------------------------+
+; tco                                                                     ;
++-------+--------------+------------+--------------+---------+------------+
+; Slack ; Required tco ; Actual tco ; From         ; To      ; From Clock ;
++-------+--------------+------------+--------------+---------+------------+
+; N/A   ; None         ; 8.362 ns   ; LEDS[7]~reg0 ; LEDS[7] ; IFCLK      ;
+; N/A   ; None         ; 8.325 ns   ; SLOE~reg0    ; SLOE    ; IFCLK      ;
+; N/A   ; None         ; 7.974 ns   ; LEDS[6]~reg0 ; LEDS[6] ; IFCLK      ;
+; N/A   ; None         ; 7.970 ns   ; LEDS[3]~reg0 ; LEDS[3] ; IFCLK      ;
+; N/A   ; None         ; 7.968 ns   ; LEDS[5]~reg0 ; LEDS[5] ; IFCLK      ;
+; N/A   ; None         ; 7.951 ns   ; LEDS[4]~reg0 ; LEDS[4] ; IFCLK      ;
+; N/A   ; None         ; 7.652 ns   ; SLRD~reg0    ; SLRD    ; IFCLK      ;
+; N/A   ; None         ; 7.644 ns   ; LEDS[1]~reg0 ; LEDS[1] ; IFCLK      ;
+; N/A   ; None         ; 7.627 ns   ; LEDS[0]~reg0 ; LEDS[0] ; IFCLK      ;
+; N/A   ; None         ; 7.619 ns   ; LEDS[2]~reg0 ; LEDS[2] ; IFCLK      ;
++-------+--------------+------------+--------------+---------+------------+
+
+
++-------------------------------------------------------------------------------+
+; th                                                                            ;
++---------------+-------------+-----------+-----------+--------------+----------+
+; Minimum Slack ; Required th ; Actual th ; From      ; To           ; To Clock ;
++---------------+-------------+-----------+-----------+--------------+----------+
+; N/A           ; None        ; -3.935 ns ; FX2_FD[7] ; LEDS[7]~reg0 ; IFCLK    ;
+; N/A           ; None        ; -3.941 ns ; FX2_FD[6] ; LEDS[6]~reg0 ; IFCLK    ;
+; N/A           ; None        ; -3.957 ns ; FX2_FD[5] ; LEDS[5]~reg0 ; IFCLK    ;
+; N/A           ; None        ; -3.961 ns ; FX2_FD[3] ; LEDS[3]~reg0 ; IFCLK    ;
+; N/A           ; None        ; -3.963 ns ; FX2_FD[4] ; LEDS[4]~reg0 ; IFCLK    ;
+; N/A           ; None        ; -4.272 ns ; FX2_FD[0] ; LEDS[0]~reg0 ; IFCLK    ;
+; N/A           ; None        ; -4.284 ns ; FX2_FD[1] ; LEDS[1]~reg0 ; IFCLK    ;
+; N/A           ; None        ; -4.440 ns ; FX2_FD[2] ; LEDS[2]~reg0 ; IFCLK    ;
+; N/A           ; None        ; -4.698 ns ; FLAGA     ; state.011    ; IFCLK    ;
+; N/A           ; None        ; -4.917 ns ; FLAGA     ; state.010    ; IFCLK    ;
+; N/A           ; None        ; -5.350 ns ; FLAGA     ; SLOE~reg0    ; IFCLK    ;
++---------------+-------------+-----------+-----------+--------------+----------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Timing Analyzer
+    Info: Version 6.0 Build 178 04/27/2006 SJ Web Edition
+    Info: Processing started: Wed Aug 02 17:03:30 2006
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off EP2_LED -c EP2_LED --timing_analysis_only
+Warning: Found pins functioning as undefined clocks and/or memory enables
+    Info: Assuming node "IFCLK" is an undefined clock
+Info: Clock "IFCLK" Internal fmax is restricted to 340.02 MHz between source register "state.100" and destination register "LEDS[7]~reg0"
+    Info: fmax restricted to clock pin edge rate 2.941 ns. Expand message to see actual delay path.
+        Info: + Longest register to register delay is 1.462 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X5_Y1_N15; Fanout = 9; REG Node = 'state.100'
+            Info: 2: + IC(0.607 ns) + CELL(0.855 ns) = 1.462 ns; Loc. = LCFF_X6_Y1_N1; Fanout = 1; REG Node = 'LEDS[7]~reg0'
+            Info: Total cell delay = 0.855 ns ( 58.48 % )
+            Info: Total interconnect delay = 0.607 ns ( 41.52 % )
+        Info: - Smallest clock skew is 0.003 ns
+            Info: + Shortest clock path from clock "IFCLK" to destination register is 2.776 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'IFCLK'
+                Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 17; COMB Node = 'IFCLK~clkctrl'
+                Info: 3: + IC(0.840 ns) + CELL(0.666 ns) = 2.776 ns; Loc. = LCFF_X6_Y1_N1; Fanout = 1; REG Node = 'LEDS[7]~reg0'
+                Info: Total cell delay = 1.796 ns ( 64.70 % )
+                Info: Total interconnect delay = 0.980 ns ( 35.30 % )
+            Info: - Longest clock path from clock "IFCLK" to source register is 2.773 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'IFCLK'
+                Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 17; COMB Node = 'IFCLK~clkctrl'
+                Info: 3: + IC(0.837 ns) + CELL(0.666 ns) = 2.773 ns; Loc. = LCFF_X5_Y1_N15; Fanout = 9; REG Node = 'state.100'
+                Info: Total cell delay = 1.796 ns ( 64.77 % )
+                Info: Total interconnect delay = 0.977 ns ( 35.23 % )
+        Info: + Micro clock to output delay of source is 0.304 ns
+        Info: + Micro setup delay of destination is -0.040 ns
+Info: tsu for register "SLOE~reg0" (data pin = "FLAGA", clock pin = "IFCLK") is 5.616 ns
+    Info: + Longest pin to register delay is 8.429 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.984 ns) = 0.984 ns; Loc. = PIN_198; Fanout = 3; PIN Node = 'FLAGA'
+        Info: 2: + IC(6.686 ns) + CELL(0.651 ns) = 8.321 ns; Loc. = LCCOMB_X5_Y1_N12; Fanout = 1; COMB Node = 'Selector1~66'
+        Info: 3: + IC(0.000 ns) + CELL(0.108 ns) = 8.429 ns; Loc. = LCFF_X5_Y1_N13; Fanout = 2; REG Node = 'SLOE~reg0'
+        Info: Total cell delay = 1.743 ns ( 20.68 % )
+        Info: Total interconnect delay = 6.686 ns ( 79.32 % )
+    Info: + Micro setup delay of destination is -0.040 ns
+    Info: - Shortest clock path from clock "IFCLK" to destination register is 2.773 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'IFCLK'
+        Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 17; COMB Node = 'IFCLK~clkctrl'
+        Info: 3: + IC(0.837 ns) + CELL(0.666 ns) = 2.773 ns; Loc. = LCFF_X5_Y1_N13; Fanout = 2; REG Node = 'SLOE~reg0'
+        Info: Total cell delay = 1.796 ns ( 64.77 % )
+        Info: Total interconnect delay = 0.977 ns ( 35.23 % )
+Info: tco from clock "IFCLK" to destination pin "LEDS[7]" through register "LEDS[7]~reg0" is 8.362 ns
+    Info: + Longest clock path from clock "IFCLK" to source register is 2.776 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'IFCLK'
+        Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 17; COMB Node = 'IFCLK~clkctrl'
+        Info: 3: + IC(0.840 ns) + CELL(0.666 ns) = 2.776 ns; Loc. = LCFF_X6_Y1_N1; Fanout = 1; REG Node = 'LEDS[7]~reg0'
+        Info: Total cell delay = 1.796 ns ( 64.70 % )
+        Info: Total interconnect delay = 0.980 ns ( 35.30 % )
+    Info: + Micro clock to output delay of source is 0.304 ns
+    Info: + Longest register to pin delay is 5.282 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X6_Y1_N1; Fanout = 1; REG Node = 'LEDS[7]~reg0'
+        Info: 2: + IC(2.006 ns) + CELL(3.276 ns) = 5.282 ns; Loc. = PIN_76; Fanout = 0; PIN Node = 'LEDS[7]'
+        Info: Total cell delay = 3.276 ns ( 62.02 % )
+        Info: Total interconnect delay = 2.006 ns ( 37.98 % )
+Info: th for register "LEDS[7]~reg0" (data pin = "FX2_FD[7]", clock pin = "IFCLK") is -3.935 ns
+    Info: + Longest clock path from clock "IFCLK" to destination register is 2.776 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'IFCLK'
+        Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 17; COMB Node = 'IFCLK~clkctrl'
+        Info: 3: + IC(0.840 ns) + CELL(0.666 ns) = 2.776 ns; Loc. = LCFF_X6_Y1_N1; Fanout = 1; REG Node = 'LEDS[7]~reg0'
+        Info: Total cell delay = 1.796 ns ( 64.70 % )
+        Info: Total interconnect delay = 0.980 ns ( 35.30 % )
+    Info: + Micro hold delay of destination is 0.306 ns
+    Info: - Shortest pin to register delay is 7.017 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.004 ns) = 1.004 ns; Loc. = PIN_64; Fanout = 1; PIN Node = 'FX2_FD[7]'
+        Info: 2: + IC(5.699 ns) + CELL(0.206 ns) = 6.909 ns; Loc. = LCCOMB_X6_Y1_N0; Fanout = 1; COMB Node = 'LEDS[7]~reg0feeder'
+        Info: 3: + IC(0.000 ns) + CELL(0.108 ns) = 7.017 ns; Loc. = LCFF_X6_Y1_N1; Fanout = 1; REG Node = 'LEDS[7]~reg0'
+        Info: Total cell delay = 1.318 ns ( 18.78 % )
+        Info: Total interconnect delay = 5.699 ns ( 81.22 % )
+Info: Quartus II Timing Analyzer was successful. 0 errors, 1 warning
+    Info: Processing ended: Wed Aug 02 17:03:31 2006
+    Info: Elapsed time: 00:00:01
+
+
