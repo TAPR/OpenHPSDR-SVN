@@ -41,8 +41,7 @@ init_hpsdr (void)
   CKCON = 0;		// MOVX takes 2 cycles
 
   // IFCLK is generated internally and runs at 48 MHz; Slave FIFO mode - PAC 07/10/2006
-  // bmASYNC added 07/25/2006 PAC
-  IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFCLKPOL | bmIFFIFO | bmASYNC;
+  IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFCLKPOL | bmIFFIFO;
   SYNCDELAY;
 
 //Clear and reset all FIFOs see pg. 15-20 of TRM V2.1
@@ -71,7 +70,6 @@ init_hpsdr (void)
   IOE = bmPORT_E_INITIAL;	// Port E initial state
   OEE = bmPORT_E_OUTPUTS;	// Port E direction register
 
-
   // configure end points
 
 // we are just using the default values, yes this is not necessary...
@@ -92,6 +90,8 @@ init_hpsdr (void)
 
   //EP2
 
+  EP2FIFOCFG = bmWORDWIDE; //core needs to see 0 to 1 transistion of AUTOOUT
+  SYNCDELAY;
   EP2FIFOCFG = bmAUTOOUT | bmWORDWIDE;
   SYNCDELAY;
   EP2AUTOINLENH = 0x02; //MSB
@@ -101,6 +101,8 @@ init_hpsdr (void)
 
   //EP4
 
+  EP4FIFOCFG = bmWORDWIDE; //core needs to see 0 to 1 transistion of AUTOOUT
+  SYNCDELAY;
   EP4FIFOCFG = bmAUTOOUT | bmWORDWIDE;
   SYNCDELAY;
   EP4AUTOINLENH = 0x02; //MSB
@@ -124,18 +126,6 @@ init_hpsdr (void)
   SYNCDELAY;
   EP8AUTOINLENL = 0x00; //LSB
 
-  // out endpoints do not come up armed
-
-  // since the defaults are double buffered we must write dummy byte counts twice
-  SYNCDELAY;
-  EP2BCL = 0x80;                // arm EP2OUT by writing byte count w/skip.
-  SYNCDELAY;
-  EP2BCL = 0x80;
-  SYNCDELAY;
-  EP4BCL = 0x80;                // arm EP4OUT by writing byte count w/skip.
-  SYNCDELAY;
-  EP4BCL = 0x80;
-
   // Set up FIFO FLAGS A through D
   SYNCDELAY;
   PINFLAGSAB = bmFLAGB3 | bmFLAGB0 | bmFLAGA3;
@@ -147,59 +137,6 @@ init_hpsdr (void)
   // enable dual autopointer feature
   AUTOPTRSETUP |= 0x01;
 
-//  EP1OUTCFG = bmVALID | bmBULK;
-//  SYNCDELAY;
-//  EP1INCFG  = bmVALID | bmBULK | bmIN;
-//  SYNCDELAY;
-//  EP2CFG    = bmVALID | bmBULK | bmQUADBUF; // 512 quad bulk OUT
-//  SYNCDELAY;
-//  EP4CFG    = 0; // disabled
-//  SYNCDELAY;
-//  EP6CFG    = bmVALID | bmBULK | bmQUADBUF | bmIN;	// 512 quad bulk IN
-//  SYNCDELAY;
-//  EP8CFG    = 0; // disabled
-//  SYNCDELAY;
-//
-//  // reset FIFOs
-//
-//  FIFORESET = bmNAKALL;
-//  SYNCDELAY;
-//  FIFORESET = 2;
-//  SYNCDELAY;
-//  // FIFORESET = 4;
-//  //SYNCDELAY;
-//  FIFORESET = 6;
-//  SYNCDELAY;
-//  // FIFORESET = 8;
-//  //SYNCDELAY;
-//  FIFORESET = 0;
-//  SYNCDELAY;
-//
-//  // configure end point FIFOs
-//
-//  // let core see 0 to 1 transistion of autoout bit
-//
-//  EP2FIFOCFG =             bmWORDWIDE;
-//  SYNCDELAY;
-//  EP2FIFOCFG = bmAUTOOUT | bmWORDWIDE;
-//  SYNCDELAY;
-//  EP6FIFOCFG = bmAUTOIN  | bmWORDWIDE;
-//  SYNCDELAY;
-//
-//
-//  // prime the pump
-//
-//#if 0
-//  EP2BCL  = 0x80;
-//  SYNCDELAY;
-//  EP2BCL  = 0x80;
-//  SYNCDELAY;
-//  EP2BCL  = 0x80;
-//  SYNCDELAY;
-//  EP2BCL  = 0x80;
-//  SYNCDELAY;
-//#endif
-
   EP0BCH = 0;
   SYNCDELAY;
 
@@ -207,15 +144,6 @@ init_hpsdr (void)
 
   EP1OUTBC = 0;
   SYNCDELAY;
-
-
-//  // set autoin length for EP6
-//  // FIXME should be f(enumeration)
-//
-//  EP6AUTOINLENH = (512) >> 8;	 // this is the length for high speed
-//  SYNCDELAY;
-//  EP6AUTOINLENL = (512) & 0xff;
-//  SYNCDELAY;
 
   // init serial
 

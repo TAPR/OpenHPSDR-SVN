@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Mon Jul 31 08:57:56 2006
+                              4 ; This file generated Wed Aug 02 16:31:04 2006
                               5 ;--------------------------------------------------------
                               6 	.module delay
                               7 	.optsdcc -mmcs51 --model-small
@@ -82,13 +82,13 @@
                              82 ;	-----------------------------------------
                              83 ;	 function udelay1
                              84 ;	-----------------------------------------
-   066C                      85 _udelay1:
+   065E                      85 _udelay1:
                              86 ;	naked function: no prologue.
                              87 ;Initial/src/lib/delay.c:34: _endasm;
                              88 ;     genInline
                              89 	 ; lcall that got us here took 4 bus cycles
-   066C 22                   90 	        ret ; 4 bus cycles
-   066D                      91 00101$:
+   065E 22                   90 	        ret ; 4 bus cycles
+   065F                      91 00101$:
                              92 ;	naked function: no epilogue.
                              93 ;------------------------------------------------------------
                              94 ;Allocation info for local variables in function 'udelay'
@@ -99,7 +99,7 @@
                              99 ;	-----------------------------------------
                             100 ;	 function udelay
                             101 ;	-----------------------------------------
-   066D                     102 _udelay:
+   065F                     102 _udelay:
                     0002    103 	ar2 = 0x02
                     0003    104 	ar3 = 0x03
                     0004    105 	ar4 = 0x04
@@ -109,13 +109,13 @@
                     0000    109 	ar0 = 0x00
                     0001    110 	ar1 = 0x01
                             111 ;     genReceive
-   066D AA 82               112 	mov	r2,dpl
+   065F AA 82               112 	mov	r2,dpl
                             113 ;Initial/src/lib/delay.c:43: do {
                             114 ;     genAssign
-   066F                     115 00101$:
+   0661                     115 00101$:
                             116 ;Initial/src/lib/delay.c:44: udelay1 ();
                             117 ;     genCall
-   066F 12 06 6C            118 	lcall	_udelay1
+   0661 12 06 5E            118 	lcall	_udelay1
                             119 ;Initial/src/lib/delay.c:45: } while (--usecs != 0);
                             120 ;     genMinus
                             121 ;     genMinusDec
@@ -123,12 +123,12 @@
                             123 ;	Peephole 112.b	changed ljmp to sjmp
                             124 ;	Peephole 199	optimized misc jump sequence
                             125 ;	Peephole 257	optimized decrement with compare
-   0672 DA FB               126 	djnz	r2,00101$
+   0664 DA FB               126 	djnz	r2,00101$
                             127 ;00107$:
                             128 ;	Peephole 200	removed redundant sjmp
-   0674                     129 00108$:
-   0674                     130 00104$:
-   0674 22                  131 	ret
+   0666                     129 00108$:
+   0666                     130 00104$:
+   0666 22                  131 	ret
                             132 ;------------------------------------------------------------
                             133 ;Allocation info for local variables in function 'mdelay1'
                             134 ;------------------------------------------------------------
@@ -137,18 +137,18 @@
                             137 ;	-----------------------------------------
                             138 ;	 function mdelay1
                             139 ;	-----------------------------------------
-   0675                     140 _mdelay1:
+   0667                     140 _mdelay1:
                             141 ;	naked function: no prologue.
                             142 ;Initial/src/lib/delay.c:68: _endasm;
                             143 ;     genInline
-   0675 90 FB 50            144 	        mov dptr,#(-1200 & 0xffff)
-   0678                     145 002$:
-   0678 A3                  146 	        inc dptr ; 3 bus cycles
-   0679 E5 82               147 	        mov a, dpl ; 2 bus cycles
-   067B 45 83               148 	        orl a, dph ; 2 bus cycles
-   067D 70 F9               149 	        jnz 002$ ; 3 bus cycles
-   067F 22                  150 	        ret
-   0680                     151 00101$:
+   0667 90 FB 50            144 	        mov dptr,#(-1200 & 0xffff)
+   066A                     145 002$:
+   066A A3                  146 	        inc dptr ; 3 bus cycles
+   066B E5 82               147 	        mov a, dpl ; 2 bus cycles
+   066D 45 83               148 	        orl a, dph ; 2 bus cycles
+   066F 70 F9               149 	        jnz 002$ ; 3 bus cycles
+   0671 22                  150 	        ret
+   0672                     151 00101$:
                             152 ;	naked function: no epilogue.
                             153 ;------------------------------------------------------------
                             154 ;Allocation info for local variables in function 'mdelay'
@@ -159,31 +159,31 @@
                             159 ;	-----------------------------------------
                             160 ;	 function mdelay
                             161 ;	-----------------------------------------
-   0680                     162 _mdelay:
+   0672                     162 _mdelay:
                             163 ;     genReceive
-   0680 AA 82               164 	mov	r2,dpl
-   0682 AB 83               165 	mov	r3,dph
+   0672 AA 82               164 	mov	r2,dpl
+   0674 AB 83               165 	mov	r3,dph
                             166 ;Initial/src/lib/delay.c:74: do {
                             167 ;     genAssign
-   0684                     168 00101$:
+   0676                     168 00101$:
                             169 ;Initial/src/lib/delay.c:75: mdelay1 ();
                             170 ;     genCall
-   0684 12 06 75            171 	lcall	_mdelay1
+   0676 12 06 67            171 	lcall	_mdelay1
                             172 ;Initial/src/lib/delay.c:76: } while (--msecs != 0);
                             173 ;     genMinus
                             174 ;     genMinusDec
-   0687 1A                  175 	dec	r2
-   0688 BA FF 01            176 	cjne	r2,#0xff,00107$
-   068B 1B                  177 	dec	r3
-   068C                     178 00107$:
+   0679 1A                  175 	dec	r2
+   067A BA FF 01            176 	cjne	r2,#0xff,00107$
+   067D 1B                  177 	dec	r3
+   067E                     178 00107$:
                             179 ;     genCmpEq
                             180 ;	Peephole 112.b	changed ljmp to sjmp
                             181 ;	Peephole 198	optimized misc jump sequence
-   068C BA 00 F5            182 	cjne	r2,#0x00,00101$
-   068F BB 00 F2            183 	cjne	r3,#0x00,00101$
+   067E BA 00 F5            182 	cjne	r2,#0x00,00101$
+   0681 BB 00 F2            183 	cjne	r3,#0x00,00101$
                             184 ;00108$:
                             185 ;	Peephole 200	removed redundant sjmp
-   0692                     186 00109$:
-   0692                     187 00104$:
-   0692 22                  188 	ret
+   0684                     186 00109$:
+   0684                     187 00104$:
+   0684 22                  188 	ret
                             189 	.area CSEG    (CODE)

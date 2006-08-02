@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at EP2_LED.v(28): Always Construct contains both blocking and non-blocking assignments

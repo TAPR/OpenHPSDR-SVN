@@ -1,0 +1,247 @@
+Analysis & Synthesis report for EP2_LED
+Wed Aug 02 17:03:20 2006
+Version 6.0 Build 178 04/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Analysis & Synthesis Source Files Read
+  5. Analysis & Synthesis Resource Usage Summary
+  6. Analysis & Synthesis Resource Utilization by Entity
+  7. State Machine - |EP2_LED|state
+  8. General Register Statistics
+  9. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                 ;
++------------------------------------+-----------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Wed Aug 02 17:03:20 2006   ;
+; Quartus II Version                 ; 6.0 Build 178 04/27/2006 SJ Web Edition ;
+; Revision Name                      ; EP2_LED                                 ;
+; Top-level Entity Name              ; EP2_LED                                 ;
+; Family                             ; Cyclone II                              ;
+; Total logic elements               ; 17                                      ;
+; Total registers                    ; 17                                      ;
+; Total pins                         ; 35                                      ;
+; Total virtual pins                 ; 0                                       ;
+; Total memory bits                  ; 0                                       ;
+; Embedded Multiplier 9-bit elements ; 0                                       ;
+; Total PLLs                         ; 0                                       ;
++------------------------------------+-----------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                ;
++--------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                             ; Setting            ; Default Value      ;
++--------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                             ; EP2C5Q208C8        ;                    ;
+; Top-level entity name                                              ; EP2_LED            ; EP2_LED            ;
+; Family name                                                        ; Cyclone II         ; Stratix            ;
+; Use smart compilation                                              ; Off                ; Off                ;
+; Restructure Multiplexers                                           ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                ; Off                ; Off                ;
+; Preserve fewer node names                                          ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                          ; Off                ; Off                ;
+; Verilog Version                                                    ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                       ; VHDL93             ; VHDL93             ;
+; State Machine Processing                                           ; Auto               ; Auto               ;
+; Extract Verilog State Machines                                     ; On                 ; On                 ;
+; Extract VHDL State Machines                                        ; On                 ; On                 ;
+; Add Pass-Through Logic to Inferred RAMs                            ; On                 ; On                 ;
+; DSP Block Balancing                                                ; Auto               ; Auto               ;
+; Maximum DSP Block Usage                                            ; Unlimited          ; Unlimited          ;
+; NOT Gate Push-Back                                                 ; On                 ; On                 ;
+; Power-Up Don't Care                                                ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                       ; Off                ; Off                ;
+; Remove Duplicate Registers                                         ; On                 ; On                 ;
+; Ignore CARRY Buffers                                               ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                             ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                              ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                          ; Off                ; Off                ;
+; Ignore LCELL Buffers                                               ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                     ; Off                ; Off                ;
+; Optimization Technique -- Cyclone II                               ; Balanced           ; Balanced           ;
+; Carry Chain Length -- Stratix/Stratix GX/Cyclone/MAX II/Cyclone II ; 70                 ; 70                 ;
+; Auto Carry Chains                                                  ; On                 ; On                 ;
+; Auto Open-Drain Pins                                               ; On                 ; On                 ;
+; Remove Duplicate Logic                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                              ; Off                ; Off                ;
+; Perform gate-level register retiming                               ; Off                ; Off                ;
+; Allow register retiming to trade off Tsu/Tco with Fmax             ; On                 ; On                 ;
+; Auto ROM Replacement                                               ; On                 ; On                 ;
+; Auto RAM Replacement                                               ; On                 ; On                 ;
+; Auto Shift Register Replacement                                    ; On                 ; On                 ;
+; Auto Clock Enable Replacement                                      ; On                 ; On                 ;
+; Allow Synchronous Control Signals                                  ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                             ; Off                ; Off                ;
+; Auto Resource Sharing                                              ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                 ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                 ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                      ; Off                ; Off                ;
+; Maximum Number of M4K Memory Blocks                                ; Unlimited          ; Unlimited          ;
+; Ignore translate_off and translate_on Synthesis Directives         ; Off                ; Off                ;
+; Show Parameter Settings Tables in Synthesis Report                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                 ; Off                ; Off                ;
+; Retiming Meta-Stability Register Sequence Length                   ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                       ; Normal compilation ; Normal compilation ;
+; HDL message level                                                  ; Level2             ; Level2             ;
++--------------------------------------------------------------------+--------------------+--------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                           ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                       ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------+
+; EP2_LED.v                        ; yes             ; User Verilog HDL File  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED.v ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimated Total logic elements              ; 17    ;
+; Total combinational functions               ; 7     ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 2     ;
+;     -- 3 input functions                    ; 1     ;
+;     -- <=2 input functions                  ; 4     ;
+;         -- Combinational cells for routing  ; 0     ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 7     ;
+;     -- arithmetic mode                      ; 0     ;
+; Total registers                             ; 17    ;
+; I/O pins                                    ; 35    ;
+; Maximum fan-out node                        ; IFCLK ;
+; Maximum fan-out                             ; 17    ;
+; Total fan-out                               ; 69    ;
+; Average fan-out                             ; 1.17  ;
++---------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                 ;
++----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ;
++----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
+; |EP2_LED                   ; 7 (7)             ; 17 (17)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 35   ; 0            ; |EP2_LED            ;
++----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-----------------------------------------------------------------------------------------------+
+; State Machine - |EP2_LED|state                                                                ;
++-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+
+; Name      ; state.001 ; state.110 ; state.010 ; state.011 ; state.100 ; state.101 ; state.000 ;
++-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+
+; state.000 ; 0         ; 0         ; 0         ; 0         ; 0         ; 0         ; 0         ;
+; state.101 ; 0         ; 0         ; 0         ; 0         ; 0         ; 1         ; 1         ;
+; state.100 ; 0         ; 0         ; 0         ; 0         ; 1         ; 0         ; 1         ;
+; state.011 ; 0         ; 0         ; 0         ; 1         ; 0         ; 0         ; 1         ;
+; state.010 ; 0         ; 0         ; 1         ; 0         ; 0         ; 0         ; 1         ;
+; state.110 ; 0         ; 1         ; 0         ; 0         ; 0         ; 0         ; 1         ;
+; state.001 ; 1         ; 0         ; 0         ; 0         ; 0         ; 0         ; 1         ;
++-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 17    ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 8     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.0 Build 178 04/27/2006 SJ Web Edition
+    Info: Processing started: Wed Aug 02 17:03:20 2006
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off EP2_LED -c EP2_LED
+Info: Found 1 design units, including 1 entities, in source file EP2_LED.v
+    Info: Found entity 1: EP2_LED
+Info: Elaborating entity "EP2_LED" for the top level hierarchy
+Warning: Reduced register "FIFO_ADR[1]~reg0" with stuck data_in port to stuck value GND
+Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
+Info: State machine "|EP2_LED|state" contains 7 states
+Info: Selected Auto state machine encoding method for state machine "|EP2_LED|state"
+Info: Encoding result for state machine "|EP2_LED|state"
+    Info: Completed encoding using 7 state bits
+        Info: Encoded state bit "state.001"
+        Info: Encoded state bit "state.110"
+        Info: Encoded state bit "state.010"
+        Info: Encoded state bit "state.011"
+        Info: Encoded state bit "state.100"
+        Info: Encoded state bit "state.101"
+        Info: Encoded state bit "state.000"
+    Info: State "|EP2_LED|state.000" uses code string "0000000"
+    Info: State "|EP2_LED|state.101" uses code string "0000011"
+    Info: State "|EP2_LED|state.100" uses code string "0000101"
+    Info: State "|EP2_LED|state.011" uses code string "0001001"
+    Info: State "|EP2_LED|state.010" uses code string "0010001"
+    Info: State "|EP2_LED|state.110" uses code string "0100001"
+    Info: State "|EP2_LED|state.001" uses code string "1000001"
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "SLWR" stuck at VCC
+    Warning: Pin "PKEND" stuck at VCC
+    Warning: Pin "FIFO_ADR[0]" stuck at GND
+    Warning: Pin "FIFO_ADR[1]" stuck at GND
+Warning: Design contains 11 input pin(s) that do not drive logic
+    Warning: No output dependent on input pin "FX2_CLK"
+    Warning: No output dependent on input pin "FLAGB"
+    Warning: No output dependent on input pin "FLAGC"
+    Warning: No output dependent on input pin "FX2_FD[8]"
+    Warning: No output dependent on input pin "FX2_FD[9]"
+    Warning: No output dependent on input pin "FX2_FD[10]"
+    Warning: No output dependent on input pin "FX2_FD[11]"
+    Warning: No output dependent on input pin "FX2_FD[12]"
+    Warning: No output dependent on input pin "FX2_FD[13]"
+    Warning: No output dependent on input pin "FX2_FD[14]"
+    Warning: No output dependent on input pin "FX2_FD[15]"
+Info: Implemented 53 device resources after synthesis - the final resource count might be different
+    Info: Implemented 21 input pins
+    Info: Implemented 14 output pins
+    Info: Implemented 18 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 19 warnings
+    Info: Processing ended: Wed Aug 02 17:03:20 2006
+    Info: Elapsed time: 00:00:01
+
+
