@@ -1,9 +1,9 @@
-Analysis & Synthesis Status : Successful - Thu Aug 03 22:23:17 2006
+Analysis & Synthesis Status : Successful - Thu Aug 03 22:55:35 2006
 Quartus II Version : 5.1 Build 176 10/26/2005 SJ Web Edition
 Revision Name : Ozy_Janus
 Top-level Entity Name : Ozy_Janus
 Family : Cyclone II
-Total combinational functions : 526
+Total combinational functions : 528
 Total registers : 705
 Total pins : 48
 Total virtual pins : 0
