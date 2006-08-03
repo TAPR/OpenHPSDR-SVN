@@ -68,6 +68,8 @@ struct usb_device *findOzy(struct usb_bus *busp) {
 	return NULL; 
 } 
 
+int OzyUSBinitialized = 0; 
+
 struct OzyHandle *OzyOpen(void)
 {
 	struct OzyHandle *ozyh = NULL; 
@@ -84,14 +86,17 @@ struct OzyHandle *OzyOpen(void)
 	ozyh->h = NULL; 
 
 
-	usb_init(); 
+	if ( !OzyUSBinitialized ) { 
+		usb_init(); 
+		OzyUSBinitialized = 1; 
+	}
 	usb_find_busses(); 
 	usb_find_devices(); 
 	busp = usb_get_busses(); 
 
 	ozydevp = findOzy(busp); 
 	if ( ozydevp == NULL ) { 
-		fprintf(stderr, "findOzy didn't!\n"); 
+		fprintf(stdout, "findOzy didn't!\n"); fflush(stdout); 
 		free(ozyh); 
 		return NULL; 
 	} 
@@ -99,18 +104,44 @@ struct OzyHandle *OzyOpen(void)
 	/* let's see if we can open the device */ 
 	ozyusbh = usb_open(ozydevp); 
 	if ( ozyusbh == NULL ) { 
-		fprintf(stderr, "open on ozy failed\n"); 
+		fprintf(stdout, "open on ozy failed\n"); fflush(stdout); 
 		free(ozyh); 
 		return NULL; 
 	} 
 
-	/* claim the out interface */ 
+	/* set the configuration */ 
+	rc = usb_set_configuration(ozyusbh, 1); 
+	if ( rc != 0 ) { 
+		fprintf(stdout, "ozy set config failed rc=%d\n", rc); fflush(stdout); 
+		free(ozyh); 
+		return NULL; 
+	} 
+
+	/* claim the  interface */ 
 	rc = usb_claim_interface(ozyusbh, 0); 
 	if ( rc != 0 ) { 
-		fprintf(stderr, "usb_claim_interface failed: rc=%d\n", rc); 
+		fprintf(stdout, "usb_claim_interface failed: rc=%d\n", rc); fflush(stdout); 
 		free(ozyh); 
 		return NULL; 		
 	} 
+
+	rc = usb_set_altinterface(ozyusbh, 0); 
+	if ( rc != 0 ) { 
+		fprintf(stdout, "warning: usb_set_altinterface failed: rc=%d\n", rc); fflush(stdout); 
+	} 
+	 
+	/* clear halts */ 
+	rc = usb_clear_halt(ozyusbh, 0x86); 
+	if ( rc != 0 ) { 
+		fprintf(stdout, "warning: usb_clear_halt on ep 0x86 failed: rc=%d\n", rc); fflush(stdout); 
+	} 
+
+	rc = usb_clear_halt(ozyusbh, 0x2); 
+	if ( rc != 0 ) { 
+		fprintf(stdout, "warning: usb_clear_halt on ep 0x2 failed: rc=%d\n", rc); fflush(stdout); 
+	} 
+
+
 	/* if we get here all is well - device is open and claimed */ 
 	ozyh->devp = ozydevp; 
 	ozyh->h = ozyusbh; 
