@@ -55,6 +55,8 @@ namespace HPSDR_USB_LIB_V1
             // Turn on LED 1 to indicate FPGA programming has started
             Set_LED(hdev, 1, true);
 
+            Console.WriteLine("TS:" + DateTime.Now);
+
             // start the load
             if ((libUSB_Interface.usb_control_msg
                 (hdev, 
@@ -71,6 +73,7 @@ namespace HPSDR_USB_LIB_V1
                 return false;
             }
 
+            Console.WriteLine("TS:" + DateTime.Now + " FL_BEGIN");
             // do the xfer
             // need to read the .rbf file here and just push it over usb in 64 byte chunks.
             FileStream fs = File.OpenRead(filename);
@@ -86,7 +89,7 @@ namespace HPSDR_USB_LIB_V1
             {
                 rbf = br.ReadBytes(MAX_EP0_PACKETSIZE); // will read up to 64 bytes
                 index += rbf.Length;
-
+                                
                 if ((libUSB_Interface.usb_control_msg
                     (hdev,
                     VENDOR_REQ_TYPE_OUT,
@@ -107,6 +110,8 @@ namespace HPSDR_USB_LIB_V1
             Console.WriteLine(index + " bytes were transfered");
             fs.Close();
 
+            Console.WriteLine("TS:" + DateTime.Now + " FL_XFER");
+
             // signal end of load
             if ((libUSB_Interface.usb_control_msg
                 (hdev,
@@ -123,6 +128,7 @@ namespace HPSDR_USB_LIB_V1
                 return false;
             }
 
+            Console.WriteLine("TS:" + DateTime.Now + " FL_END");
             // turn off LED 1 to indicate successful FPGA Load
             Set_LED(hdev, 1, false);
             return true;

@@ -112,15 +112,15 @@ GND_PLL1                     : 52        : gnd    :                   :         
 VCCA_PLL1                    : 53        : power  :                   : 1.2V    :           :                
 GNDA_PLL1                    : 54        : gnd    :                   :         :           :                
 GND                          : 55        : gnd    :                   :         :           :                
-FX2_FD[0]                    : 56        : input  : LVTTL             :         : 4         : Y              
-FX2_FD[1]                    : 57        : input  : LVTTL             :         : 4         : Y              
-FX2_FD[2]                    : 58        : input  : LVTTL             :         : 4         : Y              
-FX2_FD[3]                    : 59        : input  : LVTTL             :         : 4         : Y              
-FX2_FD[4]                    : 60        : input  : LVTTL             :         : 4         : Y              
-FX2_FD[5]                    : 61        : input  : LVTTL             :         : 4         : Y              
+FX2_FD[0]                    : 56        : bidir  : LVTTL             :         : 4         : Y              
+FX2_FD[1]                    : 57        : bidir  : LVTTL             :         : 4         : Y              
+FX2_FD[2]                    : 58        : bidir  : LVTTL             :         : 4         : Y              
+FX2_FD[3]                    : 59        : bidir  : LVTTL             :         : 4         : Y              
+FX2_FD[4]                    : 60        : bidir  : LVTTL             :         : 4         : Y              
+FX2_FD[5]                    : 61        : bidir  : LVTTL             :         : 4         : Y              
 VCCIO4                       : 62        : power  :                   : 3.3V    : 4         :                
-FX2_FD[6]                    : 63        : input  : LVTTL             :         : 4         : Y              
-FX2_FD[7]                    : 64        : input  : LVTTL             :         : 4         : Y              
+FX2_FD[6]                    : 63        : bidir  : LVTTL             :         : 4         : Y              
+FX2_FD[7]                    : 64        : bidir  : LVTTL             :         : 4         : Y              
 GND                          : 65        : gnd    :                   :         :           :                
 VCCINT                       : 66        : power  :                   : 1.2V    :           :                
 LEDS[0]                      : 67        : output : LVTTL             :         : 4         : Y              
@@ -255,13 +255,13 @@ RESERVED_INPUT               : 195       :        :                   :         
 GND                          : 196       : gnd    :                   :         :           :                
 FLAGB                        : 197       : input  : LVTTL             :         : 2         : Y              
 FLAGA                        : 198       : input  : LVTTL             :         : 2         : Y              
-FX2_FD[15]                   : 199       : input  : LVTTL             :         : 2         : Y              
-FX2_FD[14]                   : 200       : input  : LVTTL             :         : 2         : Y              
-FX2_FD[13]                   : 201       : input  : LVTTL             :         : 2         : Y              
+FX2_FD[15]                   : 199       : bidir  : LVTTL             :         : 2         : Y              
+FX2_FD[14]                   : 200       : bidir  : LVTTL             :         : 2         : Y              
+FX2_FD[13]                   : 201       : bidir  : LVTTL             :         : 2         : Y              
 VCCIO2                       : 202       : power  :                   : 3.3V    : 2         :                
-FX2_FD[12]                   : 203       : input  : LVTTL             :         : 2         : Y              
+FX2_FD[12]                   : 203       : bidir  : LVTTL             :         : 2         : Y              
 GND                          : 204       : gnd    :                   :         :           :                
-FX2_FD[11]                   : 205       : input  : LVTTL             :         : 2         : Y              
-FX2_FD[10]                   : 206       : input  : LVTTL             :         : 2         : Y              
-FX2_FD[9]                    : 207       : input  : LVTTL             :         : 2         : Y              
-FX2_FD[8]                    : 208       : input  : LVTTL             :         : 2         : Y              
+FX2_FD[11]                   : 205       : bidir  : LVTTL             :         : 2         : Y              
+FX2_FD[10]                   : 206       : bidir  : LVTTL             :         : 2         : Y              
+FX2_FD[9]                    : 207       : bidir  : LVTTL             :         : 2         : Y              
+FX2_FD[8]                    : 208       : bidir  : LVTTL             :         : 2         : Y              

@@ -2,16 +2,11 @@
 <!DOCTYPE CodeBlocks_layout_file>
 <CodeBlocks_layout_file>
 	<File name="Initial\src\hpsdr_common.c" open="1" top="1">
-		<Cursor position="4155" topLine="5"/>
-	</File>
-	<File name="Initial\src\hpsdr_main.c" open="1" top="0">
-		<Cursor position="6127" topLine="203"/>
+		<Cursor position="980" topLine="0"/>
 	</File>
 	<Expand folder="/Sources/Initial/src"/>
 	<Expand folder="/Sources/Initial"/>
 	<Expand folder="/Sources"/>
-	<Expand folder="/Others/Initial/src/asm"/>
-	<Expand folder="/Others/Initial/src"/>
-	<Expand folder="/Others/Initial"/>
+	<Expand folder="/Headers"/>
 	<Expand folder="/Others"/>
 </CodeBlocks_layout_file>

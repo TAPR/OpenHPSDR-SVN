@@ -70,3 +70,4 @@ set_location_assignment PIN_5 -to FLAGC
 set_location_assignment PIN_24 -to IFCLK
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD LVTTL
 set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
+set_global_assignment -name VECTOR_WAVEFORM_FILE EP2_LED.vwf

@@ -1,0 +1,157 @@
+
+<!--
+This XML file (created on Thu Aug 03 15:14:12 2006) contains limited information
+from the compilation of logic designs using Quartus II software (BUT NOT THE
+LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
+operation of the "TalkBack" feature.  To enable/disable this feature, run
+qtb_install.exe located in your quartus/bin folder.  For more information, go
+to license.txt.
+-->
+<talkback>
+<ver>6.0</ver>
+<schema>quartus_version_6.0_build_178.xsd</schema>
+<license>
+	<host_id>00a0cc694f79</host_id>
+	<nic_id>00123f7b788f</nic_id>
+	<cdrive_id>dc2f6d33</cdrive_id>
+</license>
+<tool>
+	<name>Quartus II</name>
+	<version>6.0</version>
+	<build>Build 178</build>
+	<binary_type>32</binary_type>
+	<module>quartus_sim</module>
+	<edition>Full Version</edition>
+	<eval>Licensed</eval>
+	<compilation_end_time>Thu Aug 03 15:14:12 2006</compilation_end_time>
+</tool>
+<machine>
+	<os>Windows XP</os>
+	<cpu>
+		<proc_count>2</proc_count>
+		<cpu_freq units="MHz">3391</cpu_freq>
+	</cpu>
+	<ram units="MB">1023</ram>
+</machine>
+<project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</project>
+<revision>EP2_LED</revision>
+<compilation_summary>
+	<flow_status>Successful - Thu Aug 03 15:14:12 2006</flow_status>
+	<simulator_setting_name>EP2_LED</simulator_setting_name>
+	<top_level_entity_name>EP2_LED</top_level_entity_name>
+</compilation_summary>
+<mep_data>
+	<command_line>quartus_sim --read_settings_files=on --write_settings_files=off EP2_LED -c EP2_LED</command_line>
+</mep_data>
+<messages>
+	<warning>Warning: Can&apos;t find signal in vector source file for input pin &quot;|EP2_LED|FLAGB&quot;</warning>
+	<warning>Warning: Can&apos;t find signal in vector source file for input pin &quot;|EP2_LED|FX2_CLK&quot;</warning>
+	<warning>Warning: Can&apos;t display state machine states -- register holding state machine bit &quot;|EP2_LED|state.0011&quot; was synthesized away</warning>
+	<info>Info: Quartus II Simulator was successful. 0 errors, 3 warnings</info>
+	<info>Info: Elapsed time: 00:00:01</info>
+	<info>Info: Processing ended: Thu Aug 03 15:14:12 2006</info>
+	<info>Info: Vector file EP2_LED.sim.vwf is saved in VWF text format. You can compress it into CVWF format in order to reduce file size. For more details please refer to the Quartus II Help.</info>
+	<info>Info: Number of transitions in simulation is 248</info>
+</messages>
+<simulator_settings>
+	<row>
+		<option>Simulation mode</option>
+		<setting>Timing</setting>
+		<default_value>Timing</default_value>
+	</row>
+	<row>
+		<option>Start time</option>
+		<setting units="ns">0</setting>
+		<default_value units="ns">0</default_value>
+	</row>
+	<row>
+		<option>Add pins automatically to simulation output waveforms</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Check outputs</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Report simulation coverage</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Display complete 1/0 value coverage report</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Display missing 1-value coverage report</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Display missing 0-value coverage report</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Detect setup and hold time violations</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Detect glitches</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Disable timing delays in Timing Simulation</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate Signal Activity File</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Group bus channels in simulation results</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Preserve fewer signal transitions to reduce memory requirements</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Trigger vector comparison with the specified mode</option>
+		<setting>INPUT_EDGE</setting>
+		<default_value>INPUT_EDGE</default_value>
+	</row>
+	<row>
+		<option>Disable setup and hold time violations detection in input registers of bi-directional pins</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Overwrite Waveform Inputs With Simulation Outputs</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Glitch Filtering</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+</simulator_settings>
+<simulator_summary>
+	<simulation_start_time>0 ps</simulation_start_time>
+	<simulation_end_time>1.0 us</simulation_end_time>
+	<simulation_netlist_size>147 nodes</simulation_netlist_size>
+	<simulation_coverage>     29.66 %</simulation_coverage>
+	<total_number_of_transitions>248</total_number_of_transitions>
+	<simulation_breakpoints>0</simulation_breakpoints>
+	<family>Cyclone II</family>
+	<device>EP2C5Q208C8</device>
+</simulator_summary>
+</talkback>

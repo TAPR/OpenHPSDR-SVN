@@ -29,7 +29,7 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 	input FLAGA;
 	input FLAGB;
 	input FLAGC;
-	input [15:0] FX2_FD;
+	inout [15:0] FX2_FD;
 	output SLWR;
 	output SLRD;
 	output SLOE;
@@ -37,63 +37,126 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 	output [1:0] FIFO_ADR;
 	output [7:0] LEDS;
 	
-	assign SLWR = 1'b1;
-	assign PKEND = 1'b1;
-	
+	reg [15:0] Tx_register;
+		
 	wire EP2_has_data = FLAGA;
+	wire EP6_has_room = FLAGC;
+	
 	reg SLOE;
 	reg SLRD;
-	reg [1:0] FIFO_ADR;
-	reg [7:0] LEDS;	
+	reg SLWR;
+	reg SLEN;
+	reg PKEND;
 	
-	reg [2:0] state;
+	assign FX2_FD[15:0] = (SLEN) ? Tx_register[15:0] : 16'bZ;
+	
+	reg [1:0] FIFO_ADR;
+	reg [7:0] HIGHBYTE;
+	reg [7:0] LEDS;	
+			
+	reg [3:0] state;
 	
 	always @(posedge IFCLK)
 		begin
 			case (state)
-				3'd0:
+				4'd0:
 					begin
+						PKEND <= 1'b1;
+						SLEN <= 1'b0;
+						SLWR <= 1'b1;
 						SLRD <= 1'b1;
 						SLOE <= 1'b1;
 						FIFO_ADR <= 2'b00; // select EP2
-						state <= 3'd1;
+						state <= 4'd1;
 					end
-				3'd1:
+				4'd1:
 					begin
-						state <= 3'd2; //delay 1 IFCLOCK CYCLE
+						state <= 4'd2; //delay 1 IFCLOCK CYCLE
 									  // this is necessary at 48MHz
 									  // to allow FIFO_ADR to settle
 					end		
-				3'd2:
+				4'd2:
 					begin
 						if(EP2_has_data)
 							begin
-								state <= 3'd3;
+								state <= 4'd4;
 								SLOE <= 1'b0; //assert SLOE								
 							end
 						else
-							state <= 3'd2; // should be 3'd0 if checking other FIFOs
+							state <= 4'd2; 
 					end	
-				3'd3:
+				4'd3:  // skipping over this state for now
+					begin
+						// SLRD <= 1'b0; //assert SLRD
+						state <= 4'd4;
+					end		
+				4'd4:
 					begin
 						SLRD <= 1'b0; //assert SLRD
-						state <= 3'd4;
-					end		
-				3'd4:
-					begin
-						LEDS[7:0] <= FX2_FD[7:0]; // read FD[16:0] here						
-						state <= 3'd5;
+						LEDS[7:0] <= FX2_FD[7:0]; // read FD[16:0] here	
+						HIGHBYTE <= FX2_FD[15:8];												
+						state <= 4'd5;
 					end
-				3'd5:
+				4'd5:
 					begin
 						SLRD <= 1'b1; // reset SLRD
-						state <= 3'd6;
+						Tx_register[7:0] <= LEDS[7:0];
+						Tx_register[15:8] <= HIGHBYTE;		
+						state <= 4'd6;
 					end
-				3'd6:
+				4'd6:
 					begin
 						SLOE <= 1'b1; //reset SLOE
-						state <= 3'd0;
+						state <= 4'd7;
 					end
+				4'd7:
+					begin
+						if (EP6_has_room)
+							begin
+								FIFO_ADR <= 2'b10; // select EP6
+								state <= 4'd8;	
+							end
+						else
+							begin
+								state <= 4'd2; // FIFO full, go back to RX
+							end
+					end
+				4'd8:
+					begin
+						state <= 4'd9; // setup wait for FIFO ADR
+					end
+				4'd9:
+					begin						
+						SLEN <= 1'b1; // drive bus
+						state <= 4'd10;
+					end
+				4'd10: 
+					begin
+						state <= 4'd11; // let data bus stabilize
+					end
+				4'd11:
+					begin
+						SLWR <= 1'b0; // assert SLWR
+						state <= 4'd12;
+					end							
+				4'd12:
+					begin
+						SLWR <= 1'b1; // reset SLWR						
+						state <= 4'd13; // wait state for SLWR
+					end
+				4'd13: 
+					begin
+						state <= 4'd14;
+					end
+				4'd14:
+					begin
+						SLEN <= 1'b0;
+						FIFO_ADR <= 2'b00; // select EP2
+						state <= 4'd1;
+					end
+				default:
+					state <= 4'd0;
+					
 			endcase
 		end			
 
