@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Sun Jul 30 22:04:11 2006
+Thu Aug 03 22:23:17 2006
 Version 5.1 Build 176 10/26/2005 SJ Web Edition
 
 
@@ -74,14 +74,14 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Jul 30 22:04:11 2006   ;
+; Analysis & Synthesis Status        ; Successful - Thu Aug 03 22:23:17 2006   ;
 ; Quartus II Version                 ; 5.1 Build 176 10/26/2005 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
 ; Family                             ; Cyclone II                              ;
-; Total combinational functions      ; 520                                     ;
-; Total registers                    ; 697                                     ;
-; Total pins                         ; 51                                      ;
+; Total combinational functions      ; 526                                     ;
+; Total registers                    ; 705                                     ;
+; Total pins                         ; 48                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304                                  ;
 ; Embedded Multiplier 9-bit elements ; 0                                       ;
@@ -216,22 +216,22 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total combinational functions               ; 520   ;
+; Total combinational functions               ; 526   ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 198   ;
+;     -- 4 input functions                    ; 201   ;
 ;     -- 3 input functions                    ; 171   ;
-;     -- <=2 input functions                  ; 151   ;
+;     -- <=2 input functions                  ; 154   ;
 ;         -- Combinational cells for routing  ; 0     ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 341   ;
+;     -- normal mode                          ; 347   ;
 ;     -- arithmetic mode                      ; 179   ;
-; Total registers                             ; 697   ;
-; I/O pins                                    ; 51    ;
+; Total registers                             ; 705   ;
+; I/O pins                                    ; 48    ;
 ; Total memory bits                           ; 98304 ;
 ; Maximum fan-out node                        ; BCLK  ;
 ; Maximum fan-out                             ; 296   ;
-; Total fan-out                               ; 4310  ;
-; Average fan-out                             ; 3.32  ;
+; Total fan-out                               ; 4342  ;
+; Average fan-out                             ; 3.31  ;
 +---------------------------------------------+-------+
 
 
@@ -240,7 +240,7 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-; |Ozy_Janus                                    ; 520 (309)         ; 697 (363)    ; 98304       ; 0            ; 0       ; 0         ; 51   ; 0            ; |Ozy_Janus                                                                                                                        ;
+; |Ozy_Janus                                    ; 526 (315)         ; 705 (371)    ; 98304       ; 0            ; 0       ; 0         ; 48   ; 0            ; |Ozy_Janus                                                                                                                        ;
 ;    |I2SAudioOut:I2SAO|                        ; 32 (32)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ;
 ;    |Rx_fifo:Rx_fifo|                          ; 89 (0)            ; 135 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|               ; 89 (0)            ; 135 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
@@ -294,16 +294,23 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
 
 
-+--------------------------------------------------------------------------+
-; State Machine - |Ozy_Janus|state_FX                                      ;
-+--------------+--------------+--------------+--------------+--------------+
-; Name         ; state_FX.001 ; state_FX.010 ; state_FX.011 ; state_FX.000 ;
-+--------------+--------------+--------------+--------------+--------------+
-; state_FX.000 ; 0            ; 0            ; 0            ; 0            ;
-; state_FX.011 ; 0            ; 0            ; 1            ; 1            ;
-; state_FX.010 ; 0            ; 1            ; 0            ; 1            ;
-; state_FX.001 ; 1            ; 0            ; 0            ; 1            ;
-+--------------+--------------+--------------+--------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Ozy_Janus|state_FX                                                                                                                                                           ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; Name          ; state_FX.0001 ; state_FX.1010 ; state_FX.0010 ; state_FX.0011 ; state_FX.0111 ; state_FX.0100 ; state_FX.0101 ; state_FX.0110 ; state_FX.1000 ; state_FX.1001 ; state_FX.0000 ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; state_FX.0000 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ;
+; state_FX.1001 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 1             ;
+; state_FX.1000 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 1             ;
+; state_FX.0110 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 1             ;
+; state_FX.0101 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 1             ;
+; state_FX.0100 ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 1             ;
+; state_FX.0111 ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
+; state_FX.0011 ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
+; state_FX.0010 ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
+; state_FX.1010 ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
+; state_FX.0001 ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -346,7 +353,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 697   ;
+; Total registers                              ; 705   ;
 ; Number of registers using Synchronous Clear  ; 44    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 28    ;
@@ -361,13 +368,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[6] ;
-; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; Yes        ; |Ozy_Janus|FIFO_ADDRESS[1] ;
-; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|byte_count[0]   ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[2] ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|byte_count[6]   ;
 ; 128:1              ; 4 bits    ; 340 LEs       ; 28 LEs               ; 312 LEs                ; Yes        ; |Ozy_Janus|AD_state[5]     ;
-; 8:1                ; 9 bits    ; 45 LEs        ; 9 LEs                ; 36 LEs                 ; Yes        ; |Ozy_Janus|sync_count[8]   ;
+; 8:1                ; 9 bits    ; 45 LEs        ; 9 LEs                ; 36 LEs                 ; Yes        ; |Ozy_Janus|sync_count[0]   ;
 ; 130:1              ; 8 bits    ; 688 LEs       ; 16 LEs               ; 672 LEs                ; Yes        ; |Ozy_Janus|register[15]    ;
-; 132:1              ; 6 bits    ; 528 LEs       ; 24 LEs               ; 504 LEs                ; Yes        ; |Ozy_Janus|register[1]     ;
+; 132:1              ; 6 bits    ; 528 LEs       ; 24 LEs               ; 504 LEs                ; Yes        ; |Ozy_Janus|register[6]     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 
 
@@ -724,7 +730,7 @@ The equations can be found in C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.map.eqn
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 5.1 Build 176 10/26/2005 SJ Web Edition
-    Info: Processing started: Sun Jul 30 22:03:44 2006
+    Info: Processing started: Thu Aug 03 22:22:55 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file clocks.v
     Info: Found entity 1: clocks
@@ -732,7 +738,7 @@ Info: Found 1 design units, including 1 entities, in source file debounce.v
     Info: Found entity 1: debounce
 Info: Found 1 design units, including 1 entities, in source file DigAudioOut48k16bI2S.v
     Info: Found entity 1: I2SAudioOut
-Warning (10273): Verilog HDL warning at Ozy_Janus.v(930): sign extended using "x" or "z"
+Warning (10273): Verilog HDL warning at Ozy_Janus.v(1053): sign extended using "x" or "z"
 Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
     Info: Found entity 1: Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
@@ -740,10 +746,11 @@ Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
     Info: Found entity 1: Tx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Info (10035): Verilog HDL or VHDL information at Ozy_Janus.v(256): object "state_A_D" declared but not used
-Info (10035): Verilog HDL or VHDL information at Ozy_Janus.v(558): object "syncd_Tx_write_full" declared but not used
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(722): object "Rx_control_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(723): object "Rx_control_3" assigned a value but never read
+Info (10035): Verilog HDL or VHDL information at Ozy_Janus.v(217): object "FLAGC" declared but not used
+Info (10035): Verilog HDL or VHDL information at Ozy_Janus.v(257): object "state_A_D" declared but not used
+Info (10035): Verilog HDL or VHDL information at Ozy_Janus.v(559): object "syncd_Tx_write_full" declared but not used
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(845): object "Rx_control_2" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(846): object "Rx_control_3" assigned a value but never read
 Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
 Info: Found 1 design units, including 1 entities, in source file ../../../../altera/quartus51/libraries/megafunctions/lpm_counter.tdf
     Info: Found entity 1: lpm_counter
@@ -840,20 +847,35 @@ Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
 Info: Duplicate registers merged to single register
     Info: Duplicate register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:ws_bwp|dffe5a[11]" merged to single register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|delayed_wrptr_g[11]"
     Info: Duplicate register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|dffpipe_a09:ws_bwp|dffe7a[10]" merged to single register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|delayed_wrptr_g[10]"
-Info: State machine "|Ozy_Janus|state_FX" contains 4 states
+Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
+Info: State machine "|Ozy_Janus|state_FX" contains 11 states
 Info: State machine "|Ozy_Janus|state_PWM" contains 14 states
 Info: State machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state" contains 5 states
 Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|state_FX"
 Info: Encoding result for state machine "|Ozy_Janus|state_FX"
-    Info: Completed encoding using 4 state bits
-        Info: Encoded state bit "state_FX.001"
-        Info: Encoded state bit "state_FX.010"
-        Info: Encoded state bit "state_FX.011"
-        Info: Encoded state bit "state_FX.000"
-    Info: State "|Ozy_Janus|state_FX.000" uses code string "0000"
-    Info: State "|Ozy_Janus|state_FX.011" uses code string "0011"
-    Info: State "|Ozy_Janus|state_FX.010" uses code string "0101"
-    Info: State "|Ozy_Janus|state_FX.001" uses code string "1001"
+    Info: Completed encoding using 11 state bits
+        Info: Encoded state bit "state_FX.0001"
+        Info: Encoded state bit "state_FX.1010"
+        Info: Encoded state bit "state_FX.0010"
+        Info: Encoded state bit "state_FX.0011"
+        Info: Encoded state bit "state_FX.0111"
+        Info: Encoded state bit "state_FX.0100"
+        Info: Encoded state bit "state_FX.0101"
+        Info: Encoded state bit "state_FX.0110"
+        Info: Encoded state bit "state_FX.1000"
+        Info: Encoded state bit "state_FX.1001"
+        Info: Encoded state bit "state_FX.0000"
+    Info: State "|Ozy_Janus|state_FX.0000" uses code string "00000000000"
+    Info: State "|Ozy_Janus|state_FX.1001" uses code string "00000000011"
+    Info: State "|Ozy_Janus|state_FX.1000" uses code string "00000000101"
+    Info: State "|Ozy_Janus|state_FX.0110" uses code string "00000001001"
+    Info: State "|Ozy_Janus|state_FX.0101" uses code string "00000010001"
+    Info: State "|Ozy_Janus|state_FX.0100" uses code string "00000100001"
+    Info: State "|Ozy_Janus|state_FX.0111" uses code string "00001000001"
+    Info: State "|Ozy_Janus|state_FX.0011" uses code string "00010000001"
+    Info: State "|Ozy_Janus|state_FX.0010" uses code string "00100000001"
+    Info: State "|Ozy_Janus|state_FX.1010" uses code string "01000000001"
+    Info: State "|Ozy_Janus|state_FX.0001" uses code string "10000000001"
 Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|state_PWM"
 Info: Encoding result for state machine "|Ozy_Janus|state_PWM"
     Info: Completed encoding using 14 state bits
@@ -898,35 +920,20 @@ Info: Encoding result for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.010" uses code string "01010"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.001" uses code string "10010"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.100" uses code string "00011"
-Warning: Replaced VCC or GND feeding tri-state bus FX2_PA[0]~3 with an always-enabled tri-state buffer
-Warning: Replaced VCC or GND feeding tri-state bus FX2_PA[1]~2 with an always-enabled tri-state buffer
-Warning: Replaced VCC or GND feeding tri-state bus FX2_PA[3]~1 with an always-enabled tri-state buffer
-Warning: Replaced VCC or GND feeding tri-state bus FX2_PA[6]~0 with an always-enabled tri-state buffer
-Info: One or more bidirs are fed by always enabled tri-state buffers
-    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "FX2_PA[2]" is moved to its source
-    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "FX2_PA[4]" is moved to its source
-    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "FX2_PA[5]" is moved to its source
-Warning: Reduced register "FIFO_ADDRESS[0]" with stuck data_in port to stuck value GND
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "FIFO_ADDRESS[1]" merged to single register "FIFO_DATA_OUTPUT_ENABLE"
-Warning: TRI or OPNDRN buffers permanently enabled
-    Warning: Node "FX2_PA[0]~12"
-    Warning: Node "FX2_PA[1]~13"
-    Warning: Node "FX2_PA[2]~7"
-    Warning: Node "FX2_PA[3]~14"
-    Warning: Node "FX2_PA[4]~8"
-    Warning: Node "FX2_PA[5]~9"
-    Warning: Node "FX2_PA[6]~15"
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "PKEND" stuck at VCC
+    Warning: Pin "FIFO_ADR[0]" stuck at GND
+    Warning: Pin "LED[4]" stuck at VCC
 Warning: Design contains 1 input pin(s) that do not drive logic
-    Warning: No output dependent on input pin "FX2_flags[1]"
-Info: Implemented 1015 device resources after synthesis - the final resource count might be different
-    Info: Implemented 10 input pins
-    Info: Implemented 17 output pins
-    Info: Implemented 24 bidirectional pins
-    Info: Implemented 932 logic cells
+    Warning: No output dependent on input pin "FLAGC"
+Info: Implemented 1024 device resources after synthesis - the final resource count might be different
+    Info: Implemented 11 input pins
+    Info: Implemented 21 output pins
+    Info: Implemented 16 bidirectional pins
+    Info: Implemented 944 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 18 warnings
-    Info: Processing ended: Sun Jul 30 22:04:11 2006
-    Info: Elapsed time: 00:00:27
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
+    Info: Processing ended: Thu Aug 03 22:23:17 2006
+    Info: Elapsed time: 00:00:22
 
 

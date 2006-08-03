@@ -1,10 +1,17 @@
 
 State Machine - |Ozy_Janus|state_FX
-Name state_FX.001 state_FX.010 state_FX.011 state_FX.000 
-state_FX.000 0 0 0 0 
-state_FX.011 0 0 1 1 
-state_FX.010 0 1 0 1 
-state_FX.001 1 0 0 1 
+Name state_FX.0001 state_FX.1010 state_FX.0010 state_FX.0011 state_FX.0111 state_FX.0100 state_FX.0101 state_FX.0110 state_FX.1000 state_FX.1001 state_FX.0000 
+state_FX.0000 0 0 0 0 0 0 0 0 0 0 0 
+state_FX.1001 0 0 0 0 0 0 0 0 0 1 1 
+state_FX.1000 0 0 0 0 0 0 0 0 1 0 1 
+state_FX.0110 0 0 0 0 0 0 0 1 0 0 1 
+state_FX.0101 0 0 0 0 0 0 1 0 0 0 1 
+state_FX.0100 0 0 0 0 0 1 0 0 0 0 1 
+state_FX.0111 0 0 0 0 1 0 0 0 0 0 1 
+state_FX.0011 0 0 0 1 0 0 0 0 0 0 1 
+state_FX.0010 0 0 1 0 0 0 0 0 0 0 1 
+state_FX.1010 0 1 0 0 0 0 0 0 0 0 1 
+state_FX.0001 1 0 0 0 0 0 0 0 0 0 1 
 
 State Machine - |Ozy_Janus|state_PWM
 Name state_PWM.00001 state_PWM.01101 state_PWM.00010 state_PWM.00011 state_PWM.00100 state_PWM.00101 state_PWM.00110 state_PWM.00111 state_PWM.01000 state_PWM.01001 state_PWM.01010 state_PWM.01011 state_PWM.01100 state_PWM.00000 

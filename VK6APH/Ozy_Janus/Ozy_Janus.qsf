@@ -83,19 +83,6 @@ set_location_assignment PIN_203 -to FX2_FD[12]
 set_location_assignment PIN_201 -to FX2_FD[13]
 set_location_assignment PIN_200 -to FX2_FD[14]
 set_location_assignment PIN_199 -to FX2_FD[15]
-set_location_assignment PIN_198 -to FX2_flags[0]
-set_location_assignment PIN_197 -to FX2_flags[1]
-set_location_assignment PIN_5 -to FX2_flags[2]
-set_location_assignment PIN_15 -to FX2_PA[0]
-set_location_assignment PIN_14 -to FX2_PA[1]
-set_location_assignment PIN_13 -to FX2_PA[2]
-set_location_assignment PIN_12 -to FX2_PA[3]
-set_location_assignment PIN_11 -to FX2_PA[4]
-set_location_assignment PIN_10 -to FX2_PA[5]
-set_location_assignment PIN_8 -to FX2_PA[6]
-set_location_assignment PIN_6 -to FX2_PA[7]
-set_location_assignment PIN_30 -to FX2_SLRD
-set_location_assignment PIN_31 -to FX2_SLWR
 set_location_assignment PIN_67 -to LED[0]
 set_location_assignment PIN_68 -to LED[1]
 set_location_assignment PIN_69 -to LED[2]
@@ -105,3 +92,13 @@ set_location_assignment PIN_74 -to LED[5]
 set_location_assignment PIN_75 -to LED[6]
 set_location_assignment PIN_76 -to LED[7]
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_location_assignment PIN_24 -to IFCLK
+set_location_assignment PIN_198 -to FLAGA
+set_location_assignment PIN_197 -to FLAGB
+set_location_assignment PIN_5 -to FLAGC
+set_location_assignment PIN_13 -to SLOE
+set_location_assignment PIN_11 -to FIFO_ADR[0]
+set_location_assignment PIN_10 -to FIFO_ADR[1]
+set_location_assignment PIN_8 -to PKEND
+set_location_assignment PIN_30 -to SLRD
+set_location_assignment PIN_31 -to SLWR

@@ -60,17 +60,17 @@ Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage 
 ~nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 2         : input  : LVTTL             :         : 1         : N              
 RESERVED_INPUT               : 3         :        :                   :         : 1         :                
 RESERVED_INPUT               : 4         :        :                   :         : 1         :                
-FX2_flags[2]                 : 5         : input  : LVTTL             :         : 1         : Y              
-FX2_PA[7]                    : 6         : bidir  : LVTTL             :         : 1         : Y              
+FLAGC                        : 5         : input  : LVTTL             :         : 1         : Y              
+RESERVED_INPUT               : 6         :        :                   :         : 1         :                
 VCCIO1                       : 7         : power  :                   : 3.3V    : 1         :                
-FX2_PA[6]                    : 8         : bidir  : LVTTL             :         : 1         : Y              
+PKEND                        : 8         : output : LVTTL             :         : 1         : Y              
 GND                          : 9         : gnd    :                   :         :           :                
-FX2_PA[5]                    : 10        : bidir  : LVTTL             :         : 1         : Y              
-FX2_PA[4]                    : 11        : bidir  : LVTTL             :         : 1         : Y              
-FX2_PA[3]                    : 12        : bidir  : LVTTL             :         : 1         : Y              
-FX2_PA[2]                    : 13        : bidir  : LVTTL             :         : 1         : Y              
-FX2_PA[1]                    : 14        : bidir  : LVTTL             :         : 1         : Y              
-FX2_PA[0]                    : 15        : bidir  : LVTTL             :         : 1         : Y              
+FIFO_ADR[1]                  : 10        : output : LVTTL             :         : 1         : Y              
+FIFO_ADR[0]                  : 11        : output : LVTTL             :         : 1         : Y              
+RESERVED_INPUT               : 12        :        :                   :         : 1         :                
+SLOE                         : 13        : output : LVTTL             :         : 1         : Y              
+RESERVED_INPUT               : 14        :        :                   :         : 1         :                
+RESERVED_INPUT               : 15        :        :                   :         : 1         :                
 TDO                          : 16        : output :                   :         : 1         :                
 TMS                          : 17        : input  :                   :         : 1         :                
 TCK                          : 18        : input  :                   :         : 1         :                
@@ -79,14 +79,14 @@ DATA0                        : 20        : input  :                   :         
 DCLK                         : 21        :        :                   :         : 1         :                
 nCE                          : 22        :        :                   :         : 1         :                
 FX2_CLK                      : 23        : input  : LVTTL             :         : 1         : Y              
-GND+                         : 24        :        :                   :         : 1         :                
+IFCLK                        : 24        : input  : LVTTL             :         : 1         : Y              
 GND                          : 25        : gnd    :                   :         :           :                
 nCONFIG                      : 26        :        :                   :         : 1         :                
 GND+                         : 27        :        :                   :         : 1         :                
 GND+                         : 28        :        :                   :         : 1         :                
 VCCIO1                       : 29        : power  :                   : 3.3V    : 1         :                
-FX2_SLRD                     : 30        : output : LVTTL             :         : 1         : Y              
-FX2_SLWR                     : 31        : output : LVTTL             :         : 1         : Y              
+SLRD                         : 30        : output : LVTTL             :         : 1         : Y              
+SLWR                         : 31        : output : LVTTL             :         : 1         : Y              
 RESERVED_INPUT               : 32        :        :                   :         : 1         :                
 RESERVED_INPUT               : 33        :        :                   :         : 1         :                
 RESERVED_INPUT               : 34        :        :                   :         : 1         :                
@@ -252,8 +252,8 @@ RESERVED_INPUT               : 193       :        :                   :         
 VCCIO2                       : 194       : power  :                   : 3.3V    : 2         :                
 RESERVED_INPUT               : 195       :        :                   :         : 2         :                
 GND                          : 196       : gnd    :                   :         :           :                
-FX2_flags[1]                 : 197       : input  : LVTTL             :         : 2         : Y              
-FX2_flags[0]                 : 198       : input  : LVTTL             :         : 2         : Y              
+FLAGB                        : 197       : input  : LVTTL             :         : 2         : Y              
+FLAGA                        : 198       : input  : LVTTL             :         : 2         : Y              
 FX2_FD[15]                   : 199       : bidir  : LVTTL             :         : 2         : Y              
 FX2_FD[14]                   : 200       : bidir  : LVTTL             :         : 2         : Y              
 FX2_FD[13]                   : 201       : bidir  : LVTTL             :         : 2         : Y              
