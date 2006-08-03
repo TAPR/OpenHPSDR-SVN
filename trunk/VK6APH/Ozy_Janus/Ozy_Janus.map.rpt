@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Thu Aug 03 22:23:17 2006
+Thu Aug 03 22:55:35 2006
 Version 5.1 Build 176 10/26/2005 SJ Web Edition
 
 
@@ -74,12 +74,12 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Aug 03 22:23:17 2006   ;
+; Analysis & Synthesis Status        ; Successful - Thu Aug 03 22:55:35 2006   ;
 ; Quartus II Version                 ; 5.1 Build 176 10/26/2005 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
 ; Family                             ; Cyclone II                              ;
-; Total combinational functions      ; 526                                     ;
+; Total combinational functions      ; 528                                     ;
 ; Total registers                    ; 705                                     ;
 ; Total pins                         ; 48                                      ;
 ; Total virtual pins                 ; 0                                       ;
@@ -216,21 +216,21 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total combinational functions               ; 526   ;
+; Total combinational functions               ; 528   ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 201   ;
-;     -- 3 input functions                    ; 171   ;
-;     -- <=2 input functions                  ; 154   ;
+;     -- 4 input functions                    ; 198   ;
+;     -- 3 input functions                    ; 175   ;
+;     -- <=2 input functions                  ; 155   ;
 ;         -- Combinational cells for routing  ; 0     ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 347   ;
+;     -- normal mode                          ; 349   ;
 ;     -- arithmetic mode                      ; 179   ;
 ; Total registers                             ; 705   ;
 ; I/O pins                                    ; 48    ;
 ; Total memory bits                           ; 98304 ;
 ; Maximum fan-out node                        ; BCLK  ;
 ; Maximum fan-out                             ; 296   ;
-; Total fan-out                               ; 4342  ;
+; Total fan-out                               ; 4344  ;
 ; Average fan-out                             ; 3.31  ;
 +---------------------------------------------+-------+
 
@@ -240,7 +240,7 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-; |Ozy_Janus                                    ; 526 (315)         ; 705 (371)    ; 98304       ; 0            ; 0       ; 0         ; 48   ; 0            ; |Ozy_Janus                                                                                                                        ;
+; |Ozy_Janus                                    ; 528 (317)         ; 705 (371)    ; 98304       ; 0            ; 0       ; 0         ; 48   ; 0            ; |Ozy_Janus                                                                                                                        ;
 ;    |I2SAudioOut:I2SAO|                        ; 32 (32)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ;
 ;    |Rx_fifo:Rx_fifo|                          ; 89 (0)            ; 135 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|               ; 89 (0)            ; 135 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
@@ -730,7 +730,7 @@ The equations can be found in C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.map.eqn
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 5.1 Build 176 10/26/2005 SJ Web Edition
-    Info: Processing started: Thu Aug 03 22:22:55 2006
+    Info: Processing started: Thu Aug 03 22:55:10 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file clocks.v
     Info: Found entity 1: clocks
@@ -746,7 +746,7 @@ Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
     Info: Found entity 1: Tx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Info (10035): Verilog HDL or VHDL information at Ozy_Janus.v(217): object "FLAGC" declared but not used
+Info (10035): Verilog HDL or VHDL information at Ozy_Janus.v(216): object "FLAGB" declared but not used
 Info (10035): Verilog HDL or VHDL information at Ozy_Janus.v(257): object "state_A_D" declared but not used
 Info (10035): Verilog HDL or VHDL information at Ozy_Janus.v(559): object "syncd_Tx_write_full" declared but not used
 Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(845): object "Rx_control_2" assigned a value but never read
@@ -925,15 +925,15 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "FIFO_ADR[0]" stuck at GND
     Warning: Pin "LED[4]" stuck at VCC
 Warning: Design contains 1 input pin(s) that do not drive logic
-    Warning: No output dependent on input pin "FLAGC"
-Info: Implemented 1024 device resources after synthesis - the final resource count might be different
+    Warning: No output dependent on input pin "FLAGB"
+Info: Implemented 1025 device resources after synthesis - the final resource count might be different
     Info: Implemented 11 input pins
     Info: Implemented 21 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 944 logic cells
+    Info: Implemented 945 logic cells
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Processing ended: Thu Aug 03 22:23:17 2006
-    Info: Elapsed time: 00:00:22
+    Info: Processing ended: Thu Aug 03 22:55:35 2006
+    Info: Elapsed time: 00:00:25
 
 

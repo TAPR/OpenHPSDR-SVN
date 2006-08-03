@@ -579,7 +579,7 @@ reg SLRD;									// FX2 read - active low
 reg SLWR;									// FX2 write - active low 
 reg [1:0] FIFO_ADR;							// FX2 register address 
 wire EP2_has_data = FLAGA;					// high when EP2 has data available
-wire EP6_ready = FLAGB; 					// high when we can write to EP6
+wire EP6_ready = FLAGC; 					// high when we can write to EP6
 reg [15:0] Rx_register;						// data from PC goes here
 reg [7:0]TX_wait; 							// increments when  we have to wait for TX_ FIFO to be free (C1)
 reg [7:0]RX_wait;							// increments when there is no receive data	(C2)		
@@ -658,7 +658,7 @@ case(state_FX)
             end
             else begin                  			// otherwise, hang out here until fifo is ready
                 SLWR <= 1;
-                state_FX <= 0; // 4'd9 ;   // **** this overcomes the problem that EP6 is never ready 
+                state_FX <= 4'd9 ;  
 				TX_wait <= TX_wait + 1'b1; 			// increment TX_wait counter
             end
         end
