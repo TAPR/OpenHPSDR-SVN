@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Thu Aug 03 15:14:12 2006) contains limited information
+This XML file (created on Fri Aug 04 15:01:04 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -23,7 +23,7 @@ to license.txt.
 	<module>quartus_sim</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Thu Aug 03 15:14:12 2006</compilation_end_time>
+	<compilation_end_time>Fri Aug 04 15:01:04 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -36,7 +36,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</project>
 <revision>EP2_LED</revision>
 <compilation_summary>
-	<flow_status>Successful - Thu Aug 03 15:14:12 2006</flow_status>
+	<flow_status>Successful - Fri Aug 04 15:01:04 2006</flow_status>
 	<simulator_setting_name>EP2_LED</simulator_setting_name>
 	<top_level_entity_name>EP2_LED</top_level_entity_name>
 </compilation_summary>
@@ -46,12 +46,11 @@ to license.txt.
 <messages>
 	<warning>Warning: Can&apos;t find signal in vector source file for input pin &quot;|EP2_LED|FLAGB&quot;</warning>
 	<warning>Warning: Can&apos;t find signal in vector source file for input pin &quot;|EP2_LED|FX2_CLK&quot;</warning>
-	<warning>Warning: Can&apos;t display state machine states -- register holding state machine bit &quot;|EP2_LED|state.0011&quot; was synthesized away</warning>
-	<info>Info: Quartus II Simulator was successful. 0 errors, 3 warnings</info>
-	<info>Info: Elapsed time: 00:00:01</info>
-	<info>Info: Processing ended: Thu Aug 03 15:14:12 2006</info>
+	<info>Info: Quartus II Simulator was successful. 0 errors, 2 warnings</info>
+	<info>Info: Elapsed time: 00:00:02</info>
+	<info>Info: Processing ended: Fri Aug 04 15:01:04 2006</info>
 	<info>Info: Vector file EP2_LED.sim.vwf is saved in VWF text format. You can compress it into CVWF format in order to reduce file size. For more details please refer to the Quartus II Help.</info>
-	<info>Info: Number of transitions in simulation is 248</info>
+	<info>Info: Number of transitions in simulation is 234</info>
 </messages>
 <simulator_settings>
 	<row>
@@ -147,9 +146,9 @@ to license.txt.
 <simulator_summary>
 	<simulation_start_time>0 ps</simulation_start_time>
 	<simulation_end_time>1.0 us</simulation_end_time>
-	<simulation_netlist_size>147 nodes</simulation_netlist_size>
-	<simulation_coverage>     29.66 %</simulation_coverage>
-	<total_number_of_transitions>248</total_number_of_transitions>
+	<simulation_netlist_size>137 nodes</simulation_netlist_size>
+	<simulation_coverage>     27.41 %</simulation_coverage>
+	<total_number_of_transitions>234</total_number_of_transitions>
 	<simulation_breakpoints>0</simulation_breakpoints>
 	<family>Cyclone II</family>
 	<device>EP2C5Q208C8</device>

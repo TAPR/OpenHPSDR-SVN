@@ -1,18 +1,15 @@
 
 State Machine - |EP2_LED|state
-Name state.0001 state.1110 state.0010 state.0100 state.0011 state.0101 state.0110 state.0111 state.1000 state.1001 state.1010 state.1011 state.1100 state.1101 state.0000 
-state.0000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-state.1101 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
-state.1100 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
-state.1011 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
-state.1010 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
-state.1001 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
-state.1000 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
-state.0111 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
-state.0110 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
-state.0101 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
-state.0011 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
-state.0100 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
-state.0010 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
-state.1110 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
-state.0001 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+Name state.0001 state.1110 state.0010 state.0100 state.0101 state.0111 state.1000 state.1001 state.1011 state.1100 state.1101 state.0000 
+state.0000 0 0 0 0 0 0 0 0 0 0 0 0 
+state.1101 0 0 0 0 0 0 0 0 0 0 1 1 
+state.1100 0 0 0 0 0 0 0 0 0 1 0 1 
+state.1011 0 0 0 0 0 0 0 0 1 0 0 1 
+state.1001 0 0 0 0 0 0 0 1 0 0 0 1 
+state.1000 0 0 0 0 0 0 1 0 0 0 0 1 
+state.0111 0 0 0 0 0 1 0 0 0 0 0 1 
+state.0101 0 0 0 0 1 0 0 0 0 0 0 1 
+state.0100 0 0 0 1 0 0 0 0 0 0 0 1 
+state.0010 0 0 1 0 0 0 0 0 0 0 0 1 
+state.1110 0 1 0 0 0 0 0 0 0 0 0 1 
+state.0001 1 0 0 0 0 0 0 0 0 0 0 1 

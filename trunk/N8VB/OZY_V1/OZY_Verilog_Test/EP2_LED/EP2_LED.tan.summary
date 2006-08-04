@@ -5,7 +5,7 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 5.249 ns
+Actual Time    : 5.473 ns
 From           : FLAGA
 To             : state.0010
 From Clock     : --
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 9.863 ns
-From           : LEDS[7]~reg0
-To             : LEDS[7]
+Actual Time    : 9.060 ns
+From           : SLEN
+To             : FX2_FD[6]
 From Clock     : IFCLK
 To Clock       : --
 Failed Paths   : 0
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -3.914 ns
+Actual Time    : -3.915 ns
 From           : FX2_FD[12]
 To             : HIGHBYTE[4]
 From Clock     : --
@@ -35,9 +35,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'IFCLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 313.48 MHz ( period = 3.190 ns )
-From           : state.0100
-To             : HIGHBYTE[3]
+Actual Time    : Restricted to 340.02 MHz ( period = 2.941 ns )
+From           : state.0101
+To             : Tx_register[7]
 From Clock     : IFCLK
 To Clock       : IFCLK
 Failed Paths   : 0
