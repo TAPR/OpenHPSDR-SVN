@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Wed Aug 02 16:31:03 2006
+                              4 ; This file generated Fri Aug 04 13:42:01 2006
                               5 ;--------------------------------------------------------
                               6 	.module hpsdr_common
                               7 	.optsdcc -mmcs51 --model-small
@@ -712,10 +712,10 @@
                     0007    712 	ar7 = 0x07
                     0000    713 	ar0 = 0x00
                     0001    714 	ar1 = 0x01
-                            715 ;Initial/src/hpsdr_common.c:35: CPUCS = bmCLKSPD0 | bmCLKOE;	// CPU runs @ 24 MHz  Changed 07/25/2006
+                            715 ;Initial/src/hpsdr_common.c:35: CPUCS = bmCLKSPD1 | bmCLKOE;	// CPU runs @ 48 MHz  Changed 08/04/2006
                             716 ;     genAssign
    04F0 90 E6 00            717 	mov	dptr,#_CPUCS
-   04F3 74 0A               718 	mov	a,#0x0A
+   04F3 74 12               718 	mov	a,#0x12
    04F5 F0                  719 	movx	@dptr,a
                             720 ;Initial/src/hpsdr_common.c:41: CKCON = 0;		// MOVX takes 2 cycles
                             721 ;     genAssign

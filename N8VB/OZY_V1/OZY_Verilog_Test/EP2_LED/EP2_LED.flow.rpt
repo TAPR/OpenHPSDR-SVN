@@ -1,5 +1,5 @@
 Flow report for EP2_LED
-Thu Aug 03 15:13:55 2006
+Fri Aug 04 15:00:58 2006
 Version 6.0 Build 178 04/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Thu Aug 03 15:13:54 2006   ;
+; Flow Status                        ; Successful - Fri Aug 04 15:00:58 2006   ;
 ; Quartus II Version                 ; 6.0 Build 178 04/27/2006 SJ Web Edition ;
 ; Revision Name                      ; EP2_LED                                 ;
 ; Top-level Entity Name              ; EP2_LED                                 ;
@@ -45,8 +45,8 @@ applicable agreement for further details.
 ; Device                             ; EP2C5Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
 ; Met timing requirements            ; Yes                                     ;
-; Total logic elements               ; 52 / 4,608 ( 1 % )                      ;
-; Total registers                    ; 51                                      ;
+; Total logic elements               ; 50 / 4,608 ( 1 % )                      ;
+; Total registers                    ; 49                                      ;
 ; Total pins                         ; 35 / 142 ( 25 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 0 / 119,808 ( 0 % )                     ;
@@ -60,7 +60,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/03/2006 15:13:42 ;
+; Start date & time ; 08/04/2006 15:00:47 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; EP2_LED             ;
 +-------------------+---------------------+
@@ -81,8 +81,8 @@ applicable agreement for further details.
 ; Analysis & Synthesis ; 00:00:01     ;
 ; Fitter               ; 00:00:03     ;
 ; Assembler            ; 00:00:02     ;
-; Timing Analyzer      ; 00:00:00     ;
-; Total                ; 00:00:06     ;
+; Timing Analyzer      ; 00:00:01     ;
+; Total                ; 00:00:07     ;
 +----------------------+--------------+
 
 

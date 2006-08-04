@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Thu Aug 03 15:13:43 2006
+Analysis & Synthesis Status : Successful - Fri Aug 04 15:00:47 2006
 Quartus II Version : 6.0 Build 178 04/27/2006 SJ Web Edition
 Revision Name : EP2_LED
 Top-level Entity Name : EP2_LED
 Family : Cyclone II
-Total logic elements : 51
-Total registers : 51
+Total logic elements : 49
+Total registers : 49
 Total pins : 35
 Total virtual pins : 0
 Total memory bits : 0

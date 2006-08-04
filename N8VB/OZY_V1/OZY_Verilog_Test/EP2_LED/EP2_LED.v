@@ -80,16 +80,11 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 						if(EP2_has_data)
 							begin
 								state <= 4'd4;
-								SLOE <= 1'b0; //assert SLOE								
+								SLOE <= 1'b0; //assert SLOE														
 							end
 						else
 							state <= 4'd2; 
-					end	
-				4'd3:  // skipping over this state for now
-					begin
-						// SLRD <= 1'b0; //assert SLRD
-						state <= 4'd4;
-					end		
+					end					
 				4'd4:
 					begin
 						SLRD <= 1'b0; //assert SLRD
@@ -101,19 +96,15 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 					begin
 						SLRD <= 1'b1; // reset SLRD
 						Tx_register[7:0] <= LEDS[7:0];
-						Tx_register[15:8] <= HIGHBYTE;		
-						state <= 4'd6;
-					end
-				4'd6:
-					begin
-						SLOE <= 1'b1; //reset SLOE
+						Tx_register[15:8] <= HIGHBYTE;
+						SLOE <= 1'b1; //reset SLOE		
 						state <= 4'd7;
-					end
+					end				
 				4'd7:
 					begin
 						if (EP6_has_room)
 							begin
-								FIFO_ADR <= 2'b10; // select EP6
+								FIFO_ADR <= 2'b10; // select EP6								
 								state <= 4'd8;	
 							end
 						else
@@ -122,18 +113,14 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 							end
 					end
 				4'd8:
-					begin
-						state <= 4'd9; // setup wait for FIFO ADR
+					begin						
+						state <= 4'd9; 
 					end
 				4'd9:
-					begin						
-						SLEN <= 1'b1; // drive bus
-						state <= 4'd10;
-					end
-				4'd10: 
 					begin
-						state <= 4'd11; // let data bus stabilize
-					end
+						SLEN <= 1'b1;
+						state <= 4'd11;
+					end				
 				4'd11:
 					begin
 						SLWR <= 1'b0; // assert SLWR
@@ -141,17 +128,17 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 					end							
 				4'd12:
 					begin
-						SLWR <= 1'b1; // reset SLWR						
-						state <= 4'd13; // wait state for SLWR
+						SLWR <= 1'b1; // reset SLWR																		
+						state <= 4'd13; 
 					end
 				4'd13: 
 					begin
+						FIFO_ADR <= 2'b00; // select EP2												
 						state <= 4'd14;
 					end
 				4'd14:
-					begin
-						SLEN <= 1'b0;
-						FIFO_ADR <= 2'b00; // select EP2
+					begin						
+						SLEN <= 1'b0;						
 						state <= 4'd1;
 					end
 				default:

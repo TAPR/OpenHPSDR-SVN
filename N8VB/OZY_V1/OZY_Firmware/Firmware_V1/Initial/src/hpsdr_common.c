@@ -32,7 +32,7 @@ void init_board (void);
 void
 init_hpsdr (void)
 {
-  CPUCS = bmCLKSPD0 | bmCLKOE;	// CPU runs @ 24 MHz  Changed 07/25/2006
+  CPUCS = bmCLKSPD1 | bmCLKOE;	// CPU runs @ 48 MHz  Changed 08/04/2006
                                                         // CLKOUT is Enabled!
                                                         // CLKOUT is the FPGA CLK1
                                                         // bmCLKSPD0 = 24 MHz

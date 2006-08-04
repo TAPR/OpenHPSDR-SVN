@@ -1,0 +1,266 @@
+Analysis & Synthesis report for fifo_test
+Fri Aug 04 15:14:08 2006
+Version 6.0 Build 178 04/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Analysis & Synthesis Source Files Read
+  5. Analysis & Synthesis Resource Usage Summary
+  6. Analysis & Synthesis Resource Utilization by Entity
+  7. State Machine - |fifo_test|state
+  8. General Register Statistics
+  9. Analysis & Synthesis Messages
+ 10. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                 ;
++------------------------------------+-----------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Fri Aug 04 15:14:08 2006   ;
+; Quartus II Version                 ; 6.0 Build 178 04/27/2006 SJ Web Edition ;
+; Revision Name                      ; fifo_test                               ;
+; Top-level Entity Name              ; fifo_test                               ;
+; Family                             ; Cyclone II                              ;
+; Total logic elements               ; 37                                      ;
+; Total registers                    ; 37                                      ;
+; Total pins                         ; 35                                      ;
+; Total virtual pins                 ; 0                                       ;
+; Total memory bits                  ; 0                                       ;
+; Embedded Multiplier 9-bit elements ; 0                                       ;
+; Total PLLs                         ; 0                                       ;
++------------------------------------+-----------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                ;
++--------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                             ; Setting            ; Default Value      ;
++--------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                             ; EP2C5Q208C8        ;                    ;
+; Top-level entity name                                              ; fifo_test          ; fifo_test          ;
+; Family name                                                        ; Cyclone II         ; Stratix            ;
+; Use smart compilation                                              ; Off                ; Off                ;
+; Restructure Multiplexers                                           ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                ; Off                ; Off                ;
+; Preserve fewer node names                                          ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                          ; Off                ; Off                ;
+; Verilog Version                                                    ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                       ; VHDL93             ; VHDL93             ;
+; State Machine Processing                                           ; Auto               ; Auto               ;
+; Extract Verilog State Machines                                     ; On                 ; On                 ;
+; Extract VHDL State Machines                                        ; On                 ; On                 ;
+; Add Pass-Through Logic to Inferred RAMs                            ; On                 ; On                 ;
+; DSP Block Balancing                                                ; Auto               ; Auto               ;
+; Maximum DSP Block Usage                                            ; Unlimited          ; Unlimited          ;
+; NOT Gate Push-Back                                                 ; On                 ; On                 ;
+; Power-Up Don't Care                                                ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                       ; Off                ; Off                ;
+; Remove Duplicate Registers                                         ; On                 ; On                 ;
+; Ignore CARRY Buffers                                               ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                             ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                              ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                          ; Off                ; Off                ;
+; Ignore LCELL Buffers                                               ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                     ; Off                ; Off                ;
+; Optimization Technique -- Cyclone II                               ; Balanced           ; Balanced           ;
+; Carry Chain Length -- Stratix/Stratix GX/Cyclone/MAX II/Cyclone II ; 70                 ; 70                 ;
+; Auto Carry Chains                                                  ; On                 ; On                 ;
+; Auto Open-Drain Pins                                               ; On                 ; On                 ;
+; Remove Duplicate Logic                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                              ; Off                ; Off                ;
+; Perform gate-level register retiming                               ; Off                ; Off                ;
+; Allow register retiming to trade off Tsu/Tco with Fmax             ; On                 ; On                 ;
+; Auto ROM Replacement                                               ; On                 ; On                 ;
+; Auto RAM Replacement                                               ; On                 ; On                 ;
+; Auto Shift Register Replacement                                    ; On                 ; On                 ;
+; Auto Clock Enable Replacement                                      ; On                 ; On                 ;
+; Allow Synchronous Control Signals                                  ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                             ; Off                ; Off                ;
+; Auto Resource Sharing                                              ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                 ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                 ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                      ; Off                ; Off                ;
+; Maximum Number of M4K Memory Blocks                                ; Unlimited          ; Unlimited          ;
+; Ignore translate_off and translate_on Synthesis Directives         ; Off                ; Off                ;
+; Show Parameter Settings Tables in Synthesis Report                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                 ; Off                ; Off                ;
+; Retiming Meta-Stability Register Sequence Length                   ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                       ; Normal compilation ; Normal compilation ;
+; HDL message level                                                  ; Level2             ; Level2             ;
++--------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                               ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                           ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------+
+; fifo_test.v                      ; yes             ; User Verilog HDL File  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test.v ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimated Total logic elements              ; 37    ;
+; Total combinational functions               ; 22    ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 2     ;
+;     -- 3 input functions                    ; 2     ;
+;     -- <=2 input functions                  ; 18    ;
+;         -- Combinational cells for routing  ; 0     ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 8     ;
+;     -- arithmetic mode                      ; 14    ;
+; Total registers                             ; 37    ;
+; I/O pins                                    ; 35    ;
+; Maximum fan-out node                        ; IFCLK ;
+; Maximum fan-out                             ; 37    ;
+; Total fan-out                               ; 157   ;
+; Average fan-out                             ; 1.67  ;
++---------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                 ;
++----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ;
++----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
+; |fifo_test                 ; 22 (22)           ; 37 (37)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 35   ; 0            ; |fifo_test          ;
++----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; State Machine - |fifo_test|state                                                                                   ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+
+; Name       ; state.0001 ; state.0110 ; state.0010 ; state.0101 ; state.0100 ; state.0011 ; state.0111 ; state.0000 ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+
+; state.0000 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ;
+; state.0111 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 1          ;
+; state.0011 ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 1          ;
+; state.0100 ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 1          ;
+; state.0101 ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 1          ;
+; state.0010 ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; state.0110 ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; state.0001 ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 37    ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 2     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.0 Build 178 04/27/2006 SJ Web Edition
+    Info: Processing started: Fri Aug 04 15:14:07 2006
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off fifo_test -c fifo_test
+Info: Found 1 design units, including 1 entities, in source file rxfifo.v
+    Info: Found entity 1: rxfifo
+Info: Found 1 design units, including 1 entities, in source file fifo_test.v
+    Info: Found entity 1: fifo_test
+Info: Elaborating entity "fifo_test" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at fifo_test.v(42): object "EP2_has_data" assigned a value but never read
+Info: Power-up level of register "PKEND~reg0" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "PKEND~reg0" with stuck data_in port to stuck value VCC
+Info: Power-up level of register "SLRD~reg0" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "SLRD~reg0" with stuck data_in port to stuck value VCC
+Info: Power-up level of register "SLOE~reg0" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "SLOE~reg0" with stuck data_in port to stuck value VCC
+Info: Power-up level of register "FIFO_ADR[1]~reg0" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "FIFO_ADR[1]~reg0" with stuck data_in port to stuck value VCC
+Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "Tx_register[0]" merged to single register "counter[0]", power-up level changed
+Info: State machine "|fifo_test|state" contains 8 states
+Info: Selected Auto state machine encoding method for state machine "|fifo_test|state"
+Info: Encoding result for state machine "|fifo_test|state"
+    Info: Completed encoding using 8 state bits
+        Info: Encoded state bit "state.0001"
+        Info: Encoded state bit "state.0110"
+        Info: Encoded state bit "state.0010"
+        Info: Encoded state bit "state.0101"
+        Info: Encoded state bit "state.0100"
+        Info: Encoded state bit "state.0011"
+        Info: Encoded state bit "state.0111"
+        Info: Encoded state bit "state.0000"
+    Info: State "|fifo_test|state.0000" uses code string "00000000"
+    Info: State "|fifo_test|state.0111" uses code string "00000011"
+    Info: State "|fifo_test|state.0011" uses code string "00000101"
+    Info: State "|fifo_test|state.0100" uses code string "00001001"
+    Info: State "|fifo_test|state.0101" uses code string "00010001"
+    Info: State "|fifo_test|state.0010" uses code string "00100001"
+    Info: State "|fifo_test|state.0110" uses code string "01000001"
+    Info: State "|fifo_test|state.0001" uses code string "10000001"
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "SLRD" stuck at VCC
+    Warning: Pin "SLOE" stuck at VCC
+    Warning: Pin "PKEND" stuck at VCC
+    Warning: Pin "FIFO_ADR[0]" stuck at GND
+    Warning: Pin "FIFO_ADR[1]" stuck at VCC
+    Warning: Pin "LEDS[3]" stuck at VCC
+    Warning: Pin "LEDS[4]" stuck at VCC
+    Warning: Pin "LEDS[5]" stuck at VCC
+    Warning: Pin "LEDS[6]" stuck at VCC
+    Warning: Pin "LEDS[7]" stuck at VCC
+Warning: Design contains 1 input pin(s) that do not drive logic
+    Warning: No output dependent on input pin "FX2_CLK"
+Info: Implemented 74 device resources after synthesis - the final resource count might be different
+    Info: Implemented 5 input pins
+    Info: Implemented 14 output pins
+    Info: Implemented 16 bidirectional pins
+    Info: Implemented 39 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 19 warnings
+    Info: Processing ended: Fri Aug 04 15:14:08 2006
+    Info: Elapsed time: 00:00:02
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test.map.smsg.
+
+
