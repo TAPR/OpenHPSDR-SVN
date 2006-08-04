@@ -1,4 +1,4 @@
-// V1.1 23rd  July 2006
+// V1.2 4th August 2006
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH 
 //
@@ -110,6 +110,8 @@
 //
 // Change log: 	Ported from Duplex.v  22 July 2006
 //				Code comments updated 23 July 2006
+//				Altered pin names to agree with PhilC conventions 3 Aug 2006
+//				Changed endian nature of 16 bit words 4 Aug 2006
 //
 // 	
 ////////////////////////////////////////////////////////////
@@ -424,14 +426,14 @@ case (AD_state)									   // see if sync is to be sent
 
 6'd3:	begin
 		if(loop_counter == 0) begin  			// load remainder of sync 
-			register[15:8] <= 8'h7F;
+			register[7:0] <= 8'h7F;
 		end
 		AD_state <= AD_state + 1'b1;		
 		end 
 6'd4:	begin
 		if(loop_counter == 0) begin					// send C&C bytes, this is C0 
 			//register <= {C0[7:2], ~clean_dash, (~clean_dot || ~clean_PTT)};  // used with dot and dash for OZY
-			register[7:0] <= {C0[7:1], ~clean_PTT}; // send PTT status each time 
+			register[15:8] <= {C0[7:1], ~clean_PTT}; // send PTT status each time 
 			rx_avail <= 12'd4095 - sync_Rx_used;  	//  must match rx fifo size 
 			strobe <= 1'b1;
 			end 
@@ -439,14 +441,14 @@ case (AD_state)									   // see if sync is to be sent
 		end
 6'd5:	begin
 		if(loop_counter == 0)begin
-			register <= {RX_wait,TX_wait};			// C1 - RX wait loop counter, C2 - Tx wait loop counter
+			register <= {TX_wait, RX_wait};		// C1 - RX wait loop counter, C2 - Tx wait loop counter
 			strobe <= 1'b1;
 			end
 		AD_state <= AD_state + 1'b1;
 		end
 6'd6:	begin
 		if(loop_counter == 0)begin
-			register <= {rx_avail[11:4],Rx_control_4} ; // C3 - number of bytes in Rx FIFO, C4 - sequence number
+			register <= {Rx_control_4,rx_avail[11:4]}; // C3 - number of bytes in Rx FIFO, C4 - sequence number
 			strobe <= 1'b1;
 			end
 		AD_state <= AD_state + 1'b1;
@@ -575,6 +577,7 @@ reg  [10:0] syncd_write_used; 	// ditto but synced to FX2 clock
 */
 
 reg SLOE;									// FX2 data bus enable - active low
+reg SLEN; 									// Put data on FX2 bus
 reg SLRD;									// FX2 read - active low
 reg SLWR;									// FX2 write - active low 
 reg [1:0] FIFO_ADR;							// FX2 register address 
@@ -595,6 +598,7 @@ case(state_FX)
 	Tx_read_clock <= 1'b0;					// reset Tx fifo read strobe
 	SLRD <= 1'b1;
 	SLOE <= 1'b1;
+	SLEN <= 1'b0;
 	FIFO_ADR <= 2'b00; 						// select EP2
 	state_FX <= 4'd1;
 	end
@@ -617,12 +621,12 @@ case(state_FX)
 // state 3 - assert SLRD 	
 4'd3:begin
 	SLRD <= 1'b0; 
-	state_FX <= 4'd4;
+	Rx_register <= FX2_FD; 
+	state_FX <= 4'd5;
 	end	
 // state 4 - get Rx data 		
 4'd4:begin
-	Rx_register <= FX2_FD; 							
-	state_FX <= 4'd5;
+	state_FX <= 4'd5;  // ******* SKIP THIS 
 	end
 // state 5 - reset SLRD	
 4'd5:begin
@@ -649,28 +653,51 @@ case(state_FX)
 			state_FX <= 4'd9;
 			Tx_read_clock <= 1'b1;				// start transfer from Tx fifo                
 		end
-// state 9 - check Tx FIFO is ready then set Write strobe 
-4'd9: begin
+// state 9 - set SLEN = 1
+4'd9:begin
+		SLEN <= 1'b1;
+		state_FX <= 4'd10;
+	 end
+// state 10 - delay 
+4'd10:begin
+		state_FX <=4'd11;
+	  end
+// state 11- check Tx FIFO is ready then set Write strobe 
+4'd11: begin
             if (EP6_ready) begin  					// if EP6 is ready, write to it and exit this state
 				Tx_read_clock <= 1'b0;				// end of transfer from Tx fifo
                 SLWR <= 0;
-                state_FX <= 4'd10;
+                state_FX <= 4'd12;
             end
             else begin                  			// otherwise, hang out here until fifo is ready
                 SLWR <= 1;
-                state_FX <= 4'd9 ;  
+                state_FX <= 4'd11;  
 				TX_wait <= TX_wait + 1'b1; 			// increment TX_wait counter
             end
         end
-// state 10 - reset SLWR
-4'd10: begin
-		SLWR <= 1;					// *** why do we need this state since SLWR is set in state 0 as well???
-        state_FX <= 4'd0;
+// state 12 - reset SLWR
+4'd12: begin
+		SLWR <= 1;					
+        state_FX <= 4'd13;
 		end
-		
+// state 13 - delay 
+4'd13: begin
+		state_FX <=4'd14;
+	   end
+// state 14 - set SLEN = 0
+4'd14: begin
+		SLEN <= 1'b0;
+		state_FX <= 4'd0;
+	   end 
 	default: state_FX <= 4'd0;
 	endcase
 end
+
+// FX2_FD is tristate when SLEN  is low, otherwise it's the Tx_register value.
+
+assign FX2_FD[15:0] = SLEN ? Tx_register[15:0] : 16'bZ;
+
+
 
 /* 
 
@@ -769,8 +796,8 @@ end
 /////////////////////////////////////////////////////////////
 
 /* 
-	The write clock of the FIFO is FX2_SLRD and the read clock BCLK.
-	Data from the FX2_FIFO is written to the FIFO using FX2_SLRD. Data from the
+	The write clock of the FIFO is SLRD and the read clock BCLK.
+	Data from the FX2_FIFO is written to the FIFO using SLRD. Data from the
 	FIFO is read on the positive edge of BCLK when fifo_enable is high. The 
 	FIFO is 4096 words long. 
 	NB: The output flags are only valid after a read/write clock has taken place
@@ -874,7 +901,7 @@ case(state_PWM)
 	 end
 // state 1 - check for 0x7F  sync character
   1: begin
-		if (Rx_data[15:8] == 8'h7F)begin 				// have middle of sync
+		if (Rx_data[7:0] == 8'h7F)begin 				// have middle of sync
 			sync_count <= sync_count + 9'b1;
 			state_PWM <= 2; 
 		end		
@@ -901,8 +928,8 @@ case(state_PWM)
 	 end
 // state 4 - look for sync again - if true continue else start again 
   4: begin
-		if (Rx_data[15:8] == 8'h7F)begin
-			Rx_control_0 <= Rx_data[7:0];			// We have sync so get Rx_control_0 
+		if (Rx_data[7:0] == 8'h7F)begin
+			Rx_control_0 <= Rx_data[15:8];			// We have sync so get Rx_control_0 
 			LED_sync <= ~LED_sync; 					// toggle sync LED. 
 			state_PWM <= 5; 		
 		end			
@@ -910,14 +937,14 @@ case(state_PWM)
 	 end
 // state 5 - get Rx_control_1 & Rx_control_2
   5: begin
-		Rx_control_1 <= Rx_data[15:8];
-		Rx_control_2 <= Rx_data[7:0];	
+		Rx_control_1 <= Rx_data[7:0];
+		Rx_control_2 <= Rx_data[15:8];	
 		state_PWM <= 6; 	
 	end	
 // state 6 - get Rx_control_3 & Rx_control_4
   6: begin
-		Rx_control_3 <= Rx_data[15:8];
-		Rx_control_4 <= Rx_data[7:0];
+		Rx_control_3 <= Rx_data[7:0];
+		Rx_control_4 <= Rx_data[15:8];
 		state_PWM <= 7; 	
 		end	
 // state 7 - get Left audio
@@ -1048,9 +1075,7 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(FX2_CLK));
 
 */
 
-// FX2_FD is tristate when write is hi, otherwise it's the Tx_register value.
 
-assign FX2_FD[15:0] = SLWR ? 16'bZ : Tx_register[15:0];
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
