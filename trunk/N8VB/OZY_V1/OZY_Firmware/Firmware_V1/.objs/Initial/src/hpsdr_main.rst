@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Fri Aug 04 13:42:00 2006
+                              4 ; This file generated Fri Aug 04 15:56:56 2006
                               5 ;--------------------------------------------------------
                               6 	.module hpsdr_main
                               7 	.optsdcc -mmcs51 --model-small
@@ -702,7 +702,7 @@
                             702 ;--------------------------------------------------------
                             703 	.area CSEG    (CODE)
    01A2                     704 __interrupt_vect:
-   01A2 02 10 55            705 	ljmp	__sdcc_gsinit_startup
+   01A2 02 10 88            705 	ljmp	__sdcc_gsinit_startup
                             706 ;--------------------------------------------------------
                             707 ; global & static initialisations
                             708 ;--------------------------------------------------------
@@ -719,11 +719,11 @@
                             719 ;------------------------------------------------------------
                             720 ;count                     Allocated with name '_isr_tick_count_1_1'
                             721 ;------------------------------------------------------------
-                            722 ;Initial/src/hpsdr_main.c:201: static unsigned char	count = 1;
+                            722 ;Initial/src/hpsdr_main.c:210: static unsigned char	count = 1;
                             723 ;     genAssign
-   104C 75 08 01            724 	mov	_isr_tick_count_1_1,#0x01
+   107F 75 08 01            724 	mov	_isr_tick_count_1_1,#0x01
                             725 	.area GSFINAL (CODE)
-   1068 02 01 A5            726 	ljmp	__sdcc_program_startup
+   109B 02 01 A5            726 	ljmp	__sdcc_program_startup
                             727 ;--------------------------------------------------------
                             728 ; Home
                             729 ;--------------------------------------------------------
@@ -734,7 +734,7 @@
                             734 ;--------------------------------------------------------
                             735 	.area CSEG    (CODE)
    01A5                     736 __sdcc_program_startup:
-   01A5 12 03 D6            737 	lcall	_main
+   01A5 12 04 09            737 	lcall	_main
                             738 ;	return from main will lock up
    01A8 80 FE               739 	sjmp .
                             740 ;------------------------------------------------------------
@@ -790,736 +790,790 @@
    01BB E0                  790 	movx	a,@dptr
    01BC FA                  791 	mov	r2,a
                             792 ;     genCmpEq
-   01BD BA 01 02            793 	cjne	r2,#0x01,00139$
+   01BD BA 01 02            793 	cjne	r2,#0x01,00149$
                             794 ;	Peephole 112.b	changed ljmp to sjmp
-   01C0 80 1A               795 	sjmp	00101$
-   01C2                     796 00139$:
+   01C0 80 20               795 	sjmp	00101$
+   01C2                     796 00149$:
                             797 ;     genCmpEq
-   01C2 BA 02 02            798 	cjne	r2,#0x02,00140$
+   01C2 BA 02 02            798 	cjne	r2,#0x02,00150$
                             799 ;	Peephole 112.b	changed ljmp to sjmp
-   01C5 80 3F               800 	sjmp	00106$
-   01C7                     801 00140$:
+   01C5 80 45               800 	sjmp	00106$
+   01C7                     801 00150$:
                             802 ;     genCmpEq
-   01C7 BA 08 03            803 	cjne	r2,#0x08,00141$
-   01CA 02 02 30            804 	ljmp	00112$
-   01CD                     805 00141$:
+   01C7 BA 08 03            803 	cjne	r2,#0x08,00151$
+   01CA 02 02 36            804 	ljmp	00112$
+   01CD                     805 00151$:
                             806 ;     genCmpEq
-   01CD BA 09 03            807 	cjne	r2,#0x09,00142$
-   01D0 02 02 50            808 	ljmp	00115$
-   01D3                     809 00142$:
+   01CD BA 09 03            807 	cjne	r2,#0x09,00152$
+   01D0 02 02 5A            808 	ljmp	00115$
+   01D3                     809 00152$:
                             810 ;     genCmpEq
-   01D3 BA 0B 03            811 	cjne	r2,#0x0B,00143$
-   01D6 02 02 82            812 	ljmp	00118$
-   01D9                     813 00143$:
-   01D9 02 02 9E            814 	ljmp	00122$
-                            815 ;Initial/src/hpsdr_main.c:69: case VRQ_SET_LED:
-   01DC                     816 00101$:
-                            817 ;Initial/src/hpsdr_main.c:71: switch (wIndexL)
-                            818 ;     genPointerGet
-                            819 ;     genFarPointerGet
-   01DC 90 E6 BC            820 	mov	dptr,#(_SETUPDAT + 0x0004)
-   01DF E0                  821 	movx	a,@dptr
-                            822 ;     genCmpEq
-                            823 ;	Peephole 112.b	changed ljmp to sjmp
-                            824 ;	Peephole 115.b	jump optimization
-   01E0 FA                  825 	mov	r2,a
-   01E1 60 05               826 	jz	00102$
-   01E3                     827 00144$:
-                            828 ;     genCmpEq
-                            829 ;	Peephole 112.b	changed ljmp to sjmp
-                            830 ;Initial/src/hpsdr_main.c:73: case 0:
-                            831 ;	Peephole 112.b	changed ljmp to sjmp
-                            832 ;	Peephole 199	optimized misc jump sequence
-   01E3 BA 01 1C            833 	cjne	r2,#0x01,00104$
-   01E6 80 0D               834 	sjmp	00103$
-                            835 ;00145$:
-   01E8                     836 00102$:
-                            837 ;Initial/src/hpsdr_main.c:74: set_led_0 (wValueL);
-                            838 ;     genPointerGet
-                            839 ;     genFarPointerGet
-   01E8 90 E6 BA            840 	mov	dptr,#(_SETUPDAT + 0x0002)
-   01EB E0                  841 	movx	a,@dptr
-                            842 ;     genCall
-                            843 ;	Peephole 244.c	loading dpl from a instead of r2
-   01EC FA                  844 	mov	r2,a
-   01ED F5 82               845 	mov	dpl,a
-   01EF 12 06 39            846 	lcall	_set_led_0
-                            847 ;Initial/src/hpsdr_main.c:75: break;
-   01F2 02 02 A2            848 	ljmp	00123$
-                            849 ;Initial/src/hpsdr_main.c:77: case 1:
-   01F5                     850 00103$:
-                            851 ;Initial/src/hpsdr_main.c:78: set_led_1 (wValueL);
-                            852 ;     genPointerGet
-                            853 ;     genFarPointerGet
-   01F5 90 E6 BA            854 	mov	dptr,#(_SETUPDAT + 0x0002)
-   01F8 E0                  855 	movx	a,@dptr
-                            856 ;     genCall
-                            857 ;	Peephole 244.c	loading dpl from a instead of r2
-   01F9 FA                  858 	mov	r2,a
-   01FA F5 82               859 	mov	dpl,a
-   01FC 12 06 46            860 	lcall	_set_led_1
-                            861 ;Initial/src/hpsdr_main.c:79: break;
-   01FF 02 02 A2            862 	ljmp	00123$
-                            863 ;Initial/src/hpsdr_main.c:81: default:
-   0202                     864 00104$:
-                            865 ;Initial/src/hpsdr_main.c:82: return 0;
-                            866 ;     genRet
-   0202 75 82 00            867 	mov	dpl,#0x00
-                            868 ;	Peephole 251.a	replaced ljmp to ret with ret
-   0205 22                  869 	ret
-                            870 ;Initial/src/hpsdr_main.c:86: case VRQ_FPGA_LOAD:
-   0206                     871 00106$:
-                            872 ;Initial/src/hpsdr_main.c:88: switch (wIndexL)			// sub-command
-                            873 ;     genPointerGet
-                            874 ;     genFarPointerGet
-   0206 90 E6 BC            875 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0209 E0                  876 	movx	a,@dptr
-                            877 ;     genCmpEq
-                            878 ;	Peephole 112.b	changed ljmp to sjmp
-                            879 ;	Peephole 115.b	jump optimization
-   020A FA                  880 	mov	r2,a
-   020B 60 0A               881 	jz	00107$
-   020D                     882 00146$:
-                            883 ;     genCmpEq
-   020D BA 01 02            884 	cjne	r2,#0x01,00147$
-                            885 ;	Peephole 112.b	changed ljmp to sjmp
-   0210 80 08               886 	sjmp	00108$
-   0212                     887 00147$:
-                            888 ;     genCmpEq
+   01D3 BA 0B 03            811 	cjne	r2,#0x0B,00153$
+   01D6 02 02 8C            812 	ljmp	00118$
+   01D9                     813 00153$:
+                            814 ;     genCmpEq
+   01D9 BA 0C 03            815 	cjne	r2,#0x0C,00154$
+   01DC 02 02 A8            816 	ljmp	00122$
+   01DF                     817 00154$:
+   01DF 02 02 D1            818 	ljmp	00129$
+                            819 ;Initial/src/hpsdr_main.c:69: case VRQ_SET_LED:
+   01E2                     820 00101$:
+                            821 ;Initial/src/hpsdr_main.c:71: switch (wIndexL)
+                            822 ;     genPointerGet
+                            823 ;     genFarPointerGet
+   01E2 90 E6 BC            824 	mov	dptr,#(_SETUPDAT + 0x0004)
+   01E5 E0                  825 	movx	a,@dptr
+                            826 ;     genCmpEq
+                            827 ;	Peephole 112.b	changed ljmp to sjmp
+                            828 ;	Peephole 115.b	jump optimization
+   01E6 FA                  829 	mov	r2,a
+   01E7 60 05               830 	jz	00102$
+   01E9                     831 00155$:
+                            832 ;     genCmpEq
+                            833 ;	Peephole 112.b	changed ljmp to sjmp
+                            834 ;Initial/src/hpsdr_main.c:73: case 0:
+                            835 ;	Peephole 112.b	changed ljmp to sjmp
+                            836 ;	Peephole 199	optimized misc jump sequence
+   01E9 BA 01 1C            837 	cjne	r2,#0x01,00104$
+   01EC 80 0D               838 	sjmp	00103$
+                            839 ;00156$:
+   01EE                     840 00102$:
+                            841 ;Initial/src/hpsdr_main.c:74: set_led_0 (wValueL);
+                            842 ;     genPointerGet
+                            843 ;     genFarPointerGet
+   01EE 90 E6 BA            844 	mov	dptr,#(_SETUPDAT + 0x0002)
+   01F1 E0                  845 	movx	a,@dptr
+                            846 ;     genCall
+                            847 ;	Peephole 244.c	loading dpl from a instead of r2
+   01F2 FA                  848 	mov	r2,a
+   01F3 F5 82               849 	mov	dpl,a
+   01F5 12 06 6C            850 	lcall	_set_led_0
+                            851 ;Initial/src/hpsdr_main.c:75: break;
+   01F8 02 02 D5            852 	ljmp	00130$
+                            853 ;Initial/src/hpsdr_main.c:77: case 1:
+   01FB                     854 00103$:
+                            855 ;Initial/src/hpsdr_main.c:78: set_led_1 (wValueL);
+                            856 ;     genPointerGet
+                            857 ;     genFarPointerGet
+   01FB 90 E6 BA            858 	mov	dptr,#(_SETUPDAT + 0x0002)
+   01FE E0                  859 	movx	a,@dptr
+                            860 ;     genCall
+                            861 ;	Peephole 244.c	loading dpl from a instead of r2
+   01FF FA                  862 	mov	r2,a
+   0200 F5 82               863 	mov	dpl,a
+   0202 12 06 79            864 	lcall	_set_led_1
+                            865 ;Initial/src/hpsdr_main.c:79: break;
+   0205 02 02 D5            866 	ljmp	00130$
+                            867 ;Initial/src/hpsdr_main.c:81: default:
+   0208                     868 00104$:
+                            869 ;Initial/src/hpsdr_main.c:82: return 0;
+                            870 ;     genRet
+   0208 75 82 00            871 	mov	dpl,#0x00
+                            872 ;	Peephole 251.a	replaced ljmp to ret with ret
+   020B 22                  873 	ret
+                            874 ;Initial/src/hpsdr_main.c:86: case VRQ_FPGA_LOAD:
+   020C                     875 00106$:
+                            876 ;Initial/src/hpsdr_main.c:88: switch (wIndexL)			// sub-command
+                            877 ;     genPointerGet
+                            878 ;     genFarPointerGet
+   020C 90 E6 BC            879 	mov	dptr,#(_SETUPDAT + 0x0004)
+   020F E0                  880 	movx	a,@dptr
+                            881 ;     genCmpEq
+                            882 ;	Peephole 112.b	changed ljmp to sjmp
+                            883 ;	Peephole 115.b	jump optimization
+   0210 FA                  884 	mov	r2,a
+   0211 60 0A               885 	jz	00107$
+   0213                     886 00157$:
+                            887 ;     genCmpEq
+   0213 BA 01 02            888 	cjne	r2,#0x01,00158$
                             889 ;	Peephole 112.b	changed ljmp to sjmp
-                            890 ;Initial/src/hpsdr_main.c:90: case FL_BEGIN:
-                            891 ;	Peephole 112.b	changed ljmp to sjmp
-                            892 ;	Peephole 199	optimized misc jump sequence
-   0212 BA 02 17            893 	cjne	r2,#0x02,00110$
-   0215 80 12               894 	sjmp	00109$
-                            895 ;00148$:
-   0217                     896 00107$:
-                            897 ;Initial/src/hpsdr_main.c:91: return fpga_load_begin ();
-                            898 ;     genCall
-                            899 ;     genRet
-                            900 ;	Peephole 251.a	replaced ljmp to ret with ret
-                            901 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0217 02 04 39            902 	ljmp	_fpga_load_begin
-                            903 ;Initial/src/hpsdr_main.c:93: case FL_XFER:
-   021A                     904 00108$:
-                            905 ;Initial/src/hpsdr_main.c:94: get_ep0_data ();
-                            906 ;     genCall
-   021A 12 01 AA            907 	lcall	_get_ep0_data
-                            908 ;Initial/src/hpsdr_main.c:95: return fpga_load_xfer (EP0BUF, EP0BCL);
-                            909 ;     genAssign
-   021D 90 E6 8B            910 	mov	dptr,#_EP0BCL
-   0220 E0                  911 	movx	a,@dptr
-   0221 F5 0F               912 	mov	_fpga_load_xfer_PARM_2,a
-                            913 ;     genCall
-                            914 ;	Peephole 182.a	used 16 bit load of DPTR
-   0223 90 E7 40            915 	mov	dptr,#_EP0BUF
-                            916 ;     genRet
-                            917 ;	Peephole 251.a	replaced ljmp to ret with ret
-                            918 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0226 02 04 C4            919 	ljmp	_fpga_load_xfer
-                            920 ;Initial/src/hpsdr_main.c:97: case FL_END:
-   0229                     921 00109$:
-                            922 ;Initial/src/hpsdr_main.c:98: return fpga_load_end ();
-                            923 ;     genCall
-                            924 ;     genRet
-                            925 ;	Peephole 251.a	replaced ljmp to ret with ret
-                            926 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0229 02 04 D4            927 	ljmp	_fpga_load_end
-                            928 ;Initial/src/hpsdr_main.c:100: default:
-   022C                     929 00110$:
-                            930 ;Initial/src/hpsdr_main.c:101: return 0;
-                            931 ;     genRet
-   022C 75 82 00            932 	mov	dpl,#0x00
-                            933 ;	Peephole 251.a	replaced ljmp to ret with ret
-   022F 22                  934 	ret
-                            935 ;Initial/src/hpsdr_main.c:105: case VRQ_I2C_WRITE:
-   0230                     936 00112$:
-                            937 ;Initial/src/hpsdr_main.c:107: get_ep0_data ();
-                            938 ;     genCall
-   0230 12 01 AA            939 	lcall	_get_ep0_data
-                            940 ;Initial/src/hpsdr_main.c:108: if (!i2c_write (wValueL, EP0BUF, EP0BCL))
-                            941 ;     genPointerGet
-                            942 ;     genFarPointerGet
-   0233 90 E6 BA            943 	mov	dptr,#(_SETUPDAT + 0x0002)
-   0236 E0                  944 	movx	a,@dptr
-   0237 FA                  945 	mov	r2,a
-                            946 ;     genAddrOf
-   0238 75 2B 40            947 	mov	_i2c_write_PARM_2,#_EP0BUF
-   023B 75 2C E7            948 	mov	(_i2c_write_PARM_2 + 1),#(_EP0BUF >> 8)
-                            949 ;     genAssign
-   023E 90 E6 8B            950 	mov	dptr,#_EP0BCL
-   0241 E0                  951 	movx	a,@dptr
-   0242 F5 2D               952 	mov	_i2c_write_PARM_3,a
-                            953 ;     genCall
-   0244 8A 82               954 	mov	dpl,r2
-   0246 12 07 A7            955 	lcall	_i2c_write
-   0249 E5 82               956 	mov	a,dpl
-                            957 ;     genIfx
-                            958 ;     genIfxJump
-                            959 ;	Peephole 109	removed ljmp by inverse jump logic
-                            960 ;Initial/src/hpsdr_main.c:109: return 0;
-                            961 ;     genRet
-                            962 ;	Peephole 256.c	loading dpl with zero from a
-   024B 70 55               963 	jnz	00123$
-   024D                     964 00149$:
-   024D F5 82               965 	mov	dpl,a
-                            966 ;Initial/src/hpsdr_main.c:112: case VRQ_SPI_WRITE:
-                            967 ;	Peephole 112.b	changed ljmp to sjmp
-                            968 ;	Peephole 251.b	replaced sjmp to ret with ret
-   024F 22                  969 	ret
-   0250                     970 00115$:
-                            971 ;Initial/src/hpsdr_main.c:114: get_ep0_data ();
-                            972 ;     genCall
-   0250 12 01 AA            973 	lcall	_get_ep0_data
-                            974 ;Initial/src/hpsdr_main.c:115: if (!spi_write (wValueH, wValueL, wIndexH, wIndexL, EP0BUF, EP0BCL))
-                            975 ;     genPointerGet
-                            976 ;     genFarPointerGet
-   0253 90 E6 BB            977 	mov	dptr,#(_SETUPDAT + 0x0003)
-   0256 E0                  978 	movx	a,@dptr
-   0257 FA                  979 	mov	r2,a
-                            980 ;     genPointerGet
-                            981 ;     genFarPointerGet
-   0258 90 E6 BA            982 	mov	dptr,#(_SETUPDAT + 0x0002)
-   025B E0                  983 	movx	a,@dptr
-   025C F5 16               984 	mov	_spi_write_PARM_2,a
-                            985 ;     genPointerGet
-                            986 ;     genFarPointerGet
-   025E 90 E6 BD            987 	mov	dptr,#(_SETUPDAT + 0x0005)
-   0261 E0                  988 	movx	a,@dptr
-   0262 F5 17               989 	mov	_spi_write_PARM_3,a
-                            990 ;     genPointerGet
-                            991 ;     genFarPointerGet
-   0264 90 E6 BC            992 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0267 E0                  993 	movx	a,@dptr
-   0268 F5 18               994 	mov	_spi_write_PARM_4,a
-                            995 ;     genAddrOf
-   026A 75 19 40            996 	mov	_spi_write_PARM_5,#_EP0BUF
-   026D 75 1A E7            997 	mov	(_spi_write_PARM_5 + 1),#(_EP0BUF >> 8)
-                            998 ;     genAssign
-   0270 90 E6 8B            999 	mov	dptr,#_EP0BCL
-   0273 E0                 1000 	movx	a,@dptr
-   0274 F5 1B              1001 	mov	_spi_write_PARM_6,a
-                           1002 ;     genCall
-   0276 8A 82              1003 	mov	dpl,r2
-   0278 12 0A A3           1004 	lcall	_spi_write
-   027B E5 82              1005 	mov	a,dpl
-                           1006 ;     genIfx
-                           1007 ;     genIfxJump
-                           1008 ;	Peephole 109	removed ljmp by inverse jump logic
-                           1009 ;Initial/src/hpsdr_main.c:116: return 0;
-                           1010 ;     genRet
-                           1011 ;	Peephole 256.c	loading dpl with zero from a
-   027D 70 23              1012 	jnz	00123$
-   027F                    1013 00150$:
-   027F F5 82              1014 	mov	dpl,a
-                           1015 ;Initial/src/hpsdr_main.c:119: case VRQ_I2C_SPEED_SET:
-                           1016 ;	Peephole 112.b	changed ljmp to sjmp
-                           1017 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0281 22                 1018 	ret
-   0282                    1019 00118$:
-                           1020 ;Initial/src/hpsdr_main.c:120: if (wValueL == 1)
-                           1021 ;     genPointerGet
-                           1022 ;     genFarPointerGet
-   0282 90 E6 BA           1023 	mov	dptr,#(_SETUPDAT + 0x0002)
-   0285 E0                 1024 	movx	a,@dptr
-   0286 FA                 1025 	mov	r2,a
-                           1026 ;     genCmpEq
-                           1027 ;	Peephole 112.b	changed ljmp to sjmp
-                           1028 ;	Peephole 199	optimized misc jump sequence
-   0287 BA 01 0A           1029 	cjne	r2,#0x01,00120$
-                           1030 ;00151$:
-                           1031 ;	Peephole 200	removed redundant sjmp
-   028A                    1032 00152$:
-                           1033 ;Initial/src/hpsdr_main.c:121: I2CTL |= bm400KHZ;
-                           1034 ;     genAssign
-                           1035 ;     genOr
-                           1036 ;	Peephole 248.a	optimized or to xdata
-   028A 90 E6 7A           1037 	mov	dptr,#_I2CTL
-   028D E0                 1038 	movx	a,@dptr
-   028E FA                 1039 	mov	r2,a
-   028F 44 01              1040 	orl	a,#0x01
-   0291 F0                 1041 	movx	@dptr,a
-                           1042 ;	Peephole 112.b	changed ljmp to sjmp
-   0292 80 0E              1043 	sjmp	00123$
-   0294                    1044 00120$:
-                           1045 ;Initial/src/hpsdr_main.c:123: I2CTL &= ~bm400KHZ;
-                           1046 ;     genAssign
-                           1047 ;     genAnd
-                           1048 ;	Peephole 248.b	optimized and to xdata
-   0294 90 E6 7A           1049 	mov	dptr,#_I2CTL
-   0297 E0                 1050 	movx	a,@dptr
-   0298 FA                 1051 	mov	r2,a
-   0299 54 FE              1052 	anl	a,#0xFE
-   029B F0                 1053 	movx	@dptr,a
-                           1054 ;Initial/src/hpsdr_main.c:124: break;
-                           1055 ;Initial/src/hpsdr_main.c:126: default:
-                           1056 ;	Peephole 112.b	changed ljmp to sjmp
-   029C 80 04              1057 	sjmp	00123$
-   029E                    1058 00122$:
-                           1059 ;Initial/src/hpsdr_main.c:127: return 0;
-                           1060 ;     genRet
-   029E 75 82 00           1061 	mov	dpl,#0x00
-                           1062 ;Initial/src/hpsdr_main.c:128: }
-                           1063 ;	Peephole 112.b	changed ljmp to sjmp
-                           1064 ;Initial/src/hpsdr_main.c:129: return 1;
-                           1065 ;     genRet
-                           1066 ;	Peephole 237.a	removed sjmp to ret
-   02A1 22                 1067 	ret
-   02A2                    1068 00123$:
-   02A2 75 82 01           1069 	mov	dpl,#0x01
-   02A5                    1070 00124$:
-   02A5 22                 1071 	ret
-                           1072 ;------------------------------------------------------------
-                           1073 ;Allocation info for local variables in function 'app_vendor_IN_cmd'
-                           1074 ;------------------------------------------------------------
-                           1075 ;------------------------------------------------------------
-                           1076 ;Initial/src/hpsdr_main.c:132: unsigned char app_vendor_IN_cmd(void)
-                           1077 ;	-----------------------------------------
-                           1078 ;	 function app_vendor_IN_cmd
-                           1079 ;	-----------------------------------------
-   02A6                    1080 _app_vendor_IN_cmd:
-                           1081 ;Initial/src/hpsdr_main.c:134: switch (bRequest)
-                           1082 ;     genPointerGet
-                           1083 ;     genFarPointerGet
-   02A6 90 E6 B9           1084 	mov	dptr,#(_SETUPDAT + 0x0001)
-   02A9 E0                 1085 	movx	a,@dptr
-   02AA FA                 1086 	mov	r2,a
-                           1087 ;     genCmpEq
-   02AB BA 81 02           1088 	cjne	r2,#0x81,00119$
+   0216 80 08               890 	sjmp	00108$
+   0218                     891 00158$:
+                            892 ;     genCmpEq
+                            893 ;	Peephole 112.b	changed ljmp to sjmp
+                            894 ;Initial/src/hpsdr_main.c:90: case FL_BEGIN:
+                            895 ;	Peephole 112.b	changed ljmp to sjmp
+                            896 ;	Peephole 199	optimized misc jump sequence
+   0218 BA 02 17            897 	cjne	r2,#0x02,00110$
+   021B 80 12               898 	sjmp	00109$
+                            899 ;00159$:
+   021D                     900 00107$:
+                            901 ;Initial/src/hpsdr_main.c:91: return fpga_load_begin ();
+                            902 ;     genCall
+                            903 ;     genRet
+                            904 ;	Peephole 251.a	replaced ljmp to ret with ret
+                            905 ;	Peephole 253.a	replaced lcall/ret with ljmp
+   021D 02 04 6C            906 	ljmp	_fpga_load_begin
+                            907 ;Initial/src/hpsdr_main.c:93: case FL_XFER:
+   0220                     908 00108$:
+                            909 ;Initial/src/hpsdr_main.c:94: get_ep0_data ();
+                            910 ;     genCall
+   0220 12 01 AA            911 	lcall	_get_ep0_data
+                            912 ;Initial/src/hpsdr_main.c:95: return fpga_load_xfer (EP0BUF, EP0BCL);
+                            913 ;     genAssign
+   0223 90 E6 8B            914 	mov	dptr,#_EP0BCL
+   0226 E0                  915 	movx	a,@dptr
+   0227 F5 0F               916 	mov	_fpga_load_xfer_PARM_2,a
+                            917 ;     genCall
+                            918 ;	Peephole 182.a	used 16 bit load of DPTR
+   0229 90 E7 40            919 	mov	dptr,#_EP0BUF
+                            920 ;     genRet
+                            921 ;	Peephole 251.a	replaced ljmp to ret with ret
+                            922 ;	Peephole 253.a	replaced lcall/ret with ljmp
+   022C 02 04 F7            923 	ljmp	_fpga_load_xfer
+                            924 ;Initial/src/hpsdr_main.c:97: case FL_END:
+   022F                     925 00109$:
+                            926 ;Initial/src/hpsdr_main.c:98: return fpga_load_end ();
+                            927 ;     genCall
+                            928 ;     genRet
+                            929 ;	Peephole 251.a	replaced ljmp to ret with ret
+                            930 ;	Peephole 253.a	replaced lcall/ret with ljmp
+   022F 02 05 07            931 	ljmp	_fpga_load_end
+                            932 ;Initial/src/hpsdr_main.c:100: default:
+   0232                     933 00110$:
+                            934 ;Initial/src/hpsdr_main.c:101: return 0;
+                            935 ;     genRet
+   0232 75 82 00            936 	mov	dpl,#0x00
+                            937 ;	Peephole 251.a	replaced ljmp to ret with ret
+   0235 22                  938 	ret
+                            939 ;Initial/src/hpsdr_main.c:105: case VRQ_I2C_WRITE:
+   0236                     940 00112$:
+                            941 ;Initial/src/hpsdr_main.c:107: get_ep0_data ();
+                            942 ;     genCall
+   0236 12 01 AA            943 	lcall	_get_ep0_data
+                            944 ;Initial/src/hpsdr_main.c:108: if (!i2c_write (wValueL, EP0BUF, EP0BCL))
+                            945 ;     genPointerGet
+                            946 ;     genFarPointerGet
+   0239 90 E6 BA            947 	mov	dptr,#(_SETUPDAT + 0x0002)
+   023C E0                  948 	movx	a,@dptr
+   023D FA                  949 	mov	r2,a
+                            950 ;     genAddrOf
+   023E 75 2B 40            951 	mov	_i2c_write_PARM_2,#_EP0BUF
+   0241 75 2C E7            952 	mov	(_i2c_write_PARM_2 + 1),#(_EP0BUF >> 8)
+                            953 ;     genAssign
+   0244 90 E6 8B            954 	mov	dptr,#_EP0BCL
+   0247 E0                  955 	movx	a,@dptr
+   0248 F5 2D               956 	mov	_i2c_write_PARM_3,a
+                            957 ;     genCall
+   024A 8A 82               958 	mov	dpl,r2
+   024C 12 07 DA            959 	lcall	_i2c_write
+   024F E5 82               960 	mov	a,dpl
+                            961 ;     genIfx
+                            962 ;     genIfxJump
+   0251 60 03               963 	jz	00160$
+   0253 02 02 D5            964 	ljmp	00130$
+   0256                     965 00160$:
+                            966 ;Initial/src/hpsdr_main.c:109: return 0;
+                            967 ;     genRet
+   0256 75 82 00            968 	mov	dpl,#0x00
+                            969 ;	Peephole 251.a	replaced ljmp to ret with ret
+   0259 22                  970 	ret
+                            971 ;Initial/src/hpsdr_main.c:112: case VRQ_SPI_WRITE:
+   025A                     972 00115$:
+                            973 ;Initial/src/hpsdr_main.c:114: get_ep0_data ();
+                            974 ;     genCall
+   025A 12 01 AA            975 	lcall	_get_ep0_data
+                            976 ;Initial/src/hpsdr_main.c:115: if (!spi_write (wValueH, wValueL, wIndexH, wIndexL, EP0BUF, EP0BCL))
+                            977 ;     genPointerGet
+                            978 ;     genFarPointerGet
+   025D 90 E6 BB            979 	mov	dptr,#(_SETUPDAT + 0x0003)
+   0260 E0                  980 	movx	a,@dptr
+   0261 FA                  981 	mov	r2,a
+                            982 ;     genPointerGet
+                            983 ;     genFarPointerGet
+   0262 90 E6 BA            984 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0265 E0                  985 	movx	a,@dptr
+   0266 F5 16               986 	mov	_spi_write_PARM_2,a
+                            987 ;     genPointerGet
+                            988 ;     genFarPointerGet
+   0268 90 E6 BD            989 	mov	dptr,#(_SETUPDAT + 0x0005)
+   026B E0                  990 	movx	a,@dptr
+   026C F5 17               991 	mov	_spi_write_PARM_3,a
+                            992 ;     genPointerGet
+                            993 ;     genFarPointerGet
+   026E 90 E6 BC            994 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0271 E0                  995 	movx	a,@dptr
+   0272 F5 18               996 	mov	_spi_write_PARM_4,a
+                            997 ;     genAddrOf
+   0274 75 19 40            998 	mov	_spi_write_PARM_5,#_EP0BUF
+   0277 75 1A E7            999 	mov	(_spi_write_PARM_5 + 1),#(_EP0BUF >> 8)
+                           1000 ;     genAssign
+   027A 90 E6 8B           1001 	mov	dptr,#_EP0BCL
+   027D E0                 1002 	movx	a,@dptr
+   027E F5 1B              1003 	mov	_spi_write_PARM_6,a
+                           1004 ;     genCall
+   0280 8A 82              1005 	mov	dpl,r2
+   0282 12 0A D6           1006 	lcall	_spi_write
+   0285 E5 82              1007 	mov	a,dpl
+                           1008 ;     genIfx
+                           1009 ;     genIfxJump
+                           1010 ;	Peephole 109	removed ljmp by inverse jump logic
+                           1011 ;Initial/src/hpsdr_main.c:116: return 0;
+                           1012 ;     genRet
+                           1013 ;	Peephole 256.c	loading dpl with zero from a
+   0287 70 4C              1014 	jnz	00130$
+   0289                    1015 00161$:
+   0289 F5 82              1016 	mov	dpl,a
+                           1017 ;Initial/src/hpsdr_main.c:119: case VRQ_I2C_SPEED_SET:
+                           1018 ;	Peephole 112.b	changed ljmp to sjmp
+                           1019 ;	Peephole 251.b	replaced sjmp to ret with ret
+   028B 22                 1020 	ret
+   028C                    1021 00118$:
+                           1022 ;Initial/src/hpsdr_main.c:120: if (wValueL == 1)
+                           1023 ;     genPointerGet
+                           1024 ;     genFarPointerGet
+   028C 90 E6 BA           1025 	mov	dptr,#(_SETUPDAT + 0x0002)
+   028F E0                 1026 	movx	a,@dptr
+   0290 FA                 1027 	mov	r2,a
+                           1028 ;     genCmpEq
+                           1029 ;	Peephole 112.b	changed ljmp to sjmp
+                           1030 ;	Peephole 199	optimized misc jump sequence
+   0291 BA 01 0A           1031 	cjne	r2,#0x01,00120$
+                           1032 ;00162$:
+                           1033 ;	Peephole 200	removed redundant sjmp
+   0294                    1034 00163$:
+                           1035 ;Initial/src/hpsdr_main.c:121: I2CTL |= bm400KHZ;
+                           1036 ;     genAssign
+                           1037 ;     genOr
+                           1038 ;	Peephole 248.a	optimized or to xdata
+   0294 90 E6 7A           1039 	mov	dptr,#_I2CTL
+   0297 E0                 1040 	movx	a,@dptr
+   0298 FA                 1041 	mov	r2,a
+   0299 44 01              1042 	orl	a,#0x01
+   029B F0                 1043 	movx	@dptr,a
+                           1044 ;	Peephole 112.b	changed ljmp to sjmp
+   029C 80 37              1045 	sjmp	00130$
+   029E                    1046 00120$:
+                           1047 ;Initial/src/hpsdr_main.c:123: I2CTL &= ~bm400KHZ;
+                           1048 ;     genAssign
+                           1049 ;     genAnd
+                           1050 ;	Peephole 248.b	optimized and to xdata
+   029E 90 E6 7A           1051 	mov	dptr,#_I2CTL
+   02A1 E0                 1052 	movx	a,@dptr
+   02A2 FA                 1053 	mov	r2,a
+   02A3 54 FE              1054 	anl	a,#0xFE
+   02A5 F0                 1055 	movx	@dptr,a
+                           1056 ;Initial/src/hpsdr_main.c:124: break;
+                           1057 ;Initial/src/hpsdr_main.c:126: case VRQ_CPU_SPEED_SET:
+                           1058 ;	Peephole 112.b	changed ljmp to sjmp
+   02A6 80 2D              1059 	sjmp	00130$
+   02A8                    1060 00122$:
+                           1061 ;Initial/src/hpsdr_main.c:127: if (wValueL == 0)
+                           1062 ;     genPointerGet
+                           1063 ;     genFarPointerGet
+   02A8 90 E6 BA           1064 	mov	dptr,#(_SETUPDAT + 0x0002)
+   02AB E0                 1065 	movx	a,@dptr
+                           1066 ;     genCmpEq
+                           1067 ;	Peephole 115.b	jump optimization
+   02AC FA                 1068 	mov	r2,a
+   02AD 60 02              1069 	jz	00165$
+   02AF                    1070 00164$:
+                           1071 ;	Peephole 112.b	changed ljmp to sjmp
+   02AF 80 08              1072 	sjmp	00127$
+   02B1                    1073 00165$:
+                           1074 ;Initial/src/hpsdr_main.c:128: CPUCS = bmCLKOE; // 12 MHz
+                           1075 ;     genAssign
+   02B1 90 E6 00           1076 	mov	dptr,#_CPUCS
+   02B4 74 02              1077 	mov	a,#0x02
+   02B6 F0                 1078 	movx	@dptr,a
+                           1079 ;	Peephole 112.b	changed ljmp to sjmp
+   02B7 80 1C              1080 	sjmp	00130$
+   02B9                    1081 00127$:
+                           1082 ;Initial/src/hpsdr_main.c:129: else if (wValueL == 1)
+                           1083 ;     genPointerGet
+                           1084 ;     genFarPointerGet
+   02B9 90 E6 BA           1085 	mov	dptr,#(_SETUPDAT + 0x0002)
+   02BC E0                 1086 	movx	a,@dptr
+   02BD FA                 1087 	mov	r2,a
+                           1088 ;     genCmpEq
                            1089 ;	Peephole 112.b	changed ljmp to sjmp
-   02AE 80 14              1090 	sjmp	00101$
-   02B0                    1091 00119$:
-                           1092 ;     genCmpEq
-   02B0 BA 82 02           1093 	cjne	r2,#0x82,00120$
-                           1094 ;	Peephole 112.b	changed ljmp to sjmp
-   02B3 80 3D              1095 	sjmp	00104$
-   02B5                    1096 00120$:
-                           1097 ;     genCmpEq
-   02B5 BA 84 03           1098 	cjne	r2,#0x84,00121$
-   02B8 02 03 31           1099 	ljmp	00107$
-   02BB                    1100 00121$:
-                           1101 ;     genCmpEq
-   02BB BA 85 03           1102 	cjne	r2,#0x85,00122$
-   02BE 02 03 4B           1103 	ljmp	00108$
-   02C1                    1104 00122$:
-   02C1 02 03 65           1105 	ljmp	00109$
-                           1106 ;Initial/src/hpsdr_main.c:136: case VRQ_I2C_READ:
-   02C4                    1107 00101$:
-                           1108 ;Initial/src/hpsdr_main.c:137: if (!i2c_read (wValueL, EP0BUF, wLengthL))
-                           1109 ;     genPointerGet
-                           1110 ;     genFarPointerGet
-   02C4 90 E6 BA           1111 	mov	dptr,#(_SETUPDAT + 0x0002)
-   02C7 E0                 1112 	movx	a,@dptr
-   02C8 FA                 1113 	mov	r2,a
-                           1114 ;     genAddrOf
-   02C9 75 2B 40           1115 	mov	_i2c_read_PARM_2,#_EP0BUF
-   02CC 75 2C E7           1116 	mov	(_i2c_read_PARM_2 + 1),#(_EP0BUF >> 8)
-                           1117 ;     genPointerGet
-                           1118 ;     genFarPointerGet
-   02CF 90 E6 BE           1119 	mov	dptr,#(_SETUPDAT + 0x0006)
-   02D2 E0                 1120 	movx	a,@dptr
-   02D3 F5 2D              1121 	mov	_i2c_read_PARM_3,a
-                           1122 ;     genCall
-   02D5 8A 82              1123 	mov	dpl,r2
-   02D7 12 06 D0           1124 	lcall	_i2c_read
-   02DA E5 82              1125 	mov	a,dpl
-                           1126 ;     genIfx
-                           1127 ;     genIfxJump
-                           1128 ;	Peephole 109	removed ljmp by inverse jump logic
-                           1129 ;Initial/src/hpsdr_main.c:138: return 0;
-                           1130 ;     genRet
-                           1131 ;	Peephole 256.c	loading dpl with zero from a
-   02DC 70 03              1132 	jnz	00103$
-   02DE                    1133 00123$:
-   02DE F5 82              1134 	mov	dpl,a
-                           1135 ;	Peephole 251.a	replaced ljmp to ret with ret
-   02E0 22                 1136 	ret
-   02E1                    1137 00103$:
-                           1138 ;Initial/src/hpsdr_main.c:139: EP0BCH = 0;
-                           1139 ;     genAssign
-   02E1 90 E6 8A           1140 	mov	dptr,#_EP0BCH
-                           1141 ;	Peephole 181	changed mov to clr
-   02E4 E4                 1142 	clr	a
-   02E5 F0                 1143 	movx	@dptr,a
-                           1144 ;Initial/src/hpsdr_main.c:140: EP0BCL = wLengthL;
-                           1145 ;     genPointerGet
-                           1146 ;     genFarPointerGet
-   02E6 90 E6 BE           1147 	mov	dptr,#(_SETUPDAT + 0x0006)
-   02E9 E0                 1148 	movx	a,@dptr
-                           1149 ;     genAssign
-                           1150 ;	Peephole 100	removed redundant mov
-   02EA FA                 1151 	mov	r2,a
-   02EB 90 E6 8B           1152 	mov	dptr,#_EP0BCL
-   02EE F0                 1153 	movx	@dptr,a
-                           1154 ;Initial/src/hpsdr_main.c:141: break;
-   02EF 02 03 69           1155 	ljmp	00110$
-                           1156 ;Initial/src/hpsdr_main.c:143: case VRQ_SPI_READ:
-   02F2                    1157 00104$:
-                           1158 ;Initial/src/hpsdr_main.c:144: if (!spi_read (wValueH, wValueL, wIndexH, wIndexL, EP0BUF, wLengthL))
-                           1159 ;     genPointerGet
-                           1160 ;     genFarPointerGet
-   02F2 90 E6 BB           1161 	mov	dptr,#(_SETUPDAT + 0x0003)
-   02F5 E0                 1162 	movx	a,@dptr
-   02F6 FA                 1163 	mov	r2,a
-                           1164 ;     genPointerGet
-                           1165 ;     genFarPointerGet
-   02F7 90 E6 BA           1166 	mov	dptr,#(_SETUPDAT + 0x0002)
-   02FA E0                 1167 	movx	a,@dptr
-   02FB F5 10              1168 	mov	_spi_read_PARM_2,a
-                           1169 ;     genPointerGet
-                           1170 ;     genFarPointerGet
-   02FD 90 E6 BD           1171 	mov	dptr,#(_SETUPDAT + 0x0005)
-   0300 E0                 1172 	movx	a,@dptr
-   0301 F5 11              1173 	mov	_spi_read_PARM_3,a
-                           1174 ;     genPointerGet
-                           1175 ;     genFarPointerGet
-   0303 90 E6 BC           1176 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0306 E0                 1177 	movx	a,@dptr
-   0307 F5 12              1178 	mov	_spi_read_PARM_4,a
-                           1179 ;     genAddrOf
-   0309 75 13 40           1180 	mov	_spi_read_PARM_5,#_EP0BUF
-   030C 75 14 E7           1181 	mov	(_spi_read_PARM_5 + 1),#(_EP0BUF >> 8)
-                           1182 ;     genPointerGet
-                           1183 ;     genFarPointerGet
-   030F 90 E6 BE           1184 	mov	dptr,#(_SETUPDAT + 0x0006)
-   0312 E0                 1185 	movx	a,@dptr
-   0313 F5 15              1186 	mov	_spi_read_PARM_6,a
-                           1187 ;     genCall
-   0315 8A 82              1188 	mov	dpl,r2
-   0317 12 0A 35           1189 	lcall	_spi_read
-   031A E5 82              1190 	mov	a,dpl
-                           1191 ;     genIfx
-                           1192 ;     genIfxJump
-                           1193 ;	Peephole 109	removed ljmp by inverse jump logic
-                           1194 ;Initial/src/hpsdr_main.c:145: return 0;
-                           1195 ;     genRet
-                           1196 ;	Peephole 256.c	loading dpl with zero from a
-   031C 70 03              1197 	jnz	00106$
-   031E                    1198 00124$:
-   031E F5 82              1199 	mov	dpl,a
-                           1200 ;	Peephole 112.b	changed ljmp to sjmp
-                           1201 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0320 22                 1202 	ret
-   0321                    1203 00106$:
-                           1204 ;Initial/src/hpsdr_main.c:146: EP0BCH = 0;
-                           1205 ;     genAssign
-   0321 90 E6 8A           1206 	mov	dptr,#_EP0BCH
-                           1207 ;	Peephole 181	changed mov to clr
-   0324 E4                 1208 	clr	a
-   0325 F0                 1209 	movx	@dptr,a
-                           1210 ;Initial/src/hpsdr_main.c:147: EP0BCL = wLengthL;
-                           1211 ;     genPointerGet
-                           1212 ;     genFarPointerGet
-   0326 90 E6 BE           1213 	mov	dptr,#(_SETUPDAT + 0x0006)
-   0329 E0                 1214 	movx	a,@dptr
-                           1215 ;     genAssign
-                           1216 ;	Peephole 100	removed redundant mov
-   032A FA                 1217 	mov	r2,a
-   032B 90 E6 8B           1218 	mov	dptr,#_EP0BCL
-   032E F0                 1219 	movx	@dptr,a
-                           1220 ;Initial/src/hpsdr_main.c:148: break;
-                           1221 ;Initial/src/hpsdr_main.c:150: case VRQ_EEPROM_TYPE_READ:
-                           1222 ;	Peephole 112.b	changed ljmp to sjmp
-   032F 80 38              1223 	sjmp	00110$
-   0331                    1224 00107$:
-                           1225 ;Initial/src/hpsdr_main.c:151: EP0BUF[0] = I2CS & bmID; // 16 = 2 byte, 8 = 1 byte
-                           1226 ;     genAssign
-   0331 90 E6 78           1227 	mov	dptr,#_I2CS
-   0334 E0                 1228 	movx	a,@dptr
-   0335 FA                 1229 	mov	r2,a
-                           1230 ;     genAnd
-   0336 53 02 18           1231 	anl	ar2,#0x18
-                           1232 ;     genPointerSet
-                           1233 ;     genFarPointerSet
-   0339 90 E7 40           1234 	mov	dptr,#_EP0BUF
-   033C EA                 1235 	mov	a,r2
-   033D F0                 1236 	movx	@dptr,a
-                           1237 ;Initial/src/hpsdr_main.c:152: EP0BCH = 0;
-                           1238 ;     genAssign
-   033E 90 E6 8A           1239 	mov	dptr,#_EP0BCH
-                           1240 ;	Peephole 181	changed mov to clr
-   0341 E4                 1241 	clr	a
-   0342 F0                 1242 	movx	@dptr,a
-                           1243 ;Initial/src/hpsdr_main.c:153: EP0BCL = 1;
-                           1244 ;     genAssign
-   0343 90 E6 8B           1245 	mov	dptr,#_EP0BCL
-   0346 74 01              1246 	mov	a,#0x01
-   0348 F0                 1247 	movx	@dptr,a
-                           1248 ;Initial/src/hpsdr_main.c:154: break;
-                           1249 ;Initial/src/hpsdr_main.c:156: case VRQ_I2C_SPEED_READ:
-                           1250 ;	Peephole 112.b	changed ljmp to sjmp
-   0349 80 1E              1251 	sjmp	00110$
-   034B                    1252 00108$:
-                           1253 ;Initial/src/hpsdr_main.c:157: EP0BUF[0] = I2CTL & bm400KHZ; // 0 = 100 kHz, 1 = 400 kHz
-                           1254 ;     genAssign
-   034B 90 E6 7A           1255 	mov	dptr,#_I2CTL
-   034E E0                 1256 	movx	a,@dptr
-   034F FA                 1257 	mov	r2,a
-                           1258 ;     genAnd
-   0350 53 02 01           1259 	anl	ar2,#0x01
-                           1260 ;     genPointerSet
-                           1261 ;     genFarPointerSet
-   0353 90 E7 40           1262 	mov	dptr,#_EP0BUF
-   0356 EA                 1263 	mov	a,r2
-   0357 F0                 1264 	movx	@dptr,a
-                           1265 ;Initial/src/hpsdr_main.c:158: EP0BCH = 0;
-                           1266 ;     genAssign
-   0358 90 E6 8A           1267 	mov	dptr,#_EP0BCH
-                           1268 ;	Peephole 181	changed mov to clr
-   035B E4                 1269 	clr	a
-   035C F0                 1270 	movx	@dptr,a
-                           1271 ;Initial/src/hpsdr_main.c:159: EP0BCL = 1;
-                           1272 ;     genAssign
-   035D 90 E6 8B           1273 	mov	dptr,#_EP0BCL
-   0360 74 01              1274 	mov	a,#0x01
-   0362 F0                 1275 	movx	@dptr,a
-                           1276 ;Initial/src/hpsdr_main.c:160: break;
-                           1277 ;Initial/src/hpsdr_main.c:162: default:
-                           1278 ;	Peephole 112.b	changed ljmp to sjmp
-   0363 80 04              1279 	sjmp	00110$
-   0365                    1280 00109$:
-                           1281 ;Initial/src/hpsdr_main.c:163: return 0;
-                           1282 ;     genRet
-   0365 75 82 00           1283 	mov	dpl,#0x00
-                           1284 ;Initial/src/hpsdr_main.c:164: }
-                           1285 ;	Peephole 112.b	changed ljmp to sjmp
-                           1286 ;Initial/src/hpsdr_main.c:165: return 1;
-                           1287 ;     genRet
-                           1288 ;	Peephole 237.a	removed sjmp to ret
-   0368 22                 1289 	ret
-   0369                    1290 00110$:
-   0369 75 82 01           1291 	mov	dpl,#0x01
-   036C                    1292 00111$:
-   036C 22                 1293 	ret
-                           1294 ;------------------------------------------------------------
-                           1295 ;Allocation info for local variables in function 'app_vendor_cmd'
-                           1296 ;------------------------------------------------------------
-                           1297 ;------------------------------------------------------------
-                           1298 ;Initial/src/hpsdr_main.c:169: app_vendor_cmd (void)
-                           1299 ;	-----------------------------------------
-                           1300 ;	 function app_vendor_cmd
-                           1301 ;	-----------------------------------------
-   036D                    1302 _app_vendor_cmd:
-                           1303 ;Initial/src/hpsdr_main.c:171: if (bRequestType == VRT_VENDOR_IN)
-                           1304 ;     genPointerGet
-                           1305 ;     genFarPointerGet
-   036D 90 E6 B8           1306 	mov	dptr,#_SETUPDAT
-   0370 E0                 1307 	movx	a,@dptr
-   0371 FA                 1308 	mov	r2,a
-                           1309 ;     genCmpEq
-                           1310 ;	Peephole 112.b	changed ljmp to sjmp
-                           1311 ;	Peephole 199	optimized misc jump sequence
-   0372 BA C0 03           1312 	cjne	r2,#0xC0,00105$
-                           1313 ;00111$:
-                           1314 ;	Peephole 200	removed redundant sjmp
-   0375                    1315 00112$:
-                           1316 ;Initial/src/hpsdr_main.c:172: return app_vendor_IN_cmd();
-                           1317 ;     genCall
-                           1318 ;     genRet
-                           1319 ;	Peephole 112.b	changed ljmp to sjmp
-                           1320 ;	Peephole 251.b	replaced sjmp to ret with ret
-                           1321 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0375 02 02 A6           1322 	ljmp	_app_vendor_IN_cmd
-   0378                    1323 00105$:
-                           1324 ;Initial/src/hpsdr_main.c:173: else if (bRequestType == VRT_VENDOR_OUT)
-                           1325 ;     genPointerGet
-                           1326 ;     genFarPointerGet
-   0378 90 E6 B8           1327 	mov	dptr,#_SETUPDAT
-   037B E0                 1328 	movx	a,@dptr
-   037C FA                 1329 	mov	r2,a
-                           1330 ;     genCmpEq
-                           1331 ;	Peephole 112.b	changed ljmp to sjmp
-                           1332 ;	Peephole 199	optimized misc jump sequence
-   037D BA 40 03           1333 	cjne	r2,#0x40,00102$
-                           1334 ;00113$:
-                           1335 ;	Peephole 200	removed redundant sjmp
-   0380                    1336 00114$:
-                           1337 ;Initial/src/hpsdr_main.c:174: return app_vendor_OUT_cmd();
-                           1338 ;     genCall
-                           1339 ;     genRet
-                           1340 ;	Peephole 112.b	changed ljmp to sjmp
-                           1341 ;Initial/src/hpsdr_main.c:176: return 0;    // invalid bRequestType
-                           1342 ;     genRet
-                           1343 ;	Peephole 237.a	removed sjmp to ret
-                           1344 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0380 02 01 B8           1345 	ljmp	_app_vendor_OUT_cmd
-   0383                    1346 00102$:
-   0383 75 82 00           1347 	mov	dpl,#0x00
-   0386                    1348 00107$:
-   0386 22                 1349 	ret
+                           1090 ;	Peephole 199	optimized misc jump sequence
+   02BE BA 01 08           1091 	cjne	r2,#0x01,00124$
+                           1092 ;00166$:
+                           1093 ;	Peephole 200	removed redundant sjmp
+   02C1                    1094 00167$:
+                           1095 ;Initial/src/hpsdr_main.c:130: CPUCS = bmCLKSPD0 | bmCLKOE; // 24 MHz
+                           1096 ;     genAssign
+   02C1 90 E6 00           1097 	mov	dptr,#_CPUCS
+   02C4 74 0A              1098 	mov	a,#0x0A
+   02C6 F0                 1099 	movx	@dptr,a
+                           1100 ;	Peephole 112.b	changed ljmp to sjmp
+   02C7 80 0C              1101 	sjmp	00130$
+   02C9                    1102 00124$:
+                           1103 ;Initial/src/hpsdr_main.c:132: CPUCS = bmCLKSPD1 | bmCLKOE; // 48 MHz
+                           1104 ;     genAssign
+   02C9 90 E6 00           1105 	mov	dptr,#_CPUCS
+   02CC 74 12              1106 	mov	a,#0x12
+   02CE F0                 1107 	movx	@dptr,a
+                           1108 ;Initial/src/hpsdr_main.c:133: break;
+                           1109 ;Initial/src/hpsdr_main.c:135: default:
+                           1110 ;	Peephole 112.b	changed ljmp to sjmp
+   02CF 80 04              1111 	sjmp	00130$
+   02D1                    1112 00129$:
+                           1113 ;Initial/src/hpsdr_main.c:136: return 0;
+                           1114 ;     genRet
+   02D1 75 82 00           1115 	mov	dpl,#0x00
+                           1116 ;Initial/src/hpsdr_main.c:137: }
+                           1117 ;	Peephole 112.b	changed ljmp to sjmp
+                           1118 ;Initial/src/hpsdr_main.c:138: return 1;
+                           1119 ;     genRet
+                           1120 ;	Peephole 237.a	removed sjmp to ret
+   02D4 22                 1121 	ret
+   02D5                    1122 00130$:
+   02D5 75 82 01           1123 	mov	dpl,#0x01
+   02D8                    1124 00131$:
+   02D8 22                 1125 	ret
+                           1126 ;------------------------------------------------------------
+                           1127 ;Allocation info for local variables in function 'app_vendor_IN_cmd'
+                           1128 ;------------------------------------------------------------
+                           1129 ;------------------------------------------------------------
+                           1130 ;Initial/src/hpsdr_main.c:141: unsigned char app_vendor_IN_cmd(void)
+                           1131 ;	-----------------------------------------
+                           1132 ;	 function app_vendor_IN_cmd
+                           1133 ;	-----------------------------------------
+   02D9                    1134 _app_vendor_IN_cmd:
+                           1135 ;Initial/src/hpsdr_main.c:143: switch (bRequest)
+                           1136 ;     genPointerGet
+                           1137 ;     genFarPointerGet
+   02D9 90 E6 B9           1138 	mov	dptr,#(_SETUPDAT + 0x0001)
+   02DC E0                 1139 	movx	a,@dptr
+   02DD FA                 1140 	mov	r2,a
+                           1141 ;     genCmpEq
+   02DE BA 81 02           1142 	cjne	r2,#0x81,00119$
+                           1143 ;	Peephole 112.b	changed ljmp to sjmp
+   02E1 80 14              1144 	sjmp	00101$
+   02E3                    1145 00119$:
+                           1146 ;     genCmpEq
+   02E3 BA 82 02           1147 	cjne	r2,#0x82,00120$
+                           1148 ;	Peephole 112.b	changed ljmp to sjmp
+   02E6 80 3D              1149 	sjmp	00104$
+   02E8                    1150 00120$:
+                           1151 ;     genCmpEq
+   02E8 BA 84 03           1152 	cjne	r2,#0x84,00121$
+   02EB 02 03 64           1153 	ljmp	00107$
+   02EE                    1154 00121$:
+                           1155 ;     genCmpEq
+   02EE BA 85 03           1156 	cjne	r2,#0x85,00122$
+   02F1 02 03 7E           1157 	ljmp	00108$
+   02F4                    1158 00122$:
+   02F4 02 03 98           1159 	ljmp	00109$
+                           1160 ;Initial/src/hpsdr_main.c:145: case VRQ_I2C_READ:
+   02F7                    1161 00101$:
+                           1162 ;Initial/src/hpsdr_main.c:146: if (!i2c_read (wValueL, EP0BUF, wLengthL))
+                           1163 ;     genPointerGet
+                           1164 ;     genFarPointerGet
+   02F7 90 E6 BA           1165 	mov	dptr,#(_SETUPDAT + 0x0002)
+   02FA E0                 1166 	movx	a,@dptr
+   02FB FA                 1167 	mov	r2,a
+                           1168 ;     genAddrOf
+   02FC 75 2B 40           1169 	mov	_i2c_read_PARM_2,#_EP0BUF
+   02FF 75 2C E7           1170 	mov	(_i2c_read_PARM_2 + 1),#(_EP0BUF >> 8)
+                           1171 ;     genPointerGet
+                           1172 ;     genFarPointerGet
+   0302 90 E6 BE           1173 	mov	dptr,#(_SETUPDAT + 0x0006)
+   0305 E0                 1174 	movx	a,@dptr
+   0306 F5 2D              1175 	mov	_i2c_read_PARM_3,a
+                           1176 ;     genCall
+   0308 8A 82              1177 	mov	dpl,r2
+   030A 12 07 03           1178 	lcall	_i2c_read
+   030D E5 82              1179 	mov	a,dpl
+                           1180 ;     genIfx
+                           1181 ;     genIfxJump
+                           1182 ;	Peephole 109	removed ljmp by inverse jump logic
+                           1183 ;Initial/src/hpsdr_main.c:147: return 0;
+                           1184 ;     genRet
+                           1185 ;	Peephole 256.c	loading dpl with zero from a
+   030F 70 03              1186 	jnz	00103$
+   0311                    1187 00123$:
+   0311 F5 82              1188 	mov	dpl,a
+                           1189 ;	Peephole 251.a	replaced ljmp to ret with ret
+   0313 22                 1190 	ret
+   0314                    1191 00103$:
+                           1192 ;Initial/src/hpsdr_main.c:148: EP0BCH = 0;
+                           1193 ;     genAssign
+   0314 90 E6 8A           1194 	mov	dptr,#_EP0BCH
+                           1195 ;	Peephole 181	changed mov to clr
+   0317 E4                 1196 	clr	a
+   0318 F0                 1197 	movx	@dptr,a
+                           1198 ;Initial/src/hpsdr_main.c:149: EP0BCL = wLengthL;
+                           1199 ;     genPointerGet
+                           1200 ;     genFarPointerGet
+   0319 90 E6 BE           1201 	mov	dptr,#(_SETUPDAT + 0x0006)
+   031C E0                 1202 	movx	a,@dptr
+                           1203 ;     genAssign
+                           1204 ;	Peephole 100	removed redundant mov
+   031D FA                 1205 	mov	r2,a
+   031E 90 E6 8B           1206 	mov	dptr,#_EP0BCL
+   0321 F0                 1207 	movx	@dptr,a
+                           1208 ;Initial/src/hpsdr_main.c:150: break;
+   0322 02 03 9C           1209 	ljmp	00110$
+                           1210 ;Initial/src/hpsdr_main.c:152: case VRQ_SPI_READ:
+   0325                    1211 00104$:
+                           1212 ;Initial/src/hpsdr_main.c:153: if (!spi_read (wValueH, wValueL, wIndexH, wIndexL, EP0BUF, wLengthL))
+                           1213 ;     genPointerGet
+                           1214 ;     genFarPointerGet
+   0325 90 E6 BB           1215 	mov	dptr,#(_SETUPDAT + 0x0003)
+   0328 E0                 1216 	movx	a,@dptr
+   0329 FA                 1217 	mov	r2,a
+                           1218 ;     genPointerGet
+                           1219 ;     genFarPointerGet
+   032A 90 E6 BA           1220 	mov	dptr,#(_SETUPDAT + 0x0002)
+   032D E0                 1221 	movx	a,@dptr
+   032E F5 10              1222 	mov	_spi_read_PARM_2,a
+                           1223 ;     genPointerGet
+                           1224 ;     genFarPointerGet
+   0330 90 E6 BD           1225 	mov	dptr,#(_SETUPDAT + 0x0005)
+   0333 E0                 1226 	movx	a,@dptr
+   0334 F5 11              1227 	mov	_spi_read_PARM_3,a
+                           1228 ;     genPointerGet
+                           1229 ;     genFarPointerGet
+   0336 90 E6 BC           1230 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0339 E0                 1231 	movx	a,@dptr
+   033A F5 12              1232 	mov	_spi_read_PARM_4,a
+                           1233 ;     genAddrOf
+   033C 75 13 40           1234 	mov	_spi_read_PARM_5,#_EP0BUF
+   033F 75 14 E7           1235 	mov	(_spi_read_PARM_5 + 1),#(_EP0BUF >> 8)
+                           1236 ;     genPointerGet
+                           1237 ;     genFarPointerGet
+   0342 90 E6 BE           1238 	mov	dptr,#(_SETUPDAT + 0x0006)
+   0345 E0                 1239 	movx	a,@dptr
+   0346 F5 15              1240 	mov	_spi_read_PARM_6,a
+                           1241 ;     genCall
+   0348 8A 82              1242 	mov	dpl,r2
+   034A 12 0A 68           1243 	lcall	_spi_read
+   034D E5 82              1244 	mov	a,dpl
+                           1245 ;     genIfx
+                           1246 ;     genIfxJump
+                           1247 ;	Peephole 109	removed ljmp by inverse jump logic
+                           1248 ;Initial/src/hpsdr_main.c:154: return 0;
+                           1249 ;     genRet
+                           1250 ;	Peephole 256.c	loading dpl with zero from a
+   034F 70 03              1251 	jnz	00106$
+   0351                    1252 00124$:
+   0351 F5 82              1253 	mov	dpl,a
+                           1254 ;	Peephole 112.b	changed ljmp to sjmp
+                           1255 ;	Peephole 251.b	replaced sjmp to ret with ret
+   0353 22                 1256 	ret
+   0354                    1257 00106$:
+                           1258 ;Initial/src/hpsdr_main.c:155: EP0BCH = 0;
+                           1259 ;     genAssign
+   0354 90 E6 8A           1260 	mov	dptr,#_EP0BCH
+                           1261 ;	Peephole 181	changed mov to clr
+   0357 E4                 1262 	clr	a
+   0358 F0                 1263 	movx	@dptr,a
+                           1264 ;Initial/src/hpsdr_main.c:156: EP0BCL = wLengthL;
+                           1265 ;     genPointerGet
+                           1266 ;     genFarPointerGet
+   0359 90 E6 BE           1267 	mov	dptr,#(_SETUPDAT + 0x0006)
+   035C E0                 1268 	movx	a,@dptr
+                           1269 ;     genAssign
+                           1270 ;	Peephole 100	removed redundant mov
+   035D FA                 1271 	mov	r2,a
+   035E 90 E6 8B           1272 	mov	dptr,#_EP0BCL
+   0361 F0                 1273 	movx	@dptr,a
+                           1274 ;Initial/src/hpsdr_main.c:157: break;
+                           1275 ;Initial/src/hpsdr_main.c:159: case VRQ_EEPROM_TYPE_READ:
+                           1276 ;	Peephole 112.b	changed ljmp to sjmp
+   0362 80 38              1277 	sjmp	00110$
+   0364                    1278 00107$:
+                           1279 ;Initial/src/hpsdr_main.c:160: EP0BUF[0] = I2CS & bmID; // 16 = 2 byte, 8 = 1 byte
+                           1280 ;     genAssign
+   0364 90 E6 78           1281 	mov	dptr,#_I2CS
+   0367 E0                 1282 	movx	a,@dptr
+   0368 FA                 1283 	mov	r2,a
+                           1284 ;     genAnd
+   0369 53 02 18           1285 	anl	ar2,#0x18
+                           1286 ;     genPointerSet
+                           1287 ;     genFarPointerSet
+   036C 90 E7 40           1288 	mov	dptr,#_EP0BUF
+   036F EA                 1289 	mov	a,r2
+   0370 F0                 1290 	movx	@dptr,a
+                           1291 ;Initial/src/hpsdr_main.c:161: EP0BCH = 0;
+                           1292 ;     genAssign
+   0371 90 E6 8A           1293 	mov	dptr,#_EP0BCH
+                           1294 ;	Peephole 181	changed mov to clr
+   0374 E4                 1295 	clr	a
+   0375 F0                 1296 	movx	@dptr,a
+                           1297 ;Initial/src/hpsdr_main.c:162: EP0BCL = 1;
+                           1298 ;     genAssign
+   0376 90 E6 8B           1299 	mov	dptr,#_EP0BCL
+   0379 74 01              1300 	mov	a,#0x01
+   037B F0                 1301 	movx	@dptr,a
+                           1302 ;Initial/src/hpsdr_main.c:163: break;
+                           1303 ;Initial/src/hpsdr_main.c:165: case VRQ_I2C_SPEED_READ:
+                           1304 ;	Peephole 112.b	changed ljmp to sjmp
+   037C 80 1E              1305 	sjmp	00110$
+   037E                    1306 00108$:
+                           1307 ;Initial/src/hpsdr_main.c:166: EP0BUF[0] = I2CTL & bm400KHZ; // 0 = 100 kHz, 1 = 400 kHz
+                           1308 ;     genAssign
+   037E 90 E6 7A           1309 	mov	dptr,#_I2CTL
+   0381 E0                 1310 	movx	a,@dptr
+   0382 FA                 1311 	mov	r2,a
+                           1312 ;     genAnd
+   0383 53 02 01           1313 	anl	ar2,#0x01
+                           1314 ;     genPointerSet
+                           1315 ;     genFarPointerSet
+   0386 90 E7 40           1316 	mov	dptr,#_EP0BUF
+   0389 EA                 1317 	mov	a,r2
+   038A F0                 1318 	movx	@dptr,a
+                           1319 ;Initial/src/hpsdr_main.c:167: EP0BCH = 0;
+                           1320 ;     genAssign
+   038B 90 E6 8A           1321 	mov	dptr,#_EP0BCH
+                           1322 ;	Peephole 181	changed mov to clr
+   038E E4                 1323 	clr	a
+   038F F0                 1324 	movx	@dptr,a
+                           1325 ;Initial/src/hpsdr_main.c:168: EP0BCL = 1;
+                           1326 ;     genAssign
+   0390 90 E6 8B           1327 	mov	dptr,#_EP0BCL
+   0393 74 01              1328 	mov	a,#0x01
+   0395 F0                 1329 	movx	@dptr,a
+                           1330 ;Initial/src/hpsdr_main.c:169: break;
+                           1331 ;Initial/src/hpsdr_main.c:171: default:
+                           1332 ;	Peephole 112.b	changed ljmp to sjmp
+   0396 80 04              1333 	sjmp	00110$
+   0398                    1334 00109$:
+                           1335 ;Initial/src/hpsdr_main.c:172: return 0;
+                           1336 ;     genRet
+   0398 75 82 00           1337 	mov	dpl,#0x00
+                           1338 ;Initial/src/hpsdr_main.c:173: }
+                           1339 ;	Peephole 112.b	changed ljmp to sjmp
+                           1340 ;Initial/src/hpsdr_main.c:174: return 1;
+                           1341 ;     genRet
+                           1342 ;	Peephole 237.a	removed sjmp to ret
+   039B 22                 1343 	ret
+   039C                    1344 00110$:
+   039C 75 82 01           1345 	mov	dpl,#0x01
+   039F                    1346 00111$:
+   039F 22                 1347 	ret
+                           1348 ;------------------------------------------------------------
+                           1349 ;Allocation info for local variables in function 'app_vendor_cmd'
                            1350 ;------------------------------------------------------------
-                           1351 ;Allocation info for local variables in function 'main_loop'
-                           1352 ;------------------------------------------------------------
-                           1353 ;------------------------------------------------------------
-                           1354 ;Initial/src/hpsdr_main.c:180: main_loop (void)
+                           1351 ;------------------------------------------------------------
+                           1352 ;Initial/src/hpsdr_main.c:178: app_vendor_cmd (void)
+                           1353 ;	-----------------------------------------
+                           1354 ;	 function app_vendor_cmd
                            1355 ;	-----------------------------------------
-                           1356 ;	 function main_loop
-                           1357 ;	-----------------------------------------
-   0387                    1358 _main_loop:
-                           1359 ;Initial/src/hpsdr_main.c:183: while (1)
-   0387                    1360 00105$:
-                           1361 ;Initial/src/hpsdr_main.c:185: if (usb_setup_packet_avail ())
-                           1362 ;     genIfx
-                           1363 ;     genIfxJump
-                           1364 ;	Peephole 111	removed ljmp by inverse jump logic
-   0387 30 03 05           1365 	jnb	__usb_got_SUDAV,00102$
-   038A                    1366 00111$:
-                           1367 ;Initial/src/hpsdr_main.c:186: usb_handle_setup_packet ();
-                           1368 ;     genCall
-   038A 12 0F E6           1369 	lcall	_usb_handle_setup_packet
-                           1370 ;	Peephole 112.b	changed ljmp to sjmp
-   038D 80 F8              1371 	sjmp	00105$
-   038F                    1372 00102$:
-                           1373 ;Initial/src/hpsdr_main.c:188: putchar(32);
-                           1374 ;     genCall
-   038F 75 82 20           1375 	mov	dpl,#0x20
-   0392 12 05 F4           1376 	lcall	_putchar
-                           1377 ;	Peephole 112.b	changed ljmp to sjmp
-   0395 80 F0              1378 	sjmp	00105$
-   0397                    1379 00107$:
-   0397 22                 1380 	ret
-                           1381 ;------------------------------------------------------------
-                           1382 ;Allocation info for local variables in function 'isr_tick'
-                           1383 ;------------------------------------------------------------
-                           1384 ;count                     Allocated with name '_isr_tick_count_1_1'
-                           1385 ;------------------------------------------------------------
-                           1386 ;Initial/src/hpsdr_main.c:199: isr_tick (void) interrupt
-                           1387 ;	-----------------------------------------
-                           1388 ;	 function isr_tick
-                           1389 ;	-----------------------------------------
-   0398                    1390 _isr_tick:
-   0398 C0 E0              1391 	push	acc
-                           1392 ;Initial/src/hpsdr_main.c:202: if (--count == 0)
-                           1393 ;     genMinus
-                           1394 ;     genMinusDec
-   039A 15 08              1395 	dec	_isr_tick_count_1_1
-                           1396 ;     genCmpEq
-   039C E5 08              1397 	mov	a,_isr_tick_count_1_1
-                           1398 ;	Peephole 162	removed sjmp by inverse jump logic
-   039E 60 02              1399 	jz	00107$
-   03A0                    1400 00106$:
-                           1401 ;	Peephole 112.b	changed ljmp to sjmp
-   03A0 80 06              1402 	sjmp	00102$
-   03A2                    1403 00107$:
-                           1404 ;Initial/src/hpsdr_main.c:204: count = 50;
-                           1405 ;     genAssign
-   03A2 75 08 32           1406 	mov	_isr_tick_count_1_1,#0x32
-                           1407 ;Initial/src/hpsdr_main.c:205: HPSDR_LED_REG ^= bmLED0;
-                           1408 ;     genXor
-   03A5 63 A0 40           1409 	xrl	_IOC,#0x40
-   03A8                    1410 00102$:
-                           1411 ;Initial/src/hpsdr_main.c:207: clear_timer_irq ();
-                           1412 ;     genAssign
-   03A8 C2 CF              1413 	clr	_TF2
-   03AA                    1414 00103$:
-   03AA D0 E0              1415 	pop	acc
-   03AC 32                 1416 	reti
-                           1417 ;	eliminated unneeded push/pop psw
-                           1418 ;	eliminated unneeded push/pop dpl
-                           1419 ;	eliminated unneeded push/pop dph
-                           1420 ;	eliminated unneeded push/pop b
-                           1421 ;------------------------------------------------------------
-                           1422 ;Allocation info for local variables in function 'patch_usb_descriptors'
-                           1423 ;------------------------------------------------------------
-                           1424 ;hw_rev                    Allocated with name '_patch_usb_descriptors_hw_rev_1_1'
-                           1425 ;serial_no                 Allocated with name '_patch_usb_descriptors_serial_no_1_1'
-                           1426 ;------------------------------------------------------------
-                           1427 ;Initial/src/hpsdr_main.c:215: patch_usb_descriptors(void)
-                           1428 ;	-----------------------------------------
-                           1429 ;	 function patch_usb_descriptors
-                           1430 ;	-----------------------------------------
-   03AD                    1431 _patch_usb_descriptors:
-                           1432 ;Initial/src/hpsdr_main.c:220: eeprom_read(I2C_ADDR_BOOT, HW_REV_OFFSET, &hw_rev, 1);	// LSB of device id
-                           1433 ;     genAddrOf
-   03AD 75 0A 00           1434 	mov	_eeprom_read_PARM_3,#_patch_usb_descriptors_hw_rev_1_1
-   03B0 75 0B 20           1435 	mov	(_eeprom_read_PARM_3 + 1),#(_patch_usb_descriptors_hw_rev_1_1 >> 8)
-                           1436 ;     genAssign
-   03B3 75 09 05           1437 	mov	_eeprom_read_PARM_2,#0x05
-                           1438 ;     genAssign
-   03B6 75 0C 01           1439 	mov	_eeprom_read_PARM_4,#0x01
-                           1440 ;     genCall
-   03B9 75 82 51           1441 	mov	dpl,#0x51
-   03BC 12 04 05           1442 	lcall	_eeprom_read
-                           1443 ;Initial/src/hpsdr_main.c:222: usb_desc_hw_rev_binary_patch_location_0[0] = hw_rev;
-                           1444 ;     genAssign
-   03BF 90 20 00           1445 	mov	dptr,#_patch_usb_descriptors_hw_rev_1_1
-   03C2 E0                 1446 	movx	a,@dptr
-                           1447 ;     genPointerSet
-                           1448 ;     genFarPointerSet
-                           1449 ;	Peephole 100	removed redundant mov
-   03C3 FA                 1450 	mov	r2,a
-   03C4 90 E0 0C           1451 	mov	dptr,#_usb_desc_hw_rev_binary_patch_location_0
-   03C7 F0                 1452 	movx	@dptr,a
-                           1453 ;Initial/src/hpsdr_main.c:223: usb_desc_hw_rev_binary_patch_location_1[0] = hw_rev;
-                           1454 ;     genPointerSet
-                           1455 ;     genFarPointerSet
-   03C8 90 E0 56           1456 	mov	dptr,#_usb_desc_hw_rev_binary_patch_location_1
-   03CB EA                 1457 	mov	a,r2
-   03CC F0                 1458 	movx	@dptr,a
-                           1459 ;Initial/src/hpsdr_main.c:224: usb_desc_hw_rev_ascii_patch_location_0[0] = hw_rev + '0';     // FIXME if we get > 9
-                           1460 ;     genPlus
-   03CD 74 30              1461 	mov	a,#0x30
-                           1462 ;	Peephole 236.a	used r2 instead of ar2
-   03CF 2A                 1463 	add	a,r2
-                           1464 ;     genPointerSet
-                           1465 ;     genFarPointerSet
-                           1466 ;	Peephole 100	removed redundant mov
-   03D0 FA                 1467 	mov	r2,a
-   03D1 90 E0 D0           1468 	mov	dptr,#_usb_desc_hw_rev_ascii_patch_location_0
-   03D4 F0                 1469 	movx	@dptr,a
-   03D5                    1470 00101$:
-   03D5 22                 1471 	ret
-                           1472 ;------------------------------------------------------------
-                           1473 ;Allocation info for local variables in function 'main'
-                           1474 ;------------------------------------------------------------
+   03A0                    1356 _app_vendor_cmd:
+                           1357 ;Initial/src/hpsdr_main.c:180: if (bRequestType == VRT_VENDOR_IN)
+                           1358 ;     genPointerGet
+                           1359 ;     genFarPointerGet
+   03A0 90 E6 B8           1360 	mov	dptr,#_SETUPDAT
+   03A3 E0                 1361 	movx	a,@dptr
+   03A4 FA                 1362 	mov	r2,a
+                           1363 ;     genCmpEq
+                           1364 ;	Peephole 112.b	changed ljmp to sjmp
+                           1365 ;	Peephole 199	optimized misc jump sequence
+   03A5 BA C0 03           1366 	cjne	r2,#0xC0,00105$
+                           1367 ;00111$:
+                           1368 ;	Peephole 200	removed redundant sjmp
+   03A8                    1369 00112$:
+                           1370 ;Initial/src/hpsdr_main.c:181: return app_vendor_IN_cmd();
+                           1371 ;     genCall
+                           1372 ;     genRet
+                           1373 ;	Peephole 112.b	changed ljmp to sjmp
+                           1374 ;	Peephole 251.b	replaced sjmp to ret with ret
+                           1375 ;	Peephole 253.a	replaced lcall/ret with ljmp
+   03A8 02 02 D9           1376 	ljmp	_app_vendor_IN_cmd
+   03AB                    1377 00105$:
+                           1378 ;Initial/src/hpsdr_main.c:182: else if (bRequestType == VRT_VENDOR_OUT)
+                           1379 ;     genPointerGet
+                           1380 ;     genFarPointerGet
+   03AB 90 E6 B8           1381 	mov	dptr,#_SETUPDAT
+   03AE E0                 1382 	movx	a,@dptr
+   03AF FA                 1383 	mov	r2,a
+                           1384 ;     genCmpEq
+                           1385 ;	Peephole 112.b	changed ljmp to sjmp
+                           1386 ;	Peephole 199	optimized misc jump sequence
+   03B0 BA 40 03           1387 	cjne	r2,#0x40,00102$
+                           1388 ;00113$:
+                           1389 ;	Peephole 200	removed redundant sjmp
+   03B3                    1390 00114$:
+                           1391 ;Initial/src/hpsdr_main.c:183: return app_vendor_OUT_cmd();
+                           1392 ;     genCall
+                           1393 ;     genRet
+                           1394 ;	Peephole 112.b	changed ljmp to sjmp
+                           1395 ;Initial/src/hpsdr_main.c:185: return 0;    // invalid bRequestType
+                           1396 ;     genRet
+                           1397 ;	Peephole 237.a	removed sjmp to ret
+                           1398 ;	Peephole 253.a	replaced lcall/ret with ljmp
+   03B3 02 01 B8           1399 	ljmp	_app_vendor_OUT_cmd
+   03B6                    1400 00102$:
+   03B6 75 82 00           1401 	mov	dpl,#0x00
+   03B9                    1402 00107$:
+   03B9 22                 1403 	ret
+                           1404 ;------------------------------------------------------------
+                           1405 ;Allocation info for local variables in function 'main_loop'
+                           1406 ;------------------------------------------------------------
+                           1407 ;------------------------------------------------------------
+                           1408 ;Initial/src/hpsdr_main.c:189: main_loop (void)
+                           1409 ;	-----------------------------------------
+                           1410 ;	 function main_loop
+                           1411 ;	-----------------------------------------
+   03BA                    1412 _main_loop:
+                           1413 ;Initial/src/hpsdr_main.c:192: while (1)
+   03BA                    1414 00105$:
+                           1415 ;Initial/src/hpsdr_main.c:194: if (usb_setup_packet_avail ())
+                           1416 ;     genIfx
+                           1417 ;     genIfxJump
+                           1418 ;	Peephole 111	removed ljmp by inverse jump logic
+   03BA 30 03 05           1419 	jnb	__usb_got_SUDAV,00102$
+   03BD                    1420 00111$:
+                           1421 ;Initial/src/hpsdr_main.c:195: usb_handle_setup_packet ();
+                           1422 ;     genCall
+   03BD 12 10 19           1423 	lcall	_usb_handle_setup_packet
+                           1424 ;	Peephole 112.b	changed ljmp to sjmp
+   03C0 80 F8              1425 	sjmp	00105$
+   03C2                    1426 00102$:
+                           1427 ;Initial/src/hpsdr_main.c:197: putchar(32);
+                           1428 ;     genCall
+   03C2 75 82 20           1429 	mov	dpl,#0x20
+   03C5 12 06 27           1430 	lcall	_putchar
+                           1431 ;	Peephole 112.b	changed ljmp to sjmp
+   03C8 80 F0              1432 	sjmp	00105$
+   03CA                    1433 00107$:
+   03CA 22                 1434 	ret
+                           1435 ;------------------------------------------------------------
+                           1436 ;Allocation info for local variables in function 'isr_tick'
+                           1437 ;------------------------------------------------------------
+                           1438 ;count                     Allocated with name '_isr_tick_count_1_1'
+                           1439 ;------------------------------------------------------------
+                           1440 ;Initial/src/hpsdr_main.c:208: isr_tick (void) interrupt
+                           1441 ;	-----------------------------------------
+                           1442 ;	 function isr_tick
+                           1443 ;	-----------------------------------------
+   03CB                    1444 _isr_tick:
+   03CB C0 E0              1445 	push	acc
+                           1446 ;Initial/src/hpsdr_main.c:211: if (--count == 0)
+                           1447 ;     genMinus
+                           1448 ;     genMinusDec
+   03CD 15 08              1449 	dec	_isr_tick_count_1_1
+                           1450 ;     genCmpEq
+   03CF E5 08              1451 	mov	a,_isr_tick_count_1_1
+                           1452 ;	Peephole 162	removed sjmp by inverse jump logic
+   03D1 60 02              1453 	jz	00107$
+   03D3                    1454 00106$:
+                           1455 ;	Peephole 112.b	changed ljmp to sjmp
+   03D3 80 06              1456 	sjmp	00102$
+   03D5                    1457 00107$:
+                           1458 ;Initial/src/hpsdr_main.c:213: count = 50;
+                           1459 ;     genAssign
+   03D5 75 08 32           1460 	mov	_isr_tick_count_1_1,#0x32
+                           1461 ;Initial/src/hpsdr_main.c:214: HPSDR_LED_REG ^= bmLED0;
+                           1462 ;     genXor
+   03D8 63 A0 40           1463 	xrl	_IOC,#0x40
+   03DB                    1464 00102$:
+                           1465 ;Initial/src/hpsdr_main.c:216: clear_timer_irq ();
+                           1466 ;     genAssign
+   03DB C2 CF              1467 	clr	_TF2
+   03DD                    1468 00103$:
+   03DD D0 E0              1469 	pop	acc
+   03DF 32                 1470 	reti
+                           1471 ;	eliminated unneeded push/pop psw
+                           1472 ;	eliminated unneeded push/pop dpl
+                           1473 ;	eliminated unneeded push/pop dph
+                           1474 ;	eliminated unneeded push/pop b
                            1475 ;------------------------------------------------------------
-                           1476 ;Initial/src/hpsdr_main.c:235: main (void)
-                           1477 ;	-----------------------------------------
-                           1478 ;	 function main
-                           1479 ;	-----------------------------------------
-   03D6                    1480 _main:
-                           1481 ;Initial/src/hpsdr_main.c:237: init_hpsdr();
-                           1482 ;     genCall
-   03D6 12 04 F0           1483 	lcall	_init_hpsdr
-                           1484 ;Initial/src/hpsdr_main.c:239: set_led_0 (1);
-                           1485 ;     genCall
-   03D9 75 82 01           1486 	mov	dpl,#0x01
-   03DC 12 06 39           1487 	lcall	_set_led_0
-                           1488 ;Initial/src/hpsdr_main.c:240: set_led_1 (0);
-                           1489 ;     genCall
-   03DF 75 82 00           1490 	mov	dpl,#0x00
-   03E2 12 06 46           1491 	lcall	_set_led_1
-                           1492 ;Initial/src/hpsdr_main.c:242: EA = 0;		// disable all interrupts
-                           1493 ;     genAssign
-   03E5 C2 AF              1494 	clr	_EA
-                           1495 ;Initial/src/hpsdr_main.c:244: patch_usb_descriptors();
-                           1496 ;     genCall
-   03E7 12 03 AD           1497 	lcall	_patch_usb_descriptors
-                           1498 ;Initial/src/hpsdr_main.c:246: setup_autovectors ();
-                           1499 ;     genCall
-   03EA 12 09 53           1500 	lcall	_setup_autovectors
-                           1501 ;Initial/src/hpsdr_main.c:247: usb_install_handlers ();
-                           1502 ;     genCall
-   03ED 12 0C B8           1503 	lcall	_usb_install_handlers
-                           1504 ;Initial/src/hpsdr_main.c:248: hook_timer_tick ((unsigned short) isr_tick);
-                           1505 ;     genCast
-   03F0 7A 98              1506 	mov	r2,#_isr_tick
-   03F2 7B 03              1507 	mov	r3,#(_isr_tick >> 8)
-                           1508 ;     genCall
-   03F4 8A 82              1509 	mov	dpl,r2
-   03F6 8B 83              1510 	mov	dph,r3
-   03F8 12 0B D7           1511 	lcall	_hook_timer_tick
-                           1512 ;Initial/src/hpsdr_main.c:250: EIEX4 = 1;	// disable INT4 FIXME
-                           1513 ;     genAssign
-   03FB D2 EA              1514 	setb	_EIEX4
-                           1515 ;Initial/src/hpsdr_main.c:251: EA = 1;			// global interrupt enable
-                           1516 ;     genAssign
-   03FD D2 AF              1517 	setb	_EA
-                           1518 ;Initial/src/hpsdr_main.c:253: fx2_renumerate ();	// simulates disconnect / reconnect
-                           1519 ;     genCall
-   03FF 12 06 AA           1520 	lcall	_fx2_renumerate
-                           1521 ;Initial/src/hpsdr_main.c:255: main_loop ();
-                           1522 ;     genCall
-                           1523 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0402 02 03 87           1524 	ljmp	_main_loop
-                           1525 	.area CSEG    (CODE)
+                           1476 ;Allocation info for local variables in function 'patch_usb_descriptors'
+                           1477 ;------------------------------------------------------------
+                           1478 ;hw_rev                    Allocated with name '_patch_usb_descriptors_hw_rev_1_1'
+                           1479 ;serial_no                 Allocated with name '_patch_usb_descriptors_serial_no_1_1'
+                           1480 ;------------------------------------------------------------
+                           1481 ;Initial/src/hpsdr_main.c:224: patch_usb_descriptors(void)
+                           1482 ;	-----------------------------------------
+                           1483 ;	 function patch_usb_descriptors
+                           1484 ;	-----------------------------------------
+   03E0                    1485 _patch_usb_descriptors:
+                           1486 ;Initial/src/hpsdr_main.c:229: eeprom_read(I2C_ADDR_BOOT, HW_REV_OFFSET, &hw_rev, 1);	// LSB of device id
+                           1487 ;     genAddrOf
+   03E0 75 0A 00           1488 	mov	_eeprom_read_PARM_3,#_patch_usb_descriptors_hw_rev_1_1
+   03E3 75 0B 20           1489 	mov	(_eeprom_read_PARM_3 + 1),#(_patch_usb_descriptors_hw_rev_1_1 >> 8)
+                           1490 ;     genAssign
+   03E6 75 09 05           1491 	mov	_eeprom_read_PARM_2,#0x05
+                           1492 ;     genAssign
+   03E9 75 0C 01           1493 	mov	_eeprom_read_PARM_4,#0x01
+                           1494 ;     genCall
+   03EC 75 82 51           1495 	mov	dpl,#0x51
+   03EF 12 04 38           1496 	lcall	_eeprom_read
+                           1497 ;Initial/src/hpsdr_main.c:231: usb_desc_hw_rev_binary_patch_location_0[0] = hw_rev;
+                           1498 ;     genAssign
+   03F2 90 20 00           1499 	mov	dptr,#_patch_usb_descriptors_hw_rev_1_1
+   03F5 E0                 1500 	movx	a,@dptr
+                           1501 ;     genPointerSet
+                           1502 ;     genFarPointerSet
+                           1503 ;	Peephole 100	removed redundant mov
+   03F6 FA                 1504 	mov	r2,a
+   03F7 90 E0 0C           1505 	mov	dptr,#_usb_desc_hw_rev_binary_patch_location_0
+   03FA F0                 1506 	movx	@dptr,a
+                           1507 ;Initial/src/hpsdr_main.c:232: usb_desc_hw_rev_binary_patch_location_1[0] = hw_rev;
+                           1508 ;     genPointerSet
+                           1509 ;     genFarPointerSet
+   03FB 90 E0 56           1510 	mov	dptr,#_usb_desc_hw_rev_binary_patch_location_1
+   03FE EA                 1511 	mov	a,r2
+   03FF F0                 1512 	movx	@dptr,a
+                           1513 ;Initial/src/hpsdr_main.c:233: usb_desc_hw_rev_ascii_patch_location_0[0] = hw_rev + '0';     // FIXME if we get > 9
+                           1514 ;     genPlus
+   0400 74 30              1515 	mov	a,#0x30
+                           1516 ;	Peephole 236.a	used r2 instead of ar2
+   0402 2A                 1517 	add	a,r2
+                           1518 ;     genPointerSet
+                           1519 ;     genFarPointerSet
+                           1520 ;	Peephole 100	removed redundant mov
+   0403 FA                 1521 	mov	r2,a
+   0404 90 E0 D0           1522 	mov	dptr,#_usb_desc_hw_rev_ascii_patch_location_0
+   0407 F0                 1523 	movx	@dptr,a
+   0408                    1524 00101$:
+   0408 22                 1525 	ret
+                           1526 ;------------------------------------------------------------
+                           1527 ;Allocation info for local variables in function 'main'
+                           1528 ;------------------------------------------------------------
+                           1529 ;------------------------------------------------------------
+                           1530 ;Initial/src/hpsdr_main.c:244: main (void)
+                           1531 ;	-----------------------------------------
+                           1532 ;	 function main
+                           1533 ;	-----------------------------------------
+   0409                    1534 _main:
+                           1535 ;Initial/src/hpsdr_main.c:246: init_hpsdr();
+                           1536 ;     genCall
+   0409 12 05 23           1537 	lcall	_init_hpsdr
+                           1538 ;Initial/src/hpsdr_main.c:248: set_led_0 (1);
+                           1539 ;     genCall
+   040C 75 82 01           1540 	mov	dpl,#0x01
+   040F 12 06 6C           1541 	lcall	_set_led_0
+                           1542 ;Initial/src/hpsdr_main.c:249: set_led_1 (0);
+                           1543 ;     genCall
+   0412 75 82 00           1544 	mov	dpl,#0x00
+   0415 12 06 79           1545 	lcall	_set_led_1
+                           1546 ;Initial/src/hpsdr_main.c:251: EA = 0;		// disable all interrupts
+                           1547 ;     genAssign
+   0418 C2 AF              1548 	clr	_EA
+                           1549 ;Initial/src/hpsdr_main.c:253: patch_usb_descriptors();
+                           1550 ;     genCall
+   041A 12 03 E0           1551 	lcall	_patch_usb_descriptors
+                           1552 ;Initial/src/hpsdr_main.c:255: setup_autovectors ();
+                           1553 ;     genCall
+   041D 12 09 86           1554 	lcall	_setup_autovectors
+                           1555 ;Initial/src/hpsdr_main.c:256: usb_install_handlers ();
+                           1556 ;     genCall
+   0420 12 0C EB           1557 	lcall	_usb_install_handlers
+                           1558 ;Initial/src/hpsdr_main.c:257: hook_timer_tick ((unsigned short) isr_tick);
+                           1559 ;     genCast
+   0423 7A CB              1560 	mov	r2,#_isr_tick
+   0425 7B 03              1561 	mov	r3,#(_isr_tick >> 8)
+                           1562 ;     genCall
+   0427 8A 82              1563 	mov	dpl,r2
+   0429 8B 83              1564 	mov	dph,r3
+   042B 12 0C 0A           1565 	lcall	_hook_timer_tick
+                           1566 ;Initial/src/hpsdr_main.c:259: EIEX4 = 1;	// disable INT4 FIXME
+                           1567 ;     genAssign
+   042E D2 EA              1568 	setb	_EIEX4
+                           1569 ;Initial/src/hpsdr_main.c:260: EA = 1;			// global interrupt enable
+                           1570 ;     genAssign
+   0430 D2 AF              1571 	setb	_EA
+                           1572 ;Initial/src/hpsdr_main.c:262: fx2_renumerate ();	// simulates disconnect / reconnect
+                           1573 ;     genCall
+   0432 12 06 DD           1574 	lcall	_fx2_renumerate
+                           1575 ;Initial/src/hpsdr_main.c:264: main_loop ();
+                           1576 ;     genCall
+                           1577 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   0435 02 03 BA           1578 	ljmp	_main_loop
+                           1579 	.area CSEG    (CODE)

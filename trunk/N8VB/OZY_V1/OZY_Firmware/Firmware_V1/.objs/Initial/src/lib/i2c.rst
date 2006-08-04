@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Fri Aug 04 13:42:02 2006
+                              4 ; This file generated Fri Aug 04 15:56:57 2006
                               5 ;--------------------------------------------------------
                               6 	.module i2c
                               7 	.optsdcc -mmcs51 --model-small
@@ -713,7 +713,7 @@
                             713 ;	-----------------------------------------
                             714 ;	 function i2c_read
                             715 ;	-----------------------------------------
-   06D0                     716 _i2c_read:
+   0703                     716 _i2c_read:
                     0002    717 	ar2 = 0x02
                     0003    718 	ar3 = 0x03
                     0004    719 	ar4 = 0x04
@@ -723,254 +723,254 @@
                     0000    723 	ar0 = 0x00
                     0001    724 	ar1 = 0x01
                             725 ;     genReceive
-   06D0 AA 82               726 	mov	r2,dpl
+   0703 AA 82               726 	mov	r2,dpl
                             727 ;Initial/src/lib/i2c.c:40: if (len == 0)			// reading zero bytes always works
                             728 ;     genCmpEq
-   06D2 E5 2D               729 	mov	a,_i2c_read_PARM_3
+   0705 E5 2D               729 	mov	a,_i2c_read_PARM_3
                             730 ;	Peephole 162	removed sjmp by inverse jump logic
-   06D4 60 02               731 	jz	00149$
-   06D6                     732 00148$:
+   0707 60 02               731 	jz	00149$
+   0709                     732 00148$:
                             733 ;	Peephole 112.b	changed ljmp to sjmp
-   06D6 80 04               734 	sjmp	00103$
-   06D8                     735 00149$:
+   0709 80 04               734 	sjmp	00103$
+   070B                     735 00149$:
                             736 ;Initial/src/lib/i2c.c:41: return 1;
                             737 ;     genRet
-   06D8 75 82 01            738 	mov	dpl,#0x01
+   070B 75 82 01            738 	mov	dpl,#0x01
                             739 ;	Peephole 251.a	replaced ljmp to ret with ret
-   06DB 22                  740 	ret
+   070E 22                  740 	ret
                             741 ;Initial/src/lib/i2c.c:43: while (I2CS & bmSTOP)		// wait for stop to clear
-   06DC                     742 00103$:
+   070F                     742 00103$:
                             743 ;     genAssign
-   06DC 90 E6 78            744 	mov	dptr,#_I2CS
-   06DF E0                  745 	movx	a,@dptr
+   070F 90 E6 78            744 	mov	dptr,#_I2CS
+   0712 E0                  745 	movx	a,@dptr
                             746 ;     genAnd
                             747 ;	Peephole 105	removed redundant mov
-   06E0 FB                  748 	mov	r3,a
+   0713 FB                  748 	mov	r3,a
                             749 ;     genIfxJump
                             750 ;	Peephole 112.a	removed ljmp by inverse jump logic
-   06E1 20 E6 F8            751 	jb	acc.6,00103$
-   06E4                     752 00150$:
+   0714 20 E6 F8            751 	jb	acc.6,00103$
+   0717                     752 00150$:
                             753 ;Initial/src/lib/i2c.c:46: I2CS = bmSTART;
                             754 ;     genAssign
-   06E4 90 E6 78            755 	mov	dptr,#_I2CS
-   06E7 74 80               756 	mov	a,#0x80
-   06E9 F0                  757 	movx	@dptr,a
+   0717 90 E6 78            755 	mov	dptr,#_I2CS
+   071A 74 80               756 	mov	a,#0x80
+   071C F0                  757 	movx	@dptr,a
                             758 ;Initial/src/lib/i2c.c:47: I2DAT = (addr << 1) | 1;	// write address and direction (1's the read bit)
                             759 ;     genLeftShift
                             760 ;     genLeftShiftLiteral
                             761 ;     genlshOne
                             762 ;	Peephole 254	optimized left shift
-   06EA EA                  763 	mov	a,r2
-   06EB 2A                  764 	add	a,r2
-   06EC FA                  765 	mov	r2,a
+   071D EA                  763 	mov	a,r2
+   071E 2A                  764 	add	a,r2
+   071F FA                  765 	mov	r2,a
                             766 ;     genOr
-   06ED 90 E6 79            767 	mov	dptr,#_I2DAT
-   06F0 74 01               768 	mov	a,#0x01
-   06F2 4A                  769 	orl	a,r2
-   06F3 F0                  770 	movx	@dptr,a
+   0720 90 E6 79            767 	mov	dptr,#_I2DAT
+   0723 74 01               768 	mov	a,#0x01
+   0725 4A                  769 	orl	a,r2
+   0726 F0                  770 	movx	@dptr,a
                             771 ;Initial/src/lib/i2c.c:49: while ((I2CS & bmDONE) == 0)
-   06F4                     772 00106$:
+   0727                     772 00106$:
                             773 ;     genAssign
-   06F4 90 E6 78            774 	mov	dptr,#_I2CS
-   06F7 E0                  775 	movx	a,@dptr
-   06F8 FA                  776 	mov	r2,a
+   0727 90 E6 78            774 	mov	dptr,#_I2CS
+   072A E0                  775 	movx	a,@dptr
+   072B FA                  776 	mov	r2,a
                             777 ;     genAnd
-   06F9 53 02 01            778 	anl	ar2,#0x01
+   072C 53 02 01            778 	anl	ar2,#0x01
                             779 ;     genCmpEq
-   06FC BA 00 02            780 	cjne	r2,#0x00,00151$
+   072F BA 00 02            780 	cjne	r2,#0x00,00151$
                             781 ;	Peephole 112.b	changed ljmp to sjmp
-   06FF 80 F3               782 	sjmp	00106$
-   0701                     783 00151$:
+   0732 80 F3               782 	sjmp	00106$
+   0734                     783 00151$:
                             784 ;Initial/src/lib/i2c.c:52: if ((I2CS & bmBERR) || (I2CS & bmACK) == 0)	// no device answered...
                             785 ;     genAssign
-   0701 90 E6 78            786 	mov	dptr,#_I2CS
-   0704 E0                  787 	movx	a,@dptr
+   0734 90 E6 78            786 	mov	dptr,#_I2CS
+   0737 E0                  787 	movx	a,@dptr
                             788 ;     genAnd
                             789 ;	Peephole 105	removed redundant mov
-   0705 FA                  790 	mov	r2,a
+   0738 FA                  790 	mov	r2,a
                             791 ;     genIfxJump
-   0706 30 E2 03            792 	jnb	acc.2,00152$
-   0709 02 07 9B            793 	ljmp	00129$
-   070C                     794 00152$:
+   0739 30 E2 03            792 	jnb	acc.2,00152$
+   073C 02 07 CE            793 	ljmp	00129$
+   073F                     794 00152$:
                             795 ;     genAssign
-   070C 90 E6 78            796 	mov	dptr,#_I2CS
-   070F E0                  797 	movx	a,@dptr
-   0710 FA                  798 	mov	r2,a
+   073F 90 E6 78            796 	mov	dptr,#_I2CS
+   0742 E0                  797 	movx	a,@dptr
+   0743 FA                  798 	mov	r2,a
                             799 ;     genAnd
-   0711 53 02 02            800 	anl	ar2,#0x02
+   0744 53 02 02            800 	anl	ar2,#0x02
                             801 ;     genCmpEq
-   0714 BA 00 03            802 	cjne	r2,#0x00,00153$
-   0717 02 07 9B            803 	ljmp	00129$
-   071A                     804 00153$:
+   0747 BA 00 03            802 	cjne	r2,#0x00,00153$
+   074A 02 07 CE            803 	ljmp	00129$
+   074D                     804 00153$:
                             805 ;Initial/src/lib/i2c.c:55: if (len == 1)
                             806 ;     genCmpEq
-   071A E5 2D               807 	mov	a,_i2c_read_PARM_3
+   074D E5 2D               807 	mov	a,_i2c_read_PARM_3
                             808 ;	Peephole 112.b	changed ljmp to sjmp
                             809 ;	Peephole 199	optimized misc jump sequence
-   071C B4 01 08            810 	cjne	a,#0x01,00113$
+   074F B4 01 08            810 	cjne	a,#0x01,00113$
                             811 ;00154$:
                             812 ;	Peephole 200	removed redundant sjmp
-   071F                     813 00155$:
+   0752                     813 00155$:
                             814 ;Initial/src/lib/i2c.c:56: I2CS |= bmLASTRD;
                             815 ;     genAssign
                             816 ;     genOr
                             817 ;	Peephole 248.a	optimized or to xdata
-   071F 90 E6 78            818 	mov	dptr,#_I2CS
-   0722 E0                  819 	movx	a,@dptr
-   0723 FA                  820 	mov	r2,a
-   0724 44 20               821 	orl	a,#0x20
-   0726 F0                  822 	movx	@dptr,a
-   0727                     823 00113$:
+   0752 90 E6 78            818 	mov	dptr,#_I2CS
+   0755 E0                  819 	movx	a,@dptr
+   0756 FA                  820 	mov	r2,a
+   0757 44 20               821 	orl	a,#0x20
+   0759 F0                  822 	movx	@dptr,a
+   075A                     823 00113$:
                             824 ;Initial/src/lib/i2c.c:58: junk = I2DAT;			// trigger the first read cycle
                             825 ;     genAssign
-   0727 90 E6 79            826 	mov	dptr,#_I2DAT
-   072A E0                  827 	movx	a,@dptr
-   072B F5 2E               828 	mov	_i2c_read_junk_1_1,a
+   075A 90 E6 79            826 	mov	dptr,#_I2DAT
+   075D E0                  827 	movx	a,@dptr
+   075E F5 2E               828 	mov	_i2c_read_junk_1_1,a
                             829 ;Initial/src/lib/i2c.c:60: while (--len != 0){
                             830 ;     genAssign
-   072D AA 2B               831 	mov	r2,_i2c_read_PARM_2
-   072F AB 2C               832 	mov	r3,(_i2c_read_PARM_2 + 1)
+   0760 AA 2B               831 	mov	r2,_i2c_read_PARM_2
+   0762 AB 2C               832 	mov	r3,(_i2c_read_PARM_2 + 1)
                             833 ;     genAssign
-   0731 AC 2D               834 	mov	r4,_i2c_read_PARM_3
-   0733                     835 00121$:
+   0764 AC 2D               834 	mov	r4,_i2c_read_PARM_3
+   0766                     835 00121$:
                             836 ;     genMinus
                             837 ;     genMinusDec
                             838 ;     genCmpEq
                             839 ;	Peephole 257	optimized decrement with compare
-   0733 DC 02               840 	djnz	r4,00156$
+   0766 DC 02               840 	djnz	r4,00156$
                             841 ;	Peephole 112.b	changed ljmp to sjmp
-   0735 80 35               842 	sjmp	00124$
-   0737                     843 00156$:
+   0768 80 35               842 	sjmp	00124$
+   076A                     843 00156$:
                             844 ;Initial/src/lib/i2c.c:61: while ((I2CS & bmDONE) == 0)
-   0737                     845 00114$:
+   076A                     845 00114$:
                             846 ;     genAssign
-   0737 90 E6 78            847 	mov	dptr,#_I2CS
-   073A E0                  848 	movx	a,@dptr
-   073B FD                  849 	mov	r5,a
+   076A 90 E6 78            847 	mov	dptr,#_I2CS
+   076D E0                  848 	movx	a,@dptr
+   076E FD                  849 	mov	r5,a
                             850 ;     genAnd
-   073C 53 05 01            851 	anl	ar5,#0x01
+   076F 53 05 01            851 	anl	ar5,#0x01
                             852 ;     genCmpEq
-   073F BD 00 02            853 	cjne	r5,#0x00,00157$
+   0772 BD 00 02            853 	cjne	r5,#0x00,00157$
                             854 ;	Peephole 112.b	changed ljmp to sjmp
-   0742 80 F3               855 	sjmp	00114$
-   0744                     856 00157$:
+   0775 80 F3               855 	sjmp	00114$
+   0777                     856 00157$:
                             857 ;Initial/src/lib/i2c.c:64: if (I2CS & bmBERR)
                             858 ;     genAssign
-   0744 90 E6 78            859 	mov	dptr,#_I2CS
-   0747 E0                  860 	movx	a,@dptr
+   0777 90 E6 78            859 	mov	dptr,#_I2CS
+   077A E0                  860 	movx	a,@dptr
                             861 ;     genAnd
                             862 ;	Peephole 105	removed redundant mov
-   0748 FD                  863 	mov	r5,a
+   077B FD                  863 	mov	r5,a
                             864 ;     genIfxJump
                             865 ;	Peephole 112.a	removed ljmp by inverse jump logic
-   0749 20 E2 4F            866 	jb	acc.2,00129$
-   074C                     867 00158$:
+   077C 20 E2 4F            866 	jb	acc.2,00129$
+   077F                     867 00158$:
                             868 ;Initial/src/lib/i2c.c:67: if (len == 1)
                             869 ;     genCmpEq
                             870 ;	Peephole 112.b	changed ljmp to sjmp
                             871 ;	Peephole 199	optimized misc jump sequence
-   074C BC 01 08            872 	cjne	r4,#0x01,00120$
+   077F BC 01 08            872 	cjne	r4,#0x01,00120$
                             873 ;00159$:
                             874 ;	Peephole 200	removed redundant sjmp
-   074F                     875 00160$:
+   0782                     875 00160$:
                             876 ;Initial/src/lib/i2c.c:68: I2CS |= bmLASTRD;
                             877 ;     genAssign
                             878 ;     genOr
                             879 ;	Peephole 248.a	optimized or to xdata
-   074F 90 E6 78            880 	mov	dptr,#_I2CS
-   0752 E0                  881 	movx	a,@dptr
-   0753 FD                  882 	mov	r5,a
-   0754 44 20               883 	orl	a,#0x20
-   0756 F0                  884 	movx	@dptr,a
-   0757                     885 00120$:
+   0782 90 E6 78            880 	mov	dptr,#_I2CS
+   0785 E0                  881 	movx	a,@dptr
+   0786 FD                  882 	mov	r5,a
+   0787 44 20               883 	orl	a,#0x20
+   0789 F0                  884 	movx	@dptr,a
+   078A                     885 00120$:
                             886 ;Initial/src/lib/i2c.c:70: *buf++ = I2DAT;		// get data, trigger another read
                             887 ;     genAssign
-   0757 90 E6 79            888 	mov	dptr,#_I2DAT
-   075A E0                  889 	movx	a,@dptr
+   078A 90 E6 79            888 	mov	dptr,#_I2DAT
+   078D E0                  889 	movx	a,@dptr
                             890 ;     genPointerSet
                             891 ;     genFarPointerSet
                             892 ;	Peephole 136	removed redundant moves
-   075B FD                  893 	mov	r5,a
-   075C 8A 82               894 	mov	dpl,r2
-   075E 8B 83               895 	mov	dph,r3
-   0760 F0                  896 	movx	@dptr,a
-   0761 A3                  897 	inc	dptr
-   0762 AA 82               898 	mov	r2,dpl
-   0764 AB 83               899 	mov	r3,dph
+   078E FD                  893 	mov	r5,a
+   078F 8A 82               894 	mov	dpl,r2
+   0791 8B 83               895 	mov	dph,r3
+   0793 F0                  896 	movx	@dptr,a
+   0794 A3                  897 	inc	dptr
+   0795 AA 82               898 	mov	r2,dpl
+   0797 AB 83               899 	mov	r3,dph
                             900 ;     genAssign
-   0766 8A 2B               901 	mov	_i2c_read_PARM_2,r2
-   0768 8B 2C               902 	mov	(_i2c_read_PARM_2 + 1),r3
+   0799 8A 2B               901 	mov	_i2c_read_PARM_2,r2
+   079B 8B 2C               902 	mov	(_i2c_read_PARM_2 + 1),r3
                             903 ;Initial/src/lib/i2c.c:75: while ((I2CS & bmDONE) == 0)
                             904 ;	Peephole 112.b	changed ljmp to sjmp
-   076A 80 C7               905 	sjmp	00121$
-   076C                     906 00124$:
+   079D 80 C7               905 	sjmp	00121$
+   079F                     906 00124$:
                             907 ;     genAssign
-   076C 90 E6 78            908 	mov	dptr,#_I2CS
-   076F E0                  909 	movx	a,@dptr
-   0770 FA                  910 	mov	r2,a
+   079F 90 E6 78            908 	mov	dptr,#_I2CS
+   07A2 E0                  909 	movx	a,@dptr
+   07A3 FA                  910 	mov	r2,a
                             911 ;     genAnd
-   0771 53 02 01            912 	anl	ar2,#0x01
+   07A4 53 02 01            912 	anl	ar2,#0x01
                             913 ;     genCmpEq
-   0774 BA 00 02            914 	cjne	r2,#0x00,00161$
+   07A7 BA 00 02            914 	cjne	r2,#0x00,00161$
                             915 ;	Peephole 112.b	changed ljmp to sjmp
-   0777 80 F3               916 	sjmp	00124$
-   0779                     917 00161$:
+   07AA 80 F3               916 	sjmp	00124$
+   07AC                     917 00161$:
                             918 ;Initial/src/lib/i2c.c:78: if (I2CS & bmBERR)
                             919 ;     genAssign
-   0779 90 E6 78            920 	mov	dptr,#_I2CS
-   077C E0                  921 	movx	a,@dptr
+   07AC 90 E6 78            920 	mov	dptr,#_I2CS
+   07AF E0                  921 	movx	a,@dptr
                             922 ;     genAnd
                             923 ;	Peephole 105	removed redundant mov
-   077D FA                  924 	mov	r2,a
+   07B0 FA                  924 	mov	r2,a
                             925 ;     genIfxJump
                             926 ;	Peephole 112.a	removed ljmp by inverse jump logic
-   077E 20 E2 1A            927 	jb	acc.2,00129$
-   0781                     928 00162$:
+   07B1 20 E2 1A            927 	jb	acc.2,00129$
+   07B4                     928 00162$:
                             929 ;Initial/src/lib/i2c.c:81: I2CS |= bmSTOP;
                             930 ;     genAssign
                             931 ;     genOr
                             932 ;	Peephole 248.a	optimized or to xdata
-   0781 90 E6 78            933 	mov	dptr,#_I2CS
-   0784 E0                  934 	movx	a,@dptr
-   0785 FA                  935 	mov	r2,a
-   0786 44 40               936 	orl	a,#0x40
-   0788 F0                  937 	movx	@dptr,a
+   07B4 90 E6 78            933 	mov	dptr,#_I2CS
+   07B7 E0                  934 	movx	a,@dptr
+   07B8 FA                  935 	mov	r2,a
+   07B9 44 40               936 	orl	a,#0x40
+   07BB F0                  937 	movx	@dptr,a
                             938 ;Initial/src/lib/i2c.c:82: *buf = I2DAT;
                             939 ;     genAssign
-   0789 AA 2B               940 	mov	r2,_i2c_read_PARM_2
-   078B AB 2C               941 	mov	r3,(_i2c_read_PARM_2 + 1)
+   07BC AA 2B               940 	mov	r2,_i2c_read_PARM_2
+   07BE AB 2C               941 	mov	r3,(_i2c_read_PARM_2 + 1)
                             942 ;     genAssign
-   078D 90 E6 79            943 	mov	dptr,#_I2DAT
-   0790 E0                  944 	movx	a,@dptr
+   07C0 90 E6 79            943 	mov	dptr,#_I2DAT
+   07C3 E0                  944 	movx	a,@dptr
                             945 ;     genPointerSet
                             946 ;     genFarPointerSet
                             947 ;	Peephole 136	removed redundant moves
-   0791 FC                  948 	mov	r4,a
-   0792 8A 82               949 	mov	dpl,r2
-   0794 8B 83               950 	mov	dph,r3
-   0796 F0                  951 	movx	@dptr,a
+   07C4 FC                  948 	mov	r4,a
+   07C5 8A 82               949 	mov	dpl,r2
+   07C7 8B 83               950 	mov	dph,r3
+   07C9 F0                  951 	movx	@dptr,a
                             952 ;Initial/src/lib/i2c.c:84: return 1;
                             953 ;     genRet
-   0797 75 82 01            954 	mov	dpl,#0x01
+   07CA 75 82 01            954 	mov	dpl,#0x01
                             955 ;Initial/src/lib/i2c.c:86: fail:
                             956 ;	Peephole 112.b	changed ljmp to sjmp
                             957 ;	Peephole 251.b	replaced sjmp to ret with ret
-   079A 22                  958 	ret
-   079B                     959 00129$:
+   07CD 22                  958 	ret
+   07CE                     959 00129$:
                             960 ;Initial/src/lib/i2c.c:87: I2CS |= bmSTOP;
                             961 ;     genAssign
                             962 ;     genOr
                             963 ;	Peephole 248.a	optimized or to xdata
-   079B 90 E6 78            964 	mov	dptr,#_I2CS
-   079E E0                  965 	movx	a,@dptr
-   079F FA                  966 	mov	r2,a
-   07A0 44 40               967 	orl	a,#0x40
-   07A2 F0                  968 	movx	@dptr,a
+   07CE 90 E6 78            964 	mov	dptr,#_I2CS
+   07D1 E0                  965 	movx	a,@dptr
+   07D2 FA                  966 	mov	r2,a
+   07D3 44 40               967 	orl	a,#0x40
+   07D5 F0                  968 	movx	@dptr,a
                             969 ;Initial/src/lib/i2c.c:88: return 0;
                             970 ;     genRet
-   07A3 75 82 00            971 	mov	dpl,#0x00
-   07A6                     972 00130$:
-   07A6 22                  973 	ret
+   07D6 75 82 00            971 	mov	dpl,#0x00
+   07D9                     972 00130$:
+   07D9 22                  973 	ret
                             974 ;------------------------------------------------------------
                             975 ;Allocation info for local variables in function 'i2c_write'
                             976 ;------------------------------------------------------------
@@ -982,177 +982,177 @@
                             982 ;	-----------------------------------------
                             983 ;	 function i2c_write
                             984 ;	-----------------------------------------
-   07A7                     985 _i2c_write:
+   07DA                     985 _i2c_write:
                             986 ;     genReceive
-   07A7 AA 82               987 	mov	r2,dpl
+   07DA AA 82               987 	mov	r2,dpl
                             988 ;Initial/src/lib/i2c.c:97: while (I2CS & bmSTOP)		// wait for stop to clear
-   07A9                     989 00101$:
+   07DC                     989 00101$:
                             990 ;     genAssign
-   07A9 90 E6 78            991 	mov	dptr,#_I2CS
-   07AC E0                  992 	movx	a,@dptr
+   07DC 90 E6 78            991 	mov	dptr,#_I2CS
+   07DF E0                  992 	movx	a,@dptr
                             993 ;     genAnd
                             994 ;	Peephole 105	removed redundant mov
-   07AD FB                  995 	mov	r3,a
+   07E0 FB                  995 	mov	r3,a
                             996 ;     genIfxJump
                             997 ;	Peephole 112.a	removed ljmp by inverse jump logic
-   07AE 20 E6 F8            998 	jb	acc.6,00101$
-   07B1                     999 00133$:
+   07E1 20 E6 F8            998 	jb	acc.6,00101$
+   07E4                     999 00133$:
                            1000 ;Initial/src/lib/i2c.c:100: I2CS = bmSTART;
                            1001 ;     genAssign
-   07B1 90 E6 78           1002 	mov	dptr,#_I2CS
-   07B4 74 80              1003 	mov	a,#0x80
-   07B6 F0                 1004 	movx	@dptr,a
+   07E4 90 E6 78           1002 	mov	dptr,#_I2CS
+   07E7 74 80              1003 	mov	a,#0x80
+   07E9 F0                 1004 	movx	@dptr,a
                            1005 ;Initial/src/lib/i2c.c:101: I2DAT = (addr << 1) | 0;	// write address and direction (0's the write bit)
                            1006 ;     genLeftShift
                            1007 ;     genLeftShiftLiteral
                            1008 ;     genlshOne
                            1009 ;	Peephole 254	optimized left shift
-   07B7 EA                 1010 	mov	a,r2
-   07B8 2A                 1011 	add	a,r2
+   07EA EA                 1010 	mov	a,r2
+   07EB 2A                 1011 	add	a,r2
                            1012 ;     genAssign
                            1013 ;	Peephole 100	removed redundant mov
-   07B9 FA                 1014 	mov	r2,a
-   07BA 90 E6 79           1015 	mov	dptr,#_I2DAT
-   07BD F0                 1016 	movx	@dptr,a
+   07EC FA                 1014 	mov	r2,a
+   07ED 90 E6 79           1015 	mov	dptr,#_I2DAT
+   07F0 F0                 1016 	movx	@dptr,a
                            1017 ;Initial/src/lib/i2c.c:103: while ((I2CS & bmDONE) == 0)
-   07BE                    1018 00104$:
+   07F1                    1018 00104$:
                            1019 ;     genAssign
-   07BE 90 E6 78           1020 	mov	dptr,#_I2CS
-   07C1 E0                 1021 	movx	a,@dptr
-   07C2 FA                 1022 	mov	r2,a
+   07F1 90 E6 78           1020 	mov	dptr,#_I2CS
+   07F4 E0                 1021 	movx	a,@dptr
+   07F5 FA                 1022 	mov	r2,a
                            1023 ;     genAnd
-   07C3 53 02 01           1024 	anl	ar2,#0x01
+   07F6 53 02 01           1024 	anl	ar2,#0x01
                            1025 ;     genCmpEq
-   07C6 BA 00 02           1026 	cjne	r2,#0x00,00134$
+   07F9 BA 00 02           1026 	cjne	r2,#0x00,00134$
                            1027 ;	Peephole 112.b	changed ljmp to sjmp
-   07C9 80 F3              1028 	sjmp	00104$
-   07CB                    1029 00134$:
+   07FC 80 F3              1028 	sjmp	00104$
+   07FE                    1029 00134$:
                            1030 ;Initial/src/lib/i2c.c:106: if ((I2CS & bmBERR) || (I2CS & bmACK) == 0)	// no device answered...
                            1031 ;     genAssign
-   07CB 90 E6 78           1032 	mov	dptr,#_I2CS
-   07CE E0                 1033 	movx	a,@dptr
+   07FE 90 E6 78           1032 	mov	dptr,#_I2CS
+   0801 E0                 1033 	movx	a,@dptr
                            1034 ;     genAnd
                            1035 ;	Peephole 105	removed redundant mov
-   07CF FA                 1036 	mov	r2,a
+   0802 FA                 1036 	mov	r2,a
                            1037 ;     genIfxJump
                            1038 ;	Peephole 112.a	removed ljmp by inverse jump logic
-   07D0 20 E2 57           1039 	jb	acc.2,00119$
-   07D3                    1040 00135$:
+   0803 20 E2 57           1039 	jb	acc.2,00119$
+   0806                    1040 00135$:
                            1041 ;     genAssign
-   07D3 90 E6 78           1042 	mov	dptr,#_I2CS
-   07D6 E0                 1043 	movx	a,@dptr
-   07D7 FA                 1044 	mov	r2,a
+   0806 90 E6 78           1042 	mov	dptr,#_I2CS
+   0809 E0                 1043 	movx	a,@dptr
+   080A FA                 1044 	mov	r2,a
                            1045 ;     genAnd
-   07D8 53 02 02           1046 	anl	ar2,#0x02
+   080B 53 02 02           1046 	anl	ar2,#0x02
                            1047 ;     genCmpEq
-   07DB BA 00 02           1048 	cjne	r2,#0x00,00136$
+   080E BA 00 02           1048 	cjne	r2,#0x00,00136$
                            1049 ;	Peephole 112.b	changed ljmp to sjmp
-   07DE 80 4A              1050 	sjmp	00119$
-   07E0                    1051 00136$:
+   0811 80 4A              1050 	sjmp	00119$
+   0813                    1051 00136$:
                            1052 ;Initial/src/lib/i2c.c:109: while (len > 0){
                            1053 ;     genAssign
-   07E0 AA 2B              1054 	mov	r2,_i2c_write_PARM_2
-   07E2 AB 2C              1055 	mov	r3,(_i2c_write_PARM_2 + 1)
+   0813 AA 2B              1054 	mov	r2,_i2c_write_PARM_2
+   0815 AB 2C              1055 	mov	r3,(_i2c_write_PARM_2 + 1)
                            1056 ;     genAssign
-   07E4 AC 2D              1057 	mov	r4,_i2c_write_PARM_3
-   07E6                    1058 00116$:
+   0817 AC 2D              1057 	mov	r4,_i2c_write_PARM_3
+   0819                    1058 00116$:
                            1059 ;     genCmpGt
                            1060 ;     genCmp
                            1061 ;     genIfxJump
                            1062 ;	Peephole 108	removed ljmp by inverse jump logic
                            1063 ;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
-   07E6 EC                 1064 	mov	a,r4
-   07E7 24 FF              1065 	add	a,#0xff - 0x00
-   07E9 50 33              1066 	jnc	00118$
-   07EB                    1067 00137$:
+   0819 EC                 1064 	mov	a,r4
+   081A 24 FF              1065 	add	a,#0xff - 0x00
+   081C 50 33              1066 	jnc	00118$
+   081E                    1067 00137$:
                            1068 ;Initial/src/lib/i2c.c:110: I2DAT = *buf++;
                            1069 ;     genPointerGet
                            1070 ;     genFarPointerGet
-   07EB 8A 82              1071 	mov	dpl,r2
-   07ED 8B 83              1072 	mov	dph,r3
-   07EF E0                 1073 	movx	a,@dptr
-   07F0 FD                 1074 	mov	r5,a
-   07F1 A3                 1075 	inc	dptr
-   07F2 AA 82              1076 	mov	r2,dpl
-   07F4 AB 83              1077 	mov	r3,dph
+   081E 8A 82              1071 	mov	dpl,r2
+   0820 8B 83              1072 	mov	dph,r3
+   0822 E0                 1073 	movx	a,@dptr
+   0823 FD                 1074 	mov	r5,a
+   0824 A3                 1075 	inc	dptr
+   0825 AA 82              1076 	mov	r2,dpl
+   0827 AB 83              1077 	mov	r3,dph
                            1078 ;     genAssign
-   07F6 90 E6 79           1079 	mov	dptr,#_I2DAT
-   07F9 ED                 1080 	mov	a,r5
-   07FA F0                 1081 	movx	@dptr,a
+   0829 90 E6 79           1079 	mov	dptr,#_I2DAT
+   082C ED                 1080 	mov	a,r5
+   082D F0                 1081 	movx	@dptr,a
                            1082 ;Initial/src/lib/i2c.c:111: len--;
                            1083 ;     genMinus
                            1084 ;     genMinusDec
-   07FB 1C                 1085 	dec	r4
+   082E 1C                 1085 	dec	r4
                            1086 ;Initial/src/lib/i2c.c:113: while ((I2CS & bmDONE) == 0)
-   07FC                    1087 00110$:
+   082F                    1087 00110$:
                            1088 ;     genAssign
-   07FC 90 E6 78           1089 	mov	dptr,#_I2CS
-   07FF E0                 1090 	movx	a,@dptr
-   0800 FD                 1091 	mov	r5,a
+   082F 90 E6 78           1089 	mov	dptr,#_I2CS
+   0832 E0                 1090 	movx	a,@dptr
+   0833 FD                 1091 	mov	r5,a
                            1092 ;     genAnd
-   0801 53 05 01           1093 	anl	ar5,#0x01
+   0834 53 05 01           1093 	anl	ar5,#0x01
                            1094 ;     genCmpEq
-   0804 BD 00 02           1095 	cjne	r5,#0x00,00138$
+   0837 BD 00 02           1095 	cjne	r5,#0x00,00138$
                            1096 ;	Peephole 112.b	changed ljmp to sjmp
-   0807 80 F3              1097 	sjmp	00110$
-   0809                    1098 00138$:
+   083A 80 F3              1097 	sjmp	00110$
+   083C                    1098 00138$:
                            1099 ;Initial/src/lib/i2c.c:116: if ((I2CS & bmBERR) || (I2CS & bmACK) == 0)	// no device answered...
                            1100 ;     genAssign
-   0809 90 E6 78           1101 	mov	dptr,#_I2CS
-   080C E0                 1102 	movx	a,@dptr
+   083C 90 E6 78           1101 	mov	dptr,#_I2CS
+   083F E0                 1102 	movx	a,@dptr
                            1103 ;     genAnd
                            1104 ;	Peephole 105	removed redundant mov
-   080D FD                 1105 	mov	r5,a
+   0840 FD                 1105 	mov	r5,a
                            1106 ;     genIfxJump
                            1107 ;	Peephole 112.a	removed ljmp by inverse jump logic
-   080E 20 E2 19           1108 	jb	acc.2,00119$
-   0811                    1109 00139$:
+   0841 20 E2 19           1108 	jb	acc.2,00119$
+   0844                    1109 00139$:
                            1110 ;     genAssign
-   0811 90 E6 78           1111 	mov	dptr,#_I2CS
-   0814 E0                 1112 	movx	a,@dptr
-   0815 FD                 1113 	mov	r5,a
+   0844 90 E6 78           1111 	mov	dptr,#_I2CS
+   0847 E0                 1112 	movx	a,@dptr
+   0848 FD                 1113 	mov	r5,a
                            1114 ;     genAnd
-   0816 53 05 02           1115 	anl	ar5,#0x02
+   0849 53 05 02           1115 	anl	ar5,#0x02
                            1116 ;     genCmpEq
                            1117 ;	Peephole 112.b	changed ljmp to sjmp
                            1118 ;	Peephole 199	optimized misc jump sequence
-   0819 BD 00 CA           1119 	cjne	r5,#0x00,00116$
+   084C BD 00 CA           1119 	cjne	r5,#0x00,00116$
                            1120 ;00140$:
                            1121 ;	Peephole 200	removed redundant sjmp
-   081C                    1122 00141$:
+   084F                    1122 00141$:
                            1123 ;Initial/src/lib/i2c.c:117: goto fail;
                            1124 ;	Peephole 112.b	changed ljmp to sjmp
-   081C 80 0C              1125 	sjmp	00119$
-   081E                    1126 00118$:
+   084F 80 0C              1125 	sjmp	00119$
+   0851                    1126 00118$:
                            1127 ;Initial/src/lib/i2c.c:120: I2CS |= bmSTOP;
                            1128 ;     genAssign
                            1129 ;     genOr
                            1130 ;	Peephole 248.a	optimized or to xdata
-   081E 90 E6 78           1131 	mov	dptr,#_I2CS
-   0821 E0                 1132 	movx	a,@dptr
-   0822 FA                 1133 	mov	r2,a
-   0823 44 40              1134 	orl	a,#0x40
-   0825 F0                 1135 	movx	@dptr,a
+   0851 90 E6 78           1131 	mov	dptr,#_I2CS
+   0854 E0                 1132 	movx	a,@dptr
+   0855 FA                 1133 	mov	r2,a
+   0856 44 40              1134 	orl	a,#0x40
+   0858 F0                 1135 	movx	@dptr,a
                            1136 ;Initial/src/lib/i2c.c:121: return 1;
                            1137 ;     genRet
-   0826 75 82 01           1138 	mov	dpl,#0x01
+   0859 75 82 01           1138 	mov	dpl,#0x01
                            1139 ;Initial/src/lib/i2c.c:123: fail:
                            1140 ;	Peephole 112.b	changed ljmp to sjmp
                            1141 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0829 22                 1142 	ret
-   082A                    1143 00119$:
+   085C 22                 1142 	ret
+   085D                    1143 00119$:
                            1144 ;Initial/src/lib/i2c.c:124: I2CS |= bmSTOP;
                            1145 ;     genAssign
                            1146 ;     genOr
                            1147 ;	Peephole 248.a	optimized or to xdata
-   082A 90 E6 78           1148 	mov	dptr,#_I2CS
-   082D E0                 1149 	movx	a,@dptr
-   082E FA                 1150 	mov	r2,a
-   082F 44 40              1151 	orl	a,#0x40
-   0831 F0                 1152 	movx	@dptr,a
+   085D 90 E6 78           1148 	mov	dptr,#_I2CS
+   0860 E0                 1149 	movx	a,@dptr
+   0861 FA                 1150 	mov	r2,a
+   0862 44 40              1151 	orl	a,#0x40
+   0864 F0                 1152 	movx	@dptr,a
                            1153 ;Initial/src/lib/i2c.c:125: return 0;
                            1154 ;     genRet
-   0832 75 82 00           1155 	mov	dpl,#0x00
-   0835                    1156 00120$:
-   0835 22                 1157 	ret
+   0865 75 82 00           1155 	mov	dpl,#0x00
+   0868                    1156 00120$:
+   0868 22                 1157 	ret
                            1158 	.area CSEG    (CODE)

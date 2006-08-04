@@ -182,17 +182,17 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      0100    l_IRAM
      0100    s_RSEG
      0106    l_USBDESCSEG
-     104C    l_CSEG
-     104C    s_GSINIT
-     1055    s_GSINIT0
-     1058    s_GSINIT1
-     1058    s_GSINIT2
-     1062    s_GSINIT3
-     1062    s_GSINIT4
-     1068    s_GSFINAL
-     1068    s_GSINIT5
-     106B    s_HOME
-     106B    s_XINIT
+     107F    l_CSEG
+     107F    s_GSINIT
+     1088    s_GSINIT0
+     108B    s_GSINIT1
+     108B    s_GSINIT2
+     1095    s_GSINIT3
+     1095    s_GSINIT4
+     109B    s_GSFINAL
+     109B    s_GSINIT5
+     109E    s_HOME
+     109E    s_XINIT
      2000    s_XSEG
      E000    s_USBDESCSEG
      E106    s_PSEG
@@ -492,7 +492,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               0000   104C =   4172. bytes (REL,CON,CODE)
+CSEG                               0000   107F =   4223. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -504,56 +504,56 @@ CSEG                               0000   104C =   4172. bytes (REL,CON,CODE)
   0C:0180    __sdcc_external_startup
   0C:01A5    __sdcc_program_startup
   0C:01B8    _app_vendor_OUT_cmd
-  0C:02A6    _app_vendor_IN_cmd
-  0C:036D    _app_vendor_cmd
-  0C:0398    _isr_tick
-  0C:03AD    _patch_usb_descriptors
-  0C:03D6    _main
-  0C:0405    _eeprom_read
-  0C:0439    _fpga_load_begin
-  0C:04C4    _fpga_load_xfer
-  0C:04D4    _fpga_load_end
-  0C:04F0    _init_hpsdr
-  0C:05F4    _putchar
-  0C:05FE    _putstr
-  0C:0639    _set_led_0
-  0C:0646    _set_led_1
-  0C:0653    _toggle_led_0
-  0C:0657    _toggle_led_1
-  0C:065B    _init_board
-  0C:065F    _udelay
-  0C:0672    _mdelay
-  0C:0685    _fx2_stall_ep0
-  0C:068E    _fx2_reset_data_toggle
-  0C:06AA    _fx2_renumerate
-  0C:06D0    _i2c_read
-  0C:07A7    _i2c_write
-  0C:0836    _hook_sv
-  0C:089B    _hook_uv
-  0C:08F7    _hook_fgv
-  0C:0953    _setup_autovectors
-  0C:09FC    _init_spi
-  0C:0A35    _spi_read
-  0C:0AA3    _spi_write
-  0C:0BD7    _hook_timer_tick
-  0C:0CB8    _usb_install_handlers
-  0C:0CE6    _plausible_endpoint
-  0C:0D05    _epcs
-  0C:0D4E    _usb_handle_set_feature
-  0C:0DBC    _usb_handle_clear_feature
-  0C:0E28    _usb_handle_get_status
-  0C:0EA2    _usb_handle_get_descriptor
-  0C:0F55    _usb_handle_IN_std_requests
-  0C:0F99    _usb_handle_OUT_std_requests
-  0C:0FD4    _usb_handle_std_requests
-  0C:0FE6    _usb_handle_setup_packet
-  0C:1024    __gptrget
+  0C:02D9    _app_vendor_IN_cmd
+  0C:03A0    _app_vendor_cmd
+  0C:03CB    _isr_tick
+  0C:03E0    _patch_usb_descriptors
+  0C:0409    _main
+  0C:0438    _eeprom_read
+  0C:046C    _fpga_load_begin
+  0C:04F7    _fpga_load_xfer
+  0C:0507    _fpga_load_end
+  0C:0523    _init_hpsdr
+  0C:0627    _putchar
+  0C:0631    _putstr
+  0C:066C    _set_led_0
+  0C:0679    _set_led_1
+  0C:0686    _toggle_led_0
+  0C:068A    _toggle_led_1
+  0C:068E    _init_board
+  0C:0692    _udelay
+  0C:06A5    _mdelay
+  0C:06B8    _fx2_stall_ep0
+  0C:06C1    _fx2_reset_data_toggle
+  0C:06DD    _fx2_renumerate
+  0C:0703    _i2c_read
+  0C:07DA    _i2c_write
+  0C:0869    _hook_sv
+  0C:08CE    _hook_uv
+  0C:092A    _hook_fgv
+  0C:0986    _setup_autovectors
+  0C:0A2F    _init_spi
+  0C:0A68    _spi_read
+  0C:0AD6    _spi_write
+  0C:0C0A    _hook_timer_tick
+  0C:0CEB    _usb_install_handlers
+  0C:0D19    _plausible_endpoint
+  0C:0D38    _epcs
+  0C:0D81    _usb_handle_set_feature
+  0C:0DEF    _usb_handle_clear_feature
+  0C:0E5B    _usb_handle_get_status
+  0C:0ED5    _usb_handle_get_descriptor
+  0C:0F88    _usb_handle_IN_std_requests
+  0C:0FCC    _usb_handle_OUT_std_requests
+  0C:1007    _usb_handle_std_requests
+  0C:1019    _usb_handle_setup_packet
+  0C:1057    __gptrget
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT                             104C   0009 =      9. bytes (REL,CON,CODE)
+GSINIT                             107F   0009 =      9. bytes (REL,CON,CODE)
 
 Hexadecimal
 
@@ -598,57 +598,57 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT0                            1055   0003 =      3. bytes (REL,CON,CODE)
+GSINIT0                            1088   0003 =      3. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:1055    __sdcc_gsinit_startup
+  0C:1088    __sdcc_gsinit_startup
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT1                            1058   0000 =      0. bytes (REL,CON,CODE)
+GSINIT1                            108B   0000 =      0. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT2                            1058   000A =     10. bytes (REL,CON,CODE)
+GSINIT2                            108B   000A =     10. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT3                            1062   0000 =      0. bytes (REL,CON,CODE)
+GSINIT3                            1095   0000 =      0. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT4                            1062   0006 =      6. bytes (REL,CON,CODE)
+GSINIT4                            1095   0006 =      6. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:1062    __mcs51_genRAMCLEAR
+  0C:1095    __mcs51_genRAMCLEAR
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT5                            1068   0000 =      0. bytes (REL,CON,CODE)
+GSINIT5                            109B   0000 =      0. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSFINAL                            1068   0003 =      3. bytes (REL,CON,CODE)
+GSFINAL                            109B   0003 =      3. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-HOME                               106B   0000 =      0. bytes (REL,CON,CODE)
+HOME                               109E   0000 =      0. bytes (REL,CON,CODE)
 
 Hexadecimal
 
@@ -660,7 +660,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              106B   0000 =      0. bytes (REL,CON,CODE)
+XINIT                              109E   0000 =      0. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]

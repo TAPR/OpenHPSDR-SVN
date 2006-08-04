@@ -1,10 +1,23 @@
 <?xml version="1.0"?>
 <!DOCTYPE CodeBlocks_layout_file>
 <CodeBlocks_layout_file>
-	<File name="Initial\src\hpsdr_common.c" open="1" top="1">
-		<Cursor position="1180" topLine="90"/>
+	<File name="Initial\include\hpsdr_commands.h" open="1" top="1">
+		<Cursor position="2761" topLine="32"/>
+	</File>
+	<File name="Initial\include\usb_common.h" open="1" top="0">
+		<Cursor position="0" topLine="0"/>
+	</File>
+	<File name="Initial\src\hpsdr_common.c" open="1" top="0">
+		<Cursor position="1144" topLine="6"/>
+	</File>
+	<File name="Initial\src\hpsdr_main.c" open="1" top="0">
+		<Cursor position="3295" topLine="89"/>
 	</File>
 	<Expand folder="/Sources/Initial/src"/>
 	<Expand folder="/Sources/Initial"/>
 	<Expand folder="/Sources"/>
+	<Expand folder="/Headers/Initial/include"/>
+	<Expand folder="/Headers/Initial"/>
+	<Expand folder="/Headers"/>
+	<Expand folder="/Others"/>
 </CodeBlocks_layout_file>

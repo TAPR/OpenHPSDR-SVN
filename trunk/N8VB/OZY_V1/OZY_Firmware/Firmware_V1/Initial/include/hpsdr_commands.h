@@ -80,5 +80,7 @@
 
 #define VRQ_I2C_SPEED_SET  0x0B  // wValueL: {0,1}
 
+#define VRQ_CPU_SPEED_SET 0x0C // wValueL: {0, 1, 2}
+
 
 #endif /* _HPSDR_COMMANDS_H_ */
