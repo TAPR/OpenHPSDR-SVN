@@ -1,5 +1,5 @@
 Fitter report for Ozy_Janus
-Thu Aug 03 22:56:16 2006
+Fri Aug 04 21:52:05 2006
 Version 5.1 Build 176 10/26/2005 SJ Web Edition
 
 
@@ -58,15 +58,15 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Fitter Summary                                                               ;
 +------------------------------------+-----------------------------------------+
-; Fitter Status                      ; Successful - Thu Aug 03 22:56:16 2006   ;
+; Fitter Status                      ; Successful - Fri Aug 04 21:52:04 2006   ;
 ; Quartus II Version                 ; 5.1 Build 176 10/26/2005 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
 ; Family                             ; Cyclone II                              ;
 ; Device                             ; EP2C5Q208C8                             ;
 ; Timing Models                      ; Preliminary                             ;
-; Total logic elements               ; 955 / 4,608 ( 21 % )                    ;
-; Total registers                    ; 705                                     ;
+; Total logic elements               ; 949 / 4,608 ( 21 % )                    ;
+; Total registers                    ; 709                                     ;
 ; Total pins                         ; 48 / 142 ( 34 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304 / 119,808 ( 82 % )               ;
@@ -143,24 +143,24 @@ The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pin.
 +---------------------------------------------+----------------------------+
 ; Resource                                    ; Usage                      ;
 +---------------------------------------------+----------------------------+
-; Total logic elements                        ; 955 / 4,608 ( 21 % )       ;
-;     -- Combinational with no register       ; 250                        ;
-;     -- Register only                        ; 423                        ;
-;     -- Combinational with a register        ; 282                        ;
+; Total logic elements                        ; 949 / 4,608 ( 21 % )       ;
+;     -- Combinational with no register       ; 240                        ;
+;     -- Register only                        ; 418                        ;
+;     -- Combinational with a register        ; 291                        ;
 ;                                             ;                            ;
 ; Logic element usage by number of LUT inputs ;                            ;
-;     -- 4 input functions                    ; 198                        ;
-;     -- 3 input functions                    ; 175                        ;
-;     -- <=2 input functions                  ; 159                        ;
-;     -- Register only                        ; 423                        ;
-;         -- Combinational cells for routing  ; 319                        ;
+;     -- 4 input functions                    ; 200                        ;
+;     -- 3 input functions                    ; 171                        ;
+;     -- <=2 input functions                  ; 160                        ;
+;     -- Register only                        ; 418                        ;
+;         -- Combinational cells for routing  ; 317                        ;
 ;                                             ;                            ;
 ; Logic elements by mode                      ;                            ;
-;     -- normal mode                          ; 353                        ;
+;     -- normal mode                          ; 352                        ;
 ;     -- arithmetic mode                      ; 179                        ;
 ;                                             ;                            ;
-; Total registers                             ; 705 / 4,608 ( 15 % )       ;
-; Total LABs                                  ; 89 / 288 ( 31 % )          ;
+; Total registers                             ; 709 / 4,608 ( 15 % )       ;
+; Total LABs                                  ; 92 / 288 ( 32 % )          ;
 ; User inserted logic elements                ; 0                          ;
 ; Virtual pins                                ; 0                          ;
 ; I/O pins                                    ; 48 / 142 ( 34 % )          ;
@@ -176,7 +176,7 @@ The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pin.
 ; Maximum fan-out                             ; 296                        ;
 ; Highest non-global fan-out signal           ; BCLK                       ;
 ; Highest non-global fan-out                  ; 296                        ;
-; Total fan-out                               ; 4459                       ;
+; Total fan-out                               ; 4463                       ;
 ; Average fan-out                             ; 2.72                       ;
 +---------------------------------------------+----------------------------+
 
@@ -192,7 +192,7 @@ The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pin.
 ; DOUT      ; 128   ; 3        ; 28           ; 6            ; 0           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; FLAGA     ; 198   ; 2        ; 5            ; 14           ; 1           ; 5                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; FLAGB     ; 197   ; 2        ; 5            ; 14           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
-; FLAGC     ; 5     ; 1        ; 0            ; 13           ; 4           ; 5                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
+; FLAGC     ; 5     ; 1        ; 0            ; 13           ; 4           ; 4                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; FX2_CLK   ; 23    ; 1        ; 0            ; 6            ; 0           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; IFCLK     ; 24    ; 1        ; 0            ; 6            ; 1           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; LRCLK     ; 133   ; 3        ; 28           ; 8            ; 1           ; 2                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
@@ -523,7 +523,7 @@ Note: User assignments will override these defaults. The user specified values a
 +-----------------------------------------------+-------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                    ; Logic Cells ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ;
 +-----------------------------------------------+-------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-; |Ozy_Janus                                    ; 955 (544)   ; 532 (317)         ; 705 (371)    ; 98304       ; 0            ; 0       ; 0         ; 48   ; 0            ; |Ozy_Janus                                                                                                                        ;
+; |Ozy_Janus                                    ; 949 (538)   ; 531 (316)         ; 709 (375)    ; 98304       ; 0            ; 0       ; 0         ; 48   ; 0            ; |Ozy_Janus                                                                                                                        ;
 ;    |I2SAudioOut:I2SAO|                        ; 54 (54)     ; 32 (32)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ;
 ;    |Rx_fifo:Rx_fifo|                          ; 175 (0)     ; 91 (0)            ; 135 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|               ; 175 (0)     ; 91 (0)            ; 135 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
@@ -578,8 +578,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; CLK_24MHZ   ; Input    ; 6             ; 6             ; --                    ; --  ;
 ; IFCLK       ; Input    ; 0             ; 0             ; --                    ; --  ;
 ; BCLK        ; Input    ; 0             ; 0             ; --                    ; --  ;
-; DOUT        ; Input    ; 6             ; 6             ; --                    ; --  ;
 ; LRCLK       ; Input    ; 6             ; 6             ; --                    ; --  ;
+; DOUT        ; Input    ; 6             ; 6             ; --                    ; --  ;
 ; FX2_CLK     ; Input    ; 0             ; 0             ; --                    ; --  ;
 ; CDOUT       ; Input    ; 6             ; 6             ; --                    ; --  ;
 ; PTT         ; Input    ; 6             ; 6             ; --                    ; --  ;
@@ -630,23 +630,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------------------------------------------------------------------------------------------------------------------+-------------------+---------+
 ; FLAGB                                                                                                                                       ;                   ;         ;
 ; FLAGC                                                                                                                                       ;                   ;         ;
-;      - LED[1]                                                                                                                               ; 0                 ; 6       ;
-;      - Select~5825                                                                                                                          ; 0                 ; 6       ;
-;      - Select~5834                                                                                                                          ; 0                 ; 6       ;
-;      - Select~5849                                                                                                                          ; 0                 ; 6       ;
-;      - Select~5926                                                                                                                          ; 0                 ; 6       ;
+;      - LED[1]                                                                                                                               ; 1                 ; 6       ;
+;      - Select~6181                                                                                                                          ; 1                 ; 6       ;
+;      - Select~6190                                                                                                                          ; 1                 ; 6       ;
+;      - Select~6207                                                                                                                          ; 1                 ; 6       ;
 ; FLAGA                                                                                                                                       ;                   ;         ;
 ;      - LED[3]                                                                                                                               ; 0                 ; 6       ;
-;      - Select~5831                                                                                                                          ; 0                 ; 6       ;
-;      - Select~5836                                                                                                                          ; 0                 ; 6       ;
-;      - state_FX~71                                                                                                                          ; 0                 ; 6       ;
-;      - Select~5929                                                                                                                          ; 0                 ; 6       ;
+;      - Select~6187                                                                                                                          ; 0                 ; 6       ;
+;      - Select~6192                                                                                                                          ; 0                 ; 6       ;
+;      - state_FX~91                                                                                                                          ; 0                 ; 6       ;
+;      - Select~6282                                                                                                                          ; 0                 ; 6       ;
 ; CLK_24MHZ                                                                                                                                   ;                   ;         ;
 ;      - LED[7]                                                                                                                               ; 1                 ; 6       ;
 ;      - clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|counter_reg_bit1a[8]                                         ; 1                 ; 6       ;
 ;      - clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|counter_reg_bit1a[2]                                         ; 1                 ; 6       ;
 ;      - I_PWM_accumulator[16]                                                                                                                ; 1                 ; 6       ;
-;      - Q_PWM_accumulator[16]                                                                                                                ; 1                 ; 6       ;
+;      - Q_PWM_accumulator[16]                                                                                                                ; 0                 ; 6       ;
 ;      - clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|counter_reg_bit1a[7]                                         ; 1                 ; 6       ;
 ;      - clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|counter_reg_bit1a[6]                                         ; 1                 ; 6       ;
 ;      - clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|counter_reg_bit1a[5]                                         ; 1                 ; 6       ;
@@ -686,22 +685,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - I_Data_in[1]                                                                                                                         ; 1                 ; 6       ;
 ;      - I_PWM_accumulator[0]                                                                                                                 ; 1                 ; 6       ;
 ;      - I_Data_in[0]                                                                                                                         ; 1                 ; 6       ;
-;      - Q_PWM_accumulator[15]                                                                                                                ; 1                 ; 6       ;
+;      - Q_PWM_accumulator[15]                                                                                                                ; 0                 ; 6       ;
 ;      - Q_Data_in[15]                                                                                                                        ; 1                 ; 6       ;
-;      - Q_PWM_accumulator[14]                                                                                                                ; 1                 ; 6       ;
-;      - Q_Data_in[14]                                                                                                                        ; 1                 ; 6       ;
-;      - Q_PWM_accumulator[13]                                                                                                                ; 1                 ; 6       ;
-;      - Q_Data_in[13]                                                                                                                        ; 1                 ; 6       ;
-;      - Q_PWM_accumulator[12]                                                                                                                ; 1                 ; 6       ;
-;      - Q_Data_in[12]                                                                                                                        ; 1                 ; 6       ;
-;      - Q_PWM_accumulator[11]                                                                                                                ; 1                 ; 6       ;
-;      - Q_Data_in[11]                                                                                                                        ; 1                 ; 6       ;
-;      - Q_PWM_accumulator[10]                                                                                                                ; 1                 ; 6       ;
-;      - Q_Data_in[10]                                                                                                                        ; 1                 ; 6       ;
-;      - Q_PWM_accumulator[9]                                                                                                                 ; 1                 ; 6       ;
-;      - Q_Data_in[9]                                                                                                                         ; 1                 ; 6       ;
-;      - Q_PWM_accumulator[8]                                                                                                                 ; 1                 ; 6       ;
-;      - Q_Data_in[8]                                                                                                                         ; 1                 ; 6       ;
+;      - Q_PWM_accumulator[14]                                                                                                                ; 0                 ; 6       ;
+;      - Q_Data_in[14]                                                                                                                        ; 0                 ; 6       ;
+;      - Q_PWM_accumulator[13]                                                                                                                ; 0                 ; 6       ;
+;      - Q_Data_in[13]                                                                                                                        ; 0                 ; 6       ;
+;      - Q_PWM_accumulator[12]                                                                                                                ; 0                 ; 6       ;
+;      - Q_Data_in[12]                                                                                                                        ; 0                 ; 6       ;
+;      - Q_PWM_accumulator[11]                                                                                                                ; 0                 ; 6       ;
+;      - Q_Data_in[11]                                                                                                                        ; 0                 ; 6       ;
+;      - Q_PWM_accumulator[10]                                                                                                                ; 0                 ; 6       ;
+;      - Q_Data_in[10]                                                                                                                        ; 0                 ; 6       ;
+;      - Q_PWM_accumulator[9]                                                                                                                 ; 0                 ; 6       ;
+;      - Q_Data_in[9]                                                                                                                         ; 0                 ; 6       ;
+;      - Q_PWM_accumulator[8]                                                                                                                 ; 0                 ; 6       ;
+;      - Q_Data_in[8]                                                                                                                         ; 0                 ; 6       ;
 ;      - Q_PWM_accumulator[7]                                                                                                                 ; 1                 ; 6       ;
 ;      - Q_Data_in[7]                                                                                                                         ; 1                 ; 6       ;
 ;      - Q_PWM_accumulator[6]                                                                                                                 ; 1                 ; 6       ;
@@ -721,26 +720,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; IFCLK                                                                                                                                       ;                   ;         ;
 ; BCLK                                                                                                                                        ;                   ;         ;
 ;      - LED_sync                                                                                                                             ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[11]                                                       ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[11]                                                       ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[10]                                                       ; 1                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[9]                                                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[8]                                                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[7]                                                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[6]                                                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[5]                                                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[4]                                                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[3]                                                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[2]                                                        ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[8]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[7]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[6]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[5]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[4]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[3]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[2]                                                        ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[1]                                                        ; 1                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdptr_g[0]                                                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a8  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a9  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a10 ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a11 ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a12 ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a13 ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a14 ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a15 ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a0  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a1  ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a2  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a3  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a4  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a5  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a6  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a7  ; 1                 ; 0       ;
 ;      - state_PWM.00000                                                                                                                      ; 1                 ; 0       ;
 ;      - state_PWM.00100                                                                                                                      ; 1                 ; 0       ;
 ;      - Rx_control_1[0]                                                                                                                      ; 1                 ; 0       ;
@@ -752,58 +751,58 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - Rx_control_0[3]                                                                                                                      ; 1                 ; 0       ;
 ;      - Rx_control_0[2]                                                                                                                      ; 1                 ; 0       ;
 ;      - Rx_control_0[1]                                                                                                                      ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[11]                       ; 1                 ; 0       ;
-;      - fifo_enable                                                                                                                          ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[6]         ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[11]        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[9]         ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[5]         ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[7]         ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[1]         ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[3]         ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[4]         ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[11]                       ; 0                 ; 0       ;
+;      - fifo_enable                                                                                                                          ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[6]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[11]        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[9]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[5]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[7]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[1]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[3]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[4]         ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[0]         ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[10]        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[8]         ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[2]         ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[6]                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[5]                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[9]                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[1]                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[7]                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[4]                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[3]                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[10]                       ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[0]                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[2]                        ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[8]                        ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[10]        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[8]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe5|dffe6a[2]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[6]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[5]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[9]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[1]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[7]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[4]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[3]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[10]                       ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[0]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[2]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[8]                        ; 0                 ; 0       ;
 ;      - state_PWM.00001                                                                                                                      ; 1                 ; 0       ;
 ;      - synced_Rx_used[10]                                                                                                                   ; 1                 ; 0       ;
 ;      - synced_Rx_used[11]                                                                                                                   ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a7  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a6  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a5  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a4  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a3  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a2  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a1  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a0  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a15 ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a14 ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a13 ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a12 ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a11 ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a10 ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a9  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ram_block4a8  ; 1                 ; 0       ;
 ;      - state_PWM.00011                                                                                                                      ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|p0addr                                                            ; 1                 ; 0       ;
-;      - I_Data[15]                                                                                                                           ; 1                 ; 0       ;
-;      - I_Data[14]                                                                                                                           ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|p0addr                                                            ; 0                 ; 0       ;
+;      - I_Data[15]                                                                                                                           ; 0                 ; 0       ;
+;      - I_Data[14]                                                                                                                           ; 0                 ; 0       ;
 ;      - I_Data[13]                                                                                                                           ; 1                 ; 0       ;
-;      - I_Data[12]                                                                                                                           ; 1                 ; 0       ;
+;      - I_Data[12]                                                                                                                           ; 0                 ; 0       ;
 ;      - I_Data[11]                                                                                                                           ; 1                 ; 0       ;
-;      - I_Data[10]                                                                                                                           ; 1                 ; 0       ;
-;      - I_Data[9]                                                                                                                            ; 1                 ; 0       ;
-;      - I_Data[8]                                                                                                                            ; 1                 ; 0       ;
-;      - I_Data[7]                                                                                                                            ; 1                 ; 0       ;
+;      - I_Data[10]                                                                                                                           ; 0                 ; 0       ;
+;      - I_Data[9]                                                                                                                            ; 0                 ; 0       ;
+;      - I_Data[8]                                                                                                                            ; 0                 ; 0       ;
+;      - I_Data[7]                                                                                                                            ; 0                 ; 0       ;
 ;      - I_Data[6]                                                                                                                            ; 1                 ; 0       ;
-;      - I_Data[5]                                                                                                                            ; 1                 ; 0       ;
-;      - I_Data[4]                                                                                                                            ; 1                 ; 0       ;
-;      - I_Data[3]                                                                                                                            ; 1                 ; 0       ;
-;      - I_Data[2]                                                                                                                            ; 1                 ; 0       ;
+;      - I_Data[5]                                                                                                                            ; 0                 ; 0       ;
+;      - I_Data[4]                                                                                                                            ; 0                 ; 0       ;
+;      - I_Data[3]                                                                                                                            ; 0                 ; 0       ;
+;      - I_Data[2]                                                                                                                            ; 0                 ; 0       ;
 ;      - I_Data[1]                                                                                                                            ; 1                 ; 0       ;
 ;      - I_Data[0]                                                                                                                            ; 1                 ; 0       ;
 ;      - Q_Data[15]                                                                                                                           ; 1                 ; 0       ;
@@ -843,20 +842,20 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - Right_PWM[2]                                                                                                                         ; 1                 ; 0       ;
 ;      - Right_PWM[14]                                                                                                                        ; 1                 ; 0       ;
 ;      - Right_PWM[5]                                                                                                                         ; 1                 ; 0       ;
-;      - Right_PWM[9]                                                                                                                         ; 1                 ; 0       ;
+;      - Right_PWM[9]                                                                                                                         ; 0                 ; 0       ;
 ;      - Right_PWM[1]                                                                                                                         ; 1                 ; 0       ;
 ;      - Right_PWM[13]                                                                                                                        ; 1                 ; 0       ;
 ;      - Right_PWM[8]                                                                                                                         ; 1                 ; 0       ;
 ;      - Right_PWM[4]                                                                                                                         ; 1                 ; 0       ;
 ;      - Right_PWM[0]                                                                                                                         ; 1                 ; 0       ;
 ;      - Right_PWM[12]                                                                                                                        ; 1                 ; 0       ;
-;      - Right_PWM[11]                                                                                                                        ; 1                 ; 0       ;
+;      - Right_PWM[11]                                                                                                                        ; 0                 ; 0       ;
 ;      - Right_PWM[7]                                                                                                                         ; 1                 ; 0       ;
 ;      - Right_PWM[3]                                                                                                                         ; 1                 ; 0       ;
 ;      - Right_PWM[15]                                                                                                                        ; 1                 ; 0       ;
 ;      - state_PWM.00101                                                                                                                      ; 1                 ; 0       ;
 ;      - data_flag                                                                                                                            ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|parity_ff                             ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|parity_ff                             ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdaclr                                                            ; 1                 ; 0       ;
 ;      - state_PWM.00111                                                                                                                      ; 1                 ; 0       ;
 ;      - state_PWM.01011                                                                                                                      ; 1                 ; 0       ;
@@ -897,7 +896,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - I_PWM[6]                                                                                                                             ; 1                 ; 0       ;
 ;      - I_PWM[5]                                                                                                                             ; 1                 ; 0       ;
 ;      - I_PWM[4]                                                                                                                             ; 1                 ; 0       ;
-;      - I_PWM[3]                                                                                                                             ; 1                 ; 0       ;
+;      - I_PWM[3]                                                                                                                             ; 0                 ; 0       ;
 ;      - I_PWM[2]                                                                                                                             ; 1                 ; 0       ;
 ;      - I_PWM[1]                                                                                                                             ; 1                 ; 0       ;
 ;      - I_PWM[0]                                                                                                                             ; 1                 ; 0       ;
@@ -922,7 +921,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - register[1]                                                                                                                          ; 1                 ; 0       ;
 ;      - register[2]                                                                                                                          ; 1                 ; 0       ;
 ;      - register[3]                                                                                                                          ; 1                 ; 0       ;
-;      - register[4]                                                                                                                          ; 0                 ; 0       ;
+;      - register[4]                                                                                                                          ; 1                 ; 0       ;
 ;      - register[5]                                                                                                                          ; 1                 ; 0       ;
 ;      - register[6]                                                                                                                          ; 1                 ; 0       ;
 ;      - register[7]                                                                                                                          ; 1                 ; 0       ;
@@ -936,13 +935,15 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - register[15]                                                                                                                         ; 1                 ; 0       ;
 ;      - strobe                                                                                                                               ; 1                 ; 0       ;
 ;      - state_PWM.00110                                                                                                                      ; 1                 ; 0       ;
-;      - state_PWM.01010                                                                                                                      ; 1                 ; 0       ;
+;      - state_PWM.01010                                                                                                                      ; 0                 ; 0       ;
 ;      - state_PWM.01001                                                                                                                      ; 1                 ; 0       ;
+;      - rx_avail[4]                                                                                                                          ; 1                 ; 0       ;
+;      - AD_state[0]                                                                                                                          ; 1                 ; 0       ;
 ;      - AD_state[2]                                                                                                                          ; 1                 ; 0       ;
 ;      - q[0]                                                                                                                                 ; 1                 ; 0       ;
-;      - AD_state[0]                                                                                                                          ; 1                 ; 0       ;
-;      - AD_state[1]                                                                                                                          ; 1                 ; 0       ;
 ;      - AD_state[5]                                                                                                                          ; 1                 ; 0       ;
+;      - AD_state[4]                                                                                                                          ; 1                 ; 0       ;
+;      - AD_state[1]                                                                                                                          ; 1                 ; 0       ;
 ;      - loop_counter[0]                                                                                                                      ; 1                 ; 0       ;
 ;      - loop_counter[1]                                                                                                                      ; 1                 ; 0       ;
 ;      - loop_counter[2]                                                                                                                      ; 1                 ; 0       ;
@@ -950,40 +951,38 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - loop_counter[4]                                                                                                                      ; 1                 ; 0       ;
 ;      - loop_counter[5]                                                                                                                      ; 1                 ; 0       ;
 ;      - loop_counter[6]                                                                                                                      ; 1                 ; 0       ;
-;      - Rx_control_4[0]                                                                                                                      ; 1                 ; 0       ;
-;      - AD_state[4]                                                                                                                          ; 1                 ; 0       ;
-;      - AD_state[3]                                                                                                                          ; 1                 ; 0       ;
 ;      - AD_state[6]                                                                                                                          ; 1                 ; 0       ;
-;      - Rx_control_4[1]                                                                                                                      ; 1                 ; 0       ;
-;      - q[1]                                                                                                                                 ; 1                 ; 0       ;
-;      - Rx_control_4[2]                                                                                                                      ; 1                 ; 0       ;
-;      - q[2]                                                                                                                                 ; 1                 ; 0       ;
-;      - Rx_control_4[3]                                                                                                                      ; 1                 ; 0       ;
-;      - q[3]                                                                                                                                 ; 1                 ; 0       ;
-;      - Rx_control_4[4]                                                                                                                      ; 1                 ; 0       ;
-;      - q[4]                                                                                                                                 ; 1                 ; 0       ;
-;      - Rx_control_4[5]                                                                                                                      ; 1                 ; 0       ;
-;      - q[5]                                                                                                                                 ; 1                 ; 0       ;
-;      - Rx_control_4[6]                                                                                                                      ; 1                 ; 0       ;
-;      - q[6]                                                                                                                                 ; 1                 ; 0       ;
-;      - q[7]                                                                                                                                 ; 1                 ; 0       ;
-;      - Rx_control_4[7]                                                                                                                      ; 1                 ; 0       ;
-;      - rx_avail[4]                                                                                                                          ; 1                 ; 0       ;
-;      - q[8]                                                                                                                                 ; 1                 ; 0       ;
+;      - AD_state[3]                                                                                                                          ; 1                 ; 0       ;
 ;      - rx_avail[5]                                                                                                                          ; 1                 ; 0       ;
-;      - q[9]                                                                                                                                 ; 1                 ; 0       ;
+;      - q[1]                                                                                                                                 ; 1                 ; 0       ;
 ;      - rx_avail[6]                                                                                                                          ; 1                 ; 0       ;
-;      - q[10]                                                                                                                                ; 1                 ; 0       ;
+;      - q[2]                                                                                                                                 ; 1                 ; 0       ;
 ;      - rx_avail[7]                                                                                                                          ; 1                 ; 0       ;
-;      - q[11]                                                                                                                                ; 1                 ; 0       ;
+;      - q[3]                                                                                                                                 ; 1                 ; 0       ;
 ;      - rx_avail[8]                                                                                                                          ; 1                 ; 0       ;
-;      - q[12]                                                                                                                                ; 1                 ; 0       ;
+;      - q[4]                                                                                                                                 ; 1                 ; 0       ;
 ;      - rx_avail[9]                                                                                                                          ; 1                 ; 0       ;
-;      - q[13]                                                                                                                                ; 1                 ; 0       ;
+;      - q[5]                                                                                                                                 ; 1                 ; 0       ;
 ;      - rx_avail[10]                                                                                                                         ; 1                 ; 0       ;
-;      - q[14]                                                                                                                                ; 1                 ; 0       ;
+;      - q[6]                                                                                                                                 ; 1                 ; 0       ;
 ;      - rx_avail[11]                                                                                                                         ; 1                 ; 0       ;
+;      - q[7]                                                                                                                                 ; 1                 ; 0       ;
+;      - q[8]                                                                                                                                 ; 1                 ; 0       ;
+;      - Rx_control_4[0]                                                                                                                      ; 1                 ; 0       ;
+;      - Rx_control_4[1]                                                                                                                      ; 1                 ; 0       ;
+;      - q[9]                                                                                                                                 ; 1                 ; 0       ;
+;      - Rx_control_4[2]                                                                                                                      ; 1                 ; 0       ;
+;      - q[10]                                                                                                                                ; 1                 ; 0       ;
+;      - Rx_control_4[3]                                                                                                                      ; 1                 ; 0       ;
+;      - q[11]                                                                                                                                ; 1                 ; 0       ;
+;      - Rx_control_4[4]                                                                                                                      ; 1                 ; 0       ;
+;      - q[12]                                                                                                                                ; 1                 ; 0       ;
+;      - Rx_control_4[5]                                                                                                                      ; 1                 ; 0       ;
+;      - q[13]                                                                                                                                ; 1                 ; 0       ;
+;      - Rx_control_4[6]                                                                                                                      ; 1                 ; 0       ;
+;      - q[14]                                                                                                                                ; 1                 ; 0       ;
 ;      - q[15]                                                                                                                                ; 1                 ; 0       ;
+;      - Rx_control_4[7]                                                                                                                      ; 1                 ; 0       ;
 ;      - sync_Rx_used[4]                                                                                                                      ; 1                 ; 0       ;
 ;      - sync_Rx_used[5]                                                                                                                      ; 1                 ; 0       ;
 ;      - sync_Rx_used[6]                                                                                                                      ; 1                 ; 0       ;
@@ -992,50 +991,50 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - sync_Rx_used[9]                                                                                                                      ; 1                 ; 0       ;
 ;      - sync_Rx_used[10]                                                                                                                     ; 1                 ; 0       ;
 ;      - sync_Rx_used[11]                                                                                                                     ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[4]                                      ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[4]                                      ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[4]                                      ; 1                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[3]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[3]                                      ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[3]                                      ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[2]                                      ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[2]                                      ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[1]                                      ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[2]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[1]                                      ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[1]                                      ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[0]                                      ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[0]                                      ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[0]                                      ; 1                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[5]                                      ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[5]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[6]                                      ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[6]                                      ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[7]                                      ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[7]                                      ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[8]                                      ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[8]                                      ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[9]                                      ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[6]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[6]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[7]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[7]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[8]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[8]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[9]                                      ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[9]                                      ; 1                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[10]                                     ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[10]                                     ; 0                 ; 0       ;
 ;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_bwp|dffe5a[11]                                     ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[11]                                     ; 1                 ; 0       ;
-; DOUT                                                                                                                                        ;                   ;         ;
-;      - q[0]                                                                                                                                 ; 1                 ; 6       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|dffpipe_c09:rs_brp|dffe5a[11]                                     ; 0                 ; 0       ;
 ; LRCLK                                                                                                                                       ;                   ;         ;
-;      - Select~5921                                                                                                                          ; 1                 ; 6       ;
-;      - Select~5936                                                                                                                          ; 1                 ; 6       ;
+;      - Select~6276                                                                                                                          ; 1                 ; 6       ;
+;      - Select~6288                                                                                                                          ; 1                 ; 6       ;
+; DOUT                                                                                                                                        ;                   ;         ;
+;      - q[0]                                                                                                                                 ; 0                 ; 6       ;
 ; FX2_CLK                                                                                                                                     ;                   ;         ;
 ; CDOUT                                                                                                                                       ;                   ;         ;
-;      - Tx_q[0]~feeder                                                                                                                       ; 0                 ; 6       ;
+;      - Tx_q[0]~feeder                                                                                                                       ; 1                 ; 6       ;
 ; PTT                                                                                                                                         ;                   ;         ;
-;      - debounce:de_PTT|pb_history[0]~feeder                                                                                                 ; 1                 ; 6       ;
+;      - debounce:de_PTT|pb_history[0]                                                                                                        ; 1                 ; 6       ;
 ; FX2_FD[0]                                                                                                                                   ;                   ;         ;
-;      - Rx_register[0]~feeder                                                                                                                ; 0                 ; 6       ;
+;      - Rx_register[0]~feeder                                                                                                                ; 1                 ; 6       ;
 ; FX2_FD[1]                                                                                                                                   ;                   ;         ;
 ;      - Rx_register[1]~feeder                                                                                                                ; 0                 ; 6       ;
 ; FX2_FD[2]                                                                                                                                   ;                   ;         ;
 ;      - Rx_register[2]~feeder                                                                                                                ; 0                 ; 6       ;
 ; FX2_FD[3]                                                                                                                                   ;                   ;         ;
-;      - Rx_register[3]~feeder                                                                                                                ; 0                 ; 6       ;
+;      - Rx_register[3]~feeder                                                                                                                ; 1                 ; 6       ;
 ; FX2_FD[4]                                                                                                                                   ;                   ;         ;
-;      - Rx_register[4]~feeder                                                                                                                ; 0                 ; 6       ;
+;      - Rx_register[4]                                                                                                                       ; 0                 ; 6       ;
 ; FX2_FD[5]                                                                                                                                   ;                   ;         ;
 ;      - Rx_register[5]~feeder                                                                                                                ; 0                 ; 6       ;
 ; FX2_FD[6]                                                                                                                                   ;                   ;         ;
@@ -1045,19 +1044,19 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; FX2_FD[8]                                                                                                                                   ;                   ;         ;
 ;      - Rx_register[8]~feeder                                                                                                                ; 1                 ; 6       ;
 ; FX2_FD[9]                                                                                                                                   ;                   ;         ;
-;      - Rx_register[9]                                                                                                                       ; 0                 ; 6       ;
+;      - Rx_register[9]~feeder                                                                                                                ; 0                 ; 6       ;
 ; FX2_FD[10]                                                                                                                                  ;                   ;         ;
 ;      - Rx_register[10]~feeder                                                                                                               ; 0                 ; 6       ;
 ; FX2_FD[11]                                                                                                                                  ;                   ;         ;
-;      - Rx_register[11]                                                                                                                      ; 1                 ; 6       ;
+;      - Rx_register[11]~feeder                                                                                                               ; 1                 ; 6       ;
 ; FX2_FD[12]                                                                                                                                  ;                   ;         ;
 ;      - Rx_register[12]~feeder                                                                                                               ; 0                 ; 6       ;
 ; FX2_FD[13]                                                                                                                                  ;                   ;         ;
-;      - Rx_register[13]~feeder                                                                                                               ; 0                 ; 6       ;
+;      - Rx_register[13]~feeder                                                                                                               ; 1                 ; 6       ;
 ; FX2_FD[14]                                                                                                                                  ;                   ;         ;
 ;      - Rx_register[14]~feeder                                                                                                               ; 0                 ; 6       ;
 ; FX2_FD[15]                                                                                                                                  ;                   ;         ;
-;      - Rx_register[15]~feeder                                                                                                               ; 0                 ; 6       ;
+;      - Rx_register[15]                                                                                                                      ; 0                 ; 6       ;
 +---------------------------------------------------------------------------------------------------------------------------------------------+-------------------+---------+
 
 
@@ -1066,49 +1065,49 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------------------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
 ; Name                                                                                         ; Location           ; Fan-Out ; Usage                      ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +----------------------------------------------------------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
+; AD_state[6]                                                                                  ; LCFF_X13_Y5_N9     ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
 ; BCLK                                                                                         ; PIN_127            ; 296     ; Clock                      ; no     ; --                   ; --               ; --                        ;
 ; CLK_24MHZ                                                                                    ; PIN_120            ; 76      ; Clock                      ; no     ; --                   ; --               ; --                        ;
-; Decoder~630                                                                                  ; LCCOMB_X25_Y1_N0   ; 16      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Decoder~631                                                                                  ; LCCOMB_X26_Y8_N2   ; 8       ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; Decoder~617                                                                                  ; LCCOMB_X14_Y7_N28  ; 16      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Decoder~618                                                                                  ; LCCOMB_X14_Y8_N30  ; 8       ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
 ; FX2_CLK                                                                                      ; PIN_23             ; 24      ; Clock                      ; yes    ; Global clock         ; GCLK0            ; --                        ;
-; I2SAudioOut:I2SAO|local_left_sample[15]~0                                                    ; LCCOMB_X21_Y5_N0   ; 32      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; I2SAudioOut:I2SAO|reduce_or~12                                                               ; LCCOMB_X22_Y5_N8   ; 5       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; IFCLK                                                                                        ; PIN_24             ; 49      ; Clock                      ; yes    ; Global clock         ; GCLK2            ; --                        ;
-; Rx_control_0[7]~0                                                                            ; LCCOMB_X20_Y6_N24  ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdaclr                    ; LCFF_X27_Y6_N3     ; 14      ; Async. clear               ; yes    ; Global clock         ; GCLK5            ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|valid_rdreq               ; LCCOMB_X19_Y5_N30  ; 29      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|wrfull_eq_comp_aeb_int~0  ; LCCOMB_X13_Y5_N6   ; 30      ; Clock enable, Write enable ; no     ; --                   ; --               ; --                        ;
-; SLRD~reg0                                                                                    ; LCFF_X1_Y6_N5      ; 88      ; Clock                      ; yes    ; Global clock         ; GCLK3            ; --                        ;
-; SLWR~reg0                                                                                    ; LCFF_X4_Y6_N29     ; 18      ; Output enable              ; no     ; --                   ; --               ; --                        ;
-; Select~5844                                                                                  ; LCCOMB_X24_Y4_N26  ; 32      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Select~5864                                                                                  ; LCCOMB_X26_Y7_N8   ; 4       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Select~5926                                                                                  ; LCCOMB_X4_Y6_N4    ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Select~5929                                                                                  ; LCCOMB_X3_Y6_N28   ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|rdaclr                    ; LCFF_X18_Y11_N5    ; 13      ; Async. clear               ; no     ; --                   ; --               ; --                        ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|rdempty_eq_comp_aeb_int~0 ; LCCOMB_X15_Y11_N16 ; 20      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|wrfull_eq_comp_aeb_int~0  ; LCCOMB_X13_Y10_N4  ; 21      ; Clock enable, Write enable ; no     ; --                   ; --               ; --                        ;
-; Tx_read_clock                                                                                ; LCFF_X1_Y6_N21     ; 55      ; Clock                      ; yes    ; Global clock         ; GCLK1            ; --                        ;
-; byte_count[6]~99                                                                             ; LCCOMB_X19_Y7_N2   ; 7       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[2]            ; LCFF_X21_Y5_N11    ; 79      ; Clock                      ; yes    ; Global clock         ; GCLK7            ; --                        ;
-; clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[8]            ; LCFF_X21_Y5_N23    ; 2       ; Clock                      ; yes    ; Global clock         ; GCLK6            ; --                        ;
-; clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[8]            ; LCFF_X21_Y5_N23    ; 18      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
-; data_flag                                                                                    ; LCFF_X27_Y7_N17    ; 86      ; Async. clear, Clock        ; yes    ; Global clock         ; GCLK4            ; --                        ;
-; debounce:de_PTT|always0~0                                                                    ; LCCOMB_X26_Y9_N2   ; 19      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
-; loop_counter[2]~258                                                                          ; LCCOMB_X27_Y8_N16  ; 7       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; register[15]~2445                                                                            ; LCCOMB_X25_Y8_N20  ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; register[6]~2434                                                                             ; LCCOMB_X25_Y6_N16  ; 6       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; rtl~2                                                                                        ; LCCOMB_X20_Y6_N12  ; 2       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; rx_avail[4]~7                                                                                ; LCCOMB_X25_Y8_N14  ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; state_FX.0100                                                                                ; LCFF_X4_Y6_N9      ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; state_PWM.00101                                                                              ; LCFF_X20_Y6_N25    ; 3       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; state_PWM.00110                                                                              ; LCFF_X25_Y6_N9     ; 9       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; state_PWM.00111                                                                              ; LCFF_X27_Y6_N29    ; 18      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; state_PWM.01000                                                                              ; LCFF_X27_Y6_N31    ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; state_PWM.01001                                                                              ; LCFF_X27_Y6_N17    ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; state_PWM.01010                                                                              ; LCFF_X27_Y6_N21    ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; state_PWM.01100                                                                              ; LCFF_X24_Y4_N29    ; 11      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
-; sync_count[0]~245                                                                            ; LCCOMB_X19_Y6_N30  ; 9       ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
-; sync_count[0]~262                                                                            ; LCCOMB_X19_Y6_N10  ; 9       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; I2SAudioOut:I2SAO|local_left_sample[15]~0                                                    ; LCCOMB_X20_Y5_N8   ; 32      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; I2SAudioOut:I2SAO|reduce_or~12                                                               ; LCCOMB_X20_Y5_N6   ; 5       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; IFCLK                                                                                        ; PIN_24             ; 53      ; Clock                      ; yes    ; Global clock         ; GCLK2            ; --                        ;
+; Rx_control_0[7]~0                                                                            ; LCCOMB_X22_Y4_N0   ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdaclr                    ; LCFF_X27_Y6_N3     ; 14      ; Async. clear               ; yes    ; Global clock         ; GCLK7            ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|valid_rdreq               ; LCCOMB_X22_Y6_N0   ; 29      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|wrfull_eq_comp_aeb_int~0  ; LCCOMB_X18_Y3_N24  ; 30      ; Clock enable, Write enable ; no     ; --                   ; --               ; --                        ;
+; SLEN                                                                                         ; LCFF_X7_Y6_N19     ; 17      ; Output enable              ; no     ; --                   ; --               ; --                        ;
+; SLRD~reg0                                                                                    ; LCFF_X1_Y6_N17     ; 88      ; Clock                      ; yes    ; Global clock         ; GCLK3            ; --                        ;
+; Select~6200                                                                                  ; LCCOMB_X24_Y3_N12  ; 32      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Select~6207                                                                                  ; LCCOMB_X7_Y6_N24   ; 9       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Select~6282                                                                                  ; LCCOMB_X10_Y7_N2   ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|rdaclr                    ; LCFF_X18_Y11_N3    ; 13      ; Async. clear               ; no     ; --                   ; --               ; --                        ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|rdempty_eq_comp_aeb_int~0 ; LCCOMB_X15_Y11_N20 ; 20      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|wrfull_eq_comp_aeb_int~0  ; LCCOMB_X14_Y10_N4  ; 21      ; Clock enable, Write enable ; no     ; --                   ; --               ; --                        ;
+; Tx_read_clock                                                                                ; LCFF_X1_Y6_N13     ; 55      ; Clock                      ; yes    ; Global clock         ; GCLK1            ; --                        ;
+; byte_count[6]~99                                                                             ; LCCOMB_X27_Y8_N6   ; 7       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[2]            ; LCFF_X20_Y5_N17    ; 79      ; Clock                      ; yes    ; Global clock         ; GCLK4            ; --                        ;
+; clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[8]            ; LCFF_X20_Y5_N29    ; 2       ; Clock                      ; yes    ; Global clock         ; GCLK6            ; --                        ;
+; clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[8]            ; LCFF_X20_Y5_N29    ; 18      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; data_flag                                                                                    ; LCFF_X26_Y7_N19    ; 86      ; Async. clear, Clock        ; yes    ; Global clock         ; GCLK5            ; --                        ;
+; debounce:de_PTT|always0~0                                                                    ; LCCOMB_X21_Y8_N0   ; 19      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; loop_counter[0]~258                                                                          ; LCCOMB_X14_Y8_N26  ; 7       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; register[0]~3067                                                                             ; LCCOMB_X15_Y6_N16  ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; register[9]~3075                                                                             ; LCCOMB_X13_Y5_N0   ; 6       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; rtl~2                                                                                        ; LCCOMB_X21_Y5_N18  ; 2       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; rx_avail[4]~7                                                                                ; LCCOMB_X14_Y6_N10  ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; state_FX.0011                                                                                ; LCFF_X10_Y7_N13    ; 18      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; state_PWM.00101                                                                              ; LCFF_X22_Y4_N1     ; 3       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; state_PWM.00110                                                                              ; LCFF_X27_Y8_N5     ; 9       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; state_PWM.00111                                                                              ; LCFF_X27_Y8_N9     ; 18      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; state_PWM.01000                                                                              ; LCFF_X27_Y2_N23    ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; state_PWM.01001                                                                              ; LCFF_X27_Y2_N25    ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; state_PWM.01010                                                                              ; LCFF_X24_Y4_N9     ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; state_PWM.01100                                                                              ; LCFF_X24_Y3_N7     ; 11      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; sync_count[8]~245                                                                            ; LCCOMB_X21_Y4_N4   ; 9       ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; sync_count[8]~262                                                                            ; LCCOMB_X21_Y4_N10  ; 9       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
 +----------------------------------------------------------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
 
 
@@ -1118,13 +1117,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                                                              ; Location        ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +-----------------------------------------------------------------------------------+-----------------+---------+----------------------+------------------+---------------------------+
 ; FX2_CLK                                                                           ; PIN_23          ; 24      ; Global clock         ; GCLK0            ; --                        ;
-; IFCLK                                                                             ; PIN_24          ; 49      ; Global clock         ; GCLK2            ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdaclr         ; LCFF_X27_Y6_N3  ; 14      ; Global clock         ; GCLK5            ; --                        ;
-; SLRD~reg0                                                                         ; LCFF_X1_Y6_N5   ; 88      ; Global clock         ; GCLK3            ; --                        ;
-; Tx_read_clock                                                                     ; LCFF_X1_Y6_N21  ; 55      ; Global clock         ; GCLK1            ; --                        ;
-; clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[2] ; LCFF_X21_Y5_N11 ; 79      ; Global clock         ; GCLK7            ; --                        ;
-; clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[8] ; LCFF_X21_Y5_N23 ; 2       ; Global clock         ; GCLK6            ; --                        ;
-; data_flag                                                                         ; LCFF_X27_Y7_N17 ; 86      ; Global clock         ; GCLK4            ; --                        ;
+; IFCLK                                                                             ; PIN_24          ; 53      ; Global clock         ; GCLK2            ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdaclr         ; LCFF_X27_Y6_N3  ; 14      ; Global clock         ; GCLK7            ; --                        ;
+; SLRD~reg0                                                                         ; LCFF_X1_Y6_N17  ; 88      ; Global clock         ; GCLK3            ; --                        ;
+; Tx_read_clock                                                                     ; LCFF_X1_Y6_N13  ; 55      ; Global clock         ; GCLK1            ; --                        ;
+; clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[2] ; LCFF_X20_Y5_N17 ; 79      ; Global clock         ; GCLK4            ; --                        ;
+; clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[8] ; LCFF_X20_Y5_N29 ; 2       ; Global clock         ; GCLK6            ; --                        ;
+; data_flag                                                                         ; LCFF_X26_Y7_N19 ; 86      ; Global clock         ; GCLK5            ; --                        ;
 +-----------------------------------------------------------------------------------+-----------------+---------+----------------------+------------------+---------------------------+
 
 
@@ -1135,15 +1134,16 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------------------------------------------------------------------------------------------+---------+
 ; BCLK                                                                                                                             ; 296     ;
 ; CLK_24MHZ                                                                                                                        ; 76      ;
-; AD_state[1]                                                                                                                      ; 37      ;
-; AD_state[2]                                                                                                                      ; 37      ;
-; AD_state[0]                                                                                                                      ; 32      ;
-; Select~5844                                                                                                                      ; 32      ;
+; AD_state[1]                                                                                                                      ; 35      ;
+; AD_state[2]                                                                                                                      ; 34      ;
+; Select~6200                                                                                                                      ; 32      ;
 ; I2SAudioOut:I2SAO|local_left_sample[15]~0                                                                                        ; 32      ;
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|wrfull_eq_comp_aeb_int~0                                      ; 30      ;
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|valid_rdreq                                                   ; 29      ;
-; AD_state[4]                                                                                                                      ; 26      ;
-; AD_state[5]                                                                                                                      ; 25      ;
+; AD_state[4]                                                                                                                      ; 28      ;
+; AD_state[0]                                                                                                                      ; 27      ;
+; AD_state[3]                                                                                                                      ; 22      ;
+; AD_state[5]                                                                                                                      ; 22      ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|wrfull_eq_comp_aeb_int~0                                      ; 21      ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|rdempty_eq_comp_aeb_int~0                                     ; 20      ;
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|wrptr_g[11]                                                   ; 20      ;
@@ -1151,7 +1151,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|wrptr_g[7]                                                    ; 20      ;
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|wrptr_g[4]                                                    ; 20      ;
 ; debounce:de_PTT|always0~0                                                                                                        ; 19      ;
-; AD_state[3]                                                                                                                      ; 19      ;
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|wrptr_g[9]                                                    ; 19      ;
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|wrptr_g[6]                                                    ; 19      ;
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|wrptr_g[3]                                                    ; 19      ;
@@ -1174,13 +1173,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdcnt_addr_ena                                                ; 18      ;
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[10] ; 18      ;
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[11] ; 18      ;
-; SLWR~reg0                                                                                                                        ; 18      ;
+; state_FX.0011                                                                                                                    ; 18      ;
 ; state_PWM.01001                                                                                                                  ; 17      ;
 ; state_PWM.01010                                                                                                                  ; 17      ;
 ; state_PWM.01000                                                                                                                  ; 17      ;
-; state_FX.0100                                                                                                                    ; 17      ;
+; SLEN                                                                                                                             ; 17      ;
 ; clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[8]                                                ; 17      ;
-; Decoder~630                                                                                                                      ; 16      ;
+; Decoder~617                                                                                                                      ; 16      ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|rdaclr                                                        ; 13      ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|wrptr_g[3]                                                    ; 12      ;
 +----------------------------------------------------------------------------------------------------------------------------------+---------+
@@ -1191,8 +1190,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Name                                                                                                                              ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Port A Input Registers ; Port A Output Registers ; Port B Input Registers ; Port B Output Registers ; Size  ; Implementation Port A Depth ; Implementation Port A Width ; Implementation Port B Depth ; Implementation Port B Width ; Implementation Bits ; M4Ks ; MIF  ; Location                                                                                                                                                                                       ;
 +-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ALTSYNCRAM ; AUTO ; True Dual Port ; 4096         ; 16           ; 4096         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 65536 ; 4096                        ; 16                          ; 4096                        ; 16                          ; 65536               ; 16   ; None ; M4K_X23_Y2, M4K_X11_Y8, M4K_X23_Y4, M4K_X23_Y7, M4K_X23_Y6, M4K_X23_Y8, M4K_X23_Y5, M4K_X23_Y3, M4K_X11_Y6, M4K_X11_Y4, M4K_X23_Y1, M4K_X11_Y1, M4K_X11_Y3, M4K_X11_Y5, M4K_X11_Y7, M4K_X11_Y2 ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|altsyncram_0kp:fifo_ram|altsyncram_6p41:altsyncram4|ALTSYNCRAM ; AUTO ; True Dual Port ; 2048         ; 16           ; 2048         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 32768 ; 2048                        ; 16                          ; 2048                        ; 16                          ; 32768               ; 8    ; None ; M4K_X23_Y9, M4K_X11_Y10, M4K_X11_Y9, M4K_X23_Y10, M4K_X11_Y11, M4K_X11_Y12, M4K_X23_Y11, M4K_X23_Y12                                                                                           ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|altsyncram_2kp:fifo_ram|altsyncram_8p41:altsyncram3|ALTSYNCRAM ; AUTO ; True Dual Port ; 4096         ; 16           ; 4096         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 65536 ; 4096                        ; 16                          ; 4096                        ; 16                          ; 65536               ; 16   ; None ; M4K_X23_Y4, M4K_X23_Y8, M4K_X23_Y1, M4K_X23_Y5, M4K_X23_Y2, M4K_X23_Y7, M4K_X23_Y6, M4K_X23_Y3, M4K_X11_Y8, M4K_X11_Y2, M4K_X11_Y1, M4K_X11_Y5, M4K_X11_Y4, M4K_X11_Y3, M4K_X11_Y6, M4K_X11_Y7 ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_gd41:auto_generated|altsyncram_0kp:fifo_ram|altsyncram_6p41:altsyncram4|ALTSYNCRAM ; AUTO ; True Dual Port ; 2048         ; 16           ; 2048         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 32768 ; 2048                        ; 16                          ; 2048                        ; 16                          ; 32768               ; 8    ; None ; M4K_X23_Y9, M4K_X23_Y11, M4K_X23_Y10, M4K_X11_Y9, M4K_X11_Y10, M4K_X11_Y11, M4K_X23_Y12, M4K_X11_Y12                                                                                           ;
 +-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 Note: Fitter may spread logical memories into multiple blocks to improve timing. The actual required RAM blocks can be found in the Fitter Resource Usage section.
 
@@ -1202,92 +1201,92 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +----------------------------+-------------------------+
 ; Interconnect Resource Type ; Usage                   ;
 +----------------------------+-------------------------+
-; Block interconnects        ; 1,621 / 15,666 ( 10 % ) ;
-; C16 interconnects          ; 9 / 812 ( 1 % )         ;
-; C4 interconnects           ; 825 / 11,424 ( 7 % )    ;
-; Direct links               ; 200 / 15,666 ( 1 % )    ;
+; Block interconnects        ; 1,654 / 15,666 ( 11 % ) ;
+; C16 interconnects          ; 23 / 812 ( 3 % )        ;
+; C4 interconnects           ; 913 / 11,424 ( 8 % )    ;
+; Direct links               ; 202 / 15,666 ( 1 % )    ;
 ; Global clocks              ; 8 / 8 ( 100 % )         ;
-; Local interconnects        ; 552 / 4,608 ( 12 % )    ;
-; R24 interconnects          ; 24 / 652 ( 4 % )        ;
-; R4 interconnects           ; 1,061 / 13,328 ( 8 % )  ;
+; Local interconnects        ; 543 / 4,608 ( 12 % )    ;
+; R24 interconnects          ; 30 / 652 ( 5 % )        ;
+; R4 interconnects           ; 1,051 / 13,328 ( 8 % )  ;
 +----------------------------+-------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Logic Elements                                                         ;
 +---------------------------------------------+------------------------------+
-; Number of Logic Elements  (Average = 10.73) ; Number of LABs  (Total = 89) ;
+; Number of Logic Elements  (Average = 10.32) ; Number of LABs  (Total = 92) ;
 +---------------------------------------------+------------------------------+
-; 1                                           ; 8                            ;
-; 2                                           ; 6                            ;
-; 3                                           ; 5                            ;
-; 4                                           ; 5                            ;
-; 5                                           ; 2                            ;
-; 6                                           ; 1                            ;
-; 7                                           ; 3                            ;
-; 8                                           ; 2                            ;
-; 9                                           ; 1                            ;
-; 10                                          ; 3                            ;
-; 11                                          ; 1                            ;
+; 1                                           ; 4                            ;
+; 2                                           ; 13                           ;
+; 3                                           ; 6                            ;
+; 4                                           ; 4                            ;
+; 5                                           ; 3                            ;
+; 6                                           ; 2                            ;
+; 7                                           ; 1                            ;
+; 8                                           ; 6                            ;
+; 9                                           ; 2                            ;
+; 10                                          ; 1                            ;
+; 11                                          ; 0                            ;
 ; 12                                          ; 1                            ;
-; 13                                          ; 5                            ;
+; 13                                          ; 3                            ;
 ; 14                                          ; 5                            ;
-; 15                                          ; 6                            ;
-; 16                                          ; 35                           ;
+; 15                                          ; 2                            ;
+; 16                                          ; 39                           ;
 +---------------------------------------------+------------------------------+
 
 
 +-------------------------------------------------------------------+
 ; LAB-wide Signals                                                  ;
 +------------------------------------+------------------------------+
-; LAB-wide Signals  (Average = 1.49) ; Number of LABs  (Total = 89) ;
+; LAB-wide Signals  (Average = 1.48) ; Number of LABs  (Total = 92) ;
 +------------------------------------+------------------------------+
 ; 1 Async. clear                     ; 3                            ;
 ; 1 Clock                            ; 68                           ;
 ; 1 Clock enable                     ; 30                           ;
-; 1 Sync. clear                      ; 6                            ;
-; 2 Clock enables                    ; 9                            ;
-; 2 Clocks                           ; 17                           ;
+; 1 Sync. clear                      ; 5                            ;
+; 2 Clock enables                    ; 10                           ;
+; 2 Clocks                           ; 20                           ;
 +------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Signals Sourced  (Average = 17.27) ; Number of LABs  (Total = 89) ;
+; Number of Signals Sourced  (Average = 16.72) ; Number of LABs  (Total = 92) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
-; 1                                            ; 4                            ;
-; 2                                            ; 5                            ;
-; 3                                            ; 2                            ;
-; 4                                            ; 4                            ;
-; 5                                            ; 3                            ;
-; 6                                            ; 4                            ;
-; 7                                            ; 1                            ;
-; 8                                            ; 2                            ;
-; 9                                            ; 1                            ;
-; 10                                           ; 3                            ;
+; 1                                            ; 3                            ;
+; 2                                            ; 3                            ;
+; 3                                            ; 5                            ;
+; 4                                            ; 10                           ;
+; 5                                            ; 0                            ;
+; 6                                            ; 5                            ;
+; 7                                            ; 3                            ;
+; 8                                            ; 1                            ;
+; 9                                            ; 3                            ;
+; 10                                           ; 0                            ;
 ; 11                                           ; 0                            ;
 ; 12                                           ; 1                            ;
-; 13                                           ; 1                            ;
+; 13                                           ; 2                            ;
 ; 14                                           ; 2                            ;
-; 15                                           ; 3                            ;
-; 16                                           ; 3                            ;
-; 17                                           ; 0                            ;
+; 15                                           ; 0                            ;
+; 16                                           ; 4                            ;
+; 17                                           ; 1                            ;
 ; 18                                           ; 2                            ;
-; 19                                           ; 2                            ;
+; 19                                           ; 1                            ;
 ; 20                                           ; 4                            ;
 ; 21                                           ; 2                            ;
-; 22                                           ; 1                            ;
-; 23                                           ; 6                            ;
-; 24                                           ; 4                            ;
-; 25                                           ; 6                            ;
-; 26                                           ; 5                            ;
-; 27                                           ; 5                            ;
-; 28                                           ; 2                            ;
+; 22                                           ; 0                            ;
+; 23                                           ; 5                            ;
+; 24                                           ; 6                            ;
+; 25                                           ; 4                            ;
+; 26                                           ; 6                            ;
+; 27                                           ; 4                            ;
+; 28                                           ; 4                            ;
 ; 29                                           ; 4                            ;
-; 30                                           ; 3                            ;
-; 31                                           ; 3                            ;
+; 30                                           ; 5                            ;
+; 31                                           ; 1                            ;
 ; 32                                           ; 1                            ;
 +----------------------------------------------+------------------------------+
 
@@ -1295,62 +1294,61 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +--------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                        ;
 +-------------------------------------------------+------------------------------+
-; Number of Signals Sourced Out  (Average = 6.44) ; Number of LABs  (Total = 89) ;
+; Number of Signals Sourced Out  (Average = 6.47) ; Number of LABs  (Total = 92) ;
 +-------------------------------------------------+------------------------------+
 ; 0                                               ; 3                            ;
-; 1                                               ; 16                           ;
+; 1                                               ; 17                           ;
 ; 2                                               ; 8                            ;
 ; 3                                               ; 9                            ;
-; 4                                               ; 1                            ;
-; 5                                               ; 5                            ;
-; 6                                               ; 6                            ;
+; 4                                               ; 5                            ;
+; 5                                               ; 4                            ;
+; 6                                               ; 4                            ;
 ; 7                                               ; 6                            ;
-; 8                                               ; 5                            ;
-; 9                                               ; 5                            ;
-; 10                                              ; 2                            ;
+; 8                                               ; 6                            ;
+; 9                                               ; 3                            ;
+; 10                                              ; 6                            ;
 ; 11                                              ; 3                            ;
-; 12                                              ; 8                            ;
+; 12                                              ; 2                            ;
 ; 13                                              ; 3                            ;
 ; 14                                              ; 4                            ;
 ; 15                                              ; 2                            ;
-; 16                                              ; 3                            ;
+; 16                                              ; 7                            ;
 +-------------------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Distinct Inputs  (Average = 10.11) ; Number of LABs  (Total = 89) ;
+; Number of Distinct Inputs  (Average = 10.18) ; Number of LABs  (Total = 92) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 0                            ;
-; 2                                            ; 8                            ;
-; 3                                            ; 12                           ;
-; 4                                            ; 4                            ;
-; 5                                            ; 6                            ;
-; 6                                            ; 5                            ;
+; 2                                            ; 5                            ;
+; 3                                            ; 16                           ;
+; 4                                            ; 5                            ;
+; 5                                            ; 8                            ;
+; 6                                            ; 1                            ;
 ; 7                                            ; 4                            ;
-; 8                                            ; 3                            ;
-; 9                                            ; 5                            ;
-; 10                                           ; 8                            ;
-; 11                                           ; 6                            ;
-; 12                                           ; 0                            ;
+; 8                                            ; 4                            ;
+; 9                                            ; 4                            ;
+; 10                                           ; 11                           ;
+; 11                                           ; 3                            ;
+; 12                                           ; 3                            ;
 ; 13                                           ; 2                            ;
 ; 14                                           ; 3                            ;
-; 15                                           ; 2                            ;
-; 16                                           ; 3                            ;
-; 17                                           ; 4                            ;
+; 15                                           ; 3                            ;
+; 16                                           ; 1                            ;
+; 17                                           ; 0                            ;
 ; 18                                           ; 2                            ;
-; 19                                           ; 1                            ;
-; 20                                           ; 2                            ;
-; 21                                           ; 1                            ;
-; 22                                           ; 1                            ;
-; 23                                           ; 1                            ;
+; 19                                           ; 4                            ;
+; 20                                           ; 1                            ;
+; 21                                           ; 3                            ;
+; 22                                           ; 3                            ;
+; 23                                           ; 2                            ;
 ; 24                                           ; 1                            ;
-; 25                                           ; 2                            ;
-; 26                                           ; 2                            ;
-; 27                                           ; 0                            ;
-; 28                                           ; 1                            ;
+; 25                                           ; 1                            ;
+; 26                                           ; 1                            ;
+; 27                                           ; 1                            ;
 +----------------------------------------------+------------------------------+
 
 
@@ -1360,7 +1358,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 5.1 Build 176 10/26/2005 SJ Web Edition
-    Info: Processing started: Thu Aug 03 22:55:37 2006
+    Info: Processing started: Fri Aug 04 21:51:29 2006
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Selected device EP2C5Q208C8 for design "Ozy_Janus"
 Info: Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
@@ -1380,7 +1378,7 @@ Info: Automatically promoted node SLRD~reg0
     Info: Automatically promoted destinations to use location or clock signal Global Clock
     Info: Following destination nodes may be non-global or may not use global or regional clocks
         Info: Destination node SLRD
-        Info: Destination node Select~5828
+        Info: Destination node Select~6184
 Info: Automatically promoted node clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[2] 
     Info: Automatically promoted destinations to use location or clock signal Global Clock
     Info: Following destination nodes may be non-global or may not use global or regional clocks
@@ -1390,7 +1388,7 @@ Info: Automatically promoted node clocks:clocks|lpm_counter:lpm_counter_componen
 Info: Automatically promoted node Tx_read_clock 
     Info: Automatically promoted destinations to use location or clock signal Global Clock
     Info: Following destination nodes may be non-global or may not use global or regional clocks
-        Info: Destination node Select~5850
+        Info: Destination node Select~6208
 Info: Automatically promoted node clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[8] 
     Info: Automatically promoted destinations to use location or clock signal Global Clock
     Info: Following destination nodes may be non-global or may not use global or regional clocks
@@ -1402,7 +1400,7 @@ Info: Automatically promoted node clocks:clocks|lpm_counter:lpm_counter_componen
         Info: Destination node I2SAudioOut:I2SAO|Select~168
         Info: Destination node I2SAudioOut:I2SAO|Select~169
         Info: Destination node state_PWM.01100
-        Info: Destination node Select~5844
+        Info: Destination node Select~6200
         Info: Destination node I2SAudioOut:I2SAO|Select~170
         Info: Non-global destination nodes limited to 10 nodes
 Info: Automatically promoted node Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_ts51:auto_generated|rdaclr 
@@ -1420,16 +1418,16 @@ Info: Fitter is using Normal packing mode for logic elements with Auto setting f
 Info: Fitter placement preparation operations ending: elapsed time is 00:00:03
 Info: Fitter placement operations beginning
 Info: Fitter placement was successful
-Info: Fitter placement operations ending: elapsed time is 00:00:16
+Info: Fitter placement operations ending: elapsed time is 00:00:15
 Info: Estimated most critical path is register to register delay of 2.835 ns
-    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X21_Y5; Fanout = 19; REG Node = 'clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[8]'
-    Info: 2: + IC(0.230 ns) + CELL(0.651 ns) = 0.881 ns; Loc. = LAB_X21_Y5; Fanout = 32; COMB Node = 'I2SAudioOut:I2SAO|local_left_sample[15]~0'
-    Info: 3: + IC(1.099 ns) + CELL(0.855 ns) = 2.835 ns; Loc. = LAB_X22_Y7; Fanout = 1; REG Node = 'I2SAudioOut:I2SAO|local_left_sample[5]'
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X20_Y5; Fanout = 19; REG Node = 'clocks:clocks|lpm_counter:lpm_counter_component|cntr_emd:auto_generated|safe_q[8]'
+    Info: 2: + IC(0.230 ns) + CELL(0.651 ns) = 0.881 ns; Loc. = LAB_X20_Y5; Fanout = 32; COMB Node = 'I2SAudioOut:I2SAO|local_left_sample[15]~0'
+    Info: 3: + IC(1.099 ns) + CELL(0.855 ns) = 2.835 ns; Loc. = LAB_X20_Y3; Fanout = 1; REG Node = 'I2SAudioOut:I2SAO|local_left_sample[5]'
     Info: Total cell delay = 1.506 ns ( 53.12 % )
     Info: Total interconnect delay = 1.329 ns ( 46.88 % )
 Info: Fitter routing operations beginning
-Info: Average interconnect usage is 7% of the available device resources. Peak interconnect usage is 10%
-Info: Fitter routing operations ending: elapsed time is 00:00:06
+Info: Average interconnect usage is 7% of the available device resources. Peak interconnect usage is 9%
+Info: Fitter routing operations ending: elapsed time is 00:00:05
 Info: Started post-fitting delay annotation
 Warning: Timing characteristics of device EP2C5Q208C8 are preliminary
 Warning: Found 37 output pins without output pin load capacitance assignment
@@ -1476,7 +1474,7 @@ Warning: Following 3 pins have nothing, GND, or VCC driving datain port -- chang
     Info: Pin FIFO_ADR[0] has GND driving its datain port
     Info: Pin LED[4] has VCC driving its datain port
 Info: Following groups of pins have the same output enable
-    Info: Following pins have the same output enable: SLWR~reg0 (inverted)
+    Info: Following pins have the same output enable: SLEN
         Info: Type bidirectional pin FX2_FD[0] uses the LVTTL I/O standard
         Info: Type bidirectional pin FX2_FD[1] uses the LVTTL I/O standard
         Info: Type bidirectional pin FX2_FD[2] uses the LVTTL I/O standard
@@ -1494,7 +1492,7 @@ Info: Following groups of pins have the same output enable
         Info: Type bidirectional pin FX2_FD[14] uses the LVTTL I/O standard
         Info: Type bidirectional pin FX2_FD[15] uses the LVTTL I/O standard
 Info: Quartus II Fitter was successful. 0 errors, 40 warnings
-    Info: Processing ended: Thu Aug 03 22:56:16 2006
-    Info: Elapsed time: 00:00:39
+    Info: Processing ended: Fri Aug 04 21:52:04 2006
+    Info: Elapsed time: 00:00:36
 
 
