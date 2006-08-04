@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Fri Aug 04 13:42:01 2006
+                              4 ; This file generated Fri Aug 04 15:56:57 2006
                               5 ;--------------------------------------------------------
                               6 	.module board_specific
                               7 	.optsdcc -mmcs51 --model-small
@@ -712,7 +712,7 @@
                             712 ;	-----------------------------------------
                             713 ;	 function putchar
                             714 ;	-----------------------------------------
-   05F4                     715 _putchar:
+   0627                     715 _putchar:
                     0002    716 	ar2 = 0x02
                     0003    717 	ar3 = 0x03
                     0004    718 	ar4 = 0x04
@@ -722,23 +722,23 @@
                     0000    722 	ar0 = 0x00
                     0001    723 	ar1 = 0x01
                             724 ;     genReceive
-   05F4 AA 82               725 	mov	r2,dpl
+   0627 AA 82               725 	mov	r2,dpl
                             726 ;Initial/src/board_specific.c:33: while(!TI);
-   05F6                     727 00101$:
+   0629                     727 00101$:
                             728 ;     genIfx
                             729 ;     genIfxJump
                             730 ;	Peephole 111	removed ljmp by inverse jump logic
                             731 ;Initial/src/board_specific.c:34: TI=0;
                             732 ;     genAssign
                             733 ;	Peephole 250.a	using atomic test and clear
-   05F6 10 99 02            734 	jbc	_TI,00108$
-   05F9 80 FB               735 	sjmp	00101$
-   05FB                     736 00108$:
+   0629 10 99 02            734 	jbc	_TI,00108$
+   062C 80 FB               735 	sjmp	00101$
+   062E                     736 00108$:
                             737 ;Initial/src/board_specific.c:35: SBUF0 = c;
                             738 ;     genAssign
-   05FB 8A 99               739 	mov	_SBUF0,r2
-   05FD                     740 00104$:
-   05FD 22                  741 	ret
+   062E 8A 99               739 	mov	_SBUF0,r2
+   0630                     740 00104$:
+   0630 22                  741 	ret
                             742 ;------------------------------------------------------------
                             743 ;Allocation info for local variables in function 'putstr'
                             744 ;------------------------------------------------------------
@@ -750,62 +750,62 @@
                             750 ;	-----------------------------------------
                             751 ;	 function putstr
                             752 ;	-----------------------------------------
-   05FE                     753 _putstr:
+   0631                     753 _putstr:
                             754 ;     genReceive
-   05FE AA 82               755 	mov	r2,dpl
-   0600 AB 83               756 	mov	r3,dph
-   0602 AC F0               757 	mov	r4,b
+   0631 AA 82               755 	mov	r2,dpl
+   0633 AB 83               756 	mov	r3,dph
+   0635 AC F0               757 	mov	r4,b
                             758 ;Initial/src/board_specific.c:42: while ((c=*(s+(i++)))!=0) putchar(c);
                             759 ;     genAssign
-   0604 7D 00               760 	mov	r5,#0x00
-   0606                     761 00101$:
+   0637 7D 00               760 	mov	r5,#0x00
+   0639                     761 00101$:
                             762 ;     genAssign
-   0606 8D 06               763 	mov	ar6,r5
+   0639 8D 06               763 	mov	ar6,r5
                             764 ;     genPlus
                             765 ;     genPlusIncr
-   0608 0D                  766 	inc	r5
+   063B 0D                  766 	inc	r5
                             767 ;     genPlus
                             768 ;	Peephole 236.g	used r6 instead of ar6
-   0609 EE                  769 	mov	a,r6
+   063C EE                  769 	mov	a,r6
                             770 ;	Peephole 236.a	used r2 instead of ar2
-   060A 2A                  771 	add	a,r2
-   060B FE                  772 	mov	r6,a
+   063D 2A                  771 	add	a,r2
+   063E FE                  772 	mov	r6,a
                             773 ;	Peephole 181	changed mov to clr
-   060C E4                  774 	clr	a
+   063F E4                  774 	clr	a
                             775 ;	Peephole 236.b	used r3 instead of ar3
-   060D 3B                  776 	addc	a,r3
-   060E FF                  777 	mov	r7,a
-   060F 8C 00               778 	mov	ar0,r4
+   0640 3B                  776 	addc	a,r3
+   0641 FF                  777 	mov	r7,a
+   0642 8C 00               778 	mov	ar0,r4
                             779 ;     genPointerGet
                             780 ;     genGenPointerGet
-   0611 8E 82               781 	mov	dpl,r6
-   0613 8F 83               782 	mov	dph,r7
-   0615 88 F0               783 	mov	b,r0
-   0617 12 10 24            784 	lcall	__gptrget
-   061A FE                  785 	mov	r6,a
+   0644 8E 82               781 	mov	dpl,r6
+   0646 8F 83               782 	mov	dph,r7
+   0648 88 F0               783 	mov	b,r0
+   064A 12 10 57            784 	lcall	__gptrget
+   064D FE                  785 	mov	r6,a
                             786 ;     genAssign
-   061B 8E 07               787 	mov	ar7,r6
+   064E 8E 07               787 	mov	ar7,r6
                             788 ;     genCmpEq
-   061D BE 00 01            789 	cjne	r6,#0x00,00108$
+   0650 BE 00 01            789 	cjne	r6,#0x00,00108$
                             790 ;	Peephole 112.b	changed ljmp to sjmp
                             791 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0620 22                  792 	ret
-   0621                     793 00108$:
+   0653 22                  792 	ret
+   0654                     793 00108$:
                             794 ;     genCall
-   0621 8F 82               795 	mov	dpl,r7
-   0623 C0 02               796 	push	ar2
-   0625 C0 03               797 	push	ar3
-   0627 C0 04               798 	push	ar4
-   0629 C0 05               799 	push	ar5
-   062B 12 05 F4            800 	lcall	_putchar
-   062E D0 05               801 	pop	ar5
-   0630 D0 04               802 	pop	ar4
-   0632 D0 03               803 	pop	ar3
-   0634 D0 02               804 	pop	ar2
+   0654 8F 82               795 	mov	dpl,r7
+   0656 C0 02               796 	push	ar2
+   0658 C0 03               797 	push	ar3
+   065A C0 04               798 	push	ar4
+   065C C0 05               799 	push	ar5
+   065E 12 06 27            800 	lcall	_putchar
+   0661 D0 05               801 	pop	ar5
+   0663 D0 04               802 	pop	ar4
+   0665 D0 03               803 	pop	ar3
+   0667 D0 02               804 	pop	ar2
                             805 ;	Peephole 112.b	changed ljmp to sjmp
-   0636 80 CE               806 	sjmp	00101$
-   0638                     807 00104$:
-   0638 22                  808 	ret
+   0669 80 CE               806 	sjmp	00101$
+   066B                     807 00104$:
+   066B 22                  808 	ret
                             809 ;------------------------------------------------------------
                             810 ;Allocation info for local variables in function 'set_led_0'
                             811 ;------------------------------------------------------------
@@ -815,29 +815,29 @@
                             815 ;	-----------------------------------------
                             816 ;	 function set_led_0
                             817 ;	-----------------------------------------
-   0639                     818 _set_led_0:
+   066C                     818 _set_led_0:
                             819 ;     genReceive
                             820 ;Initial/src/board_specific.c:48: if (!on)			// active low
                             821 ;     genIfx
                             822 ;	peephole 177.g	optimized mov sequence
-   0639 E5 82               823 	mov	a,dpl
-   063B FA                  824 	mov	r2,a
+   066C E5 82               823 	mov	a,dpl
+   066E FA                  824 	mov	r2,a
                             825 ;     genIfxJump
                             826 ;	Peephole 109	removed ljmp by inverse jump logic
-   063C 70 04               827 	jnz	00102$
-   063E                     828 00107$:
+   066F 70 04               827 	jnz	00102$
+   0671                     828 00107$:
                             829 ;Initial/src/board_specific.c:49: HPSDR_PC |= bmPC_LED0;
                             830 ;     genOr
-   063E 43 A0 40            831 	orl	_IOC,#0x40
+   0671 43 A0 40            831 	orl	_IOC,#0x40
                             832 ;	Peephole 112.b	changed ljmp to sjmp
                             833 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0641 22                  834 	ret
-   0642                     835 00102$:
+   0674 22                  834 	ret
+   0675                     835 00102$:
                             836 ;Initial/src/board_specific.c:51: HPSDR_PC &= ~bmPC_LED0;
                             837 ;     genAnd
-   0642 53 A0 BF            838 	anl	_IOC,#0xBF
-   0645                     839 00104$:
-   0645 22                  840 	ret
+   0675 53 A0 BF            838 	anl	_IOC,#0xBF
+   0678                     839 00104$:
+   0678 22                  840 	ret
                             841 ;------------------------------------------------------------
                             842 ;Allocation info for local variables in function 'set_led_1'
                             843 ;------------------------------------------------------------
@@ -847,29 +847,29 @@
                             847 ;	-----------------------------------------
                             848 ;	 function set_led_1
                             849 ;	-----------------------------------------
-   0646                     850 _set_led_1:
+   0679                     850 _set_led_1:
                             851 ;     genReceive
                             852 ;Initial/src/board_specific.c:57: if (!on)			// active low
                             853 ;     genIfx
                             854 ;	peephole 177.g	optimized mov sequence
-   0646 E5 82               855 	mov	a,dpl
-   0648 FA                  856 	mov	r2,a
+   0679 E5 82               855 	mov	a,dpl
+   067B FA                  856 	mov	r2,a
                             857 ;     genIfxJump
                             858 ;	Peephole 109	removed ljmp by inverse jump logic
-   0649 70 04               859 	jnz	00102$
-   064B                     860 00107$:
+   067C 70 04               859 	jnz	00102$
+   067E                     860 00107$:
                             861 ;Initial/src/board_specific.c:58: HPSDR_PC |= bmPC_LED1;
                             862 ;     genOr
-   064B 43 A0 80            863 	orl	_IOC,#0x80
+   067E 43 A0 80            863 	orl	_IOC,#0x80
                             864 ;	Peephole 112.b	changed ljmp to sjmp
                             865 ;	Peephole 251.b	replaced sjmp to ret with ret
-   064E 22                  866 	ret
-   064F                     867 00102$:
+   0681 22                  866 	ret
+   0682                     867 00102$:
                             868 ;Initial/src/board_specific.c:60: HPSDR_PC &= ~bmPC_LED1;
                             869 ;     genAnd
-   064F 53 A0 7F            870 	anl	_IOC,#0x7F
-   0652                     871 00104$:
-   0652 22                  872 	ret
+   0682 53 A0 7F            870 	anl	_IOC,#0x7F
+   0685                     871 00104$:
+   0685 22                  872 	ret
                             873 ;------------------------------------------------------------
                             874 ;Allocation info for local variables in function 'toggle_led_0'
                             875 ;------------------------------------------------------------
@@ -878,12 +878,12 @@
                             878 ;	-----------------------------------------
                             879 ;	 function toggle_led_0
                             880 ;	-----------------------------------------
-   0653                     881 _toggle_led_0:
+   0686                     881 _toggle_led_0:
                             882 ;Initial/src/board_specific.c:66: HPSDR_PC ^= bmPC_LED0;
                             883 ;     genXor
-   0653 63 A0 40            884 	xrl	_IOC,#0x40
-   0656                     885 00101$:
-   0656 22                  886 	ret
+   0686 63 A0 40            884 	xrl	_IOC,#0x40
+   0689                     885 00101$:
+   0689 22                  886 	ret
                             887 ;------------------------------------------------------------
                             888 ;Allocation info for local variables in function 'toggle_led_1'
                             889 ;------------------------------------------------------------
@@ -892,12 +892,12 @@
                             892 ;	-----------------------------------------
                             893 ;	 function toggle_led_1
                             894 ;	-----------------------------------------
-   0657                     895 _toggle_led_1:
+   068A                     895 _toggle_led_1:
                             896 ;Initial/src/board_specific.c:72: HPSDR_PC ^= bmPC_LED1;
                             897 ;     genXor
-   0657 63 A0 80            898 	xrl	_IOC,#0x80
-   065A                     899 00101$:
-   065A 22                  900 	ret
+   068A 63 A0 80            898 	xrl	_IOC,#0x80
+   068D                     899 00101$:
+   068D 22                  900 	ret
                             901 ;------------------------------------------------------------
                             902 ;Allocation info for local variables in function 'init_board'
                             903 ;------------------------------------------------------------
@@ -906,9 +906,9 @@
                             906 ;	-----------------------------------------
                             907 ;	 function init_board
                             908 ;	-----------------------------------------
-   065B                     909 _init_board:
+   068E                     909 _init_board:
                             910 ;Initial/src/board_specific.c:78: init_spi();
                             911 ;     genCall
                             912 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   065B 02 09 FC            913 	ljmp	_init_spi
+   068E 02 0A 2F            913 	ljmp	_init_spi
                             914 	.area CSEG    (CODE)

@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Fri Aug 04 13:42:03 2006
+                              4 ; This file generated Fri Aug 04 15:56:58 2006
                               5 ;--------------------------------------------------------
                               6 	.module timer
                               7 	.optsdcc -mmcs51 --model-small
@@ -694,7 +694,7 @@
                             694 ;	-----------------------------------------
                             695 ;	 function hook_timer_tick
                             696 ;	-----------------------------------------
-   0BD7                     697 _hook_timer_tick:
+   0C0A                     697 _hook_timer_tick:
                     0002    698 	ar2 = 0x02
                     0003    699 	ar3 = 0x03
                     0004    700 	ar4 = 0x04
@@ -704,30 +704,30 @@
                     0000    704 	ar0 = 0x00
                     0001    705 	ar1 = 0x01
                             706 ;     genReceive
-   0BD7 AA 82               707 	mov	r2,dpl
-   0BD9 AB 83               708 	mov	r3,dph
+   0C0A AA 82               707 	mov	r2,dpl
+   0C0C AB 83               708 	mov	r3,dph
                             709 ;Initial/src/lib/timer.c:44: ET2 = 0;			// disable timer 2 interrupts
                             710 ;     genAssign
-   0BDB C2 AD               711 	clr	_ET2
+   0C0E C2 AD               711 	clr	_ET2
                             712 ;Initial/src/lib/timer.c:45: hook_sv (SV_TIMER_2, isr_tick_handler);
                             713 ;     genAssign
-   0BDD 8A 2B               714 	mov	_hook_sv_PARM_2,r2
-   0BDF 8B 2C               715 	mov	(_hook_sv_PARM_2 + 1),r3
+   0C10 8A 2B               714 	mov	_hook_sv_PARM_2,r2
+   0C12 8B 2C               715 	mov	(_hook_sv_PARM_2 + 1),r3
                             716 ;     genCall
-   0BE1 75 82 2B            717 	mov	dpl,#0x2B
-   0BE4 12 08 36            718 	lcall	_hook_sv
+   0C14 75 82 2B            717 	mov	dpl,#0x2B
+   0C17 12 08 69            718 	lcall	_hook_sv
                             719 ;Initial/src/lib/timer.c:47: RCAP2H = RELOAD_VALUE >> 8;	// setup the auto reload value
                             720 ;     genAssign
-   0BE7 75 CB 63            721 	mov	_RCAP2H,#0x63
+   0C1A 75 CB 63            721 	mov	_RCAP2H,#0x63
                             722 ;Initial/src/lib/timer.c:48: RCAP2L = RELOAD_VALUE;
                             723 ;     genAssign
-   0BEA 75 CA C0            724 	mov	_RCAP2L,#0xC0
+   0C1D 75 CA C0            724 	mov	_RCAP2L,#0xC0
                             725 ;Initial/src/lib/timer.c:50: T2CON = 0x04;			// interrupt on overflow; reload; run
                             726 ;     genAssign
-   0BED 75 C8 04            727 	mov	_T2CON,#0x04
+   0C20 75 C8 04            727 	mov	_T2CON,#0x04
                             728 ;Initial/src/lib/timer.c:51: ET2 = 1;			// enable timer 2 interrupts
                             729 ;     genAssign
-   0BF0 D2 AD               730 	setb	_ET2
-   0BF2                     731 00101$:
-   0BF2 22                  732 	ret
+   0C23 D2 AD               730 	setb	_ET2
+   0C25                     731 00101$:
+   0C25 22                  732 	ret
                             733 	.area CSEG    (CODE)

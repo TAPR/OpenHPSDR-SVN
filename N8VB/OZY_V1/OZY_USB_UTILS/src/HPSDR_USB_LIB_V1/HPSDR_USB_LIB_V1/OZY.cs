@@ -44,6 +44,8 @@ namespace HPSDR_USB_LIB_V1
 
         public const int VENDOR_REQ_I2C_SPEED_SET = 0x0B; // wValueL 100kHz/400kHz {0,1}
 
+        public const int VENDOR_REQ_CPU_SPEED_SET = 0x0C; // wValueL 100kHz/400kHz {0,1,3}
+
         static public bool Load_FPGA(IntPtr hdev, string filename)
         {
             if (!(File.Exists(filename)))
@@ -321,6 +323,31 @@ namespace HPSDR_USB_LIB_V1
                 else
                     return true;
             }            
+        }
+
+        static public bool Set_CPU_Speed(IntPtr hdev, int value)
+        {
+            if (value < 0 || value > 2)
+            {
+                Console.WriteLine("Value must be 0, 1, or 2");
+                return false;
+            }
+                        
+            int ret = libUSB_Interface.usb_control_msg
+                (
+                hdev,
+                VENDOR_REQ_TYPE_OUT,
+                VENDOR_REQ_CPU_SPEED_SET,
+                value,
+                0x00,
+                new byte[0],
+                0,
+                1000
+                );
+            if (ret < 0)
+                return false;
+            else
+                return true;
         }
 
     }

@@ -123,6 +123,15 @@ unsigned char app_vendor_OUT_cmd(void)
                     I2CTL &= ~bm400KHZ;
                 break;
 
+            case VRQ_CPU_SPEED_SET:
+                if (wValueL == 0)
+                    CPUCS = bmCLKOE; // 12 MHz
+                else if (wValueL == 1)
+                    CPUCS = bmCLKSPD0 | bmCLKOE; // 24 MHz
+                else
+                    CPUCS = bmCLKSPD1 | bmCLKOE; // 48 MHz
+                break;
+
 			default:
 		  		return 0;
 	 }
