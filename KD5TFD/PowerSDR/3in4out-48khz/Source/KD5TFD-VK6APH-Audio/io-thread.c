@@ -343,7 +343,7 @@ int IsOkToSendDataToFPGA(void) {
 	} 
 	else { 
 		++NotOKtoSendCount; 
-		return 0; 
+		return 1; 
 	} 
 }
 
