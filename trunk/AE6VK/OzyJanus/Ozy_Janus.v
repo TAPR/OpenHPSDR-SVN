@@ -212,8 +212,6 @@ input FX2_CLK; 				// FX2 clock - 24MHz
 input IFCLK;				// FX2 IFCLOCK - 48MHz
 input BCLK, DOUT, LRCLK;
 inout  [15:0] FX2_FD;		// bidirectional FIFO data to/from the FX2
-//output  [15:0] FX2_FD;		// bidirectional FIFO data to/from the FX2 *******************************8
-							// ***** use this so simulation works 
 input FLAGA;
 input FLAGB;
 input FLAGC;
