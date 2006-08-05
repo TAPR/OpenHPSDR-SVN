@@ -1,4 +1,4 @@
-// V1.2 4th August 2006
+// V1.3 5th August 2006
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH 
 //
@@ -108,10 +108,11 @@
 // 
 // Built with Quartus II v5.1 
 //
-// Change log: 	Ported from Duplex.v  22 July 2006
-//				Code comments updated 23 July 2006
-//				Altered pin names to agree with PhilC conventions 3 Aug 2006
-//				Changed endian nature of 16 bit words 4 Aug 2006
+// Change log: 	Ported from Duplex.v - 22 July 2006
+//				Code comments updated - 23 July 2006
+//				Altered pin names to agree with PhilC conventions - 3 Aug 2006
+//				Changed endian nature of 16 bit words for sync only - 4 Aug 2006
+//				Updated FX2 interface and changed endian for all signals - 5 Aug 2006
 //
 // 	
 ////////////////////////////////////////////////////////////
@@ -142,6 +143,7 @@
 //
 //	 FX2 pin    to   FPGA pin connections
 //
+//	 IFCLK			- pin 24
 //   FX2_CLK		- pin 23
 //	 FX2_FD[0]		- pin 56
 //	 FX2_FD[1]		- pin 57
@@ -159,19 +161,15 @@
 //	 FX2_FD[13]		- pin 201
 //	 FX2_FD[14]		- pin 200
 //	 FX2_FD[15]		- pin 199
-//	 FX2_flags[0]	- pin 198
-//	 FX2_flags[1]	- pin 197
-//	 FX2_flags[2]	- pin 5
-//	 FX2_PA[0]		- pin 15
-//	 FX2_PA[1]		- pin 14
-//	 FX2_PA[2]		- pin 13
-//	 FX2_PA[3]		- pin 12
-//	 FX2_PA[4]		- pin 11
-//	 FX2_PA[5]		- pin 10
-//	 FX2_PA[6]		- pin 8
-//	 FX2_PA[7]		- pin 6
-//	 FX2_SLRD		- pin 30
-//	 FX2_SLWR		- pin 31
+//	 FLAGA			- pin 198
+//	 FLAGB			- pin 197
+//	 FLAGC			- pin 5
+//	 SLOE			- pin 13
+//	 FIFO_ADR[0]	- pin 11
+//	 FIFO_ADR[1]	- pin 10
+//	 PKEND			- pin 8
+//	 SLRD			- pin 30
+//	 SLWR			- pin 31
 //
 //
 //   General FPGA pins
@@ -426,14 +424,14 @@ case (AD_state)									   // see if sync is to be sent
 
 6'd3:	begin
 		if(loop_counter == 0) begin  			// load remainder of sync 
-			register[7:0] <= 8'h7F;
+			register[15:8] <= 8'h7F;
 		end
 		AD_state <= AD_state + 1'b1;		
 		end 
 6'd4:	begin
 		if(loop_counter == 0) begin					// send C&C bytes, this is C0 
 			//register <= {C0[7:2], ~clean_dash, (~clean_dot || ~clean_PTT)};  // used with dot and dash for OZY
-			register[15:8] <= {C0[7:1], ~clean_PTT}; // send PTT status each time 
+			register[7:0] <= {C0[7:1], ~clean_PTT}; // send PTT status each time 
 			rx_avail <= 12'd4095 - sync_Rx_used;  	//  must match rx fifo size 
 			strobe <= 1'b1;
 			end 
@@ -441,14 +439,14 @@ case (AD_state)									   // see if sync is to be sent
 		end
 6'd5:	begin
 		if(loop_counter == 0)begin
-			register <= {TX_wait, RX_wait};		// C1 - RX wait loop counter, C2 - Tx wait loop counter
+			register <= {RX_wait, TX_wait,};		// C1 - RX wait loop counter, C2 - Tx wait loop counter
 			strobe <= 1'b1;
 			end
 		AD_state <= AD_state + 1'b1;
 		end
 6'd6:	begin
 		if(loop_counter == 0)begin
-			register <= {Rx_control_4,rx_avail[11:4]}; // C3 - number of bytes in Rx FIFO, C4 - sequence number
+			register <= {rx_avail[11:4],Rx_control_4}; // C3 - number of bytes in Rx FIFO, C4 - sequence number
 			strobe <= 1'b1;
 			end
 		AD_state <= AD_state + 1'b1;
@@ -615,77 +613,66 @@ case(state_FX)
 			end
 		else begin
 			RX_wait <= RX_wait + 1'b1;		// increment RX_wait counter
-			state_FX <= 4'd7; 				// No Rx data so check for Tx data 
+			state_FX <= 4'd6; 				// No Rx data so check for Tx data 
 		end 
 	end	
 // state 3 - assert SLRD 	
 4'd3:begin
 	SLRD <= 1'b0; 
-	Rx_register <= FX2_FD; 
-	state_FX <= 4'd5;
+	Rx_register[15:8] <= FX2_FD[7:0]; 		//  swap endian 
+	Rx_register[7:0]  <= FX2_FD[15:8]; 
+	state_FX <= 4'd4;
 	end	
-// state 4 - get Rx data 		
+// state 4 - reset SLRD	
 4'd4:begin
-	state_FX <= 4'd5;  // ******* SKIP THIS 
-	end
-// state 5 - reset SLRD	
-4'd5:begin
 	SLRD <= 1'b1; 					
+	state_FX <= 4'd5;
+	end
+// state 5 - reset SLOE	
+4'd5:begin
+	SLOE <= 1'b1; 					
 	state_FX <= 4'd6;
 	end
-// state 6 - reset SLOE	
-4'd6:begin
-	SLOE <= 1'b1; 					
-	state_FX <= 4'd7;
-	end
-// state 7 - check for Tx data - Tx fifo must be at least half full before we Tx
-4'd7:  begin
+// state 6 - check for Tx data - Tx fifo must be at least half full before we Tx
+4'd6:  begin
 		 SLRD <= 1; 							// reset read strobe
             if (syncd_write_used[10] == 1'b1) begin // data available, so let's start the xfer...
 				SLWR <= 1;
-                state_FX <= 4'd8;
+                state_FX <= 4'd7;
 				FIFO_ADR <= 2'b10;				// select EP6
 				end 
             else state_FX <= 4'd0;      		// No Tx data so check for Rx data
          end
-// state 8 - wait setup time for FIFO ADR
-4'd8: begin
-			state_FX <= 4'd9;
+// state 7 - wait setup time for FIFO ADR
+4'd7: begin
+			state_FX <= 4'd8;
 			Tx_read_clock <= 1'b1;				// start transfer from Tx fifo                
 		end
-// state 9 - set SLEN = 1
-4'd9:begin
+// state 8 - set SLEN = 1
+4'd8:begin
 		SLEN <= 1'b1;
-		state_FX <= 4'd10;
+		state_FX <= 4'd9;
 	 end
-// state 10 - delay 
-4'd10:begin
-		state_FX <=4'd11;
-	  end
-// state 11- check Tx FIFO is ready then set Write strobe 
-4'd11: begin
+// state 9 check Tx FIFO is ready then set Write strobe 
+4'd9: begin
             if (EP6_ready) begin  					// if EP6 is ready, write to it and exit this state
 				Tx_read_clock <= 1'b0;				// end of transfer from Tx fifo
                 SLWR <= 0;
-                state_FX <= 4'd12;
+                state_FX <= 4'd10;
             end
             else begin                  			// otherwise, hang out here until fifo is ready
                 SLWR <= 1;
-                state_FX <= 4'd11;  
+                state_FX <= 4'd9;  
 				TX_wait <= TX_wait + 1'b1; 			// increment TX_wait counter
             end
         end
-// state 12 - reset SLWR
-4'd12: begin
+// state 10  reset SLWR
+4'd10: begin
 		SLWR <= 1;					
-        state_FX <= 4'd13;
+        state_FX <= 4'd11;
 		end
-// state 13 - delay 
-4'd13: begin
-		state_FX <=4'd14;
-	   end
-// state 14 - set SLEN = 0
-4'd14: begin
+// state 11 - set SLEN = 0
+4'd11: begin
 		SLEN <= 1'b0;
 		state_FX <= 4'd0;
 	   end 
@@ -694,100 +681,10 @@ case(state_FX)
 end
 
 // FX2_FD is tristate when SLEN  is low, otherwise it's the Tx_register value.
+// Swap endian so data is correct at PC end
 
-assign FX2_FD[15:0] = SLEN ? Tx_register[15:0] : 16'bZ;
-
-
-
-/* 
-
-// state 0 - check for Rx data
-  4'h0: begin
-        FX2_SLWR <= 1;								// reset FX2 FIFO write stobe
-		Tx_read_clock <= 1'b0;						// reset Tx fifo read strobe
-		if (fifo_data_available)					// does  FX2 FIFO have data
-			begin
-			state_FX <= 4'h1; 						// yes,we have Rx data so set up to get it
-			FIFO_ADDRESS <= 2'b00;					// select FIFO 2
-			end
-		else begin
-			state_FX <= 4'h7;				 		// no Rx data so check for Tx data
-			RX_wait <= RX_wait + 1'b1;				// increment RX_wait counter
-			end	
-		end
-// state 1 - wait setup time for FIFO ADR
-  4'h1: begin
-		state_FX <= 4'h2;							// wait one clock for FIFO ADR
-		end											// to become stable.
-// state 2 - assert SLOE
-  4'h2: begin
-		FIFO_DATA_OUTPUT_ENABLE <= 1'b0;			// drive data bus
-		state_FX <= 4'h3;
-		end
-// state 3 - assert SLRD
-  4'h3:	begin
-		FX2_SLRD <= 0; 								// set read strobe low
-		state_FX <= 4'h4;
-		end
-// state 4 - read FIFO
-  4'h4: begin
-		Rx_register <= FX2_FD;						// get data from FX2 FIFO
-		state_FX <= 4'h5;
-		end
-// state 5 - reset SLRD
-  4'h5: begin
-		FX2_SLRD <= 1; 								// reset SLRD
-		state_FX <= 4'h6;
-		end
-// state 6 - reset SLOE
-  4'h6: begin
-		FIFO_DATA_OUTPUT_ENABLE <= 1'b1;			// reset SLOE
-		state_FX <= 4'h0;
-		end
-// state 7 - check for Tx data - Tx fifo must be at least half full before we Tx
-  4'h7:  begin
-		 FX2_SLRD <= 1; 							// reset read strobe
-            if (syncd_write_used[10] == 1'b1) begin // data available, so let's start the xfer...
-				FX2_SLWR <= 1;
-                state_FX <= 4'h8;
-				FIFO_ADDRESS <= 2'b10;				// select FIFO 6
-				end 
-            else begin            					// No Tx data so check for Rx data
-                FX2_SLWR <= 1;
-                state_FX <= 4'h0;
-            end
-        end
-// state 8 - wait setup time for FIFO ADR
-  4'h8: begin
-			state_FX <= 4'h9;
-			Tx_read_clock <= 1'b1;				// start transfer from Tx fifo                
-		end
-
-// state 9 - check Tx FIFO is ready then set Write strobe 
-  4'h9: begin
-            if (fifo_ready) begin  					// if FIFO 4 is ready, write to it and exit this state
-				Tx_read_clock <= 1'b0;				// end of transfer from Tx fifo
-                FX2_SLWR <= 0;
-                state_FX <= 4'hA;
-            end
-            else begin                  			// otherwise, hang out here until fifo is ready
-                FX2_SLWR <= 1;
-                state_FX <= 0; //3'h3;	******* can change back to 9
-				TX_wait <= TX_wait + 1'b1; 			// increment TX_wait counter
-            end
-        end
-
-// state A - reset SLWR
-  4'hA: begin
-		FX2_SLWR <= 1;
-        state_FX <= 4'h0;
-		end
-		
-	default: state_FX <= 4'h0;
-	endcase
-end
-
-*/
+assign FX2_FD[15:8] = SLEN ? Tx_register[7:0] : 8'bZ;
+assign FX2_FD[7:0] = SLEN ? Tx_register[15:8] : 8'bZ;
 
 /////////////////////////////////////////////////////////////
 //
@@ -901,7 +798,7 @@ case(state_PWM)
 	 end
 // state 1 - check for 0x7F  sync character
   1: begin
-		if (Rx_data[7:0] == 8'h7F)begin 				// have middle of sync
+		if (Rx_data[15:8] == 8'h7F)begin 				// have middle of sync
 			sync_count <= sync_count + 9'b1;
 			state_PWM <= 2; 
 		end		
@@ -928,8 +825,8 @@ case(state_PWM)
 	 end
 // state 4 - look for sync again - if true continue else start again 
   4: begin
-		if (Rx_data[7:0] == 8'h7F)begin
-			Rx_control_0 <= Rx_data[15:8];			// We have sync so get Rx_control_0 
+		if (Rx_data[15:8] == 8'h7F)begin
+			Rx_control_0 <= Rx_data[7:0];			// We have sync so get Rx_control_0 
 			LED_sync <= ~LED_sync; 					// toggle sync LED. 
 			state_PWM <= 5; 		
 		end			
@@ -937,14 +834,14 @@ case(state_PWM)
 	 end
 // state 5 - get Rx_control_1 & Rx_control_2
   5: begin
-		Rx_control_1 <= Rx_data[7:0];
-		Rx_control_2 <= Rx_data[15:8];	
+		Rx_control_1 <= Rx_data[15:8];
+		Rx_control_2 <= Rx_data[7:0];	
 		state_PWM <= 6; 	
 	end	
 // state 6 - get Rx_control_3 & Rx_control_4
   6: begin
-		Rx_control_3 <= Rx_data[7:0];
-		Rx_control_4 <= Rx_data[15:8];
+		Rx_control_3 <= Rx_data[15:8];
+		Rx_control_4 <= Rx_data[7:0];
 		state_PWM <= 7; 	
 		end	
 // state 7 - get Left audio
