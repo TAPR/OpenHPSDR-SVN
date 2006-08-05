@@ -426,14 +426,14 @@ case (AD_state)									   // see if sync is to be sent
 
 6'd3:	begin
 		if(loop_counter == 0) begin  			// load remainder of sync 
-			register[7:0] <= 8'h7F;
+			register[15:8] <= 8'h7F;
 		end
 		AD_state <= AD_state + 1'b1;		
 		end 
 6'd4:	begin
 		if(loop_counter == 0) begin					// send C&C bytes, this is C0 
 			//register <= {C0[7:2], ~clean_dash, (~clean_dot || ~clean_PTT)};  // used with dot and dash for OZY
-			register[15:8] <= {C0[7:1], ~clean_PTT}; // send PTT status each time 
+			register[7:0] <= {C0[7:1], ~clean_PTT}; // send PTT status each time 
 			rx_avail <= 12'd4095 - sync_Rx_used;  	//  must match rx fifo size 
 			strobe <= 1'b1;
 			end 
@@ -441,14 +441,14 @@ case (AD_state)									   // see if sync is to be sent
 		end
 6'd5:	begin
 		if(loop_counter == 0)begin
-			register <= {TX_wait, RX_wait};		// C1 - RX wait loop counter, C2 - Tx wait loop counter
+			register <= {RX_wait, TX_wait};		// C1 - RX wait loop counter, C2 - Tx wait loop counter
 			strobe <= 1'b1;
 			end
 		AD_state <= AD_state + 1'b1;
 		end
 6'd6:	begin
 		if(loop_counter == 0)begin
-			register <= {Rx_control_4,rx_avail[11:4]}; // C3 - number of bytes in Rx FIFO, C4 - sequence number
+			register <= {rx_avail[11:4],Rx_control_4}; // C3 - number of bytes in Rx FIFO, C4 - sequence number
 			strobe <= 1'b1;
 			end
 		AD_state <= AD_state + 1'b1;
@@ -621,7 +621,8 @@ case(state_FX)
 // state 3 - assert SLRD 	
 4'd3:begin
 	SLRD <= 1'b0; 
-	Rx_register <= FX2_FD; 
+	Rx_register[15:8] <= FX2_FD[7:0]; 
+	Rx_register[7:0] <= FX2_FD[15:8]; 
 	state_FX <= 4'd5;
 	end	
 // state 4 - get Rx data 		
@@ -695,7 +696,8 @@ end
 
 // FX2_FD is tristate when SLEN  is low, otherwise it's the Tx_register value.
 
-assign FX2_FD[15:0] = SLEN ? Tx_register[15:0] : 16'bZ;
+assign FX2_FD[15:8] = SLEN ? Tx_register[7:0] : 8'bZ;
+assign FX2_FD[7:0] = SLEN ? Tx_register[15:8] : 8'bZ;
 
 
 
@@ -901,7 +903,7 @@ case(state_PWM)
 	 end
 // state 1 - check for 0x7F  sync character
   1: begin
-		if (Rx_data[7:0] == 8'h7F)begin 				// have middle of sync
+		if (Rx_data[15:8] == 8'h7F)begin 				// have middle of sync
 			sync_count <= sync_count + 9'b1;
 			state_PWM <= 2; 
 		end		
@@ -928,8 +930,8 @@ case(state_PWM)
 	 end
 // state 4 - look for sync again - if true continue else start again 
   4: begin
-		if (Rx_data[7:0] == 8'h7F)begin
-			Rx_control_0 <= Rx_data[15:8];			// We have sync so get Rx_control_0 
+		if (Rx_data[15:8] == 8'h7F)begin
+			Rx_control_0 <= Rx_data[7:0];			// We have sync so get Rx_control_0 
 			LED_sync <= ~LED_sync; 					// toggle sync LED. 
 			state_PWM <= 5; 		
 		end			
@@ -937,14 +939,14 @@ case(state_PWM)
 	 end
 // state 5 - get Rx_control_1 & Rx_control_2
   5: begin
-		Rx_control_1 <= Rx_data[7:0];
-		Rx_control_2 <= Rx_data[15:8];	
+		Rx_control_1 <= Rx_data[15:8];
+		Rx_control_2 <= Rx_data[7:0];	
 		state_PWM <= 6; 	
 	end	
 // state 6 - get Rx_control_3 & Rx_control_4
   6: begin
-		Rx_control_3 <= Rx_data[7:0];
-		Rx_control_4 <= Rx_data[15:8];
+		Rx_control_3 <= Rx_data[15:8];
+		Rx_control_4 <= Rx_data[7:0];
 		state_PWM <= 7; 	
 		end	
 // state 7 - get Left audio
