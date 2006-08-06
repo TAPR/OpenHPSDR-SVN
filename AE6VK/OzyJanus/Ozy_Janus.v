@@ -694,8 +694,8 @@ end
 
 // FX2_FD is tristate when SLEN  is low, otherwise it's the Tx_register value.
 
-assign FX2_FD[15:8] = SLEN ? Tx_register[7:0] : 8'bZ;
-assign FX2_FD[7:0] = SLEN ? Tx_register[15:8] : 8'bZ;
+assign FX2_FD[15:8] = SLEN ? Tx_register[7:0] : 8'bZZZZZZZZ;
+assign FX2_FD[7:0] = SLEN ? Tx_register[15:8] : 8'bZZZZZZZZ;
 
 
 
