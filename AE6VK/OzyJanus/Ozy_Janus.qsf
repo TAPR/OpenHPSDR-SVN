@@ -107,3 +107,5 @@ set_global_assignment -name VERILOG_FILE Rx_fifo.v
 set_global_assignment -name VERILOG_FILE Tx_fifo.v
 set_global_assignment -name SIMULATION_MODE FUNCTIONAL
 set_global_assignment -name ENABLE_DRC_SETTINGS ON
+set_instance_assignment -name GLOBAL_SIGNAL "GLOBAL CLOCK" -to BCLK
+set_instance_assignment -name GLOBAL_SIGNAL "GLOBAL CLOCK" -to CLK_24MHZ
