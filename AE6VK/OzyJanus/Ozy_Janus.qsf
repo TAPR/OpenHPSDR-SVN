@@ -29,7 +29,7 @@ set_global_assignment -name DEVICE EP2C5Q208C8
 set_global_assignment -name TOP_LEVEL_ENTITY Ozy_Janus
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:29:17  JULY 22, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION "6.0 SP1"
+set_global_assignment -name LAST_QUARTUS_VERSION "5.1 SP2"
 set_global_assignment -name ADD_DEFAULT_PINS_TO_SIMULATION_OUTPUT_WAVEFORMS OFF
 set_global_assignment -name ENABLE_INIT_DONE_OUTPUT ON
 set_global_assignment -name GENERATE_RBF_FILE ON
