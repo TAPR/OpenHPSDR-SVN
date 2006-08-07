@@ -1,4 +1,4 @@
- -- Copyright (C) 1991-2005 Altera Corporation
+ -- Copyright (C) 1991-2006 Altera Corporation
  -- Your use of Altera Corporation's design tools, logic functions 
  -- and other software and tools, and its AMPP partner logic 
  -- functions, and any output files any of the foregoing 
@@ -49,9 +49,10 @@
  -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
  -- RESERVED_INPUT    : Pin is tri-stated and should be connected to the board.
  -- RESERVED_INPUT_WITH_WEAK_PULLUP    : Pin is tri-stated with internal weak pull-up resistor.
+ -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
  ---------------------------------------------------------------------------------
 
-Quartus II Version 5.1 Build 176 10/26/2005 SJ Web Edition
+Quartus II Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 CHIP  "Ozy_Janus"  ASSIGNED TO AN: EP2C5Q208C8
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
@@ -105,9 +106,9 @@ RESERVED_INPUT               : 46        :        :                   :         
 RESERVED_INPUT               : 47        :        :                   :         : 1         :                
 RESERVED_INPUT               : 48        :        :                   :         : 1         :                
 GND                          : 49        : gnd    :                   :         :           :                
-GNDD_PLL1                    : 50        : gnd    :                   :         :           :                
+GND_PLL1                     : 50        : gnd    :                   :         :           :                
 VCCD_PLL1                    : 51        : power  :                   : 1.2V    :           :                
-GNDG_PLL1                    : 52        : gnd    :                   :         :           :                
+GND_PLL1                     : 52        : gnd    :                   :         :           :                
 VCCA_PLL1                    : 53        : power  :                   : 1.2V    :           :                
 GNDA_PLL1                    : 54        : gnd    :                   :         :           :                
 GND                          : 55        : gnd    :                   :         :           :                
@@ -209,9 +210,9 @@ RESERVED_INPUT               : 150       :        :                   :         
 RESERVED_INPUT               : 151       :        :                   :         : 3         :                
 RESERVED_INPUT               : 152       :        :                   :         : 3         :                
 GND                          : 153       : gnd    :                   :         :           :                
-GNDD_PLL2                    : 154       : gnd    :                   :         :           :                
+GND_PLL2                     : 154       : gnd    :                   :         :           :                
 VCCD_PLL2                    : 155       : power  :                   : 1.2V    :           :                
-GNDG_PLL2                    : 156       : gnd    :                   :         :           :                
+GND_PLL2                     : 156       : gnd    :                   :         :           :                
 VCCA_PLL2                    : 157       : power  :                   : 1.2V    :           :                
 GNDA_PLL2                    : 158       : gnd    :                   :         :           :                
 GND                          : 159       : gnd    :                   :         :           :                

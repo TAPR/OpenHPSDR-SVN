@@ -1,6 +1,6 @@
 Assembler report for Ozy_Janus
-Sat Aug 05 17:31:24 2006
-Version 5.1 Build 176 10/26/2005 SJ Web Edition
+Mon Aug 07 22:30:46 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -19,7 +19,7 @@ Version 5.1 Build 176 10/26/2005 SJ Web Edition
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2005 Altera Corporation
+Copyright (C) 1991-2006 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files any of the foregoing 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sat Aug 05 17:31:24 2006 ;
+; Assembler Status      ; Successful - Mon Aug 07 22:30:46 2006 ;
 ; Revision Name         ; Ozy_Janus                             ;
 ; Top-level Entity Name ; Ozy_Janus                             ;
 ; Family                ; Cyclone II                            ;
@@ -72,7 +72,6 @@ applicable agreement for further details.
 ; Hexadecimal Output File count direction                                        ; Up       ; Up            ;
 ; Release clears before tri-states                                               ; Off      ; Off           ;
 ; Auto-restart configuration after error                                         ; On       ; On            ;
-; Always Enable Input Buffers                                                    ; Off      ; Off           ;
 ; Maintain Compatibility with All Cyclone II M4K Versions                        ; On       ; On            ;
 +--------------------------------------------------------------------------------+----------+---------------+
 
@@ -95,7 +94,7 @@ applicable agreement for further details.
 +----------------+---------------------------------------------------------+
 ; Device         ; EP2C5Q208C8                                             ;
 ; JTAG usercode  ; 0xFFFFFFFF                                              ;
-; Checksum       ; 0x001136C3                                              ;
+; Checksum       ; 0x0010969E                                              ;
 +----------------+---------------------------------------------------------+
 
 
@@ -106,7 +105,7 @@ applicable agreement for further details.
 +----------------+---------------------------------------------------------+
 ; Device         ; EPCS4                                                   ;
 ; JTAG usercode  ; 0x00000000                                              ;
-; Checksum       ; 0x0740C1F9                                              ;
+; Checksum       ; 0x07405B32                                              ;
 +----------------+---------------------------------------------------------+
 
 
@@ -115,12 +114,13 @@ applicable agreement for further details.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus II Assembler
-    Info: Version 5.1 Build 176 10/26/2005 SJ Web Edition
-    Info: Processing started: Sat Aug 05 17:31:22 2006
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Mon Aug 07 22:30:43 2006
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Writing out detailed assembly data for power analysis
+Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Processing ended: Sat Aug 05 17:31:24 2006
-    Info: Elapsed time: 00:00:02
+    Info: Processing ended: Mon Aug 07 22:30:46 2006
+    Info: Elapsed time: 00:00:03
 
 
