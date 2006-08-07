@@ -1,6 +1,6 @@
 Fitter report for fifo_test
-Fri Aug 04 15:14:12 2006
-Version 6.0 Build 178 04/27/2006 SJ Web Edition
+Mon Aug 07 09:55:15 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -58,24 +58,24 @@ applicable agreement for further details.
 
 
 
-+------------------------------------------------------------------------------+
-; Fitter Summary                                                               ;
-+------------------------------------+-----------------------------------------+
-; Fitter Status                      ; Successful - Fri Aug 04 15:14:12 2006   ;
-; Quartus II Version                 ; 6.0 Build 178 04/27/2006 SJ Web Edition ;
-; Revision Name                      ; fifo_test                               ;
-; Top-level Entity Name              ; fifo_test                               ;
-; Family                             ; Cyclone II                              ;
-; Device                             ; EP2C5Q208C8                             ;
-; Timing Models                      ; Final                                   ;
-; Total logic elements               ; 38 / 4,608 ( < 1 % )                    ;
-; Total registers                    ; 37                                      ;
-; Total pins                         ; 78 / 142 ( 55 % )                       ;
-; Total virtual pins                 ; 0                                       ;
-; Total memory bits                  ; 0 / 119,808 ( 0 % )                     ;
-; Embedded Multiplier 9-bit elements ; 0 / 26 ( 0 % )                          ;
-; Total PLLs                         ; 0 / 2 ( 0 % )                           ;
-+------------------------------------+-----------------------------------------+
++-----------------------------------------------------------------------------------+
+; Fitter Summary                                                                    ;
++------------------------------------+----------------------------------------------+
+; Fitter Status                      ; Successful - Mon Aug 07 09:55:15 2006        ;
+; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
+; Revision Name                      ; fifo_test                                    ;
+; Top-level Entity Name              ; fifo_test                                    ;
+; Family                             ; Cyclone II                                   ;
+; Device                             ; EP2C5Q208C8                                  ;
+; Timing Models                      ; Final                                        ;
+; Total logic elements               ; 38 / 4,608 ( < 1 % )                         ;
+; Total registers                    ; 37                                           ;
+; Total pins                         ; 78 / 142 ( 55 % )                            ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 0 / 119,808 ( 0 % )                          ;
+; Embedded Multiplier 9-bit elements ; 0 / 26 ( 0 % )                               ;
+; Total PLLs                         ; 0 / 2 ( 0 % )                                ;
++------------------------------------+----------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------------------+
@@ -881,27 +881,27 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; LABs with Chains - Fit Attempt 1                                 ; 1            ;
 ; LABs with Multiple Chains - Fit Attempt 1                        ; 0            ;
 ; Time - Fit Attempt 1                                             ; 0            ;
+; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.016        ;
 +------------------------------------------------------------------+--------------+
 
 
-+---------------------------------------------+
-; Advanced Data - Placement                   ;
-+-------------------------------------+-------+
-; Name                                ; Value ;
-+-------------------------------------+-------+
-; Auto Fit Point 2 - Fit Attempt 1    ; ff    ;
-; Early Wire Use - Fit Attempt 1      ; 0     ;
-; Early Slack - Fit Attempt 1         ; -3516 ;
-; Auto Fit Point 3 - Fit Attempt 1    ; ff    ;
-; Auto Fit Point 4 - Fit Attempt 1    ; ff    ;
-; Mid Wire Use - Fit Attempt 1        ; 0     ;
-; Mid Slack - Fit Attempt 1           ; -3516 ;
-; Late Wire Use - Fit Attempt 1       ; 0     ;
-; Late Slack - Fit Attempt 1          ; -3516 ;
-; Auto Fit Point 5 - Fit Attempt 1    ; ff    ;
-; Time - Fit Attempt 1                ; 0     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.016 ;
-+-------------------------------------+-------+
++------------------------------------------+
+; Advanced Data - Placement                ;
++----------------------------------+-------+
+; Name                             ; Value ;
++----------------------------------+-------+
+; Auto Fit Point 2 - Fit Attempt 1 ; ff    ;
+; Early Wire Use - Fit Attempt 1   ; 0     ;
+; Early Slack - Fit Attempt 1      ; -3516 ;
+; Auto Fit Point 3 - Fit Attempt 1 ; ff    ;
+; Auto Fit Point 4 - Fit Attempt 1 ; ff    ;
+; Mid Wire Use - Fit Attempt 1     ; 0     ;
+; Mid Slack - Fit Attempt 1        ; -3516 ;
+; Late Wire Use - Fit Attempt 1    ; 0     ;
+; Late Slack - Fit Attempt 1       ; -3516 ;
+; Auto Fit Point 5 - Fit Attempt 1 ; ff    ;
+; Time - Fit Attempt 1             ; 0     ;
++----------------------------------+-------+
 
 
 +---------------------------------------------+
@@ -915,7 +915,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Late Slack - Fit Attempt 1          ; -2587 ;
 ; Late Wire Use - Fit Attempt 1       ; 0     ;
 ; Time - Fit Attempt 1                ; 0     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.061 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.031 ;
 +-------------------------------------+-------+
 
 
@@ -924,8 +924,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------+
 Info: *******************************************************************
 Info: Running Quartus II Fitter
-    Info: Version 6.0 Build 178 04/27/2006 SJ Web Edition
-    Info: Processing started: Fri Aug 04 15:14:09 2006
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Mon Aug 07 09:55:09 2006
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off fifo_test -c fifo_test
 Info: Selected device EP2C5Q208C8 for design "fifo_test"
 Info: Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
@@ -1032,8 +1032,8 @@ Info: Following groups of pins have the same output enable
         Info: Type bidirectional pin FX2_FD[10] uses the LVTTL I/O standard
         Info: Type bidirectional pin FX2_FD[14] uses the LVTTL I/O standard
 Info: Quartus II Fitter was successful. 0 errors, 2 warnings
-    Info: Processing ended: Fri Aug 04 15:14:12 2006
-    Info: Elapsed time: 00:00:03
+    Info: Processing ended: Mon Aug 07 09:55:15 2006
+    Info: Elapsed time: 00:00:07
 
 
 +----------------------------+

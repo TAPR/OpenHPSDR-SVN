@@ -1,6 +1,6 @@
 Flow report for EP2_LED
-Fri Aug 04 15:00:58 2006
-Version 6.0 Build 178 04/27/2006 SJ Web Edition
+Mon Aug 07 12:12:34 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -34,25 +34,25 @@ applicable agreement for further details.
 
 
 
-+------------------------------------------------------------------------------+
-; Flow Summary                                                                 ;
-+------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Fri Aug 04 15:00:58 2006   ;
-; Quartus II Version                 ; 6.0 Build 178 04/27/2006 SJ Web Edition ;
-; Revision Name                      ; EP2_LED                                 ;
-; Top-level Entity Name              ; EP2_LED                                 ;
-; Family                             ; Cyclone II                              ;
-; Device                             ; EP2C5Q208C8                             ;
-; Timing Models                      ; Final                                   ;
-; Met timing requirements            ; Yes                                     ;
-; Total logic elements               ; 50 / 4,608 ( 1 % )                      ;
-; Total registers                    ; 49                                      ;
-; Total pins                         ; 35 / 142 ( 25 % )                       ;
-; Total virtual pins                 ; 0                                       ;
-; Total memory bits                  ; 0 / 119,808 ( 0 % )                     ;
-; Embedded Multiplier 9-bit elements ; 0 / 26 ( 0 % )                          ;
-; Total PLLs                         ; 0 / 2 ( 0 % )                           ;
-+------------------------------------+-----------------------------------------+
++-----------------------------------------------------------------------------------+
+; Flow Summary                                                                      ;
++------------------------------------+----------------------------------------------+
+; Flow Status                        ; Successful - Mon Aug 07 12:12:34 2006        ;
+; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
+; Revision Name                      ; EP2_LED                                      ;
+; Top-level Entity Name              ; EP2_LED                                      ;
+; Family                             ; Cyclone II                                   ;
+; Device                             ; EP2C5Q208C8                                  ;
+; Timing Models                      ; Final                                        ;
+; Met timing requirements            ; Yes                                          ;
+; Total logic elements               ; 54 / 4,608 ( 1 % )                           ;
+; Total registers                    ; 52                                           ;
+; Total pins                         ; 35 / 142 ( 25 % )                            ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 0 / 119,808 ( 0 % )                          ;
+; Embedded Multiplier 9-bit elements ; 0 / 26 ( 0 % )                               ;
+; Total PLLs                         ; 0 / 2 ( 0 % )                                ;
++------------------------------------+----------------------------------------------+
 
 
 +-----------------------------------------+
@@ -60,17 +60,20 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/04/2006 15:00:47 ;
+; Start date & time ; 08/07/2006 12:12:22 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; EP2_LED             ;
 +-------------------+---------------------+
 
 
-+--------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                   ;
-+-----------------+-------+---------------+-------------+------------+
-; Assignment Name ; Value ; Default Value ; Entity Name ; Section Id ;
-+-----------------+-------+---------------+-------------+------------+
++--------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                           ;
++----------------------------------+--------------+---------------+-------------+------------+
+; Assignment Name                  ; Value        ; Default Value ; Entity Name ; Section Id ;
++----------------------------------+--------------+---------------+-------------+------------+
+; CYCLONEII_OPTIMIZATION_TECHNIQUE ; Speed        ; Balanced      ; --          ; --         ;
+; FITTER_EFFORT                    ; Standard Fit ; Auto Fit      ; --          ; --         ;
++----------------------------------+--------------+---------------+-------------+------------+
 
 
 +-------------------------------------+
@@ -79,10 +82,10 @@ applicable agreement for further details.
 ; Module Name          ; Elapsed Time ;
 +----------------------+--------------+
 ; Analysis & Synthesis ; 00:00:01     ;
-; Fitter               ; 00:00:03     ;
-; Assembler            ; 00:00:02     ;
+; Fitter               ; 00:00:04     ;
+; Assembler            ; 00:00:03     ;
 ; Timing Analyzer      ; 00:00:01     ;
-; Total                ; 00:00:07     ;
+; Total                ; 00:00:09     ;
 +----------------------+--------------+
 
 

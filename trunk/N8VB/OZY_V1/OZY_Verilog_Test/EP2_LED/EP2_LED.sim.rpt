@@ -1,6 +1,6 @@
 Simulator report for EP2_LED
-Fri Aug 04 15:01:04 2006
-Version 6.0 Build 178 04/27/2006 SJ Web Edition
+Mon Aug 07 11:59:07 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -45,9 +45,9 @@ applicable agreement for further details.
 +-----------------------------+--------------+
 ; Simulation Start Time       ; 0 ps         ;
 ; Simulation End Time         ; 1.0 us       ;
-; Simulation Netlist Size     ; 137 nodes    ;
-; Simulation Coverage         ;      27.41 % ;
-; Total Number of Transitions ; 234          ;
+; Simulation Netlist Size     ; 140 nodes    ;
+; Simulation Coverage         ;      30.43 % ;
+; Total Number of Transitions ; 246          ;
 ; Simulation Breakpoints      ; 0            ;
 ; Family                      ; Cyclone II   ;
 ; Device                      ; EP2C5Q208C8  ;
@@ -92,13 +92,13 @@ Please use Quartus II to view the waveform report data.
 +-----------------------------------------------------+--------------+
 ; Type                                                ; Value        ;
 +-----------------------------------------------------+--------------+
-; Total coverage as a percentage                      ;      27.41 % ;
-; Total nodes checked                                 ; 137          ;
-; Total output ports checked                          ; 135          ;
-; Total output ports with complete 1/0-value coverage ; 37           ;
-; Total output ports with no 1/0-value coverage       ; 72           ;
-; Total output ports with no 1-value coverage         ; 87           ;
-; Total output ports with no 0-value coverage         ; 83           ;
+; Total coverage as a percentage                      ;      30.43 % ;
+; Total nodes checked                                 ; 140          ;
+; Total output ports checked                          ; 138          ;
+; Total output ports with complete 1/0-value coverage ; 42           ;
+; Total output ports with no 1/0-value coverage       ; 71           ;
+; Total output ports with no 1-value coverage         ; 86           ;
+; Total output ports with no 0-value coverage         ; 81           ;
 +-----------------------------------------------------+--------------+
 
 
@@ -112,30 +112,31 @@ The following table displays output ports that toggle between 1 and 0 during sim
 ; |EP2_LED|SLRD~reg0         ; |EP2_LED|SLRD~reg0         ; regout           ;
 ; |EP2_LED|SLOE~reg0         ; |EP2_LED|SLOE~reg0         ; regout           ;
 ; |EP2_LED|FIFO_ADR[1]~reg0  ; |EP2_LED|FIFO_ADR[1]~reg0  ; regout           ;
-; |EP2_LED|state.1100        ; |EP2_LED|state.1100        ; regout           ;
-; |EP2_LED|state.1011        ; |EP2_LED|state.1011        ; regout           ;
+; |EP2_LED|state.1010        ; |EP2_LED|state.1010        ; regout           ;
+; |EP2_LED|state.1001        ; |EP2_LED|state.1001        ; regout           ;
 ; |EP2_LED|Selector1~19      ; |EP2_LED|Selector1~19      ; combout          ;
-; |EP2_LED|state.0101        ; |EP2_LED|state.0101        ; regout           ;
 ; |EP2_LED|state.0100        ; |EP2_LED|state.0100        ; regout           ;
+; |EP2_LED|state.0011        ; |EP2_LED|state.0011        ; regout           ;
 ; |EP2_LED|Selector2~9       ; |EP2_LED|Selector2~9       ; combout          ;
 ; |EP2_LED|Selector2~10      ; |EP2_LED|Selector2~10      ; combout          ;
 ; |EP2_LED|state.0010        ; |EP2_LED|state.0010        ; regout           ;
 ; |EP2_LED|Selector3~65      ; |EP2_LED|Selector3~65      ; combout          ;
-; |EP2_LED|state.0111        ; |EP2_LED|state.0111        ; regout           ;
+; |EP2_LED|state.0101        ; |EP2_LED|state.0101        ; regout           ;
 ; |EP2_LED|state.1101        ; |EP2_LED|state.1101        ; regout           ;
-; |EP2_LED|Selector4~71      ; |EP2_LED|Selector4~71      ; combout          ;
-; |EP2_LED|Selector4~72      ; |EP2_LED|Selector4~72      ; combout          ;
-; |EP2_LED|state.1001        ; |EP2_LED|state.1001        ; regout           ;
-; |EP2_LED|state~75          ; |EP2_LED|state~75          ; combout          ;
+; |EP2_LED|Selector4~59      ; |EP2_LED|Selector4~59      ; combout          ;
+; |EP2_LED|Selector4~60      ; |EP2_LED|Selector4~60      ; combout          ;
+; |EP2_LED|state.1000        ; |EP2_LED|state.1000        ; regout           ;
+; |EP2_LED|state~82          ; |EP2_LED|state~82          ; combout          ;
 ; |EP2_LED|state.0001        ; |EP2_LED|state.0001        ; regout           ;
 ; |EP2_LED|Selector6~23      ; |EP2_LED|Selector6~23      ; combout          ;
 ; |EP2_LED|Selector6~24      ; |EP2_LED|Selector6~24      ; combout          ;
+; |EP2_LED|state.1100        ; |EP2_LED|state.1100        ; regout           ;
 ; |EP2_LED|SLEN              ; |EP2_LED|SLEN              ; regout           ;
-; |EP2_LED|state.1000        ; |EP2_LED|state.1000        ; regout           ;
-; |EP2_LED|state.1110        ; |EP2_LED|state.1110        ; regout           ;
-; |EP2_LED|Selector0~9       ; |EP2_LED|Selector0~9       ; combout          ;
-; |EP2_LED|Selector0~10      ; |EP2_LED|Selector0~10      ; combout          ;
-; |EP2_LED|state~76          ; |EP2_LED|state~76          ; combout          ;
+; |EP2_LED|state.0111        ; |EP2_LED|state.0111        ; regout           ;
+; |EP2_LED|state.1011        ; |EP2_LED|state.1011        ; regout           ;
+; |EP2_LED|Selector0~21      ; |EP2_LED|Selector0~21      ; combout          ;
+; |EP2_LED|state.0110        ; |EP2_LED|state.0110        ; regout           ;
+; |EP2_LED|state~83          ; |EP2_LED|state~83          ; combout          ;
 ; |EP2_LED|IFCLK             ; |EP2_LED|IFCLK             ; combout          ;
 ; |EP2_LED|FLAGA             ; |EP2_LED|FLAGA             ; combout          ;
 ; |EP2_LED|SLWR              ; |EP2_LED|SLWR              ; padio            ;
@@ -143,8 +144,12 @@ The following table displays output ports that toggle between 1 and 0 during sim
 ; |EP2_LED|SLOE              ; |EP2_LED|SLOE              ; padio            ;
 ; |EP2_LED|FIFO_ADR[1]       ; |EP2_LED|FIFO_ADR[1]       ; padio            ;
 ; |EP2_LED|IFCLK~clkctrl     ; |EP2_LED|IFCLK~clkctrl     ; outclk           ;
-; |EP2_LED|state.1110~feeder ; |EP2_LED|state.1110~feeder ; combout          ;
 ; |EP2_LED|state.1011~feeder ; |EP2_LED|state.1011~feeder ; combout          ;
+; |EP2_LED|state.1010~feeder ; |EP2_LED|state.1010~feeder ; combout          ;
+; |EP2_LED|state.1001~feeder ; |EP2_LED|state.1001~feeder ; combout          ;
+; |EP2_LED|state.1101~feeder ; |EP2_LED|state.1101~feeder ; combout          ;
+; |EP2_LED|state.1000~feeder ; |EP2_LED|state.1000~feeder ; combout          ;
+; |EP2_LED|state.0111~feeder ; |EP2_LED|state.0111~feeder ; combout          ;
 +----------------------------+----------------------------+------------------+
 
 
@@ -221,12 +226,11 @@ The following table displays output ports that do not toggle to 1 during simulat
 ; |EP2_LED|FX2_FD[14]~1           ; |EP2_LED|FX2_FD[14]~output      ; padio            ;
 ; |EP2_LED|FX2_FD[15]~0           ; |EP2_LED|FX2_FD[15]~0           ; combout          ;
 ; |EP2_LED|FX2_FD[15]~0           ; |EP2_LED|FX2_FD[15]~output      ; padio            ;
-; |EP2_LED|LEDS[0]~reg0feeder     ; |EP2_LED|LEDS[0]~reg0feeder     ; combout          ;
-; |EP2_LED|LEDS[2]~reg0feeder     ; |EP2_LED|LEDS[2]~reg0feeder     ; combout          ;
-; |EP2_LED|LEDS[3]~reg0feeder     ; |EP2_LED|LEDS[3]~reg0feeder     ; combout          ;
-; |EP2_LED|HIGHBYTE[4]~feeder     ; |EP2_LED|HIGHBYTE[4]~feeder     ; combout          ;
+; |EP2_LED|LEDS[4]~reg0feeder     ; |EP2_LED|LEDS[4]~reg0feeder     ; combout          ;
+; |EP2_LED|LEDS[5]~reg0feeder     ; |EP2_LED|LEDS[5]~reg0feeder     ; combout          ;
+; |EP2_LED|LEDS[6]~reg0feeder     ; |EP2_LED|LEDS[6]~reg0feeder     ; combout          ;
+; |EP2_LED|LEDS[7]~reg0feeder     ; |EP2_LED|LEDS[7]~reg0feeder     ; combout          ;
 ; |EP2_LED|HIGHBYTE[5]~feeder     ; |EP2_LED|HIGHBYTE[5]~feeder     ; combout          ;
-; |EP2_LED|Tx_register[1]~feeder  ; |EP2_LED|Tx_register[1]~feeder  ; combout          ;
 ; |EP2_LED|Tx_register[3]~feeder  ; |EP2_LED|Tx_register[3]~feeder  ; combout          ;
 ; |EP2_LED|Tx_register[4]~feeder  ; |EP2_LED|Tx_register[4]~feeder  ; combout          ;
 ; |EP2_LED|Tx_register[5]~feeder  ; |EP2_LED|Tx_register[5]~feeder  ; combout          ;
@@ -311,14 +315,12 @@ The following table displays output ports that do not toggle to 0 during simulat
 ; |EP2_LED|FX2_FD[13]~2           ; |EP2_LED|FX2_FD[13]~2           ; combout          ;
 ; |EP2_LED|FX2_FD[14]~1           ; |EP2_LED|FX2_FD[14]~1           ; combout          ;
 ; |EP2_LED|FX2_FD[15]~0           ; |EP2_LED|FX2_FD[15]~0           ; combout          ;
-; |EP2_LED|LEDS[0]~reg0feeder     ; |EP2_LED|LEDS[0]~reg0feeder     ; combout          ;
-; |EP2_LED|LEDS[2]~reg0feeder     ; |EP2_LED|LEDS[2]~reg0feeder     ; combout          ;
-; |EP2_LED|LEDS[3]~reg0feeder     ; |EP2_LED|LEDS[3]~reg0feeder     ; combout          ;
-; |EP2_LED|HIGHBYTE[4]~feeder     ; |EP2_LED|HIGHBYTE[4]~feeder     ; combout          ;
+; |EP2_LED|LEDS[4]~reg0feeder     ; |EP2_LED|LEDS[4]~reg0feeder     ; combout          ;
+; |EP2_LED|LEDS[5]~reg0feeder     ; |EP2_LED|LEDS[5]~reg0feeder     ; combout          ;
+; |EP2_LED|LEDS[6]~reg0feeder     ; |EP2_LED|LEDS[6]~reg0feeder     ; combout          ;
+; |EP2_LED|LEDS[7]~reg0feeder     ; |EP2_LED|LEDS[7]~reg0feeder     ; combout          ;
 ; |EP2_LED|HIGHBYTE[5]~feeder     ; |EP2_LED|HIGHBYTE[5]~feeder     ; combout          ;
 ; |EP2_LED|Tx_register[0]~feeder  ; |EP2_LED|Tx_register[0]~feeder  ; combout          ;
-; |EP2_LED|Tx_register[1]~feeder  ; |EP2_LED|Tx_register[1]~feeder  ; combout          ;
-; |EP2_LED|Tx_register[2]~feeder  ; |EP2_LED|Tx_register[2]~feeder  ; combout          ;
 ; |EP2_LED|Tx_register[3]~feeder  ; |EP2_LED|Tx_register[3]~feeder  ; combout          ;
 ; |EP2_LED|Tx_register[4]~feeder  ; |EP2_LED|Tx_register[4]~feeder  ; combout          ;
 ; |EP2_LED|Tx_register[5]~feeder  ; |EP2_LED|Tx_register[5]~feeder  ; combout          ;
@@ -348,19 +350,19 @@ The following table displays output ports that do not toggle to 0 during simulat
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus II Simulator
-    Info: Version 6.0 Build 178 04/27/2006 SJ Web Edition
-    Info: Processing started: Fri Aug 04 15:01:03 2006
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Mon Aug 07 11:59:06 2006
 Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off EP2_LED -c EP2_LED
 Warning: Can't find signal in vector source file for input pin "|EP2_LED|FX2_CLK"
 Warning: Can't find signal in vector source file for input pin "|EP2_LED|FLAGB"
 Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
     Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
 Info: Simulation partitioned into 1 sub-simulations
-Info: Simulation coverage is      27.41 %
-Info: Number of transitions in simulation is 234
+Info: Simulation coverage is      30.43 %
+Info: Number of transitions in simulation is 246
 Info: Vector file EP2_LED.sim.vwf is saved in VWF text format. You can compress it into CVWF format in order to reduce file size. For more details please refer to the Quartus II Help.
 Info: Quartus II Simulator was successful. 0 errors, 2 warnings
-    Info: Processing ended: Fri Aug 04 15:01:04 2006
-    Info: Elapsed time: 00:00:02
+    Info: Processing ended: Mon Aug 07 11:59:06 2006
+    Info: Elapsed time: 00:00:01
 
 

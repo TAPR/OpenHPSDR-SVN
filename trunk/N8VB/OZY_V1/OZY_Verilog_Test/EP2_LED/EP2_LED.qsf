@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EP2C5Q208C8
 set_global_assignment -name TOP_LEVEL_ENTITY EP2_LED
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 6.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:13:00  AUGUST 01, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION 6.0
+set_global_assignment -name LAST_QUARTUS_VERSION "6.0 SP1"
 set_global_assignment -name VERILOG_FILE EP2_LED.v
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
 set_location_assignment PIN_11 -to FIFO_ADR[0]
@@ -71,3 +71,10 @@ set_location_assignment PIN_24 -to IFCLK
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD LVTTL
 set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
 set_global_assignment -name VECTOR_WAVEFORM_FILE EP2_LED.vwf
+set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE SPEED
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC OFF
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION OFF
+set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING OFF
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING OFF
+set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT NORMAL
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"

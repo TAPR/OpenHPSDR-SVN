@@ -1,4 +1,4 @@
-Version 6.0 Build 178 04/27/2006 SJ Web Edition
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 11
 709
 OFF
@@ -31,7 +31,7 @@ ON
 # case_sensitive
 # source_file
 fifo_test.v
-964f16f29dc36b751fa9ccb424b519a3
+2999fb59715aa8b552375a7ef5f87f7
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

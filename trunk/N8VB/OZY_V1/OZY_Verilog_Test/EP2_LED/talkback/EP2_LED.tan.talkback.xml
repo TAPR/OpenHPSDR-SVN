@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Fri Aug 04 15:00:58 2006) contains limited information
+This XML file (created on Mon Aug 07 12:12:34 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -9,7 +9,7 @@ to license.txt.
 -->
 <talkback>
 <ver>6.0</ver>
-<schema>quartus_version_6.0_build_178.xsd</schema>
+<schema>quartus_version_6.0_build_202.xsd</schema>
 <license>
 	<host_id>00a0cc694f79</host_id>
 	<nic_id>00123f7b788f</nic_id>
@@ -18,12 +18,13 @@ to license.txt.
 <tool>
 	<name>Quartus II</name>
 	<version>6.0</version>
-	<build>Build 178</build>
+	<build>Build 202</build>
+	<service_pack_label>1</service_pack_label>
 	<binary_type>32</binary_type>
 	<module>quartus_tan</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Fri Aug 04 15:00:59 2006</compilation_end_time>
+	<compilation_end_time>Mon Aug 07 12:12:34 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -36,16 +37,16 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</project>
 <revision>EP2_LED</revision>
 <compilation_summary>
-	<flow_status>Successful - Fri Aug 04 15:00:58 2006</flow_status>
-	<quartus_ii_version>6.0 Build 178 04/27/2006 SJ Web Edition</quartus_ii_version>
+	<flow_status>Successful - Mon Aug 07 12:12:34 2006</flow_status>
+	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>EP2_LED</revision_name>
 	<top_level_entity_name>EP2_LED</top_level_entity_name>
 	<family>Cyclone II</family>
 	<device>EP2C5Q208C8</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>Yes</met_timing_requirements>
-	<total_logic_elements>50 / 4,608 ( 1 % )</total_logic_elements>
-	<total_registers>49</total_registers>
+	<total_logic_elements>54 / 4,608 ( 1 % )</total_logic_elements>
+	<total_registers>52</total_registers>
 	<total_pins>35 / 142 ( 25 % )</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
 	<total_memory_bits>0 / 119,808 ( 0 % )</total_memory_bits>
@@ -62,9 +63,9 @@ to license.txt.
 	<warning>Warning: Found pins functioning as undefined clocks and/or memory enables</warning>
 	<info>Info: Quartus II Timing Analyzer was successful. 0 errors, 1 warning</info>
 	<info>Info: Elapsed time: 00:00:01</info>
-	<info>Info: Processing ended: Fri Aug 04 15:00:58 2006</info>
-	<info>Info: th for register &quot;HIGHBYTE[4]&quot; (data pin = &quot;FX2_FD[12]&quot;, clock pin = &quot;IFCLK&quot;) is -3.915 ns</info>
-	<info>Info: - Shortest pin to register delay is 7.001 ns</info>
+	<info>Info: Processing ended: Mon Aug 07 12:12:34 2006</info>
+	<info>Info: th for register &quot;HIGHBYTE[7]&quot; (data pin = &quot;FX2_FD[15]&quot;, clock pin = &quot;IFCLK&quot;) is -3.934 ns</info>
+	<info>Info: - Shortest pin to register delay is 7.020 ns</info>
 </messages>
 <clock_settings_summary>
 	<row>
@@ -83,19 +84,19 @@ to license.txt.
 		<type>Worst-case tsu</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>5.473 ns</actual>
+		<actual>5.449 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case tco</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>9.060 ns</actual>
+		<actual>9.295 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case th</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>-3.915 ns</actual>
+		<actual>-3.934 ns</actual>
 	</nonclk>
 	<clk>
 		<name>IFCLK</name>

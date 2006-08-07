@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EP2C5Q208C8
 set_global_assignment -name TOP_LEVEL_ENTITY fifo_test
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 6.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "09:30:40  AUGUST 04, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION 6.0
+set_global_assignment -name LAST_QUARTUS_VERSION "6.0 SP1"
 set_location_assignment PIN_11 -to FIFO_ADR[0]
 set_instance_assignment -name IO_STANDARD LVTTL -to FIFO_ADR[0]
 set_location_assignment PIN_10 -to FIFO_ADR[1]

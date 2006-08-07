@@ -73,7 +73,7 @@ namespace SendEP2_LEDS
                         }
                     }
                 }
-                System.Threading.Thread.Sleep(25); // sleep a bit so we can at least see LEDS flashing...
+                System.Threading.Thread.Sleep(50); // sleep a bit so we can at least see LEDS flashing...
                 //if (Console.ReadKey().Key != ConsoleKey.F1)
                 //    break;
             }

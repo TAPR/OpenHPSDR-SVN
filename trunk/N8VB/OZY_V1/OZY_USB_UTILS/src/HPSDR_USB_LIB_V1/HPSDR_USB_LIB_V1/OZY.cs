@@ -136,6 +136,96 @@ namespace HPSDR_USB_LIB_V1
             return true;
         }
 
+        static public bool Load_FPGA_Fast(IntPtr hdev, string filename)
+        {
+            if (!(File.Exists(filename)))
+            {
+                Console.WriteLine(filename + " does not exist!");
+                return false;
+            }
+
+            // Turn on LED 1 to indicate FPGA programming has started
+            Set_LED(hdev, 1, true);
+
+            Console.WriteLine("TS:" + DateTime.Now);
+
+            // start the load
+            if ((libUSB_Interface.usb_control_msg
+                (hdev,
+                VENDOR_REQ_TYPE_OUT,
+                VENDOR_REQ_FPGA_LOAD,
+                0,
+                FL_BEGIN,
+                new byte[0],
+                0,
+                1000
+                )) != 0)
+            {
+                Console.WriteLine("Failed at FL_BEGIN");
+                return false;
+            }
+
+            Console.WriteLine("TS:" + DateTime.Now + " FL_BEGIN");
+            // do the xfer
+            // need to read the .rbf file here and just push it over usb in 64 byte chunks.
+            FileStream fs = File.OpenRead(filename);
+            BinaryReader br = new BinaryReader(fs);
+
+            // start at beginning of file
+            br.BaseStream.Seek(0, SeekOrigin.Begin);
+
+            byte[] rbf; // holds our <= 128 byte chunks to write
+            int index = 0;
+
+            while (br.BaseStream.Position < br.BaseStream.Length) // check if all bytes read
+            {
+                rbf = br.ReadBytes(128); // will read up to 128 bytes
+                index += rbf.Length;
+
+                if ((libUSB_Interface.usb_control_msg
+                    (hdev,
+                    VENDOR_REQ_TYPE_OUT,
+                    VENDOR_REQ_FPGA_LOAD,
+                    0,
+                    FL_XFER,
+                    rbf,
+                    rbf.Length,
+                    1000
+                    )) != rbf.Length)
+                {
+                    fs.Close();
+                    Console.WriteLine("Failed at FL_XFER");
+                    Console.WriteLine(index + " bytes were transfered");
+                    return false;
+                }
+            }
+            Console.WriteLine(index + " bytes were transfered");
+            fs.Close();
+
+            Console.WriteLine("TS:" + DateTime.Now + " FL_XFER");
+
+            // signal end of load
+            if ((libUSB_Interface.usb_control_msg
+                (hdev,
+                VENDOR_REQ_TYPE_OUT,
+                VENDOR_REQ_FPGA_LOAD,
+                0,
+                FL_END,
+                new byte[0],
+                0,
+                1000
+                )) != 0)
+            {
+                Console.WriteLine("Failed at FL_END");
+                return false;
+            }
+
+            Console.WriteLine("TS:" + DateTime.Now + " FL_END");
+            // turn off LED 1 to indicate successful FPGA Load
+            Set_LED(hdev, 1, false);
+            return true;
+        }
+
         static public bool Read_EEPROM(IntPtr hdev, int i2c_addr, int offset, ref byte[] buffer)
         {
             // We have to set up the EEPROM from random read by writing
