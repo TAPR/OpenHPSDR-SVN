@@ -1,6 +1,6 @@
 Assembler report for fifo_test
-Fri Aug 04 15:14:16 2006
-Version 6.0 Build 178 04/27/2006 SJ Web Edition
+Mon Aug 07 09:55:20 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Fri Aug 04 15:14:16 2006 ;
+; Assembler Status      ; Successful - Mon Aug 07 09:55:20 2006 ;
 ; Revision Name         ; fifo_test                             ;
 ; Top-level Entity Name ; fifo_test                             ;
 ; Family                ; Cyclone II                            ;
@@ -114,13 +114,13 @@ applicable agreement for further details.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus II Assembler
-    Info: Version 6.0 Build 178 04/27/2006 SJ Web Edition
-    Info: Processing started: Fri Aug 04 15:14:14 2006
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Mon Aug 07 09:55:17 2006
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off fifo_test -c fifo_test
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Processing ended: Fri Aug 04 15:14:16 2006
-    Info: Elapsed time: 00:00:02
+    Info: Processing ended: Mon Aug 07 09:55:20 2006
+    Info: Elapsed time: 00:00:03
 
 

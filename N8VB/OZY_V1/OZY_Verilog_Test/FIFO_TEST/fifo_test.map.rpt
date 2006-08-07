@@ -1,6 +1,6 @@
 Analysis & Synthesis report for fifo_test
-Fri Aug 04 15:14:08 2006
-Version 6.0 Build 178 04/27/2006 SJ Web Edition
+Mon Aug 07 09:55:07 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -15,7 +15,6 @@ Version 6.0 Build 178 04/27/2006 SJ Web Edition
   7. State Machine - |fifo_test|state
   8. General Register Statistics
   9. Analysis & Synthesis Messages
- 10. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -38,22 +37,22 @@ applicable agreement for further details.
 
 
 
-+------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                 ;
-+------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Aug 04 15:14:08 2006   ;
-; Quartus II Version                 ; 6.0 Build 178 04/27/2006 SJ Web Edition ;
-; Revision Name                      ; fifo_test                               ;
-; Top-level Entity Name              ; fifo_test                               ;
-; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 37                                      ;
-; Total registers                    ; 37                                      ;
-; Total pins                         ; 35                                      ;
-; Total virtual pins                 ; 0                                       ;
-; Total memory bits                  ; 0                                       ;
-; Embedded Multiplier 9-bit elements ; 0                                       ;
-; Total PLLs                         ; 0                                       ;
-+------------------------------------+-----------------------------------------+
++-----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                      ;
++------------------------------------+----------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Mon Aug 07 09:55:07 2006        ;
+; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
+; Revision Name                      ; fifo_test                                    ;
+; Top-level Entity Name              ; fifo_test                                    ;
+; Family                             ; Cyclone II                                   ;
+; Total logic elements               ; 37                                           ;
+; Total registers                    ; 37                                           ;
+; Total pins                         ; 35                                           ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 0                                            ;
+; Embedded Multiplier 9-bit elements ; 0                                            ;
+; Total PLLs                         ; 0                                            ;
++------------------------------------+----------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------+
@@ -195,8 +194,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
-    Info: Version 6.0 Build 178 04/27/2006 SJ Web Edition
-    Info: Processing started: Fri Aug 04 15:14:07 2006
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Mon Aug 07 09:55:05 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off fifo_test -c fifo_test
 Info: Found 1 design units, including 1 entities, in source file rxfifo.v
     Info: Found entity 1: rxfifo
@@ -254,13 +253,7 @@ Info: Implemented 74 device resources after synthesis - the final resource count
     Info: Implemented 16 bidirectional pins
     Info: Implemented 39 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 19 warnings
-    Info: Processing ended: Fri Aug 04 15:14:08 2006
+    Info: Processing ended: Mon Aug 07 09:55:07 2006
     Info: Elapsed time: 00:00:02
-
-
-+------------------------------------------+
-; Analysis & Synthesis Suppressed Messages ;
-+------------------------------------------+
-The suppressed messages can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test.map.smsg.
 
 

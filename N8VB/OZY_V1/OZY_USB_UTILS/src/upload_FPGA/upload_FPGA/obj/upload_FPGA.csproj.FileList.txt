@@ -1,0 +1,7 @@
+bin\Release\upload_FPGA.exe
+bin\Release\upload_FPGA.pdb
+bin\Release\HPSDR_USB_LIB_V1.dll
+bin\Release\HPSDR_USB_LIB_V1.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\upload_FPGA.exe
+obj\Release\upload_FPGA.pdb

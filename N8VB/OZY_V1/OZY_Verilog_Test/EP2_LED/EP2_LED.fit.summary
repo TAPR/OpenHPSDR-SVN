@@ -1,12 +1,12 @@
-Fitter Status : Successful - Fri Aug 04 15:00:52 2006
-Quartus II Version : 6.0 Build 178 04/27/2006 SJ Web Edition
+Fitter Status : Successful - Mon Aug 07 12:12:28 2006
+Quartus II Version : 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
 Revision Name : EP2_LED
 Top-level Entity Name : EP2_LED
 Family : Cyclone II
 Device : EP2C5Q208C8
 Timing Models : Final
-Total logic elements : 50 / 4,608 ( 1 % )
-Total registers : 49
+Total logic elements : 54 / 4,608 ( 1 % )
+Total registers : 52
 Total pins : 35 / 142 ( 25 % )
 Total virtual pins : 0
 Total memory bits : 0 / 119,808 ( 0 % )

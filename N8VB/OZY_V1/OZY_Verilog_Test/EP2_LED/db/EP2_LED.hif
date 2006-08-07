@@ -1,4 +1,4 @@
-Version 6.0 Build 178 04/27/2006 SJ Web Edition
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 11
 709
 OFF
@@ -31,7 +31,7 @@ ON
 # case_sensitive
 # source_file
 EP2_LED.v
-d77ee0d6e671ddd44244ebc22d0bc43
+8f81ea40597fe95fb56f17467fcca781
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

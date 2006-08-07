@@ -48,7 +48,7 @@ module fifo_test(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, 
 	reg SLEN;
 	reg PKEND;
 	
-	assign FX2_FD[15:0] = (SLEN) ? Tx_register[15:0] : 16'bZ;
+	assign FX2_FD[15:0] = (SLEN) ? Tx_register[15:0] : 16'bZZZZZZZZZZZZZZZZ;
 	assign LEDS[0] = FLAGA;
 	assign LEDS[1] = FLAGB;
 	assign LEDS[2] = FLAGC;
