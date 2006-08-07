@@ -1,8 +1,8 @@
 --a_graycounter DEVICE_FAMILY="Cyclone II" PVALUE=1 WIDTH=12 clock cnt_en q
---VERSION_BEGIN 5.1 cbx_a_gray2bin 2005:04:27:12:26:10:SJ cbx_a_graycounter 2005:07:27:11:56:48:SJ cbx_cycloneii 2005:08:30:10:31:44:SJ cbx_flex10ke 2002:10:19:11:54:38:SJ cbx_mgl 2005:10:09:07:39:04:SJ cbx_stratix 2005:10:07:15:53:08:SJ cbx_stratixii 2005:07:27:05:50:56:SJ  VERSION_END
+--VERSION_BEGIN 6.0 cbx_a_gray2bin 2006:02:28:17:43:38:SJ cbx_a_graycounter 2006:03:13:11:03:08:SJ cbx_cycloneii 2006:02:07:15:19:20:SJ cbx_flex10ke 2006:01:09:11:13:48:SJ cbx_mgl 2006:05:17:10:06:16:SJ cbx_stratix 2006:05:17:09:28:32:SJ cbx_stratixii 2006:03:03:09:35:36:SJ  VERSION_END
 
 
---  Copyright (C) 1991-2005 Altera Corporation
+--  Copyright (C) 1991-2006 Altera Corporation
 --  Your use of Altera Corporation's design tools, logic functions 
 --  and other software and tools, and its AMPP partner logic 
 --  functions, and any output files any of the foregoing 
@@ -93,7 +93,8 @@ VARIABLE
 		);
 	parity : cycloneii_lcell_comb
 		WITH (
-			LUT_MASK = "9982"
+			LUT_MASK = "9982",
+			SUM_LUTC_INPUT = "cin"
 		);
 	counter_ffa[11..0] : cycloneii_lcell_ff;
 	parity_ff : cycloneii_lcell_ff;

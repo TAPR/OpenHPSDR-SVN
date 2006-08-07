@@ -1,4 +1,4 @@
-// V1.3 5th August 2006
+// V1.3 7th August 2006
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH 
 //
@@ -106,13 +106,14 @@
 // Uses single bit D/A converters using 16 bits for I and Q signals.
 //
 // 
-// Built with Quartus II v5.1 
+// Built with Quartus II v6.0 sp1 build 202
 //
 // Change log: 	Ported from Duplex.v - 22 July 2006
 //				Code comments updated - 23 July 2006
 //				Altered pin names to agree with PhilC conventions - 3 Aug 2006
 //				Changed endian nature of 16 bit words for sync only - 4 Aug 2006
 //				Updated FX2 interface and changed endian for all signals - 5 Aug 2006
+//				Built using Quartus II V6.0 - 7 Aug 2006
 //
 // 	
 ////////////////////////////////////////////////////////////

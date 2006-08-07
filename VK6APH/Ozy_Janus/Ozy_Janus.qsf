@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EP2C5Q208C8
 set_global_assignment -name TOP_LEVEL_ENTITY Ozy_Janus
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:29:17  JULY 22, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION 5.1
+set_global_assignment -name LAST_QUARTUS_VERSION "6.0 SP1"
 set_global_assignment -name VECTOR_WAVEFORM_FILE Duplex.vwf
 set_global_assignment -name VERILOG_FILE clocks.v
 set_global_assignment -name VERILOG_FILE debounce.v
@@ -102,3 +102,9 @@ set_location_assignment PIN_10 -to FIFO_ADR[1]
 set_location_assignment PIN_8 -to PKEND
 set_location_assignment PIN_30 -to SLRD
 set_location_assignment PIN_31 -to SLWR
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
+set_global_assignment -name FMAX_REQUIREMENT "48 MHz" -section_id "48MHz clock"
+set_instance_assignment -name CLOCK_SETTINGS "48MHz clock" -to IFCLK
