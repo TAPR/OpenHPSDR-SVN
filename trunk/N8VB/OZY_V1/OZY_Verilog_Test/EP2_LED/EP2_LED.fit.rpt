@@ -1,5 +1,5 @@
 Fitter report for EP2_LED
-Mon Aug 07 12:12:28 2006
+Mon Aug 07 13:24:00 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -61,7 +61,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                    ;
 +------------------------------------+----------------------------------------------+
-; Fitter Status                      ; Successful - Mon Aug 07 12:12:28 2006        ;
+; Fitter Status                      ; Successful - Mon Aug 07 13:24:00 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; EP2_LED                                      ;
 ; Top-level Entity Name              ; EP2_LED                                      ;
@@ -882,7 +882,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Late Wire Use - Fit Attempt 1       ; 1     ;
 ; Late Slack - Fit Attempt 1          ; -1064 ;
 ; Time - Fit Attempt 1                ; 1     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.139 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.094 ;
 +-------------------------------------+-------+
 
 
@@ -899,7 +899,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Late Slack - Fit Attempt 1          ; -1004 ;
 ; Late Wire Use - Fit Attempt 1       ; 1     ;
 ; Time - Fit Attempt 1                ; 0     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.062 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.093 ;
 +-------------------------------------+-------+
 
 
@@ -909,7 +909,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Aug 07 12:12:24 2006
+    Info: Processing started: Mon Aug 07 13:23:53 2006
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off EP2_LED -c EP2_LED
 Info: Selected device EP2C5Q208C8 for design "EP2_LED"
 Info: Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
@@ -998,8 +998,8 @@ Info: Following groups of pins have the same output enable
         Info: Type bidirectional pin FX2_FD[9] uses the LVTTL I/O standard
         Info: Type bidirectional pin FX2_FD[13] uses the LVTTL I/O standard
 Info: Quartus II Fitter was successful. 0 errors, 2 warnings
-    Info: Processing ended: Mon Aug 07 12:12:28 2006
-    Info: Elapsed time: 00:00:04
+    Info: Processing ended: Mon Aug 07 13:24:00 2006
+    Info: Elapsed time: 00:00:07
 
 
 +----------------------------+

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for EP2_LED
-Mon Aug 07 12:12:22 2006
+Mon Aug 07 13:23:51 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -40,7 +40,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Aug 07 12:12:22 2006        ;
+; Analysis & Synthesis Status        ; Successful - Mon Aug 07 13:23:51 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; EP2_LED                                      ;
 ; Top-level Entity Name              ; EP2_LED                                      ;
@@ -202,7 +202,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Aug 07 12:12:22 2006
+    Info: Processing started: Mon Aug 07 13:23:49 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off EP2_LED -c EP2_LED
 Info: Found 1 design units, including 1 entities, in source file EP2_LED.v
     Info: Found entity 1: EP2_LED
@@ -256,7 +256,7 @@ Info: Implemented 90 device resources after synthesis - the final resource count
     Info: Implemented 16 bidirectional pins
     Info: Implemented 55 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 8 warnings
-    Info: Processing ended: Mon Aug 07 12:12:22 2006
-    Info: Elapsed time: 00:00:01
+    Info: Processing ended: Mon Aug 07 13:23:51 2006
+    Info: Elapsed time: 00:00:03
 
 

@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Mon Aug 07 12:12:22 2006) contains limited information
+This XML file (created on Mon Aug 07 13:23:51 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus_map</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Mon Aug 07 12:12:23 2006</compilation_end_time>
+	<compilation_end_time>Mon Aug 07 13:23:51 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</project>
 <revision>EP2_LED</revision>
 <compilation_summary>
-	<flow_status>Successful - Mon Aug 07 12:12:22 2006</flow_status>
+	<flow_status>Successful - Mon Aug 07 13:23:51 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>EP2_LED</revision_name>
 	<top_level_entity_name>EP2_LED</top_level_entity_name>
@@ -66,8 +66,8 @@ to license.txt.
 	<warning>Warning: Output pins are stuck at VCC or GND</warning>
 	<warning>Warning: Pin &quot;FIFO_ADR[0]&quot; stuck at GND</warning>
 	<info>Info: Quartus II Analysis &amp; Synthesis was successful. 0 errors, 8 warnings</info>
-	<info>Info: Elapsed time: 00:00:01</info>
-	<info>Info: Processing ended: Mon Aug 07 12:12:22 2006</info>
+	<info>Info: Elapsed time: 00:00:03</info>
+	<info>Info: Processing ended: Mon Aug 07 13:23:51 2006</info>
 	<info>Info: Implemented 90 device resources after synthesis - the final resource count might be different</info>
 	<info>Info: Implemented 55 logic cells</info>
 </messages>
