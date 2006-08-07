@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Mon Aug 07 12:12:28 2006) contains limited information
+This XML file (created on Mon Aug 07 13:24:00 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus_fit</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Mon Aug 07 12:12:28 2006</compilation_end_time>
+	<compilation_end_time>Mon Aug 07 13:24:01 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</project>
 <revision>EP2_LED</revision>
 <compilation_summary>
-	<flow_status>Successful - Mon Aug 07 12:12:28 2006</flow_status>
+	<flow_status>Successful - Mon Aug 07 13:24:00 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>EP2_LED</revision_name>
 	<top_level_entity_name>EP2_LED</top_level_entity_name>
@@ -160,8 +160,8 @@ to license.txt.
 	<warning>Warning: Found 30 output pins without output pin load capacitance assignment</warning>
 	<info>Info: Generated suppressed messages file C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED.fit.smsg</info>
 	<info>Info: Quartus II Fitter was successful. 0 errors, 2 warnings</info>
-	<info>Info: Elapsed time: 00:00:04</info>
-	<info>Info: Processing ended: Mon Aug 07 12:12:28 2006</info>
+	<info>Info: Elapsed time: 00:00:07</info>
+	<info>Info: Processing ended: Mon Aug 07 13:24:00 2006</info>
 	<info>Info: Following groups of pins have the same output enable</info>
 </messages>
 <fitter_settings>
@@ -1286,7 +1286,7 @@ to license.txt.
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>0.139</value>
+		<value>0.094</value>
 	</row>
 </advanced_data___placement>
 <advanced_data___routing>
@@ -1324,7 +1324,7 @@ to license.txt.
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>0.062</value>
+		<value>0.093</value>
 	</row>
 </advanced_data___routing>
 <files>

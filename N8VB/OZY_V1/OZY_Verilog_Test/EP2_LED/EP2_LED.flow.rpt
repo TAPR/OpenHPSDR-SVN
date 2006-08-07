@@ -1,5 +1,5 @@
 Flow report for EP2_LED
-Mon Aug 07 12:12:34 2006
+Mon Aug 07 13:24:07 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Mon Aug 07 12:12:34 2006        ;
+; Flow Status                        ; Successful - Mon Aug 07 13:24:07 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; EP2_LED                                      ;
 ; Top-level Entity Name              ; EP2_LED                                      ;
@@ -60,7 +60,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/07/2006 12:12:22 ;
+; Start date & time ; 08/07/2006 13:23:49 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; EP2_LED             ;
 +-------------------+---------------------+
@@ -81,11 +81,11 @@ applicable agreement for further details.
 +----------------------+--------------+
 ; Module Name          ; Elapsed Time ;
 +----------------------+--------------+
-; Analysis & Synthesis ; 00:00:01     ;
-; Fitter               ; 00:00:04     ;
+; Analysis & Synthesis ; 00:00:03     ;
+; Fitter               ; 00:00:07     ;
 ; Assembler            ; 00:00:03     ;
-; Timing Analyzer      ; 00:00:01     ;
-; Total                ; 00:00:09     ;
+; Timing Analyzer      ; 00:00:00     ;
+; Total                ; 00:00:13     ;
 +----------------------+--------------+
 
 
