@@ -892,6 +892,94 @@ debounce:de_PTT
 }
 # end
 # entity
+alt_synch_pipe_497
+# storage
+db|Ozy_Janus.(18).cnf
+db|Ozy_Janus.(18).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_497.tdf
+18eea7ca1d1ec56b26ebf844e7d64fd
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+dffpipe_u98
+# storage
+db|Ozy_Janus.(19).cnf
+db|Ozy_Janus.(19).cnf
+# case_insensitive
+# source_file
+db|dffpipe_u98.tdf
+89c76c84b3e093fa2bf9a998a72b18d
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+Tx_fifo
+# storage
+db|Ozy_Janus.(4).cnf
+db|Ozy_Janus.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+Tx_fifo.v
+383f7c573f51125ffbf86359dfad3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+Tx_fifo:Tx_fifo
+}
+# end
+# entity
+Rx_fifo
+# storage
+db|Ozy_Janus.(20).cnf
+db|Ozy_Janus.(20).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+Rx_fifo.v
+61f13770e785547b7c896db6d21022f9
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+Rx_fifo:Rx_fifo
+}
+# end
+# entity
 cntr_tkh
 # storage
 db|Ozy_Janus.(3).cnf
@@ -945,7 +1033,7 @@ db|Ozy_Janus.(6).cnf
 # case_insensitive
 # source_file
 db|dcfifo_dj91.tdf
-18c3310e01e172bca144e1123cd6f21
+994ba6c3e9ad94298c76496e5f0
 6
 # used_port {
 wrusedw9
@@ -1814,14 +1902,14 @@ Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pip
 }
 # end
 # entity
-alt_synch_pipe_497
+alt_synch_pipe_597
 # storage
-db|Ozy_Janus.(18).cnf
-db|Ozy_Janus.(18).cnf
+db|Ozy_Janus.(22).cnf
+db|Ozy_Janus.(22).cnf
 # case_insensitive
 # source_file
-db|alt_synch_pipe_497.tdf
-18eea7ca1d1ec56b26ebf844e7d64fd
+db|alt_synch_pipe_597.tdf
+5afb2e80629b87f9e916d32fcabcc70
 6
 # used_port {
 q0
@@ -1835,18 +1923,18 @@ clock
 3
 }
 # hierarchies {
-Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_497:wrempty_reg
+Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg
 }
 # end
 # entity
-dffpipe_u98
+dffpipe_v98
 # storage
-db|Ozy_Janus.(19).cnf
-db|Ozy_Janus.(19).cnf
+db|Ozy_Janus.(23).cnf
+db|Ozy_Janus.(23).cnf
 # case_insensitive
 # source_file
-db|dffpipe_u98.tdf
-89c76c84b3e093fa2bf9a998a72b18d
+db|dffpipe_v98.tdf
+871c2728b5fc40572b6f1dec5f5c8ef
 6
 # used_port {
 q0
@@ -1860,14 +1948,14 @@ clock
 3
 }
 # hierarchies {
-Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_497:wrempty_reg|dffpipe_u98:dffpipe9
+Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg|dffpipe_v98:dffpipe9
 }
 # end
 # entity
 alt_synch_pipe_rv7
 # storage
-db|Ozy_Janus.(22).cnf
-db|Ozy_Janus.(22).cnf
+db|Ozy_Janus.(24).cnf
+db|Ozy_Janus.(24).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_rv7.tdf
@@ -1957,8 +2045,8 @@ Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pip
 # entity
 dffpipe_m09
 # storage
-db|Ozy_Janus.(23).cnf
-db|Ozy_Janus.(23).cnf
+db|Ozy_Janus.(25).cnf
+db|Ozy_Janus.(25).cnf
 # case_insensitive
 # source_file
 db|dffpipe_m09.tdf
@@ -2048,12 +2136,12 @@ Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pip
 # entity
 dcfifo_q2b1
 # storage
-db|Ozy_Janus.(24).cnf
-db|Ozy_Janus.(24).cnf
+db|Ozy_Janus.(26).cnf
+db|Ozy_Janus.(26).cnf
 # case_insensitive
 # source_file
 db|dcfifo_q2b1.tdf
-f94f20fed2b67542f3f161f8b694dc
+aafef5dc8240ed96c02a27189ce0e4f9
 6
 # used_port {
 wrusedw9
@@ -2247,8 +2335,8 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated
 # entity
 a_gray2bin_ndb
 # storage
-db|Ozy_Janus.(25).cnf
-db|Ozy_Janus.(25).cnf
+db|Ozy_Janus.(27).cnf
+db|Ozy_Janus.(27).cnf
 # case_insensitive
 # source_file
 db|a_gray2bin_ndb.tdf
@@ -2344,8 +2432,8 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|a_gray2bin_nd
 # entity
 a_graycounter_r96
 # storage
-db|Ozy_Janus.(26).cnf
-db|Ozy_Janus.(26).cnf
+db|Ozy_Janus.(28).cnf
+db|Ozy_Janus.(28).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_r96.tdf
@@ -2408,8 +2496,8 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|a_graycounter
 # entity
 a_graycounter_lk6
 # storage
-db|Ozy_Janus.(27).cnf
-db|Ozy_Janus.(27).cnf
+db|Ozy_Janus.(29).cnf
+db|Ozy_Janus.(29).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_lk6.tdf
@@ -2430,8 +2518,8 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|a_graycounter
 # entity
 a_graycounter_mk6
 # storage
-db|Ozy_Janus.(28).cnf
-db|Ozy_Janus.(28).cnf
+db|Ozy_Janus.(30).cnf
+db|Ozy_Janus.(30).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_mk6.tdf
@@ -2491,8 +2579,8 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|a_graycounter
 # entity
 altsyncram_vpu
 # storage
-db|Ozy_Janus.(29).cnf
-db|Ozy_Janus.(29).cnf
+db|Ozy_Janus.(31).cnf
+db|Ozy_Janus.(31).cnf
 # case_insensitive
 # source_file
 db|altsyncram_vpu.tdf
@@ -2690,8 +2778,8 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|altsyncram_vp
 # entity
 altsyncram_aec1
 # storage
-db|Ozy_Janus.(30).cnf
-db|Ozy_Janus.(30).cnf
+db|Ozy_Janus.(34).cnf
+db|Ozy_Janus.(34).cnf
 # case_insensitive
 # source_file
 db|altsyncram_aec1.tdf
@@ -2973,8 +3061,8 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|altsyncram_vp
 # entity
 dffpipe_n09
 # storage
-db|Ozy_Janus.(31).cnf
-db|Ozy_Janus.(31).cnf
+db|Ozy_Janus.(35).cnf
+db|Ozy_Janus.(35).cnf
 # case_insensitive
 # source_file
 db|dffpipe_n09.tdf
@@ -3073,8 +3161,8 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|dffpipe_n09:w
 # entity
 alt_synch_pipe_sv7
 # storage
-db|Ozy_Janus.(34).cnf
-db|Ozy_Janus.(34).cnf
+db|Ozy_Janus.(68).cnf
+db|Ozy_Janus.(68).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_sv7.tdf
@@ -3170,8 +3258,8 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pip
 # entity
 dffpipe_o09
 # storage
-db|Ozy_Janus.(35).cnf
-db|Ozy_Janus.(35).cnf
+db|Ozy_Janus.(69).cnf
+db|Ozy_Janus.(69).cnf
 # case_insensitive
 # source_file
 db|dffpipe_o09.tdf
@@ -3265,14 +3353,14 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pip
 }
 # end
 # entity
-alt_synch_pipe_597
+alt_synch_pipe_697
 # storage
-db|Ozy_Janus.(68).cnf
-db|Ozy_Janus.(68).cnf
+db|Ozy_Janus.(70).cnf
+db|Ozy_Janus.(70).cnf
 # case_insensitive
 # source_file
-db|alt_synch_pipe_597.tdf
-5afb2e80629b87f9e916d32fcabcc70
+db|alt_synch_pipe_697.tdf
+d2506a29ff8c29e186a6ffdce75eed1
 6
 # used_port {
 q0
@@ -3286,18 +3374,18 @@ clock
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_597:wrempty_reg
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_697:wrempty_reg
 }
 # end
 # entity
-dffpipe_v98
+dffpipe_0a8
 # storage
-db|Ozy_Janus.(69).cnf
-db|Ozy_Janus.(69).cnf
+db|Ozy_Janus.(71).cnf
+db|Ozy_Janus.(71).cnf
 # case_insensitive
 # source_file
-db|dffpipe_v98.tdf
-871c2728b5fc40572b6f1dec5f5c8ef
+db|dffpipe_0a8.tdf
+ca1b843bb934c82fc83edbd269065de
 6
 # used_port {
 q0
@@ -3311,14 +3399,14 @@ clock
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_597:wrempty_reg|dffpipe_v98:dffpipe9
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_697:wrempty_reg|dffpipe_0a8:dffpipe9
 }
 # end
 # entity
 alt_synch_pipe_tv7
 # storage
-db|Ozy_Janus.(70).cnf
-db|Ozy_Janus.(70).cnf
+db|Ozy_Janus.(72).cnf
+db|Ozy_Janus.(72).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_tv7.tdf
@@ -3414,8 +3502,8 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pip
 # entity
 dffpipe_p09
 # storage
-db|Ozy_Janus.(71).cnf
-db|Ozy_Janus.(71).cnf
+db|Ozy_Janus.(73).cnf
+db|Ozy_Janus.(73).cnf
 # case_insensitive
 # source_file
 db|dffpipe_p09.tdf
@@ -3509,50 +3597,6 @@ Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pip
 }
 # end
 # entity
-Tx_fifo
-# storage
-db|Ozy_Janus.(4).cnf
-db|Ozy_Janus.(4).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-Tx_fifo.v
-383f7c573f51125ffbf86359dfad3d1
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# hierarchies {
-Tx_fifo:Tx_fifo
-}
-# end
-# entity
-Rx_fifo
-# storage
-db|Ozy_Janus.(20).cnf
-db|Ozy_Janus.(20).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-Rx_fifo.v
-61f13770e785547b7c896db6d21022f9
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# hierarchies {
-Rx_fifo:Rx_fifo
-}
-# end
-# entity
 Ozy_Janus
 # storage
 db|Ozy_Janus.(0).cnf
@@ -3564,7 +3608,7 @@ ON
 # case_sensitive
 # source_file
 Ozy_Janus.v
-60f49eda2e0d4c95186a86a827c0b4
+2f2bd2e3be787c9a708a83d094ae90b9
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

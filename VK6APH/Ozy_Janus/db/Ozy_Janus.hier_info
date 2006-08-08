@@ -80,6 +80,7 @@ DOUT => q[0].DATAIN
 LRCLK => Selector5.IN10
 LRCLK => Selector5.IN11
 LRCLK => Selector4.IN9
+LRCLK => LED[5].DATAIN
 LRCLK => Selector4.IN2
 LRCLK => Selector5.IN2
 LED[0] <= Rx_fifo:Rx_fifo.wrfull
@@ -87,9 +88,9 @@ LED[1] <= FLAGC.DB_MAX_OUTPUT_PORT_TYPE
 LED[2] <= LED_sync.DB_MAX_OUTPUT_PORT_TYPE
 LED[3] <= FLAGA.DB_MAX_OUTPUT_PORT_TYPE
 LED[4] <= <VCC>
-LED[5] <= CLRCLK~0.DB_MAX_OUTPUT_PORT_TYPE
-LED[6] <= CBCLK~0.DB_MAX_OUTPUT_PORT_TYPE
-LED[7] <= CLK_24MHZ~0.DB_MAX_OUTPUT_PORT_TYPE
+LED[5] <= LRCLK.DB_MAX_OUTPUT_PORT_TYPE
+LED[6] <= data_flag~2.DB_MAX_OUTPUT_PORT_TYPE
+LED[7] <= Tx_read_clock~1.DB_MAX_OUTPUT_PORT_TYPE
 I_PWM_out <= I_PWM_accumulator[16].DB_MAX_OUTPUT_PORT_TYPE
 Q_PWM_out <= Q_PWM_accumulator[16].DB_MAX_OUTPUT_PORT_TYPE
 CBCLK <= CBCLK~0.DB_MAX_OUTPUT_PORT_TYPE
@@ -360,7 +361,7 @@ rdreq => valid_rdreq.IN0
 wrclk => a_graycounter_jk6:wrptr_g1p.clock
 wrclk => a_graycounter_kk6:wrptr_gp.clock
 wrclk => altsyncram_tpu:fifo_ram.clock0
-wrclk => alt_synch_pipe_497:wrempty_reg.clock
+wrclk => alt_synch_pipe_597:wrempty_reg.clock
 wrclk => dffpipe_c09:ws_brp.clock
 wrclk => dffpipe_c09:ws_bwp.clock
 wrclk => alt_synch_pipe_rv7:ws_dgrp.clock
@@ -1212,13 +1213,13 @@ q[10] <= dffe8a[10].DB_MAX_OUTPUT_PORT_TYPE
 q[11] <= dffe8a[11].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_497:wrempty_reg
-clock => dffpipe_u98:dffpipe9.clock
-d[0] => dffpipe_u98:dffpipe9.d[0]
-q[0] <= dffpipe_u98:dffpipe9.q[0]
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg
+clock => dffpipe_v98:dffpipe9.clock
+d[0] => dffpipe_v98:dffpipe9.d[0]
+q[0] <= dffpipe_v98:dffpipe9.q[0]
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_497:wrempty_reg|dffpipe_u98:dffpipe9
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg|dffpipe_v98:dffpipe9
 clock => dffe10a[0].CLK
 q[0] <= dffe10a[0].DB_MAX_OUTPUT_PORT_TYPE
 
@@ -1546,7 +1547,7 @@ rdusedw[11] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 wrclk => a_graycounter_lk6:wrptr_g1p.clock
 wrclk => a_graycounter_mk6:wrptr_gp.clock
 wrclk => altsyncram_vpu:fifo_ram.clock0
-wrclk => alt_synch_pipe_597:wrempty_reg.clock
+wrclk => alt_synch_pipe_697:wrempty_reg.clock
 wrclk => dffpipe_n09:ws_brp.clock
 wrclk => dffpipe_n09:ws_bwp.clock
 wrclk => alt_synch_pipe_tv7:ws_dgrp.clock
@@ -2555,13 +2556,13 @@ q[11] <= dffe8a[11].DB_MAX_OUTPUT_PORT_TYPE
 q[12] <= dffe8a[12].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_597:wrempty_reg
-clock => dffpipe_v98:dffpipe9.clock
-d[0] => dffpipe_v98:dffpipe9.d[0]
-q[0] <= dffpipe_v98:dffpipe9.q[0]
+|Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_697:wrempty_reg
+clock => dffpipe_0a8:dffpipe9.clock
+d[0] => dffpipe_0a8:dffpipe9.d[0]
+q[0] <= dffpipe_0a8:dffpipe9.q[0]
 
 
-|Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_597:wrempty_reg|dffpipe_v98:dffpipe9
+|Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_697:wrempty_reg|dffpipe_0a8:dffpipe9
 clock => dffe10a[0].CLK
 q[0] <= dffe10a[0].DB_MAX_OUTPUT_PORT_TYPE
 
