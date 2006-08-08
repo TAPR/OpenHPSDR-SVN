@@ -1,0 +1,162 @@
+//  V1.1 August 7, 2006
+//
+//  Copyright 2006  P. Covington, N8VB
+//
+//  HPSDR - High Performance Software Defined Radio
+//
+//  EP2 OUT test code 
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation; either version 2 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+//  Demonstrates SYNC Read from EP2 FIFO
+//
+module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, LEDS);
+
+	input FX2_CLK;
+	input IFCLK;
+	input FLAGA;
+	input FLAGB;
+	input FLAGC;
+	inout [15:0] FX2_FD;
+	output SLWR;
+	output SLRD;
+	output SLOE;
+	output PKEND;
+	output [1:0] FIFO_ADR;
+	output [7:0] LEDS;
+	
+	reg [15:0] Tx_register;
+		
+	wire EP2_has_data = FLAGA;
+	wire EP6_has_room = FLAGC;
+	
+	reg SLOE;
+	reg SLRD;
+	reg SLWR;
+	reg SLEN;
+	reg PKEND;
+	
+	assign FX2_FD[15:0] = (SLEN) ? Tx_register[15:0] : 16'bZZZZZZZZZZZZZZZZ;
+	
+	reg [1:0] FIFO_ADR;
+	reg [7:0] HIGHBYTE;
+	reg [7:0] LEDS;	
+			
+	reg [3:0] state;
+	
+	always @(posedge IFCLK)
+		begin
+			case (state)
+				4'd0:
+					begin
+						PKEND <= 1'b1;
+						SLEN <= 1'b0;
+						SLWR <= 1'b1;
+						SLRD <= 1'b1;
+						SLOE <= 1'b1;
+						FIFO_ADR <= 2'b00; // select EP2
+						state <= 4'd1;
+					end
+				4'd1:
+					begin
+						state <= 4'd2; //delay 1 IFCLOCK CYCLE
+									  // this is necessary at 48MHz
+									  // to allow FIFO_ADR to settle
+					end		
+				4'd2:
+					begin
+						if(EP2_has_data)
+							begin
+								state <= 4'd3;
+								SLOE <= 1'b0; //assert SLOE														
+							end
+						else
+							state <= 4'd2; 
+					end					
+				4'd3:
+					begin
+						SLRD <= 1'b0; //assert SLRD
+						LEDS[7:0] <= FX2_FD[7:0]; // read FD[16:0] here	
+						HIGHBYTE <= FX2_FD[15:8];												
+						state <= 4'd4;
+					end
+				4'd4:
+					begin
+						SLRD <= 1'b1; // reset SLRD
+						Tx_register[7:0] <= LEDS[7:0];
+						Tx_register[15:8] <= HIGHBYTE;
+						SLOE <= 1'b1; //reset SLOE		
+						state <= 4'd5;
+					end				
+				4'd5:
+					begin
+						if (EP6_has_room)
+							begin
+								FIFO_ADR <= 2'b10; // select EP6								
+								state <= 4'd6;	
+							end
+						else
+							begin
+								state <= 4'd2; // FIFO full, go back to RX
+							end
+					end
+				4'd6:
+					begin						
+						state <= 4'd7; // let FIFO_ADR stabilize
+					end
+				4'd7:
+					begin
+						state <= 4'd8; // let FIFO_ADR stabilize
+					end
+				4'd8:
+					begin
+						SLEN <= 1'b1; // put data on FD bus
+						state <= 4'd9;
+					end
+				4'd9:
+					begin
+						state <= 4'd10;
+					end						
+				4'd10:
+					begin
+						SLWR <= 1'b0; // assert SLWR
+						state <= 4'd11;
+					end							
+				4'd11:
+					begin
+						SLWR <= 1'b1; // reset SLWR																		
+						state <= 4'd12; 
+					end
+				4'd12: 
+					begin																		
+						state <= 4'd13; // wait state
+					end
+				4'd13:
+					begin						
+						SLEN <= 1'b0;												
+						state <= 4'd14;
+					end
+				4'd14:
+					begin
+						FIFO_ADR <= 2'b00; // select EP2
+						state <= 4'd1; // wait state
+					end
+				default:
+					state <= 4'd0;
+					
+			endcase
+		end			
+
+endmodule
