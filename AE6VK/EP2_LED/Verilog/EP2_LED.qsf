@@ -1,0 +1,80 @@
+# Copyright (C) 1991-2006 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#		EP2_LED_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name FAMILY "Cyclone II"
+set_global_assignment -name DEVICE EP2C5Q208C8
+set_global_assignment -name TOP_LEVEL_ENTITY EP2_LED
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 6.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:13:00  AUGUST 01, 2006"
+set_global_assignment -name LAST_QUARTUS_VERSION "6.0 SP1"
+set_global_assignment -name VERILOG_FILE EP2_LED.v
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_location_assignment PIN_11 -to FIFO_ADR[0]
+set_location_assignment PIN_10 -to FIFO_ADR[1]
+set_location_assignment PIN_198 -to FLAGA
+set_location_assignment PIN_23 -to FX2_CLK
+set_location_assignment PIN_56 -to FX2_FD[0]
+set_location_assignment PIN_57 -to FX2_FD[1]
+set_location_assignment PIN_58 -to FX2_FD[2]
+set_location_assignment PIN_59 -to FX2_FD[3]
+set_location_assignment PIN_60 -to FX2_FD[4]
+set_location_assignment PIN_61 -to FX2_FD[5]
+set_location_assignment PIN_63 -to FX2_FD[6]
+set_location_assignment PIN_64 -to FX2_FD[7]
+set_location_assignment PIN_208 -to FX2_FD[8]
+set_location_assignment PIN_207 -to FX2_FD[9]
+set_location_assignment PIN_206 -to FX2_FD[10]
+set_location_assignment PIN_205 -to FX2_FD[11]
+set_location_assignment PIN_203 -to FX2_FD[12]
+set_location_assignment PIN_201 -to FX2_FD[13]
+set_location_assignment PIN_200 -to FX2_FD[14]
+set_location_assignment PIN_199 -to FX2_FD[15]
+set_location_assignment PIN_75 -to LEDS[6]
+set_location_assignment PIN_74 -to LEDS[5]
+set_location_assignment PIN_72 -to LEDS[4]
+set_location_assignment PIN_70 -to LEDS[3]
+set_location_assignment PIN_69 -to LEDS[2]
+set_location_assignment PIN_68 -to LEDS[1]
+set_location_assignment PIN_76 -to LEDS[7]
+set_location_assignment PIN_67 -to LEDS[0]
+set_location_assignment PIN_8 -to PKEND
+set_location_assignment PIN_13 -to SLOE
+set_location_assignment PIN_30 -to SLRD
+set_location_assignment PIN_31 -to SLWR
+set_global_assignment -name GENERATE_RBF_FILE ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_location_assignment PIN_197 -to FLAGB
+set_location_assignment PIN_5 -to FLAGC
+set_location_assignment PIN_24 -to IFCLK
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD LVTTL
+set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
+set_global_assignment -name VECTOR_WAVEFORM_FILE EP2_LED.vwf
+set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE SPEED
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC OFF
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION OFF
+set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING OFF
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING OFF
+set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT NORMAL
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
