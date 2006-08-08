@@ -604,12 +604,16 @@ case(state_FX)
 //state 1 - delay 1 IFCLOCK cycle, this is necessary at 48MHZ to allow FIFO_ADR to settle	
 4'd1:begin
 	state_FX <= 4'd2; 						
-	end								  		
-// state 2 - check for Rx data						
+	end	
+// state 2 - delay again
 4'd2:begin
+	state_FX <= 4'd3;
+	end							  		
+// state 3 - check for Rx data						
+4'd3:begin
 		if(EP2_has_data)
 			begin
-			state_FX <= 4'd3;
+			state_FX <= 4'd4;
 			SLOE <= 1'b0; 					//assert SLOE								
 			end
 		else begin
@@ -617,24 +621,20 @@ case(state_FX)
 			state_FX <= 4'd6; 				// No Rx data so check for Tx data 
 		end 
 	end	
-// state 3 - assert SLRD 	
-4'd3:begin
+// state 4 - assert SLRD 	
+4'd4:begin
 	SLRD <= 1'b0; 
 	Rx_register[15:8] <= FX2_FD[7:0]; 		//  swap endian 
 	Rx_register[7:0]  <= FX2_FD[15:8]; 
-	state_FX <= 4'd4;
-	end	
-// state 4 - reset SLRD	
-4'd4:begin
-	SLRD <= 1'b1; 					
 	state_FX <= 4'd5;
-	end
-// state 5 - reset SLOE	
+	end	
+// state 5 - reset SLRD	and SLOE
 4'd5:begin
-	SLOE <= 1'b1; 					
+	SLRD <= 1'b1; 
+	SLOE <= 1'b1;					
 	state_FX <= 4'd6;
 	end
-// state 6 - check for Tx data - Tx fifo must be at least half full before we Tx
+// state 6- check for Tx data - Tx fifo must be at least half full before we Tx
 4'd6:  begin
 		 SLRD <= 1; 							// reset read strobe
             if (syncd_write_used[10] == 1'b1) begin // data available, so let's start the xfer...
@@ -642,23 +642,22 @@ case(state_FX)
                 state_FX <= 4'd7;
 				FIFO_ADR <= 2'b10;				// select EP6
 				end 
-            else state_FX <= 4'd0;      		// No Tx data so check for Rx data
+            else state_FX <= 4'd3;      		// No Tx data so check for Rx data, note we already have address set 
          end
 // state 7 - wait setup time for FIFO ADR
-4'd7: begin
-			state_FX <= 4'd8;
-			Tx_read_clock <= 1'b1;				// start transfer from Tx fifo                
-		end
-// state 8 - set SLEN = 1
-4'd8:begin
-		SLEN <= 1'b1;
+4'd7:begin
+		state_FX <= 4'd8;
+		Tx_read_clock <= 1'b1;				// start transfer from Tx fifo 
+	 end		
+// state 8 - wait setup time for FIFO ADR
+4'd8: begin
 		state_FX <= 4'd9;
-	 end
+	  end
 // state 9 check Tx FIFO is ready then set Write strobe 
-4'd9: begin
+4'd9:   begin
             if (EP6_ready) begin  					// if EP6 is ready, write to it and exit this state
 				Tx_read_clock <= 1'b0;				// end of transfer from Tx fifo
-                SLWR <= 0;
+                SLEN <= 1'b1;
                 state_FX <= 4'd10;
             end
             else begin                  			// otherwise, hang out here until fifo is ready
@@ -667,13 +666,22 @@ case(state_FX)
 				TX_wait <= TX_wait + 1'b1; 			// increment TX_wait counter
             end
         end
-// state 10  reset SLWR
+// state 10  set SLWR
 4'd10: begin
-		SLWR <= 1;					
-        state_FX <= 4'd11;
-		end
-// state 11 - set SLEN = 0
+		SLWR <= 1'b0;
+		state_FX <= 4'd11;
+	   end
+// state 11  reset SLWR
 4'd11: begin
+		SLWR <= 1;					
+        state_FX <= 4'd12;
+		end
+// state 12 delay for bus
+4'd12: begin
+		state_FX <= 4'd13;
+	   end
+// state 13 - set SLEN = 0
+4'd13: begin
 		SLEN <= 1'b0;
 		state_FX <= 4'd0;
 	   end 
