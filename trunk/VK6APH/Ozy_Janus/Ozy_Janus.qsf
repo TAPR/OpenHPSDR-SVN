@@ -41,8 +41,7 @@ set_global_assignment -name ENABLE_INIT_DONE_OUTPUT ON
 set_global_assignment -name GENERATE_RBF_FILE ON
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD LVTTL
-set_global_assignment -name VECTOR_INPUT_SOURCE "C:\\HPSDR\\trunk\\VK6APH\\Ozy_Janus\\Ozy_Janus.vwf"
-set_global_assignment -name FMAX_REQUIREMENT "12.288 MHz" -section_id "BCLK from Janus"
+set_global_assignment -name VECTOR_INPUT_SOURCE "C:\\HPDSDR\\trunk\\VK6APH\\Ozy_Janus\\Ozy_Janus.vwf"
 set_instance_assignment -name CLOCK_SETTINGS "BCLK from Janus" -to BCLK
 set_global_assignment -name FMAX_REQUIREMENT "24 MHz" -section_id "FX2 Clock"
 set_instance_assignment -name CLOCK_SETTINGS "FX2 Clock" -to FX2_CLK
@@ -108,3 +107,4 @@ set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
 set_global_assignment -name FMAX_REQUIREMENT "48 MHz" -section_id "48MHz clock"
 set_instance_assignment -name CLOCK_SETTINGS "48MHz clock" -to IFCLK
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS "Janus 24.576MHz clock" -section_id "BCLK from Janus"

@@ -421,31 +421,25 @@ case (AD_state)									   // see if sync is to be sent
 			end
 		AD_state <= AD_state + 1'b1;
 		end
-//**** TODO: once working combine states 3 and 4 now we are using 16 bits to FX2		
 
-6'd3:	begin
-		if(loop_counter == 0) begin  			// load remainder of sync 
-			register[15:8] <= 8'h7F;
-		end
-		AD_state <= AD_state + 1'b1;		
-		end 
 6'd4:	begin
 		if(loop_counter == 0) begin					// send C&C bytes, this is C0 
 			//register <= {C0[7:2], ~clean_dash, (~clean_dot || ~clean_PTT)};  // used with dot and dash for OZY
+			register[15:8] <= 8'h7F;
 			register[7:0] <= {C0[7:1], ~clean_PTT}; // send PTT status each time 
 			rx_avail <= 12'd4095 - sync_Rx_used;  	//  must match rx fifo size 
 			strobe <= 1'b1;
 			end 
 		AD_state <= AD_state + 1'b1;
 		end
-6'd5:	begin
+6'd6:	begin
 		if(loop_counter == 0)begin
 			register <= {RX_wait, TX_wait,};		// C1 - RX wait loop counter, C2 - Tx wait loop counter
 			strobe <= 1'b1;
 			end
 		AD_state <= AD_state + 1'b1;
 		end
-6'd6:	begin
+6'd8:	begin
 		if(loop_counter == 0)begin
 			register <= {rx_avail[11:4],Rx_control_4}; // C3 - number of bytes in Rx FIFO, C4 - sequence number
 			strobe <= 1'b1;
@@ -475,12 +469,12 @@ case (AD_state)									   // see if sync is to be sent
 		if(!LRCLK)AD_state <= 6'd25; 		// wait until LRCLK goes high 
 		else AD_state <= AD_state + 1'b1;
 		end
-6'd52:	begin
+6'd53:	begin
 		register <= Tx_data;				// send microphone or line in data to Tx FIFO
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end
-6'd53:	begin
+6'd54:	begin
 		loop_counter <= loop_counter + 1'b1; // at end of loop so increment loop counter
 		AD_state <= 6'd0;					 // done so loop again
 		end
@@ -533,7 +527,15 @@ end
 	into the Tx FIFO
 */
 
-//reg d;
+always @ (negedge BCLK)  // now width of 2x BCLK 
+begin	
+		if (data_flag)
+			data_flag <= 1'b0;
+		else
+			if (strobe) data_flag <= 1'b1;
+end
+
+/*
 
 always @ (negedge BCLK or posedge data_flag)
 begin	
@@ -542,6 +544,8 @@ begin
 		else
 			if (strobe) data_flag <= 1'b1;
 end
+
+*/
 
 ///////////////////////////////////////////////////////////////
 //
@@ -987,13 +991,12 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(FX2_CLK));
 
 assign LED[0] = ~write_full; 		// LED D1 on when Rx fifo is full. 
 assign LED[1] = ~EP6_ready;			// LED D3 on when we can write to EP6
-
 assign LED[2] = ~LED_sync; 			// LED D4 toggles each time we get sync
 assign LED[3] = ~EP2_has_data; 		//1'b1;
 assign LED[4] =  1'b1;
-assign LED[5] = CLRCLK;
-assign LED[6] = CBCLK;
-assign LED[7] = CLK_24MHZ;
+assign LED[5] = LRCLK;
+assign LED[6] = data_flag;
+assign LED[7] = Tx_read_clock; 
 
 
 endmodule
