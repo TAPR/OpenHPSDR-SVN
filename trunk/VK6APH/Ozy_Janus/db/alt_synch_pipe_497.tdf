@@ -1,8 +1,8 @@
 --dffpipe WIDTH=1 clock d q ALTERA_INTERNAL_OPTIONS=X_ON_VIOLATION_OPTION=OFF
---VERSION_BEGIN 5.1 cbx_a_gray2bin 2005:04:27:12:26:10:SJ cbx_a_graycounter 2005:07:27:11:56:48:SJ cbx_altdpram 2004:12:01:07:29:56:SJ cbx_altsyncram 2005:10:21:05:19:54:SJ cbx_cycloneii 2005:08:30:10:31:44:SJ cbx_dcfifo 2005:09:18:04:58:04:SJ cbx_fifo_common 2005:07:22:05:40:24:SJ cbx_flex10ke 2002:10:19:11:54:38:SJ cbx_lpm_add_sub 2005:09:30:12:13:06:SJ cbx_lpm_compare 2005:07:12:04:41:28:SJ cbx_lpm_counter 2005:08:24:10:49:38:SJ cbx_lpm_decode 2005:04:28:09:28:48:SJ cbx_lpm_mux 2005:04:28:09:25:00:SJ cbx_mgl 2005:10:09:07:39:04:SJ cbx_scfifo 2005:09:07:08:25:24:SJ cbx_stratix 2005:10:07:15:53:08:SJ cbx_stratixii 2005:07:27:05:50:56:SJ cbx_util_mgl 2005:09:13:05:23:22:SJ  VERSION_END
+--VERSION_BEGIN 6.0 cbx_a_gray2bin 2006:02:28:17:43:38:SJ cbx_a_graycounter 2006:03:13:11:03:08:SJ cbx_altdpram 2006:01:09:10:52:42:SJ cbx_altsyncram 2006:03:30:14:59:04:SJ cbx_cycloneii 2006:02:07:15:19:20:SJ cbx_dcfifo 2006:06:14:15:40:04:SJ cbx_fifo_common 2006:01:09:11:23:34:SJ cbx_flex10ke 2006:01:09:11:13:48:SJ cbx_lpm_add_sub 2006:01:09:11:17:20:SJ cbx_lpm_compare 2006:01:09:11:15:40:SJ cbx_lpm_counter 2006:03:23:14:19:24:SJ cbx_lpm_decode 2006:01:09:11:16:44:SJ cbx_lpm_mux 2006:01:09:11:16:16:SJ cbx_mgl 2006:05:17:10:06:16:SJ cbx_scfifo 2006:01:09:11:24:10:SJ cbx_stratix 2006:05:17:09:28:32:SJ cbx_stratixii 2006:03:03:09:35:36:SJ cbx_util_mgl 2006:01:09:10:46:36:SJ  VERSION_END
 
 
---  Copyright (C) 1991-2005 Altera Corporation
+--  Copyright (C) 1991-2006 Altera Corporation
 --  Your use of Altera Corporation's design tools, logic functions 
 --  and other software and tools, and its AMPP partner logic 
 --  functions, and any output files any of the foregoing 
