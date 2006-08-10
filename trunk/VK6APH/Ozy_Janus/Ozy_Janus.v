@@ -1,4 +1,4 @@
-// V1.3 7th August 2006
+// V1.4 10th August 2006
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH 
 //
@@ -114,6 +114,7 @@
 //				Changed endian nature of 16 bit words for sync only - 4 Aug 2006
 //				Updated FX2 interface and changed endian for all signals - 5 Aug 2006
 //				Built using Quartus II V6.0 - 7 Aug 2006
+//				Modified FX2 interface code - 10 Aug 2006
 //
 // 	
 ////////////////////////////////////////////////////////////
@@ -591,7 +592,7 @@ reg [7:0]TX_wait; 							// increments when  we have to wait for TX_ FIFO to be 
 reg [7:0]RX_wait;							// increments when there is no receive data	(C2)		
 
 
-always @ (posedge IFCLK)
+always @ (negedge IFCLK)
 begin
 	syncd_write_used <= write_used;
 case(state_FX)
@@ -603,66 +604,55 @@ case(state_FX)
 	SLOE <= 1'b1;
 	SLEN <= 1'b0;
 	FIFO_ADR <= 2'b00; 						// select EP2
-	state_FX <= 4'd1;
+	state_FX <= state_FX + 1'b1;
 	end
-//state 1 - delay 1 IFCLOCK cycle, this is necessary at 48MHZ to allow FIFO_ADR to settle	
-4'd1:begin
-	state_FX <= 4'd2; 						
-	end	
-// state 2 - delay again
+// delay 2 IFCLOCK cycle, this is necessary at 48MHZ to allow FIFO_ADR to settle	
+// check for Rx data						
 4'd2:begin
-	state_FX <= 4'd3;
-	end							  		
-// state 3 - check for Rx data						
-4'd3:begin
 		if(EP2_has_data)
 			begin
-			state_FX <= 4'd4;
+			state_FX <= state_FX + 1'b1;
 			SLOE <= 1'b0; 					//assert SLOE								
 			end
 		else begin
 			RX_wait <= RX_wait + 1'b1;		// increment RX_wait counter
-			state_FX <= 4'd6; 				// No Rx data so check for Tx data 
+			state_FX <= 4'd6; 				// No Rx data so check for Tx data ******
 		end 
 	end	
-// state 4 - assert SLRD 	
+// Wait 2 IFCLK before we assert SLRD then load received data 
 4'd4:begin
 	SLRD <= 1'b0; 
 	Rx_register[15:8] <= FX2_FD[7:0]; 		//  swap endian 
 	Rx_register[7:0]  <= FX2_FD[15:8]; 
-	state_FX <= 4'd5;
+	state_FX <= state_FX + 1'b1;
 	end	
-// state 5 - reset SLRD	and SLOE
+// reset SLRD and SLOE
 4'd5:begin
 	SLRD <= 1'b1; 
 	SLOE <= 1'b1;					
-	state_FX <= 4'd6;
+	state_FX <= state_FX + 1'b1;
 	end
-// state 6- check for Tx data - Tx fifo must be at least half full before we Tx
+// check for Tx data - Tx fifo must be at least half full before we Tx
 4'd6:  begin
-		 SLRD <= 1; 							// reset read strobe
             if (syncd_write_used[10] == 1'b1) begin // data available, so let's start the xfer...
 				SLWR <= 1;
-                state_FX <= 4'd7;
+                state_FX <= state_FX + 1'b1;
 				FIFO_ADR <= 2'b10;				// select EP6
 				end 
-            else state_FX <= 4'd3;      		// No Tx data so check for Rx data, note we already have address set 
-         end
-// state 7 - wait setup time for FIFO ADR
-4'd7:begin
-		state_FX <= 4'd8;
+            else state_FX <= 4'd2;      		// No Tx data so check for Rx data, 
+         end									// note we already have address set 
+// Wait 2 IFCLK for FIFO_ADR to stabilize, assert SLWR 
+// NOTE: seems OK with 2 waits, may need more.	
+4'd8:begin  
+		state_FX <= state_FX + 1'b1;
 		Tx_read_clock <= 1'b1;				// start transfer from Tx fifo 
 	 end		
-// state 8 - wait setup time for FIFO ADR
-4'd8: begin
-		state_FX <= 4'd9;
-	  end
-// state 9 check Tx FIFO is ready then set Write strobe 
+// check Tx FIFO is ready then set Write strobe 
 4'd9:   begin
             if (EP6_ready) begin  					// if EP6 is ready, write to it and exit this state
 				Tx_read_clock <= 1'b0;				// end of transfer from Tx fifo
                 SLEN <= 1'b1;
-                state_FX <= 4'd10;
+                state_FX <= state_FX + 1'b1;
             end
             else begin                  			// otherwise, hang out here until fifo is ready
                 SLWR <= 1;
@@ -670,34 +660,26 @@ case(state_FX)
 				TX_wait <= TX_wait + 1'b1; 			// increment TX_wait counter
             end
         end
-// state 10  set SLWR
+//  set SLWR
 4'd10: begin
 		SLWR <= 1'b0;
-		state_FX <= 4'd11;
+		state_FX <= state_FX + 1'b1;
 	   end
-// state 11  reset SLWR
-4'd11: begin
-		SLWR <= 1;					
-        state_FX <= 4'd12;
+//  reset SLWR and tristate SLEN
+4'd111: begin
+		SLWR <= 1;
+		SLEN <= 1'b0;					
+        state_FX <= 4'd0;
 		end
-// state 12 delay for bus
-4'd12: begin
-		state_FX <= 4'd13;
-	   end
-// state 13 - set SLEN = 0
-4'd13: begin
-		SLEN <= 1'b0;
-		state_FX <= 4'd0;
-	   end 
-	default: state_FX <= 4'd0;
+	default: state_FX <= state_FX + 1'b1;
 	endcase
 end
 
 // FX2_FD is tristate when SLEN  is low, otherwise it's the Tx_register value.
 // Swap endian so data is correct at PC end
 
-assign FX2_FD[15:8] = SLEN ? Tx_register[7:0] : 8'bZ;
-assign FX2_FD[7:0] = SLEN ? Tx_register[15:8] : 8'bZ;
+assign FX2_FD[15:8] = SLEN ? Tx_register[7:0]  : 8'bZ;
+assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
 
 /////////////////////////////////////////////////////////////
 //
