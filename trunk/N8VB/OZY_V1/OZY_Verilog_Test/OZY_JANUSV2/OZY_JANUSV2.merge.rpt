@@ -1,0 +1,129 @@
+Partition Merge report for OZY_JANUSV2
+Fri Aug 11 15:45:44 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Partition Merge Summary
+  3. Partition Merge Netlist Types Used
+  4. Partition Merge Partition Statistics
+  5. Partition Merge Resource Usage Summary
+  6. Partition Merge RAM Summary
+  7. Partition Merge Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------+
+; Partition Merge Summary                                                           ;
++------------------------------------+----------------------------------------------+
+; Partition Merge Status             ; Successful - Fri Aug 11 15:45:44 2006        ;
+; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
+; Revision Name                      ; OZY_JANUSV2                                  ;
+; Top-level Entity Name              ; OZY_JANUSV2                                  ;
+; Family                             ; Cyclone II                                   ;
+; Total logic elements               ; 70                                           ;
+; Total registers                    ; 70                                           ;
+; Total pins                         ; 48                                           ;
+; Total virtual pins                 ; N/A until Fitter                             ;
+; Total memory bits                  ; 128                                          ;
+; Embedded Multiplier 9-bit elements ; 0                                            ;
+; Total PLLs                         ; 0                                            ;
++------------------------------------+----------------------------------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Partition Merge Netlist Types Used                                                    ;
++----------------+------------------------+------------------------+--------------------+
+; Partition Name ; Netlist Type Used      ; Netlist Type Requested ; Partition Contents ;
++----------------+------------------------+------------------------+--------------------+
+; Top            ; Post-Synthesis Netlist ; Post-Synthesis Netlist ;                    ;
++----------------+------------------------+------------------------+--------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Partition Merge Partition Statistics                                                                                                                                                                                                                                                                            ;
++----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
+; Partition Name ; Total combinational functions ; normal mode ; arithmetic mode ; Total registers ; Input Ports ; Output Ports ; Registered Input Ports ; Registered Output Ports ; Unconnected Input Ports ; Unconnected Output Ports ; Driven Ground Input Ports ; Driven VCC Input Ports ; Partition Contents ;
++----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
+; Top            ; 44                            ; 29          ; 15              ; 70              ; 10          ; 38           ; 2                      ; 17                      ; N/A                     ; N/A                      ; N/A                       ; N/A                    ;                    ;
++----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
+
+
++-----------------------------------------------------+
+; Partition Merge Resource Usage Summary              ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimated Total logic elements              ; 70    ;
+; Total combinational functions               ; 44    ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 13    ;
+;     -- 3 input functions                    ; 13    ;
+;     -- <=2 input functions                  ; 18    ;
+;         -- Combinational cells for routing  ; 0     ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 29    ;
+;     -- arithmetic mode                      ; 15    ;
+; Total registers                             ; 70    ;
+; Virtual pins                                ; 5     ;
+; I/O pins                                    ; 48    ;
+; Total memory bits                           ; 128   ;
+; Maximum fan-out node                        ; C16   ;
+; Maximum fan-out                             ; 61    ;
+; Total fan-out                               ; 579   ;
+; Average fan-out                             ; 3.16  ;
++---------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Partition Merge RAM Summary                                                                                                                                                                                ;
++--------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; Name                                                                                                   ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF  ;
++--------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_h9b1:auto_generated|altsyncram_va11:fifo_ram|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 8            ; 16           ; 8            ; 16           ; 128  ; None ;
++--------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+
+
++--------------------------+
+; Partition Merge Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Partition Merge
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Fri Aug 11 15:45:44 2006
+Info: Command: quartus_cdb --read_settings_files=off --write_settings_files=off OZY_JANUSV2 -c OZY_JANUSV2 --merge=on
+Info: Using synthesis netlist for partition "Top"
+Info: Netlist merging resolved 1 partition(s) out of the 1 partition(s) found
+Warning: Found nodes connected to dangling design partition ports
+    Warning: Node "FX2_CLK" fans out only to specified dangling design partition port "FX2_CLK"
+    Warning: Node "FLAGA" fans out only to specified dangling design partition port "FLAGA"
+    Warning: Node "C11" fans out only to specified dangling design partition port "C11"
+    Warning: Node "C17" fans out only to specified dangling design partition port "C17"
+    Warning: Node "C20" fans out only to specified dangling design partition port "C20"
+Info: Quartus II Partition Merge was successful. 0 errors, 6 warnings
+    Info: Processing ended: Fri Aug 11 15:45:44 2006
+    Info: Elapsed time: 00:00:01
+
+

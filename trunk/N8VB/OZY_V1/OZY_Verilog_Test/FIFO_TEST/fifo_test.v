@@ -153,8 +153,7 @@ module fifo_test(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, 
 						if (EP6_has_room)
 							begin
 								SLEN <= 1'b1; // drive bus
-								SLWR <= 1'b0; // assert SLWR
-								state <= 4'd5;	
+								state <= 4'd3;	
 							end
 						else
 							begin
@@ -162,8 +161,9 @@ module fifo_test(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, 
 							end
 					end					
 				4'd3: 
-					begin						
-						state <= 4'd4; // let data bus stabilize
+					begin
+						SLWR <= 1'b0; // assert SLWR														
+						state <= 4'd5; // let data bus stabilize
 					end
 				4'd4:
 					begin

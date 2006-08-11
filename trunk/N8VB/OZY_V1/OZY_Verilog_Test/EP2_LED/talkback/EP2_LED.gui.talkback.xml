@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Mon Aug 07 13:24:15 2006) contains limited information
+This XML file (created on Thu Aug 10 11:25:49 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Mon Aug 07 13:24:15 2006</compilation_end_time>
+	<compilation_end_time>Thu Aug 10 11:25:49 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,22 +37,28 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</project>
 <revision>EP2_LED</revision>
 <gui_actions>
-	<action time="Mon Aug 07 13:23:38 2006" type="project_open">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</action>
-	<action time="Mon Aug 07 13:23:38 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED.v</action>
-	<action time="Mon Aug 07 13:23:46 2006" type="editor_open" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
-	<action time="Mon Aug 07 13:24:15 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED.v</action>
-	<action time="Mon Aug 07 13:24:15 2006" type="editor_close" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
-	<action time="Mon Aug 07 13:24:15 2006" type="project_close">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</action>
+	<action time="Thu Aug 10 09:46:04 2006" type="project_open">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</action>
+	<action time="Thu Aug 10 09:46:04 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED.v</action>
+	<action time="Thu Aug 10 09:48:04 2006" type="editor_open" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
+	<action time="Thu Aug 10 11:09:54 2006" type="editor_open" clsid="AFC_CLSID_PPL_DEFAULT_DOC">c:/altera/quartus60/win/pin_planner.ppl</action>
+	<action time="Thu Aug 10 11:10:22 2006" type="editor_open" clsid="AFC_CLSID_ASE_DEFAULT_DOC">c:/altera/quartus60/win/Assignment Editor.qase</action>
+	<action time="Thu Aug 10 11:13:05 2006" type="editor_close" clsid="AFC_CLSID_ASE_DEFAULT_DOC">c:/altera/quartus60/win/Assignment Editor.qase</action>
+	<action time="Thu Aug 10 11:13:07 2006" type="editor_close" clsid="AFC_CLSID_PPL_DEFAULT_DOC">c:/altera/quartus60/win/pin_planner.ppl</action>
+	<action time="Thu Aug 10 11:15:07 2006" type="editor_open" clsid="AFC_CLSID_FLP_DEFAULT_DOC">c:/altera/quartus60/win/TimingClosureFloorplan.fld</action>
+	<action time="Thu Aug 10 11:15:39 2006" type="editor_close" clsid="AFC_CLSID_FLP_DEFAULT_DOC">c:/altera/quartus60/win/TimingClosureFloorplan.fld</action>
+	<action time="Thu Aug 10 11:25:49 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED.v</action>
+	<action time="Thu Aug 10 11:25:49 2006" type="editor_close" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
+	<action time="Thu Aug 10 11:25:49 2006" type="project_close">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</action>
 </gui_actions>
 <gui_summary>
 	<editor_count clsid="AFC_CLSID_ACV_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_ACV_FLED_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_APE_DEFAULT_DOC">0</editor_count>
-	<editor_count clsid="AFC_CLSID_ASE_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_ASE_DEFAULT_DOC">1</editor_count>
 	<editor_count clsid="AFC_CLSID_ATC_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_CFW_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_ECUI_DEFAULT_DOC">0</editor_count>
-	<editor_count clsid="AFC_CLSID_FLP_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_FLP_DEFAULT_DOC">1</editor_count>
 	<editor_count clsid="AFC_CLSID_GED_BDF_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_GED_BSF_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_GED_GDF_DOC">0</editor_count>
@@ -76,7 +82,7 @@ to license.txt.
 	<editor_count clsid="AFC_CLSID_PJM_QPF">0</editor_count>
 	<editor_count clsid="AFC_CLSID_PJM_SSF">0</editor_count>
 	<editor_count clsid="AFC_CLSID_PJN_DEFAULT_DOC">0</editor_count>
-	<editor_count clsid="AFC_CLSID_PPL_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PPL_DEFAULT_DOC">1</editor_count>
 	<editor_count clsid="AFC_CLSID_PTW_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_QIS_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RED_DEFAULT_DOC">0</editor_count>

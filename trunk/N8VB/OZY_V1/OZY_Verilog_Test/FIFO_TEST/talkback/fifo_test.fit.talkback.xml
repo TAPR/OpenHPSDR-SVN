@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Mon Aug 07 09:55:15 2006) contains limited information
+This XML file (created on Tue Aug 08 15:59:15 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus_fit</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Mon Aug 07 09:55:15 2006</compilation_end_time>
+	<compilation_end_time>Tue Aug 08 15:59:16 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test</project>
 <revision>fifo_test</revision>
 <compilation_summary>
-	<flow_status>Successful - Mon Aug 07 09:55:15 2006</flow_status>
+	<flow_status>Successful - Tue Aug 08 15:59:15 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>fifo_test</revision_name>
 	<top_level_entity_name>fifo_test</top_level_entity_name>
@@ -45,8 +45,8 @@ to license.txt.
 	<device>EP2C5Q208C8</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>N/A</met_timing_requirements>
-	<total_logic_elements>38 / 4,608 ( &lt; 1 % )</total_logic_elements>
-	<total_registers>37</total_registers>
+	<total_logic_elements>40 / 4,608 ( &lt; 1 % )</total_logic_elements>
+	<total_registers>38</total_registers>
 	<total_pins>78 / 142 ( 55 % )</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
 	<total_memory_bits>0 / 119,808 ( 0 % )</total_memory_bits>
@@ -54,19 +54,19 @@ to license.txt.
 	<total_plls>0 / 2 ( 0 % )</total_plls>
 </compilation_summary>
 <resource_usage_summary>
-	<rsc name="Total logic elements" util="1" max=" 4608 " type="int">38 </rsc>
-	<rsc name="-- Combinational with no register" type="int">1</rsc>
+	<rsc name="Total logic elements" util="1" max=" 4608 " type="int">40 </rsc>
+	<rsc name="-- Combinational with no register" type="int">2</rsc>
 	<rsc name="-- Register only" type="int">15</rsc>
-	<rsc name="-- Combinational with a register" type="int">22</rsc>
+	<rsc name="-- Combinational with a register" type="int">23</rsc>
 	<rsc name="Logic element usage by number of LUT inputs" type="text"></rsc>
-	<rsc name="-- 4 input functions" type="int">2</rsc>
+	<rsc name="-- 4 input functions" type="int">5</rsc>
 	<rsc name="-- 3 input functions" type="int">2</rsc>
-	<rsc name="-- &lt;=2 input functions" type="int">19</rsc>
+	<rsc name="-- &lt;=2 input functions" type="int">18</rsc>
 	<rsc name="-- Register only" type="int">15</rsc>
 	<rsc name="Logic elements by mode" type="text"></rsc>
-	<rsc name="-- normal mode" type="int">9</rsc>
+	<rsc name="-- normal mode" type="int">11</rsc>
 	<rsc name="-- arithmetic mode" type="int">14</rsc>
-	<rsc name="Total registers" util="1" max=" 4608 " type="int">37 </rsc>
+	<rsc name="Total registers" util="1" max=" 4608 " type="int">38 </rsc>
 	<rsc name="Total LABs" util="6" max=" 288 " type="int">17 </rsc>
 	<rsc name="User inserted logic elements" type="int">0</rsc>
 	<rsc name="Virtual pins" type="int">0</rsc>
@@ -80,17 +80,17 @@ to license.txt.
 	<rsc name="PLLs" util="0" max=" 2 " type="int">0 </rsc>
 	<rsc name="Global clocks" util="13" max=" 8 " type="int">1 </rsc>
 	<rsc name="Maximum fan-out node" type="text">IFCLK~clkctrl</rsc>
-	<rsc name="Maximum fan-out" type="int">37</rsc>
+	<rsc name="Maximum fan-out" type="int">38</rsc>
 	<rsc name="Highest non-global fan-out signal" type="text">SLEN</rsc>
-	<rsc name="Highest non-global fan-out" type="int">16</rsc>
-	<rsc name="Total fan-out" type="int">166</rsc>
-	<rsc name="Average fan-out" type="float">1.11</rsc>
+	<rsc name="Highest non-global fan-out" type="int">18</rsc>
+	<rsc name="Total fan-out" type="int">177</rsc>
+	<rsc name="Average fan-out" type="float">1.16</rsc>
 </resource_usage_summary>
 <control_signals>
 	<row>
 		<name>IFCLK</name>
 		<location>PIN_24</location>
-		<fan_out>37</fan_out>
+		<fan_out>38</fan_out>
 		<usage>Clock</usage>
 		<global>yes</global>
 		<global_resource_used>Global clock</global_resource_used>
@@ -100,47 +100,47 @@ to license.txt.
 <non_global_high_fan_out_signals>
 	<row>
 		<name>SLWR~reg0</name>
-		<fan_out>1</fan_out>
+		<fan_out>2</fan_out>
+	</row>
+	<row>
+		<name>state.0001</name>
+		<fan_out>3</fan_out>
 	</row>
 	<row>
 		<name>state.0101</name>
-		<fan_out>3</fan_out>
+		<fan_out>5</fan_out>
 	</row>
 	<row>
 		<name>state.0010</name>
 		<fan_out>4</fan_out>
 	</row>
 	<row>
-		<name>SLEN~223</name>
+		<name>Selector1~89</name>
+		<fan_out>1</fan_out>
+	</row>
+	<row>
+		<name>state.0000</name>
 		<fan_out>2</fan_out>
 	</row>
 	<row>
-		<name>state.0001</name>
+		<name>Selector1~90</name>
+		<fan_out>1</fan_out>
+	</row>
+	<row>
+		<name>state.0011</name>
 		<fan_out>2</fan_out>
 	</row>
 	<row>
-		<name>SLEN~224</name>
-		<fan_out>2</fan_out>
+		<name>Selector2~8</name>
+		<fan_out>1</fan_out>
 	</row>
 	<row>
 		<name>Selector3~19</name>
 		<fan_out>1</fan_out>
 	</row>
-	<row>
-		<name>state.0000</name>
-		<fan_out>1</fan_out>
-	</row>
-	<row>
-		<name>counter[0]</name>
-		<fan_out>3</fan_out>
-	</row>
-	<row>
-		<name>SLEN</name>
-		<fan_out>16</fan_out>
-	</row>
 </non_global_high_fan_out_signals>
 <interconnect_usage_summary>
-	<rsc name="Local interconnects" util="1" max=" 4608 " type="int">16 </rsc>
+	<rsc name="Local interconnects" util="1" max=" 4608 " type="int">19 </rsc>
 	<rsc name="Block interconnects" util="1" max=" 15666 " type="int">51 </rsc>
 	<rsc name="R4 interconnects" util="1" max=" 13328 " type="int">12 </rsc>
 	<rsc name="R24 interconnects" util="0" max=" 652 " type="int">0 </rsc>
@@ -160,8 +160,8 @@ to license.txt.
 	<warning>Warning: Found 30 output pins without output pin load capacitance assignment</warning>
 	<info>Info: Generated suppressed messages file C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test.fit.smsg</info>
 	<info>Info: Quartus II Fitter was successful. 0 errors, 2 warnings</info>
-	<info>Info: Elapsed time: 00:00:07</info>
-	<info>Info: Processing ended: Mon Aug 07 09:55:15 2006</info>
+	<info>Info: Elapsed time: 00:00:03</info>
+	<info>Info: Processing ended: Tue Aug 08 15:59:15 2006</info>
 	<info>Info: Following groups of pins have the same output enable</info>
 </messages>
 <fitter_settings>
@@ -464,7 +464,7 @@ to license.txt.
 		<x_coordinate>0</x_coordinate>
 		<y_coordinate>13</y_coordinate>
 		<cell_number>4</cell_number>
-		<combinational_fan_out>5</combinational_fan_out>
+		<combinational_fan_out>6</combinational_fan_out>
 		<registered_fan_out>0</registered_fan_out>
 		<global>no</global>
 		<input_register>no</input_register>
@@ -1989,11 +1989,11 @@ to license.txt.
 	</row>
 	<row>
 		<name>Internal Atom Count - Fit Attempt 1</name>
-		<value>60</value>
+		<value>63</value>
 	</row>
 	<row>
 		<name>LE/ALM Count - Fit Attempt 1</name>
-		<value>39</value>
+		<value>41</value>
 	</row>
 	<row>
 		<name>LAB Count - Fit Attempt 1</name>
@@ -2017,11 +2017,11 @@ to license.txt.
 	</row>
 	<row>
 		<name>LAB Constraint &apos;non-global controls&apos; - Fit Attempt 1</name>
-		<value>0:17;1:1</value>
+		<value>0:18</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;non-global + aclr&apos; - Fit Attempt 1</name>
-		<value>0:17;1:1</value>
+		<value>0:18</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;global non-clock non-aclr&apos; - Fit Attempt 1</name>
@@ -2033,15 +2033,15 @@ to license.txt.
 	</row>
 	<row>
 		<name>LAB Constraint &apos;deterministic LABSMUXA/LABXMUXB&apos; - Fit Attempt 1</name>
-		<value>0:17;1:1</value>
+		<value>0:18</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;deterministic LABSMUXC/LABXMUXD&apos; - Fit Attempt 1</name>
-		<value>0:17;1:1</value>
+		<value>0:18</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;clock / ce pair constraint&apos; - Fit Attempt 1</name>
-		<value>0:1;1:16;2:1</value>
+		<value>0:1;1:17</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;aclr constraint&apos; - Fit Attempt 1</name>
@@ -2078,10 +2078,6 @@ to license.txt.
 	<row>
 		<name>Time - Fit Attempt 1</name>
 		<value>0</value>
-	</row>
-	<row>
-		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>0.016</value>
 	</row>
 </advanced_data___placement_preparation>
 <advanced_data___placement>
@@ -2157,16 +2153,15 @@ to license.txt.
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>0.031</value>
+		<value>0.062</value>
 	</row>
 </advanced_data___routing>
 <files>
 	<top>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test.v</top>
 	<extensions>
-		<ext ext_name="v">2</ext>
+		<ext ext_name="v">1</ext>
 	</extensions>
 	<sub_files>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/rxfifo.v</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test.v</sub_file>
 	</sub_files>
 </files>

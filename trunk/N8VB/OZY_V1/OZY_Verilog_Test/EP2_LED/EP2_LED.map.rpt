@@ -1,5 +1,5 @@
 Analysis & Synthesis report for EP2_LED
-Mon Aug 07 13:23:51 2006
+Thu Aug 10 11:13:11 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -12,9 +12,10 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
   4. Analysis & Synthesis Source Files Read
   5. Analysis & Synthesis Resource Usage Summary
   6. Analysis & Synthesis Resource Utilization by Entity
-  7. State Machine - |EP2_LED|state
-  8. General Register Statistics
+  7. General Register Statistics
+  8. Multiplexer Restructuring Statistics (No Restructuring Performed)
   9. Analysis & Synthesis Messages
+ 10. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -40,13 +41,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Aug 07 13:23:51 2006        ;
+; Analysis & Synthesis Status        ; Successful - Thu Aug 10 11:13:11 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; EP2_LED                                      ;
 ; Top-level Entity Name              ; EP2_LED                                      ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 52                                           ;
-; Total registers                    ; 52                                           ;
+; Total logic elements               ; 43                                           ;
+; Total registers                    ; 43                                           ;
 ; Total pins                         ; 35                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0                                            ;
@@ -129,22 +130,22 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 52    ;
-; Total combinational functions               ; 11    ;
+; Estimated Total logic elements              ; 43    ;
+; Total combinational functions               ; 31    ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 6     ;
-;     -- 3 input functions                    ; 0     ;
-;     -- <=2 input functions                  ; 5     ;
+;     -- 4 input functions                    ; 16    ;
+;     -- 3 input functions                    ; 9     ;
+;     -- <=2 input functions                  ; 6     ;
 ;         -- Combinational cells for routing  ; 0     ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 11    ;
-;     -- arithmetic mode                      ; 0     ;
-; Total registers                             ; 52    ;
+;     -- normal mode                          ; 27    ;
+;     -- arithmetic mode                      ; 4     ;
+; Total registers                             ; 43    ;
 ; I/O pins                                    ; 35    ;
 ; Maximum fan-out node                        ; IFCLK ;
-; Maximum fan-out                             ; 52    ;
-; Total fan-out                               ; 213   ;
-; Average fan-out                             ; 2.17  ;
+; Maximum fan-out                             ; 43    ;
+; Total fan-out                               ; 265   ;
+; Average fan-out                             ; 2.43  ;
 +---------------------------------------------+-------+
 
 
@@ -153,32 +154,9 @@ applicable agreement for further details.
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ;
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
-; |EP2_LED                   ; 11 (11)           ; 52 (52)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 35   ; 0            ; |EP2_LED            ;
+; |EP2_LED                   ; 31 (31)           ; 43 (43)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 35   ; 0            ; |EP2_LED            ;
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |EP2_LED|state                                                                                                                                                                                ;
-+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
-; Name       ; state.0001 ; state.1110 ; state.0010 ; state.0011 ; state.0100 ; state.0101 ; state.0110 ; state.0111 ; state.1000 ; state.1001 ; state.1010 ; state.1011 ; state.1100 ; state.1101 ; state.0000 ;
-+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
-; state.0000 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ;
-; state.1101 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 1          ;
-; state.1100 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 1          ;
-; state.1011 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 1          ;
-; state.1010 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 1          ;
-; state.1001 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 1          ;
-; state.1000 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
-; state.0111 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
-; state.0110 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
-; state.0101 ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
-; state.0100 ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
-; state.0011 ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
-; state.0010 ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
-; state.1110 ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
-; state.0001 ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
-+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
 
 
 +------------------------------------------------------+
@@ -186,8 +164,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 52    ;
-; Number of registers using Synchronous Clear  ; 0     ;
+; Total registers                              ; 43    ;
+; Number of registers using Synchronous Clear  ; 1     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -196,13 +174,23 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 
 
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (No Restructuring Performed)                                                                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 64:1               ; 2 bits    ; 84 LEs        ; 6 LEs                ; 78 LEs                 ; Yes        ; |EP2_LED|state[2]          ;
+; 65:1               ; 2 bits    ; 86 LEs        ; 2 LEs                ; 84 LEs                 ; Yes        ; |EP2_LED|FIFO_ADR[0]~reg0  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Aug 07 13:23:49 2006
+    Info: Processing started: Thu Aug 10 11:13:10 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off EP2_LED -c EP2_LED
 Info: Found 1 design units, including 1 entities, in source file EP2_LED.v
     Info: Found entity 1: EP2_LED
@@ -210,53 +198,25 @@ Info: Elaborating entity "EP2_LED" for the top level hierarchy
 Info: Power-up level of register "PKEND~reg0" is not specified -- using power-up level of High to minimize register
 Warning: Reduced register "PKEND~reg0" with stuck data_in port to stuck value VCC
 Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
-Info: State machine "|EP2_LED|state" contains 15 states
-Info: Selected Auto state machine encoding method for state machine "|EP2_LED|state"
-Info: Encoding result for state machine "|EP2_LED|state"
-    Info: Completed encoding using 15 state bits
-        Info: Encoded state bit "state.0001"
-        Info: Encoded state bit "state.1110"
-        Info: Encoded state bit "state.0010"
-        Info: Encoded state bit "state.0011"
-        Info: Encoded state bit "state.0100"
-        Info: Encoded state bit "state.0101"
-        Info: Encoded state bit "state.0110"
-        Info: Encoded state bit "state.0111"
-        Info: Encoded state bit "state.1000"
-        Info: Encoded state bit "state.1001"
-        Info: Encoded state bit "state.1010"
-        Info: Encoded state bit "state.1011"
-        Info: Encoded state bit "state.1100"
-        Info: Encoded state bit "state.1101"
-        Info: Encoded state bit "state.0000"
-    Info: State "|EP2_LED|state.0000" uses code string "000000000000000"
-    Info: State "|EP2_LED|state.1101" uses code string "000000000000011"
-    Info: State "|EP2_LED|state.1100" uses code string "000000000000101"
-    Info: State "|EP2_LED|state.1011" uses code string "000000000001001"
-    Info: State "|EP2_LED|state.1010" uses code string "000000000010001"
-    Info: State "|EP2_LED|state.1001" uses code string "000000000100001"
-    Info: State "|EP2_LED|state.1000" uses code string "000000001000001"
-    Info: State "|EP2_LED|state.0111" uses code string "000000010000001"
-    Info: State "|EP2_LED|state.0110" uses code string "000000100000001"
-    Info: State "|EP2_LED|state.0101" uses code string "000001000000001"
-    Info: State "|EP2_LED|state.0100" uses code string "000010000000001"
-    Info: State "|EP2_LED|state.0011" uses code string "000100000000001"
-    Info: State "|EP2_LED|state.0010" uses code string "001000000000001"
-    Info: State "|EP2_LED|state.1110" uses code string "010000000000001"
-    Info: State "|EP2_LED|state.0001" uses code string "100000000000001"
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "PKEND" stuck at VCC
     Warning: Pin "FIFO_ADR[0]" stuck at GND
 Warning: Design contains 2 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FX2_CLK"
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 90 device resources after synthesis - the final resource count might be different
+Info: Implemented 98 device resources after synthesis - the final resource count might be different
     Info: Implemented 5 input pins
     Info: Implemented 14 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 55 logic cells
+    Info: Implemented 63 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 8 warnings
-    Info: Processing ended: Mon Aug 07 13:23:51 2006
-    Info: Elapsed time: 00:00:03
+    Info: Processing ended: Thu Aug 10 11:13:11 2006
+    Info: Elapsed time: 00:00:02
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED.map.smsg.
 
 

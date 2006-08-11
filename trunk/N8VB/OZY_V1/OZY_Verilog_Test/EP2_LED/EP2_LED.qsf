@@ -78,3 +78,4 @@ set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING OF
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING OFF
 set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT NORMAL
 set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_global_assignment -name OUTPUT_PIN_LOAD 5 -section_id LVTTL

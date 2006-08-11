@@ -147,7 +147,7 @@ _high_speed_config_descr::
 	.db	DSCR_INTRFC
 	.db	0		; bInterfaceNumber (zero based)
 	.db	0		; bAlternateSetting
-	.db	4		; bNumEndpoints
+	.db	2		; bNumEndpoints
 	.db	0xff		; bInterfaceClass (vendor specific)
 	.db	0xff		; bInterfaceSubClass (vendor specific)
 	.db	0xff		; bInterfaceProtocol (vendor specific)
@@ -165,13 +165,13 @@ _high_speed_config_descr::
 
 	;; end point 4
 
-	.db	DSCR_ENDPNT_LEN
-	.db	DSCR_ENDPNT
-	.db	0x04		; bEndpointAddress (ep 4 OUT)
-	.db	ET_BULK		; bmAttributes
-	.db	<512		; wMaxPacketSize (LSB)
-	.db	>512		; wMaxPacketSize (MSB)
-	.db	0		; bInterval (iso only)
+	;;.db	DSCR_ENDPNT_LEN
+	;;.db	DSCR_ENDPNT
+	;;.db	0x04		; bEndpointAddress (ep 4 OUT)
+	;;.db	ET_BULK		; bmAttributes
+	;;.db	<512		; wMaxPacketSize (LSB)
+	;;.db	>512		; wMaxPacketSize (MSB)
+	;;.db	0		; bInterval (iso only)
 
 	;; end point 6
 
@@ -185,13 +185,13 @@ _high_speed_config_descr::
 
 	;; end point 8
 
-	.db	DSCR_ENDPNT_LEN
-	.db	DSCR_ENDPNT
-	.db	0x88		; bEndpointAddress (ep 4 IN)
-	.db	ET_BULK		; bmAttributes
-	.db	<512		; wMaxPacketSize (LSB)
-	.db	>512		; wMaxPacketSize (MSB)
-	.db	0		; bInterval (iso only)
+	;;.db	DSCR_ENDPNT_LEN
+	;;.db	DSCR_ENDPNT
+	;;.db	0x88		; bEndpointAddress (ep 4 IN)
+	;;.db	ET_BULK		; bmAttributes
+	;;.db	<512		; wMaxPacketSize (LSB)
+	;;.db	>512		; wMaxPacketSize (MSB)
+	;;.db	0		; bInterval (iso only)
 
 _high_speed_config_descr_end:
 

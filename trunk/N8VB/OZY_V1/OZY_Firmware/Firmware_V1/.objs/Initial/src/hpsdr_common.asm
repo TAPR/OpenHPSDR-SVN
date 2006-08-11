@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Fri Aug 04 15:56:56 2006
+; This file generated Tue Aug 08 15:57:29 2006
 ;--------------------------------------------------------
 	.module hpsdr_common
 	.optsdcc -mmcs51 --model-small
@@ -811,35 +811,22 @@ _init_hpsdr:
 ;Initial/src/hpsdr_common.c:78: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:79: EP2CFG = bmVALID | bmBULK | bmDOUBLEBUF;
+;Initial/src/hpsdr_common.c:79: EP2CFG = bmVALID | bmBULK | bmQUADBUF;
 ;     genAssign
 	mov	dptr,#_EP2CFG
-	mov	a,#0xA2
+	mov	a,#0xA0
 	movx	@dptr,a
 ;Initial/src/hpsdr_common.c:80: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:81: EP4CFG = bmVALID | bmBULK;
-;     genAssign
-	mov	dptr,#_EP4CFG
-	mov	a,#0xA0
-	movx	@dptr,a
-;Initial/src/hpsdr_common.c:82: SYNCDELAY;
-;     genInline
-	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:83: EP6CFG = bmVALID | bmBULK | bmDOUBLEBUF | bmIN;
+;Initial/src/hpsdr_common.c:83: EP6CFG = bmVALID | bmBULK | bmQUADBUF | bmIN;
 ;     genAssign
 	mov	dptr,#_EP6CFG
-	mov	a,#0xE2
+	mov	a,#0xE0
 	movx	@dptr,a
 ;Initial/src/hpsdr_common.c:84: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:85: EP8CFG = bmVALID | bmBULK | bmIN;
-;     genAssign
-	mov	dptr,#_EP8CFG
-	mov	a,#0xE0
-	movx	@dptr,a
 ;Initial/src/hpsdr_common.c:86: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
@@ -882,39 +869,6 @@ _init_hpsdr:
 ;Initial/src/hpsdr_common.c:100: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:104: EP4FIFOCFG = bmWORDWIDE; //core needs to see 0 to 1 transistion of AUTOOUT
-;     genAssign
-	mov	dptr,#_EP4FIFOCFG
-	mov	a,#0x01
-	movx	@dptr,a
-;Initial/src/hpsdr_common.c:105: SYNCDELAY;
-;     genInline
-	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:106: EP4FIFOCFG = bmAUTOOUT | bmWORDWIDE;
-;     genAssign
-	mov	dptr,#_EP4FIFOCFG
-	mov	a,#0x11
-	movx	@dptr,a
-;Initial/src/hpsdr_common.c:107: SYNCDELAY;
-;     genInline
-	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:108: EP4AUTOINLENH = 0x02; //MSB
-;     genAssign
-	mov	dptr,#_EP4AUTOINLENH
-	mov	a,#0x02
-	movx	@dptr,a
-;Initial/src/hpsdr_common.c:109: SYNCDELAY;
-;     genInline
-	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:110: EP4AUTOINLENL = 0x00; //LSB
-;     genAssign
-	mov	dptr,#_EP4AUTOINLENL
-;	Peephole 181	changed mov to clr
-	clr	a
-	movx	@dptr,a
-;Initial/src/hpsdr_common.c:111: SYNCDELAY;
-;     genInline
-	 nop; nop; nop; 
 ;Initial/src/hpsdr_common.c:114: EP6FIFOCFG = bmAUTOIN | bmWORDWIDE;
 ;     genAssign
 	mov	dptr,#_EP6FIFOCFG
@@ -940,28 +894,6 @@ _init_hpsdr:
 ;Initial/src/hpsdr_common.c:119: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:123: EP8FIFOCFG = bmAUTOIN | bmWORDWIDE;
-;     genAssign
-	mov	dptr,#_EP8FIFOCFG
-	mov	a,#0x09
-	movx	@dptr,a
-;Initial/src/hpsdr_common.c:124: SYNCDELAY;
-;     genInline
-	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:125: EP8AUTOINLENH = 0x02; //MSB
-;     genAssign
-	mov	dptr,#_EP8AUTOINLENH
-	mov	a,#0x02
-	movx	@dptr,a
-;Initial/src/hpsdr_common.c:126: SYNCDELAY;
-;     genInline
-	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:127: EP8AUTOINLENL = 0x00; //LSB
-;     genAssign
-	mov	dptr,#_EP8AUTOINLENL
-;	Peephole 181	changed mov to clr
-	clr	a
-	movx	@dptr,a
 ;Initial/src/hpsdr_common.c:130: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 

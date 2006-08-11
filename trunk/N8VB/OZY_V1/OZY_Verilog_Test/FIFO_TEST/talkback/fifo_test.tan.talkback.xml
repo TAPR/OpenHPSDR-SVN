@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Mon Aug 07 09:55:22 2006) contains limited information
+This XML file (created on Tue Aug 08 15:59:21 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus_tan</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Mon Aug 07 09:55:22 2006</compilation_end_time>
+	<compilation_end_time>Tue Aug 08 15:59:21 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test</project>
 <revision>fifo_test</revision>
 <compilation_summary>
-	<flow_status>Successful - Mon Aug 07 09:55:22 2006</flow_status>
+	<flow_status>Successful - Tue Aug 08 15:59:21 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>fifo_test</revision_name>
 	<top_level_entity_name>fifo_test</top_level_entity_name>
@@ -45,8 +45,8 @@ to license.txt.
 	<device>EP2C5Q208C8</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>Yes</met_timing_requirements>
-	<total_logic_elements>38 / 4,608 ( &lt; 1 % )</total_logic_elements>
-	<total_registers>37</total_registers>
+	<total_logic_elements>40 / 4,608 ( &lt; 1 % )</total_logic_elements>
+	<total_registers>38</total_registers>
 	<total_pins>78 / 142 ( 55 % )</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
 	<total_memory_bits>0 / 119,808 ( 0 % )</total_memory_bits>
@@ -63,9 +63,9 @@ to license.txt.
 	<warning>Warning: Found pins functioning as undefined clocks and/or memory enables</warning>
 	<info>Info: Quartus II Timing Analyzer was successful. 0 errors, 1 warning</info>
 	<info>Info: Elapsed time: 00:00:01</info>
-	<info>Info: Processing ended: Mon Aug 07 09:55:22 2006</info>
-	<info>Info: th for register &quot;SLEN&quot; (data pin = &quot;FLAGC&quot;, clock pin = &quot;IFCLK&quot;) is -4.263 ns</info>
-	<info>Info: - Shortest pin to register delay is 7.328 ns</info>
+	<info>Info: Processing ended: Tue Aug 08 15:59:21 2006</info>
+	<info>Info: th for register &quot;state.0101&quot; (data pin = &quot;FLAGC&quot;, clock pin = &quot;IFCLK&quot;) is -4.274 ns</info>
+	<info>Info: - Shortest pin to register delay is 7.339 ns</info>
 </messages>
 <clock_settings_summary>
 	<row>
@@ -84,13 +84,13 @@ to license.txt.
 		<type>Worst-case tsu</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>5.596 ns</actual>
+		<actual>5.606 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case tco</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>8.302 ns</actual>
+		<actual>8.310 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case tpd</type>
@@ -102,7 +102,7 @@ to license.txt.
 		<type>Worst-case th</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>-4.263 ns</actual>
+		<actual>-4.274 ns</actual>
 	</nonclk>
 	<clk>
 		<name>IFCLK</name>

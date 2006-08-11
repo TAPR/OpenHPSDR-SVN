@@ -76,13 +76,13 @@ init_hpsdr (void)
   EP1OUTCFG = bmVALID | bmBULK;
   EP1INCFG = bmVALID | bmBULK;
   SYNCDELAY;
-  EP2CFG = bmVALID | bmBULK | bmDOUBLEBUF;
+  EP2CFG = bmVALID | bmBULK | bmQUADBUF;
   SYNCDELAY;
-  EP4CFG = bmVALID | bmBULK;
+//  EP4CFG = bmVALID | bmBULK;
+//  SYNCDELAY;
+  EP6CFG = bmVALID | bmBULK | bmQUADBUF | bmIN;
   SYNCDELAY;
-  EP6CFG = bmVALID | bmBULK | bmDOUBLEBUF | bmIN;
-  SYNCDELAY;
-  EP8CFG = bmVALID | bmBULK | bmIN;
+// EP8CFG = bmVALID | bmBULK | bmIN;
   SYNCDELAY;
 
   FIFOPINPOLAR=0x00; //default polarities: SLWR active low
@@ -99,17 +99,17 @@ init_hpsdr (void)
   EP2AUTOINLENL = 0x00; //LSB
   SYNCDELAY;
 
-  //EP4
-
-  EP4FIFOCFG = bmWORDWIDE; //core needs to see 0 to 1 transistion of AUTOOUT
-  SYNCDELAY;
-  EP4FIFOCFG = bmAUTOOUT | bmWORDWIDE;
-  SYNCDELAY;
-  EP4AUTOINLENH = 0x02; //MSB
-  SYNCDELAY;
-  EP4AUTOINLENL = 0x00; //LSB
-  SYNCDELAY;
-  //EP6
+//  //EP4
+//
+//  EP4FIFOCFG = bmWORDWIDE; //core needs to see 0 to 1 transistion of AUTOOUT
+//  SYNCDELAY;
+//  EP4FIFOCFG = bmAUTOOUT | bmWORDWIDE;
+//  SYNCDELAY;
+//  EP4AUTOINLENH = 0x02; //MSB
+//  SYNCDELAY;
+//  EP4AUTOINLENL = 0x00; //LSB
+//  SYNCDELAY;
+//  //EP6
 
   EP6FIFOCFG = bmAUTOIN | bmWORDWIDE;
   SYNCDELAY;
@@ -118,13 +118,13 @@ init_hpsdr (void)
   EP6AUTOINLENL = 0x00; //LSB
   SYNCDELAY;
 
-  //EP8
-
-  EP8FIFOCFG = bmAUTOIN | bmWORDWIDE;
-  SYNCDELAY;
-  EP8AUTOINLENH = 0x02; //MSB
-  SYNCDELAY;
-  EP8AUTOINLENL = 0x00; //LSB
+//  //EP8
+//
+//  EP8FIFOCFG = bmAUTOIN | bmWORDWIDE;
+//  SYNCDELAY;
+//  EP8AUTOINLENH = 0x02; //MSB
+//  SYNCDELAY;
+//  EP8AUTOINLENL = 0x00; //LSB
 
   // Set up FIFO FLAGS A through D
   SYNCDELAY;
