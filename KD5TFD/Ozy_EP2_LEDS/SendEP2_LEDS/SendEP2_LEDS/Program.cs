@@ -91,7 +91,7 @@ namespace SendEP2_LEDS
                         buf[i + 1] = (byte)rnd.Next(0, 255);    
                     }
                 // dumpBuf(buf); 
-                Console.WriteLine("WRITE: " + libUSB_Interface.usb_bulk_write(hdev, 0x02, buf, 1000) + " " + DateTime.UtcNow.ToBinary().ToString());
+                // Console.WriteLine("WRITE: " + libUSB_Interface.usb_bulk_write(hdev, 0x02, buf, 1000) + " " + DateTime.UtcNow.ToBinary().ToString());
                 
                 int ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf, 5000);
                 Console.WriteLine("READ:  " + ret + " " + DateTime.UtcNow.ToBinary().ToString());
@@ -102,34 +102,36 @@ namespace SendEP2_LEDS
                 //}
                 if (ret > 0)
                 {
-                    if (rbuf.Length != buf.Length) // compare buffer lengths
-                    {
-                        Console.WriteLine("Length Error!");
-                        break;  // end if error
-                    }
-                    else
-                    {
-                       // test code 
-                       // if (dbggate == 100)
-                       // {
-                       //    Console.WriteLine("forced error"); 
-                       //     dbggate = 0;
-                       //     rbuf[5] = 0x77; 
-                       // }                         
+                    Console.WriteLine("Read:");
+                    dumpBuf(rbuf); 
+                    //if (rbuf.Length != buf.Length) // compare buffer lengths
+                    //{
+                    //    Console.WriteLine("Length Error!");
+                    //    break;  // end if error
+                    //}
+                    //else
+                    //{
+                    //   // test code 
+                    //   // if (dbggate == 100)
+                    //   // {
+                    //   //    Console.WriteLine("forced error"); 
+                    //   //     dbggate = 0;
+                    //   //     rbuf[5] = 0x77; 
+                    //   // }                         
 
-                        for (int i = 0; i < rbuf.Length; i++)
-                        {
-                            if (rbuf[i] != buf[i]) // compare buffer contents
-                            {
-                                Console.WriteLine("Compare Error at: " + i);
-                                Console.WriteLine("Written:");
-                                dumpBuf(buf);
-                                Console.WriteLine("Read:");
-                                dumpBuf(rbuf); 
-                                break; // end if error
-                            }
-                        }
-                    }
+                    //    for (int i = 0; i < rbuf.Length; i++)
+                    //    {
+                    //        if (rbuf[i] != buf[i]) // compare buffer contents
+                    //        {
+                    //            Console.WriteLine("Compare Error at: " + i);
+                    //            Console.WriteLine("Written:");
+                    //            dumpBuf(buf);
+                    //            Console.WriteLine("Read:");
+                    //            dumpBuf(rbuf); 
+                    //            break; // end if error
+                    //          }
+                    //    }
+                    //}
                 }
                 System.Threading.Thread.Sleep(50); // sleep a bit so we can at least see LEDS flashing...
                 //if (Console.ReadKey().Key != ConsoleKey.F1)
