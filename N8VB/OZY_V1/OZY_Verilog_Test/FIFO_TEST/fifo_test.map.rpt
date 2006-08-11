@@ -1,5 +1,5 @@
 Analysis & Synthesis report for fifo_test
-Mon Aug 07 09:55:07 2006
+Tue Aug 08 15:59:10 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -40,13 +40,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Aug 07 09:55:07 2006        ;
+; Analysis & Synthesis Status        ; Successful - Tue Aug 08 15:59:10 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; fifo_test                                    ;
 ; Top-level Entity Name              ; fifo_test                                    ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 37                                           ;
-; Total registers                    ; 37                                           ;
+; Total logic elements               ; 38                                           ;
+; Total registers                    ; 38                                           ;
 ; Total pins                         ; 35                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0                                            ;
@@ -129,22 +129,22 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 37    ;
-; Total combinational functions               ; 22    ;
+; Estimated Total logic elements              ; 38    ;
+; Total combinational functions               ; 24    ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 2     ;
+;     -- 4 input functions                    ; 5     ;
 ;     -- 3 input functions                    ; 2     ;
-;     -- <=2 input functions                  ; 18    ;
+;     -- <=2 input functions                  ; 17    ;
 ;         -- Combinational cells for routing  ; 0     ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 8     ;
+;     -- normal mode                          ; 10    ;
 ;     -- arithmetic mode                      ; 14    ;
-; Total registers                             ; 37    ;
+; Total registers                             ; 38    ;
 ; I/O pins                                    ; 35    ;
 ; Maximum fan-out node                        ; IFCLK ;
-; Maximum fan-out                             ; 37    ;
-; Total fan-out                               ; 157   ;
-; Average fan-out                             ; 1.67  ;
+; Maximum fan-out                             ; 38    ;
+; Total fan-out                               ; 168   ;
+; Average fan-out                             ; 1.73  ;
 +---------------------------------------------+-------+
 
 
@@ -153,7 +153,7 @@ applicable agreement for further details.
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ;
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
-; |fifo_test                 ; 22 (22)           ; 37 (37)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 35   ; 0            ; |fifo_test          ;
+; |fifo_test                 ; 24 (24)           ; 38 (38)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 35   ; 0            ; |fifo_test          ;
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -161,13 +161,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------------------------------------------------------------------------------------------------------+
 ; State Machine - |fifo_test|state                                                                                   ;
 +------------+------------+------------+------------+------------+------------+------------+------------+------------+
-; Name       ; state.0001 ; state.0110 ; state.0010 ; state.0101 ; state.0100 ; state.0011 ; state.0111 ; state.0000 ;
+; Name       ; state.0001 ; state.0110 ; state.0010 ; state.0011 ; state.0101 ; state.0100 ; state.0111 ; state.0000 ;
 +------------+------------+------------+------------+------------+------------+------------+------------+------------+
 ; state.0000 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ;
 ; state.0111 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 1          ;
-; state.0011 ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 1          ;
-; state.0100 ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 1          ;
-; state.0101 ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 1          ;
+; state.0100 ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 1          ;
+; state.0101 ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 1          ;
+; state.0011 ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 1          ;
 ; state.0010 ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 1          ;
 ; state.0110 ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
 ; state.0001 ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
@@ -179,12 +179,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 37    ;
+; Total registers                              ; 38    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 2     ;
+; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -195,10 +195,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Aug 07 09:55:05 2006
+    Info: Processing started: Tue Aug 08 15:59:10 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off fifo_test -c fifo_test
-Info: Found 1 design units, including 1 entities, in source file rxfifo.v
-    Info: Found entity 1: rxfifo
 Info: Found 1 design units, including 1 entities, in source file fifo_test.v
     Info: Found entity 1: fifo_test
 Info: Elaborating entity "fifo_test" for the top level hierarchy
@@ -221,16 +219,16 @@ Info: Encoding result for state machine "|fifo_test|state"
         Info: Encoded state bit "state.0001"
         Info: Encoded state bit "state.0110"
         Info: Encoded state bit "state.0010"
+        Info: Encoded state bit "state.0011"
         Info: Encoded state bit "state.0101"
         Info: Encoded state bit "state.0100"
-        Info: Encoded state bit "state.0011"
         Info: Encoded state bit "state.0111"
         Info: Encoded state bit "state.0000"
     Info: State "|fifo_test|state.0000" uses code string "00000000"
     Info: State "|fifo_test|state.0111" uses code string "00000011"
-    Info: State "|fifo_test|state.0011" uses code string "00000101"
-    Info: State "|fifo_test|state.0100" uses code string "00001001"
-    Info: State "|fifo_test|state.0101" uses code string "00010001"
+    Info: State "|fifo_test|state.0100" uses code string "00000101"
+    Info: State "|fifo_test|state.0101" uses code string "00001001"
+    Info: State "|fifo_test|state.0011" uses code string "00010001"
     Info: State "|fifo_test|state.0010" uses code string "00100001"
     Info: State "|fifo_test|state.0110" uses code string "01000001"
     Info: State "|fifo_test|state.0001" uses code string "10000001"
@@ -247,13 +245,13 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "LEDS[7]" stuck at VCC
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FX2_CLK"
-Info: Implemented 74 device resources after synthesis - the final resource count might be different
+Info: Implemented 75 device resources after synthesis - the final resource count might be different
     Info: Implemented 5 input pins
     Info: Implemented 14 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 39 logic cells
+    Info: Implemented 40 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 19 warnings
-    Info: Processing ended: Mon Aug 07 09:55:07 2006
-    Info: Elapsed time: 00:00:02
+    Info: Processing ended: Tue Aug 08 15:59:10 2006
+    Info: Elapsed time: 00:00:01
 
 

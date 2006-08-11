@@ -88,7 +88,7 @@ namespace test_fifo
             Console.WriteLine("Press return...");
             Console.ReadKey();
             System.Random rnd = new Random();
-            int size = (int)System.Math.Pow(2, 26);
+            int size = 2048;
             byte[] rbuf = new byte[size];
             HiPerfTimer pt = new HiPerfTimer();
 
@@ -105,13 +105,37 @@ namespace test_fifo
             //    //    break;
             //}
 
-            pt.Start();
-            int ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf, 5000);
-            pt.Stop();
+            //while (true)
+            //{
+                //pt.Start();
+            int counter = 0;
+                int ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf, 500);
+                //if (ret != rbuf.Length)
+                //    break;
+                FileStream fs = File.Create(".\\dump.txt");
+                StreamWriter sw = new StreamWriter(fs);
+                for (int i = 0; i < rbuf.Length; i++)
+                {
+                    sw.Write(rbuf[i].ToString("X") + " : ");
+                    Console.Write(rbuf[i].ToString("X") + " : ");
+                    if (++counter >= 8)
+                    {
+                        counter = 0;
+                        Console.WriteLine();
+                        sw.WriteLine();
+                    }
+                }
+                System.Threading.Thread.Sleep(100);
+                sw.Close();
+                fs.Close();                
+                
+                //pt.Stop();
+            //}
 
-            Console.WriteLine("RET: " + ret + " Time: " + pt.Duration);
+            //Console.WriteLine("RET: " + ret + " Time: " + pt.Duration);
             
-            Console.WriteLine("MBYTES/SEC: " + ((ret / pt.Duration)/System.Math.Pow(2, 20)));
+            //Console.WriteLine("MBYTES/SEC: " + ((ret / pt.Duration)/System.Math.Pow(2, 20)));
+
             libUSB_Interface.usb_release_interface(hdev, 0);
             libUSB_Interface.usb_close(hdev);
             Console.WriteLine(libUSB_Interface.usb_strerror());

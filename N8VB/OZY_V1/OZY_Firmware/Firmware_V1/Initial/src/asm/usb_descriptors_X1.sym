@@ -193,21 +193,21 @@ Symbol Table
     TR2                                                            00CA 
     TXD                                                            00B1 
     VID_FREE                                                    =  FFFE 
-  1 _full_speed_config_descr                                       0066 GR
-  1 _full_speed_config_descr_end                                   0078 R
-  1 _full_speed_device_descr                                       004A GR
-  1 _full_speed_devqual_descr                                      005C GR
+  1 _full_speed_config_descr                                       0058 GR
+  1 _full_speed_config_descr_end                                   006A R
+  1 _full_speed_device_descr                                       003C GR
+  1 _full_speed_devqual_descr                                      004E GR
   1 _high_speed_config_descr                                       001C GR
-  1 _high_speed_config_descr_end                                   004A R
+  1 _high_speed_config_descr_end                                   003C R
   1 _high_speed_device_descr                                       0000 GR
   1 _high_speed_devqual_descr                                      0012 GR
-  1 _nstring_descriptors                                           0078 GR
-  1 _string_descriptors                                            0079 GR
-  1 _string_descriptors_end                                        0083 R
-  1 _usb_desc_hw_rev_ascii_patch_location_0                        00D0 GR
+  1 _nstring_descriptors                                           006A GR
+  1 _string_descriptors                                            006B GR
+  1 _string_descriptors_end                                        0075 R
+  1 _usb_desc_hw_rev_ascii_patch_location_0                        00C2 GR
   1 _usb_desc_hw_rev_binary_patch_location_0                       000C GR
-  1 _usb_desc_hw_rev_binary_patch_location_1                       0056 GR
-  1 _usb_desc_serial_number_ascii                                  00F6 GR
+  1 _usb_desc_hw_rev_binary_patch_location_1                       0048 GR
+  1 _usb_desc_serial_number_ascii                                  00E8 GR
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -344,16 +344,16 @@ Symbol Table
     sm1                                                            009E 
     sm2                                                            009D 
     sp                                                             0081 
-  1 str0                                                           0084 R
-  1 str0_end                                                       008A R
-  1 str1                                                           008A R
-  1 str1_end                                                       00B2 R
-  1 str2                                                           00B2 R
-  1 str2_end                                                       00D2 R
-  1 str3                                                           00D2 R
-  1 str3_end                                                       00F4 R
-  1 str4                                                           00F4 R
-  1 str4_end                                                       0106 R
+  1 str0                                                           0076 R
+  1 str0_end                                                       007C R
+  1 str1                                                           007C R
+  1 str1_end                                                       00A4 R
+  1 str2                                                           00A4 R
+  1 str2_end                                                       00C4 R
+  1 str3                                                           00C4 R
+  1 str3_end                                                       00E6 R
+  1 str4                                                           00E6 R
+  1 str4_end                                                       00F8 R
     t2con                                                          00C8 
     t2con.0                                                        00C8 
     t2con.1                                                        00C9 
@@ -395,4 +395,4 @@ Symbol Table
 Area Table
 
    0 _CODE                                                                              size    0   flags 0
-   1 USBDESCSEG                                                                         size  106   flags 40
+   1 USBDESCSEG                                                                         size   F8   flags 40

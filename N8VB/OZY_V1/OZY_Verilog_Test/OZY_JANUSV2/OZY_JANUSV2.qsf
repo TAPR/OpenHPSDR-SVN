@@ -1,0 +1,333 @@
+# Copyright (C) 1991-2006 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#		OZY_JANUSV2_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name FAMILY "Cyclone II"
+set_global_assignment -name DEVICE EP2C5Q208C8
+set_global_assignment -name TOP_LEVEL_ENTITY OZY_JANUSV2
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "6.0 SP1"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "13:26:51  AUGUST 09, 2006"
+set_global_assignment -name LAST_QUARTUS_VERSION "6.0 SP1"
+set_global_assignment -name DEVICE_FILTER_PACKAGE "ANY QFP"
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 208
+set_location_assignment PIN_1 -to ASD0
+set_instance_assignment -name IO_STANDARD LVTTL -to ASD0
+set_location_assignment PIN_2 -to NCS0
+set_instance_assignment -name IO_STANDARD LVTTL -to NCS0
+set_location_assignment PIN_3 -to FX2_PC6
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PC6
+set_location_assignment PIN_4 -to FX2_CTL3
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_CTL3
+set_location_assignment PIN_5 -to FLAGC
+set_instance_assignment -name IO_STANDARD LVTTL -to FLAGC
+set_location_assignment PIN_6 -to PA7/FLAGD
+set_instance_assignment -name IO_STANDARD LVTTL -to PA7/FLAGD
+set_location_assignment PIN_8 -to PKEND
+set_instance_assignment -name IO_STANDARD LVTTL -to PKEND
+set_location_assignment PIN_12 -to FX2_PA3
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PA3
+set_location_assignment PIN_13 -to SLOE
+set_instance_assignment -name IO_STANDARD LVTTL -to SLOE
+set_location_assignment PIN_14 -to FX2_PA1
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PA1
+set_location_assignment PIN_15 -to FX2_PA0
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PA0
+set_location_assignment PIN_23 -to FX2_CLK
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_CLK
+set_location_assignment PIN_24 -to FX2_IFCLK
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_IFCLK
+set_location_assignment PIN_27 -to CLK2
+set_instance_assignment -name IO_STANDARD LVTTL -to CLK2
+set_location_assignment PIN_28 -to CLK3
+set_instance_assignment -name IO_STANDARD LVTTL -to CLK3
+set_location_assignment PIN_30 -to SLRD
+set_instance_assignment -name IO_STANDARD LVTTL -to SLRD
+set_location_assignment PIN_31 -to SLWR
+set_instance_assignment -name IO_STANDARD LVTTL -to SLWR
+set_location_assignment PIN_32 -to FX2_RDY2
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_RDY2
+set_location_assignment PIN_33 -to FX2_RDY3
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_RDY3
+set_location_assignment PIN_34 -to FX2_RDY4
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_RDY4
+set_location_assignment PIN_35 -to FX2_RDY5
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_RDY5
+set_location_assignment PIN_36 -to FX2_PE0
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PE0
+set_location_assignment PIN_37 -to FX2_PE1
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PE1
+set_location_assignment PIN_39 -to FX2_PE2
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PE2
+set_location_assignment PIN_40 -to FX2_PE3
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PE3
+set_location_assignment PIN_41 -to FX2_PE4
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PE4
+set_location_assignment PIN_43 -to FX2_PE5
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PE5
+set_location_assignment PIN_44 -to FX2_PE6
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PE6
+set_location_assignment PIN_45 -to FX2_PE7
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PE7
+set_location_assignment PIN_46 -to CLKXOUT
+set_instance_assignment -name IO_STANDARD LVTTL -to CLKXOUT
+set_location_assignment PIN_47 -to CLKYOUT
+set_instance_assignment -name IO_STANDARD LVTTL -to CLKYOUT
+set_location_assignment PIN_48 -to FX2_PC7
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_PC7
+set_location_assignment PIN_77 -to GPIO9
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO9
+set_location_assignment PIN_80 -to GPIO10
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO10
+set_location_assignment PIN_81 -to GPIO11
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO11
+set_location_assignment PIN_82 -to GPIO12
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO12
+set_location_assignment PIN_84 -to GPIO13
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO13
+set_location_assignment PIN_86 -to GPIO14
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO14
+set_location_assignment PIN_87 -to GPIO15
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO15
+set_location_assignment PIN_88 -to GPIO16
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO16
+set_location_assignment PIN_89 -to GPIO17
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO17
+set_location_assignment PIN_90 -to GPIO18
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO18
+set_location_assignment PIN_92 -to GPIO19
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO19
+set_location_assignment PIN_94 -to GPIO20
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO20
+set_location_assignment PIN_95 -to GPIO21
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO21
+set_location_assignment PIN_96 -to GPIO22
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO22
+set_location_assignment PIN_97 -to GPIO23
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO23
+set_location_assignment PIN_99 -to GPIO24
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO24
+set_location_assignment PIN_101 -to FX2_INT4
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_INT4
+set_location_assignment PIN_102 -to FX2_T0
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_T0
+set_location_assignment PIN_103 -to RXD
+set_instance_assignment -name IO_STANDARD LVTTL -to RXD
+set_location_assignment PIN_104 -to TXD
+set_instance_assignment -name IO_STANDARD LVTTL -to TXD
+set_location_assignment PIN_105 -to C31
+set_instance_assignment -name IO_STANDARD LVTTL -to C31
+set_location_assignment PIN_106 -to C29
+set_instance_assignment -name IO_STANDARD LVTTL -to C29
+set_location_assignment PIN_107 -to INIT_DONE
+set_instance_assignment -name IO_STANDARD LVTTL -to INIT_DONE
+set_location_assignment PIN_108 -to NCEO
+set_instance_assignment -name IO_STANDARD LVTTL -to NCEO
+set_location_assignment PIN_110 -to C27
+set_instance_assignment -name IO_STANDARD LVTTL -to C27
+set_location_assignment PIN_112 -to C25
+set_instance_assignment -name IO_STANDARD LVTTL -to C25
+set_location_assignment PIN_113 -to C24
+set_instance_assignment -name IO_STANDARD LVTTL -to C24
+set_location_assignment PIN_114 -to C23
+set_instance_assignment -name IO_STANDARD LVTTL -to C23
+set_location_assignment PIN_115 -to C22
+set_instance_assignment -name IO_STANDARD LVTTL -to C22
+set_location_assignment PIN_116 -to C21
+set_instance_assignment -name IO_STANDARD LVTTL -to C21
+set_location_assignment PIN_117 -to C20
+set_instance_assignment -name IO_STANDARD LVTTL -to C20
+set_location_assignment PIN_118 -to C19
+set_instance_assignment -name IO_STANDARD LVTTL -to C19
+set_location_assignment PIN_119 -to C18
+set_instance_assignment -name IO_STANDARD LVTTL -to C18
+set_location_assignment PIN_120 -to C17
+set_instance_assignment -name IO_STANDARD LVTTL -to C17
+set_location_assignment PIN_127 -to C16
+set_instance_assignment -name IO_STANDARD LVTTL -to C16
+set_location_assignment PIN_128 -to C15
+set_instance_assignment -name IO_STANDARD LVTTL -to C15
+set_location_assignment PIN_129 -to CLK7
+set_instance_assignment -name IO_STANDARD LVTTL -to CLK7
+set_location_assignment PIN_130 -to CLK6
+set_instance_assignment -name IO_STANDARD LVTTL -to CLK6
+set_location_assignment PIN_131 -to CLK5
+set_instance_assignment -name IO_STANDARD LVTTL -to CLK5
+set_location_assignment PIN_132 -to CLK4
+set_instance_assignment -name IO_STANDARD LVTTL -to CLK4
+set_location_assignment PIN_133 -to C14
+set_instance_assignment -name IO_STANDARD LVTTL -to C14
+set_location_assignment PIN_134 -to C13
+set_instance_assignment -name IO_STANDARD LVTTL -to C13
+set_location_assignment PIN_135 -to C12
+set_instance_assignment -name IO_STANDARD LVTTL -to C12
+set_location_assignment PIN_137 -to C11
+set_instance_assignment -name IO_STANDARD LVTTL -to C11
+set_location_assignment PIN_138 -to C10
+set_instance_assignment -name IO_STANDARD LVTTL -to C10
+set_location_assignment PIN_139 -to C9
+set_instance_assignment -name IO_STANDARD LVTTL -to C9
+set_location_assignment PIN_141 -to C8
+set_instance_assignment -name IO_STANDARD LVTTL -to C8
+set_location_assignment PIN_142 -to C7
+set_instance_assignment -name IO_STANDARD LVTTL -to C7
+set_location_assignment PIN_143 -to C6
+set_instance_assignment -name IO_STANDARD LVTTL -to C6
+set_location_assignment PIN_144 -to C5
+set_location_assignment PIN_145 -to C4
+set_instance_assignment -name IO_STANDARD LVTTL -to C4
+set_location_assignment PIN_146 -to C3
+set_instance_assignment -name IO_STANDARD LVTTL -to C3
+set_location_assignment PIN_147 -to C2
+set_instance_assignment -name IO_STANDARD LVTTL -to C2
+set_location_assignment PIN_149 -to A2
+set_instance_assignment -name IO_STANDARD LVTTL -to A2
+set_location_assignment PIN_150 -to A3
+set_instance_assignment -name IO_STANDARD LVTTL -to A3
+set_location_assignment PIN_151 -to A4
+set_instance_assignment -name IO_STANDARD LVTTL -to A4
+set_location_assignment PIN_152 -to A5
+set_instance_assignment -name IO_STANDARD LVTTL -to A5
+set_location_assignment PIN_160 -to A6
+set_instance_assignment -name IO_STANDARD LVTTL -to A6
+set_location_assignment PIN_161 -to A7
+set_instance_assignment -name IO_STANDARD LVTTL -to A7
+set_location_assignment PIN_162 -to A8
+set_instance_assignment -name IO_STANDARD LVTTL -to A8
+set_location_assignment PIN_163 -to A9
+set_instance_assignment -name IO_STANDARD LVTTL -to A9
+set_location_assignment PIN_164 -to A10
+set_instance_assignment -name IO_STANDARD LVTTL -to A10
+set_location_assignment PIN_165 -to A11
+set_instance_assignment -name IO_STANDARD LVTTL -to A11
+set_location_assignment PIN_168 -to A12
+set_instance_assignment -name IO_STANDARD LVTTL -to A12
+set_location_assignment PIN_169 -to A13
+set_instance_assignment -name IO_STANDARD LVTTL -to A13
+set_location_assignment PIN_170 -to A14
+set_instance_assignment -name IO_STANDARD LVTTL -to A14
+set_location_assignment PIN_171 -to A15
+set_instance_assignment -name IO_STANDARD LVTTL -to A15
+set_location_assignment PIN_173 -to A16
+set_instance_assignment -name IO_STANDARD LVTTL -to A16
+set_location_assignment PIN_175 -to A17
+set_instance_assignment -name IO_STANDARD LVTTL -to A17
+set_location_assignment PIN_176 -to A18
+set_instance_assignment -name IO_STANDARD LVTTL -to A18
+set_location_assignment PIN_179 -to A19
+set_instance_assignment -name IO_STANDARD LVTTL -to A19
+set_location_assignment PIN_180 -to A20
+set_instance_assignment -name IO_STANDARD LVTTL -to A20
+set_location_assignment PIN_181 -to A21
+set_instance_assignment -name IO_STANDARD LVTTL -to A21
+set_location_assignment PIN_182 -to A22
+set_instance_assignment -name IO_STANDARD LVTTL -to A22
+set_location_assignment PIN_185 -to A23
+set_instance_assignment -name IO_STANDARD LVTTL -to A23
+set_location_assignment PIN_187 -to A24
+set_instance_assignment -name IO_STANDARD LVTTL -to A24
+set_location_assignment PIN_188 -to A25
+set_instance_assignment -name IO_STANDARD LVTTL -to A25
+set_location_assignment PIN_189 -to A27
+set_instance_assignment -name IO_STANDARD LVTTL -to A27
+set_location_assignment PIN_191 -to A29
+set_instance_assignment -name IO_STANDARD LVTTL -to A29
+set_location_assignment PIN_192 -to A31
+set_instance_assignment -name IO_STANDARD LVTTL -to A31
+set_location_assignment PIN_193 -to FX2_INT5/FX2_CTL5
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_INT5/FX2_CTL5
+set_location_assignment PIN_195 -to FX2_T2/FX2_CTL4
+set_instance_assignment -name IO_STANDARD LVTTL -to FX2_T2/FX2_CTL4
+set_location_assignment PIN_197 -to FLAGB
+set_instance_assignment -name IO_STANDARD LVTTL -to FLAGB
+set_location_assignment PIN_198 -to FLAGA
+set_instance_assignment -name IO_STANDARD LVTTL -to FLAGA
+set_location_assignment PIN_16 -to TDO
+set_instance_assignment -name IO_STANDARD LVTTL -to TDO
+set_location_assignment PIN_17 -to TMS
+set_instance_assignment -name IO_STANDARD LVTTL -to TMS
+set_location_assignment PIN_18 -to TCK
+set_instance_assignment -name IO_STANDARD LVTTL -to TCK
+set_location_assignment PIN_19 -to TDI
+set_instance_assignment -name IO_STANDARD LVTTL -to TDI
+set_location_assignment PIN_20 -to DATA0
+set_instance_assignment -name IO_STANDARD LVTTL -to DATA0
+set_location_assignment PIN_21 -to DCLK
+set_instance_assignment -name IO_STANDARD LVTTL -to DCLK
+set_location_assignment PIN_22 -to nCE
+set_instance_assignment -name IO_STANDARD LVTTL -to nCE
+set_location_assignment PIN_26 -to nCONFIG
+set_instance_assignment -name IO_STANDARD LVTTL -to nCONFIG
+set_location_assignment PIN_121 -to NSTATUS
+set_instance_assignment -name IO_STANDARD LVTTL -to NSTATUS
+set_location_assignment PIN_123 -to CONF_DONE
+set_instance_assignment -name IO_STANDARD LVTTL -to CONF_DONE
+set_location_assignment PIN_125 -to MSEL1
+set_instance_assignment -name IO_STANDARD LVTTL -to MSEL1
+set_location_assignment PIN_126 -to MSEL0
+set_instance_assignment -name IO_STANDARD LVTTL -to MSEL0
+set_global_assignment -name ENABLE_INIT_DONE_OUTPUT ON
+set_global_assignment -name GENERATE_RBF_FILE ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED WITH WEAK PULL-UP"
+set_global_assignment -name INCREMENTAL_COMPILATION FULL_INCREMENTAL_COMPILATION
+set_global_assignment -name SMART_RECOMPILE ON
+set_instance_assignment -name PARTITION_HIERARCHY no_file_for_top_partition -to | -section_id Top
+set_global_assignment -name PARTITION_NETLIST_TYPE POST_SYNTH -section_id Top
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
+set_location_assignment PIN_67 -to GPIO[1]
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO[1]
+set_location_assignment PIN_68 -to GPIO[2]
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO[2]
+set_location_assignment PIN_69 -to GPIO[3]
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO[3]
+set_location_assignment PIN_70 -to GPIO[4]
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO[4]
+set_location_assignment PIN_72 -to GPIO[5]
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO[5]
+set_location_assignment PIN_74 -to GPIO[6]
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO[6]
+set_location_assignment PIN_75 -to GPIO[7]
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO[7]
+set_location_assignment PIN_76 -to GPIO[8]
+set_instance_assignment -name IO_STANDARD LVTTL -to GPIO[8]
+set_location_assignment PIN_56 -to FD[0]
+set_location_assignment PIN_57 -to FD[1]
+set_location_assignment PIN_58 -to FD[2]
+set_location_assignment PIN_59 -to FD[3]
+set_location_assignment PIN_60 -to FD[4]
+set_location_assignment PIN_61 -to FD[5]
+set_location_assignment PIN_63 -to FD[6]
+set_location_assignment PIN_64 -to FD[7]
+set_location_assignment PIN_208 -to FD[8]
+set_location_assignment PIN_207 -to FD[9]
+set_location_assignment PIN_206 -to FD[10]
+set_location_assignment PIN_205 -to FD[11]
+set_location_assignment PIN_203 -to FD[12]
+set_location_assignment PIN_201 -to FD[13]
+set_location_assignment PIN_200 -to FD[14]
+set_location_assignment PIN_199 -to FD[15]
+set_global_assignment -name VERILOG_FILE tx_fifo.v
+set_global_assignment -name VERILOG_FILE OZY_JANUSV2.v
+set_location_assignment PIN_11 -to FIFO_ADR[0]
+set_location_assignment PIN_10 -to FIFO_ADR[1]

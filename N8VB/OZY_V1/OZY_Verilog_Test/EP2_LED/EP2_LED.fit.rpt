@@ -1,5 +1,5 @@
 Fitter report for EP2_LED
-Mon Aug 07 13:24:00 2006
+Thu Aug 10 11:13:17 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -61,15 +61,15 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                    ;
 +------------------------------------+----------------------------------------------+
-; Fitter Status                      ; Successful - Mon Aug 07 13:24:00 2006        ;
+; Fitter Status                      ; Successful - Thu Aug 10 11:13:17 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; EP2_LED                                      ;
 ; Top-level Entity Name              ; EP2_LED                                      ;
 ; Family                             ; Cyclone II                                   ;
 ; Device                             ; EP2C5Q208C8                                  ;
 ; Timing Models                      ; Final                                        ;
-; Total logic elements               ; 54 / 4,608 ( 1 % )                           ;
-; Total registers                    ; 52                                           ;
+; Total logic elements               ; 63 / 4,608 ( 1 % )                           ;
+; Total registers                    ; 43                                           ;
 ; Total pins                         ; 35 / 142 ( 25 % )                            ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0 / 119,808 ( 0 % )                          ;
@@ -119,46 +119,46 @@ applicable agreement for further details.
 The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED.pin.
 
 
-+-------------------------------------------------------------------+
-; Fitter Resource Usage Summary                                     ;
-+---------------------------------------------+---------------------+
-; Resource                                    ; Usage               ;
-+---------------------------------------------+---------------------+
-; Total logic elements                        ; 54 / 4,608 ( 1 % )  ;
-;     -- Combinational with no register       ; 2                   ;
-;     -- Register only                        ; 42                  ;
-;     -- Combinational with a register        ; 10                  ;
-;                                             ;                     ;
-; Logic element usage by number of LUT inputs ;                     ;
-;     -- 4 input functions                    ; 6                   ;
-;     -- 3 input functions                    ; 0                   ;
-;     -- <=2 input functions                  ; 6                   ;
-;     -- Register only                        ; 42                  ;
-;                                             ;                     ;
-; Logic elements by mode                      ;                     ;
-;     -- normal mode                          ; 12                  ;
-;     -- arithmetic mode                      ; 0                   ;
-;                                             ;                     ;
-; Total registers                             ; 52 / 4,608 ( 1 % )  ;
-; Total LABs                                  ; 4 / 288 ( 1 % )     ;
-; User inserted logic elements                ; 0                   ;
-; Virtual pins                                ; 0                   ;
-; I/O pins                                    ; 35 / 142 ( 25 % )   ;
-;     -- Clock pins                           ; 1 / 4 ( 25 % )      ;
-; Global signals                              ; 1                   ;
-; M4Ks                                        ; 0 / 26 ( 0 % )      ;
-; Total memory bits                           ; 0 / 119,808 ( 0 % ) ;
-; Total RAM block bits                        ; 0 / 119,808 ( 0 % ) ;
-; Embedded Multiplier 9-bit elements          ; 0 / 26 ( 0 % )      ;
-; PLLs                                        ; 0 / 2 ( 0 % )       ;
-; Global clocks                               ; 1 / 8 ( 13 % )      ;
-; Maximum fan-out node                        ; IFCLK~clkctrl       ;
-; Maximum fan-out                             ; 52                  ;
-; Highest non-global fan-out signal           ; state.0100          ;
-; Highest non-global fan-out                  ; 19                  ;
-; Total fan-out                               ; 249                 ;
-; Average fan-out                             ; 1.82                ;
-+---------------------------------------------+---------------------+
++--------------------------------------------------------------------+
+; Fitter Resource Usage Summary                                      ;
++---------------------------------------------+----------------------+
+; Resource                                    ; Usage                ;
++---------------------------------------------+----------------------+
+; Total logic elements                        ; 63 / 4,608 ( 1 % )   ;
+;     -- Combinational with no register       ; 20                   ;
+;     -- Register only                        ; 32                   ;
+;     -- Combinational with a register        ; 11                   ;
+;                                             ;                      ;
+; Logic element usage by number of LUT inputs ;                      ;
+;     -- 4 input functions                    ; 16                   ;
+;     -- 3 input functions                    ; 9                    ;
+;     -- <=2 input functions                  ; 6                    ;
+;     -- Register only                        ; 32                   ;
+;                                             ;                      ;
+; Logic elements by mode                      ;                      ;
+;     -- normal mode                          ; 27                   ;
+;     -- arithmetic mode                      ; 4                    ;
+;                                             ;                      ;
+; Total registers                             ; 43 / 4,608 ( < 1 % ) ;
+; Total LABs                                  ; 4 / 288 ( 1 % )      ;
+; User inserted logic elements                ; 0                    ;
+; Virtual pins                                ; 0                    ;
+; I/O pins                                    ; 35 / 142 ( 25 % )    ;
+;     -- Clock pins                           ; 1 / 4 ( 25 % )       ;
+; Global signals                              ; 1                    ;
+; M4Ks                                        ; 0 / 26 ( 0 % )       ;
+; Total memory bits                           ; 0 / 119,808 ( 0 % )  ;
+; Total RAM block bits                        ; 0 / 119,808 ( 0 % )  ;
+; Embedded Multiplier 9-bit elements          ; 0 / 26 ( 0 % )       ;
+; PLLs                                        ; 0 / 2 ( 0 % )        ;
+; Global clocks                               ; 1 / 8 ( 13 % )       ;
+; Maximum fan-out node                        ; IFCLK~clkctrl        ;
+; Maximum fan-out                             ; 43                   ;
+; Highest non-global fan-out signal           ; TXDEN                ;
+; Highest non-global fan-out                  ; 17                   ;
+; Total fan-out                               ; 294                  ;
+; Average fan-out                             ; 2.09                 ;
++---------------------------------------------+----------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -166,9 +166,9 @@ The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Tes
 +---------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
 ; Name    ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination ; Location assigned by ;
 +---------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
-; FLAGA   ; 198   ; 2        ; 5            ; 14           ; 1           ; 3                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
+; FLAGA   ; 198   ; 2        ; 5            ; 14           ; 1           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; FLAGB   ; 197   ; 2        ; 5            ; 14           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
-; FLAGC   ; 5     ; 1        ; 0            ; 13           ; 4           ; 3                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
+; FLAGC   ; 5     ; 1        ; 0            ; 13           ; 4           ; 2                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; FX2_CLK ; 23    ; 1        ; 0            ; 6            ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; IFCLK   ; 24    ; 1        ; 0            ; 6            ; 1           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 +---------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
@@ -179,20 +179,20 @@ The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Tes
 +-------------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
 ; Name        ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Output Register ; Output Enable Register ; Power Up High ; PCI I/O Enabled ; Open Drain ; TRI Primitive ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination ; Location assigned by ; Load ;
 +-------------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
-; FIFO_ADR[0] ; 11    ; 1        ; 0            ; 12           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FIFO_ADR[1] ; 10    ; 1        ; 0            ; 12           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; LEDS[0]     ; 67    ; 4        ; 7            ; 0            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; LEDS[1]     ; 68    ; 4        ; 7            ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; LEDS[2]     ; 69    ; 4        ; 7            ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; LEDS[3]     ; 70    ; 4        ; 9            ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; LEDS[4]     ; 72    ; 4        ; 9            ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; LEDS[5]     ; 74    ; 4        ; 12           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; LEDS[6]     ; 75    ; 4        ; 12           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; LEDS[7]     ; 76    ; 4        ; 14           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; PKEND       ; 8     ; 1        ; 0            ; 12           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; SLOE        ; 13    ; 1        ; 0            ; 11           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; SLRD        ; 30    ; 1        ; 0            ; 5            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; SLWR        ; 31    ; 1        ; 0            ; 5            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FIFO_ADR[0] ; 11    ; 1        ; 0            ; 12           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FIFO_ADR[1] ; 10    ; 1        ; 0            ; 12           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; LEDS[0]     ; 67    ; 4        ; 7            ; 0            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; LEDS[1]     ; 68    ; 4        ; 7            ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; LEDS[2]     ; 69    ; 4        ; 7            ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; LEDS[3]     ; 70    ; 4        ; 9            ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; LEDS[4]     ; 72    ; 4        ; 9            ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; LEDS[5]     ; 74    ; 4        ; 12           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; LEDS[6]     ; 75    ; 4        ; 12           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; LEDS[7]     ; 76    ; 4        ; 14           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; PKEND       ; 8     ; 1        ; 0            ; 12           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; SLOE        ; 13    ; 1        ; 0            ; 11           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; SLRD        ; 30    ; 1        ; 0            ; 5            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; SLWR        ; 31    ; 1        ; 0            ; 5            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
 +-------------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
 
 
@@ -201,22 +201,22 @@ The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Tes
 +------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------------+------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
 ; Name       ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Output Register ; Output Enable Register ; Power Up High ; PCI I/O Enabled ; Open Drain ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination ; Location assigned by ; Load ;
 +------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------------+------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
-; FX2_FD[0]  ; 56    ; 4        ; 1            ; 0            ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[10] ; 206   ; 2        ; 1            ; 14           ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[11] ; 205   ; 2        ; 1            ; 14           ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[12] ; 203   ; 2        ; 3            ; 14           ; 3           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[13] ; 201   ; 2        ; 3            ; 14           ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[14] ; 200   ; 2        ; 3            ; 14           ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[15] ; 199   ; 2        ; 3            ; 14           ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[1]  ; 57    ; 4        ; 1            ; 0            ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[2]  ; 58    ; 4        ; 1            ; 0            ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[3]  ; 59    ; 4        ; 3            ; 0            ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[4]  ; 60    ; 4        ; 3            ; 0            ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[5]  ; 61    ; 4        ; 3            ; 0            ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[6]  ; 63    ; 4        ; 5            ; 0            ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[7]  ; 64    ; 4        ; 5            ; 0            ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[8]  ; 208   ; 2        ; 1            ; 14           ; 3           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; FX2_FD[9]  ; 207   ; 2        ; 1            ; 14           ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[0]  ; 56    ; 4        ; 1            ; 0            ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[10] ; 206   ; 2        ; 1            ; 14           ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[11] ; 205   ; 2        ; 1            ; 14           ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[12] ; 203   ; 2        ; 3            ; 14           ; 3           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[13] ; 201   ; 2        ; 3            ; 14           ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[14] ; 200   ; 2        ; 3            ; 14           ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[15] ; 199   ; 2        ; 3            ; 14           ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[1]  ; 57    ; 4        ; 1            ; 0            ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[2]  ; 58    ; 4        ; 1            ; 0            ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[3]  ; 59    ; 4        ; 3            ; 0            ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[4]  ; 60    ; 4        ; 3            ; 0            ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[5]  ; 61    ; 4        ; 3            ; 0            ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[6]  ; 63    ; 4        ; 5            ; 0            ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[7]  ; 64    ; 4        ; 5            ; 0            ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[8]  ; 208   ; 2        ; 1            ; 14           ; 3           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
+; FX2_FD[9]  ; 207   ; 2        ; 1            ; 14           ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 5 pF ;
 +------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------------+------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
 
 
@@ -490,7 +490,7 @@ Note: User assignments will override these defaults. The user specified values a
 +----------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------+
 ; Compilation Hierarchy Node ; Logic Cells ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name ;
 +----------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------+
-; |EP2_LED                   ; 54 (54)     ; 12 (12)           ; 52 (52)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 35   ; 0            ; 2 (2)        ; 42 (42)           ; 10 (10)          ; |EP2_LED            ;
+; |EP2_LED                   ; 63 (63)     ; 31 (31)           ; 43 (43)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 35   ; 0            ; 20 (20)      ; 32 (32)           ; 11 (11)          ; |EP2_LED            ;
 +----------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -547,37 +547,34 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; FLAGB                     ;                   ;         ;
 ; IFCLK                     ;                   ;         ;
 ; FLAGA                     ;                   ;         ;
-;      - Selector3~65       ; 0                 ; 6       ;
-;      - state~87           ; 0                 ; 6       ;
-;      - Selector6~23       ; 0                 ; 6       ;
+;      - Selector9~113      ; 1                 ; 6       ;
 ; FLAGC                     ;                   ;         ;
-;      - Selector4~60       ; 1                 ; 6       ;
-;      - Selector6~24       ; 1                 ; 6       ;
-;      - state~88           ; 1                 ; 6       ;
+;      - Selector9~114      ; 1                 ; 6       ;
+;      - Selector8~315      ; 1                 ; 6       ;
 ; FX2_FD[0]                 ;                   ;         ;
-;      - LEDS[0]~reg0feeder ; 1                 ; 6       ;
+;      - LEDS[0]~reg0feeder ; 0                 ; 6       ;
 ; FX2_FD[1]                 ;                   ;         ;
-;      - LEDS[1]~reg0       ; 0                 ; 6       ;
+;      - LEDS[1]~reg0feeder ; 0                 ; 6       ;
 ; FX2_FD[2]                 ;                   ;         ;
 ;      - LEDS[2]~reg0feeder ; 0                 ; 6       ;
 ; FX2_FD[3]                 ;                   ;         ;
-;      - LEDS[3]~reg0       ; 0                 ; 6       ;
+;      - LEDS[3]~reg0feeder ; 0                 ; 6       ;
 ; FX2_FD[4]                 ;                   ;         ;
-;      - LEDS[4]~reg0       ; 0                 ; 6       ;
+;      - LEDS[4]~reg0feeder ; 1                 ; 6       ;
 ; FX2_FD[5]                 ;                   ;         ;
-;      - LEDS[5]~reg0       ; 0                 ; 6       ;
+;      - LEDS[5]~reg0feeder ; 0                 ; 6       ;
 ; FX2_FD[6]                 ;                   ;         ;
 ;      - LEDS[6]~reg0feeder ; 0                 ; 6       ;
 ; FX2_FD[7]                 ;                   ;         ;
-;      - LEDS[7]~reg0       ; 0                 ; 6       ;
+;      - LEDS[7]~reg0feeder ; 0                 ; 6       ;
 ; FX2_FD[8]                 ;                   ;         ;
-;      - HIGHBYTE[0]~feeder ; 0                 ; 6       ;
+;      - HIGHBYTE[0]~feeder ; 1                 ; 6       ;
 ; FX2_FD[9]                 ;                   ;         ;
-;      - HIGHBYTE[1]~feeder ; 0                 ; 6       ;
+;      - HIGHBYTE[1]        ; 0                 ; 6       ;
 ; FX2_FD[10]                ;                   ;         ;
 ;      - HIGHBYTE[2]~feeder ; 0                 ; 6       ;
 ; FX2_FD[11]                ;                   ;         ;
-;      - HIGHBYTE[3]~feeder ; 1                 ; 6       ;
+;      - HIGHBYTE[3]~feeder ; 0                 ; 6       ;
 ; FX2_FD[12]                ;                   ;         ;
 ;      - HIGHBYTE[4]~feeder ; 0                 ; 6       ;
 ; FX2_FD[13]                ;                   ;         ;
@@ -585,20 +582,21 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; FX2_FD[14]                ;                   ;         ;
 ;      - HIGHBYTE[6]        ; 0                 ; 6       ;
 ; FX2_FD[15]                ;                   ;         ;
-;      - HIGHBYTE[7]~feeder ; 0                 ; 6       ;
+;      - HIGHBYTE[7]        ; 0                 ; 6       ;
 +---------------------------+-------------------+---------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------+
-; Control Signals                                                                                                                       ;
-+------------+-----------------+---------+---------------+--------+----------------------+------------------+---------------------------+
-; Name       ; Location        ; Fan-Out ; Usage         ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
-+------------+-----------------+---------+---------------+--------+----------------------+------------------+---------------------------+
-; IFCLK      ; PIN_24          ; 52      ; Clock         ; yes    ; Global clock         ; GCLK2            ; --                        ;
-; SLEN       ; LCFF_X4_Y12_N9  ; 17      ; Output enable ; no     ; --                   ; --               ; --                        ;
-; state.0011 ; LCFF_X1_Y12_N21 ; 18      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
-; state.0100 ; LCFF_X3_Y12_N31 ; 19      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
-+------------+-----------------+---------+---------------+--------+----------------------+------------------+---------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                          ;
++--------------+------------------+---------+---------------+--------+----------------------+------------------+---------------------------+
+; Name         ; Location         ; Fan-Out ; Usage         ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++--------------+------------------+---------+---------------+--------+----------------------+------------------+---------------------------+
+; Decoder0~277 ; LCCOMB_X4_Y3_N0  ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; Decoder0~278 ; LCCOMB_X5_Y3_N30 ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; IFCLK        ; PIN_24           ; 43      ; Clock         ; yes    ; Global clock         ; GCLK2            ; --                        ;
+; TXDEN        ; LCFF_X3_Y3_N5    ; 17      ; Output enable ; no     ; --                   ; --               ; --                        ;
+; state[0]     ; LCFF_X6_Y3_N3    ; 14      ; Sync. clear   ; no     ; --                   ; --               ; --                        ;
++--------------+------------------+---------+---------------+--------+----------------------+------------------+---------------------------+
 
 
 +--------------------------------------------------------------------------------------------------+
@@ -606,7 +604,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------+----------+---------+----------------------+------------------+---------------------------+
 ; Name  ; Location ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +-------+----------+---------+----------------------+------------------+---------------------------+
-; IFCLK ; PIN_24   ; 52      ; Global clock         ; GCLK2            ; --                        ;
+; IFCLK ; PIN_24   ; 43      ; Global clock         ; GCLK2            ; --                        ;
 +-------+----------+---------+----------------------+------------------+---------------------------+
 
 
@@ -615,19 +613,23 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------------------+---------+
 ; Name                   ; Fan-Out ;
 +------------------------+---------+
-; state.0100             ; 19      ;
-; state.0011             ; 18      ;
-; SLEN                   ; 17      ;
-; state.0000             ; 5       ;
-; FLAGC                  ; 3       ;
-; FLAGA                  ; 3       ;
-; state.0101             ; 3       ;
-; state.0010             ; 3       ;
-; state.1000             ; 2       ;
-; state.1101             ; 2       ;
-; Selector4~59           ; 2       ;
-; state.1010             ; 2       ;
-; state.1011             ; 2       ;
+; TXDEN                  ; 17      ;
+; Decoder0~278           ; 16      ;
+; Decoder0~277           ; 16      ;
+; state[0]               ; 14      ;
+; state[2]               ; 13      ;
+; state[3]               ; 10      ;
+; state[1]               ; 10      ;
+; state[5]               ; 8       ;
+; state[4]               ; 8       ;
+; Decoder0~275           ; 5       ;
+; Selector9~114          ; 3       ;
+; FIFO_ADR[1]~349        ; 3       ;
+; FLAGC                  ; 2       ;
+; WideOr5~153            ; 2       ;
+; Decoder0~276           ; 2       ;
+; Selector9~113          ; 2       ;
+; Selector1~139          ; 2       ;
 ; LEDS[7]~reg0           ; 2       ;
 ; LEDS[6]~reg0           ; 2       ;
 ; LEDS[5]~reg0           ; 2       ;
@@ -640,10 +642,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; SLOE~reg0              ; 2       ;
 ; SLRD~reg0              ; 2       ;
 ; SLWR~reg0              ; 2       ;
-; state.0000~feeder      ; 1       ;
-; state.0110~feeder      ; 1       ;
-; state.0111~feeder      ; 1       ;
-; state.1000~feeder      ; 1       ;
 ; Tx_register[15]~feeder ; 1       ;
 ; Tx_register[14]~feeder ; 1       ;
 ; Tx_register[13]~feeder ; 1       ;
@@ -652,42 +650,42 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Tx_register[10]~feeder ; 1       ;
 ; Tx_register[9]~feeder  ; 1       ;
 ; Tx_register[8]~feeder  ; 1       ;
-; state.1101~feeder      ; 1       ;
-; state.1001~feeder      ; 1       ;
-; state.1110~feeder      ; 1       ;
-; state.1010~feeder      ; 1       ;
-; state.1100~feeder      ; 1       ;
 ; Tx_register[7]~feeder  ; 1       ;
-; Tx_register[6]~feeder  ; 1       ;
 ; Tx_register[5]~feeder  ; 1       ;
 ; Tx_register[4]~feeder  ; 1       ;
 ; Tx_register[3]~feeder  ; 1       ;
 ; Tx_register[2]~feeder  ; 1       ;
 ; Tx_register[1]~feeder  ; 1       ;
 ; Tx_register[0]~feeder  ; 1       ;
+; HIGHBYTE[5]~feeder     ; 1       ;
+; HIGHBYTE[4]~feeder     ; 1       ;
+; HIGHBYTE[3]~feeder     ; 1       ;
+; HIGHBYTE[2]~feeder     ; 1       ;
+; HIGHBYTE[0]~feeder     ; 1       ;
+; LEDS[7]~reg0feeder     ; 1       ;
 +------------------------+---------+
 
 
-+----------------------------------------------------+
-; Interconnect Usage Summary                         ;
-+----------------------------+-----------------------+
-; Interconnect Resource Type ; Usage                 ;
-+----------------------------+-----------------------+
-; Block interconnects        ; 89 / 15,666 ( < 1 % ) ;
-; C16 interconnects          ; 12 / 812 ( 1 % )      ;
-; C4 interconnects           ; 73 / 11,424 ( < 1 % ) ;
-; Direct links               ; 22 / 15,666 ( < 1 % ) ;
-; Global clocks              ; 1 / 8 ( 13 % )        ;
-; Local interconnects        ; 17 / 4,608 ( < 1 % )  ;
-; R24 interconnects          ; 1 / 652 ( < 1 % )     ;
-; R4 interconnects           ; 53 / 13,328 ( < 1 % ) ;
-+----------------------------+-----------------------+
++-----------------------------------------------------+
+; Interconnect Usage Summary                          ;
++----------------------------+------------------------+
+; Interconnect Resource Type ; Usage                  ;
++----------------------------+------------------------+
+; Block interconnects        ; 105 / 15,666 ( < 1 % ) ;
+; C16 interconnects          ; 10 / 812 ( 1 % )       ;
+; C4 interconnects           ; 74 / 11,424 ( < 1 % )  ;
+; Direct links               ; 24 / 15,666 ( < 1 % )  ;
+; Global clocks              ; 1 / 8 ( 13 % )         ;
+; Local interconnects        ; 19 / 4,608 ( < 1 % )   ;
+; R24 interconnects          ; 0 / 652 ( 0 % )        ;
+; R4 interconnects           ; 65 / 13,328 ( < 1 % )  ;
++----------------------------+------------------------+
 
 
 +---------------------------------------------------------------------------+
 ; LAB Logic Elements                                                        ;
 +---------------------------------------------+-----------------------------+
-; Number of Logic Elements  (Average = 13.50) ; Number of LABs  (Total = 4) ;
+; Number of Logic Elements  (Average = 15.75) ; Number of LABs  (Total = 4) ;
 +---------------------------------------------+-----------------------------+
 ; 1                                           ; 0                           ;
 ; 2                                           ; 0                           ;
@@ -696,33 +694,32 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 5                                           ; 0                           ;
 ; 6                                           ; 0                           ;
 ; 7                                           ; 0                           ;
-; 8                                           ; 1                           ;
+; 8                                           ; 0                           ;
 ; 9                                           ; 0                           ;
 ; 10                                          ; 0                           ;
 ; 11                                          ; 0                           ;
 ; 12                                          ; 0                           ;
 ; 13                                          ; 0                           ;
 ; 14                                          ; 0                           ;
-; 15                                          ; 2                           ;
-; 16                                          ; 1                           ;
+; 15                                          ; 1                           ;
+; 16                                          ; 3                           ;
 +---------------------------------------------+-----------------------------+
 
 
 +------------------------------------------------------------------+
 ; LAB-wide Signals                                                 ;
 +------------------------------------+-----------------------------+
-; LAB-wide Signals  (Average = 1.50) ; Number of LABs  (Total = 4) ;
+; LAB-wide Signals  (Average = 1.75) ; Number of LABs  (Total = 4) ;
 +------------------------------------+-----------------------------+
 ; 1 Clock                            ; 4                           ;
-; 1 Clock enable                     ; 1                           ;
-; 2 Clock enables                    ; 1                           ;
+; 1 Clock enable                     ; 3                           ;
 +------------------------------------+-----------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                        ;
 +----------------------------------------------+-----------------------------+
-; Number of Signals Sourced  (Average = 24.50) ; Number of LABs  (Total = 4) ;
+; Number of Signals Sourced  (Average = 25.00) ; Number of LABs  (Total = 4) ;
 +----------------------------------------------+-----------------------------+
 ; 0                                            ; 0                           ;
 ; 1                                            ; 0                           ;
@@ -739,19 +736,19 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 12                                           ; 0                           ;
 ; 13                                           ; 0                           ;
 ; 14                                           ; 0                           ;
-; 15                                           ; 1                           ;
+; 15                                           ; 0                           ;
 ; 16                                           ; 0                           ;
 ; 17                                           ; 0                           ;
 ; 18                                           ; 0                           ;
 ; 19                                           ; 0                           ;
 ; 20                                           ; 0                           ;
 ; 21                                           ; 0                           ;
-; 22                                           ; 0                           ;
+; 22                                           ; 2                           ;
 ; 23                                           ; 0                           ;
 ; 24                                           ; 0                           ;
 ; 25                                           ; 0                           ;
 ; 26                                           ; 1                           ;
-; 27                                           ; 1                           ;
+; 27                                           ; 0                           ;
 ; 28                                           ; 0                           ;
 ; 29                                           ; 0                           ;
 ; 30                                           ; 1                           ;
@@ -761,32 +758,31 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                        ;
 +--------------------------------------------------+-----------------------------+
-; Number of Signals Sourced Out  (Average = 11.25) ; Number of LABs  (Total = 4) ;
+; Number of Signals Sourced Out  (Average = 13.25) ; Number of LABs  (Total = 4) ;
 +--------------------------------------------------+-----------------------------+
 ; 0                                                ; 0                           ;
 ; 1                                                ; 0                           ;
 ; 2                                                ; 0                           ;
 ; 3                                                ; 0                           ;
 ; 4                                                ; 0                           ;
-; 5                                                ; 1                           ;
+; 5                                                ; 0                           ;
 ; 6                                                ; 0                           ;
 ; 7                                                ; 0                           ;
 ; 8                                                ; 0                           ;
 ; 9                                                ; 0                           ;
-; 10                                               ; 1                           ;
-; 11                                               ; 0                           ;
+; 10                                               ; 0                           ;
+; 11                                               ; 1                           ;
 ; 12                                               ; 0                           ;
-; 13                                               ; 0                           ;
+; 13                                               ; 1                           ;
 ; 14                                               ; 1                           ;
-; 15                                               ; 0                           ;
-; 16                                               ; 1                           ;
+; 15                                               ; 1                           ;
 +--------------------------------------------------+-----------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                        ;
 +----------------------------------------------+-----------------------------+
-; Number of Distinct Inputs  (Average = 12.50) ; Number of LABs  (Total = 4) ;
+; Number of Distinct Inputs  (Average = 15.75) ; Number of LABs  (Total = 4) ;
 +----------------------------------------------+-----------------------------+
 ; 0                                            ; 0                           ;
 ; 1                                            ; 0                           ;
@@ -795,16 +791,16 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 4                                            ; 0                           ;
 ; 5                                            ; 0                           ;
 ; 6                                            ; 0                           ;
-; 7                                            ; 1                           ;
+; 7                                            ; 0                           ;
 ; 8                                            ; 0                           ;
 ; 9                                            ; 0                           ;
-; 10                                           ; 1                           ;
+; 10                                           ; 0                           ;
 ; 11                                           ; 0                           ;
 ; 12                                           ; 0                           ;
 ; 13                                           ; 0                           ;
-; 14                                           ; 0                           ;
+; 14                                           ; 1                           ;
 ; 15                                           ; 0                           ;
-; 16                                           ; 1                           ;
+; 16                                           ; 2                           ;
 ; 17                                           ; 1                           ;
 +----------------------------------------------+-----------------------------+
 
@@ -843,30 +839,31 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                                             ; Value       ;
 +------------------------------------------------------------------+-------------+
 ; Mid Wire Use - Fit Attempt 1                                     ; 1           ;
-; Mid Slack - Fit Attempt 1                                        ; -3193       ;
-; Internal Atom Count - Fit Attempt 1                              ; 64          ;
-; LE/ALM Count - Fit Attempt 1                                     ; 54          ;
+; Mid Slack - Fit Attempt 1                                        ; -4524       ;
+; Internal Atom Count - Fit Attempt 1                              ; 75          ;
+; LE/ALM Count - Fit Attempt 1                                     ; 64          ;
 ; LAB Count - Fit Attempt 1                                        ; 5           ;
-; Outputs per Lab - Fit Attempt 1                                  ; 7.000       ;
-; Inputs per LAB - Fit Attempt 1                                   ; 5.600       ;
+; Outputs per Lab - Fit Attempt 1                                  ; 7.800       ;
+; Inputs per LAB - Fit Attempt 1                                   ; 6.000       ;
 ; Global Inputs per LAB - Fit Attempt 1                            ; 0.800       ;
 ; LAB Constraint 'non-global clock + sync load' - Fit Attempt 1    ; 0:5         ;
-; LAB Constraint 'non-global controls' - Fit Attempt 1             ; 0:3;2:2     ;
-; LAB Constraint 'non-global + aclr' - Fit Attempt 1               ; 0:3;2:2     ;
+; LAB Constraint 'non-global controls' - Fit Attempt 1             ; 0:2;1:1;2:2 ;
+; LAB Constraint 'non-global + aclr' - Fit Attempt 1               ; 0:2;1:1;2:2 ;
 ; LAB Constraint 'global non-clock non-aclr' - Fit Attempt 1       ; 0:5         ;
 ; LAB Constraint 'global controls' - Fit Attempt 1                 ; 0:1;1:4     ;
 ; LAB Constraint 'deterministic LABSMUXA/LABXMUXB' - Fit Attempt 1 ; 0:3;1:2     ;
-; LAB Constraint 'deterministic LABSMUXC/LABXMUXD' - Fit Attempt 1 ; 0:3;1:2     ;
+; LAB Constraint 'deterministic LABSMUXC/LABXMUXD' - Fit Attempt 1 ; 0:2;1:3     ;
 ; LAB Constraint 'clock / ce pair constraint' - Fit Attempt 1      ; 0:1;1:2;2:2 ;
 ; LAB Constraint 'aclr constraint' - Fit Attempt 1                 ; 0:1;1:4     ;
 ; LAB Constraint 'true sload_sclear pair' - Fit Attempt 1          ; 0:4;1:1     ;
-; LAB Constraint 'constant sload_sclear pair' - Fit Attempt 1      ; 0:5         ;
+; LAB Constraint 'constant sload_sclear pair' - Fit Attempt 1      ; 0:4;1:1     ;
 ; LAB Constraint 'has placement constraint' - Fit Attempt 1        ; 0:5         ;
-; LEs in Chains - Fit Attempt 1                                    ; 0           ;
+; LEs in Chains - Fit Attempt 1                                    ; 5           ;
 ; LEs in Long Chains - Fit Attempt 1                               ; 0           ;
-; LABs with Chains - Fit Attempt 1                                 ; 0           ;
+; LABs with Chains - Fit Attempt 1                                 ; 1           ;
 ; LABs with Multiple Chains - Fit Attempt 1                        ; 0           ;
 ; Time - Fit Attempt 1                                             ; 0           ;
+; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.015       ;
 +------------------------------------------------------------------+-------------+
 
 
@@ -876,13 +873,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                ; Value ;
 +-------------------------------------+-------+
 ; Early Wire Use - Fit Attempt 1      ; 0     ;
-; Early Slack - Fit Attempt 1         ; -2332 ;
+; Early Slack - Fit Attempt 1         ; -4050 ;
 ; Mid Wire Use - Fit Attempt 1        ; 1     ;
-; Mid Slack - Fit Attempt 1           ; -1064 ;
+; Mid Slack - Fit Attempt 1           ; -3152 ;
 ; Late Wire Use - Fit Attempt 1       ; 1     ;
-; Late Slack - Fit Attempt 1          ; -1064 ;
+; Late Slack - Fit Attempt 1          ; -2832 ;
 ; Time - Fit Attempt 1                ; 1     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.094 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.158 ;
 +-------------------------------------+-------+
 
 
@@ -891,15 +888,15 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------+-------+
 ; Name                                ; Value ;
 +-------------------------------------+-------+
-; Early Slack - Fit Attempt 1         ; -806  ;
+; Early Slack - Fit Attempt 1         ; -2644 ;
 ; Early Wire Use - Fit Attempt 1      ; 1     ;
 ; Peak Regional Wire - Fit Attempt 1  ; 1     ;
-; Mid Slack - Fit Attempt 1           ; -1004 ;
-; Late Slack - Fit Attempt 1          ; -1004 ;
-; Late Slack - Fit Attempt 1          ; -1004 ;
+; Mid Slack - Fit Attempt 1           ; -2831 ;
+; Late Slack - Fit Attempt 1          ; -2831 ;
+; Late Slack - Fit Attempt 1          ; -2831 ;
 ; Late Wire Use - Fit Attempt 1       ; 1     ;
 ; Time - Fit Attempt 1                ; 0     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.093 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.062 ;
 +-------------------------------------+-------+
 
 
@@ -909,7 +906,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Aug 07 13:23:53 2006
+    Info: Processing started: Thu Aug 10 11:13:13 2006
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off EP2_LED -c EP2_LED
 Info: Selected device EP2C5Q208C8 for design "EP2_LED"
 Info: Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
@@ -932,55 +929,28 @@ Info: Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info: Fitter placement operations beginning
 Info: Fitter placement was successful
 Info: Fitter placement operations ending: elapsed time is 00:00:01
-Info: Estimated most critical path is register to register delay of 1.800 ns
-    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X3_Y12; Fanout = 3; REG Node = 'state.0010'
-    Info: 2: + IC(0.230 ns) + CELL(0.651 ns) = 0.881 ns; Loc. = LAB_X3_Y12; Fanout = 1; COMB Node = 'Selector6~23'
-    Info: 3: + IC(0.187 ns) + CELL(0.624 ns) = 1.692 ns; Loc. = LAB_X3_Y12; Fanout = 1; COMB Node = 'Selector6~24'
-    Info: 4: + IC(0.000 ns) + CELL(0.108 ns) = 1.800 ns; Loc. = LAB_X3_Y12; Fanout = 3; REG Node = 'state.0010'
-    Info: Total cell delay = 1.383 ns ( 76.83 % )
-    Info: Total interconnect delay = 0.417 ns ( 23.17 % )
+Info: Estimated most critical path is register to register delay of 3.568 ns
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X5_Y3; Fanout = 11; REG Node = 'state[1]'
+    Info: 2: + IC(0.982 ns) + CELL(0.596 ns) = 1.578 ns; Loc. = LAB_X6_Y3; Fanout = 1; COMB Node = 'Add0~71'
+    Info: 3: + IC(0.000 ns) + CELL(0.086 ns) = 1.664 ns; Loc. = LAB_X6_Y3; Fanout = 1; COMB Node = 'Add0~73'
+    Info: 4: + IC(0.000 ns) + CELL(0.086 ns) = 1.750 ns; Loc. = LAB_X6_Y3; Fanout = 2; COMB Node = 'Add0~75'
+    Info: 5: + IC(0.000 ns) + CELL(0.086 ns) = 1.836 ns; Loc. = LAB_X6_Y3; Fanout = 1; COMB Node = 'Add0~77'
+    Info: 6: + IC(0.000 ns) + CELL(0.506 ns) = 2.342 ns; Loc. = LAB_X6_Y3; Fanout = 1; COMB Node = 'Add0~78'
+    Info: 7: + IC(0.467 ns) + CELL(0.651 ns) = 3.460 ns; Loc. = LAB_X5_Y3; Fanout = 1; COMB Node = 'state~324'
+    Info: 8: + IC(0.000 ns) + CELL(0.108 ns) = 3.568 ns; Loc. = LAB_X5_Y3; Fanout = 8; REG Node = 'state[5]'
+    Info: Total cell delay = 2.119 ns ( 59.39 % )
+    Info: Total interconnect delay = 1.449 ns ( 40.61 % )
 Info: Fitter routing operations beginning
 Info: Average interconnect usage is 0% of the available device resources. Peak interconnect usage is 1%
     Info: The peak interconnect region extends from location x0_y0 to location x13_y14
 Info: Fitter routing operations ending: elapsed time is 00:00:00
 Info: Started post-fitting delay annotation
-Warning: Found 30 output pins without output pin load capacitance assignment
-    Info: Pin "SLWR" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "SLRD" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "SLOE" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "PKEND" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FIFO_ADR[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FIFO_ADR[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "LEDS[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "LEDS[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "LEDS[2]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "LEDS[3]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "LEDS[4]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "LEDS[5]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "LEDS[6]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "LEDS[7]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[2]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[3]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[4]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[5]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[6]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[7]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[8]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[9]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[10]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[11]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[12]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[13]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[14]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
-    Info: Pin "FX2_FD[15]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
 Info: Delay annotation completed successfully
 Warning: Following 2 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results
     Info: Pin PKEND has VCC driving its datain port
     Info: Pin FIFO_ADR[0] has GND driving its datain port
 Info: Following groups of pins have the same output enable
-    Info: Following pins have the same output enable: SLEN
+    Info: Following pins have the same output enable: TXDEN
         Info: Type bidirectional pin FX2_FD[0] uses the LVTTL I/O standard
         Info: Type bidirectional pin FX2_FD[4] uses the LVTTL I/O standard
         Info: Type bidirectional pin FX2_FD[8] uses the LVTTL I/O standard
@@ -997,9 +967,9 @@ Info: Following groups of pins have the same output enable
         Info: Type bidirectional pin FX2_FD[5] uses the LVTTL I/O standard
         Info: Type bidirectional pin FX2_FD[9] uses the LVTTL I/O standard
         Info: Type bidirectional pin FX2_FD[13] uses the LVTTL I/O standard
-Info: Quartus II Fitter was successful. 0 errors, 2 warnings
-    Info: Processing ended: Mon Aug 07 13:24:00 2006
-    Info: Elapsed time: 00:00:07
+Info: Quartus II Fitter was successful. 0 errors, 1 warning
+    Info: Processing ended: Thu Aug 10 11:13:17 2006
+    Info: Elapsed time: 00:00:05
 
 
 +----------------------------+

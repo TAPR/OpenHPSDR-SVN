@@ -1,11 +1,11 @@
 
 State Machine - |fifo_test|state
-Name state.0001 state.0110 state.0010 state.0101 state.0100 state.0011 state.0111 state.0000 
+Name state.0001 state.0110 state.0010 state.0011 state.0101 state.0100 state.0111 state.0000 
 state.0000 0 0 0 0 0 0 0 0 
 state.0111 0 0 0 0 0 0 1 1 
-state.0011 0 0 0 0 0 1 0 1 
-state.0100 0 0 0 0 1 0 0 1 
-state.0101 0 0 0 1 0 0 0 1 
+state.0100 0 0 0 0 0 1 0 1 
+state.0101 0 0 0 0 1 0 0 1 
+state.0011 0 0 0 1 0 0 0 1 
 state.0010 0 0 1 0 0 0 0 1 
 state.0110 0 1 0 0 0 0 0 1 
 state.0001 1 0 0 0 0 0 0 1 

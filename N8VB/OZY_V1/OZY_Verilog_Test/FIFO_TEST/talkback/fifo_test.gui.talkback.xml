@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Mon Aug 07 10:02:58 2006) contains limited information
+This XML file (created on Fri Aug 11 15:27:56 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Mon Aug 07 10:02:58 2006</compilation_end_time>
+	<compilation_end_time>Fri Aug 11 15:27:56 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,16 +37,10 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test</project>
 <revision>fifo_test</revision>
 <gui_actions>
-	<action time="Mon Aug 07 09:54:26 2006" type="project_open">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test</action>
-	<action time="Mon Aug 07 09:54:26 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test.v</action>
-	<action time="Mon Aug 07 09:54:26 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/rxfifo.v</action>
-	<action time="Mon Aug 07 09:54:26 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/rxfifo_inst.v</action>
-	<action time="Mon Aug 07 09:55:03 2006" type="editor_open" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
-	<action time="Mon Aug 07 10:02:58 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test.v</action>
-	<action time="Mon Aug 07 10:02:58 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/rxfifo.v</action>
-	<action time="Mon Aug 07 10:02:58 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/rxfifo_inst.v</action>
-	<action time="Mon Aug 07 10:02:58 2006" type="editor_close" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
-	<action time="Mon Aug 07 10:02:58 2006" type="project_close">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test</action>
+	<action time="Fri Aug 11 15:07:03 2006" type="project_open">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test</action>
+	<action time="Fri Aug 11 15:07:03 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test.v</action>
+	<action time="Fri Aug 11 15:27:56 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test.v</action>
+	<action time="Fri Aug 11 15:27:56 2006" type="project_close">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/FIFO_TEST/fifo_test</action>
 </gui_actions>
 <gui_summary>
 	<editor_count clsid="AFC_CLSID_ACV_DEFAULT_DOC">0</editor_count>
@@ -87,7 +81,7 @@ to license.txt.
 	<editor_count clsid="AFC_CLSID_REQC_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RPW_CHART_TYPE">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RPW_CMP_SUMMARY_TYPE">0</editor_count>
-	<editor_count clsid="AFC_CLSID_RPW_DEFAULT_DOC">1</editor_count>
+	<editor_count clsid="AFC_CLSID_RPW_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RPW_GAUGES_TYPE">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RPW_HTML_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RPW_HTML_TYPE">0</editor_count>
@@ -109,7 +103,7 @@ to license.txt.
 	<editor_count clsid="AFC_CLSID_TED_TCL_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_TED_TDF_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_TED_TDF_INC_DOC">0</editor_count>
-	<editor_count clsid="AFC_CLSID_TED_VERILOG_DOC">3</editor_count>
+	<editor_count clsid="AFC_CLSID_TED_VERILOG_DOC">1</editor_count>
 	<editor_count clsid="AFC_CLSID_TED_VHD_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_TFW_ADVANCED_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_TFW_DEFAULT_DOC">0</editor_count>
