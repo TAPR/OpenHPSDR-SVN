@@ -2,7 +2,7 @@
 <LOG_ROOT>
 	<PROJECT NAME="Ozy_Janus">
 		<CBX_INST_ENTRY INSTANCE_NAME="|Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_q2b1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_dj91.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_9p91.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Ozy_Janus|clocks:clocks|lpm_counter:lpm_counter_component" CBX_FILE_NAME="cntr_tkh.tdf"/>
 	</PROJECT>
 </LOG_ROOT>
