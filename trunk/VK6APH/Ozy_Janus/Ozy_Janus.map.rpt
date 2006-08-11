@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Fri Aug 11 16:47:59 2006
+Fri Aug 11 22:17:09 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -18,17 +18,17 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
  10. General Register Statistics
  11. Multiplexer Restructuring Statistics (Restructuring Performed)
  12. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 13. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated
- 14. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|altsyncram_tpu:fifo_ram
- 15. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4
- 16. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_qv7:rs_dgwp
- 17. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_qv7:rs_dgwp|dffpipe_l09:dffpipe6
- 18. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg
- 19. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg|dffpipe_v98:dffpipe9
- 20. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|dffpipe_c09:ws_brp
- 21. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|dffpipe_c09:ws_bwp
- 22. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_rv7:ws_dgrp
- 23. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_rv7:ws_dgrp|dffpipe_m09:dffpipe11
+ 13. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated
+ 14. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram
+ 15. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4
+ 16. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_uv7:rs_dgwp
+ 17. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_uv7:rs_dgwp|dffpipe_q09:dffpipe4
+ 18. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_797:wrempty_reg
+ 19. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_797:wrempty_reg|dffpipe_1a8:dffpipe7
+ 20. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_brp
+ 21. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_bwp
+ 22. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp
+ 23. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp|dffpipe_r09:dffpipe9
  24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
  25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated
  26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|altsyncram_vpu:fifo_ram
@@ -75,13 +75,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Aug 11 16:47:59 2006        ;
+; Analysis & Synthesis Status        ; Successful - Fri Aug 11 22:17:09 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                                    ;
 ; Top-level Entity Name              ; Ozy_Janus                                    ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 669                                          ;
-; Total registers                    ; 669                                          ;
+; Total logic elements               ; 655                                          ;
+; Total registers                    ; 655                                          ;
 ; Total pins                         ; 48                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 98,304                                       ;
@@ -155,12 +155,12 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                        ;
 +----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+
-; clocks.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/clocks.v                            ;
-; debounce.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/debounce.v                          ;
-; DigAudioOut48k16bI2S.v           ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/DigAudioOut48k16bI2S.v              ;
-; Ozy_Janus.v                      ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.v                         ;
-; Rx_fifo.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/Rx_fifo.v                           ;
-; Tx_fifo.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/Tx_fifo.v                           ;
+; Tx_fifo.v                        ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Tx_fifo.v                          ;
+; clocks.v                         ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/clocks.v                           ;
+; debounce.v                       ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/debounce.v                         ;
+; DigAudioOut48k16bI2S.v           ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/DigAudioOut48k16bI2S.v             ;
+; Ozy_Janus.v                      ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.v                        ;
+; Rx_fifo.v                        ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Rx_fifo.v                          ;
 ; lpm_counter.tdf                  ; yes             ; Megafunction                 ; c:/altera/quartus60/libraries/megafunctions/lpm_counter.tdf         ;
 ; lpm_constant.inc                 ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/lpm_constant.inc        ;
 ; lpm_decode.inc                   ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/lpm_decode.inc          ;
@@ -174,7 +174,7 @@ applicable agreement for further details.
 ; alt_counter_f10ke.inc            ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/alt_counter_f10ke.inc   ;
 ; alt_counter_stratix.inc          ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/alt_counter_stratix.inc ;
 ; aglobal60.inc                    ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/aglobal60.inc           ;
-; db/cntr_tkh.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/cntr_tkh.tdf                     ;
+; db/cntr_tkh.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/cntr_tkh.tdf                    ;
 ; dcfifo.tdf                       ; yes             ; Megafunction                 ; c:/altera/quartus60/libraries/megafunctions/dcfifo.tdf              ;
 ; altdpram.inc                     ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/altdpram.inc            ;
 ; a_graycounter.inc                ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/a_graycounter.inc       ;
@@ -183,34 +183,34 @@ applicable agreement for further details.
 ; dffpipe.inc                      ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/dffpipe.inc             ;
 ; alt_sync_fifo.inc                ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/alt_sync_fifo.inc       ;
 ; altsyncram_fifo.inc              ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/altsyncram_fifo.inc     ;
-; db/dcfifo_dj91.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_dj91.tdf                  ;
-; db/a_gray2bin_mdb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/a_gray2bin_mdb.tdf               ;
-; db/a_graycounter_q96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_q96.tdf            ;
-; db/a_graycounter_jk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_jk6.tdf            ;
-; db/a_graycounter_kk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_kk6.tdf            ;
-; db/altsyncram_tpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_tpu.tdf               ;
-; db/altsyncram_8ec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_8ec1.tdf              ;
-; db/alt_synch_pipe_qv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_qv7.tdf           ;
-; db/dffpipe_l09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_l09.tdf                  ;
-; db/alt_synch_pipe_597.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_597.tdf           ;
-; db/dffpipe_v98.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_v98.tdf                  ;
-; db/dffpipe_c09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_c09.tdf                  ;
-; db/alt_synch_pipe_rv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_rv7.tdf           ;
-; db/dffpipe_m09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_m09.tdf                  ;
-; db/dcfifo_q2b1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_q2b1.tdf                  ;
-; db/a_gray2bin_ndb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/a_gray2bin_ndb.tdf               ;
-; db/a_graycounter_r96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_r96.tdf            ;
-; db/a_graycounter_lk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_lk6.tdf            ;
-; db/a_graycounter_mk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_mk6.tdf            ;
-; db/altsyncram_vpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_vpu.tdf               ;
-; db/altsyncram_aec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_aec1.tdf              ;
-; db/dffpipe_n09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_n09.tdf                  ;
-; db/alt_synch_pipe_sv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_sv7.tdf           ;
-; db/dffpipe_o09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_o09.tdf                  ;
-; db/alt_synch_pipe_697.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_697.tdf           ;
-; db/dffpipe_0a8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_0a8.tdf                  ;
-; db/alt_synch_pipe_tv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_tv7.tdf           ;
-; db/dffpipe_p09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_p09.tdf                  ;
+; db/dcfifo_9p91.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_9p91.tdf                 ;
+; db/a_gray2bin_mdb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_gray2bin_mdb.tdf              ;
+; db/a_graycounter_q96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_q96.tdf           ;
+; db/a_graycounter_jk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_jk6.tdf           ;
+; db/a_graycounter_kk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_kk6.tdf           ;
+; db/altsyncram_tpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_tpu.tdf              ;
+; db/altsyncram_8ec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_8ec1.tdf             ;
+; db/alt_synch_pipe_uv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_uv7.tdf          ;
+; db/dffpipe_q09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_q09.tdf                 ;
+; db/alt_synch_pipe_797.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_797.tdf          ;
+; db/dffpipe_1a8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_1a8.tdf                 ;
+; db/dffpipe_c09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_c09.tdf                 ;
+; db/alt_synch_pipe_vv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_vv7.tdf          ;
+; db/dffpipe_r09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_r09.tdf                 ;
+; db/dcfifo_q2b1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_q2b1.tdf                 ;
+; db/a_gray2bin_ndb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_gray2bin_ndb.tdf              ;
+; db/a_graycounter_r96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_r96.tdf           ;
+; db/a_graycounter_lk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_lk6.tdf           ;
+; db/a_graycounter_mk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_mk6.tdf           ;
+; db/altsyncram_vpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_vpu.tdf              ;
+; db/altsyncram_aec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_aec1.tdf             ;
+; db/dffpipe_n09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_n09.tdf                 ;
+; db/alt_synch_pipe_sv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_sv7.tdf          ;
+; db/dffpipe_o09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_o09.tdf                 ;
+; db/alt_synch_pipe_697.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_697.tdf          ;
+; db/dffpipe_0a8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_0a8.tdf                 ;
+; db/alt_synch_pipe_tv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_tv7.tdf          ;
+; db/dffpipe_p09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_p09.tdf                 ;
 +----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+
 
 
@@ -219,23 +219,23 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 669   ;
-; Total combinational functions               ; 522   ;
+; Estimated Total logic elements              ; 655   ;
+; Total combinational functions               ; 543   ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 221   ;
-;     -- 3 input functions                    ; 154   ;
-;     -- <=2 input functions                  ; 147   ;
+;     -- 4 input functions                    ; 213   ;
+;     -- 3 input functions                    ; 177   ;
+;     -- <=2 input functions                  ; 153   ;
 ;         -- Combinational cells for routing  ; 0     ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 351   ;
-;     -- arithmetic mode                      ; 171   ;
-; Total registers                             ; 669   ;
+;     -- normal mode                          ; 362   ;
+;     -- arithmetic mode                      ; 181   ;
+; Total registers                             ; 655   ;
 ; I/O pins                                    ; 48    ;
 ; Total memory bits                           ; 98304 ;
 ; Maximum fan-out node                        ; BCLK  ;
-; Maximum fan-out                             ; 364   ;
-; Total fan-out                               ; 4268  ;
-; Average fan-out                             ; 3.36  ;
+; Maximum fan-out                             ; 374   ;
+; Total fan-out                               ; 4246  ;
+; Average fan-out                             ; 3.32  ;
 +---------------------------------------------+-------+
 
 
@@ -244,7 +244,7 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ;
 +-----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-; |Ozy_Janus                                    ; 522 (317)         ; 669 (364)    ; 98304       ; 0    ; 0            ; 0       ; 0         ; 48   ; 0            ; |Ozy_Janus                                                                                                                        ;
+; |Ozy_Janus                                    ; 543 (334)         ; 655 (365)    ; 98304       ; 0    ; 0            ; 0       ; 0         ; 48   ; 0            ; |Ozy_Janus                                                                                                                        ;
 ;    |I2SAudioOut:I2SAO|                        ; 33 (33)           ; 42 (42)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ;
 ;    |Rx_fifo:Rx_fifo|                          ; 97 (0)            ; 130 (0)      ; 65536       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|               ; 97 (0)            ; 130 (0)      ; 65536       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
@@ -265,17 +265,19 @@ applicable agreement for further details.
 ;             |dffpipe_n09:rs_bwp|              ; 0 (0)             ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|dffpipe_n09:rs_bwp                                  ;
 ;             |dffpipe_n09:ws_brp|              ; 0 (0)             ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|dffpipe_n09:ws_brp                                  ;
 ;             |dffpipe_n09:ws_bwp|              ; 0 (0)             ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|dffpipe_n09:ws_bwp                                  ;
-;    |Tx_fifo:Tx_fifo|                          ; 45 (0)            ; 100 (0)      ; 32768       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo                                                                                                        ;
-;       |dcfifo:dcfifo_component|               ; 45 (0)            ; 100 (0)      ; 32768       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component                                                                                ;
-;          |dcfifo_dj91:auto_generated|         ; 45 (19)           ; 100 (26)     ; 32768       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated                                                     ;
-;             |a_graycounter_kk6:wrptr_gp|      ; 13 (13)           ; 13 (13)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|a_graycounter_kk6:wrptr_gp                          ;
-;             |a_graycounter_q96:rdptr_g1p|     ; 13 (13)           ; 13 (13)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|a_graycounter_q96:rdptr_g1p                         ;
-;             |alt_synch_pipe_qv7:rs_dgwp|      ; 0 (0)             ; 24 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_qv7:rs_dgwp                          ;
-;                |dffpipe_l09:dffpipe6|         ; 0 (0)             ; 24 (24)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_qv7:rs_dgwp|dffpipe_l09:dffpipe6     ;
-;             |alt_synch_pipe_rv7:ws_dgrp|      ; 0 (0)             ; 24 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_rv7:ws_dgrp                          ;
-;                |dffpipe_m09:dffpipe11|        ; 0 (0)             ; 24 (24)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_rv7:ws_dgrp|dffpipe_m09:dffpipe11    ;
-;             |altsyncram_tpu:fifo_ram|         ; 0 (0)             ; 0 (0)        ; 32768       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|altsyncram_tpu:fifo_ram                             ;
-;                |altsyncram_8ec1:altsyncram4|  ; 0 (0)             ; 0 (0)        ; 32768       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4 ;
+;    |Tx_fifo:Tx_fifo|                          ; 49 (0)            ; 85 (0)       ; 32768       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo                                                                                                        ;
+;       |dcfifo:dcfifo_component|               ; 49 (0)            ; 85 (0)       ; 32768       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component                                                                                ;
+;          |dcfifo_9p91:auto_generated|         ; 49 (1)            ; 85 (13)      ; 32768       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated                                                     ;
+;             |a_gray2bin_mdb:wrptr_g_gray2bin| ; 11 (11)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_gray2bin_mdb:wrptr_g_gray2bin                     ;
+;             |a_gray2bin_mdb:ws_dgrp_gray2bin| ; 11 (11)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_gray2bin_mdb:ws_dgrp_gray2bin                     ;
+;             |a_graycounter_kk6:wrptr_gp|      ; 13 (13)           ; 13 (13)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_graycounter_kk6:wrptr_gp                          ;
+;             |a_graycounter_q96:rdptr_g1p|     ; 13 (13)           ; 13 (13)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_graycounter_q96:rdptr_g1p                         ;
+;             |alt_synch_pipe_vv7:ws_dgrp|      ; 0 (0)             ; 24 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp                          ;
+;                |dffpipe_r09:dffpipe9|         ; 0 (0)             ; 24 (24)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp|dffpipe_r09:dffpipe9     ;
+;             |altsyncram_tpu:fifo_ram|         ; 0 (0)             ; 0 (0)        ; 32768       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram                             ;
+;                |altsyncram_8ec1:altsyncram4|  ; 0 (0)             ; 0 (0)        ; 32768       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4 ;
+;             |dffpipe_c09:ws_brp|              ; 0 (0)             ; 11 (11)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_brp                                  ;
+;             |dffpipe_c09:ws_bwp|              ; 0 (0)             ; 11 (11)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_bwp                                  ;
 ;    |clocks:clocks|                            ; 9 (0)             ; 9 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|clocks:clocks                                                                                                          ;
 ;       |lpm_counter:lpm_counter_component|     ; 9 (0)             ; 9 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|clocks:clocks|lpm_counter:lpm_counter_component                                                                        ;
 ;          |cntr_tkh:auto_generated|            ; 9 (9)             ; 9 (9)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|clocks:clocks|lpm_counter:lpm_counter_component|cntr_tkh:auto_generated                                                ;
@@ -290,7 +292,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                                                                                                              ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF  ;
 +-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ALTSYNCRAM ; AUTO ; True Dual Port ; 4096         ; 16           ; 4096         ; 16           ; 65536 ; None ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4|ALTSYNCRAM ; AUTO ; True Dual Port ; 2048         ; 16           ; 2048         ; 16           ; 32768 ; None ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4|ALTSYNCRAM ; AUTO ; True Dual Port ; 2048         ; 16           ; 2048         ; 16           ; 32768 ; None ;
 +-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
 
 
@@ -334,29 +336,29 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 669   ;
-; Number of registers using Synchronous Clear  ; 44    ;
+; Total registers                              ; 655   ;
+; Number of registers using Synchronous Clear  ; 45    ;
 ; Number of registers using Synchronous Load   ; 1     ;
-; Number of registers using Asynchronous Clear ; 29    ;
+; Number of registers using Asynchronous Clear ; 28    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 270   ;
+; Number of registers using Clock Enable       ; 258   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[4] ;
-; 16:1               ; 2 bits    ; 20 LEs        ; 14 LEs               ; 6 LEs                  ; Yes        ; |Ozy_Janus|state_FX[1]     ;
-; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|byte_count[6]   ;
-; 128:1              ; 4 bits    ; 340 LEs       ; 28 LEs               ; 312 LEs                ; Yes        ; |Ozy_Janus|AD_state[5]     ;
-; 8:1                ; 9 bits    ; 45 LEs        ; 9 LEs                ; 36 LEs                 ; Yes        ; |Ozy_Janus|sync_count[7]   ;
-; 130:1              ; 8 bits    ; 688 LEs       ; 16 LEs               ; 672 LEs                ; Yes        ; |Ozy_Janus|register[15]    ;
-; 132:1              ; 6 bits    ; 528 LEs       ; 18 LEs               ; 510 LEs                ; Yes        ; |Ozy_Janus|register[5]     ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[6]  ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Ozy_Janus|FIFO_ADR[0]~reg0 ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|byte_count[0]    ;
+; 128:1              ; 4 bits    ; 340 LEs       ; 28 LEs               ; 312 LEs                ; Yes        ; |Ozy_Janus|AD_state[3]      ;
+; 8:1                ; 9 bits    ; 45 LEs        ; 9 LEs                ; 36 LEs                 ; Yes        ; |Ozy_Janus|sync_count[4]    ;
+; 130:1              ; 8 bits    ; 688 LEs       ; 16 LEs               ; 672 LEs                ; Yes        ; |Ozy_Janus|register[14]     ;
+; 132:1              ; 6 bits    ; 528 LEs       ; 18 LEs               ; 510 LEs                ; Yes        ; |Ozy_Janus|register[3]      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
 
 
 +----------------------------------------------------------------+
@@ -369,7 +371,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +-------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated ;
 +---------------------------------+-------+------------------+------------------------------+
 ; Assignment                      ; Value ; From             ; To                           ;
 +---------------------------------+-------+------------------+------------------------------+
@@ -379,14 +381,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; POWER_UP_LEVEL                  ; LOW   ; -                ; p0addr                       ;
 ; SUPPRESS_DA_RULE_INTERNAL       ; c106  ; -                ; rdaclr                       ;
 ; POWER_UP_LEVEL                  ; LOW   ; -                ; rdaclr                       ;
-; CUT                             ; ON    ; rdptr_g          ; ws_dgrp|dffpipe11|dffe12a    ;
-; CUT                             ; ON    ; delayed_wrptr_g  ; rs_dgwp|dffpipe6|dffe7a      ;
-; CUT                             ; ON    ; previous_rdempty ; wrempty_reg|dffpipe9|dffe10a ;
+; CUT                             ; ON    ; rdptr_g          ; ws_dgrp|dffpipe9|dffe10a     ;
+; CUT                             ; ON    ; delayed_wrptr_g  ; rs_dgwp|dffpipe4|dffe5a      ;
+; CUT                             ; ON    ; previous_rdempty ; wrempty_reg|dffpipe7|dffe8a  ;
 +---------------------------------+-------+------------------+------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|altsyncram_tpu:fifo_ram ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram ;
 +---------------------------------+--------------------+------+-----------------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                                  ;
 +---------------------------------+--------------------+------+-----------------------------------------------------+
@@ -395,7 +397,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4 ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4 ;
 +---------------------------------+--------------------+------+---------------------------------------------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                                                              ;
 +---------------------------------+--------------------+------+---------------------------------------------------------------------------------+
@@ -404,7 +406,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_qv7:rs_dgwp ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_uv7:rs_dgwp ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                            ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
@@ -413,7 +415,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_qv7:rs_dgwp|dffpipe_l09:dffpipe6 ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_uv7:rs_dgwp|dffpipe_q09:dffpipe4 ;
 +---------------------------------+-------+------+------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                       ;
 +---------------------------------+-------+------+------------------------------------------------------------------------------------------+
@@ -422,7 +424,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +--------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_797:wrempty_reg ;
 +-----------------------+-------+------+-----------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                                ;
 +-----------------------+-------+------+-----------------------------------------------------------------------------------+
@@ -431,7 +433,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg|dffpipe_v98:dffpipe9 ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_797:wrempty_reg|dffpipe_1a8:dffpipe7 ;
 +---------------------------------+-------+------+----------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                           ;
 +---------------------------------+-------+------+----------------------------------------------------------------------------------------------+
@@ -440,7 +442,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +--------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|dffpipe_c09:ws_brp ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_brp ;
 +---------------------------------+-------+------+-------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                          ;
 +---------------------------------+-------+------+-------------------------------------------------------------+
@@ -449,7 +451,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +--------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|dffpipe_c09:ws_bwp ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_bwp ;
 +---------------------------------+-------+------+-------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                          ;
 +---------------------------------+-------+------+-------------------------------------------------------------+
@@ -458,7 +460,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_rv7:ws_dgrp ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                            ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
@@ -466,13 +468,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_rv7:ws_dgrp|dffpipe_m09:dffpipe11 ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                                                        ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                         ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp|dffpipe_r09:dffpipe9 ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                       ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                        ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------+
@@ -649,8 +651,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; LPM_NUMWORDS            ; 2048        ; Integer                                      ;
 ; LPM_WIDTHU              ; 11          ; Integer                                      ;
 ; LPM_SHOWAHEAD           ; OFF         ; Untyped                                      ;
-; UNDERFLOW_CHECKING      ; ON          ; Untyped                                      ;
-; OVERFLOW_CHECKING       ; ON          ; Untyped                                      ;
+; UNDERFLOW_CHECKING      ; OFF         ; Untyped                                      ;
+; OVERFLOW_CHECKING       ; OFF         ; Untyped                                      ;
 ; USE_EAB                 ; ON          ; Untyped                                      ;
 ; ADD_RAM_OUTPUT_REGISTER ; OFF         ; Untyped                                      ;
 ; DELAY_RDUSEDW           ; 1           ; Untyped                                      ;
@@ -659,7 +661,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; WRSYNC_DELAYPIPE        ; 4           ; Integer                                      ;
 ; CLOCKS_ARE_SYNCHRONIZED ; FALSE       ; Untyped                                      ;
 ; DEVICE_FAMILY           ; Cyclone II  ; Untyped                                      ;
-; CBXI_PARAMETER          ; dcfifo_dj91 ; Untyped                                      ;
+; CBXI_PARAMETER          ; dcfifo_9p91 ; Untyped                                      ;
 +-------------------------+-------------+----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -729,8 +731,10 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Fri Aug 11 16:47:48 2006
+    Info: Processing started: Fri Aug 11 22:16:50 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
+Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
+    Info: Found entity 1: Tx_fifo
 Info: Found 1 design units, including 1 entities, in source file clocks.v
     Info: Found entity 1: clocks
 Info: Found 1 design units, including 1 entities, in source file debounce.v
@@ -741,12 +745,10 @@ Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
     Info: Found entity 1: Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
-Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
-    Info: Found entity 1: Tx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(568): object "syncd_write_used" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(780): object "Rx_control_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(781): object "Rx_control_3" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(565): object "syncd_Tx_write_full" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(765): object "Rx_control_2" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(766): object "Rx_control_3" assigned a value but never read
 Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
 Info: Found 1 design units, including 1 entities, in source file ../../../../altera/quartus60/libraries/megafunctions/lpm_counter.tdf
     Info: Found entity 1: lpm_counter
@@ -760,48 +762,48 @@ Info: Found 1 design units, including 1 entities, in source file ../../../../alt
     Info: Found entity 1: dcfifo
 Info: Elaborating entity "dcfifo" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component"
 Info: Elaborated megafunction instantiation "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component"
-Info: Found 1 design units, including 1 entities, in source file db/dcfifo_dj91.tdf
-    Info: Found entity 1: dcfifo_dj91
-Info: Elaborating entity "dcfifo_dj91" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_9p91.tdf
+    Info: Found entity 1: dcfifo_9p91
+Info: Elaborating entity "dcfifo_9p91" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated"
 Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_mdb.tdf
     Info: Found entity 1: a_gray2bin_mdb
-Info: Elaborating entity "a_gray2bin_mdb" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|a_gray2bin_mdb:wrptr_g_gray2bin"
+Info: Elaborating entity "a_gray2bin_mdb" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_gray2bin_mdb:wrptr_g_gray2bin"
 Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_q96.tdf
     Info: Found entity 1: a_graycounter_q96
-Info: Elaborating entity "a_graycounter_q96" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|a_graycounter_q96:rdptr_g1p"
+Info: Elaborating entity "a_graycounter_q96" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_graycounter_q96:rdptr_g1p"
 Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_jk6.tdf
     Info: Found entity 1: a_graycounter_jk6
-Info: Elaborating entity "a_graycounter_jk6" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|a_graycounter_jk6:wrptr_g1p"
+Info: Elaborating entity "a_graycounter_jk6" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_graycounter_jk6:wrptr_g1p"
 Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_kk6.tdf
     Info: Found entity 1: a_graycounter_kk6
-Info: Elaborating entity "a_graycounter_kk6" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|a_graycounter_kk6:wrptr_gp"
+Info: Elaborating entity "a_graycounter_kk6" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_graycounter_kk6:wrptr_gp"
 Info: Found 1 design units, including 1 entities, in source file db/altsyncram_tpu.tdf
     Info: Found entity 1: altsyncram_tpu
-Info: Elaborating entity "altsyncram_tpu" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|altsyncram_tpu:fifo_ram"
+Info: Elaborating entity "altsyncram_tpu" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram"
 Info: Found 1 design units, including 1 entities, in source file db/altsyncram_8ec1.tdf
     Info: Found entity 1: altsyncram_8ec1
-Info: Elaborating entity "altsyncram_8ec1" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_qv7.tdf
-    Info: Found entity 1: alt_synch_pipe_qv7
-Info: Elaborating entity "alt_synch_pipe_qv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_qv7:rs_dgwp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_l09.tdf
-    Info: Found entity 1: dffpipe_l09
-Info: Elaborating entity "dffpipe_l09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_qv7:rs_dgwp|dffpipe_l09:dffpipe6"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_597.tdf
-    Info: Found entity 1: alt_synch_pipe_597
-Info: Elaborating entity "alt_synch_pipe_597" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_v98.tdf
-    Info: Found entity 1: dffpipe_v98
-Info: Elaborating entity "dffpipe_v98" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg|dffpipe_v98:dffpipe9"
+Info: Elaborating entity "altsyncram_8ec1" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_uv7.tdf
+    Info: Found entity 1: alt_synch_pipe_uv7
+Info: Elaborating entity "alt_synch_pipe_uv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_uv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_q09.tdf
+    Info: Found entity 1: dffpipe_q09
+Info: Elaborating entity "dffpipe_q09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_uv7:rs_dgwp|dffpipe_q09:dffpipe4"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_797.tdf
+    Info: Found entity 1: alt_synch_pipe_797
+Info: Elaborating entity "alt_synch_pipe_797" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_797:wrempty_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_1a8.tdf
+    Info: Found entity 1: dffpipe_1a8
+Info: Elaborating entity "dffpipe_1a8" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_797:wrempty_reg|dffpipe_1a8:dffpipe7"
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_c09.tdf
     Info: Found entity 1: dffpipe_c09
-Info: Elaborating entity "dffpipe_c09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|dffpipe_c09:ws_brp"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_rv7.tdf
-    Info: Found entity 1: alt_synch_pipe_rv7
-Info: Elaborating entity "alt_synch_pipe_rv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_rv7:ws_dgrp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_m09.tdf
-    Info: Found entity 1: dffpipe_m09
-Info: Elaborating entity "dffpipe_m09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_rv7:ws_dgrp|dffpipe_m09:dffpipe11"
+Info: Elaborating entity "dffpipe_c09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_brp"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_vv7.tdf
+    Info: Found entity 1: alt_synch_pipe_vv7
+Info: Elaborating entity "alt_synch_pipe_vv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_r09.tdf
+    Info: Found entity 1: dffpipe_r09
+Info: Elaborating entity "dffpipe_r09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp|dffpipe_r09:dffpipe9"
 Info: Elaborating entity "Rx_fifo" for hierarchy "Rx_fifo:Rx_fifo"
 Info: Elaborating entity "dcfifo" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
 Info: Elaborated megafunction instantiation "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
@@ -902,20 +904,20 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "LED[4]" stuck at VCC
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 992 device resources after synthesis - the final resource count might be different
+Info: Implemented 983 device resources after synthesis - the final resource count might be different
     Info: Implemented 11 input pins
     Info: Implemented 21 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 912 logic cells
+    Info: Implemented 903 logic cells
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Processing ended: Fri Aug 11 16:47:59 2006
-    Info: Elapsed time: 00:00:11
+    Info: Processing ended: Fri Aug 11 22:17:09 2006
+    Info: Elapsed time: 00:00:19
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/HPSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.map.smsg.
+The suppressed messages can be found in C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.map.smsg.
 
 

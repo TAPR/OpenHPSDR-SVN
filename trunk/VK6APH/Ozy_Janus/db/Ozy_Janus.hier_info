@@ -1,6 +1,49 @@
 |Ozy_Janus
 FX2_CLK => FX2_CLK~0.IN1
-IFCLK => IFCLK~0.IN1
+IFCLK => SLWR~reg0.CLK
+IFCLK => Tx_read_clock.CLK
+IFCLK => SLRD~reg0.CLK
+IFCLK => SLOE~reg0.CLK
+IFCLK => SLEN.CLK
+IFCLK => FIFO_ADR[1]~reg0.CLK
+IFCLK => FIFO_ADR[0]~reg0.CLK
+IFCLK => state_FX[3].CLK
+IFCLK => state_FX[2].CLK
+IFCLK => state_FX[1].CLK
+IFCLK => state_FX[0].CLK
+IFCLK => RX_wait[7].CLK
+IFCLK => RX_wait[6].CLK
+IFCLK => RX_wait[5].CLK
+IFCLK => RX_wait[4].CLK
+IFCLK => RX_wait[3].CLK
+IFCLK => RX_wait[2].CLK
+IFCLK => RX_wait[1].CLK
+IFCLK => RX_wait[0].CLK
+IFCLK => Rx_register[15].CLK
+IFCLK => Rx_register[14].CLK
+IFCLK => Rx_register[13].CLK
+IFCLK => Rx_register[12].CLK
+IFCLK => Rx_register[11].CLK
+IFCLK => Rx_register[10].CLK
+IFCLK => Rx_register[9].CLK
+IFCLK => Rx_register[8].CLK
+IFCLK => Rx_register[7].CLK
+IFCLK => Rx_register[6].CLK
+IFCLK => Rx_register[5].CLK
+IFCLK => Rx_register[4].CLK
+IFCLK => Rx_register[3].CLK
+IFCLK => Rx_register[2].CLK
+IFCLK => Rx_register[1].CLK
+IFCLK => Rx_register[0].CLK
+IFCLK => TX_wait[7].CLK
+IFCLK => TX_wait[6].CLK
+IFCLK => TX_wait[5].CLK
+IFCLK => TX_wait[4].CLK
+IFCLK => TX_wait[3].CLK
+IFCLK => TX_wait[2].CLK
+IFCLK => TX_wait[1].CLK
+IFCLK => TX_wait[0].CLK
+IFCLK => syncd_write_used[10].CLK
 CLK_24MHZ => CLK_24MHZ~0.IN1
 FX2_FD[0] <= FX2_FD~31
 FX2_FD[1] <= FX2_FD~30
@@ -18,13 +61,16 @@ FX2_FD[12] <= FX2_FD~19
 FX2_FD[13] <= FX2_FD~18
 FX2_FD[14] <= FX2_FD~17
 FX2_FD[15] <= FX2_FD~16
-FLAGA => Selector34.IN10
+FLAGA => Selector35.IN11
 FLAGA => SLOE~0.OUTPUTSELECT
-FLAGA => Selector32.IN7
+FLAGA => Selector33.IN8
 FLAGA => LED[3].DATAIN
 FLAGB => ~NO_FANOUT~
+FLAGC => Tx_read_clock~0.OUTPUTSELECT
 FLAGC => SLEN~0.OUTPUTSELECT
-FLAGC => Selector34.IN11
+FLAGC => Selector34.IN7
+FLAGC => SLWR~1.OUTPUTSELECT
+FLAGC => Selector35.IN9
 FLAGC => LED[1].DATAIN
 SLWR <= SLWR~reg0.DB_MAX_OUTPUT_PORT_TYPE
 SLRD <= SLRD~1.DB_MAX_OUTPUT_PORT_TYPE
@@ -47,7 +93,7 @@ LED[3] <= FLAGA.DB_MAX_OUTPUT_PORT_TYPE
 LED[4] <= <VCC>
 LED[5] <= LRCLK.DB_MAX_OUTPUT_PORT_TYPE
 LED[6] <= data_flag~2.DB_MAX_OUTPUT_PORT_TYPE
-LED[7] <= Tx_read~1.DB_MAX_OUTPUT_PORT_TYPE
+LED[7] <= Tx_read_clock~1.DB_MAX_OUTPUT_PORT_TYPE
 I_PWM_out <= I_PWM_accumulator[16].DB_MAX_OUTPUT_PORT_TYPE
 Q_PWM_out <= Q_PWM_accumulator[16].DB_MAX_OUTPUT_PORT_TYPE
 CBCLK <= CBCLK~0.DB_MAX_OUTPUT_PORT_TYPE
@@ -198,47 +244,47 @@ wrusedw[10] <= dcfifo:dcfifo_component.wrusedw
 
 
 |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
-data[0] => dcfifo_dj91:auto_generated.data[0]
-data[1] => dcfifo_dj91:auto_generated.data[1]
-data[2] => dcfifo_dj91:auto_generated.data[2]
-data[3] => dcfifo_dj91:auto_generated.data[3]
-data[4] => dcfifo_dj91:auto_generated.data[4]
-data[5] => dcfifo_dj91:auto_generated.data[5]
-data[6] => dcfifo_dj91:auto_generated.data[6]
-data[7] => dcfifo_dj91:auto_generated.data[7]
-data[8] => dcfifo_dj91:auto_generated.data[8]
-data[9] => dcfifo_dj91:auto_generated.data[9]
-data[10] => dcfifo_dj91:auto_generated.data[10]
-data[11] => dcfifo_dj91:auto_generated.data[11]
-data[12] => dcfifo_dj91:auto_generated.data[12]
-data[13] => dcfifo_dj91:auto_generated.data[13]
-data[14] => dcfifo_dj91:auto_generated.data[14]
-data[15] => dcfifo_dj91:auto_generated.data[15]
-q[0] <= dcfifo_dj91:auto_generated.q[0]
-q[1] <= dcfifo_dj91:auto_generated.q[1]
-q[2] <= dcfifo_dj91:auto_generated.q[2]
-q[3] <= dcfifo_dj91:auto_generated.q[3]
-q[4] <= dcfifo_dj91:auto_generated.q[4]
-q[5] <= dcfifo_dj91:auto_generated.q[5]
-q[6] <= dcfifo_dj91:auto_generated.q[6]
-q[7] <= dcfifo_dj91:auto_generated.q[7]
-q[8] <= dcfifo_dj91:auto_generated.q[8]
-q[9] <= dcfifo_dj91:auto_generated.q[9]
-q[10] <= dcfifo_dj91:auto_generated.q[10]
-q[11] <= dcfifo_dj91:auto_generated.q[11]
-q[12] <= dcfifo_dj91:auto_generated.q[12]
-q[13] <= dcfifo_dj91:auto_generated.q[13]
-q[14] <= dcfifo_dj91:auto_generated.q[14]
-q[15] <= dcfifo_dj91:auto_generated.q[15]
-rdclk => dcfifo_dj91:auto_generated.rdclk
-rdreq => dcfifo_dj91:auto_generated.rdreq
-wrclk => dcfifo_dj91:auto_generated.wrclk
-wrreq => dcfifo_dj91:auto_generated.wrreq
+data[0] => dcfifo_9p91:auto_generated.data[0]
+data[1] => dcfifo_9p91:auto_generated.data[1]
+data[2] => dcfifo_9p91:auto_generated.data[2]
+data[3] => dcfifo_9p91:auto_generated.data[3]
+data[4] => dcfifo_9p91:auto_generated.data[4]
+data[5] => dcfifo_9p91:auto_generated.data[5]
+data[6] => dcfifo_9p91:auto_generated.data[6]
+data[7] => dcfifo_9p91:auto_generated.data[7]
+data[8] => dcfifo_9p91:auto_generated.data[8]
+data[9] => dcfifo_9p91:auto_generated.data[9]
+data[10] => dcfifo_9p91:auto_generated.data[10]
+data[11] => dcfifo_9p91:auto_generated.data[11]
+data[12] => dcfifo_9p91:auto_generated.data[12]
+data[13] => dcfifo_9p91:auto_generated.data[13]
+data[14] => dcfifo_9p91:auto_generated.data[14]
+data[15] => dcfifo_9p91:auto_generated.data[15]
+q[0] <= dcfifo_9p91:auto_generated.q[0]
+q[1] <= dcfifo_9p91:auto_generated.q[1]
+q[2] <= dcfifo_9p91:auto_generated.q[2]
+q[3] <= dcfifo_9p91:auto_generated.q[3]
+q[4] <= dcfifo_9p91:auto_generated.q[4]
+q[5] <= dcfifo_9p91:auto_generated.q[5]
+q[6] <= dcfifo_9p91:auto_generated.q[6]
+q[7] <= dcfifo_9p91:auto_generated.q[7]
+q[8] <= dcfifo_9p91:auto_generated.q[8]
+q[9] <= dcfifo_9p91:auto_generated.q[9]
+q[10] <= dcfifo_9p91:auto_generated.q[10]
+q[11] <= dcfifo_9p91:auto_generated.q[11]
+q[12] <= dcfifo_9p91:auto_generated.q[12]
+q[13] <= dcfifo_9p91:auto_generated.q[13]
+q[14] <= dcfifo_9p91:auto_generated.q[14]
+q[15] <= dcfifo_9p91:auto_generated.q[15]
+rdclk => dcfifo_9p91:auto_generated.rdclk
+rdreq => dcfifo_9p91:auto_generated.rdreq
+wrclk => dcfifo_9p91:auto_generated.wrclk
+wrreq => dcfifo_9p91:auto_generated.wrreq
 aclr => ~NO_FANOUT~
-rdempty <= dcfifo_dj91:auto_generated.rdempty
+rdempty <= dcfifo_9p91:auto_generated.rdempty
 rdfull <= <UNC>
-wrempty <= dcfifo_dj91:auto_generated.wrempty
-wrfull <= dcfifo_dj91:auto_generated.wrfull
+wrempty <= dcfifo_9p91:auto_generated.wrempty
+wrfull <= dcfifo_9p91:auto_generated.wrfull
 rdusedw[0] <= <UNC>
 rdusedw[1] <= <UNC>
 rdusedw[2] <= <UNC>
@@ -250,20 +296,20 @@ rdusedw[7] <= <UNC>
 rdusedw[8] <= <UNC>
 rdusedw[9] <= <UNC>
 rdusedw[10] <= <UNC>
-wrusedw[0] <= dcfifo_dj91:auto_generated.wrusedw[0]
-wrusedw[1] <= dcfifo_dj91:auto_generated.wrusedw[1]
-wrusedw[2] <= dcfifo_dj91:auto_generated.wrusedw[2]
-wrusedw[3] <= dcfifo_dj91:auto_generated.wrusedw[3]
-wrusedw[4] <= dcfifo_dj91:auto_generated.wrusedw[4]
-wrusedw[5] <= dcfifo_dj91:auto_generated.wrusedw[5]
-wrusedw[6] <= dcfifo_dj91:auto_generated.wrusedw[6]
-wrusedw[7] <= dcfifo_dj91:auto_generated.wrusedw[7]
-wrusedw[8] <= dcfifo_dj91:auto_generated.wrusedw[8]
-wrusedw[9] <= dcfifo_dj91:auto_generated.wrusedw[9]
-wrusedw[10] <= dcfifo_dj91:auto_generated.wrusedw[10]
+wrusedw[0] <= dcfifo_9p91:auto_generated.wrusedw[0]
+wrusedw[1] <= dcfifo_9p91:auto_generated.wrusedw[1]
+wrusedw[2] <= dcfifo_9p91:auto_generated.wrusedw[2]
+wrusedw[3] <= dcfifo_9p91:auto_generated.wrusedw[3]
+wrusedw[4] <= dcfifo_9p91:auto_generated.wrusedw[4]
+wrusedw[5] <= dcfifo_9p91:auto_generated.wrusedw[5]
+wrusedw[6] <= dcfifo_9p91:auto_generated.wrusedw[6]
+wrusedw[7] <= dcfifo_9p91:auto_generated.wrusedw[7]
+wrusedw[8] <= dcfifo_9p91:auto_generated.wrusedw[8]
+wrusedw[9] <= dcfifo_9p91:auto_generated.wrusedw[9]
+wrusedw[10] <= dcfifo_9p91:auto_generated.wrusedw[10]
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated
 data[0] => altsyncram_tpu:fifo_ram.data_a[0]
 data[1] => altsyncram_tpu:fifo_ram.data_a[1]
 data[2] => altsyncram_tpu:fifo_ram.data_a[2]
@@ -298,7 +344,7 @@ q[14] <= altsyncram_tpu:fifo_ram.q_b[14]
 q[15] <= altsyncram_tpu:fifo_ram.q_b[15]
 rdclk => a_graycounter_q96:rdptr_g1p.clock
 rdclk => altsyncram_tpu:fifo_ram.clock1
-rdclk => alt_synch_pipe_qv7:rs_dgwp.clock
+rdclk => alt_synch_pipe_uv7:rs_dgwp.clock
 rdclk => p0addr.CLK
 rdclk => previous_rdempty.CLK
 rdclk => rdptr_g[11].CLK
@@ -314,14 +360,27 @@ rdclk => rdptr_g[2].CLK
 rdclk => rdptr_g[1].CLK
 rdclk => rdptr_g[0].CLK
 rdempty <= rdempty_eq_comp_aeb_int.DB_MAX_OUTPUT_PORT_TYPE
-rdreq => valid_rdreq.IN0
+rdreq => altsyncram_tpu:fifo_ram.clocken1
+rdreq => rdcnt_addr_ena.IN0
+rdreq => rdptr_g[11].ENA
+rdreq => rdptr_g[10].ENA
+rdreq => rdptr_g[9].ENA
+rdreq => rdptr_g[8].ENA
+rdreq => rdptr_g[7].ENA
+rdreq => rdptr_g[6].ENA
+rdreq => rdptr_g[5].ENA
+rdreq => rdptr_g[4].ENA
+rdreq => rdptr_g[3].ENA
+rdreq => rdptr_g[2].ENA
+rdreq => rdptr_g[1].ENA
+rdreq => rdptr_g[0].ENA
 wrclk => a_graycounter_jk6:wrptr_g1p.clock
 wrclk => a_graycounter_kk6:wrptr_gp.clock
 wrclk => altsyncram_tpu:fifo_ram.clock0
-wrclk => alt_synch_pipe_597:wrempty_reg.clock
+wrclk => alt_synch_pipe_797:wrempty_reg.clock
 wrclk => dffpipe_c09:ws_brp.clock
 wrclk => dffpipe_c09:ws_bwp.clock
-wrclk => alt_synch_pipe_rv7:ws_dgrp.clock
+wrclk => alt_synch_pipe_vv7:ws_dgrp.clock
 wrclk => delayed_wrptr_g[11].CLK
 wrclk => delayed_wrptr_g[10].CLK
 wrclk => delayed_wrptr_g[9].CLK
@@ -336,7 +395,9 @@ wrclk => delayed_wrptr_g[1].CLK
 wrclk => delayed_wrptr_g[0].CLK
 wrempty <= int_wrempty.DB_MAX_OUTPUT_PORT_TYPE
 wrfull <= wrfull_eq_comp_aeb_int.DB_MAX_OUTPUT_PORT_TYPE
-wrreq => valid_wrreq.IN0
+wrreq => a_graycounter_jk6:wrptr_g1p.cnt_en
+wrreq => a_graycounter_kk6:wrptr_gp.cnt_en
+wrreq => altsyncram_tpu:fifo_ram.wren_a
 wrusedw[0] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 wrusedw[1] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 wrusedw[2] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
@@ -350,7 +411,7 @@ wrusedw[9] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 wrusedw[10] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|a_gray2bin_mdb:wrptr_g_gray2bin
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_gray2bin_mdb:wrptr_g_gray2bin
 bin[0] <= xor0.DB_MAX_OUTPUT_PORT_TYPE
 bin[1] <= xor1.DB_MAX_OUTPUT_PORT_TYPE
 bin[2] <= xor2.DB_MAX_OUTPUT_PORT_TYPE
@@ -378,7 +439,7 @@ gray[11] => bin[11].DATAIN
 gray[11] => xor10.IN0
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|a_gray2bin_mdb:ws_dgrp_gray2bin
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_gray2bin_mdb:ws_dgrp_gray2bin
 bin[0] <= xor0.DB_MAX_OUTPUT_PORT_TYPE
 bin[1] <= xor1.DB_MAX_OUTPUT_PORT_TYPE
 bin[2] <= xor2.DB_MAX_OUTPUT_PORT_TYPE
@@ -406,7 +467,7 @@ gray[11] => bin[11].DATAIN
 gray[11] => xor10.IN0
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|a_graycounter_q96:rdptr_g1p
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_graycounter_q96:rdptr_g1p
 aclr => counter_ffa[11].ACLR
 aclr => counter_ffa[10].ACLR
 aclr => counter_ffa[9].ACLR
@@ -449,7 +510,7 @@ q[10] <= counter_ffa[10].REGOUT
 q[11] <= counter_ffa[11].REGOUT
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|a_graycounter_jk6:wrptr_g1p
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_graycounter_jk6:wrptr_g1p
 clock => counter_ffa[11].CLK
 clock => counter_ffa[10].CLK
 clock => counter_ffa[9].CLK
@@ -479,7 +540,7 @@ q[10] <= counter_ffa[10].REGOUT
 q[11] <= counter_ffa[11].REGOUT
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|a_graycounter_kk6:wrptr_gp
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_graycounter_kk6:wrptr_gp
 clock => counter_ffa[11].CLK
 clock => counter_ffa[10].CLK
 clock => counter_ffa[9].CLK
@@ -509,7 +570,7 @@ q[10] <= counter_ffa[10].REGOUT
 q[11] <= counter_ffa[11].REGOUT
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|altsyncram_tpu:fifo_ram
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram
 address_a[0] => altsyncram_8ec1:altsyncram4.address_b[0]
 address_a[1] => altsyncram_8ec1:altsyncram4.address_b[1]
 address_a[2] => altsyncram_8ec1:altsyncram4.address_b[2]
@@ -572,7 +633,7 @@ wren_a => altsyncram_8ec1:altsyncram4.clocken1
 wren_a => altsyncram_8ec1:altsyncram4.wren_b
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4
 address_a[0] => ram_block5a0.PORTAADDR
 address_a[0] => ram_block5a1.PORTAADDR
 address_a[0] => ram_block5a2.PORTAADDR
@@ -1103,85 +1164,179 @@ wren_b => ram_block5a14.PORTBRE
 wren_b => ram_block5a15.PORTBRE
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_qv7:rs_dgwp
-clock => dffpipe_l09:dffpipe6.clock
-d[0] => dffpipe_l09:dffpipe6.d[0]
-d[1] => dffpipe_l09:dffpipe6.d[1]
-d[2] => dffpipe_l09:dffpipe6.d[2]
-d[3] => dffpipe_l09:dffpipe6.d[3]
-d[4] => dffpipe_l09:dffpipe6.d[4]
-d[5] => dffpipe_l09:dffpipe6.d[5]
-d[6] => dffpipe_l09:dffpipe6.d[6]
-d[7] => dffpipe_l09:dffpipe6.d[7]
-d[8] => dffpipe_l09:dffpipe6.d[8]
-d[9] => dffpipe_l09:dffpipe6.d[9]
-d[10] => dffpipe_l09:dffpipe6.d[10]
-d[11] => dffpipe_l09:dffpipe6.d[11]
-q[0] <= dffpipe_l09:dffpipe6.q[0]
-q[1] <= dffpipe_l09:dffpipe6.q[1]
-q[2] <= dffpipe_l09:dffpipe6.q[2]
-q[3] <= dffpipe_l09:dffpipe6.q[3]
-q[4] <= dffpipe_l09:dffpipe6.q[4]
-q[5] <= dffpipe_l09:dffpipe6.q[5]
-q[6] <= dffpipe_l09:dffpipe6.q[6]
-q[7] <= dffpipe_l09:dffpipe6.q[7]
-q[8] <= dffpipe_l09:dffpipe6.q[8]
-q[9] <= dffpipe_l09:dffpipe6.q[9]
-q[10] <= dffpipe_l09:dffpipe6.q[10]
-q[11] <= dffpipe_l09:dffpipe6.q[11]
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_uv7:rs_dgwp
+clock => dffpipe_q09:dffpipe4.clock
+d[0] => dffpipe_q09:dffpipe4.d[0]
+d[1] => dffpipe_q09:dffpipe4.d[1]
+d[2] => dffpipe_q09:dffpipe4.d[2]
+d[3] => dffpipe_q09:dffpipe4.d[3]
+d[4] => dffpipe_q09:dffpipe4.d[4]
+d[5] => dffpipe_q09:dffpipe4.d[5]
+d[6] => dffpipe_q09:dffpipe4.d[6]
+d[7] => dffpipe_q09:dffpipe4.d[7]
+d[8] => dffpipe_q09:dffpipe4.d[8]
+d[9] => dffpipe_q09:dffpipe4.d[9]
+d[10] => dffpipe_q09:dffpipe4.d[10]
+d[11] => dffpipe_q09:dffpipe4.d[11]
+q[0] <= dffpipe_q09:dffpipe4.q[0]
+q[1] <= dffpipe_q09:dffpipe4.q[1]
+q[2] <= dffpipe_q09:dffpipe4.q[2]
+q[3] <= dffpipe_q09:dffpipe4.q[3]
+q[4] <= dffpipe_q09:dffpipe4.q[4]
+q[5] <= dffpipe_q09:dffpipe4.q[5]
+q[6] <= dffpipe_q09:dffpipe4.q[6]
+q[7] <= dffpipe_q09:dffpipe4.q[7]
+q[8] <= dffpipe_q09:dffpipe4.q[8]
+q[9] <= dffpipe_q09:dffpipe4.q[9]
+q[10] <= dffpipe_q09:dffpipe4.q[10]
+q[11] <= dffpipe_q09:dffpipe4.q[11]
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_qv7:rs_dgwp|dffpipe_l09:dffpipe6
-clock => dffe7a[11].CLK
-clock => dffe7a[10].CLK
-clock => dffe7a[9].CLK
-clock => dffe7a[8].CLK
-clock => dffe7a[7].CLK
-clock => dffe7a[6].CLK
-clock => dffe7a[5].CLK
-clock => dffe7a[4].CLK
-clock => dffe7a[3].CLK
-clock => dffe7a[2].CLK
-clock => dffe7a[1].CLK
-clock => dffe7a[0].CLK
-clock => dffe8a[11].CLK
-clock => dffe8a[10].CLK
-clock => dffe8a[9].CLK
-clock => dffe8a[8].CLK
-clock => dffe8a[7].CLK
-clock => dffe8a[6].CLK
-clock => dffe8a[5].CLK
-clock => dffe8a[4].CLK
-clock => dffe8a[3].CLK
-clock => dffe8a[2].CLK
-clock => dffe8a[1].CLK
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_uv7:rs_dgwp|dffpipe_q09:dffpipe4
+clock => dffe5a[11].CLK
+clock => dffe5a[10].CLK
+clock => dffe5a[9].CLK
+clock => dffe5a[8].CLK
+clock => dffe5a[7].CLK
+clock => dffe5a[6].CLK
+clock => dffe5a[5].CLK
+clock => dffe5a[4].CLK
+clock => dffe5a[3].CLK
+clock => dffe5a[2].CLK
+clock => dffe5a[1].CLK
+clock => dffe5a[0].CLK
+clock => dffe6a[11].CLK
+clock => dffe6a[10].CLK
+clock => dffe6a[9].CLK
+clock => dffe6a[8].CLK
+clock => dffe6a[7].CLK
+clock => dffe6a[6].CLK
+clock => dffe6a[5].CLK
+clock => dffe6a[4].CLK
+clock => dffe6a[3].CLK
+clock => dffe6a[2].CLK
+clock => dffe6a[1].CLK
+clock => dffe6a[0].CLK
+q[0] <= dffe6a[0].DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= dffe6a[1].DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= dffe6a[2].DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= dffe6a[3].DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= dffe6a[4].DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= dffe6a[5].DB_MAX_OUTPUT_PORT_TYPE
+q[6] <= dffe6a[6].DB_MAX_OUTPUT_PORT_TYPE
+q[7] <= dffe6a[7].DB_MAX_OUTPUT_PORT_TYPE
+q[8] <= dffe6a[8].DB_MAX_OUTPUT_PORT_TYPE
+q[9] <= dffe6a[9].DB_MAX_OUTPUT_PORT_TYPE
+q[10] <= dffe6a[10].DB_MAX_OUTPUT_PORT_TYPE
+q[11] <= dffe6a[11].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_797:wrempty_reg
+clock => dffpipe_1a8:dffpipe7.clock
+d[0] => dffpipe_1a8:dffpipe7.d[0]
+q[0] <= dffpipe_1a8:dffpipe7.q[0]
+
+
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_797:wrempty_reg|dffpipe_1a8:dffpipe7
 clock => dffe8a[0].CLK
 q[0] <= dffe8a[0].DB_MAX_OUTPUT_PORT_TYPE
-q[1] <= dffe8a[1].DB_MAX_OUTPUT_PORT_TYPE
-q[2] <= dffe8a[2].DB_MAX_OUTPUT_PORT_TYPE
-q[3] <= dffe8a[3].DB_MAX_OUTPUT_PORT_TYPE
-q[4] <= dffe8a[4].DB_MAX_OUTPUT_PORT_TYPE
-q[5] <= dffe8a[5].DB_MAX_OUTPUT_PORT_TYPE
-q[6] <= dffe8a[6].DB_MAX_OUTPUT_PORT_TYPE
-q[7] <= dffe8a[7].DB_MAX_OUTPUT_PORT_TYPE
-q[8] <= dffe8a[8].DB_MAX_OUTPUT_PORT_TYPE
-q[9] <= dffe8a[9].DB_MAX_OUTPUT_PORT_TYPE
-q[10] <= dffe8a[10].DB_MAX_OUTPUT_PORT_TYPE
-q[11] <= dffe8a[11].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg
-clock => dffpipe_v98:dffpipe9.clock
-d[0] => dffpipe_v98:dffpipe9.d[0]
-q[0] <= dffpipe_v98:dffpipe9.q[0]
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_brp
+clock => dffe11a[11].CLK
+clock => dffe11a[10].CLK
+clock => dffe11a[9].CLK
+clock => dffe11a[8].CLK
+clock => dffe11a[7].CLK
+clock => dffe11a[6].CLK
+clock => dffe11a[5].CLK
+clock => dffe11a[4].CLK
+clock => dffe11a[3].CLK
+clock => dffe11a[2].CLK
+clock => dffe11a[1].CLK
+clock => dffe11a[0].CLK
+q[0] <= dffe11a[0].DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= dffe11a[1].DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= dffe11a[2].DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= dffe11a[3].DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= dffe11a[4].DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= dffe11a[5].DB_MAX_OUTPUT_PORT_TYPE
+q[6] <= dffe11a[6].DB_MAX_OUTPUT_PORT_TYPE
+q[7] <= dffe11a[7].DB_MAX_OUTPUT_PORT_TYPE
+q[8] <= dffe11a[8].DB_MAX_OUTPUT_PORT_TYPE
+q[9] <= dffe11a[9].DB_MAX_OUTPUT_PORT_TYPE
+q[10] <= dffe11a[10].DB_MAX_OUTPUT_PORT_TYPE
+q[11] <= dffe11a[11].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_597:wrempty_reg|dffpipe_v98:dffpipe9
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_bwp
+clock => dffe11a[11].CLK
+clock => dffe11a[10].CLK
+clock => dffe11a[9].CLK
+clock => dffe11a[8].CLK
+clock => dffe11a[7].CLK
+clock => dffe11a[6].CLK
+clock => dffe11a[5].CLK
+clock => dffe11a[4].CLK
+clock => dffe11a[3].CLK
+clock => dffe11a[2].CLK
+clock => dffe11a[1].CLK
+clock => dffe11a[0].CLK
+q[0] <= dffe11a[0].DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= dffe11a[1].DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= dffe11a[2].DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= dffe11a[3].DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= dffe11a[4].DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= dffe11a[5].DB_MAX_OUTPUT_PORT_TYPE
+q[6] <= dffe11a[6].DB_MAX_OUTPUT_PORT_TYPE
+q[7] <= dffe11a[7].DB_MAX_OUTPUT_PORT_TYPE
+q[8] <= dffe11a[8].DB_MAX_OUTPUT_PORT_TYPE
+q[9] <= dffe11a[9].DB_MAX_OUTPUT_PORT_TYPE
+q[10] <= dffe11a[10].DB_MAX_OUTPUT_PORT_TYPE
+q[11] <= dffe11a[11].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp
+clock => dffpipe_r09:dffpipe9.clock
+d[0] => dffpipe_r09:dffpipe9.d[0]
+d[1] => dffpipe_r09:dffpipe9.d[1]
+d[2] => dffpipe_r09:dffpipe9.d[2]
+d[3] => dffpipe_r09:dffpipe9.d[3]
+d[4] => dffpipe_r09:dffpipe9.d[4]
+d[5] => dffpipe_r09:dffpipe9.d[5]
+d[6] => dffpipe_r09:dffpipe9.d[6]
+d[7] => dffpipe_r09:dffpipe9.d[7]
+d[8] => dffpipe_r09:dffpipe9.d[8]
+d[9] => dffpipe_r09:dffpipe9.d[9]
+d[10] => dffpipe_r09:dffpipe9.d[10]
+d[11] => dffpipe_r09:dffpipe9.d[11]
+q[0] <= dffpipe_r09:dffpipe9.q[0]
+q[1] <= dffpipe_r09:dffpipe9.q[1]
+q[2] <= dffpipe_r09:dffpipe9.q[2]
+q[3] <= dffpipe_r09:dffpipe9.q[3]
+q[4] <= dffpipe_r09:dffpipe9.q[4]
+q[5] <= dffpipe_r09:dffpipe9.q[5]
+q[6] <= dffpipe_r09:dffpipe9.q[6]
+q[7] <= dffpipe_r09:dffpipe9.q[7]
+q[8] <= dffpipe_r09:dffpipe9.q[8]
+q[9] <= dffpipe_r09:dffpipe9.q[9]
+q[10] <= dffpipe_r09:dffpipe9.q[10]
+q[11] <= dffpipe_r09:dffpipe9.q[11]
+
+
+|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp|dffpipe_r09:dffpipe9
+clock => dffe10a[11].CLK
+clock => dffe10a[10].CLK
+clock => dffe10a[9].CLK
+clock => dffe10a[8].CLK
+clock => dffe10a[7].CLK
+clock => dffe10a[6].CLK
+clock => dffe10a[5].CLK
+clock => dffe10a[4].CLK
+clock => dffe10a[3].CLK
+clock => dffe10a[2].CLK
+clock => dffe10a[1].CLK
 clock => dffe10a[0].CLK
-q[0] <= dffe10a[0].DB_MAX_OUTPUT_PORT_TYPE
-
-
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|dffpipe_c09:ws_brp
 clock => dffe11a[11].CLK
 clock => dffe11a[10].CLK
 clock => dffe11a[9].CLK
@@ -1206,100 +1361,6 @@ q[8] <= dffe11a[8].DB_MAX_OUTPUT_PORT_TYPE
 q[9] <= dffe11a[9].DB_MAX_OUTPUT_PORT_TYPE
 q[10] <= dffe11a[10].DB_MAX_OUTPUT_PORT_TYPE
 q[11] <= dffe11a[11].DB_MAX_OUTPUT_PORT_TYPE
-
-
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|dffpipe_c09:ws_bwp
-clock => dffe11a[11].CLK
-clock => dffe11a[10].CLK
-clock => dffe11a[9].CLK
-clock => dffe11a[8].CLK
-clock => dffe11a[7].CLK
-clock => dffe11a[6].CLK
-clock => dffe11a[5].CLK
-clock => dffe11a[4].CLK
-clock => dffe11a[3].CLK
-clock => dffe11a[2].CLK
-clock => dffe11a[1].CLK
-clock => dffe11a[0].CLK
-q[0] <= dffe11a[0].DB_MAX_OUTPUT_PORT_TYPE
-q[1] <= dffe11a[1].DB_MAX_OUTPUT_PORT_TYPE
-q[2] <= dffe11a[2].DB_MAX_OUTPUT_PORT_TYPE
-q[3] <= dffe11a[3].DB_MAX_OUTPUT_PORT_TYPE
-q[4] <= dffe11a[4].DB_MAX_OUTPUT_PORT_TYPE
-q[5] <= dffe11a[5].DB_MAX_OUTPUT_PORT_TYPE
-q[6] <= dffe11a[6].DB_MAX_OUTPUT_PORT_TYPE
-q[7] <= dffe11a[7].DB_MAX_OUTPUT_PORT_TYPE
-q[8] <= dffe11a[8].DB_MAX_OUTPUT_PORT_TYPE
-q[9] <= dffe11a[9].DB_MAX_OUTPUT_PORT_TYPE
-q[10] <= dffe11a[10].DB_MAX_OUTPUT_PORT_TYPE
-q[11] <= dffe11a[11].DB_MAX_OUTPUT_PORT_TYPE
-
-
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_rv7:ws_dgrp
-clock => dffpipe_m09:dffpipe11.clock
-d[0] => dffpipe_m09:dffpipe11.d[0]
-d[1] => dffpipe_m09:dffpipe11.d[1]
-d[2] => dffpipe_m09:dffpipe11.d[2]
-d[3] => dffpipe_m09:dffpipe11.d[3]
-d[4] => dffpipe_m09:dffpipe11.d[4]
-d[5] => dffpipe_m09:dffpipe11.d[5]
-d[6] => dffpipe_m09:dffpipe11.d[6]
-d[7] => dffpipe_m09:dffpipe11.d[7]
-d[8] => dffpipe_m09:dffpipe11.d[8]
-d[9] => dffpipe_m09:dffpipe11.d[9]
-d[10] => dffpipe_m09:dffpipe11.d[10]
-d[11] => dffpipe_m09:dffpipe11.d[11]
-q[0] <= dffpipe_m09:dffpipe11.q[0]
-q[1] <= dffpipe_m09:dffpipe11.q[1]
-q[2] <= dffpipe_m09:dffpipe11.q[2]
-q[3] <= dffpipe_m09:dffpipe11.q[3]
-q[4] <= dffpipe_m09:dffpipe11.q[4]
-q[5] <= dffpipe_m09:dffpipe11.q[5]
-q[6] <= dffpipe_m09:dffpipe11.q[6]
-q[7] <= dffpipe_m09:dffpipe11.q[7]
-q[8] <= dffpipe_m09:dffpipe11.q[8]
-q[9] <= dffpipe_m09:dffpipe11.q[9]
-q[10] <= dffpipe_m09:dffpipe11.q[10]
-q[11] <= dffpipe_m09:dffpipe11.q[11]
-
-
-|Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_dj91:auto_generated|alt_synch_pipe_rv7:ws_dgrp|dffpipe_m09:dffpipe11
-clock => dffe12a[11].CLK
-clock => dffe12a[10].CLK
-clock => dffe12a[9].CLK
-clock => dffe12a[8].CLK
-clock => dffe12a[7].CLK
-clock => dffe12a[6].CLK
-clock => dffe12a[5].CLK
-clock => dffe12a[4].CLK
-clock => dffe12a[3].CLK
-clock => dffe12a[2].CLK
-clock => dffe12a[1].CLK
-clock => dffe12a[0].CLK
-clock => dffe13a[11].CLK
-clock => dffe13a[10].CLK
-clock => dffe13a[9].CLK
-clock => dffe13a[8].CLK
-clock => dffe13a[7].CLK
-clock => dffe13a[6].CLK
-clock => dffe13a[5].CLK
-clock => dffe13a[4].CLK
-clock => dffe13a[3].CLK
-clock => dffe13a[2].CLK
-clock => dffe13a[1].CLK
-clock => dffe13a[0].CLK
-q[0] <= dffe13a[0].DB_MAX_OUTPUT_PORT_TYPE
-q[1] <= dffe13a[1].DB_MAX_OUTPUT_PORT_TYPE
-q[2] <= dffe13a[2].DB_MAX_OUTPUT_PORT_TYPE
-q[3] <= dffe13a[3].DB_MAX_OUTPUT_PORT_TYPE
-q[4] <= dffe13a[4].DB_MAX_OUTPUT_PORT_TYPE
-q[5] <= dffe13a[5].DB_MAX_OUTPUT_PORT_TYPE
-q[6] <= dffe13a[6].DB_MAX_OUTPUT_PORT_TYPE
-q[7] <= dffe13a[7].DB_MAX_OUTPUT_PORT_TYPE
-q[8] <= dffe13a[8].DB_MAX_OUTPUT_PORT_TYPE
-q[9] <= dffe13a[9].DB_MAX_OUTPUT_PORT_TYPE
-q[10] <= dffe13a[10].DB_MAX_OUTPUT_PORT_TYPE
-q[11] <= dffe13a[11].DB_MAX_OUTPUT_PORT_TYPE
 
 
 |Ozy_Janus|Rx_fifo:Rx_fifo

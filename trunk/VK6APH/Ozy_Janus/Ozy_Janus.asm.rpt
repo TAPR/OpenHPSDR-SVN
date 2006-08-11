@@ -1,5 +1,5 @@
 Assembler report for Ozy_Janus
-Fri Aug 11 16:48:34 2006
+Fri Aug 11 22:18:07 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -10,8 +10,8 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/HPSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.sof
-  6. Assembler Device Options: C:/HPSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pof
+  5. Assembler Device Options: C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.sof
+  6. Assembler Device Options: C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pof
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Fri Aug 11 16:48:34 2006 ;
+; Assembler Status      ; Successful - Fri Aug 11 22:18:07 2006 ;
 ; Revision Name         ; Ozy_Janus                             ;
 ; Top-level Entity Name ; Ozy_Janus                             ;
 ; Family                ; Cyclone II                            ;
@@ -76,37 +76,37 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+----------+---------------+
 
 
-+-----------------------------------------------+
-; Assembler Generated Files                     ;
-+-----------------------------------------------+
-; File Name                                     ;
-+-----------------------------------------------+
-; C:/HPSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.sof ;
-; C:/HPSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pof ;
-; C:/HPSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.rbf ;
-+-----------------------------------------------+
++------------------------------------------------+
+; Assembler Generated Files                      ;
++------------------------------------------------+
+; File Name                                      ;
++------------------------------------------------+
+; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.sof ;
+; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pof ;
+; C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.rbf ;
++------------------------------------------------+
 
 
-+-------------------------------------------------------------------------+
-; Assembler Device Options: C:/HPSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.sof ;
-+----------------+--------------------------------------------------------+
-; Option         ; Setting                                                ;
-+----------------+--------------------------------------------------------+
-; Device         ; EP2C5Q208C8                                            ;
-; JTAG usercode  ; 0xFFFFFFFF                                             ;
-; Checksum       ; 0x0010C9FF                                             ;
-+----------------+--------------------------------------------------------+
++--------------------------------------------------------------------------+
+; Assembler Device Options: C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.sof ;
++----------------+---------------------------------------------------------+
+; Option         ; Setting                                                 ;
++----------------+---------------------------------------------------------+
+; Device         ; EP2C5Q208C8                                             ;
+; JTAG usercode  ; 0xFFFFFFFF                                              ;
+; Checksum       ; 0x0010B377                                              ;
++----------------+---------------------------------------------------------+
 
 
-+-------------------------------------------------------------------------+
-; Assembler Device Options: C:/HPSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pof ;
-+----------------+--------------------------------------------------------+
-; Option         ; Setting                                                ;
-+----------------+--------------------------------------------------------+
-; Device         ; EPCS4                                                  ;
-; JTAG usercode  ; 0x00000000                                             ;
-; Checksum       ; 0x07414666                                             ;
-+----------------+--------------------------------------------------------+
++--------------------------------------------------------------------------+
+; Assembler Device Options: C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pof ;
++----------------+---------------------------------------------------------+
+; Option         ; Setting                                                 ;
++----------------+---------------------------------------------------------+
+; Device         ; EPCS4                                                   ;
+; JTAG usercode  ; 0x00000000                                              ;
+; Checksum       ; 0x074118E4                                              ;
++----------------+---------------------------------------------------------+
 
 
 +--------------------+
@@ -115,12 +115,12 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Fri Aug 11 16:48:31 2006
+    Info: Processing started: Fri Aug 11 22:18:04 2006
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Processing ended: Fri Aug 11 16:48:34 2006
+    Info: Processing ended: Fri Aug 11 22:18:06 2006
     Info: Elapsed time: 00:00:03
 
 
