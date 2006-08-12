@@ -28,6 +28,9 @@ namespace PowerSDR
 		[DllImport("KD5TFD-VK6APH-Audio.dll")]
 		unsafe public static extern void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
 
+		[DllImport("KD5TFD-VK6APH-Audio.dll")]
+		unsafe public static extern int GetDiagData(int *a, int count);  // get diag data, count is how many slots are in array 
+
 
 
 //		public static bool CWptt() 
