@@ -21,7 +21,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 // 
-// CPLD code for Janus board to interface with an OZY board.
+// CPLD code for Janus board to interface with a Xylo board.
 // Sets I/O pins on ADC and DAC chips plus provides clocks.
 //
 // TLV320 is in slave mode and AK5394A is Master. Note that both devices are fed from 
@@ -31,6 +31,15 @@
 //
 // All unused pins on the CPLD have been set as tristate inputs in Quartus II
 // 
+// Bulit using Quartus II v6.0 SP1 build 202.
+
+
+// Change log:
+//
+//	12 August 2006 - increased reset to 3 seconds otherwise AK 5394A did not 
+//                   reset correctly when connected to OZY. VK6APH 
+//	12 August 2006 - forced speed to 48k for testing 
+//
 
 module Janus(
    input  CLK_24MHZ,
@@ -80,10 +89,21 @@ module Janus(
 
 ); 
 
+reg ad_reset;
+reg [26:0] ad_count;
+reg clock_by_2; 
+reg index;
+reg [15:0]tdata;
+reg [2:0]load;
+reg [3:0]TLV;
+reg [15:0] TLV_data;
+reg TLV_CLK;
+reg data; 
+reg [3:0] bit_count;
+reg TLV_nCS;
+
 
 // divide 24.576MHz clock by two for TLV320 and AK5394A
-reg clock_by_2; 
-  
 always @ ( posedge  CLK_24MHZ) begin 
 	clock_by_2 <= ~clock_by_2;
 	end 
@@ -96,17 +116,14 @@ always @ ( posedge  CLK_24MHZ) begin
 /////////////////////////////////////////////////////////////
 
 /*
-	 hold the A/D chip in reset until 2^25 CLK_24MHZ have passed - about 1.5 seconds. This
+	 hold the A/D chip in reset until 2^26 CLL_24MHZ have passed - about 3 seconds. This
 	 is to allow the AK4593A to calibrate correctly.
 */
 
-reg ad_reset;
-reg [25:0] ad_count;
-
 always @ (posedge CLK_24MHZ) begin
-	if(!ad_count[25])begin
+	if(!ad_count[26])begin
 	ad_reset <=0;
-	ad_count <= ad_count + 21'b1;
+	ad_count <= ad_count + 26'b1;
 	end
 	else ad_reset <= 1;
 end
@@ -132,10 +149,6 @@ end
 
 // Set up TLV320 data to send 
 
-reg index;
-reg [15:0]tdata;
-reg [2:0]load;
-
 always @ (posedge index)		// why can't this just be 'always @(index)' ?? 
 begin
 load <= load + 3'b1;			// select next data word to send
@@ -152,14 +165,6 @@ endcase
 end
 
 // State machine to send data to TLV320 via SPI interface
-
-reg [3:0]TLV;
-reg [15:0] TLV_data;
-reg TLV_CLK;
-reg data; 
-reg [3:0] bit_count;
-reg TLV_nCS;
-
 
 always @ (posedge CLK_24MHZ)
 begin
@@ -216,8 +221,8 @@ assign CLRCIN = YA6; 		// LRCLK for TLV320
 assign CLRCOUT = YA6;		// LRCLK for TLV320
 assign CMCLK = clock_by_2; 	// 24.576MHz/2
 assign CMODE = 1'b1;		// Set to 1 for SPI mode 
-assign DFS0 = YB3; 		    // set AK speed
-assign DFS1 = YC1; 			// set AK speed
+assign DFS0 = 0; //YB3; 		    // set AK speed
+assign DFS1 = 0; //YC1; 			// set AK speed
 assign EXP1 = YB3;			// AK speed test point
 assign EXP2 = YC1;			// AK speed test point
 assign EXP3 = 1'b0;
