@@ -53,6 +53,7 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block,
 	// 
 	// Output (xmit IQ, and LR audio) is always at 48 khz - downsampled by dropping samples 
 	//
+	HaveSync = 0; 
 	SampleRate = sample_rate; 
 	FPGAWriteBufSize = 512; 
 	FPGAReadBufp = NULL; 
@@ -340,6 +341,38 @@ KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmit) {   // bit xmitbit ==0, recv mod
 		XmitBit = 1; 
 	} 	
 }
+
+
+
+
+// diag data mapping 
+// 0-4 C0-C4 in 
+// 5-9 C0-C4 out 
+// 10 sync gain count 
+// 11 sync lost count 
+// 12 not ok to send count 
+// 13 have sync 
+KD5TFDVK6APHAUDIO_API int GetDiagData(int *a, int count) { 
+	int i; 	
+	for ( i = 0; i < 5; i++ ) {  /* do the ControlBytesIn */ 
+		if ( count == i ) return count; /* bail if we're out of space */ 
+		a[i] = ControlBytesIn[i]; 
+	} 
+	for ( i = 5; i < 10; i++ ) { 
+		if ( count == i ) return count; 
+		a[i] = ControlBytesOut[i-5]; 
+	} 
+	if ( count == 10 ) return 10; 
+	a[10] = SyncGainedCount; 
+	if ( count == 11 ) return 11; 
+	a[11] = LostSyncCount; 
+	if ( count == 12 ) return 12; 
+	a[12] = NotOKtoSendCount; 
+	if ( count == 13 ) return 13; 
+	a[13] = HaveSync; 
+	return 14; 	
+}
+
 
 
 

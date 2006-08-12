@@ -1589,6 +1589,7 @@ namespace PowerSDR
 
 		public static bool InitUnsupportedCard(int mixerID)
 		{
+			System.Console.WriteLine("init unsup called"); 
 			int mixer;
 			int retval = -1;
 			retval = mixerOpen(out mixer, mixerID, 0, 0, 0);

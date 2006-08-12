@@ -38,6 +38,7 @@ extern KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_blo
 extern KD5TFDVK6APHAUDIO_API void StopAudio(void); 
 extern KD5TFDVK6APHAUDIO_API int GetDotDashBits(void); 
 extern KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
+extern KD5TFDVK6APHAUDIO_API int GetDiagData(int *a, int count); 
 
 #if 0 
 extern KD5TFDVK6APHAUDIO_API int StartAudio_4port(int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata));
@@ -130,6 +131,29 @@ extern unsigned char SampleRateIn2Bits; // value of sample rate to send to fpga
 extern void *MicResamplerP; // Mic resampler filter 
 extern int SampleBits;  // how many bits in a sample 
 extern float IQConversionDivisor;  // divisor to use converting sample ints to floats 
+
+extern unsigned char ControlBytesIn[5];
+extern unsigned char ControlBytesOut[5]; 
+extern unsigned int LostSyncCount; 
+extern unsigned int SyncGainedCount; 
+extern unsigned int NotOKtoSendCount;
+extern int HaveSync; 
+
+#if 0 
+#define DIAG_C0_IN (0) 
+#define DIAG_C1_IN (1) 
+#define DIAG_C2_IN (2) 
+#define DIAG_C3_IN (3) 
+#define DIAG_C4_IN (4) 
+#define DIAG_C0_OUT (5) 
+#define DIAG_C1_OUT (6) 
+#define DIAG_C2_OUT (7) 
+#define DIAG_C3_OUT (8) 
+#define DIAG_C4_OUT (9) 
+
+#define DIAG_DATA_COUNT (10) 
+extern int DiagData[DIAG_DATA_COUNT]; 
+#endif 
 
 // buffers to handle variable size buffers to/from FPGA 
 extern int FPGAReadBufSize; 

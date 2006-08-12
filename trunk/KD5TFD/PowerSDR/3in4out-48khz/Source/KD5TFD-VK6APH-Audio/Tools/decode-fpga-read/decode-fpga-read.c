@@ -53,6 +53,36 @@ int getInt24FromFrame(unsigned char *framep, int ofs) {
 
 float IQConversionDivisor; 
 
+
+struct ControlFrame { 
+	int frame_num; 
+	unsigned char c0; 
+	unsigned char c1; 
+	unsigned char c2; 
+	unsigned char c3; 
+	unsigned char c4; 
+	unsigned char pad; /* even align things */ 
+}; 
+
+
+#define MAX_CONTROL_FRAMES (1000) 
+struct ControlFrame ControlFrames[1000]; 
+int NumControlFrames = 0; 
+
+
+void addControlFrame(unsigned char *framep, int fnum) { 
+	if ( NumControlFrames >= MAX_CONTROL_FRAMES ) return; 
+	
+	ControlFrames[NumControlFrames].frame_num = fnum; 
+	ControlFrames[NumControlFrames].c0 = framep[3];
+	ControlFrames[NumControlFrames].c1 = framep[4];
+	ControlFrames[NumControlFrames].c2 = framep[5];
+	ControlFrames[NumControlFrames].c3 = framep[6];
+	ControlFrames[NumControlFrames].c4 = framep[7];
+	++NumControlFrames; 
+	return; 
+} 
+
 void dumpFrame(unsigned char *framep, int frame_num) {
     short i, q, mic;
 	float i_f, q_f; 
@@ -64,6 +94,9 @@ void dumpFrame(unsigned char *framep, int frame_num) {
     if ( sync != 0x7f7f7f ) {
         printf("bad sync\n");
     }
+	else { 
+		addControlFrame(framep, frame_num); 
+	} 
     while ( ofs < FRAME_SIZE ) {
         i = getInt24FromFrame(framep, ofs);
         q = getInt24FromFrame(framep, ofs+3);
@@ -91,6 +124,7 @@ int main(int argc, char *argv[]) {
 	int missing_sync_count = 0; 
 	int good_frame_count = 0; 
 	int frame_num = 0; 
+	int i; 
 	IQConversionDivisor = (float)32767.0;
 
     if ( argc != 2 ) {
@@ -137,6 +171,15 @@ int main(int argc, char *argv[]) {
 	} 
 
 	printf("\n\ngood frame count: %d\nmissing sync count: %d\n", good_frame_count, missing_sync_count); 
+
+	printf("\nControl Data\n Frame   c0   c1   c2   c3   c4\n"); 
+	for ( i = 0; i <  NumControlFrames; i++ ) { 
+		printf("%6d 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x\n", ControlFrames[i].frame_num, ControlFrames[i].c0,  ControlFrames[i].c1, 
+			                                                ControlFrames[i].c2,  ControlFrames[i].c3,  ControlFrames[i].c4); 
+
+	} 
+
+
 
     writeMicDataBuf();
     if ( MicDataFile != NULL ) fclose(MicDataFile);

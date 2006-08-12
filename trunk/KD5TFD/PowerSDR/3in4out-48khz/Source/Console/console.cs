@@ -677,7 +677,12 @@ namespace PowerSDR
 		private System.Windows.Forms.CheckBoxTS chkDDSLock;
 		public System.Windows.Forms.Label label_DttSP_osc;
 		public System.Windows.Forms.Label label_DDStune;
-		public System.Windows.Forms.Label wjtDbg;
+		private System.Windows.Forms.Label lbl_C04_out;
+		private System.Windows.Forms.Label lbl_C04_in;
+		private System.Windows.Forms.Label lbl_sync_lost;
+		private System.Windows.Forms.Label lbl_sync_gain;
+		private System.Windows.Forms.Label lbl_not_ok_to_send;
+		private System.Windows.Forms.Label lbl_sync;
 
 		private System.ComponentModel.IContainer components;
 
@@ -1068,8 +1073,13 @@ namespace PowerSDR
 			this.chkDDSLock = new System.Windows.Forms.CheckBoxTS();
 			this.label_DttSP_osc = new System.Windows.Forms.Label();
 			this.label_DDStune = new System.Windows.Forms.Label();
-			this.wjtDbg = new System.Windows.Forms.Label();
+			this.lbl_C04_out = new System.Windows.Forms.Label();
 			this.timer_clock = new System.Windows.Forms.Timer(this.components);
+			this.lbl_C04_in = new System.Windows.Forms.Label();
+			this.lbl_sync_lost = new System.Windows.Forms.Label();
+			this.lbl_sync_gain = new System.Windows.Forms.Label();
+			this.lbl_not_ok_to_send = new System.Windows.Forms.Label();
+			this.lbl_sync = new System.Windows.Forms.Label();
 			this.grpVFOA.SuspendLayout();
 			this.grpVFOB.SuspendLayout();
 			this.grpDisplay.SuspendLayout();
@@ -5660,33 +5670,148 @@ namespace PowerSDR
 			this.toolTip1.SetToolTip(this.label_DDStune, resources.GetString("label_DDStune.ToolTip"));
 			this.label_DDStune.Visible = ((bool)(resources.GetObject("label_DDStune.Visible")));
 			// 
-			// wjtDbg
+			// lbl_C04_out
 			// 
-			this.wjtDbg.AccessibleDescription = resources.GetString("wjtDbg.AccessibleDescription");
-			this.wjtDbg.AccessibleName = resources.GetString("wjtDbg.AccessibleName");
-			this.wjtDbg.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("wjtDbg.Anchor")));
-			this.wjtDbg.AutoSize = ((bool)(resources.GetObject("wjtDbg.AutoSize")));
-			this.wjtDbg.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("wjtDbg.Dock")));
-			this.wjtDbg.Enabled = ((bool)(resources.GetObject("wjtDbg.Enabled")));
-			this.wjtDbg.Font = ((System.Drawing.Font)(resources.GetObject("wjtDbg.Font")));
-			this.wjtDbg.Image = ((System.Drawing.Image)(resources.GetObject("wjtDbg.Image")));
-			this.wjtDbg.ImageAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("wjtDbg.ImageAlign")));
-			this.wjtDbg.ImageIndex = ((int)(resources.GetObject("wjtDbg.ImageIndex")));
-			this.wjtDbg.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("wjtDbg.ImeMode")));
-			this.wjtDbg.Location = ((System.Drawing.Point)(resources.GetObject("wjtDbg.Location")));
-			this.wjtDbg.Name = "wjtDbg";
-			this.wjtDbg.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("wjtDbg.RightToLeft")));
-			this.wjtDbg.Size = ((System.Drawing.Size)(resources.GetObject("wjtDbg.Size")));
-			this.wjtDbg.TabIndex = ((int)(resources.GetObject("wjtDbg.TabIndex")));
-			this.wjtDbg.Text = resources.GetString("wjtDbg.Text");
-			this.wjtDbg.TextAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("wjtDbg.TextAlign")));
-			this.toolTip1.SetToolTip(this.wjtDbg, resources.GetString("wjtDbg.ToolTip"));
-			this.wjtDbg.Visible = ((bool)(resources.GetObject("wjtDbg.Visible")));
+			this.lbl_C04_out.AccessibleDescription = resources.GetString("lbl_C04_out.AccessibleDescription");
+			this.lbl_C04_out.AccessibleName = resources.GetString("lbl_C04_out.AccessibleName");
+			this.lbl_C04_out.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("lbl_C04_out.Anchor")));
+			this.lbl_C04_out.AutoSize = ((bool)(resources.GetObject("lbl_C04_out.AutoSize")));
+			this.lbl_C04_out.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("lbl_C04_out.Dock")));
+			this.lbl_C04_out.Enabled = ((bool)(resources.GetObject("lbl_C04_out.Enabled")));
+			this.lbl_C04_out.Font = ((System.Drawing.Font)(resources.GetObject("lbl_C04_out.Font")));
+			this.lbl_C04_out.Image = ((System.Drawing.Image)(resources.GetObject("lbl_C04_out.Image")));
+			this.lbl_C04_out.ImageAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_C04_out.ImageAlign")));
+			this.lbl_C04_out.ImageIndex = ((int)(resources.GetObject("lbl_C04_out.ImageIndex")));
+			this.lbl_C04_out.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("lbl_C04_out.ImeMode")));
+			this.lbl_C04_out.Location = ((System.Drawing.Point)(resources.GetObject("lbl_C04_out.Location")));
+			this.lbl_C04_out.Name = "lbl_C04_out";
+			this.lbl_C04_out.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("lbl_C04_out.RightToLeft")));
+			this.lbl_C04_out.Size = ((System.Drawing.Size)(resources.GetObject("lbl_C04_out.Size")));
+			this.lbl_C04_out.TabIndex = ((int)(resources.GetObject("lbl_C04_out.TabIndex")));
+			this.lbl_C04_out.Text = resources.GetString("lbl_C04_out.Text");
+			this.lbl_C04_out.TextAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_C04_out.TextAlign")));
+			this.toolTip1.SetToolTip(this.lbl_C04_out, resources.GetString("lbl_C04_out.ToolTip"));
+			this.lbl_C04_out.Visible = ((bool)(resources.GetObject("lbl_C04_out.Visible")));
 			// 
 			// timer_clock
 			// 
 			this.timer_clock.Enabled = true;
 			this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
+			// 
+			// lbl_C04_in
+			// 
+			this.lbl_C04_in.AccessibleDescription = resources.GetString("lbl_C04_in.AccessibleDescription");
+			this.lbl_C04_in.AccessibleName = resources.GetString("lbl_C04_in.AccessibleName");
+			this.lbl_C04_in.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("lbl_C04_in.Anchor")));
+			this.lbl_C04_in.AutoSize = ((bool)(resources.GetObject("lbl_C04_in.AutoSize")));
+			this.lbl_C04_in.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("lbl_C04_in.Dock")));
+			this.lbl_C04_in.Enabled = ((bool)(resources.GetObject("lbl_C04_in.Enabled")));
+			this.lbl_C04_in.Font = ((System.Drawing.Font)(resources.GetObject("lbl_C04_in.Font")));
+			this.lbl_C04_in.Image = ((System.Drawing.Image)(resources.GetObject("lbl_C04_in.Image")));
+			this.lbl_C04_in.ImageAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_C04_in.ImageAlign")));
+			this.lbl_C04_in.ImageIndex = ((int)(resources.GetObject("lbl_C04_in.ImageIndex")));
+			this.lbl_C04_in.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("lbl_C04_in.ImeMode")));
+			this.lbl_C04_in.Location = ((System.Drawing.Point)(resources.GetObject("lbl_C04_in.Location")));
+			this.lbl_C04_in.Name = "lbl_C04_in";
+			this.lbl_C04_in.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("lbl_C04_in.RightToLeft")));
+			this.lbl_C04_in.Size = ((System.Drawing.Size)(resources.GetObject("lbl_C04_in.Size")));
+			this.lbl_C04_in.TabIndex = ((int)(resources.GetObject("lbl_C04_in.TabIndex")));
+			this.lbl_C04_in.Text = resources.GetString("lbl_C04_in.Text");
+			this.lbl_C04_in.TextAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_C04_in.TextAlign")));
+			this.toolTip1.SetToolTip(this.lbl_C04_in, resources.GetString("lbl_C04_in.ToolTip"));
+			this.lbl_C04_in.Visible = ((bool)(resources.GetObject("lbl_C04_in.Visible")));
+			// 
+			// lbl_sync_lost
+			// 
+			this.lbl_sync_lost.AccessibleDescription = resources.GetString("lbl_sync_lost.AccessibleDescription");
+			this.lbl_sync_lost.AccessibleName = resources.GetString("lbl_sync_lost.AccessibleName");
+			this.lbl_sync_lost.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("lbl_sync_lost.Anchor")));
+			this.lbl_sync_lost.AutoSize = ((bool)(resources.GetObject("lbl_sync_lost.AutoSize")));
+			this.lbl_sync_lost.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("lbl_sync_lost.Dock")));
+			this.lbl_sync_lost.Enabled = ((bool)(resources.GetObject("lbl_sync_lost.Enabled")));
+			this.lbl_sync_lost.Font = ((System.Drawing.Font)(resources.GetObject("lbl_sync_lost.Font")));
+			this.lbl_sync_lost.Image = ((System.Drawing.Image)(resources.GetObject("lbl_sync_lost.Image")));
+			this.lbl_sync_lost.ImageAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_sync_lost.ImageAlign")));
+			this.lbl_sync_lost.ImageIndex = ((int)(resources.GetObject("lbl_sync_lost.ImageIndex")));
+			this.lbl_sync_lost.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("lbl_sync_lost.ImeMode")));
+			this.lbl_sync_lost.Location = ((System.Drawing.Point)(resources.GetObject("lbl_sync_lost.Location")));
+			this.lbl_sync_lost.Name = "lbl_sync_lost";
+			this.lbl_sync_lost.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("lbl_sync_lost.RightToLeft")));
+			this.lbl_sync_lost.Size = ((System.Drawing.Size)(resources.GetObject("lbl_sync_lost.Size")));
+			this.lbl_sync_lost.TabIndex = ((int)(resources.GetObject("lbl_sync_lost.TabIndex")));
+			this.lbl_sync_lost.Text = resources.GetString("lbl_sync_lost.Text");
+			this.lbl_sync_lost.TextAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_sync_lost.TextAlign")));
+			this.toolTip1.SetToolTip(this.lbl_sync_lost, resources.GetString("lbl_sync_lost.ToolTip"));
+			this.lbl_sync_lost.Visible = ((bool)(resources.GetObject("lbl_sync_lost.Visible")));
+			// 
+			// lbl_sync_gain
+			// 
+			this.lbl_sync_gain.AccessibleDescription = resources.GetString("lbl_sync_gain.AccessibleDescription");
+			this.lbl_sync_gain.AccessibleName = resources.GetString("lbl_sync_gain.AccessibleName");
+			this.lbl_sync_gain.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("lbl_sync_gain.Anchor")));
+			this.lbl_sync_gain.AutoSize = ((bool)(resources.GetObject("lbl_sync_gain.AutoSize")));
+			this.lbl_sync_gain.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("lbl_sync_gain.Dock")));
+			this.lbl_sync_gain.Enabled = ((bool)(resources.GetObject("lbl_sync_gain.Enabled")));
+			this.lbl_sync_gain.Font = ((System.Drawing.Font)(resources.GetObject("lbl_sync_gain.Font")));
+			this.lbl_sync_gain.Image = ((System.Drawing.Image)(resources.GetObject("lbl_sync_gain.Image")));
+			this.lbl_sync_gain.ImageAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_sync_gain.ImageAlign")));
+			this.lbl_sync_gain.ImageIndex = ((int)(resources.GetObject("lbl_sync_gain.ImageIndex")));
+			this.lbl_sync_gain.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("lbl_sync_gain.ImeMode")));
+			this.lbl_sync_gain.Location = ((System.Drawing.Point)(resources.GetObject("lbl_sync_gain.Location")));
+			this.lbl_sync_gain.Name = "lbl_sync_gain";
+			this.lbl_sync_gain.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("lbl_sync_gain.RightToLeft")));
+			this.lbl_sync_gain.Size = ((System.Drawing.Size)(resources.GetObject("lbl_sync_gain.Size")));
+			this.lbl_sync_gain.TabIndex = ((int)(resources.GetObject("lbl_sync_gain.TabIndex")));
+			this.lbl_sync_gain.Text = resources.GetString("lbl_sync_gain.Text");
+			this.lbl_sync_gain.TextAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_sync_gain.TextAlign")));
+			this.toolTip1.SetToolTip(this.lbl_sync_gain, resources.GetString("lbl_sync_gain.ToolTip"));
+			this.lbl_sync_gain.Visible = ((bool)(resources.GetObject("lbl_sync_gain.Visible")));
+			// 
+			// lbl_not_ok_to_send
+			// 
+			this.lbl_not_ok_to_send.AccessibleDescription = resources.GetString("lbl_not_ok_to_send.AccessibleDescription");
+			this.lbl_not_ok_to_send.AccessibleName = resources.GetString("lbl_not_ok_to_send.AccessibleName");
+			this.lbl_not_ok_to_send.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("lbl_not_ok_to_send.Anchor")));
+			this.lbl_not_ok_to_send.AutoSize = ((bool)(resources.GetObject("lbl_not_ok_to_send.AutoSize")));
+			this.lbl_not_ok_to_send.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("lbl_not_ok_to_send.Dock")));
+			this.lbl_not_ok_to_send.Enabled = ((bool)(resources.GetObject("lbl_not_ok_to_send.Enabled")));
+			this.lbl_not_ok_to_send.Font = ((System.Drawing.Font)(resources.GetObject("lbl_not_ok_to_send.Font")));
+			this.lbl_not_ok_to_send.Image = ((System.Drawing.Image)(resources.GetObject("lbl_not_ok_to_send.Image")));
+			this.lbl_not_ok_to_send.ImageAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_not_ok_to_send.ImageAlign")));
+			this.lbl_not_ok_to_send.ImageIndex = ((int)(resources.GetObject("lbl_not_ok_to_send.ImageIndex")));
+			this.lbl_not_ok_to_send.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("lbl_not_ok_to_send.ImeMode")));
+			this.lbl_not_ok_to_send.Location = ((System.Drawing.Point)(resources.GetObject("lbl_not_ok_to_send.Location")));
+			this.lbl_not_ok_to_send.Name = "lbl_not_ok_to_send";
+			this.lbl_not_ok_to_send.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("lbl_not_ok_to_send.RightToLeft")));
+			this.lbl_not_ok_to_send.Size = ((System.Drawing.Size)(resources.GetObject("lbl_not_ok_to_send.Size")));
+			this.lbl_not_ok_to_send.TabIndex = ((int)(resources.GetObject("lbl_not_ok_to_send.TabIndex")));
+			this.lbl_not_ok_to_send.Text = resources.GetString("lbl_not_ok_to_send.Text");
+			this.lbl_not_ok_to_send.TextAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_not_ok_to_send.TextAlign")));
+			this.toolTip1.SetToolTip(this.lbl_not_ok_to_send, resources.GetString("lbl_not_ok_to_send.ToolTip"));
+			this.lbl_not_ok_to_send.Visible = ((bool)(resources.GetObject("lbl_not_ok_to_send.Visible")));
+			// 
+			// lbl_sync
+			// 
+			this.lbl_sync.AccessibleDescription = resources.GetString("lbl_sync.AccessibleDescription");
+			this.lbl_sync.AccessibleName = resources.GetString("lbl_sync.AccessibleName");
+			this.lbl_sync.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("lbl_sync.Anchor")));
+			this.lbl_sync.AutoSize = ((bool)(resources.GetObject("lbl_sync.AutoSize")));
+			this.lbl_sync.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("lbl_sync.Dock")));
+			this.lbl_sync.Enabled = ((bool)(resources.GetObject("lbl_sync.Enabled")));
+			this.lbl_sync.Font = ((System.Drawing.Font)(resources.GetObject("lbl_sync.Font")));
+			this.lbl_sync.Image = ((System.Drawing.Image)(resources.GetObject("lbl_sync.Image")));
+			this.lbl_sync.ImageAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_sync.ImageAlign")));
+			this.lbl_sync.ImageIndex = ((int)(resources.GetObject("lbl_sync.ImageIndex")));
+			this.lbl_sync.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("lbl_sync.ImeMode")));
+			this.lbl_sync.Location = ((System.Drawing.Point)(resources.GetObject("lbl_sync.Location")));
+			this.lbl_sync.Name = "lbl_sync";
+			this.lbl_sync.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("lbl_sync.RightToLeft")));
+			this.lbl_sync.Size = ((System.Drawing.Size)(resources.GetObject("lbl_sync.Size")));
+			this.lbl_sync.TabIndex = ((int)(resources.GetObject("lbl_sync.TabIndex")));
+			this.lbl_sync.Text = resources.GetString("lbl_sync.Text");
+			this.lbl_sync.TextAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_sync.TextAlign")));
+			this.toolTip1.SetToolTip(this.lbl_sync, resources.GetString("lbl_sync.ToolTip"));
+			this.lbl_sync.Visible = ((bool)(resources.GetObject("lbl_sync.Visible")));
 			// 
 			// Console
 			// 
@@ -5699,7 +5824,12 @@ namespace PowerSDR
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.ClientSize = ((System.Drawing.Size)(resources.GetObject("$this.ClientSize")));
-			this.Controls.Add(this.wjtDbg);
+			this.Controls.Add(this.lbl_sync);
+			this.Controls.Add(this.lbl_not_ok_to_send);
+			this.Controls.Add(this.lbl_sync_gain);
+			this.Controls.Add(this.lbl_sync_lost);
+			this.Controls.Add(this.lbl_C04_in);
+			this.Controls.Add(this.lbl_C04_out);
 			this.Controls.Add(this.label_DDStune);
 			this.Controls.Add(this.label_DttSP_osc);
 			this.Controls.Add(this.chkDDSLock);
@@ -12765,6 +12895,7 @@ namespace PowerSDR
 		private void RunDisplay()
 		{
 //			display_running = true;
+
 			while(chkPower.Checked && Display.CurrentDisplayMode != DisplayMode.OFF)
 			{
 				if(!Display.DataReady)
@@ -12815,6 +12946,8 @@ namespace PowerSDR
 //			multimeter_running = true;
 			while(chkPower.Checked)
 			{
+				updateDiagData(); // kd5tfd hack
+
 				string output = "";
 				if(!meter_data_ready)
 				{
@@ -13327,9 +13460,125 @@ namespace PowerSDR
 			}
 		}
 
+
+		private int[] DiagData = new int[14]; 
+
+		// diag data mapping 
+		// 0-4 C0-C4 in 
+		// 5-9 C0-C4 out 
+		// 10 sync gain count 
+		// 11 sync lost count 
+		// 12 not ok to send count 
+		// 13 have sync 
+		// kd5tfd hack 
+		private void updateDiagData() 
+		{ 
+
+			int rc; 			
+			byte b; 
+
+			fixed(int* p = &(DiagData[0]))				
+			rc = TFDAPHaudio.GetDiagData(p, 14); 
+
+			String ctl_in; 
+
+			if ( rc >= 5 ) 
+			{ 
+				ctl_in = "C0-4 (in): "; 
+				for ( int i = 0; i < 5; i++ ) 
+				{ 
+					b = (byte)(DiagData[i] & 0xff);
+					ctl_in = ctl_in + b.ToString("x2") + " "; 
+				} 								
+			} 
+			else 
+			{
+				ctl_in = "C0-4 (in): na";
+			}
+			lbl_C04_in.Text = ctl_in; 
+
+			String ctl_out; 
+
+			if ( rc >= 10 ) 
+			{ 
+				ctl_out = "C0-4 (out): "; 
+				for ( int i = 5; i < 10; i++ ) 
+				{ 
+					b = (byte)(DiagData[i] & 0xff);
+					ctl_out = ctl_out + b.ToString("x2") + " "; 
+				} 								
+			} 
+			else 
+			{ 
+				ctl_out = "C0-4 (out): na";
+			} 
+			lbl_C04_out.Text = ctl_out; 
+
+			String sync_gain; 
+			if ( rc >= 11 ) 
+			{ 
+				sync_gain = "SG: " + DiagData[10]; 
+			}
+			else 
+			{ 
+				sync_gain = "SG: na"; 
+			} 
+			lbl_sync_gain.Text = sync_gain; 
+
+			String sync_lost; 
+			if ( rc >= 12 ) 
+			{ 
+				sync_lost = "SL: " + DiagData[11]; 
+			} 
+			else 
+			{ 
+				sync_lost = "SL: na"; 
+			} 
+			lbl_sync_lost.Text = sync_lost; 
+
+			String not_ok_to_send; 
+			if ( rc >= 13 ) 
+			{ 
+				not_ok_to_send = "NOKS: " + DiagData[12]; 
+			}
+			else 
+			{
+				not_ok_to_send = "NOKS: na"; 
+			}
+			lbl_not_ok_to_send.Text = not_ok_to_send; 
+
+			String sync_text; 
+			if ( rc >= 14 )  
+			{ 
+				if ( DiagData[13] == 0 ) 
+				{ 
+					sync_text = "NoSync"; 
+				} 
+				else 
+				{ 
+					sync_text = "Sync"; 
+				} 				
+			}
+			else 
+			{ 
+				sync_text = "Sync: na"; 
+			} 
+			lbl_sync.Text = sync_text; 
+			return; 
+
+			
+
+
+
+			// fixed(float* ptr = &Display.new_display_data[0])
+			//	DttSP.GetSpectrum(ptr);		// get the spectrum values
+
+		} 
+
 		private void timer_cpu_meter_Tick(object sender, System.EventArgs e)
 		{
 			lblCPUMeter.Text = "CPU %: " + CpuUsage.ToString("f1");
+			// updateDiagData();  // kd5tfd hack 
 		}
 
 		private void timer_peak_text_Tick(object sender, System.EventArgs e)
@@ -18209,7 +18458,7 @@ namespace PowerSDR
 			int lo_bucket = (int)(((double)lo_cut_hz/hz_per_bucket)) + zero_hz_bucket;
 			int hi_bucket = (int)(((double)hi_cut_hz/hz_per_bucket)) + zero_hz_bucket;
 
-			//~~~~ 
+			
 			float max_val = float.MinValue;
 			int max_bucket = 0;
 

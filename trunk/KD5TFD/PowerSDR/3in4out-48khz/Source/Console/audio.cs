@@ -4143,7 +4143,7 @@ namespace PowerSDR
 				a.Add(info.name);
 			}
 			//xylowolf -- add in host for xylowolson 
-			a.Add("VK6APH/KD5TFD Wolfson FPGA"); 
+			a.Add("Janus/Ozy"); 
 			return a;
 		}
 
@@ -4152,7 +4152,7 @@ namespace PowerSDR
 			ArrayList a = new ArrayList();
 			if ( hostIndex >= PA19.PA_GetHostApiCount() ) //xylowolf 
 			{ 
-				a.Add("Wolfson"); 
+				a.Add("AK5394A"); 
 				return a; 
 			} 
 			PA19.PaHostApiInfo hostInfo = PA19.PA_GetHostApiInfo(hostIndex);

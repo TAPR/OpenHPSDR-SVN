@@ -97,8 +97,8 @@ int SaveReadsIdx = 0; // idx of next buf to write to
 // #define TEST_WRITE (1) 
 
 int complete_blocks; 
-int lost_sync_count; 
-int sync_gain_count; 
+// int LostSyncCount; 
+// int sync_gain_count; 
 
 
 // #define INCL_DUMP (1) 
@@ -329,12 +329,12 @@ int PerfDataIdx = 0;
 
 
 
-unsigned char ControlBytes[5] = { 0,0,0,0,0 }; 
+
 
 unsigned short RxFifoAvail = 4096;  // make it large to start  
 unsigned char RxFramePlaying = 0; 
 
-unsigned int NotOKtoSendCount = 0; 
+// unsigned int NotOKtoSendCount = 0; 
 unsigned int SendOpprotunity = 0; 
 
 int IsOkToSendDataToFPGA(void) { 
@@ -447,10 +447,12 @@ void IOThreadMainLoop(void) {
 			numread = OzyBulkRead(OzyH, 0x86, FPGAReadBufp, FPGAReadBufSize); 
 			if ( numread <= 0 ) { 
 				int trc; 
+#if 0 
 				char tbuf[512]; 
 				fprintf(stderr, "OzyBulkRead failed rc=%d\n", numread);  fflush(stderr); 
 				trc = OzyBulkWrite(OzyH, 0x02, tbuf, sizeof(tbuf)); 
-				fprintf(stderr, "OzyBulkWrite trc=%d\n", trc);  fflush(stderr);		
+#endif 
+				fprintf(stdout, "OzyBulkWrite trc=%d\n", trc);  fflush(stderr);		
 			} 
 #endif 
 			// printf("iot: read %d bytes\n", numread); fflush(stdout); 
@@ -497,7 +499,8 @@ void IOThreadMainLoop(void) {
 							// in_stream_sync_count = 2; // we've consumed 3 bytes already, it will bump at bottom of loop to make 3 
 							state = STATE_CONTROL0; 
 							samples_this_sync = 0; 
-							++sync_gain_count; 
+							++SyncGainedCount; 
+							HaveSync = 1; 
 							// printf("sync gained: bufnum: %d i: %d\n", buf_num, i); 
 							// printf("\nSG"); 
 						} 
@@ -505,14 +508,14 @@ void IOThreadMainLoop(void) {
 
 					case STATE_CONTROL0: 
 						// printf(" C0"); 
-						ControlBytes[0] = FPGAReadBufp[i]; 						
+						ControlBytesIn[0] = FPGAReadBufp[i]; 												
 						DotDashBits = FPGAReadBufp[i] & 0x3; 						
 													
 
 #if 0 
 						++dbggate; 
 						if ( dbggate == 1000 ) { 
-							printf("cb0: %d ddb: %d\n", ControlBytes[0], DotDashBits); fflush(stdout);
+							printf("cb0: %d ddb: %d\n", ControlBytesIn[0], DotDashBits); fflush(stdout);
 							dbggate = 0; 
 						} 
 #endif 
@@ -520,25 +523,25 @@ void IOThreadMainLoop(void) {
 						break; 
 					case STATE_CONTROL1: 
 						// printf(" C1");
-						ControlBytes[1] = FPGAReadBufp[i]; 
+						ControlBytesIn[1] = FPGAReadBufp[i]; 
 						TxOverrun = FPGAReadBufp[i]; 
 						state = STATE_CONTROL2; // look for 3rd control byte 
 						break; 
 					case STATE_CONTROL2: 
 						// printf(" C2");
-						ControlBytes[2] = FPGAReadBufp[i];
+						ControlBytesIn[2] = FPGAReadBufp[i];
 						RxOverrun = FPGAReadBufp[i]; 
 						state = STATE_CONTROL3; // look for 4th control byte 
 						break; 
 					case STATE_CONTROL3:  // 
 						// printf(" C3");
-						ControlBytes[3] = FPGAReadBufp[i]; 
+						ControlBytesIn[3] = FPGAReadBufp[i]; 
 						RxFifoAvail = ((unsigned char)FPGAReadBufp[i]) << 4; 
 						state = STATE_CONTROL4;  // look for 5th and last control byte 
 						break; 
 					case STATE_CONTROL4: 
 						// printf(" C4");
-						ControlBytes[4] = FPGAReadBufp[i]; 
+						ControlBytesIn[4] = FPGAReadBufp[i]; 
 						RxFramePlaying = (unsigned char)FPGAReadBufp[i]; 
 						state = STATE_SAMPLE_HI; 
 						sample_is_left = 1; 
@@ -625,10 +628,23 @@ void IOThreadMainLoop(void) {
 
 					case STATE_SYNC_HI: 
 						// printf("\nSH");
+#if 0 
+						++dbggate; 
+
+/// dbg					
+						if ( dbggate >= 1024 ) {  // force sync loss 
+							FPGAReadBufp[i] = 0xff; 						
+						}
+						if ( dbggate >= 1100 ) {
+							dbggate = 0; 
+						}
+///
+#endif 
 						samples_this_sync = 0; 
 						if ( (unsigned char)FPGAReadBufp[i] != 0x7f ) { // argh did not find sync 
-							++lost_sync_count; 
+							++LostSyncCount; 
 							state = STATE_NOSYNC; 
+							HaveSync = 0; 
 						} 
 						else { 
 							state = STATE_SYNC_MID; 
@@ -637,8 +653,9 @@ void IOThreadMainLoop(void) {
 					case STATE_SYNC_MID: 
 						// printf(" SM");
 						if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync 
-							++lost_sync_count; 
+							++LostSyncCount; 
 							state = STATE_NOSYNC; 
+							HaveSync = 0; 
 						} 
 						else { 
 							state = STATE_SYNC_LO; 
@@ -647,8 +664,9 @@ void IOThreadMainLoop(void) {
 					case STATE_SYNC_LO: 
 						// printf(" SL");
 						if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync 
-							++lost_sync_count; 
+							++LostSyncCount; 
 							state = STATE_NOSYNC; 
+							HaveSync = 0; 
 						} 
 						else { 
 							state = STATE_CONTROL0; 
@@ -728,7 +746,7 @@ void IOThreadMainLoop(void) {
 
 						case OUT_STATE_CONTROL0:
 							out_state = OUT_STATE_CONTROL1;
-							// write_buf[writebufpos] = ControlBytes[0]; 
+							// write_buf[writebufpos] = ControlBytesIn[0]; 
 #if 0 
 							if ( XmitBit != last_xmit_bit ) { 
 								last_xmit_bit = XmitBit; 
@@ -739,13 +757,16 @@ void IOThreadMainLoop(void) {
 
 							FPGAWriteBufp[writebufpos] = (unsigned char)XmitBit; 
 							FPGAWriteBufp[writebufpos] &= 1; 
+							ControlBytesOut[0] = FPGAWriteBufp[writebufpos]; 
 
 							break; 
 
 						case OUT_STATE_CONTROL1: 
 							out_state = OUT_STATE_CONTROL2;							
 							// send sample rate in C1 low 2 bits 
-							FPGAWriteBufp[writebufpos] = ((ControlBytes[1] & 0xfc) | (SampleRateIn2Bits & 3));
+							FPGAWriteBufp[writebufpos] = ((ControlBytesIn[1] & 0xfc) | (SampleRateIn2Bits & 3));
+							ControlBytesOut[1] = FPGAWriteBufp[writebufpos]; 
+
 							
 #if 0 
 							++dbggate; 
@@ -758,18 +779,21 @@ void IOThreadMainLoop(void) {
 
 						case OUT_STATE_CONTROL2: 
 							out_state = OUT_STATE_CONTROL3;
-							FPGAWriteBufp[writebufpos] = ControlBytes[2]; 
+							FPGAWriteBufp[writebufpos] = ControlBytesIn[2]; 
+							ControlBytesOut[2] = FPGAWriteBufp[writebufpos]; 
 							break; 
 
 						case OUT_STATE_CONTROL3: 
 							out_state = OUT_STATE_CONTROL4;
-							FPGAWriteBufp[writebufpos] = ControlBytes[3]; 
+							FPGAWriteBufp[writebufpos] = ControlBytesIn[3]; 
+							ControlBytesOut[3] = FPGAWriteBufp[writebufpos]; 
 							break; 
 
 						case OUT_STATE_CONTROL4: 
 							out_state = OUT_STATE_LEFT_HI_NEEDED; 
-							// write_buf[writebufpos] = ControlBytes[4]; 
+							// write_buf[writebufpos] = ControlBytesIn[4]; 
 							FPGAWriteBufp[writebufpos] = out_frame_idx; 
+							ControlBytesOut[4] = FPGAWriteBufp[writebufpos]; 
 							++out_frame_idx; 
 							break; 
 
@@ -921,7 +945,7 @@ void IOThreadMainLoop(void) {
 			pdp->RxOverrun = RxOverrun;
 			pdp->TxOverrun = TxOverrun; 
 			pdp->frame_sending = out_frame_idx; 
-			pdp->sync_lost = lost_sync_count; 
+			pdp->sync_lost = LostSyncCount; 
 		} 
 
 
@@ -968,8 +992,8 @@ void *IOThreadMain(void *argp) {
 		SetThreadPriority(GetCurrentThread(), /* THREAD_PRIORITY_ABOVE_NORMAL */  THREAD_PRIORITY_TIME_CRITICAL /* THREAD_PRIORITY_HIGHEST  */ ); 
 	    sem_post(&IOThreadInitSem); // tell launching thread we're rockin and rollin 				
 		complete_blocks = 0; 
-		lost_sync_count = 0; 
-		sync_gain_count = 0; 
+		LostSyncCount = 0; 
+		SyncGainedCount = 0; 
 		bytes_processed = 0; 
 		SendOpprotunity = 0; 
 		NotOKtoSendCount = 0; 
@@ -994,8 +1018,8 @@ void *IOThreadMain(void *argp) {
 			testOutF = NULL; 
 		} 
 #endif 
-		printf("iothread: complete_blocks: %d\niothread: lost_sync_count: %d\nbytes_processed: %d\nsync_gain_count: %d\nsend opprotunities: %d\nNotOKTosendCount: %d\n",
-			              complete_blocks, lost_sync_count, bytes_processed, sync_gain_count, SendOpprotunity, NotOKtoSendCount); 
+		printf("iothread: complete_blocks: %d\niothread: LostSyncCount: %d\nbytes_processed: %d\nSyncGainedCount: %d\nsend opprotunities: %d\nNotOKTosendCount: %d\n",
+			              complete_blocks, LostSyncCount, bytes_processed, SyncGainedCount, SendOpprotunity, NotOKtoSendCount); 
 		fflush(stdout); 
 
 #ifdef SAVE_WRITES_TO_BUFFER 
@@ -1081,8 +1105,8 @@ void *IOThreadMain(void *argp) {
 			PERF_RECORD *pdp; 
 			f = fopen("perfdata.txt", "w"); 
 			if ( f != NULL ) { 			
-				fprintf(f, "iothread: complete_blocks: %d\niothread: lost_sync_count: %d\nbytes_processed: %d\nsync_gain_count: %d\nsend opprotunities: %d\nNotOKTosendCount: %d\n",
-			             complete_blocks, lost_sync_count, bytes_processed, sync_gain_count, SendOpprotunity, NotOKtoSendCount); 
+				fprintf(f, "iothread: complete_blocks: %d\niothread: LostSyncCount: %d\nbytes_processed: %d\nSyncGainedCount: %d\nsend opprotunities: %d\nNotOKTosendCount: %d\n",
+			             complete_blocks, LostSyncCount, bytes_processed, SyncGainedCount, SendOpprotunity, NotOKtoSendCount); 
 				for ( i = 0; i < PerfDataIdx; i++ ) { 
 					pdp = &(PerfData[i]); 				
 					now_nanos = perfTicksToNanos(pdp->ticks); 
