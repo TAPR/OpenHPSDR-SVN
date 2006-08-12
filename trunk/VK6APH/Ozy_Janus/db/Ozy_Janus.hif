@@ -3419,28 +3419,6 @@ debounce:de_PTT
 }
 # end
 # entity
-Ozy_Janus
-# storage
-db|Ozy_Janus.(0).cnf
-db|Ozy_Janus.(0).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-Ozy_Janus.v
-4fb71e8f5ed832457bed293116b4e7a
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# hierarchies {
-|
-}
-# end
-# entity
 Tx_fifo
 # storage
 db|Ozy_Janus.(4).cnf
@@ -4188,6 +4166,28 @@ clock
 }
 # hierarchies {
 Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp|dffpipe_r09:dffpipe9
+}
+# end
+# entity
+Ozy_Janus
+# storage
+db|Ozy_Janus.(0).cnf
+db|Ozy_Janus.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+Ozy_Janus.v
+d6fcbef6d4e4342dc755793331163085
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+|
 }
 # end
 # complete

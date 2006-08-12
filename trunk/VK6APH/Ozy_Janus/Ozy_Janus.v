@@ -447,35 +447,36 @@ case (AD_state)									   // see if sync is to be sent
 			end
 		AD_state <= AD_state + 1'b1;
 		end 
-6'd16:	begin
+6'd19:	begin
 		register <= q;						// AK5394A data for left channel
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end
-6'd24:  begin
+6'd27:  begin
 		register[15:8] <= q[15:8];
 		AD_state <= AD_state + 1'b1;
 		end
-6'd35:  begin
+6'd28:	begin
+		if(!LRCLK)AD_state <= 6'd28; 		// wait until LRCLK goes high 
+		else AD_state <= AD_state + 1'b1;
+		end
+6'd38:  begin
 		register[7:0] <= q[7:0];			// AK5394A data for right channel
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end
-6'd51:  begin 								
+6'd54:  begin 								
 		register <= q;
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end
-6'd25:	begin
-		if(!LRCLK)AD_state <= 6'd25; 		// wait until LRCLK goes high 
-		else AD_state <= AD_state + 1'b1;
-		end
-6'd53:	begin
+
+6'd56:	begin
 		register <= Tx_data;				// send microphone or line in data to Tx FIFO
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end
-6'd54:	begin
+6'd58:	begin
 		loop_counter <= loop_counter + 1'b1; // at end of loop so increment loop counter
 		AD_state <= 6'd0;					 // done so loop again
 		end
@@ -528,7 +529,7 @@ end
 	into the Tx FIFO
 */
 
-always @ (negedge BCLK)  // now width of 2x BCLK 
+always @ (negedge BCLK)  // now width of 2x BCLK since else too fast for FIFO 
 begin	
 		if (data_flag)
 			data_flag <= 1'b0;
@@ -536,8 +537,8 @@ begin
 			if (strobe) data_flag <= 1'b1;
 end
 
-/*
 
+/*
 always @ (negedge BCLK or posedge data_flag)
 begin	
 		if (data_flag)
@@ -545,8 +546,8 @@ begin
 		else
 			if (strobe) data_flag <= 1'b1;
 end
-
 */
+
 
 ///////////////////////////////////////////////////////////////
 //
