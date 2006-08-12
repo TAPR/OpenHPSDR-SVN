@@ -53,7 +53,7 @@ int getInt24FromFrame(unsigned char *framep, int ofs) {
 
 float IQConversionDivisor; 
 
-void dumpFrame(unsigned char *framep) {
+void dumpFrame(unsigned char *framep, int frame_num) {
     short i, q, mic;
 	float i_f, q_f; 
     unsigned int sync;
@@ -74,7 +74,7 @@ void dumpFrame(unsigned char *framep) {
 		CallbackInLbufp[i] = ((float)(bufp[3*i]))/IQConversionDivisor;  
 		CallbackInRbufp[i] =  ((float)(bufp[(3*i)+1]))/IQConversionDivisor; 
 #endif 
-        printf("%10d %10d %6d %10f %10f\n", i, q, mic, i_f, q_f);
+        printf("%10d %10d %10d %6d %10f %10f\n", frame_num, i, q, mic, i_f, q_f);
         ofs += 8;
         addMicSample(mic);
     }
@@ -90,6 +90,7 @@ int main(int argc, char *argv[]) {
 	int no_sync_bytes; 
 	int missing_sync_count = 0; 
 	int good_frame_count = 0; 
+	int frame_num = 0; 
 	IQConversionDivisor = (float)32767.0;
 
     if ( argc != 2 ) {
@@ -107,25 +108,31 @@ int main(int argc, char *argv[]) {
 
 	no_sync_bytes = 0; 
 
+	printf("    Frame#          I          Q    Mic    I float    Q float\n"); 
+
 	while ( 1 ) { 
 		numread = fread(ibuf, 1, 1, ifile); 
+		// printf("read 1: 0x%x\n", ibuf[0]); 
 		if ( numread != 1 ) break; // short read or end of file 
 		if ( l0 == 0x7f && l1 == 0x7f && ibuf[0] == 0x7f ) {  // gained sync 
 			fbuf[0] = 0x7f; fbuf[1] = 0x7f; fbuf[2] = 0x7f; 
 			numread = fread(fbuf+3, 1, FRAME_SIZE-3, ifile); 
+			// printf("read FS-3: numread=%d\n", numread); 
 			if ( numread != FRAME_SIZE-3 ) break; // no more data 
-			dumpFrame(fbuf); 
+			dumpFrame(fbuf, ++frame_num); 
 			if ( no_sync_bytes > 2 ) { 
 				++missing_sync_count;
+				// printf("bumped missing_sync_count no_sync_bytes=%d\n", no_sync_bytes); 
 			} 
 			no_sync_bytes = 0; 
-			++good_frame_count; 
-			
+			++good_frame_count; 			
+			l0 = 0; l1 = 0; 
 		} 
 		else { 
 			l0 = l1; 
 			l1 = ibuf[0]; 
-			++no_sync_bytes; 
+			++no_sync_bytes;
+			// printf("bumped no sync\n"); 
 		} 
 	} 
 
