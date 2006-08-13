@@ -39,7 +39,11 @@
 //	12 August 2006 - increased reset to 3 seconds otherwise AK 5394A did not 
 //                   reset correctly when connected to OZY. VK6APH 
 //	12 August 2006 - forced speed to 48k for testing 
+//  13 August 2006 - AK5394A now reset at power on and speed setting via Ozy
 //
+//
+//  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
+//  +3.3v or an Ozy board the AK5394A will remain in reset and produce no clocks etc.
 
 module Janus(
    input  CLK_24MHZ,
@@ -85,12 +89,11 @@ module Janus(
    input  YB3,
    output YB1,
    output YB5,
-   output YB6
+   output YB6,
+   input  AK_reset
 
 ); 
 
-reg ad_reset;
-reg [26:0] ad_count;
 reg clock_by_2; 
 reg index;
 reg [15:0]tdata;
@@ -103,30 +106,11 @@ reg [3:0] bit_count;
 reg TLV_nCS;
 
 
+
 // divide 24.576MHz clock by two for TLV320 and AK5394A
 always @ ( posedge  CLK_24MHZ) begin 
 	clock_by_2 <= ~clock_by_2;
 	end 
-
-
-//////////////////////////////////////////////////////////////
-//
-//  			Reset - AK5394A
-//
-/////////////////////////////////////////////////////////////
-
-/*
-	 hold the A/D chip in reset until 2^26 CLL_24MHZ have passed - about 3 seconds. This
-	 is to allow the AK4593A to calibrate correctly.
-*/
-
-always @ (posedge CLK_24MHZ) begin
-	if(!ad_count[26])begin
-	ad_reset <=0;
-	ad_count <= ad_count + 26'b1;
-	end
-	else ad_reset <= 1;
-end
 
 //////////////////////////////////////////////////////////////
 //
@@ -221,8 +205,8 @@ assign CLRCIN = YA6; 		// LRCLK for TLV320
 assign CLRCOUT = YA6;		// LRCLK for TLV320
 assign CMCLK = clock_by_2; 	// 24.576MHz/2
 assign CMODE = 1'b1;		// Set to 1 for SPI mode 
-assign DFS0 = 0; //YB3; 		    // set AK speed
-assign DFS1 = 0; //YC1; 			// set AK speed
+assign DFS0 = YB3; 		    // set AK speed
+assign DFS1 = YC1; 			// set AK speed
 assign EXP1 = YB3;			// AK speed test point
 assign EXP2 = YC1;			// AK speed test point
 assign EXP3 = 1'b0;
@@ -232,7 +216,7 @@ assign IPWM = YC6;
 assign YB4 = LRCLK;
 assign MCLK = clock_by_2; 	// 24.576MHz/2
 assign nCS = TLV_nCS;
-assign nRST = ad_reset;		// reset AK5394A on power up
+assign nRST = AK_reset;		// reset AK5394A on power up
 assign YB1 = PTT;			// PTT from Janus 
 assign QPWM = YA3;
 assign YB6 = SCLK; 			// is actually BCLK
@@ -242,6 +226,7 @@ assign SMODE2 = 1'b1; 		// Master mode, I2S
 assign SSCK = TLV_CLK;		// SPI clock on TLV320
 assign MOSI = data; 		// SPI data to send to TLV320 
 assign ZCAL = 1'b1;			// Calibrate AK from A/D inputs
+
 
 
 endmodule 

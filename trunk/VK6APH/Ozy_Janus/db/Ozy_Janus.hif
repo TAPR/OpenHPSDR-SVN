@@ -1739,28 +1739,6 @@ clock
 }
 # end
 # entity
-Rx_fifo
-# storage
-db|Ozy_Janus.(20).cnf
-db|Ozy_Janus.(20).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-Rx_fifo.v
-61f13770e785547b7c896db6d21022f9
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# hierarchies {
-Rx_fifo:Rx_fifo
-}
-# end
-# entity
 dcfifo
 # storage
 db|Ozy_Janus.(21).cnf
@@ -1900,9 +1878,6 @@ c8498561e0bdc47f87b5548333d65f50
 f4c68b9daca4a0e5389631895df30d0
 ..|..|..|..|altera|quartus60|libraries|megafunctions|altsyncram_fifo.inc
 12f7d8c61da985ee5330de43a169e
-}
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
 }
 # end
 # entity
@@ -2100,9 +2075,6 @@ data0
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated
-}
 # end
 # entity
 a_gray2bin_ndb
@@ -2195,10 +2167,10 @@ bin0
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|a_gray2bin_ndb:rs_dgwp_gray2bin
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|a_gray2bin_ndb:wrptr_g_gray2bin
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|a_gray2bin_ndb:ws_dgrp_gray2bin
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:rs_dgwp_gray2bin
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:wrptr_g_gray2bin
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:ws_dgrp_gray2bin
 }
 # end
 # entity
@@ -2262,7 +2234,7 @@ aclr
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|a_graycounter_r96:rdptr_g1p
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p
 }
 # end
 # entity
@@ -2284,7 +2256,7 @@ clock
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|a_graycounter_lk6:wrptr_g1p
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_lk6:wrptr_g1p
 }
 # end
 # entity
@@ -2345,7 +2317,7 @@ clock
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|a_graycounter_mk6:wrptr_gp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp
 }
 # end
 # entity
@@ -2544,7 +2516,7 @@ address_a0
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|altsyncram_vpu:fifo_ram
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram
 }
 # end
 # entity
@@ -2827,7 +2799,7 @@ none
 0
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4
 }
 # end
 # entity
@@ -2924,10 +2896,10 @@ clock
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|dffpipe_n09:rs_brp
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|dffpipe_n09:rs_bwp
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|dffpipe_n09:ws_brp
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|dffpipe_n09:ws_bwp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:ws_brp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:ws_bwp
 }
 # end
 # entity
@@ -3023,9 +2995,6 @@ clock
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_sv7:rs_dgwp
-}
 # end
 # entity
 dffpipe_o09
@@ -3120,9 +3089,6 @@ clock
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_sv7:rs_dgwp|dffpipe_o09:dffpipe7
-}
 # end
 # entity
 alt_synch_pipe_697
@@ -3145,9 +3111,6 @@ clock
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_697:wrempty_reg
-}
 # end
 # entity
 dffpipe_0a8
@@ -3169,9 +3132,6 @@ d0
 clock
 -1
 3
-}
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_697:wrempty_reg|dffpipe_0a8:dffpipe9
 }
 # end
 # entity
@@ -3267,9 +3227,6 @@ clock
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_tv7:ws_dgrp
-}
 # end
 # entity
 dffpipe_p09
@@ -3363,9 +3320,6 @@ d0
 clock
 -1
 3
-}
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_q2b1:auto_generated|alt_synch_pipe_tv7:ws_dgrp|dffpipe_p09:dffpipe11
 }
 # end
 # entity
@@ -4169,6 +4123,2432 @@ Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pip
 }
 # end
 # entity
+dcfifo
+# storage
+db|Ozy_Janus.(68).cnf
+db|Ozy_Janus.(68).cnf
+# case_insensitive
+# source_file
+..|..|..|..|altera|quartus60|libraries|megafunctions|dcfifo.tdf
+f52f61d654507d26e32b8ae857d410
+6
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+16
+PARAMETER_DEC
+USR
+LPM_NUMWORDS
+4096
+PARAMETER_DEC
+USR
+LPM_WIDTHU
+12
+PARAMETER_DEC
+USR
+LPM_SHOWAHEAD
+OFF
+PARAMETER_UNKNOWN
+USR
+UNDERFLOW_CHECKING
+OFF
+PARAMETER_UNKNOWN
+USR
+OVERFLOW_CHECKING
+OFF
+PARAMETER_UNKNOWN
+USR
+USE_EAB
+ON
+PARAMETER_UNKNOWN
+USR
+ADD_RAM_OUTPUT_REGISTER
+OFF
+PARAMETER_UNKNOWN
+USR
+DELAY_RDUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+DELAY_WRUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+RDSYNC_DELAYPIPE
+3
+PARAMETER_UNKNOWN
+DEF
+WRSYNC_DELAYPIPE
+3
+PARAMETER_UNKNOWN
+DEF
+CLOCKS_ARE_SYNCHRONIZED
+FALSE
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+dcfifo_m8b1
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+wrusedw
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrclk
+-1
+3
+rdusedw
+-1
+3
+rdreq
+-1
+3
+rdclk
+-1
+3
+q
+-1
+3
+data
+-1
+3
+}
+# include_file {
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
+758886b0947dd67e65ec58adda9b948
+..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+..|..|..|..|altera|quartus60|libraries|megafunctions|altdpram.inc
+4e1931f9814db9f22f22b9eb377c65d6
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_graycounter.inc
+6bb463da5ec6451f39fdb64aba52ffc0
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_fefifo.inc
+c8498561e0bdc47f87b5548333d65f50
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_gray2bin.inc
+2466d892d81838e113e13f4e76e71f2
+..|..|..|..|altera|quartus60|libraries|megafunctions|dffpipe.inc
+8dfdb676c11c7bcef0694118a05ea2d
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_sync_fifo.inc
+f4c68b9daca4a0e5389631895df30d0
+..|..|..|..|altera|quartus60|libraries|megafunctions|altsyncram_fifo.inc
+12f7d8c61da985ee5330de43a169e
+}
+# end
+# entity
+dcfifo_m8b1
+# storage
+db|Ozy_Janus.(69).cnf
+db|Ozy_Janus.(69).cnf
+# case_insensitive
+# source_file
+db|dcfifo_m8b1.tdf
+9c9dca89bae2d51d4ca923fb7243a8d
+6
+# used_port {
+wrusedw9
+-1
+3
+wrusedw8
+-1
+3
+wrusedw7
+-1
+3
+wrusedw6
+-1
+3
+wrusedw5
+-1
+3
+wrusedw4
+-1
+3
+wrusedw3
+-1
+3
+wrusedw2
+-1
+3
+wrusedw11
+-1
+3
+wrusedw10
+-1
+3
+wrusedw1
+-1
+3
+wrusedw0
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrclk
+-1
+3
+rdusedw9
+-1
+3
+rdusedw8
+-1
+3
+rdusedw7
+-1
+3
+rdusedw6
+-1
+3
+rdusedw5
+-1
+3
+rdusedw4
+-1
+3
+rdusedw3
+-1
+3
+rdusedw2
+-1
+3
+rdusedw11
+-1
+3
+rdusedw10
+-1
+3
+rdusedw1
+-1
+3
+rdusedw0
+-1
+3
+rdreq
+-1
+3
+rdclk
+-1
+3
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q15
+-1
+3
+q14
+-1
+3
+q13
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+data9
+-1
+3
+data8
+-1
+3
+data7
+-1
+3
+data6
+-1
+3
+data5
+-1
+3
+data4
+-1
+3
+data3
+-1
+3
+data2
+-1
+3
+data15
+-1
+3
+data14
+-1
+3
+data13
+-1
+3
+data12
+-1
+3
+data11
+-1
+3
+data10
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+}
+# end
+# entity
+alt_synch_pipe_008
+# storage
+db|Ozy_Janus.(70).cnf
+db|Ozy_Janus.(70).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_008.tdf
+b12cb0784369b9b8953173a2c51d747
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+dffpipe_s09
+# storage
+db|Ozy_Janus.(71).cnf
+db|Ozy_Janus.(71).cnf
+# case_insensitive
+# source_file
+db|dffpipe_s09.tdf
+cdbe2d301cd745982b6f765adfaf2fcc
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+alt_synch_pipe_897
+# storage
+db|Ozy_Janus.(72).cnf
+db|Ozy_Janus.(72).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_897.tdf
+8a935144918621a33b9d3c2f137d6b2
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+dffpipe_2a8
+# storage
+db|Ozy_Janus.(73).cnf
+db|Ozy_Janus.(73).cnf
+# case_insensitive
+# source_file
+db|dffpipe_2a8.tdf
+d1a602890d61ffe8f8c6876b594a52
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+alt_synch_pipe_108
+# storage
+db|Ozy_Janus.(74).cnf
+db|Ozy_Janus.(74).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_108.tdf
+80f720c1dbf84722d7fdbb4ca7483eff
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+dffpipe_t09
+# storage
+db|Ozy_Janus.(75).cnf
+db|Ozy_Janus.(75).cnf
+# case_insensitive
+# source_file
+db|dffpipe_t09.tdf
+d53d46d3efcd2d3da9d82bcf4f869fa6
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+dcfifo
+# storage
+db|Ozy_Janus.(76).cnf
+db|Ozy_Janus.(76).cnf
+# case_insensitive
+# source_file
+..|..|..|..|altera|quartus60|libraries|megafunctions|dcfifo.tdf
+f52f61d654507d26e32b8ae857d410
+6
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+16
+PARAMETER_DEC
+USR
+LPM_NUMWORDS
+4096
+PARAMETER_DEC
+USR
+LPM_WIDTHU
+12
+PARAMETER_DEC
+USR
+LPM_SHOWAHEAD
+OFF
+PARAMETER_UNKNOWN
+USR
+UNDERFLOW_CHECKING
+OFF
+PARAMETER_UNKNOWN
+USR
+OVERFLOW_CHECKING
+OFF
+PARAMETER_UNKNOWN
+USR
+USE_EAB
+ON
+PARAMETER_UNKNOWN
+USR
+ADD_RAM_OUTPUT_REGISTER
+OFF
+PARAMETER_UNKNOWN
+USR
+DELAY_RDUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+DELAY_WRUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+RDSYNC_DELAYPIPE
+3
+PARAMETER_UNKNOWN
+DEF
+WRSYNC_DELAYPIPE
+3
+PARAMETER_UNKNOWN
+DEF
+CLOCKS_ARE_SYNCHRONIZED
+FALSE
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+dcfifo_vtb1
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+wrusedw
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrclk
+-1
+3
+rdusedw
+-1
+3
+rdreq
+-1
+3
+rdfull
+-1
+3
+rdclk
+-1
+3
+q
+-1
+3
+data
+-1
+3
+}
+# include_file {
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
+758886b0947dd67e65ec58adda9b948
+..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+..|..|..|..|altera|quartus60|libraries|megafunctions|altdpram.inc
+4e1931f9814db9f22f22b9eb377c65d6
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_graycounter.inc
+6bb463da5ec6451f39fdb64aba52ffc0
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_fefifo.inc
+c8498561e0bdc47f87b5548333d65f50
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_gray2bin.inc
+2466d892d81838e113e13f4e76e71f2
+..|..|..|..|altera|quartus60|libraries|megafunctions|dffpipe.inc
+8dfdb676c11c7bcef0694118a05ea2d
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_sync_fifo.inc
+f4c68b9daca4a0e5389631895df30d0
+..|..|..|..|altera|quartus60|libraries|megafunctions|altsyncram_fifo.inc
+12f7d8c61da985ee5330de43a169e
+}
+# end
+# entity
+dcfifo_vtb1
+# storage
+db|Ozy_Janus.(77).cnf
+db|Ozy_Janus.(77).cnf
+# case_insensitive
+# source_file
+db|dcfifo_vtb1.tdf
+f27a3e42885209e6dfdcdd075303d6f
+6
+# used_port {
+wrusedw9
+-1
+3
+wrusedw8
+-1
+3
+wrusedw7
+-1
+3
+wrusedw6
+-1
+3
+wrusedw5
+-1
+3
+wrusedw4
+-1
+3
+wrusedw3
+-1
+3
+wrusedw2
+-1
+3
+wrusedw11
+-1
+3
+wrusedw10
+-1
+3
+wrusedw1
+-1
+3
+wrusedw0
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrclk
+-1
+3
+rdusedw9
+-1
+3
+rdusedw8
+-1
+3
+rdusedw7
+-1
+3
+rdusedw6
+-1
+3
+rdusedw5
+-1
+3
+rdusedw4
+-1
+3
+rdusedw3
+-1
+3
+rdusedw2
+-1
+3
+rdusedw11
+-1
+3
+rdusedw10
+-1
+3
+rdusedw1
+-1
+3
+rdusedw0
+-1
+3
+rdreq
+-1
+3
+rdfull
+-1
+3
+rdclk
+-1
+3
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q15
+-1
+3
+q14
+-1
+3
+q13
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+data9
+-1
+3
+data8
+-1
+3
+data7
+-1
+3
+data6
+-1
+3
+data5
+-1
+3
+data4
+-1
+3
+data3
+-1
+3
+data2
+-1
+3
+data15
+-1
+3
+data14
+-1
+3
+data13
+-1
+3
+data12
+-1
+3
+data11
+-1
+3
+data10
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+}
+# end
+# entity
+alt_synch_pipe_997
+# storage
+db|Ozy_Janus.(78).cnf
+db|Ozy_Janus.(78).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_997.tdf
+b54752eb5f75d60b8de57ba74d30d9
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+dffpipe_3a8
+# storage
+db|Ozy_Janus.(79).cnf
+db|Ozy_Janus.(79).cnf
+# case_insensitive
+# source_file
+db|dffpipe_3a8.tdf
+6bf69855dedf1535257a4646d90d723
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+alt_synch_pipe_208
+# storage
+db|Ozy_Janus.(80).cnf
+db|Ozy_Janus.(80).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_208.tdf
+ceb395ad5fd45177349c87dbbd5a76
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+dffpipe_u09
+# storage
+db|Ozy_Janus.(81).cnf
+db|Ozy_Janus.(81).cnf
+# case_insensitive
+# source_file
+db|dffpipe_u09.tdf
+377635db96e0a1ba85cf5cccd1c6e7a3
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+alt_synch_pipe_a97
+# storage
+db|Ozy_Janus.(82).cnf
+db|Ozy_Janus.(82).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_a97.tdf
+5c56eec8be7ab5777348eeb40948e6
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+dffpipe_4a8
+# storage
+db|Ozy_Janus.(83).cnf
+db|Ozy_Janus.(83).cnf
+# case_insensitive
+# source_file
+db|dffpipe_4a8.tdf
+358766f47434eeffd4f024806115e690
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+alt_synch_pipe_308
+# storage
+db|Ozy_Janus.(84).cnf
+db|Ozy_Janus.(84).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_308.tdf
+624c2c8165d7454c763d525c648c9da
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+dffpipe_v09
+# storage
+db|Ozy_Janus.(85).cnf
+db|Ozy_Janus.(85).cnf
+# case_insensitive
+# source_file
+db|dffpipe_v09.tdf
+52e81ac242ecac9ba89184bda2a324
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+Rx_fifo
+# storage
+db|Ozy_Janus.(20).cnf
+db|Ozy_Janus.(20).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+Rx_fifo.v
+6c9286038cf6eb391bf1d1bd4af49
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+Rx_fifo:Rx_fifo
+}
+# end
+# entity
+dcfifo
+# storage
+db|Ozy_Janus.(86).cnf
+db|Ozy_Janus.(86).cnf
+# case_insensitive
+# source_file
+..|..|..|..|altera|quartus60|libraries|megafunctions|dcfifo.tdf
+f52f61d654507d26e32b8ae857d410
+6
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+16
+PARAMETER_DEC
+USR
+LPM_NUMWORDS
+4096
+PARAMETER_DEC
+USR
+LPM_WIDTHU
+12
+PARAMETER_DEC
+USR
+LPM_SHOWAHEAD
+OFF
+PARAMETER_UNKNOWN
+USR
+UNDERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+OVERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+USE_EAB
+ON
+PARAMETER_UNKNOWN
+USR
+ADD_RAM_OUTPUT_REGISTER
+OFF
+PARAMETER_UNKNOWN
+USR
+DELAY_RDUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+DELAY_WRUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+RDSYNC_DELAYPIPE
+3
+PARAMETER_UNKNOWN
+DEF
+WRSYNC_DELAYPIPE
+3
+PARAMETER_UNKNOWN
+DEF
+CLOCKS_ARE_SYNCHRONIZED
+FALSE
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+dcfifo_3ob1
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+wrusedw
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrclk
+-1
+3
+rdusedw
+-1
+3
+rdreq
+-1
+3
+rdfull
+-1
+3
+rdclk
+-1
+3
+q
+-1
+3
+data
+-1
+3
+}
+# include_file {
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
+758886b0947dd67e65ec58adda9b948
+..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+..|..|..|..|altera|quartus60|libraries|megafunctions|altdpram.inc
+4e1931f9814db9f22f22b9eb377c65d6
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_graycounter.inc
+6bb463da5ec6451f39fdb64aba52ffc0
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_fefifo.inc
+c8498561e0bdc47f87b5548333d65f50
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_gray2bin.inc
+2466d892d81838e113e13f4e76e71f2
+..|..|..|..|altera|quartus60|libraries|megafunctions|dffpipe.inc
+8dfdb676c11c7bcef0694118a05ea2d
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_sync_fifo.inc
+f4c68b9daca4a0e5389631895df30d0
+..|..|..|..|altera|quartus60|libraries|megafunctions|altsyncram_fifo.inc
+12f7d8c61da985ee5330de43a169e
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+}
+# end
+# entity
+dcfifo_3ob1
+# storage
+db|Ozy_Janus.(87).cnf
+db|Ozy_Janus.(87).cnf
+# case_insensitive
+# source_file
+db|dcfifo_3ob1.tdf
+531ef4e2b1421a243e6194bef4ce2cf3
+6
+# used_port {
+wrusedw9
+-1
+3
+wrusedw8
+-1
+3
+wrusedw7
+-1
+3
+wrusedw6
+-1
+3
+wrusedw5
+-1
+3
+wrusedw4
+-1
+3
+wrusedw3
+-1
+3
+wrusedw2
+-1
+3
+wrusedw11
+-1
+3
+wrusedw10
+-1
+3
+wrusedw1
+-1
+3
+wrusedw0
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrclk
+-1
+3
+rdusedw9
+-1
+3
+rdusedw8
+-1
+3
+rdusedw7
+-1
+3
+rdusedw6
+-1
+3
+rdusedw5
+-1
+3
+rdusedw4
+-1
+3
+rdusedw3
+-1
+3
+rdusedw2
+-1
+3
+rdusedw11
+-1
+3
+rdusedw10
+-1
+3
+rdusedw1
+-1
+3
+rdusedw0
+-1
+3
+rdreq
+-1
+3
+rdfull
+-1
+3
+rdclk
+-1
+3
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q15
+-1
+3
+q14
+-1
+3
+q13
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+data9
+-1
+3
+data8
+-1
+3
+data7
+-1
+3
+data6
+-1
+3
+data5
+-1
+3
+data4
+-1
+3
+data3
+-1
+3
+data2
+-1
+3
+data15
+-1
+3
+data14
+-1
+3
+data13
+-1
+3
+data12
+-1
+3
+data11
+-1
+3
+data10
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated
+}
+# end
+# entity
+alt_synch_pipe_b97
+# storage
+db|Ozy_Janus.(88).cnf
+db|Ozy_Janus.(88).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_b97.tdf
+396ad2aa7dbdcd9c5ae6f4bfa8b396f
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_b97:rdfull_reg
+}
+# end
+# entity
+dffpipe_5a8
+# storage
+db|Ozy_Janus.(89).cnf
+db|Ozy_Janus.(89).cnf
+# case_insensitive
+# source_file
+db|dffpipe_5a8.tdf
+7b5c7f753ea2184c47dbeaac5ccea8e
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_b97:rdfull_reg|dffpipe_5a8:dffpipe5
+}
+# end
+# entity
+alt_synch_pipe_408
+# storage
+db|Ozy_Janus.(90).cnf
+db|Ozy_Janus.(90).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_408.tdf
+53aeb2fcb4a358b13565264cbabcd2d5
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp
+}
+# end
+# entity
+dffpipe_019
+# storage
+db|Ozy_Janus.(91).cnf
+db|Ozy_Janus.(91).cnf
+# case_insensitive
+# source_file
+db|dffpipe_019.tdf
+dabcd5268723118e23145e2163effeef
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7
+}
+# end
+# entity
+alt_synch_pipe_c97
+# storage
+db|Ozy_Janus.(92).cnf
+db|Ozy_Janus.(92).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_c97.tdf
+3063c99edda3cb482437149f72731c8
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_c97:wrempty_reg
+}
+# end
+# entity
+dffpipe_6a8
+# storage
+db|Ozy_Janus.(93).cnf
+db|Ozy_Janus.(93).cnf
+# case_insensitive
+# source_file
+db|dffpipe_6a8.tdf
+6868ee4625a3ecbb52f3a5757c50f84e
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_c97:wrempty_reg|dffpipe_6a8:dffpipe9
+}
+# end
+# entity
+alt_synch_pipe_508
+# storage
+db|Ozy_Janus.(94).cnf
+db|Ozy_Janus.(94).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_508.tdf
+37449da9397ca7d8d39182a0b6f4de91
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_508:ws_dgrp
+}
+# end
+# entity
+dffpipe_119
+# storage
+db|Ozy_Janus.(95).cnf
+db|Ozy_Janus.(95).cnf
+# case_insensitive
+# source_file
+db|dffpipe_119.tdf
+422e8642772c5fe896603d6682ba2fa5
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_508:ws_dgrp|dffpipe_119:dffpipe11
+}
+# end
+# entity
 Ozy_Janus
 # storage
 db|Ozy_Janus.(0).cnf
@@ -4180,7 +6560,7 @@ ON
 # case_sensitive
 # source_file
 Ozy_Janus.v
-d6fcbef6d4e4342dc755793331163085
+5811bc42cbddf1e7c5e1a32a69ff4c
 7
 # internal_option {
 AUTO_RESOURCE_SHARING
