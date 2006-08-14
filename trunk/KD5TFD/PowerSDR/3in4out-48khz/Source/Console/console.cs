@@ -13557,7 +13557,7 @@ namespace PowerSDR
 					b = (byte)(DiagData[i] & 0xff);
 					ctl_in = ctl_in + b.ToString("d3") + " "; 
 				} 								
-				c1_in = "C1: " + byteToBitString((byte)DiagData[1]); 
+				c1_in = "C0: " + byteToBitString((byte)DiagData[0]); 
 			} 
 			else 
 			{
@@ -13578,7 +13578,7 @@ namespace PowerSDR
 					b = (byte)(DiagData[i] & 0xff);
 					ctl_out = ctl_out + b.ToString("d3") + " "; 
 				} 								
-				c1_out = "C1: " + byteToBitString((byte)DiagData[6]); 
+				c1_out = "C0: " + byteToBitString((byte)DiagData[5]); 
 			} 
 			else 
 			{ 
