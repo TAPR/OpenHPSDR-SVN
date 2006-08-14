@@ -446,13 +446,7 @@ void IOThreadMainLoop(void) {
 #ifdef OZY 
 			numread = OzyBulkRead(OzyH, 0x86, FPGAReadBufp, FPGAReadBufSize); 
 			if ( numread <= 0 ) { 
-				int trc; 
-#if 0 
-				char tbuf[512]; 
-				fprintf(stderr, "OzyBulkRead failed rc=%d\n", numread);  fflush(stderr); 
-				trc = OzyBulkWrite(OzyH, 0x02, tbuf, sizeof(tbuf)); 
-#endif 
-				fprintf(stdout, "OzyBulkWrite trc=%d\n", trc);  fflush(stderr);		
+				fprintf(stdout, "OzyBulkRead failed rc=%d\n", numread);  fflush(stdout); 
 			} 
 #endif 
 			// printf("iot: read %d bytes\n", numread); fflush(stdout); 
@@ -764,7 +758,8 @@ void IOThreadMainLoop(void) {
 						case OUT_STATE_CONTROL1: 
 							out_state = OUT_STATE_CONTROL2;							
 							// send sample rate in C1 low 2 bits 
-							FPGAWriteBufp[writebufpos] = ((ControlBytesIn[1] & 0xfc) | (SampleRateIn2Bits & 3));
+							// FPGAWriteBufp[writebufpos] = ((ControlBytesIn[1] & 0xfc) | (SampleRateIn2Bits & 3));
+							FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3);
 							ControlBytesOut[1] = FPGAWriteBufp[writebufpos]; 
 
 							
@@ -779,13 +774,13 @@ void IOThreadMainLoop(void) {
 
 						case OUT_STATE_CONTROL2: 
 							out_state = OUT_STATE_CONTROL3;
-							FPGAWriteBufp[writebufpos] = ControlBytesIn[2]; 
+							FPGAWriteBufp[writebufpos] = 0; /* ControlBytesIn[2];  */ 
 							ControlBytesOut[2] = FPGAWriteBufp[writebufpos]; 
 							break; 
 
 						case OUT_STATE_CONTROL3: 
 							out_state = OUT_STATE_CONTROL4;
-							FPGAWriteBufp[writebufpos] = ControlBytesIn[3]; 
+							FPGAWriteBufp[writebufpos] = 0; /* ControlBytesIn[3];  */ 
 							ControlBytesOut[3] = FPGAWriteBufp[writebufpos]; 
 							break; 
 

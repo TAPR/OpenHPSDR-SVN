@@ -683,6 +683,8 @@ namespace PowerSDR
 		private System.Windows.Forms.Label lbl_sync_gain;
 		private System.Windows.Forms.Label lbl_not_ok_to_send;
 		private System.Windows.Forms.Label lbl_sync;
+		private System.Windows.Forms.Label lbl_C1_out;
+		private System.Windows.Forms.Label lbl_C1_in;
 
 		private System.ComponentModel.IContainer components;
 
@@ -1074,12 +1076,14 @@ namespace PowerSDR
 			this.label_DttSP_osc = new System.Windows.Forms.Label();
 			this.label_DDStune = new System.Windows.Forms.Label();
 			this.lbl_C04_out = new System.Windows.Forms.Label();
-			this.timer_clock = new System.Windows.Forms.Timer(this.components);
 			this.lbl_C04_in = new System.Windows.Forms.Label();
 			this.lbl_sync_lost = new System.Windows.Forms.Label();
 			this.lbl_sync_gain = new System.Windows.Forms.Label();
 			this.lbl_not_ok_to_send = new System.Windows.Forms.Label();
 			this.lbl_sync = new System.Windows.Forms.Label();
+			this.lbl_C1_out = new System.Windows.Forms.Label();
+			this.lbl_C1_in = new System.Windows.Forms.Label();
+			this.timer_clock = new System.Windows.Forms.Timer(this.components);
 			this.grpVFOA.SuspendLayout();
 			this.grpVFOB.SuspendLayout();
 			this.grpDisplay.SuspendLayout();
@@ -5693,11 +5697,6 @@ namespace PowerSDR
 			this.toolTip1.SetToolTip(this.lbl_C04_out, resources.GetString("lbl_C04_out.ToolTip"));
 			this.lbl_C04_out.Visible = ((bool)(resources.GetObject("lbl_C04_out.Visible")));
 			// 
-			// timer_clock
-			// 
-			this.timer_clock.Enabled = true;
-			this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
-			// 
 			// lbl_C04_in
 			// 
 			this.lbl_C04_in.AccessibleDescription = resources.GetString("lbl_C04_in.AccessibleDescription");
@@ -5813,6 +5812,57 @@ namespace PowerSDR
 			this.toolTip1.SetToolTip(this.lbl_sync, resources.GetString("lbl_sync.ToolTip"));
 			this.lbl_sync.Visible = ((bool)(resources.GetObject("lbl_sync.Visible")));
 			// 
+			// lbl_C1_out
+			// 
+			this.lbl_C1_out.AccessibleDescription = resources.GetString("lbl_C1_out.AccessibleDescription");
+			this.lbl_C1_out.AccessibleName = resources.GetString("lbl_C1_out.AccessibleName");
+			this.lbl_C1_out.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("lbl_C1_out.Anchor")));
+			this.lbl_C1_out.AutoSize = ((bool)(resources.GetObject("lbl_C1_out.AutoSize")));
+			this.lbl_C1_out.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("lbl_C1_out.Dock")));
+			this.lbl_C1_out.Enabled = ((bool)(resources.GetObject("lbl_C1_out.Enabled")));
+			this.lbl_C1_out.Font = ((System.Drawing.Font)(resources.GetObject("lbl_C1_out.Font")));
+			this.lbl_C1_out.Image = ((System.Drawing.Image)(resources.GetObject("lbl_C1_out.Image")));
+			this.lbl_C1_out.ImageAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_C1_out.ImageAlign")));
+			this.lbl_C1_out.ImageIndex = ((int)(resources.GetObject("lbl_C1_out.ImageIndex")));
+			this.lbl_C1_out.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("lbl_C1_out.ImeMode")));
+			this.lbl_C1_out.Location = ((System.Drawing.Point)(resources.GetObject("lbl_C1_out.Location")));
+			this.lbl_C1_out.Name = "lbl_C1_out";
+			this.lbl_C1_out.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("lbl_C1_out.RightToLeft")));
+			this.lbl_C1_out.Size = ((System.Drawing.Size)(resources.GetObject("lbl_C1_out.Size")));
+			this.lbl_C1_out.TabIndex = ((int)(resources.GetObject("lbl_C1_out.TabIndex")));
+			this.lbl_C1_out.Text = resources.GetString("lbl_C1_out.Text");
+			this.lbl_C1_out.TextAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_C1_out.TextAlign")));
+			this.toolTip1.SetToolTip(this.lbl_C1_out, resources.GetString("lbl_C1_out.ToolTip"));
+			this.lbl_C1_out.Visible = ((bool)(resources.GetObject("lbl_C1_out.Visible")));
+			// 
+			// lbl_C1_in
+			// 
+			this.lbl_C1_in.AccessibleDescription = resources.GetString("lbl_C1_in.AccessibleDescription");
+			this.lbl_C1_in.AccessibleName = resources.GetString("lbl_C1_in.AccessibleName");
+			this.lbl_C1_in.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("lbl_C1_in.Anchor")));
+			this.lbl_C1_in.AutoSize = ((bool)(resources.GetObject("lbl_C1_in.AutoSize")));
+			this.lbl_C1_in.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("lbl_C1_in.Dock")));
+			this.lbl_C1_in.Enabled = ((bool)(resources.GetObject("lbl_C1_in.Enabled")));
+			this.lbl_C1_in.Font = ((System.Drawing.Font)(resources.GetObject("lbl_C1_in.Font")));
+			this.lbl_C1_in.Image = ((System.Drawing.Image)(resources.GetObject("lbl_C1_in.Image")));
+			this.lbl_C1_in.ImageAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_C1_in.ImageAlign")));
+			this.lbl_C1_in.ImageIndex = ((int)(resources.GetObject("lbl_C1_in.ImageIndex")));
+			this.lbl_C1_in.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("lbl_C1_in.ImeMode")));
+			this.lbl_C1_in.Location = ((System.Drawing.Point)(resources.GetObject("lbl_C1_in.Location")));
+			this.lbl_C1_in.Name = "lbl_C1_in";
+			this.lbl_C1_in.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("lbl_C1_in.RightToLeft")));
+			this.lbl_C1_in.Size = ((System.Drawing.Size)(resources.GetObject("lbl_C1_in.Size")));
+			this.lbl_C1_in.TabIndex = ((int)(resources.GetObject("lbl_C1_in.TabIndex")));
+			this.lbl_C1_in.Text = resources.GetString("lbl_C1_in.Text");
+			this.lbl_C1_in.TextAlign = ((System.Drawing.ContentAlignment)(resources.GetObject("lbl_C1_in.TextAlign")));
+			this.toolTip1.SetToolTip(this.lbl_C1_in, resources.GetString("lbl_C1_in.ToolTip"));
+			this.lbl_C1_in.Visible = ((bool)(resources.GetObject("lbl_C1_in.Visible")));
+			// 
+			// timer_clock
+			// 
+			this.timer_clock.Enabled = true;
+			this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
+			// 
 			// Console
 			// 
 			this.AccessibleDescription = resources.GetString("$this.AccessibleDescription");
@@ -5824,6 +5874,8 @@ namespace PowerSDR
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.ClientSize = ((System.Drawing.Size)(resources.GetObject("$this.ClientSize")));
+			this.Controls.Add(this.lbl_C1_in);
+			this.Controls.Add(this.lbl_C1_out);
 			this.Controls.Add(this.lbl_sync);
 			this.Controls.Add(this.lbl_not_ok_to_send);
 			this.Controls.Add(this.lbl_sync_gain);
@@ -13461,6 +13513,20 @@ namespace PowerSDR
 		}
 
 
+
+		private static String[] BitStrings = {  "0000", "0001", "0010", "0011",  
+					            			    "0100", "0101", "0110", "0111", 
+										        "1000", "1001", "1010", "1011", 
+										        "1100", "1101", "1110", "1111" }; 
+
+		private static String byteToBitString(byte b) 
+		{ 
+			byte lo = (byte)(b & 0xf); 
+			byte hi = (byte)((b >> 4) & 0xf); 
+
+			return BitStrings[hi] + " " + BitStrings[lo]; 
+		} 
+
 		private int[] DiagData = new int[14]; 
 
 		// diag data mapping 
@@ -13481,6 +13547,7 @@ namespace PowerSDR
 			rc = TFDAPHaudio.GetDiagData(p, 14); 
 
 			String ctl_in; 
+			String c1_in; 
 
 			if ( rc >= 5 ) 
 			{ 
@@ -13488,31 +13555,38 @@ namespace PowerSDR
 				for ( int i = 0; i < 5; i++ ) 
 				{ 
 					b = (byte)(DiagData[i] & 0xff);
-					ctl_in = ctl_in + b.ToString("x2") + " "; 
+					ctl_in = ctl_in + b.ToString("d3") + " "; 
 				} 								
+				c1_in = "C1: " + byteToBitString((byte)DiagData[1]); 
 			} 
 			else 
 			{
 				ctl_in = "C0-4 (in): na";
+				c1_in = "C1: na"; 
 			}
 			lbl_C04_in.Text = ctl_in; 
+			lbl_C1_in.Text = c1_in; 
 
 			String ctl_out; 
+			String c1_out; 
 
 			if ( rc >= 10 ) 
 			{ 
 				ctl_out = "C0-4 (out): "; 
 				for ( int i = 5; i < 10; i++ ) 
-				{ 
+				{ 					
 					b = (byte)(DiagData[i] & 0xff);
-					ctl_out = ctl_out + b.ToString("x2") + " "; 
+					ctl_out = ctl_out + b.ToString("d3") + " "; 
 				} 								
+				c1_out = "C1: " + byteToBitString((byte)DiagData[6]); 
 			} 
 			else 
 			{ 
 				ctl_out = "C0-4 (out): na";
+				c1_out = "C1: na"; 
 			} 
 			lbl_C04_out.Text = ctl_out; 
+			lbl_C1_out.Text = c1_out; 
 
 			String sync_gain; 
 			if ( rc >= 11 ) 
