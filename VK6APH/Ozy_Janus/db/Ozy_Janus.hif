@@ -3370,6 +3370,8 @@ DEF
 }
 # hierarchies {
 debounce:de_PTT
+debounce:de_dot
+debounce:de_dash
 }
 # end
 # entity
@@ -6560,7 +6562,7 @@ ON
 # case_sensitive
 # source_file
 Ozy_Janus.v
-3fd25a24dc7baaf9cc258d3d6091abc
+452b19a2e4dab6dbf55c9ae6842c495c
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

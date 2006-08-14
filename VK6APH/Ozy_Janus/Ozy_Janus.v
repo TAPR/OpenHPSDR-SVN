@@ -118,7 +118,8 @@
 //				Added sync indication - 13 Aug 2006
 //				Added POR for AK5394A via Atlas C2 - 13 Aug 2006
 //				Decoded speed setting for AK5394A  - 13 Aug 2006
-//				Added PTT from PowerSDR and Janus - 14 Aug 2006 
+//				Added PTT from PowerSDR and Janus - 14 Aug 2006
+//				Added CW key inputs - 14 Ang 2006 
 //
 // 	
 ////////////////////////////////////////////////////////////
@@ -147,6 +148,8 @@
 //   DFS1			 - pin 118 - AK5394A speed setting
 //	 AK_reset		 - pin 147 - AK5394A reset 			- Atlas C2 
 //	 PTT_in			 - pin 146 - PTT input from Janus 	- Atlas C3
+//	 dot			 - pin 97  - dot key 	- DB9 pin 7
+//	 dash			 - pin 96  - dash key 	- DB9 pin 6
 //
 //
 //	 FX2 pin    to   FPGA pin connections
@@ -211,7 +214,7 @@
 
 module Ozy_Janus(
 	FX2_CLK, IFCLK, CLK_24MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK, LED, I_PWM_out,
-	Q_PWM_out, CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, PTT_in, AK_reset);
+	Q_PWM_out, CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, PTT_in, AK_reset, dot, dash);
 
 input CLK_24MHZ; 			// From Janus board 24.576MHz 
 input FX2_CLK; 				// FX2 clock - 24MHz
@@ -234,8 +237,9 @@ output Q_PWM_out;
 output CBCLK, CLRCLK; 		// Clocks to TLV320AIC23B 
 output CDIN; 				// Rx data to TLV320AIC23B
 input CDOUT; 				// A/D data from TLV320AIC23B
-input PTT_in; 				// PTT/dot active low
-//input dash;				// CW dash key, active low - use with OZY
+input PTT_in; 				// PTT active high
+input dot; 					// CW dot key, active low
+input dash;					// CW dash key, active low 
 output DFS0,DFS1;			// speed control for AK5394A 
 output AK_reset;			// reset for AK5394A
 
@@ -473,9 +477,9 @@ case (AD_state)									   // see if sync is to be sent
 
 6'd4:	begin
 		if(loop_counter == 0) begin					// send C&C bytes, this is C0 
-			//register <= {C0[7:2], ~clean_dash, (~clean_dot || clean_PTT_in)};  // used with dot and dash for OZY
+			register <= {C0[7:2], ~clean_dash, (~clean_dot || clean_PTT_in)};  
 			register[15:8] <= 8'h7F;
-			register[7:0] <= {C0[7:1], clean_PTT_in}; // send PTT status each time 
+			//register[7:0] <= {C0[7:1], clean_PTT_in}; // send PTT status each time 
 			rx_avail <= 12'd4095 - sync_Rx_used;  	//  must match rx fifo size 
 			strobe <= 1'b1;
 			end 
@@ -988,9 +992,7 @@ I2SAudioOut  I2SAO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(Left_PWM), .
 
 debounce de_PTT(.clean_pb(clean_PTT_in), .pb(PTT_in), .clk(FX2_CLK));
 
-/*
 
-// use this code with OZY 
 
 ///////////////////////////////////////////////////////
 //
@@ -1013,9 +1015,6 @@ debounce de_dot(.clean_pb(clean_dot), .pb(dot), .clk(FX2_CLK));
 
 debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(FX2_CLK));
 
-*/
-
-
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
@@ -1025,8 +1024,8 @@ assign LED[2] = ~have_sync; 		// LED D4 toggles each time we get sync
 assign LED[3] = ~EP2_has_data; 		//1'b1;
 assign LED[4] =  1'b1;
 assign LED[5] = ~PTT_out;			// Led on when PTT active
-assign LED[6] = ~DFS0;
-assign LED[7] = ~DFS1; 
+assign LED[6] = dot;
+assign LED[7] = dash; 
 
 
 endmodule

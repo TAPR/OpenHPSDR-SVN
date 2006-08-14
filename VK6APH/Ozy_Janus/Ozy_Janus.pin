@@ -152,8 +152,8 @@ RESERVED_INPUT               : 92        :        :                   :         
 GND                          : 93        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 94        :        :                   :         : 4         :                
 RESERVED_INPUT               : 95        :        :                   :         : 4         :                
-RESERVED_INPUT               : 96        :        :                   :         : 4         :                
-RESERVED_INPUT               : 97        :        :                   :         : 4         :                
+dash                         : 96        : input  : LVTTL             :         : 4         : Y              
+dot                          : 97        : input  : LVTTL             :         : 4         : Y              
 VCCIO4                       : 98        : power  :                   : 3.3V    : 4         :                
 RESERVED_INPUT               : 99        :        :                   :         : 4         :                
 GND                          : 100       : gnd    :                   :         :           :                
