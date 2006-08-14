@@ -1,5 +1,5 @@
 |Ozy_Janus
-FX2_CLK => FX2_CLK~0.IN1
+FX2_CLK => FX2_CLK~0.IN3
 IFCLK => SLWR~reg0.CLK
 IFCLK => Tx_read_clock.CLK
 IFCLK => SLRD~reg0.CLK
@@ -90,8 +90,8 @@ LED[2] <= have_sync.DB_MAX_OUTPUT_PORT_TYPE
 LED[3] <= FLAGA.DB_MAX_OUTPUT_PORT_TYPE
 LED[4] <= <VCC>
 LED[5] <= PTT_out.DB_MAX_OUTPUT_PORT_TYPE
-LED[6] <= DFS0~0.DB_MAX_OUTPUT_PORT_TYPE
-LED[7] <= DFS1~0.DB_MAX_OUTPUT_PORT_TYPE
+LED[6] <= dot~0.DB_MAX_OUTPUT_PORT_TYPE
+LED[7] <= dash~0.DB_MAX_OUTPUT_PORT_TYPE
 I_PWM_out <= I_PWM_accumulator[16].DB_MAX_OUTPUT_PORT_TYPE
 Q_PWM_out <= Q_PWM_accumulator[16].DB_MAX_OUTPUT_PORT_TYPE
 CBCLK <= CBCLK~0.DB_MAX_OUTPUT_PORT_TYPE
@@ -102,6 +102,8 @@ DFS0 <= DFS0~0.DB_MAX_OUTPUT_PORT_TYPE
 DFS1 <= DFS1~0.DB_MAX_OUTPUT_PORT_TYPE
 PTT_in => PTT_in~0.IN1
 AK_reset <= AK_reset~reg0.DB_MAX_OUTPUT_PORT_TYPE
+dot => dot~0.IN1
+dash => dash~0.IN1
 
 
 |Ozy_Janus|clocks:clocks
@@ -2796,6 +2798,64 @@ outbit_o <= outbit_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |Ozy_Janus|debounce:de_PTT
+clean_pb <= clean_pb~reg0.DB_MAX_OUTPUT_PORT_TYPE
+pb => pb_history[0].DATAIN
+clk => pb_history[2].CLK
+clk => pb_history[1].CLK
+clk => pb_history[0].CLK
+clk => count[18].CLK
+clk => count[17].CLK
+clk => count[16].CLK
+clk => count[15].CLK
+clk => count[14].CLK
+clk => count[13].CLK
+clk => count[12].CLK
+clk => count[11].CLK
+clk => count[10].CLK
+clk => count[9].CLK
+clk => count[8].CLK
+clk => count[7].CLK
+clk => count[6].CLK
+clk => count[5].CLK
+clk => count[4].CLK
+clk => count[3].CLK
+clk => count[2].CLK
+clk => count[1].CLK
+clk => count[0].CLK
+clk => clean_pb~reg0.CLK
+clk => pb_history[3].CLK
+
+
+|Ozy_Janus|debounce:de_dot
+clean_pb <= clean_pb~reg0.DB_MAX_OUTPUT_PORT_TYPE
+pb => pb_history[0].DATAIN
+clk => pb_history[2].CLK
+clk => pb_history[1].CLK
+clk => pb_history[0].CLK
+clk => count[18].CLK
+clk => count[17].CLK
+clk => count[16].CLK
+clk => count[15].CLK
+clk => count[14].CLK
+clk => count[13].CLK
+clk => count[12].CLK
+clk => count[11].CLK
+clk => count[10].CLK
+clk => count[9].CLK
+clk => count[8].CLK
+clk => count[7].CLK
+clk => count[6].CLK
+clk => count[5].CLK
+clk => count[4].CLK
+clk => count[3].CLK
+clk => count[2].CLK
+clk => count[1].CLK
+clk => count[0].CLK
+clk => clean_pb~reg0.CLK
+clk => pb_history[3].CLK
+
+
+|Ozy_Janus|debounce:de_dash
 clean_pb <= clean_pb~reg0.DB_MAX_OUTPUT_PORT_TYPE
 pb => pb_history[0].DATAIN
 clk => pb_history[2].CLK

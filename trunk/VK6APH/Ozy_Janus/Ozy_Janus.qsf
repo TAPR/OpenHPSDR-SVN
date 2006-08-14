@@ -109,3 +109,5 @@ set_location_assignment PIN_147 -to AK_reset
 set_location_assignment PIN_134 -to DFS0
 set_location_assignment PIN_118 -to DFS1
 set_location_assignment PIN_146 -to PTT_in
+set_location_assignment PIN_97 -to dot
+set_location_assignment PIN_96 -to dash
