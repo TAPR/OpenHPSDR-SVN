@@ -40,6 +40,7 @@
 //                   reset correctly when connected to OZY. VK6APH 
 //	12 August 2006 - forced speed to 48k for testing 
 //  13 August 2006 - AK5394A now reset at power on and speed setting via Ozy
+//  14 August 2006 - inverted PTT pass to Atlas C3
 //
 //
 //  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
@@ -69,6 +70,7 @@ module Janus(
    output nCS,
    output nRST,
    input  PTT,
+   output C3,
    output QPWM,
    input  SCLK,
    input  SDOUT,
@@ -226,6 +228,7 @@ assign SMODE2 = 1'b1; 		// Master mode, I2S
 assign SSCK = TLV_CLK;		// SPI clock on TLV320
 assign MOSI = data; 		// SPI data to send to TLV320 
 assign ZCAL = 1'b1;			// Calibrate AK from A/D inputs
+assign C3 = !PTT; 			// Pass not PTT line through to Atlas C3
 
 
 
