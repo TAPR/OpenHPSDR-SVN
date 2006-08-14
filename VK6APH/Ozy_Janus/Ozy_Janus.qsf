@@ -51,7 +51,6 @@ set_location_assignment PIN_128 -to DOUT
 set_location_assignment PIN_133 -to LRCLK
 set_location_assignment PIN_144 -to I_PWM_out
 set_location_assignment PIN_113 -to Q_PWM_out
-set_location_assignment PIN_137 -to PTT
 set_location_assignment PIN_139 -to CBCLK
 set_location_assignment PIN_117 -to CDOUT
 set_location_assignment PIN_116 -to CDIN
@@ -109,3 +108,4 @@ set_global_assignment -name VERILOG_FILE Rx_fifo.v
 set_location_assignment PIN_147 -to AK_reset
 set_location_assignment PIN_134 -to DFS0
 set_location_assignment PIN_118 -to DFS1
+set_location_assignment PIN_146 -to PTT_in

@@ -1,4 +1,4 @@
-// V1.5 13th August 2006
+// V1.6 14th August 2006
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH 
 //
@@ -117,7 +117,8 @@
 //				Modified FX2 interface code - 10 Aug 2006
 //				Added sync indication - 13 Aug 2006
 //				Added POR for AK5394A via Atlas C2 - 13 Aug 2006
-//				Decoded speed setting for AK5394A  - 13 Aug 2006 
+//				Decoded speed setting for AK5394A  - 13 Aug 2006
+//				Added PTT from PowerSDR and Janus - 14 Aug 2006 
 //
 // 	
 ////////////////////////////////////////////////////////////
@@ -144,7 +145,8 @@
 //   CLRCLK			 - pin 141 - TLV320 
 //   DFS0		   	 - pin 134 - AK5394A speed setting
 //   DFS1			 - pin 118 - AK5394A speed setting
-//	 AK_reset		 - pin 147 - AK5394A reset - Atlas C2 
+//	 AK_reset		 - pin 147 - AK5394A reset 			- Atlas C2 
+//	 PTT_in			 - pin 146 - PTT input from Janus 	- Atlas C3
 //
 //
 //	 FX2 pin    to   FPGA pin connections
@@ -209,7 +211,7 @@
 
 module Ozy_Janus(
 	FX2_CLK, IFCLK, CLK_24MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK, LED, I_PWM_out,
-	Q_PWM_out, CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, PTT, AK_reset);
+	Q_PWM_out, CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, PTT_in, AK_reset);
 
 input CLK_24MHZ; 			// From Janus board 24.576MHz 
 input FX2_CLK; 				// FX2 clock - 24MHz
@@ -232,10 +234,11 @@ output Q_PWM_out;
 output CBCLK, CLRCLK; 		// Clocks to TLV320AIC23B 
 output CDIN; 				// Rx data to TLV320AIC23B
 input CDOUT; 				// A/D data from TLV320AIC23B
-input PTT; 					// PTT/dot active low
-output DFS0,DFS1;			// speed control for AK5394A 
+input PTT_in; 				// PTT/dot active low
 //input dash;				// CW dash key, active low - use with OZY
+output DFS0,DFS1;			// speed control for AK5394A 
 output AK_reset;			// reset for AK5394A
+
 
 
 /* 
@@ -397,9 +400,19 @@ assign DFS1 = AK_reset ? S1 : 1'b0;
 
 /*
 	Add code here to decode C0-C5. NOTE: decode on the
-	positive edge of CLRCLK since the data is stable then
+	positive edge of CLRCLK since the data is stable then.
+	Only decode when  have_sync is true otherwise set safe values.
 	
 */
+
+reg PTT_out;
+
+always @ (posedge CLRCLK)
+begin
+	if(Rx_control_0[0] && have_sync) 	// decode PTT from PowerSDR and Janus  
+		 PTT_out <= 1'b1;
+	else PTT_out <= 1'b0;
+end 
 
 	
 //////////////////////////////////////////////////////////////
@@ -427,7 +440,7 @@ assign DFS1 = AK_reset ? S1 : 1'b0;
 	since the counter is incremented before we read it we actually test for 
 	the loop counter to be 63. 
 	
-	If PTT, dot or dash inputs are acitve they are sent in C & C byte C0
+	If PTT_in, dot or dash inputs are acitve they are sent in C & C byte C0
 */
 
 wire [7:0]C0;
@@ -460,9 +473,9 @@ case (AD_state)									   // see if sync is to be sent
 
 6'd4:	begin
 		if(loop_counter == 0) begin					// send C&C bytes, this is C0 
-			//register <= {C0[7:2], ~clean_dash, (~clean_dot || ~clean_PTT)};  // used with dot and dash for OZY
+			//register <= {C0[7:2], ~clean_dash, (~clean_dot || clean_PTT_in)};  // used with dot and dash for OZY
 			register[15:8] <= 8'h7F;
-			register[7:0] <= {C0[7:1], ~clean_PTT}; // send PTT status each time 
+			register[7:0] <= {C0[7:1], clean_PTT_in}; // send PTT status each time 
 			rx_avail <= 12'd4095 - sync_Rx_used;  	//  must match rx fifo size 
 			strobe <= 1'b1;
 			end 
@@ -971,9 +984,9 @@ I2SAudioOut  I2SAO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(Left_PWM), .
 //
 ///////////////////////////////////////////////////////
 
- wire clean_PTT; // debounced button 
+ wire clean_PTT_in; // debounced button 
 
-debounce de_PTT(.clean_pb(clean_PTT), .pb(PTT), .clk(FX2_CLK));
+debounce de_PTT(.clean_pb(clean_PTT_in), .pb(PTT_in), .clk(FX2_CLK));
 
 /*
 
@@ -1010,8 +1023,8 @@ assign LED[0] = ~write_full; 		// LED D1 on when Rx fifo is full.
 assign LED[1] = ~EP6_ready;			// LED D3 on when we can write to EP6
 assign LED[2] = ~have_sync; 		// LED D4 toggles each time we get sync
 assign LED[3] = ~EP2_has_data; 		//1'b1;
-assign LED[4] = 1'b1;
-assign LED[5] = 1'b1;
+assign LED[4] =  1'b1;
+assign LED[5] = ~PTT_out;			// Led on when PTT active
 assign LED[6] = ~DFS0;
 assign LED[7] = ~DFS1; 
 
