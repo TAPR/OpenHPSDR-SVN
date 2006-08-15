@@ -360,6 +360,7 @@ assign CLRCLK = clock_out[8];		// 48kHz
 	
 */ 
 
+/*
 wire DFS0;
 wire DFS1;
 reg S0;
@@ -395,6 +396,15 @@ end
 assign DFS0 = AK_reset ? S0 : 1'b0;
 assign DFS1 = AK_reset ? S1 : 1'b0;
 
+*/
+
+// need to ensure that the AK5394a has a valid speed setting when being reset
+
+wire DFS0;
+wire DFS1;
+
+assign {DFS1,DFS0} = (Rx_control_0[7:1] == 8'b0 && AK_reset) ? Rx_control_1[1:0] : 2'b0; 
+
 
 //////////////////////////////////////////////////////////////
 //
@@ -403,11 +413,12 @@ assign DFS1 = AK_reset ? S1 : 1'b0;
 //////////////////////////////////////////////////////////////
 
 /*
-	Add code here to decode C0-C5. NOTE: decode on the
-	positive edge of CLRCLK since the data is stable then.
+	Add code here to decode C0-C5.
 	Only decode when  have_sync is true otherwise set safe values.
 	
 */
+
+/*
 
 reg PTT_out;
 
@@ -417,6 +428,14 @@ begin
 		 PTT_out <= 1'b1;
 	else PTT_out <= 1'b0;
 end 
+
+*/
+
+// decode PTT from PowerSDR 
+
+wire PTT_out;
+
+assign PTT_out = have_sync ? Rx_control_0[0] : 1'b0;
 
 	
 //////////////////////////////////////////////////////////////
