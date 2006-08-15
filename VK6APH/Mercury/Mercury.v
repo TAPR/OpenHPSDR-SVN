@@ -23,7 +23,8 @@
 	12 June 2006 - First test version using state machine NCO
 	12 June 2006 - Sign extension for I and Q data added
 	13 June 2006 - CORDIC NCO stated 
-	28 July 2006 - Modified to use OZY and  16 bit FIFO 
+	28 July 2006 - Modified to use OZY and  16 bit FIFO
+	15 Aug  2006 - Futher modifications for use with OZY 
 	
 	
 */
