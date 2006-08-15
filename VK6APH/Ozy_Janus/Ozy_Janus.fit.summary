@@ -1,12 +1,12 @@
-Fitter Status : Successful - Tue Aug 15 13:03:37 2006
+Fitter Status : Successful - Tue Aug 15 20:52:57 2006
 Quartus II Version : 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
 Revision Name : Ozy_Janus
 Top-level Entity Name : Ozy_Janus
 Family : Cyclone II
 Device : EP2C5Q208C8
 Timing Models : Final
-Total logic elements : 900 / 4,608 ( 20 % )
-Total registers : 733
+Total logic elements : 897 / 4,608 ( 19 % )
+Total registers : 732
 Total pins : 51 / 142 ( 36 % )
 Total virtual pins : 0
 Total memory bits : 98,304 / 119,808 ( 82 % )

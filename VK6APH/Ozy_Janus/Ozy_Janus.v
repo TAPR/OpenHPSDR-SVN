@@ -1,4 +1,4 @@
-// V1.6 14th August 2006
+// V1.7 15th August 2006
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH 
 //
@@ -119,7 +119,8 @@
 //				Added POR for AK5394A via Atlas C2 - 13 Aug 2006
 //				Decoded speed setting for AK5394A  - 13 Aug 2006
 //				Added PTT from PowerSDR and Janus - 14 Aug 2006
-//				Added CW key inputs - 14 Ang 2006 
+//				Added CW key inputs - 14 Aug 2006 
+//				Speed up PTT and CW code - 15 Aug 2006
 //
 // 	
 ////////////////////////////////////////////////////////////
@@ -221,7 +222,7 @@ input FX2_CLK; 				// FX2 clock - 24MHz
 input IFCLK;				// FX2 IFCLOCK - 48MHz
 input BCLK, DOUT, LRCLK;
 inout  [15:0] FX2_FD;		// bidirectional FIFO data to/from the FX2
-//output  [15:0] FX2_FD;		// bidirectional FIFO data to/from the FX2 *******************************8
+//output  [15:0] FX2_FD;		// bidirectional FIFO data to/from the FX2 
 							// ***** use this so simulation works 
 input FLAGA;
 input FLAGB;
@@ -303,7 +304,7 @@ reg strobe;					// set when we want to send data to the Tx FIFO
 
 /* 
 	Reset AL5394A at power on and force into 48kHz sampling rate.
-	hold the A/D chip in reset until 2^26 CLL_24MHZ have passed - about 3 seconds. This
+	Hold the A/D chip in reset until 2^26 CLL_24MHZ have passed - about 3 seconds. This
 	is to allow the AK4593A to calibrate correctly.
 */
 
@@ -358,47 +359,10 @@ assign CLRCLK = clock_out[8];		// 48kHz
 	C1 = 8'bxxxx_xx01  - 96kHz
 	C1 = 8'bxxxx_xx10  - 192kHz
 	
+	The speed change should only be enabled when have_sync is true.
+	When reseting the AK5394A force to 48kHz. 
+	
 */ 
-
-/*
-wire DFS0;
-wire DFS1;
-reg S0;
-reg S1;
-
-always @(posedge CLRCLK) 			// data is valid at the rising edge of this clock 
-begin
-	if (Rx_control_0[7:1] == 8'd0) // speed data is not valid otherwise
-	begin
-	case(Rx_control_1[1:0])
-	0:begin 
-    	S0 <= 0;      		// AK5394A at 48k
-    	S1 <= 0;
-      end
-	1:begin 
-    	S0 <= 1;       		// AK5394A at 96k
-    	S1 <= 0;
-      end
-	2:begin 
-    	S0 <= 0;       		// AK5394A at 192k
-    	S1 <= 1;
-      end       
-   	default: begin
-		S0 <= 0;      		// AK5394A at 48k on error
-    	S1 <= 0;
-	  end
-	endcase 
-	end
-end
-
-// need to ensure that the AK5394a has a valid speed setting when being reset
-
-assign DFS0 = AK_reset ? S0 : 1'b0;
-assign DFS1 = AK_reset ? S1 : 1'b0;
-
-*/
-
-// need to ensure that the AK5394a has a valid speed setting when being reset
 
 wire DFS0;
 wire DFS1;
@@ -418,23 +382,9 @@ assign {DFS1,DFS0} = (Rx_control_0[7:1] == 8'b0 && AK_reset) ? Rx_control_1[1:0]
 	
 */
 
-/*
-
-reg PTT_out;
-
-always @ (posedge CLRCLK)
-begin
-	if(Rx_control_0[0] && have_sync) 	// decode PTT from PowerSDR and Janus  
-		 PTT_out <= 1'b1;
-	else PTT_out <= 1'b0;
-end 
-
-*/
-
-// decode PTT from PowerSDR 
+// decode PTT from PowerSDR. Held in Rx_control_0[0] 
 
 wire PTT_out;
-
 assign PTT_out = have_sync ? Rx_control_0[0] : 1'b0;
 
 	
@@ -498,7 +448,6 @@ case (AD_state)									   // see if sync is to be sent
 		if(loop_counter == 0) begin					// send C&C bytes, this is C0 
 			register <= {C0[7:2], ~clean_dash, (~clean_dot || clean_PTT_in)};  
 			register[15:8] <= 8'h7F;
-			//register[7:0] <= {C0[7:1], clean_PTT_in}; // send PTT status each time 
 			rx_avail <= 12'd4095 - sync_Rx_used;  	//  must match rx fifo size 
 			strobe <= 1'b1;
 			end 
@@ -1009,7 +958,7 @@ I2SAudioOut  I2SAO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(Left_PWM), .
 
  wire clean_PTT_in; // debounced button 
 
-debounce de_PTT(.clean_pb(clean_PTT_in), .pb(PTT_in), .clk(FX2_CLK));
+debounce de_PTT(.clean_pb(clean_PTT_in), .pb(PTT_in), .clk(IFCLK));
 
 
 
@@ -1021,7 +970,7 @@ debounce de_PTT(.clean_pb(clean_PTT_in), .pb(PTT_in), .clk(FX2_CLK));
 
  wire clean_dot; // debounced dot 
 
-debounce de_dot(.clean_pb(clean_dot), .pb(dot), .clk(FX2_CLK));
+debounce de_dot(.clean_pb(clean_dot), .pb(dot), .clk(IFCLK));
 
 
 ///////////////////////////////////////////////////////
@@ -1032,7 +981,7 @@ debounce de_dot(.clean_pb(clean_dot), .pb(dot), .clk(FX2_CLK));
 
  wire clean_dash; // debounced dash 
 
-debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(FX2_CLK));
+debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 
 // Flash the LEDs to show something is working! - LEDs are active low
