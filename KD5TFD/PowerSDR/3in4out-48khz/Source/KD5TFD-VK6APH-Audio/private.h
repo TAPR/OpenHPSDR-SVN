@@ -29,12 +29,9 @@ extern DttSP_EXP void DelPolyPhaseFIRF (/*ResSt*/ void * resst);
 #include <semaphore.h> 
 
 
-
-
-
 // PowerSDR interface routines 
 // extern KD5TFDVK6APHAUDIO_API int StartAudio(int block_size); 
-extern KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata), int sample_bits);
+extern KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata), int sample_bits);
 extern KD5TFDVK6APHAUDIO_API void StopAudio(void); 
 extern KD5TFDVK6APHAUDIO_API int GetDotDashBits(void); 
 extern KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
