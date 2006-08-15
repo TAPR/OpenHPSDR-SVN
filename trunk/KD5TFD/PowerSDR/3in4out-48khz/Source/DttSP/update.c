@@ -1,7 +1,7 @@
 /* update.c
 
-common defs and code for parm update 
-   
+common defs and code for parm update
+
 This file is part of a program that implements a Software-Defined Radio.
 
 Copyright (C) 2004, 2005, 2006-5 by Frank Brickle, AB2KT and Bob McGwier, N4HY
@@ -67,14 +67,14 @@ setRXFilter (int n, char **p)
   delFIR_COMPLEX (rx[RL].filt.coef);
 
   rx[RL].filt.coef = newFIR_Bandpass_COMPLEX (low_frequency,
-					      high_frequency,
-					      uni.samplerate, ncoef);
+                                              high_frequency,
+                                              uni.samplerate, ncoef);
 
   zcvec = newvec_COMPLEX (fftlen, "filter z vec in setFilter");
   ptmp = fftwf_plan_dft_1d (fftlen,
-			    (fftwf_complex *) zcvec,
-			    (fftwf_complex *) rx[RL].filt.ovsv->zfvec,
-			    FFTW_FORWARD, uni.wisdom.bits);
+                            (fftwf_complex *) zcvec,
+                            (fftwf_complex *) rx[RL].filt.ovsv->zfvec,
+                            FFTW_FORWARD, uni.wisdom.bits);
 #ifdef LHS
   for (i = 0; i < ncoef; i++)
     zcvec[i] = rx[RL].filt.coef->coef[i];
@@ -87,7 +87,7 @@ setRXFilter (int n, char **p)
   delvec_COMPLEX (zcvec);
   normalize_vec_COMPLEX (rx[RL].filt.ovsv->zfvec, rx[RL].filt.ovsv->fftlen);
   memcpy ((char *) rx[RL].filt.save, (char *) rx[RL].filt.ovsv->zfvec,
-	  rx[RL].filt.ovsv->fftlen * sizeof (COMPLEX));
+          rx[RL].filt.ovsv->fftlen * sizeof (COMPLEX));
 
   return 0;
 }
@@ -111,15 +111,15 @@ setTXFilter (int n, char **p)
     return -3;
   delFIR_COMPLEX (tx.filt.coef);
   tx.filt.coef = newFIR_Bandpass_COMPLEX (low_frequency,
-					  high_frequency,
-					  uni.samplerate, ncoef);
+                                          high_frequency,
+                                          uni.samplerate, ncoef);
 
   zcvec = newvec_COMPLEX (fftlen, "filter z vec in setFilter");
 //  ptmp = fftw_create_plan(fftlen, FFTW_FORWARD, uni.wisdom.bits);
   ptmp = fftwf_plan_dft_1d (fftlen,
-			    (fftwf_complex *) zcvec,
-			    (fftwf_complex *) tx.filt.ovsv->zfvec,
-			    FFTW_FORWARD, uni.wisdom.bits);
+                            (fftwf_complex *) zcvec,
+                            (fftwf_complex *) tx.filt.ovsv->zfvec,
+                            FFTW_FORWARD, uni.wisdom.bits);
 
 #ifdef LHS
   for (i = 0; i < ncoef; i++)
@@ -135,8 +135,8 @@ setTXFilter (int n, char **p)
   delvec_COMPLEX (zcvec);
   normalize_vec_COMPLEX (tx.filt.ovsv->zfvec, tx.filt.ovsv->fftlen);
   memcpy ((char *) tx.filt.save,
-	  (char *) tx.filt.ovsv->zfvec,
-	  tx.filt.ovsv->fftlen * sizeof (COMPLEX));
+          (char *) tx.filt.ovsv->zfvec,
+          tx.filt.ovsv->fftlen * sizeof (COMPLEX));
 
   return 0;
 }
@@ -150,11 +150,11 @@ setFilter (int n, char **p)
     {
       int trx = atoi (p[2]);
       if (trx == RX)
-	return setRXFilter (n, p);
+        return setRXFilter (n, p);
       else if (trx == TX)
-	return setTXFilter (n, p);
+        return setTXFilter (n, p);
       else
-	return -1;
+        return -1;
     }
 }
 
@@ -167,15 +167,15 @@ setMode (int n, char **p)
     {
       int trx = atoi (p[1]);
       switch (trx)
-	{
-	case TX:
-	  tx.mode = mode;
-	  break;
-	case RX:
-	default:
-	  rx[RL].mode = mode;
-	  break;
-	}
+        {
+        case TX:
+          tx.mode = mode;
+          break;
+        case RX:
+        default:
+          rx[RL].mode = mode;
+          break;
+        }
     }
   else
     tx.mode = rx[RL].mode = uni.mode.sdr = mode;
@@ -197,15 +197,15 @@ setOsc (int n, char **p)
     {
       int trx = atoi (p[1]);
       switch (trx)
-	{
-	case TX:
-	  tx.osc.gen->Frequency = newfreq;
-	  break;
-	case RX:
-	default:
-	  rx[RL].osc.gen->Frequency = newfreq;
-	  break;
-	}
+        {
+        case TX:
+          tx.osc.gen->Frequency = newfreq;
+          break;
+        case RX:
+        default:
+          rx[RL].osc.gen->Frequency = newfreq;
+          break;
+        }
     }
   else
     tx.osc.gen->Frequency = rx[RL].osc.gen->Frequency = newfreq;
@@ -232,40 +232,40 @@ replay_updates (void)
 
       // echo to logging output?
       if (*str == '-')
-	{
-	  quiet = TRUE;
-	  str++;
-	}
+        {
+          quiet = TRUE;
+          str++;
+        }
       else
-	quiet = FALSE;
+        quiet = FALSE;
 
       split (splt, str);
       if (NF (splt) < 1)
-	continue;
+        continue;
 
       else
-	{
-	  Thunk thk = Thunk_lookup (update_cmds, F (splt, 0));
-	  if (!thk)
-	    continue;
+        {
+          Thunk thk = Thunk_lookup (update_cmds, F (splt, 0));
+          if (!thk)
+            continue;
 
-	  else
-	    {
-	      int val = (*thk) (NF (splt) - 1, Fptr (splt, 1));
+          else
+            {
+              int val = (*thk) (NF (splt) - 1, Fptr (splt, 1));
 
-	      if (log && !quiet)
-		{
-		  int i;
-		  char *s = since (&top.start_tv);
-		  fprintf (log, "replay[%s]: returned %d from", s, val);
-		  for (i = 0; i < NF (splt); i++)
-		    fprintf (log, " %s", F (splt, i));
-		  putc ('\n', log);
-		  fflush (log);
-		}
-	      // discard val
-	    }
-	}
+              if (log && !quiet)
+                {
+                  int i;
+                  char *s = since (&top.start_tv);
+                  fprintf (log, "replay[%s]: returned %d from", s, val);
+                  for (i = 0; i < NF (splt); i++)
+                    fprintf (log, " %s", F (splt, i));
+                  putc ('\n', log);
+                  fflush (log);
+                }
+              // discard val
+            }
+        }
     }
 }
 
@@ -278,17 +278,17 @@ setSampleRate (int n, char **p)
     {
       REAL samplerate = (REAL) atof (p[0]);
       if (samplerate != uni.samplerate)
-	{
-	  top.susp = TRUE;
-	  if (reset_for_samplerate ((REAL) atof (p[0])) != -1)
-	    {
-	      uni.samplerate = samplerate;
-	      if (uni.update.flag)
-		replay_updates ();
-	      rtn = 0;
-	    }
-	  top.susp = FALSE;
-	}
+        {
+          top.susp = TRUE;
+          if (reset_for_samplerate ((REAL) atof (p[0])) != -1)
+            {
+              uni.samplerate = samplerate;
+              if (uni.update.flag)
+                replay_updates ();
+              rtn = 0;
+            }
+          top.susp = FALSE;
+        }
     }
   return rtn;
 }
@@ -366,15 +366,15 @@ setfixedAGC (int n, char **p)
     {
       int trx = atoi (p[1]);
       switch (trx)
-	{
-	case TX:
-	  tx.leveler.gen->gain.now = gain;
-	  break;
-	case RX:
-	default:
-	  rx[RL].dttspagc.gen->gain.now = gain;
-	  break;
-	}
+        {
+        case TX:
+          tx.leveler.gen->gain.now = gain;
+          break;
+        case RX:
+        default:
+          rx[RL].dttspagc.gen->gain.now = gain;
+          break;
+        }
     }
   else
     tx.leveler.gen->gain.now = rx[RL].dttspagc.gen->gain.now = gain;
@@ -443,7 +443,7 @@ setTXLevelerAttack (int n, char **p)
   tx.leveler.gen->fastindx =
     (tx.leveler.gen->sndx +
      FASTLEAD * tx.leveler.gen->mask) & tx.leveler.gen->mask;
-  tx.leveler.gen->fasthangtime = (REAL) 0.1;	//wa6ahl: 100 ms
+  tx.leveler.gen->fasthangtime = (REAL) 0.1;    //wa6ahl: 100 ms
   return 0;
 }
 PRIVATE int
@@ -504,9 +504,9 @@ setRXAGC (int n, char **p)
       rx[RL].dttspagc.gen->hangtime = (REAL) 0.5;
       rx[RL].dttspagc.gen->fasthangtime = (REAL) 0.1;
       rx[RL].dttspagc.gen->decay =
-	(REAL) (1.0 - exp (-1000 / (500.0 * uni.samplerate)));
+        (REAL) (1.0 - exp (-1000 / (500.0 * uni.samplerate)));
       rx[RL].dttspagc.gen->one_m_decay =
-	(REAL) (1.0 - rx[RL].dttspagc.gen->decay);
+        (REAL) (1.0 - rx[RL].dttspagc.gen->decay);
       rx[RL].dttspagc.flag = TRUE;
       break;
     case agcMED:
@@ -514,9 +514,9 @@ setRXAGC (int n, char **p)
       rx[RL].dttspagc.gen->hangtime = (REAL) 0.25;
       rx[RL].dttspagc.gen->fasthangtime = (REAL) 0.1;
       rx[RL].dttspagc.gen->decay =
-	(REAL) (1.0 - exp (-1000 / (250.0 * uni.samplerate)));
+        (REAL) (1.0 - exp (-1000 / (250.0 * uni.samplerate)));
       rx[RL].dttspagc.gen->one_m_decay =
-	(REAL) (1.0 - rx[RL].dttspagc.gen->decay);
+        (REAL) (1.0 - rx[RL].dttspagc.gen->decay);
       rx[RL].dttspagc.flag = TRUE;
       break;
     case agcFAST:
@@ -525,9 +525,9 @@ setRXAGC (int n, char **p)
       rx[RL].dttspagc.gen->fasthangtime = (REAL) 0.1;
       rx[RL].dttspagc.gen->hangtime = (REAL) 0.1;
       rx[RL].dttspagc.gen->decay =
-	(REAL) (1.0 - exp (-1000 / (100.0 * uni.samplerate)));
+        (REAL) (1.0 - exp (-1000 / (100.0 * uni.samplerate)));
       rx[RL].dttspagc.gen->one_m_decay =
-	(REAL) (1.0 - rx[RL].dttspagc.gen->decay);
+        (REAL) (1.0 - rx[RL].dttspagc.gen->decay);
       rx[RL].dttspagc.flag = TRUE;
       break;
     case agcLONG:
@@ -537,7 +537,7 @@ setRXAGC (int n, char **p)
       rx[RL].dttspagc.gen->fasthangtime = (REAL) 0.1;
       rx[RL].dttspagc.gen->decay = (REAL) (1.0 - exp (-0.5 / uni.samplerate));
       rx[RL].dttspagc.gen->one_m_decay =
-	(REAL) (1.0 - rx[RL].dttspagc.gen->decay);
+        (REAL) (1.0 - rx[RL].dttspagc.gen->decay);
       break;
     }
   return 0;
@@ -693,34 +693,34 @@ setGrphRXEQ (int n, char **p)
 
       tmpfilt = newFIR_Bandpass_COMPLEX (-400, 400, uni.samplerate, 257);
       for (i = 0; i < 257; i++)
-	tmpcoef[i] = Cscl (tmpfilt->coef[i], gain[0]);
+        tmpcoef[i] = Cscl (tmpfilt->coef[i], gain[0]);
       delFIR_Bandpass_COMPLEX (tmpfilt);
 
       tmpfilt = newFIR_Bandpass_COMPLEX (400, 1500, uni.samplerate, 257);
       for (i = 0; i < 257; i++)
-	tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[1]));
+        tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[1]));
       delFIR_Bandpass_COMPLEX (tmpfilt);
 
       tmpfilt = newFIR_Bandpass_COMPLEX (-1500, -400, uni.samplerate, 257);
       for (i = 0; i < 257; i++)
-	tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[1]));
+        tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[1]));
       delFIR_Bandpass_COMPLEX (tmpfilt);
 
       tmpfilt = newFIR_Bandpass_COMPLEX (1500, 6000, uni.samplerate, 257);
       for (i = 0; i < 257; i++)
-	tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[2]));
+        tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[2]));
       delFIR_Bandpass_COMPLEX (tmpfilt);
 
       tmpfilt = newFIR_Bandpass_COMPLEX (-6000, -1500, uni.samplerate, 257);
       for (i = 0; i < 257; i++)
-	tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[2]));
+        tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[2]));
       delFIR_Bandpass_COMPLEX (tmpfilt);
       for (i = 0; i < 257; i++)
-	filtcoef[254 + i] = tmpcoef[i];
+        filtcoef[254 + i] = tmpcoef[i];
       ptmp =
-	fftwf_plan_dft_1d (512, (fftwf_complex *) filtcoef,
-			   (fftwf_complex *) rx[RL].grapheq.gen->p->
-			   zfvec, FFTW_FORWARD, uni.wisdom.bits);
+        fftwf_plan_dft_1d (512, (fftwf_complex *) filtcoef,
+                           (fftwf_complex *) rx[RL].grapheq.gen->p->
+                           zfvec, FFTW_FORWARD, uni.wisdom.bits);
 
       fftwf_execute (ptmp);
       fftwf_destroy_plan (ptmp);
@@ -752,34 +752,34 @@ setGrphTXEQ (int n, char **p)
 
       tmpfilt = newFIR_Bandpass_COMPLEX (-400, 400, uni.samplerate, 257);
       for (i = 0; i < 257; i++)
-	tmpcoef[i] = Cscl (tmpfilt->coef[i], gain[0]);
+        tmpcoef[i] = Cscl (tmpfilt->coef[i], gain[0]);
       delFIR_Bandpass_COMPLEX (tmpfilt);
 
       tmpfilt = newFIR_Bandpass_COMPLEX (400, 1500, uni.samplerate, 257);
       for (i = 0; i < 257; i++)
-	tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[1]));
+        tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[1]));
       delFIR_Bandpass_COMPLEX (tmpfilt);
 
       tmpfilt = newFIR_Bandpass_COMPLEX (-1500, -400, uni.samplerate, 257);
       for (i = 0; i < 257; i++)
-	tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[1]));
+        tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[1]));
       delFIR_Bandpass_COMPLEX (tmpfilt);
 
       tmpfilt = newFIR_Bandpass_COMPLEX (1500, 6000, uni.samplerate, 257);
       for (i = 0; i < 257; i++)
-	tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[2]));
+        tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[2]));
       delFIR_Bandpass_COMPLEX (tmpfilt);
 
       tmpfilt = newFIR_Bandpass_COMPLEX (-6000, -1500, uni.samplerate, 257);
       for (i = 0; i < 257; i++)
-	tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[2]));
+        tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], gain[2]));
       delFIR_Bandpass_COMPLEX (tmpfilt);
       for (i = 0; i < 257; i++)
-	filtcoef[255 + i] = tmpcoef[i];
+        filtcoef[255 + i] = tmpcoef[i];
       ptmp =
-	fftwf_plan_dft_1d (512, (fftwf_complex *) filtcoef,
-			   (fftwf_complex *) tx.grapheq.gen->p->zfvec,
-			   FFTW_FORWARD, uni.wisdom.bits);
+        fftwf_plan_dft_1d (512, (fftwf_complex *) filtcoef,
+                           (fftwf_complex *) tx.grapheq.gen->p->zfvec,
+                           FFTW_FORWARD, uni.wisdom.bits);
 
       fftwf_execute (ptmp);
       fftwf_destroy_plan (ptmp);
@@ -1045,32 +1045,32 @@ setRXOn (int n, char **p)
   if (n < 1)
     {
       if (uni.multirx.act[RL])
-	return -1;
+        return -1;
       else
-	{
-	  uni.multirx.act[RL] = TRUE;
-	  uni.multirx.nac++;
-	  rx[RL].tick = 0;
-	  return 0;
-	}
+        {
+          uni.multirx.act[RL] = TRUE;
+          uni.multirx.nac++;
+          rx[RL].tick = 0;
+          return 0;
+        }
     }
   else
     {
       int k = atoi (p[0]);
       if (k < 0 || k >= uni.multirx.nrx)
-	return -1;
+        return -1;
       else
-	{
-	  if (uni.multirx.act[k])
-	    return -1;
-	  else
-	    {
-	      uni.multirx.act[k] = TRUE;
-	      uni.multirx.nac++;
-	      rx[k].tick = 0;
-	      return 0;
-	    }
-	}
+        {
+          if (uni.multirx.act[k])
+            return -1;
+          else
+            {
+              uni.multirx.act[k] = TRUE;
+              uni.multirx.nac++;
+              rx[k].tick = 0;
+              return 0;
+            }
+        }
     }
 }
 
@@ -1080,30 +1080,30 @@ setRXOff (int n, char **p)
   if (n < 1)
     {
       if (!uni.multirx.act[RL])
-	return -1;
+        return -1;
       else
-	{
-	  uni.multirx.act[RL] = FALSE;
-	  --uni.multirx.nac;
-	  return 0;
-	}
+        {
+          uni.multirx.act[RL] = FALSE;
+          --uni.multirx.nac;
+          return 0;
+        }
     }
   else
     {
       int k = atoi (p[0]);
       if (k < 0 || k >= uni.multirx.nrx)
-	return -1;
+        return -1;
       else
-	{
-	  if (!uni.multirx.act[k])
-	    return -1;
-	  else
-	    {
-	      uni.multirx.act[k] = FALSE;
-	      --uni.multirx.nac;
-	      return 0;
-	    }
-	}
+        {
+          if (!uni.multirx.act[k])
+            return -1;
+          else
+            {
+              uni.multirx.act[k] = FALSE;
+              --uni.multirx.nac;
+              return 0;
+            }
+        }
     }
 }
 
@@ -1122,7 +1122,7 @@ setRXPan (int n, char **p)
   else
     {
       if ((pos = (REAL) atof (p[0])) < 0.0 || pos > 1.0)
-	return -1;
+        return -1;
       theta = (REAL) ((1.0 - pos) * M_PI / 2.0);
       rx[RL].azim = Cmplx ((REAL) cos (theta), (REAL) sin (theta));
       return 0;
@@ -1141,20 +1141,20 @@ setAuxMixSt (int n, char **p)
     {
       BOOLEAN flag = atoi (p[0]);
       if (n > 1)
-	{
-	  switch (atoi (p[1]))
-	    {
-	    case TX:
-	      uni.mix.tx.flag = flag;
-	      break;
-	    case RX:
-	    default:
-	      uni.mix.rx.flag = flag;
-	      break;
-	    }
-	}
+        {
+          switch (atoi (p[1]))
+            {
+            case TX:
+              uni.mix.tx.flag = flag;
+              break;
+            case RX:
+            default:
+              uni.mix.rx.flag = flag;
+              break;
+            }
+        }
       else
-	uni.mix.rx.flag = uni.mix.tx.flag = flag;
+        uni.mix.rx.flag = uni.mix.tx.flag = flag;
       return 0;
     }
 }
@@ -1172,20 +1172,20 @@ setAuxMixGain (int n, char **p)
     {
       REAL gain = dB2lin ((REAL) atof (p[0]));
       if (n > 1)
-	{
-	  switch (atoi (p[1]))
-	    {
-	    case TX:
-	      uni.mix.tx.gain = gain;
-	      break;
-	    case RX:
-	    default:
-	      uni.mix.rx.gain = gain;
-	      break;
-	    }
-	}
+        {
+          switch (atoi (p[1]))
+            {
+            case TX:
+              uni.mix.tx.gain = gain;
+              break;
+            case RX:
+            default:
+              uni.mix.rx.gain = gain;
+              break;
+            }
+        }
       else
-	uni.mix.rx.gain = uni.mix.tx.gain = gain;
+        uni.mix.rx.gain = uni.mix.tx.gain = gain;
       return 0;
     }
 }
@@ -1202,20 +1202,20 @@ setCompandSt (int n, char **p)
     {
       BOOLEAN flag = atoi (p[0]);
       if (n > 1)
-	{
-	  switch (atoi (p[1]))
-	    {
-	    case RX:
-	      rx[RL].cpd.flag = flag;
-	      break;
-	    case TX:
-	    default:
-	      tx.cpd.flag = flag;
-	      break;
-	    }
-	}
+        {
+          switch (atoi (p[1]))
+            {
+            case RX:
+              rx[RL].cpd.flag = flag;
+              break;
+            case TX:
+            default:
+              tx.cpd.flag = flag;
+              break;
+            }
+        }
       else
-	tx.cpd.flag = flag;
+        tx.cpd.flag = flag;
       return 0;
     }
 }
@@ -1229,20 +1229,20 @@ setCompand (int n, char **p)
     {
       REAL fac = (REAL) atof (p[0]);
       if (n > 1)
-	{
-	  switch (atoi (p[1]))
-	    {
-	    case RX:
-	      WSCReset (rx[RL].cpd.gen, fac);
-	      break;
-	    case TX:
-	    default:
-	      WSCReset (tx.cpd.gen, fac);
-	      break;
-	    }
-	}
+        {
+          switch (atoi (p[1]))
+            {
+            case RX:
+              WSCReset (rx[RL].cpd.gen, fac);
+              break;
+            case TX:
+            default:
+              WSCReset (tx.cpd.gen, fac);
+              break;
+            }
+        }
       else
-	WSCReset (tx.cpd.gen, fac);
+        WSCReset (tx.cpd.gen, fac);
       return 0;
     }
 }
@@ -1320,21 +1320,21 @@ setMeterType (int n, char **p)
     {
       METERTYPE type = (METERTYPE) atoi (p[0]);
       if (n > 1)
-	{
-	  int trx = atoi (p[1]);
-	  switch (trx)
-	    {
-	    case TX:
-	      uni.meter.tx.type = type;
-	      break;
-	    case RX:
-	    default:
-	      uni.meter.rx.type = type;
-	      break;
-	    }
-	}
+        {
+          int trx = atoi (p[1]);
+          switch (trx)
+            {
+            case TX:
+              uni.meter.tx.type = type;
+              break;
+            case RX:
+            default:
+              uni.meter.rx.type = type;
+              break;
+            }
+        }
       else
-	uni.meter.rx.type = type;
+        uni.meter.rx.type = type;
     }
   return 0;
 }
@@ -1346,36 +1346,36 @@ setSpectrumPolyphase (int n, char **p)
   if (uni.spec.polyphase != setit)
     {
       if (setit)
-	{
-	  uni.spec.polyphase = TRUE;
-	  uni.spec.mask = (8 * uni.spec.size) - 1;
-	  {
-	    RealFIR WOLAfir;
-	    REAL MaxTap = 0;
-	    int i;
-	    WOLAfir =
-	      newFIR_Lowpass_REAL (1.0, (REAL) uni.spec.size,
-				   8 * uni.spec.size - 1);
-	    memset (uni.spec.window, 0, 8 * sizeof (REAL) * uni.spec.size);
-	    memcpy (uni.spec.window, FIRcoef (WOLAfir),
-		    sizeof (REAL) * (8 * uni.spec.size - 1));
-	    for (i = 0; i < 8 * uni.spec.size; i++)
-	      MaxTap = max (MaxTap, (REAL) fabs (uni.spec.window[i]));
-	    MaxTap = 1.0f / MaxTap;
-	    for (i = 0; i < 8 * uni.spec.size; i++)
-	      {
-		uni.spec.window[i] *= MaxTap;
-	      }
-	    delFIR_REAL (WOLAfir);
-	  }
-	}
+        {
+          uni.spec.polyphase = TRUE;
+          uni.spec.mask = (8 * uni.spec.size) - 1;
+          {
+            RealFIR WOLAfir;
+            REAL MaxTap = 0;
+            int i;
+            WOLAfir =
+              newFIR_Lowpass_REAL (1.0, (REAL) uni.spec.size,
+                                   8 * uni.spec.size - 1);
+            memset (uni.spec.window, 0, 8 * sizeof (REAL) * uni.spec.size);
+            memcpy (uni.spec.window, FIRcoef (WOLAfir),
+                    sizeof (REAL) * (8 * uni.spec.size - 1));
+            for (i = 0; i < 8 * uni.spec.size; i++)
+              MaxTap = max (MaxTap, (REAL) fabs (uni.spec.window[i]));
+            MaxTap = 1.0f / MaxTap;
+            for (i = 0; i < 8 * uni.spec.size; i++)
+              {
+                uni.spec.window[i] *= MaxTap;
+              }
+            delFIR_REAL (WOLAfir);
+          }
+        }
       else
-	{
-	  uni.spec.polyphase = FALSE;
-	  uni.spec.mask = uni.spec.size - 1;
-	  memset (uni.spec.window, 0, sizeof (REAL) * uni.spec.size);
-	  makewindow (uni.spec.wintype, uni.spec.size - 1, uni.spec.window);
-	}
+        {
+          uni.spec.polyphase = FALSE;
+          uni.spec.mask = uni.spec.size - 1;
+          memset (uni.spec.window, 0, sizeof (REAL) * uni.spec.size);
+          makewindow (uni.spec.wintype, uni.spec.size - 1, uni.spec.window);
+        }
       reinit_spectrum (&uni.spec);
 //              fprintf(stderr,"size = %d polyphase=%1d winmid=%lf\n",
 //                      uni.spec.mask+1,uni.spec.polyphase,uni.spec.window[uni.spec.mask>>1]),fflush(stderr);
@@ -1463,11 +1463,11 @@ setNewBuflen (int n, char **p)
     {
       top.susp = TRUE;
       if (reset_for_buflen (atoi (p[0])) != -1)
-	{
-	  if (uni.update.flag)
-	    replay_updates ();
-	  rtn = 0;
-	}
+        {
+          if (uni.update.flag)
+            replay_updates ();
+          rtn = 0;
+        }
       top.susp = FALSE;
     }
   return rtn;
@@ -1688,9 +1688,9 @@ do_update (char *str, FILE * log)
   // append to replay file?
   if (*str == '!')
     {
-      str++;			// strip !
+      str++;                    // strip !
       if (uni.update.flag)
-	fputs (str, uni.update.fp);
+        fputs (str, uni.update.fp);
     }
   // echo to logging output?
   if (*str == '-')
@@ -1708,28 +1708,28 @@ do_update (char *str, FILE * log)
     {
       Thunk thk = Thunk_lookup (update_cmds, F (splt, 0));
       if (!thk)
-	return -1;
+        return -1;
       else
-	{
-	  int val;
+        {
+          int val;
 
-	  sem_wait (&top.sync.upd.sem);
-	  val = (*thk) (NF (splt) - 1, Fptr (splt, 1));
-	  sem_post (&top.sync.upd.sem);
+          sem_wait (&top.sync.upd.sem);
+          val = (*thk) (NF (splt) - 1, Fptr (splt, 1));
+          sem_post (&top.sync.upd.sem);
 
-	  if (log && !quiet)
-	    {
-	      int i;
-	      char *s = since (&top.start_tv);
-	      fprintf (log, "update[%s]: returned %d from", s, val);
-	      for (i = 0; i < NF (splt); i++)
-		fprintf (log, " %s", F (splt, i));
-	      putc ('\n', log);
-	      fflush (log);
-	    }
+          if (log && !quiet)
+            {
+              int i;
+              char *s = since (&top.start_tv);
+              fprintf (log, "update[%s]: returned %d from", s, val);
+              for (i = 0; i < NF (splt); i++)
+                fprintf (log, " %s", F (splt, i));
+              putc ('\n', log);
+              fflush (log);
+            }
 
-	  return val;
-	}
+          return val;
+        }
     }
 }
 
@@ -1784,7 +1784,7 @@ SetFilter (double low_frequency, double high_frequency, int taps, TRXMODE trx)
 {
   char buffer[64];
   sprintf (buffer, "!setFilter %f %f %d\n", low_frequency, high_frequency,
-	   trx);
+           trx);
   sendcommand (buffer);
   return 0;
 }
@@ -1842,7 +1842,7 @@ SetNRvals (int taps, int delay, double gain, double leak)
 {
   char buffer[64];
   sprintf (buffer, "!setNRvals %d %d %12.9lf %12.9lf\n", taps, delay,
-	   gain, leak);
+           gain, leak);
   sendcommand (buffer);
   sprintf (buffer, "!setBlkNRval %12.9lf\n", min (0.1 * gain, 0.0002));
   sendcommand (buffer);
@@ -1899,7 +1899,7 @@ SetANFvals (int taps, int delay, double gain, double leak)
 {
   char buffer[64];
   sprintf (buffer, "!setANFvals %d %d %12.9lf %12.9lf\n", taps, delay,
-	   gain, leak);
+           gain, leak);
   sendcommand (buffer);
   sprintf (buffer, "!setBlkANFval %12.9lf\n", min (0.1 * gain, 0.0002));
   sendcommand (buffer);
@@ -2149,8 +2149,8 @@ SetPWSmode (int setit)
       break;
     case 2:
       sprintf (buffer, "!setSpectrumType %d\n", SPEC_SEMI_RAW);
-	  break;
-	case 4:
+          break;
+        case 4:
       sprintf (buffer, "!setSpectrumType %d\n", SPEC_POST_DET);
       break;
     default:
@@ -2189,7 +2189,7 @@ SetGrphTXEQ (int *txeq)
 {
   char buffer[256];
   sprintf (buffer, "!setGrphTXEQ %d %d %d %d\n", txeq[0], txeq[1],
-	   txeq[2], txeq[3]);
+           txeq[2], txeq[3]);
   sendcommand (buffer);
 }
 
@@ -2213,7 +2213,7 @@ SetGrphRXEQ (int *rxeq)
 {
   char buffer[256];
   sprintf (buffer, "!setGrphRXEQ %d %d %d %d\n", rxeq[0], rxeq[1],
-	   rxeq[2], rxeq[3]);
+           rxeq[2], rxeq[3]);
   sendcommand (buffer);
 }
 
@@ -2264,18 +2264,18 @@ SetTRX (TRXMODE setit)
   sem_wait (&top.sync.upd.sem);
   switch (setit) {
       case TX:
-		  switch (tx.mode) {
-			case CWU:
-			case CWL:
-				top.swch.bfct.want = 0;
-				break;
-			default:
-				top.swch.bfct.want = (int) (2 * uni.samplerate / 48000);
-				break;
-		  }
-	  case RX:
-		 top.swch.bfct.want = (int) (1 * uni.samplerate / 48000);
-		 break;
+                  switch (tx.mode) {
+                        case CWU:
+                        case CWL:
+                                top.swch.bfct.want = 0;
+                                break;
+                        default:
+                                top.swch.bfct.want = (int) (2 * uni.samplerate / 48000);
+                                break;
+                  }
+          case RX:
+                 top.swch.bfct.want = (int) (1 * uni.samplerate / 48000);
+                 break;
   }
   top.swch.trx.next = setit;
   top.swch.bfct.have = 0;
@@ -2300,7 +2300,7 @@ SetAudioSize (unsigned int size)
 {
   char buffer[64];
   sprintf (buffer, "!setJackResetSize %d\n",
-	   max (size, top.hold.size.frames));
+           max (size, top.hold.size.frames));
   sendcommand (buffer);
 }
 
@@ -2378,64 +2378,66 @@ Calculate_Meters (METERTYPE mt)
   sem_wait (&top.sync.upd.sem);
   if (uni.mode.trx == RX)
     {
-	  uni.meter.rx.mode[RL] = mt;
+          uni.meter.rx.mode[RL] = mt;
       switch (mt)
-		{
-		case SIGNAL_STRENGTH:
-			returnval = uni.meter.rx.val[RL][RX_SIGNAL_STRENGTH];
-			break;
-		case AVG_SIGNAL_STRENGTH:
-			returnval = (float) uni.meter.rx.val[RL][RX_AVG_SIGNAL_STRENGTH];
-			break;
-		case ADC_REAL:
-			returnval = (float) uni.meter.rx.val[RL][RX_ADC_REAL];
-			break;
-		case ADC_IMAG:
-			returnval = (float) uni.meter.rx.val[RL][RX_ADC_REAL];
-			break;
-		case AGC_GAIN:
-			returnval = (float) uni.meter.rx.val[RL][RX_AGC_GAIN];
-			break;
-		default:
-			returnval = -200;
-			break;
-		}
-		//fprintf(stderr,"type=%d val=%f\n",mt,returnval),fflush(stderr);
+                {
+                case SIGNAL_STRENGTH:
+                        returnval = uni.meter.rx.val[RL][RX_SIGNAL_STRENGTH];
+                        break;
+                case AVG_SIGNAL_STRENGTH:
+                        returnval = (float) uni.meter.rx.val[RL][RX_AVG_SIGNAL_STRENGTH];
+                        break;
+                case ADC_REAL:
+                        returnval = (float) uni.meter.rx.val[RL][RX_ADC_REAL];
+                        break;
+                case ADC_IMAG:
+                        returnval = (float) uni.meter.rx.val[RL][RX_ADC_IMAG];
+                        break;
+                case AGC_GAIN:
+                        returnval = (float) uni.meter.rx.val[RL][RX_AGC_GAIN];
+                        break;
+                default:
+                        returnval = -200;
+                        break;
+                }
+				printf("i: %f r: %f\n", uni.meter.rx.val[RL][RX_ADC_IMAG], uni.meter.rx.val[RL][RX_ADC_REAL]); 
+				fflush(stdout); 
+                //fprintf(stderr,"type=%d val=%f\n",mt,returnval),fflush(stderr);
     }
   else
     {
-		uni.meter.tx.mode = mt;
-		switch(mt) {
-			case MIC:
-				returnval = (float) uni.meter.tx.val[TX_MIC];
-				break;
-			case PWR:
-				returnval = (float) uni.meter.tx.val[TX_PWR];
-				break;
-			case ALC:
-				returnval = (float) uni.meter.tx.val[TX_ALC];
-				break;
-			case EQtap:
-				returnval = (float) uni.meter.tx.val[TX_EQtap];
-				break;
-			case LEVELER:
-				returnval = (float) uni.meter.tx.val[TX_LEVELER];
-				break;
-			case COMP:
-				returnval = (float) uni.meter.tx.val[TX_COMP];
-				break;
-			case CPDR:
-				returnval = (float) uni.meter.tx.val[TX_CPDR];
-				break;
-			case ALC_G:
-				returnval = (float) uni.meter.tx.val[TX_ALC_G];
-				break;
-			case LVL_G:
-				returnval = (float) uni.meter.tx.val[TX_LVL_G];
-				break;
-			default:
-				returnval = -200;
-		}
+                uni.meter.tx.mode = mt;
+                switch(mt) {
+                        case MIC:
+                                returnval = (float) uni.meter.tx.val[TX_MIC];
+                                break;
+                        case PWR:
+                                returnval = (float) uni.meter.tx.val[TX_PWR];
+                                break;
+                        case ALC:
+                                returnval = (float) uni.meter.tx.val[TX_ALC];
+                                break;
+                        case EQtap:
+                                returnval = (float) uni.meter.tx.val[TX_EQtap];
+                                break;
+                        case LEVELER:
+                                returnval = (float) uni.meter.tx.val[TX_LEVELER];
+                                break;
+                        case COMP:
+                                returnval = (float) uni.meter.tx.val[TX_COMP];
+                                break;
+                        case CPDR:
+                                returnval = (float) uni.meter.tx.val[TX_CPDR];
+                                break;
+                        case ALC_G:
+                                returnval = (float) uni.meter.tx.val[TX_ALC_G];
+                                break;
+                        case LVL_G:
+                                returnval = (float) uni.meter.tx.val[TX_LVL_G];
+                                break;
+                        default:
+                                returnval = -200;
+                }
     }
   sem_post (&top.sync.upd.sem);
   return returnval;
@@ -2455,7 +2457,7 @@ NewResampler (int samplerate_in, int samplerate_out)
 
 DttSP_EXP void
 DoResampler (COMPLEX * input, COMPLEX * output, int numsamps, int *outsamps,
-	     ResSt ptr)
+             ResSt ptr)
 {
   ptr->input = input;
   ptr->output = output;
@@ -2485,7 +2487,7 @@ NewResamplerF (int samplerate_in, int samplerate_out)
 
 DttSP_EXP void
 DoResamplerF (float *input, float *output, int numsamps, int *outsamps,
-	      ResStF ptr)
+              ResStF ptr)
 {
   ptr->input = input;
   ptr->output = output;

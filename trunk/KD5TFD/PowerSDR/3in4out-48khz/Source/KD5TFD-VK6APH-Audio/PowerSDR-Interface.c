@@ -33,9 +33,9 @@
 // this is the 4 in 4 out (actually 3 in 4 out) version of start audio 
 // 
 
-KD5TFDVK6APHAUDIO_API int StartAudio(int sample_rate, int samples_per_block, 
-									 int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata), 
-									 int sample_bits)
+KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_block, 
+										   int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata), 
+										   int sample_bits)
 { 
 	int rc; 
 	int myrc = 0; 

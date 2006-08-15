@@ -3,6 +3,7 @@
 //
 using System;
 using System.Runtime.InteropServices;
+using System.Diagnostics; 
 namespace PowerSDR
 {
 	//
@@ -16,8 +17,41 @@ namespace PowerSDR
 			// TODO: Add constructor logic here
 			//
 		}
+
+		private static bool isOzyInitialized = false; 
+
+		// returns 0 on success, !0 on failure 
+		private static int initOzy()  
+		{
+			ProcessStartInfo start_info = new ProcessStartInfo(); 
+			start_info.FileName = "initozy.bat"; 
+			start_info.UseShellExecute = true; 
+			Process p = new Process(); 
+			p.StartInfo = start_info; 
+			bool rc = p.Start(); 
+			System.Console.WriteLine("start returned: " + rc); 
+			p.WaitForExit(); 
+			System.Console.WriteLine("OzyInit completes"); 
+
+			return 0; 
+		}
+						 						  
+		unsafe public static int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits) 
+		{ 
+			if ( !isOzyInitialized ) 
+			{ 
+				if ( initOzy() != 0 )  
+				{ 
+					return 1; 
+				} 
+				isOzyInitialized = true; 
+			} 
+			return StartAudioNative(sample_rate, samples_per_block, cb, sample_bits); 
+		} 
+
+
 		[DllImport("KD5TFD-VK6APH-Audio.dll")]
-		unsafe public static extern int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits); 
+		unsafe public static extern int StartAudioNative(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits); 
 
 		[DllImport("KD5TFD-VK6APH-Audio.dll")]
 		unsafe public static extern int StopAudio(); 
