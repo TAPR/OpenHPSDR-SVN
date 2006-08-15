@@ -35,7 +35,7 @@ namespace read_I2C
         {
             if ((args.Length != 4) || (args.Length == 0))
             {
-                Console.WriteLine("usage: read_I2C <VID> <PID> <i2c_address in hex> <length in decimal>");
+                Console.WriteLine("usage: read_I2C <VID> <PID> <i2c_address in hex> <length in hex>");
                 return;
             }
 
@@ -97,15 +97,15 @@ namespace read_I2C
             int i2c_addr = int.Parse(args[2], NumberStyles.HexNumber);
 
 
-            if (args[4].Length > 2)
+            if (args[3].Length > 2)
             {
-                if (args[4].Substring(0, 2) != "0x")
+                if (args[3].Substring(0, 2) != "0x")
                 {
                     Console.WriteLine("You must specify length in Hex (0x0)");
                     return;
                 }
                 else
-                    args[4] = args[4].Substring(2);
+                    args[3] = args[3].Substring(2);
             }
             else
             {
@@ -113,7 +113,7 @@ namespace read_I2C
                 return;
             }
 
-            int length = int.Parse(args[4], NumberStyles.HexNumber);
+            int length = int.Parse(args[3], NumberStyles.HexNumber);
 
 
             libUSB_Interface.usb_init();
