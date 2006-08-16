@@ -22,9 +22,8 @@
 	
 	12 June 2006 - First test version using state machine NCO
 	12 June 2006 - Sign extension for I and Q data added
-	13 June 2006 - CORDIC NCO stated 
-	28 July 2006 - Modified to use OZY and  16 bit FIFO
-	15 Aug  2006 - Futher modifications for use with OZY 
+	13 June 2006 - CORDIC NCO started 
+	28 July 2006 - Modified to use OZY and  16 bit FIFO 
 	
 	
 */
@@ -103,17 +102,15 @@
 ////////////////////////////////////////////////////////////
 
 
-module Mercury(clock, ADC,IFCLK, FX2_CLK, FX2_FD,FIFO_ADR, SLRD, SLWR, SLOE, FLAGA, FLAGB, FLAGC, PKEND, LED);
+module Mercury(clock, ADC,IFCLK, FX2_FD,FIFO_ADR, SLRD, SLWR, SLOE, FLAGA, FLAGC, PKEND, LED);
 
 input [15:0]ADC;			// samples from LT2208
 input clock;				// 100MHz clock from LT2208
 input IFCLK;				// 48MHz clock from FX2
-input FX2_CLK; 				// FX2 clock - 24MHz
 inout  [15:0] FX2_FD;		// bidirectional FIFO data to/from the FX2
 //output  [15:0] FX2_FD;	// bidirectional FIFO data to/from the FX2 
 							// ***** use this so simulation works 
 input  FLAGA;				// Flags input from the FX2
-input  FLAGB;
 input  FLAGC;
 output SLWR;				// FX2's write line
 output SLRD; 				// FX2's FIFO read line
@@ -141,25 +138,6 @@ reg SLRD;					// FX2 read - active low
 reg SLWR;					// FX2 write - active low 
 reg [1:0] FIFO_ADR;			// FX2 register address 
 
-
-/* 
- meaning of FX2 flags etc **** UPDATE 
-FIFO2 data available FX2_flags[0] = 1
-FIFO3 data available FX2_flags[1] = 1
-FIFO4 ready to accept data  FX2_flags[2] = 1
-FIFO5 ready to accept data  FX2_PA[7] = 1
-set FX2_PA[0] = 1'b1;
-set FX2_PA[1] = 1'b1;
-set FX2_PA[3] = 1'b1;
-FX2_PA[2] = FIFO_DATAOUT_OE;
-FX2_PA[6] = FIFO_PKTEND;
-FX2_PA[5:4] = FIFO_FIFOADR;
-
-FX2_FD is a bi-directional data bus
-
-*/
-
-// set up FX2 Port A
 assign PKEND = 1'b1;
 
 
@@ -187,8 +165,6 @@ always @ (posedge clock) begin
 	end
 end 
 
-assign reset = ~clk_enable;
-
 /* 
 	multiply the A/D data by 1 and -1 at 25MHz rate  in phase quadratrue.
    	Complement and add 1 to multiply by -1 
@@ -211,36 +187,21 @@ __|  |__    __|  |__     sin
 
 */
 
-// send data_ready flag at ~48kHz  TODO: change to using oe with a latch
-
-
 reg [1:0]state;
-reg [9:0]dec_counter;
 reg data_ready;		// set at end of decimation
-wire [15:0]temp_I;
-wire [15:0]temp_Q; 
 reg [15:0]temp_ADC;
 
 
 always @ (posedge clock)
 begin
-if (dec_counter == 1023) begin
-//		temp_I <= i_out;				// save I and Q values
-//		temp_Q <= q_out;
-		data_ready <= ~data_ready;		// toggle data ready flag 
-		end
-dec_counter <= dec_counter + 10'b1;
 
 temp_ADC <= ADC;
-
 
 // A Digital Output Randomizer is fitted to the LT2208. This complements bits 15 to 1 if 
 // bit 0 is 1. This helps to reduce any pickup by the A/D input of the digital outouts. 
 // We need to de-ramdomize the LT2208 data if this is turned on. 
 
 if (ADC[0]) temp_ADC[15:1] <= ~ADC[15:1];  // Compensate for Digital Output Randomizer
-
-
 
 case (state)
 2'd0:	begin 
@@ -265,9 +226,6 @@ case (state)
 	end
 default: state <= 2'd0;
 endcase
-
-
-
 end
 
 //////////////////////////////////////////////////////////////
@@ -331,6 +289,8 @@ assign temp_Q = cic_out_q;
 
 reg clock_8;
 reg [4:0]clock_count;
+wire [15:0] temp_I;
+wire [15:0] temp_Q;
 
 always @ (posedge clock)
 begin
@@ -350,56 +310,51 @@ strobe <= 1'b0;								// reset Tx FIFO strobe
 if (loop_counter == 63) loop_counter <= 0; 	// count how many times through the loop to see if sync is to be sent
 
 case (AD_state)
-
 5'd0:	begin
-		if(data_ready) AD_state <= 0;		// loop until data_ready is low
-		else AD_state <= 5'd1;				// low so next state
+		if (data_ready)AD_state <= 5'd1;	// loop until data_read is high
+		else AD_state <= 5'd0;
 		end
 5'd1:	begin
-		if (data_ready)AD_state <= 5'd2;	// loop until data_read is high
-		else AD_state <= 5'd1;
-		end
-5'd2:	begin
 		if (loop_counter == 0) begin		// if zero  then send sync and C&C bytes
 			register <= 16'h7F7F;	
 			strobe <= 1'b1;					// strobe start if sync (80) into Tx FIFO
-			AD_state <= 5'd3;
+			AD_state <= 5'd2;
 			end
-		else AD_state <= 5'd6;
+		else AD_state <= 5'd5;
 		end
-5'd3:	begin
+5'd2:	begin
 		register <= 16'h7F00;				// rest of sync and C0 set to 0
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end	
-5'd4: begin
+5'd3: begin
 		register <= 16'h0000;				// C1 and C2 set to 0
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end
-5'd5: begin
+5'd4: begin
 		register <= 16'h0000;				// C3 and C4 set to 0
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end		
-5'd6:	begin
+5'd5:	begin
 		if (temp_I[15]) register <= {8'b11111111,temp_I[15:8]} ;	// send I data with sign extension to 24 bits
 		else register <= {8'b0, temp_I[15:8]};
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end
-5'd7:	begin
+5'd6:	begin
 		if (temp_Q[15]) register <= {temp_I[7:0], 8'b11111111};	// send Q data with sign extension to 24 bits
 		else register <= {temp_I[7:0], 8'b0};				  		
 		strobe <= 1'b1; 
 		AD_state <= AD_state + 1'b1;
 		end
-5'd8:	begin
+5'd7:	begin
 		register <= temp_Q;			// send Q data
 		strobe <= 1'b1; 
 		AD_state <= AD_state + 1'b1;
 		end
-5'd9: begin
+5'd8: begin
 		register <= 0;				// send dummy mic  data set to 0
 		strobe <= 1'b1; 
 		loop_counter <= loop_counter + 1'b1;
@@ -417,18 +372,42 @@ end
 
 /*
 	The code generates a short pulse (data_flag) on the negative
-	edge of clock_8 if strobe is set. The pulse strobes data in 'register'
+	edge of clock_count[2] if strobe is set. The pulse strobes data in 'register'
 	into the Tx FIFO
 */
 
-reg d;
-
-always @ (negedge clock_8 or posedge data_flag)
+always @ (negedge clock_count[2])
 begin	
 		if (data_flag)
 			data_flag <= 1'b0;
 		else
 			if (strobe) data_flag <= 1'b1;
+end
+
+
+// extend the lenght of the ce_out_i pulse so that A/D code has time to see it 
+reg [3:0]pulse;
+
+always @ (negedge clock)
+begin
+case (pulse)
+0:begin 
+	if (ce_out_i)begin
+		data_ready <= 1'b1;
+		pulse <= pulse + 1'b1;
+	end	
+	else begin
+		data_ready <= 1'b0;
+		pulse <= 0;
+	end
+  end 
+7:begin
+	data_ready <= 1'b0;
+	pulse <= 0;
+  end
+	
+default: pulse <= pulse + 1'b1;
+endcase
 end
 
 ///////////////////////////////////////////////////////////////
@@ -456,7 +435,7 @@ reg  [10:0] syncd_write_used; 	// ditto but synced to FX2 clock
 /*
 	The state machine checks if there are characters to be read
 	in the FX2 Rx FIFO by checking 'EP2_has_data'  If set it loads the word
-	read into the Rx_register. On the next clock it  checks if the Tx_data_fag is set
+	read into the Rx_register. On the next clock it  checks if the Tx_data_flag is set
 	 - if so it sends the data in 'register'to the Tx FIFO. After the Tx data has been sent 
 	it checks 'EP2_has_data' in round robin fashion.
 */
@@ -465,8 +444,6 @@ reg  [10:0] syncd_write_used; 	// ditto but synced to FX2 clock
 wire EP2_has_data = FLAGA;					// high when EP2 has data available
 wire EP6_ready = FLAGC; 					// high when we can write to EP6
 reg [15:0] Rx_register;						// data from PC goes here
-reg [7:0]TX_wait; 							// increments when  we have to wait for TX_ FIFO to be free (C1)
-reg [7:0]RX_wait;							// increments when there is no receive data	(C2)
 
 
 always @ (negedge IFCLK)
@@ -492,7 +469,6 @@ case(state_FX)
 			SLOE <= 1'b0; 					//assert SLOE								
 			end
 		else begin
-			RX_wait <= RX_wait + 1'b1;		// increment RX_wait counter
 			state_FX <= 4'd6; 				// No Rx data so check for Tx data ******
 		end 
 	end	
@@ -516,7 +492,7 @@ case(state_FX)
                 state_FX <= state_FX + 1'b1;
 				FIFO_ADR <= 2'b10;				// select EP6
 				end 
-            else state_FX <= 4'd2; //was 2 	  		// No Tx data so check for Rx data, 
+            else state_FX <= 4'd2; 		  		// No Tx data so check for Rx data, 
          end									// note we already have address set 
 // Wait 2 IFCLK for FIFO_ADR to stabilize, assert SLWR 
 // NOTE: seems OK with 2 waits, may need more.	
@@ -534,7 +510,6 @@ case(state_FX)
             else begin                  			// otherwise, hang out here until fifo is ready
                 SLWR <= 1;
                 state_FX <= 4'd9;  
-				TX_wait <= TX_wait + 1'b1; 			// increment TX_wait counter
             end
         end
 //  set SLWR
@@ -560,7 +535,13 @@ assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
 
 // LEDs for testing
 
-assign LED[0] = ce_out_i; 		//  LED lights when we have A/D data 
+assign LED[0] = ce_out_i; 		//  LED off when we have A/D data 
 assign LED[1] = ~EP6_ready;		// LED D3 on when we can write to EP6
+assign LED[2] = data_ready; 
+assign LED[3] = 1'b1;
+assign LED[4] = 1'b1; 
+assign LED[5] = 1'b1; 
+assign LED[6] = 1'b1; 
+assign LED[7] = 1'b1; 
 
 endmodule 
