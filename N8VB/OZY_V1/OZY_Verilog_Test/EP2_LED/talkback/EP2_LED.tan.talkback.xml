@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Thu Aug 10 11:13:23 2006) contains limited information
+This XML file (created on Thu Aug 17 18:36:14 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus_tan</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Thu Aug 10 11:13:24 2006</compilation_end_time>
+	<compilation_end_time>Thu Aug 17 18:36:14 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</project>
 <revision>EP2_LED</revision>
 <compilation_summary>
-	<flow_status>Successful - Thu Aug 10 11:13:23 2006</flow_status>
+	<flow_status>Successful - Thu Aug 17 18:36:14 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>EP2_LED</revision_name>
 	<top_level_entity_name>EP2_LED</top_level_entity_name>
@@ -45,9 +45,9 @@ to license.txt.
 	<device>EP2C5Q208C8</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>Yes</met_timing_requirements>
-	<total_logic_elements>63 / 4,608 ( 1 % )</total_logic_elements>
-	<total_registers>43</total_registers>
-	<total_pins>35 / 142 ( 25 % )</total_pins>
+	<total_logic_elements>99 / 4,608 ( 2 % )</total_logic_elements>
+	<total_registers>69</total_registers>
+	<total_pins>39 / 142 ( 27 % )</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
 	<total_memory_bits>0 / 119,808 ( 0 % )</total_memory_bits>
 	<embedded_multiplier_9_bit_elements>0 / 26 ( 0 % )</embedded_multiplier_9_bit_elements>
@@ -62,14 +62,34 @@ to license.txt.
 <messages>
 	<warning>Warning: Found pins functioning as undefined clocks and/or memory enables</warning>
 	<info>Info: Quartus II Timing Analyzer was successful. 0 errors, 1 warning</info>
-	<info>Info: Elapsed time: 00:00:01</info>
-	<info>Info: Processing ended: Thu Aug 10 11:13:23 2006</info>
-	<info>Info: th for register &quot;LEDS[0]~reg0&quot; (data pin = &quot;FX2_FD[0]&quot;, clock pin = &quot;IFCLK&quot;) is -3.961 ns</info>
-	<info>Info: - Shortest pin to register delay is 7.033 ns</info>
+	<info>Info: Elapsed time: 00:00:02</info>
+	<info>Info: Processing ended: Thu Aug 17 18:36:14 2006</info>
+	<info>Info: th for register &quot;SPI_REGS:SPI_REGS|saddr[0]&quot; (data pin = &quot;PA1&quot;, clock pin = &quot;PA0&quot;) is -3.817 ns</info>
+	<info>Info: - Shortest pin to register delay is 7.429 ns</info>
 </messages>
 <clock_settings_summary>
 	<row>
 		<clock_node_name>IFCLK</clock_node_name>
+		<type>User Pin</type>
+		<fmax_requirement>None</fmax_requirement>
+		<early_latency units="ns">0.000</early_latency>
+		<late_latency units="ns">0.000</late_latency>
+		<multiply_base_fmax_by>N/A</multiply_base_fmax_by>
+		<divide_base_fmax_by>N/A</divide_base_fmax_by>
+		<offset>N/A</offset>
+	</row>
+	<row>
+		<clock_node_name>FX2_CLK</clock_node_name>
+		<type>User Pin</type>
+		<fmax_requirement>None</fmax_requirement>
+		<early_latency units="ns">0.000</early_latency>
+		<late_latency units="ns">0.000</late_latency>
+		<multiply_base_fmax_by>N/A</multiply_base_fmax_by>
+		<divide_base_fmax_by>N/A</divide_base_fmax_by>
+		<offset>N/A</offset>
+	</row>
+	<row>
+		<clock_node_name>PA0</clock_node_name>
 		<type>User Pin</type>
 		<fmax_requirement>None</fmax_requirement>
 		<early_latency units="ns">0.000</early_latency>
@@ -84,25 +104,37 @@ to license.txt.
 		<type>Worst-case tsu</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>7.045 ns</actual>
+		<actual>5.878 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case tco</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>9.164 ns</actual>
+		<actual>9.348 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case th</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>-3.961 ns</actual>
+		<actual>-3.817 ns</actual>
 	</nonclk>
+	<clk>
+		<name>PA0</name>
+		<slack>N/A</slack>
+		<required>None</required>
+		<actual>220.90 MHz ( period = 4.527 ns )</actual>
+	</clk>
 	<clk>
 		<name>IFCLK</name>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>258.80 MHz ( period = 3.864 ns )</actual>
+		<actual>278.32 MHz ( period = 3.593 ns )</actual>
+	</clk>
+	<clk>
+		<name>FX2_CLK</name>
+		<slack>N/A</slack>
+		<required>None</required>
+		<actual>Restricted to 340.02 MHz ( period = 2.941 ns )</actual>
 	</clk>
 </performance>
 </talkback>

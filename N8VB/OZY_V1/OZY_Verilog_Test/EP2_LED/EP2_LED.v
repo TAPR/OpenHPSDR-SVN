@@ -22,7 +22,7 @@
 //
 //  Demonstrates SYNC Read from EP2 FIFO
 //
-module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, LEDS);
+module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, LEDS, PA0, PA1, PA3, PE7);
 
 	input FX2_CLK;
 	input IFCLK;
@@ -36,6 +36,10 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 	output PKEND;
 	output [1:0] FIFO_ADR;
 	output [7:0] LEDS;
+	input PA0;
+	input PA1;
+	output PA3;
+	input PE7;
 	
 	reg [15:0] Tx_register;
 		
@@ -47,13 +51,54 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 	reg SLWR;
 	reg TXDEN;
 	reg PKEND;
+		
+	wire [6:0] 	serial_address;
+	wire [7:0] 	serial_data;
+	wire		serial_strobe;
 	
+	wire [7:0] crap_reg;
+	
+	assign crap_reg = 8'h33;
+	
+	`define PORT0REG 1'b1
+					
+	SPI_REGS SPI_REGS(  .FX2_CLK(FX2_CLK),
+						.SCK(PA0),
+						.SI(PA1),
+						.SO(PA3),						
+						.CS(PE7),
+						.saddr(serial_address),
+						.sdata(serial_data),
+						.sstrobe(serial_strobe),
+						.GPReg0(crap_reg),
+						.GPReg1(),
+						.GPReg2(),
+						.GPReg3(),
+						.GPReg4(),
+						.GPReg5(),
+						.GPReg6(),
+						.GPReg7()
+						);
+						
+	Register8 #(`PORT0REG) port0reg(	.CLK(FX2_CLK),
+										.STB(serial_strobe),
+										.ADDR(serial_address),
+										.IN(serial_data),
+										.OUT(NLEDS),
+										.CHANGED()
+										);
+	
+						
 	assign FX2_FD[15:0] = (TXDEN) ? Tx_register[15:0] : 16'bZ;
 	
 	reg [1:0] FIFO_ADR;
 	reg [7:0] HIGHBYTE;
-	reg [7:0] LEDS;	
-			
+	
+	wire [7:0] NLEDS;	
+	wire [7:0] LEDS;
+	
+	assign LEDS = ~NLEDS;
+					
 	reg [5:0] state;
 	
 	always @(negedge IFCLK)
@@ -81,7 +126,7 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 				// Wait 2 IFCLK before we assert SLRD	
 				4:	begin
 						SLRD <= 1'b0; //assert SLRD
-						LEDS[7:0] <= FX2_FD[7:0]; // read FD[16:0] here	
+						//LEDS[7:0] <= FX2_FD[7:0]; // read FD[16:0] here	
 						HIGHBYTE <=  FX2_FD[15:8];												
 						state<= state + 1'b1;
 					end

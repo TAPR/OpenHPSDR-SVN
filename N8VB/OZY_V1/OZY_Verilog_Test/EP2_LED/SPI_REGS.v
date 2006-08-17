@@ -1,0 +1,142 @@
+//  V1.0 August 16, 2006
+//
+//  Copyright 2006  P. Covington, N8VB
+//
+//  HPSDR - High Performance Software Defined Radio
+//
+//	GPIO SPI REGS for OZY V1
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation; either version 2 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+// -------------------------------------------------------------------------
+// CORE LOGIC
+// -------------------------------------------------------------------------
+//
+// 1.01: Bit Clock Counter
+// 1.02: Instruction Decoder
+// 1.03: Instruction Register
+// 1.04: Serial Strobe Generator
+//
+// Implements 8x8 registers
+
+module SPI_REGS(FX2_CLK,SI,SO,SCK,CS,saddr,sdata,
+				sstrobe,GPReg0,GPReg1,GPReg2,GPReg3,
+				GPReg4,GPReg5,GPReg6,GPReg7);
+
+ input 	FX2_CLK;			// FX2 Master Clock
+ input  SCK;				// serial data clock 
+ input 	SI;					// serial data input 
+ input 	CS;					// chip select - active high
+ inout wire SO;				// serial data output
+ output reg [6:0] saddr;	// serial address
+ output reg [7:0] sdata;	// serial data
+ output wire sstrobe;		// serial strobe
+ input	[7:0] GPReg0;
+ input	[7:0] GPReg1;
+ input	[7:0] GPReg2;
+ input	[7:0] GPReg3;
+ input	[7:0] GPReg4;
+ input	[7:0] GPReg5;
+ input	[7:0] GPReg6;
+ input	[7:0] GPReg7;
+
+// -------------------------------------------------------------------------
+// DECLARATIONS
+// -------------------------------------------------------------------------
+
+ reg		sRd;				// serial Read
+ reg [7:0] 	BitCounter;			// Bit Counter
+ reg		wrDone;				// write Done
+ 
+ reg		CS_ph1;				// Chip select phase 1
+ reg		CS_ph2;				// Chip select phase 2
+ 
+// -------------------------------------------------------------------------
+// CORE LOGIC
+// -------------------------------------------------------------------------
+//
+//	
+ assign SO = (sRd) ? sdata[7] : 1'bz;
+	
+// -------------------------------------------------------------------------
+// 1.01: Bit Clock Counter
+// -------------------------------------------------------------------------
+
+	always @(posedge SCK, negedge CS) begin
+		if (~CS)
+			BitCounter <= 8'd0;
+		else if (BitCounter == 15)
+			BitCounter <= 8'd0;
+		else
+			BitCounter <= BitCounter + 8'd1;
+	end
+	
+// -------------------------------------------------------------------------
+// 1.02: Instruction Decoder
+// -------------------------------------------------------------------------
+
+	always @(posedge SCK, negedge CS) begin
+		if (~CS)
+			sRd <= 1'b0;
+		else if ((BitCounter == 7)&&(saddr[6] == 1'b1))
+			sRd <= 1'b1;
+	end
+	
+// -------------------------------------------------------------------------
+// 1.03: Address Decoder / Data Decoder
+// -------------------------------------------------------------------------
+
+	always @(posedge SCK) begin
+		if (~CS) begin
+			wrDone <= 1'b0;
+		end
+		else begin
+			if (~sRd && (BitCounter == 15))
+				wrDone <= 1'b1;
+			else
+				wrDone <= 1'b0;
+			if (sRd & (BitCounter == 8)) begin
+				case (saddr[5:0])
+					6'd1: sdata <= GPReg0;
+					6'd2: sdata <= GPReg1;
+					6'd3: sdata <= GPReg2;
+					6'd4: sdata <= GPReg3;
+					6'd5: sdata <= GPReg4;
+					6'd6: sdata <= GPReg5;
+					6'd7: sdata <= GPReg6;
+					6'd8: sdata <= GPReg7;
+					default: sdata <= 8'd0;
+				endcase
+			end
+			else if (BitCounter >= 8)
+				sdata <= {sdata[6:0], SI};
+			else if (BitCounter < 8)
+				saddr <= {saddr[5:0], SI};
+		end		
+	end
+	
+// -------------------------------------------------------------------------
+// 1.04: Serial Strobe Generator
+// -------------------------------------------------------------------------
+
+	always @(posedge FX2_CLK) begin
+		CS_ph1 <= CS;
+		CS_ph2 <= CS_ph1;
+	end
+	
+	assign sstrobe = CS_ph2 & ~CS_ph1;	
+	
+endmodule

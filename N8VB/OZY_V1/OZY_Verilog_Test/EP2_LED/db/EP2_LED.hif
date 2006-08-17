@@ -20,6 +20,56 @@ VHSM_ON
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
 # entity
+Register8
+# storage
+db|EP2_LED.(2).cnf
+db|EP2_LED.(2).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+Register8.v
+74cf92f77d38722939b861d12aab105e
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+my_address
+1
+PARAMETER_BIN
+USR
+}
+# hierarchies {
+Register8:port0reg
+}
+# end
+# entity
+SPI_REGS
+# storage
+db|EP2_LED.(1).cnf
+db|EP2_LED.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+SPI_REGS.v
+2874c1cc4d4e57bbca49962cd07110
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+SPI_REGS:SPI_REGS
+}
+# end
+# entity
 EP2_LED
 # storage
 db|EP2_LED.(0).cnf
@@ -31,7 +81,7 @@ ON
 # case_sensitive
 # source_file
 EP2_LED.v
-21a4b6538cfd50391aedad39ce9f9
+ec20584036341a53d081a11ac9e9a79
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

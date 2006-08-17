@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Tue Aug 08 15:57:30 2006
+                              4 ; This file generated Thu Aug 17 13:31:47 2006
                               5 ;--------------------------------------------------------
                               6 	.module board_specific
                               7 	.optsdcc -mmcs51 --model-small
@@ -781,7 +781,7 @@
    0609 8E 82               781 	mov	dpl,r6
    060B 8F 83               782 	mov	dph,r7
    060D 88 F0               783 	mov	b,r0
-   060F 12 10 1C            784 	lcall	__gptrget
+   060F 12 10 28            784 	lcall	__gptrget
    0612 FE                  785 	mov	r6,a
                             786 ;     genAssign
    0613 8E 07               787 	mov	ar7,r6
@@ -910,5 +910,5 @@
                             910 ;Initial/src/board_specific.c:78: init_spi();
                             911 ;     genCall
                             912 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0653 02 09 F4            913 	ljmp	_init_spi
+   0653 02 0A 00            913 	ljmp	_init_spi
                             914 	.area CSEG    (CODE)

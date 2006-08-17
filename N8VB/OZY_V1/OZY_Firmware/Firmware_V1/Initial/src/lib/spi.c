@@ -29,20 +29,10 @@
 static void
 setup_enables (unsigned char enables)
 {
-  // Software eanbles are active high.
-  // Hardware enables are active low.
-
-  // Uhh, the CODECs are active low, but the FPGA is active high...
-  //enables ^= SPI_ENABLE_FPGA;
-
-  // KLUDGE: This code is fragile, but reasonably fast...
-  // low three bits of enables go into port A
-  //HPSDR_PA = HPSDR_PA | (0x7 << 3);	// disable FPGA, CODEC_A, CODEC_B
-  //HPSDR_PA ^= (enables & 0x7) << 3;	// enable specified devs
-
-  // high four bits of enables go into port E
-  //USRP_PE = USRP_PE | (0xf << 4);	// disable TX_A, RX_A, TX_B, RX_B
-  //USRP_PE ^= (enables & 0xf0);		// enable specified devs
+    if (enables == 0)
+        HPSDR_PE = 0x0;
+    else
+        HPSDR_PE = HPSDR_PE | enables;
 }
 
 #define disable_all()	setup_enables (0)

@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Tue Aug 08 15:57:29 2006
+                              4 ; This file generated Thu Aug 17 13:31:40 2006
                               5 ;--------------------------------------------------------
                               6 	.module hpsdr_main
                               7 	.optsdcc -mmcs51 --model-small
@@ -702,7 +702,7 @@
                             702 ;--------------------------------------------------------
                             703 	.area CSEG    (CODE)
    01A2                     704 __interrupt_vect:
-   01A2 02 10 4D            705 	ljmp	__sdcc_gsinit_startup
+   01A2 02 10 59            705 	ljmp	__sdcc_gsinit_startup
                             706 ;--------------------------------------------------------
                             707 ; global & static initialisations
                             708 ;--------------------------------------------------------
@@ -721,9 +721,9 @@
                             721 ;------------------------------------------------------------
                             722 ;Initial/src/hpsdr_main.c:210: static unsigned char	count = 1;
                             723 ;     genAssign
-   1044 75 08 01            724 	mov	_isr_tick_count_1_1,#0x01
+   1050 75 08 01            724 	mov	_isr_tick_count_1_1,#0x01
                             725 	.area GSFINAL (CODE)
-   1060 02 01 A5            726 	ljmp	__sdcc_program_startup
+   106C 02 01 A5            726 	ljmp	__sdcc_program_startup
                             727 ;--------------------------------------------------------
                             728 ; Home
                             729 ;--------------------------------------------------------
@@ -1003,7 +1003,7 @@
    027E F5 1B              1003 	mov	_spi_write_PARM_6,a
                            1004 ;     genCall
    0280 8A 82              1005 	mov	dpl,r2
-   0282 12 0A 9B           1006 	lcall	_spi_write
+   0282 12 0A A7           1006 	lcall	_spi_write
    0285 E5 82              1007 	mov	a,dpl
                            1008 ;     genIfx
                            1009 ;     genIfxJump
@@ -1240,7 +1240,7 @@
    0346 F5 15              1240 	mov	_spi_read_PARM_6,a
                            1241 ;     genCall
    0348 8A 82              1242 	mov	dpl,r2
-   034A 12 0A 2D           1243 	lcall	_spi_read
+   034A 12 0A 39           1243 	lcall	_spi_read
    034D E5 82              1244 	mov	a,dpl
                            1245 ;     genIfx
                            1246 ;     genIfxJump
@@ -1420,7 +1420,7 @@
    03BD                    1420 00111$:
                            1421 ;Initial/src/hpsdr_main.c:195: usb_handle_setup_packet ();
                            1422 ;     genCall
-   03BD 12 0F DE           1423 	lcall	_usb_handle_setup_packet
+   03BD 12 0F EA           1423 	lcall	_usb_handle_setup_packet
                            1424 ;	Peephole 112.b	changed ljmp to sjmp
    03C0 80 F8              1425 	sjmp	00105$
    03C2                    1426 00102$:
@@ -1554,7 +1554,7 @@
    041D 12 09 4B           1554 	lcall	_setup_autovectors
                            1555 ;Initial/src/hpsdr_main.c:256: usb_install_handlers ();
                            1556 ;     genCall
-   0420 12 0C B0           1557 	lcall	_usb_install_handlers
+   0420 12 0C BC           1557 	lcall	_usb_install_handlers
                            1558 ;Initial/src/hpsdr_main.c:257: hook_timer_tick ((unsigned short) isr_tick);
                            1559 ;     genCast
    0423 7A CB              1560 	mov	r2,#_isr_tick
@@ -1562,7 +1562,7 @@
                            1562 ;     genCall
    0427 8A 82              1563 	mov	dpl,r2
    0429 8B 83              1564 	mov	dph,r3
-   042B 12 0B CF           1565 	lcall	_hook_timer_tick
+   042B 12 0B DB           1565 	lcall	_hook_timer_tick
                            1566 ;Initial/src/hpsdr_main.c:259: EIEX4 = 1;	// disable INT4 FIXME
                            1567 ;     genAssign
    042E D2 EA              1568 	setb	_EIEX4

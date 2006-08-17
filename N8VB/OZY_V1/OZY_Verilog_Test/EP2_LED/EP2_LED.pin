@@ -68,10 +68,10 @@ PKEND                        : 8         : output : LVTTL             :         
 GND                          : 9         : gnd    :                   :         :           :                
 FIFO_ADR[1]                  : 10        : output : LVTTL             :         : 1         : Y              
 FIFO_ADR[0]                  : 11        : output : LVTTL             :         : 1         : Y              
-RESERVED_INPUT               : 12        :        :                   :         : 1         :                
+PA3                          : 12        : output : LVTTL             :         : 1         : Y              
 SLOE                         : 13        : output : LVTTL             :         : 1         : Y              
-RESERVED_INPUT               : 14        :        :                   :         : 1         :                
-RESERVED_INPUT               : 15        :        :                   :         : 1         :                
+PA1                          : 14        : input  : LVTTL             :         : 1         : Y              
+PA0                          : 15        : input  : LVTTL             :         : 1         : Y              
 TDO                          : 16        : output :                   :         : 1         :                
 TMS                          : 17        : input  :                   :         : 1         :                
 TCK                          : 18        : input  :                   :         : 1         :                
@@ -101,7 +101,7 @@ RESERVED_INPUT               : 41        :        :                   :         
 VCCIO1                       : 42        : power  :                   : 3.3V    : 1         :                
 RESERVED_INPUT               : 43        :        :                   :         : 1         :                
 RESERVED_INPUT               : 44        :        :                   :         : 1         :                
-RESERVED_INPUT               : 45        :        :                   :         : 1         :                
+PE7                          : 45        : input  : LVTTL             :         : 1         : Y              
 RESERVED_INPUT               : 46        :        :                   :         : 1         :                
 RESERVED_INPUT               : 47        :        :                   :         : 1         :                
 RESERVED_INPUT               : 48        :        :                   :         : 1         :                

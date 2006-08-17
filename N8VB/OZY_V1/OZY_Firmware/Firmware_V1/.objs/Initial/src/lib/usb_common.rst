@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Tue Aug 08 15:57:31 2006
+                              4 ; This file generated Thu Aug 17 13:32:00 2006
                               5 ;--------------------------------------------------------
                               6 	.module usb_common
                               7 	.optsdcc -mmcs51 --model-small
@@ -710,10 +710,10 @@
                             710 	.area GSINIT  (CODE)
                             711 ;Initial/src/lib/usb_common.c:56: unsigned char	_usb_config = 0;
                             712 ;     genAssign
-   1047 75 21 00            713 	mov	__usb_config,#0x00
+   1053 75 21 00            713 	mov	__usb_config,#0x00
                             714 ;Initial/src/lib/usb_common.c:57: unsigned char	_usb_alt_setting = 0;	// FIXME really 1/interface
                             715 ;     genAssign
-   104A 75 22 00            716 	mov	__usb_alt_setting,#0x00
+   1056 75 22 00            716 	mov	__usb_alt_setting,#0x00
                             717 ;--------------------------------------------------------
                             718 ; Home
                             719 ;--------------------------------------------------------
@@ -731,7 +731,7 @@
                             731 ;	-----------------------------------------
                             732 ;	 function setup_descriptors
                             733 ;	-----------------------------------------
-   0BEB                     734 _setup_descriptors:
+   0BF7                     734 _setup_descriptors:
                     0002    735 	ar2 = 0x02
                     0003    736 	ar3 = 0x03
                     0004    737 	ar4 = 0x04
@@ -742,53 +742,53 @@
                     0001    742 	ar1 = 0x01
                             743 ;Initial/src/lib/usb_common.c:67: if (USBCS & bmHSM)
                             744 ;     genAssign
-   0BEB 90 E6 80            745 	mov	dptr,#_USBCS
-   0BEE E0                  746 	movx	a,@dptr
+   0BF7 90 E6 80            745 	mov	dptr,#_USBCS
+   0BFA E0                  746 	movx	a,@dptr
                             747 ;     genAnd
                             748 ;	Peephole 105	removed redundant mov
-   0BEF FA                  749 	mov	r2,a
+   0BFB FA                  749 	mov	r2,a
                             750 ;     genIfxJump
                             751 ;	Peephole 111	removed ljmp by inverse jump logic
-   0BF0 30 E7 19            752 	jnb	acc.7,00102$
-   0BF3                     753 00107$:
+   0BFC 30 E7 19            752 	jnb	acc.7,00102$
+   0BFF                     753 00107$:
                             754 ;Initial/src/lib/usb_common.c:69: current_device_descr  = high_speed_device_descr;
                             755 ;     genAddrOf
-   0BF3 75 23 00            756 	mov	_current_device_descr,#_high_speed_device_descr
-   0BF6 75 24 E0            757 	mov	(_current_device_descr + 1),#(_high_speed_device_descr >> 8)
+   0BFF 75 23 00            756 	mov	_current_device_descr,#_high_speed_device_descr
+   0C02 75 24 E0            757 	mov	(_current_device_descr + 1),#(_high_speed_device_descr >> 8)
                             758 ;Initial/src/lib/usb_common.c:70: current_devqual_descr = high_speed_devqual_descr;
                             759 ;     genAddrOf
-   0BF9 75 25 12            760 	mov	_current_devqual_descr,#_high_speed_devqual_descr
-   0BFC 75 26 E0            761 	mov	(_current_devqual_descr + 1),#(_high_speed_devqual_descr >> 8)
+   0C05 75 25 12            760 	mov	_current_devqual_descr,#_high_speed_devqual_descr
+   0C08 75 26 E0            761 	mov	(_current_devqual_descr + 1),#(_high_speed_devqual_descr >> 8)
                             762 ;Initial/src/lib/usb_common.c:71: current_config_descr  = high_speed_config_descr;
                             763 ;     genAddrOf
-   0BFF 75 27 1C            764 	mov	_current_config_descr,#_high_speed_config_descr
-   0C02 75 28 E0            765 	mov	(_current_config_descr + 1),#(_high_speed_config_descr >> 8)
+   0C0B 75 27 1C            764 	mov	_current_config_descr,#_high_speed_config_descr
+   0C0E 75 28 E0            765 	mov	(_current_config_descr + 1),#(_high_speed_config_descr >> 8)
                             766 ;Initial/src/lib/usb_common.c:72: other_config_descr    = full_speed_config_descr;
                             767 ;     genAddrOf
-   0C05 75 29 58            768 	mov	_other_config_descr,#_full_speed_config_descr
-   0C08 75 2A E0            769 	mov	(_other_config_descr + 1),#(_full_speed_config_descr >> 8)
+   0C11 75 29 58            768 	mov	_other_config_descr,#_full_speed_config_descr
+   0C14 75 2A E0            769 	mov	(_other_config_descr + 1),#(_full_speed_config_descr >> 8)
                             770 ;	Peephole 112.b	changed ljmp to sjmp
                             771 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0C0B 22                  772 	ret
-   0C0C                     773 00102$:
+   0C17 22                  772 	ret
+   0C18                     773 00102$:
                             774 ;Initial/src/lib/usb_common.c:76: current_device_descr  = full_speed_device_descr;
                             775 ;     genAddrOf
-   0C0C 75 23 3C            776 	mov	_current_device_descr,#_full_speed_device_descr
-   0C0F 75 24 E0            777 	mov	(_current_device_descr + 1),#(_full_speed_device_descr >> 8)
+   0C18 75 23 3C            776 	mov	_current_device_descr,#_full_speed_device_descr
+   0C1B 75 24 E0            777 	mov	(_current_device_descr + 1),#(_full_speed_device_descr >> 8)
                             778 ;Initial/src/lib/usb_common.c:77: current_devqual_descr = full_speed_devqual_descr;
                             779 ;     genAddrOf
-   0C12 75 25 4E            780 	mov	_current_devqual_descr,#_full_speed_devqual_descr
-   0C15 75 26 E0            781 	mov	(_current_devqual_descr + 1),#(_full_speed_devqual_descr >> 8)
+   0C1E 75 25 4E            780 	mov	_current_devqual_descr,#_full_speed_devqual_descr
+   0C21 75 26 E0            781 	mov	(_current_devqual_descr + 1),#(_full_speed_devqual_descr >> 8)
                             782 ;Initial/src/lib/usb_common.c:78: current_config_descr  = full_speed_config_descr;
                             783 ;     genAddrOf
-   0C18 75 27 58            784 	mov	_current_config_descr,#_full_speed_config_descr
-   0C1B 75 28 E0            785 	mov	(_current_config_descr + 1),#(_full_speed_config_descr >> 8)
+   0C24 75 27 58            784 	mov	_current_config_descr,#_full_speed_config_descr
+   0C27 75 28 E0            785 	mov	(_current_config_descr + 1),#(_full_speed_config_descr >> 8)
                             786 ;Initial/src/lib/usb_common.c:79: other_config_descr    = high_speed_config_descr;
                             787 ;     genAddrOf
-   0C1E 75 29 1C            788 	mov	_other_config_descr,#_high_speed_config_descr
-   0C21 75 2A E0            789 	mov	(_other_config_descr + 1),#(_high_speed_config_descr >> 8)
-   0C24                     790 00104$:
-   0C24 22                  791 	ret
+   0C2A 75 29 1C            788 	mov	_other_config_descr,#_high_speed_config_descr
+   0C2D 75 2A E0            789 	mov	(_other_config_descr + 1),#(_high_speed_config_descr >> 8)
+   0C30                     790 00104$:
+   0C30 22                  791 	ret
                             792 ;------------------------------------------------------------
                             793 ;Allocation info for local variables in function 'isr_SUDAV'
                             794 ;------------------------------------------------------------
@@ -797,17 +797,17 @@
                             797 ;	-----------------------------------------
                             798 ;	 function isr_SUDAV
                             799 ;	-----------------------------------------
-   0C25                     800 _isr_SUDAV:
+   0C31                     800 _isr_SUDAV:
                             801 ;Initial/src/lib/usb_common.c:86: clear_usb_irq ();
                             802 ;     genAnd
-   0C25 53 91 EF            803 	anl	_EXIF,#0xEF
+   0C31 53 91 EF            803 	anl	_EXIF,#0xEF
                             804 ;     genAssign
-   0C28 75 A1 00            805 	mov	_INT2CLR,#0x00
+   0C34 75 A1 00            805 	mov	_INT2CLR,#0x00
                             806 ;Initial/src/lib/usb_common.c:87: _usb_got_SUDAV = 1;
                             807 ;     genAssign
-   0C2B D2 03               808 	setb	__usb_got_SUDAV
-   0C2D                     809 00101$:
-   0C2D 32                  810 	reti
+   0C37 D2 03               808 	setb	__usb_got_SUDAV
+   0C39                     809 00101$:
+   0C39 32                  810 	reti
                             811 ;	eliminated unneeded push/pop psw
                             812 ;	eliminated unneeded push/pop dpl
                             813 ;	eliminated unneeded push/pop dph
@@ -821,44 +821,44 @@
                             821 ;	-----------------------------------------
                             822 ;	 function isr_USBRESET
                             823 ;	-----------------------------------------
-   0C2E                     824 _isr_USBRESET:
-   0C2E C0 E0               825 	push	acc
-   0C30 C0 F0               826 	push	b
-   0C32 C0 82               827 	push	dpl
-   0C34 C0 83               828 	push	dph
-   0C36 C0 02               829 	push	(0+2)
-   0C38 C0 03               830 	push	(0+3)
-   0C3A C0 04               831 	push	(0+4)
-   0C3C C0 05               832 	push	(0+5)
-   0C3E C0 06               833 	push	(0+6)
-   0C40 C0 07               834 	push	(0+7)
-   0C42 C0 00               835 	push	(0+0)
-   0C44 C0 01               836 	push	(0+1)
-   0C46 C0 D0               837 	push	psw
-   0C48 75 D0 00            838 	mov	psw,#0x00
+   0C3A                     824 _isr_USBRESET:
+   0C3A C0 E0               825 	push	acc
+   0C3C C0 F0               826 	push	b
+   0C3E C0 82               827 	push	dpl
+   0C40 C0 83               828 	push	dph
+   0C42 C0 02               829 	push	(0+2)
+   0C44 C0 03               830 	push	(0+3)
+   0C46 C0 04               831 	push	(0+4)
+   0C48 C0 05               832 	push	(0+5)
+   0C4A C0 06               833 	push	(0+6)
+   0C4C C0 07               834 	push	(0+7)
+   0C4E C0 00               835 	push	(0+0)
+   0C50 C0 01               836 	push	(0+1)
+   0C52 C0 D0               837 	push	psw
+   0C54 75 D0 00            838 	mov	psw,#0x00
                             839 ;Initial/src/lib/usb_common.c:93: clear_usb_irq ();
                             840 ;     genAnd
-   0C4B 53 91 EF            841 	anl	_EXIF,#0xEF
+   0C57 53 91 EF            841 	anl	_EXIF,#0xEF
                             842 ;     genAssign
-   0C4E 75 A1 00            843 	mov	_INT2CLR,#0x00
+   0C5A 75 A1 00            843 	mov	_INT2CLR,#0x00
                             844 ;Initial/src/lib/usb_common.c:94: setup_descriptors ();
                             845 ;     genCall
-   0C51 12 0B EB            846 	lcall	_setup_descriptors
-   0C54                     847 00101$:
-   0C54 D0 D0               848 	pop	psw
-   0C56 D0 01               849 	pop	(0+1)
-   0C58 D0 00               850 	pop	(0+0)
-   0C5A D0 07               851 	pop	(0+7)
-   0C5C D0 06               852 	pop	(0+6)
-   0C5E D0 05               853 	pop	(0+5)
-   0C60 D0 04               854 	pop	(0+4)
-   0C62 D0 03               855 	pop	(0+3)
-   0C64 D0 02               856 	pop	(0+2)
-   0C66 D0 83               857 	pop	dph
-   0C68 D0 82               858 	pop	dpl
-   0C6A D0 F0               859 	pop	b
-   0C6C D0 E0               860 	pop	acc
-   0C6E 32                  861 	reti
+   0C5D 12 0B F7            846 	lcall	_setup_descriptors
+   0C60                     847 00101$:
+   0C60 D0 D0               848 	pop	psw
+   0C62 D0 01               849 	pop	(0+1)
+   0C64 D0 00               850 	pop	(0+0)
+   0C66 D0 07               851 	pop	(0+7)
+   0C68 D0 06               852 	pop	(0+6)
+   0C6A D0 05               853 	pop	(0+5)
+   0C6C D0 04               854 	pop	(0+4)
+   0C6E D0 03               855 	pop	(0+3)
+   0C70 D0 02               856 	pop	(0+2)
+   0C72 D0 83               857 	pop	dph
+   0C74 D0 82               858 	pop	dpl
+   0C76 D0 F0               859 	pop	b
+   0C78 D0 E0               860 	pop	acc
+   0C7A 32                  861 	reti
                             862 ;------------------------------------------------------------
                             863 ;Allocation info for local variables in function 'isr_HIGHSPEED'
                             864 ;------------------------------------------------------------
@@ -867,44 +867,44 @@
                             867 ;	-----------------------------------------
                             868 ;	 function isr_HIGHSPEED
                             869 ;	-----------------------------------------
-   0C6F                     870 _isr_HIGHSPEED:
-   0C6F C0 E0               871 	push	acc
-   0C71 C0 F0               872 	push	b
-   0C73 C0 82               873 	push	dpl
-   0C75 C0 83               874 	push	dph
-   0C77 C0 02               875 	push	(0+2)
-   0C79 C0 03               876 	push	(0+3)
-   0C7B C0 04               877 	push	(0+4)
-   0C7D C0 05               878 	push	(0+5)
-   0C7F C0 06               879 	push	(0+6)
-   0C81 C0 07               880 	push	(0+7)
-   0C83 C0 00               881 	push	(0+0)
-   0C85 C0 01               882 	push	(0+1)
-   0C87 C0 D0               883 	push	psw
-   0C89 75 D0 00            884 	mov	psw,#0x00
+   0C7B                     870 _isr_HIGHSPEED:
+   0C7B C0 E0               871 	push	acc
+   0C7D C0 F0               872 	push	b
+   0C7F C0 82               873 	push	dpl
+   0C81 C0 83               874 	push	dph
+   0C83 C0 02               875 	push	(0+2)
+   0C85 C0 03               876 	push	(0+3)
+   0C87 C0 04               877 	push	(0+4)
+   0C89 C0 05               878 	push	(0+5)
+   0C8B C0 06               879 	push	(0+6)
+   0C8D C0 07               880 	push	(0+7)
+   0C8F C0 00               881 	push	(0+0)
+   0C91 C0 01               882 	push	(0+1)
+   0C93 C0 D0               883 	push	psw
+   0C95 75 D0 00            884 	mov	psw,#0x00
                             885 ;Initial/src/lib/usb_common.c:100: clear_usb_irq ();
                             886 ;     genAnd
-   0C8C 53 91 EF            887 	anl	_EXIF,#0xEF
+   0C98 53 91 EF            887 	anl	_EXIF,#0xEF
                             888 ;     genAssign
-   0C8F 75 A1 00            889 	mov	_INT2CLR,#0x00
+   0C9B 75 A1 00            889 	mov	_INT2CLR,#0x00
                             890 ;Initial/src/lib/usb_common.c:101: setup_descriptors ();
                             891 ;     genCall
-   0C92 12 0B EB            892 	lcall	_setup_descriptors
-   0C95                     893 00101$:
-   0C95 D0 D0               894 	pop	psw
-   0C97 D0 01               895 	pop	(0+1)
-   0C99 D0 00               896 	pop	(0+0)
-   0C9B D0 07               897 	pop	(0+7)
-   0C9D D0 06               898 	pop	(0+6)
-   0C9F D0 05               899 	pop	(0+5)
-   0CA1 D0 04               900 	pop	(0+4)
-   0CA3 D0 03               901 	pop	(0+3)
-   0CA5 D0 02               902 	pop	(0+2)
-   0CA7 D0 83               903 	pop	dph
-   0CA9 D0 82               904 	pop	dpl
-   0CAB D0 F0               905 	pop	b
-   0CAD D0 E0               906 	pop	acc
-   0CAF 32                  907 	reti
+   0C9E 12 0B F7            892 	lcall	_setup_descriptors
+   0CA1                     893 00101$:
+   0CA1 D0 D0               894 	pop	psw
+   0CA3 D0 01               895 	pop	(0+1)
+   0CA5 D0 00               896 	pop	(0+0)
+   0CA7 D0 07               897 	pop	(0+7)
+   0CA9 D0 06               898 	pop	(0+6)
+   0CAB D0 05               899 	pop	(0+5)
+   0CAD D0 04               900 	pop	(0+4)
+   0CAF D0 03               901 	pop	(0+3)
+   0CB1 D0 02               902 	pop	(0+2)
+   0CB3 D0 83               903 	pop	dph
+   0CB5 D0 82               904 	pop	dpl
+   0CB7 D0 F0               905 	pop	b
+   0CB9 D0 E0               906 	pop	acc
+   0CBB 32                  907 	reti
                             908 ;------------------------------------------------------------
                             909 ;Allocation info for local variables in function 'usb_install_handlers'
                             910 ;------------------------------------------------------------
@@ -913,38 +913,38 @@
                             913 ;	-----------------------------------------
                             914 ;	 function usb_install_handlers
                             915 ;	-----------------------------------------
-   0CB0                     916 _usb_install_handlers:
+   0CBC                     916 _usb_install_handlers:
                             917 ;Initial/src/lib/usb_common.c:107: setup_descriptors ();	    // ensure that they're set before use
                             918 ;     genCall
-   0CB0 12 0B EB            919 	lcall	_setup_descriptors
+   0CBC 12 0B F7            919 	lcall	_setup_descriptors
                             920 ;Initial/src/lib/usb_common.c:109: hook_uv (UV_SUDAV,     (unsigned short) isr_SUDAV);
                             921 ;     genCast
-   0CB3 75 2B 25            922 	mov	_hook_uv_PARM_2,#_isr_SUDAV
-   0CB6 75 2C 0C            923 	mov	(_hook_uv_PARM_2 + 1),#(_isr_SUDAV >> 8)
+   0CBF 75 2B 31            922 	mov	_hook_uv_PARM_2,#_isr_SUDAV
+   0CC2 75 2C 0C            923 	mov	(_hook_uv_PARM_2 + 1),#(_isr_SUDAV >> 8)
                             924 ;     genCall
-   0CB9 75 82 00            925 	mov	dpl,#0x00
-   0CBC 12 08 93            926 	lcall	_hook_uv
+   0CC5 75 82 00            925 	mov	dpl,#0x00
+   0CC8 12 08 93            926 	lcall	_hook_uv
                             927 ;Initial/src/lib/usb_common.c:110: hook_uv (UV_USBRESET,  (unsigned short) isr_USBRESET);
                             928 ;     genCast
-   0CBF 75 2B 2E            929 	mov	_hook_uv_PARM_2,#_isr_USBRESET
-   0CC2 75 2C 0C            930 	mov	(_hook_uv_PARM_2 + 1),#(_isr_USBRESET >> 8)
+   0CCB 75 2B 3A            929 	mov	_hook_uv_PARM_2,#_isr_USBRESET
+   0CCE 75 2C 0C            930 	mov	(_hook_uv_PARM_2 + 1),#(_isr_USBRESET >> 8)
                             931 ;     genCall
-   0CC5 75 82 10            932 	mov	dpl,#0x10
-   0CC8 12 08 93            933 	lcall	_hook_uv
+   0CD1 75 82 10            932 	mov	dpl,#0x10
+   0CD4 12 08 93            933 	lcall	_hook_uv
                             934 ;Initial/src/lib/usb_common.c:111: hook_uv (UV_HIGHSPEED, (unsigned short) isr_HIGHSPEED);
                             935 ;     genCast
-   0CCB 75 2B 6F            936 	mov	_hook_uv_PARM_2,#_isr_HIGHSPEED
-   0CCE 75 2C 0C            937 	mov	(_hook_uv_PARM_2 + 1),#(_isr_HIGHSPEED >> 8)
+   0CD7 75 2B 7B            936 	mov	_hook_uv_PARM_2,#_isr_HIGHSPEED
+   0CDA 75 2C 0C            937 	mov	(_hook_uv_PARM_2 + 1),#(_isr_HIGHSPEED >> 8)
                             938 ;     genCall
-   0CD1 75 82 14            939 	mov	dpl,#0x14
-   0CD4 12 08 93            940 	lcall	_hook_uv
+   0CDD 75 82 14            939 	mov	dpl,#0x14
+   0CE0 12 08 93            940 	lcall	_hook_uv
                             941 ;Initial/src/lib/usb_common.c:113: USBIE = bmSUDAV | bmURES | bmHSGRANT;
                             942 ;     genAssign
-   0CD7 90 E6 5C            943 	mov	dptr,#_USBIE
-   0CDA 74 31               944 	mov	a,#0x31
-   0CDC F0                  945 	movx	@dptr,a
-   0CDD                     946 00101$:
-   0CDD 22                  947 	ret
+   0CE3 90 E6 5C            943 	mov	dptr,#_USBIE
+   0CE6 74 31               944 	mov	a,#0x31
+   0CE8 F0                  945 	movx	@dptr,a
+   0CE9                     946 00101$:
+   0CE9 22                  947 	ret
                             948 ;------------------------------------------------------------
                             949 ;Allocation info for local variables in function 'plausible_endpoint'
                             950 ;------------------------------------------------------------
@@ -954,7 +954,7 @@
                             954 ;	-----------------------------------------
                             955 ;	 function plausible_endpoint
                             956 ;	-----------------------------------------
-   0CDE                     957 _plausible_endpoint:
+   0CEA                     957 _plausible_endpoint:
                             958 ;     genReceive
                             959 ;Initial/src/lib/usb_common.c:122: ep &= ~0x80;	// ignore direction bit
                             960 ;     genAnd
@@ -965,48 +965,48 @@
                             965 ;	Peephole 108	removed ljmp by inverse jump logic
                             966 ;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
                             967 ;	Peephole 187	used a instead of ar2 for anl
-   0CDE E5 82               968 	mov	a,dpl
-   0CE0 54 7F               969 	anl	a,#0x7F
-   0CE2 FA                  970 	mov	r2,a
-   0CE3 24 F7               971 	add	a,#0xff - 0x08
-   0CE5 50 04               972 	jnc	00102$
-   0CE7                     973 00109$:
+   0CEA E5 82               968 	mov	a,dpl
+   0CEC 54 7F               969 	anl	a,#0x7F
+   0CEE FA                  970 	mov	r2,a
+   0CEF 24 F7               971 	add	a,#0xff - 0x08
+   0CF1 50 04               972 	jnc	00102$
+   0CF3                     973 00109$:
                             974 ;Initial/src/lib/usb_common.c:125: return 0;
                             975 ;     genRet
-   0CE7 75 82 00            976 	mov	dpl,#0x00
+   0CF3 75 82 00            976 	mov	dpl,#0x00
                             977 ;	Peephole 112.b	changed ljmp to sjmp
                             978 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0CEA 22                  979 	ret
-   0CEB                     980 00102$:
+   0CF6 22                  979 	ret
+   0CF7                     980 00102$:
                             981 ;Initial/src/lib/usb_common.c:127: if (ep == 1)
                             982 ;     genCmpEq
                             983 ;	Peephole 112.b	changed ljmp to sjmp
                             984 ;	Peephole 199	optimized misc jump sequence
-   0CEB BA 01 04            985 	cjne	r2,#0x01,00104$
+   0CF7 BA 01 04            985 	cjne	r2,#0x01,00104$
                             986 ;00110$:
                             987 ;	Peephole 200	removed redundant sjmp
-   0CEE                     988 00111$:
+   0CFA                     988 00111$:
                             989 ;Initial/src/lib/usb_common.c:128: return 1;
                             990 ;     genRet
-   0CEE 75 82 01            991 	mov	dpl,#0x01
+   0CFA 75 82 01            991 	mov	dpl,#0x01
                             992 ;	Peephole 112.b	changed ljmp to sjmp
                             993 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0CF1 22                  994 	ret
-   0CF2                     995 00104$:
+   0CFD 22                  994 	ret
+   0CFE                     995 00104$:
                             996 ;Initial/src/lib/usb_common.c:130: return (ep & 0x1) == 0;	// must be even
                             997 ;     genAnd
-   0CF2 53 02 01            998 	anl	ar2,#0x01
+   0CFE 53 02 01            998 	anl	ar2,#0x01
                             999 ;     genCmpEq
                            1000 ;	Peephole 241.c	optimized compare
-   0CF5 E4                 1001 	clr	a
-   0CF6 BA 00 01           1002 	cjne	r2,#0x00,00112$
-   0CF9 04                 1003 	inc	a
-   0CFA                    1004 00112$:
-   0CFA                    1005 00113$:
-   0CFA F5 82              1006 	mov	dpl,a
+   0D01 E4                 1001 	clr	a
+   0D02 BA 00 01           1002 	cjne	r2,#0x00,00112$
+   0D05 04                 1003 	inc	a
+   0D06                    1004 00112$:
+   0D06                    1005 00113$:
+   0D06 F5 82              1006 	mov	dpl,a
                            1007 ;     genRet
-   0CFC                    1008 00105$:
-   0CFC 22                 1009 	ret
+   0D08                    1008 00105$:
+   0D08 22                 1009 	ret
                            1010 ;------------------------------------------------------------
                            1011 ;Allocation info for local variables in function 'epcs'
                            1012 ;------------------------------------------------------------
@@ -1016,111 +1016,111 @@
                            1016 ;	-----------------------------------------
                            1017 ;	 function epcs
                            1018 ;	-----------------------------------------
-   0CFD                    1019 _epcs:
+   0D09                    1019 _epcs:
                            1020 ;     genReceive
-   0CFD AA 82              1021 	mov	r2,dpl
+   0D09 AA 82              1021 	mov	r2,dpl
                            1022 ;Initial/src/lib/usb_common.c:139: if (ep == 0x01)		// ep1 has different in and out CS regs
                            1023 ;     genCmpEq
                            1024 ;	Peephole 112.b	changed ljmp to sjmp
                            1025 ;	Peephole 199	optimized misc jump sequence
-   0CFF BA 01 0C           1026 	cjne	r2,#0x01,00102$
+   0D0B BA 01 0C           1026 	cjne	r2,#0x01,00102$
                            1027 ;00112$:
                            1028 ;	Peephole 200	removed redundant sjmp
-   0D02                    1029 00113$:
+   0D0E                    1029 00113$:
                            1030 ;Initial/src/lib/usb_common.c:140: return EP1OUTCS;
                            1031 ;     genAssign
-   0D02 90 E6 A1           1032 	mov	dptr,#_EP1OUTCS
-   0D05 E0                 1033 	movx	a,@dptr
-   0D06 FB                 1034 	mov	r3,a
+   0D0E 90 E6 A1           1032 	mov	dptr,#_EP1OUTCS
+   0D11 E0                 1033 	movx	a,@dptr
+   0D12 FB                 1034 	mov	r3,a
                            1035 ;     genCast
-   0D07 7C 00              1036 	mov	r4,#0x00
+   0D13 7C 00              1036 	mov	r4,#0x00
                            1037 ;     genRet
-   0D09 8B 82              1038 	mov	dpl,r3
-   0D0B 8C 83              1039 	mov	dph,r4
+   0D15 8B 82              1038 	mov	dpl,r3
+   0D17 8C 83              1039 	mov	dph,r4
                            1040 ;	Peephole 112.b	changed ljmp to sjmp
                            1041 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0D0D 22                 1042 	ret
-   0D0E                    1043 00102$:
+   0D19 22                 1042 	ret
+   0D1A                    1043 00102$:
                            1044 ;Initial/src/lib/usb_common.c:142: if (ep == 0x81)
                            1045 ;     genCmpEq
                            1046 ;	Peephole 112.b	changed ljmp to sjmp
                            1047 ;	Peephole 199	optimized misc jump sequence
-   0D0E BA 81 0C           1048 	cjne	r2,#0x81,00104$
+   0D1A BA 81 0C           1048 	cjne	r2,#0x81,00104$
                            1049 ;00114$:
                            1050 ;	Peephole 200	removed redundant sjmp
-   0D11                    1051 00115$:
+   0D1D                    1051 00115$:
                            1052 ;Initial/src/lib/usb_common.c:143: return EP1INCS;
                            1053 ;     genAssign
-   0D11 90 E6 A2           1054 	mov	dptr,#_EP1INCS
-   0D14 E0                 1055 	movx	a,@dptr
-   0D15 FB                 1056 	mov	r3,a
+   0D1D 90 E6 A2           1054 	mov	dptr,#_EP1INCS
+   0D20 E0                 1055 	movx	a,@dptr
+   0D21 FB                 1056 	mov	r3,a
                            1057 ;     genCast
-   0D16 7C 00              1058 	mov	r4,#0x00
+   0D22 7C 00              1058 	mov	r4,#0x00
                            1059 ;     genRet
-   0D18 8B 82              1060 	mov	dpl,r3
-   0D1A 8C 83              1061 	mov	dph,r4
+   0D24 8B 82              1060 	mov	dpl,r3
+   0D26 8C 83              1061 	mov	dph,r4
                            1062 ;	Peephole 112.b	changed ljmp to sjmp
                            1063 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0D1C 22                 1064 	ret
-   0D1D                    1065 00104$:
+   0D28 22                 1064 	ret
+   0D29                    1065 00104$:
                            1066 ;Initial/src/lib/usb_common.c:145: ep &= ~0x80;			// ignore direction bit
                            1067 ;     genAnd
-   0D1D 53 02 7F           1068 	anl	ar2,#0x7F
+   0D29 53 02 7F           1068 	anl	ar2,#0x7F
                            1069 ;Initial/src/lib/usb_common.c:147: if (ep == 0x00)		// ep0
                            1070 ;     genCmpEq
                            1071 ;	Peephole 112.b	changed ljmp to sjmp
                            1072 ;	Peephole 199	optimized misc jump sequence
-   0D20 BA 00 0C           1073 	cjne	r2,#0x00,00106$
+   0D2C BA 00 0C           1073 	cjne	r2,#0x00,00106$
                            1074 ;00116$:
                            1075 ;	Peephole 200	removed redundant sjmp
-   0D23                    1076 00117$:
+   0D2F                    1076 00117$:
                            1077 ;Initial/src/lib/usb_common.c:148: return EP0CS;
                            1078 ;     genAssign
-   0D23 90 E6 A0           1079 	mov	dptr,#_EP0CS
-   0D26 E0                 1080 	movx	a,@dptr
-   0D27 FB                 1081 	mov	r3,a
+   0D2F 90 E6 A0           1079 	mov	dptr,#_EP0CS
+   0D32 E0                 1080 	movx	a,@dptr
+   0D33 FB                 1081 	mov	r3,a
                            1082 ;     genCast
-   0D28 7C 00              1083 	mov	r4,#0x00
+   0D34 7C 00              1083 	mov	r4,#0x00
                            1084 ;     genRet
-   0D2A 8B 82              1085 	mov	dpl,r3
-   0D2C 8C 83              1086 	mov	dph,r4
+   0D36 8B 82              1085 	mov	dpl,r3
+   0D38 8C 83              1086 	mov	dph,r4
                            1087 ;	Peephole 112.b	changed ljmp to sjmp
                            1088 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0D2E 22                 1089 	ret
-   0D2F                    1090 00106$:
+   0D3A 22                 1089 	ret
+   0D3B                    1090 00106$:
                            1091 ;Initial/src/lib/usb_common.c:150: return EP2CS + (ep >> 1);	// 2, 4, 6, 8 are consecutive
                            1092 ;     genAssign
-   0D2F 90 E6 A3           1093 	mov	dptr,#_EP2CS
-   0D32 E0                 1094 	movx	a,@dptr
-   0D33 FB                 1095 	mov	r3,a
+   0D3B 90 E6 A3           1093 	mov	dptr,#_EP2CS
+   0D3E E0                 1094 	movx	a,@dptr
+   0D3F FB                 1095 	mov	r3,a
                            1096 ;     genCast
-   0D34 7C 00              1097 	mov	r4,#0x00
+   0D40 7C 00              1097 	mov	r4,#0x00
                            1098 ;     genRightShift
                            1099 ;     genRightShiftLiteral
                            1100 ;     genrshOne
-   0D36 EA                 1101 	mov	a,r2
-   0D37 C3                 1102 	clr	c
-   0D38 13                 1103 	rrc	a
-   0D39 FA                 1104 	mov	r2,a
+   0D42 EA                 1101 	mov	a,r2
+   0D43 C3                 1102 	clr	c
+   0D44 13                 1103 	rrc	a
+   0D45 FA                 1104 	mov	r2,a
                            1105 ;     genCast
-   0D3A 7D 00              1106 	mov	r5,#0x00
+   0D46 7D 00              1106 	mov	r5,#0x00
                            1107 ;     genPlus
                            1108 ;	Peephole 236.g	used r2 instead of ar2
-   0D3C EA                 1109 	mov	a,r2
+   0D48 EA                 1109 	mov	a,r2
                            1110 ;	Peephole 236.a	used r3 instead of ar3
-   0D3D 2B                 1111 	add	a,r3
-   0D3E FB                 1112 	mov	r3,a
+   0D49 2B                 1111 	add	a,r3
+   0D4A FB                 1112 	mov	r3,a
                            1113 ;	Peephole 236.g	used r5 instead of ar5
-   0D3F ED                 1114 	mov	a,r5
+   0D4B ED                 1114 	mov	a,r5
                            1115 ;	Peephole 236.b	used r4 instead of ar4
-   0D40 3C                 1116 	addc	a,r4
+   0D4C 3C                 1116 	addc	a,r4
                            1117 ;     genCast
                            1118 ;     genRet
                            1119 ;	Peephole 235	loading dph directly from a(ccumulator), r4 not set
-   0D41 8B 82              1120 	mov	dpl,r3
-   0D43 F5 83              1121 	mov	dph,a
-   0D45                    1122 00107$:
-   0D45 22                 1123 	ret
+   0D4D 8B 82              1120 	mov	dpl,r3
+   0D4F F5 83              1121 	mov	dph,a
+   0D51                    1122 00107$:
+   0D51 22                 1123 	ret
                            1124 ;------------------------------------------------------------
                            1125 ;Allocation info for local variables in function 'usb_handle_set_feature'
                            1126 ;------------------------------------------------------------
@@ -1129,131 +1129,131 @@
                            1129 ;	-----------------------------------------
                            1130 ;	 function usb_handle_set_feature
                            1131 ;	-----------------------------------------
-   0D46                    1132 _usb_handle_set_feature:
+   0D52                    1132 _usb_handle_set_feature:
                            1133 ;Initial/src/lib/usb_common.c:155: switch (bRequestType & bmRT_RECIP_MASK)
                            1134 ;     genPointerGet
                            1135 ;     genFarPointerGet
-   0D46 90 E6 B8           1136 	mov	dptr,#_SETUPDAT
-   0D49 E0                 1137 	movx	a,@dptr
-   0D4A FA                 1138 	mov	r2,a
+   0D52 90 E6 B8           1136 	mov	dptr,#_SETUPDAT
+   0D55 E0                 1137 	movx	a,@dptr
+   0D56 FA                 1138 	mov	r2,a
                            1139 ;     genAnd
-   0D4B 53 02 1F           1140 	anl	ar2,#0x1F
+   0D57 53 02 1F           1140 	anl	ar2,#0x1F
                            1141 ;     genCmpEq
-   0D4E BA 00 02           1142 	cjne	r2,#0x00,00121$
+   0D5A BA 00 02           1142 	cjne	r2,#0x00,00121$
                            1143 ;	Peephole 112.b	changed ljmp to sjmp
-   0D51 80 05              1144 	sjmp	00101$
-   0D53                    1145 00121$:
+   0D5D 80 05              1144 	sjmp	00101$
+   0D5F                    1145 00121$:
                            1146 ;     genCmpEq
                            1147 ;	Peephole 112.b	changed ljmp to sjmp
                            1148 ;Initial/src/lib/usb_common.c:157: case bmRT_RECIP_DEVICE:
                            1149 ;	Peephole 112.b	changed ljmp to sjmp
                            1150 ;	Peephole 199	optimized misc jump sequence
-   0D53 BA 02 5B           1151 	cjne	r2,#0x02,00112$
-   0D56 80 12              1152 	sjmp	00106$
+   0D5F BA 02 5B           1151 	cjne	r2,#0x02,00112$
+   0D62 80 12              1152 	sjmp	00106$
                            1153 ;00122$:
-   0D58                    1154 00101$:
+   0D64                    1154 00101$:
                            1155 ;Initial/src/lib/usb_common.c:158: switch (wValueL)
                            1156 ;     genPointerGet
                            1157 ;     genFarPointerGet
-   0D58 90 E6 BA           1158 	mov	dptr,#(_SETUPDAT + 0x0002)
-   0D5B E0                 1159 	movx	a,@dptr
-   0D5C FA                 1160 	mov	r2,a
+   0D64 90 E6 BA           1158 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0D67 E0                 1159 	movx	a,@dptr
+   0D68 FA                 1160 	mov	r2,a
                            1161 ;     genCmpEq
-   0D5D BA 01 02           1162 	cjne	r2,#0x01,00123$
+   0D69 BA 01 02           1162 	cjne	r2,#0x01,00123$
                            1163 ;	Peephole 112.b	changed ljmp to sjmp
-   0D60 80 05              1164 	sjmp	00104$
-   0D62                    1165 00123$:
+   0D6C 80 05              1164 	sjmp	00104$
+   0D6E                    1165 00123$:
                            1166 ;     genCmpEq
-   0D62 BA 02 02           1167 	cjne	r2,#0x02,00124$
+   0D6E BA 02 02           1167 	cjne	r2,#0x02,00124$
                            1168 ;	Peephole 112.b	changed ljmp to sjmp
-   0D65 80 03              1169 	sjmp	00106$
-   0D67                    1170 00124$:
+   0D71 80 03              1169 	sjmp	00106$
+   0D73                    1170 00124$:
                            1171 ;Initial/src/lib/usb_common.c:165: default:
-   0D67                    1172 00104$:
+   0D73                    1172 00104$:
                            1173 ;Initial/src/lib/usb_common.c:166: fx2_stall_ep0 ();
                            1174 ;     genCall
-   0D67 12 06 7D           1175 	lcall	_fx2_stall_ep0
+   0D73 12 06 7D           1175 	lcall	_fx2_stall_ep0
                            1176 ;Initial/src/lib/usb_common.c:170: case bmRT_RECIP_ENDPOINT:
-   0D6A                    1177 00106$:
+   0D76                    1177 00106$:
                            1178 ;Initial/src/lib/usb_common.c:171: switch (wValueL)
                            1179 ;     genPointerGet
                            1180 ;     genFarPointerGet
-   0D6A 90 E6 BA           1181 	mov	dptr,#(_SETUPDAT + 0x0002)
-   0D6D E0                 1182 	movx	a,@dptr
+   0D76 90 E6 BA           1181 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0D79 E0                 1182 	movx	a,@dptr
                            1183 ;     genCmpEq
                            1184 ;	Peephole 115.b	jump optimization
-   0D6E FA                 1185 	mov	r2,a
-   0D6F 60 02              1186 	jz	00126$
-   0D71                    1187 00125$:
+   0D7A FA                 1185 	mov	r2,a
+   0D7B 60 02              1186 	jz	00126$
+   0D7D                    1187 00125$:
                            1188 ;	Peephole 112.b	changed ljmp to sjmp
-   0D71 80 3E              1189 	sjmp	00112$
-   0D73                    1190 00126$:
+   0D7D 80 3E              1189 	sjmp	00112$
+   0D7F                    1190 00126$:
                            1191 ;Initial/src/lib/usb_common.c:174: if (plausible_endpoint (wIndexL))
                            1192 ;     genPointerGet
                            1193 ;     genFarPointerGet
-   0D73 90 E6 BC           1194 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0D76 E0                 1195 	movx	a,@dptr
+   0D7F 90 E6 BC           1194 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0D82 E0                 1195 	movx	a,@dptr
                            1196 ;     genCall
                            1197 ;	Peephole 244.c	loading dpl from a instead of r2
-   0D77 FA                 1198 	mov	r2,a
-   0D78 F5 82              1199 	mov	dpl,a
-   0D7A 12 0C DE           1200 	lcall	_plausible_endpoint
-   0D7D E5 82              1201 	mov	a,dpl
+   0D83 FA                 1198 	mov	r2,a
+   0D84 F5 82              1199 	mov	dpl,a
+   0D86 12 0C EA           1200 	lcall	_plausible_endpoint
+   0D89 E5 82              1201 	mov	a,dpl
                            1202 ;     genIfx
                            1203 ;     genIfxJump
                            1204 ;	Peephole 110	removed ljmp by inverse jump logic
-   0D7F 60 2D              1205 	jz	00109$
-   0D81                    1206 00127$:
+   0D8B 60 2D              1205 	jz	00109$
+   0D8D                    1206 00127$:
                            1207 ;Initial/src/lib/usb_common.c:175: *epcs (wIndexL) |= bmEPSTALL;
                            1208 ;     genPointerGet
                            1209 ;     genFarPointerGet
-   0D81 90 E6 BC           1210 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0D84 E0                 1211 	movx	a,@dptr
+   0D8D 90 E6 BC           1210 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0D90 E0                 1211 	movx	a,@dptr
                            1212 ;     genCall
                            1213 ;	Peephole 244.c	loading dpl from a instead of r2
-   0D85 FA                 1214 	mov	r2,a
-   0D86 F5 82              1215 	mov	dpl,a
-   0D88 12 0C FD           1216 	lcall	_epcs
-   0D8B AA 82              1217 	mov	r2,dpl
-   0D8D AB 83              1218 	mov	r3,dph
+   0D91 FA                 1214 	mov	r2,a
+   0D92 F5 82              1215 	mov	dpl,a
+   0D94 12 0D 09           1216 	lcall	_epcs
+   0D97 AA 82              1217 	mov	r2,dpl
+   0D99 AB 83              1218 	mov	r3,dph
                            1219 ;     genPointerGet
                            1220 ;     genFarPointerGet
-   0D8F 90 E6 BC           1221 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0D92 E0                 1222 	movx	a,@dptr
+   0D9B 90 E6 BC           1221 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0D9E E0                 1222 	movx	a,@dptr
                            1223 ;     genCall
                            1224 ;	Peephole 244.c	loading dpl from a instead of r4
-   0D93 FC                 1225 	mov	r4,a
-   0D94 F5 82              1226 	mov	dpl,a
-   0D96 C0 02              1227 	push	ar2
-   0D98 C0 03              1228 	push	ar3
-   0D9A 12 0C FD           1229 	lcall	_epcs
-   0D9D D0 03              1230 	pop	ar3
-   0D9F D0 02              1231 	pop	ar2
+   0D9F FC                 1225 	mov	r4,a
+   0DA0 F5 82              1226 	mov	dpl,a
+   0DA2 C0 02              1227 	push	ar2
+   0DA4 C0 03              1228 	push	ar3
+   0DA6 12 0D 09           1229 	lcall	_epcs
+   0DA9 D0 03              1230 	pop	ar3
+   0DAB D0 02              1231 	pop	ar2
                            1232 ;     genPointerGet
                            1233 ;     genFarPointerGet
-   0DA1 E0                 1234 	movx	a,@dptr
-   0DA2 FC                 1235 	mov	r4,a
+   0DAD E0                 1234 	movx	a,@dptr
+   0DAE FC                 1235 	mov	r4,a
                            1236 ;     genOr
-   0DA3 43 04 01           1237 	orl	ar4,#0x01
+   0DAF 43 04 01           1237 	orl	ar4,#0x01
                            1238 ;     genPointerSet
                            1239 ;     genFarPointerSet
-   0DA6 8A 82              1240 	mov	dpl,r2
-   0DA8 8B 83              1241 	mov	dph,r3
-   0DAA EC                 1242 	mov	a,r4
-   0DAB F0                 1243 	movx	@dptr,a
+   0DB2 8A 82              1240 	mov	dpl,r2
+   0DB4 8B 83              1241 	mov	dph,r3
+   0DB6 EC                 1242 	mov	a,r4
+   0DB7 F0                 1243 	movx	@dptr,a
                            1244 ;	Peephole 112.b	changed ljmp to sjmp
-   0DAC 80 03              1245 	sjmp	00112$
-   0DAE                    1246 00109$:
+   0DB8 80 03              1245 	sjmp	00112$
+   0DBA                    1246 00109$:
                            1247 ;Initial/src/lib/usb_common.c:177: fx2_stall_ep0 ();
                            1248 ;     genCall
-   0DAE 12 06 7D           1249 	lcall	_fx2_stall_ep0
+   0DBA 12 06 7D           1249 	lcall	_fx2_stall_ep0
                            1250 ;Initial/src/lib/usb_common.c:181: default:
-   0DB1                    1251 00112$:
+   0DBD                    1251 00112$:
                            1252 ;Initial/src/lib/usb_common.c:182: fx2_stall_ep0 ();
                            1253 ;     genCall
                            1254 ;Initial/src/lib/usb_common.c:184: }
                            1255 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0DB1 02 06 7D           1256 	ljmp	_fx2_stall_ep0
+   0DBD 02 06 7D           1256 	ljmp	_fx2_stall_ep0
                            1257 ;------------------------------------------------------------
                            1258 ;Allocation info for local variables in function 'usb_handle_clear_feature'
                            1259 ;------------------------------------------------------------
@@ -1262,34 +1262,34 @@
                            1262 ;	-----------------------------------------
                            1263 ;	 function usb_handle_clear_feature
                            1264 ;	-----------------------------------------
-   0DB4                    1265 _usb_handle_clear_feature:
+   0DC0                    1265 _usb_handle_clear_feature:
                            1266 ;Initial/src/lib/usb_common.c:189: switch (bRequestType & bmRT_RECIP_MASK)
                            1267 ;     genPointerGet
                            1268 ;     genFarPointerGet
-   0DB4 90 E6 B8           1269 	mov	dptr,#_SETUPDAT
-   0DB7 E0                 1270 	movx	a,@dptr
-   0DB8 FA                 1271 	mov	r2,a
+   0DC0 90 E6 B8           1269 	mov	dptr,#_SETUPDAT
+   0DC3 E0                 1270 	movx	a,@dptr
+   0DC4 FA                 1271 	mov	r2,a
                            1272 ;     genAnd
-   0DB9 53 02 1F           1273 	anl	ar2,#0x1F
+   0DC5 53 02 1F           1273 	anl	ar2,#0x1F
                            1274 ;     genCmpEq
-   0DBC BA 00 02           1275 	cjne	r2,#0x00,00118$
+   0DC8 BA 00 02           1275 	cjne	r2,#0x00,00118$
                            1276 ;	Peephole 112.b	changed ljmp to sjmp
-   0DBF 80 05              1277 	sjmp	00101$
-   0DC1                    1278 00118$:
+   0DCB 80 05              1277 	sjmp	00101$
+   0DCD                    1278 00118$:
                            1279 ;     genCmpEq
                            1280 ;	Peephole 112.b	changed ljmp to sjmp
                            1281 ;Initial/src/lib/usb_common.c:192: case bmRT_RECIP_DEVICE:
                            1282 ;	Peephole 112.b	changed ljmp to sjmp
                            1283 ;	Peephole 199	optimized misc jump sequence
-   0DC1 BA 02 58           1284 	cjne	r2,#0x02,00110$
-   0DC4 80 07              1285 	sjmp	00105$
+   0DCD BA 02 58           1284 	cjne	r2,#0x02,00110$
+   0DD0 80 07              1285 	sjmp	00105$
                            1286 ;00119$:
-   0DC6                    1287 00101$:
+   0DD2                    1287 00101$:
                            1288 ;Initial/src/lib/usb_common.c:193: switch (wValueL)
                            1289 ;     genPointerGet
                            1290 ;     genFarPointerGet
-   0DC6 90 E6 BA           1291 	mov	dptr,#(_SETUPDAT + 0x0002)
-   0DC9 E0                 1292 	movx	a,@dptr
+   0DD2 90 E6 BA           1291 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0DD5 E0                 1292 	movx	a,@dptr
                            1293 ;Initial/src/lib/usb_common.c:197: fx2_stall_ep0 ();
                            1294 ;     genCall
                            1295 ;Initial/src/lib/usb_common.c:199: break;
@@ -1297,87 +1297,87 @@
                            1297 ;	Peephole 112.b	changed ljmp to sjmp
                            1298 ;	Peephole 251.b	replaced sjmp to ret with ret
                            1299 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0DCA 02 06 7D           1300 	ljmp	_fx2_stall_ep0
-   0DCD                    1301 00105$:
+   0DD6 02 06 7D           1300 	ljmp	_fx2_stall_ep0
+   0DD9                    1301 00105$:
                            1302 ;Initial/src/lib/usb_common.c:202: if (wValueL == FS_ENDPOINT_HALT && plausible_endpoint (wIndexL))
                            1303 ;     genPointerGet
                            1304 ;     genFarPointerGet
-   0DCD 90 E6 BA           1305 	mov	dptr,#(_SETUPDAT + 0x0002)
-   0DD0 E0                 1306 	movx	a,@dptr
+   0DD9 90 E6 BA           1305 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0DDC E0                 1306 	movx	a,@dptr
                            1307 ;     genCmpEq
                            1308 ;	Peephole 115.b	jump optimization
-   0DD1 FA                 1309 	mov	r2,a
-   0DD2 60 02              1310 	jz	00121$
-   0DD4                    1311 00120$:
+   0DDD FA                 1309 	mov	r2,a
+   0DDE 60 02              1310 	jz	00121$
+   0DE0                    1311 00120$:
                            1312 ;	Peephole 112.b	changed ljmp to sjmp
-   0DD4 80 43              1313 	sjmp	00107$
-   0DD6                    1314 00121$:
+   0DE0 80 43              1313 	sjmp	00107$
+   0DE2                    1314 00121$:
                            1315 ;     genPointerGet
                            1316 ;     genFarPointerGet
-   0DD6 90 E6 BC           1317 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0DD9 E0                 1318 	movx	a,@dptr
+   0DE2 90 E6 BC           1317 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0DE5 E0                 1318 	movx	a,@dptr
                            1319 ;     genCall
                            1320 ;	Peephole 244.c	loading dpl from a instead of r2
-   0DDA FA                 1321 	mov	r2,a
-   0DDB F5 82              1322 	mov	dpl,a
-   0DDD 12 0C DE           1323 	lcall	_plausible_endpoint
-   0DE0 E5 82              1324 	mov	a,dpl
+   0DE6 FA                 1321 	mov	r2,a
+   0DE7 F5 82              1322 	mov	dpl,a
+   0DE9 12 0C EA           1323 	lcall	_plausible_endpoint
+   0DEC E5 82              1324 	mov	a,dpl
                            1325 ;     genIfx
                            1326 ;     genIfxJump
                            1327 ;	Peephole 110	removed ljmp by inverse jump logic
-   0DE2 60 35              1328 	jz	00107$
-   0DE4                    1329 00122$:
+   0DEE 60 35              1328 	jz	00107$
+   0DF0                    1329 00122$:
                            1330 ;Initial/src/lib/usb_common.c:204: *epcs (wIndexL) &= ~bmEPSTALL;
                            1331 ;     genPointerGet
                            1332 ;     genFarPointerGet
-   0DE4 90 E6 BC           1333 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0DE7 E0                 1334 	movx	a,@dptr
+   0DF0 90 E6 BC           1333 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0DF3 E0                 1334 	movx	a,@dptr
                            1335 ;     genCall
                            1336 ;	Peephole 244.c	loading dpl from a instead of r2
-   0DE8 FA                 1337 	mov	r2,a
-   0DE9 F5 82              1338 	mov	dpl,a
-   0DEB 12 0C FD           1339 	lcall	_epcs
-   0DEE AA 82              1340 	mov	r2,dpl
-   0DF0 AB 83              1341 	mov	r3,dph
+   0DF4 FA                 1337 	mov	r2,a
+   0DF5 F5 82              1338 	mov	dpl,a
+   0DF7 12 0D 09           1339 	lcall	_epcs
+   0DFA AA 82              1340 	mov	r2,dpl
+   0DFC AB 83              1341 	mov	r3,dph
                            1342 ;     genPointerGet
                            1343 ;     genFarPointerGet
-   0DF2 90 E6 BC           1344 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0DF5 E0                 1345 	movx	a,@dptr
+   0DFE 90 E6 BC           1344 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0E01 E0                 1345 	movx	a,@dptr
                            1346 ;     genCall
                            1347 ;	Peephole 244.c	loading dpl from a instead of r4
-   0DF6 FC                 1348 	mov	r4,a
-   0DF7 F5 82              1349 	mov	dpl,a
-   0DF9 C0 02              1350 	push	ar2
-   0DFB C0 03              1351 	push	ar3
-   0DFD 12 0C FD           1352 	lcall	_epcs
-   0E00 D0 03              1353 	pop	ar3
-   0E02 D0 02              1354 	pop	ar2
+   0E02 FC                 1348 	mov	r4,a
+   0E03 F5 82              1349 	mov	dpl,a
+   0E05 C0 02              1350 	push	ar2
+   0E07 C0 03              1351 	push	ar3
+   0E09 12 0D 09           1352 	lcall	_epcs
+   0E0C D0 03              1353 	pop	ar3
+   0E0E D0 02              1354 	pop	ar2
                            1355 ;     genPointerGet
                            1356 ;     genFarPointerGet
-   0E04 E0                 1357 	movx	a,@dptr
-   0E05 FC                 1358 	mov	r4,a
+   0E10 E0                 1357 	movx	a,@dptr
+   0E11 FC                 1358 	mov	r4,a
                            1359 ;     genAnd
-   0E06 53 04 FE           1360 	anl	ar4,#0xFE
+   0E12 53 04 FE           1360 	anl	ar4,#0xFE
                            1361 ;     genPointerSet
                            1362 ;     genFarPointerSet
-   0E09 8A 82              1363 	mov	dpl,r2
-   0E0B 8B 83              1364 	mov	dph,r3
-   0E0D EC                 1365 	mov	a,r4
-   0E0E F0                 1366 	movx	@dptr,a
+   0E15 8A 82              1363 	mov	dpl,r2
+   0E17 8B 83              1364 	mov	dph,r3
+   0E19 EC                 1365 	mov	a,r4
+   0E1A F0                 1366 	movx	@dptr,a
                            1367 ;Initial/src/lib/usb_common.c:205: fx2_reset_data_toggle (wIndexL);
                            1368 ;     genPointerGet
                            1369 ;     genFarPointerGet
-   0E0F 90 E6 BC           1370 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0E12 E0                 1371 	movx	a,@dptr
+   0E1B 90 E6 BC           1370 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0E1E E0                 1371 	movx	a,@dptr
                            1372 ;     genCall
                            1373 ;	Peephole 244.c	loading dpl from a instead of r2
-   0E13 FA                 1374 	mov	r2,a
-   0E14 F5 82              1375 	mov	dpl,a
+   0E1F FA                 1374 	mov	r2,a
+   0E20 F5 82              1375 	mov	dpl,a
                            1376 ;	Peephole 112.b	changed ljmp to sjmp
                            1377 ;	Peephole 251.b	replaced sjmp to ret with ret
                            1378 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0E16 02 06 86           1379 	ljmp	_fx2_reset_data_toggle
-   0E19                    1380 00107$:
+   0E22 02 06 86           1379 	ljmp	_fx2_reset_data_toggle
+   0E25                    1380 00107$:
                            1381 ;Initial/src/lib/usb_common.c:208: fx2_stall_ep0 ();
                            1382 ;     genCall
                            1383 ;Initial/src/lib/usb_common.c:209: break;
@@ -1385,15 +1385,15 @@
                            1385 ;	Peephole 112.b	changed ljmp to sjmp
                            1386 ;	Peephole 251.b	replaced sjmp to ret with ret
                            1387 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0E19 02 06 7D           1388 	ljmp	_fx2_stall_ep0
-   0E1C                    1389 00110$:
+   0E25 02 06 7D           1388 	ljmp	_fx2_stall_ep0
+   0E28                    1389 00110$:
                            1390 ;Initial/src/lib/usb_common.c:212: fx2_stall_ep0 ();
                            1391 ;     genCall
                            1392 ;Initial/src/lib/usb_common.c:214: }
                            1393 ;	Peephole 253.c	replaced lcall with ljmp
-   0E1C 02 06 7D           1394 	ljmp	_fx2_stall_ep0
-   0E1F                    1395 00112$:
-   0E1F 22                 1396 	ret
+   0E28 02 06 7D           1394 	ljmp	_fx2_stall_ep0
+   0E2B                    1395 00112$:
+   0E2B 22                 1396 	ret
                            1397 ;------------------------------------------------------------
                            1398 ;Allocation info for local variables in function 'usb_handle_get_status'
                            1399 ;------------------------------------------------------------
@@ -1402,68 +1402,68 @@
                            1402 ;	-----------------------------------------
                            1403 ;	 function usb_handle_get_status
                            1404 ;	-----------------------------------------
-   0E20                    1405 _usb_handle_get_status:
+   0E2C                    1405 _usb_handle_get_status:
                            1406 ;Initial/src/lib/usb_common.c:219: switch (bRequestType & bmRT_RECIP_MASK)
                            1407 ;     genPointerGet
                            1408 ;     genFarPointerGet
-   0E20 90 E6 B8           1409 	mov	dptr,#_SETUPDAT
-   0E23 E0                 1410 	movx	a,@dptr
-   0E24 FA                 1411 	mov	r2,a
+   0E2C 90 E6 B8           1409 	mov	dptr,#_SETUPDAT
+   0E2F E0                 1410 	movx	a,@dptr
+   0E30 FA                 1411 	mov	r2,a
                            1412 ;     genAnd
-   0E25 53 02 1F           1413 	anl	ar2,#0x1F
+   0E31 53 02 1F           1413 	anl	ar2,#0x1F
                            1414 ;     genCmpEq
-   0E28 BA 00 02           1415 	cjne	r2,#0x00,00115$
+   0E34 BA 00 02           1415 	cjne	r2,#0x00,00115$
                            1416 ;	Peephole 112.b	changed ljmp to sjmp
-   0E2B 80 0A              1417 	sjmp	00101$
-   0E2D                    1418 00115$:
+   0E37 80 0A              1417 	sjmp	00101$
+   0E39                    1418 00115$:
                            1419 ;     genCmpEq
-   0E2D BA 01 02           1420 	cjne	r2,#0x01,00116$
+   0E39 BA 01 02           1420 	cjne	r2,#0x01,00116$
                            1421 ;	Peephole 112.b	changed ljmp to sjmp
-   0E30 80 1B              1422 	sjmp	00102$
-   0E32                    1423 00116$:
+   0E3C 80 1B              1422 	sjmp	00102$
+   0E3E                    1423 00116$:
                            1424 ;     genCmpEq
                            1425 ;	Peephole 112.b	changed ljmp to sjmp
                            1426 ;Initial/src/lib/usb_common.c:221: case bmRT_RECIP_DEVICE:
                            1427 ;	Peephole 112.b	changed ljmp to sjmp
                            1428 ;	Peephole 199	optimized misc jump sequence
-   0E32 BA 02 61           1429 	cjne	r2,#0x02,00107$
-   0E35 80 2A              1430 	sjmp	00103$
+   0E3E BA 02 61           1429 	cjne	r2,#0x02,00107$
+   0E41 80 2A              1430 	sjmp	00103$
                            1431 ;00117$:
-   0E37                    1432 00101$:
+   0E43                    1432 00101$:
                            1433 ;Initial/src/lib/usb_common.c:222: EP0BUF[0] = bmGSDA_SELF_POWERED;	// FIXME app should handle
                            1434 ;     genPointerSet
                            1435 ;     genFarPointerSet
-   0E37 90 E7 40           1436 	mov	dptr,#_EP0BUF
-   0E3A 74 01              1437 	mov	a,#0x01
-   0E3C F0                 1438 	movx	@dptr,a
+   0E43 90 E7 40           1436 	mov	dptr,#_EP0BUF
+   0E46 74 01              1437 	mov	a,#0x01
+   0E48 F0                 1438 	movx	@dptr,a
                            1439 ;Initial/src/lib/usb_common.c:223: EP0BUF[1] = 0;
                            1440 ;     genPointerSet
                            1441 ;     genFarPointerSet
-   0E3D 90 E7 41           1442 	mov	dptr,#(_EP0BUF + 0x0001)
+   0E49 90 E7 41           1442 	mov	dptr,#(_EP0BUF + 0x0001)
                            1443 ;	Peephole 181	changed mov to clr
                            1444 ;Initial/src/lib/usb_common.c:224: EP0BCH = 0;
                            1445 ;     genAssign
                            1446 ;	Peephole 181	changed mov to clr
                            1447 ;	Peephole 219	removed redundant clear
-   0E40 E4                 1448 	clr	a
-   0E41 F0                 1449 	movx	@dptr,a
-   0E42 90 E6 8A           1450 	mov	dptr,#_EP0BCH
-   0E45 F0                 1451 	movx	@dptr,a
+   0E4C E4                 1448 	clr	a
+   0E4D F0                 1449 	movx	@dptr,a
+   0E4E 90 E6 8A           1450 	mov	dptr,#_EP0BCH
+   0E51 F0                 1451 	movx	@dptr,a
                            1452 ;Initial/src/lib/usb_common.c:225: EP0BCL = 2;
                            1453 ;     genAssign
-   0E46 90 E6 8B           1454 	mov	dptr,#_EP0BCL
-   0E49 74 02              1455 	mov	a,#0x02
-   0E4B F0                 1456 	movx	@dptr,a
+   0E52 90 E6 8B           1454 	mov	dptr,#_EP0BCL
+   0E55 74 02              1455 	mov	a,#0x02
+   0E57 F0                 1456 	movx	@dptr,a
                            1457 ;Initial/src/lib/usb_common.c:226: break;
                            1458 ;Initial/src/lib/usb_common.c:228: case bmRT_RECIP_INTERFACE:
                            1459 ;	Peephole 112.b	changed ljmp to sjmp
                            1460 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0E4C 22                 1461 	ret
-   0E4D                    1462 00102$:
+   0E58 22                 1461 	ret
+   0E59                    1462 00102$:
                            1463 ;Initial/src/lib/usb_common.c:229: EP0BUF[0] = 0;
                            1464 ;     genPointerSet
                            1465 ;     genFarPointerSet
-   0E4D 90 E7 40           1466 	mov	dptr,#_EP0BUF
+   0E59 90 E7 40           1466 	mov	dptr,#_EP0BUF
                            1467 ;	Peephole 181	changed mov to clr
                            1468 ;Initial/src/lib/usb_common.c:230: EP0BUF[1] = 0;
                            1469 ;     genPointerSet
@@ -1474,82 +1474,82 @@
                            1474 ;     genAssign
                            1475 ;	Peephole 181	changed mov to clr
                            1476 ;	Peephole 219.a	removed redundant clear
-   0E50 E4                 1477 	clr	a
-   0E51 F0                 1478 	movx	@dptr,a
-   0E52 90 E7 41           1479 	mov	dptr,#(_EP0BUF + 0x0001)
-   0E55 F0                 1480 	movx	@dptr,a
-   0E56 90 E6 8A           1481 	mov	dptr,#_EP0BCH
-   0E59 F0                 1482 	movx	@dptr,a
+   0E5C E4                 1477 	clr	a
+   0E5D F0                 1478 	movx	@dptr,a
+   0E5E 90 E7 41           1479 	mov	dptr,#(_EP0BUF + 0x0001)
+   0E61 F0                 1480 	movx	@dptr,a
+   0E62 90 E6 8A           1481 	mov	dptr,#_EP0BCH
+   0E65 F0                 1482 	movx	@dptr,a
                            1483 ;Initial/src/lib/usb_common.c:232: EP0BCL = 2;
                            1484 ;     genAssign
-   0E5A 90 E6 8B           1485 	mov	dptr,#_EP0BCL
-   0E5D 74 02              1486 	mov	a,#0x02
-   0E5F F0                 1487 	movx	@dptr,a
+   0E66 90 E6 8B           1485 	mov	dptr,#_EP0BCL
+   0E69 74 02              1486 	mov	a,#0x02
+   0E6B F0                 1487 	movx	@dptr,a
                            1488 ;Initial/src/lib/usb_common.c:233: break;
                            1489 ;Initial/src/lib/usb_common.c:235: case bmRT_RECIP_ENDPOINT:
                            1490 ;	Peephole 112.b	changed ljmp to sjmp
                            1491 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0E60 22                 1492 	ret
-   0E61                    1493 00103$:
+   0E6C 22                 1492 	ret
+   0E6D                    1493 00103$:
                            1494 ;Initial/src/lib/usb_common.c:236: if (plausible_endpoint (wIndexL))
                            1495 ;     genPointerGet
                            1496 ;     genFarPointerGet
-   0E61 90 E6 BC           1497 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0E64 E0                 1498 	movx	a,@dptr
+   0E6D 90 E6 BC           1497 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0E70 E0                 1498 	movx	a,@dptr
                            1499 ;     genCall
                            1500 ;	Peephole 244.c	loading dpl from a instead of r2
-   0E65 FA                 1501 	mov	r2,a
-   0E66 F5 82              1502 	mov	dpl,a
-   0E68 12 0C DE           1503 	lcall	_plausible_endpoint
-   0E6B E5 82              1504 	mov	a,dpl
+   0E71 FA                 1501 	mov	r2,a
+   0E72 F5 82              1502 	mov	dpl,a
+   0E74 12 0C EA           1503 	lcall	_plausible_endpoint
+   0E77 E5 82              1504 	mov	a,dpl
                            1505 ;     genIfx
                            1506 ;     genIfxJump
                            1507 ;	Peephole 110	removed ljmp by inverse jump logic
-   0E6D 60 24              1508 	jz	00105$
-   0E6F                    1509 00118$:
+   0E79 60 24              1508 	jz	00105$
+   0E7B                    1509 00118$:
                            1510 ;Initial/src/lib/usb_common.c:238: EP0BUF[0] = *epcs (wIndexL) & bmEPSTALL;
                            1511 ;     genPointerGet
                            1512 ;     genFarPointerGet
-   0E6F 90 E6 BC           1513 	mov	dptr,#(_SETUPDAT + 0x0004)
-   0E72 E0                 1514 	movx	a,@dptr
+   0E7B 90 E6 BC           1513 	mov	dptr,#(_SETUPDAT + 0x0004)
+   0E7E E0                 1514 	movx	a,@dptr
                            1515 ;     genCall
                            1516 ;	Peephole 244.c	loading dpl from a instead of r2
-   0E73 FA                 1517 	mov	r2,a
-   0E74 F5 82              1518 	mov	dpl,a
-   0E76 12 0C FD           1519 	lcall	_epcs
+   0E7F FA                 1517 	mov	r2,a
+   0E80 F5 82              1518 	mov	dpl,a
+   0E82 12 0D 09           1519 	lcall	_epcs
                            1520 ;     genPointerGet
                            1521 ;     genFarPointerGet
-   0E79 E0                 1522 	movx	a,@dptr
-   0E7A FA                 1523 	mov	r2,a
+   0E85 E0                 1522 	movx	a,@dptr
+   0E86 FA                 1523 	mov	r2,a
                            1524 ;     genAnd
-   0E7B 53 02 01           1525 	anl	ar2,#0x01
+   0E87 53 02 01           1525 	anl	ar2,#0x01
                            1526 ;     genPointerSet
                            1527 ;     genFarPointerSet
-   0E7E 90 E7 40           1528 	mov	dptr,#_EP0BUF
-   0E81 EA                 1529 	mov	a,r2
-   0E82 F0                 1530 	movx	@dptr,a
+   0E8A 90 E7 40           1528 	mov	dptr,#_EP0BUF
+   0E8D EA                 1529 	mov	a,r2
+   0E8E F0                 1530 	movx	@dptr,a
                            1531 ;Initial/src/lib/usb_common.c:239: EP0BUF[1] = 0;
                            1532 ;     genPointerSet
                            1533 ;     genFarPointerSet
-   0E83 90 E7 41           1534 	mov	dptr,#(_EP0BUF + 0x0001)
+   0E8F 90 E7 41           1534 	mov	dptr,#(_EP0BUF + 0x0001)
                            1535 ;	Peephole 181	changed mov to clr
                            1536 ;Initial/src/lib/usb_common.c:240: EP0BCH = 0;
                            1537 ;     genAssign
                            1538 ;	Peephole 181	changed mov to clr
                            1539 ;	Peephole 219	removed redundant clear
-   0E86 E4                 1540 	clr	a
-   0E87 F0                 1541 	movx	@dptr,a
-   0E88 90 E6 8A           1542 	mov	dptr,#_EP0BCH
-   0E8B F0                 1543 	movx	@dptr,a
+   0E92 E4                 1540 	clr	a
+   0E93 F0                 1541 	movx	@dptr,a
+   0E94 90 E6 8A           1542 	mov	dptr,#_EP0BCH
+   0E97 F0                 1543 	movx	@dptr,a
                            1544 ;Initial/src/lib/usb_common.c:241: EP0BCL = 2;
                            1545 ;     genAssign
-   0E8C 90 E6 8B           1546 	mov	dptr,#_EP0BCL
-   0E8F 74 02              1547 	mov	a,#0x02
-   0E91 F0                 1548 	movx	@dptr,a
+   0E98 90 E6 8B           1546 	mov	dptr,#_EP0BCL
+   0E9B 74 02              1547 	mov	a,#0x02
+   0E9D F0                 1548 	movx	@dptr,a
                            1549 ;	Peephole 112.b	changed ljmp to sjmp
                            1550 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0E92 22                 1551 	ret
-   0E93                    1552 00105$:
+   0E9E 22                 1551 	ret
+   0E9F                    1552 00105$:
                            1553 ;Initial/src/lib/usb_common.c:244: fx2_stall_ep0 ();
                            1554 ;     genCall
                            1555 ;Initial/src/lib/usb_common.c:245: break;
@@ -1557,15 +1557,15 @@
                            1557 ;	Peephole 112.b	changed ljmp to sjmp
                            1558 ;	Peephole 251.b	replaced sjmp to ret with ret
                            1559 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0E93 02 06 7D           1560 	ljmp	_fx2_stall_ep0
-   0E96                    1561 00107$:
+   0E9F 02 06 7D           1560 	ljmp	_fx2_stall_ep0
+   0EA2                    1561 00107$:
                            1562 ;Initial/src/lib/usb_common.c:248: fx2_stall_ep0 ();
                            1563 ;     genCall
                            1564 ;Initial/src/lib/usb_common.c:250: }
                            1565 ;	Peephole 253.c	replaced lcall with ljmp
-   0E96 02 06 7D           1566 	ljmp	_fx2_stall_ep0
-   0E99                    1567 00109$:
-   0E99 22                 1568 	ret
+   0EA2 02 06 7D           1566 	ljmp	_fx2_stall_ep0
+   0EA5                    1567 00109$:
+   0EA5 22                 1568 	ret
                            1569 ;------------------------------------------------------------
                            1570 ;Allocation info for local variables in function 'usb_handle_get_descriptor'
                            1571 ;------------------------------------------------------------
@@ -1575,224 +1575,224 @@
                            1575 ;	-----------------------------------------
                            1576 ;	 function usb_handle_get_descriptor
                            1577 ;	-----------------------------------------
-   0E9A                    1578 _usb_handle_get_descriptor:
+   0EA6                    1578 _usb_handle_get_descriptor:
                            1579 ;Initial/src/lib/usb_common.c:255: switch (wValueH)
                            1580 ;     genPointerGet
                            1581 ;     genFarPointerGet
-   0E9A 90 E6 BB           1582 	mov	dptr,#(_SETUPDAT + 0x0003)
-   0E9D E0                 1583 	movx	a,@dptr
-   0E9E FA                 1584 	mov	r2,a
+   0EA6 90 E6 BB           1582 	mov	dptr,#(_SETUPDAT + 0x0003)
+   0EA9 E0                 1583 	movx	a,@dptr
+   0EAA FA                 1584 	mov	r2,a
                            1585 ;     genCmpEq
-   0E9F BA 01 02           1586 	cjne	r2,#0x01,00127$
+   0EAB BA 01 02           1586 	cjne	r2,#0x01,00127$
                            1587 ;	Peephole 112.b	changed ljmp to sjmp
-   0EA2 80 17              1588 	sjmp	00101$
-   0EA4                    1589 00127$:
+   0EAE 80 17              1588 	sjmp	00101$
+   0EB0                    1589 00127$:
                            1590 ;     genCmpEq
-   0EA4 BA 02 02           1591 	cjne	r2,#0x02,00128$
+   0EB0 BA 02 02           1591 	cjne	r2,#0x02,00128$
                            1592 ;	Peephole 112.b	changed ljmp to sjmp
-   0EA7 80 3C              1593 	sjmp	00105$
-   0EA9                    1594 00128$:
+   0EB3 80 3C              1593 	sjmp	00105$
+   0EB5                    1594 00128$:
                            1595 ;     genCmpEq
-   0EA9 BA 03 02           1596 	cjne	r2,#0x03,00129$
+   0EB5 BA 03 02           1596 	cjne	r2,#0x03,00129$
                            1597 ;	Peephole 112.b	changed ljmp to sjmp
-   0EAC 80 61              1598 	sjmp	00113$
-   0EAE                    1599 00129$:
+   0EB8 80 61              1598 	sjmp	00113$
+   0EBA                    1599 00129$:
                            1600 ;     genCmpEq
-   0EAE BA 06 02           1601 	cjne	r2,#0x06,00130$
+   0EBA BA 06 02           1601 	cjne	r2,#0x06,00130$
                            1602 ;	Peephole 112.b	changed ljmp to sjmp
-   0EB1 80 1D              1603 	sjmp	00102$
-   0EB3                    1604 00130$:
+   0EBD 80 1D              1603 	sjmp	00102$
+   0EBF                    1604 00130$:
                            1605 ;     genCmpEq
-   0EB3 BA 07 02           1606 	cjne	r2,#0x07,00131$
+   0EBF BA 07 02           1606 	cjne	r2,#0x07,00131$
                            1607 ;	Peephole 112.b	changed ljmp to sjmp
-   0EB6 80 42              1608 	sjmp	00110$
-   0EB8                    1609 00131$:
-   0EB8 02 0F 4A           1610 	ljmp	00117$
+   0EC2 80 42              1608 	sjmp	00110$
+   0EC4                    1609 00131$:
+   0EC4 02 0F 56           1610 	ljmp	00117$
                            1611 ;Initial/src/lib/usb_common.c:258: case DT_DEVICE:
-   0EBB                    1612 00101$:
+   0EC7                    1612 00101$:
                            1613 ;Initial/src/lib/usb_common.c:259: SUDPTRH = MSB (current_device_descr);
                            1614 ;     genCast
-   0EBB AA 23              1615 	mov	r2,_current_device_descr
-   0EBD AB 24              1616 	mov	r3,(_current_device_descr + 1)
+   0EC7 AA 23              1615 	mov	r2,_current_device_descr
+   0EC9 AB 24              1616 	mov	r3,(_current_device_descr + 1)
                            1617 ;     genRightShift
                            1618 ;     genRightShiftLiteral
                            1619 ;     genrshTwo
-   0EBF 8B 04              1620 	mov	ar4,r3
-   0EC1 7D 00              1621 	mov	r5,#0x00
+   0ECB 8B 04              1620 	mov	ar4,r3
+   0ECD 7D 00              1621 	mov	r5,#0x00
                            1622 ;     genCast
-   0EC3 90 E6 B3           1623 	mov	dptr,#_SUDPTRH
-   0EC6 EC                 1624 	mov	a,r4
-   0EC7 F0                 1625 	movx	@dptr,a
+   0ECF 90 E6 B3           1623 	mov	dptr,#_SUDPTRH
+   0ED2 EC                 1624 	mov	a,r4
+   0ED3 F0                 1625 	movx	@dptr,a
                            1626 ;Initial/src/lib/usb_common.c:260: SUDPTRL = LSB (current_device_descr);
                            1627 ;     genAnd
-   0EC8 7B 00              1628 	mov	r3,#0x00
+   0ED4 7B 00              1628 	mov	r3,#0x00
                            1629 ;     genCast
-   0ECA 90 E6 B4           1630 	mov	dptr,#_SUDPTRL
-   0ECD EA                 1631 	mov	a,r2
-   0ECE F0                 1632 	movx	@dptr,a
+   0ED6 90 E6 B4           1630 	mov	dptr,#_SUDPTRL
+   0ED9 EA                 1631 	mov	a,r2
+   0EDA F0                 1632 	movx	@dptr,a
                            1633 ;Initial/src/lib/usb_common.c:261: break;
                            1634 ;	Peephole 251.a	replaced ljmp to ret with ret
-   0ECF 22                 1635 	ret
+   0EDB 22                 1635 	ret
                            1636 ;Initial/src/lib/usb_common.c:263: case DT_DEVQUAL:
-   0ED0                    1637 00102$:
+   0EDC                    1637 00102$:
                            1638 ;Initial/src/lib/usb_common.c:264: SUDPTRH = MSB (current_devqual_descr);
                            1639 ;     genCast
-   0ED0 AA 25              1640 	mov	r2,_current_devqual_descr
-   0ED2 AB 26              1641 	mov	r3,(_current_devqual_descr + 1)
+   0EDC AA 25              1640 	mov	r2,_current_devqual_descr
+   0EDE AB 26              1641 	mov	r3,(_current_devqual_descr + 1)
                            1642 ;     genRightShift
                            1643 ;     genRightShiftLiteral
                            1644 ;     genrshTwo
-   0ED4 8B 04              1645 	mov	ar4,r3
-   0ED6 7D 00              1646 	mov	r5,#0x00
+   0EE0 8B 04              1645 	mov	ar4,r3
+   0EE2 7D 00              1646 	mov	r5,#0x00
                            1647 ;     genCast
-   0ED8 90 E6 B3           1648 	mov	dptr,#_SUDPTRH
-   0EDB EC                 1649 	mov	a,r4
-   0EDC F0                 1650 	movx	@dptr,a
+   0EE4 90 E6 B3           1648 	mov	dptr,#_SUDPTRH
+   0EE7 EC                 1649 	mov	a,r4
+   0EE8 F0                 1650 	movx	@dptr,a
                            1651 ;Initial/src/lib/usb_common.c:265: SUDPTRL = LSB (current_devqual_descr);
                            1652 ;     genAnd
-   0EDD 7B 00              1653 	mov	r3,#0x00
+   0EE9 7B 00              1653 	mov	r3,#0x00
                            1654 ;     genCast
-   0EDF 90 E6 B4           1655 	mov	dptr,#_SUDPTRL
-   0EE2 EA                 1656 	mov	a,r2
-   0EE3 F0                 1657 	movx	@dptr,a
+   0EEB 90 E6 B4           1655 	mov	dptr,#_SUDPTRL
+   0EEE EA                 1656 	mov	a,r2
+   0EEF F0                 1657 	movx	@dptr,a
                            1658 ;Initial/src/lib/usb_common.c:266: break;
                            1659 ;Initial/src/lib/usb_common.c:270: fx2_stall_ep0 ();
                            1660 ;	Peephole 112.b	changed ljmp to sjmp
                            1661 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0EE4 22                 1662 	ret
-   0EE5                    1663 00105$:
+   0EF0 22                 1662 	ret
+   0EF1                    1663 00105$:
                            1664 ;Initial/src/lib/usb_common.c:273: SUDPTRH = MSB (current_config_descr);
                            1665 ;     genCast
-   0EE5 AA 27              1666 	mov	r2,_current_config_descr
-   0EE7 AB 28              1667 	mov	r3,(_current_config_descr + 1)
+   0EF1 AA 27              1666 	mov	r2,_current_config_descr
+   0EF3 AB 28              1667 	mov	r3,(_current_config_descr + 1)
                            1668 ;     genRightShift
                            1669 ;     genRightShiftLiteral
                            1670 ;     genrshTwo
-   0EE9 8B 04              1671 	mov	ar4,r3
-   0EEB 7D 00              1672 	mov	r5,#0x00
+   0EF5 8B 04              1671 	mov	ar4,r3
+   0EF7 7D 00              1672 	mov	r5,#0x00
                            1673 ;     genCast
-   0EED 90 E6 B3           1674 	mov	dptr,#_SUDPTRH
-   0EF0 EC                 1675 	mov	a,r4
-   0EF1 F0                 1676 	movx	@dptr,a
+   0EF9 90 E6 B3           1674 	mov	dptr,#_SUDPTRH
+   0EFC EC                 1675 	mov	a,r4
+   0EFD F0                 1676 	movx	@dptr,a
                            1677 ;Initial/src/lib/usb_common.c:274: SUDPTRL = LSB (current_config_descr);
                            1678 ;     genAnd
-   0EF2 7B 00              1679 	mov	r3,#0x00
+   0EFE 7B 00              1679 	mov	r3,#0x00
                            1680 ;     genCast
-   0EF4 90 E6 B4           1681 	mov	dptr,#_SUDPTRL
-   0EF7 EA                 1682 	mov	a,r2
-   0EF8 F0                 1683 	movx	@dptr,a
+   0F00 90 E6 B4           1681 	mov	dptr,#_SUDPTRL
+   0F03 EA                 1682 	mov	a,r2
+   0F04 F0                 1683 	movx	@dptr,a
                            1684 ;Initial/src/lib/usb_common.c:276: break;
                            1685 ;Initial/src/lib/usb_common.c:280: fx2_stall_ep0 ();
                            1686 ;	Peephole 112.b	changed ljmp to sjmp
                            1687 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0EF9 22                 1688 	ret
-   0EFA                    1689 00110$:
+   0F05 22                 1688 	ret
+   0F06                    1689 00110$:
                            1690 ;Initial/src/lib/usb_common.c:283: SUDPTRH = MSB (other_config_descr);
                            1691 ;     genCast
-   0EFA AA 29              1692 	mov	r2,_other_config_descr
-   0EFC AB 2A              1693 	mov	r3,(_other_config_descr + 1)
+   0F06 AA 29              1692 	mov	r2,_other_config_descr
+   0F08 AB 2A              1693 	mov	r3,(_other_config_descr + 1)
                            1694 ;     genRightShift
                            1695 ;     genRightShiftLiteral
                            1696 ;     genrshTwo
-   0EFE 8B 04              1697 	mov	ar4,r3
-   0F00 7D 00              1698 	mov	r5,#0x00
+   0F0A 8B 04              1697 	mov	ar4,r3
+   0F0C 7D 00              1698 	mov	r5,#0x00
                            1699 ;     genCast
-   0F02 90 E6 B3           1700 	mov	dptr,#_SUDPTRH
-   0F05 EC                 1701 	mov	a,r4
-   0F06 F0                 1702 	movx	@dptr,a
+   0F0E 90 E6 B3           1700 	mov	dptr,#_SUDPTRH
+   0F11 EC                 1701 	mov	a,r4
+   0F12 F0                 1702 	movx	@dptr,a
                            1703 ;Initial/src/lib/usb_common.c:284: SUDPTRL = LSB (other_config_descr);
                            1704 ;     genAnd
-   0F07 7B 00              1705 	mov	r3,#0x00
+   0F13 7B 00              1705 	mov	r3,#0x00
                            1706 ;     genCast
-   0F09 90 E6 B4           1707 	mov	dptr,#_SUDPTRL
-   0F0C EA                 1708 	mov	a,r2
-   0F0D F0                 1709 	movx	@dptr,a
+   0F15 90 E6 B4           1707 	mov	dptr,#_SUDPTRL
+   0F18 EA                 1708 	mov	a,r2
+   0F19 F0                 1709 	movx	@dptr,a
                            1710 ;Initial/src/lib/usb_common.c:286: break;
                            1711 ;Initial/src/lib/usb_common.c:288: case DT_STRING:
                            1712 ;	Peephole 112.b	changed ljmp to sjmp
                            1713 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0F0E 22                 1714 	ret
-   0F0F                    1715 00113$:
+   0F1A 22                 1714 	ret
+   0F1B                    1715 00113$:
                            1716 ;Initial/src/lib/usb_common.c:289: if (wValueL >= nstring_descriptors)
                            1717 ;     genPointerGet
                            1718 ;     genFarPointerGet
-   0F0F 90 E6 BA           1719 	mov	dptr,#(_SETUPDAT + 0x0002)
-   0F12 E0                 1720 	movx	a,@dptr
-   0F13 FA                 1721 	mov	r2,a
+   0F1B 90 E6 BA           1719 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0F1E E0                 1720 	movx	a,@dptr
+   0F1F FA                 1721 	mov	r2,a
                            1722 ;     genAssign
-   0F14 90 E0 6A           1723 	mov	dptr,#_nstring_descriptors
-   0F17 E0                 1724 	movx	a,@dptr
-   0F18 FB                 1725 	mov	r3,a
+   0F20 90 E0 6A           1723 	mov	dptr,#_nstring_descriptors
+   0F23 E0                 1724 	movx	a,@dptr
+   0F24 FB                 1725 	mov	r3,a
                            1726 ;     genCmpLt
                            1727 ;     genCmp
-   0F19 C3                 1728 	clr	c
-   0F1A EA                 1729 	mov	a,r2
-   0F1B 9B                 1730 	subb	a,r3
+   0F25 C3                 1728 	clr	c
+   0F26 EA                 1729 	mov	a,r2
+   0F27 9B                 1730 	subb	a,r3
                            1731 ;     genIfxJump
                            1732 ;	Peephole 112.b	changed ljmp to sjmp
                            1733 ;	Peephole 160	removed sjmp by inverse jump logic
-   0F1C 40 03              1734 	jc	00115$
-   0F1E                    1735 00132$:
+   0F28 40 03              1734 	jc	00115$
+   0F2A                    1735 00132$:
                            1736 ;Initial/src/lib/usb_common.c:290: fx2_stall_ep0 ();
                            1737 ;     genCall
                            1738 ;	Peephole 112.b	changed ljmp to sjmp
                            1739 ;	Peephole 251.b	replaced sjmp to ret with ret
                            1740 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0F1E 02 06 7D           1741 	ljmp	_fx2_stall_ep0
-   0F21                    1742 00115$:
+   0F2A 02 06 7D           1741 	ljmp	_fx2_stall_ep0
+   0F2D                    1742 00115$:
                            1743 ;Initial/src/lib/usb_common.c:293: xdata char *p = string_descriptors[wValueL];
                            1744 ;     genPointerGet
                            1745 ;     genFarPointerGet
-   0F21 90 E6 BA           1746 	mov	dptr,#(_SETUPDAT + 0x0002)
-   0F24 E0                 1747 	movx	a,@dptr
+   0F2D 90 E6 BA           1746 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0F30 E0                 1747 	movx	a,@dptr
                            1748 ;     genMult
                            1749 ;     genMultOneByte
                            1750 ;	Peephole 105	removed redundant mov
-   0F25 FA                 1751 	mov	r2,a
-   0F26 75 F0 02           1752 	mov	b,#0x02
-   0F29 A4                 1753 	mul	ab
+   0F31 FA                 1751 	mov	r2,a
+   0F32 75 F0 02           1752 	mov	b,#0x02
+   0F35 A4                 1753 	mul	ab
                            1754 ;     genPlus
-   0F2A 24 6B              1755 	add	a,#_string_descriptors
-   0F2C F5 82              1756 	mov	dpl,a
-   0F2E 74 E0              1757 	mov	a,#(_string_descriptors >> 8)
-   0F30 35 F0              1758 	addc	a,b
-   0F32 F5 83              1759 	mov	dph,a
+   0F36 24 6B              1755 	add	a,#_string_descriptors
+   0F38 F5 82              1756 	mov	dpl,a
+   0F3A 74 E0              1757 	mov	a,#(_string_descriptors >> 8)
+   0F3C 35 F0              1758 	addc	a,b
+   0F3E F5 83              1759 	mov	dph,a
                            1760 ;     genPointerGet
                            1761 ;     genFarPointerGet
-   0F34 E0                 1762 	movx	a,@dptr
-   0F35 FA                 1763 	mov	r2,a
-   0F36 A3                 1764 	inc	dptr
-   0F37 E0                 1765 	movx	a,@dptr
-   0F38 FB                 1766 	mov	r3,a
+   0F40 E0                 1762 	movx	a,@dptr
+   0F41 FA                 1763 	mov	r2,a
+   0F42 A3                 1764 	inc	dptr
+   0F43 E0                 1765 	movx	a,@dptr
+   0F44 FB                 1766 	mov	r3,a
                            1767 ;Initial/src/lib/usb_common.c:294: SUDPTRH = MSB (p);
                            1768 ;     genCast
                            1769 ;     genRightShift
                            1770 ;     genRightShiftLiteral
                            1771 ;     genrshTwo
-   0F39 8B 04              1772 	mov	ar4,r3
-   0F3B 7D 00              1773 	mov	r5,#0x00
+   0F45 8B 04              1772 	mov	ar4,r3
+   0F47 7D 00              1773 	mov	r5,#0x00
                            1774 ;     genCast
-   0F3D 90 E6 B3           1775 	mov	dptr,#_SUDPTRH
-   0F40 EC                 1776 	mov	a,r4
-   0F41 F0                 1777 	movx	@dptr,a
+   0F49 90 E6 B3           1775 	mov	dptr,#_SUDPTRH
+   0F4C EC                 1776 	mov	a,r4
+   0F4D F0                 1777 	movx	@dptr,a
                            1778 ;Initial/src/lib/usb_common.c:295: SUDPTRL = LSB (p);
                            1779 ;     genAnd
-   0F42 7B 00              1780 	mov	r3,#0x00
+   0F4E 7B 00              1780 	mov	r3,#0x00
                            1781 ;     genCast
-   0F44 90 E6 B4           1782 	mov	dptr,#_SUDPTRL
-   0F47 EA                 1783 	mov	a,r2
-   0F48 F0                 1784 	movx	@dptr,a
+   0F50 90 E6 B4           1782 	mov	dptr,#_SUDPTRL
+   0F53 EA                 1783 	mov	a,r2
+   0F54 F0                 1784 	movx	@dptr,a
                            1785 ;Initial/src/lib/usb_common.c:297: break;
                            1786 ;Initial/src/lib/usb_common.c:299: default:
                            1787 ;	Peephole 112.b	changed ljmp to sjmp
                            1788 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0F49 22                 1789 	ret
-   0F4A                    1790 00117$:
+   0F55 22                 1789 	ret
+   0F56                    1790 00117$:
                            1791 ;Initial/src/lib/usb_common.c:300: fx2_stall_ep0 ();	// invalid request
                            1792 ;     genCall
                            1793 ;Initial/src/lib/usb_common.c:302: }
                            1794 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0F4A 02 06 7D           1795 	ljmp	_fx2_stall_ep0
+   0F56 02 06 7D           1795 	ljmp	_fx2_stall_ep0
                            1796 ;------------------------------------------------------------
                            1797 ;Allocation info for local variables in function 'usb_handle_IN_std_requests'
                            1798 ;------------------------------------------------------------
@@ -1801,83 +1801,83 @@
                            1801 ;	-----------------------------------------
                            1802 ;	 function usb_handle_IN_std_requests
                            1803 ;	-----------------------------------------
-   0F4D                    1804 _usb_handle_IN_std_requests:
+   0F59                    1804 _usb_handle_IN_std_requests:
                            1805 ;Initial/src/lib/usb_common.c:307: switch (bRequest)
                            1806 ;     genPointerGet
                            1807 ;     genFarPointerGet
-   0F4D 90 E6 B9           1808 	mov	dptr,#(_SETUPDAT + 0x0001)
-   0F50 E0                 1809 	movx	a,@dptr
+   0F59 90 E6 B9           1808 	mov	dptr,#(_SETUPDAT + 0x0001)
+   0F5C E0                 1809 	movx	a,@dptr
                            1810 ;     genCmpEq
                            1811 ;	Peephole 112.b	changed ljmp to sjmp
                            1812 ;	Peephole 115.b	jump optimization
-   0F51 FA                 1813 	mov	r2,a
-   0F52 60 36              1814 	jz	00104$
-   0F54                    1815 00114$:
+   0F5D FA                 1813 	mov	r2,a
+   0F5E 60 36              1814 	jz	00104$
+   0F60                    1815 00114$:
                            1816 ;     genCmpEq
-   0F54 BA 06 02           1817 	cjne	r2,#0x06,00115$
+   0F60 BA 06 02           1817 	cjne	r2,#0x06,00115$
                            1818 ;	Peephole 112.b	changed ljmp to sjmp
-   0F57 80 2E              1819 	sjmp	00103$
-   0F59                    1820 00115$:
+   0F63 80 2E              1819 	sjmp	00103$
+   0F65                    1820 00115$:
                            1821 ;     genCmpEq
-   0F59 BA 08 02           1822 	cjne	r2,#0x08,00116$
+   0F65 BA 08 02           1822 	cjne	r2,#0x08,00116$
                            1823 ;	Peephole 112.b	changed ljmp to sjmp
-   0F5C 80 05              1824 	sjmp	00101$
-   0F5E                    1825 00116$:
+   0F68 80 05              1824 	sjmp	00101$
+   0F6A                    1825 00116$:
                            1826 ;     genCmpEq
                            1827 ;	Peephole 112.b	changed ljmp to sjmp
                            1828 ;Initial/src/lib/usb_common.c:310: case RQ_GET_CONFIG:
                            1829 ;	Peephole 112.b	changed ljmp to sjmp
                            1830 ;	Peephole 199	optimized misc jump sequence
-   0F5E BA 0A 2C           1831 	cjne	r2,#0x0A,00106$
-   0F61 80 12              1832 	sjmp	00102$
+   0F6A BA 0A 2C           1831 	cjne	r2,#0x0A,00106$
+   0F6D 80 12              1832 	sjmp	00102$
                            1833 ;00117$:
-   0F63                    1834 00101$:
+   0F6F                    1834 00101$:
                            1835 ;Initial/src/lib/usb_common.c:311: EP0BUF[0] = _usb_config;	// FIXME app should handle
                            1836 ;     genPointerSet
                            1837 ;     genFarPointerSet
-   0F63 90 E7 40           1838 	mov	dptr,#_EP0BUF
-   0F66 E5 21              1839 	mov	a,__usb_config
-   0F68 F0                 1840 	movx	@dptr,a
+   0F6F 90 E7 40           1838 	mov	dptr,#_EP0BUF
+   0F72 E5 21              1839 	mov	a,__usb_config
+   0F74 F0                 1840 	movx	@dptr,a
                            1841 ;Initial/src/lib/usb_common.c:312: EP0BCH = 0;
                            1842 ;     genAssign
-   0F69 90 E6 8A           1843 	mov	dptr,#_EP0BCH
+   0F75 90 E6 8A           1843 	mov	dptr,#_EP0BCH
                            1844 ;	Peephole 181	changed mov to clr
-   0F6C E4                 1845 	clr	a
-   0F6D F0                 1846 	movx	@dptr,a
+   0F78 E4                 1845 	clr	a
+   0F79 F0                 1846 	movx	@dptr,a
                            1847 ;Initial/src/lib/usb_common.c:313: EP0BCL = 1;
                            1848 ;     genAssign
-   0F6E 90 E6 8B           1849 	mov	dptr,#_EP0BCL
-   0F71 74 01              1850 	mov	a,#0x01
-   0F73 F0                 1851 	movx	@dptr,a
+   0F7A 90 E6 8B           1849 	mov	dptr,#_EP0BCL
+   0F7D 74 01              1850 	mov	a,#0x01
+   0F7F F0                 1851 	movx	@dptr,a
                            1852 ;Initial/src/lib/usb_common.c:314: break;
                            1853 ;Initial/src/lib/usb_common.c:316: case RQ_GET_INTERFACE:
                            1854 ;	Peephole 112.b	changed ljmp to sjmp
                            1855 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0F74 22                 1856 	ret
-   0F75                    1857 00102$:
+   0F80 22                 1856 	ret
+   0F81                    1857 00102$:
                            1858 ;Initial/src/lib/usb_common.c:317: EP0BUF[0] = _usb_alt_setting;	// FIXME app should handle
                            1859 ;     genPointerSet
                            1860 ;     genFarPointerSet
-   0F75 90 E7 40           1861 	mov	dptr,#_EP0BUF
-   0F78 E5 22              1862 	mov	a,__usb_alt_setting
-   0F7A F0                 1863 	movx	@dptr,a
+   0F81 90 E7 40           1861 	mov	dptr,#_EP0BUF
+   0F84 E5 22              1862 	mov	a,__usb_alt_setting
+   0F86 F0                 1863 	movx	@dptr,a
                            1864 ;Initial/src/lib/usb_common.c:318: EP0BCH = 0;
                            1865 ;     genAssign
-   0F7B 90 E6 8A           1866 	mov	dptr,#_EP0BCH
+   0F87 90 E6 8A           1866 	mov	dptr,#_EP0BCH
                            1867 ;	Peephole 181	changed mov to clr
-   0F7E E4                 1868 	clr	a
-   0F7F F0                 1869 	movx	@dptr,a
+   0F8A E4                 1868 	clr	a
+   0F8B F0                 1869 	movx	@dptr,a
                            1870 ;Initial/src/lib/usb_common.c:319: EP0BCL = 1;
                            1871 ;     genAssign
-   0F80 90 E6 8B           1872 	mov	dptr,#_EP0BCL
-   0F83 74 01              1873 	mov	a,#0x01
-   0F85 F0                 1874 	movx	@dptr,a
+   0F8C 90 E6 8B           1872 	mov	dptr,#_EP0BCL
+   0F8F 74 01              1873 	mov	a,#0x01
+   0F91 F0                 1874 	movx	@dptr,a
                            1875 ;Initial/src/lib/usb_common.c:320: break;
                            1876 ;Initial/src/lib/usb_common.c:322: case RQ_GET_DESCR:
                            1877 ;	Peephole 112.b	changed ljmp to sjmp
                            1878 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0F86 22                 1879 	ret
-   0F87                    1880 00103$:
+   0F92 22                 1879 	ret
+   0F93                    1880 00103$:
                            1881 ;Initial/src/lib/usb_common.c:323: usb_handle_get_descriptor();
                            1882 ;     genCall
                            1883 ;Initial/src/lib/usb_common.c:324: break;
@@ -1885,8 +1885,8 @@
                            1885 ;	Peephole 112.b	changed ljmp to sjmp
                            1886 ;	Peephole 251.b	replaced sjmp to ret with ret
                            1887 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0F87 02 0E 9A           1888 	ljmp	_usb_handle_get_descriptor
-   0F8A                    1889 00104$:
+   0F93 02 0E A6           1888 	ljmp	_usb_handle_get_descriptor
+   0F96                    1889 00104$:
                            1890 ;Initial/src/lib/usb_common.c:327: usb_handle_get_status();
                            1891 ;     genCall
                            1892 ;Initial/src/lib/usb_common.c:328: break;
@@ -1894,15 +1894,15 @@
                            1894 ;	Peephole 112.b	changed ljmp to sjmp
                            1895 ;	Peephole 251.b	replaced sjmp to ret with ret
                            1896 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0F8A 02 0E 20           1897 	ljmp	_usb_handle_get_status
-   0F8D                    1898 00106$:
+   0F96 02 0E 2C           1897 	ljmp	_usb_handle_get_status
+   0F99                    1898 00106$:
                            1899 ;Initial/src/lib/usb_common.c:332: fx2_stall_ep0 ();
                            1900 ;     genCall
                            1901 ;Initial/src/lib/usb_common.c:334: }
                            1902 ;	Peephole 253.c	replaced lcall with ljmp
-   0F8D 02 06 7D           1903 	ljmp	_fx2_stall_ep0
-   0F90                    1904 00108$:
-   0F90 22                 1905 	ret
+   0F99 02 06 7D           1903 	ljmp	_fx2_stall_ep0
+   0F9C                    1904 00108$:
+   0F9C 22                 1905 	ret
                            1906 ;------------------------------------------------------------
                            1907 ;Allocation info for local variables in function 'usb_handle_OUT_std_requests'
                            1908 ;------------------------------------------------------------
@@ -1911,71 +1911,71 @@
                            1911 ;	-----------------------------------------
                            1912 ;	 function usb_handle_OUT_std_requests
                            1913 ;	-----------------------------------------
-   0F91                    1914 _usb_handle_OUT_std_requests:
+   0F9D                    1914 _usb_handle_OUT_std_requests:
                            1915 ;Initial/src/lib/usb_common.c:339: switch (bRequest)
                            1916 ;     genPointerGet
                            1917 ;     genFarPointerGet
-   0F91 90 E6 B9           1918 	mov	dptr,#(_SETUPDAT + 0x0001)
-   0F94 E0                 1919 	movx	a,@dptr
-   0F95 FA                 1920 	mov	r2,a
+   0F9D 90 E6 B9           1918 	mov	dptr,#(_SETUPDAT + 0x0001)
+   0FA0 E0                 1919 	movx	a,@dptr
+   0FA1 FA                 1920 	mov	r2,a
                            1921 ;     genCmpEq
-   0F96 BA 01 02           1922 	cjne	r2,#0x01,00117$
+   0FA2 BA 01 02           1922 	cjne	r2,#0x01,00117$
                            1923 ;	Peephole 112.b	changed ljmp to sjmp
-   0F99 80 27              1924 	sjmp	00103$
-   0F9B                    1925 00117$:
+   0FA5 80 27              1924 	sjmp	00103$
+   0FA7                    1925 00117$:
                            1926 ;     genCmpEq
-   0F9B BA 03 02           1927 	cjne	r2,#0x03,00118$
+   0FA7 BA 03 02           1927 	cjne	r2,#0x03,00118$
                            1928 ;	Peephole 112.b	changed ljmp to sjmp
-   0F9E 80 25              1929 	sjmp	00104$
-   0FA0                    1930 00118$:
+   0FAA 80 25              1929 	sjmp	00104$
+   0FAC                    1930 00118$:
                            1931 ;     genCmpEq
-   0FA0 BA 05 02           1932 	cjne	r2,#0x05,00119$
+   0FAC BA 05 02           1932 	cjne	r2,#0x05,00119$
                            1933 ;	Peephole 112.b	changed ljmp to sjmp
-   0FA3 80 23              1934 	sjmp	00107$
-   0FA5                    1935 00119$:
+   0FAF 80 23              1934 	sjmp	00107$
+   0FB1                    1935 00119$:
                            1936 ;     genCmpEq
-   0FA5 BA 07 02           1937 	cjne	r2,#0x07,00120$
+   0FB1 BA 07 02           1937 	cjne	r2,#0x07,00120$
                            1938 ;	Peephole 112.b	changed ljmp to sjmp
-   0FA8 80 1E              1939 	sjmp	00107$
-   0FAA                    1940 00120$:
+   0FB4 80 1E              1939 	sjmp	00107$
+   0FB6                    1940 00120$:
                            1941 ;     genCmpEq
-   0FAA BA 09 02           1942 	cjne	r2,#0x09,00121$
+   0FB6 BA 09 02           1942 	cjne	r2,#0x09,00121$
                            1943 ;	Peephole 112.b	changed ljmp to sjmp
-   0FAD 80 05              1944 	sjmp	00101$
-   0FAF                    1945 00121$:
+   0FB9 80 05              1944 	sjmp	00101$
+   0FBB                    1945 00121$:
                            1946 ;     genCmpEq
                            1947 ;	Peephole 112.b	changed ljmp to sjmp
                            1948 ;Initial/src/lib/usb_common.c:342: case RQ_SET_CONFIG:
                            1949 ;	Peephole 112.b	changed ljmp to sjmp
                            1950 ;	Peephole 199	optimized misc jump sequence
-   0FAF BA 0B 16           1951 	cjne	r2,#0x0B,00107$
-   0FB2 80 07              1952 	sjmp	00102$
+   0FBB BA 0B 16           1951 	cjne	r2,#0x0B,00107$
+   0FBE 80 07              1952 	sjmp	00102$
                            1953 ;00122$:
-   0FB4                    1954 00101$:
+   0FC0                    1954 00101$:
                            1955 ;Initial/src/lib/usb_common.c:343: _usb_config = wValueL;		// FIXME app should handle
                            1956 ;     genPointerGet
                            1957 ;     genFarPointerGet
-   0FB4 90 E6 BA           1958 	mov	dptr,#(_SETUPDAT + 0x0002)
-   0FB7 E0                 1959 	movx	a,@dptr
-   0FB8 F5 21              1960 	mov	__usb_config,a
+   0FC0 90 E6 BA           1958 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0FC3 E0                 1959 	movx	a,@dptr
+   0FC4 F5 21              1960 	mov	__usb_config,a
                            1961 ;Initial/src/lib/usb_common.c:344: break;
                            1962 ;Initial/src/lib/usb_common.c:346: case RQ_SET_INTERFACE:
                            1963 ;	Peephole 112.b	changed ljmp to sjmp
                            1964 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0FBA 22                 1965 	ret
-   0FBB                    1966 00102$:
+   0FC6 22                 1965 	ret
+   0FC7                    1966 00102$:
                            1967 ;Initial/src/lib/usb_common.c:347: _usb_alt_setting = wValueL;	// FIXME app should handle
                            1968 ;     genPointerGet
                            1969 ;     genFarPointerGet
-   0FBB 90 E6 BA           1970 	mov	dptr,#(_SETUPDAT + 0x0002)
-   0FBE E0                 1971 	movx	a,@dptr
-   0FBF F5 22              1972 	mov	__usb_alt_setting,a
+   0FC7 90 E6 BA           1970 	mov	dptr,#(_SETUPDAT + 0x0002)
+   0FCA E0                 1971 	movx	a,@dptr
+   0FCB F5 22              1972 	mov	__usb_alt_setting,a
                            1973 ;Initial/src/lib/usb_common.c:348: break;
                            1974 ;Initial/src/lib/usb_common.c:350: case RQ_CLEAR_FEATURE:
                            1975 ;	Peephole 112.b	changed ljmp to sjmp
                            1976 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0FC1 22                 1977 	ret
-   0FC2                    1978 00103$:
+   0FCD 22                 1977 	ret
+   0FCE                    1978 00103$:
                            1979 ;Initial/src/lib/usb_common.c:351: usb_handle_clear_feature();
                            1980 ;     genCall
                            1981 ;Initial/src/lib/usb_common.c:352: break;
@@ -1983,8 +1983,8 @@
                            1983 ;	Peephole 112.b	changed ljmp to sjmp
                            1984 ;	Peephole 251.b	replaced sjmp to ret with ret
                            1985 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0FC2 02 0D B4           1986 	ljmp	_usb_handle_clear_feature
-   0FC5                    1987 00104$:
+   0FCE 02 0D C0           1986 	ljmp	_usb_handle_clear_feature
+   0FD1                    1987 00104$:
                            1988 ;Initial/src/lib/usb_common.c:355: usb_handle_set_feature();
                            1989 ;     genCall
                            1990 ;Initial/src/lib/usb_common.c:356: break;
@@ -1992,15 +1992,15 @@
                            1992 ;	Peephole 112.b	changed ljmp to sjmp
                            1993 ;	Peephole 251.b	replaced sjmp to ret with ret
                            1994 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0FC5 02 0D 46           1995 	ljmp	_usb_handle_set_feature
-   0FC8                    1996 00107$:
+   0FD1 02 0D 52           1995 	ljmp	_usb_handle_set_feature
+   0FD4                    1996 00107$:
                            1997 ;Initial/src/lib/usb_common.c:361: fx2_stall_ep0 ();
                            1998 ;     genCall
                            1999 ;Initial/src/lib/usb_common.c:362: }
                            2000 ;	Peephole 253.c	replaced lcall with ljmp
-   0FC8 02 06 7D           2001 	ljmp	_fx2_stall_ep0
-   0FCB                    2002 00109$:
-   0FCB 22                 2003 	ret
+   0FD4 02 06 7D           2001 	ljmp	_fx2_stall_ep0
+   0FD7                    2002 00109$:
+   0FD7 22                 2003 	ret
                            2004 ;------------------------------------------------------------
                            2005 ;Allocation info for local variables in function 'usb_handle_std_requests'
                            2006 ;------------------------------------------------------------
@@ -2009,35 +2009,35 @@
                            2009 ;	-----------------------------------------
                            2010 ;	 function usb_handle_std_requests
                            2011 ;	-----------------------------------------
-   0FCC                    2012 _usb_handle_std_requests:
+   0FD8                    2012 _usb_handle_std_requests:
                            2013 ;Initial/src/lib/usb_common.c:367: if ((bRequestType & bmRT_DIR_MASK) == bmRT_DIR_IN)
                            2014 ;     genPointerGet
                            2015 ;     genFarPointerGet
-   0FCC 90 E6 B8           2016 	mov	dptr,#_SETUPDAT
-   0FCF E0                 2017 	movx	a,@dptr
-   0FD0 FA                 2018 	mov	r2,a
+   0FD8 90 E6 B8           2016 	mov	dptr,#_SETUPDAT
+   0FDB E0                 2017 	movx	a,@dptr
+   0FDC FA                 2018 	mov	r2,a
                            2019 ;     genAnd
-   0FD1 53 02 80           2020 	anl	ar2,#0x80
+   0FDD 53 02 80           2020 	anl	ar2,#0x80
                            2021 ;     genCmpEq
                            2022 ;	Peephole 112.b	changed ljmp to sjmp
                            2023 ;	Peephole 199	optimized misc jump sequence
-   0FD4 BA 80 03           2024 	cjne	r2,#0x80,00102$
+   0FE0 BA 80 03           2024 	cjne	r2,#0x80,00102$
                            2025 ;00107$:
                            2026 ;	Peephole 200	removed redundant sjmp
-   0FD7                    2027 00108$:
+   0FE3                    2027 00108$:
                            2028 ;Initial/src/lib/usb_common.c:369: usb_handle_IN_std_requests();
                            2029 ;     genCall
                            2030 ;	Peephole 112.b	changed ljmp to sjmp
                            2031 ;	Peephole 251.b	replaced sjmp to ret with ret
                            2032 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0FD7 02 0F 4D           2033 	ljmp	_usb_handle_IN_std_requests
-   0FDA                    2034 00102$:
+   0FE3 02 0F 59           2033 	ljmp	_usb_handle_IN_std_requests
+   0FE6                    2034 00102$:
                            2035 ;Initial/src/lib/usb_common.c:372: usb_handle_OUT_std_requests();
                            2036 ;     genCall
                            2037 ;	Peephole 253.c	replaced lcall with ljmp
-   0FDA 02 0F 91           2038 	ljmp	_usb_handle_OUT_std_requests
-   0FDD                    2039 00104$:
-   0FDD 22                 2040 	ret
+   0FE6 02 0F 9D           2038 	ljmp	_usb_handle_OUT_std_requests
+   0FE9                    2039 00104$:
+   0FE9 22                 2040 	ret
                            2041 ;------------------------------------------------------------
                            2042 ;Allocation info for local variables in function 'usb_handle_setup_packet'
                            2043 ;------------------------------------------------------------
@@ -2046,89 +2046,89 @@
                            2046 ;	-----------------------------------------
                            2047 ;	 function usb_handle_setup_packet
                            2048 ;	-----------------------------------------
-   0FDE                    2049 _usb_handle_setup_packet:
+   0FEA                    2049 _usb_handle_setup_packet:
                            2050 ;Initial/src/lib/usb_common.c:378: _usb_got_SUDAV = 0;
                            2051 ;     genAssign
-   0FDE C2 03              2052 	clr	__usb_got_SUDAV
+   0FEA C2 03              2052 	clr	__usb_got_SUDAV
                            2053 ;Initial/src/lib/usb_common.c:382: switch (bRequestType & bmRT_TYPE_MASK)
                            2054 ;     genPointerGet
                            2055 ;     genFarPointerGet
-   0FE0 90 E6 B8           2056 	mov	dptr,#_SETUPDAT
-   0FE3 E0                 2057 	movx	a,@dptr
-   0FE4 FA                 2058 	mov	r2,a
+   0FEC 90 E6 B8           2056 	mov	dptr,#_SETUPDAT
+   0FEF E0                 2057 	movx	a,@dptr
+   0FF0 FA                 2058 	mov	r2,a
                            2059 ;     genAnd
-   0FE5 53 02 60           2060 	anl	ar2,#0x60
+   0FF1 53 02 60           2060 	anl	ar2,#0x60
                            2061 ;     genCmpEq
-   0FE8 BA 00 02           2062 	cjne	r2,#0x00,00115$
+   0FF4 BA 00 02           2062 	cjne	r2,#0x00,00115$
                            2063 ;	Peephole 112.b	changed ljmp to sjmp
-   0FEB 80 1E              2064 	sjmp	00106$
-   0FED                    2065 00115$:
+   0FF7 80 1E              2064 	sjmp	00106$
+   0FF9                    2065 00115$:
                            2066 ;     genCmpEq
-   0FED BA 20 02           2067 	cjne	r2,#0x20,00116$
+   0FF9 BA 20 02           2067 	cjne	r2,#0x20,00116$
                            2068 ;	Peephole 112.b	changed ljmp to sjmp
-   0FF0 80 08              2069 	sjmp	00102$
-   0FF2                    2070 00116$:
+   0FFC 80 08              2069 	sjmp	00102$
+   0FFE                    2070 00116$:
                            2071 ;     genCmpEq
-   0FF2 BA 40 02           2072 	cjne	r2,#0x40,00117$
+   0FFE BA 40 02           2072 	cjne	r2,#0x40,00117$
                            2073 ;	Peephole 112.b	changed ljmp to sjmp
-   0FF5 80 08              2074 	sjmp	00103$
-   0FF7                    2075 00117$:
+   1001 80 08              2074 	sjmp	00103$
+   1003                    2075 00117$:
                            2076 ;     genCmpEq
                            2077 ;	Peephole 112.b	changed ljmp to sjmp
                            2078 ;	Peephole 199	optimized misc jump sequence
-   0FF7 BA 60 16           2079 	cjne	r2,#0x60,00107$
+   1003 BA 60 16           2079 	cjne	r2,#0x60,00107$
                            2080 ;00118$:
                            2081 ;	Peephole 200	removed redundant sjmp
-   0FFA                    2082 00119$:
+   1006                    2082 00119$:
                            2083 ;Initial/src/lib/usb_common.c:386: case bmRT_TYPE_RESERVED:
-   0FFA                    2084 00102$:
+   1006                    2084 00102$:
                            2085 ;Initial/src/lib/usb_common.c:387: fx2_stall_ep0 ();		// we don't handle these.  indicate error
                            2086 ;     genCall
-   0FFA 12 06 7D           2087 	lcall	_fx2_stall_ep0
+   1006 12 06 7D           2087 	lcall	_fx2_stall_ep0
                            2088 ;Initial/src/lib/usb_common.c:388: break;
                            2089 ;Initial/src/lib/usb_common.c:390: case bmRT_TYPE_VENDOR:
                            2090 ;	Peephole 112.b	changed ljmp to sjmp
-   0FFD 80 14              2091 	sjmp	00108$
-   0FFF                    2092 00103$:
+   1009 80 14              2091 	sjmp	00108$
+   100B                    2092 00103$:
                            2093 ;Initial/src/lib/usb_common.c:392: if (!app_vendor_cmd ())
                            2094 ;     genCall
-   0FFF 12 03 A0           2095 	lcall	_app_vendor_cmd
-   1002 E5 82              2096 	mov	a,dpl
+   100B 12 03 A0           2095 	lcall	_app_vendor_cmd
+   100E E5 82              2096 	mov	a,dpl
                            2097 ;     genIfx
                            2098 ;     genIfxJump
                            2099 ;	Peephole 109	removed ljmp by inverse jump logic
-   1004 70 0D              2100 	jnz	00108$
-   1006                    2101 00120$:
+   1010 70 0D              2100 	jnz	00108$
+   1012                    2101 00120$:
                            2102 ;Initial/src/lib/usb_common.c:393: fx2_stall_ep0 ();
                            2103 ;     genCall
-   1006 12 06 7D           2104 	lcall	_fx2_stall_ep0
+   1012 12 06 7D           2104 	lcall	_fx2_stall_ep0
                            2105 ;Initial/src/lib/usb_common.c:394: break;
                            2106 ;Initial/src/lib/usb_common.c:396: case bmRT_TYPE_STD:
                            2107 ;	Peephole 112.b	changed ljmp to sjmp
-   1009 80 08              2108 	sjmp	00108$
-   100B                    2109 00106$:
+   1015 80 08              2108 	sjmp	00108$
+   1017                    2109 00106$:
                            2110 ;Initial/src/lib/usb_common.c:398: usb_handle_std_requests();
                            2111 ;     genCall
-   100B 12 0F CC           2112 	lcall	_usb_handle_std_requests
+   1017 12 0F D8           2112 	lcall	_usb_handle_std_requests
                            2113 ;Initial/src/lib/usb_common.c:399: break;
                            2114 ;Initial/src/lib/usb_common.c:401: default:
                            2115 ;	Peephole 112.b	changed ljmp to sjmp
-   100E 80 03              2116 	sjmp	00108$
-   1010                    2117 00107$:
+   101A 80 03              2116 	sjmp	00108$
+   101C                    2117 00107$:
                            2118 ;Initial/src/lib/usb_common.c:402: fx2_stall_ep0 ();		// indicate error
                            2119 ;     genCall
-   1010 12 06 7D           2120 	lcall	_fx2_stall_ep0
+   101C 12 06 7D           2120 	lcall	_fx2_stall_ep0
                            2121 ;Initial/src/lib/usb_common.c:405: }
-   1013                    2122 00108$:
+   101F                    2122 00108$:
                            2123 ;Initial/src/lib/usb_common.c:408: EP0CS |= bmHSNAK;
                            2124 ;     genAssign
                            2125 ;     genOr
                            2126 ;	Peephole 248.a	optimized or to xdata
-   1013 90 E6 A0           2127 	mov	dptr,#_EP0CS
-   1016 E0                 2128 	movx	a,@dptr
-   1017 FA                 2129 	mov	r2,a
-   1018 44 80              2130 	orl	a,#0x80
-   101A F0                 2131 	movx	@dptr,a
-   101B                    2132 00109$:
-   101B 22                 2133 	ret
+   101F 90 E6 A0           2127 	mov	dptr,#_EP0CS
+   1022 E0                 2128 	movx	a,@dptr
+   1023 FA                 2129 	mov	r2,a
+   1024 44 80              2130 	orl	a,#0x80
+   1026 F0                 2131 	movx	@dptr,a
+   1027                    2132 00109$:
+   1027 22                 2133 	ret
                            2134 	.area CSEG    (CODE)

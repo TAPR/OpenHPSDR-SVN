@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Tue Aug 08 15:57:29 2006
+                              4 ; This file generated Thu Aug 17 13:31:44 2006
                               5 ;--------------------------------------------------------
                               6 	.module hpsdr_common
                               7 	.optsdcc -mmcs51 --model-small
@@ -782,7 +782,7 @@
    0039 00                  782 	 nop; nop; nop; 
                             783 ;Initial/src/hpsdr_common.c:64: IOA = bmPORT_A_INITIAL;	// Port A initial state
                             784 ;     genAssign
-   003A 75 80 02            785 	mov	_IOA,#0x02
+   003A 75 80 00            785 	mov	_IOA,#0x00
                             786 ;Initial/src/hpsdr_common.c:65: OEA = bmPORT_A_OUTPUTS;	// Port A direction register
                             787 ;     genAssign
    003D 75 B2 03            788 	mov	_OEA,#0x03
@@ -794,7 +794,7 @@
    0043 75 B4 E7            794 	mov	_OEC,#0xE7
                             795 ;Initial/src/hpsdr_common.c:70: IOE = bmPORT_E_INITIAL;	// Port E initial state
                             796 ;     genAssign
-   0046 75 B1 FF            797 	mov	_IOE,#0xFF
+   0046 75 B1 00            797 	mov	_IOE,#0x00
                             798 ;Initial/src/hpsdr_common.c:71: OEE = bmPORT_E_OUTPUTS;	// Port E direction register
                             799 ;     genAssign
    0049 75 B6 FF            800 	mov	_OEE,#0xFF

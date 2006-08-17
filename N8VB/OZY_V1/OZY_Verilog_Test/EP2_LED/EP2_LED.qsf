@@ -79,3 +79,11 @@ set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING OFF
 set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT NORMAL
 set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
 set_global_assignment -name OUTPUT_PIN_LOAD 5 -section_id LVTTL
+set_global_assignment -name VERILOG_FILE SPI_REGS.v
+set_location_assignment PIN_15 -to PA0
+set_location_assignment PIN_14 -to PA1
+set_location_assignment PIN_12 -to PA3
+set_location_assignment PIN_3 -to PC6
+set_location_assignment PIN_48 -to PC7
+set_location_assignment PIN_45 -to PE7
+set_global_assignment -name VERILOG_FILE Register8.v
