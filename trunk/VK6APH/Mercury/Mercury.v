@@ -24,7 +24,7 @@
 	12 June 2006 - Sign extension for I and Q data added
 	13 June 2006 - CORDIC NCO started 
 	28 July 2006 - Modified to use OZY and  16 bit FIFO 
-	
+	17 Aug  2006 - modified so that CIC takes 16 bits in an gives 24 out	
 	
 */
 	
@@ -257,22 +257,30 @@ end
 //
 ///////////////////////////////////////////////////////////////
 
+// Module: filter_13
+
+// Filter Settings:
+//
 // Discrete-Time FIR Multirate Filter (real)
 // -----------------------------------------
 // Filter Structure        : Cascaded Integrator-Comb Decimator
 // Decimation Factor       : 2048
 // Differential Delay      : 1
-// Number of Sections      : 3
+// Number of Sections      : 4
+// Stable                  : Yes
+// Linear Phase            : Yes (Type 1)
+//
+// Input                   : s16,15
+// Output                  : s24,-21
 
-
-wire [15:0]cic_out_i;
-wire [15:0]cic_out_q;
+wire [23:0]cic_out_i;
+wire [23:0]cic_out_q;
 wire ce_out_i;				// narrow pulse when data available
 wire ce_out_q;				// narrow pulse when data available
 
 
-filter cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(i_out),.filter_out(cic_out_i),.ce_out(ce_out_i));
-filter cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(q_out),.filter_out(cic_out_q),.ce_out(ce_out_q));
+filter_13 cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(i_out),.filter_out(cic_out_i),.ce_out(ce_out_i));
+filter_13 cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(q_out),.filter_out(cic_out_q),.ce_out(ce_out_q));
 
 assign temp_I = cic_out_i;
 assign temp_Q = cic_out_q;
@@ -289,8 +297,8 @@ assign temp_Q = cic_out_q;
 
 reg clock_8;
 reg [4:0]clock_count;
-wire [15:0] temp_I;
-wire [15:0] temp_Q;
+wire [23:0] temp_I;
+wire [23:0] temp_Q;
 
 always @ (posedge clock)
 begin
@@ -338,19 +346,17 @@ case (AD_state)
 		AD_state <= AD_state + 1'b1;
 		end		
 5'd5:	begin
-		if (temp_I[15]) register <= {8'b11111111,temp_I[15:8]} ;	// send I data with sign extension to 24 bits
-		else register <= {8'b0, temp_I[15:8]};
+		register <= temp_I[23:16];			// first 16 bits of I
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end
 5'd6:	begin
-		if (temp_Q[15]) register <= {temp_I[7:0], 8'b11111111};	// send Q data with sign extension to 24 bits
-		else register <= {temp_I[7:0], 8'b0};				  		
+		register <= {temp_I[7:0], temp_Q[23:16]};	// last 8 bits of I and first 8 of Q			  		
 		strobe <= 1'b1; 
 		AD_state <= AD_state + 1'b1;
 		end
 5'd7:	begin
-		register <= temp_Q;			// send Q data
+		register <= temp_Q[15:0];			// send Q data
 		strobe <= 1'b1; 
 		AD_state <= AD_state + 1'b1;
 		end
