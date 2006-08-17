@@ -346,7 +346,7 @@ case (AD_state)
 		AD_state <= AD_state + 1'b1;
 		end		
 5'd5:	begin
-		register <= temp_I[23:16];			// first 16 bits of I
+		register <= temp_I[23:8];			// first 16 bits of I
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end
@@ -548,6 +548,6 @@ assign LED[3] = 1'b1;
 assign LED[4] = 1'b1; 
 assign LED[5] = 1'b1; 
 assign LED[6] = 1'b1; 
-assign LED[7] = 1'b1; 
+assign LED[7] = ~EP2_has_data; // LED on when we receive data 
 
 endmodule 
