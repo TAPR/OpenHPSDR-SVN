@@ -39,7 +39,7 @@
                              39 	.area CSEG (CODE)
    0000                      40 __standard_interrupt_vector::
    0000                      41 __reset_vector::
-   0000 02 10 44             42 	ljmp	s_GSINIT
+   0000 02 10 50             42 	ljmp	s_GSINIT
                              43 	
                              44 	;; 13 8-byte entries.  We point them all at __isr_nop
    0003 02 00 6B             45 	ljmp	__isr_nop	; 3 bytes

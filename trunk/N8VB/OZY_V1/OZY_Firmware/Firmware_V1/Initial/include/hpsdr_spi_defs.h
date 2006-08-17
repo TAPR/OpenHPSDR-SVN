@@ -52,13 +52,13 @@
 /*
  * SPI_FMT_* goes in wIndexL
  */
-#define SPI_FMT_xSB_MASK	(1 << 7)
-#  define	SPI_FMT_LSB	(1 << 7)	// least signficant bit first
-#  define	SPI_FMT_MSB	(0 << 7)	// most significant bit first
-#define	SPI_FMT_HDR_MASK	(3 << 5)
-#  define	SPI_FMT_HDR_0	(0 << 5)	// 0 header bytes
-#  define	SPI_FMT_HDR_1	(1 << 5)	// 1 header byte
-#  define	SPI_FMT_HDR_2	(2 << 5)	// 2 header bytes
+#define SPI_FMT_xSB_MASK	0x80
+#  define	SPI_FMT_LSB	0x80	// least signficant bit first
+#  define	SPI_FMT_MSB	0x00	// most significant bit first
+#define	SPI_FMT_HDR_MASK	0x60
+#  define	SPI_FMT_HDR_0	0x00	// 0 header bytes
+#  define	SPI_FMT_HDR_1	0x20	// 1 header byte
+#  define	SPI_FMT_HDR_2	0x40	// 2 header bytes
 
 /*
  * SPI_ENABLE_*  goes in wIndexH
@@ -69,7 +69,7 @@
  * [FWIW, the hardware implements them as active low.  Don't change the
  * definitions of these.  They are related to usrp_rev1_regs.h]
  */
-#define	SPI_ENABLE_FPGA		0x01	// select FPGA
+#define	SPI_ENABLE_FPGA		0x80	// select FPGA
 
 /*
  * If there's one header byte, it goes in wValueL.

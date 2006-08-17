@@ -52,7 +52,7 @@ sbit at 0x80+3 bitS_IN;			// in from FX2 point of view
 
 #define bmPORT_A_OUTPUTS  (bmPA_S_CLK  | bmPA_S_DATA_TO_PERIPH)
 
-#define bmPORT_A_INITIAL	(bmPA_S_DATA_TO_PERIPH)
+#define bmPORT_A_INITIAL	0x00
 
 //-------------------------------------------------------------
 /* Port B: FIFO FD[7:0]	*/
@@ -133,14 +133,6 @@ sbit at 0xA0+2 bitALTERA_DCLK;
 				 )
 
 
-#define	bmPORT_E_INITIAL	(bmPE_PE0	\
-				 | bmPE_PE1 	 \
-				 | bmPE_PE2	 \
-				 | bmPE_PE3	 \
-				 | bmPE_PE4	 \
-				 | bmPE_PE5   \
-				 | bmPE_PE6   \
-				 | bmPE_PE7   \
-				 )
+#define	bmPORT_E_INITIAL	0x00
 
 #endif /* _HPSDR_REV1_REGS_H_ */
