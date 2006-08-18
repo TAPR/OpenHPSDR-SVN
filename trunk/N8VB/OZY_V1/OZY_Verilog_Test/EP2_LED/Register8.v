@@ -6,6 +6,8 @@
 //
 //	GPIO SPI REGS for OZY V1
 //
+//	Based on USRP code, Copyright (C) 2003,2004 Matt Ettus
+//
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation; either version 2 of the License, or
@@ -35,11 +37,12 @@ module Register8(CLK,STB,ADDR,IN,OUT,CHANGED);
  output reg 		CHANGED;
 
  always @(posedge CLK) begin
+	// On strobe, check if address matches
 	if (STB & (my_address == ADDR)) begin
-		OUT <= IN;
+		OUT <= IN;  // match, xfer to register
 		CHANGED <= 1'b1;
 	end
-	else 
+	else // no match
 		CHANGED <= 1'b0;
  end
 

@@ -47,9 +47,6 @@ sbit at 0x80+0 bitS_CLK;		// 0x80 is the bit address of PORT A
 sbit at 0x80+1 bitS_OUT;		// out from FX2 point of view
 sbit at 0x80+3 bitS_IN;			// in from FX2 point of view
 
-
-/* all outputs except S_DATA_FROM_PERIPH, FX2_2, FX2_3 */
-
 #define bmPORT_A_OUTPUTS  (bmPA_S_CLK  | bmPA_S_DATA_TO_PERIPH)
 
 #define bmPORT_A_INITIAL	0x00

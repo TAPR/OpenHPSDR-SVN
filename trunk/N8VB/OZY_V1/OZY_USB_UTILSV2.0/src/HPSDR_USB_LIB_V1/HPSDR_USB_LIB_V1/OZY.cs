@@ -362,6 +362,16 @@ namespace HPSDR_USB_LIB_V1
 
         static public bool Read_SPI(IntPtr hdev, byte hdr_hi, byte hdr_lo, byte en, byte fmt, ref byte[] buffer)
         {
+            Console.WriteLine("hdr_hi: " + hdr_hi.ToString("X")
+                                + " hdr_lo: " + hdr_lo.ToString("X")
+                                + " en: " + en.ToString("X")
+                                + " fmt: " + fmt.ToString("X"));
+
+            int wVal = (hdr_hi << 8) + hdr_lo;
+            int wIdx = (en << 8) + fmt;
+
+            Console.WriteLine("wValue: " + wVal.ToString("X")
+                                + " wIndex: " + wIdx.ToString("X"));
             if (buffer.Length < 1 || buffer.Length > MAX_EP0_PACKETSIZE)
                 return false;
             else
@@ -370,8 +380,8 @@ namespace HPSDR_USB_LIB_V1
                     hdev,
                     VENDOR_REQ_TYPE_IN,
                     VENDOR_REQ_SPI_READ,
-                    (int)(hdr_hi<<8 + hdr_lo),
-                    (int)(en<<8 + fmt),
+                    wVal,
+                    wIdx,
                     buffer,
                     buffer.Length,
                     1000
