@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Thu Aug 17 18:36:02 2006) contains limited information
+This XML file (created on Fri Aug 18 12:59:38 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus_fit</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Thu Aug 17 18:36:02 2006</compilation_end_time>
+	<compilation_end_time>Fri Aug 18 12:59:38 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</project>
 <revision>EP2_LED</revision>
 <compilation_summary>
-	<flow_status>Successful - Thu Aug 17 18:36:02 2006</flow_status>
+	<flow_status>Successful - Fri Aug 18 12:59:38 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>EP2_LED</revision_name>
 	<top_level_entity_name>EP2_LED</top_level_entity_name>
@@ -45,7 +45,7 @@ to license.txt.
 	<device>EP2C5Q208C8</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>N/A</met_timing_requirements>
-	<total_logic_elements>99 / 4,608 ( 2 % )</total_logic_elements>
+	<total_logic_elements>102 / 4,608 ( 2 % )</total_logic_elements>
 	<total_registers>69</total_registers>
 	<total_pins>39 / 142 ( 27 % )</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
@@ -54,20 +54,20 @@ to license.txt.
 	<total_plls>0 / 2 ( 0 % )</total_plls>
 </compilation_summary>
 <resource_usage_summary>
-	<rsc name="Total logic elements" util="2" max=" 4608 " type="int">99 </rsc>
-	<rsc name="-- Combinational with no register" type="int">30</rsc>
-	<rsc name="-- Register only" type="int">23</rsc>
-	<rsc name="-- Combinational with a register" type="int">46</rsc>
+	<rsc name="Total logic elements" util="2" max=" 4608 " type="int">102 </rsc>
+	<rsc name="-- Combinational with no register" type="int">33</rsc>
+	<rsc name="-- Register only" type="int">27</rsc>
+	<rsc name="-- Combinational with a register" type="int">42</rsc>
 	<rsc name="Logic element usage by number of LUT inputs" type="text"></rsc>
-	<rsc name="-- 4 input functions" type="int">40</rsc>
-	<rsc name="-- 3 input functions" type="int">12</rsc>
+	<rsc name="-- 4 input functions" type="int">31</rsc>
+	<rsc name="-- 3 input functions" type="int">20</rsc>
 	<rsc name="-- &lt;=2 input functions" type="int">24</rsc>
-	<rsc name="-- Register only" type="int">23</rsc>
+	<rsc name="-- Register only" type="int">27</rsc>
 	<rsc name="Logic elements by mode" type="text"></rsc>
-	<rsc name="-- normal mode" type="int">65</rsc>
+	<rsc name="-- normal mode" type="int">64</rsc>
 	<rsc name="-- arithmetic mode" type="int">11</rsc>
 	<rsc name="Total registers" util="1" max=" 4608 " type="int">69 </rsc>
-	<rsc name="Total LABs" util="3" max=" 288 " type="int">8 </rsc>
+	<rsc name="Total LABs" util="3" max=" 288 " type="int">9 </rsc>
 	<rsc name="User inserted logic elements" type="int">0</rsc>
 	<rsc name="Virtual pins" type="int">0</rsc>
 	<rsc name="I/O pins" util="27" max=" 142 " type="int">39 </rsc>
@@ -83,8 +83,8 @@ to license.txt.
 	<rsc name="Maximum fan-out" type="int">35</rsc>
 	<rsc name="Highest non-global fan-out signal" type="text">PA0</rsc>
 	<rsc name="Highest non-global fan-out" type="int">24</rsc>
-	<rsc name="Total fan-out" type="int">495</rsc>
-	<rsc name="Average fan-out" type="float">2.39</rsc>
+	<rsc name="Total fan-out" type="int">496</rsc>
+	<rsc name="Average fan-out" type="float">2.35</rsc>
 </resource_usage_summary>
 <control_signals>
 	<row>
@@ -156,14 +156,14 @@ to license.txt.
 	</row>
 </non_global_high_fan_out_signals>
 <interconnect_usage_summary>
-	<rsc name="Local interconnects" util="1" max=" 4608 " type="int">46 </rsc>
-	<rsc name="Block interconnects" util="1" max=" 15666 " type="int">156 </rsc>
-	<rsc name="R4 interconnects" util="1" max=" 13328 " type="int">66 </rsc>
-	<rsc name="R24 interconnects" util="0" max=" 652 " type="int">0 </rsc>
-	<rsc name="C4 interconnects" util="1" max=" 11424 " type="int">122 </rsc>
-	<rsc name="C16 interconnects" util="1" max=" 812 " type="int">2 </rsc>
+	<rsc name="Local interconnects" util="1" max=" 4608 " type="int">53 </rsc>
+	<rsc name="Block interconnects" util="1" max=" 15666 " type="int">165 </rsc>
+	<rsc name="R4 interconnects" util="1" max=" 13328 " type="int">94 </rsc>
+	<rsc name="R24 interconnects" util="1" max=" 652 " type="int">4 </rsc>
+	<rsc name="C4 interconnects" util="1" max=" 11424 " type="int">106 </rsc>
+	<rsc name="C16 interconnects" util="1" max=" 812 " type="int">4 </rsc>
 	<rsc name="Global clocks" util="25" max=" 8 " type="int">2 </rsc>
-	<rsc name="Direct links" util="1" max=" 15666 " type="int">51 </rsc>
+	<rsc name="Direct links" util="1" max=" 15666 " type="int">40 </rsc>
 </interconnect_usage_summary>
 <mep_data>
 	<command_line>quartus_fit --read_settings_files=off --write_settings_files=off EP2_LED -c EP2_LED</command_line>
@@ -178,8 +178,8 @@ to license.txt.
 	<warning>Warning: Node &quot;PC6&quot; is assigned to location or region, but does not exist in design</warning>
 	<info>Info: Generated suppressed messages file C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED.fit.smsg</info>
 	<info>Info: Quartus II Fitter was successful. 0 errors, 4 warnings</info>
-	<info>Info: Elapsed time: 00:00:10</info>
-	<info>Info: Processing ended: Thu Aug 17 18:36:02 2006</info>
+	<info>Info: Elapsed time: 00:00:09</info>
+	<info>Info: Processing ended: Fri Aug 18 12:59:38 2006</info>
 	<info>Info: Following groups of pins have the same output enable</info>
 </messages>
 <fitter_settings>
@@ -501,7 +501,7 @@ to license.txt.
 		<x_coordinate>0</x_coordinate>
 		<y_coordinate>2</y_coordinate>
 		<cell_number>1</cell_number>
-		<combinational_fan_out>12</combinational_fan_out>
+		<combinational_fan_out>10</combinational_fan_out>
 		<registered_fan_out>0</registered_fan_out>
 		<global>no</global>
 		<input_register>no</input_register>
@@ -717,27 +717,6 @@ to license.txt.
 		<pci_i_o_enabled>no</pci_i_o_enabled>
 		<open_drain>no</open_drain>
 		<tri_primitive>no</tri_primitive>
-		<bus_hold>no</bus_hold>
-		<weak_pull_up>Off</weak_pull_up>
-		<i_o_standard>LVTTL</i_o_standard>
-		<current_strength>24mA</current_strength>
-		<termination>Off</termination>
-		<location_assigned_by>User</location_assigned_by>
-		<load units="pF">5</load>
-	</row>
-	<row>
-		<name>PA3</name>
-		<pin__>12</pin__>
-		<i_o_bank>1</i_o_bank>
-		<x_coordinate>0</x_coordinate>
-		<y_coordinate>11</y_coordinate>
-		<cell_number>0</cell_number>
-		<output_register>no</output_register>
-		<output_enable_register>no</output_enable_register>
-		<power_up_high>no</power_up_high>
-		<pci_i_o_enabled>no</pci_i_o_enabled>
-		<open_drain>no</open_drain>
-		<tri_primitive>yes</tri_primitive>
 		<bus_hold>no</bus_hold>
 		<weak_pull_up>Off</weak_pull_up>
 		<i_o_standard>LVTTL</i_o_standard>
@@ -1216,6 +1195,30 @@ to license.txt.
 		<location_assigned_by>User</location_assigned_by>
 		<load units="pF">5</load>
 	</row>
+	<row>
+		<name>PA3</name>
+		<pin__>12</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">5</load>
+	</row>
 </bidir_pins>
 <i_o_bank_usage>
 	<row>
@@ -1256,79 +1259,79 @@ to license.txt.
 	</row>
 	<row>
 		<name>Mid Slack - Fit Attempt 1</name>
-		<value>-5065</value>
+		<value>-4524</value>
 	</row>
 	<row>
 		<name>Internal Atom Count - Fit Attempt 1</name>
-		<value>146</value>
+		<value>145</value>
 	</row>
 	<row>
 		<name>LE/ALM Count - Fit Attempt 1</name>
-		<value>99</value>
+		<value>98</value>
 	</row>
 	<row>
 		<name>LAB Count - Fit Attempt 1</name>
-		<value>10</value>
+		<value>9</value>
 	</row>
 	<row>
 		<name>Outputs per Lab - Fit Attempt 1</name>
-		<value>5.800</value>
+		<value>7.889</value>
 	</row>
 	<row>
 		<name>Inputs per LAB - Fit Attempt 1</name>
-		<value>6.200</value>
+		<value>8.222</value>
 	</row>
 	<row>
 		<name>Global Inputs per LAB - Fit Attempt 1</name>
-		<value>0.600</value>
+		<value>0.778</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;non-global clock + sync load&apos; - Fit Attempt 1</name>
-		<value>0:7;1:2;2:1</value>
+		<value>0:6;1:1;2:2</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;non-global controls&apos; - Fit Attempt 1</name>
-		<value>0:4;1:2;2:2;3:1;4:1</value>
+		<value>0:3;1:2;2:1;3:2;4:1</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;non-global + aclr&apos; - Fit Attempt 1</name>
-		<value>0:4;1:2;2:2;3:1;4:1</value>
+		<value>0:3;1:2;2:1;3:2;4:1</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;global non-clock non-aclr&apos; - Fit Attempt 1</name>
-		<value>0:10</value>
+		<value>0:9</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;global controls&apos; - Fit Attempt 1</name>
-		<value>0:4;1:6</value>
+		<value>0:2;1:7</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;deterministic LABSMUXA/LABXMUXB&apos; - Fit Attempt 1</name>
-		<value>0:5;1:3;2:2</value>
+		<value>0:4;1:2;2:2;3:1</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;deterministic LABSMUXC/LABXMUXD&apos; - Fit Attempt 1</name>
-		<value>0:4;1:5;2:1</value>
+		<value>0:3;1:3;2:2;3:1</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;clock / ce pair constraint&apos; - Fit Attempt 1</name>
-		<value>0:2;1:5;2:3</value>
+		<value>0:1;1:5;2:3</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;aclr constraint&apos; - Fit Attempt 1</name>
-		<value>0:2;1:8</value>
+		<value>0:1;1:6;2:2</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;true sload_sclear pair&apos; - Fit Attempt 1</name>
-		<value>0:6;1:4</value>
+		<value>0:4;1:5</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;constant sload_sclear pair&apos; - Fit Attempt 1</name>
-		<value>0:9;1:1</value>
+		<value>0:8;1:1</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;has placement constraint&apos; - Fit Attempt 1</name>
-		<value>0:10</value>
+		<value>0:9</value>
 	</row>
 	<row>
 		<name>LEs in Chains - Fit Attempt 1</name>
@@ -1350,10 +1353,6 @@ to license.txt.
 		<name>Time - Fit Attempt 1</name>
 		<value>0</value>
 	</row>
-	<row>
-		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>0.031</value>
-	</row>
 </advanced_data___placement_preparation>
 <advanced_data___placement>
 	<row>
@@ -1362,7 +1361,7 @@ to license.txt.
 	</row>
 	<row>
 		<name>Early Slack - Fit Attempt 1</name>
-		<value>-4071</value>
+		<value>-4645</value>
 	</row>
 	<row>
 		<name>Mid Wire Use - Fit Attempt 1</name>
@@ -1370,7 +1369,7 @@ to license.txt.
 	</row>
 	<row>
 		<name>Mid Slack - Fit Attempt 1</name>
-		<value>-3813</value>
+		<value>-3147</value>
 	</row>
 	<row>
 		<name>Late Wire Use - Fit Attempt 1</name>
@@ -1378,7 +1377,7 @@ to license.txt.
 	</row>
 	<row>
 		<name>Late Slack - Fit Attempt 1</name>
-		<value>-3415</value>
+		<value>-2844</value>
 	</row>
 	<row>
 		<name>Time - Fit Attempt 1</name>
@@ -1386,13 +1385,13 @@ to license.txt.
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>0.062</value>
+		<value>0.157</value>
 	</row>
 </advanced_data___placement>
 <advanced_data___routing>
 	<row>
 		<name>Early Slack - Fit Attempt 1</name>
-		<value>-2892</value>
+		<value>-2222</value>
 	</row>
 	<row>
 		<name>Early Wire Use - Fit Attempt 1</name>
@@ -1404,15 +1403,15 @@ to license.txt.
 	</row>
 	<row>
 		<name>Mid Slack - Fit Attempt 1</name>
-		<value>-3712</value>
+		<value>-2793</value>
 	</row>
 	<row>
 		<name>Late Slack - Fit Attempt 1</name>
-		<value>-3420</value>
+		<value>-2793</value>
 	</row>
 	<row>
 		<name>Late Slack - Fit Attempt 1</name>
-		<value>-3420</value>
+		<value>-2793</value>
 	</row>
 	<row>
 		<name>Late Wire Use - Fit Attempt 1</name>
@@ -1424,7 +1423,7 @@ to license.txt.
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>0.078</value>
+		<value>0.110</value>
 	</row>
 </advanced_data___routing>
 <files>

@@ -122,6 +122,7 @@ namespace read_SPI
 
             byte[] buf = new byte[1];
 
+            buf[0] = 0x00;
             addr = addr | 0x40;
 
             if ((OZY.Read_SPI(usb_dev_handle, 0, (byte)addr, OZY.SPI_EN_FPGA, OZY.SPI_FMT_MSB | OZY.SPI_FMT_HDR_1, ref buf)))

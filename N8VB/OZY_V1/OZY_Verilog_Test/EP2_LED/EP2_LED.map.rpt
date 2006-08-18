@@ -1,5 +1,5 @@
 Analysis & Synthesis report for EP2_LED
-Thu Aug 17 18:35:49 2006
+Fri Aug 18 12:59:26 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -42,12 +42,12 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Aug 17 18:35:49 2006        ;
+; Analysis & Synthesis Status        ; Successful - Fri Aug 18 12:59:26 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; EP2_LED                                      ;
 ; Top-level Entity Name              ; EP2_LED                                      ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 76                                           ;
+; Total logic elements               ; 75                                           ;
 ; Total registers                    ; 69                                           ;
 ; Total pins                         ; 39                                           ;
 ; Total virtual pins                 ; 0                                            ;
@@ -133,22 +133,22 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 76    ;
-; Total combinational functions               ; 76    ;
+; Estimated Total logic elements              ; 75    ;
+; Total combinational functions               ; 75    ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 40    ;
-;     -- 3 input functions                    ; 12    ;
+;     -- 4 input functions                    ; 31    ;
+;     -- 3 input functions                    ; 20    ;
 ;     -- <=2 input functions                  ; 24    ;
 ;         -- Combinational cells for routing  ; 0     ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 65    ;
+;     -- normal mode                          ; 64    ;
 ;     -- arithmetic mode                      ; 11    ;
 ; Total registers                             ; 69    ;
 ; I/O pins                                    ; 39    ;
 ; Maximum fan-out node                        ; IFCLK ;
 ; Maximum fan-out                             ; 35    ;
-; Total fan-out                               ; 475   ;
-; Average fan-out                             ; 2.58  ;
+; Total fan-out                               ; 471   ;
+; Average fan-out                             ; 2.57  ;
 +---------------------------------------------+-------+
 
 
@@ -157,9 +157,9 @@ applicable agreement for further details.
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+-----------------------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name         ;
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+-----------------------------+
-; |EP2_LED                   ; 76 (39)           ; 69 (35)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 39   ; 0            ; |EP2_LED                    ;
+; |EP2_LED                   ; 75 (39)           ; 69 (35)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 39   ; 0            ; |EP2_LED                    ;
 ;    |Register8:port0reg|    ; 2 (2)             ; 8 (8)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |EP2_LED|Register8:port0reg ;
-;    |SPI_REGS:SPI_REGS|     ; 35 (35)           ; 26 (26)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |EP2_LED|SPI_REGS:SPI_REGS  ;
+;    |SPI_REGS:SPI_REGS|     ; 34 (34)           ; 26 (26)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |EP2_LED|SPI_REGS:SPI_REGS  ;
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+-----------------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -171,10 +171,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Total registers                              ; 69    ;
 ; Number of registers using Synchronous Clear  ; 1     ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Synchronous Load   ; 8     ;
 ; Number of registers using Asynchronous Clear ; 9     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 47    ;
+; Number of registers using Clock Enable       ; 39    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -206,7 +206,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Aug 17 18:35:46 2006
+    Info: Processing started: Fri Aug 18 12:59:23 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off EP2_LED -c EP2_LED
 Info: Found 1 design units, including 1 entities, in source file EP2_LED.v
     Info: Found entity 1: EP2_LED
@@ -216,7 +216,6 @@ Info: Found 1 design units, including 1 entities, in source file Register8.v
     Info: Found entity 1: Register8
 Info: Elaborating entity "EP2_LED" for the top level hierarchy
 Info: Elaborating entity "SPI_REGS" for hierarchy "SPI_REGS:SPI_REGS"
-Warning (10036): Verilog HDL or VHDL warning at SPI_REGS.v(62): object "wrDone" assigned a value but never read
 Info: Elaborating entity "Register8" for hierarchy "Register8:port0reg"
 Info: Power-up level of register "PKEND~reg0" is not specified -- using power-up level of High to minimize register
 Warning: Reduced register "PKEND~reg0" with stuck data_in port to stuck value VCC
@@ -226,14 +225,14 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "FIFO_ADR[0]" stuck at GND
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 148 device resources after synthesis - the final resource count might be different
+Info: Implemented 147 device resources after synthesis - the final resource count might be different
     Info: Implemented 8 input pins
-    Info: Implemented 15 output pins
-    Info: Implemented 16 bidirectional pins
-    Info: Implemented 109 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 8 warnings
-    Info: Processing ended: Thu Aug 17 18:35:49 2006
-    Info: Elapsed time: 00:00:03
+    Info: Implemented 14 output pins
+    Info: Implemented 17 bidirectional pins
+    Info: Implemented 108 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 7 warnings
+    Info: Processing ended: Fri Aug 18 12:59:26 2006
+    Info: Elapsed time: 00:00:04
 
 
 +------------------------------------------+

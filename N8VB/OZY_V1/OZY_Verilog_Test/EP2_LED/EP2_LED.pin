@@ -68,7 +68,7 @@ PKEND                        : 8         : output : LVTTL             :         
 GND                          : 9         : gnd    :                   :         :           :                
 FIFO_ADR[1]                  : 10        : output : LVTTL             :         : 1         : Y              
 FIFO_ADR[0]                  : 11        : output : LVTTL             :         : 1         : Y              
-PA3                          : 12        : output : LVTTL             :         : 1         : Y              
+PA3                          : 12        : bidir  : LVTTL             :         : 1         : Y              
 SLOE                         : 13        : output : LVTTL             :         : 1         : Y              
 PA1                          : 14        : input  : LVTTL             :         : 1         : Y              
 PA0                          : 15        : input  : LVTTL             :         : 1         : Y              

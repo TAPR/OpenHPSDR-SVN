@@ -1,0 +1,508 @@
+Timing Analyzer report for gpio_control
+Fri Aug 18 16:07:46 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Clock Setup: 'SCK'
+  6. Clock Setup: 'FX2_CLK'
+  7. tsu
+  8. tco
+  9. th
+ 10. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                                                       ;
++------------------------------+-------+---------------+----------------------------------+---------------------------------+----------------------------+------------+----------+--------------+
+; Type                         ; Slack ; Required Time ; Actual Time                      ; From                            ; To                         ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+-------+---------------+----------------------------------+---------------------------------+----------------------------+------------+----------+--------------+
+; Worst-case tsu               ; N/A   ; None          ; 8.626 ns                         ; GPIO[23]                        ; SPI_REGS:spi_regs|sdata[7] ; --         ; SCK      ; 0            ;
+; Worst-case tco               ; N/A   ; None          ; 8.988 ns                         ; SPI_REGS:spi_regs|sRd           ; SO                         ; SCK        ; --       ; 0            ;
+; Worst-case th                ; N/A   ; None          ; -4.354 ns                        ; SI                              ; SPI_REGS:spi_regs|saddr[0] ; --         ; SCK      ; 0            ;
+; Clock Setup: 'SCK'           ; N/A   ; None          ; 140.71 MHz ( period = 7.107 ns ) ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|sdata[1] ; SCK        ; SCK      ; 0            ;
+; Clock Setup: 'FX2_CLK'       ; N/A   ; None          ; 279.80 MHz ( period = 3.574 ns ) ; SPI_REGS:spi_regs|CS_ph1        ; RegisterX:port0reg|OUT[0]  ; FX2_CLK    ; FX2_CLK  ; 0            ;
+; Total number of failed paths ;       ;               ;                                  ;                                 ;                            ;            ;          ; 0            ;
++------------------------------+-------+---------------+----------------------------------+---------------------------------+----------------------------+------------+----------+--------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                ; Setting            ; From ; To ; Entity Name ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                           ; EP2C5Q208C8        ;      ;    ;             ;
+; Timing Models                                         ; Final              ;      ;    ;             ;
+; Number of source nodes to report per destination node ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                 ; 10                 ;      ;    ;             ;
+; Number of paths to report                             ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                          ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                            ; Off                ;      ;    ;             ;
+; Default hold multicycle                               ; Same As Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains             ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                        ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                      ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                 ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements               ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                      ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                  ; Off                ;      ;    ;             ;
+; Use TimeQuest Timing Analyzer                         ; Off                ;      ;    ;             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                             ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type     ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset ; Phase offset ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; SCK             ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
+; FX2_CLK         ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'SCK'                                                                                                                                                                                                                                                            ;
++-----------------------------------------+-----------------------------------------------------+---------------------------------+---------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack                                   ; Actual fmax (period)                                ; From                            ; To                              ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-----------------------------------------+-----------------------------------------------------+---------------------------------+---------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A                                     ; 140.71 MHz ( period = 7.107 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 6.841 ns                ;
+; N/A                                     ; 140.98 MHz ( period = 7.093 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 6.827 ns                ;
+; N/A                                     ; 141.52 MHz ( period = 7.066 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 6.800 ns                ;
+; N/A                                     ; 141.60 MHz ( period = 7.062 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 6.796 ns                ;
+; N/A                                     ; 141.88 MHz ( period = 7.048 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 6.782 ns                ;
+; N/A                                     ; 142.43 MHz ( period = 7.021 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 6.755 ns                ;
+; N/A                                     ; 143.08 MHz ( period = 6.989 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 6.723 ns                ;
+; N/A                                     ; 143.88 MHz ( period = 6.950 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 6.679 ns                ;
+; N/A                                     ; 143.97 MHz ( period = 6.946 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 6.680 ns                ;
+; N/A                                     ; 144.01 MHz ( period = 6.944 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 6.678 ns                ;
+; N/A                                     ; 144.26 MHz ( period = 6.932 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 6.666 ns                ;
+; N/A                                     ; 144.80 MHz ( period = 6.906 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 6.635 ns                ;
+; N/A                                     ; 144.82 MHz ( period = 6.905 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 6.634 ns                ;
+; N/A                                     ; 144.82 MHz ( period = 6.905 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 6.639 ns                ;
+; N/A                                     ; 144.82 MHz ( period = 6.905 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 6.639 ns                ;
+; N/A                                     ; 145.75 MHz ( period = 6.861 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 6.590 ns                ;
+; N/A                                     ; 145.77 MHz ( period = 6.860 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 6.594 ns                ;
+; N/A                                     ; 145.77 MHz ( period = 6.860 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 6.594 ns                ;
+; N/A                                     ; 146.07 MHz ( period = 6.846 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 6.580 ns                ;
+; N/A                                     ; 146.22 MHz ( period = 6.839 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 6.573 ns                ;
+; N/A                                     ; 146.46 MHz ( period = 6.828 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 6.562 ns                ;
+; N/A                                     ; 146.52 MHz ( period = 6.825 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 6.559 ns                ;
+; N/A                                     ; 146.65 MHz ( period = 6.819 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 6.553 ns                ;
+; N/A                                     ; 147.10 MHz ( period = 6.798 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 6.532 ns                ;
+; N/A                                     ; 147.28 MHz ( period = 6.790 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 6.524 ns                ;
+; N/A                                     ; 147.30 MHz ( period = 6.789 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 6.518 ns                ;
+; N/A                                     ; 147.58 MHz ( period = 6.776 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 6.510 ns                ;
+; N/A                                     ; 148.17 MHz ( period = 6.749 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 6.483 ns                ;
+; N/A                                     ; 148.26 MHz ( period = 6.745 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 6.474 ns                ;
+; N/A                                     ; 148.28 MHz ( period = 6.744 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 6.478 ns                ;
+; N/A                                     ; 148.32 MHz ( period = 6.742 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 6.476 ns                ;
+; N/A                                     ; 148.79 MHz ( period = 6.721 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 6.455 ns                ;
+; N/A                                     ; 149.19 MHz ( period = 6.703 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 6.432 ns                ;
+; N/A                                     ; 149.66 MHz ( period = 6.682 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 6.411 ns                ;
+; N/A                                     ; 149.88 MHz ( period = 6.672 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 6.406 ns                ;
+; N/A                                     ; 149.95 MHz ( period = 6.669 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 6.403 ns                ;
+; N/A                                     ; 150.17 MHz ( period = 6.659 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 6.388 ns                ;
+; N/A                                     ; 150.20 MHz ( period = 6.658 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 6.392 ns                ;
+; N/A                                     ; 150.26 MHz ( period = 6.655 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 6.389 ns                ;
+; N/A                                     ; 150.65 MHz ( period = 6.638 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 6.367 ns                ;
+; N/A                                     ; 150.67 MHz ( period = 6.637 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 6.371 ns                ;
+; N/A                                     ; 150.76 MHz ( period = 6.633 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 6.362 ns                ;
+; N/A                                     ; 150.88 MHz ( period = 6.628 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 6.362 ns                ;
+; N/A                                     ; 151.77 MHz ( period = 6.589 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 6.318 ns                ;
+; N/A                                     ; 151.79 MHz ( period = 6.588 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 6.322 ns                ;
+; N/A                                     ; 152.65 MHz ( period = 6.551 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 6.285 ns                ;
+; N/A                                     ; 153.56 MHz ( period = 6.512 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 6.241 ns                ;
+; N/A                                     ; 153.68 MHz ( period = 6.507 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 6.241 ns                ;
+; N/A                                     ; 154.01 MHz ( period = 6.493 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 6.227 ns                ;
+; N/A                                     ; 154.61 MHz ( period = 6.468 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 6.197 ns                ;
+; N/A                                     ; 154.63 MHz ( period = 6.467 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 6.201 ns                ;
+; N/A                                     ; 154.66 MHz ( period = 6.466 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 6.200 ns                ;
+; N/A                                     ; 156.52 MHz ( period = 6.389 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 6.123 ns                ;
+; N/A                                     ; 157.48 MHz ( period = 6.350 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 6.079 ns                ;
+; N/A                                     ; 158.58 MHz ( period = 6.306 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 6.035 ns                ;
+; N/A                                     ; 158.60 MHz ( period = 6.305 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 6.039 ns                ;
+; N/A                                     ; 159.64 MHz ( period = 6.264 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 5.998 ns                ;
+; N/A                                     ; 160.00 MHz ( period = 6.250 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 5.984 ns                ;
+; N/A                                     ; 160.69 MHz ( period = 6.223 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 5.957 ns                ;
+; N/A                                     ; 162.71 MHz ( period = 6.146 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 5.880 ns                ;
+; N/A                                     ; 163.75 MHz ( period = 6.107 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 5.836 ns                ;
+; N/A                                     ; 164.93 MHz ( period = 6.063 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 5.792 ns                ;
+; N/A                                     ; 164.96 MHz ( period = 6.062 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 5.796 ns                ;
+; N/A                                     ; 167.95 MHz ( period = 5.954 ns )                    ; SPI_REGS:spi_regs|saddr[3]      ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 5.726 ns                ;
+; N/A                                     ; 168.35 MHz ( period = 5.940 ns )                    ; SPI_REGS:spi_regs|saddr[3]      ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 5.712 ns                ;
+; N/A                                     ; 169.15 MHz ( period = 5.912 ns )                    ; SPI_REGS:spi_regs|saddr[5]      ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 5.684 ns                ;
+; N/A                                     ; 169.15 MHz ( period = 5.912 ns )                    ; SPI_REGS:spi_regs|saddr[3]      ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 5.684 ns                ;
+; N/A                                     ; 169.55 MHz ( period = 5.898 ns )                    ; SPI_REGS:spi_regs|saddr[5]      ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 5.670 ns                ;
+; N/A                                     ; 170.36 MHz ( period = 5.870 ns )                    ; SPI_REGS:spi_regs|saddr[5]      ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 5.642 ns                ;
+; N/A                                     ; 171.38 MHz ( period = 5.835 ns )                    ; SPI_REGS:spi_regs|saddr[3]      ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 5.607 ns                ;
+; N/A                                     ; 172.53 MHz ( period = 5.796 ns )                    ; SPI_REGS:spi_regs|saddr[3]      ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 5.563 ns                ;
+; N/A                                     ; 172.62 MHz ( period = 5.793 ns )                    ; SPI_REGS:spi_regs|saddr[5]      ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 5.565 ns                ;
+; N/A                                     ; 173.79 MHz ( period = 5.754 ns )                    ; SPI_REGS:spi_regs|saddr[5]      ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 5.521 ns                ;
+; N/A                                     ; 173.85 MHz ( period = 5.752 ns )                    ; SPI_REGS:spi_regs|saddr[3]      ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 5.524 ns                ;
+; N/A                                     ; 173.85 MHz ( period = 5.752 ns )                    ; SPI_REGS:spi_regs|saddr[3]      ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 5.519 ns                ;
+; N/A                                     ; 175.13 MHz ( period = 5.710 ns )                    ; SPI_REGS:spi_regs|saddr[5]      ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 5.482 ns                ;
+; N/A                                     ; 175.13 MHz ( period = 5.710 ns )                    ; SPI_REGS:spi_regs|saddr[5]      ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 5.477 ns                ;
+; N/A                                     ; 178.89 MHz ( period = 5.590 ns )                    ; SPI_REGS:spi_regs|saddr[2]      ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 5.362 ns                ;
+; N/A                                     ; 179.34 MHz ( period = 5.576 ns )                    ; SPI_REGS:spi_regs|saddr[2]      ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 5.348 ns                ;
+; N/A                                     ; 180.15 MHz ( period = 5.551 ns )                    ; SPI_REGS:spi_regs|saddr[1]      ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 5.325 ns                ;
+; N/A                                     ; 180.25 MHz ( period = 5.548 ns )                    ; SPI_REGS:spi_regs|saddr[2]      ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 5.320 ns                ;
+; N/A                                     ; 182.78 MHz ( period = 5.471 ns )                    ; SPI_REGS:spi_regs|saddr[2]      ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 5.243 ns                ;
+; N/A                                     ; 184.09 MHz ( period = 5.432 ns )                    ; SPI_REGS:spi_regs|saddr[2]      ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 5.199 ns                ;
+; N/A                                     ; 185.60 MHz ( period = 5.388 ns )                    ; SPI_REGS:spi_regs|saddr[2]      ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 5.160 ns                ;
+; N/A                                     ; 185.60 MHz ( period = 5.388 ns )                    ; SPI_REGS:spi_regs|saddr[2]      ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 5.155 ns                ;
+; N/A                                     ; 187.27 MHz ( period = 5.340 ns )                    ; SPI_REGS:spi_regs|saddr[4]      ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 5.112 ns                ;
+; N/A                                     ; 187.76 MHz ( period = 5.326 ns )                    ; SPI_REGS:spi_regs|saddr[4]      ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 5.098 ns                ;
+; N/A                                     ; 188.75 MHz ( period = 5.298 ns )                    ; SPI_REGS:spi_regs|saddr[4]      ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 5.070 ns                ;
+; N/A                                     ; 191.53 MHz ( period = 5.221 ns )                    ; SPI_REGS:spi_regs|saddr[4]      ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 4.993 ns                ;
+; N/A                                     ; 192.98 MHz ( period = 5.182 ns )                    ; SPI_REGS:spi_regs|saddr[4]      ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 4.949 ns                ;
+; N/A                                     ; 194.63 MHz ( period = 5.138 ns )                    ; SPI_REGS:spi_regs|saddr[4]      ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 4.910 ns                ;
+; N/A                                     ; 194.63 MHz ( period = 5.138 ns )                    ; SPI_REGS:spi_regs|saddr[4]      ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 4.905 ns                ;
+; N/A                                     ; 197.82 MHz ( period = 5.055 ns )                    ; SPI_REGS:spi_regs|saddr[0]      ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 4.827 ns                ;
+; N/A                                     ; 197.94 MHz ( period = 5.052 ns )                    ; SPI_REGS:spi_regs|sdata[0]      ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 4.788 ns                ;
+; N/A                                     ; 198.37 MHz ( period = 5.041 ns )                    ; SPI_REGS:spi_regs|saddr[0]      ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 4.813 ns                ;
+; N/A                                     ; 206.06 MHz ( period = 4.853 ns )                    ; SPI_REGS:spi_regs|saddr[0]      ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 4.625 ns                ;
+; N/A                                     ; 208.51 MHz ( period = 4.796 ns )                    ; SPI_REGS:spi_regs|saddr[0]      ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 4.570 ns                ;
+; N/A                                     ; 214.22 MHz ( period = 4.668 ns )                    ; SPI_REGS:spi_regs|saddr[0]      ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 4.440 ns                ;
+; N/A                                     ; 219.68 MHz ( period = 4.552 ns )                    ; SPI_REGS:spi_regs|saddr[0]      ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 4.319 ns                ;
+; N/A                                     ; 221.24 MHz ( period = 4.520 ns )                    ; SPI_REGS:spi_regs|saddr[0]      ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 4.287 ns                ;
+; N/A                                     ; 222.22 MHz ( period = 4.500 ns )                    ; SPI_REGS:spi_regs|saddr[0]      ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 4.272 ns                ;
+; N/A                                     ; 223.26 MHz ( period = 4.479 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 4.215 ns                ;
+; N/A                                     ; 225.53 MHz ( period = 4.434 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 4.170 ns                ;
+; N/A                                     ; 231.05 MHz ( period = 4.328 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|saddr[3]      ; SCK        ; SCK      ; None                        ; None                      ; 4.026 ns                ;
+; N/A                                     ; 231.05 MHz ( period = 4.328 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|saddr[5]      ; SCK        ; SCK      ; None                        ; None                      ; 4.026 ns                ;
+; N/A                                     ; 231.05 MHz ( period = 4.328 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|saddr[4]      ; SCK        ; SCK      ; None                        ; None                      ; 4.026 ns                ;
+; N/A                                     ; 231.05 MHz ( period = 4.328 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|saddr[2]      ; SCK        ; SCK      ; None                        ; None                      ; 4.026 ns                ;
+; N/A                                     ; 231.05 MHz ( period = 4.328 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|saddr[0]      ; SCK        ; SCK      ; None                        ; None                      ; 4.026 ns                ;
+; N/A                                     ; 231.05 MHz ( period = 4.328 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|saddr[1]      ; SCK        ; SCK      ; None                        ; None                      ; 4.026 ns                ;
+; N/A                                     ; 231.05 MHz ( period = 4.328 ns )                    ; SPI_REGS:spi_regs|BitCounter[3] ; SPI_REGS:spi_regs|saddr[6]      ; SCK        ; SCK      ; None                        ; None                      ; 4.026 ns                ;
+; N/A                                     ; 231.59 MHz ( period = 4.318 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 4.054 ns                ;
+; N/A                                     ; 233.37 MHz ( period = 4.285 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|saddr[3]      ; SCK        ; SCK      ; None                        ; None                      ; 3.983 ns                ;
+; N/A                                     ; 233.37 MHz ( period = 4.285 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|saddr[5]      ; SCK        ; SCK      ; None                        ; None                      ; 3.983 ns                ;
+; N/A                                     ; 233.37 MHz ( period = 4.285 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|saddr[4]      ; SCK        ; SCK      ; None                        ; None                      ; 3.983 ns                ;
+; N/A                                     ; 233.37 MHz ( period = 4.285 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|saddr[2]      ; SCK        ; SCK      ; None                        ; None                      ; 3.983 ns                ;
+; N/A                                     ; 233.37 MHz ( period = 4.285 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|saddr[0]      ; SCK        ; SCK      ; None                        ; None                      ; 3.983 ns                ;
+; N/A                                     ; 233.37 MHz ( period = 4.285 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|saddr[1]      ; SCK        ; SCK      ; None                        ; None                      ; 3.983 ns                ;
+; N/A                                     ; 233.37 MHz ( period = 4.285 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|saddr[6]      ; SCK        ; SCK      ; None                        ; None                      ; 3.983 ns                ;
+; N/A                                     ; 236.29 MHz ( period = 4.232 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 3.968 ns                ;
+; N/A                                     ; 237.47 MHz ( period = 4.211 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 3.947 ns                ;
+; N/A                                     ; 239.98 MHz ( period = 4.167 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|saddr[3]      ; SCK        ; SCK      ; None                        ; None                      ; 3.865 ns                ;
+; N/A                                     ; 239.98 MHz ( period = 4.167 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|saddr[5]      ; SCK        ; SCK      ; None                        ; None                      ; 3.865 ns                ;
+; N/A                                     ; 239.98 MHz ( period = 4.167 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|saddr[4]      ; SCK        ; SCK      ; None                        ; None                      ; 3.865 ns                ;
+; N/A                                     ; 239.98 MHz ( period = 4.167 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|saddr[2]      ; SCK        ; SCK      ; None                        ; None                      ; 3.865 ns                ;
+; N/A                                     ; 239.98 MHz ( period = 4.167 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|saddr[0]      ; SCK        ; SCK      ; None                        ; None                      ; 3.865 ns                ;
+; N/A                                     ; 239.98 MHz ( period = 4.167 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|saddr[1]      ; SCK        ; SCK      ; None                        ; None                      ; 3.865 ns                ;
+; N/A                                     ; 239.98 MHz ( period = 4.167 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|saddr[6]      ; SCK        ; SCK      ; None                        ; None                      ; 3.865 ns                ;
+; N/A                                     ; 240.27 MHz ( period = 4.162 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 3.898 ns                ;
+; N/A                                     ; 244.92 MHz ( period = 4.083 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|saddr[3]      ; SCK        ; SCK      ; None                        ; None                      ; 3.781 ns                ;
+; N/A                                     ; 244.92 MHz ( period = 4.083 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|saddr[5]      ; SCK        ; SCK      ; None                        ; None                      ; 3.781 ns                ;
+; N/A                                     ; 244.92 MHz ( period = 4.083 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|saddr[4]      ; SCK        ; SCK      ; None                        ; None                      ; 3.781 ns                ;
+; N/A                                     ; 244.92 MHz ( period = 4.083 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|saddr[2]      ; SCK        ; SCK      ; None                        ; None                      ; 3.781 ns                ;
+; N/A                                     ; 244.92 MHz ( period = 4.083 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|saddr[0]      ; SCK        ; SCK      ; None                        ; None                      ; 3.781 ns                ;
+; N/A                                     ; 244.92 MHz ( period = 4.083 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|saddr[1]      ; SCK        ; SCK      ; None                        ; None                      ; 3.781 ns                ;
+; N/A                                     ; 244.92 MHz ( period = 4.083 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|saddr[6]      ; SCK        ; SCK      ; None                        ; None                      ; 3.781 ns                ;
+; N/A                                     ; 246.31 MHz ( period = 4.060 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|saddr[3]      ; SCK        ; SCK      ; None                        ; None                      ; 3.758 ns                ;
+; N/A                                     ; 246.31 MHz ( period = 4.060 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|saddr[5]      ; SCK        ; SCK      ; None                        ; None                      ; 3.758 ns                ;
+; N/A                                     ; 246.31 MHz ( period = 4.060 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|saddr[4]      ; SCK        ; SCK      ; None                        ; None                      ; 3.758 ns                ;
+; N/A                                     ; 246.31 MHz ( period = 4.060 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|saddr[2]      ; SCK        ; SCK      ; None                        ; None                      ; 3.758 ns                ;
+; N/A                                     ; 246.31 MHz ( period = 4.060 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|saddr[0]      ; SCK        ; SCK      ; None                        ; None                      ; 3.758 ns                ;
+; N/A                                     ; 246.31 MHz ( period = 4.060 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|saddr[1]      ; SCK        ; SCK      ; None                        ; None                      ; 3.758 ns                ;
+; N/A                                     ; 246.31 MHz ( period = 4.060 ns )                    ; SPI_REGS:spi_regs|sRd           ; SPI_REGS:spi_regs|saddr[6]      ; SCK        ; SCK      ; None                        ; None                      ; 3.758 ns                ;
+; N/A                                     ; 246.67 MHz ( period = 4.054 ns )                    ; SPI_REGS:spi_regs|saddr[1]      ; SPI_REGS:spi_regs|sdata[1]      ; SCK        ; SCK      ; None                        ; None                      ; 3.826 ns                ;
+; N/A                                     ; 247.46 MHz ( period = 4.041 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 3.777 ns                ;
+; N/A                                     ; 247.52 MHz ( period = 4.040 ns )                    ; SPI_REGS:spi_regs|saddr[1]      ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 3.812 ns                ;
+; N/A                                     ; 249.19 MHz ( period = 4.013 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|saddr[3]      ; SCK        ; SCK      ; None                        ; None                      ; 3.711 ns                ;
+; N/A                                     ; 249.19 MHz ( period = 4.013 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|saddr[5]      ; SCK        ; SCK      ; None                        ; None                      ; 3.711 ns                ;
+; N/A                                     ; 249.19 MHz ( period = 4.013 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|saddr[4]      ; SCK        ; SCK      ; None                        ; None                      ; 3.711 ns                ;
+; N/A                                     ; 249.19 MHz ( period = 4.013 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|saddr[2]      ; SCK        ; SCK      ; None                        ; None                      ; 3.711 ns                ;
+; N/A                                     ; 249.19 MHz ( period = 4.013 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|saddr[0]      ; SCK        ; SCK      ; None                        ; None                      ; 3.711 ns                ;
+; N/A                                     ; 249.19 MHz ( period = 4.013 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|saddr[1]      ; SCK        ; SCK      ; None                        ; None                      ; 3.711 ns                ;
+; N/A                                     ; 249.19 MHz ( period = 4.013 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|saddr[6]      ; SCK        ; SCK      ; None                        ; None                      ; 3.711 ns                ;
+; N/A                                     ; 252.59 MHz ( period = 3.959 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|sRd           ; SCK        ; SCK      ; None                        ; None                      ; 3.695 ns                ;
+; N/A                                     ; 252.72 MHz ( period = 3.957 ns )                    ; SPI_REGS:spi_regs|BitCounter[6] ; SPI_REGS:spi_regs|BitCounter[4] ; SCK        ; SCK      ; None                        ; None                      ; 3.693 ns                ;
+; N/A                                     ; 255.23 MHz ( period = 3.918 ns )                    ; SPI_REGS:spi_regs|saddr[1]      ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 3.685 ns                ;
+; N/A                                     ; 255.30 MHz ( period = 3.917 ns )                    ; SPI_REGS:spi_regs|saddr[1]      ; SPI_REGS:spi_regs|sdata[2]      ; SCK        ; SCK      ; None                        ; None                      ; 3.684 ns                ;
+; N/A                                     ; 257.07 MHz ( period = 3.890 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|saddr[3]      ; SCK        ; SCK      ; None                        ; None                      ; 3.588 ns                ;
+; N/A                                     ; 257.07 MHz ( period = 3.890 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|saddr[5]      ; SCK        ; SCK      ; None                        ; None                      ; 3.588 ns                ;
+; N/A                                     ; 257.07 MHz ( period = 3.890 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|saddr[4]      ; SCK        ; SCK      ; None                        ; None                      ; 3.588 ns                ;
+; N/A                                     ; 257.07 MHz ( period = 3.890 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|saddr[2]      ; SCK        ; SCK      ; None                        ; None                      ; 3.588 ns                ;
+; N/A                                     ; 257.07 MHz ( period = 3.890 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|saddr[0]      ; SCK        ; SCK      ; None                        ; None                      ; 3.588 ns                ;
+; N/A                                     ; 257.07 MHz ( period = 3.890 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|saddr[1]      ; SCK        ; SCK      ; None                        ; None                      ; 3.588 ns                ;
+; N/A                                     ; 257.07 MHz ( period = 3.890 ns )                    ; SPI_REGS:spi_regs|BitCounter[2] ; SPI_REGS:spi_regs|saddr[6]      ; SCK        ; SCK      ; None                        ; None                      ; 3.588 ns                ;
+; N/A                                     ; 257.80 MHz ( period = 3.879 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 3.615 ns                ;
+; N/A                                     ; 259.61 MHz ( period = 3.852 ns )                    ; SPI_REGS:spi_regs|saddr[1]      ; SPI_REGS:spi_regs|sdata[3]      ; SCK        ; SCK      ; None                        ; None                      ; 3.624 ns                ;
+; N/A                                     ; 266.17 MHz ( period = 3.757 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|sRd           ; SCK        ; SCK      ; None                        ; None                      ; 3.493 ns                ;
+; N/A                                     ; 266.31 MHz ( period = 3.755 ns )                    ; SPI_REGS:spi_regs|BitCounter[7] ; SPI_REGS:spi_regs|BitCounter[4] ; SCK        ; SCK      ; None                        ; None                      ; 3.491 ns                ;
+; N/A                                     ; 268.10 MHz ( period = 3.730 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|saddr[3]      ; SCK        ; SCK      ; None                        ; None                      ; 3.428 ns                ;
+; N/A                                     ; 268.10 MHz ( period = 3.730 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|saddr[5]      ; SCK        ; SCK      ; None                        ; None                      ; 3.428 ns                ;
+; N/A                                     ; 268.10 MHz ( period = 3.730 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|saddr[4]      ; SCK        ; SCK      ; None                        ; None                      ; 3.428 ns                ;
+; N/A                                     ; 268.10 MHz ( period = 3.730 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|saddr[2]      ; SCK        ; SCK      ; None                        ; None                      ; 3.428 ns                ;
+; N/A                                     ; 268.10 MHz ( period = 3.730 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|saddr[0]      ; SCK        ; SCK      ; None                        ; None                      ; 3.428 ns                ;
+; N/A                                     ; 268.10 MHz ( period = 3.730 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|saddr[1]      ; SCK        ; SCK      ; None                        ; None                      ; 3.428 ns                ;
+; N/A                                     ; 268.10 MHz ( period = 3.730 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|saddr[6]      ; SCK        ; SCK      ; None                        ; None                      ; 3.428 ns                ;
+; N/A                                     ; 271.22 MHz ( period = 3.687 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|sRd           ; SCK        ; SCK      ; None                        ; None                      ; 3.423 ns                ;
+; N/A                                     ; 271.37 MHz ( period = 3.685 ns )                    ; SPI_REGS:spi_regs|BitCounter[4] ; SPI_REGS:spi_regs|BitCounter[4] ; SCK        ; SCK      ; None                        ; None                      ; 3.421 ns                ;
+; N/A                                     ; 272.70 MHz ( period = 3.667 ns )                    ; SPI_REGS:spi_regs|saddr[1]      ; SPI_REGS:spi_regs|sdata[0]      ; SCK        ; SCK      ; None                        ; None                      ; 3.439 ns                ;
+; N/A                                     ; 274.95 MHz ( period = 3.637 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|saddr[3]      ; SCK        ; SCK      ; None                        ; None                      ; 3.335 ns                ;
+; N/A                                     ; 274.95 MHz ( period = 3.637 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|saddr[5]      ; SCK        ; SCK      ; None                        ; None                      ; 3.335 ns                ;
+; N/A                                     ; 274.95 MHz ( period = 3.637 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|saddr[4]      ; SCK        ; SCK      ; None                        ; None                      ; 3.335 ns                ;
+; N/A                                     ; 274.95 MHz ( period = 3.637 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|saddr[2]      ; SCK        ; SCK      ; None                        ; None                      ; 3.335 ns                ;
+; N/A                                     ; 274.95 MHz ( period = 3.637 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|saddr[0]      ; SCK        ; SCK      ; None                        ; None                      ; 3.335 ns                ;
+; N/A                                     ; 274.95 MHz ( period = 3.637 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|saddr[1]      ; SCK        ; SCK      ; None                        ; None                      ; 3.335 ns                ;
+; N/A                                     ; 274.95 MHz ( period = 3.637 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|saddr[6]      ; SCK        ; SCK      ; None                        ; None                      ; 3.335 ns                ;
+; N/A                                     ; 275.03 MHz ( period = 3.636 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 3.372 ns                ;
+; N/A                                     ; 278.86 MHz ( period = 3.586 ns )                    ; SPI_REGS:spi_regs|saddr[3]      ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 3.360 ns                ;
+; N/A                                     ; 282.17 MHz ( period = 3.544 ns )                    ; SPI_REGS:spi_regs|saddr[5]      ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 3.318 ns                ;
+; N/A                                     ; 285.80 MHz ( period = 3.499 ns )                    ; SPI_REGS:spi_regs|saddr[1]      ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 3.271 ns                ;
+; N/A                                     ; 286.12 MHz ( period = 3.495 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|sRd           ; SCK        ; SCK      ; None                        ; None                      ; 3.231 ns                ;
+; N/A                                     ; 286.29 MHz ( period = 3.493 ns )                    ; SPI_REGS:spi_regs|BitCounter[0] ; SPI_REGS:spi_regs|BitCounter[4] ; SCK        ; SCK      ; None                        ; None                      ; 3.229 ns                ;
+; N/A                                     ; 290.95 MHz ( period = 3.437 ns )                    ; SPI_REGS:spi_regs|sdata[5]      ; SPI_REGS:spi_regs|sdata[6]      ; SCK        ; SCK      ; None                        ; None                      ; 3.173 ns                ;
+; N/A                                     ; 293.77 MHz ( period = 3.404 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|sRd           ; SCK        ; SCK      ; None                        ; None                      ; 3.140 ns                ;
+; N/A                                     ; 293.94 MHz ( period = 3.402 ns )                    ; SPI_REGS:spi_regs|BitCounter[5] ; SPI_REGS:spi_regs|BitCounter[4] ; SCK        ; SCK      ; None                        ; None                      ; 3.138 ns                ;
+; N/A                                     ; 310.37 MHz ( period = 3.222 ns )                    ; SPI_REGS:spi_regs|saddr[2]      ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 2.996 ns                ;
+; N/A                                     ; 310.56 MHz ( period = 3.220 ns )                    ; SPI_REGS:spi_regs|BitCounter[1] ; SPI_REGS:spi_regs|BitCounter[4] ; SCK        ; SCK      ; None                        ; None                      ; 2.956 ns                ;
+; N/A                                     ; 317.86 MHz ( period = 3.146 ns )                    ; SPI_REGS:spi_regs|sdata[6]      ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 2.884 ns                ;
+; N/A                                     ; 322.16 MHz ( period = 3.104 ns )                    ; SPI_REGS:spi_regs|sdata[7]      ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 2.840 ns                ;
+; N/A                                     ; 334.78 MHz ( period = 2.987 ns )                    ; SPI_REGS:spi_regs|sdata[3]      ; SPI_REGS:spi_regs|sdata[4]      ; SCK        ; SCK      ; None                        ; None                      ; 2.718 ns                ;
+; N/A                                     ; 336.25 MHz ( period = 2.974 ns )                    ; SPI_REGS:spi_regs|sdata[4]      ; SPI_REGS:spi_regs|sdata[5]      ; SCK        ; SCK      ; None                        ; None                      ; 2.715 ns                ;
+; N/A                                     ; 336.47 MHz ( period = 2.972 ns )                    ; SPI_REGS:spi_regs|saddr[4]      ; SPI_REGS:spi_regs|sdata[7]      ; SCK        ; SCK      ; None                        ; None                      ; 2.746 ns                ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;                                 ;                                 ;            ;          ;                             ;                           ;                         ;
++-----------------------------------------+-----------------------------------------------------+---------------------------------+---------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'FX2_CLK'                                                                                                                                                                                                    ;
++-------+------------------------------------------------+--------------------------+---------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack ; Actual fmax (period)                           ; From                     ; To                        ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-------+------------------------------------------------+--------------------------+---------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A   ; 279.80 MHz ( period = 3.574 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port0reg|OUT[7] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.304 ns                ;
+; N/A   ; 279.80 MHz ( period = 3.574 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port0reg|OUT[6] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.304 ns                ;
+; N/A   ; 279.80 MHz ( period = 3.574 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port0reg|OUT[5] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.304 ns                ;
+; N/A   ; 279.80 MHz ( period = 3.574 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port0reg|OUT[4] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.304 ns                ;
+; N/A   ; 279.80 MHz ( period = 3.574 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port0reg|OUT[3] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.304 ns                ;
+; N/A   ; 279.80 MHz ( period = 3.574 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port0reg|OUT[2] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.304 ns                ;
+; N/A   ; 279.80 MHz ( period = 3.574 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port0reg|OUT[1] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.304 ns                ;
+; N/A   ; 279.80 MHz ( period = 3.574 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port0reg|OUT[0] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.304 ns                ;
+; N/A   ; 296.65 MHz ( period = 3.371 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port1reg|OUT[7] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.102 ns                ;
+; N/A   ; 296.65 MHz ( period = 3.371 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port1reg|OUT[6] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.102 ns                ;
+; N/A   ; 296.65 MHz ( period = 3.371 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port1reg|OUT[5] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.102 ns                ;
+; N/A   ; 296.65 MHz ( period = 3.371 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port1reg|OUT[4] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.102 ns                ;
+; N/A   ; 296.65 MHz ( period = 3.371 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port1reg|OUT[3] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.102 ns                ;
+; N/A   ; 296.65 MHz ( period = 3.371 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port1reg|OUT[2] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.102 ns                ;
+; N/A   ; 296.65 MHz ( period = 3.371 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port1reg|OUT[1] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.102 ns                ;
+; N/A   ; 296.65 MHz ( period = 3.371 ns )               ; SPI_REGS:spi_regs|CS_ph1 ; RegisterX:port1reg|OUT[0] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.102 ns                ;
+; N/A   ; 301.02 MHz ( period = 3.322 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port0reg|OUT[7] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.052 ns                ;
+; N/A   ; 301.02 MHz ( period = 3.322 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port0reg|OUT[6] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.052 ns                ;
+; N/A   ; 301.02 MHz ( period = 3.322 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port0reg|OUT[5] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.052 ns                ;
+; N/A   ; 301.02 MHz ( period = 3.322 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port0reg|OUT[4] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.052 ns                ;
+; N/A   ; 301.02 MHz ( period = 3.322 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port0reg|OUT[3] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.052 ns                ;
+; N/A   ; 301.02 MHz ( period = 3.322 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port0reg|OUT[2] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.052 ns                ;
+; N/A   ; 301.02 MHz ( period = 3.322 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port0reg|OUT[1] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.052 ns                ;
+; N/A   ; 301.02 MHz ( period = 3.322 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port0reg|OUT[0] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.052 ns                ;
+; N/A   ; 320.62 MHz ( period = 3.119 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port1reg|OUT[7] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.850 ns                ;
+; N/A   ; 320.62 MHz ( period = 3.119 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port1reg|OUT[6] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.850 ns                ;
+; N/A   ; 320.62 MHz ( period = 3.119 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port1reg|OUT[5] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.850 ns                ;
+; N/A   ; 320.62 MHz ( period = 3.119 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port1reg|OUT[4] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.850 ns                ;
+; N/A   ; 320.62 MHz ( period = 3.119 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port1reg|OUT[3] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.850 ns                ;
+; N/A   ; 320.62 MHz ( period = 3.119 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port1reg|OUT[2] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.850 ns                ;
+; N/A   ; 320.62 MHz ( period = 3.119 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port1reg|OUT[1] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.850 ns                ;
+; N/A   ; 320.62 MHz ( period = 3.119 ns )               ; SPI_REGS:spi_regs|CS_ph2 ; RegisterX:port1reg|OUT[0] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.850 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; SPI_REGS:spi_regs|CS_ph1 ; SPI_REGS:spi_regs|CS_ph2  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.219 ns                ;
++-------+------------------------------------------------+--------------------------+---------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++--------------------------------------------------------------------------------------+
+; tsu                                                                                  ;
++-------+--------------+------------+----------+----------------------------+----------+
+; Slack ; Required tsu ; Actual tsu ; From     ; To                         ; To Clock ;
++-------+--------------+------------+----------+----------------------------+----------+
+; N/A   ; None         ; 8.626 ns   ; GPIO[23] ; SPI_REGS:spi_regs|sdata[7] ; SCK      ;
+; N/A   ; None         ; 6.363 ns   ; SI       ; SPI_REGS:spi_regs|sdata[0] ; SCK      ;
+; N/A   ; None         ; 6.271 ns   ; GPIO[16] ; SPI_REGS:spi_regs|sdata[0] ; SCK      ;
+; N/A   ; None         ; 6.063 ns   ; GPIO[21] ; SPI_REGS:spi_regs|sdata[5] ; SCK      ;
+; N/A   ; None         ; 5.834 ns   ; GPIO[22] ; SPI_REGS:spi_regs|sdata[6] ; SCK      ;
+; N/A   ; None         ; 5.829 ns   ; GPIO[17] ; SPI_REGS:spi_regs|sdata[1] ; SCK      ;
+; N/A   ; None         ; 5.825 ns   ; CS       ; SPI_REGS:spi_regs|CS_ph1   ; FX2_CLK  ;
+; N/A   ; None         ; 5.603 ns   ; GPIO[19] ; SPI_REGS:spi_regs|sdata[3] ; SCK      ;
+; N/A   ; None         ; 5.586 ns   ; GPIO[18] ; SPI_REGS:spi_regs|sdata[2] ; SCK      ;
+; N/A   ; None         ; 5.576 ns   ; GPIO[20] ; SPI_REGS:spi_regs|sdata[4] ; SCK      ;
+; N/A   ; None         ; 4.620 ns   ; SI       ; SPI_REGS:spi_regs|saddr[0] ; SCK      ;
++-------+--------------+------------+----------+----------------------------+----------+
+
+
++----------------------------------------------------------------------------------------+
+; tco                                                                                    ;
++-------+--------------+------------+----------------------------+----------+------------+
+; Slack ; Required tco ; Actual tco ; From                       ; To       ; From Clock ;
++-------+--------------+------------+----------------------------+----------+------------+
+; N/A   ; None         ; 8.988 ns   ; SPI_REGS:spi_regs|sRd      ; SO       ; SCK        ;
+; N/A   ; None         ; 8.875 ns   ; RegisterX:port1reg|OUT[7]  ; GPIO[15] ; FX2_CLK    ;
+; N/A   ; None         ; 8.799 ns   ; SPI_REGS:spi_regs|sdata[7] ; SO       ; SCK        ;
+; N/A   ; None         ; 8.775 ns   ; RegisterX:port1reg|OUT[3]  ; GPIO[11] ; FX2_CLK    ;
+; N/A   ; None         ; 8.747 ns   ; RegisterX:port1reg|OUT[5]  ; GPIO[13] ; FX2_CLK    ;
+; N/A   ; None         ; 8.738 ns   ; RegisterX:port1reg|OUT[6]  ; GPIO[14] ; FX2_CLK    ;
+; N/A   ; None         ; 8.670 ns   ; RegisterX:port0reg|OUT[5]  ; GPIO[5]  ; FX2_CLK    ;
+; N/A   ; None         ; 8.588 ns   ; RegisterX:port1reg|OUT[0]  ; GPIO[8]  ; FX2_CLK    ;
+; N/A   ; None         ; 8.545 ns   ; RegisterX:port1reg|OUT[2]  ; GPIO[10] ; FX2_CLK    ;
+; N/A   ; None         ; 8.537 ns   ; RegisterX:port0reg|OUT[7]  ; GPIO[7]  ; FX2_CLK    ;
+; N/A   ; None         ; 8.524 ns   ; RegisterX:port0reg|OUT[6]  ; GPIO[6]  ; FX2_CLK    ;
+; N/A   ; None         ; 8.517 ns   ; RegisterX:port1reg|OUT[1]  ; GPIO[9]  ; FX2_CLK    ;
+; N/A   ; None         ; 8.492 ns   ; RegisterX:port1reg|OUT[4]  ; GPIO[12] ; FX2_CLK    ;
+; N/A   ; None         ; 8.173 ns   ; RegisterX:port0reg|OUT[3]  ; GPIO[3]  ; FX2_CLK    ;
+; N/A   ; None         ; 8.165 ns   ; RegisterX:port0reg|OUT[0]  ; GPIO[0]  ; FX2_CLK    ;
+; N/A   ; None         ; 7.760 ns   ; RegisterX:port0reg|OUT[2]  ; GPIO[2]  ; FX2_CLK    ;
+; N/A   ; None         ; 7.754 ns   ; RegisterX:port0reg|OUT[1]  ; GPIO[1]  ; FX2_CLK    ;
+; N/A   ; None         ; 7.753 ns   ; RegisterX:port0reg|OUT[4]  ; GPIO[4]  ; FX2_CLK    ;
++-------+--------------+------------+----------------------------+----------+------------+
+
+
++--------------------------------------------------------------------------------------------+
+; th                                                                                         ;
++---------------+-------------+-----------+----------+----------------------------+----------+
+; Minimum Slack ; Required th ; Actual th ; From     ; To                         ; To Clock ;
++---------------+-------------+-----------+----------+----------------------------+----------+
+; N/A           ; None        ; -4.354 ns ; SI       ; SPI_REGS:spi_regs|saddr[0] ; SCK      ;
+; N/A           ; None        ; -5.310 ns ; GPIO[20] ; SPI_REGS:spi_regs|sdata[4] ; SCK      ;
+; N/A           ; None        ; -5.320 ns ; GPIO[18] ; SPI_REGS:spi_regs|sdata[2] ; SCK      ;
+; N/A           ; None        ; -5.337 ns ; GPIO[19] ; SPI_REGS:spi_regs|sdata[3] ; SCK      ;
+; N/A           ; None        ; -5.559 ns ; CS       ; SPI_REGS:spi_regs|CS_ph1   ; FX2_CLK  ;
+; N/A           ; None        ; -5.563 ns ; GPIO[17] ; SPI_REGS:spi_regs|sdata[1] ; SCK      ;
+; N/A           ; None        ; -5.568 ns ; GPIO[22] ; SPI_REGS:spi_regs|sdata[6] ; SCK      ;
+; N/A           ; None        ; -5.797 ns ; GPIO[21] ; SPI_REGS:spi_regs|sdata[5] ; SCK      ;
+; N/A           ; None        ; -6.005 ns ; GPIO[16] ; SPI_REGS:spi_regs|sdata[0] ; SCK      ;
+; N/A           ; None        ; -6.097 ns ; SI       ; SPI_REGS:spi_regs|sdata[0] ; SCK      ;
+; N/A           ; None        ; -8.360 ns ; GPIO[23] ; SPI_REGS:spi_regs|sdata[7] ; SCK      ;
++---------------+-------------+-----------+----------+----------------------------+----------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Timing Analyzer
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Fri Aug 18 16:07:45 2006
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off gpio_control -c gpio_control --timing_analysis_only
+Warning: Found pins functioning as undefined clocks and/or memory enables
+    Info: Assuming node "SCK" is an undefined clock
+    Info: Assuming node "FX2_CLK" is an undefined clock
+Info: Clock "SCK" has Internal fmax of 140.71 MHz between source register "SPI_REGS:spi_regs|BitCounter[3]" and destination register "SPI_REGS:spi_regs|sdata[1]" (period= 7.107 ns)
+    Info: + Longest register to register delay is 6.841 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X8_Y7_N19; Fanout = 7; REG Node = 'SPI_REGS:spi_regs|BitCounter[3]'
+        Info: 2: + IC(0.780 ns) + CELL(0.616 ns) = 1.396 ns; Loc. = LCCOMB_X9_Y7_N8; Fanout = 2; COMB Node = 'SPI_REGS:spi_regs|always2~53'
+        Info: 3: + IC(0.374 ns) + CELL(0.370 ns) = 2.140 ns; Loc. = LCCOMB_X9_Y7_N0; Fanout = 4; COMB Node = 'SPI_REGS:spi_regs|always2~54'
+        Info: 4: + IC(1.062 ns) + CELL(0.206 ns) = 3.408 ns; Loc. = LCCOMB_X12_Y7_N22; Fanout = 11; COMB Node = 'SPI_REGS:spi_regs|sdata[6]~1241'
+        Info: 5: + IC(1.098 ns) + CELL(0.589 ns) = 5.095 ns; Loc. = LCCOMB_X9_Y7_N26; Fanout = 1; COMB Node = 'SPI_REGS:spi_regs|sdata~1250'
+        Info: 6: + IC(0.680 ns) + CELL(0.206 ns) = 5.981 ns; Loc. = LCCOMB_X10_Y7_N16; Fanout = 1; COMB Node = 'SPI_REGS:spi_regs|sdata~1251'
+        Info: 7: + IC(0.382 ns) + CELL(0.370 ns) = 6.733 ns; Loc. = LCCOMB_X10_Y7_N12; Fanout = 1; COMB Node = 'SPI_REGS:spi_regs|sdata~1252'
+        Info: 8: + IC(0.000 ns) + CELL(0.108 ns) = 6.841 ns; Loc. = LCFF_X10_Y7_N13; Fanout = 3; REG Node = 'SPI_REGS:spi_regs|sdata[1]'
+        Info: Total cell delay = 2.465 ns ( 36.03 % )
+        Info: Total interconnect delay = 4.376 ns ( 63.97 % )
+    Info: - Smallest clock skew is -0.002 ns
+        Info: + Shortest clock path from clock "SCK" to destination register is 3.550 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.995 ns) = 0.995 ns; Loc. = PIN_15; Fanout = 24; CLK Node = 'SCK'
+            Info: 2: + IC(1.889 ns) + CELL(0.666 ns) = 3.550 ns; Loc. = LCFF_X10_Y7_N13; Fanout = 3; REG Node = 'SPI_REGS:spi_regs|sdata[1]'
+            Info: Total cell delay = 1.661 ns ( 46.79 % )
+            Info: Total interconnect delay = 1.889 ns ( 53.21 % )
+        Info: - Longest clock path from clock "SCK" to source register is 3.552 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.995 ns) = 0.995 ns; Loc. = PIN_15; Fanout = 24; CLK Node = 'SCK'
+            Info: 2: + IC(1.891 ns) + CELL(0.666 ns) = 3.552 ns; Loc. = LCFF_X8_Y7_N19; Fanout = 7; REG Node = 'SPI_REGS:spi_regs|BitCounter[3]'
+            Info: Total cell delay = 1.661 ns ( 46.76 % )
+            Info: Total interconnect delay = 1.891 ns ( 53.24 % )
+    Info: + Micro clock to output delay of source is 0.304 ns
+    Info: + Micro setup delay of destination is -0.040 ns
+Info: Clock "FX2_CLK" has Internal fmax of 279.8 MHz between source register "SPI_REGS:spi_regs|CS_ph1" and destination register "RegisterX:port0reg|OUT[7]" (period= 3.574 ns)
+    Info: + Longest register to register delay is 3.304 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X12_Y7_N3; Fanout = 2; REG Node = 'SPI_REGS:spi_regs|CS_ph1'
+        Info: 2: + IC(0.443 ns) + CELL(0.202 ns) = 0.645 ns; Loc. = LCCOMB_X12_Y7_N8; Fanout = 2; COMB Node = 'RegisterX:port1reg|always0~29'
+        Info: 3: + IC(1.042 ns) + CELL(0.206 ns) = 1.893 ns; Loc. = LCCOMB_X10_Y7_N14; Fanout = 8; COMB Node = 'RegisterX:port0reg|always0~17'
+        Info: 4: + IC(0.556 ns) + CELL(0.855 ns) = 3.304 ns; Loc. = LCFF_X9_Y7_N3; Fanout = 2; REG Node = 'RegisterX:port0reg|OUT[7]'
+        Info: Total cell delay = 1.263 ns ( 38.23 % )
+        Info: Total interconnect delay = 2.041 ns ( 61.77 % )
+    Info: - Smallest clock skew is -0.006 ns
+        Info: + Shortest clock path from clock "FX2_CLK" to destination register is 2.759 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'FX2_CLK'
+            Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 18; COMB Node = 'FX2_CLK~clkctrl'
+            Info: 3: + IC(0.810 ns) + CELL(0.666 ns) = 2.759 ns; Loc. = LCFF_X9_Y7_N3; Fanout = 2; REG Node = 'RegisterX:port0reg|OUT[7]'
+            Info: Total cell delay = 1.806 ns ( 65.46 % )
+            Info: Total interconnect delay = 0.953 ns ( 34.54 % )
+        Info: - Longest clock path from clock "FX2_CLK" to source register is 2.765 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'FX2_CLK'
+            Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 18; COMB Node = 'FX2_CLK~clkctrl'
+            Info: 3: + IC(0.816 ns) + CELL(0.666 ns) = 2.765 ns; Loc. = LCFF_X12_Y7_N3; Fanout = 2; REG Node = 'SPI_REGS:spi_regs|CS_ph1'
+            Info: Total cell delay = 1.806 ns ( 65.32 % )
+            Info: Total interconnect delay = 0.959 ns ( 34.68 % )
+    Info: + Micro clock to output delay of source is 0.304 ns
+    Info: + Micro setup delay of destination is -0.040 ns
+Info: tsu for register "SPI_REGS:spi_regs|sdata[7]" (data pin = "GPIO[23]", clock pin = "SCK") is 8.626 ns
+    Info: + Longest pin to register delay is 12.218 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = PIN_99; Fanout = 1; PIN Node = 'GPIO[23]'
+        Info: 2: + IC(0.000 ns) + CELL(0.984 ns) = 0.984 ns; Loc. = IOC_X24_Y0_N0; Fanout = 1; COMB Node = 'GPIO[23]~0'
+        Info: 3: + IC(7.262 ns) + CELL(0.651 ns) = 8.897 ns; Loc. = LCCOMB_X9_Y7_N2; Fanout = 1; COMB Node = 'SPI_REGS:spi_regs|Selector0~170'
+        Info: 4: + IC(0.697 ns) + CELL(0.650 ns) = 10.244 ns; Loc. = LCCOMB_X10_Y7_N28; Fanout = 1; COMB Node = 'SPI_REGS:spi_regs|Selector0~171'
+        Info: 5: + IC(1.660 ns) + CELL(0.206 ns) = 12.110 ns; Loc. = LCCOMB_X8_Y7_N4; Fanout = 1; COMB Node = 'SPI_REGS:spi_regs|sdata~1240'
+        Info: 6: + IC(0.000 ns) + CELL(0.108 ns) = 12.218 ns; Loc. = LCFF_X8_Y7_N5; Fanout = 4; REG Node = 'SPI_REGS:spi_regs|sdata[7]'
+        Info: Total cell delay = 2.599 ns ( 21.27 % )
+        Info: Total interconnect delay = 9.619 ns ( 78.73 % )
+    Info: + Micro setup delay of destination is -0.040 ns
+    Info: - Shortest clock path from clock "SCK" to destination register is 3.552 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.995 ns) = 0.995 ns; Loc. = PIN_15; Fanout = 24; CLK Node = 'SCK'
+        Info: 2: + IC(1.891 ns) + CELL(0.666 ns) = 3.552 ns; Loc. = LCFF_X8_Y7_N5; Fanout = 4; REG Node = 'SPI_REGS:spi_regs|sdata[7]'
+        Info: Total cell delay = 1.661 ns ( 46.76 % )
+        Info: Total interconnect delay = 1.891 ns ( 53.24 % )
+Info: tco from clock "SCK" to destination pin "SO" through register "SPI_REGS:spi_regs|sRd" is 8.988 ns
+    Info: + Longest clock path from clock "SCK" to source register is 3.552 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.995 ns) = 0.995 ns; Loc. = PIN_15; Fanout = 24; CLK Node = 'SCK'
+        Info: 2: + IC(1.891 ns) + CELL(0.666 ns) = 3.552 ns; Loc. = LCFF_X8_Y7_N1; Fanout = 3; REG Node = 'SPI_REGS:spi_regs|sRd'
+        Info: Total cell delay = 1.661 ns ( 46.76 % )
+        Info: Total interconnect delay = 1.891 ns ( 53.24 % )
+    Info: + Micro clock to output delay of source is 0.304 ns
+    Info: + Longest register to pin delay is 5.132 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X8_Y7_N1; Fanout = 3; REG Node = 'SPI_REGS:spi_regs|sRd'
+        Info: 2: + IC(1.987 ns) + CELL(3.145 ns) = 5.132 ns; Loc. = PIN_12; Fanout = 0; PIN Node = 'SO'
+        Info: Total cell delay = 3.145 ns ( 61.28 % )
+        Info: Total interconnect delay = 1.987 ns ( 38.72 % )
+Info: th for register "SPI_REGS:spi_regs|saddr[0]" (data pin = "SI", clock pin = "SCK") is -4.354 ns
+    Info: + Longest clock path from clock "SCK" to destination register is 3.514 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.995 ns) = 0.995 ns; Loc. = PIN_15; Fanout = 24; CLK Node = 'SCK'
+        Info: 2: + IC(1.853 ns) + CELL(0.666 ns) = 3.514 ns; Loc. = LCFF_X12_Y7_N27; Fanout = 7; REG Node = 'SPI_REGS:spi_regs|saddr[0]'
+        Info: Total cell delay = 1.661 ns ( 47.27 % )
+        Info: Total interconnect delay = 1.853 ns ( 52.73 % )
+    Info: + Micro hold delay of destination is 0.306 ns
+    Info: - Shortest pin to register delay is 8.174 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.995 ns) = 0.995 ns; Loc. = PIN_14; Fanout = 2; PIN Node = 'SI'
+        Info: 2: + IC(6.719 ns) + CELL(0.460 ns) = 8.174 ns; Loc. = LCFF_X12_Y7_N27; Fanout = 7; REG Node = 'SPI_REGS:spi_regs|saddr[0]'
+        Info: Total cell delay = 1.455 ns ( 17.80 % )
+        Info: Total interconnect delay = 6.719 ns ( 82.20 % )
+Info: Quartus II Timing Analyzer was successful. 0 errors, 1 warning
+    Info: Processing ended: Fri Aug 18 16:07:45 2006
+    Info: Elapsed time: 00:00:01
+
+

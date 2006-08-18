@@ -1,0 +1,12 @@
+Analysis & Synthesis Status : Successful - Fri Aug 18 16:07:26 2006
+Quartus II Version : 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
+Revision Name : gpio_control
+Top-level Entity Name : gpio_control
+Family : Cyclone II
+Total logic elements : 47
+Total registers : 42
+Total pins : 29
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

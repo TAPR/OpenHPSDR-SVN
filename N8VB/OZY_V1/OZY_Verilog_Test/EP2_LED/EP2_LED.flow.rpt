@@ -1,5 +1,5 @@
 Flow report for EP2_LED
-Thu Aug 17 18:36:14 2006
+Fri Aug 18 12:59:48 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Thu Aug 17 18:36:14 2006        ;
+; Flow Status                        ; Successful - Fri Aug 18 12:59:48 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; EP2_LED                                      ;
 ; Top-level Entity Name              ; EP2_LED                                      ;
@@ -45,7 +45,7 @@ applicable agreement for further details.
 ; Device                             ; EP2C5Q208C8                                  ;
 ; Timing Models                      ; Final                                        ;
 ; Met timing requirements            ; Yes                                          ;
-; Total logic elements               ; 99 / 4,608 ( 2 % )                           ;
+; Total logic elements               ; 102 / 4,608 ( 2 % )                          ;
 ; Total registers                    ; 69                                           ;
 ; Total pins                         ; 39 / 142 ( 27 % )                            ;
 ; Total virtual pins                 ; 0                                            ;
@@ -60,7 +60,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/17/2006 18:35:47 ;
+; Start date & time ; 08/18/2006 12:59:23 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; EP2_LED             ;
 +-------------------+---------------------+
@@ -83,10 +83,10 @@ applicable agreement for further details.
 ; Module Name          ; Elapsed Time ;
 +----------------------+--------------+
 ; Analysis & Synthesis ; 00:00:04     ;
-; Fitter               ; 00:00:10     ;
-; Assembler            ; 00:00:04     ;
+; Fitter               ; 00:00:09     ;
+; Assembler            ; 00:00:03     ;
 ; Timing Analyzer      ; 00:00:02     ;
-; Total                ; 00:00:20     ;
+; Total                ; 00:00:18     ;
 +----------------------+--------------+
 
 

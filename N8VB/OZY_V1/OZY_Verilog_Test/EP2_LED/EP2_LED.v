@@ -38,7 +38,7 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 	output [7:0] LEDS;
 	input PA0;
 	input PA1;
-	output PA3;
+	inout PA3;
 	input PE7;
 	
 	reg [15:0] Tx_register;
@@ -55,11 +55,7 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 	wire [6:0] 	serial_address;
 	wire [7:0] 	serial_data;
 	wire		serial_strobe;
-	
-	wire [7:0] crap_reg;
-	
-	assign crap_reg = 8'h33;
-	
+			
 	`define PORT0REG 1'b1
 					
 	SPI_REGS SPI_REGS(  .FX2_CLK(FX2_CLK),
@@ -70,7 +66,7 @@ module EP2_LED(FX2_CLK, IFCLK, FLAGA, FLAGB, FLAGC, FX2_FD, SLWR, SLRD, SLOE, PK
 						.saddr(serial_address),
 						.sdata(serial_data),
 						.sstrobe(serial_strobe),
-						.GPReg0(crap_reg),
+						.GPReg0(NLEDS),
 						.GPReg1(),
 						.GPReg2(),
 						.GPReg3(),

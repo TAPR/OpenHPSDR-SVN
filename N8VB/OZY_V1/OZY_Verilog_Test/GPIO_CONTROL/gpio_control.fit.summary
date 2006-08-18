@@ -1,0 +1,14 @@
+Fitter Status : Successful - Fri Aug 18 16:07:36 2006
+Quartus II Version : 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
+Revision Name : gpio_control
+Top-level Entity Name : gpio_control
+Family : Cyclone II
+Device : EP2C5Q208C8
+Timing Models : Final
+Total logic elements : 52 / 4,608 ( 1 % )
+Total registers : 42
+Total pins : 29 / 142 ( 20 % )
+Total virtual pins : 0
+Total memory bits : 0 / 119,808 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 26 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )

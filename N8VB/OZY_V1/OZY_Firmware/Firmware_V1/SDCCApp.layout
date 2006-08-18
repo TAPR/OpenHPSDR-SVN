@@ -1,14 +1,17 @@
 <?xml version="1.0"?>
 <!DOCTYPE CodeBlocks_layout_file>
 <CodeBlocks_layout_file>
-	<File name="Initial\src\hpsdr_main.c" open="1" top="1">
-		<Cursor position="0" topLine="94"/>
+	<File name="Initial\include\hpsdr_rev1_regs.h" open="1" top="1">
+		<Cursor position="1334" topLine="17"/>
 	</File>
-	<File name="Initial\src\lib\spi.c" open="1" top="0">
-		<Cursor position="0" topLine="154"/>
+	<File name="Initial\src\hpsdr_common.c" open="1" top="0">
+		<Cursor position="1084" topLine="27"/>
 	</File>
 	<Expand folder="/Sources/Initial/src/lib"/>
 	<Expand folder="/Sources/Initial/src"/>
 	<Expand folder="/Sources/Initial"/>
 	<Expand folder="/Sources"/>
+	<Expand folder="/Headers/Initial/include"/>
+	<Expand folder="/Headers/Initial"/>
+	<Expand folder="/Headers"/>
 </CodeBlocks_layout_file>

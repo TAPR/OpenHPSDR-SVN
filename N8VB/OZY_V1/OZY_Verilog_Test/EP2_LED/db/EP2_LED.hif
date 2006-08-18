@@ -59,7 +59,7 @@ ON
 # case_sensitive
 # source_file
 SPI_REGS.v
-2874c1cc4d4e57bbca49962cd07110
+d12c44156059d9d17add84b3bffe945a
 7
 # internal_option {
 AUTO_RESOURCE_SHARING
@@ -81,7 +81,7 @@ ON
 # case_sensitive
 # source_file
 EP2_LED.v
-ec20584036341a53d081a11ac9e9a79
+f74ccfd6d9f66badd8ee339780bdfc30
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

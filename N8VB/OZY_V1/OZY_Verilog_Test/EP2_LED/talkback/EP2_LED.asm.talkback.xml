@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Thu Aug 17 18:36:10 2006) contains limited information
+This XML file (created on Fri Aug 18 12:59:44 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus_asm</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Thu Aug 17 18:36:10 2006</compilation_end_time>
+	<compilation_end_time>Fri Aug 18 12:59:45 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/EP2_LED/EP2_LED</project>
 <revision>EP2_LED</revision>
 <compilation_summary>
-	<flow_status>Successful - Thu Aug 17 18:36:10 2006</flow_status>
+	<flow_status>Successful - Fri Aug 18 12:59:44 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>EP2_LED</revision_name>
 	<top_level_entity_name>EP2_LED</top_level_entity_name>
@@ -45,7 +45,7 @@ to license.txt.
 	<device>EP2C5Q208C8</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>N/A</met_timing_requirements>
-	<total_logic_elements>99 / 4,608 ( 2 % )</total_logic_elements>
+	<total_logic_elements>102 / 4,608 ( 2 % )</total_logic_elements>
 	<total_registers>69</total_registers>
 	<total_pins>39 / 142 ( 27 % )</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
@@ -61,8 +61,8 @@ to license.txt.
 </software_data>
 <messages>
 	<info>Info: Quartus II Assembler was successful. 0 errors, 0 warnings</info>
-	<info>Info: Elapsed time: 00:00:04</info>
-	<info>Info: Processing ended: Thu Aug 17 18:36:10 2006</info>
+	<info>Info: Elapsed time: 00:00:03</info>
+	<info>Info: Processing ended: Fri Aug 18 12:59:44 2006</info>
 	<info>Info: Assembler is generating device programming files</info>
 	<info>Info: Writing out detailed assembly data for power analysis</info>
 </messages>

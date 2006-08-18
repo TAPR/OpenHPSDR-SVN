@@ -6,6 +6,8 @@
 //
 //	GPIO SPI REGS for OZY V1
 //
+//	Based on USRP code, Copyright (C) 2003,2004 Matt Ettus
+//
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation; either version 2 of the License, or
@@ -41,7 +43,7 @@ module SPI_REGS(FX2_CLK,SI,SO,SCK,CS,saddr,sdata,
  input 	SI;					// serial data input 
  input 	CS;					// chip select - active high
  inout wire SO;				// serial data output
- output reg [6:0] saddr;	// serial address
+ output reg [6:0] saddr;	// serial address 7 bits
  output reg [7:0] sdata;	// serial data
  output wire sstrobe;		// serial strobe
  input	[7:0] GPReg0;
@@ -57,10 +59,9 @@ module SPI_REGS(FX2_CLK,SI,SO,SCK,CS,saddr,sdata,
 // DECLARATIONS
 // -------------------------------------------------------------------------
 
- reg		sRd;				// serial Read
+ reg		sRd;				// serial Read, asserted in read cycle
  reg [7:0] 	BitCounter;			// Bit Counter
- reg		wrDone;				// write Done
- 
+  
  reg		CS_ph1;				// Chip select phase 1
  reg		CS_ph2;				// Chip select phase 2
  
@@ -69,7 +70,7 @@ module SPI_REGS(FX2_CLK,SI,SO,SCK,CS,saddr,sdata,
 // -------------------------------------------------------------------------
 //
 //	
- assign SO = (sRd) ? sdata[7] : 1'bz;
+ assign SO = sRd ? sdata[7] : 1'bz; // drive SO when in read, otherwise hi-z
 	
 // -------------------------------------------------------------------------
 // 1.01: Bit Clock Counter
@@ -78,7 +79,7 @@ module SPI_REGS(FX2_CLK,SI,SO,SCK,CS,saddr,sdata,
 	always @(posedge SCK, negedge CS) begin
 		if (~CS)
 			BitCounter <= 8'd0;
-		else if (BitCounter == 15)
+		else if (BitCounter == 15)  // reset BitCounter when 16 bits xfered
 			BitCounter <= 8'd0;
 		else
 			BitCounter <= BitCounter + 8'd1;
@@ -87,11 +88,16 @@ module SPI_REGS(FX2_CLK,SI,SO,SCK,CS,saddr,sdata,
 // -------------------------------------------------------------------------
 // 1.02: Instruction Decoder
 // -------------------------------------------------------------------------
-
+	
+	// saddr 6 5 4 3 2 1 0
+	//       x a a a a a a
+	// x = 1 for read, 0 for write (in bit 7 of address)
+	// a = address, up to 64 registers
+	
 	always @(posedge SCK, negedge CS) begin
 		if (~CS)
 			sRd <= 1'b0;
-		else if ((BitCounter == 7)&&(saddr[6] == 1'b1))
+		else if ((BitCounter == 7)&&(saddr[5] == 1'b1)) // read set
 			sRd <= 1'b1;
 	end
 	
@@ -99,39 +105,30 @@ module SPI_REGS(FX2_CLK,SI,SO,SCK,CS,saddr,sdata,
 // 1.03: Address Decoder / Data Decoder
 // -------------------------------------------------------------------------
 
-	always @(posedge SCK) begin
-		if (~CS) begin
-			wrDone <= 1'b0;
-		end
-		else begin
-			if (~sRd && (BitCounter == 15))
-				wrDone <= 1'b1;
-			else
-				wrDone <= 1'b0;
-			if (sRd & (BitCounter == 8)) begin
-				case (saddr[5:0])
-					6'd1: sdata <= GPReg0;
-					6'd2: sdata <= GPReg1;
-					6'd3: sdata <= GPReg2;
-					6'd4: sdata <= GPReg3;
-					6'd5: sdata <= GPReg4;
-					6'd6: sdata <= GPReg5;
-					6'd7: sdata <= GPReg6;
-					6'd8: sdata <= GPReg7;
-					default: sdata <= 8'd0;
-				endcase
-			end
-			else if (BitCounter >= 8)
-				sdata <= {sdata[6:0], SI};
-			else if (BitCounter < 8)
-				saddr <= {saddr[5:0], SI};
-		end		
+	always @(posedge SCK) begin		
+		if (sRd & (BitCounter == 8)) // xfer readback registers into sdata
+			case (saddr[5:0])		 // for transmission
+				6'd1: sdata <= GPReg0;
+				6'd2: sdata <= GPReg1;
+				6'd3: sdata <= GPReg2;
+				6'd4: sdata <= GPReg3;
+				6'd5: sdata <= GPReg4;
+				6'd6: sdata <= GPReg5;
+				6'd7: sdata <= GPReg6;
+				6'd8: sdata <= GPReg7;
+				default: sdata <= 8'd0;
+			endcase			
+		else if (BitCounter >= 8)
+			sdata <= {sdata[6:0], SI}; // read in data byte, shift data out
+		else if (BitCounter < 8)
+			saddr <= {saddr[5:0], SI}; // read in address byte		
 	end
 	
 // -------------------------------------------------------------------------
 // 1.04: Serial Strobe Generator
 // -------------------------------------------------------------------------
 
+	// generate a strobe to indicate serial data was transferred
 	always @(posedge FX2_CLK) begin
 		CS_ph1 <= CS;
 		CS_ph2 <= CS_ph1;
