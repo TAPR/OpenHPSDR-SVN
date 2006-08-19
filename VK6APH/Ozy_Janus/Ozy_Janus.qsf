@@ -45,16 +45,16 @@ set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 8 -section_id "TLV BCL
 set_instance_assignment -name CLOCK_SETTINGS "TLV BCLK" -to CBCLK
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
-set_location_assignment PIN_120 -to CLK_24MHZ
-set_location_assignment PIN_127 -to BCLK
-set_location_assignment PIN_128 -to DOUT
-set_location_assignment PIN_133 -to LRCLK
-set_location_assignment PIN_144 -to I_PWM_out
-set_location_assignment PIN_113 -to Q_PWM_out
-set_location_assignment PIN_139 -to CBCLK
-set_location_assignment PIN_117 -to CDOUT
-set_location_assignment PIN_116 -to CDIN
-set_location_assignment PIN_141 -to CLRCLK
+set_location_assignment PIN_144 -to CLK_24MHZ
+set_location_assignment PIN_143 -to BCLK
+set_location_assignment PIN_138 -to DOUT
+set_location_assignment PIN_142 -to LRCLK
+set_location_assignment PIN_145 -to I_PWM_out
+set_location_assignment PIN_146 -to Q_PWM_out
+set_location_assignment PIN_141 -to CBCLK
+set_location_assignment PIN_137 -to CDOUT
+set_location_assignment PIN_135 -to CDIN
+set_location_assignment PIN_139 -to CLRCLK
 set_location_assignment PIN_23 -to FX2_CLK
 set_location_assignment PIN_56 -to FX2_FD[0]
 set_location_assignment PIN_57 -to FX2_FD[1]
@@ -107,7 +107,7 @@ set_global_assignment -name VERILOG_FILE Ozy_Janus.v
 set_global_assignment -name VERILOG_FILE Rx_fifo.v
 set_location_assignment PIN_147 -to AK_reset
 set_location_assignment PIN_134 -to DFS0
-set_location_assignment PIN_118 -to DFS1
-set_location_assignment PIN_146 -to PTT_in
+set_location_assignment PIN_133 -to DFS1
+set_location_assignment PIN_128 -to PTT_in
 set_location_assignment PIN_97 -to dot
 set_location_assignment PIN_96 -to dash

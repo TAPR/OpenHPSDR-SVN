@@ -121,6 +121,7 @@
 //				Added PTT from PowerSDR and Janus - 14 Aug 2006
 //				Added CW key inputs - 14 Aug 2006 
 //				Speed up PTT and CW code - 15 Aug 2006
+//				Changed Atlas bus connections to free I2C pins - 19 Aug 2006
 //
 // 	
 ////////////////////////////////////////////////////////////
@@ -134,23 +135,25 @@
 //
 //   AK5394A and LTV320AIC23B connections to OZY FPGA pins
 //
-//   24.576MHZ clock - pin 120 - (CLK_24MHZ)
-//   BCLK			 - pin 127 - AK5394A (SCLK)
-//   DOUT 			 - pin 128 - AK5394A
-//   LRCLK 		     - pin 133 - AK5394A
-//   I_PWM_out	 	 - pin 144
-//   Q_PWM_out		 - pin 113
-//   PTT	 		 - pin 137
-//   CBCLK			 - pin 139 - TLV320
-//   CDOUT			 - pin 117 - TLV320
-//   CDIN			 - pin 116 - TLV320
-//   CLRCLK			 - pin 141 - TLV320 
-//   DFS0		   	 - pin 134 - AK5394A speed setting
-//   DFS1			 - pin 118 - AK5394A speed setting
-//	 AK_reset		 - pin 147 - AK5394A reset 			- Atlas C2 
-//	 PTT_in			 - pin 146 - PTT input from Janus 	- Atlas C3
-//	 dot			 - pin 97  - dot key 	- DB9 pin 7
-//	 dash			 - pin 96  - dash key 	- DB9 pin 6
+//	 AK_reset		 - Atlas C2  - pin 147 - AK5394A reset 
+//   Q_PWM_out		 - Atlas C3  - pin 146
+//   I_PWM_out	 	 - Atlas C4  - pin 145
+//   24.576MHZ clock - Atlas C5	 - pin 144 - (CLK_24MHZ)
+//   BCLK			 - Atlas C6	 - pin 143 - AK5394A (SCLK)
+//   LRCLK 		     - Atlas C7  - pin 142 - AK5394A
+//   CBCLK			 - Atlas C8  - pin 141 - TLV320
+//   CLRCLK			 - Atlas C9  - pin 139 - TLV320 
+//   DOUT 			 - Atlas C10 - pin 138 - AK5394A
+//   CDOUT			 - Atlas C11 - pin 137 - TLV320
+//   CDIN			 - Atlas C12 - pin 135 - TLV320
+//   DFS0		   	 - Atlas C13 - pin 134 - AK5394A speed setting
+//   DFS1			 - Atlas C14 - pin 133 - AK5394A speed setting
+//	 PTT_in			 - Atlas C15 - pin 128 - PTT input from Janus 	
+//
+//	 DB9 - pin connections 
+//
+//	 dot			 - Atlas	   pin 97  - PTT/dot key - DB9 pin 7
+//	 dash			 - Atlas	   pin 96  - dash key 	 - DB9 pin 6
 //
 //
 //	 FX2 pin    to   FPGA pin connections
@@ -204,12 +207,8 @@
 //
 //////////////////////////////////////////////////////////////
 
-//  replace SO, S1 with DFS0 and DFS1.  
-// 	combine states in Rx code where indicated 
+//
 //	check pin names are consistent all the way through
-//	activate dot, dash and PTT inputs with debounce
-//  decode C&C data 
-//	encode C&C data
 //  make output data/levels safe when sync is lost 
 //
 
@@ -990,7 +989,7 @@ assign LED[0] = ~write_full; 		// LED D1 on when Rx fifo is full.
 assign LED[1] = ~EP6_ready;			// LED D3 on when we can write to EP6
 assign LED[2] = ~have_sync; 		// LED D4 toggles each time we get sync
 assign LED[3] = ~EP2_has_data; 		//1'b1;
-assign LED[4] =  1'b1;
+assign LED[4] = ~clean_PTT_in;
 assign LED[5] = ~PTT_out;			// Led on when PTT active
 assign LED[6] = dot;
 assign LED[7] = dash; 

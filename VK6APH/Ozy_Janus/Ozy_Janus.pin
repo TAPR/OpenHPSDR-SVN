@@ -169,40 +169,40 @@ VCCIO3                       : 109       : power  :                   : 3.3V    
 RESERVED_INPUT               : 110       :        :                   :         : 3         :                
 GND                          : 111       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 112       :        :                   :         : 3         :                
-Q_PWM_out                    : 113       : output : LVTTL             :         : 3         : Y              
+RESERVED_INPUT               : 113       :        :                   :         : 3         :                
 RESERVED_INPUT               : 114       :        :                   :         : 3         :                
 RESERVED_INPUT               : 115       :        :                   :         : 3         :                
-CDIN                         : 116       : output : LVTTL             :         : 3         : Y              
-CDOUT                        : 117       : input  : LVTTL             :         : 3         : Y              
-DFS1                         : 118       : output : LVTTL             :         : 3         : Y              
+RESERVED_INPUT               : 116       :        :                   :         : 3         :                
+RESERVED_INPUT               : 117       :        :                   :         : 3         :                
+RESERVED_INPUT               : 118       :        :                   :         : 3         :                
 RESERVED_INPUT               : 119       :        :                   :         : 3         :                
-CLK_24MHZ                    : 120       : input  : LVTTL             :         : 3         : Y              
+RESERVED_INPUT               : 120       :        :                   :         : 3         :                
 nSTATUS                      : 121       :        :                   :         : 3         :                
 VCCIO3                       : 122       : power  :                   : 3.3V    : 3         :                
 CONF_DONE                    : 123       :        :                   :         : 3         :                
 GND                          : 124       : gnd    :                   :         :           :                
 MSEL1                        : 125       :        :                   :         : 3         :                
 MSEL0                        : 126       :        :                   :         : 3         :                
-BCLK                         : 127       : input  : LVTTL             :         : 3         : Y              
-DOUT                         : 128       : input  : LVTTL             :         : 3         : Y              
+RESERVED_INPUT               : 127       :        :                   :         : 3         :                
+PTT_in                       : 128       : input  : LVTTL             :         : 3         : Y              
 GND+                         : 129       :        :                   :         : 3         :                
 GND+                         : 130       :        :                   :         : 3         :                
 GND+                         : 131       :        :                   :         : 3         :                
 GND+                         : 132       :        :                   :         : 3         :                
-LRCLK                        : 133       : input  : LVTTL             :         : 3         : Y              
+DFS1                         : 133       : output : LVTTL             :         : 3         : Y              
 DFS0                         : 134       : output : LVTTL             :         : 3         : Y              
-RESERVED_INPUT               : 135       :        :                   :         : 3         :                
+CDIN                         : 135       : output : LVTTL             :         : 3         : Y              
 VCCIO3                       : 136       : power  :                   : 3.3V    : 3         :                
-RESERVED_INPUT               : 137       :        :                   :         : 3         :                
-RESERVED_INPUT               : 138       :        :                   :         : 3         :                
-CBCLK                        : 139       : output : LVTTL             :         : 3         : Y              
+CDOUT                        : 137       : input  : LVTTL             :         : 3         : Y              
+DOUT                         : 138       : input  : LVTTL             :         : 3         : Y              
+CLRCLK                       : 139       : output : LVTTL             :         : 3         : Y              
 GND                          : 140       : gnd    :                   :         :           :                
-CLRCLK                       : 141       : output : LVTTL             :         : 3         : Y              
-RESERVED_INPUT               : 142       :        :                   :         : 3         :                
-RESERVED_INPUT               : 143       :        :                   :         : 3         :                
-I_PWM_out                    : 144       : output : LVTTL             :         : 3         : Y              
-RESERVED_INPUT               : 145       :        :                   :         : 3         :                
-PTT_in                       : 146       : input  : LVTTL             :         : 3         : Y              
+CBCLK                        : 141       : output : LVTTL             :         : 3         : Y              
+LRCLK                        : 142       : input  : LVTTL             :         : 3         : Y              
+BCLK                         : 143       : input  : LVTTL             :         : 3         : Y              
+CLK_24MHZ                    : 144       : input  : LVTTL             :         : 3         : Y              
+I_PWM_out                    : 145       : output : LVTTL             :         : 3         : Y              
+Q_PWM_out                    : 146       : output : LVTTL             :         : 3         : Y              
 AK_reset                     : 147       : output : LVTTL             :         : 3         : Y              
 VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
 RESERVED_INPUT               : 149       :        :                   :         : 3         :                

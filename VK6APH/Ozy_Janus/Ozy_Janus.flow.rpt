@@ -1,5 +1,5 @@
 Flow report for Ozy_Janus
-Tue Aug 15 20:53:09 2006
+Sat Aug 19 16:40:13 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Tue Aug 15 20:53:09 2006        ;
+; Flow Status                        ; Successful - Sat Aug 19 16:40:12 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                                    ;
 ; Top-level Entity Name              ; Ozy_Janus                                    ;
@@ -45,8 +45,8 @@ applicable agreement for further details.
 ; Device                             ; EP2C5Q208C8                                  ;
 ; Timing Models                      ; Final                                        ;
 ; Met timing requirements            ; Yes                                          ;
-; Total logic elements               ; 897 / 4,608 ( 19 % )                         ;
-; Total registers                    ; 732                                          ;
+; Total logic elements               ; 898 / 4,608 ( 19 % )                         ;
+; Total registers                    ; 733                                          ;
 ; Total pins                         ; 51 / 142 ( 36 % )                            ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 98,304 / 119,808 ( 82 % )                    ;
@@ -60,7 +60,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/15/2006 20:51:28 ;
+; Start date & time ; 08/19/2006 16:38:48 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Ozy_Janus           ;
 +-------------------+---------------------+
@@ -85,11 +85,11 @@ applicable agreement for further details.
 +----------------------+--------------+
 ; Module Name          ; Elapsed Time ;
 +----------------------+--------------+
-; Analysis & Synthesis ; 00:00:28     ;
-; Fitter               ; 00:00:56     ;
+; Analysis & Synthesis ; 00:00:20     ;
+; Fitter               ; 00:00:52     ;
 ; Assembler            ; 00:00:03     ;
-; Timing Analyzer      ; 00:00:03     ;
-; Total                ; 00:01:30     ;
+; Timing Analyzer      ; 00:00:02     ;
+; Total                ; 00:01:17     ;
 +----------------------+--------------+
 
 
