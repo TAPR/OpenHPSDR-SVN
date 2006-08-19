@@ -24,7 +24,7 @@
 	12 June 2006 - Sign extension for I and Q data added
 	13 June 2006 - CORDIC NCO started 
 	28 July 2006 - Modified to use OZY and  16 bit FIFO 
-	17 Aug  2006 - modified so that CIC takes 16 bits in an gives 24 out	
+	17 Aug  2006 - modified so that CIC takes 16 bits in and gives 24 out	
 	
 */
 	
@@ -122,8 +122,10 @@ output SLOE;				// FX2 data bus enable - active low
 
 
 wire PKEND;
-reg [15:0]i_out;
-reg [15:0]q_out;
+//reg [15:0]i_out;
+//reg [15:0]q_out;
+wire [15:0]i_out;
+wire [15:0]q_out;
 reg [3:0] state_FX;			// state for FX2
 reg data_flag;				// set when data ready to send to Tx FIFO
 reg [15:0] register;		// AK5394A A/D uses this to send its data to Tx FIFO
@@ -139,6 +141,8 @@ reg SLWR;					// FX2 write - active low
 reg [1:0] FIFO_ADR;			// FX2 register address 
 
 assign PKEND = 1'b1;
+reg data_ready;				// set at end of decimation
+reg [15:0]temp_ADC;
 
 
 
@@ -187,9 +191,10 @@ __|  |__    __|  |__     sin
 
 */
 
+/*
 reg [1:0]state;
-reg data_ready;		// set at end of decimation
-reg [15:0]temp_ADC;
+
+
 
 
 always @ (posedge clock)
@@ -198,10 +203,10 @@ begin
 temp_ADC <= ADC;
 
 // A Digital Output Randomizer is fitted to the LT2208. This complements bits 15 to 1 if 
-// bit 0 is 1. This helps to reduce any pickup by the A/D input of the digital outouts. 
+// bit 0 is 1. This helps to reduce any pickup by the A/D input of the digital outputs. 
 // We need to de-ramdomize the LT2208 data if this is turned on. 
 
-if (ADC[0]) temp_ADC[15:1] <= ~ADC[15:1];  // Compensate for Digital Output Randomizer
+//if (ADC[0]) temp_ADC[15:1] <= ~ADC[15:1];  // Compensate for Digital Output Randomizer
 
 case (state)
 2'd0:	begin 
@@ -228,6 +233,8 @@ default: state <= 2'd0;
 endcase
 end
 
+*/
+
 //////////////////////////////////////////////////////////////
 //
 //		CORDIC NCO - set at ~25MHz
@@ -237,18 +244,18 @@ end
 
 /* Code rotates A/D input at set frequency  and produces I & Q */
 
-/*
+
 
 	parameter FREQ = 32'b0100000000000000;  //~25MHz  i.e. FREQ /(100e6/2^16)
 	wire	[31:0] phase;
 
 	// The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
-	phase_accumulator rx_phase_accumulator(.clk(clock),.reset(reset),.frequency(FREQ),.phase_out(phase));
+	phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(FREQ),.phase_out(phase));
 
 	// The cordic takes I and Q in along with the top 16 bits of the phase dword.  The I and Q out are freq shifted
-	cordic rx_cordic(.clk(clock),.reset(reset),.Iin(temp_ADC),.Qin(temp_ADC),.PhaseIn(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
+	cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(ADC),.Qin(ADC),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
 
-*/
+
 
 ///////////////////////////////////////////////////////////////
 //

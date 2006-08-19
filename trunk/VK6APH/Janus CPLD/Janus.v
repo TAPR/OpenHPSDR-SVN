@@ -41,59 +41,58 @@
 //	12 August 2006 - forced speed to 48k for testing 
 //  13 August 2006 - AK5394A now reset at power on and speed setting via Ozy
 //  14 August 2006 - inverted PTT pass to Atlas C3
+//  19 August 2006 - Interface to Atlas pins changed - V1.0
 //
 //
 //  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
 //  +3.3v or an Ozy board the AK5394A will remain in reset and produce no clocks etc.
 
 module Janus(
-   input  CLK_24MHZ,
-   input  CAL,
-   output CBCLK,
-   output CDIN,
-   input  CDOUT,
-   output CLRCIN,
-   output CLRCOUT,
-   output CMCLK,
-   output CMODE,
-   output DFS0,
-   output DFS1,
-   output EXP1,
-   output EXP2,
-   output EXP3,
-   output EXP4,
-   input  FSYNC,
-   output HPF,
-   output IPWM,
-   input  LRCLK,
-   output MCLK,
-   output nCS,
-   output nRST,
-   input  PTT,
-   output C3,
-   output QPWM,
-   input  SCLK,
-   input  SDOUT,
-   output SMODE1,
-   output SMODE2,
-   output SSCK,
-   output MOSI,
-   output ZCAL,
-   output YB7,
-   input  YC6,
-   input  YA3,
-   output YB4,
-   input  YA7,
-   input  YC3,
-   output YC2,
-   input  YC1,
-   input  YA6,
-   input  YB3,
-   output YB1,
-   output YB5,
-   output YB6,
-   input  AK_reset
-
+   	input  CLK_24MHZ,
+   	input  CAL,
+   	output CBCLK,
+   	output CDIN,
+   	input  CDOUT,
+   	output CLRCIN,
+   	output CLRCOUT,
+   	output CMCLK,
+   	output CMODE,
+   	output DFS0,
+   	output DFS1,
+   	output EXP1,
+   	output EXP2,
+   	output EXP3,
+   	output EXP4,
+   	input  FSYNC,
+   	output HPF,
+   	output IPWM,
+   	input  LRCLK,
+   	output MCLK,
+   	output nCS,
+   	output nRST,
+   	input  PTT,
+   	output QPWM,
+   	input  SCLK,
+  	input  SDOUT,
+   	output SMODE1,
+   	output SMODE2,
+   	output SSCK,
+   	output MOSI,
+   	output ZCAL,
+   	input  C2,
+	input  C3,
+	input  C4,
+	output C5,
+	output C6,
+	output C7,
+	input  C8,
+	input  C9,
+	output C10,
+	output C11,
+	input  C12,
+	input  C13,
+	input  C14,
+	inout  C15
 ); 
 
 reg clock_by_2; 
@@ -196,41 +195,44 @@ default: TLV <= 0;
 endcase
 end 
 
+// Atlas outputs
+assign C5 = CLK_24MHZ;		
+assign C6 = SCLK; 			// is actually BCLK
+assign C7 = LRCLK;
+assign C10 = SDOUT; 
+assign C11 = CDOUT;
+assign C15 = ~PTT; 			// sent not PTT 
 
-// set up pins 
+// Atlas inputs
+assign nRST = C2;			// reset AK5394A on power up
+assign QPWM = C3;
+assign IPWM = C4;
+assign CBCLK = C8;
+assign CLRCIN = C9; 		// LRCLK for TLV320
+assign CLRCOUT = C9;		// LRCLK for TLV320
+assign CDIN = C12;
+assign DFS0 = C13; 		    // set AK speed
+assign DFS1 = C14; 			// set AK speed
 
-assign YB7 = CLK_24MHZ;		
-assign CBCLK = YA7;
-assign CDIN = YC3;
-assign YC2 = CDOUT;
-assign CLRCIN = YA6; 		// LRCLK for TLV320
-assign CLRCOUT = YA6;		// LRCLK for TLV320
-assign CMCLK = clock_by_2; 	// 24.576MHz/2
-assign CMODE = 1'b1;		// Set to 1 for SPI mode 
-assign DFS0 = YB3; 		    // set AK speed
-assign DFS1 = YC1; 			// set AK speed
-assign EXP1 = YB3;			// AK speed test point
-assign EXP2 = YC1;			// AK speed test point
-assign EXP3 = 1'b0;
-assign EXP4 = 1'b0;
-assign HPF = 1'b1; 			// HPF in AK on
-assign IPWM = YC6;
-assign YB4 = LRCLK;
+// AK5394A pins
 assign MCLK = clock_by_2; 	// 24.576MHz/2
-assign nCS = TLV_nCS;
-assign nRST = AK_reset;		// reset AK5394A on power up
-assign YB1 = PTT;			// PTT from Janus 
-assign QPWM = YA3;
-assign YB6 = SCLK; 			// is actually BCLK
-assign YB5 = SDOUT; 
+assign HPF = 1'b1; 			// HPF in AK on
 assign SMODE1 = 1'b1; 		// Master mode, I2S
 assign SMODE2 = 1'b1; 		// Master mode, I2S
+assign ZCAL = 1'b1;			// Calibrate AK from A/D inputs
+
+// LTV320 pins
+assign CMCLK = clock_by_2; 	// 24.576MHz/2
+assign CMODE = 1'b1;		// Set to 1 for SPI mode 
+assign nCS = TLV_nCS;
 assign SSCK = TLV_CLK;		// SPI clock on TLV320
 assign MOSI = data; 		// SPI data to send to TLV320 
-assign ZCAL = 1'b1;			// Calibrate AK from A/D inputs
-assign C3 = !PTT; 			// Pass not PTT line through to Atlas C3
 
-
+// EXTRA pins
+assign EXP1 = 1'b0;			
+assign EXP2 = 1'b0;			
+assign EXP3 = 1'b0;
+assign EXP4 = 1'b0;
 
 endmodule 
 
