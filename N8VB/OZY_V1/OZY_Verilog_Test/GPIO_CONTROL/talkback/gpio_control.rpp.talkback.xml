@@ -1,0 +1,1574 @@
+
+<!--
+This XML file (created on Mon Aug 21 12:18:25 2006) contains limited information
+from the compilation of logic designs using Quartus II software (BUT NOT THE
+LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
+operation of the "TalkBack" feature.  To enable/disable this feature, run
+qtb_install.exe located in your quartus/bin folder.  For more information, go
+to license.txt.
+-->
+<talkback>
+<ver>6.0</ver>
+<schema>quartus_version_6.0_build_202.xsd</schema>
+<license>
+	<host_id>00a0cc694f79</host_id>
+	<nic_id>00123f7b788f</nic_id>
+	<cdrive_id>dc2f6d33</cdrive_id>
+</license>
+<tool>
+	<name>Quartus II</name>
+	<version>6.0</version>
+	<build>Build 202</build>
+	<service_pack_label>1</service_pack_label>
+	<binary_type>32</binary_type>
+	<module>quartus_rpp</module>
+	<edition>Full Version</edition>
+	<eval>Licensed</eval>
+	<compilation_end_time>Mon Aug 21 12:18:25 2006</compilation_end_time>
+</tool>
+<machine>
+	<os>Windows XP</os>
+	<cpu>
+		<proc_count>2</proc_count>
+		<cpu_freq units="MHz">3391</cpu_freq>
+	</cpu>
+	<ram units="MB">1023</ram>
+</machine>
+<project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/gpio_control</project>
+<revision>gpio_control</revision>
+<compilation_summary>
+	<flow_status>Successful - Fri Aug 18 16:07:45 2006</flow_status>
+	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
+	<revision_name>gpio_control</revision_name>
+	<top_level_entity_name>gpio_control</top_level_entity_name>
+	<family>Cyclone II</family>
+	<device>EP2C5Q208C8</device>
+	<timing_models>Final</timing_models>
+	<met_timing_requirements>Yes</met_timing_requirements>
+	<total_logic_elements>52 / 4,608 ( 1 % )</total_logic_elements>
+	<total_registers>42</total_registers>
+	<total_pins>29 / 142 ( 20 % )</total_pins>
+	<total_virtual_pins>0</total_virtual_pins>
+	<total_memory_bits>0 / 119,808 ( 0 % )</total_memory_bits>
+	<embedded_multiplier_9_bit_elements>0 / 26 ( 0 % )</embedded_multiplier_9_bit_elements>
+	<total_plls>0 / 2 ( 0 % )</total_plls>
+</compilation_summary>
+<mep_data>
+	<command_line>quartus_rpp gpio_control -c gpio_control --netlist_type=sgate</command_line>
+</mep_data>
+<software_data>
+	<smart_recompile>off</smart_recompile>
+</software_data>
+<messages>
+	<info>Info: Quartus II RTL Viewer, Technology Map Viewer &amp; State Machine Viewer Preprocessor was successful. 0 errors, 0 warnings</info>
+	<info>Info: Elapsed time: 00:00:01</info>
+	<info>Info: Processing ended: Mon Aug 21 12:18:25 2006</info>
+	<info>Info: Command: quartus_rpp gpio_control -c gpio_control --netlist_type=sgate</info>
+	<info>Info: Running Quartus II RTL Viewer, Technology Map Viewer &amp; State Machine Viewer Preprocessor</info>
+</messages>
+<fitter_settings>
+	<row>
+		<option>Device</option>
+		<setting>EP2C5Q208C8</setting>
+	</row>
+	<row>
+		<option>Use smart compilation</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Router Timing Optimization Level</option>
+		<setting>Normal</setting>
+		<default_value>Normal</default_value>
+	</row>
+	<row>
+		<option>Placement Effort Multiplier</option>
+		<setting>1.0</setting>
+		<default_value>1.0</default_value>
+	</row>
+	<row>
+		<option>Router Effort Multiplier</option>
+		<setting>1.0</setting>
+		<default_value>1.0</default_value>
+	</row>
+	<row>
+		<option>Optimize Hold Timing</option>
+		<setting>IO Paths and Minimum TPD Paths</setting>
+		<default_value>IO Paths and Minimum TPD Paths</default_value>
+	</row>
+	<row>
+		<option>Optimize Fast-Corner Timing</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>PowerPlay Power Optimization</option>
+		<setting>Normal compilation</setting>
+		<default_value>Normal compilation</default_value>
+	</row>
+	<row>
+		<option>Optimize Timing</option>
+		<setting>Normal compilation</setting>
+		<default_value>Normal compilation</default_value>
+	</row>
+	<row>
+		<option>Optimize IOC Register Placement for Timing</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Limit to One Fitting Attempt</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Final Placement Optimizations</option>
+		<setting>Automatically</setting>
+		<default_value>Automatically</default_value>
+	</row>
+	<row>
+		<option>Fitter Aggressive Routability Optimizations</option>
+		<setting>Automatically</setting>
+		<default_value>Automatically</default_value>
+	</row>
+	<row>
+		<option>Fitter Initial Placement Seed</option>
+		<setting>1</setting>
+		<default_value>1</default_value>
+	</row>
+	<row>
+		<option>PCI I/O</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Weak Pull-Up Resistor</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Enable Bus-Hold Circuitry</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Auto Global Memory Control Signals</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Auto Packed Registers -- Stratix II/Cyclone II</option>
+		<setting>Auto</setting>
+		<default_value>Auto</default_value>
+	</row>
+	<row>
+		<option>Auto Delay Chains</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Merge PLLs</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Ignore PLL Mode When Merging PLLs</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Fitter Effort</option>
+		<setting>Auto Fit</setting>
+		<default_value>Auto Fit</default_value>
+	</row>
+	<row>
+		<option>Physical Synthesis Effort Level</option>
+		<setting>Normal</setting>
+		<default_value>Normal</default_value>
+	</row>
+	<row>
+		<option>Auto Global Clock</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Global Register Control Signals</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Always Enable Input Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+</fitter_settings>
+<fitter_device_options>
+	<row>
+		<option>Enable user-supplied start-up clock (CLKUSR)</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Enable device-wide reset (DEV_CLRn)</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Enable device-wide output enable (DEV_OE)</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Enable INIT_DONE output</option>
+		<setting>On</setting>
+	</row>
+	<row>
+		<option>Configuration scheme</option>
+		<setting>Active Serial</setting>
+	</row>
+	<row>
+		<option>Error detection CRC</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Reserve nCEO pin after configuration</option>
+		<setting>As output driving ground</setting>
+	</row>
+	<row>
+		<option>Reserve all unused pins</option>
+		<setting>As input tri-stated</setting>
+	</row>
+	<row>
+		<option>Base pin-out file on sameframe device</option>
+		<setting>Off</setting>
+	</row>
+</fitter_device_options>
+<analysis___synthesis_settings>
+	<row>
+		<option>Device</option>
+		<setting>EP2C5Q208C8</setting>
+	</row>
+	<row>
+		<option>Top-level entity name</option>
+		<setting>gpio_control</setting>
+		<default_value>gpio_control</default_value>
+	</row>
+	<row>
+		<option>Family name</option>
+		<setting>Cyclone II</setting>
+		<default_value>Stratix</default_value>
+	</row>
+	<row>
+		<option>Use smart compilation</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Restructure Multiplexers</option>
+		<setting>Auto</setting>
+		<default_value>Auto</default_value>
+	</row>
+	<row>
+		<option>Create Debugging Nodes for IP Cores</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Preserve fewer node names</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Disable OpenCore Plus hardware evaluation</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Verilog Version</option>
+		<setting>Verilog_2001</setting>
+		<default_value>Verilog_2001</default_value>
+	</row>
+	<row>
+		<option>VHDL Version</option>
+		<setting>VHDL93</setting>
+		<default_value>VHDL93</default_value>
+	</row>
+	<row>
+		<option>State Machine Processing</option>
+		<setting>Auto</setting>
+		<default_value>Auto</default_value>
+	</row>
+	<row>
+		<option>Extract Verilog State Machines</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Extract VHDL State Machines</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Add Pass-Through Logic to Inferred RAMs</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>DSP Block Balancing</option>
+		<setting>Auto</setting>
+		<default_value>Auto</default_value>
+	</row>
+	<row>
+		<option>Maximum DSP Block Usage</option>
+		<setting>Unlimited</setting>
+		<default_value>Unlimited</default_value>
+	</row>
+	<row>
+		<option>NOT Gate Push-Back</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Power-Up Don&apos;t Care</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Remove Redundant Logic Cells</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Remove Duplicate Registers</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Ignore CARRY Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Ignore CASCADE Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Ignore GLOBAL Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Ignore ROW GLOBAL Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Ignore LCELL Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Ignore SOFT Buffers</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Limit AHDL Integers to 32 Bits</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Optimization Technique -- Cyclone II</option>
+		<setting>Balanced</setting>
+		<default_value>Balanced</default_value>
+	</row>
+	<row>
+		<option>Carry Chain Length -- Stratix/Stratix GX/Cyclone/MAX II/Cyclone II</option>
+		<setting>70</setting>
+		<default_value>70</default_value>
+	</row>
+	<row>
+		<option>Auto Carry Chains</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Open-Drain Pins</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Remove Duplicate Logic</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Perform WYSIWYG Primitive Resynthesis</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Perform gate-level register retiming</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Allow register retiming to trade off Tsu/Tco with Fmax</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto ROM Replacement</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto RAM Replacement</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Shift Register Replacement</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Clock Enable Replacement</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Allow Synchronous Control Signals</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Force Use of Synchronous Clear Signals</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Auto Resource Sharing</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Allow Any RAM Size For Recognition</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Allow Any ROM Size For Recognition</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Allow Any Shift Register Size For Recognition</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Maximum Number of M4K Memory Blocks</option>
+		<setting>Unlimited</setting>
+		<default_value>Unlimited</default_value>
+	</row>
+	<row>
+		<option>Ignore translate_off and translate_on Synthesis Directives</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Show Parameter Settings Tables in Synthesis Report</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Ignore Maximum Fan-Out Assignments</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Retiming Meta-Stability Register Sequence Length</option>
+		<setting>2</setting>
+		<default_value>2</default_value>
+	</row>
+	<row>
+		<option>PowerPlay Power Optimization</option>
+		<setting>Normal compilation</setting>
+		<default_value>Normal compilation</default_value>
+	</row>
+	<row>
+		<option>HDL message level</option>
+		<setting>Level2</setting>
+		<default_value>Level2</default_value>
+	</row>
+</analysis___synthesis_settings>
+<assembler_settings>
+	<row>
+		<option>Generate Raw Binary File (.rbf) For Target Device</option>
+		<setting>On</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Use smart compilation</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate Serial Vector Format File (.svf) for Target Device</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate a JEDEC STAPL Format File (.jam) for Target Device</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate an uncompressed Jam STAPL Byte Code 2.0 File (.jbc) for Target Device</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate a compressed Jam STAPL Byte Code 2.0 File (.jbc) for Target Device</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Generate compressed bitstreams</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Compression mode</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Clock source for configuration device</option>
+		<setting>Internal</setting>
+		<default_value>Internal</default_value>
+	</row>
+	<row>
+		<option>Clock frequency of the configuration device</option>
+		<setting units="MHz">10</setting>
+		<default_value units="MHz">10</default_value>
+	</row>
+	<row>
+		<option>Divide clock frequency by</option>
+		<setting>1</setting>
+		<default_value>1</default_value>
+	</row>
+	<row>
+		<option>JTAG user code for target device</option>
+		<setting>Ffffffff</setting>
+		<default_value>Ffffffff</default_value>
+	</row>
+	<row>
+		<option>Configuration device</option>
+		<setting>Auto</setting>
+		<default_value>Auto</default_value>
+	</row>
+	<row>
+		<option>JTAG user code for configuration device</option>
+		<setting>Ffffffff</setting>
+		<default_value>Ffffffff</default_value>
+	</row>
+	<row>
+		<option>Configuration device auto user code</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate Tabular Text File (.ttf) For Target Device</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Generate Hexadecimal (Intel-Format) Output File (.hexout) for Target Device</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Hexadecimal Output File start address</option>
+		<setting>0</setting>
+		<default_value>0</default_value>
+	</row>
+	<row>
+		<option>Hexadecimal Output File count direction</option>
+		<setting>Up</setting>
+		<default_value>Up</default_value>
+	</row>
+	<row>
+		<option>Release clears before tri-states</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Auto-restart configuration after error</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Maintain Compatibility with All Cyclone II M4K Versions</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+</assembler_settings>
+<general_register_statistics>
+	<row>
+		<statistic>Total registers</statistic>
+		<value>42</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Synchronous Clear</statistic>
+		<value>0</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Synchronous Load</statistic>
+		<value>0</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Asynchronous Clear</statistic>
+		<value>9</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Asynchronous Load</statistic>
+		<value>0</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Clock Enable</statistic>
+		<value>30</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Preset</statistic>
+		<value>0</value>
+	</row>
+</general_register_statistics>
+<clock_settings_summary>
+	<row>
+		<clock_node_name>SCK</clock_node_name>
+		<type>User Pin</type>
+		<fmax_requirement>None</fmax_requirement>
+		<early_latency units="ns">0.000</early_latency>
+		<late_latency units="ns">0.000</late_latency>
+		<multiply_base_fmax_by>N/A</multiply_base_fmax_by>
+		<divide_base_fmax_by>N/A</divide_base_fmax_by>
+		<offset>N/A</offset>
+	</row>
+	<row>
+		<clock_node_name>FX2_CLK</clock_node_name>
+		<type>User Pin</type>
+		<fmax_requirement>None</fmax_requirement>
+		<early_latency units="ns">0.000</early_latency>
+		<late_latency units="ns">0.000</late_latency>
+		<multiply_base_fmax_by>N/A</multiply_base_fmax_by>
+		<divide_base_fmax_by>N/A</divide_base_fmax_by>
+		<offset>N/A</offset>
+	</row>
+</clock_settings_summary>
+<input_pins>
+	<row>
+		<name>CS</name>
+		<pin__>45</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>2</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>10</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>FX2_CLK</name>
+		<pin__>23</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>6</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>SCK</name>
+		<pin__>15</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>3</cell_number>
+		<combinational_fan_out>24</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>SI</name>
+		<pin__>14</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>2</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+</input_pins>
+<bidir_pins>
+	<row>
+		<name>GPIO[0]</name>
+		<pin__>67</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>7</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[10]</name>
+		<pin__>81</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>17</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[11]</name>
+		<pin__>82</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>17</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[12]</name>
+		<pin__>84</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>17</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[13]</name>
+		<pin__>86</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>19</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>3</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[14]</name>
+		<pin__>87</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>19</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[15]</name>
+		<pin__>88</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>19</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[16]</name>
+		<pin__>89</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>19</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>yes</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[17]</name>
+		<pin__>90</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>21</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>3</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>yes</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[18]</name>
+		<pin__>92</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>21</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>yes</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[19]</name>
+		<pin__>94</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>21</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>yes</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[1]</name>
+		<pin__>68</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>7</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[20]</name>
+		<pin__>95</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>21</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>yes</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[21]</name>
+		<pin__>96</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>24</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>yes</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[22]</name>
+		<pin__>97</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>24</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>yes</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[23]</name>
+		<pin__>99</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>24</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>yes</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[2]</name>
+		<pin__>69</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>7</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[3]</name>
+		<pin__>70</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>9</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[4]</name>
+		<pin__>72</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>9</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[5]</name>
+		<pin__>74</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>12</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[6]</name>
+		<pin__>75</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>12</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[7]</name>
+		<pin__>76</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>14</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[8]</name>
+		<pin__>77</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>14</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>GPIO[9]</name>
+		<pin__>80</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>17</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>3</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>SO</name>
+		<pin__>12</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+</bidir_pins>
+<i_o_bank_usage>
+	<row>
+		<i_o_bank>1</i_o_bank>
+		<usage>7 / 34 ( 21 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+	<row>
+		<i_o_bank>2</i_o_bank>
+		<usage>0 / 35 ( 0 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+	<row>
+		<i_o_bank>3</i_o_bank>
+		<usage>2 / 37 ( 5 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+	<row>
+		<i_o_bank>4</i_o_bank>
+		<usage>24 / 36 ( 67 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+</i_o_bank_usage>
+<advanced_data___general>
+	<row>
+		<name>Status Code</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Desired User Slack</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Fit Attempts</name>
+		<value>1</value>
+	</row>
+</advanced_data___general>
+<advanced_data___placement_preparation>
+	<row>
+		<name>Auto Fit Point 1 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Mid Wire Use - Fit Attempt 1</name>
+		<value>1</value>
+	</row>
+	<row>
+		<name>Mid Slack - Fit Attempt 1</name>
+		<value>-10512</value>
+	</row>
+	<row>
+		<name>Internal Atom Count - Fit Attempt 1</name>
+		<value>90</value>
+	</row>
+	<row>
+		<name>LE/ALM Count - Fit Attempt 1</name>
+		<value>53</value>
+	</row>
+	<row>
+		<name>LAB Count - Fit Attempt 1</name>
+		<value>5</value>
+	</row>
+	<row>
+		<name>Outputs per Lab - Fit Attempt 1</name>
+		<value>11.200</value>
+	</row>
+	<row>
+		<name>Inputs per LAB - Fit Attempt 1</name>
+		<value>13.000</value>
+	</row>
+	<row>
+		<name>Global Inputs per LAB - Fit Attempt 1</name>
+		<value>0.600</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;non-global clock + sync load&apos; - Fit Attempt 1</name>
+		<value>0:1;1:4</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;non-global controls&apos; - Fit Attempt 1</name>
+		<value>0:1;2:2;3:2</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;non-global + aclr&apos; - Fit Attempt 1</name>
+		<value>0:1;2:2;3:2</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;global non-clock non-aclr&apos; - Fit Attempt 1</name>
+		<value>0:5</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;global controls&apos; - Fit Attempt 1</name>
+		<value>0:2;1:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;deterministic LABSMUXA/LABXMUXB&apos; - Fit Attempt 1</name>
+		<value>0:1;1:1;2:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;deterministic LABSMUXC/LABXMUXD&apos; - Fit Attempt 1</name>
+		<value>0:1;1:2;2:2</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;clock / ce pair constraint&apos; - Fit Attempt 1</name>
+		<value>0:1;1:1;2:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;aclr constraint&apos; - Fit Attempt 1</name>
+		<value>0:1;1:3;2:1</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;true sload_sclear pair&apos; - Fit Attempt 1</name>
+		<value>0:2;1:3</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;constant sload_sclear pair&apos; - Fit Attempt 1</name>
+		<value>0:5</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;has placement constraint&apos; - Fit Attempt 1</name>
+		<value>0:5</value>
+	</row>
+	<row>
+		<name>LEs in Chains - Fit Attempt 1</name>
+		<value>8</value>
+	</row>
+	<row>
+		<name>LEs in Long Chains - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>LABs with Chains - Fit Attempt 1</name>
+		<value>1</value>
+	</row>
+	<row>
+		<name>LABs with Multiple Chains - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Time - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+</advanced_data___placement_preparation>
+<advanced_data___placement>
+	<row>
+		<name>Auto Fit Point 2 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Early Wire Use - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Early Slack - Fit Attempt 1</name>
+		<value>-10478</value>
+	</row>
+	<row>
+		<name>Auto Fit Point 3 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Auto Fit Point 4 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Mid Wire Use - Fit Attempt 1</name>
+		<value>1</value>
+	</row>
+	<row>
+		<name>Mid Slack - Fit Attempt 1</name>
+		<value>-7617</value>
+	</row>
+	<row>
+		<name>Late Wire Use - Fit Attempt 1</name>
+		<value>1</value>
+	</row>
+	<row>
+		<name>Late Slack - Fit Attempt 1</name>
+		<value>-7617</value>
+	</row>
+	<row>
+		<name>Auto Fit Point 5 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Time - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+</advanced_data___placement>
+<advanced_data___routing>
+	<row>
+		<name>Early Slack - Fit Attempt 1</name>
+		<value>-5322</value>
+	</row>
+	<row>
+		<name>Early Wire Use - Fit Attempt 1</name>
+		<value>1</value>
+	</row>
+	<row>
+		<name>Peak Regional Wire - Fit Attempt 1</name>
+		<value>1</value>
+	</row>
+	<row>
+		<name>Mid Slack - Fit Attempt 1</name>
+		<value>-6649</value>
+	</row>
+	<row>
+		<name>Late Slack - Fit Attempt 1</name>
+		<value>-6429</value>
+	</row>
+	<row>
+		<name>Late Slack - Fit Attempt 1</name>
+		<value>-6429</value>
+	</row>
+	<row>
+		<name>Late Wire Use - Fit Attempt 1</name>
+		<value>1</value>
+	</row>
+	<row>
+		<name>Time - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
+		<value>0.078</value>
+	</row>
+</advanced_data___routing>
+</talkback>

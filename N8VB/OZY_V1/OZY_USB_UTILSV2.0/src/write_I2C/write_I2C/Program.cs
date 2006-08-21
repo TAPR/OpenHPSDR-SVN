@@ -33,9 +33,9 @@ namespace write_I2C
     {
         static void Main(string[] args)
         {
-            if ((args.Length != 7) || (args.Length == 0))
+            if ((args.Length < 5) || (args.Length == 0))
             {
-                Console.WriteLine("usage: write_I2C <VID> <PID> <i2c_address in hex> <value1 in hex> <value2 in hex> <value3 in hex> <count in dec (1-3)>");
+                Console.WriteLine("usage: write_I2C <VID> <PID> <i2c_address in hex> <count in hex> <bytes in hex...>");
                 return;
             }
 
@@ -95,12 +95,12 @@ namespace write_I2C
             }
 
             int i2c_addr = int.Parse(args[2], NumberStyles.HexNumber);
-
+                        
             if (args[3].Length > 2)
             {
                 if (args[3].Substring(0, 2) != "0x")
                 {
-                    Console.WriteLine("You must specify i2c_addr in Hex (0x0)");
+                    Console.WriteLine("You must specify count in Hex (0x0)");
                     return;
                 }
                 else
@@ -108,91 +108,40 @@ namespace write_I2C
             }
             else
             {
-                Console.WriteLine("You must specify value1 in Hex (0x0)");
+                Console.WriteLine("You must specify count in Hex (0x0)");
                 return;
             }
-            
-            int value1 = int.Parse(args[3], NumberStyles.HexNumber);
 
-            if (args[4].Length > 2)
+            int count = int.Parse(args[3], NumberStyles.HexNumber);
+
+            byte[] bytes = new byte[args.Length - 4];
+
+            for (int i = 4; i < args.Length; i++)
             {
-                if (args[4].Substring(0, 2) != "0x")
+                if (args[i].Length > 2)
                 {
-                    Console.WriteLine("You must specify value2 in Hex (0x0)");
-                    return;
+                    if (args[i].Substring(0, 2) != "0x")
+                    {
+                        Console.WriteLine("You must specify bytes in Hex (0x0)");
+                        return;
+                    }
+                    else
+                        args[i] = args[i].Substring(2);
                 }
                 else
-                    args[4] = args[4].Substring(2);
-            }
-            else
-            {
-                Console.WriteLine("You must specify value2 in Hex (0x0)");
-                return;
-            }
-
-            int value2 = int.Parse(args[4], NumberStyles.HexNumber);
-
-            if (args[5].Length > 2)
-            {
-                if (args[5].Substring(0, 2) != "0x")
                 {
-                    Console.WriteLine("You must specify value3 in Hex (0x0)");
+                    Console.WriteLine("You must specify bytes in Hex (0x0)");
                     return;
                 }
-                else
-                    args[5] = args[5].Substring(2);
-            }
-            else
-            {
-                Console.WriteLine("You must specify value3 in Hex (0x0)");
-                return;
+
+                bytes[i-4] = byte.Parse(args[i], NumberStyles.HexNumber);
             }
 
-            int value3 = int.Parse(args[5], NumberStyles.HexNumber);
-            int count = int.Parse(args[6], NumberStyles.HexNumber);
-
-            if ((count < 1) || (count > 3))
-            {
-                Console.WriteLine("count must be 1, 2 or 3)");
-                return;
-            }
-
-            libUSB_Interface.usb_bus bus;
+            IntPtr usb_dev_handle = IntPtr.Zero;
 
             try
             {
-                libUSB_Interface.usb_init();
-                Console.WriteLine("finding busses...");
-                libUSB_Interface.usb_find_busses();
-                Console.WriteLine("finding devices...");
-                libUSB_Interface.usb_find_devices();
-                Console.WriteLine("usb_get_busses...");
-                bus = libUSB_Interface.usb_get_busses();
-                Console.WriteLine("bus location: " + bus.location.ToString());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("An error occurred: " + e.Message);
-                return;
-            }
-
-            Console.WriteLine("Checking for VID PID...");
-            libUSB_Interface.usb_device fdev = USB.FindDevice(bus, vid, pid);
-            if (fdev != null)
-                Console.WriteLine("Found VID PID: " + vid.ToString("x") + " " + pid.ToString("x"));
-            else
-            {
-                Console.WriteLine("did not find VID PID: " + vid.ToString("x") + " " + pid.ToString("x"));
-                return;
-            }
-
-            Console.WriteLine("Trying to open device...");
-
-            IntPtr usb_dev_handle;
-
-            try
-            {
-                usb_dev_handle = libUSB_Interface.usb_open(fdev);
+                usb_dev_handle = USB.InitFindAndOpenDevice(vid, pid);
                 Console.WriteLine("Device handle is: " + usb_dev_handle.ToString());
             }
             catch (Exception e)
@@ -200,30 +149,8 @@ namespace write_I2C
                 Console.WriteLine("An error occurred: " + e.Message);
                 return;
             }
-
-            byte[] buf = new byte[count];
-
-            switch (count)
-            {
-                case 1:
-                    buf[0] = (byte)value1;
-                    break;
-                case 2:
-                    buf[0] = (byte)value1;
-                    buf[1] = (byte)value2;
-                    break;
-                case 3:
-                    buf[0] = (byte)value1;
-                    buf[1] = (byte)value2;
-                    buf[2] = (byte)value3;
-                    break;
-                default:
-                    Console.WriteLine("An undefined error occurred");
-                    libUSB_Interface.usb_close(usb_dev_handle);
-                    return;
-            }            
-
-            if ((OZY.Write_I2C(usb_dev_handle, i2c_addr, buf)))
+                        
+            if ((OZY.Write_I2C(usb_dev_handle, i2c_addr, bytes)))
             {
                 Console.WriteLine("Wrote to address: " + i2c_addr);
             }
