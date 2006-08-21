@@ -64,3 +64,4 @@ set_location_assignment PIN_95 -to GPIO[20]
 set_location_assignment PIN_96 -to GPIO[21]
 set_location_assignment PIN_97 -to GPIO[22]
 set_location_assignment PIN_99 -to GPIO[23]
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
