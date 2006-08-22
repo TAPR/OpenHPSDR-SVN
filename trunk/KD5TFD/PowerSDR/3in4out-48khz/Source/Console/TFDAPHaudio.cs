@@ -4,6 +4,8 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Diagnostics; 
+using HPSDR_USB_LIB_V1;
+
 namespace PowerSDR
 {
 	//
@@ -35,11 +37,51 @@ namespace PowerSDR
 
 			return 0; 
 		}
-						 						  
+
+		
+		public static int oz_start() 
+		{
+			libUSB_Interface.usb_bus bus;
+
+			try
+			{
+				libUSB_Interface.usb_init();
+				System.Console.WriteLine("finding busses...");
+				libUSB_Interface.usb_find_busses();
+				System.Console.WriteLine("finding devices...");
+				libUSB_Interface.usb_find_devices();
+				System.Console.WriteLine("usb_get_busses...");
+				bus = libUSB_Interface.usb_get_busses();
+				System.Console.WriteLine("bus location: " + bus.location.ToString());
+			}
+			catch (Exception e)
+			{
+				System.Console.WriteLine("An error occurred: " + e.Message);
+				return 1;
+			}
+
+			int vid = 0xfffe; 
+			int pid = 0x7; 
+
+			System.Console.WriteLine("Checking for VID PID...");
+
+			libUSB_Interface.usb_device fdev = HPSDR_USB_LIB_V1.USB.FindDevice(bus, vid, pid);
+			if (fdev != null)
+				System.Console.WriteLine("Found VID PID: " + vid.ToString("x") + " " + pid.ToString("x"));
+			else
+			{
+				System.Console.WriteLine("did not find VID PID: " + vid.ToString("x") + " " + pid.ToString("x"));
+				return 1;
+			}
+			return 1; 
+		}
+		 						  
 		unsafe public static int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits) 
 		{ 
 			if ( !isOzyInitialized ) 
 			{ 
+				// oz_start(); 
+
 				if ( initOzy() != 0 )  
 				{ 
 					return 1; 
