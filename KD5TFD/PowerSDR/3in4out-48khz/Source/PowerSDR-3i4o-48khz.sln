@@ -52,6 +52,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "decode-fpga-read", "KD5TFD-
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPSDR_USB_LIB_V1.1", "HPSDR_USB_LIB_V1.1\HPSDR_USB_LIB_V1.1.csproj", "{CAAC4594-93AC-40DD-9109-AC4D18397D1E}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -102,6 +106,10 @@ Global
 		{9F0B7269-887A-49DB-B1F1-E09EEC725616}.Debug.Build.0 = Debug|Win32
 		{9F0B7269-887A-49DB-B1F1-E09EEC725616}.Release.ActiveCfg = Release|Win32
 		{9F0B7269-887A-49DB-B1F1-E09EEC725616}.Release.Build.0 = Release|Win32
+		{CAAC4594-93AC-40DD-9109-AC4D18397D1E}.Debug.ActiveCfg = Debug|.NET
+		{CAAC4594-93AC-40DD-9109-AC4D18397D1E}.Debug.Build.0 = Debug|.NET
+		{CAAC4594-93AC-40DD-9109-AC4D18397D1E}.Release.ActiveCfg = Release|.NET
+		{CAAC4594-93AC-40DD-9109-AC4D18397D1E}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
