@@ -1,0 +1,267 @@
+ -- Copyright (C) 1991-2006 Altera Corporation
+ -- Your use of Altera Corporation's design tools, logic functions 
+ -- and other software and tools, and its AMPP partner logic 
+ -- functions, and any output files any of the foregoing 
+ -- (including device programming or simulation files), and any 
+ -- associated documentation or information are expressly subject 
+ -- to the terms and conditions of the Altera Program License 
+ -- Subscription Agreement, Altera MegaCore Function License 
+ -- Agreement, or other applicable license agreement, including, 
+ -- without limitation, that your use is for the sole purpose of 
+ -- programming logic devices manufactured by Altera and sold by 
+ -- Altera or its authorized distributors.  Please refer to the 
+ -- applicable agreement for further details.
+ -- 
+ -- This is a Quartus II output file. It is for reporting purposes only, and is
+ -- not intended for use as a Quartus II input file. This file cannot be used
+ -- to make Quartus II pin assignments - for instructions on how to make pin
+ -- assignments, please see Quartus II help.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- NC            : No Connect. This pin has no internal connection to the device.
+ -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (1.2V).
+ -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
+ --                 of its bank.
+ --					Bank 1:		3.3V
+ --					Bank 2:		3.3V
+ --					Bank 3:		3.3V
+ --					Bank 4:		3.3V
+ -- GND           : Dedicated ground pin. Dedicated GND pins MUST be connected to GND.
+ --					It can also be used to report unused dedicated pins. The connection
+ --					on the board for unused dedicated pins depends on whether this will
+ --					be used in a future design. One example is device migration. When
+ --					using device migration, refer to the device pin-tables. If it is a
+ --					GND pin in the pin table or if it will not be used in a future design
+ --					for another purpose the it MUST be connected to GND. If it is an unused
+ --					dedicated pin, then it can be connected to a valid signal on the board
+ --					(low, high, or toggling) if that signal is required for a different
+ --					revision of the design.
+ -- GND+          : Unused input pin. It can also be used to report unused dual-purpose pins.
+ --					This pin should be connected to GND. It may also be connected  to a
+ --					valid signal  on the board  (low, high, or toggling)  if that signal
+ --					is required for a different revision of the design.
+ -- GND*          : Unused  I/O  pin.   This pin can either be left unconnected or
+ --           	    connected to GND.  Connecting this pin to GND will improve the
+ --           	    device's immunity to noise.
+ -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
+ -- RESERVED_INPUT    : Pin is tri-stated and should be connected to the board.
+ -- RESERVED_INPUT_WITH_WEAK_PULLUP    : Pin is tri-stated with internal weak pull-up resistor.
+ -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
+ ---------------------------------------------------------------------------------
+
+Quartus II Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+CHIP  "mercury"  ASSIGNED TO AN: EP2C5Q208C7
+
+Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
+-------------------------------------------------------------------------------------------------------------
+~ASDO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 1         : input  : LVTTL             :         : 1         : N              
+~nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 2         : input  : LVTTL             :         : 1         : N              
+serial_data[3]               : 3         : input  : LVTTL             :         : 1         : N              
+q_in[4]                      : 4         : input  : LVTTL             :         : 1         : N              
+serial_data[20]              : 5         : input  : LVTTL             :         : 1         : N              
+q_out[4]                     : 6         : output : LVTTL             :         : 1         : N              
+VCCIO1                       : 7         : power  :                   : 3.3V    : 1         :                
+serial_data[12]              : 8         : input  : LVTTL             :         : 1         : N              
+GND                          : 9         : gnd    :                   :         :           :                
+i_in[14]                     : 10        : input  : LVTTL             :         : 1         : N              
+serial_data[30]              : 11        : input  : LVTTL             :         : 1         : N              
+i_in[8]                      : 12        : input  : LVTTL             :         : 1         : N              
+serial_data[31]              : 13        : input  : LVTTL             :         : 1         : N              
+serial_data[24]              : 14        : input  : LVTTL             :         : 1         : N              
+q_out[15]                    : 15        : output : LVTTL             :         : 1         : N              
+TDO                          : 16        : output :                   :         : 1         :                
+TMS                          : 17        : input  :                   :         : 1         :                
+TCK                          : 18        : input  :                   :         : 1         :                
+TDI                          : 19        : input  :                   :         : 1         :                
+DATA0                        : 20        : input  :                   :         : 1         :                
+DCLK                         : 21        :        :                   :         : 1         :                
+nCE                          : 22        :        :                   :         : 1         :                
+q_in[11]                     : 23        : input  : LVTTL             :         : 1         : N              
+q_in[12]                     : 24        : input  : LVTTL             :         : 1         : N              
+GND                          : 25        : gnd    :                   :         :           :                
+nCONFIG                      : 26        :        :                   :         : 1         :                
+q_in[13]                     : 27        : input  : LVTTL             :         : 1         : N              
+q_in[14]                     : 28        : input  : LVTTL             :         : 1         : N              
+VCCIO1                       : 29        : power  :                   : 3.3V    : 1         :                
+serial_strobe                : 30        : input  : LVTTL             :         : 1         : N              
+RESERVED_INPUT               : 31        :        :                   :         : 1         :                
+serial_data[25]              : 32        : input  : LVTTL             :         : 1         : N              
+i_out[10]                    : 33        : output : LVTTL             :         : 1         : N              
+i_out[4]                     : 34        : output : LVTTL             :         : 1         : N              
+RESERVED_INPUT               : 35        :        :                   :         : 1         :                
+q_out[3]                     : 36        : output : LVTTL             :         : 1         : N              
+RESERVED_INPUT               : 37        :        :                   :         : 1         :                
+GND                          : 38        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 39        :        :                   :         : 1         :                
+RESERVED_INPUT               : 40        :        :                   :         : 1         :                
+serial_data[13]              : 41        : input  : LVTTL             :         : 1         : N              
+VCCIO1                       : 42        : power  :                   : 3.3V    : 1         :                
+serial_data[7]               : 43        : input  : LVTTL             :         : 1         : N              
+RESERVED_INPUT               : 44        :        :                   :         : 1         :                
+q_out[11]                    : 45        : output : LVTTL             :         : 1         : N              
+RESERVED_INPUT               : 46        :        :                   :         : 1         :                
+decim_rate[3]                : 47        : input  : LVTTL             :         : 1         : N              
+i_in[7]                      : 48        : input  : LVTTL             :         : 1         : N              
+GND                          : 49        : gnd    :                   :         :           :                
+GND_PLL1                     : 50        : gnd    :                   :         :           :                
+VCCD_PLL1                    : 51        : power  :                   : 1.2V    :           :                
+GND_PLL1                     : 52        : gnd    :                   :         :           :                
+VCCA_PLL1                    : 53        : power  :                   : 1.2V    :           :                
+GNDA_PLL1                    : 54        : gnd    :                   :         :           :                
+GND                          : 55        : gnd    :                   :         :           :                
+hb_strobe                    : 56        : output : LVTTL             :         : 4         : N              
+serial_addr[0]               : 57        : input  : LVTTL             :         : 4         : N              
+q_out[1]                     : 58        : output : LVTTL             :         : 4         : N              
+i_out[5]                     : 59        : output : LVTTL             :         : 4         : N              
+decim_rate[7]                : 60        : input  : LVTTL             :         : 4         : N              
+serial_data[29]              : 61        : input  : LVTTL             :         : 4         : N              
+VCCIO4                       : 62        : power  :                   : 3.3V    : 4         :                
+q_in[3]                      : 63        : input  : LVTTL             :         : 4         : N              
+serial_data[9]               : 64        : input  : LVTTL             :         : 4         : N              
+GND                          : 65        : gnd    :                   :         :           :                
+VCCINT                       : 66        : power  :                   : 1.2V    :           :                
+RESERVED_INPUT               : 67        :        :                   :         : 4         :                
+i_in[15]                     : 68        : input  : LVTTL             :         : 4         : N              
+serial_data[22]              : 69        : input  : LVTTL             :         : 4         : N              
+q_in[5]                      : 70        : input  : LVTTL             :         : 4         : N              
+VCCIO4                       : 71        : power  :                   : 3.3V    : 4         :                
+serial_data[26]              : 72        : input  : LVTTL             :         : 4         : N              
+GND                          : 73        : gnd    :                   :         :           :                
+i_in[3]                      : 74        : input  : LVTTL             :         : 4         : N              
+i_in[6]                      : 75        : input  : LVTTL             :         : 4         : N              
+serial_data[4]               : 76        : input  : LVTTL             :         : 4         : N              
+decim_rate[1]                : 77        : input  : LVTTL             :         : 4         : N              
+GND                          : 78        : gnd    :                   :         :           :                
+VCCINT                       : 79        : power  :                   : 1.2V    :           :                
+RESERVED_INPUT               : 80        :        :                   :         : 4         :                
+RESERVED_INPUT               : 81        :        :                   :         : 4         :                
+serial_data[23]              : 82        : input  : LVTTL             :         : 4         : N              
+VCCIO4                       : 83        : power  :                   : 3.3V    : 4         :                
+serial_data[10]              : 84        : input  : LVTTL             :         : 4         : N              
+GND                          : 85        : gnd    :                   :         :           :                
+i_out[12]                    : 86        : output : LVTTL             :         : 4         : N              
+i_out[14]                    : 87        : output : LVTTL             :         : 4         : N              
+serial_data[28]              : 88        : input  : LVTTL             :         : 4         : N              
+RESERVED_INPUT               : 89        :        :                   :         : 4         :                
+i_in[2]                      : 90        : input  : LVTTL             :         : 4         : N              
+VCCIO4                       : 91        : power  :                   : 3.3V    : 4         :                
+serial_data[27]              : 92        : input  : LVTTL             :         : 4         : N              
+GND                          : 93        : gnd    :                   :         :           :                
+q_in[7]                      : 94        : input  : LVTTL             :         : 4         : N              
+decim_rate[4]                : 95        : input  : LVTTL             :         : 4         : N              
+i_out[11]                    : 96        : output : LVTTL             :         : 4         : N              
+decim_rate[5]                : 97        : input  : LVTTL             :         : 4         : N              
+VCCIO4                       : 98        : power  :                   : 3.3V    : 4         :                
+q_in[0]                      : 99        : input  : LVTTL             :         : 4         : N              
+GND                          : 100       : gnd    :                   :         :           :                
+q_out[13]                    : 101       : output : LVTTL             :         : 4         : N              
+serial_data[6]               : 102       : input  : LVTTL             :         : 4         : N              
+q_out[8]                     : 103       : output : LVTTL             :         : 4         : N              
+q_out[5]                     : 104       : output : LVTTL             :         : 4         : N              
+i_in[0]                      : 105       : input  : LVTTL             :         : 3         : N              
+q_in[8]                      : 106       : input  : LVTTL             :         : 3         : N              
+~LVDS41n/INIT_DONE~ / RESERVED : 107       : output : LVTTL             :         : 3         : N              
+~LVDS41p/nCEO~ / GND*        : 108       : output : LVTTL             :         : 3         : N              
+VCCIO3                       : 109       : power  :                   : 3.3V    : 3         :                
+RESERVED_INPUT               : 110       :        :                   :         : 3         :                
+GND                          : 111       : gnd    :                   :         :           :                
+serial_data[19]              : 112       : input  : LVTTL             :         : 3         : N              
+q_in[2]                      : 113       : input  : LVTTL             :         : 3         : N              
+i_out[1]                     : 114       : output : LVTTL             :         : 3         : N              
+q_out[10]                    : 115       : output : LVTTL             :         : 3         : N              
+q_out[14]                    : 116       : output : LVTTL             :         : 3         : N              
+RESERVED_INPUT               : 117       :        :                   :         : 3         :                
+decim_rate[6]                : 118       : input  : LVTTL             :         : 3         : N              
+i_out[13]                    : 119       : output : LVTTL             :         : 3         : N              
+q_in[10]                     : 120       : input  : LVTTL             :         : 3         : N              
+nSTATUS                      : 121       :        :                   :         : 3         :                
+VCCIO3                       : 122       : power  :                   : 3.3V    : 3         :                
+CONF_DONE                    : 123       :        :                   :         : 3         :                
+GND                          : 124       : gnd    :                   :         :           :                
+MSEL1                        : 125       :        :                   :         : 3         :                
+MSEL0                        : 126       :        :                   :         : 3         :                
+decimator_strobe             : 127       : input  : LVTTL             :         : 3         : N              
+serial_data[5]               : 128       : input  : LVTTL             :         : 3         : N              
+serial_addr[1]               : 129       : input  : LVTTL             :         : 3         : N              
+serial_addr[2]               : 130       : input  : LVTTL             :         : 3         : N              
+serial_addr[3]               : 131       : input  : LVTTL             :         : 3         : N              
+serial_addr[4]               : 132       : input  : LVTTL             :         : 3         : N              
+serial_addr[5]               : 133       : input  : LVTTL             :         : 3         : N              
+i_in[1]                      : 134       : input  : LVTTL             :         : 3         : N              
+RESERVED_INPUT               : 135       :        :                   :         : 3         :                
+VCCIO3                       : 136       : power  :                   : 3.3V    : 3         :                
+i_in[5]                      : 137       : input  : LVTTL             :         : 3         : N              
+serial_data[15]              : 138       : input  : LVTTL             :         : 3         : N              
+RESERVED_INPUT               : 139       :        :                   :         : 3         :                
+GND                          : 140       : gnd    :                   :         :           :                
+RESERVED_INPUT               : 141       :        :                   :         : 3         :                
+clock                        : 142       : input  : LVTTL             :         : 3         : N              
+serial_data[14]              : 143       : input  : LVTTL             :         : 3         : N              
+sample_strobe                : 144       : input  : LVTTL             :         : 3         : N              
+serial_data[2]               : 145       : input  : LVTTL             :         : 3         : N              
+serial_data[8]               : 146       : input  : LVTTL             :         : 3         : N              
+i_in[4]                      : 147       : input  : LVTTL             :         : 3         : N              
+VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
+q_out[6]                     : 149       : output : LVTTL             :         : 3         : N              
+serial_data[11]              : 150       : input  : LVTTL             :         : 3         : N              
+i_out[0]                     : 151       : output : LVTTL             :         : 3         : N              
+RESERVED_INPUT               : 152       :        :                   :         : 3         :                
+GND                          : 153       : gnd    :                   :         :           :                
+GND_PLL2                     : 154       : gnd    :                   :         :           :                
+VCCD_PLL2                    : 155       : power  :                   : 1.2V    :           :                
+GND_PLL2                     : 156       : gnd    :                   :         :           :                
+VCCA_PLL2                    : 157       : power  :                   : 1.2V    :           :                
+GNDA_PLL2                    : 158       : gnd    :                   :         :           :                
+GND                          : 159       : gnd    :                   :         :           :                
+i_out[2]                     : 160       : output : LVTTL             :         : 2         : N              
+i_in[13]                     : 161       : input  : LVTTL             :         : 2         : N              
+serial_data[18]              : 162       : input  : LVTTL             :         : 2         : N              
+q_in[1]                      : 163       : input  : LVTTL             :         : 2         : N              
+q_out[0]                     : 164       : output : LVTTL             :         : 2         : N              
+serial_addr[6]               : 165       : input  : LVTTL             :         : 2         : N              
+VCCIO2                       : 166       : power  :                   : 3.3V    : 2         :                
+GND                          : 167       : gnd    :                   :         :           :                
+i_out[8]                     : 168       : output : LVTTL             :         : 2         : N              
+i_out[9]                     : 169       : output : LVTTL             :         : 2         : N              
+q_in[6]                      : 170       : input  : LVTTL             :         : 2         : N              
+q_out[9]                     : 171       : output : LVTTL             :         : 2         : N              
+VCCIO2                       : 172       : power  :                   : 3.3V    : 2         :                
+RESERVED_INPUT               : 173       :        :                   :         : 2         :                
+GND                          : 174       : gnd    :                   :         :           :                
+i_out[6]                     : 175       : output : LVTTL             :         : 2         : N              
+q_out[7]                     : 176       : output : LVTTL             :         : 2         : N              
+GND                          : 177       : gnd    :                   :         :           :                
+VCCINT                       : 178       : power  :                   : 1.2V    :           :                
+serial_data[21]              : 179       : input  : LVTTL             :         : 2         : N              
+i_in[9]                      : 180       : input  : LVTTL             :         : 2         : N              
+i_out[3]                     : 181       : output : LVTTL             :         : 2         : N              
+RESERVED_INPUT               : 182       :        :                   :         : 2         :                
+VCCIO2                       : 183       : power  :                   : 3.3V    : 2         :                
+GND                          : 184       : gnd    :                   :         :           :                
+serial_data[17]              : 185       : input  : LVTTL             :         : 2         : N              
+GND                          : 186       : gnd    :                   :         :           :                
+decim_rate[2]                : 187       : input  : LVTTL             :         : 2         : N              
+serial_data[16]              : 188       : input  : LVTTL             :         : 2         : N              
+q_out[2]                     : 189       : output : LVTTL             :         : 2         : N              
+VCCINT                       : 190       : power  :                   : 1.2V    :           :                
+i_in[11]                     : 191       : input  : LVTTL             :         : 2         : N              
+enable                       : 192       : input  : LVTTL             :         : 2         : N              
+i_out[7]                     : 193       : output : LVTTL             :         : 2         : N              
+VCCIO2                       : 194       : power  :                   : 3.3V    : 2         :                
+serial_data[1]               : 195       : input  : LVTTL             :         : 2         : N              
+GND                          : 196       : gnd    :                   :         :           :                
+decim_rate[0]                : 197       : input  : LVTTL             :         : 2         : N              
+i_out[15]                    : 198       : output : LVTTL             :         : 2         : N              
+serial_data[0]               : 199       : input  : LVTTL             :         : 2         : N              
+reset                        : 200       : input  : LVTTL             :         : 2         : Y              
+RESERVED_INPUT               : 201       :        :                   :         : 2         :                
+VCCIO2                       : 202       : power  :                   : 3.3V    : 2         :                
+i_in[10]                     : 203       : input  : LVTTL             :         : 2         : N              
+GND                          : 204       : gnd    :                   :         :           :                
+q_in[15]                     : 205       : input  : LVTTL             :         : 2         : N              
+i_in[12]                     : 206       : input  : LVTTL             :         : 2         : N              
+q_in[9]                      : 207       : input  : LVTTL             :         : 2         : N              
+q_out[12]                    : 208       : output : LVTTL             :         : 2         : N              
