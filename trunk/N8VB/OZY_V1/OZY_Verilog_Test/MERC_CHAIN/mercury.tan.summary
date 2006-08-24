@@ -1,0 +1,66 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 9.856 ns
+From           : serial_addr[6]
+To             : phase_acc:rx_phase_acc|phase[16]
+From Clock     : --
+To Clock       : clock
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 7.514 ns
+From           : DDC_filt:fq|DDC_filt_stage2:u_DDC_filt_stage2|output_register[7]
+To             : q_out[7]
+From Clock     : clock
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : 0.332 ns
+From           : i_in[11]
+To             : cordic:rx_cordic|x0[11]
+From Clock     : --
+To Clock       : clock
+Failed Paths   : 0
+
+Type           : Clock Setup: 'clock'
+Slack          : 0.380 ns
+Required Time  : 130.01 MHz ( period = 7.692 ns )
+Actual Time    : 136.76 MHz ( period = 7.312 ns )
+From           : DDC_filt:fi|DDC_filt_stage1:u_DDC_filt_stage1|input_register[12]
+To             : DDC_filt:fi|DDC_filt_stage1:u_DDC_filt_stage1|section_out1[59]
+From Clock     : clock
+To Clock       : clock
+Failed Paths   : 0
+
+Type           : Clock Hold: 'clock'
+Slack          : 0.612 ns
+Required Time  : 130.01 MHz ( period = 7.692 ns )
+Actual Time    : N/A
+From           : DDC_filt:fq|DDC_filt_stage2:u_DDC_filt_stage2|input_pipeline_phase0[4][15]
+To             : DDC_filt:fq|DDC_filt_stage2:u_DDC_filt_stage2|sumdelay_pipeline1[10][15]
+From Clock     : clock
+To Clock       : clock
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+
