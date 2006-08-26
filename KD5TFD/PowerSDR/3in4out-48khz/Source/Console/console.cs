@@ -13287,7 +13287,7 @@ namespace PowerSDR
 							}
 							else
 							{
-								if ( ( Keyer.PrimaryConnPort == "SDR" || Keyer.PrimaryConnPort == "FPGA" )  &&
+								if ( ( Keyer.PrimaryConnPort == "SDR" || Keyer.PrimaryConnPort == "Ozy" )  &&
 									Keyer.SecondaryConnPort == "None" &&
 									!cw_semi_break_in_enabled)
 								{

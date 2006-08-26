@@ -164,9 +164,13 @@ namespace HPSDR_USB_LIB_V1
             int linecounter = 0;
             StreamReader reader = new StreamReader(filename, Encoding.ASCII);
 
-            while (reader.BaseStream.Position < reader.BaseStream.Length )
+			// line below does not read to end of file -- apparently the base reader 
+			// gets out in front of the StreamReader on top of it. (kd5tfd) 
+            // while (reader.BaseStream.Position < reader.BaseStream.Length )
+			while ( true ) 
             {
                 string str = reader.ReadLine();
+				if ( str == null ) break; // end of file - bail out 
                 linecounter++;
 
                 if (str.Substring(0, 1) != ":")
