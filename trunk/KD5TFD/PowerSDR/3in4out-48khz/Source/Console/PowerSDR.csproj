@@ -264,6 +264,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "JanusOzyIO.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "logon.cs"
                     SubType = "Form"
                     BuildAction = "Compile"

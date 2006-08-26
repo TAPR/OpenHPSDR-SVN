@@ -5400,7 +5400,7 @@ namespace PowerSDR
 			this.comboKeyerConnPrimary.DropDownWidth = 64;
 			this.comboKeyerConnPrimary.Items.AddRange(new object[] {
 																	   "SDR",
-																	   "FPGA"});
+																	   "Ozy"});
 			this.comboKeyerConnPrimary.Location = new System.Drawing.Point(104, 24);
 			this.comboKeyerConnPrimary.Name = "comboKeyerConnPrimary";
 			this.comboKeyerConnPrimary.Size = new System.Drawing.Size(64, 21);
