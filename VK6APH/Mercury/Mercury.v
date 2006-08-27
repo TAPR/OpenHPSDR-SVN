@@ -246,7 +246,7 @@ end
 
 
 
-	parameter FREQ = 32'b0100000000000000;  //~25MHz  i.e. FREQ /(100e6/2^16)
+	parameter FREQ = 32'h40000000;  //~25MHz  i.e. FREQ /(100e6/2^32)
 	wire	[31:0] phase;
 
 	// The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
