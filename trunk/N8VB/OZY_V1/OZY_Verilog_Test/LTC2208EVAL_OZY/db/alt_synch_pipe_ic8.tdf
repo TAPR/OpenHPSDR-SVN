@@ -1,0 +1,42 @@
+--dffpipe DELAY=2 WIDTH=3 clock clrn d q ALTERA_INTERNAL_OPTIONS=X_ON_VIOLATION_OPTION=OFF
+--VERSION_BEGIN 6.0 cbx_a_gray2bin 2006:02:28:17:43:38:SJ cbx_a_graycounter 2006:03:13:11:03:08:SJ cbx_altdpram 2006:01:09:10:52:42:SJ cbx_altsyncram 2006:03:30:14:59:04:SJ cbx_cycloneii 2006:02:07:15:19:20:SJ cbx_dcfifo 2006:06:14:15:40:04:SJ cbx_fifo_common 2006:01:09:11:23:34:SJ cbx_flex10ke 2006:01:09:11:13:48:SJ cbx_lpm_add_sub 2006:01:09:11:17:20:SJ cbx_lpm_compare 2006:01:09:11:15:40:SJ cbx_lpm_counter 2006:03:23:14:19:24:SJ cbx_lpm_decode 2006:01:09:11:16:44:SJ cbx_lpm_mux 2006:01:09:11:16:16:SJ cbx_mgl 2006:05:17:10:06:16:SJ cbx_scfifo 2006:01:09:11:24:10:SJ cbx_stratix 2006:05:17:09:28:32:SJ cbx_stratixii 2006:03:03:09:35:36:SJ cbx_util_mgl 2006:01:09:10:46:36:SJ  VERSION_END
+
+
+--  Copyright (C) 1991-2006 Altera Corporation
+--  Your use of Altera Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Altera Program License 
+--  Subscription Agreement, Altera MegaCore Function License 
+--  Agreement, or other applicable license agreement, including, 
+--  without limitation, that your use is for the sole purpose of 
+--  programming logic devices manufactured by Altera and sold by 
+--  Altera or its authorized distributors.  Please refer to the 
+--  applicable agreement for further details.
+
+
+FUNCTION dffpipe_cd9 (clock, clrn, d[2..0])
+RETURNS ( q[2..0]);
+
+--synthesis_resources = reg 6 
+OPTIONS ALTERA_INTERNAL_OPTION = "X_ON_VIOLATION_OPTION=OFF";
+
+SUBDESIGN alt_synch_pipe_ic8
+( 
+	clock	:	input;
+	clrn	:	input;
+	d[2..0]	:	input;
+	q[2..0]	:	output;
+) 
+VARIABLE 
+	dffpipe17 : dffpipe_cd9;
+
+BEGIN 
+	dffpipe17.clock = clock;
+	dffpipe17.clrn = clrn;
+	dffpipe17.d[] = d[];
+	q[] = dffpipe17.q[];
+END;
+--VALID FILE

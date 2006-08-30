@@ -9,7 +9,7 @@
 		<Option compiler="5"/>
 		<Build>
 			<Target title="FX2">
-				<Option output="OZYV1FW08172006-1.hex"/>
+				<Option output="OZYV1FW08282006-1.hex"/>
 				<Option working_dir="."/>
 				<Option object_output=".objs"/>
 				<Option deps_output=".deps"/>

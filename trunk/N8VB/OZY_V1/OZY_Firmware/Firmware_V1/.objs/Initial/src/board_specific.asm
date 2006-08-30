@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Thu Aug 17 13:31:47 2006
+; This file generated Mon Aug 28 11:37:52 2006
 ;--------------------------------------------------------
 	.module board_specific
 	.optsdcc -mmcs51 --model-small

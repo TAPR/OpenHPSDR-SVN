@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.5.0 #1020 (May  8 2005)
-; This file generated Thu Aug 17 13:31:44 2006
+; This file generated Mon Aug 28 11:37:51 2006
 ;--------------------------------------------------------
 	.module hpsdr_common
 	.optsdcc -mmcs51 --model-small
@@ -720,89 +720,89 @@ _init_hpsdr:
 ;Initial/src/hpsdr_common.c:41: CKCON = 0;		// MOVX takes 2 cycles
 ;     genAssign
 	mov	_CKCON,#0x00
-;Initial/src/hpsdr_common.c:44: IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFCLKPOL | bmIFFIFO;
+;Initial/src/hpsdr_common.c:44: IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFFIFO;
 ;     genAssign
 	mov	dptr,#_IFCONFIG
-	mov	a,#0xF3
+	mov	a,#0xE3
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:45: SYNCDELAY;
+;Initial/src/hpsdr_common.c:47: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:48: SYNCDELAY;
-;     genInline
-	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:49: FIFORESET = 0x80;
+;Initial/src/hpsdr_common.c:48: FIFORESET = 0x80;
 ;     genAssign
 	mov	dptr,#_FIFORESET
 	mov	a,#0x80
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:50: SYNCDELAY;
+;Initial/src/hpsdr_common.c:49: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:51: FIFORESET = 0x02;
+;Initial/src/hpsdr_common.c:50: FIFORESET = 0x02;
 ;     genAssign
 	mov	dptr,#_FIFORESET
 	mov	a,#0x02
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:52: SYNCDELAY;
+;Initial/src/hpsdr_common.c:51: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:53: FIFORESET = 0x04;
+;Initial/src/hpsdr_common.c:52: FIFORESET = 0x04;
 ;     genAssign
 	mov	dptr,#_FIFORESET
 	mov	a,#0x04
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:54: SYNCDELAY;
+;Initial/src/hpsdr_common.c:53: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:55: FIFORESET = 0x06;
+;Initial/src/hpsdr_common.c:54: FIFORESET = 0x06;
 ;     genAssign
 	mov	dptr,#_FIFORESET
 	mov	a,#0x06
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:56: SYNCDELAY;
+;Initial/src/hpsdr_common.c:55: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:57: FIFORESET = 0x08;
+;Initial/src/hpsdr_common.c:56: FIFORESET = 0x08;
 ;     genAssign
 	mov	dptr,#_FIFORESET
 	mov	a,#0x08
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:58: SYNCDELAY;
+;Initial/src/hpsdr_common.c:57: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:59: FIFORESET = 0x00;
+;Initial/src/hpsdr_common.c:58: FIFORESET = 0x00;
 ;     genAssign
 	mov	dptr,#_FIFORESET
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:60: SYNCDELAY;
+;Initial/src/hpsdr_common.c:59: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:64: IOA = bmPORT_A_INITIAL;	// Port A initial state
+;Initial/src/hpsdr_common.c:63: IOA = bmPORT_A_INITIAL;	// Port A initial state
 ;     genAssign
 	mov	_IOA,#0x00
-;Initial/src/hpsdr_common.c:65: OEA = bmPORT_A_OUTPUTS;	// Port A direction register
+;Initial/src/hpsdr_common.c:64: OEA = bmPORT_A_OUTPUTS;	// Port A direction register
 ;     genAssign
 	mov	_OEA,#0x03
-;Initial/src/hpsdr_common.c:67: IOC = bmPORT_C_INITIAL;	// Port C initial state
+;Initial/src/hpsdr_common.c:66: IOC = bmPORT_C_INITIAL;	// Port C initial state
 ;     genAssign
 	mov	_IOC,#0xC0
-;Initial/src/hpsdr_common.c:68: OEC = bmPORT_C_OUTPUTS;	// Port C direction register
+;Initial/src/hpsdr_common.c:67: OEC = bmPORT_C_OUTPUTS;	// Port C direction register
 ;     genAssign
 	mov	_OEC,#0xE7
-;Initial/src/hpsdr_common.c:70: IOE = bmPORT_E_INITIAL;	// Port E initial state
+;Initial/src/hpsdr_common.c:69: IOE = bmPORT_E_INITIAL;	// Port E initial state
 ;     genAssign
 	mov	_IOE,#0x00
-;Initial/src/hpsdr_common.c:71: OEE = bmPORT_E_OUTPUTS;	// Port E direction register
+;Initial/src/hpsdr_common.c:70: OEE = bmPORT_E_OUTPUTS;	// Port E direction register
 ;     genAssign
 	mov	_OEE,#0xFF
-;Initial/src/hpsdr_common.c:76: EP1OUTCFG = bmVALID | bmBULK;
+;Initial/src/hpsdr_common.c:75: EP1OUTCFG = bmVALID | bmBULK;
 ;     genAssign
 	mov	dptr,#_EP1OUTCFG
 	mov	a,#0xA0
 	movx	@dptr,a
+;Initial/src/hpsdr_common.c:76: SYNCDELAY;
+;     genInline
+	 nop; nop; nop; 
 ;Initial/src/hpsdr_common.c:77: EP1INCFG = bmVALID | bmBULK;
 ;     genAssign
 	mov	dptr,#_EP1INCFG
@@ -819,134 +819,121 @@ _init_hpsdr:
 ;Initial/src/hpsdr_common.c:80: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:83: EP6CFG = bmVALID | bmBULK | bmQUADBUF | bmIN;
+;Initial/src/hpsdr_common.c:81: EP6CFG = bmVALID | bmBULK | bmQUADBUF | bmIN;
 ;     genAssign
 	mov	dptr,#_EP6CFG
 	mov	a,#0xE0
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:84: SYNCDELAY;
+;Initial/src/hpsdr_common.c:82: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:86: SYNCDELAY;
-;     genInline
-	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:88: FIFOPINPOLAR=0x00; //default polarities: SLWR active low
+;Initial/src/hpsdr_common.c:84: FIFOPINPOLAR=0x00; //default polarities: SLWR active low
 ;     genAssign
 	mov	dptr,#_FIFOPINPOLAR
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:93: EP2FIFOCFG = bmWORDWIDE; //core needs to see 0 to 1 transistion of AUTOOUT
+;Initial/src/hpsdr_common.c:86: SYNCDELAY;
+;     genInline
+	 nop; nop; nop; 
+;Initial/src/hpsdr_common.c:89: EP2FIFOCFG = bmWORDWIDE; //core needs to see 0 to 1 transistion of AUTOOUT
 ;     genAssign
 	mov	dptr,#_EP2FIFOCFG
 	mov	a,#0x01
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:94: SYNCDELAY;
+;Initial/src/hpsdr_common.c:90: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:95: EP2FIFOCFG = bmAUTOOUT | bmWORDWIDE;
+;Initial/src/hpsdr_common.c:91: EP2FIFOCFG = bmAUTOOUT | bmWORDWIDE;
 ;     genAssign
 	mov	dptr,#_EP2FIFOCFG
 	mov	a,#0x11
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:96: SYNCDELAY;
+;Initial/src/hpsdr_common.c:92: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:97: EP2AUTOINLENH = 0x02; //MSB
+;Initial/src/hpsdr_common.c:93: EP2AUTOINLENH = 0x02; //MSB
 ;     genAssign
 	mov	dptr,#_EP2AUTOINLENH
 	mov	a,#0x02
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:98: SYNCDELAY;
+;Initial/src/hpsdr_common.c:94: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:99: EP2AUTOINLENL = 0x00; //LSB
+;Initial/src/hpsdr_common.c:95: EP2AUTOINLENL = 0x00; //LSB
 ;     genAssign
 	mov	dptr,#_EP2AUTOINLENL
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:100: SYNCDELAY;
+;Initial/src/hpsdr_common.c:96: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:114: EP6FIFOCFG = bmAUTOIN | bmWORDWIDE;
+;Initial/src/hpsdr_common.c:99: EP6FIFOCFG = bmAUTOIN | bmWORDWIDE;
 ;     genAssign
 	mov	dptr,#_EP6FIFOCFG
 	mov	a,#0x09
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:115: SYNCDELAY;
+;Initial/src/hpsdr_common.c:100: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:116: EP6AUTOINLENH = 0x02; //MSB
+;Initial/src/hpsdr_common.c:101: EP6AUTOINLENH = 0x02; //MSB
 ;     genAssign
 	mov	dptr,#_EP6AUTOINLENH
 	mov	a,#0x02
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:117: SYNCDELAY;
+;Initial/src/hpsdr_common.c:102: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:118: EP6AUTOINLENL = 0x00; //LSB
+;Initial/src/hpsdr_common.c:103: EP6AUTOINLENL = 0x00; //LSB
 ;     genAssign
 	mov	dptr,#_EP6AUTOINLENL
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:119: SYNCDELAY;
+;Initial/src/hpsdr_common.c:104: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:130: SYNCDELAY;
-;     genInline
-	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:131: PINFLAGSAB = bmFLAGB3 | bmFLAGB0 | bmFLAGA3;
-;     genAssign
-	mov	dptr,#_PINFLAGSAB
-	mov	a,#0x98
-	movx	@dptr,a
-;Initial/src/hpsdr_common.c:132: SYNCDELAY;
-;     genInline
-	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:135: | bmFLAGC1;
-;     genAssign
-	mov	dptr,#_PINFLAGSCD
-	mov	a,#0xFE
-	movx	@dptr,a
-;Initial/src/hpsdr_common.c:138: AUTOPTRSETUP |= 0x01;
+;Initial/src/hpsdr_common.c:107: AUTOPTRSETUP |= 0x01;
 ;     genOr
 	orl	_AUTOPTRSETUP,#0x01
-;Initial/src/hpsdr_common.c:140: EP0BCH = 0;
+;Initial/src/hpsdr_common.c:108: SYNCDELAY;
+;     genInline
+	 nop; nop; nop; 
+;Initial/src/hpsdr_common.c:110: EP0BCH = 0;
 ;     genAssign
 	mov	dptr,#_EP0BCH
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:141: SYNCDELAY;
+;Initial/src/hpsdr_common.c:111: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:145: EP1OUTBC = 0;
+;Initial/src/hpsdr_common.c:115: EP1OUTBC = 0;
 ;     genAssign
 	mov	dptr,#_EP1OUTBC
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;Initial/src/hpsdr_common.c:146: SYNCDELAY;
+;Initial/src/hpsdr_common.c:116: SYNCDELAY;
 ;     genInline
 	 nop; nop; nop; 
-;Initial/src/hpsdr_common.c:150: SCON0 = 0x50;
+;Initial/src/hpsdr_common.c:120: SCON0 = 0x50;
 ;     genAssign
 	mov	_SCON0,#0x50
-;Initial/src/hpsdr_common.c:151: TMOD |= 0x20;
+;Initial/src/hpsdr_common.c:121: TMOD |= 0x20;
 ;     genOr
 	orl	_TMOD,#0x20
-;Initial/src/hpsdr_common.c:152: TH1 = 0xB2;
+;Initial/src/hpsdr_common.c:122: TH1 = 0xB2;
 ;     genAssign
 	mov	_TH1,#0xB2
-;Initial/src/hpsdr_common.c:153: TR1 = 1;
+;Initial/src/hpsdr_common.c:123: TR1 = 1;
 ;     genAssign
 	setb	_TR1
-;Initial/src/hpsdr_common.c:154: TI = 1;
+;Initial/src/hpsdr_common.c:124: TI = 1;
 ;     genAssign
 	setb	_TI
-;Initial/src/hpsdr_common.c:156: init_board ();
+;Initial/src/hpsdr_common.c:126: init_board ();
 ;     genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_init_board
