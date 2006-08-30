@@ -88,7 +88,7 @@ namespace test_fifo
             Console.WriteLine("Press return...");
             Console.ReadKey();
             System.Random rnd = new Random();
-            int size = 2048;
+            int size = 4096;
             byte[] rbuf = new byte[size];
             HiPerfTimer pt = new HiPerfTimer();
 
@@ -108,22 +108,18 @@ namespace test_fifo
             //while (true)
             //{
                 //pt.Start();
-            int counter = 0;
+                int counter = 0;
                 int ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf, 500);
                 //if (ret != rbuf.Length)
                 //    break;
                 FileStream fs = File.Create(".\\dump.txt");
                 StreamWriter sw = new StreamWriter(fs);
-                for (int i = 0; i < rbuf.Length; i++)
+                for (int i = 0; i < rbuf.Length; i+=2)
                 {
-                    sw.Write(rbuf[i].ToString("X") + " : ");
-                    Console.Write(rbuf[i].ToString("X") + " : ");
-                    if (++counter >= 8)
-                    {
-                        counter = 0;
-                        Console.WriteLine();
-                        sw.WriteLine();
-                    }
+                    int foo = (int)(rbuf[i + 1] * 256 + rbuf[i]);
+                    int doo = nBitTwosComp(foo, 16);
+                    Console.WriteLine(doo.ToString());
+                    sw.WriteLine(doo.ToString());
                 }
                 System.Threading.Thread.Sleep(100);
                 sw.Close();
@@ -142,6 +138,22 @@ namespace test_fifo
             Console.WriteLine("Error stop at time: " + DateTime.Now);
             Console.WriteLine("Press return...");
             Console.ReadKey();
+        }
+
+        private static int nBitTwosComp(int data, int numBits)
+        {
+            System.Collections.BitArray b = new System.Collections.BitArray(new int[] { data });
+
+            int result = -(data & (1 << numBits - 1));
+            //int result = -(b[numBits - 1] ? 1 : 0) * (1 << numBits - 1);
+
+            //for (int i = numBits - 2; i >= 0; i--)
+            //    result += (b[i] ? 1 : 0) * (1 << i);
+
+            for (int i = numBits - 2; i >= 0; i--) 
+                result |= (data & (1 << i));
+
+            return result;
         }
     }
 }

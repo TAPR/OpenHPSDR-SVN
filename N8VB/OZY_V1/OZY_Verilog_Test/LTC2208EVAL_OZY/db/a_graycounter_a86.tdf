@@ -1,0 +1,38 @@
+--a_graycounter DEVICE_FAMILY="Cyclone II" WIDTH=3 aclr clock cnt_en q
+--VERSION_BEGIN 6.0 cbx_a_gray2bin 2006:02:28:17:43:38:SJ cbx_a_graycounter 2006:03:13:11:03:08:SJ cbx_cycloneii 2006:02:07:15:19:20:SJ cbx_flex10ke 2006:01:09:11:13:48:SJ cbx_mgl 2006:05:17:10:06:16:SJ cbx_stratix 2006:05:17:09:28:32:SJ cbx_stratixii 2006:03:03:09:35:36:SJ  VERSION_END
+
+
+--  Copyright (C) 1991-2006 Altera Corporation
+--  Your use of Altera Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Altera Program License 
+--  Subscription Agreement, Altera MegaCore Function License 
+--  Agreement, or other applicable license agreement, including, 
+--  without limitation, that your use is for the sole purpose of 
+--  programming logic devices manufactured by Altera and sold by 
+--  Altera or its authorized distributors.  Please refer to the 
+--  applicable agreement for further details.
+
+
+
+--synthesis_resources = reg 3 
+SUBDESIGN a_graycounter_a86
+( 
+	aclr	:	input;
+	clock	:	input;
+	cnt_en	:	input;
+	q[2..0]	:	output;
+) 
+VARIABLE 
+	dffe5a[2..0] : dffe;
+
+BEGIN 
+	dffe5a[].CLK = clock;
+	dffe5a[].CLRN = ( (! aclr), (! aclr), (! aclr));
+	dffe5a[].D = ( ((cnt_en & (dffe5a[2..2].Q $ ((! dffe5a[0..0].Q) & (dffe5a[1..1].Q $ dffe5a[2..2].Q)))) # ((! cnt_en) & dffe5a[2..2].Q)), ((cnt_en & (dffe5a[1..1].Q $ (dffe5a[0..0].Q & (! (dffe5a[1..1].Q $ dffe5a[2..2].Q))))) # ((! cnt_en) & dffe5a[1..1].Q)), ((cnt_en & (! (dffe5a[1..1].Q $ dffe5a[2..2].Q))) # ((! cnt_en) & dffe5a[0..0].Q)));
+	q[] = dffe5a[].Q;
+END;
+--VALID FILE

@@ -1,0 +1,124 @@
+
+<!--
+This XML file (created on Tue Aug 29 09:14:29 2006) contains limited information
+from the compilation of logic designs using Quartus II software (BUT NOT THE
+LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
+operation of the "TalkBack" feature.  To enable/disable this feature, run
+qtb_install.exe located in your quartus/bin folder.  For more information, go
+to license.txt.
+-->
+<talkback>
+<ver>6.0</ver>
+<schema>quartus_version_6.0_build_202.xsd</schema>
+<license>
+	<host_id>00a0cc694f79</host_id>
+	<nic_id>00123f7b788f</nic_id>
+	<cdrive_id>dc2f6d33</cdrive_id>
+</license>
+<tool>
+	<name>Quartus II</name>
+	<version>6.0</version>
+	<build>Build 202</build>
+	<service_pack_label>1</service_pack_label>
+	<binary_type>32</binary_type>
+	<module>quartus</module>
+	<edition>Full Version</edition>
+	<eval>Licensed</eval>
+	<compilation_end_time>Tue Aug 29 09:14:29 2006</compilation_end_time>
+</tool>
+<machine>
+	<os>Windows XP</os>
+	<cpu>
+		<proc_count>2</proc_count>
+		<cpu_freq units="MHz">3391</cpu_freq>
+	</cpu>
+	<ram units="MB">1023</ram>
+</machine>
+<project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval</project>
+<revision>ozy_eval</revision>
+<gui_actions>
+	<action time="Tue Aug 29 08:43:04 2006" type="project_open">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval</action>
+	<action time="Tue Aug 29 08:43:04 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval.v</action>
+	<action time="Tue Aug 29 08:43:04 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/tx_fifo.v</action>
+	<action time="Tue Aug 29 08:45:08 2006" type="editor_open" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
+	<action time="Tue Aug 29 08:45:59 2006" type="editor_open" clsid="AFC_CLSID_PPL_DEFAULT_DOC">c:/altera/quartus60/win/pin_planner.ppl</action>
+	<action time="Tue Aug 29 09:14:29 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval.v</action>
+	<action time="Tue Aug 29 09:14:29 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/tx_fifo.v</action>
+	<action time="Tue Aug 29 09:14:29 2006" type="editor_close" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
+	<action time="Tue Aug 29 09:14:29 2006" type="editor_close" clsid="AFC_CLSID_PPL_DEFAULT_DOC">c:/altera/quartus60/win/pin_planner.ppl</action>
+	<action time="Tue Aug 29 09:14:29 2006" type="project_close">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval</action>
+</gui_actions>
+<gui_summary>
+	<editor_count clsid="AFC_CLSID_ACV_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_ACV_FLED_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_APE_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_ASE_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_ATC_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_CFW_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_ECUI_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_FLP_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_GED_BDF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_GED_BSF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_GED_GDF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_GED_SYM_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_MED_HEX_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_MED_MIF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_MSW_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_OAW_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PGMW_CDF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PGMW_COF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PGMW_FCF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PGMW_JAM_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PGMW_JCF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PGMW_PFL_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PGMW_POF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PGMW_SOF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PJM_ARCHIVE">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PJM_CSF">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PJM_FSF">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PJM_PROJECT">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PJM_QPF">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PJM_SSF">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PJN_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_PPL_DEFAULT_DOC">1</editor_count>
+	<editor_count clsid="AFC_CLSID_PTW_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_QIS_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RED_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_REQC_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RPW_CHART_TYPE">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RPW_CMP_SUMMARY_TYPE">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RPW_DEFAULT_DOC">1</editor_count>
+	<editor_count clsid="AFC_CLSID_RPW_GAUGES_TYPE">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RPW_HTML_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RPW_HTML_TYPE">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RPW_TABLE_TYPE">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RPW_TEXT_TYPE">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RPW_TXT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RSM_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RUI_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RUI_SIM_VIEWER_FAST_TIMING_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RUI_SIM_VIEWER_FUNCTIONAL_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RUI_SIM_VIEWER_TIMING_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_RUI_TECH_VIEWER_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_SED_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_SFW_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_SOPCW_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_TED_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_TED_EDF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_TED_PTF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_TED_TCL_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_TED_TDF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_TED_TDF_INC_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_TED_VERILOG_DOC">2</editor_count>
+	<editor_count clsid="AFC_CLSID_TED_VHD_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_TFW_ADVANCED_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_TFW_DEFAULT_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_WED_RDX_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_WED_SCF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_WED_TBL_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_WED_VCD_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_WED_VCF_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_WED_VEC_DOC">0</editor_count>
+	<editor_count clsid="AFC_CLSID_WED_ZVCF_DOC">0</editor_count>
+</gui_summary>
+</talkback>

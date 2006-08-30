@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.5.0 #1020 (May  8 2005)
-                              4 ; This file generated Thu Aug 17 13:31:40 2006
+                              4 ; This file generated Mon Aug 28 11:37:51 2006
                               5 ;--------------------------------------------------------
                               6 	.module hpsdr_main
                               7 	.optsdcc -mmcs51 --model-small
@@ -702,7 +702,7 @@
                             702 ;--------------------------------------------------------
                             703 	.area CSEG    (CODE)
    01A2                     704 __interrupt_vect:
-   01A2 02 10 59            705 	ljmp	__sdcc_gsinit_startup
+   01A2 02 10 4C            705 	ljmp	__sdcc_gsinit_startup
                             706 ;--------------------------------------------------------
                             707 ; global & static initialisations
                             708 ;--------------------------------------------------------
@@ -721,9 +721,9 @@
                             721 ;------------------------------------------------------------
                             722 ;Initial/src/hpsdr_main.c:210: static unsigned char	count = 1;
                             723 ;     genAssign
-   1050 75 08 01            724 	mov	_isr_tick_count_1_1,#0x01
+   1043 75 08 01            724 	mov	_isr_tick_count_1_1,#0x01
                             725 	.area GSFINAL (CODE)
-   106C 02 01 A5            726 	ljmp	__sdcc_program_startup
+   105F 02 01 A5            726 	ljmp	__sdcc_program_startup
                             727 ;--------------------------------------------------------
                             728 ; Home
                             729 ;--------------------------------------------------------
@@ -847,7 +847,7 @@
                             847 ;	Peephole 244.c	loading dpl from a instead of r2
    01F2 FA                  848 	mov	r2,a
    01F3 F5 82               849 	mov	dpl,a
-   01F5 12 06 31            850 	lcall	_set_led_0
+   01F5 12 06 24            850 	lcall	_set_led_0
                             851 ;Initial/src/hpsdr_main.c:75: break;
    01F8 02 02 D5            852 	ljmp	00130$
                             853 ;Initial/src/hpsdr_main.c:77: case 1:
@@ -861,7 +861,7 @@
                             861 ;	Peephole 244.c	loading dpl from a instead of r2
    01FF FA                  862 	mov	r2,a
    0200 F5 82               863 	mov	dpl,a
-   0202 12 06 3E            864 	lcall	_set_led_1
+   0202 12 06 31            864 	lcall	_set_led_1
                             865 ;Initial/src/hpsdr_main.c:79: break;
    0205 02 02 D5            866 	ljmp	00130$
                             867 ;Initial/src/hpsdr_main.c:81: default:
@@ -956,7 +956,7 @@
    0248 F5 2D               956 	mov	_i2c_write_PARM_3,a
                             957 ;     genCall
    024A 8A 82               958 	mov	dpl,r2
-   024C 12 07 9F            959 	lcall	_i2c_write
+   024C 12 07 92            959 	lcall	_i2c_write
    024F E5 82               960 	mov	a,dpl
                             961 ;     genIfx
                             962 ;     genIfxJump
@@ -1003,7 +1003,7 @@
    027E F5 1B              1003 	mov	_spi_write_PARM_6,a
                            1004 ;     genCall
    0280 8A 82              1005 	mov	dpl,r2
-   0282 12 0A A7           1006 	lcall	_spi_write
+   0282 12 0A 9A           1006 	lcall	_spi_write
    0285 E5 82              1007 	mov	a,dpl
                            1008 ;     genIfx
                            1009 ;     genIfxJump
@@ -1175,7 +1175,7 @@
    0306 F5 2D              1175 	mov	_i2c_read_PARM_3,a
                            1176 ;     genCall
    0308 8A 82              1177 	mov	dpl,r2
-   030A 12 06 C8           1178 	lcall	_i2c_read
+   030A 12 06 BB           1178 	lcall	_i2c_read
    030D E5 82              1179 	mov	a,dpl
                            1180 ;     genIfx
                            1181 ;     genIfxJump
@@ -1240,7 +1240,7 @@
    0346 F5 15              1240 	mov	_spi_read_PARM_6,a
                            1241 ;     genCall
    0348 8A 82              1242 	mov	dpl,r2
-   034A 12 0A 39           1243 	lcall	_spi_read
+   034A 12 0A 2C           1243 	lcall	_spi_read
    034D E5 82              1244 	mov	a,dpl
                            1245 ;     genIfx
                            1246 ;     genIfxJump
@@ -1420,14 +1420,14 @@
    03BD                    1420 00111$:
                            1421 ;Initial/src/hpsdr_main.c:195: usb_handle_setup_packet ();
                            1422 ;     genCall
-   03BD 12 0F EA           1423 	lcall	_usb_handle_setup_packet
+   03BD 12 0F DD           1423 	lcall	_usb_handle_setup_packet
                            1424 ;	Peephole 112.b	changed ljmp to sjmp
    03C0 80 F8              1425 	sjmp	00105$
    03C2                    1426 00102$:
                            1427 ;Initial/src/hpsdr_main.c:197: putchar(32);
                            1428 ;     genCall
    03C2 75 82 20           1429 	mov	dpl,#0x20
-   03C5 12 05 EC           1430 	lcall	_putchar
+   03C5 12 05 DF           1430 	lcall	_putchar
                            1431 ;	Peephole 112.b	changed ljmp to sjmp
    03C8 80 F0              1432 	sjmp	00105$
    03CA                    1433 00107$:
@@ -1538,11 +1538,11 @@
                            1538 ;Initial/src/hpsdr_main.c:248: set_led_0 (1);
                            1539 ;     genCall
    040C 75 82 01           1540 	mov	dpl,#0x01
-   040F 12 06 31           1541 	lcall	_set_led_0
+   040F 12 06 24           1541 	lcall	_set_led_0
                            1542 ;Initial/src/hpsdr_main.c:249: set_led_1 (0);
                            1543 ;     genCall
    0412 75 82 00           1544 	mov	dpl,#0x00
-   0415 12 06 3E           1545 	lcall	_set_led_1
+   0415 12 06 31           1545 	lcall	_set_led_1
                            1546 ;Initial/src/hpsdr_main.c:251: EA = 0;		// disable all interrupts
                            1547 ;     genAssign
    0418 C2 AF              1548 	clr	_EA
@@ -1551,10 +1551,10 @@
    041A 12 03 E0           1551 	lcall	_patch_usb_descriptors
                            1552 ;Initial/src/hpsdr_main.c:255: setup_autovectors ();
                            1553 ;     genCall
-   041D 12 09 4B           1554 	lcall	_setup_autovectors
+   041D 12 09 3E           1554 	lcall	_setup_autovectors
                            1555 ;Initial/src/hpsdr_main.c:256: usb_install_handlers ();
                            1556 ;     genCall
-   0420 12 0C BC           1557 	lcall	_usb_install_handlers
+   0420 12 0C AF           1557 	lcall	_usb_install_handlers
                            1558 ;Initial/src/hpsdr_main.c:257: hook_timer_tick ((unsigned short) isr_tick);
                            1559 ;     genCast
    0423 7A CB              1560 	mov	r2,#_isr_tick
@@ -1562,7 +1562,7 @@
                            1562 ;     genCall
    0427 8A 82              1563 	mov	dpl,r2
    0429 8B 83              1564 	mov	dph,r3
-   042B 12 0B DB           1565 	lcall	_hook_timer_tick
+   042B 12 0B CE           1565 	lcall	_hook_timer_tick
                            1566 ;Initial/src/hpsdr_main.c:259: EIEX4 = 1;	// disable INT4 FIXME
                            1567 ;     genAssign
    042E D2 EA              1568 	setb	_EIEX4
@@ -1571,7 +1571,7 @@
    0430 D2 AF              1571 	setb	_EA
                            1572 ;Initial/src/hpsdr_main.c:262: fx2_renumerate ();	// simulates disconnect / reconnect
                            1573 ;     genCall
-   0432 12 06 A2           1574 	lcall	_fx2_renumerate
+   0432 12 06 95           1574 	lcall	_fx2_renumerate
                            1575 ;Initial/src/hpsdr_main.c:264: main_loop ();
                            1576 ;     genCall
                            1577 ;	Peephole 253.b	replaced lcall/ret with ljmp

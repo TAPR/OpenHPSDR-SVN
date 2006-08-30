@@ -41,8 +41,7 @@ init_hpsdr (void)
   CKCON = 0;		// MOVX takes 2 cycles
 
   // IFCLK is generated internally and runs at 48 MHz; Slave FIFO mode - PAC 07/10/2006
-  IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFCLKPOL | bmIFFIFO;
-  SYNCDELAY;
+  IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFFIFO;
 
 //Clear and reset all FIFOs see pg. 15-20 of TRM V2.1
   SYNCDELAY;
@@ -74,22 +73,19 @@ init_hpsdr (void)
 
 // we are just using the default values, yes this is not necessary...
   EP1OUTCFG = bmVALID | bmBULK;
+  SYNCDELAY;
   EP1INCFG = bmVALID | bmBULK;
   SYNCDELAY;
   EP2CFG = bmVALID | bmBULK | bmQUADBUF;
   SYNCDELAY;
-//  EP4CFG = bmVALID | bmBULK;
-//  SYNCDELAY;
   EP6CFG = bmVALID | bmBULK | bmQUADBUF | bmIN;
-  SYNCDELAY;
-// EP8CFG = bmVALID | bmBULK | bmIN;
   SYNCDELAY;
 
   FIFOPINPOLAR=0x00; //default polarities: SLWR active low
                                     // see pg 15-22 TRM V2.1
+  SYNCDELAY;
 
-  //EP2
-
+  // EP2
   EP2FIFOCFG = bmWORDWIDE; //core needs to see 0 to 1 transistion of AUTOOUT
   SYNCDELAY;
   EP2FIFOCFG = bmAUTOOUT | bmWORDWIDE;
@@ -99,18 +95,7 @@ init_hpsdr (void)
   EP2AUTOINLENL = 0x00; //LSB
   SYNCDELAY;
 
-//  //EP4
-//
-//  EP4FIFOCFG = bmWORDWIDE; //core needs to see 0 to 1 transistion of AUTOOUT
-//  SYNCDELAY;
-//  EP4FIFOCFG = bmAUTOOUT | bmWORDWIDE;
-//  SYNCDELAY;
-//  EP4AUTOINLENH = 0x02; //MSB
-//  SYNCDELAY;
-//  EP4AUTOINLENL = 0x00; //LSB
-//  SYNCDELAY;
-//  //EP6
-
+  // EP6
   EP6FIFOCFG = bmAUTOIN | bmWORDWIDE;
   SYNCDELAY;
   EP6AUTOINLENH = 0x02; //MSB
@@ -118,24 +103,9 @@ init_hpsdr (void)
   EP6AUTOINLENL = 0x00; //LSB
   SYNCDELAY;
 
-//  //EP8
-//
-//  EP8FIFOCFG = bmAUTOIN | bmWORDWIDE;
-//  SYNCDELAY;
-//  EP8AUTOINLENH = 0x02; //MSB
-//  SYNCDELAY;
-//  EP8AUTOINLENL = 0x00; //LSB
-
-  // Set up FIFO FLAGS A through D
-  SYNCDELAY;
-  PINFLAGSAB = bmFLAGB3 | bmFLAGB0 | bmFLAGA3;
-  SYNCDELAY;
-  PINFLAGSCD = bmFLAGD3 | bmFLAGD2 | bmFLAGD1
-                        | bmFLAGD0 | bmFLAGC3 | bmFLAGC2
-                        | bmFLAGC1;
-
   // enable dual autopointer feature
   AUTOPTRSETUP |= 0x01;
+  SYNCDELAY;
 
   EP0BCH = 0;
   SYNCDELAY;

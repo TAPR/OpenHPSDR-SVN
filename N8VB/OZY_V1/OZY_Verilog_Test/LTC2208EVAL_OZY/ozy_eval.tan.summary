@@ -1,0 +1,76 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 5.665 ns
+From           : FLAGB
+To             : WRITE_FX2FIFO
+From Clock     : --
+To Clock       : IFCLK
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 12.767 ns
+From           : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[4]
+To             : GPIO2
+From Clock     : ENC_CLK
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case tpd
+Slack          : N/A
+Required Time  : None
+Actual Time    : 10.721 ns
+From           : FLAGB
+To             : GPIO6
+From Clock     : --
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -3.313 ns
+From           : DA[0]
+To             : ADC[0]
+From Clock     : --
+To Clock       : ENC_CLK
+Failed Paths   : 0
+
+Type           : Clock Setup: 'IFCLK'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 175.07 MHz ( period = 5.712 ns )
+From           : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdptr_g[5]
+To             : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5|q_a[15]
+From Clock     : IFCLK
+To Clock       : IFCLK
+Failed Paths   : 0
+
+Type           : Clock Setup: 'ENC_CLK'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 178.54 MHz ( period = 5.601 ns )
+From           : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[4]
+To             : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[11]
+From Clock     : ENC_CLK
+To Clock       : ENC_CLK
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+
