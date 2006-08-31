@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Tue Aug 29 09:14:19 2006) contains limited information
+This XML file (created on Thu Aug 31 11:56:37 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus_tan</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Tue Aug 29 09:14:19 2006</compilation_end_time>
+	<compilation_end_time>Thu Aug 31 11:56:37 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval</project>
 <revision>ozy_eval</revision>
 <compilation_summary>
-	<flow_status>Successful - Tue Aug 29 09:14:18 2006</flow_status>
+	<flow_status>Successful - Thu Aug 31 11:56:36 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>ozy_eval</revision_name>
 	<top_level_entity_name>ozy_eval</top_level_entity_name>
@@ -45,11 +45,11 @@ to license.txt.
 	<device>EP2C5Q208C7</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>Yes</met_timing_requirements>
-	<total_logic_elements>164 / 4,608 ( 4 % )</total_logic_elements>
-	<total_registers>145</total_registers>
+	<total_logic_elements>126 / 4,608 ( 3 % )</total_logic_elements>
+	<total_registers>118</total_registers>
 	<total_pins>51 / 142 ( 36 % )</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
-	<total_memory_bits>32,768 / 119,808 ( 27 % )</total_memory_bits>
+	<total_memory_bits>16,384 / 119,808 ( 14 % )</total_memory_bits>
 	<embedded_multiplier_9_bit_elements>0 / 26 ( 0 % )</embedded_multiplier_9_bit_elements>
 	<total_plls>0 / 2 ( 0 % )</total_plls>
 </compilation_summary>
@@ -65,9 +65,9 @@ to license.txt.
 	<warning>Warning: Found pins functioning as undefined clocks and/or memory enables</warning>
 	<info>Info: Quartus II Timing Analyzer was successful. 0 errors, 3 warnings</info>
 	<info>Info: Elapsed time: 00:00:01</info>
-	<info>Info: Processing ended: Tue Aug 29 09:14:18 2006</info>
-	<info>Info: th for register &quot;ADC[0]&quot; (data pin = &quot;DA[0]&quot;, clock pin = &quot;ENC_CLK&quot;) is -3.313 ns</info>
-	<info>Info: - Shortest pin to register delay is 7.086 ns</info>
+	<info>Info: Processing ended: Thu Aug 31 11:56:36 2006</info>
+	<info>Info: th for register &quot;ADC[7]&quot; (data pin = &quot;DA[7]&quot;, clock pin = &quot;ENC_CLK&quot;) is -3.218 ns</info>
+	<info>Info: - Shortest pin to register delay is 6.426 ns</info>
 </messages>
 <clock_settings_summary>
 	<row>
@@ -96,37 +96,37 @@ to license.txt.
 		<type>Worst-case tsu</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>5.665 ns</actual>
+		<actual>5.756 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case tco</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>12.767 ns</actual>
+		<actual>12.131 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case tpd</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>10.721 ns</actual>
+		<actual>10.675 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case th</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>-3.313 ns</actual>
+		<actual>-3.218 ns</actual>
 	</nonclk>
 	<clk>
 		<name>IFCLK</name>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>175.07 MHz ( period = 5.712 ns )</actual>
+		<actual>164.28 MHz ( period = 6.087 ns )</actual>
 	</clk>
 	<clk>
 		<name>ENC_CLK</name>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>178.54 MHz ( period = 5.601 ns )</actual>
+		<actual>167.03 MHz ( period = 5.987 ns )</actual>
 	</clk>
 </performance>
 </talkback>

@@ -5,7 +5,7 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 5.665 ns
+Actual Time    : 5.756 ns
 From           : FLAGB
 To             : WRITE_FX2FIFO
 From Clock     : --
@@ -15,8 +15,8 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 12.767 ns
-From           : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[4]
+Actual Time    : 12.131 ns
+From           : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[10]
 To             : GPIO2
 From Clock     : ENC_CLK
 To Clock       : --
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 10.721 ns
+Actual Time    : 10.675 ns
 From           : FLAGB
 To             : GPIO6
 From Clock     : --
@@ -35,9 +35,9 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -3.313 ns
-From           : DA[0]
-To             : ADC[0]
+Actual Time    : -3.218 ns
+From           : DA[7]
+To             : ADC[7]
 From Clock     : --
 To Clock       : ENC_CLK
 Failed Paths   : 0
@@ -45,9 +45,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'IFCLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 175.07 MHz ( period = 5.712 ns )
-From           : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdptr_g[5]
-To             : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5|q_a[15]
+Actual Time    : 164.28 MHz ( period = 6.087 ns )
+From           : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[3]
+To             : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[10]
 From Clock     : IFCLK
 To Clock       : IFCLK
 Failed Paths   : 0
@@ -55,9 +55,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'ENC_CLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 178.54 MHz ( period = 5.601 ns )
-From           : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[4]
-To             : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[11]
+Actual Time    : 167.03 MHz ( period = 5.987 ns )
+From           : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[10]
+To             : tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[10]
 From Clock     : ENC_CLK
 To Clock       : ENC_CLK
 Failed Paths   : 0
