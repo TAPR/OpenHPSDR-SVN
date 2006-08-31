@@ -1,5 +1,5 @@
 Fitter report for ozy_eval
-Tue Aug 29 09:14:11 2006
+Thu Aug 31 11:56:30 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -61,18 +61,18 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                    ;
 +------------------------------------+----------------------------------------------+
-; Fitter Status                      ; Successful - Tue Aug 29 09:14:11 2006        ;
+; Fitter Status                      ; Successful - Thu Aug 31 11:56:30 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; ozy_eval                                     ;
 ; Top-level Entity Name              ; ozy_eval                                     ;
 ; Family                             ; Cyclone II                                   ;
 ; Device                             ; EP2C5Q208C7                                  ;
 ; Timing Models                      ; Final                                        ;
-; Total logic elements               ; 164 / 4,608 ( 4 % )                          ;
-; Total registers                    ; 145                                          ;
+; Total logic elements               ; 126 / 4,608 ( 3 % )                          ;
+; Total registers                    ; 118                                          ;
 ; Total pins                         ; 51 / 142 ( 36 % )                            ;
 ; Total virtual pins                 ; 0                                            ;
-; Total memory bits                  ; 32,768 / 119,808 ( 27 % )                    ;
+; Total memory bits                  ; 16,384 / 119,808 ( 14 % )                    ;
 ; Embedded Multiplier 9-bit elements ; 0 / 26 ( 0 % )                               ;
 ; Total PLLs                         ; 0 / 2 ( 0 % )                                ;
 +------------------------------------+----------------------------------------------+
@@ -124,40 +124,40 @@ The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Tes
 +---------------------------------------------+---------------------------+
 ; Resource                                    ; Usage                     ;
 +---------------------------------------------+---------------------------+
-; Total logic elements                        ; 164 / 4,608 ( 4 % )       ;
-;     -- Combinational with no register       ; 19                        ;
-;     -- Register only                        ; 78                        ;
-;     -- Combinational with a register        ; 67                        ;
+; Total logic elements                        ; 126 / 4,608 ( 3 % )       ;
+;     -- Combinational with no register       ; 8                         ;
+;     -- Register only                        ; 73                        ;
+;     -- Combinational with a register        ; 45                        ;
 ;                                             ;                           ;
 ; Logic element usage by number of LUT inputs ;                           ;
-;     -- 4 input functions                    ; 23                        ;
-;     -- 3 input functions                    ; 45                        ;
-;     -- <=2 input functions                  ; 18                        ;
-;     -- Register only                        ; 78                        ;
+;     -- 4 input functions                    ; 15                        ;
+;     -- 3 input functions                    ; 25                        ;
+;     -- <=2 input functions                  ; 13                        ;
+;     -- Register only                        ; 73                        ;
 ;                                             ;                           ;
 ; Logic elements by mode                      ;                           ;
-;     -- normal mode                          ; 53                        ;
-;     -- arithmetic mode                      ; 33                        ;
+;     -- normal mode                          ; 31                        ;
+;     -- arithmetic mode                      ; 22                        ;
 ;                                             ;                           ;
-; Total registers                             ; 145 / 4,608 ( 3 % )       ;
-; Total LABs                                  ; 13 / 288 ( 5 % )          ;
+; Total registers                             ; 118 / 4,608 ( 3 % )       ;
+; Total LABs                                  ; 10 / 288 ( 3 % )          ;
 ; User inserted logic elements                ; 0                         ;
 ; Virtual pins                                ; 0                         ;
 ; I/O pins                                    ; 51 / 142 ( 36 % )         ;
 ;     -- Clock pins                           ; 1 / 4 ( 25 % )            ;
 ; Global signals                              ; 1                         ;
-; M4Ks                                        ; 8 / 26 ( 31 % )           ;
-; Total memory bits                           ; 32,768 / 119,808 ( 27 % ) ;
-; Total RAM block bits                        ; 36,864 / 119,808 ( 31 % ) ;
+; M4Ks                                        ; 4 / 26 ( 15 % )           ;
+; Total memory bits                           ; 16,384 / 119,808 ( 14 % ) ;
+; Total RAM block bits                        ; 18,432 / 119,808 ( 15 % ) ;
 ; Embedded Multiplier 9-bit elements          ; 0 / 26 ( 0 % )            ;
 ; PLLs                                        ; 0 / 2 ( 0 % )             ;
 ; Global clocks                               ; 1 / 8 ( 13 % )            ;
 ; Maximum fan-out node                        ; txfifoclr                 ;
-; Maximum fan-out                             ; 119                       ;
+; Maximum fan-out                             ; 88                        ;
 ; Highest non-global fan-out signal           ; txfifoclr                 ;
-; Highest non-global fan-out                  ; 119                       ;
-; Total fan-out                               ; 989                       ;
-; Average fan-out                             ; 2.91                      ;
+; Highest non-global fan-out                  ; 88                        ;
+; Total fan-out                               ; 688                       ;
+; Average fan-out                             ; 2.46                      ;
 +---------------------------------------------+---------------------------+
 
 
@@ -182,7 +182,7 @@ The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Tes
 ; DA[7]   ; 169   ; 2        ; 21           ; 14           ; 1           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; DA[8]   ; 168   ; 2        ; 21           ; 14           ; 0           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; DA[9]   ; 165   ; 2        ; 24           ; 14           ; 2           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
-; ENC_CLK ; 150   ; 3        ; 28           ; 12           ; 2           ; 75                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
+; ENC_CLK ; 150   ; 3        ; 28           ; 12           ; 2           ; 68                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; FLAGA   ; 198   ; 2        ; 5            ; 14           ; 1           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; FLAGB   ; 197   ; 2        ; 5            ; 14           ; 0           ; 2                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
 ; FLAGC   ; 5     ; 1        ; 0            ; 13           ; 4           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; LVTTL        ; Off         ; User                 ;
@@ -493,32 +493,28 @@ The pin-out file can be found in C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Tes
 Note: User assignments will override these defaults. The user specified values are listed in the Output Pins and Bidir Pins tables.
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                                    ;
-+-----------------------------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-; Compilation Hierarchy Node                    ; Logic Cells ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                                                                                                               ;
-+-----------------------------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-; |ozy_eval                                     ; 164 (22)    ; 86 (6)            ; 145 (21)     ; 32768       ; 8    ; 0            ; 0       ; 0         ; 51   ; 0            ; 19 (1)       ; 78 (16)           ; 67 (5)           ; |ozy_eval                                                                                                                         ;
-;    |tx_fifo:tx_fifo|                          ; 142 (0)     ; 80 (0)            ; 124 (0)      ; 32768       ; 8    ; 0            ; 0       ; 0         ; 0    ; 0            ; 18 (0)       ; 62 (0)            ; 62 (0)           ; |ozy_eval|tx_fifo:tx_fifo                                                                                                         ;
-;       |dcfifo:dcfifo_component|               ; 142 (0)     ; 80 (0)            ; 124 (0)      ; 32768       ; 8    ; 0            ; 0       ; 0         ; 0    ; 0            ; 18 (0)       ; 62 (0)            ; 62 (0)           ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component                                                                                 ;
-;          |dcfifo_mfb1:auto_generated|         ; 142 (46)    ; 80 (34)           ; 124 (28)     ; 32768       ; 8    ; 0            ; 0       ; 0         ; 0    ; 0            ; 18 (18)      ; 62 (24)           ; 62 (16)          ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated                                                      ;
-;             |a_gray2bin_mdb:rdptr_g_gray2bin| ; 10 (10)     ; 10 (10)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 10 (10)          ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_gray2bin_mdb:rdptr_g_gray2bin                      ;
-;             |a_gray2bin_mdb:rs_dgwp_gray2bin| ; 10 (10)     ; 10 (10)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 10 (10)          ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_gray2bin_mdb:rs_dgwp_gray2bin                      ;
-;             |a_graycounter_q96:rdptr_g1p|     ; 13 (13)     ; 13 (13)           ; 13 (13)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 13 (13)          ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p                          ;
-;             |a_graycounter_r27:wrptr_gp|      ; 13 (13)     ; 13 (13)           ; 13 (13)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 13 (13)          ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp                           ;
-;             |alt_synch_pipe_7e8:rs_dgwp|      ; 24 (0)      ; 0 (0)             ; 24 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 18 (0)            ; 6 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_7e8:rs_dgwp                           ;
-;                |dffpipe_5f9:dffpipe10|        ; 24 (24)     ; 0 (0)             ; 24 (24)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 18 (18)           ; 6 (6)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_7e8:rs_dgwp|dffpipe_5f9:dffpipe10     ;
-;             |alt_synch_pipe_8e8:ws_dgrp|      ; 24 (0)      ; 0 (0)             ; 24 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 18 (0)            ; 6 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp                           ;
-;                |dffpipe_6f9:dffpipe15|        ; 24 (24)     ; 0 (0)             ; 24 (24)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 18 (18)           ; 6 (6)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15     ;
-;             |alt_synch_pipe_pn7:rdfull_reg|   ; 1 (0)       ; 0 (0)             ; 1 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 1 (0)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_pn7:rdfull_reg                        ;
-;                |dffpipe_jo8:dffpipe7|         ; 1 (1)       ; 0 (0)             ; 1 (1)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_pn7:rdfull_reg|dffpipe_jo8:dffpipe7   ;
-;             |alt_synch_pipe_qn7:wrempty_reg|  ; 1 (0)       ; 0 (0)             ; 1 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 1 (0)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_qn7:wrempty_reg                       ;
-;                |dffpipe_ko8:dffpipe13|        ; 1 (1)       ; 0 (0)             ; 1 (1)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_qn7:wrempty_reg|dffpipe_ko8:dffpipe13 ;
-;             |altsyncram_td11:fifo_ram|        ; 0 (0)       ; 0 (0)             ; 0 (0)        ; 32768       ; 8    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram                             ;
-;                |altsyncram_72f1:altsyncram5|  ; 0 (0)       ; 0 (0)             ; 0 (0)        ; 32768       ; 8    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5 ;
-;             |dffpipe_4f9:rs_brp|              ; 10 (10)     ; 0 (0)             ; 10 (10)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 10 (10)          ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|dffpipe_4f9:rs_brp                                   ;
-;             |dffpipe_4f9:rs_bwp|              ; 10 (10)     ; 0 (0)             ; 10 (10)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 10 (10)          ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|dffpipe_4f9:rs_bwp                                   ;
-+-----------------------------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                                   ;
++----------------------------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+; Compilation Hierarchy Node                   ; Logic Cells ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                                                                                                               ;
++----------------------------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+; |ozy_eval                                    ; 126 (23)    ; 53 (7)            ; 118 (22)     ; 16384       ; 4    ; 0            ; 0       ; 0         ; 51   ; 0            ; 8 (1)        ; 73 (16)           ; 45 (6)           ; |ozy_eval                                                                                                                         ;
+;    |tx_fifo:tx_fifo|                         ; 103 (0)     ; 46 (0)            ; 96 (0)       ; 16384       ; 4    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (0)        ; 57 (0)            ; 39 (0)           ; |ozy_eval|tx_fifo:tx_fifo                                                                                                         ;
+;       |dcfifo:dcfifo_component|              ; 103 (0)     ; 46 (0)            ; 96 (0)       ; 16384       ; 4    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (0)        ; 57 (0)            ; 39 (0)           ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component                                                                                 ;
+;          |dcfifo_efb1:auto_generated|        ; 103 (33)    ; 46 (22)           ; 96 (26)      ; 16384       ; 4    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 57 (22)           ; 39 (15)          ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated                                                      ;
+;             |a_graycounter_j27:wrptr_gp|     ; 12 (12)     ; 12 (12)           ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp                           ;
+;             |a_graycounter_p96:rdptr_g1p|    ; 12 (12)     ; 12 (12)           ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p                          ;
+;             |alt_synch_pipe_0e8:rs_dgwp|     ; 22 (0)      ; 0 (0)             ; 22 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 16 (0)            ; 6 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp                           ;
+;                |dffpipe_qe9:dffpipe10|       ; 22 (22)     ; 0 (0)             ; 22 (22)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 16 (16)           ; 6 (6)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp|dffpipe_qe9:dffpipe10     ;
+;             |alt_synch_pipe_1e8:ws_dgrp|     ; 22 (0)      ; 0 (0)             ; 22 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 17 (0)            ; 5 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp                           ;
+;                |dffpipe_re9:dffpipe15|       ; 22 (22)     ; 0 (0)             ; 22 (22)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 17 (17)           ; 5 (5)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15     ;
+;             |alt_synch_pipe_hn7:rdfull_reg|  ; 1 (0)       ; 0 (0)             ; 1 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 1 (0)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg                        ;
+;                |dffpipe_bo8:dffpipe7|        ; 1 (1)       ; 0 (0)             ; 1 (1)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7   ;
+;             |alt_synch_pipe_in7:wrempty_reg| ; 1 (0)       ; 0 (0)             ; 1 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 1 (0)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg                       ;
+;                |dffpipe_co8:dffpipe13|       ; 1 (1)       ; 0 (0)             ; 1 (1)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13 ;
+;             |altsyncram_rd11:fifo_ram|       ; 0 (0)       ; 0 (0)             ; 0 (0)        ; 16384       ; 4    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram                             ;
+;                |altsyncram_52f1:altsyncram5| ; 0 (0)       ; 0 (0)             ; 0 (0)        ; 16384       ; 4    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |ozy_eval|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5 ;
++----------------------------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -581,143 +577,136 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------+----------+---------------+---------------+-----------------------+-----+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Pad To Core Delay Chain Fanout                                                                                                                                             ;
-+----------------------------------------------------------------------------------------------------------------------------------------------+-------------------+---------+
-; Source Pin / Fanout                                                                                                                          ; Pad To Core Index ; Setting ;
-+----------------------------------------------------------------------------------------------------------------------------------------------+-------------------+---------+
-; FX2_CLK                                                                                                                                      ;                   ;         ;
-; FLAGA                                                                                                                                        ;                   ;         ;
-;      - GPIO5                                                                                                                                 ; 0                 ; 6       ;
-; FLAGB                                                                                                                                        ;                   ;         ;
-;      - GPIO6                                                                                                                                 ; 0                 ; 6       ;
-;      - Selector1~16                                                                                                                          ; 0                 ; 6       ;
-; FLAGC                                                                                                                                        ;                   ;         ;
-;      - GPIO7                                                                                                                                 ; 1                 ; 6       ;
-; IFCLK                                                                                                                                        ;                   ;         ;
-; ENC_CLK                                                                                                                                      ;                   ;         ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[11]       ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[10]       ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[9]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[8]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[7]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[6]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[5]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[4]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[3]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[2]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[1]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe17a[0]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_qn7:wrempty_reg|dffpipe_ko8:dffpipe13|dffe14a[0]    ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a0  ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a1  ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a2  ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a3  ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a5  ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a8  ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a9  ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a11 ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[11]                         ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[10]                         ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[9]                          ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[8]                          ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[7]                          ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[6]                          ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[5]                          ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[4]                          ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[3]                          ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[2]                          ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[1]                          ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|counter_ffa[0]                          ; 0                 ; 0       ;
-;      - ADC[0]                                                                                                                                ; 0                 ; 0       ;
-;      - ADC[1]                                                                                                                                ; 0                 ; 0       ;
-;      - ADC[2]                                                                                                                                ; 0                 ; 0       ;
-;      - ADC[3]                                                                                                                                ; 0                 ; 0       ;
-;      - ADC[4]                                                                                                                                ; 0                 ; 0       ;
-;      - ADC[5]                                                                                                                                ; 0                 ; 0       ;
-;      - ADC[6]                                                                                                                                ; 0                 ; 0       ;
-;      - ADC[7]                                                                                                                                ; 0                 ; 0       ;
-;      - ADC[8]                                                                                                                                ; 0                 ; 0       ;
-;      - ADC[9]                                                                                                                                ; 0                 ; 0       ;
-;      - ADC[10]                                                                                                                               ; 0                 ; 0       ;
-;      - ADC[11]                                                                                                                               ; 0                 ; 0       ;
-;      - ADC[12]                                                                                                                               ; 0                 ; 0       ;
-;      - ADC[13]                                                                                                                               ; 0                 ; 0       ;
-;      - ADC[14]                                                                                                                               ; 0                 ; 0       ;
-;      - ADC[15]                                                                                                                               ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[6]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|parity_ff                               ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[11]       ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[5]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[9]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[1]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[7]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[4]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[3]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[0]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[10]       ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[2]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_8e8:ws_dgrp|dffpipe_6f9:dffpipe15|dffe16a[8]        ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|previous_wrfull                                                    ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[6]                                                 ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[11]                                                ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[9]                                                 ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[5]                                                 ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[7]                                                 ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[1]                                                 ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[3]                                                 ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[4]                                                 ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[0]                                                 ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[10]                                                ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[8]                                                 ; 0                 ; 0       ;
-;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|delayed_wrptr_g[2]                                                 ; 0                 ; 0       ;
-; DA[0]                                                                                                                                        ;                   ;         ;
-;      - ADC[0]~feeder                                                                                                                         ; 0                 ; 6       ;
-; DA[1]                                                                                                                                        ;                   ;         ;
-;      - ADC[1]                                                                                                                                ; 0                 ; 6       ;
-; DA[2]                                                                                                                                        ;                   ;         ;
-;      - ADC[2]                                                                                                                                ; 0                 ; 6       ;
-; DA[3]                                                                                                                                        ;                   ;         ;
-;      - ADC[3]                                                                                                                                ; 0                 ; 6       ;
-; DA[4]                                                                                                                                        ;                   ;         ;
-;      - ADC[4]                                                                                                                                ; 0                 ; 6       ;
-; DA[5]                                                                                                                                        ;                   ;         ;
-;      - ADC[5]~feeder                                                                                                                         ; 1                 ; 6       ;
-; DA[6]                                                                                                                                        ;                   ;         ;
-;      - ADC[6]~feeder                                                                                                                         ; 0                 ; 6       ;
-; DA[7]                                                                                                                                        ;                   ;         ;
-;      - ADC[7]~feeder                                                                                                                         ; 0                 ; 6       ;
-; DA[8]                                                                                                                                        ;                   ;         ;
-;      - ADC[8]                                                                                                                                ; 0                 ; 6       ;
-; DA[9]                                                                                                                                        ;                   ;         ;
-;      - ADC[9]~feeder                                                                                                                         ; 1                 ; 6       ;
-; DA[10]                                                                                                                                       ;                   ;         ;
-;      - ADC[10]                                                                                                                               ; 0                 ; 6       ;
-; DA[11]                                                                                                                                       ;                   ;         ;
-;      - ADC[11]                                                                                                                               ; 0                 ; 6       ;
-; DA[12]                                                                                                                                       ;                   ;         ;
-;      - ADC[12]~feeder                                                                                                                        ; 0                 ; 6       ;
-; DA[13]                                                                                                                                       ;                   ;         ;
-;      - ADC[13]~feeder                                                                                                                        ; 0                 ; 6       ;
-; DA[14]                                                                                                                                       ;                   ;         ;
-;      - ADC[14]                                                                                                                               ; 0                 ; 6       ;
-; DA[15]                                                                                                                                       ;                   ;         ;
-;      - ADC[15]~feeder                                                                                                                        ; 1                 ; 6       ;
-+----------------------------------------------------------------------------------------------------------------------------------------------+-------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Pad To Core Delay Chain Fanout                                                                                                                                            ;
++---------------------------------------------------------------------------------------------------------------------------------------------+-------------------+---------+
+; Source Pin / Fanout                                                                                                                         ; Pad To Core Index ; Setting ;
++---------------------------------------------------------------------------------------------------------------------------------------------+-------------------+---------+
+; FX2_CLK                                                                                                                                     ;                   ;         ;
+; FLAGA                                                                                                                                       ;                   ;         ;
+;      - GPIO5                                                                                                                                ; 0                 ; 6       ;
+; FLAGB                                                                                                                                       ;                   ;         ;
+;      - GPIO6                                                                                                                                ; 1                 ; 6       ;
+;      - Selector1~16                                                                                                                         ; 1                 ; 6       ;
+; FLAGC                                                                                                                                       ;                   ;         ;
+;      - GPIO7                                                                                                                                ; 1                 ; 6       ;
+; IFCLK                                                                                                                                       ;                   ;         ;
+; ENC_CLK                                                                                                                                     ;                   ;         ;
+;      - adc_go                                                                                                                               ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe17a[10]      ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe17a[9]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe17a[8]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe17a[7]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe17a[6]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe17a[5]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe17a[4]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe17a[3]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe17a[2]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe17a[1]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe17a[0]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13|dffe14a[0]   ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|ram_block6a0 ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|ram_block6a1 ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|ram_block6a2 ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|ram_block6a4 ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|counter_ffa[10]                        ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|counter_ffa[9]                         ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|counter_ffa[8]                         ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|counter_ffa[7]                         ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|counter_ffa[6]                         ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|counter_ffa[5]                         ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|counter_ffa[4]                         ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|counter_ffa[3]                         ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|counter_ffa[2]                         ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|counter_ffa[1]                         ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|counter_ffa[0]                         ; 0                 ; 0       ;
+;      - ADC[0]                                                                                                                               ; 0                 ; 0       ;
+;      - ADC[1]                                                                                                                               ; 0                 ; 0       ;
+;      - ADC[2]                                                                                                                               ; 0                 ; 0       ;
+;      - ADC[3]                                                                                                                               ; 0                 ; 0       ;
+;      - ADC[4]                                                                                                                               ; 0                 ; 0       ;
+;      - ADC[5]                                                                                                                               ; 0                 ; 0       ;
+;      - ADC[6]                                                                                                                               ; 0                 ; 0       ;
+;      - ADC[7]                                                                                                                               ; 0                 ; 0       ;
+;      - ADC[8]                                                                                                                               ; 0                 ; 0       ;
+;      - ADC[9]                                                                                                                               ; 0                 ; 0       ;
+;      - ADC[10]                                                                                                                              ; 0                 ; 0       ;
+;      - ADC[11]                                                                                                                              ; 0                 ; 0       ;
+;      - ADC[12]                                                                                                                              ; 0                 ; 0       ;
+;      - ADC[13]                                                                                                                              ; 0                 ; 0       ;
+;      - ADC[14]                                                                                                                              ; 0                 ; 0       ;
+;      - ADC[15]                                                                                                                              ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe16a[2]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe16a[4]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|parity_ff                              ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe16a[8]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe16a[10]      ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe16a[0]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe16a[9]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe16a[6]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe16a[7]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe16a[3]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe16a[1]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15|dffe16a[5]       ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|previous_wrfull                                                   ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|delayed_wrptr_g[4]                                                ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|delayed_wrptr_g[2]                                                ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|delayed_wrptr_g[10]                                               ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|delayed_wrptr_g[8]                                                ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|delayed_wrptr_g[0]                                                ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|delayed_wrptr_g[9]                                                ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|delayed_wrptr_g[7]                                                ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|delayed_wrptr_g[6]                                                ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|delayed_wrptr_g[1]                                                ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|delayed_wrptr_g[3]                                                ; 0                 ; 0       ;
+;      - tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|delayed_wrptr_g[5]                                                ; 0                 ; 0       ;
+; DA[0]                                                                                                                                       ;                   ;         ;
+;      - ADC[0]~feeder                                                                                                                        ; 0                 ; 6       ;
+; DA[1]                                                                                                                                       ;                   ;         ;
+;      - ADC[1]                                                                                                                               ; 0                 ; 6       ;
+; DA[2]                                                                                                                                       ;                   ;         ;
+;      - ADC[2]                                                                                                                               ; 1                 ; 6       ;
+; DA[3]                                                                                                                                       ;                   ;         ;
+;      - ADC[3]~feeder                                                                                                                        ; 1                 ; 6       ;
+; DA[4]                                                                                                                                       ;                   ;         ;
+;      - ADC[4]                                                                                                                               ; 0                 ; 6       ;
+; DA[5]                                                                                                                                       ;                   ;         ;
+;      - ADC[5]~feeder                                                                                                                        ; 0                 ; 6       ;
+; DA[6]                                                                                                                                       ;                   ;         ;
+;      - ADC[6]~feeder                                                                                                                        ; 0                 ; 6       ;
+; DA[7]                                                                                                                                       ;                   ;         ;
+;      - ADC[7]~feeder                                                                                                                        ; 0                 ; 6       ;
+; DA[8]                                                                                                                                       ;                   ;         ;
+;      - ADC[8]~feeder                                                                                                                        ; 0                 ; 6       ;
+; DA[9]                                                                                                                                       ;                   ;         ;
+;      - ADC[9]~feeder                                                                                                                        ; 0                 ; 6       ;
+; DA[10]                                                                                                                                      ;                   ;         ;
+;      - ADC[10]                                                                                                                              ; 0                 ; 6       ;
+; DA[11]                                                                                                                                      ;                   ;         ;
+;      - ADC[11]~feeder                                                                                                                       ; 0                 ; 6       ;
+; DA[12]                                                                                                                                      ;                   ;         ;
+;      - ADC[12]                                                                                                                              ; 0                 ; 6       ;
+; DA[13]                                                                                                                                      ;                   ;         ;
+;      - ADC[13]                                                                                                                              ; 0                 ; 6       ;
+; DA[14]                                                                                                                                      ;                   ;         ;
+;      - ADC[14]~feeder                                                                                                                       ; 0                 ; 6       ;
+; DA[15]                                                                                                                                      ;                   ;         ;
+;      - ADC[15]~feeder                                                                                                                       ; 0                 ; 6       ;
++---------------------------------------------------------------------------------------------------------------------------------------------+-------------------+---------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Control Signals                                                                                                                                                                                                          ;
-+--------------------------------------------------------------------------------+-------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
-; Name                                                                           ; Location          ; Fan-Out ; Usage                      ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
-+--------------------------------------------------------------------------------+-------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
-; ENC_CLK                                                                        ; PIN_150           ; 75      ; Clock                      ; no     ; --                   ; --               ; --                        ;
-; IFCLK                                                                          ; PIN_24            ; 86      ; Clock                      ; yes    ; Global clock         ; GCLK2            ; --                        ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|op_1~259    ; LCCOMB_X19_Y10_N0 ; 10      ; Clock enable, Write enable ; no     ; --                   ; --               ; --                        ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdaclr      ; LCFF_X18_Y7_N1    ; 14      ; Async. clear               ; no     ; --                   ; --               ; --                        ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|valid_rdreq ; LCCOMB_X19_Y7_N0  ; 20      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; txfifoclr                                                                      ; LCFF_X19_Y7_N15   ; 119     ; Async. clear               ; no     ; --                   ; --               ; --                        ;
-+--------------------------------------------------------------------------------+-------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                                                                                                           ;
++--------------------------------------------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
+; Name                                                                           ; Location           ; Fan-Out ; Usage                      ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++--------------------------------------------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
+; ENC_CLK                                                                        ; PIN_150            ; 68      ; Clock                      ; no     ; --                   ; --               ; --                        ;
+; IFCLK                                                                          ; PIN_24             ; 58      ; Clock                      ; yes    ; Global clock         ; GCLK2            ; --                        ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdaclr      ; LCFF_X22_Y8_N5     ; 13      ; Async. clear               ; no     ; --                   ; --               ; --                        ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|valid_rdreq ; LCCOMB_X22_Y10_N16 ; 15      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|valid_wrreq ; LCCOMB_X24_Y10_N0  ; 6       ; Clock enable, Write enable ; no     ; --                   ; --               ; --                        ;
+; txfifoclr                                                                      ; LCFF_X26_Y10_N21   ; 88      ; Async. clear               ; no     ; --                   ; --               ; --                        ;
++--------------------------------------------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
 
 
 +--------------------------------------------------------------------------------------------------+
@@ -725,7 +714,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------+----------+---------+----------------------+------------------+---------------------------+
 ; Name  ; Location ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +-------+----------+---------+----------------------+------------------+---------------------------+
-; IFCLK ; PIN_24   ; 86      ; Global clock         ; GCLK2            ; --                        ;
+; IFCLK ; PIN_24   ; 58      ; Global clock         ; GCLK2            ; --                        ;
 +-------+----------+---------+----------------------+------------------+---------------------------+
 
 
@@ -734,66 +723,66 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------------------------------------------------------------------------------------------+---------+
 ; Name                                                                                                                             ; Fan-Out ;
 +----------------------------------------------------------------------------------------------------------------------------------+---------+
-; txfifoclr                                                                                                                        ; 119     ;
-; ENC_CLK                                                                                                                          ; 75      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|valid_rdreq                                                   ; 20      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|op_1~259                                                      ; 18      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdaclr                                                        ; 14      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[2]   ; 12      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[8]   ; 12      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[0]   ; 12      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[4]   ; 12      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[3]   ; 12      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[1]   ; 12      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[7]   ; 12      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[5]   ; 12      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[9]   ; 12      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[6]   ; 12      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[9]  ; 11      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[8]  ; 11      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[7]  ; 11      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[6]  ; 11      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[5]  ; 11      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[4]  ; 11      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[3]  ; 11      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[2]  ; 11      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[1]  ; 11      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[0]  ; 11      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdcnt_addr_ena                                                ; 10      ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|ram_address_a[10]                                             ; 8       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|ram_address_b[10]                                             ; 8       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdptr_g[4]                                                    ; 5       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdptr_g[7]                                                    ; 5       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_gray2bin_mdb:rdptr_g_gray2bin|xor5                          ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_gray2bin_mdb:rs_dgwp_gray2bin|xor5                          ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_gray2bin_mdb:rdptr_g_gray2bin|xor8                          ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_gray2bin_mdb:rs_dgwp_gray2bin|xor8                          ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdempty_eq_comp_aeb_int~0                                     ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdptr_g[10]                                                   ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_7e8:rs_dgwp|dffpipe_5f9:dffpipe10|dffe12a[4]   ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdptr_g[3]                                                    ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_7e8:rs_dgwp|dffpipe_5f9:dffpipe10|dffe12a[7]   ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdptr_g[1]                                                    ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdptr_g[9]                                                    ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdptr_g[6]                                                    ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdptr_g[11]                                                   ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[10]  ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_r27:wrptr_gp|power_modified_counter_values[11]  ; 4       ;
+; txfifoclr                                                                                                                        ; 88      ;
+; ENC_CLK                                                                                                                          ; 68      ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|valid_rdreq                                                   ; 15      ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdaclr                                                        ; 13      ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|valid_wrreq                                                   ; 10      ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[5]   ; 8       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[3]   ; 8       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[1]   ; 8       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[6]   ; 8       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[7]   ; 8       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[0]   ; 8       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[8]   ; 8       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[2]   ; 8       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[4]   ; 8       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[8]  ; 7       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[7]  ; 7       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[6]  ; 7       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[5]  ; 7       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[4]  ; 7       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[3]  ; 7       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[2]  ; 7       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[1]  ; 7       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[0]  ; 7       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdcnt_addr_ena                                                ; 6       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdempty_eq_comp_aeb_int~0                                     ; 6       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|ram_address_a[9]                                              ; 4       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|ram_address_b[9]                                              ; 4       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|wrfull_eq_comp_aeb_int~0                                      ; 4       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[9]   ; 4       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[10]  ; 4       ;
 ; WRITE_FX2FIFO                                                                                                                    ; 4       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_gray2bin_mdb:rdptr_g_gray2bin|xor2                          ; 3       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_gray2bin_mdb:rs_dgwp_gray2bin|xor2                          ; 3       ;
 ; fx2st.0010                                                                                                                       ; 3       ;
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[10] ; 3       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[9]  ; 3       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p|power_modified_counter_values[10] ; 3       ;
+; FLAGB                                                                                                                            ; 2       ;
+; fx2st.0000                                                                                                                       ; 2       ;
+; fx2st.0001                                                                                                                       ; 2       ;
+; adc_go                                                                                                                           ; 2       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[5]                                                    ; 2       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[1]                                                    ; 2       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[3]                                                    ; 2       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[7]                                                    ; 2       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[6]                                                    ; 2       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[0]                                                    ; 2       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[9]                                                    ; 2       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[10]                                                   ; 2       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[8]                                                    ; 2       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[4]                                                    ; 2       ;
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|rdptr_g[2]                                                    ; 2       ;
+; fx2st.0000~feeder                                                                                                                ; 1       ;
 +----------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Fitter RAM Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ;
-+------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+----------------------------------------------------------------------------------------------------+
-; Name                                                                                                                               ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Port A Input Registers ; Port A Output Registers ; Port B Input Registers ; Port B Output Registers ; Size  ; Implementation Port A Depth ; Implementation Port A Width ; Implementation Port B Depth ; Implementation Port B Width ; Implementation Bits ; M4Ks ; MIF  ; Location                                                                                           ;
-+------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+----------------------------------------------------------------------------------------------------+
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|altsyncram_td11:fifo_ram|altsyncram_72f1:altsyncram5|ALTSYNCRAM ; AUTO ; True Dual Port ; 2048         ; 16           ; 2048         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 32768 ; 2048                        ; 16                          ; 2048                        ; 16                          ; 32768               ; 8    ; None ; M4K_X23_Y7, M4K_X23_Y10, M4K_X23_Y8, M4K_X23_Y9, M4K_X23_Y11, M4K_X23_Y12, M4K_X11_Y10, M4K_X11_Y7 ;
-+------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+----------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter RAM Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ;
++------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+---------------------------------------------------+
+; Name                                                                                                                               ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Port A Input Registers ; Port A Output Registers ; Port B Input Registers ; Port B Output Registers ; Size  ; Implementation Port A Depth ; Implementation Port A Width ; Implementation Port B Depth ; Implementation Port B Width ; Implementation Bits ; M4Ks ; MIF  ; Location                                          ;
++------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+---------------------------------------------------+
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|ALTSYNCRAM ; AUTO ; True Dual Port ; 1024         ; 16           ; 1024         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 16384 ; 1024                        ; 16                          ; 1024                        ; 16                          ; 16384               ; 4    ; None ; M4K_X23_Y12, M4K_X23_Y9, M4K_X23_Y11, M4K_X23_Y10 ;
++------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+---------------------------------------------------+
 Note: Fitter may spread logical memories into multiple blocks to improve timing. The actual required RAM blocks can be found in the Fitter Resource Usage section.
 
 
@@ -802,63 +791,64 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +----------------------------+-----------------------+
 ; Interconnect Resource Type ; Usage                 ;
 +----------------------------+-----------------------+
-; Block interconnects        ; 428 / 15,666 ( 3 % )  ;
-; C16 interconnects          ; 7 / 812 ( < 1 % )     ;
-; C4 interconnects           ; 265 / 11,424 ( 2 % )  ;
-; Direct links               ; 31 / 15,666 ( < 1 % ) ;
+; Block interconnects        ; 266 / 15,666 ( 2 % )  ;
+; C16 interconnects          ; 6 / 812 ( < 1 % )     ;
+; C4 interconnects           ; 163 / 11,424 ( 1 % )  ;
+; Direct links               ; 36 / 15,666 ( < 1 % ) ;
 ; Global clocks              ; 1 / 8 ( 13 % )        ;
-; Local interconnects        ; 85 / 4,608 ( 2 % )    ;
-; R24 interconnects          ; 17 / 652 ( 3 % )      ;
-; R4 interconnects           ; 359 / 13,328 ( 3 % )  ;
+; Local interconnects        ; 63 / 4,608 ( 1 % )    ;
+; R24 interconnects          ; 6 / 652 ( < 1 % )     ;
+; R4 interconnects           ; 222 / 13,328 ( 2 % )  ;
 +----------------------------+-----------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Logic Elements                                                         ;
 +---------------------------------------------+------------------------------+
-; Number of Logic Elements  (Average = 12.62) ; Number of LABs  (Total = 13) ;
+; Number of Logic Elements  (Average = 12.60) ; Number of LABs  (Total = 10) ;
 +---------------------------------------------+------------------------------+
 ; 1                                           ; 1                            ;
-; 2                                           ; 1                            ;
+; 2                                           ; 0                            ;
 ; 3                                           ; 0                            ;
 ; 4                                           ; 0                            ;
 ; 5                                           ; 0                            ;
-; 6                                           ; 0                            ;
+; 6                                           ; 1                            ;
 ; 7                                           ; 1                            ;
 ; 8                                           ; 0                            ;
 ; 9                                           ; 0                            ;
-; 10                                          ; 1                            ;
+; 10                                          ; 0                            ;
 ; 11                                          ; 0                            ;
 ; 12                                          ; 0                            ;
 ; 13                                          ; 0                            ;
 ; 14                                          ; 0                            ;
 ; 15                                          ; 0                            ;
-; 16                                          ; 9                            ;
+; 16                                          ; 7                            ;
 +---------------------------------------------+------------------------------+
 
 
 +-------------------------------------------------------------------+
 ; LAB-wide Signals                                                  ;
 +------------------------------------+------------------------------+
-; LAB-wide Signals  (Average = 1.85) ; Number of LABs  (Total = 13) ;
+; LAB-wide Signals  (Average = 1.90) ; Number of LABs  (Total = 10) ;
 +------------------------------------+------------------------------+
-; 1 Async. clear                     ; 10                           ;
+; 1 Async. clear                     ; 7                            ;
 ; 1 Clock                            ; 6                            ;
-; 1 Clock enable                     ; 3                            ;
-; 2 Clocks                           ; 5                            ;
+; 1 Clock enable                     ; 1                            ;
+; 2 Async. clears                    ; 1                            ;
+; 2 Clocks                           ; 4                            ;
 +------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Signals Sourced  (Average = 20.54) ; Number of LABs  (Total = 13) ;
+; Number of Signals Sourced  (Average = 22.00) ; Number of LABs  (Total = 10) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
-; 1                                            ; 2                            ;
-; 2                                            ; 0                            ;
+; 1                                            ; 0                            ;
+; 2                                            ; 1                            ;
 ; 3                                            ; 0                            ;
-; 4                                            ; 1                            ;
+; 4                                            ; 0                            ;
 ; 5                                            ; 0                            ;
 ; 6                                            ; 0                            ;
 ; 7                                            ; 0                            ;
@@ -867,7 +857,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; 10                                           ; 0                            ;
 ; 11                                           ; 0                            ;
 ; 12                                           ; 1                            ;
-; 13                                           ; 0                            ;
+; 13                                           ; 1                            ;
 ; 14                                           ; 0                            ;
 ; 15                                           ; 0                            ;
 ; 16                                           ; 0                            ;
@@ -877,13 +867,13 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; 20                                           ; 0                            ;
 ; 21                                           ; 0                            ;
 ; 22                                           ; 0                            ;
-; 23                                           ; 1                            ;
-; 24                                           ; 0                            ;
+; 23                                           ; 0                            ;
+; 24                                           ; 1                            ;
 ; 25                                           ; 0                            ;
-; 26                                           ; 2                            ;
-; 27                                           ; 0                            ;
-; 28                                           ; 2                            ;
-; 29                                           ; 2                            ;
+; 26                                           ; 1                            ;
+; 27                                           ; 2                            ;
+; 28                                           ; 0                            ;
+; 29                                           ; 1                            ;
 ; 30                                           ; 2                            ;
 +----------------------------------------------+------------------------------+
 
@@ -891,24 +881,24 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +--------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                        ;
 +-------------------------------------------------+------------------------------+
-; Number of Signals Sourced Out  (Average = 9.00) ; Number of LABs  (Total = 13) ;
+; Number of Signals Sourced Out  (Average = 8.60) ; Number of LABs  (Total = 10) ;
 +-------------------------------------------------+------------------------------+
 ; 0                                               ; 0                            ;
-; 1                                               ; 2                            ;
-; 2                                               ; 1                            ;
+; 1                                               ; 1                            ;
+; 2                                               ; 0                            ;
 ; 3                                               ; 0                            ;
-; 4                                               ; 0                            ;
+; 4                                               ; 1                            ;
 ; 5                                               ; 0                            ;
-; 6                                               ; 0                            ;
-; 7                                               ; 2                            ;
-; 8                                               ; 0                            ;
-; 9                                               ; 1                            ;
+; 6                                               ; 2                            ;
+; 7                                               ; 0                            ;
+; 8                                               ; 2                            ;
+; 9                                               ; 0                            ;
 ; 10                                              ; 1                            ;
-; 11                                              ; 1                            ;
-; 12                                              ; 2                            ;
-; 13                                              ; 0                            ;
+; 11                                              ; 0                            ;
+; 12                                              ; 0                            ;
+; 13                                              ; 1                            ;
 ; 14                                              ; 1                            ;
-; 15                                              ; 1                            ;
+; 15                                              ; 0                            ;
 ; 16                                              ; 1                            ;
 +-------------------------------------------------+------------------------------+
 
@@ -916,29 +906,26 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +-----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Distinct Inputs  (Average = 11.46) ; Number of LABs  (Total = 13) ;
+; Number of Distinct Inputs  (Average = 11.20) ; Number of LABs  (Total = 10) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 0                            ;
-; 2                                            ; 2                            ;
+; 2                                            ; 1                            ;
 ; 3                                            ; 0                            ;
 ; 4                                            ; 0                            ;
 ; 5                                            ; 0                            ;
 ; 6                                            ; 0                            ;
-; 7                                            ; 0                            ;
-; 8                                            ; 0                            ;
+; 7                                            ; 1                            ;
+; 8                                            ; 1                            ;
 ; 9                                            ; 0                            ;
 ; 10                                           ; 2                            ;
-; 11                                           ; 2                            ;
-; 12                                           ; 2                            ;
-; 13                                           ; 1                            ;
+; 11                                           ; 0                            ;
+; 12                                           ; 0                            ;
+; 13                                           ; 0                            ;
 ; 14                                           ; 2                            ;
-; 15                                           ; 0                            ;
+; 15                                           ; 2                            ;
 ; 16                                           ; 0                            ;
-; 17                                           ; 0                            ;
-; 18                                           ; 1                            ;
-; 19                                           ; 0                            ;
-; 20                                           ; 1                            ;
+; 17                                           ; 1                            ;
 +----------------------------------------------+------------------------------+
 
 
@@ -971,39 +958,39 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +--------------------+-------+
 
 
-+------------------------------------------------------------------------------------+
-; Advanced Data - Placement Preparation                                              ;
-+------------------------------------------------------------------+-----------------+
-; Name                                                             ; Value           ;
-+------------------------------------------------------------------+-----------------+
-; Auto Fit Point 1 - Fit Attempt 1                                 ; ff              ;
-; Mid Wire Use - Fit Attempt 1                                     ; 4               ;
-; Mid Slack - Fit Attempt 1                                        ; -9421           ;
-; Internal Atom Count - Fit Attempt 1                              ; 229             ;
-; LE/ALM Count - Fit Attempt 1                                     ; 165             ;
-; LAB Count - Fit Attempt 1                                        ; 14              ;
-; Outputs per Lab - Fit Attempt 1                                  ; 8.429           ;
-; Inputs per LAB - Fit Attempt 1                                   ; 10.000          ;
-; Global Inputs per LAB - Fit Attempt 1                            ; 0.643           ;
-; LAB Constraint 'non-global clock + sync load' - Fit Attempt 1    ; 0:7;1:7         ;
-; LAB Constraint 'non-global controls' - Fit Attempt 1             ; 0:3;1:1;2:9;3:1 ;
-; LAB Constraint 'non-global + aclr' - Fit Attempt 1               ; 0:3;1:1;2:9;3:1 ;
-; LAB Constraint 'global non-clock non-aclr' - Fit Attempt 1       ; 0:14            ;
-; LAB Constraint 'global controls' - Fit Attempt 1                 ; 0:5;1:8;2:1     ;
-; LAB Constraint 'deterministic LABSMUXA/LABXMUXB' - Fit Attempt 1 ; 0:3;1:1;2:9;3:1 ;
-; LAB Constraint 'deterministic LABSMUXC/LABXMUXD' - Fit Attempt 1 ; 0:5;1:8;2:1     ;
-; LAB Constraint 'clock / ce pair constraint' - Fit Attempt 1      ; 0:3;1:3;2:8     ;
-; LAB Constraint 'aclr constraint' - Fit Attempt 1                 ; 0:3;1:8;2:3     ;
-; LAB Constraint 'true sload_sclear pair' - Fit Attempt 1          ; 0:8;1:6         ;
-; LAB Constraint 'constant sload_sclear pair' - Fit Attempt 1      ; 0:14            ;
-; LAB Constraint 'has placement constraint' - Fit Attempt 1        ; 0:14            ;
-; LEs in Chains - Fit Attempt 1                                    ; 36              ;
-; LEs in Long Chains - Fit Attempt 1                               ; 0               ;
-; LABs with Chains - Fit Attempt 1                                 ; 3               ;
-; LABs with Multiple Chains - Fit Attempt 1                        ; 0               ;
-; Time - Fit Attempt 1                                             ; 0               ;
-; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.078           ;
-+------------------------------------------------------------------+-----------------+
++--------------------------------------------------------------------------------+
+; Advanced Data - Placement Preparation                                          ;
++------------------------------------------------------------------+-------------+
+; Name                                                             ; Value       ;
++------------------------------------------------------------------+-------------+
+; Auto Fit Point 1 - Fit Attempt 1                                 ; ff          ;
+; Mid Wire Use - Fit Attempt 1                                     ; 4           ;
+; Mid Slack - Fit Attempt 1                                        ; -9338       ;
+; Internal Atom Count - Fit Attempt 1                              ; 169         ;
+; LE/ALM Count - Fit Attempt 1                                     ; 127         ;
+; LAB Count - Fit Attempt 1                                        ; 11          ;
+; Outputs per Lab - Fit Attempt 1                                  ; 7.909       ;
+; Inputs per LAB - Fit Attempt 1                                   ; 9.455       ;
+; Global Inputs per LAB - Fit Attempt 1                            ; 0.727       ;
+; LAB Constraint 'non-global clock + sync load' - Fit Attempt 1    ; 0:5;1:6     ;
+; LAB Constraint 'non-global controls' - Fit Attempt 1             ; 0:1;1:2;2:8 ;
+; LAB Constraint 'non-global + aclr' - Fit Attempt 1               ; 0:1;1:2;2:8 ;
+; LAB Constraint 'global non-clock non-aclr' - Fit Attempt 1       ; 0:11        ;
+; LAB Constraint 'global controls' - Fit Attempt 1                 ; 0:3;1:7;2:1 ;
+; LAB Constraint 'deterministic LABSMUXA/LABXMUXB' - Fit Attempt 1 ; 0:1;1:2;2:8 ;
+; LAB Constraint 'deterministic LABSMUXC/LABXMUXD' - Fit Attempt 1 ; 0:3;1:8     ;
+; LAB Constraint 'clock / ce pair constraint' - Fit Attempt 1      ; 0:1;1:4;2:6 ;
+; LAB Constraint 'aclr constraint' - Fit Attempt 1                 ; 0:1;1:8;2:2 ;
+; LAB Constraint 'true sload_sclear pair' - Fit Attempt 1          ; 0:6;1:5     ;
+; LAB Constraint 'constant sload_sclear pair' - Fit Attempt 1      ; 0:11        ;
+; LAB Constraint 'has placement constraint' - Fit Attempt 1        ; 0:11        ;
+; LEs in Chains - Fit Attempt 1                                    ; 24          ;
+; LEs in Long Chains - Fit Attempt 1                               ; 0           ;
+; LABs with Chains - Fit Attempt 1                                 ; 2           ;
+; LABs with Multiple Chains - Fit Attempt 1                        ; 0           ;
+; Time - Fit Attempt 1                                             ; 0           ;
+; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.048       ;
++------------------------------------------------------------------+-------------+
 
 
 +---------------------------------------------+
@@ -1013,16 +1000,16 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +-------------------------------------+-------+
 ; Auto Fit Point 2 - Fit Attempt 1    ; ff    ;
 ; Early Wire Use - Fit Attempt 1      ; 1     ;
-; Early Slack - Fit Attempt 1         ; -9020 ;
+; Early Slack - Fit Attempt 1         ; -9918 ;
 ; Auto Fit Point 3 - Fit Attempt 1    ; ff    ;
 ; Auto Fit Point 4 - Fit Attempt 1    ; ff    ;
 ; Mid Wire Use - Fit Attempt 1        ; 2     ;
-; Mid Slack - Fit Attempt 1           ; -6234 ;
-; Late Wire Use - Fit Attempt 1       ; 3     ;
-; Late Slack - Fit Attempt 1          ; -6234 ;
+; Mid Slack - Fit Attempt 1           ; -6734 ;
+; Late Wire Use - Fit Attempt 1       ; 2     ;
+; Late Slack - Fit Attempt 1          ; -6734 ;
 ; Auto Fit Point 5 - Fit Attempt 1    ; ff    ;
 ; Time - Fit Attempt 1                ; 0     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.126 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.124 ;
 +-------------------------------------+-------+
 
 
@@ -1031,15 +1018,15 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +-------------------------------------+-------+
 ; Name                                ; Value ;
 +-------------------------------------+-------+
-; Early Slack - Fit Attempt 1         ; -4452 ;
-; Early Wire Use - Fit Attempt 1      ; 3     ;
-; Peak Regional Wire - Fit Attempt 1  ; 4     ;
-; Mid Slack - Fit Attempt 1           ; -5033 ;
-; Late Slack - Fit Attempt 1          ; -4933 ;
-; Late Slack - Fit Attempt 1          ; -4933 ;
-; Late Wire Use - Fit Attempt 1       ; 3     ;
+; Early Slack - Fit Attempt 1         ; -4805 ;
+; Early Wire Use - Fit Attempt 1      ; 2     ;
+; Peak Regional Wire - Fit Attempt 1  ; 2     ;
+; Mid Slack - Fit Attempt 1           ; -5261 ;
+; Late Slack - Fit Attempt 1          ; -5261 ;
+; Late Slack - Fit Attempt 1          ; -5261 ;
+; Late Wire Use - Fit Attempt 1       ; 2     ;
 ; Time - Fit Attempt 1                ; 1     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.548 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.329 ;
 +-------------------------------------+-------+
 
 
@@ -1049,7 +1036,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Tue Aug 29 09:14:02 2006
+    Info: Processing started: Thu Aug 31 11:56:24 2006
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off ozy_eval -c ozy_eval
 Info: Selected device EP2C5Q208C7 for design "ozy_eval"
 Info: Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
@@ -1060,37 +1047,36 @@ Info: Design uses memory blocks. Violating setup or hold times of memory block a
 Info: Automatically promoted node IFCLK (placed in PIN 24 (CLK1, LVDSCLK0n, Input))
     Info: Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G2
 Info: Starting register packing
-Info: Finished register packing: elapsed time is 00:00:01
+Info: Finished register packing: elapsed time is 00:00:00
     Extra Info: No registers were packed into other blocks
 Info: Fitter placement preparation operations beginning
 Info: Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info: Fitter placement operations beginning
 Info: Fitter placement was successful
 Info: Fitter placement operations ending: elapsed time is 00:00:00
-Info: Estimated most critical path is register to register delay of 5.746 ns
-    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X18_Y10; Fanout = 2; REG Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|alt_synch_pipe_7e8:rs_dgwp|dffpipe_5f9:dffpipe10|dffe12a[5]'
-    Info: 2: + IC(0.560 ns) + CELL(0.178 ns) = 0.738 ns; Loc. = LAB_X18_Y10; Fanout = 1; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdempty_eq_comp_aeb_int~79'
-    Info: 3: + IC(0.740 ns) + CELL(0.491 ns) = 1.969 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdempty_eq_comp_aeb_int~82'
-    Info: 4: + IC(0.131 ns) + CELL(0.544 ns) = 2.644 ns; Loc. = LAB_X18_Y8; Fanout = 4; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdempty_eq_comp_aeb_int~0'
-    Info: 5: + IC(0.354 ns) + CELL(0.322 ns) = 3.320 ns; Loc. = LAB_X18_Y8; Fanout = 180; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|rdcnt_addr_ena'
-    Info: 6: + IC(0.475 ns) + CELL(0.517 ns) = 4.312 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|parity~COUT'
-    Info: 7: + IC(0.000 ns) + CELL(0.080 ns) = 4.392 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera0~COUT'
-    Info: 8: + IC(0.000 ns) + CELL(0.080 ns) = 4.472 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera1~COUT'
-    Info: 9: + IC(0.000 ns) + CELL(0.080 ns) = 4.552 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera2~COUT'
-    Info: 10: + IC(0.000 ns) + CELL(0.080 ns) = 4.632 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera3~COUT'
-    Info: 11: + IC(0.000 ns) + CELL(0.080 ns) = 4.712 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera4~COUT'
-    Info: 12: + IC(0.000 ns) + CELL(0.080 ns) = 4.792 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera5~COUT'
-    Info: 13: + IC(0.000 ns) + CELL(0.080 ns) = 4.872 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera6~COUT'
-    Info: 14: + IC(0.000 ns) + CELL(0.080 ns) = 4.952 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera7~COUT'
-    Info: 15: + IC(0.000 ns) + CELL(0.080 ns) = 5.032 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera8~COUT'
-    Info: 16: + IC(0.000 ns) + CELL(0.080 ns) = 5.112 ns; Loc. = LAB_X18_Y8; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera9~COUT'
-    Info: 17: + IC(0.000 ns) + CELL(0.080 ns) = 5.192 ns; Loc. = LAB_X18_Y8; Fanout = 1; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera10~COUT'
-    Info: 18: + IC(0.000 ns) + CELL(0.458 ns) = 5.650 ns; Loc. = LAB_X18_Y8; Fanout = 1; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|countera11'
-    Info: 19: + IC(0.000 ns) + CELL(0.096 ns) = 5.746 ns; Loc. = LAB_X18_Y8; Fanout = 3; REG Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_mfb1:auto_generated|a_graycounter_q96:rdptr_g1p|power_modified_counter_values[11]'
-    Info: Total cell delay = 3.486 ns ( 60.67 % )
-    Info: Total interconnect delay = 2.260 ns ( 39.33 % )
+Info: Estimated most critical path is register to register delay of 6.246 ns
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X24_Y10; Fanout = 4; REG Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[10]'
+    Info: 2: + IC(1.145 ns) + CELL(0.178 ns) = 1.323 ns; Loc. = LAB_X24_Y8; Fanout = 1; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|wrfull_eq_comp_aeb_int~71'
+    Info: 3: + IC(0.739 ns) + CELL(0.491 ns) = 2.553 ns; Loc. = LAB_X24_Y10; Fanout = 1; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|wrfull_eq_comp_aeb_int~74'
+    Info: 4: + IC(0.131 ns) + CELL(0.541 ns) = 3.225 ns; Loc. = LAB_X24_Y10; Fanout = 4; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|wrfull_eq_comp_aeb_int~0'
+    Info: 5: + IC(0.498 ns) + CELL(0.177 ns) = 3.900 ns; Loc. = LAB_X24_Y10; Fanout = 212; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|valid_wrreq'
+    Info: 6: + IC(0.475 ns) + CELL(0.517 ns) = 4.892 ns; Loc. = LAB_X24_Y10; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|parity~COUT'
+    Info: 7: + IC(0.000 ns) + CELL(0.080 ns) = 4.972 ns; Loc. = LAB_X24_Y10; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|countera0~COUT'
+    Info: 8: + IC(0.000 ns) + CELL(0.080 ns) = 5.052 ns; Loc. = LAB_X24_Y10; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|countera1~COUT'
+    Info: 9: + IC(0.000 ns) + CELL(0.080 ns) = 5.132 ns; Loc. = LAB_X24_Y10; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|countera2~COUT'
+    Info: 10: + IC(0.000 ns) + CELL(0.080 ns) = 5.212 ns; Loc. = LAB_X24_Y10; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|countera3~COUT'
+    Info: 11: + IC(0.000 ns) + CELL(0.080 ns) = 5.292 ns; Loc. = LAB_X24_Y10; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|countera4~COUT'
+    Info: 12: + IC(0.000 ns) + CELL(0.080 ns) = 5.372 ns; Loc. = LAB_X24_Y10; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|countera5~COUT'
+    Info: 13: + IC(0.000 ns) + CELL(0.080 ns) = 5.452 ns; Loc. = LAB_X24_Y10; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|countera6~COUT'
+    Info: 14: + IC(0.000 ns) + CELL(0.080 ns) = 5.532 ns; Loc. = LAB_X24_Y10; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|countera7~COUT'
+    Info: 15: + IC(0.000 ns) + CELL(0.080 ns) = 5.612 ns; Loc. = LAB_X24_Y10; Fanout = 2; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|countera8~COUT'
+    Info: 16: + IC(0.000 ns) + CELL(0.080 ns) = 5.692 ns; Loc. = LAB_X24_Y10; Fanout = 1; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|countera9~COUT'
+    Info: 17: + IC(0.000 ns) + CELL(0.458 ns) = 6.150 ns; Loc. = LAB_X24_Y10; Fanout = 1; COMB Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|countera10'
+    Info: 18: + IC(0.000 ns) + CELL(0.096 ns) = 6.246 ns; Loc. = LAB_X24_Y10; Fanout = 4; REG Node = 'tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp|power_modified_counter_values[10]'
+    Info: Total cell delay = 3.258 ns ( 52.16 % )
+    Info: Total interconnect delay = 2.988 ns ( 47.84 % )
 Info: Fitter routing operations beginning
-Info: Average interconnect usage is 2% of the available device resources. Peak interconnect usage is 3%
+Info: Average interconnect usage is 1% of the available device resources. Peak interconnect usage is 2%
     Info: The peak interconnect region extends from location x14_y0 to location x28_y14
 Info: Fitter routing operations ending: elapsed time is 00:00:01
 Info: The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
@@ -1136,8 +1122,8 @@ Warning: Following 5 pins have nothing, GND, or VCC driving datain port -- chang
     Info: Pin FIFO_ADR[1] has VCC driving its datain port
     Info: Pin EVALPIN39 has VCC driving its datain port
 Info: Quartus II Fitter was successful. 0 errors, 2 warnings
-    Info: Processing ended: Tue Aug 29 09:14:11 2006
-    Info: Elapsed time: 00:00:09
+    Info: Processing ended: Thu Aug 31 11:56:30 2006
+    Info: Elapsed time: 00:00:06
 
 
 +----------------------------+

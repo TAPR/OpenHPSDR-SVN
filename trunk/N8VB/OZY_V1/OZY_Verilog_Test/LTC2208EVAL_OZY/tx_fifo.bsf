@@ -82,8 +82,8 @@ applicable agreement for further details.
 	(port
 		(pt 160 72)
 		(output)
-		(text "wrusedw[10..0]" (rect 0 0 92 14)(font "Arial" (font_size 8)))
-		(text "wrusedw[10..0]" (rect 63 66 132 79)(font "Arial" (font_size 8)))
+		(text "wrusedw[9..0]" (rect 0 0 84 14)(font "Arial" (font_size 8)))
+		(text "wrusedw[9..0]" (rect 69 66 132 79)(font "Arial" (font_size 8)))
 		(line (pt 160 72)(pt 144 72)(line_width 3))
 	)
 	(port
@@ -110,12 +110,12 @@ applicable agreement for further details.
 	(port
 		(pt 160 152)
 		(output)
-		(text "rdusedw[10..0]" (rect 0 0 87 14)(font "Arial" (font_size 8)))
-		(text "rdusedw[10..0]" (rect 67 146 135 159)(font "Arial" (font_size 8)))
+		(text "rdusedw[9..0]" (rect 0 0 80 14)(font "Arial" (font_size 8)))
+		(text "rdusedw[9..0]" (rect 73 146 135 159)(font "Arial" (font_size 8)))
 		(line (pt 160 152)(pt 144 152)(line_width 3))
 	)
 	(drawing
-		(text "16 bits x 2048 words" (rect 58 172 144 184)(font "Arial" ))
+		(text "16 bits x 1024 words" (rect 58 172 144 184)(font "Arial" ))
 		(line (pt 16 16)(pt 144 16)(line_width 1))
 		(line (pt 144 16)(pt 144 184)(line_width 1))
 		(line (pt 144 184)(pt 16 184)(line_width 1))

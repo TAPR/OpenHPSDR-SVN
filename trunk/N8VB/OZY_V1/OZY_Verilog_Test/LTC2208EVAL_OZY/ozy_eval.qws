@@ -7,7 +7,6 @@ ptn_Child1=Document-0
 ptn_Child2=Document-1
 ptn_Child3=Document-2
 ptn_Child4=Document-3
-ptn_Child5=Document-4
 [ProjectWorkspace.Frames.ChildFrames.Document-0]
 ptn_Child1=ViewFrame-0
 [ProjectWorkspace.Frames.ChildFrames.Document-0.ViewFrame-0]
@@ -27,16 +26,4 @@ WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPMPPPPPPPCOPPPPPPCEAAAAAA
 IsActiveChildFrame=False
 ptn_Child1=StateMap
 [ProjectWorkspace.Frames.ChildFrames.Document-1.ViewFrame-0.StateMap]
-AFC_IN_REPORT=False
-[ProjectWorkspace.Frames.ChildFrames.Document-3]
-ptn_Child1=ViewFrame-0
-[ProjectWorkspace.Frames.ChildFrames.Document-3.ViewFrame-0]
-DocPathName=../../../../../../../altera/quartus60/win/pin_planner.ppl
-DocumentCLSID={428be327-2a68-4a16-a2c9-0502a8811afc}
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPMPPPPPPPCOPPPPPPCEAAAAAAHFAAAAAAJIDAAAAALBCAAAAA
-IsActiveChildFrame=False
-ptn_Child1=StateMap
-[ProjectWorkspace.Frames.ChildFrames.Document-3.ViewFrame-0.StateMap]
-AFC_CMP_AP_NAME=ozy_eval
-AFC_PROJ_DB_PATH=C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/db/ozy_eval.quartus_db
 AFC_IN_REPORT=False

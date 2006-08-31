@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Tue Aug 29 09:14:29 2006) contains limited information
+This XML file (created on Wed Aug 30 16:20:39 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Tue Aug 29 09:14:29 2006</compilation_end_time>
+	<compilation_end_time>Wed Aug 30 16:20:39 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,16 +37,14 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval</project>
 <revision>ozy_eval</revision>
 <gui_actions>
-	<action time="Tue Aug 29 08:43:04 2006" type="project_open">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval</action>
-	<action time="Tue Aug 29 08:43:04 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval.v</action>
-	<action time="Tue Aug 29 08:43:04 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/tx_fifo.v</action>
-	<action time="Tue Aug 29 08:45:08 2006" type="editor_open" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
-	<action time="Tue Aug 29 08:45:59 2006" type="editor_open" clsid="AFC_CLSID_PPL_DEFAULT_DOC">c:/altera/quartus60/win/pin_planner.ppl</action>
-	<action time="Tue Aug 29 09:14:29 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval.v</action>
-	<action time="Tue Aug 29 09:14:29 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/tx_fifo.v</action>
-	<action time="Tue Aug 29 09:14:29 2006" type="editor_close" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
-	<action time="Tue Aug 29 09:14:29 2006" type="editor_close" clsid="AFC_CLSID_PPL_DEFAULT_DOC">c:/altera/quartus60/win/pin_planner.ppl</action>
-	<action time="Tue Aug 29 09:14:29 2006" type="project_close">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval</action>
+	<action time="Wed Aug 30 16:13:39 2006" type="project_open">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval</action>
+	<action time="Wed Aug 30 16:13:40 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval.v</action>
+	<action time="Wed Aug 30 16:13:40 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/tx_fifo.v</action>
+	<action time="Wed Aug 30 16:14:59 2006" type="editor_open" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
+	<action time="Wed Aug 30 16:20:39 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval.v</action>
+	<action time="Wed Aug 30 16:20:39 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/tx_fifo.v</action>
+	<action time="Wed Aug 30 16:20:39 2006" type="editor_close" clsid="AFC_CLSID_RPW_DEFAULT_DOC">c:/altera/quartus60/win/Report_Window_01.qrpt</action>
+	<action time="Wed Aug 30 16:20:39 2006" type="project_close">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/LTC2208EVAL_OZY/ozy_eval</action>
 </gui_actions>
 <gui_summary>
 	<editor_count clsid="AFC_CLSID_ACV_DEFAULT_DOC">0</editor_count>
@@ -80,7 +78,7 @@ to license.txt.
 	<editor_count clsid="AFC_CLSID_PJM_QPF">0</editor_count>
 	<editor_count clsid="AFC_CLSID_PJM_SSF">0</editor_count>
 	<editor_count clsid="AFC_CLSID_PJN_DEFAULT_DOC">0</editor_count>
-	<editor_count clsid="AFC_CLSID_PPL_DEFAULT_DOC">1</editor_count>
+	<editor_count clsid="AFC_CLSID_PPL_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_PTW_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_QIS_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RED_DEFAULT_DOC">0</editor_count>

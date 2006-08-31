@@ -76,8 +76,6 @@ set_location_assignment PIN_5 -to FLAGC
 set_location_assignment PIN_13 -to SLOE
 set_location_assignment PIN_30 -to SLRD
 set_location_assignment PIN_31 -to SLWR
-set_global_assignment -name VERILOG_FILE tx_fifo.v
-set_global_assignment -name VERILOG_FILE ozy_eval.v
 set_location_assignment PIN_67 -to GPIO1
 set_location_assignment PIN_68 -to GPIO2
 set_location_assignment PIN_69 -to GPIO3
@@ -90,3 +88,6 @@ set_location_assignment PIN_75 -to GPIO7
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
 set_global_assignment -name ENABLE_RECOVERY_REMOVAL_ANALYSIS ON
 set_location_assignment PIN_181 -to EVALPIN39
+set_global_assignment -name VERILOG_FILE ram_16.v
+set_global_assignment -name VERILOG_FILE tx_fifo.v
+set_global_assignment -name VERILOG_FILE ozy_eval.v

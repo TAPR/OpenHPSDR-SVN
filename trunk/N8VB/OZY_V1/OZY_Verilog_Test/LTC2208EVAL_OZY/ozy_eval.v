@@ -52,10 +52,17 @@ module ozy_eval(	ENC_CLK,
 	assign EVALPIN39 = 1'b1; // VCC to eval board
 	
 	reg [15:0] ADC;
+	reg adc_go;
 		
 	always @(posedge ENC_CLK)
 	begin
 		ADC <= DA[15:0]; // buffer the ADC data
+		if (readfifoempty) begin
+			adc_go <= 1'b1;
+			end
+		if (writefifofull) begin
+			adc_go <= 1'b0;
+			end			
 	end
 		
 	reg [2:0] adcst;
@@ -69,13 +76,13 @@ module ozy_eval(	ENC_CLK,
 	assign GPIO7 = FLAGC;
 	
 	wire [9:0] read_used;
-		
+	
 	tx_fifo tx_fifo(.aclr(txfifoclr), .wrclk(ENC_CLK), 
-			.rdreq(WRITE_FX2FIFO), .rdclk(IFCLK), .wrreq(~read_used[9]),
+			.rdreq(WRITE_FX2FIFO), .rdclk(IFCLK), .wrreq(adc_go),
 			.data(ADC), .rdempty(readfifoempty), .wrempty(writefifoempty), 
 			.wrfull(writefifofull),	.rdfull(readfifofull), 
-			.q(FD), .wrusedw(), .rdusedw(read_used));	
-			
+			.q(FD), .wrusedw(), .rdusedw(read_used));
+				
 	reg [3:0] fx2st;
 	reg WRITE_FX2FIFO;
 	
@@ -88,22 +95,24 @@ module ozy_eval(	ENC_CLK,
 	wire SLWR = ~WRITE_FX2FIFO; // SLWR is active low
 	
 	wire [15:0] FD; // FX2 FIFO DATA
-					
+	
+	assign usb_write = (~readfifoempty) & (~FIFO_FULL);
+						
 	always @(posedge IFCLK)
 	begin
 		case (fx2st)
 		4'd0: begin
 			txfifoclr <= 1'b1;
 			WRITE_FX2FIFO <= 1'b0;
-			fx2st <= 4'd1;			
+			fx2st <= 4'd1;
 			end
 		4'd1: begin
 			txfifoclr <= 1'b0;
 			fx2st <= 4'd2;
 			end
 		4'd2: begin
-			if ((~FIFO_FULL) & (~readfifoempty)) begin
-					WRITE_FX2FIFO <= 1'b1;					
+			if (usb_write) begin
+					WRITE_FX2FIFO <= 1'b1;
 				end
 			else begin
 				WRITE_FX2FIFO <= 1'b0;
