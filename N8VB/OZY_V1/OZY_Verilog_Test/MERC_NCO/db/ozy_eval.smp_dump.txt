@@ -1,0 +1,6 @@
+
+State Machine - |ozy_nco|fx2st
+Name fx2st.0000 fx2st.0010 fx2st.0001 
+fx2st.0000 0 0 0 
+fx2st.0010 1 1 0 
+fx2st.0001 1 0 1 

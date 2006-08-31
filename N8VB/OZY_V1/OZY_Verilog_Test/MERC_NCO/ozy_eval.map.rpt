@@ -1,0 +1,892 @@
+Analysis & Synthesis report for ozy_eval
+Thu Aug 31 18:38:04 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Analysis & Synthesis Source Files Read
+  5. Analysis & Synthesis Resource Usage Summary
+  6. Analysis & Synthesis Resource Utilization by Entity
+  7. Analysis & Synthesis RAM Summary
+  8. State Machine - |ozy_nco|fx2st
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component
+ 12. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated
+ 13. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram
+ 14. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5
+ 15. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg
+ 16. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7
+ 17. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:rs_brp
+ 18. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:rs_bwp
+ 19. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp
+ 20. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp|dffpipe_qe9:dffpipe10
+ 21. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg
+ 22. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13
+ 23. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:ws_brp
+ 24. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:ws_bwp
+ 25. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp
+ 26. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15
+ 27. Parameter Settings for User Entity Instance: Top-level Entity: |ozy_nco
+ 28. Parameter Settings for User Entity Instance: phase_accumulator:rx_phase_accumulator
+ 29. Parameter Settings for User Entity Instance: cordic:rx_cordic
+ 30. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0
+ 31. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage1
+ 32. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage2
+ 33. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage3
+ 34. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage4
+ 35. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage5
+ 36. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage6
+ 37. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage7
+ 38. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage8
+ 39. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage9
+ 40. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage10
+ 41. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage11
+ 42. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage12
+ 43. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage13
+ 44. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage14
+ 45. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage15
+ 46. Parameter Settings for User Entity Instance: tx_fifo:tx_fifo|dcfifo:dcfifo_component
+ 47. dcfifo Parameter Settings by Entity Instance
+ 48. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                      ;
++------------------------------------+----------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Thu Aug 31 18:38:04 2006        ;
+; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
+; Revision Name                      ; ozy_eval                                     ;
+; Top-level Entity Name              ; ozy_nco                                      ;
+; Family                             ; Cyclone II                                   ;
+; Total logic elements               ; 1348                                         ;
+; Total registers                    ; 944                                          ;
+; Total pins                         ; 51                                           ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 16,384                                       ;
+; Embedded Multiplier 9-bit elements ; 0                                            ;
+; Total PLLs                         ; 0                                            ;
++------------------------------------+----------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                ;
++--------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                             ; Setting            ; Default Value      ;
++--------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                             ; EP2C5Q208C7        ;                    ;
+; Top-level entity name                                              ; ozy_nco            ; ozy_eval           ;
+; Family name                                                        ; Cyclone II         ; Stratix            ;
+; Use smart compilation                                              ; Off                ; Off                ;
+; Restructure Multiplexers                                           ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                ; Off                ; Off                ;
+; Preserve fewer node names                                          ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                          ; Off                ; Off                ;
+; Verilog Version                                                    ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                       ; VHDL93             ; VHDL93             ;
+; State Machine Processing                                           ; Auto               ; Auto               ;
+; Extract Verilog State Machines                                     ; On                 ; On                 ;
+; Extract VHDL State Machines                                        ; On                 ; On                 ;
+; Add Pass-Through Logic to Inferred RAMs                            ; On                 ; On                 ;
+; DSP Block Balancing                                                ; Auto               ; Auto               ;
+; Maximum DSP Block Usage                                            ; Unlimited          ; Unlimited          ;
+; NOT Gate Push-Back                                                 ; On                 ; On                 ;
+; Power-Up Don't Care                                                ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                       ; Off                ; Off                ;
+; Remove Duplicate Registers                                         ; On                 ; On                 ;
+; Ignore CARRY Buffers                                               ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                             ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                              ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                          ; Off                ; Off                ;
+; Ignore LCELL Buffers                                               ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                     ; Off                ; Off                ;
+; Optimization Technique -- Cyclone II                               ; Balanced           ; Balanced           ;
+; Carry Chain Length -- Stratix/Stratix GX/Cyclone/MAX II/Cyclone II ; 70                 ; 70                 ;
+; Auto Carry Chains                                                  ; On                 ; On                 ;
+; Auto Open-Drain Pins                                               ; On                 ; On                 ;
+; Remove Duplicate Logic                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                              ; Off                ; Off                ;
+; Perform gate-level register retiming                               ; Off                ; Off                ;
+; Allow register retiming to trade off Tsu/Tco with Fmax             ; On                 ; On                 ;
+; Auto ROM Replacement                                               ; On                 ; On                 ;
+; Auto RAM Replacement                                               ; On                 ; On                 ;
+; Auto Shift Register Replacement                                    ; On                 ; On                 ;
+; Auto Clock Enable Replacement                                      ; On                 ; On                 ;
+; Allow Synchronous Control Signals                                  ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                             ; Off                ; Off                ;
+; Auto Resource Sharing                                              ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                 ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                 ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                      ; Off                ; Off                ;
+; Maximum Number of M4K Memory Blocks                                ; Unlimited          ; Unlimited          ;
+; Ignore translate_off and translate_on Synthesis Directives         ; Off                ; Off                ;
+; Show Parameter Settings Tables in Synthesis Report                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                 ; Off                ; Off                ;
+; Retiming Meta-Stability Register Sequence Length                   ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                       ; Normal compilation ; Normal compilation ;
+; HDL message level                                                  ; Level2             ; Level2             ;
++--------------------------------------------------------------------+--------------------+--------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                  ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                        ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+
+; phase_accumulator.v              ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/phase_accumulator.v       ;
+; cordic.v                         ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/cordic.v                  ;
+; cordic_stage.v                   ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/cordic_stage.v            ;
+; tx_fifo.v                        ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/tx_fifo.v                 ;
+; ozy_nco.v                        ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_nco.v                 ;
+; dcfifo.tdf                       ; yes             ; Megafunction                 ; c:/altera/quartus60/libraries/megafunctions/dcfifo.tdf                              ;
+; lpm_counter.inc                  ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/lpm_counter.inc                         ;
+; lpm_add_sub.inc                  ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/lpm_add_sub.inc                         ;
+; altdpram.inc                     ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/altdpram.inc                            ;
+; a_graycounter.inc                ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/a_graycounter.inc                       ;
+; a_fefifo.inc                     ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/a_fefifo.inc                            ;
+; a_gray2bin.inc                   ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/a_gray2bin.inc                          ;
+; dffpipe.inc                      ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/dffpipe.inc                             ;
+; alt_sync_fifo.inc                ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/alt_sync_fifo.inc                       ;
+; lpm_compare.inc                  ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/lpm_compare.inc                         ;
+; altsyncram_fifo.inc              ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/altsyncram_fifo.inc                     ;
+; aglobal60.inc                    ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/aglobal60.inc                           ;
+; db/dcfifo_efb1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dcfifo_efb1.tdf        ;
+; db/a_gray2bin_ldb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_gray2bin_ldb.tdf     ;
+; db/a_graycounter_p96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_p96.tdf  ;
+; db/a_graycounter_k27.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_k27.tdf  ;
+; db/a_graycounter_j27.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_j27.tdf  ;
+; db/altsyncram_rd11.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_rd11.tdf    ;
+; db/altsyncram_52f1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_52f1.tdf    ;
+; db/alt_synch_pipe_hn7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_hn7.tdf ;
+; db/dffpipe_bo8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_bo8.tdf        ;
+; db/dffpipe_pe9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_pe9.tdf        ;
+; db/alt_synch_pipe_0e8.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_0e8.tdf ;
+; db/dffpipe_qe9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_qe9.tdf        ;
+; db/alt_synch_pipe_in7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_in7.tdf ;
+; db/dffpipe_co8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_co8.tdf        ;
+; db/alt_synch_pipe_1e8.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_1e8.tdf ;
+; db/dffpipe_re9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_re9.tdf        ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary           ;
++---------------------------------------------+---------+
+; Resource                                    ; Usage   ;
++---------------------------------------------+---------+
+; Estimated Total logic elements              ; 1,348   ;
+; Total combinational functions               ; 1348    ;
+; Logic element usage by number of LUT inputs ;         ;
+;     -- 4 input functions                    ; 16      ;
+;     -- 3 input functions                    ; 738     ;
+;     -- <=2 input functions                  ; 594     ;
+;         -- Combinational cells for routing  ; 0       ;
+; Logic elements by mode                      ;         ;
+;     -- normal mode                          ; 491     ;
+;     -- arithmetic mode                      ; 857     ;
+; Total registers                             ; 944     ;
+; I/O pins                                    ; 51      ;
+; Total memory bits                           ; 16384   ;
+; Maximum fan-out node                        ; ENC_CLK ;
+; Maximum fan-out                             ; 906     ;
+; Total fan-out                               ; 6651    ;
+; Average fan-out                             ; 2.82    ;
++---------------------------------------------+---------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                ;
++----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
+; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                              ;
++----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
+; |ozy_nco                                     ; 1348 (17)         ; 944 (34)     ; 16384       ; 0    ; 0            ; 0       ; 0         ; 51   ; 0            ; |ozy_nco                                                                                                                         ;
+;    |cordic:rx_cordic|                        ; 1255 (34)         ; 782 (32)     ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic                                                                                                        ;
+;       |cordic_stage:cordic_stage0|           ; 55 (55)           ; 50 (50)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0                                                                             ;
+;       |cordic_stage:cordic_stage10|          ; 97 (97)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage10                                                                            ;
+;       |cordic_stage:cordic_stage11|          ; 67 (67)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage11                                                                            ;
+;       |cordic_stage:cordic_stage12|          ; 65 (65)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage12                                                                            ;
+;       |cordic_stage:cordic_stage13|          ; 63 (63)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage13                                                                            ;
+;       |cordic_stage:cordic_stage14|          ; 63 (63)           ; 21 (21)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage14                                                                            ;
+;       |cordic_stage:cordic_stage15|          ; 21 (21)           ; 16 (16)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage15                                                                            ;
+;       |cordic_stage:cordic_stage1|           ; 112 (112)         ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1                                                                             ;
+;       |cordic_stage:cordic_stage2|           ; 85 (85)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage2                                                                             ;
+;       |cordic_stage:cordic_stage3|           ; 83 (83)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage3                                                                             ;
+;       |cordic_stage:cordic_stage4|           ; 81 (81)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage4                                                                             ;
+;       |cordic_stage:cordic_stage5|           ; 107 (107)         ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage5                                                                             ;
+;       |cordic_stage:cordic_stage6|           ; 77 (77)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage6                                                                             ;
+;       |cordic_stage:cordic_stage7|           ; 75 (75)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage7                                                                             ;
+;       |cordic_stage:cordic_stage8|           ; 73 (73)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage8                                                                             ;
+;       |cordic_stage:cordic_stage9|           ; 97 (97)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9                                                                             ;
+;    |phase_accumulator:rx_phase_accumulator|  ; 32 (32)           ; 32 (32)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|phase_accumulator:rx_phase_accumulator                                                                                  ;
+;    |tx_fifo:tx_fifo|                         ; 44 (0)            ; 96 (0)       ; 16384       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo                                                                                                         ;
+;       |dcfifo:dcfifo_component|              ; 44 (0)            ; 96 (0)       ; 16384       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component                                                                                 ;
+;          |dcfifo_efb1:auto_generated|        ; 44 (20)           ; 96 (26)      ; 16384       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated                                                      ;
+;             |a_graycounter_j27:wrptr_gp|     ; 12 (12)           ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp                           ;
+;             |a_graycounter_p96:rdptr_g1p|    ; 12 (12)           ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p                          ;
+;             |alt_synch_pipe_0e8:rs_dgwp|     ; 0 (0)             ; 22 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp                           ;
+;                |dffpipe_qe9:dffpipe10|       ; 0 (0)             ; 22 (22)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp|dffpipe_qe9:dffpipe10     ;
+;             |alt_synch_pipe_1e8:ws_dgrp|     ; 0 (0)             ; 22 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp                           ;
+;                |dffpipe_re9:dffpipe15|       ; 0 (0)             ; 22 (22)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15     ;
+;             |alt_synch_pipe_hn7:rdfull_reg|  ; 0 (0)             ; 1 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg                        ;
+;                |dffpipe_bo8:dffpipe7|        ; 0 (0)             ; 1 (1)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7   ;
+;             |alt_synch_pipe_in7:wrempty_reg| ; 0 (0)             ; 1 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg                       ;
+;                |dffpipe_co8:dffpipe13|       ; 0 (0)             ; 1 (1)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13 ;
+;             |altsyncram_rd11:fifo_ram|       ; 0 (0)             ; 0 (0)        ; 16384       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram                             ;
+;                |altsyncram_52f1:altsyncram5| ; 0 (0)             ; 0 (0)        ; 16384       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5 ;
++----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                      ;
++------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
+; Name                                                                                                                               ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF  ;
++------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
+; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|ALTSYNCRAM ; AUTO ; True Dual Port ; 1024         ; 16           ; 1024         ; 16           ; 16384 ; None ;
++------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
+
+
++---------------------------------------------------+
+; State Machine - |ozy_nco|fx2st                    ;
++------------+------------+------------+------------+
+; Name       ; fx2st.0000 ; fx2st.0010 ; fx2st.0001 ;
++------------+------------+------------+------------+
+; fx2st.0000 ; 0          ; 0          ; 0          ;
+; fx2st.0010 ; 1          ; 1          ; 0          ;
+; fx2st.0001 ; 1          ; 0          ; 1          ;
++------------+------------+------------+------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 944   ;
+; Number of registers using Synchronous Clear  ; 763   ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 96    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 21    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
+; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage10|PHout[5] ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9|PHout[4]  ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage5|PHout[9]  ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[13] ;
+; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[10]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|Istage0[0]                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
+
+
++----------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component ;
++---------------------------------+-------+------+---------------+
+; Assignment                      ; Value ; From ; To            ;
++---------------------------------+-------+------+---------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -             ;
++---------------------------------+-------+------+---------------+
+
+
++--------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated  ;
++---------------------------------+-------+------------------+-------------------------------+
+; Assignment                      ; Value ; From             ; To                            ;
++---------------------------------+-------+------------------+-------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -                ; -                             ;
+; REMOVE_DUPLICATE_REGISTERS      ; OFF   ; -                ; -                             ;
+; SUPPRESS_DA_RULE_INTERNAL       ; d101  ; -                ; -                             ;
+; POWER_UP_LEVEL                  ; LOW   ; -                ; p0addr                        ;
+; SUPPRESS_DA_RULE_INTERNAL       ; c106  ; -                ; rdaclr                        ;
+; POWER_UP_LEVEL                  ; LOW   ; -                ; rdaclr                        ;
+; CUT                             ; ON    ; rdptr_g          ; ws_dgrp|dffpipe15|dffe16a     ;
+; CUT                             ; ON    ; delayed_wrptr_g  ; rs_dgwp|dffpipe10|dffe11a     ;
+; CUT                             ; ON    ; previous_wrfull  ; rdfull_reg|dffpipe7|dffe8a    ;
+; CUT                             ; ON    ; previous_rdempty ; wrempty_reg|dffpipe13|dffe14a ;
++---------------------------------+-------+------------------+-------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram ;
++---------------------------------+--------------------+------+------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                   ;
++---------------------------------+--------------------+------+------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                    ;
++---------------------------------+--------------------+------+------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5 ;
++---------------------------------+--------------------+------+----------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                               ;
++---------------------------------+--------------------+------+----------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                                ;
++---------------------------------+--------------------+------+----------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg ;
++-----------------------+-------+------+----------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                               ;
++-----------------------+-------+------+----------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                ;
++-----------------------+-------+------+----------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7 ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                          ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                           ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:rs_brp ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                          ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                           ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:rs_bwp ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                          ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                           ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp ;
++-----------------------+-------+------+-------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                            ;
++-----------------------+-------+------+-------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                             ;
++-----------------------+-------+------+-------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp|dffpipe_qe9:dffpipe10 ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                        ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                         ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg ;
++-----------------------+-------+------+-----------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                                ;
++-----------------------+-------+------+-----------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                 ;
++-----------------------+-------+------+-----------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13 ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                            ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                             ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:ws_brp ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                          ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                           ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:ws_bwp ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                          ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                           ;
++---------------------------------+-------+------+-------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp ;
++-----------------------+-------+------+-------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                            ;
++-----------------------+-------+------+-------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                             ;
++-----------------------+-------+------+-------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15 ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                        ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                         ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |ozy_nco ;
++----------------+----------------------------------+---------------------+
+; Parameter Name ; Value                            ; Type                ;
++----------------+----------------------------------+---------------------+
+; FREQ           ; 00000000000000000000000000010101 ; Binary              ;
++----------------+----------------------------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: phase_accumulator:rx_phase_accumulator ;
++----------------+-------+------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                       ;
++----------------+-------+------------------------------------------------------------+
+; RESOLUTION     ; 32    ; Integer                                                    ;
++----------------+-------+------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; CORDIC_WIDTH   ; 16    ; Integer                              ;
+; PHASE_WIDTH    ; 16    ; Integer                              ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0 ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                         ;
+; PHASE_WIDTH    ; 15    ; Integer                                                         ;
+; SHIFT          ; 0     ; Integer                                                         ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage1 ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                         ;
+; PHASE_WIDTH    ; 15    ; Integer                                                         ;
+; SHIFT          ; 1     ; Integer                                                         ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage2 ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                         ;
+; PHASE_WIDTH    ; 15    ; Integer                                                         ;
+; SHIFT          ; 2     ; Integer                                                         ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage3 ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                         ;
+; PHASE_WIDTH    ; 15    ; Integer                                                         ;
+; SHIFT          ; 3     ; Integer                                                         ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage4 ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                         ;
+; PHASE_WIDTH    ; 15    ; Integer                                                         ;
+; SHIFT          ; 4     ; Integer                                                         ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage5 ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                         ;
+; PHASE_WIDTH    ; 15    ; Integer                                                         ;
+; SHIFT          ; 5     ; Integer                                                         ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage6 ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                         ;
+; PHASE_WIDTH    ; 15    ; Integer                                                         ;
+; SHIFT          ; 6     ; Integer                                                         ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage7 ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                         ;
+; PHASE_WIDTH    ; 15    ; Integer                                                         ;
+; SHIFT          ; 7     ; Integer                                                         ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage8 ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                         ;
+; PHASE_WIDTH    ; 15    ; Integer                                                         ;
+; SHIFT          ; 8     ; Integer                                                         ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage9 ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                         ;
+; PHASE_WIDTH    ; 15    ; Integer                                                         ;
+; SHIFT          ; 9     ; Integer                                                         ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage10 ;
++----------------+-------+------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                             ;
++----------------+-------+------------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                          ;
+; PHASE_WIDTH    ; 15    ; Integer                                                          ;
+; SHIFT          ; 10    ; Integer                                                          ;
++----------------+-------+------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage11 ;
++----------------+-------+------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                             ;
++----------------+-------+------------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                          ;
+; PHASE_WIDTH    ; 15    ; Integer                                                          ;
+; SHIFT          ; 11    ; Integer                                                          ;
++----------------+-------+------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage12 ;
++----------------+-------+------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                             ;
++----------------+-------+------------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                          ;
+; PHASE_WIDTH    ; 15    ; Integer                                                          ;
+; SHIFT          ; 12    ; Integer                                                          ;
++----------------+-------+------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage13 ;
++----------------+-------+------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                             ;
++----------------+-------+------------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                          ;
+; PHASE_WIDTH    ; 15    ; Integer                                                          ;
+; SHIFT          ; 13    ; Integer                                                          ;
++----------------+-------+------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage14 ;
++----------------+-------+------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                             ;
++----------------+-------+------------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                          ;
+; PHASE_WIDTH    ; 15    ; Integer                                                          ;
+; SHIFT          ; 14    ; Integer                                                          ;
++----------------+-------+------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage15 ;
++----------------+-------+------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                             ;
++----------------+-------+------------------------------------------------------------------+
+; CORDIC_WIDTH   ; 18    ; Integer                                                          ;
+; PHASE_WIDTH    ; 15    ; Integer                                                          ;
+; SHIFT          ; 15    ; Integer                                                          ;
++----------------+-------+------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: tx_fifo:tx_fifo|dcfifo:dcfifo_component ;
++-------------------------+-------------+----------------------------------------------+
+; Parameter Name          ; Value       ; Type                                         ;
++-------------------------+-------------+----------------------------------------------+
+; AUTO_CARRY_CHAINS       ; ON          ; AUTO_CARRY                                   ;
+; IGNORE_CARRY_BUFFERS    ; OFF         ; IGNORE_CARRY                                 ;
+; AUTO_CASCADE_CHAINS     ; ON          ; AUTO_CASCADE                                 ;
+; IGNORE_CASCADE_BUFFERS  ; OFF         ; IGNORE_CASCADE                               ;
+; LPM_WIDTH               ; 16          ; Integer                                      ;
+; LPM_NUMWORDS            ; 1024        ; Integer                                      ;
+; LPM_WIDTHU              ; 10          ; Integer                                      ;
+; LPM_SHOWAHEAD           ; OFF         ; Untyped                                      ;
+; UNDERFLOW_CHECKING      ; ON          ; Untyped                                      ;
+; OVERFLOW_CHECKING       ; ON          ; Untyped                                      ;
+; USE_EAB                 ; ON          ; Untyped                                      ;
+; ADD_RAM_OUTPUT_REGISTER ; OFF         ; Untyped                                      ;
+; DELAY_RDUSEDW           ; 1           ; Untyped                                      ;
+; DELAY_WRUSEDW           ; 1           ; Untyped                                      ;
+; RDSYNC_DELAYPIPE        ; 4           ; Integer                                      ;
+; WRSYNC_DELAYPIPE        ; 4           ; Integer                                      ;
+; CLOCKS_ARE_SYNCHRONIZED ; FALSE       ; Untyped                                      ;
+; DEVICE_FAMILY           ; Cyclone II  ; Untyped                                      ;
+; CBXI_PARAMETER          ; dcfifo_efb1 ; Untyped                                      ;
++-------------------------+-------------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------+
+; dcfifo Parameter Settings by Entity Instance                         ;
++----------------------------+-----------------------------------------+
+; Name                       ; Value                                   ;
++----------------------------+-----------------------------------------+
+; Number of entity instances ; 1                                       ;
+; Entity Instance            ; tx_fifo:tx_fifo|dcfifo:dcfifo_component ;
+;     -- FIFO Type           ; Dual Clock                              ;
+;     -- LPM_WIDTH           ; 16                                      ;
+;     -- LPM_NUMWORDS        ; 1024                                    ;
+;     -- LPM_SHOWAHEAD       ; OFF                                     ;
+;     -- USE_EAB             ; ON                                      ;
++----------------------------+-----------------------------------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Thu Aug 31 18:37:54 2006
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ozy_eval -c ozy_eval
+Info: Found 1 design units, including 1 entities, in source file phase_accumulator.v
+    Info: Found entity 1: phase_accumulator
+Info: Found 1 design units, including 1 entities, in source file cordic.v
+    Info: Found entity 1: cordic
+Info: Found 1 design units, including 1 entities, in source file cordic_stage.v
+    Info: Found entity 1: cordic_stage
+Info: Found 1 design units, including 1 entities, in source file tx_fifo.v
+    Info: Found entity 1: tx_fifo
+Warning (10236): Verilog HDL net warning at ozy_nco.v(140): created undeclared net "usb_write"
+Info: Found 1 design units, including 1 entities, in source file ozy_nco.v
+    Info: Found entity 1: ozy_nco
+Info: Elaborating entity "ozy_nco" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at ozy_nco.v(135): object "FIFO_EMPTY" assigned a value but never read
+Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
+Info: Elaborating entity "cordic" for hierarchy "cordic:rx_cordic"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage0"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage1"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage2"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage3"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage4"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage5"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage6"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage7"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage8"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage9"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage10"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage11"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage12"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage13"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage14"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage15"
+Info: Elaborating entity "tx_fifo" for hierarchy "tx_fifo:tx_fifo"
+Info: Found 1 design units, including 1 entities, in source file ../../../../../../../altera/quartus60/libraries/megafunctions/dcfifo.tdf
+    Info: Found entity 1: dcfifo
+Info: Elaborating entity "dcfifo" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component"
+Info: Elaborated megafunction instantiation "tx_fifo:tx_fifo|dcfifo:dcfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_efb1.tdf
+    Info: Found entity 1: dcfifo_efb1
+Info: Elaborating entity "dcfifo_efb1" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_ldb.tdf
+    Info: Found entity 1: a_gray2bin_ldb
+Info: Elaborating entity "a_gray2bin_ldb" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_gray2bin_ldb:rdptr_g_gray2bin"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_p96.tdf
+    Info: Found entity 1: a_graycounter_p96
+Info: Elaborating entity "a_graycounter_p96" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_k27.tdf
+    Info: Found entity 1: a_graycounter_k27
+Info: Elaborating entity "a_graycounter_k27" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_k27:wrptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_j27.tdf
+    Info: Found entity 1: a_graycounter_j27
+Info: Elaborating entity "a_graycounter_j27" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_rd11.tdf
+    Info: Found entity 1: altsyncram_rd11
+Info: Elaborating entity "altsyncram_rd11" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_52f1.tdf
+    Info: Found entity 1: altsyncram_52f1
+Info: Elaborating entity "altsyncram_52f1" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_hn7.tdf
+    Info: Found entity 1: alt_synch_pipe_hn7
+Info: Elaborating entity "alt_synch_pipe_hn7" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_bo8.tdf
+    Info: Found entity 1: dffpipe_bo8
+Info: Elaborating entity "dffpipe_bo8" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_pe9.tdf
+    Info: Found entity 1: dffpipe_pe9
+Info: Elaborating entity "dffpipe_pe9" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:rs_brp"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_0e8.tdf
+    Info: Found entity 1: alt_synch_pipe_0e8
+Info: Elaborating entity "alt_synch_pipe_0e8" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_qe9.tdf
+    Info: Found entity 1: dffpipe_qe9
+Info: Elaborating entity "dffpipe_qe9" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp|dffpipe_qe9:dffpipe10"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_in7.tdf
+    Info: Found entity 1: alt_synch_pipe_in7
+Info: Elaborating entity "alt_synch_pipe_in7" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_co8.tdf
+    Info: Found entity 1: dffpipe_co8
+Info: Elaborating entity "dffpipe_co8" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_1e8.tdf
+    Info: Found entity 1: alt_synch_pipe_1e8
+Info: Elaborating entity "alt_synch_pipe_1e8" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_re9.tdf
+    Info: Found entity 1: dffpipe_re9
+Info: Elaborating entity "dffpipe_re9" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15"
+Warning: Port "#5" on the entity instantiation of "cordic_stage15" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage14" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage13" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage12" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage11" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage10" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage9" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage8" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage7" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage6" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage5" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage4" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage3" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage2" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage1" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Port "#5" on the entity instantiation of "cordic_stage0" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
+Warning: Reduced register "cordic:rx_cordic|Qstage0[17]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[16]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[15]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[14]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[13]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[12]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[11]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[10]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[9]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[8]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[7]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[6]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[5]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[4]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[3]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[2]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|Qstage0[0]" with stuck data_in port to stuck value GND
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cordic:rx_cordic|Istage0[17]" merged to single register "cordic:rx_cordic|Istage0[16]"
+Info: State machine "|ozy_nco|fx2st" contains 3 states
+Info: Selected Auto state machine encoding method for state machine "|ozy_nco|fx2st"
+Info: Encoding result for state machine "|ozy_nco|fx2st"
+    Info: Completed encoding using 3 state bits
+        Info: Encoded state bit "fx2st.0000"
+        Info: Encoded state bit "fx2st.0010"
+        Info: Encoded state bit "fx2st.0001"
+    Info: State "|ozy_nco|fx2st.0000" uses code string "000"
+    Info: State "|ozy_nco|fx2st.0010" uses code string "110"
+    Info: State "|ozy_nco|fx2st.0001" uses code string "101"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[17]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[16]"
+Warning: Resynthesizing Cyclone or Stratix WYSIWYG primitives into Cyclone II WYSIWYG primitives; however, resynthesized WYSIWYG primitives may not produce optimal compilation results.
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "SLRD" stuck at VCC
+    Warning: Pin "SLOE" stuck at VCC
+    Warning: Pin "FIFO_ADR[0]" stuck at GND
+    Warning: Pin "FIFO_ADR[1]" stuck at VCC
+    Warning: Pin "EVALPIN39" stuck at VCC
+Warning: Design contains 1 input pin(s) that do not drive logic
+    Warning: No output dependent on input pin "FX2_CLK"
+Info: Implemented 1504 device resources after synthesis - the final resource count might be different
+    Info: Implemented 22 input pins
+    Info: Implemented 29 output pins
+    Info: Implemented 1437 logic cells
+    Info: Implemented 16 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 45 warnings
+    Info: Processing ended: Thu Aug 31 18:38:04 2006
+    Info: Elapsed time: 00:00:10
+
+

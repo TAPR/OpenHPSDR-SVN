@@ -192,7 +192,7 @@ namespace MercScope
             this.numericUpDown3.Size = new System.Drawing.Size(68, 20);
             this.numericUpDown3.TabIndex = 10;
             this.numericUpDown3.Value = new decimal(new int[] {
-            500,
+            75,
             0,
             0,
             0});
