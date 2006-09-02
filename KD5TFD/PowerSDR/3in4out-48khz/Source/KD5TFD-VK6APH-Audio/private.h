@@ -53,6 +53,7 @@ extern KD5TFDVK6APHAUDIO_API void StopAudio(void);
 extern KD5TFDVK6APHAUDIO_API int GetDotDashBits(void); 
 extern KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
 extern KD5TFDVK6APHAUDIO_API int GetDiagData(int *a, int count); 
+extern KD5TFDVK6APHAUDIO_API void SetVFOfreq(int f);
 
 #if 0 
 extern KD5TFDVK6APHAUDIO_API int StartAudio_4port(int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata));
@@ -152,6 +153,7 @@ extern unsigned int LostSyncCount;
 extern unsigned int SyncGainedCount; 
 extern unsigned int NotOKtoSendCount;
 extern int HaveSync; 
+extern int VFOfreq;
 
 #if 0 
 #define DIAG_C0_IN (0) 

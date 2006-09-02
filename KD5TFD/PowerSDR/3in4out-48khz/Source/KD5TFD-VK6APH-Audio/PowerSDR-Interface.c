@@ -280,6 +280,11 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 }
 
 
+KD5TFDVK6APHAUDIO_API void SetVFOfreq(double ff) { 	
+	ff = (1000000.0  * ff * 4294967296.0) / ( 100.0 * 1000000); 
+	VFOfreq = (int)ff; 
+	return; 
+}
 
 // 
 // StopAudio -- undo what start audio did.  Close/Free/Destroy that which StartAudio Opened/Alloc'd/Created. 
@@ -297,7 +302,6 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
 		InSampleFIFOp = NULL; 
 	}
 	printf("fifo destroyted\n");   fflush(stdout); 
-
 
 
 	if ( IOSampleInBufp != NULL ) { 
@@ -534,6 +538,9 @@ KD5TFDVK6APHAUDIO_API int StartAudio(int samples_per_block, int (__stdcall *call
 	} 
 	return myrc; 
 }
+
+
+
 
 
 KD5TFDVK6APHAUDIO_API void StopAudio() { 
