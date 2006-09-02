@@ -14871,6 +14871,10 @@ namespace PowerSDR
 			}
 			
 			double freq = double.Parse(txtVFOAFreq.Text);
+
+			// tell ozy/mercury/janus the freq 
+			TFDAPHaudio.SetVFOfreq(freq); 
+
 			txtVFOAFreq.Text = freq.ToString("f6");
 
 			current_xvtr_index = XVTRForm.XVTRFreq(freq);

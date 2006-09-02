@@ -99,18 +99,19 @@ namespace PowerSDR
 			{ 
 				int rc; 
 				// oz_start(); 
-				rc = JanusOzyIO.getJanusOzy().init(); 				
-				System.Console.WriteLine("JanusOzyIO.init returned: " + rc); 
-				if ( rc != 0 ) 
+				// rc = JanusOzyIO.getJanusOzy().init(); 				
+				// System.Console.WriteLine("JanusOzyIO.init returned: " + rc); 
+				
+				// if ( rc != 0 ) 
+				// { 
+				//	return 1; 
+				// }
+
+
+  				if ( initOzy() != 0 )  
 				{ 
 					return 1; 
-				}
-
-
-//				if ( initOzy() != 0 )  
-//				{ 
-//					return 1; 
-//				} 
+				} 
 				isOzyInitialized = true; 
 			} 
 			return StartAudioNative(sample_rate, samples_per_block, cb, sample_bits); 
@@ -131,6 +132,9 @@ namespace PowerSDR
 
 		[DllImport("KD5TFD-VK6APH-Audio.dll")]
 		unsafe public static extern int GetDiagData(int *a, int count);  // get diag data, count is how many slots are in array 
+
+		[DllImport("KD5TFD-VK6APH-Audio.dll")]
+		unsafe public static extern void SetVFOfreq(double f);  // tell aux hardware current freq -- in MHz 
 
 
 

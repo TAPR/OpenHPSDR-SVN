@@ -394,6 +394,8 @@ void IOThreadMainLoop(void) {
 
 	int wrote_frame = 0; 
 	int ok_to_write = 0; 
+
+	int out_control_idx = 0; 
 	
 	unsigned char *outbufp = NULL; 
 	int outbufpos; // position of next sample to be processed in outbufp 
@@ -748,10 +750,13 @@ void IOThreadMainLoop(void) {
 							} 
 #endif 
 
-
+							
 							FPGAWriteBufp[writebufpos] = (unsigned char)XmitBit; 
-							FPGAWriteBufp[writebufpos] &= 1; 
-							ControlBytesOut[0] = FPGAWriteBufp[writebufpos]; 
+							FPGAWriteBufp[writebufpos] &= 1; // not needed ? 
+							if ( out_control_idx == 1 ) {  // send freq 
+								FPGAWriteBufp[writebufpos] |= 2; 
+							} 
+							ControlBytesOut[0] = FPGAWriteBufp[writebufpos]; 							
 
 							break; 
 
@@ -759,7 +764,13 @@ void IOThreadMainLoop(void) {
 							out_state = OUT_STATE_CONTROL2;							
 							// send sample rate in C1 low 2 bits 
 							// FPGAWriteBufp[writebufpos] = ((ControlBytesIn[1] & 0xfc) | (SampleRateIn2Bits & 3));
-							FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3);
+							if ( out_control_idx == 1 ) { 
+									FPGAWriteBufp[writebufpos] =  (VFOfreq >> 24) & 0xff; // byte 0 of freq 
+							}
+							else { 
+									FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3);
+							}
+
 							ControlBytesOut[1] = FPGAWriteBufp[writebufpos]; 
 
 							
@@ -774,22 +785,43 @@ void IOThreadMainLoop(void) {
 
 						case OUT_STATE_CONTROL2: 
 							out_state = OUT_STATE_CONTROL3;
-							FPGAWriteBufp[writebufpos] = 0; /* ControlBytesIn[2];  */ 
+							if ( out_control_idx == 1 ) { 
+								FPGAWriteBufp[writebufpos] = (VFOfreq >> 16) & 0xff; 
+							}
+							else { 
+								FPGAWriteBufp[writebufpos] = 0; /* ControlBytesIn[2];  */ 
+							}
 							ControlBytesOut[2] = FPGAWriteBufp[writebufpos]; 
 							break; 
 
 						case OUT_STATE_CONTROL3: 
 							out_state = OUT_STATE_CONTROL4;
-							FPGAWriteBufp[writebufpos] = 0; /* ControlBytesIn[3];  */ 
+							if ( out_control_idx == 1 ) { 
+								FPGAWriteBufp[writebufpos] = (VFOfreq >> 8) & 0xff; 
+							}
+							else { 
+								FPGAWriteBufp[writebufpos] = 0; /* ControlBytesIn[3];  */ 
+							}
 							ControlBytesOut[3] = FPGAWriteBufp[writebufpos]; 
 							break; 
 
 						case OUT_STATE_CONTROL4: 
 							out_state = OUT_STATE_LEFT_HI_NEEDED; 
 							// write_buf[writebufpos] = ControlBytesIn[4]; 
-							FPGAWriteBufp[writebufpos] = out_frame_idx; 
+							if ( out_control_idx == 1 ) {
+								FPGAWriteBufp[writebufpos] = VFOfreq & 0xff; 
+							} 
+							else {
+								FPGAWriteBufp[writebufpos] = out_frame_idx; 
+							}
 							ControlBytesOut[4] = FPGAWriteBufp[writebufpos]; 
 							++out_frame_idx; 
+							if ( out_control_idx == 1 ) { 
+								out_control_idx = 0; 
+							}
+							else { 
+								out_control_idx = 1; 
+							} 
 							break; 
 
 						case OUT_STATE_LEFT_LO_NEEDED: 
