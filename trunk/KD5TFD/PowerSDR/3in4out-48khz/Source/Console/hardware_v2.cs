@@ -416,15 +416,25 @@ namespace PowerSDR
 //			get { return pio_ic1.GetBit(TR); }
 			set 
 			{
+				Console c = Console.getConsole(); 
 				if(value) 
 				{ 
+										
 					TFDAPHaudio.SetXmitBit(1); 
+					if ( c.serialPTT != null ) 
+					{
+						c.serialPTT.setDTR(true); 
+					}
 					pio_ic1.SetBit(TR);
 					
 				}
 				else 
 				{
 					TFDAPHaudio.SetXmitBit(0); 
+					if ( c.serialPTT != null ) 
+					{
+						c.serialPTT.setDTR(false); 
+					}
 					pio_ic1.ClearBit(TR);
 				}
 			}

@@ -84,6 +84,20 @@ namespace PowerSDR
 			return false; 
 		}
 
+		public bool isCTS() 
+		{
+			return commPort.isCTS(); 
+		}
+
+		public bool isDSR() 
+		{ 
+			return commPort.isDSR(); 
+		}
+
+		public void setDTR(bool v) 
+		{
+			commPort.setDTR(v); 
+		}
 		
 		public void Destroy() 
 		{ 
