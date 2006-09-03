@@ -76,6 +76,8 @@ namespace SDRSerialSupportII
 		{
 			commPort = new SerialPort();
 			commPort.Encoding = System.Text.Encoding.ASCII;
+			commPort.RtsEnable = true; // kd5tfd hack for soft rock ptt 
+			commPort.DtrEnable = false; // set dtr off 
 			commPort.ErrorEvent += new SerialPorts.SerialEventHandler(this.SerialPortErrorEvent);
 			commPort.ReceivedEvent += new SerialPorts.SerialEventHandler(this.SerialPortReceivedEvent);
 			commPort.PinChangedEvent += new SerialPorts.SerialEventHandler(this.SerialPortPinChangedEvent);
@@ -213,6 +215,12 @@ namespace SDRSerialSupportII
 		{
 			if ( !isOpen ) return false; // fixme error check 
 			return commPort.CDHolding; 
+		}
+
+		public void setDTR(bool v) 
+		{ 
+			if ( !isOpen ) return; 
+			commPort.DtrEnable = v; 
 		}
 
 		void SerialPortErrorEvent(object source, SerialPorts.SerialEventArgs e)

@@ -142,7 +142,7 @@ namespace PowerSDR
 					case "SDR":
 						if (sp.IsOpen) sp.Close();	
 						break;
-					case "FPGA":  // fpga does not need to be opened or closed 
+					case "Ozy":  // fpga does not need to be opened or closed 
 						break; 
 					default:
 						if (sp.IsOpen) sp.Close();
@@ -180,6 +180,18 @@ namespace PowerSDR
 							MessageBox.Show("CAT was selected for the Keyer Secondary Port, but CAT is not enabled.");
 
 						break;
+
+					case "BB-PTT": 
+						Console c = Console.getConsole(); 	
+						if ( c != null ) 
+						{ 
+							if ( ! c.PTTBitBangEnabled || c.serialPTT == null ) 
+							{ 
+								MessageBox.Show("Bit Bang PTT was selected for the Keyer Secondary Port, but Bit Bang PTT is not enabled.");
+							}
+						}
+						break; 
+
 					default: // COMx
 						if(sp2.IsOpen) sp2.Close();
 						sp2.PortName = secondary_conn_port;
@@ -279,7 +291,7 @@ namespace PowerSDR
 							extkey_dot  = (byte)(((b & (byte)StatusPin.Dot ) != 0) ? 1:0);
 							break;
 
-						case "FPGA": 
+						case "Ozy": 
 							int tmp = TFDAPHaudio.GetDotDash(); 
 							// System.Console.WriteLine("dd: " + tmp); 
 							extkey_dot = (byte)(tmp & 0x1); 
@@ -347,8 +359,55 @@ namespace PowerSDR
 								//								Debug.WriteLine("keyprog: "+keyprog);
 							} 
 							else keyprog = 0;
-
 							break;
+
+
+						case "BB-PTT":
+							Console c = Console.getConsole();
+							
+							
+							if ((extkey_dash==0) && (extkey_dot == 0)) // don't override primary
+							{
+								switch(secondary_ptt_line)
+								{
+									case KeyerLine.NONE:
+										if (sp2dotkey) extkey_dash  = System.Convert.ToByte(c.serialPTT.isDSR() );
+										else extkey_dot = System.Convert.ToByte(c.serialPTT.isCTS() );
+										break;
+									case KeyerLine.DTR: // look at DSR since we are on the other side of the null modem cable
+										keyerptt =   c.serialPTT.isDSR();
+										//										extkey_dot = System.Convert.ToByte(sp2.CtsHolding);
+										break;
+									case KeyerLine.RTS: // look at CTS since we are on the other side of the null modem cable
+										keyerptt = c.serialPTT.isCTS();
+										//										extkey_dash  = System.Convert.ToByte(sp2.DsrHolding);
+										break;								
+								}
+
+								switch(secondary_key_line)
+								{
+									case KeyerLine.NONE:
+										if (sp2dotkey) extkey_dash  = System.Convert.ToByte(c.serialPTT.isDSR());
+										else extkey_dot = System.Convert.ToByte(c.serialPTT.isCTS());
+										break;
+									case KeyerLine.DTR: // look at DSR since we are on the other side of the null modem cable
+										extkey_dot = System.Convert.ToByte(c.serialPTT.isDSR());
+										//										Debug.WriteLine("extkey_dot: "+extkey_dot);
+										break;
+									case KeyerLine.RTS: // look at CTS since we are on the other side of the null modem cable
+										extkey_dash = System.Convert.ToByte(c.serialPTT.isCTS());
+										break;
+								}
+								
+								if ((extkey_dash+extkey_dot) != 0)
+									keyprog=1;
+								else keyprog=0;
+								//								Debug.WriteLine("keyprog: "+keyprog);
+							} 
+							else keyprog = 0;
+							break;
+
+
 
 						default: // comm port
 							if ((extkey_dash==0) && (extkey_dot == 0)) // don't override primary

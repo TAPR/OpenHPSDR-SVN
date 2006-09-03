@@ -5091,7 +5091,7 @@ namespace PowerSDR
 			this.tbDSPImagePhaseRX.Maximum = 400;
 			this.tbDSPImagePhaseRX.Minimum = -400;
 			this.tbDSPImagePhaseRX.Name = "tbDSPImagePhaseRX";
-			this.tbDSPImagePhaseRX.Size = new System.Drawing.Size(160, 45);
+			this.tbDSPImagePhaseRX.Size = new System.Drawing.Size(160, 50);
 			this.tbDSPImagePhaseRX.TabIndex = 3;
 			this.tbDSPImagePhaseRX.TickFrequency = 50;
 			this.toolTip1.SetToolTip(this.tbDSPImagePhaseRX, "Sets the phase offset between the I and Q channels.  ");
@@ -5113,7 +5113,7 @@ namespace PowerSDR
 			this.tbDSPImageGainRX.Maximum = 500;
 			this.tbDSPImageGainRX.Minimum = -500;
 			this.tbDSPImageGainRX.Name = "tbDSPImageGainRX";
-			this.tbDSPImageGainRX.Size = new System.Drawing.Size(160, 45);
+			this.tbDSPImageGainRX.Size = new System.Drawing.Size(160, 50);
 			this.tbDSPImageGainRX.TabIndex = 4;
 			this.tbDSPImageGainRX.TickFrequency = 50;
 			this.toolTip1.SetToolTip(this.tbDSPImageGainRX, "Sets the amplitude/gain offset between the I and Q channels.  ");
@@ -5244,7 +5244,7 @@ namespace PowerSDR
 			this.tbDSPImagePhaseTX.Maximum = 400;
 			this.tbDSPImagePhaseTX.Minimum = -400;
 			this.tbDSPImagePhaseTX.Name = "tbDSPImagePhaseTX";
-			this.tbDSPImagePhaseTX.Size = new System.Drawing.Size(160, 45);
+			this.tbDSPImagePhaseTX.Size = new System.Drawing.Size(160, 50);
 			this.tbDSPImagePhaseTX.TabIndex = 3;
 			this.tbDSPImagePhaseTX.TickFrequency = 50;
 			this.toolTip1.SetToolTip(this.tbDSPImagePhaseTX, "Sets the phase offset between the I and Q channels.  ");
@@ -5266,7 +5266,7 @@ namespace PowerSDR
 			this.tbDSPImageGainTX.Maximum = 500;
 			this.tbDSPImageGainTX.Minimum = -500;
 			this.tbDSPImageGainTX.Name = "tbDSPImageGainTX";
-			this.tbDSPImageGainTX.Size = new System.Drawing.Size(160, 45);
+			this.tbDSPImageGainTX.Size = new System.Drawing.Size(160, 50);
 			this.tbDSPImageGainTX.TabIndex = 4;
 			this.tbDSPImageGainTX.TickFrequency = 50;
 			this.toolTip1.SetToolTip(this.tbDSPImageGainTX, "Sets the amplitude/gain offset between the I and Q channels.  ");
@@ -6903,7 +6903,7 @@ namespace PowerSDR
 			// 
 			this.tbTXCompander.Location = new System.Drawing.Point(20, 128);
 			this.tbTXCompander.Name = "tbTXCompander";
-			this.tbTXCompander.Size = new System.Drawing.Size(152, 45);
+			this.tbTXCompander.Size = new System.Drawing.Size(152, 50);
 			this.tbTXCompander.TabIndex = 34;
 			this.toolTip1.SetToolTip(this.tbTXCompander, "Sets the compander value.");
 			this.tbTXCompander.Value = 3;
@@ -7000,7 +7000,7 @@ namespace PowerSDR
 			this.tbTXFFCompression.Location = new System.Drawing.Point(24, 48);
 			this.tbTXFFCompression.Maximum = 20;
 			this.tbTXFFCompression.Name = "tbTXFFCompression";
-			this.tbTXFFCompression.Size = new System.Drawing.Size(152, 45);
+			this.tbTXFFCompression.Size = new System.Drawing.Size(152, 50);
 			this.tbTXFFCompression.TabIndex = 21;
 			this.tbTXFFCompression.TickFrequency = 2;
 			this.toolTip1.SetToolTip(this.tbTXFFCompression, "Sets the compression value allowing more average power without raising the peaks." +
@@ -11106,7 +11106,7 @@ namespace PowerSDR
 			this.grpPTTBitBang.Controls.Add(this.chkCATPTTEnabled);
 			this.grpPTTBitBang.Location = new System.Drawing.Point(192, 16);
 			this.grpPTTBitBang.Name = "grpPTTBitBang";
-			this.grpPTTBitBang.Size = new System.Drawing.Size(128, 152);
+			this.grpPTTBitBang.Size = new System.Drawing.Size(144, 152);
 			this.grpPTTBitBang.TabIndex = 91;
 			this.grpPTTBitBang.TabStop = false;
 			this.grpPTTBitBang.Text = "PTT Control";
@@ -11117,7 +11117,7 @@ namespace PowerSDR
 			this.comboCATPTTPort.DropDownWidth = 56;
 			this.comboCATPTTPort.Location = new System.Drawing.Point(56, 56);
 			this.comboCATPTTPort.Name = "comboCATPTTPort";
-			this.comboCATPTTPort.Size = new System.Drawing.Size(56, 21);
+			this.comboCATPTTPort.Size = new System.Drawing.Size(80, 21);
 			this.comboCATPTTPort.TabIndex = 96;
 			this.toolTip1.SetToolTip(this.comboCATPTTPort, "Selects the COM port for use with PTT control");
 			this.comboCATPTTPort.SelectedIndexChanged += new System.EventHandler(this.comboCATPTTPort_SelectedIndexChanged);
@@ -11127,7 +11127,7 @@ namespace PowerSDR
 			this.lblCATPTTPort.Image = null;
 			this.lblCATPTTPort.Location = new System.Drawing.Point(16, 56);
 			this.lblCATPTTPort.Name = "lblCATPTTPort";
-			this.lblCATPTTPort.Size = new System.Drawing.Size(40, 23);
+			this.lblCATPTTPort.Size = new System.Drawing.Size(32, 23);
 			this.lblCATPTTPort.TabIndex = 6;
 			this.lblCATPTTPort.Text = "Port:";
 			// 
@@ -11186,7 +11186,7 @@ namespace PowerSDR
 			this.comboCATPort.DropDownWidth = 56;
 			this.comboCATPort.Location = new System.Drawing.Point(72, 48);
 			this.comboCATPort.Name = "comboCATPort";
-			this.comboCATPort.Size = new System.Drawing.Size(56, 21);
+			this.comboCATPort.Size = new System.Drawing.Size(80, 21);
 			this.comboCATPort.TabIndex = 95;
 			this.toolTip1.SetToolTip(this.comboCATPort, "Sets the COM port to be used for the CAT interface.");
 			this.comboCATPort.SelectedIndexChanged += new System.EventHandler(this.comboCATPort_SelectedIndexChanged);
@@ -11206,7 +11206,7 @@ namespace PowerSDR
 															  "57600"});
 			this.comboCATbaud.Location = new System.Drawing.Point(72, 88);
 			this.comboCATbaud.Name = "comboCATbaud";
-			this.comboCATbaud.Size = new System.Drawing.Size(56, 21);
+			this.comboCATbaud.Size = new System.Drawing.Size(80, 21);
 			this.comboCATbaud.TabIndex = 93;
 			this.comboCATbaud.SelectedIndexChanged += new System.EventHandler(this.comboCATbaud_SelectedIndexChanged);
 			// 
@@ -11276,7 +11276,7 @@ namespace PowerSDR
 																"space"});
 			this.comboCATparity.Location = new System.Drawing.Point(72, 120);
 			this.comboCATparity.Name = "comboCATparity";
-			this.comboCATparity.Size = new System.Drawing.Size(56, 21);
+			this.comboCATparity.Size = new System.Drawing.Size(80, 21);
 			this.comboCATparity.TabIndex = 92;
 			this.comboCATparity.SelectedIndexChanged += new System.EventHandler(this.comboCATparity_SelectedIndexChanged);
 			// 
@@ -11290,7 +11290,7 @@ namespace PowerSDR
 																  "6"});
 			this.comboCATdatabits.Location = new System.Drawing.Point(72, 152);
 			this.comboCATdatabits.Name = "comboCATdatabits";
-			this.comboCATdatabits.Size = new System.Drawing.Size(56, 21);
+			this.comboCATdatabits.Size = new System.Drawing.Size(80, 21);
 			this.comboCATdatabits.TabIndex = 93;
 			this.comboCATdatabits.SelectedIndexChanged += new System.EventHandler(this.comboCATdatabits_SelectedIndexChanged);
 			// 
@@ -11304,7 +11304,7 @@ namespace PowerSDR
 																  "2"});
 			this.comboCATstopbits.Location = new System.Drawing.Point(72, 184);
 			this.comboCATstopbits.Name = "comboCATstopbits";
-			this.comboCATstopbits.Size = new System.Drawing.Size(56, 21);
+			this.comboCATstopbits.Size = new System.Drawing.Size(80, 21);
 			this.comboCATstopbits.TabIndex = 94;
 			this.comboCATstopbits.SelectedIndexChanged += new System.EventHandler(this.comboCATstopbits_SelectedIndexChanged);
 			// 
@@ -11441,7 +11441,7 @@ namespace PowerSDR
 			this.tkbarTestGenFreq.Location = new System.Drawing.Point(16, 56);
 			this.tkbarTestGenFreq.Maximum = 20000;
 			this.tkbarTestGenFreq.Name = "tkbarTestGenFreq";
-			this.tkbarTestGenFreq.Size = new System.Drawing.Size(344, 45);
+			this.tkbarTestGenFreq.Size = new System.Drawing.Size(344, 50);
 			this.tkbarTestGenFreq.TabIndex = 1;
 			this.tkbarTestGenFreq.TickFrequency = 1000;
 			this.toolTip1.SetToolTip(this.tkbarTestGenFreq, "Sets the frequency of the signal.");
@@ -12357,11 +12357,12 @@ namespace PowerSDR
 
 			comboKeyerConnPrimary.Items.Clear();
 			comboKeyerConnPrimary.Items.Add("SDR");
-			comboKeyerConnPrimary.Items.Add("FPGA");
+			comboKeyerConnPrimary.Items.Add("Ozy");
 
 			comboKeyerConnSecondary.Items.Clear();
 			comboKeyerConnSecondary.Items.Add("None");
 			comboKeyerConnSecondary.Items.Add("CAT");
+			comboKeyerConnSecondary.Items.Add("BB-PTT");
 
 			comboCATPort.Items.Clear();
 			comboCATPTTPort.Items.Clear();
@@ -12388,10 +12389,14 @@ namespace PowerSDR
 					if(sp.IsOpen)
 					{
 						a.Add(sp.PortName);
+						// System.Console.WriteLine("gacp: closing: " + i); 
 						sp.Close();
 					}
 				}
-				catch(Exception) {};
+				catch(Exception ex) {
+					;
+					// System.Console.WriteLine("gacp i=" + i + " caught: " + ex); 
+				}
 			}
 			return a;
 		}
@@ -16506,7 +16511,7 @@ namespace PowerSDR
 			}
 			else 
 			{
-				chkCATPTTEnabled.Enabled = false; 
+				chkCATPTTEnabled.Enabled = true; 
 				chkCATPTTEnabled.Checked = false; // make sure it is not checked 
 			}				 				    
 		}

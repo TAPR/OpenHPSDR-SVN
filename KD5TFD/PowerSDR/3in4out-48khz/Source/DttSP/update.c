@@ -2400,8 +2400,8 @@ Calculate_Meters (METERTYPE mt)
                         returnval = -200;
                         break;
                 }
-				printf("i: %f r: %f\n", uni.meter.rx.val[RL][RX_ADC_IMAG], uni.meter.rx.val[RL][RX_ADC_REAL]); 
-				fflush(stdout); 
+                // printf("i: %f r: %f\n", uni.meter.rx.val[RL][RX_ADC_IMAG], uni.meter.rx.val[RL][RX_ADC_REAL]);
+                // fflush(stdout);
                 //fprintf(stderr,"type=%d val=%f\n",mt,returnval),fflush(stderr);
     }
   else
@@ -2502,3 +2502,4 @@ DelPolyPhaseFIRF (ResSt resst)
   extern void delPolyPhaseFIRF (ResSt resst);
   delPolyPhaseFIRF (resst);
 }
+

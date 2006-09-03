@@ -569,8 +569,15 @@ namespace SerialPorts
 				}
 			}
 			
-			if (Win32API_Serial.GetFileType(tempHandle) != Win32API_Serial.FILE_TYPE_CHAR) 
+
+
+			// kd5tfd -- fix Keyspan problem -- Keyspan USB serial adapters return FILE_TYPE_UNKNOWN here so we 
+			// allow that to accomodate the Keyspan adapater.  (Sept 2006) 
+			int ftype = Win32API_Serial.GetFileType(tempHandle);
+			if ( (ftype  != Win32API_Serial.FILE_TYPE_CHAR) && 
+				(ftype  != Win32API_Serial.FILE_TYPE_UNKNOWN) ) 
 				throw new ArgumentException("resource", Resources.GetResourceString("Arg_InvalidResourceFile"));
+
 			
 			_safeHandle = new __SafeHandle(tempHandle, true);
 			

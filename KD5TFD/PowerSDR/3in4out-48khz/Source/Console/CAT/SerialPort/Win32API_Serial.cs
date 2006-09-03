@@ -43,6 +43,7 @@ namespace SerialPorts
 		internal const int FILE_FLAG_OVERLAPPED   = 0x40000000;
 		internal const int FILE_ATTRIBUTE_NORMAL = 0x00000080;
 		
+		internal const int FILE_TYPE_UNKNOWN = 0;
 		internal const int FILE_TYPE_DISK = 1;
 		internal const int FILE_TYPE_CHAR = 2;
 		internal const int FILE_TYPE_PIPE = 3;
