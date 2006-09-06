@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Thu Aug 31 18:38:22 2006) contains limited information
+This XML file (created on Wed Sep 06 15:55:54 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus_fit</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Thu Aug 31 18:38:22 2006</compilation_end_time>
+	<compilation_end_time>Wed Sep 06 15:55:55 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_eval</project>
 <revision>ozy_eval</revision>
 <compilation_summary>
-	<flow_status>Successful - Thu Aug 31 18:38:22 2006</flow_status>
+	<flow_status>Successful - Wed Sep 06 15:55:53 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>ozy_eval</revision_name>
 	<top_level_entity_name>ozy_nco</top_level_entity_name>
@@ -45,59 +45,84 @@ to license.txt.
 	<device>EP2C5Q208C7</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>N/A</met_timing_requirements>
-	<total_logic_elements>1,424 / 4,608 ( 31 % )</total_logic_elements>
-	<total_registers>944</total_registers>
-	<total_pins>51 / 142 ( 36 % )</total_pins>
+	<total_logic_elements>1,271 / 4,608 ( 28 % )</total_logic_elements>
+	<total_registers>849</total_registers>
+	<total_pins>55 / 142 ( 39 % )</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
 	<total_memory_bits>16,384 / 119,808 ( 14 % )</total_memory_bits>
 	<embedded_multiplier_9_bit_elements>0 / 26 ( 0 % )</embedded_multiplier_9_bit_elements>
 	<total_plls>0 / 2 ( 0 % )</total_plls>
 </compilation_summary>
 <resource_usage_summary>
-	<rsc name="Total logic elements" util="31" max=" 4608 " type="int">1424 </rsc>
-	<rsc name="-- Combinational with no register" type="int">480</rsc>
-	<rsc name="-- Register only" type="int">73</rsc>
-	<rsc name="-- Combinational with a register" type="int">871</rsc>
+	<rsc name="Total logic elements" util="28" max=" 4608 " type="int">1271 </rsc>
+	<rsc name="-- Combinational with no register" type="int">422</rsc>
+	<rsc name="-- Register only" type="int">125</rsc>
+	<rsc name="-- Combinational with a register" type="int">724</rsc>
 	<rsc name="Logic element usage by number of LUT inputs" type="text"></rsc>
-	<rsc name="-- 4 input functions" type="int">16</rsc>
-	<rsc name="-- 3 input functions" type="int">738</rsc>
-	<rsc name="-- &lt;=2 input functions" type="int">597</rsc>
-	<rsc name="-- Register only" type="int">73</rsc>
+	<rsc name="-- 4 input functions" type="int">45</rsc>
+	<rsc name="-- 3 input functions" type="int">605</rsc>
+	<rsc name="-- &lt;=2 input functions" type="int">496</rsc>
+	<rsc name="-- Register only" type="int">125</rsc>
 	<rsc name="Logic elements by mode" type="text"></rsc>
-	<rsc name="-- normal mode" type="int">494</rsc>
-	<rsc name="-- arithmetic mode" type="int">857</rsc>
-	<rsc name="Total registers" util="20" max=" 4608 " type="int">944 </rsc>
-	<rsc name="Total LABs" util="34" max=" 288 " type="int">98 </rsc>
+	<rsc name="-- normal mode" type="int">485</rsc>
+	<rsc name="-- arithmetic mode" type="int">661</rsc>
+	<rsc name="Total registers" util="18" max=" 4608 " type="int">849 </rsc>
+	<rsc name="Total LABs" util="32" max=" 288 " type="int">91 </rsc>
 	<rsc name="User inserted logic elements" type="int">0</rsc>
 	<rsc name="Virtual pins" type="int">0</rsc>
-	<rsc name="I/O pins" util="36" max=" 142 " type="int">51 </rsc>
+	<rsc name="I/O pins" util="39" max=" 142 " type="int">55 </rsc>
 	<rsc name="-- Clock pins" util="25" max=" 4 " type="int">1 </rsc>
-	<rsc name="Global signals" type="int">1</rsc>
+	<rsc name="Global signals" type="int">3</rsc>
 	<rsc name="M4Ks" util="15" max=" 26 " type="int">4 </rsc>
 	<rsc name="Total memory bits" util="14" max=" 119808 " type="int">16384 </rsc>
 	<rsc name="Total RAM block bits" util="15" max=" 119808 " type="int">18432 </rsc>
 	<rsc name="Embedded Multiplier 9-bit elements" util="0" max=" 26 " type="int">0 </rsc>
 	<rsc name="PLLs" util="0" max=" 2 " type="int">0 </rsc>
-	<rsc name="Global clocks" util="13" max=" 8 " type="int">1 </rsc>
+	<rsc name="Global clocks" util="38" max=" 8 " type="int">3 </rsc>
 	<rsc name="Maximum fan-out node" type="text">ENC_CLK</rsc>
-	<rsc name="Maximum fan-out" type="int">894</rsc>
+	<rsc name="Maximum fan-out" type="int">711</rsc>
 	<rsc name="Highest non-global fan-out signal" type="text">ENC_CLK</rsc>
-	<rsc name="Highest non-global fan-out" type="int">894</rsc>
-	<rsc name="Total fan-out" type="int">6397</rsc>
-	<rsc name="Average fan-out" type="float">2.66</rsc>
+	<rsc name="Highest non-global fan-out" type="int">711</rsc>
+	<rsc name="Total fan-out" type="int">5694</rsc>
+	<rsc name="Average fan-out" type="float">2.65</rsc>
 </resource_usage_summary>
 <control_signals>
 	<row>
 		<name>ENC_CLK</name>
 		<location>PIN_150</location>
-		<fan_out>894</fan_out>
+		<fan_out>711</fan_out>
 		<usage>Clock</usage>
 		<global>no</global>
 	</row>
 	<row>
+		<name>SCK</name>
+		<location>PIN_15</location>
+		<fan_out>24</fan_out>
+		<usage>Clock</usage>
+		<global>no</global>
+	</row>
+	<row>
+		<name>txfifoclr</name>
+		<location>LCFF_X8_Y6_N29</location>
+		<fan_out>148</fan_out>
+		<usage>Async. clear</usage>
+		<global>yes</global>
+		<global_resource_used>Global clock</global_resource_used>
+		<global_line_name>GCLK3</global_line_name>
+	</row>
+	<row>
+		<name>FX2_CLK</name>
+		<location>PIN_23</location>
+		<fan_out>10</fan_out>
+		<usage>Clock</usage>
+		<global>yes</global>
+		<global_resource_used>Global clock</global_resource_used>
+		<global_line_name>GCLK0</global_line_name>
+	</row>
+	<row>
 		<name>IFCLK</name>
 		<location>PIN_24</location>
-		<fan_out>58</fan_out>
+		<fan_out>112</fan_out>
 		<usage>Clock</usage>
 		<global>yes</global>
 		<global_resource_used>Global clock</global_resource_used>
@@ -106,74 +131,91 @@ to license.txt.
 </control_signals>
 <non_global_high_fan_out_signals>
 	<row>
-		<name>tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|q_a[0]</name>
+		<name>FD[0]~reg0</name>
 		<fan_out>1</fan_out>
 	</row>
 	<row>
-		<name>tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|q_a[13]</name>
+		<name>FD[1]~reg0</name>
 		<fan_out>1</fan_out>
 	</row>
 	<row>
-		<name>tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|q_a[6]</name>
+		<name>FD[2]~reg0</name>
 		<fan_out>1</fan_out>
 	</row>
 	<row>
-		<name>tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|q_a[5]</name>
+		<name>FD[3]~reg0</name>
 		<fan_out>1</fan_out>
 	</row>
 	<row>
-		<name>tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|q_a[1]</name>
+		<name>FD[4]~reg0</name>
 		<fan_out>1</fan_out>
 	</row>
 	<row>
-		<name>tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|q_a[4]</name>
+		<name>FD[5]~reg0</name>
 		<fan_out>1</fan_out>
 	</row>
 	<row>
-		<name>tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|q_a[3]</name>
+		<name>FD[6]~reg0</name>
 		<fan_out>1</fan_out>
 	</row>
 	<row>
-		<name>tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|q_a[2]</name>
+		<name>FD[7]~reg0</name>
 		<fan_out>1</fan_out>
 	</row>
 	<row>
-		<name>tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|q_a[7]</name>
+		<name>FD[8]~reg0</name>
 		<fan_out>1</fan_out>
 	</row>
 	<row>
-		<name>tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|q_a[15]</name>
+		<name>FD[9]~reg0</name>
 		<fan_out>1</fan_out>
 	</row>
 </non_global_high_fan_out_signals>
 <ram_summary>
 	<row>
-		<name>tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|ALTSYNCRAM</name>
+		<name>tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5|ALTSYNCRAM</name>
 		<type>AUTO</type>
 		<mode>True Dual Port</mode>
-		<port_a_depth>1024</port_a_depth>
+		<port_a_depth>512</port_a_depth>
 		<port_a_width>16</port_a_width>
-		<port_b_depth>1024</port_b_depth>
+		<port_b_depth>512</port_b_depth>
 		<port_b_width>16</port_b_width>
 		<port_a_input_registers>yes</port_a_input_registers>
 		<port_a_output_registers>yes</port_a_output_registers>
 		<port_b_input_registers>yes</port_b_input_registers>
 		<port_b_output_registers>no</port_b_output_registers>
-		<size>16384</size>
-		<m4ks>4</m4ks>
+		<size>8192</size>
+		<m4ks>2</m4ks>
 		<mif>None</mif>
-		<location>M4K_X11_Y5, M4K_X11_Y6, M4K_X11_Y7, M4K_X11_Y8</location>
+		<location>M4K_X23_Y8, M4K_X23_Y7</location>
+	</row>
+	<row>
+		<name>tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>True Dual Port</mode>
+		<port_a_depth>512</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>512</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>yes</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>8192</size>
+		<m4ks>2</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y6, M4K_X23_Y5</location>
 	</row>
 </ram_summary>
 <interconnect_usage_summary>
-	<rsc name="Local interconnects" util="7" max=" 4608 " type="int">334 </rsc>
-	<rsc name="Block interconnects" util="12" max=" 15666 " type="int">1853 </rsc>
-	<rsc name="R4 interconnects" util="9" max=" 13328 " type="int">1218 </rsc>
-	<rsc name="R24 interconnects" util="2" max=" 652 " type="int">10 </rsc>
-	<rsc name="C4 interconnects" util="10" max=" 11424 " type="int">1122 </rsc>
-	<rsc name="C16 interconnects" util="1" max=" 812 " type="int">5 </rsc>
-	<rsc name="Global clocks" util="13" max=" 8 " type="int">1 </rsc>
-	<rsc name="Direct links" util="1" max=" 15666 " type="int">170 </rsc>
+	<rsc name="Local interconnects" util="8" max=" 4608 " type="int">382 </rsc>
+	<rsc name="Block interconnects" util="11" max=" 15666 " type="int">1655 </rsc>
+	<rsc name="R4 interconnects" util="8" max=" 13328 " type="int">1078 </rsc>
+	<rsc name="R24 interconnects" util="4" max=" 652 " type="int">23 </rsc>
+	<rsc name="C4 interconnects" util="8" max=" 11424 " type="int">934 </rsc>
+	<rsc name="C16 interconnects" util="1" max=" 812 " type="int">11 </rsc>
+	<rsc name="Global clocks" util="38" max=" 8 " type="int">3 </rsc>
+	<rsc name="Direct links" util="1" max=" 15666 " type="int">192 </rsc>
 </interconnect_usage_summary>
 <mep_data>
 	<command_line>quartus_fit --read_settings_files=off --write_settings_files=off ozy_eval -c ozy_eval</command_line>
@@ -183,12 +225,12 @@ to license.txt.
 </software_data>
 <messages>
 	<warning>Warning: Following 5 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results</warning>
-	<warning>Warning: Found 29 output pins without output pin load capacitance assignment</warning>
+	<warning>Warning: Found 30 output pins without output pin load capacitance assignment</warning>
 	<info>Info: Generated suppressed messages file C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_eval.fit.smsg</info>
 	<info>Info: Quartus II Fitter was successful. 0 errors, 2 warnings</info>
-	<info>Info: Elapsed time: 00:00:17</info>
-	<info>Info: Processing ended: Thu Aug 31 18:38:22 2006</info>
-	<info>Info: Pin EVALPIN39 has VCC driving its datain port</info>
+	<info>Info: Elapsed time: 00:00:19</info>
+	<info>Info: Processing ended: Wed Sep 06 15:55:53 2006</info>
+	<info>Info: Following groups of pins have the same output enable</info>
 </messages>
 <fitter_settings>
 	<row>
@@ -369,6 +411,25 @@ to license.txt.
 	</row>
 </fitter_device_options>
 <input_pins>
+	<row>
+		<name>CS</name>
+		<pin__>45</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>2</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>10</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
 	<row>
 		<name>DA[0]</name>
 		<pin__>180</pin__>
@@ -680,7 +741,7 @@ to license.txt.
 		<x_coordinate>28</x_coordinate>
 		<y_coordinate>12</y_coordinate>
 		<cell_number>2</cell_number>
-		<combinational_fan_out>894</combinational_fan_out>
+		<combinational_fan_out>711</combinational_fan_out>
 		<registered_fan_out>0</registered_fan_out>
 		<global>no</global>
 		<input_register>no</input_register>
@@ -718,7 +779,7 @@ to license.txt.
 		<x_coordinate>5</x_coordinate>
 		<y_coordinate>14</y_coordinate>
 		<cell_number>0</cell_number>
-		<combinational_fan_out>2</combinational_fan_out>
+		<combinational_fan_out>3</combinational_fan_out>
 		<registered_fan_out>0</registered_fan_out>
 		<global>no</global>
 		<input_register>no</input_register>
@@ -756,7 +817,7 @@ to license.txt.
 		<x_coordinate>0</x_coordinate>
 		<y_coordinate>6</y_coordinate>
 		<cell_number>0</cell_number>
-		<combinational_fan_out>0</combinational_fan_out>
+		<combinational_fan_out>1</combinational_fan_out>
 		<registered_fan_out>0</registered_fan_out>
 		<global>no</global>
 		<input_register>no</input_register>
@@ -776,6 +837,44 @@ to license.txt.
 		<y_coordinate>6</y_coordinate>
 		<cell_number>1</cell_number>
 		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>SCK</name>
+		<pin__>15</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>3</cell_number>
+		<combinational_fan_out>24</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>SI</name>
+		<pin__>14</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>2</combinational_fan_out>
 		<registered_fan_out>0</registered_fan_out>
 		<global>no</global>
 		<input_register>no</input_register>
@@ -1399,10 +1498,36 @@ to license.txt.
 		<load units="pF">0</load>
 	</row>
 </output_pins>
+<bidir_pins>
+	<row>
+		<name>SO</name>
+		<pin__>12</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+</bidir_pins>
 <i_o_bank_usage>
 	<row>
 		<i_o_bank>1</i_o_bank>
-		<usage>10 / 34 ( 29 % )</usage>
+		<usage>14 / 34 ( 41 % )</usage>
 		<vccio_voltage>3.3V</vccio_voltage>
 	</row>
 	<row>
@@ -1446,107 +1571,103 @@ to license.txt.
 	</row>
 	<row>
 		<name>Mid Slack - Fit Attempt 1</name>
-		<value>-9338</value>
+		<value>-9228</value>
 	</row>
 	<row>
 		<name>Internal Atom Count - Fit Attempt 1</name>
-		<value>2293</value>
+		<value>1991</value>
 	</row>
 	<row>
 		<name>LE/ALM Count - Fit Attempt 1</name>
-		<value>1425</value>
+		<value>1272</value>
 	</row>
 	<row>
 		<name>LAB Count - Fit Attempt 1</name>
-		<value>99</value>
+		<value>92</value>
 	</row>
 	<row>
 		<name>Outputs per Lab - Fit Attempt 1</name>
-		<value>10.848</value>
+		<value>10.065</value>
 	</row>
 	<row>
 		<name>Inputs per LAB - Fit Attempt 1</name>
-		<value>16.182</value>
+		<value>15.207</value>
 	</row>
 	<row>
 		<name>Global Inputs per LAB - Fit Attempt 1</name>
-		<value>0.071</value>
+		<value>0.359</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;non-global clock + sync load&apos; - Fit Attempt 1</name>
-		<value>0:14;1:84;2:1</value>
+		<value>0:20;1:69;2:3</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;non-global controls&apos; - Fit Attempt 1</name>
-		<value>0:10;1:1;2:85;3:2;4:1</value>
+		<value>0:12;1:15;2:61;3:3;4:1</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;non-global + aclr&apos; - Fit Attempt 1</name>
-		<value>0:10;1:1;2:85;3:2;4:1</value>
+		<value>0:11;1:5;2:70;3:3;4:3</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;global non-clock non-aclr&apos; - Fit Attempt 1</name>
-		<value>0:99</value>
+		<value>0:92</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;global controls&apos; - Fit Attempt 1</name>
-		<value>0:92;1:6;2:1</value>
+		<value>0:72;1:7;2:11;3:2</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;deterministic LABSMUXA/LABXMUXB&apos; - Fit Attempt 1</name>
-		<value>0:10;1:80;2:8;3:1</value>
+		<value>0:12;1:76;2:4</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;deterministic LABSMUXC/LABXMUXD&apos; - Fit Attempt 1</name>
-		<value>0:12;1:6;2:81</value>
+		<value>0:16;1:13;2:62;3:1</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;clock / ce pair constraint&apos; - Fit Attempt 1</name>
-		<value>0:10;1:82;2:7</value>
+		<value>0:11;1:67;2:14</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;aclr constraint&apos; - Fit Attempt 1</name>
-		<value>0:10;1:84;2:5</value>
+		<value>0:11;1:73;2:8</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;true sload_sclear pair&apos; - Fit Attempt 1</name>
-		<value>0:12;1:87</value>
+		<value>0:17;1:75</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;constant sload_sclear pair&apos; - Fit Attempt 1</name>
-		<value>0:19;1:80</value>
+		<value>0:32;1:60</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;has placement constraint&apos; - Fit Attempt 1</name>
-		<value>0:35;1:64</value>
+		<value>0:44;1:48</value>
 	</row>
 	<row>
 		<name>LEs in Chains - Fit Attempt 1</name>
-		<value>912</value>
+		<value>708</value>
 	</row>
 	<row>
 		<name>LEs in Long Chains - Fit Attempt 1</name>
-		<value>616</value>
+		<value>451</value>
 	</row>
 	<row>
 		<name>LABs with Chains - Fit Attempt 1</name>
-		<value>85</value>
+		<value>68</value>
 	</row>
 	<row>
 		<name>LABs with Multiple Chains - Fit Attempt 1</name>
-		<value>2</value>
+		<value>3</value>
 	</row>
 	<row>
 		<name>Time - Fit Attempt 1</name>
 		<value>1</value>
 	</row>
 	<row>
-		<name>Time in tsm_dat.dll - Fit Attempt 1</name>
-		<value>0.016</value>
-	</row>
-	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>0.204</value>
+		<value>0.235</value>
 	</row>
 </advanced_data___placement_preparation>
 <advanced_data___placement>
@@ -1560,7 +1681,7 @@ to license.txt.
 	</row>
 	<row>
 		<name>Early Slack - Fit Attempt 1</name>
-		<value>-7850</value>
+		<value>-9456</value>
 	</row>
 	<row>
 		<name>Auto Fit Point 3 - Fit Attempt 1</name>
@@ -1572,19 +1693,19 @@ to license.txt.
 	</row>
 	<row>
 		<name>Mid Wire Use - Fit Attempt 1</name>
-		<value>8</value>
+		<value>7</value>
 	</row>
 	<row>
 		<name>Mid Slack - Fit Attempt 1</name>
-		<value>-6616</value>
+		<value>-7737</value>
 	</row>
 	<row>
 		<name>Late Wire Use - Fit Attempt 1</name>
-		<value>9</value>
+		<value>8</value>
 	</row>
 	<row>
 		<name>Late Slack - Fit Attempt 1</name>
-		<value>-6616</value>
+		<value>-7737</value>
 	</row>
 	<row>
 		<name>Auto Fit Point 5 - Fit Attempt 1</name>
@@ -1596,33 +1717,33 @@ to license.txt.
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>0.405</value>
+		<value>0.359</value>
 	</row>
 </advanced_data___placement>
 <advanced_data___routing>
 	<row>
 		<name>Early Slack - Fit Attempt 1</name>
-		<value>-4916</value>
+		<value>-5637</value>
 	</row>
 	<row>
 		<name>Early Wire Use - Fit Attempt 1</name>
-		<value>10</value>
+		<value>8</value>
 	</row>
 	<row>
 		<name>Peak Regional Wire - Fit Attempt 1</name>
-		<value>14</value>
+		<value>13</value>
 	</row>
 	<row>
 		<name>Mid Slack - Fit Attempt 1</name>
-		<value>-5043</value>
+		<value>-6870</value>
 	</row>
 	<row>
 		<name>Late Slack - Fit Attempt 1</name>
-		<value>-5043</value>
+		<value>-6064</value>
 	</row>
 	<row>
 		<name>Late Slack - Fit Attempt 1</name>
-		<value>-5043</value>
+		<value>-6064</value>
 	</row>
 	<row>
 		<name>Late Wire Use - Fit Attempt 1</name>
@@ -1634,19 +1755,21 @@ to license.txt.
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>1.390</value>
+		<value>1.531</value>
 	</row>
 </advanced_data___routing>
 <files>
 	<top>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_nco.v</top>
 	<extensions>
 		<ext filename="none">1</ext>
-		<ext ext_name="v">5</ext>
+		<ext ext_name="v">7</ext>
 		<ext ext_name="tdf">17</ext>
 		<ext ext_name="inc">11</ext>
 		<ext ext_name="lst">1</ext>
 	</extensions>
 	<sub_files>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/SPI_REGS.v</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/RegisterX.v</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/phase_accumulator.v</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/cordic.v</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/cordic_stage.v</sub_file>
@@ -1665,23 +1788,23 @@ to license.txt.
 		<sub_file>c:/altera/quartus60/libraries/megafunctions/altsyncram_fifo.inc</sub_file>
 		<sub_file>c:/altera/quartus60/libraries/megafunctions/aglobal60.inc</sub_file>
 		<sub_file>c:/altera/quartus60/libraries/megafunctions/cbx.lst</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dcfifo_efb1.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_gray2bin_ldb.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_p96.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_k27.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_j27.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_rd11.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_52f1.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dcfifo_ncb1.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_gray2bin_kdb.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_o96.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_l27.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_i27.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_bb11.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_lve1.tdf</sub_file>
 		<sub_file>none</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_hn7.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_bo8.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_pe9.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_0e8.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_qe9.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_in7.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_co8.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_1e8.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_re9.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_ln7.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_fo8.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_oe9.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_vd8.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_ue9.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_mn7.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_go8.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_4e8.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_ve9.tdf</sub_file>
 	</sub_files>
 </files>
 <architecture>
@@ -1690,6 +1813,6 @@ to license.txt.
 	<device>EP2C5Q208C7</device>
 </architecture>
 <pkg_io>
-	<pin_std count="55">LVTTL</pin_std>
+	<pin_std count="59">LVTTL</pin_std>
 </pkg_io>
 </talkback>

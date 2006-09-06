@@ -127,7 +127,7 @@ module cordic(clk,reset,Iin,Qin,PHin,Iout,Qout,PHout);
 		cordic_stage #(CORDIC_WIDTH+2,PHASE_WIDTH-1,15) 
 			cordic_stage15(clk,reset,Istage15,Qstage15,PHstage15,16'd0,Istage16,Qstage16,PHstage16);
 			
-		assign Iout = Istage16[CORDIC_WIDTH:1];
-		assign Qout = Qstage16[CORDIC_WIDTH:1];
-		assign PHout = PHstage16;				
+		assign Iout = Istage12[CORDIC_WIDTH:1];
+		assign Qout = Qstage12[CORDIC_WIDTH:1];
+		assign PHout = PHstage12;				
 endmodule

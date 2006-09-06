@@ -48,7 +48,7 @@ module cordic_stage(clk,reset,Iin,Qin,PHin,coeff,Iout,Qout,PHout);
 	output	[CORDIC_WIDTH-1:0] Qout;
 	output	[PHASE_WIDTH-1:0] PHout;
 	
-	wire	phase_positive = -PHin[PHASE_WIDTH-1]; // test for positive phase, flag
+	wire	phase_positive = ~PHin[PHASE_WIDTH-1]; // test for positive phase, flag
 	
 	reg		[CORDIC_WIDTH-1:0] Iout;
 	reg		[CORDIC_WIDTH-1:0] Qout;
