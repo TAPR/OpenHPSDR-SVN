@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Mon Aug 21 17:18:21 2006) contains limited information
+This XML file (created on Wed Sep 06 14:09:27 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Mon Aug 21 17:18:21 2006</compilation_end_time>
+	<compilation_end_time>Wed Sep 06 14:09:29 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,19 +37,14 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/gpio_control</project>
 <revision>gpio_control</revision>
 <gui_actions>
-	<action time="Mon Aug 21 12:18:12 2006" type="project_open">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/gpio_control</action>
-	<action time="Mon Aug 21 12:18:13 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/SPI_REGS.v</action>
-	<action time="Mon Aug 21 12:18:13 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/RegisterX.v</action>
-	<action time="Mon Aug 21 12:18:13 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/gpio_control.v</action>
-	<action time="Mon Aug 21 12:18:23 2006" type="editor_open" clsid="AFC_CLSID_RUI_DEFAULT_DOC">c:/altera/quartus60/win/RTL_Viewer.qrui</action>
-	<action time="Mon Aug 21 12:20:49 2006" type="editor_close" clsid="AFC_CLSID_RUI_DEFAULT_DOC">c:/altera/quartus60/win/RTL_Viewer.qrui</action>
-	<action time="Mon Aug 21 12:20:54 2006" type="editor_open" clsid="AFC_CLSID_RUI_DEFAULT_DOC">c:/altera/quartus60/win/RTL_Viewer.qrui</action>
-	<action time="Mon Aug 21 12:24:02 2006" type="editor_close" clsid="AFC_CLSID_RUI_DEFAULT_DOC">c:/altera/quartus60/win/RTL_Viewer.qrui</action>
-	<action time="Mon Aug 21 12:55:22 2006" type="help">quartus.chm::device.chm::/dev/dev_list_dev_adapt.htm</action>
-	<action time="Mon Aug 21 17:18:21 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/SPI_REGS.v</action>
-	<action time="Mon Aug 21 17:18:21 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/RegisterX.v</action>
-	<action time="Mon Aug 21 17:18:21 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/gpio_control.v</action>
-	<action time="Mon Aug 21 17:18:21 2006" type="project_close">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/gpio_control</action>
+	<action time="Wed Sep 06 13:55:30 2006" type="project_open">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/gpio_control</action>
+	<action time="Wed Sep 06 13:55:31 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/SPI_REGS.v</action>
+	<action time="Wed Sep 06 13:55:31 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/RegisterX.v</action>
+	<action time="Wed Sep 06 13:55:31 2006" type="editor_open" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/gpio_control.v</action>
+	<action time="Wed Sep 06 14:09:27 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/SPI_REGS.v</action>
+	<action time="Wed Sep 06 14:09:27 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/RegisterX.v</action>
+	<action time="Wed Sep 06 14:09:27 2006" type="editor_close" clsid="AFC_CLSID_TED_VERILOG_DOC">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/gpio_control.v</action>
+	<action time="Wed Sep 06 14:09:27 2006" type="project_close">C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/GPIO_CONTROL/gpio_control</action>
 </gui_actions>
 <gui_summary>
 	<editor_count clsid="AFC_CLSID_ACV_DEFAULT_DOC">0</editor_count>
@@ -98,7 +93,7 @@ to license.txt.
 	<editor_count clsid="AFC_CLSID_RPW_TEXT_TYPE">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RPW_TXT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RSM_DEFAULT_DOC">0</editor_count>
-	<editor_count clsid="AFC_CLSID_RUI_DEFAULT_DOC">2</editor_count>
+	<editor_count clsid="AFC_CLSID_RUI_DEFAULT_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RUI_SIM_VIEWER_FAST_TIMING_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RUI_SIM_VIEWER_FUNCTIONAL_DOC">0</editor_count>
 	<editor_count clsid="AFC_CLSID_RUI_SIM_VIEWER_TIMING_DOC">0</editor_count>

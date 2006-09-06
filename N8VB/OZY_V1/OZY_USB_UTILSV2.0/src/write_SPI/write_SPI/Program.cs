@@ -165,7 +165,7 @@ namespace write_SPI
 
             if ((OZY.Write_SPI(usb_dev_handle, 0, (byte)addr, OZY.SPI_EN_FPGA, (OZY.SPI_FMT_MSB | OZY.SPI_FMT_HDR_1), buf)))
             {
-                Console.WriteLine("Wrote to address: " + addr);
+                Console.WriteLine("Wrote to address: " + addr + " : " + value);
             }
             else
             {

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ozy_eval
-Thu Aug 31 18:38:04 2006
+Wed Sep 06 15:55:32 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -16,44 +16,62 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
   8. State Machine - |ozy_nco|fx2st
   9. General Register Statistics
  10. Multiplexer Restructuring Statistics (Restructuring Performed)
- 11. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component
- 12. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated
- 13. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram
- 14. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5
- 15. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg
- 16. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7
- 17. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:rs_brp
- 18. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:rs_bwp
- 19. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp
- 20. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp|dffpipe_qe9:dffpipe10
- 21. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg
- 22. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13
- 23. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:ws_brp
- 24. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:ws_bwp
- 25. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp
- 26. Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15
- 27. Parameter Settings for User Entity Instance: Top-level Entity: |ozy_nco
- 28. Parameter Settings for User Entity Instance: phase_accumulator:rx_phase_accumulator
- 29. Parameter Settings for User Entity Instance: cordic:rx_cordic
- 30. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0
- 31. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage1
- 32. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage2
- 33. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage3
- 34. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage4
- 35. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage5
- 36. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage6
- 37. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage7
- 38. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage8
- 39. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage9
- 40. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage10
- 41. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage11
- 42. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage12
- 43. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage13
- 44. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage14
- 45. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage15
- 46. Parameter Settings for User Entity Instance: tx_fifo:tx_fifo|dcfifo:dcfifo_component
- 47. dcfifo Parameter Settings by Entity Instance
- 48. Analysis & Synthesis Messages
+ 11. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component
+ 12. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated
+ 13. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram
+ 14. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5
+ 15. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg
+ 16. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7
+ 17. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp
+ 18. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_bwp
+ 19. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp
+ 20. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10
+ 21. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg
+ 22. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13
+ 23. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_brp
+ 24. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_bwp
+ 25. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp
+ 26. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15
+ 27. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component
+ 28. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated
+ 29. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram
+ 30. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5
+ 31. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg
+ 32. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7
+ 33. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp
+ 34. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_bwp
+ 35. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp
+ 36. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10
+ 37. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg
+ 38. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13
+ 39. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_brp
+ 40. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_bwp
+ 41. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp
+ 42. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15
+ 43. Parameter Settings for User Entity Instance: SPI_REGS:spi_regs
+ 44. Parameter Settings for User Entity Instance: RegisterX:freqsetreg
+ 45. Parameter Settings for User Entity Instance: phase_accumulator:rx_phase_accumulator
+ 46. Parameter Settings for User Entity Instance: cordic:rx_cordic
+ 47. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0
+ 48. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage1
+ 49. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage2
+ 50. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage3
+ 51. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage4
+ 52. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage5
+ 53. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage6
+ 54. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage7
+ 55. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage8
+ 56. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage9
+ 57. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage10
+ 58. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage11
+ 59. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage12
+ 60. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage13
+ 61. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage14
+ 62. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage15
+ 63. Parameter Settings for User Entity Instance: tx_fifo:tx_fifo_i|dcfifo:dcfifo_component
+ 64. Parameter Settings for User Entity Instance: tx_fifo:tx_fifo_q|dcfifo:dcfifo_component
+ 65. dcfifo Parameter Settings by Entity Instance
+ 66. Analysis & Synthesis Messages
 
 
 
@@ -79,14 +97,14 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Aug 31 18:38:04 2006        ;
+; Analysis & Synthesis Status        ; Successful - Wed Sep 06 15:55:31 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; ozy_eval                                     ;
 ; Top-level Entity Name              ; ozy_nco                                      ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 1348                                         ;
-; Total registers                    ; 944                                          ;
-; Total pins                         ; 51                                           ;
+; Total logic elements               ; 1141                                         ;
+; Total registers                    ; 849                                          ;
+; Total pins                         ; 55                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 16,384                                       ;
 ; Embedded Multiplier 9-bit elements ; 0                                            ;
@@ -159,6 +177,8 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                        ;
 +----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+
+; SPI_REGS.v                       ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/SPI_REGS.v                ;
+; RegisterX.v                      ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/RegisterX.v               ;
 ; phase_accumulator.v              ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/phase_accumulator.v       ;
 ; cordic.v                         ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/cordic.v                  ;
 ; cordic_stage.v                   ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/cordic_stage.v            ;
@@ -176,22 +196,22 @@ applicable agreement for further details.
 ; lpm_compare.inc                  ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/lpm_compare.inc                         ;
 ; altsyncram_fifo.inc              ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/altsyncram_fifo.inc                     ;
 ; aglobal60.inc                    ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/aglobal60.inc                           ;
-; db/dcfifo_efb1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dcfifo_efb1.tdf        ;
-; db/a_gray2bin_ldb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_gray2bin_ldb.tdf     ;
-; db/a_graycounter_p96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_p96.tdf  ;
-; db/a_graycounter_k27.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_k27.tdf  ;
-; db/a_graycounter_j27.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_j27.tdf  ;
-; db/altsyncram_rd11.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_rd11.tdf    ;
-; db/altsyncram_52f1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_52f1.tdf    ;
-; db/alt_synch_pipe_hn7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_hn7.tdf ;
-; db/dffpipe_bo8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_bo8.tdf        ;
-; db/dffpipe_pe9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_pe9.tdf        ;
-; db/alt_synch_pipe_0e8.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_0e8.tdf ;
-; db/dffpipe_qe9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_qe9.tdf        ;
-; db/alt_synch_pipe_in7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_in7.tdf ;
-; db/dffpipe_co8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_co8.tdf        ;
-; db/alt_synch_pipe_1e8.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_1e8.tdf ;
-; db/dffpipe_re9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_re9.tdf        ;
+; db/dcfifo_ncb1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dcfifo_ncb1.tdf        ;
+; db/a_gray2bin_kdb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_gray2bin_kdb.tdf     ;
+; db/a_graycounter_o96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_o96.tdf  ;
+; db/a_graycounter_l27.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_l27.tdf  ;
+; db/a_graycounter_i27.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_i27.tdf  ;
+; db/altsyncram_bb11.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_bb11.tdf    ;
+; db/altsyncram_lve1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_lve1.tdf    ;
+; db/alt_synch_pipe_ln7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_ln7.tdf ;
+; db/dffpipe_fo8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_fo8.tdf        ;
+; db/dffpipe_oe9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_oe9.tdf        ;
+; db/alt_synch_pipe_vd8.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_vd8.tdf ;
+; db/dffpipe_ue9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_ue9.tdf        ;
+; db/alt_synch_pipe_mn7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_mn7.tdf ;
+; db/dffpipe_go8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_go8.tdf        ;
+; db/alt_synch_pipe_4e8.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_4e8.tdf ;
+; db/dffpipe_ve9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_ve9.tdf        ;
 +----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+
 
 
@@ -200,87 +220,94 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 1,348   ;
-; Total combinational functions               ; 1348    ;
+; Estimated Total logic elements              ; 1,141   ;
+; Total combinational functions               ; 1141    ;
 ; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 16      ;
-;     -- 3 input functions                    ; 738     ;
-;     -- <=2 input functions                  ; 594     ;
+;     -- 4 input functions                    ; 45      ;
+;     -- 3 input functions                    ; 605     ;
+;     -- <=2 input functions                  ; 491     ;
 ;         -- Combinational cells for routing  ; 0       ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 491     ;
-;     -- arithmetic mode                      ; 857     ;
-; Total registers                             ; 944     ;
-; I/O pins                                    ; 51      ;
+;     -- normal mode                          ; 480     ;
+;     -- arithmetic mode                      ; 661     ;
+; Total registers                             ; 849     ;
+; I/O pins                                    ; 55      ;
 ; Total memory bits                           ; 16384   ;
 ; Maximum fan-out node                        ; ENC_CLK ;
-; Maximum fan-out                             ; 906     ;
-; Total fan-out                               ; 6651    ;
-; Average fan-out                             ; 2.82    ;
+; Maximum fan-out                             ; 739     ;
+; Total fan-out                               ; 6274    ;
+; Average fan-out                             ; 3.02    ;
 +---------------------------------------------+---------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                ;
-+----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
-; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                              ;
-+----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
-; |ozy_nco                                     ; 1348 (17)         ; 944 (34)     ; 16384       ; 0    ; 0            ; 0       ; 0         ; 51   ; 0            ; |ozy_nco                                                                                                                         ;
-;    |cordic:rx_cordic|                        ; 1255 (34)         ; 782 (32)     ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic                                                                                                        ;
-;       |cordic_stage:cordic_stage0|           ; 55 (55)           ; 50 (50)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0                                                                             ;
-;       |cordic_stage:cordic_stage10|          ; 97 (97)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage10                                                                            ;
-;       |cordic_stage:cordic_stage11|          ; 67 (67)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage11                                                                            ;
-;       |cordic_stage:cordic_stage12|          ; 65 (65)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage12                                                                            ;
-;       |cordic_stage:cordic_stage13|          ; 63 (63)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage13                                                                            ;
-;       |cordic_stage:cordic_stage14|          ; 63 (63)           ; 21 (21)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage14                                                                            ;
-;       |cordic_stage:cordic_stage15|          ; 21 (21)           ; 16 (16)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage15                                                                            ;
-;       |cordic_stage:cordic_stage1|           ; 112 (112)         ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1                                                                             ;
-;       |cordic_stage:cordic_stage2|           ; 85 (85)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage2                                                                             ;
-;       |cordic_stage:cordic_stage3|           ; 83 (83)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage3                                                                             ;
-;       |cordic_stage:cordic_stage4|           ; 81 (81)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage4                                                                             ;
-;       |cordic_stage:cordic_stage5|           ; 107 (107)         ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage5                                                                             ;
-;       |cordic_stage:cordic_stage6|           ; 77 (77)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage6                                                                             ;
-;       |cordic_stage:cordic_stage7|           ; 75 (75)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage7                                                                             ;
-;       |cordic_stage:cordic_stage8|           ; 73 (73)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage8                                                                             ;
-;       |cordic_stage:cordic_stage9|           ; 97 (97)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9                                                                             ;
-;    |phase_accumulator:rx_phase_accumulator|  ; 32 (32)           ; 32 (32)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|phase_accumulator:rx_phase_accumulator                                                                                  ;
-;    |tx_fifo:tx_fifo|                         ; 44 (0)            ; 96 (0)       ; 16384       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo                                                                                                         ;
-;       |dcfifo:dcfifo_component|              ; 44 (0)            ; 96 (0)       ; 16384       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component                                                                                 ;
-;          |dcfifo_efb1:auto_generated|        ; 44 (20)           ; 96 (26)      ; 16384       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated                                                      ;
-;             |a_graycounter_j27:wrptr_gp|     ; 12 (12)           ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp                           ;
-;             |a_graycounter_p96:rdptr_g1p|    ; 12 (12)           ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p                          ;
-;             |alt_synch_pipe_0e8:rs_dgwp|     ; 0 (0)             ; 22 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp                           ;
-;                |dffpipe_qe9:dffpipe10|       ; 0 (0)             ; 22 (22)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp|dffpipe_qe9:dffpipe10     ;
-;             |alt_synch_pipe_1e8:ws_dgrp|     ; 0 (0)             ; 22 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp                           ;
-;                |dffpipe_re9:dffpipe15|       ; 0 (0)             ; 22 (22)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15     ;
-;             |alt_synch_pipe_hn7:rdfull_reg|  ; 0 (0)             ; 1 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg                        ;
-;                |dffpipe_bo8:dffpipe7|        ; 0 (0)             ; 1 (1)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7   ;
-;             |alt_synch_pipe_in7:wrempty_reg| ; 0 (0)             ; 1 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg                       ;
-;                |dffpipe_co8:dffpipe13|       ; 0 (0)             ; 1 (1)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13 ;
-;             |altsyncram_rd11:fifo_ram|       ; 0 (0)             ; 0 (0)        ; 16384       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram                             ;
-;                |altsyncram_52f1:altsyncram5| ; 0 (0)             ; 0 (0)        ; 16384       ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5 ;
-+----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                  ;
++----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+
+; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                ;
++----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+
+; |ozy_nco                                     ; 1141 (35)         ; 849 (51)     ; 16384       ; 0    ; 0            ; 0       ; 0         ; 55   ; 0            ; |ozy_nco                                                                                                                           ;
+;    |RegisterX:freqsetreg|                    ; 1 (1)             ; 8 (8)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RegisterX:freqsetreg                                                                                                      ;
+;    |SPI_REGS:spi_regs|                       ; 27 (27)           ; 26 (26)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|SPI_REGS:spi_regs                                                                                                         ;
+;    |cordic:rx_cordic|                        ; 988 (26)          ; 588 (24)     ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic                                                                                                          ;
+;       |cordic_stage:cordic_stage0|           ; 47 (47)           ; 42 (42)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0                                                                               ;
+;       |cordic_stage:cordic_stage10|          ; 70 (70)           ; 37 (37)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage10                                                                              ;
+;       |cordic_stage:cordic_stage11|          ; 50 (50)           ; 32 (32)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage11                                                                              ;
+;       |cordic_stage:cordic_stage1|           ; 93 (93)           ; 45 (45)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1                                                                               ;
+;       |cordic_stage:cordic_stage2|           ; 109 (109)         ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage2                                                                               ;
+;       |cordic_stage:cordic_stage3|           ; 83 (83)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage3                                                                               ;
+;       |cordic_stage:cordic_stage4|           ; 81 (81)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage4                                                                               ;
+;       |cordic_stage:cordic_stage5|           ; 107 (107)         ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage5                                                                               ;
+;       |cordic_stage:cordic_stage6|           ; 77 (77)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage6                                                                               ;
+;       |cordic_stage:cordic_stage7|           ; 75 (75)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage7                                                                               ;
+;       |cordic_stage:cordic_stage8|           ; 73 (73)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage8                                                                               ;
+;       |cordic_stage:cordic_stage9|           ; 97 (97)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9                                                                               ;
+;    |phase_accumulator:rx_phase_accumulator|  ; 8 (8)             ; 8 (8)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|phase_accumulator:rx_phase_accumulator                                                                                    ;
+;    |tx_fifo:tx_fifo_i|                       ; 41 (0)            ; 84 (0)       ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i                                                                                                         ;
+;       |dcfifo:dcfifo_component|              ; 41 (0)            ; 84 (0)       ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component                                                                                 ;
+;          |dcfifo_ncb1:auto_generated|        ; 41 (19)           ; 84 (22)      ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated                                                      ;
+;             |a_graycounter_i27:wrptr_gp|     ; 11 (11)           ; 11 (11)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_i27:wrptr_gp                           ;
+;             |a_graycounter_o96:rdptr_g1p|    ; 11 (11)           ; 11 (11)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_o96:rdptr_g1p                          ;
+;             |alt_synch_pipe_4e8:ws_dgrp|     ; 0 (0)             ; 20 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp                           ;
+;                |dffpipe_ve9:dffpipe15|       ; 0 (0)             ; 20 (20)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15     ;
+;             |alt_synch_pipe_vd8:rs_dgwp|     ; 0 (0)             ; 20 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp                           ;
+;                |dffpipe_ue9:dffpipe10|       ; 0 (0)             ; 20 (20)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10     ;
+;             |altsyncram_bb11:fifo_ram|       ; 0 (0)             ; 0 (0)        ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram                             ;
+;                |altsyncram_lve1:altsyncram5| ; 0 (0)             ; 0 (0)        ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5 ;
+;    |tx_fifo:tx_fifo_q|                       ; 41 (0)            ; 84 (0)       ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_q                                                                                                         ;
+;       |dcfifo:dcfifo_component|              ; 41 (0)            ; 84 (0)       ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component                                                                                 ;
+;          |dcfifo_ncb1:auto_generated|        ; 41 (19)           ; 84 (22)      ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated                                                      ;
+;             |a_graycounter_i27:wrptr_gp|     ; 11 (11)           ; 11 (11)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_i27:wrptr_gp                           ;
+;             |a_graycounter_o96:rdptr_g1p|    ; 11 (11)           ; 11 (11)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_o96:rdptr_g1p                          ;
+;             |alt_synch_pipe_4e8:ws_dgrp|     ; 0 (0)             ; 20 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp                           ;
+;                |dffpipe_ve9:dffpipe15|       ; 0 (0)             ; 20 (20)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15     ;
+;             |alt_synch_pipe_vd8:rs_dgwp|     ; 0 (0)             ; 20 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp                           ;
+;                |dffpipe_ue9:dffpipe10|       ; 0 (0)             ; 20 (20)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10     ;
+;             |altsyncram_bb11:fifo_ram|       ; 0 (0)             ; 0 (0)        ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram                             ;
+;                |altsyncram_lve1:altsyncram5| ; 0 (0)             ; 0 (0)        ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5 ;
++----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis RAM Summary                                                                                                                                                                                                      ;
-+------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
-; Name                                                                                                                               ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF  ;
-+------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
-; tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5|ALTSYNCRAM ; AUTO ; True Dual Port ; 1024         ; 16           ; 1024         ; 16           ; 16384 ; None ;
-+------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                       ;
++--------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------+------+
+; Name                                                                                                                                 ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF  ;
++--------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------+------+
+; tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5|ALTSYNCRAM ; AUTO ; True Dual Port ; 512          ; 16           ; 512          ; 16           ; 8192 ; None ;
+; tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5|ALTSYNCRAM ; AUTO ; True Dual Port ; 512          ; 16           ; 512          ; 16           ; 8192 ; None ;
++--------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------+------+
 
 
-+---------------------------------------------------+
-; State Machine - |ozy_nco|fx2st                    ;
-+------------+------------+------------+------------+
-; Name       ; fx2st.0000 ; fx2st.0010 ; fx2st.0001 ;
-+------------+------------+------------+------------+
-; fx2st.0000 ; 0          ; 0          ; 0          ;
-; fx2st.0010 ; 1          ; 1          ; 0          ;
-; fx2st.0001 ; 1          ; 0          ; 1          ;
-+------------+------------+------------+------------+
++----------------------------------------------------------------+
+; State Machine - |ozy_nco|fx2st                                 ;
++------------+------------+------------+------------+------------+
+; Name       ; fx2st.0010 ; fx2st.0011 ; fx2st.0001 ; fx2st.0000 ;
++------------+------------+------------+------------+------------+
+; fx2st.0000 ; 0          ; 0          ; 0          ; 0          ;
+; fx2st.0001 ; 0          ; 0          ; 1          ; 1          ;
+; fx2st.0011 ; 0          ; 1          ; 0          ; 1          ;
+; fx2st.0010 ; 1          ; 0          ; 0          ; 1          ;
++------------+------------+------------+------------+------------+
 
 
 +------------------------------------------------------+
@@ -288,12 +315,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 944   ;
-; Number of registers using Synchronous Clear  ; 763   ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 96    ;
+; Total registers                              ; 849   ;
+; Number of registers using Synchronous Clear  ; 560   ;
+; Number of registers using Synchronous Load   ; 1     ;
+; Number of registers using Asynchronous Clear ; 177   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 21    ;
+; Number of registers using Clock Enable       ; 68    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -303,125 +330,74 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
-; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage10|PHout[5] ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9|PHout[4]  ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |ozy_nco|SPI_REGS:spi_regs|sdata[5]                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|Istage0[12]                          ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9|PHout[2]  ;
 ; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage5|PHout[9]  ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[13] ;
-; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[10]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|Istage0[0]                           ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage2|PHout[12] ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[14] ;
+; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[17]  ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |ozy_nco|FD[0]~reg0                                            ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |ozy_nco|fx2st~6                                               ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 
 
-+----------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component ;
-+---------------------------------+-------+------+---------------+
-; Assignment                      ; Value ; From ; To            ;
-+---------------------------------+-------+------+---------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -             ;
-+---------------------------------+-------+------+---------------+
++------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component ;
++---------------------------------+-------+------+-----------------+
+; Assignment                      ; Value ; From ; To              ;
++---------------------------------+-------+------+-----------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -               ;
++---------------------------------+-------+------+-----------------+
 
 
-+--------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated  ;
-+---------------------------------+-------+------------------+-------------------------------+
-; Assignment                      ; Value ; From             ; To                            ;
-+---------------------------------+-------+------------------+-------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -                ; -                             ;
-; REMOVE_DUPLICATE_REGISTERS      ; OFF   ; -                ; -                             ;
-; SUPPRESS_DA_RULE_INTERNAL       ; d101  ; -                ; -                             ;
-; POWER_UP_LEVEL                  ; LOW   ; -                ; p0addr                        ;
-; SUPPRESS_DA_RULE_INTERNAL       ; c106  ; -                ; rdaclr                        ;
-; POWER_UP_LEVEL                  ; LOW   ; -                ; rdaclr                        ;
-; CUT                             ; ON    ; rdptr_g          ; ws_dgrp|dffpipe15|dffe16a     ;
-; CUT                             ; ON    ; delayed_wrptr_g  ; rs_dgwp|dffpipe10|dffe11a     ;
-; CUT                             ; ON    ; previous_wrfull  ; rdfull_reg|dffpipe7|dffe8a    ;
-; CUT                             ; ON    ; previous_rdempty ; wrempty_reg|dffpipe13|dffe14a ;
-+---------------------------------+-------+------------------+-------------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram ;
-+---------------------------------+--------------------+------+------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                   ;
-+---------------------------------+--------------------+------+------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                    ;
-+---------------------------------+--------------------+------+------------------------------------------------------+
-
-
-+------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5 ;
-+---------------------------------+--------------------+------+----------------------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                               ;
-+---------------------------------+--------------------+------+----------------------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                                ;
-+---------------------------------+--------------------+------+----------------------------------------------------------------------------------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg ;
-+-----------------------+-------+------+----------------------------------------------------------------------------------+
-; Assignment            ; Value ; From ; To                                                                               ;
-+-----------------------+-------+------+----------------------------------------------------------------------------------+
-; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                ;
-+-----------------------+-------+------+----------------------------------------------------------------------------------+
-
-
-+----------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7 ;
-+---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                                                          ;
-+---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                           ;
-+---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:rs_brp ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                          ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                           ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:rs_bwp ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                          ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                           ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
++---------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated ;
++---------------------------------+-------+------------------+--------------------------------+
+; Assignment                      ; Value ; From             ; To                             ;
++---------------------------------+-------+------------------+--------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -                ; -                              ;
+; REMOVE_DUPLICATE_REGISTERS      ; OFF   ; -                ; -                              ;
+; SUPPRESS_DA_RULE_INTERNAL       ; d101  ; -                ; -                              ;
+; POWER_UP_LEVEL                  ; LOW   ; -                ; p0addr                         ;
+; SUPPRESS_DA_RULE_INTERNAL       ; c106  ; -                ; rdaclr                         ;
+; POWER_UP_LEVEL                  ; LOW   ; -                ; rdaclr                         ;
+; CUT                             ; ON    ; rdptr_g          ; ws_dgrp|dffpipe15|dffe16a      ;
+; CUT                             ; ON    ; delayed_wrptr_g  ; rs_dgwp|dffpipe10|dffe11a      ;
+; CUT                             ; ON    ; previous_wrfull  ; rdfull_reg|dffpipe7|dffe8a     ;
+; CUT                             ; ON    ; previous_rdempty ; wrempty_reg|dffpipe13|dffe14a  ;
++---------------------------------+-------+------------------+--------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp ;
-+-----------------------+-------+------+-------------------------------------------------------------------------------+
-; Assignment            ; Value ; From ; To                                                                            ;
-+-----------------------+-------+------+-------------------------------------------------------------------------------+
-; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                             ;
-+-----------------------+-------+------+-------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                     ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                      ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp|dffpipe_qe9:dffpipe10 ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                                                        ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                         ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5 ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                                 ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                                  ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg ;
-+-----------------------+-------+------+-----------------------------------------------------------------------------------+
-; Assignment            ; Value ; From ; To                                                                                ;
-+-----------------------+-------+------+-----------------------------------------------------------------------------------+
-; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                 ;
-+-----------------------+-------+------+-----------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg ;
++-----------------------+-------+------+------------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                                 ;
++-----------------------+-------+------+------------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                  ;
++-----------------------+-------+------+------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13 ;
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7 ;
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                            ;
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
@@ -429,49 +405,267 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:ws_brp ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                          ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                           ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                            ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                             ;
++---------------------------------+-------+------+---------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:ws_bwp ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                          ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                           ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_bwp ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                            ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                             ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                              ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                               ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10 ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                          ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                           ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg ;
++-----------------------+-------+------+-------------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                                  ;
++-----------------------+-------+------+-------------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                   ;
++-----------------------+-------+------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13 ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                              ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                               ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_brp ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                            ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                             ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_bwp ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                            ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                             ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                              ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                               ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15 ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                          ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                           ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component ;
++---------------------------------+-------+------+-----------------+
+; Assignment                      ; Value ; From ; To              ;
++---------------------------------+-------+------+-----------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -               ;
++---------------------------------+-------+------+-----------------+
+
+
++---------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated ;
++---------------------------------+-------+------------------+--------------------------------+
+; Assignment                      ; Value ; From             ; To                             ;
++---------------------------------+-------+------------------+--------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -                ; -                              ;
+; REMOVE_DUPLICATE_REGISTERS      ; OFF   ; -                ; -                              ;
+; SUPPRESS_DA_RULE_INTERNAL       ; d101  ; -                ; -                              ;
+; POWER_UP_LEVEL                  ; LOW   ; -                ; p0addr                         ;
+; SUPPRESS_DA_RULE_INTERNAL       ; c106  ; -                ; rdaclr                         ;
+; POWER_UP_LEVEL                  ; LOW   ; -                ; rdaclr                         ;
+; CUT                             ; ON    ; rdptr_g          ; ws_dgrp|dffpipe15|dffe16a      ;
+; CUT                             ; ON    ; delayed_wrptr_g  ; rs_dgwp|dffpipe10|dffe11a      ;
+; CUT                             ; ON    ; previous_wrfull  ; rdfull_reg|dffpipe7|dffe8a     ;
+; CUT                             ; ON    ; previous_rdempty ; wrempty_reg|dffpipe13|dffe14a  ;
++---------------------------------+-------+------------------+--------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp ;
-+-----------------------+-------+------+-------------------------------------------------------------------------------+
-; Assignment            ; Value ; From ; To                                                                            ;
-+-----------------------+-------+------+-------------------------------------------------------------------------------+
-; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                             ;
-+-----------------------+-------+------+-------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                     ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                      ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15 ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                                                        ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                         ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5 ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                                 ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                                  ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------+
 
 
-+-------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: Top-level Entity: |ozy_nco ;
-+----------------+----------------------------------+---------------------+
-; Parameter Name ; Value                            ; Type                ;
-+----------------+----------------------------------+---------------------+
-; FREQ           ; 00000000000000000000000000010101 ; Binary              ;
-+----------------+----------------------------------+---------------------+
++---------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg ;
++-----------------------+-------+------+------------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                                 ;
++-----------------------+-------+------+------------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                  ;
++-----------------------+-------+------+------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7 ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                            ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                             ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                            ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                             ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_bwp ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                            ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                             ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                              ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                               ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10 ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                          ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                           ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg ;
++-----------------------+-------+------+-------------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                                  ;
++-----------------------+-------+------+-------------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                   ;
++-----------------------+-------+------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13 ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                              ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                               ;
++---------------------------------+-------+------+-------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_brp ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                            ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                             ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_bwp ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                            ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                             ;
++---------------------------------+-------+------+---------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                              ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                               ;
++-----------------------+-------+------+---------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15 ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                          ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                           ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SPI_REGS:spi_regs ;
++----------------+-------+---------------------------------------+
+; Parameter Name ; Value ; Type                                  ;
++----------------+-------+---------------------------------------+
+; WIDTH          ; 8     ; Integer                               ;
++----------------+-------+---------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: RegisterX:freqsetreg ;
++----------------+---------+----------------------------------------+
+; Parameter Name ; Value   ; Type                                   ;
++----------------+---------+----------------------------------------+
+; my_address     ; 0000001 ; Binary                                 ;
+; WIDTH          ; 8       ; Integer                                ;
++----------------+---------+----------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -688,47 +882,81 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: tx_fifo:tx_fifo|dcfifo:dcfifo_component ;
-+-------------------------+-------------+----------------------------------------------+
-; Parameter Name          ; Value       ; Type                                         ;
-+-------------------------+-------------+----------------------------------------------+
-; AUTO_CARRY_CHAINS       ; ON          ; AUTO_CARRY                                   ;
-; IGNORE_CARRY_BUFFERS    ; OFF         ; IGNORE_CARRY                                 ;
-; AUTO_CASCADE_CHAINS     ; ON          ; AUTO_CASCADE                                 ;
-; IGNORE_CASCADE_BUFFERS  ; OFF         ; IGNORE_CASCADE                               ;
-; LPM_WIDTH               ; 16          ; Integer                                      ;
-; LPM_NUMWORDS            ; 1024        ; Integer                                      ;
-; LPM_WIDTHU              ; 10          ; Integer                                      ;
-; LPM_SHOWAHEAD           ; OFF         ; Untyped                                      ;
-; UNDERFLOW_CHECKING      ; ON          ; Untyped                                      ;
-; OVERFLOW_CHECKING       ; ON          ; Untyped                                      ;
-; USE_EAB                 ; ON          ; Untyped                                      ;
-; ADD_RAM_OUTPUT_REGISTER ; OFF         ; Untyped                                      ;
-; DELAY_RDUSEDW           ; 1           ; Untyped                                      ;
-; DELAY_WRUSEDW           ; 1           ; Untyped                                      ;
-; RDSYNC_DELAYPIPE        ; 4           ; Integer                                      ;
-; WRSYNC_DELAYPIPE        ; 4           ; Integer                                      ;
-; CLOCKS_ARE_SYNCHRONIZED ; FALSE       ; Untyped                                      ;
-; DEVICE_FAMILY           ; Cyclone II  ; Untyped                                      ;
-; CBXI_PARAMETER          ; dcfifo_efb1 ; Untyped                                      ;
-+-------------------------+-------------+----------------------------------------------+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: tx_fifo:tx_fifo_i|dcfifo:dcfifo_component ;
++-------------------------+-------------+------------------------------------------------+
+; Parameter Name          ; Value       ; Type                                           ;
++-------------------------+-------------+------------------------------------------------+
+; AUTO_CARRY_CHAINS       ; ON          ; AUTO_CARRY                                     ;
+; IGNORE_CARRY_BUFFERS    ; OFF         ; IGNORE_CARRY                                   ;
+; AUTO_CASCADE_CHAINS     ; ON          ; AUTO_CASCADE                                   ;
+; IGNORE_CASCADE_BUFFERS  ; OFF         ; IGNORE_CASCADE                                 ;
+; LPM_WIDTH               ; 16          ; Integer                                        ;
+; LPM_NUMWORDS            ; 512         ; Integer                                        ;
+; LPM_WIDTHU              ; 9           ; Integer                                        ;
+; LPM_SHOWAHEAD           ; OFF         ; Untyped                                        ;
+; UNDERFLOW_CHECKING      ; ON          ; Untyped                                        ;
+; OVERFLOW_CHECKING       ; ON          ; Untyped                                        ;
+; USE_EAB                 ; ON          ; Untyped                                        ;
+; ADD_RAM_OUTPUT_REGISTER ; OFF         ; Untyped                                        ;
+; DELAY_RDUSEDW           ; 1           ; Untyped                                        ;
+; DELAY_WRUSEDW           ; 1           ; Untyped                                        ;
+; RDSYNC_DELAYPIPE        ; 4           ; Integer                                        ;
+; WRSYNC_DELAYPIPE        ; 4           ; Integer                                        ;
+; CLOCKS_ARE_SYNCHRONIZED ; FALSE       ; Untyped                                        ;
+; DEVICE_FAMILY           ; Cyclone II  ; Untyped                                        ;
+; CBXI_PARAMETER          ; dcfifo_ncb1 ; Untyped                                        ;
++-------------------------+-------------+------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------------+
-; dcfifo Parameter Settings by Entity Instance                         ;
-+----------------------------+-----------------------------------------+
-; Name                       ; Value                                   ;
-+----------------------------+-----------------------------------------+
-; Number of entity instances ; 1                                       ;
-; Entity Instance            ; tx_fifo:tx_fifo|dcfifo:dcfifo_component ;
-;     -- FIFO Type           ; Dual Clock                              ;
-;     -- LPM_WIDTH           ; 16                                      ;
-;     -- LPM_NUMWORDS        ; 1024                                    ;
-;     -- LPM_SHOWAHEAD       ; OFF                                     ;
-;     -- USE_EAB             ; ON                                      ;
-+----------------------------+-----------------------------------------+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: tx_fifo:tx_fifo_q|dcfifo:dcfifo_component ;
++-------------------------+-------------+------------------------------------------------+
+; Parameter Name          ; Value       ; Type                                           ;
++-------------------------+-------------+------------------------------------------------+
+; AUTO_CARRY_CHAINS       ; ON          ; AUTO_CARRY                                     ;
+; IGNORE_CARRY_BUFFERS    ; OFF         ; IGNORE_CARRY                                   ;
+; AUTO_CASCADE_CHAINS     ; ON          ; AUTO_CASCADE                                   ;
+; IGNORE_CASCADE_BUFFERS  ; OFF         ; IGNORE_CASCADE                                 ;
+; LPM_WIDTH               ; 16          ; Integer                                        ;
+; LPM_NUMWORDS            ; 512         ; Integer                                        ;
+; LPM_WIDTHU              ; 9           ; Integer                                        ;
+; LPM_SHOWAHEAD           ; OFF         ; Untyped                                        ;
+; UNDERFLOW_CHECKING      ; ON          ; Untyped                                        ;
+; OVERFLOW_CHECKING       ; ON          ; Untyped                                        ;
+; USE_EAB                 ; ON          ; Untyped                                        ;
+; ADD_RAM_OUTPUT_REGISTER ; OFF         ; Untyped                                        ;
+; DELAY_RDUSEDW           ; 1           ; Untyped                                        ;
+; DELAY_WRUSEDW           ; 1           ; Untyped                                        ;
+; RDSYNC_DELAYPIPE        ; 4           ; Integer                                        ;
+; WRSYNC_DELAYPIPE        ; 4           ; Integer                                        ;
+; CLOCKS_ARE_SYNCHRONIZED ; FALSE       ; Untyped                                        ;
+; DEVICE_FAMILY           ; Cyclone II  ; Untyped                                        ;
+; CBXI_PARAMETER          ; dcfifo_ncb1 ; Untyped                                        ;
++-------------------------+-------------+------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------+
+; dcfifo Parameter Settings by Entity Instance                           ;
++----------------------------+-------------------------------------------+
+; Name                       ; Value                                     ;
++----------------------------+-------------------------------------------+
+; Number of entity instances ; 2                                         ;
+; Entity Instance            ; tx_fifo:tx_fifo_i|dcfifo:dcfifo_component ;
+;     -- FIFO Type           ; Dual Clock                                ;
+;     -- LPM_WIDTH           ; 16                                        ;
+;     -- LPM_NUMWORDS        ; 512                                       ;
+;     -- LPM_SHOWAHEAD       ; OFF                                       ;
+;     -- USE_EAB             ; ON                                        ;
+; Entity Instance            ; tx_fifo:tx_fifo_q|dcfifo:dcfifo_component ;
+;     -- FIFO Type           ; Dual Clock                                ;
+;     -- LPM_WIDTH           ; 16                                        ;
+;     -- LPM_NUMWORDS        ; 512                                       ;
+;     -- LPM_SHOWAHEAD       ; OFF                                       ;
+;     -- USE_EAB             ; ON                                        ;
++----------------------------+-------------------------------------------+
 
 
 +-------------------------------+
@@ -737,8 +965,12 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Aug 31 18:37:54 2006
+    Info: Processing started: Wed Sep 06 15:55:18 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ozy_eval -c ozy_eval
+Info: Found 1 design units, including 1 entities, in source file SPI_REGS.v
+    Info: Found entity 1: SPI_REGS
+Info: Found 1 design units, including 1 entities, in source file RegisterX.v
+    Info: Found entity 1: RegisterX
 Info: Found 1 design units, including 1 entities, in source file phase_accumulator.v
     Info: Found entity 1: phase_accumulator
 Info: Found 1 design units, including 1 entities, in source file cordic.v
@@ -747,11 +979,12 @@ Info: Found 1 design units, including 1 entities, in source file cordic_stage.v
     Info: Found entity 1: cordic_stage
 Info: Found 1 design units, including 1 entities, in source file tx_fifo.v
     Info: Found entity 1: tx_fifo
-Warning (10236): Verilog HDL net warning at ozy_nco.v(140): created undeclared net "usb_write"
 Info: Found 1 design units, including 1 entities, in source file ozy_nco.v
     Info: Found entity 1: ozy_nco
 Info: Elaborating entity "ozy_nco" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at ozy_nco.v(135): object "FIFO_EMPTY" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at ozy_nco.v(189): object "FIFO_EMPTY" assigned a value but never read
+Info: Elaborating entity "SPI_REGS" for hierarchy "SPI_REGS:spi_regs"
+Info: Elaborating entity "RegisterX" for hierarchy "RegisterX:freqsetreg"
 Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
 Info: Elaborating entity "cordic" for hierarchy "cordic:rx_cordic"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage0"
@@ -770,59 +1003,59 @@ Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_s
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage13"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage14"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage15"
-Info: Elaborating entity "tx_fifo" for hierarchy "tx_fifo:tx_fifo"
+Info: Elaborating entity "tx_fifo" for hierarchy "tx_fifo:tx_fifo_i"
 Info: Found 1 design units, including 1 entities, in source file ../../../../../../../altera/quartus60/libraries/megafunctions/dcfifo.tdf
     Info: Found entity 1: dcfifo
-Info: Elaborating entity "dcfifo" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component"
-Info: Elaborated megafunction instantiation "tx_fifo:tx_fifo|dcfifo:dcfifo_component"
-Info: Found 1 design units, including 1 entities, in source file db/dcfifo_efb1.tdf
-    Info: Found entity 1: dcfifo_efb1
-Info: Elaborating entity "dcfifo_efb1" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated"
-Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_ldb.tdf
-    Info: Found entity 1: a_gray2bin_ldb
-Info: Elaborating entity "a_gray2bin_ldb" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_gray2bin_ldb:rdptr_g_gray2bin"
-Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_p96.tdf
-    Info: Found entity 1: a_graycounter_p96
-Info: Elaborating entity "a_graycounter_p96" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_p96:rdptr_g1p"
-Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_k27.tdf
-    Info: Found entity 1: a_graycounter_k27
-Info: Elaborating entity "a_graycounter_k27" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_k27:wrptr_g1p"
-Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_j27.tdf
-    Info: Found entity 1: a_graycounter_j27
-Info: Elaborating entity "a_graycounter_j27" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|a_graycounter_j27:wrptr_gp"
-Info: Found 1 design units, including 1 entities, in source file db/altsyncram_rd11.tdf
-    Info: Found entity 1: altsyncram_rd11
-Info: Elaborating entity "altsyncram_rd11" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram"
-Info: Found 1 design units, including 1 entities, in source file db/altsyncram_52f1.tdf
-    Info: Found entity 1: altsyncram_52f1
-Info: Elaborating entity "altsyncram_52f1" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|altsyncram_rd11:fifo_ram|altsyncram_52f1:altsyncram5"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_hn7.tdf
-    Info: Found entity 1: alt_synch_pipe_hn7
-Info: Elaborating entity "alt_synch_pipe_hn7" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_bo8.tdf
-    Info: Found entity 1: dffpipe_bo8
-Info: Elaborating entity "dffpipe_bo8" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_pe9.tdf
-    Info: Found entity 1: dffpipe_pe9
-Info: Elaborating entity "dffpipe_pe9" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|dffpipe_pe9:rs_brp"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_0e8.tdf
-    Info: Found entity 1: alt_synch_pipe_0e8
-Info: Elaborating entity "alt_synch_pipe_0e8" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_qe9.tdf
-    Info: Found entity 1: dffpipe_qe9
-Info: Elaborating entity "dffpipe_qe9" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_0e8:rs_dgwp|dffpipe_qe9:dffpipe10"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_in7.tdf
-    Info: Found entity 1: alt_synch_pipe_in7
-Info: Elaborating entity "alt_synch_pipe_in7" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_co8.tdf
-    Info: Found entity 1: dffpipe_co8
-Info: Elaborating entity "dffpipe_co8" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_1e8.tdf
-    Info: Found entity 1: alt_synch_pipe_1e8
-Info: Elaborating entity "alt_synch_pipe_1e8" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_re9.tdf
-    Info: Found entity 1: dffpipe_re9
-Info: Elaborating entity "dffpipe_re9" for hierarchy "tx_fifo:tx_fifo|dcfifo:dcfifo_component|dcfifo_efb1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_re9:dffpipe15"
+Info: Elaborating entity "dcfifo" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component"
+Info: Elaborated megafunction instantiation "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_ncb1.tdf
+    Info: Found entity 1: dcfifo_ncb1
+Info: Elaborating entity "dcfifo_ncb1" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_kdb.tdf
+    Info: Found entity 1: a_gray2bin_kdb
+Info: Elaborating entity "a_gray2bin_kdb" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_o96.tdf
+    Info: Found entity 1: a_graycounter_o96
+Info: Elaborating entity "a_graycounter_o96" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_o96:rdptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_l27.tdf
+    Info: Found entity 1: a_graycounter_l27
+Info: Elaborating entity "a_graycounter_l27" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_l27:wrptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_i27.tdf
+    Info: Found entity 1: a_graycounter_i27
+Info: Elaborating entity "a_graycounter_i27" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_i27:wrptr_gp"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_bb11.tdf
+    Info: Found entity 1: altsyncram_bb11
+Info: Elaborating entity "altsyncram_bb11" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_lve1.tdf
+    Info: Found entity 1: altsyncram_lve1
+Info: Elaborating entity "altsyncram_lve1" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_ln7.tdf
+    Info: Found entity 1: alt_synch_pipe_ln7
+Info: Elaborating entity "alt_synch_pipe_ln7" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_fo8.tdf
+    Info: Found entity 1: dffpipe_fo8
+Info: Elaborating entity "dffpipe_fo8" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_oe9.tdf
+    Info: Found entity 1: dffpipe_oe9
+Info: Elaborating entity "dffpipe_oe9" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_vd8.tdf
+    Info: Found entity 1: alt_synch_pipe_vd8
+Info: Elaborating entity "alt_synch_pipe_vd8" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_ue9.tdf
+    Info: Found entity 1: dffpipe_ue9
+Info: Elaborating entity "dffpipe_ue9" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_mn7.tdf
+    Info: Found entity 1: alt_synch_pipe_mn7
+Info: Elaborating entity "alt_synch_pipe_mn7" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_go8.tdf
+    Info: Found entity 1: dffpipe_go8
+Info: Elaborating entity "dffpipe_go8" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_4e8.tdf
+    Info: Found entity 1: alt_synch_pipe_4e8
+Info: Elaborating entity "alt_synch_pipe_4e8" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_ve9.tdf
+    Info: Found entity 1: dffpipe_ve9
+Info: Elaborating entity "dffpipe_ve9" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15"
 Warning: Port "#5" on the entity instantiation of "cordic_stage15" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
 Warning: Port "#5" on the entity instantiation of "cordic_stage14" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
 Warning: Port "#5" on the entity instantiation of "cordic_stage13" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
@@ -857,36 +1090,83 @@ Warning: Reduced register "cordic:rx_cordic|Qstage0[3]" with stuck data_in port 
 Warning: Reduced register "cordic:rx_cordic|Qstage0[2]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic:rx_cordic|Qstage0[1]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic:rx_cordic|Qstage0[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[23]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[22]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[21]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[20]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[19]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[18]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[17]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[16]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[15]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[14]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[13]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[12]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[11]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[10]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[9]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[8]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[7]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[6]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[5]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[4]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[3]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[2]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|PHstage0[7]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|PHstage0[6]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|PHstage0[5]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|PHstage0[4]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|PHstage0[3]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|PHstage0[2]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|PHstage0[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|PHstage0[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[7]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[6]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[5]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[4]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[3]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[2]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[0]" with stuck data_in port to stuck value GND
 Info: Duplicate registers merged to single register
+    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[2]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage2|PHout[0]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[4]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[3]"
+    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[7]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[5]"
+    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[6]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[5]"
     Info: Duplicate register "cordic:rx_cordic|Istage0[17]" merged to single register "cordic:rx_cordic|Istage0[16]"
-Info: State machine "|ozy_nco|fx2st" contains 3 states
+Info: State machine "|ozy_nco|fx2st" contains 4 states
 Info: Selected Auto state machine encoding method for state machine "|ozy_nco|fx2st"
 Info: Encoding result for state machine "|ozy_nco|fx2st"
-    Info: Completed encoding using 3 state bits
-        Info: Encoded state bit "fx2st.0000"
+    Info: Completed encoding using 4 state bits
         Info: Encoded state bit "fx2st.0010"
+        Info: Encoded state bit "fx2st.0011"
         Info: Encoded state bit "fx2st.0001"
-    Info: State "|ozy_nco|fx2st.0000" uses code string "000"
-    Info: State "|ozy_nco|fx2st.0010" uses code string "110"
-    Info: State "|ozy_nco|fx2st.0001" uses code string "101"
+        Info: Encoded state bit "fx2st.0000"
+    Info: State "|ozy_nco|fx2st.0000" uses code string "0000"
+    Info: State "|ozy_nco|fx2st.0001" uses code string "0011"
+    Info: State "|ozy_nco|fx2st.0011" uses code string "0101"
+    Info: State "|ozy_nco|fx2st.0010" uses code string "1001"
 Info: Duplicate registers merged to single register
     Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[17]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[16]"
-Warning: Resynthesizing Cyclone or Stratix WYSIWYG primitives into Cyclone II WYSIWYG primitives; however, resynthesized WYSIWYG primitives may not produce optimal compilation results.
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "SLRD" stuck at VCC
     Warning: Pin "SLOE" stuck at VCC
     Warning: Pin "FIFO_ADR[0]" stuck at GND
     Warning: Pin "FIFO_ADR[1]" stuck at VCC
     Warning: Pin "EVALPIN39" stuck at VCC
-Warning: Design contains 1 input pin(s) that do not drive logic
-    Warning: No output dependent on input pin "FX2_CLK"
-Info: Implemented 1504 device resources after synthesis - the final resource count might be different
-    Info: Implemented 22 input pins
+Info: Implemented 1389 device resources after synthesis - the final resource count might be different
+    Info: Implemented 25 input pins
     Info: Implemented 29 output pins
-    Info: Implemented 1437 logic cells
-    Info: Implemented 16 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 45 warnings
-    Info: Processing ended: Thu Aug 31 18:38:04 2006
-    Info: Elapsed time: 00:00:10
+    Info: Implemented 1 bidirectional pins
+    Info: Implemented 1302 logic cells
+    Info: Implemented 32 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 83 warnings
+    Info: Processing ended: Wed Sep 06 15:55:31 2006
+    Info: Elapsed time: 00:00:15
 
 

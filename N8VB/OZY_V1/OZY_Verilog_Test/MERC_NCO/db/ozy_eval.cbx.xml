@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="ozy_eval">
-		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|tx_fifo:tx_fifo|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_efb1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_ncb1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_ncb1.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

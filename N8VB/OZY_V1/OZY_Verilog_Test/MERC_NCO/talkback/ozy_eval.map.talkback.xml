@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Thu Aug 31 18:38:04 2006) contains limited information
+This XML file (created on Wed Sep 06 15:55:32 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus_map</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Thu Aug 31 18:38:04 2006</compilation_end_time>
+	<compilation_end_time>Wed Sep 06 15:55:33 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_eval</project>
 <revision>ozy_eval</revision>
 <compilation_summary>
-	<flow_status>Successful - Thu Aug 31 18:38:04 2006</flow_status>
+	<flow_status>Successful - Wed Sep 06 15:55:32 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>ozy_eval</revision_name>
 	<top_level_entity_name>ozy_nco</top_level_entity_name>
@@ -45,20 +45,27 @@ to license.txt.
 	<device>EP2C5Q208C7</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>N/A</met_timing_requirements>
-	<total_logic_elements>1348</total_logic_elements>
-	<total_registers>944</total_registers>
-	<total_pins>51</total_pins>
+	<total_logic_elements>1141</total_logic_elements>
+	<total_registers>849</total_registers>
+	<total_pins>55</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
 	<total_memory_bits>16,384</total_memory_bits>
 	<embedded_multiplier_9_bit_elements>0</embedded_multiplier_9_bit_elements>
 	<total_plls>0</total_plls>
 </compilation_summary>
 <lpm_params>
-	<lpm_data type="dcfifo" num_inst="1">
-		<inst name="tx_fifo:tx_fifo|dcfifo:dcfifo_component">
+	<lpm_data type="dcfifo" num_inst="2">
+		<inst name="tx_fifo:tx_fifo_i|dcfifo:dcfifo_component">
 			<param name="FIFO Type" value="Dual Clock"></param>
 			<param name="LPM_WIDTH" value="16"></param>
-			<param name="LPM_NUMWORDS" value="1024"></param>
+			<param name="LPM_NUMWORDS" value="512"></param>
+			<param name="LPM_SHOWAHEAD" value="OFF"></param>
+			<param name="USE_EAB" value="ON"></param>
+		</inst>
+		<inst name="tx_fifo:tx_fifo_q|dcfifo:dcfifo_component">
+			<param name="FIFO Type" value="Dual Clock"></param>
+			<param name="LPM_WIDTH" value="16"></param>
+			<param name="LPM_NUMWORDS" value="512"></param>
 			<param name="LPM_SHOWAHEAD" value="OFF"></param>
 			<param name="USE_EAB" value="ON"></param>
 		</inst>
@@ -71,16 +78,16 @@ to license.txt.
 	<smart_recompile>off</smart_recompile>
 </software_data>
 <messages>
-	<warning>Warning: Design contains 1 input pin(s) that do not drive logic</warning>
-	<warning>Warning: No output dependent on input pin &quot;FX2_CLK&quot;</warning>
 	<warning>Warning: Output pins are stuck at VCC or GND</warning>
 	<warning>Warning: Pin &quot;EVALPIN39&quot; stuck at VCC</warning>
 	<warning>Warning: Pin &quot;FIFO_ADR[1]&quot; stuck at VCC</warning>
-	<info>Info: Quartus II Analysis &amp; Synthesis was successful. 0 errors, 45 warnings</info>
-	<info>Info: Elapsed time: 00:00:10</info>
-	<info>Info: Processing ended: Thu Aug 31 18:38:04 2006</info>
-	<info>Info: Implemented 1504 device resources after synthesis - the final resource count might be different</info>
-	<info>Info: Implemented 16 RAM segments</info>
+	<warning>Warning: Pin &quot;FIFO_ADR[0]&quot; stuck at GND</warning>
+	<warning>Warning: Pin &quot;SLOE&quot; stuck at VCC</warning>
+	<info>Info: Quartus II Analysis &amp; Synthesis was successful. 0 errors, 83 warnings</info>
+	<info>Info: Elapsed time: 00:00:15</info>
+	<info>Info: Processing ended: Wed Sep 06 15:55:31 2006</info>
+	<info>Info: Implemented 1389 device resources after synthesis - the final resource count might be different</info>
+	<info>Info: Implemented 32 RAM segments</info>
 </messages>
 <analysis___synthesis_settings>
 	<row>
@@ -346,19 +353,19 @@ to license.txt.
 <general_register_statistics>
 	<row>
 		<statistic>Total registers</statistic>
-		<value>944</value>
+		<value>849</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Synchronous Clear</statistic>
-		<value>763</value>
+		<value>560</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Synchronous Load</statistic>
-		<value>0</value>
+		<value>1</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Asynchronous Clear</statistic>
-		<value>96</value>
+		<value>177</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Asynchronous Load</statistic>
@@ -366,7 +373,7 @@ to license.txt.
 	</row>
 	<row>
 		<statistic>Number of registers using Clock Enable</statistic>
-		<value>21</value>
+		<value>68</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Preset</statistic>

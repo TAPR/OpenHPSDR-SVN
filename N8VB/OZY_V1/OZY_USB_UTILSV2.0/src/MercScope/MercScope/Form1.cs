@@ -9,6 +9,7 @@ using HPSDR_USB_LIB_V1;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
+using SharpDSP;
 
 namespace MercScope
 {
@@ -18,11 +19,13 @@ namespace MercScope
         Random rnd;
         const int bsize = 2048;
         byte[] adcbuf = new byte[bsize];
-        const int isize = 1024;
-        int[] valbuf = new int[isize];
+        const int isize = 512;
+        int[] ivalbuf = new int[isize];
+        const int qsize = 512;
+        int[] qvalbuf = new int[qsize];
         IntPtr hdev = IntPtr.Zero;
         bool adcon = false;
-        bool singleshot = false;
+        PowerSpectrum ps = new PowerSpectrum(isize, WindowType.HAMMING_WINDOW);
 
         public Form1()
         {
@@ -40,10 +43,10 @@ namespace MercScope
         private void Form1_Load(object sender, EventArgs e)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.Width = 1110;
-            this.Height = 800;
-            pictureBox1.Width = 1000;
-            pictureBox1.Height = pictureBox1.Width/2;
+            this.Width = 631;
+            this.Height = 725;
+            pictureBox1.Width = 512;
+            pictureBox1.Height = 512;
             scoperect = pictureBox1.ClientRectangle;
             timer1.Interval = 10;
             timer1.Enabled = true;            
@@ -59,8 +62,8 @@ namespace MercScope
 
             int tickheight = 4;
             int tickheightLarge = 8;
-            int gridspacing = (int)pictureBox1.Height/10;
-            int tickspacing = (int)gridspacing/10;
+            int gridspacing = (int)pictureBox1.Height/8;
+            int tickspacing = (int)gridspacing/8;
             int largetickspacing = (int)gridspacing/2;
 
             // draw the Grid Lines
@@ -112,36 +115,63 @@ namespace MercScope
 
         private void RefreshScope(Graphics g)
         {
-            int xmax = 1000; // number of sample points
-            int ymax = 500;  // maximum y value
+            int xmax = 512; // number of sample points
+            int ymax = 512;  // maximum y value
             int xlast = -1;
-            int ylast = 0;
-            int yDraw = 0;
+            int ylastI = 0;
+            int ylastQ = 0;
+            int ylastPS = 0;
+            int yDrawI = 0;
+            int yDrawQ = 0;
+            int yDrawPS = 0;
 
             int yscale = (int)numericUpDown1.Value;
-            int ypos = vScrollBar1.Value;
+            int yposI = vScrollBar1.Value;
+            int yposQ = vScrollBar2.Value;
+            int yposPS = vScrollBar3.Value;
             int xtscale = (int)numericUpDown2.Value;
             int xtpos = hScrollBar1.Value;
             int xDraw = xtpos;
 
             if (!read_adc(ref adcbuf))
                 return;
-
-            for (int i = 0, j = 0; i < adcbuf.Length; i += 2, j++)
+                        
+            for (int i = 0, j = 0; i < adcbuf.Length; i += 4, j++)
             {
-                valbuf[j] = (int)(adcbuf[i + 1] * 256 + adcbuf[i]);
-                valbuf[j] = nBitTwosComp(valbuf[j], 16);
+                ivalbuf[j] = (int)BitConverter.ToInt16(adcbuf, i);                
+                qvalbuf[j] = (int)BitConverter.ToInt16(adcbuf, i + 2);                
             }
+
+            double[] d_i = new double[ivalbuf.Length];
+            double[] d_q = new double[qvalbuf.Length];
+            
+            DataConvert.IntToDouble(ivalbuf, 65536, ref d_i);
+            DataConvert.IntToDouble(qvalbuf, 65536, ref d_q);
+
+            double[] ps_result = new double[ivalbuf.Length];
+
+            ps.PowerSpectrumSignal(ref d_i, ref d_q, ref ps_result);
+
+            int[] ps_result_int = new int[ps_result.Length];
+
+            DataConvert.DoubleToInt(ps_result, 65536, ref ps_result_int);
+            DataConvert.ScaleInt(-300, ref ps_result_int);
 
             // read each value from the buffer and plot the sample on the scope		
             for (int xpos = 0; xpos < xmax; xpos++)
             {
                 //int n = rnd.Next(-32767, 32767);
-                int n = valbuf[xpos];
+                int nI = ivalbuf[xpos];
+                int nQ = qvalbuf[xpos];
+                int nPS = ps_result_int[xpos];
 
-                int yint = (int)(ymax+ypos) / 2 + (int)(n >> yscale);
+                int yintI = (int)(ymax+yposI) / 2 + (int)(nI >> yscale);
+                int yintQ = (int)(ymax+yposQ) / 2 + (int)(nQ >> yscale);
+                int yintPS = (int)(ymax + yposPS) / 2 + (int)(nPS >> yscale);
 
-                yDraw = yint;
+                yDrawI = yintI;
+                yDrawQ = yintQ;
+                yDrawPS = yintPS;
 
                 // don't draw the first sample point, use it as
                 // a starting sample point
@@ -159,14 +189,18 @@ namespace MercScope
                     // scaled sample point
                     if (xDraw < pictureBox1.Width)
                     {
-                        g.DrawLine(Pens.Yellow, xlast, ylast, xDraw, yint);
+                        g.DrawLine(Pens.Yellow, xlast, ylastI, xDraw, yintI);
+                        g.DrawLine(Pens.Red, xlast, ylastQ, xDraw, yintQ);
+                        g.DrawLine(Pens.White, xlast, ylastPS, xDraw, yintPS);
                     }
                 }
 
                 // remember the current sample point to allow for connecting
                 // the next sample point
                 xlast = xDraw;
-                ylast = yDraw;
+                ylastI = yDrawI;
+                ylastQ = yDrawQ;
+                ylastPS = yDrawPS;
                               
             }
 
@@ -202,23 +236,7 @@ namespace MercScope
             else
                 return true;
         }
-
-        private static int nBitTwosComp(int data, int numBits)
-        {
-            System.Collections.BitArray b = new System.Collections.BitArray(new int[] { data });
-
-            int result = -(data & (1 << numBits - 1));
-            //int result = -(b[numBits - 1] ? 1 : 0) * (1 << numBits - 1);
-
-            //for (int i = numBits - 2; i >= 0; i--)
-            //    result += (b[i] ? 1 : 0) * (1 << i);
-
-            for (int i = numBits - 2; i >= 0; i--)
-                result |= (data & (1 << i));
-
-            return result;
-        }
-
+        
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             adcon = checkBox1.Checked;
@@ -242,6 +260,18 @@ namespace MercScope
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             stop_adc();
+        }
+
+        private void hScrollBar2_Scroll(object sender, ScrollEventArgs e)
+        {
+            byte[] buf = new byte[1];
+            buf[0] = (byte)hScrollBar2.Value;
+
+            textBox1.Text = (((((float)buf[0] * (float)Math.Pow(2, 24)) * (float)100))/(float)Math.Pow(2,32)).ToString();
+            textBox2.Text = buf[0].ToString();
+
+            if (hdev != IntPtr.Zero)
+                OZY.Write_SPI(hdev, 0, 0x01, OZY.SPI_EN_FPGA, (OZY.SPI_FMT_MSB | OZY.SPI_FMT_HDR_1), buf);
         }
 
     }
