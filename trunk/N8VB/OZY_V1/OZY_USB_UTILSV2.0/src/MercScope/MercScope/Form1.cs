@@ -26,6 +26,7 @@ namespace MercScope
         IntPtr hdev = IntPtr.Zero;
         bool adcon = false;
         PowerSpectrum ps = new PowerSpectrum(isize, WindowType.HAMMING_WINDOW);
+        IQCorrection iqcor = new IQCorrection(512);
 
         public Form1()
         {
@@ -44,12 +45,16 @@ namespace MercScope
         {
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Width = 631;
-            this.Height = 725;
+            this.Height = 770;
             pictureBox1.Width = 512;
             pictureBox1.Height = 512;
             scoperect = pictureBox1.ClientRectangle;
             timer1.Interval = 10;
-            timer1.Enabled = true;            
+            timer1.Enabled = true;
+            hScrollBar2.Maximum = (int)(Int32.MaxValue - 1);
+            hScrollBar2.Minimum = 0;
+            hScrollBar2.SmallChange = (int)Int32.MaxValue / 10000000;
+            hScrollBar2.LargeChange = (int)Int32.MaxValue / 100000;            
         }
 
         private void DrawGrid(Graphics g)
@@ -126,6 +131,7 @@ namespace MercScope
             int yDrawPS = 0;
 
             int yscale = (int)numericUpDown1.Value;
+            int ps_scale = (int)nudSpecScale.Value;
             int yposI = vScrollBar1.Value;
             int yposQ = vScrollBar2.Value;
             int yposPS = vScrollBar3.Value;
@@ -142,32 +148,112 @@ namespace MercScope
                 qvalbuf[j] = (int)BitConverter.ToInt16(adcbuf, i + 2);                
             }
 
+            int maxval = 0;
+            foreach (int val in ivalbuf)
+            {
+                if (val > maxval)
+                    maxval = val;
+            }
+
+            txtMax.Text = maxval.ToString();
+
+            int minval = 0;
+            foreach (int val in ivalbuf)
+            {
+                if (val < minval)
+                    minval = val;
+            }
+
+            txtMin.Text = minval.ToString();
+
+            int Qmaxval = 0;
+            foreach (int val in qvalbuf)
+            {
+                if (val > Qmaxval)
+                    Qmaxval = val;
+            }
+
+            txtQMax.Text = Qmaxval.ToString();
+
+            int Qminval = 0;
+            foreach (int val in qvalbuf)
+            {
+                if (val < Qminval)
+                    Qminval = val;
+            }
+
+            txtQMin.Text = Qminval.ToString();
+
             double[] d_i = new double[ivalbuf.Length];
             double[] d_q = new double[qvalbuf.Length];
             
-            DataConvert.IntToDouble(ivalbuf, 65536, ref d_i);
-            DataConvert.IntToDouble(qvalbuf, 65536, ref d_q);
+            DataConvert.IntToDouble(ivalbuf, (int)Math.Pow(2,15), ref d_i);
+            DataConvert.IntToDouble(qvalbuf, (int)Math.Pow(2, 15), ref d_q);
+
+            Gains gain;
+            gain.IQGainValue = (double)hscrollGain.Value/10;
+            gain.IQPhaseValue = (double)hscrollPhase.Value/10;
+
+            iqcor.DoIQCorrection(ref d_i, ref d_q, gain);
 
             double[] ps_result = new double[ivalbuf.Length];
 
             ps.PowerSpectrumSignal(ref d_i, ref d_q, ref ps_result);
 
-            int[] ps_result_int = new int[ps_result.Length];
+            double PSminval = 0;
+            foreach (double val in ps_result)
+            {
+                if (val < PSminval)
+                    PSminval = val;
+            }
 
-            DataConvert.DoubleToInt(ps_result, 65536, ref ps_result_int);
-            DataConvert.ScaleInt(-300, ref ps_result_int);
-                
+            txtPSMin.Text = PSminval.ToString("E");
+
+            double PSmaxval = -1e200;
+            foreach (double val in ps_result)
+            {
+                if (val > PSmaxval)
+                    PSmaxval = val;
+            }
+
+            txtPSMax.Text = PSmaxval.ToString("E");
+
+            int[] ps_result_int = new int[ps_result.Length];
+            
+            DataConvert.DoubleToInt(ps_result, 32768, ref ps_result_int);
+                       
+            int Pminval = 0;
+            foreach (int val in ps_result_int)
+            {
+                if (val < Pminval)
+                    Pminval = val;
+            }
+
+            txtPMin.Text = Pminval.ToString();
+
+            int Pmaxval = 0;
+            foreach (int val in ps_result_int)
+            {
+                if (val > Pmaxval)
+                    Pmaxval = val;
+            }
+
+            txtPMax.Text = Pmaxval.ToString();
+
+            DataConvert.ScaleInt(-500, ref ps_result_int);
+            DataConvert.ScaleInt(-1, ref ivalbuf);
+            DataConvert.ScaleInt(-1, ref qvalbuf);
+
             // read each value from the buffer and plot the sample on the scope		
             for (int xpos = 0; xpos < xmax; xpos++)
             {
-                //int n = rnd.Next(-32767, 32767);
                 int nI = ivalbuf[xpos];
                 int nQ = qvalbuf[xpos];
                 int nPS = ps_result_int[xpos];
                 
                 int yintI = (int)(ymax+yposI) / 2 + (int)(nI >> yscale);
                 int yintQ = (int)(ymax+yposQ) / 2 + (int)(nQ >> yscale);
-                int yintPS = (int)(ymax + yposPS) / 2 + (int)(nPS >> yscale);
+                int yintPS = (int)(ymax + yposPS) / 2 + (int)(nPS >> ps_scale);
 
                 yDrawI = yintI;
                 yDrawQ = yintQ;
@@ -189,9 +275,9 @@ namespace MercScope
                     // scaled sample point
                     if (xDraw < pictureBox1.Width)
                     {
-                        g.DrawLine(Pens.Yellow, xlast, ylastI, xDraw, yintI);
-                        g.DrawLine(Pens.Red, xlast, ylastQ, xDraw, yintQ);
-                        g.DrawLine(Pens.White, xlast, ylastPS, xDraw, yintPS);
+                        if (chkI.Checked) g.DrawLine(Pens.Yellow, xlast, ylastI, xDraw, yintI);
+                        if (chkQ.Checked) g.DrawLine(Pens.Red, xlast, ylastQ, xDraw, yintQ);
+                        if (chkSpec.Checked) g.DrawLine(Pens.White, xlast, ylastPS, xDraw, yintPS);
                     }
                 }
 
@@ -230,11 +316,20 @@ namespace MercScope
 
         private bool read_adc(ref byte[] rbuf)
         {
-            int ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf, 500);
-            if (ret != rbuf.Length)
-                return false;
-            else
+            if (checkBox2.Checked)
+            {
+                rnd.NextBytes(rbuf);
                 return true;
+            }
+            else
+            {
+
+                int ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf, 500);
+                if (ret != rbuf.Length)
+                    return false;
+                else
+                    return true;
+            }
         }
         
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -264,12 +359,26 @@ namespace MercScope
 
         private void hScrollBar2_Scroll(object sender, ScrollEventArgs e)
         {
-            byte[] buf = new byte[1];
-            buf[0] = (byte)hScrollBar2.Value;
+            byte[] buf = BitConverter.GetBytes(hScrollBar2.Value); // gets 4 bytes
+            byte[] tempbuf = new byte[4];
 
-            textBox1.Text = (((((float)buf[0] * (float)Math.Pow(2, 24)) * (float)100))/(float)Math.Pow(2,32)).ToString();
-            textBox2.Text = buf[0].ToString();
+            if (buf.Length < 4) return;
 
+            // put bytes in proper order MSB to LSB
+            for (int i = 0; i < buf.Length; i++)
+            {
+                tempbuf[buf.Length - 1 - i] = buf[i];
+            }
+
+            buf = tempbuf;
+
+            textBox1.Text = ((((float)hScrollBar2.Value * (float)100))/(float)Math.Pow(2,32)).ToString();
+            textBox2.Text = buf[0].ToString("X2") 
+                            + ":" + buf[1].ToString("X2") 
+                            + ":" + buf[2].ToString("X2") 
+                            + ":" + buf[3].ToString("X2");
+            
+            // send to OZY register 0x01, 32 bits
             if (hdev != IntPtr.Zero)
                 OZY.Write_SPI(hdev, 0, 0x01, OZY.SPI_EN_FPGA, (OZY.SPI_FMT_MSB | OZY.SPI_FMT_HDR_1), buf);
         }

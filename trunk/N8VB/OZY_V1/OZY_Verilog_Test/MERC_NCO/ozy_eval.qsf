@@ -88,6 +88,15 @@ set_location_assignment PIN_75 -to GPIO7
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
 set_global_assignment -name ENABLE_RECOVERY_REMOVAL_ANALYSIS ON
 set_location_assignment PIN_181 -to EVALPIN39
+set_location_assignment PIN_45 -to CS
+set_location_assignment PIN_15 -to SCK
+set_location_assignment PIN_14 -to SI
+set_location_assignment PIN_12 -to SO
+set_global_assignment -name VERILOG_FILE CIC_R64_M1_N4.v
+set_global_assignment -name VERILOG_FILE CIC_R256_M1_N5.v
+set_global_assignment -name VERILOG_FILE CIC_R100_M1_N10.v
+set_global_assignment -name VERILOG_FILE CIC_R100_M1_N5.v
+set_global_assignment -name VERILOG_FILE rng.v
 set_global_assignment -name VERILOG_FILE SPI_REGS.v
 set_global_assignment -name VERILOG_FILE RegisterX.v
 set_global_assignment -name VERILOG_FILE phase_accumulator.v
@@ -95,7 +104,3 @@ set_global_assignment -name VERILOG_FILE cordic.v
 set_global_assignment -name VERILOG_FILE cordic_stage.v
 set_global_assignment -name VERILOG_FILE tx_fifo.v
 set_global_assignment -name VERILOG_FILE ozy_nco.v
-set_location_assignment PIN_45 -to CS
-set_location_assignment PIN_15 -to SCK
-set_location_assignment PIN_14 -to SI
-set_location_assignment PIN_12 -to SO

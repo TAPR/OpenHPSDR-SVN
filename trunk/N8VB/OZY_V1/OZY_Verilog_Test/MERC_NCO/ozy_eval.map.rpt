@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ozy_eval
-Wed Sep 06 15:55:32 2006
+Thu Sep 07 17:58:58 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -97,13 +97,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Sep 06 15:55:31 2006        ;
+; Analysis & Synthesis Status        ; Successful - Thu Sep 07 17:58:58 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; ozy_eval                                     ;
 ; Top-level Entity Name              ; ozy_nco                                      ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 1141                                         ;
-; Total registers                    ; 849                                          ;
+; Total logic elements               ; 1764                                         ;
+; Total registers                    ; 1646                                         ;
 ; Total pins                         ; 55                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 16,384                                       ;
@@ -177,6 +177,8 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                        ;
 +----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+
+; CIC_R64_M1_N4.v                  ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/CIC_R64_M1_N4.v           ;
+; rng.v                            ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/rng.v                     ;
 ; SPI_REGS.v                       ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/SPI_REGS.v                ;
 ; RegisterX.v                      ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/RegisterX.v               ;
 ; phase_accumulator.v              ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/phase_accumulator.v       ;
@@ -220,23 +222,23 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 1,141   ;
-; Total combinational functions               ; 1141    ;
+; Estimated Total logic elements              ; 1,764   ;
+; Total combinational functions               ; 1764    ;
 ; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 45      ;
-;     -- 3 input functions                    ; 605     ;
-;     -- <=2 input functions                  ; 491     ;
+;     -- 4 input functions                    ; 79      ;
+;     -- 3 input functions                    ; 1041    ;
+;     -- <=2 input functions                  ; 644     ;
 ;         -- Combinational cells for routing  ; 0       ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 480     ;
-;     -- arithmetic mode                      ; 661     ;
-; Total registers                             ; 849     ;
+;     -- normal mode                          ; 681     ;
+;     -- arithmetic mode                      ; 1083    ;
+; Total registers                             ; 1646    ;
 ; I/O pins                                    ; 55      ;
 ; Total memory bits                           ; 16384   ;
 ; Maximum fan-out node                        ; ENC_CLK ;
-; Maximum fan-out                             ; 739     ;
-; Total fan-out                               ; 6274    ;
-; Average fan-out                             ; 3.02    ;
+; Maximum fan-out                             ; 1464    ;
+; Total fan-out                               ; 10615   ;
+; Average fan-out                             ; 3.04    ;
 +---------------------------------------------+---------+
 
 
@@ -245,15 +247,17 @@ applicable agreement for further details.
 +----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                ;
 +----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+
-; |ozy_nco                                     ; 1141 (35)         ; 849 (51)     ; 16384       ; 0    ; 0            ; 0       ; 0         ; 55   ; 0            ; |ozy_nco                                                                                                                           ;
-;    |RegisterX:freqsetreg|                    ; 1 (1)             ; 8 (8)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RegisterX:freqsetreg                                                                                                      ;
-;    |SPI_REGS:spi_regs|                       ; 27 (27)           ; 26 (26)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|SPI_REGS:spi_regs                                                                                                         ;
-;    |cordic:rx_cordic|                        ; 988 (26)          ; 588 (24)     ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic                                                                                                          ;
-;       |cordic_stage:cordic_stage0|           ; 47 (47)           ; 42 (42)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0                                                                               ;
+; |ozy_nco                                     ; 1764 (35)         ; 1646 (51)    ; 16384       ; 0    ; 0            ; 0       ; 0         ; 55   ; 0            ; |ozy_nco                                                                                                                           ;
+;    |CIC_R64_M1_N4:I_CIC|                     ; 203 (203)         ; 292 (292)    ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|CIC_R64_M1_N4:I_CIC                                                                                                       ;
+;    |CIC_R64_M1_N4:Q_CIC|                     ; 206 (206)         ; 296 (296)    ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|CIC_R64_M1_N4:Q_CIC                                                                                                       ;
+;    |RegisterX:freqsetreg|                    ; 1 (1)             ; 32 (32)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RegisterX:freqsetreg                                                                                                      ;
+;    |SPI_REGS:spi_regs|                       ; 85 (85)           ; 74 (74)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|SPI_REGS:spi_regs                                                                                                         ;
+;    |cordic:rx_cordic|                        ; 996 (34)          ; 609 (32)     ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic                                                                                                          ;
+;       |cordic_stage:cordic_stage0|           ; 53 (53)           ; 49 (49)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0                                                                               ;
 ;       |cordic_stage:cordic_stage10|          ; 70 (70)           ; 37 (37)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage10                                                                              ;
 ;       |cordic_stage:cordic_stage11|          ; 50 (50)           ; 32 (32)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage11                                                                              ;
-;       |cordic_stage:cordic_stage1|           ; 93 (93)           ; 45 (45)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1                                                                               ;
-;       |cordic_stage:cordic_stage2|           ; 109 (109)         ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage2                                                                               ;
+;       |cordic_stage:cordic_stage1|           ; 111 (111)         ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1                                                                               ;
+;       |cordic_stage:cordic_stage2|           ; 85 (85)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage2                                                                               ;
 ;       |cordic_stage:cordic_stage3|           ; 83 (83)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage3                                                                               ;
 ;       |cordic_stage:cordic_stage4|           ; 81 (81)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage4                                                                               ;
 ;       |cordic_stage:cordic_stage5|           ; 107 (107)         ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage5                                                                               ;
@@ -261,7 +265,8 @@ applicable agreement for further details.
 ;       |cordic_stage:cordic_stage7|           ; 75 (75)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage7                                                                               ;
 ;       |cordic_stage:cordic_stage8|           ; 73 (73)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage8                                                                               ;
 ;       |cordic_stage:cordic_stage9|           ; 97 (97)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9                                                                               ;
-;    |phase_accumulator:rx_phase_accumulator|  ; 8 (8)             ; 8 (8)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|phase_accumulator:rx_phase_accumulator                                                                                    ;
+;    |phase_accumulator:rx_phase_accumulator|  ; 64 (64)           ; 32 (32)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|phase_accumulator:rx_phase_accumulator                                                                                    ;
+;    |rng:random|                              ; 92 (92)           ; 92 (92)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|rng:random                                                                                                                ;
 ;    |tx_fifo:tx_fifo_i|                       ; 41 (0)            ; 84 (0)       ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i                                                                                                         ;
 ;       |dcfifo:dcfifo_component|              ; 41 (0)            ; 84 (0)       ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component                                                                                 ;
 ;          |dcfifo_ncb1:auto_generated|        ; 41 (19)           ; 84 (22)      ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated                                                      ;
@@ -315,12 +320,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 849   ;
-; Number of registers using Synchronous Clear  ; 560   ;
-; Number of registers using Synchronous Load   ; 1     ;
-; Number of registers using Asynchronous Clear ; 177   ;
+; Total registers                              ; 1646  ;
+; Number of registers using Synchronous Clear  ; 568   ;
+; Number of registers using Synchronous Load   ; 27    ;
+; Number of registers using Asynchronous Clear ; 789   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 68    ;
+; Number of registers using Clock Enable       ; 421   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -330,15 +335,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |ozy_nco|SPI_REGS:spi_regs|sdata[5]                            ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|Istage0[12]                          ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9|PHout[2]  ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage5|PHout[9]  ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage2|PHout[12] ;
-; 3:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[14] ;
-; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[17]  ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |ozy_nco|FD[0]~reg0                                            ;
+; 3:1                ; 31 bits   ; 62 LEs        ; 31 LEs               ; 31 LEs                 ; Yes        ; |ozy_nco|SPI_REGS:spi_regs|sdata[1]                            ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9|PHout[6]  ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage5|PHout[1]  ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[4]  ;
+; 3:1                ; 38 bits   ; 76 LEs        ; 76 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[13] ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |ozy_nco|FD[5]~reg0                                            ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |ozy_nco|fx2st~6                                               ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 34 LEs               ; 0 LEs                  ; No         ; |ozy_nco|cordic:rx_cordic|Qstage0~36                           ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 
 
@@ -653,7 +657,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+-------+---------------------------------------+
 ; Parameter Name ; Value ; Type                                  ;
 +----------------+-------+---------------------------------------+
-; WIDTH          ; 8     ; Integer                               ;
+; WIDTH          ; 32    ; Integer                               ;
 +----------------+-------+---------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -664,7 +668,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value   ; Type                                   ;
 +----------------+---------+----------------------------------------+
 ; my_address     ; 0000001 ; Binary                                 ;
-; WIDTH          ; 8       ; Integer                                ;
+; WIDTH          ; 32      ; Integer                                ;
 +----------------+---------+----------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -965,8 +969,18 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Wed Sep 06 15:55:18 2006
+    Info: Processing started: Thu Sep 07 17:58:32 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ozy_eval -c ozy_eval
+Info: Found 1 design units, including 1 entities, in source file CIC_R64_M1_N4.v
+    Info: Found entity 1: CIC_R64_M1_N4
+Info: Found 1 design units, including 1 entities, in source file CIC_R256_M1_N5.v
+    Info: Found entity 1: CIC_R256_M1_N5
+Info: Found 1 design units, including 1 entities, in source file CIC_R100_M1_N10.v
+    Info: Found entity 1: CIC_R100_M1_N10
+Info: Found 1 design units, including 1 entities, in source file CIC_R100_M1_N5.v
+    Info: Found entity 1: CIC_R100_M1_N5
+Info: Found 1 design units, including 1 entities, in source file rng.v
+    Info: Found entity 1: rng
 Info: Found 1 design units, including 1 entities, in source file SPI_REGS.v
     Info: Found entity 1: SPI_REGS
 Info: Found 1 design units, including 1 entities, in source file RegisterX.v
@@ -982,9 +996,10 @@ Info: Found 1 design units, including 1 entities, in source file tx_fifo.v
 Info: Found 1 design units, including 1 entities, in source file ozy_nco.v
     Info: Found entity 1: ozy_nco
 Info: Elaborating entity "ozy_nco" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at ozy_nco.v(189): object "FIFO_EMPTY" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at ozy_nco.v(223): object "FIFO_EMPTY" assigned a value but never read
 Info: Elaborating entity "SPI_REGS" for hierarchy "SPI_REGS:spi_regs"
 Info: Elaborating entity "RegisterX" for hierarchy "RegisterX:freqsetreg"
+Info: Elaborating entity "rng" for hierarchy "rng:random"
 Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
 Info: Elaborating entity "cordic" for hierarchy "cordic:rx_cordic"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage0"
@@ -1003,6 +1018,10 @@ Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_s
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage13"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage14"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage15"
+Info: Elaborating entity "CIC_R64_M1_N4" for hierarchy "CIC_R64_M1_N4:I_CIC"
+Warning (10036): Verilog HDL or VHDL warning at CIC_R64_M1_N4.v(89): object "section_in1" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at CIC_R64_M1_N4.v(173): truncated value with size 32 to match size of target (6)
+Warning (10230): Verilog HDL assignment warning at CIC_R64_M1_N4.v(179): truncated value with size 32 to match size of target (1)
 Info: Elaborating entity "tx_fifo" for hierarchy "tx_fifo:tx_fifo_i"
 Info: Found 1 design units, including 1 entities, in source file ../../../../../../../altera/quartus60/libraries/megafunctions/dcfifo.tdf
     Info: Found entity 1: dcfifo
@@ -1056,6 +1075,8 @@ Info: Elaborating entity "alt_synch_pipe_4e8" for hierarchy "tx_fifo:tx_fifo_i|d
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_ve9.tdf
     Info: Found entity 1: dffpipe_ve9
 Info: Elaborating entity "dffpipe_ve9" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15"
+Warning: Port "filter_out" on the entity instantiation of "Q_CIC" is connected to a signal of width 16. The formal width of the signal in the module is 18.  Extra bits will be left dangling without any fanout logic.
+Warning: Port "filter_out" on the entity instantiation of "I_CIC" is connected to a signal of width 16. The formal width of the signal in the module is 18.  Extra bits will be left dangling without any fanout logic.
 Warning: Port "#5" on the entity instantiation of "cordic_stage15" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
 Warning: Port "#5" on the entity instantiation of "cordic_stage14" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
 Warning: Port "#5" on the entity instantiation of "cordic_stage13" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
@@ -1072,73 +1093,37 @@ Warning: Port "#5" on the entity instantiation of "cordic_stage3" is connected t
 Warning: Port "#5" on the entity instantiation of "cordic_stage2" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
 Warning: Port "#5" on the entity instantiation of "cordic_stage1" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
 Warning: Port "#5" on the entity instantiation of "cordic_stage0" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
-Warning: Reduced register "cordic:rx_cordic|Qstage0[17]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[16]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[15]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[14]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[13]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[12]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[11]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[10]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[9]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[8]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Qstage0[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[23]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[22]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[21]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[20]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[19]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[18]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[17]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[16]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[15]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[14]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[13]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[12]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[11]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[10]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[9]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[8]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "phase_accumulator:rx_phase_accumulator|phase_out[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|PHstage0[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|PHstage0[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|PHstage0[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|PHstage0[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|PHstage0[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|PHstage0[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|PHstage0[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|PHstage0[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[0]" with stuck data_in port to stuck value GND
+Warning: Port "number_o" on the entity instantiation of "random" is connected to a signal of width 12. The formal width of the signal in the module is 32.  Extra bits will be left dangling without any fanout logic.
 Info: Duplicate registers merged to single register
-    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[2]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage2|PHout[0]"
+    Info: Duplicate register "CIC_R64_M1_N4:I_CIC|cur_count[4]" merged to single register "CIC_R64_M1_N4:Q_CIC|cur_count[4]"
+    Info: Duplicate register "CIC_R64_M1_N4:I_CIC|cur_count[3]" merged to single register "CIC_R64_M1_N4:Q_CIC|cur_count[3]"
+    Info: Duplicate register "CIC_R64_M1_N4:I_CIC|cur_count[2]" merged to single register "CIC_R64_M1_N4:Q_CIC|cur_count[2]"
+    Info: Duplicate register "CIC_R64_M1_N4:I_CIC|cur_count[1]" merged to single register "CIC_R64_M1_N4:Q_CIC|cur_count[1]"
+    Info: Duplicate register "CIC_R64_M1_N4:I_CIC|cur_count[0]" merged to single register "CIC_R64_M1_N4:Q_CIC|cur_count[0]"
+    Info: Duplicate register "CIC_R64_M1_N4:I_CIC|ce_out_reg" merged to single register "CIC_R64_M1_N4:Q_CIC|ce_out_reg"
+    Info: Duplicate register "CIC_R64_M1_N4:I_CIC|cur_count[5]" merged to single register "CIC_R64_M1_N4:Q_CIC|cur_count[5]"
 Info: Duplicate registers merged to single register
-    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[4]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[3]"
-    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[7]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[5]"
-    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[6]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[5]"
-    Info: Duplicate register "cordic:rx_cordic|Istage0[17]" merged to single register "cordic:rx_cordic|Istage0[16]"
+    Info: Duplicate register "cordic:rx_cordic|Istage0[17]" merged to single register "cordic:rx_cordic|Qstage0[17]"
+    Info: Duplicate register "cordic:rx_cordic|Istage0[16]" merged to single register "cordic:rx_cordic|Qstage0[17]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[16]" merged to single register "cordic:rx_cordic|Qstage0[17]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[15]" merged to single register "cordic:rx_cordic|Istage0[15]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[14]" merged to single register "cordic:rx_cordic|Istage0[14]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[13]" merged to single register "cordic:rx_cordic|Istage0[13]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[12]" merged to single register "cordic:rx_cordic|Istage0[12]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[11]" merged to single register "cordic:rx_cordic|Istage0[11]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[10]" merged to single register "cordic:rx_cordic|Istage0[10]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[9]" merged to single register "cordic:rx_cordic|Istage0[9]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[8]" merged to single register "cordic:rx_cordic|Istage0[8]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[7]" merged to single register "cordic:rx_cordic|Istage0[7]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[6]" merged to single register "cordic:rx_cordic|Istage0[6]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[5]" merged to single register "cordic:rx_cordic|Istage0[5]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[4]" merged to single register "cordic:rx_cordic|Istage0[4]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[3]" merged to single register "cordic:rx_cordic|Istage0[3]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[2]" merged to single register "cordic:rx_cordic|Istage0[2]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[1]" merged to single register "cordic:rx_cordic|Istage0[1]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[0]" merged to single register "cordic:rx_cordic|Istage0[0]"
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[0]" with stuck data_in port to stuck value GND
 Info: State machine "|ozy_nco|fx2st" contains 4 states
 Info: Selected Auto state machine encoding method for state machine "|ozy_nco|fx2st"
 Info: Encoding result for state machine "|ozy_nco|fx2st"
@@ -1151,22 +1136,20 @@ Info: Encoding result for state machine "|ozy_nco|fx2st"
     Info: State "|ozy_nco|fx2st.0001" uses code string "0011"
     Info: State "|ozy_nco|fx2st.0011" uses code string "0101"
     Info: State "|ozy_nco|fx2st.0010" uses code string "1001"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[17]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[16]"
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "SLRD" stuck at VCC
     Warning: Pin "SLOE" stuck at VCC
     Warning: Pin "FIFO_ADR[0]" stuck at GND
     Warning: Pin "FIFO_ADR[1]" stuck at VCC
     Warning: Pin "EVALPIN39" stuck at VCC
-Info: Implemented 1389 device resources after synthesis - the final resource count might be different
+Info: Implemented 2226 device resources after synthesis - the final resource count might be different
     Info: Implemented 25 input pins
     Info: Implemented 29 output pins
     Info: Implemented 1 bidirectional pins
-    Info: Implemented 1302 logic cells
+    Info: Implemented 2139 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 83 warnings
-    Info: Processing ended: Wed Sep 06 15:55:31 2006
-    Info: Elapsed time: 00:00:15
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 31 warnings
+    Info: Processing ended: Thu Sep 07 17:58:58 2006
+    Info: Elapsed time: 00:00:27
 
 

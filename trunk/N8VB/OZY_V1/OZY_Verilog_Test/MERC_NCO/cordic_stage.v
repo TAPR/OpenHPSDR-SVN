@@ -57,19 +57,19 @@ module cordic_stage(clk,reset,Iin,Qin,PHin,coeff,Iout,Qout,PHout);
 	always @(posedge clk)
 		if(reset)
 			begin
-				Iout <= #1 0;
-				Qout <= #1 0;
-				PHout <= #1 0;
+				Iout <=  0;
+				Qout <=  0;
+				PHout <=  0;
 			end
 		else
 			begin
-				Iout <= #1 phase_positive ?
+				Iout <=  phase_positive ?
 					Iin - {{SHIFT+1{Qin[CORDIC_WIDTH-1]}},Qin[CORDIC_WIDTH-2:SHIFT]} :
 					Iin + {{SHIFT+1{Qin[CORDIC_WIDTH-1]}},Qin[CORDIC_WIDTH-2:SHIFT]};
-				Qout <= #1 phase_positive ?
+				Qout <=  phase_positive ?
 					Qin + {{SHIFT+1{Iin[CORDIC_WIDTH-1]}},Iin[CORDIC_WIDTH-2:SHIFT]} :
-					Qin -{{SHIFT+1{Iin[CORDIC_WIDTH-1]}},Iin[CORDIC_WIDTH-2:SHIFT]};  // changed sign to match USRP
-				PHout <= #1 phase_positive ?
+					Qin - {{SHIFT+1{Iin[CORDIC_WIDTH-1]}},Iin[CORDIC_WIDTH-2:SHIFT]};  // changed sign to match USRP
+				PHout <=  phase_positive ?
 					PHin - coeff :
 					PHin + coeff ;
 			end	
