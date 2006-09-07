@@ -27,18 +27,19 @@
 // Outputs:
 // phase_out - phase accumulator current value, size based on RESOLUTION parameter, default = 32
 //
-module phase_accumulator(clk,reset,frequency,phase_out);
+module phase_accumulator(clk,reset,frequency,random_in,phase_out);
 	parameter RESOLUTION = 32;
 	
 	input	clk;
 	input	reset;
 	input	[RESOLUTION-1:0] frequency;
+	input 	[RESOLUTION-1:0] random_in;
 	
 	output reg [RESOLUTION-1:0] phase_out;
 	
 	always @(posedge clk)
 		if(reset)
-			phase_out <= #1 32'b0; // reset the phase accumulator to 0
+			phase_out <= 32'b0; // reset the phase accumulator to 0
 		else
-			phase_out <= #1 phase_out + frequency; // add frequency increment to phase accumulator			
+			phase_out <= (phase_out + frequency) | random_in; // add frequency increment to phase accumulator			
 endmodule
