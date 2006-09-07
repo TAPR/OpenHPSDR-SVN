@@ -156,7 +156,7 @@ namespace MercScope
 
             DataConvert.DoubleToInt(ps_result, 65536, ref ps_result_int);
             DataConvert.ScaleInt(-300, ref ps_result_int);
-
+                
             // read each value from the buffer and plot the sample on the scope		
             for (int xpos = 0; xpos < xmax; xpos++)
             {
@@ -164,7 +164,7 @@ namespace MercScope
                 int nI = ivalbuf[xpos];
                 int nQ = qvalbuf[xpos];
                 int nPS = ps_result_int[xpos];
-
+                
                 int yintI = (int)(ymax+yposI) / 2 + (int)(nI >> yscale);
                 int yintQ = (int)(ymax+yposQ) / 2 + (int)(nQ >> yscale);
                 int yintPS = (int)(ymax + yposPS) / 2 + (int)(nPS >> yscale);
