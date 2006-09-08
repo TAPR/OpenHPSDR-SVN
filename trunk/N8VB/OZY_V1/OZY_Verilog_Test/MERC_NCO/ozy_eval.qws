@@ -91,8 +91,8 @@ ptn_Child1=ViewFrame-0
 [ProjectWorkspace.Frames.ChildFrames.Document-7.ViewFrame-0]
 DocPathName=ozy_nco.v
 DocumentCLSID={84678d98-dc76-11d0-a0d8-0020affa5bde}
-WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPMPPPPPPPCOPPPPPPAAAAAAAAAAAAAAAADEDAAAAAAMBAAAAA
-IsActiveChildFrame=True
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPMPPPPPPPCOPPPPPPAAAAAAAAAAAAAAAADEDAAAAAAMBAAAAA
+IsActiveChildFrame=False
 ptn_Child1=StateMap
 [ProjectWorkspace.Frames.ChildFrames.Document-7.ViewFrame-0.StateMap]
 AFC_IN_REPORT=False

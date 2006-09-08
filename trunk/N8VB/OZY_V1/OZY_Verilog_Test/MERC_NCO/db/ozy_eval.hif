@@ -5880,582 +5880,6 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_p
 }
 # end
 # entity
-cordic_stage
-# storage
-db|ozy_eval.(3).cnf
-db|ozy_eval.(3).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-0
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage0
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(4).cnf
-db|ozy_eval.(4).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-1
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage1
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(5).cnf
-db|ozy_eval.(5).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-2
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage2
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(6).cnf
-db|ozy_eval.(6).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-3
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage3
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(7).cnf
-db|ozy_eval.(7).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-4
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage4
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(8).cnf
-db|ozy_eval.(8).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-5
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage5
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(9).cnf
-db|ozy_eval.(9).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-6
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage6
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(10).cnf
-db|ozy_eval.(10).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-7
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage7
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(11).cnf
-db|ozy_eval.(11).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-8
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage8
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(12).cnf
-db|ozy_eval.(12).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-9
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage9
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(13).cnf
-db|ozy_eval.(13).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-10
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage10
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(14).cnf
-db|ozy_eval.(14).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-11
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage11
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(15).cnf
-db|ozy_eval.(15).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-12
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage12
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(16).cnf
-db|ozy_eval.(16).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-13
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage13
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(17).cnf
-db|ozy_eval.(17).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-14
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage14
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(18).cnf
-db|ozy_eval.(18).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-15ae628ae47d6c7673a8fd4d5ee286
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-18
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-15
-PARAMETER_DEC
-USR
-}
-# hierarchies {
-cordic:rx_cordic|cordic_stage:cordic_stage15
-}
-# end
-# entity
 SPI_REGS
 # storage
 db|ozy_eval.(37).cnf
@@ -6507,38 +5931,6 @@ WIDTH
 8
 PARAMETER_DEC
 USR
-}
-# end
-# entity
-cordic
-# storage
-db|ozy_eval.(2).cnf
-db|ozy_eval.(2).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic.v
-65ccea2f657ea56687a9a4ff8fdb644b
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-16
-PARAMETER_DEC
-DEF
-PHASE_WIDTH
-16
-PARAMETER_DEC
-DEF
-}
-# hierarchies {
-cordic:rx_cordic
 }
 # end
 # entity
@@ -6707,6 +6099,10 @@ CIC_R256_M1_N5.v
 AUTO_RESOURCE_SHARING
 OFF
 }
+# hierarchies {
+CIC_R256_M1_N5:I_CIC
+CIC_R256_M1_N5:Q_CIC
+}
 # end
 # entity
 CIC_R64_M1_N4
@@ -6726,9 +6122,1728 @@ b4e18bfcdeb9059aafe1bdab73c6f9e
 AUTO_RESOURCE_SHARING
 OFF
 }
+# end
+# entity
+cordic_17
+# storage
+db|ozy_eval.(46).cnf
+db|ozy_eval.(46).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_17.v
+78c53d1cf101f87662d0797b2628f8
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+altshift_taps
+# storage
+db|ozy_eval.(47).cnf
+db|ozy_eval.(47).cnf
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altshift_taps.tdf
+42c98c16735ededc8911e861e8589ef
+6
+# user_parameter {
+NUMBER_OF_TAPS
+1
+PARAMETER_UNKNOWN
+USR
+TAP_DISTANCE
+3
+PARAMETER_UNKNOWN
+USR
+WIDTH
+21
+PARAMETER_UNKNOWN
+USR
+POWER_UP_STATE
+CLEARED
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+shift_taps_m1m
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps20
+-1
+3
+taps2
+-1
+3
+taps19
+-1
+3
+taps18
+-1
+3
+taps17
+-1
+3
+taps16
+-1
+3
+taps15
+-1
+3
+taps14
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin20
+-1
+3
+shiftin2
+-1
+3
+shiftin19
+-1
+3
+shiftin18
+-1
+3
+shiftin17
+-1
+3
+shiftin16
+-1
+3
+shiftin15
+-1
+3
+shiftin14
+-1
+3
+shiftin13
+-1
+3
+shiftin12
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# include_file {
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_constant.inc
+dcde44eee59335c1e2fe75d574f9646
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
+758886b0947dd67e65ec58adda9b948
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altdpram.inc
+4e1931f9814db9f22f22b9eb377c65d6
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+}
+# end
+# entity
+shift_taps_m1m
+# storage
+db|ozy_eval.(48).cnf
+db|ozy_eval.(48).cnf
+# case_insensitive
+# source_file
+db|shift_taps_m1m.tdf
+811c229a2f6162b6c131953a32c53eb
+6
+# used_port {
+taps9
+-1
+3
+taps8
+-1
+3
+taps7
+-1
+3
+taps6
+-1
+3
+taps5
+-1
+3
+taps4
+-1
+3
+taps3
+-1
+3
+taps20
+-1
+3
+taps2
+-1
+3
+taps19
+-1
+3
+taps18
+-1
+3
+taps17
+-1
+3
+taps16
+-1
+3
+taps15
+-1
+3
+taps14
+-1
+3
+taps13
+-1
+3
+taps12
+-1
+3
+taps11
+-1
+3
+taps10
+-1
+3
+taps1
+-1
+3
+taps0
+-1
+3
+shiftin9
+-1
+3
+shiftin8
+-1
+3
+shiftin7
+-1
+3
+shiftin6
+-1
+3
+shiftin5
+-1
+3
+shiftin4
+-1
+3
+shiftin3
+-1
+3
+shiftin20
+-1
+3
+shiftin2
+-1
+3
+shiftin19
+-1
+3
+shiftin18
+-1
+3
+shiftin17
+-1
+3
+shiftin16
+-1
+3
+shiftin15
+-1
+3
+shiftin14
+-1
+3
+shiftin13
+-1
+3
+shiftin12
+-1
+3
+shiftin11
+-1
+3
+shiftin10
+-1
+3
+shiftin1
+-1
+3
+shiftin0
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+altsyncram_9g31
+# storage
+db|ozy_eval.(49).cnf
+db|ozy_eval.(49).cnf
+# case_insensitive
+# source_file
+db|altsyncram_9g31.tdf
+5c33a0fe7c73737f44fe49c2654c2f42
+6
+# user_parameter {
+PORT_A_ADDRESS_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_A_BYTE_ENABLE_MASK_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_A_DATA_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_B_ADDRESS_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_B_BYTE_ENABLE_MASK_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_B_DATA_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+}
+# used_port {
+q_b9
+-1
+3
+q_b8
+-1
+3
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b20
+-1
+3
+q_b2
+-1
+3
+q_b19
+-1
+3
+q_b18
+-1
+3
+q_b17
+-1
+3
+q_b16
+-1
+3
+q_b15
+-1
+3
+q_b14
+-1
+3
+q_b13
+-1
+3
+q_b12
+-1
+3
+q_b11
+-1
+3
+q_b10
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a9
+-1
+3
+data_a8
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a20
+-1
+3
+data_a2
+-1
+3
+data_a19
+-1
+3
+data_a18
+-1
+3
+data_a17
+-1
+3
+data_a16
+-1
+3
+data_a15
+-1
+3
+data_a14
+-1
+3
+data_a13
+-1
+3
+data_a12
+-1
+3
+data_a11
+-1
+3
+data_a10
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clock1
+-1
+3
+clock0
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+wren_a
+-1
+2
+clocken1
+-1
+2
+clocken0
+-1
+2
+}
+# memory_file {
+none
+0
+}
+# end
+# entity
+add_sub_gvd
+# storage
+db|ozy_eval.(50).cnf
+db|ozy_eval.(50).cnf
+# case_insensitive
+# source_file
+db|add_sub_gvd.tdf
+a1fa149a608b8963b16d6d262e04545
+6
+# used_port {
+result1
+-1
+3
+result0
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+datab1
+-1
+1
+datab0
+-1
+1
+}
+# end
+# entity
+cntr_imc
+# storage
+db|ozy_eval.(51).cnf
+db|ozy_eval.(51).cnf
+# case_insensitive
+# source_file
+db|cntr_imc.tdf
+eac498a9dc2cba356ab27a55a7dc50b4
+6
+# used_port {
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+2
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(3).cnf
+db|ozy_eval.(3).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+0
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(4).cnf
+db|ozy_eval.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+1
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(5).cnf
+db|ozy_eval.(5).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+2
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(6).cnf
+db|ozy_eval.(6).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+3
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(7).cnf
+db|ozy_eval.(7).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+4
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(8).cnf
+db|ozy_eval.(8).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+5
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(9).cnf
+db|ozy_eval.(9).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+6
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(10).cnf
+db|ozy_eval.(10).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+7
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(11).cnf
+db|ozy_eval.(11).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+8
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(12).cnf
+db|ozy_eval.(12).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+9
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(13).cnf
+db|ozy_eval.(13).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+10
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(14).cnf
+db|ozy_eval.(14).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+11
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(15).cnf
+db|ozy_eval.(15).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+12
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(16).cnf
+db|ozy_eval.(16).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+13
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(17).cnf
+db|ozy_eval.(17).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+14
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(18).cnf
+db|ozy_eval.(18).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+15
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic
+# storage
+db|ozy_eval.(2).cnf
+db|ozy_eval.(2).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic.v
+65ccea2f657ea56687a9a4ff8fdb644b
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+16
+PARAMETER_DEC
+DEF
+PHASE_WIDTH
+16
+PARAMETER_DEC
+DEF
+}
 # hierarchies {
-CIC_R64_M1_N4:I_CIC
-CIC_R64_M1_N4:Q_CIC
+cordic:rx_cordic
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(52).cnf
+db|ozy_eval.(52).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+0
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage0
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(53).cnf
+db|ozy_eval.(53).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+1
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage1
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(54).cnf
+db|ozy_eval.(54).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+2
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage2
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(55).cnf
+db|ozy_eval.(55).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+3
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage3
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(56).cnf
+db|ozy_eval.(56).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+4
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage4
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(57).cnf
+db|ozy_eval.(57).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+5
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage5
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(58).cnf
+db|ozy_eval.(58).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+6
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage6
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(59).cnf
+db|ozy_eval.(59).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+7
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage7
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(60).cnf
+db|ozy_eval.(60).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+8
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage8
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(61).cnf
+db|ozy_eval.(61).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+9
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage9
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(62).cnf
+db|ozy_eval.(62).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+10
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage10
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(63).cnf
+db|ozy_eval.(63).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+11
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage11
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(64).cnf
+db|ozy_eval.(64).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+12
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage12
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(65).cnf
+db|ozy_eval.(65).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+13
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage13
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(66).cnf
+db|ozy_eval.(66).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+14
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage14
+}
+# end
+# entity
+cordic_stage
+# storage
+db|ozy_eval.(67).cnf
+db|ozy_eval.(67).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+5bad6ca8ed10a2172d15c171ebad1362
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+18
+PARAMETER_DEC
+USR
+PHASE_WIDTH
+15
+PARAMETER_DEC
+USR
+SHIFT
+15
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage15
 }
 # end
 # entity
@@ -6743,7 +7858,7 @@ ON
 # case_sensitive
 # source_file
 ozy_nco.v
-ba2e9a39817ecb9d5288bd2044d3830
+7e5ea8af50e4ac25b930931be76d3e0
 7
 # internal_option {
 AUTO_RESOURCE_SHARING
