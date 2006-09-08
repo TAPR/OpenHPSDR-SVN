@@ -92,6 +92,7 @@ set_location_assignment PIN_45 -to CS
 set_location_assignment PIN_15 -to SCK
 set_location_assignment PIN_14 -to SI
 set_location_assignment PIN_12 -to SO
+set_global_assignment -name VERILOG_FILE cordic_17.v
 set_global_assignment -name VERILOG_FILE CIC_R64_M1_N4.v
 set_global_assignment -name VERILOG_FILE CIC_R256_M1_N5.v
 set_global_assignment -name VERILOG_FILE CIC_R100_M1_N10.v

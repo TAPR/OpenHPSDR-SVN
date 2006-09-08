@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Thu Sep 07 17:58:58 2006) contains limited information
+This XML file (created on Fri Sep 08 16:54:50 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to license.txt.
 	<module>quartus_map</module>
 	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Thu Sep 07 17:58:59 2006</compilation_end_time>
+	<compilation_end_time>Fri Sep 08 16:54:51 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to license.txt.
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_eval</project>
 <revision>ozy_eval</revision>
 <compilation_summary>
-	<flow_status>Successful - Thu Sep 07 17:58:58 2006</flow_status>
+	<flow_status>Successful - Fri Sep 08 16:54:50 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>ozy_eval</revision_name>
 	<top_level_entity_name>ozy_nco</top_level_entity_name>
@@ -45,8 +45,8 @@ to license.txt.
 	<device>EP2C5Q208C7</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>N/A</met_timing_requirements>
-	<total_logic_elements>1764</total_logic_elements>
-	<total_registers>1646</total_registers>
+	<total_logic_elements>1838</total_logic_elements>
+	<total_registers>1794</total_registers>
 	<total_pins>55</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
 	<total_memory_bits>16,384</total_memory_bits>
@@ -83,10 +83,10 @@ to license.txt.
 	<warning>Warning: Pin &quot;FIFO_ADR[1]&quot; stuck at VCC</warning>
 	<warning>Warning: Pin &quot;FIFO_ADR[0]&quot; stuck at GND</warning>
 	<warning>Warning: Pin &quot;SLOE&quot; stuck at VCC</warning>
-	<info>Info: Quartus II Analysis &amp; Synthesis was successful. 0 errors, 31 warnings</info>
-	<info>Info: Elapsed time: 00:00:27</info>
-	<info>Info: Processing ended: Thu Sep 07 17:58:58 2006</info>
-	<info>Info: Implemented 2226 device resources after synthesis - the final resource count might be different</info>
+	<info>Info: Quartus II Analysis &amp; Synthesis was successful. 0 errors, 47 warnings</info>
+	<info>Info: Elapsed time: 00:00:25</info>
+	<info>Info: Processing ended: Fri Sep 08 16:54:50 2006</info>
+	<info>Info: Implemented 2347 device resources after synthesis - the final resource count might be different</info>
 	<info>Info: Implemented 32 RAM segments</info>
 </messages>
 <analysis___synthesis_settings>
@@ -353,19 +353,19 @@ to license.txt.
 <general_register_statistics>
 	<row>
 		<statistic>Total registers</statistic>
-		<value>1646</value>
+		<value>1794</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Synchronous Clear</statistic>
-		<value>568</value>
+		<value>592</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Synchronous Load</statistic>
-		<value>27</value>
+		<value>1</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Asynchronous Clear</statistic>
-		<value>789</value>
+		<value>1028</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Asynchronous Load</statistic>
@@ -373,7 +373,7 @@ to license.txt.
 	</row>
 	<row>
 		<statistic>Number of registers using Clock Enable</statistic>
-		<value>421</value>
+		<value>512</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Preset</statistic>

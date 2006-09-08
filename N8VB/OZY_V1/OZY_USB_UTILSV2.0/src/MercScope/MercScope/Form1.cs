@@ -25,7 +25,7 @@ namespace MercScope
         int[] qvalbuf = new int[qsize];
         IntPtr hdev = IntPtr.Zero;
         bool adcon = false;
-        PowerSpectrum ps = new PowerSpectrum(isize, WindowType.HAMMING_WINDOW);
+        PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.HAMMING_WINDOW);
         IQCorrection iqcor = new IQCorrection(512);
 
         public Form1()
@@ -53,8 +53,8 @@ namespace MercScope
             timer1.Enabled = true;
             hScrollBar2.Maximum = (int)(Int32.MaxValue - 1);
             hScrollBar2.Minimum = 0;
-            hScrollBar2.SmallChange = (int)Int32.MaxValue / 10000000;
-            hScrollBar2.LargeChange = (int)Int32.MaxValue / 100000;            
+            hScrollBar2.SmallChange = (int)Int32.MaxValue / 100000;
+            hScrollBar2.LargeChange = (int)Int32.MaxValue / 10000;            
         }
 
         private void DrawGrid(Graphics g)
@@ -190,15 +190,24 @@ namespace MercScope
             DataConvert.IntToDouble(ivalbuf, (int)Math.Pow(2,15), ref d_i);
             DataConvert.IntToDouble(qvalbuf, (int)Math.Pow(2, 15), ref d_q);
 
-            Gains gain;
-            gain.IQGainValue = (double)hscrollGain.Value/10;
-            gain.IQPhaseValue = (double)hscrollPhase.Value/10;
+            //Gains gain;
+            //gain.IQGainValue = (double)hscrollGain.Value / 10;
+            //gain.IQPhaseValue = (double)hscrollPhase.Value / 10;
 
-            iqcor.DoIQCorrection(ref d_i, ref d_q, gain);
+            //iqcor.DoIQCorrection(ref d_i, ref d_q, gain);
 
-            double[] ps_result = new double[ivalbuf.Length];
+            double[] d_i_b = new double[ivalbuf.Length * 2];
+            double[] d_q_b = new double[qvalbuf.Length * 2];
 
-            ps.PowerSpectrumSignal(ref d_i, ref d_q, ref ps_result);
+            for (int i = 0; i < ivalbuf.Length; i++)
+            {
+                d_i_b[i] = d_i[i];
+                d_q_b[i] = d_q[i];
+            }
+
+            double[] ps_result = new double[d_i_b.Length];
+
+            ps.PowerSpectrumSignal(ref d_i_b, ref d_q_b, ref ps_result);
 
             double PSminval = 0;
             foreach (double val in ps_result)
@@ -209,7 +218,7 @@ namespace MercScope
 
             txtPSMin.Text = PSminval.ToString("E");
 
-            double PSmaxval = -1e200;
+            double PSmaxval = double.MinValue;
             foreach (double val in ps_result)
             {
                 if (val > PSmaxval)
@@ -231,7 +240,7 @@ namespace MercScope
 
             txtPMin.Text = Pminval.ToString();
 
-            int Pmaxval = 0;
+            int Pmaxval = int.MinValue;
             foreach (int val in ps_result_int)
             {
                 if (val > Pmaxval)
@@ -249,7 +258,7 @@ namespace MercScope
             {
                 int nI = ivalbuf[xpos];
                 int nQ = qvalbuf[xpos];
-                int nPS = ps_result_int[xpos];
+                int nPS = ps_result_int[xpos * 2];
                 
                 int yintI = (int)(ymax+yposI) / 2 + (int)(nI >> yscale);
                 int yintQ = (int)(ymax+yposQ) / 2 + (int)(nQ >> yscale);

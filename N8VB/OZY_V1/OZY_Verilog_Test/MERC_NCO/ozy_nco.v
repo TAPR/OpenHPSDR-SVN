@@ -157,29 +157,49 @@ module ozy_nco(	ENC_CLK,
 				.loadseed_i(~clk_enable),
 				.seed_i(32'hF0FF0FFF),
 				.number_o(rand_num));		
-					
+	
+	/*				
 	phase_accumulator rx_phase_accumulator(	.clk(ENC_CLK),
 											.reset(~clk_enable),
 											.frequency(freqset_register),
 											.random_in({20'h0,rand_num[11:0]}),
 											.phase_out(phase));
+	*/
 	
+	phase_accumulator rx_phase_accumulator(	.clk(ENC_CLK),
+											.reset(~clk_enable),
+											.frequency(freqset_register),
+											.random_in(32'h0),
+											.phase_out(phase));
+											
 	
 	cordic rx_cordic(	.clk(ENC_CLK),
 						.reset(~clk_enable),
-						.Iin(ADC),
-						.Qin(ADC),
+						.Iin(ADC[15:0]),
+						.Qin(16'h0),
 						.PHin(phase[31:16]),
 						.Iout(i_out),
 						.Qout(q_out),
 						.PHout());
+	
+	
+	
+	/*
+	cordic_17 rx_cordic(	.in(ADC),
+							.iout(i_out),
+							.qout(q_out),
+							.ain(phase[31:16]),
+							.clk(ENC_CLK));
+	
+	*/
 	
 	wire [15:0] i_dec;
 	wire [15:0] q_dec;
 	wire i_strobe;
 	wire q_strobe;
 	
-	CIC_R64_M1_N4 I_CIC(	.clk(ENC_CLK),
+	
+	CIC_R256_M1_N5 I_CIC(	.clk(ENC_CLK),
 			                .clk_enable(clk_enable),
 			                .reset(~clk_enable),
 			                .filter_in(i_out),
@@ -187,7 +207,7 @@ module ozy_nco(	ENC_CLK,
 			                .ce_out(i_strobe)
 			                );
 
-	CIC_R64_M1_N4 Q_CIC(	.clk(ENC_CLK),
+	CIC_R256_M1_N5 Q_CIC(	.clk(ENC_CLK),
 			                .clk_enable(clk_enable),
 			                .reset(~clk_enable),
 			                .filter_in(q_out),
@@ -209,6 +229,23 @@ module ozy_nco(	ENC_CLK,
 			.wrfull(qwritefifofull),	.rdfull(), 
 			.q(QWORD), .wrusedw(), .rdusedw());
 	
+	
+	/*
+	// I FIFO		
+	tx_fifo tx_fifo_i(.aclr(txfifoclr), .wrclk(ENC_CLK), 
+			.rdreq(WRITE_FX2FIFO & (fx2st == 4'd2)), .rdclk(IFCLK), .wrreq(adc_go),
+			.data(i_out), .rdempty(ireadfifoempty), .wrempty(), 
+			.wrfull(iwritefifofull),	.rdfull(), 
+			.q(IWORD), .wrusedw(), .rdusedw());
+	
+	// Q FIFO		
+	tx_fifo tx_fifo_q(.aclr(txfifoclr), .wrclk(ENC_CLK), 
+			.rdreq(WRITE_FX2FIFO & (fx2st == 4'd3)), .rdclk(IFCLK), .wrreq(adc_go),
+			.data(q_out), .rdempty(qreadfifoempty), .wrempty(), 
+			.wrfull(qwritefifofull),	.rdfull(), 
+			.q(QWORD), .wrusedw(), .rdusedw());
+	
+	*/
 	
 	// Write to EP6
 				
@@ -248,7 +285,7 @@ module ozy_nco(	ENC_CLK,
 		4'd2: begin
 			if (usb_write) begin
 					WRITE_FX2FIFO <= 1'b1;
-					FD <= IWORD;
+					FD <= QWORD; // changed order 9/8/2006 was IWORD
 					fx2st <= 4'd3;
 				end
 			else begin
@@ -256,8 +293,7 @@ module ozy_nco(	ENC_CLK,
 				end
 			end
 		4'd3: begin
-				WRITE_FX2FIFO <= 1'b1;
-				FD <= QWORD;
+				FD <= IWORD; // changed order 9/8/2006
 				fx2st <= 4'd2;
 				end
 		default: begin
