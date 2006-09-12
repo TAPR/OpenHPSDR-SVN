@@ -1,0 +1,45 @@
+Quartus II Archive log --	C:/FPGA/SDRUSB Files/Janus/Janus_v1.qarlog
+
+Archive:	C:/FPGA/SDRUSB Files/Janus/Janus_v1.qar
+Date:		Sat Aug 19 17:14:01 2006
+Quartus II		6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
+
+	=========== Files Selected: ===========
+C:/FPGA/SDRUSB Files/Janus/12 Aug Janus.v
+C:/FPGA/SDRUSB Files/Janus/13 Aug Janus.v
+C:/FPGA/SDRUSB Files/Janus/19 Aug Janus.v
+C:/FPGA/SDRUSB Files/Janus/24mhz-input.vwf
+C:/FPGA/SDRUSB Files/Janus/Duplex.v
+C:/FPGA/SDRUSB Files/Janus/Janus.asm.rpt
+C:/FPGA/SDRUSB Files/Janus/Janus.cdf
+C:/FPGA/SDRUSB Files/Janus/Janus.done
+C:/FPGA/SDRUSB Files/Janus/Janus.dpf
+C:/FPGA/SDRUSB Files/Janus/Janus.fit.eqn
+C:/FPGA/SDRUSB Files/Janus/Janus.fit.rpt
+C:/FPGA/SDRUSB Files/Janus/Janus.fit.summary
+C:/FPGA/SDRUSB Files/Janus/Janus.flow.rpt
+C:/FPGA/SDRUSB Files/Janus/Janus.map.eqn
+C:/FPGA/SDRUSB Files/Janus/Janus.map.rpt
+C:/FPGA/SDRUSB Files/Janus/Janus.map.summary
+C:/FPGA/SDRUSB Files/Janus/Janus.pin
+C:/FPGA/SDRUSB Files/Janus/Janus.pof
+C:/FPGA/SDRUSB Files/Janus/Janus.qarlog
+C:/FPGA/SDRUSB Files/Janus/Janus.qsf
+C:/FPGA/SDRUSB Files/Janus/Janus.qws
+C:/FPGA/SDRUSB Files/Janus/Janus.sim.rpt
+C:/FPGA/SDRUSB Files/Janus/Janus.tan.rpt
+C:/FPGA/SDRUSB Files/Janus/Janus.tan.summary
+C:/FPGA/SDRUSB Files/Janus/Janus.v
+C:/FPGA/SDRUSB Files/Janus/Janus_assignment_defaults.qdf
+C:/FPGA/SDRUSB Files/Janus/Janus_v1.qarlog
+C:/FPGA/SDRUSB Files/Janus/db/Janus.cbx.xml
+C:/FPGA/SDRUSB Files/Janus/db/Janus.qpf
+c:/altera/quartus60/win/assignment_defaults.qdf
+	======= Total: 30 files to archive =======
+
+
+
+******* Archived project restoration attempt on Mon Aug 21 18:34:05 2006
+Source archive file:	E:/scratch/Janus_v1.qar
+Archive was extracted into	E:/wjt/radio/projects/Ozy/FPGA/JanusCPLD
+		 - successfully.
