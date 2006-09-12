@@ -1,0 +1,11 @@
+bin\Release\DDSTuneTest.exe
+bin\Release\DDSTuneTest.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\DDSTuneTest.exe
+obj\Release\DDSTuneTest.pdb
+bin\Debug\DDSTuneTest.exe
+bin\Debug\DDSTuneTest.pdb
+bin\Debug\HPSDR_USB_LIB_V1.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\DDSTuneTest.exe
+obj\Debug\DDSTuneTest.pdb
