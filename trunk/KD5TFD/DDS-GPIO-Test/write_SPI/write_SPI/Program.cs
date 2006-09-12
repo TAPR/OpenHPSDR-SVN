@@ -65,19 +65,8 @@ namespace DDSTuneTest
 
         // latch data into one of the PIO registers. 
         // addr needs to be on of the PIO_xxx constants 
-        // returns true on success, false on failure 
+        // returns true on success, false on failure         
         private bool LatchRegister(byte addr, byte data)
-        {
-            bool rc; 
-            rc = zLatchRegister(addr, data); 
-            Thread.Sleep(10); 
-            return rc; 
-        }
-
-
-
-
-        private bool zLatchRegister(byte addr, byte data)
         {
             bool rc; 
             byte[] buf = new byte[1]; 
@@ -233,6 +222,9 @@ namespace DDSTuneTest
             while ( true ) { 
 
 #if false 
+                // this blob of code alternates all 0's, 1's, 10101..., 0101... to 
+                // IC1 on the PIO board -- can be viewed at JP2 of the PIO board 
+                // 
                 Console.WriteLine("Latching all 0's"); 
                 LatchRegister(PIO_IC1, 0); 
                 Thread.Sleep(10000); 
