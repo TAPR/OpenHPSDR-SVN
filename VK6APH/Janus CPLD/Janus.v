@@ -42,6 +42,7 @@
 //  13 August 2006 - AK5394A now reset at power on and speed setting via Ozy
 //  14 August 2006 - inverted PTT pass to Atlas C3
 //  19 August 2006 - Interface to Atlas pins changed - V1.0
+//  21 August 2006 - Change to use I2C interface to TLV320AIC23B  -- spi code commented out w/ '//i2c' comments  (kd5tfd) 
 //
 //
 //  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
@@ -76,8 +77,8 @@ module Janus(
   	input  SDOUT,
    	output SMODE1,
    	output SMODE2,
-   	output SSCK,
-   	output MOSI,
+   	input  SSCK,  // was output for spi interface 
+   	input  MOSI,  // was output for spi interface 
    	output ZCAL,
    	input  C2,
 	input  C3,
@@ -104,7 +105,7 @@ reg [15:0] TLV_data;
 reg TLV_CLK;
 reg data; 
 reg [3:0] bit_count;
-reg TLV_nCS;
+//i2c reg TLV_nCS;
 
 
 
@@ -134,66 +135,66 @@ always @ ( posedge  CLK_24MHZ) begin
 
 // Set up TLV320 data to send 
 
-always @ (posedge index)		// why can't this just be 'always @(index)' ?? 
-begin
-load <= load + 3'b1;			// select next data word to send
-case (load)
-3'd0: tdata <= 16'h1E00;		// data to load into TLV320
-3'd1: tdata <= 16'h1201;
-3'd2: tdata <= 16'h0815;
-3'd3: tdata <= 16'h0C00;
-3'd4: tdata <= 16'h0E02;
-3'd5: tdata <= 16'h1000;
-3'd6: tdata <= 16'h0A00;
-default: load <= 0;
-endcase
-end
+//i2c always @ (posedge index)		// why can't this just be 'always @(index)' ?? 
+//i2c begin
+//i2c load <= load + 3'b1;			// select next data word to send
+//i2c case (load)
+//i2c 3'd0: tdata <= 16'h1E00;		// data to load into TLV320
+//i2c 3'd1: tdata <= 16'h1201;
+//i2c 3'd2: tdata <= 16'h0815;
+//i2c 3'd3: tdata <= 16'h0C00;
+//i2c 3'd4: tdata <= 16'h0E02;
+//i2c 3'd5: tdata <= 16'h1000;
+//i2c 3'd6: tdata <= 16'h0A00;
+//i2c default: load <= 0;
+//i2c endcase
+//i2c end
 
 // State machine to send data to TLV320 via SPI interface
 
-always @ (posedge CLK_24MHZ)
-begin
-case (TLV)
-4'd0: begin
-	TLV_nCS <= 1'b1;				// set TLV320 CS high
-	bit_count <= 4'd15;				// set starting bit count to 15
-	index <= ~index;				// load next data to send	
-	TLV <= TLV + 4'b1;
-   end
-4'd1: begin
-	TLV_nCS <= 1'b0; 				// start data transfer with nCS low
-	TLV_data <= tdata;
-	data <= TLV_data[bit_count];	// set data up 
-	TLV <= TLV + 4'b1;
-	end
-4'd2: begin
-	TLV_CLK <= 1'b1; 				// clock data into TLV320
-	TLV <= TLV + 4'b1;	
-	end
-4'd3: begin
-	TLV_CLK <= 1'b0; 				// reset clock  
-	TLV <= TLV + 4'b1;	
-	end
-4'd4: begin
-		if(bit_count == 0) begin	// word transfer is complete, check for any more
-			index <= ~index;
-			TLV <= 4'd5; 
-		end
-		else begin
-			bit_count <= bit_count - 1'b1;
-			TLV <= 4'b1; 			// go round again 				
-		end
-	end								// end transfer
-4'd5: begin
-		if (load == 7)begin				// stop when all data sent 
-			TLV <= 4'd5;				// hang out here forever 
-			TLV_nCS <= 1'b1; 			// set CS high
-		end 
-		else TLV <= 0; 					// else get next data 
-	end
-default: TLV <= 0;
-endcase
-end 
+//i2c always @ (posedge CLK_24MHZ)
+//i2c begin
+//i2c case (TLV)
+//i2c 4'd0: begin
+//i2c         TLV_nCS <= 1'b1;                                // set TLV320 CS high
+//i2c         bit_count <= 4'd15;                             // set starting bit count to 15
+//i2c         index <= ~index;                                // load next data to send
+//i2c         TLV <= TLV + 4'b1;
+//i2c    end
+//i2c 4'd1: begin
+//i2c         TLV_nCS <= 1'b0;                                // start data transfer with nCS low
+//i2c         TLV_data <= tdata;
+//i2c         data <= TLV_data[bit_count];    // set data up
+//i2c         TLV <= TLV + 4'b1;
+//i2c         end
+//i2c 4'd2: begin
+//i2c         TLV_CLK <= 1'b1;                                // clock data into TLV320
+//i2c         TLV <= TLV + 4'b1;
+//i2c         end
+//i2c 4'd3: begin
+//i2c         TLV_CLK <= 1'b0;                                // reset clock
+//i2c         TLV <= TLV + 4'b1;
+//i2c         end
+//i2c 4'd4: begin
+//i2c                 if(bit_count == 0) begin        // word transfer is complete, check for any more
+//i2c                         index <= ~index;
+//i2c                         TLV <= 4'd5;
+//i2c                 end
+//i2c                 else begin
+//i2c                         bit_count <= bit_count - 1'b1;
+//i2c                         TLV <= 4'b1;                    // go round again
+//i2c                 end
+//i2c         end                                                             // end transfer
+//i2c 4'd5: begin
+//i2c                 if (load == 7)begin                             // stop when all data sent
+//i2c                         TLV <= 4'd5;                            // hang out here forever
+//i2c                         TLV_nCS <= 1'b1;                        // set CS high
+//i2c                 end
+//i2c                 else TLV <= 0;                                  // else get next data
+//i2c         end
+//i2c default: TLV <= 0;
+//i2c endcase
+//i2c end
 
 // Atlas outputs
 assign C5 = CLK_24MHZ;		
@@ -223,10 +224,12 @@ assign ZCAL = 1'b1;			// Calibrate AK from A/D inputs
 
 // LTV320 pins
 assign CMCLK = clock_by_2; 	// 24.576MHz/2
-assign CMODE = 1'b1;		// Set to 1 for SPI mode 
-assign nCS = TLV_nCS;
-assign SSCK = TLV_CLK;		// SPI clock on TLV320
-assign MOSI = data; 		// SPI data to send to TLV320 
+//i2c assign CMODE = 1'b1;		// Set to 1 for SPI mode 
+assign CMODE = 1'b0;		// Set to 0 for I2C
+//i2c assign nCS = TLV_nCS;
+assign nCS = 1'b0;   // this results in an i2c addr of 0x1a 
+//i2c assign SSCK = TLV_CLK;		// SPI clock on TLV320
+//i2c assign MOSI = data; 		    // SPI data to send to TLV320 
 
 // EXTRA pins
 assign EXP1 = 1'b0;			
@@ -235,5 +238,3 @@ assign EXP3 = 1'b0;
 assign EXP4 = 1'b0;
 
 endmodule 
-
-
