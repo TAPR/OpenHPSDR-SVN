@@ -16,3150 +16,115 @@ VHSM_ON
 -- Start Partition --
 -- End Partition --
 -- Start Library Paths --
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|
 -- End Library Paths --
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
 # entity
-dcfifo
+SPI_REGS
 # storage
-db|ozy_eval.(20).cnf
-db|ozy_eval.(20).cnf
-# case_insensitive
-# source_file
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|dcfifo.tdf
-f52f61d654507d26e32b8ae857d410
-6
-# user_parameter {
-AUTO_CARRY_CHAINS
-ON
-AUTO_CARRY
-USR
-IGNORE_CARRY_BUFFERS
-OFF
-IGNORE_CARRY
-USR
-AUTO_CASCADE_CHAINS
-ON
-AUTO_CASCADE
-USR
-IGNORE_CASCADE_BUFFERS
-OFF
-IGNORE_CASCADE
-USR
-LPM_WIDTH
-16
-PARAMETER_DEC
-USR
-LPM_NUMWORDS
-1024
-PARAMETER_DEC
-USR
-LPM_WIDTHU
-10
-PARAMETER_DEC
-USR
-LPM_SHOWAHEAD
-OFF
-PARAMETER_UNKNOWN
-USR
-UNDERFLOW_CHECKING
-ON
-PARAMETER_UNKNOWN
-USR
-OVERFLOW_CHECKING
-ON
-PARAMETER_UNKNOWN
-USR
-USE_EAB
-ON
-PARAMETER_UNKNOWN
-USR
-ADD_RAM_OUTPUT_REGISTER
-OFF
-PARAMETER_UNKNOWN
-DEF
-DELAY_RDUSEDW
-1
-PARAMETER_UNKNOWN
-DEF
-DELAY_WRUSEDW
-1
-PARAMETER_UNKNOWN
-DEF
-RDSYNC_DELAYPIPE
-4
-PARAMETER_DEC
-USR
-WRSYNC_DELAYPIPE
-4
-PARAMETER_DEC
-USR
-CLOCKS_ARE_SYNCHRONIZED
-FALSE
-PARAMETER_UNKNOWN
-DEF
-DEVICE_FAMILY
-Cyclone II
-PARAMETER_UNKNOWN
-USR
-CBXI_PARAMETER
-dcfifo_efb1
-PARAMETER_UNKNOWN
-USR
-}
-# used_port {
-wrusedw
--1
-3
-wrreq
--1
-3
-wrfull
--1
-3
-wrempty
--1
-3
-wrclk
--1
-3
-rdusedw
--1
-3
-rdreq
--1
-3
-rdfull
--1
-3
-rdempty
--1
-3
-rdclk
--1
-3
-q
--1
-3
-data
--1
-3
-aclr
--1
-3
-}
-# include_file {
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
-758886b0947dd67e65ec58adda9b948
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
-7d9a33dd39f13aa690c3d0edd88351
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altdpram.inc
-4e1931f9814db9f22f22b9eb377c65d6
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|a_graycounter.inc
-6bb463da5ec6451f39fdb64aba52ffc0
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|a_fefifo.inc
-c8498561e0bdc47f87b5548333d65f50
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|a_gray2bin.inc
-2466d892d81838e113e13f4e76e71f2
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|dffpipe.inc
-8dfdb676c11c7bcef0694118a05ea2d
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_sync_fifo.inc
-f4c68b9daca4a0e5389631895df30d0
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
-aec4ea1b78f4cda1c3effe18f1abbf63
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altsyncram_fifo.inc
-12f7d8c61da985ee5330de43a169e
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
-b3d07c643dae10ab2b3e646e99ec45fc
-}
-# end
-# entity
-dcfifo_efb1
-# storage
-db|ozy_eval.(21).cnf
-db|ozy_eval.(21).cnf
-# case_insensitive
-# source_file
-db|dcfifo_efb1.tdf
-d1c19af521729946f2e795b9cae988f
-6
-# used_port {
-wrusedw9
--1
-3
-wrusedw8
--1
-3
-wrusedw7
--1
-3
-wrusedw6
--1
-3
-wrusedw5
--1
-3
-wrusedw4
--1
-3
-wrusedw3
--1
-3
-wrusedw2
--1
-3
-wrusedw1
--1
-3
-wrusedw0
--1
-3
-wrreq
--1
-3
-wrfull
--1
-3
-wrempty
--1
-3
-wrclk
--1
-3
-rdusedw9
--1
-3
-rdusedw8
--1
-3
-rdusedw7
--1
-3
-rdusedw6
--1
-3
-rdusedw5
--1
-3
-rdusedw4
--1
-3
-rdusedw3
--1
-3
-rdusedw2
--1
-3
-rdusedw1
--1
-3
-rdusedw0
--1
-3
-rdreq
--1
-3
-rdfull
--1
-3
-rdempty
--1
-3
-rdclk
--1
-3
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q15
--1
-3
-q14
--1
-3
-q13
--1
-3
-q12
--1
-3
-q11
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-data9
--1
-3
-data8
--1
-3
-data7
--1
-3
-data6
--1
-3
-data5
--1
-3
-data4
--1
-3
-data3
--1
-3
-data2
--1
-3
-data15
--1
-3
-data14
--1
-3
-data13
--1
-3
-data12
--1
-3
-data11
--1
-3
-data10
--1
-3
-data1
--1
-3
-data0
--1
-3
-aclr
--1
-3
-}
-# end
-# entity
-a_gray2bin_ldb
-# storage
-db|ozy_eval.(22).cnf
-db|ozy_eval.(22).cnf
-# case_insensitive
-# source_file
-db|a_gray2bin_ldb.tdf
-77a423bd43c343cc28a6738a1fe28b7
-6
-# used_port {
-gray9
--1
-3
-gray8
--1
-3
-gray7
--1
-3
-gray6
--1
-3
-gray5
--1
-3
-gray4
--1
-3
-gray3
--1
-3
-gray2
--1
-3
-gray10
--1
-3
-gray1
--1
-3
-gray0
--1
-3
-bin9
--1
-3
-bin8
--1
-3
-bin7
--1
-3
-bin6
--1
-3
-bin5
--1
-3
-bin4
--1
-3
-bin3
--1
-3
-bin2
--1
-3
-bin10
--1
-3
-bin1
--1
-3
-bin0
--1
-3
-}
-# end
-# entity
-a_graycounter_p96
-# storage
-db|ozy_eval.(23).cnf
-db|ozy_eval.(23).cnf
-# case_insensitive
-# source_file
-db|a_graycounter_p96.tdf
-4a4f26b39feb7b8f705d7dd568dc476b
-6
-# used_port {
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-cnt_en
--1
-3
-clock
--1
-3
-aclr
--1
-3
-}
-# end
-# entity
-a_graycounter_k27
-# storage
-db|ozy_eval.(24).cnf
-db|ozy_eval.(24).cnf
-# case_insensitive
-# source_file
-db|a_graycounter_k27.tdf
-3e1192942b7f70e45bbbfee596591fc
-6
-# used_port {
-cnt_en
--1
-3
-clock
--1
-3
-aclr
--1
-3
-}
-# end
-# entity
-a_graycounter_j27
-# storage
-db|ozy_eval.(25).cnf
-db|ozy_eval.(25).cnf
-# case_insensitive
-# source_file
-db|a_graycounter_j27.tdf
-8db71ade95b6da8a44ccb6d3b3b999b
-6
-# used_port {
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-cnt_en
--1
-3
-clock
--1
-3
-aclr
--1
-3
-}
-# end
-# entity
-altsyncram_rd11
-# storage
-db|ozy_eval.(26).cnf
-db|ozy_eval.(26).cnf
-# case_insensitive
-# source_file
-db|altsyncram_rd11.tdf
-e89e3aa2941c74dae12474d1601eb2
-6
-# used_port {
-wren_a
--1
-3
-q_b9
--1
-3
-q_b8
--1
-3
-q_b7
--1
-3
-q_b6
--1
-3
-q_b5
--1
-3
-q_b4
--1
-3
-q_b3
--1
-3
-q_b2
--1
-3
-q_b15
--1
-3
-q_b14
--1
-3
-q_b13
--1
-3
-q_b12
--1
-3
-q_b11
--1
-3
-q_b10
--1
-3
-q_b1
--1
-3
-q_b0
--1
-3
-data_a9
--1
-3
-data_a8
--1
-3
-data_a7
--1
-3
-data_a6
--1
-3
-data_a5
--1
-3
-data_a4
--1
-3
-data_a3
--1
-3
-data_a2
--1
-3
-data_a15
--1
-3
-data_a14
--1
-3
-data_a13
--1
-3
-data_a12
--1
-3
-data_a11
--1
-3
-data_a10
--1
-3
-data_a1
--1
-3
-data_a0
--1
-3
-clocken1
--1
-3
-clock1
--1
-3
-clock0
--1
-3
-addressstall_b
--1
-3
-address_b9
--1
-3
-address_b8
--1
-3
-address_b7
--1
-3
-address_b6
--1
-3
-address_b5
--1
-3
-address_b4
--1
-3
-address_b3
--1
-3
-address_b2
--1
-3
-address_b1
--1
-3
-address_b0
--1
-3
-address_a9
--1
-3
-address_a8
--1
-3
-address_a7
--1
-3
-address_a6
--1
-3
-address_a5
--1
-3
-address_a4
--1
-3
-address_a3
--1
-3
-address_a2
--1
-3
-address_a1
--1
-3
-address_a0
--1
-3
-aclr1
--1
-3
-}
-# end
-# entity
-altsyncram_52f1
-# storage
-db|ozy_eval.(27).cnf
-db|ozy_eval.(27).cnf
-# case_insensitive
-# source_file
-db|altsyncram_52f1.tdf
-cfa6a54be12751d823b863098522
-6
-# user_parameter {
-PORT_A_ADDRESS_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_A_BYTE_ENABLE_MASK_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_A_DATA_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_B_ADDRESS_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_B_BYTE_ENABLE_MASK_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_B_DATA_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-}
-# used_port {
-wren_b
--1
-3
-q_a9
--1
-3
-q_a8
--1
-3
-q_a7
--1
-3
-q_a6
--1
-3
-q_a5
--1
-3
-q_a4
--1
-3
-q_a3
--1
-3
-q_a2
--1
-3
-q_a15
--1
-3
-q_a14
--1
-3
-q_a13
--1
-3
-q_a12
--1
-3
-q_a11
--1
-3
-q_a10
--1
-3
-q_a1
--1
-3
-q_a0
--1
-3
-data_b9
--1
-3
-data_b8
--1
-3
-data_b7
--1
-3
-data_b6
--1
-3
-data_b5
--1
-3
-data_b4
--1
-3
-data_b3
--1
-3
-data_b2
--1
-3
-data_b15
--1
-3
-data_b14
--1
-3
-data_b13
--1
-3
-data_b12
--1
-3
-data_b11
--1
-3
-data_b10
--1
-3
-data_b1
--1
-3
-data_b0
--1
-3
-clocken1
--1
-3
-clocken0
--1
-3
-clock1
--1
-3
-clock0
--1
-3
-addressstall_a
--1
-3
-address_b9
--1
-3
-address_b8
--1
-3
-address_b7
--1
-3
-address_b6
--1
-3
-address_b5
--1
-3
-address_b4
--1
-3
-address_b3
--1
-3
-address_b2
--1
-3
-address_b1
--1
-3
-address_b0
--1
-3
-address_a9
--1
-3
-address_a8
--1
-3
-address_a7
--1
-3
-address_a6
--1
-3
-address_a5
--1
-3
-address_a4
--1
-3
-address_a3
--1
-3
-address_a2
--1
-3
-address_a1
--1
-3
-address_a0
--1
-3
-aclr1
--1
-3
-wren_a
--1
-1
-data_a9
--1
-2
-data_a8
--1
-2
-data_a7
--1
-2
-data_a6
--1
-2
-data_a5
--1
-2
-data_a4
--1
-2
-data_a3
--1
-2
-data_a2
--1
-2
-data_a15
--1
-2
-data_a14
--1
-2
-data_a13
--1
-2
-data_a12
--1
-2
-data_a11
--1
-2
-data_a10
--1
-2
-data_a1
--1
-2
-data_a0
--1
-2
-}
-# memory_file {
-none
-0
-}
-# end
-# entity
-alt_synch_pipe_hn7
-# storage
-db|ozy_eval.(28).cnf
-db|ozy_eval.(28).cnf
-# case_insensitive
-# source_file
-db|alt_synch_pipe_hn7.tdf
-7837f69b1f13149a6ffc4da6f1d82125
-6
-# used_port {
-q0
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-dffpipe_bo8
-# storage
-db|ozy_eval.(29).cnf
-db|ozy_eval.(29).cnf
-# case_insensitive
-# source_file
-db|dffpipe_bo8.tdf
-3ba12c65e5f86f19dfb2c72691abbd
-6
-# used_port {
-q0
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-dffpipe_pe9
-# storage
-db|ozy_eval.(30).cnf
-db|ozy_eval.(30).cnf
-# case_insensitive
-# source_file
-db|dffpipe_pe9.tdf
-2ece8f17893a88706f4e137d65384cd
-6
-# used_port {
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-d9
--1
-3
-d8
--1
-3
-d7
--1
-3
-d6
--1
-3
-d5
--1
-3
-d4
--1
-3
-d3
--1
-3
-d2
--1
-3
-d10
--1
-3
-d1
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-alt_synch_pipe_0e8
-# storage
-db|ozy_eval.(31).cnf
-db|ozy_eval.(31).cnf
-# case_insensitive
-# source_file
-db|alt_synch_pipe_0e8.tdf
-969570a5fe6b279553d88d379c6d19
-6
-# used_port {
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-d9
--1
-3
-d8
--1
-3
-d7
--1
-3
-d6
--1
-3
-d5
--1
-3
-d4
--1
-3
-d3
--1
-3
-d2
--1
-3
-d10
--1
-3
-d1
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-dffpipe_qe9
-# storage
-db|ozy_eval.(32).cnf
-db|ozy_eval.(32).cnf
-# case_insensitive
-# source_file
-db|dffpipe_qe9.tdf
-a9853661539f3bb25601ff2d04f240
-6
-# used_port {
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-d9
--1
-3
-d8
--1
-3
-d7
--1
-3
-d6
--1
-3
-d5
--1
-3
-d4
--1
-3
-d3
--1
-3
-d2
--1
-3
-d10
--1
-3
-d1
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-alt_synch_pipe_in7
-# storage
-db|ozy_eval.(33).cnf
-db|ozy_eval.(33).cnf
-# case_insensitive
-# source_file
-db|alt_synch_pipe_in7.tdf
-961b7b4366e28198cc6c47389267ed
-6
-# used_port {
-q0
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-dffpipe_co8
-# storage
-db|ozy_eval.(34).cnf
-db|ozy_eval.(34).cnf
-# case_insensitive
-# source_file
-db|dffpipe_co8.tdf
-c6850abac2ec5f6fc2cd946ab3aa0
-6
-# used_port {
-q0
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-alt_synch_pipe_1e8
-# storage
-db|ozy_eval.(35).cnf
-db|ozy_eval.(35).cnf
-# case_insensitive
-# source_file
-db|alt_synch_pipe_1e8.tdf
-782db393a94651b94f9f3ea20be3f
-6
-# used_port {
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-d9
--1
-3
-d8
--1
-3
-d7
--1
-3
-d6
--1
-3
-d5
--1
-3
-d4
--1
-3
-d3
--1
-3
-d2
--1
-3
-d10
--1
-3
-d1
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-dffpipe_re9
-# storage
-db|ozy_eval.(36).cnf
-db|ozy_eval.(36).cnf
-# case_insensitive
-# source_file
-db|dffpipe_re9.tdf
-3bc71d92acd5459c6deb939d73b612e8
-6
-# used_port {
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-d9
--1
-3
-d8
--1
-3
-d7
--1
-3
-d6
--1
-3
-d5
--1
-3
-d4
--1
-3
-d3
--1
-3
-d2
--1
-3
-d10
--1
-3
-d1
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-dcfifo
-# storage
-db|ozy_eval.(101).cnf
-db|ozy_eval.(101).cnf
-# case_insensitive
-# source_file
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|dcfifo.tdf
-f52f61d654507d26e32b8ae857d410
-6
-# user_parameter {
-AUTO_CARRY_CHAINS
-ON
-AUTO_CARRY
-USR
-IGNORE_CARRY_BUFFERS
-OFF
-IGNORE_CARRY
-USR
-AUTO_CASCADE_CHAINS
-ON
-AUTO_CASCADE
-USR
-IGNORE_CASCADE_BUFFERS
-OFF
-IGNORE_CASCADE
-USR
-LPM_WIDTH
-32
-PARAMETER_DEC
-USR
-LPM_NUMWORDS
-1024
-PARAMETER_DEC
-USR
-LPM_WIDTHU
-10
-PARAMETER_DEC
-USR
-LPM_SHOWAHEAD
-OFF
-PARAMETER_UNKNOWN
-USR
-UNDERFLOW_CHECKING
-ON
-PARAMETER_UNKNOWN
-USR
-OVERFLOW_CHECKING
-ON
-PARAMETER_UNKNOWN
-USR
-USE_EAB
-ON
-PARAMETER_UNKNOWN
-USR
-ADD_RAM_OUTPUT_REGISTER
-OFF
-PARAMETER_UNKNOWN
-DEF
-DELAY_RDUSEDW
-1
-PARAMETER_UNKNOWN
-DEF
-DELAY_WRUSEDW
-1
-PARAMETER_UNKNOWN
-DEF
-RDSYNC_DELAYPIPE
-4
-PARAMETER_DEC
-USR
-WRSYNC_DELAYPIPE
-4
-PARAMETER_DEC
-USR
-CLOCKS_ARE_SYNCHRONIZED
-FALSE
-PARAMETER_UNKNOWN
-DEF
-DEVICE_FAMILY
-Cyclone II
-PARAMETER_UNKNOWN
-USR
-CBXI_PARAMETER
-dcfifo_cfb1
-PARAMETER_UNKNOWN
-USR
-}
-# used_port {
-wrusedw
--1
-3
-wrreq
--1
-3
-wrfull
--1
-3
-wrempty
--1
-3
-wrclk
--1
-3
-rdusedw
--1
-3
-rdreq
--1
-3
-rdfull
--1
-3
-rdempty
--1
-3
-rdclk
--1
-3
-q
--1
-3
-data
--1
-3
-aclr
--1
-3
-}
-# include_file {
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
-758886b0947dd67e65ec58adda9b948
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
-7d9a33dd39f13aa690c3d0edd88351
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altdpram.inc
-4e1931f9814db9f22f22b9eb377c65d6
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|a_graycounter.inc
-6bb463da5ec6451f39fdb64aba52ffc0
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|a_fefifo.inc
-c8498561e0bdc47f87b5548333d65f50
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|a_gray2bin.inc
-2466d892d81838e113e13f4e76e71f2
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|dffpipe.inc
-8dfdb676c11c7bcef0694118a05ea2d
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_sync_fifo.inc
-f4c68b9daca4a0e5389631895df30d0
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
-aec4ea1b78f4cda1c3effe18f1abbf63
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altsyncram_fifo.inc
-12f7d8c61da985ee5330de43a169e
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
-b3d07c643dae10ab2b3e646e99ec45fc
-}
-# end
-# entity
-dcfifo_cfb1
-# storage
-db|ozy_eval.(102).cnf
-db|ozy_eval.(102).cnf
-# case_insensitive
-# source_file
-db|dcfifo_cfb1.tdf
-b45014864f30573e98d51c52fa7dee92
-6
-# used_port {
-wrusedw9
--1
-3
-wrusedw8
--1
-3
-wrusedw7
--1
-3
-wrusedw6
--1
-3
-wrusedw5
--1
-3
-wrusedw4
--1
-3
-wrusedw3
--1
-3
-wrusedw2
--1
-3
-wrusedw1
--1
-3
-wrusedw0
--1
-3
-wrreq
--1
-3
-wrfull
--1
-3
-wrempty
--1
-3
-wrclk
--1
-3
-rdusedw9
--1
-3
-rdusedw8
--1
-3
-rdusedw7
--1
-3
-rdusedw6
--1
-3
-rdusedw5
--1
-3
-rdusedw4
--1
-3
-rdusedw3
--1
-3
-rdusedw2
--1
-3
-rdusedw1
--1
-3
-rdusedw0
--1
-3
-rdreq
--1
-3
-rdfull
--1
-3
-rdempty
--1
-3
-rdclk
--1
-3
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q31
--1
-3
-q30
--1
-3
-q3
--1
-3
-q29
--1
-3
-q28
--1
-3
-q27
--1
-3
-q26
--1
-3
-q25
--1
-3
-q24
--1
-3
-q23
--1
-3
-q22
--1
-3
-q21
--1
-3
-q20
--1
-3
-q2
--1
-3
-q19
--1
-3
-q18
--1
-3
-q17
--1
-3
-q16
--1
-3
-q15
--1
-3
-q14
--1
-3
-q13
--1
-3
-q12
--1
-3
-q11
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-data9
--1
-3
-data8
--1
-3
-data7
--1
-3
-data6
--1
-3
-data5
--1
-3
-data4
--1
-3
-data31
--1
-3
-data30
--1
-3
-data3
--1
-3
-data29
--1
-3
-data28
--1
-3
-data27
--1
-3
-data26
--1
-3
-data25
--1
-3
-data24
--1
-3
-data23
--1
-3
-data22
--1
-3
-data21
--1
-3
-data20
--1
-3
-data2
--1
-3
-data19
--1
-3
-data18
--1
-3
-data17
--1
-3
-data16
--1
-3
-data15
--1
-3
-data14
--1
-3
-data13
--1
-3
-data12
--1
-3
-data11
--1
-3
-data10
--1
-3
-data1
--1
-3
-data0
--1
-3
-aclr
--1
-3
-}
-# end
-# entity
-altsyncram_nd11
-# storage
-db|ozy_eval.(103).cnf
-db|ozy_eval.(103).cnf
-# case_insensitive
-# source_file
-db|altsyncram_nd11.tdf
-e44917fc6ef6dbeaad9f373b5df86ff5
-6
-# used_port {
-wren_a
--1
-3
-q_b9
--1
-3
-q_b8
--1
-3
-q_b7
--1
-3
-q_b6
--1
-3
-q_b5
--1
-3
-q_b4
--1
-3
-q_b31
--1
-3
-q_b30
--1
-3
-q_b3
--1
-3
-q_b29
--1
-3
-q_b28
--1
-3
-q_b27
--1
-3
-q_b26
--1
-3
-q_b25
--1
-3
-q_b24
--1
-3
-q_b23
--1
-3
-q_b22
--1
-3
-q_b21
--1
-3
-q_b20
--1
-3
-q_b2
--1
-3
-q_b19
--1
-3
-q_b18
--1
-3
-q_b17
--1
-3
-q_b16
--1
-3
-q_b15
--1
-3
-q_b14
--1
-3
-q_b13
--1
-3
-q_b12
--1
-3
-q_b11
--1
-3
-q_b10
--1
-3
-q_b1
--1
-3
-q_b0
--1
-3
-data_a9
--1
-3
-data_a8
--1
-3
-data_a7
--1
-3
-data_a6
--1
-3
-data_a5
--1
-3
-data_a4
--1
-3
-data_a31
--1
-3
-data_a30
--1
-3
-data_a3
--1
-3
-data_a29
--1
-3
-data_a28
--1
-3
-data_a27
--1
-3
-data_a26
--1
-3
-data_a25
--1
-3
-data_a24
--1
-3
-data_a23
--1
-3
-data_a22
--1
-3
-data_a21
--1
-3
-data_a20
--1
-3
-data_a2
--1
-3
-data_a19
--1
-3
-data_a18
--1
-3
-data_a17
--1
-3
-data_a16
--1
-3
-data_a15
--1
-3
-data_a14
--1
-3
-data_a13
--1
-3
-data_a12
--1
-3
-data_a11
--1
-3
-data_a10
--1
-3
-data_a1
--1
-3
-data_a0
--1
-3
-clocken1
--1
-3
-clock1
--1
-3
-clock0
--1
-3
-addressstall_b
--1
-3
-address_b9
--1
-3
-address_b8
--1
-3
-address_b7
--1
-3
-address_b6
--1
-3
-address_b5
--1
-3
-address_b4
--1
-3
-address_b3
--1
-3
-address_b2
--1
-3
-address_b1
--1
-3
-address_b0
--1
-3
-address_a9
--1
-3
-address_a8
--1
-3
-address_a7
--1
-3
-address_a6
--1
-3
-address_a5
--1
-3
-address_a4
--1
-3
-address_a3
--1
-3
-address_a2
--1
-3
-address_a1
--1
-3
-address_a0
--1
-3
-aclr1
--1
-3
-}
-# end
-# entity
-altsyncram_12f1
-# storage
-db|ozy_eval.(104).cnf
-db|ozy_eval.(104).cnf
-# case_insensitive
-# source_file
-db|altsyncram_12f1.tdf
-3fdda9855b2dce46944aec374e422b28
-6
-# user_parameter {
-PORT_A_ADDRESS_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_A_BYTE_ENABLE_MASK_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_A_DATA_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_B_ADDRESS_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_B_BYTE_ENABLE_MASK_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_B_DATA_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-}
-# used_port {
-wren_b
--1
-3
-q_a9
--1
-3
-q_a8
--1
-3
-q_a7
--1
-3
-q_a6
--1
-3
-q_a5
--1
-3
-q_a4
--1
-3
-q_a31
--1
-3
-q_a30
--1
-3
-q_a3
--1
-3
-q_a29
--1
-3
-q_a28
--1
-3
-q_a27
--1
-3
-q_a26
--1
-3
-q_a25
--1
-3
-q_a24
--1
-3
-q_a23
--1
-3
-q_a22
--1
-3
-q_a21
--1
-3
-q_a20
--1
-3
-q_a2
--1
-3
-q_a19
--1
-3
-q_a18
--1
-3
-q_a17
--1
-3
-q_a16
--1
-3
-q_a15
--1
-3
-q_a14
--1
-3
-q_a13
--1
-3
-q_a12
--1
-3
-q_a11
--1
-3
-q_a10
--1
-3
-q_a1
--1
-3
-q_a0
--1
-3
-data_b9
--1
-3
-data_b8
--1
-3
-data_b7
--1
-3
-data_b6
--1
-3
-data_b5
--1
-3
-data_b4
--1
-3
-data_b31
--1
-3
-data_b30
--1
-3
-data_b3
--1
-3
-data_b29
--1
-3
-data_b28
--1
-3
-data_b27
--1
-3
-data_b26
--1
-3
-data_b25
--1
-3
-data_b24
--1
-3
-data_b23
--1
-3
-data_b22
--1
-3
-data_b21
--1
-3
-data_b20
--1
-3
-data_b2
--1
-3
-data_b19
--1
-3
-data_b18
--1
-3
-data_b17
--1
-3
-data_b16
--1
-3
-data_b15
--1
-3
-data_b14
--1
-3
-data_b13
--1
-3
-data_b12
--1
-3
-data_b11
--1
-3
-data_b10
--1
-3
-data_b1
--1
-3
-data_b0
--1
-3
-clocken1
--1
-3
-clocken0
--1
-3
-clock1
--1
-3
-clock0
--1
-3
-addressstall_a
--1
-3
-address_b9
--1
-3
-address_b8
--1
-3
-address_b7
--1
-3
-address_b6
--1
-3
-address_b5
--1
-3
-address_b4
--1
-3
-address_b3
--1
-3
-address_b2
--1
-3
-address_b1
--1
-3
-address_b0
--1
-3
-address_a9
--1
-3
-address_a8
--1
-3
-address_a7
--1
-3
-address_a6
--1
-3
-address_a5
--1
-3
-address_a4
--1
-3
-address_a3
--1
-3
-address_a2
--1
-3
-address_a1
--1
-3
-address_a0
--1
-3
-aclr1
--1
-3
-wren_a
--1
-1
-data_a9
--1
-2
-data_a8
--1
-2
-data_a7
--1
-2
-data_a6
--1
-2
-data_a5
--1
-2
-data_a4
--1
-2
-data_a31
--1
-2
-data_a30
--1
-2
-data_a3
--1
-2
-data_a29
--1
-2
-data_a28
--1
-2
-data_a27
--1
-2
-data_a26
--1
-2
-data_a25
--1
-2
-data_a24
--1
-2
-data_a23
--1
-2
-data_a22
--1
-2
-data_a21
--1
-2
-data_a20
--1
-2
-data_a2
--1
-2
-data_a19
--1
-2
-data_a18
--1
-2
-data_a17
--1
-2
-data_a16
--1
-2
-data_a15
--1
-2
-data_a14
--1
-2
-data_a13
--1
-2
-data_a12
--1
-2
-data_a11
--1
-2
-data_a10
--1
-2
-data_a1
--1
-2
-data_a0
--1
-2
-}
-# memory_file {
-none
-0
-}
-# end
-# entity
-alt_synch_pipe_jn7
-# storage
-db|ozy_eval.(105).cnf
-db|ozy_eval.(105).cnf
-# case_insensitive
-# source_file
-db|alt_synch_pipe_jn7.tdf
-deead156cd8cff32fda8cbdb0ff397e
-6
-# used_port {
-q0
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-dffpipe_do8
-# storage
-db|ozy_eval.(106).cnf
-db|ozy_eval.(106).cnf
-# case_insensitive
-# source_file
-db|dffpipe_do8.tdf
-88dcc561b28611b7f6ce34f3df835270
-6
-# used_port {
-q0
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-alt_synch_pipe_2e8
-# storage
-db|ozy_eval.(107).cnf
-db|ozy_eval.(107).cnf
-# case_insensitive
-# source_file
-db|alt_synch_pipe_2e8.tdf
-18277be3822c26e672e7e2582d06ccb
-6
-# used_port {
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-d9
--1
-3
-d8
--1
-3
-d7
--1
-3
-d6
--1
-3
-d5
--1
-3
-d4
--1
-3
-d3
--1
-3
-d2
--1
-3
-d10
--1
-3
-d1
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-dffpipe_se9
-# storage
-db|ozy_eval.(108).cnf
-db|ozy_eval.(108).cnf
-# case_insensitive
-# source_file
-db|dffpipe_se9.tdf
-de71f8b9cad1ede112ad14369fd7d42
-6
-# used_port {
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-d9
--1
-3
-d8
--1
-3
-d7
--1
-3
-d6
--1
-3
-d5
--1
-3
-d4
--1
-3
-d3
--1
-3
-d2
--1
-3
-d10
--1
-3
-d1
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-alt_synch_pipe_kn7
-# storage
-db|ozy_eval.(109).cnf
-db|ozy_eval.(109).cnf
-# case_insensitive
-# source_file
-db|alt_synch_pipe_kn7.tdf
-62db3e803ac39de1d3815770caa6e6e1
-6
-# used_port {
-q0
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-dffpipe_eo8
-# storage
-db|ozy_eval.(110).cnf
-db|ozy_eval.(110).cnf
-# case_insensitive
-# source_file
-db|dffpipe_eo8.tdf
-f3a4ec7b240633ea950b6a976996b4f
-6
-# used_port {
-q0
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-alt_synch_pipe_3e8
-# storage
-db|ozy_eval.(111).cnf
-db|ozy_eval.(111).cnf
-# case_insensitive
-# source_file
-db|alt_synch_pipe_3e8.tdf
-9b6fcccdef7de763f34a1de52f6fbad
-6
-# used_port {
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-d9
--1
-3
-d8
--1
-3
-d7
--1
-3
-d6
--1
-3
-d5
--1
-3
-d4
--1
-3
-d3
--1
-3
-d2
--1
-3
-d10
--1
-3
-d1
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-dffpipe_te9
-# storage
-db|ozy_eval.(112).cnf
-db|ozy_eval.(112).cnf
-# case_insensitive
-# source_file
-db|dffpipe_te9.tdf
-1631c31687c67039d85b2f124ddeac
-6
-# used_port {
-q9
--1
-3
-q8
--1
-3
-q7
--1
-3
-q6
--1
-3
-q5
--1
-3
-q4
--1
-3
-q3
--1
-3
-q2
--1
-3
-q10
--1
-3
-q1
--1
-3
-q0
--1
-3
-d9
--1
-3
-d8
--1
-3
-d7
--1
-3
-d6
--1
-3
-d5
--1
-3
-d4
--1
-3
-d3
--1
-3
-d2
--1
-3
-d10
--1
-3
-d1
--1
-3
-d0
--1
-3
-clrn
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-fifo_pll
-# storage
-db|ozy_eval.(113).cnf
-db|ozy_eval.(113).cnf
+db|ozy_eval.(1).cnf
+db|ozy_eval.(1).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-fifo_pll.v
-761935a131c83d2e4de7bc695d569f10
+SPI_REGS.v
+a3e75dbb289074f0582aa2adb20ced0
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+WIDTH
+32
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+SPI_REGS:spi_regs
+}
+# end
+# entity
+RegisterX
+# storage
+db|ozy_eval.(2).cnf
+db|ozy_eval.(2).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+RegisterX.v
+4ac5199e07eb4377666219e6e486be7
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+my_address
+0000001
+PARAMETER_BIN
+USR
+WIDTH
+32
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+RegisterX:freqsetreg
+}
+# end
+# entity
+RegisterX
+# storage
+db|ozy_eval.(3).cnf
+db|ozy_eval.(3).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+RegisterX.v
+4ac5199e07eb4377666219e6e486be7
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+my_address
+0000010
+PARAMETER_BIN
+USR
+WIDTH
+32
+PARAMETER_DEC
+USR
+}
+# hierarchies {
+RegisterX:optionreg
+}
+# end
+# entity
+a_nco
+# storage
+db|ozy_eval.(4).cnf
+db|ozy_eval.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+a_nco.v
+8d5df97362e87cf089b2b5c63fb2167
 7
 # internal_option {
 AUTO_RESOURCE_SHARING
@@ -3167,1054 +132,471 @@ OFF
 }
 # end
 # entity
-altpll
+a_nco_st
 # storage
-db|ozy_eval.(114).cnf
-db|ozy_eval.(114).cnf
+db|ozy_eval.(5).cnf
+db|ozy_eval.(5).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+a_nco_st.v
+4230b6e35804df912b312ac6ef37ff1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+mpr
+16
+PARAMETER_DEC
+DEF
+apr
+32
+PARAMETER_DEC
+DEF
+apri
+16
+PARAMETER_DEC
+DEF
+aprf
+32
+PARAMETER_DEC
+DEF
+aprp
+16
+PARAMETER_DEC
+DEF
+aprid
+21
+PARAMETER_DEC
+DEF
+dpri
+5
+PARAMETER_DEC
+DEF
+cpr
+4
+PARAMETER_DEC
+DEF
+mval
+16
+PARAMETER_DEC
+DEF
+nstages
+33
+PARAMETER_DEC
+DEF
+X0
+19897
+PARAMETER_DEC
+DEF
+Z0
+16384
+PARAMETER_DEC
+DEF
+Z1
+9672
+PARAMETER_DEC
+DEF
+Z2
+5110
+PARAMETER_DEC
+DEF
+Z3
+2594
+PARAMETER_DEC
+DEF
+Z4
+1302
+PARAMETER_DEC
+DEF
+Z5
+651
+PARAMETER_DEC
+DEF
+Z6
+325
+PARAMETER_DEC
+DEF
+Z7
+162
+PARAMETER_DEC
+DEF
+Z8
+81
+PARAMETER_DEC
+DEF
+Z9
+40
+PARAMETER_DEC
+DEF
+Z10
+20
+PARAMETER_DEC
+DEF
+Z11
+10
+PARAMETER_DEC
+DEF
+Z12
+5
+PARAMETER_DEC
+DEF
+Z13
+2
+PARAMETER_DEC
+DEF
+Z14
+1
+PARAMETER_DEC
+DEF
+Z15
+0
+PARAMETER_DEC
+DEF
+Z16
+0
+PARAMETER_DEC
+DEF
+Z17
+0
+PARAMETER_DEC
+DEF
+Z18
+0
+PARAMETER_DEC
+DEF
+Z19
+0
+PARAMETER_DEC
+DEF
+Z20
+0
+PARAMETER_DEC
+DEF
+Z21
+0
+PARAMETER_DEC
+DEF
+Z22
+0
+PARAMETER_DEC
+DEF
+Z23
+0
+PARAMETER_DEC
+DEF
+Z24
+0
+PARAMETER_DEC
+DEF
+Z25
+0
+PARAMETER_DEC
+DEF
+Z26
+0
+PARAMETER_DEC
+DEF
+Z27
+0
+PARAMETER_DEC
+DEF
+Z28
+0
+PARAMETER_DEC
+DEF
+Z29
+0
+PARAMETER_DEC
+DEF
+Z30
+0
+PARAMETER_DEC
+DEF
+Z31
+0
+PARAMETER_DEC
+DEF
+nc
+1
+PARAMETER_DEC
+DEF
+log2nc
+0
+PARAMETER_DEC
+DEF
+outselinit
+0
+PARAMETER_DEC
+DEF
+paci0
+0
+PARAMETER_DEC
+DEF
+paci1
+0
+PARAMETER_DEC
+DEF
+paci2
+0
+PARAMETER_DEC
+DEF
+paci3
+0
+PARAMETER_DEC
+DEF
+paci4
+0
+PARAMETER_DEC
+DEF
+paci5
+0
+PARAMETER_DEC
+DEF
+paci6
+0
+PARAMETER_DEC
+DEF
+paci7
+0
+PARAMETER_DEC
+DEF
+}
+# end
+# entity
+cord_init
+# storage
+db|ozy_eval.(6).cnf
+db|ozy_eval.(6).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cord_init.v
+213d5ad9e93731adb61943218875e4b9
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+X0
+19897
+PARAMETER_DEC
+USR
+apr
+32
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+apri
+16
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cord_fs
+# storage
+db|ozy_eval.(7).cnf
+db|ozy_eval.(7).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cord_fs.v
+46e526a672dda5efa0f5556322df60a6
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+mpr
+16
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cord_seg_sel
+# storage
+db|ozy_eval.(8).cnf
+db|ozy_eval.(8).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cord_seg_sel.v
+31de6d2aa79e89bc27b56fd24b1bd3
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+nstages
+33
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+asj_altqmcpipe
+# storage
+db|ozy_eval.(9).cnf
+db|ozy_eval.(9).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|asj_altqmcpipe.v
+52f131331293dc46295f6e175311b1
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+apr
+32
+PARAMETER_DEC
+USR
+lat
+1
+PARAMETER_DEC
+USR
+nc
+1
+PARAMETER_DEC
+USR
+paci0
+0
+PARAMETER_DEC
+USR
+paci1
+0
+PARAMETER_DEC
+USR
+paci2
+0
+PARAMETER_DEC
+USR
+paci3
+0
+PARAMETER_DEC
+USR
+paci4
+0
+PARAMETER_DEC
+USR
+paci5
+0
+PARAMETER_DEC
+USR
+paci6
+0
+PARAMETER_DEC
+USR
+paci7
+0
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+lpm_add_sub
+# storage
+db|ozy_eval.(10).cnf
+db|ozy_eval.(10).cnf
 # case_insensitive
 # source_file
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altpll.tdf
-eda762e5901c3e66939b23e413541e
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.tdf
+fd2aba47a9ae5274232d645edd0f35f
 6
 # user_parameter {
-OPERATION_MODE
-NORMAL
+LPM_WIDTH
+32
+PARAMETER_DEC
+USR
+LPM_REPRESENTATION
+UNSIGNED
 PARAMETER_UNKNOWN
 USR
-PLL_TYPE
+LPM_DIRECTION
+DEFAULT
+PARAMETER_UNKNOWN
+DEF
+ONE_INPUT_IS_CONSTANT
+NO
+PARAMETER_UNKNOWN
+DEF
+LPM_PIPELINE
+1
+PARAMETER_DEC
+USR
+MAXIMIZE_SPEED
+5
+PARAMETER_UNKNOWN
+DEF
+REGISTERED_AT_END
+0
+PARAMETER_UNKNOWN
+DEF
+OPTIMIZE_FOR_SPEED
+5
+PARAMETER_UNKNOWN
+USR
+USE_CS_BUFFERS
+1
+PARAMETER_UNKNOWN
+DEF
+CARRY_CHAIN
+MANUAL
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN_LENGTH
+48
+CARRY_CHAIN_LENGTH
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+USE_WYS
+OFF
+PARAMETER_UNKNOWN
+DEF
+STYLE
 FAST
 PARAMETER_UNKNOWN
 USR
-QUALIFY_CONF_DONE
-OFF
-PARAMETER_UNKNOWN
-DEF
-COMPENSATE_CLOCK
-CLK0
-PARAMETER_UNKNOWN
-USR
-SCAN_CHAIN
-LONG
-PARAMETER_UNKNOWN
-DEF
-PRIMARY_CLOCK
-INCLK0
-PARAMETER_UNKNOWN
-DEF
-INCLK0_INPUT_FREQUENCY
-20833
-PARAMETER_DEC
-USR
-INCLK1_INPUT_FREQUENCY
-0
-PARAMETER_UNKNOWN
-DEF
-GATE_LOCK_SIGNAL
-NO
-PARAMETER_UNKNOWN
-USR
-GATE_LOCK_COUNTER
-0
-PARAMETER_UNKNOWN
-DEF
-LOCK_HIGH
-1
-PARAMETER_UNKNOWN
-DEF
-LOCK_LOW
-1
-PARAMETER_UNKNOWN
-DEF
-VALID_LOCK_MULTIPLIER
-1
-PARAMETER_DEC
-USR
-INVALID_LOCK_MULTIPLIER
-5
-PARAMETER_DEC
-USR
-SWITCH_OVER_ON_LOSSCLK
-OFF
-PARAMETER_UNKNOWN
-DEF
-SWITCH_OVER_ON_GATED_LOCK
-OFF
-PARAMETER_UNKNOWN
-DEF
-ENABLE_SWITCH_OVER_COUNTER
-OFF
-PARAMETER_UNKNOWN
-DEF
-SKIP_VCO
-OFF
-PARAMETER_UNKNOWN
-DEF
-SWITCH_OVER_COUNTER
-0
-PARAMETER_UNKNOWN
-DEF
-SWITCH_OVER_TYPE
-AUTO
-PARAMETER_UNKNOWN
-DEF
-FEEDBACK_SOURCE
-EXTCLK0
-PARAMETER_UNKNOWN
-DEF
-BANDWIDTH
-0
-PARAMETER_UNKNOWN
-DEF
-BANDWIDTH_TYPE
-AUTO
-PARAMETER_UNKNOWN
-DEF
-SPREAD_FREQUENCY
-0
-PARAMETER_UNKNOWN
-DEF
-DOWN_SPREAD
-0
-PARAMETER_UNKNOWN
-DEF
-SELF_RESET_ON_GATED_LOSS_LOCK
-OFF
-PARAMETER_UNKNOWN
-DEF
-CLK5_MULTIPLY_BY
-1
-PARAMETER_UNKNOWN
-DEF
-CLK4_MULTIPLY_BY
-1
-PARAMETER_UNKNOWN
-DEF
-CLK3_MULTIPLY_BY
-1
-PARAMETER_UNKNOWN
-DEF
-CLK2_MULTIPLY_BY
-1
-PARAMETER_UNKNOWN
-DEF
-CLK1_MULTIPLY_BY
-1
-PARAMETER_UNKNOWN
-DEF
-CLK0_MULTIPLY_BY
-2
-PARAMETER_DEC
-USR
-CLK5_DIVIDE_BY
-1
-PARAMETER_UNKNOWN
-DEF
-CLK4_DIVIDE_BY
-1
-PARAMETER_UNKNOWN
-DEF
-CLK3_DIVIDE_BY
-1
-PARAMETER_UNKNOWN
-DEF
-CLK2_DIVIDE_BY
-1
-PARAMETER_UNKNOWN
-DEF
-CLK1_DIVIDE_BY
-1
-PARAMETER_UNKNOWN
-DEF
-CLK0_DIVIDE_BY
-1
-PARAMETER_DEC
-USR
-CLK5_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-DEF
-CLK4_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-DEF
-CLK3_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-DEF
-CLK2_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-DEF
-CLK1_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-DEF
-CLK0_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-USR
-CLK5_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-CLK4_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-CLK3_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-CLK2_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-CLK1_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-CLK0_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-CLK5_DUTY_CYCLE
-50
-PARAMETER_UNKNOWN
-DEF
-CLK4_DUTY_CYCLE
-50
-PARAMETER_UNKNOWN
-DEF
-CLK3_DUTY_CYCLE
-50
-PARAMETER_UNKNOWN
-DEF
-CLK2_DUTY_CYCLE
-50
-PARAMETER_UNKNOWN
-DEF
-CLK1_DUTY_CYCLE
-50
-PARAMETER_UNKNOWN
-DEF
-CLK0_DUTY_CYCLE
-50
-PARAMETER_DEC
-USR
-EXTCLK3_MULTIPLY_BY
-1
-PARAMETER_UNKNOWN
-DEF
-EXTCLK2_MULTIPLY_BY
-1
-PARAMETER_UNKNOWN
-DEF
-EXTCLK1_MULTIPLY_BY
-1
-PARAMETER_UNKNOWN
-DEF
-EXTCLK0_MULTIPLY_BY
-1
-PARAMETER_UNKNOWN
-DEF
-EXTCLK3_DIVIDE_BY
-1
-PARAMETER_UNKNOWN
-DEF
-EXTCLK2_DIVIDE_BY
-1
-PARAMETER_UNKNOWN
-DEF
-EXTCLK1_DIVIDE_BY
-1
-PARAMETER_UNKNOWN
-DEF
-EXTCLK0_DIVIDE_BY
-1
-PARAMETER_UNKNOWN
-DEF
-EXTCLK3_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-DEF
-EXTCLK2_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-DEF
-EXTCLK1_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-DEF
-EXTCLK0_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-DEF
-EXTCLK3_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-EXTCLK2_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-EXTCLK1_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-EXTCLK0_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-EXTCLK3_DUTY_CYCLE
-50
-PARAMETER_UNKNOWN
-DEF
-EXTCLK2_DUTY_CYCLE
-50
-PARAMETER_UNKNOWN
-DEF
-EXTCLK1_DUTY_CYCLE
-50
-PARAMETER_UNKNOWN
-DEF
-EXTCLK0_DUTY_CYCLE
-50
-PARAMETER_UNKNOWN
-DEF
-VCO_MULTIPLY_BY
-0
-PARAMETER_UNKNOWN
-DEF
-VCO_DIVIDE_BY
-0
-PARAMETER_UNKNOWN
-DEF
-SCLKOUT0_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-DEF
-SCLKOUT1_PHASE_SHIFT
-0
-PARAMETER_UNKNOWN
-DEF
-VCO_MIN
-0
-PARAMETER_UNKNOWN
-DEF
-VCO_MAX
-0
-PARAMETER_UNKNOWN
-DEF
-VCO_CENTER
-0
-PARAMETER_UNKNOWN
-DEF
-PFD_MIN
-0
-PARAMETER_UNKNOWN
-DEF
-PFD_MAX
-0
-PARAMETER_UNKNOWN
-DEF
-M_INITIAL
-0
-PARAMETER_UNKNOWN
-DEF
-M
-0
-PARAMETER_UNKNOWN
-DEF
-N
-1
-PARAMETER_UNKNOWN
-DEF
-M2
-1
-PARAMETER_UNKNOWN
-DEF
-N2
-1
-PARAMETER_UNKNOWN
-DEF
-SS
-1
-PARAMETER_UNKNOWN
-DEF
-C0_HIGH
-0
-PARAMETER_UNKNOWN
-DEF
-C1_HIGH
-0
-PARAMETER_UNKNOWN
-DEF
-C2_HIGH
-0
-PARAMETER_UNKNOWN
-DEF
-C3_HIGH
-0
-PARAMETER_UNKNOWN
-DEF
-C4_HIGH
-0
-PARAMETER_UNKNOWN
-DEF
-C5_HIGH
-0
-PARAMETER_UNKNOWN
-DEF
-C0_LOW
-0
-PARAMETER_UNKNOWN
-DEF
-C1_LOW
-0
-PARAMETER_UNKNOWN
-DEF
-C2_LOW
-0
-PARAMETER_UNKNOWN
-DEF
-C3_LOW
-0
-PARAMETER_UNKNOWN
-DEF
-C4_LOW
-0
-PARAMETER_UNKNOWN
-DEF
-C5_LOW
-0
-PARAMETER_UNKNOWN
-DEF
-C0_INITIAL
-0
-PARAMETER_UNKNOWN
-DEF
-C1_INITIAL
-0
-PARAMETER_UNKNOWN
-DEF
-C2_INITIAL
-0
-PARAMETER_UNKNOWN
-DEF
-C3_INITIAL
-0
-PARAMETER_UNKNOWN
-DEF
-C4_INITIAL
-0
-PARAMETER_UNKNOWN
-DEF
-C5_INITIAL
-0
-PARAMETER_UNKNOWN
-DEF
-C0_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-C1_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-C2_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-C3_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-C4_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-C5_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-C0_PH
-0
-PARAMETER_UNKNOWN
-DEF
-C1_PH
-0
-PARAMETER_UNKNOWN
-DEF
-C2_PH
-0
-PARAMETER_UNKNOWN
-DEF
-C3_PH
-0
-PARAMETER_UNKNOWN
-DEF
-C4_PH
-0
-PARAMETER_UNKNOWN
-DEF
-C5_PH
-0
-PARAMETER_UNKNOWN
-DEF
-L0_HIGH
-1
-PARAMETER_UNKNOWN
-DEF
-L1_HIGH
-1
-PARAMETER_UNKNOWN
-DEF
-G0_HIGH
-1
-PARAMETER_UNKNOWN
-DEF
-G1_HIGH
-1
-PARAMETER_UNKNOWN
-DEF
-G2_HIGH
-1
-PARAMETER_UNKNOWN
-DEF
-G3_HIGH
-1
-PARAMETER_UNKNOWN
-DEF
-E0_HIGH
-1
-PARAMETER_UNKNOWN
-DEF
-E1_HIGH
-1
-PARAMETER_UNKNOWN
-DEF
-E2_HIGH
-1
-PARAMETER_UNKNOWN
-DEF
-E3_HIGH
-1
-PARAMETER_UNKNOWN
-DEF
-L0_LOW
-1
-PARAMETER_UNKNOWN
-DEF
-L1_LOW
-1
-PARAMETER_UNKNOWN
-DEF
-G0_LOW
-1
-PARAMETER_UNKNOWN
-DEF
-G1_LOW
-1
-PARAMETER_UNKNOWN
-DEF
-G2_LOW
-1
-PARAMETER_UNKNOWN
-DEF
-G3_LOW
-1
-PARAMETER_UNKNOWN
-DEF
-E0_LOW
-1
-PARAMETER_UNKNOWN
-DEF
-E1_LOW
-1
-PARAMETER_UNKNOWN
-DEF
-E2_LOW
-1
-PARAMETER_UNKNOWN
-DEF
-E3_LOW
-1
-PARAMETER_UNKNOWN
-DEF
-L0_INITIAL
-1
-PARAMETER_UNKNOWN
-DEF
-L1_INITIAL
-1
-PARAMETER_UNKNOWN
-DEF
-G0_INITIAL
-1
-PARAMETER_UNKNOWN
-DEF
-G1_INITIAL
-1
-PARAMETER_UNKNOWN
-DEF
-G2_INITIAL
-1
-PARAMETER_UNKNOWN
-DEF
-G3_INITIAL
-1
-PARAMETER_UNKNOWN
-DEF
-E0_INITIAL
-1
-PARAMETER_UNKNOWN
-DEF
-E1_INITIAL
-1
-PARAMETER_UNKNOWN
-DEF
-E2_INITIAL
-1
-PARAMETER_UNKNOWN
-DEF
-E3_INITIAL
-1
-PARAMETER_UNKNOWN
-DEF
-L0_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-L1_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-G0_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-G1_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-G2_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-G3_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-E0_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-E1_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-E2_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-E3_MODE
-BYPASS
-PARAMETER_UNKNOWN
-DEF
-L0_PH
-0
-PARAMETER_UNKNOWN
-DEF
-L1_PH
-0
-PARAMETER_UNKNOWN
-DEF
-G0_PH
-0
-PARAMETER_UNKNOWN
-DEF
-G1_PH
-0
-PARAMETER_UNKNOWN
-DEF
-G2_PH
-0
-PARAMETER_UNKNOWN
-DEF
-G3_PH
-0
-PARAMETER_UNKNOWN
-DEF
-E0_PH
-0
-PARAMETER_UNKNOWN
-DEF
-E1_PH
-0
-PARAMETER_UNKNOWN
-DEF
-E2_PH
-0
-PARAMETER_UNKNOWN
-DEF
-E3_PH
-0
-PARAMETER_UNKNOWN
-DEF
-M_PH
-0
-PARAMETER_UNKNOWN
-DEF
-C1_USE_CASC_IN
-0
-PARAMETER_UNKNOWN
-DEF
-C2_USE_CASC_IN
-0
-PARAMETER_UNKNOWN
-DEF
-C3_USE_CASC_IN
-0
-PARAMETER_UNKNOWN
-DEF
-C4_USE_CASC_IN
-0
-PARAMETER_UNKNOWN
-DEF
-C5_USE_CASC_IN
-0
-PARAMETER_UNKNOWN
-DEF
-CLK0_COUNTER
-G0
-PARAMETER_UNKNOWN
-DEF
-CLK1_COUNTER
-G0
-PARAMETER_UNKNOWN
-DEF
-CLK2_COUNTER
-G0
-PARAMETER_UNKNOWN
-DEF
-CLK3_COUNTER
-G0
-PARAMETER_UNKNOWN
-DEF
-CLK4_COUNTER
-G0
-PARAMETER_UNKNOWN
-DEF
-CLK5_COUNTER
-G0
-PARAMETER_UNKNOWN
-DEF
-L0_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-L1_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-G0_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-G1_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-G2_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-G3_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-E0_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-E1_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-E2_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-E3_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-M_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-N_TIME_DELAY
-0
-PARAMETER_UNKNOWN
-DEF
-EXTCLK3_COUNTER
-E3
-PARAMETER_UNKNOWN
-DEF
-EXTCLK2_COUNTER
-E2
-PARAMETER_UNKNOWN
-DEF
-EXTCLK1_COUNTER
-E1
-PARAMETER_UNKNOWN
-DEF
-EXTCLK0_COUNTER
-E0
-PARAMETER_UNKNOWN
-DEF
-ENABLE0_COUNTER
-L0
-PARAMETER_UNKNOWN
-DEF
-ENABLE1_COUNTER
-L0
-PARAMETER_UNKNOWN
-DEF
-CHARGE_PUMP_CURRENT
-2
-PARAMETER_UNKNOWN
-DEF
-LOOP_FILTER_R
- 1.000000
-PARAMETER_UNKNOWN
-DEF
-LOOP_FILTER_C
-5
-PARAMETER_UNKNOWN
-DEF
-VCO_POST_SCALE
-0
-PARAMETER_UNKNOWN
-DEF
-CLK2_OUTPUT_FREQUENCY
-0
-PARAMETER_UNKNOWN
-DEF
-CLK1_OUTPUT_FREQUENCY
-0
-PARAMETER_UNKNOWN
-DEF
-CLK0_OUTPUT_FREQUENCY
-0
-PARAMETER_UNKNOWN
-DEF
-INTENDED_DEVICE_FAMILY
-Cyclone II
-PARAMETER_UNKNOWN
-USR
-PORT_CLKENA0
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLKENA1
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLKENA2
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLKENA3
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLKENA4
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLKENA5
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_EXTCLKENA0
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_EXTCLKENA1
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_EXTCLKENA2
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_EXTCLKENA3
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_EXTCLK0
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_EXTCLK1
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_EXTCLK2
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_EXTCLK3
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLKBAD0
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLKBAD1
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLK0
-PORT_USED
-PARAMETER_UNKNOWN
-USR
-PORT_CLK1
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLK2
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLK3
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLK4
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLK5
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_SCANDATA
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_SCANDATAOUT
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_SCANDONE
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_SCLKOUT1
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_SCLKOUT0
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_ACTIVECLOCK
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLKLOSS
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_INCLK1
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_INCLK0
-PORT_USED
-PARAMETER_UNKNOWN
-USR
-PORT_FBIN
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_PLLENA
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_CLKSWITCH
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_ARESET
-PORT_USED
-PARAMETER_UNKNOWN
-USR
-PORT_PFDENA
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_SCANCLK
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_SCANACLR
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_SCANREAD
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_SCANWRITE
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_ENABLE0
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_ENABLE1
-PORT_UNUSED
-PARAMETER_UNKNOWN
-USR
-PORT_LOCKED
-PORT_USED
-PARAMETER_UNKNOWN
-USR
-M_TEST_SOURCE
-5
-PARAMETER_UNKNOWN
-DEF
-C0_TEST_SOURCE
-5
-PARAMETER_UNKNOWN
-DEF
-C1_TEST_SOURCE
-5
-PARAMETER_UNKNOWN
-DEF
-C2_TEST_SOURCE
-5
-PARAMETER_UNKNOWN
-DEF
-C3_TEST_SOURCE
-5
-PARAMETER_UNKNOWN
-DEF
-C4_TEST_SOURCE
-5
-PARAMETER_UNKNOWN
-DEF
-C5_TEST_SOURCE
-5
-PARAMETER_UNKNOWN
-DEF
-DEVICE_FAMILY
-Cyclone II
+CBXI_PARAMETER
+add_sub_pah
 PARAMETER_UNKNOWN
 USR
 AUTO_CARRY_CHAINS
@@ -4235,68 +617,2832 @@ IGNORE_CASCADE
 USR
 }
 # used_port {
-locked
+result
 -1
 3
-inclk
+datab
 -1
 3
-clk
+dataa
 -1
 3
-areset
+clock
 -1
 3
-scanwrite
+clken
 -1
-1
-scanread
+3
+aclr
 -1
-1
-scandata
--1
-1
-scanclk
--1
-1
-scanaclr
--1
-1
-clkswitch
--1
-1
-pllena
--1
-2
-pfdena
--1
-2
-fbin
--1
-2
-extclkena
--1
-2
-clkena
+3
+add_sub
 -1
 2
 }
 # include_file {
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|look_add.inc
+ab9f577d30c5ef3166fab6c1c32c4a
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|addcore.inc
+ff795e21e4847824c03218724f1a1252
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|bypassff.inc
+8e8df160d449a63ec15dc86ecf2b373f
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altshift.inc
+70fa13aee7d6d160ef20b2de32813a
 ..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
 b3d07c643dae10ab2b3e646e99ec45fc
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|stratix_pll.inc
-5f8211898149ceae8264a0ea5036254f
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|stratixii_pll.inc
-6d1985e16ab5f59a1fd6b0ae20978a4e
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|cycloneii_pll.inc
-39a0d9d1237d1db39c848c3f9faffc
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_stratix_add_sub.inc
+c08f604aefba5b4f1f554e565113c6
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_mercury_add_sub.inc
+ae39f15ed67cc9a095d29f68f6ad0f8
+}
+# end
+# entity
+add_sub_pah
+# storage
+db|ozy_eval.(11).cnf
+db|ozy_eval.(11).cnf
+# case_insensitive
+# source_file
+db|add_sub_pah.tdf
+ea137f31f8a44b554b3bd1bf9cef05c
+6
+# used_port {
+result9
+-1
+3
+result8
+-1
+3
+result7
+-1
+3
+result6
+-1
+3
+result5
+-1
+3
+result4
+-1
+3
+result31
+-1
+3
+result30
+-1
+3
+result3
+-1
+3
+result29
+-1
+3
+result28
+-1
+3
+result27
+-1
+3
+result26
+-1
+3
+result25
+-1
+3
+result24
+-1
+3
+result23
+-1
+3
+result22
+-1
+3
+result21
+-1
+3
+result20
+-1
+3
+result2
+-1
+3
+result19
+-1
+3
+result18
+-1
+3
+result17
+-1
+3
+result16
+-1
+3
+result15
+-1
+3
+result14
+-1
+3
+result13
+-1
+3
+result12
+-1
+3
+result11
+-1
+3
+result10
+-1
+3
+result1
+-1
+3
+result0
+-1
+3
+datab9
+-1
+3
+datab8
+-1
+3
+datab7
+-1
+3
+datab6
+-1
+3
+datab5
+-1
+3
+datab4
+-1
+3
+datab31
+-1
+3
+datab30
+-1
+3
+datab3
+-1
+3
+datab29
+-1
+3
+datab28
+-1
+3
+datab27
+-1
+3
+datab26
+-1
+3
+datab25
+-1
+3
+datab24
+-1
+3
+datab23
+-1
+3
+datab22
+-1
+3
+datab21
+-1
+3
+datab20
+-1
+3
+datab2
+-1
+3
+datab19
+-1
+3
+datab18
+-1
+3
+datab17
+-1
+3
+datab16
+-1
+3
+datab15
+-1
+3
+datab14
+-1
+3
+datab13
+-1
+3
+datab12
+-1
+3
+datab11
+-1
+3
+datab10
+-1
+3
+datab1
+-1
+3
+datab0
+-1
+3
+dataa9
+-1
+3
+dataa8
+-1
+3
+dataa7
+-1
+3
+dataa6
+-1
+3
+dataa5
+-1
+3
+dataa4
+-1
+3
+dataa31
+-1
+3
+dataa30
+-1
+3
+dataa3
+-1
+3
+dataa29
+-1
+3
+dataa28
+-1
+3
+dataa27
+-1
+3
+dataa26
+-1
+3
+dataa25
+-1
+3
+dataa24
+-1
+3
+dataa23
+-1
+3
+dataa22
+-1
+3
+dataa21
+-1
+3
+dataa20
+-1
+3
+dataa2
+-1
+3
+dataa19
+-1
+3
+dataa18
+-1
+3
+dataa17
+-1
+3
+dataa16
+-1
+3
+dataa15
+-1
+3
+dataa14
+-1
+3
+dataa13
+-1
+3
+dataa12
+-1
+3
+dataa11
+-1
+3
+dataa10
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+add_sub
+-1
+3
+aclr
+-1
+3
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(12).cnf
+db|ozy_eval.(12).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+16384
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+lpm_add_sub
+# storage
+db|ozy_eval.(13).cnf
+db|ozy_eval.(13).cnf
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.tdf
+fd2aba47a9ae5274232d645edd0f35f
+6
+# user_parameter {
+LPM_WIDTH
+16
+PARAMETER_DEC
+USR
+LPM_REPRESENTATION
+SIGNED
+PARAMETER_UNKNOWN
+USR
+LPM_DIRECTION
+DEFAULT
+PARAMETER_UNKNOWN
+DEF
+ONE_INPUT_IS_CONSTANT
+NO
+PARAMETER_UNKNOWN
+DEF
+LPM_PIPELINE
+1
+PARAMETER_DEC
+USR
+MAXIMIZE_SPEED
+5
+PARAMETER_UNKNOWN
+DEF
+REGISTERED_AT_END
+0
+PARAMETER_UNKNOWN
+DEF
+OPTIMIZE_FOR_SPEED
+5
+PARAMETER_UNKNOWN
+USR
+USE_CS_BUFFERS
+1
+PARAMETER_UNKNOWN
+DEF
+CARRY_CHAIN
+MANUAL
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN_LENGTH
+48
+CARRY_CHAIN_LENGTH
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+USE_WYS
+OFF
+PARAMETER_UNKNOWN
+DEF
+STYLE
+FAST
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+add_sub_bng
+PARAMETER_UNKNOWN
+USR
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+}
+# used_port {
+result
+-1
+3
+datab
+-1
+3
+dataa
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+add_sub
+-1
+1
+}
+# include_file {
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|look_add.inc
+ab9f577d30c5ef3166fab6c1c32c4a
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|addcore.inc
+ff795e21e4847824c03218724f1a1252
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|bypassff.inc
+8e8df160d449a63ec15dc86ecf2b373f
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altshift.inc
+70fa13aee7d6d160ef20b2de32813a
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_stratix_add_sub.inc
+c08f604aefba5b4f1f554e565113c6
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_mercury_add_sub.inc
+ae39f15ed67cc9a095d29f68f6ad0f8
+}
+# end
+# entity
+add_sub_bng
+# storage
+db|ozy_eval.(14).cnf
+db|ozy_eval.(14).cnf
+# case_insensitive
+# source_file
+db|add_sub_bng.tdf
+45ec492c378993ddb064e39c65cf953
+6
+# used_port {
+result9
+-1
+3
+result8
+-1
+3
+result7
+-1
+3
+result6
+-1
+3
+result5
+-1
+3
+result4
+-1
+3
+result3
+-1
+3
+result2
+-1
+3
+result15
+-1
+3
+result14
+-1
+3
+result13
+-1
+3
+result12
+-1
+3
+result11
+-1
+3
+result10
+-1
+3
+result1
+-1
+3
+result0
+-1
+3
+datab9
+-1
+3
+datab8
+-1
+3
+datab7
+-1
+3
+datab6
+-1
+3
+datab5
+-1
+3
+datab4
+-1
+3
+datab3
+-1
+3
+datab2
+-1
+3
+datab15
+-1
+3
+datab14
+-1
+3
+datab13
+-1
+3
+datab12
+-1
+3
+datab11
+-1
+3
+datab10
+-1
+3
+datab1
+-1
+3
+datab0
+-1
+3
+dataa9
+-1
+3
+dataa8
+-1
+3
+dataa7
+-1
+3
+dataa6
+-1
+3
+dataa5
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa15
+-1
+3
+dataa14
+-1
+3
+dataa13
+-1
+3
+dataa12
+-1
+3
+dataa11
+-1
+3
+dataa10
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+add_sub
+-1
+3
+aclr
+-1
+3
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(15).cnf
+db|ozy_eval.(15).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+1
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(16).cnf
+db|ozy_eval.(16).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+1
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+lpm_add_sub
+# storage
+db|ozy_eval.(17).cnf
+db|ozy_eval.(17).cnf
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.tdf
+fd2aba47a9ae5274232d645edd0f35f
+6
+# user_parameter {
+LPM_WIDTH
+16
+PARAMETER_DEC
+USR
+LPM_REPRESENTATION
+SIGNED
+PARAMETER_UNKNOWN
+USR
+LPM_DIRECTION
+DEFAULT
+PARAMETER_UNKNOWN
+DEF
+ONE_INPUT_IS_CONSTANT
+NO
+PARAMETER_UNKNOWN
+DEF
+LPM_PIPELINE
+1
+PARAMETER_DEC
+USR
+MAXIMIZE_SPEED
+5
+PARAMETER_UNKNOWN
+DEF
+REGISTERED_AT_END
+0
+PARAMETER_UNKNOWN
+DEF
+OPTIMIZE_FOR_SPEED
+5
+PARAMETER_UNKNOWN
+USR
+USE_CS_BUFFERS
+1
+PARAMETER_UNKNOWN
+DEF
+CARRY_CHAIN
+MANUAL
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN_LENGTH
+48
+CARRY_CHAIN_LENGTH
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+USE_WYS
+OFF
+PARAMETER_UNKNOWN
+DEF
+STYLE
+FAST
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+add_sub_o3h
+PARAMETER_UNKNOWN
+USR
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+}
+# used_port {
+result
+-1
+3
+datab
+-1
+3
+dataa
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+add_sub
+-1
+2
+}
+# include_file {
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|look_add.inc
+ab9f577d30c5ef3166fab6c1c32c4a
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|addcore.inc
+ff795e21e4847824c03218724f1a1252
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|bypassff.inc
+8e8df160d449a63ec15dc86ecf2b373f
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altshift.inc
+70fa13aee7d6d160ef20b2de32813a
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_stratix_add_sub.inc
+c08f604aefba5b4f1f554e565113c6
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_mercury_add_sub.inc
+ae39f15ed67cc9a095d29f68f6ad0f8
+}
+# end
+# entity
+add_sub_o3h
+# storage
+db|ozy_eval.(18).cnf
+db|ozy_eval.(18).cnf
+# case_insensitive
+# source_file
+db|add_sub_o3h.tdf
+711099ae82d78fe11a15b976b798dde
+6
+# used_port {
+result9
+-1
+3
+result8
+-1
+3
+result7
+-1
+3
+result6
+-1
+3
+result5
+-1
+3
+result4
+-1
+3
+result3
+-1
+3
+result2
+-1
+3
+result15
+-1
+3
+result14
+-1
+3
+result13
+-1
+3
+result12
+-1
+3
+result11
+-1
+3
+result10
+-1
+3
+result1
+-1
+3
+result0
+-1
+3
+datab9
+-1
+3
+datab8
+-1
+3
+datab7
+-1
+3
+datab6
+-1
+3
+datab5
+-1
+3
+datab4
+-1
+3
+datab3
+-1
+3
+datab2
+-1
+3
+datab15
+-1
+3
+datab14
+-1
+3
+datab13
+-1
+3
+datab12
+-1
+3
+datab11
+-1
+3
+datab10
+-1
+3
+datab1
+-1
+3
+datab0
+-1
+3
+dataa9
+-1
+3
+dataa8
+-1
+3
+dataa7
+-1
+3
+dataa6
+-1
+3
+dataa5
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa15
+-1
+3
+dataa14
+-1
+3
+dataa13
+-1
+3
+dataa12
+-1
+3
+dataa11
+-1
+3
+dataa10
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+add_sub
+-1
+3
+aclr
+-1
+3
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(19).cnf
+db|ozy_eval.(19).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+9672
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(20).cnf
+db|ozy_eval.(20).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+2
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(21).cnf
+db|ozy_eval.(21).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+2
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(22).cnf
+db|ozy_eval.(22).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+5110
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(23).cnf
+db|ozy_eval.(23).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+3
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(24).cnf
+db|ozy_eval.(24).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+3
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(25).cnf
+db|ozy_eval.(25).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+2594
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(26).cnf
+db|ozy_eval.(26).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+4
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(27).cnf
+db|ozy_eval.(27).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+4
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(28).cnf
+db|ozy_eval.(28).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+1302
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(29).cnf
+db|ozy_eval.(29).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+5
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(30).cnf
+db|ozy_eval.(30).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+5
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(31).cnf
+db|ozy_eval.(31).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+651
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(32).cnf
+db|ozy_eval.(32).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+6
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(33).cnf
+db|ozy_eval.(33).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+6
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(34).cnf
+db|ozy_eval.(34).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+325
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(35).cnf
+db|ozy_eval.(35).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+7
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(36).cnf
+db|ozy_eval.(36).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+7
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(37).cnf
+db|ozy_eval.(37).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+162
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(38).cnf
+db|ozy_eval.(38).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+8
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(39).cnf
+db|ozy_eval.(39).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+8
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(40).cnf
+db|ozy_eval.(40).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+81
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(41).cnf
+db|ozy_eval.(41).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+9
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(42).cnf
+db|ozy_eval.(42).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+9
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(43).cnf
+db|ozy_eval.(43).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+40
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(44).cnf
+db|ozy_eval.(44).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+10
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(45).cnf
+db|ozy_eval.(45).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+10
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(46).cnf
+db|ozy_eval.(46).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+20
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(47).cnf
+db|ozy_eval.(47).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+11
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(48).cnf
+db|ozy_eval.(48).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+11
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(49).cnf
+db|ozy_eval.(49).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+10
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(50).cnf
+db|ozy_eval.(50).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+12
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(51).cnf
+db|ozy_eval.(51).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+12
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(52).cnf
+db|ozy_eval.(52).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+5
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(53).cnf
+db|ozy_eval.(53).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+13
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(54).cnf
+db|ozy_eval.(54).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+13
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(55).cnf
+db|ozy_eval.(55).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+2
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(56).cnf
+db|ozy_eval.(56).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+14
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(57).cnf
+db|ozy_eval.(57).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+14
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_zxor_1p_lpm
+# storage
+db|ozy_eval.(58).cnf
+db|ozy_eval.(58).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_zxor_1p_lpm.v
+8bf346fd1caa95c94c22b9d3737dfcc
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+Zn
+1
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_sxor_1p_lpm
+# storage
+db|ozy_eval.(59).cnf
+db|ozy_eval.(59).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_sxor_1p_lpm.v
+fe17911a8322d966c3cacc5cfe678b9d
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+15
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cordic_axor_1p_lpm
+# storage
+db|ozy_eval.(60).cnf
+db|ozy_eval.(60).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cordic_axor_1p_lpm.v
+26c049b374a9c650f581dd3d66954be
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+pipe
+1
+PARAMETER_DEC
+USR
+mpr
+16
+PARAMETER_DEC
+USR
+shiftby
+15
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+cord_2c
+# storage
+db|ozy_eval.(61).cnf
+db|ozy_eval.(61).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|cord_2c.v
+f63c504ced8cd53e47993ccdc2108052
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+mpr
+16
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+asj_crd
+# storage
+db|ozy_eval.(62).cnf
+db|ozy_eval.(62).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|asj_crd.v
+2c89866eacf601aa904344e2eb792c
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+mpr
+16
+PARAMETER_DEC
+USR
+X0
+600
+PARAMETER_DEC
+DEF
+}
+# end
+# entity
+dop_reg
+# storage
+db|ozy_eval.(63).cnf
+db|ozy_eval.(63).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|dop_reg.v
+9af2f4c2eb3cf94cf73c5de3c981e43
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+mpr
+16
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+asj_nco_isdr
+# storage
+db|ozy_eval.(64).cnf
+db|ozy_eval.(64).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|..|..|..|..|..|..|altera|megacore|nco-v2.3.0|lib|asj_nco_isdr.v
+9cd1e1b690e60aa6f67d2962cca8ca
+7
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+ctc
+36
+PARAMETER_DEC
+USR
+cpr
+6
+PARAMETER_DEC
+USR
+}
+# end
+# entity
+lpm_counter
+# storage
+db|ozy_eval.(65).cnf
+db|ozy_eval.(65).cnf
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.tdf
+9ee47257a6b8b166152317b4e89afa
+6
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+6
+PARAMETER_DEC
+USR
+LPM_DIRECTION
+UP
+PARAMETER_UNKNOWN
+USR
+LPM_MODULUS
+0
+PARAMETER_UNKNOWN
+DEF
+LPM_AVALUE
+UNUSED
+PARAMETER_UNKNOWN
+DEF
+LPM_SVALUE
+UNUSED
+PARAMETER_UNKNOWN
+DEF
+LPM_PORT_UPDOWN
+PORT_CONNECTIVITY
+PARAMETER_UNKNOWN
+DEF
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN
+MANUAL
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN_LENGTH
+48
+CARRY_CHAIN_LENGTH
+USR
+NOT_GATE_PUSH_BACK
+ON
+NOT_GATE_PUSH_BACK
+USR
+CARRY_CNT_EN
+SMART
+PARAMETER_UNKNOWN
+DEF
+LABWIDE_SCLR
+ON
+PARAMETER_UNKNOWN
+DEF
+USE_NEW_VERSION
+TRUE
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+cntr_opf
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+sclr
+-1
+3
+q
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# include_file {
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_constant.inc
+dcde44eee59335c1e2fe75d574f9646
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_decode.inc
+bd0e2f5e01c1bd360461dceb53d48
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|cmpconst.inc
+e61874547688138e6fc0b49ff8760
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
+758886b0947dd67e65ec58adda9b948
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|dffeea.inc
+55d29d20f7e852c37746bec4e2495ec
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_synch_counter.inc
+e64d362a7450ad9895aa7e1e5dc2b42a
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_synch_counter_f.inc
+88e2e3ac71decf106c8d913bf441832f
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_counter_f10ke.inc
+d8a92a43831e9df2804dcf9a927e20
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_counter_stratix.inc
+587bf41cd15486161ec3eb5a1fef4c2
+}
+# end
+# entity
+cntr_opf
+# storage
+db|ozy_eval.(66).cnf
+db|ozy_eval.(66).cnf
+# case_insensitive
+# source_file
+db|cntr_opf.tdf
+fc5c72c9b40d6155d2f4feb476f2b32
+6
+# used_port {
+sclr
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+clock
+-1
+3
+clk_en
+-1
+3
+}
+# end
+# entity
+CIC_R256_M1_N5
+# storage
+db|ozy_eval.(67).cnf
+db|ozy_eval.(67).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CIC_R256_M1_N5.v
+3ad615b0e2e9c32c36a5958b1266b4
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
 }
 # end
 # entity
 tx_fifo
 # storage
-db|ozy_eval.(19).cnf
-db|ozy_eval.(19).cnf
+db|ozy_eval.(68).cnf
+db|ozy_eval.(68).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -4318,8 +3464,8 @@ tx_fifo:tx_fifo_q
 # entity
 dcfifo
 # storage
-db|ozy_eval.(115).cnf
-db|ozy_eval.(115).cnf
+db|ozy_eval.(69).cnf
+db|ozy_eval.(69).cnf
 # case_insensitive
 # source_file
 ..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|dcfifo.tdf
@@ -4445,10 +3591,14 @@ aclr
 3
 }
 # include_file {
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
-758886b0947dd67e65ec58adda9b948
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
 ..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
 7d9a33dd39f13aa690c3d0edd88351
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
+758886b0947dd67e65ec58adda9b948
 ..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altdpram.inc
 4e1931f9814db9f22f22b9eb377c65d6
 ..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|a_graycounter.inc
@@ -4461,12 +3611,8 @@ c8498561e0bdc47f87b5548333d65f50
 8dfdb676c11c7bcef0694118a05ea2d
 ..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|alt_sync_fifo.inc
 f4c68b9daca4a0e5389631895df30d0
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
-aec4ea1b78f4cda1c3effe18f1abbf63
 ..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altsyncram_fifo.inc
 12f7d8c61da985ee5330de43a169e
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
-b3d07c643dae10ab2b3e646e99ec45fc
 }
 # hierarchies {
 tx_fifo:tx_fifo_i|dcfifo:dcfifo_component
@@ -4476,8 +3622,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component
 # entity
 dcfifo_ncb1
 # storage
-db|ozy_eval.(116).cnf
-db|ozy_eval.(116).cnf
+db|ozy_eval.(70).cnf
+db|ozy_eval.(70).cnf
 # case_insensitive
 # source_file
 db|dcfifo_ncb1.tdf
@@ -4670,8 +3816,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated
 # entity
 a_gray2bin_kdb
 # storage
-db|ozy_eval.(117).cnf
-db|ozy_eval.(117).cnf
+db|ozy_eval.(71).cnf
+db|ozy_eval.(71).cnf
 # case_insensitive
 # source_file
 db|a_gray2bin_kdb.tdf
@@ -4753,8 +3899,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_gray2bin_
 # entity
 a_graycounter_o96
 # storage
-db|ozy_eval.(118).cnf
-db|ozy_eval.(118).cnf
+db|ozy_eval.(72).cnf
+db|ozy_eval.(72).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_o96.tdf
@@ -4809,8 +3955,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycount
 # entity
 a_graycounter_l27
 # storage
-db|ozy_eval.(119).cnf
-db|ozy_eval.(119).cnf
+db|ozy_eval.(73).cnf
+db|ozy_eval.(73).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_l27.tdf
@@ -4835,8 +3981,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycount
 # entity
 a_graycounter_i27
 # storage
-db|ozy_eval.(120).cnf
-db|ozy_eval.(120).cnf
+db|ozy_eval.(74).cnf
+db|ozy_eval.(74).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_i27.tdf
@@ -4891,8 +4037,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycount
 # entity
 altsyncram_bb11
 # storage
-db|ozy_eval.(121).cnf
-db|ozy_eval.(121).cnf
+db|ozy_eval.(75).cnf
+db|ozy_eval.(75).cnf
 # case_insensitive
 # source_file
 db|altsyncram_bb11.tdf
@@ -5076,8 +4222,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_
 # entity
 altsyncram_lve1
 # storage
-db|ozy_eval.(122).cnf
-db|ozy_eval.(122).cnf
+db|ozy_eval.(76).cnf
+db|ozy_eval.(76).cnf
 # case_insensitive
 # source_file
 db|altsyncram_lve1.tdf
@@ -5345,8 +4491,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_
 # entity
 alt_synch_pipe_ln7
 # storage
-db|ozy_eval.(123).cnf
-db|ozy_eval.(123).cnf
+db|ozy_eval.(77).cnf
+db|ozy_eval.(77).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_ln7.tdf
@@ -5374,8 +4520,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_p
 # entity
 dffpipe_fo8
 # storage
-db|ozy_eval.(124).cnf
-db|ozy_eval.(124).cnf
+db|ozy_eval.(78).cnf
+db|ozy_eval.(78).cnf
 # case_insensitive
 # source_file
 db|dffpipe_fo8.tdf
@@ -5403,8 +4549,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_p
 # entity
 dffpipe_oe9
 # storage
-db|ozy_eval.(125).cnf
-db|ozy_eval.(125).cnf
+db|ozy_eval.(79).cnf
+db|ozy_eval.(79).cnf
 # case_insensitive
 # source_file
 db|dffpipe_oe9.tdf
@@ -5492,8 +4638,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9
 # entity
 alt_synch_pipe_vd8
 # storage
-db|ozy_eval.(126).cnf
-db|ozy_eval.(126).cnf
+db|ozy_eval.(80).cnf
+db|ozy_eval.(80).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_vd8.tdf
@@ -5575,8 +4721,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_p
 # entity
 dffpipe_ue9
 # storage
-db|ozy_eval.(127).cnf
-db|ozy_eval.(127).cnf
+db|ozy_eval.(81).cnf
+db|ozy_eval.(81).cnf
 # case_insensitive
 # source_file
 db|dffpipe_ue9.tdf
@@ -5658,8 +4804,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_p
 # entity
 alt_synch_pipe_mn7
 # storage
-db|ozy_eval.(128).cnf
-db|ozy_eval.(128).cnf
+db|ozy_eval.(82).cnf
+db|ozy_eval.(82).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_mn7.tdf
@@ -5687,8 +4833,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_p
 # entity
 dffpipe_go8
 # storage
-db|ozy_eval.(129).cnf
-db|ozy_eval.(129).cnf
+db|ozy_eval.(83).cnf
+db|ozy_eval.(83).cnf
 # case_insensitive
 # source_file
 db|dffpipe_go8.tdf
@@ -5716,8 +4862,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_p
 # entity
 alt_synch_pipe_4e8
 # storage
-db|ozy_eval.(130).cnf
-db|ozy_eval.(130).cnf
+db|ozy_eval.(84).cnf
+db|ozy_eval.(84).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_4e8.tdf
@@ -5799,8 +4945,8 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_p
 # entity
 dffpipe_ve9
 # storage
-db|ozy_eval.(131).cnf
-db|ozy_eval.(131).cnf
+db|ozy_eval.(85).cnf
+db|ozy_eval.(85).cnf
 # case_insensitive
 # source_file
 db|dffpipe_ve9.tdf
@@ -5880,146 +5026,1226 @@ tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_p
 }
 # end
 # entity
-SPI_REGS
+pzdyqx
 # storage
-db|ozy_eval.(37).cnf
-db|ozy_eval.(37).cnf
+db|ozy_eval.(86).cnf
+db|ozy_eval.(86).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
-# case_sensitive
+# case_insensitive
 # source_file
-SPI_REGS.v
-a3e75dbb289074f0582aa2adb20ced0
-7
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|pzdyqx.vhd
+d85a4c8b123947b430525d2326c5b3
+4
 # internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
 AUTO_RESOURCE_SHARING
 OFF
 }
 # user_parameter {
-WIDTH
+pzdyqx0
 8
+PARAMETER_UNKNOWN
+USR
+pzdyqx9
+1
 PARAMETER_DEC
 DEF
+sld_node_info
+552448
+PARAMETER_DEC
+DEF
+pzdyqx5
+1
+PARAMETER_UNKNOWN
+USR
+pzdyqx6
+01101010111101110000000000010100
+PARAMETER_UNKNOWN
+USR
+pzdyqx1
+3600
+PARAMETER_UNKNOWN
+USR
+pzdyqx3
+12
+PARAMETER_UNKNOWN
+USR
+pzdyqx2
+0
+PARAMETER_UNKNOWN
+USR
+pzdyqx4
+1
+PARAMETER_UNKNOWN
+USR
 }
 # end
 # entity
-RegisterX
+MDCK2395
 # storage
-db|ozy_eval.(38).cnf
-db|ozy_eval.(38).cnf
+db|ozy_eval.(87).cnf
+db|ozy_eval.(87).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
-# case_sensitive
+# case_insensitive
 # source_file
-RegisterX.v
-4ac5199e07eb4377666219e6e486be7
-7
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|pzdyqx.vhd
+d85a4c8b123947b430525d2326c5b3
+4
 # internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
 AUTO_RESOURCE_SHARING
 OFF
 }
 # user_parameter {
-my_address
-0000001
-PARAMETER_BIN
+osc_stages
+13
+PARAMETER_DEC
 USR
-WIDTH
+osc_prescaler
 8
 PARAMETER_DEC
 USR
-}
-# end
-# entity
-SPI_REGS
-# storage
-db|ozy_eval.(39).cnf
-db|ozy_eval.(39).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-SPI_REGS.v
-a3e75dbb289074f0582aa2adb20ced0
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-WIDTH
-32
+clk_gen_width
+27
 PARAMETER_DEC
 USR
 }
-# hierarchies {
-SPI_REGS:spi_regs
-}
 # end
 # entity
-RegisterX
+CJQJ5354
 # storage
-db|ozy_eval.(40).cnf
-db|ozy_eval.(40).cnf
+db|ozy_eval.(88).cnf
+db|ozy_eval.(88).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
-# case_sensitive
+# case_insensitive
 # source_file
-RegisterX.v
-4ac5199e07eb4377666219e6e486be7
-7
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|pzdyqx.vhd
+d85a4c8b123947b430525d2326c5b3
+4
 # internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
 AUTO_RESOURCE_SHARING
 OFF
 }
 # user_parameter {
-my_address
-0000001
+width
+19
+PARAMETER_DEC
+USR
+modulus
+0
+PARAMETER_DEC
+USR
+ constraint(kvqq4224)
+18 downto 0
+PARAMETER_STRING
+USR
+}
+# end
+# entity
+CJQJ5354
+# storage
+db|ozy_eval.(89).cnf
+db|ozy_eval.(89).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|pzdyqx.vhd
+d85a4c8b123947b430525d2326c5b3
+4
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+width
+12
+PARAMETER_DEC
+USR
+modulus
+3600
+PARAMETER_DEC
+USR
+ constraint(kvqq4224)
+11 downto 0
+PARAMETER_STRING
+USR
+}
+# end
+# entity
+PZMU7345
+# storage
+db|ozy_eval.(90).cnf
+db|ozy_eval.(90).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|pzdyqx.vhd
+d85a4c8b123947b430525d2326c5b3
+4
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+width
+13
+PARAMETER_DEC
+USR
+ constraint(yjoq9945)
+12 downto 0
+PARAMETER_STRING
+USR
+}
+# end
+# entity
+VELJ8121
+# storage
+db|ozy_eval.(91).cnf
+db|ozy_eval.(91).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|pzdyqx.vhd
+d85a4c8b123947b430525d2326c5b3
+4
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+n_bits
+72
+PARAMETER_DEC
+USR
+word_size
+4
+PARAMETER_DEC
+USR
+ constraint(gisa9786)
+71 downto 0
+PARAMETER_STRING
+USR
+}
+# end
+# entity
+sld_hub
+# storage
+db|ozy_eval.(92).cnf
+db|ozy_eval.(92).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|sld_hub.vhd
+3b818b15a0c638c33e1554884fd8c4c2
+4
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+sld_hub_ip_version
+1
+PARAMETER_UNKNOWN
+USR
+sld_hub_ip_minor_version
+3
+PARAMETER_UNKNOWN
+USR
+sld_common_ip_version
+0
+PARAMETER_UNKNOWN
+USR
+device_family
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+n_nodes
+1
+PARAMETER_UNKNOWN
+USR
+n_sel_bits
+1
+PARAMETER_UNKNOWN
+USR
+n_node_ir_bits
+4
+PARAMETER_UNKNOWN
+USR
+node_info
+00000000000010000110111000000000
 PARAMETER_BIN
 USR
-WIDTH
-32
-PARAMETER_DEC
+compilation_mode
+0
+PARAMETER_UNKNOWN
 USR
-}
-# hierarchies {
-RegisterX:freqsetreg
 }
 # end
 # entity
-rng
+sld_jtag_state_machine
 # storage
-db|ozy_eval.(41).cnf
-db|ozy_eval.(41).cnf
+db|ozy_eval.(93).cnf
+db|ozy_eval.(93).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
-# case_sensitive
+# case_insensitive
 # source_file
-rng.v
-b1cdb9e99a31154fc5aaafd15fe9ca4
-7
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|sld_hub.vhd
+3b818b15a0c638c33e1554884fd8c4c2
+4
 # internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
 AUTO_RESOURCE_SHARING
 OFF
 }
-# hierarchies {
-rng:random
+# user_parameter {
+ip_major_version
+1
+PARAMETER_DEC
+USR
+ip_minor_version
+3
+PARAMETER_DEC
+USR
+common_ip_version
+0
+PARAMETER_DEC
+USR
+ constraint(jtag_state)
+15 downto 0
+PARAMETER_STRING
+USR
+}
+# end
+# entity
+lpm_shiftreg
+# storage
+db|ozy_eval.(94).cnf
+db|ozy_eval.(94).cnf
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_shiftreg.tdf
+5c3a6ccfa9758137252ac34dcc2420
+6
+# user_parameter {
+LPM_WIDTH
+10
+PARAMETER_DEC
+USR
+LPM_DIRECTION
+RIGHT
+PARAMETER_UNKNOWN
+USR
+LPM_AVALUE
+UNUSED
+PARAMETER_UNKNOWN
+DEF
+LPM_SVALUE
+UNUSED
+PARAMETER_UNKNOWN
+DEF
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+}
+# used_port {
+shiftin
+-1
+3
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+enable
+-1
+3
+clock
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_constant.inc
+dcde44eee59335c1e2fe75d574f9646
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|dffeea.inc
+55d29d20f7e852c37746bec4e2495ec
+}
+# end
+# entity
+lpm_decode
+# storage
+db|ozy_eval.(95).cnf
+db|ozy_eval.(95).cnf
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_decode.tdf
+2c635cd4e4aadce939ff33a1912efcc
+6
+# user_parameter {
+LPM_WIDTH
+3
+PARAMETER_DEC
+USR
+LPM_DECODES
+8
+PARAMETER_DEC
+USR
+LPM_PIPELINE
+1
+PARAMETER_DEC
+USR
+CASCADE_CHAIN
+MANUAL
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+decode_aoi
+PARAMETER_UNKNOWN
+USR
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+}
+# used_port {
+eq7
+-1
+3
+eq3
+-1
+3
+eq2
+-1
+3
+eq1
+-1
+3
+eq0
+-1
+3
+enable
+-1
+3
+data2
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altshift.inc
+70fa13aee7d6d160ef20b2de32813a
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_constant.inc
+dcde44eee59335c1e2fe75d574f9646
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|declut.inc
+b1d5939399e5c04dfe1d209af8cc490
+}
+# end
+# entity
+decode_aoi
+# storage
+db|ozy_eval.(96).cnf
+db|ozy_eval.(96).cnf
+# case_insensitive
+# source_file
+db|decode_aoi.tdf
+753fd7e8fcd8fa7addb3e2e91ec225dc
+6
+# used_port {
+eq7
+-1
+3
+eq6
+-1
+3
+eq5
+-1
+3
+eq4
+-1
+3
+eq3
+-1
+3
+eq2
+-1
+3
+eq1
+-1
+3
+eq0
+-1
+3
+enable
+-1
+3
+data2
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+clock
+-1
+3
+clken
+-1
+3
+aclr
+-1
+3
+}
+# end
+# entity
+sld_dffex
+# storage
+db|ozy_eval.(97).cnf
+db|ozy_eval.(97).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|sld_dffex.vhd
+e07a659f3de75fb323a077607414df48
+4
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+size
+1
+PARAMETER_DEC
+USR
+ constraint(d)
+0 downto 0
+PARAMETER_STRING
+USR
+ constraint(q)
+0 downto 0
+PARAMETER_STRING
+USR
+}
+# end
+# entity
+sld_dffex
+# storage
+db|ozy_eval.(98).cnf
+db|ozy_eval.(98).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|sld_dffex.vhd
+e07a659f3de75fb323a077607414df48
+4
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+size
+5
+PARAMETER_DEC
+USR
+ constraint(d)
+4 downto 0
+PARAMETER_STRING
+USR
+ constraint(q)
+4 downto 0
+PARAMETER_STRING
+USR
+}
+# end
+# entity
+sld_dffex
+# storage
+db|ozy_eval.(99).cnf
+db|ozy_eval.(99).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|sld_dffex.vhd
+e07a659f3de75fb323a077607414df48
+4
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+size
+4
+PARAMETER_DEC
+USR
+ constraint(d)
+3 downto 0
+PARAMETER_STRING
+USR
+ constraint(q)
+3 downto 0
+PARAMETER_STRING
+USR
+}
+# end
+# entity
+sld_rom_sr
+# storage
+db|ozy_eval.(100).cnf
+db|ozy_eval.(100).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|sld_rom_sr.vhd
+46bf7d6fc3d9e00e329c55b1b0c497
+4
+# internal_option {
+IP_SHOW_ELABORATION_MESSAGES
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+common_ip_version
+0
+PARAMETER_DEC
+USR
+n_bits
+64
+PARAMETER_DEC
+USR
+word_size
+4
+PARAMETER_DEC
+USR
+ constraint(rom_data)
+63 downto 0
+PARAMETER_STRING
+USR
+}
+# end
+# entity
+lpm_mult
+# storage
+db|ozy_eval.(101).cnf
+db|ozy_eval.(101).cnf
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_mult.tdf
+e8bb27478ef74f4f9202cef9589dd3c
+6
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTHA
+16
+PARAMETER_UNKNOWN
+USR
+LPM_WIDTHB
+16
+PARAMETER_UNKNOWN
+USR
+LPM_WIDTHP
+32
+PARAMETER_UNKNOWN
+USR
+LPM_WIDTHR
+32
+PARAMETER_UNKNOWN
+USR
+LPM_WIDTHS
+1
+PARAMETER_UNKNOWN
+USR
+LPM_REPRESENTATION
+UNSIGNED
+PARAMETER_UNKNOWN
+USR
+LPM_PIPELINE
+0
+PARAMETER_UNKNOWN
+DEF
+LATENCY
+0
+PARAMETER_UNKNOWN
+DEF
+INPUT_A_IS_CONSTANT
+NO
+PARAMETER_UNKNOWN
+USR
+INPUT_B_IS_CONSTANT
+NO
+PARAMETER_UNKNOWN
+USR
+USE_EAB
+OFF
+PARAMETER_UNKNOWN
+DEF
+MAXIMIZE_SPEED
+6
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN
+MANUAL
+PARAMETER_UNKNOWN
+USR
+APEX20K_TECHNOLOGY_MAPPER
+LUT
+TECH_MAPPER_APEX20K
+USR
+DEDICATED_MULTIPLIER_CIRCUITRY
+AUTO
+PARAMETER_UNKNOWN
+USR
+DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO
+0
+PARAMETER_UNKNOWN
+DEF
+DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO
+0
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+mult_9v01
+PARAMETER_UNKNOWN
+USR
+INPUT_A_FIXED_VALUE
+Bx
+PARAMETER_UNKNOWN
+DEF
+INPUT_B_FIXED_VALUE
+Bx
+PARAMETER_UNKNOWN
+DEF
+}
+# used_port {
+result9
+-1
+3
+result8
+-1
+3
+result7
+-1
+3
+result6
+-1
+3
+result5
+-1
+3
+result4
+-1
+3
+result3
+-1
+3
+result2
+-1
+3
+result15
+-1
+3
+result14
+-1
+3
+result13
+-1
+3
+result12
+-1
+3
+result11
+-1
+3
+result10
+-1
+3
+result1
+-1
+3
+result0
+-1
+3
+datab9
+-1
+3
+datab8
+-1
+3
+datab7
+-1
+3
+datab6
+-1
+3
+datab5
+-1
+3
+datab4
+-1
+3
+datab3
+-1
+3
+datab2
+-1
+3
+datab15
+-1
+3
+datab14
+-1
+3
+datab13
+-1
+3
+datab12
+-1
+3
+datab11
+-1
+3
+datab10
+-1
+3
+datab1
+-1
+3
+datab0
+-1
+3
+dataa9
+-1
+3
+dataa8
+-1
+3
+dataa7
+-1
+3
+dataa6
+-1
+3
+dataa5
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa15
+-1
+3
+dataa14
+-1
+3
+dataa13
+-1
+3
+dataa12
+-1
+3
+dataa11
+-1
+3
+dataa10
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+}
+# include_file {
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|bypassff.inc
+8e8df160d449a63ec15dc86ecf2b373f
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altshift.inc
+70fa13aee7d6d160ef20b2de32813a
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|multcore.inc
+13b7e8bee916e23c5f79837e9c670
+}
+# end
+# entity
+mult_9v01
+# storage
+db|ozy_eval.(102).cnf
+db|ozy_eval.(102).cnf
+# case_insensitive
+# source_file
+db|mult_9v01.tdf
+9a594121deeae8aec12399f92f166f
+6
+# user_parameter {
+dataa_width
+0
+PARAMETER_UNKNOWN
+DEF
+}
+# used_port {
+result9
+-1
+3
+result8
+-1
+3
+result7
+-1
+3
+result6
+-1
+3
+result5
+-1
+3
+result4
+-1
+3
+result31
+-1
+3
+result30
+-1
+3
+result3
+-1
+3
+result29
+-1
+3
+result28
+-1
+3
+result27
+-1
+3
+result26
+-1
+3
+result25
+-1
+3
+result24
+-1
+3
+result23
+-1
+3
+result22
+-1
+3
+result21
+-1
+3
+result20
+-1
+3
+result2
+-1
+3
+result19
+-1
+3
+result18
+-1
+3
+result17
+-1
+3
+result16
+-1
+3
+result15
+-1
+3
+result14
+-1
+3
+result13
+-1
+3
+result12
+-1
+3
+result11
+-1
+3
+result10
+-1
+3
+result1
+-1
+3
+result0
+-1
+3
+datab9
+-1
+3
+datab8
+-1
+3
+datab7
+-1
+3
+datab6
+-1
+3
+datab5
+-1
+3
+datab4
+-1
+3
+datab3
+-1
+3
+datab2
+-1
+3
+datab15
+-1
+3
+datab14
+-1
+3
+datab13
+-1
+3
+datab12
+-1
+3
+datab11
+-1
+3
+datab10
+-1
+3
+datab1
+-1
+3
+datab0
+-1
+3
+dataa9
+-1
+3
+dataa8
+-1
+3
+dataa7
+-1
+3
+dataa6
+-1
+3
+dataa5
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa15
+-1
+3
+dataa14
+-1
+3
+dataa13
+-1
+3
+dataa12
+-1
+3
+dataa11
+-1
+3
+dataa10
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
 }
 # end
 # entity
 phase_accumulator
 # storage
-db|ozy_eval.(1).cnf
-db|ozy_eval.(1).cnf
+db|ozy_eval.(103).cnf
+db|ozy_eval.(103).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -6044,1205 +6270,10 @@ phase_accumulator:rx_phase_accumulator
 }
 # end
 # entity
-CIC_R100_M1_N5
-# storage
-db|ozy_eval.(42).cnf
-db|ozy_eval.(42).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-CIC_R100_M1_N5.v
-24aa0ff635dcb266ce69789a2bbc13
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# end
-# entity
-CIC_R100_M1_N10
-# storage
-db|ozy_eval.(43).cnf
-db|ozy_eval.(43).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-CIC_R100_M1_N10.v
-db646e23566cbab71e1e38b8a49e815
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# end
-# entity
-CIC_R256_M1_N5
-# storage
-db|ozy_eval.(44).cnf
-db|ozy_eval.(44).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-CIC_R256_M1_N5.v
-3ad615b0e2e9c32c36a5958b1266b4
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# hierarchies {
-CIC_R256_M1_N5:I_CIC
-CIC_R256_M1_N5:Q_CIC
-}
-# end
-# entity
-CIC_R64_M1_N4
-# storage
-db|ozy_eval.(45).cnf
-db|ozy_eval.(45).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-CIC_R64_M1_N4.v
-b4e18bfcdeb9059aafe1bdab73c6f9e
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# end
-# entity
-cordic_17
-# storage
-db|ozy_eval.(46).cnf
-db|ozy_eval.(46).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_17.v
-78c53d1cf101f87662d0797b2628f8
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# end
-# entity
-altshift_taps
-# storage
-db|ozy_eval.(47).cnf
-db|ozy_eval.(47).cnf
-# case_insensitive
-# source_file
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altshift_taps.tdf
-42c98c16735ededc8911e861e8589ef
-6
-# user_parameter {
-NUMBER_OF_TAPS
-1
-PARAMETER_UNKNOWN
-USR
-TAP_DISTANCE
-3
-PARAMETER_UNKNOWN
-USR
-WIDTH
-21
-PARAMETER_UNKNOWN
-USR
-POWER_UP_STATE
-CLEARED
-PARAMETER_UNKNOWN
-DEF
-CBXI_PARAMETER
-shift_taps_m1m
-PARAMETER_UNKNOWN
-USR
-}
-# used_port {
-taps9
--1
-3
-taps8
--1
-3
-taps7
--1
-3
-taps6
--1
-3
-taps5
--1
-3
-taps4
--1
-3
-taps3
--1
-3
-taps20
--1
-3
-taps2
--1
-3
-taps19
--1
-3
-taps18
--1
-3
-taps17
--1
-3
-taps16
--1
-3
-taps15
--1
-3
-taps14
--1
-3
-taps13
--1
-3
-taps12
--1
-3
-taps11
--1
-3
-taps10
--1
-3
-taps1
--1
-3
-taps0
--1
-3
-shiftin9
--1
-3
-shiftin8
--1
-3
-shiftin7
--1
-3
-shiftin6
--1
-3
-shiftin5
--1
-3
-shiftin4
--1
-3
-shiftin3
--1
-3
-shiftin20
--1
-3
-shiftin2
--1
-3
-shiftin19
--1
-3
-shiftin18
--1
-3
-shiftin17
--1
-3
-shiftin16
--1
-3
-shiftin15
--1
-3
-shiftin14
--1
-3
-shiftin13
--1
-3
-shiftin12
--1
-3
-shiftin11
--1
-3
-shiftin10
--1
-3
-shiftin1
--1
-3
-shiftin0
--1
-3
-clock
--1
-3
-}
-# include_file {
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_constant.inc
-dcde44eee59335c1e2fe75d574f9646
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
-758886b0947dd67e65ec58adda9b948
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altdpram.inc
-4e1931f9814db9f22f22b9eb377c65d6
-..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
-aec4ea1b78f4cda1c3effe18f1abbf63
-}
-# end
-# entity
-shift_taps_m1m
-# storage
-db|ozy_eval.(48).cnf
-db|ozy_eval.(48).cnf
-# case_insensitive
-# source_file
-db|shift_taps_m1m.tdf
-811c229a2f6162b6c131953a32c53eb
-6
-# used_port {
-taps9
--1
-3
-taps8
--1
-3
-taps7
--1
-3
-taps6
--1
-3
-taps5
--1
-3
-taps4
--1
-3
-taps3
--1
-3
-taps20
--1
-3
-taps2
--1
-3
-taps19
--1
-3
-taps18
--1
-3
-taps17
--1
-3
-taps16
--1
-3
-taps15
--1
-3
-taps14
--1
-3
-taps13
--1
-3
-taps12
--1
-3
-taps11
--1
-3
-taps10
--1
-3
-taps1
--1
-3
-taps0
--1
-3
-shiftin9
--1
-3
-shiftin8
--1
-3
-shiftin7
--1
-3
-shiftin6
--1
-3
-shiftin5
--1
-3
-shiftin4
--1
-3
-shiftin3
--1
-3
-shiftin20
--1
-3
-shiftin2
--1
-3
-shiftin19
--1
-3
-shiftin18
--1
-3
-shiftin17
--1
-3
-shiftin16
--1
-3
-shiftin15
--1
-3
-shiftin14
--1
-3
-shiftin13
--1
-3
-shiftin12
--1
-3
-shiftin11
--1
-3
-shiftin10
--1
-3
-shiftin1
--1
-3
-shiftin0
--1
-3
-clock
--1
-3
-}
-# end
-# entity
-altsyncram_9g31
-# storage
-db|ozy_eval.(49).cnf
-db|ozy_eval.(49).cnf
-# case_insensitive
-# source_file
-db|altsyncram_9g31.tdf
-5c33a0fe7c73737f44fe49c2654c2f42
-6
-# user_parameter {
-PORT_A_ADDRESS_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_A_BYTE_ENABLE_MASK_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_A_DATA_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_B_ADDRESS_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_B_BYTE_ENABLE_MASK_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-PORT_B_DATA_WIDTH
-1
-PARAMETER_UNKNOWN
-DEF
-}
-# used_port {
-q_b9
--1
-3
-q_b8
--1
-3
-q_b7
--1
-3
-q_b6
--1
-3
-q_b5
--1
-3
-q_b4
--1
-3
-q_b3
--1
-3
-q_b20
--1
-3
-q_b2
--1
-3
-q_b19
--1
-3
-q_b18
--1
-3
-q_b17
--1
-3
-q_b16
--1
-3
-q_b15
--1
-3
-q_b14
--1
-3
-q_b13
--1
-3
-q_b12
--1
-3
-q_b11
--1
-3
-q_b10
--1
-3
-q_b1
--1
-3
-q_b0
--1
-3
-data_a9
--1
-3
-data_a8
--1
-3
-data_a7
--1
-3
-data_a6
--1
-3
-data_a5
--1
-3
-data_a4
--1
-3
-data_a3
--1
-3
-data_a20
--1
-3
-data_a2
--1
-3
-data_a19
--1
-3
-data_a18
--1
-3
-data_a17
--1
-3
-data_a16
--1
-3
-data_a15
--1
-3
-data_a14
--1
-3
-data_a13
--1
-3
-data_a12
--1
-3
-data_a11
--1
-3
-data_a10
--1
-3
-data_a1
--1
-3
-data_a0
--1
-3
-clock1
--1
-3
-clock0
--1
-3
-address_b1
--1
-3
-address_b0
--1
-3
-address_a1
--1
-3
-address_a0
--1
-3
-wren_a
--1
-2
-clocken1
--1
-2
-clocken0
--1
-2
-}
-# memory_file {
-none
-0
-}
-# end
-# entity
-add_sub_gvd
-# storage
-db|ozy_eval.(50).cnf
-db|ozy_eval.(50).cnf
-# case_insensitive
-# source_file
-db|add_sub_gvd.tdf
-a1fa149a608b8963b16d6d262e04545
-6
-# used_port {
-result1
--1
-3
-result0
--1
-3
-dataa1
--1
-3
-dataa0
--1
-3
-datab1
--1
-1
-datab0
--1
-1
-}
-# end
-# entity
-cntr_imc
-# storage
-db|ozy_eval.(51).cnf
-db|ozy_eval.(51).cnf
-# case_insensitive
-# source_file
-db|cntr_imc.tdf
-eac498a9dc2cba356ab27a55a7dc50b4
-6
-# used_port {
-q1
--1
-3
-q0
--1
-3
-clock
--1
-3
-clk_en
--1
-2
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(3).cnf
-db|ozy_eval.(3).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-0
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(4).cnf
-db|ozy_eval.(4).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-1
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(5).cnf
-db|ozy_eval.(5).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-2
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(6).cnf
-db|ozy_eval.(6).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-3
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(7).cnf
-db|ozy_eval.(7).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-4
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(8).cnf
-db|ozy_eval.(8).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-5
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(9).cnf
-db|ozy_eval.(9).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-6
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(10).cnf
-db|ozy_eval.(10).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-7
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(11).cnf
-db|ozy_eval.(11).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-8
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(12).cnf
-db|ozy_eval.(12).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-9
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(13).cnf
-db|ozy_eval.(13).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-10
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(14).cnf
-db|ozy_eval.(14).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-11
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(15).cnf
-db|ozy_eval.(15).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-12
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(16).cnf
-db|ozy_eval.(16).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-13
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(17).cnf
-db|ozy_eval.(17).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-14
-PARAMETER_DEC
-USR
-}
-# end
-# entity
-cordic_stage
-# storage
-db|ozy_eval.(18).cnf
-db|ozy_eval.(18).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-cordic_stage.v
-5bad6ca8ed10a2172d15c171ebad1362
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# user_parameter {
-CORDIC_WIDTH
-20
-PARAMETER_DEC
-USR
-PHASE_WIDTH
-15
-PARAMETER_DEC
-USR
-SHIFT
-15
-PARAMETER_DEC
-USR
-}
-# end
-# entity
 cordic
 # storage
-db|ozy_eval.(2).cnf
-db|ozy_eval.(2).cnf
+db|ozy_eval.(104).cnf
+db|ozy_eval.(104).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7273,8 +6304,8 @@ cordic:rx_cordic
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(52).cnf
-db|ozy_eval.(52).cnf
+db|ozy_eval.(105).cnf
+db|ozy_eval.(105).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7309,8 +6340,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage0
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(53).cnf
-db|ozy_eval.(53).cnf
+db|ozy_eval.(106).cnf
+db|ozy_eval.(106).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7345,8 +6376,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage1
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(54).cnf
-db|ozy_eval.(54).cnf
+db|ozy_eval.(107).cnf
+db|ozy_eval.(107).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7381,8 +6412,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage2
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(55).cnf
-db|ozy_eval.(55).cnf
+db|ozy_eval.(108).cnf
+db|ozy_eval.(108).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7417,8 +6448,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage3
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(56).cnf
-db|ozy_eval.(56).cnf
+db|ozy_eval.(109).cnf
+db|ozy_eval.(109).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7453,8 +6484,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage4
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(57).cnf
-db|ozy_eval.(57).cnf
+db|ozy_eval.(110).cnf
+db|ozy_eval.(110).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7489,8 +6520,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage5
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(58).cnf
-db|ozy_eval.(58).cnf
+db|ozy_eval.(111).cnf
+db|ozy_eval.(111).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7525,8 +6556,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage6
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(59).cnf
-db|ozy_eval.(59).cnf
+db|ozy_eval.(112).cnf
+db|ozy_eval.(112).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7561,8 +6592,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage7
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(60).cnf
-db|ozy_eval.(60).cnf
+db|ozy_eval.(113).cnf
+db|ozy_eval.(113).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7597,8 +6628,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage8
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(61).cnf
-db|ozy_eval.(61).cnf
+db|ozy_eval.(114).cnf
+db|ozy_eval.(114).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7633,8 +6664,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage9
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(62).cnf
-db|ozy_eval.(62).cnf
+db|ozy_eval.(115).cnf
+db|ozy_eval.(115).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7669,8 +6700,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage10
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(63).cnf
-db|ozy_eval.(63).cnf
+db|ozy_eval.(116).cnf
+db|ozy_eval.(116).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7705,8 +6736,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage11
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(64).cnf
-db|ozy_eval.(64).cnf
+db|ozy_eval.(117).cnf
+db|ozy_eval.(117).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7741,8 +6772,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage12
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(65).cnf
-db|ozy_eval.(65).cnf
+db|ozy_eval.(118).cnf
+db|ozy_eval.(118).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7777,8 +6808,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage13
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(66).cnf
-db|ozy_eval.(66).cnf
+db|ozy_eval.(119).cnf
+db|ozy_eval.(119).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7813,8 +6844,8 @@ cordic:rx_cordic|cordic_stage:cordic_stage14
 # entity
 cordic_stage
 # storage
-db|ozy_eval.(67).cnf
-db|ozy_eval.(67).cnf
+db|ozy_eval.(120).cnf
+db|ozy_eval.(120).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -7847,6 +6878,29 @@ cordic:rx_cordic|cordic_stage:cordic_stage15
 }
 # end
 # entity
+CIC_R100_M1_N5
+# storage
+db|ozy_eval.(121).cnf
+db|ozy_eval.(121).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CIC_R100_M1_N5.v
+24aa0ff635dcb266ce69789a2bbc13
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+CIC_R100_M1_N5:I_CIC
+CIC_R100_M1_N5:Q_CIC
+}
+# end
+# entity
 ozy_nco
 # storage
 db|ozy_eval.(0).cnf
@@ -7858,7 +6912,7 @@ ON
 # case_sensitive
 # source_file
 ozy_nco.v
-7e5ea8af50e4ac25b930931be76d3e0
+8744787a5de77e59d2a548a05790b531
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

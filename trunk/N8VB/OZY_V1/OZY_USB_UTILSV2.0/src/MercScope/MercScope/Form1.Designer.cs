@@ -74,6 +74,9 @@ namespace MercScope
             this.nudSpecScale = new System.Windows.Forms.NumericUpDown();
             this.hscrollGain = new System.Windows.Forms.HScrollBar();
             this.hscrollPhase = new System.Windows.Forms.HScrollBar();
+            this.txtSR = new System.Windows.Forms.TextBox();
+            this.btnSendSR = new System.Windows.Forms.Button();
+            this.btnRd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -217,7 +220,7 @@ namespace MercScope
             0,
             0});
             this.numericUpDown3.Minimum = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});
@@ -530,11 +533,41 @@ namespace MercScope
             this.hscrollPhase.SmallChange = 100;
             this.hscrollPhase.TabIndex = 43;
             // 
+            // txtSR
+            // 
+            this.txtSR.Location = new System.Drawing.Point(32, 781);
+            this.txtSR.Name = "txtSR";
+            this.txtSR.Size = new System.Drawing.Size(74, 20);
+            this.txtSR.TabIndex = 44;
+            // 
+            // btnSendSR
+            // 
+            this.btnSendSR.Location = new System.Drawing.Point(127, 781);
+            this.btnSendSR.Name = "btnSendSR";
+            this.btnSendSR.Size = new System.Drawing.Size(75, 20);
+            this.btnSendSR.TabIndex = 45;
+            this.btnSendSR.Text = "Send";
+            this.btnSendSR.UseVisualStyleBackColor = true;
+            this.btnSendSR.Click += new System.EventHandler(this.btnSendSR_Click);
+            // 
+            // btnRd
+            // 
+            this.btnRd.Location = new System.Drawing.Point(127, 807);
+            this.btnRd.Name = "btnRd";
+            this.btnRd.Size = new System.Drawing.Size(75, 20);
+            this.btnRd.TabIndex = 46;
+            this.btnRd.Text = "Read";
+            this.btnRd.UseVisualStyleBackColor = true;
+            this.btnRd.Click += new System.EventHandler(this.btnRd_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 778);
+            this.ClientSize = new System.Drawing.Size(619, 859);
+            this.Controls.Add(this.btnRd);
+            this.Controls.Add(this.btnSendSR);
+            this.Controls.Add(this.txtSR);
             this.Controls.Add(this.hscrollPhase);
             this.Controls.Add(this.hscrollGain);
             this.Controls.Add(this.label14);
@@ -639,6 +672,9 @@ namespace MercScope
         private System.Windows.Forms.NumericUpDown nudSpecScale;
         private System.Windows.Forms.HScrollBar hscrollGain;
         private System.Windows.Forms.HScrollBar hscrollPhase;
+        private System.Windows.Forms.TextBox txtSR;
+        private System.Windows.Forms.Button btnSendSR;
+        private System.Windows.Forms.Button btnRd;
     }
 }
 

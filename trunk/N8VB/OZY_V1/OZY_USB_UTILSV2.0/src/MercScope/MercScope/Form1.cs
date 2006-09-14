@@ -392,5 +392,46 @@ namespace MercScope
                 OZY.Write_SPI(hdev, 0, 0x01, OZY.SPI_EN_FPGA, (OZY.SPI_FMT_MSB | OZY.SPI_FMT_HDR_1), buf);
         }
 
+        private void btnSendSR_Click(object sender, EventArgs e)
+        {
+            int cmd = Convert.ToInt32(txtSR.Text);
+            byte[] buf = BitConverter.GetBytes(cmd);
+
+            byte[] tempbuf = new byte[4];
+
+            if (buf.Length < 4) return;
+
+            // put bytes in proper order MSB to LSB
+            for (int i = 0; i < buf.Length; i++)
+            {
+                tempbuf[buf.Length - 1 - i] = buf[i];
+            }
+
+            for (int i = 0; i < buf.Length; i++)
+            {
+                listBox1.Items.Add(buf[i]);
+            }
+
+            buf = tempbuf;
+            // send to OZY register 0x02, 32 bits
+            if (hdev != IntPtr.Zero)
+                OZY.Write_SPI(hdev, 0, 0x02, OZY.SPI_EN_FPGA, (OZY.SPI_FMT_MSB | OZY.SPI_FMT_HDR_1), buf);            
+            
+        }
+
+        private void btnRd_Click(object sender, EventArgs e)
+        {
+            byte[] buf = new byte[4];
+
+            if (hdev != IntPtr.Zero)
+                OZY.Read_SPI(hdev, 0, 0x02, OZY.SPI_EN_FPGA, (OZY.SPI_FMT_MSB | OZY.SPI_FMT_HDR_1), ref buf);
+
+            for (int i = 0; i < buf.Length; i++)
+            {
+                listBox1.Items.Add(buf[i]);
+            }
+        }
+
+
     }
 }
