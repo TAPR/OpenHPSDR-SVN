@@ -1,5 +1,5 @@
 Flow report for ozy_eval
-Fri Sep 08 16:55:47 2006
+Thu Sep 14 17:54:48 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Fri Sep 08 16:55:46 2006        ;
+; Flow Status                        ; Successful - Thu Sep 14 17:54:48 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; ozy_eval                                     ;
 ; Top-level Entity Name              ; ozy_nco                                      ;
@@ -45,8 +45,8 @@ applicable agreement for further details.
 ; Device                             ; EP2C5Q208C7                                  ;
 ; Timing Models                      ; Final                                        ;
 ; Met timing requirements            ; Yes                                          ;
-; Total logic elements               ; 2,217 / 4,608 ( 48 % )                       ;
-; Total registers                    ; 1794                                         ;
+; Total logic elements               ; 2,253 / 4,608 ( 49 % )                       ;
+; Total registers                    ; 1793                                         ;
 ; Total pins                         ; 55 / 142 ( 39 % )                            ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 16,384 / 119,808 ( 14 % )                    ;
@@ -60,20 +60,21 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/08/2006 16:54:27 ;
+; Start date & time ; 09/14/2006 17:53:51 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; ozy_eval            ;
 +-------------------+---------------------+
 
 
-+---------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                      ;
-+----------------------------------+---------+---------------+-------------+------------+
-; Assignment Name                  ; Value   ; Default Value ; Entity Name ; Section Id ;
-+----------------------------------+---------+---------------+-------------+------------+
-; ENABLE_RECOVERY_REMOVAL_ANALYSIS ; On      ; Off           ; --          ; --         ;
-; TOP_LEVEL_ENTITY                 ; ozy_nco ; ozy_eval      ; --          ; --         ;
-+----------------------------------+---------+---------------+-------------+------------+
++------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                 ;
++----------------------------------+------------------------------------+---------------+-------------+------------+
+; Assignment Name                  ; Value                              ; Default Value ; Entity Name ; Section Id ;
++----------------------------------+------------------------------------+---------------+-------------+------------+
+; ENABLE_RECOVERY_REMOVAL_ANALYSIS ; On                                 ; Off           ; --          ; --         ;
+; TOP_LEVEL_ENTITY                 ; ozy_nco                            ; ozy_eval      ; --          ; --         ;
+; USER_LIBRARIES                   ; C:/altera/megacore/nco-v2.3.0/lib; ; --            ; --          ; --         ;
++----------------------------------+------------------------------------+---------------+-------------+------------+
 
 
 +-------------------------------------+
@@ -81,11 +82,11 @@ applicable agreement for further details.
 +----------------------+--------------+
 ; Module Name          ; Elapsed Time ;
 +----------------------+--------------+
-; Analysis & Synthesis ; 00:00:25     ;
-; Fitter               ; 00:00:31     ;
-; Assembler            ; 00:00:05     ;
-; Timing Analyzer      ; 00:00:05     ;
-; Total                ; 00:01:06     ;
+; Analysis & Synthesis ; 00:00:19     ;
+; Fitter               ; 00:00:25     ;
+; Assembler            ; 00:00:03     ;
+; Timing Analyzer      ; 00:00:03     ;
+; Total                ; 00:00:50     ;
 +----------------------+--------------+
 
 

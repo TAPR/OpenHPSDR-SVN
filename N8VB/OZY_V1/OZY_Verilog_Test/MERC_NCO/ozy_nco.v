@@ -102,17 +102,14 @@ module ozy_nco(	ENC_CLK,
 			end			
 	end
 			
-	wire [15:0] i_out;
-	wire [15:0] q_out;
-	
 	// SPI
-	`define FREQSETADRREG 7'h1 // freq setting register address = 0x01
-	
+		
 	wire [6:0] serial_address;
  	wire [31:0] serial_data;
  	wire	   serial_strobe;
 	wire [31:0] freqset_register;	// freq set is read/write
-	
+	wire [31:0] option_sel_register;
+		
 	// SPI communications module
  	SPI_REGS #(32) spi_regs(	.FX2_CLK(FX2_CLK),
 								.SI(SI),
@@ -123,7 +120,7 @@ module ozy_nco(	ENC_CLK,
 								.sdata(serial_data),
 								.sstrobe(serial_strobe),
 								.GPReg0(freqset_register), // readback for freqset
-								.GPReg1(), 
+								.GPReg1(option_sel_register), 
 								.GPReg2(), 
 								.GPReg3(),
 								.GPReg4(),
@@ -132,13 +129,21 @@ module ozy_nco(	ENC_CLK,
 								.GPReg7());
 	
 	// Freq Setting Register, Address = 0x01	
- 	RegisterX #(`FREQSETADRREG, 32) freqsetreg(.CLK(FX2_CLK),
+ 	RegisterX #(7'h1, 32) freqsetreg(.CLK(FX2_CLK),
 									.STB(serial_strobe),
 									.ADDR(serial_address),
 									.IN(serial_data),
 									.OUT(freqset_register),
 									.CHANGED());
-													
+	
+	// Freq Setting Register, Address = 0x02	
+ 	RegisterX #(7'h2, 32) optionreg(.CLK(FX2_CLK),
+									.STB(serial_strobe),
+									.ADDR(serial_address),
+									.IN(serial_data),
+									.OUT(option_sel_register),
+									.CHANGED());
+																						
 	//parameter FREQ = 32'hF5C28F5; // (6 MHz/100 MHz)*(2^32)
 	//parameter FREQ = 32'hB3333333; // 70 MHz
 	//parameter FREQ = 32'h4CCCCCCC; // 30 MHz
@@ -149,8 +154,9 @@ module ozy_nco(	ENC_CLK,
 	
 	wire [31:0] phase;
 	
-	wire [31:0] rand_num;	
+	//wire [31:0] rand_num;	
 	
+	/*
 	// used for phase dithering	
 	rng random(	.clk(ENC_CLK),
 				.reset(1'b1),
@@ -158,7 +164,7 @@ module ozy_nco(	ENC_CLK,
 				.seed_i(32'hF0FF0FFF),
 				.number_o(rand_num));		
 	
-	/*				
+					
 	phase_accumulator rx_phase_accumulator(	.clk(ENC_CLK),
 											.reset(~clk_enable),
 											.frequency(freqset_register),
@@ -166,6 +172,9 @@ module ozy_nco(	ENC_CLK,
 											.phase_out(phase));
 	*/
 	
+	wire [15:0] i_cordic_out;
+	wire [15:0] q_cordic_out;		
+		
 	phase_accumulator rx_phase_accumulator(	.clk(ENC_CLK),
 											.reset(~clk_enable),
 											.frequency(freqset_register),
@@ -178,75 +187,64 @@ module ozy_nco(	ENC_CLK,
 						.Iin(ADC[15:0]),
 						.Qin(16'h0),
 						.PHin(phase[31:16]),
-						.Iout(i_out),
-						.Qout(q_out),
-						.PHout());
-	
-	
-	
-	/*
-	cordic_17 rx_cordic(	.in(ADC),
-							.iout(i_out),
-							.qout(q_out),
-							.ain(phase[31:16]),
-							.clk(ENC_CLK));
-	
-	*/
-	
-	wire [15:0] i_dec;
-	wire [15:0] q_dec;
+						.Iout(i_cordic_out),
+						.Qout(q_cordic_out),
+						.PHout());	
+					
 	wire i_strobe;
 	wire q_strobe;
 	
-	
-	CIC_R256_M1_N5 I_CIC(	.clk(ENC_CLK),
+		
+	CIC_R100_M1_N5 I_CIC(	.clk(ENC_CLK),
 			                .clk_enable(clk_enable),
 			                .reset(~clk_enable),
-			                .filter_in(i_out),
-			                .filter_out(i_dec),
+			                .filter_in(i_cordic_out),
+			                .filter_out(i_stage2),
 			                .ce_out(i_strobe)
 			                );
 
-	CIC_R256_M1_N5 Q_CIC(	.clk(ENC_CLK),
+	CIC_R100_M1_N5 Q_CIC(	.clk(ENC_CLK),
 			                .clk_enable(clk_enable),
 			                .reset(~clk_enable),
-			                .filter_in(q_out),
-			                .filter_out(q_dec),
+			                .filter_in(q_cordic_out),
+			                .filter_out(q_stage2),
 			                .ce_out(q_strobe)
-			                );
+			                );	
+	
+	
+	wire [15:0] i_fifo_out;
+	wire [15:0] q_fifo_out;
+	
+	wire [15:0] i_stage1;
+	wire [15:0] q_stage1;
+	wire [15:0] i_stage2;
+	wire [15:0] q_stage2;
+	
+	assign i_fifo_out = (option_sel_register[1:0] == 2'b00) ? ADC[15:0] : i_stage1[15:0];
+	assign q_fifo_out = (option_sel_register[1:0] == 2'b00) ? 16'b0 : q_stage1[15:0];
+	assign i_stage1 = (option_sel_register[1:0] == 2'b01) ? i_cordic_out[15:0] : i_stage2[15:0];
+	assign q_stage1 = (option_sel_register[1:0] == 2'b01) ? q_cordic_out[15:0] : q_stage2[15:0];
+	
+	wire i_sel_strobe;
+	wire q_sel_strobe;
+	
+	assign i_sel_strobe = (option_sel_register[1:0] == 2'b0X) ? 1'b1 : i_strobe;
+	assign q_sel_strobe = (option_sel_register[1:0] == 2'b0X) ? 1'b1 : q_strobe;
 	
 	// I FIFO		
 	tx_fifo tx_fifo_i(.aclr(txfifoclr), .wrclk(ENC_CLK), 
-			.rdreq(WRITE_FX2FIFO & (fx2st == 4'd2)), .rdclk(IFCLK), .wrreq(adc_go & i_strobe),
-			.data(i_dec), .rdempty(ireadfifoempty), .wrempty(), 
+			.rdreq(WRITE_FX2FIFO & (fx2st == 4'd2)), .rdclk(IFCLK), .wrreq(adc_go & i_sel_strobe),
+			.data(i_fifo_out), .rdempty(ireadfifoempty), .wrempty(), 
 			.wrfull(iwritefifofull),	.rdfull(), 
 			.q(IWORD), .wrusedw(), .rdusedw());
 	
 	// Q FIFO		
 	tx_fifo tx_fifo_q(.aclr(txfifoclr), .wrclk(ENC_CLK), 
-			.rdreq(WRITE_FX2FIFO & (fx2st == 4'd3)), .rdclk(IFCLK), .wrreq(adc_go & q_strobe),
-			.data(q_dec), .rdempty(qreadfifoempty), .wrempty(), 
+			.rdreq(WRITE_FX2FIFO & (fx2st == 4'd3)), .rdclk(IFCLK), .wrreq(adc_go & q_sel_strobe),
+			.data(q_fifo_out), .rdempty(qreadfifoempty), .wrempty(), 
 			.wrfull(qwritefifofull),	.rdfull(), 
 			.q(QWORD), .wrusedw(), .rdusedw());
-	
-	
-	/*
-	// I FIFO		
-	tx_fifo tx_fifo_i(.aclr(txfifoclr), .wrclk(ENC_CLK), 
-			.rdreq(WRITE_FX2FIFO & (fx2st == 4'd2)), .rdclk(IFCLK), .wrreq(adc_go),
-			.data(i_out), .rdempty(ireadfifoempty), .wrempty(), 
-			.wrfull(iwritefifofull),	.rdfull(), 
-			.q(IWORD), .wrusedw(), .rdusedw());
-	
-	// Q FIFO		
-	tx_fifo tx_fifo_q(.aclr(txfifoclr), .wrclk(ENC_CLK), 
-			.rdreq(WRITE_FX2FIFO & (fx2st == 4'd3)), .rdclk(IFCLK), .wrreq(adc_go),
-			.data(q_out), .rdempty(qreadfifoempty), .wrempty(), 
-			.wrfull(qwritefifofull),	.rdfull(), 
-			.q(QWORD), .wrusedw(), .rdusedw());
-	
-	*/
-	
+				
 	// Write to EP6
 				
 	reg [3:0] fx2st;
