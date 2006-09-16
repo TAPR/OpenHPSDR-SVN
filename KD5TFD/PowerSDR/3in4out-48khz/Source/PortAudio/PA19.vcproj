@@ -122,6 +122,7 @@
 				SuppressStartupBanner="TRUE"
 				ModuleDefinitionFile=".\pa19.def"
 				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile="..\..\bin\Debug\pa19.pdb"
 				ImportLibrary="$(OutDir)/PA19.lib"
 				TargetMachine="1"/>
 			<Tool

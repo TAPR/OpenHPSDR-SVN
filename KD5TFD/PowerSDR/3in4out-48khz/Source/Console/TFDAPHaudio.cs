@@ -93,7 +93,7 @@ namespace PowerSDR
 			return 1; 
 		}
 		 						  
-		unsafe public static int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits) 
+		unsafe public static int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits, int no_send) 
 		{ 
 			if ( !isOzyInitialized ) 
 			{ 
@@ -114,12 +114,12 @@ namespace PowerSDR
 				} 
 				isOzyInitialized = true; 
 			} 
-			return StartAudioNative(sample_rate, samples_per_block, cb, sample_bits); 
+			return StartAudioNative(sample_rate, samples_per_block, cb, sample_bits, no_send); 
 		} 
 
 
 		[DllImport("KD5TFD-VK6APH-Audio.dll")]
-		unsafe public static extern int StartAudioNative(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits); 
+		unsafe public static extern int StartAudioNative(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits, int no_send); 
 
 		[DllImport("KD5TFD-VK6APH-Audio.dll")]
 		unsafe public static extern int StopAudio(); 

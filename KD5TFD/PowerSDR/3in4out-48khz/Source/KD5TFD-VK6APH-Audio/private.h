@@ -145,6 +145,7 @@ extern int SampleRate;
 extern unsigned char SampleRateIn2Bits; // value of sample rate to send to fpga 
 extern void *MicResamplerP; // Mic resampler filter 
 extern int SampleBits;  // how many bits in a sample 
+extern int ForceNoSend;  // force no sending of data to Janus 
 extern float IQConversionDivisor;  // divisor to use converting sample ints to floats 
 
 extern unsigned char ControlBytesIn[5];
