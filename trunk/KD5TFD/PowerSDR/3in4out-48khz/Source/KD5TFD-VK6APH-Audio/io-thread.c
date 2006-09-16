@@ -911,12 +911,19 @@ void IOThreadMainLoop(void) {
 			
 			if ( writebufpos >= FPGAWriteBufSize ) {  // write the buffer if we've filled it. 
 				wrote_frame = 1; 
+				if ( !ForceNoSend ) { 
 #ifdef XYLO
-				numwritten = XyloBulkWrite(XyloH, 2, FPGAWriteBufp, FPGAWriteBufSize); 
+					numwritten = XyloBulkWrite(XyloH, 2, FPGAWriteBufp, FPGAWriteBufSize); 
 #endif 
 #ifdef OZY 
-				numwritten = OzyBulkWrite(OzyH, 0x02, FPGAWriteBufp, FPGAWriteBufSize); 
+					numwritten = OzyBulkWrite(OzyH, 0x02, FPGAWriteBufp, FPGAWriteBufSize); 
+				
+				
 #endif 
+				}
+				else { 
+					numwritten = FPGAWriteBufSize; 
+				}
 				// numwritten = OUTBUF_SIZE; 
 
 #ifdef SAVE_WRITES_TO_BUFFER 

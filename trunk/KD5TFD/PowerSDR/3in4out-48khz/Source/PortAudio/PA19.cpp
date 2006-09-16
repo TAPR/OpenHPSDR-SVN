@@ -2,6 +2,8 @@
  *   Written by Eric Wachsmann
  */
 
+
+
 #include <windows.h>
 #include "portaudio.h"
 //#include "PA19.h"
@@ -84,6 +86,7 @@ PA19_API const char* CCONV PA_GetErrorText(PaError errorCode)
 
 PA19_API PaError CCONV PA_Initialize()
 {
+	/* __debugbreak();  */ 
 	return Pa_Initialize();
 }
 

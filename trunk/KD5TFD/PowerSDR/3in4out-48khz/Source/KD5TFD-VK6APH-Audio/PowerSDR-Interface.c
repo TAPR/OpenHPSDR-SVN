@@ -52,7 +52,7 @@
 
 KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_block, 
 										   int (__stdcall *callbackp)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata), 
-										   int sample_bits)
+										   int sample_bits, int no_send)
 { 
 	int rc; 
 	int myrc = 0; 
@@ -76,6 +76,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 	FPGAReadBufp = NULL; 
 	FPGAWriteBufp = NULL; 
 	SampleBits = sample_bits; 
+	ForceNoSend = no_send; 
 	IQConversionDivisor = (float)8388607.0;  // (2**23)-1
 	if ( SampleBits == 16 ) { 
 		IQConversionDivisor = (float)32767.0;
@@ -281,7 +282,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 
 
 KD5TFDVK6APHAUDIO_API void SetVFOfreq(double ff) { 	
-	ff = (1000000.0  * ff * 4294967296.0) / ( 100.0 * 1000000); 
+	ff = (1000000.0  * ff * 4294967296.0) / ( 100.0 * 1000000);  // 1Mhz * (f in mhz) * (2**32) / (100 mhz) 
 	VFOfreq = (int)ff; 
 	return; 
 }

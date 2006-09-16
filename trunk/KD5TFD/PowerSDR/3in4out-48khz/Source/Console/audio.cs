@@ -4233,12 +4233,17 @@ namespace PowerSDR
 			{ 
 				using_tfdaph_audio = true; 
 				int rc; 
+				int no_send = 0; 
 				int sample_bits = 24; 
 				if ( console.Force16bitIQ ) 
 				{ 
 					sample_bits = 16; 
 				} 
-				rc = TFDAPHaudio.StartAudio((int)sample_rate, (int)block_size, callback, sample_bits); 
+				if ( console.NoJanusSend ) 
+				{
+					no_send = 1; 
+				}
+				rc = TFDAPHaudio.StartAudio((int)sample_rate, (int)block_size, callback, sample_bits, no_send); 
 				if ( rc != 0 ) 
 				{ 
 					System.Console.WriteLine("TFDAPH.StartAudio failed w/ rc: " + rc); 

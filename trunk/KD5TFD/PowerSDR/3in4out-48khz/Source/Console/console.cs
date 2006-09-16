@@ -6204,6 +6204,11 @@ namespace PowerSDR
 							Force16bitIQ = true; 
 							this.Text = this.Text + " *** 16 bit IQ ***"; 
 							break; 
+						
+						case "--no-send-to-Janus":
+							NoJanusSend = true; 
+							this.Text = this.Text + "*** NoJanusSend ***"; 
+							break; 
 
 					}
 				}
@@ -6215,6 +6220,7 @@ namespace PowerSDR
 		}
 
 		public bool Force16bitIQ = false; 
+		public bool NoJanusSend = false; 
 
 		public void ExitConsole()
 		{
