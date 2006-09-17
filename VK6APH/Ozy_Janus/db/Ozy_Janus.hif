@@ -243,28 +243,6 @@ clocks:clocks|lpm_counter:lpm_counter_component|cntr_tkh:auto_generated
 }
 # end
 # entity
-Rx_fifo
-# storage
-db|Ozy_Janus.(4).cnf
-db|Ozy_Janus.(4).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-Rx_fifo.v
-6c9286038cf6eb391bf1d1bd4af49
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# hierarchies {
-Rx_fifo:Rx_fifo
-}
-# end
-# entity
 dcfifo
 # storage
 db|Ozy_Janus.(5).cnf
@@ -407,9 +385,6 @@ c8498561e0bdc47f87b5548333d65f50
 f4c68b9daca4a0e5389631895df30d0
 ..|..|..|..|altera|quartus60|libraries|megafunctions|altsyncram_fifo.inc
 12f7d8c61da985ee5330de43a169e
-}
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
 }
 # end
 # entity
@@ -610,9 +585,6 @@ data0
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated
-}
 # end
 # entity
 a_gray2bin_ndb
@@ -705,10 +677,10 @@ bin0
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:rs_dgwp_gray2bin
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:wrptr_g_gray2bin
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:ws_dgrp_gray2bin
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_gray2bin_ndb:rs_dgwp_gray2bin
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_gray2bin_ndb:wrptr_g_gray2bin
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_gray2bin_ndb:ws_dgrp_gray2bin
 }
 # end
 # entity
@@ -772,7 +744,7 @@ aclr
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p
 }
 # end
 # entity
@@ -794,7 +766,7 @@ clock
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_lk6:wrptr_g1p
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_lk6:wrptr_g1p
 }
 # end
 # entity
@@ -855,7 +827,7 @@ clock
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp
 }
 # end
 # entity
@@ -1054,7 +1026,7 @@ address_a0
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram
 }
 # end
 # entity
@@ -1337,7 +1309,7 @@ none
 0
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4
 }
 # end
 # entity
@@ -1361,9 +1333,6 @@ clock
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_b97:rdfull_reg
-}
 # end
 # entity
 dffpipe_5a8
@@ -1385,9 +1354,6 @@ d0
 clock
 -1
 3
-}
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_b97:rdfull_reg|dffpipe_5a8:dffpipe5
 }
 # end
 # entity
@@ -1484,10 +1450,10 @@ clock
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:ws_brp
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:ws_bwp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:ws_brp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:ws_bwp
 }
 # end
 # entity
@@ -1583,9 +1549,6 @@ clock
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp
-}
 # end
 # entity
 dffpipe_019
@@ -1680,9 +1643,6 @@ clock
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7
-}
 # end
 # entity
 alt_synch_pipe_c97
@@ -1705,9 +1665,6 @@ clock
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_c97:wrempty_reg
-}
 # end
 # entity
 dffpipe_6a8
@@ -1729,9 +1686,6 @@ d0
 clock
 -1
 3
-}
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_c97:wrempty_reg|dffpipe_6a8:dffpipe9
 }
 # end
 # entity
@@ -1827,9 +1781,6 @@ clock
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_508:ws_dgrp
-}
 # end
 # entity
 dffpipe_119
@@ -1923,9 +1874,6 @@ d0
 clock
 -1
 3
-}
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_508:ws_dgrp|dffpipe_119:dffpipe11
 }
 # end
 # entity
@@ -3523,6 +3471,872 @@ debounce:de_dash
 }
 # end
 # entity
+Rx_fifo
+# storage
+db|Ozy_Janus.(4).cnf
+db|Ozy_Janus.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+Rx_fifo.v
+e3b4f8b7c6b96f89dd67faf117baccc3
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+Rx_fifo:Rx_fifo
+}
+# end
+# entity
+dcfifo
+# storage
+db|Ozy_Janus.(40).cnf
+db|Ozy_Janus.(40).cnf
+# case_insensitive
+# source_file
+..|..|..|..|altera|quartus60|libraries|megafunctions|dcfifo.tdf
+f52f61d654507d26e32b8ae857d410
+6
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+16
+PARAMETER_DEC
+USR
+LPM_NUMWORDS
+4096
+PARAMETER_DEC
+USR
+LPM_WIDTHU
+12
+PARAMETER_DEC
+USR
+LPM_SHOWAHEAD
+OFF
+PARAMETER_UNKNOWN
+USR
+UNDERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+OVERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+USE_EAB
+ON
+PARAMETER_UNKNOWN
+USR
+ADD_RAM_OUTPUT_REGISTER
+OFF
+PARAMETER_UNKNOWN
+USR
+DELAY_RDUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+DELAY_WRUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+RDSYNC_DELAYPIPE
+3
+PARAMETER_UNKNOWN
+DEF
+WRSYNC_DELAYPIPE
+3
+PARAMETER_UNKNOWN
+DEF
+CLOCKS_ARE_SYNCHRONIZED
+FALSE
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+dcfifo_rhc1
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+wrusedw
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrempty
+-1
+3
+wrclk
+-1
+3
+rdusedw
+-1
+3
+rdreq
+-1
+3
+rdfull
+-1
+3
+rdclk
+-1
+3
+q
+-1
+3
+data
+-1
+3
+}
+# include_file {
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
+758886b0947dd67e65ec58adda9b948
+..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+..|..|..|..|altera|quartus60|libraries|megafunctions|altdpram.inc
+4e1931f9814db9f22f22b9eb377c65d6
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_graycounter.inc
+6bb463da5ec6451f39fdb64aba52ffc0
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_fefifo.inc
+c8498561e0bdc47f87b5548333d65f50
+..|..|..|..|altera|quartus60|libraries|megafunctions|a_gray2bin.inc
+2466d892d81838e113e13f4e76e71f2
+..|..|..|..|altera|quartus60|libraries|megafunctions|dffpipe.inc
+8dfdb676c11c7bcef0694118a05ea2d
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_sync_fifo.inc
+f4c68b9daca4a0e5389631895df30d0
+..|..|..|..|altera|quartus60|libraries|megafunctions|altsyncram_fifo.inc
+12f7d8c61da985ee5330de43a169e
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+}
+# end
+# entity
+dcfifo_rhc1
+# storage
+db|Ozy_Janus.(41).cnf
+db|Ozy_Janus.(41).cnf
+# case_insensitive
+# source_file
+db|dcfifo_rhc1.tdf
+fb2cd0f684364a6f109bb977dba3e5
+6
+# used_port {
+wrusedw9
+-1
+3
+wrusedw8
+-1
+3
+wrusedw7
+-1
+3
+wrusedw6
+-1
+3
+wrusedw5
+-1
+3
+wrusedw4
+-1
+3
+wrusedw3
+-1
+3
+wrusedw2
+-1
+3
+wrusedw11
+-1
+3
+wrusedw10
+-1
+3
+wrusedw1
+-1
+3
+wrusedw0
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrempty
+-1
+3
+wrclk
+-1
+3
+rdusedw9
+-1
+3
+rdusedw8
+-1
+3
+rdusedw7
+-1
+3
+rdusedw6
+-1
+3
+rdusedw5
+-1
+3
+rdusedw4
+-1
+3
+rdusedw3
+-1
+3
+rdusedw2
+-1
+3
+rdusedw11
+-1
+3
+rdusedw10
+-1
+3
+rdusedw1
+-1
+3
+rdusedw0
+-1
+3
+rdreq
+-1
+3
+rdfull
+-1
+3
+rdclk
+-1
+3
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q15
+-1
+3
+q14
+-1
+3
+q13
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+data9
+-1
+3
+data8
+-1
+3
+data7
+-1
+3
+data6
+-1
+3
+data5
+-1
+3
+data4
+-1
+3
+data3
+-1
+3
+data2
+-1
+3
+data15
+-1
+3
+data14
+-1
+3
+data13
+-1
+3
+data12
+-1
+3
+data11
+-1
+3
+data10
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated
+}
+# end
+# entity
+alt_synch_pipe_d97
+# storage
+db|Ozy_Janus.(42).cnf
+db|Ozy_Janus.(42).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_d97.tdf
+69cc4ef465ff541c97ffd6d7aa2e935
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_d97:rdfull_reg
+}
+# end
+# entity
+dffpipe_7a8
+# storage
+db|Ozy_Janus.(43).cnf
+db|Ozy_Janus.(43).cnf
+# case_insensitive
+# source_file
+db|dffpipe_7a8.tdf
+757d9cd36edcab9c75bb16ff5b7fa5
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_d97:rdfull_reg|dffpipe_7a8:dffpipe5
+}
+# end
+# entity
+alt_synch_pipe_608
+# storage
+db|Ozy_Janus.(44).cnf
+db|Ozy_Janus.(44).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_608.tdf
+75e038dc939165d13e7cc27623659824
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp
+}
+# end
+# entity
+dffpipe_219
+# storage
+db|Ozy_Janus.(45).cnf
+db|Ozy_Janus.(45).cnf
+# case_insensitive
+# source_file
+db|dffpipe_219.tdf
+d060c8f2d5be3db9db157c3e6a5da8aa
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7
+}
+# end
+# entity
+alt_synch_pipe_e97
+# storage
+db|Ozy_Janus.(46).cnf
+db|Ozy_Janus.(46).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_e97.tdf
+266eb2e133935183749caa941f978268
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_e97:wrempty_reg
+}
+# end
+# entity
+dffpipe_8a8
+# storage
+db|Ozy_Janus.(47).cnf
+db|Ozy_Janus.(47).cnf
+# case_insensitive
+# source_file
+db|dffpipe_8a8.tdf
+7a2fcdc5a64d275fe81b8483e58b48
+6
+# used_port {
+q0
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_e97:wrempty_reg|dffpipe_8a8:dffpipe9
+}
+# end
+# entity
+alt_synch_pipe_708
+# storage
+db|Ozy_Janus.(48).cnf
+db|Ozy_Janus.(48).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_708.tdf
+f7c31629669daa5d818ad5caf9fc43
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_708:ws_dgrp
+}
+# end
+# entity
+dffpipe_319
+# storage
+db|Ozy_Janus.(49).cnf
+db|Ozy_Janus.(49).cnf
+# case_insensitive
+# source_file
+db|dffpipe_319.tdf
+ebca1d5a64a75770921d8343f149ecc
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_708:ws_dgrp|dffpipe_319:dffpipe11
+}
+# end
+# entity
 Ozy_Janus
 # storage
 db|Ozy_Janus.(0).cnf
@@ -3534,7 +4348,7 @@ ON
 # case_sensitive
 # source_file
 Ozy_Janus.v
-c3ee1c121bc76c918dc90d127da4be0
+9c954ae7a49ae17268a743a6183662
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

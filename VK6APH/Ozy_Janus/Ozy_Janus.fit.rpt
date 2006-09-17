@@ -1,5 +1,5 @@
 Fitter report for Ozy_Janus
-Tue Sep 12 21:56:29 2006
+Sun Sep 17 16:45:39 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                    ;
 +------------------------------------+----------------------------------------------+
-; Fitter Status                      ; Successful - Tue Sep 12 21:56:28 2006        ;
+; Fitter Status                      ; Successful - Sun Sep 17 16:45:38 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                                    ;
 ; Top-level Entity Name              ; Ozy_Janus                                    ;
@@ -119,22 +119,22 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------------------------------------------------+------------+--------------------+---------------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------+------------------+
 ; Node                                                                                                                           ; Action     ; Operation          ; Reason              ; Node Port ; Destination Node                                                                                                                        ; Destination Port ;
 +--------------------------------------------------------------------------------------------------------------------------------+------------+--------------------+---------------------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------+------------------+
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[1] ; Duplicated ; Physical Synthesis ; Timing optimization ; REGOUT    ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[1]~_DUP_REG ; REGOUT           ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[2] ; Duplicated ; Physical Synthesis ; Timing optimization ; REGOUT    ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[2]~_DUP_REG ; REGOUT           ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~100_BDD3                             ; Duplicated ; Physical Synthesis ; Timing optimization ; COMBOUT   ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~100_BDD3_DUP_COMB                             ; COMBOUT          ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~100_BDD3                             ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[1] ; Duplicated ; Physical Synthesis ; Timing optimization ; REGOUT    ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[1]~_DUP_REG ; REGOUT           ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[2] ; Duplicated ; Physical Synthesis ; Timing optimization ; REGOUT    ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[2]~_DUP_REG ; REGOUT           ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~100_BDD3                             ; Duplicated ; Physical Synthesis ; Timing optimization ; COMBOUT   ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~100_BDD3_DUP_COMB                             ; COMBOUT          ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~100_BDD3                             ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
 ; AD_state[4]~492                                                                                                                ; Modified   ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|_~25                                                        ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~0$wirecell                           ; Modified   ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~90                                   ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~91                                   ; Modified   ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~94                                   ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~95                                   ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~96                                   ; Modified   ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~97_BDD0                              ; Created    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~98_BDD1                              ; Created    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~99_BDD2                              ; Created    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~100_BDD3                             ; Created    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|_~25                                                        ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~0$wirecell                           ; Modified   ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~90                                   ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~91                                   ; Modified   ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~94                                   ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~95                                   ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~96                                   ; Modified   ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~97_BDD0                              ; Created    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~98_BDD1                              ; Created    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~99_BDD2                              ; Created    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~100_BDD3                             ; Created    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
 ; SLWR~339                                                                                                                       ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
 ; SLWR~340                                                                                                                       ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
 ; SLWR~341                                                                                                                       ; Deleted    ; Physical Synthesis ; Timing optimization ;           ;                                                                                                                                         ;                  ;
@@ -547,23 +547,23 @@ Note: User assignments will override these defaults. The user specified values a
 ;    |I2SAudioOut:I2SAO|                        ; 49 (49)     ; 33 (33)           ; 42 (42)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 16 (16)           ; 26 (26)          ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ;
 ;    |Rx_fifo:Rx_fifo|                          ; 139 (0)     ; 99 (0)            ; 132 (0)      ; 65536       ; 16   ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (0)        ; 39 (0)            ; 93 (0)           ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|               ; 139 (0)     ; 99 (0)            ; 132 (0)      ; 65536       ; 16   ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (0)        ; 39 (0)            ; 93 (0)           ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
-;          |dcfifo_3ob1:auto_generated|         ; 139 (36)    ; 99 (24)           ; 132 (28)     ; 65536       ; 16   ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 39 (26)           ; 93 (17)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated                                                     ;
-;             |a_gray2bin_ndb:rdptr_g_gray2bin| ; 12 (12)     ; 12 (12)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin                     ;
-;             |a_gray2bin_ndb:rs_dgwp_gray2bin| ; 12 (12)     ; 12 (12)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:rs_dgwp_gray2bin                     ;
-;             |a_gray2bin_ndb:wrptr_g_gray2bin| ; 11 (11)     ; 11 (11)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 11 (11)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:wrptr_g_gray2bin                     ;
-;             |a_gray2bin_ndb:ws_dgrp_gray2bin| ; 12 (12)     ; 12 (12)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_gray2bin_ndb:ws_dgrp_gray2bin                     ;
-;             |a_graycounter_mk6:wrptr_gp|      ; 16 (16)     ; 14 (14)           ; 16 (16)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 2 (2)             ; 14 (14)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp                          ;
-;             |a_graycounter_r96:rdptr_g1p|     ; 14 (14)     ; 14 (14)           ; 14 (14)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 14 (14)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p                         ;
-;             |alt_synch_pipe_408:rs_dgwp|      ; 13 (0)      ; 0 (0)             ; 13 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 5 (0)             ; 8 (0)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp                          ;
-;                |dffpipe_019:dffpipe7|         ; 13 (13)     ; 0 (0)             ; 13 (13)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 5 (5)             ; 8 (8)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7     ;
-;             |alt_synch_pipe_508:ws_dgrp|      ; 13 (0)      ; 0 (0)             ; 13 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 6 (0)             ; 7 (0)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_508:ws_dgrp                          ;
-;                |dffpipe_119:dffpipe11|        ; 13 (13)     ; 0 (0)             ; 13 (13)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 6 (6)             ; 7 (7)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_508:ws_dgrp|dffpipe_119:dffpipe11    ;
-;             |altsyncram_vpu:fifo_ram|         ; 0 (0)       ; 0 (0)             ; 0 (0)        ; 65536       ; 16   ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram                             ;
-;                |altsyncram_aec1:altsyncram4|  ; 0 (0)       ; 0 (0)             ; 0 (0)        ; 65536       ; 16   ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4 ;
-;             |dffpipe_n09:rs_brp|              ; 12 (12)     ; 0 (0)             ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp                                  ;
-;             |dffpipe_n09:rs_bwp|              ; 12 (12)     ; 0 (0)             ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp                                  ;
-;             |dffpipe_n09:ws_brp|              ; 12 (12)     ; 0 (0)             ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:ws_brp                                  ;
-;             |dffpipe_n09:ws_bwp|              ; 12 (12)     ; 0 (0)             ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:ws_bwp                                  ;
+;          |dcfifo_rhc1:auto_generated|         ; 139 (36)    ; 99 (24)           ; 132 (28)     ; 65536       ; 16   ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 39 (26)           ; 93 (17)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated                                                     ;
+;             |a_gray2bin_ndb:rdptr_g_gray2bin| ; 12 (12)     ; 12 (12)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin                     ;
+;             |a_gray2bin_ndb:rs_dgwp_gray2bin| ; 12 (12)     ; 12 (12)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_gray2bin_ndb:rs_dgwp_gray2bin                     ;
+;             |a_gray2bin_ndb:wrptr_g_gray2bin| ; 11 (11)     ; 11 (11)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 11 (11)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_gray2bin_ndb:wrptr_g_gray2bin                     ;
+;             |a_gray2bin_ndb:ws_dgrp_gray2bin| ; 12 (12)     ; 12 (12)           ; 0 (0)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_gray2bin_ndb:ws_dgrp_gray2bin                     ;
+;             |a_graycounter_mk6:wrptr_gp|      ; 16 (16)     ; 14 (14)           ; 16 (16)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 2 (2)             ; 14 (14)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp                          ;
+;             |a_graycounter_r96:rdptr_g1p|     ; 14 (14)     ; 14 (14)           ; 14 (14)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 14 (14)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p                         ;
+;             |alt_synch_pipe_608:rs_dgwp|      ; 13 (0)      ; 0 (0)             ; 13 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 5 (0)             ; 8 (0)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp                          ;
+;                |dffpipe_219:dffpipe7|         ; 13 (13)     ; 0 (0)             ; 13 (13)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 5 (5)             ; 8 (8)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7     ;
+;             |alt_synch_pipe_708:ws_dgrp|      ; 13 (0)      ; 0 (0)             ; 13 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 6 (0)             ; 7 (0)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_708:ws_dgrp                          ;
+;                |dffpipe_319:dffpipe11|        ; 13 (13)     ; 0 (0)             ; 13 (13)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 6 (6)             ; 7 (7)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_708:ws_dgrp|dffpipe_319:dffpipe11    ;
+;             |altsyncram_vpu:fifo_ram|         ; 0 (0)       ; 0 (0)             ; 0 (0)        ; 65536       ; 16   ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram                             ;
+;                |altsyncram_aec1:altsyncram4|  ; 0 (0)       ; 0 (0)             ; 0 (0)        ; 65536       ; 16   ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4 ;
+;             |dffpipe_n09:rs_brp|              ; 12 (12)     ; 0 (0)             ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp                                  ;
+;             |dffpipe_n09:rs_bwp|              ; 12 (12)     ; 0 (0)             ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp                                  ;
+;             |dffpipe_n09:ws_brp|              ; 12 (12)     ; 0 (0)             ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:ws_brp                                  ;
+;             |dffpipe_n09:ws_bwp|              ; 12 (12)     ; 0 (0)             ; 12 (12)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 12 (12)          ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:ws_bwp                                  ;
 ;    |Tx_fifo:Tx_fifo|                          ; 86 (0)      ; 50 (0)            ; 85 (0)       ; 32768       ; 8    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (0)        ; 36 (0)            ; 49 (0)           ; |Ozy_Janus|Tx_fifo:Tx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|               ; 86 (0)      ; 50 (0)            ; 85 (0)       ; 32768       ; 8    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (0)        ; 36 (0)            ; 49 (0)           ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component                                                                                ;
 ;          |dcfifo_9p91:auto_generated|         ; 86 (14)     ; 50 (2)            ; 85 (13)      ; 32768       ; 8    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 36 (12)           ; 49 (1)           ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated                                                     ;
@@ -676,30 +676,30 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - DFS1~reg0                                                                                                                            ; 0                 ; 0       ;
 ;      - have_sync                                                                                                                            ; 0                 ; 0       ;
 ;      - Rx_control_0[0]                                                                                                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[12]                                                       ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[11]                                                       ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[10]                                                       ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[9]                                                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[8]                                                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[7]                                                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[6]                                                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[5]                                                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[4]                                                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[3]                                                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[2]                                                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[1]                                                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdptr_g[0]                                                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a8  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a9  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a10 ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a11 ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a12 ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a13 ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a14 ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a15 ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[12]                                                       ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[11]                                                       ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[10]                                                       ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[9]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[8]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[7]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[6]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[5]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[4]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[3]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[2]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[1]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdptr_g[0]                                                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a8  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a9  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a10 ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a11 ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a12 ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a13 ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a14 ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a15 ; 0                 ; 0       ;
 ;      - state_PWM.00000                                                                                                                      ; 0                 ; 0       ;
 ;      - state_PWM.00100                                                                                                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a0  ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a0  ; 0                 ; 0       ;
 ;      - Rx_control_1[0]                                                                                                                      ; 0                 ; 0       ;
 ;      - Rx_control_0[7]                                                                                                                      ; 0                 ; 0       ;
 ;      - Rx_control_0[6]                                                                                                                      ; 0                 ; 0       ;
@@ -731,42 +731,42 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_brp|dffe11a[1]                                     ; 0                 ; 0       ;
 ;      - Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_bwp|dffe11a[0]                                     ; 0                 ; 0       ;
 ;      - Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|dffpipe_c09:ws_brp|dffe11a[0]                                     ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[3]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[3]                        ; 0                 ; 0       ;
 ;      - fifo_enable                                                                                                                          ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[8]         ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[2]         ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[3]         ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[11]        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[4]         ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[9]         ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[7]         ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[12]        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[6]         ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[5]         ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[1]         ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[10]        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|alt_synch_pipe_408:rs_dgwp|dffpipe_019:dffpipe7|dffe8a[0]         ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[11]                       ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[8]                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[2]                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[9]                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[4]                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[7]                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[12]                       ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[5]                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[6]                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[10]                       ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[1]                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[0]                        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a1  ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a2  ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a3  ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a7  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a4  ; 1                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a5  ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a6  ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[8]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[2]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[3]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[11]        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[4]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[9]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[7]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[12]        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[6]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[5]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[1]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[10]        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|alt_synch_pipe_608:rs_dgwp|dffpipe_219:dffpipe7|dffe8a[0]         ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[11]                       ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[8]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[2]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[9]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[4]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[7]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[12]                       ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[5]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[6]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[10]                       ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[1]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[0]                        ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a1  ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a2  ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a3  ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a7  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a4  ; 1                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a5  ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a6  ; 0                 ; 0       ;
 ;      - state_PWM.00011                                                                                                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|p0addr                                                            ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|p0addr                                                            ; 0                 ; 0       ;
 ;      - state_PWM.00001                                                                                                                      ; 0                 ; 0       ;
 ;      - synced_Rx_used[10]                                                                                                                   ; 1                 ; 0       ;
 ;      - synced_Rx_used[11]                                                                                                                   ; 1                 ; 0       ;
@@ -867,8 +867,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp|dffpipe_r09:dffpipe9|dffe11a[1]        ; 0                 ; 0       ;
 ;      - Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_graycounter_kk6:wrptr_gp|counter_ffa[0]                         ; 0                 ; 0       ;
 ;      - Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|alt_synch_pipe_vv7:ws_dgrp|dffpipe_r09:dffpipe9|dffe11a[0]        ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|parity_ff                             ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdaclr                                                            ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|parity_ff                             ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdaclr                                                            ; 0                 ; 0       ;
 ;      - state_PWM.00111                                                                                                                      ; 0                 ; 0       ;
 ;      - state_PWM.01011                                                                                                                      ; 0                 ; 0       ;
 ;      - state_PWM.00010                                                                                                                      ; 0                 ; 0       ;
@@ -1017,30 +1017,30 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - sync_Rx_used[9]                                                                                                                      ; 0                 ; 0       ;
 ;      - sync_Rx_used[10]                                                                                                                     ; 0                 ; 0       ;
 ;      - sync_Rx_used[11]                                                                                                                     ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[4]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[4]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[3]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[3]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[2]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[2]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[1]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[1]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[0]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[0]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[5]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[5]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[6]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[6]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[7]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[7]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[8]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[8]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[9]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[9]                                      ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[10]                                     ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[10]                                     ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[11]                                     ; 0                 ; 0       ;
-;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|dffpipe_n09:rs_brp|dffe6a[11]                                     ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[4]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[4]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[3]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[3]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[2]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[2]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[1]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[1]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[0]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[0]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[5]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[5]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[6]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[6]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[7]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[7]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[8]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[8]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[9]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[9]                                      ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[10]                                     ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[10]                                     ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_bwp|dffe6a[11]                                     ; 0                 ; 0       ;
+;      - Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|dffpipe_n09:rs_brp|dffe6a[11]                                     ; 0                 ; 0       ;
 ; CLK_24MHZ                                                                                                                                   ;                   ;         ;
 ;      - AK_reset~reg0                                                                                                                        ; 1                 ; 0       ;
 ;      - clocks:clocks|lpm_counter:lpm_counter_component|cntr_tkh:auto_generated|counter_reg_bit1a[8]                                         ; 1                 ; 0       ;
@@ -1208,9 +1208,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; IFCLK                                                                                       ; PIN_24             ; 115     ; Clock                                   ; yes    ; Global clock         ; GCLK2            ; --                        ;
 ; RX_wait[0]~7                                                                                ; LCCOMB_X5_Y6_N20   ; 9       ; Clock enable                            ; no     ; --                   ; --               ; --                        ;
 ; Rx_control_0[0]~7                                                                           ; LCCOMB_X24_Y9_N4   ; 9       ; Clock enable                            ; no     ; --                   ; --               ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdaclr                   ; LCFF_X27_Y6_N11    ; 15      ; Async. clear                            ; yes    ; Global clock         ; GCLK7            ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|valid_rdreq              ; LCCOMB_X25_Y8_N16  ; 30      ; Clock enable                            ; no     ; --                   ; --               ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~0 ; LCCOMB_X22_Y9_N18  ; 17      ; Clock enable, Write enable              ; no     ; --                   ; --               ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdaclr                   ; LCFF_X27_Y6_N11    ; 15      ; Async. clear                            ; yes    ; Global clock         ; GCLK7            ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|valid_rdreq              ; LCCOMB_X25_Y8_N16  ; 30      ; Clock enable                            ; no     ; --                   ; --               ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~0 ; LCCOMB_X22_Y9_N18  ; 17      ; Clock enable, Write enable              ; no     ; --                   ; --               ; --                        ;
 ; SLEN                                                                                        ; LCFF_X1_Y6_N7      ; 18      ; Output enable                           ; no     ; --                   ; --               ; --                        ;
 ; SLRD~reg0                                                                                   ; LCFF_X1_Y6_N21     ; 82      ; Clock                                   ; yes    ; Global clock         ; GCLK0            ; --                        ;
 ; Selector54~27                                                                               ; LCCOMB_X25_Y11_N16 ; 32      ; Clock enable                            ; no     ; --                   ; --               ; --                        ;
@@ -1246,7 +1246,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                                                              ; Location         ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +-----------------------------------------------------------------------------------+------------------+---------+----------------------+------------------+---------------------------+
 ; IFCLK                                                                             ; PIN_24           ; 115     ; Global clock         ; GCLK2            ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdaclr         ; LCFF_X27_Y6_N11  ; 15      ; Global clock         ; GCLK7            ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdaclr         ; LCFF_X27_Y6_N11  ; 15      ; Global clock         ; GCLK7            ; --                        ;
 ; SLRD~reg0                                                                         ; LCFF_X1_Y6_N21   ; 82      ; Global clock         ; GCLK0            ; --                        ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|rdaclr         ; LCFF_X27_Y5_N23  ; 13      ; Global clock         ; GCLK4            ; --                        ;
 ; Tx_read_clock                                                                     ; LCFF_X1_Y6_N29   ; 34      ; Global clock         ; GCLK1            ; --                        ;
@@ -1263,51 +1263,51 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; CLK_24MHZ                                                                                                                        ; 103     ;
 ; AD_state[3]                                                                                                                      ; 40      ;
 ; AD_state[2]                                                                                                                      ; 35      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|wrfull_eq_comp_aeb_int~0                                      ; 33      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|wrfull_eq_comp_aeb_int~0                                      ; 33      ;
 ; AD_state[1]                                                                                                                      ; 32      ;
 ; Selector54~27                                                                                                                    ; 32      ;
 ; I2SAudioOut:I2SAO|local_left_sample[15]~0                                                                                        ; 32      ;
 ; AD_state[4]                                                                                                                      ; 30      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|valid_rdreq                                                   ; 30      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|valid_rdreq                                                   ; 30      ;
 ; ad_count[26]                                                                                                                     ; 29      ;
 ; AD_state[0]                                                                                                                      ; 25      ;
 ; AD_state[5]                                                                                                                      ; 24      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[5]   ; 23      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[8]   ; 23      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[10]  ; 22      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[7]   ; 22      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[4]   ; 22      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[0]   ; 21      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[1]   ; 21      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[6]   ; 21      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[9]   ; 21      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[2]   ; 21      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[3]   ; 21      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[5]   ; 23      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[8]   ; 23      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[10]  ; 22      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[7]   ; 22      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[4]   ; 22      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[0]   ; 21      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[1]   ; 21      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[6]   ; 21      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[9]   ; 21      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[2]   ; 21      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[3]   ; 21      ;
 ; data_flag                                                                                                                        ; 20      ;
 ; debounce:de_dash|always0~0                                                                                                       ; 19      ;
 ; debounce:de_dot|always0~0                                                                                                        ; 19      ;
 ; debounce:de_PTT|always0~0                                                                                                        ; 19      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[0]  ; 19      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[1]  ; 19      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[10] ; 19      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[6]  ; 19      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[5]  ; 19      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[7]  ; 19      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[4]  ; 19      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[9]  ; 19      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[2]  ; 19      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[8]  ; 19      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[3]  ; 19      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[0]  ; 19      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[1]  ; 19      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[10] ; 19      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[6]  ; 19      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[5]  ; 19      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[7]  ; 19      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[4]  ; 19      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[9]  ; 19      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[2]  ; 19      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[8]  ; 19      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[3]  ; 19      ;
 ; state_PWM.00111                                                                                                                  ; 18      ;
 ; SLEN                                                                                                                             ; 18      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdcnt_addr_ena                                                ; 18      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdcnt_addr_ena                                                ; 18      ;
 ; state_PWM.01001                                                                                                                  ; 17      ;
 ; state_PWM.01010                                                                                                                  ; 17      ;
 ; state_PWM.01000                                                                                                                  ; 17      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|ram_address_a[11]                                             ; 17      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|ram_address_a[11]                                             ; 17      ;
 ; Decoder1~125                                                                                                                     ; 16      ;
 ; Decoder2~113                                                                                                                     ; 16      ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|ram_address_b[11]                                             ; 16      ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|ram_address_b[11]                                             ; 16      ;
 ; clocks:clocks|lpm_counter:lpm_counter_component|cntr_tkh:auto_generated|safe_q[8]                                                ; 16      ;
 +----------------------------------------------------------------------------------------------------------------------------------+---------+
 
@@ -1317,7 +1317,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Name                                                                                                                              ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Port A Input Registers ; Port A Output Registers ; Port B Input Registers ; Port B Output Registers ; Size  ; Implementation Port A Depth ; Implementation Port A Width ; Implementation Port B Depth ; Implementation Port B Width ; Implementation Bits ; M4Ks ; MIF  ; Location                                                                                                                                                                                             ;
 +-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ALTSYNCRAM ; AUTO ; True Dual Port ; 4096         ; 16           ; 4096         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 65536 ; 4096                        ; 16                          ; 4096                        ; 16                          ; 65536               ; 16   ; None ; M4K_X11_Y12, M4K_X23_Y12, M4K_X23_Y5, M4K_X23_Y13, M4K_X23_Y1, M4K_X23_Y6, M4K_X23_Y2, M4K_X23_Y9, M4K_X11_Y9, M4K_X11_Y13, M4K_X23_Y11, M4K_X23_Y8, M4K_X23_Y3, M4K_X23_Y10, M4K_X23_Y7, M4K_X23_Y4 ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ALTSYNCRAM ; AUTO ; True Dual Port ; 4096         ; 16           ; 4096         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 65536 ; 4096                        ; 16                          ; 4096                        ; 16                          ; 65536               ; 16   ; None ; M4K_X11_Y12, M4K_X23_Y12, M4K_X23_Y5, M4K_X23_Y13, M4K_X23_Y1, M4K_X23_Y6, M4K_X23_Y2, M4K_X23_Y9, M4K_X11_Y9, M4K_X11_Y13, M4K_X23_Y11, M4K_X23_Y8, M4K_X23_Y3, M4K_X23_Y10, M4K_X23_Y7, M4K_X23_Y4 ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4|ALTSYNCRAM ; AUTO ; True Dual Port ; 2048         ; 16           ; 2048         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 32768 ; 2048                        ; 16                          ; 2048                        ; 16                          ; 32768               ; 8    ; None ; M4K_X11_Y6, M4K_X11_Y3, M4K_X11_Y5, M4K_X11_Y4, M4K_X11_Y7, M4K_X11_Y11, M4K_X11_Y8, M4K_X11_Y10                                                                                                     ;
 +-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 Note: Fitter may spread logical memories into multiple blocks to improve timing. The actual required RAM blocks can be found in the Fitter Resource Usage section.
@@ -1542,7 +1542,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; LABs with Chains - Fit Attempt 1                                 ; 27                       ;
 ; LABs with Multiple Chains - Fit Attempt 1                        ; 0                        ;
 ; Time - Fit Attempt 1                                             ; 3                        ;
-; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.423                    ;
+; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.421                    ;
 +------------------------------------------------------------------+--------------------------+
 
 
@@ -1557,9 +1557,9 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; Mid Slack - Fit Attempt 1            ; 10025 ;
 ; Late Wire Use - Fit Attempt 1        ; 8     ;
 ; Late Slack - Fit Attempt 1           ; 10025 ;
-; Time - Fit Attempt 1                 ; 24    ;
-; Time in fit_fsyn.dll - Fit Attempt 1 ; 6.437 ;
-; Time in tsm_tan.dll - Fit Attempt 1  ; 7.210 ;
+; Time - Fit Attempt 1                 ; 22    ;
+; Time in fit_fsyn.dll - Fit Attempt 1 ; 6.046 ;
+; Time in tsm_tan.dll - Fit Attempt 1  ; 6.794 ;
 +--------------------------------------+-------+
 
 
@@ -1576,8 +1576,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; Late Slack - Fit Attempt 1          ; -225  ;
 ; Late Wire Use - Fit Attempt 1       ; 9     ;
 ; Time - Fit Attempt 1                ; 7     ;
-; Time in tsm_dat.dll - Fit Attempt 1 ; 0.015 ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 4.703 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 4.578 ;
 +-------------------------------------+-------+
 
 
@@ -1587,7 +1586,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Tue Sep 12 21:55:36 2006
+    Info: Processing started: Sun Sep 17 16:44:51 2006
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Selected device EP2C5Q208C8 for design "Ozy_Janus"
 Info: Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
@@ -1614,7 +1613,7 @@ Info: Automatically promoted node Tx_read_clock
     Info: Following destination nodes may be non-global or may not use global or regional clocks
         Info: Destination node Tx_read_clock~62
         Info: Destination node Tx_read_clock~63
-Info: Automatically promoted node Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|rdaclr 
+Info: Automatically promoted node Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|rdaclr 
     Info: Automatically promoted destinations to use location or clock signal Global Clock
 Info: Automatically promoted node Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|rdaclr 
     Info: Automatically promoted destinations to use location or clock signal Global Clock
@@ -1634,7 +1633,7 @@ Info: Starting physical synthesis algorithm register retiming
 Info: Physical synthesis algorithm register retiming complete: estimated performance improvement of up to 0 percent
 Info: Starting physical synthesis algorithm combinational resynthesis 1
 Info: Physical synthesis algorithm combinational resynthesis 1 complete: estimated performance improvement of up to 0 percent
-Info: Physical synthesis optimizations complete: elapsed time is 00:00:05
+Info: Physical synthesis optimizations complete: elapsed time is 00:00:03
 Info: Fitter placement preparation operations beginning
 Info: Fitter placement preparation operations ending: elapsed time is 00:00:03
 Info: Fitter placement operations beginning
@@ -1647,10 +1646,10 @@ Info: Starting physical synthesis algorithm RESPLIT
 Info: Physical synthesis algorithm RESPLIT complete: estimated performance improvement of up to 0 percent
 Info: Physical synthesis optimizations complete: elapsed time is 00:00:06
 Info: Fitter placement was successful
-Info: Fitter placement operations ending: elapsed time is 00:00:24
+Info: Fitter placement operations ending: elapsed time is 00:00:22
 Info: Estimated most critical path is register to memory delay of 3.024 ns
     Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X6_Y6; Fanout = 1; REG Node = 'Rx_register[9]'
-    Info: 2: + IC(2.894 ns) + CELL(0.130 ns) = 3.024 ns; Loc. = M4K_X23_Y13; Fanout = 1; MEM Node = 'Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_3ob1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a9~portb_datain_reg0'
+    Info: 2: + IC(2.894 ns) + CELL(0.130 ns) = 3.024 ns; Loc. = M4K_X23_Y13; Fanout = 1; MEM Node = 'Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a9~portb_datain_reg0'
     Info: Total cell delay = 0.130 ns ( 4.30 % )
     Info: Total interconnect delay = 2.894 ns ( 95.70 % )
 Info: Fitter routing operations beginning
@@ -1721,7 +1720,7 @@ Info: Following groups of pins have the same output enable
         Info: Type bidirectional pin FX2_FD[9] uses the LVTTL I/O standard
         Info: Type bidirectional pin FX2_FD[13] uses the LVTTL I/O standard
 Info: Quartus II Fitter was successful. 0 errors, 2 warnings
-    Info: Processing ended: Tue Sep 12 21:56:28 2006
-    Info: Elapsed time: 00:00:53
+    Info: Processing ended: Sun Sep 17 16:45:38 2006
+    Info: Elapsed time: 00:00:48
 
 

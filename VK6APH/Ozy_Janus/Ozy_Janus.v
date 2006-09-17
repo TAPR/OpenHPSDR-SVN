@@ -580,10 +580,10 @@ end
 
 always @ (negedge BCLK)  // now width of 2x BCLK since else too fast for FIFO
 begin
-                if (data_flag)
-                        data_flag <= 1'b0;
-                else
-                        if (strobe) data_flag <= 1'b1;
+    if (data_flag)
+        data_flag <= 1'b0;
+    else
+    if (strobe) data_flag <= 1'b1;
 end
 
 
@@ -670,79 +670,79 @@ begin
 case(state_FX)
 // state 0 - set up to check for Rx data from EP2
 4'd0:begin
-    SLWR <= 1;                                                  // reset FX2 FIFO write stobe
+    	SLWR <= 1;                                              // reset FX2 FIFO write stobe
         Tx_read_clock <= 1'b0;                                  // reset Tx fifo read strobe
         SLRD <= 1'b1;
         SLOE <= 1'b1;
         SLEN <= 1'b0;
         FIFO_ADR <= 2'b00;                                      // select EP2
         state_FX <= state_FX + 1'b1;
-        end
+     end
 // delay 2 IFCLOCK cycle, this is necessary at 48MHZ to allow FIFO_ADR to settle
 // check for Rx data
 4'd2:begin
-                if(EP2_has_data)
-                        begin
-                        state_FX <= state_FX + 1'b1;
-                        SLOE <= 1'b0;                           //assert SLOE
-                        end
-                else begin
-                        RX_wait <= RX_wait + 1'b1;              // increment RX_wait counter
-                        state_FX <= 4'd6;                       // No Rx data so check for Tx data 
-                end
-        end
+       if(EP2_has_data)
+       begin
+       		state_FX <= state_FX + 1'b1;
+            SLOE <= 1'b0;                           			//assert SLOE
+       end
+       else begin
+            RX_wait <= RX_wait + 1'b1;              			// increment RX_wait counter
+            state_FX <= 4'd6;                       			// No Rx data so check for Tx data 
+       end
+    end
 // Wait 2 IFCLK before we assert SLRD then load received data
 4'd4:begin
         SLRD <= 1'b0;
         Rx_register[15:8] <= FX2_FD[7:0];               		//  swap endian
         Rx_register[7:0]  <= FX2_FD[15:8];
         state_FX <= state_FX + 1'b1;
-        end
+     end
 // reset SLRD and SLOE
 4'd5:begin
         SLRD <= 1'b1;
         SLOE <= 1'b1;
         state_FX <= state_FX + 1'b1;
-        end
+     end
 // check for Tx data - Tx fifo must be at least half full before we Tx
 4'd6:  begin
             if (syncd_write_used[10] == 1'b1) begin 			// data available, so let's start the xfer...
-                                SLWR <= 1;
+                SLWR <= 1;
                 state_FX <= state_FX + 1'b1;
-                                FIFO_ADR <= 2'b10;              // select EP6
-                                end
+                FIFO_ADR <= 2'b10;              // select EP6
+            end
             else state_FX <= 4'd2; //was 2                      // No Tx data so check for Rx data,
-         end                                                    // note we already have address set
+       end                                                      // note we already have address set
 // Wait 2 IFCLK for FIFO_ADR to stabilize, assert SLWR
 // NOTE: seems OK with 2 waits, may need more.
 4'd8:begin
-                state_FX <= state_FX + 1'b1;
-                Tx_read_clock <= 1'b1;                          // start transfer from Tx fifo
-         end
+         state_FX <= state_FX + 1'b1;
+         Tx_read_clock <= 1'b1;                          // start transfer from Tx fifo
+     end
 // check Tx FIFO is ready then set Write strobe
 4'd9:   begin
             if (EP6_ready) begin                                // if EP6 is ready, write to it and exit this state
-                                Tx_read_clock <= 1'b0;          // end of transfer from Tx fifo
+                Tx_read_clock <= 1'b0;          // end of transfer from Tx fifo
                 SLEN <= 1'b1;
                 state_FX <= state_FX + 1'b1;
             end
             else begin                                          // otherwise, hang out here until fifo is ready
                 SLWR <= 1;
                 state_FX <= 4'd9;
-                                TX_wait <= TX_wait + 1'b1;      // increment TX_wait counter
+                TX_wait <= TX_wait + 1'b1;      // increment TX_wait counter
             end
         end
 //  set SLWR
 4'd10: begin
-                SLWR <= 1'b0;
-                state_FX <= state_FX + 1'b1;
-           end
+          SLWR <= 1'b0;
+          state_FX <= state_FX + 1'b1;
+       end
 //  reset SLWR and tristate SLEN
 4'd11: begin
-                SLWR <= 1;
-                SLEN <= 1'b0;
-        state_FX <= 4'd0;
-                end
+         SLWR <= 1;
+         SLEN <= 1'b0;
+         state_FX <= 4'd0;
+       end
         default: state_FX <= state_FX + 1'b1;
         endcase
 end
@@ -1017,8 +1017,8 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 assign LED[0] = ~write_full;            // LED D1 on when Rx fifo is full.
 assign LED[1] = ~EP6_ready;             // LED D3 on when we can write to EP6
-assign LED[2] = ~have_sync;             // LED D4 toggles each time we get sync
-assign LED[3] = ~EP2_has_data;          //1'b1;
+assign LED[2] = ~have_sync;             // LED D4 on when we get sync
+assign LED[3] = ~EP2_has_data;          //
 assign LED[4] = ~clean_PTT_in;
 assign LED[5] = ~PTT_out;               // Led on when PTT active
 assign LED[6] = dot;

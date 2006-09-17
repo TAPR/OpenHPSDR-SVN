@@ -42,6 +42,7 @@ module Rx_fifo (
 	q,
 	rdfull,
 	rdusedw,
+	wrempty,
 	wrfull,
 	wrusedw);
 
@@ -53,19 +54,22 @@ module Rx_fifo (
 	output	[15:0]  q;
 	output	  rdfull;
 	output	[11:0]  rdusedw;
+	output	  wrempty;
 	output	  wrfull;
 	output	[11:0]  wrusedw;
 
 	wire  sub_wire0;
 	wire [11:0] sub_wire1;
 	wire  sub_wire2;
-	wire [15:0] sub_wire3;
-	wire [11:0] sub_wire4;
+	wire  sub_wire3;
+	wire [15:0] sub_wire4;
+	wire [11:0] sub_wire5;
 	wire  rdfull = sub_wire0;
 	wire [11:0] wrusedw = sub_wire1[11:0];
 	wire  wrfull = sub_wire2;
-	wire [15:0] q = sub_wire3[15:0];
-	wire [11:0] rdusedw = sub_wire4[11:0];
+	wire  wrempty = sub_wire3;
+	wire [15:0] q = sub_wire4[15:0];
+	wire [11:0] rdusedw = sub_wire5[11:0];
 
 	dcfifo	dcfifo_component (
 				.wrclk (wrclk),
@@ -76,13 +80,13 @@ module Rx_fifo (
 				.rdfull (sub_wire0),
 				.wrusedw (sub_wire1),
 				.wrfull (sub_wire2),
-				.q (sub_wire3),
-				.rdusedw (sub_wire4)
+				.wrempty (sub_wire3),
+				.q (sub_wire4),
+				.rdusedw (sub_wire5)
 				// synopsys translate_off
 				,
 				.aclr (),
-				.rdempty (),
-				.wrempty ()
+				.rdempty ()
 				// synopsys translate_on
 				);
 	defparam
@@ -129,7 +133,7 @@ endmodule
 // Retrieval info: PRIVATE: rsUsedW NUMERIC "1"
 // Retrieval info: PRIVATE: sc_aclr NUMERIC "0"
 // Retrieval info: PRIVATE: sc_sclr NUMERIC "0"
-// Retrieval info: PRIVATE: wsEmpty NUMERIC "0"
+// Retrieval info: PRIVATE: wsEmpty NUMERIC "1"
 // Retrieval info: PRIVATE: wsFull NUMERIC "1"
 // Retrieval info: PRIVATE: wsUsedW NUMERIC "1"
 // Retrieval info: CONSTANT: ADD_RAM_OUTPUT_REGISTER STRING "OFF"
@@ -150,6 +154,7 @@ endmodule
 // Retrieval info: USED_PORT: rdreq 0 0 0 0 INPUT NODEFVAL rdreq
 // Retrieval info: USED_PORT: rdusedw 0 0 12 0 OUTPUT NODEFVAL rdusedw[11..0]
 // Retrieval info: USED_PORT: wrclk 0 0 0 0 INPUT NODEFVAL wrclk
+// Retrieval info: USED_PORT: wrempty 0 0 0 0 OUTPUT NODEFVAL wrempty
 // Retrieval info: USED_PORT: wrfull 0 0 0 0 OUTPUT NODEFVAL wrfull
 // Retrieval info: USED_PORT: wrreq 0 0 0 0 INPUT NODEFVAL wrreq
 // Retrieval info: USED_PORT: wrusedw 0 0 12 0 OUTPUT NODEFVAL wrusedw[11..0]
@@ -162,6 +167,7 @@ endmodule
 // Retrieval info: CONNECT: rdfull 0 0 0 0 @rdfull 0 0 0 0
 // Retrieval info: CONNECT: rdusedw 0 0 12 0 @rdusedw 0 0 12 0
 // Retrieval info: CONNECT: wrfull 0 0 0 0 @wrfull 0 0 0 0
+// Retrieval info: CONNECT: wrempty 0 0 0 0 @wrempty 0 0 0 0
 // Retrieval info: CONNECT: wrusedw 0 0 12 0 @wrusedw 0 0 12 0
 // Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
 // Retrieval info: GEN_FILE: TYPE_NORMAL Rx_fifo.v TRUE
