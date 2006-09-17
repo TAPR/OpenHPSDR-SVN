@@ -66,6 +66,13 @@ applicable agreement for further details.
 		(line (pt 160 40)(pt 144 40)(line_width 1))
 	)
 	(port
+		(pt 160 56)
+		(output)
+		(text "wrempty" (rect 0 0 50 14)(font "Arial" (font_size 8)))
+		(text "wrempty" (rect 98 50 137 63)(font "Arial" (font_size 8)))
+		(line (pt 160 56)(pt 144 56)(line_width 1))
+	)
+	(port
 		(pt 160 72)
 		(output)
 		(text "wrusedw[11..0]" (rect 0 0 92 14)(font "Arial" (font_size 8)))
