@@ -93,13 +93,10 @@ set_location_assignment PIN_15 -to SCK
 set_location_assignment PIN_14 -to SI
 set_location_assignment PIN_12 -to SO
 set_global_assignment -name USER_LIBRARIES "C:/altera/megacore/nco-v2.3.0/lib;"
-set_global_assignment -name VERILOG_FILE CIC_R100_M1_N5_CFIR.v
-set_global_assignment -name VERILOG_FILE CIC_R100_M1_N5_CFIR_stage1.v
-set_global_assignment -name VERILOG_FILE CIC_R100_M1_N5_CFIR_stage2.v
-set_global_assignment -name VERILOG_FILE CIC_R64_M1_N4.v
-set_global_assignment -name VERILOG_FILE CIC_R256_M1_N5.v
-set_global_assignment -name VERILOG_FILE CIC_R100_M1_N10.v
-set_global_assignment -name VERILOG_FILE CIC_R100_M1_N5.v
+set_global_assignment -name VERILOG_FILE HB.v
+set_global_assignment -name VERILOG_FILE CIC_D4.v
+set_global_assignment -name VERILOG_FILE CIC_D65.v
+set_global_assignment -name VERILOG_FILE RXMUX.v
 set_global_assignment -name VERILOG_FILE rng.v
 set_global_assignment -name VERILOG_FILE SPI_REGS.v
 set_global_assignment -name VERILOG_FILE RegisterX.v

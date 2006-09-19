@@ -6895,9 +6895,1258 @@ CIC_R100_M1_N5.v
 AUTO_RESOURCE_SHARING
 OFF
 }
+# end
+# entity
+RXMUX
+# storage
+db|ozy_eval.(122).cnf
+db|ozy_eval.(122).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+RXMUX.v
+890c1418043e97db581983fa32b9a
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
 # hierarchies {
-CIC_R100_M1_N5:I_CIC
-CIC_R100_M1_N5:Q_CIC
+RXMUX:I_MUX
+RXMUX:Q_MUX
+}
+# end
+# entity
+lpm_mux
+# storage
+db|ozy_eval.(123).cnf
+db|ozy_eval.(123).cnf
+# case_insensitive
+# source_file
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_mux.tdf
+9bf66e437b499c0f0b81c977a5a50
+6
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+16
+PARAMETER_DEC
+USR
+LPM_SIZE
+4
+PARAMETER_DEC
+USR
+LPM_WIDTHS
+2
+PARAMETER_DEC
+USR
+LPM_PIPELINE
+1
+PARAMETER_DEC
+USR
+CBXI_PARAMETER
+mux_6me
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+sel
+-1
+3
+result
+-1
+3
+data
+-1
+3
+clock
+-1
+3
+}
+# include_file {
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|bypassff.inc
+8e8df160d449a63ec15dc86ecf2b373f
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|altshift.inc
+70fa13aee7d6d160ef20b2de32813a
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+..|..|..|..|..|..|..|altera|quartus60|libraries|megafunctions|muxlut.inc
+f172666ca13e5e31e17e3f6cb35af52
+}
+# hierarchies {
+RXMUX:I_MUX|lpm_mux:lpm_mux_component
+RXMUX:Q_MUX|lpm_mux:lpm_mux_component
+}
+# end
+# entity
+mux_6me
+# storage
+db|ozy_eval.(124).cnf
+db|ozy_eval.(124).cnf
+# case_insensitive
+# source_file
+db|mux_6me.tdf
+be69d0665f8ac92d91023f43b4326f
+6
+# used_port {
+sel1
+-1
+3
+sel0
+-1
+3
+result9
+-1
+3
+result8
+-1
+3
+result7
+-1
+3
+result6
+-1
+3
+result5
+-1
+3
+result4
+-1
+3
+result3
+-1
+3
+result2
+-1
+3
+result15
+-1
+3
+result14
+-1
+3
+result13
+-1
+3
+result12
+-1
+3
+result11
+-1
+3
+result10
+-1
+3
+result1
+-1
+3
+result0
+-1
+3
+data9
+-1
+3
+data8
+-1
+3
+data7
+-1
+3
+data63
+-1
+3
+data62
+-1
+3
+data61
+-1
+3
+data60
+-1
+3
+data6
+-1
+3
+data59
+-1
+3
+data58
+-1
+3
+data57
+-1
+3
+data56
+-1
+3
+data55
+-1
+3
+data54
+-1
+3
+data53
+-1
+3
+data52
+-1
+3
+data51
+-1
+3
+data50
+-1
+3
+data5
+-1
+3
+data49
+-1
+3
+data48
+-1
+3
+data47
+-1
+3
+data46
+-1
+3
+data45
+-1
+3
+data44
+-1
+3
+data43
+-1
+3
+data42
+-1
+3
+data41
+-1
+3
+data40
+-1
+3
+data4
+-1
+3
+data39
+-1
+3
+data38
+-1
+3
+data37
+-1
+3
+data36
+-1
+3
+data35
+-1
+3
+data34
+-1
+3
+data33
+-1
+3
+data32
+-1
+3
+data31
+-1
+3
+data30
+-1
+3
+data3
+-1
+3
+data29
+-1
+3
+data28
+-1
+3
+data27
+-1
+3
+data26
+-1
+3
+data25
+-1
+3
+data24
+-1
+3
+data23
+-1
+3
+data22
+-1
+3
+data21
+-1
+3
+data20
+-1
+3
+data2
+-1
+3
+data19
+-1
+3
+data18
+-1
+3
+data17
+-1
+3
+data16
+-1
+3
+data15
+-1
+3
+data14
+-1
+3
+data13
+-1
+3
+data12
+-1
+3
+data11
+-1
+3
+data10
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+RXMUX:I_MUX|lpm_mux:lpm_mux_component|mux_6me:auto_generated
+RXMUX:Q_MUX|lpm_mux:lpm_mux_component|mux_6me:auto_generated
+}
+# end
+# entity
+CIC_R100_M1_N10
+# storage
+db|ozy_eval.(125).cnf
+db|ozy_eval.(125).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CIC_R100_M1_N10.v
+db646e23566cbab71e1e38b8a49e815
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CIC_R256_M1_N6
+# storage
+db|ozy_eval.(126).cnf
+db|ozy_eval.(126).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CIC_R256_M1_N6.v
+2c1a606ba1d8f7d20417366b9309823
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CIC_R256_M1_N7
+# storage
+db|ozy_eval.(127).cnf
+db|ozy_eval.(127).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CIC_R256_M1_N7.v
+4f864317682ebfb231bbfffb0f5b4d
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CIC_R64_M1_N7
+# storage
+db|ozy_eval.(128).cnf
+db|ozy_eval.(128).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CIC_R64_M1_N7.v
+1988544959bdf4d6f39aa66bdf4c666
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CIC_R64_M1_N8
+# storage
+db|ozy_eval.(129).cnf
+db|ozy_eval.(129).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CIC_R64_M1_N8.v
+567e2b21bcc8a9fafeb2eccc8b21a4
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CASCADE_D520
+# storage
+db|ozy_eval.(130).cnf
+db|ozy_eval.(130).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CASCADE_D520.v
+39ff5cbe2b1e67fd1146fad66645b4
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CASCADE_D520_stage1
+# storage
+db|ozy_eval.(131).cnf
+db|ozy_eval.(131).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CASCADE_D520_stage1.v
+a9d78e2fa07cb588c490a98e117a4df
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CASCADE_D520_stage2
+# storage
+db|ozy_eval.(132).cnf
+db|ozy_eval.(132).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CASCADE_D520_stage2.v
+adc2e0de32a94b06c25b2c9e0932e86
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CASCADE_D520_stage3
+# storage
+db|ozy_eval.(133).cnf
+db|ozy_eval.(133).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CASCADE_D520_stage3.v
+c4249847d78b3fba3dcf621b13329d3e
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+coeffphase1_1
+111111111111101010
+PARAMETER_BIN
+DEF
+coeffphase1_2
+000000001000010001
+PARAMETER_BIN
+DEF
+coeffphase1_3
+000001100010011011
+PARAMETER_BIN
+DEF
+coeffphase1_4
+000000101010001100
+PARAMETER_BIN
+DEF
+coeffphase1_5
+000000101010001100
+PARAMETER_BIN
+DEF
+coeffphase1_6
+000001100010011011
+PARAMETER_BIN
+DEF
+coeffphase1_7
+000000001000010001
+PARAMETER_BIN
+DEF
+coeffphase1_8
+111111111111101010
+PARAMETER_BIN
+DEF
+coeffphase2_1
+111111111110110101
+PARAMETER_BIN
+DEF
+coeffphase2_2
+111111110001001010
+PARAMETER_BIN
+DEF
+coeffphase2_3
+000001001100100100
+PARAMETER_BIN
+DEF
+coeffphase2_4
+001011100000100110
+PARAMETER_BIN
+DEF
+coeffphase2_5
+111011011000111110
+PARAMETER_BIN
+DEF
+coeffphase2_6
+000000000010111110
+PARAMETER_BIN
+DEF
+coeffphase2_7
+000000000111000111
+PARAMETER_BIN
+DEF
+coeffphase2_8
+000000000000000000
+PARAMETER_BIN
+DEF
+coeffphase3_1
+000000000000010101
+PARAMETER_BIN
+DEF
+coeffphase3_2
+111111011000100111
+PARAMETER_BIN
+DEF
+coeffphase3_3
+111101101010000111
+PARAMETER_BIN
+DEF
+coeffphase3_4
+010001010001001010
+PARAMETER_BIN
+DEF
+coeffphase3_5
+111101101010000111
+PARAMETER_BIN
+DEF
+coeffphase3_6
+111111011000100111
+PARAMETER_BIN
+DEF
+coeffphase3_7
+000000000000010101
+PARAMETER_BIN
+DEF
+coeffphase3_8
+000000000000000000
+PARAMETER_BIN
+DEF
+coeffphase4_1
+000000000111000111
+PARAMETER_BIN
+DEF
+coeffphase4_2
+000000000010111110
+PARAMETER_BIN
+DEF
+coeffphase4_3
+111011011000111110
+PARAMETER_BIN
+DEF
+coeffphase4_4
+001011100000100110
+PARAMETER_BIN
+DEF
+coeffphase4_5
+000001001100100100
+PARAMETER_BIN
+DEF
+coeffphase4_6
+111111110001001010
+PARAMETER_BIN
+DEF
+coeffphase4_7
+111111111110110101
+PARAMETER_BIN
+DEF
+coeffphase4_8
+000000000000000000
+PARAMETER_BIN
+DEF
+}
+# end
+# entity
+CASCADE_D130
+# storage
+db|ozy_eval.(134).cnf
+db|ozy_eval.(134).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CASCADE_D130.v
+9ae9dbe9d621994d2c122711d6ef02d
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CASCADE_D130_stage1
+# storage
+db|ozy_eval.(135).cnf
+db|ozy_eval.(135).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CASCADE_D130_stage1.v
+f87f226410f2b047b880a2f7b5bdc2e
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CASCADE_D130_stage2
+# storage
+db|ozy_eval.(136).cnf
+db|ozy_eval.(136).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CASCADE_D130_stage2.v
+f60ae497877c9adaa9eb4b1fd2dd
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CASCADE_D260_stage1
+# storage
+db|ozy_eval.(138).cnf
+db|ozy_eval.(138).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CASCADE_D260_stage1.v
+65df1675e25a5ce4a78d2c5b0878480
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CASCADE_D260_stage2
+# storage
+db|ozy_eval.(139).cnf
+db|ozy_eval.(139).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CASCADE_D260_stage2.v
+4a95425825cb134298c7aa8ef63c1cd
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# end
+# entity
+CIC_D65
+# storage
+db|ozy_eval.(137).cnf
+db|ozy_eval.(137).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CIC_D65.v
+c2d1556bf984b77d759776a214b7e846
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+CIC_D65:I_CAS1
+CIC_D65:Q_CAS1
+}
+# end
+# entity
+CIC_D4
+# storage
+db|ozy_eval.(140).cnf
+db|ozy_eval.(140).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+CIC_D4.v
+ebc33d22b0fcea5eeec39d2bd402d1a
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+CIC_D4:I_CAS2
+CIC_D4:Q_CAS2
+}
+# end
+# entity
+HB
+# storage
+db|ozy_eval.(141).cnf
+db|ozy_eval.(141).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+HB.v
+fd8f4d2a814fc492946634a29f9881db
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# user_parameter {
+coeffphase1_1
+1111111111111111
+PARAMETER_BIN
+DEF
+coeffphase1_2
+0000000000000001
+PARAMETER_BIN
+DEF
+coeffphase1_3
+1111111111111101
+PARAMETER_BIN
+DEF
+coeffphase1_4
+0000000000000101
+PARAMETER_BIN
+DEF
+coeffphase1_5
+1111111111110111
+PARAMETER_BIN
+DEF
+coeffphase1_6
+0000000000001110
+PARAMETER_BIN
+DEF
+coeffphase1_7
+1111111111101011
+PARAMETER_BIN
+DEF
+coeffphase1_8
+0000000000011110
+PARAMETER_BIN
+DEF
+coeffphase1_9
+1111111111010111
+PARAMETER_BIN
+DEF
+coeffphase1_10
+0000000000111000
+PARAMETER_BIN
+DEF
+coeffphase1_11
+1111111110110101
+PARAMETER_BIN
+DEF
+coeffphase1_12
+0000000001100011
+PARAMETER_BIN
+DEF
+coeffphase1_13
+1111111110000000
+PARAMETER_BIN
+DEF
+coeffphase1_14
+0000000010100011
+PARAMETER_BIN
+DEF
+coeffphase1_15
+1111111100110001
+PARAMETER_BIN
+DEF
+coeffphase1_16
+0000000100000100
+PARAMETER_BIN
+DEF
+coeffphase1_17
+1111111010111100
+PARAMETER_BIN
+DEF
+coeffphase1_18
+0000000110010100
+PARAMETER_BIN
+DEF
+coeffphase1_19
+1111111000001001
+PARAMETER_BIN
+DEF
+coeffphase1_20
+0000001001110110
+PARAMETER_BIN
+DEF
+coeffphase1_21
+1111110011100010
+PARAMETER_BIN
+DEF
+coeffphase1_22
+0000010000001001
+PARAMETER_BIN
+DEF
+coeffphase1_23
+1111101010010010
+PARAMETER_BIN
+DEF
+coeffphase1_24
+0000011111011110
+PARAMETER_BIN
+DEF
+coeffphase1_25
+1111001010010111
+PARAMETER_BIN
+DEF
+coeffphase1_26
+0010100010110000
+PARAMETER_BIN
+DEF
+coeffphase1_27
+0010100010110000
+PARAMETER_BIN
+DEF
+coeffphase1_28
+1111001010010111
+PARAMETER_BIN
+DEF
+coeffphase1_29
+0000011111011110
+PARAMETER_BIN
+DEF
+coeffphase1_30
+1111101010010010
+PARAMETER_BIN
+DEF
+coeffphase1_31
+0000010000001001
+PARAMETER_BIN
+DEF
+coeffphase1_32
+1111110011100010
+PARAMETER_BIN
+DEF
+coeffphase1_33
+0000001001110110
+PARAMETER_BIN
+DEF
+coeffphase1_34
+1111111000001001
+PARAMETER_BIN
+DEF
+coeffphase1_35
+0000000110010100
+PARAMETER_BIN
+DEF
+coeffphase1_36
+1111111010111100
+PARAMETER_BIN
+DEF
+coeffphase1_37
+0000000100000100
+PARAMETER_BIN
+DEF
+coeffphase1_38
+1111111100110001
+PARAMETER_BIN
+DEF
+coeffphase1_39
+0000000010100011
+PARAMETER_BIN
+DEF
+coeffphase1_40
+1111111110000000
+PARAMETER_BIN
+DEF
+coeffphase1_41
+0000000001100011
+PARAMETER_BIN
+DEF
+coeffphase1_42
+1111111110110101
+PARAMETER_BIN
+DEF
+coeffphase1_43
+0000000000111000
+PARAMETER_BIN
+DEF
+coeffphase1_44
+1111111111010111
+PARAMETER_BIN
+DEF
+coeffphase1_45
+0000000000011110
+PARAMETER_BIN
+DEF
+coeffphase1_46
+1111111111101011
+PARAMETER_BIN
+DEF
+coeffphase1_47
+0000000000001110
+PARAMETER_BIN
+DEF
+coeffphase1_48
+1111111111110111
+PARAMETER_BIN
+DEF
+coeffphase1_49
+0000000000000101
+PARAMETER_BIN
+DEF
+coeffphase1_50
+1111111111111101
+PARAMETER_BIN
+DEF
+coeffphase1_51
+0000000000000001
+PARAMETER_BIN
+DEF
+coeffphase1_52
+1111111111111111
+PARAMETER_BIN
+DEF
+coeffphase2_1
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_2
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_3
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_4
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_5
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_6
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_7
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_8
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_9
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_10
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_11
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_12
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_13
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_14
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_15
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_16
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_17
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_18
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_19
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_20
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_21
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_22
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_23
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_24
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_25
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_26
+0100000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_27
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_28
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_29
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_30
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_31
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_32
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_33
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_34
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_35
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_36
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_37
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_38
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_39
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_40
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_41
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_42
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_43
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_44
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_45
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_46
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_47
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_48
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_49
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_50
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_51
+0000000000000000
+PARAMETER_BIN
+DEF
+coeffphase2_52
+0000000000000000
+PARAMETER_BIN
+DEF
+}
+# hierarchies {
+HB:I_HB
+HB:Q_HB
 }
 # end
 # entity
@@ -6912,7 +8161,7 @@ ON
 # case_sensitive
 # source_file
 ozy_nco.v
-8744787a5de77e59d2a548a05790b531
+6f21f5bfd7c6dd05cc3eff4637ffd5
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

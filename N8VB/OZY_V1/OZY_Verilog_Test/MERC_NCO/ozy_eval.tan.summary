@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 7.482 ns
+Actual Time    : 8.198 ns
 From           : FLAGB
-To             : FD[13]~reg0
+To             : FD[8]~reg0
 From Clock     : --
 To Clock       : IFCLK
 Failed Paths   : 0
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 12.326 ns
-From           : tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_i27:wrptr_gp|power_modified_counter_values[7]
-To             : GPIO1
+Actual Time    : 12.979 ns
+From           : tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_i27:wrptr_gp|power_modified_counter_values[8]
+To             : GPIO2
 From Clock     : ENC_CLK
 To Clock       : --
 Failed Paths   : 0
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 10.666 ns
+Actual Time    : 10.388 ns
 From           : FLAGB
 To             : GPIO6
 From Clock     : --
@@ -35,39 +35,39 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -3.027 ns
-From           : DA[3]
-To             : ADC[3]
+Actual Time    : -2.952 ns
+From           : DA[0]
+To             : ADC[0]
 From Clock     : --
+To Clock       : ENC_CLK
+Failed Paths   : 0
+
+Type           : Clock Setup: 'ENC_CLK'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 138.68 MHz ( period = 7.211 ns )
+From           : CIC_D65:Q_CAS1|input_register[3]
+To             : CIC_D65:Q_CAS1|section_out1[46]
+From Clock     : ENC_CLK
 To Clock       : ENC_CLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'IFCLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 141.42 MHz ( period = 7.071 ns )
-From           : tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|rdptr_g[9]
-To             : FD[13]~reg0
+Actual Time    : 166.56 MHz ( period = 6.004 ns )
+From           : tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10|dffe12a[8]
+To             : tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_o96:rdptr_g1p|power_modified_counter_values[9]
 From Clock     : IFCLK
 To Clock       : IFCLK
-Failed Paths   : 0
-
-Type           : Clock Setup: 'ENC_CLK'
-Slack          : N/A
-Required Time  : None
-Actual Time    : 154.58 MHz ( period = 6.469 ns )
-From           : CIC_R100_M1_N5:Q_CIC|input_register[4]
-To             : CIC_R100_M1_N5:Q_CIC|section_out1[47]
-From Clock     : ENC_CLK
-To Clock       : ENC_CLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'SCK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 160.72 MHz ( period = 6.222 ns )
-From           : SPI_REGS:spi_regs|BitCounter[31]
-To             : SPI_REGS:spi_regs|sdata[11]
+Actual Time    : 178.38 MHz ( period = 5.606 ns )
+From           : SPI_REGS:spi_regs|BitCounter[22]
+To             : SPI_REGS:spi_regs|sdata[22]
 From Clock     : SCK
 To Clock       : SCK
 Failed Paths   : 0
@@ -75,9 +75,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'FX2_CLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 315.96 MHz ( period = 3.165 ns )
+Actual Time    : 292.23 MHz ( period = 3.422 ns )
 From           : SPI_REGS:spi_regs|CS_ph1
-To             : RegisterX:freqsetreg|OUT[2]
+To             : RegisterX:optionreg|OUT[2]
 From Clock     : FX2_CLK
 To Clock       : FX2_CLK
 Failed Paths   : 0

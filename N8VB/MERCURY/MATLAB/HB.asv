@@ -1,0 +1,22 @@
+% CASCADE FILTER DESIGN
+% P.COVINGTON
+% 09/19/2006
+%
+% THIRD STAGE
+% Half Band Filter Design
+%
+N = 90;   % filter order
+fp = 0.45; % passband edge
+IWL = 16; % Input Word Length
+OWL = 20; % Output Word Length
+
+b = fi
+
+set(hcic2, 'InputFracLength', 0);
+
+% Fs_in = 100.000e6;
+% h = fvtool(hcic1, 'Fs', Fs_in);
+
+generatehdl(hcic2,'Name', 'CIC_D4', 'TargetLanguage', 'Verilog',...
+    'TargetDirectory', 'c:\data', 'AddPipelineRegisters', 'on', ...
+    'CoeffMultipliers', 'csd', 'FIRAdderStyle', 'tree');
