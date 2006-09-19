@@ -25,7 +25,7 @@ namespace MercScope
         int[] qvalbuf = new int[qsize];
         IntPtr hdev = IntPtr.Zero;
         bool adcon = false;
-        PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.HAMMING_WINDOW);
+        PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.BLACKMAN4_WINDOW);
         IQCorrection iqcor = new IQCorrection(512);
 
         public Form1()
