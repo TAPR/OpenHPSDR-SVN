@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Tue Sep 19 16:42:27 2006) contains limited information
+This XML file (created on Wed Sep 20 11:18:02 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<module>quartus_asm</module>
 	<edition>Web Edition</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Tue Sep 19 16:42:27 2006</compilation_end_time>
+	<compilation_end_time>Wed Sep 20 11:18:03 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_eval</project>
 <revision>ozy_eval</revision>
 <compilation_summary>
-	<flow_status>Successful - Tue Sep 19 16:42:27 2006</flow_status>
+	<flow_status>Successful - Wed Sep 20 11:18:02 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>ozy_eval</revision_name>
 	<top_level_entity_name>ozy_nco</top_level_entity_name>
@@ -45,8 +45,8 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<device>EP2C5Q208C7</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>N/A</met_timing_requirements>
-	<total_logic_elements>4,145 / 4,608 ( 90 % )</total_logic_elements>
-	<total_registers>3701</total_registers>
+	<total_logic_elements>4,507 / 4,608 ( 98 % )</total_logic_elements>
+	<total_registers>4242</total_registers>
 	<total_pins>55 / 142 ( 39 % )</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
 	<total_memory_bits>16,384 / 119,808 ( 14 % )</total_memory_bits>
@@ -62,7 +62,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 <messages>
 	<info>Info: Quartus II Assembler was successful. 0 errors, 0 warnings</info>
 	<info>Info: Elapsed time: 00:00:04</info>
-	<info>Info: Processing ended: Tue Sep 19 16:42:27 2006</info>
+	<info>Info: Processing ended: Wed Sep 20 11:18:02 2006</info>
 	<info>Info: Assembler is generating device programming files</info>
 	<info>Info: Writing out detailed assembly data for power analysis</info>
 </messages>

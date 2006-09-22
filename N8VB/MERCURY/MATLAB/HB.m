@@ -5,16 +5,16 @@
 % THIRD STAGE
 % Half Band Filter Design
 %
-N = 40;   % filter order
+N = 6;   % filter order
 w = hamming(N+1);
 fp = 0.45;
 d = 0.0001; % 80 db atten
 IWL = 16; % Input Word Length
 OWL = 20; % Output Word Length
 
-%b = firhalfband(N,d,'dev');
+b = firhalfband(N,d,'dev');
 %b = firhalfband(N,w);
-b = firhalfband('minorder',fp,d,'kaiser');
+%b = firhalfband('minorder',fp,d,'kaiser');
 
 hm = mfilt.firdecim(2,b);
 
