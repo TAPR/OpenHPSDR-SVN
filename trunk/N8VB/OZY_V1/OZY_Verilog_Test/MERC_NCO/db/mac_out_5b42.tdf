@@ -1,0 +1,37 @@
+--alt_mac_out ADDNSUB0_CLEAR="NONE" ADDNSUB0_CLOCK="NONE" ADDNSUB0_PIPELINE_CLEAR="NONE" ADDNSUB0_PIPELINE_CLOCK="NONE" ADDNSUB1_CLEAR="NONE" ADDNSUB1_CLOCK="NONE" ADDNSUB1_PIPELINE_CLEAR="NONE" ADDNSUB1_PIPELINE_CLOCK="NONE" DATAA_WIDTH=25 DATAB_WIDTH=0 DATAC_WIDTH=0 DATAD_WIDTH=0 OPERATION_MODE="OUTPUT_ONLY" OUTPUT_CLEAR="NONE" OUTPUT_CLOCK="NONE" OUTPUT_WIDTH=25 SIGNA_CLEAR="NONE" SIGNA_CLOCK="NONE" SIGNA_PIPELINE_CLEAR="NONE" SIGNA_PIPELINE_CLOCK="NONE" SIGNB_CLEAR="NONE" SIGNB_CLOCK="NONE" SIGNB_PIPELINE_CLEAR="NONE" SIGNB_PIPELINE_CLOCK="NONE" ZEROACC_CLEAR="NONE" ZEROACC_CLOCK="NONE" ZEROACC_PIPELINE_CLEAR="NONE" ZEROACC_PIPELINE_CLOCK="NONE" clk dataa dataout CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48 DEVICE_FAMILY="Cyclone II"
+--VERSION_BEGIN 6.0 cbx_alt_mac_out 2006:06:13:10:36:36:SJ cbx_mgl 2006:05:17:10:06:16:SJ  VERSION_END
+
+
+--  Copyright (C) 1991-2006 Altera Corporation
+--  Your use of Altera Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Altera Program License 
+--  Subscription Agreement, Altera MegaCore Function License 
+--  Agreement, or other applicable license agreement, including, 
+--  without limitation, that your use is for the sole purpose of 
+--  programming logic devices manufactured by Altera and sold by 
+--  Altera or its authorized distributors.  Please refer to the 
+--  applicable agreement for further details.
+
+
+
+--synthesis_resources = 
+SUBDESIGN mac_out_5b42
+( 
+	clk[3..0]	:	input;
+	dataa[24..0]	:	input;
+	dataout[24..0]	:	output;
+) 
+VARIABLE 
+	signa	: NODE;
+	signb	: NODE;
+
+BEGIN 
+	dataout[] = (dataa[] & (((signa # (! signa)) # signb) # (! signb)));
+	signa = VCC;
+	signb = VCC;
+END;
+--VALID FILE
