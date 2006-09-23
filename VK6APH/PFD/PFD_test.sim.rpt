@@ -1,0 +1,310 @@
+Simulator report for PFD_test
+Sat Sep 23 14:12:37 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. Coverage Summary
+  6. Complete 1/0-Value Coverage
+  7. Missing 1-Value Coverage
+  8. Missing 0-Value Coverage
+  9. Simulator INI Usage
+ 10. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------+
+; Simulator Summary                          ;
++-----------------------------+--------------+
+; Type                        ; Value        ;
++-----------------------------+--------------+
+; Simulation Start Time       ; 0 ps         ;
+; Simulation End Time         ; 3.0 ms       ;
+; Simulation Netlist Size     ; 108 nodes    ;
+; Simulation Coverage         ;      88.97 % ;
+; Total Number of Transitions ; 2682936      ;
+; Simulation Breakpoints      ; 0            ;
+; Family                      ; Cyclone II   ;
+; Device                      ; EP2C5Q208C8  ;
++-----------------------------+--------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                        ;
++--------------------------------------------------------------------------------------------+--------------+---------------+
+; Option                                                                                     ; Setting      ; Default Value ;
++--------------------------------------------------------------------------------------------+--------------+---------------+
+; Simulation mode                                                                            ; Timing       ; Timing        ;
+; Start time                                                                                 ; 0 ns         ; 0 ns          ;
+; Vector input source                                                                        ; PFD_test.vwf ;               ;
+; Add pins automatically to simulation output waveforms                                      ; Off          ; On            ;
+; Check outputs                                                                              ; Off          ; Off           ;
+; Report simulation coverage                                                                 ; On           ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On           ; On            ;
+; Display missing 1-value coverage report                                                    ; On           ; On            ;
+; Display missing 0-value coverage report                                                    ; On           ; On            ;
+; Detect setup and hold time violations                                                      ; Off          ; Off           ;
+; Detect glitches                                                                            ; Off          ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off          ; Off           ;
+; Generate Signal Activity File                                                              ; Off          ; Off           ;
+; Group bus channels in simulation results                                                   ; Off          ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On           ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE   ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off          ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off          ;               ;
+; Glitch Filtering                                                                           ; Off          ; Off           ;
++--------------------------------------------------------------------------------------------+--------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II to view the waveform report data.
+
+
++--------------------------------------------------------------------+
+; Coverage Summary                                                   ;
++-----------------------------------------------------+--------------+
+; Type                                                ; Value        ;
++-----------------------------------------------------+--------------+
+; Total coverage as a percentage                      ;      88.97 % ;
+; Total nodes checked                                 ; 108          ;
+; Total output ports checked                          ; 136          ;
+; Total output ports with complete 1/0-value coverage ; 121          ;
+; Total output ports with no 1/0-value coverage       ; 14           ;
+; Total output ports with no 1-value coverage         ; 14           ;
+; Total output ports with no 0-value coverage         ; 15           ;
++-----------------------------------------------------+--------------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++--------------------------------------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                                                  ;
++---------------------------------------------+---------------------------------------------+------------------+
+; Node Name                                   ; Output Port Name                            ; Output Port Type ;
++---------------------------------------------+---------------------------------------------+------------------+
+; |PFD_test|ref_1k                            ; |PFD_test|ref_1k                            ; regout           ;
+; |PFD_test|osc_1k                            ; |PFD_test|osc_1k                            ; regout           ;
+; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_11   ; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_11   ; regout           ;
+; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_12   ; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_12   ; regout           ;
+; |PFD_test|ref_count[14]                     ; |PFD_test|ref_count[14]                     ; regout           ;
+; |PFD_test|ref_count[12]                     ; |PFD_test|ref_count[12]                     ; regout           ;
+; |PFD_test|ref_count[11]                     ; |PFD_test|ref_count[11]                     ; regout           ;
+; |PFD_test|ref_count[13]                     ; |PFD_test|ref_count[13]                     ; regout           ;
+; |PFD_test|Equal0~137                        ; |PFD_test|Equal0~137                        ; combout          ;
+; |PFD_test|ref_count[10]                     ; |PFD_test|ref_count[10]                     ; regout           ;
+; |PFD_test|ref_count[8]                      ; |PFD_test|ref_count[8]                      ; regout           ;
+; |PFD_test|ref_count[7]                      ; |PFD_test|ref_count[7]                      ; regout           ;
+; |PFD_test|ref_count[9]                      ; |PFD_test|ref_count[9]                      ; regout           ;
+; |PFD_test|Equal0~138                        ; |PFD_test|Equal0~138                        ; combout          ;
+; |PFD_test|ref_count[5]                      ; |PFD_test|ref_count[5]                      ; regout           ;
+; |PFD_test|ref_count[4]                      ; |PFD_test|ref_count[4]                      ; regout           ;
+; |PFD_test|ref_count[3]                      ; |PFD_test|ref_count[3]                      ; regout           ;
+; |PFD_test|ref_count[6]                      ; |PFD_test|ref_count[6]                      ; regout           ;
+; |PFD_test|Equal0~139                        ; |PFD_test|Equal0~139                        ; combout          ;
+; |PFD_test|ref_count[2]                      ; |PFD_test|ref_count[2]                      ; regout           ;
+; |PFD_test|ref_count[1]                      ; |PFD_test|ref_count[1]                      ; regout           ;
+; |PFD_test|ref_count[0]                      ; |PFD_test|ref_count[0]                      ; regout           ;
+; |PFD_test|Equal0~140                        ; |PFD_test|Equal0~140                        ; combout          ;
+; |PFD_test|ref_1k~49                         ; |PFD_test|ref_1k~49                         ; combout          ;
+; |PFD_test|osc_count[11]                     ; |PFD_test|osc_count[11]                     ; regout           ;
+; |PFD_test|Equal1~137                        ; |PFD_test|Equal1~137                        ; combout          ;
+; |PFD_test|osc_count[8]                      ; |PFD_test|osc_count[8]                      ; regout           ;
+; |PFD_test|osc_count[7]                      ; |PFD_test|osc_count[7]                      ; regout           ;
+; |PFD_test|osc_count[10]                     ; |PFD_test|osc_count[10]                     ; regout           ;
+; |PFD_test|osc_count[9]                      ; |PFD_test|osc_count[9]                      ; regout           ;
+; |PFD_test|Equal1~138                        ; |PFD_test|Equal1~138                        ; combout          ;
+; |PFD_test|osc_count[6]                      ; |PFD_test|osc_count[6]                      ; regout           ;
+; |PFD_test|osc_count[5]                      ; |PFD_test|osc_count[5]                      ; regout           ;
+; |PFD_test|osc_count[4]                      ; |PFD_test|osc_count[4]                      ; regout           ;
+; |PFD_test|osc_count[3]                      ; |PFD_test|osc_count[3]                      ; regout           ;
+; |PFD_test|Equal1~139                        ; |PFD_test|Equal1~139                        ; combout          ;
+; |PFD_test|osc_count[1]                      ; |PFD_test|osc_count[1]                      ; regout           ;
+; |PFD_test|osc_count[0]                      ; |PFD_test|osc_count[0]                      ; regout           ;
+; |PFD_test|osc_count[2]                      ; |PFD_test|osc_count[2]                      ; regout           ;
+; |PFD_test|Equal1~140                        ; |PFD_test|Equal1~140                        ; combout          ;
+; |PFD_test|osc_1k~49                         ; |PFD_test|osc_1k~49                         ; combout          ;
+; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_10   ; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_10   ; combout          ;
+; |PFD_test|Add0~180                          ; |PFD_test|Add0~180                          ; combout          ;
+; |PFD_test|Add0~180                          ; |PFD_test|Add0~181                          ; cout             ;
+; |PFD_test|Add0~182                          ; |PFD_test|Add0~182                          ; combout          ;
+; |PFD_test|Add0~182                          ; |PFD_test|Add0~183                          ; cout             ;
+; |PFD_test|Add0~184                          ; |PFD_test|Add0~184                          ; combout          ;
+; |PFD_test|Add0~184                          ; |PFD_test|Add0~185                          ; cout             ;
+; |PFD_test|Add0~186                          ; |PFD_test|Add0~186                          ; combout          ;
+; |PFD_test|Add0~186                          ; |PFD_test|Add0~187                          ; cout             ;
+; |PFD_test|Add0~188                          ; |PFD_test|Add0~188                          ; combout          ;
+; |PFD_test|Add0~188                          ; |PFD_test|Add0~189                          ; cout             ;
+; |PFD_test|Add0~190                          ; |PFD_test|Add0~190                          ; combout          ;
+; |PFD_test|Add0~190                          ; |PFD_test|Add0~191                          ; cout             ;
+; |PFD_test|Add0~192                          ; |PFD_test|Add0~192                          ; combout          ;
+; |PFD_test|Add0~192                          ; |PFD_test|Add0~193                          ; cout             ;
+; |PFD_test|Add0~194                          ; |PFD_test|Add0~194                          ; combout          ;
+; |PFD_test|Add0~194                          ; |PFD_test|Add0~195                          ; cout             ;
+; |PFD_test|Add0~196                          ; |PFD_test|Add0~196                          ; combout          ;
+; |PFD_test|Add0~196                          ; |PFD_test|Add0~197                          ; cout             ;
+; |PFD_test|Add0~198                          ; |PFD_test|Add0~198                          ; combout          ;
+; |PFD_test|Add0~198                          ; |PFD_test|Add0~199                          ; cout             ;
+; |PFD_test|Add0~200                          ; |PFD_test|Add0~200                          ; combout          ;
+; |PFD_test|Add0~200                          ; |PFD_test|Add0~201                          ; cout             ;
+; |PFD_test|Add0~202                          ; |PFD_test|Add0~202                          ; combout          ;
+; |PFD_test|Add0~202                          ; |PFD_test|Add0~203                          ; cout             ;
+; |PFD_test|Add0~204                          ; |PFD_test|Add0~204                          ; combout          ;
+; |PFD_test|Add0~204                          ; |PFD_test|Add0~205                          ; cout             ;
+; |PFD_test|Add0~206                          ; |PFD_test|Add0~206                          ; combout          ;
+; |PFD_test|Add0~206                          ; |PFD_test|Add0~207                          ; cout             ;
+; |PFD_test|Add0~208                          ; |PFD_test|Add0~208                          ; combout          ;
+; |PFD_test|ref_count~413                     ; |PFD_test|ref_count~413                     ; combout          ;
+; |PFD_test|ref_count~414                     ; |PFD_test|ref_count~414                     ; combout          ;
+; |PFD_test|ref_count~415                     ; |PFD_test|ref_count~415                     ; combout          ;
+; |PFD_test|ref_count~416                     ; |PFD_test|ref_count~416                     ; combout          ;
+; |PFD_test|ref_count~417                     ; |PFD_test|ref_count~417                     ; combout          ;
+; |PFD_test|ref_count~418                     ; |PFD_test|ref_count~418                     ; combout          ;
+; |PFD_test|ref_count~419                     ; |PFD_test|ref_count~419                     ; combout          ;
+; |PFD_test|Add1~180                          ; |PFD_test|Add1~180                          ; combout          ;
+; |PFD_test|Add1~180                          ; |PFD_test|Add1~181                          ; cout             ;
+; |PFD_test|Add1~182                          ; |PFD_test|Add1~182                          ; combout          ;
+; |PFD_test|Add1~182                          ; |PFD_test|Add1~183                          ; cout             ;
+; |PFD_test|Add1~184                          ; |PFD_test|Add1~184                          ; combout          ;
+; |PFD_test|Add1~184                          ; |PFD_test|Add1~185                          ; cout             ;
+; |PFD_test|Add1~186                          ; |PFD_test|Add1~186                          ; combout          ;
+; |PFD_test|Add1~186                          ; |PFD_test|Add1~187                          ; cout             ;
+; |PFD_test|Add1~188                          ; |PFD_test|Add1~188                          ; combout          ;
+; |PFD_test|Add1~188                          ; |PFD_test|Add1~189                          ; cout             ;
+; |PFD_test|Add1~190                          ; |PFD_test|Add1~190                          ; combout          ;
+; |PFD_test|Add1~190                          ; |PFD_test|Add1~191                          ; cout             ;
+; |PFD_test|Add1~192                          ; |PFD_test|Add1~192                          ; combout          ;
+; |PFD_test|Add1~192                          ; |PFD_test|Add1~193                          ; cout             ;
+; |PFD_test|Add1~194                          ; |PFD_test|Add1~194                          ; combout          ;
+; |PFD_test|Add1~194                          ; |PFD_test|Add1~195                          ; cout             ;
+; |PFD_test|Add1~196                          ; |PFD_test|Add1~196                          ; combout          ;
+; |PFD_test|Add1~196                          ; |PFD_test|Add1~197                          ; cout             ;
+; |PFD_test|Add1~198                          ; |PFD_test|Add1~198                          ; combout          ;
+; |PFD_test|Add1~198                          ; |PFD_test|Add1~199                          ; cout             ;
+; |PFD_test|Add1~200                          ; |PFD_test|Add1~200                          ; combout          ;
+; |PFD_test|Add1~200                          ; |PFD_test|Add1~201                          ; cout             ;
+; |PFD_test|Add1~202                          ; |PFD_test|Add1~202                          ; combout          ;
+; |PFD_test|Add1~202                          ; |PFD_test|Add1~203                          ; cout             ;
+; |PFD_test|osc_count~317                     ; |PFD_test|osc_count~317                     ; combout          ;
+; |PFD_test|Add1~204                          ; |PFD_test|Add1~204                          ; combout          ;
+; |PFD_test|osc_count~318                     ; |PFD_test|osc_count~318                     ; combout          ;
+; |PFD_test|osc_count~319                     ; |PFD_test|osc_count~319                     ; combout          ;
+; |PFD_test|osc_count~320                     ; |PFD_test|osc_count~320                     ; combout          ;
+; |PFD_test|osc_count~321                     ; |PFD_test|osc_count~321                     ; combout          ;
+; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_11~2 ; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_11~2 ; combout          ;
+; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_12~2 ; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_12~2 ; combout          ;
+; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_9~2  ; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_9~2  ; combout          ;
+; |PFD_test|ref_in                            ; |PFD_test|ref_in                            ; combout          ;
+; |PFD_test|osc_in                            ; |PFD_test|osc_in                            ; combout          ;
+; |PFD_test|LED[0]                            ; |PFD_test|LED[0]                            ; padio            ;
+; |PFD_test|LED[1]                            ; |PFD_test|LED[1]                            ; padio            ;
+; |PFD_test|LED[2]                            ; |PFD_test|LED[2]                            ; padio            ;
+; |PFD_test|LED[3]                            ; |PFD_test|LED[3]                            ; padio            ;
+; |PFD_test|ref_in~clkctrl                    ; |PFD_test|ref_in~clkctrl                    ; outclk           ;
+; |PFD_test|ref_1k~clkctrl                    ; |PFD_test|ref_1k~clkctrl                    ; outclk           ;
+; |PFD_test|osc_1k~clkctrl                    ; |PFD_test|osc_1k~clkctrl                    ; outclk           ;
+; |PFD_test|osc_in~clkctrl                    ; |PFD_test|osc_in~clkctrl                    ; outclk           ;
++---------------------------------------------+---------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++--------------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                             ;
++---------------------------------+---------------------------------+------------------+
+; Node Name                       ; Output Port Name                ; Output Port Type ;
++---------------------------------+---------------------------------+------------------+
+; |PFD_test|pfd:comb_60|DFF_inst3 ; |PFD_test|pfd:comb_60|DFF_inst3 ; regout           ;
+; |PFD_test|pfd:comb_60|pfd_out   ; |PFD_test|pfd:comb_60|pfd_out   ; combout          ;
+; |PFD_test|osc_count[14]         ; |PFD_test|osc_count[14]         ; regout           ;
+; |PFD_test|osc_count[13]         ; |PFD_test|osc_count[13]         ; regout           ;
+; |PFD_test|osc_count[12]         ; |PFD_test|osc_count[12]         ; regout           ;
+; |PFD_test|Add1~204              ; |PFD_test|Add1~205              ; cout             ;
+; |PFD_test|Add1~206              ; |PFD_test|Add1~206              ; combout          ;
+; |PFD_test|Add1~206              ; |PFD_test|Add1~207              ; cout             ;
+; |PFD_test|Add1~208              ; |PFD_test|Add1~208              ; combout          ;
+; |PFD_test|pfd_out               ; |PFD_test|pfd_out               ; padio            ;
+; |PFD_test|LED[4]                ; |PFD_test|LED[4]                ; padio            ;
+; |PFD_test|LED[5]                ; |PFD_test|LED[5]                ; padio            ;
+; |PFD_test|LED[6]                ; |PFD_test|LED[6]                ; padio            ;
+; |PFD_test|LED[7]                ; |PFD_test|LED[7]                ; padio            ;
++---------------------------------+---------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++--------------------------------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                                               ;
++------------------------------------------+------------------------------------------+------------------+
+; Node Name                                ; Output Port Name                         ; Output Port Type ;
++------------------------------------------+------------------------------------------+------------------+
+; |PFD_test|pfd:comb_60|DFF_inst3          ; |PFD_test|pfd:comb_60|DFF_inst3          ; regout           ;
+; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_9 ; |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_9 ; regout           ;
+; |PFD_test|pfd:comb_60|pfd_out            ; |PFD_test|pfd:comb_60|pfd_out            ; combout          ;
+; |PFD_test|osc_count[14]                  ; |PFD_test|osc_count[14]                  ; regout           ;
+; |PFD_test|osc_count[13]                  ; |PFD_test|osc_count[13]                  ; regout           ;
+; |PFD_test|osc_count[12]                  ; |PFD_test|osc_count[12]                  ; regout           ;
+; |PFD_test|Add1~204                       ; |PFD_test|Add1~205                       ; cout             ;
+; |PFD_test|Add1~206                       ; |PFD_test|Add1~206                       ; combout          ;
+; |PFD_test|Add1~206                       ; |PFD_test|Add1~207                       ; cout             ;
+; |PFD_test|Add1~208                       ; |PFD_test|Add1~208                       ; combout          ;
+; |PFD_test|pfd_out                        ; |PFD_test|pfd_out                        ; padio            ;
+; |PFD_test|LED[4]                         ; |PFD_test|LED[4]                         ; padio            ;
+; |PFD_test|LED[5]                         ; |PFD_test|LED[5]                         ; padio            ;
+; |PFD_test|LED[6]                         ; |PFD_test|LED[6]                         ; padio            ;
+; |PFD_test|LED[7]                         ; |PFD_test|LED[7]                         ; padio            ;
++------------------------------------------+------------------------------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II Simulator
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Sat Sep 23 14:11:52 2006
+Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off PFD_test -c PFD_test
+Info: Inverted registers were found during simulation
+    Info: Register: |PFD_test|pfd:comb_60|SYNTHESIZED_WIRE_9
+Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
+    Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
+Info: Simulation partitioned into 1 sub-simulations
+Info: Simulation coverage is      88.97 %
+Info: Number of transitions in simulation is 2682936
+Info: Vector file PFD_test.sim.vwf is saved in VWF text format. You can compress it into CVWF format in order to reduce file size. For more details please refer to the Quartus II Help.
+Info: Quartus II Simulator was successful. 0 errors, 0 warnings
+    Info: Processing ended: Sat Sep 23 14:12:36 2006
+    Info: Elapsed time: 00:00:44
+
+

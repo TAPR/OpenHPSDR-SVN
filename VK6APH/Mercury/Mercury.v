@@ -24,7 +24,11 @@
 	12 June 2006 - Sign extension for I and Q data added
 	13 June 2006 - CORDIC NCO started 
 	28 July 2006 - Modified to use OZY and  16 bit FIFO 
-	17 Aug  2006 - modified so that CIC takes 16 bits in and gives 24 out	
+	17 Aug  2006 - modified so that CIC takes 16 bits in and gives 24 out
+	28 Aug  2006 - uses  USRP CORDIC 
+	29 Aug  2006 - CIC changed to decimate by 512 to give 196kHz output
+	 3 Sept 2006 - Added decode of frequency from PowerSDR
+		
 	
 */
 	
@@ -122,10 +126,6 @@ output SLOE;				// FX2 data bus enable - active low
 
 
 wire PKEND;
-//reg [15:0]i_out;
-//reg [15:0]q_out;
-wire [15:0]i_out;
-wire [15:0]q_out;
 reg [3:0] state_FX;			// state for FX2
 reg data_flag;				// set when data ready to send to Tx FIFO
 reg [15:0] register;		// AK5394A A/D uses this to send its data to Tx FIFO
@@ -142,7 +142,7 @@ reg [1:0] FIFO_ADR;			// FX2 register address
 
 assign PKEND = 1'b1;
 reg data_ready;				// set at end of decimation
-reg [15:0]temp_ADC;
+
 
 
 
@@ -152,9 +152,9 @@ reg [15:0]temp_ADC;
 //
 ////////////////////////////////////////////////////////////////////////
 
-// holds reset = 1 and clk_enable = 0 for first 1024 clock counts
+// holds clk_enable = 0 for first 1024 clock counts
 
-wire reset;
+
 reg clk_enable;
 
 reg [10:0]reset_count;
@@ -169,33 +169,24 @@ always @ (posedge clock) begin
 	end
 end 
 
-/* 
-	multiply the A/D data by 1 and -1 at 25MHz rate  in phase quadratrue.
-   	Complement and add 1 to multiply by -1 
+//assign temp_ADC = ADC;
 
-	state machine to generate sin and cos at 25MHz 
+// A Digital Output Randomizer is fitted to the LT2208. This complements bits 15 to 1 if 
+// bit 0 is 1. This helps to reduce any pickup by the A/D input of the digital outputs. 
+// We need to de-ramdomize the LT2208 data if this is turned on. 
 
-   __          __
-  |  |        |  |
-__|  |__    __|  |__     sin 
-        |  |
-        |__|
+// assign temp_ADC = ADC[0]? {~ADC[15:1],ADC[0]}: ADC;  // Compensate for Digital Output Randomizer
 
-      __          __
-     |  |        |  |
-   __|  |__    __|  |__  cos
-           |  |
-           |__|
-
-
-
-*/
 
 /*
+
+// multiply by 1 and -1 at 25MHz
+
+reg [15:0]i_out;
+reg [15:0]q_out;
+reg [15:0]temp_ADC;
+
 reg [1:0]state;
-
-
-
 
 always @ (posedge clock)
 begin
@@ -232,8 +223,9 @@ case (state)
 default: state <= 2'd0;
 endcase
 end
-
 */
+
+
 
 //////////////////////////////////////////////////////////////
 //
@@ -242,18 +234,24 @@ end
 //
 //////////////////////////////////////////////////////////////
 
-/* Code rotates A/D input at set frequency  and produces I & Q */
+//Code rotates A/D input at set frequency  and produces I & Q /
 
+// IMPORTANT: set Qin to be 16'd0 since we only have a single input 
 
+wire [15:0]i_out;
+wire [15:0]q_out;
+wire [15:0]temp_ADC;
 
-	parameter FREQ = 32'h40000000;  //~25MHz  i.e. FREQ /(100e6/2^32)
+	//parameter FREQ = 32'h40000000;  //~25MHz  i.e. FREQ /(100e6/2^32)
+	//parameter FREQ = 32'h24538EF3; // 14.190MHz
 	wire	[31:0] phase;
 
 	// The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
-	phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(FREQ),.phase_out(phase));
+	phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(frequency),.phase_out(phase));
 
-	// The cordic takes I and Q in along with the top 16 bits of the phase dword.  The I and Q out are freq shifted
-	cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(ADC),.Qin(ADC),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
+	// The cordic takes I and Q in along with the top 18 bits of the phase dword.  The I and Q out are freq shifted
+	cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(16'd0),.Qin(ADC),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
+
 
 
 
@@ -264,21 +262,31 @@ end
 //
 ///////////////////////////////////////////////////////////////
 
-// Module: filter_13
-
+// -------------------------------------------------------------
+//
+// Module: filter_14
+//
+// HDL Code Generation Options:
+//
+// TargetLanguage: Verilog
+// Name: filter_14
+// TargetDirectory: C:\DOCUME~1\phil\LOCALS~1\Temp\tp124049\hdlsrc
+// SerialPartition: -1
+// CastBeforeSum: On
+//
 // Filter Settings:
 //
 // Discrete-Time FIR Multirate Filter (real)
 // -----------------------------------------
 // Filter Structure        : Cascaded Integrator-Comb Decimator
-// Decimation Factor       : 2048
+// Decimation Factor       : 512
 // Differential Delay      : 1
 // Number of Sections      : 4
 // Stable                  : Yes
 // Linear Phase            : Yes (Type 1)
 //
 // Input                   : s16,15
-// Output                  : s24,-21
+// Output                  : s24,-13                : s24,-21
 
 wire [23:0]cic_out_i;
 wire [23:0]cic_out_q;
@@ -286,11 +294,8 @@ wire ce_out_i;				// narrow pulse when data available
 wire ce_out_q;				// narrow pulse when data available
 
 
-filter_13 cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(i_out),.filter_out(cic_out_i),.ce_out(ce_out_i));
-filter_13 cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(q_out),.filter_out(cic_out_q),.ce_out(ce_out_q));
-
-assign temp_I = cic_out_i;
-assign temp_Q = cic_out_q;
+filter_14 cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(i_out),.filter_out(cic_out_i),.ce_out(ce_out_i));
+filter_14 cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(q_out),.filter_out(cic_out_q),.ce_out(ce_out_q));
 
 
 //////////////////////////////////////////////////////////////////////
@@ -299,7 +304,7 @@ assign temp_Q = cic_out_q;
 //
 //////////////////////////////////////////////////////////////////////
 
-// since we are decimating by 2048 we can use a slower clock for reading
+// since we are decimating by 512 we can use a slower clock for reading
 // the A/D, say 12.5MHz
 
 reg clock_8;
@@ -348,22 +353,22 @@ case (AD_state)
 		AD_state <= AD_state + 1'b1;
 		end
 5'd4: begin
-		register <= 16'h0000;				// C3 and C4 set to 0
+		register <= 16'hFF00;				// C3 set to 255 and  C4 set to 0
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end		
 5'd5:	begin
-		register <= temp_I[23:8];			// first 16 bits of I
+		register <= cic_out_i[23:8];			// first 16 bits of I
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end
 5'd6:	begin
-		register <= {temp_I[7:0], temp_Q[23:16]};	// last 8 bits of I and first 8 of Q			  		
+		register <= {cic_out_i[7:0], cic_out_q[23:16]};	// last 8 bits of I and first 8 of Q			  		
 		strobe <= 1'b1; 
 		AD_state <= AD_state + 1'b1;
 		end
 5'd7:	begin
-		register <= temp_Q[15:0];			// send Q data
+		register <= cic_out_q[15:0];			// send Q data
 		strobe <= 1'b1; 
 		AD_state <= AD_state + 1'b1;
 		end
@@ -546,15 +551,50 @@ end
 assign FX2_FD[15:8] = SLEN ? Tx_register[7:0]  : 8'bZ;
 assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
 
+//////////////////////////////////////////////////////////////
+//
+//				Decode NCO frequency from PowerSDR
+//
+//////////////////////////////////////////////////////////////
+
+reg [31:0]frequency;
+reg [1:0] freq;
+reg led0;
+
+always @ (posedge SLRD)  // positive edge of FX2 FIFO read strobe
+begin 
+case (freq)
+0: 	if (Rx_register == 16'h7F7F) freq <= 1; // look for start of sync
+	else freq <= 0;
+1: 	if (Rx_register[15:1] == 15'b0111_1111_0000_001) // 7F, 0000 001x
+	begin
+		freq <= 2;
+		led0 = ~led0; // toggle test led 
+	end 
+	else freq <= 0; // look for rest of sync and address
+2:	begin 
+	frequency[31:16]<= Rx_register;
+	freq <= 3;
+	end
+3:  begin
+	frequency[15:0] <= Rx_register[15:0];
+	freq <= 0;
+	end
+default: freq <= 0;
+endcase
+end 
+	
+
+
 // LEDs for testing
 
-assign LED[0] = ce_out_i; 		//  LED off when we have A/D data 
+assign LED[0] = led0; 		
 assign LED[1] = ~EP6_ready;		// LED D3 on when we can write to EP6
 assign LED[2] = data_ready; 
 assign LED[3] = 1'b1;
 assign LED[4] = 1'b1; 
 assign LED[5] = 1'b1; 
-assign LED[6] = 1'b1; 
+assign LED[6] = ~SLRD; 
 assign LED[7] = ~EP2_has_data; // LED on when we receive data 
 
 endmodule 
