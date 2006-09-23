@@ -1,0 +1,54 @@
+|PFD_test
+ref_in => ref_count[14].CLK
+ref_in => ref_count[13].CLK
+ref_in => ref_count[12].CLK
+ref_in => ref_count[11].CLK
+ref_in => ref_count[10].CLK
+ref_in => ref_count[9].CLK
+ref_in => ref_count[8].CLK
+ref_in => ref_count[7].CLK
+ref_in => ref_count[6].CLK
+ref_in => ref_count[5].CLK
+ref_in => ref_count[4].CLK
+ref_in => ref_count[3].CLK
+ref_in => ref_count[2].CLK
+ref_in => ref_count[1].CLK
+ref_in => ref_count[0].CLK
+ref_in => ref_1k.CLK
+ref_in => LED[0].DATAIN
+osc_in => osc_count[14].CLK
+osc_in => osc_count[13].CLK
+osc_in => osc_count[12].CLK
+osc_in => osc_count[11].CLK
+osc_in => osc_count[10].CLK
+osc_in => osc_count[9].CLK
+osc_in => osc_count[8].CLK
+osc_in => osc_count[7].CLK
+osc_in => osc_count[6].CLK
+osc_in => osc_count[5].CLK
+osc_in => osc_count[4].CLK
+osc_in => osc_count[3].CLK
+osc_in => osc_count[2].CLK
+osc_in => osc_count[1].CLK
+osc_in => osc_count[0].CLK
+osc_in => osc_1k.CLK
+osc_in => LED[1].DATAIN
+pfd_out <= pfd:comb_60.pfd_out
+LED[0] <= ref_in.DB_MAX_OUTPUT_PORT_TYPE
+LED[1] <= osc_in.DB_MAX_OUTPUT_PORT_TYPE
+LED[2] <= ref_1k~1.DB_MAX_OUTPUT_PORT_TYPE
+LED[3] <= osc_1k~1.DB_MAX_OUTPUT_PORT_TYPE
+LED[4] <= pfd:comb_60.pfd_out
+LED[5] <= <VCC>
+LED[6] <= <VCC>
+LED[7] <= <VCC>
+
+
+|PFD_test|pfd:comb_60
+ref_in => SYNTHESIZED_WIRE_11.CLK
+ref_in => DFF_inst3.CLK
+osc_in => SYNTHESIZED_WIRE_12.CLK
+osc_in => SYNTHESIZED_WIRE_8.CLK
+pfd_out <= pfd_out~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
