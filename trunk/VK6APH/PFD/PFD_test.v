@@ -9,6 +9,7 @@ output pfd_out;
 output [7:0]LED;
 
 wire pdf_out;
+wire lock;				// is low when loop is locked
 reg ref_1k;
 reg osc_1k;
 reg [14:0]ref_count;
@@ -42,7 +43,7 @@ end
 
 // apply to PFD
 
- pfd(.ref_in(ref_1k),.osc_in(osc_1k),.pfd_out(pfd_out));
+ pfd(.ref_in(ref_1k),.osc_in(osc_1k),.pfd_out(pfd_out),.lock(lock));
 
 
 assign LED[0] = ref_in;
@@ -52,7 +53,7 @@ assign LED[3] = osc_1k;
 assign LED[4] = pfd_out;
 assign LED[5] = 1'b1;
 assign LED[6] = 1'b1;
-assign LED[7] = 1'b1;
+assign LED[7] = lock;  // low when loop is locked 
 
 
 endmodule

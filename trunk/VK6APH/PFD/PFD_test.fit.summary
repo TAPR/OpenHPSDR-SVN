@@ -1,11 +1,11 @@
-Fitter Status : Successful - Sat Sep 23 15:42:49 2006
+Fitter Status : Successful - Mon Sep 25 20:35:22 2006
 Quartus II Version : 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
 Revision Name : PFD_test
 Top-level Entity Name : PFD_test
 Family : Cyclone II
 Device : EP2C5Q208C8
 Timing Models : Final
-Total logic elements : 57 / 4,608 ( 1 % )
+Total logic elements : 58 / 4,608 ( 1 % )
 Total registers : 36
 Total pins : 11 / 142 ( 8 % )
 Total virtual pins : 0

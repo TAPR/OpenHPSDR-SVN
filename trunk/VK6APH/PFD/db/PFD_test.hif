@@ -250,7 +250,7 @@ ON
 # case_sensitive
 # source_file
 PFD_test.v
-622553b15685d0ddc4a97263deecd12
+9afb9c0d2d0eee7f99c2a8fe7d7aa1c
 7
 # internal_option {
 AUTO_RESOURCE_SHARING
@@ -265,17 +265,6 @@ pfd
 # storage
 db|PFD_test.(1).cnf
 db|PFD_test.(1).cnf
-# case_insensitive
-# source_file
-pfd.bdf
-eded63d59a3d8854c3341501688ed
-24
-# end
-# entity
-pfd
-# storage
-db|PFD_test.(4).cnf
-db|PFD_test.(4).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -283,7 +272,7 @@ ON
 # case_sensitive
 # source_file
 pfd.v
-2f4aa58cda9d65b8b5c7726feec3cb58
+61148f7d601fd7e38624a1617802472
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

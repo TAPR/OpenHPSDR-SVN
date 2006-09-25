@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PFD_test
-Sat Sep 23 15:42:42 2006
+Mon Sep 25 20:35:12 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -40,12 +40,12 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Sep 23 15:42:42 2006        ;
+; Analysis & Synthesis Status        ; Successful - Mon Sep 25 20:35:12 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; PFD_test                                     ;
 ; Top-level Entity Name              ; PFD_test                                     ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 57                                           ;
+; Total logic elements               ; 58                                           ;
 ; Total registers                    ; 36                                           ;
 ; Total pins                         ; 11                                           ;
 ; Total virtual pins                 ; 0                                            ;
@@ -130,22 +130,22 @@ applicable agreement for further details.
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 57     ;
-; Total combinational functions               ; 57     ;
+; Estimated Total logic elements              ; 58     ;
+; Total combinational functions               ; 58     ;
 ; Logic element usage by number of LUT inputs ;        ;
 ;     -- 4 input functions                    ; 23     ;
 ;     -- 3 input functions                    ; 0      ;
-;     -- <=2 input functions                  ; 34     ;
+;     -- <=2 input functions                  ; 35     ;
 ;         -- Combinational cells for routing  ; 0      ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 29     ;
+;     -- normal mode                          ; 30     ;
 ;     -- arithmetic mode                      ; 28     ;
 ; Total registers                             ; 36     ;
 ; I/O pins                                    ; 11     ;
 ; Maximum fan-out node                        ; ref_in ;
 ; Maximum fan-out                             ; 17     ;
-; Total fan-out                               ; 235    ;
-; Average fan-out                             ; 2.26   ;
+; Total fan-out                               ; 238    ;
+; Average fan-out                             ; 2.27   ;
 +---------------------------------------------+--------+
 
 
@@ -154,8 +154,8 @@ applicable agreement for further details.
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+-----------------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name   ;
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+-----------------------+
-; |PFD_test                  ; 57 (52)           ; 36 (32)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 11   ; 0            ; |PFD_test             ;
-;    |pfd:comb_60|           ; 5 (5)             ; 4 (4)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |PFD_test|pfd:comb_60 ;
+; |PFD_test                  ; 58 (52)           ; 36 (32)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 11   ; 0            ; |PFD_test             ;
+;    |pfd:comb_60|           ; 6 (6)             ; 4 (4)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |PFD_test|pfd:comb_60 ;
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+-----------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -180,7 +180,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------+---------+
 ; Inverted Register                      ; Fan out ;
 +----------------------------------------+---------+
-; pfd:comb_60|SYNTHESIZED_WIRE_8         ; 2       ;
+; pfd:comb_60|SYNTHESIZED_WIRE_9         ; 3       ;
 ; Total number of inverted registers = 1 ;         ;
 +----------------------------------------+---------+
 
@@ -191,7 +191,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sat Sep 23 15:42:41 2006
+    Info: Processing started: Mon Sep 25 20:35:10 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PFD_test -c PFD_test
 Info: Found 1 design units, including 1 entities, in source file pfd.v
     Info: Found entity 1: pfd
@@ -204,13 +204,12 @@ Info: DEV_CLRn pin will set, and not reset, register with preset signal due to N
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "LED[5]" stuck at VCC
     Warning: Pin "LED[6]" stuck at VCC
-    Warning: Pin "LED[7]" stuck at VCC
-Info: Implemented 69 device resources after synthesis - the final resource count might be different
+Info: Implemented 70 device resources after synthesis - the final resource count might be different
     Info: Implemented 2 input pins
     Info: Implemented 9 output pins
-    Info: Implemented 58 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 4 warnings
-    Info: Processing ended: Sat Sep 23 15:42:42 2006
+    Info: Implemented 59 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 3 warnings
+    Info: Processing ended: Mon Sep 25 20:35:12 2006
     Info: Elapsed time: 00:00:02
 
 
