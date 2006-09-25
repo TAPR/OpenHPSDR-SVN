@@ -41,14 +41,15 @@ LED[3] <= osc_1k~1.DB_MAX_OUTPUT_PORT_TYPE
 LED[4] <= pfd:comb_60.pfd_out
 LED[5] <= <VCC>
 LED[6] <= <VCC>
-LED[7] <= <VCC>
+LED[7] <= pfd:comb_60.lock
 
 
 |PFD_test|pfd:comb_60
-ref_in => SYNTHESIZED_WIRE_11.CLK
+ref_in => SYNTHESIZED_WIRE_12.CLK
 ref_in => DFF_inst3.CLK
-osc_in => SYNTHESIZED_WIRE_12.CLK
-osc_in => SYNTHESIZED_WIRE_8.CLK
+osc_in => SYNTHESIZED_WIRE_13.CLK
+osc_in => SYNTHESIZED_WIRE_9.CLK
 pfd_out <= pfd_out~0.DB_MAX_OUTPUT_PORT_TYPE
+lock <= lock~0.DB_MAX_OUTPUT_PORT_TYPE
 
 

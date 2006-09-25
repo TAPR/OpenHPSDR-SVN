@@ -48,3 +48,4 @@ set_location_assignment PIN_145 -to pfd_out
 set_global_assignment -name VERILOG_FILE pfd.v
 set_global_assignment -name VERILOG_FILE PFD_test.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE PFD_test.vwf
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"

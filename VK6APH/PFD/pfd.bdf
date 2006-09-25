@@ -53,9 +53,25 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 632 216 808 232)
+	(rect 624 216 800 232)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "pfd_out" (rect 90 0 127 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8)(line_width 1))
+		(line (pt 52 4)(pt 78 4)(line_width 1))
+		(line (pt 52 12)(pt 78 12)(line_width 1))
+		(line (pt 52 12)(pt 52 4)(line_width 1))
+		(line (pt 78 4)(pt 82 8)(line_width 1))
+		(line (pt 82 8)(pt 78 12)(line_width 1))
+		(line (pt 78 12)(pt 82 8)(line_width 1))
+	)
+)
+(pin
+	(output)
+	(rect 624 128 800 144)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "lock" (rect 90 0 110 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8)(line_width 1))
@@ -442,6 +458,39 @@ applicable agreement for further details.
 		(circle (rect 44 20 52 28)(line_width 1))
 	)
 )
+(symbol
+	(rect 560 112 624 160)
+	(text "NAND2" (rect 1 0 32 10)(font "Arial" (font_size 6)))
+	(text "inst11" (rect 3 37 32 49)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "IN2" (rect 2 23 19 35)(font "Courier New" (bold))(invisible))
+		(text "IN2" (rect 2 23 19 35)(font "Courier New" (bold))(invisible))
+		(line (pt 0 32)(pt 15 32)(line_width 1))
+	)
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN1" (rect 2 7 19 19)(font "Courier New" (bold))(invisible))
+		(text "IN1" (rect 2 7 19 19)(font "Courier New" (bold))(invisible))
+		(line (pt 0 16)(pt 15 16)(line_width 1))
+	)
+	(port
+		(pt 64 24)
+		(output)
+		(text "OUT" (rect 48 15 65 27)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 48 15 65 27)(font "Courier New" (bold))(invisible))
+		(line (pt 52 24)(pt 64 24)(line_width 1))
+	)
+	(drawing
+		(line (pt 15 37)(pt 32 37)(line_width 1))
+		(line (pt 15 12)(pt 32 12)(line_width 1))
+		(line (pt 15 36)(pt 15 12)(line_width 1))
+		(arc (pt 32 36)(pt 32 12)(rect 20 12 45 37)(line_width 1))
+		(circle (rect 44 20 52 28)(line_width 1))
+	)
+)
 (connector
 	(pt 272 104)
 	(pt 280 104)
@@ -583,10 +632,6 @@ applicable agreement for further details.
 	(pt 440 104)
 )
 (connector
-	(pt 632 224)
-	(pt 624 224)
-)
-(connector
 	(pt 536 376)
 	(pt 544 376)
 )
@@ -597,10 +642,6 @@ applicable agreement for further details.
 (connector
 	(pt 560 232)
 	(pt 544 232)
-)
-(connector
-	(pt 488 104)
-	(pt 544 104)
 )
 (connector
 	(pt 560 216)
@@ -623,16 +664,8 @@ applicable agreement for further details.
 	(pt 464 256)
 )
 (connector
-	(pt 448 384)
-	(pt 448 184)
-)
-(connector
 	(pt 448 184)
 	(pt 384 184)
-)
-(connector
-	(pt 424 384)
-	(pt 448 384)
 )
 (connector
 	(pt 448 384)
@@ -651,12 +684,40 @@ applicable agreement for further details.
 	(pt 544 200)
 )
 (connector
+	(pt 544 200)
+	(pt 544 216)
+)
+(connector
+	(pt 488 104)
 	(pt 544 104)
+)
+(connector
+	(pt 424 384)
+	(pt 448 384)
+)
+(connector
+	(pt 560 128)
+	(pt 544 128)
+)
+(connector
+	(pt 544 104)
+	(pt 544 128)
+)
+(connector
+	(pt 544 128)
 	(pt 544 200)
 )
 (connector
-	(pt 544 200)
-	(pt 544 216)
+	(pt 448 144)
+	(pt 560 144)
+)
+(connector
+	(pt 448 144)
+	(pt 448 184)
+)
+(connector
+	(pt 448 184)
+	(pt 448 384)
 )
 (junction (pt 216 104))
 (junction (pt 216 384))
@@ -665,3 +726,6 @@ applicable agreement for further details.
 (junction (pt 344 256))
 (junction (pt 448 384))
 (junction (pt 544 200))
+(junction (pt 544 128))
+(junction (pt 448 184))
+(text "Phase - Frequency Detector VK6APH  September 2006" (rect 200 528 513 542)(font "Arial" (font_size 8)))
