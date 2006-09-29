@@ -15816,6 +15816,22 @@ namespace PowerSDR
 					osc_freq = -osc_freq; 
 					DttSP.SetOsc(osc_freq);  
 					DttSP.SetTXOsc(osc_freq);
+					
+					if ( current_dsp_mode == DSPMode.CWU || current_dsp_mode == DSPMode.CWL ) 
+					{						
+						float keyer_freq = (float)(-osc_freq); 
+						switch(current_dsp_mode)
+						{
+							case DSPMode.CWU:
+								keyer_freq -= CWPitch; 
+								break; 
+
+							case DSPMode.CWL:
+								keyer_freq += CWPitch; 
+								break; 
+						}
+						DttSP.SetKeyerFreq(keyer_freq);
+					}
 					tuned_freq = freq; 
 					System.Console.WriteLine("osc_freq: " + osc_freq); 
 				} 
