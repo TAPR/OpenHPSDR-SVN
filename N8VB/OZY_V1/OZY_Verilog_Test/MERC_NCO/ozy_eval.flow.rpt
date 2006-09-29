@@ -1,5 +1,5 @@
 Flow report for ozy_eval
-Wed Sep 20 11:18:11 2006
+Fri Sep 29 12:34:41 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Wed Sep 20 11:18:10 2006        ;
+; Flow Status                        ; Successful - Fri Sep 29 12:34:40 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; ozy_eval                                     ;
 ; Top-level Entity Name              ; ozy_nco                                      ;
@@ -45,8 +45,8 @@ applicable agreement for further details.
 ; Device                             ; EP2C5Q208C7                                  ;
 ; Timing Models                      ; Final                                        ;
 ; Met timing requirements            ; Yes                                          ;
-; Total logic elements               ; 4,507 / 4,608 ( 98 % )                       ;
-; Total registers                    ; 4242                                         ;
+; Total logic elements               ; 2,617 / 4,608 ( 57 % )                       ;
+; Total registers                    ; 2127                                         ;
 ; Total pins                         ; 55 / 142 ( 39 % )                            ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 16,384 / 119,808 ( 14 % )                    ;
@@ -60,7 +60,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/20/2006 11:12:13 ;
+; Start date & time ; 09/29/2006 12:33:24 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; ozy_eval            ;
 +-------------------+---------------------+
@@ -82,11 +82,11 @@ applicable agreement for further details.
 +----------------------+--------------+
 ; Module Name          ; Elapsed Time ;
 +----------------------+--------------+
-; Analysis & Synthesis ; 00:01:34     ;
-; Fitter               ; 00:04:05     ;
+; Analysis & Synthesis ; 00:00:27     ;
+; Fitter               ; 00:00:36     ;
 ; Assembler            ; 00:00:04     ;
-; Timing Analyzer      ; 00:00:06     ;
-; Total                ; 00:05:49     ;
+; Timing Analyzer      ; 00:00:04     ;
+; Total                ; 00:01:11     ;
 +----------------------+--------------+
 
 

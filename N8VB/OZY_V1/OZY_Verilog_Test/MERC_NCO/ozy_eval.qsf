@@ -93,6 +93,14 @@ set_location_assignment PIN_15 -to SCK
 set_location_assignment PIN_14 -to SI
 set_location_assignment PIN_12 -to SO
 set_global_assignment -name USER_LIBRARIES "C:/altera/megacore/nco-v2.3.0/lib;"
+set_global_assignment -name VERILOG_FILE coeff_rom.v
+set_global_assignment -name VERILOG_FILE ram16.v
+set_global_assignment -name VERILOG_FILE acc.v
+set_global_assignment -name VERILOG_FILE halfband_decim.v
+set_global_assignment -name VERILOG_FILE mult.v
+set_global_assignment -name VERILOG_FILE ram16_2sum.v
+set_global_assignment -name VERILOG_FILE sign_extend.v
+set_global_assignment -name VERILOG_FILE cic_decim.v
 set_global_assignment -name VERILOG_FILE HB.v
 set_global_assignment -name VERILOG_FILE CIC_D4.v
 set_global_assignment -name VERILOG_FILE CIC_D65.v

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ozy_eval
-Wed Sep 20 11:13:46 2006
+Fri Sep 29 12:33:50 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -15,69 +15,70 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
   7. Analysis & Synthesis RAM Summary
   8. State Machine - |ozy_nco|fx2st
   9. General Register Statistics
- 10. Inverted Register Statistics
- 11. Multiplexer Restructuring Statistics (Restructuring Performed)
- 12. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component
- 13. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated
- 14. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram
- 15. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5
- 16. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg
- 17. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7
- 18. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp
- 19. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_bwp
- 20. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp
- 21. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10
- 22. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg
- 23. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13
- 24. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_brp
- 25. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_bwp
- 26. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp
- 27. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15
- 28. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component
- 29. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated
- 30. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram
- 31. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5
- 32. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg
- 33. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7
- 34. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp
- 35. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_bwp
- 36. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp
- 37. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10
- 38. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg
- 39. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13
- 40. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_brp
- 41. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_bwp
- 42. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp
- 43. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15
- 44. Parameter Settings for User Entity Instance: SPI_REGS:spi_regs
- 45. Parameter Settings for User Entity Instance: RegisterX:freqsetreg
- 46. Parameter Settings for User Entity Instance: RegisterX:optionreg
- 47. Parameter Settings for User Entity Instance: phase_accumulator:rx_phase_accumulator
- 48. Parameter Settings for User Entity Instance: cordic:rx_cordic
- 49. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0
- 50. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage1
- 51. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage2
- 52. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage3
- 53. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage4
- 54. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage5
- 55. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage6
- 56. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage7
- 57. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage8
- 58. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage9
- 59. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage10
- 60. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage11
- 61. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage12
- 62. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage13
- 63. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage14
- 64. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage15
- 65. Parameter Settings for User Entity Instance: HB:I_HB
- 66. Parameter Settings for User Entity Instance: HB:Q_HB
- 67. Parameter Settings for User Entity Instance: RXMUX:I_MUX|lpm_mux:lpm_mux_component
- 68. Parameter Settings for User Entity Instance: RXMUX:Q_MUX|lpm_mux:lpm_mux_component
- 69. Parameter Settings for User Entity Instance: tx_fifo:tx_fifo_i|dcfifo:dcfifo_component
- 70. Parameter Settings for User Entity Instance: tx_fifo:tx_fifo_q|dcfifo:dcfifo_component
- 71. dcfifo Parameter Settings by Entity Instance
- 72. Analysis & Synthesis Messages
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component
+ 12. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated
+ 13. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram
+ 14. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5
+ 15. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg
+ 16. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7
+ 17. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp
+ 18. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_bwp
+ 19. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp
+ 20. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10
+ 21. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg
+ 22. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13
+ 23. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_brp
+ 24. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_bwp
+ 25. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp
+ 26. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15
+ 27. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component
+ 28. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated
+ 29. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram
+ 30. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5
+ 31. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg
+ 32. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7
+ 33. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp
+ 34. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_bwp
+ 35. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp
+ 36. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10
+ 37. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg
+ 38. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13
+ 39. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_brp
+ 40. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_bwp
+ 41. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp
+ 42. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp|dffpipe_ve9:dffpipe15
+ 43. Parameter Settings for User Entity Instance: SPI_REGS:spi_regs
+ 44. Parameter Settings for User Entity Instance: RegisterX:freqsetreg
+ 45. Parameter Settings for User Entity Instance: RegisterX:optionreg
+ 46. Parameter Settings for User Entity Instance: phase_accumulator:rx_phase_accumulator
+ 47. Parameter Settings for User Entity Instance: cordic:rx_cordic
+ 48. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0
+ 49. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage1
+ 50. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage2
+ 51. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage3
+ 52. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage4
+ 53. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage5
+ 54. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage6
+ 55. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage7
+ 56. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage8
+ 57. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage9
+ 58. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage10
+ 59. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage11
+ 60. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage12
+ 61. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage13
+ 62. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage14
+ 63. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage15
+ 64. Parameter Settings for User Entity Instance: cic_decim:cic_i
+ 65. Parameter Settings for User Entity Instance: cic_decim:cic_i|sign_extend:ext_input
+ 66. Parameter Settings for User Entity Instance: cic_decim:cic_q
+ 67. Parameter Settings for User Entity Instance: cic_decim:cic_q|sign_extend:ext_input
+ 68. Parameter Settings for User Entity Instance: RXMUX:I_MUX|lpm_mux:lpm_mux_component
+ 69. Parameter Settings for User Entity Instance: RXMUX:Q_MUX|lpm_mux:lpm_mux_component
+ 70. Parameter Settings for User Entity Instance: tx_fifo:tx_fifo_i|dcfifo:dcfifo_component
+ 71. Parameter Settings for User Entity Instance: tx_fifo:tx_fifo_q|dcfifo:dcfifo_component
+ 72. dcfifo Parameter Settings by Entity Instance
+ 73. Analysis & Synthesis Messages
 
 
 
@@ -103,13 +104,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Sep 20 11:13:46 2006        ;
+; Analysis & Synthesis Status        ; Successful - Fri Sep 29 12:33:50 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; ozy_eval                                     ;
 ; Top-level Entity Name              ; ozy_nco                                      ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 4242                                         ;
-; Total registers                    ; 4242                                         ;
+; Total logic elements               ; 2443                                         ;
+; Total registers                    ; 2127                                         ;
 ; Total pins                         ; 55                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 16,384                                       ;
@@ -183,9 +184,8 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                        ;
 +----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------+
-; HB.v                             ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/HB.v                      ;
-; CIC_D4.v                         ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/CIC_D4.v                  ;
-; CIC_D65.v                        ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/CIC_D65.v                 ;
+; sign_extend.v                    ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/sign_extend.v             ;
+; cic_decim.v                      ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/cic_decim.v               ;
 ; RXMUX.v                          ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/RXMUX.v                   ;
 ; SPI_REGS.v                       ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/SPI_REGS.v                ;
 ; RegisterX.v                      ; yes             ; User Verilog HDL File        ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/RegisterX.v               ;
@@ -235,23 +235,23 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 4,242   ;
-; Total combinational functions               ; 3823    ;
+; Estimated Total logic elements              ; 2,443   ;
+; Total combinational functions               ; 2443    ;
 ; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 119     ;
-;     -- 3 input functions                    ; 2977    ;
-;     -- <=2 input functions                  ; 727     ;
+;     -- 4 input functions                    ; 82      ;
+;     -- 3 input functions                    ; 1377    ;
+;     -- <=2 input functions                  ; 984     ;
 ;         -- Combinational cells for routing  ; 0       ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 710     ;
-;     -- arithmetic mode                      ; 3113    ;
-; Total registers                             ; 4242    ;
+;     -- normal mode                          ; 1035    ;
+;     -- arithmetic mode                      ; 1408    ;
+; Total registers                             ; 2127    ;
 ; I/O pins                                    ; 55      ;
 ; Total memory bits                           ; 16384   ;
 ; Maximum fan-out node                        ; ENC_CLK ;
-; Maximum fan-out                             ; 4028    ;
-; Total fan-out                               ; 27163   ;
-; Average fan-out                             ; 3.33    ;
+; Maximum fan-out                             ; 1913    ;
+; Total fan-out                               ; 13906   ;
+; Average fan-out                             ; 2.99    ;
 +---------------------------------------------+---------+
 
 
@@ -260,22 +260,18 @@ applicable agreement for further details.
 +----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                ;
 +----------------------------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+
-; |ozy_nco                                     ; 3823 (36)         ; 4242 (51)    ; 16384       ; 0    ; 0            ; 0       ; 0         ; 55   ; 0            ; |ozy_nco                                                                                                                           ;
-;    |CIC_D4:I_CAS2|                           ; 615 (615)         ; 895 (895)    ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|CIC_D4:I_CAS2                                                                                                             ;
-;    |CIC_D4:Q_CAS2|                           ; 615 (615)         ; 889 (889)    ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|CIC_D4:Q_CAS2                                                                                                             ;
-;    |CIC_D65:I_CAS1|                          ; 323 (323)         ; 441 (441)    ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|CIC_D65:I_CAS1                                                                                                            ;
-;    |CIC_D65:Q_CAS1|                          ; 310 (310)         ; 445 (445)    ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|CIC_D65:Q_CAS1                                                                                                            ;
-;    |HB:I_HB|                                 ; 327 (327)         ; 271 (271)    ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|HB:I_HB                                                                                                                   ;
-;    |HB:Q_HB|                                 ; 329 (329)         ; 270 (270)    ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|HB:Q_HB                                                                                                                   ;
-;    |RXMUX:I_MUX|                             ; 32 (0)            ; 16 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:I_MUX                                                                                                               ;
-;       |lpm_mux:lpm_mux_component|            ; 32 (0)            ; 16 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:I_MUX|lpm_mux:lpm_mux_component                                                                                     ;
-;          |mux_6me:auto_generated|            ; 32 (32)           ; 16 (16)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:I_MUX|lpm_mux:lpm_mux_component|mux_6me:auto_generated                                                              ;
-;    |RXMUX:Q_MUX|                             ; 32 (0)            ; 16 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:Q_MUX                                                                                                               ;
-;       |lpm_mux:lpm_mux_component|            ; 32 (0)            ; 16 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:Q_MUX|lpm_mux:lpm_mux_component                                                                                     ;
-;          |mux_6me:auto_generated|            ; 32 (32)           ; 16 (16)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:Q_MUX|lpm_mux:lpm_mux_component|mux_6me:auto_generated                                                              ;
+; |ozy_nco                                     ; 2443 (37)         ; 2127 (51)    ; 16384       ; 0    ; 0            ; 0       ; 0         ; 55   ; 0            ; |ozy_nco                                                                                                                           ;
+;    |RXMUX:I_MUX|                             ; 33 (0)            ; 16 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:I_MUX                                                                                                               ;
+;       |lpm_mux:lpm_mux_component|            ; 33 (0)            ; 16 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:I_MUX|lpm_mux:lpm_mux_component                                                                                     ;
+;          |mux_6me:auto_generated|            ; 33 (33)           ; 16 (16)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:I_MUX|lpm_mux:lpm_mux_component|mux_6me:auto_generated                                                              ;
+;    |RXMUX:Q_MUX|                             ; 16 (0)            ; 16 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:Q_MUX                                                                                                               ;
+;       |lpm_mux:lpm_mux_component|            ; 16 (0)            ; 16 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:Q_MUX|lpm_mux:lpm_mux_component                                                                                     ;
+;          |mux_6me:auto_generated|            ; 16 (16)           ; 16 (16)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RXMUX:Q_MUX|lpm_mux:lpm_mux_component|mux_6me:auto_generated                                                              ;
 ;    |RegisterX:freqsetreg|                    ; 1 (1)             ; 32 (32)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RegisterX:freqsetreg                                                                                                      ;
 ;    |RegisterX:optionreg|                     ; 3 (3)             ; 32 (32)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|RegisterX:optionreg                                                                                                       ;
-;    |SPI_REGS:spi_regs|                       ; 86 (86)           ; 74 (74)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|SPI_REGS:spi_regs                                                                                                         ;
+;    |SPI_REGS:spi_regs|                       ; 85 (85)           ; 74 (74)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|SPI_REGS:spi_regs                                                                                                         ;
+;    |cic_decim:cic_i|                         ; 574 (574)         ; 544 (544)    ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cic_decim:cic_i                                                                                                           ;
+;    |cic_decim:cic_q|                         ; 581 (581)         ; 552 (552)    ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cic_decim:cic_q                                                                                                           ;
 ;    |cordic:rx_cordic|                        ; 999 (34)          ; 610 (32)     ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic                                                                                                          ;
 ;       |cordic_stage:cordic_stage0|           ; 55 (55)           ; 50 (50)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0                                                                               ;
 ;       |cordic_stage:cordic_stage10|          ; 70 (70)           ; 37 (37)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage10                                                                              ;
@@ -290,9 +286,9 @@ applicable agreement for further details.
 ;       |cordic_stage:cordic_stage8|           ; 73 (73)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage8                                                                               ;
 ;       |cordic_stage:cordic_stage9|           ; 97 (97)           ; 51 (51)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9                                                                               ;
 ;    |phase_accumulator:rx_phase_accumulator|  ; 32 (32)           ; 32 (32)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|phase_accumulator:rx_phase_accumulator                                                                                    ;
-;    |tx_fifo:tx_fifo_i|                       ; 42 (0)            ; 84 (0)       ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i                                                                                                         ;
-;       |dcfifo:dcfifo_component|              ; 42 (0)            ; 84 (0)       ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component                                                                                 ;
-;          |dcfifo_ncb1:auto_generated|        ; 42 (20)           ; 84 (22)      ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated                                                      ;
+;    |tx_fifo:tx_fifo_i|                       ; 41 (0)            ; 84 (0)       ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i                                                                                                         ;
+;       |dcfifo:dcfifo_component|              ; 41 (0)            ; 84 (0)       ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component                                                                                 ;
+;          |dcfifo_ncb1:auto_generated|        ; 41 (19)           ; 84 (22)      ; 8192        ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated                                                      ;
 ;             |a_graycounter_i27:wrptr_gp|     ; 11 (11)           ; 11 (11)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_i27:wrptr_gp                           ;
 ;             |a_graycounter_o96:rdptr_g1p|    ; 11 (11)           ; 11 (11)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|a_graycounter_o96:rdptr_g1p                          ;
 ;             |alt_synch_pipe_4e8:ws_dgrp|     ; 0 (0)             ; 20 (0)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp                           ;
@@ -343,24 +339,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 4242  ;
-; Number of registers using Synchronous Clear  ; 623   ;
-; Number of registers using Synchronous Load   ; 32    ;
-; Number of registers using Asynchronous Clear ; 3412  ;
+; Total registers                              ; 2127  ;
+; Number of registers using Synchronous Clear  ; 1271  ;
+; Number of registers using Synchronous Load   ; 40    ;
+; Number of registers using Asynchronous Clear ; 201   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 2938  ;
+; Number of registers using Clock Enable       ; 884   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
-
-
-+--------------------------------------------------+
-; Inverted Register Statistics                     ;
-+----------------------------------------+---------+
-; Inverted Register                      ; Fan out ;
-+----------------------------------------+---------+
-; HB:Q_HB|ring_count[0]                  ; 2       ;
-; Total number of inverted registers = 1 ;         ;
-+----------------------------------------+---------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -368,13 +354,15 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|Istage0[5]                           ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9|PHout[13] ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage5|PHout[4]  ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[11] ;
-; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[12]  ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |ozy_nco|FD[13]~reg0                                           ;
-; 66:1               ; 31 bits   ; 1364 LEs      ; 62 LEs               ; 1302 LEs               ; Yes        ; |ozy_nco|SPI_REGS:spi_regs|sdata[17]                           ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cic_decim:cic_q|counter[5]                            ;
+; 3:1                ; 736 bits  ; 1472 LEs      ; 736 LEs              ; 736 LEs                ; Yes        ; |ozy_nco|cic_decim:cic_q|sampler[24]                           ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|Istage0[2]                           ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage9|PHout[8]  ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage5|PHout[3]  ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[13] ;
+; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; Yes        ; |ozy_nco|cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[11]  ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |ozy_nco|FD[11]~reg0                                           ;
+; 66:1               ; 31 bits   ; 1364 LEs      ; 62 LEs               ; 1302 LEs               ; Yes        ; |ozy_nco|SPI_REGS:spi_regs|sdata[18]                           ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |ozy_nco|fx2st~4                                               ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 
@@ -930,37 +918,51 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+------------------------------------------------------+
-; Parameter Settings for User Entity Instance: HB:I_HB ;
-+----------------+------------------+------------------+
-; Parameter Name ; Value            ; Type             ;
-+----------------+------------------+------------------+
-; coeffphase1_1  ; 1111101111001101 ; Binary           ;
-; coeffphase1_2  ; 0010010000110001 ; Binary           ;
-; coeffphase1_3  ; 0010010000110001 ; Binary           ;
-; coeffphase1_4  ; 1111101111001101 ; Binary           ;
-; coeffphase2_1  ; 0000000000000000 ; Binary           ;
-; coeffphase2_2  ; 0100000000000000 ; Binary           ;
-; coeffphase2_3  ; 0000000000000000 ; Binary           ;
-; coeffphase2_4  ; 0000000000000000 ; Binary           ;
-+----------------+------------------+------------------+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cic_decim:cic_i ;
++------------------+-------+-----------------------------------+
+; Parameter Name   ; Value ; Type                              ;
++------------------+-------+-----------------------------------+
+; bw               ; 16    ; Integer                           ;
+; N                ; 4     ; Integer                           ;
+; log2_of_max_rate ; 8     ; Integer                           ;
+; maxbitgain       ; 32    ; Integer                           ;
++------------------+-------+-----------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+------------------------------------------------------+
-; Parameter Settings for User Entity Instance: HB:Q_HB ;
-+----------------+------------------+------------------+
-; Parameter Name ; Value            ; Type             ;
-+----------------+------------------+------------------+
-; coeffphase1_1  ; 1111101111001101 ; Binary           ;
-; coeffphase1_2  ; 0010010000110001 ; Binary           ;
-; coeffphase1_3  ; 0010010000110001 ; Binary           ;
-; coeffphase1_4  ; 1111101111001101 ; Binary           ;
-; coeffphase2_1  ; 0000000000000000 ; Binary           ;
-; coeffphase2_2  ; 0100000000000000 ; Binary           ;
-; coeffphase2_3  ; 0000000000000000 ; Binary           ;
-; coeffphase2_4  ; 0000000000000000 ; Binary           ;
-+----------------+------------------+------------------+
++------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cic_decim:cic_i|sign_extend:ext_input ;
++----------------+-------+-----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                      ;
++----------------+-------+-----------------------------------------------------------+
+; bits_in        ; 16    ; Integer                                                   ;
+; bits_out       ; 48    ; Integer                                                   ;
++----------------+-------+-----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cic_decim:cic_q ;
++------------------+-------+-----------------------------------+
+; Parameter Name   ; Value ; Type                              ;
++------------------+-------+-----------------------------------+
+; bw               ; 16    ; Integer                           ;
+; N                ; 4     ; Integer                           ;
+; log2_of_max_rate ; 8     ; Integer                           ;
+; maxbitgain       ; 32    ; Integer                           ;
++------------------+-------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cic_decim:cic_q|sign_extend:ext_input ;
++----------------+-------+-----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                      ;
++----------------+-------+-----------------------------------------------------------+
+; bits_in        ; 16    ; Integer                                                   ;
+; bits_out       ; 48    ; Integer                                                   ;
++----------------+-------+-----------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -1085,8 +1087,12 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Wed Sep 20 11:12:13 2006
+    Info: Processing started: Fri Sep 29 12:33:23 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ozy_eval -c ozy_eval
+Info: Found 1 design units, including 1 entities, in source file sign_extend.v
+    Info: Found entity 1: sign_extend
+Info: Found 1 design units, including 1 entities, in source file cic_decim.v
+    Info: Found entity 1: cic_decim
 Info: Found 1 design units, including 1 entities, in source file HB.v
     Info: Found entity 1: HB
 Info: Found 1 design units, including 1 entities, in source file CIC_D4.v
@@ -1112,7 +1118,7 @@ Info: Found 1 design units, including 1 entities, in source file tx_fifo.v
 Info: Found 1 design units, including 1 entities, in source file ozy_nco.v
     Info: Found entity 1: ozy_nco
 Info: Elaborating entity "ozy_nco" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at ozy_nco.v(310): object "FIFO_EMPTY" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at ozy_nco.v(331): object "FIFO_EMPTY" assigned a value but never read
 Info: Elaborating entity "SPI_REGS" for hierarchy "SPI_REGS:spi_regs"
 Info: Elaborating entity "RegisterX" for hierarchy "RegisterX:freqsetreg"
 Info: Elaborating entity "RegisterX" for hierarchy "RegisterX:optionreg"
@@ -1134,29 +1140,8 @@ Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_s
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage13"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage14"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage15"
-Info: Elaborating entity "CIC_D65" for hierarchy "CIC_D65:I_CAS1"
-Warning (10036): Verilog HDL or VHDL warning at CIC_D65.v(91): object "section_in1" assigned a value but never read
-Warning (10230): Verilog HDL assignment warning at CIC_D65.v(191): truncated value with size 32 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at CIC_D65.v(197): truncated value with size 32 to match size of target (1)
-Info: Elaborating entity "CIC_D4" for hierarchy "CIC_D4:I_CAS2"
-Warning (10036): Verilog HDL or VHDL warning at CIC_D4.v(101): object "section_in1" assigned a value but never read
-Warning (10230): Verilog HDL assignment warning at CIC_D4.v(281): truncated value with size 32 to match size of target (2)
-Warning (10230): Verilog HDL assignment warning at CIC_D4.v(287): truncated value with size 32 to match size of target (1)
-Info: Elaborating entity "HB" for hierarchy "HB:I_HB"
-Warning (10036): Verilog HDL or VHDL warning at HB.v(76): object "coeffphase1_1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(77): object "coeffphase1_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(78): object "coeffphase1_3" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(79): object "coeffphase1_4" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(80): object "coeffphase2_1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(81): object "coeffphase2_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(82): object "coeffphase2_3" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(83): object "coeffphase2_4" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(93): object "mulcsd_temp" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(99): object "mulcsd_temp_3" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(101): object "product_pipeline_phase0_1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(104): object "product_pipeline_phase0_4" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(105): object "product_pipeline_phase1_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at HB.v(113): object "add_temp_1" assigned a value but never read
+Info: Elaborating entity "cic_decim" for hierarchy "cic_decim:cic_i"
+Info: Elaborating entity "sign_extend" for hierarchy "cic_decim:cic_i|sign_extend:ext_input"
 Info: Elaborating entity "RXMUX" for hierarchy "RXMUX:I_MUX"
 Info: Found 1 design units, including 1 entities, in source file ../../../../../../../altera/quartus60/libraries/megafunctions/lpm_mux.tdf
     Info: Found entity 1: lpm_mux
@@ -1234,101 +1219,15 @@ Warning: Port "#5" on the entity instantiation of "cordic_stage3" is connected t
 Warning: Port "#5" on the entity instantiation of "cordic_stage2" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
 Warning: Port "#5" on the entity instantiation of "cordic_stage1" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
 Warning: Port "#5" on the entity instantiation of "cordic_stage0" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be driven by GND.
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[13]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[12]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[11]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[10]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[9]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[8]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:Q_HB|product_pipeline_phase1_2[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[13]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[12]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[11]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[10]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[9]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[8]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "HB:I_HB|product_pipeline_phase1_2[0]" with stuck data_in port to stuck value GND
 Info: Duplicate registers merged to single register
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_2[3]" merged to single register "HB:Q_HB|input_pipeline_phase0[1][3]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_2[2]" merged to single register "HB:Q_HB|input_pipeline_phase0[1][2]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_2[1]" merged to single register "HB:Q_HB|input_pipeline_phase0[1][1]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_2[0]" merged to single register "HB:Q_HB|input_pipeline_phase0[1][0]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_3[3]" merged to single register "HB:Q_HB|input_pipeline_phase0[2][3]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_3[2]" merged to single register "HB:Q_HB|input_pipeline_phase0[2][2]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_3[1]" merged to single register "HB:Q_HB|input_pipeline_phase0[2][1]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_3[0]" merged to single register "HB:Q_HB|input_pipeline_phase0[2][0]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_1[28]" merged to single register "HB:Q_HB|product_pipeline_phase0_1[29]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_1[27]" merged to single register "HB:Q_HB|product_pipeline_phase0_1[29]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_1[26]" merged to single register "HB:Q_HB|product_pipeline_phase0_1[29]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_4[28]" merged to single register "HB:Q_HB|product_pipeline_phase0_4[29]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_4[27]" merged to single register "HB:Q_HB|product_pipeline_phase0_4[29]"
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_4[26]" merged to single register "HB:Q_HB|product_pipeline_phase0_4[29]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline1[1][30]" merged to single register "HB:Q_HB|sumdelay_pipeline1[1][31]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline1[2][30]" merged to single register "HB:Q_HB|sumdelay_pipeline1[2][31]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline1[2][29]" merged to single register "HB:Q_HB|sumdelay_pipeline1[2][31]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline1[2][28]" merged to single register "HB:Q_HB|sumdelay_pipeline1[2][31]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline1[2][27]" merged to single register "HB:Q_HB|sumdelay_pipeline1[2][31]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline1[2][26]" merged to single register "HB:Q_HB|sumdelay_pipeline1[2][31]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline2[1][30]" merged to single register "HB:Q_HB|sumdelay_pipeline2[1][31]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline2[1][29]" merged to single register "HB:Q_HB|sumdelay_pipeline2[1][31]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline2[1][28]" merged to single register "HB:Q_HB|sumdelay_pipeline2[1][31]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline2[1][27]" merged to single register "HB:Q_HB|sumdelay_pipeline2[1][31]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline2[1][26]" merged to single register "HB:Q_HB|sumdelay_pipeline2[1][31]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_2[3]" merged to single register "HB:I_HB|input_pipeline_phase0[1][3]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_2[2]" merged to single register "HB:I_HB|input_pipeline_phase0[1][2]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_2[1]" merged to single register "HB:I_HB|input_pipeline_phase0[1][1]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_2[0]" merged to single register "HB:I_HB|input_pipeline_phase0[1][0]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_3[3]" merged to single register "HB:I_HB|input_pipeline_phase0[2][3]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_3[2]" merged to single register "HB:I_HB|input_pipeline_phase0[2][2]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_3[1]" merged to single register "HB:I_HB|input_pipeline_phase0[2][1]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_3[0]" merged to single register "HB:I_HB|input_pipeline_phase0[2][0]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_1[28]" merged to single register "HB:I_HB|product_pipeline_phase0_1[29]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_1[27]" merged to single register "HB:I_HB|product_pipeline_phase0_1[29]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_1[26]" merged to single register "HB:I_HB|product_pipeline_phase0_1[29]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_4[28]" merged to single register "HB:I_HB|product_pipeline_phase0_4[29]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_4[27]" merged to single register "HB:I_HB|product_pipeline_phase0_4[29]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_4[26]" merged to single register "HB:I_HB|product_pipeline_phase0_4[29]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline1[1][30]" merged to single register "HB:I_HB|sumdelay_pipeline1[1][31]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline1[2][30]" merged to single register "HB:I_HB|sumdelay_pipeline1[2][31]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline1[2][29]" merged to single register "HB:I_HB|sumdelay_pipeline1[2][31]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline1[2][28]" merged to single register "HB:I_HB|sumdelay_pipeline1[2][31]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline1[2][27]" merged to single register "HB:I_HB|sumdelay_pipeline1[2][31]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline1[2][26]" merged to single register "HB:I_HB|sumdelay_pipeline1[2][31]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline2[1][30]" merged to single register "HB:I_HB|sumdelay_pipeline2[1][31]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline2[1][29]" merged to single register "HB:I_HB|sumdelay_pipeline2[1][31]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline2[1][28]" merged to single register "HB:I_HB|sumdelay_pipeline2[1][31]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline2[1][27]" merged to single register "HB:I_HB|sumdelay_pipeline2[1][31]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline2[1][26]" merged to single register "HB:I_HB|sumdelay_pipeline2[1][31]"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "HB:I_HB|ce_out_reg" merged to single register "HB:Q_HB|ce_out_reg"
-    Info: Duplicate register "HB:I_HB|ce_delayline6" merged to single register "HB:Q_HB|ce_delayline6"
-    Info: Duplicate register "HB:I_HB|ring_count[1]" merged to single register "HB:Q_HB|ring_count[1]"
-    Info: Duplicate register "HB:I_HB|ring_count[0]" merged to single register "HB:Q_HB|ring_count[0]"
-    Info: Duplicate register "CIC_D4:I_CAS2|cur_count[0]" merged to single register "CIC_D4:Q_CAS2|cur_count[0]"
-    Info: Duplicate register "CIC_D4:I_CAS2|ce_out_reg" merged to single register "CIC_D4:Q_CAS2|ce_out_reg"
-    Info: Duplicate register "CIC_D4:I_CAS2|cur_count[1]" merged to single register "CIC_D4:Q_CAS2|cur_count[1]"
-    Info: Duplicate register "CIC_D65:I_CAS1|cur_count[5]" merged to single register "CIC_D65:Q_CAS1|cur_count[5]"
-    Info: Duplicate register "CIC_D65:I_CAS1|cur_count[4]" merged to single register "CIC_D65:Q_CAS1|cur_count[4]"
-    Info: Duplicate register "CIC_D65:I_CAS1|cur_count[3]" merged to single register "CIC_D65:Q_CAS1|cur_count[3]"
-    Info: Duplicate register "CIC_D65:I_CAS1|cur_count[2]" merged to single register "CIC_D65:Q_CAS1|cur_count[2]"
-    Info: Duplicate register "CIC_D65:I_CAS1|cur_count[1]" merged to single register "CIC_D65:Q_CAS1|cur_count[1]"
-    Info: Duplicate register "CIC_D65:I_CAS1|cur_count[0]" merged to single register "CIC_D65:Q_CAS1|cur_count[0]"
-    Info: Duplicate register "CIC_D65:I_CAS1|ce_out_reg" merged to single register "CIC_D65:Q_CAS1|ce_out_reg"
-    Info: Duplicate register "CIC_D65:I_CAS1|cur_count[6]" merged to single register "CIC_D65:Q_CAS1|cur_count[6]"
+    Info: Duplicate register "cic_decim:cic_i|counter[7]" merged to single register "cic_decim:cic_q|counter[7]"
+    Info: Duplicate register "cic_decim:cic_i|counter[6]" merged to single register "cic_decim:cic_q|counter[6]"
+    Info: Duplicate register "cic_decim:cic_i|counter[5]" merged to single register "cic_decim:cic_q|counter[5]"
+    Info: Duplicate register "cic_decim:cic_i|counter[4]" merged to single register "cic_decim:cic_q|counter[4]"
+    Info: Duplicate register "cic_decim:cic_i|counter[3]" merged to single register "cic_decim:cic_q|counter[3]"
+    Info: Duplicate register "cic_decim:cic_i|counter[2]" merged to single register "cic_decim:cic_q|counter[2]"
+    Info: Duplicate register "cic_decim:cic_i|counter[1]" merged to single register "cic_decim:cic_q|counter[1]"
+    Info: Duplicate register "cic_decim:cic_i|counter[0]" merged to single register "cic_decim:cic_q|counter[0]"
 Warning: Reduced register "cordic:rx_cordic|Qstage0[17]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic:rx_cordic|Qstage0[16]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic:rx_cordic|Qstage0[15]" with stuck data_in port to stuck value GND
@@ -1348,18 +1247,6 @@ Warning: Reduced register "cordic:rx_cordic|Qstage0[2]" with stuck data_in port 
 Warning: Reduced register "cordic:rx_cordic|Qstage0[1]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic:rx_cordic|Qstage0[0]" with stuck data_in port to stuck value GND
 Info: Duplicate registers merged to single register
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_1[0]" merged to single register "HB:Q_HB|input_pipeline_phase0[0][0]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline1[0][0]" merged to single register "HB:Q_HB|input_pipeline_phase0[1][0]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline1[0][30]" merged to single register "HB:Q_HB|sumdelay_pipeline1[0][31]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_1[0]" merged to single register "HB:I_HB|input_pipeline_phase0[0][0]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline1[0][0]" merged to single register "HB:I_HB|input_pipeline_phase0[1][0]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline1[0][30]" merged to single register "HB:I_HB|sumdelay_pipeline1[0][31]"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "HB:Q_HB|product_pipeline_phase0_1[1]" merged to single register "HB:Q_HB|input_pipeline_phase0[0][1]"
-    Info: Duplicate register "HB:Q_HB|sumdelay_pipeline1[0][1]" merged to single register "HB:Q_HB|input_pipeline_phase0[1][1]"
-    Info: Duplicate register "HB:I_HB|product_pipeline_phase0_1[1]" merged to single register "HB:I_HB|input_pipeline_phase0[0][1]"
-    Info: Duplicate register "HB:I_HB|sumdelay_pipeline1[0][1]" merged to single register "HB:I_HB|input_pipeline_phase0[1][1]"
-Info: Duplicate registers merged to single register
     Info: Duplicate register "cordic:rx_cordic|Istage0[17]" merged to single register "cordic:rx_cordic|Istage0[16]"
 Info: State machine "|ozy_nco|fx2st" contains 4 states
 Info: Selected Auto state machine encoding method for state machine "|ozy_nco|fx2st"
@@ -1375,23 +1262,20 @@ Info: Encoding result for state machine "|ozy_nco|fx2st"
     Info: State "|ozy_nco|fx2st.0010" uses code string "1001"
 Info: Duplicate registers merged to single register
     Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[17]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[16]"
-Warning: Resynthesizing Cyclone or Stratix WYSIWYG primitives into Cyclone II WYSIWYG primitives; however, resynthesized WYSIWYG primitives may not produce optimal compilation results.
-Info: Registers with preset signals will power-up high
-Info: DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "SLRD" stuck at VCC
     Warning: Pin "SLOE" stuck at VCC
     Warning: Pin "FIFO_ADR[0]" stuck at GND
     Warning: Pin "FIFO_ADR[1]" stuck at VCC
     Warning: Pin "EVALPIN39" stuck at VCC
-Info: Implemented 5268 device resources after synthesis - the final resource count might be different
+Info: Implemented 2746 device resources after synthesis - the final resource count might be different
     Info: Implemented 25 input pins
     Info: Implemented 29 output pins
     Info: Implemented 1 bidirectional pins
-    Info: Implemented 5181 logic cells
+    Info: Implemented 2659 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 90 warnings
-    Info: Processing ended: Wed Sep 20 11:13:46 2006
-    Info: Elapsed time: 00:01:34
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 41 warnings
+    Info: Processing ended: Fri Sep 29 12:33:50 2006
+    Info: Elapsed time: 00:00:27
 
 
