@@ -5,7 +5,7 @@
 % THIRD STAGE
 % Half Band Filter Design
 %
-N = 6;   % filter order
+N = 80;   % filter order
 w = hamming(N+1);
 fp = 0.45;
 d = 0.0001; % 80 db atten
@@ -23,9 +23,9 @@ set(hm, 'FilterInternals', 'SpecifyPrecision');
 set(hm, 'InputWordLength', IWL);
 set(hm, 'OutputWordLength', OWL);
 
-% Fs_in = 100.000e6/260;
-% h = fvtool(hm, 'Fs', Fs_in);
+Fs_in = 100.000e6/260;
+h = fvtool(hm, 'Fs', Fs_in);
 
-generatehdl(hm,'Name', 'HB', 'TargetLanguage', 'Verilog',...
-    'TargetDirectory', 'c:\data', 'AddPipelineRegisters', 'on', ...
-    'CoeffMultipliers', 'csd', 'FIRAdderStyle', 'tree');
+% generatehdl(hm,'Name', 'HB', 'TargetLanguage', 'Verilog',...
+%     'TargetDirectory', 'c:\data', 'AddPipelineRegisters', 'on', ...
+%     'CoeffMultipliers', 'csd', 'FIRAdderStyle', 'tree');

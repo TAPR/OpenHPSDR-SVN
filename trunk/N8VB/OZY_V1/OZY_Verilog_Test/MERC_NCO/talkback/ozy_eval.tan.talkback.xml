@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Wed Sep 20 11:18:11 2006) contains limited information
+This XML file (created on Fri Sep 29 12:34:41 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<module>quartus_tan</module>
 	<edition>Web Edition</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Wed Sep 20 11:18:11 2006</compilation_end_time>
+	<compilation_end_time>Fri Sep 29 12:34:41 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_eval</project>
 <revision>ozy_eval</revision>
 <compilation_summary>
-	<flow_status>Successful - Wed Sep 20 11:18:10 2006</flow_status>
+	<flow_status>Successful - Fri Sep 29 12:34:40 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>ozy_eval</revision_name>
 	<top_level_entity_name>ozy_nco</top_level_entity_name>
@@ -45,8 +45,8 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<device>EP2C5Q208C7</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>Yes</met_timing_requirements>
-	<total_logic_elements>4,507 / 4,608 ( 98 % )</total_logic_elements>
-	<total_registers>4242</total_registers>
+	<total_logic_elements>2,617 / 4,608 ( 57 % )</total_logic_elements>
+	<total_registers>2127</total_registers>
 	<total_pins>55 / 142 ( 39 % )</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
 	<total_memory_bits>16,384 / 119,808 ( 14 % )</total_memory_bits>
@@ -65,10 +65,10 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<warning>Warning: No matching clocks have timing constraints</warning>
 	<warning>Warning: Found pins functioning as undefined clocks and/or memory enables</warning>
 	<info>Info: Quartus II Timing Analyzer was successful. 0 errors, 4 warnings</info>
-	<info>Info: Elapsed time: 00:00:06</info>
-	<info>Info: Processing ended: Wed Sep 20 11:18:10 2006</info>
-	<info>Info: th for register &quot;ADC[0]&quot; (data pin = &quot;DA[0]&quot;, clock pin = &quot;ENC_CLK&quot;) is -2.876 ns</info>
-	<info>Info: - Shortest pin to register delay is 6.790 ns</info>
+	<info>Info: Elapsed time: 00:00:04</info>
+	<info>Info: Processing ended: Fri Sep 29 12:34:40 2006</info>
+	<info>Info: th for register &quot;ADC[0]&quot; (data pin = &quot;DA[0]&quot;, clock pin = &quot;ENC_CLK&quot;) is -3.017 ns</info>
+	<info>Info: - Shortest pin to register delay is 7.373 ns</info>
 </messages>
 <clock_settings_summary>
 	<row>
@@ -117,49 +117,49 @@ to www.altera.com/products/software/download/dnl-download_license.html
 		<type>Worst-case tsu</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>7.324 ns</actual>
+		<actual>9.587 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case tco</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>13.680 ns</actual>
+		<actual>12.651 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case tpd</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>10.112 ns</actual>
+		<actual>11.134 ns</actual>
 	</nonclk>
 	<nonclk>
 		<type>Worst-case th</type>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>-2.876 ns</actual>
+		<actual>-3.017 ns</actual>
 	</nonclk>
-	<clk>
-		<name>ENC_CLK</name>
-		<slack>N/A</slack>
-		<required>None</required>
-		<actual>72.86 MHz ( period = 13.725 ns )</actual>
-	</clk>
 	<clk>
 		<name>IFCLK</name>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>123.08 MHz ( period = 8.125 ns )</actual>
+		<actual>121.34 MHz ( period = 8.241 ns )</actual>
+	</clk>
+	<clk>
+		<name>ENC_CLK</name>
+		<slack>N/A</slack>
+		<required>None</required>
+		<actual>140.41 MHz ( period = 7.122 ns )</actual>
 	</clk>
 	<clk>
 		<name>SCK</name>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>154.11 MHz ( period = 6.489 ns )</actual>
+		<actual>172.06 MHz ( period = 5.812 ns )</actual>
 	</clk>
 	<clk>
 		<name>FX2_CLK</name>
 		<slack>N/A</slack>
 		<required>None</required>
-		<actual>249.56 MHz ( period = 4.007 ns )</actual>
+		<actual>306.00 MHz ( period = 3.268 ns )</actual>
 	</clk>
 </performance>
 </talkback>
