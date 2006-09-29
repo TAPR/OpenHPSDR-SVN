@@ -23,6 +23,10 @@
 //    FlexRadio Systems, 8900 Marybank Dr., Austin, TX  78750, USA.
 //=================================================================
 
+//
+// SoftRock and HPSDR Modifications Copyright 2005, 2006 Bill Tracey (kd5tfd) 
+//
+
 //#define INTERLEAVED
 //#define SPLIT_INTERLEAVED
 
