@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Fri Sep 29 12:33:50 2006
+Analysis & Synthesis Status : Successful - Sun Oct 01 14:17:41 2006
 Quartus II Version : 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
 Revision Name : ozy_eval
 Top-level Entity Name : ozy_nco
 Family : Cyclone II
-Total logic elements : 2443
-Total registers : 2127
+Total logic elements : 3302
+Total registers : 2802
 Total pins : 55
 Total virtual pins : 0
-Total memory bits : 16,384
-Embedded Multiplier 9-bit elements : 0
+Total memory bits : 20,992
+Embedded Multiplier 9-bit elements : 12
 Total PLLs : 0

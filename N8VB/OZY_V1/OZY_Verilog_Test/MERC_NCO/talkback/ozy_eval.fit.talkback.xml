@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Fri Sep 29 12:34:29 2006) contains limited information
+This XML file (created on Sun Oct 01 14:19:19 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<module>quartus_fit</module>
 	<edition>Web Edition</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Fri Sep 29 12:34:29 2006</compilation_end_time>
+	<compilation_end_time>Sun Oct 01 14:19:19 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_eval</project>
 <revision>ozy_eval</revision>
 <compilation_summary>
-	<flow_status>Successful - Fri Sep 29 12:34:28 2006</flow_status>
+	<flow_status>Successful - Sun Oct 01 14:19:18 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>ozy_eval</revision_name>
 	<top_level_entity_name>ozy_nco</top_level_entity_name>
@@ -45,52 +45,52 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<device>EP2C5Q208C7</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>N/A</met_timing_requirements>
-	<total_logic_elements>2,617 / 4,608 ( 57 % )</total_logic_elements>
-	<total_registers>2127</total_registers>
+	<total_logic_elements>3,667 / 4,608 ( 80 % )</total_logic_elements>
+	<total_registers>2706</total_registers>
 	<total_pins>55 / 142 ( 39 % )</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
-	<total_memory_bits>16,384 / 119,808 ( 14 % )</total_memory_bits>
-	<embedded_multiplier_9_bit_elements>0 / 26 ( 0 % )</embedded_multiplier_9_bit_elements>
+	<total_memory_bits>20,992 / 119,808 ( 18 % )</total_memory_bits>
+	<embedded_multiplier_9_bit_elements>12 / 26 ( 46 % )</embedded_multiplier_9_bit_elements>
 	<total_plls>0 / 2 ( 0 % )</total_plls>
 </compilation_summary>
 <resource_usage_summary>
-	<rsc name="Total logic elements" util="57" max=" 4608 " type="int">2617 </rsc>
-	<rsc name="-- Combinational with no register" type="int">490</rsc>
-	<rsc name="-- Register only" type="int">169</rsc>
-	<rsc name="-- Combinational with a register" type="int">1958</rsc>
+	<rsc name="Total logic elements" util="80" max=" 4608 " type="int">3667 </rsc>
+	<rsc name="-- Combinational with no register" type="int">961</rsc>
+	<rsc name="-- Register only" type="int">360</rsc>
+	<rsc name="-- Combinational with a register" type="int">2346</rsc>
 	<rsc name="Logic element usage by number of LUT inputs" type="text"></rsc>
-	<rsc name="-- 4 input functions" type="int">82</rsc>
-	<rsc name="-- 3 input functions" type="int">1377</rsc>
-	<rsc name="-- &lt;=2 input functions" type="int">989</rsc>
-	<rsc name="-- Register only" type="int">169</rsc>
+	<rsc name="-- 4 input functions" type="int">210</rsc>
+	<rsc name="-- 3 input functions" type="int">1935</rsc>
+	<rsc name="-- &lt;=2 input functions" type="int">1162</rsc>
+	<rsc name="-- Register only" type="int">360</rsc>
 	<rsc name="Logic elements by mode" type="text"></rsc>
-	<rsc name="-- normal mode" type="int">1040</rsc>
-	<rsc name="-- arithmetic mode" type="int">1408</rsc>
-	<rsc name="Total registers" util="46" max=" 4608 " type="int">2127 </rsc>
-	<rsc name="Total LABs" util="63" max=" 288 " type="int">182 </rsc>
+	<rsc name="-- normal mode" type="int">1293</rsc>
+	<rsc name="-- arithmetic mode" type="int">2014</rsc>
+	<rsc name="Total registers" util="59" max=" 4608 " type="int">2706 </rsc>
+	<rsc name="Total LABs" util="96" max=" 288 " type="int">277 </rsc>
 	<rsc name="User inserted logic elements" type="int">0</rsc>
 	<rsc name="Virtual pins" type="int">0</rsc>
 	<rsc name="I/O pins" util="39" max=" 142 " type="int">55 </rsc>
 	<rsc name="-- Clock pins" util="25" max=" 4 " type="int">1 </rsc>
 	<rsc name="Global signals" type="int">3</rsc>
-	<rsc name="M4Ks" util="15" max=" 26 " type="int">4 </rsc>
-	<rsc name="Total memory bits" util="14" max=" 119808 " type="int">16384 </rsc>
-	<rsc name="Total RAM block bits" util="15" max=" 119808 " type="int">18432 </rsc>
-	<rsc name="Embedded Multiplier 9-bit elements" util="0" max=" 26 " type="int">0 </rsc>
+	<rsc name="M4Ks" util="50" max=" 26 " type="int">13 </rsc>
+	<rsc name="Total memory bits" util="18" max=" 119808 " type="int">20992 </rsc>
+	<rsc name="Total RAM block bits" util="50" max=" 119808 " type="int">59904 </rsc>
+	<rsc name="Embedded Multiplier 9-bit elements" util="46" max=" 26 " type="int">12 </rsc>
 	<rsc name="PLLs" util="0" max=" 2 " type="int">0 </rsc>
 	<rsc name="Global clocks" util="38" max=" 8 " type="int">3 </rsc>
 	<rsc name="Maximum fan-out node" type="text">ENC_CLK</rsc>
-	<rsc name="Maximum fan-out" type="int">1885</rsc>
+	<rsc name="Maximum fan-out" type="int">2479</rsc>
 	<rsc name="Highest non-global fan-out signal" type="text">ENC_CLK</rsc>
-	<rsc name="Highest non-global fan-out" type="int">1885</rsc>
-	<rsc name="Total fan-out" type="int">13357</rsc>
-	<rsc name="Average fan-out" type="float">2.81</rsc>
+	<rsc name="Highest non-global fan-out" type="int">2479</rsc>
+	<rsc name="Total fan-out" type="int">18825</rsc>
+	<rsc name="Average fan-out" type="float">3.02</rsc>
 </resource_usage_summary>
 <control_signals>
 	<row>
 		<name>ENC_CLK</name>
 		<location>PIN_150</location>
-		<fan_out>1885</fan_out>
+		<fan_out>2479</fan_out>
 		<usage>Clock</usage>
 		<global>no</global>
 	</row>
@@ -103,12 +103,12 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	</row>
 	<row>
 		<name>txfifoclr</name>
-		<location>LCFF_X6_Y6_N9</location>
+		<location>LCFF_X1_Y11_N13</location>
 		<fan_out>148</fan_out>
 		<usage>Async. clear</usage>
 		<global>yes</global>
 		<global_resource_used>Global clock</global_resource_used>
-		<global_line_name>GCLK3</global_line_name>
+		<global_line_name>GCLK1</global_line_name>
 	</row>
 	<row>
 		<name>FX2_CLK</name>
@@ -187,7 +187,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 		<size>8192</size>
 		<m4ks>2</m4ks>
 		<mif>None</mif>
-		<location>M4K_X23_Y4, M4K_X23_Y6</location>
+		<location>M4K_X11_Y10, M4K_X11_Y11</location>
 	</row>
 	<row>
 		<name>tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5|ALTSYNCRAM</name>
@@ -204,18 +204,369 @@ to www.altera.com/products/software/download/dnl-download_license.html
 		<size>8192</size>
 		<m4ks>2</m4ks>
 		<mif>None</mif>
-		<location>M4K_X11_Y6, M4K_X11_Y7</location>
+		<location>M4K_X11_Y12, M4K_X11_Y13</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_i3|ram16:ram16_odd|altsyncram:ram_array_rtl_1|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y10</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_q3|ram16:ram16_odd|altsyncram:ram_array_rtl_0|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y10</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_i2|ram16:ram16_odd|altsyncram:ram_array_rtl_5|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y5</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_q2|ram16:ram16_odd|altsyncram:ram_array_rtl_2|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y5</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_i|ram16:ram16_odd|altsyncram:ram_array_rtl_11|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X11_Y2</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_q|ram16:ram16_odd|altsyncram:ram_array_rtl_8|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X11_Y2</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_i3|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_7|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y12</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_q3|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_4|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y12</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_i3|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_6|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y11</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_q3|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_3|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y11</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_i2|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_13|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y2</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_q2|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_10|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y2</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_i2|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_12|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y3</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_q2|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_9|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y3</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_i|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_17|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y7</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_q|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_15|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y7</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_i|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_16|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y9</location>
+	</row>
+	<row>
+		<name>halfband_decim:hb_q|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_14|altsyncram_7pi1:auto_generated|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>Simple Dual Port</mode>
+		<port_a_depth>16</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>16</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>no</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>256</size>
+		<m4ks>1</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y9</location>
 	</row>
 </ram_summary>
+<dsp_block_usage_summary>
+	<row>
+		<statistic>Simple Multipliers (9-bit)</statistic>
+		<number_used>0</number_used>
+		<available_per_block>2</available_per_block>
+		<maximum_available>26</maximum_available>
+	</row>
+	<row>
+		<statistic>Simple Multipliers (18-bit)</statistic>
+		<number_used>6</number_used>
+		<available_per_block>1</available_per_block>
+		<maximum_available>13</maximum_available>
+	</row>
+	<row>
+		<statistic>Embedded Multiplier Blocks</statistic>
+		<number_used>6</number_used>
+		<maximum_available>13</maximum_available>
+	</row>
+	<row>
+		<statistic>Embedded Multiplier 9-bit elements</statistic>
+		<number_used>12</number_used>
+		<available_per_block>2</available_per_block>
+		<maximum_available>26</maximum_available>
+	</row>
+	<row>
+		<statistic>Signed Embedded Multipliers</statistic>
+		<number_used>6</number_used>
+	</row>
+	<row>
+		<statistic>Unsigned Embedded Multipliers</statistic>
+		<number_used>0</number_used>
+	</row>
+	<row>
+		<statistic>Mixed Sign Embedded Multipliers</statistic>
+		<number_used>0</number_used>
+	</row>
+	<row>
+		<statistic>Variable Sign Embedded Multipliers</statistic>
+		<number_used>0</number_used>
+	</row>
+	<row>
+		<statistic>Dedicated Input Shift Register Chains</statistic>
+		<number_used>0</number_used>
+	</row>
+</dsp_block_usage_summary>
 <interconnect_usage_summary>
-	<rsc name="Local interconnects" util="18" max=" 4608 " type="int">814 </rsc>
-	<rsc name="Block interconnects" util="23" max=" 15666 " type="int">3660 </rsc>
-	<rsc name="R4 interconnects" util="20" max=" 13328 " type="int">2676 </rsc>
-	<rsc name="R24 interconnects" util="4" max=" 652 " type="int">28 </rsc>
-	<rsc name="C4 interconnects" util="20" max=" 11424 " type="int">2341 </rsc>
-	<rsc name="C16 interconnects" util="3" max=" 812 " type="int">23 </rsc>
+	<rsc name="Local interconnects" util="27" max=" 4608 " type="int">1232 </rsc>
+	<rsc name="Block interconnects" util="35" max=" 15666 " type="int">5557 </rsc>
+	<rsc name="R4 interconnects" util="33" max=" 13328 " type="int">4342 </rsc>
+	<rsc name="R24 interconnects" util="10" max=" 652 " type="int">67 </rsc>
+	<rsc name="C4 interconnects" util="30" max=" 11424 " type="int">3418 </rsc>
+	<rsc name="C16 interconnects" util="5" max=" 812 " type="int">42 </rsc>
 	<rsc name="Global clocks" util="38" max=" 8 " type="int">3 </rsc>
-	<rsc name="Direct links" util="3" max=" 15666 " type="int">449 </rsc>
+	<rsc name="Direct links" util="4" max=" 15666 " type="int">654 </rsc>
 </interconnect_usage_summary>
 <mep_data>
 	<command_line>quartus_fit --read_settings_files=off --write_settings_files=off ozy_eval -c ozy_eval</command_line>
@@ -227,8 +578,8 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<warning>Warning: Following 5 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results</warning>
 	<warning>Warning: Found 30 output pins without output pin load capacitance assignment</warning>
 	<info>Info: Quartus II Fitter was successful. 0 errors, 2 warnings</info>
-	<info>Info: Elapsed time: 00:00:36</info>
-	<info>Info: Processing ended: Fri Sep 29 12:34:28 2006</info>
+	<info>Info: Elapsed time: 00:01:35</info>
+	<info>Info: Processing ended: Sun Oct 01 14:19:18 2006</info>
 	<info>Info: Following groups of pins have the same output enable</info>
 	<info>Info: Following pins have the same output enable: SPI_REGS:spi_regs|sRd</info>
 </messages>
@@ -741,7 +1092,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 		<x_coordinate>28</x_coordinate>
 		<y_coordinate>12</y_coordinate>
 		<cell_number>2</cell_number>
-		<combinational_fan_out>1885</combinational_fan_out>
+		<combinational_fan_out>2479</combinational_fan_out>
 		<registered_fan_out>0</registered_fan_out>
 		<global>no</global>
 		<input_register>no</input_register>
@@ -779,7 +1130,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 		<x_coordinate>5</x_coordinate>
 		<y_coordinate>14</y_coordinate>
 		<cell_number>0</cell_number>
-		<combinational_fan_out>3</combinational_fan_out>
+		<combinational_fan_out>4</combinational_fan_out>
 		<registered_fan_out>0</registered_fan_out>
 		<global>no</global>
 		<input_register>no</input_register>
@@ -1562,116 +1913,112 @@ to www.altera.com/products/software/download/dnl-download_license.html
 </advanced_data___general>
 <advanced_data___placement_preparation>
 	<row>
-		<name>Auto Fit Point 1 - Fit Attempt 1</name>
-		<value>ff</value>
-	</row>
-	<row>
 		<name>Mid Wire Use - Fit Attempt 1</name>
-		<value>32</value>
+		<value>64</value>
 	</row>
 	<row>
 		<name>Mid Slack - Fit Attempt 1</name>
-		<value>-9228</value>
+		<value>-15469</value>
 	</row>
 	<row>
 		<name>Internal Atom Count - Fit Attempt 1</name>
-		<value>4570</value>
+		<value>6008</value>
 	</row>
 	<row>
 		<name>LE/ALM Count - Fit Attempt 1</name>
-		<value>2617</value>
+		<value>3667</value>
 	</row>
 	<row>
 		<name>LAB Count - Fit Attempt 1</name>
-		<value>182</value>
+		<value>277</value>
 	</row>
 	<row>
 		<name>Outputs per Lab - Fit Attempt 1</name>
-		<value>12.209</value>
+		<value>10.722</value>
 	</row>
 	<row>
 		<name>Inputs per LAB - Fit Attempt 1</name>
-		<value>18.297</value>
+		<value>16.271</value>
 	</row>
 	<row>
 		<name>Global Inputs per LAB - Fit Attempt 1</name>
-		<value>0.269</value>
+		<value>0.141</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;non-global clock + sync load&apos; - Fit Attempt 1</name>
-		<value>0:22;1:136;2:24</value>
+		<value>0:48;1:184;2:45</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;non-global controls&apos; - Fit Attempt 1</name>
-		<value>0:11;1:17;2:106;3:28;4:20</value>
+		<value>0:40;1:20;2:148;3:33;4:36</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;non-global + aclr&apos; - Fit Attempt 1</name>
-		<value>0:9;1:6;2:111;3:34;4:22</value>
+		<value>0:39;1:9;2:156;3:37;4:36</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;global non-clock non-aclr&apos; - Fit Attempt 1</name>
-		<value>0:182</value>
+		<value>0:277</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;global controls&apos; - Fit Attempt 1</name>
-		<value>0:149;1:17;2:14;3:2</value>
+		<value>0:253;1:9;2:13;3:2</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;deterministic LABSMUXA/LABXMUXB&apos; - Fit Attempt 1</name>
-		<value>0:11;1:162;2:9</value>
+		<value>0:40;1:230;2:7</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;deterministic LABSMUXC/LABXMUXD&apos; - Fit Attempt 1</name>
-		<value>0:15;1:44;2:117;3:6</value>
+		<value>0:42;1:66;2:146;3:23</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;clock / ce pair constraint&apos; - Fit Attempt 1</name>
-		<value>0:9;1:138;2:35</value>
+		<value>0:39;1:199;2:39</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;aclr constraint&apos; - Fit Attempt 1</name>
-		<value>0:9;1:158;2:15</value>
+		<value>0:39;1:230;2:8</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;true sload_sclear pair&apos; - Fit Attempt 1</name>
-		<value>0:44;1:138</value>
+		<value>0:91;1:186</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;constant sload_sclear pair&apos; - Fit Attempt 1</name>
-		<value>0:69;1:113</value>
+		<value>0:154;1:123</value>
 	</row>
 	<row>
 		<name>LAB Constraint &apos;has placement constraint&apos; - Fit Attempt 1</name>
-		<value>0:82;1:100</value>
+		<value>0:135;1:142</value>
 	</row>
 	<row>
 		<name>LEs in Chains - Fit Attempt 1</name>
-		<value>1471</value>
+		<value>2113</value>
 	</row>
 	<row>
 		<name>LEs in Long Chains - Fit Attempt 1</name>
-		<value>1219</value>
+		<value>1645</value>
 	</row>
 	<row>
 		<name>LABs with Chains - Fit Attempt 1</name>
-		<value>120</value>
+		<value>179</value>
 	</row>
 	<row>
 		<name>LABs with Multiple Chains - Fit Attempt 1</name>
-		<value>1</value>
-	</row>
-	<row>
-		<name>Time - Fit Attempt 1</name>
 		<value>2</value>
 	</row>
 	<row>
+		<name>Time - Fit Attempt 1</name>
+		<value>31</value>
+	</row>
+	<row>
 		<name>Time in tsm_dat.dll - Fit Attempt 1</name>
-		<value>0.016</value>
+		<value>0.015</value>
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>0.655</value>
+		<value>1.766</value>
 	</row>
 </advanced_data___placement_preparation>
 <advanced_data___placement>
@@ -1685,11 +2032,11 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	</row>
 	<row>
 		<name>Early Wire Use - Fit Attempt 1</name>
-		<value>11</value>
+		<value>15</value>
 	</row>
 	<row>
 		<name>Early Slack - Fit Attempt 1</name>
-		<value>-9553</value>
+		<value>-14579</value>
 	</row>
 	<row>
 		<name>Auto Fit Point 3 - Fit Attempt 1</name>
@@ -1701,77 +2048,87 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	</row>
 	<row>
 		<name>Mid Wire Use - Fit Attempt 1</name>
-		<value>18</value>
+		<value>29</value>
 	</row>
 	<row>
 		<name>Mid Slack - Fit Attempt 1</name>
-		<value>-7904</value>
+		<value>-13261</value>
 	</row>
 	<row>
 		<name>Late Wire Use - Fit Attempt 1</name>
-		<value>20</value>
+		<value>32</value>
 	</row>
 	<row>
 		<name>Late Slack - Fit Attempt 1</name>
-		<value>-7904</value>
-	</row>
-	<row>
-		<name>Auto Fit Point 5 - Fit Attempt 1</name>
-		<value>ff</value>
+		<value>-13261</value>
 	</row>
 	<row>
 		<name>Time - Fit Attempt 1</name>
-		<value>4</value>
+		<value>9</value>
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>1.235</value>
+		<value>2.749</value>
 	</row>
 </advanced_data___placement>
 <advanced_data___routing>
 	<row>
 		<name>Early Slack - Fit Attempt 1</name>
-		<value>-7083</value>
+		<value>-12230</value>
 	</row>
 	<row>
 		<name>Early Wire Use - Fit Attempt 1</name>
-		<value>20</value>
+		<value>31</value>
 	</row>
 	<row>
 		<name>Peak Regional Wire - Fit Attempt 1</name>
-		<value>18</value>
+		<value>33</value>
 	</row>
 	<row>
 		<name>Mid Slack - Fit Attempt 1</name>
-		<value>-7532</value>
+		<value>-12344</value>
 	</row>
 	<row>
 		<name>Late Slack - Fit Attempt 1</name>
-		<value>-7532</value>
+		<value>-12344</value>
+	</row>
+	<row>
+		<name>Late Slack - Fit Attempt 1</name>
+		<value>-12344</value>
 	</row>
 	<row>
 		<name>Late Wire Use - Fit Attempt 1</name>
-		<value>20</value>
+		<value>31</value>
 	</row>
 	<row>
 		<name>Time - Fit Attempt 1</name>
-		<value>8</value>
+		<value>15</value>
+	</row>
+	<row>
+		<name>Time in tsm_dat.dll - Fit Attempt 1</name>
+		<value>0.016</value>
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>4.938</value>
+		<value>9.171</value>
 	</row>
 </advanced_data___routing>
 <files>
 	<top>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_nco.v</top>
 	<extensions>
 		<ext filename="none">1</ext>
-		<ext ext_name="v">14</ext>
-		<ext ext_name="tdf">19</ext>
-		<ext ext_name="inc">14</ext>
+		<ext ext_name="v">20</ext>
+		<ext ext_name="tdf">23</ext>
+		<ext ext_name="inc">23</ext>
 		<ext ext_name="lst">1</ext>
 	</extensions>
 	<sub_files>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/coeff_rom.v</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ram16.v</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/acc.v</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/halfband_decim.v</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/mult.v</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ram16_2sum.v</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/sign_extend.v</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/cic_decim.v</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/HB.v</sub_file>
@@ -1821,6 +2178,19 @@ to www.altera.com/products/software/download/dnl-download_license.html
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_go8.tdf</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_4e8.tdf</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_ve9.tdf</sub_file>
+		<sub_file>c:/altera/quartus60/libraries/megafunctions/altsyncram.tdf</sub_file>
+		<sub_file>c:/altera/quartus60/libraries/megafunctions/stratix_ram_block.inc</sub_file>
+		<sub_file>c:/altera/quartus60/libraries/megafunctions/lpm_mux.inc</sub_file>
+		<sub_file>c:/altera/quartus60/libraries/megafunctions/lpm_decode.inc</sub_file>
+		<sub_file>c:/altera/quartus60/libraries/megafunctions/altsyncram.inc</sub_file>
+		<sub_file>c:/altera/quartus60/libraries/megafunctions/a_rdenreg.inc</sub_file>
+		<sub_file>c:/altera/quartus60/libraries/megafunctions/altrom.inc</sub_file>
+		<sub_file>c:/altera/quartus60/libraries/megafunctions/altram.inc</sub_file>
+		<sub_file>c:/altera/quartus60/libraries/megafunctions/altqpram.inc</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_7pi1.tdf</sub_file>
+		<sub_file>c:/altera/quartus60/libraries/megafunctions/lpm_mult.tdf</sub_file>
+		<sub_file>c:/altera/quartus60/libraries/megafunctions/multcore.inc</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/mult_5o01.tdf</sub_file>
 	</sub_files>
 </files>
 <architecture>

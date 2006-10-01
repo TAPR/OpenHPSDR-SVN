@@ -1,8 +1,33 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="ozy_eval">
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i2|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_12" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_14" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i2|ram16:ram16_odd|altsyncram:ram_array_rtl_5" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i3|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_7" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q3|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_3" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i|mult:mult|lpm_mult:Mult0" CBX_FILE_NAME="mult_5o01.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_16" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q2|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_10" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q|mult:mult|lpm_mult:Mult0" CBX_FILE_NAME="mult_5o01.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q|ram16:ram16_odd|altsyncram:ram_array_rtl_8" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_17" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_ncb1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_ncb1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i2|mult:mult|lpm_mult:Mult0" CBX_FILE_NAME="mult_5o01.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i3|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_6" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i|ram16:ram16_odd|altsyncram:ram_array_rtl_11" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q2|mult:mult|lpm_mult:Mult0" CBX_FILE_NAME="mult_5o01.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|RXMUX:I_MUX|lpm_mux:lpm_mux_component" CBX_FILE_NAME="mux_6me.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|RXMUX:Q_MUX|lpm_mux:lpm_mux_component" CBX_FILE_NAME="mux_6me.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_ncb1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i2|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_13" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i3|mult:mult|lpm_mult:Mult0" CBX_FILE_NAME="mult_5o01.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q3|mult:mult|lpm_mult:Mult0" CBX_FILE_NAME="mult_5o01.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q3|ram16:ram16_odd|altsyncram:ram_array_rtl_0" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_15" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_i3|ram16:ram16_odd|altsyncram:ram_array_rtl_1" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q2|ram16:ram16_odd|altsyncram:ram_array_rtl_2" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q2|ram16_2sum:ram16_even|altsyncram:ram_array__dual_rtl_9" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ozy_nco|halfband_decim:hb_q3|ram16_2sum:ram16_even|altsyncram:ram_array_rtl_4" CBX_FILE_NAME="altsyncram_7pi1.tdf"/>
 	</PROJECT>
 </LOG_ROOT>
