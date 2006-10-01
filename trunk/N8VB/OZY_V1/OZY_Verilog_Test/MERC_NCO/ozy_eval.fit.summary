@@ -1,14 +1,14 @@
-Fitter Status : Successful - Fri Sep 29 12:34:28 2006
+Fitter Status : Successful - Sun Oct 01 14:19:18 2006
 Quartus II Version : 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
 Revision Name : ozy_eval
 Top-level Entity Name : ozy_nco
 Family : Cyclone II
 Device : EP2C5Q208C7
 Timing Models : Final
-Total logic elements : 2,617 / 4,608 ( 57 % )
-Total registers : 2127
+Total logic elements : 3,667 / 4,608 ( 80 % )
+Total registers : 2706
 Total pins : 55 / 142 ( 39 % )
 Total virtual pins : 0
-Total memory bits : 16,384 / 119,808 ( 14 % )
-Embedded Multiplier 9-bit elements : 0 / 26 ( 0 % )
+Total memory bits : 20,992 / 119,808 ( 18 % )
+Embedded Multiplier 9-bit elements : 12 / 26 ( 46 % )
 Total PLLs : 0 / 2 ( 0 % )

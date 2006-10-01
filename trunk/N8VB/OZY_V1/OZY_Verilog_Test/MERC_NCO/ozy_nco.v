@@ -197,67 +197,17 @@ module ozy_nco(	ENC_CLK,
 	wire q_strobe2;
 	wire i_strobe3;
 	wire q_strobe3;
+	wire i_strobe4;
+	wire q_strobe4;
 	
 	wire [15:0] i_cic_out1;
 	wire [15:0] q_cic_out1;
-	//wire [19:0] i_cic_out2;
-	//wire [19:0] q_cic_out2;
-	wire [19:0] i_hb_out;
-	wire [19:0] q_hb_out;
-	
-	/*	
-	CIC_D65 I_CAS1(	.clk(ENC_CLK),
-			                .clk_enable(clk_enable),
-			                .reset(~clk_enable),
-			                .filter_in(i_cordic_out),
-			                .filter_out(i_cic_out1),
-			                .ce_out(i_strobe1)
-			                );
-
-	CIC_D65 Q_CAS1(	.clk(ENC_CLK),
-			                .clk_enable(clk_enable),
-			                .reset(~clk_enable),
-			                .filter_in(q_cordic_out),
-			                .filter_out(q_cic_out1),
-			                .ce_out(q_strobe1)
-			                );	
-	
-	
-	CIC_D4 I_CAS2(	.clk(ENC_CLK),
-			                .clk_enable(i_strobe1),
-			                .reset(~clk_enable),
-			                .filter_in(i_cic_out1[19:4]),
-			                .filter_out(i_cic_out2),
-			                .ce_out(i_strobe2)
-			                );
-
-	CIC_D4 Q_CAS2(	.clk(ENC_CLK),
-			                .clk_enable(q_strobe1),
-			                .reset(~clk_enable),
-			                .filter_in(q_cic_out1[19:4]),
-			                .filter_out(q_cic_out2),
-			                .ce_out(q_strobe2)
-			                );
-			
-	HB I_HB(
-            .clk(ENC_CLK),
-            .clk_enable(i_strobe2),
-            .reset(~clk_enable),
-            .filter_in(i_cic_out2[19:4]),
-            .filter_out(i_hb_out),
-            .ce_out(i_strobe3)
-            );	
-
-	HB Q_HB(
-            .clk(ENC_CLK),
-            .clk_enable(q_strobe2),
-            .reset(~clk_enable),
-            .filter_in(q_cic_out2[19:4]),
-            .filter_out(q_hb_out),
-            .ce_out(q_strobe3)
-            );	
-	
-	*/
+	wire [15:0] i_hb_out;
+	wire [15:0] q_hb_out;
+	wire [15:0] i_hb_out2;
+	wire [15:0] q_hb_out2;
+	wire [15:0] i_hb_out3;
+	wire [15:0] q_hb_out3;
 	
 	cic_decim cic_i ( 	.clock(ENC_CLK),
 						.reset(~clk_enable),
@@ -294,6 +244,42 @@ module ozy_nco(	ENC_CLK,
    							.data_in(q_cic_out1), 
 							.data_out(q_hb_out),
 							.debugctrl());
+							
+	halfband_decim hb_i2  (	.clock(ENC_CLK),
+							.reset(~clk_enable),
+							.enable(clk_enable), 
+							.strobe_in(i_strobe2), 
+							.strobe_out(i_strobe3),
+   							.data_in(i_hb_out), 
+							.data_out(i_hb_out2),
+							.debugctrl());
+							
+	halfband_decim hb_q2  (	.clock(ENC_CLK),
+							.reset(~clk_enable),
+							.enable(clk_enable), 
+							.strobe_in(q_strobe2), 
+							.strobe_out(q_strobe3),
+   							.data_in(q_hb_out), 
+							.data_out(q_hb_out2),
+							.debugctrl());
+	
+	halfband_decim hb_i3  (	.clock(ENC_CLK),
+							.reset(~clk_enable),
+							.enable(clk_enable), 
+							.strobe_in(i_strobe3), 
+							.strobe_out(i_strobe4),
+   							.data_in(i_hb_out2), 
+							.data_out(i_hb_out3),
+							.debugctrl());
+							
+	halfband_decim hb_q3  (	.clock(ENC_CLK),
+							.reset(~clk_enable),
+							.enable(clk_enable), 
+							.strobe_in(q_strobe3), 
+							.strobe_out(q_strobe4),
+   							.data_in(q_hb_out2), 
+							.data_out(q_hb_out3),
+							.debugctrl());						
 		
 	wire [15:0] i_fifo_out;
 	wire [15:0] q_fifo_out;
@@ -306,7 +292,7 @@ module ozy_nco(	ENC_CLK,
 				.data0x(ADC),
 				.data1x(i_cordic_out),
 				.data2x(i_cic_out1),
-				.data3x(i_hb_out),
+				.data3x(i_hb_out3),
 				.sel(option_sel_register[1:0]),
 				.result(i_fifo_out));
 				
@@ -315,12 +301,12 @@ module ozy_nco(	ENC_CLK,
 				.data0x(16'h0),
 				.data1x(q_cordic_out),
 				.data2x(q_cic_out1),
-				.data3x(q_hb_out),
+				.data3x(q_hb_out3),
 				.sel(option_sel_register[1:0]),
 				.result(q_fifo_out));
 	
-	assign i_sel_strobe = (option_sel_register[1:0] == 2'b10) ? i_strobe1 : 1'b1;
-	assign q_sel_strobe = (option_sel_register[1:0] == 2'b10) ? q_strobe1 : 1'b1;
+	assign i_sel_strobe = (option_sel_register[1:0] == 2'b10) ? i_strobe1 : (option_sel_register[1:0] == 2'b11) ? i_strobe4: 1'b1;
+	assign q_sel_strobe = (option_sel_register[1:0] == 2'b10) ? q_strobe1 : (option_sel_register[1:0] == 2'b11) ? q_strobe4: 1'b1;
 	
 	// I FIFO		
 	tx_fifo tx_fifo_i(.aclr(txfifoclr), .wrclk(ENC_CLK), 

@@ -1,6 +1,6 @@
 
 <!--
-This XML file (created on Fri Sep 29 12:33:50 2006) contains limited information
+This XML file (created on Sun Oct 01 14:17:42 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
@@ -24,7 +24,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<module>quartus_map</module>
 	<edition>Web Edition</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Fri Sep 29 12:33:51 2006</compilation_end_time>
+	<compilation_end_time>Sun Oct 01 14:17:42 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,7 +37,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_eval</project>
 <revision>ozy_eval</revision>
 <compilation_summary>
-	<flow_status>Successful - Fri Sep 29 12:33:50 2006</flow_status>
+	<flow_status>Successful - Sun Oct 01 14:17:41 2006</flow_status>
 	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
 	<revision_name>ozy_eval</revision_name>
 	<top_level_entity_name>ozy_nco</top_level_entity_name>
@@ -45,12 +45,12 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<device>EP2C5Q208C7</device>
 	<timing_models>Final</timing_models>
 	<met_timing_requirements>N/A</met_timing_requirements>
-	<total_logic_elements>2443</total_logic_elements>
-	<total_registers>2127</total_registers>
+	<total_logic_elements>3302</total_logic_elements>
+	<total_registers>2802</total_registers>
 	<total_pins>55</total_pins>
 	<total_virtual_pins>0</total_virtual_pins>
-	<total_memory_bits>16,384</total_memory_bits>
-	<embedded_multiplier_9_bit_elements>0</embedded_multiplier_9_bit_elements>
+	<total_memory_bits>20,992</total_memory_bits>
+	<embedded_multiplier_9_bit_elements>12</embedded_multiplier_9_bit_elements>
 	<total_plls>0</total_plls>
 </compilation_summary>
 <lpm_params>
@@ -70,7 +70,118 @@ to www.altera.com/products/software/download/dnl-download_license.html
 			<param name="USE_EAB" value="ON"></param>
 		</inst>
 	</lpm_data>
+	<lpm_data type="lpm_mult" num_inst="6">
+		<inst name="halfband_decim:hb_q2|mult:mult|lpm_mult:Mult0">
+			<param name="LPM_WIDTHA" value="16"></param>
+			<param name="LPM_WIDTHB" value="16"></param>
+			<param name="LPM_WIDTHP" value="32"></param>
+			<param name="LPM_REPRESENTATION" value="SIGNED"></param>
+			<param name="INPUT_A_IS_CONSTANT" value="NO"></param>
+			<param name="INPUT_B_IS_CONSTANT" value="NO"></param>
+			<param name="USE_EAB" value="OFF"></param>
+			<param name="DEDICATED_MULTIPLIER_CIRCUITRY" value="AUTO"></param>
+			<param name="INPUT_A_FIXED_VALUE" value="Bx"></param>
+			<param name="INPUT_B_FIXED_VALUE" value="Bx"></param>
+		</inst>
+		<inst name="halfband_decim:hb_i2|mult:mult|lpm_mult:Mult0">
+			<param name="LPM_WIDTHA" value="16"></param>
+			<param name="LPM_WIDTHB" value="16"></param>
+			<param name="LPM_WIDTHP" value="32"></param>
+			<param name="LPM_REPRESENTATION" value="SIGNED"></param>
+			<param name="INPUT_A_IS_CONSTANT" value="NO"></param>
+			<param name="INPUT_B_IS_CONSTANT" value="NO"></param>
+			<param name="USE_EAB" value="OFF"></param>
+			<param name="DEDICATED_MULTIPLIER_CIRCUITRY" value="AUTO"></param>
+			<param name="INPUT_A_FIXED_VALUE" value="Bx"></param>
+			<param name="INPUT_B_FIXED_VALUE" value="Bx"></param>
+		</inst>
+		<inst name="halfband_decim:hb_q|mult:mult|lpm_mult:Mult0">
+			<param name="LPM_WIDTHA" value="16"></param>
+			<param name="LPM_WIDTHB" value="16"></param>
+			<param name="LPM_WIDTHP" value="32"></param>
+			<param name="LPM_REPRESENTATION" value="SIGNED"></param>
+			<param name="INPUT_A_IS_CONSTANT" value="NO"></param>
+			<param name="INPUT_B_IS_CONSTANT" value="NO"></param>
+			<param name="USE_EAB" value="OFF"></param>
+			<param name="DEDICATED_MULTIPLIER_CIRCUITRY" value="AUTO"></param>
+			<param name="INPUT_A_FIXED_VALUE" value="Bx"></param>
+			<param name="INPUT_B_FIXED_VALUE" value="Bx"></param>
+		</inst>
+		<inst name="halfband_decim:hb_i|mult:mult|lpm_mult:Mult0">
+			<param name="LPM_WIDTHA" value="16"></param>
+			<param name="LPM_WIDTHB" value="16"></param>
+			<param name="LPM_WIDTHP" value="32"></param>
+			<param name="LPM_REPRESENTATION" value="SIGNED"></param>
+			<param name="INPUT_A_IS_CONSTANT" value="NO"></param>
+			<param name="INPUT_B_IS_CONSTANT" value="NO"></param>
+			<param name="USE_EAB" value="OFF"></param>
+			<param name="DEDICATED_MULTIPLIER_CIRCUITRY" value="AUTO"></param>
+			<param name="INPUT_A_FIXED_VALUE" value="Bx"></param>
+			<param name="INPUT_B_FIXED_VALUE" value="Bx"></param>
+		</inst>
+		<inst name="halfband_decim:hb_q3|mult:mult|lpm_mult:Mult0">
+			<param name="LPM_WIDTHA" value="16"></param>
+			<param name="LPM_WIDTHB" value="16"></param>
+			<param name="LPM_WIDTHP" value="32"></param>
+			<param name="LPM_REPRESENTATION" value="SIGNED"></param>
+			<param name="INPUT_A_IS_CONSTANT" value="NO"></param>
+			<param name="INPUT_B_IS_CONSTANT" value="NO"></param>
+			<param name="USE_EAB" value="OFF"></param>
+			<param name="DEDICATED_MULTIPLIER_CIRCUITRY" value="AUTO"></param>
+			<param name="INPUT_A_FIXED_VALUE" value="Bx"></param>
+			<param name="INPUT_B_FIXED_VALUE" value="Bx"></param>
+		</inst>
+		<inst name="halfband_decim:hb_i3|mult:mult|lpm_mult:Mult0">
+			<param name="LPM_WIDTHA" value="16"></param>
+			<param name="LPM_WIDTHB" value="16"></param>
+			<param name="LPM_WIDTHP" value="32"></param>
+			<param name="LPM_REPRESENTATION" value="SIGNED"></param>
+			<param name="INPUT_A_IS_CONSTANT" value="NO"></param>
+			<param name="INPUT_B_IS_CONSTANT" value="NO"></param>
+			<param name="USE_EAB" value="OFF"></param>
+			<param name="DEDICATED_MULTIPLIER_CIRCUITRY" value="AUTO"></param>
+			<param name="INPUT_A_FIXED_VALUE" value="Bx"></param>
+			<param name="INPUT_B_FIXED_VALUE" value="Bx"></param>
+		</inst>
+	</lpm_data>
 </lpm_params>
+<dsp_block_usage_summary>
+	<row>
+		<statistic>Simple Multipliers (9-bit)</statistic>
+		<number_used>0</number_used>
+	</row>
+	<row>
+		<statistic>Simple Multipliers (18-bit)</statistic>
+		<number_used>6</number_used>
+	</row>
+	<row>
+		<statistic>Embedded Multiplier Blocks</statistic>
+	</row>
+	<row>
+		<statistic>Embedded Multiplier 9-bit elements</statistic>
+		<number_used>12</number_used>
+	</row>
+	<row>
+		<statistic>Signed Embedded Multipliers</statistic>
+		<number_used>6</number_used>
+	</row>
+	<row>
+		<statistic>Unsigned Embedded Multipliers</statistic>
+		<number_used>0</number_used>
+	</row>
+	<row>
+		<statistic>Mixed Sign Embedded Multipliers</statistic>
+		<number_used>0</number_used>
+	</row>
+	<row>
+		<statistic>Variable Sign Embedded Multipliers</statistic>
+		<number_used>0</number_used>
+	</row>
+	<row>
+		<statistic>Dedicated Input Shift Register Chains</statistic>
+		<number_used>0</number_used>
+	</row>
+</dsp_block_usage_summary>
 <mep_data>
 	<command_line>quartus_map --read_settings_files=on --write_settings_files=off ozy_eval -c ozy_eval</command_line>
 </mep_data>
@@ -83,11 +194,11 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<warning>Warning: Pin &quot;FIFO_ADR[1]&quot; stuck at VCC</warning>
 	<warning>Warning: Pin &quot;FIFO_ADR[0]&quot; stuck at GND</warning>
 	<warning>Warning: Pin &quot;SLOE&quot; stuck at VCC</warning>
-	<info>Info: Quartus II Analysis &amp; Synthesis was successful. 0 errors, 41 warnings</info>
-	<info>Info: Elapsed time: 00:00:27</info>
-	<info>Info: Processing ended: Fri Sep 29 12:33:50 2006</info>
-	<info>Info: Implemented 2746 device resources after synthesis - the final resource count might be different</info>
-	<info>Info: Implemented 32 RAM segments</info>
+	<info>Info: Quartus II Analysis &amp; Synthesis was successful. 0 errors, 42 warnings</info>
+	<info>Info: Elapsed time: 00:00:46</info>
+	<info>Info: Processing ended: Sun Oct 01 14:17:41 2006</info>
+	<info>Info: Implemented 4112 device resources after synthesis - the final resource count might be different</info>
+	<info>Info: Implemented 12 DSP elements</info>
 </messages>
 <analysis___synthesis_settings>
 	<row>
@@ -353,15 +464,15 @@ to www.altera.com/products/software/download/dnl-download_license.html
 <general_register_statistics>
 	<row>
 		<statistic>Total registers</statistic>
-		<value>2127</value>
+		<value>2802</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Synchronous Clear</statistic>
-		<value>1271</value>
+		<value>1772</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Synchronous Load</statistic>
-		<value>40</value>
+		<value>247</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Asynchronous Clear</statistic>
@@ -373,7 +484,7 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	</row>
 	<row>
 		<statistic>Number of registers using Clock Enable</statistic>
-		<value>884</value>
+		<value>1184</value>
 	</row>
 	<row>
 		<statistic>Number of registers using Preset</statistic>
