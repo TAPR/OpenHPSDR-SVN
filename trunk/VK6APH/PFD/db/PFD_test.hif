@@ -239,28 +239,6 @@ clock
 }
 # end
 # entity
-PFD_test
-# storage
-db|PFD_test.(0).cnf
-db|PFD_test.(0).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-PFD_test.v
-9afb9c0d2d0eee7f99c2a8fe7d7aa1c
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-}
-# hierarchies {
-|
-}
-# end
-# entity
 pfd
 # storage
 db|PFD_test.(1).cnf
@@ -279,7 +257,29 @@ AUTO_RESOURCE_SHARING
 OFF
 }
 # hierarchies {
-pfd:comb_60
+pfd:Janus_pfd
+}
+# end
+# entity
+PFD_test
+# storage
+db|PFD_test.(0).cnf
+db|PFD_test.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+PFD_test.v
+f9d9f5b0d03b42784984caacf572cb8f
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+|
 }
 # end
 # complete

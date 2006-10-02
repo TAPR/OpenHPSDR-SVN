@@ -1,4 +1,5 @@
 |PFD_test
+MHz => ref_out.DATAIN
 ref_in => ref_count[14].CLK
 ref_in => ref_count[13].CLK
 ref_in => ref_count[12].CLK
@@ -14,10 +15,10 @@ ref_in => ref_count[3].CLK
 ref_in => ref_count[2].CLK
 ref_in => ref_count[1].CLK
 ref_in => ref_count[0].CLK
+ref_in => ref_OK.ACLR
 ref_in => ref_1k.CLK
 ref_in => LED[0].DATAIN
-osc_in => osc_count[14].CLK
-osc_in => osc_count[13].CLK
+ref_out <= MHz.DB_MAX_OUTPUT_PORT_TYPE
 osc_in => osc_count[12].CLK
 osc_in => osc_count[11].CLK
 osc_in => osc_count[10].CLK
@@ -33,18 +34,18 @@ osc_in => osc_count[1].CLK
 osc_in => osc_count[0].CLK
 osc_in => osc_1k.CLK
 osc_in => LED[1].DATAIN
-pfd_out <= pfd:comb_60.pfd_out
+VCXO_out <= VCXO_out~0.DB_MAX_OUTPUT_PORT_TYPE
 LED[0] <= ref_in.DB_MAX_OUTPUT_PORT_TYPE
 LED[1] <= osc_in.DB_MAX_OUTPUT_PORT_TYPE
 LED[2] <= ref_1k~1.DB_MAX_OUTPUT_PORT_TYPE
 LED[3] <= osc_1k~1.DB_MAX_OUTPUT_PORT_TYPE
-LED[4] <= pfd:comb_60.pfd_out
+LED[4] <= pfd:Janus_pfd.pfd_out
 LED[5] <= <VCC>
-LED[6] <= <VCC>
-LED[7] <= pfd:comb_60.lock
+LED[6] <= ref_OK.DB_MAX_OUTPUT_PORT_TYPE
+LED[7] <= LED~0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|PFD_test|pfd:comb_60
+|PFD_test|pfd:Janus_pfd
 ref_in => SYNTHESIZED_WIRE_12.CLK
 ref_in => DFF_inst3.CLK
 osc_in => SYNTHESIZED_WIRE_13.CLK

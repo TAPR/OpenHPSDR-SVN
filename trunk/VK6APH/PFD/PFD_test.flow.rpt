@@ -1,5 +1,5 @@
 Flow report for PFD_test
-Mon Sep 25 20:35:31 2006
+Mon Oct 02 20:35:45 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Mon Sep 25 20:35:30 2006        ;
+; Flow Status                        ; Successful - Mon Oct 02 20:35:45 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; PFD_test                                     ;
 ; Top-level Entity Name              ; PFD_test                                     ;
@@ -46,8 +46,8 @@ applicable agreement for further details.
 ; Timing Models                      ; Final                                        ;
 ; Met timing requirements            ; Yes                                          ;
 ; Total logic elements               ; 58 / 4,608 ( 1 % )                           ;
-; Total registers                    ; 36                                           ;
-; Total pins                         ; 11 / 142 ( 8 % )                             ;
+; Total registers                    ; 35                                           ;
+; Total pins                         ; 13 / 142 ( 9 % )                             ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0 / 119,808 ( 0 % )                          ;
 ; Embedded Multiplier 9-bit elements ; 0 / 26 ( 0 % )                               ;
@@ -60,7 +60,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/25/2006 20:35:10 ;
+; Start date & time ; 10/02/2006 20:35:28 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; PFD_test            ;
 +-------------------+---------------------+
@@ -80,11 +80,11 @@ applicable agreement for further details.
 +----------------------+--------------+
 ; Module Name          ; Elapsed Time ;
 +----------------------+--------------+
-; Analysis & Synthesis ; 00:00:02     ;
-; Fitter               ; 00:00:08     ;
+; Analysis & Synthesis ; 00:00:01     ;
+; Fitter               ; 00:00:06     ;
 ; Assembler            ; 00:00:03     ;
-; Timing Analyzer      ; 00:00:00     ;
-; Total                ; 00:00:13     ;
+; Timing Analyzer      ; 00:00:01     ;
+; Total                ; 00:00:11     ;
 +----------------------+--------------+
 
 

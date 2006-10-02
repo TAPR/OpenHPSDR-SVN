@@ -1,0 +1,38 @@
+Quartus II Archive log --	C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.qarlog
+
+Archive:	C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.qar
+Date:		Mon Oct 02 20:38:46 2006
+Quartus II		6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
+
+	=========== Files Selected: ===========
+C:/HPDSDR/trunk/VK6APH/PFD/1 Oct  PFD_test.v
+C:/HPDSDR/trunk/VK6APH/PFD/OZYV1FW08082006-1.hex
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.asm.rpt
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.done
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.fit.rpt
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.fit.summary
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.flow.rpt
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.map.rpt
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.map.summary
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.pin
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.pof
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.qsf
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.qws
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.rbf
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.sim.rpt
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.sof
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.tan.rpt
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.tan.summary
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.v
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.vwf
+C:/HPDSDR/trunk/VK6APH/PFD/db/PFD_test.cbx.xml
+C:/HPDSDR/trunk/VK6APH/PFD/db/PFD_test.qpf
+C:/HPDSDR/trunk/VK6APH/PFD/db/PFD_test.sim.vwf
+C:/HPDSDR/trunk/VK6APH/PFD/db/cntr_bmh.tdf
+C:/HPDSDR/trunk/VK6APH/PFD/pfd.bdf
+C:/HPDSDR/trunk/VK6APH/PFD/pfd.v
+c:/altera/quartus60/win/assignment_defaults.qdf
+	======= Total: 27 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
