@@ -42,10 +42,12 @@ set_location_assignment PIN_72 -to LED[4]
 set_location_assignment PIN_74 -to LED[5]
 set_location_assignment PIN_75 -to LED[6]
 set_location_assignment PIN_76 -to LED[7]
-set_location_assignment PIN_24 -to ref_in
+set_location_assignment PIN_143 -to ref_in
 set_location_assignment PIN_146 -to osc_in
-set_location_assignment PIN_145 -to pfd_out
 set_global_assignment -name VERILOG_FILE pfd.v
 set_global_assignment -name VERILOG_FILE PFD_test.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE PFD_test.vwf
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_location_assignment PIN_145 -to VCXO_out
+set_location_assignment PIN_24 -to MHz
+set_location_assignment PIN_144 -to ref_out
