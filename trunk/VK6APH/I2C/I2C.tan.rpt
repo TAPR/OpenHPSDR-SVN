@@ -1,0 +1,490 @@
+Timing Analyzer report for I2C
+Tue Oct 03 20:34:26 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Clock Setup: 'CLK'
+  6. Clock Hold: 'CLK'
+  7. tsu
+  8. tco
+  9. th
+ 10. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                                                                                           ;
++------------------------------+------------------------------------------+---------------+----------------------------------+-------------------------------+-------------------------------+------------+----------+--------------+
+; Type                         ; Slack                                    ; Required Time ; Actual Time                      ; From                          ; To                            ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+------------------------------------------+---------------+----------------------------------+-------------------------------+-------------------------------+------------+----------+--------------+
+; Worst-case tsu               ; N/A                                      ; None          ; 5.735 ns                         ; sda                           ; deglitch:deglitch_sda|out     ; --         ; CLK      ; 0            ;
+; Worst-case tco               ; N/A                                      ; None          ; 14.455 ns                        ; i2c_slave:comb_28|i2c_sm[1]   ; sda                           ; CLK        ; --       ; 0            ;
+; Worst-case th                ; N/A                                      ; None          ; -4.010 ns                        ; scl                           ; deglitch:deglitch_scl|in_n1   ; --         ; CLK      ; 0            ;
+; Clock Setup: 'CLK'           ; N/A                                      ; None          ; 110.50 MHz ( period = 9.050 ns ) ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; 0            ;
+; Clock Hold: 'CLK'            ; Not operational: Clock Skew > Data Delay ; None          ; N/A                              ; deglitch:deglitch_scl|out     ; i2c_slave:comb_28|start       ; CLK        ; CLK      ; 3            ;
+; Total number of failed paths ;                                          ;               ;                                  ;                               ;                               ;            ;          ; 3            ;
++------------------------------+------------------------------------------+---------------+----------------------------------+-------------------------------+-------------------------------+------------+----------+--------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                ; Setting            ; From ; To ; Entity Name ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                           ; EP2C5Q208C8        ;      ;    ;             ;
+; Timing Models                                         ; Final              ;      ;    ;             ;
+; Number of source nodes to report per destination node ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                 ; 10                 ;      ;    ;             ;
+; Number of paths to report                             ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                          ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                            ; Off                ;      ;    ;             ;
+; Default hold multicycle                               ; Same As Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains             ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                        ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                      ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                 ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements               ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                      ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                  ; Off                ;      ;    ;             ;
+; Use TimeQuest Timing Analyzer                         ; Off                ;      ;    ;             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                             ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type     ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset ; Phase offset ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; CLK             ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'CLK'                                                                                                                                                                                                                                                        ;
++-----------------------------------------+-----------------------------------------------------+-------------------------------+-------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack                                   ; Actual fmax (period)                                ; From                          ; To                            ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-----------------------------------------+-----------------------------------------------------+-------------------------------+-------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A                                     ; 110.50 MHz ( period = 9.050 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|int_reg0[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.275 ns                ;
+; N/A                                     ; 110.50 MHz ( period = 9.050 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|int_reg0[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.275 ns                ;
+; N/A                                     ; 110.50 MHz ( period = 9.050 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|int_reg0[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.275 ns                ;
+; N/A                                     ; 110.50 MHz ( period = 9.050 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|int_reg0[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.275 ns                ;
+; N/A                                     ; 110.50 MHz ( period = 9.050 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|int_reg0[4] ; CLK        ; CLK      ; None                        ; None                      ; 4.275 ns                ;
+; N/A                                     ; 110.50 MHz ( period = 9.050 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|int_reg0[5] ; CLK        ; CLK      ; None                        ; None                      ; 4.275 ns                ;
+; N/A                                     ; 110.50 MHz ( period = 9.050 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 4.275 ns                ;
+; N/A                                     ; 110.50 MHz ( period = 9.050 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; None                        ; None                      ; 4.275 ns                ;
+; N/A                                     ; 111.53 MHz ( period = 8.966 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 4.219 ns                ;
+; N/A                                     ; 115.29 MHz ( period = 8.674 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|int_reg0[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.087 ns                ;
+; N/A                                     ; 115.29 MHz ( period = 8.674 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|int_reg0[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.087 ns                ;
+; N/A                                     ; 115.29 MHz ( period = 8.674 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|int_reg0[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.087 ns                ;
+; N/A                                     ; 115.29 MHz ( period = 8.674 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|int_reg0[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.087 ns                ;
+; N/A                                     ; 115.29 MHz ( period = 8.674 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|int_reg0[4] ; CLK        ; CLK      ; None                        ; None                      ; 4.087 ns                ;
+; N/A                                     ; 115.29 MHz ( period = 8.674 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|int_reg0[5] ; CLK        ; CLK      ; None                        ; None                      ; 4.087 ns                ;
+; N/A                                     ; 115.29 MHz ( period = 8.674 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 4.087 ns                ;
+; N/A                                     ; 115.29 MHz ( period = 8.674 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; None                        ; None                      ; 4.087 ns                ;
+; N/A                                     ; 116.39 MHz ( period = 8.592 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|int_reg0[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.046 ns                ;
+; N/A                                     ; 116.39 MHz ( period = 8.592 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|int_reg0[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.046 ns                ;
+; N/A                                     ; 116.39 MHz ( period = 8.592 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|int_reg0[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.046 ns                ;
+; N/A                                     ; 116.39 MHz ( period = 8.592 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|int_reg0[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.046 ns                ;
+; N/A                                     ; 116.39 MHz ( period = 8.592 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|int_reg0[4] ; CLK        ; CLK      ; None                        ; None                      ; 4.046 ns                ;
+; N/A                                     ; 116.39 MHz ( period = 8.592 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|int_reg0[5] ; CLK        ; CLK      ; None                        ; None                      ; 4.046 ns                ;
+; N/A                                     ; 116.39 MHz ( period = 8.592 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 4.046 ns                ;
+; N/A                                     ; 116.39 MHz ( period = 8.592 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; None                        ; None                      ; 4.046 ns                ;
+; N/A                                     ; 116.41 MHz ( period = 8.590 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 4.031 ns                ;
+; N/A                                     ; 117.54 MHz ( period = 8.508 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 3.990 ns                ;
+; N/A                                     ; 124.84 MHz ( period = 8.010 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|int_reg0[0] ; CLK        ; CLK      ; None                        ; None                      ; 3.755 ns                ;
+; N/A                                     ; 124.84 MHz ( period = 8.010 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|int_reg0[1] ; CLK        ; CLK      ; None                        ; None                      ; 3.755 ns                ;
+; N/A                                     ; 124.84 MHz ( period = 8.010 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|int_reg0[2] ; CLK        ; CLK      ; None                        ; None                      ; 3.755 ns                ;
+; N/A                                     ; 124.84 MHz ( period = 8.010 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|int_reg0[3] ; CLK        ; CLK      ; None                        ; None                      ; 3.755 ns                ;
+; N/A                                     ; 124.84 MHz ( period = 8.010 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|int_reg0[4] ; CLK        ; CLK      ; None                        ; None                      ; 3.755 ns                ;
+; N/A                                     ; 124.84 MHz ( period = 8.010 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|int_reg0[5] ; CLK        ; CLK      ; None                        ; None                      ; 3.755 ns                ;
+; N/A                                     ; 124.84 MHz ( period = 8.010 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 3.755 ns                ;
+; N/A                                     ; 124.84 MHz ( period = 8.010 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; None                        ; None                      ; 3.755 ns                ;
+; N/A                                     ; 126.17 MHz ( period = 7.926 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 3.699 ns                ;
+; N/A                                     ; 130.28 MHz ( period = 7.676 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|cyc_cnt[2]  ; CLK        ; CLK      ; None                        ; None                      ; 3.571 ns                ;
+; N/A                                     ; 130.75 MHz ( period = 7.648 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|i2c_sm[2]   ; CLK        ; CLK      ; None                        ; None                      ; 3.560 ns                ;
+; N/A                                     ; 136.99 MHz ( period = 7.300 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|cyc_cnt[2]  ; CLK        ; CLK      ; None                        ; None                      ; 3.383 ns                ;
+; N/A                                     ; 137.51 MHz ( period = 7.272 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|i2c_sm[2]   ; CLK        ; CLK      ; None                        ; None                      ; 3.372 ns                ;
+; N/A                                     ; 138.54 MHz ( period = 7.218 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|cyc_cnt[2]  ; CLK        ; CLK      ; None                        ; None                      ; 3.342 ns                ;
+; N/A                                     ; 139.08 MHz ( period = 7.190 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|i2c_sm[2]   ; CLK        ; CLK      ; None                        ; None                      ; 3.331 ns                ;
+; N/A                                     ; 144.30 MHz ( period = 6.930 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 3.201 ns                ;
+; N/A                                     ; 144.34 MHz ( period = 6.928 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 3.197 ns                ;
+; N/A                                     ; 144.34 MHz ( period = 6.928 ns )                    ; i2c_slave:comb_28|start       ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 3.596 ns                ;
+; N/A                                     ; 149.84 MHz ( period = 6.674 ns )                    ; i2c_slave:comb_28|start       ; i2c_slave:comb_28|i2c_sm[2]   ; CLK        ; CLK      ; None                        ; None                      ; 3.469 ns                ;
+; N/A                                     ; 150.69 MHz ( period = 6.636 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|cyc_cnt[2]  ; CLK        ; CLK      ; None                        ; None                      ; 3.051 ns                ;
+; N/A                                     ; 151.33 MHz ( period = 6.608 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|i2c_sm[2]   ; CLK        ; CLK      ; None                        ; None                      ; 3.040 ns                ;
+; N/A                                     ; 151.75 MHz ( period = 6.590 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|cyc_cnt[0]  ; CLK        ; CLK      ; None                        ; None                      ; 3.028 ns                ;
+; N/A                                     ; 152.58 MHz ( period = 6.554 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 3.013 ns                ;
+; N/A                                     ; 152.63 MHz ( period = 6.552 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 3.009 ns                ;
+; N/A                                     ; 154.51 MHz ( period = 6.472 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 2.972 ns                ;
+; N/A                                     ; 154.56 MHz ( period = 6.470 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 2.968 ns                ;
+; N/A                                     ; 155.23 MHz ( period = 6.442 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|cyc_cnt[1]  ; CLK        ; CLK      ; None                        ; None                      ; 2.954 ns                ;
+; N/A                                     ; 156.20 MHz ( period = 6.402 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|rcv_cntr[3] ; CLK        ; CLK      ; None                        ; None                      ; 2.937 ns                ;
+; N/A                                     ; 156.20 MHz ( period = 6.402 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|rcv_cntr[1] ; CLK        ; CLK      ; None                        ; None                      ; 2.937 ns                ;
+; N/A                                     ; 156.20 MHz ( period = 6.402 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|rcv_cntr[0] ; CLK        ; CLK      ; None                        ; None                      ; 2.937 ns                ;
+; N/A                                     ; 156.20 MHz ( period = 6.402 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|rcv_cntr[2] ; CLK        ; CLK      ; None                        ; None                      ; 2.937 ns                ;
+; N/A                                     ; 160.93 MHz ( period = 6.214 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|cyc_cnt[0]  ; CLK        ; CLK      ; None                        ; None                      ; 2.840 ns                ;
+; N/A                                     ; 163.08 MHz ( period = 6.132 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|cyc_cnt[0]  ; CLK        ; CLK      ; None                        ; None                      ; 2.799 ns                ;
+; N/A                                     ; 164.15 MHz ( period = 6.092 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|rcv_cntr[3] ; CLK        ; CLK      ; None                        ; None                      ; 2.782 ns                ;
+; N/A                                     ; 164.15 MHz ( period = 6.092 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|rcv_cntr[1] ; CLK        ; CLK      ; None                        ; None                      ; 2.782 ns                ;
+; N/A                                     ; 164.15 MHz ( period = 6.092 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|rcv_cntr[0] ; CLK        ; CLK      ; None                        ; None                      ; 2.782 ns                ;
+; N/A                                     ; 164.15 MHz ( period = 6.092 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|rcv_cntr[2] ; CLK        ; CLK      ; None                        ; None                      ; 2.782 ns                ;
+; N/A                                     ; 164.85 MHz ( period = 6.066 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|cyc_cnt[1]  ; CLK        ; CLK      ; None                        ; None                      ; 2.766 ns                ;
+; N/A                                     ; 167.11 MHz ( period = 5.984 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|cyc_cnt[1]  ; CLK        ; CLK      ; None                        ; None                      ; 2.725 ns                ;
+; N/A                                     ; 167.95 MHz ( period = 5.954 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 5.690 ns                ;
+; N/A                                     ; 168.24 MHz ( period = 5.944 ns )                    ; i2c_slave:comb_28|start       ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 3.104 ns                ;
+; N/A                                     ; 169.78 MHz ( period = 5.890 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 2.681 ns                ;
+; N/A                                     ; 169.84 MHz ( period = 5.888 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 2.677 ns                ;
+; N/A                                     ; 171.97 MHz ( period = 5.815 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 5.551 ns                ;
+; N/A                                     ; 172.47 MHz ( period = 5.798 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 5.534 ns                ;
+; N/A                                     ; 180.18 MHz ( period = 5.550 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|cyc_cnt[0]  ; CLK        ; CLK      ; None                        ; None                      ; 2.508 ns                ;
+; N/A                                     ; 182.32 MHz ( period = 5.485 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 5.218 ns                ;
+; N/A                                     ; 183.15 MHz ( period = 5.460 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 5.196 ns                ;
+; N/A                                     ; 185.12 MHz ( period = 5.402 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|cyc_cnt[1]  ; CLK        ; CLK      ; None                        ; None                      ; 2.434 ns                ;
+; N/A                                     ; 187.06 MHz ( period = 5.346 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 5.079 ns                ;
+; N/A                                     ; 187.65 MHz ( period = 5.329 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 5.062 ns                ;
+; N/A                                     ; 187.93 MHz ( period = 5.321 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 5.057 ns                ;
+; N/A                                     ; 187.97 MHz ( period = 5.320 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|rcv_cntr[3] ; CLK        ; CLK      ; None                        ; None                      ; 2.396 ns                ;
+; N/A                                     ; 188.54 MHz ( period = 5.304 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 5.040 ns                ;
+; N/A                                     ; 193.27 MHz ( period = 5.174 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|debug[3]    ; CLK        ; CLK      ; None                        ; None                      ; 2.320 ns                ;
+; N/A                                     ; 193.80 MHz ( period = 5.160 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|debug[3]    ; CLK        ; CLK      ; None                        ; None                      ; 2.313 ns                ;
+; N/A                                     ; 194.25 MHz ( period = 5.148 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|rcv_cntr[2] ; CLK        ; CLK      ; None                        ; None                      ; 2.310 ns                ;
+; N/A                                     ; 195.69 MHz ( period = 5.110 ns )                    ; i2c_slave:comb_28|cyc_cnt[2]  ; i2c_slave:comb_28|int_reg0[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.863 ns                ;
+; N/A                                     ; 195.69 MHz ( period = 5.110 ns )                    ; i2c_slave:comb_28|cyc_cnt[2]  ; i2c_slave:comb_28|int_reg0[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.863 ns                ;
+; N/A                                     ; 195.69 MHz ( period = 5.110 ns )                    ; i2c_slave:comb_28|cyc_cnt[2]  ; i2c_slave:comb_28|int_reg0[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.863 ns                ;
+; N/A                                     ; 195.69 MHz ( period = 5.110 ns )                    ; i2c_slave:comb_28|cyc_cnt[2]  ; i2c_slave:comb_28|int_reg0[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.863 ns                ;
+; N/A                                     ; 195.69 MHz ( period = 5.110 ns )                    ; i2c_slave:comb_28|cyc_cnt[2]  ; i2c_slave:comb_28|int_reg0[4] ; CLK        ; CLK      ; None                        ; None                      ; 4.863 ns                ;
+; N/A                                     ; 195.69 MHz ( period = 5.110 ns )                    ; i2c_slave:comb_28|cyc_cnt[2]  ; i2c_slave:comb_28|int_reg0[5] ; CLK        ; CLK      ; None                        ; None                      ; 4.863 ns                ;
+; N/A                                     ; 195.69 MHz ( period = 5.110 ns )                    ; i2c_slave:comb_28|cyc_cnt[2]  ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 4.863 ns                ;
+; N/A                                     ; 195.69 MHz ( period = 5.110 ns )                    ; i2c_slave:comb_28|cyc_cnt[2]  ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; None                        ; None                      ; 4.863 ns                ;
+; N/A                                     ; 199.44 MHz ( period = 5.014 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|int_reg0[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.764 ns                ;
+; N/A                                     ; 199.44 MHz ( period = 5.014 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|int_reg0[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.764 ns                ;
+; N/A                                     ; 199.44 MHz ( period = 5.014 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|int_reg0[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.764 ns                ;
+; N/A                                     ; 199.44 MHz ( period = 5.014 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|int_reg0[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.764 ns                ;
+; N/A                                     ; 199.44 MHz ( period = 5.014 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|int_reg0[4] ; CLK        ; CLK      ; None                        ; None                      ; 4.764 ns                ;
+; N/A                                     ; 199.44 MHz ( period = 5.014 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|int_reg0[5] ; CLK        ; CLK      ; None                        ; None                      ; 4.764 ns                ;
+; N/A                                     ; 199.44 MHz ( period = 5.014 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 4.764 ns                ;
+; N/A                                     ; 199.44 MHz ( period = 5.014 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; None                        ; None                      ; 4.764 ns                ;
+; N/A                                     ; 200.92 MHz ( period = 4.977 ns )                    ; i2c_slave:comb_28|target      ; i2c_slave:comb_28|int_reg0[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.730 ns                ;
+; N/A                                     ; 200.92 MHz ( period = 4.977 ns )                    ; i2c_slave:comb_28|target      ; i2c_slave:comb_28|int_reg0[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.730 ns                ;
+; N/A                                     ; 200.92 MHz ( period = 4.977 ns )                    ; i2c_slave:comb_28|target      ; i2c_slave:comb_28|int_reg0[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.730 ns                ;
+; N/A                                     ; 200.92 MHz ( period = 4.977 ns )                    ; i2c_slave:comb_28|target      ; i2c_slave:comb_28|int_reg0[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.730 ns                ;
+; N/A                                     ; 200.92 MHz ( period = 4.977 ns )                    ; i2c_slave:comb_28|target      ; i2c_slave:comb_28|int_reg0[4] ; CLK        ; CLK      ; None                        ; None                      ; 4.730 ns                ;
+; N/A                                     ; 200.92 MHz ( period = 4.977 ns )                    ; i2c_slave:comb_28|target      ; i2c_slave:comb_28|int_reg0[5] ; CLK        ; CLK      ; None                        ; None                      ; 4.730 ns                ;
+; N/A                                     ; 200.92 MHz ( period = 4.977 ns )                    ; i2c_slave:comb_28|target      ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 4.730 ns                ;
+; N/A                                     ; 200.92 MHz ( period = 4.977 ns )                    ; i2c_slave:comb_28|target      ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; None                        ; None                      ; 4.730 ns                ;
+; N/A                                     ; 200.96 MHz ( period = 4.976 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|rcv_cntr[1] ; CLK        ; CLK      ; None                        ; None                      ; 2.224 ns                ;
+; N/A                                     ; 202.88 MHz ( period = 4.929 ns )                    ; i2c_slave:comb_28|cyc_cnt[1]  ; i2c_slave:comb_28|int_reg0[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.682 ns                ;
+; N/A                                     ; 202.88 MHz ( period = 4.929 ns )                    ; i2c_slave:comb_28|cyc_cnt[1]  ; i2c_slave:comb_28|int_reg0[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.682 ns                ;
+; N/A                                     ; 202.88 MHz ( period = 4.929 ns )                    ; i2c_slave:comb_28|cyc_cnt[1]  ; i2c_slave:comb_28|int_reg0[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.682 ns                ;
+; N/A                                     ; 202.88 MHz ( period = 4.929 ns )                    ; i2c_slave:comb_28|cyc_cnt[1]  ; i2c_slave:comb_28|int_reg0[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.682 ns                ;
+; N/A                                     ; 202.88 MHz ( period = 4.929 ns )                    ; i2c_slave:comb_28|cyc_cnt[1]  ; i2c_slave:comb_28|int_reg0[4] ; CLK        ; CLK      ; None                        ; None                      ; 4.682 ns                ;
+; N/A                                     ; 202.88 MHz ( period = 4.929 ns )                    ; i2c_slave:comb_28|cyc_cnt[1]  ; i2c_slave:comb_28|int_reg0[5] ; CLK        ; CLK      ; None                        ; None                      ; 4.682 ns                ;
+; N/A                                     ; 202.88 MHz ( period = 4.929 ns )                    ; i2c_slave:comb_28|cyc_cnt[1]  ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 4.682 ns                ;
+; N/A                                     ; 202.88 MHz ( period = 4.929 ns )                    ; i2c_slave:comb_28|cyc_cnt[1]  ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; None                        ; None                      ; 4.682 ns                ;
+; N/A                                     ; 204.67 MHz ( period = 4.886 ns )                    ; i2c_slave:comb_28|rcv_reg[3]  ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 4.608 ns                ;
+; N/A                                     ; 205.21 MHz ( period = 4.873 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|int_reg0[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.623 ns                ;
+; N/A                                     ; 205.21 MHz ( period = 4.873 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|int_reg0[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.623 ns                ;
+; N/A                                     ; 205.21 MHz ( period = 4.873 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|int_reg0[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.623 ns                ;
+; N/A                                     ; 205.21 MHz ( period = 4.873 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|int_reg0[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.623 ns                ;
+; N/A                                     ; 205.21 MHz ( period = 4.873 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|int_reg0[4] ; CLK        ; CLK      ; None                        ; None                      ; 4.623 ns                ;
+; N/A                                     ; 205.21 MHz ( period = 4.873 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|int_reg0[5] ; CLK        ; CLK      ; None                        ; None                      ; 4.623 ns                ;
+; N/A                                     ; 205.21 MHz ( period = 4.873 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 4.623 ns                ;
+; N/A                                     ; 205.21 MHz ( period = 4.873 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; None                        ; None                      ; 4.623 ns                ;
+; N/A                                     ; 206.48 MHz ( period = 4.843 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|int_reg0[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.593 ns                ;
+; N/A                                     ; 206.48 MHz ( period = 4.843 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|int_reg0[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.593 ns                ;
+; N/A                                     ; 206.48 MHz ( period = 4.843 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|int_reg0[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.593 ns                ;
+; N/A                                     ; 206.48 MHz ( period = 4.843 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|int_reg0[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.593 ns                ;
+; N/A                                     ; 206.48 MHz ( period = 4.843 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|int_reg0[4] ; CLK        ; CLK      ; None                        ; None                      ; 4.593 ns                ;
+; N/A                                     ; 206.48 MHz ( period = 4.843 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|int_reg0[5] ; CLK        ; CLK      ; None                        ; None                      ; 4.593 ns                ;
+; N/A                                     ; 206.48 MHz ( period = 4.843 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 4.593 ns                ;
+; N/A                                     ; 206.48 MHz ( period = 4.843 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; None                        ; None                      ; 4.593 ns                ;
+; N/A                                     ; 206.70 MHz ( period = 4.838 ns )                    ; i2c_slave:comb_28|rcv_reg[7]  ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 4.560 ns                ;
+; N/A                                     ; 206.95 MHz ( period = 4.832 ns )                    ; i2c_slave:comb_28|cyc_cnt[0]  ; i2c_slave:comb_28|int_reg0[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.585 ns                ;
+; N/A                                     ; 206.95 MHz ( period = 4.832 ns )                    ; i2c_slave:comb_28|cyc_cnt[0]  ; i2c_slave:comb_28|int_reg0[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.585 ns                ;
+; N/A                                     ; 206.95 MHz ( period = 4.832 ns )                    ; i2c_slave:comb_28|cyc_cnt[0]  ; i2c_slave:comb_28|int_reg0[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.585 ns                ;
+; N/A                                     ; 206.95 MHz ( period = 4.832 ns )                    ; i2c_slave:comb_28|cyc_cnt[0]  ; i2c_slave:comb_28|int_reg0[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.585 ns                ;
+; N/A                                     ; 206.95 MHz ( period = 4.832 ns )                    ; i2c_slave:comb_28|cyc_cnt[0]  ; i2c_slave:comb_28|int_reg0[4] ; CLK        ; CLK      ; None                        ; None                      ; 4.585 ns                ;
+; N/A                                     ; 206.95 MHz ( period = 4.832 ns )                    ; i2c_slave:comb_28|cyc_cnt[0]  ; i2c_slave:comb_28|int_reg0[5] ; CLK        ; CLK      ; None                        ; None                      ; 4.585 ns                ;
+; N/A                                     ; 206.95 MHz ( period = 4.832 ns )                    ; i2c_slave:comb_28|cyc_cnt[0]  ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 4.585 ns                ;
+; N/A                                     ; 206.95 MHz ( period = 4.832 ns )                    ; i2c_slave:comb_28|cyc_cnt[0]  ; i2c_slave:comb_28|int_reg0[7] ; CLK        ; CLK      ; None                        ; None                      ; 4.585 ns                ;
+; N/A                                     ; 209.03 MHz ( period = 4.784 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_reg[0]  ; CLK        ; CLK      ; None                        ; None                      ; 2.142 ns                ;
+; N/A                                     ; 209.03 MHz ( period = 4.784 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_reg[1]  ; CLK        ; CLK      ; None                        ; None                      ; 2.142 ns                ;
+; N/A                                     ; 209.03 MHz ( period = 4.784 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_reg[6]  ; CLK        ; CLK      ; None                        ; None                      ; 2.142 ns                ;
+; N/A                                     ; 209.03 MHz ( period = 4.784 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_reg[7]  ; CLK        ; CLK      ; None                        ; None                      ; 2.142 ns                ;
+; N/A                                     ; 209.03 MHz ( period = 4.784 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_reg[3]  ; CLK        ; CLK      ; None                        ; None                      ; 2.142 ns                ;
+; N/A                                     ; 209.03 MHz ( period = 4.784 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_reg[5]  ; CLK        ; CLK      ; None                        ; None                      ; 2.142 ns                ;
+; N/A                                     ; 209.03 MHz ( period = 4.784 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_reg[4]  ; CLK        ; CLK      ; None                        ; None                      ; 2.142 ns                ;
+; N/A                                     ; 209.03 MHz ( period = 4.784 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_reg[2]  ; CLK        ; CLK      ; None                        ; None                      ; 2.142 ns                ;
+; N/A                                     ; 210.26 MHz ( period = 4.756 ns )                    ; i2c_slave:comb_28|rcv_reg[5]  ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 4.478 ns                ;
+; N/A                                     ; 210.30 MHz ( period = 4.755 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|rcv_cntr[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.491 ns                ;
+; N/A                                     ; 210.30 MHz ( period = 4.755 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|rcv_cntr[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.491 ns                ;
+; N/A                                     ; 210.30 MHz ( period = 4.755 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|rcv_cntr[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.491 ns                ;
+; N/A                                     ; 210.30 MHz ( period = 4.755 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|rcv_cntr[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.491 ns                ;
+; N/A                                     ; 211.77 MHz ( period = 4.722 ns )                    ; i2c_slave:comb_28|rcv_reg[2]  ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 4.444 ns                ;
+; N/A                                     ; 218.25 MHz ( period = 4.582 ns )                    ; i2c_slave:comb_28|rcv_reg[6]  ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 4.304 ns                ;
+; N/A                                     ; 218.96 MHz ( period = 4.567 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|rcv_cntr[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.303 ns                ;
+; N/A                                     ; 218.96 MHz ( period = 4.567 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|rcv_cntr[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.303 ns                ;
+; N/A                                     ; 218.96 MHz ( period = 4.567 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|rcv_cntr[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.303 ns                ;
+; N/A                                     ; 218.96 MHz ( period = 4.567 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|rcv_cntr[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.303 ns                ;
+; N/A                                     ; 220.75 MHz ( period = 4.530 ns )                    ; i2c_slave:comb_28|target      ; i2c_slave:comb_28|debug[3]    ; CLK        ; CLK      ; None                        ; None                      ; 2.001 ns                ;
+; N/A                                     ; 220.95 MHz ( period = 4.526 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|rcv_cntr[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.262 ns                ;
+; N/A                                     ; 220.95 MHz ( period = 4.526 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|rcv_cntr[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.262 ns                ;
+; N/A                                     ; 220.95 MHz ( period = 4.526 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|rcv_cntr[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.262 ns                ;
+; N/A                                     ; 220.95 MHz ( period = 4.526 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|rcv_cntr[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.262 ns                ;
+; N/A                                     ; 226.40 MHz ( period = 4.417 ns )                    ; i2c_slave:comb_28|rcv_reg[3]  ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 4.136 ns                ;
+; N/A                                     ; 227.69 MHz ( period = 4.392 ns )                    ; i2c_slave:comb_28|rcv_reg[3]  ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 4.114 ns                ;
+; N/A                                     ; 228.89 MHz ( period = 4.369 ns )                    ; i2c_slave:comb_28|rcv_reg[7]  ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 4.088 ns                ;
+; N/A                                     ; 230.20 MHz ( period = 4.344 ns )                    ; i2c_slave:comb_28|rcv_reg[7]  ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 4.066 ns                ;
+; N/A                                     ; 230.52 MHz ( period = 4.338 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|debug[3]    ; CLK        ; CLK      ; None                        ; None                      ; 1.902 ns                ;
+; N/A                                     ; 233.26 MHz ( period = 4.287 ns )                    ; i2c_slave:comb_28|rcv_reg[5]  ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 4.006 ns                ;
+; N/A                                     ; 234.63 MHz ( period = 4.262 ns )                    ; i2c_slave:comb_28|rcv_reg[5]  ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 3.984 ns                ;
+; N/A                                     ; 235.13 MHz ( period = 4.253 ns )                    ; i2c_slave:comb_28|rcv_reg[2]  ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 3.972 ns                ;
+; N/A                                     ; 236.13 MHz ( period = 4.235 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_cntr[3] ; CLK        ; CLK      ; None                        ; None                      ; 3.971 ns                ;
+; N/A                                     ; 236.13 MHz ( period = 4.235 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_cntr[1] ; CLK        ; CLK      ; None                        ; None                      ; 3.971 ns                ;
+; N/A                                     ; 236.13 MHz ( period = 4.235 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_cntr[0] ; CLK        ; CLK      ; None                        ; None                      ; 3.971 ns                ;
+; N/A                                     ; 236.13 MHz ( period = 4.235 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|rcv_cntr[2] ; CLK        ; CLK      ; None                        ; None                      ; 3.971 ns                ;
+; N/A                                     ; 236.52 MHz ( period = 4.228 ns )                    ; i2c_slave:comb_28|rcv_reg[2]  ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 3.950 ns                ;
+; N/A                                     ; 238.15 MHz ( period = 4.199 ns )                    ; i2c_slave:comb_28|rcv_reg[4]  ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 3.921 ns                ;
+; N/A                                     ; 238.27 MHz ( period = 4.197 ns )                    ; i2c_slave:comb_28|i2c_sm[1]   ; i2c_slave:comb_28|i2c_sm[2]   ; CLK        ; CLK      ; None                        ; None                      ; 3.933 ns                ;
+; N/A                                     ; 243.13 MHz ( period = 4.113 ns )                    ; i2c_slave:comb_28|rcv_reg[6]  ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 3.832 ns                ;
+; N/A                                     ; 244.62 MHz ( period = 4.088 ns )                    ; i2c_slave:comb_28|rcv_reg[6]  ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 3.810 ns                ;
+; N/A                                     ; 245.64 MHz ( period = 4.071 ns )                    ; i2c_slave:comb_28|start       ; i2c_slave:comb_28|rcv_cntr[3] ; CLK        ; CLK      ; None                        ; None                      ; 4.203 ns                ;
+; N/A                                     ; 245.64 MHz ( period = 4.071 ns )                    ; i2c_slave:comb_28|start       ; i2c_slave:comb_28|rcv_cntr[1] ; CLK        ; CLK      ; None                        ; None                      ; 4.203 ns                ;
+; N/A                                     ; 245.64 MHz ( period = 4.071 ns )                    ; i2c_slave:comb_28|start       ; i2c_slave:comb_28|rcv_cntr[0] ; CLK        ; CLK      ; None                        ; None                      ; 4.203 ns                ;
+; N/A                                     ; 245.64 MHz ( period = 4.071 ns )                    ; i2c_slave:comb_28|start       ; i2c_slave:comb_28|rcv_cntr[2] ; CLK        ; CLK      ; None                        ; None                      ; 4.203 ns                ;
+; N/A                                     ; 248.39 MHz ( period = 4.026 ns )                    ; i2c_slave:comb_28|i2c_sm[2]   ; i2c_slave:comb_28|i2c_sm[2]   ; CLK        ; CLK      ; None                        ; None                      ; 3.762 ns                ;
+; N/A                                     ; 253.16 MHz ( period = 3.950 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|rcv_cntr[0] ; CLK        ; CLK      ; None                        ; None                      ; 1.711 ns                ;
+; N/A                                     ; 257.14 MHz ( period = 3.889 ns )                    ; i2c_slave:comb_28|rcv_cntr[2] ; i2c_slave:comb_28|debug[3]    ; CLK        ; CLK      ; None                        ; None                      ; 3.622 ns                ;
+; N/A                                     ; 257.80 MHz ( period = 3.879 ns )                    ; i2c_slave:comb_28|rcv_cntr[0] ; i2c_slave:comb_28|debug[3]    ; CLK        ; CLK      ; None                        ; None                      ; 3.612 ns                ;
+; N/A                                     ; 264.83 MHz ( period = 3.776 ns )                    ; i2c_slave:comb_28|target      ; i2c_slave:comb_28|cyc_cnt[2]  ; CLK        ; CLK      ; None                        ; None                      ; 3.512 ns                ;
+; N/A                                     ; 268.10 MHz ( period = 3.730 ns )                    ; i2c_slave:comb_28|rcv_reg[4]  ; i2c_slave:comb_28|target      ; CLK        ; CLK      ; None                        ; None                      ; 3.449 ns                ;
+; N/A                                     ; 269.11 MHz ( period = 3.716 ns )                    ; i2c_slave:comb_28|rcv_cntr[1] ; i2c_slave:comb_28|debug[3]    ; CLK        ; CLK      ; None                        ; None                      ; 3.449 ns                ;
+; N/A                                     ; 269.91 MHz ( period = 3.705 ns )                    ; i2c_slave:comb_28|rcv_reg[4]  ; i2c_slave:comb_28|i2c_sm[1]   ; CLK        ; CLK      ; None                        ; None                      ; 3.427 ns                ;
+; N/A                                     ; 275.03 MHz ( period = 3.636 ns )                    ; i2c_slave:comb_28|rcv_cntr[3] ; i2c_slave:comb_28|debug[3]    ; CLK        ; CLK      ; None                        ; None                      ; 3.369 ns                ;
+; N/A                                     ; 283.05 MHz ( period = 3.533 ns )                    ; i2c_slave:comb_28|i2c_sm[0]   ; i2c_slave:comb_28|i2c_sm[2]   ; CLK        ; CLK      ; None                        ; None                      ; 3.269 ns                ;
+; N/A                                     ; 308.83 MHz ( period = 3.238 ns )                    ; i2c_slave:comb_28|rcv_reg[1]  ; i2c_slave:comb_28|i2c_sm[0]   ; CLK        ; CLK      ; None                        ; None                      ; 2.960 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; deglitch:deglitch_sda|out     ; i2c_slave:comb_28|int_reg0[6] ; CLK        ; CLK      ; None                        ; None                      ; 5.552 ns                ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;                               ;                               ;            ;          ;                             ;                           ;                         ;
++-----------------------------------------+-----------------------------------------------------+-------------------------------+-------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Hold: 'CLK'                                                                                                                                                                                                    ;
++------------------------------------------+------------------------------+-------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; Minimum Slack                            ; From                         ; To                            ; From Clock ; To Clock ; Required Hold Relationship ; Required Shortest P2P Time ; Actual Shortest P2P Time ;
++------------------------------------------+------------------------------+-------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; Not operational: Clock Skew > Data Delay ; deglitch:deglitch_scl|out    ; i2c_slave:comb_28|start       ; CLK        ; CLK      ; None                       ; None                       ; 1.257 ns                 ;
+; Not operational: Clock Skew > Data Delay ; deglitch:deglitch_scl|out    ; i2c_slave:comb_28|stop        ; CLK        ; CLK      ; None                       ; None                       ; 1.966 ns                 ;
+; Not operational: Clock Skew > Data Delay ; i2c_slave:comb_28|cyc_cnt[0] ; i2c_slave:comb_28|main_out[0] ; CLK        ; CLK      ; None                       ; None                       ; 1.093 ns                 ;
++------------------------------------------+------------------------------+-------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+
+
++-----------------------------------------------------------------------------------+
+; tsu                                                                               ;
++-------+--------------+------------+------+-----------------------------+----------+
+; Slack ; Required tsu ; Actual tsu ; From ; To                          ; To Clock ;
++-------+--------------+------------+------+-----------------------------+----------+
+; N/A   ; None         ; 5.735 ns   ; sda  ; deglitch:deglitch_sda|out   ; CLK      ;
+; N/A   ; None         ; 5.466 ns   ; sda  ; deglitch:deglitch_sda|in_n1 ; CLK      ;
+; N/A   ; None         ; 5.425 ns   ; scl  ; deglitch:deglitch_scl|out   ; CLK      ;
+; N/A   ; None         ; 4.276 ns   ; scl  ; deglitch:deglitch_scl|in_n1 ; CLK      ;
++-------+--------------+------------+------+-----------------------------+----------+
+
+
++-------------------------------------------------------------------------------------------+
+; tco                                                                                       ;
++-------+--------------+------------+-------------------------------+----------+------------+
+; Slack ; Required tco ; Actual tco ; From                          ; To       ; From Clock ;
++-------+--------------+------------+-------------------------------+----------+------------+
+; N/A   ; None         ; 14.455 ns  ; i2c_slave:comb_28|i2c_sm[1]   ; sda      ; CLK        ;
+; N/A   ; None         ; 13.856 ns  ; i2c_slave:comb_28|i2c_sm[2]   ; sda      ; CLK        ;
+; N/A   ; None         ; 13.800 ns  ; i2c_slave:comb_28|rcv_cntr[2] ; sda      ; CLK        ;
+; N/A   ; None         ; 13.757 ns  ; i2c_slave:comb_28|rcv_cntr[0] ; sda      ; CLK        ;
+; N/A   ; None         ; 13.689 ns  ; i2c_slave:comb_28|main_out[0] ; sda      ; CLK        ;
+; N/A   ; None         ; 13.664 ns  ; i2c_slave:comb_28|i2c_sm[0]   ; sda      ; CLK        ;
+; N/A   ; None         ; 13.364 ns  ; i2c_slave:comb_28|rcv_cntr[1] ; sda      ; CLK        ;
+; N/A   ; None         ; 12.910 ns  ; i2c_slave:comb_28|target      ; sda      ; CLK        ;
+; N/A   ; None         ; 12.418 ns  ; i2c_slave:comb_28|rcv_cntr[0] ; debug[4] ; CLK        ;
+; N/A   ; None         ; 12.245 ns  ; i2c_slave:comb_28|debug[3]    ; sda      ; CLK        ;
+; N/A   ; None         ; 12.202 ns  ; i2c_slave:comb_28|rcv_cntr[2] ; debug[6] ; CLK        ;
+; N/A   ; None         ; 11.962 ns  ; i2c_slave:comb_28|rcv_cntr[3] ; debug[7] ; CLK        ;
+; N/A   ; None         ; 11.871 ns  ; i2c_slave:comb_28|i2c_sm[0]   ; debug[0] ; CLK        ;
+; N/A   ; None         ; 11.779 ns  ; i2c_slave:comb_28|rcv_cntr[1] ; debug[5] ; CLK        ;
+; N/A   ; None         ; 11.770 ns  ; i2c_slave:comb_28|i2c_sm[1]   ; debug[1] ; CLK        ;
+; N/A   ; None         ; 11.502 ns  ; i2c_slave:comb_28|start       ; debug[8] ; CLK        ;
+; N/A   ; None         ; 11.239 ns  ; i2c_slave:comb_28|debug[3]    ; debug[3] ; CLK        ;
+; N/A   ; None         ; 11.106 ns  ; i2c_slave:comb_28|i2c_sm[2]   ; debug[2] ; CLK        ;
+; N/A   ; None         ; 11.034 ns  ; i2c_slave:comb_28|int_reg0[0] ; LED[0]   ; CLK        ;
+; N/A   ; None         ; 10.697 ns  ; i2c_slave:comb_28|int_reg0[7] ; LED[7]   ; CLK        ;
+; N/A   ; None         ; 10.690 ns  ; i2c_slave:comb_28|int_reg0[1] ; LED[1]   ; CLK        ;
+; N/A   ; None         ; 10.683 ns  ; i2c_slave:comb_28|int_reg0[2] ; LED[2]   ; CLK        ;
+; N/A   ; None         ; 10.666 ns  ; i2c_slave:comb_28|int_reg0[3] ; LED[3]   ; CLK        ;
+; N/A   ; None         ; 10.648 ns  ; i2c_slave:comb_28|int_reg0[4] ; LED[4]   ; CLK        ;
+; N/A   ; None         ; 10.372 ns  ; i2c_slave:comb_28|stop        ; debug[9] ; CLK        ;
+; N/A   ; None         ; 10.286 ns  ; i2c_slave:comb_28|int_reg0[6] ; LED[6]   ; CLK        ;
+; N/A   ; None         ; 10.273 ns  ; i2c_slave:comb_28|int_reg0[5] ; LED[5]   ; CLK        ;
++-------+--------------+------------+-------------------------------+----------+------------+
+
+
++-----------------------------------------------------------------------------------------+
+; th                                                                                      ;
++---------------+-------------+-----------+------+-----------------------------+----------+
+; Minimum Slack ; Required th ; Actual th ; From ; To                          ; To Clock ;
++---------------+-------------+-----------+------+-----------------------------+----------+
+; N/A           ; None        ; -4.010 ns ; scl  ; deglitch:deglitch_scl|in_n1 ; CLK      ;
+; N/A           ; None        ; -5.159 ns ; scl  ; deglitch:deglitch_scl|out   ; CLK      ;
+; N/A           ; None        ; -5.200 ns ; sda  ; deglitch:deglitch_sda|in_n1 ; CLK      ;
+; N/A           ; None        ; -5.469 ns ; sda  ; deglitch:deglitch_sda|out   ; CLK      ;
++---------------+-------------+-----------+------+-----------------------------+----------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Timing Analyzer
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Tue Oct 03 20:34:25 2006
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off I2C -c I2C --timing_analysis_only
+Warning: Timing Analysis is analyzing one or more combinational loops as latches
+    Warning: Node "i2c_slave:comb_28|main_out[0]" is a latch
+Warning: Found pins functioning as undefined clocks and/or memory enables
+    Info: Assuming node "CLK" is an undefined clock
+Warning: Found 5 node(s) in clock paths which may be acting as ripple and/or gated clocks -- node(s) analyzed as buffer(s) resulting in clock skew
+    Info: Detected ripple clock "i2c_slave:comb_28|cyc_cnt[1]" as buffer
+    Info: Detected ripple clock "i2c_slave:comb_28|cyc_cnt[2]" as buffer
+    Info: Detected gated clock "i2c_slave:comb_28|Decoder1~25" as buffer
+    Info: Detected ripple clock "deglitch:deglitch_sda|out" as buffer
+    Info: Detected ripple clock "deglitch:deglitch_scl|out" as buffer
+Info: Clock "CLK" has Internal fmax of 110.5 MHz between source register "i2c_slave:comb_28|rcv_cntr[2]" and destination register "i2c_slave:comb_28|int_reg0[0]" (period= 9.05 ns)
+    Info: + Longest register to register delay is 4.275 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X14_Y2_N27; Fanout = 7; REG Node = 'i2c_slave:comb_28|rcv_cntr[2]'
+        Info: 2: + IC(0.796 ns) + CELL(0.370 ns) = 1.166 ns; Loc. = LCCOMB_X14_Y2_N12; Fanout = 8; COMB Node = 'i2c_slave:comb_28|Equal1~38'
+        Info: 3: + IC(0.400 ns) + CELL(0.206 ns) = 1.772 ns; Loc. = LCCOMB_X14_Y2_N2; Fanout = 3; COMB Node = 'i2c_slave:comb_28|ack~18'
+        Info: 4: + IC(0.385 ns) + CELL(0.206 ns) = 2.363 ns; Loc. = LCCOMB_X14_Y2_N16; Fanout = 8; COMB Node = 'i2c_slave:comb_28|int_reg0[0]~313'
+        Info: 5: + IC(1.057 ns) + CELL(0.855 ns) = 4.275 ns; Loc. = LCFF_X13_Y1_N9; Fanout = 1; REG Node = 'i2c_slave:comb_28|int_reg0[0]'
+        Info: Total cell delay = 1.637 ns ( 38.29 % )
+        Info: Total interconnect delay = 2.638 ns ( 61.71 % )
+    Info: - Smallest clock skew is 0.014 ns
+        Info: + Shortest clock path from clock "CLK" to destination register is 5.771 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'CLK'
+            Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 15; COMB Node = 'CLK~clkctrl'
+            Info: 3: + IC(0.827 ns) + CELL(0.970 ns) = 3.067 ns; Loc. = LCFF_X27_Y6_N21; Fanout = 4; REG Node = 'deglitch:deglitch_scl|out'
+            Info: 4: + IC(1.186 ns) + CELL(0.000 ns) = 4.253 ns; Loc. = CLKCTRL_G4; Fanout = 28; COMB Node = 'deglitch:deglitch_scl|out~clkctrl'
+            Info: 5: + IC(0.852 ns) + CELL(0.666 ns) = 5.771 ns; Loc. = LCFF_X13_Y1_N9; Fanout = 1; REG Node = 'i2c_slave:comb_28|int_reg0[0]'
+            Info: Total cell delay = 2.766 ns ( 47.93 % )
+            Info: Total interconnect delay = 3.005 ns ( 52.07 % )
+        Info: - Longest clock path from clock "CLK" to source register is 5.757 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'CLK'
+            Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 15; COMB Node = 'CLK~clkctrl'
+            Info: 3: + IC(0.827 ns) + CELL(0.970 ns) = 3.067 ns; Loc. = LCFF_X27_Y6_N21; Fanout = 4; REG Node = 'deglitch:deglitch_scl|out'
+            Info: 4: + IC(1.186 ns) + CELL(0.000 ns) = 4.253 ns; Loc. = CLKCTRL_G4; Fanout = 28; COMB Node = 'deglitch:deglitch_scl|out~clkctrl'
+            Info: 5: + IC(0.838 ns) + CELL(0.666 ns) = 5.757 ns; Loc. = LCFF_X14_Y2_N27; Fanout = 7; REG Node = 'i2c_slave:comb_28|rcv_cntr[2]'
+            Info: Total cell delay = 2.766 ns ( 48.05 % )
+            Info: Total interconnect delay = 2.991 ns ( 51.95 % )
+    Info: + Micro clock to output delay of source is 0.304 ns
+    Info: + Micro setup delay of destination is -0.040 ns
+    Info: Delay path is controlled by inverted clocks -- if clock duty cycle is 50, fmax is divided by two
+Warning: Circuit may not operate. Detected 3 non-operational path(s) clocked by clock "CLK" with clock skew larger than data delay. See Compilation Report for details.
+Info: Found hold time violation between source  pin or register "deglitch:deglitch_scl|out" and destination pin or register "i2c_slave:comb_28|start" for clock "CLK" (Hold time is 1.343 ns)
+    Info: + Largest clock skew is 2.598 ns
+        Info: + Longest clock path from clock "CLK" to destination register is 5.361 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'CLK'
+            Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 15; COMB Node = 'CLK~clkctrl'
+            Info: 3: + IC(0.812 ns) + CELL(0.970 ns) = 3.052 ns; Loc. = LCFF_X1_Y6_N17; Fanout = 8; REG Node = 'deglitch:deglitch_sda|out'
+            Info: 4: + IC(0.816 ns) + CELL(0.000 ns) = 3.868 ns; Loc. = CLKCTRL_G0; Fanout = 2; COMB Node = 'deglitch:deglitch_sda|out~clkctrl'
+            Info: 5: + IC(0.827 ns) + CELL(0.666 ns) = 5.361 ns; Loc. = LCFF_X27_Y6_N13; Fanout = 7; REG Node = 'i2c_slave:comb_28|start'
+            Info: Total cell delay = 2.766 ns ( 51.59 % )
+            Info: Total interconnect delay = 2.595 ns ( 48.41 % )
+        Info: - Shortest clock path from clock "CLK" to source register is 2.763 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'CLK'
+            Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 15; COMB Node = 'CLK~clkctrl'
+            Info: 3: + IC(0.827 ns) + CELL(0.666 ns) = 2.763 ns; Loc. = LCFF_X27_Y6_N21; Fanout = 4; REG Node = 'deglitch:deglitch_scl|out'
+            Info: Total cell delay = 1.796 ns ( 65.00 % )
+            Info: Total interconnect delay = 0.967 ns ( 35.00 % )
+    Info: - Micro clock to output delay of source is 0.304 ns
+    Info: - Shortest register to register delay is 1.257 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X27_Y6_N21; Fanout = 4; REG Node = 'deglitch:deglitch_scl|out'
+        Info: 2: + IC(0.402 ns) + CELL(0.855 ns) = 1.257 ns; Loc. = LCFF_X27_Y6_N13; Fanout = 7; REG Node = 'i2c_slave:comb_28|start'
+        Info: Total cell delay = 0.855 ns ( 68.02 % )
+        Info: Total interconnect delay = 0.402 ns ( 31.98 % )
+    Info: + Micro hold delay of destination is 0.306 ns
+    Info: Delay path is controlled by inverted clocks -- if clock duty cycle is 50, fmax is divided by two
+Info: tsu for register "deglitch:deglitch_sda|out" (data pin = "sda", clock pin = "CLK") is 5.735 ns
+    Info: + Longest pin to register delay is 8.523 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = PIN_116; Fanout = 1; PIN Node = 'sda'
+        Info: 2: + IC(0.000 ns) + CELL(0.995 ns) = 0.995 ns; Loc. = IOC_X28_Y4_N0; Fanout = 2; COMB Node = 'sda~2'
+        Info: 3: + IC(6.796 ns) + CELL(0.624 ns) = 8.415 ns; Loc. = LCCOMB_X1_Y6_N16; Fanout = 1; COMB Node = 'deglitch:deglitch_sda|out~89'
+        Info: 4: + IC(0.000 ns) + CELL(0.108 ns) = 8.523 ns; Loc. = LCFF_X1_Y6_N17; Fanout = 8; REG Node = 'deglitch:deglitch_sda|out'
+        Info: Total cell delay = 1.727 ns ( 20.26 % )
+        Info: Total interconnect delay = 6.796 ns ( 79.74 % )
+    Info: + Micro setup delay of destination is -0.040 ns
+    Info: - Shortest clock path from clock "CLK" to destination register is 2.748 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'CLK'
+        Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 15; COMB Node = 'CLK~clkctrl'
+        Info: 3: + IC(0.812 ns) + CELL(0.666 ns) = 2.748 ns; Loc. = LCFF_X1_Y6_N17; Fanout = 8; REG Node = 'deglitch:deglitch_sda|out'
+        Info: Total cell delay = 1.796 ns ( 65.36 % )
+        Info: Total interconnect delay = 0.952 ns ( 34.64 % )
+Info: tco from clock "CLK" to destination pin "sda" through register "i2c_slave:comb_28|i2c_sm[1]" is 14.455 ns
+    Info: + Longest clock path from clock "CLK" to source register is 5.757 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'CLK'
+        Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 15; COMB Node = 'CLK~clkctrl'
+        Info: 3: + IC(0.827 ns) + CELL(0.970 ns) = 3.067 ns; Loc. = LCFF_X27_Y6_N21; Fanout = 4; REG Node = 'deglitch:deglitch_scl|out'
+        Info: 4: + IC(1.186 ns) + CELL(0.000 ns) = 4.253 ns; Loc. = CLKCTRL_G4; Fanout = 28; COMB Node = 'deglitch:deglitch_scl|out~clkctrl'
+        Info: 5: + IC(0.838 ns) + CELL(0.666 ns) = 5.757 ns; Loc. = LCFF_X14_Y2_N7; Fanout = 9; REG Node = 'i2c_slave:comb_28|i2c_sm[1]'
+        Info: Total cell delay = 2.766 ns ( 48.05 % )
+        Info: Total interconnect delay = 2.991 ns ( 51.95 % )
+    Info: + Micro clock to output delay of source is 0.304 ns
+    Info: + Longest register to pin delay is 8.394 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X14_Y2_N7; Fanout = 9; REG Node = 'i2c_slave:comb_28|i2c_sm[1]'
+        Info: 2: + IC(1.616 ns) + CELL(0.604 ns) = 2.220 ns; Loc. = LCCOMB_X14_Y3_N24; Fanout = 1; COMB Node = 'i2c_slave:comb_28|sda_out~34'
+        Info: 3: + IC(0.393 ns) + CELL(0.651 ns) = 3.264 ns; Loc. = LCCOMB_X14_Y3_N0; Fanout = 1; COMB Node = 'sda~0'
+        Info: 4: + IC(2.024 ns) + CELL(3.106 ns) = 8.394 ns; Loc. = PIN_116; Fanout = 0; PIN Node = 'sda'
+        Info: Total cell delay = 4.361 ns ( 51.95 % )
+        Info: Total interconnect delay = 4.033 ns ( 48.05 % )
+Info: th for register "deglitch:deglitch_scl|in_n1" (data pin = "scl", clock pin = "CLK") is -4.010 ns
+    Info: + Longest clock path from clock "CLK" to destination register is 2.763 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'CLK'
+        Info: 2: + IC(0.140 ns) + CELL(0.000 ns) = 1.270 ns; Loc. = CLKCTRL_G2; Fanout = 15; COMB Node = 'CLK~clkctrl'
+        Info: 3: + IC(0.827 ns) + CELL(0.666 ns) = 2.763 ns; Loc. = LCFF_X27_Y6_N9; Fanout = 2; REG Node = 'deglitch:deglitch_scl|in_n1'
+        Info: Total cell delay = 1.796 ns ( 65.00 % )
+        Info: Total interconnect delay = 0.967 ns ( 35.00 % )
+    Info: + Micro hold delay of destination is 0.306 ns
+    Info: - Shortest pin to register delay is 7.079 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.995 ns) = 0.995 ns; Loc. = PIN_117; Fanout = 2; PIN Node = 'scl'
+        Info: 2: + IC(5.624 ns) + CELL(0.460 ns) = 7.079 ns; Loc. = LCFF_X27_Y6_N9; Fanout = 2; REG Node = 'deglitch:deglitch_scl|in_n1'
+        Info: Total cell delay = 1.455 ns ( 20.55 % )
+        Info: Total interconnect delay = 5.624 ns ( 79.45 % )
+Info: Quartus II Timing Analyzer was successful. 0 errors, 5 warnings
+    Info: Processing ended: Tue Oct 03 20:34:26 2006
+    Info: Elapsed time: 00:00:01
+
+

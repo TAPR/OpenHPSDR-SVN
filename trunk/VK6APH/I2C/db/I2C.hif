@@ -1,0 +1,93 @@
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+11
+709
+OFF
+OFF
+OFF
+OFF
+OFF
+FV_OFF
+Level2
+0
+0
+VRSM_ON
+VHSM_ON
+0
+-- Start Partition --
+-- End Partition --
+-- Start Library Paths --
+..|I2C new|db|
+..|..|..|..|FPGA|Mercury|megafunctions|
+..|..|..|..|FPGA|Mercury|db|
+-- End Library Paths --
+-- Start VHDL Libraries --
+-- End VHDL Libraries --
+# entity
+deglitch
+# storage
+db|I2C.(1).cnf
+db|I2C.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+deglitch.v
+42355370fcfa585c5ffdde8fdeafb6
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+deglitch:deglitch_scl
+deglitch:deglitch_sda
+}
+# end
+# entity
+i2c_slave
+# storage
+db|I2C.(2).cnf
+db|I2C.(2).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+i2c_slave.v
+d56ade4febac642a32c52b562c5bf4d4
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+i2c_slave:comb_28
+}
+# end
+# entity
+I2C
+# storage
+db|I2C.(0).cnf
+db|I2C.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+I2C.v
+af82358d99753fa77478a8d0e1901661
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+|
+}
+# end
+# complete
+
