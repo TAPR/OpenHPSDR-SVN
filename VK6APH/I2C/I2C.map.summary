@@ -1,0 +1,12 @@
+Analysis & Synthesis Status : Successful - Tue Oct 03 20:33:58 2006
+Quartus II Version : 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
+Revision Name : I2C
+Top-level Entity Name : I2C
+Family : Cyclone II
+Total logic elements : 51
+Total registers : 45
+Total pins : 21
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

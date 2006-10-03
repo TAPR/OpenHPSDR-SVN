@@ -1,0 +1,231 @@
+Analysis & Synthesis report for I2C
+Tue Oct 03 20:33:58 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Analysis & Synthesis Source Files Read
+  5. Analysis & Synthesis Resource Usage Summary
+  6. Analysis & Synthesis Resource Utilization by Entity
+  7. User-Specified and Inferred Latches
+  8. General Register Statistics
+  9. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                      ;
++------------------------------------+----------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Tue Oct 03 20:33:58 2006        ;
+; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
+; Revision Name                      ; I2C                                          ;
+; Top-level Entity Name              ; I2C                                          ;
+; Family                             ; Cyclone II                                   ;
+; Total logic elements               ; 51                                           ;
+; Total registers                    ; 45                                           ;
+; Total pins                         ; 21                                           ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 0                                            ;
+; Embedded Multiplier 9-bit elements ; 0                                            ;
+; Total PLLs                         ; 0                                            ;
++------------------------------------+----------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                ;
++--------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                             ; Setting            ; Default Value      ;
++--------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                             ; EP2C5Q208C8        ;                    ;
+; Top-level entity name                                              ; I2C                ; I2C                ;
+; Family name                                                        ; Cyclone II         ; Stratix            ;
+; Use smart compilation                                              ; Off                ; Off                ;
+; Restructure Multiplexers                                           ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                ; Off                ; Off                ;
+; Preserve fewer node names                                          ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                          ; Off                ; Off                ;
+; Verilog Version                                                    ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                       ; VHDL93             ; VHDL93             ;
+; State Machine Processing                                           ; Auto               ; Auto               ;
+; Extract Verilog State Machines                                     ; On                 ; On                 ;
+; Extract VHDL State Machines                                        ; On                 ; On                 ;
+; Add Pass-Through Logic to Inferred RAMs                            ; On                 ; On                 ;
+; DSP Block Balancing                                                ; Auto               ; Auto               ;
+; Maximum DSP Block Usage                                            ; Unlimited          ; Unlimited          ;
+; NOT Gate Push-Back                                                 ; On                 ; On                 ;
+; Power-Up Don't Care                                                ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                       ; Off                ; Off                ;
+; Remove Duplicate Registers                                         ; On                 ; On                 ;
+; Ignore CARRY Buffers                                               ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                             ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                              ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                          ; Off                ; Off                ;
+; Ignore LCELL Buffers                                               ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                     ; Off                ; Off                ;
+; Optimization Technique -- Cyclone II                               ; Balanced           ; Balanced           ;
+; Carry Chain Length -- Stratix/Stratix GX/Cyclone/MAX II/Cyclone II ; 70                 ; 70                 ;
+; Auto Carry Chains                                                  ; On                 ; On                 ;
+; Auto Open-Drain Pins                                               ; On                 ; On                 ;
+; Remove Duplicate Logic                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                              ; Off                ; Off                ;
+; Perform gate-level register retiming                               ; Off                ; Off                ;
+; Allow register retiming to trade off Tsu/Tco with Fmax             ; On                 ; On                 ;
+; Auto ROM Replacement                                               ; On                 ; On                 ;
+; Auto RAM Replacement                                               ; On                 ; On                 ;
+; Auto Shift Register Replacement                                    ; On                 ; On                 ;
+; Auto Clock Enable Replacement                                      ; On                 ; On                 ;
+; Allow Synchronous Control Signals                                  ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                             ; Off                ; Off                ;
+; Auto Resource Sharing                                              ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                 ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                 ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                      ; Off                ; Off                ;
+; Maximum Number of M4K Memory Blocks                                ; Unlimited          ; Unlimited          ;
+; Ignore translate_off and translate_on Synthesis Directives         ; Off                ; Off                ;
+; Show Parameter Settings Tables in Synthesis Report                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                 ; Off                ; Off                ;
+; Retiming Meta-Stability Register Sequence Length                   ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                       ; Normal compilation ; Normal compilation ;
+; HDL message level                                                  ; Level2             ; Level2             ;
++--------------------------------------------------------------------+--------------------+--------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                               ;
++----------------------------------+-----------------+------------------------+----------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path           ;
++----------------------------------+-----------------+------------------------+----------------------------------------+
+; I2C.v                            ; yes             ; User Verilog HDL File  ; C:/HPDSDR/trunk/VK6APH/I2C/I2C.v       ;
+; i2c_slave.v                      ; yes             ; User Verilog HDL File  ; C:/HPDSDR/trunk/VK6APH/I2C/i2c_slave.v ;
+; deglitch.v                       ; yes             ; User Verilog HDL File  ; C:/HPDSDR/trunk/VK6APH/I2C/deglitch.v  ;
++----------------------------------+-----------------+------------------------+----------------------------------------+
+
+
++-------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                             ;
++---------------------------------------------+---------------------------+
+; Resource                                    ; Usage                     ;
++---------------------------------------------+---------------------------+
+; Estimated Total logic elements              ; 51                        ;
+; Total combinational functions               ; 51                        ;
+; Logic element usage by number of LUT inputs ;                           ;
+;     -- 4 input functions                    ; 23                        ;
+;     -- 3 input functions                    ; 11                        ;
+;     -- <=2 input functions                  ; 17                        ;
+;         -- Combinational cells for routing  ; 0                         ;
+; Logic elements by mode                      ;                           ;
+;     -- normal mode                          ; 44                        ;
+;     -- arithmetic mode                      ; 7                         ;
+; Total registers                             ; 45                        ;
+; I/O pins                                    ; 21                        ;
+; Maximum fan-out node                        ; deglitch:deglitch_scl|out ;
+; Maximum fan-out                             ; 31                        ;
+; Total fan-out                               ; 321                       ;
+; Average fan-out                             ; 2.74                      ;
++---------------------------------------------+---------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                        ;
++----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+----------------------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name        ;
++----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+----------------------------+
+; |I2C                       ; 51 (7)            ; 45 (7)       ; 0           ; 0    ; 0            ; 0       ; 0         ; 21   ; 0            ; |I2C                       ;
+;    |deglitch:deglitch_scl| ; 2 (2)             ; 4 (4)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |I2C|deglitch:deglitch_scl ;
+;    |deglitch:deglitch_sda| ; 2 (2)             ; 4 (4)        ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |I2C|deglitch:deglitch_sda ;
+;    |i2c_slave:comb_28|     ; 40 (40)           ; 30 (30)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; |I2C|i2c_slave:comb_28     ;
++----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+----------------------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++---------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                     ;
++----------------------------------------------------+---------------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal       ; Free of Timing Hazards ;
++----------------------------------------------------+---------------------------+------------------------+
+; i2c_slave:comb_28|main_out[0]                      ; i2c_slave:comb_28|WideOr3 ; yes                    ;
+; Number of user-specified and inferred latches = 1  ;                           ;                        ;
++----------------------------------------------------+---------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 45    ;
+; Number of registers using Synchronous Clear  ; 4     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 30    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 23    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Tue Oct 03 20:33:55 2006
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off I2C -c I2C
+Info: Found 1 design units, including 1 entities, in source file I2C.v
+    Info: Found entity 1: I2C
+Info: Found 1 design units, including 1 entities, in source file i2c_slave.v
+    Info: Found entity 1: i2c_slave
+Info: Found 1 design units, including 1 entities, in source file deglitch.v
+    Info: Found entity 1: deglitch
+Info: Elaborating entity "I2C" for the top level hierarchy
+Info: Elaborating entity "deglitch" for hierarchy "deglitch:deglitch_scl"
+Info: Elaborating entity "i2c_slave" for hierarchy "i2c_slave:comb_28"
+Warning (10270): Verilog HDL statement warning at i2c_slave.v(279): incomplete Case Statement has no default case item
+Warning (10240): Verilog HDL Always Construct warning at i2c_slave.v(278): inferring latch(es) for variable "main_out", which holds its previous value in one or more paths through the always construct
+Info (10041): Verilog HDL or VHDL info at i2c_slave.v(279): inferred latch for "main_out[7]"
+Info (10041): Verilog HDL or VHDL info at i2c_slave.v(279): inferred latch for "main_out[6]"
+Info (10041): Verilog HDL or VHDL info at i2c_slave.v(279): inferred latch for "main_out[5]"
+Info (10041): Verilog HDL or VHDL info at i2c_slave.v(279): inferred latch for "main_out[4]"
+Info (10041): Verilog HDL or VHDL info at i2c_slave.v(279): inferred latch for "main_out[3]"
+Info (10041): Verilog HDL or VHDL info at i2c_slave.v(279): inferred latch for "main_out[2]"
+Info (10041): Verilog HDL or VHDL info at i2c_slave.v(279): inferred latch for "main_out[1]"
+Info (10041): Verilog HDL or VHDL info at i2c_slave.v(279): inferred latch for "main_out[0]"
+Warning: Port "debug" on the entity instantiation of "comb_28" is connected to a signal of width 10. The formal width of the signal in the module is 12.  Extra bits will be left dangling without any fanout logic.
+Warning: Latch i2c_slave:comb_28|main_out[0] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal i2c_slave:comb_28|cyc_cnt[2]
+Info: Implemented 97 device resources after synthesis - the final resource count might be different
+    Info: Implemented 2 input pins
+    Info: Implemented 18 output pins
+    Info: Implemented 1 bidirectional pins
+    Info: Implemented 76 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 5 warnings
+    Info: Processing ended: Tue Oct 03 20:33:58 2006
+    Info: Elapsed time: 00:00:04
+
+
