@@ -151,7 +151,7 @@ namespace PowerSDR
 						{
 							sp.Open();
 							sp.DtrEnable=true;
-							sp.RtsEnable=true;
+							sp.RtsEnable=false; // kd5tfd changed this to false for soft rock xmit support 
 						}
 						catch(Exception) 
 						{

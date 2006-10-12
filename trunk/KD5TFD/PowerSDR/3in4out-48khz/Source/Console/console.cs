@@ -13211,13 +13211,24 @@ namespace PowerSDR
                     
 					bool mic_ptt = (b & (byte)StatusPin.Dot) != 0;					
 
-					if ( !mic_ptt ) 
+					if ( !mic_ptt )  // check some aux sources for ptt 
 					{ 
 						if ( (TFDAPHaudio.GetDotDash() & 0x1) != 0 ) 
 						{ 
 							mic_ptt = true; 
 						} 
-					} 
+						if ( !mic_ptt )  // if we're not in cw mode take either of the serial port keyer lines as ptt - mostly for soft rock support. 
+						{ 
+							if ( current_dsp_mode != DSPMode.CWL && current_dsp_mode != DSPMode.CWU ) 
+							{
+								if ( Keyer.PrimaryConnPort != "SDR" && Keyer.PrimaryConnPort != "Ozy" ) 
+								{
+									if ( Keyer.sp.CtsHolding ) mic_ptt = true; 
+									else if ( Keyer.sp.DsrHolding ) mic_ptt = true; 
+								}
+							}						
+						} 
+					}
 					bool x2_ptt = (b & (byte)StatusPin.PIN_11) != 0;
 					bool cw_ptt = (CWSemiBreakInEnabled &(DttSP.KeyerPlaying() != 0)) | Keyer.KeyerPTT | Keyer.MemoryPTT; 
 					bool cat_ptt = false;
