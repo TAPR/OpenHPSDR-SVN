@@ -425,6 +425,11 @@ namespace PowerSDR
 					{
 						c.serialPTT.setDTR(true); 
 					}
+					if ( c.Keyer.PrimaryConnPort != "SDR" && 
+						c.Keyer.PrimaryConnPort != "Ozy" ) 
+					{
+						c.Keyer.sp.RtsEnable = true; 
+					}
 					pio_ic1.SetBit(TR);
 					
 				}
@@ -434,6 +439,11 @@ namespace PowerSDR
 					if ( c.serialPTT != null ) 
 					{
 						c.serialPTT.setDTR(false); 
+					}
+					if ( c.Keyer.PrimaryConnPort != "SDR" && 
+						c.Keyer.PrimaryConnPort != "Ozy" ) 
+					{
+						c.Keyer.sp.RtsEnable = false; 
 					}
 					pio_ic1.ClearBit(TR);
 				}
