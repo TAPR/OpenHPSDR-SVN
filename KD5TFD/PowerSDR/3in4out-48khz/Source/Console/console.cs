@@ -15012,21 +15012,105 @@ namespace PowerSDR
 						break;
 					case Model.SOFTROCK40:
 					case Model.SDR1000_DDSLOCKED:
-						//!!!!drm patch
-						double osc_freq = soft_rock_center_freq*1e6 - freq*1e6;
-						if ( current_dsp_mode  == DSPMode.DRM ) // if we're in DRM mode we need to be offset 12khz
-						{
-							osc_freq = osc_freq + 12000; 
-							// System.Console.WriteLine("setting osc_freq: " + osc_freq); 
-						}
-						tuned_freq = freq;
-						//Debug.WriteLine("osc_freq: "+osc_freq.ToString("f6"));
-						DttSP.SetOsc(osc_freq);
+						SetSoftRockOscFreqs(); 
 						break;
 				}
 			}
 
 			if(Display.PeakOn) Display.ResetDisplayPeak();
+		}
+
+
+		// 
+		// set tx, rx, and keyer freqs appropriate for a soft rock
+		// 
+		private void SetSoftRockOscFreqs() 
+		{
+
+
+
+			double freq = double.Parse(txtVFOAFreq.Text);
+
+			if(current_dsp_mode == DSPMode.CWL) 
+			{
+				freq += (double)CWForm.CWPitch * 0.0000010; 
+			}
+			else if(current_dsp_mode == DSPMode.CWU) 
+			{
+				freq -= (double)CWForm.CWPitch * 0.0000010;
+			}
+
+			if(freq < min_freq) freq = min_freq;
+			else if(freq > max_freq) freq = max_freq;
+
+			if (chkRIT.Checked ) 
+			{ 
+				freq += (int)udRIT.Value * 0.000001;
+			}
+
+
+
+
+
+			//!!!!drm patch
+			double osc_freq = soft_rock_center_freq*1e6 - freq*1e6;						
+			double tx_freq; 
+			//??!! TODO!! KD5TFD - need to add code to split and xit to update tx freq if they are changed 
+			if ( chkVFOSplit.Checked ) 
+			{
+				tx_freq = double.Parse(txtVFOBFreq.Text);
+			}
+			else 
+			{ 
+				tx_freq = double.Parse(txtVFOAFreq.Text); 
+			}
+			if ( chkXIT.Checked ) 
+			{							
+				tx_freq += (int)udXIT.Value * 0.000001;
+			}
+			if(current_dsp_mode == DSPMode.CWL) 
+			{ 
+				tx_freq += (double)CWForm.CWPitch * 0.0000010;
+			}
+			else if(current_dsp_mode == DSPMode.CWU) 
+			{ 
+				tx_freq -= (double)CWForm.CWPitch * 0.0000010;
+			}
+
+			double tx_osc_freq = soft_rock_center_freq*1e6 - tx_freq*1e6;
+			tx_osc_freq = -tx_osc_freq; 
+
+			System.Console.WriteLine("freq: " + freq + " tx_freq: " + tx_freq); 
+						
+			if ( current_dsp_mode  == DSPMode.DRM ) // if we're in DRM mode we need to be offset 12khz
+			{
+				osc_freq = osc_freq + 12000; 
+				// System.Console.WriteLine("setting osc_freq: " + osc_freq); 
+			}
+			tuned_freq = freq;
+			//Debug.WriteLine("osc_freq: "+osc_freq.ToString("f6"));
+			DttSP.SetOsc(osc_freq);
+			DttSP.SetTXOsc(tx_osc_freq);
+
+			System.Console.WriteLine("osc_freq: " + osc_freq); 
+			System.Console.WriteLine("tx_osc_freq: " + tx_osc_freq); 
+					
+			if ( current_dsp_mode == DSPMode.CWU || current_dsp_mode == DSPMode.CWL ) 
+			{						
+				float keyer_freq = (float)(-tx_osc_freq); 
+				switch(current_dsp_mode)
+				{
+					case DSPMode.CWU:
+						keyer_freq -= CWPitch; 
+						break; 
+
+					case DSPMode.CWL:
+						keyer_freq += CWPitch; 
+						break; 
+				}
+				DttSP.SetKeyerFreq(keyer_freq);
+				System.Console.WriteLine("keyer_freq: " + keyer_freq); 
+			}
 		}
 
 		private static double tuned_freq;
@@ -15181,7 +15265,16 @@ namespace PowerSDR
 					return;
 				}
 				Debug.WriteLine("freq: "+freq.ToString("f6"));
-				DDSFreq = freq;
+
+				if ( current_model ==  Model.SDR1000_DDSLOCKED || 
+					current_model == Model.SOFTROCK40 )  
+				{
+					SetSoftRockOscFreqs(); 
+				}
+				else 
+				{ 
+					DDSFreq = freq;
+				}				
 			}
 		}
 
@@ -15812,10 +15905,11 @@ namespace PowerSDR
 				else  // soft rock style tuning 
 				{ 					
 
+
 					// need to add checking in here to make sure we're in tuning range 
 					System.Console.WriteLine("Freq: " + freq); 
 					System.Console.WriteLine("SR Center: " + soft_rock_center_freq); 
-					
+#if false 					
 					double osc_freq = soft_rock_center_freq*1e6 - freq*1e6;
 					osc_freq = -osc_freq; 
 					DttSP.SetOsc(osc_freq);  
@@ -15836,8 +15930,10 @@ namespace PowerSDR
 						}
 						DttSP.SetKeyerFreq(keyer_freq);
 					}
-					tuned_freq = freq; 
 					System.Console.WriteLine("osc_freq: " + osc_freq); 
+#endif 
+					tuned_freq = freq; 
+				
 				} 
 
 				if(num_channels == 2) Hdw.MuteRelay = !chkMON.Checked;
@@ -18434,12 +18530,21 @@ namespace PowerSDR
 				txtVFOBFreq.ForeColor = vfo_text_dark_color;
 				txtVFOBBand.ForeColor = band_text_dark_color;
 			}
+
+
+			// if we're doing soft rock stuff may need to update osc (tx mainly) when split is on 
+			if ( current_model ==  Model.SOFTROCK40 || 
+				 current_model ==  Model.SDR1000_DDSLOCKED ) 
+			{ 
+				SetSoftRockOscFreqs(); 
+			}
+
+
 			// BT 04/2005
 			// raises the serial io event
 			// EventArgs sioe = EventArgs.Empty;
 			// OnNotifySIO(sioe);
 		}
-
 		private void chkXIT_CheckedChanged(object sender, System.EventArgs e)
 		{
 			if(chkXIT.Checked)
@@ -18453,12 +18558,21 @@ namespace PowerSDR
 				chkXIT.BackColor = SystemColors.Control;
 			}
 
-			if(chkMOX.Checked)
+			
+			if ( current_model == Model.SOFTROCK40 || 
+				current_model == Model.SDR1000_DDSLOCKED ) 
 			{
-				if(chkVFOSplit.Checked)
-					txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-				else
-					txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+				SetSoftRockOscFreqs(); 
+			}
+			else  // if we're no DDS/SoftRock then only need to update freqs if mox is on 
+			{ 
+				if(chkMOX.Checked)
+				{
+					if(chkVFOSplit.Checked)
+						txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+					else
+						txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+				}
 			}
 		}
 
@@ -18485,12 +18599,18 @@ namespace PowerSDR
 
 		private void udXIT_ValueChanged(object sender, System.EventArgs e)
 		{
+
 			if(chkXIT.Checked && chkMOX.Checked)
 			{
 				if(chkVFOSplit.Checked)
 					txtVFOBFreq_LostFocus(this, EventArgs.Empty);
 				else
 					txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+			}
+			else if ( current_model == Model.SOFTROCK40 || 
+				current_model == Model.SDR1000_DDSLOCKED ) 
+			{
+				SetSoftRockOscFreqs(); 
 			}
 
 			if(udXIT.Focused)
