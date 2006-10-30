@@ -1,0 +1,217 @@
+SDR-1000 USB-to-parallel adapter I/O functions
+==============================================
+
+[20060823/SA]
+
+
+These are the SDR-1000 USB-to-parallel adapter low-level I/O functions:
+
+    class Sdr1kUsb
+    {
+    public:
+        int Latch(BYTE latch, BYTE data);
+        int DDSReset();
+        int DDSWrite(BYTE addr, BYTE data);
+        int SRLoad(BYTE reg, BYTE data);
+        int GetStatusPort();
+        int GetADC();
+    };
+
+What you see above is a portion of the C++ API on the PC side.  The
+current versions of PowerSDR call the corresponding functions in
+Sdr1kUsb.dll.  The "next-generation" PowerSDR will probably use the
+C++ API directly.
+
+I will not describe here how the commands are transferred over USB,
+since you probably have to come up with a different way of doing that
+anyway.  (Phil C's suggestion of using vendor commands over EP0 sounds
+like a good idea.)
+
+The actual implementation of I/O operations on the EZ-USB device is in
+8051 assembly code.  Instead of just giving you that code I will
+explain how it works using C-style pseudocode.
+
+
+1. Latch(latch, data)
+
+This is the fundamental SDR-1000 I/O operation that is used both
+directly and by the other more complex I/O functions.
+
+The implementation is very straightforward.  We write the data byte to
+outputs D7-D0.  Then we strobe the control line(s) to load the data
+into the selected PIO board latch(es):  C0 for EXT, C1 for BPF, C2 for
+DAT, C3 for ADR.
+
+    out(D, data);   // load data
+    delay();
+    out(C, latch);  // control line for selected latch = high
+    delay();
+    out(C, 0);      // control line = low
+
+Note that the computer's parallel port would invert the C0, C1 and C3
+bits, but we can simply disregard this.  The control line bits
+translate into the following values for the 'latch' parameter:
+
+    enum { EXT = 0x01, BPF = 0x02, DAT = 0x04, ADR = 0x08 };
+
+The PIO board latch IC's are fast so delay() can be very small.  (The
+Flex USB adapter performs the entire Latch operation typically in
+about one microsecond.)
+
+DAT and ADR latches are controlled by the DDSReset and DDSWrite
+functions, so users should be allowed direct access only to EXT and
+BPF latches.  Furthermore, when using the SDR-1000 RFE board, the low
+6 bits of BPF are controlled by the SRLoad function and should also be
+protected from user access.  Conversely, the high 2 bits of BPF set by
+the user should not be modified by SRLoad.
+
+
+2. DDSReset()
+
+This function simply sets the AD9854 WRB line high and strobes the
+RESET line.  The sequence is as follows.
+
+    Latch(ADR, 0x40);   // RESET = low, WRB = high
+    Latch(ADR, 0xC0);   // RESET = high, WRB = high
+    Latch(ADR, 0x40);   // RESET = low, WRB = high
+
+
+3. DDSWrite(addr, data)
+
+This function writes data into AD9854 registers.  The sequence is as
+follows.
+
+    Latch(DAT, data);           // set data byte
+    Latch(ADR, 0x40 | addr);    // set address, WRB = high
+    Latch(ADR, addr);           // WRB = low
+    Latch(ADR, 0x40 | addr);    // WRB = high
+
+
+4. SRLoad(reg, data)
+
+This function loads data into RFE board shift registers using the low
+6 bits of BPF latch.  Bits 3 and 4 of the 'reg' parameter select the
+register to be loaded:
+    enum { IC11 = 0x00, IC7 = 0x08, IC10 = 0x10, IC9 = 0x18 };
+
+The BPF latch bits have to be initialized as follows:
+
+    // retain the high 2 bits set by the user:
+    //      bpf.bit7 = MUTE;
+    //      bpf.bit6 = TX;
+    bpf.bit5 = 1;           // SRLOAD = high
+    bpf.bit4 = reg.bit4;    // SR select
+    bpf.bit3 = reg.bit3;    // SR select
+    bpf.bit2 = 1;           // XSCLR = high
+    bpf.bit1 = 0;           // SCLK = low
+
+Then we shift in the 8 data bits, MSB first:
+
+    for (B = 7; B >= 0; B--) {
+        for (B = 7; B >= 0; B--) {
+        bpf.bit0 = data.bitB;   // bit0 = data
+        Latch(BPF, bpfbits);    // latch data
+        bpf.bit1 = 1            // SCLK = high
+        Latch(BPF, bpfbits);    // shift bit
+        bpf.bit1 = 0            // SCLK = low
+    }
+
+If data == 0, it's also possible to clear the shift register without
+having to shift in 8 zeros.  Simply replace the shift loop with:
+
+    bpf.bit2 = 0;           // XSCLR = low;
+    Latch(BPF, bpfbits);
+
+Finally, the register is loaded:
+
+    bpf.bit5 = 0;           // SRLOAD = low
+    Latch(BPF, bpfbits);    // load SR
+    bpf.bit5 = 1;           // SRLOAD = high
+    Latch(BPF, bpfbits);
+
+
+5. GetStatusPort()
+
+This is very simple.  Just poll the status inputs and send the bits
+back to the USB host computer.
+
+However, due to inherent latency in USB communication, operations that
+require polling of status bits to be precisely synchronized with
+output functions can be problematic.  This is the reason why the
+following, very complex operation had to be implemented on the USB
+controller.
+
+
+6. GetADC()
+
+This function reads the FWD and REV power readings from the Flex
+100WPA.  The operation gets both values almost simultaneously.  The
+difference between the two readings is about 0.5 milliseconds when
+using the Flex USB adapter.  Of course, reliable real-time SWR
+measurement would require completely simultaneous readings, but that's
+simply not possible with the current hardware.  Still, this is much
+better compared to PowerSDR's parallel port I/O.
+
+The sequence is pretty complex.  (In fact, FlexRadio's original
+implementation wasn't quite right.  I looked at their code for a long
+time and didn't understand how it could work.  So I asked Eric a
+couple of "stupid" questions, and eventually the code was corrected.)
+
+You should probably verify that you can get the simpler I/O operations
+to work before trying this one.  But in case you're curious, here is
+my 8051 code already.  I will explain it in more detail when you get
+to the point of actually implementing this function:
+
+;
+;---------------perform ADC poll sequence----------------------
+;
+                mov     dptr,#adc_sequence
+;
+                mov     rSeq,#50        ; 50 steps
+adc_loop:       movx    a,@dptr         ; get ADC control bits
+                anl     a,#0x38         ; bits 3-5
+                orl     a,rIC11         ; combine RFE-IC11 bits
+                call    rfe_shift
+;
+                movx    a,@dptr
+                anl     a,#3            ; sample input?
+                jz      adc_next
+                mov     c,S6_BIT        ; get bit
+                jb      acc.1,adc_chan1
+                mov     a,ADC0          ; channel 0
+                rlc     a               ; MSB first <<<
+                mov     ADC0,a
+                sjmp    adc_next
+adc_chan1:      mov     a,ADC1          ; channel 1
+                rlc     a
+                mov     ADC1,a
+;
+adc_next:       inc     dptr
+                djnz    rSeq,adc_loop
+;
+                ret
+;
+;---------------adc_sequence-----------------------------------
+;
+adc_sequence:   DB      0x10,0x18,0x10,0x18     ; CS low, start bit, single-ended
+                DB      0x00,0x08,0x00,0x08     ; channel 0, mux settling
+                DB      0x00,0x09,0x00,0x09     ; bit7, bit6
+                DB      0x00,0x09,0x00,0x09     ; bit5, bit4
+                DB      0x00,0x09,0x00,0x09     ; bit3, bit2
+                DB      0x00,0x09,0x00,0x01     ; bit1, bit0
+                DB      0x20                    ; CS high
+;
+                DB      0x10,0x18,0x10,0x18     ; CS low, start bit, single-ended
+                DB      0x10,0x18,0x00,0x08     ; channel 1, mux settling
+                DB      0x00,0x0A,0x00,0x0A     ; bit7, bit6
+                DB      0x00,0x0A,0x00,0x0A     ; bit5, bit4
+                DB      0x00,0x0A,0x00,0x0A     ; bit3, bit2
+                DB      0x00,0x0A,0x00,0x02     ; bit1, bit0
+                DB      0x20                    ; CS high
+;
+;--------------------------------------------------------------
+;
+
+
+[end]
+
