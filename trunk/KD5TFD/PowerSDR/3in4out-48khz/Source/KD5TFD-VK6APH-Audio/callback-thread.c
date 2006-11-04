@@ -53,6 +53,36 @@ float TestToneVals[NUM_TEST_TONE_VALS] = {
 		 
 #endif
 
+
+#define IQ_GLITCH_DEBUG (1) 
+#ifdef IQ_GLITCH_DEBUG
+#define DBG_BUF_COUNT (2048*100)
+float CB_DbgBuf[DBG_BUF_COUNT][4]; 
+int CB_DbgIdx = 0; 
+
+void DumpCBDbg() { 
+	int i; 
+	FILE *of = fopen("iqgltich.txt", "w"); 
+	if ( of == NULL ) return; 
+
+	for ( i = 0; i < DBG_BUF_COUNT; i++ ) { 
+		++CB_DbgIdx;  // do this at top of loop to start with the buffer immed following the idx since it point at next buf to fill 
+		if ( CB_DbgIdx >= DBG_BUF_COUNT ) { 
+			CB_DbgIdx = 0; 
+		}
+		fprintf(of, "%f, %f, %f, %f\n", CB_DbgBuf[CB_DbgIdx][0],
+								        CB_DbgBuf[CB_DbgIdx][1],
+									    CB_DbgBuf[CB_DbgIdx][2],
+									    CB_DbgBuf[CB_DbgIdx][3]); 
+ 				
+	}
+	fclose(of); 
+	return; 	
+} 
+
+#endif 
+
+
 int cb_keep_running; 
 
 // extern void Dump(FILE *ofile,                /* file handle to dump to - assumed to be      */
@@ -63,6 +93,9 @@ int cb_keep_running;
 
 // int cb_dump_count = 0; 
 
+#if 0 
+// now obsolete 
+// 
 // this is the main loop of the callback thread -- basically suck stuff out of the fifo from the io 
 // thread and feed it to the power sdr callback 
 // 
@@ -205,8 +238,8 @@ void CallbackThreadMainLoop(void) {
 		
 	} 
 } 
-
-
+// end obsolete block 
+#endif 
 
 
 
@@ -368,16 +401,33 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 			fprintf(stderr, "Mayday Mayday - bad sample rate in callback-thread.c"); 
 	} 
 
+
+
+#ifdef IQ_GLITCH_DEBUG 
+	for ( i = 0; i < BlockSize; i++ ) { 		
+		CB_DbgBuf[CB_DbgIdx][0] = CallbackOutLbufp[i]; 
+		CB_DbgBuf[CB_DbgIdx][1] = CallbackOutRbufp[i]; 
+		CB_DbgBuf[CB_DbgIdx][2] = CallbackMonOutLbufp[i];
+		CB_DbgBuf[CB_DbgIdx][3] = CallbackMonOutRbufp[i];
+		++CB_DbgIdx; 
+		if ( CB_DbgIdx >= DBG_BUF_COUNT ) { 
+			CB_DbgIdx = 0; 
+		} 				
+	} 
+#endif 
+
+
+
 	for ( i = 0, outidx = 0 ; i < BlockSize; i += out_sample_incr, outidx++ ) { 
 #if 1
 		LIMIT_SAMPLE(CallbackOutRbufp[i]);
-		LIMIT_SAMPLE(CallbackOutRbufp[i]); 
+		// LIMIT_SAMPLE(CallbackOutRbufp[i]); 
 		LIMIT_SAMPLE(CallbackOutLbufp[i]);
-		LIMIT_SAMPLE(CallbackOutLbufp[i]); 
+		// LIMIT_SAMPLE(CallbackOutLbufp[i]); 
 		LIMIT_SAMPLE(CallbackMonOutLbufp[i]);
-		LIMIT_SAMPLE(CallbackMonOutLbufp[i]);
+		// LIMIT_SAMPLE(CallbackMonOutLbufp[i]);
 		LIMIT_SAMPLE(CallbackMonOutRbufp[i]); 
-		LIMIT_SAMPLE(CallbackMonOutRbufp[i]);  
+		// LIMIT_SAMPLE(CallbackMonOutRbufp[i]);  
 #else 
 		// limit data to +/- 1.0 
 		if ( CallbackOutRbufp[i] > 1.0 ) { 
@@ -435,7 +485,8 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 } 
 
 
-
+#if 0 
+// now obsolete
 void *CallbackThreadMain(void *argp) {				
 		CallbackThreadRunning = 1; 
 		cb_keep_running = 1; 
@@ -446,3 +497,4 @@ void *CallbackThreadMain(void *argp) {
 		CallbackThreadRunning = 0;		
 		return NULL; 
 }
+#endif 
