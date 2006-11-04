@@ -10355,7 +10355,7 @@ namespace PowerSDR
 //#if(DEBUG)
 //				double freq = TuningWordToFreq(tuning_word);
 //				if(!MOX) freq -= DttSP.current_rx_osc / 1000000;
-//				else freq += DttSP.current_tx_osc / 1000000;
+//				else freq += DttSP.current_tfx_osc / 1000000;
 //
 //				Debug.WriteLine("word: "+TuningWordToFreq(tuning_word).ToString("f6") +
 //					" rxosc: "+(DttSP.current_rx_osc / 1000000).ToString("f6") +

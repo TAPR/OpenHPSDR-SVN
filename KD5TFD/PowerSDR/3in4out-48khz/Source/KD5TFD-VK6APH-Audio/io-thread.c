@@ -1112,6 +1112,9 @@ void *IOThreadMain(void *argp) {
 
 
 #ifdef PERF_DEBUG		
+
+		DumpCBDbg();
+
 		// printHLA(&ReadHLA, /* stdout, */ "ReadHLA (perfticks): "); 
 		// ReadHLA.sum = perfTicksToNanos(ReadHLA.sum); 
 		// ReadHLA.hi = perfTicksToNanos(ReadHLA.hi); 
