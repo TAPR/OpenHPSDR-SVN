@@ -1,0 +1,27 @@
+DDSTune: 7.068136
+StartAudio: block_size: 2048
+StartAudio: sample_rate: 48000
+StartAudio: num_channels: 4
+StartAudio: latency_ms: 0
+start returned: True
+OzyInit completes
+sa: samples_per_block: 2048
+DDSTune: 0.000000
+Stop Audio called
+stop audio called
+iothread: complete_blocks: 1972
+iothread: LostSyncCount: 1
+bytes_processed: 32838144
+SyncGainedCount: 2
+send opprotunities: 64137
+NotOKTosendCount: 0
+ReadHLA (ns):  count: 64137 hi: 14402109 lo: 79898 avg: 974425
+InConvert (ns):  count: 1972 hi: 579682 lo: 86323 avg: 113422
+OutConvert (ns):  count: 1972 hi: 783619 lo: 224330 avg: 262044
+Callback (ns):  count: 1972 hi: 10465296 lo: 212038 avg: 457041
+Write Interval (ns):  count: 64104 hi: 15176789 lo: 654552 avg: 1648254
+iothread stopped
+fifo destroyted
+sample buf freed
+call back buf freed
+Ozy closed

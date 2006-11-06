@@ -1,0 +1,64 @@
+setOsc -11025.000000 0
+setGrphRXEQ 0 0 0 0
+setRXListen 1
+setGrphRXEQ 0 0 0 0
+setRXListen 0
+setGrphTXEQ 0 0 0 0
+setFilter 8175.000000 9999.000000 0
+setRXListen 1
+setFilter 8175.000000 9999.000000 0
+setRXListen 0
+setJackResetSize 2048
+setRXListen 1
+setRXListen 0
+setSpectrumWindow 1
+setTXLevelerTop 3.162278
+setcorrectIQgain -13.00
+setcorrectIQphase  13.00
+setOsc -11025.000000 0
+setOsc -11474.609374 0
+setANFvals 65 50  0.000500000  0.000050000
+setBlkANFval  0.000050000
+setRXListen 1
+setANFvals 65 50  0.000500000  0.000050000
+setBlkANFval  0.000050000
+setRXListen 0
+setNRvals 65 50  0.000500000  0.000050000
+setBlkNRval  0.000050000
+setRXListen 1
+setNRvals 65 50  0.000500000  0.000050000
+setBlkNRval  0.000050000
+setRXListen 0
+setcorrectIQphase  13.00
+setcorrectIQgain -13.00
+setcorrectTXIQphase   0.00
+setcorrectTXIQgain   0.00
+setRXAGCHangThreshold 0
+setRXListen 1
+setRXAGCHangThreshold 0
+setRXListen 0
+setFilter -2900.000000 -300.000000 1
+setRXListen 1
+setFilter -2900.000000 -300.000000 1
+setRXListen 0
+setFilter -2900.000000 -200.000000 1
+setRXListen 1
+setFilter -2900.000000 -200.000000 1
+setRXListen 0
+setRXAGC 3
+setRXListen 1
+setRXAGC 3
+setRXListen 0
+setSpectrumType 1
+setSpectrumType 2
+setFilter -2900.000000 -200.000000 1
+setRXListen 1
+setFilter -2900.000000 -200.000000 1
+setRXListen 0
+setMode 8
+setRXListen 1
+setMode 8
+setRXListen 0
+setOsc 0.000000 0
+setOsc -1921.875000 0
+setOsc -2441.406249 0
