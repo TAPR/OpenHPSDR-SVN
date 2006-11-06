@@ -1,0 +1,17 @@
+Only in .: diff.out
+diff -b -r ./sdrexport.h \sdr1000.src\svn-701\trunk\Source\DttSP/sdrexport.h
+368,376d367
+< #if 0
+<     struct
+<     {
+<       int rx_count; /* -1, 0, or 1 -1, left leads by 1 sample, 0 same, +1 right leads by 1 sample */
+<       int tx_count;
+<       float rx_save;
+<       float tx_save;
+<     } sample_offset;
+< #endif
+Only in .: sdrexport.h.bak
+diff -b -r ./update.c \sdr1000.src\svn-701\trunk\Source\DttSP/update.c
+2444d2443
+<                         // returnval = (float) uni.meter.rx.val[RL][RX_ADC_IMAG];
+Only in .: update.c.bak
