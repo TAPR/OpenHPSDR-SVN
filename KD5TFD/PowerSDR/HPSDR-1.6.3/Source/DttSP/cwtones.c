@@ -92,7 +92,8 @@ CWTone (CWToneGen cwt)
       // apply envelope
       // (same base as osc.gen internal buf)
       CXBdata (cwt->buf, i) = Cscl (CXBdata (cwt->buf, i), cwt->mul);
-    }
+	}
+	CXBhave(cwt->buf) = n; /* kd5tfd added - set have field of buf so correctIQ works */ 
 
   // indicate whether it's turned itself off
   // sometime during this pass

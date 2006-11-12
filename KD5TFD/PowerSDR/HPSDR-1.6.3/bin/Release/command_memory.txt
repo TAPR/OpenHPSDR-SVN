@@ -12,11 +12,14 @@ setJackResetSize 2048
 setRXListen 1
 setRXListen 0
 setSpectrumWindow 1
-setTXLevelerTop 3.162278
-setcorrectIQgain -13.00
-setcorrectIQphase  13.00
 setOsc -11025.000000 0
-setOsc -11474.609374 0
+setTXLevelerTop 3.162278
+setOsc -11025.000000 0
+setcorrectIQgain -13.00
+setcorrectTXIQgain  -2.00
+setcorrectIQphase  13.00
+setcorrectTXIQphase  -2.00
+setOsc -11025.000000 0
 setANFvals 65 50  0.000500000  0.000050000
 setBlkANFval  0.000050000
 setRXListen 1
@@ -31,8 +34,8 @@ setBlkNRval  0.000050000
 setRXListen 0
 setcorrectIQphase  13.00
 setcorrectIQgain -13.00
-setcorrectTXIQphase   0.00
-setcorrectTXIQgain   0.00
+setcorrectTXIQphase  -2.00
+setcorrectTXIQgain  -2.00
 setRXAGCHangThreshold 0
 setRXListen 1
 setRXAGCHangThreshold 0
@@ -50,15 +53,612 @@ setRXListen 1
 setRXAGC 3
 setRXListen 0
 setSpectrumType 1
-setSpectrumType 2
-setFilter -2900.000000 -200.000000 1
+setMode 4
 setRXListen 1
-setFilter -2900.000000 -200.000000 1
+setMode 4
 setRXListen 0
-setMode 8
+setOsc 0.000000 1
+setFilter 200.000000 2900.000000 1
 setRXListen 1
-setMode 8
+setFilter 200.000000 2900.000000 1
 setRXListen 0
+setFilter 350.000000 850.000000 0
+setRXListen 1
+setFilter 350.000000 850.000000 0
+setRXListen 0
+setOsc -11025.000000 0
 setOsc 0.000000 0
-setOsc -1921.875000 0
-setOsc -2441.406249 0
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase  16.00
+setcorrectTXIQphase  22.00
+setcorrectTXIQphase  28.00
+setcorrectTXIQphase  34.00
+setcorrectTXIQphase  40.00
+setcorrectTXIQphase  47.00
+setcorrectTXIQphase  53.00
+setcorrectTXIQphase  65.00
+setcorrectTXIQphase  71.00
+setcorrectTXIQphase  78.00
+setcorrectTXIQphase  90.00
+setcorrectTXIQphase  96.00
+setcorrectTXIQphase 115.00
+setcorrectTXIQphase 121.00
+setcorrectTXIQphase 127.00
+setcorrectTXIQphase 133.00
+setcorrectTXIQphase 140.00
+setcorrectTXIQphase 146.00
+setcorrectTXIQphase 152.00
+setcorrectTXIQphase 158.00
+setcorrectTXIQphase 164.00
+setcorrectTXIQphase 171.00
+setcorrectTXIQphase 177.00
+setcorrectTXIQphase 189.00
+setcorrectTXIQphase 202.00
+setcorrectTXIQphase 208.00
+setcorrectTXIQphase 226.00
+setcorrectTXIQphase 233.00
+setcorrectTXIQphase 239.00
+setcorrectTXIQphase 245.00
+setcorrectTXIQphase 251.00
+setcorrectTXIQphase 257.00
+setcorrectTXIQphase 264.00
+setcorrectTXIQphase 276.00
+setcorrectTXIQphase 282.00
+setcorrectTXIQphase 288.00
+setcorrectTXIQphase 282.00
+setcorrectTXIQphase 270.00
+setcorrectTXIQphase 245.00
+setcorrectTXIQphase 220.00
+setcorrectTXIQphase 214.00
+setcorrectTXIQphase 195.00
+setcorrectTXIQphase 158.00
+setcorrectTXIQphase  96.00
+setcorrectTXIQphase  71.00
+setcorrectTXIQphase  53.00
+setcorrectTXIQphase  16.00
+setcorrectTXIQphase -40.00
+setcorrectTXIQphase -65.00
+setcorrectTXIQphase -109.00
+setcorrectTXIQphase -146.00
+setcorrectTXIQphase -177.00
+setcorrectTXIQphase -202.00
+setcorrectTXIQphase -245.00
+setcorrectTXIQphase -270.00
+setcorrectTXIQphase -276.00
+setcorrectTXIQphase -282.00
+setcorrectTXIQphase -288.00
+setcorrectTXIQphase -295.00
+setcorrectTXIQphase -307.00
+setcorrectTXIQphase -319.00
+setcorrectTXIQphase -326.00
+setcorrectTXIQphase -313.00
+setcorrectTXIQphase -307.00
+setcorrectTXIQphase -301.00
+setcorrectTXIQphase -295.00
+setcorrectTXIQphase -282.00
+setcorrectTXIQphase -257.00
+setcorrectTXIQphase -208.00
+setcorrectTXIQphase -146.00
+setcorrectTXIQphase -115.00
+setcorrectTXIQphase -96.00
+setcorrectTXIQphase -78.00
+setcorrectTXIQphase -53.00
+setcorrectTXIQphase  -9.00
+setcorrectTXIQphase  65.00
+setcorrectTXIQphase 127.00
+setcorrectTXIQphase 164.00
+setcorrectTXIQphase 189.00
+setcorrectTXIQphase 245.00
+setcorrectTXIQphase 251.00
+setcorrectTXIQphase 257.00
+setcorrectTXIQphase 264.00
+setcorrectTXIQphase 270.00
+setcorrectTXIQphase 276.00
+setcorrectTXIQphase 282.00
+setcorrectTXIQphase 288.00
+setcorrectTXIQphase 282.00
+setcorrectTXIQphase 270.00
+setcorrectTXIQphase 245.00
+setcorrectTXIQphase 226.00
+setcorrectTXIQphase 195.00
+setcorrectTXIQphase 177.00
+setcorrectTXIQphase 158.00
+setcorrectTXIQphase 133.00
+setcorrectTXIQphase 102.00
+setcorrectTXIQphase  90.00
+setcorrectTXIQphase  71.00
+setcorrectTXIQphase  65.00
+setcorrectTXIQphase  53.00
+setcorrectTXIQphase  40.00
+setcorrectTXIQphase  16.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase -16.00
+setcorrectTXIQphase -28.00
+setcorrectTXIQphase -34.00
+setcorrectTXIQphase -53.00
+setcorrectTXIQphase -65.00
+setcorrectTXIQphase -71.00
+setcorrectTXIQphase -78.00
+setcorrectTXIQphase -84.00
+setcorrectTXIQphase -96.00
+setcorrectTXIQphase -102.00
+setcorrectTXIQphase -109.00
+setcorrectTXIQphase -115.00
+setcorrectTXIQphase -121.00
+setcorrectTXIQphase -115.00
+setcorrectTXIQphase -109.00
+setcorrectTXIQphase -102.00
+setcorrectTXIQphase -96.00
+setcorrectTXIQphase -90.00
+setcorrectTXIQphase -78.00
+setcorrectTXIQphase -65.00
+setcorrectTXIQphase -59.00
+setcorrectTXIQphase -53.00
+setcorrectTXIQphase -47.00
+setcorrectTXIQphase -40.00
+setcorrectTXIQphase -34.00
+setcorrectTXIQphase -28.00
+setcorrectTXIQphase -22.00
+setcorrectTXIQphase -16.00
+setcorrectTXIQphase  -9.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase   9.00
+setcorrectTXIQphase  16.00
+setcorrectTXIQphase  28.00
+setcorrectTXIQphase  34.00
+setcorrectTXIQphase  28.00
+setcorrectTXIQphase  22.00
+setcorrectTXIQphase  16.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase -28.00
+setcorrectTXIQphase -34.00
+setcorrectTXIQphase -47.00
+setcorrectTXIQphase -28.00
+setcorrectTXIQphase -16.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase   9.00
+setcorrectTXIQphase  34.00
+setcorrectTXIQphase  53.00
+setcorrectTXIQphase  59.00
+setcorrectTXIQphase  65.00
+setcorrectTXIQphase  71.00
+setcorrectTXIQphase  84.00
+setcorrectTXIQphase  90.00
+setcorrectTXIQphase  78.00
+setcorrectTXIQphase  71.00
+setcorrectTXIQphase  53.00
+setcorrectTXIQphase  47.00
+setcorrectTXIQphase  34.00
+setcorrectTXIQphase  22.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase  -9.00
+setcorrectTXIQphase -16.00
+setcorrectTXIQphase -22.00
+setcorrectTXIQphase -28.00
+setcorrectTXIQphase -34.00
+setcorrectTXIQphase -40.00
+setcorrectTXIQphase -47.00
+setcorrectTXIQphase -40.00
+setcorrectTXIQphase -47.00
+setcorrectTXIQphase -53.00
+setcorrectTXIQphase -59.00
+setcorrectTXIQphase -65.00
+setcorrectTXIQphase -78.00
+setcorrectTXIQphase -102.00
+setcorrectTXIQphase -115.00
+setcorrectTXIQphase -127.00
+setcorrectTXIQphase -140.00
+setcorrectTXIQphase -146.00
+setcorrectTXIQphase -152.00
+setcorrectTXIQphase -158.00
+setcorrectTXIQphase -171.00
+setcorrectTXIQphase -177.00
+setcorrectTXIQphase -183.00
+setcorrectTXIQphase -189.00
+setcorrectTXIQphase -195.00
+setcorrectTXIQphase -202.00
+setcorrectTXIQphase -208.00
+setcorrectTXIQphase -202.00
+setcorrectTXIQphase -171.00
+setcorrectTXIQphase -133.00
+setcorrectTXIQphase -102.00
+setcorrectTXIQphase -78.00
+setcorrectTXIQphase -40.00
+setcorrectTXIQphase -34.00
+setcorrectTXIQphase -22.00
+setcorrectTXIQphase  -9.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase  16.00
+setcorrectTXIQphase  40.00
+setcorrectTXIQphase  47.00
+setcorrectTXIQphase  71.00
+setcorrectTXIQphase  96.00
+setcorrectTXIQphase 102.00
+setcorrectTXIQphase 109.00
+setcorrectTXIQphase 115.00
+setcorrectTXIQphase 109.00
+setcorrectTXIQphase 102.00
+setcorrectTXIQphase  96.00
+setcorrectTXIQphase  90.00
+setcorrectTXIQphase  84.00
+setcorrectTXIQphase  78.00
+setcorrectTXIQphase  71.00
+setcorrectTXIQphase  47.00
+setcorrectTXIQphase  34.00
+setcorrectTXIQphase  22.00
+setcorrectTXIQphase  16.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase  -9.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase   9.00
+setcorrectTXIQphase  16.00
+setcorrectTXIQphase -47.00
+setcorrectTXIQphase -65.00
+setcorrectTXIQphase -84.00
+setcorrectTXIQphase -78.00
+setcorrectTXIQphase -65.00
+setcorrectTXIQphase -59.00
+setcorrectTXIQphase -47.00
+setcorrectTXIQphase -22.00
+setcorrectTXIQphase -16.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase   9.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase  -9.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase   9.00
+setcorrectTXIQphase  16.00
+setcorrectTXIQphase  28.00
+setcorrectTXIQphase  34.00
+setcorrectTXIQphase  40.00
+setcorrectTXIQphase  47.00
+setcorrectTXIQphase  53.00
+setcorrectTXIQphase  34.00
+setcorrectTXIQphase  28.00
+setcorrectTXIQphase   9.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase  -9.00
+setcorrectTXIQphase -22.00
+setcorrectTXIQphase -34.00
+setcorrectTXIQphase -40.00
+setcorrectTXIQphase -47.00
+setcorrectTXIQphase -59.00
+setcorrectTXIQphase -65.00
+setcorrectTXIQphase -71.00
+setcorrectTXIQphase -78.00
+setcorrectTXIQphase -65.00
+setcorrectTXIQphase -53.00
+setcorrectTXIQphase -34.00
+setcorrectTXIQphase -28.00
+setcorrectTXIQphase -22.00
+setcorrectTXIQphase -16.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase   9.00
+setcorrectTXIQphase  22.00
+setcorrectTXIQphase  28.00
+setcorrectTXIQphase  47.00
+setcorrectTXIQphase  53.00
+setcorrectTXIQphase  59.00
+setcorrectTXIQphase  65.00
+setcorrectTXIQphase  78.00
+setcorrectTXIQphase  84.00
+setcorrectTXIQphase  78.00
+setcorrectTXIQphase  65.00
+setcorrectTXIQphase  47.00
+setcorrectTXIQphase  34.00
+setcorrectTXIQphase  22.00
+setcorrectTXIQphase  16.00
+setcorrectTXIQphase   9.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase  -9.00
+setcorrectTXIQphase -16.00
+setcorrectTXIQphase -28.00
+setcorrectTXIQphase -22.00
+setcorrectTXIQphase -23.00
+setcorrectTXIQphase -24.00
+setcorrectTXIQphase -25.00
+setcorrectTXIQphase -26.00
+setcorrectTXIQphase -27.00
+setcorrectTXIQphase -28.00
+setcorrectTXIQphase -29.00
+setcorrectTXIQphase -30.00
+setcorrectTXIQphase -31.00
+setcorrectTXIQphase -32.00
+setcorrectTXIQphase -33.00
+setcorrectTXIQphase -34.00
+setcorrectTXIQphase -35.00
+setcorrectTXIQphase -36.00
+setcorrectTXIQphase -37.00
+setcorrectTXIQphase -38.00
+setcorrectTXIQphase -39.00
+setcorrectTXIQphase -40.00
+setcorrectTXIQphase -41.00
+setcorrectTXIQphase -40.00
+setcorrectTXIQphase -39.00
+setcorrectTXIQphase -38.00
+setcorrectTXIQphase -37.00
+setcorrectTXIQphase -36.00
+setcorrectTXIQphase -35.00
+setcorrectTXIQphase -34.00
+setcorrectTXIQphase -33.00
+setcorrectTXIQphase -32.00
+setcorrectTXIQphase -31.00
+setcorrectTXIQphase -30.00
+setcorrectTXIQphase -29.00
+setcorrectTXIQphase -28.00
+setcorrectTXIQphase -27.00
+setcorrectTXIQphase -26.00
+setcorrectTXIQphase -25.00
+setcorrectTXIQphase -24.00
+setcorrectTXIQphase -23.00
+setcorrectTXIQphase -22.00
+setcorrectTXIQphase -21.00
+setcorrectTXIQphase -20.00
+setcorrectTXIQphase -19.00
+setcorrectTXIQphase -18.00
+setcorrectTXIQphase -17.00
+setcorrectTXIQphase -16.00
+setcorrectTXIQphase -15.00
+setcorrectTXIQphase -14.00
+setcorrectTXIQphase -13.00
+setcorrectTXIQphase -12.00
+setcorrectTXIQphase -11.00
+setcorrectTXIQphase -10.00
+setcorrectTXIQphase  -9.00
+setcorrectTXIQphase  -8.00
+setcorrectTXIQphase  -7.00
+setcorrectTXIQphase  -6.00
+setcorrectTXIQphase  -5.00
+setcorrectTXIQphase  -4.00
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase  -2.00
+setcorrectTXIQphase  -1.00
+setcorrectTXIQphase   0.00
+setcorrectTXIQphase   1.00
+setcorrectTXIQphase   2.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase   4.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase   2.00
+setcorrectTXIQphase   1.00
+setcorrectTXIQphase   0.00
+setOsc -11025.000000 0
+setOsc 0.000000 0
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase   9.00
+setcorrectTXIQphase   8.00
+setcorrectTXIQphase   7.00
+setcorrectTXIQphase   6.00
+setcorrectTXIQphase   5.00
+setcorrectTXIQphase   4.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase   2.00
+setcorrectTXIQphase   1.00
+setcorrectTXIQphase   0.00
+setOsc -11025.000000 0
+setOsc 0.000000 0
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase   2.00
+setcorrectTXIQphase   1.00
+setcorrectTXIQphase   2.00
+setcorrectTXIQphase   3.00
+setcorrectTXIQphase   2.00
+setcorrectTXIQphase   1.00
+setcorrectTXIQphase   0.00
+setcorrectTXIQphase  -1.00
+setcorrectTXIQphase  -2.00
+setOsc -11025.000000 0
+setOsc -11025.000001 0
+setOsc 11025.000001 1
+setOsc -11025.000001 0
+setOsc 11025.000001 1
+setOsc 0.000000 0
+setOsc -11025.000001 0
+setOsc 11025.000001 1
+setOsc -11026.000001 0
+setOsc 11026.000001 1
+setOsc -11036.000001 0
+setOsc 11036.000001 1
+setOsc -11046.000001 0
+setOsc 11046.000001 1
+setOsc -11056.000001 0
+setOsc 11056.000001 1
+setOsc -11156.000001 0
+setOsc 11156.000001 1
+setOsc -11256.000001 0
+setOsc 11256.000001 1
+setOsc -11356.000001 0
+setOsc 11356.000001 1
+setOsc -12356.000001 0
+setOsc 12356.000001 1
+setOsc -13356.000001 0
+setOsc 13356.000001 1
+setOsc -14356.000001 0
+setOsc 14356.000001 1
+setOsc -15356.000001 0
+setOsc 15356.000001 1
+setOsc -15456.000001 0
+setOsc 15456.000001 1
+setOsc -15556.000001 0
+setOsc 15556.000001 1
+setOsc -15566.000001 0
+setOsc 15566.000001 1
+setOsc -15576.000001 0
+setOsc 15576.000001 1
+setOsc -15566.000001 0
+setOsc 15566.000001 1
+setOsc -15556.000001 0
+setOsc 15556.000001 1
+setOsc -15456.000001 0
+setOsc 15456.000001 1
+setOsc -15356.000001 0
+setOsc 15356.000001 1
+setOsc -14356.000001 0
+setOsc 14356.000001 1
+setOsc -13356.000001 0
+setOsc 13356.000001 1
+setOsc -12356.000001 0
+setOsc 12356.000001 1
+setOsc -12256.000001 0
+setOsc 12256.000001 1
+setOsc -12156.000001 0
+setOsc 12156.000001 1
+setOsc -12146.000001 0
+setOsc 12146.000001 1
+setOsc -12136.000001 0
+setOsc 12136.000001 1
+setOsc -12126.000001 0
+setOsc 12126.000001 1
+setOsc -12116.000001 0
+setOsc 12116.000001 1
+setOsc -12016.000001 0
+setOsc 12016.000001 1
+setOsc -11916.000001 0
+setOsc 11916.000001 1
+setOsc -10916.000001 0
+setOsc 10916.000001 1
+setOsc -9916.000001 0
+setOsc 9916.000001 1
+setOsc -8916.000001 0
+setOsc 8916.000001 1
+setOsc -8816.000001 0
+setOsc 8816.000001 1
+setOsc -8716.000001 0
+setOsc 8716.000001 1
+setOsc -8706.000001 0
+setOsc 8706.000001 1
+setOsc -8696.000001 0
+setOsc 8696.000001 1
+setOsc 0.000000 0
+setOsc -8696.000001 0
+setOsc 8696.000001 1
+setOsc 0.000000 0
+setOsc -8696.000001 0
+setOsc 8696.000001 1
+setOsc -11025.000001 0
+setOsc 11025.000001 1
+setOsc -11025.000001 0
+setOsc 11025.000001 1
+setOsc 0.000000 0
+setcorrectTXIQphase  -3.00
+setcorrectTXIQphase   9.00
+setcorrectTXIQphase  16.00
+setcorrectTXIQphase  28.00
+setcorrectTXIQphase  65.00
+setcorrectTXIQphase 115.00
+setcorrectTXIQphase 158.00
+setcorrectTXIQphase 177.00
+setcorrectTXIQphase 189.00
+setcorrectTXIQphase 195.00
+setcorrectTXIQphase 226.00
+setcorrectTXIQphase 233.00
+setcorrectTXIQphase 257.00
+setcorrectTXIQphase 282.00
+setcorrectTXIQphase 301.00
+setcorrectTXIQphase 313.00
+setcorrectTXIQphase 307.00
+setcorrectTXIQphase 301.00
+setcorrectTXIQphase 270.00
+setcorrectTXIQphase 183.00
+setcorrectTXIQphase 133.00
+setcorrectTXIQphase 121.00
+setcorrectTXIQphase 127.00
+setcorrectTXIQphase 133.00
+setcorrectTXIQphase 140.00
+setcorrectTXIQphase 183.00
+setcorrectTXIQphase 226.00
+setcorrectTXIQphase 239.00
+setcorrectTXIQphase 264.00
+setcorrectTXIQphase 288.00
+setcorrectTXIQphase 313.00
+setcorrectTXIQphase 332.00
+setcorrectTXIQphase 338.00
+setcorrectTXIQphase 344.00
+setcorrectTXIQphase 369.00
+setcorrectTXIQphase 381.00
+setcorrectTXIQphase 394.00
+setcorrectTXIQphase 388.00
+setcorrectTXIQphase 363.00
+setcorrectTXIQphase 245.00
+setcorrectTXIQphase 195.00
+setcorrectTXIQphase 183.00
+setcorrectTXIQphase 171.00
+setcorrectTXIQphase 158.00
+setcorrectTXIQphase 127.00
+setcorrectTXIQphase  59.00
+setcorrectTXIQphase   9.00
+setcorrectTXIQphase -22.00
+setcorrectTXIQphase -47.00
+setcorrectTXIQphase -59.00
+setcorrectTXIQphase -65.00
+setcorrectTXIQphase -90.00
+setcorrectTXIQphase -102.00
+setcorrectTXIQphase -121.00
+setcorrectTXIQphase -140.00
+setcorrectTXIQphase -158.00
+setcorrectTXIQphase -183.00
+setcorrectTXIQphase -202.00
+setcorrectTXIQphase -220.00
+setcorrectTXIQphase -233.00
+setcorrectTXIQphase -251.00
+setcorrectTXIQphase -270.00
+setcorrectTXIQphase -307.00
+setcorrectTXIQphase -344.00
+setcorrectTXIQphase -388.00
+setcorrectTXIQphase -400.00
+setcorrectTXIQphase -388.00
+setcorrectTXIQphase -288.00
+setcorrectTXIQphase -115.00
+setcorrectTXIQphase  -9.00
+setcorrectTXIQphase  90.00
+setcorrectTXIQphase 152.00
+setcorrectTXIQphase 202.00
+setcorrectTXIQphase 251.00
+setcorrectTXIQphase 313.00
+setcorrectTXIQphase 350.00
+setcorrectTXIQphase 400.00
+setcorrectTXIQphase 381.00
+setcorrectTXIQphase 288.00
+setcorrectTXIQphase 214.00
+setcorrectTXIQphase 152.00
+setcorrectTXIQphase 140.00
+setcorrectTXIQphase 133.00
+setcorrectTXIQphase 115.00
+setcorrectTXIQphase  96.00
+setcorrectTXIQphase  78.00
+setcorrectTXIQphase  59.00
+setcorrectTXIQphase  28.00
+setcorrectTXIQphase -22.00
+setcorrectTXIQphase -71.00
+setcorrectTXIQphase -90.00
+setcorrectTXIQphase -102.00
+setcorrectTXIQphase -121.00
+setcorrectTXIQphase -127.00
+setcorrectTXIQphase -109.00
+setcorrectTXIQphase -65.00
+setcorrectTXIQphase  40.00
+setcorrectTXIQphase 115.00
+setcorrectTXIQphase 146.00
+setcorrectTXIQphase 164.00
+setcorrectTXIQphase 171.00
+setcorrectTXIQphase 177.00
+setcorrectTXIQphase 171.00
+setcorrectTXIQphase 152.00
+setcorrectTXIQphase  90.00
+setcorrectTXIQphase  28.00
+setcorrectTXIQphase  22.00
+setOsc -11025.000001 0
+setOsc 11025.000001 1
+setcorrectTXIQphase  -2.00
+setOsc 0.000000 0
+setOsc -11025.000001 0
+setOsc 11025.000001 1
+setOsc -11025.000000 0

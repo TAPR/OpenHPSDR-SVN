@@ -55,6 +55,7 @@ void
 correctIQ (CXB sigbuf, IQ iq)
 {
   int i;
+
   for (i = 0; i < CXBhave (sigbuf); i++)
     {
       CXBimag (sigbuf, i) += iq->phase * CXBreal (sigbuf, i);

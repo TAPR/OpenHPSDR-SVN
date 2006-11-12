@@ -80,8 +80,8 @@ ringb_float_t *lring, *rring;
 
 
 CWToneGen gen;
-static BOOLEAN playing = FALSE, iambic = FALSE, bug = FALSE, 
-	cw_ring_reset = FALSE;
+static BOOLEAN playing = FALSE, iambic = FALSE, bug = FALSE,
+        cw_ring_reset = FALSE;
 static REAL wpm = 18.0, freq = 600.0, ramp = 5.0, gain = 0.0;
 
 
@@ -92,19 +92,19 @@ DttSP_EXP void
 CWtoneExchange (float *bufl, float *bufr, int nframes)
 {
   size_t numsamps, bytesize = sizeof (float) * nframes;
-  
+
   if (cw_ring_reset)
     {
-	  size_t reset_size = max(SIZEBUF,(unsigned)nframes);
+          size_t reset_size = max(SIZEBUF,(unsigned)nframes);
       cw_ring_reset = FALSE;
- 	  EnterCriticalSection (cs_cw);
+          EnterCriticalSection (cs_cw);
       //ringb_float_restart (lring, reset_size);
       //ringb_float_restart (rring, reset_size);
-	  ringb_float_reset(lring);
-	  ringb_float_reset(rring);
+          ringb_float_reset(lring);
+          ringb_float_reset(rring);
       memset (bufl, 0, bytesize);
       memset (bufr, 0, bytesize);
-	  LeaveCriticalSection (cs_cw);
+          LeaveCriticalSection (cs_cw);
       return;
     }
   if ((numsamps = ringb_float_read_space (lring)) < (size_t) nframes)
@@ -112,22 +112,22 @@ CWtoneExchange (float *bufl, float *bufr, int nframes)
       memset (bufl, 0, bytesize);
       memset (bufr, 0, bytesize);
 /*      if (numsamps != 0)
-	  {
+          {
           EnterCriticalSection (cs_cw);
-		  ringb_float_read (lring, bufl + nframes - numsamps, numsamps);
-		  ringb_float_read (rring, bufr + nframes - numsamps, numsamps);
-		  LeaveCriticalSection (cs_cw);
-	  }
-	  */
+                  ringb_float_read (lring, bufl + nframes - numsamps, numsamps);
+                  ringb_float_read (rring, bufr + nframes - numsamps, numsamps);
+                  LeaveCriticalSection (cs_cw);
+          }
+          */
     }
   else
     {
-	  EnterCriticalSection (cs_cw);
+          EnterCriticalSection (cs_cw);
       ringb_float_read (lring, bufl, nframes);
       ringb_float_read (rring, bufr, nframes);
-	  LeaveCriticalSection (cs_cw);
+          LeaveCriticalSection (cs_cw);
     }
-	
+
 }
 
 // generated tone -> output ringbuffer
@@ -141,14 +141,15 @@ send_tone (void)
   else
     {
       int i;
-      EnterCriticalSection (cs_cw);
+      EnterCriticalSection (cs_cw);	  
+      correctIQ(gen->buf, tx.iqfix);
       for (i = 0; i < gen->size; i++)
-	  {
-		float l = (float) CXBreal (gen->buf, i),
-			r = (float) CXBimag (gen->buf, i);
-		ringb_float_write (lring, (float *) &l, 1);
-		ringb_float_write (rring, (float *) &r, 1);
-	  }
+          {
+                float l = (float) CXBreal (gen->buf, i),
+                        r = (float) CXBimag (gen->buf, i);
+                ringb_float_write (lring, (float *) &l, 1);
+                ringb_float_write (rring, (float *) &r, 1);
+          }
       LeaveCriticalSection (cs_cw);
     }
 }
@@ -166,11 +167,11 @@ send_silence (void)
       int i;
       EnterCriticalSection (cs_cw);
       for (i = 0; i < gen->size; i++)
-	  {
-		float zero = 0.0;
-		ringb_float_write (lring, &zero, 1);
-		ringb_float_write (rring, &zero, 1);
-	  }
+          {
+                float zero = 0.0;
+                ringb_float_write (lring, &zero, 1);
+                ringb_float_write (rring, &zero, 1);
+          }
       LeaveCriticalSection (cs_cw);
     }
 }
@@ -187,42 +188,42 @@ CWtoneExchange (float *bufl, int nframes, int numchans)
   if ((numframes =
        ringb_float_read_space (lring)) < (size_t) numchans * nframes)
     {
-	  EnterCriticalSection (cs_cw);
+          EnterCriticalSection (cs_cw);
       memset (bufl, 0, bytesize);
       if (numframes != 0)
-		{
-			int i, j;
-			numframes /= numchans;
+                {
+                        int i, j;
+                        numframes /= numchans;
 
-			for (i = 0; i < nframes - (int) numframes; i++)
-			{
-				float l, r;
-				ringb_float_read (lring, &l, 1);
-				ringb_float_read (lring, &r, 1);
-				for (j = 0; j < numchans; j += 2, locbuf += 2)
-				{
-					locbuf[0] = l;
-					locbuf[1] = r;
-				}
-			}
-		}
-	  LeaveCriticalSection (cs_cw);
+                        for (i = 0; i < nframes - (int) numframes; i++)
+                        {
+                                float l, r;
+                                ringb_float_read (lring, &l, 1);
+                                ringb_float_read (lring, &r, 1);
+                                for (j = 0; j < numchans; j += 2, locbuf += 2)
+                                {
+                                        locbuf[0] = l;
+                                        locbuf[1] = r;
+                                }
+                        }
+                }
+          LeaveCriticalSection (cs_cw);
     }
   else
     {
       int i, j;
       EnterCriticalSection (cs_cw);
       for (i = 0; i < nframes; i++)
-	  {
-		float l, r;
-		ringb_float_read (lring, &l, 1);
-		ringb_float_read (lring, &r, 1);
-		for (j = 0; j < numchans; j += 2, locbuf += 2)
-			{
-			locbuf[0] = l;
-			locbuf[1] = r;
-			}
-	  }
+          {
+                float l, r;
+                ringb_float_read (lring, &l, 1);
+                ringb_float_read (lring, &r, 1);
+                for (j = 0; j < numchans; j += 2, locbuf += 2)
+                        {
+                        locbuf[0] = l;
+                        locbuf[1] = r;
+                        }
+          }
       LeaveCriticalSection (cs_cw);
     }
 }
@@ -243,6 +244,7 @@ send_tone (void)
     {
       EnterCriticalSection (cs_cw);
       ringb_float_write (lring, (float *) CXBbase (gen->buf), 2 * gen->size);
+#pragma message("info: need IQ correction in CW xmit path (kd5tfd 12 Nov 2006)") 
       LeaveCriticalSection (cs_cw);
     }
 }
@@ -263,10 +265,10 @@ send_silence (void)
       int i;
       EnterCriticalSection (cs_cw);
       for (i = 0; i < 2 * gen->size; i++)
-	{
-	  float zero = 0.0;
-	  ringb_float_write (lring, &zero, 1);
-	}
+        {
+          float zero = 0.0;
+          ringb_float_write (lring, &zero, 1);
+        }
       LeaveCriticalSection (cs_cw);
     }
 }
@@ -281,7 +283,7 @@ send_silence (void)
 
 CALLBACK
 timer_callback (UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1,
-		DWORD_PTR dw2)
+                DWORD_PTR dw2)
 {
   sem_post (&poll_fired);
 }
@@ -296,23 +298,23 @@ sound_thread_keyd (void)
       sem_wait (&clock_fired);
 
       if (playing)
-		{
+                {
 
-			// CWTone keeps playing for awhile after it's turned off,
-			// in order to allow for a decay envelope;
-			// returns FALSE when it's actually done.
-			playing = CWTone (gen);
-			EnterCriticalSection(update_ok);
-			send_tone ();
-			LeaveCriticalSection(update_ok);
-		}
-		else
-		{
-			EnterCriticalSection(update_ok);
-			send_silence ();
-			// only let updates run when we've just generated silence
-			LeaveCriticalSection(update_ok);
-		}
+                        // CWTone keeps playing for awhile after it's turned off,
+                        // in order to allow for a decay envelope;
+                        // returns FALSE when it's actually done.
+                        playing = CWTone (gen);
+                        EnterCriticalSection(update_ok);
+                        send_tone ();
+                        LeaveCriticalSection(update_ok);
+                }
+                else
+                {
+                        EnterCriticalSection(update_ok);
+                        send_silence ();
+                        // only let updates run when we've just generated silence
+                        LeaveCriticalSection(update_ok);
+                }
     }
 
   pthread_exit (0);
@@ -324,15 +326,15 @@ read_key (REAL del, BOOLEAN dot, BOOLEAN dash)
 {
   extern BOOLEAN read_straight_key (KeyerState ks, BOOLEAN keyed);
   extern BOOLEAN read_iambic_key (KeyerState ks, BOOLEAN dot,
-				  BOOLEAN dash, KeyerLogic kl, REAL ticklen);
+                                  BOOLEAN dash, KeyerLogic kl, REAL ticklen);
 
 
   if (bug)
     {
       if (dash)
-	return read_straight_key (ks, dash);
+        return read_straight_key (ks, dash);
       else
-	return read_iambic_key (ks, dot, FALSE, kl, del);
+        return read_iambic_key (ks, dot, FALSE, kl, del);
     }
   if (iambic)
     return read_iambic_key (ks, dot, dash, kl, del);
@@ -471,7 +473,7 @@ SetKeyerMode (int newmode)
   if (newmode == 1)
   {
     ks->mode = MODE_B;
-	ks->flag.mdlmdB = TRUE;
+        ks->flag.mdlmdB = TRUE;
   }
   if (newmode == 0)
   {
@@ -501,16 +503,16 @@ SetKeyerRevPdl (BOOLEAN rvp)
 }
 
 /*updateKeyer(REAL nfreq, BOOLEAN niambic, REAL ngain, REAL nramp, REAL nwpm,
-			BOOLEAN revpdl, int weight, REAL SampleRate) {
-	ks->flag.iambic = niambic;
-	iambic = niambic;
-	ks->flag.revpdl = revpdl;
-	ks->weight = weight;
-	wpm = nwpm;
-	gain = ngain;
-	ramp = nramp;
-	freq = nfreq;
-	gen->osc.freq = 2.0 * M_PI * freq / SampleRate;
+                        BOOLEAN revpdl, int weight, REAL SampleRate) {
+        ks->flag.iambic = niambic;
+        iambic = niambic;
+        ks->flag.revpdl = revpdl;
+        ks->weight = weight;
+        wpm = nwpm;
+        gain = ngain;
+        ramp = nramp;
+        freq = nfreq;
+        gen->osc.freq = 2.0 * M_PI * freq / SampleRate;
 } */
 DttSP_EXP void
 SetKeyerPerf (BOOLEAN hiperf)
@@ -523,7 +525,7 @@ SetKeyerPerf (BOOLEAN hiperf)
       timeKillEvent ((UINT) timerid);
       timerid = 0;
       Sleep (11);
-	  LeaveCriticalSection(update_ok);
+          LeaveCriticalSection(update_ok);
     }
   delCWToneGen (gen);
   if (hiperf)
@@ -542,36 +544,36 @@ SetKeyerPerf (BOOLEAN hiperf)
   if (tmp_timer != 0)
     {
 #ifndef INTERLEAVED
-	  EnterCriticalSection(cs_cw);
+          EnterCriticalSection(cs_cw);
       ringb_float_restart (lring, SIZEBUF);
       ringb_float_restart (rring, SIZEBUF);
-	  LeaveCriticalSection(cs_cw);
+          LeaveCriticalSection(cs_cw);
 #else
       ringb_float_restart (lring, SIZEBUF);
 #endif
       if ((timerid =
-	   timeSetEvent (key_poll_period, 1,
-			 (LPTIMECALLBACK) timer_callback,
-			 (DWORD_PTR) NULL, TIME_PERIODIC)) == (MMRESULT) NULL)
-	fprintf (stderr, "Timer failed\n"), fflush (stderr);
-      
+           timeSetEvent (key_poll_period, 1,
+                         (LPTIMECALLBACK) timer_callback,
+                         (DWORD_PTR) NULL, TIME_PERIODIC)) == (MMRESULT) NULL)
+        fprintf (stderr, "Timer failed\n"), fflush (stderr);
+
     }
 }
 DttSP_EXP void
 NewKeyer (REAL freq, BOOLEAN niambic, REAL gain, REAL ramp, REAL wpm,
-	  REAL SampleRate)
+          REAL SampleRate)
 {
 
   BOOL out;
   kl = newKeyerLogic ();
   ks = newKeyerState ();
   ks->flag.iambic = niambic;
-  ks->flag.revpdl = TRUE;	// depends on port wiring
+  ks->flag.revpdl = TRUE;       // depends on port wiring
   ks->flag.autospace.khar = ks->flag.autospace.word = FALSE;
   ks->flag.mdlmdB = TRUE;
   ks->flag.memory.dah = TRUE;
   ks->flag.memory.dit = TRUE;
-  ks->debounce = 1;		// could be more if sampled faster
+  ks->debounce = 1;             // could be more if sampled faster
   ks->mode = MODE_B;
   ks->weight = 50;
   ks->wpm = wpm;
@@ -611,14 +613,14 @@ NewKeyer (REAL freq, BOOLEAN niambic, REAL gain, REAL ramp, REAL wpm,
 DttSP_EXP void
 *NewCriticalSection()
 {
-	LPCRITICAL_SECTION cs_ptr;
-	cs_ptr = (LPCRITICAL_SECTION)safealloc(1,sizeof(CRITICAL_SECTION),"Critical Section");
-	return (void *)cs_ptr;
+        LPCRITICAL_SECTION cs_ptr;
+        cs_ptr = (LPCRITICAL_SECTION)safealloc(1,sizeof(CRITICAL_SECTION),"Critical Section");
+        return (void *)cs_ptr;
 }
 DttSP_EXP void
 DestroyCriticalSection(LPCRITICAL_SECTION cs_ptr)
 {
-	safefree((char *)cs_ptr);
+        safefree((char *)cs_ptr);
 }
 
 DttSP_EXP void
@@ -632,7 +634,7 @@ StartKeyer ()
 #endif
   if ((timerid =
        timeSetEvent (key_poll_period, 1, (LPTIMECALLBACK) timer_callback,
-		     (DWORD_PTR) NULL, TIME_PERIODIC)) == (MMRESULT) NULL)
+                     (DWORD_PTR) NULL, TIME_PERIODIC)) == (MMRESULT) NULL)
     fprintf (stderr, "Timer failed\n"), fflush (stderr);
   sem_post (&keyer_started);
 }
