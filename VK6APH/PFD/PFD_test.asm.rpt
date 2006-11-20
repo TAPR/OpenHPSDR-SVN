@@ -1,5 +1,5 @@
 Assembler report for PFD_test
-Mon Oct 02 20:35:42 2006
+Fri Nov 10 12:03:11 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Mon Oct 02 20:35:42 2006 ;
+; Assembler Status      ; Successful - Fri Nov 10 12:03:11 2006 ;
 ; Revision Name         ; PFD_test                              ;
 ; Top-level Entity Name ; PFD_test                              ;
 ; Family                ; Cyclone II                            ;
@@ -94,7 +94,7 @@ applicable agreement for further details.
 +----------------+--------------------------------------------------+
 ; Device         ; EP2C5Q208C8                                      ;
 ; JTAG usercode  ; 0xFFFFFFFF                                       ;
-; Checksum       ; 0x00076627                                       ;
+; Checksum       ; 0x000754F4                                       ;
 +----------------+--------------------------------------------------+
 
 
@@ -105,7 +105,7 @@ applicable agreement for further details.
 +----------------+--------------------------------------------------+
 ; Device         ; EPCS4                                            ;
 ; JTAG usercode  ; 0x00000000                                       ;
-; Checksum       ; 0x07510B89                                       ;
+; Checksum       ; 0x07515181                                       ;
 +----------------+--------------------------------------------------+
 
 
@@ -115,12 +115,12 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Oct 02 20:35:39 2006
+    Info: Processing started: Fri Nov 10 12:03:07 2006
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off PFD_test -c PFD_test
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Processing ended: Mon Oct 02 20:35:42 2006
-    Info: Elapsed time: 00:00:03
+    Info: Processing ended: Fri Nov 10 12:03:11 2006
+    Info: Elapsed time: 00:00:04
 
 
