@@ -58,7 +58,7 @@ Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage 
 SSCK                         : 1         : input  : LVTTL             :         : 2         : Y              
 CMCLK                        : 2         : output : LVTTL             :         : 1         : Y              
 PTT                          : 3         : input  : LVTTL             :         : 1         : Y              
-CLK_24MHZ                    : 4         : input  : LVTTL             :         : 1         : Y              
+CLK_12MHZ                    : 4         : input  : LVTTL             :         : 1         : Y              
 DFS1                         : 5         : output : LVTTL             :         : 1         : Y              
 HPF                          : 6         : output : LVTTL             :         : 1         : Y              
 DFS0                         : 7         : output : LVTTL             :         : 1         : Y              
@@ -139,9 +139,9 @@ RESERVED_INPUT               : 81        :        :                   :         
 C3                           : 82        : input  : LVTTL             :         : 2         : Y              
 RESERVED_INPUT               : 83        :        :                   :         : 2         :                
 C2                           : 84        : input  : LVTTL             :         : 2         : Y              
-EXP1                         : 85        : output : LVTTL             :         : 2         : Y              
-EXP2                         : 86        : output : LVTTL             :         : 2         : Y              
-EXP3                         : 87        : output : LVTTL             :         : 2         : Y              
+TUNE                         : 85        : output : LVTTL             :         : 2         : Y              
+LED1                         : 86        : output : LVTTL             :         : 2         : Y              
+LED2                         : 87        : output : LVTTL             :         : 2         : Y              
 EXP4                         : 88        : output : LVTTL             :         : 2         : Y              
 QPWM                         : 89        : output : LVTTL             :         : 2         : Y              
 IPWM                         : 90        : output : LVTTL             :         : 2         : Y              

@@ -42,14 +42,15 @@
 //  13 August 2006 - AK5394A now reset at power on and speed setting via Ozy
 //  14 August 2006 - inverted PTT pass to Atlas C3
 //  19 August 2006 - Interface to Atlas pins changed - V1.0
-//  21 August 2006 - Change to use I2C interface to TLV320AIC23B  -- spi code commented out w/ '//i2c' comments  (kd5tfd) 
+//  21 August 2006 - Change to use I2C interface to TLV320AIC23B  -- spi code commented out w/ '//i2c' comments  (kd5tfd)
+//  19 November 2006 - Changes to use the V2 hardware. Replace 24.576MHz clock with 12.288MHz. 
 //
 //
 //  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
 //  +3.3v or an Ozy board the AK5394A will remain in reset and produce no clocks etc.
 
 module Janus(
-   	input  CLK_24MHZ,
+   	input  CLK_12MHZ,
    	input  CAL,
    	output CBCLK,
    	output CDIN,
@@ -60,9 +61,9 @@ module Janus(
    	output CMODE,
    	output DFS0,
    	output DFS1,
-   	output EXP1,
-   	output EXP2,
-   	output EXP3,
+   	output TUNE,
+   	output LED1,
+   	output LED2,
    	output EXP4,
    	input  FSYNC,
    	output HPF,
@@ -96,7 +97,6 @@ module Janus(
 	inout  C15
 ); 
 
-reg clock_by_2; 
 reg index;
 reg [15:0]tdata;
 reg [2:0]load;
@@ -106,13 +106,6 @@ reg TLV_CLK;
 reg data; 
 reg [3:0] bit_count;
 //i2c reg TLV_nCS;
-
-
-
-// divide 24.576MHz clock by two for TLV320 and AK5394A
-always @ ( posedge  CLK_24MHZ) begin 
-	clock_by_2 <= ~clock_by_2;
-	end 
 
 //////////////////////////////////////////////////////////////
 //
@@ -152,7 +145,7 @@ always @ ( posedge  CLK_24MHZ) begin
 
 // State machine to send data to TLV320 via SPI interface
 
-//i2c always @ (posedge CLK_24MHZ)
+//i2c always @ (posedge CLK_12MHZ)
 //i2c begin
 //i2c case (TLV)
 //i2c 4'd0: begin
@@ -197,7 +190,7 @@ always @ ( posedge  CLK_24MHZ) begin
 //i2c end
 
 // Atlas outputs
-assign C5 = CLK_24MHZ;		
+assign C5 = CLK_12MHZ;		
 assign C6 = SCLK; 			// is actually BCLK
 assign C7 = LRCLK;
 assign C10 = SDOUT; 
@@ -216,14 +209,14 @@ assign DFS0 = C13; 		    // set AK speed
 assign DFS1 = C14; 			// set AK speed
 
 // AK5394A pins
-assign MCLK = clock_by_2; 	// 24.576MHz/2
+assign MCLK = CLK_12MHZ; 	// 12.288MHz
 assign HPF = 1'b1; 			// HPF in AK on
 assign SMODE1 = 1'b1; 		// Master mode, I2S
 assign SMODE2 = 1'b1; 		// Master mode, I2S
 assign ZCAL = 1'b1;			// Calibrate AK from A/D inputs
 
 // LTV320 pins
-assign CMCLK = clock_by_2; 	// 24.576MHz/2
+assign CMCLK = CLK_12MHZ; 	// 12.288MHz
 //i2c assign CMODE = 1'b1;		// Set to 1 for SPI mode 
 assign CMODE = 1'b0;		// Set to 0 for I2C
 //i2c assign nCS = TLV_nCS;
@@ -231,10 +224,10 @@ assign nCS = 1'b0;   // this results in an i2c addr of 0x1a
 //i2c assign SSCK = TLV_CLK;		// SPI clock on TLV320
 //i2c assign MOSI = data; 		    // SPI data to send to TLV320 
 
-// EXTRA pins
-assign EXP1 = 1'b0;			
-assign EXP2 = 1'b0;			
-assign EXP3 = 1'b0;
+// Other pins 
+assign TUNE = 1'b0;			
+assign LED1 = 1'b0;			
+assign LED2 = 1'b0;
 assign EXP4 = 1'b0;
 
 endmodule 

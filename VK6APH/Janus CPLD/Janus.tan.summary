@@ -2,16 +2,6 @@
 Timing Analyzer Summary
 --------------------------------------------------------------------------------------
 
-Type           : Worst-case tco
-Slack          : N/A
-Required Time  : None
-Actual Time    : 8.237 ns
-From           : clock_by_2
-To             : MCLK
-From Clock     : CLK_24MHZ
-To Clock       : --
-Failed Paths   : 0
-
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
@@ -20,16 +10,6 @@ From           : C3
 To             : QPWM
 From Clock     : --
 To Clock       : --
-Failed Paths   : 0
-
-Type           : Clock Setup: 'CLK_24MHZ'
-Slack          : N/A
-Required Time  : None
-Actual Time    : Restricted to 304.04 MHz ( period = 3.289 ns )
-From           : clock_by_2
-To             : clock_by_2
-From Clock     : CLK_24MHZ
-To Clock       : CLK_24MHZ
 Failed Paths   : 0
 
 Type           : Total number of failed paths
