@@ -200,7 +200,7 @@ GND                          : 140       : gnd    :                   :         
 CBCLK                        : 141       : output : LVTTL             :         : 3         : Y              
 LRCLK                        : 142       : input  : LVTTL             :         : 3         : Y              
 BCLK                         : 143       : input  : LVTTL             :         : 3         : Y              
-CLK_24MHZ                    : 144       : input  : LVTTL             :         : 3         : Y              
+CLK_12MHZ                    : 144       : input  : LVTTL             :         : 3         : Y              
 I_PWM_out                    : 145       : output : LVTTL             :         : 3         : Y              
 Q_PWM_out                    : 146       : output : LVTTL             :         : 3         : Y              
 AK_reset                     : 147       : output : LVTTL             :         : 3         : Y              
