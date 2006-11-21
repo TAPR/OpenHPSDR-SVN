@@ -39,13 +39,11 @@ set_instance_assignment -name CLOCK_SETTINGS "BCLK from Janus" -to BCLK
 set_global_assignment -name FMAX_REQUIREMENT "24 MHz" -section_id "FX2 Clock"
 set_instance_assignment -name CLOCK_SETTINGS "FX2 Clock" -to FX2_CLK
 set_global_assignment -name FMAX_REQUIREMENT "24.576 MHz" -section_id "Janus 24.576MHz clock"
-set_instance_assignment -name CLOCK_SETTINGS "Janus 24.576MHz clock" -to CLK_24MHZ
 set_global_assignment -name BASED_ON_CLOCK_SETTINGS "Janus 24.576MHz clock" -section_id "TLV BCLK"
 set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 8 -section_id "TLV BCLK"
 set_instance_assignment -name CLOCK_SETTINGS "TLV BCLK" -to CBCLK
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
-set_location_assignment PIN_144 -to CLK_24MHZ
 set_location_assignment PIN_143 -to BCLK
 set_location_assignment PIN_138 -to DOUT
 set_location_assignment PIN_142 -to LRCLK
@@ -111,3 +109,5 @@ set_location_assignment PIN_133 -to DFS1
 set_location_assignment PIN_128 -to PTT_in
 set_location_assignment PIN_97 -to dot
 set_location_assignment PIN_96 -to dash
+set_instance_assignment -name CLOCK_SETTINGS "Janus 24.576MHz clock" -to CLK_12MHZ
+set_location_assignment PIN_144 -to CLK_12MHZ

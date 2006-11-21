@@ -1,7 +1,7 @@
 |Ozy_Janus
 FX2_CLK => ~NO_FANOUT~
 IFCLK => IFCLK~0.IN3
-CLK_24MHZ => CLK_24MHZ~0.IN1
+CLK_12MHZ => CLK_12MHZ~0.IN1
 FX2_FD[0] <= FX2_FD~31
 FX2_FD[1] <= FX2_FD~30
 FX2_FD[2] <= FX2_FD~29
@@ -73,11 +73,10 @@ q[4] <= lpm_counter:lpm_counter_component.q
 q[5] <= lpm_counter:lpm_counter_component.q
 q[6] <= lpm_counter:lpm_counter_component.q
 q[7] <= lpm_counter:lpm_counter_component.q
-q[8] <= lpm_counter:lpm_counter_component.q
 
 
 |Ozy_Janus|clocks:clocks|lpm_counter:lpm_counter_component
-clock => cntr_tkh:auto_generated.clock
+clock => cntr_skh:auto_generated.clock
 clk_en => ~NO_FANOUT~
 cnt_en => ~NO_FANOUT~
 updown => ~NO_FANOUT~
@@ -97,17 +96,15 @@ data[4] => ~NO_FANOUT~
 data[5] => ~NO_FANOUT~
 data[6] => ~NO_FANOUT~
 data[7] => ~NO_FANOUT~
-data[8] => ~NO_FANOUT~
 cin => ~NO_FANOUT~
-q[0] <= cntr_tkh:auto_generated.q[0]
-q[1] <= cntr_tkh:auto_generated.q[1]
-q[2] <= cntr_tkh:auto_generated.q[2]
-q[3] <= cntr_tkh:auto_generated.q[3]
-q[4] <= cntr_tkh:auto_generated.q[4]
-q[5] <= cntr_tkh:auto_generated.q[5]
-q[6] <= cntr_tkh:auto_generated.q[6]
-q[7] <= cntr_tkh:auto_generated.q[7]
-q[8] <= cntr_tkh:auto_generated.q[8]
+q[0] <= cntr_skh:auto_generated.q[0]
+q[1] <= cntr_skh:auto_generated.q[1]
+q[2] <= cntr_skh:auto_generated.q[2]
+q[3] <= cntr_skh:auto_generated.q[3]
+q[4] <= cntr_skh:auto_generated.q[4]
+q[5] <= cntr_skh:auto_generated.q[5]
+q[6] <= cntr_skh:auto_generated.q[6]
+q[7] <= cntr_skh:auto_generated.q[7]
 cout <= <GND>
 eq[0] <= <GND>
 eq[1] <= <GND>
@@ -127,8 +124,7 @@ eq[14] <= <GND>
 eq[15] <= <GND>
 
 
-|Ozy_Janus|clocks:clocks|lpm_counter:lpm_counter_component|cntr_tkh:auto_generated
-clock => counter_reg_bit1a[8].CLK
+|Ozy_Janus|clocks:clocks|lpm_counter:lpm_counter_component|cntr_skh:auto_generated
 clock => counter_reg_bit1a[7].CLK
 clock => counter_reg_bit1a[6].CLK
 clock => counter_reg_bit1a[5].CLK
@@ -145,7 +141,6 @@ q[4] <= counter_reg_bit1a[4].REGOUT
 q[5] <= counter_reg_bit1a[5].REGOUT
 q[6] <= counter_reg_bit1a[6].REGOUT
 q[7] <= counter_reg_bit1a[7].REGOUT
-q[8] <= counter_reg_bit1a[8].REGOUT
 
 
 |Ozy_Janus|Rx_fifo:Rx_fifo
