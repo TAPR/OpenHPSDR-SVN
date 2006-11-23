@@ -80,7 +80,7 @@ DATA0                        : 20        : input  :                   :         
 DCLK                         : 21        :        :                   :         : 1         :                
 nCE                          : 22        :        :                   :         : 1         :                
 GND+                         : 23        :        :                   :         : 1         :                
-MHz                          : 24        : input  : LVTTL             :         : 1         : Y              
+GND+                         : 24        :        :                   :         : 1         :                
 GND                          : 25        : gnd    :                   :         :           :                
 nCONFIG                      : 26        :        :                   :         : 1         :                
 GND+                         : 27        :        :                   :         : 1         :                
@@ -200,7 +200,7 @@ GND                          : 140       : gnd    :                   :         
 RESERVED_INPUT               : 141       :        :                   :         : 3         :                
 RESERVED_INPUT               : 142       :        :                   :         : 3         :                
 ref_in                       : 143       : input  : LVTTL             :         : 3         : Y              
-ref_out                      : 144       : output : LVTTL             :         : 3         : Y              
+RESERVED_INPUT               : 144       :        :                   :         : 3         :                
 VCXO_out                     : 145       : output : LVTTL             :         : 3         : Y              
 osc_in                       : 146       : input  : LVTTL             :         : 3         : Y              
 RESERVED_INPUT               : 147       :        :                   :         : 3         :                

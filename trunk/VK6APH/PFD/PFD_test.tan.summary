@@ -5,10 +5,10 @@ Timing Analyzer Summary
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 19.169 ns
-From           : pfd:Janus_pfd|SYNTHESIZED_WIRE_12
+Actual Time    : 18.942 ns
+From           : pfd:Janus_pfd|SYNTHESIZED_WIRE_13
 To             : VCXO_out
-From Clock     : ref_in
+From Clock     : osc_in
 To Clock       : --
 Failed Paths   : 0
 
@@ -25,9 +25,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'osc_in'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 247.10 MHz ( period = 4.047 ns )
-From           : osc_count[0]
-To             : osc_count[8]
+Actual Time    : 241.90 MHz ( period = 4.134 ns )
+From           : osc_count[4]
+To             : osc_count[11]
 From Clock     : osc_in
 To Clock       : osc_in
 Failed Paths   : 0
@@ -35,9 +35,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'ref_in'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 260.42 MHz ( period = 3.840 ns )
-From           : ref_count[7]
-To             : ref_count[8]
+Actual Time    : 260.08 MHz ( period = 3.845 ns )
+From           : ref_count[3]
+To             : ref_count[12]
 From Clock     : ref_in
 To Clock       : ref_in
 Failed Paths   : 0
