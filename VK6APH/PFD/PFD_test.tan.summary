@@ -3,41 +3,61 @@ Timing Analyzer Summary
 --------------------------------------------------------------------------------------
 
 Type           : Worst-case tco
-Slack          : N/A
-Required Time  : None
-Actual Time    : 18.942 ns
-From           : pfd:Janus_pfd|SYNTHESIZED_WIRE_13
-To             : VCXO_out
-From Clock     : osc_in
+Slack          : 5.734 ns
+Required Time  : 20.000 ns
+Actual Time    : 14.266 ns
+From           : ref_8k
+To             : LED[2]
+From Clock     : ref_in
 To Clock       : --
 Failed Paths   : 0
 
 Type           : Worst-case tpd
-Slack          : N/A
-Required Time  : None
-Actual Time    : 11.351 ns
-From           : osc_in
-To             : LED[1]
+Slack          : 8.677 ns
+Required Time  : 20.000 ns
+Actual Time    : 11.323 ns
+From           : ref_in
+To             : LED[0]
 From Clock     : --
 To Clock       : --
 Failed Paths   : 0
 
+Type           : Clock Setup: 'ref_in'
+Slack          : 75.608 ns
+Required Time  : 12.29 MHz ( period = 81.380 ns )
+Actual Time    : 173.25 MHz ( period = 5.772 ns )
+From           : ref_count[12]
+To             : ref_count[4]
+From Clock     : ref_in
+To Clock       : ref_in
+Failed Paths   : 0
+
 Type           : Clock Setup: 'osc_in'
-Slack          : N/A
-Required Time  : None
-Actual Time    : 241.90 MHz ( period = 4.134 ns )
-From           : osc_count[4]
-To             : osc_count[11]
+Slack          : 94.357 ns
+Required Time  : 10.00 MHz ( period = 100.000 ns )
+Actual Time    : 177.21 MHz ( period = 5.643 ns )
+From           : osc_count[7]
+To             : osc_count[8]
 From Clock     : osc_in
 To Clock       : osc_in
 Failed Paths   : 0
 
-Type           : Clock Setup: 'ref_in'
-Slack          : N/A
-Required Time  : None
-Actual Time    : 260.08 MHz ( period = 3.845 ns )
-From           : ref_count[3]
-To             : ref_count[12]
+Type           : Clock Hold: 'osc_in'
+Slack          : 0.753 ns
+Required Time  : 10.00 MHz ( period = 100.000 ns )
+Actual Time    : N/A
+From           : osc_count[15]
+To             : osc_count[15]
+From Clock     : osc_in
+To Clock       : osc_in
+Failed Paths   : 0
+
+Type           : Clock Hold: 'ref_in'
+Slack          : 0.753 ns
+Required Time  : 12.29 MHz ( period = 81.380 ns )
+Actual Time    : N/A
+From           : ref_count[15]
+To             : ref_count[15]
 From Clock     : ref_in
 To Clock       : ref_in
 Failed Paths   : 0

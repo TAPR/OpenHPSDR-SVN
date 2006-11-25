@@ -51,3 +51,26 @@ set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-
 set_location_assignment PIN_145 -to VCXO_out
 set_location_assignment PIN_24 -to MHz
 set_location_assignment PIN_144 -to ref_out
+set_global_assignment -name FMAX_REQUIREMENT "10 MHz" -section_id osc_in
+set_global_assignment -name FMAX_REQUIREMENT "12.288 MHz" -section_id ref_in
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS osc_in -section_id osc_8k
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 100 -section_id osc_8k
+set_global_assignment -name OFFSET_FROM_BASE_CLOCK "0 ps" -section_id osc_8k
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS ref_in -section_id ref_8k
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 100 -section_id ref_8k
+set_global_assignment -name OFFSET_FROM_BASE_CLOCK "0 ps" -section_id ref_8k
+set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
+set_instance_assignment -name CLOCK_SETTINGS osc_in -to osc_in
+set_instance_assignment -name CLOCK_SETTINGS ref_in -to ref_in
+set_instance_assignment -name CLOCK_SETTINGS osc_8k -to osc_8k
+set_instance_assignment -name CLOCK_SETTINGS ref_8k -to ref_8k
+set_global_assignment -name CUT_OFF_PATHS_BETWEEN_CLOCK_DOMAINS OFF
+set_global_assignment -name CUT_OFF_IO_PIN_FEEDBACK OFF
+set_global_assignment -name CUT_OFF_READ_DURING_WRITE_PATHS OFF
+set_global_assignment -name TPD_REQUIREMENT "20 ns"
+set_global_assignment -name TSU_REQUIREMENT "20 ns"
+set_global_assignment -name TCO_REQUIREMENT "20 ns"
+set_global_assignment -name TH_REQUIREMENT "20 ns"
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER osc_8k -section_id reference
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER ref_8k -section_id reference
+set_global_assignment -name ENABLE_CLOCK_LATENCY ON

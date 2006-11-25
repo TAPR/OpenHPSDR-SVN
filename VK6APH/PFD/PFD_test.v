@@ -30,7 +30,7 @@ reg [15:0]osc_count;
 
 always @ (posedge ref_in)
 begin
-	if (ref_count == 15'd4999) 
+	if (ref_count == 15'd624) 
 		begin 
 			ref_8k <= ~ref_8k;
 			ref_count <= 15'd0;
@@ -42,7 +42,7 @@ end
 
 always @ (posedge osc_in)
 begin
-	if (osc_count == 15'd6143) 
+	if (osc_count == 15'd767) 
 		begin 
 			osc_8k <= ~osc_8k;
 			osc_count <= 15'd0;
@@ -52,7 +52,7 @@ end
 
 // apply to PFD
 
- pfd Janus_pfd(.ref_in(ref_8k),.osc_in(osc_8k),.pfd_out(pfd_out),.lock(lock));
+// pfd Janus_pfd(.ref_in(ref_8k),.osc_in(osc_8k),.pfd_out(pfd_out),.lock(lock));
 
 //
 // check if the 10MHz reference signal is present.
@@ -67,11 +67,11 @@ else ref_OK <= 1'b1;		 // goes high if no reference
 end 
 
 // select the signal to send to the loop LPF depending if the 10MHz reference is present
-assign  VCXO_out = ref_OK ?  osc_8k : pfd_out; 
+//assign  VCXO_out = ref_OK ?  osc_8k : pfd_out; 
 
 //assign  VCXO_out = pfd_out; 
 
-//assign VCXO_out = ~(ref_8k ^ osc_8k);
+assign VCXO_out = ref_8k ^ osc_8k;
 
 // LEDs for testing
 
