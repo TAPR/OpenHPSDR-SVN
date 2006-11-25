@@ -1,0 +1,116 @@
+Timing Analyzer report for Janus
+Sun Nov 19 20:21:34 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. tpd
+  5. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                 ;
++------------------------------+-------+---------------+-------------+------+------+------------+----------+--------------+
+; Type                         ; Slack ; Required Time ; Actual Time ; From ; To   ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+-------+---------------+-------------+------+------+------------+----------+--------------+
+; Worst-case tpd               ; N/A   ; None          ; 7.004 ns    ; C3   ; QPWM ; --         ; --       ; 0            ;
+; Total number of failed paths ;       ;               ;             ;      ;      ;            ;          ; 0            ;
++------------------------------+-------+---------------+-------------+------+------+------------+----------+--------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                ; Setting            ; From ; To ; Entity Name ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                           ; EPM240T100C5       ;      ;    ;             ;
+; Timing Models                                         ; Final              ;      ;    ;             ;
+; Number of source nodes to report per destination node ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                 ; 10                 ;      ;    ;             ;
+; Number of paths to report                             ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                          ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                            ; Off                ;      ;    ;             ;
+; Default hold multicycle                               ; Same As Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains             ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                        ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                      ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                 ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements               ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                      ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                  ; Off                ;      ;    ;             ;
+; Use TimeQuest Timing Analyzer                         ; Off                ;      ;    ;             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+
+
++-------------------------------------------------------------------+
+; tpd                                                               ;
++-------+-------------------+-----------------+-----------+---------+
+; Slack ; Required P2P Time ; Actual P2P Time ; From      ; To      ;
++-------+-------------------+-----------------+-----------+---------+
+; N/A   ; None              ; 7.004 ns        ; C3        ; QPWM    ;
+; N/A   ; None              ; 6.853 ns        ; C4        ; IPWM    ;
+; N/A   ; None              ; 6.817 ns        ; LRCLK     ; C7      ;
+; N/A   ; None              ; 6.800 ns        ; SCLK      ; C6      ;
+; N/A   ; None              ; 6.791 ns        ; C14       ; DFS1    ;
+; N/A   ; None              ; 6.699 ns        ; CDOUT     ; C11     ;
+; N/A   ; None              ; 6.699 ns        ; SDOUT     ; C10     ;
+; N/A   ; None              ; 6.671 ns        ; C13       ; DFS0    ;
+; N/A   ; None              ; 6.624 ns        ; PTT       ; C15     ;
+; N/A   ; None              ; 6.442 ns        ; CLK_12MHZ ; C5      ;
+; N/A   ; None              ; 6.312 ns        ; C2        ; nRST    ;
+; N/A   ; None              ; 6.022 ns        ; C12       ; CDIN    ;
+; N/A   ; None              ; 6.021 ns        ; C9        ; CLRCIN  ;
+; N/A   ; None              ; 5.970 ns        ; C9        ; CLRCOUT ;
+; N/A   ; None              ; 5.837 ns        ; C8        ; CBCLK   ;
+; N/A   ; None              ; 5.771 ns        ; CLK_12MHZ ; MCLK    ;
+; N/A   ; None              ; 4.922 ns        ; CLK_12MHZ ; CMCLK   ;
++-------+-------------------+-----------------+-----------+---------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Timing Analyzer
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Sun Nov 19 20:21:33 2006
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off Janus -c Janus
+Info: Started post-fitting delay annotation
+Info: Delay annotation completed successfully
+Info: Longest tpd from source pin "C3" to destination pin "QPWM" is 7.004 ns
+    Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_82; Fanout = 1; PIN Node = 'C3'
+    Info: 2: + IC(3.550 ns) + CELL(2.322 ns) = 7.004 ns; Loc. = PIN_89; Fanout = 0; PIN Node = 'QPWM'
+    Info: Total cell delay = 3.454 ns ( 49.31 % )
+    Info: Total interconnect delay = 3.550 ns ( 50.69 % )
+Info: Quartus II Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Processing ended: Sun Nov 19 20:21:34 2006
+    Info: Elapsed time: 00:00:01
+
+
