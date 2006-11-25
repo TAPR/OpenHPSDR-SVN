@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Thu Nov 23 22:08:23 2006
+Analysis & Synthesis Status : Successful - Sat Nov 25 17:22:48 2006
 Quartus II Version : 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
 Revision Name : PFD_test
 Top-level Entity Name : PFD_test
 Family : Cyclone II
-Total logic elements : 58
-Total registers : 39
+Total logic elements : 52
+Total registers : 35
 Total pins : 11
 Total virtual pins : 0
 Total memory bits : 0

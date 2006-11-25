@@ -256,9 +256,6 @@ pfd.v
 AUTO_RESOURCE_SHARING
 OFF
 }
-# hierarchies {
-pfd:Janus_pfd
-}
 # end
 # entity
 PFD_test
@@ -272,7 +269,7 @@ ON
 # case_sensitive
 # source_file
 PFD_test.v
-b05775bda18121e9d902cbc11b685e9
+c212fefb9730cd747c559c545d810ec
 7
 # internal_option {
 AUTO_RESOURCE_SHARING
