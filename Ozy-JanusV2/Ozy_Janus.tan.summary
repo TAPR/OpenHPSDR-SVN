@@ -16,7 +16,7 @@ Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
 Actual Time    : 15.789 ns
-From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_mk6:wrptr_gp|power_modified_counter_values[6]
+From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_jk6:wrptr_gp|power_modified_counter_values[6]
 To             : LED[0]
 From Clock     : IFCLK
 To Clock       : --
@@ -47,7 +47,7 @@ Slack          : 9.468 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : Restricted to 163.03 MHz ( period = 6.134 ns )
 From           : Rx_register[9]
-To             : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|ram_block5a9~portb_datain_reg0
+To             : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ram_block6a9~portb_datain_reg0
 From Clock     : IFCLK
 To Clock       : IFCLK
 Failed Paths   : 0
@@ -56,7 +56,7 @@ Type           : Clock Setup: 'BCLK'
 Slack          : 12.695 ns
 Required Time  : 24.58 MHz ( period = 40.690 ns )
 Actual Time    : 65.36 MHz ( period = 15.300 ns )
-From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram4|q_a[12]
+From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[12]
 To             : sync_count[5]
 From Clock     : BCLK
 To Clock       : BCLK
@@ -76,7 +76,7 @@ Type           : Clock Hold: 'BCLK'
 Slack          : 0.379 ns
 Required Time  : 24.58 MHz ( period = 40.690 ns )
 Actual Time    : N/A
-From           : Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_graycounter_kk6:wrptr_gp|power_modified_counter_values[6]
+From           : Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|a_graycounter_ik6:wrptr_gp|power_modified_counter_values[6]
 To             : Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_9p91:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4|ram_block5a9~portb_address_reg6
 From Clock     : BCLK
 To Clock       : BCLK
