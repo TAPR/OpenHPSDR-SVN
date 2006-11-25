@@ -1,0 +1,49 @@
+--dffpipe WIDTH=1 clock d q ALTERA_INTERNAL_OPTIONS=AUTO_SHIFT_REGISTER_RECOGNITION=OFF
+--VERSION_BEGIN 6.0 cbx_mgl 2006:05:17:10:06:16:SJ cbx_stratixii 2006:03:03:09:35:36:SJ cbx_util_mgl 2006:01:09:10:46:36:SJ  VERSION_END
+
+
+--  Copyright (C) 1991-2006 Altera Corporation
+--  Your use of Altera Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Altera Program License 
+--  Subscription Agreement, Altera MegaCore Function License 
+--  Agreement, or other applicable license agreement, including, 
+--  without limitation, that your use is for the sole purpose of 
+--  programming logic devices manufactured by Altera and sold by 
+--  Altera or its authorized distributors.  Please refer to the 
+--  applicable agreement for further details.
+
+
+
+--synthesis_resources = reg 1 
+OPTIONS ALTERA_INTERNAL_OPTION = "AUTO_SHIFT_REGISTER_RECOGNITION=OFF";
+
+SUBDESIGN dffpipe_s98
+( 
+	clock	:	input;
+	d[0..0]	:	input;
+	q[0..0]	:	output;
+) 
+VARIABLE 
+	dffe8a[0..0] : dffe;
+	clrn	: NODE;
+	ena	: NODE;
+	prn	: NODE;
+	sclr	: NODE;
+
+BEGIN 
+	dffe8a[].CLK = clock;
+	dffe8a[].CLRN = clrn;
+	dffe8a[].D = (d[] & (! sclr));
+	dffe8a[].ENA = ena;
+	dffe8a[].PRN = prn;
+	clrn = VCC;
+	ena = VCC;
+	prn = VCC;
+	q[] = dffe8a[].Q;
+	sclr = GND;
+END;
+--VALID FILE

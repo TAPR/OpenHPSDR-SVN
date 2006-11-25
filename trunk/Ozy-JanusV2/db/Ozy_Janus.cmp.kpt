@@ -1,0 +1,60 @@
+<kpt_db name="Ozy_Janus.fit">
+<key_points_set type="reference">
+    <key_point id="0" type="register">
+    <name>Rx_fifo/dcfifo_component/auto_generated/wrptr_gp/power_modified_counter_values[0]</name>
+  </key_point>
+    <key_point id="1" type="register">
+    <name>Rx_fifo/dcfifo_component/auto_generated/wrptr_gp/power_modified_counter_values[2]</name>
+  </key_point>
+</key_points_set>
+  <key_points_set type="transformed">
+        <key_point id="0" type="register">
+      <name>Rx_fifo/dcfifo_component/auto_generated/wrptr_gp/power_modified_counter_values[0]</name>
+      </key_point>
+        <key_point id="1" type="register">
+      <name>Rx_fifo/dcfifo_component/auto_generated/wrptr_gp/power_modified_counter_values[0]~_DUP_REG</name>
+      </key_point>
+        <key_point id="2" type="register">
+      <name>Rx_fifo/dcfifo_component/auto_generated/wrptr_gp/power_modified_counter_values[2]</name>
+      </key_point>
+        <key_point id="3" type="register">
+      <name>Rx_fifo/dcfifo_component/auto_generated/wrptr_gp/power_modified_counter_values[2]~_DUP_REG</name>
+      </key_point>
+  </key_points_set>
+    <transformations_set>
+        <transformation elim_type="not_eliminated">
+        <kp_set type="reference">
+        <kp_state index="0">
+        <noninverts>
+            <kp id="0">     </kp>
+        </noninverts>
+</kp_state>
+  </kp_set>
+        <kp_set type="transformed">
+        <kp_state index="0">
+        <noninverts>
+            <kp id="0">     </kp>
+            <kp id="1">     </kp>
+        </noninverts>
+  </kp_state>
+  </kp_set>
+  </transformation>
+        <transformation elim_type="not_eliminated">
+        <kp_set type="reference">
+        <kp_state index="0">
+        <noninverts>
+            <kp id="1">     </kp>
+        </noninverts>
+</kp_state>
+  </kp_set>
+        <kp_set type="transformed">
+        <kp_state index="0">
+        <noninverts>
+            <kp id="2">     </kp>
+            <kp id="3">     </kp>
+        </noninverts>
+  </kp_state>
+  </kp_set>
+  </transformation>
+  </transformations_set>
+</kpt_db>
