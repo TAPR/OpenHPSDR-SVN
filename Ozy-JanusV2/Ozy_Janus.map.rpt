@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Sat Nov 25 19:43:15 2006
+Sat Nov 25 20:03:37 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -79,7 +79,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Nov 25 19:43:15 2006        ;
+; Analysis & Synthesis Status        ; Successful - Sat Nov 25 20:03:37 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                                    ;
 ; Top-level Entity Name              ; Ozy_Janus                                    ;
@@ -779,7 +779,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sat Nov 25 19:42:50 2006
+    Info: Processing started: Sat Nov 25 20:03:18 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
     Info: Found entity 1: Tx_fifo
@@ -965,8 +965,8 @@ Info: Implemented 1064 device resources after synthesis - the final resource cou
     Info: Implemented 981 logic cells
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Processing ended: Sat Nov 25 19:43:15 2006
-    Info: Elapsed time: 00:00:26
+    Info: Processing ended: Sat Nov 25 20:03:37 2006
+    Info: Elapsed time: 00:00:20
 
 
 +------------------------------------------+
