@@ -1,5 +1,5 @@
 Fitter report for Ozy_Janus
-Sat Nov 25 19:44:11 2006
+Sat Nov 25 20:04:31 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                    ;
 +------------------------------------+----------------------------------------------+
-; Fitter Status                      ; Successful - Sat Nov 25 19:44:11 2006        ;
+; Fitter Status                      ; Successful - Sat Nov 25 20:04:31 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                                    ;
 ; Top-level Entity Name              ; Ozy_Janus                                    ;
@@ -1533,8 +1533,8 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; LABs with Chains - Fit Attempt 1                                 ; 27                      ;
 ; LABs with Multiple Chains - Fit Attempt 1                        ; 0                       ;
 ; Time - Fit Attempt 1                                             ; 4                       ;
-; Time in tsm_dat.dll - Fit Attempt 1                              ; 0.016                   ;
-; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.391                   ;
+; Time in tsm_dat.dll - Fit Attempt 1                              ; 0.015                   ;
+; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.390                   ;
 +------------------------------------------------------------------+-------------------------+
 
 
@@ -1550,8 +1550,8 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; Late Wire Use - Fit Attempt 1        ; 9     ;
 ; Late Slack - Fit Attempt 1           ; 10035 ;
 ; Time - Fit Attempt 1                 ; 23    ;
-; Time in fit_fsyn.dll - Fit Attempt 1 ; 6.266 ;
-; Time in tsm_tan.dll - Fit Attempt 1  ; 6.919 ;
+; Time in fit_fsyn.dll - Fit Attempt 1 ; 6.313 ;
+; Time in tsm_tan.dll - Fit Attempt 1  ; 6.943 ;
 +--------------------------------------+-------+
 
 
@@ -1567,7 +1567,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; Late Slack - Fit Attempt 1          ; -199  ;
 ; Late Wire Use - Fit Attempt 1       ; 9     ;
 ; Time - Fit Attempt 1                ; 7     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 4.390 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 4.374 ;
 +-------------------------------------+-------+
 
 
@@ -1577,7 +1577,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sat Nov 25 19:43:18 2006
+    Info: Processing started: Sat Nov 25 20:03:40 2006
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Selected device EP2C5Q208C8 for design "Ozy_Janus"
 Info: Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
@@ -1711,7 +1711,7 @@ Info: Following groups of pins have the same output enable
         Info: Type bidirectional pin FX2_FD[9] uses the LVTTL I/O standard
         Info: Type bidirectional pin FX2_FD[13] uses the LVTTL I/O standard
 Info: Quartus II Fitter was successful. 0 errors, 2 warnings
-    Info: Processing ended: Sat Nov 25 19:44:11 2006
-    Info: Elapsed time: 00:00:53
+    Info: Processing ended: Sat Nov 25 20:04:31 2006
+    Info: Elapsed time: 00:00:52
 
 
