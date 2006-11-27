@@ -1,6 +1,6 @@
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-11
-709
+36
+1792
 OFF
 OFF
 OFF
@@ -50,7 +50,7 @@ OFF
 IGNORE_CASCADE
 USR
 LPM_WIDTH
-16
+10
 PARAMETER_DEC
 USR
 LPM_DIRECTION
@@ -58,9 +58,9 @@ UP
 PARAMETER_UNKNOWN
 USR
 LPM_MODULUS
-0
-PARAMETER_UNKNOWN
-DEF
+624
+PARAMETER_DEC
+USR
 LPM_AVALUE
 UNUSED
 PARAMETER_UNKNOWN
@@ -74,7 +74,7 @@ PORT_UNUSED
 PARAMETER_UNKNOWN
 USR
 DEVICE_FAMILY
-Cyclone II
+MAX II
 PARAMETER_UNKNOWN
 USR
 CARRY_CHAIN
@@ -102,12 +102,15 @@ TRUE
 PARAMETER_UNKNOWN
 DEF
 CBXI_PARAMETER
-cntr_bmh
+cntr_35j
 PARAMETER_UNKNOWN
 USR
 }
 # used_port {
 q
+-1
+3
+cout
 -1
 3
 clock
@@ -148,6 +151,8 @@ cin
 2
 }
 # include_file {
+..|..|..|..|altera|quartus60|libraries|megafunctions|dffeea.inc
+55d29d20f7e852c37746bec4e2495ec
 ..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_constant.inc
 dcde44eee59335c1e2fe75d574f9646
 ..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_decode.inc
@@ -160,14 +165,12 @@ e61874547688138e6fc0b49ff8760
 aec4ea1b78f4cda1c3effe18f1abbf63
 ..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
 758886b0947dd67e65ec58adda9b948
-..|..|..|..|altera|quartus60|libraries|megafunctions|dffeea.inc
-55d29d20f7e852c37746bec4e2495ec
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_counter_f10ke.inc
+d8a92a43831e9df2804dcf9a927e20
 ..|..|..|..|altera|quartus60|libraries|megafunctions|alt_synch_counter.inc
 e64d362a7450ad9895aa7e1e5dc2b42a
 ..|..|..|..|altera|quartus60|libraries|megafunctions|alt_synch_counter_f.inc
 88e2e3ac71decf106c8d913bf441832f
-..|..|..|..|altera|quartus60|libraries|megafunctions|alt_counter_f10ke.inc
-d8a92a43831e9df2804dcf9a927e20
 ..|..|..|..|altera|quartus60|libraries|megafunctions|alt_counter_stratix.inc
 587bf41cd15486161ec3eb5a1fef4c2
 ..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
@@ -175,14 +178,14 @@ b3d07c643dae10ab2b3e646e99ec45fc
 }
 # end
 # entity
-cntr_bmh
+cntr_35j
 # storage
 db|PFD_test.(3).cnf
 db|PFD_test.(3).cnf
 # case_insensitive
 # source_file
-db|cntr_bmh.tdf
-b48091d528458867f5cb1763f2b6b391
+db|cntr_35j.tdf
+35f4b5f3fac0602936ae13e0f8cdce
 6
 # used_port {
 q9
@@ -209,28 +212,13 @@ q3
 q2
 -1
 3
-q15
--1
-3
-q14
--1
-3
-q13
--1
-3
-q12
--1
-3
-q11
--1
-3
-q10
--1
-3
 q1
 -1
 3
 q0
+-1
+3
+cout
 -1
 3
 clock
@@ -239,10 +227,678 @@ clock
 }
 # end
 # entity
-pfd
+lpm_counter
+# storage
+db|PFD_test.(5).cnf
+db|PFD_test.(5).cnf
+# case_insensitive
+# source_file
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.tdf
+9ee47257a6b8b166152317b4e89afa
+6
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+10
+PARAMETER_DEC
+USR
+LPM_DIRECTION
+UP
+PARAMETER_UNKNOWN
+USR
+LPM_MODULUS
+767
+PARAMETER_DEC
+USR
+LPM_AVALUE
+UNUSED
+PARAMETER_UNKNOWN
+DEF
+LPM_SVALUE
+UNUSED
+PARAMETER_UNKNOWN
+DEF
+LPM_PORT_UPDOWN
+PORT_UNUSED
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+MAX II
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN
+MANUAL
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN_LENGTH
+48
+CARRY_CHAIN_LENGTH
+USR
+NOT_GATE_PUSH_BACK
+ON
+NOT_GATE_PUSH_BACK
+USR
+CARRY_CNT_EN
+SMART
+PARAMETER_UNKNOWN
+DEF
+LABWIDE_SCLR
+ON
+PARAMETER_UNKNOWN
+DEF
+USE_NEW_VERSION
+TRUE
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+cntr_b5j
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+q
+-1
+3
+cout
+-1
+3
+clock
+-1
+3
+sset
+-1
+1
+sload
+-1
+1
+sclr
+-1
+1
+data
+-1
+1
+aset
+-1
+1
+aload
+-1
+1
+aclr
+-1
+1
+updown
+-1
+2
+cnt_en
+-1
+2
+clk_en
+-1
+2
+cin
+-1
+2
+}
+# include_file {
+..|..|..|..|altera|quartus60|libraries|megafunctions|dffeea.inc
+55d29d20f7e852c37746bec4e2495ec
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_constant.inc
+dcde44eee59335c1e2fe75d574f9646
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_decode.inc
+bd0e2f5e01c1bd360461dceb53d48
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+..|..|..|..|altera|quartus60|libraries|megafunctions|cmpconst.inc
+e61874547688138e6fc0b49ff8760
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
+758886b0947dd67e65ec58adda9b948
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_counter_f10ke.inc
+d8a92a43831e9df2804dcf9a927e20
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_synch_counter.inc
+e64d362a7450ad9895aa7e1e5dc2b42a
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_synch_counter_f.inc
+88e2e3ac71decf106c8d913bf441832f
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_counter_stratix.inc
+587bf41cd15486161ec3eb5a1fef4c2
+..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+}
+# end
+# entity
+cntr_b5j
+# storage
+db|PFD_test.(6).cnf
+db|PFD_test.(6).cnf
+# case_insensitive
+# source_file
+db|cntr_b5j.tdf
+d463b28e774955c1b06623f7c3c9032
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+cout
+-1
+3
+clock
+-1
+3
+}
+# end
+# entity
+counter1
 # storage
 db|PFD_test.(1).cnf
 db|PFD_test.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+counter1.v
+72346b998234babb5adb790927a7ec
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+counter1:counter1
+}
+# end
+# entity
+lpm_counter
+# storage
+db|PFD_test.(4).cnf
+db|PFD_test.(4).cnf
+# case_insensitive
+# source_file
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.tdf
+9ee47257a6b8b166152317b4e89afa
+6
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+10
+PARAMETER_DEC
+USR
+LPM_DIRECTION
+UP
+PARAMETER_UNKNOWN
+USR
+LPM_MODULUS
+625
+PARAMETER_DEC
+USR
+LPM_AVALUE
+UNUSED
+PARAMETER_UNKNOWN
+DEF
+LPM_SVALUE
+UNUSED
+PARAMETER_UNKNOWN
+DEF
+LPM_PORT_UPDOWN
+PORT_UNUSED
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+MAX II
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN
+MANUAL
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN_LENGTH
+48
+CARRY_CHAIN_LENGTH
+USR
+NOT_GATE_PUSH_BACK
+ON
+NOT_GATE_PUSH_BACK
+USR
+CARRY_CNT_EN
+SMART
+PARAMETER_UNKNOWN
+DEF
+LABWIDE_SCLR
+ON
+PARAMETER_UNKNOWN
+DEF
+USE_NEW_VERSION
+TRUE
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+cntr_45j
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+q
+-1
+3
+cout
+-1
+3
+clock
+-1
+3
+sset
+-1
+1
+sload
+-1
+1
+sclr
+-1
+1
+data
+-1
+1
+aset
+-1
+1
+aload
+-1
+1
+aclr
+-1
+1
+updown
+-1
+2
+cnt_en
+-1
+2
+clk_en
+-1
+2
+cin
+-1
+2
+}
+# include_file {
+..|..|..|..|altera|quartus60|libraries|megafunctions|dffeea.inc
+55d29d20f7e852c37746bec4e2495ec
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_constant.inc
+dcde44eee59335c1e2fe75d574f9646
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_decode.inc
+bd0e2f5e01c1bd360461dceb53d48
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+..|..|..|..|altera|quartus60|libraries|megafunctions|cmpconst.inc
+e61874547688138e6fc0b49ff8760
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
+758886b0947dd67e65ec58adda9b948
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_counter_f10ke.inc
+d8a92a43831e9df2804dcf9a927e20
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_synch_counter.inc
+e64d362a7450ad9895aa7e1e5dc2b42a
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_synch_counter_f.inc
+88e2e3ac71decf106c8d913bf441832f
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_counter_stratix.inc
+587bf41cd15486161ec3eb5a1fef4c2
+..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+}
+# hierarchies {
+counter1:counter1|lpm_counter:lpm_counter_component
+}
+# end
+# entity
+cntr_45j
+# storage
+db|PFD_test.(7).cnf
+db|PFD_test.(7).cnf
+# case_insensitive
+# source_file
+db|cntr_45j.tdf
+10e56ddc8015b3a7231b3564af74626e
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+cout
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated
+}
+# end
+# entity
+counter2
+# storage
+db|PFD_test.(8).cnf
+db|PFD_test.(8).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+counter2.v
+bd156e9119e23fb30afda345db6d7
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+}
+# hierarchies {
+counter2:counter2
+}
+# end
+# entity
+lpm_counter
+# storage
+db|PFD_test.(9).cnf
+db|PFD_test.(9).cnf
+# case_insensitive
+# source_file
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.tdf
+9ee47257a6b8b166152317b4e89afa
+6
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+10
+PARAMETER_DEC
+USR
+LPM_DIRECTION
+UP
+PARAMETER_UNKNOWN
+USR
+LPM_MODULUS
+768
+PARAMETER_DEC
+USR
+LPM_AVALUE
+UNUSED
+PARAMETER_UNKNOWN
+DEF
+LPM_SVALUE
+UNUSED
+PARAMETER_UNKNOWN
+DEF
+LPM_PORT_UPDOWN
+PORT_UNUSED
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+MAX II
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN
+MANUAL
+PARAMETER_UNKNOWN
+USR
+CARRY_CHAIN_LENGTH
+48
+CARRY_CHAIN_LENGTH
+USR
+NOT_GATE_PUSH_BACK
+ON
+NOT_GATE_PUSH_BACK
+USR
+CARRY_CNT_EN
+SMART
+PARAMETER_UNKNOWN
+DEF
+LABWIDE_SCLR
+ON
+PARAMETER_UNKNOWN
+DEF
+USE_NEW_VERSION
+TRUE
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+cntr_c5j
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+q
+-1
+3
+cout
+-1
+3
+clock
+-1
+3
+sset
+-1
+1
+sload
+-1
+1
+sclr
+-1
+1
+data
+-1
+1
+aset
+-1
+1
+aload
+-1
+1
+aclr
+-1
+1
+updown
+-1
+2
+cnt_en
+-1
+2
+clk_en
+-1
+2
+cin
+-1
+2
+}
+# include_file {
+..|..|..|..|altera|quartus60|libraries|megafunctions|dffeea.inc
+55d29d20f7e852c37746bec4e2495ec
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_constant.inc
+dcde44eee59335c1e2fe75d574f9646
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_decode.inc
+bd0e2f5e01c1bd360461dceb53d48
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+..|..|..|..|altera|quartus60|libraries|megafunctions|cmpconst.inc
+e61874547688138e6fc0b49ff8760
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+..|..|..|..|altera|quartus60|libraries|megafunctions|lpm_counter.inc
+758886b0947dd67e65ec58adda9b948
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_counter_f10ke.inc
+d8a92a43831e9df2804dcf9a927e20
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_synch_counter.inc
+e64d362a7450ad9895aa7e1e5dc2b42a
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_synch_counter_f.inc
+88e2e3ac71decf106c8d913bf441832f
+..|..|..|..|altera|quartus60|libraries|megafunctions|alt_counter_stratix.inc
+587bf41cd15486161ec3eb5a1fef4c2
+..|..|..|..|altera|quartus60|libraries|megafunctions|aglobal60.inc
+b3d07c643dae10ab2b3e646e99ec45fc
+}
+# hierarchies {
+counter2:counter2|lpm_counter:lpm_counter_component
+}
+# end
+# entity
+cntr_c5j
+# storage
+db|PFD_test.(10).cnf
+db|PFD_test.(10).cnf
+# case_insensitive
+# source_file
+db|cntr_c5j.tdf
+12b68bc9444e6022cb22467fed7de11
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+cout
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated
+}
+# end
+# entity
+pfd
+# storage
+db|PFD_test.(11).cnf
+db|PFD_test.(11).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -255,6 +911,9 @@ pfd.v
 # internal_option {
 AUTO_RESOURCE_SHARING
 OFF
+}
+# hierarchies {
+pfd:Janus_pfd
 }
 # end
 # entity
@@ -269,7 +928,7 @@ ON
 # case_sensitive
 # source_file
 PFD_test.v
-c212fefb9730cd747c559c545d810ec
+63ae9460b136748e8a71accb4f957b1
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

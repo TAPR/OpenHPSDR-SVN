@@ -3,61 +3,101 @@ Timing Analyzer Summary
 --------------------------------------------------------------------------------------
 
 Type           : Worst-case tco
-Slack          : 5.734 ns
-Required Time  : 20.000 ns
-Actual Time    : 14.266 ns
-From           : ref_8k
-To             : LED[2]
-From Clock     : ref_in
+Slack          : -8.355 ns
+Required Time  : 15.000 ns
+Actual Time    : 23.355 ns
+From           : ref_OK
+To             : tune
+From Clock     : osc_in
 To Clock       : --
-Failed Paths   : 0
+Failed Paths   : 10
 
 Type           : Worst-case tpd
-Slack          : 8.677 ns
-Required Time  : 20.000 ns
-Actual Time    : 11.323 ns
-From           : ref_in
-To             : LED[0]
+Slack          : 8.588 ns
+Required Time  : 15.000 ns
+Actual Time    : 6.412 ns
+From           : osc_in
+To             : C5
 From Clock     : --
 To Clock       : --
 Failed Paths   : 0
 
+Type           : Clock Setup: 'osc_8k'
+Slack          : -1.629 ns
+Required Time  : 0.10 MHz ( period = 10000.000 ns )
+Actual Time    : N/A
+From           : pfd:Janus_pfd|SYNTHESIZED_WIRE_12
+To             : pfd:Janus_pfd|SYNTHESIZED_WIRE_9
+From Clock     : ref_8k
+To Clock       : osc_8k
+Failed Paths   : 1
+
+Type           : Clock Setup: 'ref_8k'
+Slack          : -0.761 ns
+Required Time  : 0.12 MHz ( period = 8138.000 ns )
+Actual Time    : N/A
+From           : pfd:Janus_pfd|SYNTHESIZED_WIRE_13
+To             : pfd:Janus_pfd|DFF_inst3
+From Clock     : osc_8k
+To Clock       : ref_8k
+Failed Paths   : 1
+
 Type           : Clock Setup: 'ref_in'
-Slack          : 75.608 ns
+Slack          : 73.211 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
-Actual Time    : 173.25 MHz ( period = 5.772 ns )
-From           : ref_count[12]
-To             : ref_count[4]
+Actual Time    : 122.41 MHz ( period = 8.169 ns )
+From           : counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[0]
+To             : counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[3]
 From Clock     : ref_in
 To Clock       : ref_in
 Failed Paths   : 0
 
 Type           : Clock Setup: 'osc_in'
-Slack          : 94.357 ns
+Slack          : 91.858 ns
 Required Time  : 10.00 MHz ( period = 100.000 ns )
-Actual Time    : 177.21 MHz ( period = 5.643 ns )
-From           : osc_count[7]
-To             : osc_count[8]
+Actual Time    : 122.82 MHz ( period = 8.142 ns )
+From           : counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[1]
+To             : counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[3]
 From Clock     : osc_in
 To Clock       : osc_in
 Failed Paths   : 0
 
+Type           : Clock Hold: 'osc_8k'
+Slack          : 1.660 ns
+Required Time  : 0.10 MHz ( period = 10000.000 ns )
+Actual Time    : N/A
+From           : pfd:Janus_pfd|SYNTHESIZED_WIRE_13
+To             : pfd:Janus_pfd|SYNTHESIZED_WIRE_13
+From Clock     : osc_8k
+To Clock       : osc_8k
+Failed Paths   : 0
+
+Type           : Clock Hold: 'ref_8k'
+Slack          : 1.925 ns
+Required Time  : 0.12 MHz ( period = 8138.000 ns )
+Actual Time    : N/A
+From           : pfd:Janus_pfd|SYNTHESIZED_WIRE_12
+To             : pfd:Janus_pfd|SYNTHESIZED_WIRE_12
+From Clock     : ref_8k
+To Clock       : ref_8k
+Failed Paths   : 0
+
 Type           : Clock Hold: 'osc_in'
-Slack          : 0.753 ns
+Slack          : 2.107 ns
 Required Time  : 10.00 MHz ( period = 100.000 ns )
 Actual Time    : N/A
-From           : osc_count[15]
-To             : osc_count[15]
+From           : counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[4]
+To             : counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[4]
 From Clock     : osc_in
 To Clock       : osc_in
 Failed Paths   : 0
 
 Type           : Clock Hold: 'ref_in'
-Slack          : 0.753 ns
+Slack          : 2.117 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
 Actual Time    : N/A
-From           : ref_count[15]
-To             : ref_count[15]
+From           : counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[4]
+To             : counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[4]
 From Clock     : ref_in
 To Clock       : ref_in
 Failed Paths   : 0
@@ -70,7 +110,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 0
+Failed Paths   : 12
 
 --------------------------------------------------------------------------------------
 

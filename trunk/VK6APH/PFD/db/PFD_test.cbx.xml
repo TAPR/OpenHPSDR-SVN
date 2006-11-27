@@ -1,5 +1,7 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="PFD_test">
+		<CBX_INST_ENTRY INSTANCE_NAME="|PFD_test|counter1:counter1|lpm_counter:lpm_counter_component" CBX_FILE_NAME="cntr_45j.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|PFD_test|counter2:counter2|lpm_counter:lpm_counter_component" CBX_FILE_NAME="cntr_c5j.tdf"/>
 	</PROJECT>
 </LOG_ROOT>
