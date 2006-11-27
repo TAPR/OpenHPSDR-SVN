@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PFD_test
-Sat Nov 25 17:22:48 2006
+Mon Nov 27 21:39:02 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -13,7 +13,10 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
   5. Analysis & Synthesis Resource Usage Summary
   6. Analysis & Synthesis Resource Utilization by Entity
   7. General Register Statistics
-  8. Analysis & Synthesis Messages
+  8. Inverted Register Statistics
+  9. Parameter Settings for User Entity Instance: counter1:counter1|lpm_counter:lpm_counter_component
+ 10. Parameter Settings for User Entity Instance: counter2:counter2|lpm_counter:lpm_counter_component
+ 11. Analysis & Synthesis Messages
 
 
 
@@ -36,22 +39,19 @@ applicable agreement for further details.
 
 
 
-+-----------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                      ;
-+------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Nov 25 17:22:48 2006        ;
-; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
-; Revision Name                      ; PFD_test                                     ;
-; Top-level Entity Name              ; PFD_test                                     ;
-; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 52                                           ;
-; Total registers                    ; 35                                           ;
-; Total pins                         ; 11                                           ;
-; Total virtual pins                 ; 0                                            ;
-; Total memory bits                  ; 0                                            ;
-; Embedded Multiplier 9-bit elements ; 0                                            ;
-; Total PLLs                         ; 0                                            ;
-+------------------------------------+----------------------------------------------+
++----------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                               ;
++-----------------------------+----------------------------------------------+
+; Analysis & Synthesis Status ; Successful - Mon Nov 27 21:39:02 2006        ;
+; Quartus II Version          ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
+; Revision Name               ; PFD_test                                     ;
+; Top-level Entity Name       ; PFD_test                                     ;
+; Family                      ; MAX II                                       ;
+; Total logic elements        ; 40                                           ;
+; Total pins                  ; 6                                            ;
+; Total virtual pins          ; 0                                            ;
+; UFM blocks                  ; 0                                            ;
++-----------------------------+----------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------+
@@ -59,9 +59,9 @@ applicable agreement for further details.
 +--------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                             ; Setting            ; Default Value      ;
 +--------------------------------------------------------------------+--------------------+--------------------+
-; Device                                                             ; EP2C5Q208C8        ;                    ;
+; Device                                                             ; EPM240T100C5       ;                    ;
 ; Top-level entity name                                              ; PFD_test           ; PFD_test           ;
-; Family name                                                        ; Cyclone II         ; Stratix            ;
+; Family name                                                        ; MAX II             ; Stratix            ;
 ; Use smart compilation                                              ; Off                ; Off                ;
 ; Restructure Multiplexers                                           ; Auto               ; Auto               ;
 ; Create Debugging Nodes for IP Cores                                ; Off                ; Off                ;
@@ -73,8 +73,6 @@ applicable agreement for further details.
 ; Extract Verilog State Machines                                     ; On                 ; On                 ;
 ; Extract VHDL State Machines                                        ; On                 ; On                 ;
 ; Add Pass-Through Logic to Inferred RAMs                            ; On                 ; On                 ;
-; DSP Block Balancing                                                ; Auto               ; Auto               ;
-; Maximum DSP Block Usage                                            ; Unlimited          ; Unlimited          ;
 ; NOT Gate Push-Back                                                 ; On                 ; On                 ;
 ; Power-Up Don't Care                                                ; On                 ; On                 ;
 ; Remove Redundant Logic Cells                                       ; Off                ; Off                ;
@@ -86,7 +84,7 @@ applicable agreement for further details.
 ; Ignore LCELL Buffers                                               ; Off                ; Off                ;
 ; Ignore SOFT Buffers                                                ; On                 ; On                 ;
 ; Limit AHDL Integers to 32 Bits                                     ; Off                ; Off                ;
-; Optimization Technique -- Cyclone II                               ; Balanced           ; Balanced           ;
+; Optimization Technique -- MAX II                                   ; Balanced           ; Balanced           ;
 ; Carry Chain Length -- Stratix/Stratix GX/Cyclone/MAX II/Cyclone II ; 70                 ; 70                 ;
 ; Auto Carry Chains                                                  ; On                 ; On                 ;
 ; Auto Open-Drain Pins                                               ; On                 ; On                 ;
@@ -94,17 +92,15 @@ applicable agreement for further details.
 ; Perform WYSIWYG Primitive Resynthesis                              ; Off                ; Off                ;
 ; Perform gate-level register retiming                               ; Off                ; Off                ;
 ; Allow register retiming to trade off Tsu/Tco with Fmax             ; On                 ; On                 ;
-; Auto ROM Replacement                                               ; On                 ; On                 ;
-; Auto RAM Replacement                                               ; On                 ; On                 ;
 ; Auto Shift Register Replacement                                    ; On                 ; On                 ;
 ; Auto Clock Enable Replacement                                      ; On                 ; On                 ;
 ; Allow Synchronous Control Signals                                  ; On                 ; On                 ;
 ; Force Use of Synchronous Clear Signals                             ; Off                ; Off                ;
+; Auto RAM Block Balancing                                           ; On                 ; On                 ;
 ; Auto Resource Sharing                                              ; Off                ; Off                ;
-; Allow Any RAM Size For Recognition                                 ; Off                ; Off                ;
-; Allow Any ROM Size For Recognition                                 ; Off                ; Off                ;
-; Allow Any Shift Register Size For Recognition                      ; Off                ; Off                ;
+; Maximum Number of M512 Memory Blocks                               ; Unlimited          ; Unlimited          ;
 ; Maximum Number of M4K Memory Blocks                                ; Unlimited          ; Unlimited          ;
+; Maximum Number of M-RAM Memory Blocks                              ; Unlimited          ; Unlimited          ;
 ; Ignore translate_off and translate_on Synthesis Directives         ; Off                ; Off                ;
 ; Show Parameter Settings Tables in Synthesis Report                 ; On                 ; On                 ;
 ; Ignore Maximum Fan-Out Assignments                                 ; Off                ; Off                ;
@@ -114,46 +110,83 @@ applicable agreement for further details.
 +--------------------------------------------------------------------+--------------------+--------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                              ;
-+----------------------------------+-----------------+------------------------+---------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path          ;
-+----------------------------------+-----------------+------------------------+---------------------------------------+
-; PFD_test.v                       ; yes             ; User Verilog HDL File  ; C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.v ;
-+----------------------------------+-----------------+------------------------+---------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                  ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                        ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+
+; counter2.v                       ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/PFD/counter2.v                               ;
+; counter1.v                       ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/PFD/counter1.v                               ;
+; pfd.v                            ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/PFD/pfd.v                                    ;
+; PFD_test.v                       ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.v                               ;
+; lpm_counter.tdf                  ; yes             ; Megafunction                 ; c:/altera/quartus60/libraries/megafunctions/lpm_counter.tdf         ;
+; lpm_constant.inc                 ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/lpm_constant.inc        ;
+; lpm_decode.inc                   ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/lpm_decode.inc          ;
+; lpm_add_sub.inc                  ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/lpm_add_sub.inc         ;
+; cmpconst.inc                     ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/cmpconst.inc            ;
+; lpm_compare.inc                  ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/lpm_compare.inc         ;
+; lpm_counter.inc                  ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/lpm_counter.inc         ;
+; dffeea.inc                       ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/dffeea.inc              ;
+; alt_synch_counter.inc            ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/alt_synch_counter.inc   ;
+; alt_synch_counter_f.inc          ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/alt_synch_counter_f.inc ;
+; alt_counter_f10ke.inc            ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/alt_counter_f10ke.inc   ;
+; alt_counter_stratix.inc          ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/alt_counter_stratix.inc ;
+; aglobal60.inc                    ; yes             ; Other                        ; c:/altera/quartus60/libraries/megafunctions/aglobal60.inc           ;
+; db/cntr_45j.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/PFD/db/cntr_45j.tdf                          ;
+; db/cntr_c5j.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/PFD/db/cntr_c5j.tdf                          ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+
 
 
-+------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary          ;
-+---------------------------------------------+--------+
-; Resource                                    ; Usage  ;
-+---------------------------------------------+--------+
-; Estimated Total logic elements              ; 52     ;
-; Total combinational functions               ; 52     ;
-; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 10     ;
-;     -- 3 input functions                    ; 0      ;
-;     -- <=2 input functions                  ; 42     ;
-;         -- Combinational cells for routing  ; 0      ;
-; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 22     ;
-;     -- arithmetic mode                      ; 30     ;
-; Total registers                             ; 35     ;
-; I/O pins                                    ; 11     ;
-; Maximum fan-out node                        ; ref_in ;
-; Maximum fan-out                             ; 19     ;
-; Total fan-out                               ; 199    ;
-; Average fan-out                             ; 2.03   ;
-+---------------------------------------------+--------+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Total logic elements                        ; 40    ;
+;     -- Combinational with no register       ; 13    ;
+;     -- Register only                        ; 1     ;
+;     -- Combinational with a register        ; 26    ;
+;                                             ;       ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 7     ;
+;     -- 3 input functions                    ; 2     ;
+;     -- 2 input functions                    ; 21    ;
+;     -- 1 input functions                    ; 7     ;
+;     -- 0 input functions                    ; 2     ;
+;         -- Combinational cells for routing  ; 0     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 20    ;
+;     -- arithmetic mode                      ; 20    ;
+;     -- qfbk mode                            ; 0     ;
+;     -- register cascade mode                ; 0     ;
+;     -- synchronous clear/load mode          ; 20    ;
+;     -- asynchronous clear/load mode         ; 3     ;
+;                                             ;       ;
+; Total registers                             ; 27    ;
+; Total logic cells in carry chains           ; 22    ;
+; I/O pins                                    ; 6     ;
+; Maximum fan-out node                        ; ~GND  ;
+; Maximum fan-out                             ; 20    ;
+; Total fan-out                               ; 158   ;
+; Average fan-out                             ; 3.43  ;
++---------------------------------------------+-------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                 ;
-+----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
-; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ;
-+----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
-; |PFD_test                  ; 52 (52)           ; 35 (35)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 11   ; 0            ; |PFD_test           ;
-+----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                    ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------------------------------------------------+
+; Compilation Hierarchy Node                ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                   ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------------------------------------------------+
+; |PFD_test                                 ; 40 (7)      ; 27           ; 0          ; 6    ; 0            ; 13 (4)       ; 1 (0)             ; 26 (3)           ; 22 (0)          ; 0 (0)      ; |PFD_test                                                                             ;
+;    |counter1:counter1|                    ; 14 (0)      ; 10           ; 0          ; 0    ; 0            ; 4 (0)        ; 0 (0)             ; 10 (0)           ; 11 (0)          ; 0 (0)      ; |PFD_test|counter1:counter1                                                           ;
+;       |lpm_counter:lpm_counter_component| ; 14 (0)      ; 10           ; 0          ; 0    ; 0            ; 4 (0)        ; 0 (0)             ; 10 (0)           ; 11 (0)          ; 0 (0)      ; |PFD_test|counter1:counter1|lpm_counter:lpm_counter_component                         ;
+;          |cntr_45j:auto_generated|        ; 14 (14)     ; 10           ; 0          ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 10 (10)          ; 11 (11)         ; 0 (0)      ; |PFD_test|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated ;
+;    |counter2:counter2|                    ; 14 (0)      ; 10           ; 0          ; 0    ; 0            ; 4 (0)        ; 0 (0)             ; 10 (0)           ; 11 (0)          ; 0 (0)      ; |PFD_test|counter2:counter2                                                           ;
+;       |lpm_counter:lpm_counter_component| ; 14 (0)      ; 10           ; 0          ; 0    ; 0            ; 4 (0)        ; 0 (0)             ; 10 (0)           ; 11 (0)          ; 0 (0)      ; |PFD_test|counter2:counter2|lpm_counter:lpm_counter_component                         ;
+;          |cntr_c5j:auto_generated|        ; 14 (14)     ; 10           ; 0          ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 10 (10)          ; 11 (11)         ; 0 (0)      ; |PFD_test|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated ;
+;    |pfd:Janus_pfd|                        ; 5 (5)       ; 4            ; 0          ; 0    ; 0            ; 1 (1)        ; 1 (1)             ; 3 (3)            ; 0 (0)           ; 0 (0)      ; |PFD_test|pfd:Janus_pfd                                                               ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------------------------------------------------------------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -162,14 +195,78 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 35    ;
+; Total registers                              ; 27    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 1     ;
+; Number of registers using Synchronous Load   ; 20    ;
+; Number of registers using Asynchronous Clear ; 3     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; pfd:Janus_pfd|SYNTHESIZED_WIRE_9       ; 3       ;
+; Total number of inverted registers = 1 ;         ;
++----------------------------------------+---------+
+
+
++--------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: counter1:counter1|lpm_counter:lpm_counter_component ;
++------------------------+-------------+-----------------------------------------------------------+
+; Parameter Name         ; Value       ; Type                                                      ;
++------------------------+-------------+-----------------------------------------------------------+
+; AUTO_CARRY_CHAINS      ; ON          ; AUTO_CARRY                                                ;
+; IGNORE_CARRY_BUFFERS   ; OFF         ; IGNORE_CARRY                                              ;
+; AUTO_CASCADE_CHAINS    ; ON          ; AUTO_CASCADE                                              ;
+; IGNORE_CASCADE_BUFFERS ; OFF         ; IGNORE_CASCADE                                            ;
+; LPM_WIDTH              ; 10          ; Integer                                                   ;
+; LPM_DIRECTION          ; UP          ; Untyped                                                   ;
+; LPM_MODULUS            ; 625         ; Integer                                                   ;
+; LPM_AVALUE             ; UNUSED      ; Untyped                                                   ;
+; LPM_SVALUE             ; UNUSED      ; Untyped                                                   ;
+; LPM_PORT_UPDOWN        ; PORT_UNUSED ; Untyped                                                   ;
+; DEVICE_FAMILY          ; MAX II      ; Untyped                                                   ;
+; CARRY_CHAIN            ; MANUAL      ; Untyped                                                   ;
+; CARRY_CHAIN_LENGTH     ; 48          ; CARRY_CHAIN_LENGTH                                        ;
+; NOT_GATE_PUSH_BACK     ; ON          ; NOT_GATE_PUSH_BACK                                        ;
+; CARRY_CNT_EN           ; SMART       ; Untyped                                                   ;
+; LABWIDE_SCLR           ; ON          ; Untyped                                                   ;
+; USE_NEW_VERSION        ; TRUE        ; Untyped                                                   ;
+; CBXI_PARAMETER         ; cntr_45j    ; Untyped                                                   ;
++------------------------+-------------+-----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: counter2:counter2|lpm_counter:lpm_counter_component ;
++------------------------+-------------+-----------------------------------------------------------+
+; Parameter Name         ; Value       ; Type                                                      ;
++------------------------+-------------+-----------------------------------------------------------+
+; AUTO_CARRY_CHAINS      ; ON          ; AUTO_CARRY                                                ;
+; IGNORE_CARRY_BUFFERS   ; OFF         ; IGNORE_CARRY                                              ;
+; AUTO_CASCADE_CHAINS    ; ON          ; AUTO_CASCADE                                              ;
+; IGNORE_CASCADE_BUFFERS ; OFF         ; IGNORE_CASCADE                                            ;
+; LPM_WIDTH              ; 10          ; Integer                                                   ;
+; LPM_DIRECTION          ; UP          ; Untyped                                                   ;
+; LPM_MODULUS            ; 768         ; Integer                                                   ;
+; LPM_AVALUE             ; UNUSED      ; Untyped                                                   ;
+; LPM_SVALUE             ; UNUSED      ; Untyped                                                   ;
+; LPM_PORT_UPDOWN        ; PORT_UNUSED ; Untyped                                                   ;
+; DEVICE_FAMILY          ; MAX II      ; Untyped                                                   ;
+; CARRY_CHAIN            ; MANUAL      ; Untyped                                                   ;
+; CARRY_CHAIN_LENGTH     ; 48          ; CARRY_CHAIN_LENGTH                                        ;
+; NOT_GATE_PUSH_BACK     ; ON          ; NOT_GATE_PUSH_BACK                                        ;
+; CARRY_CNT_EN           ; SMART       ; Untyped                                                   ;
+; LABWIDE_SCLR           ; ON          ; Untyped                                                   ;
+; USE_NEW_VERSION        ; TRUE        ; Untyped                                                   ;
+; CBXI_PARAMETER         ; cntr_c5j    ; Untyped                                                   ;
++------------------------+-------------+-----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +-------------------------------+
@@ -178,24 +275,39 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sat Nov 25 17:22:46 2006
+    Info: Processing started: Mon Nov 27 21:39:01 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PFD_test -c PFD_test
+Info: Found 1 design units, including 1 entities, in source file counter2.v
+    Info: Found entity 1: counter2
+Info: Found 1 design units, including 1 entities, in source file counter1.v
+    Info: Found entity 1: counter1
 Info: Found 1 design units, including 1 entities, in source file pfd.v
     Info: Found entity 1: pfd
 Info: Found 1 design units, including 1 entities, in source file PFD_test.v
     Info: Found entity 1: PFD_test
 Info: Elaborating entity "PFD_test" for the top level hierarchy
-Warning (10030): Tied undriven net "pfd_out" at PFD_test.v(21) to 0
-Warning (10030): Tied undriven net "lock" at PFD_test.v(22) to 0
-Warning: Output pins are stuck at VCC or GND
-    Warning: Pin "LED[4]" stuck at GND
-    Warning: Pin "LED[5]" stuck at VCC
-Info: Implemented 64 device resources after synthesis - the final resource count might be different
+Info: Elaborating entity "counter1" for hierarchy "counter1:counter1"
+Info: Found 1 design units, including 1 entities, in source file ../../../../altera/quartus60/libraries/megafunctions/lpm_counter.tdf
+    Info: Found entity 1: lpm_counter
+Info: Elaborating entity "lpm_counter" for hierarchy "counter1:counter1|lpm_counter:lpm_counter_component"
+Info: Elaborated megafunction instantiation "counter1:counter1|lpm_counter:lpm_counter_component"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_45j.tdf
+    Info: Found entity 1: cntr_45j
+Info: Elaborating entity "cntr_45j" for hierarchy "counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated"
+Info: Elaborating entity "counter2" for hierarchy "counter2:counter2"
+Info: Elaborating entity "lpm_counter" for hierarchy "counter2:counter2|lpm_counter:lpm_counter_component"
+Info: Elaborated megafunction instantiation "counter2:counter2|lpm_counter:lpm_counter_component"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_c5j.tdf
+    Info: Found entity 1: cntr_c5j
+Info: Elaborating entity "cntr_c5j" for hierarchy "counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated"
+Info: Elaborating entity "pfd" for hierarchy "pfd:Janus_pfd"
+Info: Registers with preset signals will power-up high
+Info: Implemented 46 device resources after synthesis - the final resource count might be different
     Info: Implemented 2 input pins
-    Info: Implemented 9 output pins
-    Info: Implemented 53 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 5 warnings
-    Info: Processing ended: Sat Nov 25 17:22:48 2006
-    Info: Elapsed time: 00:00:03
+    Info: Implemented 4 output pins
+    Info: Implemented 40 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 0 warnings
+    Info: Processing ended: Mon Nov 27 21:39:02 2006
+    Info: Elapsed time: 00:00:02
 
 

@@ -9,54 +9,53 @@
 
 // V1.1 11th Nov 2006 changed ref to 8kHz since this is the HCF of 10MHz and 12.288MHz that
 // allows an integer divider for both signals
+// 27th November - changed to use Megafunctions for the dividers and moved to Janus CPLD
 
 
-module PFD_test(ref_in, osc_in, VCXO_out, LED);
+module PFD_test(ref_in, osc_in, tune, LED1, LED2, C5);
 
 input ref_in;		// 10MHz reference 
 input osc_in;		// 12.288MHz from VCXO
-output VCXO_out;	// signal to loop LPF
-output [7:0]LED;
-wire VCXO_out;
+output tune;		// signal to loop LPF
+output LED1;
+output LED2;
+output C5;			// 12MHz signal over Atlas bus
+wire tune;
 wire pfd_out;
-wire lock;				// is low when loop is locked
+wire lock;			// is low when loop is locked
 reg ref_8k;
 reg osc_8k;
-reg ref_OK;				// is low when reference signal is present
-reg [15:0]ref_count;
-reg [15:0]osc_count;
+reg ref_OK;			// is low when reference signal is present
+wire cout1;
+wire cout2;
+wire C5;
 
-// divide 10MHz reference clock down to 8kHz
+assign C5 = osc_in; 
 
-always @ (posedge ref_in)
-begin
-	if (ref_count == 15'd624) 
-		begin 
-			ref_8k <= ~ref_8k;
-			ref_count <= 15'd0;
-		end
-	else ref_count <= ref_count + 15'b1;
-end 
 
-// divide 12.288MHz ADC  clock down to 8kHz
+// divide 10MHz reference clock by 625 to give  16kHz
+counter1 counter1(.clock(ref_in), .cout(cout1));
 
-always @ (posedge osc_in)
-begin
-	if (osc_count == 15'd767) 
-		begin 
-			osc_8k <= ~osc_8k;
-			osc_count <= 15'd0;
-		end
-	else osc_count <= osc_count + 15'b1;
-end 
+// divide by 2 to give a square wave
+always @ (posedge cout1)
+	ref_8k <= ~ref_8k;
+
+
+// divide 12.288MHz ADC  clock by 768 to give 16kHz
+counter2 counter2(.clock(osc_in), .cout(cout2));
+
+// divide by 2 to give a square wave
+always @ (posedge cout2)
+	osc_8k <= ~osc_8k;
+
 
 // apply to PFD
 
-// pfd Janus_pfd(.ref_in(ref_8k),.osc_in(osc_8k),.pfd_out(pfd_out),.lock(lock));
+pfd Janus_pfd(.ref_in(ref_8k),.osc_in(osc_8k),.pfd_out(pfd_out),.lock(lock));
 
 //
 // check if the 10MHz reference signal is present.
-// if so use PFD output else use 8kHz so as to set the 
+// if so use PFD output else use 4kHz so as to set the 
 // VCXO control voltage to 3.3v/2 
 //
 
@@ -67,22 +66,19 @@ else ref_OK <= 1'b1;		 // goes high if no reference
 end 
 
 // select the signal to send to the loop LPF depending if the 10MHz reference is present
-//assign  VCXO_out = ref_OK ?  osc_8k : pfd_out; 
+assign  tune = ref_OK ?  osc_8k : pfd_out; 
 
-//assign  VCXO_out = pfd_out; 
+//assign  tune = pfd_out; 
 
-assign VCXO_out = ref_8k ^ osc_8k;
+//assign tune = ~ref_8k ^ osc_8k;
 
 // LEDs for testing
 
-assign LED[0] = ref_in;
-assign LED[1] = osc_in;
-assign LED[2] = ref_8k;
-assign LED[3] = osc_8k;
-assign LED[4] = pfd_out;
-assign LED[5] = 1'b1;
-assign LED[6] = ref_OK;
-assign LED[7] = (lock | ref_OK);  // low when loop is locked and we have a reference signal 
+
+assign LED1 = ref_OK;
+//assign LED2 = osc_8k;
+
+assign LED2 = (lock | ref_OK);  // low when loop is locked and we have a reference signal 
 
 
 endmodule
