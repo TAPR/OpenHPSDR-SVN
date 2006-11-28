@@ -2,6 +2,16 @@
 Timing Analyzer Summary
 --------------------------------------------------------------------------------------
 
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 24.688 ns
+From           : pfd:Janus_pfd|inst5
+To             : TUNE
+From Clock     : ref_in
+To Clock       : --
+Failed Paths   : 0
+
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
@@ -10,6 +20,26 @@ From           : C3
 To             : QPWM
 From Clock     : --
 To Clock       : --
+Failed Paths   : 0
+
+Type           : Clock Setup: 'CLK_12MHZ'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 121.94 MHz ( period = 8.201 ns )
+From           : counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[1]
+To             : counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[3]
+From Clock     : CLK_12MHZ
+To Clock       : CLK_12MHZ
+Failed Paths   : 0
+
+Type           : Clock Setup: 'ref_in'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 122.52 MHz ( period = 8.162 ns )
+From           : counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[1]
+To             : counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[3]
+From Clock     : ref_in
+To Clock       : ref_in
 Failed Paths   : 0
 
 Type           : Total number of failed paths

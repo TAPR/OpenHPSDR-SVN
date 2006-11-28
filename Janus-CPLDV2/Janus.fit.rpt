@@ -1,5 +1,5 @@
 Fitter report for Janus
-Sun Nov 19 20:21:28 2006
+Tue Nov 28 15:47:45 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -19,14 +19,21 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
  11. Output Pin Default Load For Reported TCO
  12. Fitter Resource Utilization by Entity
  13. Delay Chain Summary
- 14. Non-Global High Fan-Out Signals
- 15. Interconnect Usage Summary
- 16. Fitter Device Options
- 17. Advanced Data - General
- 18. Advanced Data - Placement Preparation
- 19. Advanced Data - Placement
- 20. Advanced Data - Routing
- 21. Fitter Messages
+ 14. Control Signals
+ 15. Global & Other Fast Signals
+ 16. Non-Global High Fan-Out Signals
+ 17. Interconnect Usage Summary
+ 18. LAB Logic Elements
+ 19. LAB-wide Signals
+ 20. LAB Signals Sourced
+ 21. LAB Signals Sourced Out
+ 22. LAB Distinct Inputs
+ 23. Fitter Device Options
+ 24. Advanced Data - General
+ 25. Advanced Data - Placement Preparation
+ 26. Advanced Data - Placement
+ 27. Advanced Data - Routing
+ 28. Fitter Messages
 
 
 
@@ -52,15 +59,15 @@ applicable agreement for further details.
 +----------------------------------------------------------------------+
 ; Fitter Summary                                                       ;
 +-----------------------+----------------------------------------------+
-; Fitter Status         ; Successful - Sun Nov 19 20:21:28 2006        ;
+; Fitter Status         ; Successful - Tue Nov 28 15:47:45 2006        ;
 ; Quartus II Version    ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name         ; Janus                                        ;
 ; Top-level Entity Name ; Janus                                        ;
 ; Family                ; MAX II                                       ;
 ; Device                ; EPM240T100C5                                 ;
 ; Timing Models         ; Final                                        ;
-; Total logic elements  ; 0 / 240 ( 0 % )                              ;
-; Total pins            ; 45 / 80 ( 56 % )                             ;
+; Total logic elements  ; 39 / 240 ( 16 % )                            ;
+; Total pins            ; 46 / 80 ( 57 % )                             ;
 ; Total virtual pins    ; 0                                            ;
 ; UFM blocks            ; 0 / 1 ( 0 % )                                ;
 +-----------------------+----------------------------------------------+
@@ -108,50 +115,50 @@ applicable agreement for further details.
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Janus V2 CPLD/Janus.pin.
+The pin-out file can be found in C:/HPSDR/trunk/Janus-CPLDV2/Janus.pin.
 
 
-+----------------------------------------------------------------+
-; Fitter Resource Usage Summary                                  ;
-+---------------------------------------------+------------------+
-; Resource                                    ; Usage            ;
-+---------------------------------------------+------------------+
-; Total logic elements                        ; 0 / 240 ( 0 % )  ;
-;     -- Combinational with no register       ; 0                ;
-;     -- Register only                        ; 0                ;
-;     -- Combinational with a register        ; 0                ;
-;                                             ;                  ;
-; Logic element usage by number of LUT inputs ;                  ;
-;     -- 4 input functions                    ; 0                ;
-;     -- 3 input functions                    ; 0                ;
-;     -- 2 input functions                    ; 0                ;
-;     -- 1 input functions                    ; 0                ;
-;     -- 0 input functions                    ; 0                ;
-;                                             ;                  ;
-; Logic elements by mode                      ;                  ;
-;     -- normal mode                          ; 0                ;
-;     -- arithmetic mode                      ; 0                ;
-;     -- qfbk mode                            ; 0                ;
-;     -- register cascade mode                ; 0                ;
-;     -- synchronous clear/load mode          ; 0                ;
-;     -- asynchronous clear/load mode         ; 0                ;
-;                                             ;                  ;
-; Total LABs                                  ; 0 / 24 ( 0 % )   ;
-; Logic elements in carry chains              ; 0                ;
-; User inserted logic elements                ; 0                ;
-; Virtual pins                                ; 0                ;
-; I/O pins                                    ; 45 / 80 ( 56 % ) ;
-;     -- Clock pins                           ; 3                ;
-; Global signals                              ; 0                ;
-; UFM blocks                                  ; 0 / 1 ( 0 % )    ;
-; Global clocks                               ; 0 / 4 ( 0 % )    ;
-; Maximum fan-out node                        ; CLK_12MHZ        ;
-; Maximum fan-out                             ; 3                ;
-; Highest non-global fan-out signal           ; CLK_12MHZ        ;
-; Highest non-global fan-out                  ; 3                ;
-; Total fan-out                               ; 17               ;
-; Average fan-out                             ; 0.38             ;
-+---------------------------------------------+------------------+
++-----------------------------------------------------------------+
+; Fitter Resource Usage Summary                                   ;
++---------------------------------------------+-------------------+
+; Resource                                    ; Usage             ;
++---------------------------------------------+-------------------+
+; Total logic elements                        ; 39 / 240 ( 16 % ) ;
+;     -- Combinational with no register       ; 12                ;
+;     -- Register only                        ; 0                 ;
+;     -- Combinational with a register        ; 27                ;
+;                                             ;                   ;
+; Logic element usage by number of LUT inputs ;                   ;
+;     -- 4 input functions                    ; 7                 ;
+;     -- 3 input functions                    ; 2                 ;
+;     -- 2 input functions                    ; 21                ;
+;     -- 1 input functions                    ; 7                 ;
+;     -- 0 input functions                    ; 2                 ;
+;                                             ;                   ;
+; Logic elements by mode                      ;                   ;
+;     -- normal mode                          ; 19                ;
+;     -- arithmetic mode                      ; 20                ;
+;     -- qfbk mode                            ; 1                 ;
+;     -- register cascade mode                ; 0                 ;
+;     -- synchronous clear/load mode          ; 21                ;
+;     -- asynchronous clear/load mode         ; 3                 ;
+;                                             ;                   ;
+; Total LABs                                  ; 8 / 24 ( 33 % )   ;
+; Logic elements in carry chains              ; 22                ;
+; User inserted logic elements                ; 0                 ;
+; Virtual pins                                ; 0                 ;
+; I/O pins                                    ; 46 / 80 ( 57 % )  ;
+;     -- Clock pins                           ; 3                 ;
+; Global signals                              ; 4                 ;
+; UFM blocks                                  ; 0 / 1 ( 0 % )     ;
+; Global clocks                               ; 4 / 4 ( 100 % )   ;
+; Maximum fan-out node                        ; ~GND              ;
+; Maximum fan-out                             ; 20                ;
+; Highest non-global fan-out signal           ; ~GND              ;
+; Highest non-global fan-out                  ; 20                ;
+; Total fan-out                               ; 181               ;
+; Average fan-out                             ; 2.13              ;
++---------------------------------------------+-------------------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -169,7 +176,7 @@ The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Janus V2 CPLD/Janus.pin.
 ; C9        ; 68    ; 2        ; 8            ; 3            ; 1           ; 2                     ; 0                  ; no     ; no              ; no       ; Off          ; LVTTL        ; User                 ;
 ; CAL       ; 16    ; 1        ; 1            ; 2            ; 2           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; LVTTL        ; User                 ;
 ; CDOUT     ; 92    ; 2        ; 3            ; 5            ; 0           ; 1                     ; 0                  ; no     ; no              ; no       ; Off          ; LVTTL        ; User                 ;
-; CLK_12MHZ ; 4     ; 1        ; 1            ; 4            ; 2           ; 3                     ; 0                  ; no     ; no              ; no       ; Off          ; LVTTL        ; User                 ;
+; CLK_12MHZ ; 4     ; 1        ; 1            ; 4            ; 2           ; 13                    ; 0                  ; yes    ; no              ; no       ; Off          ; LVTTL        ; User                 ;
 ; FSYNC     ; 12    ; 1        ; 1            ; 3            ; 3           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; LVTTL        ; User                 ;
 ; LRCLK     ; 20    ; 1        ; 1            ; 1            ; 2           ; 1                     ; 0                  ; no     ; no              ; no       ; Off          ; LVTTL        ; User                 ;
 ; MOSI      ; 100   ; 2        ; 2            ; 5            ; 2           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; LVTTL        ; User                 ;
@@ -177,6 +184,7 @@ The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Janus V2 CPLD/Janus.pin.
 ; SCLK      ; 21    ; 1        ; 1            ; 1            ; 3           ; 1                     ; 0                  ; no     ; no              ; no       ; Off          ; LVTTL        ; User                 ;
 ; SDOUT     ; 14    ; 1        ; 1            ; 2            ; 0           ; 1                     ; 0                  ; no     ; no              ; no       ; Off          ; LVTTL        ; User                 ;
 ; SSCK      ; 1     ; 2        ; 2            ; 5            ; 3           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; LVTTL        ; User                 ;
+; ref_in    ; 50    ; 1        ; 7            ; 0            ; 1           ; 11                    ; 0                  ; yes    ; no              ; no       ; Off          ; LVTTL        ; User                 ;
 +-----------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+-----------------+----------+--------------+--------------+----------------------+
 
 
@@ -228,7 +236,7 @@ The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Janus V2 CPLD/Janus.pin.
 +----------+------------------+---------------+--------------+
 ; I/O Bank ; Usage            ; VCCIO Voltage ; VREF Voltage ;
 +----------+------------------+---------------+--------------+
-; 1        ; 16 / 38 ( 42 % ) ; 3.3V          ; --           ;
+; 1        ; 17 / 38 ( 45 % ) ; 3.3V          ; --           ;
 ; 2        ; 29 / 42 ( 69 % ) ; 3.3V          ; --           ;
 +----------+------------------+---------------+--------------+
 
@@ -287,7 +295,7 @@ The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Janus V2 CPLD/Janus.pin.
 ; 47       ; 37         ; 1        ; RESERVED_INPUT ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 48       ; 38         ; 1        ; RESERVED_INPUT ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 49       ; 39         ; 1        ; RESERVED_INPUT ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 50       ; 40         ; 1        ; RESERVED_INPUT ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 50       ; 40         ; 1        ; ref_in         ; input  ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 51       ; 41         ; 1        ; RESERVED_INPUT ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 52       ; 42         ; 2        ; C15            ; bidir  ; LVTTL        ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 53       ; 43         ; 2        ; RESERVED_INPUT ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
@@ -357,13 +365,20 @@ The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Janus V2 CPLD/Janus.pin.
 Note: User assignments will override these defaults. The user specified values are listed in the Output Pins and Bidir Pins tables.
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Fitter Resource Utilization by Entity                                                                                                                                                                 ;
-+----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+
-; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ;
-+----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+
-; |Janus                     ; 0 (0)       ; 0            ; 0          ; 45   ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; 0 (0)           ; 0 (0)      ; |Janus              ;
-+----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                               ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------------------------------+
+; Compilation Hierarchy Node                ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------------------------------+
+; |Janus                                    ; 39 (6)      ; 27           ; 0          ; 46   ; 0            ; 12 (3)       ; 0 (0)             ; 27 (3)           ; 22 (0)          ; 1 (1)      ; |Janus                                                                             ;
+;    |counter1:counter1|                    ; 14 (0)      ; 10           ; 0          ; 0    ; 0            ; 4 (0)        ; 0 (0)             ; 10 (0)           ; 11 (0)          ; 0 (0)      ; |Janus|counter1:counter1                                                           ;
+;       |lpm_counter:lpm_counter_component| ; 14 (0)      ; 10           ; 0          ; 0    ; 0            ; 4 (0)        ; 0 (0)             ; 10 (0)           ; 11 (0)          ; 0 (0)      ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component                         ;
+;          |cntr_45j:auto_generated|        ; 14 (14)     ; 10           ; 0          ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 10 (10)          ; 11 (11)         ; 0 (0)      ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated ;
+;    |counter2:counter2|                    ; 14 (0)      ; 10           ; 0          ; 0    ; 0            ; 4 (0)        ; 0 (0)             ; 10 (0)           ; 11 (0)          ; 0 (0)      ; |Janus|counter2:counter2                                                           ;
+;       |lpm_counter:lpm_counter_component| ; 14 (0)      ; 10           ; 0          ; 0    ; 0            ; 4 (0)        ; 0 (0)             ; 10 (0)           ; 11 (0)          ; 0 (0)      ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component                         ;
+;          |cntr_c5j:auto_generated|        ; 14 (14)     ; 10           ; 0          ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 10 (10)          ; 11 (11)         ; 0 (0)      ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated ;
+;    |pfd:Janus_pfd|                        ; 5 (5)       ; 4            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 4 (4)            ; 0 (0)           ; 0 (0)      ; |Janus|pfd:Janus_pfd                                                               ;
++-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------------------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -389,6 +404,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; LRCLK     ; Input    ; 0             ;
 ; SDOUT     ; Input    ; 0             ;
 ; CDOUT     ; Input    ; 0             ;
+; ref_in    ; Input    ; 0             ;
 ; PTT       ; Input    ; 0             ;
 ; CBCLK     ; Output   ; --            ;
 ; CDIN      ; Output   ; --            ;
@@ -420,26 +436,90 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------+----------+---------------+
 
 
-+---------------------------------+
-; Non-Global High Fan-Out Signals ;
-+-----------+---------------------+
-; Name      ; Fan-Out             ;
-+-----------+---------------------+
-; CLK_12MHZ ; 3                   ;
-; C9        ; 2                   ;
-; PTT       ; 1                   ;
-; CDOUT     ; 1                   ;
-; SDOUT     ; 1                   ;
-; LRCLK     ; 1                   ;
-; SCLK      ; 1                   ;
-; C3        ; 1                   ;
-; C2        ; 1                   ;
-; C4        ; 1                   ;
-; C14       ; 1                   ;
-; C13       ; 1                   ;
-; C12       ; 1                   ;
-; C8        ; 1                   ;
-+-----------+---------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                                                                              ;
++---------------------------------------------------------------------------------------------+-------------+---------+---------------------+--------+----------------------+------------------+
+; Name                                                                                        ; Location    ; Fan-Out ; Usage               ; Global ; Global Resource Used ; Global Line Name ;
++---------------------------------------------------------------------------------------------+-------------+---------+---------------------+--------+----------------------+------------------+
+; CLK_12MHZ                                                                                   ; PIN_4       ; 13      ; Clock               ; yes    ; Global clock         ; GCLK3            ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|modulus_trigger ; LC_X3_Y2_N5 ; 11      ; Clock, Sync. load   ; no     ; --                   ; --               ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|modulus_trigger ; LC_X3_Y3_N5 ; 11      ; Clock, Sync. load   ; no     ; --                   ; --               ;
+; osc_8k                                                                                      ; LC_X2_Y3_N1 ; 5       ; Clock               ; yes    ; Global clock         ; GCLK2            ;
+; pfd:Janus_pfd|inst3                                                                         ; LC_X6_Y3_N7 ; 2       ; Async. clear        ; no     ; --                   ; --               ;
+; pfd:Janus_pfd|inst4                                                                         ; LC_X6_Y4_N5 ; 3       ; Async. clear        ; no     ; --                   ; --               ;
+; ref_8k                                                                                      ; LC_X2_Y2_N1 ; 3       ; Clock               ; yes    ; Global clock         ; GCLK1            ;
+; ref_in                                                                                      ; PIN_50      ; 11      ; Async. clear, Clock ; yes    ; Global clock         ; GCLK0            ;
++---------------------------------------------------------------------------------------------+-------------+---------+---------------------+--------+----------------------+------------------+
+
+
++-----------------------------------------------------------------------------+
+; Global & Other Fast Signals                                                 ;
++-----------+-------------+---------+----------------------+------------------+
+; Name      ; Location    ; Fan-Out ; Global Resource Used ; Global Line Name ;
++-----------+-------------+---------+----------------------+------------------+
+; CLK_12MHZ ; PIN_4       ; 13      ; Global clock         ; GCLK3            ;
+; osc_8k    ; LC_X2_Y3_N1 ; 5       ; Global clock         ; GCLK2            ;
+; ref_8k    ; LC_X2_Y2_N1 ; 3       ; Global clock         ; GCLK1            ;
+; ref_in    ; PIN_50      ; 11      ; Global clock         ; GCLK0            ;
++-----------+-------------+---------+----------------------+------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Non-Global High Fan-Out Signals                                                                                  ;
++--------------------------------------------------------------------------------------------------------+---------+
+; Name                                                                                                   ; Fan-Out ;
++--------------------------------------------------------------------------------------------------------+---------+
+; ~GND                                                                                                   ; 20      ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|modulus_trigger            ; 11      ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|modulus_trigger            ; 11      ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella4~COUT        ; 5       ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella4~COUT        ; 5       ;
+; ref_OK                                                                                                 ; 4       ;
+; pfd:Janus_pfd|inst4                                                                                    ; 3       ;
+; pfd:Janus_pfd|inst2                                                                                    ; 3       ;
+; C9                                                                                                     ; 2       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[8]                  ; 2       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[7]                  ; 2       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[6]                  ; 2       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[5]                  ; 2       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[4]                  ; 2       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[3]                  ; 2       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[2]                  ; 2       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[1]                  ; 2       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[0]                  ; 2       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[9]                  ; 2       ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[8]                  ; 2       ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[7]                  ; 2       ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[6]                  ; 2       ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[5]                  ; 2       ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[4]                  ; 2       ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[3]                  ; 2       ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[2]                  ; 2       ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[1]                  ; 2       ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[0]                  ; 2       ;
+; counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[9]                  ; 2       ;
+; pfd:Janus_pfd|inst6                                                                                    ; 2       ;
+; pfd:Janus_pfd|inst5                                                                                    ; 2       ;
+; pfd:Janus_pfd|inst3                                                                                    ; 2       ;
+; PTT                                                                                                    ; 1       ;
+; CDOUT                                                                                                  ; 1       ;
+; SDOUT                                                                                                  ; 1       ;
+; LRCLK                                                                                                  ; 1       ;
+; SCLK                                                                                                   ; 1       ;
+; C3                                                                                                     ; 1       ;
+; C2                                                                                                     ; 1       ;
+; C4                                                                                                     ; 1       ;
+; C14                                                                                                    ; 1       ;
+; C13                                                                                                    ; 1       ;
+; C12                                                                                                    ; 1       ;
+; C8                                                                                                     ; 1       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~69           ; 1       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella8~COUTCOUT1_2 ; 1       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella8~COUT        ; 1       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~68           ; 1       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella7~COUTCOUT1_2 ; 1       ;
+; counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella7~COUT        ; 1       ;
++--------------------------------------------------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------+
@@ -447,14 +527,95 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------+------------------+
 ; Interconnect Resource Type ; Usage            ;
 +----------------------------+------------------+
-; C4s                        ; 18 / 784 ( 2 % ) ;
-; Direct links               ; 0 / 888 ( 0 % )  ;
-; Global clocks              ; 0 / 4 ( 0 % )    ;
-; LAB clocks                 ; 0 / 32 ( 0 % )   ;
-; LUT chains                 ; 0 / 216 ( 0 % )  ;
-; Local interconnects        ; 17 / 888 ( 2 % ) ;
-; R4s                        ; 23 / 704 ( 3 % ) ;
+; C4s                        ; 27 / 784 ( 3 % ) ;
+; Direct links               ; 20 / 888 ( 2 % ) ;
+; Global clocks              ; 4 / 4 ( 100 % )  ;
+; LAB clocks                 ; 9 / 32 ( 28 % )  ;
+; LUT chains                 ; 3 / 216 ( 1 % )  ;
+; Local interconnects        ; 49 / 888 ( 6 % ) ;
+; R4s                        ; 29 / 704 ( 4 % ) ;
 +----------------------------+------------------+
+
+
++--------------------------------------------------------------------------+
+; LAB Logic Elements                                                       ;
++--------------------------------------------+-----------------------------+
+; Number of Logic Elements  (Average = 4.88) ; Number of LABs  (Total = 8) ;
++--------------------------------------------+-----------------------------+
+; 1                                          ; 3                           ;
+; 2                                          ; 0                           ;
+; 3                                          ; 0                           ;
+; 4                                          ; 0                           ;
+; 5                                          ; 1                           ;
+; 6                                          ; 2                           ;
+; 7                                          ; 0                           ;
+; 8                                          ; 0                           ;
+; 9                                          ; 1                           ;
+; 10                                         ; 1                           ;
++--------------------------------------------+-----------------------------+
+
+
++------------------------------------------------------------------+
+; LAB-wide Signals                                                 ;
++------------------------------------+-----------------------------+
+; LAB-wide Signals  (Average = 1.25) ; Number of LABs  (Total = 8) ;
++------------------------------------+-----------------------------+
+; 1 Async. clear                     ; 1                           ;
+; 1 Clock                            ; 5                           ;
+; 2 Async. clears                    ; 1                           ;
+; 2 Clocks                           ; 3                           ;
++------------------------------------+-----------------------------+
+
+
++---------------------------------------------------------------------------+
+; LAB Signals Sourced                                                       ;
++---------------------------------------------+-----------------------------+
+; Number of Signals Sourced  (Average = 5.00) ; Number of LABs  (Total = 8) ;
++---------------------------------------------+-----------------------------+
+; 0                                           ; 0                           ;
+; 1                                           ; 3                           ;
+; 2                                           ; 0                           ;
+; 3                                           ; 0                           ;
+; 4                                           ; 0                           ;
+; 5                                           ; 0                           ;
+; 6                                           ; 3                           ;
+; 7                                           ; 0                           ;
+; 8                                           ; 0                           ;
+; 9                                           ; 1                           ;
+; 10                                          ; 1                           ;
++---------------------------------------------+-----------------------------+
+
+
++-------------------------------------------------------------------------------+
+; LAB Signals Sourced Out                                                       ;
++-------------------------------------------------+-----------------------------+
+; Number of Signals Sourced Out  (Average = 3.13) ; Number of LABs  (Total = 8) ;
++-------------------------------------------------+-----------------------------+
+; 0                                               ; 0                           ;
+; 1                                               ; 3                           ;
+; 2                                               ; 1                           ;
+; 3                                               ; 1                           ;
+; 4                                               ; 0                           ;
+; 5                                               ; 1                           ;
+; 6                                               ; 2                           ;
++-------------------------------------------------+-----------------------------+
+
+
++---------------------------------------------------------------------------+
+; LAB Distinct Inputs                                                       ;
++---------------------------------------------+-----------------------------+
+; Number of Distinct Inputs  (Average = 4.25) ; Number of LABs  (Total = 8) ;
++---------------------------------------------+-----------------------------+
+; 0                                           ; 0                           ;
+; 1                                           ; 2                           ;
+; 2                                           ; 0                           ;
+; 3                                           ; 1                           ;
+; 4                                           ; 2                           ;
+; 5                                           ; 0                           ;
+; 6                                           ; 1                           ;
+; 7                                           ; 1                           ;
+; 8                                           ; 1                           ;
++---------------------------------------------+-----------------------------+
 
 
 +--------------------------------------------------------------------+
@@ -483,74 +644,78 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-------+
 
 
-+-----------------------------------------------------------------------------------------+
-; Advanced Data - Placement Preparation                                                   ;
-+--------------------------------------------------------------------------------+--------+
-; Name                                                                           ; Value  ;
-+--------------------------------------------------------------------------------+--------+
-; Auto Fit Point 1 - Fit Attempt 1                                               ; ff     ;
-; Mid Wire Use - Fit Attempt 1                                                   ; 4      ;
-; Mid Slack - Fit Attempt 1                                                      ; -7137  ;
-; Internal Atom Count - Fit Attempt 1                                            ; 0      ;
-; LE/ALM Count - Fit Attempt 1                                                   ; 0      ;
-; LAB Count - Fit Attempt 1                                                      ; 0      ;
-; Outputs per Lab - Fit Attempt 1                                                ; -1.#IO ;
-; Inputs per LAB - Fit Attempt 1                                                 ; -1.#IO ;
-; Global Inputs per LAB - Fit Attempt 1                                          ; -1.#IO ;
-; LAB Constraint 'non-global clock / CE pair + async load' - Fit Attempt 1       ;        ;
-; LAB Constraint 'ce + sync load' - Fit Attempt 1                                ;        ;
-; LAB Constraint 'non-global controls' - Fit Attempt 1                           ;        ;
-; LAB Constraint 'un-route combination' - Fit Attempt 1                          ;        ;
-; LAB Constraint 'non-global with asyn_clear' - Fit Attempt 1                    ;        ;
-; LAB Constraint 'un-route with async_clear' - Fit Attempt 1                     ;        ;
-; LAB Constraint 'non-global async clear + sync clear' - Fit Attempt 1           ;        ;
-; LAB Constraint 'global non-clock/non-asynch_clear' - Fit Attempt 1             ;        ;
-; LAB Constraint 'ygr_cl_ngclk_gclkce_sload_aload_constraint' - Fit Attempt 1    ;        ;
-; LAB Constraint 'global control signals' - Fit Attempt 1                        ;        ;
-; LAB Constraint 'clock / ce pair constraint' - Fit Attempt 1                    ;        ;
-; LAB Constraint 'aload_aclr pair with aload used' - Fit Attempt 1               ;        ;
-; LAB Constraint 'aload_aclr pair' - Fit Attempt 1                               ;        ;
-; LAB Constraint 'sload_sclear pair' - Fit Attempt 1                             ;        ;
-; LAB Constraint 'invert_a constraint' - Fit Attempt 1                           ;        ;
-; LAB Constraint 'has placement constraint' - Fit Attempt 1                      ;        ;
-; LAB Constraint 'use of ADATA or SDATA by registers constraint' - Fit Attempt 1 ;        ;
-; LEs in Chains - Fit Attempt 1                                                  ; 0      ;
-; LEs in Long Chains - Fit Attempt 1                                             ; 0      ;
-; LABs with Chains - Fit Attempt 1                                               ; 0      ;
-; LABs with Multiple Chains - Fit Attempt 1                                      ; 0      ;
-; Time - Fit Attempt 1                                                           ; 0      ;
-; Time in tsm_tan.dll - Fit Attempt 1                                            ; 0.015  ;
-+--------------------------------------------------------------------------------+--------+
++----------------------------------------------------------------------------------------------+
+; Advanced Data - Placement Preparation                                                        ;
++--------------------------------------------------------------------------------+-------------+
+; Name                                                                           ; Value       ;
++--------------------------------------------------------------------------------+-------------+
+; Auto Fit Point 1 - Fit Attempt 1                                               ; ff          ;
+; Mid Wire Use - Fit Attempt 1                                                   ; 10          ;
+; Mid Slack - Fit Attempt 1                                                      ; -21957      ;
+; Internal Atom Count - Fit Attempt 1                                            ; 39          ;
+; LE/ALM Count - Fit Attempt 1                                                   ; 39          ;
+; LAB Count - Fit Attempt 1                                                      ; 8           ;
+; Outputs per Lab - Fit Attempt 1                                                ; 3.125       ;
+; Inputs per LAB - Fit Attempt 1                                                 ; 3.000       ;
+; Global Inputs per LAB - Fit Attempt 1                                          ; 1.250       ;
+; LAB Constraint 'non-global clock / CE pair + async load' - Fit Attempt 1       ; 0:6;1:2     ;
+; LAB Constraint 'ce + sync load' - Fit Attempt 1                                ; 0:4;1:4     ;
+; LAB Constraint 'non-global controls' - Fit Attempt 1                           ; 0:2;1:4;2:2 ;
+; LAB Constraint 'un-route combination' - Fit Attempt 1                          ; 0:2;1:6     ;
+; LAB Constraint 'non-global with asyn_clear' - Fit Attempt 1                    ; 0:2;1:3;2:3 ;
+; LAB Constraint 'un-route with async_clear' - Fit Attempt 1                     ; 0:2;1:5;2:1 ;
+; LAB Constraint 'non-global async clear + sync clear' - Fit Attempt 1           ; 0:6;1:2     ;
+; LAB Constraint 'global non-clock/non-asynch_clear' - Fit Attempt 1             ; 0:8         ;
+; LAB Constraint 'ygr_cl_ngclk_gclkce_sload_aload_constraint' - Fit Attempt 1    ; 0:4;1:2;2:2 ;
+; LAB Constraint 'global control signals' - Fit Attempt 1                        ; 1:7;3:1     ;
+; LAB Constraint 'clock / ce pair constraint' - Fit Attempt 1                    ; 1:5;2:3     ;
+; LAB Constraint 'aload_aclr pair with aload used' - Fit Attempt 1               ; 0:8         ;
+; LAB Constraint 'aload_aclr pair' - Fit Attempt 1                               ; 1:7;2:1     ;
+; LAB Constraint 'sload_sclear pair' - Fit Attempt 1                             ; 0:3;1:5     ;
+; LAB Constraint 'invert_a constraint' - Fit Attempt 1                           ; 0:3;1:5     ;
+; LAB Constraint 'has placement constraint' - Fit Attempt 1                      ; 0:4;1:4     ;
+; LAB Constraint 'use of ADATA or SDATA by registers constraint' - Fit Attempt 1 ; 0:8         ;
+; LEs in Chains - Fit Attempt 1                                                  ; 22          ;
+; LEs in Long Chains - Fit Attempt 1                                             ; 22          ;
+; LABs with Chains - Fit Attempt 1                                               ; 4           ;
+; LABs with Multiple Chains - Fit Attempt 1                                      ; 0           ;
+; Time - Fit Attempt 1                                                           ; 0           ;
++--------------------------------------------------------------------------------+-------------+
 
 
-+---------------------------------------------+
-; Advanced Data - Placement                   ;
-+-------------------------------------+-------+
-; Name                                ; Value ;
-+-------------------------------------+-------+
-; Mid Wire Use - Fit Attempt 1        ; 4     ;
-; Mid Slack - Fit Attempt 1           ; -6896 ;
-; Auto Fit Point 4 - Fit Attempt 1    ; ff    ;
-; Late Wire Use - Fit Attempt 1       ; 4     ;
-; Late Slack - Fit Attempt 1          ; -6896 ;
-; Auto Fit Point 5 - Fit Attempt 1    ; ff    ;
-; Time - Fit Attempt 1                ; 0     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.062 ;
-+-------------------------------------+-------+
++----------------------------------------------+
+; Advanced Data - Placement                    ;
++-------------------------------------+--------+
+; Name                                ; Value  ;
++-------------------------------------+--------+
+; Auto Fit Point 2 - Fit Attempt 1    ; ff     ;
+; Early Wire Use - Fit Attempt 1      ; 3      ;
+; Early Slack - Fit Attempt 1         ; -27500 ;
+; Auto Fit Point 3 - Fit Attempt 1    ; ff     ;
+; Auto Fit Point 4 - Fit Attempt 1    ; ff     ;
+; Mid Wire Use - Fit Attempt 1        ; 6      ;
+; Mid Slack - Fit Attempt 1           ; -27500 ;
+; Late Wire Use - Fit Attempt 1       ; 7      ;
+; Late Slack - Fit Attempt 1          ; -27500 ;
+; Auto Fit Point 5 - Fit Attempt 1    ; ff     ;
+; Time - Fit Attempt 1                ; 0      ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.047  ;
++-------------------------------------+--------+
 
 
-+---------------------------------------+
-; Advanced Data - Routing               ;
-+-------------------------------+-------+
-; Name                          ; Value ;
-+-------------------------------+-------+
-; Early Slack - Fit Attempt 1   ; -6531 ;
-; Mid Slack - Fit Attempt 1     ; -6531 ;
-; Late Slack - Fit Attempt 1    ; -6531 ;
-; Late Slack - Fit Attempt 1    ; -6531 ;
-; Late Wire Use - Fit Attempt 1 ; 3     ;
-; Time - Fit Attempt 1          ; 0     ;
-+-------------------------------+-------+
++----------------------------------------------+
+; Advanced Data - Routing                      ;
++-------------------------------------+--------+
+; Name                                ; Value  ;
++-------------------------------------+--------+
+; Early Slack - Fit Attempt 1         ; -23968 ;
+; Mid Slack - Fit Attempt 1           ; -24398 ;
+; Late Slack - Fit Attempt 1          ; -24398 ;
+; Late Slack - Fit Attempt 1          ; -24398 ;
+; Late Wire Use - Fit Attempt 1       ; 7      ;
+; Time - Fit Attempt 1                ; 0      ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.064  ;
++-------------------------------------+--------+
 
 
 +-----------------+
@@ -559,7 +724,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Nov 19 20:21:27 2006
+    Info: Processing started: Tue Nov 28 15:47:45 2006
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off Janus -c Janus
 Info: Selected device EPM240T100C5 for design "Janus"
 Info: Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
@@ -575,6 +740,18 @@ Info: Timing requirements not specified -- optimizing circuit to achieve the fol
 Extra Info: Performing register packing on registers with non-logic cell location assignments
 Extra Info: Completed register packing on registers with non-logic cell location assignments
 Info: Completed User Assigned Global Signals Promotion Operation
+Info: Automatically promoted some destinations of signal "CLK_12MHZ" to use Global clock
+    Info: Destination "C5" may be non-global or may not use global clock
+    Info: Destination "MCLK" may be non-global or may not use global clock
+    Info: Destination "CMCLK" may be non-global or may not use global clock
+Info: Pin "CLK_12MHZ" drives global clock, but is not placed in a dedicated clock pin position
+Info: Automatically promoted signal "ref_in" to use Global clock
+Info: Pin "ref_in" drives global clock, but is not placed in a dedicated clock pin position
+Info: Automatically promoted some destinations of signal "osc_8k" to use Global clock
+    Info: Destination "osc_8k" may be non-global or may not use global clock
+    Info: Destination "TUNE~71" may be non-global or may not use global clock
+Info: Automatically promoted some destinations of signal "ref_8k" to use Global clock
+    Info: Destination "ref_8k" may be non-global or may not use global clock
 Info: Completed Auto Global Promotion Operation
 Info: Starting register packing
 Info: Fitter is using Normal packing mode for logic elements with Auto setting for Auto Packed Registers logic option
@@ -588,11 +765,13 @@ Info: Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info: Fitter placement operations beginning
 Info: Fitter placement was successful
 Info: Fitter placement operations ending: elapsed time is 00:00:00
-Info: Estimated most critical path is pin to pin delay of 6.647 ns
-    Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_78; Fanout = 1; PIN Node = 'C4'
-    Info: 2: + IC(3.193 ns) + CELL(2.322 ns) = 6.647 ns; Loc. = PIN_90; Fanout = 0; PIN Node = 'IPWM'
-    Info: Total cell delay = 3.454 ns ( 51.96 % )
-    Info: Total interconnect delay = 3.193 ns ( 48.04 % )
+Info: Estimated most critical path is register to pin delay of 7.029 ns
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X5_Y3; Fanout = 2; REG Node = 'pfd:Janus_pfd|inst5'
+    Info: 2: + IC(1.246 ns) + CELL(0.511 ns) = 1.757 ns; Loc. = LAB_X6_Y3; Fanout = 3; COMB Node = 'pfd:Janus_pfd|inst2'
+    Info: 3: + IC(0.440 ns) + CELL(0.740 ns) = 2.937 ns; Loc. = LAB_X6_Y3; Fanout = 1; COMB Node = 'TUNE~72'
+    Info: 4: + IC(1.770 ns) + CELL(2.322 ns) = 7.029 ns; Loc. = PIN_85; Fanout = 0; PIN Node = 'TUNE'
+    Info: Total cell delay = 3.573 ns ( 50.83 % )
+    Info: Total interconnect delay = 3.456 ns ( 49.17 % )
 Info: Fitter routing operations beginning
 Info: Fitter routing operations ending: elapsed time is 00:00:00
 Info: The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
@@ -600,11 +779,8 @@ Info: The Fitter performed an Auto Fit compilation.  Optimizations were skipped 
     Info: Optimizations that may affect the design's timing were skipped
 Warning: Following 1 pins have no output enable or a GND or VCC output enable - later changes to this connectivity may change fitting results
     Info: Pin C15 has a permanently enabled output enable
-Warning: Following 10 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results
+Warning: Following 7 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results
     Info: Pin CMODE has GND driving its datain port
-    Info: Pin TUNE has GND driving its datain port
-    Info: Pin LED1 has GND driving its datain port
-    Info: Pin LED2 has GND driving its datain port
     Info: Pin EXP4 has GND driving its datain port
     Info: Pin HPF has VCC driving its datain port
     Info: Pin nCS has GND driving its datain port
@@ -612,7 +788,7 @@ Warning: Following 10 pins have nothing, GND, or VCC driving datain port -- chan
     Info: Pin SMODE2 has VCC driving its datain port
     Info: Pin ZCAL has VCC driving its datain port
 Info: Quartus II Fitter was successful. 0 errors, 2 warnings
-    Info: Processing ended: Sun Nov 19 20:21:28 2006
-    Info: Elapsed time: 00:00:02
+    Info: Processing ended: Tue Nov 28 15:47:45 2006
+    Info: Elapsed time: 00:00:01
 
 

@@ -1,6 +1,6 @@
 Simulator report for Janus
-Sun Jul 02 07:20:47 2006
-Version 5.1 Build 176 10/26/2005 SJ Web Edition
+Tue Nov 28 15:36:04 2006
+Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -22,7 +22,7 @@ Version 5.1 Build 176 10/26/2005 SJ Web Edition
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2005 Altera Corporation
+Copyright (C) 1991-2006 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files any of the foregoing 
@@ -45,34 +45,40 @@ applicable agreement for further details.
 +-----------------------------+--------------+
 ; Simulation Start Time       ; 0 ps         ;
 ; Simulation End Time         ; 5.0 ms       ;
-; Simulation Netlist Size     ; 50 nodes     ;
-; Simulation Coverage         ;      24.00 % ;
-; Total Number of Transitions ; 860415       ;
+; Simulation Netlist Size     ; 86 nodes     ;
+; Simulation Coverage         ;       0.00 % ;
+; Total Number of Transitions ; 0            ;
+; Simulation Breakpoints      ; 0            ;
 ; Family                      ; MAX II       ;
 ; Device                      ; EPM240T100C5 ;
 +-----------------------------+--------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------+
-; Simulator Settings                                                                                                           ;
-+-----------------------------------------------------------------+--------------------------------------------+---------------+
-; Option                                                          ; Setting                                    ; Default Value ;
-+-----------------------------------------------------------------+--------------------------------------------+---------------+
-; Simulation mode                                                 ; Timing                                     ; Timing        ;
-; Start time                                                      ; 0 ns                                       ; 0 ns          ;
-; Vector input source                                             ; C:\FPGA\SDRUSB Files\Janus\24mhz-input.vwf ;               ;
-; Add pins automatically to simulation output waveforms           ; On                                         ; On            ;
-; Check outputs                                                   ; Off                                        ; Off           ;
-; Report simulation coverage                                      ; On                                         ; On            ;
-; Detect setup and hold time violations                           ; Off                                        ; Off           ;
-; Detect glitches                                                 ; Off                                        ; Off           ;
-; Automatically save/load simulation netlist                      ; Off                                        ; Off           ;
-; Disable timing delays in Timing Simulation                      ; Off                                        ; Off           ;
-; Generate Signal Activity File                                   ; Off                                        ; Off           ;
-; Group bus channels in simulation results                        ; Off                                        ; Off           ;
-; Preserve fewer signal transitions to reduce memory requirements ; On                                         ; On            ;
-; Overwrite Waveform Inputs With Simulation Outputs               ; Off                                        ;               ;
-+-----------------------------------------------------------------+--------------------------------------------+---------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                                                       ;
++--------------------------------------------------------------------------------------------+---------------------------------------------+---------------+
+; Option                                                                                     ; Setting                                     ; Default Value ;
++--------------------------------------------------------------------------------------------+---------------------------------------------+---------------+
+; Simulation mode                                                                            ; Timing                                      ; Timing        ;
+; Start time                                                                                 ; 0 ns                                        ; 0 ns          ;
+; Vector input source                                                                        ; C:\HPSDR\trunk\Janus-CPLDV2\24mhz-input.vwf ;               ;
+; Add pins automatically to simulation output waveforms                                      ; On                                          ; On            ;
+; Check outputs                                                                              ; Off                                         ; Off           ;
+; Report simulation coverage                                                                 ; On                                          ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On                                          ; On            ;
+; Display missing 1-value coverage report                                                    ; On                                          ; On            ;
+; Display missing 0-value coverage report                                                    ; On                                          ; On            ;
+; Detect setup and hold time violations                                                      ; Off                                         ; Off           ;
+; Detect glitches                                                                            ; Off                                         ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off                                         ; Off           ;
+; Generate Signal Activity File                                                              ; Off                                         ; Off           ;
+; Group bus channels in simulation results                                                   ; Off                                         ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On                                          ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE                                  ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off                                         ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off                                         ;               ;
+; Glitch Filtering                                                                           ; Off                                         ; Off           ;
++--------------------------------------------------------------------------------------------+---------------------------------------------+---------------+
 
 
 +----------------------+
@@ -87,126 +93,230 @@ Please use Quartus II to view the waveform report data.
 +-----------------------------------------------------+--------------+
 ; Type                                                ; Value        ;
 +-----------------------------------------------------+--------------+
-; Total coverage as a percentage                      ;      24.00 % ;
-; Total nodes checked                                 ; 50           ;
-; Total output ports checked                          ; 50           ;
-; Total output ports with complete 1/0-value coverage ; 12           ;
-; Total output ports with no 1/0-value coverage       ; 35           ;
-; Total output ports with no 1-value coverage         ; 35           ;
-; Total output ports with no 0-value coverage         ; 38           ;
+; Total coverage as a percentage                      ;       0.00 % ;
+; Total nodes checked                                 ; 86           ;
+; Total output ports checked                          ; 95           ;
+; Total output ports with complete 1/0-value coverage ; 0            ;
+; Total output ports with no 1/0-value coverage       ; 95           ;
+; Total output ports with no 1-value coverage         ; 95           ;
+; Total output ports with no 0-value coverage         ; 95           ;
 +-----------------------------------------------------+--------------+
 
 
 The following table displays output ports that toggle between 1 and 0 during simulation.
-+-----------------------------------------------------------------------+
-; Complete 1/0-Value Coverage                                           ;
-+--------------------+-------------------------------+------------------+
-; Node Name          ; Output Port Name              ; Output Port Type ;
-+--------------------+-------------------------------+------------------+
-; |Janus|ad_count[4] ; |Janus|ad_count[4]~55         ; cout0            ;
-; |Janus|ad_count[3] ; |Janus|ad_count[3]~59         ; cout             ;
-; |Janus|ad_count[2] ; |Janus|ad_count[2]~63         ; cout0            ;
-; |Janus|ad_count[2] ; |Janus|ad_count[2]~63COUT1_82 ; cout1            ;
-; |Janus|ad_count[1] ; |Janus|ad_count[1]~67         ; cout0            ;
-; |Janus|ad_count[1] ; |Janus|ad_count[1]~67COUT1_81 ; cout1            ;
-; |Janus|ad_count[0] ; |Janus|ad_count[0]~71         ; cout0            ;
-; |Janus|ad_count[0] ; |Janus|ad_count[0]~71COUT1_79 ; cout1            ;
-; |Janus|CLK_24MHZ   ; |Janus|CLK_24MHZ              ; combout          ;
-; |Janus|CMCLK       ; |Janus|CMCLK                  ; padio            ;
-; |Janus|MCLK        ; |Janus|MCLK                   ; padio            ;
-; |Janus|YB7         ; |Janus|YB7                    ; padio            ;
-+--------------------+-------------------------------+------------------+
++-------------------------------------------------+
+; Complete 1/0-Value Coverage                     ;
++-----------+------------------+------------------+
+; Node Name ; Output Port Name ; Output Port Type ;
++-----------+------------------+------------------+
 
 
 The following table displays output ports that do not toggle to 1 during simulation.
-+-----------------------------------------------------------------------+
-; Missing 1-Value Coverage                                              ;
-+--------------------+-------------------------------+------------------+
-; Node Name          ; Output Port Name              ; Output Port Type ;
-+--------------------+-------------------------------+------------------+
-; |Janus|ad_count[4] ; |Janus|ad_count[4]~55COUT1_84 ; cout1            ;
-; |Janus|YA7         ; |Janus|YA7                    ; combout          ;
-; |Janus|YC3         ; |Janus|YC3                    ; combout          ;
-; |Janus|YA6         ; |Janus|YA6                    ; combout          ;
-; |Janus|YC1         ; |Janus|YC1                    ; combout          ;
-; |Janus|YC6         ; |Janus|YC6                    ; combout          ;
-; |Janus|YA3         ; |Janus|YA3                    ; combout          ;
-; |Janus|LRCLK       ; |Janus|LRCLK                  ; combout          ;
-; |Janus|CDOUT       ; |Janus|CDOUT                  ; combout          ;
-; |Janus|PTT         ; |Janus|PTT                    ; combout          ;
-; |Janus|SDOUT       ; |Janus|SDOUT                  ; combout          ;
-; |Janus|SCLK        ; |Janus|SCLK                   ; combout          ;
-; |Janus|CBCLK       ; |Janus|CBCLK                  ; padio            ;
-; |Janus|CDIN        ; |Janus|CDIN                   ; padio            ;
-; |Janus|CLRCIN      ; |Janus|CLRCIN                 ; padio            ;
-; |Janus|CLRCOUT     ; |Janus|CLRCOUT                ; padio            ;
-; |Janus|CMODE       ; |Janus|CMODE                  ; padio            ;
-; |Janus|DFS0        ; |Janus|DFS0                   ; padio            ;
-; |Janus|DFS1        ; |Janus|DFS1                   ; padio            ;
-; |Janus|EXP1        ; |Janus|EXP1                   ; padio            ;
-; |Janus|EXP2        ; |Janus|EXP2                   ; padio            ;
-; |Janus|EXP3        ; |Janus|EXP3                   ; padio            ;
-; |Janus|EXP4        ; |Janus|EXP4                   ; padio            ;
-; |Janus|HPF         ; |Janus|HPF                    ; padio            ;
-; |Janus|IPWM        ; |Janus|IPWM                   ; padio            ;
-; |Janus|nCS         ; |Janus|nCS                    ; padio            ;
-; |Janus|QPWM        ; |Janus|QPWM                   ; padio            ;
-; |Janus|SMODE1      ; |Janus|SMODE1                 ; padio            ;
-; |Janus|SMODE2      ; |Janus|SMODE2                 ; padio            ;
-; |Janus|ZCAL        ; |Janus|ZCAL                   ; padio            ;
-; |Janus|YB4         ; |Janus|YB4                    ; padio            ;
-; |Janus|YC2         ; |Janus|YC2                    ; padio            ;
-; |Janus|YB1         ; |Janus|YB1                    ; padio            ;
-; |Janus|YB5         ; |Janus|YB5                    ; padio            ;
-; |Janus|YB6         ; |Janus|YB6                    ; padio            ;
-+--------------------+-------------------------------+------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                                                                                                                                                                               ;
++-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                           ; Output Port Name                                                                                              ; Output Port Type ;
++-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+------------------+
+; |Janus|ref_OK                                                                                       ; |Janus|ref_OK                                                                                                 ; regout           ;
+; |Janus|TUNE~71                                                                                      ; |Janus|TUNE~71                                                                                                ; combout          ;
+; |Janus|TUNE~71                                                                                      ; |Janus|pfd:Janus_pfd|inst3                                                                                    ; regout           ;
+; |Janus|pfd:Janus_pfd|inst2                                                                          ; |Janus|pfd:Janus_pfd|inst2                                                                                    ; combout          ;
+; |Janus|pfd:Janus_pfd|inst4                                                                          ; |Janus|pfd:Janus_pfd|inst4                                                                                    ; regout           ;
+; |Janus|TUNE~72                                                                                      ; |Janus|TUNE~72                                                                                                ; combout          ;
+; |Janus|LED2~0                                                                                       ; |Janus|LED2~0                                                                                                 ; combout          ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|modulus_trigger  ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|modulus_trigger            ; combout          ;
+; |Janus|ref_8k                                                                                       ; |Janus|ref_8k                                                                                                 ; regout           ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[9]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella9~COUT        ; cout             ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[0]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella0~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[0]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella0~COUTCOUT1_3 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[1]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella1~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[1]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella1~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[2]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella2~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[2]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella2~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[3]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella3~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[3]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella3~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~67 ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~67           ; combout          ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[4]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella4~COUT        ; cout             ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[5]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella5~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[5]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella5~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[6]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella6~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[6]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella6~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[7]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella7~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[7]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella7~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~68 ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~68           ; combout          ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[8]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella8~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[8]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella8~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~69 ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~69           ; combout          ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|modulus_trigger  ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|modulus_trigger            ; combout          ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[9]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella9~COUT        ; cout             ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[0]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella0~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[0]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella0~COUTCOUT1_3 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[1]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella1~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[1]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella1~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[2]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella2~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[2]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella2~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[3]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella3~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[3]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella3~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~67 ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~67           ; combout          ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[4]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella4~COUT        ; cout             ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[5]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella5~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[5]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella5~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[6]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella6~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[6]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella6~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[7]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella7~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[7]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella7~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~68 ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~68           ; combout          ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[8]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella8~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[8]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella8~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~69 ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~69           ; combout          ;
+; |Janus|~GND                                                                                         ; |Janus|~GND                                                                                                   ; combout          ;
+; |Janus|C8                                                                                           ; |Janus|C8                                                                                                     ; combout          ;
+; |Janus|C12                                                                                          ; |Janus|C12                                                                                                    ; combout          ;
+; |Janus|C9                                                                                           ; |Janus|C9                                                                                                     ; combout          ;
+; |Janus|CLK_12MHZ                                                                                    ; |Janus|CLK_12MHZ                                                                                              ; combout          ;
+; |Janus|C13                                                                                          ; |Janus|C13                                                                                                    ; combout          ;
+; |Janus|C14                                                                                          ; |Janus|C14                                                                                                    ; combout          ;
+; |Janus|C4                                                                                           ; |Janus|C4                                                                                                     ; combout          ;
+; |Janus|C2                                                                                           ; |Janus|C2                                                                                                     ; combout          ;
+; |Janus|C3                                                                                           ; |Janus|C3                                                                                                     ; combout          ;
+; |Janus|SCLK                                                                                         ; |Janus|SCLK                                                                                                   ; combout          ;
+; |Janus|LRCLK                                                                                        ; |Janus|LRCLK                                                                                                  ; combout          ;
+; |Janus|SDOUT                                                                                        ; |Janus|SDOUT                                                                                                  ; combout          ;
+; |Janus|CDOUT                                                                                        ; |Janus|CDOUT                                                                                                  ; combout          ;
+; |Janus|ref_in                                                                                       ; |Janus|ref_in                                                                                                 ; combout          ;
+; |Janus|PTT                                                                                          ; |Janus|PTT                                                                                                    ; combout          ;
+; |Janus|CBCLK                                                                                        ; |Janus|CBCLK                                                                                                  ; padio            ;
+; |Janus|CDIN                                                                                         ; |Janus|CDIN                                                                                                   ; padio            ;
+; |Janus|CLRCIN                                                                                       ; |Janus|CLRCIN                                                                                                 ; padio            ;
+; |Janus|CLRCOUT                                                                                      ; |Janus|CLRCOUT                                                                                                ; padio            ;
+; |Janus|CMCLK                                                                                        ; |Janus|CMCLK                                                                                                  ; padio            ;
+; |Janus|CMODE                                                                                        ; |Janus|CMODE                                                                                                  ; padio            ;
+; |Janus|DFS0                                                                                         ; |Janus|DFS0                                                                                                   ; padio            ;
+; |Janus|DFS1                                                                                         ; |Janus|DFS1                                                                                                   ; padio            ;
+; |Janus|TUNE                                                                                         ; |Janus|TUNE                                                                                                   ; padio            ;
+; |Janus|LED1                                                                                         ; |Janus|LED1                                                                                                   ; padio            ;
+; |Janus|LED2                                                                                         ; |Janus|LED2                                                                                                   ; padio            ;
+; |Janus|EXP4                                                                                         ; |Janus|EXP4                                                                                                   ; padio            ;
+; |Janus|HPF                                                                                          ; |Janus|HPF                                                                                                    ; padio            ;
+; |Janus|IPWM                                                                                         ; |Janus|IPWM                                                                                                   ; padio            ;
+; |Janus|MCLK                                                                                         ; |Janus|MCLK                                                                                                   ; padio            ;
+; |Janus|nCS                                                                                          ; |Janus|nCS                                                                                                    ; padio            ;
+; |Janus|nRST                                                                                         ; |Janus|nRST                                                                                                   ; padio            ;
+; |Janus|QPWM                                                                                         ; |Janus|QPWM                                                                                                   ; padio            ;
+; |Janus|SMODE1                                                                                       ; |Janus|SMODE1                                                                                                 ; padio            ;
+; |Janus|SMODE2                                                                                       ; |Janus|SMODE2                                                                                                 ; padio            ;
+; |Janus|ZCAL                                                                                         ; |Janus|ZCAL                                                                                                   ; padio            ;
+; |Janus|C5                                                                                           ; |Janus|C5                                                                                                     ; padio            ;
+; |Janus|C6                                                                                           ; |Janus|C6                                                                                                     ; padio            ;
+; |Janus|C7                                                                                           ; |Janus|C7                                                                                                     ; padio            ;
+; |Janus|C10                                                                                          ; |Janus|C10                                                                                                    ; padio            ;
+; |Janus|C11                                                                                          ; |Janus|C11                                                                                                    ; padio            ;
+; |Janus|C15~output                                                                                   ; |Janus|C15~output                                                                                             ; padio            ;
++-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+------------------+
 
 
 The following table displays output ports that do not toggle to 0 during simulation.
-+-----------------------------------------------------------------------+
-; Missing 0-Value Coverage                                              ;
-+--------------------+-------------------------------+------------------+
-; Node Name          ; Output Port Name              ; Output Port Type ;
-+--------------------+-------------------------------+------------------+
-; |Janus|ad_reset    ; |Janus|ad_reset               ; regout           ;
-; |Janus|ad_count[5] ; |Janus|ad_count[5]            ; regout           ;
-; |Janus|ad_count[4] ; |Janus|ad_count[4]~55COUT1_84 ; cout1            ;
-; |Janus|YA7         ; |Janus|YA7                    ; combout          ;
-; |Janus|YC3         ; |Janus|YC3                    ; combout          ;
-; |Janus|YA6         ; |Janus|YA6                    ; combout          ;
-; |Janus|YC1         ; |Janus|YC1                    ; combout          ;
-; |Janus|YC6         ; |Janus|YC6                    ; combout          ;
-; |Janus|YA3         ; |Janus|YA3                    ; combout          ;
-; |Janus|LRCLK       ; |Janus|LRCLK                  ; combout          ;
-; |Janus|CDOUT       ; |Janus|CDOUT                  ; combout          ;
-; |Janus|PTT         ; |Janus|PTT                    ; combout          ;
-; |Janus|SDOUT       ; |Janus|SDOUT                  ; combout          ;
-; |Janus|SCLK        ; |Janus|SCLK                   ; combout          ;
-; |Janus|CBCLK       ; |Janus|CBCLK                  ; padio            ;
-; |Janus|CDIN        ; |Janus|CDIN                   ; padio            ;
-; |Janus|CLRCIN      ; |Janus|CLRCIN                 ; padio            ;
-; |Janus|CLRCOUT     ; |Janus|CLRCOUT                ; padio            ;
-; |Janus|CMODE       ; |Janus|CMODE                  ; padio            ;
-; |Janus|DFS0        ; |Janus|DFS0                   ; padio            ;
-; |Janus|DFS1        ; |Janus|DFS1                   ; padio            ;
-; |Janus|EXP1        ; |Janus|EXP1                   ; padio            ;
-; |Janus|EXP2        ; |Janus|EXP2                   ; padio            ;
-; |Janus|EXP3        ; |Janus|EXP3                   ; padio            ;
-; |Janus|EXP4        ; |Janus|EXP4                   ; padio            ;
-; |Janus|HPF         ; |Janus|HPF                    ; padio            ;
-; |Janus|IPWM        ; |Janus|IPWM                   ; padio            ;
-; |Janus|nCS         ; |Janus|nCS                    ; padio            ;
-; |Janus|nRST        ; |Janus|nRST                   ; padio            ;
-; |Janus|QPWM        ; |Janus|QPWM                   ; padio            ;
-; |Janus|SMODE1      ; |Janus|SMODE1                 ; padio            ;
-; |Janus|SMODE2      ; |Janus|SMODE2                 ; padio            ;
-; |Janus|ZCAL        ; |Janus|ZCAL                   ; padio            ;
-; |Janus|YB4         ; |Janus|YB4                    ; padio            ;
-; |Janus|YC2         ; |Janus|YC2                    ; padio            ;
-; |Janus|YB1         ; |Janus|YB1                    ; padio            ;
-; |Janus|YB5         ; |Janus|YB5                    ; padio            ;
-; |Janus|YB6         ; |Janus|YB6                    ; padio            ;
-+--------------------+-------------------------------+------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                                                                                                                                                                               ;
++-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                           ; Output Port Name                                                                                              ; Output Port Type ;
++-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+------------------+
+; |Janus|ref_OK                                                                                       ; |Janus|ref_OK                                                                                                 ; regout           ;
+; |Janus|TUNE~71                                                                                      ; |Janus|TUNE~71                                                                                                ; combout          ;
+; |Janus|TUNE~71                                                                                      ; |Janus|pfd:Janus_pfd|inst3                                                                                    ; regout           ;
+; |Janus|pfd:Janus_pfd|inst2                                                                          ; |Janus|pfd:Janus_pfd|inst2                                                                                    ; combout          ;
+; |Janus|pfd:Janus_pfd|inst4                                                                          ; |Janus|pfd:Janus_pfd|inst4                                                                                    ; regout           ;
+; |Janus|TUNE~72                                                                                      ; |Janus|TUNE~72                                                                                                ; combout          ;
+; |Janus|LED2~0                                                                                       ; |Janus|LED2~0                                                                                                 ; combout          ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|modulus_trigger  ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|modulus_trigger            ; combout          ;
+; |Janus|ref_8k                                                                                       ; |Janus|ref_8k                                                                                                 ; regout           ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[9]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella9~COUT        ; cout             ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[0]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella0~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[0]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella0~COUTCOUT1_3 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[1]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella1~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[1]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella1~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[2]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella2~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[2]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella2~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[3]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella3~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[3]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella3~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~67 ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~67           ; combout          ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[4]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella4~COUT        ; cout             ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[5]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella5~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[5]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella5~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[6]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella6~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[6]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella6~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[7]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella7~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[7]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella7~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~68 ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~68           ; combout          ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[8]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella8~COUT        ; cout0            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[8]        ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|counter_cella8~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~69 ; |Janus|counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|cmpr1_aeb_int~69           ; combout          ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|modulus_trigger  ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|modulus_trigger            ; combout          ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[9]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella9~COUT        ; cout             ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[0]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella0~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[0]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella0~COUTCOUT1_3 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[1]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella1~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[1]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella1~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[2]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella2~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[2]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella2~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[3]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella3~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[3]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella3~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~67 ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~67           ; combout          ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[4]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella4~COUT        ; cout             ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[5]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella5~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[5]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella5~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[6]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella6~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[6]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella6~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[7]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella7~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[7]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella7~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~68 ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~68           ; combout          ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[8]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella8~COUT        ; cout0            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[8]        ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|counter_cella8~COUTCOUT1_2 ; cout1            ;
+; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~69 ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|cmpr1_aeb_int~69           ; combout          ;
+; |Janus|~GND                                                                                         ; |Janus|~GND                                                                                                   ; combout          ;
+; |Janus|C8                                                                                           ; |Janus|C8                                                                                                     ; combout          ;
+; |Janus|C12                                                                                          ; |Janus|C12                                                                                                    ; combout          ;
+; |Janus|C9                                                                                           ; |Janus|C9                                                                                                     ; combout          ;
+; |Janus|CLK_12MHZ                                                                                    ; |Janus|CLK_12MHZ                                                                                              ; combout          ;
+; |Janus|C13                                                                                          ; |Janus|C13                                                                                                    ; combout          ;
+; |Janus|C14                                                                                          ; |Janus|C14                                                                                                    ; combout          ;
+; |Janus|C4                                                                                           ; |Janus|C4                                                                                                     ; combout          ;
+; |Janus|C2                                                                                           ; |Janus|C2                                                                                                     ; combout          ;
+; |Janus|C3                                                                                           ; |Janus|C3                                                                                                     ; combout          ;
+; |Janus|SCLK                                                                                         ; |Janus|SCLK                                                                                                   ; combout          ;
+; |Janus|LRCLK                                                                                        ; |Janus|LRCLK                                                                                                  ; combout          ;
+; |Janus|SDOUT                                                                                        ; |Janus|SDOUT                                                                                                  ; combout          ;
+; |Janus|CDOUT                                                                                        ; |Janus|CDOUT                                                                                                  ; combout          ;
+; |Janus|ref_in                                                                                       ; |Janus|ref_in                                                                                                 ; combout          ;
+; |Janus|PTT                                                                                          ; |Janus|PTT                                                                                                    ; combout          ;
+; |Janus|CBCLK                                                                                        ; |Janus|CBCLK                                                                                                  ; padio            ;
+; |Janus|CDIN                                                                                         ; |Janus|CDIN                                                                                                   ; padio            ;
+; |Janus|CLRCIN                                                                                       ; |Janus|CLRCIN                                                                                                 ; padio            ;
+; |Janus|CLRCOUT                                                                                      ; |Janus|CLRCOUT                                                                                                ; padio            ;
+; |Janus|CMCLK                                                                                        ; |Janus|CMCLK                                                                                                  ; padio            ;
+; |Janus|CMODE                                                                                        ; |Janus|CMODE                                                                                                  ; padio            ;
+; |Janus|DFS0                                                                                         ; |Janus|DFS0                                                                                                   ; padio            ;
+; |Janus|DFS1                                                                                         ; |Janus|DFS1                                                                                                   ; padio            ;
+; |Janus|TUNE                                                                                         ; |Janus|TUNE                                                                                                   ; padio            ;
+; |Janus|LED1                                                                                         ; |Janus|LED1                                                                                                   ; padio            ;
+; |Janus|LED2                                                                                         ; |Janus|LED2                                                                                                   ; padio            ;
+; |Janus|EXP4                                                                                         ; |Janus|EXP4                                                                                                   ; padio            ;
+; |Janus|HPF                                                                                          ; |Janus|HPF                                                                                                    ; padio            ;
+; |Janus|IPWM                                                                                         ; |Janus|IPWM                                                                                                   ; padio            ;
+; |Janus|MCLK                                                                                         ; |Janus|MCLK                                                                                                   ; padio            ;
+; |Janus|nCS                                                                                          ; |Janus|nCS                                                                                                    ; padio            ;
+; |Janus|nRST                                                                                         ; |Janus|nRST                                                                                                   ; padio            ;
+; |Janus|QPWM                                                                                         ; |Janus|QPWM                                                                                                   ; padio            ;
+; |Janus|SMODE1                                                                                       ; |Janus|SMODE1                                                                                                 ; padio            ;
+; |Janus|SMODE2                                                                                       ; |Janus|SMODE2                                                                                                 ; padio            ;
+; |Janus|ZCAL                                                                                         ; |Janus|ZCAL                                                                                                   ; padio            ;
+; |Janus|C5                                                                                           ; |Janus|C5                                                                                                     ; padio            ;
+; |Janus|C6                                                                                           ; |Janus|C6                                                                                                     ; padio            ;
+; |Janus|C7                                                                                           ; |Janus|C7                                                                                                     ; padio            ;
+; |Janus|C10                                                                                          ; |Janus|C10                                                                                                    ; padio            ;
+; |Janus|C11                                                                                          ; |Janus|C11                                                                                                    ; padio            ;
+; |Janus|C15~output                                                                                   ; |Janus|C15~output                                                                                             ; padio            ;
++-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+------------------+
 
 
 +---------------------+
@@ -221,30 +331,40 @@ The following table displays output ports that do not toggle to 0 during simulat
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus II Simulator
-    Info: Version 5.1 Build 176 10/26/2005 SJ Web Edition
-    Info: Processing started: Sun Jul 02 07:20:14 2006
+    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+    Info: Processing started: Tue Nov 28 15:36:03 2006
 Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off Janus -c Janus
+Warning: Ignored node in vector source file. Can't find corresponding node name "CLK_24MHZ" in design.
 Warning: Can't find signal in vector source file for input pin "|Janus|CAL"
 Warning: Can't find signal in vector source file for input pin "|Janus|FSYNC"
-Warning: Can't find signal in vector source file for input pin "|Janus|YB3"
-Warning: Can't find signal in vector source file for input pin "|Janus|YA7"
-Warning: Can't find signal in vector source file for input pin "|Janus|YC3"
-Warning: Can't find signal in vector source file for input pin "|Janus|YA6"
-Warning: Can't find signal in vector source file for input pin "|Janus|YC1"
-Warning: Can't find signal in vector source file for input pin "|Janus|YC6"
-Warning: Can't find signal in vector source file for input pin "|Janus|YA3"
-Warning: Can't find signal in vector source file for input pin "|Janus|LRCLK"
-Warning: Can't find signal in vector source file for input pin "|Janus|CDOUT"
-Warning: Can't find signal in vector source file for input pin "|Janus|PTT"
-Warning: Can't find signal in vector source file for input pin "|Janus|SDOUT"
+Warning: Can't find signal in vector source file for input pin "|Janus|SSCK"
+Warning: Can't find signal in vector source file for input pin "|Janus|MOSI"
+Warning: Can't find signal in vector source file for input pin "|Janus|C8"
+Warning: Can't find signal in vector source file for input pin "|Janus|C12"
+Warning: Can't find signal in vector source file for input pin "|Janus|C9"
+Warning: Can't find signal in vector source file for input pin "|Janus|CLK_12MHZ"
+Warning: Can't find signal in vector source file for input pin "|Janus|C13"
+Warning: Can't find signal in vector source file for input pin "|Janus|C14"
+Warning: Can't find signal in vector source file for input pin "|Janus|C4"
+Warning: Can't find signal in vector source file for input pin "|Janus|C2"
+Warning: Can't find signal in vector source file for input pin "|Janus|C3"
 Warning: Can't find signal in vector source file for input pin "|Janus|SCLK"
+Warning: Can't find signal in vector source file for input pin "|Janus|LRCLK"
+Warning: Can't find signal in vector source file for input pin "|Janus|SDOUT"
+Warning: Can't find signal in vector source file for input pin "|Janus|CDOUT"
+Warning: Can't find signal in vector source file for input pin "|Janus|ref_in"
+Warning: Can't find signal in vector source file for input pin "|Janus|PTT"
+Warning: Can't find signal in vector source file for input pin "|Janus|C15"
+Info: Inverted registers were found during simulation
+    Info: Register: |Janus|pfd:Janus_pfd|inst4
 Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
     Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
 Info: Simulation partitioned into 1 sub-simulations
-Info: Simulation coverage is      24.00 %
-Info: Number of transitions in simulation is 860415
-Info: Quartus II Simulator was successful. 0 errors, 14 warnings
-    Info: Processing ended: Sun Jul 02 07:20:47 2006
-    Info: Elapsed time: 00:00:34
+Info: Simulation coverage is       0.00 %
+Info: Number of transitions in simulation is 0
+Info: Vector file Janus.sim.vwf is saved in VWF text format. You can compress it into CVWF format in order to reduce file size. For more details please refer to the Quartus II Help.
+Info: Quartus II Simulator was successful. 0 errors, 21 warnings
+    Info: Processing ended: Tue Nov 28 15:36:03 2006
+    Info: Elapsed time: 00:00:00
 
 

@@ -25,9 +25,18 @@
 // Sets I/O pins on ADC and DAC chips plus provides clocks.
 //
 // TLV320 is in slave mode and AK5394A is Master. Note that both devices are fed from 
-// the CLK_12MHz. 
+// the CLK_12MHz (12.288MHz). 
 //
-// Sets up TLV320 via its SPI interface
+// Sets up TLV320 via its I2C interface.
+//
+// Enables the 12.288MHz ADC clock to be phased locked to a 10MHz reference as follows:
+// The  10MHz reference signal and 12.288MHz VCXO are divided 
+// to give 8kHz signals.  These are fed to a Phase Frequency Detector (PFD)
+// the output of which is filtered and fed to the VCXO. 
+// The PFD has a lock detector that is active low. 
+// The circuit checks that the 10MHz reference is present, if not 
+// it connects the 8kHz from the VCXO to the PFD output so that 
+// the VCXO LPF output is constant at 3.3v/2 which sets the VCXO to its nominal value.
 //
 // All unused pins on the CPLD have been set as tristate inputs in Quartus II
 // 
@@ -44,6 +53,7 @@
 //  19 August 2006 - Interface to Atlas pins changed - V1.0
 //  21 August 2006 - Change to use I2C interface to TLV320AIC23B  -- spi code commented out w/ '//i2c' comments  (kd5tfd)
 //  19 November 2006 - Changes to use the V2 hardware. Replace 24.576MHz clock with 12.288MHz. 
+//  28 November 2006 - Added PLL to enable 12.288MHz clock to be locked to 10MHz reference
 //
 //
 //  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
@@ -81,20 +91,21 @@ module Janus(
    	input  SSCK,  // was output for spi interface 
    	input  MOSI,  // was output for spi interface 
    	output ZCAL,
-   	input  C2,
-	input  C3,
-	input  C4,
-	output C5,
-	output C6,
-	output C7,
-	input  C8,
-	input  C9,
-	output C10,
-	output C11,
-	input  C12,
-	input  C13,
-	input  C14,
-	inout  C15
+   	input  C2,	// nRST
+	input  C3,	// QPWM
+	input  C4,	// IPWM
+	output C5,	// 12.288MHz clock to Atlas bus
+	output C6,	// SCLK
+	output C7,	// LRCLK
+	input  C8,  // CBCLK
+	input  C9,	// CLRCIN/CLRCOUT
+	output C10,	// SDOUT
+	output C11,	// CDOUT
+	input  C12,	// CDIN
+	input  C13,	// DFS0
+	input  C14,	// DFS1
+	inout  C15, // !PTT
+	input  ref_in  // C16 - 10MHz reference in from Atlas bus
 ); 
 
 reg index;
@@ -105,6 +116,13 @@ reg [15:0] TLV_data;
 reg TLV_CLK;
 reg data; 
 reg [3:0] bit_count;
+wire pdf_out;
+reg ref_8k;
+reg osc_8k;
+wire cout1;
+wire cout2;
+reg ref_OK; // is low when 10MHz reference signal is present
+
 //i2c reg TLV_nCS;
 
 //////////////////////////////////////////////////////////////
@@ -128,7 +146,7 @@ reg [3:0] bit_count;
 
 // Set up TLV320 data to send 
 
-//i2c always @ (posedge index)		// why can't this just be 'always @(index)' ?? 
+//i2c always @ (posedge index)		
 //i2c begin
 //i2c load <= load + 3'b1;			// select next data word to send
 //i2c case (load)
@@ -189,6 +207,55 @@ reg [3:0] bit_count;
 //i2c endcase
 //i2c end
 
+//////////////////////////////////////////////////////////////
+//
+// 		PLL to lock 12.288MHz clock to 10MHz reference
+//
+/////////////////////////////////////////////////////////////
+
+// Uses Altera LPM_COUNTER Megafunction for the dividers
+
+// divide 10MHz reference clock by 625 to give  16kHz
+counter1 counter1(.clock(ref_in), .cout(cout1));
+
+// divide by 2 to give a square wave
+always @ (posedge cout1)
+	ref_8k <= ~ref_8k;
+
+
+// divide 12.288MHz ADC  clock by 768 to give 16kHz
+counter2 counter2(.clock(CLK_12MHZ), .cout(cout2));
+
+// divide by 2 to give a square wave
+always @ (posedge cout2)
+	osc_8k <= ~osc_8k;
+
+
+// apply to PFD
+pfd Janus_pfd(.ref_in(ref_8k),.osc_in(osc_8k),.pfd_out(pfd_out),.lock(lock));
+
+//
+// check if the 10MHz reference signal is present.
+// If so use PFD output else use 8kHz so as to set the 
+// VCXO control voltage to 3.3v/2 
+//
+
+always @ (posedge ref_in or posedge osc_8k)
+begin 
+	if (ref_in)ref_OK <= 1'b0;   // ref_OK goes low if ref present so we can drive an LED
+	else ref_OK <= 1'b1;		 // goes high if no reference 
+end 
+
+// select the signal to send to the loop LPF depending if the 10MHz reference is present
+assign  TUNE = ref_OK ?  osc_8k : pfd_out; 
+
+
+//////////////////////////////////////////////////////////////
+//
+// 		CPLD to Atlas bus interface
+//
+/////////////////////////////////////////////////////////////
+
 // Atlas outputs
 assign C5 = CLK_12MHZ;		
 assign C6 = SCLK; 			// is actually BCLK
@@ -225,9 +292,9 @@ assign nCS = 1'b0;   // this results in an i2c addr of 0x1a
 //i2c assign MOSI = data; 		    // SPI data to send to TLV320 
 
 // Other pins 
-assign TUNE = 1'b0;			
-assign LED1 = 1'b0;			
-assign LED2 = 1'b0;
+
+assign LED1 = ref_OK;		  	// Green LED on when 10MHz reference signal is present
+assign LED2 = (lock | ref_OK);  // Yellow LED on when loop is locked and we have a reference signal 
 assign EXP4 = 1'b0;
 
 endmodule 
