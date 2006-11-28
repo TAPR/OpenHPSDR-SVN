@@ -104,7 +104,7 @@ GNDIO                        : 46        : gnd    :                   :         
 RESERVED_INPUT               : 47        :        :                   :         : 1         :                
 RESERVED_INPUT               : 48        :        :                   :         : 1         :                
 RESERVED_INPUT               : 49        :        :                   :         : 1         :                
-RESERVED_INPUT               : 50        :        :                   :         : 1         :                
+ref_in                       : 50        : input  : LVTTL             :         : 1         : Y              
 RESERVED_INPUT               : 51        :        :                   :         : 1         :                
 C15                          : 52        : bidir  : LVTTL             :         : 2         : Y              
 RESERVED_INPUT               : 53        :        :                   :         : 2         :                
