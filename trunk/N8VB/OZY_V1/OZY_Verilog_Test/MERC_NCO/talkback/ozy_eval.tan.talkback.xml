@@ -1,30 +1,29 @@
 
 <!--
-This XML file (created on Sun Oct 01 14:19:31 2006) contains limited information
+This XML file (created on Thu Nov 16 17:12:20 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
 qtb_install.exe located in your quartus/bin folder.  For more information, go
-to www.altera.com/products/software/download/dnl-download_license.html
+to license.txt.
 -->
 <talkback>
 <ver>6.0</ver>
-<schema>quartus_version_6.0_build_202.xsd</schema>
+<schema>quartus_version_6.0_build_178.xsd</schema>
 <license>
-	<host_id>00123f7b788f</host_id>
+	<host_id>00a0cc694f79</host_id>
 	<nic_id>00123f7b788f</nic_id>
 	<cdrive_id>dc2f6d33</cdrive_id>
 </license>
 <tool>
 	<name>Quartus II</name>
 	<version>6.0</version>
-	<build>Build 202</build>
-	<service_pack_label>1</service_pack_label>
+	<build>Build 178</build>
 	<binary_type>32</binary_type>
 	<module>quartus_tan</module>
-	<edition>Web Edition</edition>
+	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Sun Oct 01 14:19:31 2006</compilation_end_time>
+	<compilation_end_time>Thu Nov 16 17:12:21 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,8 +36,8 @@ to www.altera.com/products/software/download/dnl-download_license.html
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_eval</project>
 <revision>ozy_eval</revision>
 <compilation_summary>
-	<flow_status>Successful - Sun Oct 01 14:19:31 2006</flow_status>
-	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
+	<flow_status>Successful - Thu Nov 16 17:12:19 2006</flow_status>
+	<quartus_ii_version>6.0 Build 178 04/27/2006 SJ Full Version</quartus_ii_version>
 	<revision_name>ozy_eval</revision_name>
 	<top_level_entity_name>ozy_nco</top_level_entity_name>
 	<family>Cyclone II</family>
@@ -65,8 +64,8 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	<warning>Warning: No matching clocks have timing constraints</warning>
 	<warning>Warning: Found pins functioning as undefined clocks and/or memory enables</warning>
 	<info>Info: Quartus II Timing Analyzer was successful. 0 errors, 4 warnings</info>
-	<info>Info: Elapsed time: 00:00:05</info>
-	<info>Info: Processing ended: Sun Oct 01 14:19:31 2006</info>
+	<info>Info: Elapsed time: 00:00:06</info>
+	<info>Info: Processing ended: Thu Nov 16 17:12:19 2006</info>
 	<info>Info: th for register &quot;ADC[4]&quot; (data pin = &quot;DA[4]&quot;, clock pin = &quot;ENC_CLK&quot;) is -2.955 ns</info>
 	<info>Info: - Shortest pin to register delay is 6.921 ns</info>
 </messages>
