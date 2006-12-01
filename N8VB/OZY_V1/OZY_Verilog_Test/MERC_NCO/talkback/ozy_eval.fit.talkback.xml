@@ -1,30 +1,29 @@
 
 <!--
-This XML file (created on Sun Oct 01 14:19:19 2006) contains limited information
+This XML file (created on Thu Nov 16 17:12:03 2006) contains limited information
 from the compilation of logic designs using Quartus II software (BUT NOT THE
 LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
 operation of the "TalkBack" feature.  To enable/disable this feature, run
 qtb_install.exe located in your quartus/bin folder.  For more information, go
-to www.altera.com/products/software/download/dnl-download_license.html
+to license.txt.
 -->
 <talkback>
 <ver>6.0</ver>
-<schema>quartus_version_6.0_build_202.xsd</schema>
+<schema>quartus_version_6.0_build_178.xsd</schema>
 <license>
-	<host_id>00123f7b788f</host_id>
+	<host_id>00a0cc694f79</host_id>
 	<nic_id>00123f7b788f</nic_id>
 	<cdrive_id>dc2f6d33</cdrive_id>
 </license>
 <tool>
 	<name>Quartus II</name>
 	<version>6.0</version>
-	<build>Build 202</build>
-	<service_pack_label>1</service_pack_label>
+	<build>Build 178</build>
 	<binary_type>32</binary_type>
 	<module>quartus_fit</module>
-	<edition>Web Edition</edition>
+	<edition>Full Version</edition>
 	<eval>Licensed</eval>
-	<compilation_end_time>Sun Oct 01 14:19:19 2006</compilation_end_time>
+	<compilation_end_time>Thu Nov 16 17:12:03 2006</compilation_end_time>
 </tool>
 <machine>
 	<os>Windows XP</os>
@@ -37,8 +36,8 @@ to www.altera.com/products/software/download/dnl-download_license.html
 <project>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_eval</project>
 <revision>ozy_eval</revision>
 <compilation_summary>
-	<flow_status>Successful - Sun Oct 01 14:19:18 2006</flow_status>
-	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
+	<flow_status>Successful - Thu Nov 16 17:12:02 2006</flow_status>
+	<quartus_ii_version>6.0 Build 178 04/27/2006 SJ Full Version</quartus_ii_version>
 	<revision_name>ozy_eval</revision_name>
 	<top_level_entity_name>ozy_nco</top_level_entity_name>
 	<family>Cyclone II</family>
@@ -577,11 +576,11 @@ to www.altera.com/products/software/download/dnl-download_license.html
 <messages>
 	<warning>Warning: Following 5 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results</warning>
 	<warning>Warning: Found 30 output pins without output pin load capacitance assignment</warning>
+	<info>Info: Generated suppressed messages file C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_eval.fit.smsg</info>
 	<info>Info: Quartus II Fitter was successful. 0 errors, 2 warnings</info>
-	<info>Info: Elapsed time: 00:01:35</info>
-	<info>Info: Processing ended: Sun Oct 01 14:19:18 2006</info>
+	<info>Info: Elapsed time: 00:02:05</info>
+	<info>Info: Processing ended: Thu Nov 16 17:12:01 2006</info>
 	<info>Info: Following groups of pins have the same output enable</info>
-	<info>Info: Following pins have the same output enable: SPI_REGS:spi_regs|sRd</info>
 </messages>
 <fitter_settings>
 	<row>
@@ -2010,15 +2009,15 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	</row>
 	<row>
 		<name>Time - Fit Attempt 1</name>
-		<value>31</value>
+		<value>40</value>
 	</row>
 	<row>
 		<name>Time in tsm_dat.dll - Fit Attempt 1</name>
-		<value>0.015</value>
+		<value>0.016</value>
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>1.766</value>
+		<value>1.901</value>
 	</row>
 </advanced_data___placement_preparation>
 <advanced_data___placement>
@@ -2064,11 +2063,11 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	</row>
 	<row>
 		<name>Time - Fit Attempt 1</name>
-		<value>9</value>
+		<value>12</value>
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>2.749</value>
+		<value>3.368</value>
 	</row>
 </advanced_data___placement>
 <advanced_data___routing>
@@ -2102,21 +2101,20 @@ to www.altera.com/products/software/download/dnl-download_license.html
 	</row>
 	<row>
 		<name>Time - Fit Attempt 1</name>
-		<value>15</value>
+		<value>20</value>
 	</row>
 	<row>
 		<name>Time in tsm_dat.dll - Fit Attempt 1</name>
-		<value>0.016</value>
+		<value>0.031</value>
 	</row>
 	<row>
 		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
-		<value>9.171</value>
+		<value>11.689</value>
 	</row>
 </advanced_data___routing>
 <files>
 	<top>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/ozy_nco.v</top>
 	<extensions>
-		<ext filename="none">1</ext>
 		<ext ext_name="v">20</ext>
 		<ext ext_name="tdf">23</ext>
 		<ext ext_name="inc">23</ext>
@@ -2168,14 +2166,13 @@ to www.altera.com/products/software/download/dnl-download_license.html
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_i27.tdf</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_bb11.tdf</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_lve1.tdf</sub_file>
-		<sub_file>none</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_ln7.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_fo8.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_hn7.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_bo8.tdf</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_oe9.tdf</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_vd8.tdf</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_ue9.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_mn7.tdf</sub_file>
-		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_go8.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_in7.tdf</sub_file>
+		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_co8.tdf</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_4e8.tdf</sub_file>
 		<sub_file>C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_ve9.tdf</sub_file>
 		<sub_file>c:/altera/quartus60/libraries/megafunctions/altsyncram.tdf</sub_file>

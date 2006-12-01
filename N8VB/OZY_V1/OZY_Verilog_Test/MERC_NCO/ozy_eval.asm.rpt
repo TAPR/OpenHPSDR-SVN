@@ -1,6 +1,6 @@
 Assembler report for ozy_eval
-Sun Oct 01 14:19:24 2006
-Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+Thu Nov 16 17:12:11 2006
+Version 6.0 Build 178 04/27/2006 SJ Full Version
 
 
 ---------------------
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Oct 01 14:19:24 2006 ;
+; Assembler Status      ; Successful - Thu Nov 16 17:12:11 2006 ;
 ; Revision Name         ; ozy_eval                              ;
 ; Top-level Entity Name ; ozy_nco                               ;
 ; Family                ; Cyclone II                            ;
@@ -114,13 +114,13 @@ applicable agreement for further details.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus II Assembler
-    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Oct 01 14:19:21 2006
+    Info: Version 6.0 Build 178 04/27/2006 SJ Full Version
+    Info: Processing started: Thu Nov 16 17:12:06 2006
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off ozy_eval -c ozy_eval
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Processing ended: Sun Oct 01 14:19:24 2006
-    Info: Elapsed time: 00:00:03
+    Info: Processing ended: Thu Nov 16 17:12:11 2006
+    Info: Elapsed time: 00:00:05
 
 

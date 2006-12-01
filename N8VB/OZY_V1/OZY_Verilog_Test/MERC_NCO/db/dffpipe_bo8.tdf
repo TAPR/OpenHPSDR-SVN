@@ -1,5 +1,5 @@
 --dffpipe WIDTH=1 clock clrn d q ALTERA_INTERNAL_OPTIONS=AUTO_SHIFT_REGISTER_RECOGNITION=OFF
---VERSION_BEGIN 6.0 cbx_mgl 2006:05:17:10:06:16:SJ cbx_stratixii 2006:03:03:09:35:36:SJ cbx_util_mgl 2006:01:09:10:46:36:SJ  VERSION_END
+--VERSION_BEGIN 6.0 cbx_mgl 2006:04:14:11:14:36:SJ cbx_stratixii 2006:03:03:09:35:36:SJ cbx_util_mgl 2006:01:09:10:46:36:SJ  VERSION_END
 
 
 --  Copyright (C) 1991-2006 Altera Corporation

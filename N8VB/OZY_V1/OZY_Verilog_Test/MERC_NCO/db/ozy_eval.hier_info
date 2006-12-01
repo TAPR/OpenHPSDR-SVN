@@ -15344,7 +15344,7 @@ q[14] <= altsyncram_bb11:fifo_ram.q_b[14]
 q[15] <= altsyncram_bb11:fifo_ram.q_b[15]
 rdclk => a_graycounter_o96:rdptr_g1p.clock
 rdclk => altsyncram_bb11:fifo_ram.clock1
-rdclk => alt_synch_pipe_ln7:rdfull_reg.clock
+rdclk => alt_synch_pipe_hn7:rdfull_reg.clock
 rdclk => dffpipe_oe9:rs_brp.clock
 rdclk => dffpipe_oe9:rs_bwp.clock
 rdclk => alt_synch_pipe_vd8:rs_dgwp.clock
@@ -15361,7 +15361,7 @@ rdclk => rdptr_g[2].CLK
 rdclk => rdptr_g[1].CLK
 rdclk => rdptr_g[0].CLK
 rdempty <= rdempty_eq_comp_aeb_int.DB_MAX_OUTPUT_PORT_TYPE
-rdfull <= alt_synch_pipe_ln7:rdfull_reg.q[0]
+rdfull <= alt_synch_pipe_hn7:rdfull_reg.q[0]
 rdreq => valid_rdreq.IN0
 rdusedw[0] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 rdusedw[1] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
@@ -15375,7 +15375,7 @@ rdusedw[8] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 wrclk => a_graycounter_l27:wrptr_g1p.clock
 wrclk => a_graycounter_i27:wrptr_gp.clock
 wrclk => altsyncram_bb11:fifo_ram.clock0
-wrclk => alt_synch_pipe_mn7:wrempty_reg.clock
+wrclk => alt_synch_pipe_in7:wrempty_reg.clock
 wrclk => dffpipe_oe9:ws_brp.clock
 wrclk => dffpipe_oe9:ws_bwp.clock
 wrclk => alt_synch_pipe_4e8:ws_dgrp.clock
@@ -16154,14 +16154,14 @@ wren_b => ram_block6a14.PORTBRE
 wren_b => ram_block6a15.PORTBRE
 
 
-|ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg
-clock => dffpipe_fo8:dffpipe7.clock
-clrn => dffpipe_fo8:dffpipe7.clrn
-d[0] => dffpipe_fo8:dffpipe7.d[0]
-q[0] <= dffpipe_fo8:dffpipe7.q[0]
+|ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg
+clock => dffpipe_bo8:dffpipe7.clock
+clrn => dffpipe_bo8:dffpipe7.clrn
+d[0] => dffpipe_bo8:dffpipe7.d[0]
+q[0] <= dffpipe_bo8:dffpipe7.q[0]
 
 
-|ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7
+|ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7
 clock => dffe8a[0].CLK
 clrn => dffe8a[0].ACLR
 q[0] <= dffe8a[0].DB_MAX_OUTPUT_PORT_TYPE
@@ -16311,14 +16311,14 @@ q[8] <= dffe12a[8].DB_MAX_OUTPUT_PORT_TYPE
 q[9] <= dffe12a[9].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg
-clock => dffpipe_go8:dffpipe13.clock
-clrn => dffpipe_go8:dffpipe13.clrn
-d[0] => dffpipe_go8:dffpipe13.d[0]
-q[0] <= dffpipe_go8:dffpipe13.q[0]
+|ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg
+clock => dffpipe_co8:dffpipe13.clock
+clrn => dffpipe_co8:dffpipe13.clrn
+d[0] => dffpipe_co8:dffpipe13.d[0]
+q[0] <= dffpipe_co8:dffpipe13.q[0]
 
 
-|ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13
+|ozy_nco|tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13
 clock => dffe14a[0].CLK
 clrn => dffe14a[0].ACLR
 q[0] <= dffe14a[0].DB_MAX_OUTPUT_PORT_TYPE
@@ -16630,7 +16630,7 @@ q[14] <= altsyncram_bb11:fifo_ram.q_b[14]
 q[15] <= altsyncram_bb11:fifo_ram.q_b[15]
 rdclk => a_graycounter_o96:rdptr_g1p.clock
 rdclk => altsyncram_bb11:fifo_ram.clock1
-rdclk => alt_synch_pipe_ln7:rdfull_reg.clock
+rdclk => alt_synch_pipe_hn7:rdfull_reg.clock
 rdclk => dffpipe_oe9:rs_brp.clock
 rdclk => dffpipe_oe9:rs_bwp.clock
 rdclk => alt_synch_pipe_vd8:rs_dgwp.clock
@@ -16647,7 +16647,7 @@ rdclk => rdptr_g[2].CLK
 rdclk => rdptr_g[1].CLK
 rdclk => rdptr_g[0].CLK
 rdempty <= rdempty_eq_comp_aeb_int.DB_MAX_OUTPUT_PORT_TYPE
-rdfull <= alt_synch_pipe_ln7:rdfull_reg.q[0]
+rdfull <= alt_synch_pipe_hn7:rdfull_reg.q[0]
 rdreq => valid_rdreq.IN0
 rdusedw[0] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 rdusedw[1] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
@@ -16661,7 +16661,7 @@ rdusedw[8] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 wrclk => a_graycounter_l27:wrptr_g1p.clock
 wrclk => a_graycounter_i27:wrptr_gp.clock
 wrclk => altsyncram_bb11:fifo_ram.clock0
-wrclk => alt_synch_pipe_mn7:wrempty_reg.clock
+wrclk => alt_synch_pipe_in7:wrempty_reg.clock
 wrclk => dffpipe_oe9:ws_brp.clock
 wrclk => dffpipe_oe9:ws_bwp.clock
 wrclk => alt_synch_pipe_4e8:ws_dgrp.clock
@@ -17440,14 +17440,14 @@ wren_b => ram_block6a14.PORTBRE
 wren_b => ram_block6a15.PORTBRE
 
 
-|ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg
-clock => dffpipe_fo8:dffpipe7.clock
-clrn => dffpipe_fo8:dffpipe7.clrn
-d[0] => dffpipe_fo8:dffpipe7.d[0]
-q[0] <= dffpipe_fo8:dffpipe7.q[0]
+|ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg
+clock => dffpipe_bo8:dffpipe7.clock
+clrn => dffpipe_bo8:dffpipe7.clrn
+d[0] => dffpipe_bo8:dffpipe7.d[0]
+q[0] <= dffpipe_bo8:dffpipe7.q[0]
 
 
-|ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7
+|ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7
 clock => dffe8a[0].CLK
 clrn => dffe8a[0].ACLR
 q[0] <= dffe8a[0].DB_MAX_OUTPUT_PORT_TYPE
@@ -17597,14 +17597,14 @@ q[8] <= dffe12a[8].DB_MAX_OUTPUT_PORT_TYPE
 q[9] <= dffe12a[9].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg
-clock => dffpipe_go8:dffpipe13.clock
-clrn => dffpipe_go8:dffpipe13.clrn
-d[0] => dffpipe_go8:dffpipe13.d[0]
-q[0] <= dffpipe_go8:dffpipe13.q[0]
+|ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg
+clock => dffpipe_co8:dffpipe13.clock
+clrn => dffpipe_co8:dffpipe13.clrn
+d[0] => dffpipe_co8:dffpipe13.d[0]
+q[0] <= dffpipe_co8:dffpipe13.q[0]
 
 
-|ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13
+|ozy_nco|tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13
 clock => dffe14a[0].CLK
 clrn => dffe14a[0].ACLR
 q[0] <= dffe14a[0].DB_MAX_OUTPUT_PORT_TYPE

@@ -1,6 +1,6 @@
 Analysis & Synthesis report for ozy_eval
-Sun Oct 01 14:17:41 2006
-Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+Thu Nov 16 17:09:53 2006
+Version 6.0 Build 178 04/27/2006 SJ Full Version
 
 
 ---------------------
@@ -21,14 +21,14 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
  13. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated
  14. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram
  15. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5
- 16. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg
- 17. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7
+ 16. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg
+ 17. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7
  18. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp
  19. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_bwp
  20. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp
  21. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10
- 22. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg
- 23. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13
+ 22. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg
+ 23. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13
  24. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_brp
  25. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_bwp
  26. Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp
@@ -37,14 +37,14 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
  29. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated
  30. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram
  31. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5
- 32. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg
- 33. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7
+ 32. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg
+ 33. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7
  34. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp
  35. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_bwp
  36. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp
  37. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10
- 38. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg
- 39. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13
+ 38. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg
+ 39. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13
  40. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_brp
  41. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:ws_bwp
  42. Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp
@@ -145,22 +145,22 @@ applicable agreement for further details.
 
 
 
-+-----------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                      ;
-+------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Oct 01 14:17:41 2006        ;
-; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
-; Revision Name                      ; ozy_eval                                     ;
-; Top-level Entity Name              ; ozy_nco                                      ;
-; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 3302                                         ;
-; Total registers                    ; 2802                                         ;
-; Total pins                         ; 55                                           ;
-; Total virtual pins                 ; 0                                            ;
-; Total memory bits                  ; 20,992                                       ;
-; Embedded Multiplier 9-bit elements ; 12                                           ;
-; Total PLLs                         ; 0                                            ;
-+------------------------------------+----------------------------------------------+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++------------------------------------+------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Thu Nov 16 17:09:53 2006    ;
+; Quartus II Version                 ; 6.0 Build 178 04/27/2006 SJ Full Version ;
+; Revision Name                      ; ozy_eval                                 ;
+; Top-level Entity Name              ; ozy_nco                                  ;
+; Family                             ; Cyclone II                               ;
+; Total logic elements               ; 3302                                     ;
+; Total registers                    ; 2802                                     ;
+; Total pins                         ; 55                                       ;
+; Total virtual pins                 ; 0                                        ;
+; Total memory bits                  ; 20,992                                   ;
+; Embedded Multiplier 9-bit elements ; 12                                       ;
+; Total PLLs                         ; 0                                        ;
++------------------------------------+------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------+
@@ -268,13 +268,13 @@ applicable agreement for further details.
 ; db/a_graycounter_i27.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/a_graycounter_i27.tdf  ;
 ; db/altsyncram_bb11.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_bb11.tdf    ;
 ; db/altsyncram_lve1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/altsyncram_lve1.tdf    ;
-; db/alt_synch_pipe_ln7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_ln7.tdf ;
-; db/dffpipe_fo8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_fo8.tdf        ;
+; db/alt_synch_pipe_hn7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_hn7.tdf ;
+; db/dffpipe_bo8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_bo8.tdf        ;
 ; db/dffpipe_oe9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_oe9.tdf        ;
 ; db/alt_synch_pipe_vd8.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_vd8.tdf ;
 ; db/dffpipe_ue9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_ue9.tdf        ;
-; db/alt_synch_pipe_mn7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_mn7.tdf ;
-; db/dffpipe_go8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_go8.tdf        ;
+; db/alt_synch_pipe_in7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_in7.tdf ;
+; db/dffpipe_co8.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_co8.tdf        ;
 ; db/alt_synch_pipe_4e8.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/alt_synch_pipe_4e8.tdf ;
 ; db/dffpipe_ve9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Data/HPSDR/trunk/N8VB/OZY_V1/OZY_Verilog_Test/MERC_NCO/db/dffpipe_ve9.tdf        ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera/quartus60/libraries/megafunctions/altsyncram.tdf                          ;
@@ -609,7 +609,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg ;
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg ;
 +-----------------------+-------+------+------------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                                 ;
 +-----------------------+-------+------+------------------------------------------------------------------------------------+
@@ -618,7 +618,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7 ;
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7 ;
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                            ;
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
@@ -663,7 +663,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 
 
 +----------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg ;
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                                  ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------------+
@@ -672,7 +672,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13 ;
+; Source assignments for tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13 ;
 +---------------------------------+-------+------+-------------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                              ;
 +---------------------------------+-------+------+-------------------------------------------------------------------------------------------------+
@@ -762,7 +762,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg ;
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg ;
 +-----------------------+-------+------+------------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                                 ;
 +-----------------------+-------+------+------------------------------------------------------------------------------------+
@@ -771,7 +771,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7 ;
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7 ;
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                            ;
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
@@ -816,7 +816,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 
 
 +----------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg ;
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                                  ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------------+
@@ -825,7 +825,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13 ;
+; Source assignments for tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13 ;
 +---------------------------------+-------+------+-------------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                              ;
 +---------------------------------+-------+------+-------------------------------------------------------------------------------------------------+
@@ -2677,8 +2677,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
-    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Oct 01 14:16:55 2006
+    Info: Version 6.0 Build 178 04/27/2006 SJ Full Version
+    Info: Processing started: Thu Nov 16 17:08:54 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ozy_eval -c ozy_eval
 Info: Found 1 design units, including 1 entities, in source file coeff_rom.v
     Info: Found entity 1: coeff_rom
@@ -2786,12 +2786,12 @@ Info: Elaborating entity "altsyncram_bb11" for hierarchy "tx_fifo:tx_fifo_i|dcfi
 Info: Found 1 design units, including 1 entities, in source file db/altsyncram_lve1.tdf
     Info: Found entity 1: altsyncram_lve1
 Info: Elaborating entity "altsyncram_lve1" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|altsyncram_bb11:fifo_ram|altsyncram_lve1:altsyncram5"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_ln7.tdf
-    Info: Found entity 1: alt_synch_pipe_ln7
-Info: Elaborating entity "alt_synch_pipe_ln7" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_fo8.tdf
-    Info: Found entity 1: dffpipe_fo8
-Info: Elaborating entity "dffpipe_fo8" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_ln7:rdfull_reg|dffpipe_fo8:dffpipe7"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_hn7.tdf
+    Info: Found entity 1: alt_synch_pipe_hn7
+Info: Elaborating entity "alt_synch_pipe_hn7" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_bo8.tdf
+    Info: Found entity 1: dffpipe_bo8
+Info: Elaborating entity "dffpipe_bo8" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_hn7:rdfull_reg|dffpipe_bo8:dffpipe7"
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_oe9.tdf
     Info: Found entity 1: dffpipe_oe9
 Info: Elaborating entity "dffpipe_oe9" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|dffpipe_oe9:rs_brp"
@@ -2801,12 +2801,12 @@ Info: Elaborating entity "alt_synch_pipe_vd8" for hierarchy "tx_fifo:tx_fifo_i|d
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_ue9.tdf
     Info: Found entity 1: dffpipe_ue9
 Info: Elaborating entity "dffpipe_ue9" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_ue9:dffpipe10"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_mn7.tdf
-    Info: Found entity 1: alt_synch_pipe_mn7
-Info: Elaborating entity "alt_synch_pipe_mn7" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_go8.tdf
-    Info: Found entity 1: dffpipe_go8
-Info: Elaborating entity "dffpipe_go8" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_mn7:wrempty_reg|dffpipe_go8:dffpipe13"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_in7.tdf
+    Info: Found entity 1: alt_synch_pipe_in7
+Info: Elaborating entity "alt_synch_pipe_in7" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_co8.tdf
+    Info: Found entity 1: dffpipe_co8
+Info: Elaborating entity "dffpipe_co8" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_in7:wrempty_reg|dffpipe_co8:dffpipe13"
 Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_4e8.tdf
     Info: Found entity 1: alt_synch_pipe_4e8
 Info: Elaborating entity "alt_synch_pipe_4e8" for hierarchy "tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_ncb1:auto_generated|alt_synch_pipe_4e8:ws_dgrp"
@@ -3006,7 +3006,7 @@ Info: Implemented 4112 device resources after synthesis - the final resource cou
     Info: Implemented 320 RAM segments
     Info: Implemented 12 DSP elements
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 42 warnings
-    Info: Processing ended: Sun Oct 01 14:17:41 2006
-    Info: Elapsed time: 00:00:46
+    Info: Processing ended: Thu Nov 16 17:09:53 2006
+    Info: Elapsed time: 00:00:59
 
 

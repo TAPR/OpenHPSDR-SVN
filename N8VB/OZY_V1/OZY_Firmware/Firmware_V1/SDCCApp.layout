@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE CodeBlocks_layout_file>
 <CodeBlocks_layout_file>
-	<File name="Initial\src\hpsdr_common.c" open="1" top="1">
-		<Cursor position="787" topLine="71"/>
+	<File name="Initial\src\eeprom_io.c" open="1" top="1">
+		<Cursor position="973" topLine="20"/>
+	</File>
+	<File name="Initial\src\fpga_load.c" open="1" top="0">
+		<Cursor position="1042" topLine="105"/>
 	</File>
 	<Expand folder="/Sources/Initial/src"/>
 	<Expand folder="/Sources/Initial"/>
 	<Expand folder="/Sources"/>
-	<Expand folder="/Headers/Initial/include"/>
-	<Expand folder="/Headers/Initial"/>
-	<Expand folder="/Headers"/>
 </CodeBlocks_layout_file>
