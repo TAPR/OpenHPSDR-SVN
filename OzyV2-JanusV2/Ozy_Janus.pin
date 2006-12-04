@@ -60,7 +60,7 @@ Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage 
 ~ASDO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 1         : input  : LVTTL             :         : 1         : N              
 ~nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 2         : input  : LVTTL             :         : 1         : N              
 RESERVED_INPUT               : 3         :        :                   :         : 1         :                
-RESERVED_INPUT               : 4         :        :                   :         : 1         :                
+DEBUG_LED0                   : 4         : output : LVTTL             :         : 1         : Y              
 FLAGC                        : 5         : input  : LVTTL             :         : 1         : Y              
 RESERVED_INPUT               : 6         :        :                   :         : 1         :                
 VCCIO1                       : 7         : power  :                   : 3.3V    : 1         :                
@@ -89,8 +89,8 @@ VCCIO1                       : 29        : power  :                   : 3.3V    
 SLRD                         : 30        : output : LVTTL             :         : 1         : Y              
 SLWR                         : 31        : output : LVTTL             :         : 1         : Y              
 VCCINT                       : 32        : power  :                   : 1.2V    :           :                
-RESERVED_INPUT               : 33        :        :                   :         : 1         :                
-RESERVED_INPUT               : 34        :        :                   :         : 1         :                
+DEBUG_LED1                   : 33        : output : LVTTL             :         : 1         : Y              
+DEBUG_LED2                   : 34        : output : LVTTL             :         : 1         : Y              
 RESERVED_INPUT               : 35        :        :                   :         : 1         :                
 GND                          : 36        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 37        :        :                   :         : 1         :                
@@ -123,10 +123,10 @@ FX2_FD[6]                    : 63        : bidir  : LVTTL             :         
 FX2_FD[7]                    : 64        : bidir  : LVTTL             :         : 4         : Y              
 GND                          : 65        : gnd    :                   :         :           :                
 VCCINT                       : 66        : power  :                   : 1.2V    :           :                
-LED[0]                       : 67        : output : LVTTL             :         : 4         : Y              
-LED[1]                       : 68        : output : LVTTL             :         : 4         : Y              
-LED[2]                       : 69        : output : LVTTL             :         : 4         : Y              
-LED[3]                       : 70        : output : LVTTL             :         : 4         : Y              
+RESERVED_INPUT               : 67        :        :                   :         : 4         :                
+RESERVED_INPUT               : 68        :        :                   :         : 4         :                
+RESERVED_INPUT               : 69        :        :                   :         : 4         :                
+RESERVED_INPUT               : 70        :        :                   :         : 4         :                
 VCCIO4                       : 71        : power  :                   : 3.3V    : 4         :                
 RESERVED_INPUT               : 72        :        :                   :         : 4         :                
 GND                          : 73        : gnd    :                   :         :           :                
@@ -160,7 +160,7 @@ GND                          : 100       : gnd    :                   :         
 RESERVED_INPUT               : 101       :        :                   :         : 4         :                
 RESERVED_INPUT               : 102       :        :                   :         : 4         :                
 RESERVED_INPUT               : 103       :        :                   :         : 4         :                
-RESERVED_INPUT               : 104       :        :                   :         : 4         :                
+DEBUG_LED3                   : 104       : output : LVTTL             :         : 4         : Y              
 RESERVED_INPUT               : 105       :        :                   :         : 3         :                
 RESERVED_INPUT               : 106       :        :                   :         : 3         :                
 ~LVDS54n/INIT_DONE~ / RESERVED : 107       : output : LVTTL             :         : 3         : N              
@@ -201,9 +201,9 @@ RESERVED_INPUT               : 141       :        :                   :         
 RESERVED_INPUT               : 142       :        :                   :         : 3         :                
 RESERVED_INPUT               : 143       :        :                   :         : 3         :                
 RESERVED_INPUT               : 144       :        :                   :         : 3         :                
-LED[7]                       : 145       : output : LVTTL             :         : 3         : N              
-LED[6]                       : 146       : output : LVTTL             :         : 3         : N              
-LED[5]                       : 147       : output : LVTTL             :         : 3         : N              
+RESERVED_INPUT               : 145       :        :                   :         : 3         :                
+RESERVED_INPUT               : 146       :        :                   :         : 3         :                
+RESERVED_INPUT               : 147       :        :                   :         : 3         :                
 VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
 AK_reset                     : 149       : output : LVTTL             :         : 3         : Y              
 Q_PWM_out                    : 150       : output : LVTTL             :         : 3         : Y              
@@ -236,7 +236,7 @@ RESERVED_INPUT               : 176       :        :                   :         
 GND                          : 177       : gnd    :                   :         :           :                
 VCCINT                       : 178       : power  :                   : 1.2V    :           :                
 RESERVED_INPUT               : 179       :        :                   :         : 2         :                
-LED[4]                       : 180       : output : LVTTL             :         : 2         : N              
+RESERVED_INPUT               : 180       :        :                   :         : 2         :                
 RESERVED_INPUT               : 181       :        :                   :         : 2         :                
 RESERVED_INPUT               : 182       :        :                   :         : 2         :                
 VCCIO2                       : 183       : power  :                   : 3.3V    : 2         :                
