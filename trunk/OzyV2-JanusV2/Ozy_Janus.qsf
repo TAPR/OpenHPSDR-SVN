@@ -70,10 +70,6 @@ set_location_assignment PIN_203 -to FX2_FD[12]
 set_location_assignment PIN_201 -to FX2_FD[13]
 set_location_assignment PIN_200 -to FX2_FD[14]
 set_location_assignment PIN_199 -to FX2_FD[15]
-set_location_assignment PIN_67 -to LED[0]
-set_location_assignment PIN_68 -to LED[1]
-set_location_assignment PIN_69 -to LED[2]
-set_location_assignment PIN_70 -to LED[3]
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
 set_location_assignment PIN_24 -to IFCLK
 set_location_assignment PIN_198 -to FLAGA
@@ -108,3 +104,7 @@ set_location_assignment PIN_96 -to dash
 set_instance_assignment -name CLOCK_SETTINGS "Janus 24.576MHz clock" -to CLK_12MHZ
 set_location_assignment PIN_152 -to CLK_12MHZ
 set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
+set_location_assignment PIN_4 -to DEBUG_LED0
+set_location_assignment PIN_33 -to DEBUG_LED1
+set_location_assignment PIN_34 -to DEBUG_LED2
+set_location_assignment PIN_104 -to DEBUG_LED3

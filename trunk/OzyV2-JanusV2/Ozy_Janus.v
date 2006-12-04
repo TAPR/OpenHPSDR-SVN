@@ -125,7 +125,7 @@
 //              Fixed I lo byte sample bug, I & Q last bit sample bug, added test mode - 27 Aug 2006
 //				Fixed bug in speed decode now we are sending current frequency from PowerSDR - 9 Nov 2006
 //				Modified to support Janus V2 hardware - 20 Nov 2006
-//				Modified to support Ozy V2 hardware - 4 Dec 2006
+//				Modified to support Ozy V2 hardware using EP2C8Q208C8- 4 Dec 2006
 //
 ////////////////////////////////////////////////////////////
 
@@ -230,8 +230,8 @@
 //
 
 module Ozy_Janus(
-        FX2_CLK, IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK, LED, I_PWM_out,
-        Q_PWM_out, CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, PTT_in, AK_reset, dot, dash);
+        FX2_CLK, IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,I_PWM_out,
+        Q_PWM_out, CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, PTT_in, AK_reset, dot, dash, DEBUG_LED0, DEBUG_LED1, DEBUG_LED2, DEBUG_LED3);
 
 input CLK_12MHZ;               // From Janus board 24.576MHz
 input FX2_CLK;                 // FX2 clock - 24MHz
@@ -248,7 +248,10 @@ output SLRD;
 output SLOE;
 output PKEND;
 output [1:0] FIFO_ADR;
-output [7:0] LED;               // LEDs on OZY board
+output DEBUG_LED0;               // LEDs on OZY board
+output DEBUG_LED1;
+output DEBUG_LED2;
+output DEBUG_LED3;
 output I_PWM_out;               // PWM D/A converter output
 output Q_PWM_out;
 output CBCLK, CLRCLK;           // Clocks to TLV320AIC23B
@@ -1049,16 +1052,11 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
-assign LED[0] = ~write_full;            // LED D1 on when Rx fifo is full.
-assign LED[1] = ~EP6_ready;                     // LED D3 on when we can write to EP6
-assign LED[2] = ~have_sync;             // LED D4 toggles each time we get sync
-assign LED[3] = ~EP2_has_data;          //1'b1;
-assign LED[4] = ~clean_PTT_in;
-assign LED[5] = ~PTT_out;                       // Led on when PTT active
-// assign LED[6] = dot;
-// assign LED[7] = dash;
-assign LED[6] = DFS0; 
-assign LED[7] = DFS1;
+assign DEBUG_LED0 = ~write_full;            // LED D0 on when Rx fifo is full.
+assign DEBUG_LED1 = ~EP6_ready;             // LED D1 on when we can write to EP6
+assign DEBUG_LED2 = ~have_sync;             // LED D2 toggles each time we get sync
+assign DEBUG_LED3 = ~EP2_has_data;          //
+
 
 endmodule
 
