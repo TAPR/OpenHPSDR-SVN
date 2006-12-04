@@ -1,0 +1,36 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 9.625 ns
+From           : clock_reg[16]
+To             : ATLAS_C24
+From Clock     : FX2_CLK
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Clock Setup: 'FX2_CLK'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 267.81 MHz ( period = 3.734 ns )
+From           : clock_reg[0]
+To             : clock_reg[19]
+From Clock     : FX2_CLK
+To Clock       : FX2_CLK
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+

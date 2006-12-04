@@ -1,0 +1,267 @@
+ -- Copyright (C) 1991-2006 Altera Corporation
+ -- Your use of Altera Corporation's design tools, logic functions 
+ -- and other software and tools, and its AMPP partner logic 
+ -- functions, and any output files any of the foregoing 
+ -- (including device programming or simulation files), and any 
+ -- associated documentation or information are expressly subject 
+ -- to the terms and conditions of the Altera Program License 
+ -- Subscription Agreement, Altera MegaCore Function License 
+ -- Agreement, or other applicable license agreement, including, 
+ -- without limitation, that your use is for the sole purpose of 
+ -- programming logic devices manufactured by Altera and sold by 
+ -- Altera or its authorized distributors.  Please refer to the 
+ -- applicable agreement for further details.
+ -- 
+ -- This is a Quartus II output file. It is for reporting purposes only, and is
+ -- not intended for use as a Quartus II input file. This file cannot be used
+ -- to make Quartus II pin assignments - for instructions on how to make pin
+ -- assignments, please see Quartus II help.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- NC            : No Connect. This pin has no internal connection to the device.
+ -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (1.2V).
+ -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
+ --                 of its bank.
+ --					Bank 1:		3.3V
+ --					Bank 2:		3.3V
+ --					Bank 3:		3.3V
+ --					Bank 4:		3.3V
+ -- GND           : Dedicated ground pin. Dedicated GND pins MUST be connected to GND.
+ --					It can also be used to report unused dedicated pins. The connection
+ --					on the board for unused dedicated pins depends on whether this will
+ --					be used in a future design. One example is device migration. When
+ --					using device migration, refer to the device pin-tables. If it is a
+ --					GND pin in the pin table or if it will not be used in a future design
+ --					for another purpose the it MUST be connected to GND. If it is an unused
+ --					dedicated pin, then it can be connected to a valid signal on the board
+ --					(low, high, or toggling) if that signal is required for a different
+ --					revision of the design.
+ -- GND+          : Unused input pin. It can also be used to report unused dual-purpose pins.
+ --					This pin should be connected to GND. It may also be connected  to a
+ --					valid signal  on the board  (low, high, or toggling)  if that signal
+ --					is required for a different revision of the design.
+ -- GND*          : Unused  I/O  pin.   This pin can either be left unconnected or
+ --           	    connected to GND.  Connecting this pin to GND will improve the
+ --           	    device's immunity to noise.
+ -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
+ -- RESERVED_INPUT    : Pin is tri-stated and should be connected to the board.
+ -- RESERVED_INPUT_WITH_WEAK_PULLUP    : Pin is tri-stated with internal weak pull-up resistor.
+ -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
+ ---------------------------------------------------------------------------------
+
+Quartus II Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+CHIP  "TestImage"  ASSIGNED TO AN: EP2C8Q208C8
+
+Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
+-------------------------------------------------------------------------------------------------------------
+~ASDO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 1         : input  : LVTTL             :         : 1         : N              
+~nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 2         : input  : LVTTL             :         : 1         : N              
+RESERVED_INPUT               : 3         :        :                   :         : 1         :                
+DEBUG_LED0                   : 4         : output : LVTTL             :         : 1         : Y              
+RESERVED_INPUT               : 5         :        :                   :         : 1         :                
+RESERVED_INPUT               : 6         :        :                   :         : 1         :                
+VCCIO1                       : 7         : power  :                   : 3.3V    : 1         :                
+RESERVED_INPUT               : 8         :        :                   :         : 1         :                
+GND                          : 9         : gnd    :                   :         :           :                
+RESERVED_INPUT               : 10        :        :                   :         : 1         :                
+RESERVED_INPUT               : 11        :        :                   :         : 1         :                
+RESERVED_INPUT               : 12        :        :                   :         : 1         :                
+RESERVED_INPUT               : 13        :        :                   :         : 1         :                
+RESERVED_INPUT               : 14        :        :                   :         : 1         :                
+RESERVED_INPUT               : 15        :        :                   :         : 1         :                
+TDO                          : 16        : output :                   :         : 1         :                
+TMS                          : 17        : input  :                   :         : 1         :                
+TCK                          : 18        : input  :                   :         : 1         :                
+TDI                          : 19        : input  :                   :         : 1         :                
+DATA0                        : 20        : input  :                   :         : 1         :                
+DCLK                         : 21        :        :                   :         : 1         :                
+nCE                          : 22        :        :                   :         : 1         :                
+FX2_CLK                      : 23        : input  : LVTTL             :         : 1         : Y              
+GND+                         : 24        :        :                   :         : 1         :                
+GND                          : 25        : gnd    :                   :         :           :                
+nCONFIG                      : 26        :        :                   :         : 1         :                
+GND+                         : 27        :        :                   :         : 1         :                
+GND+                         : 28        :        :                   :         : 1         :                
+VCCIO1                       : 29        : power  :                   : 3.3V    : 1         :                
+RESERVED_INPUT               : 30        :        :                   :         : 1         :                
+RESERVED_INPUT               : 31        :        :                   :         : 1         :                
+VCCINT                       : 32        : power  :                   : 1.2V    :           :                
+DEBUG_LED1                   : 33        : output : LVTTL             :         : 1         : Y              
+DEBUG_LED2                   : 34        : output : LVTTL             :         : 1         : Y              
+RESERVED_INPUT               : 35        :        :                   :         : 1         :                
+GND                          : 36        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 37        :        :                   :         : 1         :                
+GND                          : 38        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 39        :        :                   :         : 1         :                
+RESERVED_INPUT               : 40        :        :                   :         : 1         :                
+RESERVED_INPUT               : 41        :        :                   :         : 1         :                
+VCCIO1                       : 42        : power  :                   : 3.3V    : 1         :                
+RESERVED_INPUT               : 43        :        :                   :         : 1         :                
+RESERVED_INPUT               : 44        :        :                   :         : 1         :                
+RESERVED_INPUT               : 45        :        :                   :         : 1         :                
+RESERVED_INPUT               : 46        :        :                   :         : 1         :                
+RESERVED_INPUT               : 47        :        :                   :         : 1         :                
+RESERVED_INPUT               : 48        :        :                   :         : 1         :                
+GND                          : 49        : gnd    :                   :         :           :                
+GND_PLL1                     : 50        : gnd    :                   :         :           :                
+VCCD_PLL1                    : 51        : power  :                   : 1.2V    :           :                
+GND_PLL1                     : 52        : gnd    :                   :         :           :                
+VCCA_PLL1                    : 53        : power  :                   : 1.2V    :           :                
+GNDA_PLL1                    : 54        : gnd    :                   :         :           :                
+GND                          : 55        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 56        :        :                   :         : 4         :                
+RESERVED_INPUT               : 57        :        :                   :         : 4         :                
+RESERVED_INPUT               : 58        :        :                   :         : 4         :                
+RESERVED_INPUT               : 59        :        :                   :         : 4         :                
+RESERVED_INPUT               : 60        :        :                   :         : 4         :                
+RESERVED_INPUT               : 61        :        :                   :         : 4         :                
+VCCIO4                       : 62        : power  :                   : 3.3V    : 4         :                
+RESERVED_INPUT               : 63        :        :                   :         : 4         :                
+RESERVED_INPUT               : 64        :        :                   :         : 4         :                
+GND                          : 65        : gnd    :                   :         :           :                
+VCCINT                       : 66        : power  :                   : 1.2V    :           :                
+RESERVED_INPUT               : 67        :        :                   :         : 4         :                
+RESERVED_INPUT               : 68        :        :                   :         : 4         :                
+RESERVED_INPUT               : 69        :        :                   :         : 4         :                
+RESERVED_INPUT               : 70        :        :                   :         : 4         :                
+VCCIO4                       : 71        : power  :                   : 3.3V    : 4         :                
+RESERVED_INPUT               : 72        :        :                   :         : 4         :                
+GND                          : 73        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 74        :        :                   :         : 4         :                
+RESERVED_INPUT               : 75        :        :                   :         : 4         :                
+RESERVED_INPUT               : 76        :        :                   :         : 4         :                
+RESERVED_INPUT               : 77        :        :                   :         : 4         :                
+GND                          : 78        : gnd    :                   :         :           :                
+VCCINT                       : 79        : power  :                   : 1.2V    :           :                
+RESERVED_INPUT               : 80        :        :                   :         : 4         :                
+RESERVED_INPUT               : 81        :        :                   :         : 4         :                
+RESERVED_INPUT               : 82        :        :                   :         : 4         :                
+VCCIO4                       : 83        : power  :                   : 3.3V    : 4         :                
+RESERVED_INPUT               : 84        :        :                   :         : 4         :                
+GND                          : 85        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 86        :        :                   :         : 4         :                
+RESERVED_INPUT               : 87        :        :                   :         : 4         :                
+RESERVED_INPUT               : 88        :        :                   :         : 4         :                
+RESERVED_INPUT               : 89        :        :                   :         : 4         :                
+RESERVED_INPUT               : 90        :        :                   :         : 4         :                
+VCCIO4                       : 91        : power  :                   : 3.3V    : 4         :                
+RESERVED_INPUT               : 92        :        :                   :         : 4         :                
+GND                          : 93        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 94        :        :                   :         : 4         :                
+RESERVED_INPUT               : 95        :        :                   :         : 4         :                
+RESERVED_INPUT               : 96        :        :                   :         : 4         :                
+RESERVED_INPUT               : 97        :        :                   :         : 4         :                
+VCCIO4                       : 98        : power  :                   : 3.3V    : 4         :                
+RESERVED_INPUT               : 99        :        :                   :         : 4         :                
+GND                          : 100       : gnd    :                   :         :           :                
+RESERVED_INPUT               : 101       :        :                   :         : 4         :                
+RESERVED_INPUT               : 102       :        :                   :         : 4         :                
+ATLAS_A31                    : 103       : output : LVTTL             :         : 4         : Y              
+ATLAS_A29                    : 104       : output : LVTTL             :         : 4         : Y              
+ATLAS_A27                    : 105       : output : LVTTL             :         : 3         : Y              
+ATLAS_A25                    : 106       : output : LVTTL             :         : 3         : Y              
+RESERVED_INPUT               : 107       :        :                   :         : 3         :                
+DEBUG_LED3                   : 108       : output : LVTTL             :         : 3         : Y              
+VCCIO3                       : 109       : power  :                   : 3.3V    : 3         :                
+ATLAS_A24                    : 110       : output : LVTTL             :         : 3         : Y              
+GND                          : 111       : gnd    :                   :         :           :                
+ATLAS_A23                    : 112       : output : LVTTL             :         : 3         : Y              
+ATLAS_A22                    : 113       : output : LVTTL             :         : 3         : Y              
+ATLAS_A21                    : 114       : output : LVTTL             :         : 3         : Y              
+ATLAS_A20                    : 115       : output : LVTTL             :         : 3         : Y              
+ATLAS_A19                    : 116       : output : LVTTL             :         : 3         : Y              
+ATLAS_A18                    : 117       : output : LVTTL             :         : 3         : Y              
+ATLAS_A17                    : 118       : output : LVTTL             :         : 3         : Y              
+GND                          : 119       : gnd    :                   :         :           :                
+VCCINT                       : 120       : power  :                   : 1.2V    :           :                
+nSTATUS                      : 121       :        :                   :         : 3         :                
+VCCIO3                       : 122       : power  :                   : 3.3V    : 3         :                
+CONF_DONE                    : 123       :        :                   :         : 3         :                
+GND                          : 124       : gnd    :                   :         :           :                
+MSEL1                        : 125       :        :                   :         : 3         :                
+MSEL0                        : 126       :        :                   :         : 3         :                
+ATLAS_A16                    : 127       : output : LVTTL             :         : 3         : Y              
+ATLAS_A15                    : 128       : output : LVTTL             :         : 3         : Y              
+GND+                         : 129       :        :                   :         : 3         :                
+GND+                         : 130       :        :                   :         : 3         :                
+GND+                         : 131       :        :                   :         : 3         :                
+GND+                         : 132       :        :                   :         : 3         :                
+ATLAS_A14                    : 133       : output : LVTTL             :         : 3         : Y              
+ATLAS_A13                    : 134       : output : LVTTL             :         : 3         : Y              
+ATLAS_A12                    : 135       : output : LVTTL             :         : 3         : Y              
+VCCIO3                       : 136       : power  :                   : 3.3V    : 3         :                
+ATLAS_A11                    : 137       : output : LVTTL             :         : 3         : Y              
+ATLAS_A10                    : 138       : output : LVTTL             :         : 3         : Y              
+ATLAS_A9                     : 139       : output : LVTTL             :         : 3         : Y              
+GND                          : 140       : gnd    :                   :         :           :                
+ATLAS_A8                     : 141       : output : LVTTL             :         : 3         : Y              
+ATLAS_A7                     : 142       : output : LVTTL             :         : 3         : Y              
+ATLAS_A6                     : 143       : output : LVTTL             :         : 3         : Y              
+ATLAS_A5                     : 144       : output : LVTTL             :         : 3         : Y              
+ATLAS_A4                     : 145       : output : LVTTL             :         : 3         : Y              
+ATLAS_A3                     : 146       : output : LVTTL             :         : 3         : Y              
+ATLAS_A2                     : 147       : output : LVTTL             :         : 3         : Y              
+VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
+ATLAS_C2                     : 149       : output : LVTTL             :         : 3         : Y              
+ATLAS_C3                     : 150       : output : LVTTL             :         : 3         : Y              
+ATLAS_C4                     : 151       : output : LVTTL             :         : 3         : Y              
+ATLAS_C5                     : 152       : output : LVTTL             :         : 3         : Y              
+GND                          : 153       : gnd    :                   :         :           :                
+GND_PLL2                     : 154       : gnd    :                   :         :           :                
+VCCD_PLL2                    : 155       : power  :                   : 1.2V    :           :                
+GND_PLL2                     : 156       : gnd    :                   :         :           :                
+VCCA_PLL2                    : 157       : power  :                   : 1.2V    :           :                
+GNDA_PLL2                    : 158       : gnd    :                   :         :           :                
+GND                          : 159       : gnd    :                   :         :           :                
+ATLAS_C6                     : 160       : output : LVTTL             :         : 2         : Y              
+ATLAS_C7                     : 161       : output : LVTTL             :         : 2         : Y              
+ATLAS_C8                     : 162       : output : LVTTL             :         : 2         : Y              
+ATLAS_C9                     : 163       : output : LVTTL             :         : 2         : Y              
+ATLAS_C10                    : 164       : output : LVTTL             :         : 2         : Y              
+ATLAS_C11                    : 165       : output : LVTTL             :         : 2         : Y              
+VCCIO2                       : 166       : power  :                   : 3.3V    : 2         :                
+GND                          : 167       : gnd    :                   :         :           :                
+ATLAS_C12                    : 168       : output : LVTTL             :         : 2         : Y              
+ATLAS_C13                    : 169       : output : LVTTL             :         : 2         : Y              
+ATLAS_C14                    : 170       : output : LVTTL             :         : 2         : Y              
+ATLAS_C15                    : 171       : output : LVTTL             :         : 2         : Y              
+VCCIO2                       : 172       : power  :                   : 3.3V    : 2         :                
+ATLAS_C16                    : 173       : output : LVTTL             :         : 2         : Y              
+GND                          : 174       : gnd    :                   :         :           :                
+ATLAS_C17                    : 175       : output : LVTTL             :         : 2         : Y              
+ATLAS_C18                    : 176       : output : LVTTL             :         : 2         : Y              
+GND                          : 177       : gnd    :                   :         :           :                
+VCCINT                       : 178       : power  :                   : 1.2V    :           :                
+ATLAS_C19                    : 179       : output : LVTTL             :         : 2         : Y              
+ATLAS_C20                    : 180       : output : LVTTL             :         : 2         : Y              
+ATLAS_C21                    : 181       : output : LVTTL             :         : 2         : Y              
+ATLAS_C22                    : 182       : output : LVTTL             :         : 2         : Y              
+VCCIO2                       : 183       : power  :                   : 3.3V    : 2         :                
+GND                          : 184       : gnd    :                   :         :           :                
+ATLAS_C23                    : 185       : output : LVTTL             :         : 2         : Y              
+GND                          : 186       : gnd    :                   :         :           :                
+ATLAS_C24                    : 187       : output : LVTTL             :         : 2         : Y              
+ATLAS_C25                    : 188       : output : LVTTL             :         : 2         : Y              
+ATLAS_C27                    : 189       : output : LVTTL             :         : 2         : Y              
+VCCINT                       : 190       : power  :                   : 1.2V    :           :                
+ATLAS_C29                    : 191       : output : LVTTL             :         : 2         : Y              
+ATLAS_C31                    : 192       : output : LVTTL             :         : 2         : Y              
+RESERVED_INPUT               : 193       :        :                   :         : 2         :                
+VCCIO2                       : 194       : power  :                   : 3.3V    : 2         :                
+RESERVED_INPUT               : 195       :        :                   :         : 2         :                
+GND                          : 196       : gnd    :                   :         :           :                
+RESERVED_INPUT               : 197       :        :                   :         : 2         :                
+RESERVED_INPUT               : 198       :        :                   :         : 2         :                
+RESERVED_INPUT               : 199       :        :                   :         : 2         :                
+RESERVED_INPUT               : 200       :        :                   :         : 2         :                
+RESERVED_INPUT               : 201       :        :                   :         : 2         :                
+VCCIO2                       : 202       : power  :                   : 3.3V    : 2         :                
+RESERVED_INPUT               : 203       :        :                   :         : 2         :                
+GND                          : 204       : gnd    :                   :         :           :                
+RESERVED_INPUT               : 205       :        :                   :         : 2         :                
+RESERVED_INPUT               : 206       :        :                   :         : 2         :                
+RESERVED_INPUT               : 207       :        :                   :         : 2         :                
+RESERVED_INPUT               : 208       :        :                   :         : 2         :                

@@ -1,0 +1,35 @@
+Quartus II Archive log --	C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.qarlog
+
+Archive:	C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.qar
+Date:		Sun Dec 03 12:13:36 2006
+Quartus II		6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
+
+	=========== Files Selected: ===========
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/OzyTestImage V1.v
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/OzyTestImage V2.v
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.asm.rpt
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.cdf
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.done
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.fit.eqn
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.fit.rpt
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.fit.summary
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.flow.rpt
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.map.eqn
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.map.rpt
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.map.summary
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.pin
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.pof
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.qsf
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.qws
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.rbf
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.sof
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.tan.rpt
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.tan.summary
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage_assignment_defaults.qdf
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/db/TestImage.cbx.xml
+C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/db/TestImage.qpf
+c:/altera/quartus60/win/assignment_defaults.qdf
+	======= Total: 24 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

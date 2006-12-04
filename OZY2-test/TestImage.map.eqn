@@ -1,0 +1,560 @@
+-- Copyright (C) 1991-2005 Altera Corporation
+-- Your use of Altera Corporation's design tools, logic functions 
+-- and other software and tools, and its AMPP partner logic 
+-- functions, and any output files any of the foregoing 
+-- (including device programming or simulation files), and any 
+-- associated documentation or information are expressly subject 
+-- to the terms and conditions of the Altera Program License 
+-- Subscription Agreement, Altera MegaCore Function License 
+-- Agreement, or other applicable license agreement, including, 
+-- without limitation, that your use is for the sole purpose of 
+-- programming logic devices manufactured by Altera and sold by 
+-- Altera or its authorized distributors.  Please refer to the 
+-- applicable agreement for further details.
+--clock_reg[4] is clock_reg[4]
+clock_reg[4] = DFFEAS(A1L70, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[5] is clock_reg[5]
+clock_reg[5] = DFFEAS(A1L73, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[8] is clock_reg[8]
+clock_reg[8] = DFFEAS(A1L82, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[9] is clock_reg[9]
+clock_reg[9] = DFFEAS(A1L85, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[10] is clock_reg[10]
+clock_reg[10] = DFFEAS(A1L88, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[11] is clock_reg[11]
+clock_reg[11] = DFFEAS(A1L91, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[12] is clock_reg[12]
+clock_reg[12] = DFFEAS(A1L94, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[13] is clock_reg[13]
+clock_reg[13] = DFFEAS(A1L97, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[14] is clock_reg[14]
+clock_reg[14] = DFFEAS(A1L100, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[15] is clock_reg[15]
+clock_reg[15] = DFFEAS(A1L103, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[16] is clock_reg[16]
+clock_reg[16] = DFFEAS(A1L106, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[17] is clock_reg[17]
+clock_reg[17] = DFFEAS(A1L109, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[2] is clock_reg[2]
+clock_reg[2] = DFFEAS(A1L64, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[3] is clock_reg[3]
+clock_reg[3] = DFFEAS(A1L67, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[18] is clock_reg[18]
+clock_reg[18] = DFFEAS(A1L112, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[19] is clock_reg[19]
+clock_reg[19] = DFFEAS(A1L115, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[0] is clock_reg[0]
+clock_reg[0] = DFFEAS(A1L58, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[1] is clock_reg[1]
+clock_reg[1] = DFFEAS(A1L61, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[6] is clock_reg[6]
+clock_reg[6] = DFFEAS(A1L76, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--clock_reg[7] is clock_reg[7]
+clock_reg[7] = DFFEAS(A1L79, FX2_CLK,  ,  ,  ,  ,  ,  ,  );
+
+
+--A1L58 is clock_reg[0]~160
+A1L58 = clock_reg[0] $ VCC;
+
+--A1L59 is clock_reg[0]~161
+A1L59 = CARRY(clock_reg[0]);
+
+
+--A1L61 is clock_reg[1]~162
+A1L61 = clock_reg[1] & !A1L59 # !clock_reg[1] & (A1L59 # GND);
+
+--A1L62 is clock_reg[1]~163
+A1L62 = CARRY(!A1L59 # !clock_reg[1]);
+
+
+--A1L64 is clock_reg[2]~164
+A1L64 = clock_reg[2] & (A1L62 $ GND) # !clock_reg[2] & !A1L62 & VCC;
+
+--A1L65 is clock_reg[2]~165
+A1L65 = CARRY(clock_reg[2] & !A1L62);
+
+
+--A1L67 is clock_reg[3]~166
+A1L67 = clock_reg[3] & !A1L65 # !clock_reg[3] & (A1L65 # GND);
+
+--A1L68 is clock_reg[3]~167
+A1L68 = CARRY(!A1L65 # !clock_reg[3]);
+
+
+--A1L70 is clock_reg[4]~168
+A1L70 = clock_reg[4] & (A1L68 $ GND) # !clock_reg[4] & !A1L68 & VCC;
+
+--A1L71 is clock_reg[4]~169
+A1L71 = CARRY(clock_reg[4] & !A1L68);
+
+
+--A1L73 is clock_reg[5]~170
+A1L73 = clock_reg[5] & !A1L71 # !clock_reg[5] & (A1L71 # GND);
+
+--A1L74 is clock_reg[5]~171
+A1L74 = CARRY(!A1L71 # !clock_reg[5]);
+
+
+--A1L76 is clock_reg[6]~172
+A1L76 = clock_reg[6] & (A1L74 $ GND) # !clock_reg[6] & !A1L74 & VCC;
+
+--A1L77 is clock_reg[6]~173
+A1L77 = CARRY(clock_reg[6] & !A1L74);
+
+
+--A1L79 is clock_reg[7]~174
+A1L79 = clock_reg[7] & !A1L77 # !clock_reg[7] & (A1L77 # GND);
+
+--A1L80 is clock_reg[7]~175
+A1L80 = CARRY(!A1L77 # !clock_reg[7]);
+
+
+--A1L82 is clock_reg[8]~176
+A1L82 = clock_reg[8] & (A1L80 $ GND) # !clock_reg[8] & !A1L80 & VCC;
+
+--A1L83 is clock_reg[8]~177
+A1L83 = CARRY(clock_reg[8] & !A1L80);
+
+
+--A1L85 is clock_reg[9]~178
+A1L85 = clock_reg[9] & !A1L83 # !clock_reg[9] & (A1L83 # GND);
+
+--A1L86 is clock_reg[9]~179
+A1L86 = CARRY(!A1L83 # !clock_reg[9]);
+
+
+--A1L88 is clock_reg[10]~180
+A1L88 = clock_reg[10] & (A1L86 $ GND) # !clock_reg[10] & !A1L86 & VCC;
+
+--A1L89 is clock_reg[10]~181
+A1L89 = CARRY(clock_reg[10] & !A1L86);
+
+
+--A1L91 is clock_reg[11]~182
+A1L91 = clock_reg[11] & !A1L89 # !clock_reg[11] & (A1L89 # GND);
+
+--A1L92 is clock_reg[11]~183
+A1L92 = CARRY(!A1L89 # !clock_reg[11]);
+
+
+--A1L94 is clock_reg[12]~184
+A1L94 = clock_reg[12] & (A1L92 $ GND) # !clock_reg[12] & !A1L92 & VCC;
+
+--A1L95 is clock_reg[12]~185
+A1L95 = CARRY(clock_reg[12] & !A1L92);
+
+
+--A1L97 is clock_reg[13]~186
+A1L97 = clock_reg[13] & !A1L95 # !clock_reg[13] & (A1L95 # GND);
+
+--A1L98 is clock_reg[13]~187
+A1L98 = CARRY(!A1L95 # !clock_reg[13]);
+
+
+--A1L100 is clock_reg[14]~188
+A1L100 = clock_reg[14] & (A1L98 $ GND) # !clock_reg[14] & !A1L98 & VCC;
+
+--A1L101 is clock_reg[14]~189
+A1L101 = CARRY(clock_reg[14] & !A1L98);
+
+
+--A1L103 is clock_reg[15]~190
+A1L103 = clock_reg[15] & !A1L101 # !clock_reg[15] & (A1L101 # GND);
+
+--A1L104 is clock_reg[15]~191
+A1L104 = CARRY(!A1L101 # !clock_reg[15]);
+
+
+--A1L106 is clock_reg[16]~192
+A1L106 = clock_reg[16] & (A1L104 $ GND) # !clock_reg[16] & !A1L104 & VCC;
+
+--A1L107 is clock_reg[16]~193
+A1L107 = CARRY(clock_reg[16] & !A1L104);
+
+
+--A1L109 is clock_reg[17]~194
+A1L109 = clock_reg[17] & !A1L107 # !clock_reg[17] & (A1L107 # GND);
+
+--A1L110 is clock_reg[17]~195
+A1L110 = CARRY(!A1L107 # !clock_reg[17]);
+
+
+--A1L112 is clock_reg[18]~196
+A1L112 = clock_reg[18] & (A1L110 $ GND) # !clock_reg[18] & !A1L110 & VCC;
+
+--A1L113 is clock_reg[18]~197
+A1L113 = CARRY(clock_reg[18] & !A1L110);
+
+
+--A1L115 is clock_reg[19]~198
+A1L115 = clock_reg[19] $ A1L113;
+
+
+--FX2_CLK is FX2_CLK
+--operation mode is input
+
+FX2_CLK = INPUT();
+
+
+--ATLAS_X26DC is ATLAS_X26DC
+--operation mode is output
+
+ATLAS_X26DC = OUTPUT(clock_reg[4]);
+
+
+--ATLAS_X25DC is ATLAS_X25DC
+--operation mode is output
+
+ATLAS_X25DC = OUTPUT(clock_reg[5]);
+
+
+--ATLAS_X24DC is ATLAS_X24DC
+--operation mode is output
+
+ATLAS_X24DC = OUTPUT(clock_reg[8]);
+
+
+--ATLAS_X23C7 is ATLAS_X23C7
+--operation mode is output
+
+ATLAS_X23C7 = OUTPUT(clock_reg[9]);
+
+
+--ATLAS_X22C6 is ATLAS_X22C6
+--operation mode is output
+
+ATLAS_X22C6 = OUTPUT(clock_reg[10]);
+
+
+--ATLAS_X21C5 is ATLAS_X21C5
+--operation mode is output
+
+ATLAS_X21C5 = OUTPUT(clock_reg[11]);
+
+
+--ATLAS_X20C4 is ATLAS_X20C4
+--operation mode is output
+
+ATLAS_X20C4 = OUTPUT(clock_reg[12]);
+
+
+--ATLAS_X19C3 is ATLAS_X19C3
+--operation mode is output
+
+ATLAS_X19C3 = OUTPUT(clock_reg[13]);
+
+
+--ATLAS_X18C2 is ATLAS_X18C2
+--operation mode is output
+
+ATLAS_X18C2 = OUTPUT(clock_reg[14]);
+
+
+--ATLAS_X17C1 is ATLAS_X17C1
+--operation mode is output
+
+ATLAS_X17C1 = OUTPUT(clock_reg[15]);
+
+
+--ATLAS_X16C0 is ATLAS_X16C0
+--operation mode is output
+
+ATLAS_X16C0 = OUTPUT(clock_reg[16]);
+
+
+--ATLAS_X15B7 is ATLAS_X15B7
+--operation mode is output
+
+ATLAS_X15B7 = OUTPUT(clock_reg[17]);
+
+
+--ATLAS_X14B6 is ATLAS_X14B6
+--operation mode is output
+
+ATLAS_X14B6 = OUTPUT(clock_reg[2]);
+
+
+--ATLAS_X13B5 is ATLAS_X13B5
+--operation mode is output
+
+ATLAS_X13B5 = OUTPUT(clock_reg[3]);
+
+
+--ATLAS_X12B4 is ATLAS_X12B4
+--operation mode is output
+
+ATLAS_X12B4 = OUTPUT(clock_reg[8]);
+
+
+--ATLAS_X11B3 is ATLAS_X11B3
+--operation mode is output
+
+ATLAS_X11B3 = OUTPUT(clock_reg[9]);
+
+
+--ATLAS_X10B2 is ATLAS_X10B2
+--operation mode is output
+
+ATLAS_X10B2 = OUTPUT(clock_reg[10]);
+
+
+--ATLAS_X9B1 is ATLAS_X9B1
+--operation mode is output
+
+ATLAS_X9B1 = OUTPUT(clock_reg[11]);
+
+
+--ATLAS_X8B0 is ATLAS_X8B0
+--operation mode is output
+
+ATLAS_X8B0 = OUTPUT(clock_reg[12]);
+
+
+--ATLAS_X7A7 is ATLAS_X7A7
+--operation mode is output
+
+ATLAS_X7A7 = OUTPUT(clock_reg[13]);
+
+
+--ATLAS_X6A6 is ATLAS_X6A6
+--operation mode is output
+
+ATLAS_X6A6 = OUTPUT(clock_reg[14]);
+
+
+--ATLAS_X5A5 is ATLAS_X5A5
+--operation mode is output
+
+ATLAS_X5A5 = OUTPUT(clock_reg[15]);
+
+
+--ATLAS_X4A4 is ATLAS_X4A4
+--operation mode is output
+
+ATLAS_X4A4 = OUTPUT(clock_reg[16]);
+
+
+--ATLAS_X3A3 is ATLAS_X3A3
+--operation mode is output
+
+ATLAS_X3A3 = OUTPUT(clock_reg[17]);
+
+
+--ATLAS_X2A2 is ATLAS_X2A2
+--operation mode is output
+
+ATLAS_X2A2 = OUTPUT(clock_reg[18]);
+
+
+--ATLAS_X1A1 is ATLAS_X1A1
+--operation mode is output
+
+ATLAS_X1A1 = OUTPUT(clock_reg[19]);
+
+
+--ATLAS_X0A0 is ATLAS_X0A0
+--operation mode is output
+
+ATLAS_X0A0 = OUTPUT(clock_reg[0]);
+
+
+--ATLAS_Y0A0 is ATLAS_Y0A0
+--operation mode is output
+
+ATLAS_Y0A0 = OUTPUT(clock_reg[1]);
+
+
+--ATLAS_Y1A1 is ATLAS_Y1A1
+--operation mode is output
+
+ATLAS_Y1A1 = OUTPUT(clock_reg[2]);
+
+
+--ATLAS_Y2A2 is ATLAS_Y2A2
+--operation mode is output
+
+ATLAS_Y2A2 = OUTPUT(clock_reg[3]);
+
+
+--ATLAS_Y3A3 is ATLAS_Y3A3
+--operation mode is output
+
+ATLAS_Y3A3 = OUTPUT(clock_reg[4]);
+
+
+--ATLAS_Y4A4 is ATLAS_Y4A4
+--operation mode is output
+
+ATLAS_Y4A4 = OUTPUT(clock_reg[5]);
+
+
+--ATLAS_Y5A5 is ATLAS_Y5A5
+--operation mode is output
+
+ATLAS_Y5A5 = OUTPUT(clock_reg[6]);
+
+
+--ATLAS_Y6A6 is ATLAS_Y6A6
+--operation mode is output
+
+ATLAS_Y6A6 = OUTPUT(clock_reg[7]);
+
+
+--ATLAS_Y7A7 is ATLAS_Y7A7
+--operation mode is output
+
+ATLAS_Y7A7 = OUTPUT(clock_reg[8]);
+
+
+--ATLAS_Y8B0 is ATLAS_Y8B0
+--operation mode is output
+
+ATLAS_Y8B0 = OUTPUT(clock_reg[9]);
+
+
+--ATLAS_Y9B1 is ATLAS_Y9B1
+--operation mode is output
+
+ATLAS_Y9B1 = OUTPUT(clock_reg[10]);
+
+
+--ATLAS_Y10B2 is ATLAS_Y10B2
+--operation mode is output
+
+ATLAS_Y10B2 = OUTPUT(clock_reg[11]);
+
+
+--ATLAS_Y11B3 is ATLAS_Y11B3
+--operation mode is output
+
+ATLAS_Y11B3 = OUTPUT(clock_reg[12]);
+
+
+--ATLAS_Y12B4 is ATLAS_Y12B4
+--operation mode is output
+
+ATLAS_Y12B4 = OUTPUT(clock_reg[13]);
+
+
+--ATLAS_Y13B5 is ATLAS_Y13B5
+--operation mode is output
+
+ATLAS_Y13B5 = OUTPUT(clock_reg[14]);
+
+
+--ATLAS_Y14B6 is ATLAS_Y14B6
+--operation mode is output
+
+ATLAS_Y14B6 = OUTPUT(clock_reg[15]);
+
+
+--ATLAS_Y15B7 is ATLAS_Y15B7
+--operation mode is output
+
+ATLAS_Y15B7 = OUTPUT(clock_reg[16]);
+
+
+--ATLAS_Y16C0 is ATLAS_Y16C0
+--operation mode is output
+
+ATLAS_Y16C0 = OUTPUT(clock_reg[17]);
+
+
+--ATLAS_Y17C1 is ATLAS_Y17C1
+--operation mode is output
+
+ATLAS_Y17C1 = OUTPUT(clock_reg[18]);
+
+
+--ATLAS_Y18C2 is ATLAS_Y18C2
+--operation mode is output
+
+ATLAS_Y18C2 = OUTPUT(clock_reg[19]);
+
+
+--ATLAS_Y19C3 is ATLAS_Y19C3
+--operation mode is output
+
+ATLAS_Y19C3 = OUTPUT(clock_reg[0]);
+
+
+--ATLAS_Y20C4 is ATLAS_Y20C4
+--operation mode is output
+
+ATLAS_Y20C4 = OUTPUT(clock_reg[1]);
+
+
+--ATLAS_Y21C5 is ATLAS_Y21C5
+--operation mode is output
+
+ATLAS_Y21C5 = OUTPUT(clock_reg[2]);
+
+
+--ATLAS_Y22C6 is ATLAS_Y22C6
+--operation mode is output
+
+ATLAS_Y22C6 = OUTPUT(clock_reg[3]);
+
+
+--ATLAS_Y23C7 is ATLAS_Y23C7
+--operation mode is output
+
+ATLAS_Y23C7 = OUTPUT(clock_reg[4]);
+
+
+--ATLAS_Y24DC is ATLAS_Y24DC
+--operation mode is output
+
+ATLAS_Y24DC = OUTPUT(clock_reg[5]);
+
+
+--ATLAS_Y25DC is ATLAS_Y25DC
+--operation mode is output
+
+ATLAS_Y25DC = OUTPUT(clock_reg[6]);
+
+
+--ATLAS_Y26DC is ATLAS_Y26DC
+--operation mode is output
+
+ATLAS_Y26DC = OUTPUT(clock_reg[7]);
+
+
