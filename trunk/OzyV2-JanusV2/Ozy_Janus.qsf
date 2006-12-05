@@ -37,7 +37,6 @@ set_global_assignment -name STRATIX_DEVICE_IO_STANDARD LVTTL
 set_global_assignment -name VECTOR_INPUT_SOURCE "C:\\HPDSDR\\trunk\\VK6APH\\Ozy_Janus\\Ozy_Janus.vwf"
 set_instance_assignment -name CLOCK_SETTINGS "BCLK from Janus" -to BCLK
 set_global_assignment -name FMAX_REQUIREMENT "24 MHz" -section_id "FX2 Clock"
-set_instance_assignment -name CLOCK_SETTINGS "FX2 Clock" -to FX2_CLK
 set_global_assignment -name FMAX_REQUIREMENT "24.576 MHz" -section_id "Janus 24.576MHz clock"
 set_global_assignment -name BASED_ON_CLOCK_SETTINGS "Janus 24.576MHz clock" -section_id "TLV BCLK"
 set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 8 -section_id "TLV BCLK"
@@ -53,7 +52,6 @@ set_location_assignment PIN_162 -to CBCLK
 set_location_assignment PIN_165 -to CDOUT
 set_location_assignment PIN_168 -to CDIN
 set_location_assignment PIN_163 -to CLRCLK
-set_location_assignment PIN_23 -to FX2_CLK
 set_location_assignment PIN_56 -to FX2_FD[0]
 set_location_assignment PIN_57 -to FX2_FD[1]
 set_location_assignment PIN_58 -to FX2_FD[2]
