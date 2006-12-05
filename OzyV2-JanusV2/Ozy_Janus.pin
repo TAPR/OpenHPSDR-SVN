@@ -79,7 +79,7 @@ TDI                          : 19        : input  :                   :         
 DATA0                        : 20        : input  :                   :         : 1         :                
 DCLK                         : 21        :        :                   :         : 1         :                
 nCE                          : 22        :        :                   :         : 1         :                
-FX2_CLK                      : 23        : input  : LVTTL             :         : 1         : Y              
+GND+                         : 23        :        :                   :         : 1         :                
 IFCLK                        : 24        : input  : LVTTL             :         : 1         : Y              
 GND                          : 25        : gnd    :                   :         :           :                
 nCONFIG                      : 26        :        :                   :         : 1         :                

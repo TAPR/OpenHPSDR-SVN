@@ -230,11 +230,10 @@
 //
 
 module Ozy_Janus(
-        FX2_CLK, IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,I_PWM_out,
-        Q_PWM_out, CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, PTT_in, AK_reset, dot, dash, DEBUG_LED0, DEBUG_LED1, DEBUG_LED2, DEBUG_LED3);
+        IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,I_PWM_out,
+        Q_PWM_out, CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, PTT_in, AK_reset, dot, dash, DEBUG_LED0, DEBUG_LED1, DEBUG_LED2,DEBUG_LED3);
 
 input CLK_12MHZ;               // From Janus board 24.576MHz
-input FX2_CLK;                 // FX2 clock - 24MHz
 input IFCLK;                   // FX2 IFCLOCK - 48MHz
 input BCLK, DOUT, LRCLK;
 inout  [15:0] FX2_FD;           // bidirectional FIFO data to/from the FX2
@@ -805,8 +804,8 @@ assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
         After successfully finding sync it  reads the next 5 bytes
         which are control bytes C0-C4. The next word is the Left audio and the following the
         Right audio which are sent to the TLV320 D/A converters.
-    The next worid is the  I data and the following the Q data.
-    The I and Q data is sent to individual 16 bit PWM D/A converters.
+    	The next worid is the  I data and the following the Q data.
+    	The I and Q data is sent to individual 16 bit PWM D/A converters.
 
         The words sent to the D/A converters must be sent at the sample rate
         of the A/D converters (48kHz) so is synced on the positive edge of the CLRCLK. Further reads
