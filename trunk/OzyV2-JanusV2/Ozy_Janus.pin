@@ -160,11 +160,11 @@ GND                          : 100       : gnd    :                   :         
 RESERVED_INPUT               : 101       :        :                   :         : 4         :                
 RESERVED_INPUT               : 102       :        :                   :         : 4         :                
 RESERVED_INPUT               : 103       :        :                   :         : 4         :                
-DEBUG_LED3                   : 104       : output : LVTTL             :         : 4         : Y              
+RESERVED_INPUT               : 104       :        :                   :         : 4         :                
 RESERVED_INPUT               : 105       :        :                   :         : 3         :                
 RESERVED_INPUT               : 106       :        :                   :         : 3         :                
 ~LVDS54n/INIT_DONE~ / RESERVED : 107       : output : LVTTL             :         : 3         : N              
-~LVDS54p/nCEO~ / GND*        : 108       : output : LVTTL             :         : 3         : N              
+DEBUG_LED3                   : 108       : output : LVTTL             :         : 3         : Y              
 VCCIO3                       : 109       : power  :                   : 3.3V    : 3         :                
 RESERVED_INPUT               : 110       :        :                   :         : 3         :                
 GND                          : 111       : gnd    :                   :         :           :                
