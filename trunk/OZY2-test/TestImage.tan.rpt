@@ -1,5 +1,5 @@
 Timing Analyzer report for TestImage
-Mon Dec 04 19:56:08 2006
+Sun Dec 10 19:44:58 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -35,15 +35,15 @@ applicable agreement for further details.
 
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Timing Analyzer Summary                                                                                                                                        ;
-+------------------------------+-------+---------------+----------------------------------+---------------+---------------+------------+----------+--------------+
-; Type                         ; Slack ; Required Time ; Actual Time                      ; From          ; To            ; From Clock ; To Clock ; Failed Paths ;
-+------------------------------+-------+---------------+----------------------------------+---------------+---------------+------------+----------+--------------+
-; Worst-case tco               ; N/A   ; None          ; 9.625 ns                         ; clock_reg[16] ; ATLAS_C24     ; FX2_CLK    ; --       ; 0            ;
-; Clock Setup: 'FX2_CLK'       ; N/A   ; None          ; 267.81 MHz ( period = 3.734 ns ) ; clock_reg[0]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; 0            ;
-; Total number of failed paths ;       ;               ;                                  ;               ;               ;            ;          ; 0            ;
-+------------------------------+-------+---------------+----------------------------------+---------------+---------------+------------+----------+--------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                       ;
++------------------------------+-------+---------------+----------------------------------+--------------+---------------+------------+----------+--------------+
+; Type                         ; Slack ; Required Time ; Actual Time                      ; From         ; To            ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+-------+---------------+----------------------------------+--------------+---------------+------------+----------+--------------+
+; Worst-case tco               ; N/A   ; None          ; 10.956 ns                        ; clock_reg[2] ; FPGA_GPIO1    ; FX2_CLK    ; --       ; 0            ;
+; Clock Setup: 'FX2_CLK'       ; N/A   ; None          ; 268.02 MHz ( period = 3.731 ns ) ; clock_reg[0] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; 0            ;
+; Total number of failed paths ;       ;               ;                                  ;              ;               ;            ;          ; 0            ;
++------------------------------+-------+---------------+----------------------------------+--------------+---------------+------------+----------+--------------+
 
 
 +------------------------------------------------------------------------------------------------------+
@@ -86,270 +86,286 @@ applicable agreement for further details.
 +-----------------------------------------+-----------------------------------------------------+---------------+---------------+------------+----------+-----------------------------+---------------------------+-------------------------+
 ; Slack                                   ; Actual fmax (period)                                ; From          ; To            ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
 +-----------------------------------------+-----------------------------------------------------+---------------+---------------+------------+----------+-----------------------------+---------------------------+-------------------------+
-; N/A                                     ; 267.81 MHz ( period = 3.734 ns )                    ; clock_reg[0]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.464 ns                ;
-; N/A                                     ; 272.33 MHz ( period = 3.672 ns )                    ; clock_reg[1]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.402 ns                ;
-; N/A                                     ; 274.12 MHz ( period = 3.648 ns )                    ; clock_reg[0]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.378 ns                ;
-; N/A                                     ; 278.86 MHz ( period = 3.586 ns )                    ; clock_reg[1]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.316 ns                ;
-; N/A                                     ; 282.01 MHz ( period = 3.546 ns )                    ; clock_reg[2]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.276 ns                ;
-; N/A                                     ; 289.02 MHz ( period = 3.460 ns )                    ; clock_reg[2]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.190 ns                ;
-; N/A                                     ; 289.18 MHz ( period = 3.458 ns )                    ; clock_reg[0]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.188 ns                ;
-; N/A                                     ; 292.83 MHz ( period = 3.415 ns )                    ; clock_reg[3]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.145 ns                ;
-; N/A                                     ; 294.46 MHz ( period = 3.396 ns )                    ; clock_reg[1]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.126 ns                ;
-; N/A                                     ; 296.38 MHz ( period = 3.374 ns )                    ; clock_reg[4]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.104 ns                ;
-; N/A                                     ; 296.56 MHz ( period = 3.372 ns )                    ; clock_reg[0]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.102 ns                ;
-; N/A                                     ; 300.39 MHz ( period = 3.329 ns )                    ; clock_reg[3]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.059 ns                ;
-; N/A                                     ; 302.11 MHz ( period = 3.310 ns )                    ; clock_reg[1]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.040 ns                ;
-; N/A                                     ; 304.14 MHz ( period = 3.288 ns )                    ; clock_reg[4]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.018 ns                ;
-; N/A                                     ; 304.32 MHz ( period = 3.286 ns )                    ; clock_reg[0]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.016 ns                ;
-; N/A                                     ; 305.81 MHz ( period = 3.270 ns )                    ; clock_reg[2]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.000 ns                ;
-; N/A                                     ; 309.21 MHz ( period = 3.234 ns )                    ; clock_reg[5]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.964 ns                ;
-; N/A                                     ; 310.17 MHz ( period = 3.224 ns )                    ; clock_reg[1]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.954 ns                ;
-; N/A                                     ; 312.50 MHz ( period = 3.200 ns )                    ; clock_reg[0]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.930 ns                ;
-; N/A                                     ; 312.99 MHz ( period = 3.195 ns )                    ; clock_reg[6]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.925 ns                ;
-; N/A                                     ; 314.07 MHz ( period = 3.184 ns )                    ; clock_reg[2]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.914 ns                ;
-; N/A                                     ; 317.66 MHz ( period = 3.148 ns )                    ; clock_reg[5]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.878 ns                ;
-; N/A                                     ; 318.57 MHz ( period = 3.139 ns )                    ; clock_reg[3]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.869 ns                ;
-; N/A                                     ; 318.67 MHz ( period = 3.138 ns )                    ; clock_reg[1]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.868 ns                ;
-; N/A                                     ; 321.13 MHz ( period = 3.114 ns )                    ; clock_reg[0]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.844 ns                ;
-; N/A                                     ; 321.65 MHz ( period = 3.109 ns )                    ; clock_reg[6]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.839 ns                ;
-; N/A                                     ; 322.79 MHz ( period = 3.098 ns )                    ; clock_reg[2]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.828 ns                ;
-; N/A                                     ; 322.79 MHz ( period = 3.098 ns )                    ; clock_reg[4]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.828 ns                ;
-; N/A                                     ; 326.90 MHz ( period = 3.059 ns )                    ; clock_reg[7]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.789 ns                ;
-; N/A                                     ; 327.55 MHz ( period = 3.053 ns )                    ; clock_reg[3]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.783 ns                ;
-; N/A                                     ; 327.65 MHz ( period = 3.052 ns )                    ; clock_reg[1]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.782 ns                ;
-; N/A                                     ; 330.25 MHz ( period = 3.028 ns )                    ; clock_reg[0]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.758 ns                ;
-; N/A                                     ; 332.01 MHz ( period = 3.012 ns )                    ; clock_reg[2]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.742 ns                ;
-; N/A                                     ; 332.01 MHz ( period = 3.012 ns )                    ; clock_reg[4]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.742 ns                ;
-; N/A                                     ; 335.46 MHz ( period = 2.981 ns )                    ; clock_reg[8]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.711 ns                ;
-; N/A                                     ; 336.36 MHz ( period = 2.973 ns )                    ; clock_reg[7]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.703 ns                ;
-; N/A                                     ; 337.04 MHz ( period = 2.967 ns )                    ; clock_reg[3]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.697 ns                ;
-; N/A                                     ; 337.15 MHz ( period = 2.966 ns )                    ; clock_reg[1]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.696 ns                ;
-; N/A                                     ; 338.07 MHz ( period = 2.958 ns )                    ; clock_reg[5]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.688 ns                ;
-; N/A                                     ; 339.90 MHz ( period = 2.942 ns )                    ; clock_reg[0]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.672 ns                ;
+; N/A                                     ; 268.02 MHz ( period = 3.731 ns )                    ; clock_reg[0]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.464 ns                ;
+; N/A                                     ; 272.55 MHz ( period = 3.669 ns )                    ; clock_reg[1]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.402 ns                ;
+; N/A                                     ; 274.35 MHz ( period = 3.645 ns )                    ; clock_reg[0]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.378 ns                ;
+; N/A                                     ; 279.10 MHz ( period = 3.583 ns )                    ; clock_reg[1]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.316 ns                ;
+; N/A                                     ; 282.25 MHz ( period = 3.543 ns )                    ; clock_reg[2]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.276 ns                ;
+; N/A                                     ; 289.27 MHz ( period = 3.457 ns )                    ; clock_reg[2]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.190 ns                ;
+; N/A                                     ; 289.44 MHz ( period = 3.455 ns )                    ; clock_reg[0]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.188 ns                ;
+; N/A                                     ; 293.86 MHz ( period = 3.403 ns )                    ; clock_reg[3]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.136 ns                ;
+; N/A                                     ; 294.72 MHz ( period = 3.393 ns )                    ; clock_reg[1]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.126 ns                ;
+; N/A                                     ; 296.65 MHz ( period = 3.371 ns )                    ; clock_reg[4]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.104 ns                ;
+; N/A                                     ; 296.82 MHz ( period = 3.369 ns )                    ; clock_reg[0]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.102 ns                ;
+; N/A                                     ; 301.48 MHz ( period = 3.317 ns )                    ; clock_reg[3]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.050 ns                ;
+; N/A                                     ; 302.39 MHz ( period = 3.307 ns )                    ; clock_reg[1]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.040 ns                ;
+; N/A                                     ; 304.41 MHz ( period = 3.285 ns )                    ; clock_reg[4]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.018 ns                ;
+; N/A                                     ; 304.60 MHz ( period = 3.283 ns )                    ; clock_reg[0]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.016 ns                ;
+; N/A                                     ; 306.09 MHz ( period = 3.267 ns )                    ; clock_reg[2]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 3.000 ns                ;
+; N/A                                     ; 309.50 MHz ( period = 3.231 ns )                    ; clock_reg[5]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.964 ns                ;
+; N/A                                     ; 310.46 MHz ( period = 3.221 ns )                    ; clock_reg[1]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.954 ns                ;
+; N/A                                     ; 312.79 MHz ( period = 3.197 ns )                    ; clock_reg[0]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.930 ns                ;
+; N/A                                     ; 313.28 MHz ( period = 3.192 ns )                    ; clock_reg[6]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.925 ns                ;
+; N/A                                     ; 314.37 MHz ( period = 3.181 ns )                    ; clock_reg[2]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.914 ns                ;
+; N/A                                     ; 317.97 MHz ( period = 3.145 ns )                    ; clock_reg[5]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.878 ns                ;
+; N/A                                     ; 318.98 MHz ( period = 3.135 ns )                    ; clock_reg[1]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.868 ns                ;
+; N/A                                     ; 319.80 MHz ( period = 3.127 ns )                    ; clock_reg[3]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.860 ns                ;
+; N/A                                     ; 321.44 MHz ( period = 3.111 ns )                    ; clock_reg[0]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.844 ns                ;
+; N/A                                     ; 321.96 MHz ( period = 3.106 ns )                    ; clock_reg[6]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.839 ns                ;
+; N/A                                     ; 323.10 MHz ( period = 3.095 ns )                    ; clock_reg[2]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.828 ns                ;
+; N/A                                     ; 323.10 MHz ( period = 3.095 ns )                    ; clock_reg[4]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.828 ns                ;
+; N/A                                     ; 327.23 MHz ( period = 3.056 ns )                    ; clock_reg[7]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.789 ns                ;
+; N/A                                     ; 327.98 MHz ( period = 3.049 ns )                    ; clock_reg[1]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.782 ns                ;
+; N/A                                     ; 328.84 MHz ( period = 3.041 ns )                    ; clock_reg[3]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.774 ns                ;
+; N/A                                     ; 330.58 MHz ( period = 3.025 ns )                    ; clock_reg[0]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.758 ns                ;
+; N/A                                     ; 332.34 MHz ( period = 3.009 ns )                    ; clock_reg[2]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.742 ns                ;
+; N/A                                     ; 332.34 MHz ( period = 3.009 ns )                    ; clock_reg[4]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.742 ns                ;
+; N/A                                     ; 335.80 MHz ( period = 2.978 ns )                    ; clock_reg[8]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.711 ns                ;
+; N/A                                     ; 336.70 MHz ( period = 2.970 ns )                    ; clock_reg[7]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.703 ns                ;
+; N/A                                     ; 337.50 MHz ( period = 2.963 ns )                    ; clock_reg[1]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.696 ns                ;
+; N/A                                     ; 338.41 MHz ( period = 2.955 ns )                    ; clock_reg[3]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.688 ns                ;
+; N/A                                     ; 338.41 MHz ( period = 2.955 ns )                    ; clock_reg[5]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.688 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[0]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.672 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.656 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.656 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.654 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.649 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.645 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.625 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.611 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[1]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.610 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.602 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.602 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[0]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.586 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.570 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.570 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.568 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.563 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.525 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.559 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[1]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.524 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.516 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.516 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[7]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.513 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.484 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.484 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.477 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.439 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.435 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[10] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.439 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.435 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.430 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.430 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[7]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.427 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[0]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.411 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.398 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.398 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.391 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.378 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.353 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.369 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[11] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.358 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.349 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[10] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.353 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.344 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.349 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[1]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.349 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.344 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.344 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[7]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.341 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[0]  ; clock_reg[8]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.325 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.312 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.305 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.292 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.286 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.267 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.283 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.277 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[11] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.272 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.263 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.258 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[1]  ; clock_reg[8]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.263 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.258 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.258 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[7]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.255 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[13] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.241 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[0]  ; clock_reg[7]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.239 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.226 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.219 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.223 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.206 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.200 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.219 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.197 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.191 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.177 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.172 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[1]  ; clock_reg[7]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.177 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.172 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[7]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.169 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[10] ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.163 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[13] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.155 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[0]  ; clock_reg[6]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.153 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.133 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[8]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.137 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.120 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.133 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.111 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[14] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.106 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.091 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.092 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.086 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[1]  ; clock_reg[6]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.091 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.086 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[7]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.083 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.083 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[11] ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.082 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[15] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.079 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[10] ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.077 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[15] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.070 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[0]  ; clock_reg[5]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.067 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.047 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[7]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.051 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.051 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.034 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.047 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.025 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[14] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.020 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.005 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.010 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[8]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.006 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[1]  ; clock_reg[5]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.005 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 2.001 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[7]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.997 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[8]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.997 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[11] ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.996 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[15] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.993 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[16] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.993 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[10] ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.991 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[15] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.984 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[16] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.984 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[0]  ; clock_reg[4]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.981 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[8]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.965 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[6]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.965 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[13] ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.965 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.948 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.939 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.919 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.924 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[7]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.920 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[1]  ; clock_reg[4]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.919 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.915 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[7]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.911 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[7]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.911 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.911 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[11] ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.910 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[16] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.907 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[10] ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.905 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[16] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.898 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[0]  ; clock_reg[3]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.895 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[5]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.879 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[7]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.879 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[13] ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.879 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.872 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.862 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[17] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.854 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[17] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.863 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.853 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.833 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.838 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[6]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.834 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[1]  ; clock_reg[3]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.833 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[14] ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.830 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.829 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[8]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.825 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[6]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.825 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[11] ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.824 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[10] ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.819 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[0]  ; clock_reg[2]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.809 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[15] ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.794 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[15] ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.803 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[4]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.793 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[6]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.793 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[13] ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.793 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[8]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.786 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.776 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[17] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.768 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.752 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[5]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.748 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[17] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.777 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[10] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.767 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[1]  ; clock_reg[2]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.747 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[14] ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.744 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.743 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[5]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.739 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[7]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.739 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[11] ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.738 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[7]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.736 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[10] ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.733 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[15] ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.708 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[16] ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.708 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[15] ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.717 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[16] ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.717 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[3]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.707 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[5]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.707 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[13] ; clock_reg[14] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.707 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[7]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.700 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[18] ; clock_reg[19] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.694 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.666 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[4]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.662 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.658 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[14] ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.658 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.657 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[4]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.653 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[5]  ; clock_reg[6]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.653 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[11] ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.652 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[7]  ; clock_reg[8]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.650 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[10] ; clock_reg[11] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.647 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[15] ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.228 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[16] ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.228 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[15] ; clock_reg[15] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.237 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[16] ; clock_reg[16] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.237 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[4]  ; clock_reg[4]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.227 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[2]  ; clock_reg[2]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.227 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[13] ; clock_reg[13] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.227 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[6]  ; clock_reg[6]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.220 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[0]  ; clock_reg[1]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.218 ns                ;
 ; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[18] ; clock_reg[18] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.214 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.188 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[12] ; clock_reg[12] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.187 ns                ;
-; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[3]  ; clock_reg[3]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.183 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[17] ; clock_reg[17] ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.188 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[8]  ; clock_reg[8]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.179 ns                ;
+; N/A                                     ; Restricted to 340.02 MHz ( period = 2.941 ns )      ; clock_reg[9]  ; clock_reg[9]  ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 1.179 ns                ;
 ; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;               ;               ;            ;          ;                             ;                           ;                         ;
 +-----------------------------------------+-----------------------------------------------------+---------------+---------------+------------+----------+-----------------------------+---------------------------+-------------------------+
 
 
-+----------------------------------------------------------------------------+
-; tco                                                                        ;
-+-------+--------------+------------+---------------+-----------+------------+
-; Slack ; Required tco ; Actual tco ; From          ; To        ; From Clock ;
-+-------+--------------+------------+---------------+-----------+------------+
-; N/A   ; None         ; 9.625 ns   ; clock_reg[16] ; ATLAS_C24 ; FX2_CLK    ;
-; N/A   ; None         ; 9.614 ns   ; clock_reg[19] ; ATLAS_C29 ; FX2_CLK    ;
-; N/A   ; None         ; 9.612 ns   ; clock_reg[18] ; ATLAS_C27 ; FX2_CLK    ;
-; N/A   ; None         ; 9.601 ns   ; clock_reg[15] ; ATLAS_C23 ; FX2_CLK    ;
-; N/A   ; None         ; 9.479 ns   ; clock_reg[13] ; ATLAS_C21 ; FX2_CLK    ;
-; N/A   ; None         ; 9.241 ns   ; clock_reg[12] ; ATLAS_C20 ; FX2_CLK    ;
-; N/A   ; None         ; 9.240 ns   ; clock_reg[11] ; ATLAS_C19 ; FX2_CLK    ;
-; N/A   ; None         ; 9.213 ns   ; clock_reg[14] ; ATLAS_C22 ; FX2_CLK    ;
-; N/A   ; None         ; 8.916 ns   ; clock_reg[17] ; ATLAS_C25 ; FX2_CLK    ;
-; N/A   ; None         ; 8.878 ns   ; clock_reg[0]  ; ATLAS_C31 ; FX2_CLK    ;
-; N/A   ; None         ; 8.762 ns   ; clock_reg[0]  ; ATLAS_A31 ; FX2_CLK    ;
-; N/A   ; None         ; 8.728 ns   ; clock_reg[17] ; ATLAS_A25 ; FX2_CLK    ;
-; N/A   ; None         ; 8.711 ns   ; clock_reg[19] ; ATLAS_A29 ; FX2_CLK    ;
-; N/A   ; None         ; 8.618 ns   ; clock_reg[10] ; ATLAS_A18 ; FX2_CLK    ;
-; N/A   ; None         ; 8.610 ns   ; clock_reg[14] ; ATLAS_A22 ; FX2_CLK    ;
-; N/A   ; None         ; 8.593 ns   ; clock_reg[16] ; ATLAS_A24 ; FX2_CLK    ;
-; N/A   ; None         ; 8.565 ns   ; clock_reg[18] ; ATLAS_A27 ; FX2_CLK    ;
-; N/A   ; None         ; 8.282 ns   ; clock_reg[13] ; ATLAS_A21 ; FX2_CLK    ;
-; N/A   ; None         ; 8.266 ns   ; clock_reg[17] ; ATLAS_C13 ; FX2_CLK    ;
-; N/A   ; None         ; 8.252 ns   ; clock_reg[12] ; ATLAS_A20 ; FX2_CLK    ;
-; N/A   ; None         ; 8.241 ns   ; clock_reg[11] ; ATLAS_A19 ; FX2_CLK    ;
-; N/A   ; None         ; 8.228 ns   ; clock_reg[15] ; ATLAS_A23 ; FX2_CLK    ;
-; N/A   ; None         ; 8.219 ns   ; clock_reg[8]  ; ATLAS_C16 ; FX2_CLK    ;
-; N/A   ; None         ; 8.188 ns   ; clock_reg[10] ; ATLAS_C18 ; FX2_CLK    ;
-; N/A   ; None         ; 8.188 ns   ; clock_reg[9]  ; ATLAS_C17 ; FX2_CLK    ;
-; N/A   ; None         ; 8.177 ns   ; clock_reg[2]  ; ATLAS_C14 ; FX2_CLK    ;
-; N/A   ; None         ; 8.173 ns   ; clock_reg[16] ; ATLAS_C12 ; FX2_CLK    ;
-; N/A   ; None         ; 8.169 ns   ; clock_reg[13] ; ATLAS_C9  ; FX2_CLK    ;
-; N/A   ; None         ; 8.163 ns   ; clock_reg[14] ; ATLAS_C10 ; FX2_CLK    ;
-; N/A   ; None         ; 8.146 ns   ; clock_reg[15] ; ATLAS_C11 ; FX2_CLK    ;
-; N/A   ; None         ; 7.863 ns   ; clock_reg[3]  ; ATLAS_A15 ; FX2_CLK    ;
-; N/A   ; None         ; 7.851 ns   ; clock_reg[9]  ; ATLAS_A17 ; FX2_CLK    ;
-; N/A   ; None         ; 7.832 ns   ; clock_reg[8]  ; ATLAS_A16 ; FX2_CLK    ;
-; N/A   ; None         ; 7.814 ns   ; clock_reg[3]  ; ATLAS_C15 ; FX2_CLK    ;
-; N/A   ; None         ; 7.813 ns   ; clock_reg[12] ; ATLAS_C8  ; FX2_CLK    ;
-; N/A   ; None         ; 7.810 ns   ; clock_reg[11] ; ATLAS_C7  ; FX2_CLK    ;
-; N/A   ; None         ; 7.792 ns   ; clock_reg[10] ; ATLAS_C6  ; FX2_CLK    ;
-; N/A   ; None         ; 7.679 ns   ; clock_reg[16] ; ATLAS_A12 ; FX2_CLK    ;
-; N/A   ; None         ; 7.675 ns   ; clock_reg[10] ; ATLAS_A6  ; FX2_CLK    ;
-; N/A   ; None         ; 7.665 ns   ; clock_reg[14] ; ATLAS_A10 ; FX2_CLK    ;
-; N/A   ; None         ; 7.603 ns   ; clock_reg[8]  ; ATLAS_C4  ; FX2_CLK    ;
-; N/A   ; None         ; 7.550 ns   ; clock_reg[9]  ; ATLAS_C5  ; FX2_CLK    ;
-; N/A   ; None         ; 7.432 ns   ; clock_reg[2]  ; ATLAS_A14 ; FX2_CLK    ;
-; N/A   ; None         ; 7.431 ns   ; clock_reg[17] ; ATLAS_A13 ; FX2_CLK    ;
-; N/A   ; None         ; 7.423 ns   ; clock_reg[15] ; ATLAS_A11 ; FX2_CLK    ;
-; N/A   ; None         ; 7.414 ns   ; clock_reg[11] ; ATLAS_A7  ; FX2_CLK    ;
-; N/A   ; None         ; 7.407 ns   ; clock_reg[5]  ; ATLAS_C3  ; FX2_CLK    ;
-; N/A   ; None         ; 7.396 ns   ; clock_reg[9]  ; ATLAS_A5  ; FX2_CLK    ;
-; N/A   ; None         ; 7.395 ns   ; clock_reg[13] ; ATLAS_A9  ; FX2_CLK    ;
-; N/A   ; None         ; 7.388 ns   ; clock_reg[8]  ; ATLAS_A4  ; FX2_CLK    ;
-; N/A   ; None         ; 7.371 ns   ; clock_reg[4]  ; ATLAS_C2  ; FX2_CLK    ;
-; N/A   ; None         ; 7.350 ns   ; clock_reg[12] ; ATLAS_A8  ; FX2_CLK    ;
-; N/A   ; None         ; 7.018 ns   ; clock_reg[4]  ; ATLAS_A2  ; FX2_CLK    ;
-; N/A   ; None         ; 7.010 ns   ; clock_reg[5]  ; ATLAS_A3  ; FX2_CLK    ;
-+-------+--------------+------------+---------------+-----------+------------+
++------------------------------------------------------------------------------+
+; tco                                                                          ;
++-------+--------------+------------+---------------+-------------+------------+
+; Slack ; Required tco ; Actual tco ; From          ; To          ; From Clock ;
++-------+--------------+------------+---------------+-------------+------------+
+; N/A   ; None         ; 10.956 ns  ; clock_reg[2]  ; FPGA_GPIO1  ; FX2_CLK    ;
+; N/A   ; None         ; 10.749 ns  ; clock_reg[9]  ; ATLAS_C17   ; FX2_CLK    ;
+; N/A   ; None         ; 10.678 ns  ; clock_reg[0]  ; ATLAS_A31   ; FX2_CLK    ;
+; N/A   ; None         ; 10.646 ns  ; clock_reg[19] ; ATLAS_C29   ; FX2_CLK    ;
+; N/A   ; None         ; 10.441 ns  ; clock_reg[12] ; FPGA_GPIO7  ; FX2_CLK    ;
+; N/A   ; None         ; 10.230 ns  ; clock_reg[8]  ; FPGA_GPIO3  ; FX2_CLK    ;
+; N/A   ; None         ; 10.227 ns  ; clock_reg[18] ; ATLAS_A27   ; FX2_CLK    ;
+; N/A   ; None         ; 10.219 ns  ; clock_reg[13] ; FPGA_GPIO8  ; FX2_CLK    ;
+; N/A   ; None         ; 10.177 ns  ; clock_reg[14] ; FPGA_GPIO9  ; FX2_CLK    ;
+; N/A   ; None         ; 10.144 ns  ; clock_reg[10] ; FPGA_GPIO5  ; FX2_CLK    ;
+; N/A   ; None         ; 9.883 ns   ; clock_reg[9]  ; FPGA_GPIO4  ; FX2_CLK    ;
+; N/A   ; None         ; 9.878 ns   ; clock_reg[17] ; ATLAS_A25   ; FX2_CLK    ;
+; N/A   ; None         ; 9.745 ns   ; clock_reg[12] ; ATLAS_A20   ; FX2_CLK    ;
+; N/A   ; None         ; 9.720 ns   ; clock_reg[16] ; ATLAS_A24   ; FX2_CLK    ;
+; N/A   ; None         ; 9.718 ns   ; clock_reg[17] ; FPGA_GPIO12 ; FX2_CLK    ;
+; N/A   ; None         ; 9.660 ns   ; clock_reg[3]  ; FPGA_GPIO2  ; FX2_CLK    ;
+; N/A   ; None         ; 9.577 ns   ; clock_reg[15] ; FPGA_GPIO10 ; FX2_CLK    ;
+; N/A   ; None         ; 9.554 ns   ; clock_reg[0]  ; FPGA_GPIO15 ; FX2_CLK    ;
+; N/A   ; None         ; 9.534 ns   ; clock_reg[16] ; FPGA_GPIO11 ; FX2_CLK    ;
+; N/A   ; None         ; 9.521 ns   ; clock_reg[19] ; FPGA_GPIO14 ; FX2_CLK    ;
+; N/A   ; None         ; 9.488 ns   ; clock_reg[18] ; FPGA_GPIO13 ; FX2_CLK    ;
+; N/A   ; None         ; 9.483 ns   ; clock_reg[2]  ; FPGA_GPIO16 ; FX2_CLK    ;
+; N/A   ; None         ; 9.288 ns   ; clock_reg[16] ; ATLAS_C24   ; FX2_CLK    ;
+; N/A   ; None         ; 9.272 ns   ; clock_reg[10] ; ATLAS_A18   ; FX2_CLK    ;
+; N/A   ; None         ; 9.268 ns   ; clock_reg[18] ; ATLAS_C27   ; FX2_CLK    ;
+; N/A   ; None         ; 9.247 ns   ; clock_reg[15] ; ATLAS_C23   ; FX2_CLK    ;
+; N/A   ; None         ; 9.012 ns   ; clock_reg[8]  ; ATLAS_C16   ; FX2_CLK    ;
+; N/A   ; None         ; 8.957 ns   ; clock_reg[14] ; ATLAS_C22   ; FX2_CLK    ;
+; N/A   ; None         ; 8.944 ns   ; clock_reg[11] ; FPGA_GPIO6  ; FX2_CLK    ;
+; N/A   ; None         ; 8.910 ns   ; clock_reg[12] ; ATLAS_C20   ; FX2_CLK    ;
+; N/A   ; None         ; 8.900 ns   ; clock_reg[13] ; ATLAS_C21   ; FX2_CLK    ;
+; N/A   ; None         ; 8.891 ns   ; clock_reg[17] ; ATLAS_C25   ; FX2_CLK    ;
+; N/A   ; None         ; 8.844 ns   ; clock_reg[0]  ; ATLAS_C31   ; FX2_CLK    ;
+; N/A   ; None         ; 8.516 ns   ; clock_reg[19] ; ATLAS_A29   ; FX2_CLK    ;
+; N/A   ; None         ; 8.508 ns   ; clock_reg[11] ; ATLAS_C19   ; FX2_CLK    ;
+; N/A   ; None         ; 8.314 ns   ; clock_reg[15] ; ATLAS_A23   ; FX2_CLK    ;
+; N/A   ; None         ; 8.285 ns   ; clock_reg[14] ; ATLAS_A22   ; FX2_CLK    ;
+; N/A   ; None         ; 8.264 ns   ; clock_reg[13] ; ATLAS_A21   ; FX2_CLK    ;
+; N/A   ; None         ; 8.261 ns   ; clock_reg[11] ; ATLAS_A19   ; FX2_CLK    ;
+; N/A   ; None         ; 8.252 ns   ; clock_reg[9]  ; ATLAS_A17   ; FX2_CLK    ;
+; N/A   ; None         ; 8.194 ns   ; clock_reg[3]  ; ATLAS_A15   ; FX2_CLK    ;
+; N/A   ; None         ; 8.181 ns   ; clock_reg[10] ; ATLAS_C18   ; FX2_CLK    ;
+; N/A   ; None         ; 8.175 ns   ; clock_reg[2]  ; ATLAS_C14   ; FX2_CLK    ;
+; N/A   ; None         ; 7.886 ns   ; clock_reg[8]  ; ATLAS_A16   ; FX2_CLK    ;
+; N/A   ; None         ; 7.854 ns   ; clock_reg[13] ; ATLAS_C9    ; FX2_CLK    ;
+; N/A   ; None         ; 7.850 ns   ; clock_reg[17] ; ATLAS_C13   ; FX2_CLK    ;
+; N/A   ; None         ; 7.843 ns   ; clock_reg[15] ; ATLAS_C11   ; FX2_CLK    ;
+; N/A   ; None         ; 7.843 ns   ; clock_reg[14] ; ATLAS_C10   ; FX2_CLK    ;
+; N/A   ; None         ; 7.827 ns   ; clock_reg[2]  ; ATLAS_A14   ; FX2_CLK    ;
+; N/A   ; None         ; 7.822 ns   ; clock_reg[16] ; ATLAS_C12   ; FX2_CLK    ;
+; N/A   ; None         ; 7.805 ns   ; clock_reg[3]  ; ATLAS_C15   ; FX2_CLK    ;
+; N/A   ; None         ; 7.713 ns   ; clock_reg[12] ; ATLAS_A8    ; FX2_CLK    ;
+; N/A   ; None         ; 7.696 ns   ; clock_reg[10] ; ATLAS_A6    ; FX2_CLK    ;
+; N/A   ; None         ; 7.568 ns   ; clock_reg[8]  ; ATLAS_C4    ; FX2_CLK    ;
+; N/A   ; None         ; 7.559 ns   ; clock_reg[9]  ; ATLAS_C5    ; FX2_CLK    ;
+; N/A   ; None         ; 7.484 ns   ; clock_reg[12] ; ATLAS_C8    ; FX2_CLK    ;
+; N/A   ; None         ; 7.484 ns   ; clock_reg[11] ; ATLAS_C7    ; FX2_CLK    ;
+; N/A   ; None         ; 7.468 ns   ; clock_reg[10] ; ATLAS_C6    ; FX2_CLK    ;
+; N/A   ; None         ; 7.448 ns   ; clock_reg[15] ; ATLAS_A11   ; FX2_CLK    ;
+; N/A   ; None         ; 7.439 ns   ; clock_reg[11] ; ATLAS_A7    ; FX2_CLK    ;
+; N/A   ; None         ; 7.433 ns   ; clock_reg[8]  ; ATLAS_A4    ; FX2_CLK    ;
+; N/A   ; None         ; 7.426 ns   ; clock_reg[16] ; ATLAS_A12   ; FX2_CLK    ;
+; N/A   ; None         ; 7.411 ns   ; clock_reg[5]  ; ATLAS_A3    ; FX2_CLK    ;
+; N/A   ; None         ; 7.410 ns   ; clock_reg[17] ; ATLAS_A13   ; FX2_CLK    ;
+; N/A   ; None         ; 7.399 ns   ; clock_reg[9]  ; ATLAS_A5    ; FX2_CLK    ;
+; N/A   ; None         ; 7.384 ns   ; clock_reg[14] ; ATLAS_A10   ; FX2_CLK    ;
+; N/A   ; None         ; 7.377 ns   ; clock_reg[4]  ; ATLAS_A2    ; FX2_CLK    ;
+; N/A   ; None         ; 7.366 ns   ; clock_reg[13] ; ATLAS_A9    ; FX2_CLK    ;
+; N/A   ; None         ; 7.021 ns   ; clock_reg[4]  ; ATLAS_C2    ; FX2_CLK    ;
+; N/A   ; None         ; 7.011 ns   ; clock_reg[5]  ; ATLAS_C3    ; FX2_CLK    ;
++-------+--------------+------------+---------------+-------------+------------+
 
 
 +--------------------------+
@@ -358,65 +374,65 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Timing Analyzer
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Dec 04 19:56:07 2006
+    Info: Processing started: Sun Dec 10 19:44:57 2006
 Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off TestImage -c TestImage --timing_analysis_only
 Warning: Found pins functioning as undefined clocks and/or memory enables
     Info: Assuming node "FX2_CLK" is an undefined clock
-Info: Clock "FX2_CLK" has Internal fmax of 267.81 MHz between source register "clock_reg[0]" and destination register "clock_reg[19]" (period= 3.734 ns)
+Info: Clock "FX2_CLK" has Internal fmax of 268.02 MHz between source register "clock_reg[0]" and destination register "clock_reg[19]" (period= 3.731 ns)
     Info: + Longest register to register delay is 3.464 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X33_Y15_N13; Fanout = 5; REG Node = 'clock_reg[0]'
-        Info: 2: + IC(0.460 ns) + CELL(0.735 ns) = 1.195 ns; Loc. = LCCOMB_X33_Y15_N14; Fanout = 2; COMB Node = 'clock_reg[1]~97'
-        Info: 3: + IC(0.000 ns) + CELL(0.086 ns) = 1.281 ns; Loc. = LCCOMB_X33_Y15_N16; Fanout = 2; COMB Node = 'clock_reg[2]~98'
-        Info: 4: + IC(0.000 ns) + CELL(0.086 ns) = 1.367 ns; Loc. = LCCOMB_X33_Y15_N18; Fanout = 2; COMB Node = 'clock_reg[3]~99'
-        Info: 5: + IC(0.000 ns) + CELL(0.086 ns) = 1.453 ns; Loc. = LCCOMB_X33_Y15_N20; Fanout = 2; COMB Node = 'clock_reg[4]~100'
-        Info: 6: + IC(0.000 ns) + CELL(0.086 ns) = 1.539 ns; Loc. = LCCOMB_X33_Y15_N22; Fanout = 2; COMB Node = 'clock_reg[5]~101'
-        Info: 7: + IC(0.000 ns) + CELL(0.086 ns) = 1.625 ns; Loc. = LCCOMB_X33_Y15_N24; Fanout = 2; COMB Node = 'clock_reg[6]~102'
-        Info: 8: + IC(0.000 ns) + CELL(0.086 ns) = 1.711 ns; Loc. = LCCOMB_X33_Y15_N26; Fanout = 2; COMB Node = 'clock_reg[7]~103'
-        Info: 9: + IC(0.000 ns) + CELL(0.086 ns) = 1.797 ns; Loc. = LCCOMB_X33_Y15_N28; Fanout = 2; COMB Node = 'clock_reg[8]~104'
-        Info: 10: + IC(0.000 ns) + CELL(0.175 ns) = 1.972 ns; Loc. = LCCOMB_X33_Y15_N30; Fanout = 2; COMB Node = 'clock_reg[9]~105'
-        Info: 11: + IC(0.000 ns) + CELL(0.086 ns) = 2.058 ns; Loc. = LCCOMB_X33_Y14_N0; Fanout = 2; COMB Node = 'clock_reg[10]~106'
-        Info: 12: + IC(0.000 ns) + CELL(0.086 ns) = 2.144 ns; Loc. = LCCOMB_X33_Y14_N2; Fanout = 2; COMB Node = 'clock_reg[11]~107'
-        Info: 13: + IC(0.000 ns) + CELL(0.086 ns) = 2.230 ns; Loc. = LCCOMB_X33_Y14_N4; Fanout = 2; COMB Node = 'clock_reg[12]~108'
-        Info: 14: + IC(0.000 ns) + CELL(0.086 ns) = 2.316 ns; Loc. = LCCOMB_X33_Y14_N6; Fanout = 2; COMB Node = 'clock_reg[13]~109'
-        Info: 15: + IC(0.000 ns) + CELL(0.086 ns) = 2.402 ns; Loc. = LCCOMB_X33_Y14_N8; Fanout = 2; COMB Node = 'clock_reg[14]~110'
-        Info: 16: + IC(0.000 ns) + CELL(0.086 ns) = 2.488 ns; Loc. = LCCOMB_X33_Y14_N10; Fanout = 2; COMB Node = 'clock_reg[15]~111'
-        Info: 17: + IC(0.000 ns) + CELL(0.086 ns) = 2.574 ns; Loc. = LCCOMB_X33_Y14_N12; Fanout = 2; COMB Node = 'clock_reg[16]~112'
-        Info: 18: + IC(0.000 ns) + CELL(0.190 ns) = 2.764 ns; Loc. = LCCOMB_X33_Y14_N14; Fanout = 2; COMB Node = 'clock_reg[17]~113'
-        Info: 19: + IC(0.000 ns) + CELL(0.086 ns) = 2.850 ns; Loc. = LCCOMB_X33_Y14_N16; Fanout = 1; COMB Node = 'clock_reg[18]~114'
-        Info: 20: + IC(0.000 ns) + CELL(0.506 ns) = 3.356 ns; Loc. = LCCOMB_X33_Y14_N18; Fanout = 1; COMB Node = 'clock_reg[19]~93'
-        Info: 21: + IC(0.000 ns) + CELL(0.108 ns) = 3.464 ns; Loc. = LCFF_X33_Y14_N19; Fanout = 3; REG Node = 'clock_reg[19]'
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X33_Y16_N13; Fanout = 6; REG Node = 'clock_reg[0]'
+        Info: 2: + IC(0.460 ns) + CELL(0.735 ns) = 1.195 ns; Loc. = LCCOMB_X33_Y16_N14; Fanout = 2; COMB Node = 'clock_reg[1]~97'
+        Info: 3: + IC(0.000 ns) + CELL(0.086 ns) = 1.281 ns; Loc. = LCCOMB_X33_Y16_N16; Fanout = 2; COMB Node = 'clock_reg[2]~98'
+        Info: 4: + IC(0.000 ns) + CELL(0.086 ns) = 1.367 ns; Loc. = LCCOMB_X33_Y16_N18; Fanout = 2; COMB Node = 'clock_reg[3]~99'
+        Info: 5: + IC(0.000 ns) + CELL(0.086 ns) = 1.453 ns; Loc. = LCCOMB_X33_Y16_N20; Fanout = 2; COMB Node = 'clock_reg[4]~100'
+        Info: 6: + IC(0.000 ns) + CELL(0.086 ns) = 1.539 ns; Loc. = LCCOMB_X33_Y16_N22; Fanout = 2; COMB Node = 'clock_reg[5]~101'
+        Info: 7: + IC(0.000 ns) + CELL(0.086 ns) = 1.625 ns; Loc. = LCCOMB_X33_Y16_N24; Fanout = 2; COMB Node = 'clock_reg[6]~102'
+        Info: 8: + IC(0.000 ns) + CELL(0.086 ns) = 1.711 ns; Loc. = LCCOMB_X33_Y16_N26; Fanout = 2; COMB Node = 'clock_reg[7]~103'
+        Info: 9: + IC(0.000 ns) + CELL(0.086 ns) = 1.797 ns; Loc. = LCCOMB_X33_Y16_N28; Fanout = 2; COMB Node = 'clock_reg[8]~104'
+        Info: 10: + IC(0.000 ns) + CELL(0.175 ns) = 1.972 ns; Loc. = LCCOMB_X33_Y16_N30; Fanout = 2; COMB Node = 'clock_reg[9]~105'
+        Info: 11: + IC(0.000 ns) + CELL(0.086 ns) = 2.058 ns; Loc. = LCCOMB_X33_Y15_N0; Fanout = 2; COMB Node = 'clock_reg[10]~106'
+        Info: 12: + IC(0.000 ns) + CELL(0.086 ns) = 2.144 ns; Loc. = LCCOMB_X33_Y15_N2; Fanout = 2; COMB Node = 'clock_reg[11]~107'
+        Info: 13: + IC(0.000 ns) + CELL(0.086 ns) = 2.230 ns; Loc. = LCCOMB_X33_Y15_N4; Fanout = 2; COMB Node = 'clock_reg[12]~108'
+        Info: 14: + IC(0.000 ns) + CELL(0.086 ns) = 2.316 ns; Loc. = LCCOMB_X33_Y15_N6; Fanout = 2; COMB Node = 'clock_reg[13]~109'
+        Info: 15: + IC(0.000 ns) + CELL(0.086 ns) = 2.402 ns; Loc. = LCCOMB_X33_Y15_N8; Fanout = 2; COMB Node = 'clock_reg[14]~110'
+        Info: 16: + IC(0.000 ns) + CELL(0.086 ns) = 2.488 ns; Loc. = LCCOMB_X33_Y15_N10; Fanout = 2; COMB Node = 'clock_reg[15]~111'
+        Info: 17: + IC(0.000 ns) + CELL(0.086 ns) = 2.574 ns; Loc. = LCCOMB_X33_Y15_N12; Fanout = 2; COMB Node = 'clock_reg[16]~112'
+        Info: 18: + IC(0.000 ns) + CELL(0.190 ns) = 2.764 ns; Loc. = LCCOMB_X33_Y15_N14; Fanout = 2; COMB Node = 'clock_reg[17]~113'
+        Info: 19: + IC(0.000 ns) + CELL(0.086 ns) = 2.850 ns; Loc. = LCCOMB_X33_Y15_N16; Fanout = 1; COMB Node = 'clock_reg[18]~114'
+        Info: 20: + IC(0.000 ns) + CELL(0.506 ns) = 3.356 ns; Loc. = LCCOMB_X33_Y15_N18; Fanout = 1; COMB Node = 'clock_reg[19]~93'
+        Info: 21: + IC(0.000 ns) + CELL(0.108 ns) = 3.464 ns; Loc. = LCFF_X33_Y15_N19; Fanout = 4; REG Node = 'clock_reg[19]'
         Info: Total cell delay = 3.004 ns ( 86.72 % )
         Info: Total interconnect delay = 0.460 ns ( 13.28 % )
-    Info: - Smallest clock skew is -0.006 ns
-        Info: + Shortest clock path from clock "FX2_CLK" to destination register is 2.865 ns
+    Info: - Smallest clock skew is -0.003 ns
+        Info: + Shortest clock path from clock "FX2_CLK" to destination register is 2.871 ns
             Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'FX2_CLK'
             Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 20; COMB Node = 'FX2_CLK~clkctrl'
-            Info: 3: + IC(0.920 ns) + CELL(0.666 ns) = 2.865 ns; Loc. = LCFF_X33_Y14_N19; Fanout = 3; REG Node = 'clock_reg[19]'
-            Info: Total cell delay = 1.806 ns ( 63.04 % )
-            Info: Total interconnect delay = 1.059 ns ( 36.96 % )
-        Info: - Longest clock path from clock "FX2_CLK" to source register is 2.871 ns
-            Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'FX2_CLK'
-            Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 20; COMB Node = 'FX2_CLK~clkctrl'
-            Info: 3: + IC(0.926 ns) + CELL(0.666 ns) = 2.871 ns; Loc. = LCFF_X33_Y15_N13; Fanout = 5; REG Node = 'clock_reg[0]'
+            Info: 3: + IC(0.926 ns) + CELL(0.666 ns) = 2.871 ns; Loc. = LCFF_X33_Y15_N19; Fanout = 4; REG Node = 'clock_reg[19]'
             Info: Total cell delay = 1.806 ns ( 62.90 % )
             Info: Total interconnect delay = 1.065 ns ( 37.10 % )
+        Info: - Longest clock path from clock "FX2_CLK" to source register is 2.874 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'FX2_CLK'
+            Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 20; COMB Node = 'FX2_CLK~clkctrl'
+            Info: 3: + IC(0.929 ns) + CELL(0.666 ns) = 2.874 ns; Loc. = LCFF_X33_Y16_N13; Fanout = 6; REG Node = 'clock_reg[0]'
+            Info: Total cell delay = 1.806 ns ( 62.84 % )
+            Info: Total interconnect delay = 1.068 ns ( 37.16 % )
     Info: + Micro clock to output delay of source is 0.304 ns
     Info: + Micro setup delay of destination is -0.040 ns
-Info: tco from clock "FX2_CLK" to destination pin "ATLAS_C24" through register "clock_reg[16]" is 9.625 ns
-    Info: + Longest clock path from clock "FX2_CLK" to source register is 2.865 ns
+Info: tco from clock "FX2_CLK" to destination pin "FPGA_GPIO1" through register "clock_reg[2]" is 10.956 ns
+    Info: + Longest clock path from clock "FX2_CLK" to source register is 2.874 ns
         Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'FX2_CLK'
         Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 20; COMB Node = 'FX2_CLK~clkctrl'
-        Info: 3: + IC(0.920 ns) + CELL(0.666 ns) = 2.865 ns; Loc. = LCFF_X33_Y14_N13; Fanout = 6; REG Node = 'clock_reg[16]'
-        Info: Total cell delay = 1.806 ns ( 63.04 % )
-        Info: Total interconnect delay = 1.059 ns ( 36.96 % )
+        Info: 3: + IC(0.929 ns) + CELL(0.666 ns) = 2.874 ns; Loc. = LCFF_X33_Y16_N17; Fanout = 6; REG Node = 'clock_reg[2]'
+        Info: Total cell delay = 1.806 ns ( 62.84 % )
+        Info: Total interconnect delay = 1.068 ns ( 37.16 % )
     Info: + Micro clock to output delay of source is 0.304 ns
-    Info: + Longest register to pin delay is 6.456 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X33_Y14_N13; Fanout = 6; REG Node = 'clock_reg[16]'
-        Info: 2: + IC(3.190 ns) + CELL(3.266 ns) = 6.456 ns; Loc. = PIN_187; Fanout = 0; PIN Node = 'ATLAS_C24'
-        Info: Total cell delay = 3.266 ns ( 50.59 % )
-        Info: Total interconnect delay = 3.190 ns ( 49.41 % )
+    Info: + Longest register to pin delay is 7.778 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X33_Y16_N17; Fanout = 6; REG Node = 'clock_reg[2]'
+        Info: 2: + IC(4.492 ns) + CELL(3.286 ns) = 7.778 ns; Loc. = PIN_67; Fanout = 0; PIN Node = 'FPGA_GPIO1'
+        Info: Total cell delay = 3.286 ns ( 42.25 % )
+        Info: Total interconnect delay = 4.492 ns ( 57.75 % )
 Info: Quartus II Timing Analyzer was successful. 0 errors, 1 warning
-    Info: Processing ended: Mon Dec 04 19:56:08 2006
+    Info: Processing ended: Sun Dec 10 19:44:58 2006
     Info: Elapsed time: 00:00:01
 
 
