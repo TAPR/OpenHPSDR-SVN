@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 9.625 ns
-From           : clock_reg[16]
-To             : ATLAS_C24
+Actual Time    : 10.956 ns
+From           : clock_reg[2]
+To             : FPGA_GPIO1
 From Clock     : FX2_CLK
 To Clock       : --
 Failed Paths   : 0
@@ -15,7 +15,7 @@ Failed Paths   : 0
 Type           : Clock Setup: 'FX2_CLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 267.81 MHz ( period = 3.734 ns )
+Actual Time    : 268.02 MHz ( period = 3.731 ns )
 From           : clock_reg[0]
 To             : clock_reg[19]
 From Clock     : FX2_CLK

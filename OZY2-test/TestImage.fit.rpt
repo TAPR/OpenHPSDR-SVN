@@ -1,5 +1,5 @@
 Fitter report for TestImage
-Mon Dec 04 19:55:54 2006
+Sun Dec 10 19:44:48 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -59,7 +59,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                    ;
 +------------------------------------+----------------------------------------------+
-; Fitter Status                      ; Successful - Mon Dec 04 19:55:53 2006        ;
+; Fitter Status                      ; Successful - Sun Dec 10 19:44:48 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; TestImage                                    ;
 ; Top-level Entity Name              ; OzyTestImageTop                              ;
@@ -68,7 +68,7 @@ applicable agreement for further details.
 ; Timing Models                      ; Final                                        ;
 ; Total logic elements               ; 20 / 8,256 ( < 1 % )                         ;
 ; Total registers                    ; 20                                           ;
-; Total pins                         ; 59 / 138 ( 43 % )                            ;
+; Total pins                         ; 75 / 138 ( 54 % )                            ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0 / 165,888 ( 0 % )                          ;
 ; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                               ;
@@ -114,7 +114,7 @@ applicable agreement for further details.
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.pin.
+The pin-out file can be found in C:/HPDSDR/trunk/OZY2-test/TestImage.pin.
 
 
 +--------------------------------------------------------------------+
@@ -141,7 +141,7 @@ The pin-out file can be found in C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.pi
 ; Total LABs                                  ; 2 / 516 ( < 1 % )    ;
 ; User inserted logic elements                ; 0                    ;
 ; Virtual pins                                ; 0                    ;
-; I/O pins                                    ; 59 / 138 ( 43 % )    ;
+; I/O pins                                    ; 75 / 138 ( 54 % )    ;
 ;     -- Clock pins                           ; 1 / 4 ( 25 % )       ;
 ; Global signals                              ; 1                    ;
 ; M4Ks                                        ; 0 / 36 ( 0 % )       ;
@@ -153,9 +153,9 @@ The pin-out file can be found in C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.pi
 ; Maximum fan-out node                        ; FX2_CLK~clkctrl      ;
 ; Maximum fan-out                             ; 20                   ;
 ; Highest non-global fan-out signal           ; clock_reg[8]         ;
-; Highest non-global fan-out                  ; 5                    ;
-; Total fan-out                               ; 134                  ;
-; Average fan-out                             ; 1.31                 ;
+; Highest non-global fan-out                  ; 6                    ;
+; Total fan-out                               ; 150                  ;
+; Average fan-out                             ; 1.26                 ;
 +---------------------------------------------+----------------------+
 
 
@@ -168,70 +168,86 @@ The pin-out file can be found in C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.pi
 +---------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Output Pins                                                                                                                                                                                                                                                                                 ;
-+------------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
-; Name       ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Output Register ; Output Enable Register ; Power Up High ; PCI I/O Enabled ; Open Drain ; TRI Primitive ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination ; Location assigned by ; Load ;
-+------------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
-; ATLAS_A10  ; 138   ; 3        ; 34           ; 12           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A11  ; 137   ; 3        ; 34           ; 11           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A12  ; 135   ; 3        ; 34           ; 11           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A13  ; 134   ; 3        ; 34           ; 11           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A14  ; 133   ; 3        ; 34           ; 11           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A15  ; 128   ; 3        ; 34           ; 9            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A16  ; 127   ; 3        ; 34           ; 9            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A17  ; 118   ; 3        ; 34           ; 7            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A18  ; 117   ; 3        ; 34           ; 5            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A19  ; 116   ; 3        ; 34           ; 5            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A2   ; 147   ; 3        ; 34           ; 15           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A20  ; 115   ; 3        ; 34           ; 4            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A21  ; 114   ; 3        ; 34           ; 4            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A22  ; 113   ; 3        ; 34           ; 3            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A23  ; 112   ; 3        ; 34           ; 3            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A24  ; 110   ; 3        ; 34           ; 3            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A25  ; 106   ; 3        ; 34           ; 1            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A27  ; 105   ; 3        ; 34           ; 1            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A29  ; 104   ; 4        ; 32           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A3   ; 146   ; 3        ; 34           ; 15           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A31  ; 103   ; 4        ; 32           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A4   ; 145   ; 3        ; 34           ; 14           ; 4           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A5   ; 144   ; 3        ; 34           ; 13           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A6   ; 143   ; 3        ; 34           ; 13           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A7   ; 142   ; 3        ; 34           ; 12           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A8   ; 141   ; 3        ; 34           ; 12           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_A9   ; 139   ; 3        ; 34           ; 12           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C10  ; 164   ; 2        ; 30           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C11  ; 165   ; 2        ; 30           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C12  ; 168   ; 2        ; 28           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C13  ; 169   ; 2        ; 28           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C14  ; 170   ; 2        ; 28           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C15  ; 171   ; 2        ; 28           ; 19           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C16  ; 173   ; 2        ; 25           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C17  ; 175   ; 2        ; 23           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C18  ; 176   ; 2        ; 23           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C19  ; 179   ; 2        ; 18           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C2   ; 149   ; 3        ; 34           ; 16           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C20  ; 180   ; 2        ; 18           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C21  ; 181   ; 2        ; 18           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C22  ; 182   ; 2        ; 18           ; 19           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C23  ; 185   ; 2        ; 14           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C24  ; 187   ; 2        ; 14           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C25  ; 188   ; 2        ; 12           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C27  ; 189   ; 2        ; 12           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C29  ; 191   ; 2        ; 12           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C3   ; 150   ; 3        ; 34           ; 16           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C31  ; 192   ; 2        ; 9            ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C4   ; 151   ; 3        ; 34           ; 17           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C5   ; 152   ; 3        ; 34           ; 17           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C6   ; 160   ; 2        ; 32           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C7   ; 161   ; 2        ; 32           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C8   ; 162   ; 2        ; 32           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; ATLAS_C9   ; 163   ; 2        ; 30           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; DEBUG_LED0 ; 4     ; 1        ; 0            ; 18           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; DEBUG_LED1 ; 33    ; 1        ; 0            ; 8            ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; DEBUG_LED2 ; 34    ; 1        ; 0            ; 7            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-; DEBUG_LED3 ; 108   ; 3        ; 34           ; 2            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
-+------------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Output Pins                                                                                                                                                                                                                                                                                  ;
++-------------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
+; Name        ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Output Register ; Output Enable Register ; Power Up High ; PCI I/O Enabled ; Open Drain ; TRI Primitive ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination ; Location assigned by ; Load ;
++-------------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
+; ATLAS_A10   ; 138   ; 3        ; 34           ; 12           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A11   ; 137   ; 3        ; 34           ; 11           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A12   ; 135   ; 3        ; 34           ; 11           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A13   ; 134   ; 3        ; 34           ; 11           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A14   ; 133   ; 3        ; 34           ; 11           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A15   ; 128   ; 3        ; 34           ; 9            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A16   ; 127   ; 3        ; 34           ; 9            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A17   ; 118   ; 3        ; 34           ; 7            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A18   ; 117   ; 3        ; 34           ; 5            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A19   ; 116   ; 3        ; 34           ; 5            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A2    ; 147   ; 3        ; 34           ; 15           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A20   ; 115   ; 3        ; 34           ; 4            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A21   ; 114   ; 3        ; 34           ; 4            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A22   ; 113   ; 3        ; 34           ; 3            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A23   ; 112   ; 3        ; 34           ; 3            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A24   ; 110   ; 3        ; 34           ; 3            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A25   ; 106   ; 3        ; 34           ; 1            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A27   ; 105   ; 3        ; 34           ; 1            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A29   ; 104   ; 4        ; 32           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A3    ; 146   ; 3        ; 34           ; 15           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A31   ; 103   ; 4        ; 32           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A4    ; 145   ; 3        ; 34           ; 14           ; 4           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A5    ; 144   ; 3        ; 34           ; 13           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A6    ; 143   ; 3        ; 34           ; 13           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A7    ; 142   ; 3        ; 34           ; 12           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A8    ; 141   ; 3        ; 34           ; 12           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A9    ; 139   ; 3        ; 34           ; 12           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C10   ; 164   ; 2        ; 30           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C11   ; 165   ; 2        ; 30           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C12   ; 168   ; 2        ; 28           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C13   ; 169   ; 2        ; 28           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C14   ; 170   ; 2        ; 28           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C15   ; 171   ; 2        ; 28           ; 19           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C16   ; 173   ; 2        ; 25           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C17   ; 175   ; 2        ; 23           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C18   ; 176   ; 2        ; 23           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C19   ; 179   ; 2        ; 18           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C2    ; 149   ; 3        ; 34           ; 16           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C20   ; 180   ; 2        ; 18           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C21   ; 181   ; 2        ; 18           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C22   ; 182   ; 2        ; 18           ; 19           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C23   ; 185   ; 2        ; 14           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C24   ; 187   ; 2        ; 14           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C25   ; 188   ; 2        ; 12           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C27   ; 189   ; 2        ; 12           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C29   ; 191   ; 2        ; 12           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C3    ; 150   ; 3        ; 34           ; 16           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C31   ; 192   ; 2        ; 9            ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C4    ; 151   ; 3        ; 34           ; 17           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C5    ; 152   ; 3        ; 34           ; 17           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C6    ; 160   ; 2        ; 32           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C7    ; 161   ; 2        ; 32           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C8    ; 162   ; 2        ; 32           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_C9    ; 163   ; 2        ; 30           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; DEBUG_LED0  ; 4     ; 1        ; 0            ; 18           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; DEBUG_LED1  ; 33    ; 1        ; 0            ; 8            ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; DEBUG_LED2  ; 34    ; 1        ; 0            ; 7            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; DEBUG_LED3  ; 108   ; 3        ; 34           ; 2            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO1  ; 67    ; 4        ; 9            ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO10 ; 80    ; 4        ; 23           ; 0            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO11 ; 81    ; 4        ; 23           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO12 ; 82    ; 4        ; 23           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO13 ; 84    ; 4        ; 25           ; 0            ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO14 ; 86    ; 4        ; 25           ; 0            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO15 ; 87    ; 4        ; 25           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO16 ; 88    ; 4        ; 25           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO2  ; 68    ; 4        ; 12           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO3  ; 69    ; 4        ; 12           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO4  ; 70    ; 4        ; 14           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO5  ; 72    ; 4        ; 16           ; 0            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO6  ; 74    ; 4        ; 16           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO7  ; 75    ; 4        ; 16           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO8  ; 76    ; 4        ; 18           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_GPIO9  ; 77    ; 4        ; 18           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; LVTTL        ; 24mA             ; Off         ; User                 ; 0 pF ;
++-------------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
 
 
 +------------------------------------------------------------+
@@ -241,8 +257,8 @@ The pin-out file can be found in C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.pi
 +----------+------------------+---------------+--------------+
 ; 1        ; 6 / 32 ( 19 % )  ; 3.3V          ; --           ;
 ; 2        ; 23 / 35 ( 66 % ) ; 3.3V          ; --           ;
-; 3        ; 30 / 35 ( 86 % ) ; 3.3V          ; --           ;
-; 4        ; 2 / 36 ( 6 % )   ; 3.3V          ; --           ;
+; 3        ; 31 / 35 ( 89 % ) ; 3.3V          ; --           ;
+; 4        ; 18 / 36 ( 50 % ) ; 3.3V          ; --           ;
 +----------+------------------+---------------+--------------+
 
 
@@ -317,28 +333,28 @@ The pin-out file can be found in C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.pi
 ; 64       ; 61         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 65       ;            ;          ; GND                                       ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 66       ;            ;          ; VCCINT                                    ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
-; 67       ; 69         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 68       ; 70         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 69       ; 71         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 70       ; 74         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 67       ; 69         ; 4        ; FPGA_GPIO1                                ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 68       ; 70         ; 4        ; FPGA_GPIO2                                ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 69       ; 71         ; 4        ; FPGA_GPIO3                                ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 70       ; 74         ; 4        ; FPGA_GPIO4                                ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 71       ;            ; 4        ; VCCIO4                                    ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
-; 72       ; 75         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 72       ; 75         ; 4        ; FPGA_GPIO5                                ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 73       ;            ;          ; GND                                       ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 74       ; 76         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 75       ; 77         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 76       ; 78         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 77       ; 79         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 74       ; 76         ; 4        ; FPGA_GPIO6                                ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 75       ; 77         ; 4        ; FPGA_GPIO7                                ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 76       ; 78         ; 4        ; FPGA_GPIO8                                ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 77       ; 79         ; 4        ; FPGA_GPIO9                                ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 78       ;            ;          ; GND                                       ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 79       ;            ;          ; VCCINT                                    ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
-; 80       ; 82         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 81       ; 83         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 82       ; 84         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 80       ; 82         ; 4        ; FPGA_GPIO10                               ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 81       ; 83         ; 4        ; FPGA_GPIO11                               ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 82       ; 84         ; 4        ; FPGA_GPIO12                               ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 83       ;            ; 4        ; VCCIO4                                    ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
-; 84       ; 85         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 84       ; 85         ; 4        ; FPGA_GPIO13                               ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 85       ;            ;          ; GND                                       ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 86       ; 86         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 87       ; 87         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 88       ; 88         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 86       ; 86         ; 4        ; FPGA_GPIO14                               ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 87       ; 87         ; 4        ; FPGA_GPIO15                               ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 88       ; 88         ; 4        ; FPGA_GPIO16                               ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 89       ; 89         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 90       ; 90         ; 4        ; RESERVED_INPUT                            ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 91       ;            ; 4        ; VCCIO4                                    ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
@@ -357,7 +373,7 @@ The pin-out file can be found in C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/TestImage.pi
 ; 104      ; 100        ; 4        ; ATLAS_A29                                 ; output ; LVTTL        ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 105      ; 101        ; 3        ; ATLAS_A27                                 ; output ; LVTTL        ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 106      ; 102        ; 3        ; ATLAS_A25                                 ; output ; LVTTL        ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 107      ; 105        ; 3        ; RESERVED_INPUT                            ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 107      ; 105        ; 3        ; *~LVDS54n/INIT_DONE~ / RESERVED           ; output ; LVTTL        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; 108      ; 106        ; 3        ; DEBUG_LED3                                ; output ; LVTTL        ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 109      ;            ; 3        ; VCCIO3                                    ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 110      ; 107        ; 3        ; ATLAS_A24                                 ; output ; LVTTL        ;         ; Row I/O    ; Y               ; no       ; Off          ;
@@ -504,76 +520,92 @@ Note: User assignments will override these defaults. The user specified values a
 +----------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------+
 ; Compilation Hierarchy Node ; Logic Cells ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name ;
 +----------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------+
-; |OzyTestImageTop           ; 20 (20)     ; 20 (20)           ; 20 (20)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 59   ; 0            ; 0 (0)        ; 0 (0)             ; 20 (20)          ; |OzyTestImageTop    ;
+; |OzyTestImageTop           ; 20 (20)     ; 20 (20)           ; 20 (20)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 75   ; 0            ; 0 (0)        ; 0 (0)             ; 20 (20)          ; |OzyTestImageTop    ;
 +----------------------------+-------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+-------------------------------------------------------------------------------------+
-; Delay Chain Summary                                                                 ;
-+------------+----------+---------------+---------------+-----------------------+-----+
-; Name       ; Pin Type ; Pad to Core 0 ; Pad to Core 1 ; Pad to Input Register ; TCO ;
-+------------+----------+---------------+---------------+-----------------------+-----+
-; FX2_CLK    ; Input    ; 0             ; 0             ; --                    ; --  ;
-; ATLAS_A2   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A3   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A4   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A5   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A6   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A7   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A8   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A9   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A10  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A11  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A12  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A13  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A14  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A15  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A16  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A17  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A18  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A19  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A20  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A21  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A22  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A23  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A24  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A25  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A27  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A29  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_A31  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C2   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C3   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C4   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C5   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C6   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C7   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C8   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C9   ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C10  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C11  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C12  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C13  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C14  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C15  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C16  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C17  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C18  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C19  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C20  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C21  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C22  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C23  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C24  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C25  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C27  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C29  ; Output   ; --            ; --            ; --                    ; --  ;
-; ATLAS_C31  ; Output   ; --            ; --            ; --                    ; --  ;
-; DEBUG_LED0 ; Output   ; --            ; --            ; --                    ; --  ;
-; DEBUG_LED1 ; Output   ; --            ; --            ; --                    ; --  ;
-; DEBUG_LED2 ; Output   ; --            ; --            ; --                    ; --  ;
-; DEBUG_LED3 ; Output   ; --            ; --            ; --                    ; --  ;
-+------------+----------+---------------+---------------+-----------------------+-----+
++--------------------------------------------------------------------------------------+
+; Delay Chain Summary                                                                  ;
++-------------+----------+---------------+---------------+-----------------------+-----+
+; Name        ; Pin Type ; Pad to Core 0 ; Pad to Core 1 ; Pad to Input Register ; TCO ;
++-------------+----------+---------------+---------------+-----------------------+-----+
+; FX2_CLK     ; Input    ; 0             ; 0             ; --                    ; --  ;
+; ATLAS_A2    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A3    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A4    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A5    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A6    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A7    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A8    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A9    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A10   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A11   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A12   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A13   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A14   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A15   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A16   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A17   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A18   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A19   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A20   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A21   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A22   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A23   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A24   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A25   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A27   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A29   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A31   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C2    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C3    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C4    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C5    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C6    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C7    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C8    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C9    ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C10   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C11   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C12   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C13   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C14   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C15   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C16   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C17   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C18   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C19   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C20   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C21   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C22   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C23   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C24   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C25   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C27   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C29   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_C31   ; Output   ; --            ; --            ; --                    ; --  ;
+; DEBUG_LED0  ; Output   ; --            ; --            ; --                    ; --  ;
+; DEBUG_LED1  ; Output   ; --            ; --            ; --                    ; --  ;
+; DEBUG_LED2  ; Output   ; --            ; --            ; --                    ; --  ;
+; DEBUG_LED3  ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO1  ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO2  ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO3  ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO4  ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO5  ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO6  ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO7  ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO8  ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO9  ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO10 ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO11 ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO12 ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO13 ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO14 ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO15 ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_GPIO16 ; Output   ; --            ; --            ; --                    ; --  ;
++-------------+----------+---------------+---------------+-----------------------+-----+
 
 
 +---------------------------------------------------+
@@ -608,21 +640,21 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------+-------------+
 ; Name              ; Fan-Out     ;
 +-------------------+-------------+
-; clock_reg[17]     ; 5           ;
-; clock_reg[16]     ; 5           ;
-; clock_reg[15]     ; 5           ;
-; clock_reg[14]     ; 5           ;
-; clock_reg[13]     ; 5           ;
-; clock_reg[12]     ; 5           ;
-; clock_reg[11]     ; 5           ;
-; clock_reg[10]     ; 5           ;
-; clock_reg[9]      ; 5           ;
-; clock_reg[8]      ; 5           ;
-; clock_reg[0]      ; 4           ;
-; clock_reg[19]     ; 3           ;
-; clock_reg[18]     ; 3           ;
-; clock_reg[3]      ; 3           ;
-; clock_reg[2]      ; 3           ;
+; clock_reg[17]     ; 6           ;
+; clock_reg[16]     ; 6           ;
+; clock_reg[15]     ; 6           ;
+; clock_reg[14]     ; 6           ;
+; clock_reg[13]     ; 6           ;
+; clock_reg[12]     ; 6           ;
+; clock_reg[11]     ; 6           ;
+; clock_reg[10]     ; 6           ;
+; clock_reg[9]      ; 6           ;
+; clock_reg[8]      ; 6           ;
+; clock_reg[0]      ; 5           ;
+; clock_reg[2]      ; 5           ;
+; clock_reg[19]     ; 4           ;
+; clock_reg[18]     ; 4           ;
+; clock_reg[3]      ; 4           ;
 ; clock_reg[5]      ; 3           ;
 ; clock_reg[4]      ; 3           ;
 ; clock_reg[0]~116  ; 1           ;
@@ -661,20 +693,20 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------+-------------+
 
 
-+----------------------------------------------------+
-; Interconnect Usage Summary                         ;
-+----------------------------+-----------------------+
-; Interconnect Resource Type ; Usage                 ;
-+----------------------------+-----------------------+
-; Block interconnects        ; 54 / 26,052 ( < 1 % ) ;
-; C16 interconnects          ; 0 / 1,156 ( 0 % )     ;
-; C4 interconnects           ; 81 / 17,952 ( < 1 % ) ;
-; Direct links               ; 2 / 26,052 ( < 1 % )  ;
-; Global clocks              ; 1 / 8 ( 13 % )        ;
-; Local interconnects        ; 20 / 8,256 ( < 1 % )  ;
-; R24 interconnects          ; 2 / 1,020 ( < 1 % )   ;
-; R4 interconnects           ; 55 / 22,440 ( < 1 % ) ;
-+----------------------------+-----------------------+
++-----------------------------------------------------+
+; Interconnect Usage Summary                          ;
++----------------------------+------------------------+
+; Interconnect Resource Type ; Usage                  ;
++----------------------------+------------------------+
+; Block interconnects        ; 70 / 26,052 ( < 1 % )  ;
+; C16 interconnects          ; 8 / 1,156 ( < 1 % )    ;
+; C4 interconnects           ; 105 / 17,952 ( < 1 % ) ;
+; Direct links               ; 2 / 26,052 ( < 1 % )   ;
+; Global clocks              ; 1 / 8 ( 13 % )         ;
+; Local interconnects        ; 20 / 8,256 ( < 1 % )   ;
+; R24 interconnects          ; 9 / 1,020 ( < 1 % )    ;
+; R4 interconnects           ; 74 / 22,440 ( < 1 % )  ;
++----------------------------+------------------------+
 
 
 +---------------------------------------------------------------------------+
@@ -777,7 +809,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Enable user-supplied start-up clock (CLKUSR) ; Off                 ;
 ; Enable device-wide reset (DEV_CLRn)          ; Off                 ;
 ; Enable device-wide output enable (DEV_OE)    ; Off                 ;
-; Enable INIT_DONE output                      ; Off                 ;
+; Enable INIT_DONE output                      ; On                  ;
 ; Configuration scheme                         ; Active Serial       ;
 ; Error detection CRC                          ; Off                 ;
 ; Reserve ASDO pin after configuration.        ; As input tri-stated ;
@@ -828,6 +860,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; LABs with Chains - Fit Attempt 1                                 ; 2       ;
 ; LABs with Multiple Chains - Fit Attempt 1                        ; 0       ;
 ; Time - Fit Attempt 1                                             ; 0       ;
+; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.031   ;
 +------------------------------------------------------------------+---------+
 
 
@@ -841,9 +874,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Early Slack - Fit Attempt 1      ; -3967 ;
 ; Auto Fit Point 3 - Fit Attempt 1 ; ff    ;
 ; Auto Fit Point 4 - Fit Attempt 1 ; ff    ;
-; Mid Wire Use - Fit Attempt 1     ; 0     ;
+; Mid Wire Use - Fit Attempt 1     ; 1     ;
 ; Mid Slack - Fit Attempt 1        ; -3967 ;
-; Late Wire Use - Fit Attempt 1    ; 0     ;
+; Late Wire Use - Fit Attempt 1    ; 1     ;
 ; Late Slack - Fit Attempt 1       ; -3967 ;
 ; Auto Fit Point 5 - Fit Attempt 1 ; ff    ;
 ; Time - Fit Attempt 1             ; 0     ;
@@ -855,11 +888,11 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------+-------+
 ; Name                                ; Value ;
 +-------------------------------------+-------+
-; Early Slack - Fit Attempt 1         ; -2775 ;
-; Mid Slack - Fit Attempt 1           ; -2800 ;
-; Late Slack - Fit Attempt 1          ; -2800 ;
-; Late Slack - Fit Attempt 1          ; -2800 ;
-; Late Wire Use - Fit Attempt 1       ; 0     ;
+; Early Slack - Fit Attempt 1         ; -2776 ;
+; Mid Slack - Fit Attempt 1           ; -2801 ;
+; Late Slack - Fit Attempt 1          ; -2801 ;
+; Late Slack - Fit Attempt 1          ; -2801 ;
+; Late Wire Use - Fit Attempt 1       ; 1     ;
 ; Time - Fit Attempt 1                ; 0     ;
 ; Time in tsm_tan.dll - Fit Attempt 1 ; 0.109 ;
 +-------------------------------------+-------+
@@ -871,7 +904,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Dec 04 19:55:44 2006
+    Info: Processing started: Sun Dec 10 19:44:43 2006
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off TestImage -c TestImage
 Info: Selected device EP2C8Q208C8 for design "TestImage"
 Info: Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
@@ -897,27 +930,27 @@ Info: Fitter placement operations beginning
 Info: Fitter placement was successful
 Info: Fitter placement operations ending: elapsed time is 00:00:00
 Info: Estimated most critical path is register to register delay of 3.454 ns
-    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X33_Y15; Fanout = 2; REG Node = 'clock_reg[1]'
-    Info: 2: + IC(0.675 ns) + CELL(0.596 ns) = 1.271 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[1]~97'
-    Info: 3: + IC(0.000 ns) + CELL(0.086 ns) = 1.357 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[2]~98'
-    Info: 4: + IC(0.000 ns) + CELL(0.086 ns) = 1.443 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[3]~99'
-    Info: 5: + IC(0.000 ns) + CELL(0.086 ns) = 1.529 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[4]~100'
-    Info: 6: + IC(0.000 ns) + CELL(0.086 ns) = 1.615 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[5]~101'
-    Info: 7: + IC(0.000 ns) + CELL(0.086 ns) = 1.701 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[6]~102'
-    Info: 8: + IC(0.000 ns) + CELL(0.086 ns) = 1.787 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[7]~103'
-    Info: 9: + IC(0.000 ns) + CELL(0.086 ns) = 1.873 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[8]~104'
-    Info: 10: + IC(0.000 ns) + CELL(0.086 ns) = 1.959 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[9]~105'
-    Info: 11: + IC(0.107 ns) + CELL(0.086 ns) = 2.152 ns; Loc. = LAB_X33_Y14; Fanout = 2; COMB Node = 'clock_reg[10]~106'
-    Info: 12: + IC(0.000 ns) + CELL(0.086 ns) = 2.238 ns; Loc. = LAB_X33_Y14; Fanout = 2; COMB Node = 'clock_reg[11]~107'
-    Info: 13: + IC(0.000 ns) + CELL(0.086 ns) = 2.324 ns; Loc. = LAB_X33_Y14; Fanout = 2; COMB Node = 'clock_reg[12]~108'
-    Info: 14: + IC(0.000 ns) + CELL(0.086 ns) = 2.410 ns; Loc. = LAB_X33_Y14; Fanout = 2; COMB Node = 'clock_reg[13]~109'
-    Info: 15: + IC(0.000 ns) + CELL(0.086 ns) = 2.496 ns; Loc. = LAB_X33_Y14; Fanout = 2; COMB Node = 'clock_reg[14]~110'
-    Info: 16: + IC(0.000 ns) + CELL(0.086 ns) = 2.582 ns; Loc. = LAB_X33_Y14; Fanout = 2; COMB Node = 'clock_reg[15]~111'
-    Info: 17: + IC(0.000 ns) + CELL(0.086 ns) = 2.668 ns; Loc. = LAB_X33_Y14; Fanout = 2; COMB Node = 'clock_reg[16]~112'
-    Info: 18: + IC(0.000 ns) + CELL(0.086 ns) = 2.754 ns; Loc. = LAB_X33_Y14; Fanout = 2; COMB Node = 'clock_reg[17]~113'
-    Info: 19: + IC(0.000 ns) + CELL(0.086 ns) = 2.840 ns; Loc. = LAB_X33_Y14; Fanout = 1; COMB Node = 'clock_reg[18]~114'
-    Info: 20: + IC(0.000 ns) + CELL(0.506 ns) = 3.346 ns; Loc. = LAB_X33_Y14; Fanout = 1; COMB Node = 'clock_reg[19]~93'
-    Info: 21: + IC(0.000 ns) + CELL(0.108 ns) = 3.454 ns; Loc. = LAB_X33_Y14; Fanout = 3; REG Node = 'clock_reg[19]'
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X33_Y16; Fanout = 2; REG Node = 'clock_reg[1]'
+    Info: 2: + IC(0.675 ns) + CELL(0.596 ns) = 1.271 ns; Loc. = LAB_X33_Y16; Fanout = 2; COMB Node = 'clock_reg[1]~97'
+    Info: 3: + IC(0.000 ns) + CELL(0.086 ns) = 1.357 ns; Loc. = LAB_X33_Y16; Fanout = 2; COMB Node = 'clock_reg[2]~98'
+    Info: 4: + IC(0.000 ns) + CELL(0.086 ns) = 1.443 ns; Loc. = LAB_X33_Y16; Fanout = 2; COMB Node = 'clock_reg[3]~99'
+    Info: 5: + IC(0.000 ns) + CELL(0.086 ns) = 1.529 ns; Loc. = LAB_X33_Y16; Fanout = 2; COMB Node = 'clock_reg[4]~100'
+    Info: 6: + IC(0.000 ns) + CELL(0.086 ns) = 1.615 ns; Loc. = LAB_X33_Y16; Fanout = 2; COMB Node = 'clock_reg[5]~101'
+    Info: 7: + IC(0.000 ns) + CELL(0.086 ns) = 1.701 ns; Loc. = LAB_X33_Y16; Fanout = 2; COMB Node = 'clock_reg[6]~102'
+    Info: 8: + IC(0.000 ns) + CELL(0.086 ns) = 1.787 ns; Loc. = LAB_X33_Y16; Fanout = 2; COMB Node = 'clock_reg[7]~103'
+    Info: 9: + IC(0.000 ns) + CELL(0.086 ns) = 1.873 ns; Loc. = LAB_X33_Y16; Fanout = 2; COMB Node = 'clock_reg[8]~104'
+    Info: 10: + IC(0.000 ns) + CELL(0.086 ns) = 1.959 ns; Loc. = LAB_X33_Y16; Fanout = 2; COMB Node = 'clock_reg[9]~105'
+    Info: 11: + IC(0.107 ns) + CELL(0.086 ns) = 2.152 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[10]~106'
+    Info: 12: + IC(0.000 ns) + CELL(0.086 ns) = 2.238 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[11]~107'
+    Info: 13: + IC(0.000 ns) + CELL(0.086 ns) = 2.324 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[12]~108'
+    Info: 14: + IC(0.000 ns) + CELL(0.086 ns) = 2.410 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[13]~109'
+    Info: 15: + IC(0.000 ns) + CELL(0.086 ns) = 2.496 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[14]~110'
+    Info: 16: + IC(0.000 ns) + CELL(0.086 ns) = 2.582 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[15]~111'
+    Info: 17: + IC(0.000 ns) + CELL(0.086 ns) = 2.668 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[16]~112'
+    Info: 18: + IC(0.000 ns) + CELL(0.086 ns) = 2.754 ns; Loc. = LAB_X33_Y15; Fanout = 2; COMB Node = 'clock_reg[17]~113'
+    Info: 19: + IC(0.000 ns) + CELL(0.086 ns) = 2.840 ns; Loc. = LAB_X33_Y15; Fanout = 1; COMB Node = 'clock_reg[18]~114'
+    Info: 20: + IC(0.000 ns) + CELL(0.506 ns) = 3.346 ns; Loc. = LAB_X33_Y15; Fanout = 1; COMB Node = 'clock_reg[19]~93'
+    Info: 21: + IC(0.000 ns) + CELL(0.108 ns) = 3.454 ns; Loc. = LAB_X33_Y15; Fanout = 4; REG Node = 'clock_reg[19]'
     Info: Total cell delay = 2.672 ns ( 77.36 % )
     Info: Total interconnect delay = 0.782 ns ( 22.64 % )
 Info: Fitter routing operations beginning
@@ -926,7 +959,7 @@ Info: The Fitter performed an Auto Fit compilation.  Optimizations were skipped 
     Info: Optimizations that may affect the design's routability were skipped
     Info: Optimizations that may affect the design's timing were skipped
 Info: Started post-fitting delay annotation
-Warning: Found 58 output pins without output pin load capacitance assignment
+Warning: Found 74 output pins without output pin load capacitance assignment
     Info: Pin "ATLAS_A2" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "ATLAS_A3" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "ATLAS_A4" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
@@ -985,6 +1018,22 @@ Warning: Found 58 output pins without output pin load capacitance assignment
     Info: Pin "DEBUG_LED1" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "DEBUG_LED2" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "DEBUG_LED3" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO1" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO2" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO3" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO4" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO5" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO6" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO7" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO8" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO9" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO10" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO11" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO12" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO13" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO14" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO15" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_GPIO16" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
 Info: Delay annotation completed successfully
 Warning: Following 4 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results
     Info: Pin DEBUG_LED0 has GND driving its datain port
@@ -992,7 +1041,7 @@ Warning: Following 4 pins have nothing, GND, or VCC driving datain port -- chang
     Info: Pin DEBUG_LED2 has GND driving its datain port
     Info: Pin DEBUG_LED3 has GND driving its datain port
 Info: Quartus II Fitter was successful. 0 errors, 2 warnings
-    Info: Processing ended: Mon Dec 04 19:55:53 2006
-    Info: Elapsed time: 00:00:10
+    Info: Processing ended: Sun Dec 10 19:44:48 2006
+    Info: Elapsed time: 00:00:05
 
 

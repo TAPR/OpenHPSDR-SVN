@@ -1,11 +1,11 @@
-Analysis & Synthesis Status : Successful - Mon Dec 04 19:55:38 2006
+Analysis & Synthesis Status : Successful - Sun Dec 10 19:44:41 2006
 Quartus II Version : 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
 Revision Name : TestImage
 Top-level Entity Name : OzyTestImageTop
 Family : Cyclone II
 Total logic elements : 20
 Total registers : 20
-Total pins : 59
+Total pins : 75
 Total virtual pins : 0
 Total memory bits : 0
 Embedded Multiplier 9-bit elements : 0

@@ -4,7 +4,8 @@
 // Simple test load for the Ozy FPGA -- takes in a clock, divides it down via a register and feeds it out to all the FPGA pins so one can
 // validate board wiring
 //
-// 2 December 2006 - Modified for V2 of the OZY board, clock now 24MHz from FX2_CLK - VK6APH 
+// 2 December 2006 - Modified for V2 of the OZY board, clock now 24MHz from FX2_CLK - VK6APH
+// 10 December 2006 - added GPIO pins except 17-24 since theses are inputs - VK6APH
 
 
 module OzyTestImageTop(
@@ -66,8 +67,23 @@ module OzyTestImageTop(
 	output DEBUG_LED0,
 	output DEBUG_LED1,
 	output DEBUG_LED2,
-	output DEBUG_LED3
-
+	output DEBUG_LED3,
+	output FPGA_GPIO1,
+	output FPGA_GPIO2,
+	output FPGA_GPIO3,
+	output FPGA_GPIO4,
+	output FPGA_GPIO5,
+	output FPGA_GPIO6,
+	output FPGA_GPIO7,
+	output FPGA_GPIO8,
+	output FPGA_GPIO9,
+	output FPGA_GPIO10,
+	output FPGA_GPIO11,
+	output FPGA_GPIO12,
+	output FPGA_GPIO13,
+	output FPGA_GPIO14,
+	output FPGA_GPIO15,
+	output FPGA_GPIO16
 ); 
 
         // divided down clock signals
@@ -141,6 +157,23 @@ assign ATLAS_C25 = clock_reg[17];            // 17
 assign ATLAS_C27 = clock_reg[18];            // 18 
 assign ATLAS_C29 = clock_reg[19];            // 19 
 assign ATLAS_C31 = clock_reg[0];             // 0 
+assign FPGA_GPIO1 = clock_reg[2]; 
+assign FPGA_GPIO2 = clock_reg[3];
+assign FPGA_GPIO3 = clock_reg[8];
+assign FPGA_GPIO4 = clock_reg[9];
+assign FPGA_GPIO5 = clock_reg[10];
+assign FPGA_GPIO6 = clock_reg[11];
+assign FPGA_GPIO7 = clock_reg[12];
+assign FPGA_GPIO8 = clock_reg[13];
+assign FPGA_GPIO9 = clock_reg[14];
+assign FPGA_GPIO10 = clock_reg[15];
+assign FPGA_GPIO11 = clock_reg[16];
+assign FPGA_GPIO12 = clock_reg[17];
+assign FPGA_GPIO13 = clock_reg[18];
+assign FPGA_GPIO14 = clock_reg[19];
+assign FPGA_GPIO15 = clock_reg[0];
+assign FPGA_GPIO16 = clock_reg[2]; 
+
 
 // LEDs
 assign DEBUG_LED0 = 0; // on

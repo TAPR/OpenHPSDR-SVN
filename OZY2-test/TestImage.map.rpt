@@ -1,5 +1,5 @@
 Analysis & Synthesis report for TestImage
-Mon Dec 04 19:55:38 2006
+Sun Dec 10 19:44:41 2006
 Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 
 
@@ -39,14 +39,14 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Dec 04 19:55:38 2006        ;
+; Analysis & Synthesis Status        ; Successful - Sun Dec 10 19:44:41 2006        ;
 ; Quartus II Version                 ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
 ; Revision Name                      ; TestImage                                    ;
 ; Top-level Entity Name              ; OzyTestImageTop                              ;
 ; Family                             ; Cyclone II                                   ;
 ; Total logic elements               ; 20                                           ;
 ; Total registers                    ; 20                                           ;
-; Total pins                         ; 59                                           ;
+; Total pins                         ; 75                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0                                            ;
 ; Embedded Multiplier 9-bit elements ; 0                                            ;
@@ -114,13 +114,13 @@ applicable agreement for further details.
 +--------------------------------------------------------------------+--------------------+--------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                             ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                         ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------+
-; OzyTestImage V2.v                ; yes             ; User Verilog HDL File  ; C:/HPDSDR/trunk/KD5TFD/OzyFPGATest/OzyTestImage V2.v ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                    ;
++----------------------------------+-----------------+------------------------+---------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                ;
++----------------------------------+-----------------+------------------------+---------------------------------------------+
+; OzyTestImage V2.v                ; yes             ; User Verilog HDL File  ; C:/HPDSDR/trunk/OZY2-test/OzyTestImage V2.v ;
++----------------------------------+-----------------+------------------------+---------------------------------------------+
 
 
 +-------------------------------------------------------+
@@ -139,11 +139,11 @@ applicable agreement for further details.
 ;     -- normal mode                          ; 2       ;
 ;     -- arithmetic mode                      ; 18      ;
 ; Total registers                             ; 20      ;
-; I/O pins                                    ; 59      ;
+; I/O pins                                    ; 75      ;
 ; Maximum fan-out node                        ; FX2_CLK ;
 ; Maximum fan-out                             ; 20      ;
-; Total fan-out                               ; 133     ;
-; Average fan-out                             ; 1.34    ;
+; Total fan-out                               ; 149     ;
+; Average fan-out                             ; 1.30    ;
 +---------------------------------------------+---------+
 
 
@@ -152,7 +152,7 @@ applicable agreement for further details.
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ;
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
-; |OzyTestImageTop           ; 20 (20)           ; 20 (20)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 59   ; 0            ; |OzyTestImageTop    ;
+; |OzyTestImageTop           ; 20 (20)           ; 20 (20)      ; 0           ; 0    ; 0            ; 0       ; 0         ; 75   ; 0            ; |OzyTestImageTop    ;
 +----------------------------+-------------------+--------------+-------------+------+--------------+---------+-----------+------+--------------+---------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -178,7 +178,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Dec 04 19:55:33 2006
+    Info: Processing started: Sun Dec 10 19:44:39 2006
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off TestImage -c TestImage
 Info: Found 1 design units, including 1 entities, in source file OzyTestImage V2.v
     Info: Found entity 1: OzyTestImageTop
@@ -188,12 +188,12 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "DEBUG_LED1" stuck at GND
     Warning: Pin "DEBUG_LED2" stuck at GND
     Warning: Pin "DEBUG_LED3" stuck at GND
-Info: Implemented 79 device resources after synthesis - the final resource count might be different
+Info: Implemented 95 device resources after synthesis - the final resource count might be different
     Info: Implemented 1 input pins
-    Info: Implemented 58 output pins
+    Info: Implemented 74 output pins
     Info: Implemented 20 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 5 warnings
-    Info: Processing ended: Mon Dec 04 19:55:38 2006
-    Info: Elapsed time: 00:00:05
+    Info: Processing ended: Sun Dec 10 19:44:41 2006
+    Info: Elapsed time: 00:00:03
 
 

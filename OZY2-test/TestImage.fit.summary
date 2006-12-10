@@ -1,4 +1,4 @@
-Fitter Status : Successful - Mon Dec 04 19:55:53 2006
+Fitter Status : Successful - Sun Dec 10 19:44:48 2006
 Quartus II Version : 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
 Revision Name : TestImage
 Top-level Entity Name : OzyTestImageTop
@@ -7,7 +7,7 @@ Device : EP2C8Q208C8
 Timing Models : Final
 Total logic elements : 20 / 8,256 ( < 1 % )
 Total registers : 20
-Total pins : 59 / 138 ( 43 % )
+Total pins : 75 / 138 ( 54 % )
 Total virtual pins : 0
 Total memory bits : 0 / 165,888 ( 0 % )
 Embedded Multiplier 9-bit elements : 0 / 36 ( 0 % )

@@ -123,28 +123,28 @@ RESERVED_INPUT               : 63        :        :                   :         
 RESERVED_INPUT               : 64        :        :                   :         : 4         :                
 GND                          : 65        : gnd    :                   :         :           :                
 VCCINT                       : 66        : power  :                   : 1.2V    :           :                
-RESERVED_INPUT               : 67        :        :                   :         : 4         :                
-RESERVED_INPUT               : 68        :        :                   :         : 4         :                
-RESERVED_INPUT               : 69        :        :                   :         : 4         :                
-RESERVED_INPUT               : 70        :        :                   :         : 4         :                
+FPGA_GPIO1                   : 67        : output : LVTTL             :         : 4         : Y              
+FPGA_GPIO2                   : 68        : output : LVTTL             :         : 4         : Y              
+FPGA_GPIO3                   : 69        : output : LVTTL             :         : 4         : Y              
+FPGA_GPIO4                   : 70        : output : LVTTL             :         : 4         : Y              
 VCCIO4                       : 71        : power  :                   : 3.3V    : 4         :                
-RESERVED_INPUT               : 72        :        :                   :         : 4         :                
+FPGA_GPIO5                   : 72        : output : LVTTL             :         : 4         : Y              
 GND                          : 73        : gnd    :                   :         :           :                
-RESERVED_INPUT               : 74        :        :                   :         : 4         :                
-RESERVED_INPUT               : 75        :        :                   :         : 4         :                
-RESERVED_INPUT               : 76        :        :                   :         : 4         :                
-RESERVED_INPUT               : 77        :        :                   :         : 4         :                
+FPGA_GPIO6                   : 74        : output : LVTTL             :         : 4         : Y              
+FPGA_GPIO7                   : 75        : output : LVTTL             :         : 4         : Y              
+FPGA_GPIO8                   : 76        : output : LVTTL             :         : 4         : Y              
+FPGA_GPIO9                   : 77        : output : LVTTL             :         : 4         : Y              
 GND                          : 78        : gnd    :                   :         :           :                
 VCCINT                       : 79        : power  :                   : 1.2V    :           :                
-RESERVED_INPUT               : 80        :        :                   :         : 4         :                
-RESERVED_INPUT               : 81        :        :                   :         : 4         :                
-RESERVED_INPUT               : 82        :        :                   :         : 4         :                
+FPGA_GPIO10                  : 80        : output : LVTTL             :         : 4         : Y              
+FPGA_GPIO11                  : 81        : output : LVTTL             :         : 4         : Y              
+FPGA_GPIO12                  : 82        : output : LVTTL             :         : 4         : Y              
 VCCIO4                       : 83        : power  :                   : 3.3V    : 4         :                
-RESERVED_INPUT               : 84        :        :                   :         : 4         :                
+FPGA_GPIO13                  : 84        : output : LVTTL             :         : 4         : Y              
 GND                          : 85        : gnd    :                   :         :           :                
-RESERVED_INPUT               : 86        :        :                   :         : 4         :                
-RESERVED_INPUT               : 87        :        :                   :         : 4         :                
-RESERVED_INPUT               : 88        :        :                   :         : 4         :                
+FPGA_GPIO14                  : 86        : output : LVTTL             :         : 4         : Y              
+FPGA_GPIO15                  : 87        : output : LVTTL             :         : 4         : Y              
+FPGA_GPIO16                  : 88        : output : LVTTL             :         : 4         : Y              
 RESERVED_INPUT               : 89        :        :                   :         : 4         :                
 RESERVED_INPUT               : 90        :        :                   :         : 4         :                
 VCCIO4                       : 91        : power  :                   : 3.3V    : 4         :                
@@ -163,7 +163,7 @@ ATLAS_A31                    : 103       : output : LVTTL             :         
 ATLAS_A29                    : 104       : output : LVTTL             :         : 4         : Y              
 ATLAS_A27                    : 105       : output : LVTTL             :         : 3         : Y              
 ATLAS_A25                    : 106       : output : LVTTL             :         : 3         : Y              
-RESERVED_INPUT               : 107       :        :                   :         : 3         :                
+~LVDS54n/INIT_DONE~ / RESERVED : 107       : output : LVTTL             :         : 3         : N              
 DEBUG_LED3                   : 108       : output : LVTTL             :         : 3         : Y              
 VCCIO3                       : 109       : power  :                   : 3.3V    : 3         :                
 ATLAS_A24                    : 110       : output : LVTTL             :         : 3         : Y              
