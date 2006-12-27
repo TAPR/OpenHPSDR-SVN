@@ -10,13 +10,13 @@
 	is valid at the positive edge of the LT2208 100MHz clock.
 	
 	The data is processed by a CORDIC NCO to produce I and Q
-	outputs.  These are decimated by 2048 in a CIC filter to 
-	give output data at ~48kHz to feed to the FX2 and hence via 
+	outputs.  These are decimated by 512 in a CIC filter to 
+	give output data at ~192kHz to feed to the FX2 and hence via 
 	the USB to PowerSDR.
 	
 	The data is sent in the Janus format vis:-
 	
-	<7F7F><7F00><0000><0000><I sign extension,I MSB><Q LSB,Q sign extension><Q MSB,Q LSB><0000> etc 
+	<7F7F><7F00><0000><FF00><I MSB,I ><I LSB,Q MSB><Q,Q LSB><0000> etc 
 	
 	Change log:
 	
@@ -28,6 +28,10 @@
 	28 Aug  2006 - uses  USRP CORDIC 
 	29 Aug  2006 - CIC changed to decimate by 512 to give 196kHz output
 	 3 Sept 2006 - Added decode of frequency from PowerSDR
+	10 Dec  2006 - Ported to Ozy V2 hardware
+	12 Dec  2006 - Start PWM DAC for audio out
+	23 Dec  2006 - Added debug code for PWM testing
+	27 Dec  2006 - PWM working  
 		
 	
 */
@@ -40,25 +44,28 @@
 //
 //  LT2208		Pin		Ozy-Atlas	FPGA Pin
 //				1		
-//	    CLK		3		C19			118
+//	    CLK		3		C19			179
 //		Ov		5		
-//		D15		7		C17			120
-//		D14		9		C16			127
-//		D13		11		C15			128
-//		D12		13		C14			133
-//		D11		15		C13			134
-//		D10		17		C12			135
-//		D9		19		C11			137
-//		D8		21		C10			138
-//		D7		13		C9			139
-//		D6		25		C8			141
-//		D5		27		C7			142
-//		D4		29		C6			143
-//		D3		31		C5			144
-//		D2		33		C4			145
-//		D1		35		C3			146
-//		D0		37		C2			147
-//		3.3v	39		
+//		D15		7		C17			175
+//		D14		9		C16			173
+//		D13		11		C15			171
+//		D12		13		C14			170
+//		D11		15		C13			169
+//		D10		17		C12			168
+//		D9		19		C11			165
+//		D8		21		C10			164
+//		D7		13		C9			163
+//		D6		25		C8			162
+//		D5		27		C7			161
+//		D4		29		C6			160
+//		D3		31		C5			152
+//		D2		33		C4			151
+//		D1		35		C3			150
+//		D0		37		C2			149
+//		3.3v	39	
+//
+//		I_PWM_out		C20			180
+//		Q_PWM_out		C21			181
 
 //
 //	 FX2 pin    to   FPGA pin connections
@@ -94,19 +101,35 @@
 //
 //   General FPGA pins
 //
-//	 	LED[0]			- pin 67
-//	 	LED[1]			- pin 68
-//	 	LED[2]			- pin 69
-//	 	LED[3]			- pin 70
-//	 	LED[4]			- pin 72
-//	 	LED[5]			- pin 74
-//	 	LED[6]			- pin 75
-//	 	LED[7]			- pin 76
+//	 DEBUG_LED0		- 4 
+//	 DEBUG_LED1		- 33
+//	 DEBUG_LED2		- 34
+//	 DEBUG_LED3		- 108
+//	 FPGA_GPIO1		- 67
+//	 FPGA_GPIO2		- 68
+//	 FPGA_GPIO3		- 69
+//	 FPGA_GPIO4		- 70
+//	 FPGA_GPIO5		- 72
+//	 FPGA_GPIO6		- 74
+//	 FPGA_GPIO7		- 75
+//	 FPGA_GPIO8		- 76
+//	 FPGA_GPIO9		- 77
+//	 FPGA_GPIO10	- 80
+//	 FPGA_GPIO11	- 81
+//	 FPGA_GPIO12	- 82
+//	 FPGA_GPIO13	- 84
+//	 FPGA_GPIO14	- 86
+//	 FPGA_GPIO15	- 87
+//	 FPGA_GPIO16	- 88
 //
 ////////////////////////////////////////////////////////////
 
 
-module Mercury(clock, ADC,IFCLK, FX2_FD,FIFO_ADR, SLRD, SLWR, SLOE, FLAGA, FLAGC, PKEND, LED);
+module Mercury(clock, ADC,IFCLK, FX2_FD,FIFO_ADR, SLRD, SLWR, SLOE, FLAGA, FLAGC, PKEND,
+	   DEBUG_LED0,DEBUG_LED1, DEBUG_LED2, DEBUG_LED3,
+		 FPGA_GPIO1, FPGA_GPIO2, FPGA_GPIO3, FPGA_GPIO4, FPGA_GPIO5, FPGA_GPIO6,
+		 FPGA_GPIO7, FPGA_GPIO8, FPGA_GPIO9, FPGA_GPIO10, FPGA_GPIO11,
+		 FPGA_GPIO12, FPGA_GPIO13, FPGA_GPIO14, FPGA_GPIO15, FPGA_GPIO16);
 
 input [15:0]ADC;			// samples from LT2208
 input clock;				// 100MHz clock from LT2208
@@ -120,16 +143,34 @@ output SLWR;				// FX2's write line
 output SLRD; 				// FX2's FIFO read line
 output PKEND; 				// signals packed end, not used
 output [1:0] FIFO_ADR;		// FX2 register address 
-output [7:0] LED;			// LEDs on OZY board
+output DEBUG_LED0;			// LEDs on OZY board
+output DEBUG_LED1;
+output DEBUG_LED2;
+output DEBUG_LED3;
 output SLOE;				// FX2 data bus enable - active low
+output FPGA_GPIO1;
+output FPGA_GPIO2;
+output FPGA_GPIO3;		
+output FPGA_GPIO4;	
+output FPGA_GPIO5;	
+output FPGA_GPIO6;	
+output FPGA_GPIO7;	
+output FPGA_GPIO8;		
+output FPGA_GPIO9;		
+output FPGA_GPIO10;	
+output FPGA_GPIO11;
+output FPGA_GPIO12;	
+output FPGA_GPIO13;	
+output FPGA_GPIO14;	
+output FPGA_GPIO15;	
+output FPGA_GPIO16;
 
 
 
 wire PKEND;
 reg [3:0] state_FX;			// state for FX2
 reg data_flag;				// set when data ready to send to Tx FIFO
-reg [15:0] register;		// AK5394A A/D uses this to send its data to Tx FIFO
-reg [15:0] Tx_data;		  	// Tx mic audio from TLV320
+reg [15:0] register;		// LT2208 A/D uses this to send its data to Tx FIFO
 reg [6:0] loop_counter;		// counts number of times round loop 
 reg [11:0] sync_Rx_used; 	// holds # of bytes in Rx_fifo for use by PC
 reg [11:0] rx_avail;  		// how much space is avail in the rx fifo
@@ -142,6 +183,7 @@ reg [1:0] FIFO_ADR;			// FX2 register address
 
 assign PKEND = 1'b1;
 reg data_ready;				// set at end of decimation
+
 
 
 
@@ -169,74 +211,53 @@ always @ (posedge clock) begin
 	end
 end 
 
-//assign temp_ADC = ADC;
+assign temp_ADC = ADC;
 
 // A Digital Output Randomizer is fitted to the LT2208. This complements bits 15 to 1 if 
 // bit 0 is 1. This helps to reduce any pickup by the A/D input of the digital outputs. 
 // We need to de-ramdomize the LT2208 data if this is turned on. 
 
-// assign temp_ADC = ADC[0]? {~ADC[15:1],ADC[0]}: ADC;  // Compensate for Digital Output Randomizer
-
-
-/*
-
-// multiply by 1 and -1 at 25MHz
-
-reg [15:0]i_out;
-reg [15:0]q_out;
-reg [15:0]temp_ADC;
-
-reg [1:0]state;
-
-always @ (posedge clock)
-begin
-
-temp_ADC <= ADC;
-
-// A Digital Output Randomizer is fitted to the LT2208. This complements bits 15 to 1 if 
-// bit 0 is 1. This helps to reduce any pickup by the A/D input of the digital outputs. 
-// We need to de-ramdomize the LT2208 data if this is turned on. 
-
-//if (ADC[0]) temp_ADC[15:1] <= ~ADC[15:1];  // Compensate for Digital Output Randomizer
-
-case (state)
-2'd0:	begin 
-	i_out <= temp_ADC;			// x1
-	q_out <= 0;					// x-1
-	state <= 2'd1;
-	end
-2'd1:	begin
-	i_out <= 0;					// x1
-	q_out <= temp_ADC;			// x1
-	state <= 2'd2;
-	end
-2'd2: 	begin
-	i_out <= ~temp_ADC + 16'd1;
-	q_out <= 0;
-	state <=2'd3;
-	end
-2'd3:	begin
-	i_out <= 0;
-	q_out <= ~temp_ADC + 16'd1;
-	state <= 2'd0;
-	end
-default: state <= 2'd0;
-endcase
-end
-*/
-
-
+//assign temp_ADC = ADC[0]? {~ADC[15:1],ADC[0]}: ADC;  // Compensate for Digital Output Randomizer
 
 //////////////////////////////////////////////////////////////
 //
-//		CORDIC NCO - set at ~25MHz
+//		CLOCKS
+//
+//
+//////////////////////////////////////////////////////////////
+
+// Generate ~48kHz clock for PWM ADC
+
+reg PWM_clock;
+reg [10:0]PWM_count;
+always @ (posedge clock)
+begin
+	if (PWM_count == 1023) // divide 100MHz clock by 1024 to give 48.828kHz
+		begin
+		PWM_clock <= ~PWM_clock;
+		PWM_count <= 0;
+		end
+	else PWM_count <= PWM_count + 11'b1;
+end
+
+// sync frequecy change to 100MHz clock
+reg [31:0]sync_frequency;
+
+always @ (posedge clock)
+begin
+	sync_frequency <= frequency;
+end
+
+//////////////////////////////////////////////////////////////
+//
+//		CORDIC NCO 
 //
 //
 //////////////////////////////////////////////////////////////
 
 //Code rotates A/D input at set frequency  and produces I & Q /
 
-// IMPORTANT: set Qin to be 16'd0 since we only have a single input 
+// IMPORTANT: set Iin to be 16'd0 since we only have a single input 
 
 wire [15:0]i_out;
 wire [15:0]q_out;
@@ -245,12 +266,15 @@ wire [15:0]temp_ADC;
 	//parameter FREQ = 32'h40000000;  //~25MHz  i.e. FREQ /(100e6/2^32)
 	//parameter FREQ = 32'h24538EF3; // 14.190MHz
 	wire	[31:0] phase;
+	reg [31:0]frequency;
+	
+	//assign frequency = 32'h24538EF3; // 14.190MHz
 
 	// The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
-	phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(frequency),.phase_out(phase));
+	phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
 
 	// The cordic takes I and Q in along with the top 18 bits of the phase dword.  The I and Q out are freq shifted
-	cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(16'd0),.Qin(ADC),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
+	cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(16'd0),.Qin(temp_ADC),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
 
 
 
@@ -322,6 +346,7 @@ begin
 	else clock_count <= clock_count + 5'b1;
 end
 
+
 reg [4:0]AD_state;
 
 always @ (posedge clock_8)
@@ -338,6 +363,7 @@ case (AD_state)
 		if (loop_counter == 0) begin		// if zero  then send sync and C&C bytes
 			register <= 16'h7F7F;	
 			strobe <= 1'b1;					// strobe start if sync (80) into Tx FIFO
+			rx_avail <= 12'd4095 - sync_Rx_used;    
 			AD_state <= 5'd2;
 			end
 		else AD_state <= 5'd5;
@@ -353,7 +379,8 @@ case (AD_state)
 		AD_state <= AD_state + 1'b1;
 		end
 5'd4: begin
-		register <= 16'hFF00;				// C3 set to 255 and  C4 set to 0
+//		register <= 16'hFF00;				// C3 set to 255 and  C4 set to 0
+		register <= {rx_avail[11:4],8'b0};     // C3 - number of bytes free in Rx FIFO, C4 - sequence number
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end		
@@ -428,6 +455,31 @@ default: pulse <= pulse + 1'b1;
 endcase
 end
 
+/////////////////////////////////////////////////////////////
+//
+//   Rx_fifo  (4096) Dual clock FIFO - Altera Megafunction (dcfifo)
+//
+/////////////////////////////////////////////////////////////
+
+/*
+        The write clock of the FIFO is SLRD and the read clock clock_8.
+        Data from the FX2_FIFO is written to the FIFO using SLRD. Data from the
+        FIFO is read on the positive edge of clock_8 when fifo_enable is high. The
+        FIFO is 4096 words long.
+        NB: The output flags are only valid after a read/write clock has taken place
+*/
+
+
+wire [15:0] Rx_data;
+wire write_full;                         // high when tx side of fifo is full
+wire read_full;
+wire [11:0] Rx_used;             // how many bytes in FX2 side Rx fifo
+wire [11:0] Rx_used_rdside;  // read side count
+
+Rx_fifo Rx_fifo(.wrclk (SLRD),.rdreq (fifo_enable),.rdclk (clock_8),.wrreq (1'b1),
+                .data (Rx_register),.q (Rx_data), .wrfull (write_full),.wrusedw(Rx_used),
+                .rdusedw(Rx_used_rdside), .rdfull(read_full));
+
 ///////////////////////////////////////////////////////////////
 //
 //				Tx_fifo - 2048 words - Altera Megafunction
@@ -454,7 +506,7 @@ reg  [10:0] syncd_write_used; 	// ditto but synced to FX2 clock
 	The state machine checks if there are characters to be read
 	in the FX2 Rx FIFO by checking 'EP2_has_data'  If set it loads the word
 	read into the Rx_register. On the next clock it  checks if the Tx_data_flag is set
-	 - if so it sends the data in 'register'to the Tx FIFO. After the Tx data has been sent 
+	 - if so it sends the data in 'register' to the Tx FIFO. After the Tx data has been sent 
 	it checks 'EP2_has_data' in round robin fashion.
 */
 
@@ -494,12 +546,12 @@ case(state_FX)
 4'd4:begin
 	SLRD <= 1'b0; 
 	Rx_register[15:8] <= FX2_FD[7:0]; 		//  swap endian 
-	Rx_register[7:0]  <= FX2_FD[15:8]; 		// done need RX data, just ignore it for now. 
+	Rx_register[7:0]  <= FX2_FD[15:8]; 		
 	state_FX <= state_FX + 1'b1;
 	end	
 // reset SLRD and SLOE
 4'd5:begin
-	SLRD <= 1'b1; 
+	SLRD <= 1'b1; 							// positive edge of SLRD clocks data into Rx_fifo
 	SLOE <= 1'b1;					
 	state_FX <= state_FX + 1'b1;
 	end
@@ -551,15 +603,153 @@ end
 assign FX2_FD[15:8] = SLEN ? Tx_register[7:0]  : 8'bZ;
 assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
 
-//////////////////////////////////////////////////////////////
-//
-//				Decode NCO frequency from PowerSDR
-//
-//////////////////////////////////////////////////////////////
 
-reg [31:0]frequency;
-reg [1:0] freq;
+//////////////////////////////////////////////////////////////
+//
+//                              State Machine to manage PWM interface
+//
+//////////////////////////////////////////////////////////////
+/*
+        The state machine changes state on the negative edge of clock_8.
+        The code loops until there are at least 1024 bytes in the Rx_FIFO.
+        The code then loops looking for a sync sequence (0x7F7F7F). Once located it
+        sleeps for 512 bytes (256 words) and then looks for the sync sequence again. If located
+        it contiunes, if not it restarts.
+
+        Whilst sync is being detected,or restarted, then all logic outputs are set to safe values.
+
+        After successfully finding sync it  reads the next 5 bytes
+        which are control bytes C0-C4. The next word is the Left audio and the following the
+        Right audio which are sent to the TLV320 D/A converters.
+    	The next worid is the  I data and the following the Q data.
+    	The I and Q data is sent to individual 16 bit PWM D/A converters.
+
+        The words sent to the D/A converters must be sent at the sample rate
+        of the A/D converters (48kHz) so is synced on the positive edge of the PWM_clock. Further reads
+        of Rx_data are inhibited until the Rx FIFO has at least 16 bytes in it.
+
+        We need to loop through the following code 62 times. The first time though
+        we look for the 3 sync bytes, 5 control bytes, 2 left bytes, 2 right bytes,  2 I bytes and 2 Q
+        bytes for a total of (3 + 5 + 2 + 2 + 2 + 2) 16 bytes. Subsequent times through we do not look for
+        the sync or control bytes so receive ( 2 + 2 + 2 + 2) 8 bytes.
+
+        Since each frame is 512 bytes long we need to go through the loop
+
+        (512 - 16)/8 = 62 times
+
+        since the counter is incremented before we read it we actually test for
+        the byte counter to be 63.
+
+        At the end of the loop the next 3 bytes should be the sync sequence (state 3).
+        If the sync sequence is found then we continue otherwise we revert to the beginning
+        (state 0) and try to gain sync again.
+
+        Note that we use clock_8 to read the Rx_FIFO. This is so we can remove data from it quickly. We then wait for
+        the 48kHz PWM_clock so the received data is available at the correct time for the DACs.
+
+*/
+
+reg [4:0] state_PWM;                    // state for PWM  counts 0 to 13
+reg [15:0] Left_PWM;                    // Left 16 bit PWM data for D/A converter
+reg [15:0] Right_PWM;                   // Right 16 bit PWM data for D/A converter
+reg [15:0] I_PWM;                       // I 16 bit PWM data for D/A conveter
+reg [15:0] Q_PWM;                       // Q 16 bit PWM data for D/A conveter
+reg fifo_enable;                        // controls reading of dual clock fifo
+reg [11:0] synced_Rx_used;              // how may bytes in FX2 side Rx fifos synced to clock_8
+reg [6:0] byte_count;                   // counts number of times round loop
+reg [7:0] Rx_control_0;                 // control C0 from PC, MOX active if bit 0 set
+reg [7:0] Rx_control_1;                 // control C1 from PC, decode bits 1,0 for A/D speed setting
+reg [7:0] Rx_control_2;                 // control C2 from PC
+reg [7:0] Rx_control_3;                 // control C3 from PC
+reg [7:0] Rx_control_4;                 // control C4 from PC
+reg [8:0]sync_count;
+reg have_sync;                          // high when we have sync
+
+
+always @ (posedge clock_8)
+begin
+synced_Rx_used <= Rx_used;      
+case(state_PWM)
+  0: begin
+	byte_count <= 0;
+    if(synced_Rx_used > 1023)begin       // wait until we have at least 1024 words to check
+        fifo_enable <= 1'b1;             // enable read of dual clock fifo
+        if (Rx_data == 16'h7F7F)begin    // have start of sync
+            state_PWM <= 1;
+        end
+        else state_PWM <= 0;             // no sync so look again
+        end
+	 else begin
+     	fifo_enable <= 1'b0;            // prevent FIFO reads until we have >1023 available
+        state_PWM <= 0;                 // loop here if not
+     end
+     end
+// state 1 - look for balance of sync  - if true continue else start again
+  1: begin
+     if (Rx_data[15:8] == 8'h7F)begin
+        have_sync <= ~have_sync;        // toggle sync  
+        state_PWM <= 2;
+     end
+     else state_PWM <= 0;
+     end
+// state 2 - skip Rx_control_1 & Rx_control_2
+  2: begin
+        state_PWM <= 3;
+     end
+// state 3 - skip Rx_control_3 & Rx_control_4 
+  3: begin
+        state_PWM <= 4;
+	end
+// state 4 - get Left audio and CORDIC frequency
+4: begin
+	fifo_enable <= 1'b1; // enable reads from Rx fifo 
+	I_Data <= Rx_data;
+	state_PWM <= 5;
+   end
+// state 5 - get Right audio
+5: begin
+	Q_Data <= Rx_data;
+	state_PWM <= 6;
+   end
+// state 6 - skip I PWM
+6: begin
+	state_PWM <= 7;
+   end
+// state 7 - skip Q PWM
+7: begin
+	state_PWM <= 8;
+   end
+// state 8 - loop here until 48kHz clock goes low 
+8: begin
+	fifo_enable <= 1'b0; // stop reading from Rx fifo while we wait for 48kHz clock
+	if(PWM_clock) state_PWM <= 8;
+	else state_PWM <= 9;
+   end
+// state 9 - wait until 48kHz clock goes high
+9: begin
+	if(PWM_clock)begin
+		byte_count <= byte_count + 1'b1;
+	 	state_PWM <= 10;
+	end
+	else state_PWM <= 9;
+   end
+// state 10 - check loop count and either continue or look for sync
+10: begin
+		if(synced_Rx_used > 7) // make sure we have enough data to do a loop
+		begin
+	  		if(byte_count == 63) state_PWM <= 0; // look for sync if we have done 62 loops
+  	  		else 	state_PWM <= 4;
+		end
+		else state_PWM <= 10;
+   end
+
+default: state_PWM <= 0;
+endcase
+end 
+
+
 reg led0;
+reg [2:0]freq;
 
 always @ (posedge SLRD)  // positive edge of FX2 FIFO read strobe
 begin 
@@ -583,18 +773,68 @@ case (freq)
 default: freq <= 0;
 endcase
 end 
+
+
+
 	
+	
+/////////////////////////////////////////////////////////////////
+//
+// Single bit PWM 16 bit D/A converters
+//
+/////////////////////////////////////////////////////////////////
+
+// This runs off the 100MHz clock to simplify the LPF requirements.
+
+reg [15:0] I_Data;
+reg [15:0] Q_Data;
+reg [15:0] I_Data_in;
+reg [15:0] Q_Data_in;
+reg [16:0] I_PWM_accumulator;
+reg [16:0] Q_PWM_accumulator;
+
+
+always @(negedge clock)
+begin
+        I_Data_in <= I_Data + 16'h8000;         // so that 0 in gives 50:50 mark/space
+        Q_Data_in <= Q_Data + 16'h8000;
+        I_PWM_accumulator <= I_PWM_accumulator[15:0] + I_Data_in;
+        Q_PWM_accumulator <= Q_PWM_accumulator[15:0] + Q_Data_in;
+
+end
+
+assign I_PWM_out = I_PWM_accumulator[16];       // send to FPGA pins
+assign Q_PWM_out = Q_PWM_accumulator[16];
 
 
 // LEDs for testing
 
-assign LED[0] = led0; 		
-assign LED[1] = ~EP6_ready;		// LED D3 on when we can write to EP6
-assign LED[2] = data_ready; 
-assign LED[3] = 1'b1;
-assign LED[4] = 1'b1; 
-assign LED[5] = 1'b1; 
-assign LED[6] = ~SLRD; 
-assign LED[7] = ~EP2_has_data; // LED on when we receive data 
+assign DEBUG_LED0 = ~have_sync; 	// LED 0 on when we have sync	
+assign DEBUG_LED1 = ~EP6_ready;		// LED D3 on when we can write to EP6
+assign DEBUG_LED2 = ~data_ready;    // LED on when LT2208 has data 
+assign DEBUG_LED3 = ~EP2_has_data;  // LED on when we receive data 
+
+// Debug pins
+
+assign FPGA_GPIO1 = PWM_clock;
+assign FPGA_GPIO2 = SLRD;
+assign FPGA_GPIO3 = fifo_enable;		
+assign FPGA_GPIO4 = state_PWM[0];	
+assign FPGA_GPIO5 = clock_8;	
+assign FPGA_GPIO6 = state_PWM[1];	
+assign FPGA_GPIO7 = write_full;	
+assign FPGA_GPIO8 = state_PWM[2];		
+assign FPGA_GPIO9 = read_full;		
+assign FPGA_GPIO10 = state_PWM[3];	
+assign FPGA_GPIO11 = led0;
+assign FPGA_GPIO12 = state_PWM[4];	
+assign FPGA_GPIO13 = 1'b0;	
+assign FPGA_GPIO14 = I_PWM_out;	
+assign FPGA_GPIO15 = 1'b0;	
+assign FPGA_GPIO16 = Q_PWM_out;
+
 
 endmodule 
+
+
+
