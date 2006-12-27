@@ -34,7 +34,7 @@ namespace HPSDR_USB_LIB_V1
         public const int VENDOR_REQ_I2C_SPEED_READ = 0x85;
 
         /* Vendor Out Commands */
-        public const int VENDOR_REQ_SET_LED = 0x01;     // wValueL off/on {0,1}; wIndexL: which {0,1}
+        public const int VENDOR_REQ_SET_LED = 0x01;     // wValueL {0,255}
         public const int VENDOR_REQ_FPGA_LOAD = 0x02;
         public const int FL_BEGIN = 0;	                // wIndexL: begin fpga programming cycle.  stalls if trouble.
         public const int FL_XFER = 1;	                // wIndexL: xfer up to 64 bytes of data
@@ -485,6 +485,61 @@ namespace HPSDR_USB_LIB_V1
                 else
                     return true;
             }            
+        }
+
+        static public bool Set_LED_Register ( IntPtr hdev, byte value )
+        {                 
+            int ret = libUSB_Interface.usb_control_msg (
+                hdev,
+                VENDOR_REQ_TYPE_OUT,
+                VENDOR_REQ_SET_LED,
+                value,
+                0,
+                new byte [ 0 ],
+                0,
+                1000
+                );
+            if ( ret < 0 )
+                return false;
+            else
+                return true;
+                        
+        }
+
+        static public bool Set_Passthrough ( IntPtr hdev, int vendor_cmd, int wValue, int wIndex, byte[] buffer )
+        {
+            int ret = libUSB_Interface.usb_control_msg (
+                hdev,
+                VENDOR_REQ_TYPE_OUT,
+                vendor_cmd,
+                wValue,
+                wIndex,
+                buffer,
+                buffer.Length,
+                1000
+                );
+            if ( ret < 0 )
+                return false;
+            else
+                return true;
+        }
+
+        static public bool Get_Passthrough ( IntPtr hdev, int vendor_cmd, int wValue, int wIndex, ref byte [ ] buffer )
+        {
+            int ret = libUSB_Interface.usb_control_msg (
+                hdev,
+                VENDOR_REQ_TYPE_IN,
+                vendor_cmd,
+                wValue,
+                wIndex,
+                buffer,
+                buffer.Length,
+                1000
+                );
+            if ( ret == buffer.Length )
+                return true;
+            else
+                return false;
         }
 
         static public bool Set_CPU_Speed(IntPtr hdev, int value)
