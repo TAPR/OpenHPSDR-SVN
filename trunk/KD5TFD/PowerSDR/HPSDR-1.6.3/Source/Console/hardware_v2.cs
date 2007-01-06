@@ -879,6 +879,11 @@ namespace PowerSDR
 						double dds_tune = c.TuningWordToFreq(dds_tuning_word);	// = dds_tuning_word * c.DDSClockCorrection / Math.Pow(2,48);
 						c.label_DDStune.Text = "DDS: " + dds_tune.ToString("f6");
 					}
+					if ( c != null ) 
+					{
+						double dds_tune = c.TuningWordToFreq(dds_tuning_word); 
+						TFDAPHaudio.SetVFOfreq(dds_tune); 						
+					}
 				
 					for(int i=0; i<6; i++)
 					{
