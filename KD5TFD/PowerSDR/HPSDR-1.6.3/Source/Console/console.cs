@@ -20401,8 +20401,10 @@ namespace PowerSDR
                         }
 
                         double freq = double.Parse(txtVFOAFreq.Text);
+						// this bit does not work as it tells mercury the VFO freq, not what the DDS is tuned to 
+						// moved this bit into hardware_v2.cs where the DDS tuning word is set 
 						// tell ozy/mercury/janus the freq
-						TFDAPHaudio.SetVFOfreq(freq);
+						// TFDAPHaudio.SetVFOfreq(freq);
 
                         //txtVFOAFreq.Text = freq.ToString("f6");
                         UpdateVFOAFreq(freq.ToString("f6"));
