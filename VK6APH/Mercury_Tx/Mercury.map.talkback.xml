@@ -1,0 +1,366 @@
+
+<!--
+This XML file (created on Tue Aug 15 16:42:34 2006) contains limited information
+from the compilation of logic designs using Quartus II software (BUT NOT THE
+LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
+operation of the "TalkBack" feature.  To enable/disable this feature, run
+qtb_install.exe located in your quartus/bin folder.  For more information, go
+to www.altera.com/products/software/download/dnl-download_license.html
+-->
+<talkback>
+<ver>6.0</ver>
+<schema>quartus_version_6.0_build_202.xsd</schema>
+<license>
+	<host_id>0013d3f4cf33</host_id>
+	<t_guard>T000092992</t_guard>
+	<nic_id>0013d3f4cf33</nic_id>
+	<cdrive_id>d86310c5</cdrive_id>
+</license>
+<tool>
+	<name>Quartus II</name>
+	<version>6.0</version>
+	<build>Build 202</build>
+	<service_pack_label>1</service_pack_label>
+	<binary_type>32</binary_type>
+	<module>quartus_map</module>
+	<edition>Web Edition</edition>
+	<eval>Licensed</eval>
+	<compilation_end_time>Tue Aug 15 16:42:34 2006</compilation_end_time>
+</tool>
+<machine>
+	<os>Windows XP</os>
+	<cpu>
+		<proc_count>1</proc_count>
+		<cpu_freq units="MHz">2193</cpu_freq>
+	</cpu>
+	<ram units="MB">960</ram>
+</machine>
+<project>C:/FPGA/Mercury/Mercury</project>
+<revision>Mercury</revision>
+<compilation_summary>
+	<flow_status>Successful - Tue Aug 15 16:42:34 2006</flow_status>
+	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
+	<revision_name>Mercury</revision_name>
+	<top_level_entity_name>Mercury</top_level_entity_name>
+	<family>Cyclone II</family>
+	<device>EP2C5Q208C8</device>
+	<timing_models>Final</timing_models>
+	<met_timing_requirements>N/A</met_timing_requirements>
+	<total_logic_elements>573</total_logic_elements>
+	<total_registers>573</total_registers>
+	<total_pins>52</total_pins>
+	<total_virtual_pins>0</total_virtual_pins>
+	<total_memory_bits>32,768</total_memory_bits>
+	<embedded_multiplier_9_bit_elements>0</embedded_multiplier_9_bit_elements>
+	<total_plls>0</total_plls>
+</compilation_summary>
+<mep_data>
+	<command_line>quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury</command_line>
+</mep_data>
+<software_data>
+	<smart_recompile>off</smart_recompile>
+</software_data>
+<messages>
+	<warning>Warning: Design contains 2 input pin(s) that do not drive logic</warning>
+	<warning>Warning: No output dependent on input pin &quot;FLAGB&quot;</warning>
+	<warning>Warning: No output dependent on input pin &quot;FX2_CLK&quot;</warning>
+	<warning>Warning: Output pins are stuck at VCC or GND</warning>
+	<warning>Warning: Pin &quot;LED[7]&quot; stuck at GND</warning>
+	<info>Info: Generated suppressed messages file C:/FPGA/Mercury/Mercury.map.smsg</info>
+	<info>Info: Quartus II Analysis &amp; Synthesis was successful. 0 errors, 28 warnings</info>
+	<info>Info: Elapsed time: 00:00:07</info>
+	<info>Info: Processing ended: Tue Aug 15 16:42:34 2006</info>
+	<info>Info: Implemented 813 device resources after synthesis - the final resource count might be different</info>
+</messages>
+<analysis___synthesis_settings>
+	<row>
+		<option>Device</option>
+		<setting>EP2C5Q208C8</setting>
+	</row>
+	<row>
+		<option>Top-level entity name</option>
+		<setting>Mercury</setting>
+		<default_value>Mercury</default_value>
+	</row>
+	<row>
+		<option>Family name</option>
+		<setting>Cyclone II</setting>
+		<default_value>Stratix</default_value>
+	</row>
+	<row>
+		<option>Use smart compilation</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Restructure Multiplexers</option>
+		<setting>Auto</setting>
+		<default_value>Auto</default_value>
+	</row>
+	<row>
+		<option>Create Debugging Nodes for IP Cores</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Preserve fewer node names</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Disable OpenCore Plus hardware evaluation</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Verilog Version</option>
+		<setting>Verilog_2001</setting>
+		<default_value>Verilog_2001</default_value>
+	</row>
+	<row>
+		<option>VHDL Version</option>
+		<setting>VHDL93</setting>
+		<default_value>VHDL93</default_value>
+	</row>
+	<row>
+		<option>State Machine Processing</option>
+		<setting>Auto</setting>
+		<default_value>Auto</default_value>
+	</row>
+	<row>
+		<option>Extract Verilog State Machines</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Extract VHDL State Machines</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Add Pass-Through Logic to Inferred RAMs</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>DSP Block Balancing</option>
+		<setting>Auto</setting>
+		<default_value>Auto</default_value>
+	</row>
+	<row>
+		<option>Maximum DSP Block Usage</option>
+		<setting>Unlimited</setting>
+		<default_value>Unlimited</default_value>
+	</row>
+	<row>
+		<option>NOT Gate Push-Back</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Power-Up Don&apos;t Care</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Remove Redundant Logic Cells</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Remove Duplicate Registers</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Ignore CARRY Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Ignore CASCADE Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Ignore GLOBAL Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Ignore ROW GLOBAL Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Ignore LCELL Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Ignore SOFT Buffers</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Limit AHDL Integers to 32 Bits</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Optimization Technique -- Cyclone II</option>
+		<setting>Balanced</setting>
+		<default_value>Balanced</default_value>
+	</row>
+	<row>
+		<option>Carry Chain Length -- Stratix/Stratix GX/Cyclone/MAX II/Cyclone II</option>
+		<setting>70</setting>
+		<default_value>70</default_value>
+	</row>
+	<row>
+		<option>Auto Carry Chains</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Open-Drain Pins</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Remove Duplicate Logic</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Perform WYSIWYG Primitive Resynthesis</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Perform gate-level register retiming</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Allow register retiming to trade off Tsu/Tco with Fmax</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto ROM Replacement</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto RAM Replacement</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Shift Register Replacement</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Clock Enable Replacement</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Allow Synchronous Control Signals</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Force Use of Synchronous Clear Signals</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Auto Resource Sharing</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Allow Any RAM Size For Recognition</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Allow Any ROM Size For Recognition</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Allow Any Shift Register Size For Recognition</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Maximum Number of M4K Memory Blocks</option>
+		<setting>Unlimited</setting>
+		<default_value>Unlimited</default_value>
+	</row>
+	<row>
+		<option>Ignore translate_off and translate_on Synthesis Directives</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Show Parameter Settings Tables in Synthesis Report</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Ignore Maximum Fan-Out Assignments</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Retiming Meta-Stability Register Sequence Length</option>
+		<setting>2</setting>
+		<default_value>2</default_value>
+	</row>
+	<row>
+		<option>PowerPlay Power Optimization</option>
+		<setting>Normal compilation</setting>
+		<default_value>Normal compilation</default_value>
+	</row>
+	<row>
+		<option>HDL message level</option>
+		<setting>Level2</setting>
+		<default_value>Level2</default_value>
+	</row>
+</analysis___synthesis_settings>
+<general_register_statistics>
+	<row>
+		<statistic>Total registers</statistic>
+		<value>573</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Synchronous Clear</statistic>
+		<value>23</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Synchronous Load</statistic>
+		<value>14</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Asynchronous Clear</statistic>
+		<value>404</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Asynchronous Load</statistic>
+		<value>0</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Clock Enable</statistic>
+		<value>179</value>
+	</row>
+	<row>
+		<statistic>Number of registers using Preset</statistic>
+		<value>0</value>
+	</row>
+</general_register_statistics>
+</talkback>
