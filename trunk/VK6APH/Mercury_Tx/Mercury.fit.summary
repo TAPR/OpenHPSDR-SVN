@@ -1,0 +1,16 @@
+Fitter Status : Successful - Thu Jan 11 21:38:34 2007
+Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
+Revision Name : Mercury
+Top-level Entity Name : Mercury
+Family : Cyclone II
+Device : EP2C8Q208C8
+Timing Models : Final
+Total logic elements : 2,446 / 8,256 ( 30 % )
+    Total combinational functions : 2,096 / 8,256 ( 25 % )
+    Dedicated logic registers : 1,728 / 8,256 ( 21 % )
+Total registers : 1728
+Total pins : 76 / 138 ( 55 % )
+Total virtual pins : 0
+Total memory bits : 98,304 / 165,888 ( 59 % )
+Embedded Multiplier 9-bit elements : 0 / 36 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )

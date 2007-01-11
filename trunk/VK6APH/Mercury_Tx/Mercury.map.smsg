@@ -1,0 +1,326 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Thu Jan 11 21:35:23 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
+Info: Found 1 design units, including 1 entities, in source file cicint.v
+    Info: Found entity 1: cicint
+Info: Found 1 design units, including 1 entities, in source file HB.v
+    Info: Found entity 1: HB
+Info: Found 1 design units, including 1 entities, in source file test_filter.v
+    Info: Found entity 1: test_filter
+Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
+    Info: Found entity 1: Rx_fifo
+Info: Found 1 design units, including 1 entities, in source file phase_accumulator.v
+    Info: Found entity 1: phase_accumulator
+Info: Found 1 design units, including 1 entities, in source file filter_14.v
+    Info: Found entity 1: filter_14
+Info: Found 1 design units, including 1 entities, in source file cordic_stage.v
+    Info: Found entity 1: cordic_stage
+Info: Found 1 design units, including 1 entities, in source file cordic.v
+    Info: Found entity 1: cordic
+Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
+    Info: Found entity 1: Tx_fifo
+Info: Found 1 design units, including 1 entities, in source file Mercury.v
+    Info: Found entity 1: Mercury
+Info: Elaborating entity "Mercury" for the top level hierarchy
+Warning (10858): Verilog HDL warning at Mercury.v(195): object sync_Rx_used used but never assigned
+Warning (10030): Net "sync_Rx_used[11]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[10]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[9]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[8]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[7]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[6]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[5]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[4]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
+Info: Elaborating entity "cicint" for hierarchy "cicint:cic_I"
+Warning (10230): Verilog HDL assignment warning at cicint.v(182): truncated value with size 32 to match size of target (11)
+Warning (10230): Verilog HDL assignment warning at cicint.v(188): truncated value with size 32 to match size of target (1)
+Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
+Info: Elaborating entity "cordic" for hierarchy "cordic:rx_cordic"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage0"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage1"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage2"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage3"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage4"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage5"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage6"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage7"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage8"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage9"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage10"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage11"
+Info: Elaborating entity "Rx_fifo" for hierarchy "Rx_fifo:Rx_fifo"
+Warning: Entity "dcfifo" obtained from "C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf" instead of from Quartus II megafunction library
+Warning: Using design file ../Mercury/megafunctions/dcfifo.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info: Found entity 1: dcfifo
+Info: Elaborating entity "dcfifo" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_6bf1.tdf
+    Info: Found entity 1: dcfifo_6bf1
+Info: Elaborating entity "dcfifo_6bf1" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_ndb.tdf
+    Info: Found entity 1: a_gray2bin_ndb
+Info: Elaborating entity "a_gray2bin_ndb" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_r96.tdf
+    Info: Found entity 1: a_graycounter_r96
+Info: Elaborating entity "a_graycounter_r96" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_r96:rdptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_kk6.tdf
+    Info: Found entity 1: a_graycounter_kk6
+Info: Elaborating entity "a_graycounter_kk6" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_kk6:wrptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_jk6.tdf
+    Info: Found entity 1: a_graycounter_jk6
+Info: Elaborating entity "a_graycounter_jk6" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_jk6:wrptr_gp"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_vpu.tdf
+    Info: Found entity 1: altsyncram_vpu
+Info: Elaborating entity "altsyncram_vpu" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_aec1.tdf
+    Info: Found entity 1: altsyncram_aec1
+Info: Elaborating entity "altsyncram_aec1" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_297.tdf
+    Info: Found entity 1: alt_synch_pipe_297
+Info: Elaborating entity "alt_synch_pipe_297" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_s98.tdf
+    Info: Found entity 1: dffpipe_s98
+Info: Elaborating entity "dffpipe_s98" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg|dffpipe_s98:dffpipe7"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_c09.tdf
+    Info: Found entity 1: dffpipe_c09
+Info: Elaborating entity "dffpipe_c09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_brp"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_iv7.tdf
+    Info: Found entity 1: alt_synch_pipe_iv7
+Info: Elaborating entity "alt_synch_pipe_iv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_d09.tdf
+    Info: Found entity 1: dffpipe_d09
+Info: Elaborating entity "dffpipe_d09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_d09:dffpipe10"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_397.tdf
+    Info: Found entity 1: alt_synch_pipe_397
+Info: Elaborating entity "alt_synch_pipe_397" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_t98.tdf
+    Info: Found entity 1: dffpipe_t98
+Info: Elaborating entity "dffpipe_t98" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg|dffpipe_t98:dffpipe12"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_jv7.tdf
+    Info: Found entity 1: alt_synch_pipe_jv7
+Info: Elaborating entity "alt_synch_pipe_jv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_e09.tdf
+    Info: Found entity 1: dffpipe_e09
+Info: Elaborating entity "dffpipe_e09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp|dffpipe_e09:dffpipe14"
+Info: Elaborating entity "Tx_fifo" for hierarchy "Tx_fifo:Tx_fifo"
+Info: Elaborating entity "dcfifo" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_pre1.tdf
+    Info: Found entity 1: dcfifo_pre1
+Info: Elaborating entity "dcfifo_pre1" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_mdb.tdf
+    Info: Found entity 1: a_gray2bin_mdb
+Info: Elaborating entity "a_gray2bin_mdb" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|a_gray2bin_mdb:wrptr_g_gray2bin"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_q96.tdf
+    Info: Found entity 1: a_graycounter_q96
+Info: Elaborating entity "a_graycounter_q96" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|a_graycounter_q96:rdptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_lk6.tdf
+    Info: Found entity 1: a_graycounter_lk6
+Info: Elaborating entity "a_graycounter_lk6" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|a_graycounter_lk6:wrptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_ik6.tdf
+    Info: Found entity 1: a_graycounter_ik6
+Info: Elaborating entity "a_graycounter_ik6" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|a_graycounter_ik6:wrptr_gp"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_tpu.tdf
+    Info: Found entity 1: altsyncram_tpu
+Info: Elaborating entity "altsyncram_tpu" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|altsyncram_tpu:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_8ec1.tdf
+    Info: Found entity 1: altsyncram_8ec1
+Info: Elaborating entity "altsyncram_8ec1" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_hv7.tdf
+    Info: Found entity 1: alt_synch_pipe_hv7
+Info: Elaborating entity "alt_synch_pipe_hv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|alt_synch_pipe_hv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_b09.tdf
+    Info: Found entity 1: dffpipe_b09
+Info: Elaborating entity "dffpipe_b09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|alt_synch_pipe_hv7:rs_dgwp|dffpipe_b09:dffpipe6"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_497.tdf
+    Info: Found entity 1: alt_synch_pipe_497
+Info: Elaborating entity "alt_synch_pipe_497" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|alt_synch_pipe_497:wrempty_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_u98.tdf
+    Info: Found entity 1: dffpipe_u98
+Info: Elaborating entity "dffpipe_u98" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|alt_synch_pipe_497:wrempty_reg|dffpipe_u98:dffpipe8"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_kv7.tdf
+    Info: Found entity 1: alt_synch_pipe_kv7
+Info: Elaborating entity "alt_synch_pipe_kv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|alt_synch_pipe_kv7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_f09.tdf
+    Info: Found entity 1: dffpipe_f09
+Info: Elaborating entity "dffpipe_f09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_f09:dffpipe10"
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage11" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage10" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage9" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage8" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage7" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage6" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage5" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage4" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage3" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage2" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage1" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage0" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "Iin" on the entity instantiation of "rx_cordic" is connected to a signal of width 14. The formal width of the signal in the module is 16.  Extra bits will be driven by GND.
+Warning: Port "Iout" on the entity instantiation of "rx_cordic" is connected to a signal of width 14. The formal width of the signal in the module is 16.  Extra bits will be left dangling without any fanout logic.
+Warning: Port "Qin" on the entity instantiation of "rx_cordic" is connected to a signal of width 14. The formal width of the signal in the module is 16.  Extra bits will be driven by GND.
+Warning: Port "Qout" on the entity instantiation of "rx_cordic" is connected to a signal of width 14. The formal width of the signal in the module is 16.  Extra bits will be left dangling without any fanout logic.
+Warning: Reduced register "AD_state[4]" with stuck data_in port to stuck value GND
+Warning: Reduced register "state_PWM[4]" with stuck data_in port to stuck value GND
+Info: Power-up level of register "rx_avail[11]" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "rx_avail[11]" with stuck data_in port to stuck value VCC
+Info: Power-up level of register "rx_avail[10]" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "rx_avail[10]" with stuck data_in port to stuck value VCC
+Info: Power-up level of register "rx_avail[9]" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "rx_avail[9]" with stuck data_in port to stuck value VCC
+Info: Power-up level of register "rx_avail[8]" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "rx_avail[8]" with stuck data_in port to stuck value VCC
+Info: Power-up level of register "rx_avail[7]" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "rx_avail[7]" with stuck data_in port to stuck value VCC
+Info: Power-up level of register "rx_avail[6]" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "rx_avail[6]" with stuck data_in port to stuck value VCC
+Info: Power-up level of register "rx_avail[5]" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "rx_avail[5]" with stuck data_in port to stuck value VCC
+Info: Power-up level of register "rx_avail[4]" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "rx_avail[4]" with stuck data_in port to stuck value VCC
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cicint:cic_Q|diff1[13]" merged to single register "cicint:cic_Q|diff1[14]"
+    Info: Duplicate register "cicint:cic_Q|diff2[14]" merged to single register "cicint:cic_Q|diff2[15]"
+    Info: Duplicate register "cicint:cic_Q|diff3[15]" merged to single register "cicint:cic_Q|diff3[16]"
+    Info: Duplicate register "cicint:cic_Q|diff4[16]" merged to single register "cicint:cic_Q|diff4[17]"
+    Info: Duplicate register "cicint:cic_I|diff1[13]" merged to single register "cicint:cic_I|diff1[14]"
+    Info: Duplicate register "cicint:cic_I|diff2[14]" merged to single register "cicint:cic_I|diff2[15]"
+    Info: Duplicate register "cicint:cic_I|diff3[15]" merged to single register "cicint:cic_I|diff3[16]"
+    Info: Duplicate register "cicint:cic_I|diff4[16]" merged to single register "cicint:cic_I|diff4[17]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cicint:cic_I|cur_count[9]" merged to single register "cicint:cic_Q|cur_count[9]"
+    Info: Duplicate register "cicint:cic_I|cur_count[8]" merged to single register "cicint:cic_Q|cur_count[8]"
+    Info: Duplicate register "cicint:cic_I|cur_count[7]" merged to single register "cicint:cic_Q|cur_count[7]"
+    Info: Duplicate register "cicint:cic_I|cur_count[6]" merged to single register "cicint:cic_Q|cur_count[6]"
+    Info: Duplicate register "cicint:cic_I|cur_count[5]" merged to single register "cicint:cic_Q|cur_count[5]"
+    Info: Duplicate register "cicint:cic_I|cur_count[4]" merged to single register "cicint:cic_Q|cur_count[4]"
+    Info: Duplicate register "cicint:cic_I|cur_count[3]" merged to single register "cicint:cic_Q|cur_count[3]"
+    Info: Duplicate register "cicint:cic_I|cur_count[2]" merged to single register "cicint:cic_Q|cur_count[2]"
+    Info: Duplicate register "cicint:cic_I|cur_count[1]" merged to single register "cicint:cic_Q|cur_count[1]"
+    Info: Duplicate register "cicint:cic_I|cur_count[0]" merged to single register "cicint:cic_Q|cur_count[0]"
+    Info: Duplicate register "cicint:cic_I|cur_count[10]" merged to single register "cicint:cic_Q|cur_count[10]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "register[12]" merged to single register "register[13]"
+    Info: Duplicate register "register[11]" merged to single register "register[13]"
+    Info: Duplicate register "register[10]" merged to single register "register[13]"
+    Info: Duplicate register "register[9]" merged to single register "register[13]"
+    Info: Duplicate register "register[8]" merged to single register "register[13]"
+    Info: Duplicate register "register[5]" merged to single register "register[6]"
+    Info: Duplicate register "register[4]" merged to single register "register[6]"
+    Info: Duplicate register "register[3]" merged to single register "register[6]"
+    Info: Duplicate register "register[2]" merged to single register "register[6]"
+    Info: Duplicate register "register[1]" merged to single register "register[6]"
+    Info: Duplicate register "register[0]" merged to single register "register[6]"
+Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
+Warning: Reduced register "register[7]" with stuck data_in port to stuck value GND
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[16]" merged to single register "cordic:rx_cordic|Qstage0[17]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[15]" merged to single register "cordic:rx_cordic|Qstage0[17]"
+    Info: Duplicate register "cordic:rx_cordic|Istage0[17]" merged to single register "cordic:rx_cordic|Istage0[16]"
+    Info: Duplicate register "cordic:rx_cordic|Istage0[15]" merged to single register "cordic:rx_cordic|Istage0[16]"
+    Info: Duplicate register "register[14]" merged to single register "register[13]"
+Info: State machine "|Mercury|freq" contains 4 states
+Info: Selected Auto state machine encoding method for state machine "|Mercury|freq"
+Info: Encoding result for state machine "|Mercury|freq"
+    Info: Completed encoding using 4 state bits
+        Info: Encoded state bit "freq.001"
+        Info: Encoded state bit "freq.011"
+        Info: Encoded state bit "freq.010"
+        Info: Encoded state bit "freq.000"
+    Info: State "|Mercury|freq.000" uses code string "0000"
+    Info: State "|Mercury|freq.010" uses code string "0011"
+    Info: State "|Mercury|freq.011" uses code string "0101"
+    Info: State "|Mercury|freq.001" uses code string "1001"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "clock_count[0]" merged to single register "PWM_count[0]"
+    Info: Duplicate register "clock_count[1]" merged to single register "PWM_count[1]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "clock_count[2]" merged to single register "PWM_count[2]"
+    Info: Duplicate register "cordic:rx_cordic|Istage0[16]" merged to single register "cordic:rx_cordic|Istage0[14]"
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[17]" merged to single register "cordic:rx_cordic|Qstage0[14]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[17]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[16]"
+    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[17]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[16]"
+Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_add_sub.tdf
+    Info: Found entity 1: lpm_add_sub
+Info: Elaborated megafunction instantiation "cordic:rx_cordic|cordic_stage:cordic_stage10|lpm_add_sub:Add1"
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_sjg.tdf
+    Info: Found entity 1: add_sub_sjg
+Info: Elaborated megafunction instantiation "cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1"
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_rjg.tdf
+    Info: Found entity 1: add_sub_rjg
+Warning: Reduced register "pulse[3]" with stuck data_in port to stuck value GND
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "FIFO_ADR[0]" stuck at GND
+    Warning: Pin "PKEND" stuck at VCC
+    Warning: Pin "FPGA_GPIO12" stuck at GND
+    Warning: Pin "FPGA_GPIO13" stuck at GND
+    Warning: Pin "FPGA_GPIO15" stuck at GND
+Info: 40 registers lost all their fanouts during netlist optimizations. The first 40 are displayed below.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/p0addr" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[9]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[8]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[7]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[6]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[5]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[4]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[3]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/parity_ff" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[9]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[8]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[7]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[6]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[5]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[4]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[3]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/parity_ff" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/ws_bwp/dffe7a[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/ws_brp/dffe7a[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/ws_bwp/dffe9a[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/ws_brp/dffe9a[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "synced_Rx_used[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "synced_Rx_used[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "synced_Rx_used[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "freq~9" lost all its fanouts during netlist optimizations.
+    Info: Register "freq~10" lost all its fanouts during netlist optimizations.
+    Info: Register "freq~11" lost all its fanouts during netlist optimizations.
+    Info: Register "rx_cordic/cordic_stage9/PHout[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "rx_cordic/cordic_stage8/PHout[0]" lost all its fanouts during netlist optimizations.
+Warning: Design contains 16 input pin(s) that do not drive logic
+    Warning: No output dependent on input pin "ADC[0]"
+    Warning: No output dependent on input pin "ADC[1]"
+    Warning: No output dependent on input pin "ADC[2]"
+    Warning: No output dependent on input pin "ADC[3]"
+    Warning: No output dependent on input pin "ADC[4]"
+    Warning: No output dependent on input pin "ADC[5]"
+    Warning: No output dependent on input pin "ADC[6]"
+    Warning: No output dependent on input pin "ADC[7]"
+    Warning: No output dependent on input pin "ADC[8]"
+    Warning: No output dependent on input pin "ADC[9]"
+    Warning: No output dependent on input pin "ADC[10]"
+    Warning: No output dependent on input pin "ADC[11]"
+    Warning: No output dependent on input pin "ADC[12]"
+    Warning: No output dependent on input pin "ADC[13]"
+    Warning: No output dependent on input pin "ADC[14]"
+    Warning: No output dependent on input pin "ADC[15]"
+Info: Implemented 2687 device resources after synthesis - the final resource count might be different
+    Info: Implemented 20 input pins
+    Info: Implemented 40 output pins
+    Info: Implemented 16 bidirectional pins
+    Info: Implemented 2579 logic cells
+    Info: Implemented 32 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 65 warnings
+    Info: Allocated 139 megabytes of memory during processing
+    Info: Processing ended: Thu Jan 11 21:36:09 2007
+    Info: Elapsed time: 00:00:46
