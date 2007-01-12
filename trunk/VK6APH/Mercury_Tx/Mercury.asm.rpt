@@ -1,5 +1,5 @@
 Assembler report for Mercury
-Thu Jan 11 21:39:08 2007
+Fri Jan 12 13:31:14 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -10,9 +10,9 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.sof
-  6. Assembler Device Options: C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.pof
-  7. Assembler Device Options: C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.rbf
+  5. Assembler Device Options: C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.sof
+  6. Assembler Device Options: C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.pof
+  7. Assembler Device Options: C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.rbf
   8. Assembler Messages
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Thu Jan 11 21:39:08 2007 ;
+; Assembler Status      ; Successful - Fri Jan 12 13:31:14 2007 ;
 ; Revision Name         ; Mercury                               ;
 ; Top-level Entity Name ; Mercury                               ;
 ; Family                ; Cyclone II                            ;
@@ -77,48 +77,48 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+----------+---------------+
 
 
-+-----------------------------------------------+
-; Assembler Generated Files                     ;
-+-----------------------------------------------+
-; File Name                                     ;
-+-----------------------------------------------+
-; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.sof ;
-; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.pof ;
-; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.rbf ;
-+-----------------------------------------------+
++----------------------------------------------+
+; Assembler Generated Files                    ;
++----------------------------------------------+
+; File Name                                    ;
++----------------------------------------------+
+; C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.sof ;
+; C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.pof ;
+; C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.rbf ;
++----------------------------------------------+
 
 
-+-------------------------------------------------------------------------+
-; Assembler Device Options: C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.sof ;
-+----------------+--------------------------------------------------------+
-; Option         ; Setting                                                ;
-+----------------+--------------------------------------------------------+
-; Device         ; EP2C8Q208C8                                            ;
-; JTAG usercode  ; 0xFFFFFFFF                                             ;
-; Checksum       ; 0x0023CA50                                             ;
-+----------------+--------------------------------------------------------+
++------------------------------------------------------------------------+
+; Assembler Device Options: C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.sof ;
++----------------+-------------------------------------------------------+
+; Option         ; Setting                                               ;
++----------------+-------------------------------------------------------+
+; Device         ; EP2C8Q208C8                                           ;
+; JTAG usercode  ; 0xFFFFFFFF                                            ;
+; Checksum       ; 0x00243B92                                            ;
++----------------+-------------------------------------------------------+
 
 
-+-------------------------------------------------------------------------+
-; Assembler Device Options: C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.pof ;
-+--------------------+----------------------------------------------------+
-; Option             ; Setting                                            ;
-+--------------------+----------------------------------------------------+
-; Device             ; EPCS4                                              ;
-; JTAG usercode      ; 0x00000000                                         ;
-; Checksum           ; 0x06CA7ED5                                         ;
-; Compression Ratio  ; 2                                                  ;
-+--------------------+----------------------------------------------------+
++------------------------------------------------------------------------+
+; Assembler Device Options: C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.pof ;
++--------------------+---------------------------------------------------+
+; Option             ; Setting                                           ;
++--------------------+---------------------------------------------------+
+; Device             ; EPCS4                                             ;
+; JTAG usercode      ; 0x00000000                                        ;
+; Checksum           ; 0x06CC1FBB                                        ;
+; Compression Ratio  ; 2                                                 ;
++--------------------+---------------------------------------------------+
 
 
-+-------------------------------------------------------------------------+
-; Assembler Device Options: C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.rbf ;
-+---------------------+---------------------------------------------------+
-; Option              ; Setting                                           ;
-+---------------------+---------------------------------------------------+
-; Raw Binary File     ;                                                   ;
-;  Compression Ratio  ; 2                                                 ;
-+---------------------+---------------------------------------------------+
++------------------------------------------------------------------------+
+; Assembler Device Options: C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.rbf ;
++---------------------+--------------------------------------------------+
+; Option              ; Setting                                          ;
++---------------------+--------------------------------------------------+
+; Raw Binary File     ;                                                  ;
+;  Compression Ratio  ; 2                                                ;
++---------------------+--------------------------------------------------+
 
 
 +--------------------+
@@ -127,13 +127,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Jan 11 21:38:57 2007
+    Info: Processing started: Fri Jan 12 13:31:04 2007
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Mercury -c Mercury
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Allocated 131 megabytes of memory during processing
-    Info: Processing ended: Thu Jan 11 21:39:08 2007
-    Info: Elapsed time: 00:00:11
+    Info: Processing ended: Fri Jan 12 13:31:14 2007
+    Info: Elapsed time: 00:00:10
 
 

@@ -1,5 +1,5 @@
 Fitter report for Mercury
-Thu Jan 11 21:38:35 2007
+Fri Jan 12 13:31:00 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -61,17 +61,17 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Fitter Summary                                                               ;
 +------------------------------------+-----------------------------------------+
-; Fitter Status                      ; Successful - Thu Jan 11 21:38:34 2007   ;
+; Fitter Status                      ; Successful - Fri Jan 12 13:30:59 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; Mercury                                 ;
 ; Family                             ; Cyclone II                              ;
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
-; Total logic elements               ; 2,446 / 8,256 ( 30 % )                  ;
-;     Total combinational functions  ; 2,096 / 8,256 ( 25 % )                  ;
-;     Dedicated logic registers      ; 1,728 / 8,256 ( 21 % )                  ;
-; Total registers                    ; 1728                                    ;
+; Total logic elements               ; 2,443 / 8,256 ( 30 % )                  ;
+;     Total combinational functions  ; 2,092 / 8,256 ( 25 % )                  ;
+;     Dedicated logic registers      ; 1,724 / 8,256 ( 21 % )                  ;
+; Total registers                    ; 1724                                    ;
 ; Total pins                         ; 76 / 138 ( 55 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304 / 165,888 ( 59 % )               ;
@@ -125,7 +125,7 @@ applicable agreement for further details.
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.pin.
+The pin-out file can be found in C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.pin.
 
 
 +--------------------------------------------------------------------------+
@@ -133,26 +133,26 @@ The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.pin.
 +---------------------------------------------+----------------------------+
 ; Resource                                    ; Usage                      ;
 +---------------------------------------------+----------------------------+
-; Total logic elements                        ; 2,446 / 8,256 ( 30 % )     ;
-;     -- Combinational with no register       ; 718                        ;
-;     -- Register only                        ; 350                        ;
-;     -- Combinational with a register        ; 1378                       ;
+; Total logic elements                        ; 2,443 / 8,256 ( 30 % )     ;
+;     -- Combinational with no register       ; 719                        ;
+;     -- Register only                        ; 351                        ;
+;     -- Combinational with a register        ; 1373                       ;
 ;                                             ;                            ;
 ; Logic element usage by number of LUT inputs ;                            ;
 ;     -- 4 input functions                    ; 178                        ;
-;     -- 3 input functions                    ; 1285                       ;
-;     -- <=2 input functions                  ; 633                        ;
-;     -- Register only                        ; 350                        ;
+;     -- 3 input functions                    ; 1282                       ;
+;     -- <=2 input functions                  ; 632                        ;
+;     -- Register only                        ; 351                        ;
 ;                                             ;                            ;
 ; Logic elements by mode                      ;                            ;
-;     -- normal mode                          ; 714                        ;
+;     -- normal mode                          ; 710                        ;
 ;     -- arithmetic mode                      ; 1382                       ;
 ;                                             ;                            ;
-; Total registers*                            ; 1,728 / 8,646 ( 20 % )     ;
-;     -- Dedicated logic registers            ; 1,728 / 8,256 ( 21 % )     ;
+; Total registers*                            ; 1,724 / 8,646 ( 20 % )     ;
+;     -- Dedicated logic registers            ; 1,724 / 8,256 ( 21 % )     ;
 ;     -- I/O registers                        ; 0 / 390 ( 0 % )            ;
 ;                                             ;                            ;
-; Total LABs:  partially or completely used   ; 198 / 516 ( 38 % )         ;
+; Total LABs:  partially or completely used   ; 184 / 516 ( 36 % )         ;
 ; User inserted logic elements                ; 0                          ;
 ; Virtual pins                                ; 0                          ;
 ; I/O pins                                    ; 76 / 138 ( 55 % )          ;
@@ -164,13 +164,13 @@ The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.pin.
 ; Embedded Multiplier 9-bit elements          ; 0 / 36 ( 0 % )             ;
 ; PLLs                                        ; 0 / 2 ( 0 % )              ;
 ; Global clocks                               ; 8 / 8 ( 100 % )            ;
-; Average interconnect usage                  ; 7%                         ;
-; Peak interconnect usage                     ; 19%                        ;
+; Average interconnect usage                  ; 8%                         ;
+; Peak interconnect usage                     ; 15%                        ;
 ; Maximum fan-out node                        ; clock                      ;
-; Maximum fan-out                             ; 769                        ;
+; Maximum fan-out                             ; 765                        ;
 ; Highest non-global fan-out signal           ; clock                      ;
-; Highest non-global fan-out                  ; 769                        ;
-; Total fan-out                               ; 11851                      ;
+; Highest non-global fan-out                  ; 765                        ;
+; Total fan-out                               ; 11821                      ;
 ; Average fan-out                             ; 2.83                       ;
 +---------------------------------------------+----------------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
@@ -201,7 +201,7 @@ The pin-out file can be found in C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.pin.
 ; FLAGA   ; 198   ; 2        ; 5            ; 19           ; 1           ; 4                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; FLAGC   ; 5     ; 1        ; 0            ; 17           ; 0           ; 5                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; IFCLK   ; 24    ; 1        ; 0            ; 9            ; 1           ; 1                     ; 0                  ; yes    ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; clock   ; 179   ; 2        ; 18           ; 19           ; 0           ; 769                   ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; clock   ; 179   ; 2        ; 18           ; 19           ; 0           ; 765                   ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 +---------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
 
 
@@ -547,7 +547,7 @@ Note: User assignments will override these defaults. The user specified values a
 +-----------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                    ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                                                                                                             ;
 +-----------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------------------------------------------------------------------------------------------------------------------+
-; |Mercury                                      ; 2446 (392)  ; 1728 (291)                ; 0 (0)         ; 98304       ; 24   ; 0            ; 0       ; 0         ; 76   ; 0            ; 718 (101)    ; 350 (166)         ; 1378 (124)       ; |Mercury                                                                                                                        ;
+; |Mercury                                      ; 2443 (387)  ; 1724 (287)                ; 0 (0)         ; 98304       ; 24   ; 0            ; 0       ; 0         ; 76   ; 0            ; 719 (100)    ; 351 (165)         ; 1373 (121)       ; |Mercury                                                                                                                        ;
 ;    |Rx_fifo:Rx_fifo|                          ; 112 (0)     ; 108 (0)                   ; 0 (0)         ; 65536       ; 16   ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (0)        ; 38 (0)            ; 70 (0)           ; |Mercury|Rx_fifo:Rx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|               ; 112 (0)     ; 108 (0)                   ; 0 (0)         ; 65536       ; 16   ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (0)        ; 38 (0)            ; 70 (0)           ; |Mercury|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
 ;          |dcfifo_6bf1:auto_generated|         ; 112 (34)    ; 108 (29)                  ; 0 (0)         ; 65536       ; 16   ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 38 (26)           ; 70 (19)          ; |Mercury|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated                                                     ;
@@ -578,9 +578,9 @@ Note: User assignments will override these defaults. The user specified values a
 ;                |altsyncram_8ec1:altsyncram4|  ; 0 (0)       ; 0 (0)                     ; 0 (0)         ; 32768       ; 8    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |Mercury|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4 ;
 ;             |dffpipe_b09:ws_brp|              ; 11 (11)     ; 11 (11)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 11 (11)          ; |Mercury|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|dffpipe_b09:ws_brp                                  ;
 ;             |dffpipe_b09:ws_bwp|              ; 11 (11)     ; 11 (11)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 11 (11)          ; |Mercury|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|dffpipe_b09:ws_bwp                                  ;
-;    |cicint:cic_I|                             ; 339 (339)   ; 299 (299)                 ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 39 (39)      ; 31 (31)           ; 269 (269)        ; |Mercury|cicint:cic_I                                                                                                           ;
-;    |cicint:cic_Q|                             ; 345 (345)   ; 309 (309)                 ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 36 (36)      ; 29 (29)           ; 280 (280)        ; |Mercury|cicint:cic_Q                                                                                                           ;
-;    |cordic:rx_cordic|                         ; 1178 (120)  ; 616 (45)                  ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 537 (50)     ; 62 (45)           ; 579 (25)         ; |Mercury|cordic:rx_cordic                                                                                                       ;
+;    |cicint:cic_I|                             ; 339 (339)   ; 299 (299)                 ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 39 (39)      ; 29 (29)           ; 271 (271)        ; |Mercury|cicint:cic_I                                                                                                           ;
+;    |cicint:cic_Q|                             ; 345 (345)   ; 309 (309)                 ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 36 (36)      ; 33 (33)           ; 276 (276)        ; |Mercury|cicint:cic_Q                                                                                                           ;
+;    |cordic:rx_cordic|                         ; 1178 (120)  ; 616 (45)                  ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 539 (52)     ; 62 (45)           ; 577 (23)         ; |Mercury|cordic:rx_cordic                                                                                                       ;
 ;       |cordic_stage:cordic_stage0|            ; 96 (64)     ; 49 (49)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 47 (15)      ; 13 (13)           ; 36 (2)           ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage0                                                                            ;
 ;          |lpm_add_sub:Add1|                   ; 66 (0)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 32 (0)       ; 0 (0)             ; 34 (0)           ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1                                                           ;
 ;             |add_sub_rjg:auto_generated|      ; 66 (66)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 32 (32)      ; 0 (0)             ; 34 (34)          ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1|add_sub_rjg:auto_generated                                ;
@@ -759,18 +759,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; IFCLK                                                       ;                   ;         ;
 ; clock                                                       ;                   ;         ;
 ;      - PWM_clock                                            ; 0                 ; 0       ;
-;      - clock_8                                              ; 0                 ; 0       ;
-;      - pulse[2]                                             ; 1                 ; 0       ;
-;      - pulse[1]                                             ; 0                 ; 0       ;
-;      - pulse[0]                                             ; 1                 ; 0       ;
-;      - data_ready                                           ; 1                 ; 0       ;
-;      - cicint:cic_I|ce_out_reg                              ; 0                 ; 0       ;
-;      - I_PWM_accumulator[16]                                ; 0                 ; 0       ;
-;      - Q_PWM_accumulator[16]                                ; 0                 ; 0       ;
-;      - clk_enable                                           ; 0                 ; 0       ;
-;      - PWM_count[2]                                         ; 0                 ; 0       ;
-;      - PWM_count[1]                                         ; 0                 ; 0       ;
-;      - PWM_count[0]                                         ; 0                 ; 0       ;
 ;      - PWM_count[10]                                        ; 0                 ; 0       ;
 ;      - PWM_count[9]                                         ; 0                 ; 0       ;
 ;      - PWM_count[8]                                         ; 0                 ; 0       ;
@@ -779,6 +767,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - PWM_count[5]                                         ; 0                 ; 0       ;
 ;      - PWM_count[4]                                         ; 0                 ; 0       ;
 ;      - PWM_count[3]                                         ; 0                 ; 0       ;
+;      - PWM_count[2]                                         ; 0                 ; 0       ;
+;      - PWM_count[1]                                         ; 0                 ; 0       ;
+;      - PWM_count[0]                                         ; 0                 ; 0       ;
+;      - clock_8                                              ; 0                 ; 0       ;
+;      - clk_enable                                           ; 0                 ; 0       ;
+;      - cicint:cic_I|ce_out_reg                              ; 0                 ; 0       ;
+;      - I_PWM_accumulator[16]                                ; 0                 ; 0       ;
+;      - Q_PWM_accumulator[16]                                ; 0                 ; 0       ;
 ;      - clock_count[3]                                       ; 1                 ; 0       ;
 ;      - clock_count[4]                                       ; 1                 ; 0       ;
 ;      - I_PWM_accumulator[15]                                ; 0                 ; 0       ;
@@ -788,37 +784,37 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - I_PWM_accumulator[13]                                ; 0                 ; 0       ;
 ;      - I_Data_in[13]                                        ; 0                 ; 0       ;
 ;      - I_PWM_accumulator[12]                                ; 0                 ; 0       ;
-;      - I_Data_in[12]                                        ; 1                 ; 0       ;
+;      - I_Data_in[12]                                        ; 0                 ; 0       ;
 ;      - I_PWM_accumulator[11]                                ; 0                 ; 0       ;
 ;      - I_Data_in[11]                                        ; 0                 ; 0       ;
 ;      - I_PWM_accumulator[10]                                ; 0                 ; 0       ;
 ;      - I_Data_in[10]                                        ; 0                 ; 0       ;
 ;      - I_PWM_accumulator[9]                                 ; 0                 ; 0       ;
-;      - I_Data_in[9]                                         ; 1                 ; 0       ;
+;      - I_Data_in[9]                                         ; 0                 ; 0       ;
 ;      - I_PWM_accumulator[8]                                 ; 0                 ; 0       ;
 ;      - I_Data_in[8]                                         ; 0                 ; 0       ;
-;      - I_PWM_accumulator[7]                                 ; 0                 ; 0       ;
-;      - I_Data_in[7]                                         ; 1                 ; 0       ;
-;      - I_PWM_accumulator[6]                                 ; 0                 ; 0       ;
-;      - I_Data_in[6]                                         ; 1                 ; 0       ;
-;      - I_PWM_accumulator[5]                                 ; 0                 ; 0       ;
-;      - I_Data_in[5]                                         ; 1                 ; 0       ;
-;      - I_PWM_accumulator[4]                                 ; 0                 ; 0       ;
-;      - I_Data_in[4]                                         ; 1                 ; 0       ;
-;      - I_PWM_accumulator[3]                                 ; 0                 ; 0       ;
+;      - I_PWM_accumulator[7]                                 ; 1                 ; 0       ;
+;      - I_Data_in[7]                                         ; 0                 ; 0       ;
+;      - I_PWM_accumulator[6]                                 ; 1                 ; 0       ;
+;      - I_Data_in[6]                                         ; 0                 ; 0       ;
+;      - I_PWM_accumulator[5]                                 ; 1                 ; 0       ;
+;      - I_Data_in[5]                                         ; 0                 ; 0       ;
+;      - I_PWM_accumulator[4]                                 ; 1                 ; 0       ;
+;      - I_Data_in[4]                                         ; 0                 ; 0       ;
+;      - I_PWM_accumulator[3]                                 ; 1                 ; 0       ;
 ;      - I_Data_in[3]                                         ; 0                 ; 0       ;
-;      - I_PWM_accumulator[2]                                 ; 0                 ; 0       ;
-;      - I_Data_in[2]                                         ; 1                 ; 0       ;
-;      - I_PWM_accumulator[1]                                 ; 0                 ; 0       ;
+;      - I_PWM_accumulator[2]                                 ; 1                 ; 0       ;
+;      - I_Data_in[2]                                         ; 0                 ; 0       ;
+;      - I_PWM_accumulator[1]                                 ; 1                 ; 0       ;
 ;      - I_Data_in[1]                                         ; 0                 ; 0       ;
-;      - I_PWM_accumulator[0]                                 ; 0                 ; 0       ;
+;      - I_PWM_accumulator[0]                                 ; 1                 ; 0       ;
 ;      - I_Data_in[0]                                         ; 0                 ; 0       ;
 ;      - Q_PWM_accumulator[15]                                ; 0                 ; 0       ;
 ;      - Q_Data_in[15]                                        ; 0                 ; 0       ;
 ;      - Q_PWM_accumulator[14]                                ; 0                 ; 0       ;
 ;      - Q_Data_in[14]                                        ; 0                 ; 0       ;
 ;      - Q_PWM_accumulator[13]                                ; 0                 ; 0       ;
-;      - Q_Data_in[13]                                        ; 0                 ; 0       ;
+;      - Q_Data_in[13]                                        ; 1                 ; 0       ;
 ;      - Q_PWM_accumulator[12]                                ; 0                 ; 0       ;
 ;      - Q_Data_in[12]                                        ; 0                 ; 0       ;
 ;      - Q_PWM_accumulator[11]                                ; 0                 ; 0       ;
@@ -840,7 +836,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - Q_PWM_accumulator[3]                                 ; 0                 ; 0       ;
 ;      - Q_Data_in[3]                                         ; 0                 ; 0       ;
 ;      - Q_PWM_accumulator[2]                                 ; 0                 ; 0       ;
-;      - Q_Data_in[2]                                         ; 0                 ; 0       ;
+;      - Q_Data_in[2]                                         ; 1                 ; 0       ;
 ;      - Q_PWM_accumulator[1]                                 ; 0                 ; 0       ;
 ;      - Q_Data_in[1]                                         ; 0                 ; 0       ;
 ;      - Q_PWM_accumulator[0]                                 ; 0                 ; 0       ;
@@ -882,24 +878,24 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - phase_accumulator:rx_phase_accumulator|phase_out[18] ; 0                 ; 0       ;
 ;      - phase_accumulator:rx_phase_accumulator|phase_out[17] ; 0                 ; 0       ;
 ;      - phase_accumulator:rx_phase_accumulator|phase_out[16] ; 0                 ; 0       ;
-;      - cicint:cic_Q|output_register[13]                     ; 1                 ; 0       ;
+;      - cicint:cic_Q|output_register[13]                     ; 0                 ; 0       ;
 ;      - cicint:cic_Q|output_register[12]                     ; 1                 ; 0       ;
-;      - cicint:cic_Q|output_register[11]                     ; 1                 ; 0       ;
-;      - cicint:cic_Q|output_register[10]                     ; 1                 ; 0       ;
+;      - cicint:cic_Q|output_register[11]                     ; 0                 ; 0       ;
+;      - cicint:cic_Q|output_register[10]                     ; 0                 ; 0       ;
 ;      - cicint:cic_Q|output_register[9]                      ; 0                 ; 0       ;
-;      - cicint:cic_Q|output_register[8]                      ; 1                 ; 0       ;
+;      - cicint:cic_Q|output_register[8]                      ; 0                 ; 0       ;
 ;      - cicint:cic_Q|output_register[7]                      ; 1                 ; 0       ;
-;      - cicint:cic_Q|output_register[6]                      ; 1                 ; 0       ;
-;      - cicint:cic_Q|output_register[5]                      ; 1                 ; 0       ;
-;      - cicint:cic_Q|output_register[4]                      ; 1                 ; 0       ;
-;      - cicint:cic_Q|output_register[3]                      ; 1                 ; 0       ;
-;      - cicint:cic_Q|output_register[2]                      ; 1                 ; 0       ;
+;      - cicint:cic_Q|output_register[6]                      ; 0                 ; 0       ;
+;      - cicint:cic_Q|output_register[5]                      ; 0                 ; 0       ;
+;      - cicint:cic_Q|output_register[4]                      ; 0                 ; 0       ;
+;      - cicint:cic_Q|output_register[3]                      ; 0                 ; 0       ;
+;      - cicint:cic_Q|output_register[2]                      ; 0                 ; 0       ;
 ;      - cicint:cic_Q|output_register[1]                      ; 1                 ; 0       ;
-;      - cicint:cic_Q|output_register[0]                      ; 1                 ; 0       ;
+;      - cicint:cic_Q|output_register[0]                      ; 0                 ; 0       ;
 ;      - phase_accumulator:rx_phase_accumulator|phase_out[31] ; 0                 ; 0       ;
-;      - cicint:cic_I|output_register[13]                     ; 1                 ; 0       ;
+;      - cicint:cic_I|output_register[13]                     ; 0                 ; 0       ;
 ;      - cicint:cic_I|output_register[12]                     ; 0                 ; 0       ;
-;      - cicint:cic_I|output_register[11]                     ; 1                 ; 0       ;
+;      - cicint:cic_I|output_register[11]                     ; 0                 ; 0       ;
 ;      - cicint:cic_I|output_register[10]                     ; 0                 ; 0       ;
 ;      - cicint:cic_I|output_register[9]                      ; 0                 ; 0       ;
 ;      - cicint:cic_I|output_register[8]                      ; 0                 ; 0       ;
@@ -911,81 +907,81 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - cicint:cic_I|output_register[2]                      ; 0                 ; 0       ;
 ;      - cicint:cic_I|output_register[1]                      ; 0                 ; 0       ;
 ;      - cicint:cic_I|output_register[0]                      ; 0                 ; 0       ;
-;      - sync_frequency[30]                                   ; 0                 ; 0       ;
-;      - sync_frequency[29]                                   ; 1                 ; 0       ;
+;      - sync_frequency[30]                                   ; 1                 ; 0       ;
+;      - sync_frequency[29]                                   ; 0                 ; 0       ;
 ;      - sync_frequency[28]                                   ; 1                 ; 0       ;
 ;      - sync_frequency[27]                                   ; 0                 ; 0       ;
-;      - sync_frequency[26]                                   ; 1                 ; 0       ;
+;      - sync_frequency[26]                                   ; 0                 ; 0       ;
 ;      - sync_frequency[25]                                   ; 0                 ; 0       ;
-;      - sync_frequency[24]                                   ; 1                 ; 0       ;
-;      - sync_frequency[23]                                   ; 1                 ; 0       ;
-;      - sync_frequency[22]                                   ; 1                 ; 0       ;
-;      - sync_frequency[21]                                   ; 0                 ; 0       ;
+;      - sync_frequency[24]                                   ; 0                 ; 0       ;
+;      - sync_frequency[23]                                   ; 0                 ; 0       ;
+;      - sync_frequency[22]                                   ; 0                 ; 0       ;
+;      - sync_frequency[21]                                   ; 1                 ; 0       ;
 ;      - sync_frequency[20]                                   ; 0                 ; 0       ;
 ;      - sync_frequency[19]                                   ; 1                 ; 0       ;
 ;      - sync_frequency[18]                                   ; 0                 ; 0       ;
 ;      - sync_frequency[17]                                   ; 0                 ; 0       ;
-;      - sync_frequency[16]                                   ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[15] ; 1                 ; 0       ;
-;      - sync_frequency[15]                                   ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[14] ; 1                 ; 0       ;
+;      - sync_frequency[16]                                   ; 1                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[15] ; 0                 ; 0       ;
+;      - sync_frequency[15]                                   ; 1                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[14] ; 0                 ; 0       ;
 ;      - sync_frequency[14]                                   ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[13] ; 1                 ; 0       ;
-;      - sync_frequency[13]                                   ; 1                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[12] ; 1                 ; 0       ;
-;      - sync_frequency[12]                                   ; 1                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[11] ; 1                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[13] ; 0                 ; 0       ;
+;      - sync_frequency[13]                                   ; 0                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[12] ; 0                 ; 0       ;
+;      - sync_frequency[12]                                   ; 0                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[11] ; 0                 ; 0       ;
 ;      - sync_frequency[11]                                   ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[10] ; 1                 ; 0       ;
-;      - sync_frequency[10]                                   ; 1                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[9]  ; 1                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[10] ; 0                 ; 0       ;
+;      - sync_frequency[10]                                   ; 0                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[9]  ; 0                 ; 0       ;
 ;      - sync_frequency[9]                                    ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[8]  ; 1                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[8]  ; 0                 ; 0       ;
 ;      - sync_frequency[8]                                    ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[7]  ; 1                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[7]  ; 0                 ; 0       ;
 ;      - sync_frequency[7]                                    ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[6]  ; 1                 ; 0       ;
-;      - sync_frequency[6]                                    ; 1                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[5]  ; 1                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[6]  ; 0                 ; 0       ;
+;      - sync_frequency[6]                                    ; 0                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[5]  ; 0                 ; 0       ;
 ;      - sync_frequency[5]                                    ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[4]  ; 1                 ; 0       ;
-;      - sync_frequency[4]                                    ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[3]  ; 1                 ; 0       ;
-;      - sync_frequency[3]                                    ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[2]  ; 1                 ; 0       ;
-;      - sync_frequency[2]                                    ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[1]  ; 1                 ; 0       ;
-;      - sync_frequency[1]                                    ; 0                 ; 0       ;
-;      - phase_accumulator:rx_phase_accumulator|phase_out[0]  ; 1                 ; 0       ;
-;      - sync_frequency[0]                                    ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[57]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[56]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[55]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[54]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[53]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[52]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[51]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[50]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[49]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[48]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[47]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[46]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[45]                       ; 0                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[4]  ; 0                 ; 0       ;
+;      - sync_frequency[4]                                    ; 1                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[3]  ; 0                 ; 0       ;
+;      - sync_frequency[3]                                    ; 1                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[2]  ; 0                 ; 0       ;
+;      - sync_frequency[2]                                    ; 1                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[1]  ; 0                 ; 0       ;
+;      - sync_frequency[1]                                    ; 1                 ; 0       ;
+;      - phase_accumulator:rx_phase_accumulator|phase_out[0]  ; 0                 ; 0       ;
+;      - sync_frequency[0]                                    ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[57]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[56]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[55]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[54]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[53]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[52]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[51]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[50]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[49]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[48]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[47]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[46]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out10[45]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out10[44]                       ; 0                 ; 0       ;
-;      - sync_frequency[31]                                   ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[57]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[56]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[55]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[54]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[53]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[52]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[51]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[50]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[49]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[48]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[47]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[46]                       ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out10[45]                       ; 1                 ; 0       ;
+;      - sync_frequency[31]                                   ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[57]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[56]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[55]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[54]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[53]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[52]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[51]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[50]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[49]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[48]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[47]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[46]                       ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out10[45]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out10[44]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[47]                        ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[46]                        ; 1                 ; 0       ;
@@ -1021,37 +1017,37 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - cicint:cic_Q|section_out9[30]                        ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out10[29]                       ; 0                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[29]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[28]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[28]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[28]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[27]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[27]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[27]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[26]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[26]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[26]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[25]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[25]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[25]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[24]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[24]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[24]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[23]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[23]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[23]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[22]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[22]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[22]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[21]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[21]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[21]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[20]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[20]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[20]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[19]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[19]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[19]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[18]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[18]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[18]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[17]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[17]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[17]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[16]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[16]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[16]                        ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out10[15]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[15]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[15]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[14]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[14]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[14]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out10[13]                       ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out10[13]                       ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[13]                        ; 0                 ; 0       ;
 ;      - cicint:cic_Q|section_out10[12]                       ; 0                 ; 0       ;
 ;      - cicint:cic_Q|section_out9[12]                        ; 0                 ; 0       ;
@@ -1113,37 +1109,37 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - cicint:cic_I|section_out9[30]                        ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out10[29]                       ; 1                 ; 0       ;
 ;      - cicint:cic_I|section_out9[29]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[28]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[28]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[28]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[27]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[27]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[27]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[26]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[26]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[26]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[25]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[25]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[25]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[24]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[24]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[24]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[23]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[23]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[23]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[22]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[22]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[22]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[21]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[21]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[21]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[20]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[20]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[20]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[19]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[19]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[19]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[18]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[18]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[18]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[17]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[17]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[17]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[16]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[16]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[16]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[15]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[15]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[15]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[14]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[14]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[14]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out10[13]                       ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out10[13]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[13]                        ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out10[12]                       ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out9[12]                        ; 0                 ; 0       ;
@@ -1182,33 +1178,33 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - cicint:cic_Q|section_out8[29]                        ; 0                 ; 0       ;
 ;      - cicint:cic_Q|section_out8[28]                        ; 0                 ; 0       ;
 ;      - cicint:cic_Q|section_out8[27]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[26]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[25]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[24]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[23]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[22]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[21]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[20]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[19]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[18]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[17]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[16]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[15]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[14]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[13]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[12]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[11]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[10]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[9]                         ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[8]                         ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[7]                         ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[6]                         ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[5]                         ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[4]                         ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[3]                         ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[2]                         ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[1]                         ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out8[0]                         ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out8[26]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[25]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[24]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[23]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[22]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[21]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[20]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[19]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[18]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[17]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[16]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[15]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[14]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[13]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[12]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[11]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[10]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[9]                         ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[8]                         ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[7]                         ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[6]                         ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[5]                         ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[4]                         ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[3]                         ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[2]                         ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[1]                         ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out8[0]                         ; 1                 ; 0       ;
 ;      - cicint:cic_I|section_out8[37]                        ; 1                 ; 0       ;
 ;      - cicint:cic_I|section_out8[36]                        ; 1                 ; 0       ;
 ;      - cicint:cic_I|section_out8[35]                        ; 1                 ; 0       ;
@@ -1220,22 +1216,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - cicint:cic_I|section_out8[29]                        ; 1                 ; 0       ;
 ;      - cicint:cic_I|section_out8[28]                        ; 1                 ; 0       ;
 ;      - cicint:cic_I|section_out8[27]                        ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out8[26]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[25]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[24]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[23]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[22]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[21]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[20]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[19]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[18]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[17]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[16]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[15]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[14]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[13]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[12]                        ; 0                 ; 0       ;
-;      - cicint:cic_I|section_out8[11]                        ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out8[26]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[25]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[24]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[23]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[22]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[21]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[20]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[19]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[18]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[17]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[16]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[15]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[14]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[13]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[12]                        ; 1                 ; 0       ;
+;      - cicint:cic_I|section_out8[11]                        ; 1                 ; 0       ;
 ;      - cicint:cic_I|section_out8[10]                        ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out8[9]                         ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out8[8]                         ; 0                 ; 0       ;
@@ -1247,20 +1243,20 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - cicint:cic_I|section_out8[2]                         ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out8[1]                         ; 0                 ; 0       ;
 ;      - cicint:cic_I|section_out8[0]                         ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[27]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[26]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[25]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[24]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[23]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[22]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[21]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[20]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[19]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[18]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[17]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[16]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[15]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out7[14]                        ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out7[27]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[26]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[25]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[24]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[23]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[22]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[21]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[20]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[19]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[18]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[17]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[16]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[15]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out7[14]                        ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out7[13]                        ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out7[12]                        ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out7[11]                        ; 1                 ; 0       ;
@@ -1303,15 +1299,15 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - cicint:cic_I|section_out7[2]                         ; 1                 ; 0       ;
 ;      - cicint:cic_I|section_out7[1]                         ; 1                 ; 0       ;
 ;      - cicint:cic_I|section_out7[0]                         ; 1                 ; 0       ;
-;      - cicint:cic_Q|section_out6[17]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out6[16]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out6[15]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out6[14]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out6[13]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out6[12]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out6[11]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out6[10]                        ; 0                 ; 0       ;
-;      - cicint:cic_Q|section_out6[9]                         ; 0                 ; 0       ;
+;      - cicint:cic_Q|section_out6[17]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out6[16]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out6[15]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out6[14]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out6[13]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out6[12]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out6[11]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out6[10]                        ; 1                 ; 0       ;
+;      - cicint:cic_Q|section_out6[9]                         ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out6[8]                         ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out6[7]                         ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out6[6]                         ; 1                 ; 0       ;
@@ -1321,118 +1317,118 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - cicint:cic_Q|section_out6[2]                         ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out6[1]                         ; 1                 ; 0       ;
 ;      - cicint:cic_Q|section_out6[0]                         ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[17]                        ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[16]                        ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[15]                        ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[14]                        ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[13]                        ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[12]                        ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[11]                        ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[10]                        ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[9]                         ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[8]                         ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[7]                         ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[6]                         ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[5]                         ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[4]                         ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[3]                         ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[2]                         ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[1]                         ; 1                 ; 0       ;
-;      - cicint:cic_I|section_out6[0]                         ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff1[14]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[13]                      ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff1[12]                               ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[17]                        ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[16]                        ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[15]                        ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[14]                        ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[13]                        ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[12]                        ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[11]                        ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[10]                        ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[9]                         ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[8]                         ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[7]                         ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[6]                         ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[5]                         ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[4]                         ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[3]                         ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[2]                         ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[1]                         ; 0                 ; 0       ;
+;      - cicint:cic_I|section_out6[0]                         ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff1[14]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[13]                      ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff1[12]                               ; 1                 ; 0       ;
 ;      - cicint:cic_Q|input_register[12]                      ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff1[11]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[11]                      ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff1[10]                               ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff1[11]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[11]                      ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff1[10]                               ; 1                 ; 0       ;
 ;      - cicint:cic_Q|input_register[10]                      ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff1[9]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[9]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff1[8]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[8]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff1[7]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[7]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff1[6]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[6]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff1[5]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[5]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff1[4]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[4]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff1[3]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[3]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff1[2]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[2]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff1[1]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[1]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff1[0]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|input_register[0]                       ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff2[15]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff2[13]                               ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff1[9]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[9]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff1[8]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[8]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff1[7]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[7]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff1[6]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[6]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff1[5]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[5]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff1[4]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[4]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff1[3]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[3]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff1[2]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[2]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff1[1]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[1]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff1[0]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|input_register[0]                       ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff2[15]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff2[13]                               ; 1                 ; 0       ;
 ;      - cicint:cic_Q|diff2[12]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff2[11]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff2[10]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff2[9]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff2[8]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff2[11]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff2[10]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff2[9]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff2[8]                                ; 1                 ; 0       ;
 ;      - cicint:cic_Q|diff2[7]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff2[6]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff2[6]                                ; 1                 ; 0       ;
 ;      - cicint:cic_Q|diff2[5]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff2[4]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff2[3]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff2[2]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff2[1]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff2[0]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[16]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[14]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[13]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[12]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[11]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[10]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[9]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[8]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[7]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[6]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[5]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff3[4]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff3[3]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff3[2]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff3[1]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff3[0]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff4[17]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff4[15]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff4[14]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff4[13]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff4[12]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff4[11]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff4[10]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff4[9]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff4[8]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff4[7]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff4[6]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff4[5]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff4[4]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff4[3]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff4[2]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff4[1]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff4[0]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff5[17]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff5[16]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff5[15]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff5[14]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff5[13]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff5[12]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff5[11]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff5[10]                               ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff5[9]                                ; 0                 ; 0       ;
-;      - cicint:cic_Q|diff5[8]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff5[7]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff5[6]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff5[5]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff5[4]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff5[3]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff5[2]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff5[1]                                ; 1                 ; 0       ;
-;      - cicint:cic_Q|diff5[0]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff2[4]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff2[3]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff2[2]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff2[1]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff2[0]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[16]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[14]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[13]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[12]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[11]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[10]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[9]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[8]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[7]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[6]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[5]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff3[4]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff3[3]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff3[2]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff3[1]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff3[0]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff4[17]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff4[15]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff4[14]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff4[13]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff4[12]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff4[11]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff4[10]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff4[9]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff4[8]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff4[7]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff4[6]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff4[5]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff4[4]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff4[3]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff4[2]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff4[1]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff4[0]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff5[17]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff5[16]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff5[15]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff5[14]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff5[13]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff5[12]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff5[11]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff5[10]                               ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff5[9]                                ; 1                 ; 0       ;
+;      - cicint:cic_Q|diff5[8]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff5[7]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff5[6]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff5[5]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff5[4]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff5[3]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff5[2]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff5[1]                                ; 0                 ; 0       ;
+;      - cicint:cic_Q|diff5[0]                                ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff1[14]                               ; 0                 ; 0       ;
 ;      - cicint:cic_I|input_register[13]                      ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff1[12]                               ; 1                 ; 0       ;
@@ -1466,9 +1462,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - cicint:cic_I|diff2[12]                               ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff2[11]                               ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff2[10]                               ; 0                 ; 0       ;
-;      - cicint:cic_I|diff2[9]                                ; 1                 ; 0       ;
+;      - cicint:cic_I|diff2[9]                                ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff2[8]                                ; 0                 ; 0       ;
-;      - cicint:cic_I|diff2[7]                                ; 1                 ; 0       ;
+;      - cicint:cic_I|diff2[7]                                ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff2[6]                                ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff2[5]                                ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff2[4]                                ; 0                 ; 0       ;
@@ -1487,11 +1483,11 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - cicint:cic_I|diff3[7]                                ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff3[6]                                ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff3[5]                                ; 0                 ; 0       ;
-;      - cicint:cic_I|diff3[4]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff3[3]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff3[2]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff3[1]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff3[0]                                ; 1                 ; 0       ;
+;      - cicint:cic_I|diff3[4]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff3[3]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff3[2]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff3[1]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff3[0]                                ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff4[17]                               ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff4[15]                               ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff4[14]                               ; 0                 ; 0       ;
@@ -1501,50 +1497,50 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - cicint:cic_I|diff4[10]                               ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff4[9]                                ; 0                 ; 0       ;
 ;      - cicint:cic_I|diff4[8]                                ; 0                 ; 0       ;
-;      - cicint:cic_I|diff4[7]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff4[6]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff4[5]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff4[4]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff4[3]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff4[2]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff4[1]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff4[0]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[17]                               ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[16]                               ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[15]                               ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[14]                               ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[13]                               ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[12]                               ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[11]                               ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[10]                               ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[9]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[8]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[7]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[6]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[5]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[4]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[3]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[2]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[1]                                ; 1                 ; 0       ;
-;      - cicint:cic_I|diff5[0]                                ; 1                 ; 0       ;
+;      - cicint:cic_I|diff4[7]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff4[6]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff4[5]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff4[4]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff4[3]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff4[2]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff4[1]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff4[0]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[17]                               ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[16]                               ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[15]                               ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[14]                               ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[13]                               ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[12]                               ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[11]                               ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[10]                               ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[9]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[8]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[7]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[6]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[5]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[4]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[3]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[2]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[1]                                ; 0                 ; 0       ;
+;      - cicint:cic_I|diff5[0]                                ; 0                 ; 0       ;
 ; FX2_FD[0]                                                   ;                   ;         ;
-;      - Rx_register[8]                                       ; 0                 ; 6       ;
+;      - Rx_register[8]~feeder                                ; 0                 ; 6       ;
 ; FX2_FD[1]                                                   ;                   ;         ;
-;      - Rx_register[9]~feeder                                ; 1                 ; 6       ;
+;      - Rx_register[9]                                       ; 0                 ; 6       ;
 ; FX2_FD[2]                                                   ;                   ;         ;
 ;      - Rx_register[10]                                      ; 0                 ; 6       ;
 ; FX2_FD[3]                                                   ;                   ;         ;
 ;      - Rx_register[11]~feeder                               ; 0                 ; 6       ;
 ; FX2_FD[4]                                                   ;                   ;         ;
-;      - Rx_register[12]~feeder                               ; 0                 ; 6       ;
+;      - Rx_register[12]                                      ; 0                 ; 6       ;
 ; FX2_FD[5]                                                   ;                   ;         ;
 ;      - Rx_register[13]                                      ; 0                 ; 6       ;
 ; FX2_FD[6]                                                   ;                   ;         ;
-;      - Rx_register[14]                                      ; 0                 ; 6       ;
+;      - Rx_register[14]~feeder                               ; 0                 ; 6       ;
 ; FX2_FD[7]                                                   ;                   ;         ;
-;      - Rx_register[15]                                      ; 1                 ; 6       ;
+;      - Rx_register[15]~feeder                               ; 0                 ; 6       ;
 ; FX2_FD[8]                                                   ;                   ;         ;
-;      - Rx_register[0]                                       ; 1                 ; 6       ;
+;      - Rx_register[0]                                       ; 0                 ; 6       ;
 ; FX2_FD[9]                                                   ;                   ;         ;
 ;      - Rx_register[1]                                       ; 0                 ; 6       ;
 ; FX2_FD[10]                                                  ;                   ;         ;
@@ -1552,13 +1548,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; FX2_FD[11]                                                  ;                   ;         ;
 ;      - Rx_register[3]                                       ; 0                 ; 6       ;
 ; FX2_FD[12]                                                  ;                   ;         ;
-;      - Rx_register[4]                                       ; 0                 ; 6       ;
+;      - Rx_register[4]                                       ; 1                 ; 6       ;
 ; FX2_FD[13]                                                  ;                   ;         ;
-;      - Rx_register[5]~feeder                                ; 1                 ; 6       ;
+;      - Rx_register[5]~feeder                                ; 0                 ; 6       ;
 ; FX2_FD[14]                                                  ;                   ;         ;
-;      - Rx_register[6]~feeder                                ; 1                 ; 6       ;
+;      - Rx_register[6]~feeder                                ; 0                 ; 6       ;
 ; FX2_FD[15]                                                  ;                   ;         ;
-;      - Rx_register[7]                                       ; 1                 ; 6       ;
+;      - Rx_register[7]                                       ; 0                 ; 6       ;
 +-------------------------------------------------------------+-------------------+---------+
 
 
@@ -1567,36 +1563,36 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------------------------------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
 ; Name                                                                                        ; Location           ; Fan-Out ; Usage                      ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +---------------------------------------------------------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
-; Decoder1~104                                                                                ; LCCOMB_X2_Y9_N14   ; 16      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Decoder2~135                                                                                ; LCCOMB_X8_Y14_N22  ; 15      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Decoder2~136                                                                                ; LCCOMB_X21_Y14_N12 ; 16      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Decoder2~137                                                                                ; LCCOMB_X21_Y14_N0  ; 16      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Decoder2~138                                                                                ; LCCOMB_X16_Y10_N4  ; 14      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Decoder1~104                                                                                ; LCCOMB_X2_Y9_N16   ; 16      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Decoder2~135                                                                                ; LCCOMB_X21_Y4_N0   ; 15      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Decoder2~136                                                                                ; LCCOMB_X21_Y4_N28  ; 16      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Decoder2~137                                                                                ; LCCOMB_X18_Y3_N8   ; 16      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Decoder2~138                                                                                ; LCCOMB_X21_Y4_N24  ; 14      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
 ; IFCLK                                                                                       ; PIN_24             ; 27      ; Clock                      ; yes    ; Global Clock         ; GCLK2            ; --                        ;
-; PWM_count[2]                                                                                ; LCFF_X18_Y11_N15   ; 5       ; Clock                      ; no     ; --                   ; --               ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|rdaclr                   ; LCFF_X33_Y10_N7    ; 15      ; Async. clear               ; yes    ; Global Clock         ; GCLK7            ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|valid_rdreq              ; LCCOMB_X25_Y13_N20 ; 29      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|wrfull_eq_comp_aeb_int~0 ; LCCOMB_X26_Y15_N0  ; 20      ; Clock enable, Write enable ; no     ; --                   ; --               ; --                        ;
+; PWM_count[2]                                                                                ; LCFF_X19_Y6_N7     ; 5       ; Clock                      ; no     ; --                   ; --               ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|rdaclr                   ; LCFF_X1_Y9_N29     ; 15      ; Async. clear               ; yes    ; Global Clock         ; GCLK0            ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|valid_rdreq              ; LCCOMB_X22_Y3_N22  ; 29      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|wrfull_eq_comp_aeb_int~0 ; LCCOMB_X26_Y3_N30  ; 20      ; Clock enable, Write enable ; no     ; --                   ; --               ; --                        ;
 ; SLEN                                                                                        ; LCFF_X2_Y9_N13     ; 18      ; Output enable              ; no     ; --                   ; --               ; --                        ;
-; SLRD~reg0                                                                                   ; LCFF_X1_Y9_N3      ; 118     ; Clock                      ; yes    ; Global Clock         ; GCLK3            ; --                        ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|rdaclr                   ; LCFF_X10_Y1_N29    ; 13      ; Async. clear               ; no     ; --                   ; --               ; --                        ;
-; Tx_read_clock                                                                               ; LCFF_X1_Y9_N21     ; 34      ; Clock                      ; yes    ; Global Clock         ; GCLK1            ; --                        ;
-; cicint:cic_I|ce_out_reg                                                                     ; LCFF_X33_Y10_N15   ; 616     ; Clock                      ; yes    ; Global Clock         ; GCLK4            ; --                        ;
-; cicint:cic_I|phase_0~84                                                                     ; LCCOMB_X15_Y15_N12 ; 189     ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; clk_enable                                                                                  ; LCFF_X18_Y17_N29   ; 650     ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
-; clk_enable                                                                                  ; LCFF_X18_Y17_N29   ; 608     ; Async. clear               ; yes    ; Global Clock         ; GCLK5            ; --                        ;
-; clock                                                                                       ; PIN_179            ; 769     ; Clock                      ; no     ; --                   ; --               ; --                        ;
-; clock_8                                                                                     ; LCFF_X33_Y10_N1    ; 156     ; Clock                      ; yes    ; Global Clock         ; GCLK6            ; --                        ;
-; data_flag                                                                                   ; LCFF_X1_Y9_N29     ; 3       ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
-; data_flag                                                                                   ; LCFF_X1_Y9_N29     ; 55      ; Clock                      ; yes    ; Global Clock         ; GCLK0            ; --                        ;
-; freq.010                                                                                    ; LCFF_X12_Y12_N13   ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; freq.011                                                                                    ; LCFF_X12_Y12_N11   ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; loop_counter[6]~459                                                                         ; LCCOMB_X8_Y11_N4   ; 7       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; register[15]~973                                                                            ; LCCOMB_X16_Y10_N18 ; 7       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; register[15]~976                                                                            ; LCCOMB_X16_Y13_N4  ; 4       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; register[15]~979                                                                            ; LCCOMB_X16_Y13_N20 ; 8       ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
-; reset_count[10]                                                                             ; LCFF_X21_Y18_N25   ; 13      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; state_PWM[0]                                                                                ; LCFF_X16_Y10_N31   ; 19      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; SLRD~reg0                                                                                   ; LCFF_X1_Y9_N9      ; 118     ; Clock                      ; yes    ; Global Clock         ; GCLK3            ; --                        ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|rdaclr                   ; LCFF_X23_Y14_N3    ; 13      ; Async. clear               ; no     ; --                   ; --               ; --                        ;
+; Tx_read_clock                                                                               ; LCFF_X1_Y9_N23     ; 34      ; Clock                      ; yes    ; Global Clock         ; GCLK1            ; --                        ;
+; cicint:cic_I|ce_out_reg                                                                     ; LCFF_X33_Y10_N15   ; 616     ; Clock                      ; yes    ; Global Clock         ; GCLK5            ; --                        ;
+; cicint:cic_I|phase_0~84                                                                     ; LCCOMB_X18_Y12_N20 ; 189     ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; clk_enable                                                                                  ; LCFF_X19_Y14_N29   ; 650     ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; clk_enable                                                                                  ; LCFF_X19_Y14_N29   ; 608     ; Async. clear               ; yes    ; Global Clock         ; GCLK4            ; --                        ;
+; clock                                                                                       ; PIN_179            ; 765     ; Clock                      ; no     ; --                   ; --               ; --                        ;
+; clock_8                                                                                     ; LCFF_X33_Y10_N31   ; 156     ; Clock                      ; yes    ; Global Clock         ; GCLK7            ; --                        ;
+; data_flag                                                                                   ; LCFF_X33_Y10_N7    ; 3       ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; data_flag                                                                                   ; LCFF_X33_Y10_N7    ; 55      ; Clock                      ; yes    ; Global Clock         ; GCLK6            ; --                        ;
+; freq.010                                                                                    ; LCFF_X7_Y7_N13     ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; freq.011                                                                                    ; LCFF_X7_Y7_N7      ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; loop_counter[6]~532                                                                         ; LCCOMB_X19_Y2_N2   ; 7       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; register[15]~1147                                                                           ; LCCOMB_X18_Y3_N0   ; 7       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; register[15]~1151                                                                           ; LCCOMB_X19_Y4_N14  ; 4       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; register[15]~1154                                                                           ; LCCOMB_X19_Y4_N8   ; 8       ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; reset_count[10]                                                                             ; LCFF_X16_Y15_N23   ; 13      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; state_PWM[0]                                                                                ; LCFF_X18_Y3_N3     ; 19      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
 +---------------------------------------------------------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
 
 
@@ -1606,13 +1602,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                                                      ; Location         ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +---------------------------------------------------------------------------+------------------+---------+----------------------+------------------+---------------------------+
 ; IFCLK                                                                     ; PIN_24           ; 27      ; Global Clock         ; GCLK2            ; --                        ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|rdaclr ; LCFF_X33_Y10_N7  ; 15      ; Global Clock         ; GCLK7            ; --                        ;
-; SLRD~reg0                                                                 ; LCFF_X1_Y9_N3    ; 118     ; Global Clock         ; GCLK3            ; --                        ;
-; Tx_read_clock                                                             ; LCFF_X1_Y9_N21   ; 34      ; Global Clock         ; GCLK1            ; --                        ;
-; cicint:cic_I|ce_out_reg                                                   ; LCFF_X33_Y10_N15 ; 616     ; Global Clock         ; GCLK4            ; --                        ;
-; clk_enable                                                                ; LCFF_X18_Y17_N29 ; 608     ; Global Clock         ; GCLK5            ; --                        ;
-; clock_8                                                                   ; LCFF_X33_Y10_N1  ; 156     ; Global Clock         ; GCLK6            ; --                        ;
-; data_flag                                                                 ; LCFF_X1_Y9_N29   ; 55      ; Global Clock         ; GCLK0            ; --                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|rdaclr ; LCFF_X1_Y9_N29   ; 15      ; Global Clock         ; GCLK0            ; --                        ;
+; SLRD~reg0                                                                 ; LCFF_X1_Y9_N9    ; 118     ; Global Clock         ; GCLK3            ; --                        ;
+; Tx_read_clock                                                             ; LCFF_X1_Y9_N23   ; 34      ; Global Clock         ; GCLK1            ; --                        ;
+; cicint:cic_I|ce_out_reg                                                   ; LCFF_X33_Y10_N15 ; 616     ; Global Clock         ; GCLK5            ; --                        ;
+; clk_enable                                                                ; LCFF_X19_Y14_N29 ; 608     ; Global Clock         ; GCLK4            ; --                        ;
+; clock_8                                                                   ; LCFF_X33_Y10_N31 ; 156     ; Global Clock         ; GCLK7            ; --                        ;
+; data_flag                                                                 ; LCFF_X33_Y10_N7  ; 55      ; Global Clock         ; GCLK6            ; --                        ;
 +---------------------------------------------------------------------------+------------------+---------+----------------------+------------------+---------------------------+
 
 
@@ -1621,7 +1617,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------------------------------------------------------------------------+---------+
 ; Name                                                                                                           ; Fan-Out ;
 +----------------------------------------------------------------------------------------------------------------+---------+
-; clock                                                                                                          ; 769     ;
+; clock                                                                                                          ; 765     ;
 ; clk_enable                                                                                                     ; 649     ;
 ; cicint:cic_I|phase_0~84                                                                                        ; 189     ;
 ; cordic:rx_cordic|cordic_stage:cordic_stage0|PHout[14]                                                          ; 49      ;
@@ -1674,14 +1670,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------------------------------------------------------------------------+---------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Fitter RAM Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ;
-+-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+-------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Name                                                                                                                              ; Type ; Mode           ; Clock Mode  ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Port A Input Registers ; Port A Output Registers ; Port B Input Registers ; Port B Output Registers ; Size  ; Implementation Port A Depth ; Implementation Port A Width ; Implementation Port B Depth ; Implementation Port B Width ; Implementation Bits ; M4Ks ; MIF  ; Location                                                                                                                                                                                                       ;
-+-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+-------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ALTSYNCRAM ; AUTO ; True Dual Port ; Dual Clocks ; 4096         ; 16           ; 4096         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 65536 ; 4096                        ; 16                          ; 4096                        ; 16                          ; 65536               ; 16   ; None ; M4K_X11_Y10, M4K_X27_Y11, M4K_X27_Y16, M4K_X11_Y14, M4K_X11_Y13, M4K_X27_Y12, M4K_X27_Y13, M4K_X27_Y17, M4K_X27_Y10, M4K_X11_Y16, M4K_X27_Y14, M4K_X11_Y17, M4K_X27_Y15, M4K_X11_Y12, M4K_X11_Y15, M4K_X11_Y11 ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4|ALTSYNCRAM ; AUTO ; True Dual Port ; Dual Clocks ; 2048         ; 16           ; 2048         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 32768 ; 2048                        ; 16                          ; 2048                        ; 16                          ; 32768               ; 8    ; None ; M4K_X11_Y3, M4K_X11_Y1, M4K_X11_Y2, M4K_X11_Y4, M4K_X11_Y8, M4K_X11_Y5, M4K_X11_Y7, M4K_X11_Y6                                                                                                                 ;
-+-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+-------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter RAM Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ;
++-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+-------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Name                                                                                                                              ; Type ; Mode           ; Clock Mode  ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Port A Input Registers ; Port A Output Registers ; Port B Input Registers ; Port B Output Registers ; Size  ; Implementation Port A Depth ; Implementation Port A Width ; Implementation Port B Depth ; Implementation Port B Width ; Implementation Bits ; M4Ks ; MIF  ; Location                                                                                                                                                                                       ;
++-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+-------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ALTSYNCRAM ; AUTO ; True Dual Port ; Dual Clocks ; 4096         ; 16           ; 4096         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 65536 ; 4096                        ; 16                          ; 4096                        ; 16                          ; 65536               ; 16   ; None ; M4K_X11_Y2, M4K_X27_Y9, M4K_X11_Y5, M4K_X27_Y8, M4K_X27_Y5, M4K_X11_Y9, M4K_X11_Y3, M4K_X27_Y2, M4K_X27_Y6, M4K_X11_Y4, M4K_X27_Y4, M4K_X11_Y6, M4K_X27_Y7, M4K_X11_Y8, M4K_X11_Y7, M4K_X27_Y3 ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_pre1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4|ALTSYNCRAM ; AUTO ; True Dual Port ; Dual Clocks ; 2048         ; 16           ; 2048         ; 16           ; yes                    ; yes                     ; yes                    ; no                      ; 32768 ; 2048                        ; 16                          ; 2048                        ; 16                          ; 32768               ; 8    ; None ; M4K_X27_Y13, M4K_X27_Y14, M4K_X11_Y14, M4K_X11_Y13, M4K_X27_Y16, M4K_X11_Y15, M4K_X11_Y16, M4K_X27_Y15                                                                                         ;
++-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+-------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+-------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 Note: Fitter may spread logical memories into multiple blocks to improve timing. The actual required RAM blocks can be found in the Fitter Resource Usage section.
 
 
@@ -1690,171 +1686,171 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +----------------------------+-------------------------+
 ; Interconnect Resource Type ; Usage                   ;
 +----------------------------+-------------------------+
-; Block interconnects        ; 3,695 / 26,052 ( 14 % ) ;
-; C16 interconnects          ; 37 / 1,156 ( 3 % )      ;
-; C4 interconnects           ; 1,544 / 17,952 ( 9 % )  ;
-; Direct links               ; 954 / 26,052 ( 4 % )    ;
+; Block interconnects        ; 3,748 / 26,052 ( 14 % ) ;
+; C16 interconnects          ; 32 / 1,156 ( 3 % )      ;
+; C4 interconnects           ; 1,566 / 17,952 ( 9 % )  ;
+; Direct links               ; 994 / 26,052 ( 4 % )    ;
 ; Global clocks              ; 8 / 8 ( 100 % )         ;
-; Local interconnects        ; 715 / 8,256 ( 9 % )     ;
-; R24 interconnects          ; 40 / 1,020 ( 4 % )      ;
-; R4 interconnects           ; 1,968 / 22,440 ( 9 % )  ;
+; Local interconnects        ; 671 / 8,256 ( 8 % )     ;
+; R24 interconnects          ; 30 / 1,020 ( 3 % )      ;
+; R4 interconnects           ; 2,208 / 22,440 ( 10 % ) ;
 +----------------------------+-------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Logic Elements                                                          ;
 +---------------------------------------------+-------------------------------+
-; Number of Logic Elements  (Average = 12.35) ; Number of LABs  (Total = 198) ;
+; Number of Logic Elements  (Average = 13.28) ; Number of LABs  (Total = 184) ;
 +---------------------------------------------+-------------------------------+
-; 1                                           ; 6                             ;
-; 2                                           ; 14                            ;
-; 3                                           ; 4                             ;
-; 4                                           ; 7                             ;
+; 1                                           ; 5                             ;
+; 2                                           ; 3                             ;
+; 3                                           ; 5                             ;
+; 4                                           ; 3                             ;
 ; 5                                           ; 3                             ;
-; 6                                           ; 2                             ;
+; 6                                           ; 3                             ;
 ; 7                                           ; 3                             ;
-; 8                                           ; 1                             ;
+; 8                                           ; 2                             ;
 ; 9                                           ; 8                             ;
-; 10                                          ; 6                             ;
-; 11                                          ; 7                             ;
-; 12                                          ; 6                             ;
-; 13                                          ; 7                             ;
-; 14                                          ; 10                            ;
-; 15                                          ; 20                            ;
-; 16                                          ; 94                            ;
+; 10                                          ; 3                             ;
+; 11                                          ; 4                             ;
+; 12                                          ; 9                             ;
+; 13                                          ; 6                             ;
+; 14                                          ; 5                             ;
+; 15                                          ; 19                            ;
+; 16                                          ; 103                           ;
 +---------------------------------------------+-------------------------------+
 
 
 +--------------------------------------------------------------------+
 ; LAB-wide Signals                                                   ;
 +------------------------------------+-------------------------------+
-; LAB-wide Signals  (Average = 1.72) ; Number of LABs  (Total = 198) ;
+; LAB-wide Signals  (Average = 1.75) ; Number of LABs  (Total = 184) ;
 +------------------------------------+-------------------------------+
-; 1 Async. clear                     ; 52                            ;
-; 1 Clock                            ; 152                           ;
-; 1 Clock enable                     ; 33                            ;
-; 1 Sync. clear                      ; 70                            ;
-; 2 Clock enables                    ; 8                             ;
-; 2 Clocks                           ; 25                            ;
+; 1 Async. clear                     ; 50                            ;
+; 1 Clock                            ; 145                           ;
+; 1 Clock enable                     ; 29                            ;
+; 1 Sync. clear                      ; 69                            ;
+; 2 Clock enables                    ; 6                             ;
+; 2 Clocks                           ; 23                            ;
 +------------------------------------+-------------------------------+
 
 
 +------------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                          ;
 +----------------------------------------------+-------------------------------+
-; Number of Signals Sourced  (Average = 20.24) ; Number of LABs  (Total = 198) ;
+; Number of Signals Sourced  (Average = 21.68) ; Number of LABs  (Total = 184) ;
 +----------------------------------------------+-------------------------------+
 ; 0                                            ; 0                             ;
-; 1                                            ; 4                             ;
-; 2                                            ; 6                             ;
-; 3                                            ; 5                             ;
-; 4                                            ; 7                             ;
-; 5                                            ; 3                             ;
-; 6                                            ; 7                             ;
-; 7                                            ; 3                             ;
-; 8                                            ; 3                             ;
-; 9                                            ; 2                             ;
-; 10                                           ; 0                             ;
+; 1                                            ; 2                             ;
+; 2                                            ; 3                             ;
+; 3                                            ; 4                             ;
+; 4                                            ; 3                             ;
+; 5                                            ; 2                             ;
+; 6                                            ; 4                             ;
+; 7                                            ; 2                             ;
+; 8                                            ; 1                             ;
+; 9                                            ; 1                             ;
+; 10                                           ; 1                             ;
 ; 11                                           ; 1                             ;
-; 12                                           ; 5                             ;
-; 13                                           ; 1                             ;
-; 14                                           ; 7                             ;
-; 15                                           ; 1                             ;
-; 16                                           ; 7                             ;
-; 17                                           ; 1                             ;
-; 18                                           ; 9                             ;
-; 19                                           ; 3                             ;
-; 20                                           ; 8                             ;
-; 21                                           ; 6                             ;
-; 22                                           ; 7                             ;
+; 12                                           ; 3                             ;
+; 13                                           ; 3                             ;
+; 14                                           ; 6                             ;
+; 15                                           ; 2                             ;
+; 16                                           ; 8                             ;
+; 17                                           ; 2                             ;
+; 18                                           ; 10                            ;
+; 19                                           ; 9                             ;
+; 20                                           ; 4                             ;
+; 21                                           ; 4                             ;
+; 22                                           ; 2                             ;
 ; 23                                           ; 17                            ;
-; 24                                           ; 1                             ;
-; 25                                           ; 2                             ;
+; 24                                           ; 6                             ;
+; 25                                           ; 6                             ;
 ; 26                                           ; 22                            ;
-; 27                                           ; 7                             ;
-; 28                                           ; 8                             ;
-; 29                                           ; 8                             ;
-; 30                                           ; 9                             ;
-; 31                                           ; 4                             ;
-; 32                                           ; 24                            ;
+; 27                                           ; 4                             ;
+; 28                                           ; 4                             ;
+; 29                                           ; 7                             ;
+; 30                                           ; 11                            ;
+; 31                                           ; 8                             ;
+; 32                                           ; 22                            ;
 +----------------------------------------------+-------------------------------+
 
 
 +----------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                          ;
 +--------------------------------------------------+-------------------------------+
-; Number of Signals Sourced Out  (Average = 10.20) ; Number of LABs  (Total = 198) ;
+; Number of Signals Sourced Out  (Average = 11.02) ; Number of LABs  (Total = 184) ;
 +--------------------------------------------------+-------------------------------+
-; 0                                                ; 3                             ;
-; 1                                                ; 12                            ;
-; 2                                                ; 21                            ;
+; 0                                                ; 5                             ;
+; 1                                                ; 10                            ;
+; 2                                                ; 8                             ;
 ; 3                                                ; 10                            ;
 ; 4                                                ; 8                             ;
-; 5                                                ; 7                             ;
-; 6                                                ; 5                             ;
-; 7                                                ; 4                             ;
+; 5                                                ; 6                             ;
+; 6                                                ; 1                             ;
+; 7                                                ; 5                             ;
 ; 8                                                ; 8                             ;
 ; 9                                                ; 11                            ;
 ; 10                                               ; 6                             ;
 ; 11                                               ; 6                             ;
-; 12                                               ; 6                             ;
-; 13                                               ; 8                             ;
-; 14                                               ; 22                            ;
-; 15                                               ; 16                            ;
-; 16                                               ; 31                            ;
+; 12                                               ; 8                             ;
+; 13                                               ; 10                            ;
+; 14                                               ; 9                             ;
+; 15                                               ; 21                            ;
+; 16                                               ; 36                            ;
 ; 17                                               ; 3                             ;
-; 18                                               ; 3                             ;
+; 18                                               ; 4                             ;
 ; 19                                               ; 1                             ;
-; 20                                               ; 0                             ;
+; 20                                               ; 1                             ;
 ; 21                                               ; 1                             ;
-; 22                                               ; 0                             ;
-; 23                                               ; 0                             ;
-; 24                                               ; 1                             ;
-; 25                                               ; 2                             ;
+; 22                                               ; 1                             ;
+; 23                                               ; 1                             ;
+; 24                                               ; 0                             ;
+; 25                                               ; 1                             ;
 ; 26                                               ; 0                             ;
 ; 27                                               ; 2                             ;
-; 28                                               ; 1                             ;
+; 28                                               ; 0                             ;
+; 29                                               ; 1                             ;
 +--------------------------------------------------+-------------------------------+
 
 
 +------------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                          ;
 +----------------------------------------------+-------------------------------+
-; Number of Distinct Inputs  (Average = 14.34) ; Number of LABs  (Total = 198) ;
+; Number of Distinct Inputs  (Average = 15.51) ; Number of LABs  (Total = 184) ;
 +----------------------------------------------+-------------------------------+
 ; 0                                            ; 0                             ;
 ; 1                                            ; 3                             ;
-; 2                                            ; 5                             ;
-; 3                                            ; 9                             ;
-; 4                                            ; 11                            ;
+; 2                                            ; 4                             ;
+; 3                                            ; 3                             ;
+; 4                                            ; 3                             ;
 ; 5                                            ; 8                             ;
-; 6                                            ; 8                             ;
+; 6                                            ; 4                             ;
 ; 7                                            ; 8                             ;
-; 8                                            ; 4                             ;
-; 9                                            ; 7                             ;
-; 10                                           ; 4                             ;
-; 11                                           ; 8                             ;
+; 8                                            ; 3                             ;
+; 9                                            ; 9                             ;
+; 10                                           ; 5                             ;
+; 11                                           ; 4                             ;
 ; 12                                           ; 2                             ;
-; 13                                           ; 4                             ;
-; 14                                           ; 5                             ;
-; 15                                           ; 6                             ;
-; 16                                           ; 5                             ;
-; 17                                           ; 7                             ;
-; 18                                           ; 20                            ;
-; 19                                           ; 27                            ;
-; 20                                           ; 8                             ;
-; 21                                           ; 8                             ;
-; 22                                           ; 11                            ;
-; 23                                           ; 4                             ;
-; 24                                           ; 0                             ;
-; 25                                           ; 2                             ;
-; 26                                           ; 3                             ;
-; 27                                           ; 2                             ;
-; 28                                           ; 4                             ;
-; 29                                           ; 0                             ;
-; 30                                           ; 0                             ;
-; 31                                           ; 3                             ;
-; 32                                           ; 1                             ;
+; 13                                           ; 3                             ;
+; 14                                           ; 4                             ;
+; 15                                           ; 8                             ;
+; 16                                           ; 4                             ;
+; 17                                           ; 11                            ;
+; 18                                           ; 19                            ;
+; 19                                           ; 32                            ;
+; 20                                           ; 9                             ;
+; 21                                           ; 12                            ;
+; 22                                           ; 8                             ;
+; 23                                           ; 2                             ;
+; 24                                           ; 3                             ;
+; 25                                           ; 1                             ;
+; 26                                           ; 2                             ;
+; 27                                           ; 1                             ;
+; 28                                           ; 3                             ;
+; 29                                           ; 2                             ;
+; 30                                           ; 2                             ;
+; 31                                           ; 1                             ;
 +----------------------------------------------+-------------------------------+
 
 
@@ -1885,74 +1881,72 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +--------------------+-------+
 
 
-+---------------------------------------------------------------------------------------------+
-; Advanced Data - Placement Preparation                                                       ;
-+------------------------------------------------------------------+--------------------------+
-; Name                                                             ; Value                    ;
-+------------------------------------------------------------------+--------------------------+
-; Mid Wire Use - Fit Attempt 1                                     ; 15                       ;
-; Mid Slack - Fit Attempt 1                                        ; -7168                    ;
-; Internal Atom Count - Fit Attempt 1                              ; 3821                     ;
-; LE/ALM Count - Fit Attempt 1                                     ; 2439                     ;
-; LAB Count - Fit Attempt 1                                        ; 224                      ;
-; Outputs per Lab - Fit Attempt 1                                  ; 7.679                    ;
-; Inputs per LAB - Fit Attempt 1                                   ; 11.290                   ;
-; Global Inputs per LAB - Fit Attempt 1                            ; 0.996                    ;
-; LAB Constraint 'non-global clock + sync load' - Fit Attempt 1    ; 0:144;1:78;2:2           ;
-; LAB Constraint 'non-global controls' - Fit Attempt 1             ; 0:39;1:140;2:38;3:7      ;
-; LAB Constraint 'non-global + aclr' - Fit Attempt 1               ; 0:39;1:108;2:50;3:21;4:6 ;
-; LAB Constraint 'global non-clock non-aclr' - Fit Attempt 1       ; 0:224                    ;
-; LAB Constraint 'global controls' - Fit Attempt 1                 ; 0:23;1:179;2:22          ;
-; LAB Constraint 'deterministic LABSMUXA/LABXMUXB' - Fit Attempt 1 ; 0:133;1:73;2:18          ;
-; LAB Constraint 'deterministic LABSMUXC/LABXMUXD' - Fit Attempt 1 ; 0:40;1:161;2:23          ;
-; LAB Constraint 'clock / ce pair constraint' - Fit Attempt 1      ; 0:11;1:175;2:38          ;
-; LAB Constraint 'aclr constraint' - Fit Attempt 1                 ; 0:11;1:201;2:12          ;
-; LAB Constraint 'true sload_sclear pair' - Fit Attempt 1          ; 0:110;1:114              ;
-; LAB Constraint 'constant sload_sclear pair' - Fit Attempt 1      ; 0:131;1:93               ;
-; LAB Constraint 'has placement constraint' - Fit Attempt 1        ; 0:134;1:90               ;
-; LEs in Chains - Fit Attempt 1                                    ; 1461                     ;
-; LEs in Long Chains - Fit Attempt 1                               ; 968                      ;
-; LABs with Chains - Fit Attempt 1                                 ; 128                      ;
-; LABs with Multiple Chains - Fit Attempt 1                        ; 0                        ;
-; Time - Fit Attempt 1                                             ; 8                        ;
-; Time in tsm_dat.dll - Fit Attempt 1                              ; 0.016                    ;
-; Time in tsm_tan.dll - Fit Attempt 1                              ; 1.188                    ;
-+------------------------------------------------------------------+--------------------------+
++--------------------------------------------------------------------------------------------+
+; Advanced Data - Placement Preparation                                                      ;
++------------------------------------------------------------------+-------------------------+
+; Name                                                             ; Value                   ;
++------------------------------------------------------------------+-------------------------+
+; Mid Wire Use - Fit Attempt 1                                     ; 15                      ;
+; Mid Slack - Fit Attempt 1                                        ; -7168                   ;
+; Internal Atom Count - Fit Attempt 1                              ; 3813                    ;
+; LE/ALM Count - Fit Attempt 1                                     ; 2435                    ;
+; LAB Count - Fit Attempt 1                                        ; 216                     ;
+; Outputs per Lab - Fit Attempt 1                                  ; 7.995                   ;
+; Inputs per LAB - Fit Attempt 1                                   ; 11.671                  ;
+; Global Inputs per LAB - Fit Attempt 1                            ; 0.981                   ;
+; LAB Constraint 'non-global clock + sync load' - Fit Attempt 1    ; 0:142;1:73;2:1          ;
+; LAB Constraint 'non-global controls' - Fit Attempt 1             ; 0:44;1:130;2:34;3:8     ;
+; LAB Constraint 'non-global + aclr' - Fit Attempt 1               ; 0:44;1:97;2:50;3:19;4:6 ;
+; LAB Constraint 'global non-clock non-aclr' - Fit Attempt 1       ; 0:216                   ;
+; LAB Constraint 'global controls' - Fit Attempt 1                 ; 0:23;1:174;2:19         ;
+; LAB Constraint 'deterministic LABSMUXA/LABXMUXB' - Fit Attempt 1 ; 0:129;1:70;2:17         ;
+; LAB Constraint 'deterministic LABSMUXC/LABXMUXD' - Fit Attempt 1 ; 0:45;1:149;2:22         ;
+; LAB Constraint 'clock / ce pair constraint' - Fit Attempt 1      ; 0:15;1:167;2:34         ;
+; LAB Constraint 'aclr constraint' - Fit Attempt 1                 ; 0:15;1:190;2:11         ;
+; LAB Constraint 'true sload_sclear pair' - Fit Attempt 1          ; 0:112;1:104             ;
+; LAB Constraint 'constant sload_sclear pair' - Fit Attempt 1      ; 0:130;1:86              ;
+; LAB Constraint 'has placement constraint' - Fit Attempt 1        ; 0:126;1:90              ;
+; LEs in Chains - Fit Attempt 1                                    ; 1461                    ;
+; LEs in Long Chains - Fit Attempt 1                               ; 968                     ;
+; LABs with Chains - Fit Attempt 1                                 ; 127                     ;
+; LABs with Multiple Chains - Fit Attempt 1                        ; 1                       ;
+; Time - Fit Attempt 1                                             ; 6                       ;
+; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.703                   ;
++------------------------------------------------------------------+-------------------------+
 
 
-+----------------------------------------------+
-; Advanced Data - Placement                    ;
-+-------------------------------------+--------+
-; Name                                ; Value  ;
-+-------------------------------------+--------+
-; Early Wire Use - Fit Attempt 1      ; 4      ;
-; Early Slack - Fit Attempt 1         ; -6106  ;
-; Mid Wire Use - Fit Attempt 1        ; 8      ;
-; Mid Slack - Fit Attempt 1           ; -5462  ;
-; Late Wire Use - Fit Attempt 1       ; 8      ;
-; Late Slack - Fit Attempt 1          ; -5462  ;
-; Peak Regional Wire - Fit Attempt 1  ; 0.000  ;
-; Time - Fit Attempt 1                ; 64     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 14.182 ;
-+-------------------------------------+--------+
++---------------------------------------------+
+; Advanced Data - Placement                   ;
++-------------------------------------+-------+
+; Name                                ; Value ;
++-------------------------------------+-------+
+; Early Wire Use - Fit Attempt 1      ; 4     ;
+; Early Slack - Fit Attempt 1         ; -5813 ;
+; Mid Wire Use - Fit Attempt 1        ; 8     ;
+; Mid Slack - Fit Attempt 1           ; -5767 ;
+; Late Wire Use - Fit Attempt 1       ; 9     ;
+; Late Slack - Fit Attempt 1          ; -5767 ;
+; Peak Regional Wire - Fit Attempt 1  ; 0.000 ;
+; Time - Fit Attempt 1                ; 43    ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 8.691 ;
++-------------------------------------+-------+
 
 
-+----------------------------------------------+
-; Advanced Data - Routing                      ;
-+-------------------------------------+--------+
-; Name                                ; Value  ;
-+-------------------------------------+--------+
-; Early Slack - Fit Attempt 1         ; -4517  ;
-; Early Wire Use - Fit Attempt 1      ; 9      ;
-; Peak Regional Wire - Fit Attempt 1  ; 19     ;
-; Mid Slack - Fit Attempt 1           ; -5183  ;
-; Late Slack - Fit Attempt 1          ; -5183  ;
-; Late Slack - Fit Attempt 1          ; -5183  ;
-; Late Wire Use - Fit Attempt 1       ; 10     ;
-; Time - Fit Attempt 1                ; 20     ;
-; Time in tsm_dat.dll - Fit Attempt 1 ; 0.015  ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 14.078 ;
-+-------------------------------------+--------+
++---------------------------------------------+
+; Advanced Data - Routing                     ;
++-------------------------------------+-------+
+; Name                                ; Value ;
++-------------------------------------+-------+
+; Early Slack - Fit Attempt 1         ; -4486 ;
+; Early Wire Use - Fit Attempt 1      ; 9     ;
+; Peak Regional Wire - Fit Attempt 1  ; 16    ;
+; Mid Slack - Fit Attempt 1           ; -4638 ;
+; Late Slack - Fit Attempt 1          ; -4638 ;
+; Late Wire Use - Fit Attempt 1       ; 10    ;
+; Time - Fit Attempt 1                ; 11    ;
+; Time in tsm_dat.dll - Fit Attempt 1 ; 0.016 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 7.796 ;
++-------------------------------------+-------+
 
 
 +-----------------+
@@ -1961,7 +1955,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Jan 11 21:36:26 2007
+    Info: Processing started: Fri Jan 12 13:29:37 2007
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off Mercury -c Mercury
 Info: Selected device EP2C8Q208C8 for design "Mercury"
 Info: Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
@@ -1979,9 +1973,6 @@ Info: Automatically promoted node IFCLK (placed in PIN 24 (CLK1, LVDSCLK0n, Inpu
     Info: Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G2
 Info: Automatically promoted node cicint:cic_I|ce_out_reg 
     Info: Automatically promoted destinations to use location or clock signal Global Clock
-    Info: Following destination nodes may be non-global or may not use global or regional clocks
-        Info: Destination node Selector17~105
-        Info: Destination node Selector18~47
 Info: Automatically promoted node clock_8 
     Info: Automatically promoted destinations to use location or clock signal Global Clock
     Info: Following destination nodes may be non-global or may not use global or regional clocks
@@ -2026,45 +2017,45 @@ Extra Info: Started Fast Input/Output/OE register processing
 Extra Info: Finished Fast Input/Output/OE register processing
 Extra Info: Moving registers into I/O cells, Multiplier Blocks, and RAM blocks to improve timing and density
 Extra Info: Finished moving registers into I/O cells, Multiplier Blocks, and RAM blocks
-Info: Finished register packing: elapsed time is 00:00:01
+Info: Finished register packing: elapsed time is 00:00:00
     Extra Info: No registers were packed into other blocks
 Info: Fitter placement preparation operations beginning
-Info: Fitter placement preparation operations ending: elapsed time is 00:00:08
+Info: Fitter placement preparation operations ending: elapsed time is 00:00:06
 Info: Fitter placement operations beginning
 Info: Fitter placement was successful
-Info: Fitter placement operations ending: elapsed time is 00:01:04
-Info: Estimated most critical path is register to register delay of 15.387 ns
-    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X15_Y13; Fanout = 3; REG Node = 'cicint:cic_I|input_register[1]'
-    Info: 2: + IC(1.400 ns) + CELL(0.596 ns) = 1.996 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'cicint:cic_I|Add1~211'
-    Info: 3: + IC(0.000 ns) + CELL(0.506 ns) = 2.502 ns; Loc. = LAB_X14_Y11; Fanout = 3; COMB Node = 'cicint:cic_I|Add1~212'
-    Info: 4: + IC(0.885 ns) + CELL(0.621 ns) = 4.008 ns; Loc. = LAB_X15_Y11; Fanout = 2; COMB Node = 'cicint:cic_I|Add2~226'
-    Info: 5: + IC(0.000 ns) + CELL(0.506 ns) = 4.514 ns; Loc. = LAB_X15_Y11; Fanout = 3; COMB Node = 'cicint:cic_I|Add2~227'
-    Info: 6: + IC(1.293 ns) + CELL(0.621 ns) = 6.428 ns; Loc. = LAB_X16_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|Add3~241'
-    Info: 7: + IC(0.000 ns) + CELL(0.086 ns) = 6.514 ns; Loc. = LAB_X16_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|Add3~243'
-    Info: 8: + IC(0.000 ns) + CELL(0.086 ns) = 6.600 ns; Loc. = LAB_X16_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|Add3~245'
-    Info: 9: + IC(0.000 ns) + CELL(0.086 ns) = 6.686 ns; Loc. = LAB_X16_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|Add3~247'
-    Info: 10: + IC(0.000 ns) + CELL(0.086 ns) = 6.772 ns; Loc. = LAB_X16_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|Add3~249'
-    Info: 11: + IC(0.107 ns) + CELL(0.506 ns) = 7.385 ns; Loc. = LAB_X16_Y11; Fanout = 3; COMB Node = 'cicint:cic_I|Add3~250'
-    Info: 12: + IC(1.309 ns) + CELL(0.621 ns) = 9.315 ns; Loc. = LAB_X16_Y15; Fanout = 2; COMB Node = 'cicint:cic_I|Add4~276'
-    Info: 13: + IC(0.107 ns) + CELL(0.506 ns) = 9.928 ns; Loc. = LAB_X16_Y14; Fanout = 3; COMB Node = 'cicint:cic_I|Add4~277'
-    Info: 14: + IC(0.885 ns) + CELL(0.621 ns) = 11.434 ns; Loc. = LAB_X15_Y14; Fanout = 2; COMB Node = 'cicint:cic_I|Add5~715'
-    Info: 15: + IC(0.000 ns) + CELL(0.506 ns) = 11.940 ns; Loc. = LAB_X15_Y14; Fanout = 1; COMB Node = 'cicint:cic_I|Add5~716'
-    Info: 16: + IC(0.605 ns) + CELL(0.206 ns) = 12.751 ns; Loc. = LAB_X15_Y14; Fanout = 2; COMB Node = 'cicint:cic_I|Add5~739'
-    Info: 17: + IC(0.885 ns) + CELL(0.621 ns) = 14.257 ns; Loc. = LAB_X14_Y14; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[10]~8282'
-    Info: 18: + IC(0.000 ns) + CELL(0.086 ns) = 14.343 ns; Loc. = LAB_X14_Y14; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[11]~8283'
-    Info: 19: + IC(0.000 ns) + CELL(0.086 ns) = 14.429 ns; Loc. = LAB_X14_Y14; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[12]~8284'
-    Info: 20: + IC(0.000 ns) + CELL(0.086 ns) = 14.515 ns; Loc. = LAB_X14_Y14; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[13]~8285'
-    Info: 21: + IC(0.000 ns) + CELL(0.086 ns) = 14.601 ns; Loc. = LAB_X14_Y14; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[14]~8286'
-    Info: 22: + IC(0.000 ns) + CELL(0.086 ns) = 14.687 ns; Loc. = LAB_X14_Y14; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[15]~8287'
-    Info: 23: + IC(0.000 ns) + CELL(0.086 ns) = 14.773 ns; Loc. = LAB_X14_Y14; Fanout = 1; COMB Node = 'cicint:cic_I|section_out6[16]~8288'
-    Info: 24: + IC(0.000 ns) + CELL(0.506 ns) = 15.279 ns; Loc. = LAB_X14_Y14; Fanout = 1; COMB Node = 'cicint:cic_I|section_out6[17]~8254'
-    Info: 25: + IC(0.000 ns) + CELL(0.108 ns) = 15.387 ns; Loc. = LAB_X14_Y14; Fanout = 22; REG Node = 'cicint:cic_I|section_out6[17]'
-    Info: Total cell delay = 7.911 ns ( 51.41 % )
-    Info: Total interconnect delay = 7.476 ns ( 48.59 % )
+Info: Fitter placement operations ending: elapsed time is 00:00:43
+Info: Estimated most critical path is register to register delay of 14.951 ns
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X24_Y13; Fanout = 3; REG Node = 'cicint:cic_I|input_register[1]'
+    Info: 2: + IC(0.981 ns) + CELL(0.596 ns) = 1.577 ns; Loc. = LAB_X23_Y13; Fanout = 2; COMB Node = 'cicint:cic_I|Add1~211'
+    Info: 3: + IC(0.000 ns) + CELL(0.506 ns) = 2.083 ns; Loc. = LAB_X23_Y13; Fanout = 3; COMB Node = 'cicint:cic_I|Add1~212'
+    Info: 4: + IC(0.885 ns) + CELL(0.621 ns) = 3.589 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'cicint:cic_I|Add2~226'
+    Info: 5: + IC(0.000 ns) + CELL(0.506 ns) = 4.095 ns; Loc. = LAB_X22_Y13; Fanout = 3; COMB Node = 'cicint:cic_I|Add2~227'
+    Info: 6: + IC(0.885 ns) + CELL(0.621 ns) = 5.601 ns; Loc. = LAB_X21_Y13; Fanout = 2; COMB Node = 'cicint:cic_I|Add3~241'
+    Info: 7: + IC(0.000 ns) + CELL(0.086 ns) = 5.687 ns; Loc. = LAB_X21_Y13; Fanout = 2; COMB Node = 'cicint:cic_I|Add3~243'
+    Info: 8: + IC(0.000 ns) + CELL(0.086 ns) = 5.773 ns; Loc. = LAB_X21_Y13; Fanout = 2; COMB Node = 'cicint:cic_I|Add3~245'
+    Info: 9: + IC(0.000 ns) + CELL(0.086 ns) = 5.859 ns; Loc. = LAB_X21_Y13; Fanout = 2; COMB Node = 'cicint:cic_I|Add3~247'
+    Info: 10: + IC(0.000 ns) + CELL(0.086 ns) = 5.945 ns; Loc. = LAB_X21_Y13; Fanout = 2; COMB Node = 'cicint:cic_I|Add3~249'
+    Info: 11: + IC(0.107 ns) + CELL(0.506 ns) = 6.558 ns; Loc. = LAB_X21_Y12; Fanout = 3; COMB Node = 'cicint:cic_I|Add3~250'
+    Info: 12: + IC(1.667 ns) + CELL(0.621 ns) = 8.846 ns; Loc. = LAB_X19_Y13; Fanout = 2; COMB Node = 'cicint:cic_I|Add4~276'
+    Info: 13: + IC(0.107 ns) + CELL(0.506 ns) = 9.459 ns; Loc. = LAB_X19_Y12; Fanout = 3; COMB Node = 'cicint:cic_I|Add4~277'
+    Info: 14: + IC(0.885 ns) + CELL(0.621 ns) = 10.965 ns; Loc. = LAB_X18_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|Add5~715'
+    Info: 15: + IC(0.000 ns) + CELL(0.506 ns) = 11.471 ns; Loc. = LAB_X18_Y12; Fanout = 1; COMB Node = 'cicint:cic_I|Add5~716'
+    Info: 16: + IC(0.605 ns) + CELL(0.206 ns) = 12.282 ns; Loc. = LAB_X18_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|Add5~739'
+    Info: 17: + IC(0.918 ns) + CELL(0.621 ns) = 13.821 ns; Loc. = LAB_X17_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[10]~8282'
+    Info: 18: + IC(0.000 ns) + CELL(0.086 ns) = 13.907 ns; Loc. = LAB_X17_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[11]~8283'
+    Info: 19: + IC(0.000 ns) + CELL(0.086 ns) = 13.993 ns; Loc. = LAB_X17_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[12]~8284'
+    Info: 20: + IC(0.000 ns) + CELL(0.086 ns) = 14.079 ns; Loc. = LAB_X17_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[13]~8285'
+    Info: 21: + IC(0.000 ns) + CELL(0.086 ns) = 14.165 ns; Loc. = LAB_X17_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[14]~8286'
+    Info: 22: + IC(0.000 ns) + CELL(0.086 ns) = 14.251 ns; Loc. = LAB_X17_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|section_out6[15]~8287'
+    Info: 23: + IC(0.000 ns) + CELL(0.086 ns) = 14.337 ns; Loc. = LAB_X17_Y12; Fanout = 1; COMB Node = 'cicint:cic_I|section_out6[16]~8288'
+    Info: 24: + IC(0.000 ns) + CELL(0.506 ns) = 14.843 ns; Loc. = LAB_X17_Y12; Fanout = 1; COMB Node = 'cicint:cic_I|section_out6[17]~8254'
+    Info: 25: + IC(0.000 ns) + CELL(0.108 ns) = 14.951 ns; Loc. = LAB_X17_Y12; Fanout = 22; REG Node = 'cicint:cic_I|section_out6[17]'
+    Info: Total cell delay = 7.911 ns ( 52.91 % )
+    Info: Total interconnect delay = 7.040 ns ( 47.09 % )
 Info: Fitter routing operations beginning
-Info: Average interconnect usage is 7% of the available device resources. Peak interconnect usage is 19%
+Info: Average interconnect usage is 8% of the available device resources. Peak interconnect usage is 15%
     Info: The peak interconnect region extends from location X11_Y10 to location X22_Y19
-Info: Fitter routing operations ending: elapsed time is 00:00:20
+Info: Fitter routing operations ending: elapsed time is 00:00:11
 Info: Started post-fitting delay annotation
 Warning: Found 56 output pins without output pin load capacitance assignment
     Info: Pin "FIFO_ADR[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
@@ -2125,9 +2116,10 @@ Warning: Found 56 output pins without output pin load capacitance assignment
     Info: Pin "FX2_FD[15]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
 Info: Delay annotation completed successfully
 Info: Design uses memory blocks. Violating setup or hold times of memory block address registers for either read or write operations could cause memory contents to be corrupted. Make sure that all memory block address registers meet the setup and hold time requirements.
-Warning: Following 5 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results
+Warning: Following 6 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results
     Info: Pin FIFO_ADR[0] has GND driving its datain port
     Info: Pin PKEND has VCC driving its datain port
+    Info: Pin DEBUG_LED2 has VCC driving its datain port
     Info: Pin FPGA_GPIO12 has GND driving its datain port
     Info: Pin FPGA_GPIO13 has GND driving its datain port
     Info: Pin FPGA_GPIO15 has GND driving its datain port
@@ -2151,7 +2143,7 @@ Info: Following groups of pins have the same output enable
         Info: Type bidirectional pin FX2_FD[13] uses the 3.3-V LVTTL I/O standard
 Info: Quartus II Fitter was successful. 0 errors, 2 warnings
     Info: Allocated 186 megabytes of memory during processing
-    Info: Processing ended: Thu Jan 11 21:38:34 2007
-    Info: Elapsed time: 00:02:08
+    Info: Processing ended: Fri Jan 12 13:30:59 2007
+    Info: Elapsed time: 00:01:22
 
 

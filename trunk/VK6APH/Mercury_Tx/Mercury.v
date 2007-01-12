@@ -1,37 +1,29 @@
 /***********************************************************
 *
-*	Test program for LT2208
+*	Test program for AD9744
 *
 ************************************************************/
 
 
-/* 	This program interfaces the LT2208 to PowerSDR over USB.
-	The data from the LT2208 is in 16 bit parallel format and 
-	is valid at the positive edge of the LT2208 100MHz clock.
+/* 	This program interfaces the AD9744 ADC to PowerSDR over USB.
+	The data to the AD9744  is in 14 bit parallel format and 
+	is sent at the positive edge of the LT2208 100MHz clock.
+	
+	The ~48kHz I and Q data from PowerSDR is interpolated by 2048 in a CIC to 
+	give a data rate of 100MHz. 
 	
 	The data is processed by a CORDIC NCO to produce I and Q
-	outputs.  These are decimated by 512 in a CIC filter to 
-	give output data at ~192kHz to feed to the FX2 and hence via 
-	the USB to PowerSDR.
+	outputs.  These are then added together to remove the unwanted sideband
+	and passed to the AD9744.
 	
-	The data is sent in the Janus format vis:-
+	In order to use PowerSDR dummy data at ~48kHz is sent via the FX2.
+	
+	The data is sent and received  in the Janus format vis:-
 	
 	<7F7F><7F00><0000><FF00><I MSB,I ><I LSB,Q MSB><Q,Q LSB><0000> etc 
 	
 	Change log:
 	
-	12 June 2006 - First test version using state machine NCO
-	12 June 2006 - Sign extension for I and Q data added
-	13 June 2006 - CORDIC NCO started 
-	28 July 2006 - Modified to use OZY and  16 bit FIFO 
-	17 Aug  2006 - modified so that CIC takes 16 bits in and gives 24 out
-	28 Aug  2006 - uses  USRP CORDIC 
-	29 Aug  2006 - CIC changed to decimate by 512 to give 196kHz output
-	 3 Sept 2006 - Added decode of frequency from PowerSDR
-	10 Dec  2006 - Ported to Ozy V2 hardware
-	12 Dec  2006 - Start PWM DAC for audio out
-	23 Dec  2006 - Added debug code for PWM testing
-	27 Dec  2006 - PWM working 
 	11 Jan  2007 - Started transmitter code 
 		
 	
@@ -342,56 +334,60 @@ strobe <= 1'b0;								// reset Tx FIFO strobe
 if (loop_counter == 63) loop_counter <= 0; 	// count how many times through the loop to see if sync is to be sent
 
 case (AD_state)
-5'd0:	begin
-		if (PWM_clock)AD_state <= 5'd1;	// loop until 48kHz clock is high
-		else AD_state <= 5'd0;
-		end
-5'd1:	begin
-		if (loop_counter == 0) begin		// if zero  then send sync and C&C bytes
+0:	begin
+		if (PWM_clock)AD_state <= 0;		// loop until 48kHz clock is low
+		else AD_state <= 5'd1;
+	end
+1:	begin
+	if (PWM_clock)							// loop until 48kHz clock is high
+	begin
+		if (loop_counter == 0)				// if zero  then send sync and C&C bytes
+		begin
 			register <= 16'h7F7F;	
 			strobe <= 1'b1;					// strobe start if sync (80) into Tx FIFO
 			rx_avail <= 12'd4095 - sync_Rx_used;    
 			AD_state <= 5'd2;
-			end
-		else AD_state <= 5'd5;
 		end
-5'd2:	begin
+		else AD_state <= 5'd5;
+	end
+	else AD_state <= 1; 
+	end
+2:	begin
 		register <= 16'h7F00;				// rest of sync and C0 set to 0
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
-		end	
-5'd3: begin
+	end	
+3: begin
 		register <= 16'h0000;				// C1 and C2 set to 0
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
-		end
-5'd4: begin
-//		register <= 16'hFF00;				// C3 set to 255 and  C4 set to 0
+	end
+4: begin
 		register <= {rx_avail[11:4],8'b0};     // C3 - number of bytes free in Rx FIFO, C4 - sequence number
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
-		end		
-5'd5:	begin
-		register <= 0;			// dummy I and Q data for PowerSDR
+	end		
+5:	begin
+		register <= 0;						// dummy I and Q data for PowerSDR
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
-		end
-5'd6:	begin
-		register <= 0;	// last 8 bits of I and first 8 of Q			  		
+	end
+6:	begin
+		register <= 0;						// last 8 bits of I and first 8 of Q			  		
 		strobe <= 1'b1; 
 		AD_state <= AD_state + 1'b1;
-		end
-5'd7:	begin
+	end
+7:	begin
 		register <= 0;			// send Q data
 		strobe <= 1'b1; 
 		AD_state <= AD_state + 1'b1;
-		end
-5'd8: begin
+	end
+8: begin
 		register <= 0;				// send dummy mic  data set to 0
 		strobe <= 1'b1; 
 		loop_counter <= loop_counter + 1'b1;
 		AD_state <= 0;
-		end
+	end
 default: AD_state <= 0;
 endcase
 end
@@ -417,30 +413,6 @@ begin
 end
 
 
-// extend the lenght of the ce_out_i pulse so that A/D code has time to see it 
-reg [3:0]pulse;
-
-always @ (negedge clock)
-begin
-case (pulse)
-0:begin 
-	if (ce_out_i)begin
-		data_ready <= 1'b1;
-		pulse <= pulse + 1'b1;
-	end	
-	else begin
-		data_ready <= 1'b0;
-		pulse <= 0;
-	end
-  end 
-7:begin
-	data_ready <= 1'b0;
-	pulse <= 0;
-  end
-	
-default: pulse <= pulse + 1'b1;
-endcase
-end
 
 /////////////////////////////////////////////////////////////
 //
@@ -460,8 +432,8 @@ end
 wire [15:0] Rx_data;
 wire write_full;                         // high when tx side of fifo is full
 wire read_full;
-wire [11:0] Rx_used;             // how many bytes in FX2 side Rx fifo
-wire [11:0] Rx_used_rdside;  // read side count
+wire [11:0] Rx_used;             		// how many bytes in FX2 side Rx fifo
+wire [11:0] Rx_used_rdside;  			// read side count
 
 Rx_fifo Rx_fifo(.wrclk (SLRD),.rdreq (fifo_enable),.rdclk (clock_8),.wrreq (1'b1),
                 .data (Rx_register),.q (Rx_data), .wrfull (write_full),.wrusedw(Rx_used),
@@ -599,21 +571,17 @@ assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
 /*
         The state machine changes state on the negative edge of clock_8.
         The code loops until there are at least 1024 bytes in the Rx_FIFO.
-        The code then loops looking for a sync sequence (0x7F7F7F). Once located it
-        sleeps for 512 bytes (256 words) and then looks for the sync sequence again. If located
-        it contiunes, if not it restarts.
-
-        Whilst sync is being detected,or restarted, then all logic outputs are set to safe values.
+        The code then loops looking for a sync sequence (0x7F7F7F). 
 
         After successfully finding sync it  reads the next 5 bytes
         which are control bytes C0-C4. The next word is the Left audio and the following the
         Right audio which are sent to the TLV320 D/A converters.
-    	The next worid is the  I data and the following the Q data.
-    	The I and Q data is sent to individual 16 bit PWM D/A converters.
+    	The next word is the  I data and the following the Q data.
+    	The I and Q data is sent to the interpolating CIC filter and the the NCO. 
 
         The words sent to the D/A converters must be sent at the sample rate
         of the A/D converters (48kHz) so is synced on the positive edge of the PWM_clock. Further reads
-        of Rx_data are inhibited until the Rx FIFO has at least 16 bytes in it.
+        of Rx_data are inhibited until the Rx FIFO has at least 8 bytes in it.
 
         We need to loop through the following code 62 times. The first time though
         we look for the 3 sync bytes, 5 control bytes, 2 left bytes, 2 right bytes,  2 I bytes and 2 Q
@@ -628,8 +596,6 @@ assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
         the byte counter to be 63.
 
         At the end of the loop the next 3 bytes should be the sync sequence (state 3).
-        If the sync sequence is found then we continue otherwise we revert to the beginning
-        (state 0) and try to gain sync again.
 
         Note that we use clock_8 to read the Rx_FIFO. This is so we can remove data from it quickly. We then wait for
         the 48kHz PWM_clock so the received data is available at the correct time for the DACs.
@@ -650,7 +616,7 @@ reg [7:0] Rx_control_2;                 // control C2 from PC
 reg [7:0] Rx_control_3;                 // control C3 from PC
 reg [7:0] Rx_control_4;                 // control C4 from PC
 reg [8:0]sync_count;
-reg have_sync;                          // high when we have sync
+reg have_sync;                          // toggles each time we get sync
 
 
 always @ (posedge clock_8)
@@ -736,6 +702,9 @@ default: state_PWM <= 0;
 endcase
 end 
 
+// Get NCO frequency.
+// This should be done in the above routine but for some reason it does not work.
+
 
 reg led0;
 reg [2:0]freq;
@@ -743,7 +712,7 @@ reg [2:0]freq;
 always @ (posedge SLRD)  // positive edge of FX2 FIFO read strobe
 begin 
 case (freq)
-0: 	if (Rx_register == 16'h7F7F) freq <= 1; // look for start of sync
+0: 	if (Rx_register == 16'h7F7F) freq <= 1; // look for start of sync 7F7F
 	else freq <= 0;
 1: 	if (Rx_register[15:1] == 15'b0111_1111_0000_001) // 7F, 0000 001x
 	begin
@@ -756,17 +725,13 @@ case (freq)
 	freq <= 3;
 	end
 3:  begin
-	frequency[15:0] <= Rx_register[15:0];
+	frequency[15:0] <= Rx_register[15:0]; // have NCO frequency so loop back to start
 	freq <= 0;
 	end
 default: freq <= 0;
 endcase
 end 
 
-
-
-	
-	
 /////////////////////////////////////////////////////////////////
 //
 // Single bit PWM 16 bit D/A converters
@@ -798,9 +763,9 @@ assign Q_PWM_out = Q_PWM_accumulator[16];
 
 // LEDs for testing
 
-assign DEBUG_LED0 = ~have_sync; 	// LED 0 on when we have sync	
+assign DEBUG_LED0 = ~have_sync; 	// LED 0 toggles each time we have sync	
 assign DEBUG_LED1 = ~EP6_ready;		// LED D3 on when we can write to EP6
-assign DEBUG_LED2 = ~data_ready;    // LED on when LT2208 has data 
+assign DEBUG_LED2 = 1'b1;		    //  
 assign DEBUG_LED3 = ~EP2_has_data;  // LED on when we receive data 
 
 // Debug pins

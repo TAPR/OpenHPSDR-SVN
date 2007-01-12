@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Mercury
-Thu Jan 11 21:36:10 2007
+Fri Jan 12 13:29:34 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -112,15 +112,15 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Jan 11 21:36:10 2007   ;
+; Analysis & Synthesis Status        ; Successful - Fri Jan 12 13:29:34 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; Mercury                                 ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 2,093                                   ;
-;     Total combinational functions  ; 2,093                                   ;
-;     Dedicated logic registers      ; 1,728                                   ;
-; Total registers                    ; 1728                                    ;
+; Total logic elements               ; 2,089                                   ;
+;     Total combinational functions  ; 2,089                                   ;
+;     Dedicated logic registers      ; 1,724                                   ;
+; Total registers                    ; 1724                                    ;
 ; Total pins                         ; 76                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304                                  ;
@@ -198,54 +198,54 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                         ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
-; cicint.v                         ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/cicint.v                           ;
-; Rx_fifo.v                        ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Rx_fifo.v                          ;
-; phase_accumulator.v              ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/phase_accumulator.v                ;
-; cordic_stage.v                   ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/cordic_stage.v                     ;
-; cordic.v                         ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/cordic.v                           ;
-; Tx_fifo.v                        ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Tx_fifo.v                          ;
-; Mercury.v                        ; yes             ; User Verilog HDL File        ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.v                          ;
-; dcfifo.tdf                       ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf              ;
-; lpm_counter.inc                  ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/lpm_counter.inc         ;
-; lpm_add_sub.inc                  ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/lpm_add_sub.inc         ;
-; altdpram.inc                     ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/altdpram.inc            ;
-; a_graycounter.inc                ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/a_graycounter.inc       ;
-; a_fefifo.inc                     ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/a_fefifo.inc            ;
-; a_gray2bin.inc                   ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/a_gray2bin.inc          ;
-; dffpipe.inc                      ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/dffpipe.inc             ;
-; alt_sync_fifo.inc                ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/alt_sync_fifo.inc       ;
-; lpm_compare.inc                  ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/lpm_compare.inc         ;
-; altsyncram_fifo.inc              ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/altsyncram_fifo.inc     ;
-; aglobal51.inc                    ; yes             ; Other                        ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/aglobal51.inc           ;
-; db/dcfifo_6bf1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/dcfifo_6bf1.tdf                 ;
-; db/a_gray2bin_ndb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/a_gray2bin_ndb.tdf              ;
-; db/a_graycounter_r96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_r96.tdf           ;
-; db/a_graycounter_kk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_kk6.tdf           ;
-; db/a_graycounter_jk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_jk6.tdf           ;
-; db/altsyncram_vpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/altsyncram_vpu.tdf              ;
-; db/altsyncram_aec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/altsyncram_aec1.tdf             ;
-; db/alt_synch_pipe_297.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_297.tdf          ;
-; db/dffpipe_s98.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_s98.tdf                 ;
-; db/dffpipe_c09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_c09.tdf                 ;
-; db/alt_synch_pipe_iv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_iv7.tdf          ;
-; db/dffpipe_d09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_d09.tdf                 ;
-; db/alt_synch_pipe_397.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_397.tdf          ;
-; db/dffpipe_t98.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_t98.tdf                 ;
-; db/alt_synch_pipe_jv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_jv7.tdf          ;
-; db/dffpipe_e09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_e09.tdf                 ;
-; db/dcfifo_pre1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/dcfifo_pre1.tdf                 ;
-; db/a_gray2bin_mdb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/a_gray2bin_mdb.tdf              ;
-; db/a_graycounter_q96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_q96.tdf           ;
-; db/a_graycounter_lk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_lk6.tdf           ;
-; db/a_graycounter_ik6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_ik6.tdf           ;
-; db/altsyncram_tpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/altsyncram_tpu.tdf              ;
-; db/altsyncram_8ec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/altsyncram_8ec1.tdf             ;
-; db/alt_synch_pipe_hv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_hv7.tdf          ;
-; db/dffpipe_b09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_b09.tdf                 ;
-; db/alt_synch_pipe_497.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_497.tdf          ;
-; db/dffpipe_u98.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_u98.tdf                 ;
-; db/alt_synch_pipe_kv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_kv7.tdf          ;
-; db/dffpipe_f09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_f09.tdf                 ;
+; cicint.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/cicint.v                            ;
+; Rx_fifo.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/Rx_fifo.v                           ;
+; phase_accumulator.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/phase_accumulator.v                 ;
+; cordic_stage.v                   ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/cordic_stage.v                      ;
+; cordic.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/cordic.v                            ;
+; Tx_fifo.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/Tx_fifo.v                           ;
+; Mercury.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.v                           ;
+; dcfifo.tdf                       ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf               ;
+; lpm_counter.inc                  ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_counter.inc          ;
+; lpm_add_sub.inc                  ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_add_sub.inc          ;
+; altdpram.inc                     ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altdpram.inc             ;
+; a_graycounter.inc                ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_graycounter.inc        ;
+; a_fefifo.inc                     ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_fefifo.inc             ;
+; a_gray2bin.inc                   ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_gray2bin.inc           ;
+; dffpipe.inc                      ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dffpipe.inc              ;
+; alt_sync_fifo.inc                ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/alt_sync_fifo.inc        ;
+; lpm_compare.inc                  ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_compare.inc          ;
+; altsyncram_fifo.inc              ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altsyncram_fifo.inc      ;
+; aglobal51.inc                    ; yes             ; Other                        ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/aglobal51.inc            ;
+; db/dcfifo_6bf1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/dcfifo_6bf1.tdf                  ;
+; db/a_gray2bin_ndb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/a_gray2bin_ndb.tdf               ;
+; db/a_graycounter_r96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_r96.tdf            ;
+; db/a_graycounter_kk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_kk6.tdf            ;
+; db/a_graycounter_jk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_jk6.tdf            ;
+; db/altsyncram_vpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/altsyncram_vpu.tdf               ;
+; db/altsyncram_aec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/altsyncram_aec1.tdf              ;
+; db/alt_synch_pipe_297.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_297.tdf           ;
+; db/dffpipe_s98.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_s98.tdf                  ;
+; db/dffpipe_c09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_c09.tdf                  ;
+; db/alt_synch_pipe_iv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_iv7.tdf           ;
+; db/dffpipe_d09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_d09.tdf                  ;
+; db/alt_synch_pipe_397.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_397.tdf           ;
+; db/dffpipe_t98.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_t98.tdf                  ;
+; db/alt_synch_pipe_jv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_jv7.tdf           ;
+; db/dffpipe_e09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_e09.tdf                  ;
+; db/dcfifo_pre1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/dcfifo_pre1.tdf                  ;
+; db/a_gray2bin_mdb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/a_gray2bin_mdb.tdf               ;
+; db/a_graycounter_q96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_q96.tdf            ;
+; db/a_graycounter_lk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_lk6.tdf            ;
+; db/a_graycounter_ik6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/a_graycounter_ik6.tdf            ;
+; db/altsyncram_tpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/altsyncram_tpu.tdf               ;
+; db/altsyncram_8ec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/altsyncram_8ec1.tdf              ;
+; db/alt_synch_pipe_hv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_hv7.tdf           ;
+; db/dffpipe_b09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_b09.tdf                  ;
+; db/alt_synch_pipe_497.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_497.tdf           ;
+; db/dffpipe_u98.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_u98.tdf                  ;
+; db/alt_synch_pipe_kv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/alt_synch_pipe_kv7.tdf           ;
+; db/dffpipe_f09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/dffpipe_f09.tdf                  ;
 ; lpm_add_sub.tdf                  ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_add_sub.tdf         ;
 ; addcore.inc                      ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/addcore.inc             ;
 ; look_add.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/look_add.inc            ;
@@ -254,8 +254,8 @@ applicable agreement for further details.
 ; alt_stratix_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/alt_stratix_add_sub.inc ;
 ; alt_mercury_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/alt_mercury_add_sub.inc ;
 ; aglobal61.inc                    ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/aglobal61.inc           ;
-; db/add_sub_sjg.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/add_sub_sjg.tdf                 ;
-; db/add_sub_rjg.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPDSDR/trunk/VK6APH/Mercury_Tx/db/add_sub_rjg.tdf                 ;
+; db/add_sub_sjg.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/add_sub_sjg.tdf                  ;
+; db/add_sub_rjg.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Mercury_Tx/db/add_sub_rjg.tdf                  ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 
 
@@ -264,27 +264,27 @@ applicable agreement for further details.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimated Total logic elements              ; 2,093      ;
+; Estimated Total logic elements              ; 2,089      ;
 ;                                             ;            ;
-; Total combinational functions               ; 2093       ;
+; Total combinational functions               ; 2089       ;
 ; Logic element usage by number of LUT inputs ;            ;
 ;     -- 4 input functions                    ; 178        ;
-;     -- 3 input functions                    ; 1285       ;
-;     -- <=2 input functions                  ; 630        ;
+;     -- 3 input functions                    ; 1282       ;
+;     -- <=2 input functions                  ; 629        ;
 ;                                             ;            ;
 ; Logic elements by mode                      ;            ;
-;     -- normal mode                          ; 711        ;
+;     -- normal mode                          ; 707        ;
 ;     -- arithmetic mode                      ; 1382       ;
 ;                                             ;            ;
-; Total registers                             ; 1728       ;
-;     -- Dedicated logic registers            ; 1728       ;
+; Total registers                             ; 1724       ;
+;     -- Dedicated logic registers            ; 1724       ;
 ;     -- I/O registers                        ; 0          ;
 ;                                             ;            ;
 ; I/O pins                                    ; 76         ;
 ; Total memory bits                           ; 98304      ;
 ; Maximum fan-out node                        ; clk_enable ;
 ; Maximum fan-out                             ; 1257       ;
-; Total fan-out                               ; 11781      ;
+; Total fan-out                               ; 11761      ;
 ; Average fan-out                             ; 3.00       ;
 +---------------------------------------------+------------+
 
@@ -294,7 +294,7 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                             ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------+
-; |Mercury                                      ; 2093 (225)        ; 1728 (291)   ; 98304       ; 0            ; 0       ; 0         ; 76   ; 0            ; |Mercury                                                                                                                        ;
+; |Mercury                                      ; 2089 (221)        ; 1724 (287)   ; 98304       ; 0            ; 0       ; 0         ; 76   ; 0            ; |Mercury                                                                                                                        ;
 ;    |Rx_fifo:Rx_fifo|                          ; 72 (0)            ; 108 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|Rx_fifo:Rx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|               ; 72 (0)            ; 108 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
 ;          |dcfifo_6bf1:auto_generated|         ; 72 (21)           ; 108 (29)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated                                                     ;
@@ -509,8 +509,7 @@ Encoding Type:  One-Hot
 ; rx_cordic/cordic_stage0/Qout[17]                                  ; Merged with rx_cordic/cordic_stage0/Qout[16] ;
 ; rx_cordic/cordic_stage9/PHout[0]                                  ; Lost fanout                                  ;
 ; rx_cordic/cordic_stage8/PHout[0]                                  ; Lost fanout                                  ;
-; pulse[3]                                                          ; Stuck at GND due to stuck port data_in       ;
-; Total Number of Removed Registers = 95                            ;                                              ;
+; Total Number of Removed Registers = 94                            ;                                              ;
 +-------------------------------------------------------------------+----------------------------------------------+
 
 
@@ -519,7 +518,7 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1728  ;
+; Total registers                              ; 1724  ;
 ; Number of registers using Synchronous Clear  ; 627   ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 636   ;
@@ -534,25 +533,25 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Mercury|loop_counter[0]                                       ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Mercury|loop_counter[3]                                       ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|Qstage0[14]                          ;
 ; 3:1                ; 28 bits   ; 56 LEs        ; 56 LEs               ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|Istage0[0]                           ;
 ; 3:1                ; 28 bits   ; 56 LEs        ; 56 LEs               ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage11|Qout[14] ;
 ; 3:1                ; 37 bits   ; 74 LEs        ; 74 LEs               ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage10|Qout[0]  ;
 ; 3:1                ; 49 bits   ; 98 LEs        ; 98 LEs               ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage9|Iout[10]  ;
-; 3:1                ; 51 bits   ; 102 LEs       ; 102 LEs              ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage8|Qout[6]   ;
+; 3:1                ; 51 bits   ; 102 LEs       ; 102 LEs              ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage8|Qout[3]   ;
 ; 3:1                ; 51 bits   ; 102 LEs       ; 102 LEs              ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage7|Qout[4]   ;
 ; 3:1                ; 51 bits   ; 102 LEs       ; 102 LEs              ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage6|Iout[9]   ;
 ; 3:1                ; 50 bits   ; 100 LEs       ; 100 LEs              ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage5|Iout[9]   ;
-; 3:1                ; 51 bits   ; 102 LEs       ; 102 LEs              ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage4|Qout[12]  ;
+; 3:1                ; 51 bits   ; 102 LEs       ; 102 LEs              ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage4|PHout[0]  ;
 ; 3:1                ; 51 bits   ; 102 LEs       ; 102 LEs              ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage3|Iout[9]   ;
-; 3:1                ; 51 bits   ; 102 LEs       ; 102 LEs              ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage2|Qout[16]  ;
-; 3:1                ; 49 bits   ; 98 LEs        ; 98 LEs               ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage1|Qout[17]  ;
-; 3:1                ; 38 bits   ; 76 LEs        ; 76 LEs               ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[13]  ;
-; 16:1               ; 7 bits    ; 70 LEs        ; 7 LEs                ; 63 LEs                 ; Yes        ; |Mercury|byte_count[6]                                         ;
-; 16:1               ; 3 bits    ; 30 LEs        ; 24 LEs               ; 6 LEs                  ; Yes        ; |Mercury|AD_state[1]                                           ;
+; 3:1                ; 51 bits   ; 102 LEs       ; 102 LEs              ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage2|Qout[17]  ;
+; 3:1                ; 49 bits   ; 98 LEs        ; 98 LEs               ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage1|Qout[8]   ;
+; 3:1                ; 38 bits   ; 76 LEs        ; 76 LEs               ; 0 LEs                  ; Yes        ; |Mercury|cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[11]  ;
+; 16:1               ; 7 bits    ; 70 LEs        ; 7 LEs                ; 63 LEs                 ; Yes        ; |Mercury|byte_count[1]                                         ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 12 LEs               ; 8 LEs                  ; Yes        ; |Mercury|strobe                                                ;
 ; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Mercury|FIFO_ADR[1]~reg0                                      ;
-; 17:1               ; 5 bits    ; 55 LEs        ; 20 LEs               ; 35 LEs                 ; Yes        ; |Mercury|register[13]                                          ;
+; 18:1               ; 5 bits    ; 60 LEs        ; 20 LEs               ; 40 LEs                 ; Yes        ; |Mercury|register[6]                                           ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 
 
@@ -1688,7 +1687,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Jan 11 21:35:23 2007
+    Info: Processing started: Fri Jan 12 13:29:07 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
 Info: Found 1 design units, including 1 entities, in source file cicint.v
     Info: Found entity 1: cicint
@@ -1711,15 +1710,15 @@ Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
 Info: Found 1 design units, including 1 entities, in source file Mercury.v
     Info: Found entity 1: Mercury
 Info: Elaborating entity "Mercury" for the top level hierarchy
-Warning (10858): Verilog HDL warning at Mercury.v(195): object sync_Rx_used used but never assigned
-Warning (10030): Net "sync_Rx_used[11]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[10]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[9]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[8]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[7]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[6]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[5]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[4]" at Mercury.v(195) has no driver or initial value, using a default initial value 0
+Warning (10858): Verilog HDL warning at Mercury.v(187): object sync_Rx_used used but never assigned
+Warning (10030): Net "sync_Rx_used[11]" at Mercury.v(187) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[10]" at Mercury.v(187) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[9]" at Mercury.v(187) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[8]" at Mercury.v(187) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[7]" at Mercury.v(187) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[6]" at Mercury.v(187) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[5]" at Mercury.v(187) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[4]" at Mercury.v(187) has no driver or initial value, using a default initial value 0
 Info: Elaborating entity "cicint" for hierarchy "cicint:cic_I"
 Warning (10230): Verilog HDL assignment warning at cicint.v(182): truncated value with size 32 to match size of target (11)
 Warning (10230): Verilog HDL assignment warning at cicint.v(188): truncated value with size 32 to match size of target (1)
@@ -1738,7 +1737,7 @@ Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_s
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage10"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage11"
 Info: Elaborating entity "Rx_fifo" for hierarchy "Rx_fifo:Rx_fifo"
-Warning: Entity "dcfifo" obtained from "C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf" instead of from Quartus II megafunction library
+Warning: Entity "dcfifo" obtained from "C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf" instead of from Quartus II megafunction library
 Warning: Using design file ../Mercury/megafunctions/dcfifo.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
     Info: Found entity 1: dcfifo
 Info: Elaborating entity "dcfifo" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
@@ -1936,10 +1935,10 @@ Info: Found 1 design units, including 1 entities, in source file db/add_sub_sjg.
 Info: Elaborated megafunction instantiation "cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1"
 Info: Found 1 design units, including 1 entities, in source file db/add_sub_rjg.tdf
     Info: Found entity 1: add_sub_rjg
-Warning: Reduced register "pulse[3]" with stuck data_in port to stuck value GND
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "FIFO_ADR[0]" stuck at GND
     Warning: Pin "PKEND" stuck at VCC
+    Warning: Pin "DEBUG_LED2" stuck at VCC
     Warning: Pin "FPGA_GPIO12" stuck at GND
     Warning: Pin "FPGA_GPIO13" stuck at GND
     Warning: Pin "FPGA_GPIO15" stuck at GND
@@ -2001,21 +2000,21 @@ Warning: Design contains 16 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "ADC[13]"
     Warning: No output dependent on input pin "ADC[14]"
     Warning: No output dependent on input pin "ADC[15]"
-Info: Implemented 2687 device resources after synthesis - the final resource count might be different
+Info: Implemented 2682 device resources after synthesis - the final resource count might be different
     Info: Implemented 20 input pins
     Info: Implemented 40 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 2579 logic cells
+    Info: Implemented 2574 logic cells
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 65 warnings
     Info: Allocated 139 megabytes of memory during processing
-    Info: Processing ended: Thu Jan 11 21:36:09 2007
-    Info: Elapsed time: 00:00:46
+    Info: Processing ended: Fri Jan 12 13:29:34 2007
+    Info: Elapsed time: 00:00:27
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/HPDSDR/trunk/VK6APH/Mercury_Tx/Mercury.map.smsg.
+The suppressed messages can be found in C:/HPSDR/trunk/VK6APH/Mercury_Tx/Mercury.map.smsg.
 
 
