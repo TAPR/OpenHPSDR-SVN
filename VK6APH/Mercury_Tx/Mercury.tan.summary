@@ -5,7 +5,7 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 6.623 ns
+Actual Time    : 7.325 ns
 From           : FLAGC
 To             : SLWR~reg0
 From Clock     : --
@@ -15,8 +15,8 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 16.145 ns
-From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_jk6:wrptr_gp|counter_ffa[1]
+Actual Time    : 15.184 ns
+From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_jk6:wrptr_gp|counter_ffa[2]
 To             : FPGA_GPIO7
 From Clock     : IFCLK
 To Clock       : --
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.538 ns
+Actual Time    : 11.539 ns
 From           : FLAGA
 To             : DEBUG_LED3
 From Clock     : --
@@ -35,38 +35,38 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -4.517 ns
-From           : FLAGC
-To             : SLEN
+Actual Time    : -3.909 ns
+From           : FX2_FD[7]
+To             : Rx_register[15]
 From Clock     : --
 To Clock       : IFCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'clock'
-Slack          : -5.191 ns
+Slack          : -4.601 ns
 Required Time  : 100.00 MHz ( period = 10.000 ns )
-Actual Time    : 65.83 MHz ( period = 15.191 ns )
-From           : cicint:cic_Q|input_register[0]
+Actual Time    : 68.49 MHz ( period = 14.601 ns )
+From           : cicint:cic_Q|diff1[0]
 To             : cicint:cic_Q|section_out6[17]
 From Clock     : clock
 To Clock       : clock
-Failed Paths   : 971
+Failed Paths   : 891
 
 Type           : Clock Setup: 'clock_8'
-Slack          : 0.348 ns
+Slack          : 0.133 ns
 Required Time  : 6.25 MHz ( period = 160.000 ns )
 Actual Time    : N/A
 From           : PWM_clock
-To             : byte_count[6]
+To             : register[6]
 From Clock     : clock
 To Clock       : clock_8
 Failed Paths   : 0
 
 Type           : Clock Setup: 'IFCLK'
-Slack          : 1.134 ns
+Slack          : 2.589 ns
 Required Time  : 100.00 MHz ( period = 10.000 ns )
-Actual Time    : 129.33 MHz ( period = 7.732 ns )
-From           : Rx_register[11]
+Actual Time    : 207.38 MHz ( period = 4.822 ns )
+From           : Rx_register[14]
 To             : freq.000
 From Clock     : IFCLK
 To Clock       : IFCLK
@@ -76,8 +76,8 @@ Type           : Clock Hold: 'clock'
 Slack          : 0.499 ns
 Required Time  : 100.00 MHz ( period = 10.000 ns )
 Actual Time    : N/A
-From           : reset_count[0]
-To             : reset_count[0]
+From           : clock_count[3]
+To             : clock_count[3]
 From Clock     : clock
 To Clock       : clock
 Failed Paths   : 0
@@ -110,7 +110,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 971
+Failed Paths   : 891
 
 --------------------------------------------------------------------------------------
 
