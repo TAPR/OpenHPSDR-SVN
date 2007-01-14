@@ -1,0 +1,40 @@
+--dffpipe WIDTH=1 clock d q ALTERA_INTERNAL_OPTIONS=X_ON_VIOLATION_OPTION=OFF
+--VERSION_BEGIN 6.1 cbx_a_gray2bin 2006:02:28:14:37:30:SJ cbx_a_graycounter 2006:05:31:11:44:48:SJ cbx_altdpram 2006:11:03:15:22:16:SJ cbx_altsyncram 2006:11:03:10:29:54:SJ cbx_cycloneii 2006:09:29:19:03:26:SJ cbx_dcfifo 2006:11:03:10:22:54:SJ cbx_fifo_common 2006:03:14:10:59:42:SJ cbx_flex10ke 2006:01:09:11:13:48:SJ cbx_lpm_add_sub 2006:10:10:22:03:24:SJ cbx_lpm_compare 2006:04:25:14:54:12:SJ cbx_lpm_counter 2006:11:07:16:43:46:SJ cbx_lpm_decode 2006:04:25:15:10:18:SJ cbx_lpm_mux 2006:04:25:15:10:08:SJ cbx_mgl 2006:10:27:16:08:48:SJ cbx_scfifo 2006:10:16:20:17:00:SJ cbx_stratix 2006:09:18:10:47:42:SJ cbx_stratixii 2006:10:13:14:01:30:SJ cbx_stratixiii 2006:10:19:19:28:28:SJ cbx_util_mgl 2006:11:03:10:32:30:SJ  VERSION_END
+
+
+--  Copyright (C) 1991-2006 Altera Corporation
+--  Your use of Altera Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Altera Program License 
+--  Subscription Agreement, Altera MegaCore Function License 
+--  Agreement, or other applicable license agreement, including, 
+--  without limitation, that your use is for the sole purpose of 
+--  programming logic devices manufactured by Altera and sold by 
+--  Altera or its authorized distributors.  Please refer to the 
+--  applicable agreement for further details.
+
+
+FUNCTION dffpipe_s98 (clock, d[0..0])
+RETURNS ( q[0..0]);
+
+--synthesis_resources = reg 1 
+OPTIONS ALTERA_INTERNAL_OPTION = "X_ON_VIOLATION_OPTION=OFF";
+
+SUBDESIGN alt_synch_pipe_297
+( 
+	clock	:	input;
+	d[0..0]	:	input;
+	q[0..0]	:	output;
+) 
+VARIABLE 
+	dffpipe7 : dffpipe_s98;
+
+BEGIN 
+	dffpipe7.clock = clock;
+	dffpipe7.d[] = d[];
+	q[] = dffpipe7.q[];
+END;
+--VALID FILE

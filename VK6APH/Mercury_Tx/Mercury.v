@@ -251,20 +251,38 @@ begin
 	sync_frequency <= frequency;
 end
 
+
+// latch data to  CIC when ce_out_x goes low
+
+reg [15:0]cic_i;
+reg [15:0]cic_q;
+
+always @ (negedge ce_out_i)
+begin
+	cic_i <= I_PWM;
+end 
+
+always @ (negedge ce_out_q)
+begin
+	cic_q <= Q_PWM;
+end 
+	
+
 ////////////////////////////////////////////////////////////////
 //
 //  Interpolating CIC filter  2048 
 //
 ////////////////////////////////////////////////////////////////
 
-wire [13:0]cic_out_i;
-wire [13:0]cic_out_q;
+wire [15:0]cic_out_i;
+wire [15:0]cic_out_q;
 wire ce_out_i;				// narrow pulse when data available
 wire ce_out_q;				// narrow pulse when data available
 
+cicint cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_i),.filter_out(cic_out_i),.ce_out(ce_out_i));
+cicint cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_q),.filter_out(cic_out_q),.ce_out(ce_out_q));
 
-cicint cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(I_PWM),.filter_out(cic_out_i),.ce_out(ce_out_i));
-cicint cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(Q_PWM),.filter_out(cic_out_q),.ce_out(ce_out_q));
+	
 
 
 //////////////////////////////////////////////////////////////
@@ -278,11 +296,15 @@ cicint cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in
 
  
 
-wire [13:0]i_out;
-wire [13:0]q_out;
+wire [15:0]i_out;
+wire [15:0]q_out;
 wire [15:0]temp_ADC;
 wire [31:0] phase;
 reg  [31:0]frequency;
+
+wire [16:0]q_temp;
+wire [16:0]i_temp;
+
 	
 //assign sync_frequency = 32'h24538EF3; // 14.190MHz i.e. FREQ /(100e6/2^32)
 
@@ -290,14 +312,23 @@ reg  [31:0]frequency;
 phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
 
 // The cordic takes I and Q in along with the top 15 bits of the phase dword.  The I and Q out are freq shifted
-cordic rx_cordic(.clk(ce_out_i),.reset(~clk_enable),.Iin(cic_out_i),.Qin(cic_out_q),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
+cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(cic_out_i),.Qin(cic_out_q),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
 
-// add the I and Q outputs from the cordic to cancel the unwanted sideband
+// add the I and Q outputs from the cordic to cancel the unwanted sideband, use sign extension (thanks Bill!)
 
-wire [14:0]DAC_temp;
-assign DAC_temp = i_out + q_out; // this may overflow to 15 bits
-assign DAC = DAC_temp[14:1];	 // trim to 14 bits
 
+assign i_temp[15:0] = i_out;
+assign i_temp[16] 	= i_out[15];
+assign q_temp[15:0] = q_out;
+assign q_temp[16]	= q_out[15];
+
+wire [16:0]DAC_temp;
+
+assign DAC_temp = i_temp + q_temp;
+assign DAC[13:0] = DAC_temp[16:3] + 14'h2000;  // add Vcc/2 so that zero in gives half rail out 
+
+
+//assign DAC = i_out[15:2] + 14'h2000; 
 
 
 
@@ -605,8 +636,10 @@ assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
 reg [4:0] state_PWM;                    // state for PWM  counts 0 to 13
 reg [15:0] Left_PWM;                    // Left 16 bit PWM data for D/A converter
 reg [15:0] Right_PWM;                   // Right 16 bit PWM data for D/A converter
-reg [13:0] I_PWM;                       // I 14 bit PWM data for transmitter
-reg [13:0] Q_PWM;                       // Q 14 bit PWM data for transmitter
+reg [15:0] I_PWM;                       // I 14 bit PWM data for transmitter
+reg [15:0] I_PWM_temp;
+reg [15:0] Q_PWM;                       // Q 14 bit PWM data for transmitter
+reg [15:0] Q_PWM_temp;
 reg fifo_enable;                        // controls reading of dual clock fifo
 reg [11:0] synced_Rx_used;              // how may bytes in FX2 side Rx fifos synced to clock_8
 reg [6:0] byte_count;                   // counts number of times round loop
@@ -619,7 +652,7 @@ reg [8:0]sync_count;
 reg have_sync;                          // toggles each time we get sync
 
 
-always @ (posedge clock_8)
+always @ (negedge clock_8)
 begin
 synced_Rx_used <= Rx_used;      
 case(state_PWM)
@@ -666,12 +699,12 @@ case(state_PWM)
    end
 // state 6 - get I PWM
 6: begin
-	I_PWM <= Rx_data[15:2];
+	I_PWM_temp <= Rx_data;
 	state_PWM <= 7;
    end
 // state 7 - get Q PWM
 7: begin
-	Q_PWM <= Rx_data[15:2];
+	Q_PWM_temp <= Rx_data;
 	state_PWM <= 8;
    end
 // state 8 - loop here until 48kHz clock goes low 
@@ -683,6 +716,8 @@ case(state_PWM)
 // state 9 - wait until 48kHz clock goes high
 9: begin
 	if(PWM_clock)begin
+		I_PWM <= I_PWM_temp;	// ensure that I and Q update at the same time 
+		Q_PWM <= Q_PWM_temp;  
 		byte_count <= byte_count + 1'b1;
 	 	state_PWM <= 10;
 	end
@@ -765,7 +800,7 @@ assign Q_PWM_out = Q_PWM_accumulator[16];
 
 assign DEBUG_LED0 = ~have_sync; 	// LED 0 toggles each time we have sync	
 assign DEBUG_LED1 = ~EP6_ready;		// LED D3 on when we can write to EP6
-assign DEBUG_LED2 = 1'b1;		    //  
+assign DEBUG_LED2 = ce_out_i;		//  strobe from CIC filter
 assign DEBUG_LED3 = ~EP2_has_data;  // LED on when we receive data 
 
 // Debug pins

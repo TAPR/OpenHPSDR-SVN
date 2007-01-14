@@ -1,0 +1,7 @@
+
+State Machine - |Mercury|freq
+Name freq.001 freq.011 freq.010 freq.000 
+freq.000 0 0 0 0 
+freq.010 0 0 1 1 
+freq.011 0 1 0 1 
+freq.001 1 0 0 1 
