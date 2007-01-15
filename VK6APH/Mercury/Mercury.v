@@ -31,7 +31,9 @@
 	10 Dec  2006 - Ported to Ozy V2 hardware
 	12 Dec  2006 - Start PWM DAC for audio out
 	23 Dec  2006 - Added debug code for PWM testing
-	27 Dec  2006 - PWM working  
+	27 Dec  2006 - PWM working 
+	14 Jan  2007 - Modified sync code and NCO frequency read
+	14 Jan  2007 - Added dc offset removal  
 		
 	
 */
@@ -219,6 +221,17 @@ assign temp_ADC = ADC;
 
 //assign temp_ADC = ADC[0]? {~ADC[15:1],ADC[0]}: ADC;  // Compensate for Digital Output Randomizer
 
+//////////////////////////////////////////////////////////////////////
+//
+//		Remove DC offset from ADC output 
+//
+//////////////////////////////////////////////////////////////////////
+
+//wire [15:0]ADC_no_dc;
+
+//dc_offset_correct dc_offset_correct_adc(.clk(!clock),.clken(clk_enable),.data_in(temp_ADC),.data_out(ADC_no_dc),.dc_level_out());
+
+
 //////////////////////////////////////////////////////////////
 //
 //		CLOCKS
@@ -273,7 +286,7 @@ wire [15:0]temp_ADC;
 	// The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
 	phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
 
-	// The cordic takes I and Q in along with the top 18 bits of the phase dword.  The I and Q out are freq shifted
+	// The cordic takes I and Q in along with the top 16 bits of the phase dword.  The I and Q out are freq shifted
 	cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(16'd0),.Qin(temp_ADC),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
 
 
@@ -666,7 +679,7 @@ reg [8:0]sync_count;
 reg have_sync;                          // high when we have sync
 
 
-always @ (posedge clock_8)
+always @ (negedge clock_8)
 begin
 synced_Rx_used <= Rx_used;      
 case(state_PWM)
@@ -687,17 +700,26 @@ case(state_PWM)
 // state 1 - look for balance of sync  - if true continue else start again
   1: begin
      if (Rx_data[15:8] == 8'h7F)begin
+		Rx_control_0 <= Rx_data[7:0];
         have_sync <= ~have_sync;        // toggle sync  
         state_PWM <= 2;
      end
      else state_PWM <= 0;
      end
-// state 2 - skip Rx_control_1 & Rx_control_2
+// state 2 - Get NCO frequency
   2: begin
+		if (Rx_control_0[7:1] == 7'b0000_001)
+		begin
+			frequency[31:16]<= Rx_data;	
+		end
         state_PWM <= 3;
      end
-// state 3 - skip Rx_control_3 & Rx_control_4 
+// state 3 - get NCO frequency
   3: begin
+		if (Rx_control_0[7:1] == 7'b0000_001)
+		begin
+			frequency[15:0]<= Rx_data;	
+		end
         state_PWM <= 4;
 	end
 // state 4 - get Left audio and CORDIC frequency
@@ -747,7 +769,7 @@ default: state_PWM <= 0;
 endcase
 end 
 
-
+/*
 reg led0;
 reg [2:0]freq;
 
@@ -773,7 +795,7 @@ case (freq)
 default: freq <= 0;
 endcase
 end 
-
+*/
 
 
 	
@@ -794,7 +816,7 @@ reg [16:0] I_PWM_accumulator;
 reg [16:0] Q_PWM_accumulator;
 
 
-always @(negedge clock)
+always @(negedge IFCLK)
 begin
         I_Data_in <= I_Data + 16'h8000;         // so that 0 in gives 50:50 mark/space
         Q_Data_in <= Q_Data + 16'h8000;
@@ -826,7 +848,7 @@ assign FPGA_GPIO7 = write_full;
 assign FPGA_GPIO8 = state_PWM[2];		
 assign FPGA_GPIO9 = read_full;		
 assign FPGA_GPIO10 = state_PWM[3];	
-assign FPGA_GPIO11 = led0;
+assign FPGA_GPIO11 = 1'b1;
 assign FPGA_GPIO12 = state_PWM[4];	
 assign FPGA_GPIO13 = 1'b0;	
 assign FPGA_GPIO14 = I_PWM_out;	
