@@ -1,15 +1,13 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="Mercury">
-		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage7|lpm_add_sub:Add2" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage8|lpm_add_sub:Add1" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_6bf1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage10|lpm_add_sub:Add1" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage1|lpm_add_sub:Add1" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage8|lpm_add_sub:Add2" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage9|lpm_add_sub:Add1" CBX_FILE_NAME="add_sub_sjg.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage10|lpm_add_sub:Add2" CBX_FILE_NAME="add_sub_sjg.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage10|lpm_add_sub:Add2" CBX_FILE_NAME="add_sub_rjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage1|lpm_add_sub:Add2" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage2|lpm_add_sub:Add1" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage5|lpm_add_sub:Add2" CBX_FILE_NAME="add_sub_sjg.tdf"/>
@@ -22,6 +20,7 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage3|lpm_add_sub:Add2" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage4|lpm_add_sub:Add1" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_pre1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|adder:add_IQ|parallel_add:parallel_add_component" CBX_FILE_NAME="par_add_rje.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage4|lpm_add_sub:Add2" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Mercury|cordic:rx_cordic|cordic_stage:cordic_stage5|lpm_add_sub:Add1" CBX_FILE_NAME="add_sub_sjg.tdf"/>
 	</PROJECT>

@@ -1,3 +1,29 @@
+// V0.0 14th January 2007
+//
+// Copyright 2007 Phil Harman VK6APH
+//
+//  HPSDR - High Performance Software Defined Radio
+//
+//
+//  Mercury Transmitter.
+//
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation; either version 2 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+
+
 /***********************************************************
 *
 *	Test program for AD9744
@@ -24,7 +50,9 @@
 	
 	Change log:
 	
-	11 Jan  2007 - Started transmitter code 
+	11 Jan  2007 - Started transmitter code
+	13 Jan  2007 - first code working 
+	18 Jan  2007 - started AM testing  
 		
 	
 */
@@ -252,7 +280,8 @@ begin
 end
 
 
-// latch data to  CIC when ce_out_x goes low
+// latch I & Q data into  CIC when ce_out_x goes low. Use negative edge 
+// to ensure that data is stable.
 
 reg [15:0]cic_i;
 reg [15:0]cic_q;
@@ -264,7 +293,7 @@ end
 
 always @ (negedge ce_out_q)
 begin
-	cic_q <= Q_PWM;
+	cic_q <= Q_PWM + 16'h4000;
 end 
 	
 
@@ -276,13 +305,11 @@ end
 
 wire [15:0]cic_out_i;
 wire [15:0]cic_out_q;
-wire ce_out_i;				// narrow pulse when data available
-wire ce_out_q;				// narrow pulse when data available
+wire ce_out_i;				// narrow pulse when data required
+wire ce_out_q;				// narrow pulse when data required
 
 cicint cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_i),.filter_out(cic_out_i),.ce_out(ce_out_i));
 cicint cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_q),.filter_out(cic_out_q),.ce_out(ce_out_q));
-
-	
 
 
 //////////////////////////////////////////////////////////////
@@ -293,8 +320,6 @@ cicint cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in
 //////////////////////////////////////////////////////////////
 
 //Code rotates input at set frequency  and produces I & Q /
-
- 
 
 wire [15:0]i_out;
 wire [15:0]q_out;
@@ -311,26 +336,15 @@ wire [16:0]i_temp;
 // The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
 phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
 
-// The cordic takes I and Q in along with the top 15 bits of the phase dword.  The I and Q out are freq shifted
-cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(cic_out_i),.Qin(cic_out_q),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
+// The cordic takes I and Q in along with the top 16 bits of the phase dword.  The I and Q out are freq shifted
+cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(16'd0),.Qin(cic_out_q),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
 
-// add the I and Q outputs from the cordic to cancel the unwanted sideband, use sign extension (thanks Bill!)
-
-
-assign i_temp[15:0] = i_out;
-assign i_temp[16] 	= i_out[15];
-assign q_temp[15:0] = q_out;
-assign q_temp[16]	= q_out[15];
+// add the I and Q outputs from the CORDIC to cancel the unwanted sideband and send to the AD97544 DAC
 
 wire [16:0]DAC_temp;
-
-assign DAC_temp = i_temp + q_temp;
-assign DAC[13:0] = DAC_temp[16:3] + 14'h2000;  // add Vcc/2 so that zero in gives half rail out 
-
-
-//assign DAC = i_out[15:2] + 14'h2000; 
-
-
+adder add_IQ(.data0x(i_out),.data1x(q_out),.result(DAC_temp));
+//assign DAC[13:0] = DAC_temp[16:3] + 14'h2000;  // add Vcc/2 so that zero in gives half rail out 
+assign DAC[13:0] = q_out[15:2] + 14'h2000;  // add Vcc/2 so that zero in gives half rail out 
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -338,8 +352,8 @@ assign DAC[13:0] = DAC_temp[16:3] + 14'h2000;  // add Vcc/2 so that zero in give
 //
 //////////////////////////////////////////////////////////////////////
 
-// since we are decimating by 512 we can use a slower clock for reading
-// the A/D, say 12.5MHz
+// we can use a slower clock for sending dummy data to PowerSDR, say 6.25MHz
+
 
 reg clock_8;
 reg [4:0]clock_count;
@@ -630,6 +644,8 @@ assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
 
         Note that we use clock_8 to read the Rx_FIFO. This is so we can remove data from it quickly. We then wait for
         the 48kHz PWM_clock so the received data is available at the correct time for the DACs.
+		Also note that the NEGATIVE edge of clock_8 is used so the FIFO data is stable when we read it
+		since it is written on the positive edge.
 
 */
 
@@ -673,20 +689,29 @@ case(state_PWM)
 // state 1 - look for balance of sync  - if true continue else start again
   1: begin
      if (Rx_data[15:8] == 8'h7F)begin
+		Rx_control_0 <= Rx_data[7:0];	// get Rx_control 0
         have_sync <= ~have_sync;        // toggle sync  
         state_PWM <= 2;
      end
      else state_PWM <= 0;
      end
-// state 2 - skip Rx_control_1 & Rx_control_2
+// state 2 - Check if we are sending NCO frequency, if so get it
   2: begin
+		if (Rx_control_0[7:1] == 7'b0000_001)
+		begin
+			frequency[31:16]<= Rx_data;
+		end
         state_PWM <= 3;
      end
-// state 3 - skip Rx_control_3 & Rx_control_4 
+// state 3 - get balance of NCO frequency 
   3: begin
+		if (Rx_control_0[7:1] == 7'b0000_001)
+		begin
+			frequency[15:0]<= Rx_data;
+		end
         state_PWM <= 4;
 	end
-// state 4 - get Left audio and CORDIC frequency
+// state 4 - get Left audio 
 4: begin
 	fifo_enable <= 1'b1; // enable reads from Rx fifo 
 	I_Data <= Rx_data;
@@ -737,35 +762,6 @@ default: state_PWM <= 0;
 endcase
 end 
 
-// Get NCO frequency.
-// This should be done in the above routine but for some reason it does not work.
-
-
-reg led0;
-reg [2:0]freq;
-
-always @ (posedge SLRD)  // positive edge of FX2 FIFO read strobe
-begin 
-case (freq)
-0: 	if (Rx_register == 16'h7F7F) freq <= 1; // look for start of sync 7F7F
-	else freq <= 0;
-1: 	if (Rx_register[15:1] == 15'b0111_1111_0000_001) // 7F, 0000 001x
-	begin
-		freq <= 2;
-		led0 = ~led0; // toggle test led 
-	end 
-	else freq <= 0; // look for rest of sync and address
-2:	begin 
-	frequency[31:16]<= Rx_register;
-	freq <= 3;
-	end
-3:  begin
-	frequency[15:0] <= Rx_register[15:0]; // have NCO frequency so loop back to start
-	freq <= 0;
-	end
-default: freq <= 0;
-endcase
-end 
 
 /////////////////////////////////////////////////////////////////
 //
@@ -815,7 +811,7 @@ assign FPGA_GPIO7 = write_full;
 assign FPGA_GPIO8 = state_PWM[2];		
 assign FPGA_GPIO9 = read_full;		
 assign FPGA_GPIO10 = state_PWM[3];	
-assign FPGA_GPIO11 = led0;
+assign FPGA_GPIO11 = 1'b1;
 assign FPGA_GPIO12 = state_PWM[4];	
 assign FPGA_GPIO13 = 1'b0;	
 assign FPGA_GPIO14 = I_PWM_out;	

@@ -131,6 +131,7 @@ set_location_assignment PIN_145 -to DAC[2]
 set_location_assignment PIN_146 -to DAC[1]
 set_location_assignment PIN_147 -to DAC[0]
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_global_assignment -name VERILOG_FILE adder.v
 set_global_assignment -name VERILOG_FILE cicint.v
 set_global_assignment -name VERILOG_FILE HB.v
 set_global_assignment -name VERILOG_FILE test_filter.v
