@@ -1039,6 +1039,13 @@ do_tx_pre (void)
 	}
 }
 
+
+
+extern int EerXmit; 
+#define SQRT2 (1.414213562f) 
+// #define PI (3.14159265f) 
+extern int MercuryXmit; 
+
 PRIVATE void
 do_tx_post (void)
 {
@@ -1051,9 +1058,40 @@ do_tx_post (void)
 	if (uni.spec.flag)
 		do_tx_spectrum (tx.buf.o);
 
+
+
+	// kd5tfd added eer support 
+	// for envelope elimination restoration xmit we want amgnitude in I and phase in q 
+	switch ( tx.mode ) { 
+		case USB:
+		case LSB:
+		case CWU:
+		case CWL:
+		case DIGU:
+		case DIGL:
+		case DSB:
+			if ( EerXmit  ) { 
+				int i; 
+				int n;
+				n = CXBhave(tx.buf.o); 
+				for ( i = 0; i < n; i++ ) { 
+					COMPLEX z = Cr2p(CXBdata(tx.buf.o, i));
+					// mag in real, angle in im 
+					z.re = z.re / SQRT2;   // normalize -  +1 is max value allowable 
+					z.im = z.im  / (REAL)PI;     // normalize - want angle to range -/+ 1; 
+					CXBdata(tx.buf.o, i) = z; 			
+				}	
+			}
+			break; 
+
+		default: 
+			break; 
+	}
+
 	// meter modulated signal
 
-	if (tx.osc.gen->Frequency != 0.0)
+	// kd5tfd added check for mercury xmit -- for mercury we mix up on the FPGA 
+	if (tx.osc.gen->Frequency != 0.0 && MercuryXmit == 0 )
 	{
 		int i;
 		ComplexOSC (tx.osc.gen);
@@ -1070,6 +1108,9 @@ do_tx_post (void)
 
 /* modulator processing */
 
+
+
+
 PRIVATE void
 do_tx_SBCW (void)
 {
@@ -1080,6 +1121,7 @@ do_tx_SBCW (void)
 	do_tx_meter (tx.buf.i, TX_ALC);
 	if (tx.mode != DSB)
 		CXBscl (tx.buf.i, 2.0f);
+
 }
 
 PRIVATE void

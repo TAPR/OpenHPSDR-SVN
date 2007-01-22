@@ -2584,3 +2584,16 @@ SetRXPan(float p)
         sendcommand(buffer);
         return;
 }
+
+
+int MercuryXmit = 0;
+
+DttSP_EXP void SetMercuryXmit(int on_off) {
+    MercuryXmit = on_off;
+}
+
+int EerXmit = 0;
+
+DttSP_EXP void SetEerXmit(int on_off) {
+    EerXmit = on_off;
+}
