@@ -668,6 +668,40 @@ namespace PowerSDR
 		[DllImport("DttSP.dll", EntryPoint="SetRXPan")]
 		unsafe public static extern void SetRXPan(float pan); // takes values from 0 to 1.0 for L to R.
 
+
+		[DllImport("DttSP.dll", EntryPoint="SetMercuryXmit")]
+		public static extern void SetMercuryXmit_DLL(int setit);
+		public static void SetMercuryXmit(bool setit) 
+		{ 
+			int i_setit = 0; 
+			if ( setit ) 
+			{ 
+				i_setit = 1; 
+			}
+			SetMercuryXmit_DLL(i_setit); 
+			return;
+		}
+
+
+		[DllImport("DttSP.dll", EntryPoint="SetEerXmit")]
+		public static extern void SetEerXmit_DLL(int setit);
+		public static void SetEerXmit(bool setit) 
+		{ 
+			int i_setit = 0; 
+			if ( setit ) 
+			{ 
+				i_setit = 1; 
+			}
+			SetEerXmit_DLL(i_setit); 
+			return;
+		}
+	 
+		
+
+
+
+
+
 		#endregion
 
 		#region Properties

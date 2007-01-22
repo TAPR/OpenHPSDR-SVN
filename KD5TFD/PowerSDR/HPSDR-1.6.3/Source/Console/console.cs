@@ -8257,6 +8257,16 @@ namespace PowerSDR
                                                         this.Text = this.Text + " *** 16 bit IQ ***";
                                                         break;
 
+												case "--mercury-xmit-hack":  
+														DttSP.SetMercuryXmit(true); 
+														this.Text = this.Text + " *** MercXmit ***"; 
+														break;
+
+												case "--eer-xmit-hack":
+														DttSP.SetEerXmit(true); 
+														this.Text = this.Text + " *** EerXmit ***"; 
+														break;
+
                                                 case "--no-send-to-Janus":
                                                         NoJanusSend = true;
                                                         this.Text = this.Text + "*** NoJanusSend ***";
