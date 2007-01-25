@@ -1,7 +1,7 @@
  -- Copyright (C) 1991-2006 Altera Corporation
  -- Your use of Altera Corporation's design tools, logic functions 
  -- and other software and tools, and its AMPP partner logic 
- -- functions, and any output files any of the foregoing 
+ -- functions, and any output files from any of the foregoing 
  -- (including device programming or simulation files), and any 
  -- associated documentation or information are expressly subject 
  -- to the terms and conditions of the Altera Program License 
@@ -52,24 +52,24 @@
  -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
  ---------------------------------------------------------------------------------
 
-Quartus II Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 CHIP  "Ozy_Janus"  ASSIGNED TO AN: EP2C8Q208C8
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
 -------------------------------------------------------------------------------------------------------------
-~ASDO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 1         : input  : LVTTL             :         : 1         : N              
-~nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 2         : input  : LVTTL             :         : 1         : N              
+~ASDO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 1         : input  : 3.3-V LVTTL       :         : 1         : N              
+~nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 2         : input  : 3.3-V LVTTL       :         : 1         : N              
 RESERVED_INPUT               : 3         :        :                   :         : 1         :                
-DEBUG_LED0                   : 4         : output : LVTTL             :         : 1         : Y              
-FLAGC                        : 5         : input  : LVTTL             :         : 1         : Y              
+DEBUG_LED0                   : 4         : output : 3.3-V LVTTL       :         : 1         : Y              
+FLAGC                        : 5         : input  : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 6         :        :                   :         : 1         :                
 VCCIO1                       : 7         : power  :                   : 3.3V    : 1         :                
-PKEND                        : 8         : output : LVTTL             :         : 1         : Y              
+PKEND                        : 8         : output : 3.3-V LVTTL       :         : 1         : Y              
 GND                          : 9         : gnd    :                   :         :           :                
-FIFO_ADR[1]                  : 10        : output : LVTTL             :         : 1         : Y              
-FIFO_ADR[0]                  : 11        : output : LVTTL             :         : 1         : Y              
+FIFO_ADR[1]                  : 10        : output : 3.3-V LVTTL       :         : 1         : Y              
+FIFO_ADR[0]                  : 11        : output : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 12        :        :                   :         : 1         :                
-SLOE                         : 13        : output : LVTTL             :         : 1         : Y              
+SLOE                         : 13        : output : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 14        :        :                   :         : 1         :                
 RESERVED_INPUT               : 15        :        :                   :         : 1         :                
 TDO                          : 16        : output :                   :         : 1         :                
@@ -80,17 +80,17 @@ DATA0                        : 20        : input  :                   :         
 DCLK                         : 21        :        :                   :         : 1         :                
 nCE                          : 22        :        :                   :         : 1         :                
 GND+                         : 23        :        :                   :         : 1         :                
-IFCLK                        : 24        : input  : LVTTL             :         : 1         : Y              
+IFCLK                        : 24        : input  : 3.3-V LVTTL       :         : 1         : Y              
 GND                          : 25        : gnd    :                   :         :           :                
 nCONFIG                      : 26        :        :                   :         : 1         :                
 GND+                         : 27        :        :                   :         : 1         :                
 GND+                         : 28        :        :                   :         : 1         :                
 VCCIO1                       : 29        : power  :                   : 3.3V    : 1         :                
-SLRD                         : 30        : output : LVTTL             :         : 1         : Y              
-SLWR                         : 31        : output : LVTTL             :         : 1         : Y              
+SLRD                         : 30        : output : 3.3-V LVTTL       :         : 1         : Y              
+SLWR                         : 31        : output : 3.3-V LVTTL       :         : 1         : Y              
 VCCINT                       : 32        : power  :                   : 1.2V    :           :                
-DEBUG_LED1                   : 33        : output : LVTTL             :         : 1         : Y              
-DEBUG_LED2                   : 34        : output : LVTTL             :         : 1         : Y              
+DEBUG_LED1                   : 33        : output : 3.3-V LVTTL       :         : 1         : Y              
+DEBUG_LED2                   : 34        : output : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 35        :        :                   :         : 1         :                
 GND                          : 36        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 37        :        :                   :         : 1         :                
@@ -112,15 +112,15 @@ GND_PLL1                     : 52        : gnd    :                   :         
 VCCA_PLL1                    : 53        : power  :                   : 1.2V    :           :                
 GNDA_PLL1                    : 54        : gnd    :                   :         :           :                
 GND                          : 55        : gnd    :                   :         :           :                
-FX2_FD[0]                    : 56        : bidir  : LVTTL             :         : 4         : Y              
-FX2_FD[1]                    : 57        : bidir  : LVTTL             :         : 4         : Y              
-FX2_FD[2]                    : 58        : bidir  : LVTTL             :         : 4         : Y              
-FX2_FD[3]                    : 59        : bidir  : LVTTL             :         : 4         : Y              
-FX2_FD[4]                    : 60        : bidir  : LVTTL             :         : 4         : Y              
-FX2_FD[5]                    : 61        : bidir  : LVTTL             :         : 4         : Y              
+FX2_FD[0]                    : 56        : bidir  : 3.3-V LVTTL       :         : 4         : Y              
+FX2_FD[1]                    : 57        : bidir  : 3.3-V LVTTL       :         : 4         : Y              
+FX2_FD[2]                    : 58        : bidir  : 3.3-V LVTTL       :         : 4         : Y              
+FX2_FD[3]                    : 59        : bidir  : 3.3-V LVTTL       :         : 4         : Y              
+FX2_FD[4]                    : 60        : bidir  : 3.3-V LVTTL       :         : 4         : Y              
+FX2_FD[5]                    : 61        : bidir  : 3.3-V LVTTL       :         : 4         : Y              
 VCCIO4                       : 62        : power  :                   : 3.3V    : 4         :                
-FX2_FD[6]                    : 63        : bidir  : LVTTL             :         : 4         : Y              
-FX2_FD[7]                    : 64        : bidir  : LVTTL             :         : 4         : Y              
+FX2_FD[6]                    : 63        : bidir  : 3.3-V LVTTL       :         : 4         : Y              
+FX2_FD[7]                    : 64        : bidir  : 3.3-V LVTTL       :         : 4         : Y              
 GND                          : 65        : gnd    :                   :         :           :                
 VCCINT                       : 66        : power  :                   : 1.2V    :           :                
 RESERVED_INPUT               : 67        :        :                   :         : 4         :                
@@ -152,8 +152,8 @@ RESERVED_INPUT               : 92        :        :                   :         
 GND                          : 93        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 94        :        :                   :         : 4         :                
 RESERVED_INPUT               : 95        :        :                   :         : 4         :                
-dash                         : 96        : input  : LVTTL             :         : 4         : Y              
-dot                          : 97        : input  : LVTTL             :         : 4         : Y              
+dash                         : 96        : input  : 3.3-V LVTTL       :         : 4         : Y              
+dot                          : 97        : input  : 3.3-V LVTTL       :         : 4         : Y              
 VCCIO4                       : 98        : power  :                   : 3.3V    : 4         :                
 RESERVED_INPUT               : 99        :        :                   :         : 4         :                
 GND                          : 100       : gnd    :                   :         :           :                
@@ -163,8 +163,8 @@ RESERVED_INPUT               : 103       :        :                   :         
 RESERVED_INPUT               : 104       :        :                   :         : 4         :                
 RESERVED_INPUT               : 105       :        :                   :         : 3         :                
 RESERVED_INPUT               : 106       :        :                   :         : 3         :                
-~LVDS54n/INIT_DONE~ / RESERVED : 107       : output : LVTTL             :         : 3         : N              
-DEBUG_LED3                   : 108       : output : LVTTL             :         : 3         : Y              
+~LVDS54n/INIT_DONE~ / RESERVED : 107       : output : 3.3-V LVTTL       :         : 3         : N              
+DEBUG_LED3                   : 108       : output : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 109       : power  :                   : 3.3V    : 3         :                
 RESERVED_INPUT               : 110       :        :                   :         : 3         :                
 GND                          : 111       : gnd    :                   :         :           :                
@@ -205,10 +205,10 @@ RESERVED_INPUT               : 145       :        :                   :         
 RESERVED_INPUT               : 146       :        :                   :         : 3         :                
 RESERVED_INPUT               : 147       :        :                   :         : 3         :                
 VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
-AK_reset                     : 149       : output : LVTTL             :         : 3         : Y              
-Q_PWM_out                    : 150       : output : LVTTL             :         : 3         : Y              
-I_PWM_out                    : 151       : output : LVTTL             :         : 3         : Y              
-CLK_12MHZ                    : 152       : input  : LVTTL             :         : 3         : Y              
+AK_reset                     : 149       : output : 3.3-V LVTTL       :         : 3         : Y              
+Q_PWM_out                    : 150       : output : 3.3-V LVTTL       :         : 3         : Y              
+I_PWM_out                    : 151       : output : 3.3-V LVTTL       :         : 3         : Y              
+CLK_12MHZ                    : 152       : input  : 3.3-V LVTTL       :         : 3         : Y              
 GND                          : 153       : gnd    :                   :         :           :                
 GND_PLL2                     : 154       : gnd    :                   :         :           :                
 VCCD_PLL2                    : 155       : power  :                   : 1.2V    :           :                
@@ -216,18 +216,18 @@ GND_PLL2                     : 156       : gnd    :                   :         
 VCCA_PLL2                    : 157       : power  :                   : 1.2V    :           :                
 GNDA_PLL2                    : 158       : gnd    :                   :         :           :                
 GND                          : 159       : gnd    :                   :         :           :                
-BCLK                         : 160       : input  : LVTTL             :         : 2         : Y              
-LRCLK                        : 161       : input  : LVTTL             :         : 2         : Y              
-CBCLK                        : 162       : output : LVTTL             :         : 2         : Y              
-CLRCLK                       : 163       : output : LVTTL             :         : 2         : Y              
-DOUT                         : 164       : input  : LVTTL             :         : 2         : Y              
-CDOUT                        : 165       : input  : LVTTL             :         : 2         : Y              
+BCLK                         : 160       : input  : 3.3-V LVTTL       :         : 2         : Y              
+LRCLK                        : 161       : input  : 3.3-V LVTTL       :         : 2         : Y              
+CBCLK                        : 162       : output : 3.3-V LVTTL       :         : 2         : Y              
+CLRCLK                       : 163       : output : 3.3-V LVTTL       :         : 2         : Y              
+DOUT                         : 164       : input  : 3.3-V LVTTL       :         : 2         : Y              
+CDOUT                        : 165       : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 166       : power  :                   : 3.3V    : 2         :                
 GND                          : 167       : gnd    :                   :         :           :                
-CDIN                         : 168       : output : LVTTL             :         : 2         : Y              
-DFS0                         : 169       : output : LVTTL             :         : 2         : Y              
-DFS1                         : 170       : output : LVTTL             :         : 2         : Y              
-PTT_in                       : 171       : input  : LVTTL             :         : 2         : Y              
+CDIN                         : 168       : output : 3.3-V LVTTL       :         : 2         : Y              
+DFS0                         : 169       : output : 3.3-V LVTTL       :         : 2         : Y              
+DFS1                         : 170       : output : 3.3-V LVTTL       :         : 2         : Y              
+PTT_in                       : 171       : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 172       : power  :                   : 3.3V    : 2         :                
 RESERVED_INPUT               : 173       :        :                   :         : 2         :                
 GND                          : 174       : gnd    :                   :         :           :                
@@ -253,15 +253,15 @@ RESERVED_INPUT               : 193       :        :                   :         
 VCCIO2                       : 194       : power  :                   : 3.3V    : 2         :                
 RESERVED_INPUT               : 195       :        :                   :         : 2         :                
 GND                          : 196       : gnd    :                   :         :           :                
-FLAGB                        : 197       : input  : LVTTL             :         : 2         : Y              
-FLAGA                        : 198       : input  : LVTTL             :         : 2         : Y              
-FX2_FD[15]                   : 199       : bidir  : LVTTL             :         : 2         : Y              
-FX2_FD[14]                   : 200       : bidir  : LVTTL             :         : 2         : Y              
-FX2_FD[13]                   : 201       : bidir  : LVTTL             :         : 2         : Y              
+FLAGB                        : 197       : input  : 3.3-V LVTTL       :         : 2         : Y              
+FLAGA                        : 198       : input  : 3.3-V LVTTL       :         : 2         : Y              
+FX2_FD[15]                   : 199       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+FX2_FD[14]                   : 200       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+FX2_FD[13]                   : 201       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 202       : power  :                   : 3.3V    : 2         :                
-FX2_FD[12]                   : 203       : bidir  : LVTTL             :         : 2         : Y              
+FX2_FD[12]                   : 203       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
 GND                          : 204       : gnd    :                   :         :           :                
-FX2_FD[11]                   : 205       : bidir  : LVTTL             :         : 2         : Y              
-FX2_FD[10]                   : 206       : bidir  : LVTTL             :         : 2         : Y              
-FX2_FD[9]                    : 207       : bidir  : LVTTL             :         : 2         : Y              
-FX2_FD[8]                    : 208       : bidir  : LVTTL             :         : 2         : Y              
+FX2_FD[11]                   : 205       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+FX2_FD[10]                   : 206       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+FX2_FD[9]                    : 207       : bidir  : 3.3-V LVTTL       :         : 2         : Y              
+FX2_FD[8]                    : 208       : bidir  : 3.3-V LVTTL       :         : 2         : Y              

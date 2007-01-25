@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 8.611 ns
-From           : FLAGC
-To             : TX_wait[7]
+Actual Time    : 7.494 ns
+From           : FLAGA
+To             : RX_wait[1]
 From Clock     : --
 To Clock       : IFCLK
 Failed Paths   : 0
@@ -15,8 +15,8 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 17.481 ns
-From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_jk6:wrptr_gp|power_modified_counter_values[2]~_DUP_REG
+Actual Time    : 15.774 ns
+From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_jk6:wrptr_gp|countera2_OTERM58
 To             : DEBUG_LED0
 From Clock     : IFCLK
 To Clock       : --
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.538 ns
+Actual Time    : 11.539 ns
 From           : FLAGA
 To             : DEBUG_LED3
 From Clock     : --
@@ -35,7 +35,7 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -1.212 ns
+Actual Time    : -0.989 ns
 From           : CDOUT
 To             : Tx_q[0]
 From Clock     : --
@@ -43,53 +43,43 @@ To Clock       : CLK_12MHZ
 Failed Paths   : 0
 
 Type           : Clock Setup: 'IFCLK'
-Slack          : 10.566 ns
+Slack          : 8.771 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : N/A
-From           : Rx_register[12]
-To             : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ram_block6a12~portb_datain_reg0
+Actual Time    : Restricted to 163.03 MHz ( period = 6.134 ns )
+From           : Rx_register[1]
+To             : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ram_block6a1~portb_datain_reg0
 From Clock     : IFCLK
 To Clock       : IFCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'BCLK'
-Slack          : 13.039 ns
+Slack          : 13.037 ns
 Required Time  : 24.58 MHz ( period = 40.690 ns )
-Actual Time    : 68.44 MHz ( period = 14.612 ns )
-From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[14]
-To             : sync_count[1]
+Actual Time    : 68.42 MHz ( period = 14.616 ns )
+From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[13]
+To             : Rx_control_0[4]
 From Clock     : BCLK
 To Clock       : BCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'CLK_12MHZ'
-Slack          : 20.105 ns
+Slack          : 20.119 ns
 Required Time  : 24.58 MHz ( period = 40.690 ns )
 Actual Time    : Restricted to 360.10 MHz ( period = 2.777 ns )
 From           : clocks:clocks|lpm_counter:lpm_counter_component|cntr_skh:auto_generated|safe_q[7]
-To             : I2SAudioOut:I2SAO|local_left_sample[8]
+To             : I2SAudioOut:I2SAO|local_right_sample[4]
 From Clock     : CLK_12MHZ
 To Clock       : CLK_12MHZ
 Failed Paths   : 0
 
 Type           : Clock Hold: 'BCLK'
-Slack          : 0.313 ns
+Slack          : 0.417 ns
 Required Time  : 24.58 MHz ( period = 40.690 ns )
 Actual Time    : N/A
-From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|a_graycounter_r96:rdptr_g1p|power_modified_counter_values[6]
-To             : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_rhc1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ram_block6a8~porta_address_reg6
+From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[9]
+To             : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ram_block6a5~porta_address_reg9
 From Clock     : BCLK
 To Clock       : BCLK
-Failed Paths   : 0
-
-Type           : Clock Hold: 'CLK_12MHZ'
-Slack          : 0.367 ns
-Required Time  : 24.58 MHz ( period = 40.690 ns )
-Actual Time    : N/A
-From           : clocks:clocks|lpm_counter:lpm_counter_component|cntr_skh:auto_generated|safe_q[7]
-To             : TX_state[0]
-From Clock     : CLK_12MHZ
-To Clock       : CLK_12MHZ
 Failed Paths   : 0
 
 Type           : Clock Hold: 'IFCLK'
@@ -100,6 +90,16 @@ From           : debounce:de_PTT|clean_pb
 To             : debounce:de_PTT|clean_pb
 From Clock     : IFCLK
 To Clock       : IFCLK
+Failed Paths   : 0
+
+Type           : Clock Hold: 'CLK_12MHZ'
+Slack          : 0.499 ns
+Required Time  : 24.58 MHz ( period = 40.690 ns )
+Actual Time    : N/A
+From           : ad_count[0]
+To             : ad_count[0]
+From Clock     : CLK_12MHZ
+To Clock       : CLK_12MHZ
 Failed Paths   : 0
 
 Type           : Total number of failed paths
