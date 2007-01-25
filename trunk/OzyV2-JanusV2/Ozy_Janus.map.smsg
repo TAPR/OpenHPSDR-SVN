@@ -1,2 +1,232 @@
-Warning (10273): Verilog HDL warning at Ozy_Janus.v(785): extended using "x" or "z"
-Warning (10273): Verilog HDL warning at Ozy_Janus.v(786): extended using "x" or "z"
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Thu Jan 25 21:44:35 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
+Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
+    Info: Found entity 1: Tx_fifo
+Info: Found 1 design units, including 1 entities, in source file clocks.v
+    Info: Found entity 1: clocks
+Info: Found 1 design units, including 1 entities, in source file debounce.v
+    Info: Found entity 1: debounce
+Info: Found 1 design units, including 1 entities, in source file DigAudioOut48k16bI2S.v
+    Info: Found entity 1: I2SAudioOut
+Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
+    Info: Found entity 1: Ozy_Janus
+Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
+    Info: Found entity 1: Rx_fifo
+Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(406): object "PTT_out" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(846): object "Rx_control_1" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(847): object "Rx_control_2" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(848): object "Rx_control_3" assigned a value but never read
+Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
+Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
+    Info: Found entity 1: lpm_counter
+Info: Elaborating entity "lpm_counter" for hierarchy "clocks:clocks|lpm_counter:lpm_counter_component"
+Info: Elaborated megafunction instantiation "clocks:clocks|lpm_counter:lpm_counter_component"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_skh.tdf
+    Info: Found entity 1: cntr_skh
+Info: Elaborating entity "cntr_skh" for hierarchy "clocks:clocks|lpm_counter:lpm_counter_component|cntr_skh:auto_generated"
+Info: Elaborating entity "Rx_fifo" for hierarchy "Rx_fifo:Rx_fifo"
+Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/dcfifo.tdf
+    Info: Found entity 1: dcfifo
+Info: Elaborating entity "dcfifo" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
+Info: Elaborated megafunction instantiation "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_6bf1.tdf
+    Info: Found entity 1: dcfifo_6bf1
+Info: Elaborating entity "dcfifo_6bf1" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_ndb.tdf
+    Info: Found entity 1: a_gray2bin_ndb
+Info: Elaborating entity "a_gray2bin_ndb" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_r96.tdf
+    Info: Found entity 1: a_graycounter_r96
+Info: Elaborating entity "a_graycounter_r96" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_r96:rdptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_kk6.tdf
+    Info: Found entity 1: a_graycounter_kk6
+Info: Elaborating entity "a_graycounter_kk6" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_kk6:wrptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_jk6.tdf
+    Info: Found entity 1: a_graycounter_jk6
+Info: Elaborating entity "a_graycounter_jk6" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_jk6:wrptr_gp"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_vpu.tdf
+    Info: Found entity 1: altsyncram_vpu
+Info: Elaborating entity "altsyncram_vpu" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_aec1.tdf
+    Info: Found entity 1: altsyncram_aec1
+Info: Elaborating entity "altsyncram_aec1" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_297.tdf
+    Info: Found entity 1: alt_synch_pipe_297
+Info: Elaborating entity "alt_synch_pipe_297" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_s98.tdf
+    Info: Found entity 1: dffpipe_s98
+Info: Elaborating entity "dffpipe_s98" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg|dffpipe_s98:dffpipe7"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_c09.tdf
+    Info: Found entity 1: dffpipe_c09
+Info: Elaborating entity "dffpipe_c09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_brp"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_iv7.tdf
+    Info: Found entity 1: alt_synch_pipe_iv7
+Info: Elaborating entity "alt_synch_pipe_iv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_d09.tdf
+    Info: Found entity 1: dffpipe_d09
+Info: Elaborating entity "dffpipe_d09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_d09:dffpipe10"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_397.tdf
+    Info: Found entity 1: alt_synch_pipe_397
+Info: Elaborating entity "alt_synch_pipe_397" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_t98.tdf
+    Info: Found entity 1: dffpipe_t98
+Info: Elaborating entity "dffpipe_t98" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg|dffpipe_t98:dffpipe12"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_jv7.tdf
+    Info: Found entity 1: alt_synch_pipe_jv7
+Info: Elaborating entity "alt_synch_pipe_jv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_e09.tdf
+    Info: Found entity 1: dffpipe_e09
+Info: Elaborating entity "dffpipe_e09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp|dffpipe_e09:dffpipe14"
+Info: Elaborating entity "Tx_fifo" for hierarchy "Tx_fifo:Tx_fifo"
+Info: Elaborating entity "dcfifo" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component"
+Info: Elaborated megafunction instantiation "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_jic1.tdf
+    Info: Found entity 1: dcfifo_jic1
+Info: Elaborating entity "dcfifo_jic1" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_mdb.tdf
+    Info: Found entity 1: a_gray2bin_mdb
+Info: Elaborating entity "a_gray2bin_mdb" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|a_gray2bin_mdb:wrptr_g_gray2bin"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_q96.tdf
+    Info: Found entity 1: a_graycounter_q96
+Info: Elaborating entity "a_graycounter_q96" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|a_graycounter_q96:rdptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_lk6.tdf
+    Info: Found entity 1: a_graycounter_lk6
+Info: Elaborating entity "a_graycounter_lk6" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|a_graycounter_lk6:wrptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_ik6.tdf
+    Info: Found entity 1: a_graycounter_ik6
+Info: Elaborating entity "a_graycounter_ik6" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|a_graycounter_ik6:wrptr_gp"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_tpu.tdf
+    Info: Found entity 1: altsyncram_tpu
+Info: Elaborating entity "altsyncram_tpu" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_8ec1.tdf
+    Info: Found entity 1: altsyncram_8ec1
+Info: Elaborating entity "altsyncram_8ec1" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_kv7.tdf
+    Info: Found entity 1: alt_synch_pipe_kv7
+Info: Elaborating entity "alt_synch_pipe_kv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_f09.tdf
+    Info: Found entity 1: dffpipe_f09
+Info: Elaborating entity "dffpipe_f09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_b09.tdf
+    Info: Found entity 1: dffpipe_b09
+Info: Elaborating entity "dffpipe_b09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_brp"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_lv7.tdf
+    Info: Found entity 1: alt_synch_pipe_lv7
+Info: Elaborating entity "alt_synch_pipe_lv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_g09.tdf
+    Info: Found entity 1: dffpipe_g09
+Info: Elaborating entity "dffpipe_g09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe9"
+Info: Elaborating entity "I2SAudioOut" for hierarchy "I2SAudioOut:I2SAO"
+Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
+Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
+Info: State machine "|Ozy_Janus|state_PWM" contains 14 states
+Info: State machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state" contains 5 states
+Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|state_PWM"
+Info: Encoding result for state machine "|Ozy_Janus|state_PWM"
+    Info: Completed encoding using 14 state bits
+        Info: Encoded state bit "state_PWM.00001"
+        Info: Encoded state bit "state_PWM.01101"
+        Info: Encoded state bit "state_PWM.00010"
+        Info: Encoded state bit "state_PWM.00011"
+        Info: Encoded state bit "state_PWM.00100"
+        Info: Encoded state bit "state_PWM.00101"
+        Info: Encoded state bit "state_PWM.00110"
+        Info: Encoded state bit "state_PWM.00111"
+        Info: Encoded state bit "state_PWM.01000"
+        Info: Encoded state bit "state_PWM.01001"
+        Info: Encoded state bit "state_PWM.01010"
+        Info: Encoded state bit "state_PWM.01011"
+        Info: Encoded state bit "state_PWM.01100"
+        Info: Encoded state bit "state_PWM.00000"
+    Info: State "|Ozy_Janus|state_PWM.00000" uses code string "00000000000000"
+    Info: State "|Ozy_Janus|state_PWM.01100" uses code string "00000000000011"
+    Info: State "|Ozy_Janus|state_PWM.01011" uses code string "00000000000101"
+    Info: State "|Ozy_Janus|state_PWM.01010" uses code string "00000000001001"
+    Info: State "|Ozy_Janus|state_PWM.01001" uses code string "00000000010001"
+    Info: State "|Ozy_Janus|state_PWM.01000" uses code string "00000000100001"
+    Info: State "|Ozy_Janus|state_PWM.00111" uses code string "00000001000001"
+    Info: State "|Ozy_Janus|state_PWM.00110" uses code string "00000010000001"
+    Info: State "|Ozy_Janus|state_PWM.00101" uses code string "00000100000001"
+    Info: State "|Ozy_Janus|state_PWM.00100" uses code string "00001000000001"
+    Info: State "|Ozy_Janus|state_PWM.00011" uses code string "00010000000001"
+    Info: State "|Ozy_Janus|state_PWM.00010" uses code string "00100000000001"
+    Info: State "|Ozy_Janus|state_PWM.01101" uses code string "01000000000001"
+    Info: State "|Ozy_Janus|state_PWM.00001" uses code string "10000000000001"
+Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
+Info: Encoding result for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "I2SAudioOut:I2SAO|TLV_state.001"
+        Info: Encoded state bit "I2SAudioOut:I2SAO|TLV_state.010"
+        Info: Encoded state bit "I2SAudioOut:I2SAO|TLV_state.011"
+        Info: Encoded state bit "I2SAudioOut:I2SAO|TLV_state.000"
+        Info: Encoded state bit "I2SAudioOut:I2SAO|TLV_state.100"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.000" uses code string "00000"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.011" uses code string "00110"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.010" uses code string "01010"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.001" uses code string "10010"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.100" uses code string "00011"
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "PKEND" stuck at VCC
+    Warning: Pin "FIFO_ADR[0]" stuck at GND
+Info: 45 registers lost all their fanouts during netlist optimizations. The first 45 are displayed below.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/p0addr" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[9]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[8]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[7]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[6]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[5]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[4]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[3]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/parity_ff" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[9]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[8]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[7]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[6]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[5]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[4]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[3]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/parity_ff" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/ws_bwp/dffe8a[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/ws_brp/dffe8a[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/ws_bwp/dffe9a[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/ws_brp/dffe9a[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/rs_bwp/dffe9a[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/rs_brp/dffe9a[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "synced_Rx_used[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "synced_Rx_used[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "synced_Rx_used[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "synced_Rx_used[3]" lost all its fanouts during netlist optimizations.
+    Info: Register "state_PWM~19" lost all its fanouts during netlist optimizations.
+    Info: Register "state_PWM~20" lost all its fanouts during netlist optimizations.
+    Info: Register "state_PWM~21" lost all its fanouts during netlist optimizations.
+    Info: Register "state_PWM~22" lost all its fanouts during netlist optimizations.
+    Info: Register "state_PWM~23" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SAO/TLV_state~7" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SAO/TLV_state~8" lost all its fanouts during netlist optimizations.
+Warning: Design contains 1 input pin(s) that do not drive logic
+    Warning: No output dependent on input pin "FLAGB"
+Info: Implemented 1057 device resources after synthesis - the final resource count might be different
+    Info: Implemented 12 input pins
+    Info: Implemented 18 output pins
+    Info: Implemented 16 bidirectional pins
+    Info: Implemented 979 logic cells
+    Info: Implemented 32 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
+    Info: Allocated 138 megabytes of memory during processing
+    Info: Processing ended: Thu Jan 25 21:45:02 2007
+    Info: Elapsed time: 00:00:27

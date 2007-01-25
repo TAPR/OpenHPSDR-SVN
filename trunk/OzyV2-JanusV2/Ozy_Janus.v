@@ -126,6 +126,8 @@
 //				Fixed bug in speed decode now we are sending current frequency from PowerSDR - 9 Nov 2006
 //				Modified to support Janus V2 hardware - 20 Nov 2006
 //				Modified to support Ozy V2 hardware using EP2C8Q208C8- 4 Dec 2006
+//				Upgraded to Quartus V6.1 - 25th Jan 2006
+//				Modified PWM DAC to run off IFCLK to increase resolution - 25th Jan 2006
 //
 ////////////////////////////////////////////////////////////
 
@@ -981,7 +983,7 @@ end
 //
 /////////////////////////////////////////////////////////////////
 
-// This runs off the 24.576MHz clock to simplify the LPF requirements.
+// This runs off the 48MHZ IFCLKL clock to increase effective number of bits.
 
 reg [15:0] I_Data;
 reg [15:0] Q_Data;
@@ -991,7 +993,7 @@ reg [16:0] I_PWM_accumulator;
 reg [16:0] Q_PWM_accumulator;
 
 
-always @(negedge CLK_12MHZ)
+always @(negedge IFCLK)
 begin
         I_Data_in <= I_Data + 16'h8000;         // so that 0 in gives 50:50 mark/space
         Q_Data_in <= Q_Data + 16'h8000;
