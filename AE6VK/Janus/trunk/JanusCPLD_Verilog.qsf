@@ -1,0 +1,138 @@
+# Copyright (C) 1991-2006 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#		JanusCPLD_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name DEVICE EPM240T100C5
+set_global_assignment -name FAMILY "MAX II"
+set_global_assignment -name TOP_LEVEL_ENTITY JanusCPLD
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 6.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "01:51:41  JANUARY 28, 2007"
+set_global_assignment -name LAST_QUARTUS_VERSION 6.1
+set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 100
+set_location_assignment PIN_83 -to Atlas_A2
+set_location_assignment PIN_81 -to Atlas_A3
+set_location_assignment PIN_77 -to Atlas_A4
+set_location_assignment PIN_75 -to Atlas_A5
+set_location_assignment PIN_73 -to Atlas_A6
+set_location_assignment PIN_71 -to Atlas_A7
+set_location_assignment PIN_69 -to Atlas_A8
+set_location_assignment PIN_67 -to Atlas_A9
+set_location_assignment PIN_64 -to Atlas_A10
+set_location_assignment PIN_61 -to Atlas_A11
+set_location_assignment PIN_57 -to Atlas_A12
+set_location_assignment PIN_55 -to Atlas_A13
+set_location_assignment PIN_53 -to Atlas_A14
+set_location_assignment PIN_51 -to Atlas_A15
+set_location_assignment PIN_49 -to Atlas_A16
+set_location_assignment PIN_47 -to Atlas_A17
+set_location_assignment PIN_43 -to Atlas_A18
+set_location_assignment PIN_41 -to Atlas_A19
+set_location_assignment PIN_39 -to Atlas_A20
+set_location_assignment PIN_37 -to Atlas_A21
+set_location_assignment PIN_35 -to Atlas_A22
+set_location_assignment PIN_27 -to Atlas_A31
+set_location_assignment PIN_84 -to Atlas_C2
+set_location_assignment PIN_82 -to Atlas_C3
+set_location_assignment PIN_78 -to Atlas_C4
+set_location_assignment PIN_76 -to Atlas_C5
+set_location_assignment PIN_74 -to Atlas_C6
+set_location_assignment PIN_72 -to Atlas_C7
+set_location_assignment PIN_70 -to Atlas_C8
+set_location_assignment PIN_68 -to Atlas_C9
+set_location_assignment PIN_66 -to Atlas_C10
+set_location_assignment PIN_62 -to Atlas_C11
+set_location_assignment PIN_58 -to Atlas_C12
+set_location_assignment PIN_56 -to Atlas_C13
+set_location_assignment PIN_54 -to Atlas_C14
+set_location_assignment PIN_52 -to Atlas_C15
+set_location_assignment PIN_50 -to Atlas_C16
+set_location_assignment PIN_48 -to Atlas_C17
+set_location_assignment PIN_44 -to Atlas_C18
+set_location_assignment PIN_42 -to Atlas_C19
+set_location_assignment PIN_40 -to Atlas_C20
+set_location_assignment PIN_38 -to Atlas_C21
+set_location_assignment PIN_36 -to Atlas_C22
+set_location_assignment PIN_34 -to Atlas_C23
+set_location_assignment PIN_33 -to Atlas_C24
+set_location_assignment PIN_30 -to Atlas_C25
+set_location_assignment PIN_29 -to Atlas_C27
+set_location_assignment PIN_28 -to Atlas_C29
+set_location_assignment PIN_26 -to Atlas_C31
+set_location_assignment PIN_4 -to OnBoard_XO_out
+set_location_assignment PIN_3 -to OnBoard_PTT
+set_location_assignment PIN_90 -to OnBoard_PWMFilter_I
+set_location_assignment PIN_89 -to OnBoard_PWMFilter_Q
+set_location_assignment PIN_85 -to OnBoard_J7Header1
+set_location_assignment PIN_86 -to OnBoard_J7Header2
+set_location_assignment PIN_87 -to OnBoard_J7Header3
+set_location_assignment PIN_88 -to OnBoard_J7Header4
+set_location_assignment PIN_21 -to ADC_SCLK
+set_location_assignment PIN_20 -to ADC_LRCK
+set_location_assignment PIN_12 -to ADC_FSYNC
+set_location_assignment PIN_14 -to ADC_SDATA
+set_location_assignment PIN_19 -to ADC_SMODE1
+set_location_assignment PIN_18 -to ADC_SMODE2
+set_location_assignment PIN_8 -to ADC_MCLK
+set_location_assignment PIN_7 -to ADC_DFS0
+set_location_assignment PIN_5 -to ADC_DFS1
+set_location_assignment PIN_6 -to ADC_HPFE
+set_location_assignment PIN_15 -to ADC_ZCAL
+set_location_assignment PIN_16 -to ADC_CAL
+set_location_assignment PIN_17 -to ADC_RSTN
+set_location_assignment PIN_98 -to CODEC_CSn
+set_location_assignment PIN_99 -to CODEC_MODE
+set_location_assignment PIN_1 -to CODEC_SCLK
+set_location_assignment PIN_100 -to CODEC_SDIN
+set_location_assignment PIN_96 -to CODEC_DIN
+set_location_assignment PIN_92 -to CODEC_DOUT
+set_location_assignment PIN_95 -to CODEC_LRCIN
+set_location_assignment PIN_91 -to CODEC_LRCOUT
+set_location_assignment PIN_97 -to CODEC_BCLK
+set_location_assignment PIN_2 -to CODEC_MCLK
+set_global_assignment -name USER_LIBRARIES ./library
+set_global_assignment -name AUTO_RESTART_CONFIGURATION OFF
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_global_assignment -name FMAX_REQUIREMENT "25 MHz" -section_id XO_clock
+set_instance_assignment -name CLOCK_SETTINGS XO_clock -to OnBoard_XO_out
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS XO_clock -section_id Janus_Clock
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 2 -section_id Janus_Clock
+set_instance_assignment -name CLOCK_SETTINGS Janus_Clock -to "OnBoard_interface:OnBoard_hrdw|XO_interface:XO|Clk"
+set_global_assignment -name VERILOG_FILE library/OnBoard_interface.v
+set_global_assignment -name VERILOG_FILE library/XO_interface.v
+set_global_assignment -name VERILOG_FILE library/PTT_interface.v
+set_global_assignment -name VERILOG_FILE library/PWMFilter_interface.v
+set_global_assignment -name VERILOG_FILE library/TestHeader_interface.v
+set_global_assignment -name VERILOG_FILE library/AK5394A_reset.v
+set_global_assignment -name VERILOG_FILE library/ADC_interface.v
+set_global_assignment -name VERILOG_FILE library/CODEC_interface.v
+set_global_assignment -name BSF_FILE library/OnBoard_interface.bsf
+set_global_assignment -name BSF_FILE library/XO_interface.bsf
+set_global_assignment -name BSF_FILE library/PTT_interface.bsf
+set_global_assignment -name BSF_FILE library/PWMFilter_interface.bsf
+set_global_assignment -name BSF_FILE library/TestHeader_interface.bsf
+set_global_assignment -name BSF_FILE library/AK5394A_reset.bsf
+set_global_assignment -name BSF_FILE library/CODEC_interface.bsf
+set_global_assignment -name BDF_FILE JanusCPLD.bdf
