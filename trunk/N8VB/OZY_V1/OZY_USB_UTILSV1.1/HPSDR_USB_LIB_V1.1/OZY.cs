@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Text;
 using System.IO;
 
@@ -23,12 +22,18 @@ namespace HPSDR_USB_LIB_V1
                                                         // wIndexH:	enables
                                                         // wIndexL:	format
                                                         // len: how much to read
+        public const int SPI_FMT_MSB = (0 << 7);
+        public const int SPI_FMT_HDR_0 = (0 << 5);
+        public const int SPI_FMT_HDR_1 = (1 << 5);
+        public const int SPI_FMT_HDR_2 = (2 << 5);
+        public const int SPI_EN_FPGA = 0x80;
+
         public const int VENDOR_REQ_RS232_READ = 0x83;
         public const int VENDOR_REQ_EEPROM_TYPE_READ = 0x84;
         public const int VENDOR_REQ_I2C_SPEED_READ = 0x85;
 
         /* Vendor Out Commands */
-        public const int VENDOR_REQ_SET_LED = 0x01;     // wValueL off/on {0,1}; wIndexL: which {0,1}
+        public const int VENDOR_REQ_SET_LED = 0x01;     // wValueL {0,255}
         public const int VENDOR_REQ_FPGA_LOAD = 0x02;
         public const int FL_BEGIN = 0;	                // wIndexL: begin fpga programming cycle.  stalls if trouble.
         public const int FL_XFER = 1;	                // wIndexL: xfer up to 64 bytes of data
@@ -354,6 +359,39 @@ namespace HPSDR_USB_LIB_V1
             }
         }
 
+        static public bool Read_SPI(IntPtr hdev, byte hdr_hi, byte hdr_lo, byte en, byte fmt, ref byte[] buffer)
+        {
+            Console.WriteLine("hdr_hi: " + hdr_hi.ToString("X")
+                                + " hdr_lo: " + hdr_lo.ToString("X")
+                                + " en: " + en.ToString("X")
+                                + " fmt: " + fmt.ToString("X"));
+
+            int wVal = (hdr_hi << 8) + hdr_lo;
+            int wIdx = (en << 8) + fmt;
+
+            Console.WriteLine("wValue: " + wVal.ToString("X")
+                                + " wIndex: " + wIdx.ToString("X"));
+            if (buffer.Length < 1 || buffer.Length > MAX_EP0_PACKETSIZE)
+                return false;
+            else
+            {
+                int ret = libUSB_Interface.usb_control_msg(
+                    hdev,
+                    VENDOR_REQ_TYPE_IN,
+                    VENDOR_REQ_SPI_READ,
+                    wVal,
+                    wIdx,
+                    buffer,
+                    buffer.Length,
+                    1000
+                    );
+                if (ret == buffer.Length)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
         static public bool Write_I2C(IntPtr hdev, int i2c_addr, byte[] buffer)
         {
             if (buffer.Length < 1 || buffer.Length > MAX_EP0_PACKETSIZE)
@@ -366,6 +404,39 @@ namespace HPSDR_USB_LIB_V1
                     VENDOR_REQ_I2C_WRITE,
                     i2c_addr,
                     0,
+                    buffer,
+                    buffer.Length,
+                    1000
+                    );
+                if (ret > 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        static public bool Write_SPI(IntPtr hdev, byte hdr_hi, byte hdr_lo, byte en, byte fmt, byte[] buffer)
+        {
+            Console.WriteLine("hdr_hi: " + hdr_hi.ToString("X") 
+                                + " hdr_lo: " + hdr_lo.ToString("X")
+                                + " en: " + en.ToString("X")
+                                + " fmt: " + fmt.ToString("X"));
+
+            int wVal = (hdr_hi << 8) + hdr_lo;
+            int wIdx = (en << 8) + fmt;
+
+            Console.WriteLine("wValue: " + wVal.ToString("X")
+                                + " wIndex: " + wIdx.ToString("X"));
+            if (buffer.Length < 1 || buffer.Length > MAX_EP0_PACKETSIZE)
+                return false;
+            else
+            {
+                int ret = libUSB_Interface.usb_control_msg(
+                    hdev,
+                    VENDOR_REQ_TYPE_OUT,
+                    VENDOR_REQ_SPI_WRITE,
+                    wVal,
+                    wIdx,
                     buffer,
                     buffer.Length,
                     1000
@@ -413,6 +484,61 @@ namespace HPSDR_USB_LIB_V1
                 else
                     return true;
             }            
+        }
+
+        static public bool Set_LED_Register ( IntPtr hdev, byte value )
+        {                 
+            int ret = libUSB_Interface.usb_control_msg (
+                hdev,
+                VENDOR_REQ_TYPE_OUT,
+                VENDOR_REQ_SET_LED,
+                value,
+                0,
+                new byte [ 0 ],
+                0,
+                1000
+                );
+            if ( ret < 0 )
+                return false;
+            else
+                return true;
+                        
+        }
+
+        static public bool Set_Passthrough ( IntPtr hdev, int vendor_cmd, int wValue, int wIndex, byte[] buffer )
+        {
+            int ret = libUSB_Interface.usb_control_msg (
+                hdev,
+                VENDOR_REQ_TYPE_OUT,
+                vendor_cmd,
+                wValue,
+                wIndex,
+                buffer,
+                buffer.Length,
+                1000
+                );
+            if ( ret < 0 )
+                return false;
+            else
+                return true;
+        }
+
+        static public bool Get_Passthrough ( IntPtr hdev, int vendor_cmd, int wValue, int wIndex, ref byte [ ] buffer )
+        {
+            int ret = libUSB_Interface.usb_control_msg (
+                hdev,
+                VENDOR_REQ_TYPE_IN,
+                vendor_cmd,
+                wValue,
+                wIndex,
+                buffer,
+                buffer.Length,
+                1000
+                );
+            if ( ret == buffer.Length )
+                return true;
+            else
+                return false;
         }
 
         static public bool Set_CPU_Speed(IntPtr hdev, int value)

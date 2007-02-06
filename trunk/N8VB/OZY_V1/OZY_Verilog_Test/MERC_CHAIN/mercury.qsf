@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EP2C5Q208C7
 set_global_assignment -name TOP_LEVEL_ENTITY rx_chain
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "6.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "11:14:59  AUGUST 23, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION "6.0 SP1"
+set_global_assignment -name LAST_QUARTUS_VERSION 6.1
 set_global_assignment -name ENABLE_INIT_DONE_OUTPUT ON
 set_global_assignment -name GENERATE_RBF_FILE ON
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
