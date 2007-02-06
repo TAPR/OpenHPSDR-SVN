@@ -3,3 +3,4 @@ bin\Release\SharpDSP2.0.dll
 bin\Release\SharpDSP2.0.pdb
 obj\Release\SharpDSP2.0.dll
 obj\Release\SharpDSP2.0.pdb
+obj\Debug\ResolveAssemblyReference.cache

@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EP2C5Q208C7
 set_global_assignment -name TOP_LEVEL_ENTITY ozy_nco
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "6.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "15:09:28  AUGUST 27, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION 6.0
+set_global_assignment -name LAST_QUARTUS_VERSION 6.1
 set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 7
 set_global_assignment -name ENABLE_INIT_DONE_OUTPUT ON
 set_global_assignment -name GENERATE_RBF_FILE ON

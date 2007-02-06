@@ -131,7 +131,7 @@ namespace program_OZYEEPROM
             buf[0] = 0xC0;  // C0 load
             buf[1] = 0xFE;  // low byte of VID
             buf[2] = 0xFF;  // high byte of VID
-            buf[3] = 0x07;  // low byte of PID
+            buf[3] = 0xFF;  // low byte of PID
             buf[4] = 0x00;  // high byte of PID
             buf[5] = 0x01;  // low byte of DID <-- revision number
             buf[6] = 0x00;  // high byte of DID
