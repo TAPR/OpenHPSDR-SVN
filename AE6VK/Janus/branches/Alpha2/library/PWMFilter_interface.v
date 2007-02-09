@@ -5,7 +5,7 @@
 // Interface between Janus OnBoard PWM Filter and the
 // JanusCPLD system.
 // 
-// The software supports the Alpha1 version of the Janus board.
+// The software supports the Alpha2 version of the Janus board.
 //
 //
 // This program is free software; you can redistribute it and/or modify

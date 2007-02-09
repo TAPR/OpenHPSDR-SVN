@@ -24,9 +24,9 @@ applicable agreement for further details.
 )
 (pin
 	(bidir)
-	(rect 24 -24 546 -8)
+	(rect 24 -24 200 -8)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
-	(text "OnBoard_J7Header4, OnBoard_J7Header3, OnBoard_J7Header2, OnBoard_J7Header1" (rect 90 0 517 12)(font "Arial" ))
+	(text "OnBoard_TP3" (rect 90 0 157 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 56 4)(pt 78 4)(line_width 1))
@@ -41,9 +41,9 @@ applicable agreement for further details.
 )
 (pin
 	(bidir)
-	(rect 24 16 201 32)
+	(rect 24 16 200 32)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
-	(text "TestHeader[3..0]" (rect 90 0 172 12)(font "Arial" ))
+	(text "TP3" (rect 90 0 108 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 56 4)(pt 78 4)(line_width 1))
@@ -58,18 +58,15 @@ applicable agreement for further details.
 )
 (connector
 	(pt 24 -16)
-	(pt 8 -16)
-	(bus)
+	(pt 16 -16)
 )
 (connector
-	(pt 8 -16)
-	(pt 8 24)
-	(bus)
+	(pt 16 -16)
+	(pt 16 24)
 )
 (connector
-	(pt 8 24)
+	(pt 16 24)
 	(pt 24 24)
-	(bus)
 )
 (title_block
 	(rect 464 288 832 504)
@@ -79,12 +76,12 @@ applicable agreement for further details.
 	(section (rect 0 48 368 72)(text "DESIGNER" (rect 2 0 59 12)(font "Arial" ))(text "CTDay - AE6VK" (rect 56 2 191 20)(font "Arial" (font_size 12)))(border))
 	(section (rect 0 168 280 192)(text "NUMBER" (rect 2 0 49 12)(font "Arial" ))(text "0.00" (rect 56 1 85 17)(font "Arial" (font_size 10)))(border))
 	(section (rect 280 168 368 192)(text "REV" (rect 2 1 24 13)(font "Arial" ))(text "A" (rect 43 1 53 17)(font "Arial" (font_size 10)))(border))
-	(section (rect 0 192 240 216)(text "DATE" (rect 2 0 30 12)(font "Arial" ))(text "Sat Feb 03 13:17:35 2007" (rect 56 3 233 19)(font "Arial" (font_size 10)))(date)(border))
+	(section (rect 0 192 240 216)(text "DATE" (rect 2 0 30 12)(font "Arial" ))(text "Sat Feb 03 23:02:55 2007" (rect 56 3 233 19)(font "Arial" (font_size 10)))(date)(border))
 	(section (rect 240 192 310 216)(text "SHEET" (rect 2 0 37 12)(font "Arial" ))(text "1" (rect 55 5 63 21)(font "Arial" (font_size 10))))
 	(section (rect 310 192 368 216)(text "OF" (rect 10 0 25 12)(font "Arial" ))(text "1" (rect 34 4 42 20)(font "Arial" (font_size 10))))
 	(section (rect 0 72 368 96)(text "ORIGINAL" (rect 2 0 55 12)(font "Arial" ))(text "W. Tracey KD5TFD & P. Harman VK6APH" (rect 56 2 407 20)(font "Arial" (font_size 12)))(border))
-	(section (rect 0 96 368 120)(text "HARDWARE" (rect 2 0 66 12)(font "Arial" ))(text "Neither Alpha1 nor Alpha2" (rect 56 2 270 20)(font "Arial" (font_size 12)))(border))
-	(section (rect 0 120 368 144)(text "COMMENT" (rect 2 0 56 12)(font "Arial" ))(text "Baseline for hardware branches" (rect 56 2 315 20)(font "Arial" (font_size 12)))(border))
+	(section (rect 0 96 368 120)(text "HARDWARE" (rect 2 0 66 12)(font "Arial" ))(text "Alpha2" (rect 56 2 113 20)(font "Arial" (font_size 12)))(border))
+	(section (rect 0 120 368 144)(text "COMMENT" (rect 2 0 56 12)(font "Arial" ))(text "Alpha2 branch refactored" (rect 56 2 262 20)(font "Arial" (font_size 12)))(border))
 	(section (rect 0 144 176 168)(text "PROJECT" (rect 2 0 52 12)(font "Arial" ))(text "JanusCPLD" (rect 56 3 136 19)(font "Arial" (font_size 10)))(border))
 	(section (rect 176 144 368 168)(text "CUSTOM" (rect 2 0 48 12)(font "Arial" ))(text "<<unspecified>>" (rect 56 3 170 19)(font "Arial" (font_size 10)))(border))
 	(drawing

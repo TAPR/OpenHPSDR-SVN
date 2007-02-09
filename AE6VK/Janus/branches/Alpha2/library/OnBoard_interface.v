@@ -5,7 +5,7 @@
 // Interface between Janus OnBoard discrete hardware and the
 // JanusCPLD system.
 // 
-// The software supports the Alpha1 version of the Janus board.
+// The software supports the Alpha2 version of the Janus board.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -27,34 +27,37 @@
 module OnBoard_interface (
 	// Pins
 	input	OnBoard_XO_out,
+	output	OnBoard_XO_tune,
 	output	OnBoard_PWMFilter_I,
 	output	OnBoard_PWMFilter_Q,
-	input	OnBoard_PTT,
-	inout	OnBoard_J7Header1,
-	inout	OnBoard_J7Header2,
-	inout	OnBoard_J7Header3,
-	inout	OnBoard_J7Header4,
+	input	OnBoard_nPTT,
+	output	Ref_OK,
+	output	Lock_OK,
+	inout	OnBoard_TP3,
 	// Wires
 	output	Clk,
+	input	Ref_Clk,
 	input	PWMI,
 	input	PWMQ,
-	output	PTT,
-	inout	[3:0] TestHeader
+	output	nPTT,
+	inout	TP3
 	);
 	
 	// Assemble the full interface from its components.	
-	XO_interface XO (OnBoard_XO_out, Clk);
+	XO_interface XO (
+		OnBoard_XO_out, 
+		OnBoard_XO_tune, 
+		Ref_OK,
+		Lock_OK,
+		Ref_Clk,
+		Clk);
 	
 	PWMFilter_interface PWMFilter (OnBoard_PWMFilter_I, 
 								   OnBoard_PWMFilter_Q,
 								   PWMI, PWMQ);
 		
-	PTT_interface PTTHrdw (OnBoard_PTT, PTT);
+	PTT_interface PTTHrdw (OnBoard_nPTT, nPTT);
 	
-	TestHeader_interface TestHeaderJ7 (OnBoard_J7Header1,
-									   OnBoard_J7Header2,
-									   OnBoard_J7Header3,
-									   OnBoard_J7Header4,
-									   TestHeader);
+	TestHeader_interface TestHeaderJ7 (OnBoard_TP3, TP3);
 
 endmodule

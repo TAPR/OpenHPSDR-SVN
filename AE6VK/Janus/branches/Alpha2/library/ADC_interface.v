@@ -5,7 +5,7 @@
 // Interface between Janus AKM AK5394A ADC and the JanusCPLD system.
 // On Janus, the AK5394A runs in I2S Master Mode.
 // 
-// The software supports the Alpha1 version of the Janus board.
+// The software supports the Alpha2 version of the Janus board.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -62,7 +62,7 @@ module ADC_interface (
 	// Wire-up Master clock
 	assign ADC_MCLK = ADC_Clk;
 
-	// Instantiate AK5394A reset circuitry.
-	AK5394A_reset ADC_reset (ADC_RSTN, ADC_nReset, ADC_Clk);
+	// Wire-up reset
+	assign ADC_RSTN = ADC_nReset;
 	
 endmodule

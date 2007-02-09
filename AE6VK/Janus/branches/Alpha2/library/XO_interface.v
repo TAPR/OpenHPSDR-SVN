@@ -5,7 +5,7 @@
 // Interface between Janus OnBoard crystal Oscillator (XO) and 
 // JanusCPLD system clock, which runs at 12.288MHz.
 // 
-// The software supports the Alpha1 version of the Janus board.
+// The software supports the Alpha2 version of the Janus board.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -26,16 +26,40 @@
 //
 module XO_interface (
 	// Pins
-	input		OnBoard_XO_out,
+	input	OnBoard_XO_out,
+	output	OnBoard_XO_tune,
+	output	reg Ref_OK,
+	output	Lock_OK,
 	// Wires
-	output reg	Clk
+	input Ref_Clk,
+	output Clk
 	);
 	
-	// Since the Alpha1 XO runs at 24.576MHz, we need to divide it 
-	// by two to get the system clock.
+	wire Clk_Lock;	// PLL loop locked
+	wire Tune;		// Tunes XO to reference
+	wire Center;	// Tunes XO to zero offset
 	
-	always @ (posedge OnBoard_XO_out)
+	// Since the Alpha2 XO runs at 12.288MHz, we can wire it 
+	// directly to the system clock.
+	assign Clk = OnBoard_XO_out;
+	
+	// Instantiate PLL
+	JanusPLL PLL(.Ref_10000kHz(Ref_Clk), 
+				 .Clk_12288kHz(OnBoard_XO_out), 
+				 .lock(Clk_Lock),
+				 .pfd_out(Tune),
+				 .center_tune(Center));
+	
+	// If Ref_Clk is never high, there is no Ref_Clk
+	always @ (posedge Ref_Clk or posedge Center) 
 	begin
-		Clk <= ~Clk;
+		Ref_OK <= Ref_Clk;
 	end
+	
+	// Tune the XO if reference is present
+	assign OnBoard_XO_tune = Ref_OK ? Tune : Center;
+	
+	// Signal good lock
+	assign Lock_OK = Clk_Lock & Ref_OK;
+	
 endmodule

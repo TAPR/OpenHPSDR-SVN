@@ -6,7 +6,7 @@
 // system. On Janus, the TLV320AIC23B runs in I2S Master Mode.
 // [I plan to change this to Master Mode as an exersize.]
 // 
-// The software supports the Alpha1 version of the Janus board.
+// The software supports the Alpha2 version of the Janus board.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -29,8 +29,8 @@ module CODEC_interface (
 	// Pins
 	output	CODEC_CSn,
 	output	CODEC_MODE,
-	output	CODEC_SDIN,
-	output	CODEC_SCLK,
+	inout	CODEC_SDIN,
+	inout	CODEC_SCLK,
 	output	CODEC_DIN,
 	input	CODEC_DOUT,
 	output	CODEC_LRCIN,
@@ -38,22 +38,27 @@ module CODEC_interface (
 	output	CODEC_BCLK,
 	output	CODEC_MCLK,
 	// Wires
-	inout	[4:0] CODEC_I2S,	// I2S[SDIN, WSIN, SDOUT, WSOUT, SCK]
-	input	[1:0] CODEC_I2C,	// I2C[SDIN, SCLK]
+	inout	[3:0] CODEC_I2S,	// I2S[SDIN, SDOUT, WSINOUT, SCK]
+	inout	[1:0] CODEC_I2C,	// I2C[SDIN, SCLK]
 	input	CODEC_Clk			// Master clock
 	);
 	
-	// Wire-up I2S TCVR bus
-	assign CODEC_DIN    = CODEC_I2S[4];
-	assign CODEC_LRCIN  = CODEC_I2S[3];
+	// Wire-up I2S TXVR bus
+	assign CODEC_DIN    = CODEC_I2S[3];
+	assign CODEC_LRCIN  = CODEC_I2S[1];
 	assign CODEC_I2S[2] = CODEC_DOUT;
 	assign CODEC_LRCOUT = CODEC_I2S[1];
 	assign CODEC_BCLK   = CODEC_I2S[0];
 	// Wire-up Master clock
 	assign CODEC_MCLK = CODEC_Clk;
 
-	// Instantiate TLV320AIC23B reset circuitry.
-	// TLV320AIC23B_reset CODEC_reset (CODEC_I2C, 
-	// 		CODEC_SDIN, CODEC_SCLK, CODEC_CSn, CODEC_MODE);
+	// Fix TLV320AIC23B in I2C mode & I2C address
+	// to 0x1A. Ozy currently does all the initialization.
+	assign CODEC_MODE = 1'b0;
+	assign CODEC_CSn  = 1'b0;
+	
+	// Wire-up I2C bus
+	tran SDIN (CODEC_SDIN, CODEC_I2C[1]);
+	tran SCLK (CODEC_SCLK, CODEC_I2C[0]);
 	
 endmodule

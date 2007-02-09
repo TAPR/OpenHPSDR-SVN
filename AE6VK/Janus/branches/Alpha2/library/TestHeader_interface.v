@@ -5,7 +5,7 @@
 // Interface between Janus OnBoard J7 Test Header and the
 // JanusCPLD system.
 // 
-// The software supports the Alpha1 version of the Janus board.
+// The software supports the Alpha2 version of the Janus board.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -26,17 +26,11 @@
 //
 module TestHeader_interface (
 	// Pins
-	inout	OnBoard_J7Header1,
-	inout	OnBoard_J7Header2,
-	inout	OnBoard_J7Header3,
-	inout	OnBoard_J7Header4,
+	inout	OnBoard_TP3,
 	// Wires
-	inout	[3:0] TestHeader
+	inout	TP3
 	);
 	
 	// Wire up Test Header.	
-	assign {OnBoard_J7Header1, 
-	        OnBoard_J7Header2, 
-	        OnBoard_J7Header3, 
-	        OnBoard_J7Header4} = TestHeader;
+	tran (OnBoard_TP3, TP3);
 endmodule

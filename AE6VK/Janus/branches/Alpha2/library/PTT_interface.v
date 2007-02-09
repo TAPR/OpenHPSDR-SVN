@@ -5,7 +5,7 @@
 // Interface between Janus OnBoard PTT circuit and the
 // JanusCPLD system.
 // 
-// The software supports the Alpha1 version of the Janus board.
+// The software supports the Alpha2 version of the Janus board.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -26,11 +26,11 @@
 //
 module PTT_interface (
 	// Pins
-	input	OnBoard_PTT,
+	input	OnBoard_nPTT,
 	// Wires
-	output	PTT
+	output	nPTT
 	);
 	
 	// On Alpha1, there is no processing here.	
-	assign PTT = OnBoard_PTT;
+	assign nPTT = OnBoard_nPTT;
 endmodule
