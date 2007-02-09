@@ -1,0 +1,120 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 240 240)
+	(text "CODEC_interface" (rect 5 0 94 12)(font "Arial" ))
+	(text "inst" (rect 8 208 25 220)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "CODEC_DOUT" (rect 0 0 76 12)(font "Arial" ))
+		(text "CODEC_DOUT" (rect 21 27 97 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "CODEC_Clk" (rect 0 0 62 12)(font "Arial" ))
+		(text "CODEC_Clk" (rect 21 43 83 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
+	)
+	(port
+		(pt 224 32)
+		(output)
+		(text "CODEC_CSn" (rect 0 0 67 12)(font "Arial" ))
+		(text "CODEC_CSn" (rect 136 27 203 39)(font "Arial" ))
+		(line (pt 224 32)(pt 208 32)(line_width 1))
+	)
+	(port
+		(pt 224 48)
+		(output)
+		(text "CODEC_MODE" (rect 0 0 77 12)(font "Arial" ))
+		(text "CODEC_MODE" (rect 126 43 203 55)(font "Arial" ))
+		(line (pt 224 48)(pt 208 48)(line_width 1))
+	)
+	(port
+		(pt 224 96)
+		(output)
+		(text "CODEC_DIN" (rect 0 0 66 12)(font "Arial" ))
+		(text "CODEC_DIN" (rect 137 91 203 103)(font "Arial" ))
+		(line (pt 224 96)(pt 208 96)(line_width 1))
+	)
+	(port
+		(pt 224 112)
+		(output)
+		(text "CODEC_LRCIN" (rect 0 0 80 12)(font "Arial" ))
+		(text "CODEC_LRCIN" (rect 123 107 203 119)(font "Arial" ))
+		(line (pt 224 112)(pt 208 112)(line_width 1))
+	)
+	(port
+		(pt 224 128)
+		(output)
+		(text "CODEC_LRCOUT" (rect 0 0 90 12)(font "Arial" ))
+		(text "CODEC_LRCOUT" (rect 113 123 203 135)(font "Arial" ))
+		(line (pt 224 128)(pt 208 128)(line_width 1))
+	)
+	(port
+		(pt 224 144)
+		(output)
+		(text "CODEC_BCLK" (rect 0 0 74 12)(font "Arial" ))
+		(text "CODEC_BCLK" (rect 129 139 203 151)(font "Arial" ))
+		(line (pt 224 144)(pt 208 144)(line_width 1))
+	)
+	(port
+		(pt 224 160)
+		(output)
+		(text "CODEC_MCLK" (rect 0 0 75 12)(font "Arial" ))
+		(text "CODEC_MCLK" (rect 128 155 203 167)(font "Arial" ))
+		(line (pt 224 160)(pt 208 160)(line_width 1))
+	)
+	(port
+		(pt 224 64)
+		(bidir)
+		(text "CODEC_SDIN" (rect 0 0 73 12)(font "Arial" ))
+		(text "CODEC_SDIN" (rect 130 59 203 71)(font "Arial" ))
+		(line (pt 224 64)(pt 208 64)(line_width 1))
+	)
+	(port
+		(pt 224 80)
+		(bidir)
+		(text "CODEC_SCLK" (rect 0 0 74 12)(font "Arial" ))
+		(text "CODEC_SCLK" (rect 129 75 203 87)(font "Arial" ))
+		(line (pt 224 80)(pt 208 80)(line_width 1))
+	)
+	(port
+		(pt 224 176)
+		(bidir)
+		(text "CODEC_I2S[3..0]" (rect 0 0 88 12)(font "Arial" ))
+		(text "CODEC_I2S[3..0]" (rect 115 171 203 183)(font "Arial" ))
+		(line (pt 224 176)(pt 208 176)(line_width 3))
+	)
+	(port
+		(pt 224 192)
+		(bidir)
+		(text "CODEC_I2C[1..0]" (rect 0 0 89 12)(font "Arial" ))
+		(text "CODEC_I2C[1..0]" (rect 114 187 203 199)(font "Arial" ))
+		(line (pt 224 192)(pt 208 192)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 208 208)(line_width 1))
+	)
+)
