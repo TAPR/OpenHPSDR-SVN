@@ -1,6 +1,6 @@
 Assembler report for Janus
-Tue Nov 28 15:47:47 2006
-Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+Sat Feb 10 17:07:32 2007
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
 ---------------------
@@ -10,7 +10,7 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/HPSDR/trunk/Janus-CPLDV2/Janus.pof
+  5. Assembler Device Options: C:/HPDSDR/trunk/Janus-CPLDV2/Janus.pof
   6. Assembler Messages
 
 
@@ -21,7 +21,7 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 Copyright (C) 1991-2006 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
-functions, and any output files any of the foregoing 
+functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
 to the terms and conditions of the Altera Program License 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Tue Nov 28 15:47:47 2006 ;
+; Assembler Status      ; Successful - Sat Feb 10 17:07:32 2007 ;
 ; Revision Name         ; Janus                                 ;
 ; Top-level Entity Name ; Janus                                 ;
 ; Family                ; MAX II                                ;
@@ -50,7 +50,6 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+-----------+---------------+
 ; Option                                                                         ; Setting   ; Default Value ;
 +--------------------------------------------------------------------------------+-----------+---------------+
-; Use smart compilation                                                          ; Off       ; Off           ;
 ; Generate Serial Vector Format File (.svf) for Target Device                    ; Off       ; Off           ;
 ; Generate a JEDEC STAPL Format File (.jam) for Target Device                    ; Off       ; Off           ;
 ; Generate an uncompressed Jam STAPL Byte Code 2.0 File (.jbc) for Target Device ; Off       ; Off           ;
@@ -71,27 +70,28 @@ applicable agreement for further details.
 ; Generate Hexadecimal (Intel-Format) Output File (.hexout) for Target Device    ; Off       ; Off           ;
 ; Hexadecimal Output File start address                                          ; 0         ; 0             ;
 ; Hexadecimal Output File count direction                                        ; Up        ; Up            ;
+; Use smart compilation                                                          ; Off       ; Off           ;
 +--------------------------------------------------------------------------------+-----------+---------------+
 
 
-+---------------------------------------+
-; Assembler Generated Files             ;
-+---------------------------------------+
-; File Name                             ;
-+---------------------------------------+
-; C:/HPSDR/trunk/Janus-CPLDV2/Janus.pof ;
-+---------------------------------------+
++----------------------------------------+
+; Assembler Generated Files              ;
++----------------------------------------+
+; File Name                              ;
++----------------------------------------+
+; C:/HPDSDR/trunk/Janus-CPLDV2/Janus.pof ;
++----------------------------------------+
 
 
-+-----------------------------------------------------------------+
-; Assembler Device Options: C:/HPSDR/trunk/Janus-CPLDV2/Janus.pof ;
-+----------------+------------------------------------------------+
-; Option         ; Setting                                        ;
-+----------------+------------------------------------------------+
-; Device         ; EPM240T100C5                                   ;
-; JTAG usercode  ; 0xFFFFFFFF                                     ;
-; Checksum       ; 0x0018C408                                     ;
-+----------------+------------------------------------------------+
++------------------------------------------------------------------+
+; Assembler Device Options: C:/HPDSDR/trunk/Janus-CPLDV2/Janus.pof ;
++----------------+-------------------------------------------------+
+; Option         ; Setting                                         ;
++----------------+-------------------------------------------------+
+; Device         ; EPM240T100C5                                    ;
+; JTAG usercode  ; 0xFFFFFFFF                                      ;
+; Checksum       ; 0x00174D80                                      ;
++----------------+-------------------------------------------------+
 
 
 +--------------------+
@@ -99,13 +99,14 @@ applicable agreement for further details.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus II Assembler
-    Info: Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
-    Info: Processing started: Tue Nov 28 15:47:47 2006
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Sat Feb 10 17:07:27 2007
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Janus -c Janus
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Processing ended: Tue Nov 28 15:47:47 2006
-    Info: Elapsed time: 00:00:00
+    Info: Allocated 106 megabytes of memory during processing
+    Info: Processing ended: Sat Feb 10 17:07:32 2007
+    Info: Elapsed time: 00:00:05
 
 

@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EPM240T100C5
 set_global_assignment -name TOP_LEVEL_ENTITY Janus
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:37:01  JUNE 30, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION "6.0 SP1"
+set_global_assignment -name LAST_QUARTUS_VERSION 6.1
 set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 100
 set_global_assignment -name AUTO_RESTART_CONFIGURATION OFF
@@ -62,9 +62,7 @@ set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-
 set_global_assignment -name VECTOR_INPUT_SOURCE "C:\\HPSDR\\trunk\\Janus-CPLDV2\\24mhz-input.vwf"
 set_location_assignment PIN_1 -to SSCK
 set_location_assignment PIN_100 -to MOSI
-set_location_assignment PIN_82 -to C3
 set_location_assignment PIN_84 -to C2
-set_location_assignment PIN_78 -to C4
 set_location_assignment PIN_76 -to C5
 set_location_assignment PIN_74 -to C6
 set_location_assignment PIN_72 -to C7
@@ -85,3 +83,5 @@ set_global_assignment -name VERILOG_FILE counter1.v
 set_global_assignment -name BDF_FILE pfd.bdf
 set_global_assignment -name VERILOG_FILE Janus.v
 set_location_assignment PIN_50 -to ref_in
+set_location_assignment PIN_82 -to CLK_48MHZ
+set_location_assignment PIN_78 -to IQOUT
