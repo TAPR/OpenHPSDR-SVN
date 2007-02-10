@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Thu Jan 25 21:45:02 2007
+Sat Feb 10 20:17:53 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -14,45 +14,46 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
   6. Analysis & Synthesis Resource Utilization by Entity
   7. Analysis & Synthesis RAM Summary
   8. State Machine - |Ozy_Janus|state_PWM
-  9. State Machine - |Ozy_Janus|I2SAudioOut:I2SAO|TLV_state
- 10. Registers Removed During Synthesis
- 11. General Register Statistics
- 12. Multiplexer Restructuring Statistics (Restructuring Performed)
- 13. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 14. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated
- 15. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram
- 16. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
- 17. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg
- 18. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg|dffpipe_s98:dffpipe7
- 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_brp
- 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_bwp
- 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp
- 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_d09:dffpipe10
- 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg
- 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg|dffpipe_t98:dffpipe12
- 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_brp
- 26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_bwp
- 27. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp
- 28. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp|dffpipe_e09:dffpipe14
- 29. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 30. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated
- 31. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram
- 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3
- 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp
- 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5
- 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_brp
- 36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_bwp
- 37. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp
- 38. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe9
- 39. Parameter Settings for User Entity Instance: clocks:clocks|lpm_counter:lpm_counter_component
- 40. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 41. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 42. Parameter Settings for User Entity Instance: debounce:de_PTT
- 43. Parameter Settings for User Entity Instance: debounce:de_dot
- 44. Parameter Settings for User Entity Instance: debounce:de_dash
- 45. dcfifo Parameter Settings by Entity Instance
- 46. Analysis & Synthesis Messages
- 47. Analysis & Synthesis Suppressed Messages
+  9. State Machine - |Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state
+ 10. State Machine - |Ozy_Janus|I2SAudioOut:I2SAO|TLV_state
+ 11. Registers Removed During Synthesis
+ 12. General Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+ 15. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated
+ 16. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram
+ 17. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
+ 18. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg
+ 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg|dffpipe_s98:dffpipe7
+ 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_brp
+ 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_bwp
+ 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp
+ 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_d09:dffpipe10
+ 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg
+ 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg|dffpipe_t98:dffpipe12
+ 26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_brp
+ 27. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_bwp
+ 28. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp
+ 29. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp|dffpipe_e09:dffpipe14
+ 30. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 31. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated
+ 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram
+ 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3
+ 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp
+ 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5
+ 36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_brp
+ 37. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_bwp
+ 38. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp
+ 39. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe9
+ 40. Parameter Settings for User Entity Instance: clocks:clocks|lpm_counter:lpm_counter_component
+ 41. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+ 42. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 43. Parameter Settings for User Entity Instance: debounce:de_PTT
+ 44. Parameter Settings for User Entity Instance: debounce:de_dot
+ 45. Parameter Settings for User Entity Instance: debounce:de_dash
+ 46. dcfifo Parameter Settings by Entity Instance
+ 47. Analysis & Synthesis Messages
+ 48. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -78,15 +79,15 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Jan 25 21:45:02 2007   ;
+; Analysis & Synthesis Status        ; Successful - Sat Feb 10 20:17:53 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 727                                     ;
-;     Total combinational functions  ; 610                                     ;
-;     Dedicated logic registers      ; 727                                     ;
-; Total registers                    ; 727                                     ;
+; Total logic elements               ; 694                                     ;
+;     Total combinational functions  ; 598                                     ;
+;     Dedicated logic registers      ; 694                                     ;
+; Total registers                    ; 694                                     ;
 ; Total pins                         ; 46                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304                                  ;
@@ -226,28 +227,28 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 727   ;
+; Estimated Total logic elements              ; 694   ;
 ;                                             ;       ;
-; Total combinational functions               ; 610   ;
+; Total combinational functions               ; 598   ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 204   ;
-;     -- 3 input functions                    ; 195   ;
-;     -- <=2 input functions                  ; 211   ;
+;     -- 4 input functions                    ; 227   ;
+;     -- 3 input functions                    ; 166   ;
+;     -- <=2 input functions                  ; 205   ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 371   ;
-;     -- arithmetic mode                      ; 239   ;
+;     -- normal mode                          ; 391   ;
+;     -- arithmetic mode                      ; 207   ;
 ;                                             ;       ;
-; Total registers                             ; 727   ;
-;     -- Dedicated logic registers            ; 727   ;
+; Total registers                             ; 694   ;
+;     -- Dedicated logic registers            ; 694   ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
 ; I/O pins                                    ; 46    ;
 ; Total memory bits                           ; 98304 ;
 ; Maximum fan-out node                        ; BCLK  ;
 ; Maximum fan-out                             ; 374   ;
-; Total fan-out                               ; 4580  ;
-; Average fan-out                             ; 3.24  ;
+; Total fan-out                               ; 4544  ;
+; Average fan-out                             ; 3.32  ;
 +---------------------------------------------+-------+
 
 
@@ -256,8 +257,9 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-; |Ozy_Janus                                    ; 610 (360)         ; 727 (390)    ; 98304       ; 0            ; 0       ; 0         ; 46   ; 0            ; |Ozy_Janus                                                                                                                        ;
-;    |I2SAudioOut:I2SAO|                        ; 33 (33)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ;
+; |Ozy_Janus                                    ; 598 (325)         ; 694 (324)    ; 98304       ; 0            ; 0       ; 0         ; 46   ; 0            ; |Ozy_Janus                                                                                                                        ;
+;    |I2SAudioOut:I2SAO|                        ; 34 (34)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ;
+;    |I2SAudioOut:I2SIQO|                       ; 22 (22)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SIQO                                                                                                     ;
 ;    |Rx_fifo:Rx_fifo|                          ; 97 (0)            ; 130 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|               ; 97 (0)            ; 130 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
 ;          |dcfifo_6bf1:auto_generated|         ; 97 (22)           ; 130 (28)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated                                                     ;
@@ -335,6 +337,20 @@ Encoding Type:  One-Hot
 
 Encoding Type:  One-Hot
 +-----------------------------------------------------------------------------------------------+
+; State Machine - |Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state                                       ;
++---------------+---------------+---------------+---------------+---------------+---------------+
+; Name          ; TLV_state.001 ; TLV_state.010 ; TLV_state.011 ; TLV_state.000 ; TLV_state.100 ;
++---------------+---------------+---------------+---------------+---------------+---------------+
+; TLV_state.000 ; 0             ; 0             ; 0             ; 0             ; 0             ;
+; TLV_state.011 ; 0             ; 0             ; 1             ; 1             ; 0             ;
+; TLV_state.010 ; 0             ; 1             ; 0             ; 1             ; 0             ;
+; TLV_state.001 ; 1             ; 0             ; 0             ; 1             ; 0             ;
+; TLV_state.100 ; 0             ; 0             ; 0             ; 1             ; 1             ;
++---------------+---------------+---------------+---------------+---------------+---------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------+
 ; State Machine - |Ozy_Janus|I2SAudioOut:I2SAO|TLV_state                                        ;
 +---------------+---------------+---------------+---------------+---------------+---------------+
 ; Name          ; TLV_state.001 ; TLV_state.010 ; TLV_state.011 ; TLV_state.000 ; TLV_state.100 ;
@@ -396,9 +412,20 @@ Encoding Type:  One-Hot
 ; state_PWM~21                                                      ; Lost fanout                            ;
 ; state_PWM~22                                                      ; Lost fanout                            ;
 ; state_PWM~23                                                      ; Lost fanout                            ;
+; I2SIQO/TLV_state~7                                                ; Lost fanout                            ;
+; I2SIQO/TLV_state~8                                                ; Lost fanout                            ;
 ; I2SAO/TLV_state~7                                                 ; Lost fanout                            ;
 ; I2SAO/TLV_state~8                                                 ; Lost fanout                            ;
-; Total Number of Removed Registers = 46                            ;                                        ;
+; I2SIQO/TLV_state.011                                              ; Lost fanout                            ;
+; I2SIQO/TLV_state.001                                              ; Lost fanout                            ;
+; I2SIQO/bit_count[3]                                               ; Merged with I2SAO/bit_count[3]         ;
+; I2SIQO/bit_count[2]                                               ; Merged with I2SAO/bit_count[2]         ;
+; I2SIQO/bit_count[1]                                               ; Merged with I2SAO/bit_count[1]         ;
+; I2SIQO/bit_count[0]                                               ; Merged with I2SAO/bit_count[0]         ;
+; I2SIQO/TLV_state.100                                              ; Merged with I2SAO/TLV_state.100        ;
+; I2SIQO/TLV_state.010                                              ; Merged with I2SAO/TLV_state.010        ;
+; I2SIQO/TLV_state.000                                              ; Merged with I2SAO/TLV_state.000        ;
+; Total Number of Removed Registers = 57                            ;                                        ;
 +-------------------------------------------------------------------+----------------------------------------+
 
 
@@ -407,12 +434,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 727   ;
+; Total registers                              ; 694   ;
 ; Number of registers using Synchronous Clear  ; 82    ;
 ; Number of registers using Synchronous Load   ; 2     ;
 ; Number of registers using Asynchronous Clear ; 28    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 280   ;
+; Number of registers using Clock Enable       ; 311   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -422,14 +449,14 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output  ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[4]  ;
-; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Ozy_Janus|FIFO_ADR[0]~reg0 ;
-; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|byte_count[6]    ;
-; 128:1              ; 4 bits    ; 340 LEs       ; 32 LEs               ; 308 LEs                ; Yes        ; |Ozy_Janus|AD_state[2]      ;
-; 8:1                ; 9 bits    ; 45 LEs        ; 9 LEs                ; 36 LEs                 ; Yes        ; |Ozy_Janus|sync_count[7]    ;
-; 71:1               ; 8 bits    ; 376 LEs       ; 24 LEs               ; 352 LEs                ; Yes        ; |Ozy_Janus|register[12]     ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[6]  ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Ozy_Janus|FIFO_ADR[1]~reg0 ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|byte_count[4]    ;
+; 128:1              ; 4 bits    ; 340 LEs       ; 32 LEs               ; 308 LEs                ; Yes        ; |Ozy_Janus|AD_state[5]      ;
+; 8:1                ; 9 bits    ; 45 LEs        ; 9 LEs                ; 36 LEs                 ; Yes        ; |Ozy_Janus|sync_count[6]    ;
+; 71:1               ; 8 bits    ; 376 LEs       ; 24 LEs               ; 352 LEs                ; Yes        ; |Ozy_Janus|register[13]     ;
 ; 72:1               ; 5 bits    ; 240 LEs       ; 20 LEs               ; 220 LEs                ; Yes        ; |Ozy_Janus|register[2]      ;
-; 72:1               ; 2 bits    ; 96 LEs        ; 6 LEs                ; 90 LEs                 ; Yes        ; |Ozy_Janus|register[0]      ;
+; 72:1               ; 2 bits    ; 96 LEs        ; 6 LEs                ; 90 LEs                 ; Yes        ; |Ozy_Janus|register[1]      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
 
 
@@ -827,7 +854,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Jan 25 21:44:35 2007
+    Info: Processing started: Sat Feb 10 20:17:28 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
     Info: Found entity 1: Tx_fifo
@@ -842,10 +869,10 @@ Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(406): object "PTT_out" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(846): object "Rx_control_1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(847): object "Rx_control_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(848): object "Rx_control_3" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(413): object "PTT_out" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(855): object "Rx_control_1" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(856): object "Rx_control_2" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(857): object "Rx_control_3" assigned a value but never read
 Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
 Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
     Info: Found entity 1: lpm_counter
@@ -950,6 +977,7 @@ Info: Elaborating entity "I2SAudioOut" for hierarchy "I2SAudioOut:I2SAO"
 Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
 Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
 Info: State machine "|Ozy_Janus|state_PWM" contains 14 states
+Info: State machine "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state" contains 5 states
 Info: State machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state" contains 5 states
 Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|state_PWM"
 Info: Encoding result for state machine "|Ozy_Janus|state_PWM"
@@ -982,6 +1010,19 @@ Info: Encoding result for state machine "|Ozy_Janus|state_PWM"
     Info: State "|Ozy_Janus|state_PWM.00010" uses code string "00100000000001"
     Info: State "|Ozy_Janus|state_PWM.01101" uses code string "01000000000001"
     Info: State "|Ozy_Janus|state_PWM.00001" uses code string "10000000000001"
+Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state"
+Info: Encoding result for state machine "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.001"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.010"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.011"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.000"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.100"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.000" uses code string "00000"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.011" uses code string "00110"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.010" uses code string "01010"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.001" uses code string "10010"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.100" uses code string "00011"
 Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
 Info: Encoding result for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
     Info: Completed encoding using 5 state bits
@@ -995,10 +1036,18 @@ Info: Encoding result for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.010" uses code string "01010"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.001" uses code string "10010"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.100" uses code string "00011"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[3]" merged to single register "I2SAudioOut:I2SAO|bit_count[3]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[2]" merged to single register "I2SAudioOut:I2SAO|bit_count[2]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[1]" merged to single register "I2SAudioOut:I2SAO|bit_count[1]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[0]" merged to single register "I2SAudioOut:I2SAO|bit_count[0]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.100" merged to single register "I2SAudioOut:I2SAO|TLV_state.100"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.010" merged to single register "I2SAudioOut:I2SAO|TLV_state.010"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.000" merged to single register "I2SAudioOut:I2SAO|TLV_state.000"
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "PKEND" stuck at VCC
     Warning: Pin "FIFO_ADR[0]" stuck at GND
-Info: 45 registers lost all their fanouts during netlist optimizations. The first 45 are displayed below.
+Info: 49 registers lost all their fanouts during netlist optimizations. The first 49 are displayed below.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/p0addr" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
@@ -1042,20 +1091,24 @@ Info: 45 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "state_PWM~21" lost all its fanouts during netlist optimizations.
     Info: Register "state_PWM~22" lost all its fanouts during netlist optimizations.
     Info: Register "state_PWM~23" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state~7" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state~8" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~7" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state.011" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1057 device resources after synthesis - the final resource count might be different
+Info: Implemented 1047 device resources after synthesis - the final resource count might be different
     Info: Implemented 12 input pins
     Info: Implemented 18 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 979 logic cells
+    Info: Implemented 969 logic cells
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Allocated 138 megabytes of memory during processing
-    Info: Processing ended: Thu Jan 25 21:45:02 2007
-    Info: Elapsed time: 00:00:27
+    Info: Allocated 135 megabytes of memory during processing
+    Info: Processing ended: Sat Feb 10 20:17:53 2007
+    Info: Elapsed time: 00:00:25
 
 
 +------------------------------------------+
