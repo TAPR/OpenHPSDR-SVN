@@ -46,8 +46,6 @@ set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
 set_location_assignment PIN_160 -to BCLK
 set_location_assignment PIN_164 -to DOUT
 set_location_assignment PIN_161 -to LRCLK
-set_location_assignment PIN_151 -to I_PWM_out
-set_location_assignment PIN_150 -to Q_PWM_out
 set_location_assignment PIN_162 -to CBCLK
 set_location_assignment PIN_165 -to CDOUT
 set_location_assignment PIN_168 -to CDIN
@@ -107,3 +105,7 @@ set_location_assignment PIN_33 -to DEBUG_LED1
 set_location_assignment PIN_34 -to DEBUG_LED2
 set_location_assignment PIN_108 -to DEBUG_LED3
 set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_location_assignment PIN_151 -to IQOUT
+set_location_assignment PIN_86 -to I_test
+set_location_assignment PIN_88 -to Q_test
+set_location_assignment PIN_150 -to CLK_48MHZ

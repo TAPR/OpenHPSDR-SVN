@@ -1,4 +1,4 @@
-// V1.10 4th December 2006
+// V1.20 10th February 2006
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -83,17 +83,17 @@
 // A/D data is in 2's complement format.
 // AK5394A is set to be 192/96/48kHz, 24 bit in I2S mode.
 //
-// TLV320 is set via I2C (or SPI via the Janus CPLD) to be 48kHz, 16 bit and I2S mode as follows:
+// TLV320 is set via I2C to be 48kHz, 16 bit and I2S mode as follows:
 //
-// TLV320  - 36 1E 00 - Reset chip
-//         - 36 12 01 - set digital interface active
-//         - 36 0A 00 - turn D/A mute off
-//         - 36 08 15 - D/A on, mic input, mic 20dB boost
-//         - 36 0C 00 - All chip power on
-//         - 36 0E 02 - Slave, 16 bit, I2S
-//         - 36 10 00 - Clock/2, 48k, Normal mode
+// TLV320  - 1A 1E 00 - Reset chip
+//         - 1A 12 01 - set digital interface active
+//         - 1A 0A 00 - turn D/A mute off
+//         - 1A 08 15 - D/A on, mic input, mic 20dB boost
+//         - 1A 0C 00 - All chip power on
+//         - 1A 0E 02 - Slave, 16 bit, I2S
+//         - 1A 10 00 - Clock/2, 48k, Normal mode
 //
-//         I2C address for TLV320 is 0x36 (TODO: check address is correct when using OZY)
+//         I2C address for TLV320 is 0x1A 
 
 
 
@@ -103,10 +103,11 @@
 // since the FX2 USB must run off the FX2 24MHz clock and the
 // A/D's  must run of the 12.288MHz clock.
 //
-// Uses single bit D/A converters using 16 bits for I and Q signals.
+//
+// I and Q data is sent in I2S format to Atlas bus for use by Janus and Penelope
 //
 //
-// Built with Quartus II v6.0 sp1 build 202
+// Built with Quartus II v6.1 Build 201
 //
 // Change log:  Ported from Duplex.v - 22 July 2006
 //              Code comments updated - 23 July 2006
@@ -128,6 +129,8 @@
 //				Modified to support Ozy V2 hardware using EP2C8Q208C8- 4 Dec 2006
 //				Upgraded to Quartus V6.1 - 25th Jan 2006
 //				Modified PWM DAC to run off IFCLK to increase resolution - 25th Jan 2006
+//				Added I and Q outputs in I2S format for use with Janus and Penelope - 10th Feb 2006
+//				
 //
 ////////////////////////////////////////////////////////////
 
@@ -153,7 +156,9 @@
 //   CDIN                   - Atlas C12 - pin 168 - TLV320
 //   DFS0                   - Atlas C13 - pin 169 - AK5394A speed setting
 //   DFS1                   - Atlas C14 - pin 170 - AK5394A speed setting
-//   TT_in                  - Atlas C15 - pin 171 - PTT input from Janus
+//   PTT_in                 - Atlas C15 - pin 171 - PTT input from Janus
+//							- Atlas C16 -         - 10MHz reference 
+//	 IQOUT					- Altas C17 - pin 175 - I & Q out in I2S format
 //
 //   DB9 - pin connections
 //
@@ -232,10 +237,11 @@
 //
 
 module Ozy_Janus(
-        IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,I_PWM_out,
-        Q_PWM_out, CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, PTT_in, AK_reset, dot, dash, DEBUG_LED0, DEBUG_LED1, DEBUG_LED2,DEBUG_LED3);
+        IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
+        CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, IQOUT, PTT_in, AK_reset, dot, dash, DEBUG_LED0,
+		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ);
 
-input CLK_12MHZ;               // From Janus board 24.576MHz
+input CLK_12MHZ;               // From Janus board 12.288MHz
 input IFCLK;                   // FX2 IFCLOCK - 48MHz
 input BCLK, DOUT, LRCLK;
 inout  [15:0] FX2_FD;           // bidirectional FIFO data to/from the FX2
@@ -253,10 +259,9 @@ output DEBUG_LED0;               // LEDs on OZY board
 output DEBUG_LED1;
 output DEBUG_LED2;
 output DEBUG_LED3;
-output I_PWM_out;               // PWM D/A converter output
-output Q_PWM_out;
 output CBCLK, CLRCLK;           // Clocks to TLV320AIC23B
 output CDIN;                    // Rx data to TLV320AIC23B
+output IQOUT;					// I and Q data in I2S format to Atlas
 input CDOUT;                    // A/D data from TLV320AIC23B
 input PTT_in;                   // PTT active high
 input dot;                      // CW dot key, active low
@@ -265,6 +270,7 @@ output DFS0,DFS1;               // speed control for AK5394A
 output AK_reset;                // reset for AK5394A
 wire DFS0;
 wire DFS1;
+output CLK_48MHZ; 				// 48MHz clock to Janus for PWM decoder 
 
 
 
@@ -344,7 +350,7 @@ end
 
 //////////////////////////////////////////////////////////////
 //
-//                              Clocks for TLV320AIC23B
+//                              Clocks for TLV320AIC23B etc
 //
 //////////////////////////////////////////////////////////////
 
@@ -365,6 +371,7 @@ clocks clocks(CLK_12MHZ, clock_out);
 
 assign CBCLK = clock_out[1] ;           // 3.072MHz
 assign CLRCLK = clock_out[7];           // 48kHz
+assign CLK_48MHZ = IFCLK; 				// 48MHz clock to PWM DAC on Janus
 
 
 //////////////////////////////////////////////////////////////
@@ -704,12 +711,12 @@ begin
 case(state_FX)
 // state 0 - set up to check for Rx data from EP2
 4'd0:begin
-    SLWR <= 1;                                                          // reset FX2 FIFO write stobe
+    SLWR <= 1;                                                  // reset FX2 FIFO write stobe
         Tx_read_clock <= 1'b0;                                  // reset Tx fifo read strobe
         SLRD <= 1'b1;
         SLOE <= 1'b1;
         SLEN <= 1'b0;
-        FIFO_ADR <= 2'b00;                                              // select EP2
+        FIFO_ADR <= 2'b00;                                      // select EP2
         state_FX <= state_FX + 1'b1;
         end
 // delay 2 IFCLOCK cycle, this is necessary at 48MHZ to allow FIFO_ADR to settle
@@ -718,11 +725,11 @@ case(state_FX)
                 if(EP2_has_data)
                         begin
                         state_FX <= state_FX + 1'b1;
-                        SLOE <= 1'b0;                                   //assert SLOE
+                        SLOE <= 1'b0;                             //assert SLOE
                         end
                 else begin
                         RX_wait <= RX_wait + 1'b1;              // increment RX_wait counter
-                        state_FX <= 4'd6;                               // No Rx data so check for Tx data ******
+                        state_FX <= 4'd6;                       // No Rx data so check for Tx data
                 end
         end
 // Wait 2 IFCLK before we assert SLRD then load received data
@@ -743,10 +750,10 @@ case(state_FX)
             if (syncd_write_used[10] == 1'b1) begin // data available, so let's start the xfer...
                                 SLWR <= 1;
                 state_FX <= state_FX + 1'b1;
-                                FIFO_ADR <= 2'b10;                              // select EP6
+                                FIFO_ADR <= 2'b10;              // select EP6
                                 end
             else state_FX <= 4'd2; //was 2                      // No Tx data so check for Rx data,
-         end                                                                    // note we already have address set
+         end                                                    // note we already have address set
 // Wait 2 IFCLK for FIFO_ADR to stabilize, assert SLWR
 // NOTE: seems OK with 2 waits, may need more.
 4'd8:begin
@@ -755,15 +762,15 @@ case(state_FX)
          end
 // check Tx FIFO is ready then set Write strobe
 4'd9:   begin
-            if (EP6_ready) begin                                        // if EP6 is ready, write to it and exit this state
-                                Tx_read_clock <= 1'b0;                          // end of transfer from Tx fifo
+            if (EP6_ready) begin                                // if EP6 is ready, write to it and exit this state
+                                Tx_read_clock <= 1'b0;          // end of transfer from Tx fifo
                 SLEN <= 1'b1;
                 state_FX <= state_FX + 1'b1;
             end
             else begin                                          // otherwise, hang out here until fifo is ready
                 SLWR <= 1;
                 state_FX <= 4'd9;
-                                TX_wait <= TX_wait + 1'b1;                      // increment TX_wait counter
+                                TX_wait <= TX_wait + 1'b1;      // increment TX_wait counter
             end
         end
 //  set SLWR
@@ -837,9 +844,11 @@ assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
 reg [4:0] state_PWM;                    // state for PWM  counts 0 to 13
 reg [15:0] Left_PWM;                    // Left 16 bit PWM data for D/A converter
 reg [15:0] Right_PWM;                   // Right 16 bit PWM data for D/A converter
-reg [15:0] I_PWM;                               // I 16 bit PWM data for D/A conveter
-reg [15:0] Q_PWM;                               // Q 16 bit PWM data for D/A conveter
-reg fifo_enable;                                // controls reading of dual clock fifo
+reg [15:0] I_PWM;                       // I 16 bit PWM data for D/A conveter
+reg [15:0] Q_PWM;                       // Q 16 bit PWM data for D/A conveter
+reg [15:0] I_Data;
+reg [15:0] Q_Data; 
+reg fifo_enable;                        // controls reading of dual clock fifo
 reg [11:0] synced_Rx_used;              // how may bytes in FX2 side Rx fifos synced to BCLK
 reg [6:0] byte_count;                   // counts number of times round loop
 reg [7:0] Rx_control_0;                 // control C0 from PC, MOX active if bit 0 set
@@ -977,34 +986,6 @@ case(state_PWM)
         endcase
 end
 
-/////////////////////////////////////////////////////////////////
-//
-// Single bit PWM 16 bit D/A converters
-//
-/////////////////////////////////////////////////////////////////
-
-// This runs off the 48MHZ IFCLKL clock to increase effective number of bits.
-
-reg [15:0] I_Data;
-reg [15:0] Q_Data;
-reg [15:0] I_Data_in;
-reg [15:0] Q_Data_in;
-reg [16:0] I_PWM_accumulator;
-reg [16:0] Q_PWM_accumulator;
-
-
-always @(negedge IFCLK)
-begin
-        I_Data_in <= I_Data + 16'h8000;         // so that 0 in gives 50:50 mark/space
-        Q_Data_in <= Q_Data + 16'h8000;
-        I_PWM_accumulator <= I_PWM_accumulator[15:0] + I_Data_in;
-        Q_PWM_accumulator <= Q_PWM_accumulator[15:0] + Q_Data_in;
-
-end
-
-assign I_PWM_out = I_PWM_accumulator[16];       // send to FPGA pins
-assign Q_PWM_out = Q_PWM_accumulator[16];
-
 ///////////////////////////////////////////////////////////////
 //
 //              Implements I2S format audio out,
@@ -1015,7 +996,15 @@ assign Q_PWM_out = Q_PWM_accumulator[16];
 
 I2SAudioOut  I2SAO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(Left_PWM), .right_sample_i(Right_PWM),.outbit_o(CDIN));
 
+///////////////////////////////////////////////////////////////
+//
+//              Implements I2S format I and Q  out,
+//              16 bits, two channels  for Janus and Penelope
+//
+///////////////////////////////////////////////////////////////
 
+
+I2SAudioOut  I2SIQO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(I_Data), .right_sample_i(Q_Data),.outbit_o(IQOUT));
 
 ///////////////////////////////////////////////////////
 //
@@ -1056,8 +1045,7 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 assign DEBUG_LED0 = ~write_full;            // LED D0 on when Rx fifo is full.
 assign DEBUG_LED1 = ~EP6_ready;             // LED D1 on when we can write to EP6
 assign DEBUG_LED2 = ~have_sync;             // LED D2 toggles each time we get sync
-assign DEBUG_LED3 = ~EP2_has_data;          //
-
+assign DEBUG_LED3 = ~EP2_has_data;          // LED D3 on when EP2 has data 
 
 endmodule
 

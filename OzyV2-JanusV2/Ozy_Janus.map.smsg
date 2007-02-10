@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Jan 25 21:44:35 2007
+    Info: Processing started: Sat Feb 10 20:17:28 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
     Info: Found entity 1: Tx_fifo
@@ -16,10 +16,10 @@ Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(406): object "PTT_out" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(846): object "Rx_control_1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(847): object "Rx_control_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(848): object "Rx_control_3" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(413): object "PTT_out" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(855): object "Rx_control_1" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(856): object "Rx_control_2" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(857): object "Rx_control_3" assigned a value but never read
 Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
 Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
     Info: Found entity 1: lpm_counter
@@ -124,6 +124,7 @@ Info: Elaborating entity "I2SAudioOut" for hierarchy "I2SAudioOut:I2SAO"
 Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
 Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
 Info: State machine "|Ozy_Janus|state_PWM" contains 14 states
+Info: State machine "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state" contains 5 states
 Info: State machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state" contains 5 states
 Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|state_PWM"
 Info: Encoding result for state machine "|Ozy_Janus|state_PWM"
@@ -156,6 +157,19 @@ Info: Encoding result for state machine "|Ozy_Janus|state_PWM"
     Info: State "|Ozy_Janus|state_PWM.00010" uses code string "00100000000001"
     Info: State "|Ozy_Janus|state_PWM.01101" uses code string "01000000000001"
     Info: State "|Ozy_Janus|state_PWM.00001" uses code string "10000000000001"
+Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state"
+Info: Encoding result for state machine "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.001"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.010"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.011"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.000"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.100"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.000" uses code string "00000"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.011" uses code string "00110"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.010" uses code string "01010"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.001" uses code string "10010"
+    Info: State "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state.100" uses code string "00011"
 Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
 Info: Encoding result for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
     Info: Completed encoding using 5 state bits
@@ -169,10 +183,18 @@ Info: Encoding result for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.010" uses code string "01010"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.001" uses code string "10010"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.100" uses code string "00011"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[3]" merged to single register "I2SAudioOut:I2SAO|bit_count[3]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[2]" merged to single register "I2SAudioOut:I2SAO|bit_count[2]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[1]" merged to single register "I2SAudioOut:I2SAO|bit_count[1]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[0]" merged to single register "I2SAudioOut:I2SAO|bit_count[0]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.100" merged to single register "I2SAudioOut:I2SAO|TLV_state.100"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.010" merged to single register "I2SAudioOut:I2SAO|TLV_state.010"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.000" merged to single register "I2SAudioOut:I2SAO|TLV_state.000"
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "PKEND" stuck at VCC
     Warning: Pin "FIFO_ADR[0]" stuck at GND
-Info: 45 registers lost all their fanouts during netlist optimizations. The first 45 are displayed below.
+Info: 49 registers lost all their fanouts during netlist optimizations. The first 49 are displayed below.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/p0addr" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
@@ -216,17 +238,21 @@ Info: 45 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "state_PWM~21" lost all its fanouts during netlist optimizations.
     Info: Register "state_PWM~22" lost all its fanouts during netlist optimizations.
     Info: Register "state_PWM~23" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state~7" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state~8" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~7" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state.011" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1057 device resources after synthesis - the final resource count might be different
+Info: Implemented 1047 device resources after synthesis - the final resource count might be different
     Info: Implemented 12 input pins
     Info: Implemented 18 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 979 logic cells
+    Info: Implemented 969 logic cells
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Allocated 138 megabytes of memory during processing
-    Info: Processing ended: Thu Jan 25 21:45:02 2007
-    Info: Elapsed time: 00:00:27
+    Info: Allocated 135 megabytes of memory during processing
+    Info: Processing ended: Sat Feb 10 20:17:53 2007
+    Info: Elapsed time: 00:00:25
