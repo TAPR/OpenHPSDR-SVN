@@ -40,7 +40,7 @@
 //
 // All unused pins on the CPLD have been set as tristate inputs in Quartus II
 // 
-// Bulit using Quartus II v6.0 SP1 build 202.
+// Built using Quartus II v6.1  build 201.
 
 
 // Change log:
@@ -51,9 +51,10 @@
 //  13 August 2006 - AK5394A now reset at power on and speed setting via Ozy
 //  14 August 2006 - inverted PTT pass to Atlas C3
 //  19 August 2006 - Interface to Atlas pins changed - V1.0
-//  21 August 2006 - Change to use I2C interface to TLV320AIC23B  -- spi code commented out w/ '//i2c' comments  (kd5tfd)
+//  21 August 2006 - Change to use I2C interface to TLV320AIC23B  
 //  19 November 2006 - Changes to use the V2 hardware. Replace 24.576MHz clock with 12.288MHz. 
 //  28 November 2006 - Added PLL to enable 12.288MHz clock to be locked to 10MHz reference
+//  10 Februray 2007 - Changed I Q to I2S format and added PWM DAC for I and Q outputs
 //
 //
 //  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
@@ -83,29 +84,29 @@ module Janus(
    	output nCS,
    	output nRST,
    	input  PTT,
-   	output QPWM,
-   	input  SCLK,
+   	output QPWM,	// Q data out
+   	input  SCLK,	// I data out
   	input  SDOUT,
    	output SMODE1,
    	output SMODE2,
-   	input  SSCK,  // was output for spi interface 
-   	input  MOSI,  // was output for spi interface 
+   	input  SSCK,  	// was output for spi interface 
+   	input  MOSI,  	// was output for spi interface 
    	output ZCAL,
-   	input  C2,	// nRST
-	input  C3,	// QPWM
-	input  C4,	// IPWM
-	output C5,	// 12.288MHz clock to Atlas bus
-	output C6,	// SCLK
-	output C7,	// LRCLK
-	input  C8,  // CBCLK
-	input  C9,	// CLRCIN/CLRCOUT
-	output C10,	// SDOUT
-	output C11,	// CDOUT
-	input  C12,	// CDIN
-	input  C13,	// DFS0
-	input  C14,	// DFS1
-	inout  C15, // !PTT
-	input  ref_in  // C16 - 10MHz reference in from Atlas bus
+   	input  C2,		// nRST
+	input  CLK_48MHZ,	// 48MHz clock from FX2 for PWM 
+	input  IQOUT,	// I and Q data in I2S format 
+	output C5,		// 12.288MHz clock to Atlas bus
+	output C6,		// SCLK
+	output C7,		// LRCLK
+	input  C8,  	// CBCLK
+	input  C9,		// CLRCIN/CLRCOUT
+	output C10,		// SDOUT
+	output C11,		// CDOUT
+	input  C12,		// CDIN
+	input  C13,		// DFS0
+	input  C14,		// DFS1
+	inout  C15, 	// !PTT
+	input  ref_in  	// C16 - 10MHz reference in from Atlas bus
 ); 
 
 reg index;
@@ -115,97 +116,12 @@ reg [3:0]TLV;
 reg [15:0] TLV_data;
 reg TLV_CLK;
 reg data; 
-reg [3:0] bit_count;
 wire pdf_out;
 reg ref_8k;
 reg osc_8k;
 wire cout1;
 wire cout2;
 reg ref_OK; // is low when 10MHz reference signal is present
-
-//i2c reg TLV_nCS;
-
-//////////////////////////////////////////////////////////////
-//
-// 		Set up TLV320 using SPI until I2C on OZY is going 
-//
-/////////////////////////////////////////////////////////////
-
-/* Data to send to TLV320 is 
-
- 	1E 00 - Reset chip
- 	12 01 - set digital interface active
- 	08 15 - D/A on, mic input, mic 20dB boost
- 	08 14 - ditto but no mic boost
- 	0C 00 - All chip power on
- 	0E 02 - Slave, 16 bit, I2S
- 	10 00 - 48k, Normal mode
- 	0A 00 - turn D/A mute off
-
-*/
-
-// Set up TLV320 data to send 
-
-//i2c always @ (posedge index)		
-//i2c begin
-//i2c load <= load + 3'b1;			// select next data word to send
-//i2c case (load)
-//i2c 3'd0: tdata <= 16'h1E00;		// data to load into TLV320
-//i2c 3'd1: tdata <= 16'h1201;
-//i2c 3'd2: tdata <= 16'h0815;
-//i2c 3'd3: tdata <= 16'h0C00;
-//i2c 3'd4: tdata <= 16'h0E02;
-//i2c 3'd5: tdata <= 16'h1000;
-//i2c 3'd6: tdata <= 16'h0A00;
-//i2c default: load <= 0;
-//i2c endcase
-//i2c end
-
-// State machine to send data to TLV320 via SPI interface
-
-//i2c always @ (posedge CLK_12MHZ)
-//i2c begin
-//i2c case (TLV)
-//i2c 4'd0: begin
-//i2c         TLV_nCS <= 1'b1;                                // set TLV320 CS high
-//i2c         bit_count <= 4'd15;                             // set starting bit count to 15
-//i2c         index <= ~index;                                // load next data to send
-//i2c         TLV <= TLV + 4'b1;
-//i2c    end
-//i2c 4'd1: begin
-//i2c         TLV_nCS <= 1'b0;                                // start data transfer with nCS low
-//i2c         TLV_data <= tdata;
-//i2c         data <= TLV_data[bit_count];    // set data up
-//i2c         TLV <= TLV + 4'b1;
-//i2c         end
-//i2c 4'd2: begin
-//i2c         TLV_CLK <= 1'b1;                                // clock data into TLV320
-//i2c         TLV <= TLV + 4'b1;
-//i2c         end
-//i2c 4'd3: begin
-//i2c         TLV_CLK <= 1'b0;                                // reset clock
-//i2c         TLV <= TLV + 4'b1;
-//i2c         end
-//i2c 4'd4: begin
-//i2c                 if(bit_count == 0) begin        // word transfer is complete, check for any more
-//i2c                         index <= ~index;
-//i2c                         TLV <= 4'd5;
-//i2c                 end
-//i2c                 else begin
-//i2c                         bit_count <= bit_count - 1'b1;
-//i2c                         TLV <= 4'b1;                    // go round again
-//i2c                 end
-//i2c         end                                                             // end transfer
-//i2c 4'd5: begin
-//i2c                 if (load == 7)begin                             // stop when all data sent
-//i2c                         TLV <= 4'd5;                            // hang out here forever
-//i2c                         TLV_nCS <= 1'b1;                        // set CS high
-//i2c                 end
-//i2c                 else TLV <= 0;                                  // else get next data
-//i2c         end
-//i2c default: TLV <= 0;
-//i2c endcase
-//i2c end
 
 //////////////////////////////////////////////////////////////
 //
@@ -249,6 +165,85 @@ end
 // select the signal to send to the loop LPF depending if the 10MHz reference is present
 assign  TUNE = ref_OK ?  osc_8k : pfd_out; 
 
+///////////////////////////////////////////////////////////
+//
+//    I2S receiver 
+//
+///////////////////////////////////////////////////////////
+
+// receive I and Q data from Atlas bus in I2S format
+
+reg [3:0] bit_count;     // how many bits clocked 
+reg [2:0]IQ_state;
+reg [15:0] I_data;
+reg [15:0] Q_data;
+wire CLRCLK;
+
+assign CLRCLK = C9;
+
+always @(posedge CBCLK)
+begin
+case(IQ_state)
+0:	begin
+	if (!CLRCLK)IQ_state <= 0;					// loop until CLRLCK is high
+	else IQ_state <= 1;
+	end
+1:	if (CLRCLK)IQ_state <= 1;					// loop until CLRCLK is low
+	else IQ_state <= 2;
+2:	begin
+	I_data[bit_count] <= IQOUT;					// get 16 bits of I data 
+	bit_count <= bit_count - 1'b1;
+		if (bit_count == 0)	IQ_state <= 3; 
+		else IQ_state <= 2;  
+	end
+3:	if (!CLRCLK)IQ_state <= 3; 					// loop until CLRLCK is high
+	else IQ_state <= 4;
+4:	begin
+	Q_data[bit_count] <= IQOUT;					// get 16 bits of Q data
+	bit_count <= bit_count - 1'b1;
+		if (bit_count == 0)	IQ_state <= 0; 		// done so start again
+		else IQ_state <= 4;					
+	end 
+	default: IQ_state <= 0;
+endcase
+end
+
+// sync I and Q data to 48kHz LR clock
+
+reg [15:0] I_sync_data;
+reg [15:0] Q_sync_data;
+
+always @ (negedge CLRCLK)  // use negative edge so that both I and Q are from same frame.
+begin 
+	I_sync_data <= I_data;
+	Q_sync_data <= Q_data;
+end 
+
+///////////////////////////////////////////////////////////
+//
+//    PWM DAC for I and Q outputs 
+//
+///////////////////////////////////////////////////////////
+
+reg [16:0] I_accumulator;
+reg [16:0] Q_accumulator;
+reg [15:0] I_in;
+reg [15:0] Q_in;
+
+
+always @(negedge CLK_48MHZ)				// clock PWM at 48MHz
+begin
+        I_in <= I_sync_data + 16'h8000;         // so that 0 in gives 50:50 mark/space
+        Q_in <= Q_sync_data + 16'h8000;
+        I_accumulator <= I_accumulator[15:0] + I_in;
+        Q_accumulator <= Q_accumulator[15:0] + Q_in;
+
+end
+
+assign IPWM = I_accumulator[16];       // send to FPGA pins
+assign QPWM = Q_accumulator[16];
+
+
 
 //////////////////////////////////////////////////////////////
 //
@@ -258,21 +253,19 @@ assign  TUNE = ref_OK ?  osc_8k : pfd_out;
 
 // Atlas outputs
 assign C5 = CLK_12MHZ;		
-assign C6 = SCLK; 			// is actually BCLK
+assign C6 = SCLK; 		// is actually BCLK
 assign C7 = LRCLK;
 assign C10 = SDOUT; 
 assign C11 = CDOUT;
-assign C15 = ~PTT; 			// send not PTT 
+assign C15 = ~PTT; 		// send not PTT 
 
 // Atlas inputs
 assign nRST = C2;			// reset AK5394A on power up
-assign QPWM = C3;
-assign IPWM = C4;
 assign CBCLK = C8;
 assign CLRCIN = C9; 		// LRCLK for TLV320
 assign CLRCOUT = C9;		// LRCLK for TLV320
 assign CDIN = C12;
-assign DFS0 = C13; 		    // set AK speed
+assign DFS0 = C13; 			// set AK speed
 assign DFS1 = C14; 			// set AK speed
 
 // AK5394A pins
@@ -284,16 +277,12 @@ assign ZCAL = 1'b1;			// Calibrate AK from A/D inputs
 
 // LTV320 pins
 assign CMCLK = CLK_12MHZ; 	// 12.288MHz
-//i2c assign CMODE = 1'b1;		// Set to 1 for SPI mode 
 assign CMODE = 1'b0;		// Set to 0 for I2C
-//i2c assign nCS = TLV_nCS;
-assign nCS = 1'b0;   // this results in an i2c addr of 0x1a 
-//i2c assign SSCK = TLV_CLK;		// SPI clock on TLV320
-//i2c assign MOSI = data; 		    // SPI data to send to TLV320 
+assign nCS = 1'b0;   		// this results in an i2c addr of 0x1a 
 
 // Other pins 
 
-assign LED1 = ref_OK;		  	// Green LED on when 10MHz reference signal is present
+assign LED1 = ref_OK;		  // Green LED on when 10MHz reference signal is present
 assign LED2 = (lock | ref_OK);  // Yellow LED on when loop is locked and we have a reference signal 
 assign EXP4 = 1'b0;
 

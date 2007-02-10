@@ -1,7 +1,7 @@
  -- Copyright (C) 1991-2006 Altera Corporation
  -- Your use of Altera Corporation's design tools, logic functions 
  -- and other software and tools, and its AMPP partner logic 
- -- functions, and any output files any of the foregoing 
+ -- functions, and any output files from any of the foregoing 
  -- (including device programming or simulation files), and any 
  -- associated documentation or information are expressly subject 
  -- to the terms and conditions of the Altera Program License 
@@ -50,32 +50,32 @@
  -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
  ---------------------------------------------------------------------------------
 
-Quartus II Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 CHIP  "Janus"  ASSIGNED TO AN: EPM240T100C5
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
 -------------------------------------------------------------------------------------------------------------
-SSCK                         : 1         : input  : LVTTL             :         : 2         : Y              
-CMCLK                        : 2         : output : LVTTL             :         : 1         : Y              
-PTT                          : 3         : input  : LVTTL             :         : 1         : Y              
-CLK_12MHZ                    : 4         : input  : LVTTL             :         : 1         : Y              
-DFS1                         : 5         : output : LVTTL             :         : 1         : Y              
-HPF                          : 6         : output : LVTTL             :         : 1         : Y              
-DFS0                         : 7         : output : LVTTL             :         : 1         : Y              
-MCLK                         : 8         : output : LVTTL             :         : 1         : Y              
+SSCK                         : 1         : input  : 3.3-V LVTTL       :         : 2         : Y              
+CMCLK                        : 2         : output : 3.3-V LVTTL       :         : 1         : Y              
+PTT                          : 3         : input  : 3.3-V LVTTL       :         : 1         : Y              
+CLK_12MHZ                    : 4         : input  : 3.3-V LVTTL       :         : 1         : Y              
+DFS1                         : 5         : output : 3.3-V LVTTL       :         : 1         : Y              
+HPF                          : 6         : output : 3.3-V LVTTL       :         : 1         : Y              
+DFS0                         : 7         : output : 3.3-V LVTTL       :         : 1         : Y              
+MCLK                         : 8         : output : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 9         : power  :                   : 3.3V    : 1         :                
 GNDIO                        : 10        : gnd    :                   :         :           :                
 GNDINT                       : 11        : gnd    :                   :         :           :                
-FSYNC                        : 12        : input  : LVTTL             :         : 1         : Y              
+FSYNC                        : 12        : input  : 3.3-V LVTTL       :         : 1         : Y              
 VCCINT                       : 13        : power  :                   : 3.3V    :           :                
-SDOUT                        : 14        : input  : LVTTL             :         : 1         : Y              
-ZCAL                         : 15        : output : LVTTL             :         : 1         : Y              
-CAL                          : 16        : input  : LVTTL             :         : 1         : Y              
-nRST                         : 17        : output : LVTTL             :         : 1         : Y              
-SMODE2                       : 18        : output : LVTTL             :         : 1         : Y              
-SMODE1                       : 19        : output : LVTTL             :         : 1         : Y              
-LRCLK                        : 20        : input  : LVTTL             :         : 1         : Y              
-SCLK                         : 21        : input  : LVTTL             :         : 1         : Y              
+SDOUT                        : 14        : input  : 3.3-V LVTTL       :         : 1         : Y              
+ZCAL                         : 15        : output : 3.3-V LVTTL       :         : 1         : Y              
+CAL                          : 16        : input  : 3.3-V LVTTL       :         : 1         : Y              
+nRST                         : 17        : output : 3.3-V LVTTL       :         : 1         : Y              
+SMODE2                       : 18        : output : 3.3-V LVTTL       :         : 1         : Y              
+SMODE1                       : 19        : output : 3.3-V LVTTL       :         : 1         : Y              
+LRCLK                        : 20        : input  : 3.3-V LVTTL       :         : 1         : Y              
+SCLK                         : 21        : input  : 3.3-V LVTTL       :         : 1         : Y              
 TMS                          : 22        : input  :                   :         : 1         :                
 TDI                          : 23        : input  :                   :         : 1         :                
 TCK                          : 24        : input  :                   :         : 1         :                
@@ -104,54 +104,54 @@ GNDIO                        : 46        : gnd    :                   :         
 RESERVED_INPUT               : 47        :        :                   :         : 1         :                
 RESERVED_INPUT               : 48        :        :                   :         : 1         :                
 RESERVED_INPUT               : 49        :        :                   :         : 1         :                
-ref_in                       : 50        : input  : LVTTL             :         : 1         : Y              
+ref_in                       : 50        : input  : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 51        :        :                   :         : 1         :                
-C15                          : 52        : bidir  : LVTTL             :         : 2         : Y              
+C15                          : 52        : bidir  : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 53        :        :                   :         : 2         :                
-C14                          : 54        : input  : LVTTL             :         : 2         : Y              
+C14                          : 54        : input  : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 55        :        :                   :         : 2         :                
-C13                          : 56        : input  : LVTTL             :         : 2         : Y              
+C13                          : 56        : input  : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 57        :        :                   :         : 2         :                
-C12                          : 58        : input  : LVTTL             :         : 2         : Y              
+C12                          : 58        : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 59        : power  :                   : 3.3V    : 2         :                
 GNDIO                        : 60        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 61        :        :                   :         : 2         :                
-C11                          : 62        : output : LVTTL             :         : 2         : Y              
+C11                          : 62        : output : 3.3-V LVTTL       :         : 2         : Y              
 VCCINT                       : 63        : power  :                   : 3.3V    :           :                
 RESERVED_INPUT               : 64        :        :                   :         : 2         :                
 GNDINT                       : 65        : gnd    :                   :         :           :                
-C10                          : 66        : output : LVTTL             :         : 2         : Y              
+C10                          : 66        : output : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 67        :        :                   :         : 2         :                
-C9                           : 68        : input  : LVTTL             :         : 2         : Y              
+C9                           : 68        : input  : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 69        :        :                   :         : 2         :                
-C8                           : 70        : input  : LVTTL             :         : 2         : Y              
+C8                           : 70        : input  : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 71        :        :                   :         : 2         :                
-C7                           : 72        : output : LVTTL             :         : 2         : Y              
+C7                           : 72        : output : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 73        :        :                   :         : 2         :                
-C6                           : 74        : output : LVTTL             :         : 2         : Y              
+C6                           : 74        : output : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 75        :        :                   :         : 2         :                
-C5                           : 76        : output : LVTTL             :         : 2         : Y              
+C5                           : 76        : output : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 77        :        :                   :         : 2         :                
-C4                           : 78        : input  : LVTTL             :         : 2         : Y              
+IQOUT                        : 78        : input  : 3.3-V LVTTL       :         : 2         : Y              
 GNDIO                        : 79        : gnd    :                   :         :           :                
 VCCIO2                       : 80        : power  :                   : 3.3V    : 2         :                
 RESERVED_INPUT               : 81        :        :                   :         : 2         :                
-C3                           : 82        : input  : LVTTL             :         : 2         : Y              
+CLK_48MHZ                    : 82        : input  : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 83        :        :                   :         : 2         :                
-C2                           : 84        : input  : LVTTL             :         : 2         : Y              
-TUNE                         : 85        : output : LVTTL             :         : 2         : Y              
-LED1                         : 86        : output : LVTTL             :         : 2         : Y              
-LED2                         : 87        : output : LVTTL             :         : 2         : Y              
-EXP4                         : 88        : output : LVTTL             :         : 2         : Y              
-QPWM                         : 89        : output : LVTTL             :         : 2         : Y              
-IPWM                         : 90        : output : LVTTL             :         : 2         : Y              
-CLRCOUT                      : 91        : output : LVTTL             :         : 2         : Y              
-CDOUT                        : 92        : input  : LVTTL             :         : 2         : Y              
+C2                           : 84        : input  : 3.3-V LVTTL       :         : 2         : Y              
+TUNE                         : 85        : output : 3.3-V LVTTL       :         : 2         : Y              
+LED1                         : 86        : output : 3.3-V LVTTL       :         : 2         : Y              
+LED2                         : 87        : output : 3.3-V LVTTL       :         : 2         : Y              
+EXP4                         : 88        : output : 3.3-V LVTTL       :         : 2         : Y              
+QPWM                         : 89        : output : 3.3-V LVTTL       :         : 2         : Y              
+IPWM                         : 90        : output : 3.3-V LVTTL       :         : 2         : Y              
+CLRCOUT                      : 91        : output : 3.3-V LVTTL       :         : 2         : Y              
+CDOUT                        : 92        : input  : 3.3-V LVTTL       :         : 2         : Y              
 GNDIO                        : 93        : gnd    :                   :         :           :                
 VCCIO2                       : 94        : power  :                   : 3.3V    : 2         :                
-CLRCIN                       : 95        : output : LVTTL             :         : 2         : Y              
-CDIN                         : 96        : output : LVTTL             :         : 2         : Y              
-CBCLK                        : 97        : output : LVTTL             :         : 2         : Y              
-nCS                          : 98        : output : LVTTL             :         : 2         : Y              
-CMODE                        : 99        : output : LVTTL             :         : 2         : Y              
-MOSI                         : 100       : input  : LVTTL             :         : 2         : Y              
+CLRCIN                       : 95        : output : 3.3-V LVTTL       :         : 2         : Y              
+CDIN                         : 96        : output : 3.3-V LVTTL       :         : 2         : Y              
+CBCLK                        : 97        : output : 3.3-V LVTTL       :         : 2         : Y              
+nCS                          : 98        : output : 3.3-V LVTTL       :         : 2         : Y              
+CMODE                        : 99        : output : 3.3-V LVTTL       :         : 2         : Y              
+MOSI                         : 100       : input  : 3.3-V LVTTL       :         : 2         : Y              
