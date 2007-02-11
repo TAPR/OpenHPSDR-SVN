@@ -1,5 +1,5 @@
 @ECHO OFF
-load_firmware 0xfffe 0x0007 OZYV1FW08282006-1.hex
+load_firmware 0xfffe 0x00ff QS1R_FirmwareV1.hex
 Sleep 2000
-upload_FPGA 0xfffe 0x0007 ozy_eval.rbf
+upload_FPGA 0xfffe 0x00ff fpga_top.rbf
 pause
