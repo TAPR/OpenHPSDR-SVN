@@ -309,7 +309,7 @@ namespace MercScope
 
         private void start_adc()
         {
-            hdev = USB.InitFindAndOpenDevice(0xfffe, 0x0007);
+            hdev = USB.InitFindAndOpenDevice(0xfffe, 0x00ff);
             libUSB_Interface.usb_set_configuration(hdev, 1);
             libUSB_Interface.usb_claim_interface(hdev, 0);
             libUSB_Interface.usb_set_altinterface(hdev, 0);
