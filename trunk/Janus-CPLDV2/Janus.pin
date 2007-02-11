@@ -82,7 +82,7 @@ TCK                          : 24        : input  :                   :         
 TDO                          : 25        : output :                   :         : 1         :                
 RESERVED_INPUT               : 26        :        :                   :         : 1         :                
 RESERVED_INPUT               : 27        :        :                   :         : 1         :                
-RESERVED_INPUT               : 28        :        :                   :         : 1         :                
+A3                           : 28        : input  : 3.3-V LVTTL       :         : 1         : N              
 RESERVED_INPUT               : 29        :        :                   :         : 1         :                
 RESERVED_INPUT               : 30        :        :                   :         : 1         :                
 VCCIO1                       : 31        : power  :                   : 3.3V    : 1         :                
@@ -137,7 +137,7 @@ GNDIO                        : 79        : gnd    :                   :         
 VCCIO2                       : 80        : power  :                   : 3.3V    : 2         :                
 RESERVED_INPUT               : 81        :        :                   :         : 2         :                
 CLK_48MHZ                    : 82        : input  : 3.3-V LVTTL       :         : 2         : Y              
-RESERVED_INPUT               : 83        :        :                   :         : 2         :                
+A2                           : 83        : output : 3.3-V LVTTL       :         : 2         : N              
 C2                           : 84        : input  : 3.3-V LVTTL       :         : 2         : Y              
 TUNE                         : 85        : output : 3.3-V LVTTL       :         : 2         : Y              
 LED1                         : 86        : output : 3.3-V LVTTL       :         : 2         : Y              
