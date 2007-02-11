@@ -1,0 +1,203 @@
+# Copyright (C) 1991-2006 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#		fpga_top_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name DEVICE EP2C8Q208C8
+set_global_assignment -name FAMILY "Cyclone II"
+set_global_assignment -name TOP_LEVEL_ENTITY fpga_top
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 6.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "11:07:09  DECEMBER 19, 2006"
+set_global_assignment -name LAST_QUARTUS_VERSION 6.1
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
+set_instance_assignment -name PARTITION_HIERARCHY no_file_for_top_partition -to | -section_id Top
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_location_assignment PIN_27 -to CLKA
+set_location_assignment PIN_161 -to CS_FPGA_M_N
+set_location_assignment PIN_165 -to CS_FPGA_N
+set_location_assignment PIN_64 -to DDC0_A_B
+set_location_assignment PIN_92 -to DDC0_A_B_OUT
+set_location_assignment PIN_63 -to DDC0_CLK
+set_location_assignment PIN_61 -to DDC0_DIN[15]
+set_location_assignment PIN_60 -to DDC0_DIN[14]
+set_location_assignment PIN_59 -to DDC0_DIN[13]
+set_location_assignment PIN_58 -to DDC0_DIN[12]
+set_location_assignment PIN_57 -to DDC0_DIN[11]
+set_location_assignment PIN_56 -to DDC0_DIN[10]
+set_location_assignment PIN_48 -to DDC0_DIN[9]
+set_location_assignment PIN_47 -to DDC0_DIN[8]
+set_location_assignment PIN_46 -to DDC0_DIN[7]
+set_location_assignment PIN_45 -to DDC0_DIN[6]
+set_location_assignment PIN_44 -to DDC0_DIN[5]
+set_location_assignment PIN_43 -to DDC0_DIN[4]
+set_location_assignment PIN_41 -to DDC0_DIN[3]
+set_location_assignment PIN_40 -to DDC0_DIN[2]
+set_location_assignment PIN_39 -to DDC0_DIN[1]
+set_location_assignment PIN_37 -to DDC0_DIN[0]
+set_location_assignment PIN_88 -to DDC0_DOUT[15]
+set_location_assignment PIN_87 -to DDC0_DOUT[14]
+set_location_assignment PIN_86 -to DDC0_DOUT[13]
+set_location_assignment PIN_84 -to DDC0_DOUT[12]
+set_location_assignment PIN_82 -to DDC0_DOUT[11]
+set_location_assignment PIN_81 -to DDC0_DOUT[10]
+set_location_assignment PIN_80 -to DDC0_DOUT[9]
+set_location_assignment PIN_77 -to DDC0_DOUT[8]
+set_location_assignment PIN_76 -to DDC0_DOUT[7]
+set_location_assignment PIN_75 -to DDC0_DOUT[6]
+set_location_assignment PIN_74 -to DDC0_DOUT[5]
+set_location_assignment PIN_72 -to DDC0_DOUT[4]
+set_location_assignment PIN_70 -to DDC0_DOUT[3]
+set_location_assignment PIN_69 -to DDC0_DOUT[2]
+set_location_assignment PIN_68 -to DDC0_DOUT[1]
+set_location_assignment PIN_67 -to DDC0_DOUT[0]
+set_location_assignment PIN_94 -to DDC0_DTACK_RDY
+set_location_assignment PIN_89 -to DDC0_DVOUT
+set_location_assignment PIN_90 -to DDC0_IQOUT
+set_location_assignment PIN_160 -to DDC1_A_B
+set_location_assignment PIN_97 -to DDC1_A_B_OUT
+set_location_assignment PIN_133 -to DDC1_CLK
+set_location_assignment PIN_152 -to DDC1_DIN[15]
+set_location_assignment PIN_151 -to DDC1_DIN[14]
+set_location_assignment PIN_150 -to DDC1_DIN[13]
+set_location_assignment PIN_149 -to DDC1_DIN[12]
+set_location_assignment PIN_147 -to DDC1_DIN[11]
+set_location_assignment PIN_146 -to DDC1_DIN[10]
+set_location_assignment PIN_145 -to DDC1_DIN[9]
+set_location_assignment PIN_144 -to DDC1_DIN[8]
+set_location_assignment PIN_143 -to DDC1_DIN[7]
+set_location_assignment PIN_142 -to DDC1_DIN[6]
+set_location_assignment PIN_141 -to DDC1_DIN[5]
+set_location_assignment PIN_139 -to DDC1_DIN[4]
+set_location_assignment PIN_138 -to DDC1_DIN[3]
+set_location_assignment PIN_137 -to DDC1_DIN[2]
+set_location_assignment PIN_135 -to DDC1_DIN[1]
+set_location_assignment PIN_134 -to DDC1_DIN[0]
+set_location_assignment PIN_128 -to DDC1_DOUT[15]
+set_location_assignment PIN_127 -to DDC1_DOUT[14]
+set_location_assignment PIN_118 -to DDC1_DOUT[13]
+set_location_assignment PIN_117 -to DDC1_DOUT[12]
+set_location_assignment PIN_116 -to DDC1_DOUT[11]
+set_location_assignment PIN_115 -to DDC1_DOUT[10]
+set_location_assignment PIN_114 -to DDC1_DOUT[9]
+set_location_assignment PIN_113 -to DDC1_DOUT[8]
+set_location_assignment PIN_112 -to DDC1_DOUT[7]
+set_location_assignment PIN_110 -to DDC1_DOUT[6]
+set_location_assignment PIN_106 -to DDC1_DOUT[5]
+set_location_assignment PIN_105 -to DDC1_DOUT[4]
+set_location_assignment PIN_104 -to DDC1_DOUT[3]
+set_location_assignment PIN_103 -to DDC1_DOUT[2]
+set_location_assignment PIN_102 -to DDC1_DOUT[1]
+set_location_assignment PIN_101 -to DDC1_DOUT[0]
+set_location_assignment PIN_95 -to DDC1_DTACK_RDY
+set_location_assignment PIN_99 -to DDC1_DVOUT
+set_location_assignment PIN_96 -to DDC1_IQOUT
+set_location_assignment PIN_188 -to FD[15]
+set_location_assignment PIN_189 -to FD[14]
+set_location_assignment PIN_191 -to FD[13]
+set_location_assignment PIN_192 -to FD[12]
+set_location_assignment PIN_193 -to FD[11]
+set_location_assignment PIN_195 -to FD[10]
+set_location_assignment PIN_197 -to FD[9]
+set_location_assignment PIN_198 -to FD[8]
+set_location_assignment PIN_199 -to FD[7]
+set_location_assignment PIN_200 -to FD[6]
+set_location_assignment PIN_201 -to FD[5]
+set_location_assignment PIN_203 -to FD[4]
+set_location_assignment PIN_205 -to FD[3]
+set_location_assignment PIN_206 -to FD[2]
+set_location_assignment PIN_207 -to FD[1]
+set_location_assignment PIN_208 -to FD[0]
+set_location_assignment PIN_179 -to FIFO_ADR[1]
+set_location_assignment PIN_180 -to FIFO_ADR[0]
+set_location_assignment PIN_173 -to FLAG[2]
+set_location_assignment PIN_175 -to FLAG[1]
+set_location_assignment PIN_176 -to FLAG[0]
+set_location_assignment PIN_181 -to PKEND
+set_location_assignment PIN_171 -to SLCS
+set_location_assignment PIN_182 -to SLOE
+set_location_assignment PIN_187 -to SLRD
+set_location_assignment PIN_185 -to SLWR
+set_location_assignment PIN_164 -to SCLK_M
+set_location_assignment PIN_162 -to SDI_M
+set_location_assignment PIN_163 -to SDO_M
+set_location_assignment PIN_170 -to FX2_SCLK
+set_location_assignment PIN_168 -to FX2_SDI
+set_location_assignment PIN_169 -to FX2_SDO
+set_location_assignment PIN_24 -to IFCLK
+set_location_assignment PIN_23 -to FX2CLK
+set_location_assignment PIN_35 -to INA[15]
+set_location_assignment PIN_34 -to INA[14]
+set_location_assignment PIN_33 -to INA[13]
+set_location_assignment PIN_31 -to INA[12]
+set_location_assignment PIN_30 -to INA[11]
+set_location_assignment PIN_15 -to INA[10]
+set_location_assignment PIN_14 -to INA[9]
+set_location_assignment PIN_13 -to INA[8]
+set_location_assignment PIN_12 -to INA[7]
+set_location_assignment PIN_11 -to INA[6]
+set_location_assignment PIN_10 -to INA[5]
+set_location_assignment PIN_8 -to INA[4]
+set_location_assignment PIN_6 -to INA[3]
+set_location_assignment PIN_5 -to INA[2]
+set_location_assignment PIN_4 -to INA[1]
+set_location_assignment PIN_3 -to INA[0]
+set_location_assignment PIN_132 -to CLK4
+set_location_assignment PIN_131 -to CLK5
+set_global_assignment -name GENERATE_RBF_FILE ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_global_assignment -name USER_LIBRARIES "C:/altera/61WEB/ip/fir_compiler/lib;C:/altera/61WEB/ip/cic/lib;C:/altera/61WEB/ip/nco/lib;"
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION ON -entity msft_data
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION ON -entity tdl_da_lc
+set_global_assignment -name REMOVE_DUPLICATE_REGISTERS OFF -entity tdl_da_lc
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity sadd_lpm
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity tsadd_lpm
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity sadd_lpm_cen
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity tsadd_lpm_cen
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity sadd
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity tsadd
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity lc_tdl_strat
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity lc_tdl_mr
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity lc_tdl_en
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity lc_tdl_strat_cen
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity sadd_reg_top_cen
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity tsadd_reg_top_cen
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity sadd_cen
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity sadd_reg_top
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity tsadd_reg_top
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity tsadd_lpm_reg_top_cen
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity sadd_lpm_reg_top_cen
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -entity mlu_nd_lc
+set_global_assignment -name DSP_BLOCK_BALANCING "LOGIC ELEMENTS" -entity fir_st
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_global_assignment -name INCREMENTAL_COMPILATION OFF
+set_global_assignment -name VERILOG_FILE ../CIC/CIC6_520.v
+set_global_assignment -name VERILOG_FILE HB_2.v
+set_global_assignment -name VERILOG_FILE SPI_REGS.v
+set_global_assignment -name VERILOG_FILE cordic.v
+set_global_assignment -name VERILOG_FILE cordic_stage.v
+set_global_assignment -name VERILOG_FILE phase_accumulator.v
+set_global_assignment -name VERILOG_FILE tx_fifo.v
+set_global_assignment -name VERILOG_FILE fpga_top.v
+set_global_assignment -name VERILOG_FILE RegisterX.v

@@ -1,0 +1,951 @@
+Classic Timing Analyzer report for init_load
+Fri Dec 29 13:46:48 2006
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Clock Setup: 'FX2CLK'
+  6. tsu
+  7. tco
+  8. tpd
+  9. th
+ 10. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                             ;
++------------------------------+-------+---------------+----------------------------------+----------------------+-------------+------------+----------+--------------+
+; Type                         ; Slack ; Required Time ; Actual Time                      ; From                 ; To          ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+-------+---------------+----------------------------------+----------------------+-------------+------------+----------+--------------+
+; Worst-case tsu               ; N/A   ; None          ; 7.762 ns                         ; A[3]                 ; data[3]     ; --         ; FX2CLK   ; 0            ;
+; Worst-case tco               ; N/A   ; None          ; 8.861 ns                         ; LTC2208_CNTRL_REG[3] ; PGA         ; FX2CLK     ; --       ; 0            ;
+; Worst-case tpd               ; N/A   ; None          ; 10.602 ns                        ; RD_N                 ; D[5]        ; --         ; --       ; 0            ;
+; Worst-case th                ; N/A   ; None          ; -1.228 ns                        ; D[4]                 ; ATTN_REG[4] ; --         ; FX2CLK   ; 0            ;
+; Clock Setup: 'FX2CLK'        ; N/A   ; None          ; 107.69 MHz ( period = 9.286 ns ) ; DDC_CNTRL_REG[3]     ; data[3]     ; FX2CLK     ; FX2CLK   ; 0            ;
+; Total number of failed paths ;       ;               ;                                  ;                      ;             ;            ;          ; 0            ;
++------------------------------+-------+---------------+----------------------------------+----------------------+-------------+------------+----------+--------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                ; Setting            ; From ; To ; Entity Name ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                           ; EPM240T100C5       ;      ;    ;             ;
+; Timing Models                                         ; Final              ;      ;    ;             ;
+; Default hold multicycle                               ; Same as Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains             ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                        ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                      ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                 ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements               ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                      ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                  ; Off                ;      ;    ;             ;
+; Number of source nodes to report per destination node ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                 ; 10                 ;      ;    ;             ;
+; Number of paths to report                             ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                          ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                            ; Off                ;      ;    ;             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                             ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type     ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset ; Phase offset ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; FX2CLK          ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'FX2CLK'                                                                                                                                                                                            ;
++-------+------------------------------------------------+----------------------+----------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack ; Actual fmax (period)                           ; From                 ; To                   ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-------+------------------------------------------------+----------------------+----------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A   ; 107.69 MHz ( period = 9.286 ns )               ; DDC_CNTRL_REG[3]     ; data[3]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 8.577 ns                ;
+; N/A   ; 116.48 MHz ( period = 8.585 ns )               ; LTC2208_CNTRL_REG[1] ; data[1]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.876 ns                ;
+; N/A   ; 124.64 MHz ( period = 8.023 ns )               ; reset_counter[4]     ; reset_counter[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.314 ns                ;
+; N/A   ; 124.64 MHz ( period = 8.023 ns )               ; reset_counter[4]     ; reset_counter[3]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.314 ns                ;
+; N/A   ; 124.64 MHz ( period = 8.023 ns )               ; reset_counter[4]     ; reset_counter[2]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.314 ns                ;
+; N/A   ; 124.64 MHz ( period = 8.023 ns )               ; reset_counter[4]     ; reset_counter[1]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.314 ns                ;
+; N/A   ; 124.64 MHz ( period = 8.023 ns )               ; reset_counter[4]     ; reset_counter[4]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.314 ns                ;
+; N/A   ; 124.64 MHz ( period = 8.023 ns )               ; reset_counter[4]     ; reset_counter[5]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.314 ns                ;
+; N/A   ; 124.64 MHz ( period = 8.023 ns )               ; reset_counter[4]     ; reset_counter[6]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.314 ns                ;
+; N/A   ; 124.64 MHz ( period = 8.023 ns )               ; reset_counter[4]     ; reset_counter[7]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.314 ns                ;
+; N/A   ; 124.72 MHz ( period = 8.018 ns )               ; reset_counter[7]     ; reset_counter[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.309 ns                ;
+; N/A   ; 124.72 MHz ( period = 8.018 ns )               ; reset_counter[7]     ; reset_counter[3]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.309 ns                ;
+; N/A   ; 124.72 MHz ( period = 8.018 ns )               ; reset_counter[7]     ; reset_counter[2]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.309 ns                ;
+; N/A   ; 124.72 MHz ( period = 8.018 ns )               ; reset_counter[7]     ; reset_counter[1]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.309 ns                ;
+; N/A   ; 124.72 MHz ( period = 8.018 ns )               ; reset_counter[7]     ; reset_counter[4]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.309 ns                ;
+; N/A   ; 124.72 MHz ( period = 8.018 ns )               ; reset_counter[7]     ; reset_counter[5]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.309 ns                ;
+; N/A   ; 124.72 MHz ( period = 8.018 ns )               ; reset_counter[7]     ; reset_counter[6]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.309 ns                ;
+; N/A   ; 124.72 MHz ( period = 8.018 ns )               ; reset_counter[7]     ; reset_counter[7]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.309 ns                ;
+; N/A   ; 125.75 MHz ( period = 7.952 ns )               ; reset_counter[6]     ; reset_counter[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.243 ns                ;
+; N/A   ; 125.75 MHz ( period = 7.952 ns )               ; reset_counter[6]     ; reset_counter[3]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.243 ns                ;
+; N/A   ; 125.75 MHz ( period = 7.952 ns )               ; reset_counter[6]     ; reset_counter[2]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.243 ns                ;
+; N/A   ; 125.75 MHz ( period = 7.952 ns )               ; reset_counter[6]     ; reset_counter[1]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.243 ns                ;
+; N/A   ; 125.75 MHz ( period = 7.952 ns )               ; reset_counter[6]     ; reset_counter[4]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.243 ns                ;
+; N/A   ; 125.75 MHz ( period = 7.952 ns )               ; reset_counter[6]     ; reset_counter[5]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.243 ns                ;
+; N/A   ; 125.75 MHz ( period = 7.952 ns )               ; reset_counter[6]     ; reset_counter[6]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.243 ns                ;
+; N/A   ; 125.75 MHz ( period = 7.952 ns )               ; reset_counter[6]     ; reset_counter[7]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.243 ns                ;
+; N/A   ; 128.60 MHz ( period = 7.776 ns )               ; reset_counter[5]     ; reset_counter[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.067 ns                ;
+; N/A   ; 128.60 MHz ( period = 7.776 ns )               ; reset_counter[5]     ; reset_counter[3]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.067 ns                ;
+; N/A   ; 128.60 MHz ( period = 7.776 ns )               ; reset_counter[5]     ; reset_counter[2]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.067 ns                ;
+; N/A   ; 128.60 MHz ( period = 7.776 ns )               ; reset_counter[5]     ; reset_counter[1]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.067 ns                ;
+; N/A   ; 128.60 MHz ( period = 7.776 ns )               ; reset_counter[5]     ; reset_counter[4]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.067 ns                ;
+; N/A   ; 128.60 MHz ( period = 7.776 ns )               ; reset_counter[5]     ; reset_counter[5]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.067 ns                ;
+; N/A   ; 128.60 MHz ( period = 7.776 ns )               ; reset_counter[5]     ; reset_counter[6]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.067 ns                ;
+; N/A   ; 128.60 MHz ( period = 7.776 ns )               ; reset_counter[5]     ; reset_counter[7]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.067 ns                ;
+; N/A   ; 128.63 MHz ( period = 7.774 ns )               ; reset_counter[4]     ; CPLD_reset           ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.065 ns                ;
+; N/A   ; 128.72 MHz ( period = 7.769 ns )               ; reset_counter[7]     ; CPLD_reset           ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 7.060 ns                ;
+; N/A   ; 129.82 MHz ( period = 7.703 ns )               ; reset_counter[6]     ; CPLD_reset           ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.994 ns                ;
+; N/A   ; 130.72 MHz ( period = 7.650 ns )               ; DDC_CNTRL_REG[5]     ; data[5]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.941 ns                ;
+; N/A   ; 132.86 MHz ( period = 7.527 ns )               ; reset_counter[5]     ; CPLD_reset           ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.818 ns                ;
+; N/A   ; 133.33 MHz ( period = 7.500 ns )               ; DDC_CNTRL_REG[0]     ; data[0]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.791 ns                ;
+; N/A   ; 133.96 MHz ( period = 7.465 ns )               ; CPLD_reset           ; LTC2208_CNTRL_REG[5] ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.756 ns                ;
+; N/A   ; 140.27 MHz ( period = 7.129 ns )               ; CPLD_reset           ; RFFE_CNTRL_REG[7]    ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.420 ns                ;
+; N/A   ; 140.45 MHz ( period = 7.120 ns )               ; CPLD_reset           ; ATTN_REG[7]          ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.411 ns                ;
+; N/A   ; 140.49 MHz ( period = 7.118 ns )               ; CPLD_reset           ; DDC_CNTRL_REG[5]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.409 ns                ;
+; N/A   ; 140.73 MHz ( period = 7.106 ns )               ; CPLD_reset           ; DEBUG_LED_REG[3]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.397 ns                ;
+; N/A   ; 141.54 MHz ( period = 7.065 ns )               ; RFFE_CNTRL_REG[1]    ; data[1]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.356 ns                ;
+; N/A   ; 142.01 MHz ( period = 7.042 ns )               ; CPLD_reset           ; ATTN_REG[0]          ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.333 ns                ;
+; N/A   ; 142.01 MHz ( period = 7.042 ns )               ; CPLD_reset           ; ATTN_REG[2]          ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.333 ns                ;
+; N/A   ; 142.43 MHz ( period = 7.021 ns )               ; CPLD_reset           ; DDC_CNTRL_REG[7]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.312 ns                ;
+; N/A   ; 142.65 MHz ( period = 7.010 ns )               ; CPLD_reset           ; LTC2208_CNTRL_REG[7] ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.301 ns                ;
+; N/A   ; 143.47 MHz ( period = 6.970 ns )               ; CPLD_GPIO_REG[5]     ; data[5]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.261 ns                ;
+; N/A   ; 144.59 MHz ( period = 6.916 ns )               ; CPLD_reset           ; DDC_CNTRL_REG[4]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.207 ns                ;
+; N/A   ; 144.59 MHz ( period = 6.916 ns )               ; CPLD_reset           ; DDC_CNTRL_REG[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.207 ns                ;
+; N/A   ; 144.59 MHz ( period = 6.916 ns )               ; CPLD_reset           ; DDC_CNTRL_REG[2]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.207 ns                ;
+; N/A   ; 144.59 MHz ( period = 6.916 ns )               ; CPLD_reset           ; DDC_CNTRL_REG[6]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.207 ns                ;
+; N/A   ; 144.59 MHz ( period = 6.916 ns )               ; CPLD_reset           ; DDC_CNTRL_REG[1]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.207 ns                ;
+; N/A   ; 145.67 MHz ( period = 6.865 ns )               ; CPLD_reset           ; RFFE_CNTRL_REG[1]    ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.156 ns                ;
+; N/A   ; 145.67 MHz ( period = 6.865 ns )               ; CPLD_reset           ; RFFE_CNTRL_REG[5]    ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.156 ns                ;
+; N/A   ; 145.88 MHz ( period = 6.855 ns )               ; DDC_CNTRL_REG[2]     ; data[2]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.146 ns                ;
+; N/A   ; 147.47 MHz ( period = 6.781 ns )               ; CPLD_reset           ; DEBUG_LED_REG[2]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.072 ns                ;
+; N/A   ; 147.89 MHz ( period = 6.762 ns )               ; CPLD_reset           ; ATTN_REG[6]          ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.053 ns                ;
+; N/A   ; 148.57 MHz ( period = 6.731 ns )               ; CPLD_GPIO_REG[4]     ; data[4]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 6.022 ns                ;
+; N/A   ; 149.77 MHz ( period = 6.677 ns )               ; CPLD_reset           ; DEBUG_LED_REG[5]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.968 ns                ;
+; N/A   ; 149.77 MHz ( period = 6.677 ns )               ; CPLD_reset           ; DEBUG_LED_REG[6]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.968 ns                ;
+; N/A   ; 149.77 MHz ( period = 6.677 ns )               ; CPLD_reset           ; DEBUG_LED_REG[7]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.968 ns                ;
+; N/A   ; 149.77 MHz ( period = 6.677 ns )               ; CPLD_reset           ; DEBUG_LED_REG[1]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.968 ns                ;
+; N/A   ; 149.77 MHz ( period = 6.677 ns )               ; CPLD_reset           ; DEBUG_LED_REG[4]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.968 ns                ;
+; N/A   ; 150.51 MHz ( period = 6.644 ns )               ; CPLD_reset           ; data[1]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.935 ns                ;
+; N/A   ; 150.51 MHz ( period = 6.644 ns )               ; CPLD_reset           ; data[4]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.935 ns                ;
+; N/A   ; 150.94 MHz ( period = 6.625 ns )               ; CPLD_reset           ; data[3]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.916 ns                ;
+; N/A   ; 151.19 MHz ( period = 6.614 ns )               ; LTC2208_CNTRL_REG[3] ; data[3]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.905 ns                ;
+; N/A   ; 155.13 MHz ( period = 6.446 ns )               ; DDC_CNTRL_REG[6]     ; data[6]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.737 ns                ;
+; N/A   ; 155.16 MHz ( period = 6.445 ns )               ; reset_counter[0]     ; reset_counter[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.736 ns                ;
+; N/A   ; 155.16 MHz ( period = 6.445 ns )               ; reset_counter[0]     ; reset_counter[3]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.736 ns                ;
+; N/A   ; 155.16 MHz ( period = 6.445 ns )               ; reset_counter[0]     ; reset_counter[2]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.736 ns                ;
+; N/A   ; 155.16 MHz ( period = 6.445 ns )               ; reset_counter[0]     ; reset_counter[1]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.736 ns                ;
+; N/A   ; 155.16 MHz ( period = 6.445 ns )               ; reset_counter[0]     ; reset_counter[4]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.736 ns                ;
+; N/A   ; 155.16 MHz ( period = 6.445 ns )               ; reset_counter[0]     ; reset_counter[5]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.736 ns                ;
+; N/A   ; 155.16 MHz ( period = 6.445 ns )               ; reset_counter[0]     ; reset_counter[6]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.736 ns                ;
+; N/A   ; 155.16 MHz ( period = 6.445 ns )               ; reset_counter[0]     ; reset_counter[7]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.736 ns                ;
+; N/A   ; 155.47 MHz ( period = 6.432 ns )               ; CPLD_reset           ; LTC2208_CNTRL_REG[4] ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.723 ns                ;
+; N/A   ; 155.71 MHz ( period = 6.422 ns )               ; CPLD_reset           ; ATTN_REG[5]          ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.713 ns                ;
+; N/A   ; 156.35 MHz ( period = 6.396 ns )               ; CPLD_reset           ; DDC_CNTRL_REG[3]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.687 ns                ;
+; N/A   ; 156.37 MHz ( period = 6.395 ns )               ; CPLD_reset           ; RFFE_CNTRL_REG[0]    ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.686 ns                ;
+; N/A   ; 156.37 MHz ( period = 6.395 ns )               ; CPLD_reset           ; RFFE_CNTRL_REG[2]    ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.686 ns                ;
+; N/A   ; 156.37 MHz ( period = 6.395 ns )               ; CPLD_reset           ; RFFE_CNTRL_REG[6]    ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.686 ns                ;
+; N/A   ; 156.81 MHz ( period = 6.377 ns )               ; CPLD_GPIO_REG[7]     ; data[7]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.668 ns                ;
+; N/A   ; 158.10 MHz ( period = 6.325 ns )               ; CPLD_GPIO_REG[6]     ; data[6]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.616 ns                ;
+; N/A   ; 159.03 MHz ( period = 6.288 ns )               ; CPLD_reset           ; RFFE_CNTRL_REG[3]    ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.579 ns                ;
+; N/A   ; 159.03 MHz ( period = 6.288 ns )               ; CPLD_reset           ; RFFE_CNTRL_REG[4]    ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.579 ns                ;
+; N/A   ; 161.39 MHz ( period = 6.196 ns )               ; reset_counter[0]     ; CPLD_reset           ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.487 ns                ;
+; N/A   ; 163.48 MHz ( period = 6.117 ns )               ; ATTN_REG[3]          ; data[3]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.408 ns                ;
+; N/A   ; 164.07 MHz ( period = 6.095 ns )               ; reset_counter[1]     ; reset_counter[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.386 ns                ;
+; N/A   ; 164.07 MHz ( period = 6.095 ns )               ; reset_counter[1]     ; reset_counter[3]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.386 ns                ;
+; N/A   ; 164.07 MHz ( period = 6.095 ns )               ; reset_counter[1]     ; reset_counter[2]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.386 ns                ;
+; N/A   ; 164.07 MHz ( period = 6.095 ns )               ; reset_counter[1]     ; reset_counter[1]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.386 ns                ;
+; N/A   ; 164.07 MHz ( period = 6.095 ns )               ; reset_counter[1]     ; reset_counter[4]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.386 ns                ;
+; N/A   ; 164.07 MHz ( period = 6.095 ns )               ; reset_counter[1]     ; reset_counter[5]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.386 ns                ;
+; N/A   ; 164.07 MHz ( period = 6.095 ns )               ; reset_counter[1]     ; reset_counter[6]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.386 ns                ;
+; N/A   ; 164.07 MHz ( period = 6.095 ns )               ; reset_counter[1]     ; reset_counter[7]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.386 ns                ;
+; N/A   ; 164.66 MHz ( period = 6.073 ns )               ; DDC_CNTRL_REG[4]     ; data[4]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.364 ns                ;
+; N/A   ; 166.72 MHz ( period = 5.998 ns )               ; CPLD_reset           ; LTC2208_CNTRL_REG[0] ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.289 ns                ;
+; N/A   ; 166.72 MHz ( period = 5.998 ns )               ; CPLD_reset           ; LTC2208_CNTRL_REG[2] ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.289 ns                ;
+; N/A   ; 166.72 MHz ( period = 5.998 ns )               ; CPLD_reset           ; LTC2208_CNTRL_REG[3] ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.289 ns                ;
+; N/A   ; 166.72 MHz ( period = 5.998 ns )               ; CPLD_reset           ; LTC2208_CNTRL_REG[6] ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.289 ns                ;
+; N/A   ; 167.39 MHz ( period = 5.974 ns )               ; CPLD_reset           ; ATTN_REG[3]          ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.265 ns                ;
+; N/A   ; 167.39 MHz ( period = 5.974 ns )               ; CPLD_reset           ; ATTN_REG[1]          ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.265 ns                ;
+; N/A   ; 167.39 MHz ( period = 5.974 ns )               ; CPLD_reset           ; ATTN_REG[4]          ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.265 ns                ;
+; N/A   ; 167.59 MHz ( period = 5.967 ns )               ; CPLD_reset           ; CPLD_GPIO_REG[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.258 ns                ;
+; N/A   ; 167.59 MHz ( period = 5.967 ns )               ; CPLD_reset           ; CPLD_GPIO_REG[4]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.258 ns                ;
+; N/A   ; 167.59 MHz ( period = 5.967 ns )               ; CPLD_reset           ; CPLD_GPIO_REG[1]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.258 ns                ;
+; N/A   ; 167.59 MHz ( period = 5.967 ns )               ; CPLD_reset           ; CPLD_GPIO_REG[5]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.258 ns                ;
+; N/A   ; 167.59 MHz ( period = 5.967 ns )               ; CPLD_reset           ; CPLD_GPIO_REG[2]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.258 ns                ;
+; N/A   ; 167.59 MHz ( period = 5.967 ns )               ; CPLD_reset           ; CPLD_GPIO_REG[6]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.258 ns                ;
+; N/A   ; 167.59 MHz ( period = 5.967 ns )               ; CPLD_reset           ; CPLD_GPIO_REG[3]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.258 ns                ;
+; N/A   ; 167.59 MHz ( period = 5.967 ns )               ; CPLD_reset           ; CPLD_GPIO_REG[7]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.258 ns                ;
+; N/A   ; 167.79 MHz ( period = 5.960 ns )               ; DDC_CNTRL_REG[7]     ; data[7]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.251 ns                ;
+; N/A   ; 167.93 MHz ( period = 5.955 ns )               ; DDC_CNTRL_REG[1]     ; data[1]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.246 ns                ;
+; N/A   ; 168.46 MHz ( period = 5.936 ns )               ; RFFE_CNTRL_REG[6]    ; data[6]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.227 ns                ;
+; N/A   ; 170.07 MHz ( period = 5.880 ns )               ; DEBUG_LED_REG[0]     ; data[0]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.171 ns                ;
+; N/A   ; 170.50 MHz ( period = 5.865 ns )               ; LTC2208_CNTRL_REG[0] ; data[0]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.156 ns                ;
+; N/A   ; 171.06 MHz ( period = 5.846 ns )               ; reset_counter[1]     ; CPLD_reset           ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.137 ns                ;
+; N/A   ; 171.12 MHz ( period = 5.844 ns )               ; CPLD_reset           ; data[5]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.135 ns                ;
+; N/A   ; 171.12 MHz ( period = 5.844 ns )               ; CPLD_reset           ; data[6]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.135 ns                ;
+; N/A   ; 171.12 MHz ( period = 5.844 ns )               ; CPLD_reset           ; data[7]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.135 ns                ;
+; N/A   ; 173.46 MHz ( period = 5.765 ns )               ; DEBUG_LED_REG[5]     ; data[5]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 5.056 ns                ;
+; N/A   ; 178.79 MHz ( period = 5.593 ns )               ; LTC2208_CNTRL_REG[5] ; data[5]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.884 ns                ;
+; N/A   ; 182.48 MHz ( period = 5.480 ns )               ; CPLD_reset           ; data[0]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.771 ns                ;
+; N/A   ; 182.48 MHz ( period = 5.480 ns )               ; CPLD_reset           ; data[2]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.771 ns                ;
+; N/A   ; 183.32 MHz ( period = 5.455 ns )               ; LTC2208_CNTRL_REG[7] ; data[7]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.746 ns                ;
+; N/A   ; 187.37 MHz ( period = 5.337 ns )               ; ATTN_REG[4]          ; data[4]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.628 ns                ;
+; N/A   ; 187.51 MHz ( period = 5.333 ns )               ; LTC2208_CNTRL_REG[2] ; data[2]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.624 ns                ;
+; N/A   ; 190.37 MHz ( period = 5.253 ns )               ; DEBUG_LED_REG[2]     ; data[2]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.544 ns                ;
+; N/A   ; 190.59 MHz ( period = 5.247 ns )               ; RFFE_CNTRL_REG[0]    ; data[0]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.538 ns                ;
+; N/A   ; 192.05 MHz ( period = 5.207 ns )               ; CPLD_reset           ; DEBUG_LED_REG[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.498 ns                ;
+; N/A   ; 192.34 MHz ( period = 5.199 ns )               ; RFFE_CNTRL_REG[2]    ; data[2]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.490 ns                ;
+; N/A   ; 195.31 MHz ( period = 5.120 ns )               ; reset_counter[3]     ; reset_counter[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.411 ns                ;
+; N/A   ; 195.31 MHz ( period = 5.120 ns )               ; reset_counter[3]     ; reset_counter[3]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.411 ns                ;
+; N/A   ; 195.31 MHz ( period = 5.120 ns )               ; reset_counter[3]     ; reset_counter[2]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.411 ns                ;
+; N/A   ; 195.31 MHz ( period = 5.120 ns )               ; reset_counter[3]     ; reset_counter[1]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.411 ns                ;
+; N/A   ; 195.31 MHz ( period = 5.120 ns )               ; reset_counter[3]     ; reset_counter[4]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.411 ns                ;
+; N/A   ; 195.31 MHz ( period = 5.120 ns )               ; reset_counter[3]     ; reset_counter[5]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.411 ns                ;
+; N/A   ; 195.31 MHz ( period = 5.120 ns )               ; reset_counter[3]     ; reset_counter[6]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.411 ns                ;
+; N/A   ; 195.31 MHz ( period = 5.120 ns )               ; reset_counter[3]     ; reset_counter[7]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.411 ns                ;
+; N/A   ; 201.13 MHz ( period = 4.972 ns )               ; reset_counter[2]     ; reset_counter[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.263 ns                ;
+; N/A   ; 201.13 MHz ( period = 4.972 ns )               ; reset_counter[2]     ; reset_counter[3]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.263 ns                ;
+; N/A   ; 201.13 MHz ( period = 4.972 ns )               ; reset_counter[2]     ; reset_counter[2]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.263 ns                ;
+; N/A   ; 201.13 MHz ( period = 4.972 ns )               ; reset_counter[2]     ; reset_counter[1]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.263 ns                ;
+; N/A   ; 201.13 MHz ( period = 4.972 ns )               ; reset_counter[2]     ; reset_counter[4]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.263 ns                ;
+; N/A   ; 201.13 MHz ( period = 4.972 ns )               ; reset_counter[2]     ; reset_counter[5]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.263 ns                ;
+; N/A   ; 201.13 MHz ( period = 4.972 ns )               ; reset_counter[2]     ; reset_counter[6]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.263 ns                ;
+; N/A   ; 201.13 MHz ( period = 4.972 ns )               ; reset_counter[2]     ; reset_counter[7]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.263 ns                ;
+; N/A   ; 205.30 MHz ( period = 4.871 ns )               ; reset_counter[3]     ; CPLD_reset           ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.162 ns                ;
+; N/A   ; 206.61 MHz ( period = 4.840 ns )               ; ATTN_REG[1]          ; data[1]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.131 ns                ;
+; N/A   ; 211.73 MHz ( period = 4.723 ns )               ; reset_counter[2]     ; CPLD_reset           ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 4.014 ns                ;
+; N/A   ; 225.89 MHz ( period = 4.427 ns )               ; DEBUG_LED_REG[6]     ; data[6]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 3.718 ns                ;
+; N/A   ; 227.43 MHz ( period = 4.397 ns )               ; DEBUG_LED_REG[7]     ; data[7]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 3.688 ns                ;
+; N/A   ; 229.31 MHz ( period = 4.361 ns )               ; ATTN_REG[5]          ; data[5]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 3.652 ns                ;
+; N/A   ; 229.62 MHz ( period = 4.355 ns )               ; RFFE_CNTRL_REG[4]    ; data[4]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 3.646 ns                ;
+; N/A   ; 234.08 MHz ( period = 4.272 ns )               ; RFFE_CNTRL_REG[3]    ; data[3]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 3.563 ns                ;
+; N/A   ; 251.38 MHz ( period = 3.978 ns )               ; LTC2208_CNTRL_REG[6] ; data[6]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 3.269 ns                ;
+; N/A   ; 259.74 MHz ( period = 3.850 ns )               ; LTC2208_CNTRL_REG[4] ; data[4]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 3.141 ns                ;
+; N/A   ; 263.57 MHz ( period = 3.794 ns )               ; LTC2208_CNTRL_REG[1] ; LTC2208_CNTRL_REG[1] ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 3.085 ns                ;
+; N/A   ; 270.27 MHz ( period = 3.700 ns )               ; ATTN_REG[7]          ; data[7]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 2.991 ns                ;
+; N/A   ; 271.59 MHz ( period = 3.682 ns )               ; ATTN_REG[6]          ; data[6]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 2.973 ns                ;
+; N/A   ; 277.78 MHz ( period = 3.600 ns )               ; RFFE_CNTRL_REG[5]    ; data[5]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 2.891 ns                ;
+; N/A   ; 283.53 MHz ( period = 3.527 ns )               ; CPLD_reset           ; LTC2208_CNTRL_REG[1] ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 2.818 ns                ;
+; N/A   ; 285.14 MHz ( period = 3.507 ns )               ; RFFE_CNTRL_REG[7]    ; data[7]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 2.798 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; DEBUG_LED_REG[0]     ; DEBUG_LED_REG[0]     ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 2.425 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; ATTN_REG[0]          ; data[0]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 2.165 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; ATTN_REG[2]          ; data[2]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 2.159 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; DEBUG_LED_REG[3]     ; data[3]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 2.158 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; DEBUG_LED_REG[1]     ; data[1]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 1.905 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; DEBUG_LED_REG[4]     ; data[4]              ; FX2CLK     ; FX2CLK   ; None                        ; None                      ; 1.901 ns                ;
++-------+------------------------------------------------+----------------------+----------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; tsu                                                                                                                                                 ;
++-----------------------------------------+-----------------------------------------------------+------------+------+----------------------+----------+
+; Slack                                   ; Required tsu                                        ; Actual tsu ; From ; To                   ; To Clock ;
++-----------------------------------------+-----------------------------------------------------+------------+------+----------------------+----------+
+; N/A                                     ; None                                                ; 7.762 ns   ; A[3] ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.709 ns   ; A[5] ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.517 ns   ; A[3] ; data[1]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.516 ns   ; A[4] ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.497 ns   ; A[3] ; data[4]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.464 ns   ; A[5] ; data[1]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.444 ns   ; A[5] ; data[4]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.276 ns   ; A[3] ; DEBUG_LED_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.271 ns   ; A[4] ; data[1]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.264 ns   ; A[0] ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.251 ns   ; A[4] ; data[4]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.223 ns   ; A[5] ; DEBUG_LED_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.214 ns   ; A[3] ; ATTN_REG[0]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.214 ns   ; A[3] ; ATTN_REG[2]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.183 ns   ; A[3] ; LTC2208_CNTRL_REG[4] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.161 ns   ; A[5] ; ATTN_REG[0]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.161 ns   ; A[5] ; ATTN_REG[2]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.130 ns   ; A[5] ; LTC2208_CNTRL_REG[4] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.117 ns   ; A[2] ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.115 ns   ; A[2] ; DEBUG_LED_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.030 ns   ; A[4] ; DEBUG_LED_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.019 ns   ; RD_N ; data[1]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.019 ns   ; RD_N ; data[4]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 7.000 ns   ; RD_N ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.995 ns   ; A[1] ; data[1]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.995 ns   ; A[1] ; data[4]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.976 ns   ; A[1] ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.968 ns   ; A[4] ; ATTN_REG[0]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.968 ns   ; A[4] ; ATTN_REG[2]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.937 ns   ; A[4] ; LTC2208_CNTRL_REG[4] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.931 ns   ; A[2] ; data[1]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.931 ns   ; A[2] ; data[4]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.880 ns   ; A[3] ; DDC_CNTRL_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.880 ns   ; A[3] ; DDC_CNTRL_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.880 ns   ; A[3] ; DDC_CNTRL_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.880 ns   ; A[3] ; DDC_CNTRL_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.880 ns   ; A[3] ; DDC_CNTRL_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.880 ns   ; A[3] ; DDC_CNTRL_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.846 ns   ; A[0] ; ATTN_REG[0]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.846 ns   ; A[0] ; ATTN_REG[2]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.837 ns   ; A[3] ; RFFE_CNTRL_REG[1]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.837 ns   ; A[3] ; RFFE_CNTRL_REG[5]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.837 ns   ; A[3] ; RFFE_CNTRL_REG[7]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.827 ns   ; A[5] ; DDC_CNTRL_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.827 ns   ; A[5] ; DDC_CNTRL_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.827 ns   ; A[5] ; DDC_CNTRL_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.827 ns   ; A[5] ; DDC_CNTRL_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.827 ns   ; A[5] ; DDC_CNTRL_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.827 ns   ; A[5] ; DDC_CNTRL_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.815 ns   ; A[0] ; LTC2208_CNTRL_REG[4] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.784 ns   ; A[5] ; RFFE_CNTRL_REG[1]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.784 ns   ; A[5] ; RFFE_CNTRL_REG[5]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.784 ns   ; A[5] ; RFFE_CNTRL_REG[7]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.749 ns   ; A[3] ; LTC2208_CNTRL_REG[0] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.749 ns   ; A[3] ; LTC2208_CNTRL_REG[2] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.749 ns   ; A[3] ; LTC2208_CNTRL_REG[3] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.749 ns   ; A[3] ; LTC2208_CNTRL_REG[5] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.749 ns   ; A[3] ; LTC2208_CNTRL_REG[6] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.749 ns   ; A[3] ; LTC2208_CNTRL_REG[7] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.704 ns   ; A[3] ; CPLD_GPIO_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.704 ns   ; A[3] ; CPLD_GPIO_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.704 ns   ; A[3] ; CPLD_GPIO_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.704 ns   ; A[3] ; CPLD_GPIO_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.704 ns   ; A[3] ; CPLD_GPIO_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.704 ns   ; A[3] ; CPLD_GPIO_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.704 ns   ; A[3] ; CPLD_GPIO_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.704 ns   ; A[3] ; CPLD_GPIO_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.696 ns   ; A[5] ; LTC2208_CNTRL_REG[0] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.696 ns   ; A[5] ; LTC2208_CNTRL_REG[2] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.696 ns   ; A[5] ; LTC2208_CNTRL_REG[3] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.696 ns   ; A[5] ; LTC2208_CNTRL_REG[5] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.696 ns   ; A[5] ; LTC2208_CNTRL_REG[6] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.696 ns   ; A[5] ; LTC2208_CNTRL_REG[7] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.651 ns   ; A[5] ; CPLD_GPIO_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.651 ns   ; A[5] ; CPLD_GPIO_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.651 ns   ; A[5] ; CPLD_GPIO_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.651 ns   ; A[5] ; CPLD_GPIO_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.651 ns   ; A[5] ; CPLD_GPIO_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.651 ns   ; A[5] ; CPLD_GPIO_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.651 ns   ; A[5] ; CPLD_GPIO_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.651 ns   ; A[5] ; CPLD_GPIO_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.634 ns   ; A[4] ; DDC_CNTRL_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.634 ns   ; A[4] ; DDC_CNTRL_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.634 ns   ; A[4] ; DDC_CNTRL_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.634 ns   ; A[4] ; DDC_CNTRL_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.634 ns   ; A[4] ; DDC_CNTRL_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.634 ns   ; A[4] ; DDC_CNTRL_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.618 ns   ; A[0] ; data[1]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.595 ns   ; A[0] ; data[6]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.594 ns   ; A[3] ; ATTN_REG[5]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.594 ns   ; A[3] ; ATTN_REG[7]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.591 ns   ; A[4] ; RFFE_CNTRL_REG[1]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.591 ns   ; A[4] ; RFFE_CNTRL_REG[5]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.591 ns   ; A[4] ; RFFE_CNTRL_REG[7]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.541 ns   ; A[5] ; ATTN_REG[5]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.541 ns   ; A[5] ; ATTN_REG[7]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.518 ns   ; A[3] ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.513 ns   ; A[3] ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.503 ns   ; A[4] ; LTC2208_CNTRL_REG[0] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.503 ns   ; A[4] ; LTC2208_CNTRL_REG[2] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.503 ns   ; A[4] ; LTC2208_CNTRL_REG[3] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.503 ns   ; A[4] ; LTC2208_CNTRL_REG[5] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.503 ns   ; A[4] ; LTC2208_CNTRL_REG[6] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.503 ns   ; A[4] ; LTC2208_CNTRL_REG[7] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.489 ns   ; A[3] ; data[5]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.489 ns   ; A[3] ; data[6]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.489 ns   ; A[3] ; data[7]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.465 ns   ; A[5] ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.460 ns   ; A[5] ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.458 ns   ; A[4] ; CPLD_GPIO_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.458 ns   ; A[4] ; CPLD_GPIO_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.458 ns   ; A[4] ; CPLD_GPIO_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.458 ns   ; A[4] ; CPLD_GPIO_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.458 ns   ; A[4] ; CPLD_GPIO_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.458 ns   ; A[4] ; CPLD_GPIO_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.458 ns   ; A[4] ; CPLD_GPIO_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.458 ns   ; A[4] ; CPLD_GPIO_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.436 ns   ; A[5] ; data[5]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.436 ns   ; A[5] ; data[6]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.436 ns   ; A[5] ; data[7]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.397 ns   ; A[2] ; ATTN_REG[0]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.397 ns   ; A[2] ; ATTN_REG[2]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.388 ns   ; D[5] ; LTC2208_CNTRL_REG[5] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.381 ns   ; A[0] ; LTC2208_CNTRL_REG[0] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.381 ns   ; A[0] ; LTC2208_CNTRL_REG[2] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.381 ns   ; A[0] ; LTC2208_CNTRL_REG[3] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.381 ns   ; A[0] ; LTC2208_CNTRL_REG[5] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.381 ns   ; A[0] ; LTC2208_CNTRL_REG[6] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.381 ns   ; A[0] ; LTC2208_CNTRL_REG[7] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.367 ns   ; A[3] ; RFFE_CNTRL_REG[0]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.367 ns   ; A[3] ; RFFE_CNTRL_REG[2]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.367 ns   ; A[3] ; RFFE_CNTRL_REG[6]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.366 ns   ; A[2] ; LTC2208_CNTRL_REG[4] ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.360 ns   ; A[3] ; DDC_CNTRL_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.360 ns   ; A[3] ; DDC_CNTRL_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.348 ns   ; A[4] ; ATTN_REG[5]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.348 ns   ; A[4] ; ATTN_REG[7]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.326 ns   ; A[1] ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.321 ns   ; A[1] ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.314 ns   ; A[5] ; RFFE_CNTRL_REG[0]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.314 ns   ; A[5] ; RFFE_CNTRL_REG[2]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.314 ns   ; A[5] ; RFFE_CNTRL_REG[6]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.307 ns   ; A[5] ; DDC_CNTRL_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.307 ns   ; A[5] ; DDC_CNTRL_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.303 ns   ; WR_N ; DDC_CNTRL_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.303 ns   ; WR_N ; DDC_CNTRL_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.303 ns   ; WR_N ; DDC_CNTRL_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.303 ns   ; WR_N ; DDC_CNTRL_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.303 ns   ; WR_N ; DDC_CNTRL_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.303 ns   ; WR_N ; DDC_CNTRL_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.272 ns   ; A[4] ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.267 ns   ; A[4] ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.260 ns   ; A[3] ; RFFE_CNTRL_REG[3]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.260 ns   ; A[3] ; RFFE_CNTRL_REG[4]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.260 ns   ; WR_N ; RFFE_CNTRL_REG[1]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.260 ns   ; WR_N ; RFFE_CNTRL_REG[5]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.260 ns   ; WR_N ; RFFE_CNTRL_REG[7]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.252 ns   ; A[2] ; data[6]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.248 ns   ; RD_N ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.243 ns   ; A[4] ; data[5]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.243 ns   ; A[4] ; data[6]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.243 ns   ; A[4] ; data[7]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.243 ns   ; RD_N ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.239 ns   ; A[0] ; data[5]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.226 ns   ; A[0] ; ATTN_REG[5]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.226 ns   ; A[0] ; ATTN_REG[7]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.219 ns   ; RD_N ; data[5]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.219 ns   ; RD_N ; data[6]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.219 ns   ; RD_N ; data[7]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.207 ns   ; A[5] ; RFFE_CNTRL_REG[3]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.207 ns   ; A[5] ; RFFE_CNTRL_REG[4]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.195 ns   ; A[1] ; data[5]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.195 ns   ; A[1] ; data[6]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.195 ns   ; A[1] ; data[7]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.160 ns   ; A[2] ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.155 ns   ; A[2] ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.146 ns   ; A[3] ; ATTN_REG[3]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.146 ns   ; A[3] ; ATTN_REG[1]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.146 ns   ; A[3] ; ATTN_REG[4]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.146 ns   ; A[3] ; ATTN_REG[6]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.131 ns   ; A[2] ; data[5]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.131 ns   ; A[2] ; data[7]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.127 ns   ; WR_N ; CPLD_GPIO_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.127 ns   ; WR_N ; CPLD_GPIO_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.127 ns   ; WR_N ; CPLD_GPIO_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.127 ns   ; WR_N ; CPLD_GPIO_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.127 ns   ; WR_N ; CPLD_GPIO_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.127 ns   ; WR_N ; CPLD_GPIO_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.127 ns   ; WR_N ; CPLD_GPIO_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.127 ns   ; WR_N ; CPLD_GPIO_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.121 ns   ; A[4] ; RFFE_CNTRL_REG[0]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.121 ns   ; A[4] ; RFFE_CNTRL_REG[2]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.121 ns   ; A[4] ; RFFE_CNTRL_REG[6]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.114 ns   ; A[4] ; DDC_CNTRL_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.114 ns   ; A[4] ; DDC_CNTRL_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.097 ns   ; A[0] ; data[7]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.093 ns   ; A[5] ; ATTN_REG[3]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.093 ns   ; A[5] ; ATTN_REG[1]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.093 ns   ; A[5] ; ATTN_REG[4]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; 6.093 ns   ; A[5] ; ATTN_REG[6]          ; FX2CLK   ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;            ;      ;                      ;          ;
++-----------------------------------------+-----------------------------------------------------+------------+------+----------------------+----------+
+
+
++----------------------------------------------------------------------------------------+
+; tco                                                                                    ;
++-------+--------------+------------+----------------------+----------------+------------+
+; Slack ; Required tco ; Actual tco ; From                 ; To             ; From Clock ;
++-------+--------------+------------+----------------------+----------------+------------+
+; N/A   ; None         ; 8.861 ns   ; LTC2208_CNTRL_REG[3] ; PGA            ; FX2CLK     ;
+; N/A   ; None         ; 8.837 ns   ; LTC2208_CNTRL_REG[1] ; SHDN           ; FX2CLK     ;
+; N/A   ; None         ; 8.832 ns   ; data[2]              ; D[2]           ; FX2CLK     ;
+; N/A   ; None         ; 8.788 ns   ; DEBUG_LED_REG[0]     ; DEBUG_LED[0]   ; FX2CLK     ;
+; N/A   ; None         ; 8.785 ns   ; data[6]              ; D[6]           ; FX2CLK     ;
+; N/A   ; None         ; 8.780 ns   ; LTC2208_CNTRL_REG[2] ; RAND           ; FX2CLK     ;
+; N/A   ; None         ; 8.769 ns   ; LTC2208_CNTRL_REG[0] ; DITH           ; FX2CLK     ;
+; N/A   ; None         ; 8.763 ns   ; data[7]              ; D[7]           ; FX2CLK     ;
+; N/A   ; None         ; 8.753 ns   ; CPLD_reset           ; CPLD_RESET_OUT ; FX2CLK     ;
+; N/A   ; None         ; 8.752 ns   ; data[5]              ; D[5]           ; FX2CLK     ;
+; N/A   ; None         ; 8.746 ns   ; DDC_CNTRL_REG[3]     ; DDC1_RESET_N   ; FX2CLK     ;
+; N/A   ; None         ; 8.732 ns   ; data[0]              ; D[0]           ; FX2CLK     ;
+; N/A   ; None         ; 8.694 ns   ; DDC_CNTRL_REG[6]     ; SYNC_NCO       ; FX2CLK     ;
+; N/A   ; None         ; 8.679 ns   ; DEBUG_LED_REG[4]     ; DEBUG_LED[4]   ; FX2CLK     ;
+; N/A   ; None         ; 8.658 ns   ; ATTN_REG[5]          ; ATTN[5]        ; FX2CLK     ;
+; N/A   ; None         ; 8.657 ns   ; DDC_CNTRL_REG[0]     ; DDC0_PAR_SER   ; FX2CLK     ;
+; N/A   ; None         ; 8.637 ns   ; RFFE_CNTRL_REG[0]    ; HPF_BYPASS_N   ; FX2CLK     ;
+; N/A   ; None         ; 8.637 ns   ; RFFE_CNTRL_REG[0]    ; HPF_BYPASS     ; FX2CLK     ;
+; N/A   ; None         ; 8.553 ns   ; RFFE_CNTRL_REG[2]    ; RFA_BYPASS_N   ; FX2CLK     ;
+; N/A   ; None         ; 8.553 ns   ; RFFE_CNTRL_REG[2]    ; RFA_BYPASS     ; FX2CLK     ;
+; N/A   ; None         ; 8.290 ns   ; DEBUG_LED_REG[1]     ; DEBUG_LED[1]   ; FX2CLK     ;
+; N/A   ; None         ; 8.240 ns   ; ATTN_REG[1]          ; ATTN[1]        ; FX2CLK     ;
+; N/A   ; None         ; 8.207 ns   ; ATTN_REG[4]          ; ATTN[4]        ; FX2CLK     ;
+; N/A   ; None         ; 8.204 ns   ; DEBUG_LED_REG[3]     ; DEBUG_LED[3]   ; FX2CLK     ;
+; N/A   ; None         ; 8.204 ns   ; DEBUG_LED_REG[2]     ; DEBUG_LED[2]   ; FX2CLK     ;
+; N/A   ; None         ; 8.156 ns   ; data[4]              ; D[4]           ; FX2CLK     ;
+; N/A   ; None         ; 8.137 ns   ; ATTN_REG[3]          ; ATTN[3]        ; FX2CLK     ;
+; N/A   ; None         ; 8.124 ns   ; DDC_CNTRL_REG[2]     ; DDC1_PAR_SER   ; FX2CLK     ;
+; N/A   ; None         ; 8.115 ns   ; DDC_CNTRL_REG[4]     ; SYNC_RCF       ; FX2CLK     ;
+; N/A   ; None         ; 8.095 ns   ; data[3]              ; D[3]           ; FX2CLK     ;
+; N/A   ; None         ; 8.095 ns   ; RFFE_CNTRL_REG[1]    ; LPF_BYPASS_N   ; FX2CLK     ;
+; N/A   ; None         ; 8.095 ns   ; RFFE_CNTRL_REG[1]    ; LPF_BYPASS     ; FX2CLK     ;
+; N/A   ; None         ; 8.035 ns   ; ATTN_REG[0]          ; ATTN[0]        ; FX2CLK     ;
+; N/A   ; None         ; 8.011 ns   ; data[1]              ; D[1]           ; FX2CLK     ;
+; N/A   ; None         ; 7.927 ns   ; CPLD_GPIO_REG[0]     ; CPLD_GPIO[0]   ; FX2CLK     ;
+; N/A   ; None         ; 7.919 ns   ; CPLD_GPIO_REG[1]     ; CPLD_GPIO[1]   ; FX2CLK     ;
+; N/A   ; None         ; 7.914 ns   ; DDC_CNTRL_REG[5]     ; SYNC_CIC       ; FX2CLK     ;
+; N/A   ; None         ; 7.914 ns   ; ATTN_REG[2]          ; ATTN[2]        ; FX2CLK     ;
+; N/A   ; None         ; 7.899 ns   ; DDC_CNTRL_REG[1]     ; DDC0_RESET_N   ; FX2CLK     ;
+; N/A   ; None         ; 6.889 ns   ; CPLD_GPIO_REG[4]     ; CPLD_GPIO[0]   ; FX2CLK     ;
+; N/A   ; None         ; 6.885 ns   ; CPLD_GPIO_REG[6]     ; CPLD_GPIO[2]   ; FX2CLK     ;
+; N/A   ; None         ; 6.827 ns   ; CPLD_GPIO_REG[3]     ; CPLD_GPIO[3]   ; FX2CLK     ;
+; N/A   ; None         ; 6.820 ns   ; CPLD_GPIO_REG[2]     ; CPLD_GPIO[2]   ; FX2CLK     ;
+; N/A   ; None         ; 6.789 ns   ; CPLD_GPIO_REG[5]     ; CPLD_GPIO[1]   ; FX2CLK     ;
+; N/A   ; None         ; 6.782 ns   ; CPLD_GPIO_REG[7]     ; CPLD_GPIO[3]   ; FX2CLK     ;
++-------+--------------+------------+----------------------+----------------+------------+
+
+
++-----------------------------------------------------------------------+
+; tpd                                                                   ;
++-------+-------------------+-----------------+----------+--------------+
+; Slack ; Required P2P Time ; Actual P2P Time ; From     ; To           ;
++-------+-------------------+-----------------+----------+--------------+
+; N/A   ; None              ; 10.602 ns       ; RD_N     ; D[7]         ;
+; N/A   ; None              ; 10.602 ns       ; RD_N     ; D[6]         ;
+; N/A   ; None              ; 10.602 ns       ; RD_N     ; D[5]         ;
+; N/A   ; None              ; 10.555 ns       ; A[8]     ; D[7]         ;
+; N/A   ; None              ; 10.555 ns       ; A[8]     ; D[6]         ;
+; N/A   ; None              ; 10.555 ns       ; A[8]     ; D[5]         ;
+; N/A   ; None              ; 10.392 ns       ; RD_N     ; D[0]         ;
+; N/A   ; None              ; 10.363 ns       ; A13      ; D[7]         ;
+; N/A   ; None              ; 10.363 ns       ; A13      ; D[6]         ;
+; N/A   ; None              ; 10.363 ns       ; A13      ; D[5]         ;
+; N/A   ; None              ; 10.353 ns       ; WR_N     ; D[7]         ;
+; N/A   ; None              ; 10.353 ns       ; WR_N     ; D[6]         ;
+; N/A   ; None              ; 10.353 ns       ; WR_N     ; D[5]         ;
+; N/A   ; None              ; 10.349 ns       ; A[9]     ; D[7]         ;
+; N/A   ; None              ; 10.349 ns       ; A[9]     ; D[6]         ;
+; N/A   ; None              ; 10.349 ns       ; A[9]     ; D[5]         ;
+; N/A   ; None              ; 10.345 ns       ; A[8]     ; D[0]         ;
+; N/A   ; None              ; 10.264 ns       ; A[5]     ; D[7]         ;
+; N/A   ; None              ; 10.264 ns       ; A[5]     ; D[6]         ;
+; N/A   ; None              ; 10.264 ns       ; A[5]     ; D[5]         ;
+; N/A   ; None              ; 10.153 ns       ; A13      ; D[0]         ;
+; N/A   ; None              ; 10.143 ns       ; WR_N     ; D[0]         ;
+; N/A   ; None              ; 10.139 ns       ; A[9]     ; D[0]         ;
+; N/A   ; None              ; 10.103 ns       ; RD_N     ; CS_DDC0_N    ;
+; N/A   ; None              ; 10.090 ns       ; RD_N     ; CS_DDC1_N    ;
+; N/A   ; None              ; 10.056 ns       ; A[8]     ; CS_DDC0_N    ;
+; N/A   ; None              ; 10.054 ns       ; A[5]     ; D[0]         ;
+; N/A   ; None              ; 10.048 ns       ; A[6]     ; D[7]         ;
+; N/A   ; None              ; 10.048 ns       ; A[6]     ; D[6]         ;
+; N/A   ; None              ; 10.048 ns       ; A[6]     ; D[5]         ;
+; N/A   ; None              ; 10.044 ns       ; A[8]     ; CS_DDC1_N    ;
+; N/A   ; None              ; 9.993 ns        ; A[10]    ; D[7]         ;
+; N/A   ; None              ; 9.993 ns        ; A[10]    ; D[6]         ;
+; N/A   ; None              ; 9.993 ns        ; A[10]    ; D[5]         ;
+; N/A   ; None              ; 9.887 ns        ; A[7]     ; D[7]         ;
+; N/A   ; None              ; 9.887 ns        ; A[7]     ; D[6]         ;
+; N/A   ; None              ; 9.887 ns        ; A[7]     ; D[5]         ;
+; N/A   ; None              ; 9.864 ns        ; A13      ; CS_DDC0_N    ;
+; N/A   ; None              ; 9.854 ns        ; WR_N     ; CS_DDC0_N    ;
+; N/A   ; None              ; 9.851 ns        ; A13      ; CS_DDC1_N    ;
+; N/A   ; None              ; 9.850 ns        ; A[9]     ; CS_DDC0_N    ;
+; N/A   ; None              ; 9.841 ns        ; WR_N     ; CS_DDC1_N    ;
+; N/A   ; None              ; 9.838 ns        ; A[6]     ; D[0]         ;
+; N/A   ; None              ; 9.838 ns        ; A[9]     ; CS_DDC1_N    ;
+; N/A   ; None              ; 9.797 ns        ; RD_N     ; D[4]         ;
+; N/A   ; None              ; 9.797 ns        ; RD_N     ; D[3]         ;
+; N/A   ; None              ; 9.797 ns        ; RD_N     ; D[2]         ;
+; N/A   ; None              ; 9.797 ns        ; RD_N     ; D[1]         ;
+; N/A   ; None              ; 9.783 ns        ; A[10]    ; D[0]         ;
+; N/A   ; None              ; 9.765 ns        ; A[5]     ; CS_DDC0_N    ;
+; N/A   ; None              ; 9.753 ns        ; A[5]     ; CS_DDC1_N    ;
+; N/A   ; None              ; 9.750 ns        ; A[8]     ; D[4]         ;
+; N/A   ; None              ; 9.750 ns        ; A[8]     ; D[3]         ;
+; N/A   ; None              ; 9.750 ns        ; A[8]     ; D[2]         ;
+; N/A   ; None              ; 9.750 ns        ; A[8]     ; D[1]         ;
+; N/A   ; None              ; 9.677 ns        ; A[7]     ; D[0]         ;
+; N/A   ; None              ; 9.558 ns        ; A13      ; D[4]         ;
+; N/A   ; None              ; 9.558 ns        ; A13      ; D[3]         ;
+; N/A   ; None              ; 9.558 ns        ; A13      ; D[2]         ;
+; N/A   ; None              ; 9.558 ns        ; A13      ; D[1]         ;
+; N/A   ; None              ; 9.549 ns        ; A[6]     ; CS_DDC0_N    ;
+; N/A   ; None              ; 9.548 ns        ; WR_N     ; D[4]         ;
+; N/A   ; None              ; 9.548 ns        ; WR_N     ; D[3]         ;
+; N/A   ; None              ; 9.548 ns        ; WR_N     ; D[2]         ;
+; N/A   ; None              ; 9.548 ns        ; WR_N     ; D[1]         ;
+; N/A   ; None              ; 9.544 ns        ; A[9]     ; D[4]         ;
+; N/A   ; None              ; 9.544 ns        ; A[9]     ; D[3]         ;
+; N/A   ; None              ; 9.544 ns        ; A[9]     ; D[2]         ;
+; N/A   ; None              ; 9.544 ns        ; A[9]     ; D[1]         ;
+; N/A   ; None              ; 9.537 ns        ; A[6]     ; CS_DDC1_N    ;
+; N/A   ; None              ; 9.494 ns        ; A[10]    ; CS_DDC0_N    ;
+; N/A   ; None              ; 9.482 ns        ; A[10]    ; CS_DDC1_N    ;
+; N/A   ; None              ; 9.459 ns        ; A[5]     ; D[4]         ;
+; N/A   ; None              ; 9.459 ns        ; A[5]     ; D[3]         ;
+; N/A   ; None              ; 9.459 ns        ; A[5]     ; D[2]         ;
+; N/A   ; None              ; 9.459 ns        ; A[5]     ; D[1]         ;
+; N/A   ; None              ; 9.388 ns        ; A[7]     ; CS_DDC0_N    ;
+; N/A   ; None              ; 9.376 ns        ; A[7]     ; CS_DDC1_N    ;
+; N/A   ; None              ; 9.265 ns        ; A[3]     ; CS_DDC1_N    ;
+; N/A   ; None              ; 9.243 ns        ; A[6]     ; D[4]         ;
+; N/A   ; None              ; 9.243 ns        ; A[6]     ; D[3]         ;
+; N/A   ; None              ; 9.243 ns        ; A[6]     ; D[2]         ;
+; N/A   ; None              ; 9.243 ns        ; A[6]     ; D[1]         ;
+; N/A   ; None              ; 9.235 ns        ; A[4]     ; D[7]         ;
+; N/A   ; None              ; 9.235 ns        ; A[4]     ; D[6]         ;
+; N/A   ; None              ; 9.235 ns        ; A[4]     ; D[5]         ;
+; N/A   ; None              ; 9.188 ns        ; A[10]    ; D[4]         ;
+; N/A   ; None              ; 9.188 ns        ; A[10]    ; D[3]         ;
+; N/A   ; None              ; 9.188 ns        ; A[10]    ; D[2]         ;
+; N/A   ; None              ; 9.188 ns        ; A[10]    ; D[1]         ;
+; N/A   ; None              ; 9.082 ns        ; A[7]     ; D[4]         ;
+; N/A   ; None              ; 9.082 ns        ; A[7]     ; D[3]         ;
+; N/A   ; None              ; 9.082 ns        ; A[7]     ; D[2]         ;
+; N/A   ; None              ; 9.082 ns        ; A[7]     ; D[1]         ;
+; N/A   ; None              ; 9.025 ns        ; A[4]     ; D[0]         ;
+; N/A   ; None              ; 8.996 ns        ; A[3]     ; D[7]         ;
+; N/A   ; None              ; 8.996 ns        ; A[3]     ; D[6]         ;
+; N/A   ; None              ; 8.996 ns        ; A[3]     ; D[5]         ;
+; N/A   ; None              ; 8.786 ns        ; A[3]     ; D[0]         ;
+; N/A   ; None              ; 8.736 ns        ; A[4]     ; CS_DDC0_N    ;
+; N/A   ; None              ; 8.720 ns        ; A[4]     ; CS_DDC1_N    ;
+; N/A   ; None              ; 8.430 ns        ; A[4]     ; D[4]         ;
+; N/A   ; None              ; 8.430 ns        ; A[4]     ; D[3]         ;
+; N/A   ; None              ; 8.430 ns        ; A[4]     ; D[2]         ;
+; N/A   ; None              ; 8.430 ns        ; A[4]     ; D[1]         ;
+; N/A   ; None              ; 8.191 ns        ; A[3]     ; D[4]         ;
+; N/A   ; None              ; 8.191 ns        ; A[3]     ; D[3]         ;
+; N/A   ; None              ; 8.191 ns        ; A[3]     ; D[2]         ;
+; N/A   ; None              ; 8.191 ns        ; A[3]     ; D[1]         ;
+; N/A   ; None              ; 7.416 ns        ; WR_N     ; DDC_WR_N     ;
+; N/A   ; None              ; 7.223 ns        ; A[1]     ; DDC_A[1]     ;
+; N/A   ; None              ; 7.111 ns        ; RD_N     ; DDC_RD_N     ;
+; N/A   ; None              ; 7.027 ns        ; A[2]     ; DDC_A[2]     ;
+; N/A   ; None              ; 6.900 ns        ; A[0]     ; DDC_A[0]     ;
+; N/A   ; None              ; 4.836 ns        ; OVERFLOW ; ADC_OVFL_IND ;
++-------+-------------------+-----------------+----------+--------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; th                                                                                                                                                         ;
++-----------------------------------------+-----------------------------------------------------+-----------+--------------+----------------------+----------+
+; Minimum Slack                           ; Required th                                         ; Actual th ; From         ; To                   ; To Clock ;
++-----------------------------------------+-----------------------------------------------------+-----------+--------------+----------------------+----------+
+; N/A                                     ; None                                                ; -1.228 ns ; D[4]         ; ATTN_REG[4]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.306 ns ; D[5]         ; CPLD_GPIO_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.374 ns ; D[1]         ; RFFE_CNTRL_REG[1]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.388 ns ; D[3]         ; ATTN_REG[3]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.420 ns ; D[5]         ; ATTN_REG[5]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.431 ns ; D[1]         ; ATTN_REG[1]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.434 ns ; D[2]         ; LTC2208_CNTRL_REG[2] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.579 ns ; D[7]         ; DEBUG_LED_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.607 ns ; D[7]         ; CPLD_GPIO_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.650 ns ; D[0]         ; DDC_CNTRL_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.652 ns ; D[6]         ; CPLD_GPIO_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.715 ns ; D[2]         ; DDC_CNTRL_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.817 ns ; D[6]         ; DDC_CNTRL_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.833 ns ; D[4]         ; CPLD_GPIO_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.900 ns ; D[0]         ; LTC2208_CNTRL_REG[0] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -1.995 ns ; A[2]         ; LTC2208_CNTRL_REG[1] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.066 ns ; D[5]         ; RFFE_CNTRL_REG[5]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.088 ns ; A[1]         ; LTC2208_CNTRL_REG[1] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.161 ns ; CPLD_GPIO[0] ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.180 ns ; CPLD_GPIO[2] ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.237 ns ; WR_N         ; DEBUG_LED_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.316 ns ; D[0]         ; RFFE_CNTRL_REG[0]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.322 ns ; A[0]         ; LTC2208_CNTRL_REG[1] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.375 ns ; A[1]         ; LTC2208_CNTRL_REG[0] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.375 ns ; A[1]         ; LTC2208_CNTRL_REG[2] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.375 ns ; A[1]         ; LTC2208_CNTRL_REG[3] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.375 ns ; A[1]         ; LTC2208_CNTRL_REG[5] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.375 ns ; A[1]         ; LTC2208_CNTRL_REG[6] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.375 ns ; A[1]         ; LTC2208_CNTRL_REG[7] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.397 ns ; WR_N         ; LTC2208_CNTRL_REG[0] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.397 ns ; WR_N         ; LTC2208_CNTRL_REG[2] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.397 ns ; WR_N         ; LTC2208_CNTRL_REG[3] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.397 ns ; WR_N         ; LTC2208_CNTRL_REG[5] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.397 ns ; WR_N         ; LTC2208_CNTRL_REG[6] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.397 ns ; WR_N         ; LTC2208_CNTRL_REG[7] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.431 ns ; D[2]         ; RFFE_CNTRL_REG[2]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.632 ns ; A[0]         ; CPLD_GPIO_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.632 ns ; A[0]         ; CPLD_GPIO_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.632 ns ; A[0]         ; CPLD_GPIO_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.632 ns ; A[0]         ; CPLD_GPIO_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.632 ns ; A[0]         ; CPLD_GPIO_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.632 ns ; A[0]         ; CPLD_GPIO_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.632 ns ; A[0]         ; CPLD_GPIO_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.632 ns ; A[0]         ; CPLD_GPIO_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.662 ns ; D[0]         ; DEBUG_LED_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.736 ns ; A[2]         ; CPLD_GPIO_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.736 ns ; A[2]         ; CPLD_GPIO_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.736 ns ; A[2]         ; CPLD_GPIO_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.736 ns ; A[2]         ; CPLD_GPIO_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.736 ns ; A[2]         ; CPLD_GPIO_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.736 ns ; A[2]         ; CPLD_GPIO_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.736 ns ; A[2]         ; CPLD_GPIO_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.736 ns ; A[2]         ; CPLD_GPIO_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.782 ns ; A[0]         ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.809 ns ; A[1]         ; LTC2208_CNTRL_REG[4] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.810 ns ; WR_N         ; DEBUG_LED_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.810 ns ; WR_N         ; DEBUG_LED_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.810 ns ; WR_N         ; DEBUG_LED_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.810 ns ; WR_N         ; DEBUG_LED_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.810 ns ; WR_N         ; DEBUG_LED_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.810 ns ; WR_N         ; DEBUG_LED_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.812 ns ; A[0]         ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.831 ns ; WR_N         ; LTC2208_CNTRL_REG[4] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.864 ns ; WR_N         ; ATTN_REG[3]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.864 ns ; WR_N         ; ATTN_REG[1]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.864 ns ; WR_N         ; ATTN_REG[4]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -2.864 ns ; WR_N         ; ATTN_REG[6]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.002 ns ; RD_N         ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.012 ns ; RD_N         ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.016 ns ; WR_N         ; LTC2208_CNTRL_REG[1] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.053 ns ; D[1]         ; LTC2208_CNTRL_REG[1] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.096 ns ; D[4]         ; RFFE_CNTRL_REG[4]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.097 ns ; D[4]         ; LTC2208_CNTRL_REG[4] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.108 ns ; A[1]         ; ATTN_REG[3]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.108 ns ; A[1]         ; ATTN_REG[1]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.108 ns ; A[1]         ; ATTN_REG[4]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.108 ns ; A[1]         ; ATTN_REG[6]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.192 ns ; D[4]         ; DDC_CNTRL_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.206 ns ; A[1]         ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.216 ns ; A[1]         ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.217 ns ; D[4]         ; DEBUG_LED_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.239 ns ; WR_N         ; DEBUG_LED_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.251 ns ; D[3]         ; RFFE_CNTRL_REG[3]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.311 ns ; D[3]         ; DEBUG_LED_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.312 ns ; WR_N         ; ATTN_REG[5]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.312 ns ; WR_N         ; ATTN_REG[7]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.313 ns ; D[3]         ; LTC2208_CNTRL_REG[3] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.320 ns ; D[3]         ; DDC_CNTRL_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.362 ns ; D[2]         ; CPLD_GPIO_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.362 ns ; A[2]         ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.372 ns ; A[2]         ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.438 ns ; A[4]         ; LTC2208_CNTRL_REG[1] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.441 ns ; A[0]         ; DEBUG_LED_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.441 ns ; A[0]         ; DEBUG_LED_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.441 ns ; A[0]         ; DEBUG_LED_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.441 ns ; A[0]         ; DEBUG_LED_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.441 ns ; A[0]         ; DEBUG_LED_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.441 ns ; A[0]         ; DEBUG_LED_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.556 ns ; A[1]         ; ATTN_REG[5]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.556 ns ; A[1]         ; ATTN_REG[7]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.590 ns ; A[1]         ; DEBUG_LED_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.590 ns ; A[1]         ; DEBUG_LED_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.590 ns ; A[1]         ; DEBUG_LED_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.590 ns ; A[1]         ; DEBUG_LED_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.590 ns ; A[1]         ; DEBUG_LED_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.590 ns ; A[1]         ; DEBUG_LED_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.631 ns ; A[5]         ; LTC2208_CNTRL_REG[1] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.657 ns ; A[2]         ; data[7]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.684 ns ; A[3]         ; LTC2208_CNTRL_REG[1] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.741 ns ; D[6]         ; LTC2208_CNTRL_REG[6] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.751 ns ; A[2]         ; data[5]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.758 ns ; D[6]         ; RFFE_CNTRL_REG[6]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.771 ns ; CPLD_GPIO[1] ; data[1]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.870 ns ; A[0]         ; DEBUG_LED_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.909 ns ; D[5]         ; DEBUG_LED_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.932 ns ; WR_N         ; ATTN_REG[0]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.932 ns ; WR_N         ; ATTN_REG[2]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.952 ns ; A[2]         ; RFFE_CNTRL_REG[3]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.952 ns ; A[2]         ; RFFE_CNTRL_REG[4]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.961 ns ; CPLD_GPIO[3] ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.969 ns ; A[0]         ; data[4]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.984 ns ; RD_N         ; data[5]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.984 ns ; RD_N         ; data[6]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.984 ns ; RD_N         ; data[7]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -3.997 ns ; D[3]         ; CPLD_GPIO_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.019 ns ; A[1]         ; DEBUG_LED_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.039 ns ; D[7]         ; LTC2208_CNTRL_REG[7] ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.043 ns ; A[2]         ; DDC_CNTRL_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.043 ns ; A[2]         ; DDC_CNTRL_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.050 ns ; D[7]         ; DDC_CNTRL_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.059 ns ; A[2]         ; RFFE_CNTRL_REG[0]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.059 ns ; A[2]         ; RFFE_CNTRL_REG[2]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.059 ns ; A[2]         ; RFFE_CNTRL_REG[6]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.066 ns ; A[0]         ; data[6]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.125 ns ; A[2]         ; data[1]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.149 ns ; D[7]         ; ATTN_REG[7]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.158 ns ; D[7]         ; RFFE_CNTRL_REG[7]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.176 ns ; A[1]         ; ATTN_REG[0]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.176 ns ; A[1]         ; ATTN_REG[2]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.188 ns ; A[1]         ; data[5]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.188 ns ; A[1]         ; data[6]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.188 ns ; A[1]         ; data[7]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.217 ns ; D[1]         ; CPLD_GPIO_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.344 ns ; A[2]         ; data[6]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.354 ns ; RD_N         ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.396 ns ; A[0]         ; RFFE_CNTRL_REG[3]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.396 ns ; A[0]         ; RFFE_CNTRL_REG[4]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.412 ns ; D[6]         ; DEBUG_LED_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.414 ns ; A[2]         ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.431 ns ; A[4]         ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.441 ns ; A[4]         ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.458 ns ; A[0]         ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.462 ns ; A[1]         ; RFFE_CNTRL_REG[3]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.462 ns ; A[1]         ; RFFE_CNTRL_REG[4]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.470 ns ; D[1]         ; DEBUG_LED_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.491 ns ; A[0]         ; DDC_CNTRL_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.491 ns ; A[0]         ; DDC_CNTRL_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.503 ns ; A[0]         ; RFFE_CNTRL_REG[0]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.503 ns ; A[0]         ; RFFE_CNTRL_REG[2]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.503 ns ; A[0]         ; RFFE_CNTRL_REG[6]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.504 ns ; A[2]         ; data[4]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.521 ns ; A[0]         ; data[1]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.529 ns ; A[2]         ; RFFE_CNTRL_REG[1]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.529 ns ; A[2]         ; RFFE_CNTRL_REG[5]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.529 ns ; A[2]         ; RFFE_CNTRL_REG[7]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.543 ns ; D[0]         ; CPLD_GPIO_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.557 ns ; A[0]         ; data[5]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.558 ns ; A[1]         ; data[3]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.562 ns ; A[1]         ; DDC_CNTRL_REG[3]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.562 ns ; A[1]         ; DDC_CNTRL_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.563 ns ; A[2]         ; DDC_CNTRL_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.563 ns ; A[2]         ; DDC_CNTRL_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.563 ns ; A[2]         ; DDC_CNTRL_REG[0]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.563 ns ; A[2]         ; DDC_CNTRL_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.563 ns ; A[2]         ; DDC_CNTRL_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.563 ns ; A[2]         ; DDC_CNTRL_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.568 ns ; A[0]         ; data[7]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.569 ns ; A[1]         ; RFFE_CNTRL_REG[0]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.569 ns ; A[1]         ; RFFE_CNTRL_REG[2]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.569 ns ; A[1]         ; RFFE_CNTRL_REG[6]    ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.614 ns ; D[2]         ; ATTN_REG[2]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.624 ns ; D[6]         ; ATTN_REG[6]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.624 ns ; A[5]         ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.634 ns ; A[5]         ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.659 ns ; D[1]         ; DDC_CNTRL_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.677 ns ; A[3]         ; data[2]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.687 ns ; A[3]         ; data[0]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.775 ns ; A[2]         ; ATTN_REG[3]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.775 ns ; A[2]         ; ATTN_REG[1]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.775 ns ; A[2]         ; ATTN_REG[4]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.775 ns ; A[2]         ; ATTN_REG[6]          ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.784 ns ; RD_N         ; data[1]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.784 ns ; RD_N         ; data[4]              ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.793 ns ; A[4]         ; DEBUG_LED_REG[2]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.793 ns ; A[4]         ; DEBUG_LED_REG[5]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.793 ns ; A[4]         ; DEBUG_LED_REG[6]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.793 ns ; A[4]         ; DEBUG_LED_REG[7]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.793 ns ; A[4]         ; DEBUG_LED_REG[1]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.793 ns ; A[4]         ; DEBUG_LED_REG[4]     ; FX2CLK   ;
+; N/A                                     ; None                                                ; -4.878 ns ; A[2]         ; DEBUG_LED_REG[2]     ; FX2CLK   ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;           ;              ;                      ;          ;
++-----------------------------------------+-----------------------------------------------------+-----------+--------------+----------------------+----------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Classic Timing Analyzer
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Fri Dec 29 13:46:46 2006
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off init_load -c init_load
+Info: Started post-fitting delay annotation
+Info: Delay annotation completed successfully
+Warning: Found pins functioning as undefined clocks and/or memory enables
+    Info: Assuming node "FX2CLK" is an undefined clock
+Info: Clock "FX2CLK" has Internal fmax of 107.69 MHz between source register "DDC_CNTRL_REG[3]" and destination register "data[3]" (period= 9.286 ns)
+    Info: + Longest register to register delay is 8.577 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC_X6_Y3_N5; Fanout = 2; REG Node = 'DDC_CNTRL_REG[3]'
+        Info: 2: + IC(3.067 ns) + CELL(0.200 ns) = 3.267 ns; Loc. = LC_X6_Y3_N4; Fanout = 1; COMB Node = 'Selector4~19'
+        Info: 3: + IC(2.142 ns) + CELL(0.200 ns) = 5.609 ns; Loc. = LC_X5_Y3_N3; Fanout = 1; COMB Node = 'Selector4~20'
+        Info: 4: + IC(1.785 ns) + CELL(1.183 ns) = 8.577 ns; Loc. = LC_X5_Y4_N4; Fanout = 1; REG Node = 'data[3]'
+        Info: Total cell delay = 1.583 ns ( 18.46 % )
+        Info: Total interconnect delay = 6.994 ns ( 81.54 % )
+    Info: - Smallest clock skew is 0.000 ns
+        Info: + Shortest clock path from clock "FX2CLK" to destination register is 3.348 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_12; Fanout = 65; CLK Node = 'FX2CLK'
+            Info: 2: + IC(1.267 ns) + CELL(0.918 ns) = 3.348 ns; Loc. = LC_X5_Y4_N4; Fanout = 1; REG Node = 'data[3]'
+            Info: Total cell delay = 2.081 ns ( 62.16 % )
+            Info: Total interconnect delay = 1.267 ns ( 37.84 % )
+        Info: - Longest clock path from clock "FX2CLK" to source register is 3.348 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_12; Fanout = 65; CLK Node = 'FX2CLK'
+            Info: 2: + IC(1.267 ns) + CELL(0.918 ns) = 3.348 ns; Loc. = LC_X6_Y3_N5; Fanout = 2; REG Node = 'DDC_CNTRL_REG[3]'
+            Info: Total cell delay = 2.081 ns ( 62.16 % )
+            Info: Total interconnect delay = 1.267 ns ( 37.84 % )
+    Info: + Micro clock to output delay of source is 0.376 ns
+    Info: + Micro setup delay of destination is 0.333 ns
+Info: tsu for register "data[3]" (data pin = "A[3]", clock pin = "FX2CLK") is 7.762 ns
+    Info: + Longest pin to register delay is 10.777 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_83; Fanout = 2; PIN Node = 'A[3]'
+        Info: 2: + IC(2.620 ns) + CELL(0.511 ns) = 4.263 ns; Loc. = LC_X5_Y4_N2; Fanout = 6; COMB Node = 'Decoder0~292'
+        Info: 3: + IC(1.943 ns) + CELL(0.200 ns) = 6.406 ns; Loc. = LC_X4_Y1_N1; Fanout = 14; COMB Node = 'data[7]~210'
+        Info: 4: + IC(2.608 ns) + CELL(0.200 ns) = 9.214 ns; Loc. = LC_X5_Y4_N7; Fanout = 1; COMB Node = 'CPLD_GPIO_REG[7]~2218'
+        Info: 5: + IC(0.759 ns) + CELL(0.804 ns) = 10.777 ns; Loc. = LC_X5_Y4_N4; Fanout = 1; REG Node = 'data[3]'
+        Info: Total cell delay = 2.847 ns ( 26.42 % )
+        Info: Total interconnect delay = 7.930 ns ( 73.58 % )
+    Info: + Micro setup delay of destination is 0.333 ns
+    Info: - Shortest clock path from clock "FX2CLK" to destination register is 3.348 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_12; Fanout = 65; CLK Node = 'FX2CLK'
+        Info: 2: + IC(1.267 ns) + CELL(0.918 ns) = 3.348 ns; Loc. = LC_X5_Y4_N4; Fanout = 1; REG Node = 'data[3]'
+        Info: Total cell delay = 2.081 ns ( 62.16 % )
+        Info: Total interconnect delay = 1.267 ns ( 37.84 % )
+Info: tco from clock "FX2CLK" to destination pin "PGA" through register "LTC2208_CNTRL_REG[3]" is 8.861 ns
+    Info: + Longest clock path from clock "FX2CLK" to source register is 3.348 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_12; Fanout = 65; CLK Node = 'FX2CLK'
+        Info: 2: + IC(1.267 ns) + CELL(0.918 ns) = 3.348 ns; Loc. = LC_X6_Y3_N4; Fanout = 2; REG Node = 'LTC2208_CNTRL_REG[3]'
+        Info: Total cell delay = 2.081 ns ( 62.16 % )
+        Info: Total interconnect delay = 1.267 ns ( 37.84 % )
+    Info: + Micro clock to output delay of source is 0.376 ns
+    Info: + Longest register to pin delay is 5.137 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC_X6_Y3_N4; Fanout = 2; REG Node = 'LTC2208_CNTRL_REG[3]'
+        Info: 2: + IC(2.815 ns) + CELL(2.322 ns) = 5.137 ns; Loc. = PIN_18; Fanout = 0; PIN Node = 'PGA'
+        Info: Total cell delay = 2.322 ns ( 45.20 % )
+        Info: Total interconnect delay = 2.815 ns ( 54.80 % )
+Info: Longest tpd from source pin "RD_N" to destination pin "D[7]" is 10.602 ns
+    Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_76; Fanout = 5; PIN Node = 'RD_N'
+    Info: 2: + IC(3.407 ns) + CELL(0.200 ns) = 4.739 ns; Loc. = LC_X2_Y4_N4; Fanout = 2; COMB Node = 'decode_ddc1~81'
+    Info: 3: + IC(0.780 ns) + CELL(0.511 ns) = 6.030 ns; Loc. = LC_X2_Y4_N7; Fanout = 2; COMB Node = 'decode_ddc0~1'
+    Info: 4: + IC(0.776 ns) + CELL(0.511 ns) = 7.317 ns; Loc. = LC_X2_Y4_N6; Fanout = 8; COMB Node = 'do_read~39'
+    Info: 5: + IC(1.681 ns) + CELL(1.604 ns) = 10.602 ns; Loc. = PIN_8; Fanout = 0; PIN Node = 'D[7]'
+    Info: Total cell delay = 3.958 ns ( 37.33 % )
+    Info: Total interconnect delay = 6.644 ns ( 62.67 % )
+Info: th for register "ATTN_REG[4]" (data pin = "D[4]", clock pin = "FX2CLK") is -1.228 ns
+    Info: + Longest clock path from clock "FX2CLK" to destination register is 3.348 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.163 ns) = 1.163 ns; Loc. = PIN_12; Fanout = 65; CLK Node = 'FX2CLK'
+        Info: 2: + IC(1.267 ns) + CELL(0.918 ns) = 3.348 ns; Loc. = LC_X4_Y3_N5; Fanout = 2; REG Node = 'ATTN_REG[4]'
+        Info: Total cell delay = 2.081 ns ( 62.16 % )
+        Info: Total interconnect delay = 1.267 ns ( 37.84 % )
+    Info: + Micro hold delay of destination is 0.221 ns
+    Info: - Shortest pin to register delay is 4.797 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = PIN_5; Fanout = 1; PIN Node = 'D[4]'
+        Info: 2: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = IOC_X1_Y4_N3; Fanout = 3; COMB Node = 'D[4]~3'
+        Info: 3: + IC(2.482 ns) + CELL(1.183 ns) = 4.797 ns; Loc. = LC_X4_Y3_N5; Fanout = 2; REG Node = 'ATTN_REG[4]'
+        Info: Total cell delay = 2.315 ns ( 48.26 % )
+        Info: Total interconnect delay = 2.482 ns ( 51.74 % )
+Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 1 warning
+    Info: Allocated 98 megabytes of memory during processing
+    Info: Processing ended: Fri Dec 29 13:46:48 2006
+    Info: Elapsed time: 00:00:02
+
+

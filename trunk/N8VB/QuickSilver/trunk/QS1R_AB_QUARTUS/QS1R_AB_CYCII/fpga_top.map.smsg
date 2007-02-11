@@ -1,0 +1,38 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Wed Jan 31 13:45:12 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off fpga_top -c fpga_top
+Info: Found 1 design units, including 1 entities, in source file CIC8_10.v
+    Info: Found entity 1: CIC8_10
+Info: Found 1 design units, including 1 entities, in source file CIC3_13.v
+    Info: Found entity 1: CIC3_13
+Info: Found 1 design units, including 1 entities, in source file dc_offset_correct.v
+    Info: Found entity 1: dc_offset_correct
+Info: Found 1 design units, including 1 entities, in source file SPI_REGS.v
+    Info: Found entity 1: SPI_REGS
+Info: Found 1 design units, including 1 entities, in source file cordic.v
+    Info: Found entity 1: cordic
+Info: Found 1 design units, including 1 entities, in source file cordic_stage.v
+    Info: Found entity 1: cordic_stage
+Info: Found 1 design units, including 1 entities, in source file phase_accumulator.v
+    Info: Found entity 1: phase_accumulator
+Info: Found 1 design units, including 1 entities, in source file RegisterX.v
+    Info: Found entity 1: RegisterX
+Info: Found 1 design units, including 1 entities, in source file tx_fifo.v
+    Info: Found entity 1: tx_fifo
+Info: Found 1 design units, including 1 entities, in source file fpga_top.v
+    Info: Found entity 1: fpga_top
+Info: Found 1 design units, including 1 entities, in source file mux_16.v
+    Info: Found entity 1: mux16
+Info: Found 1 design units, including 1 entities, in source file mux_8.v
+    Info: Found entity 1: mux8
+Info: Found 1 design units, including 1 entities, in source file nco_st.v
+    Info: Found entity 1: nco_st
+Info: Found 1 design units, including 1 entities, in source file nco.v
+    Info: Found entity 1: nco
+Error (10053): Verilog HDL error at cordic.v(133): variable "Istage17" cannot be indexed because it is not declared as an array File: C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/cordic.v Line: 133
+Error: Quartus II Analysis & Synthesis was unsuccessful. 1 error, 0 warnings
+    Info: Allocated 136 megabytes of memory during processing
+    Error: Processing ended: Wed Jan 31 13:45:16 2007
+    Error: Elapsed time: 00:00:04

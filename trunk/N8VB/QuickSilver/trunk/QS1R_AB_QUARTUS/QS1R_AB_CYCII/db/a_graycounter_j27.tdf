@@ -1,0 +1,124 @@
+--a_graycounter DEVICE_FAMILY="Cyclone II" PVALUE=1 WIDTH=10 aclr clock cnt_en q
+--VERSION_BEGIN 6.1 cbx_a_gray2bin 2006:02:28:14:37:30:SJ cbx_a_graycounter 2006:05:31:11:44:48:SJ cbx_cycloneii 2006:09:29:19:03:26:SJ cbx_flex10ke 2006:01:09:11:13:48:SJ cbx_mgl 2006:10:27:16:08:48:SJ cbx_stratix 2006:09:18:10:47:42:SJ cbx_stratixii 2006:10:13:14:01:30:SJ  VERSION_END
+
+
+--  Copyright (C) 1991-2006 Altera Corporation
+--  Your use of Altera Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Altera Program License 
+--  Subscription Agreement, Altera MegaCore Function License 
+--  Agreement, or other applicable license agreement, including, 
+--  without limitation, that your use is for the sole purpose of 
+--  programming logic devices manufactured by Altera and sold by 
+--  Altera or its authorized distributors.  Please refer to the 
+--  applicable agreement for further details.
+
+
+FUNCTION cycloneii_lcell_comb (cin, dataa, datab, datac, datad)
+WITH ( 	LUT_MASK,	SUM_LUTC_INPUT) 
+RETURNS ( combout, cout);
+
+--synthesis_resources = lut 11 reg 11 
+SUBDESIGN a_graycounter_j27
+( 
+	aclr	:	input;
+	clock	:	input;
+	cnt_en	:	input;
+	q[9..0]	:	output;
+) 
+VARIABLE 
+	countera0 : cycloneii_lcell_comb
+		WITH (
+			LUT_MASK = "C6A0",
+			SUM_LUTC_INPUT = "cin"
+		);
+	countera1 : cycloneii_lcell_comb
+		WITH (
+			LUT_MASK = "6C50",
+			SUM_LUTC_INPUT = "cin"
+		);
+	countera2 : cycloneii_lcell_comb
+		WITH (
+			LUT_MASK = "6C50",
+			SUM_LUTC_INPUT = "cin"
+		);
+	countera3 : cycloneii_lcell_comb
+		WITH (
+			LUT_MASK = "6C50",
+			SUM_LUTC_INPUT = "cin"
+		);
+	countera4 : cycloneii_lcell_comb
+		WITH (
+			LUT_MASK = "6C50",
+			SUM_LUTC_INPUT = "cin"
+		);
+	countera5 : cycloneii_lcell_comb
+		WITH (
+			LUT_MASK = "6C50",
+			SUM_LUTC_INPUT = "cin"
+		);
+	countera6 : cycloneii_lcell_comb
+		WITH (
+			LUT_MASK = "6C50",
+			SUM_LUTC_INPUT = "cin"
+		);
+	countera7 : cycloneii_lcell_comb
+		WITH (
+			LUT_MASK = "6C50",
+			SUM_LUTC_INPUT = "cin"
+		);
+	countera8 : cycloneii_lcell_comb
+		WITH (
+			LUT_MASK = "6C50",
+			SUM_LUTC_INPUT = "cin"
+		);
+	countera9 : cycloneii_lcell_comb
+		WITH (
+			LUT_MASK = "5A5A",
+			SUM_LUTC_INPUT = "cin"
+		);
+	parity : cycloneii_lcell_comb
+		WITH (
+			LUT_MASK = "9982",
+			SUM_LUTC_INPUT = "cin"
+		);
+	counter_ffa[9..0] : dffeas;
+	parity_ff : dffeas;
+	power_modified_counter_values[9..0]	: WIRE;
+	sclr	: NODE;
+	updown	: NODE;
+
+BEGIN 
+	countera[9..0].cin = ( countera[8..0].cout, parity.cout);
+	countera[9..0].dataa = ( power_modified_counter_values[9..9], power_modified_counter_values[7..0], cnt_en);
+	countera[0].datab = counter_ffa[0].q;
+	countera[1].datab = power_modified_counter_values[1..1];
+	countera[2].datab = power_modified_counter_values[2..2];
+	countera[3].datab = power_modified_counter_values[3..3];
+	countera[4].datab = power_modified_counter_values[4..4];
+	countera[5].datab = power_modified_counter_values[5..5];
+	countera[6].datab = power_modified_counter_values[6..6];
+	countera[7].datab = power_modified_counter_values[7..7];
+	countera[8].datab = power_modified_counter_values[8..8];
+	countera[9..0].datad = B"1111111111";
+	parity.cin = updown;
+	parity.dataa = cnt_en;
+	parity.datab = (! parity_ff.q);
+	parity.datad = B"1";
+	counter_ffa[].clk = clock;
+	counter_ffa[].clrn = (! aclr);
+	counter_ffa[].d = countera[9..0].combout;
+	counter_ffa[].sclr = sclr;
+	parity_ff.clk = clock;
+	parity_ff.clrn = (! aclr);
+	parity_ff.d = parity.combout;
+	parity_ff.sclr = sclr;
+	power_modified_counter_values[] = ( counter_ffa[9..1].q, (! counter_ffa[0..0].q));
+	q[] = power_modified_counter_values[];
+	sclr = GND;
+	updown = VCC;
+END;
+--VALID FILE

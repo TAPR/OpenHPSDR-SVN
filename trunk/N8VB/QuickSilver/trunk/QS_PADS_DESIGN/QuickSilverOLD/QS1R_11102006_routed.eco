@@ -1,0 +1,79 @@
+*PADS-ECO-V3.0-MILS*
+
+*REMARK* -- QS1R_11102006_routed.pcb -- Sun Nov 12 13:52:44 2006
+
+
+*DELPIN*
+U21.1    $$$380
+U21.2    $$$224
+R14.1    $$$224
+U21.3    RFBIASV
+
+*DELPART*
+U21 FDV304P
+
+*DELPIN*
+R26.1    3.3VD
+R26.2    $$$380
+R29.2    $$$380
+
+*DELPART*
+R26 RES0805
+
+*DELPIN*
+R29.1    RFA_\BYPASS
+
+*DELPART*
+R29 RES0805
+*END*
+*PADS-ECO-V3.0-MILS*
+
+*REMARK* -- QS1R_11102006_routed.pcb -- Sun Nov 12 13:55:34 2006
+
+
+*NET*
+*SIGNAL* RFBIASV 20
+R25.2 R14.1
+*MODIFY_GENERAL_RULES* CLEARANCE
+HIERARCHY_OBJECT  PCB:PCB
+MIN_TRACK_WIDTH           6
+REC_TRACK_WIDTH           10
+MAX_TRACK_WIDTH           250
+TRACK_TO_TRACK            6
+VIA_TO_TRACK              6
+VIA_TO_VIA                6
+PAD_TO_TRACK              6
+PAD_TO_VIA                6
+PAD_TO_PAD                6
+SMD_TO_TRACK              6
+SMD_TO_VIA                6
+SMD_TO_PAD                6
+SMD_TO_SMD                6
+COPPER_TO_TRACK           6
+COPPER_TO_VIA             6
+COPPER_TO_PAD             5
+COPPER_TO_SMD             6
+COPPER_TO_COPPER          6
+TEXT_TO_TRACK             6
+TEXT_TO_VIA               6
+TEXT_TO_PAD               6
+TEXT_TO_SMD               6
+OUTLINE_TO_TRACK          6
+OUTLINE_TO_VIA            6
+OUTLINE_TO_PAD            6
+OUTLINE_TO_SMD            6
+OUTLINE_TO_COPPER         6
+DRILL_TO_TRACK            6
+DRILL_TO_VIA              6
+DRILL_TO_PAD              6
+DRILL_TO_SMD              6
+DRILL_TO_COPPER           6
+SAME_NET_SMD_TO_VIA       6
+SAME_NET_SMD_TO_CRN       6
+SAME_NET_VIA_TO_VIA       6
+SAME_NET_PAD_TO_CRN       6
+SAME_NET_TRACK_TO_CRN     6
+DRILL_TO_DRILL            6
+BODY_TO_BODY              6
+
+*END*

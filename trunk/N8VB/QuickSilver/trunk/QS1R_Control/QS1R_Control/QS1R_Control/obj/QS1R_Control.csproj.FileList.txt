@@ -1,0 +1,16 @@
+bin\Release\QS1R_Control.exe
+bin\Release\QS1R_Control.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\QS1R_Control.Main.resources
+obj\Release\QS1R_Control.Properties.Resources.resources
+obj\Release\QS1R_Control.csproj.GenerateResource.Cache
+obj\Release\QS1R_Control.exe
+obj\Release\QS1R_Control.pdb
+bin\Debug\QS1R_Control.exe
+bin\Debug\QS1R_Control.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\QS1R_Control.Main.resources
+obj\Debug\QS1R_Control.Properties.Resources.resources
+obj\Debug\QS1R_Control.csproj.GenerateResource.Cache
+obj\Debug\QS1R_Control.exe
+obj\Debug\QS1R_Control.pdb

@@ -1,0 +1,73 @@
+<!-- code formatted by http://manoli.net/csharpformat/ -->
+<pre class="csharpcode">
+<span class="rem">//==============================================================</span>
+<span class="rem">//Written by: Philip A Covington, N8VB</span>
+<span class="rem">////This software is licensed under the GNU General Public License</span>
+<span class="rem">//==============================================================</span>
+<span class="rem">//ToneOscillator.cs</span>
+<span class="rem">//implements a local oscillator </span>
+<span class="rem">//</span>
+<span class="rem">//==============================================================</span>
+
+<span class="kwrd">using</span> System;
+<span class="kwrd">using</span> System.Runtime.InteropServices;
+
+<span class="kwrd">namespace</span> SharpDSP
+{
+    <span class="kwrd">unsafe</span> <span class="kwrd">public</span> <span class="kwrd">struct</span> LocalOscillator
+    {
+        <span class="preproc">#region</span> <span class="kwrd">private</span> members
+
+        <span class="kwrd">private</span> <span class="kwrd">double</span> frequencyTone;
+        <span class="kwrd">private</span> <span class="kwrd">double</span> phaseTone;
+        <span class="kwrd">private</span> <span class="kwrd">float</span> magnitudeTone;
+        <span class="kwrd">private</span> <span class="kwrd">double</span> stepTone;
+        <span class="kwrd">private</span> <span class="kwrd">double</span> CosN;
+        <span class="kwrd">private</span> <span class="kwrd">double</span> SinN;
+        <span class="kwrd">private</span> <span class="kwrd">float</span> samplerate;
+    
+        <span class="preproc">#endregion</span>
+        
+        <span class="preproc">#region</span> Constructor
+
+        <span class="kwrd">public</span> LocalOscillator(<span class="kwrd">double</span> frequency, <span class="kwrd">double</span> phase, <span class="kwrd">double</span> magnitude, <span class="kwrd">double</span> sampleRate)
+        {
+            <span class="kwrd">this</span>.frequencyTone = frequency / sampleRate;
+            <span class="kwrd">this</span>.magnitudeTone = (<span class="kwrd">float</span>)magnitude;
+            <span class="kwrd">this</span>.stepTone = <span class="kwrd">this</span>.frequencyTone * Math.PI * 2.0;
+            <span class="kwrd">this</span>.phaseTone = phase;
+            <span class="kwrd">this</span>.CosN = 0;
+            <span class="kwrd">this</span>.SinN = 0;
+            <span class="kwrd">this</span>.samplerate = (<span class="kwrd">float</span>)sampleRate;            
+        }
+
+        <span class="preproc">#endregion</span>
+
+        <span class="preproc">#region</span> Public members
+
+        <span class="kwrd">public</span> <span class="kwrd">void</span> DoMixer(<span class="kwrd">float</span>* realin, <span class="kwrd">float</span>* imagin, <span class="kwrd">float</span>* realout, <span class="kwrd">float</span>* imagout, <span class="kwrd">int</span> length)
+        {
+            <span class="kwrd">for</span> (<span class="kwrd">int</span> i = 0; i &lt; length; i++)
+            {
+                <span class="kwrd">this</span>.CosN = Math.Cos(<span class="kwrd">this</span>.phaseTone);
+                <span class="kwrd">this</span>.SinN = Math.Sin(<span class="kwrd">this</span>.phaseTone);
+                
+                realout[i] = (<span class="kwrd">float</span>)((<span class="kwrd">this</span>.CosN * realin[i]) - (<span class="kwrd">this</span>.SinN * imagin[i])) * <span class="kwrd">this</span>.magnitudeTone;
+                imagout[i] = (<span class="kwrd">float</span>)((<span class="kwrd">this</span>.CosN * imagin[i]) + (<span class="kwrd">this</span>.SinN * realin[i])) * <span class="kwrd">this</span>.magnitudeTone;
+                
+                <span class="kwrd">this</span>.phaseTone += <span class="kwrd">this</span>.stepTone;
+            }
+        }
+        
+        <span class="kwrd">public</span> <span class="kwrd">void</span> ChangeFrequency(<span class="kwrd">float</span> newfreq)
+        {
+            <span class="kwrd">this</span>.frequencyTone = newfreq / <span class="kwrd">this</span>.samplerate;
+            <span class="kwrd">this</span>.stepTone = <span class="kwrd">this</span>.frequencyTone * Math.PI * 2.0;
+        }    
+        
+        <span class="preproc">#endregion</span>
+
+    }
+
+}
+</pre>
