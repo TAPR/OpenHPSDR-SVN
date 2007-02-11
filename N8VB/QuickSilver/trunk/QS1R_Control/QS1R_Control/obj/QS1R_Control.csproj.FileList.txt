@@ -1,0 +1,7 @@
+bin\Debug\QS1R_Control.exe
+bin\Debug\QS1R_Control.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\QS1R_Control.MainForm.resources
+obj\Debug\QS1R_Control.csproj.GenerateResource.Cache
+obj\Debug\QS1R_Control.exe
+obj\Debug\QS1R_Control.pdb

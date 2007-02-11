@@ -1,0 +1,70 @@
+Quartus II Archive log --	C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.qarlog
+
+Archive:	C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.qar
+Date:		Wed Jan 17 09:06:23 2007
+Quartus II		6.1 Build 201 11/27/2006 SJ Web Edition
+
+	=========== Files Selected: ===========
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/RegisterX.v
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/SPI_REGS.v
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/cordic.v
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/cordic_stage.v
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/a_gray2bin_kdb.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/a_graycounter_i27.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/a_graycounter_j27.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/a_graycounter_o96.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/alt_synch_pipe_0e8.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/alt_synch_pipe_1e8.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/alt_synch_pipe_2e8.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/alt_synch_pipe_vd8.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/altsyncram_7b11.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/altsyncram_bb11.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/altsyncram_hve1.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/altsyncram_lve1.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/dcfifo_8bi1.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/dcfifo_o4e1.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/dffpipe_oe9.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/dffpipe_pe9.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/dffpipe_qe9.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/dffpipe_re9.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/dffpipe_se9.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/fpga_top.cbx.xml
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/fpga_top.qpf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/mult_dq01.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/mult_or01.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/mult_pr01.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/mult_qr01.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/db/mult_sr01.tdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/dc_offset_correct.v
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/dec2Fir.v
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.asm.rpt
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.cdf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.done
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.dpf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.fit.rpt
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.fit.smsg
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.fit.summary
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.flow.rpt
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.map.rpt
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.map.smsg
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.map.summary
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.merge.rpt
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.pin
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.pof
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.qsf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.qws
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.rbf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.sof
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.tan.rpt
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.tan.summary
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/fpga_top.v
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/phase_accumulator.v
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/tx_fifo.bsf
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/tx_fifo.v
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/tx_fifo_bb.v
+C:/Data/QS/QuickSilver/trunk/QS1R_AB_QUARTUS/QS1R_AB_CYCII/tx_fifo_inst.v
+c:/altera/61web/quartus/bin/assignment_defaults.qdf
+	======= Total: 59 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

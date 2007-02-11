@@ -1,0 +1,2696 @@
+Version 6.1 Build 201 11/27/2006 SJ Web Edition
+11
+808
+OFF
+OFF
+OFF
+OFF
+OFF
+FV_OFF
+Level2
+0
+0
+VRSM_ON
+VHSM_ON
+0
+-- Start Partition --
+-- End Partition --
+-- Start Library Paths --
+..|..|..|..|..|..|altera|61WEB|ip|fir_compiler|lib|
+..|..|..|..|..|..|altera|61WEB|ip|cic|lib|
+..|..|..|..|..|..|altera|61WEB|ip|nco|lib|
+-- End Library Paths --
+-- Start VHDL Libraries --
+-- End VHDL Libraries --
+# entity
+SPI_REGS
+# storage
+db|fpga_top.(1).cnf
+db|fpga_top.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+SPI_REGS.v
+af198c3f2cb61c2d510aaa27fdde61c
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+WIDTH
+32
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+SPI_REGS:spi_regs
+}
+# end
+# entity
+RegisterX
+# storage
+db|fpga_top.(2).cnf
+db|fpga_top.(2).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+RegisterX.v
+4ac5199e07eb4377666219e6e486be7
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+my_address
+0000001
+PARAMETER_UNSIGNED_BIN
+USR
+WIDTH
+32
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+RegisterX:freqsetreg
+}
+# end
+# entity
+RegisterX
+# storage
+db|fpga_top.(3).cnf
+db|fpga_top.(3).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+RegisterX.v
+4ac5199e07eb4377666219e6e486be7
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+my_address
+0000010
+PARAMETER_UNSIGNED_BIN
+USR
+WIDTH
+32
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+RegisterX:dcoffsetreg
+}
+# end
+# entity
+phase_accumulator
+# storage
+db|fpga_top.(4).cnf
+db|fpga_top.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+phase_accumulator.v
+fd2c9e5b76865631dab2f2410956790
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+RESOLUTION
+32
+PARAMETER_SIGNED_DEC
+DEF
+}
+# hierarchies {
+phase_accumulator:rx_phase_accumulator
+}
+# end
+# entity
+cordic
+# storage
+db|fpga_top.(5).cnf
+db|fpga_top.(5).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic.v
+6b988ca516569fcf4127c4d568deb0a3
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+20
+PARAMETER_SIGNED_DEC
+DEF
+PHASE_WIDTH
+20
+PARAMETER_SIGNED_DEC
+DEF
+}
+# hierarchies {
+cordic:rx_cordic
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(6).cnf
+db|fpga_top.(6).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+0
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage0
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(7).cnf
+db|fpga_top.(7).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+1
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage1
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(8).cnf
+db|fpga_top.(8).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+2
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage2
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(9).cnf
+db|fpga_top.(9).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+3
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage3
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(10).cnf
+db|fpga_top.(10).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+4
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage4
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(11).cnf
+db|fpga_top.(11).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+5
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage5
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(12).cnf
+db|fpga_top.(12).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+6
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage6
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(13).cnf
+db|fpga_top.(13).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+7
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage7
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(14).cnf
+db|fpga_top.(14).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+8
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage8
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(15).cnf
+db|fpga_top.(15).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+9
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage9
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(16).cnf
+db|fpga_top.(16).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+10
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage10
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(17).cnf
+db|fpga_top.(17).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+11
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage11
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(18).cnf
+db|fpga_top.(18).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+12
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage12
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(19).cnf
+db|fpga_top.(19).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+13
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage13
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(20).cnf
+db|fpga_top.(20).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+14
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage14
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(21).cnf
+db|fpga_top.(21).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+15
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage15
+}
+# end
+# entity
+cordic_stage
+# storage
+db|fpga_top.(22).cnf
+db|fpga_top.(22).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+cordic_stage.v
+396371f149381a67ccf0bd8de5ac3d1
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# user_parameter {
+CORDIC_WIDTH
+22
+PARAMETER_SIGNED_DEC
+USR
+PHASE_WIDTH
+19
+PARAMETER_SIGNED_DEC
+USR
+SHIFT
+16
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+cordic:rx_cordic|cordic_stage:cordic_stage16
+}
+# end
+# entity
+tx_fifo
+# storage
+db|fpga_top.(24).cnf
+db|fpga_top.(24).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+tx_fifo.v
+61fb24b63816db929f0dcfa2febd380
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# hierarchies {
+tx_fifo:tx_fifo_i
+tx_fifo:tx_fifo_q
+}
+# end
+# entity
+dcfifo
+# storage
+db|fpga_top.(25).cnf
+db|fpga_top.(25).cnf
+# case_insensitive
+# source_file
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|dcfifo.tdf
+415e8dd6c43c694340fb20e6318c42
+6
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+32
+PARAMETER_SIGNED_DEC
+USR
+LPM_NUMWORDS
+512
+PARAMETER_SIGNED_DEC
+USR
+LPM_WIDTHU
+9
+PARAMETER_SIGNED_DEC
+USR
+LPM_SHOWAHEAD
+OFF
+PARAMETER_UNKNOWN
+USR
+UNDERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+OVERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+USE_EAB
+ON
+PARAMETER_UNKNOWN
+USR
+ADD_RAM_OUTPUT_REGISTER
+OFF
+PARAMETER_UNKNOWN
+DEF
+DELAY_RDUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+DELAY_WRUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+RDSYNC_DELAYPIPE
+4
+PARAMETER_SIGNED_DEC
+USR
+WRSYNC_DELAYPIPE
+4
+PARAMETER_SIGNED_DEC
+USR
+CLOCKS_ARE_SYNCHRONIZED
+FALSE
+PARAMETER_UNKNOWN
+DEF
+MAXIMIZE_SPEED
+5
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+dcfifo_8bi1
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+wrusedw
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrempty
+-1
+3
+wrclk
+-1
+3
+rdusedw
+-1
+3
+rdreq
+-1
+3
+rdfull
+-1
+3
+rdempty
+-1
+3
+rdclk
+-1
+3
+q
+-1
+3
+data
+-1
+3
+aclr
+-1
+3
+}
+# include_file {
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|a_graycounter.inc
+6bb463da5ec6451f39fdb64aba52ffc0
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|alt_sync_fifo.inc
+f4c68b9daca4a0e5389631895df30d0
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|lpm_counter.inc
+7f888b135ddf66f0653c44cb18ac5
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|altdpram.inc
+99d442b5b66c88db4daf94d99c6e4e77
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|a_fefifo.inc
+c8498561e0bdc47f87b5548333d65f50
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|a_gray2bin.inc
+2466d892d81838e113e13f4e76e71f2
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|dffpipe.inc
+8dfdb676c11c7bcef0694118a05ea2d
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|altsyncram_fifo.inc
+12f7d8c61da985ee5330de43a169e
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+..|..|..|..|..|..|altera|61web|quartus|libraries|megafunctions|aglobal61.inc
+b513fb574ceb8f5886cd4ba429e82ec
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component
+}
+# end
+# entity
+dcfifo_8bi1
+# storage
+db|fpga_top.(26).cnf
+db|fpga_top.(26).cnf
+# case_insensitive
+# source_file
+db|dcfifo_8bi1.tdf
+446f3e8f7efb49390871b94c1585bf
+6
+# used_port {
+wrusedw8
+-1
+3
+wrusedw7
+-1
+3
+wrusedw6
+-1
+3
+wrusedw5
+-1
+3
+wrusedw4
+-1
+3
+wrusedw3
+-1
+3
+wrusedw2
+-1
+3
+wrusedw1
+-1
+3
+wrusedw0
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrempty
+-1
+3
+wrclk
+-1
+3
+rdusedw8
+-1
+3
+rdusedw7
+-1
+3
+rdusedw6
+-1
+3
+rdusedw5
+-1
+3
+rdusedw4
+-1
+3
+rdusedw3
+-1
+3
+rdusedw2
+-1
+3
+rdusedw1
+-1
+3
+rdusedw0
+-1
+3
+rdreq
+-1
+3
+rdfull
+-1
+3
+rdempty
+-1
+3
+rdclk
+-1
+3
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q31
+-1
+3
+q30
+-1
+3
+q3
+-1
+3
+q29
+-1
+3
+q28
+-1
+3
+q27
+-1
+3
+q26
+-1
+3
+q25
+-1
+3
+q24
+-1
+3
+q23
+-1
+3
+q22
+-1
+3
+q21
+-1
+3
+q20
+-1
+3
+q2
+-1
+3
+q19
+-1
+3
+q18
+-1
+3
+q17
+-1
+3
+q16
+-1
+3
+q15
+-1
+3
+q14
+-1
+3
+q13
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+data9
+-1
+3
+data8
+-1
+3
+data7
+-1
+3
+data6
+-1
+3
+data5
+-1
+3
+data4
+-1
+3
+data31
+-1
+3
+data30
+-1
+3
+data3
+-1
+3
+data29
+-1
+3
+data28
+-1
+3
+data27
+-1
+3
+data26
+-1
+3
+data25
+-1
+3
+data24
+-1
+3
+data23
+-1
+3
+data22
+-1
+3
+data21
+-1
+3
+data20
+-1
+3
+data2
+-1
+3
+data19
+-1
+3
+data18
+-1
+3
+data17
+-1
+3
+data16
+-1
+3
+data15
+-1
+3
+data14
+-1
+3
+data13
+-1
+3
+data12
+-1
+3
+data11
+-1
+3
+data10
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+aclr
+-1
+3
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated
+}
+# end
+# entity
+a_gray2bin_kdb
+# storage
+db|fpga_top.(27).cnf
+db|fpga_top.(27).cnf
+# case_insensitive
+# source_file
+db|a_gray2bin_kdb.tdf
+716e945ddf61c260e1a8bcbbcb0b1d6
+6
+# used_port {
+gray9
+-1
+3
+gray8
+-1
+3
+gray7
+-1
+3
+gray6
+-1
+3
+gray5
+-1
+3
+gray4
+-1
+3
+gray3
+-1
+3
+gray2
+-1
+3
+gray1
+-1
+3
+gray0
+-1
+3
+bin9
+-1
+3
+bin8
+-1
+3
+bin7
+-1
+3
+bin6
+-1
+3
+bin5
+-1
+3
+bin4
+-1
+3
+bin3
+-1
+3
+bin2
+-1
+3
+bin1
+-1
+3
+bin0
+-1
+3
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin
+}
+# end
+# entity
+a_graycounter_o96
+# storage
+db|fpga_top.(28).cnf
+db|fpga_top.(28).cnf
+# case_insensitive
+# source_file
+db|a_graycounter_o96.tdf
+90ef438fef31c8b699cdab9554a01d43
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+aclr
+-1
+3
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_graycounter_o96:rdptr_g1p
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_graycounter_o96:rdptr_g1p
+}
+# end
+# entity
+a_graycounter_j27
+# storage
+db|fpga_top.(29).cnf
+db|fpga_top.(29).cnf
+# case_insensitive
+# source_file
+db|a_graycounter_j27.tdf
+ce253ef7245555ef6f5814d9a947638
+6
+# used_port {
+cnt_en
+-1
+3
+clock
+-1
+3
+aclr
+-1
+3
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_graycounter_j27:wrptr_g1p
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_graycounter_j27:wrptr_g1p
+}
+# end
+# entity
+a_graycounter_i27
+# storage
+db|fpga_top.(30).cnf
+db|fpga_top.(30).cnf
+# case_insensitive
+# source_file
+db|a_graycounter_i27.tdf
+123e1af14a76c659e4efba5e9ccb2b31
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+aclr
+-1
+3
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_graycounter_i27:wrptr_gp
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|a_graycounter_i27:wrptr_gp
+}
+# end
+# entity
+altsyncram_7b11
+# storage
+db|fpga_top.(31).cnf
+db|fpga_top.(31).cnf
+# case_insensitive
+# source_file
+db|altsyncram_7b11.tdf
+bf1617969c7759795ea8d7e4345b1b
+6
+# used_port {
+wren_a
+-1
+3
+q_b9
+-1
+3
+q_b8
+-1
+3
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b31
+-1
+3
+q_b30
+-1
+3
+q_b3
+-1
+3
+q_b29
+-1
+3
+q_b28
+-1
+3
+q_b27
+-1
+3
+q_b26
+-1
+3
+q_b25
+-1
+3
+q_b24
+-1
+3
+q_b23
+-1
+3
+q_b22
+-1
+3
+q_b21
+-1
+3
+q_b20
+-1
+3
+q_b2
+-1
+3
+q_b19
+-1
+3
+q_b18
+-1
+3
+q_b17
+-1
+3
+q_b16
+-1
+3
+q_b15
+-1
+3
+q_b14
+-1
+3
+q_b13
+-1
+3
+q_b12
+-1
+3
+q_b11
+-1
+3
+q_b10
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a9
+-1
+3
+data_a8
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a31
+-1
+3
+data_a30
+-1
+3
+data_a3
+-1
+3
+data_a29
+-1
+3
+data_a28
+-1
+3
+data_a27
+-1
+3
+data_a26
+-1
+3
+data_a25
+-1
+3
+data_a24
+-1
+3
+data_a23
+-1
+3
+data_a22
+-1
+3
+data_a21
+-1
+3
+data_a20
+-1
+3
+data_a2
+-1
+3
+data_a19
+-1
+3
+data_a18
+-1
+3
+data_a17
+-1
+3
+data_a16
+-1
+3
+data_a15
+-1
+3
+data_a14
+-1
+3
+data_a13
+-1
+3
+data_a12
+-1
+3
+data_a11
+-1
+3
+data_a10
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken1
+-1
+3
+clock1
+-1
+3
+clock0
+-1
+3
+addressstall_b
+-1
+3
+address_b8
+-1
+3
+address_b7
+-1
+3
+address_b6
+-1
+3
+address_b5
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a8
+-1
+3
+address_a7
+-1
+3
+address_a6
+-1
+3
+address_a5
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr1
+-1
+3
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|altsyncram_7b11:fifo_ram
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|altsyncram_7b11:fifo_ram
+}
+# end
+# entity
+altsyncram_hve1
+# storage
+db|fpga_top.(32).cnf
+db|fpga_top.(32).cnf
+# case_insensitive
+# source_file
+db|altsyncram_hve1.tdf
+b45bdf7fb7def58f0eb41faf8d22a81
+6
+# user_parameter {
+PORT_A_ADDRESS_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_A_BYTE_ENABLE_MASK_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_A_DATA_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_B_ADDRESS_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_B_BYTE_ENABLE_MASK_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_B_DATA_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+}
+# used_port {
+wren_b
+-1
+3
+q_a9
+-1
+3
+q_a8
+-1
+3
+q_a7
+-1
+3
+q_a6
+-1
+3
+q_a5
+-1
+3
+q_a4
+-1
+3
+q_a31
+-1
+3
+q_a30
+-1
+3
+q_a3
+-1
+3
+q_a29
+-1
+3
+q_a28
+-1
+3
+q_a27
+-1
+3
+q_a26
+-1
+3
+q_a25
+-1
+3
+q_a24
+-1
+3
+q_a23
+-1
+3
+q_a22
+-1
+3
+q_a21
+-1
+3
+q_a20
+-1
+3
+q_a2
+-1
+3
+q_a19
+-1
+3
+q_a18
+-1
+3
+q_a17
+-1
+3
+q_a16
+-1
+3
+q_a15
+-1
+3
+q_a14
+-1
+3
+q_a13
+-1
+3
+q_a12
+-1
+3
+q_a11
+-1
+3
+q_a10
+-1
+3
+q_a1
+-1
+3
+q_a0
+-1
+3
+data_b9
+-1
+3
+data_b8
+-1
+3
+data_b7
+-1
+3
+data_b6
+-1
+3
+data_b5
+-1
+3
+data_b4
+-1
+3
+data_b31
+-1
+3
+data_b30
+-1
+3
+data_b3
+-1
+3
+data_b29
+-1
+3
+data_b28
+-1
+3
+data_b27
+-1
+3
+data_b26
+-1
+3
+data_b25
+-1
+3
+data_b24
+-1
+3
+data_b23
+-1
+3
+data_b22
+-1
+3
+data_b21
+-1
+3
+data_b20
+-1
+3
+data_b2
+-1
+3
+data_b19
+-1
+3
+data_b18
+-1
+3
+data_b17
+-1
+3
+data_b16
+-1
+3
+data_b15
+-1
+3
+data_b14
+-1
+3
+data_b13
+-1
+3
+data_b12
+-1
+3
+data_b11
+-1
+3
+data_b10
+-1
+3
+data_b1
+-1
+3
+data_b0
+-1
+3
+clocken1
+-1
+3
+clocken0
+-1
+3
+clock1
+-1
+3
+clock0
+-1
+3
+addressstall_a
+-1
+3
+address_b8
+-1
+3
+address_b7
+-1
+3
+address_b6
+-1
+3
+address_b5
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a8
+-1
+3
+address_a7
+-1
+3
+address_a6
+-1
+3
+address_a5
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+aclr1
+-1
+3
+wren_a
+-1
+1
+data_a9
+-1
+2
+data_a8
+-1
+2
+data_a7
+-1
+2
+data_a6
+-1
+2
+data_a5
+-1
+2
+data_a4
+-1
+2
+data_a31
+-1
+2
+data_a30
+-1
+2
+data_a3
+-1
+2
+data_a29
+-1
+2
+data_a28
+-1
+2
+data_a27
+-1
+2
+data_a26
+-1
+2
+data_a25
+-1
+2
+data_a24
+-1
+2
+data_a23
+-1
+2
+data_a22
+-1
+2
+data_a21
+-1
+2
+data_a20
+-1
+2
+data_a2
+-1
+2
+data_a19
+-1
+2
+data_a18
+-1
+2
+data_a17
+-1
+2
+data_a16
+-1
+2
+data_a15
+-1
+2
+data_a14
+-1
+2
+data_a13
+-1
+2
+data_a12
+-1
+2
+data_a11
+-1
+2
+data_a10
+-1
+2
+data_a1
+-1
+2
+data_a0
+-1
+2
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|altsyncram_7b11:fifo_ram|altsyncram_hve1:altsyncram3
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|altsyncram_7b11:fifo_ram|altsyncram_hve1:altsyncram3
+}
+# end
+# entity
+dffpipe_oe9
+# storage
+db|fpga_top.(33).cnf
+db|fpga_top.(33).cnf
+# case_insensitive
+# source_file
+db|dffpipe_oe9.tdf
+3a83a6c3de7104557feb937e0aa598
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clrn
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|dffpipe_oe9:rs_brp
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|dffpipe_oe9:rs_bwp
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|dffpipe_oe9:ws_brp
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|dffpipe_oe9:ws_bwp
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|dffpipe_oe9:rs_brp
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|dffpipe_oe9:rs_bwp
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|dffpipe_oe9:ws_brp
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|dffpipe_oe9:ws_bwp
+}
+# end
+# entity
+alt_synch_pipe_vd8
+# storage
+db|fpga_top.(34).cnf
+db|fpga_top.(34).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_vd8.tdf
+a2a12f90f3688ff1e727b0d26a255e76
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clrn
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp
+}
+# end
+# entity
+dffpipe_pe9
+# storage
+db|fpga_top.(35).cnf
+db|fpga_top.(35).cnf
+# case_insensitive
+# source_file
+db|dffpipe_pe9.tdf
+b4784f918a08b393e35a367574440
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clrn
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6
+}
+# end
+# entity
+alt_synch_pipe_0e8
+# storage
+db|fpga_top.(36).cnf
+db|fpga_top.(36).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_0e8.tdf
+99408c45b5eefbf5b117bfc1d73664f
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clrn
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_0e8:ws_dgrp
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_0e8:ws_dgrp
+}
+# end
+# entity
+dffpipe_qe9
+# storage
+db|fpga_top.(37).cnf
+db|fpga_top.(37).cnf
+# case_insensitive
+# source_file
+db|dffpipe_qe9.tdf
+9b3880ff4b82edfc4efa411b82f94c8
+6
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clrn
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_0e8:ws_dgrp|dffpipe_qe9:dffpipe9
+tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_0e8:ws_dgrp|dffpipe_qe9:dffpipe9
+}
+# end
+# entity
+CIC6_520
+# storage
+db|fpga_top.(23).cnf
+db|fpga_top.(23).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+..|CIC|CIC6_520.v
+1f4fc3889e492bfc95566949203049f3
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# hierarchies {
+CIC6_520:f1_inst1_I
+CIC6_520:f1_inst1_Q
+}
+# end
+# entity
+fpga_top
+# storage
+db|fpga_top.(0).cnf
+db|fpga_top.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+fpga_top.v
+aa3864adc09870b271ed47564a102f56
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# hierarchies {
+|
+}
+# end
+# complete
+

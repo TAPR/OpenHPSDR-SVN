@@ -1,0 +1,409 @@
+                              1 ;;; -*- asm -*-
+                              2 ;;;
+                              3 ;;; HPSDR/OZY - High Performance Software Defined Radio, OZY Firmware
+                              4 ;;;
+                              5 ;;; Adapted from USRP firmware 07/10/2006 by Phil Covington N8VB
+                              6 ;;;
+                              7 ;;; Copyright 2003 Free Software Foundation, Inc.
+                              8 ;;; 
+                              9 ;;; This file is part of GNU Radio
+                             10 ;;; 
+                             11 ;;; GNU Radio is free software; you can redistribute it and/or modify
+                             12 ;;; it under the terms of the GNU General Public License as published by
+                             13 ;;; the Free Software Foundation; either version 2, or (at your option)
+                             14 ;;; any later version.
+                             15 ;;; 
+                             16 ;;; GNU Radio is distributed in the hope that it will be useful,
+                             17 ;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+                             18 ;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                             19 ;;; GNU General Public License for more details.
+                             20 ;;; 
+                             21 ;;; You should have received a copy of the GNU General Public License
+                             22 ;;; along with GNU Radio; see the file COPYING.  If not, write to
+                             23 ;;; the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+                             24 ;;; Boston, MA 02111-1307, USA.
+                             25 ;;;
+                             26 	
+                             27 ;;; USB Descriptor table for the HPSDR
+                             28 ;;; 
+                             29 ;;; We're a high-speed only device (480 Mb/sec) with 1 configuration
+                             30 ;;; and 3 interfaces.  
+                             31 ;;; 
+                             32 ;;;	interface 0:	command and status (ep0 COMMAND)
+                             33 ;;;	interface 1:	Transmit path (ep2 OUT BULK)
+                             34 ;;;	interface 2:	Receive path (ep6 IN BULK)
+                             35 
+                             36 	.module usb_descriptors
+                             37 	
+                    FFFE     38 	VID_FREE	 = 0xfffe	; Free Software Folks
+                    0007     39 	PID_USRP	 = 0x0007	; HPSDR
+                             40 
+                             41 	;; We distinguish configured from unconfigured USRPs using the Device ID.
+                             42 	;; If the MSB of the DID is 0, the device is unconfigured.
+                             43 	;; The LSB of the DID is reserved for hardware revs.
+                             44 	
+                    0100     45 	DID_USRP	 = 0x0100	; Device ID (bcd)
+                             46 
+                             47 	
+                    0001     48 	DSCR_DEVICE	 =   1	; Descriptor type: Device
+                    0002     49 	DSCR_CONFIG	 =   2	; Descriptor type: Configuration
+                    0003     50 	DSCR_STRING	 =   3	; Descriptor type: String
+                    0004     51 	DSCR_INTRFC	 =   4	; Descriptor type: Interface
+                    0005     52 	DSCR_ENDPNT	 =   5	; Descriptor type: Endpoint
+                    0006     53 	DSCR_DEVQUAL	 =   6	; Descriptor type: Device Qualifier
+                             54 	
+                    0012     55 	DSCR_DEVICE_LEN	 =  18
+                    0009     56 	DSCR_CONFIG_LEN  =   9
+                    0009     57 	DSCR_INTRFC_LEN  =   9
+                    0007     58 	DSCR_ENDPNT_LEN  =   7
+                    000A     59 	DSCR_DEVQUAL_LEN =  10
+                             60 	
+                    0000     61 	ET_CONTROL	 =   0	; Endpoint type: Control
+                    0001     62 	ET_ISO		 =   1	; Endpoint type: Isochronous
+                    0002     63 	ET_BULK		 =   2	; Endpoint type: Bulk
+                    0003     64 	ET_INT		 =   3	; Endpoint type: Interrupt
+                             65 	
+                             66 	
+                             67 	;; configuration attributes
+                    0040     68 	bmSELF_POWERED	=	1 << 6
+                             69 
+                             70 ;;; --------------------------------------------------------
+                             71 ;;;	external ram data
+                             72 ;;;--------------------------------------------------------
+                             73 	
+                             74 	.area USBDESCSEG    (XDATA)
+                             75 	
+                             76 ;;; ----------------------------------------------------------------
+                             77 ;;; descriptors used when operating at high speed (480Mb/sec)
+                             78 ;;; ----------------------------------------------------------------
+                             79 	
+   0000                      80 	.even	; descriptors must be 2-byte aligned for SUDPTR{H,L} to work
+                             81 
+                             82 	;; The .even directive isn't really honored by the linker.  Bummer!
+                             83 	;; (There's no way to specify an alignment requirement for a given area,
+                             84 	;; hence when they're concatenated together, even doesn't work.)
+                             85 	;; 
+                             86 	;; We work around this by telling the linker to put USBDESCSEG
+                             87 	;; at 0xE000 absolute.  This means that the maximimum length of this
+                             88 	;; segment is 480 bytes, leaving room for the two hash slots 
+                             89 	;; at 0xE1EO to 0xE1FF.  
+                             90 	;; 
+                             91 	;; As of July 7, 2004, this segment is 326 bytes long
+                             92 	
+   0000                      93 _high_speed_device_descr::
+   0000 12                   94 	.db	DSCR_DEVICE_LEN
+   0001 01                   95 	.db	DSCR_DEVICE
+   0002 00                   96 	.db	<0x0200		; Specification version (LSB)
+   0003 02                   97 	.db	>0x0200		; Specification version (MSB)
+   0004 FF                   98 	.db	0xff		; device class (vendor specific)
+   0005 FF                   99 	.db	0xff		; device subclass (vendor specific)
+   0006 FF                  100 	.db	0xff		; device protocol (vendor specific)
+   0007 40                  101 	.db	64		; bMaxPacketSize0 for endpoint 0
+   0008 FE                  102 	.db	<VID_FREE	; idVendor
+   0009 FF                  103 	.db	>VID_FREE	; idVendor
+   000A 07                  104 	.db	<PID_USRP	; idProduct
+   000B 00                  105 	.db	>PID_USRP	; idProduct
+   000C                     106 _usb_desc_hw_rev_binary_patch_location_0::
+   000C 00                  107 	.db	<DID_USRP	; bcdDevice
+   000D 01                  108 	.db	>DID_USRP	; bcdDevice
+   000E 01                  109 	.db	SI_VENDOR	; iManufacturer (string index)
+   000F 02                  110 	.db	SI_PRODUCT	; iProduct (string index)
+   0010 06                  111 	.db	SI_SERIAL	; iSerial number (string index)
+   0011 01                  112 	.db	1		; bNumConfigurations
+                            113 	
+                            114 ;;; describes the other speed (12Mb/sec)
+   0012                     115 	.even
+   0012                     116 _high_speed_devqual_descr::
+   0012 0A                  117 	.db	DSCR_DEVQUAL_LEN
+   0013 06                  118 	.db	DSCR_DEVQUAL
+   0014 00                  119 	.db	<0x0200		; bcdUSB (LSB)
+   0015 02                  120 	.db	>0x0200		; bcdUSB (MSB)
+   0016 FF                  121 	.db	0xff		; bDeviceClass
+   0017 FF                  122 	.db	0xff		; bDeviceSubClass
+   0018 FF                  123 	.db	0xff		; bDeviceProtocol
+   0019 40                  124 	.db	64		; bMaxPacketSize0
+   001A 01                  125 	.db	1		; bNumConfigurations (one config at 12Mb/sec)
+   001B 00                  126 	.db	0		; bReserved
+                            127 	
+   001C                     128 	.even
+   001C                     129 _high_speed_config_descr::	
+   001C 09                  130 	.db	DSCR_CONFIG_LEN
+   001D 02                  131 	.db	DSCR_CONFIG
+   001E 32                  132 	.db	<(_high_speed_config_descr_end - _high_speed_config_descr) ; LSB
+   001F 00                  133 	.db	>(_high_speed_config_descr_end - _high_speed_config_descr) ; MSB
+   0020 03                  134 	.db	3		; bNumInterfaces
+   0021 01                  135 	.db	1		; bConfigurationValue
+   0022 00                  136 	.db	0		; iConfiguration
+   0023 C0                  137 	.db	0x80 | bmSELF_POWERED ; bmAttributes
+   0024 00                  138 	.db	0		; bMaxPower
+                            139 
+                            140 	;; interface descriptor 0 (command & status, ep0 COMMAND)
+                            141 	
+   0025 09                  142 	.db	DSCR_INTRFC_LEN
+   0026 04                  143 	.db	DSCR_INTRFC
+   0027 00                  144 	.db	0		; bInterfaceNumber (zero based)
+   0028 00                  145 	.db	0		; bAlternateSetting
+   0029 00                  146 	.db	0		; bNumEndpoints
+   002A FF                  147 	.db	0xff		; bInterfaceClass (vendor specific)
+   002B FF                  148 	.db	0xff		; bInterfaceSubClass (vendor specific)
+   002C FF                  149 	.db	0xff		; bInterfaceProtocol (vendor specific)
+   002D 03                  150 	.db	SI_COMMAND_AND_STATUS	; iInterface (description)
+                            151 
+                            152 	;; interface descriptor 1 (transmit path, ep2 OUT BULK)
+                            153 	
+   002E 09                  154 	.db	DSCR_INTRFC_LEN
+   002F 04                  155 	.db	DSCR_INTRFC
+   0030 01                  156 	.db	1		; bInterfaceNumber (zero based)
+   0031 00                  157 	.db	0		; bAlternateSetting
+   0032 01                  158 	.db	1		; bNumEndpoints
+   0033 FF                  159 	.db	0xff		; bInterfaceClass (vendor specific)
+   0034 FF                  160 	.db	0xff		; bInterfaceSubClass (vendor specific)
+   0035 FF                  161 	.db	0xff		; bInterfaceProtocol (vendor specific)
+   0036 04                  162 	.db	SI_TX_PATH	; iInterface (description)
+                            163 
+                            164 	;; interface 1's end point
+                            165 
+   0037 07                  166 	.db	DSCR_ENDPNT_LEN
+   0038 05                  167 	.db	DSCR_ENDPNT
+   0039 02                  168 	.db	0x02		; bEndpointAddress (ep 2 OUT)
+   003A 02                  169 	.db	ET_BULK		; bmAttributes
+   003B 00                  170 	.db	<512		; wMaxPacketSize (LSB)
+   003C 02                  171 	.db	>512		; wMaxPacketSize (MSB)
+   003D 00                  172 	.db	0		; bInterval (iso only)
+                            173 
+                            174 	;; interface descriptor 2 (receive path, ep6 IN BULK)
+                            175 	
+   003E 09                  176 	.db	DSCR_INTRFC_LEN
+   003F 04                  177 	.db	DSCR_INTRFC
+   0040 02                  178 	.db	2		; bInterfaceNumber (zero based)
+   0041 00                  179 	.db	0		; bAlternateSetting
+   0042 01                  180 	.db	1		; bNumEndpoints
+   0043 FF                  181 	.db	0xff		; bInterfaceClass (vendor specific)
+   0044 FF                  182 	.db	0xff		; bInterfaceSubClass (vendor specific)
+   0045 FF                  183 	.db	0xff		; bInterfaceProtocol (vendor specific)
+   0046 05                  184 	.db	SI_RX_PATH	; iInterface (description)
+                            185 
+                            186 	;; interface 2's end point
+                            187 
+   0047 07                  188 	.db	DSCR_ENDPNT_LEN
+   0048 05                  189 	.db	DSCR_ENDPNT
+   0049 86                  190 	.db	0x86		; bEndpointAddress (ep 6 IN)
+   004A 02                  191 	.db	ET_BULK		; bmAttributes
+   004B 00                  192 	.db	<512		; wMaxPacketSize (LSB)
+   004C 02                  193 	.db	>512		; wMaxPacketSize (MSB)
+   004D 00                  194 	.db	0		; bInterval (iso only)
+                            195 
+   004E                     196 _high_speed_config_descr_end:		
+                            197 
+                            198 ;;; ----------------------------------------------------------------
+                            199 ;;; descriptors used when operating at full speed (12Mb/sec)
+                            200 ;;; ----------------------------------------------------------------
+                            201 
+   004E                     202 	.even
+   004E                     203 _full_speed_device_descr::	
+   004E 12                  204 	.db	DSCR_DEVICE_LEN
+   004F 01                  205 	.db	DSCR_DEVICE
+   0050 00                  206 	.db	<0x0200		; Specification version (LSB)
+   0051 02                  207 	.db	>0x0200		; Specification version (MSB)
+   0052 FF                  208 	.db	0xff		; device class (vendor specific)
+   0053 FF                  209 	.db	0xff		; device subclass (vendor specific)
+   0054 FF                  210 	.db	0xff		; device protocol (vendor specific)
+   0055 40                  211 	.db	64		; bMaxPacketSize0 for endpoint 0
+   0056 FE                  212 	.db	<VID_FREE	; idVendor
+   0057 FF                  213 	.db	>VID_FREE	; idVendor
+   0058 07                  214 	.db	<PID_USRP	; idProduct
+   0059 00                  215 	.db	>PID_USRP	; idProduct
+   005A                     216 _usb_desc_hw_rev_binary_patch_location_1::
+   005A 00                  217 	.db	<DID_USRP	; bcdDevice
+   005B 01                  218 	.db	>DID_USRP	; bcdDevice
+   005C 01                  219 	.db	SI_VENDOR	; iManufacturer (string index)
+   005D 02                  220 	.db	SI_PRODUCT	; iProduct (string index)
+   005E 00                  221 	.db	SI_NONE		; iSerial number (None)
+   005F 01                  222 	.db	1		; bNumConfigurations
+                            223 	
+                            224 	
+                            225 ;;; describes the other speed (480Mb/sec)
+   0060                     226 	.even
+   0060                     227 _full_speed_devqual_descr::
+   0060 0A                  228 	.db	DSCR_DEVQUAL_LEN
+   0061 06                  229 	.db	DSCR_DEVQUAL
+   0062 00                  230 	.db	<0x0200		; bcdUSB
+   0063 02                  231 	.db	>0x0200		; bcdUSB
+   0064 FF                  232 	.db	0xff		; bDeviceClass
+   0065 FF                  233 	.db	0xff		; bDeviceSubClass
+   0066 FF                  234 	.db	0xff		; bDeviceProtocol
+   0067 40                  235 	.db	64		; bMaxPacketSize0
+   0068 01                  236 	.db	1		; bNumConfigurations (one config at 480Mb/sec)
+   0069 00                  237 	.db	0		; bReserved
+                            238 	
+   006A                     239 	.even
+   006A                     240 _full_speed_config_descr::	
+   006A 09                  241 	.db	DSCR_CONFIG_LEN
+   006B 02                  242 	.db	DSCR_CONFIG
+   006C 12                  243 	.db	<(_full_speed_config_descr_end - _full_speed_config_descr) ; LSB
+   006D 00                  244 	.db	>(_full_speed_config_descr_end - _full_speed_config_descr) ; MSB
+   006E 01                  245 	.db	1		; bNumInterfaces
+   006F 01                  246 	.db	1		; bConfigurationValue
+   0070 00                  247 	.db	0		; iConfiguration
+   0071 C0                  248 	.db	0x80 | bmSELF_POWERED ; bmAttributes
+   0072 00                  249 	.db	0		; bMaxPower
+                            250 
+                            251 	;; interface descriptor 0 (command & status, ep0 COMMAND)
+                            252 	
+   0073 09                  253 	.db	DSCR_INTRFC_LEN
+   0074 04                  254 	.db	DSCR_INTRFC
+   0075 00                  255 	.db	0		; bInterfaceNumber (zero based)
+   0076 00                  256 	.db	0		; bAlternateSetting
+   0077 00                  257 	.db	0		; bNumEndpoints
+   0078 FF                  258 	.db	0xff		; bInterfaceClass (vendor specific)
+   0079 FF                  259 	.db	0xff		; bInterfaceSubClass (vendor specific)
+   007A FF                  260 	.db	0xff		; bInterfaceProtocol (vendor specific)
+   007B 03                  261 	.db	SI_COMMAND_AND_STATUS	; iInterface (description)
+                            262 	
+   007C                     263 _full_speed_config_descr_end:	
+                            264 	
+                            265 ;;; ----------------------------------------------------------------
+                            266 ;;;			string descriptors
+                            267 ;;; ----------------------------------------------------------------
+                            268 
+   007C                     269 _nstring_descriptors::
+   007C 07                  270 	.db	(_string_descriptors_end - _string_descriptors) / 2
+                            271 
+   007D                     272 _string_descriptors::
+   007Dr8Cs00               273 	.db	<str0, >str0
+   007Fr92s00               274 	.db	<str1, >str1
+   0081rBAs00               275 	.db	<str2, >str2
+   0083rD2s00               276 	.db	<str3, >str3
+   0085rF4s00               277 	.db	<str4, >str4
+   0087r10s01               278 	.db	<str5, >str5
+   0089r2As01               279 	.db	<str6, >str6
+   008B                     280 _string_descriptors_end:
+                            281 
+                    0000    282 	SI_NONE = 0
+                            283 	;; str0 contains the language ID's.
+   008C                     284 	.even
+   008C 06                  285 str0:	.db	str0_end - str0
+   008D 03                  286 	.db	DSCR_STRING
+   008E 00                  287 	.db	0
+   008F 00                  288 	.db	0
+   0090 09                  289 	.db	<0x0409		; magic code for US English (LSB)
+   0091 04                  290 	.db	>0x0409		; magic code for US English (MSB)
+   0092                     291 str0_end:
+                            292 
+                    0001    293 	SI_VENDOR = 1
+   0092                     294 	.even
+   0092 28                  295 str1:	.db	str1_end - str1
+   0093 03                  296 	.db	DSCR_STRING
+   0094 46 00               297 	.db	'F, 0		; 16-bit unicode
+   0096 72 00               298 	.db	'r, 0
+   0098 65 00               299 	.db	'e, 0
+   009A 65 00               300 	.db	'e, 0
+   009C 20 00               301 	.db	' , 0
+   009E 53 00               302 	.db	'S, 0
+   00A0 6F 00               303 	.db	'o, 0
+   00A2 66 00               304 	.db	'f, 0
+   00A4 74 00               305 	.db	't, 0
+   00A6 77 00               306 	.db	'w, 0
+   00A8 61 00               307 	.db	'a, 0
+   00AA 72 00               308 	.db	'r, 0
+   00AC 65 00               309 	.db	'e, 0
+   00AE 20 00               310 	.db	' , 0
+   00B0 46 00               311 	.db	'F, 0
+   00B2 6F 00               312 	.db	'o, 0
+   00B4 6C 00               313 	.db	'l, 0
+   00B6 6B 00               314 	.db	'k, 0
+   00B8 73 00               315 	.db	's, 0
+   00BA                     316 str1_end:
+                            317 
+                    0002    318 	SI_PRODUCT = 2
+   00BA                     319 	.even
+   00BA 18                  320 str2:	.db	str2_end - str2
+   00BB 03                  321 	.db	DSCR_STRING
+   00BC 48 00               322 	.db	'H, 0
+   00BE 50 00               323 	.db	'P, 0
+   00C0 53 00               324 	.db	'S, 0
+   00C2 44 00               325 	.db	'D, 0
+   00C4 52 00               326 	.db	'R, 0
+   00C6 20 00               327 	.db	' , 0
+   00C8 52 00               328 	.db	'R, 0
+   00CA 65 00               329 	.db	'e, 0
+   00CC 76 00               330 	.db	'v, 0
+   00CE 20 00               331 	.db	' , 0
+   00D0                     332 _usb_desc_hw_rev_ascii_patch_location_0::
+   00D0 3F 00               333 	.db	'?, 0
+   00D2                     334 str2_end:
+                            335 
+                    0003    336 	SI_COMMAND_AND_STATUS = 3
+   00D2                     337 	.even
+   00D2 22                  338 str3:	.db	str3_end - str3
+   00D3 03                  339 	.db	DSCR_STRING
+   00D4 43 00               340 	.db	'C, 0
+   00D6 6F 00               341 	.db	'o, 0
+   00D8 6D 00               342 	.db	'm, 0
+   00DA 6D 00               343 	.db	'm, 0
+   00DC 61 00               344 	.db	'a, 0
+   00DE 6E 00               345 	.db	'n, 0
+   00E0 64 00               346 	.db	'd, 0
+   00E2 20 00               347 	.db	' , 0
+   00E4 26 00               348 	.db	'&, 0
+   00E6 20 00               349 	.db	' , 0
+   00E8 53 00               350 	.db	'S, 0
+   00EA 74 00               351 	.db	't, 0
+   00EC 61 00               352 	.db	'a, 0
+   00EE 74 00               353 	.db	't, 0
+   00F0 75 00               354 	.db	'u, 0
+   00F2 73 00               355 	.db	's, 0
+   00F4                     356 str3_end:
+                            357 
+                    0004    358 	SI_TX_PATH = 4
+   00F4                     359 	.even
+   00F4 1C                  360 str4:	.db	str4_end - str4
+   00F5 03                  361 	.db	DSCR_STRING
+   00F6 54 00               362 	.db	'T, 0
+   00F8 72 00               363 	.db	'r, 0
+   00FA 61 00               364 	.db	'a, 0
+   00FC 6E 00               365 	.db	'n, 0
+   00FE 73 00               366 	.db	's, 0
+   0100 6D 00               367 	.db	'm, 0
+   0102 69 00               368 	.db	'i, 0
+   0104 74 00               369 	.db	't, 0
+   0106 20 00               370 	.db	' , 0
+   0108 50 00               371 	.db	'P, 0
+   010A 61 00               372 	.db	'a, 0
+   010C 74 00               373 	.db	't, 0
+   010E 68 00               374 	.db	'h, 0
+   0110                     375 str4_end:
+                            376 
+                    0005    377 	SI_RX_PATH = 5
+   0110                     378 	.even
+   0110 1A                  379 str5:	.db	str5_end - str5
+   0111 03                  380 	.db	DSCR_STRING
+   0112 52 00               381 	.db	'R, 0
+   0114 65 00               382 	.db	'e, 0
+   0116 63 00               383 	.db	'c, 0
+   0118 65 00               384 	.db	'e, 0
+   011A 69 00               385 	.db	'i, 0
+   011C 76 00               386 	.db	'v, 0
+   011E 65 00               387 	.db	'e, 0
+   0120 20 00               388 	.db	' , 0
+   0122 50 00               389 	.db	'P, 0
+   0124 61 00               390 	.db	'a, 0
+   0126 74 00               391 	.db	't, 0
+   0128 68 00               392 	.db	'h, 0
+   012A                     393 str5_end:
+                            394 
+                    0006    395 	SI_SERIAL = 6
+   012A                     396 	.even
+   012A 12                  397 str6:	.db	str6_end - str6
+   012B 03                  398 	.db	DSCR_STRING
+   012C                     399 _usb_desc_serial_number_ascii::
+   012C 33 00               400 	.db	'3, 0
+   012E 2E 00               401 	.db	'., 0
+   0130 31 00               402 	.db	'1, 0
+   0132 34 00               403 	.db	'4, 0
+   0134 31 00               404 	.db	'1, 0
+   0136 35 00               405 	.db	'5, 0
+   0138 39 00               406 	.db	'9, 0
+   013A 33 00               407 	.db	'3, 0
+   013C                     408 str6_end:
+                            409 

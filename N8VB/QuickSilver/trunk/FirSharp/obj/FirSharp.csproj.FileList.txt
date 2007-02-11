@@ -1,0 +1,8 @@
+bin\Debug\FirSharp.exe
+bin\Debug\FirSharp.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\FirSharp.exe
+obj\Debug\FirSharp.pdb
+bin\Release\FirSharp.exe
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\FirSharp.exe

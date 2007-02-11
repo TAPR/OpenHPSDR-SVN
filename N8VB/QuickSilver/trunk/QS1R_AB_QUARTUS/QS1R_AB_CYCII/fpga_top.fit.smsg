@@ -1,0 +1,290 @@
+Info: *******************************************************************
+Info: Running Quartus II Fitter
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Fri Feb 09 19:27:10 2007
+Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off fpga_top -c fpga_top
+Info: Selected device EP2C8Q208C8 for design "fpga_top"
+Info: Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
+Info: Fitter is using the Classic Timing Analyzer
+Info: Timing requirements not specified -- optimizing circuit to achieve the following default global requirements
+    Info: Assuming a global fmax requirement of 1000 MHz
+    Info: Not setting a global tsu requirement
+    Info: Not setting a global tco requirement
+    Info: Not setting a global tpd requirement
+Info: Device migration not selected. If you intend to use device migration later, you may need to change the pin assignments as they may be incompatible with other devices
+    Info: Device EP2C5Q208C8 is compatible
+    Info: Device EP2C5Q208I8 is compatible
+    Info: Device EP2C8Q208I8 is compatible
+Info: Fitter converted 2 user pins into dedicated programming pins
+    Info: Pin ~ASDO~ is reserved at location 1
+    Info: Pin ~nCSO~ is reserved at location 2
+Info: Design uses memory blocks. Violating setup or hold times of memory block address registers for either read or write operations could cause memory contents to be corrupted. Make sure that all memory block address registers meet the setup and hold time requirements.
+Info: Automatically promoted node CLKA (placed in PIN 27 (CLK2, LVDSCLK1p, Input))
+    Info: Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G3
+Info: Automatically promoted node IFCLK (placed in PIN 24 (CLK1, LVDSCLK0n, Input))
+    Info: Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G2
+Info: Automatically promoted node FX2CLK (placed in PIN 23 (CLK0, LVDSCLK0p, Input))
+    Info: Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G0
+    Info: Following destination nodes may be non-global or may not use global or regional clocks
+        Info: Destination node DDC0_CLK
+        Info: Destination node DDC1_CLK
+Info: Automatically promoted node clk_enable 
+    Info: Automatically promoted destinations to use location or clock signal Global Clock
+    Info: Following destination nodes may be non-global or may not use global or regional clocks
+        Info: Destination node CIC6_520:f1_inst1_I|phase_1~26
+        Info: Destination node cordic:rx_cordic|cordic_stage:cordic_stage16|Qout[20]
+        Info: Destination node cordic:rx_cordic|cordic_stage:cordic_stage16|Qout[19]
+        Info: Destination node cordic:rx_cordic|cordic_stage:cordic_stage16|Qout[18]
+        Info: Destination node cordic:rx_cordic|cordic_stage:cordic_stage16|Qout[17]
+        Info: Destination node cordic:rx_cordic|cordic_stage:cordic_stage16|Qout[16]
+        Info: Destination node cordic:rx_cordic|cordic_stage:cordic_stage16|Qout[15]
+        Info: Destination node cordic:rx_cordic|cordic_stage:cordic_stage16|Qout[14]
+        Info: Destination node cordic:rx_cordic|cordic_stage:cordic_stage16|Qout[13]
+        Info: Destination node cordic:rx_cordic|cordic_stage:cordic_stage16|Qout[12]
+        Info: Non-global destination nodes limited to 10 nodes
+Info: Automatically promoted node txfifoclr 
+    Info: Automatically promoted destinations to use location or clock signal Global Clock
+    Info: Following destination nodes may be non-global or may not use global or regional clocks
+        Info: Destination node Selector0~8
+Info: Automatically promoted node tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|rdaclr 
+    Info: Automatically promoted destinations to use location or clock signal Global Clock
+Info: Automatically promoted node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|rdaclr 
+    Info: Automatically promoted destinations to use location or clock signal Global Clock
+Info: Starting register packing
+Info: Finished register packing: elapsed time is 00:00:02
+    Extra Info: No registers were packed into other blocks
+Info: Fitter placement preparation operations beginning
+Info: Fitter placement preparation operations ending: elapsed time is 00:00:20
+Info: Fitter placement operations beginning
+Info: Fitter placement was successful
+Info: Fitter placement operations ending: elapsed time is 00:03:17
+Info: Estimated most critical path is register to register delay of 18.901 ns
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X29_Y17; Fanout = 5; REG Node = 'CIC6_520:f1_inst1_I|section_out6[0]'
+    Info: 2: + IC(0.981 ns) + CELL(0.596 ns) = 1.577 ns; Loc. = LAB_X28_Y17; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|Add7~1098'
+    Info: 3: + IC(0.000 ns) + CELL(0.506 ns) = 2.083 ns; Loc. = LAB_X28_Y17; Fanout = 3; COMB Node = 'CIC6_520:f1_inst1_I|Add7~1099'
+    Info: 4: + IC(1.259 ns) + CELL(0.621 ns) = 3.963 ns; Loc. = LAB_X26_Y17; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|Add8~1169'
+    Info: 5: + IC(0.000 ns) + CELL(0.506 ns) = 4.469 ns; Loc. = LAB_X26_Y17; Fanout = 3; COMB Node = 'CIC6_520:f1_inst1_I|Add8~1170'
+    Info: 6: + IC(0.885 ns) + CELL(0.621 ns) = 5.975 ns; Loc. = LAB_X25_Y17; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|Add9~1102'
+    Info: 7: + IC(0.000 ns) + CELL(0.506 ns) = 6.481 ns; Loc. = LAB_X25_Y17; Fanout = 3; COMB Node = 'CIC6_520:f1_inst1_I|Add9~1103'
+    Info: 8: + IC(0.885 ns) + CELL(0.621 ns) = 7.987 ns; Loc. = LAB_X24_Y17; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|Add10~1173'
+    Info: 9: + IC(0.000 ns) + CELL(0.506 ns) = 8.493 ns; Loc. = LAB_X24_Y17; Fanout = 3; COMB Node = 'CIC6_520:f1_inst1_I|Add10~1174'
+    Info: 10: + IC(0.885 ns) + CELL(0.621 ns) = 9.999 ns; Loc. = LAB_X23_Y17; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|Add11~1106'
+    Info: 11: + IC(0.000 ns) + CELL(0.506 ns) = 10.505 ns; Loc. = LAB_X23_Y17; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|Add11~1107'
+    Info: 12: + IC(0.885 ns) + CELL(0.621 ns) = 12.011 ns; Loc. = LAB_X22_Y17; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~371'
+    Info: 13: + IC(0.000 ns) + CELL(0.086 ns) = 12.097 ns; Loc. = LAB_X22_Y17; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~372'
+    Info: 14: + IC(0.000 ns) + CELL(0.086 ns) = 12.183 ns; Loc. = LAB_X22_Y17; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~373'
+    Info: 15: + IC(0.000 ns) + CELL(0.086 ns) = 12.269 ns; Loc. = LAB_X22_Y17; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~374'
+    Info: 16: + IC(0.000 ns) + CELL(0.086 ns) = 12.355 ns; Loc. = LAB_X22_Y17; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~375'
+    Info: 17: + IC(0.000 ns) + CELL(0.086 ns) = 12.441 ns; Loc. = LAB_X22_Y17; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~376'
+    Info: 18: + IC(0.000 ns) + CELL(0.086 ns) = 12.527 ns; Loc. = LAB_X22_Y17; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~377'
+    Info: 19: + IC(0.000 ns) + CELL(0.086 ns) = 12.613 ns; Loc. = LAB_X22_Y17; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~378'
+    Info: 20: + IC(0.107 ns) + CELL(0.086 ns) = 12.806 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~379'
+    Info: 21: + IC(0.000 ns) + CELL(0.086 ns) = 12.892 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~380'
+    Info: 22: + IC(0.000 ns) + CELL(0.086 ns) = 12.978 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~381'
+    Info: 23: + IC(0.000 ns) + CELL(0.086 ns) = 13.064 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~382'
+    Info: 24: + IC(0.000 ns) + CELL(0.086 ns) = 13.150 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~383'
+    Info: 25: + IC(0.000 ns) + CELL(0.086 ns) = 13.236 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~384'
+    Info: 26: + IC(0.000 ns) + CELL(0.086 ns) = 13.322 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~385'
+    Info: 27: + IC(0.000 ns) + CELL(0.086 ns) = 13.408 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~386'
+    Info: 28: + IC(0.000 ns) + CELL(0.086 ns) = 13.494 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~387'
+    Info: 29: + IC(0.000 ns) + CELL(0.086 ns) = 13.580 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~388'
+    Info: 30: + IC(0.000 ns) + CELL(0.086 ns) = 13.666 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~389'
+    Info: 31: + IC(0.000 ns) + CELL(0.086 ns) = 13.752 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~390'
+    Info: 32: + IC(0.000 ns) + CELL(0.086 ns) = 13.838 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~391'
+    Info: 33: + IC(0.000 ns) + CELL(0.086 ns) = 13.924 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~392'
+    Info: 34: + IC(0.000 ns) + CELL(0.086 ns) = 14.010 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~393'
+    Info: 35: + IC(0.000 ns) + CELL(0.086 ns) = 14.096 ns; Loc. = LAB_X22_Y16; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~394'
+    Info: 36: + IC(0.107 ns) + CELL(0.086 ns) = 14.289 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~395'
+    Info: 37: + IC(0.000 ns) + CELL(0.086 ns) = 14.375 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~396'
+    Info: 38: + IC(0.000 ns) + CELL(0.086 ns) = 14.461 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~397'
+    Info: 39: + IC(0.000 ns) + CELL(0.086 ns) = 14.547 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~398'
+    Info: 40: + IC(0.000 ns) + CELL(0.086 ns) = 14.633 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~399'
+    Info: 41: + IC(0.000 ns) + CELL(0.086 ns) = 14.719 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~400'
+    Info: 42: + IC(0.000 ns) + CELL(0.086 ns) = 14.805 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~401'
+    Info: 43: + IC(0.000 ns) + CELL(0.086 ns) = 14.891 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~402'
+    Info: 44: + IC(0.000 ns) + CELL(0.086 ns) = 14.977 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~403'
+    Info: 45: + IC(0.000 ns) + CELL(0.086 ns) = 15.063 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~404'
+    Info: 46: + IC(0.000 ns) + CELL(0.086 ns) = 15.149 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~405'
+    Info: 47: + IC(0.000 ns) + CELL(0.086 ns) = 15.235 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~406'
+    Info: 48: + IC(0.000 ns) + CELL(0.086 ns) = 15.321 ns; Loc. = LAB_X22_Y15; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~407'
+    Info: 49: + IC(0.000 ns) + CELL(0.086 ns) = 15.407 ns; Loc. = LAB_X22_Y15; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~408'
+    Info: 50: + IC(0.000 ns) + CELL(0.086 ns) = 15.493 ns; Loc. = LAB_X22_Y15; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[64]~409'
+    Info: 51: + IC(0.000 ns) + CELL(0.086 ns) = 15.579 ns; Loc. = LAB_X22_Y15; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[65]~410'
+    Info: 52: + IC(0.107 ns) + CELL(0.086 ns) = 15.772 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[66]~411'
+    Info: 53: + IC(0.000 ns) + CELL(0.086 ns) = 15.858 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[67]~412'
+    Info: 54: + IC(0.000 ns) + CELL(0.086 ns) = 15.944 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[68]~413'
+    Info: 55: + IC(0.000 ns) + CELL(0.086 ns) = 16.030 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[69]~414'
+    Info: 56: + IC(0.000 ns) + CELL(0.086 ns) = 16.116 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[70]~415'
+    Info: 57: + IC(0.000 ns) + CELL(0.086 ns) = 16.202 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[71]~416'
+    Info: 58: + IC(0.000 ns) + CELL(0.086 ns) = 16.288 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[72]~417'
+    Info: 59: + IC(0.000 ns) + CELL(0.086 ns) = 16.374 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[73]~418'
+    Info: 60: + IC(0.000 ns) + CELL(0.086 ns) = 16.460 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[74]~419'
+    Info: 61: + IC(0.000 ns) + CELL(0.086 ns) = 16.546 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[75]~420'
+    Info: 62: + IC(0.000 ns) + CELL(0.086 ns) = 16.632 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[76]~421'
+    Info: 63: + IC(0.000 ns) + CELL(0.086 ns) = 16.718 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[77]~422'
+    Info: 64: + IC(0.000 ns) + CELL(0.086 ns) = 16.804 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[78]~423'
+    Info: 65: + IC(0.000 ns) + CELL(0.086 ns) = 16.890 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[79]~424'
+    Info: 66: + IC(0.000 ns) + CELL(0.086 ns) = 16.976 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[80]~425'
+    Info: 67: + IC(0.000 ns) + CELL(0.086 ns) = 17.062 ns; Loc. = LAB_X22_Y14; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[81]~426'
+    Info: 68: + IC(0.107 ns) + CELL(0.086 ns) = 17.255 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[82]~427'
+    Info: 69: + IC(0.000 ns) + CELL(0.086 ns) = 17.341 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[83]~428'
+    Info: 70: + IC(0.000 ns) + CELL(0.086 ns) = 17.427 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[84]~429'
+    Info: 71: + IC(0.000 ns) + CELL(0.086 ns) = 17.513 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[85]~430'
+    Info: 72: + IC(0.000 ns) + CELL(0.086 ns) = 17.599 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[86]~431'
+    Info: 73: + IC(0.000 ns) + CELL(0.086 ns) = 17.685 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[87]~432'
+    Info: 74: + IC(0.000 ns) + CELL(0.086 ns) = 17.771 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[88]~433'
+    Info: 75: + IC(0.000 ns) + CELL(0.086 ns) = 17.857 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[89]~434'
+    Info: 76: + IC(0.000 ns) + CELL(0.086 ns) = 17.943 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[90]~435'
+    Info: 77: + IC(0.000 ns) + CELL(0.086 ns) = 18.029 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[91]~436'
+    Info: 78: + IC(0.000 ns) + CELL(0.086 ns) = 18.115 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[92]~437'
+    Info: 79: + IC(0.000 ns) + CELL(0.086 ns) = 18.201 ns; Loc. = LAB_X22_Y13; Fanout = 2; COMB Node = 'CIC6_520:f1_inst1_I|output_register[93]~438'
+    Info: 80: + IC(0.000 ns) + CELL(0.086 ns) = 18.287 ns; Loc. = LAB_X22_Y13; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[94]~439'
+    Info: 81: + IC(0.000 ns) + CELL(0.506 ns) = 18.793 ns; Loc. = LAB_X22_Y13; Fanout = 1; COMB Node = 'CIC6_520:f1_inst1_I|output_register[95]~322'
+    Info: 82: + IC(0.000 ns) + CELL(0.108 ns) = 18.901 ns; Loc. = LAB_X22_Y13; Fanout = 1; REG Node = 'CIC6_520:f1_inst1_I|output_register[95]'
+    Info: Total cell delay = 12.693 ns ( 67.16 % )
+    Info: Total interconnect delay = 6.208 ns ( 32.84 % )
+Info: Fitter routing operations beginning
+Info: Average interconnect usage is 9% of the available device resources. Peak interconnect usage is 16%
+    Info: The peak interconnect region extends from location X11_Y10 to location X22_Y19
+Info: Fitter routing operations ending: elapsed time is 00:00:13
+Info: Started post-fitting delay annotation
+Warning: Found 62 output pins without output pin load capacitance assignment
+    Info: Pin "DDC0_CLK" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_A_B" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[2]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[3]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[4]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[5]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[6]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[7]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[8]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[9]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[10]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[11]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[12]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[13]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[14]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC0_DIN[15]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_CLK" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_A_B" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[2]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[3]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[4]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[5]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[6]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[7]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[8]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[9]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[10]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[11]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[12]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[13]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[14]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DDC1_DIN[15]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "SLCS" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FIFO_ADR[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FIFO_ADR[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "PKEND" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "SLOE" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "SLWR" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "SLRD" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[2]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[3]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[4]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[5]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[6]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[7]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[8]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[9]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[10]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[11]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[12]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[13]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[14]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FD[15]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "SDI_M" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "SDO_M" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_SDO" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+Info: Delay annotation completed successfully
+Info: Design uses memory blocks. Violating setup or hold times of memory block address registers for either read or write operations could cause memory contents to be corrupted. Make sure that all memory block address registers meet the setup and hold time requirements.
+Info: Node txfifoclr~clkctrl uses non-global routing resources to route signals to global destination nodes
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|rdptr_g[2] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|rdptr_g[4] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|rdptr_g[6] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|rdptr_g[0] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|delayed_wrptr_g[3] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe7a[3] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_0e8:ws_dgrp|dffpipe_qe9:dffpipe9|dffe10a[6] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe7a[8] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe8a[9] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe8a[4] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe8a[2] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe8a[6] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe7a[0] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe8a[3] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe8a[7] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|delayed_wrptr_g[0] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe8a[8] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe8a[0] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_0e8:ws_dgrp|dffpipe_qe9:dffpipe9|dffe10a[4] -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|rdaclr -- routed using non-global resources
+    Info: Port clear -- assigned as a global for destination node tx_fifo:tx_fifo_q|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|rdaclr -- routed using non-global resources
+Warning: Following 2 pins have no output enable or a GND or VCC output enable - later changes to this connectivity may change fitting results
+    Info: Pin SDI_M has a permanently disabled output enable
+    Info: Pin SDO_M has a permanently disabled output enable
+Warning: Following 42 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results
+    Info: Pin DDC0_A_B has VCC driving its datain port
+    Info: Pin DDC0_DIN[0] has GND driving its datain port
+    Info: Pin DDC0_DIN[1] has GND driving its datain port
+    Info: Pin DDC0_DIN[2] has GND driving its datain port
+    Info: Pin DDC0_DIN[3] has GND driving its datain port
+    Info: Pin DDC0_DIN[4] has GND driving its datain port
+    Info: Pin DDC0_DIN[5] has GND driving its datain port
+    Info: Pin DDC0_DIN[6] has GND driving its datain port
+    Info: Pin DDC0_DIN[7] has GND driving its datain port
+    Info: Pin DDC0_DIN[8] has GND driving its datain port
+    Info: Pin DDC0_DIN[9] has GND driving its datain port
+    Info: Pin DDC0_DIN[10] has GND driving its datain port
+    Info: Pin DDC0_DIN[11] has GND driving its datain port
+    Info: Pin DDC0_DIN[12] has GND driving its datain port
+    Info: Pin DDC0_DIN[13] has GND driving its datain port
+    Info: Pin DDC0_DIN[14] has GND driving its datain port
+    Info: Pin DDC0_DIN[15] has GND driving its datain port
+    Info: Pin DDC1_A_B has VCC driving its datain port
+    Info: Pin DDC1_DIN[0] has GND driving its datain port
+    Info: Pin DDC1_DIN[1] has GND driving its datain port
+    Info: Pin DDC1_DIN[2] has GND driving its datain port
+    Info: Pin DDC1_DIN[3] has GND driving its datain port
+    Info: Pin DDC1_DIN[4] has GND driving its datain port
+    Info: Pin DDC1_DIN[5] has GND driving its datain port
+    Info: Pin DDC1_DIN[6] has GND driving its datain port
+    Info: Pin DDC1_DIN[7] has GND driving its datain port
+    Info: Pin DDC1_DIN[8] has GND driving its datain port
+    Info: Pin DDC1_DIN[9] has GND driving its datain port
+    Info: Pin DDC1_DIN[10] has GND driving its datain port
+    Info: Pin DDC1_DIN[11] has GND driving its datain port
+    Info: Pin DDC1_DIN[12] has GND driving its datain port
+    Info: Pin DDC1_DIN[13] has GND driving its datain port
+    Info: Pin DDC1_DIN[14] has GND driving its datain port
+    Info: Pin DDC1_DIN[15] has GND driving its datain port
+    Info: Pin SLCS has VCC driving its datain port
+    Info: Pin FIFO_ADR[0] has GND driving its datain port
+    Info: Pin FIFO_ADR[1] has VCC driving its datain port
+    Info: Pin PKEND has GND driving its datain port
+    Info: Pin SLOE has VCC driving its datain port
+    Info: Pin SLRD has VCC driving its datain port
+    Info: Pin SDI_M has VCC driving its datain port
+    Info: Pin SDO_M has VCC driving its datain port
+Info: Following groups of pins have the same output enable
+    Info: Following pins have the same output enable: SPI_REGS:spi_regs|sRd
+        Info: Type bidirectional pin FX2_SDO uses the 3.3-V LVTTL I/O standard
+Info: Quartus II Fitter was successful. 0 errors, 3 warnings
+    Info: Allocated 213 megabytes of memory during processing
+    Info: Processing ended: Fri Feb 09 19:31:35 2007
+    Info: Elapsed time: 00:04:25

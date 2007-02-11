@@ -1,0 +1,96 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 7.887 ns
+From           : FLAG[1]
+To             : FD[9]~reg0
+From Clock     : --
+To Clock       : IFCLK
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 10.048 ns
+From           : SPI_REGS:spi_regs|sdata[31]
+To             : FX2_SDO
+From Clock     : FX2_SCLK
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case tpd
+Slack          : N/A
+Required Time  : None
+Actual Time    : 6.596 ns
+From           : FX2CLK
+To             : DDC1_CLK
+From Clock     : --
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -3.553 ns
+From           : INA[6]
+To             : ADC[6]
+From Clock     : --
+To Clock       : CLKA
+Failed Paths   : 0
+
+Type           : Clock Setup: 'CLKA'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 49.34 MHz ( period = 20.266 ns )
+From           : CIC6_520:f1_inst1_Q|diff1[5]
+To             : CIC6_520:f1_inst1_Q|output_register[95]
+From Clock     : CLKA
+To Clock       : CLKA
+Failed Paths   : 0
+
+Type           : Clock Setup: 'FX2_SCLK'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 142.31 MHz ( period = 7.027 ns )
+From           : SPI_REGS:spi_regs|BitCounter[23]
+To             : SPI_REGS:spi_regs|sdata[0]
+From Clock     : FX2_SCLK
+To Clock       : FX2_SCLK
+Failed Paths   : 0
+
+Type           : Clock Setup: 'IFCLK'
+Slack          : N/A
+Required Time  : None
+Actual Time    : Restricted to 163.03 MHz ( period = 6.134 ns )
+From           : tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|alt_synch_pipe_vd8:rs_dgwp|dffpipe_pe9:dffpipe6|dffe8a[4]
+To             : tx_fifo:tx_fifo_i|dcfifo:dcfifo_component|dcfifo_8bi1:auto_generated|altsyncram_7b11:fifo_ram|altsyncram_hve1:altsyncram3|q_a[20]
+From Clock     : IFCLK
+To Clock       : IFCLK
+Failed Paths   : 0
+
+Type           : Clock Setup: 'FX2CLK'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 280.90 MHz ( period = 3.560 ns )
+From           : SPI_REGS:spi_regs|CS_ph1
+To             : RegisterX:dcoffsetreg|OUT[8]
+From Clock     : FX2CLK
+To Clock       : FX2CLK
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+

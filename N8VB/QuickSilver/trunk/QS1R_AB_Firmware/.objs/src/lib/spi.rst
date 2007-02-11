@@ -1,0 +1,1502 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.5.0 #1020 (May  8 2005)
+                              4 ; This file generated Fri Jan 05 10:13:16 2007
+                              5 ;--------------------------------------------------------
+                              6 	.module spi
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _bitCPLD_CS
+                             13 	.globl _bitFPGA_CS
+                             14 	.globl _bitALTERA_DCLK
+                             15 	.globl _bitALTERA_DATA0
+                             16 	.globl _bitS_CLK
+                             17 	.globl _bitS_IN
+                             18 	.globl _bitS_OUT
+                             19 	.globl _EIPX6
+                             20 	.globl _EIPX5
+                             21 	.globl _EIPX4
+                             22 	.globl _PI2C
+                             23 	.globl _PUSB
+                             24 	.globl _EIEX6
+                             25 	.globl _EIEX5
+                             26 	.globl _EIEX4
+                             27 	.globl _EI2C
+                             28 	.globl _EIUSB
+                             29 	.globl _SMOD1
+                             30 	.globl _ERESI
+                             31 	.globl _RESI
+                             32 	.globl _INT6
+                             33 	.globl _CY
+                             34 	.globl _AC
+                             35 	.globl _F0
+                             36 	.globl _RS1
+                             37 	.globl _RS0
+                             38 	.globl _OV
+                             39 	.globl _FL
+                             40 	.globl _P
+                             41 	.globl _TF2
+                             42 	.globl _EXF2
+                             43 	.globl _RCLK
+                             44 	.globl _TCLK
+                             45 	.globl _EXEN2
+                             46 	.globl _TR2
+                             47 	.globl _C_T2
+                             48 	.globl _CP_RL2
+                             49 	.globl _SM01
+                             50 	.globl _SM11
+                             51 	.globl _SM21
+                             52 	.globl _REN1
+                             53 	.globl _TB81
+                             54 	.globl _RB81
+                             55 	.globl _TI1
+                             56 	.globl _RI1
+                             57 	.globl _PS1
+                             58 	.globl _PT2
+                             59 	.globl _PS0
+                             60 	.globl _PT1
+                             61 	.globl _PX1
+                             62 	.globl _PT0
+                             63 	.globl _PX0
+                             64 	.globl _EA
+                             65 	.globl _ES1
+                             66 	.globl _ET2
+                             67 	.globl _ES0
+                             68 	.globl _ET1
+                             69 	.globl _EX1
+                             70 	.globl _ET0
+                             71 	.globl _EX0
+                             72 	.globl _SM0
+                             73 	.globl _SM1
+                             74 	.globl _SM2
+                             75 	.globl _REN
+                             76 	.globl _TB8
+                             77 	.globl _RB8
+                             78 	.globl _TI
+                             79 	.globl _RI
+                             80 	.globl _TF1
+                             81 	.globl _TR1
+                             82 	.globl _TF0
+                             83 	.globl _TR0
+                             84 	.globl _IE1
+                             85 	.globl _IT1
+                             86 	.globl _IE0
+                             87 	.globl _IT0
+                             88 	.globl _SEL
+                             89 	.globl _EIP
+                             90 	.globl _B
+                             91 	.globl _EIE
+                             92 	.globl _ACC
+                             93 	.globl _EICON
+                             94 	.globl _PSW
+                             95 	.globl _TH2
+                             96 	.globl _TL2
+                             97 	.globl _RCAP2H
+                             98 	.globl _RCAP2L
+                             99 	.globl _T2CON
+                            100 	.globl _SBUF1
+                            101 	.globl _SCON1
+                            102 	.globl _GPIFSGLDATLNOX
+                            103 	.globl _GPIFSGLDATLX
+                            104 	.globl _GPIFSGLDATH
+                            105 	.globl _GPIFTRIG
+                            106 	.globl _EP01STAT
+                            107 	.globl _IP
+                            108 	.globl _OEE
+                            109 	.globl _OED
+                            110 	.globl _OEC
+                            111 	.globl _OEB
+                            112 	.globl _OEA
+                            113 	.globl _IOE
+                            114 	.globl _IOD
+                            115 	.globl _AUTOPTRSETUP
+                            116 	.globl _EP68FIFOFLGS
+                            117 	.globl _EP24FIFOFLGS
+                            118 	.globl _EP2468STAT
+                            119 	.globl _IE
+                            120 	.globl _INT4CLR
+                            121 	.globl _INT2CLR
+                            122 	.globl _IOC
+                            123 	.globl _AUTODAT2
+                            124 	.globl _AUTOPTRL2
+                            125 	.globl _AUTOPTRH2
+                            126 	.globl _AUTODAT1
+                            127 	.globl _APTR1L
+                            128 	.globl _APTR1H
+                            129 	.globl _SBUF0
+                            130 	.globl _SCON0
+                            131 	.globl _MPAGE
+                            132 	.globl _EXIF
+                            133 	.globl _IOB
+                            134 	.globl _CKCON
+                            135 	.globl _TH1
+                            136 	.globl _TH0
+                            137 	.globl _TL1
+                            138 	.globl _TL0
+                            139 	.globl _TMOD
+                            140 	.globl _TCON
+                            141 	.globl _PCON
+                            142 	.globl _DPS
+                            143 	.globl _DPH1
+                            144 	.globl _DPL1
+                            145 	.globl _DPH
+                            146 	.globl _DPL
+                            147 	.globl _SP
+                            148 	.globl _IOA
+                            149 	.globl _CPLD_GPIO
+                            150 	.globl _RFFE_CNTRL
+                            151 	.globl _ATTN
+                            152 	.globl _DEBUG_LED_REG
+                            153 	.globl _LTC2208_CNTRL_REG
+                            154 	.globl _DDC_CNTRL
+                            155 	.globl _DDC1_AMR
+                            156 	.globl _DDC1_LAR
+                            157 	.globl _DDC1_DR4
+                            158 	.globl _DDC1_DR3
+                            159 	.globl _DDC1_DR2
+                            160 	.globl _DDC1_DR1
+                            161 	.globl _DDC1_DR0
+                            162 	.globl _DDC0_AMR
+                            163 	.globl _DDC0_LAR
+                            164 	.globl _DDC0_DR4
+                            165 	.globl _DDC0_DR3
+                            166 	.globl _DDC0_DR2
+                            167 	.globl _DDC0_DR1
+                            168 	.globl _DDC0_DR0
+                            169 	.globl _EP8FIFOBUF
+                            170 	.globl _EP6FIFOBUF
+                            171 	.globl _EP4FIFOBUF
+                            172 	.globl _EP2FIFOBUF
+                            173 	.globl _EP1INBUF
+                            174 	.globl _EP1OUTBUF
+                            175 	.globl _EP0BUF
+                            176 	.globl _CT4
+                            177 	.globl _CT3
+                            178 	.globl _CT2
+                            179 	.globl _CT1
+                            180 	.globl _USBTEST
+                            181 	.globl _TESTCFG
+                            182 	.globl _DBUG
+                            183 	.globl _UDMACRCQUAL
+                            184 	.globl _UDMACRCL
+                            185 	.globl _UDMACRCH
+                            186 	.globl _GPIFHOLDAMOUNT
+                            187 	.globl _FLOWSTBHPERIOD
+                            188 	.globl _FLOWSTBEDGE
+                            189 	.globl _FLOWSTB
+                            190 	.globl _FLOWHOLDOFF
+                            191 	.globl _FLOWEQ1CTL
+                            192 	.globl _FLOWEQ0CTL
+                            193 	.globl _FLOWLOGIC
+                            194 	.globl _FLOWSTATE
+                            195 	.globl _GPIFABORT
+                            196 	.globl _GPIFREADYSTAT
+                            197 	.globl _GPIFREADYCFG
+                            198 	.globl _XGPIFSGLDATLNOX
+                            199 	.globl _XGPIFSGLDATLX
+                            200 	.globl _XGPIFSGLDATH
+                            201 	.globl _EP8GPIFTRIG
+                            202 	.globl _EP8GPIFPFSTOP
+                            203 	.globl _EP8GPIFFLGSEL
+                            204 	.globl _EP6GPIFTRIG
+                            205 	.globl _EP6GPIFPFSTOP
+                            206 	.globl _EP6GPIFFLGSEL
+                            207 	.globl _EP4GPIFTRIG
+                            208 	.globl _EP4GPIFPFSTOP
+                            209 	.globl _EP4GPIFFLGSEL
+                            210 	.globl _EP2GPIFTRIG
+                            211 	.globl _EP2GPIFPFSTOP
+                            212 	.globl _EP2GPIFFLGSEL
+                            213 	.globl _GPIFTCB0
+                            214 	.globl _GPIFTCB1
+                            215 	.globl _GPIFTCB2
+                            216 	.globl _GPIFTCB3
+                            217 	.globl _GPIFADRL
+                            218 	.globl _GPIFADRH
+                            219 	.globl _GPIFCTLCFG
+                            220 	.globl _GPIFIDLECTL
+                            221 	.globl _GPIFIDLECS
+                            222 	.globl _GPIFWFSELECT
+                            223 	.globl _SETUPDAT
+                            224 	.globl _SUDPTRCTL
+                            225 	.globl _SUDPTRL
+                            226 	.globl _SUDPTRH
+                            227 	.globl _EP8FIFOBCL
+                            228 	.globl _EP8FIFOBCH
+                            229 	.globl _EP6FIFOBCL
+                            230 	.globl _EP6FIFOBCH
+                            231 	.globl _EP4FIFOBCL
+                            232 	.globl _EP4FIFOBCH
+                            233 	.globl _EP2FIFOBCL
+                            234 	.globl _EP2FIFOBCH
+                            235 	.globl _EP8FIFOFLGS
+                            236 	.globl _EP6FIFOFLGS
+                            237 	.globl _EP4FIFOFLGS
+                            238 	.globl _EP2FIFOFLGS
+                            239 	.globl _EP8CS
+                            240 	.globl _EP6CS
+                            241 	.globl _EP4CS
+                            242 	.globl _EP2CS
+                            243 	.globl _EP1INCS
+                            244 	.globl _EP1OUTCS
+                            245 	.globl _EP0CS
+                            246 	.globl _EP8BCL
+                            247 	.globl _EP8BCH
+                            248 	.globl _EP6BCL
+                            249 	.globl _EP6BCH
+                            250 	.globl _EP4BCL
+                            251 	.globl _EP4BCH
+                            252 	.globl _EP2BCL
+                            253 	.globl _EP2BCH
+                            254 	.globl _EP1INBC
+                            255 	.globl _EP1OUTBC
+                            256 	.globl _EP0BCL
+                            257 	.globl _EP0BCH
+                            258 	.globl _FNADDR
+                            259 	.globl _MICROFRAME
+                            260 	.globl _USBFRAMEL
+                            261 	.globl _USBFRAMEH
+                            262 	.globl _TOGCTL
+                            263 	.globl _WAKEUPCS
+                            264 	.globl _SUSPEND
+                            265 	.globl _USBCS
+                            266 	.globl _XAUTODAT2
+                            267 	.globl _XAUTODAT1
+                            268 	.globl _I2CTL
+                            269 	.globl _I2DAT
+                            270 	.globl _I2CS
+                            271 	.globl _PORTECFG
+                            272 	.globl _PORTCCFG
+                            273 	.globl _PORTACFG
+                            274 	.globl _INTSETUP
+                            275 	.globl _INT4IVEC
+                            276 	.globl _INT2IVEC
+                            277 	.globl _CLRERRCNT
+                            278 	.globl _ERRCNTLIM
+                            279 	.globl _USBERRIRQ
+                            280 	.globl _USBERRIE
+                            281 	.globl _GPIFIRQ
+                            282 	.globl _GPIFIE
+                            283 	.globl _EPIRQ
+                            284 	.globl _EPIE
+                            285 	.globl _USBIRQ
+                            286 	.globl _USBIE
+                            287 	.globl _NAKIRQ
+                            288 	.globl _NAKIE
+                            289 	.globl _IBNIRQ
+                            290 	.globl _IBNIE
+                            291 	.globl _EP8FIFOIRQ
+                            292 	.globl _EP8FIFOIE
+                            293 	.globl _EP6FIFOIRQ
+                            294 	.globl _EP6FIFOIE
+                            295 	.globl _EP4FIFOIRQ
+                            296 	.globl _EP4FIFOIE
+                            297 	.globl _EP2FIFOIRQ
+                            298 	.globl _EP2FIFOIE
+                            299 	.globl _OUTPKTEND
+                            300 	.globl _INPKTEND
+                            301 	.globl _EP8ISOINPKTS
+                            302 	.globl _EP6ISOINPKTS
+                            303 	.globl _EP4ISOINPKTS
+                            304 	.globl _EP2ISOINPKTS
+                            305 	.globl _EP8FIFOPFL
+                            306 	.globl _EP8FIFOPFH
+                            307 	.globl _EP6FIFOPFL
+                            308 	.globl _EP6FIFOPFH
+                            309 	.globl _EP4FIFOPFL
+                            310 	.globl _EP4FIFOPFH
+                            311 	.globl _EP2FIFOPFL
+                            312 	.globl _EP2FIFOPFH
+                            313 	.globl _EP8AUTOINLENL
+                            314 	.globl _EP8AUTOINLENH
+                            315 	.globl _EP6AUTOINLENL
+                            316 	.globl _EP6AUTOINLENH
+                            317 	.globl _EP4AUTOINLENL
+                            318 	.globl _EP4AUTOINLENH
+                            319 	.globl _EP2AUTOINLENL
+                            320 	.globl _EP2AUTOINLENH
+                            321 	.globl _EP8FIFOCFG
+                            322 	.globl _EP6FIFOCFG
+                            323 	.globl _EP4FIFOCFG
+                            324 	.globl _EP2FIFOCFG
+                            325 	.globl _EP8CFG
+                            326 	.globl _EP6CFG
+                            327 	.globl _EP4CFG
+                            328 	.globl _EP2CFG
+                            329 	.globl _EP1INCFG
+                            330 	.globl _EP1OUTCFG
+                            331 	.globl _REVCTL
+                            332 	.globl _REVID
+                            333 	.globl _FIFOPINPOLAR
+                            334 	.globl _UART230
+                            335 	.globl _BPADDRL
+                            336 	.globl _BPADDRH
+                            337 	.globl _BREAKPT
+                            338 	.globl _FIFORESET
+                            339 	.globl _PINFLAGSCD
+                            340 	.globl _PINFLAGSAB
+                            341 	.globl _IFCONFIG
+                            342 	.globl _CPUCS
+                            343 	.globl _RES_WAVEDATA_END
+                            344 	.globl _GPIF_WAVE_DATA
+                            345 	.globl _read_bytes_msb_PARM_2
+                            346 	.globl _write_bytes_msb_PARM_2
+                            347 	.globl _spi_write_PARM_6
+                            348 	.globl _spi_write_PARM_5
+                            349 	.globl _spi_write_PARM_4
+                            350 	.globl _spi_write_PARM_3
+                            351 	.globl _spi_write_PARM_2
+                            352 	.globl _spi_read_PARM_6
+                            353 	.globl _spi_read_PARM_5
+                            354 	.globl _spi_read_PARM_4
+                            355 	.globl _spi_read_PARM_3
+                            356 	.globl _spi_read_PARM_2
+                            357 	.globl _init_spi
+                            358 	.globl _spi_read
+                            359 	.globl _spi_write
+                            360 ;--------------------------------------------------------
+                            361 ; special function registers
+                            362 ;--------------------------------------------------------
+                            363 	.area RSEG    (DATA)
+                    0080    364 _IOA	=	0x0080
+                    0081    365 _SP	=	0x0081
+                    0082    366 _DPL	=	0x0082
+                    0083    367 _DPH	=	0x0083
+                    0084    368 _DPL1	=	0x0084
+                    0085    369 _DPH1	=	0x0085
+                    0086    370 _DPS	=	0x0086
+                    0087    371 _PCON	=	0x0087
+                    0088    372 _TCON	=	0x0088
+                    0089    373 _TMOD	=	0x0089
+                    008A    374 _TL0	=	0x008a
+                    008B    375 _TL1	=	0x008b
+                    008C    376 _TH0	=	0x008c
+                    008D    377 _TH1	=	0x008d
+                    008E    378 _CKCON	=	0x008e
+                    0090    379 _IOB	=	0x0090
+                    0091    380 _EXIF	=	0x0091
+                    0092    381 _MPAGE	=	0x0092
+                    0098    382 _SCON0	=	0x0098
+                    0099    383 _SBUF0	=	0x0099
+                    009A    384 _APTR1H	=	0x009a
+                    009B    385 _APTR1L	=	0x009b
+                    009C    386 _AUTODAT1	=	0x009c
+                    009D    387 _AUTOPTRH2	=	0x009d
+                    009E    388 _AUTOPTRL2	=	0x009e
+                    009F    389 _AUTODAT2	=	0x009f
+                    00A0    390 _IOC	=	0x00a0
+                    00A1    391 _INT2CLR	=	0x00a1
+                    00A2    392 _INT4CLR	=	0x00a2
+                    00A8    393 _IE	=	0x00a8
+                    00AA    394 _EP2468STAT	=	0x00aa
+                    00AB    395 _EP24FIFOFLGS	=	0x00ab
+                    00AC    396 _EP68FIFOFLGS	=	0x00ac
+                    00AF    397 _AUTOPTRSETUP	=	0x00af
+                    00B0    398 _IOD	=	0x00b0
+                    00B1    399 _IOE	=	0x00b1
+                    00B2    400 _OEA	=	0x00b2
+                    00B3    401 _OEB	=	0x00b3
+                    00B4    402 _OEC	=	0x00b4
+                    00B5    403 _OED	=	0x00b5
+                    00B6    404 _OEE	=	0x00b6
+                    00B8    405 _IP	=	0x00b8
+                    00BA    406 _EP01STAT	=	0x00ba
+                    00BB    407 _GPIFTRIG	=	0x00bb
+                    00BD    408 _GPIFSGLDATH	=	0x00bd
+                    00BE    409 _GPIFSGLDATLX	=	0x00be
+                    00BF    410 _GPIFSGLDATLNOX	=	0x00bf
+                    00C0    411 _SCON1	=	0x00c0
+                    00C1    412 _SBUF1	=	0x00c1
+                    00C8    413 _T2CON	=	0x00c8
+                    00CA    414 _RCAP2L	=	0x00ca
+                    00CB    415 _RCAP2H	=	0x00cb
+                    00CC    416 _TL2	=	0x00cc
+                    00CD    417 _TH2	=	0x00cd
+                    00D0    418 _PSW	=	0x00d0
+                    00D8    419 _EICON	=	0x00d8
+                    00E0    420 _ACC	=	0x00e0
+                    00E8    421 _EIE	=	0x00e8
+                    00F0    422 _B	=	0x00f0
+                    00F8    423 _EIP	=	0x00f8
+                            424 ;--------------------------------------------------------
+                            425 ; special function bits 
+                            426 ;--------------------------------------------------------
+                            427 	.area RSEG    (DATA)
+                    0086    428 _SEL	=	0x0086
+                    0088    429 _IT0	=	0x0088
+                    0089    430 _IE0	=	0x0089
+                    008A    431 _IT1	=	0x008a
+                    008B    432 _IE1	=	0x008b
+                    008C    433 _TR0	=	0x008c
+                    008D    434 _TF0	=	0x008d
+                    008E    435 _TR1	=	0x008e
+                    008F    436 _TF1	=	0x008f
+                    0098    437 _RI	=	0x0098
+                    0099    438 _TI	=	0x0099
+                    009A    439 _RB8	=	0x009a
+                    009B    440 _TB8	=	0x009b
+                    009C    441 _REN	=	0x009c
+                    009D    442 _SM2	=	0x009d
+                    009E    443 _SM1	=	0x009e
+                    009F    444 _SM0	=	0x009f
+                    00A8    445 _EX0	=	0x00a8
+                    00A9    446 _ET0	=	0x00a9
+                    00AA    447 _EX1	=	0x00aa
+                    00AB    448 _ET1	=	0x00ab
+                    00AC    449 _ES0	=	0x00ac
+                    00AD    450 _ET2	=	0x00ad
+                    00AE    451 _ES1	=	0x00ae
+                    00AF    452 _EA	=	0x00af
+                    00B8    453 _PX0	=	0x00b8
+                    00B9    454 _PT0	=	0x00b9
+                    00BA    455 _PX1	=	0x00ba
+                    00BB    456 _PT1	=	0x00bb
+                    00BC    457 _PS0	=	0x00bc
+                    00BD    458 _PT2	=	0x00bd
+                    00BE    459 _PS1	=	0x00be
+                    00C0    460 _RI1	=	0x00c0
+                    00C1    461 _TI1	=	0x00c1
+                    00C2    462 _RB81	=	0x00c2
+                    00C3    463 _TB81	=	0x00c3
+                    00C4    464 _REN1	=	0x00c4
+                    00C5    465 _SM21	=	0x00c5
+                    00C6    466 _SM11	=	0x00c6
+                    00C7    467 _SM01	=	0x00c7
+                    00C8    468 _CP_RL2	=	0x00c8
+                    00C9    469 _C_T2	=	0x00c9
+                    00CA    470 _TR2	=	0x00ca
+                    00CB    471 _EXEN2	=	0x00cb
+                    00CC    472 _TCLK	=	0x00cc
+                    00CD    473 _RCLK	=	0x00cd
+                    00CE    474 _EXF2	=	0x00ce
+                    00CF    475 _TF2	=	0x00cf
+                    00D0    476 _P	=	0x00d0
+                    00D1    477 _FL	=	0x00d1
+                    00D2    478 _OV	=	0x00d2
+                    00D3    479 _RS0	=	0x00d3
+                    00D4    480 _RS1	=	0x00d4
+                    00D5    481 _F0	=	0x00d5
+                    00D6    482 _AC	=	0x00d6
+                    00D7    483 _CY	=	0x00d7
+                    00DB    484 _INT6	=	0x00db
+                    00DC    485 _RESI	=	0x00dc
+                    00DD    486 _ERESI	=	0x00dd
+                    00DF    487 _SMOD1	=	0x00df
+                    00E8    488 _EIUSB	=	0x00e8
+                    00E9    489 _EI2C	=	0x00e9
+                    00EA    490 _EIEX4	=	0x00ea
+                    00EB    491 _EIEX5	=	0x00eb
+                    00EC    492 _EIEX6	=	0x00ec
+                    00F8    493 _PUSB	=	0x00f8
+                    00F9    494 _PI2C	=	0x00f9
+                    00FA    495 _EIPX4	=	0x00fa
+                    00FB    496 _EIPX5	=	0x00fb
+                    00FC    497 _EIPX6	=	0x00fc
+                    0080    498 _bitS_OUT	=	0x0080
+                    0081    499 _bitS_IN	=	0x0081
+                    0083    500 _bitS_CLK	=	0x0083
+                    00A0    501 _bitALTERA_DATA0	=	0x00a0
+                    00A2    502 _bitALTERA_DCLK	=	0x00a2
+                    00A6    503 _bitFPGA_CS	=	0x00a6
+                    00A7    504 _bitCPLD_CS	=	0x00a7
+                            505 ;--------------------------------------------------------
+                            506 ; overlayable register banks 
+                            507 ;--------------------------------------------------------
+                            508 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     509 	.ds 8
+                            510 ;--------------------------------------------------------
+                            511 ; internal ram data
+                            512 ;--------------------------------------------------------
+                            513 	.area DSEG    (DATA)
+   000F                     514 _spi_read_PARM_2::
+   000F                     515 	.ds 1
+   0010                     516 _spi_read_PARM_3::
+   0010                     517 	.ds 1
+   0011                     518 _spi_read_PARM_4::
+   0011                     519 	.ds 1
+   0012                     520 _spi_read_PARM_5::
+   0012                     521 	.ds 2
+   0014                     522 _spi_read_PARM_6::
+   0014                     523 	.ds 1
+   0015                     524 _spi_write_PARM_2::
+   0015                     525 	.ds 1
+   0016                     526 _spi_write_PARM_3::
+   0016                     527 	.ds 1
+   0017                     528 _spi_write_PARM_4::
+   0017                     529 	.ds 1
+   0018                     530 _spi_write_PARM_5::
+   0018                     531 	.ds 2
+   001A                     532 _spi_write_PARM_6::
+   001A                     533 	.ds 1
+   001B                     534 _write_bytes_msb_PARM_2::
+   001B                     535 	.ds 1
+   001C                     536 _read_bytes_msb_PARM_2::
+   001C                     537 	.ds 1
+                            538 ;--------------------------------------------------------
+                            539 ; overlayable items in internal ram 
+                            540 ;--------------------------------------------------------
+                            541 	.area	OSEG    (OVR,DATA)
+                            542 	.area	OSEG    (OVR,DATA)
+                            543 	.area	OSEG    (OVR,DATA)
+                            544 ;--------------------------------------------------------
+                            545 ; indirectly addressable internal ram data
+                            546 ;--------------------------------------------------------
+                            547 	.area ISEG    (DATA)
+                            548 ;--------------------------------------------------------
+                            549 ; bit data
+                            550 ;--------------------------------------------------------
+                            551 	.area BSEG    (BIT)
+                            552 ;--------------------------------------------------------
+                            553 ; paged external ram data
+                            554 ;--------------------------------------------------------
+                            555 	.area PSEG    (PAG,XDATA)
+                            556 ;--------------------------------------------------------
+                            557 ; external ram data
+                            558 ;--------------------------------------------------------
+                            559 	.area XSEG    (XDATA)
+                    E400    560 _GPIF_WAVE_DATA	=	0xe400
+                    E480    561 _RES_WAVEDATA_END	=	0xe480
+                    E600    562 _CPUCS	=	0xe600
+                    E601    563 _IFCONFIG	=	0xe601
+                    E602    564 _PINFLAGSAB	=	0xe602
+                    E603    565 _PINFLAGSCD	=	0xe603
+                    E604    566 _FIFORESET	=	0xe604
+                    E605    567 _BREAKPT	=	0xe605
+                    E606    568 _BPADDRH	=	0xe606
+                    E607    569 _BPADDRL	=	0xe607
+                    E608    570 _UART230	=	0xe608
+                    E609    571 _FIFOPINPOLAR	=	0xe609
+                    E60A    572 _REVID	=	0xe60a
+                    E60B    573 _REVCTL	=	0xe60b
+                    E610    574 _EP1OUTCFG	=	0xe610
+                    E611    575 _EP1INCFG	=	0xe611
+                    E612    576 _EP2CFG	=	0xe612
+                    E613    577 _EP4CFG	=	0xe613
+                    E614    578 _EP6CFG	=	0xe614
+                    E615    579 _EP8CFG	=	0xe615
+                    E618    580 _EP2FIFOCFG	=	0xe618
+                    E619    581 _EP4FIFOCFG	=	0xe619
+                    E61A    582 _EP6FIFOCFG	=	0xe61a
+                    E61B    583 _EP8FIFOCFG	=	0xe61b
+                    E620    584 _EP2AUTOINLENH	=	0xe620
+                    E621    585 _EP2AUTOINLENL	=	0xe621
+                    E622    586 _EP4AUTOINLENH	=	0xe622
+                    E623    587 _EP4AUTOINLENL	=	0xe623
+                    E624    588 _EP6AUTOINLENH	=	0xe624
+                    E625    589 _EP6AUTOINLENL	=	0xe625
+                    E626    590 _EP8AUTOINLENH	=	0xe626
+                    E627    591 _EP8AUTOINLENL	=	0xe627
+                    E630    592 _EP2FIFOPFH	=	0xe630
+                    E631    593 _EP2FIFOPFL	=	0xe631
+                    E632    594 _EP4FIFOPFH	=	0xe632
+                    E633    595 _EP4FIFOPFL	=	0xe633
+                    E634    596 _EP6FIFOPFH	=	0xe634
+                    E635    597 _EP6FIFOPFL	=	0xe635
+                    E636    598 _EP8FIFOPFH	=	0xe636
+                    E637    599 _EP8FIFOPFL	=	0xe637
+                    E640    600 _EP2ISOINPKTS	=	0xe640
+                    E641    601 _EP4ISOINPKTS	=	0xe641
+                    E642    602 _EP6ISOINPKTS	=	0xe642
+                    E643    603 _EP8ISOINPKTS	=	0xe643
+                    E648    604 _INPKTEND	=	0xe648
+                    E649    605 _OUTPKTEND	=	0xe649
+                    E650    606 _EP2FIFOIE	=	0xe650
+                    E651    607 _EP2FIFOIRQ	=	0xe651
+                    E652    608 _EP4FIFOIE	=	0xe652
+                    E653    609 _EP4FIFOIRQ	=	0xe653
+                    E654    610 _EP6FIFOIE	=	0xe654
+                    E655    611 _EP6FIFOIRQ	=	0xe655
+                    E656    612 _EP8FIFOIE	=	0xe656
+                    E657    613 _EP8FIFOIRQ	=	0xe657
+                    E658    614 _IBNIE	=	0xe658
+                    E659    615 _IBNIRQ	=	0xe659
+                    E65A    616 _NAKIE	=	0xe65a
+                    E65B    617 _NAKIRQ	=	0xe65b
+                    E65C    618 _USBIE	=	0xe65c
+                    E65D    619 _USBIRQ	=	0xe65d
+                    E65E    620 _EPIE	=	0xe65e
+                    E65F    621 _EPIRQ	=	0xe65f
+                    E660    622 _GPIFIE	=	0xe660
+                    E661    623 _GPIFIRQ	=	0xe661
+                    E662    624 _USBERRIE	=	0xe662
+                    E663    625 _USBERRIRQ	=	0xe663
+                    E664    626 _ERRCNTLIM	=	0xe664
+                    E665    627 _CLRERRCNT	=	0xe665
+                    E666    628 _INT2IVEC	=	0xe666
+                    E667    629 _INT4IVEC	=	0xe667
+                    E668    630 _INTSETUP	=	0xe668
+                    E670    631 _PORTACFG	=	0xe670
+                    E671    632 _PORTCCFG	=	0xe671
+                    E672    633 _PORTECFG	=	0xe672
+                    E678    634 _I2CS	=	0xe678
+                    E679    635 _I2DAT	=	0xe679
+                    E67A    636 _I2CTL	=	0xe67a
+                    E67B    637 _XAUTODAT1	=	0xe67b
+                    E67C    638 _XAUTODAT2	=	0xe67c
+                    E680    639 _USBCS	=	0xe680
+                    E681    640 _SUSPEND	=	0xe681
+                    E682    641 _WAKEUPCS	=	0xe682
+                    E683    642 _TOGCTL	=	0xe683
+                    E684    643 _USBFRAMEH	=	0xe684
+                    E685    644 _USBFRAMEL	=	0xe685
+                    E686    645 _MICROFRAME	=	0xe686
+                    E687    646 _FNADDR	=	0xe687
+                    E68A    647 _EP0BCH	=	0xe68a
+                    E68B    648 _EP0BCL	=	0xe68b
+                    E68D    649 _EP1OUTBC	=	0xe68d
+                    E68F    650 _EP1INBC	=	0xe68f
+                    E690    651 _EP2BCH	=	0xe690
+                    E691    652 _EP2BCL	=	0xe691
+                    E694    653 _EP4BCH	=	0xe694
+                    E695    654 _EP4BCL	=	0xe695
+                    E698    655 _EP6BCH	=	0xe698
+                    E699    656 _EP6BCL	=	0xe699
+                    E69C    657 _EP8BCH	=	0xe69c
+                    E69D    658 _EP8BCL	=	0xe69d
+                    E6A0    659 _EP0CS	=	0xe6a0
+                    E6A1    660 _EP1OUTCS	=	0xe6a1
+                    E6A2    661 _EP1INCS	=	0xe6a2
+                    E6A3    662 _EP2CS	=	0xe6a3
+                    E6A4    663 _EP4CS	=	0xe6a4
+                    E6A5    664 _EP6CS	=	0xe6a5
+                    E6A6    665 _EP8CS	=	0xe6a6
+                    E6A7    666 _EP2FIFOFLGS	=	0xe6a7
+                    E6A8    667 _EP4FIFOFLGS	=	0xe6a8
+                    E6A9    668 _EP6FIFOFLGS	=	0xe6a9
+                    E6AA    669 _EP8FIFOFLGS	=	0xe6aa
+                    E6AB    670 _EP2FIFOBCH	=	0xe6ab
+                    E6AC    671 _EP2FIFOBCL	=	0xe6ac
+                    E6AD    672 _EP4FIFOBCH	=	0xe6ad
+                    E6AE    673 _EP4FIFOBCL	=	0xe6ae
+                    E6AF    674 _EP6FIFOBCH	=	0xe6af
+                    E6B0    675 _EP6FIFOBCL	=	0xe6b0
+                    E6B1    676 _EP8FIFOBCH	=	0xe6b1
+                    E6B2    677 _EP8FIFOBCL	=	0xe6b2
+                    E6B3    678 _SUDPTRH	=	0xe6b3
+                    E6B4    679 _SUDPTRL	=	0xe6b4
+                    E6B5    680 _SUDPTRCTL	=	0xe6b5
+                    E6B8    681 _SETUPDAT	=	0xe6b8
+                    E6C0    682 _GPIFWFSELECT	=	0xe6c0
+                    E6C1    683 _GPIFIDLECS	=	0xe6c1
+                    E6C2    684 _GPIFIDLECTL	=	0xe6c2
+                    E6C3    685 _GPIFCTLCFG	=	0xe6c3
+                    E6C4    686 _GPIFADRH	=	0xe6c4
+                    E6C5    687 _GPIFADRL	=	0xe6c5
+                    E6CE    688 _GPIFTCB3	=	0xe6ce
+                    E6CF    689 _GPIFTCB2	=	0xe6cf
+                    E6D0    690 _GPIFTCB1	=	0xe6d0
+                    E6D1    691 _GPIFTCB0	=	0xe6d1
+                    E6D2    692 _EP2GPIFFLGSEL	=	0xe6d2
+                    E6D3    693 _EP2GPIFPFSTOP	=	0xe6d3
+                    E6D4    694 _EP2GPIFTRIG	=	0xe6d4
+                    E6DA    695 _EP4GPIFFLGSEL	=	0xe6da
+                    E6DB    696 _EP4GPIFPFSTOP	=	0xe6db
+                    E6DC    697 _EP4GPIFTRIG	=	0xe6dc
+                    E6E2    698 _EP6GPIFFLGSEL	=	0xe6e2
+                    E6E3    699 _EP6GPIFPFSTOP	=	0xe6e3
+                    E6E4    700 _EP6GPIFTRIG	=	0xe6e4
+                    E6EA    701 _EP8GPIFFLGSEL	=	0xe6ea
+                    E6EB    702 _EP8GPIFPFSTOP	=	0xe6eb
+                    E6EC    703 _EP8GPIFTRIG	=	0xe6ec
+                    E6F0    704 _XGPIFSGLDATH	=	0xe6f0
+                    E6F1    705 _XGPIFSGLDATLX	=	0xe6f1
+                    E6F2    706 _XGPIFSGLDATLNOX	=	0xe6f2
+                    E6F3    707 _GPIFREADYCFG	=	0xe6f3
+                    E6F4    708 _GPIFREADYSTAT	=	0xe6f4
+                    E6F5    709 _GPIFABORT	=	0xe6f5
+                    E6C6    710 _FLOWSTATE	=	0xe6c6
+                    E6C7    711 _FLOWLOGIC	=	0xe6c7
+                    E6C8    712 _FLOWEQ0CTL	=	0xe6c8
+                    E6C9    713 _FLOWEQ1CTL	=	0xe6c9
+                    E6CA    714 _FLOWHOLDOFF	=	0xe6ca
+                    E6CB    715 _FLOWSTB	=	0xe6cb
+                    E6CC    716 _FLOWSTBEDGE	=	0xe6cc
+                    E6CD    717 _FLOWSTBHPERIOD	=	0xe6cd
+                    E60C    718 _GPIFHOLDAMOUNT	=	0xe60c
+                    E67D    719 _UDMACRCH	=	0xe67d
+                    E67E    720 _UDMACRCL	=	0xe67e
+                    E67F    721 _UDMACRCQUAL	=	0xe67f
+                    E6F8    722 _DBUG	=	0xe6f8
+                    E6F9    723 _TESTCFG	=	0xe6f9
+                    E6FA    724 _USBTEST	=	0xe6fa
+                    E6FB    725 _CT1	=	0xe6fb
+                    E6FC    726 _CT2	=	0xe6fc
+                    E6FD    727 _CT3	=	0xe6fd
+                    E6FE    728 _CT4	=	0xe6fe
+                    E740    729 _EP0BUF	=	0xe740
+                    E780    730 _EP1OUTBUF	=	0xe780
+                    E7C0    731 _EP1INBUF	=	0xe7c0
+                    F000    732 _EP2FIFOBUF	=	0xf000
+                    F400    733 _EP4FIFOBUF	=	0xf400
+                    F800    734 _EP6FIFOBUF	=	0xf800
+                    FC00    735 _EP8FIFOBUF	=	0xfc00
+                    6000    736 _DDC0_DR0	=	0x6000
+                    6001    737 _DDC0_DR1	=	0x6001
+                    6002    738 _DDC0_DR2	=	0x6002
+                    6003    739 _DDC0_DR3	=	0x6003
+                    6004    740 _DDC0_DR4	=	0x6004
+                    6006    741 _DDC0_LAR	=	0x6006
+                    6007    742 _DDC0_AMR	=	0x6007
+                    6010    743 _DDC1_DR0	=	0x6010
+                    6011    744 _DDC1_DR1	=	0x6011
+                    6012    745 _DDC1_DR2	=	0x6012
+                    6013    746 _DDC1_DR3	=	0x6013
+                    6014    747 _DDC1_DR4	=	0x6014
+                    6016    748 _DDC1_LAR	=	0x6016
+                    6017    749 _DDC1_AMR	=	0x6017
+                    6020    750 _DDC_CNTRL	=	0x6020
+                    6021    751 _LTC2208_CNTRL_REG	=	0x6021
+                    6022    752 _DEBUG_LED_REG	=	0x6022
+                    6023    753 _ATTN	=	0x6023
+                    6024    754 _RFFE_CNTRL	=	0x6024
+                    6025    755 _CPLD_GPIO	=	0x6025
+                            756 ;--------------------------------------------------------
+                            757 ; external initialized ram data
+                            758 ;--------------------------------------------------------
+                            759 	.area CSEG    (CODE)
+                            760 	.area GSINIT0 (CODE)
+                            761 	.area GSINIT1 (CODE)
+                            762 	.area GSINIT2 (CODE)
+                            763 	.area GSINIT3 (CODE)
+                            764 	.area GSINIT4 (CODE)
+                            765 	.area GSINIT5 (CODE)
+                            766 ;--------------------------------------------------------
+                            767 ; global & static initialisations
+                            768 ;--------------------------------------------------------
+                            769 	.area CSEG    (CODE)
+                            770 	.area GSINIT  (CODE)
+                            771 	.area GSFINAL (CODE)
+                            772 	.area GSINIT  (CODE)
+                            773 ;--------------------------------------------------------
+                            774 ; Home
+                            775 ;--------------------------------------------------------
+                            776 	.area HOME    (CODE)
+                            777 	.area CSEG    (CODE)
+                            778 ;--------------------------------------------------------
+                            779 ; code
+                            780 ;--------------------------------------------------------
+                            781 	.area CSEG    (CODE)
+                            782 ;------------------------------------------------------------
+                            783 ;Allocation info for local variables in function 'setup_enables'
+                            784 ;------------------------------------------------------------
+                            785 ;enables                   Allocated to registers r2 
+                            786 ;------------------------------------------------------------
+                            787 ;src/lib/spi.c:30: setup_enables (unsigned char enables)
+                            788 ;	-----------------------------------------
+                            789 ;	 function setup_enables
+                            790 ;	-----------------------------------------
+   0672                     791 _setup_enables:
+                    0002    792 	ar2 = 0x02
+                    0003    793 	ar3 = 0x03
+                    0004    794 	ar4 = 0x04
+                    0005    795 	ar5 = 0x05
+                    0006    796 	ar6 = 0x06
+                    0007    797 	ar7 = 0x07
+                    0000    798 	ar0 = 0x00
+                    0001    799 	ar1 = 0x01
+                            800 ;     genReceive
+   0672 AA 82               801 	mov	r2,dpl
+                            802 ;src/lib/spi.c:32: if (enables == 0)
+                            803 ;     genCmpEq
+                            804 ;	Peephole 112.b	changed ljmp to sjmp
+                            805 ;	Peephole 199	optimized misc jump sequence
+   0674 BA 00 05            806 	cjne	r2,#0x00,00104$
+                            807 ;00110$:
+                            808 ;	Peephole 200	removed redundant sjmp
+   0677                     809 00111$:
+                            810 ;src/lib/spi.c:34: bitFPGA_CS = 0; // set FPGA CS low
+                            811 ;     genAssign
+   0677 C2 A6               812 	clr	_bitFPGA_CS
+                            813 ;src/lib/spi.c:35: bitCPLD_CS = 0; // set CPLD CS low
+                            814 ;     genAssign
+   0679 C2 A7               815 	clr	_bitCPLD_CS
+                            816 ;	Peephole 112.b	changed ljmp to sjmp
+                            817 ;	Peephole 251.b	replaced sjmp to ret with ret
+   067B 22                  818 	ret
+   067C                     819 00104$:
+                            820 ;src/lib/spi.c:37: else if (enables == SPI_ENABLE_FPGA)
+                            821 ;     genCmpEq
+                            822 ;	Peephole 112.b	changed ljmp to sjmp
+                            823 ;	Peephole 199	optimized misc jump sequence
+   067C BA 80 02            824 	cjne	r2,#0x80,00106$
+                            825 ;00112$:
+                            826 ;	Peephole 200	removed redundant sjmp
+   067F                     827 00113$:
+                            828 ;src/lib/spi.c:38: bitFPGA_CS = 1; // set FPGA CS high = enabled
+                            829 ;     genAssign
+   067F D2 A6               830 	setb	_bitFPGA_CS
+   0681                     831 00106$:
+   0681 22                  832 	ret
+                            833 ;------------------------------------------------------------
+                            834 ;Allocation info for local variables in function 'init_spi'
+                            835 ;------------------------------------------------------------
+                            836 ;------------------------------------------------------------
+                            837 ;src/lib/spi.c:44: init_spi (void)
+                            838 ;	-----------------------------------------
+                            839 ;	 function init_spi
+                            840 ;	-----------------------------------------
+   0682                     841 _init_spi:
+                            842 ;src/lib/spi.c:46: disable_all ();		/* disable all devs	  */
+                            843 ;     genCall
+   0682 75 82 00            844 	mov	dpl,#0x00
+   0685 12 06 72            845 	lcall	_setup_enables
+                            846 ;src/lib/spi.c:47: bitS_OUT = 0;			/* idle state has CLK = 0 */
+                            847 ;     genAssign
+   0688 C2 80               848 	clr	_bitS_OUT
+   068A                     849 00101$:
+   068A 22                  850 	ret
+                            851 ;------------------------------------------------------------
+                            852 ;Allocation info for local variables in function 'count_bits8'
+                            853 ;------------------------------------------------------------
+                            854 ;v                         Allocated to registers r2 
+                            855 ;count                     Allocated to registers r3 
+                            856 ;------------------------------------------------------------
+                            857 ;src/lib/spi.c:78: count_bits8 (unsigned char v)
+                            858 ;	-----------------------------------------
+                            859 ;	 function count_bits8
+                            860 ;	-----------------------------------------
+   068B                     861 _count_bits8:
+                            862 ;     genReceive
+   068B AA 82               863 	mov	r2,dpl
+                            864 ;src/lib/spi.c:80: unsigned char count = 0;
+                            865 ;     genAssign
+   068D 7B 00               866 	mov	r3,#0x00
+                            867 ;src/lib/spi.c:81: if (v & (1 << 0)) count++;
+                            868 ;     genAnd
+   068F EA                  869 	mov	a,r2
+                            870 ;     genIfxJump
+                            871 ;	Peephole 111	removed ljmp by inverse jump logic
+   0690 30 E0 02            872 	jnb	acc.0,00102$
+   0693                     873 00127$:
+                            874 ;     genAssign
+   0693 7B 01               875 	mov	r3,#0x01
+   0695                     876 00102$:
+                            877 ;src/lib/spi.c:82: if (v & (1 << 1)) count++;
+                            878 ;     genAnd
+   0695 EA                  879 	mov	a,r2
+                            880 ;     genIfxJump
+                            881 ;	Peephole 111	removed ljmp by inverse jump logic
+   0696 30 E1 01            882 	jnb	acc.1,00104$
+   0699                     883 00128$:
+                            884 ;     genPlus
+                            885 ;     genPlusIncr
+   0699 0B                  886 	inc	r3
+   069A                     887 00104$:
+                            888 ;src/lib/spi.c:83: if (v & (1 << 2)) count++;
+                            889 ;     genAnd
+   069A EA                  890 	mov	a,r2
+                            891 ;     genIfxJump
+                            892 ;	Peephole 111	removed ljmp by inverse jump logic
+   069B 30 E2 01            893 	jnb	acc.2,00106$
+   069E                     894 00129$:
+                            895 ;     genPlus
+                            896 ;     genPlusIncr
+   069E 0B                  897 	inc	r3
+   069F                     898 00106$:
+                            899 ;src/lib/spi.c:84: if (v & (1 << 3)) count++;
+                            900 ;     genAnd
+   069F EA                  901 	mov	a,r2
+                            902 ;     genIfxJump
+                            903 ;	Peephole 111	removed ljmp by inverse jump logic
+   06A0 30 E3 01            904 	jnb	acc.3,00108$
+   06A3                     905 00130$:
+                            906 ;     genPlus
+                            907 ;     genPlusIncr
+   06A3 0B                  908 	inc	r3
+   06A4                     909 00108$:
+                            910 ;src/lib/spi.c:85: if (v & (1 << 4)) count++;
+                            911 ;     genAnd
+   06A4 EA                  912 	mov	a,r2
+                            913 ;     genIfxJump
+                            914 ;	Peephole 111	removed ljmp by inverse jump logic
+   06A5 30 E4 01            915 	jnb	acc.4,00110$
+   06A8                     916 00131$:
+                            917 ;     genPlus
+                            918 ;     genPlusIncr
+   06A8 0B                  919 	inc	r3
+   06A9                     920 00110$:
+                            921 ;src/lib/spi.c:86: if (v & (1 << 5)) count++;
+                            922 ;     genAnd
+   06A9 EA                  923 	mov	a,r2
+                            924 ;     genIfxJump
+                            925 ;	Peephole 111	removed ljmp by inverse jump logic
+   06AA 30 E5 01            926 	jnb	acc.5,00112$
+   06AD                     927 00132$:
+                            928 ;     genPlus
+                            929 ;     genPlusIncr
+   06AD 0B                  930 	inc	r3
+   06AE                     931 00112$:
+                            932 ;src/lib/spi.c:87: if (v & (1 << 6)) count++;
+                            933 ;     genAnd
+   06AE EA                  934 	mov	a,r2
+                            935 ;     genIfxJump
+                            936 ;	Peephole 111	removed ljmp by inverse jump logic
+   06AF 30 E6 01            937 	jnb	acc.6,00114$
+   06B2                     938 00133$:
+                            939 ;     genPlus
+                            940 ;     genPlusIncr
+   06B2 0B                  941 	inc	r3
+   06B3                     942 00114$:
+                            943 ;src/lib/spi.c:88: if (v & (1 << 7)) count++;
+                            944 ;     genAnd
+   06B3 EA                  945 	mov	a,r2
+                            946 ;     genIfxJump
+                            947 ;	Peephole 111	removed ljmp by inverse jump logic
+   06B4 30 E7 01            948 	jnb	acc.7,00116$
+   06B7                     949 00134$:
+                            950 ;     genPlus
+                            951 ;     genPlusIncr
+   06B7 0B                  952 	inc	r3
+   06B8                     953 00116$:
+                            954 ;src/lib/spi.c:89: return count;
+                            955 ;     genRet
+   06B8 8B 82               956 	mov	dpl,r3
+   06BA                     957 00117$:
+   06BA 22                  958 	ret
+                            959 ;------------------------------------------------------------
+                            960 ;Allocation info for local variables in function 'spi_read'
+                            961 ;------------------------------------------------------------
+                            962 ;header_lo                 Allocated with name '_spi_read_PARM_2'
+                            963 ;enables                   Allocated with name '_spi_read_PARM_3'
+                            964 ;format                    Allocated with name '_spi_read_PARM_4'
+                            965 ;buf                       Allocated with name '_spi_read_PARM_5'
+                            966 ;len                       Allocated with name '_spi_read_PARM_6'
+                            967 ;header_hi                 Allocated to registers r2 
+                            968 ;------------------------------------------------------------
+                            969 ;src/lib/spi.c:105: spi_read (unsigned char header_hi, unsigned char header_lo,
+                            970 ;	-----------------------------------------
+                            971 ;	 function spi_read
+                            972 ;	-----------------------------------------
+   06BB                     973 _spi_read:
+                            974 ;     genReceive
+   06BB AA 82               975 	mov	r2,dpl
+                            976 ;src/lib/spi.c:109: if (count_bits8 (enables) > 1)
+                            977 ;     genCall
+   06BD 85 10 82            978 	mov	dpl,_spi_read_PARM_3
+   06C0 C0 02               979 	push	ar2
+   06C2 12 06 8B            980 	lcall	_count_bits8
+   06C5 AB 82               981 	mov	r3,dpl
+   06C7 D0 02               982 	pop	ar2
+                            983 ;     genCmpGt
+                            984 ;     genCmp
+                            985 ;     genIfxJump
+                            986 ;	Peephole 108	removed ljmp by inverse jump logic
+                            987 ;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
+   06C9 EB                  988 	mov	a,r3
+   06CA 24 FE               989 	add	a,#0xff - 0x01
+   06CC 50 04               990 	jnc	00102$
+   06CE                     991 00121$:
+                            992 ;src/lib/spi.c:110: return 0;		// error, too many enables set
+                            993 ;     genRet
+   06CE 75 82 00            994 	mov	dpl,#0x00
+                            995 ;	Peephole 112.b	changed ljmp to sjmp
+                            996 ;	Peephole 251.b	replaced sjmp to ret with ret
+   06D1 22                  997 	ret
+   06D2                     998 00102$:
+                            999 ;src/lib/spi.c:112: setup_enables (enables);
+                           1000 ;     genCall
+   06D2 85 10 82           1001 	mov	dpl,_spi_read_PARM_3
+   06D5 C0 02              1002 	push	ar2
+   06D7 12 06 72           1003 	lcall	_setup_enables
+   06DA D0 02              1004 	pop	ar2
+                           1005 ;src/lib/spi.c:114: if (format & SPI_FMT_LSB){		// order: LSB
+                           1006 ;     genAnd
+   06DC E5 11              1007 	mov	a,_spi_read_PARM_4
+                           1008 ;     genIfxJump
+                           1009 ;	Peephole 111	removed ljmp by inverse jump logic
+   06DE 30 E7 04           1010 	jnb	acc.7,00111$
+   06E1                    1011 00122$:
+                           1012 ;src/lib/spi.c:116: return 0;		// error, not implemented
+                           1013 ;     genRet
+   06E1 75 82 00           1014 	mov	dpl,#0x00
+                           1015 ;	Peephole 112.b	changed ljmp to sjmp
+                           1016 ;	Peephole 251.b	replaced sjmp to ret with ret
+   06E4 22                 1017 	ret
+   06E5                    1018 00111$:
+                           1019 ;src/lib/spi.c:138: switch (format & SPI_FMT_HDR_MASK){
+                           1020 ;     genAnd
+   06E5 74 60              1021 	mov	a,#0x60
+   06E7 55 11              1022 	anl	a,_spi_read_PARM_4
+                           1023 ;     genCmpEq
+                           1024 ;	Peephole 112.b	changed ljmp to sjmp
+                           1025 ;	Peephole 115.b	jump optimization
+   06E9 FB                 1026 	mov	r3,a
+   06EA 60 23              1027 	jz	00107$
+   06EC                    1028 00123$:
+                           1029 ;     genCmpEq
+   06EC BB 20 02           1030 	cjne	r3,#0x20,00124$
+                           1031 ;	Peephole 112.b	changed ljmp to sjmp
+   06EF 80 05              1032 	sjmp	00104$
+   06F1                    1033 00124$:
+                           1034 ;     genCmpEq
+                           1035 ;	Peephole 112.b	changed ljmp to sjmp
+                           1036 ;src/lib/spi.c:141: case SPI_FMT_HDR_1:
+                           1037 ;	Peephole 112.b	changed ljmp to sjmp
+                           1038 ;	Peephole 199	optimized misc jump sequence
+   06F1 BB 40 17           1039 	cjne	r3,#0x40,00106$
+   06F4 80 08              1040 	sjmp	00105$
+                           1041 ;00125$:
+   06F6                    1042 00104$:
+                           1043 ;src/lib/spi.c:142: write_byte_msb (header_lo);
+                           1044 ;     genCall
+   06F6 85 0F 82           1045 	mov	dpl,_spi_read_PARM_2
+   06F9 12 07 82           1046 	lcall	_write_byte_msb
+                           1047 ;src/lib/spi.c:143: break;
+                           1048 ;src/lib/spi.c:144: case SPI_FMT_HDR_2:
+                           1049 ;	Peephole 112.b	changed ljmp to sjmp
+   06FC 80 11              1050 	sjmp	00107$
+   06FE                    1051 00105$:
+                           1052 ;src/lib/spi.c:145: write_byte_msb (header_hi);
+                           1053 ;     genCall
+   06FE 8A 82              1054 	mov	dpl,r2
+   0700 12 07 82           1055 	lcall	_write_byte_msb
+                           1056 ;src/lib/spi.c:146: write_byte_msb (header_lo);
+                           1057 ;     genCall
+   0703 85 0F 82           1058 	mov	dpl,_spi_read_PARM_2
+   0706 12 07 82           1059 	lcall	_write_byte_msb
+                           1060 ;src/lib/spi.c:147: break;
+                           1061 ;src/lib/spi.c:148: default:
+                           1062 ;	Peephole 112.b	changed ljmp to sjmp
+   0709 80 04              1063 	sjmp	00107$
+   070B                    1064 00106$:
+                           1065 ;src/lib/spi.c:149: return 0;		// error
+                           1066 ;     genRet
+   070B 75 82 00           1067 	mov	dpl,#0x00
+                           1068 ;src/lib/spi.c:150: }
+                           1069 ;	Peephole 112.b	changed ljmp to sjmp
+                           1070 ;	Peephole 251.b	replaced sjmp to ret with ret
+   070E 22                 1071 	ret
+   070F                    1072 00107$:
+                           1073 ;src/lib/spi.c:151: if (len != 0)
+                           1074 ;     genCmpEq
+   070F E5 14              1075 	mov	a,_spi_read_PARM_6
+                           1076 ;	Peephole 110	removed ljmp by inverse jump logic
+   0711 60 0C              1077 	jz	00112$
+   0713                    1078 00126$:
+                           1079 ;src/lib/spi.c:152: read_bytes_msb (buf, len);
+                           1080 ;     genAssign
+   0713 85 14 1C           1081 	mov	_read_bytes_msb_PARM_2,_spi_read_PARM_6
+                           1082 ;     genCall
+   0716 85 12 82           1083 	mov	dpl,_spi_read_PARM_5
+   0719 85 13 83           1084 	mov	dph,(_spi_read_PARM_5 + 1)
+   071C 12 08 3D           1085 	lcall	_read_bytes_msb
+   071F                    1086 00112$:
+                           1087 ;src/lib/spi.c:155: disable_all ();
+                           1088 ;     genCall
+   071F 75 82 00           1089 	mov	dpl,#0x00
+   0722 12 06 72           1090 	lcall	_setup_enables
+                           1091 ;src/lib/spi.c:156: return 1;		// success
+                           1092 ;     genRet
+   0725 75 82 01           1093 	mov	dpl,#0x01
+   0728                    1094 00113$:
+   0728 22                 1095 	ret
+                           1096 ;------------------------------------------------------------
+                           1097 ;Allocation info for local variables in function 'spi_write'
+                           1098 ;------------------------------------------------------------
+                           1099 ;header_lo                 Allocated with name '_spi_write_PARM_2'
+                           1100 ;enables                   Allocated with name '_spi_write_PARM_3'
+                           1101 ;format                    Allocated with name '_spi_write_PARM_4'
+                           1102 ;buf                       Allocated with name '_spi_write_PARM_5'
+                           1103 ;len                       Allocated with name '_spi_write_PARM_6'
+                           1104 ;header_hi                 Allocated to registers r2 
+                           1105 ;------------------------------------------------------------
+                           1106 ;src/lib/spi.c:162: spi_write (unsigned char header_hi, unsigned char header_lo,
+                           1107 ;	-----------------------------------------
+                           1108 ;	 function spi_write
+                           1109 ;	-----------------------------------------
+   0729                    1110 _spi_write:
+                           1111 ;     genReceive
+   0729 AA 82              1112 	mov	r2,dpl
+                           1113 ;src/lib/spi.c:166: setup_enables (enables);
+                           1114 ;     genCall
+   072B 85 16 82           1115 	mov	dpl,_spi_write_PARM_3
+   072E C0 02              1116 	push	ar2
+   0730 12 06 72           1117 	lcall	_setup_enables
+   0733 D0 02              1118 	pop	ar2
+                           1119 ;src/lib/spi.c:168: if (format & SPI_FMT_LSB){		// order: LSB
+                           1120 ;     genAnd
+   0735 E5 17              1121 	mov	a,_spi_write_PARM_4
+                           1122 ;     genIfxJump
+                           1123 ;	Peephole 111	removed ljmp by inverse jump logic
+   0737 30 E7 04           1124 	jnb	acc.7,00109$
+   073A                    1125 00118$:
+                           1126 ;src/lib/spi.c:170: return 0;		// error, not implemented
+                           1127 ;     genRet
+   073A 75 82 00           1128 	mov	dpl,#0x00
+                           1129 ;	Peephole 112.b	changed ljmp to sjmp
+                           1130 ;	Peephole 251.b	replaced sjmp to ret with ret
+   073D 22                 1131 	ret
+   073E                    1132 00109$:
+                           1133 ;src/lib/spi.c:192: switch (format & SPI_FMT_HDR_MASK){
+                           1134 ;     genAnd
+   073E 74 60              1135 	mov	a,#0x60
+   0740 55 17              1136 	anl	a,_spi_write_PARM_4
+                           1137 ;     genCmpEq
+                           1138 ;	Peephole 112.b	changed ljmp to sjmp
+                           1139 ;	Peephole 115.b	jump optimization
+   0742 FB                 1140 	mov	r3,a
+   0743 60 23              1141 	jz	00105$
+   0745                    1142 00119$:
+                           1143 ;     genCmpEq
+   0745 BB 20 02           1144 	cjne	r3,#0x20,00120$
+                           1145 ;	Peephole 112.b	changed ljmp to sjmp
+   0748 80 05              1146 	sjmp	00102$
+   074A                    1147 00120$:
+                           1148 ;     genCmpEq
+                           1149 ;	Peephole 112.b	changed ljmp to sjmp
+                           1150 ;src/lib/spi.c:195: case SPI_FMT_HDR_1:
+                           1151 ;	Peephole 112.b	changed ljmp to sjmp
+                           1152 ;	Peephole 199	optimized misc jump sequence
+   074A BB 40 17           1153 	cjne	r3,#0x40,00104$
+   074D 80 08              1154 	sjmp	00103$
+                           1155 ;00121$:
+   074F                    1156 00102$:
+                           1157 ;src/lib/spi.c:196: write_byte_msb (header_lo);
+                           1158 ;     genCall
+   074F 85 15 82           1159 	mov	dpl,_spi_write_PARM_2
+   0752 12 07 82           1160 	lcall	_write_byte_msb
+                           1161 ;src/lib/spi.c:197: break;
+                           1162 ;src/lib/spi.c:198: case SPI_FMT_HDR_2:
+                           1163 ;	Peephole 112.b	changed ljmp to sjmp
+   0755 80 11              1164 	sjmp	00105$
+   0757                    1165 00103$:
+                           1166 ;src/lib/spi.c:199: write_byte_msb (header_hi);
+                           1167 ;     genCall
+   0757 8A 82              1168 	mov	dpl,r2
+   0759 12 07 82           1169 	lcall	_write_byte_msb
+                           1170 ;src/lib/spi.c:200: write_byte_msb (header_lo);
+                           1171 ;     genCall
+   075C 85 15 82           1172 	mov	dpl,_spi_write_PARM_2
+   075F 12 07 82           1173 	lcall	_write_byte_msb
+                           1174 ;src/lib/spi.c:201: break;
+                           1175 ;src/lib/spi.c:202: default:
+                           1176 ;	Peephole 112.b	changed ljmp to sjmp
+   0762 80 04              1177 	sjmp	00105$
+   0764                    1178 00104$:
+                           1179 ;src/lib/spi.c:203: return 0;		// error
+                           1180 ;     genRet
+   0764 75 82 00           1181 	mov	dpl,#0x00
+                           1182 ;src/lib/spi.c:204: }
+                           1183 ;	Peephole 112.b	changed ljmp to sjmp
+                           1184 ;	Peephole 251.b	replaced sjmp to ret with ret
+   0767 22                 1185 	ret
+   0768                    1186 00105$:
+                           1187 ;src/lib/spi.c:205: if (len != 0)
+                           1188 ;     genCmpEq
+   0768 E5 1A              1189 	mov	a,_spi_write_PARM_6
+                           1190 ;	Peephole 110	removed ljmp by inverse jump logic
+   076A 60 0C              1191 	jz	00110$
+   076C                    1192 00122$:
+                           1193 ;src/lib/spi.c:206: write_bytes_msb (buf, len);
+                           1194 ;     genAssign
+   076C 85 1A 1B           1195 	mov	_write_bytes_msb_PARM_2,_spi_write_PARM_6
+                           1196 ;     genCall
+   076F 85 18 82           1197 	mov	dpl,_spi_write_PARM_5
+   0772 85 19 83           1198 	mov	dph,(_spi_write_PARM_5 + 1)
+   0775 12 07 D5           1199 	lcall	_write_bytes_msb
+   0778                    1200 00110$:
+                           1201 ;src/lib/spi.c:209: disable_all ();
+                           1202 ;     genCall
+   0778 75 82 00           1203 	mov	dpl,#0x00
+   077B 12 06 72           1204 	lcall	_setup_enables
+                           1205 ;src/lib/spi.c:210: return 1;		// success
+                           1206 ;     genRet
+   077E 75 82 01           1207 	mov	dpl,#0x01
+   0781                    1208 00111$:
+   0781 22                 1209 	ret
+                           1210 ;------------------------------------------------------------
+                           1211 ;Allocation info for local variables in function 'write_byte_msb'
+                           1212 ;------------------------------------------------------------
+                           1213 ;v                         Allocated to registers r2 
+                           1214 ;------------------------------------------------------------
+                           1215 ;src/lib/spi.c:216: write_byte_msb (unsigned char v)
+                           1216 ;	-----------------------------------------
+                           1217 ;	 function write_byte_msb
+                           1218 ;	-----------------------------------------
+   0782                    1219 _write_byte_msb:
+                           1220 ;     genReceive
+                           1221 ;src/lib/spi.c:218: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+                           1222 ;     genRLC
+                           1223 ;	peephole 177.g	optimized mov sequence
+   0782 E5 82              1224 	mov	a,dpl
+   0784 FA                 1225 	mov	r2,a
+   0785 23                 1226 	rl	a
+                           1227 ;src/lib/spi.c:219: bitS_OUT = v & 0x1;
+                           1228 ;     genAnd
+                           1229 ;	Peephole 105	removed redundant mov
+   0786 FA                 1230 	mov	r2,a
+   0787 13                 1231 	rrc	a
+   0788 92 80              1232 	mov	_bitS_OUT,c
+                           1233 ;src/lib/spi.c:220: bitS_CLK = 1;
+                           1234 ;     genAssign
+   078A D2 83              1235 	setb	_bitS_CLK
+                           1236 ;src/lib/spi.c:221: bitS_CLK = 0;
+                           1237 ;     genAssign
+   078C C2 83              1238 	clr	_bitS_CLK
+                           1239 ;src/lib/spi.c:223: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+                           1240 ;     genRLC
+   078E EA                 1241 	mov	a,r2
+   078F 23                 1242 	rl	a
+                           1243 ;src/lib/spi.c:224: bitS_OUT = v & 0x1;
+                           1244 ;     genAnd
+                           1245 ;	Peephole 105	removed redundant mov
+   0790 FA                 1246 	mov	r2,a
+   0791 13                 1247 	rrc	a
+   0792 92 80              1248 	mov	_bitS_OUT,c
+                           1249 ;src/lib/spi.c:225: bitS_CLK = 1;
+                           1250 ;     genAssign
+   0794 D2 83              1251 	setb	_bitS_CLK
+                           1252 ;src/lib/spi.c:226: bitS_CLK = 0;
+                           1253 ;     genAssign
+   0796 C2 83              1254 	clr	_bitS_CLK
+                           1255 ;src/lib/spi.c:228: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+                           1256 ;     genRLC
+   0798 EA                 1257 	mov	a,r2
+   0799 23                 1258 	rl	a
+                           1259 ;src/lib/spi.c:229: bitS_OUT = v & 0x1;
+                           1260 ;     genAnd
+                           1261 ;	Peephole 105	removed redundant mov
+   079A FA                 1262 	mov	r2,a
+   079B 13                 1263 	rrc	a
+   079C 92 80              1264 	mov	_bitS_OUT,c
+                           1265 ;src/lib/spi.c:230: bitS_CLK = 1;
+                           1266 ;     genAssign
+   079E D2 83              1267 	setb	_bitS_CLK
+                           1268 ;src/lib/spi.c:231: bitS_CLK = 0;
+                           1269 ;     genAssign
+   07A0 C2 83              1270 	clr	_bitS_CLK
+                           1271 ;src/lib/spi.c:233: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+                           1272 ;     genRLC
+   07A2 EA                 1273 	mov	a,r2
+   07A3 23                 1274 	rl	a
+                           1275 ;src/lib/spi.c:234: bitS_OUT = v & 0x1;
+                           1276 ;     genAnd
+                           1277 ;	Peephole 105	removed redundant mov
+   07A4 FA                 1278 	mov	r2,a
+   07A5 13                 1279 	rrc	a
+   07A6 92 80              1280 	mov	_bitS_OUT,c
+                           1281 ;src/lib/spi.c:235: bitS_CLK = 1;
+                           1282 ;     genAssign
+   07A8 D2 83              1283 	setb	_bitS_CLK
+                           1284 ;src/lib/spi.c:236: bitS_CLK = 0;
+                           1285 ;     genAssign
+   07AA C2 83              1286 	clr	_bitS_CLK
+                           1287 ;src/lib/spi.c:238: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+                           1288 ;     genRLC
+   07AC EA                 1289 	mov	a,r2
+   07AD 23                 1290 	rl	a
+                           1291 ;src/lib/spi.c:239: bitS_OUT = v & 0x1;
+                           1292 ;     genAnd
+                           1293 ;	Peephole 105	removed redundant mov
+   07AE FA                 1294 	mov	r2,a
+   07AF 13                 1295 	rrc	a
+   07B0 92 80              1296 	mov	_bitS_OUT,c
+                           1297 ;src/lib/spi.c:240: bitS_CLK = 1;
+                           1298 ;     genAssign
+   07B2 D2 83              1299 	setb	_bitS_CLK
+                           1300 ;src/lib/spi.c:241: bitS_CLK = 0;
+                           1301 ;     genAssign
+   07B4 C2 83              1302 	clr	_bitS_CLK
+                           1303 ;src/lib/spi.c:243: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+                           1304 ;     genRLC
+   07B6 EA                 1305 	mov	a,r2
+   07B7 23                 1306 	rl	a
+                           1307 ;src/lib/spi.c:244: bitS_OUT = v & 0x1;
+                           1308 ;     genAnd
+                           1309 ;	Peephole 105	removed redundant mov
+   07B8 FA                 1310 	mov	r2,a
+   07B9 13                 1311 	rrc	a
+   07BA 92 80              1312 	mov	_bitS_OUT,c
+                           1313 ;src/lib/spi.c:245: bitS_CLK = 1;
+                           1314 ;     genAssign
+   07BC D2 83              1315 	setb	_bitS_CLK
+                           1316 ;src/lib/spi.c:246: bitS_CLK = 0;
+                           1317 ;     genAssign
+   07BE C2 83              1318 	clr	_bitS_CLK
+                           1319 ;src/lib/spi.c:248: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+                           1320 ;     genRLC
+   07C0 EA                 1321 	mov	a,r2
+   07C1 23                 1322 	rl	a
+                           1323 ;src/lib/spi.c:249: bitS_OUT = v & 0x1;
+                           1324 ;     genAnd
+                           1325 ;	Peephole 105	removed redundant mov
+   07C2 FA                 1326 	mov	r2,a
+   07C3 13                 1327 	rrc	a
+   07C4 92 80              1328 	mov	_bitS_OUT,c
+                           1329 ;src/lib/spi.c:250: bitS_CLK = 1;
+                           1330 ;     genAssign
+   07C6 D2 83              1331 	setb	_bitS_CLK
+                           1332 ;src/lib/spi.c:251: bitS_CLK = 0;
+                           1333 ;     genAssign
+   07C8 C2 83              1334 	clr	_bitS_CLK
+                           1335 ;src/lib/spi.c:253: v = (v << 1) | (v >> 7);	// rotate left (MSB into bottom bit)
+                           1336 ;     genRLC
+   07CA EA                 1337 	mov	a,r2
+   07CB 23                 1338 	rl	a
+                           1339 ;src/lib/spi.c:254: bitS_OUT = v & 0x1;
+                           1340 ;     genAnd
+                           1341 ;	Peephole 105	removed redundant mov
+   07CC FA                 1342 	mov	r2,a
+   07CD 13                 1343 	rrc	a
+   07CE 92 80              1344 	mov	_bitS_OUT,c
+                           1345 ;src/lib/spi.c:255: bitS_CLK = 1;
+                           1346 ;     genAssign
+   07D0 D2 83              1347 	setb	_bitS_CLK
+                           1348 ;src/lib/spi.c:256: bitS_CLK = 0;
+                           1349 ;     genAssign
+   07D2 C2 83              1350 	clr	_bitS_CLK
+   07D4                    1351 00101$:
+   07D4 22                 1352 	ret
+                           1353 ;------------------------------------------------------------
+                           1354 ;Allocation info for local variables in function 'write_bytes_msb'
+                           1355 ;------------------------------------------------------------
+                           1356 ;len                       Allocated with name '_write_bytes_msb_PARM_2'
+                           1357 ;buf                       Allocated to registers r2 r3 
+                           1358 ;------------------------------------------------------------
+                           1359 ;src/lib/spi.c:260: write_bytes_msb (const xdata unsigned char *buf, unsigned char len)
+                           1360 ;	-----------------------------------------
+                           1361 ;	 function write_bytes_msb
+                           1362 ;	-----------------------------------------
+   07D5                    1363 _write_bytes_msb:
+                           1364 ;     genReceive
+   07D5 AA 82              1365 	mov	r2,dpl
+   07D7 AB 83              1366 	mov	r3,dph
+                           1367 ;src/lib/spi.c:262: while (len-- != 0){
+                           1368 ;     genAssign
+                           1369 ;     genAssign
+   07D9 AC 1B              1370 	mov	r4,_write_bytes_msb_PARM_2
+   07DB                    1371 00101$:
+                           1372 ;     genAssign
+   07DB 8C 05              1373 	mov	ar5,r4
+                           1374 ;     genMinus
+                           1375 ;     genMinusDec
+   07DD 1C                 1376 	dec	r4
+                           1377 ;     genCmpEq
+   07DE BD 00 01           1378 	cjne	r5,#0x00,00108$
+                           1379 ;	Peephole 112.b	changed ljmp to sjmp
+                           1380 ;	Peephole 251.b	replaced sjmp to ret with ret
+   07E1 22                 1381 	ret
+   07E2                    1382 00108$:
+                           1383 ;src/lib/spi.c:263: write_byte_msb (*buf++);
+                           1384 ;     genPointerGet
+                           1385 ;     genFarPointerGet
+   07E2 8A 82              1386 	mov	dpl,r2
+   07E4 8B 83              1387 	mov	dph,r3
+   07E6 E0                 1388 	movx	a,@dptr
+   07E7 FD                 1389 	mov	r5,a
+   07E8 A3                 1390 	inc	dptr
+   07E9 AA 82              1391 	mov	r2,dpl
+   07EB AB 83              1392 	mov	r3,dph
+                           1393 ;     genCall
+   07ED 8D 82              1394 	mov	dpl,r5
+   07EF C0 02              1395 	push	ar2
+   07F1 C0 03              1396 	push	ar3
+   07F3 C0 04              1397 	push	ar4
+   07F5 12 07 82           1398 	lcall	_write_byte_msb
+   07F8 D0 04              1399 	pop	ar4
+   07FA D0 03              1400 	pop	ar3
+   07FC D0 02              1401 	pop	ar2
+                           1402 ;	Peephole 112.b	changed ljmp to sjmp
+   07FE 80 DB              1403 	sjmp	00101$
+   0800                    1404 00104$:
+   0800 22                 1405 	ret
+                           1406 ;------------------------------------------------------------
+                           1407 ;Allocation info for local variables in function 'read_byte_msb'
+                           1408 ;------------------------------------------------------------
+                           1409 ;------------------------------------------------------------
+                           1410 ;src/lib/spi.c:319: read_byte_msb (void) _naked
+                           1411 ;	-----------------------------------------
+                           1412 ;	 function read_byte_msb
+                           1413 ;	-----------------------------------------
+   0801                    1414 _read_byte_msb:
+                           1415 ;	naked function: no prologue.
+                           1416 ;src/lib/spi.c:366: _endasm;
+                           1417 ;     genInline
+   0801 E4                 1418 	        clr a
+   0802 D2 83              1419 	        setb _bitS_CLK
+   0804 A2 81              1420 	        mov c, _bitS_IN
+   0806 33                 1421 	        rlc a
+   0807 C2 83              1422 	        clr _bitS_CLK
+   0809 D2 83              1423 	        setb _bitS_CLK
+   080B A2 81              1424 	        mov c, _bitS_IN
+   080D 33                 1425 	        rlc a
+   080E C2 83              1426 	        clr _bitS_CLK
+   0810 D2 83              1427 	        setb _bitS_CLK
+   0812 A2 81              1428 	        mov c, _bitS_IN
+   0814 33                 1429 	        rlc a
+   0815 C2 83              1430 	        clr _bitS_CLK
+   0817 D2 83              1431 	        setb _bitS_CLK
+   0819 A2 81              1432 	        mov c, _bitS_IN
+   081B 33                 1433 	        rlc a
+   081C C2 83              1434 	        clr _bitS_CLK
+   081E D2 83              1435 	        setb _bitS_CLK
+   0820 A2 81              1436 	        mov c, _bitS_IN
+   0822 33                 1437 	        rlc a
+   0823 C2 83              1438 	        clr _bitS_CLK
+   0825 D2 83              1439 	        setb _bitS_CLK
+   0827 A2 81              1440 	        mov c, _bitS_IN
+   0829 33                 1441 	        rlc a
+   082A C2 83              1442 	        clr _bitS_CLK
+   082C D2 83              1443 	        setb _bitS_CLK
+   082E A2 81              1444 	        mov c, _bitS_IN
+   0830 33                 1445 	        rlc a
+   0831 C2 83              1446 	        clr _bitS_CLK
+   0833 D2 83              1447 	        setb _bitS_CLK
+   0835 A2 81              1448 	        mov c, _bitS_IN
+   0837 33                 1449 	        rlc a
+   0838 C2 83              1450 	        clr _bitS_CLK
+   083A F5 82              1451 	        mov dpl,a
+   083C 22                 1452 	        ret
+   083D                    1453 00101$:
+                           1454 ;	naked function: no epilogue.
+                           1455 ;------------------------------------------------------------
+                           1456 ;Allocation info for local variables in function 'read_bytes_msb'
+                           1457 ;------------------------------------------------------------
+                           1458 ;len                       Allocated with name '_read_bytes_msb_PARM_2'
+                           1459 ;buf                       Allocated to registers r2 r3 
+                           1460 ;------------------------------------------------------------
+                           1461 ;src/lib/spi.c:371: read_bytes_msb (xdata unsigned char *buf, unsigned char len)
+                           1462 ;	-----------------------------------------
+                           1463 ;	 function read_bytes_msb
+                           1464 ;	-----------------------------------------
+   083D                    1465 _read_bytes_msb:
+                           1466 ;     genReceive
+   083D AA 82              1467 	mov	r2,dpl
+   083F AB 83              1468 	mov	r3,dph
+                           1469 ;src/lib/spi.c:373: while (len-- != 0){
+                           1470 ;     genAssign
+                           1471 ;     genAssign
+   0841 AC 1C              1472 	mov	r4,_read_bytes_msb_PARM_2
+   0843                    1473 00101$:
+                           1474 ;     genAssign
+   0843 8C 05              1475 	mov	ar5,r4
+                           1476 ;     genMinus
+                           1477 ;     genMinusDec
+   0845 1C                 1478 	dec	r4
+                           1479 ;     genCmpEq
+   0846 BD 00 01           1480 	cjne	r5,#0x00,00108$
+                           1481 ;	Peephole 112.b	changed ljmp to sjmp
+                           1482 ;	Peephole 251.b	replaced sjmp to ret with ret
+   0849 22                 1483 	ret
+   084A                    1484 00108$:
+                           1485 ;src/lib/spi.c:374: *buf++ = read_byte_msb ();
+                           1486 ;     genCall
+   084A 12 08 01           1487 	lcall	_read_byte_msb
+   084D AD 82              1488 	mov	r5,dpl
+                           1489 ;     genPointerSet
+                           1490 ;     genFarPointerSet
+   084F 8A 82              1491 	mov	dpl,r2
+   0851 8B 83              1492 	mov	dph,r3
+   0853 ED                 1493 	mov	a,r5
+   0854 F0                 1494 	movx	@dptr,a
+   0855 A3                 1495 	inc	dptr
+   0856 AA 82              1496 	mov	r2,dpl
+   0858 AB 83              1497 	mov	r3,dph
+                           1498 ;	Peephole 112.b	changed ljmp to sjmp
+   085A 80 E7              1499 	sjmp	00101$
+   085C                    1500 00104$:
+   085C 22                 1501 	ret
+                           1502 	.area CSEG    (CODE)

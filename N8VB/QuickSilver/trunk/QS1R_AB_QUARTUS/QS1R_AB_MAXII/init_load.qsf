@@ -1,0 +1,119 @@
+# Copyright (C) 1991-2006 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#		init_load_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name DEVICE EPM240T100C5
+set_global_assignment -name FAMILY "MAX II"
+set_global_assignment -name TOP_LEVEL_ENTITY init_load
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 6.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "09:28:03  DECEMBER 19, 2006"
+set_global_assignment -name LAST_QUARTUS_VERSION 6.1
+set_location_assignment PIN_1 -to D[0]
+set_location_assignment PIN_2 -to D[1]
+set_location_assignment PIN_3 -to D[2]
+set_location_assignment PIN_4 -to D[3]
+set_location_assignment PIN_5 -to D[4]
+set_location_assignment PIN_6 -to D[5]
+set_location_assignment PIN_7 -to D[6]
+set_location_assignment PIN_8 -to D[7]
+set_location_assignment PIN_12 -to FX2CLK
+set_location_assignment PIN_14 -to CLKA
+set_location_assignment PIN_15 -to DITH
+set_location_assignment PIN_16 -to SHDN
+set_location_assignment PIN_17 -to RAND
+set_location_assignment PIN_18 -to PGA
+set_location_assignment PIN_19 -to OVERFLOW
+set_location_assignment PIN_20 -to ADC_OVFL_IND
+set_location_assignment PIN_21 -to CPLD_RESET_OUT
+set_location_assignment PIN_26 -to HPF_BYPASS
+set_location_assignment PIN_27 -to HPF_BYPASS_N
+set_location_assignment PIN_28 -to LPF_BYPASS
+set_location_assignment PIN_29 -to LPF_BYPASS_N
+set_location_assignment PIN_30 -to RFA_BYPASS
+set_location_assignment PIN_33 -to RFA_BYPASS_N
+set_location_assignment PIN_34 -to ATTN[0]
+set_location_assignment PIN_35 -to ATTN[1]
+set_location_assignment PIN_36 -to ATTN[2]
+set_location_assignment PIN_37 -to ATTN[3]
+set_location_assignment PIN_38 -to ATTN[4]
+set_location_assignment PIN_39 -to ATTN[5]
+set_location_assignment PIN_44 -to DEBUG_LED[4]
+set_location_assignment PIN_43 -to DEBUG_LED[3]
+set_location_assignment PIN_42 -to DEBUG_LED[2]
+set_location_assignment PIN_41 -to DEBUG_LED[1]
+set_location_assignment PIN_40 -to DEBUG_LED[0]
+set_location_assignment PIN_50 -to CPLD_GPIO[3]
+set_location_assignment PIN_49 -to CPLD_GPIO[2]
+set_location_assignment PIN_48 -to CPLD_GPIO[1]
+set_location_assignment PIN_47 -to CPLD_GPIO[0]
+set_location_assignment PIN_51 -to FX2_SDA
+set_location_assignment PIN_52 -to FX2_SCL
+set_location_assignment PIN_53 -to FPGA_INIT_DONE
+set_location_assignment PIN_56 -to DDC1_RESET_N
+set_location_assignment PIN_57 -to DDC0_RESET_N
+set_location_assignment PIN_58 -to SYNC_RCF
+set_location_assignment PIN_61 -to SYNC_CIC
+set_location_assignment PIN_62 -to DDC1_CLK
+set_location_assignment PIN_64 -to DDC0_CLK
+set_location_assignment PIN_67 -to FX2_INT4
+set_location_assignment PIN_68 -to CS_FPGA_M_N
+set_location_assignment PIN_69 -to SDI_M
+set_location_assignment PIN_70 -to SDO_M
+set_location_assignment PIN_71 -to SCLK_M
+set_location_assignment PIN_72 -to CS_CPLD_N
+set_location_assignment PIN_73 -to FX2_SDI
+set_location_assignment PIN_74 -to FX2_SDO
+set_location_assignment PIN_75 -to FX2_SCLK
+set_location_assignment PIN_76 -to RD_N
+set_location_assignment PIN_77 -to WR_N
+set_location_assignment PIN_90 -to A[10]
+set_location_assignment PIN_89 -to A[9]
+set_location_assignment PIN_88 -to A[8]
+set_location_assignment PIN_87 -to A[7]
+set_location_assignment PIN_86 -to A[6]
+set_location_assignment PIN_85 -to A[5]
+set_location_assignment PIN_84 -to A[4]
+set_location_assignment PIN_83 -to A[3]
+set_location_assignment PIN_82 -to A[2]
+set_location_assignment PIN_81 -to A[1]
+set_location_assignment PIN_78 -to A[0]
+set_location_assignment PIN_91 -to A13
+set_location_assignment PIN_92 -to DDC_A0
+set_location_assignment PIN_95 -to DDC_A1
+set_location_assignment PIN_96 -to DDC_A2
+set_location_assignment PIN_97 -to DDC_RD_N
+set_location_assignment PIN_98 -to DDC_WR_N
+set_location_assignment PIN_99 -to CS_DDC0_N
+set_location_assignment PIN_100 -to CS_DDC1_N
+set_global_assignment -name AUTO_RESTART_CONFIGURATION OFF
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_global_assignment -name SMART_RECOMPILE ON
+set_global_assignment -name VERILOG_FILE init_load.v
+set_location_assignment PIN_66 -to SYNC_NCO
+set_location_assignment PIN_54 -to DDC1_PAR_SER
+set_location_assignment PIN_55 -to DDC0_PAR_SER
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_global_assignment -name MAXII_OPTIMIZATION_TECHNIQUE AREA
+set_global_assignment -name FITTER_EFFORT "AUTO FIT"

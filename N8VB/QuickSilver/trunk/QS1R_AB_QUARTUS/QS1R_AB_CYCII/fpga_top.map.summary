@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Fri Feb 09 19:27:08 2007
+Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
+Revision Name : fpga_top
+Top-level Entity Name : fpga_top
+Family : Cyclone II
+Total logic elements : 3,859
+    Total combinational functions : 3,859
+    Dedicated logic registers : 3,362
+Total registers : 3362
+Total pins : 131
+Total virtual pins : 0
+Total memory bits : 32,768
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
