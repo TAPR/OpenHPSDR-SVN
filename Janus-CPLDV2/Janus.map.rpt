@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Janus
-Sun Feb 11 15:47:21 2007
+Mon Feb 12 20:25:33 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -45,13 +45,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                          ;
 +-----------------------------+-----------------------------------------+
-; Analysis & Synthesis Status ; Successful - Sun Feb 11 15:47:21 2007   ;
+; Analysis & Synthesis Status ; Successful - Mon Feb 12 20:25:33 2007   ;
 ; Quartus II Version          ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name               ; Janus                                   ;
 ; Top-level Entity Name       ; Janus                                   ;
 ; Family                      ; MAX II                                  ;
-; Total logic elements        ; 197                                     ;
-; Total pins                  ; 48                                      ;
+; Total logic elements        ; 198                                     ;
+; Total pins                  ; 46                                      ;
 ; Total virtual pins          ; 0                                       ;
 ; UFM blocks                  ; 0                                       ;
 +-----------------------------+-----------------------------------------+
@@ -148,33 +148,33 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total logic elements                        ; 197   ;
+; Total logic elements                        ; 198   ;
 ;     -- Combinational with no register       ; 31    ;
 ;     -- Register only                        ; 63    ;
-;     -- Combinational with a register        ; 103   ;
+;     -- Combinational with a register        ; 104   ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
 ;     -- 4 input functions                    ; 60    ;
 ;     -- 3 input functions                    ; 33    ;
 ;     -- 2 input functions                    ; 27    ;
-;     -- 1 input functions                    ; 12    ;
+;     -- 1 input functions                    ; 13    ;
 ;     -- 0 input functions                    ; 2     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 145   ;
+;     -- normal mode                          ; 146   ;
 ;     -- arithmetic mode                      ; 52    ;
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
 ;     -- synchronous clear/load mode          ; 21    ;
 ;     -- asynchronous clear/load mode         ; 3     ;
 ;                                             ;       ;
-; Total registers                             ; 166   ;
+; Total registers                             ; 167   ;
 ; Total logic cells in carry chains           ; 56    ;
-; I/O pins                                    ; 48    ;
-; Maximum fan-out node                        ; CLKx2 ;
-; Maximum fan-out                             ; 66    ;
-; Total fan-out                               ; 703   ;
-; Average fan-out                             ; 2.87  ;
+; I/O pins                                    ; 46    ;
+; Maximum fan-out node                        ; dclk  ;
+; Maximum fan-out                             ; 67    ;
+; Total fan-out                               ; 704   ;
+; Average fan-out                             ; 2.89  ;
 +---------------------------------------------+-------+
 
 
@@ -183,7 +183,7 @@ applicable agreement for further details.
 +-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                                                ;
 +-------------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------------------------------+
-; |Janus                                    ; 197 (164)   ; 166          ; 0          ; 48   ; 0            ; 31 (22)      ; 63 (62)           ; 103 (80)         ; 56 (34)         ; 0 (0)      ; |Janus                                                                             ;
+; |Janus                                    ; 198 (165)   ; 167          ; 0          ; 46   ; 0            ; 31 (22)      ; 63 (62)           ; 104 (81)         ; 56 (34)         ; 0 (0)      ; |Janus                                                                             ;
 ;    |counter1:counter1|                    ; 14 (0)      ; 10           ; 0          ; 0    ; 0            ; 4 (0)        ; 0 (0)             ; 10 (0)           ; 11 (0)          ; 0 (0)      ; |Janus|counter1:counter1                                                           ;
 ;       |lpm_counter:lpm_counter_component| ; 14 (0)      ; 10           ; 0          ; 0    ; 0            ; 4 (0)        ; 0 (0)             ; 10 (0)           ; 11 (0)          ; 0 (0)      ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component                         ;
 ;          |cntr_45j:auto_generated|        ; 14 (14)     ; 10           ; 0          ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 10 (10)          ; 11 (11)         ; 0 (0)      ; |Janus|counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated ;
@@ -225,7 +225,7 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 166   ;
+; Total registers                              ; 167   ;
 ; Number of registers using Synchronous Clear  ; 1     ;
 ; Number of registers using Synchronous Load   ; 20    ;
 ; Number of registers using Asynchronous Clear ; 3     ;
@@ -305,7 +305,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Feb 11 15:47:18 2007
+    Info: Processing started: Mon Feb 12 20:25:27 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Janus -c Janus
 Info: Found 1 design units, including 1 entities, in source file counter2.v
     Info: Found entity 1: counter2
@@ -365,15 +365,15 @@ Warning: Design contains 4 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FSYNC"
     Warning: No output dependent on input pin "SSCK"
     Warning: No output dependent on input pin "MOSI"
-Info: Implemented 245 device resources after synthesis - the final resource count might be different
-    Info: Implemented 20 input pins
-    Info: Implemented 27 output pins
+Info: Implemented 244 device resources after synthesis - the final resource count might be different
+    Info: Implemented 19 input pins
+    Info: Implemented 26 output pins
     Info: Implemented 1 bidirectional pins
-    Info: Implemented 197 logic cells
+    Info: Implemented 198 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 16 warnings
     Info: Allocated 126 megabytes of memory during processing
-    Info: Processing ended: Sun Feb 11 15:47:21 2007
-    Info: Elapsed time: 00:00:03
+    Info: Processing ended: Mon Feb 12 20:25:33 2007
+    Info: Elapsed time: 00:00:06
 
 
 +------------------------------------------+

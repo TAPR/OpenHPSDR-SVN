@@ -54,7 +54,8 @@
 //  21 August 2006 - Change to use I2C interface to TLV320AIC23B  
 //  19 November 2006 - Changes to use the V2 hardware. Replace 24.576MHz clock with 12.288MHz. 
 //  28 November 2006 - Added PLL to enable 12.288MHz clock to be locked to 10MHz reference
-//  10 Februray 2007 - Changed I Q to I2S format and added PWM DAC for I and Q outputs
+//  10 February 2007 - Changed I Q to I2S format and added PWM DAC for I and Q outputs
+//  12 February 2007 - Added clock doubler to run PWM DAC from 2 x 48MHz. 
 //
 //
 //  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
@@ -221,6 +222,25 @@ end
 
 ///////////////////////////////////////////////////////////
 //
+//    Clock doubler - converts 48MHz clock to 96MHz
+//
+///////////////////////////////////////////////////////////
+
+wire D;
+wire dclk;
+reg Q;
+
+always @(posedge dclk)
+begin
+	Q = D;
+end
+
+assign D = ~Q;
+assign dclk = CLK_48MHZ ^ D;
+
+
+///////////////////////////////////////////////////////////
+//
 //    PWM DAC for I and Q outputs 
 //
 ///////////////////////////////////////////////////////////
@@ -231,7 +251,7 @@ reg [15:0] I_in;
 reg [15:0] Q_in;
 
 
-always @(negedge CLK_48MHZ)				// clock PWM at 48MHz
+always @(negedge dclk)							// clock PWM at 96MHz
 begin
         I_in <= I_sync_data + 16'h8000;         // so that 0 in gives 50:50 mark/space
         Q_in <= Q_sync_data + 16'h8000;
@@ -240,7 +260,7 @@ begin
 
 end
 
-assign IPWM = I_accumulator[16];       // send to FPGA pins
+assign IPWM = I_accumulator[16];       			// send to FPGA pins
 assign QPWM = Q_accumulator[16];
 
 
