@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 1.133 ns
+Actual Time    : 0.712 ns
 From           : IQOUT
-To             : I_data[9]
+To             : I_data[11]
 From Clock     : --
 To Clock       : C8
 Failed Paths   : 0
@@ -15,7 +15,7 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 23.777 ns
+Actual Time    : 23.522 ns
 From           : pfd:Janus_pfd|inst5
 To             : TUNE
 From Clock     : ref_in
@@ -25,9 +25,9 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 6.826 ns
-From           : LRCLK
-To             : C7
+Actual Time    : 6.834 ns
+From           : C14
+To             : DFS1
 From Clock     : --
 To Clock       : --
 Failed Paths   : 0
@@ -35,9 +35,9 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : 2.497 ns
+Actual Time    : 1.881 ns
 From           : C9
-To             : IQ_state.100
+To             : IQ_state.000
 From Clock     : --
 To Clock       : C8
 Failed Paths   : 0
@@ -45,8 +45,8 @@ Failed Paths   : 0
 Type           : Clock Setup: 'ref_in'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 113.48 MHz ( period = 8.812 ns )
-From           : counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[3]
+Actual Time    : 114.80 MHz ( period = 8.711 ns )
+From           : counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[4]
 To             : counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated|safe_q[5]
 From Clock     : ref_in
 To Clock       : ref_in
@@ -55,8 +55,8 @@ Failed Paths   : 0
 Type           : Clock Setup: 'CLK_12MHZ'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 122.71 MHz ( period = 8.149 ns )
-From           : counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[1]
+Actual Time    : 122.64 MHz ( period = 8.154 ns )
+From           : counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[0]
 To             : counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated|safe_q[3]
 From Clock     : CLK_12MHZ
 To Clock       : CLK_12MHZ
@@ -65,28 +65,18 @@ Failed Paths   : 0
 Type           : Clock Setup: 'C8'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 155.79 MHz ( period = 6.419 ns )
+Actual Time    : 147.93 MHz ( period = 6.760 ns )
 From           : bit_count[0]
-To             : Q_data[9]
+To             : I_data[7]
 From Clock     : C8
 To Clock       : C8
-Failed Paths   : 0
-
-Type           : Clock Setup: 'A3'
-Slack          : N/A
-Required Time  : None
-Actual Time    : 158.20 MHz ( period = 6.321 ns )
-From           : I_in[5]
-To             : I_accumulator[8]
-From Clock     : A3
-To Clock       : A3
 Failed Paths   : 0
 
 Type           : Clock Setup: 'CLK_48MHZ'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 158.20 MHz ( period = 6.321 ns )
-From           : I_in[5]
+Actual Time    : 173.73 MHz ( period = 5.756 ns )
+From           : I_in[4]
 To             : I_accumulator[8]
 From Clock     : CLK_48MHZ
 To Clock       : CLK_48MHZ
