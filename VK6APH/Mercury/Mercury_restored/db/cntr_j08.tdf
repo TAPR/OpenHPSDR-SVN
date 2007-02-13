@@ -1,0 +1,162 @@
+--lpm_counter DEVICE_FAMILY="Cyclone" lpm_direction="UP" lpm_width=11 aclr clock cnt_en q
+--VERSION_BEGIN 6.0 cbx_cycloneii 2006:02:07:15:19:20:SJ cbx_lpm_add_sub 2006:01:09:11:17:20:SJ cbx_lpm_compare 2006:01:09:11:15:40:SJ cbx_lpm_counter 2006:03:23:14:19:24:SJ cbx_lpm_decode 2006:01:09:11:16:44:SJ cbx_mgl 2006:05:17:10:06:16:SJ cbx_stratix 2006:05:17:09:28:32:SJ cbx_stratixii 2006:03:03:09:35:36:SJ  VERSION_END
+
+
+--  Copyright (C) 1991-2006 Altera Corporation
+--  Your use of Altera Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Altera Program License 
+--  Subscription Agreement, Altera MegaCore Function License 
+--  Agreement, or other applicable license agreement, including, 
+--  without limitation, that your use is for the sole purpose of 
+--  programming logic devices manufactured by Altera and sold by 
+--  Altera or its authorized distributors.  Please refer to the 
+--  applicable agreement for further details.
+
+
+FUNCTION cyclone_lcell (aclr, aload, cin, clk, dataa, datab, datac, datad, ena, inverta, regcascin, sclr, sload)
+WITH ( 	cin_used,	lut_mask,	operation_mode,	output_mode,	register_cascade_mode,	sum_lutc_input,	synch_mode) 
+RETURNS ( combout, cout, regout);
+
+--synthesis_resources = lut 11 
+SUBDESIGN cntr_j08
+( 
+	aclr	:	input;
+	clock	:	input;
+	cnt_en	:	input;
+	q[10..0]	:	output;
+) 
+VARIABLE 
+	counter_cella0 : cyclone_lcell
+		WITH (
+			cin_used = "false",
+			lut_mask = "66AA",
+			operation_mode = "arithmetic",
+			synch_mode = "on"
+		);
+	counter_cella1 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6AA0",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	counter_cella2 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6AA0",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	counter_cella3 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6AA0",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	counter_cella4 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6AA0",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	counter_cella5 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6AA0",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	counter_cella6 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6AA0",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	counter_cella7 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6AA0",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	counter_cella8 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6AA0",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	counter_cella9 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6AA0",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	counter_cella10 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6AA0",
+			operation_mode = "normal",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	aclr_actual	: WIRE;
+	clk_en	: NODE;
+	data[10..0]	: NODE;
+	s_val[10..0]	: WIRE;
+	safe_q[10..0]	: WIRE;
+	sclr	: NODE;
+	sload	: NODE;
+	sset	: NODE;
+	sset_node	: WIRE;
+
+BEGIN 
+	counter_cella[10..0].aclr = aclr_actual;
+	counter_cella[10..0].aload = B"00000000000";
+	counter_cella[1].cin = counter_cella[0].cout;
+	counter_cella[2].cin = counter_cella[1].cout;
+	counter_cella[3].cin = counter_cella[2].cout;
+	counter_cella[4].cin = counter_cella[3].cout;
+	counter_cella[5].cin = counter_cella[4].cout;
+	counter_cella[6].cin = counter_cella[5].cout;
+	counter_cella[7].cin = counter_cella[6].cout;
+	counter_cella[8].cin = counter_cella[7].cout;
+	counter_cella[9].cin = counter_cella[8].cout;
+	counter_cella[10].cin = counter_cella[9].cout;
+	counter_cella[10..0].clk = clock;
+	counter_cella[10..0].dataa = safe_q[];
+	counter_cella[10..0].datab = cnt_en;
+	counter_cella[10..0].datac = ((sset & s_val[]) # ((! sset) & data[]));
+	counter_cella[10].datad = B"1";
+	counter_cella[10..0].ena = clk_en;
+	counter_cella[10..0].sclr = sclr;
+	counter_cella[10..0].sload = (sset_node # sload);
+	aclr_actual = aclr;
+	clk_en = VCC;
+	data[] = GND;
+	q[] = safe_q[];
+	s_val[] = B"11111111111";
+	safe_q[] = counter_cella[10..0].regout;
+	sclr = GND;
+	sload = GND;
+	sset = GND;
+	sset_node = B"0";
+END;
+--VALID FILE

@@ -1,0 +1,86 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 7.257 ns
+From           : ADC[0]
+To             : cordic:rx_cordic|Istage0[16]
+From Clock     : --
+To Clock       : clock
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 13.380 ns
+From           : Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_f2c1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4|q_a[12]
+To             : FX2_FD[4]
+From Clock     : IFCLK
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case tpd
+Slack          : N/A
+Required Time  : None
+Actual Time    : 11.550 ns
+From           : FLAGC
+To             : LED[1]
+From Clock     : --
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -3.594 ns
+From           : ADC[13]
+To             : cordic:rx_cordic|Istage0[13]
+From Clock     : --
+To Clock       : clock
+Failed Paths   : 0
+
+Type           : Clock Setup: 'clock'
+Slack          : -1.575 ns
+Required Time  : 100.00 MHz ( period = 10.000 ns )
+Actual Time    : 86.39 MHz ( period = 11.575 ns )
+From           : filter_14:cic_I|section_out4[7]
+To             : filter_14:cic_I|output_register[23]
+From Clock     : clock
+To Clock       : clock
+Failed Paths   : 332
+
+Type           : Clock Setup: 'IFCLK'
+Slack          : N/A
+Required Time  : None
+Actual Time    : Restricted to 163.03 MHz ( period = 6.134 ns )
+From           : Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_f2c1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4|ram_block5a7~porta_address_reg10
+To             : Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_f2c1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4|q_a[13]
+From Clock     : IFCLK
+To Clock       : IFCLK
+Failed Paths   : 0
+
+Type           : Clock Hold: 'clock'
+Slack          : 0.499 ns
+Required Time  : 100.00 MHz ( period = 10.000 ns )
+Actual Time    : N/A
+From           : phase_accumulator:rx_phase_accumulator|phase_out[31]
+To             : phase_accumulator:rx_phase_accumulator|phase_out[31]
+From Clock     : clock
+To Clock       : clock
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 332
+
+--------------------------------------------------------------------------------------
+

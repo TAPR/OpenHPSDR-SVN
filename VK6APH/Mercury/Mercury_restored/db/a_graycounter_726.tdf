@@ -1,0 +1,159 @@
+--a_graycounter DEVICE_FAMILY="Cyclone" WIDTH=11 aclr clock cnt_en q
+--VERSION_BEGIN 6.0 cbx_a_gray2bin 2006:02:28:17:43:38:SJ cbx_a_graycounter 2006:03:13:11:03:08:SJ cbx_cycloneii 2006:02:07:15:19:20:SJ cbx_flex10ke 2006:01:09:11:13:48:SJ cbx_mgl 2006:05:17:10:06:16:SJ cbx_stratix 2006:05:17:09:28:32:SJ cbx_stratixii 2006:03:03:09:35:36:SJ  VERSION_END
+
+
+--  Copyright (C) 1991-2006 Altera Corporation
+--  Your use of Altera Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Altera Program License 
+--  Subscription Agreement, Altera MegaCore Function License 
+--  Agreement, or other applicable license agreement, including, 
+--  without limitation, that your use is for the sole purpose of 
+--  programming logic devices manufactured by Altera and sold by 
+--  Altera or its authorized distributors.  Please refer to the 
+--  applicable agreement for further details.
+
+
+FUNCTION cyclone_lcell (aclr, aload, cin, clk, dataa, datab, datac, datad, ena, inverta, regcascin, sclr, sload)
+WITH ( 	cin_used,	lut_mask,	operation_mode,	output_mode,	register_cascade_mode,	sum_lutc_input,	synch_mode) 
+RETURNS ( combout, cout, regout);
+
+--synthesis_resources = lut 12 
+SUBDESIGN a_graycounter_726
+( 
+	aclr	:	input;
+	clock	:	input;
+	cnt_en	:	input;
+	q[10..0]	:	output;
+) 
+VARIABLE 
+	countera0 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "C6A0",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	countera1 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6C50",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	countera2 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6C50",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	countera3 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6C50",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	countera4 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6C50",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	countera5 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6C50",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	countera6 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6C50",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	countera7 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6C50",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	countera8 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6C50",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	countera9 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6C50",
+			operation_mode = "arithmetic",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	countera10 : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "5A5A",
+			operation_mode = "normal",
+			sum_lutc_input = "cin",
+			synch_mode = "on"
+		);
+	parity : cyclone_lcell
+		WITH (
+			cin_used = "true",
+			lut_mask = "6682",
+			operation_mode = "arithmetic",
+			synch_mode = "on"
+		);
+	power_modified_counter_values[10..0]	: WIRE;
+	sclr	: NODE;
+	updown	: NODE;
+
+BEGIN 
+	countera[10..0].aclr = aclr;
+	countera[10..0].cin = ( countera[9..0].cout, parity.cout);
+	countera[10..0].clk = clock;
+	countera[10..0].dataa = ( power_modified_counter_values[10..10], power_modified_counter_values[8..0], cnt_en);
+	countera[0].datab = countera[0].regout;
+	countera[1].datab = power_modified_counter_values[1..1];
+	countera[2].datab = power_modified_counter_values[2..2];
+	countera[3].datab = power_modified_counter_values[3..3];
+	countera[4].datab = power_modified_counter_values[4..4];
+	countera[5].datab = power_modified_counter_values[5..5];
+	countera[6].datab = power_modified_counter_values[6..6];
+	countera[7].datab = power_modified_counter_values[7..7];
+	countera[8].datab = power_modified_counter_values[8..8];
+	countera[9].datab = power_modified_counter_values[9..9];
+	countera[10..0].sclr = sclr;
+	parity.aclr = aclr;
+	parity.cin = updown;
+	parity.clk = clock;
+	parity.dataa = cnt_en;
+	parity.datab = parity.regout;
+	parity.sclr = sclr;
+	power_modified_counter_values[] = ( countera[10..0].regout);
+	q[] = power_modified_counter_values[];
+	sclr = GND;
+	updown = VCC;
+END;
+--VALID FILE

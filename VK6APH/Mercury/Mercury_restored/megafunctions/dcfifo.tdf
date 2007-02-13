@@ -1,0 +1,445 @@
+-- **************************************************************************
+--	Dual-clock FIFO Parameterized Megafunction - DCFIFO
+--
+--	Copyright (C) 1988-1999 Altera Corporation
+--	Any megafunction design, and related net list (encrypted or decrypted),
+--	support information, device programming or simulation file, and any other
+--	associated documentation or information provided by Altera or a partner
+--	under Altera's Megafunction Partnership Program may be used only to
+--	program PLD devices (but not masked PLD devices) from Altera.  Any other
+--	use of such megafunction design, net list, support information, device
+--	programming or simulation file, or any other related documentation or
+--	information is prohibited for any other purpose, including, but not
+--	limited to modification, reverse engineering, de-compiling, or use with
+--	any other silicon devices, unless such use is explicitly licensed under
+--	a separate agreement with Altera or a megafunction partner.  Title to
+--	the intellectual property, including patents, copyrights, trademarks,
+--	trade secrets, or maskworks, embodied in any such megafunction design,
+--	net list, support information, device programming or simulation file, or
+--	any other related documentation or information provided by Altera or a
+--	megafunction partner, remains with Altera, the megafunction partner, or
+--	their respective licensors.  No other licenses, including any licenses
+--	needed under any third party's intellectual property, are provided herein.
+--
+--	Version 1.1
+--
+--------------------------------------------------------------------
+--
+-- This FIFO uses a separate clock for writing and reading.
+-- This allows two asynchronous subsystems (i.e. using unrelated clocks) to communicate.
+-- 
+-- For a general description of the FIFO behavior, please refer to the 
+--  single-clock FIFO SCFIFO. 
+-- Unique characteristics of DCFIFO are described below.
+--
+--------------------------------------------------------------------
+--
+-- The wrclk clock is used to write to the FIFO.
+-- The rdclk clock is used to read from the FIFO.
+--
+-- To enable two subsystems using separate clocks to check the state of the FIFO, 
+--  two sets of empty/full/usedw[] flags are created:
+--    wrempty, wrfull and wrusedw[] are synchronous to wrclk (writing flags).
+--    rdempty, rdfull and rdusedw[] are synchronous to rdclk (reading flags).
+--
+-- The 'wrfull' and 'rdempty' flags control respectively the ability 
+-- to write and read to the FIFO. 
+-- 
+-- Due to a synchronization mechanism implemented in the FIFO, and to allow 
+--  fast operation, the information carried by wrempty, wrfull or wrusedw[] may 
+--  be delayed by one clock latency. The same is also true for the reading flags.
+-- Latencies are also inserted between the writing and the reading flags.
+--------------------------------------------------------------------
+OPTIONS NAME_SUBSTITUTION = ON;
+OPTIONS ALTERA_INTERNAL_OPTION = "AUTO_SHIFT_REGISTER_RECOGNITION=OFF";
+
+INCLUDE "lpm_counter";
+INCLUDE "lpm_add_sub";
+INCLUDE "altdpram";
+INCLUDE "a_graycounter";
+INCLUDE "a_fefifo";
+INCLUDE "a_gray2bin";
+INCLUDE "dffpipe";
+INCLUDE "alt_sync_fifo";
+INCLUDE "lpm_compare";
+INCLUDE "altsyncram_fifo";
+INCLUDE "aglobal51";
+-------------------------------------------------------------------------------
+PARAMETERS
+(
+	LPM_WIDTH,
+	LPM_NUMWORDS,
+
+	LPM_WIDTHU = CEIL(LOG2(LPM_NUMWORDS)), -- simulation parameter added for simgen flow
+	LPM_SHOWAHEAD = "OFF",
+	UNDERFLOW_CHECKING = "ON",
+	OVERFLOW_CHECKING = "ON",
+	USE_EAB = "ON",
+	ADD_RAM_OUTPUT_REGISTER = "OFF",
+
+	-- output delay to the usedw[] outputs
+	DELAY_RDUSEDW = 1,					-- one clock cycle by default
+	DELAY_WRUSEDW = 1,
+
+	-- Pipe length used for synchronization and metastability resolving
+	-- If the rdclk and wrclk are unrelated, most often used values range from 2 to 4
+	-- If they are syncronized to one another, 0 might be used
+	RDSYNC_DELAYPIPE = 3,				-- from the wrclk to the rdclk subsystem
+	WRSYNC_DELAYPIPE = 3,				-- from the rdclk to the wrclk subsystem
+
+	CLOCKS_ARE_SYNCHRONIZED = "FALSE",	-- Are the clocks sufficiently synchronized (or clock multiples of each other with no pashe shift)
+									 	-- such that the synchronization and pipeline registers may be elliminated
+	DEVICE_FAMILY,
+	CBXI_PARAMETER = "NOTHING"
+);
+FUNCTION @CBXI_PARAMETER (data[lpm_width-1..0], rdclk, rdreq, wrclk, wrreq, aclr) RETURNS (q[lpm_width-1..0], rdempty, rdfull, wrempty, wrfull, rdusedw[ceil(log2(lpm_numwords))-1..0], wrusedw[ceil(log2(lpm_numwords))-1..0]);
+
+CONSTANT RDUSEDW_DELAYPIPE = 1;			-- use a delayed usedw[] by default to compute empty/full
+CONSTANT WRUSEDW_DELAYPIPE = 1;
+
+CONSTANT WIDTHAD = CEIL(LOG2(LPM_NUMWORDS));
+CONSTANT GRAY_DELAYPIPE = 1;
+DEFINE USE_ALTSYNCRAM_FIFO() = STRATIX_EAB() & (CLOCKS_ARE_SYNCHRONIZED == "FALSE");
+DEFINE STRATIX_EAB() = (FAMILY_STRATIX() == 1) & (USE_EAB == "ON");
+
+-------------------------------------------------------------------------------
+SUBDESIGN dcfifo
+(
+	data[LPM_WIDTH-1..0]	: INPUT;
+	q[LPM_WIDTH-1..0]		: OUTPUT;
+	rdclk, rdreq,
+	wrclk, wrreq			: INPUT;
+	aclr					: INPUT = GND;
+
+	rdempty, rdfull, 
+	wrempty, wrfull			: OUTPUT;
+	rdusedw[WIDTHAD-1..0], 
+	wrusedw[WIDTHAD-1..0]	: OUTPUT;
+)
+
+-------------------------------------------------------------------------------
+VARIABLE
+IF (CBXI_PARAMETER == "NOTHING") GENERATE
+	IF !USE_ALTSYNCRAM_FIFO() GENERATE
+		IF CLOCKS_ARE_SYNCHRONIZED != "TRUE" GENERATE
+			valid_wreq, valid_rreq: NODE;
+			wrptr_b: lpm_counter WITH( LPM_WIDTH=WIDTHAD );
+			rdptr_b: lpm_counter WITH( LPM_WIDTH=WIDTHAD );
+			wrptr_g: a_graycounter WITH( WIDTH=WIDTHAD );
+
+			-- For Stratix need to have a zero powered read counter to the Ram so dont need these delay registers
+			IF !STRATIX_EAB() GENERATE
+				rdptr_g: a_graycounter WITH( WIDTH=WIDTHAD, PVALUE=1 );
+				rdptrrg[WIDTHAD-1..0]: DFFE;
+			ELSE GENERATE
+				rdptr_g: a_graycounter WITH( WIDTH=WIDTHAD); -- i.e. PVALUE = 0
+				rdptrrg[WIDTHAD-1..0]: NODE;
+			END GENERATE;
+
+			write_delay_cycle[WIDTHAD - 1..0]: DFF;		-- wait cycle to prevent a read before a full write clock has finished
+			
+			-- If it is Stratix then the ram will not power up reading to 0 so need to make an alterante circuit
+			IF (LPM_SHOWAHEAD=="OFF") & !STRATIX_EAB() GENERATE
+				FIFOram: altdpram WITH( WIDTH=LPM_WIDTH, WIDTHAD=WIDTHAD, USE_EAB=USE_EAB, RDCONTROL_REG="UNREGISTERED", RDCONTROL_ACLR="OFF", OUTDATA_REG="OUTCLOCK",
+										SUPPRESS_MEMORY_CONVERSION_WARNINGS = "ON");
+			ELSE GENERATE
+				FIFOram: altdpram WITH( WIDTH=LPM_WIDTH, WIDTHAD=WIDTHAD, USE_EAB=USE_EAB, RDCONTROL_REG="UNREGISTERED", RDCONTROL_ACLR="OFF", OUTDATA_REG="UNREGISTERED",
+										SUPPRESS_MEMORY_CONVERSION_WARNINGS = "ON");
+			END GENERATE;
+			
+			read_state: a_fefifo WITH( LPM_WIDTHAD=WIDTHAD, LPM_NUMWORDS=LPM_NUMWORDS, 
+				UNDERFLOW_CHECKING=UNDERFLOW_CHECKING, OVERFLOW_CHECKING=OVERFLOW_CHECKING, USEDW_IN_DELAY=RDUSEDW_DELAYPIPE );
+
+			-- These are for precomputing a value needed by the state machine
+			usedw_is_1 : DFF;
+			usedw_is_1_compare : lpm_compare WITH (LPM_WIDTH = WIDTHAD);
+
+			write_state:a_fefifo WITH( LPM_WIDTHAD=WIDTHAD, LPM_NUMWORDS=LPM_NUMWORDS, 
+				UNDERFLOW_CHECKING=UNDERFLOW_CHECKING, OVERFLOW_CHECKING=OVERFLOW_CHECKING, USEDW_IN_DELAY=WRUSEDW_DELAYPIPE );
+
+			rs_dgwp[WIDTHAD-1..0], ws_dgrp[WIDTHAD-1..0]: NODE;	-- delayed gray read and write counters
+			rs_nbwp[WIDTHAD-1..0], ws_nbrp[WIDTHAD-1..0]: NODE;	-- binary read and write counters
+			ws_dbrp[WIDTHAD-1..0], rs_dbwp[WIDTHAD-1..0]: NODE;	-- delayed binary read and write counters
+			rd_udwn[WIDTHAD-1..0], wr_udwn[WIDTHAD-1..0]: NODE;	-- used_w[]
+			rd_dbuw[WIDTHAD-1..0], wr_dbuw[WIDTHAD-1..0]: NODE;	-- delayed used_w[]
+		ELSE GENERATE
+			synchronized_fifo	:	alt_sync_fifo WITH ( 	LPM_WIDTH = LPM_WIDTH, LPM_NUMWORDS = LPM_NUMWORDS, LPM_SHOWAHEAD = LPM_SHOWAHEAD,
+														UNDERFLOW_CHECKING = UNDERFLOW_CHECKING, OVERFLOW_CHECKING = OVERFLOW_CHECKING,
+														USE_EAB = USE_EAB
+													);
+		END GENERATE;
+	ELSE GENERATE
+		sub_fifo : altsyncram_fifo WITH	(	LPM_WIDTH = LPM_WIDTH,
+											LPM_NUMWORDS = LPM_NUMWORDS,
+											LPM_SHOWAHEAD = LPM_SHOWAHEAD,
+											UNDERFLOW_CHECKING = UNDERFLOW_CHECKING,
+											OVERFLOW_CHECKING = OVERFLOW_CHECKING,
+											USE_EAB = USE_EAB,
+											DELAY_RDUSEDW = DELAY_RDUSEDW,
+											DELAY_WRUSEDW = DELAY_WRUSEDW,
+											RDSYNC_DELAYPIPE = RDSYNC_DELAYPIPE,
+											WRSYNC_DELAYPIPE = WRSYNC_DELAYPIPE
+										);
+	END GENERATE;
+ELSE GENERATE
+	auto_generated : @CBXI_PARAMETER WITH (CBXI_PARAMETER = "NOTHING");
+END GENERATE;
+-------------------------------------------------------------------------------
+BEGIN
+IF CBXI_PARAMETER == "NOTHING" GENERATE
+	-- Cause: The Stratix device family does not support the showahead mode
+	-- Action: Do not use showahead mode for Stratix
+	ASSERT !((FAMILY_STRATIX() == 1) & (LPM_SHOWAHEAD == "ON") & (USE_EAB == "ON"))
+		REPORT "Fifo can not be used in showahead mode for the Stratix device family."
+		SEVERITY ERROR
+		HELP_ID DCFIFO_STRATIX_SHOWAHEAD_MODE;
+
+	ASSERT (LPM_WIDTH>=1)
+			REPORT "Value of LPM_WIDTH parameter must be greater than or equal to 1"
+			SEVERITY ERROR
+			HELP_ID DCFIFO_WIDTH;
+
+	ASSERT (LPM_NUMWORDS>=2)
+			REPORT "Value of LPM_NUMWORDS parameter must be greater than or equal to 2"
+			SEVERITY ERROR
+			HELP_ID DCFIFO_NUMWORDS;
+
+--------------------------------------------------------------------
+	ASSERT (USE_EAB=="ON") # (USE_EAB=="OFF")
+			REPORT "Illegal value for USE_EAB parameter -- value must be ""ON"" or ""OFF"""
+			SEVERITY ERROR
+			HELP_ID DCFIFO_USE_EAB;
+
+	ASSERT (LPM_SHOWAHEAD=="ON") # (LPM_SHOWAHEAD=="OFF")
+			REPORT "Illegal value for LPM_SHOWAHEAD parameter -- value must be ""ON"" or ""OFF"""
+			SEVERITY ERROR
+			HELP_ID DCFIFO_SHOWAHEAD;
+
+	ASSERT (UNDERFLOW_CHECKING=="ON" # UNDERFLOW_CHECKING=="OFF")
+			REPORT "Illegal value for UNDERFLOW_CHECKING parameter -- value must be ""ON"" or ""OFF"""
+			SEVERITY ERROR
+			HELP_ID DCFIFO_INVALID_UNDERFLOW_CHECKING;
+
+	ASSERT (OVERFLOW_CHECKING=="ON" # OVERFLOW_CHECKING=="OFF")
+			REPORT "Illegal value for OVERFLOW_CHECKING parameter -- value must be ""ON"" or ""OFF"""
+			SEVERITY ERROR
+			HELP_ID DCFIFO_INVALID_OVERFLOW_CHECKING;
+
+	-- cause:	A value other than "TRUE" or "FALSE" was used for the CLOCKS_ARE_SYNCHRONIZED parameter
+	--
+	-- action:	Change the value of CLOCKS_ARE_SYNCHRONIZED to either "TRUE" or "FALSE"
+	ASSERT	((CLOCKS_ARE_SYNCHRONIZED == "TRUE") # (CLOCKS_ARE_SYNCHRONIZED == "FALSE"))
+			REPORT "Illegal value for CLOCKS_ARE_SYNCHRONIZED (%) parameter -- value must be ""TRUE"" or ""FALSE""" CLOCKS_ARE_SYNCHRONIZED
+			SEVERITY ERROR
+			HELP_ID DCFIFO_INVALID_CLOCKS_ARE_SYNCHRONIZED;
+
+	-- cause: 	No delay will be introduced onto the wrusedw or rdusedw ports
+	--			nor will any metastability registers be introduced when the
+	--			CLOCKS_ARE_SYNCHRONIZED parameter is set to "TRUE."  Therfore
+	--			this parameter is being ignored.
+	--
+	-- action:	IF this is what is intended no action needs to be taken and the warning
+	--			may be ignored.  Otherwise, the CLOCKS_ARE_SYNCHRONIZED parameter must be
+	--			set to "TRUE".
+	ASSERT	((CLOCKS_ARE_SYNCHRONIZED != "TRUE") # !USED(DELAY_RDUSEDW))
+			REPORT "DELAY_RDUSEDW parameter is ignored for CLOCKS_ARE_SYNCHRONIZED == ""TRUE"""
+			SEVERITY WARNING
+			HELP_ID DCFIFO_CLOCKS_SYNCHRO_WARNING;
+
+	ASSERT	((CLOCKS_ARE_SYNCHRONIZED != "TRUE") # !USED(DELAY_WRUSEDW))
+			REPORT "DELAY_WRUSEDW parameter is ignored for CLOCKS_ARE_SYNCHRONIZED == ""TRUE"""
+			SEVERITY WARNING
+			HELP_ID DCFIFO_CLOCKS_SYNCHRO_WARNING;
+
+	ASSERT	((CLOCKS_ARE_SYNCHRONIZED != "TRUE") # !USED(RDSYNC_DELAYPIPE))
+			REPORT "RDSYNC_DELAYPIPE parameter is ignored for CLOCKS_ARE_SYNCHRONIZED == ""TRUE"""
+			SEVERITY WARNING
+			HELP_ID DCFIFO_CLOCKS_SYNCHRO_WARNING;
+
+	ASSERT	((CLOCKS_ARE_SYNCHRONIZED != "TRUE") # !USED(WRSYNC_DELAYPIPE))
+			REPORT "WRSYNC_DELAYPIPE parameter is ignored for CLOCKS_ARE_SYNCHRONIZED == ""TRUE"""
+			SEVERITY WARNING
+			HELP_ID DCFIFO_CLOCKS_SYNCHRO_WARNING;
+-------------------------------------------------------------------------------
+	IF !USE_ALTSYNCRAM_FIFO() GENERATE
+		IF CLOCKS_ARE_SYNCHRONIZED != "TRUE" GENERATE
+			-- FIFO read & write
+
+			IF UNDERFLOW_CHECKING=="OFF" GENERATE
+				valid_rreq = rdreq;
+			ELSE GENERATE
+				valid_rreq = rdreq & !rdempty;
+			END GENERATE;
+
+			IF OVERFLOW_CHECKING=="OFF" GENERATE
+				valid_wreq = wrreq;
+			ELSE GENERATE
+				valid_wreq = wrreq & !wrfull;
+			END GENERATE;
+
+			(wrptr_g, wrptr_b).clock = wrclk;
+			(wrptr_g, wrptr_b).cnt_en = valid_wreq;
+			(wrptr_g, wrptr_b).aclr = aclr;
+		
+			(rdptr_g, rdptr_b).clock = rdclk;
+			(rdptr_g, rdptr_b).cnt_en = valid_rreq;
+			(rdptr_g, rdptr_b).aclr = aclr;
+			rdptrrg[] = rdptr_g.q[];
+			IF !STRATIX_EAB() GENERATE
+				rdptrrg[].(clk, ena, clrn) = (rdclk, valid_rreq, !aclr);
+			END GENERATE;
+
+			FIFOram.wraddress[] = wrptr_g.q[];
+			FIFOram.rdaddress[] = rdptr_g.q[];
+			FIFOram.(inclock, outclock) = (wrclk, rdclk);
+			FIFOram.(wren, outclocken) = (valid_wreq, valid_rreq);
+			IF USED(aclr) & !STRATIX_EAB() GENERATE
+				FIFOram.aclr = aclr;
+			END GENERATE;
+			FIFOram.data[] = data[];
+			q[] = FIFOram.q[];
+
+			-------------------------------------------------------------------------------
+			-- FIFO UsedW[]
+
+			-- delay the transmission of writes to the read-side
+			write_delay_cycle[].clk = wrclk;
+			write_delay_cycle[].d = wrptr_g.q[];
+			write_delay_cycle[].clrn = !aclr;
+
+			rs_dgwp[] = dffpipe( .d[]=write_delay_cycle[].q, .clock=rdclk, .clrn=!aclr ) WITH( WIDTH=WIDTHAD, DELAY=RDSYNC_DELAYPIPE ) RETURNS(.q[]);
+			ws_dgrp[] = dffpipe( .d[]=rdptrrg  [], .clock=wrclk, .clrn=!aclr ) WITH( WIDTH=WIDTHAD, DELAY=WRSYNC_DELAYPIPE ) RETURNS(.q[]);
+
+			rs_nbwp[] = a_gray2bin( .gray[]=rs_dgwp[] ) WITH( WIDTH=WIDTHAD ) RETURNS(.bin[]);
+			ws_nbrp[] = a_gray2bin( .gray[]=ws_dgrp[] ) WITH( WIDTH=WIDTHAD ) RETURNS(.bin[]);
+
+			rs_dbwp[] = dffpipe( .d[]=rs_nbwp[], .clock=rdclk, .clrn=!aclr ) WITH( WIDTH=WIDTHAD, DELAY=GRAY_DELAYPIPE ) RETURNS(.q[]);
+			ws_dbrp[] = dffpipe( .d[]=ws_nbrp[], .clock=wrclk, .clrn=!aclr ) WITH( WIDTH=WIDTHAD, DELAY=GRAY_DELAYPIPE ) RETURNS(.q[]);
+
+			rd_udwn[] = lpm_add_sub( .dataa[]=rs_dbwp[], .datab[]=rdptr_b.q[] ) WITH( LPM_WIDTH=WIDTHAD, LPM_DIRECTION="SUB" ) RETURNS(.result[]);
+			wr_udwn[] = lpm_add_sub( .dataa[]=wrptr_b.q[], .datab[]=ws_dbrp[] ) WITH( LPM_WIDTH=WIDTHAD, LPM_DIRECTION="SUB" ) RETURNS(.result[]);
+
+			rdusedw[] = dffpipe( .d[]=rd_udwn[], .clock=rdclk, .clrn=!aclr ) WITH( WIDTH=WIDTHAD, DELAY=DELAY_RDUSEDW ) RETURNS(.q[]);
+			wrusedw[] = dffpipe( .d[]=wr_udwn[], .clock=wrclk, .clrn=!aclr ) WITH( WIDTH=WIDTHAD, DELAY=DELAY_WRUSEDW ) RETURNS(.q[]);
+
+			-------------------------------------------------------------------------------
+			-- FIFO state
+
+			rd_dbuw[] = dffpipe( .d[]=rd_udwn[], .clock=rdclk, .clrn=!aclr ) WITH( WIDTH=WIDTHAD, DELAY=RDUSEDW_DELAYPIPE ) RETURNS(.q[]);
+			read_state.(usedw_in[], rreq, clock, aclr) = (rd_dbuw[], rdreq, rdclk, aclr);
+			(rdempty, rdfull) =  read_state.(empty, full);
+
+			-- Precompute a value for the state machine
+			-- Set up the comparison unit
+			usedw_is_1_compare.dataa[] = rd_udwn[];
+			usedw_is_1_compare.datab[] = GND;
+			IF (WIDTHAD > 1) GENERATE
+				usedw_is_1_compare.datab[1..0] = (valid_rreq, !valid_rreq);
+			ELSE GENERATE
+				usedw_is_1_compare.datab[] = !valid_rreq;
+			END GENERATE;
+			-- Add in the delay register
+			usedw_is_1.d = usedw_is_1_compare.aeb;
+			usedw_is_1.clk = rdclk;
+			usedw_is_1.clrn = !aclr;
+			-- Now connect it to the state machine
+			read_state.usedw_is_1 = usedw_is_1.q;
+
+			wr_dbuw[] = dffpipe( .d[]=wr_udwn[], .clock=wrclk, .clrn=!aclr ) WITH( WIDTH=WIDTHAD, DELAY=WRUSEDW_DELAYPIPE ) RETURNS(.q[]);
+			write_state.(usedw_in[], wreq, clock, aclr) = (wr_dbuw[], wrreq, wrclk, aclr);
+			(wrempty, wrfull) = write_state.(empty, full);
+		ELSE GENERATE -- use no synchronization registers
+			-- in this case dcfifo is just a wrapper for alt_sync_fifo
+			synchronized_fifo.(rdclk, rdreq, wrclk, wrreq, aclr) = (rdclk, rdreq, wrclk, wrreq, aclr);
+			synchronized_fifo.data[] = data[];
+			q[] = synchronized_fifo.q[];
+			(rdempty, rdfull, wrempty, wrfull) = synchronized_fifo.(rdempty, rdfull, wrempty, wrfull);
+			q[] = synchronized_fifo.q[];
+			rdusedw[] = synchronized_fifo.rdusedw[];
+			wrusedw[] = synchronized_fifo.wrusedw[];
+		END GENERATE;
+	ELSE GENERATE -- Using the altsyncram fifo implementation
+		sub_fifo.data[] = data[];
+		sub_fifo.wrclk = wrclk;
+		sub_fifo.rdclk = rdclk;
+		IF USED(aclr) GENERATE
+			sub_fifo.aclr = aclr;
+		END GENERATE;
+		sub_fifo.wrreq = wrreq;
+		sub_fifo.rdreq = rdreq;
+		IF USED(wrempty) GENERATE
+			wrempty = sub_fifo.wrempty;
+		END GENERATE;
+		IF USED(wrfull) GENERATE
+			wrfull = sub_fifo.wrfull;
+		END GENERATE;
+		IF USED(wrusedw) GENERATE
+			wrusedw[] = sub_fifo.wrusedw[];
+		END GENERATE;
+		IF USED(rdempty) GENERATE
+			rdempty = sub_fifo.rdempty;
+		END GENERATE;
+		IF USED(rdfull) GENERATE
+			rdfull = sub_fifo.rdfull;
+		END GENERATE;
+		IF USED(rdusedw) GENERATE
+			rdusedw[] = sub_fifo.rdusedw[];
+		END GENERATE;
+		IF USED(q) GENERATE
+			q[] = sub_fifo.q[];
+		END GENERATE;
+	END GENERATE;
+ELSE GENERATE
+	IF USED(data) GENERATE
+		auto_generated.data[] = data[];
+	END GENERATE;
+	IF USED(rdclk) GENERATE
+		auto_generated.rdclk = rdclk;
+	END GENERATE;
+	IF USED(rdreq) GENERATE
+		auto_generated.rdreq = rdreq;
+	END GENERATE;
+	IF USED(wrclk) GENERATE
+		auto_generated.wrclk = wrclk;
+	END GENERATE;
+	IF USED(wrreq) GENERATE
+		auto_generated.wrreq = wrreq;
+	END GENERATE;
+	IF USED(aclr) GENERATE
+		auto_generated.aclr = aclr;
+	END GENERATE;
+	IF USED(q) GENERATE
+		q[] = auto_generated.q[];
+	END GENERATE;
+	IF USED(rdempty) GENERATE
+		rdempty = auto_generated.rdempty;
+	END GENERATE;	
+	IF USED(rdfull) GENERATE
+		rdfull = auto_generated.rdfull;
+	END GENERATE;
+	IF USED(wrempty) GENERATE
+		wrempty = auto_generated.wrempty;
+	END GENERATE;
+	IF USED(wrfull) GENERATE
+		wrfull = auto_generated.wrfull;
+	END GENERATE;
+	IF USED(rdusedw) GENERATE
+		rdusedw[] = auto_generated.rdusedw[];
+	END GENERATE;
+	IF USED(wrusedw) GENERATE
+		wrusedw[] = auto_generated.wrusedw[];
+	END GENERATE;
+END GENERATE;
+	IF !USED(wrusedw) GENERATE
+		wrusedw[] = GND;
+	END GENERATE;
+	IF !USED(wrempty) GENERATE
+		wrempty = GND;
+	END GENERATE;
+	IF !USED(wrfull) GENERATE
+		wrfull = GND;
+	END GENERATE;
+	IF !USED(q) GENERATE
+		q[] = GND;
+	END GENERATE;
+END;

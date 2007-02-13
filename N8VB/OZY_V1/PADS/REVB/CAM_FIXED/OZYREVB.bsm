@@ -3,7 +3,7 @@
 G04 PADS Layout (Build Number 2005.266.2) generated Gerber (RS-274-X) file*
 G04 PC Version=2.1*
 *
-%IN "OZY_REVB_10012006_blz.p"*%
+%IN "OZY_REVB_02122007_route"*%
 *
 %MOIN*%
 *
@@ -59,19 +59,19 @@ G04 PC Aperture Table*
 *
 *
 G04 PC Copper Outlines (0)*
-G04 Layer Name OZY_REVB_10012006_blz.p - dark (0)*
+G04 Layer Name OZY_REVB_02122007_route - dark (0)*
 %LPD*%
 *
 *
 G04 PC Area=Custom_Thermal*
 *
 G04 PC Custom Flashes*
-G04 Layer Name OZY_REVB_10012006_blz.p - flashes*
+G04 Layer Name OZY_REVB_02122007_route - flashes*
 %LPD*%
 *
 *
 G04 PC Circuitry*
-G04 Layer Name OZY_REVB_10012006_blz.p - circuitry*
+G04 Layer Name OZY_REVB_02122007_route - circuitry*
 %LPD*%
 *
 G54D30*

@@ -1,0 +1,57 @@
+
+<!--
+This XML file (created on Wed Aug 16 16:48:37 2006) contains limited information
+from the compilation of logic designs using Quartus II software (BUT NOT THE
+LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
+operation of the "TalkBack" feature.  To enable/disable this feature, run
+qtb_install.exe located in your quartus/bin folder.  For more information, go
+to www.altera.com/products/software/download/dnl-download_license.html
+-->
+<talkback>
+<ver>6.0</ver>
+<schema>quartus_version_6.0_build_202.xsd</schema>
+<machine>
+	<os>Windows XP</os>
+	<cpu>
+		<proc_count>1</proc_count>
+		<cpu_freq units="MHz">2193</cpu_freq>
+	</cpu>
+	<ram units="MB">960</ram>
+</machine>
+<tool>
+	<name>Quartus II</name>
+	<version>6.0</version>
+	<build>Build 202</build>
+	<service_pack_label>1</service_pack_label>
+	<binary_type>32</binary_type>
+	<module>quartus</module>
+	<edition>Web Edition</edition>
+	<eval>Licensed</eval>
+	<compilation_end_time>Wed Aug 16 16:48:37 2006</compilation_end_time>
+</tool>
+<license>
+	<host_id>0013d3f4cf33</host_id>
+	<t_guard>T000092992</t_guard>
+	<nic_id>0013d3f4cf33</nic_id>
+	<cdrive_id>d86310c5</cdrive_id>
+</license>
+<internal_error>
+	<executable>quartus.exe</executable>
+	<sub_system>ERR</sub_system>
+	<callstack>Stack Trace:
+04ef4839: edt_wed_get_module_handle() + 0x87b (edt_wed)
+
+End-trace
+</callstack>
+	<error>Fatal error detected: Access Violation</error>
+	<date>Wed Aug 16 16:47:38 2006</date>
+	<version>Quartus II Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition</version>
+	<full_error>Fatal error detected: Access Violation
+Stack Trace:
+04ef4839: edt_wed_get_module_handle() + 0x87b (edt_wed)
+
+End-trace
+
+Quartus II Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition </full_error>
+</internal_error>
+</talkback>
