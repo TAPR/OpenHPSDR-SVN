@@ -1,4 +1,4 @@
-// V1.20 10th February 2006
+// V1.30 13th February 2007
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -128,8 +128,10 @@
 //				Modified to support Janus V2 hardware - 20 Nov 2006
 //				Modified to support Ozy V2 hardware using EP2C8Q208C8- 4 Dec 2006
 //				Upgraded to Quartus V6.1 - 25th Jan 2006
-//				Modified PWM DAC to run off IFCLK to increase resolution - 25th Jan 2006
-//				Added I and Q outputs in I2S format for use with Janus and Penelope - 10th Feb 2006
+//				Modified PWM DAC to run off IFCLK to increase resolution - 25th Jan 2007
+//				Added I and Q outputs in I2S format for use with Janus and Penelope - 10th Feb 2007
+//				Moved PWM DAC to Janus CPLD - 11th Feb 2007
+//				Moved I and Q outputs to TLV320 and Left/Right audio to PWM DAC - 13th Feb 2007
 //				
 //
 ////////////////////////////////////////////////////////////
@@ -238,7 +240,7 @@
 
 module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
-        CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, IQOUT, PTT_in, AK_reset, dot, dash, DEBUG_LED0,
+        CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset, dot, dash, DEBUG_LED0,
 		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ);
 
 input CLK_12MHZ;               // From Janus board 12.288MHz
@@ -261,7 +263,7 @@ output DEBUG_LED2;
 output DEBUG_LED3;
 output CBCLK, CLRCLK;           // Clocks to TLV320AIC23B
 output CDIN;                    // Rx data to TLV320AIC23B
-output IQOUT;					// I and Q data in I2S format to Atlas
+output LROUT;					// Left  and Right audio data in I2S format to Atlas
 input CDOUT;                    // A/D data from TLV320AIC23B
 input PTT_in;                   // PTT active high
 input dot;                      // CW dot key, active low
@@ -360,7 +362,7 @@ end
         LRCLK must change state on the negative edge of BCLK.
 */
 
-// divide  CLK_12MHZ (12.288MHz) from Janus to give clocks for the TLV320 and PWM -
+// divide  CLK_12MHZ (12.288MHz) from Janus to give clocks for the TLV320 
 // using Altera Megafunction
 
 wire [7:0]clock_out;
@@ -842,8 +844,8 @@ assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
 */
 
 reg [4:0] state_PWM;                    // state for PWM  counts 0 to 13
-reg [15:0] Left_PWM;                    // Left 16 bit PWM data for D/A converter
-reg [15:0] Right_PWM;                   // Right 16 bit PWM data for D/A converter
+reg [15:0] Left_Data;                    // Left 16 bit PWM data for D/A converter
+reg [15:0] Right_Data;                   // Right 16 bit PWM data for D/A converter
 reg [15:0] I_PWM;                       // I 16 bit PWM data for D/A conveter
 reg [15:0] Q_PWM;                       // Q 16 bit PWM data for D/A conveter
 reg [15:0] I_Data;
@@ -938,12 +940,12 @@ case(state_PWM)
 // state 7 - get Left audio
   7: begin
                 fifo_enable <= 1'b1;                                            // enable Rx_fifo
-                Left_PWM <= Rx_data;
+                Left_Data <= Rx_data;
                 state_PWM <= 8;
                 end
 // state 8 - get Right audio
   8: begin
-                Right_PWM <= Rx_data;
+                Right_Data <= Rx_data;
                 state_PWM <= 9;
                 end
 // state 9 - get I audio
@@ -967,8 +969,8 @@ case(state_PWM)
                 if (CLRCLK)                                                             // wait for A/D LRCLK to go high so we are in sync
                 begin
                         byte_count <= byte_count + 1'b1;
-                        I_Data[15:0] <=  I_PWM[15:0];                   // set up I D/A data
-                        Q_Data[15:0] <=  Q_PWM[15:0];                   // set up Q D/A data
+                        //I_Data[15:0] <=  I_PWM[15:0];                   // set up I D/A data
+                        //Q_Data[15:0] <=  Q_PWM[15:0];                   // set up Q D/A data
                         state_PWM <= 13;
                 end
                 else state_PWM <= 12;
@@ -988,23 +990,23 @@ end
 
 ///////////////////////////////////////////////////////////////
 //
-//              Implements I2S format audio out,
-//              16 bits, two channels  for TLV320AIC23B D/A converter
-//
-///////////////////////////////////////////////////////////////
-
-
-I2SAudioOut  I2SAO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(Left_PWM), .right_sample_i(Right_PWM),.outbit_o(CDIN));
-
-///////////////////////////////////////////////////////////////
-//
 //              Implements I2S format I and Q  out,
-//              16 bits, two channels  for Janus and Penelope
+//              16 bits, two channels  for TLV320AIC23B D/A converter and Penelope
 //
 ///////////////////////////////////////////////////////////////
 
 
-I2SAudioOut  I2SIQO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(I_Data), .right_sample_i(Q_Data),.outbit_o(IQOUT));
+I2SAudioOut  I2SAO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(I_PWM), .right_sample_i(Q_PWM),.outbit_o(CDIN));
+
+///////////////////////////////////////////////////////////////
+//
+//              Implements I2S format Left and Right audio out,
+//              16 bits, two channels for PWM DAC on Janus
+//
+///////////////////////////////////////////////////////////////
+
+
+I2SAudioOut  I2SIQO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(Left_Data), .right_sample_i(Right_Data),.outbit_o(LROUT));
 
 ///////////////////////////////////////////////////////
 //

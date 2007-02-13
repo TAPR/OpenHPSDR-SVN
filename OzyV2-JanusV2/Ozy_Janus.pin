@@ -207,7 +207,7 @@ RESERVED_INPUT               : 147       :        :                   :         
 VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
 AK_reset                     : 149       : output : 3.3-V LVTTL       :         : 3         : Y              
 CLK_48MHZ                    : 150       : output : 3.3-V LVTTL       :         : 3         : Y              
-IQOUT                        : 151       : output : 3.3-V LVTTL       :         : 3         : Y              
+LROUT                        : 151       : output : 3.3-V LVTTL       :         : 3         : Y              
 CLK_12MHZ                    : 152       : input  : 3.3-V LVTTL       :         : 3         : Y              
 GND                          : 153       : gnd    :                   :         :           :                
 GND_PLL2                     : 154       : gnd    :                   :         :           :                
