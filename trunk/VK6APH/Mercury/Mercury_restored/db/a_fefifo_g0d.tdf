@@ -1,0 +1,93 @@
+--a_fefifo LPM_NUMWORDS=2048 lpm_widthad=11 OVERFLOW_CHECKING="ON" UNDERFLOW_CHECKING="ON" USEDW_IN_DELAY=1 aclr clock empty full usedw_in wreq
+--VERSION_BEGIN 6.0 cbx_cycloneii 2006:02:07:15:19:20:SJ cbx_fifo_common 2006:01:09:11:23:34:SJ cbx_lpm_add_sub 2006:01:09:11:17:20:SJ cbx_lpm_compare 2006:01:09:11:15:40:SJ cbx_lpm_counter 2006:03:23:14:19:24:SJ cbx_lpm_decode 2006:01:09:11:16:44:SJ cbx_mgl 2006:05:17:10:06:16:SJ cbx_stratix 2006:05:17:09:28:32:SJ cbx_stratixii 2006:03:03:09:35:36:SJ  VERSION_END
+
+
+--  Copyright (C) 1991-2006 Altera Corporation
+--  Your use of Altera Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Altera Program License 
+--  Subscription Agreement, Altera MegaCore Function License 
+--  Agreement, or other applicable license agreement, including, 
+--  without limitation, that your use is for the sole purpose of 
+--  programming logic devices manufactured by Altera and sold by 
+--  Altera or its authorized distributors.  Please refer to the 
+--  applicable agreement for further details.
+
+
+
+--synthesis_resources = lut 21 
+SUBDESIGN a_fefifo_g0d
+( 
+	aclr	:	input;
+	clock	:	input;
+	empty	:	output;
+	full	:	output;
+	usedw_in[10..0]	:	input;
+	wreq	:	input;
+) 
+VARIABLE 
+	b_full : dffe;
+	b_non_empty : dffe;
+	b_one : dffe;
+	cmp_full_aeb_int	:	WIRE;
+	cmp_full_agb_int	:	WIRE;
+	cmp_full_ageb	:	WIRE;
+	cmp_full_dataa[10..0]	:	WIRE;
+	cmp_full_datab[10..0]	:	WIRE;
+	equal_zero[10..0]	: WIRE;
+	is_zero0	: WIRE;
+	is_zero1	: WIRE;
+	is_zero10	: WIRE;
+	is_zero2	: WIRE;
+	is_zero3	: WIRE;
+	is_zero4	: WIRE;
+	is_zero5	: WIRE;
+	is_zero6	: WIRE;
+	is_zero7	: WIRE;
+	is_zero8	: WIRE;
+	is_zero9	: WIRE;
+	usedw[10..0]	: WIRE;
+
+BEGIN 
+	b_full.CLK = clock;
+	b_full.CLRN = (! aclr);
+	b_full.D = cmp_full_ageb;
+	b_non_empty.CLK = clock;
+	b_non_empty.CLRN = (! aclr);
+	b_non_empty.D = (wreq # (b_non_empty.Q & ((! b_one.Q) # (! is_zero10))));
+	b_one.CLK = clock;
+	b_one.CLRN = (! aclr);
+	b_one.D = ((b_one.Q & (b_one.Q $ (wreq # is_zero10))) # (((! b_one.Q) & b_non_empty.Q) & (! wreq)));
+	IF (cmp_full_dataa[] == cmp_full_datab[]) THEN
+		cmp_full_aeb_int = VCC;
+	ELSE
+		cmp_full_aeb_int = GND;
+	END IF;
+	IF (cmp_full_dataa[] > cmp_full_datab[]) THEN
+		cmp_full_agb_int = VCC;
+	ELSE
+		cmp_full_agb_int = GND;
+	END IF;
+	cmp_full_ageb = cmp_full_agb_int # cmp_full_aeb_int;
+	cmp_full_dataa[] = usedw[];
+	cmp_full_datab[] = B"11111111101";
+	empty = (! b_non_empty.Q);
+	equal_zero[] = ( B"1", B"1", B"1", B"1", B"1", B"1", B"1", B"1", B"1", B"1", B"1");
+	full = b_full.Q;
+	is_zero0 = (usedw[0..0] $ equal_zero[0..0]);
+	is_zero1 = ((usedw[1..1] $ equal_zero[1..1]) & is_zero0);
+	is_zero10 = ((usedw[10..10] $ equal_zero[10..10]) & is_zero9);
+	is_zero2 = ((usedw[2..2] $ equal_zero[2..2]) & is_zero1);
+	is_zero3 = ((usedw[3..3] $ equal_zero[3..3]) & is_zero2);
+	is_zero4 = ((usedw[4..4] $ equal_zero[4..4]) & is_zero3);
+	is_zero5 = ((usedw[5..5] $ equal_zero[5..5]) & is_zero4);
+	is_zero6 = ((usedw[6..6] $ equal_zero[6..6]) & is_zero5);
+	is_zero7 = ((usedw[7..7] $ equal_zero[7..7]) & is_zero6);
+	is_zero8 = ((usedw[8..8] $ equal_zero[8..8]) & is_zero7);
+	is_zero9 = ((usedw[9..9] $ equal_zero[9..9]) & is_zero8);
+	usedw[] = usedw_in[];
+END;
+--VALID FILE
