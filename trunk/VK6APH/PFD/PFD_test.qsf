@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EPM240T100C5
 set_global_assignment -name TOP_LEVEL_ENTITY PFD_test
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "6.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "11:40:28  SEPTEMBER 23, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION "6.0 SP1"
+set_global_assignment -name LAST_QUARTUS_VERSION 6.1
 set_global_assignment -name USER_LIBRARIES "C:/HPDSDR/trunk/VK6APH/I2C new/db/;C:/FPGA/Mercury/megafunctions/;C:/FPGA/Mercury/db/"
 set_global_assignment -name GENERATE_RBF_FILE OFF
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
@@ -37,13 +37,13 @@ set_global_assignment -name VECTOR_INPUT_SOURCE PFD_test.vwf
 set_location_assignment PIN_50 -to ref_in
 set_location_assignment PIN_4 -to osc_in
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
-set_global_assignment -name FMAX_REQUIREMENT "10 MHz" -section_id osc_in
-set_global_assignment -name FMAX_REQUIREMENT "12.288 MHz" -section_id ref_in
+set_global_assignment -name FMAX_REQUIREMENT "12.288 MHz" -section_id osc_in
+set_global_assignment -name FMAX_REQUIREMENT "10 MHz" -section_id ref_in
 set_global_assignment -name BASED_ON_CLOCK_SETTINGS osc_in -section_id osc_8k
-set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 100 -section_id osc_8k
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 1536 -section_id osc_8k
 set_global_assignment -name OFFSET_FROM_BASE_CLOCK "0 ps" -section_id osc_8k
 set_global_assignment -name BASED_ON_CLOCK_SETTINGS ref_in -section_id ref_8k
-set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 100 -section_id ref_8k
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 1250 -section_id ref_8k
 set_global_assignment -name OFFSET_FROM_BASE_CLOCK "0 ps" -section_id ref_8k
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "IO PATHS AND MINIMUM TPD PATHS"
 set_instance_assignment -name CLOCK_SETTINGS osc_in -to osc_in
@@ -61,15 +61,15 @@ set_global_assignment -name ASSIGNMENT_GROUP_MEMBER osc_8k -section_id reference
 set_global_assignment -name ASSIGNMENT_GROUP_MEMBER ref_8k -section_id reference
 set_global_assignment -name ENABLE_CLOCK_LATENCY ON
 set_global_assignment -name OPTIMIZE_FAST_CORNER_TIMING ON
-set_global_assignment -name FMAX_REQUIREMENT "10 MHz"
+set_global_assignment -name FMAX_REQUIREMENT "12.288 MHz"
 set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
-set_global_assignment -name VERILOG_FILE counter2.v
-set_global_assignment -name VERILOG_FILE counter1.v
-set_global_assignment -name VERILOG_FILE pfd.v
-set_global_assignment -name VERILOG_FILE PFD_test.v
-set_global_assignment -name VECTOR_WAVEFORM_FILE PFD_test.vwf
 set_location_assignment PIN_86 -to LED1
 set_location_assignment PIN_87 -to LED2
 set_location_assignment PIN_85 -to tune
 set_global_assignment -name AUTO_RESTART_CONFIGURATION OFF
 set_location_assignment PIN_76 -to C5
+set_global_assignment -name VERILOG_FILE counter2.v
+set_global_assignment -name VERILOG_FILE counter1.v
+set_global_assignment -name VERILOG_FILE pfd.v
+set_global_assignment -name VERILOG_FILE PFD_test.v
+set_global_assignment -name VECTOR_WAVEFORM_FILE PFD_test.vwf

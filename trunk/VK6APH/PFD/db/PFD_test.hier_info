@@ -1,9 +1,9 @@
 |PFD_test
 ref_in => ref_in~0.IN1
 osc_in => osc_in~0.IN1
-tune <= tune~0.DB_MAX_OUTPUT_PORT_TYPE
-LED1 <= ref_OK.DB_MAX_OUTPUT_PORT_TYPE
-LED2 <= LED2~0.DB_MAX_OUTPUT_PORT_TYPE
+tune <= ref_8k.DB_MAX_OUTPUT_PORT_TYPE
+LED1 <= <GND>
+LED2 <= <GND>
 C5 <= osc_in~0.DB_MAX_OUTPUT_PORT_TYPE
 
 
@@ -189,14 +189,5 @@ q[6] <= counter_cella6.REGOUT
 q[7] <= counter_cella7.REGOUT
 q[8] <= counter_cella8.REGOUT
 q[9] <= counter_cella9.REGOUT
-
-
-|PFD_test|pfd:Janus_pfd
-ref_in => SYNTHESIZED_WIRE_12.CLK
-ref_in => DFF_inst3.CLK
-osc_in => SYNTHESIZED_WIRE_13.CLK
-osc_in => SYNTHESIZED_WIRE_9.CLK
-pfd_out <= pfd_out~0.DB_MAX_OUTPUT_PORT_TYPE
-lock <= lock~0.DB_MAX_OUTPUT_PORT_TYPE
 
 

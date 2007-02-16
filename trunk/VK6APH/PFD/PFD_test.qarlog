@@ -1,11 +1,12 @@
 Quartus II Archive log --	C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.qarlog
 
 Archive:	C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.qar
-Date:		Mon Oct 02 20:38:46 2006
-Quartus II		6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
+Date:		Thu Jan 25 21:54:37 2007
+Quartus II		6.1 Build 201 11/27/2006 SJ Web Edition
 
 	=========== Files Selected: ===========
 C:/HPDSDR/trunk/VK6APH/PFD/1 Oct  PFD_test.v
+C:/HPDSDR/trunk/VK6APH/PFD/21 Jan working  PFD_test.v
 C:/HPDSDR/trunk/VK6APH/PFD/OZYV1FW08082006-1.hex
 C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.asm.rpt
 C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.done
@@ -16,6 +17,7 @@ C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.map.rpt
 C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.map.summary
 C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.pin
 C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.pof
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.qarlog
 C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.qsf
 C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.qws
 C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.rbf
@@ -25,14 +27,33 @@ C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.tan.rpt
 C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.tan.summary
 C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.v
 C:/HPDSDR/trunk/VK6APH/PFD/PFD_test.vwf
+C:/HPDSDR/trunk/VK6APH/PFD/PFD_test_assignment_defaults.qdf
+C:/HPDSDR/trunk/VK6APH/PFD/counter1.v
+C:/HPDSDR/trunk/VK6APH/PFD/counter2.v
 C:/HPDSDR/trunk/VK6APH/PFD/db/PFD_test.cbx.xml
 C:/HPDSDR/trunk/VK6APH/PFD/db/PFD_test.qpf
 C:/HPDSDR/trunk/VK6APH/PFD/db/PFD_test.sim.vwf
+C:/HPDSDR/trunk/VK6APH/PFD/db/cntr_45j.tdf
 C:/HPDSDR/trunk/VK6APH/PFD/db/cntr_bmh.tdf
+C:/HPDSDR/trunk/VK6APH/PFD/db/cntr_c5j.tdf
 C:/HPDSDR/trunk/VK6APH/PFD/pfd.bdf
 C:/HPDSDR/trunk/VK6APH/PFD/pfd.v
-c:/altera/quartus60/win/assignment_defaults.qdf
-	======= Total: 27 files to archive =======
+c:/altera/61/quartus/bin/assignment_defaults.qdf
+c:/altera/61/quartus/libraries/megafunctions/aglobal61.inc
+c:/altera/61/quartus/libraries/megafunctions/alt_counter_f10ke.inc
+c:/altera/61/quartus/libraries/megafunctions/alt_counter_stratix.inc
+c:/altera/61/quartus/libraries/megafunctions/alt_synch_counter.inc
+c:/altera/61/quartus/libraries/megafunctions/alt_synch_counter_f.inc
+c:/altera/61/quartus/libraries/megafunctions/cbx.lst
+c:/altera/61/quartus/libraries/megafunctions/cmpconst.inc
+c:/altera/61/quartus/libraries/megafunctions/dffeea.inc
+c:/altera/61/quartus/libraries/megafunctions/lpm_add_sub.inc
+c:/altera/61/quartus/libraries/megafunctions/lpm_compare.inc
+c:/altera/61/quartus/libraries/megafunctions/lpm_constant.inc
+c:/altera/61/quartus/libraries/megafunctions/lpm_counter.inc
+c:/altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
+c:/altera/61/quartus/libraries/megafunctions/lpm_decode.inc
+	======= Total: 48 files to archive =======
 
 	================ Status: ===============
 All files archived successfully.
