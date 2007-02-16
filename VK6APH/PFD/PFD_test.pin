@@ -1,7 +1,7 @@
  -- Copyright (C) 1991-2006 Altera Corporation
  -- Your use of Altera Corporation's design tools, logic functions 
  -- and other software and tools, and its AMPP partner logic 
- -- functions, and any output files any of the foregoing 
+ -- functions, and any output files from any of the foregoing 
  -- (including device programming or simulation files), and any 
  -- associated documentation or information are expressly subject 
  -- to the terms and conditions of the Altera Program License 
@@ -50,7 +50,7 @@
  -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
  ---------------------------------------------------------------------------------
 
-Quartus II Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 CHIP  "PFD_test"  ASSIGNED TO AN: EPM240T100C5
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
@@ -58,7 +58,7 @@ Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage 
 RESERVED_INPUT               : 1         :        :                   :         : 2         :                
 RESERVED_INPUT               : 2         :        :                   :         : 1         :                
 RESERVED_INPUT               : 3         :        :                   :         : 1         :                
-osc_in                       : 4         : input  : LVTTL             :         : 1         : Y              
+osc_in                       : 4         : input  : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 5         :        :                   :         : 1         :                
 RESERVED_INPUT               : 6         :        :                   :         : 1         :                
 RESERVED_INPUT               : 7         :        :                   :         : 1         :                
@@ -104,7 +104,7 @@ GNDIO                        : 46        : gnd    :                   :         
 RESERVED_INPUT               : 47        :        :                   :         : 1         :                
 RESERVED_INPUT               : 48        :        :                   :         : 1         :                
 RESERVED_INPUT               : 49        :        :                   :         : 1         :                
-ref_in                       : 50        : input  : LVTTL             :         : 1         : Y              
+ref_in                       : 50        : input  : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 51        :        :                   :         : 1         :                
 RESERVED_INPUT               : 52        :        :                   :         : 2         :                
 RESERVED_INPUT               : 53        :        :                   :         : 2         :                
@@ -130,7 +130,7 @@ RESERVED_INPUT               : 72        :        :                   :         
 RESERVED_INPUT               : 73        :        :                   :         : 2         :                
 RESERVED_INPUT               : 74        :        :                   :         : 2         :                
 RESERVED_INPUT               : 75        :        :                   :         : 2         :                
-C5                           : 76        : output : LVTTL             :         : 2         : Y              
+C5                           : 76        : output : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 77        :        :                   :         : 2         :                
 RESERVED_INPUT               : 78        :        :                   :         : 2         :                
 GNDIO                        : 79        : gnd    :                   :         :           :                
@@ -139,9 +139,9 @@ RESERVED_INPUT               : 81        :        :                   :         
 RESERVED_INPUT               : 82        :        :                   :         : 2         :                
 RESERVED_INPUT               : 83        :        :                   :         : 2         :                
 RESERVED_INPUT               : 84        :        :                   :         : 2         :                
-tune                         : 85        : output : LVTTL             :         : 2         : Y              
-LED1                         : 86        : output : LVTTL             :         : 2         : Y              
-LED2                         : 87        : output : LVTTL             :         : 2         : Y              
+tune                         : 85        : output : 3.3-V LVTTL       :         : 2         : Y              
+LED1                         : 86        : output : 3.3-V LVTTL       :         : 2         : Y              
+LED2                         : 87        : output : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 88        :        :                   :         : 2         :                
 RESERVED_INPUT               : 89        :        :                   :         : 2         :                
 RESERVED_INPUT               : 90        :        :                   :         : 2         :                

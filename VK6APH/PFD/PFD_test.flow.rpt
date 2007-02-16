@@ -1,6 +1,6 @@
 Flow report for PFD_test
-Mon Nov 27 21:39:12 2006
-Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
+Sun Jan 21 11:53:50 2007
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
 ---------------------
@@ -21,7 +21,7 @@ Version 6.0 Build 202 06/20/2006 Service Pack 1 SJ Web Edition
 Copyright (C) 1991-2006 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
-functions, and any output files any of the foregoing 
+functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
 to the terms and conditions of the Altera Program License 
@@ -34,22 +34,22 @@ applicable agreement for further details.
 
 
 
-+------------------------------------------------------------------------+
-; Flow Summary                                                           ;
-+-------------------------+----------------------------------------------+
-; Flow Status             ; Successful - Mon Nov 27 21:39:12 2006        ;
-; Quartus II Version      ; 6.0 Build 202 06/20/2006 SP 1 SJ Web Edition ;
-; Revision Name           ; PFD_test                                     ;
-; Top-level Entity Name   ; PFD_test                                     ;
-; Family                  ; MAX II                                       ;
-; Device                  ; EPM240T100C5                                 ;
-; Timing Models           ; Final                                        ;
-; Met timing requirements ; No                                           ;
-; Total logic elements    ; 39 / 240 ( 16 % )                            ;
-; Total pins              ; 6 / 80 ( 8 % )                               ;
-; Total virtual pins      ; 0                                            ;
-; UFM blocks              ; 0 / 1 ( 0 % )                                ;
-+-------------------------+----------------------------------------------+
++-------------------------------------------------------------------+
+; Flow Summary                                                      ;
++-------------------------+-----------------------------------------+
+; Flow Status             ; Successful - Sun Jan 21 11:53:50 2007   ;
+; Quartus II Version      ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
+; Revision Name           ; PFD_test                                ;
+; Top-level Entity Name   ; PFD_test                                ;
+; Family                  ; MAX II                                  ;
+; Device                  ; EPM240T100C5                            ;
+; Timing Models           ; Final                                   ;
+; Met timing requirements ; No                                      ;
+; Total logic elements    ; 16 / 240 ( 7 % )                        ;
+; Total pins              ; 6 / 80 ( 8 % )                          ;
+; Total virtual pins      ; 0                                       ;
+; UFM blocks              ; 0 / 1 ( 0 % )                           ;
++-------------------------+-----------------------------------------+
 
 
 +-----------------------------------------+
@@ -57,7 +57,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/27/2006 21:39:01 ;
+; Start date & time ; 01/21/2007 11:53:36 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; PFD_test            ;
 +-------------------+---------------------+
@@ -68,14 +68,12 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------------------------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                                                                 ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+---------------------------------------------------------------------------------------+---------------+-------------+------------+
-; ASSIGNMENT_GROUP_MEMBER             ; osc_8k                                                                                ; --            ; --          ; reference  ;
-; ASSIGNMENT_GROUP_MEMBER             ; ref_8k                                                                                ; --            ; --          ; reference  ;
 ; CUT_OFF_IO_PIN_FEEDBACK             ; Off                                                                                   ; On            ; --          ; --         ;
 ; CUT_OFF_PATHS_BETWEEN_CLOCK_DOMAINS ; Off                                                                                   ; On            ; --          ; --         ;
 ; CUT_OFF_READ_DURING_WRITE_PATHS     ; Off                                                                                   ; On            ; --          ; --         ;
 ; ENABLE_CLOCK_LATENCY                ; On                                                                                    ; Off           ; --          ; --         ;
 ; FITTER_EFFORT                       ; Standard Fit                                                                          ; Auto Fit      ; --          ; --         ;
-; FMAX_REQUIREMENT                    ; 10 MHz                                                                                ; --            ; --          ; --         ;
+; FMAX_REQUIREMENT                    ; 12.288 MHz                                                                            ; --            ; --          ; --         ;
 ; OPTIMIZE_FAST_CORNER_TIMING         ; On                                                                                    ; Off           ; --          ; --         ;
 ; TCO_REQUIREMENT                     ; 15 ns                                                                                 ; --            ; --          ; --         ;
 ; TH_REQUIREMENT                      ; 15 ns                                                                                 ; --            ; --          ; --         ;
@@ -85,17 +83,17 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------------------------------------------------------+---------------+-------------+------------+
 
 
-+-------------------------------------+
-; Flow Elapsed Time                   ;
-+----------------------+--------------+
-; Module Name          ; Elapsed Time ;
-+----------------------+--------------+
-; Analysis & Synthesis ; 00:00:02     ;
-; Fitter               ; 00:00:03     ;
-; Assembler            ; 00:00:01     ;
-; Timing Analyzer      ; 00:00:01     ;
-; Total                ; 00:00:07     ;
-+----------------------+--------------+
++----------------------------------------+
+; Flow Elapsed Time                      ;
++-------------------------+--------------+
+; Module Name             ; Elapsed Time ;
++-------------------------+--------------+
+; Analysis & Synthesis    ; 00:00:02     ;
+; Fitter                  ; 00:00:02     ;
+; Assembler               ; 00:00:04     ;
+; Classic Timing Analyzer ; 00:00:01     ;
+; Total                   ; 00:00:09     ;
++-------------------------+--------------+
 
 
 ------------
