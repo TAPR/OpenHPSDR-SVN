@@ -109,3 +109,4 @@ set_location_assignment PIN_86 -to I_test
 set_location_assignment PIN_88 -to Q_test
 set_location_assignment PIN_150 -to CLK_48MHZ
 set_location_assignment PIN_151 -to LROUT
+set_location_assignment PIN_175 -to CLK_MCLK

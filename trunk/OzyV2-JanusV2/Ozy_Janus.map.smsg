@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Tue Feb 13 20:32:52 2007
+    Info: Processing started: Tue Feb 20 21:55:29 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
     Info: Found entity 1: Tx_fifo
@@ -16,10 +16,10 @@ Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(415): object "PTT_out" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(857): object "Rx_control_1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(858): object "Rx_control_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(859): object "Rx_control_3" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(443): object "PTT_out" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(874): object "Rx_control_1" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(875): object "Rx_control_2" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(876): object "Rx_control_3" assigned a value but never read
 Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
 Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
     Info: Found entity 1: lpm_counter
@@ -246,13 +246,13 @@ Info: 49 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1014 device resources after synthesis - the final resource count might be different
-    Info: Implemented 12 input pins
-    Info: Implemented 18 output pins
+Info: Implemented 1017 device resources after synthesis - the final resource count might be different
+    Info: Implemented 10 input pins
+    Info: Implemented 20 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 936 logic cells
+    Info: Implemented 939 logic cells
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
     Info: Allocated 135 megabytes of memory during processing
-    Info: Processing ended: Tue Feb 13 20:33:14 2007
-    Info: Elapsed time: 00:00:22
+    Info: Processing ended: Tue Feb 20 21:55:49 2007
+    Info: Elapsed time: 00:00:20
