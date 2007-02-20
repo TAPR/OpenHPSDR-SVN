@@ -85,3 +85,4 @@ set_global_assignment -name VERILOG_FILE Janus.v
 set_location_assignment PIN_50 -to ref_in
 set_location_assignment PIN_82 -to CLK_48MHZ
 set_location_assignment PIN_78 -to IQOUT
+set_location_assignment PIN_48 -to CLK_MCLK
