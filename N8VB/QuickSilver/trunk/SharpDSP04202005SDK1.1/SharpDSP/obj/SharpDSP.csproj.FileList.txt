@@ -1,8 +1,0 @@
-bin\Release\SharpDSP.dll
-obj\Release\ResolveAssemblyReference.cache
-obj\Release\SharpDSP.dll
-bin\Debug\SharpDSP.dll
-bin\Debug\SharpDSP.pdb
-obj\Debug\ResolveAssemblyReference.cache
-obj\Debug\SharpDSP.dll
-obj\Debug\SharpDSP.pdb

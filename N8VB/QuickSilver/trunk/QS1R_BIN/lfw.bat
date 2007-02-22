@@ -1,1 +1,0 @@
-load_firmware 0xfffe 0x0007 OZYV1FW07312006-1.hex
