@@ -35,12 +35,9 @@ set_global_assignment -name GENERATE_RBF_FILE ON
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD LVTTL
 set_global_assignment -name VECTOR_INPUT_SOURCE "C:\\HPDSDR\\trunk\\VK6APH\\Ozy_Janus\\Ozy_Janus.vwf"
-set_instance_assignment -name CLOCK_SETTINGS "BCLK from Janus" -to BCLK
+set_instance_assignment -name CLOCK_SETTINGS "BCLK to AK5394A" -to BCLK
 set_global_assignment -name FMAX_REQUIREMENT "24 MHz" -section_id "FX2 Clock"
-set_global_assignment -name FMAX_REQUIREMENT "24.576 MHz" -section_id "Janus 24.576MHz clock"
-set_global_assignment -name BASED_ON_CLOCK_SETTINGS "Janus 24.576MHz clock" -section_id "TLV BCLK"
-set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 8 -section_id "TLV BCLK"
-set_instance_assignment -name CLOCK_SETTINGS "TLV BCLK" -to CBCLK
+set_instance_assignment -name CLOCK_SETTINGS "CBCLK to TLV320" -to CBCLK
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
 set_location_assignment PIN_160 -to BCLK
@@ -83,7 +80,6 @@ set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
 set_global_assignment -name FMAX_REQUIREMENT "48 MHz" -section_id "48MHz clock"
 set_instance_assignment -name CLOCK_SETTINGS "48MHz clock" -to IFCLK
-set_global_assignment -name BASED_ON_CLOCK_SETTINGS "Janus 24.576MHz clock" -section_id "BCLK from Janus"
 set_global_assignment -name VERILOG_FILE Tx_fifo.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE Duplex.vwf
 set_global_assignment -name VERILOG_FILE clocks.v
@@ -97,7 +93,6 @@ set_location_assignment PIN_170 -to DFS1
 set_location_assignment PIN_171 -to PTT_in
 set_location_assignment PIN_97 -to dot
 set_location_assignment PIN_96 -to dash
-set_instance_assignment -name CLOCK_SETTINGS "Janus 24.576MHz clock" -to CLK_12MHZ
 set_location_assignment PIN_152 -to CLK_12MHZ
 set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
 set_location_assignment PIN_4 -to DEBUG_LED0
@@ -109,4 +104,16 @@ set_location_assignment PIN_86 -to I_test
 set_location_assignment PIN_88 -to Q_test
 set_location_assignment PIN_150 -to CLK_48MHZ
 set_location_assignment PIN_151 -to LROUT
+set_global_assignment -name FMAX_REQUIREMENT "48 MHz"
+set_global_assignment -name FMAX_REQUIREMENT "12.288 MHz" -section_id CLK_12MHZ
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS CLK_12MHZ -section_id "BCLK to AK5394A"
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS CLK_12MHZ -section_id "LRCLK to AD5394A"
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 64 -section_id "LRCLK to AD5394A"
+set_instance_assignment -name CLOCK_SETTINGS "LRCLK to AD5394A" -to LRCLK
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS CLK_12MHZ -section_id "CBCLK to TLV320"
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 4 -section_id "CBCLK to TLV320"
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS CLK_12MHZ -section_id "CLRCLK to TLV320"
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 256 -section_id "CLRCLK to TLV320"
+set_instance_assignment -name CLOCK_SETTINGS "CLRCLK to TLV320" -to CLRCLK
+set_instance_assignment -name CLOCK_SETTINGS CLK_12MHZ -to CLK_12MHZ
 set_location_assignment PIN_175 -to CLK_MCLK
