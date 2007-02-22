@@ -25,11 +25,12 @@
 // Sets I/O pins on ADC and DAC chips plus provides clocks.
 //
 // TLV320 is in slave mode and AK5394A is Master. Note that both devices are fed from 
-// the CLK_12MHz (12.288MHz). 
+// the Master Clock CLK_MCLK (12.288MHz) which comes from Atlas. CLK_MCLK is generated in Ozy and 
+// is either CLK_12MHZ from Janus looped to CLK_MCLK or is derived from Mercury or Penelope if fitted.
 //
 // Sets up TLV320 via its I2C interface.
 //
-// Enables the 12.288MHz ADC clock to be phased locked to a 10MHz reference as follows:
+// Enables the 12.288MHz clock to be phased locked to a 10MHz reference as follows:
 // The  10MHz reference signal and 12.288MHz VCXO are divided 
 // to give 8kHz signals.  These are fed to a Phase Frequency Detector (PFD)
 // the output of which is filtered and fed to the VCXO. 
@@ -56,7 +57,7 @@
 //  28 November 2006 - Added PLL to enable 12.288MHz clock to be locked to 10MHz reference
 //  10 February 2007 - Changed I Q to I2S format and added PWM DAC for I and Q outputs
 //  12 February 2007 - Added clock doubler to run PWM DAC from 2 x 48MHz. 
-//  19 February 2007 - Changed AK5394A to run in Slave mode to enable clocking from Mercury and Penelope.
+//  22 February 2007 - Added CLK_MCLK input that is used clock the AD5394A and TLV320AIC23B 
 //
 //
 //  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
@@ -80,14 +81,14 @@ module Janus(
    	output EXP4,
    	input  FSYNC,
    	output HPF,
-   	output IPWM,	// I data out
-   	output  LRCLK,
+   	output IPWM,
+   	input  LRCLK,
    	output MCLK,
    	output nCS,
    	output nRST,
    	input  PTT,
    	output QPWM,	// Q data out
-   	output  SCLK,	
+   	input  SCLK,	// I data out
   	input  SDOUT,
    	output SMODE1,
    	output SMODE2,
@@ -98,8 +99,8 @@ module Janus(
 	input  CLK_48MHZ,	// 48MHz clock from FX2 for PWM 
 	input  IQOUT,	// I and Q data in I2S format 
 	output C5,		// 12.288MHz clock to Atlas bus
-	input  C6,		// SCLK
-	input  C7,		// LRCLK
+	output C6,		// SCLK
+	output C7,		// LRCLK
 	input  C8,  	// CBCLK
 	input  C9,		// CLRCIN/CLRCOUT
 	output C10,		// SDOUT
@@ -108,7 +109,8 @@ module Janus(
 	input  C13,		// DFS0
 	input  C14,		// DFS1
 	inout  C15, 	// !PTT
-	input  ref_in  	// C16 - 10MHz reference in from Atlas bus
+	input  ref_in, 	// C16 - 10MHz reference in from Atlas bus
+	input  CLK_MCLK // Master clock from Ozy 
 ); 
 
 reg index;
@@ -274,6 +276,8 @@ assign QPWM = Q_accumulator[16];
 
 // Atlas outputs
 assign C5 = CLK_12MHZ;		
+assign C6 = SCLK; 		// is actually BCLK
+assign C7 = LRCLK;
 assign C10 = SDOUT; 
 assign C11 = CDOUT;
 assign C15 = ~PTT; 		// send not PTT 
@@ -286,18 +290,16 @@ assign CLRCOUT = C9;		// LRCLK for TLV320
 assign CDIN = C12;
 assign DFS0 = C13; 			// set AK speed
 assign DFS1 = C14; 			// set AK speed
-assign SCLK = C6;
-assign LRCLK = C7;
 
 // AK5394A pins
-assign MCLK = CLK_12MHZ; 	// 12.288MHz
+assign MCLK = CLK_MCLK; 	// Master clock from Ozy
 assign HPF = 1'b1; 			// HPF in AK on
-assign SMODE1 = 1'b0; 		// Slave mode, I2S
-assign SMODE2 = 1'b1; 		// Slave mode, I2S
+assign SMODE1 = 1'b1; 		// Master mode, I2S
+assign SMODE2 = 1'b1; 		// Master mode, I2S
 assign ZCAL = 1'b1;			// Calibrate AK from A/D inputs
 
 // LTV320 pins
-assign CMCLK = CLK_12MHZ; 	// 12.288MHz
+assign CMCLK = CLK_MCLK; 	// Master clock from Ozy
 assign CMODE = 1'b0;		// Set to 0 for I2C
 assign nCS = 1'b0;   		// this results in an i2c addr of 0x1a 
 
