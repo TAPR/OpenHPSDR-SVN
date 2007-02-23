@@ -1,4 +1,4 @@
-// V1.30 13th February 2007
+// V1.40 23rd February 2007
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -97,14 +97,14 @@
 
 
 
-// AK5394A and TLV320 MCLK clock is 12.288MHz and is generated on the Janus board CPLD
+// AK5394A and TLV320 MCLK clock is 12.288MHz and is provided on the Atlas bus.
 // This version uses 2 state machines, one to manage A/D
 // and one to manage the FX2 USB interface. The two are needed
 // since the FX2 USB must run off the FX2 24MHz clock and the
 // A/D's  must run of the 12.288MHz clock.
 //
 //
-// I and Q data is sent in I2S format to Atlas bus for use by Janus and Penelope
+// I and Q data is sent in I2S format to the Atlas bus for use by Janus and Penelope
 //
 //
 // Built with Quartus II v6.1 Build 201
@@ -147,21 +147,21 @@
 //   AK5394A and LTV320AIC23B connections to OZY FPGA pins
 //
 //   AK_reset             	- Atlas C2  - pin 149 - AK5394A reset
-//   Q_PWM_out           	- Atlas C3  - pin 150
-//   I_PWM_out           	- Atlas C4  - pin 151
-//   12.288MHZ clock 		- Atlas C5  - pin 152 - (CLK_12MHZ)
+//   CLK_48MHZ           	- Atlas C3  - pin 150 - 48MHz clock to PWM DACs
+//   LROUT		           	- Atlas C4  - pin 151 - L/R audio in I2S format
+//   CLK_12MHZ   	 		- Atlas C5  - pin 152 - 12.288MHz clock from Janus
 //   BCLK                   - Atlas C6  - pin 160 - AK5394A (SCLK)
 //   LRCLK                  - Atlas C7  - pin 161 - AK5394A
 //   CBCLK                  - Atlas C8  - pin 162 - TLV320
 //   CLRCLK                 - Atlas C9  - pin 163 - TLV320
 //   DOUT                   - Atlas C10 - pin 164 - AK5394A
 //   CDOUT                  - Atlas C11 - pin 165 - TLV320
-//   CDIN                   - Atlas C12 - pin 168 - TLV320
+//   CDIN                   - Atlas C12 - pin 168 - TLV320 (I and Q audio)
 //   DFS0                   - Atlas C13 - pin 169 - AK5394A speed setting
 //   DFS1                   - Atlas C14 - pin 170 - AK5394A speed setting
 //   PTT_in                 - Atlas C15 - pin 171 - PTT input from Janus
-//							- Atlas C16 -         - 10MHz reference 
-//	 IQOUT					- Altas C17 - pin 175 - I & Q out in I2S format
+//							- Atlas C16 - pin 173 - 10MHz reference 
+//	 CLK_MCLK				- Altas C17 - pin 175 - Master clock to Atlas for Janus etc 
 //
 //   DB9 - pin connections
 //
@@ -246,7 +246,7 @@ module Ozy_Janus(
 
 input CLK_12MHZ;               // From Janus board 12.288MHz
 input IFCLK;                   // FX2 IFCLOCK - 48MHz
-output CLK_MCLK; 			   // MCLK to Altas for Janus 
+output CLK_MCLK; 			   // Master Clock  to Altas for Janus 
 input BCLK, DOUT, LRCLK;
 inout  [15:0] FX2_FD;           // bidirectional FIFO data to/from the FX2
 //output  [15:0] FX2_FD;        // bidirectional FIFO data to/from the FX2
@@ -274,7 +274,7 @@ output DFS0,DFS1;               // speed control for AK5394A
 output AK_reset;                // reset for AK5394A
 wire DFS0;
 wire DFS1;
-output CLK_48MHZ; 				// 48MHz clock to Janus for PWM decoder 
+output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
 
 
 
@@ -336,14 +336,14 @@ reg strobe;                     // set when we want to send data to the Tx FIFO
 
 /*
         Reset AL5394A at power on and force into 48kHz sampling rate.
-        Hold the A/D chip in reset until 2^25 CLK_12MHZ have passed - about 3 seconds. This
+        Hold the A/D chip in reset until 2^25 CLK_MCLK have passed - about 3 seconds. This
         is to allow the AK4593A to calibrate correctly.
 */
 
 reg AK_reset;
 reg [25:0] ad_count;
 
-always @ (posedge CLK_12MHZ) begin
+always @ (posedge CLK_MCLK) begin
         if(!ad_count[25])begin
         AK_reset <=0;
         ad_count <= ad_count + 25'b1;
@@ -364,21 +364,27 @@ end
         LRCLK must change state on the negative edge of BCLK.
 */
 
-// divide  CLK_12MHZ (12.288MHz) from Janus to give clocks for the TLV320 
+// divide  CLK_MCLK (12.288MHz) to give clocks for the TLV320 etc
 // using Altera Megafunction
 
 wire [7:0]clock_out;
 wire CBCLK;
 wire CLRCLK;
 
-clocks clocks(CLK_12MHZ, clock_out);
+clocks clocks(CLK_MCLK, clock_out);
 
 assign CBCLK = clock_out[1] ;           // 3.072MHz
 assign CLRCLK = clock_out[7];           // 48kHz
 assign CLK_48MHZ = IFCLK; 				// 48MHz clock to PWM DAC on Janus
+
+// the Master Clock (CLK_MCLK) will come from Janus unless a Mercury or Penelope board
+// is being used then it will come from the Atlas bus on C17
+// For now force use of Janus 12.288MHz clock
+
 assign CLK_MCLK = CLK_12MHZ; 			// CLK_MCLK to Atlas for Janus
 
-
+		
+	
 //////////////////////////////////////////////////////////////
 //
 //      Decode A/D speed
@@ -500,9 +506,9 @@ always @ (posedge BCLK)
 begin
                 q[15:0] <= {q[14:0],`DOUTbit};                  // shift current AK5394A data left and add next bit
                 sync_Rx_used[11:0] <= Rx_used_rdside;
-                strobe <= 1'b0;                                                 // reset Tx FIFO strobe
-                if (loop_counter == 63) loop_counter <= 0; // count how many times through the loop to
-case (AD_state)                                                                    // see if sync is to be sent
+                strobe <= 1'b0;                                 // reset Tx FIFO strobe
+                if (loop_counter == 63) loop_counter <= 0; 		// count how many times through the loop to
+case (AD_state)                                                 // see if sync is to be sent
 6'd0:   begin
                 if(!LRCLK) AD_state <= 6'd0;                    // loop until LRCLK is high
                 else AD_state <= 6'd1;
@@ -514,13 +520,13 @@ case (AD_state)                                                                 
 6'd2:   begin
                 if (loop_counter == 0) begin                    // if zero  then send sync and C&C bytes
                         register <= 16'h7F7F;
-                        strobe <= 1'b1;                                         // strobe start of sync (7F7F) into Tx FIFO
+                        strobe <= 1'b1;                         // strobe start of sync (7F7F) into Tx FIFO
                         end
                 AD_state <= AD_state + 1'b1;
                 end
 
 6'd4:   begin
-                if(loop_counter == 0) begin                                     // send C&C bytes, this is C0
+                if(loop_counter == 0) begin                     // send C&C bytes, this is C0
                         register <= {C0[7:2], ~clean_dash, (~clean_dot || clean_PTT_in)};
                         register[15:8] <= 8'h7F;
                         rx_avail <= 12'd4095 - sync_Rx_used;    //  must match rx fifo size
@@ -530,7 +536,7 @@ case (AD_state)                                                                 
                 end
 6'd6:   begin
                 if(loop_counter == 0)begin
-                        register <= {RX_wait, TX_wait,};                // C1 - RX wait loop counter, C2 - Tx wait loop counter
+                        register <= {RX_wait, TX_wait,};        // C1 - RX wait loop counter, C2 - Tx wait loop counter
                         strobe <= 1'b1;
                         end
                 AD_state <= AD_state + 1'b1;
@@ -543,7 +549,7 @@ case (AD_state)                                                                 
                 AD_state <= AD_state + 1'b1;
                 end
 6'd18:  begin   
-                register <= q;                                          // AK5394A data for left channel
+                register <= q;                                  // AK5394A data for left channel
                 strobe <= 1'b1;
                 AD_state <= AD_state + 1'b1;
                 end
@@ -552,7 +558,7 @@ case (AD_state)                                                                 
                 AD_state <= AD_state + 1'b1;
                 end
 6'd28:  begin
-                if(!LRCLK)AD_state <= 6'd28;            // wait until LRCLK goes high
+                if(!LRCLK)AD_state <= 6'd28;            		// wait until LRCLK goes high
                 else AD_state <= AD_state + 1'b1;
                 end
 6'd37:  begin 
@@ -572,8 +578,8 @@ case (AD_state)                                                                 
                 AD_state <= AD_state + 1'b1;
                 end
 6'd58:  begin
-                loop_counter <= loop_counter + 1'b1; // at end of loop so increment loop counter
-                AD_state <= 6'd0;                                        // done so loop again
+                loop_counter <= loop_counter + 1'b1; 			// at end of loop so increment loop counter
+                AD_state <= 6'd0;                               // done so loop again
                 end
 default:AD_state <= AD_state + 1'b1;
 endcase
@@ -594,10 +600,10 @@ reg [4:0]TX_state;
 
 always @ (posedge CBCLK)
 begin
-                Tx_q[15:0] <= {Tx_q[14:0], CDOUT};                      // shift current TLV320 data left and add next bit
+                Tx_q[15:0] <= {Tx_q[14:0], CDOUT};              // shift current TLV320 data left and add next bit
 case (TX_state)
 5'd0:   begin
-                if(CLRCLK) TX_state <= 5'd0;                            // loop until CLRCLK is low
+                if(CLRCLK) TX_state <= 5'd0;                    // loop until CLRCLK is low
                 else TX_state <= 5'd1;
                 end
 5'd1:   begin
@@ -605,8 +611,8 @@ case (TX_state)
                 else TX_state <= 5'd1;
                 end
 5'd18:  begin
-                Tx_data <= Tx_q;                                                        // TLV320 (microphone or line in)data
-                TX_state <= 5'd0;                                                       // done so loop again
+                Tx_data <= Tx_q;                                // TLV320 (microphone or line in)data
+                TX_state <= 5'd0;                               // done so loop again
                 end
 default:TX_state <= TX_state + 1'b1;
 endcase
@@ -614,7 +620,7 @@ end
 
 //////////////////////////////////////////////////////////////
 //
-//                              One-shot to strobe data into Tx FIFO
+//       One-shot to strobe data into Tx FIFO
 //
 //////////////////////////////////////////////////////////////
 
@@ -632,17 +638,6 @@ begin
                         if (strobe) data_flag <= 1'b1;
 end
 
-
-/*
-always @ (negedge BCLK or posedge data_flag)
-begin
-                if (data_flag)
-                        data_flag <= 1'b0;
-                else
-                        if (strobe) data_flag <= 1'b1;
-end
-*/
-
 /////////////////////////////////////////////////////////////
 //
 //   Rx_fifo  (4096) Dual clock FIFO - Altera Megafunction (dcfifo)
@@ -659,9 +654,9 @@ end
 
 
 wire [15:0] Rx_data;
-wire write_full;                         // high when tx side of fifo is full
+wire write_full;                 // high when tx side of fifo is full
 wire [11:0] Rx_used;             // how many bytes in FX2 side Rx fifo
-wire [11:0] Rx_used_rdside;  // read side count
+wire [11:0] Rx_used_rdside;  	 // read side count
 
 Rx_fifo Rx_fifo(.wrclk (SLRD),.rdreq (fifo_enable),.rdclk (BCLK),.wrreq (1'b1),
                 .data (Rx_register),.q (Rx_data), .wrfull (write_full),.wrusedw(Rx_used),
@@ -670,7 +665,7 @@ Rx_fifo Rx_fifo(.wrclk (SLRD),.rdreq (fifo_enable),.rdclk (BCLK),.wrreq (1'b1),
 
 ///////////////////////////////////////////////////////////////
 //
-//                              Tx_fifo - 2048 words - Altera Megafunction
+//     Tx_fifo - 2048 words - Altera Megafunction
 //
 //////////////////////////////////////////////////////////////
 
@@ -678,12 +673,12 @@ Tx_fifo         Tx_fifo(.wrclk (BCLK),.rdreq (1'b1),.rdclk (Tx_read_clock),.wrre
                                 .data (register),.rdempty (Tx_rdempty), .wrempty (Tx_write_empty),
                                 .wrfull (),.q (Tx_register), .wrusedw(write_used));
 
-wire Tx_rdempty;                                // High when Tx fifo empty
+wire Tx_rdempty;                        // High when Tx fifo empty
 wire [15:0] Tx_register;                // holds data from A/D to send to FX2
 wire Tx_write_empty;
 reg  Tx_read_clock;                     // when goes high sends data to Tx_register
 wire [10:0] write_used;                 // indicates how may bytes in the Tx buffer
-reg  [10:0] syncd_write_used;   // ditto but synced to FX2 clock
+reg  [10:0] syncd_write_used;   		// ditto but synced to FX2 clock
 
 //////////////////////////////////////////////////////////////
 //
@@ -698,16 +693,16 @@ reg  [10:0] syncd_write_used;   // ditto but synced to FX2 clock
         it checks 'EP2_has_data' in round robin fashion.
 */
 
-reg SLOE;                                                                       // FX2 data bus enable - active low
-reg SLEN;                                                                       // Put data on FX2 bus
-reg SLRD;                                                                       // FX2 read - active low
-reg SLWR;                                                                       // FX2 write - active low
-reg [1:0] FIFO_ADR;                                                     // FX2 register address
-wire EP2_has_data = FLAGA;                                      // high when EP2 has data available
-wire EP6_ready = FLAGC;                                         // high when we can write to EP6
-reg [15:0] Rx_register;                                         // data from PC goes here
-reg [7:0]TX_wait;                                                       // increments when  we have to wait for TX_ FIFO to be free (C1)
-reg [7:0]RX_wait;                                                       // increments when there is no receive data     (C2)
+reg SLOE;                             // FX2 data bus enable - active low
+reg SLEN;                             // Put data on FX2 bus
+reg SLRD;                             // FX2 read - active low
+reg SLWR;                             // FX2 write - active low
+reg [1:0] FIFO_ADR;                   // FX2 register address
+wire EP2_has_data = FLAGA;            // high when EP2 has data available
+wire EP6_ready = FLAGC;               // high when we can write to EP6
+reg [15:0] Rx_register;               // data from PC goes here
+reg [7:0]TX_wait;                     // increments when  we have to wait for TX_ FIFO to be free (C1)
+reg [7:0]RX_wait;                     // increments when there is no receive data     (C2)
 
 
 always @ (negedge IFCLK)
@@ -716,12 +711,12 @@ begin
 case(state_FX)
 // state 0 - set up to check for Rx data from EP2
 4'd0:begin
-    SLWR <= 1;                                                  // reset FX2 FIFO write stobe
-        Tx_read_clock <= 1'b0;                                  // reset Tx fifo read strobe
+    SLWR <= 1;                        // reset FX2 FIFO write stobe
+        Tx_read_clock <= 1'b0;        // reset Tx fifo read strobe
         SLRD <= 1'b1;
         SLOE <= 1'b1;
         SLEN <= 1'b0;
-        FIFO_ADR <= 2'b00;                                      // select EP2
+        FIFO_ADR <= 2'b00;            // select EP2
         state_FX <= state_FX + 1'b1;
         end
 // delay 2 IFCLOCK cycle, this is necessary at 48MHZ to allow FIFO_ADR to settle
@@ -768,29 +763,29 @@ case(state_FX)
 // check Tx FIFO is ready then set Write strobe
 4'd9:   begin
             if (EP6_ready) begin                                // if EP6 is ready, write to it and exit this state
-                                Tx_read_clock <= 1'b0;          // end of transfer from Tx fifo
+                Tx_read_clock <= 1'b0;          				// end of transfer from Tx fifo
                 SLEN <= 1'b1;
                 state_FX <= state_FX + 1'b1;
             end
             else begin                                          // otherwise, hang out here until fifo is ready
                 SLWR <= 1;
                 state_FX <= 4'd9;
-                                TX_wait <= TX_wait + 1'b1;      // increment TX_wait counter
+                TX_wait <= TX_wait + 1'b1;      				// increment TX_wait counter
             end
         end
 //  set SLWR
 4'd10: begin
-                SLWR <= 1'b0;
-                state_FX <= state_FX + 1'b1;
-           end
+          SLWR <= 1'b0;
+          state_FX <= state_FX + 1'b1;
+       end
 //  reset SLWR and tristate SLEN
 4'd11: begin
-                SLWR <= 1;
-                SLEN <= 1'b0;
+        SLWR <= 1;
+        SLEN <= 1'b0;
         state_FX <= 4'd0;
-                end
+        end
         default: state_FX <= state_FX + 1'b1;
-        endcase
+    endcase
 end
 
 // FX2_FD is tristate when SLEN  is low, otherwise it's the Tx_register value.
@@ -798,6 +793,8 @@ end
 
 assign FX2_FD[15:8] = SLEN ? Tx_register[7:0]  : 8'bZ;
 assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
+
+
 
 
 
@@ -847,8 +844,8 @@ assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
 */
 
 reg [4:0] state_PWM;                    // state for PWM  counts 0 to 13
-reg [15:0] Left_Data;                    // Left 16 bit PWM data for D/A converter
-reg [15:0] Right_Data;                   // Right 16 bit PWM data for D/A converter
+reg [15:0] Left_Data;                   // Left 16 bit PWM data for D/A converter
+reg [15:0] Right_Data;                  // Right 16 bit PWM data for D/A converter
 reg [15:0] I_PWM;                       // I 16 bit PWM data for D/A conveter
 reg [15:0] Q_PWM;                       // Q 16 bit PWM data for D/A conveter
 reg [15:0] I_Data;
@@ -864,38 +861,38 @@ reg [7:0] Rx_control_4;                 // control C4 from PC
 reg [1:0] SpeedBits;                    // Sampling rate bits (kd5tfd added) 00=48, 01=96 10=192 
 
 reg [8:0]sync_count;
-reg have_sync;                                  // high when we have sync
+reg have_sync;                          // high when we have sync
 
 
 always @ (negedge BCLK)
 begin
-        synced_Rx_used <= Rx_used;                                                      // sync Rx_used to BCLK since this runs of FX2 clock
+        synced_Rx_used <= Rx_used;      // sync Rx_used to BCLK since this runs of FX2 clock
 case(state_PWM)
   0: begin
 // IMPORTANT:  We are looking for, or have lost sync, at this point - use this state to set all
 // outputs etc to a safe value.
-                have_sync <= 1'b0;                                                              // turn sync LED off
-                if(synced_Rx_used > 1023)begin                                  // wait until we have at lease 1024 bytes to check
-                        byte_count <= 0;                                                        // reset byte count
-                        fifo_enable <= 1'b1;                                            // enable read of dual clock fifo
-                        sync_count <= 0;                                                        // reset sync counter
-                        if (Rx_data == 16'h7F7F)begin                           // have start of sync
+                have_sync <= 1'b0;                                  // turn sync LED off
+                if(synced_Rx_used > 1023)begin                      // wait until we have at lease 1024 bytes to check
+                        byte_count <= 0;                            // reset byte count
+                        fifo_enable <= 1'b1;                        // enable read of dual clock fifo
+                        sync_count <= 0;                            // reset sync counter
+                        if (Rx_data == 16'h7F7F)begin               // have start of sync
                                 sync_count <= sync_count + 9'b1;
                                 state_PWM <= 1;
                         end
-                        else state_PWM <= 0;                                            // no sync so look again
+                        else state_PWM <= 0;                         // no sync so look again
                 end     else begin
-                        fifo_enable <= 1'b0;                                            // prevent FIFO reads until we have >1023 available
-                        state_PWM <= 0;                                                         // loop here if not
+                        fifo_enable <= 1'b0;                         // prevent FIFO reads until we have >1023 available
+                        state_PWM <= 0;                              // loop here if not
                 end
          end
 // state 1 - check for 0x7F  sync character
   1: begin
-                if (Rx_data[15:8] == 8'h7F)begin                                // have middle of sync
+                if (Rx_data[15:8] == 8'h7F)begin                     // have middle of sync
                         sync_count <= sync_count + 9'b1;
                         state_PWM <= 2;
                 end
-                else state_PWM <= 0;                                                    // not sync, restart
+                else state_PWM <= 0;                                 // not sync, restart
          end
 
 // state 2 - loop until the next sync is due and check we receive it
@@ -911,8 +908,8 @@ case(state_PWM)
 // state 3 - look for sync again - if true continue else start again
 // Once in sync this is where the code re-enters.
   3: begin
-                byte_count <= 0;                                                        // reset byte count
-                fifo_enable <= 1'b1;                                            // enable read of dual clock fifo
+                byte_count <= 0;                                       // reset byte count
+                fifo_enable <= 1'b1;                                   // enable read of dual clock fifo
                 if (Rx_data == 16'h7F7F) state_PWM <= 4;
                 else state_PWM <= 0;
          end
@@ -920,7 +917,7 @@ case(state_PWM)
   4: begin
                 if (Rx_data[15:8] == 8'h7F)begin
                         Rx_control_0 <= Rx_data[7:0];                   // We have sync so get Rx_control_0
-                        have_sync <= 1'b1;                                      // toggle sync LED.
+                        have_sync <= 1'b1;                              // toggle sync LED.
                         state_PWM <= 5;
                 end
                 else state_PWM <= 0;
@@ -942,7 +939,7 @@ case(state_PWM)
                 end
 // state 7 - get Left audio
   7: begin
-                fifo_enable <= 1'b1;                                            // enable Rx_fifo
+                fifo_enable <= 1'b1;                       // enable Rx_fifo
                 Left_Data <= Rx_data;
                 state_PWM <= 8;
                 end
@@ -969,11 +966,11 @@ case(state_PWM)
            end
 // state 12 - wait for positive edge of LRCLK
   12: begin
-                if (CLRCLK)                                                             // wait for A/D LRCLK to go high so we are in sync
+                if (CLRCLK)                                             // wait for A/D LRCLK to go high so we are in sync
                 begin
                         byte_count <= byte_count + 1'b1;
-                        //I_Data[15:0] <=  I_PWM[15:0];                   // set up I D/A data
-                        //Q_Data[15:0] <=  Q_PWM[15:0];                   // set up Q D/A data
+                        //I_Data[15:0] <=  I_PWM[15:0];                 // set up I D/A data
+                        //Q_Data[15:0] <=  Q_PWM[15:0];                 // set up Q D/A data
                         state_PWM <= 13;
                 end
                 else state_PWM <= 12;
@@ -982,7 +979,7 @@ case(state_PWM)
   13: begin
                 if (synced_Rx_used > 15)
                 begin
-                        if(byte_count == 63) state_PWM <= 3; // look for sync if we have done 62 loops
+                        if(byte_count == 63) state_PWM <= 3; 			// look for sync if we have done 62 loops
                         else state_PWM <= 7;
                 end
                 else state_PWM <= 13;                                   // wait until we have 16 bytes in the fifo
