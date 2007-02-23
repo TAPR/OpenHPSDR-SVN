@@ -57,7 +57,8 @@
 //  28 November 2006 - Added PLL to enable 12.288MHz clock to be locked to 10MHz reference
 //  10 February 2007 - Changed I Q to I2S format and added PWM DAC for I and Q outputs
 //  12 February 2007 - Added clock doubler to run PWM DAC from 2 x 48MHz. 
-//  22 February 2007 - Added CLK_MCLK input that is used clock the AD5394A and TLV320AIC23B 
+//  22 February 2007 - Added CLK_MCLK input that is used clock the AD5394A and TLV320AIC23B
+//  23 February 2007 - Removed clock doubler due to noise in audio output 
 //
 //
 //  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
@@ -225,25 +226,6 @@ end
 
 ///////////////////////////////////////////////////////////
 //
-//    Clock doubler - converts 48MHz clock to 96MHz
-//
-///////////////////////////////////////////////////////////
-
-wire D;
-wire dclk;
-reg Q;
-
-always @(posedge dclk)
-begin
-	Q = D;
-end
-
-assign D = ~Q;
-assign dclk = CLK_48MHZ ^ D;
-
-
-///////////////////////////////////////////////////////////
-//
 //    PWM DAC for I and Q outputs 
 //
 ///////////////////////////////////////////////////////////
@@ -254,7 +236,7 @@ reg [15:0] I_in;
 reg [15:0] Q_in;
 
 
-always @(negedge dclk)							// clock PWM at 96MHz
+always @(negedge CLK_48MHZ)						// clock PWM at 48MHz
 begin
         I_in <= I_sync_data + 16'h8000;         // so that 0 in gives 50:50 mark/space
         Q_in <= Q_sync_data + 16'h8000;
@@ -276,11 +258,11 @@ assign QPWM = Q_accumulator[16];
 
 // Atlas outputs
 assign C5 = CLK_12MHZ;		
-assign C6 = SCLK; 		// is actually BCLK
+assign C6 = SCLK; 			// is actually BCLK
 assign C7 = LRCLK;
 assign C10 = SDOUT; 
 assign C11 = CDOUT;
-assign C15 = ~PTT; 		// send not PTT 
+assign C15 = ~PTT; 			// send not PTT 
 
 // Atlas inputs
 assign nRST = C2;			// reset AK5394A on power up
@@ -305,7 +287,7 @@ assign nCS = 1'b0;   		// this results in an i2c addr of 0x1a
 
 // Other pins 
 
-assign LED1 = ref_OK;		  // Green LED on when 10MHz reference signal is present
+assign LED1 = ref_OK;		  	// Green LED on when 10MHz reference signal is present
 assign LED2 = (lock | ref_OK);  // Yellow LED on when loop is locked and we have a reference signal 
 assign EXP4 = 1'b0;
 
