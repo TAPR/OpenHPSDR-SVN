@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Feb 22 21:52:26 2007
+    Info: Processing started: Fri Feb 23 21:06:20 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
     Info: Found entity 1: Tx_fifo
@@ -16,10 +16,10 @@ Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(417): object "PTT_out" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(859): object "Rx_control_1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(860): object "Rx_control_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(861): object "Rx_control_3" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(424): object "PTT_out" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(857): object "Rx_control_1" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(858): object "Rx_control_2" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(859): object "Rx_control_3" assigned a value but never read
 Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
 Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
     Info: Found entity 1: lpm_counter
@@ -254,5 +254,5 @@ Info: Implemented 1015 device resources after synthesis - the final resource cou
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
     Info: Allocated 135 megabytes of memory during processing
-    Info: Processing ended: Thu Feb 22 21:52:45 2007
+    Info: Processing ended: Fri Feb 23 21:06:39 2007
     Info: Elapsed time: 00:00:19
