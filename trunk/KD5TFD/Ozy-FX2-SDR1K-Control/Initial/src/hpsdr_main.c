@@ -44,13 +44,13 @@
 #define	HW_REV_OFFSET		  5
 
 #define	bRequestType	SETUPDAT[0]
-#define	bRequest		    SETUPDAT[1]
+#define	bRequest	    SETUPDAT[1]
 #define	wValueL			SETUPDAT[2]
 #define	wValueH			SETUPDAT[3]
 #define	wIndexL			SETUPDAT[4]
 #define	wIndexH		    SETUPDAT[5]
-#define	wLengthL		    SETUPDAT[6]
-#define	wLengthH		    SETUPDAT[7]
+#define	wLengthL	    SETUPDAT[6]
+#define	wLengthH	    SETUPDAT[7]
 
 static void
 get_ep0_data (void)
@@ -64,8 +64,22 @@ get_ep0_data (void)
  * If we handle this one, return non-zero.
  */
 
+extern void byteToHex(unsigned char, char *); 
+
 unsigned char app_vendor_OUT_cmd(void)
-{ 
+{
+	
+#if 1 	
+	char dbuf[3]; 
+	putstr("vendor out: req=0x"); 
+	byteToHex(bRequest, dbuf); 
+	putstr(dbuf); 
+	putstr(" wValueL=0x"); 
+	byteToHex(wValueL, dbuf); 
+	putstr(dbuf); 
+	putstr("\n"); 
+#endif 	  
+
 	switch (bRequest)
 		{
 
@@ -128,11 +142,19 @@ unsigned char app_vendor_OUT_cmd(void)
                 
 #ifdef SDR1K_CONTROL                 
             case VRQ_SDR1K_CTL:
-            // putstr("VRQ_SDR1K_CTL \n"); 
-            // HPSDR_LED_REG ^= bmLED0;
-            get_ep0_data();             
-        	return	SDR1k_ControlOut(wValueH, wValueL, wIndexH, wIndexL, EP0BUF, EP0BCL); 		 
-            break;
+	            // get_ep0_data (); -- no data for these 
+#if 1              
+				putstr("pre wValueL=0x"); 
+				byteToHex(wValueL, dbuf); 
+				putstr(dbuf); 
+				putstr("\n"); 
+#endif 	  
+            
+                         
+        		if (!SDR1k_ControlOut(wValueH, wValueL, wIndexH, wIndexL, EP0BUF, EP0BCL)) {
+        			return 0;  
+        		} 		 
+            	break;
 #endif               
               
 

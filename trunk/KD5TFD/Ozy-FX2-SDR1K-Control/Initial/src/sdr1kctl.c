@@ -94,16 +94,21 @@ void byteToHex(unsigned char b, unsigned char *bufp) {
 
 // Write the Data reg of the simulated parallel port - returns 0 on failure, !0 for ok  
 unsigned char SDR1k_Control_setDataReg(unsigned char val) {
-	
-	unsigned char xdata databuf[1]; 
-	putstr("SDR1kctl - setDataReg\n"); 
+	unsigned char xdata databuf[1];
+	unsigned char bbuf[3];  
 	databuf[0] = val;
+	putstr("setDataReg val=0x"); 
+	byteToHex(val, bbuf); 
+	putstr(bbuf); 
+	putstr("\n");  
+	
 	// HPSDR_LED_REG ^= bmLED0; // toggle LED so we know we got here 
 	if (!spi_write (0, ADDR_DATA, SPI_EN_FPGA, SPI_FMT_HDR_1 | SPI_FMT_MSB , (const xdata unsigned char *)databuf, 1)) {
+		putstr("setDataReg bailout\n"); 
 		return 0;  
 	}	
 	/* else */
- 	 
+ 	putstr("setDataReg good rc\n");  
 	return 1; 	 
 }
 
@@ -293,11 +298,13 @@ unsigned char SDR1k_Control_SR_Load(unsigned char wIndexH, unsigned char wIndexL
 unsigned char SDR1k_ControlOut(unsigned char wValueH, unsigned char wValueL,
 							  unsigned char wIndexH, unsigned char wIndexL, 
 							  const xdata unsigned char *bufp, unsigned char buflen) {
+#if 1 							  	
 	unsigned char hbuf[3]; 	 
 	putstr("SDR1k_ControlOut wValueL=0x");
 	byteToHex(wValueL, hbuf); 
 	putstr(hbuf); 
-	putstr("\n"); 
+	putstr("\n");
+#endif 	 
 	
 	switch ( wValueL ) {			
 		case SDR1KCTRL_LATCH:    
