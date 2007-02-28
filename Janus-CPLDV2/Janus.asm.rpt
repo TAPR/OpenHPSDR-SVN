@@ -1,5 +1,5 @@
 Assembler report for Janus
-Fri Feb 23 22:21:56 2007
+Wed Feb 28 19:57:47 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Fri Feb 23 22:21:56 2007 ;
+; Assembler Status      ; Successful - Wed Feb 28 19:57:47 2007 ;
 ; Revision Name         ; Janus                                 ;
 ; Top-level Entity Name ; Janus                                 ;
 ; Family                ; MAX II                                ;
@@ -90,7 +90,7 @@ applicable agreement for further details.
 +----------------+-------------------------------------------------+
 ; Device         ; EPM240T100C5                                    ;
 ; JTAG usercode  ; 0xFFFFFFFF                                      ;
-; Checksum       ; 0x00174B84                                      ;
+; Checksum       ; 0x001746DA                                      ;
 +----------------+-------------------------------------------------+
 
 
@@ -100,13 +100,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Fri Feb 23 22:21:51 2007
+    Info: Processing started: Wed Feb 28 19:57:41 2007
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Janus -c Janus
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Allocated 106 megabytes of memory during processing
-    Info: Processing ended: Fri Feb 23 22:21:56 2007
-    Info: Elapsed time: 00:00:05
+    Info: Processing ended: Wed Feb 28 19:57:47 2007
+    Info: Elapsed time: 00:00:06
 
 
