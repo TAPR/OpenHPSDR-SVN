@@ -59,6 +59,7 @@
 //  12 February 2007 - Added clock doubler to run PWM DAC from 2 x 48MHz. 
 //  22 February 2007 - Added CLK_MCLK input that is used clock the AD5394A and TLV320AIC23B
 //  23 February 2007 - Removed clock doubler due to noise in audio output 
+//  28 February 2007 - Changed PTT to be logic 1 if active and high Z if not
 //
 //
 //  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
@@ -262,7 +263,7 @@ assign C6 = SCLK; 			// is actually BCLK
 assign C7 = LRCLK;
 assign C10 = SDOUT; 
 assign C11 = CDOUT;
-assign C15 = ~PTT; 			// send not PTT 
+assign C15 = (PTT == 0) ? 1'b1 : 1'bz; // PTT is 1 if active and high Z if not
 
 // Atlas inputs
 assign nRST = C2;			// reset AK5394A on power up
