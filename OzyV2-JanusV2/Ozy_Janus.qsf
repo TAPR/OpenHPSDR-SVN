@@ -117,3 +117,4 @@ set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 256 -section_id "CLRCL
 set_instance_assignment -name CLOCK_SETTINGS "CLRCLK to TLV320" -to CLRCLK
 set_instance_assignment -name CLOCK_SETTINGS CLK_12MHZ -to CLK_12MHZ
 set_location_assignment PIN_175 -to CLK_MCLK
+set_location_assignment PIN_180 -to CC

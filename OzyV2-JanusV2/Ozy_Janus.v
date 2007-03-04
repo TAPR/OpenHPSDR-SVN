@@ -1,11 +1,11 @@
-// V1.40 23rd February 2007
+// V1.50 4th March  2007
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
 //  HPSDR - High Performance Software Defined Radio
 //
 //
-//  Janus to Ozy interface.
+//  Janus to Ozy to Penelope interface.
 //
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -106,6 +106,19 @@
 //
 // I and Q data is sent in I2S format to the Atlas bus for use by Janus and Penelope
 //
+// 	The C&C encoder broadcasts data over the Atlas bus C20 for
+//	use by other cards e.g. Mercury and Penelope.  The data is in 
+//	I2S format with the clock being CBLCK and the start of each frame
+//	being indicated using the positive edge of CLRCLK.
+//	
+//	The data fomat is as follows:
+//	
+//	<1 bit PTT><4 bits address><32 bits frequency><4 bits band><7 bits OC><1 bit mode> 
+//	
+//	for a total of 49 bits. Frequency format is the DDC data word i.e. FREQ/2^32/Clock and 
+//	OC is the open collector data on Penelope
+//
+//
 //
 // Built with Quartus II v6.1 Build 201
 //
@@ -133,6 +146,7 @@
 //				Moved PWM DAC to Janus CPLD - 11th Feb 2007
 //				Moved I and Q outputs to TLV320 and Left/Right audio to PWM DAC - 13th Feb 2007
 //				Added CLK_MCLK to Atlas for Janus - 22 Feb 2007
+//				Added Command and Control data for Penelope and Mercury - 4th March 2007
 //				
 //
 ////////////////////////////////////////////////////////////
@@ -242,7 +256,7 @@
 module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
         CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset, dot, dash, DEBUG_LED0,
-		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK);
+		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC);
 
 input CLK_12MHZ;               // From Janus board 12.288MHz
 input IFCLK;                   // FX2 IFCLOCK - 48MHz
@@ -275,6 +289,7 @@ output AK_reset;                // reset for AK5394A
 wire DFS0;
 wire DFS1;
 output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
+output CC;						// Command and Control data to Atlas bus 
 
 
 
@@ -800,7 +815,7 @@ assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
 
 //////////////////////////////////////////////////////////////
 //
-//                              State Machine to manage PWM interface
+//   State Machine to manage PWM interface
 //
 //////////////////////////////////////////////////////////////
 /*
@@ -929,12 +944,20 @@ case(state_PWM)
 				if ( Rx_control_0[7:1] == 7'h00  ) begin   //set speed bits register if Rx0 indicates speed in Rx1
 					SpeedBits[1:0] <= Rx_data[9:8]; 
 				end 
+				if (Rx_control_0[7:1] == 7'b0000_001)	   // get frequency if Rx0 is valid 
+				begin
+				frequency[31:16]<= Rx_data;	
+				end
                 state_PWM <= 6;
         end
 // state 6 - get Rx_control_3 & Rx_control_4
   6: begin
                 Rx_control_3 <= Rx_data[15:8];
                 Rx_control_4 <= Rx_data[7:0];
+				if (Rx_control_0[7:1] == 7'b0000_001)	  // get balance of frequency
+				begin
+				frequency[15:0]<= Rx_data;	
+				end
                 state_PWM <= 7;
                 end
 // state 7 - get Left audio
@@ -990,6 +1013,103 @@ end
 
 ///////////////////////////////////////////////////////////////
 //
+//              Implements Command & Control  encoder 
+//
+///////////////////////////////////////////////////////////////
+
+/*
+	The C&C encoder broadcasts data over the Atlas bus C20 for
+	use by other cards e.g. Mercury and Penelope.  The data is in 
+	I2S format with the clock being CBLCK and the start of each frame
+	being indicated using the positive edge of CLRCLK.
+	
+	The data fomat is as follows:
+	
+	<1 bit PTT><4 bits address><32 bits frequency><4 bits band><7 bits OC><1 bit mode> 
+	
+	for a total of 49 bits. Frequency format is the DDC data word i.e. FREQ/2^32/Clock and 
+	OC is the open collector data on Penelope. The band data decodes as follows:
+	
+	0000 160m
+	0001 80m
+	0010 60m
+	0011 40m
+	0100 30m
+	0101 20m
+	0110 17m
+	0111 15m
+	1000 12m
+	1001 10m
+	1010 6m
+	1011 160 kHz
+	1100 AMBC LO
+	1101 AMBC MID
+	1110 AMBC HI
+	1111 Bypass
+	
+	For future expansion the four bit address enables specific C&C data to be send to individual boards.
+	For the present for use with Mercury and Penelope the address is fixed at 0000. 
+
+
+*/
+
+reg [48:0]CCdata;
+reg [6:0] CCcount;
+reg CC;							// C&C data out to Atlas bus 
+wire [3:0] CC_address;			// C&C address, fixed at 0 for now 
+wire [3:0] band;				// current band, decodes as above
+wire [6:0] OC;					// Open Collector outputs on Penelope board 
+wire mode;						// Mode, 0 for I and Q, 1 for phase and envelope
+reg  [31:0]frequency;
+
+
+// dummy data for testing
+
+assign CC_address = 4'b0110;
+assign band = 4'b1100;
+assign OC = 7'b1100111;
+assign mode = 1'b0;
+//assign frequency = 32'hF0F0F0F0;
+
+
+// sync data to CLRCLK
+
+always @ (posedge CLRCLK)
+begin
+	CCdata <= {PTT_out, CC_address, frequency, band, OC, mode}; // concatenate data to send 
+end
+
+// send data to Atlas bus in I2S format
+
+reg [1:0]CCstate;
+
+always @ (negedge CBCLK)
+begin	
+case(CCstate)
+0:	begin
+	if (CLRCLK == 0)begin			// loop until CLRCLK is low 
+		 CCstate <= 1;
+		 CCcount <= 6'd49;			// reset counter
+	end 	
+	else CCstate <= 0;
+	end
+1:	begin
+	if(CLRCLK)CCstate <= 2;			// loop until CLRCLK is high
+	else CCstate <= 1;
+	end 
+2:	begin
+	CC <= CCdata[CCcount];			// shift data out to Altas bus MSB first
+	CCcount <= CCcount - 1'b1;
+	if (CCcount == 0) CCstate <= 0;
+	else CCstate <= 2;
+	end 
+	
+default: CCstate <= 0;
+endcase
+end 
+
+///////////////////////////////////////////////////////////////
+//
 //              Implements I2S format I and Q  out,
 //              16 bits, two channels  for TLV320AIC23B D/A converter and Penelope
 //
@@ -1041,13 +1161,14 @@ debounce de_dot(.clean_pb(clean_dot), .pb(dot), .clk(IFCLK));
 
 debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
-
 // Flash the LEDs to show something is working! - LEDs are active low
 
 assign DEBUG_LED0 = ~write_full;            // LED D0 on when Rx fifo is full.
 assign DEBUG_LED1 = ~EP6_ready;             // LED D1 on when we can write to EP6
 assign DEBUG_LED2 = ~have_sync;             // LED D2 toggles each time we get sync
-assign DEBUG_LED3 = ~EP2_has_data;          // LED D3 on when EP2 has data 
+//assign DEBUG_LED3 = ~EP2_has_data;          // LED D3 on when EP2 has data 
+assign DEBUG_LED3 = ~PTT_out;          
+
 
 endmodule
 
