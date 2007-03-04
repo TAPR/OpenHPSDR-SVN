@@ -33,3 +33,8 @@ KD5TFDVK6APHAUDIO_API int fnKD5TFDVK6APHAudio(void);
 
 extern KD5TFDVK6APHAUDIO_API int I2C_Cmd(unsigned char addr, unsigned char cmdbuf[], unsigned char cmdlen); 
 extern KD5TFDVK6APHAUDIO_API char * I2C_RCtoString(int rc);
+
+
+extern KD5TFDVK6APHAUDIO_API struct OzyHandle *OzyOpen(void); 
+extern KD5TFDVK6APHAUDIO_API void OzyClose(struct OzyHandle *h); 
+extern KD5TFDVK6APHAUDIO_API void *OzyHandleToRealHandle(struct OzyHandle *ozh);

@@ -267,6 +267,13 @@ namespace PowerSDR
 			set { usb_present = value; }
 		}
 
+
+		private bool ozy_control = false;
+		public bool OzyControl 
+		{			
+			set { ozy_control = value; }
+		}
+
 		private int pll_mult = 1;
 		public int PLLMult
 		{
@@ -934,7 +941,24 @@ namespace PowerSDR
 			switch(config.config)
 			{
 				case PIO:
-					if(usb_present)
+					if ( ozy_control ) 
+					{ 
+						byte address = 0;
+						switch(config.address)
+						{
+							case PIO_IC1:
+								address = OzySDR1kControl.LATCH_BPF; 
+								break;
+							case PIO_IC3:
+								address = OzySDR1kControl.LATCH_EXT;
+								break;
+							default:
+								address = 0;
+								break;
+						}
+						OzySDR1kControl.Latch(address, data);
+					}
+					else if(usb_present)
 					{
 						byte address = 0;
 						switch(config.address)
@@ -957,7 +981,11 @@ namespace PowerSDR
 					}
 					break;
 				case RFE:
-					if(usb_present)
+					if ( ozy_control ) 
+					{ 
+						OzySDR1kControl.SRLoad(config.address, data); 
+					}
+					else if(usb_present)
 					{
 						USB.Sdr1kSRLoad(config.address, data);
 					}
@@ -1002,7 +1030,12 @@ namespace PowerSDR
 
 		private void ResetDDS()
 		{
-			if(usb_present)
+
+			if ( ozy_control ) 
+			{ 
+				OzySDR1kControl.DDSReset(); 
+			} 
+			else if(usb_present)
 			{
 				USB.Sdr1kDDSReset();
 			}
@@ -1022,7 +1055,11 @@ namespace PowerSDR
 
 		private void DDSWrite(byte data, byte addr)
 		{
-			if(usb_present)
+			if ( ozy_control ) 
+			{
+				OzySDR1kControl.DDSWrite(addr, data); 
+			}
+			else if(usb_present)
 			{
 				USB.Sdr1kDDSWrite(addr, data);
 			}
@@ -1142,8 +1179,14 @@ namespace PowerSDR
 
 		public byte StatusPort()
 		{
-			if(usb_present)
+			if ( ozy_control ) 
+			{
+				return (byte)OzySDR1kControl.GetStatusPort(); 
+			}
+			else if(usb_present) 
+			{ 
 				return (byte)USB.Sdr1kGetStatusPort();
+			}
 			else
 			{ 
 				if ( ignore_ptt ) 
@@ -1152,7 +1195,7 @@ namespace PowerSDR
 				}
 				else 
 				{
-				return Parallel.inport((ushort)(lpt_addr+1));
+					return Parallel.inport((ushort)(lpt_addr+1));
 				}
 			}
 		}
@@ -1168,7 +1211,12 @@ namespace PowerSDR
 			// get ADC on amplifier
 			// 0 for forward power, 1 for reverse
 
-			if(usb_present)
+			if ( ozy_control ) 
+			{
+				System.Console.WriteLine("warning - Ozy ADC read not implemented!!"); 
+				OzySDR1kControl.GetADC(); 
+			}
+			else if(usb_present)
 			{
 				int data = USB.Sdr1kGetADC();
 				if(chan == 0)

@@ -1,5 +1,5 @@
-load_firmware 0xfffe 0x0007 ozyv1fw08082006-1.hex
-sleep 2
+load_firmware 0xfffe 0x0007 ozyfw-sdr1k.hex
+sleep 3000
 upload_FPGA 0xfffe 0x0007 Ozy_Janus.rbf
 rem        1E 00 - Reset chip
 rem        12 01 - set digital interface active
