@@ -1,8 +1,14 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Mar 04 23:20:29 2007
+    Info: Processing started: Sun Mar 04 10:17:21 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
+Info: Found 1 design units, including 1 entities, in source file RegisterX.v
+    Info: Found entity 1: RegisterX
+Info: Found 1 design units, including 1 entities, in source file SPI_REGS.v
+    Info: Found entity 1: SPI_REGS
+Info: Found 1 design units, including 1 entities, in source file gpio_control.v
+    Info: Found entity 1: gpio_control
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
     Info: Found entity 1: Tx_fifo
 Info: Found 1 design units, including 1 entities, in source file clocks.v
@@ -16,11 +22,19 @@ Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(872): object "Rx_control_1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(873): object "Rx_control_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(874): object "Rx_control_3" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(902): object "Rx_control_1" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(903): object "Rx_control_2" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(904): object "Rx_control_3" assigned a value but never read
+Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
+Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(46): conditional expression evaluates to a constant
+Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(47): conditional expression evaluates to a constant
+Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(48): conditional expression evaluates to a constant
+Info: Elaborating entity "SPI_REGS" for hierarchy "gpio_control:gpio_controlSDR|SPI_REGS:spi_regs"
+Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port0reg"
+Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port1reg"
+Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port2reg"
 Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
-Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
+Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus61/quartus/libraries/megafunctions/lpm_counter.tdf
     Info: Found entity 1: lpm_counter
 Info: Elaborating entity "lpm_counter" for hierarchy "clocks:clocks|lpm_counter:lpm_counter_component"
 Info: Elaborated megafunction instantiation "clocks:clocks|lpm_counter:lpm_counter_component"
@@ -28,7 +42,7 @@ Info: Found 1 design units, including 1 entities, in source file db/cntr_skh.tdf
     Info: Found entity 1: cntr_skh
 Info: Elaborating entity "cntr_skh" for hierarchy "clocks:clocks|lpm_counter:lpm_counter_component|cntr_skh:auto_generated"
 Info: Elaborating entity "Rx_fifo" for hierarchy "Rx_fifo:Rx_fifo"
-Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/dcfifo.tdf
+Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus61/quartus/libraries/megafunctions/dcfifo.tdf
     Info: Found entity 1: dcfifo
 Info: Elaborating entity "dcfifo" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
 Info: Elaborated megafunction instantiation "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
@@ -225,9 +239,43 @@ Info: Duplicate registers merged to single register
     Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.100" merged to single register "I2SAudioOut:I2SAO|TLV_state.100"
     Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.010" merged to single register "I2SAudioOut:I2SAO|TLV_state.010"
     Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.000" merged to single register "I2SAudioOut:I2SAO|TLV_state.000"
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[0]~23 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[1]~22 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[2]~21 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[3]~20 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[4]~19 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[5]~18 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[6]~17 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[7]~16 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[8]~15 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[9]~14 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[10]~13 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[11]~12 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[12]~11 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[13]~10 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[14]~9 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[15]~8 that it feeds
+Warning: TRI or OPNDRN buffers permanently enabled
+    Warning: Node "GPIO[0]~24"
+    Warning: Node "GPIO[1]~25"
+    Warning: Node "GPIO[2]~26"
+    Warning: Node "GPIO[3]~27"
+    Warning: Node "GPIO[4]~28"
+    Warning: Node "GPIO[5]~29"
+    Warning: Node "GPIO[6]~30"
+    Warning: Node "GPIO[7]~31"
+    Warning: Node "GPIO[8]~32"
+    Warning: Node "GPIO[9]~33"
+    Warning: Node "GPIO[10]~34"
+    Warning: Node "GPIO[11]~35"
+    Warning: Node "GPIO[12]~36"
+    Warning: Node "GPIO[13]~37"
+    Warning: Node "GPIO[14]~38"
+    Warning: Node "GPIO[15]~39"
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "PKEND" stuck at VCC
     Warning: Pin "FIFO_ADR[0]" stuck at GND
+    Warning: Pin "GPIO_nIOE" stuck at GND
 Info: 49 registers lost all their fanouts during netlist optimizations. The first 49 are displayed below.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/p0addr" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
@@ -280,13 +328,13 @@ Info: 49 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1126 device resources after synthesis - the final resource count might be different
-    Info: Implemented 12 input pins
-    Info: Implemented 20 output pins
-    Info: Implemented 16 bidirectional pins
-    Info: Implemented 1046 logic cells
+Info: Implemented 1225 device resources after synthesis - the final resource count might be different
+    Info: Implemented 14 input pins
+    Info: Implemented 21 output pins
+    Info: Implemented 41 bidirectional pins
+    Info: Implemented 1117 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 25 warnings
-    Info: Allocated 135 megabytes of memory during processing
-    Info: Processing ended: Sun Mar 04 23:20:49 2007
-    Info: Elapsed time: 00:00:20
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 62 warnings
+    Info: Allocated 139 megabytes of memory during processing
+    Info: Processing ended: Sun Mar 04 10:18:15 2007
+    Info: Elapsed time: 00:00:54

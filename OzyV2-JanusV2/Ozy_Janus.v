@@ -1,9 +1,8 @@
-// V1.50 4th March  2007
+// V1.60 4th March  2007
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
 //  HPSDR - High Performance Software Defined Radio
-//
 //
 //  Janus to Ozy to Penelope interface.
 //
@@ -147,6 +146,7 @@
 //				Moved I and Q outputs to TLV320 and Left/Right audio to PWM DAC - 13th Feb 2007
 //				Added CLK_MCLK to Atlas for Janus - 22 Feb 2007
 //				Added Command and Control data for Penelope and Mercury - 4th March 2007
+//				Added SPI control of GPIO lines for SDR 1K Control - 4th March 2007 (kd5tfd) 
 //				
 //
 ////////////////////////////////////////////////////////////
@@ -255,8 +255,12 @@
 
 module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
-        CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset, dot, dash, DEBUG_LED0,
-		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC);
+        CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
+		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC,
+		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE
+		);
+		
+
 
 input CLK_12MHZ;               // From Janus board 12.288MHz
 input IFCLK;                   // FX2 IFCLOCK - 48MHz
@@ -282,8 +286,8 @@ output CDIN;                    // Rx data to TLV320AIC23B
 output LROUT;					// Left  and Right audio data in I2S format to Atlas
 input CDOUT;                    // A/D data from TLV320AIC23B
 input PTT_in;                   // PTT active high
-input dot;                      // CW dot key, active low
-input dash;                     // CW dash key, active low
+// input dot;                      // CW dot key, active low
+// input dash;                     // CW dash key, active low
 output DFS0,DFS1;               // speed control for AK5394A
 output AK_reset;                // reset for AK5394A
 wire DFS0;
@@ -291,6 +295,32 @@ wire DFS1;
 output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
 output CC;						// Command and Control data to Atlas bus 
 
+
+// interface lines for GPIO control 
+input 				FX2_CLK;		// master system clock from FX2 
+input 				SPI_SCK;		// SPI SCK from FX2
+input 				SPI_SI;			// SPI serial in from FX2
+inout 				SPI_SO;			// SPI serial out to FX2
+input 				SPI_CS;         // FPGA chip select from FX2
+inout [23:0]		GPIO;			// OZY GPIO lines
+output 				GPIO_nIOE;      // enable GPIO driver chips 
+
+wire dot;
+wire dash; 
+
+assign dot = GPIO[22];   // alias dot and dash to appropriate GPIO lines 
+assign dash = GPIO[23]; 
+
+assign GPIO_nIOE = 0; 
+
+// instantiate gpio control block 
+gpio_control gpio_controlSDR(.FX2_CLK(FX2_CLK), 
+		    				 .SCK(SPI_SCK), 
+							 .SI(SPI_SI), 
+							 .SO(SPI_SO), 
+							 .CS(SPI_CS), 
+							 .GPIO(GPIO)
+							 );
 
 
 /*
