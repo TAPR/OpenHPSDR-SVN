@@ -69,7 +69,7 @@ extern void byteToHex(unsigned char, char *);
 unsigned char app_vendor_OUT_cmd(void)
 {
 	
-#if 1 	
+#if 0 	
 	char dbuf[3]; 
 	putstr("vendor out: req=0x"); 
 	byteToHex(bRequest, dbuf); 
@@ -143,7 +143,7 @@ unsigned char app_vendor_OUT_cmd(void)
 #ifdef SDR1K_CONTROL                 
             case VRQ_SDR1K_CTL:
 	            // get_ep0_data (); -- no data for these 
-#if 1              
+#if 0              
 				putstr("pre wValueL=0x"); 
 				byteToHex(wValueL, dbuf); 
 				putstr(dbuf); 
@@ -193,9 +193,10 @@ unsigned char app_vendor_IN_cmd(void)
                 
 #ifdef SDR1K_CONTROL                 
 	        case VRQ_SDR1K_CTL:
-    	        putstr("VRQ_SDR1K_CTL \n"); 
-	            // HPSDR_LED_REG ^= bmLED0;
-    	          
+#if 0 	        
+    	        putstr("VRQ_SDR1K_CTL \n");
+#endif     	        
+	 	          
         		if (!SDR1k_ControlIn(wValueH, wValueL, wIndexH, wIndexL, EP0BUF, wLengthL) ) {
         			putstr("sdr1kin error bailout\n"); 
         			return 0; 
@@ -206,8 +207,6 @@ unsigned char app_vendor_IN_cmd(void)
             	
 #endif               
               
-                
-
             case VRQ_EEPROM_TYPE_READ:
                 EP0BUF[0] = I2CS & bmID; // 16 = 2 byte, 8 = 1 byte
                 EP0BCH = 0;

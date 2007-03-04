@@ -3,7 +3,7 @@
 
 <ManagedProjectBuildInfo>
 <project id="OzyFirmware-wjt.cdt.managedbuild.target.sdcc.exe.417969504" name="MCS51 family (SDCC)" projectType="cdt.managedbuild.target.sdcc.exe">
-<configuration artifactExtension="hex" artifactName="OzyFirmware-wjt" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.sdcc.exe.release.789109409" name="Release" parent="cdt.managedbuild.config.sdcc.exe.release">
+<configuration artifactExtension="hex" artifactName="ozyfw-sdr1k" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.sdcc.exe.release.789109409" name="Release" parent="cdt.managedbuild.config.sdcc.exe.release">
 <toolChain id="cdt.managedbuild.toolchain.sdcc.exe.release.1659975412" name="SDCC Tool Chain" superClass="cdt.managedbuild.toolchain.sdcc.exe.release">
 <tool command="sdcc -c --no-xinit-opt --xram-loc 0x2000 --xram-size 0x2000 --code-size 0x2000 -DSDR1K_CONTROL" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.1594908462" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
 <option id="sdcc.c.compiler.option.misc.verbose.439683963" superClass="sdcc.c.compiler.option.misc.verbose" value="true" valueType="boolean"/>
