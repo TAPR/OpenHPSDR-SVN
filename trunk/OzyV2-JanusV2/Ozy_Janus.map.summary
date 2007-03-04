@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Sun Mar 04 23:20:49 2007
+Analysis & Synthesis Status : Successful - Sun Mar 04 10:18:15 2007
 Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
 Revision Name : Ozy_Janus
 Top-level Entity Name : Ozy_Janus
 Family : Cyclone II
-Total logic elements : 739
-    Total combinational functions : 641
-    Dedicated logic registers : 739
-Total registers : 739
-Total pins : 48
+Total logic elements : 781
+    Total combinational functions : 687
+    Dedicated logic registers : 781
+Total registers : 781
+Total pins : 76
 Total virtual pins : 0
 Total memory bits : 98,304
 Embedded Multiplier 9-bit elements : 0

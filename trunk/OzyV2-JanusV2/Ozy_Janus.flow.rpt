@@ -1,5 +1,5 @@
 Flow report for Ozy_Janus
-Sun Mar 04 23:22:45 2007
+Sun Mar 04 10:22:09 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Sun Mar 04 23:22:44 2007   ;
+; Flow Status                        ; Successful - Sun Mar 04 10:22:08 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
@@ -45,11 +45,11 @@ applicable agreement for further details.
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
 ; Met timing requirements            ; Yes                                     ;
-; Total logic elements               ; 946 / 8,256 ( 11 % )                    ;
-;     Total combinational functions  ; 648 / 8,256 ( 8 % )                     ;
-;     Dedicated logic registers      ; 740 / 8,256 ( 9 % )                     ;
-; Total registers                    ; 740                                     ;
-; Total pins                         ; 48 / 138 ( 35 % )                       ;
+; Total logic elements               ; 1,006 / 8,256 ( 12 % )                  ;
+;     Total combinational functions  ; 693 / 8,256 ( 8 % )                     ;
+;     Dedicated logic registers      ; 785 / 8,256 ( 10 % )                    ;
+; Total registers                    ; 785                                     ;
+; Total pins                         ; 76 / 138 ( 55 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304 / 165,888 ( 59 % )               ;
 ; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                          ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/04/2007 23:20:29 ;
+; Start date & time ; 03/04/2007 10:17:22 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Ozy_Janus           ;
 +-------------------+---------------------+
@@ -88,11 +88,11 @@ applicable agreement for further details.
 +-------------------------+--------------+
 ; Module Name             ; Elapsed Time ;
 +-------------------------+--------------+
-; Analysis & Synthesis    ; 00:00:20     ;
-; Fitter                  ; 00:01:38     ;
-; Assembler               ; 00:00:08     ;
-; Classic Timing Analyzer ; 00:00:02     ;
-; Total                   ; 00:02:08     ;
+; Analysis & Synthesis    ; 00:00:54     ;
+; Fitter                  ; 00:03:05     ;
+; Assembler               ; 00:00:20     ;
+; Classic Timing Analyzer ; 00:00:07     ;
+; Total                   ; 00:04:26     ;
 +-------------------------+--------------+
 
 
