@@ -298,7 +298,7 @@ unsigned char SDR1k_Control_SR_Load(unsigned char wIndexH, unsigned char wIndexL
 unsigned char SDR1k_ControlOut(unsigned char wValueH, unsigned char wValueL,
 							  unsigned char wIndexH, unsigned char wIndexL, 
 							  const xdata unsigned char *bufp, unsigned char buflen) {
-#if 1 							  	
+#if 0 							  	
 	unsigned char hbuf[3]; 	 
 	putstr("SDR1k_ControlOut wValueL=0x");
 	byteToHex(wValueL, hbuf); 
@@ -338,13 +338,15 @@ unsigned char SDR1k_Control_Read_Status(const xdata unsigned char *bufp, unsigne
 	unsigned char bbuf[3]; 
 	// 0x40 == read 
 	rc = spi_read(0, ADDR_STATUS | 0x40, SPI_EN_FPGA, SPI_FMT_HDR_1 | SPI_FMT_MSB, bufp, buflen);
+#if 0 	
 	putstr("read_status rc=0x");  
 	byteToHex(rc, bbuf);  
 	putstr(bbuf); 
 	putstr(" data=0x"); 
 	byteToHex(bufp[0], bbuf); 
 	putstr(bbuf); 
-	putstr("\n"); 
+	putstr("\n");
+#endif
 	return rc; 
 }
 
