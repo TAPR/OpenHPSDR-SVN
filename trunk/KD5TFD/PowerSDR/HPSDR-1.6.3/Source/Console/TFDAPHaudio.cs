@@ -42,6 +42,8 @@ namespace PowerSDR
 		// returns 0 on success, !0 on failure 
 		private static int initOzy()  
 		{
+			return 0; 
+
 			ProcessStartInfo start_info = new ProcessStartInfo(); 
 			start_info.FileName = "initozy.bat"; 
 			start_info.UseShellExecute = true; 
@@ -136,6 +138,15 @@ namespace PowerSDR
 		[DllImport("KD5TFD-VK6APH-Audio.dll")]
 		unsafe public static extern void SetVFOfreq(double f);  // tell aux hardware current freq -- in MHz 
 
+		[DllImport("KD5TFD-VK6APH-Audio.dll")]
+		unsafe public static extern IntPtr OzyOpen();
+
+		[DllImport("KD5TFD-VK6APH-Audio.dll")]
+		unsafe public static extern void OzyClose(IntPtr ozyh);
+
+
+		[DllImport("KD5TFD-VK6APH-Audio.dll")]
+		unsafe public static extern IntPtr OzyHandleToRealHandle(IntPtr ozh);
 
 
 //		public static bool CWptt() 

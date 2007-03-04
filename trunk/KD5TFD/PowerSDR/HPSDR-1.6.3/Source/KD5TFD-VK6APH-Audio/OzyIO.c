@@ -84,9 +84,15 @@ struct usb_device *findOzy(struct usb_bus *busp) {
 	return NULL; 
 } 
 
-int OzyUSBinitialized = 0; 
+int OzyUSBinitialized = 0;
 
-struct OzyHandle *OzyOpen(void)
+struct OzyHandle *SavedOzyh = NULL;
+int SavedOzyHandleUseCount = 0;  
+
+
+
+
+struct OzyHandle *internalOzyOpen(void)
 {
 	struct OzyHandle *ozyh = NULL; 
 	struct usb_bus *busp; 
@@ -164,14 +170,57 @@ struct OzyHandle *OzyOpen(void)
 	return ozyh; 
 }
 
-void OzyClose(struct OzyHandle *h)
+KD5TFDVK6APHAUDIO_API void *OzyHandleToRealHandle(struct OzyHandle *ozh) {
+	return (void *)ozh->h; 
+}
+
+KD5TFDVK6APHAUDIO_API struct OzyHandle *OzyOpen(void) {
+	//!!fixme -- need mutex
+	if ( SavedOzyh == NULL ) { /* not opened yet - open it */  
+		SavedOzyh = internalOzyOpen(); 
+		if ( SavedOzyh != NULL ) {
+			  SavedOzyHandleUseCount = 1; 
+		} 
+		return SavedOzyh; 
+	} 
+	/* else */ 
+	/* handle already exisits - just bump use count and retrn it */ 
+	++SavedOzyHandleUseCount; 
+	return SavedOzyh; 	 
+}  
+
+
+
+void internalOzyClose(struct OzyHandle *h)
 {
 	usb_release_interface(h->h, 0x0); 
 	usb_close(h->h); 
 	free(h); 
 	return; 
-
 }
+
+
+KD5TFDVK6APHAUDIO_API void OzyClose(struct OzyHandle *h) {
+	//!!fixme -- need mutex 
+	if ( h != SavedOzyh ) {
+		printf("unkmown ozyh closed!"); 
+		return; 
+	}
+    if ( SavedOzyh == NULL ) {
+    	printf("close already closed ozyh");  
+    } 
+    --SavedOzyHandleUseCount; 
+    if ( SavedOzyHandleUseCount == 0 ) {
+    	internalOzyClose(SavedOzyh); 
+    	SavedOzyh = NULL;  
+    } 
+    return; 
+}
+
+
+
+
+
 
 ///////////////////////////////////////////////////
 // USB functions to send and receive bulk packets

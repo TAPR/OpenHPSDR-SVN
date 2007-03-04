@@ -2322,7 +2322,9 @@ namespace PowerSDR
 				int num_chan = 1;
 				if(vac_stereo) num_chan = 2;
 				vac_rb_reset = true;
-				retval = StartAudio(ref callbackVAC, (uint)block_size2, sample_rate2, host2, input_dev2, output_dev2, num_chan, 1, latency2);
+				// below is a hack from AE6VK  - don't go thru StartAudio hacked for Jaanus/OZY since it 
+				// is clueless about VAC 
+				retval = StartAudio_original(ref callbackVAC, (uint)block_size2, sample_rate2, host2, input_dev2, output_dev2, num_chan, 1, latency2);
 			}
 
 			return retval;
@@ -2342,7 +2344,7 @@ namespace PowerSDR
 
 
 			// !!KD5TFD FIXME TODO bug: this check is not right when the channel being started is VAC 
-			// if VAC and FPGA audio is being used it sned up in the else branck -- bad! 
+			// if VAC and FPGA audio is being used it ends up in the else branch -- bad! 
 			//
 			if ( host_api_index < PA19.PA_GetHostApiCount() )  // using classic portaudio 
 			{ 

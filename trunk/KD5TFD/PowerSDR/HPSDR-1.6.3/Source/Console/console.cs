@@ -140,6 +140,7 @@ namespace PowerSDR
                 EXTIGY,
                 MP3_PLUS,
                 SANTA_CRUZ,
+				JANUS_OZY, 
                 LAST,
         }
 
@@ -15332,6 +15333,22 @@ namespace PowerSDR
                         }
                 }
 
+			private bool ozy_control = false;
+			public bool OzyControl
+			{
+				get { return ozy_control; }
+				set
+				{
+					ozy_control = value; 
+					Hdw.OzyControl = value;
+					if(SetupForm != null)
+						SetupForm.OzyControl = value;
+				}
+			}
+
+
+
+
                 private PerformanceCounter cpu_usage;
                 public float CpuUsage
                 {
@@ -16765,6 +16782,7 @@ namespace PowerSDR
                                         bool cat_ptt = false;
                                         bool vox_ptt = Audio.VOXActive;
                                         if(usb_present) x2_ptt = !x2_ptt;
+										// if ( ozy_control ) x2_ptt = !x2_ptt; 
 
                                         // wjt added
                                         if (PTTBitBangEnabled && serialPTT != null && serialPTT.isPTT())

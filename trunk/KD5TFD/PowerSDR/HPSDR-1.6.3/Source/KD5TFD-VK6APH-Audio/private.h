@@ -76,8 +76,7 @@ struct OzyHandle {
 }; 
 
 
-extern struct OzyHandle *OzyOpen(void); 
-extern void OzyClose(struct OzyHandle *h); 
+
 extern int OzyBulkWrite(struct OzyHandle *h, int ep, void* buffer, int buffersize);
 extern int OzyBulkRead(struct OzyHandle *h, int ep, void* buffer, int buffersize);
 #endif 

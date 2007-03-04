@@ -298,6 +298,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "OzySDR1kControl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "paddle.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
