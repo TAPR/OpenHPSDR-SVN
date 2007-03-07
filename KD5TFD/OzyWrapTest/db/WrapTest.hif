@@ -1,0 +1,72 @@
+Version 6.1 Build 201 11/27/2006 SJ Web Edition
+11
+808
+OFF
+OFF
+OFF
+OFF
+ON
+FV_OFF
+Level2
+0
+0
+VRSM_ON
+VHSM_ON
+0
+-- Start Partition --
+-- End Partition --
+-- Start Library Paths --
+-- End Library Paths --
+-- Start VHDL Libraries --
+-- End VHDL Libraries --
+# entity
+loopBackCheck
+# storage
+db|WrapTest.(1).cnf
+db|WrapTest.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+loopBackChecker.v
+6a31825e202223e96c5d4f77babbd0b2
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# hierarchies {
+loopBackCheck:loopBackA02C02
+loopBackCheck:loopBackA10C10
+}
+# end
+# entity
+WrapTest
+# storage
+db|WrapTest.(0).cnf
+db|WrapTest.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+WrapTest.v
+aacce6f44652264bfb8736c434744ea
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# hierarchies {
+|
+}
+# end
+# complete
+
