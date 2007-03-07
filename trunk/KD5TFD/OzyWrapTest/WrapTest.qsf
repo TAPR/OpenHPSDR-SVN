@@ -1,0 +1,105 @@
+# Copyright (C) 1991-2006 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#		WrapTest_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name DEVICE EP2C8Q208C8
+set_global_assignment -name FAMILY "Cyclone II"
+set_global_assignment -name TOP_LEVEL_ENTITY WrapTest
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 6.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "21:15:40  MARCH 05, 2007"
+set_global_assignment -name LAST_QUARTUS_VERSION 6.1
+set_global_assignment -name VERILOG_FILE WrapTest.v
+set_location_assignment PIN_56 -to FX2_FD[0]
+set_location_assignment PIN_57 -to FX2_FD[1]
+set_location_assignment PIN_58 -to FX2_FD[2]
+set_location_assignment PIN_59 -to FX2_FD[3]
+set_location_assignment PIN_60 -to FX2_FD[4]
+set_location_assignment PIN_61 -to FX2_FD[5]
+set_location_assignment PIN_63 -to FX2_FD[6]
+set_location_assignment PIN_64 -to FX2_FD[7]
+set_location_assignment PIN_208 -to FX2_FD[8]
+set_location_assignment PIN_207 -to FX2_FD[9]
+set_location_assignment PIN_206 -to FX2_FD[10]
+set_location_assignment PIN_205 -to FX2_FD[11]
+set_location_assignment PIN_203 -to FX2_FD[12]
+set_location_assignment PIN_201 -to FX2_FD[13]
+set_location_assignment PIN_200 -to FX2_FD[14]
+set_location_assignment PIN_199 -to FX2_FD[15]
+set_location_assignment PIN_24 -to IFCLK
+set_location_assignment PIN_198 -to FLAGA
+set_location_assignment PIN_197 -to FLAGB
+set_location_assignment PIN_5 -to FLAGC
+set_location_assignment PIN_13 -to SLOE
+set_location_assignment PIN_11 -to FIFO_ADR[0]
+set_location_assignment PIN_10 -to FIFO_ADR[1]
+set_location_assignment PIN_8 -to PKEND
+set_location_assignment PIN_30 -to SLRD
+set_location_assignment PIN_4 -to DEBUG_LED0
+set_location_assignment PIN_33 -to DEBUG_LED1
+set_location_assignment PIN_34 -to DEBUG_LED2
+set_location_assignment PIN_108 -to DEBUG_LED3
+set_location_assignment PIN_23 -to FX2_CLK
+set_location_assignment PIN_67 -to GPIO[0]
+set_location_assignment PIN_68 -to GPIO[1]
+set_location_assignment PIN_69 -to GPIO[2]
+set_location_assignment PIN_70 -to GPIO[3]
+set_location_assignment PIN_72 -to GPIO[4]
+set_location_assignment PIN_74 -to GPIO[5]
+set_location_assignment PIN_75 -to GPIO[6]
+set_location_assignment PIN_76 -to GPIO[7]
+set_location_assignment PIN_77 -to GPIO[8]
+set_location_assignment PIN_80 -to GPIO[9]
+set_location_assignment PIN_81 -to GPIO[10]
+set_location_assignment PIN_82 -to GPIO[11]
+set_location_assignment PIN_84 -to GPIO[12]
+set_location_assignment PIN_86 -to GPIO[13]
+set_location_assignment PIN_87 -to GPIO[14]
+set_location_assignment PIN_88 -to GPIO[15]
+set_location_assignment PIN_89 -to GPIO[16]
+set_location_assignment PIN_90 -to GPIO[17]
+set_location_assignment PIN_92 -to GPIO[18]
+set_location_assignment PIN_94 -to GPIO[19]
+set_location_assignment PIN_95 -to GPIO[20]
+set_location_assignment PIN_96 -to GPIO[21]
+set_location_assignment PIN_97 -to GPIO[22]
+set_location_assignment PIN_99 -to GPIO[23]
+set_location_assignment PIN_45 -to SPI_CS
+set_location_assignment PIN_15 -to SPI_SCK
+set_location_assignment PIN_14 -to SPI_SI
+set_location_assignment PIN_12 -to SPI_SO
+set_location_assignment PIN_41 -to GPIO_nIOE
+set_instance_assignment -name PARTITION_HIERARCHY no_file_for_top_partition -to | -section_id Top
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name ENABLE_INIT_DONE_OUTPUT ON
+set_global_assignment -name GENERATE_RBF_FILE ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
+set_location_assignment PIN_31 -to SLWR
+set_global_assignment -name VERILOG_FILE loopBackChecker.v
+set_location_assignment PIN_147 -to ATLAS_A02
+set_location_assignment PIN_138 -to ATLAS_A10
+set_location_assignment PIN_149 -to ATLAS_C02
+set_location_assignment PIN_164 -to ATLAS_C10

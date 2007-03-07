@@ -1,0 +1,95 @@
+|WrapTest
+IFCLK => ~NO_FANOUT~
+FX2_FD[0] <= <UNC>
+FX2_FD[1] <= <UNC>
+FX2_FD[2] <= <UNC>
+FX2_FD[3] <= <UNC>
+FX2_FD[4] <= <UNC>
+FX2_FD[5] <= <UNC>
+FX2_FD[6] <= <UNC>
+FX2_FD[7] <= <UNC>
+FX2_FD[8] <= <UNC>
+FX2_FD[9] <= <UNC>
+FX2_FD[10] <= <UNC>
+FX2_FD[11] <= <UNC>
+FX2_FD[12] <= <UNC>
+FX2_FD[13] <= <UNC>
+FX2_FD[14] <= <UNC>
+FX2_FD[15] <= <UNC>
+FLAGA => ~NO_FANOUT~
+FLAGB => ~NO_FANOUT~
+FLAGC => ~NO_FANOUT~
+SLWR <= <GND>
+SLRD <= <GND>
+SLOE <= <GND>
+PKEND <= <GND>
+FIFO_ADR[0] <= <GND>
+FIFO_ADR[1] <= <GND>
+DEBUG_LED0 <= leds[0].DB_MAX_OUTPUT_PORT_TYPE
+DEBUG_LED1 <= leds[1].DB_MAX_OUTPUT_PORT_TYPE
+DEBUG_LED2 <= loopBackCheck:loopBackA02C02.not_ok_o
+DEBUG_LED3 <= loopBackCheck:loopBackA10C10.not_ok_o
+FX2_CLK => FX2_CLK~0.IN2
+SPI_SCK => ~NO_FANOUT~
+SPI_SI => ~NO_FANOUT~
+SPI_SO <= <UNC>
+SPI_CS => ~NO_FANOUT~
+GPIO[0] <= <UNC>
+GPIO[1] <= <UNC>
+GPIO[2] <= <UNC>
+GPIO[3] <= <UNC>
+GPIO[4] <= <UNC>
+GPIO[5] <= <UNC>
+GPIO[6] <= <UNC>
+GPIO[7] <= <UNC>
+GPIO[8] <= <UNC>
+GPIO[9] <= <UNC>
+GPIO[10] <= <UNC>
+GPIO[11] <= <UNC>
+GPIO[12] <= <UNC>
+GPIO[13] <= <UNC>
+GPIO[14] <= <UNC>
+GPIO[15] <= <UNC>
+GPIO[16] <= <UNC>
+GPIO[17] <= <UNC>
+GPIO[18] <= <UNC>
+GPIO[19] <= <UNC>
+GPIO[20] <= <UNC>
+GPIO[21] <= <UNC>
+GPIO[22] <= <UNC>
+GPIO[23] <= <UNC>
+GPIO_nIOE <= <GND>
+ATLAS_A02 <= ATLAS_A02~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A10 <= ATLAS_A10~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_C02 => ATLAS_C02~0.IN1
+ATLAS_C10 => ATLAS_C10~0.IN1
+
+
+|WrapTest|loopBackCheck:loopBackA02C02
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA10C10
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
