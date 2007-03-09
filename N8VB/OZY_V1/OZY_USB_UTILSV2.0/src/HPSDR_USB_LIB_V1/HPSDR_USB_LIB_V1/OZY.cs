@@ -32,6 +32,7 @@ namespace HPSDR_USB_LIB_V1
         public const int VENDOR_REQ_RS232_READ = 0x83;
         public const int VENDOR_REQ_EEPROM_TYPE_READ = 0x84;
         public const int VENDOR_REQ_I2C_SPEED_READ = 0x85;
+        public const int VENDOR_REQ_QF_CMD_READ = 0xA9;
 
         /* Vendor Out Commands */
         public const int VENDOR_REQ_SET_LED = 0x01;     // wValueL {0,255}
@@ -51,6 +52,7 @@ namespace HPSDR_USB_LIB_V1
         public const int VENDOR_REQ_I2C_SPEED_SET = 0x0B; // wValueL 100kHz/400kHz {0,1}
 
         public const int VENDOR_REQ_CPU_SPEED_SET = 0x0C; // wValueL 100kHz/400kHz {0,1,3}
+        public const int VENDOR_REQ_QF_CMD_WRITE = 0x30;
 
         static public bool Load_FPGA(IntPtr hdev, string filename)
         {
@@ -393,6 +395,36 @@ namespace HPSDR_USB_LIB_V1
             }
         }
 
+        static public bool Read_QF_CMD(IntPtr hdev, byte op_code, byte address, ref byte[] buffer)
+        {
+            Console.WriteLine("op_code: " + op_code.ToString("X")
+                                + " address: " + address.ToString("X"));
+
+            int wVal = (op_code << 8) + address;
+            
+            Console.WriteLine("wValue: " + wVal.ToString("X"));
+            
+            if (buffer.Length < 1 || buffer.Length > MAX_EP0_PACKETSIZE)
+                return false;
+            else
+            {
+                int ret = libUSB_Interface.usb_control_msg(
+                    hdev,
+                    VENDOR_REQ_TYPE_IN,
+                    VENDOR_REQ_QF_CMD_READ,
+                    wVal,
+                    0,
+                    buffer,
+                    buffer.Length,
+                    1000
+                    );
+                if (ret == buffer.Length)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
         static public bool Write_I2C(IntPtr hdev, int i2c_addr, byte[] buffer)
         {
             if (buffer.Length < 1 || buffer.Length > MAX_EP0_PACKETSIZE)
@@ -438,6 +470,37 @@ namespace HPSDR_USB_LIB_V1
                     VENDOR_REQ_SPI_WRITE,
                     wVal,
                     wIdx,
+                    buffer,
+                    buffer.Length,
+                    1000
+                    );
+                if (ret > 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        static public bool Write_QF_CMD(IntPtr hdev, byte op_code, byte address, ref byte[] buffer)
+        {
+            Console.WriteLine("op_code: " + op_code.ToString("X")
+                                + " address: " + address.ToString("X")
+                                );
+
+            int wVal = (op_code << 8) + address;
+            
+            Console.WriteLine("wValue: " + wVal.ToString("X"));
+
+            if (buffer.Length < 1 || buffer.Length > MAX_EP0_PACKETSIZE)
+                return false;
+            else
+            {
+                int ret = libUSB_Interface.usb_control_msg(
+                    hdev,
+                    VENDOR_REQ_TYPE_OUT,
+                    VENDOR_REQ_QF_CMD_WRITE,
+                    wVal,
+                    0,
                     buffer,
                     buffer.Length,
                     1000
