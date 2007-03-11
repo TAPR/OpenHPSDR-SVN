@@ -1,14 +1,14 @@
-Fitter Status : Successful - Sun Mar 11 08:33:27 2007
+Fitter Status : Successful - Sun Mar 11 18:09:12 2007
 Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
 Revision Name : WrapTest
 Top-level Entity Name : WrapTest
 Family : Cyclone II
 Device : EP2C8Q208C8
 Timing Models : Final
-Total logic elements : 190 / 8,256 ( 2 % )
-    Total combinational functions : 181 / 8,256 ( 2 % )
-    Dedicated logic registers : 121 / 8,256 ( 1 % )
-Total registers : 121
+Total logic elements : 328 / 8,256 ( 4 % )
+    Total combinational functions : 313 / 8,256 ( 4 % )
+    Dedicated logic registers : 191 / 8,256 ( 2 % )
+Total registers : 191
 Total pins : 67 / 138 ( 49 % )
 Total virtual pins : 0
 Total memory bits : 128 / 165,888 ( < 1 % )

@@ -152,8 +152,9 @@ set_location_assignment PIN_188 -to ATLAS_C25
 set_location_assignment PIN_189 -to ATLAS_C27
 set_location_assignment PIN_191 -to ATLAS_C29
 set_location_assignment PIN_192 -to ATLAS_C31
+set_location_assignment PIN_101 -to FPGA_RXD
+set_location_assignment PIN_102 -to FPGA_TXD
+set_global_assignment -name VERILOG_FILE rs232_tx_fifo.v
 set_global_assignment -name VERILOG_FILE WrapTest.v
 set_global_assignment -name VERILOG_FILE loopBackChecker.v
 set_global_assignment -name VERILOG_FILE rs232_xmit.v
-set_location_assignment PIN_101 -to FPGA_RXD
-set_location_assignment PIN_102 -to FPGA_TXD

@@ -45,30 +45,6 @@ loopBackCheck:loopBackA10C10
 }
 # end
 # entity
-WrapTest
-# storage
-db|WrapTest.(0).cnf
-db|WrapTest.(0).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-WrapTest.v
-2fef25bca3a0b2a06e92b98a404110
-7
-# internal_option {
-AUTO_RESOURCE_SHARING
-OFF
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-}
-# hierarchies {
-|
-}
-# end
-# entity
 rs232_xmit
 # storage
 db|WrapTest.(2).cnf
@@ -751,6 +727,30 @@ aclr
 # hierarchies {
 rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:rd_ptr_count
 rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:wr_ptr
+}
+# end
+# entity
+WrapTest
+# storage
+db|WrapTest.(0).cnf
+db|WrapTest.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+WrapTest.v
+12ca3dfe9f14d8293efd9c099b3e7f
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# hierarchies {
+|
 }
 # end
 # complete
