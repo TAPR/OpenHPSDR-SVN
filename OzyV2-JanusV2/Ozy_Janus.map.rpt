@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Sun Mar 04 10:18:16 2007
+Fri Mar 09 22:32:41 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -84,7 +84,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Mar 04 10:18:15 2007   ;
+; Analysis & Synthesis Status        ; Successful - Fri Mar 09 22:32:41 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
@@ -939,7 +939,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Mar 04 10:17:21 2007
+    Info: Processing started: Fri Mar 09 22:31:59 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file RegisterX.v
     Info: Found entity 1: RegisterX
@@ -1273,9 +1273,9 @@ Info: Implemented 1225 device resources after synthesis - the final resource cou
     Info: Implemented 1117 logic cells
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 62 warnings
-    Info: Allocated 139 megabytes of memory during processing
-    Info: Processing ended: Sun Mar 04 10:18:15 2007
-    Info: Elapsed time: 00:00:54
+    Info: Allocated 135 megabytes of memory during processing
+    Info: Processing ended: Fri Mar 09 22:32:41 2007
+    Info: Elapsed time: 00:00:42
 
 
 +------------------------------------------+

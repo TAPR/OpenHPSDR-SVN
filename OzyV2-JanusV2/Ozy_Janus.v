@@ -309,7 +309,7 @@ wire dot;
 wire dash; 
 
 assign dot = GPIO[22];   // alias dot and dash to appropriate GPIO lines 
-assign dash = GPIO[23]; 
+assign dash = GPIO[21]; 
 
 assign GPIO_nIOE = 0; 
 
