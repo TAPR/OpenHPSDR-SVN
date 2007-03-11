@@ -1,5 +1,5 @@
 Fitter report for WrapTest
-Tue Mar 06 23:17:22 2007
+Sun Mar 11 08:33:27 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -23,18 +23,19 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
  15. Control Signals
  16. Global & Other Fast Signals
  17. Non-Global High Fan-Out Signals
- 18. Interconnect Usage Summary
- 19. LAB Logic Elements
- 20. LAB-wide Signals
- 21. LAB Signals Sourced
- 22. LAB Signals Sourced Out
- 23. LAB Distinct Inputs
- 24. Fitter Device Options
- 25. Advanced Data - General
- 26. Advanced Data - Placement Preparation
- 27. Advanced Data - Placement
- 28. Advanced Data - Routing
- 29. Fitter Messages
+ 18. Fitter RAM Summary
+ 19. Interconnect Usage Summary
+ 20. LAB Logic Elements
+ 21. LAB-wide Signals
+ 22. LAB Signals Sourced
+ 23. LAB Signals Sourced Out
+ 24. LAB Distinct Inputs
+ 25. Fitter Device Options
+ 26. Advanced Data - General
+ 27. Advanced Data - Placement Preparation
+ 28. Advanced Data - Placement
+ 29. Advanced Data - Routing
+ 30. Fitter Messages
 
 
 
@@ -60,20 +61,20 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Fitter Summary                                                               ;
 +------------------------------------+-----------------------------------------+
-; Fitter Status                      ; Successful - Tue Mar 06 23:17:22 2007   ;
+; Fitter Status                      ; Successful - Sun Mar 11 08:33:27 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; WrapTest                                ;
 ; Top-level Entity Name              ; WrapTest                                ;
 ; Family                             ; Cyclone II                              ;
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
-; Total logic elements               ; 55 / 8,256 ( < 1 % )                    ;
-;     Total combinational functions  ; 55 / 8,256 ( < 1 % )                    ;
-;     Dedicated logic registers      ; 34 / 8,256 ( < 1 % )                    ;
-; Total registers                    ; 34                                      ;
-; Total pins                         ; 64 / 138 ( 46 % )                       ;
+; Total logic elements               ; 190 / 8,256 ( 2 % )                     ;
+;     Total combinational functions  ; 181 / 8,256 ( 2 % )                     ;
+;     Dedicated logic registers      ; 121 / 8,256 ( 1 % )                     ;
+; Total registers                    ; 121                                     ;
+; Total pins                         ; 67 / 138 ( 49 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
-; Total memory bits                  ; 0 / 165,888 ( 0 % )                     ;
+; Total memory bits                  ; 128 / 165,888 ( < 1 % )                 ;
 ; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                          ;
 ; Total PLLs                         ; 0 / 2 ( 0 % )                           ;
 +------------------------------------+-----------------------------------------+
@@ -126,51 +127,51 @@ applicable agreement for further details.
 The pin-out file can be found in E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTest.pin.
 
 
-+--------------------------------------------------------------------+
-; Fitter Resource Usage Summary                                      ;
-+---------------------------------------------+----------------------+
-; Resource                                    ; Usage                ;
-+---------------------------------------------+----------------------+
-; Total logic elements                        ; 55 / 8,256 ( < 1 % ) ;
-;     -- Combinational with no register       ; 21                   ;
-;     -- Register only                        ; 0                    ;
-;     -- Combinational with a register        ; 34                   ;
-;                                             ;                      ;
-; Logic element usage by number of LUT inputs ;                      ;
-;     -- 4 input functions                    ; 14                   ;
-;     -- 3 input functions                    ; 2                    ;
-;     -- <=2 input functions                  ; 39                   ;
-;     -- Register only                        ; 0                    ;
-;                                             ;                      ;
-; Logic elements by mode                      ;                      ;
-;     -- normal mode                          ; 31                   ;
-;     -- arithmetic mode                      ; 24                   ;
-;                                             ;                      ;
-; Total registers*                            ; 34 / 8,646 ( < 1 % ) ;
-;     -- Dedicated logic registers            ; 34 / 8,256 ( < 1 % ) ;
-;     -- I/O registers                        ; 0 / 390 ( 0 % )      ;
-;                                             ;                      ;
-; Total LABs:  partially or completely used   ; 6 / 516 ( 1 % )      ;
-; User inserted logic elements                ; 0                    ;
-; Virtual pins                                ; 0                    ;
-; I/O pins                                    ; 64 / 138 ( 46 % )    ;
-;     -- Clock pins                           ; 1 / 4 ( 25 % )       ;
-; Global signals                              ; 1                    ;
-; M4Ks                                        ; 0 / 36 ( 0 % )       ;
-; Total memory bits                           ; 0 / 165,888 ( 0 % )  ;
-; Total RAM block bits                        ; 0 / 165,888 ( 0 % )  ;
-; Embedded Multiplier 9-bit elements          ; 0 / 36 ( 0 % )       ;
-; PLLs                                        ; 0 / 2 ( 0 % )        ;
-; Global clocks                               ; 1 / 8 ( 13 % )       ;
-; Average interconnect usage                  ; 0%                   ;
-; Peak interconnect usage                     ; 0%                   ;
-; Maximum fan-out node                        ; FX2_CLK~clkctrl      ;
-; Maximum fan-out                             ; 34                   ;
-; Highest non-global fan-out signal           ; Equal0~66            ;
-; Highest non-global fan-out                  ; 26                   ;
-; Total fan-out                               ; 240                  ;
-; Average fan-out                             ; 1.53                 ;
-+---------------------------------------------+----------------------+
++-----------------------------------------------------------------------+
+; Fitter Resource Usage Summary                                         ;
++---------------------------------------------+-------------------------+
+; Resource                                    ; Usage                   ;
++---------------------------------------------+-------------------------+
+; Total logic elements                        ; 190 / 8,256 ( 2 % )     ;
+;     -- Combinational with no register       ; 69                      ;
+;     -- Register only                        ; 9                       ;
+;     -- Combinational with a register        ; 112                     ;
+;                                             ;                         ;
+; Logic element usage by number of LUT inputs ;                         ;
+;     -- 4 input functions                    ; 45                      ;
+;     -- 3 input functions                    ; 28                      ;
+;     -- <=2 input functions                  ; 108                     ;
+;     -- Register only                        ; 9                       ;
+;                                             ;                         ;
+; Logic elements by mode                      ;                         ;
+;     -- normal mode                          ; 102                     ;
+;     -- arithmetic mode                      ; 79                      ;
+;                                             ;                         ;
+; Total registers*                            ; 121 / 8,646 ( 1 % )     ;
+;     -- Dedicated logic registers            ; 121 / 8,256 ( 1 % )     ;
+;     -- I/O registers                        ; 0 / 390 ( 0 % )         ;
+;                                             ;                         ;
+; Total LABs:  partially or completely used   ; 17 / 516 ( 3 % )        ;
+; User inserted logic elements                ; 0                       ;
+; Virtual pins                                ; 0                       ;
+; I/O pins                                    ; 67 / 138 ( 49 % )       ;
+;     -- Clock pins                           ; 1 / 4 ( 25 % )          ;
+; Global signals                              ; 1                       ;
+; M4Ks                                        ; 1 / 36 ( 3 % )          ;
+; Total memory bits                           ; 128 / 165,888 ( < 1 % ) ;
+; Total RAM block bits                        ; 4,608 / 165,888 ( 3 % ) ;
+; Embedded Multiplier 9-bit elements          ; 0 / 36 ( 0 % )          ;
+; PLLs                                        ; 0 / 2 ( 0 % )           ;
+; Global clocks                               ; 1 / 8 ( 13 % )          ;
+; Average interconnect usage                  ; 0%                      ;
+; Peak interconnect usage                     ; 0%                      ;
+; Maximum fan-out node                        ; FX2_CLK~clkctrl         ;
+; Maximum fan-out                             ; 122                     ;
+; Highest non-global fan-out signal           ; Equal0~66               ;
+; Highest non-global fan-out                  ; 26                      ;
+; Total fan-out                               ; 814                     ;
+; Average fan-out                             ; 2.14                    ;
++---------------------------------------------+-------------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
 
@@ -185,7 +186,7 @@ The pin-out file can be found in E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTes
 ; FLAGA     ; 198   ; 2        ; 5            ; 19           ; 1           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; FLAGB     ; 197   ; 2        ; 5            ; 19           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; FLAGC     ; 5     ; 1        ; 0            ; 17           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; FX2_CLK   ; 23    ; 1        ; 0            ; 9            ; 0           ; 1                     ; 0                  ; yes    ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; FX2_CLK   ; 23    ; 1        ; 0            ; 9            ; 0           ; 2                     ; 0                  ; yes    ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; IFCLK     ; 24    ; 1        ; 0            ; 9            ; 1           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; SPI_CS    ; 45    ; 1        ; 0            ; 3            ; 2           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; SPI_SCK   ; 15    ; 1        ; 0            ; 14           ; 3           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
@@ -199,6 +200,8 @@ The pin-out file can be found in E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTes
 ; Name        ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Output Register ; Output Enable Register ; Power Up High ; PCI I/O Enabled ; Open Drain ; TRI Primitive ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination ; Location assigned by ; Load ;
 +-------------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
 ; ATLAS_A02   ; 147   ; 3        ; 34           ; 15           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A04   ; 145   ; 3        ; 34           ; 14           ; 4           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; ATLAS_A06   ; 143   ; 3        ; 34           ; 13           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; ATLAS_A10   ; 138   ; 3        ; 34           ; 12           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; DEBUG_LED0  ; 4     ; 1        ; 0            ; 18           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; DEBUG_LED1  ; 33    ; 1        ; 0            ; 8            ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
@@ -206,6 +209,7 @@ The pin-out file can be found in E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTes
 ; DEBUG_LED3  ; 108   ; 3        ; 34           ; 2            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; FIFO_ADR[0] ; 11    ; 1        ; 0            ; 16           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; FIFO_ADR[1] ; 10    ; 1        ; 0            ; 17           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FPGA_TXD    ; 102   ; 4        ; 32           ; 0            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; GPIO_nIOE   ; 41    ; 1        ; 0            ; 4            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; PKEND       ; 8     ; 1        ; 0            ; 17           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; SLOE        ; 13    ; 1        ; 0            ; 16           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
@@ -270,8 +274,8 @@ The pin-out file can be found in E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTes
 +----------+------------------+---------------+--------------+
 ; 1        ; 19 / 32 ( 59 % ) ; 3.3V          ; --           ;
 ; 2        ; 11 / 35 ( 31 % ) ; 3.3V          ; --           ;
-; 3        ; 5 / 35 ( 14 % )  ; 3.3V          ; --           ;
-; 4        ; 32 / 36 ( 89 % ) ; 3.3V          ; --           ;
+; 3        ; 7 / 35 ( 20 % )  ; 3.3V          ; --           ;
+; 4        ; 33 / 36 ( 92 % ) ; 3.3V          ; --           ;
 +----------+------------------+---------------+--------------+
 
 
@@ -381,7 +385,7 @@ The pin-out file can be found in E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTes
 ; 99       ; 96         ; 4        ; GPIO[23]                                 ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 100      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 101      ; 97         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 102      ; 98         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 102      ; 98         ; 4        ; FPGA_TXD                                 ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 103      ; 99         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 104      ; 100        ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 105      ; 101        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
@@ -422,9 +426,9 @@ The pin-out file can be found in E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTes
 ; 140      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 141      ; 137        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 142      ; 138        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
-; 143      ; 141        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 143      ; 141        ; 3        ; ATLAS_A06                                ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 144      ; 142        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
-; 145      ; 143        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 145      ; 143        ; 3        ; ATLAS_A04                                ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 146      ; 149        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 147      ; 150        ; 3        ; ATLAS_A02                                ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 148      ;            ; 3        ; VCCIO3                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
@@ -528,15 +532,26 @@ The pin-out file can be found in E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTes
 Note: User assignments will override these defaults. The user specified values are listed in the Output Pins and Bidir Pins tables.
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                      ;
-+-----------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+----------------------------------------+
-; Compilation Hierarchy Node        ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                    ;
-+-----------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+----------------------------------------+
-; |WrapTest                         ; 55 (47)     ; 34 (28)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 64   ; 0            ; 21 (19)      ; 0 (0)             ; 34 (28)          ; |WrapTest                              ;
-;    |loopBackCheck:loopBackA02C02| ; 4 (4)       ; 3 (3)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 3 (3)            ; |WrapTest|loopBackCheck:loopBackA02C02 ;
-;    |loopBackCheck:loopBackA10C10| ; 4 (4)       ; 3 (3)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 3 (3)            ; |WrapTest|loopBackCheck:loopBackA10C10 ;
-+-----------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+----------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                                                                                              ;
++----------------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Compilation Hierarchy Node                         ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                                                                                                                                                           ;
++----------------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; |WrapTest                                          ; 190 (125)   ; 121 (79)                  ; 0 (0)         ; 128         ; 1    ; 0            ; 0       ; 0         ; 67   ; 0            ; 69 (46)      ; 9 (0)             ; 112 (79)         ; |WrapTest                                                                                                                                                                     ;
+;    |loopBackCheck:loopBackA02C02|                  ; 4 (4)       ; 3 (3)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 3 (3)            ; |WrapTest|loopBackCheck:loopBackA02C02                                                                                                                                        ;
+;    |loopBackCheck:loopBackA10C10|                  ; 4 (4)       ; 3 (3)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 3 (3)            ; |WrapTest|loopBackCheck:loopBackA10C10                                                                                                                                        ;
+;    |rs232_xmit:Ozy_rs232_xmit|                     ; 57 (35)     ; 36 (22)                   ; 0 (0)         ; 128         ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 21 (13)      ; 9 (9)             ; 27 (13)          ; |WrapTest|rs232_xmit:Ozy_rs232_xmit                                                                                                                                           ;
+;       |rs232_tx_fifo:tx_fifo|                      ; 22 (0)      ; 14 (0)                    ; 0 (0)         ; 128         ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (0)        ; 0 (0)             ; 14 (0)           ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo                                                                                                                     ;
+;          |scfifo:scfifo_component|                 ; 22 (0)      ; 14 (0)                    ; 0 (0)         ; 128         ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (0)        ; 0 (0)             ; 14 (0)           ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component                                                                                             ;
+;             |scfifo_cdv:auto_generated|            ; 22 (0)      ; 14 (0)                    ; 0 (0)         ; 128         ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (0)        ; 0 (0)             ; 14 (0)           ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated                                                                   ;
+;                |a_dpfifo_jjv:dpfifo|               ; 22 (2)      ; 14 (0)                    ; 0 (0)         ; 128         ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (2)        ; 0 (0)             ; 14 (0)           ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo                                               ;
+;                   |a_fefifo_76e:fifo_state|        ; 12 (8)      ; 6 (2)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 0 (0)             ; 6 (2)            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state                       ;
+;                      |cntr_pj7:count_usedw|        ; 4 (4)       ; 4 (4)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 4 (4)            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state|cntr_pj7:count_usedw  ;
+;                   |cntr_djb:rd_ptr_count|          ; 4 (4)       ; 4 (4)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 4 (4)            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:rd_ptr_count                         ;
+;                   |cntr_djb:wr_ptr|                ; 4 (4)       ; 4 (4)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 4 (4)            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:wr_ptr                               ;
+;                   |dpram_1it:FIFOram|              ; 0 (0)       ; 0 (0)                     ; 0 (0)         ; 128         ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram                             ;
+;                      |altsyncram_0sj1:altsyncram2| ; 0 (0)       ; 0 (0)                     ; 0 (0)         ; 128         ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2 ;
++----------------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -606,6 +621,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; GPIO_nIOE   ; Output   ; --            ; --            ; --                    ; --  ;
 ; ATLAS_A02   ; Output   ; --            ; --            ; --                    ; --  ;
 ; ATLAS_A10   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A06   ; Output   ; --            ; --            ; --                    ; --  ;
+; ATLAS_A04   ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_TXD    ; Output   ; --            ; --            ; --                    ; --  ;
 ; FX2_CLK     ; Input    ; 0             ; 0             ; --                    ; --  ;
 ; ATLAS_C02   ; Input    ; 6             ; 6             ; --                    ; --  ;
 ; ATLAS_C10   ; Input    ; 6             ; 6             ; --                    ; --  ;
@@ -667,20 +685,27 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; SPI_CS                                        ;                   ;         ;
 ; FX2_CLK                                       ;                   ;         ;
 ; ATLAS_C02                                     ;                   ;         ;
-;      - loopBackCheck:loopBackA02C02|always0~0 ; 1                 ; 6       ;
+;      - loopBackCheck:loopBackA02C02|always0~0 ; 0                 ; 6       ;
 ; ATLAS_C10                                     ;                   ;         ;
 ;      - loopBackCheck:loopBackA10C10|always0~0 ; 0                 ; 6       ;
 +-----------------------------------------------+-------------------+---------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Control Signals                                                                                                                        ;
-+-----------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; Name      ; Location           ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
-+-----------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; Equal0~66 ; LCCOMB_X14_Y11_N28 ; 26      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; FX2_CLK   ; PIN_23             ; 34      ; Clock        ; yes    ; Global Clock         ; GCLK2            ; --                        ;
-+-----------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                                                                                                                                                                 ;
++----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
+; Name                                                                                                                                               ; Location           ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
+; Equal0~66                                                                                                                                          ; LCCOMB_X28_Y13_N16 ; 26      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Equal4~140                                                                                                                                         ; LCCOMB_X12_Y13_N10 ; 8       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; FX2_CLK                                                                                                                                            ; PIN_23             ; 122     ; Clock        ; yes    ; Global Clock         ; GCLK2            ; --                        ;
+; always2~116                                                                                                                                        ; LCCOMB_X12_Y11_N10 ; 8       ; Sync. load   ; no     ; --                   ; --               ; --                        ;
+; rs232_xmit:Ozy_rs232_xmit|data_in_holding[7]~615                                                                                                   ; LCCOMB_X12_Y10_N22 ; 9       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state|_~28 ; LCCOMB_X13_Y6_N28  ; 4       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|valid_rreq                   ; LCCOMB_X13_Y6_N8   ; 5       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|valid_wreq                   ; LCCOMB_X13_Y6_N20  ; 8       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; rs232_xmit:Ozy_rs232_xmit|xmit_count[0]~587                                                                                                        ; LCCOMB_X13_Y6_N4   ; 4       ; Clock enable ; no     ; --                   ; --               ; --                        ;
++----------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
 
 
 +----------------------------------------------------------------------------------------------------+
@@ -688,207 +713,227 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------+----------+---------+----------------------+------------------+---------------------------+
 ; Name    ; Location ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +---------+----------+---------+----------------------+------------------+---------------------------+
-; FX2_CLK ; PIN_23   ; 34      ; Global Clock         ; GCLK2            ; --                        ;
+; FX2_CLK ; PIN_23   ; 122     ; Global Clock         ; GCLK2            ; --                        ;
 +---------+----------+---------+----------------------+------------------+---------------------------+
 
 
-+--------------------------------------------------------+
-; Non-Global High Fan-Out Signals                        ;
-+----------------------------------------------+---------+
-; Name                                         ; Fan-Out ;
-+----------------------------------------------+---------+
-; Equal0~66                                    ; 26      ;
-; Equal1~281                                   ; 14      ;
-; loopback_reset                               ; 6       ;
-; clock_count[3]                               ; 6       ;
-; clock_count[2]                               ; 6       ;
-; leds[1]                                      ; 4       ;
-; leds[0]                                      ; 4       ;
-; loopBackCheck:loopBackA10C10|armed           ; 3       ;
-; loopBackCheck:loopBackA02C02|armed           ; 3       ;
-; loopBackCheck:loopBackA10C10|last_ref_sig    ; 2       ;
-; loopBackCheck:loopBackA02C02|last_ref_sig    ; 2       ;
-; clock_count[1]                               ; 2       ;
-; clock_count[4]                               ; 2       ;
-; clock_count[5]                               ; 2       ;
-; clock_count[6]                               ; 2       ;
-; clock_count[0]                               ; 2       ;
-; clock_count[9]                               ; 2       ;
-; clock_count[10]                              ; 2       ;
-; clock_count[7]                               ; 2       ;
-; clock_count[8]                               ; 2       ;
-; clock_count[12]                              ; 2       ;
-; clock_count[13]                              ; 2       ;
-; clock_count[11]                              ; 2       ;
-; clock_count[14]                              ; 2       ;
-; clock_count[17]                              ; 2       ;
-; clock_count[18]                              ; 2       ;
-; clock_count[15]                              ; 2       ;
-; clock_count[16]                              ; 2       ;
-; clock_count[19]                              ; 2       ;
-; clock_count[21]                              ; 2       ;
-; clock_count[22]                              ; 2       ;
-; clock_count[20]                              ; 2       ;
-; clock_count[24]                              ; 2       ;
-; clock_count[23]                              ; 2       ;
-; loopBackCheck:loopBackA10C10|not_ok_o        ; 2       ;
-; loopBackCheck:loopBackA02C02|not_ok_o        ; 2       ;
-; ATLAS_C10                                    ; 1       ;
-; ATLAS_C02                                    ; 1       ;
-; loopBackCheck:loopBackA10C10|last_ref_sig~58 ; 1       ;
-; loopBackCheck:loopBackA02C02|last_ref_sig~58 ; 1       ;
-; loopBackCheck:loopBackA10C10|armed~24        ; 1       ;
-; loopBackCheck:loopBackA02C02|armed~24        ; 1       ;
-; clock_count~427                              ; 1       ;
-; clock_count~426                              ; 1       ;
-; clock_count~425                              ; 1       ;
-; clock_count~424                              ; 1       ;
-; clock_count~423                              ; 1       ;
-; clock_count~422                              ; 1       ;
-; clock_count~421                              ; 1       ;
-; clock_count~420                              ; 1       ;
-+----------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Non-Global High Fan-Out Signals                                                                                                                                     ;
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; Name                                                                                                                                                      ; Fan-Out ;
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; Equal0~66                                                                                                                                                 ; 26      ;
+; Equal1~281                                                                                                                                                ; 14      ;
+; Equal3~246                                                                                                                                                ; 13      ;
+; Equal3~249                                                                                                                                                ; 12      ;
+; rs232_xmit:Ozy_rs232_xmit|xmit_count[1]                                                                                                                   ; 11      ;
+; rs232_xmit:Ozy_rs232_xmit|xmit_count[0]                                                                                                                   ; 10      ;
+; rs232_xmit:Ozy_rs232_xmit|data_in_holding[7]~615                                                                                                          ; 9       ;
+; Equal4~140                                                                                                                                                ; 8       ;
+; always2~116                                                                                                                                               ; 8       ;
+; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|valid_wreq                          ; 8       ;
+; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state|b_non_empty ; 7       ;
+; rs232_xmit:Ozy_rs232_xmit|output_state.10                                                                                                                 ; 6       ;
+; rs232_xmit:Ozy_rs232_xmit|xmit_count[2]                                                                                                                   ; 6       ;
+; rs232_xmit:Ozy_rs232_xmit|output_state.01                                                                                                                 ; 6       ;
+; loopback_reset                                                                                                                                            ; 6       ;
+; clock_count[3]                                                                                                                                            ; 6       ;
+; clock_count[2]                                                                                                                                            ; 6       ;
+; ~GND                                                                                                                                                      ; 5       ;
+; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|valid_rreq                          ; 5       ;
+; rs232_xmit:Ozy_rs232_xmit|fifo_read_strobe                                                                                                                ; 5       ;
+; rs232_xmit:Ozy_rs232_xmit|fifo_write_strobe                                                                                                               ; 5       ;
+; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state|_~28        ; 4       ;
+; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state|b_full      ; 4       ;
+; rs232_xmit:Ozy_rs232_xmit|xmit_count[0]~587                                                                                                               ; 4       ;
+; rs232_xmit:Ozy_rs232_xmit|xmit_count[3]                                                                                                                   ; 4       ;
+; leds[1]                                                                                                                                                   ; 4       ;
+; leds[0]                                                                                                                                                   ; 4       ;
+; rs232_xmit_reg[3]                                                                                                                                         ; 4       ;
+; baud_reg[16]                                                                                                                                              ; 4       ;
+; serial_clock_count[8]                                                                                                                                     ; 3       ;
+; serial_clock_count[9]                                                                                                                                     ; 3       ;
+; serial_clock_count[11]                                                                                                                                    ; 3       ;
+; serial_clock_count[12]                                                                                                                                    ; 3       ;
+; serial_clock_count[16]                                                                                                                                    ; 3       ;
+; serial_clock_count[17]                                                                                                                                    ; 3       ;
+; serial_clock_count[18]                                                                                                                                    ; 3       ;
+; serial_clock_count[20]                                                                                                                                    ; 3       ;
+; serial_clock_count[21]                                                                                                                                    ; 3       ;
+; serial_clock_count[23]                                                                                                                                    ; 3       ;
+; rs232_write_strobe                                                                                                                                        ; 3       ;
+; rs232_xmit:Ozy_rs232_xmit|input_state.00                                                                                                                  ; 3       ;
+; rs232_xmit:Ozy_rs232_xmit|output_state.00                                                                                                                 ; 3       ;
+; loopBackCheck:loopBackA10C10|armed                                                                                                                        ; 3       ;
+; loopBackCheck:loopBackA02C02|armed                                                                                                                        ; 3       ;
+; rs232_xmit:Ozy_rs232_xmit|xmit_o                                                                                                                          ; 3       ;
+; rs232_xmit_reg[4]                                                                                                                                         ; 3       ;
+; rs232_xmit_reg[7]                                                                                                                                         ; 3       ;
+; rs232_xmit_reg[5]                                                                                                                                         ; 3       ;
+; rs232_xmit_reg[6]                                                                                                                                         ; 3       ;
+; rs232_xmit_reg[0]                                                                                                                                         ; 3       ;
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
-+----------------------------------------------------+
-; Interconnect Usage Summary                         ;
-+----------------------------+-----------------------+
-; Interconnect Resource Type ; Usage                 ;
-+----------------------------+-----------------------+
-; Block interconnects        ; 68 / 26,052 ( < 1 % ) ;
-; C16 interconnects          ; 1 / 1,156 ( < 1 % )   ;
-; C4 interconnects           ; 37 / 17,952 ( < 1 % ) ;
-; Direct links               ; 18 / 26,052 ( < 1 % ) ;
-; Global clocks              ; 1 / 8 ( 13 % )        ;
-; Local interconnects        ; 32 / 8,256 ( < 1 % )  ;
-; R24 interconnects          ; 2 / 1,020 ( < 1 % )   ;
-; R4 interconnects           ; 57 / 22,440 ( < 1 % ) ;
-+----------------------------+-----------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter RAM Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+-------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------+
+; Name                                                                                                                                                                           ; Type ; Mode             ; Clock Mode  ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Port A Input Registers ; Port A Output Registers ; Port B Input Registers ; Port B Output Registers ; Size ; Implementation Port A Depth ; Implementation Port A Width ; Implementation Port B Depth ; Implementation Port B Width ; Implementation Bits ; M4Ks ; MIF  ; Location   ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+-------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------+
+; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; Dual Clocks ; 16           ; 8            ; 16           ; 8            ; yes                    ; no                      ; yes                    ; no                      ; 128  ; 16                          ; 8                           ; 16                          ; 8                           ; 128                 ; 1    ; None ; M4K_X11_Y6 ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+-------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------+------------+
+Note: Fitter may spread logical memories into multiple blocks to improve timing. The actual required RAM blocks can be found in the Fitter Resource Usage section.
 
 
-+--------------------------------------------------------------------------+
-; LAB Logic Elements                                                       ;
-+--------------------------------------------+-----------------------------+
-; Number of Logic Elements  (Average = 9.17) ; Number of LABs  (Total = 6) ;
-+--------------------------------------------+-----------------------------+
-; 1                                          ; 1                           ;
-; 2                                          ; 1                           ;
-; 3                                          ; 0                           ;
-; 4                                          ; 1                           ;
-; 5                                          ; 0                           ;
-; 6                                          ; 0                           ;
-; 7                                          ; 0                           ;
-; 8                                          ; 0                           ;
-; 9                                          ; 0                           ;
-; 10                                         ; 0                           ;
-; 11                                         ; 0                           ;
-; 12                                         ; 0                           ;
-; 13                                         ; 0                           ;
-; 14                                         ; 0                           ;
-; 15                                         ; 0                           ;
-; 16                                         ; 3                           ;
-+--------------------------------------------+-----------------------------+
-
-
-+------------------------------------------------------------------+
-; LAB-wide Signals                                                 ;
-+------------------------------------+-----------------------------+
-; LAB-wide Signals  (Average = 1.33) ; Number of LABs  (Total = 6) ;
-+------------------------------------+-----------------------------+
-; 1 Clock                            ; 5                           ;
-; 1 Clock enable                     ; 3                           ;
-+------------------------------------+-----------------------------+
++-----------------------------------------------------+
+; Interconnect Usage Summary                          ;
++----------------------------+------------------------+
+; Interconnect Resource Type ; Usage                  ;
++----------------------------+------------------------+
+; Block interconnects        ; 147 / 26,052 ( < 1 % ) ;
+; C16 interconnects          ; 2 / 1,156 ( < 1 % )    ;
+; C4 interconnects           ; 80 / 17,952 ( < 1 % )  ;
+; Direct links               ; 47 / 26,052 ( < 1 % )  ;
+; Global clocks              ; 1 / 8 ( 13 % )         ;
+; Local interconnects        ; 140 / 8,256 ( 2 % )    ;
+; R24 interconnects          ; 3 / 1,020 ( < 1 % )    ;
+; R4 interconnects           ; 80 / 22,440 ( < 1 % )  ;
++----------------------------+------------------------+
 
 
 +----------------------------------------------------------------------------+
-; LAB Signals Sourced                                                        ;
-+----------------------------------------------+-----------------------------+
-; Number of Signals Sourced  (Average = 14.83) ; Number of LABs  (Total = 6) ;
-+----------------------------------------------+-----------------------------+
-; 0                                            ; 0                           ;
-; 1                                            ; 1                           ;
-; 2                                            ; 0                           ;
-; 3                                            ; 0                           ;
-; 4                                            ; 1                           ;
-; 5                                            ; 0                           ;
-; 6                                            ; 0                           ;
-; 7                                            ; 1                           ;
-; 8                                            ; 0                           ;
-; 9                                            ; 0                           ;
-; 10                                           ; 0                           ;
-; 11                                           ; 0                           ;
-; 12                                           ; 0                           ;
-; 13                                           ; 0                           ;
-; 14                                           ; 0                           ;
-; 15                                           ; 0                           ;
-; 16                                           ; 0                           ;
-; 17                                           ; 0                           ;
-; 18                                           ; 0                           ;
-; 19                                           ; 0                           ;
-; 20                                           ; 0                           ;
-; 21                                           ; 0                           ;
-; 22                                           ; 0                           ;
-; 23                                           ; 1                           ;
-; 24                                           ; 0                           ;
-; 25                                           ; 0                           ;
-; 26                                           ; 0                           ;
-; 27                                           ; 2                           ;
-+----------------------------------------------+-----------------------------+
+; LAB Logic Elements                                                         ;
++---------------------------------------------+------------------------------+
+; Number of Logic Elements  (Average = 11.18) ; Number of LABs  (Total = 17) ;
++---------------------------------------------+------------------------------+
+; 1                                           ; 2                            ;
+; 2                                           ; 0                            ;
+; 3                                           ; 0                            ;
+; 4                                           ; 2                            ;
+; 5                                           ; 1                            ;
+; 6                                           ; 0                            ;
+; 7                                           ; 1                            ;
+; 8                                           ; 1                            ;
+; 9                                           ; 0                            ;
+; 10                                          ; 0                            ;
+; 11                                          ; 0                            ;
+; 12                                          ; 0                            ;
+; 13                                          ; 0                            ;
+; 14                                          ; 0                            ;
+; 15                                          ; 0                            ;
+; 16                                          ; 10                           ;
++---------------------------------------------+------------------------------+
 
 
-+-------------------------------------------------------------------------------+
-; LAB Signals Sourced Out                                                       ;
-+-------------------------------------------------+-----------------------------+
-; Number of Signals Sourced Out  (Average = 7.83) ; Number of LABs  (Total = 6) ;
-+-------------------------------------------------+-----------------------------+
-; 0                                               ; 0                           ;
-; 1                                               ; 2                           ;
-; 2                                               ; 0                           ;
-; 3                                               ; 0                           ;
-; 4                                               ; 1                           ;
-; 5                                               ; 0                           ;
-; 6                                               ; 0                           ;
-; 7                                               ; 0                           ;
-; 8                                               ; 0                           ;
-; 9                                               ; 0                           ;
-; 10                                              ; 0                           ;
-; 11                                              ; 1                           ;
-; 12                                              ; 0                           ;
-; 13                                              ; 0                           ;
-; 14                                              ; 1                           ;
-; 15                                              ; 0                           ;
-; 16                                              ; 1                           ;
-+-------------------------------------------------+-----------------------------+
++-------------------------------------------------------------------+
+; LAB-wide Signals                                                  ;
++------------------------------------+------------------------------+
+; LAB-wide Signals  (Average = 1.47) ; Number of LABs  (Total = 17) ;
++------------------------------------+------------------------------+
+; 1 Clock                            ; 17                           ;
+; 1 Clock enable                     ; 7                            ;
+; 2 Clock enables                    ; 1                            ;
++------------------------------------+------------------------------+
 
 
-+---------------------------------------------------------------------------+
-; LAB Distinct Inputs                                                       ;
-+---------------------------------------------+-----------------------------+
-; Number of Distinct Inputs  (Average = 9.50) ; Number of LABs  (Total = 6) ;
-+---------------------------------------------+-----------------------------+
-; 0                                           ; 0                           ;
-; 1                                           ; 0                           ;
-; 2                                           ; 0                           ;
-; 3                                           ; 1                           ;
-; 4                                           ; 1                           ;
-; 5                                           ; 0                           ;
-; 6                                           ; 0                           ;
-; 7                                           ; 0                           ;
-; 8                                           ; 1                           ;
-; 9                                           ; 0                           ;
-; 10                                          ; 1                           ;
-; 11                                          ; 1                           ;
-; 12                                          ; 0                           ;
-; 13                                          ; 0                           ;
-; 14                                          ; 0                           ;
-; 15                                          ; 0                           ;
-; 16                                          ; 0                           ;
-; 17                                          ; 0                           ;
-; 18                                          ; 0                           ;
-; 19                                          ; 0                           ;
-; 20                                          ; 0                           ;
-; 21                                          ; 1                           ;
-+---------------------------------------------+-----------------------------+
++-----------------------------------------------------------------------------+
+; LAB Signals Sourced                                                         ;
++----------------------------------------------+------------------------------+
+; Number of Signals Sourced  (Average = 18.18) ; Number of LABs  (Total = 17) ;
++----------------------------------------------+------------------------------+
+; 0                                            ; 0                            ;
+; 1                                            ; 0                            ;
+; 2                                            ; 2                            ;
+; 3                                            ; 0                            ;
+; 4                                            ; 0                            ;
+; 5                                            ; 0                            ;
+; 6                                            ; 0                            ;
+; 7                                            ; 0                            ;
+; 8                                            ; 2                            ;
+; 9                                            ; 0                            ;
+; 10                                           ; 1                            ;
+; 11                                           ; 0                            ;
+; 12                                           ; 0                            ;
+; 13                                           ; 1                            ;
+; 14                                           ; 1                            ;
+; 15                                           ; 0                            ;
+; 16                                           ; 0                            ;
+; 17                                           ; 0                            ;
+; 18                                           ; 0                            ;
+; 19                                           ; 0                            ;
+; 20                                           ; 1                            ;
+; 21                                           ; 0                            ;
+; 22                                           ; 0                            ;
+; 23                                           ; 2                            ;
+; 24                                           ; 2                            ;
+; 25                                           ; 1                            ;
+; 26                                           ; 1                            ;
+; 27                                           ; 1                            ;
+; 28                                           ; 1                            ;
+; 29                                           ; 0                            ;
+; 30                                           ; 0                            ;
+; 31                                           ; 0                            ;
+; 32                                           ; 1                            ;
++----------------------------------------------+------------------------------+
+
+
++--------------------------------------------------------------------------------+
+; LAB Signals Sourced Out                                                        ;
++-------------------------------------------------+------------------------------+
+; Number of Signals Sourced Out  (Average = 6.06) ; Number of LABs  (Total = 17) ;
++-------------------------------------------------+------------------------------+
+; 0                                               ; 0                            ;
+; 1                                               ; 3                            ;
+; 2                                               ; 1                            ;
+; 3                                               ; 0                            ;
+; 4                                               ; 4                            ;
+; 5                                               ; 1                            ;
+; 6                                               ; 1                            ;
+; 7                                               ; 2                            ;
+; 8                                               ; 1                            ;
+; 9                                               ; 0                            ;
+; 10                                              ; 0                            ;
+; 11                                              ; 1                            ;
+; 12                                              ; 1                            ;
+; 13                                              ; 2                            ;
++-------------------------------------------------+------------------------------+
+
+
++----------------------------------------------------------------------------+
+; LAB Distinct Inputs                                                        ;
++---------------------------------------------+------------------------------+
+; Number of Distinct Inputs  (Average = 7.35) ; Number of LABs  (Total = 17) ;
++---------------------------------------------+------------------------------+
+; 0                                           ; 0                            ;
+; 1                                           ; 1                            ;
+; 2                                           ; 3                            ;
+; 3                                           ; 1                            ;
+; 4                                           ; 1                            ;
+; 5                                           ; 2                            ;
+; 6                                           ; 2                            ;
+; 7                                           ; 0                            ;
+; 8                                           ; 3                            ;
+; 9                                           ; 0                            ;
+; 10                                          ; 1                            ;
+; 11                                          ; 0                            ;
+; 12                                          ; 0                            ;
+; 13                                          ; 1                            ;
+; 14                                          ; 1                            ;
+; 15                                          ; 0                            ;
+; 16                                          ; 0                            ;
+; 17                                          ; 0                            ;
+; 18                                          ; 0                            ;
+; 19                                          ; 0                            ;
+; 20                                          ; 0                            ;
+; 21                                          ; 0                            ;
+; 22                                          ; 0                            ;
+; 23                                          ; 0                            ;
+; 24                                          ; 0                            ;
+; 25                                          ; 0                            ;
+; 26                                          ; 0                            ;
+; 27                                          ; 0                            ;
+; 28                                          ; 1                            ;
++---------------------------------------------+------------------------------+
 
 
 +--------------------------------------------------------------------+
@@ -919,39 +964,39 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-------+
 
 
-+--------------------------------------------------------------------------------+
-; Advanced Data - Placement Preparation                                          ;
-+------------------------------------------------------------------+-------------+
-; Name                                                             ; Value       ;
-+------------------------------------------------------------------+-------------+
-; Auto Fit Point 1 - Fit Attempt 1                                 ; ff          ;
-; Mid Wire Use - Fit Attempt 1                                     ; 0           ;
-; Mid Slack - Fit Attempt 1                                        ; -7965       ;
-; Internal Atom Count - Fit Attempt 1                              ; 90          ;
-; LE/ALM Count - Fit Attempt 1                                     ; 56          ;
-; LAB Count - Fit Attempt 1                                        ; 7           ;
-; Outputs per Lab - Fit Attempt 1                                  ; 6.714       ;
-; Inputs per LAB - Fit Attempt 1                                   ; 7.429       ;
-; Global Inputs per LAB - Fit Attempt 1                            ; 1.000       ;
-; LAB Constraint 'non-global clock + sync load' - Fit Attempt 1    ; 0:7         ;
-; LAB Constraint 'non-global controls' - Fit Attempt 1             ; 0:3;1:4     ;
-; LAB Constraint 'non-global + aclr' - Fit Attempt 1               ; 0:3;1:4     ;
-; LAB Constraint 'global non-clock non-aclr' - Fit Attempt 1       ; 0:7         ;
-; LAB Constraint 'global controls' - Fit Attempt 1                 ; 0:2;1:3;2:2 ;
-; LAB Constraint 'deterministic LABSMUXA/LABXMUXB' - Fit Attempt 1 ; 0:3;1:4     ;
-; LAB Constraint 'deterministic LABSMUXC/LABXMUXD' - Fit Attempt 1 ; 0:3;1:4     ;
-; LAB Constraint 'clock / ce pair constraint' - Fit Attempt 1      ; 0:2;1:2;2:3 ;
-; LAB Constraint 'aclr constraint' - Fit Attempt 1                 ; 0:2;1:5     ;
-; LAB Constraint 'true sload_sclear pair' - Fit Attempt 1          ; 0:7         ;
-; LAB Constraint 'constant sload_sclear pair' - Fit Attempt 1      ; 0:7         ;
-; LAB Constraint 'has placement constraint' - Fit Attempt 1        ; 0:5;1:2     ;
-; LEs in Chains - Fit Attempt 1                                    ; 25          ;
-; LEs in Long Chains - Fit Attempt 1                               ; 25          ;
-; LABs with Chains - Fit Attempt 1                                 ; 2           ;
-; LABs with Multiple Chains - Fit Attempt 1                        ; 0           ;
-; Time - Fit Attempt 1                                             ; 0           ;
-; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.031       ;
-+------------------------------------------------------------------+-------------+
++---------------------------------------------------------------------------------+
+; Advanced Data - Placement Preparation                                           ;
++------------------------------------------------------------------+--------------+
+; Name                                                             ; Value        ;
++------------------------------------------------------------------+--------------+
+; Auto Fit Point 1 - Fit Attempt 1                                 ; ff           ;
+; Mid Wire Use - Fit Attempt 1                                     ; 1            ;
+; Mid Slack - Fit Attempt 1                                        ; -12213       ;
+; Internal Atom Count - Fit Attempt 1                              ; 302          ;
+; LE/ALM Count - Fit Attempt 1                                     ; 190          ;
+; LAB Count - Fit Attempt 1                                        ; 17           ;
+; Outputs per Lab - Fit Attempt 1                                  ; 6.118        ;
+; Inputs per LAB - Fit Attempt 1                                   ; 6.412        ;
+; Global Inputs per LAB - Fit Attempt 1                            ; 1.118        ;
+; LAB Constraint 'non-global clock + sync load' - Fit Attempt 1    ; 0:16;1:1     ;
+; LAB Constraint 'non-global controls' - Fit Attempt 1             ; 0:6;1:10;3:1 ;
+; LAB Constraint 'non-global + aclr' - Fit Attempt 1               ; 0:6;1:10;3:1 ;
+; LAB Constraint 'global non-clock non-aclr' - Fit Attempt 1       ; 0:17         ;
+; LAB Constraint 'global controls' - Fit Attempt 1                 ; 1:15;2:2     ;
+; LAB Constraint 'deterministic LABSMUXA/LABXMUXB' - Fit Attempt 1 ; 0:6;1:11     ;
+; LAB Constraint 'deterministic LABSMUXC/LABXMUXD' - Fit Attempt 1 ; 0:6;1:10;2:1 ;
+; LAB Constraint 'clock / ce pair constraint' - Fit Attempt 1      ; 1:9;2:8      ;
+; LAB Constraint 'aclr constraint' - Fit Attempt 1                 ; 1:17         ;
+; LAB Constraint 'true sload_sclear pair' - Fit Attempt 1          ; 0:15;1:2     ;
+; LAB Constraint 'constant sload_sclear pair' - Fit Attempt 1      ; 0:17         ;
+; LAB Constraint 'has placement constraint' - Fit Attempt 1        ; 0:13;1:4     ;
+; LEs in Chains - Fit Attempt 1                                    ; 86           ;
+; LEs in Long Chains - Fit Attempt 1                               ; 50           ;
+; LABs with Chains - Fit Attempt 1                                 ; 9            ;
+; LABs with Multiple Chains - Fit Attempt 1                        ; 0            ;
+; Time - Fit Attempt 1                                             ; 0            ;
+; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.048        ;
++------------------------------------------------------------------+--------------+
 
 
 +----------------------------------------------+
@@ -961,17 +1006,17 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------+--------+
 ; Auto Fit Point 2 - Fit Attempt 1    ; ff     ;
 ; Early Wire Use - Fit Attempt 1      ; 0      ;
-; Early Slack - Fit Attempt 1         ; -11274 ;
+; Early Slack - Fit Attempt 1         ; -10753 ;
 ; Auto Fit Point 3 - Fit Attempt 1    ; ff     ;
 ; Auto Fit Point 4 - Fit Attempt 1    ; ff     ;
 ; Mid Wire Use - Fit Attempt 1        ; 0      ;
-; Mid Slack - Fit Attempt 1           ; -6313  ;
+; Mid Slack - Fit Attempt 1           ; -8069  ;
 ; Late Wire Use - Fit Attempt 1       ; 0      ;
-; Late Slack - Fit Attempt 1          ; -6313  ;
+; Late Slack - Fit Attempt 1          ; -8069  ;
 ; Peak Regional Wire - Fit Attempt 1  ; 0.000  ;
 ; Auto Fit Point 5 - Fit Attempt 1    ; ff     ;
 ; Time - Fit Attempt 1                ; 0      ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.031  ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.110  ;
 +-------------------------------------+--------+
 
 
@@ -980,15 +1025,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------+-------+
 ; Name                                ; Value ;
 +-------------------------------------+-------+
-; Early Slack - Fit Attempt 1         ; -5063 ;
+; Early Slack - Fit Attempt 1         ; -6105 ;
 ; Early Wire Use - Fit Attempt 1      ; 0     ;
 ; Peak Regional Wire - Fit Attempt 1  ; 1     ;
-; Mid Slack - Fit Attempt 1           ; -5476 ;
-; Late Slack - Fit Attempt 1          ; -5476 ;
+; Mid Slack - Fit Attempt 1           ; -6368 ;
+; Late Slack - Fit Attempt 1          ; -6368 ;
 ; Late Wire Use - Fit Attempt 1       ; 0     ;
 ; Time - Fit Attempt 1                ; 1     ;
-; Time in tsm_dat.dll - Fit Attempt 1 ; 0.016 ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.108 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.405 ;
 +-------------------------------------+-------+
 
 
@@ -998,14 +1042,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Tue Mar 06 23:17:10 2007
+    Info: Processing started: Sun Mar 11 08:33:11 2007
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off WrapTest -c WrapTest
 Info: Selected device EP2C8Q208C8 for design "WrapTest"
 Info: Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
 Info: Fitter is using the Classic Timing Analyzer
 Info: Timing requirements not specified -- quality metrics such as performance and power consumption may be sacrificed to reduce compilation time.
 Info: The Fitter has identified 1 logical partitions of which 0 have a previous placement to use
-    Info: Previous placement does not exist for 153 of 153 atoms in partition Top
+    Info: Previous placement does not exist for 377 of 377 atoms in partition Top
 Info: Device migration not selected. If you intend to use device migration later, you may need to change the pin assignments as they may be incompatible with other devices
     Info: Device EP2C5Q208C8 is compatible
     Info: Device EP2C5Q208I8 is compatible
@@ -1014,8 +1058,11 @@ Info: Fitter converted 3 user pins into dedicated programming pins
     Info: Pin ~ASDO~ is reserved at location 1
     Info: Pin ~nCSO~ is reserved at location 2
     Info: Pin ~LVDS54n/INIT_DONE~ is reserved at location 107
+Info: Design uses memory blocks. Violating setup or hold times of memory block address registers for either read or write operations could cause memory contents to be corrupted. Make sure that all memory block address registers meet the setup and hold time requirements.
 Info: Automatically promoted node FX2_CLK (placed in PIN 23 (CLK0, LVDSCLK0p, Input))
     Info: Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G2
+    Info: Following destination nodes may be non-global or may not use global or regional clocks
+        Info: Destination node ATLAS_A04
 Info: Starting register packing
 Extra Info: Performing register packing on registers with non-logic cell location assignments
 Extra Info: Completed register packing on registers with non-logic cell location assignments
@@ -1025,51 +1072,80 @@ Extra Info: Moving registers into I/O cells, Multiplier Blocks, and RAM blocks t
 Extra Info: Finished moving registers into I/O cells, Multiplier Blocks, and RAM blocks
 Info: Finished register packing: elapsed time is 00:00:00
     Extra Info: No registers were packed into other blocks
+Warning: Ignored locations or region assignments to the following nodes
+    Warning: Node "ATLAS_A03" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A05" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A07" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A08" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A09" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A11" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A12" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A13" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A14" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A15" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A16" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A17" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A18" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A19" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A20" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A21" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A22" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A23" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A24" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A25" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A27" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A29" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_A31" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C03" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C04" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C05" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C06" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C07" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C08" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C09" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C11" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C12" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C13" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C14" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C15" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C16" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C17" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C18" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C19" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C20" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C21" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C22" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C23" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C24" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C25" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C27" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C29" is assigned to location or region, but does not exist in design
+    Warning: Node "ATLAS_C31" is assigned to location or region, but does not exist in design
+    Warning: Node "FPGA_RXD" is assigned to location or region, but does not exist in design
 Info: Fitter placement preparation operations beginning
 Info: Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info: Fitter placement operations beginning
 Info: Fitter placement was successful
 Info: Fitter placement operations ending: elapsed time is 00:00:00
-Info: Estimated most critical path is register to register delay of 5.800 ns
-    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X13_Y12; Fanout = 3; REG Node = 'clock_count[0]'
-    Info: 2: + IC(0.954 ns) + CELL(0.621 ns) = 1.575 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~301'
-    Info: 3: + IC(0.000 ns) + CELL(0.086 ns) = 1.661 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~303'
-    Info: 4: + IC(0.000 ns) + CELL(0.086 ns) = 1.747 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~305'
-    Info: 5: + IC(0.000 ns) + CELL(0.086 ns) = 1.833 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~307'
-    Info: 6: + IC(0.000 ns) + CELL(0.086 ns) = 1.919 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~309'
-    Info: 7: + IC(0.000 ns) + CELL(0.086 ns) = 2.005 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~311'
-    Info: 8: + IC(0.000 ns) + CELL(0.086 ns) = 2.091 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~313'
-    Info: 9: + IC(0.000 ns) + CELL(0.086 ns) = 2.177 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~315'
-    Info: 10: + IC(0.000 ns) + CELL(0.086 ns) = 2.263 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~317'
-    Info: 11: + IC(0.000 ns) + CELL(0.086 ns) = 2.349 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~319'
-    Info: 12: + IC(0.000 ns) + CELL(0.086 ns) = 2.435 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~321'
-    Info: 13: + IC(0.000 ns) + CELL(0.086 ns) = 2.521 ns; Loc. = LAB_X14_Y12; Fanout = 2; COMB Node = 'Add0~323'
-    Info: 14: + IC(0.107 ns) + CELL(0.086 ns) = 2.714 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'Add0~325'
-    Info: 15: + IC(0.000 ns) + CELL(0.086 ns) = 2.800 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'Add0~327'
-    Info: 16: + IC(0.000 ns) + CELL(0.086 ns) = 2.886 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'Add0~329'
-    Info: 17: + IC(0.000 ns) + CELL(0.086 ns) = 2.972 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'Add0~331'
-    Info: 18: + IC(0.000 ns) + CELL(0.086 ns) = 3.058 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'Add0~333'
-    Info: 19: + IC(0.000 ns) + CELL(0.086 ns) = 3.144 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'Add0~335'
-    Info: 20: + IC(0.000 ns) + CELL(0.086 ns) = 3.230 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'Add0~337'
-    Info: 21: + IC(0.000 ns) + CELL(0.086 ns) = 3.316 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'Add0~339'
-    Info: 22: + IC(0.000 ns) + CELL(0.086 ns) = 3.402 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'Add0~341'
-    Info: 23: + IC(0.000 ns) + CELL(0.086 ns) = 3.488 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'Add0~343'
-    Info: 24: + IC(0.000 ns) + CELL(0.086 ns) = 3.574 ns; Loc. = LAB_X14_Y11; Fanout = 2; COMB Node = 'Add0~345'
-    Info: 25: + IC(0.000 ns) + CELL(0.086 ns) = 3.660 ns; Loc. = LAB_X14_Y11; Fanout = 1; COMB Node = 'Add0~347'
-    Info: 26: + IC(0.000 ns) + CELL(0.506 ns) = 4.166 ns; Loc. = LAB_X14_Y11; Fanout = 1; COMB Node = 'Add0~348'
-    Info: 27: + IC(0.875 ns) + CELL(0.651 ns) = 5.692 ns; Loc. = LAB_X15_Y12; Fanout = 1; COMB Node = 'clock_count~417'
-    Info: 28: + IC(0.000 ns) + CELL(0.108 ns) = 5.800 ns; Loc. = LAB_X15_Y12; Fanout = 2; REG Node = 'clock_count[24]'
-    Info: Total cell delay = 3.864 ns ( 66.62 % )
-    Info: Total interconnect delay = 1.936 ns ( 33.38 % )
+Info: Estimated most critical path is memory to register delay of 7.388 ns
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = M4K_X11_Y6; Fanout = 1; MEM Node = 'rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2|ram_block3a4~portb_address_reg3'
+    Info: 2: + IC(0.000 ns) + CELL(3.758 ns) = 3.758 ns; Loc. = M4K_X11_Y6; Fanout = 1; MEM Node = 'rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2|q_b[4]'
+    Info: 3: + IC(0.883 ns) + CELL(0.206 ns) = 4.847 ns; Loc. = LAB_X12_Y6; Fanout = 1; COMB Node = 'rs232_xmit:Ozy_rs232_xmit|Mux0~56'
+    Info: 4: + IC(0.605 ns) + CELL(0.206 ns) = 5.658 ns; Loc. = LAB_X12_Y6; Fanout = 1; COMB Node = 'rs232_xmit:Ozy_rs232_xmit|Mux0~57'
+    Info: 5: + IC(0.441 ns) + CELL(0.370 ns) = 6.469 ns; Loc. = LAB_X12_Y6; Fanout = 1; COMB Node = 'rs232_xmit:Ozy_rs232_xmit|Selector3~338'
+    Info: 6: + IC(0.605 ns) + CELL(0.206 ns) = 7.280 ns; Loc. = LAB_X12_Y6; Fanout = 1; COMB Node = 'rs232_xmit:Ozy_rs232_xmit|Selector3~341'
+    Info: 7: + IC(0.000 ns) + CELL(0.108 ns) = 7.388 ns; Loc. = LAB_X12_Y6; Fanout = 3; REG Node = 'rs232_xmit:Ozy_rs232_xmit|xmit_o'
+    Info: Total cell delay = 4.854 ns ( 65.70 % )
+    Info: Total interconnect delay = 2.534 ns ( 34.30 % )
 Info: Fitter routing operations beginning
 Info: Average interconnect usage is 0% of the available device resources. Peak interconnect usage is 0%
-    Info: The peak interconnect region extends from location X11_Y10 to location X22_Y19
+    Info: The peak interconnect region extends from location X23_Y10 to location X34_Y19
 Info: Fitter routing operations ending: elapsed time is 00:00:01
 Info: The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info: Optimizations that may affect the design's routability were skipped
     Info: Optimizations that may affect the design's timing were skipped
 Info: Started post-fitting delay annotation
-Warning: Found 54 output pins without output pin load capacitance assignment
+Warning: Found 57 output pins without output pin load capacitance assignment
     Info: Pin "FX2_FD[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "FX2_FD[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "FX2_FD[2]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
@@ -1124,7 +1200,11 @@ Warning: Found 54 output pins without output pin load capacitance assignment
     Info: Pin "GPIO_nIOE" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "ATLAS_A02" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "ATLAS_A10" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "ATLAS_A06" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "ATLAS_A04" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FPGA_TXD" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
 Info: Delay annotation completed successfully
+Info: Design uses memory blocks. Violating setup or hold times of memory block address registers for either read or write operations could cause memory contents to be corrupted. Make sure that all memory block address registers meet the setup and hold time requirements.
 Warning: Following 41 pins have no output enable or a GND or VCC output enable - later changes to this connectivity may change fitting results
     Info: Pin FX2_FD[0] has a permanently disabled output enable
     Info: Pin FX2_FD[1] has a permanently disabled output enable
@@ -1216,9 +1296,9 @@ Warning: Following 48 pins have nothing, GND, or VCC driving datain port -- chan
     Info: Pin FIFO_ADR[0] has GND driving its datain port
     Info: Pin FIFO_ADR[1] has GND driving its datain port
     Info: Pin GPIO_nIOE has GND driving its datain port
-Info: Quartus II Fitter was successful. 0 errors, 3 warnings
-    Info: Allocated 171 megabytes of memory during processing
-    Info: Processing ended: Tue Mar 06 23:17:22 2007
-    Info: Elapsed time: 00:00:12
+Info: Quartus II Fitter was successful. 0 errors, 53 warnings
+    Info: Allocated 172 megabytes of memory during processing
+    Info: Processing ended: Sun Mar 11 08:33:27 2007
+    Info: Elapsed time: 00:00:16
 
 

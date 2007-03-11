@@ -1,5 +1,5 @@
 Analysis & Synthesis report for WrapTest
-Tue Mar 06 23:17:03 2007
+Sun Mar 11 08:33:04 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -12,8 +12,15 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
   4. Analysis & Synthesis Source Files Read
   5. Analysis & Synthesis Resource Usage Summary
   6. Analysis & Synthesis Resource Utilization by Entity
-  7. General Register Statistics
-  8. Analysis & Synthesis Messages
+  7. Analysis & Synthesis RAM Summary
+  8. State Machine - |WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state
+  9. State Machine - |WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Source assignments for rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2
+ 13. Parameter Settings for User Entity Instance: rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component
+ 14. scfifo Parameter Settings by Entity Instance
+ 15. Analysis & Synthesis Messages
 
 
 
@@ -39,14 +46,14 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Mar 06 23:17:03 2007   ;
+; Analysis & Synthesis Status        ; Successful - Sun Mar 11 08:33:04 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; WrapTest                                ;
 ; Top-level Entity Name              ; WrapTest                                ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 60                                      ;
-;     Total combinational functions  ; 60                                      ;
-;     Dedicated logic registers      ; 34                                      ;
+; Total logic elements               ; 185                                     ;
+;     Total combinational functions  ; 185                                     ;
+;     Dedicated logic registers      ; 121                                     ;
 ; Total registers                    ; N/A until Partition Merge               ;
 ; Total pins                         ; N/A until Partition Merge               ;
 ; Total virtual pins                 ; N/A until Partition Merge               ;
@@ -118,14 +125,30 @@ applicable agreement for further details.
 +--------------------------------------------------------------------+--------------------+--------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                  ;
-+----------------------------------+-----------------+------------------------+-----------------------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                              ;
-+----------------------------------+-----------------+------------------------+-----------------------------------------------------------+
-; WrapTest.v                       ; yes             ; User Verilog HDL File  ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTest.v        ;
-; loopBackChecker.v                ; yes             ; User Verilog HDL File  ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/loopBackChecker.v ;
-+----------------------------------+-----------------+------------------------+-----------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                      ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------+
+; WrapTest.v                       ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTest.v                ;
+; loopBackChecker.v                ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/loopBackChecker.v         ;
+; rs232_xmit.v                     ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/rs232_xmit.v              ;
+; rs232_tx_fifo.v                  ; yes             ; Other                        ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/rs232_tx_fifo.v           ;
+; scfifo.tdf                       ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/scfifo.tdf    ;
+; a_regfifo.inc                    ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/a_regfifo.inc ;
+; a_dpfifo.inc                     ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/a_dpfifo.inc  ;
+; a_i2fifo.inc                     ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/a_i2fifo.inc  ;
+; a_fffifo.inc                     ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/a_fffifo.inc  ;
+; a_f2fifo.inc                     ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/a_f2fifo.inc  ;
+; aglobal61.inc                    ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/aglobal61.inc ;
+; db/scfifo_cdv.tdf                ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/db/scfifo_cdv.tdf         ;
+; db/a_dpfifo_jjv.tdf              ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/db/a_dpfifo_jjv.tdf       ;
+; db/a_fefifo_76e.tdf              ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/db/a_fefifo_76e.tdf       ;
+; db/cntr_pj7.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/db/cntr_pj7.tdf           ;
+; db/dpram_1it.tdf                 ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/db/dpram_1it.tdf          ;
+; db/altsyncram_0sj1.tdf           ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/db/altsyncram_0sj1.tdf    ;
+; db/cntr_djb.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/db/cntr_djb.tdf           ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------+
 
 
 +-------------------------------------------------------+
@@ -133,40 +156,85 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 60      ;
+; Estimated Total logic elements              ; 185     ;
 ;                                             ;         ;
-; Total combinational functions               ; 60      ;
+; Total combinational functions               ; 185     ;
 ; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 14      ;
-;     -- 3 input functions                    ; 2       ;
-;     -- <=2 input functions                  ; 44      ;
+;     -- 4 input functions                    ; 45      ;
+;     -- 3 input functions                    ; 28      ;
+;     -- <=2 input functions                  ; 112     ;
 ;                                             ;         ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 36      ;
-;     -- arithmetic mode                      ; 24      ;
+;     -- normal mode                          ; 106     ;
+;     -- arithmetic mode                      ; 79      ;
 ;                                             ;         ;
-; Total registers                             ; 34      ;
-;     -- Dedicated logic registers            ; 34      ;
+; Total registers                             ; 121     ;
+;     -- Dedicated logic registers            ; 121     ;
 ;     -- I/O registers                        ; 0       ;
 ;                                             ;         ;
 ; I/O pins                                    ; 41      ;
+; Total memory bits                           ; 128     ;
 ; Maximum fan-out node                        ; FX2_CLK ;
-; Maximum fan-out                             ; 34      ;
-; Total fan-out                               ; 291     ;
-; Average fan-out                             ; 1.46    ;
+; Maximum fan-out                             ; 130     ;
+; Total fan-out                               ; 939     ;
+; Average fan-out                             ; 2.23    ;
 +---------------------------------------------+---------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                    ;
-+-----------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+
-; Compilation Hierarchy Node        ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                    ;
-+-----------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+
-; |WrapTest                         ; 60 (50)           ; 34 (28)      ; 0           ; 0            ; 0       ; 0         ; 41   ; 0            ; |WrapTest                              ;
-;    |loopBackCheck:loopBackA02C02| ; 5 (5)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA02C02 ;
-;    |loopBackCheck:loopBackA10C10| ; 5 (5)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA10C10 ;
-+-----------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                            ;
++----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Compilation Hierarchy Node                         ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                           ;
++----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; |WrapTest                                          ; 185 (127)         ; 121 (79)     ; 128         ; 0            ; 0       ; 0         ; 41   ; 0            ; |WrapTest                                                                                                                                                                     ;
+;    |loopBackCheck:loopBackA02C02|                  ; 5 (5)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA02C02                                                                                                                                        ;
+;    |loopBackCheck:loopBackA10C10|                  ; 5 (5)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA10C10                                                                                                                                        ;
+;    |rs232_xmit:Ozy_rs232_xmit|                     ; 48 (26)           ; 36 (22)      ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit                                                                                                                                           ;
+;       |rs232_tx_fifo:tx_fifo|                      ; 22 (0)            ; 14 (0)       ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo                                                                                                                     ;
+;          |scfifo:scfifo_component|                 ; 22 (0)            ; 14 (0)       ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component                                                                                             ;
+;             |scfifo_cdv:auto_generated|            ; 22 (0)            ; 14 (0)       ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated                                                                   ;
+;                |a_dpfifo_jjv:dpfifo|               ; 22 (2)            ; 14 (0)       ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo                                               ;
+;                   |a_fefifo_76e:fifo_state|        ; 12 (8)            ; 6 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state                       ;
+;                      |cntr_pj7:count_usedw|        ; 4 (4)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state|cntr_pj7:count_usedw  ;
+;                   |cntr_djb:rd_ptr_count|          ; 4 (4)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:rd_ptr_count                         ;
+;                   |cntr_djb:wr_ptr|                ; 4 (4)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:wr_ptr                               ;
+;                   |dpram_1it:FIFOram|              ; 0 (0)             ; 0 (0)        ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram                             ;
+;                      |altsyncram_0sj1:altsyncram2| ; 0 (0)             ; 0 (0)        ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2 ;
++----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                                                                   ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; Name                                                                                                                                                                           ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF  ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 16           ; 8            ; 16           ; 8            ; 128  ; None ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------+
+; State Machine - |WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state   ;
++----------------+----------------+----------------+----------------+
+; Name           ; input_state.00 ; input_state.10 ; input_state.01 ;
++----------------+----------------+----------------+----------------+
+; input_state.00 ; 0              ; 0              ; 0              ;
+; input_state.10 ; 1              ; 1              ; 0              ;
+; input_state.01 ; 1              ; 0              ; 1              ;
++----------------+----------------+----------------+----------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------+
+; State Machine - |WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state      ;
++-----------------+-----------------+-----------------+-----------------+
+; Name            ; output_state.00 ; output_state.10 ; output_state.01 ;
++-----------------+-----------------+-----------------+-----------------+
+; output_state.00 ; 0               ; 0               ; 0               ;
+; output_state.10 ; 1               ; 1               ; 0               ;
+; output_state.01 ; 1               ; 0               ; 1               ;
++-----------------+-----------------+-----------------+-----------------+
 
 
 +------------------------------------------------------+
@@ -174,14 +242,76 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 34    ;
+; Total registers                              ; 121   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Synchronous Load   ; 8     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 26    ;
+; Number of registers using Clock Enable       ; 58    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|xmit_count[0]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state~7 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2 ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                                                                           ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                                                                            ;
++---------------------------------+--------------------+------+------------------------------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component ;
++-------------------------+------------+-------------------------------------------------------------------------------+
+; Parameter Name          ; Value      ; Type                                                                          ;
++-------------------------+------------+-------------------------------------------------------------------------------+
+; AUTO_CARRY_CHAINS       ; ON         ; AUTO_CARRY                                                                    ;
+; IGNORE_CARRY_BUFFERS    ; OFF        ; IGNORE_CARRY                                                                  ;
+; AUTO_CASCADE_CHAINS     ; ON         ; AUTO_CASCADE                                                                  ;
+; IGNORE_CASCADE_BUFFERS  ; OFF        ; IGNORE_CASCADE                                                                ;
+; lpm_width               ; 8          ; Signed Integer                                                                ;
+; LPM_NUMWORDS            ; 16         ; Signed Integer                                                                ;
+; LPM_WIDTHU              ; 4          ; Signed Integer                                                                ;
+; LPM_SHOWAHEAD           ; OFF        ; Untyped                                                                       ;
+; UNDERFLOW_CHECKING      ; ON         ; Untyped                                                                       ;
+; OVERFLOW_CHECKING       ; ON         ; Untyped                                                                       ;
+; ALLOW_RWCYCLE_WHEN_FULL ; OFF        ; Untyped                                                                       ;
+; ADD_RAM_OUTPUT_REGISTER ; OFF        ; Untyped                                                                       ;
+; ALMOST_FULL_VALUE       ; 0          ; Untyped                                                                       ;
+; ALMOST_EMPTY_VALUE      ; 0          ; Untyped                                                                       ;
+; USE_EAB                 ; ON         ; Untyped                                                                       ;
+; MAXIMIZE_SPEED          ; 5          ; Untyped                                                                       ;
+; DEVICE_FAMILY           ; Cyclone II ; Untyped                                                                       ;
+; OPTIMIZE_FOR_SPEED      ; 5          ; Untyped                                                                       ;
+; CBXI_PARAMETER          ; scfifo_cdv ; Untyped                                                                       ;
++-------------------------+------------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------+
+; scfifo Parameter Settings by Entity Instance                                                         ;
++----------------------------+-------------------------------------------------------------------------+
+; Name                       ; Value                                                                   ;
++----------------------------+-------------------------------------------------------------------------+
+; Number of entity instances ; 1                                                                       ;
+; Entity Instance            ; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component ;
+;     -- FIFO Type           ; Single Clock                                                            ;
+;     -- lpm_width           ; 8                                                                       ;
+;     -- LPM_NUMWORDS        ; 16                                                                      ;
+;     -- LPM_SHOWAHEAD       ; OFF                                                                     ;
+;     -- USE_EAB             ; ON                                                                      ;
++----------------------------+-------------------------------------------------------------------------+
 
 
 +-------------------------------+
@@ -190,22 +320,78 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Tue Mar 06 23:16:59 2007
+    Info: Processing started: Sun Mar 11 08:32:53 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off WrapTest -c WrapTest
 Info: Found 1 design units, including 1 entities, in source file WrapTest.v
     Info: Found entity 1: WrapTest
 Info: Found 1 design units, including 1 entities, in source file loopBackChecker.v
     Info: Found entity 1: loopBackCheck
+Info: Found 1 design units, including 1 entities, in source file rs232_xmit.v
+    Info: Found entity 1: rs232_xmit
 Info: Elaborating entity "WrapTest" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(119): truncated value with size 32 to match size of target (25)
-Warning (10034): Output port "SLWR" at WrapTest.v(33) has no driver
-Warning (10034): Output port "SLRD" at WrapTest.v(34) has no driver
-Warning (10034): Output port "SLOE" at WrapTest.v(35) has no driver
-Warning (10034): Output port "PKEND" at WrapTest.v(36) has no driver
-Warning (10034): Output port "FIFO_ADR[1]" at WrapTest.v(37) has no driver
-Warning (10034): Output port "FIFO_ADR[0]" at WrapTest.v(37) has no driver
-Warning (10034): Output port "GPIO_nIOE" at WrapTest.v(55) has no driver
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(109): truncated value with size 32 to match size of target (17)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(133): truncated value with size 32 to match size of target (25)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(159): truncated value with size 32 to match size of target (25)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(168): truncated value with size 32 to match size of target (8)
+Warning (10034): Output port "SLWR" at WrapTest.v(34) has no driver
+Warning (10034): Output port "SLRD" at WrapTest.v(35) has no driver
+Warning (10034): Output port "SLOE" at WrapTest.v(36) has no driver
+Warning (10034): Output port "PKEND" at WrapTest.v(37) has no driver
+Warning (10034): Output port "FIFO_ADR[1]" at WrapTest.v(38) has no driver
+Warning (10034): Output port "FIFO_ADR[0]" at WrapTest.v(38) has no driver
+Warning (10034): Output port "GPIO_nIOE" at WrapTest.v(56) has no driver
 Info: Elaborating entity "loopBackCheck" for hierarchy "loopBackCheck:loopBackA02C02"
+Info: Elaborating entity "rs232_xmit" for hierarchy "rs232_xmit:Ozy_rs232_xmit"
+Warning (10230): Verilog HDL assignment warning at rs232_xmit.v(115): truncated value with size 32 to match size of target (4)
+Warning (10034): Output port "space_avail_o" at rs232_xmit.v(24) has no driver
+Warning: Using design file rs232_tx_fifo.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info: Found entity 1: rs232_tx_fifo
+Info: Elaborating entity "rs232_tx_fifo" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo"
+Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus61/quartus/libraries/megafunctions/scfifo.tdf
+    Info: Found entity 1: scfifo
+Info: Elaborating entity "scfifo" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component"
+Info: Elaborated megafunction instantiation "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/scfifo_cdv.tdf
+    Info: Found entity 1: scfifo_cdv
+Info: Elaborating entity "scfifo_cdv" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_dpfifo_jjv.tdf
+    Info: Found entity 1: a_dpfifo_jjv
+Info: Elaborating entity "a_dpfifo_jjv" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo"
+Info: Found 1 design units, including 1 entities, in source file db/a_fefifo_76e.tdf
+    Info: Found entity 1: a_fefifo_76e
+Info: Elaborating entity "a_fefifo_76e" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_pj7.tdf
+    Info: Found entity 1: cntr_pj7
+Info: Elaborating entity "cntr_pj7" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state|cntr_pj7:count_usedw"
+Info: Found 1 design units, including 1 entities, in source file db/dpram_1it.tdf
+    Info: Found entity 1: dpram_1it
+Info: Elaborating entity "dpram_1it" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_0sj1.tdf
+    Info: Found entity 1: altsyncram_0sj1
+Info: Elaborating entity "altsyncram_0sj1" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_djb.tdf
+    Info: Found entity 1: cntr_djb
+Info: Elaborating entity "cntr_djb" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:rd_ptr_count"
+Info: State machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state" contains 3 states
+Info: State machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state" contains 3 states
+Info: Selected Auto state machine encoding method for state machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state"
+Info: Encoding result for state machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state"
+    Info: Completed encoding using 3 state bits
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|input_state.00"
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|input_state.10"
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|input_state.01"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state.00" uses code string "000"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state.10" uses code string "110"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state.01" uses code string "101"
+Info: Selected Auto state machine encoding method for state machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state"
+Info: Encoding result for state machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state"
+    Info: Completed encoding using 3 state bits
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|output_state.00"
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|output_state.10"
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|output_state.01"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state.00" uses code string "000"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state.10" uses code string "110"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state.01" uses code string "101"
 Warning: The bidir "FX2_FD[0]" has no source; inserted an always disabled tri-state buffer.
 Warning: The bidir "FX2_FD[1]" has no source; inserted an always disabled tri-state buffer.
 Warning: The bidir "FX2_FD[2]" has no source; inserted an always disabled tri-state buffer.
@@ -255,14 +441,15 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "FIFO_ADR[0]" stuck at GND
     Warning: Pin "FIFO_ADR[1]" stuck at GND
     Warning: Pin "GPIO_nIOE" stuck at GND
-Info: Implemented 166 device resources after synthesis - the final resource count might be different
+Info: Implemented 313 device resources after synthesis - the final resource count might be different
     Info: Implemented 10 input pins
-    Info: Implemented 13 output pins
+    Info: Implemented 16 output pins
     Info: Implemented 82 bidirectional pins
-    Info: Implemented 61 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 57 warnings
-    Info: Allocated 124 megabytes of memory during processing
-    Info: Processing ended: Tue Mar 06 23:17:03 2007
-    Info: Elapsed time: 00:00:04
+    Info: Implemented 197 logic cells
+    Info: Implemented 8 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 63 warnings
+    Info: Allocated 129 megabytes of memory during processing
+    Info: Processing ended: Sun Mar 11 08:33:04 2007
+    Info: Elapsed time: 00:00:11
 
 

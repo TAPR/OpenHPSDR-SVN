@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="WrapTest">
+		<CBX_INST_ENTRY INSTANCE_NAME="|WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component" CBX_FILE_NAME="scfifo_cdv.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

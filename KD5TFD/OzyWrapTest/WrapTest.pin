@@ -158,7 +158,7 @@ VCCIO4                       : 98        : power  :                   : 3.3V    
 GPIO[23]                     : 99        : bidir  : 3.3-V LVTTL       :         : 4         : Y              
 GND                          : 100       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 101       :        :                   :         : 4         :                
-RESERVED_INPUT               : 102       :        :                   :         : 4         :                
+FPGA_TXD                     : 102       : output : 3.3-V LVTTL       :         : 4         : Y              
 RESERVED_INPUT               : 103       :        :                   :         : 4         :                
 RESERVED_INPUT               : 104       :        :                   :         : 4         :                
 RESERVED_INPUT               : 105       :        :                   :         : 3         :                
@@ -199,9 +199,9 @@ RESERVED_INPUT               : 139       :        :                   :         
 GND                          : 140       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 141       :        :                   :         : 3         :                
 RESERVED_INPUT               : 142       :        :                   :         : 3         :                
-RESERVED_INPUT               : 143       :        :                   :         : 3         :                
+ATLAS_A06                    : 143       : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 144       :        :                   :         : 3         :                
-RESERVED_INPUT               : 145       :        :                   :         : 3         :                
+ATLAS_A04                    : 145       : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 146       :        :                   :         : 3         :                
 ATLAS_A02                    : 147       : output : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
