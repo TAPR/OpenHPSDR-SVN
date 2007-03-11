@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 5.994 ns
-From           : ATLAS_C10
-To             : loopBackCheck:loopBackA10C10|not_ok_o
+Actual Time    : 7.100 ns
+From           : ATLAS_C02
+To             : loopBackCheck:loopBackA02C02|not_ok_o
 From Clock     : --
 To Clock       : FX2_CLK
 Failed Paths   : 0
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 10.377 ns
-From           : leds[0]
-To             : DEBUG_LED0
+Actual Time    : 10.876 ns
+From           : rs232_xmit:Ozy_rs232_xmit|xmit_o
+To             : FPGA_TXD
 From Clock     : FX2_CLK
 To Clock       : --
 Failed Paths   : 0
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 6.912 ns
+Actual Time    : 6.908 ns
 From           : FX2_CLK
 To             : ATLAS_A04
 From Clock     : --
@@ -35,9 +35,9 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -5.359 ns
-From           : ATLAS_C02
-To             : loopBackCheck:loopBackA02C02|not_ok_o
+Actual Time    : -6.561 ns
+From           : ATLAS_C10
+To             : loopBackCheck:loopBackA10C10|not_ok_o
 From Clock     : --
 To Clock       : FX2_CLK
 Failed Paths   : 0
@@ -45,9 +45,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'FX2_CLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 142.21 MHz ( period = 7.032 ns )
-From           : rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2|ram_block3a0~portb_address_reg3
-To             : rs232_xmit:Ozy_rs232_xmit|xmit_o
+Actual Time    : 130.17 MHz ( period = 7.682 ns )
+From           : loopBackCheck:loopBackA02C02|not_ok_o
+To             : pass_count[7]
 From Clock     : FX2_CLK
 To Clock       : FX2_CLK
 Failed Paths   : 0

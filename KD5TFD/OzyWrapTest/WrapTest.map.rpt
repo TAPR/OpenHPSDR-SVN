@@ -1,5 +1,5 @@
 Analysis & Synthesis report for WrapTest
-Sun Mar 11 08:33:04 2007
+Sun Mar 11 18:08:43 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -13,14 +13,18 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
   5. Analysis & Synthesis Resource Usage Summary
   6. Analysis & Synthesis Resource Utilization by Entity
   7. Analysis & Synthesis RAM Summary
-  8. State Machine - |WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state
-  9. State Machine - |WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state
- 10. General Register Statistics
- 11. Multiplexer Restructuring Statistics (Restructuring Performed)
- 12. Source assignments for rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2
- 13. Parameter Settings for User Entity Instance: rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component
- 14. scfifo Parameter Settings by Entity Instance
- 15. Analysis & Synthesis Messages
+  8. State Machine - |WrapTest|test_loop_state
+  9. State Machine - |WrapTest|post_xmit_state
+ 10. State Machine - |WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state
+ 11. State Machine - |WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state
+ 12. Registers Removed During Synthesis
+ 13. General Register Statistics
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Source assignments for rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2
+ 16. Parameter Settings for User Entity Instance: rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component
+ 17. scfifo Parameter Settings by Entity Instance
+ 18. Analysis & Synthesis Messages
+ 19. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -46,14 +50,14 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Mar 11 08:33:04 2007   ;
+; Analysis & Synthesis Status        ; Successful - Sun Mar 11 18:08:43 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; WrapTest                                ;
 ; Top-level Entity Name              ; WrapTest                                ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 185                                     ;
-;     Total combinational functions  ; 185                                     ;
-;     Dedicated logic registers      ; 121                                     ;
+; Total logic elements               ; 316                                     ;
+;     Total combinational functions  ; 316                                     ;
+;     Dedicated logic registers      ; 191                                     ;
 ; Total registers                    ; N/A until Partition Merge               ;
 ; Total pins                         ; N/A until Partition Merge               ;
 ; Total virtual pins                 ; N/A until Partition Merge               ;
@@ -130,10 +134,10 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                      ;
 +----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------+
+; rs232_tx_fifo.v                  ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/rs232_tx_fifo.v           ;
 ; WrapTest.v                       ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTest.v                ;
 ; loopBackChecker.v                ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/loopBackChecker.v         ;
 ; rs232_xmit.v                     ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/rs232_xmit.v              ;
-; rs232_tx_fifo.v                  ; yes             ; Other                        ; E:/wjt/radio/projects/Ozy/FPGA/WrapTest/rs232_tx_fifo.v           ;
 ; scfifo.tdf                       ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/scfifo.tdf    ;
 ; a_regfifo.inc                    ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/a_regfifo.inc ;
 ; a_dpfifo.inc                     ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/a_dpfifo.inc  ;
@@ -156,28 +160,28 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 185     ;
+; Estimated Total logic elements              ; 316     ;
 ;                                             ;         ;
-; Total combinational functions               ; 185     ;
+; Total combinational functions               ; 316     ;
 ; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 45      ;
-;     -- 3 input functions                    ; 28      ;
-;     -- <=2 input functions                  ; 112     ;
+;     -- 4 input functions                    ; 97      ;
+;     -- 3 input functions                    ; 43      ;
+;     -- <=2 input functions                  ; 176     ;
 ;                                             ;         ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 106     ;
-;     -- arithmetic mode                      ; 79      ;
+;     -- normal mode                          ; 224     ;
+;     -- arithmetic mode                      ; 92      ;
 ;                                             ;         ;
-; Total registers                             ; 121     ;
-;     -- Dedicated logic registers            ; 121     ;
+; Total registers                             ; 191     ;
+;     -- Dedicated logic registers            ; 191     ;
 ;     -- I/O registers                        ; 0       ;
 ;                                             ;         ;
 ; I/O pins                                    ; 41      ;
 ; Total memory bits                           ; 128     ;
 ; Maximum fan-out node                        ; FX2_CLK ;
-; Maximum fan-out                             ; 130     ;
-; Total fan-out                               ; 939     ;
-; Average fan-out                             ; 2.23    ;
+; Maximum fan-out                             ; 200     ;
+; Total fan-out                               ; 1524    ;
+; Average fan-out                             ; 2.45    ;
 +---------------------------------------------+---------+
 
 
@@ -186,10 +190,10 @@ applicable agreement for further details.
 +----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                         ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                           ;
 +----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; |WrapTest                                          ; 185 (127)         ; 121 (79)     ; 128         ; 0            ; 0       ; 0         ; 41   ; 0            ; |WrapTest                                                                                                                                                                     ;
+; |WrapTest                                          ; 316 (258)         ; 191 (150)    ; 128         ; 0            ; 0       ; 0         ; 41   ; 0            ; |WrapTest                                                                                                                                                                     ;
 ;    |loopBackCheck:loopBackA02C02|                  ; 5 (5)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA02C02                                                                                                                                        ;
 ;    |loopBackCheck:loopBackA10C10|                  ; 5 (5)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA10C10                                                                                                                                        ;
-;    |rs232_xmit:Ozy_rs232_xmit|                     ; 48 (26)           ; 36 (22)      ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit                                                                                                                                           ;
+;    |rs232_xmit:Ozy_rs232_xmit|                     ; 48 (26)           ; 35 (21)      ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit                                                                                                                                           ;
 ;       |rs232_tx_fifo:tx_fifo|                      ; 22 (0)            ; 14 (0)       ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo                                                                                                                     ;
 ;          |scfifo:scfifo_component|                 ; 22 (0)            ; 14 (0)       ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component                                                                                             ;
 ;             |scfifo_cdv:auto_generated|            ; 22 (0)            ; 14 (0)       ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated                                                                   ;
@@ -211,6 +215,66 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
 ; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 16           ; 8            ; 16           ; 8            ; 128  ; None ;
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |WrapTest|test_loop_state                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ;
++-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+; Name                  ; test_loop_state.00001 ; test_loop_state.11010 ; test_loop_state.00010 ; test_loop_state.00011 ; test_loop_state.00100 ; test_loop_state.01101 ; test_loop_state.00110 ; test_loop_state.00101 ; test_loop_state.01000 ; test_loop_state.00111 ; test_loop_state.01010 ; test_loop_state.01001 ; test_loop_state.01111 ; test_loop_state.01011 ; test_loop_state.01100 ; test_loop_state.01110 ; test_loop_state.10000 ; test_loop_state.10001 ; test_loop_state.10010 ; test_loop_state.10011 ; test_loop_state.10100 ; test_loop_state.10101 ; test_loop_state.10110 ; test_loop_state.10111 ; test_loop_state.11000 ; test_loop_state.11001 ; test_loop_state.00000 ;
++-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+; test_loop_state.00000 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ;
+; test_loop_state.11001 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 1                     ;
+; test_loop_state.11000 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 1                     ;
+; test_loop_state.10111 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.10110 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.10101 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.10100 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.10011 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.10010 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.10001 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.10000 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.01110 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.01100 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.01011 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.01111 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.01001 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.01010 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.00111 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.01000 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.00101 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.00110 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.01101 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.00100 ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.00011 ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.00010 ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.11010 ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; test_loop_state.00001 ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
++-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |WrapTest|post_xmit_state                                                                                                                                                                                                                                                                                                                                                     ;
++-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+; Name                  ; post_xmit_state.00111 ; post_xmit_state.01001 ; post_xmit_state.01011 ; post_xmit_state.01100 ; post_xmit_state.01101 ; post_xmit_state.10001 ; post_xmit_state.10010 ; post_xmit_state.10011 ; post_xmit_state.10100 ; post_xmit_state.10101 ; post_xmit_state.10110 ; post_xmit_state.10111 ; post_xmit_state.11000 ; post_xmit_state.11001 ; post_xmit_state.11010 ;
++-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+; post_xmit_state.11010 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ;
+; post_xmit_state.11001 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 1                     ;
+; post_xmit_state.11000 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 1                     ;
+; post_xmit_state.10111 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 1                     ;
+; post_xmit_state.10110 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; post_xmit_state.10101 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; post_xmit_state.10100 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; post_xmit_state.10011 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; post_xmit_state.10010 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; post_xmit_state.10001 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; post_xmit_state.01101 ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; post_xmit_state.01100 ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; post_xmit_state.01011 ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; post_xmit_state.01001 ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; post_xmit_state.00111 ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
++-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+
 
 
 Encoding Type:  One-Hot
@@ -237,17 +301,40 @@ Encoding Type:  One-Hot
 +-----------------+-----------------+-----------------+-----------------+
 
 
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; char_to_xmit[7]                        ; Stuck at GND due to stuck port data_in ;
+; rs232_xmit_reg[7]                      ; Stuck at GND due to stuck port data_in ;
+; Ozy_rs232_xmit/data_in_holding[7]      ; Stuck at GND due to stuck port data_in ;
+; test_loop_state.00101                  ; Lost fanout                            ;
+; test_loop_state~76                     ; Lost fanout                            ;
+; test_loop_state~77                     ; Lost fanout                            ;
+; test_loop_state~78                     ; Lost fanout                            ;
+; test_loop_state~79                     ; Lost fanout                            ;
+; test_loop_state~80                     ; Lost fanout                            ;
+; post_xmit_state~7                      ; Lost fanout                            ;
+; post_xmit_state~8                      ; Lost fanout                            ;
+; post_xmit_state~9                      ; Lost fanout                            ;
+; post_xmit_state~10                     ; Lost fanout                            ;
+; post_xmit_state~11                     ; Lost fanout                            ;
+; Total Number of Removed Registers = 14 ;                                        ;
++----------------------------------------+----------------------------------------+
+
+
 +------------------------------------------------------+
 ; General Register Statistics                          ;
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 121   ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 8     ;
+; Total registers                              ; 191   ;
+; Number of registers using Synchronous Clear  ; 36    ;
+; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 58    ;
+; Number of registers using Clock Enable       ; 103   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -257,8 +344,11 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|xmit_count[0]  ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state~7 ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |WrapTest|rs232_delay_count[13]                    ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |WrapTest|pass_count[7]                            ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|xmit_count[3]  ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; No         ; |WrapTest|test_loop_state~21                       ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state~6 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
 
 
@@ -320,8 +410,10 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Mar 11 08:32:53 2007
+    Info: Processing started: Sun Mar 11 18:08:24 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off WrapTest -c WrapTest
+Info: Found 1 design units, including 1 entities, in source file rs232_tx_fifo.v
+    Info: Found entity 1: rs232_tx_fifo
 Info: Found 1 design units, including 1 entities, in source file WrapTest.v
     Info: Found entity 1: WrapTest
 Info: Found 1 design units, including 1 entities, in source file loopBackChecker.v
@@ -329,10 +421,14 @@ Info: Found 1 design units, including 1 entities, in source file loopBackChecker
 Info: Found 1 design units, including 1 entities, in source file rs232_xmit.v
     Info: Found entity 1: rs232_xmit
 Info: Elaborating entity "WrapTest" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(109): truncated value with size 32 to match size of target (17)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(113): truncated value with size 32 to match size of target (17)
 Warning (10230): Verilog HDL assignment warning at WrapTest.v(133): truncated value with size 32 to match size of target (25)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(159): truncated value with size 32 to match size of target (25)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(168): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(197): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(209): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(155): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(158): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(283): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(293): truncated value with size 32 to match size of target (16)
 Warning (10034): Output port "SLWR" at WrapTest.v(34) has no driver
 Warning (10034): Output port "SLRD" at WrapTest.v(35) has no driver
 Warning (10034): Output port "SLOE" at WrapTest.v(36) has no driver
@@ -344,8 +440,6 @@ Info: Elaborating entity "loopBackCheck" for hierarchy "loopBackCheck:loopBackA0
 Info: Elaborating entity "rs232_xmit" for hierarchy "rs232_xmit:Ozy_rs232_xmit"
 Warning (10230): Verilog HDL assignment warning at rs232_xmit.v(115): truncated value with size 32 to match size of target (4)
 Warning (10034): Output port "space_avail_o" at rs232_xmit.v(24) has no driver
-Warning: Using design file rs232_tx_fifo.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
-    Info: Found entity 1: rs232_tx_fifo
 Info: Elaborating entity "rs232_tx_fifo" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo"
 Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus61/quartus/libraries/megafunctions/scfifo.tdf
     Info: Found entity 1: scfifo
@@ -372,8 +466,103 @@ Info: Elaborating entity "altsyncram_0sj1" for hierarchy "rs232_xmit:Ozy_rs232_x
 Info: Found 1 design units, including 1 entities, in source file db/cntr_djb.tdf
     Info: Found entity 1: cntr_djb
 Info: Elaborating entity "cntr_djb" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:rd_ptr_count"
+Warning: Reduced register "char_to_xmit[7]" with stuck data_in port to stuck value GND
+Warning: Reduced register "rs232_xmit_reg[7]" with stuck data_in port to stuck value GND
+Warning: Reduced register "rs232_xmit:Ozy_rs232_xmit|data_in_holding[7]" with stuck data_in port to stuck value GND
+Info: State machine "|WrapTest|test_loop_state" contains 27 states
+Info: State machine "|WrapTest|post_xmit_state" contains 15 states
 Info: State machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state" contains 3 states
 Info: State machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state" contains 3 states
+Info: Selected Auto state machine encoding method for state machine "|WrapTest|test_loop_state"
+Info: Encoding result for state machine "|WrapTest|test_loop_state"
+    Info: Completed encoding using 27 state bits
+        Info: Encoded state bit "test_loop_state.00001"
+        Info: Encoded state bit "test_loop_state.11010"
+        Info: Encoded state bit "test_loop_state.00010"
+        Info: Encoded state bit "test_loop_state.00011"
+        Info: Encoded state bit "test_loop_state.00100"
+        Info: Encoded state bit "test_loop_state.01101"
+        Info: Encoded state bit "test_loop_state.00110"
+        Info: Encoded state bit "test_loop_state.00101"
+        Info: Encoded state bit "test_loop_state.01000"
+        Info: Encoded state bit "test_loop_state.00111"
+        Info: Encoded state bit "test_loop_state.01010"
+        Info: Encoded state bit "test_loop_state.01001"
+        Info: Encoded state bit "test_loop_state.01111"
+        Info: Encoded state bit "test_loop_state.01011"
+        Info: Encoded state bit "test_loop_state.01100"
+        Info: Encoded state bit "test_loop_state.01110"
+        Info: Encoded state bit "test_loop_state.10000"
+        Info: Encoded state bit "test_loop_state.10001"
+        Info: Encoded state bit "test_loop_state.10010"
+        Info: Encoded state bit "test_loop_state.10011"
+        Info: Encoded state bit "test_loop_state.10100"
+        Info: Encoded state bit "test_loop_state.10101"
+        Info: Encoded state bit "test_loop_state.10110"
+        Info: Encoded state bit "test_loop_state.10111"
+        Info: Encoded state bit "test_loop_state.11000"
+        Info: Encoded state bit "test_loop_state.11001"
+        Info: Encoded state bit "test_loop_state.00000"
+    Info: State "|WrapTest|test_loop_state.00000" uses code string "000000000000000000000000000"
+    Info: State "|WrapTest|test_loop_state.11001" uses code string "000000000000000000000000011"
+    Info: State "|WrapTest|test_loop_state.11000" uses code string "000000000000000000000000101"
+    Info: State "|WrapTest|test_loop_state.10111" uses code string "000000000000000000000001001"
+    Info: State "|WrapTest|test_loop_state.10110" uses code string "000000000000000000000010001"
+    Info: State "|WrapTest|test_loop_state.10101" uses code string "000000000000000000000100001"
+    Info: State "|WrapTest|test_loop_state.10100" uses code string "000000000000000000001000001"
+    Info: State "|WrapTest|test_loop_state.10011" uses code string "000000000000000000010000001"
+    Info: State "|WrapTest|test_loop_state.10010" uses code string "000000000000000000100000001"
+    Info: State "|WrapTest|test_loop_state.10001" uses code string "000000000000000001000000001"
+    Info: State "|WrapTest|test_loop_state.10000" uses code string "000000000000000010000000001"
+    Info: State "|WrapTest|test_loop_state.01110" uses code string "000000000000000100000000001"
+    Info: State "|WrapTest|test_loop_state.01100" uses code string "000000000000001000000000001"
+    Info: State "|WrapTest|test_loop_state.01011" uses code string "000000000000010000000000001"
+    Info: State "|WrapTest|test_loop_state.01111" uses code string "000000000000100000000000001"
+    Info: State "|WrapTest|test_loop_state.01001" uses code string "000000000001000000000000001"
+    Info: State "|WrapTest|test_loop_state.01010" uses code string "000000000010000000000000001"
+    Info: State "|WrapTest|test_loop_state.00111" uses code string "000000000100000000000000001"
+    Info: State "|WrapTest|test_loop_state.01000" uses code string "000000001000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00101" uses code string "000000010000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00110" uses code string "000000100000000000000000001"
+    Info: State "|WrapTest|test_loop_state.01101" uses code string "000001000000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00100" uses code string "000010000000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00011" uses code string "000100000000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00010" uses code string "001000000000000000000000001"
+    Info: State "|WrapTest|test_loop_state.11010" uses code string "010000000000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00001" uses code string "100000000000000000000000001"
+Info: Selected Auto state machine encoding method for state machine "|WrapTest|post_xmit_state"
+Info: Encoding result for state machine "|WrapTest|post_xmit_state"
+    Info: Completed encoding using 15 state bits
+        Info: Encoded state bit "post_xmit_state.00111"
+        Info: Encoded state bit "post_xmit_state.01001"
+        Info: Encoded state bit "post_xmit_state.01011"
+        Info: Encoded state bit "post_xmit_state.01100"
+        Info: Encoded state bit "post_xmit_state.01101"
+        Info: Encoded state bit "post_xmit_state.10001"
+        Info: Encoded state bit "post_xmit_state.10010"
+        Info: Encoded state bit "post_xmit_state.10011"
+        Info: Encoded state bit "post_xmit_state.10100"
+        Info: Encoded state bit "post_xmit_state.10101"
+        Info: Encoded state bit "post_xmit_state.10110"
+        Info: Encoded state bit "post_xmit_state.10111"
+        Info: Encoded state bit "post_xmit_state.11000"
+        Info: Encoded state bit "post_xmit_state.11001"
+        Info: Encoded state bit "post_xmit_state.11010"
+    Info: State "|WrapTest|post_xmit_state.11010" uses code string "000000000000000"
+    Info: State "|WrapTest|post_xmit_state.11001" uses code string "000000000000011"
+    Info: State "|WrapTest|post_xmit_state.11000" uses code string "000000000000101"
+    Info: State "|WrapTest|post_xmit_state.10111" uses code string "000000000001001"
+    Info: State "|WrapTest|post_xmit_state.10110" uses code string "000000000010001"
+    Info: State "|WrapTest|post_xmit_state.10101" uses code string "000000000100001"
+    Info: State "|WrapTest|post_xmit_state.10100" uses code string "000000001000001"
+    Info: State "|WrapTest|post_xmit_state.10011" uses code string "000000010000001"
+    Info: State "|WrapTest|post_xmit_state.10010" uses code string "000000100000001"
+    Info: State "|WrapTest|post_xmit_state.10001" uses code string "000001000000001"
+    Info: State "|WrapTest|post_xmit_state.01101" uses code string "000010000000001"
+    Info: State "|WrapTest|post_xmit_state.01100" uses code string "000100000000001"
+    Info: State "|WrapTest|post_xmit_state.01011" uses code string "001000000000001"
+    Info: State "|WrapTest|post_xmit_state.01001" uses code string "010000000000001"
+    Info: State "|WrapTest|post_xmit_state.00111" uses code string "100000000000001"
 Info: Selected Auto state machine encoding method for state machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state"
 Info: Encoding result for state machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state"
     Info: Completed encoding using 3 state bits
@@ -441,15 +630,33 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "FIFO_ADR[0]" stuck at GND
     Warning: Pin "FIFO_ADR[1]" stuck at GND
     Warning: Pin "GPIO_nIOE" stuck at GND
-Info: Implemented 313 device resources after synthesis - the final resource count might be different
+Info: 11 registers lost all their fanouts during netlist optimizations. The first 11 are displayed below.
+    Info: Register "test_loop_state.00101" lost all its fanouts during netlist optimizations.
+    Info: Register "test_loop_state~76" lost all its fanouts during netlist optimizations.
+    Info: Register "test_loop_state~77" lost all its fanouts during netlist optimizations.
+    Info: Register "test_loop_state~78" lost all its fanouts during netlist optimizations.
+    Info: Register "test_loop_state~79" lost all its fanouts during netlist optimizations.
+    Info: Register "test_loop_state~80" lost all its fanouts during netlist optimizations.
+    Info: Register "post_xmit_state~7" lost all its fanouts during netlist optimizations.
+    Info: Register "post_xmit_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "post_xmit_state~9" lost all its fanouts during netlist optimizations.
+    Info: Register "post_xmit_state~10" lost all its fanouts during netlist optimizations.
+    Info: Register "post_xmit_state~11" lost all its fanouts during netlist optimizations.
+Info: Implemented 453 device resources after synthesis - the final resource count might be different
     Info: Implemented 10 input pins
     Info: Implemented 16 output pins
     Info: Implemented 82 bidirectional pins
-    Info: Implemented 197 logic cells
+    Info: Implemented 337 logic cells
     Info: Implemented 8 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 63 warnings
-    Info: Allocated 129 megabytes of memory during processing
-    Info: Processing ended: Sun Mar 11 08:33:04 2007
-    Info: Elapsed time: 00:00:11
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 69 warnings
+    Info: Allocated 130 megabytes of memory during processing
+    Info: Processing ended: Sun Mar 11 18:08:42 2007
+    Info: Elapsed time: 00:00:18
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in E:/wjt/radio/projects/Ozy/FPGA/WrapTest/WrapTest.map.smsg.
 
 
