@@ -20,7 +20,8 @@ module WrapTest(
         IFCLK, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, 
  	    DEBUG_LED0, DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, 	
 		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE,
-		ATLAS_A02, ATLAS_A10, ATLAS_C02, ATLAS_C10
+		ATLAS_A02, ATLAS_A10, ATLAS_C02, ATLAS_C10, ATLAS_A06, ATLAS_A04, 
+		FPGA_TXD
 		);
 		
 		
@@ -59,6 +60,10 @@ output ATLAS_A10;
 input ATLAS_C02; 
 input ATLAS_C10; 
 
+output ATLAS_A06; 
+output ATLAS_A04; 
+
+output FPGA_TXD;  // serial port out line 
 
 reg[1:0] leds; 
 reg[24:0] clock_count; 
@@ -68,6 +73,7 @@ assign DEBUG_LED1 = ~leds[1];
 // assign DEBUG_LED2 = ~leds[2]; 		
 // assign DEBUG_LED3 = ~leds[3]; 		
 
+assign ATLAS_A04 = FX2_CLK; 
 
 wire ATLAS_A02 = clock_count[2]; 
 wire ATLAS_A10 = clock_count[3];  
@@ -97,15 +103,23 @@ loopBackCheck loopBackA10C10( .ref_sig_i(ATLAS_A10),
 							);							
 
 
+// baudclock 
+reg[16:0] baud_reg; 
+always @ (posedge FX2_CLK) begin
+	baud_reg <= baud_reg[15:0] + 629; 
+end 
+
+assign ATLAS_A06 = baud_reg[16]; 
+
 always @ (posedge FX2_CLK) begin 
 	if ( leds == 0 ) begin 
 		leds <= 1; 
 	end 
 	else begin 
-		if ( clock_count != 24000000 ) begin 
+		if ( clock_count != 12000000 ) begin 
 			loopback_reset <= 0; 
 		end 
-		if ( clock_count == 24000000 ) begin
+		if ( clock_count == 12000000 ) begin
 			clock_count <= 0; 
 			loopback_reset <= 1; 
 			if ( leds[1:0] == 2'b10 ) begin 
@@ -121,6 +135,40 @@ always @ (posedge FX2_CLK) begin
 	end 
 end 
 
+// instantiate our rs232 xmitter 
+reg rs232_write_strobe; 
+wire rs232_space_avail; 
+reg[7:0] rs232_xmit_reg; 
+rs232_xmit Ozy_rs232_xmit( .data_i(rs232_xmit_reg), 
+				           .clk_i(FX2_CLK),
+				           .space_avail_o(rs232_space_avail),
+				           .write_req_i(rs232_write_strobe), 
+				           .baud_clock_i(baud_reg[16]), 
+				           .xmit_o(FPGA_TXD)
+				         ); 
+
+
+reg[24:0] serial_clock_count; 
+
+always @ (posedge FX2_CLK ) begin 
+	if ( serial_clock_count == 12000000) begin // xmit a char 
+		rs232_write_strobe <= 1; 
+		serial_clock_count <= 0; 	
+	end 	
+	else begin // count is
+		serial_clock_count <= serial_clock_count + 1; 
+	end 
+	
+	if ( serial_clock_count == 0 ) begin 
+		rs232_write_strobe <= 0; 
+		if ( rs232_xmit_reg == 0 || rs232_xmit_reg == 122 ) begin // 122 = 'z' 
+			rs232_xmit_reg <= 97;  // 97 = 'a' 
+		end 
+		else begin 
+			rs232_xmit_reg <= rs232_xmit_reg + 1; 
+		end 
+	end 	
+end 
 
 
 endmodule 

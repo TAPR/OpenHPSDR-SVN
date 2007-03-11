@@ -56,7 +56,7 @@ ON
 # case_sensitive
 # source_file
 WrapTest.v
-aacce6f44652264bfb8736c434744ea
+2fef25bca3a0b2a06e92b98a404110
 7
 # internal_option {
 AUTO_RESOURCE_SHARING
@@ -66,6 +66,691 @@ OFF
 }
 # hierarchies {
 |
+}
+# end
+# entity
+rs232_xmit
+# storage
+db|WrapTest.(2).cnf
+db|WrapTest.(2).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+rs232_xmit.v
+4a52f54165b73ca11c971b603ac7e19f
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# hierarchies {
+rs232_xmit:Ozy_rs232_xmit
+}
+# end
+# entity
+rs232_tx_fifo
+# storage
+db|WrapTest.(3).cnf
+db|WrapTest.(3).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+rs232_tx_fifo.v
+fc942af9784dd0936fefe4b888d31
+7
+# internal_option {
+AUTO_RESOURCE_SHARING
+OFF
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+}
+# hierarchies {
+rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo
+}
+# end
+# entity
+scfifo
+# storage
+db|WrapTest.(4).cnf
+db|WrapTest.(4).cnf
+# case_insensitive
+# source_file
+g:|altera|quartus61|quartus|libraries|megafunctions|scfifo.tdf
+35622eb715ad7962dc948ede2925d2b
+6
+# user_parameter {
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+lpm_width
+8
+PARAMETER_SIGNED_DEC
+USR
+LPM_NUMWORDS
+16
+PARAMETER_SIGNED_DEC
+USR
+LPM_WIDTHU
+4
+PARAMETER_SIGNED_DEC
+USR
+LPM_SHOWAHEAD
+OFF
+PARAMETER_UNKNOWN
+USR
+UNDERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+OVERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+ALLOW_RWCYCLE_WHEN_FULL
+OFF
+PARAMETER_UNKNOWN
+DEF
+ADD_RAM_OUTPUT_REGISTER
+OFF
+PARAMETER_UNKNOWN
+USR
+ALMOST_FULL_VALUE
+0
+PARAMETER_UNKNOWN
+DEF
+ALMOST_EMPTY_VALUE
+0
+PARAMETER_UNKNOWN
+DEF
+USE_EAB
+ON
+PARAMETER_UNKNOWN
+USR
+MAXIMIZE_SPEED
+5
+PARAMETER_UNKNOWN
+DEF
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+OPTIMIZE_FOR_SPEED
+5
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+scfifo_cdv
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+wrreq
+-1
+3
+rdreq
+-1
+3
+q
+-1
+3
+full
+-1
+3
+empty
+-1
+3
+data
+-1
+3
+clock
+-1
+3
+}
+# include_file {
+g:|altera|quartus61|quartus|libraries|megafunctions|a_dpfifo.inc
+748303753a041187a5d4113b5f62acf
+g:|altera|quartus61|quartus|libraries|megafunctions|a_regfifo.inc
+afe6bfc54c15224ce61beaea9e71dc
+g:|altera|quartus61|quartus|libraries|megafunctions|a_i2fifo.inc
+ca5bb76c5a51df22b24c8b01cbcc918
+g:|altera|quartus61|quartus|libraries|megafunctions|aglobal61.inc
+b513fb574ceb8f5886cd4ba429e82ec
+g:|altera|quartus61|quartus|libraries|megafunctions|a_fffifo.inc
+ebf62e69b8fb10b5db33a57861298d55
+g:|altera|quartus61|quartus|libraries|megafunctions|a_f2fifo.inc
+9bc132bd4e9e2ef1fb9633f6a742f
+}
+# hierarchies {
+rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component
+}
+# end
+# entity
+scfifo_cdv
+# storage
+db|WrapTest.(5).cnf
+db|WrapTest.(5).cnf
+# case_insensitive
+# source_file
+db|scfifo_cdv.tdf
+4edbb26a6f80ed3e48d2fe9d27934f86
+6
+# used_port {
+wrreq
+-1
+3
+rdreq
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+full
+-1
+3
+empty
+-1
+3
+data7
+-1
+3
+data6
+-1
+3
+data5
+-1
+3
+data4
+-1
+3
+data3
+-1
+3
+data2
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated
+}
+# end
+# entity
+a_dpfifo_jjv
+# storage
+db|WrapTest.(6).cnf
+db|WrapTest.(6).cnf
+# case_insensitive
+# source_file
+db|a_dpfifo_jjv.tdf
+aeb54ea823f2e37750da71a34c325a51
+6
+# used_port {
+wreq
+-1
+3
+sclr
+-1
+3
+rreq
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+full
+-1
+3
+empty
+-1
+3
+data7
+-1
+3
+data6
+-1
+3
+data5
+-1
+3
+data4
+-1
+3
+data3
+-1
+3
+data2
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo
+}
+# end
+# entity
+a_fefifo_76e
+# storage
+db|WrapTest.(7).cnf
+db|WrapTest.(7).cnf
+# case_insensitive
+# source_file
+db|a_fefifo_76e.tdf
+b0a67339728554f3e3bd54c3f6d4d34
+6
+# used_port {
+wreq
+-1
+3
+sclr
+-1
+3
+rreq
+-1
+3
+full
+-1
+3
+empty
+-1
+3
+clock
+-1
+3
+aclr
+-1
+3
+}
+# hierarchies {
+rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state
+}
+# end
+# entity
+cntr_pj7
+# storage
+db|WrapTest.(8).cnf
+db|WrapTest.(8).cnf
+# case_insensitive
+# source_file
+db|cntr_pj7.tdf
+2dfa4fac2a38ed194b7ee681e57a2816
+6
+# used_port {
+updown
+-1
+3
+sclr
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+aclr
+-1
+3
+}
+# hierarchies {
+rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state|cntr_pj7:count_usedw
+}
+# end
+# entity
+dpram_1it
+# storage
+db|WrapTest.(9).cnf
+db|WrapTest.(9).cnf
+# case_insensitive
+# source_file
+db|dpram_1it.tdf
+6aba6be6de5138c6310f2ddff915679
+6
+# used_port {
+wren
+-1
+3
+wraddress3
+-1
+3
+wraddress2
+-1
+3
+wraddress1
+-1
+3
+wraddress0
+-1
+3
+rdaddress3
+-1
+3
+rdaddress2
+-1
+3
+rdaddress1
+-1
+3
+rdaddress0
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+outclocken
+-1
+3
+outclock
+-1
+3
+inclock
+-1
+3
+data7
+-1
+3
+data6
+-1
+3
+data5
+-1
+3
+data4
+-1
+3
+data3
+-1
+3
+data2
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+}
+# hierarchies {
+rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram
+}
+# end
+# entity
+altsyncram_0sj1
+# storage
+db|WrapTest.(10).cnf
+db|WrapTest.(10).cnf
+# case_insensitive
+# source_file
+db|altsyncram_0sj1.tdf
+e2e8429e894d8c41ecab7decc0307e74
+6
+# user_parameter {
+PORT_A_ADDRESS_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_A_BYTE_ENABLE_MASK_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_A_DATA_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_B_ADDRESS_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_B_BYTE_ENABLE_MASK_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+PORT_B_DATA_WIDTH
+1
+PARAMETER_UNKNOWN
+DEF
+}
+# used_port {
+wren_a
+-1
+3
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b2
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a2
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken1
+-1
+3
+clock1
+-1
+3
+clock0
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+}
+# hierarchies {
+rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2
+}
+# end
+# entity
+cntr_djb
+# storage
+db|WrapTest.(11).cnf
+db|WrapTest.(11).cnf
+# case_insensitive
+# source_file
+db|cntr_djb.tdf
+b5f0ba8238f856aa8cb7ceafd693691a
+6
+# used_port {
+sclr
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+aclr
+-1
+3
+}
+# hierarchies {
+rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:rd_ptr_count
+rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:wr_ptr
 }
 # end
 # complete

@@ -29,7 +29,7 @@ DEBUG_LED0 <= leds[0].DB_MAX_OUTPUT_PORT_TYPE
 DEBUG_LED1 <= leds[1].DB_MAX_OUTPUT_PORT_TYPE
 DEBUG_LED2 <= loopBackCheck:loopBackA02C02.not_ok_o
 DEBUG_LED3 <= loopBackCheck:loopBackA10C10.not_ok_o
-FX2_CLK => FX2_CLK~0.IN2
+FX2_CLK => FX2_CLK~0.IN3
 SPI_SCK => ~NO_FANOUT~
 SPI_SI => ~NO_FANOUT~
 SPI_SO <= <UNC>
@@ -63,6 +63,9 @@ ATLAS_A02 <= ATLAS_A02~0.DB_MAX_OUTPUT_PORT_TYPE
 ATLAS_A10 <= ATLAS_A10~0.DB_MAX_OUTPUT_PORT_TYPE
 ATLAS_C02 => ATLAS_C02~0.IN1
 ATLAS_C10 => ATLAS_C10~0.IN1
+ATLAS_A06 <= baud_reg[16]~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A04 <= FX2_CLK~0.DB_MAX_OUTPUT_PORT_TYPE
+FPGA_TXD <= rs232_xmit:Ozy_rs232_xmit.xmit_o
 
 
 |WrapTest|loopBackCheck:loopBackA02C02
@@ -91,5 +94,351 @@ master_clock_i => not_ok_o~reg0.CLK
 reset_i => not_ok_o~2.OUTPUTSELECT
 reset_i => armed~2.OUTPUTSELECT
 reset_i => last_ref_sig.ENA
+
+
+|WrapTest|rs232_xmit:Ozy_rs232_xmit
+data_i[0] => data_in_holding~15.DATAB
+data_i[1] => data_in_holding~14.DATAB
+data_i[2] => data_in_holding~13.DATAB
+data_i[3] => data_in_holding~12.DATAB
+data_i[4] => data_in_holding~11.DATAB
+data_i[5] => data_in_holding~10.DATAB
+data_i[6] => data_in_holding~9.DATAB
+data_i[7] => data_in_holding~8.DATAB
+clk_i => clk_i~0.IN1
+space_avail_o <= <GND>
+write_req_i => input_state~0.OUTPUTSELECT
+write_req_i => input_state~1.OUTPUTSELECT
+write_req_i => input_state~2.OUTPUTSELECT
+write_req_i => data_in_holding~8.OUTPUTSELECT
+write_req_i => data_in_holding~9.OUTPUTSELECT
+write_req_i => data_in_holding~10.OUTPUTSELECT
+write_req_i => data_in_holding~11.OUTPUTSELECT
+write_req_i => data_in_holding~12.OUTPUTSELECT
+write_req_i => data_in_holding~13.OUTPUTSELECT
+write_req_i => data_in_holding~14.OUTPUTSELECT
+write_req_i => data_in_holding~15.OUTPUTSELECT
+baud_clock_i => always1~0.IN1
+baud_clock_i => last_baud_clock.DATAIN
+xmit_o <= xmit_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo
+clock => clock~0.IN1
+data[0] => data[0]~7.IN1
+data[1] => data[1]~6.IN1
+data[2] => data[2]~5.IN1
+data[3] => data[3]~4.IN1
+data[4] => data[4]~3.IN1
+data[5] => data[5]~2.IN1
+data[6] => data[6]~1.IN1
+data[7] => data[7]~0.IN1
+rdreq => rdreq~0.IN1
+wrreq => wrreq~0.IN1
+empty <= scfifo:scfifo_component.empty
+full <= scfifo:scfifo_component.full
+q[0] <= scfifo:scfifo_component.q
+q[1] <= scfifo:scfifo_component.q
+q[2] <= scfifo:scfifo_component.q
+q[3] <= scfifo:scfifo_component.q
+q[4] <= scfifo:scfifo_component.q
+q[5] <= scfifo:scfifo_component.q
+q[6] <= scfifo:scfifo_component.q
+q[7] <= scfifo:scfifo_component.q
+
+
+|WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component
+data[0] => scfifo_cdv:auto_generated.data[0]
+data[1] => scfifo_cdv:auto_generated.data[1]
+data[2] => scfifo_cdv:auto_generated.data[2]
+data[3] => scfifo_cdv:auto_generated.data[3]
+data[4] => scfifo_cdv:auto_generated.data[4]
+data[5] => scfifo_cdv:auto_generated.data[5]
+data[6] => scfifo_cdv:auto_generated.data[6]
+data[7] => scfifo_cdv:auto_generated.data[7]
+q[0] <= scfifo_cdv:auto_generated.q[0]
+q[1] <= scfifo_cdv:auto_generated.q[1]
+q[2] <= scfifo_cdv:auto_generated.q[2]
+q[3] <= scfifo_cdv:auto_generated.q[3]
+q[4] <= scfifo_cdv:auto_generated.q[4]
+q[5] <= scfifo_cdv:auto_generated.q[5]
+q[6] <= scfifo_cdv:auto_generated.q[6]
+q[7] <= scfifo_cdv:auto_generated.q[7]
+wrreq => scfifo_cdv:auto_generated.wrreq
+rdreq => scfifo_cdv:auto_generated.rdreq
+clock => scfifo_cdv:auto_generated.clock
+aclr => ~NO_FANOUT~
+sclr => ~NO_FANOUT~
+empty <= scfifo_cdv:auto_generated.empty
+full <= scfifo_cdv:auto_generated.full
+almost_full <= <GND>
+almost_empty <= <GND>
+usedw[0] <= <GND>
+usedw[1] <= <GND>
+usedw[2] <= <GND>
+usedw[3] <= <GND>
+
+
+|WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated
+clock => a_dpfifo_jjv:dpfifo.clock
+data[0] => a_dpfifo_jjv:dpfifo.data[0]
+data[1] => a_dpfifo_jjv:dpfifo.data[1]
+data[2] => a_dpfifo_jjv:dpfifo.data[2]
+data[3] => a_dpfifo_jjv:dpfifo.data[3]
+data[4] => a_dpfifo_jjv:dpfifo.data[4]
+data[5] => a_dpfifo_jjv:dpfifo.data[5]
+data[6] => a_dpfifo_jjv:dpfifo.data[6]
+data[7] => a_dpfifo_jjv:dpfifo.data[7]
+empty <= a_dpfifo_jjv:dpfifo.empty
+full <= a_dpfifo_jjv:dpfifo.full
+q[0] <= a_dpfifo_jjv:dpfifo.q[0]
+q[1] <= a_dpfifo_jjv:dpfifo.q[1]
+q[2] <= a_dpfifo_jjv:dpfifo.q[2]
+q[3] <= a_dpfifo_jjv:dpfifo.q[3]
+q[4] <= a_dpfifo_jjv:dpfifo.q[4]
+q[5] <= a_dpfifo_jjv:dpfifo.q[5]
+q[6] <= a_dpfifo_jjv:dpfifo.q[6]
+q[7] <= a_dpfifo_jjv:dpfifo.q[7]
+rdreq => a_dpfifo_jjv:dpfifo.rreq
+wrreq => a_dpfifo_jjv:dpfifo.wreq
+
+
+|WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo
+clock => a_fefifo_76e:fifo_state.clock
+clock => dpram_1it:FIFOram.inclock
+clock => dpram_1it:FIFOram.outclock
+clock => cntr_djb:rd_ptr_count.clock
+clock => cntr_djb:wr_ptr.clock
+data[0] => dpram_1it:FIFOram.data[0]
+data[1] => dpram_1it:FIFOram.data[1]
+data[2] => dpram_1it:FIFOram.data[2]
+data[3] => dpram_1it:FIFOram.data[3]
+data[4] => dpram_1it:FIFOram.data[4]
+data[5] => dpram_1it:FIFOram.data[5]
+data[6] => dpram_1it:FIFOram.data[6]
+data[7] => dpram_1it:FIFOram.data[7]
+empty <= a_fefifo_76e:fifo_state.empty
+full <= a_fefifo_76e:fifo_state.full
+q[0] <= dpram_1it:FIFOram.q[0]
+q[1] <= dpram_1it:FIFOram.q[1]
+q[2] <= dpram_1it:FIFOram.q[2]
+q[3] <= dpram_1it:FIFOram.q[3]
+q[4] <= dpram_1it:FIFOram.q[4]
+q[5] <= dpram_1it:FIFOram.q[5]
+q[6] <= dpram_1it:FIFOram.q[6]
+q[7] <= dpram_1it:FIFOram.q[7]
+rreq => a_fefifo_76e:fifo_state.rreq
+rreq => valid_rreq.IN0
+sclr => a_fefifo_76e:fifo_state.sclr
+sclr => cntr_djb:rd_ptr_count.sclr
+sclr => cntr_djb:wr_ptr.sclr
+wreq => a_fefifo_76e:fifo_state.wreq
+wreq => valid_wreq.IN0
+
+
+|WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state
+aclr => cntr_pj7:count_usedw.aclr
+clock => cntr_pj7:count_usedw.clock
+clock => b_full.CLK
+clock => b_non_empty.CLK
+full <= b_full.DB_MAX_OUTPUT_PORT_TYPE
+rreq => valid_rreq.IN0
+sclr => cntr_pj7:count_usedw.sclr
+wreq => valid_wreq.IN0
+
+
+|WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state|cntr_pj7:count_usedw
+aclr => counter_reg_bit1a[3].ACLR
+aclr => counter_reg_bit1a[2].ACLR
+aclr => counter_reg_bit1a[1].ACLR
+aclr => counter_reg_bit1a[0].ACLR
+clock => counter_reg_bit1a[3].CLK
+clock => counter_reg_bit1a[2].CLK
+clock => counter_reg_bit1a[1].CLK
+clock => counter_reg_bit1a[0].CLK
+q[0] <= counter_reg_bit1a[0].REGOUT
+q[1] <= counter_reg_bit1a[1].REGOUT
+q[2] <= counter_reg_bit1a[2].REGOUT
+q[3] <= counter_reg_bit1a[3].REGOUT
+updown => counter_comb_bita0.DATAB
+updown => counter_comb_bita1.DATAB
+updown => counter_comb_bita2.DATAB
+updown => counter_comb_bita3.DATAB
+
+
+|WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram
+data[0] => altsyncram_0sj1:altsyncram2.data_a[0]
+data[1] => altsyncram_0sj1:altsyncram2.data_a[1]
+data[2] => altsyncram_0sj1:altsyncram2.data_a[2]
+data[3] => altsyncram_0sj1:altsyncram2.data_a[3]
+data[4] => altsyncram_0sj1:altsyncram2.data_a[4]
+data[5] => altsyncram_0sj1:altsyncram2.data_a[5]
+data[6] => altsyncram_0sj1:altsyncram2.data_a[6]
+data[7] => altsyncram_0sj1:altsyncram2.data_a[7]
+inclock => altsyncram_0sj1:altsyncram2.clock0
+outclock => altsyncram_0sj1:altsyncram2.clock1
+outclocken => altsyncram_0sj1:altsyncram2.clocken1
+q[0] <= altsyncram_0sj1:altsyncram2.q_b[0]
+q[1] <= altsyncram_0sj1:altsyncram2.q_b[1]
+q[2] <= altsyncram_0sj1:altsyncram2.q_b[2]
+q[3] <= altsyncram_0sj1:altsyncram2.q_b[3]
+q[4] <= altsyncram_0sj1:altsyncram2.q_b[4]
+q[5] <= altsyncram_0sj1:altsyncram2.q_b[5]
+q[6] <= altsyncram_0sj1:altsyncram2.q_b[6]
+q[7] <= altsyncram_0sj1:altsyncram2.q_b[7]
+rdaddress[0] => altsyncram_0sj1:altsyncram2.address_b[0]
+rdaddress[1] => altsyncram_0sj1:altsyncram2.address_b[1]
+rdaddress[2] => altsyncram_0sj1:altsyncram2.address_b[2]
+rdaddress[3] => altsyncram_0sj1:altsyncram2.address_b[3]
+wraddress[0] => altsyncram_0sj1:altsyncram2.address_a[0]
+wraddress[1] => altsyncram_0sj1:altsyncram2.address_a[1]
+wraddress[2] => altsyncram_0sj1:altsyncram2.address_a[2]
+wraddress[3] => altsyncram_0sj1:altsyncram2.address_a[3]
+wren => altsyncram_0sj1:altsyncram2.wren_a
+
+
+|WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2
+address_a[0] => ram_block3a0.PORTAADDR
+address_a[0] => ram_block3a1.PORTAADDR
+address_a[0] => ram_block3a2.PORTAADDR
+address_a[0] => ram_block3a3.PORTAADDR
+address_a[0] => ram_block3a4.PORTAADDR
+address_a[0] => ram_block3a5.PORTAADDR
+address_a[0] => ram_block3a6.PORTAADDR
+address_a[0] => ram_block3a7.PORTAADDR
+address_a[1] => ram_block3a0.PORTAADDR1
+address_a[1] => ram_block3a1.PORTAADDR1
+address_a[1] => ram_block3a2.PORTAADDR1
+address_a[1] => ram_block3a3.PORTAADDR1
+address_a[1] => ram_block3a4.PORTAADDR1
+address_a[1] => ram_block3a5.PORTAADDR1
+address_a[1] => ram_block3a6.PORTAADDR1
+address_a[1] => ram_block3a7.PORTAADDR1
+address_a[2] => ram_block3a0.PORTAADDR2
+address_a[2] => ram_block3a1.PORTAADDR2
+address_a[2] => ram_block3a2.PORTAADDR2
+address_a[2] => ram_block3a3.PORTAADDR2
+address_a[2] => ram_block3a4.PORTAADDR2
+address_a[2] => ram_block3a5.PORTAADDR2
+address_a[2] => ram_block3a6.PORTAADDR2
+address_a[2] => ram_block3a7.PORTAADDR2
+address_a[3] => ram_block3a0.PORTAADDR3
+address_a[3] => ram_block3a1.PORTAADDR3
+address_a[3] => ram_block3a2.PORTAADDR3
+address_a[3] => ram_block3a3.PORTAADDR3
+address_a[3] => ram_block3a4.PORTAADDR3
+address_a[3] => ram_block3a5.PORTAADDR3
+address_a[3] => ram_block3a6.PORTAADDR3
+address_a[3] => ram_block3a7.PORTAADDR3
+address_b[0] => ram_block3a0.PORTBADDR
+address_b[0] => ram_block3a1.PORTBADDR
+address_b[0] => ram_block3a2.PORTBADDR
+address_b[0] => ram_block3a3.PORTBADDR
+address_b[0] => ram_block3a4.PORTBADDR
+address_b[0] => ram_block3a5.PORTBADDR
+address_b[0] => ram_block3a6.PORTBADDR
+address_b[0] => ram_block3a7.PORTBADDR
+address_b[1] => ram_block3a0.PORTBADDR1
+address_b[1] => ram_block3a1.PORTBADDR1
+address_b[1] => ram_block3a2.PORTBADDR1
+address_b[1] => ram_block3a3.PORTBADDR1
+address_b[1] => ram_block3a4.PORTBADDR1
+address_b[1] => ram_block3a5.PORTBADDR1
+address_b[1] => ram_block3a6.PORTBADDR1
+address_b[1] => ram_block3a7.PORTBADDR1
+address_b[2] => ram_block3a0.PORTBADDR2
+address_b[2] => ram_block3a1.PORTBADDR2
+address_b[2] => ram_block3a2.PORTBADDR2
+address_b[2] => ram_block3a3.PORTBADDR2
+address_b[2] => ram_block3a4.PORTBADDR2
+address_b[2] => ram_block3a5.PORTBADDR2
+address_b[2] => ram_block3a6.PORTBADDR2
+address_b[2] => ram_block3a7.PORTBADDR2
+address_b[3] => ram_block3a0.PORTBADDR3
+address_b[3] => ram_block3a1.PORTBADDR3
+address_b[3] => ram_block3a2.PORTBADDR3
+address_b[3] => ram_block3a3.PORTBADDR3
+address_b[3] => ram_block3a4.PORTBADDR3
+address_b[3] => ram_block3a5.PORTBADDR3
+address_b[3] => ram_block3a6.PORTBADDR3
+address_b[3] => ram_block3a7.PORTBADDR3
+clock0 => ram_block3a0.CLK0
+clock0 => ram_block3a1.CLK0
+clock0 => ram_block3a2.CLK0
+clock0 => ram_block3a3.CLK0
+clock0 => ram_block3a4.CLK0
+clock0 => ram_block3a5.CLK0
+clock0 => ram_block3a6.CLK0
+clock0 => ram_block3a7.CLK0
+clock1 => ram_block3a0.CLK1
+clock1 => ram_block3a1.CLK1
+clock1 => ram_block3a2.CLK1
+clock1 => ram_block3a3.CLK1
+clock1 => ram_block3a4.CLK1
+clock1 => ram_block3a5.CLK1
+clock1 => ram_block3a6.CLK1
+clock1 => ram_block3a7.CLK1
+clocken1 => ram_block3a0.ENA1
+clocken1 => ram_block3a1.ENA1
+clocken1 => ram_block3a2.ENA1
+clocken1 => ram_block3a3.ENA1
+clocken1 => ram_block3a4.ENA1
+clocken1 => ram_block3a5.ENA1
+clocken1 => ram_block3a6.ENA1
+clocken1 => ram_block3a7.ENA1
+data_a[0] => ram_block3a0.PORTADATAIN
+data_a[1] => ram_block3a1.PORTADATAIN
+data_a[2] => ram_block3a2.PORTADATAIN
+data_a[3] => ram_block3a3.PORTADATAIN
+data_a[4] => ram_block3a4.PORTADATAIN
+data_a[5] => ram_block3a5.PORTADATAIN
+data_a[6] => ram_block3a6.PORTADATAIN
+data_a[7] => ram_block3a7.PORTADATAIN
+q_b[0] <= ram_block3a0.PORTBDATAOUT
+q_b[1] <= ram_block3a1.PORTBDATAOUT
+q_b[2] <= ram_block3a2.PORTBDATAOUT
+q_b[3] <= ram_block3a3.PORTBDATAOUT
+q_b[4] <= ram_block3a4.PORTBDATAOUT
+q_b[5] <= ram_block3a5.PORTBDATAOUT
+q_b[6] <= ram_block3a6.PORTBDATAOUT
+q_b[7] <= ram_block3a7.PORTBDATAOUT
+wren_a => ram_block3a0.ENA0
+wren_a => ram_block3a1.ENA0
+wren_a => ram_block3a2.ENA0
+wren_a => ram_block3a3.ENA0
+wren_a => ram_block3a4.ENA0
+wren_a => ram_block3a5.ENA0
+wren_a => ram_block3a6.ENA0
+wren_a => ram_block3a7.ENA0
+
+
+|WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:rd_ptr_count
+aclr => counter_reg_bit4a[3].ACLR
+aclr => counter_reg_bit4a[2].ACLR
+aclr => counter_reg_bit4a[1].ACLR
+aclr => counter_reg_bit4a[0].ACLR
+clock => counter_reg_bit4a[3].CLK
+clock => counter_reg_bit4a[2].CLK
+clock => counter_reg_bit4a[1].CLK
+clock => counter_reg_bit4a[0].CLK
+q[0] <= counter_reg_bit4a[0].REGOUT
+q[1] <= counter_reg_bit4a[1].REGOUT
+q[2] <= counter_reg_bit4a[2].REGOUT
+q[3] <= counter_reg_bit4a[3].REGOUT
+
+
+|WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:wr_ptr
+aclr => counter_reg_bit4a[3].ACLR
+aclr => counter_reg_bit4a[2].ACLR
+aclr => counter_reg_bit4a[1].ACLR
+aclr => counter_reg_bit4a[0].ACLR
+clock => counter_reg_bit4a[3].CLK
+clock => counter_reg_bit4a[2].CLK
+clock => counter_reg_bit4a[1].CLK
+clock => counter_reg_bit4a[0].CLK
+q[0] <= counter_reg_bit4a[0].REGOUT
+q[1] <= counter_reg_bit4a[1].REGOUT
+q[2] <= counter_reg_bit4a[2].REGOUT
+q[3] <= counter_reg_bit4a[3].REGOUT
 
 
