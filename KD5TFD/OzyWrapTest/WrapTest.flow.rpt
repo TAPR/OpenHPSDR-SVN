@@ -1,5 +1,5 @@
 Flow report for WrapTest
-Sun Mar 11 18:09:44 2007
+Mon Mar 12 23:39:22 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Sun Mar 11 18:09:44 2007   ;
+; Flow Status                        ; Successful - Mon Mar 12 23:39:22 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; WrapTest                                ;
 ; Top-level Entity Name              ; WrapTest                                ;
@@ -45,11 +45,11 @@ applicable agreement for further details.
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
 ; Met timing requirements            ; Yes                                     ;
-; Total logic elements               ; 328 / 8,256 ( 4 % )                     ;
-;     Total combinational functions  ; 313 / 8,256 ( 4 % )                     ;
-;     Dedicated logic registers      ; 191 / 8,256 ( 2 % )                     ;
-; Total registers                    ; 191                                     ;
-; Total pins                         ; 67 / 138 ( 49 % )                       ;
+; Total logic elements               ; 477 / 8,256 ( 6 % )                     ;
+;     Total combinational functions  ; 462 / 8,256 ( 6 % )                     ;
+;     Dedicated logic registers      ; 271 / 8,256 ( 3 % )                     ;
+; Total registers                    ; 271                                     ;
+; Total pins                         ; 105 / 138 ( 76 % )                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 128 / 165,888 ( < 1 % )                 ;
 ; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                          ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/11/2007 18:08:26 ;
+; Start date & time ; 03/12/2007 23:38:01 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; WrapTest            ;
 +-------------------+---------------------+
@@ -82,12 +82,12 @@ applicable agreement for further details.
 +-------------------------+--------------+
 ; Module Name             ; Elapsed Time ;
 +-------------------------+--------------+
-; Analysis & Synthesis    ; 00:00:19     ;
+; Analysis & Synthesis    ; 00:00:23     ;
 ; Partition Merge         ; 00:00:03     ;
-; Fitter                  ; 00:00:19     ;
-; Assembler               ; 00:00:17     ;
+; Fitter                  ; 00:00:21     ;
+; Assembler               ; 00:00:15     ;
 ; Classic Timing Analyzer ; 00:00:03     ;
-; Total                   ; 00:01:01     ;
+; Total                   ; 00:01:05     ;
 +-------------------------+--------------+
 
 
