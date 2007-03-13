@@ -162,19 +162,19 @@ FPGA_TXD                     : 102       : output : 3.3-V LVTTL       :         
 RESERVED_INPUT               : 103       :        :                   :         : 4         :                
 RESERVED_INPUT               : 104       :        :                   :         : 4         :                
 RESERVED_INPUT               : 105       :        :                   :         : 3         :                
-RESERVED_INPUT               : 106       :        :                   :         : 3         :                
+ATLAS_A25                    : 106       : output : 3.3-V LVTTL       :         : 3         : Y              
 ~LVDS54n/INIT_DONE~ / RESERVED : 107       : output : 3.3-V LVTTL       :         : 3         : N              
 DEBUG_LED3                   : 108       : output : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 109       : power  :                   : 3.3V    : 3         :                
-RESERVED_INPUT               : 110       :        :                   :         : 3         :                
+ATLAS_A24                    : 110       : output : 3.3-V LVTTL       :         : 3         : Y              
 GND                          : 111       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 112       :        :                   :         : 3         :                
-RESERVED_INPUT               : 113       :        :                   :         : 3         :                
+ATLAS_A23                    : 112       : output : 3.3-V LVTTL       :         : 3         : Y              
+ATLAS_A22                    : 113       : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 114       :        :                   :         : 3         :                
 RESERVED_INPUT               : 115       :        :                   :         : 3         :                
-RESERVED_INPUT               : 116       :        :                   :         : 3         :                
-RESERVED_INPUT               : 117       :        :                   :         : 3         :                
-RESERVED_INPUT               : 118       :        :                   :         : 3         :                
+ATLAS_A19                    : 116       : output : 3.3-V LVTTL       :         : 3         : Y              
+ATLAS_A18                    : 117       : output : 3.3-V LVTTL       :         : 3         : Y              
+ATLAS_A17                    : 118       : output : 3.3-V LVTTL       :         : 3         : Y              
 GND                          : 119       : gnd    :                   :         :           :                
 VCCINT                       : 120       : power  :                   : 1.2V    :           :                
 nSTATUS                      : 121       :        :                   :         : 3         :                
@@ -183,32 +183,32 @@ CONF_DONE                    : 123       :        :                   :         
 GND                          : 124       : gnd    :                   :         :           :                
 MSEL1                        : 125       :        :                   :         : 3         :                
 MSEL0                        : 126       :        :                   :         : 3         :                
-RESERVED_INPUT               : 127       :        :                   :         : 3         :                
-RESERVED_INPUT               : 128       :        :                   :         : 3         :                
+ATLAS_A16                    : 127       : output : 3.3-V LVTTL       :         : 3         : Y              
+ATLAS_A15                    : 128       : output : 3.3-V LVTTL       :         : 3         : Y              
 GND+                         : 129       :        :                   :         : 3         :                
 GND+                         : 130       :        :                   :         : 3         :                
 GND+                         : 131       :        :                   :         : 3         :                
 GND+                         : 132       :        :                   :         : 3         :                
-RESERVED_INPUT               : 133       :        :                   :         : 3         :                
-RESERVED_INPUT               : 134       :        :                   :         : 3         :                
-RESERVED_INPUT               : 135       :        :                   :         : 3         :                
+ATLAS_A14                    : 133       : output : 3.3-V LVTTL       :         : 3         : Y              
+ATLAS_A13                    : 134       : output : 3.3-V LVTTL       :         : 3         : Y              
+ATLAS_A12                    : 135       : output : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 136       : power  :                   : 3.3V    : 3         :                
-RESERVED_INPUT               : 137       :        :                   :         : 3         :                
+ATLAS_A11                    : 137       : output : 3.3-V LVTTL       :         : 3         : Y              
 ATLAS_A10                    : 138       : output : 3.3-V LVTTL       :         : 3         : Y              
-RESERVED_INPUT               : 139       :        :                   :         : 3         :                
+ATLAS_A09                    : 139       : output : 3.3-V LVTTL       :         : 3         : Y              
 GND                          : 140       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 141       :        :                   :         : 3         :                
-RESERVED_INPUT               : 142       :        :                   :         : 3         :                
+ATLAS_A08                    : 141       : output : 3.3-V LVTTL       :         : 3         : Y              
+ATLAS_A07                    : 142       : output : 3.3-V LVTTL       :         : 3         : Y              
 ATLAS_A06                    : 143       : output : 3.3-V LVTTL       :         : 3         : Y              
-RESERVED_INPUT               : 144       :        :                   :         : 3         :                
+ATLAS_A05                    : 144       : output : 3.3-V LVTTL       :         : 3         : Y              
 ATLAS_A04                    : 145       : output : 3.3-V LVTTL       :         : 3         : Y              
-RESERVED_INPUT               : 146       :        :                   :         : 3         :                
+ATLAS_A03                    : 146       : output : 3.3-V LVTTL       :         : 3         : Y              
 ATLAS_A02                    : 147       : output : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
 ATLAS_C02                    : 149       : input  : 3.3-V LVTTL       :         : 3         : Y              
-RESERVED_INPUT               : 150       :        :                   :         : 3         :                
-RESERVED_INPUT               : 151       :        :                   :         : 3         :                
-RESERVED_INPUT               : 152       :        :                   :         : 3         :                
+ATLAS_C03                    : 150       : input  : 3.3-V LVTTL       :         : 3         : Y              
+ATLAS_C04                    : 151       : input  : 3.3-V LVTTL       :         : 3         : Y              
+ATLAS_C05                    : 152       : input  : 3.3-V LVTTL       :         : 3         : Y              
 GND                          : 153       : gnd    :                   :         :           :                
 GND_PLL2                     : 154       : gnd    :                   :         :           :                
 VCCD_PLL2                    : 155       : power  :                   : 1.2V    :           :                
@@ -216,35 +216,35 @@ GND_PLL2                     : 156       : gnd    :                   :         
 VCCA_PLL2                    : 157       : power  :                   : 1.2V    :           :                
 GNDA_PLL2                    : 158       : gnd    :                   :         :           :                
 GND                          : 159       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 160       :        :                   :         : 2         :                
-RESERVED_INPUT               : 161       :        :                   :         : 2         :                
-RESERVED_INPUT               : 162       :        :                   :         : 2         :                
-RESERVED_INPUT               : 163       :        :                   :         : 2         :                
+ATLAS_C06                    : 160       : input  : 3.3-V LVTTL       :         : 2         : Y              
+ATLAS_C07                    : 161       : input  : 3.3-V LVTTL       :         : 2         : Y              
+ATLAS_C08                    : 162       : input  : 3.3-V LVTTL       :         : 2         : Y              
+ATLAS_C09                    : 163       : input  : 3.3-V LVTTL       :         : 2         : Y              
 ATLAS_C10                    : 164       : input  : 3.3-V LVTTL       :         : 2         : Y              
-RESERVED_INPUT               : 165       :        :                   :         : 2         :                
+ATLAS_C11                    : 165       : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 166       : power  :                   : 3.3V    : 2         :                
 GND                          : 167       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 168       :        :                   :         : 2         :                
-RESERVED_INPUT               : 169       :        :                   :         : 2         :                
-RESERVED_INPUT               : 170       :        :                   :         : 2         :                
-RESERVED_INPUT               : 171       :        :                   :         : 2         :                
+ATLAS_C12                    : 168       : input  : 3.3-V LVTTL       :         : 2         : Y              
+ATLAS_C13                    : 169       : input  : 3.3-V LVTTL       :         : 2         : Y              
+ATLAS_C14                    : 170       : input  : 3.3-V LVTTL       :         : 2         : Y              
+ATLAS_C15                    : 171       : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 172       : power  :                   : 3.3V    : 2         :                
-RESERVED_INPUT               : 173       :        :                   :         : 2         :                
+ATLAS_C16                    : 173       : input  : 3.3-V LVTTL       :         : 2         : Y              
 GND                          : 174       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 175       :        :                   :         : 2         :                
-RESERVED_INPUT               : 176       :        :                   :         : 2         :                
+ATLAS_C17                    : 175       : input  : 3.3-V LVTTL       :         : 2         : Y              
+ATLAS_C18                    : 176       : input  : 3.3-V LVTTL       :         : 2         : Y              
 GND                          : 177       : gnd    :                   :         :           :                
 VCCINT                       : 178       : power  :                   : 1.2V    :           :                
-RESERVED_INPUT               : 179       :        :                   :         : 2         :                
+ATLAS_C19                    : 179       : input  : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 180       :        :                   :         : 2         :                
 RESERVED_INPUT               : 181       :        :                   :         : 2         :                
-RESERVED_INPUT               : 182       :        :                   :         : 2         :                
+ATLAS_C22                    : 182       : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 183       : power  :                   : 3.3V    : 2         :                
 GND                          : 184       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 185       :        :                   :         : 2         :                
+ATLAS_C23                    : 185       : input  : 3.3-V LVTTL       :         : 2         : Y              
 GND                          : 186       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 187       :        :                   :         : 2         :                
-RESERVED_INPUT               : 188       :        :                   :         : 2         :                
+ATLAS_C24                    : 187       : input  : 3.3-V LVTTL       :         : 2         : Y              
+ATLAS_C25                    : 188       : input  : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 189       :        :                   :         : 2         :                
 VCCINT                       : 190       : power  :                   : 1.2V    :           :                
 RESERVED_INPUT               : 191       :        :                   :         : 2         :                

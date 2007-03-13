@@ -20,8 +20,13 @@ module WrapTest(
         IFCLK, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, 
  	    DEBUG_LED0, DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, 	
 		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE,
-		ATLAS_A02, ATLAS_A10, ATLAS_C02, ATLAS_C10, ATLAS_A06, ATLAS_A04, 
-		FPGA_TXD
+		ATLAS_A02, ATLAS_A03, ATLAS_A04, ATLAS_A05, ATLAS_A06, ATLAS_A07, ATLAS_A08, ATLAS_A09,
+        ATLAS_A10, ATLAS_A11, ATLAS_A12, ATLAS_A13, ATLAS_A14, ATLAS_A15, ATLAS_A16, ATLAS_A17,
+        ATLAS_A18, ATLAS_A19, ATLAS_A22, ATLAS_A23, ATLAS_A24, ATLAS_A25, ATLAS_C02, ATLAS_C03,
+        ATLAS_C04, ATLAS_C05, ATLAS_C06, ATLAS_C07, ATLAS_C08, ATLAS_C09, ATLAS_C10, ATLAS_C11,
+        ATLAS_C12, ATLAS_C13, ATLAS_C14, ATLAS_C15, ATLAS_C16, ATLAS_C17, ATLAS_C18, ATLAS_C19,
+        ATLAS_C22, ATLAS_C23, ATLAS_C24, ATLAS_C25,
+   		FPGA_TXD
 		);
 		
 		
@@ -55,13 +60,62 @@ input 				SPI_CS;         // FPGA chip select from FX2
 inout [23:0]		GPIO;			// OZY GPIO lines
 output 				GPIO_nIOE;      // enable GPIO driver chips 
 
-output ATLAS_A02; 
-output ATLAS_A10; 
-input ATLAS_C02; 
-input ATLAS_C10; 
 
-output ATLAS_A06; 
-output ATLAS_A04; 
+output ATLAS_A02;
+output ATLAS_A03;
+output ATLAS_A04;
+output ATLAS_A05;
+output ATLAS_A06;
+output ATLAS_A07;
+output ATLAS_A08;
+output ATLAS_A09;
+output ATLAS_A10;
+output ATLAS_A11;
+output ATLAS_A12;
+output ATLAS_A13;
+output ATLAS_A14;
+output ATLAS_A15;
+output ATLAS_A16;
+output ATLAS_A17;
+output ATLAS_A18;
+output ATLAS_A19;
+output ATLAS_A22;
+output ATLAS_A23;
+output ATLAS_A24;
+output ATLAS_A25;
+
+
+input ATLAS_C02;
+input ATLAS_C03;
+input ATLAS_C04;
+input ATLAS_C05;
+input ATLAS_C06;
+input ATLAS_C07;
+input ATLAS_C08;
+input ATLAS_C09;
+input ATLAS_C10;
+input ATLAS_C11;
+input ATLAS_C12;
+input ATLAS_C13;
+input ATLAS_C14;
+input ATLAS_C15;
+input ATLAS_C16;
+input ATLAS_C17;
+input ATLAS_C18;
+input ATLAS_C19;
+input ATLAS_C22;
+input ATLAS_C23;
+input ATLAS_C24;
+input ATLAS_C25;
+
+
+
+
+
+
+
+
+
 
 output FPGA_TXD;  // serial port out line 
 
@@ -73,37 +127,63 @@ assign DEBUG_LED1 = ~leds[1];
 // assign DEBUG_LED2 = ~leds[2]; 		
 // assign DEBUG_LED3 = ~leds[3]; 		
 
-assign ATLAS_A04 = FX2_CLK; 
+ 
 
-wire ATLAS_A02 = clock_count[2]; 
-wire ATLAS_A10 = clock_count[3];  
+wire ATLAS_A02 = clock_count[00];   // 6
+wire ATLAS_A03 = clock_count[01];   // 3
+wire ATLAS_A04 = clock_count[02];   // 1.5
+wire ATLAS_A05 = clock_count[03];   // 750
+wire ATLAS_A06 = clock_count[04];   // 375
+wire ATLAS_A07 = clock_count[05];   // 187.5
+wire ATLAS_A08 = clock_count[06];   // 93.75
+wire ATLAS_A09 = ~clock_count[00];
+wire ATLAS_A10 = ~clock_count[01];
+wire ATLAS_A11 = ~clock_count[02];
+wire ATLAS_A12 = ~clock_count[03];
+wire ATLAS_A13 = ~clock_count[04];
+wire ATLAS_A14 = ~clock_count[05];
+wire ATLAS_A15 = ~clock_count[06];
+wire ATLAS_A16 = clock_count[00];
+wire ATLAS_A17 = clock_count[01];
+wire ATLAS_A18 = clock_count[02];
+wire ATLAS_A19 = clock_count[03];
 
+wire ATLAS_A22 = clock_count[00];
+wire ATLAS_A23 = clock_count[01];
+wire ATLAS_A24 = clock_count[02];
+wire ATLAS_A25 = clock_count[03];
 
-
-reg[1:0] loopback_reset; 
-wire[1:0] loopback_result; 
-
+reg[21:0] loopback_reset; 
+wire[21:0] loopback_result; 
 
 assign DEBUG_LED2 = ~loopback_result[0];
 assign DEBUG_LED3 = ~loopback_result[1];
 
-
 // instantiate two loopback checkers 
 
-loopBackCheck loopBackA02C02( .ref_sig_i(ATLAS_A02), 
-                              .check_sig_i(ATLAS_C02), 
-					     	  .not_ok_o(loopback_result[0]),
-							  .master_clock_i(FX2_CLK), 
-							  .reset_i(loopback_reset[0])
-						     );
-							
-loopBackCheck loopBackA10C10( .ref_sig_i(ATLAS_A10), 
-                              .check_sig_i(ATLAS_C10), 
-							  .not_ok_o(loopback_result[1]),
-							  .master_clock_i(FX2_CLK), 
-							  .reset_i(loopback_reset[1])
-							);							
+loopBackCheck loopBackA02C02( .ref_sig_i(ATLAS_A02), .check_sig_i(ATLAS_C02), .not_ok_o(loopback_result[00]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[00]) );
+loopBackCheck loopBackA03C03( .ref_sig_i(ATLAS_A03), .check_sig_i(ATLAS_C03), .not_ok_o(loopback_result[01]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[01]) );
+loopBackCheck loopBackA04C04( .ref_sig_i(ATLAS_A04), .check_sig_i(ATLAS_C04), .not_ok_o(loopback_result[02]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[02]) );
+loopBackCheck loopBackA05C05( .ref_sig_i(ATLAS_A05), .check_sig_i(ATLAS_C05), .not_ok_o(loopback_result[03]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[03]) );
+loopBackCheck loopBackA06C06( .ref_sig_i(ATLAS_A06), .check_sig_i(ATLAS_C06), .not_ok_o(loopback_result[04]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[04]) );
+loopBackCheck loopBackA07C07( .ref_sig_i(ATLAS_A07), .check_sig_i(ATLAS_C07), .not_ok_o(loopback_result[05]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[05]) );
+loopBackCheck loopBackA08C08( .ref_sig_i(ATLAS_A08), .check_sig_i(ATLAS_C08), .not_ok_o(loopback_result[06]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[06]) );
+loopBackCheck loopBackA09C09( .ref_sig_i(ATLAS_A09), .check_sig_i(ATLAS_C09), .not_ok_o(loopback_result[07]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[07]) );
+loopBackCheck loopBackA10C10( .ref_sig_i(ATLAS_A10), .check_sig_i(ATLAS_C10), .not_ok_o(loopback_result[08]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[08]) );
+loopBackCheck loopBackA11C11( .ref_sig_i(ATLAS_A11), .check_sig_i(ATLAS_C11), .not_ok_o(loopback_result[09]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[09]) );
+loopBackCheck loopBackA12C12( .ref_sig_i(ATLAS_A12), .check_sig_i(ATLAS_C12), .not_ok_o(loopback_result[10]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[10]) );
+loopBackCheck loopBackA13C13( .ref_sig_i(ATLAS_A13), .check_sig_i(ATLAS_C13), .not_ok_o(loopback_result[11]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[11]) );
+loopBackCheck loopBackA14C14( .ref_sig_i(ATLAS_A14), .check_sig_i(ATLAS_C14), .not_ok_o(loopback_result[12]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[12]) );
+loopBackCheck loopBackA15C15( .ref_sig_i(ATLAS_A15), .check_sig_i(ATLAS_C15), .not_ok_o(loopback_result[13]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[13]) );
+loopBackCheck loopBackA16C16( .ref_sig_i(ATLAS_A16), .check_sig_i(ATLAS_C16), .not_ok_o(loopback_result[14]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[14]) );
+loopBackCheck loopBackA17C17( .ref_sig_i(ATLAS_A17), .check_sig_i(ATLAS_C17), .not_ok_o(loopback_result[15]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[15]) );
+loopBackCheck loopBackA18C18( .ref_sig_i(ATLAS_A18), .check_sig_i(ATLAS_C18), .not_ok_o(loopback_result[16]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[16]) );
+loopBackCheck loopBackA19C19( .ref_sig_i(ATLAS_A19), .check_sig_i(ATLAS_C19), .not_ok_o(loopback_result[17]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[17]) );
 
+loopBackCheck loopBackA22C22( .ref_sig_i(ATLAS_A22), .check_sig_i(ATLAS_C22), .not_ok_o(loopback_result[18]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[18]) );
+loopBackCheck loopBackA23C23( .ref_sig_i(ATLAS_A23), .check_sig_i(ATLAS_C23), .not_ok_o(loopback_result[19]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[19]) );
+loopBackCheck loopBackA24C24( .ref_sig_i(ATLAS_A24), .check_sig_i(ATLAS_C24), .not_ok_o(loopback_result[20]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[20]) );
+loopBackCheck loopBackA25C25( .ref_sig_i(ATLAS_A25), .check_sig_i(ATLAS_C25), .not_ok_o(loopback_result[21]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[21]) );
 
 
 
@@ -112,9 +192,7 @@ reg[16:0] baud_reg;
 always @ (posedge FX2_CLK) begin
 	baud_reg <= baud_reg[15:0] + 629; 
 end 
-
-assign ATLAS_A06 = baud_reg[16]; 
-
+ 
 always @ (posedge FX2_CLK) begin 
 	if ( leds == 0 ) begin 
 		leds <= 1; 
@@ -175,15 +253,13 @@ always @ ( posedge FX2_CLK )
 begin 
 	case ( test_loop_state ) 
 		0: begin  // init -- reset all loopbacks 
-			loopback_reset[0] <= 1; 
-			loopback_reset[1] <= 1; 
+            loopback_reset <= 1; 
 			test_circ_idx <= 0; 
 			test_loop_state <= 1; 
 		end
 		
 		1: begin  // come out of init - go into idling state 
-			loopback_reset[0] <= 0; 
-			loopback_reset[1] <= 0; 
+			loopback_reset <= 0; 
 			test_loop_state <= 2; 
 			idle_counter <= 0; 
 		end 
@@ -269,9 +345,9 @@ begin
 		
 		14: begin  // all done printing mesaage - see if we're at end of loop and if all passed print msg - else go on to next circ 
 			loopback_reset[test_circ_idx] <= 0; 
-			if ( test_circ_idx == 1 ) begin  // are we at end of list?? reset to 0
+			if ( test_circ_idx == 21 ) begin  // are we at end of list?? reset to 0
 				test_circ_idx <= 0;  
-				if ( pass_count == 2 ) begin  // did all circuits pass? 
+				if ( pass_count == 22 ) begin  // did all circuits pass? 
 					test_loop_state <= 16;  // go print 'All Pass!" message 
 				end 
 				else begin

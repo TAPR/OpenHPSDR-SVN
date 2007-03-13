@@ -28,8 +28,8 @@ FIFO_ADR[1] <= <GND>
 DEBUG_LED0 <= leds[0].DB_MAX_OUTPUT_PORT_TYPE
 DEBUG_LED1 <= leds[1].DB_MAX_OUTPUT_PORT_TYPE
 DEBUG_LED2 <= loopBackCheck:loopBackA02C02.not_ok_o
-DEBUG_LED3 <= loopBackCheck:loopBackA10C10.not_ok_o
-FX2_CLK => FX2_CLK~0.IN3
+DEBUG_LED3 <= loopBackCheck:loopBackA03C03.not_ok_o
+FX2_CLK => FX2_CLK~0.IN23
 SPI_SCK => ~NO_FANOUT~
 SPI_SI => ~NO_FANOUT~
 SPI_SO <= <UNC>
@@ -59,12 +59,50 @@ GPIO[21] <= <UNC>
 GPIO[22] <= <UNC>
 GPIO[23] <= <UNC>
 GPIO_nIOE <= <GND>
-ATLAS_A02 <= ATLAS_A02~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A02 <= ATLAS_A22~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A03 <= ATLAS_A23~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A04 <= ATLAS_A24~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A05 <= ATLAS_A25~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A06 <= ATLAS_A06~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A07 <= ATLAS_A07~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A08 <= ATLAS_A08~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A09 <= ATLAS_A09~0.DB_MAX_OUTPUT_PORT_TYPE
 ATLAS_A10 <= ATLAS_A10~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A11 <= ATLAS_A11~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A12 <= ATLAS_A12~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A13 <= ATLAS_A13~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A14 <= ATLAS_A14~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A15 <= ATLAS_A15~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A16 <= ATLAS_A22~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A17 <= ATLAS_A23~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A18 <= ATLAS_A24~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A19 <= ATLAS_A25~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A22 <= ATLAS_A22~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A23 <= ATLAS_A23~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A24 <= ATLAS_A24~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_A25 <= ATLAS_A25~0.DB_MAX_OUTPUT_PORT_TYPE
 ATLAS_C02 => ATLAS_C02~0.IN1
+ATLAS_C03 => ATLAS_C03~0.IN1
+ATLAS_C04 => ATLAS_C04~0.IN1
+ATLAS_C05 => ATLAS_C05~0.IN1
+ATLAS_C06 => ATLAS_C06~0.IN1
+ATLAS_C07 => ATLAS_C07~0.IN1
+ATLAS_C08 => ATLAS_C08~0.IN1
+ATLAS_C09 => ATLAS_C09~0.IN1
 ATLAS_C10 => ATLAS_C10~0.IN1
-ATLAS_A06 <= baud_reg[16]~0.DB_MAX_OUTPUT_PORT_TYPE
-ATLAS_A04 <= FX2_CLK~0.DB_MAX_OUTPUT_PORT_TYPE
+ATLAS_C11 => ATLAS_C11~0.IN1
+ATLAS_C12 => ATLAS_C12~0.IN1
+ATLAS_C13 => ATLAS_C13~0.IN1
+ATLAS_C14 => ATLAS_C14~0.IN1
+ATLAS_C15 => ATLAS_C15~0.IN1
+ATLAS_C16 => ATLAS_C16~0.IN1
+ATLAS_C17 => ATLAS_C17~0.IN1
+ATLAS_C18 => ATLAS_C18~0.IN1
+ATLAS_C19 => ATLAS_C19~0.IN1
+ATLAS_C22 => ATLAS_C22~0.IN1
+ATLAS_C23 => ATLAS_C23~0.IN1
+ATLAS_C24 => ATLAS_C24~0.IN1
+ATLAS_C25 => ATLAS_C25~0.IN1
 FPGA_TXD <= rs232_xmit:Ozy_rs232_xmit.xmit_o
 
 
@@ -82,7 +120,287 @@ reset_i => armed~2.OUTPUTSELECT
 reset_i => last_ref_sig.ENA
 
 
+|WrapTest|loopBackCheck:loopBackA03C03
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA04C04
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA05C05
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA06C06
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA07C07
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA08C08
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA09C09
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
 |WrapTest|loopBackCheck:loopBackA10C10
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA11C11
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA12C12
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA13C13
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA14C14
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA15C15
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA16C16
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA17C17
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA18C18
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA19C19
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA22C22
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA23C23
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA24C24
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackA25C25
 ref_sig_i => always0~0.IN0
 ref_sig_i => always0~1.IN1
 ref_sig_i => last_ref_sig~0.DATAA

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for WrapTest
-Sun Mar 11 18:08:43 2007
+Mon Mar 12 23:38:23 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -50,14 +50,14 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Mar 11 18:08:43 2007   ;
+; Analysis & Synthesis Status        ; Successful - Mon Mar 12 23:38:23 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; WrapTest                                ;
 ; Top-level Entity Name              ; WrapTest                                ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 316                                     ;
-;     Total combinational functions  ; 316                                     ;
-;     Dedicated logic registers      ; 191                                     ;
+; Total logic elements               ; 472                                     ;
+;     Total combinational functions  ; 472                                     ;
+;     Dedicated logic registers      ; 271                                     ;
 ; Total registers                    ; N/A until Partition Merge               ;
 ; Total pins                         ; N/A until Partition Merge               ;
 ; Total virtual pins                 ; N/A until Partition Merge               ;
@@ -160,28 +160,28 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 316     ;
+; Estimated Total logic elements              ; 472     ;
 ;                                             ;         ;
-; Total combinational functions               ; 316     ;
+; Total combinational functions               ; 472     ;
 ; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 97      ;
-;     -- 3 input functions                    ; 43      ;
-;     -- <=2 input functions                  ; 176     ;
+;     -- 4 input functions                    ; 244     ;
+;     -- 3 input functions                    ; 39      ;
+;     -- <=2 input functions                  ; 189     ;
 ;                                             ;         ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 224     ;
+;     -- normal mode                          ; 380     ;
 ;     -- arithmetic mode                      ; 92      ;
 ;                                             ;         ;
-; Total registers                             ; 191     ;
-;     -- Dedicated logic registers            ; 191     ;
+; Total registers                             ; 271     ;
+;     -- Dedicated logic registers            ; 271     ;
 ;     -- I/O registers                        ; 0       ;
 ;                                             ;         ;
 ; I/O pins                                    ; 41      ;
 ; Total memory bits                           ; 128     ;
 ; Maximum fan-out node                        ; FX2_CLK ;
-; Maximum fan-out                             ; 200     ;
-; Total fan-out                               ; 1524    ;
-; Average fan-out                             ; 2.45    ;
+; Maximum fan-out                             ; 279     ;
+; Total fan-out                               ; 2299    ;
+; Average fan-out                             ; 2.56    ;
 +---------------------------------------------+---------+
 
 
@@ -190,10 +190,30 @@ applicable agreement for further details.
 +----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                         ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                           ;
 +----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; |WrapTest                                          ; 316 (258)         ; 191 (150)    ; 128         ; 0            ; 0       ; 0         ; 41   ; 0            ; |WrapTest                                                                                                                                                                     ;
+; |WrapTest                                          ; 472 (337)         ; 271 (170)    ; 128         ; 0            ; 0       ; 0         ; 41   ; 0            ; |WrapTest                                                                                                                                                                     ;
 ;    |loopBackCheck:loopBackA02C02|                  ; 5 (5)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA02C02                                                                                                                                        ;
-;    |loopBackCheck:loopBackA10C10|                  ; 5 (5)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA10C10                                                                                                                                        ;
-;    |rs232_xmit:Ozy_rs232_xmit|                     ; 48 (26)           ; 35 (21)      ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit                                                                                                                                           ;
+;    |loopBackCheck:loopBackA03C03|                  ; 5 (5)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA03C03                                                                                                                                        ;
+;    |loopBackCheck:loopBackA04C04|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA04C04                                                                                                                                        ;
+;    |loopBackCheck:loopBackA05C05|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA05C05                                                                                                                                        ;
+;    |loopBackCheck:loopBackA06C06|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA06C06                                                                                                                                        ;
+;    |loopBackCheck:loopBackA07C07|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA07C07                                                                                                                                        ;
+;    |loopBackCheck:loopBackA08C08|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA08C08                                                                                                                                        ;
+;    |loopBackCheck:loopBackA09C09|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA09C09                                                                                                                                        ;
+;    |loopBackCheck:loopBackA10C10|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA10C10                                                                                                                                        ;
+;    |loopBackCheck:loopBackA11C11|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA11C11                                                                                                                                        ;
+;    |loopBackCheck:loopBackA12C12|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA12C12                                                                                                                                        ;
+;    |loopBackCheck:loopBackA13C13|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA13C13                                                                                                                                        ;
+;    |loopBackCheck:loopBackA14C14|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA14C14                                                                                                                                        ;
+;    |loopBackCheck:loopBackA15C15|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA15C15                                                                                                                                        ;
+;    |loopBackCheck:loopBackA16C16|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA16C16                                                                                                                                        ;
+;    |loopBackCheck:loopBackA17C17|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA17C17                                                                                                                                        ;
+;    |loopBackCheck:loopBackA18C18|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA18C18                                                                                                                                        ;
+;    |loopBackCheck:loopBackA19C19|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA19C19                                                                                                                                        ;
+;    |loopBackCheck:loopBackA22C22|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA22C22                                                                                                                                        ;
+;    |loopBackCheck:loopBackA23C23|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA23C23                                                                                                                                        ;
+;    |loopBackCheck:loopBackA24C24|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA24C24                                                                                                                                        ;
+;    |loopBackCheck:loopBackA25C25|                  ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|loopBackCheck:loopBackA25C25                                                                                                                                        ;
+;    |rs232_xmit:Ozy_rs232_xmit|                     ; 45 (23)           ; 35 (21)      ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit                                                                                                                                           ;
 ;       |rs232_tx_fifo:tx_fifo|                      ; 22 (0)            ; 14 (0)       ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo                                                                                                                     ;
 ;          |scfifo:scfifo_component|                 ; 22 (0)            ; 14 (0)       ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component                                                                                             ;
 ;             |scfifo_cdv:auto_generated|            ; 22 (0)            ; 14 (0)       ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated                                                                   ;
@@ -329,8 +349,8 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 191   ;
-; Number of registers using Synchronous Clear  ; 36    ;
+; Total registers                              ; 271   ;
+; Number of registers using Synchronous Clear  ; 38    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -344,11 +364,11 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |WrapTest|rs232_delay_count[13]                    ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |WrapTest|pass_count[7]                            ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |WrapTest|rs232_delay_count[10]                    ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |WrapTest|pass_count[6]                            ;
 ; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|xmit_count[3]  ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; No         ; |WrapTest|test_loop_state~21                       ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state~6 ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; No         ; |WrapTest|test_loop_state~17                       ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state~7 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
 
 
@@ -410,7 +430,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Mar 11 18:08:24 2007
+    Info: Processing started: Mon Mar 12 23:38:00 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off WrapTest -c WrapTest
 Info: Found 1 design units, including 1 entities, in source file rs232_tx_fifo.v
     Info: Found entity 1: rs232_tx_fifo
@@ -421,21 +441,21 @@ Info: Found 1 design units, including 1 entities, in source file loopBackChecker
 Info: Found 1 design units, including 1 entities, in source file rs232_xmit.v
     Info: Found entity 1: rs232_xmit
 Info: Elaborating entity "WrapTest" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(113): truncated value with size 32 to match size of target (17)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(133): truncated value with size 32 to match size of target (25)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(197): truncated value with size 32 to match size of target (16)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(209): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(155): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(158): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(283): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(293): truncated value with size 32 to match size of target (16)
-Warning (10034): Output port "SLWR" at WrapTest.v(34) has no driver
-Warning (10034): Output port "SLRD" at WrapTest.v(35) has no driver
-Warning (10034): Output port "SLOE" at WrapTest.v(36) has no driver
-Warning (10034): Output port "PKEND" at WrapTest.v(37) has no driver
-Warning (10034): Output port "FIFO_ADR[1]" at WrapTest.v(38) has no driver
-Warning (10034): Output port "FIFO_ADR[0]" at WrapTest.v(38) has no driver
-Warning (10034): Output port "GPIO_nIOE" at WrapTest.v(56) has no driver
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(193): truncated value with size 32 to match size of target (17)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(211): truncated value with size 32 to match size of target (25)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(273): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(285): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(233): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(236): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(359): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(369): truncated value with size 32 to match size of target (16)
+Warning (10034): Output port "SLWR" at WrapTest.v(39) has no driver
+Warning (10034): Output port "SLRD" at WrapTest.v(40) has no driver
+Warning (10034): Output port "SLOE" at WrapTest.v(41) has no driver
+Warning (10034): Output port "PKEND" at WrapTest.v(42) has no driver
+Warning (10034): Output port "FIFO_ADR[1]" at WrapTest.v(43) has no driver
+Warning (10034): Output port "FIFO_ADR[0]" at WrapTest.v(43) has no driver
+Warning (10034): Output port "GPIO_nIOE" at WrapTest.v(61) has no driver
 Info: Elaborating entity "loopBackCheck" for hierarchy "loopBackCheck:loopBackA02C02"
 Info: Elaborating entity "rs232_xmit" for hierarchy "rs232_xmit:Ozy_rs232_xmit"
 Warning (10230): Verilog HDL assignment warning at rs232_xmit.v(115): truncated value with size 32 to match size of target (4)
@@ -642,16 +662,16 @@ Info: 11 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "post_xmit_state~9" lost all its fanouts during netlist optimizations.
     Info: Register "post_xmit_state~10" lost all its fanouts during netlist optimizations.
     Info: Register "post_xmit_state~11" lost all its fanouts during netlist optimizations.
-Info: Implemented 453 device resources after synthesis - the final resource count might be different
-    Info: Implemented 10 input pins
-    Info: Implemented 16 output pins
+Info: Implemented 647 device resources after synthesis - the final resource count might be different
+    Info: Implemented 30 input pins
+    Info: Implemented 34 output pins
     Info: Implemented 82 bidirectional pins
-    Info: Implemented 337 logic cells
+    Info: Implemented 493 logic cells
     Info: Implemented 8 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 69 warnings
     Info: Allocated 130 megabytes of memory during processing
-    Info: Processing ended: Sun Mar 11 18:08:42 2007
-    Info: Elapsed time: 00:00:18
+    Info: Processing ended: Mon Mar 12 23:38:23 2007
+    Info: Elapsed time: 00:00:23
 
 
 +------------------------------------------+
