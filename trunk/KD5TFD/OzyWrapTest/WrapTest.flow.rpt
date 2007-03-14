@@ -1,5 +1,5 @@
 Flow report for WrapTest
-Mon Mar 12 23:39:22 2007
+Tue Mar 13 18:54:31 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Mon Mar 12 23:39:22 2007   ;
+; Flow Status                        ; Successful - Tue Mar 13 18:54:31 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; WrapTest                                ;
 ; Top-level Entity Name              ; WrapTest                                ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/12/2007 23:38:01 ;
+; Start date & time ; 03/13/2007 18:53:18 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; WrapTest            ;
 +-------------------+---------------------+
@@ -82,12 +82,12 @@ applicable agreement for further details.
 +-------------------------+--------------+
 ; Module Name             ; Elapsed Time ;
 +-------------------------+--------------+
-; Analysis & Synthesis    ; 00:00:23     ;
-; Partition Merge         ; 00:00:03     ;
-; Fitter                  ; 00:00:21     ;
+; Analysis & Synthesis    ; 00:00:21     ;
+; Partition Merge         ; 00:00:02     ;
+; Fitter                  ; 00:00:20     ;
 ; Assembler               ; 00:00:15     ;
 ; Classic Timing Analyzer ; 00:00:03     ;
-; Total                   ; 00:01:05     ;
+; Total                   ; 00:01:01     ;
 +-------------------------+--------------+
 
 
