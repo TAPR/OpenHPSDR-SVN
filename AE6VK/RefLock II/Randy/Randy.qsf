@@ -37,3 +37,33 @@ set_global_assignment -name VERILOG_FILE Randy.v
 set_location_assignment PIN_31 -to LED1
 set_location_assignment PIN_32 -to LED2
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_location_assignment PIN_1 -to SCK
+set_location_assignment PIN_2 -to SDI
+set_location_assignment PIN_3 -to SDO
+set_location_assignment PIN_4 -to CS
+set_location_assignment PIN_20 -to OnePPS
+set_location_assignment PIN_89 -to REF
+set_location_assignment PIN_91 -to VCXO
+set_location_assignment PIN_111 -to PD1_XOR
+set_location_assignment PIN_112 -to PD2_UP
+set_location_assignment PIN_113 -to PD2_DN
+set_location_assignment PIN_42 -to R0
+set_location_assignment PIN_41 -to R1
+set_location_assignment PIN_40 -to R2
+set_location_assignment PIN_39 -to R3
+set_location_assignment PIN_38 -to R4
+set_location_assignment PIN_37 -to R5
+set_location_assignment PIN_59 -to N11
+set_location_assignment PIN_60 -to N10
+set_location_assignment PIN_61 -to N9
+set_location_assignment PIN_62 -to N8
+set_location_assignment PIN_63 -to N7
+set_location_assignment PIN_66 -to N6
+set_location_assignment PIN_67 -to N5
+set_location_assignment PIN_68 -to N4
+set_location_assignment PIN_69 -to N3
+set_location_assignment PIN_70 -to N2
+set_location_assignment PIN_71 -to N1
+set_location_assignment PIN_72 -to N0
+set_instance_assignment -name ALIAS SCL -to SCK
+set_instance_assignment -name ALIAS SDA -to SOI
