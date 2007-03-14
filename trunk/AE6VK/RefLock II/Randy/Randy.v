@@ -24,6 +24,9 @@
 // CPLD code to lock 10MHz refClock to 144.075MHz VCO.
 module Randy
 	(
+		input REF,
+		input VCXO,
+		output PD1_XOR,
 		output LED1,
 		output LED2
 	);
