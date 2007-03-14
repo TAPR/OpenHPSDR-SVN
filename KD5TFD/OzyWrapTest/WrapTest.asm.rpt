@@ -1,5 +1,5 @@
 Assembler report for WrapTest
-Mon Mar 12 23:39:16 2007
+Tue Mar 13 18:54:25 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Mon Mar 12 23:39:16 2007 ;
+; Assembler Status      ; Successful - Tue Mar 13 18:54:25 2007 ;
 ; Revision Name         ; WrapTest                              ;
 ; Top-level Entity Name ; WrapTest                              ;
 ; Family                ; Cyclone II                            ;
@@ -127,13 +127,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Mon Mar 12 23:39:01 2007
+    Info: Processing started: Tue Mar 13 18:54:10 2007
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off WrapTest -c WrapTest
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Allocated 126 megabytes of memory during processing
-    Info: Processing ended: Mon Mar 12 23:39:16 2007
+    Info: Processing ended: Tue Mar 13 18:54:25 2007
     Info: Elapsed time: 00:00:15
 
 
