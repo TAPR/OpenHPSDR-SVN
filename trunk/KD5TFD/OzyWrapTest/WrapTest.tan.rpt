@@ -1,5 +1,5 @@
 Classic Timing Analyzer report for WrapTest
-Tue Mar 13 18:54:31 2007
+Sun Mar 18 14:34:46 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -42,10 +42,10 @@ applicable agreement for further details.
 +------------------------------+-------+---------------+----------------------------------+---------------------------------------+---------------------------------------+------------+----------+--------------+
 ; Type                         ; Slack ; Required Time ; Actual Time                      ; From                                  ; To                                    ; From Clock ; To Clock ; Failed Paths ;
 +------------------------------+-------+---------------+----------------------------------+---------------------------------------+---------------------------------------+------------+----------+--------------+
-; Worst-case tsu               ; N/A   ; None          ; 7.305 ns                         ; ATLAS_C22                             ; loopBackCheck:loopBackA22C22|not_ok_o ; --         ; FX2_CLK  ; 0            ;
-; Worst-case tco               ; N/A   ; None          ; 10.655 ns                        ; rs232_xmit:Ozy_rs232_xmit|xmit_o      ; FPGA_TXD                              ; FX2_CLK    ; --       ; 0            ;
-; Worst-case th                ; N/A   ; None          ; -4.845 ns                        ; ATLAS_C14                             ; loopBackCheck:loopBackA14C14|not_ok_o ; --         ; FX2_CLK  ; 0            ;
-; Clock Setup: 'FX2_CLK'       ; N/A   ; None          ; 78.37 MHz ( period = 12.760 ns ) ; loopBackCheck:loopBackA04C04|not_ok_o ; test_loop_state.01101                 ; FX2_CLK    ; FX2_CLK  ; 0            ;
+; Worst-case tsu               ; N/A   ; None          ; 7.477 ns                         ; ATLAS_C08                             ; loopBackCheck:loopBackA08C08|not_ok_o ; --         ; FX2_CLK  ; 0            ;
+; Worst-case tco               ; N/A   ; None          ; 10.198 ns                        ; clock_count[1]                        ; ATLAS_A03                             ; FX2_CLK    ; --       ; 0            ;
+; Worst-case th                ; N/A   ; None          ; -5.039 ns                        ; ATLAS_C19                             ; loopBackCheck:loopBackA19C19|not_ok_o ; --         ; FX2_CLK  ; 0            ;
+; Clock Setup: 'FX2_CLK'       ; N/A   ; None          ; 71.61 MHz ( period = 13.964 ns ) ; loopBackCheck:loopBackA25C25|not_ok_o ; pass_count[7]                         ; FX2_CLK    ; FX2_CLK  ; 0            ;
 ; Total number of failed paths ;       ;               ;                                  ;                                       ;                                       ;            ;          ; 0            ;
 +------------------------------+-------+---------------+----------------------------------+---------------------------------------+---------------------------------------+------------+----------+--------------+
 
@@ -84,243 +84,259 @@ applicable agreement for further details.
 +-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Clock Setup: 'FX2_CLK'                                                                                                                                                                                                                                                    ;
-+-----------------------------------------+-----------------------------------------------------+---------------------------------------+-----------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
-; Slack                                   ; Actual fmax (period)                                ; From                                  ; To                    ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
-+-----------------------------------------+-----------------------------------------------------+---------------------------------------+-----------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
-; N/A                                     ; 78.37 MHz ( period = 12.760 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.085 ns                ;
-; N/A                                     ; 78.96 MHz ( period = 12.664 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.034 ns                ;
-; N/A                                     ; 79.21 MHz ( period = 12.624 ns )                    ; loopBackCheck:loopBackA14C14|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.005 ns                ;
-; N/A                                     ; 79.82 MHz ( period = 12.528 ns )                    ; loopBackCheck:loopBackA14C14|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.954 ns                ;
-; N/A                                     ; 80.05 MHz ( period = 12.492 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.948 ns                ;
-; N/A                                     ; 80.18 MHz ( period = 12.472 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.936 ns                ;
-; N/A                                     ; 80.44 MHz ( period = 12.432 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.927 ns                ;
-; N/A                                     ; 80.80 MHz ( period = 12.376 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.885 ns                ;
-; N/A                                     ; 80.93 MHz ( period = 12.356 ns )                    ; loopBackCheck:loopBackA14C14|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.868 ns                ;
-; N/A                                     ; 81.06 MHz ( period = 12.336 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.876 ns                ;
-; N/A                                     ; 81.17 MHz ( period = 12.320 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.862 ns                ;
-; N/A                                     ; 81.42 MHz ( period = 12.282 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.834 ns                ;
-; N/A                                     ; 81.94 MHz ( period = 12.204 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.799 ns                ;
-; N/A                                     ; 82.06 MHz ( period = 12.186 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.783 ns                ;
-; N/A                                     ; 82.07 MHz ( period = 12.184 ns )                    ; loopBackCheck:loopBackA14C14|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.782 ns                ;
-; N/A                                     ; 82.21 MHz ( period = 12.164 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.790 ns                ;
-; N/A                                     ; 82.33 MHz ( period = 12.146 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.773 ns                ;
-; N/A                                     ; 82.84 MHz ( period = 12.072 ns )                    ; loopBackCheck:loopBackA15C15|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.729 ns                ;
-; N/A                                     ; 82.99 MHz ( period = 12.050 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.722 ns                ;
-; N/A                                     ; 83.11 MHz ( period = 12.032 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.713 ns                ;
-; N/A                                     ; 83.24 MHz ( period = 12.014 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.697 ns                ;
-; N/A                                     ; 83.39 MHz ( period = 11.992 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.704 ns                ;
-; N/A                                     ; 83.50 MHz ( period = 11.976 ns )                    ; loopBackCheck:loopBackA15C15|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.678 ns                ;
-; N/A                                     ; 83.60 MHz ( period = 11.962 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.714 ns                ;
-; N/A                                     ; 83.71 MHz ( period = 11.946 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.683 ns                ;
-; N/A                                     ; 83.75 MHz ( period = 11.940 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.672 ns                ;
-; N/A                                     ; 83.79 MHz ( period = 11.934 ns )                    ; loopBackCheck:loopBackA17C17|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.667 ns                ;
-; N/A                                     ; 83.99 MHz ( period = 11.906 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.693 ns                ;
-; N/A                                     ; 84.19 MHz ( period = 11.878 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.636 ns                ;
-; N/A                                     ; 84.27 MHz ( period = 11.866 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.663 ns                ;
-; N/A                                     ; 84.39 MHz ( period = 11.850 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.632 ns                ;
-; N/A                                     ; 84.45 MHz ( period = 11.842 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.611 ns                ;
-; N/A                                     ; 84.47 MHz ( period = 11.838 ns )                    ; loopBackCheck:loopBackA17C17|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.616 ns                ;
-; N/A                                     ; 84.66 MHz ( period = 11.812 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.611 ns                ;
-; N/A                                     ; 84.67 MHz ( period = 11.810 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.642 ns                ;
-; N/A                                     ; 84.72 MHz ( period = 11.804 ns )                    ; loopBackCheck:loopBackA15C15|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.592 ns                ;
-; N/A                                     ; 84.72 MHz ( period = 11.804 ns )                    ; loopBackCheck:loopBackA14C14|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.592 ns                ;
-; N/A                                     ; 84.98 MHz ( period = 11.768 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.586 ns                ;
-; N/A                                     ; 85.14 MHz ( period = 11.746 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.594 ns                ;
-; N/A                                     ; 85.43 MHz ( period = 11.706 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.550 ns                ;
-; N/A                                     ; 85.51 MHz ( period = 11.694 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.577 ns                ;
-; N/A                                     ; 85.63 MHz ( period = 11.678 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.546 ns                ;
-; N/A                                     ; 85.65 MHz ( period = 11.676 ns )                    ; loopBackCheck:loopBackA14C14|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.531 ns                ;
-; N/A                                     ; 85.72 MHz ( period = 11.666 ns )                    ; loopBackCheck:loopBackA17C17|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.530 ns                ;
-; N/A                                     ; 85.76 MHz ( period = 11.660 ns )                    ; loopBackCheck:loopBackA07C07|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.533 ns                ;
-; N/A                                     ; 85.82 MHz ( period = 11.652 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.523 ns                ;
-; N/A                                     ; 85.84 MHz ( period = 11.650 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.543 ns                ;
-; N/A                                     ; 85.93 MHz ( period = 11.638 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.556 ns                ;
-; N/A                                     ; 85.97 MHz ( period = 11.632 ns )                    ; loopBackCheck:loopBackA15C15|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.506 ns                ;
-; N/A                                     ; 85.97 MHz ( period = 11.632 ns )                    ; loopBackCheck:loopBackA14C14|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.506 ns                ;
-; N/A                                     ; 86.12 MHz ( period = 11.612 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.514 ns                ;
-; N/A                                     ; 86.24 MHz ( period = 11.596 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.500 ns                ;
-; N/A                                     ; 86.48 MHz ( period = 11.564 ns )                    ; loopBackCheck:loopBackA07C07|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.482 ns                ;
-; N/A                                     ; 86.70 MHz ( period = 11.534 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.506 ns                ;
-; N/A                                     ; 86.78 MHz ( period = 11.524 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.462 ns                ;
-; N/A                                     ; 86.79 MHz ( period = 11.522 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.491 ns                ;
-; N/A                                     ; 86.84 MHz ( period = 11.516 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.496 ns                ;
-; N/A                                     ; 86.91 MHz ( period = 11.506 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.460 ns                ;
-; N/A                                     ; 87.00 MHz ( period = 11.494 ns )                    ; loopBackCheck:loopBackA17C17|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.444 ns                ;
-; N/A                                     ; 87.06 MHz ( period = 11.486 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.448 ns                ;
-; N/A                                     ; 87.08 MHz ( period = 11.484 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.453 ns                ;
-; N/A                                     ; 87.11 MHz ( period = 11.480 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.437 ns                ;
-; N/A                                     ; 87.12 MHz ( period = 11.478 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.457 ns                ;
-; N/A                                     ; 87.17 MHz ( period = 11.472 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.429 ns                ;
-; N/A                                     ; 87.21 MHz ( period = 11.466 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.470 ns                ;
-; N/A                                     ; 87.24 MHz ( period = 11.462 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.421 ns                ;
-; N/A                                     ; 87.26 MHz ( period = 11.460 ns )                    ; loopBackCheck:loopBackA14C14|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.420 ns                ;
-; N/A                                     ; 87.41 MHz ( period = 11.440 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.428 ns                ;
-; N/A                                     ; 87.43 MHz ( period = 11.438 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.455 ns                ;
-; N/A                                     ; 87.54 MHz ( period = 11.424 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.414 ns                ;
-; N/A                                     ; 87.57 MHz ( period = 11.420 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.445 ns                ;
-; N/A                                     ; 87.67 MHz ( period = 11.406 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.424 ns                ;
-; N/A                                     ; 87.78 MHz ( period = 11.392 ns )                    ; loopBackCheck:loopBackA07C07|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.396 ns                ;
-; N/A                                     ; 87.80 MHz ( period = 11.390 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.397 ns                ;
-; N/A                                     ; 87.90 MHz ( period = 11.376 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.378 ns                ;
-; N/A                                     ; 88.23 MHz ( period = 11.334 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.360 ns                ;
-; N/A                                     ; 88.29 MHz ( period = 11.326 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.360 ns                ;
-; N/A                                     ; 88.42 MHz ( period = 11.310 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.355 ns                ;
-; N/A                                     ; 88.42 MHz ( period = 11.310 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.373 ns                ;
-; N/A                                     ; 88.43 MHz ( period = 11.308 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.351 ns                ;
-; N/A                                     ; 88.45 MHz ( period = 11.306 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.371 ns                ;
-; N/A                                     ; 88.57 MHz ( period = 11.290 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.335 ns                ;
-; N/A                                     ; 88.59 MHz ( period = 11.288 ns )                    ; loopBackCheck:loopBackA14C14|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.334 ns                ;
-; N/A                                     ; 88.75 MHz ( period = 11.268 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.342 ns                ;
-; N/A                                     ; 88.76 MHz ( period = 11.266 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.369 ns                ;
-; N/A                                     ; 88.87 MHz ( period = 11.252 ns )                    ; loopBackCheck:loopBackA15C15|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.316 ns                ;
-; N/A                                     ; 88.90 MHz ( period = 11.248 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.359 ns                ;
-; N/A                                     ; 89.13 MHz ( period = 11.220 ns )                    ; loopBackCheck:loopBackA07C07|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.310 ns                ;
-; N/A                                     ; 89.14 MHz ( period = 11.218 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.311 ns                ;
-; N/A                                     ; 89.17 MHz ( period = 11.214 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.304 ns                ;
-; N/A                                     ; 89.25 MHz ( period = 11.204 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.292 ns                ;
-; N/A                                     ; 89.30 MHz ( period = 11.198 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.299 ns                ;
-; N/A                                     ; 89.65 MHz ( period = 11.154 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.274 ns                ;
-; N/A                                     ; 89.75 MHz ( period = 11.142 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.301 ns                ;
-; N/A                                     ; 89.78 MHz ( period = 11.138 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.287 ns                ;
-; N/A                                     ; 89.80 MHz ( period = 11.136 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.265 ns                ;
-; N/A                                     ; 89.88 MHz ( period = 11.126 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.270 ns                ;
-; N/A                                     ; 89.90 MHz ( period = 11.124 ns )                    ; loopBackCheck:loopBackA15C15|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.255 ns                ;
-; N/A                                     ; 89.94 MHz ( period = 11.118 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.249 ns                ;
-; N/A                                     ; 89.98 MHz ( period = 11.114 ns )                    ; loopBackCheck:loopBackA17C17|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.254 ns                ;
-; N/A                                     ; 90.12 MHz ( period = 11.096 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.256 ns                ;
-; N/A                                     ; 90.14 MHz ( period = 11.094 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.283 ns                ;
-; N/A                                     ; 90.20 MHz ( period = 11.086 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.280 ns                ;
-; N/A                                     ; 90.25 MHz ( period = 11.080 ns )                    ; loopBackCheck:loopBackA15C15|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.230 ns                ;
-; N/A                                     ; 90.29 MHz ( period = 11.076 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.273 ns                ;
-; N/A                                     ; 90.53 MHz ( period = 11.046 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.225 ns                ;
-; N/A                                     ; 90.56 MHz ( period = 11.042 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.218 ns                ;
-; N/A                                     ; 90.65 MHz ( period = 11.032 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.206 ns                ;
-; N/A                                     ; 90.79 MHz ( period = 11.014 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.240 ns                ;
-; N/A                                     ; 90.93 MHz ( period = 10.998 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.209 ns                ;
-; N/A                                     ; 90.94 MHz ( period = 10.996 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.213 ns                ;
-; N/A                                     ; 91.02 MHz ( period = 10.986 ns )                    ; loopBackCheck:loopBackA17C17|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.193 ns                ;
-; N/A                                     ; 91.06 MHz ( period = 10.982 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.188 ns                ;
-; N/A                                     ; 91.16 MHz ( period = 10.970 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.215 ns                ;
-; N/A                                     ; 91.19 MHz ( period = 10.966 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.201 ns                ;
-; N/A                                     ; 91.26 MHz ( period = 10.958 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.219 ns                ;
-; N/A                                     ; 91.29 MHz ( period = 10.954 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.184 ns                ;
-; N/A                                     ; 91.36 MHz ( period = 10.946 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.163 ns                ;
-; N/A                                     ; 91.39 MHz ( period = 10.942 ns )                    ; loopBackCheck:loopBackA17C17|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.168 ns                ;
-; N/A                                     ; 91.52 MHz ( period = 10.926 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.181 ns                ;
-; N/A                                     ; 91.63 MHz ( period = 10.914 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.194 ns                ;
-; N/A                                     ; 91.68 MHz ( period = 10.908 ns )                    ; loopBackCheck:loopBackA15C15|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.144 ns                ;
-; N/A                                     ; 91.74 MHz ( period = 10.900 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.162 ns                ;
-; N/A                                     ; 92.00 MHz ( period = 10.870 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.132 ns                ;
-; N/A                                     ; 92.25 MHz ( period = 10.840 ns )                    ; loopBackCheck:loopBackA07C07|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.120 ns                ;
-; N/A                                     ; 92.51 MHz ( period = 10.810 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.102 ns                ;
-; N/A                                     ; 92.61 MHz ( period = 10.798 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.120 ns                ;
-; N/A                                     ; 92.61 MHz ( period = 10.798 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.129 ns                ;
-; N/A                                     ; 92.71 MHz ( period = 10.786 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.114 ns                ;
-; N/A                                     ; 92.75 MHz ( period = 10.782 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.098 ns                ;
-; N/A                                     ; 92.85 MHz ( period = 10.770 ns )                    ; loopBackCheck:loopBackA17C17|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.082 ns                ;
-; N/A                                     ; 92.99 MHz ( period = 10.754 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.095 ns                ;
-; N/A                                     ; 93.09 MHz ( period = 10.742 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.108 ns                ;
-; N/A                                     ; 93.14 MHz ( period = 10.736 ns )                    ; loopBackCheck:loopBackA15C15|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.058 ns                ;
-; N/A                                     ; 93.21 MHz ( period = 10.728 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.076 ns                ;
-; N/A                                     ; 93.34 MHz ( period = 10.714 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.093 ns                ;
-; N/A                                     ; 93.35 MHz ( period = 10.712 ns )                    ; loopBackCheck:loopBackA07C07|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.059 ns                ;
-; N/A                                     ; 93.49 MHz ( period = 10.696 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.083 ns                ;
-; N/A                                     ; 93.55 MHz ( period = 10.690 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.063 ns                ;
-; N/A                                     ; 93.74 MHz ( period = 10.668 ns )                    ; loopBackCheck:loopBackA07C07|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.034 ns                ;
-; N/A                                     ; 93.76 MHz ( period = 10.666 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.035 ns                ;
-; N/A                                     ; 93.88 MHz ( period = 10.652 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.016 ns                ;
-; N/A                                     ; 94.11 MHz ( period = 10.626 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.043 ns                ;
-; N/A                                     ; 94.25 MHz ( period = 10.610 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.012 ns                ;
-; N/A                                     ; 94.36 MHz ( period = 10.598 ns )                    ; loopBackCheck:loopBackA17C17|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.996 ns                ;
-; N/A                                     ; 94.46 MHz ( period = 10.586 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.032 ns                ;
-; N/A                                     ; 94.46 MHz ( period = 10.586 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.011 ns                ;
-; N/A                                     ; 94.50 MHz ( period = 10.582 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.009 ns                ;
-; N/A                                     ; 94.61 MHz ( period = 10.570 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.022 ns                ;
-; N/A                                     ; 94.63 MHz ( period = 10.568 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.022 ns                ;
-; N/A                                     ; 94.73 MHz ( period = 10.556 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.990 ns                ;
-; N/A                                     ; 94.86 MHz ( period = 10.542 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.007 ns                ;
-; N/A                                     ; 94.89 MHz ( period = 10.538 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.974 ns                ;
-; N/A                                     ; 95.02 MHz ( period = 10.524 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.955 ns                ;
-; N/A                                     ; 95.02 MHz ( period = 10.524 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.997 ns                ;
-; N/A                                     ; 95.08 MHz ( period = 10.518 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.977 ns                ;
-; N/A                                     ; 95.27 MHz ( period = 10.496 ns )                    ; loopBackCheck:loopBackA07C07|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.948 ns                ;
-; N/A                                     ; 95.29 MHz ( period = 10.494 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.949 ns                ;
-; N/A                                     ; 95.33 MHz ( period = 10.490 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.942 ns                ;
-; N/A                                     ; 95.42 MHz ( period = 10.480 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.930 ns                ;
-; N/A                                     ; 95.62 MHz ( period = 10.458 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.950 ns                ;
-; N/A                                     ; 96.02 MHz ( period = 10.414 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.925 ns                ;
-; N/A                                     ; 96.06 MHz ( period = 10.410 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.923 ns                ;
-; N/A                                     ; 96.17 MHz ( period = 10.398 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o ; pass_count[0]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.901 ns                ;
-; N/A                                     ; 96.43 MHz ( period = 10.370 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.921 ns                ;
-; N/A                                     ; 96.51 MHz ( period = 10.362 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.881 ns                ;
-; N/A                                     ; 96.60 MHz ( period = 10.352 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.911 ns                ;
-; N/A                                     ; 96.66 MHz ( period = 10.346 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.891 ns                ;
-; N/A                                     ; 96.86 MHz ( period = 10.324 ns )                    ; loopBackCheck:loopBackA07C07|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.862 ns                ;
-; N/A                                     ; 96.88 MHz ( period = 10.322 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.863 ns                ;
-; N/A                                     ; 96.92 MHz ( period = 10.318 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.856 ns                ;
-; N/A                                     ; 97.01 MHz ( period = 10.308 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.844 ns                ;
-; N/A                                     ; 97.45 MHz ( period = 10.262 ns )                    ; loopBackCheck:loopBackA14C14|not_ok_o ; pass_count[0]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.821 ns                ;
-; N/A                                     ; 97.64 MHz ( period = 10.242 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.839 ns                ;
-; N/A                                     ; 98.06 MHz ( period = 10.198 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.835 ns                ;
-; N/A                                     ; 98.23 MHz ( period = 10.180 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.825 ns                ;
-; N/A                                     ; 98.27 MHz ( period = 10.176 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.800 ns                ;
-; N/A                                     ; 98.52 MHz ( period = 10.150 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.777 ns                ;
-; N/A                                     ; 98.56 MHz ( period = 10.146 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.770 ns                ;
-; N/A                                     ; 98.66 MHz ( period = 10.136 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.758 ns                ;
-; N/A                                     ; 98.91 MHz ( period = 10.110 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o ; pass_count[0]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.752 ns                ;
-; N/A                                     ; 99.30 MHz ( period = 10.070 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.753 ns                ;
-; N/A                                     ; 99.30 MHz ( period = 10.070 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o ; pass_count[0]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.743 ns                ;
-; N/A                                     ; 99.52 MHz ( period = 10.048 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.739 ns                ;
-; N/A                                     ; 99.96 MHz ( period = 10.004 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.714 ns                ;
-; N/A                                     ; 100.26 MHz ( period = 9.974 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.684 ns                ;
-; N/A                                     ; 100.34 MHz ( period = 9.966 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.701 ns                ;
-; N/A                                     ; 100.66 MHz ( period = 9.934 ns )                    ; loopBackCheck:loopBackA22C22|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.688 ns                ;
-; N/A                                     ; 100.81 MHz ( period = 9.920 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o ; pass_count[0]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.650 ns                ;
-; N/A                                     ; 101.65 MHz ( period = 9.838 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o ; test_loop_state.00100 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.640 ns                ;
-; N/A                                     ; 101.65 MHz ( period = 9.838 ns )                    ; loopBackCheck:loopBackA22C22|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.637 ns                ;
-; N/A                                     ; 101.71 MHz ( period = 9.832 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.628 ns                ;
-; N/A                                     ; 102.10 MHz ( period = 9.794 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.615 ns                ;
-; N/A                                     ; 102.21 MHz ( period = 9.784 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o ; pass_count[0]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.589 ns                ;
-; N/A                                     ; 102.99 MHz ( period = 9.710 ns )                    ; loopBackCheck:loopBackA15C15|not_ok_o ; pass_count[0]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.545 ns                ;
-; N/A                                     ; 103.46 MHz ( period = 9.666 ns )                    ; loopBackCheck:loopBackA22C22|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.551 ns                ;
-; N/A                                     ; 103.52 MHz ( period = 9.660 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.542 ns                ;
-; N/A                                     ; 103.93 MHz ( period = 9.622 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.529 ns                ;
-; N/A                                     ; 104.17 MHz ( period = 9.600 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o ; pass_count[0]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.530 ns                ;
-; N/A                                     ; 104.34 MHz ( period = 9.584 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o ; pass_count[0]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 4.499 ns                ;
-; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;                                       ;                       ;            ;          ;                             ;                           ;                         ;
-+-----------------------------------------+-----------------------------------------------------+---------------------------------------+-----------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'FX2_CLK'                                                                                                                                                                                                                                                            ;
++-----------------------------------------+-----------------------------------------------------+-----------------------------------------------+-----------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack                                   ; Actual fmax (period)                                ; From                                          ; To                    ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-----------------------------------------+-----------------------------------------------------+-----------------------------------------------+-----------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A                                     ; 71.61 MHz ( period = 13.964 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.701 ns                ;
+; N/A                                     ; 71.95 MHz ( period = 13.898 ns )                    ; loopBackCheck:loopBackGPIO12GPIO020|not_ok_o  ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.678 ns                ;
+; N/A                                     ; 72.05 MHz ( period = 13.880 ns )                    ; loopBackCheck:loopBackGPIO10GPIO018|not_ok_o  ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.659 ns                ;
+; N/A                                     ; 72.57 MHz ( period = 13.780 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.614 ns                ;
+; N/A                                     ; 72.59 MHz ( period = 13.776 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.623 ns                ;
+; N/A                                     ; 72.75 MHz ( period = 13.746 ns )                    ; loopBackCheck:loopBackGPIO11GPIO019|not_ok_o  ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.601 ns                ;
+; N/A                                     ; 72.80 MHz ( period = 13.736 ns )                    ; loopBackCheck:loopBackGPIO02ATLASC20|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.613 ns                ;
+; N/A                                     ; 73.62 MHz ( period = 13.584 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.511 ns                ;
+; N/A                                     ; 73.72 MHz ( period = 13.564 ns )                    ; loopBackCheck:loopBackGPIO13GPIO021|not_ok_o  ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.505 ns                ;
+; N/A                                     ; 73.75 MHz ( period = 13.560 ns )                    ; loopBackCheck:loopBackGPIO01GPIO017|not_ok_o  ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.517 ns                ;
+; N/A                                     ; 73.86 MHz ( period = 13.540 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.499 ns                ;
+; N/A                                     ; 73.98 MHz ( period = 13.518 ns )                    ; loopBackCheck:loopBackGPIO12GPIO020|not_ok_o  ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.488 ns                ;
+; N/A                                     ; 74.07 MHz ( period = 13.500 ns )                    ; loopBackCheck:loopBackGPIO10GPIO018|not_ok_o  ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.469 ns                ;
+; N/A                                     ; 74.36 MHz ( period = 13.448 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.448 ns                ;
+; N/A                                     ; 74.56 MHz ( period = 13.412 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.425 ns                ;
+; N/A                                     ; 74.63 MHz ( period = 13.400 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.424 ns                ;
+; N/A                                     ; 74.65 MHz ( period = 13.396 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.433 ns                ;
+; N/A                                     ; 74.74 MHz ( period = 13.380 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.455 ns                ;
+; N/A                                     ; 74.74 MHz ( period = 13.380 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.455 ns                ;
+; N/A                                     ; 74.82 MHz ( period = 13.366 ns )                    ; loopBackCheck:loopBackGPIO11GPIO019|not_ok_o  ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.411 ns                ;
+; N/A                                     ; 74.86 MHz ( period = 13.358 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.408 ns                ;
+; N/A                                     ; 74.87 MHz ( period = 13.356 ns )                    ; loopBackCheck:loopBackGPIO02ATLASC20|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.423 ns                ;
+; N/A                                     ; 74.93 MHz ( period = 13.346 ns )                    ; loopBackCheck:loopBackGPIO12GPIO020|not_ok_o  ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.402 ns                ;
+; N/A                                     ; 75.03 MHz ( period = 13.328 ns )                    ; loopBackCheck:loopBackGPIO10GPIO018|not_ok_o  ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.383 ns                ;
+; N/A                                     ; 75.29 MHz ( period = 13.282 ns )                    ; loopBackCheck:loopBackGPIO15GPIO023|not_ok_o  ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.369 ns                ;
+; N/A                                     ; 75.31 MHz ( period = 13.278 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.383 ns                ;
+; N/A                                     ; 75.36 MHz ( period = 13.270 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.372 ns                ;
+; N/A                                     ; 75.36 MHz ( period = 13.270 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.363 ns                ;
+; N/A                                     ; 75.53 MHz ( period = 13.240 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.355 ns                ;
+; N/A                                     ; 75.53 MHz ( period = 13.240 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.339 ns                ;
+; N/A                                     ; 75.60 MHz ( period = 13.228 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.338 ns                ;
+; N/A                                     ; 75.60 MHz ( period = 13.228 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.338 ns                ;
+; N/A                                     ; 75.62 MHz ( period = 13.224 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.347 ns                ;
+; N/A                                     ; 75.79 MHz ( period = 13.194 ns )                    ; loopBackCheck:loopBackGPIO11GPIO019|not_ok_o  ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.325 ns                ;
+; N/A                                     ; 75.85 MHz ( period = 13.184 ns )                    ; loopBackCheck:loopBackGPIO13GPIO021|not_ok_o  ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.315 ns                ;
+; N/A                                     ; 75.85 MHz ( period = 13.184 ns )                    ; loopBackCheck:loopBackGPIO02ATLASC20|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.337 ns                ;
+; N/A                                     ; 75.87 MHz ( period = 13.180 ns )                    ; loopBackCheck:loopBackGPIO01GPIO017|not_ok_o  ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.327 ns                ;
+; N/A                                     ; 75.91 MHz ( period = 13.174 ns )                    ; loopBackCheck:loopBackGPIO12GPIO020|not_ok_o  ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.316 ns                ;
+; N/A                                     ; 75.99 MHz ( period = 13.160 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.309 ns                ;
+; N/A                                     ; 76.01 MHz ( period = 13.156 ns )                    ; loopBackCheck:loopBackGPIO10GPIO018|not_ok_o  ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.297 ns                ;
+; N/A                                     ; 76.52 MHz ( period = 13.068 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.258 ns                ;
+; N/A                                     ; 76.52 MHz ( period = 13.068 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.253 ns                ;
+; N/A                                     ; 76.59 MHz ( period = 13.056 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.252 ns                ;
+; N/A                                     ; 76.60 MHz ( period = 13.054 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.292 ns                ;
+; N/A                                     ; 76.62 MHz ( period = 13.052 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.261 ns                ;
+; N/A                                     ; 76.79 MHz ( period = 13.022 ns )                    ; loopBackCheck:loopBackGPIO11GPIO019|not_ok_o  ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.239 ns                ;
+; N/A                                     ; 76.85 MHz ( period = 13.012 ns )                    ; loopBackCheck:loopBackGPIO13GPIO021|not_ok_o  ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.229 ns                ;
+; N/A                                     ; 76.85 MHz ( period = 13.012 ns )                    ; loopBackCheck:loopBackGPIO02ATLASC20|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.251 ns                ;
+; N/A                                     ; 76.88 MHz ( period = 13.008 ns )                    ; loopBackCheck:loopBackGPIO01GPIO017|not_ok_o  ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.241 ns                ;
+; N/A                                     ; 76.89 MHz ( period = 13.006 ns )                    ; loopBackCheck:loopBackGPIO04ATLASA27|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.223 ns                ;
+; N/A                                     ; 76.91 MHz ( period = 13.002 ns )                    ; loopBackCheck:loopBackGPIO12GPIO020|not_ok_o  ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.230 ns                ;
+; N/A                                     ; 76.92 MHz ( period = 13.000 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.265 ns                ;
+; N/A                                     ; 76.92 MHz ( period = 13.000 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.265 ns                ;
+; N/A                                     ; 76.99 MHz ( period = 12.988 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.223 ns                ;
+; N/A                                     ; 77.02 MHz ( period = 12.984 ns )                    ; loopBackCheck:loopBackGPIO10GPIO018|not_ok_o  ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.211 ns                ;
+; N/A                                     ; 77.05 MHz ( period = 12.978 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.218 ns                ;
+; N/A                                     ; 77.51 MHz ( period = 12.902 ns )                    ; loopBackCheck:loopBackGPIO15GPIO023|not_ok_o  ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.179 ns                ;
+; N/A                                     ; 77.53 MHz ( period = 12.898 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.193 ns                ;
+; N/A                                     ; 77.54 MHz ( period = 12.896 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.172 ns                ;
+; N/A                                     ; 77.54 MHz ( period = 12.896 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.167 ns                ;
+; N/A                                     ; 77.58 MHz ( period = 12.890 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.182 ns                ;
+; N/A                                     ; 77.58 MHz ( period = 12.890 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.173 ns                ;
+; N/A                                     ; 77.62 MHz ( period = 12.884 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.166 ns                ;
+; N/A                                     ; 77.64 MHz ( period = 12.880 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.175 ns                ;
+; N/A                                     ; 77.76 MHz ( period = 12.860 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.165 ns                ;
+; N/A                                     ; 77.82 MHz ( period = 12.850 ns )                    ; loopBackCheck:loopBackGPIO11GPIO019|not_ok_o  ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.153 ns                ;
+; N/A                                     ; 77.83 MHz ( period = 12.848 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.148 ns                ;
+; N/A                                     ; 77.88 MHz ( period = 12.840 ns )                    ; loopBackCheck:loopBackGPIO13GPIO021|not_ok_o  ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.143 ns                ;
+; N/A                                     ; 77.88 MHz ( period = 12.840 ns )                    ; loopBackCheck:loopBackGPIO02ATLASC20|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.165 ns                ;
+; N/A                                     ; 77.91 MHz ( period = 12.836 ns )                    ; loopBackCheck:loopBackGPIO07ATLASC27|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.157 ns                ;
+; N/A                                     ; 77.91 MHz ( period = 12.836 ns )                    ; loopBackCheck:loopBackGPIO01GPIO017|not_ok_o  ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.155 ns                ;
+; N/A                                     ; 77.94 MHz ( period = 12.830 ns )                    ; loopBackCheck:loopBackGPIO12GPIO020|not_ok_o  ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.144 ns                ;
+; N/A                                     ; 77.95 MHz ( period = 12.828 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.179 ns                ;
+; N/A                                     ; 77.95 MHz ( period = 12.828 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.179 ns                ;
+; N/A                                     ; 78.03 MHz ( period = 12.816 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.137 ns                ;
+; N/A                                     ; 78.05 MHz ( period = 12.812 ns )                    ; loopBackCheck:loopBackGPIO10GPIO018|not_ok_o  ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.125 ns                ;
+; N/A                                     ; 78.09 MHz ( period = 12.806 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.132 ns                ;
+; N/A                                     ; 78.22 MHz ( period = 12.784 ns )                    ; loopBackCheck:loopBackA22C22|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.139 ns                ;
+; N/A                                     ; 78.49 MHz ( period = 12.740 ns )                    ; loopBackCheck:loopBackGPIO14GPIO022|not_ok_o  ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.099 ns                ;
+; N/A                                     ; 78.55 MHz ( period = 12.730 ns )                    ; loopBackCheck:loopBackGPIO15GPIO023|not_ok_o  ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.093 ns                ;
+; N/A                                     ; 78.58 MHz ( period = 12.726 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.107 ns                ;
+; N/A                                     ; 78.59 MHz ( period = 12.724 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.086 ns                ;
+; N/A                                     ; 78.59 MHz ( period = 12.724 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.081 ns                ;
+; N/A                                     ; 78.63 MHz ( period = 12.718 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.096 ns                ;
+; N/A                                     ; 78.63 MHz ( period = 12.718 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.087 ns                ;
+; N/A                                     ; 78.67 MHz ( period = 12.712 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.080 ns                ;
+; N/A                                     ; 78.68 MHz ( period = 12.710 ns )                    ; loopBackCheck:loopBackGPIO03ATLASC21|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.074 ns                ;
+; N/A                                     ; 78.69 MHz ( period = 12.708 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.089 ns                ;
+; N/A                                     ; 78.81 MHz ( period = 12.688 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.079 ns                ;
+; N/A                                     ; 78.88 MHz ( period = 12.678 ns )                    ; loopBackCheck:loopBackGPIO11GPIO019|not_ok_o  ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.067 ns                ;
+; N/A                                     ; 78.89 MHz ( period = 12.676 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.062 ns                ;
+; N/A                                     ; 78.90 MHz ( period = 12.674 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.102 ns                ;
+; N/A                                     ; 78.94 MHz ( period = 12.668 ns )                    ; loopBackCheck:loopBackGPIO13GPIO021|not_ok_o  ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.057 ns                ;
+; N/A                                     ; 78.94 MHz ( period = 12.668 ns )                    ; loopBackCheck:loopBackGPIO02ATLASC20|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.079 ns                ;
+; N/A                                     ; 78.96 MHz ( period = 12.664 ns )                    ; loopBackCheck:loopBackGPIO01GPIO017|not_ok_o  ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.069 ns                ;
+; N/A                                     ; 79.00 MHz ( period = 12.658 ns )                    ; loopBackCheck:loopBackGPIO12GPIO020|not_ok_o  ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.058 ns                ;
+; N/A                                     ; 79.01 MHz ( period = 12.656 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.093 ns                ;
+; N/A                                     ; 79.01 MHz ( period = 12.656 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.093 ns                ;
+; N/A                                     ; 79.09 MHz ( period = 12.644 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.051 ns                ;
+; N/A                                     ; 79.11 MHz ( period = 12.640 ns )                    ; loopBackCheck:loopBackGPIO10GPIO018|not_ok_o  ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.039 ns                ;
+; N/A                                     ; 79.15 MHz ( period = 12.634 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.046 ns                ;
+; N/A                                     ; 79.18 MHz ( period = 12.630 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.039 ns                ;
+; N/A                                     ; 79.20 MHz ( period = 12.626 ns )                    ; loopBackCheck:loopBackGPIO04ATLASA27|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.033 ns                ;
+; N/A                                     ; 79.28 MHz ( period = 12.614 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.042 ns                ;
+; N/A                                     ; 79.63 MHz ( period = 12.558 ns )                    ; loopBackCheck:loopBackGPIO15GPIO023|not_ok_o  ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.007 ns                ;
+; N/A                                     ; 79.66 MHz ( period = 12.554 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.021 ns                ;
+; N/A                                     ; 79.67 MHz ( period = 12.552 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.000 ns                ;
+; N/A                                     ; 79.71 MHz ( period = 12.546 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.010 ns                ;
+; N/A                                     ; 79.71 MHz ( period = 12.546 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.001 ns                ;
+; N/A                                     ; 79.74 MHz ( period = 12.540 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.994 ns                ;
+; N/A                                     ; 79.77 MHz ( period = 12.536 ns )                    ; loopBackCheck:loopBackGPIO05ATLASA29|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.011 ns                ;
+; N/A                                     ; 79.77 MHz ( period = 12.536 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.003 ns                ;
+; N/A                                     ; 79.90 MHz ( period = 12.516 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.993 ns                ;
+; N/A                                     ; 79.96 MHz ( period = 12.506 ns )                    ; loopBackCheck:loopBackGPIO11GPIO019|not_ok_o  ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.981 ns                ;
+; N/A                                     ; 79.97 MHz ( period = 12.504 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.976 ns                ;
+; N/A                                     ; 79.99 MHz ( period = 12.502 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.016 ns                ;
+; N/A                                     ; 80.03 MHz ( period = 12.496 ns )                    ; loopBackCheck:loopBackGPIO13GPIO021|not_ok_o  ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.971 ns                ;
+; N/A                                     ; 80.03 MHz ( period = 12.496 ns )                    ; loopBackCheck:loopBackGPIO02ATLASC20|not_ok_o ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.993 ns                ;
+; N/A                                     ; 80.05 MHz ( period = 12.492 ns )                    ; loopBackCheck:loopBackGPIO01GPIO017|not_ok_o  ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.983 ns                ;
+; N/A                                     ; 80.10 MHz ( period = 12.484 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.007 ns                ;
+; N/A                                     ; 80.10 MHz ( period = 12.484 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 6.007 ns                ;
+; N/A                                     ; 80.18 MHz ( period = 12.472 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.965 ns                ;
+; N/A                                     ; 80.19 MHz ( period = 12.470 ns )                    ; loopBackCheck:loopBackA25C25|not_ok_o         ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.925 ns                ;
+; N/A                                     ; 80.24 MHz ( period = 12.462 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.960 ns                ;
+; N/A                                     ; 80.28 MHz ( period = 12.456 ns )                    ; loopBackCheck:loopBackGPIO07ATLASC27|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.967 ns                ;
+; N/A                                     ; 80.30 MHz ( period = 12.454 ns )                    ; loopBackCheck:loopBackGPIO04ATLASA27|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.947 ns                ;
+; N/A                                     ; 80.42 MHz ( period = 12.434 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.961 ns                ;
+; N/A                                     ; 80.62 MHz ( period = 12.404 ns )                    ; loopBackCheck:loopBackGPIO12GPIO020|not_ok_o  ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.902 ns                ;
+; N/A                                     ; 80.62 MHz ( period = 12.404 ns )                    ; loopBackCheck:loopBackA22C22|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.949 ns                ;
+; N/A                                     ; 80.74 MHz ( period = 12.386 ns )                    ; loopBackCheck:loopBackGPIO10GPIO018|not_ok_o  ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.883 ns                ;
+; N/A                                     ; 80.74 MHz ( period = 12.386 ns )                    ; loopBackCheck:loopBackGPIO15GPIO023|not_ok_o  ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.921 ns                ;
+; N/A                                     ; 80.76 MHz ( period = 12.382 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.935 ns                ;
+; N/A                                     ; 80.78 MHz ( period = 12.380 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.914 ns                ;
+; N/A                                     ; 80.81 MHz ( period = 12.374 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.924 ns                ;
+; N/A                                     ; 80.81 MHz ( period = 12.374 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.915 ns                ;
+; N/A                                     ; 80.91 MHz ( period = 12.360 ns )                    ; loopBackCheck:loopBackGPIO14GPIO022|not_ok_o  ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.909 ns                ;
+; N/A                                     ; 81.01 MHz ( period = 12.344 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.907 ns                ;
+; N/A                                     ; 81.09 MHz ( period = 12.332 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.890 ns                ;
+; N/A                                     ; 81.10 MHz ( period = 12.330 ns )                    ; loopBackCheck:loopBackGPIO03ATLASC21|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.884 ns                ;
+; N/A                                     ; 81.10 MHz ( period = 12.330 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.930 ns                ;
+; N/A                                     ; 81.14 MHz ( period = 12.324 ns )                    ; loopBackCheck:loopBackGPIO13GPIO021|not_ok_o  ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.885 ns                ;
+; N/A                                     ; 81.17 MHz ( period = 12.320 ns )                    ; loopBackCheck:loopBackGPIO01GPIO017|not_ok_o  ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.897 ns                ;
+; N/A                                     ; 81.22 MHz ( period = 12.312 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.921 ns                ;
+; N/A                                     ; 81.22 MHz ( period = 12.312 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.921 ns                ;
+; N/A                                     ; 81.30 MHz ( period = 12.300 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.879 ns                ;
+; N/A                                     ; 81.37 MHz ( period = 12.290 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.874 ns                ;
+; N/A                                     ; 81.39 MHz ( period = 12.286 ns )                    ; loopBackCheck:loopBackA05C05|not_ok_o         ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.838 ns                ;
+; N/A                                     ; 81.41 MHz ( period = 12.284 ns )                    ; loopBackCheck:loopBackGPIO07ATLASC27|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.881 ns                ;
+; N/A                                     ; 81.42 MHz ( period = 12.282 ns )                    ; loopBackCheck:loopBackA03C03|not_ok_o         ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.847 ns                ;
+; N/A                                     ; 81.42 MHz ( period = 12.282 ns )                    ; loopBackCheck:loopBackGPIO04ATLASA27|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.861 ns                ;
+; N/A                                     ; 81.62 MHz ( period = 12.252 ns )                    ; loopBackCheck:loopBackGPIO11GPIO019|not_ok_o  ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.825 ns                ;
+; N/A                                     ; 81.63 MHz ( period = 12.250 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.849 ns                ;
+; N/A                                     ; 81.69 MHz ( period = 12.242 ns )                    ; loopBackCheck:loopBackGPIO02ATLASC20|not_ok_o ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.837 ns                ;
+; N/A                                     ; 81.73 MHz ( period = 12.236 ns )                    ; loopBackCheck:loopBackA17C17|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.883 ns                ;
+; N/A                                     ; 81.74 MHz ( period = 12.234 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.852 ns                ;
+; N/A                                     ; 81.75 MHz ( period = 12.232 ns )                    ; loopBackCheck:loopBackGPIO08ATLASC29|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.841 ns                ;
+; N/A                                     ; 81.75 MHz ( period = 12.232 ns )                    ; loopBackCheck:loopBackA22C22|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.863 ns                ;
+; N/A                                     ; 81.87 MHz ( period = 12.214 ns )                    ; loopBackCheck:loopBackGPIO15GPIO023|not_ok_o  ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.835 ns                ;
+; N/A                                     ; 81.90 MHz ( period = 12.210 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.849 ns                ;
+; N/A                                     ; 81.91 MHz ( period = 12.208 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.828 ns                ;
+; N/A                                     ; 81.95 MHz ( period = 12.202 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.838 ns                ;
+; N/A                                     ; 81.95 MHz ( period = 12.202 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.829 ns                ;
+; N/A                                     ; 81.99 MHz ( period = 12.196 ns )                    ; loopBackCheck:loopBackGPIO16GPIO024|not_ok_o  ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.817 ns                ;
+; N/A                                     ; 82.05 MHz ( period = 12.188 ns )                    ; loopBackCheck:loopBackGPIO14GPIO022|not_ok_o  ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.823 ns                ;
+; N/A                                     ; 82.16 MHz ( period = 12.172 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.821 ns                ;
+; N/A                                     ; 82.24 MHz ( period = 12.160 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.804 ns                ;
+; N/A                                     ; 82.25 MHz ( period = 12.158 ns )                    ; loopBackCheck:loopBackGPIO03ATLASC21|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.798 ns                ;
+; N/A                                     ; 82.25 MHz ( period = 12.158 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.844 ns                ;
+; N/A                                     ; 82.26 MHz ( period = 12.156 ns )                    ; loopBackCheck:loopBackGPIO05ATLASA29|not_ok_o ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.821 ns                ;
+; N/A                                     ; 82.30 MHz ( period = 12.150 ns )                    ; loopBackCheck:loopBackA15C15|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.819 ns                ;
+; N/A                                     ; 82.37 MHz ( period = 12.140 ns )                    ; loopBackCheck:loopBackA13C13|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.835 ns                ;
+; N/A                                     ; 82.37 MHz ( period = 12.140 ns )                    ; loopBackCheck:loopBackA12C12|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.835 ns                ;
+; N/A                                     ; 82.52 MHz ( period = 12.118 ns )                    ; loopBackCheck:loopBackA23C23|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.788 ns                ;
+; N/A                                     ; 82.56 MHz ( period = 12.112 ns )                    ; loopBackCheck:loopBackA07C07|not_ok_o         ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.791 ns                ;
+; N/A                                     ; 82.56 MHz ( period = 12.112 ns )                    ; loopBackCheck:loopBackGPIO07ATLASC27|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.795 ns                ;
+; N/A                                     ; 82.58 MHz ( period = 12.110 ns )                    ; loopBackCheck:loopBackGPIO04ATLASA27|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.775 ns                ;
+; N/A                                     ; 82.80 MHz ( period = 12.078 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.763 ns                ;
+; N/A                                     ; 82.85 MHz ( period = 12.070 ns )                    ; loopBackCheck:loopBackGPIO13GPIO021|not_ok_o  ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.729 ns                ;
+; N/A                                     ; 82.88 MHz ( period = 12.066 ns )                    ; loopBackCheck:loopBackGPIO01GPIO017|not_ok_o  ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.741 ns                ;
+; N/A                                     ; 82.90 MHz ( period = 12.062 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o         ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.766 ns                ;
+; N/A                                     ; 82.92 MHz ( period = 12.060 ns )                    ; loopBackCheck:loopBackA22C22|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.777 ns                ;
+; N/A                                     ; 82.96 MHz ( period = 12.054 ns )                    ; loopBackCheck:loopBackA10C10|not_ok_o         ; pass_count[6]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.771 ns                ;
+; N/A                                     ; 83.02 MHz ( period = 12.046 ns )                    ; loopBackCheck:loopBackA19C19|not_ok_o         ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.723 ns                ;
+; N/A                                     ; 83.04 MHz ( period = 12.042 ns )                    ; loopBackCheck:loopBackGPIO15GPIO023|not_ok_o  ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.749 ns                ;
+; N/A                                     ; 83.07 MHz ( period = 12.038 ns )                    ; loopBackCheck:loopBackA11C11|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.763 ns                ;
+; N/A                                     ; 83.13 MHz ( period = 12.030 ns )                    ; loopBackCheck:loopBackA24C24|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.752 ns                ;
+; N/A                                     ; 83.13 MHz ( period = 12.030 ns )                    ; loopBackCheck:loopBackA18C18|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.743 ns                ;
+; N/A                                     ; 83.22 MHz ( period = 12.016 ns )                    ; loopBackCheck:loopBackGPIO14GPIO022|not_ok_o  ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.737 ns                ;
+; N/A                                     ; 83.31 MHz ( period = 12.004 ns )                    ; loopBackCheck:loopBackGPIO09ATLASC31|not_ok_o ; pass_count[7]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.729 ns                ;
+; N/A                                     ; 83.33 MHz ( period = 12.000 ns )                    ; loopBackCheck:loopBackA02C02|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.735 ns                ;
+; N/A                                     ; 83.42 MHz ( period = 11.988 ns )                    ; loopBackCheck:loopBackA09C09|not_ok_o         ; pass_count[1]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.718 ns                ;
+; N/A                                     ; 83.43 MHz ( period = 11.986 ns )                    ; loopBackCheck:loopBackGPIO03ATLASC21|not_ok_o ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.712 ns                ;
+; N/A                                     ; 83.43 MHz ( period = 11.986 ns )                    ; loopBackCheck:loopBackA16C16|not_ok_o         ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.758 ns                ;
+; N/A                                     ; 83.44 MHz ( period = 11.984 ns )                    ; loopBackCheck:loopBackGPIO05ATLASA29|not_ok_o ; pass_count[5]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.735 ns                ;
+; N/A                                     ; 83.65 MHz ( period = 11.954 ns )                    ; loopBackCheck:loopBackA04C04|not_ok_o         ; test_loop_state.01101 ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.672 ns                ;
+; N/A                                     ; 83.75 MHz ( period = 11.940 ns )                    ; loopBackCheck:loopBackGPIO07ATLASC27|not_ok_o ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.709 ns                ;
+; N/A                                     ; 83.77 MHz ( period = 11.938 ns )                    ; loopBackCheck:loopBackGPIO04ATLASA27|not_ok_o ; pass_count[2]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.689 ns                ;
+; N/A                                     ; 83.99 MHz ( period = 11.906 ns )                    ; loopBackCheck:loopBackA08C08|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.677 ns                ;
+; N/A                                     ; 84.10 MHz ( period = 11.890 ns )                    ; loopBackCheck:loopBackA06C06|not_ok_o         ; pass_count[4]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.680 ns                ;
+; N/A                                     ; 84.12 MHz ( period = 11.888 ns )                    ; loopBackCheck:loopBackA22C22|not_ok_o         ; pass_count[3]         ; FX2_CLK    ; FX2_CLK  ; None                        ; None                      ; 5.691 ns                ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;                                               ;                       ;            ;          ;                             ;                           ;                         ;
++-----------------------------------------+-----------------------------------------------------+-----------------------------------------------+-----------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
 
 
-+--------------------------------------------------------------------------------------------------+
-; tsu                                                                                              ;
-+-------+--------------+------------+-----------+---------------------------------------+----------+
-; Slack ; Required tsu ; Actual tsu ; From      ; To                                    ; To Clock ;
-+-------+--------------+------------+-----------+---------------------------------------+----------+
-; N/A   ; None         ; 7.305 ns   ; ATLAS_C22 ; loopBackCheck:loopBackA22C22|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 7.254 ns   ; ATLAS_C07 ; loopBackCheck:loopBackA07C07|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 7.047 ns   ; ATLAS_C08 ; loopBackCheck:loopBackA08C08|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 6.954 ns   ; ATLAS_C23 ; loopBackCheck:loopBackA23C23|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 6.933 ns   ; ATLAS_C05 ; loopBackCheck:loopBackA05C05|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 6.809 ns   ; ATLAS_C02 ; loopBackCheck:loopBackA02C02|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 6.695 ns   ; ATLAS_C25 ; loopBackCheck:loopBackA25C25|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 6.612 ns   ; ATLAS_C24 ; loopBackCheck:loopBackA24C24|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 6.381 ns   ; ATLAS_C11 ; loopBackCheck:loopBackA11C11|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 6.335 ns   ; ATLAS_C16 ; loopBackCheck:loopBackA16C16|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 6.201 ns   ; ATLAS_C06 ; loopBackCheck:loopBackA06C06|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 6.158 ns   ; ATLAS_C03 ; loopBackCheck:loopBackA03C03|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 6.150 ns   ; ATLAS_C09 ; loopBackCheck:loopBackA09C09|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 6.134 ns   ; ATLAS_C12 ; loopBackCheck:loopBackA12C12|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 5.952 ns   ; ATLAS_C19 ; loopBackCheck:loopBackA19C19|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 5.888 ns   ; ATLAS_C13 ; loopBackCheck:loopBackA13C13|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 5.885 ns   ; ATLAS_C10 ; loopBackCheck:loopBackA10C10|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 5.865 ns   ; ATLAS_C04 ; loopBackCheck:loopBackA04C04|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 5.840 ns   ; ATLAS_C18 ; loopBackCheck:loopBackA18C18|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 5.524 ns   ; ATLAS_C17 ; loopBackCheck:loopBackA17C17|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 5.516 ns   ; ATLAS_C15 ; loopBackCheck:loopBackA15C15|not_ok_o ; FX2_CLK  ;
-; N/A   ; None         ; 5.111 ns   ; ATLAS_C14 ; loopBackCheck:loopBackA14C14|not_ok_o ; FX2_CLK  ;
-+-------+--------------+------------+-----------+---------------------------------------+----------+
++----------------------------------------------------------------------------------------------------------+
+; tsu                                                                                                      ;
++-------+--------------+------------+-----------+-----------------------------------------------+----------+
+; Slack ; Required tsu ; Actual tsu ; From      ; To                                            ; To Clock ;
++-------+--------------+------------+-----------+-----------------------------------------------+----------+
+; N/A   ; None         ; 7.477 ns   ; ATLAS_C08 ; loopBackCheck:loopBackA08C08|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.875 ns   ; ATLAS_C07 ; loopBackCheck:loopBackA07C07|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.835 ns   ; ATLAS_C04 ; loopBackCheck:loopBackA04C04|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.797 ns   ; ATLAS_C10 ; loopBackCheck:loopBackA10C10|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.789 ns   ; ATLAS_C02 ; loopBackCheck:loopBackA02C02|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.678 ns   ; ATLAS_C05 ; loopBackCheck:loopBackA05C05|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.608 ns   ; ATLAS_A29 ; loopBackCheck:loopBackGPIO05ATLASA29|not_ok_o ; FX2_CLK  ;
+; N/A   ; None         ; 6.565 ns   ; ATLAS_C12 ; loopBackCheck:loopBackA12C12|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.559 ns   ; ATLAS_C06 ; loopBackCheck:loopBackA06C06|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.543 ns   ; ATLAS_C03 ; loopBackCheck:loopBackA03C03|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.521 ns   ; ATLAS_C27 ; loopBackCheck:loopBackGPIO07ATLASC27|not_ok_o ; FX2_CLK  ;
+; N/A   ; None         ; 6.513 ns   ; ATLAS_C24 ; loopBackCheck:loopBackA24C24|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.510 ns   ; ATLAS_C13 ; loopBackCheck:loopBackA13C13|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.499 ns   ; ATLAS_C31 ; loopBackCheck:loopBackGPIO09ATLASC31|not_ok_o ; FX2_CLK  ;
+; N/A   ; None         ; 6.448 ns   ; ATLAS_C21 ; loopBackCheck:loopBackGPIO03ATLASC21|not_ok_o ; FX2_CLK  ;
+; N/A   ; None         ; 6.438 ns   ; ATLAS_C23 ; loopBackCheck:loopBackA23C23|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.349 ns   ; GPIO[22]  ; loopBackCheck:loopBackGPIO15GPIO023|not_ok_o  ; FX2_CLK  ;
+; N/A   ; None         ; 6.311 ns   ; GPIO[20]  ; loopBackCheck:loopBackGPIO13GPIO021|not_ok_o  ; FX2_CLK  ;
+; N/A   ; None         ; 6.293 ns   ; GPIO[16]  ; loopBackCheck:loopBackGPIO01GPIO017|not_ok_o  ; FX2_CLK  ;
+; N/A   ; None         ; 6.279 ns   ; GPIO[17]  ; loopBackCheck:loopBackGPIO10GPIO018|not_ok_o  ; FX2_CLK  ;
+; N/A   ; None         ; 6.255 ns   ; GPIO[23]  ; loopBackCheck:loopBackGPIO16GPIO024|not_ok_o  ; FX2_CLK  ;
+; N/A   ; None         ; 6.183 ns   ; ATLAS_C11 ; loopBackCheck:loopBackA11C11|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.178 ns   ; ATLAS_C29 ; loopBackCheck:loopBackGPIO08ATLASC29|not_ok_o ; FX2_CLK  ;
+; N/A   ; None         ; 6.139 ns   ; ATLAS_C15 ; loopBackCheck:loopBackA15C15|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.094 ns   ; ATLAS_C09 ; loopBackCheck:loopBackA09C09|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 6.016 ns   ; ATLAS_A31 ; loopBackCheck:loopBackGPIO06ATLASA31|not_ok_o ; FX2_CLK  ;
+; N/A   ; None         ; 6.012 ns   ; ATLAS_C16 ; loopBackCheck:loopBackA16C16|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 5.985 ns   ; GPIO[21]  ; loopBackCheck:loopBackGPIO14GPIO022|not_ok_o  ; FX2_CLK  ;
+; N/A   ; None         ; 5.940 ns   ; ATLAS_C25 ; loopBackCheck:loopBackA25C25|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 5.898 ns   ; GPIO[18]  ; loopBackCheck:loopBackGPIO11GPIO019|not_ok_o  ; FX2_CLK  ;
+; N/A   ; None         ; 5.835 ns   ; ATLAS_C14 ; loopBackCheck:loopBackA14C14|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 5.798 ns   ; ATLAS_C17 ; loopBackCheck:loopBackA17C17|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 5.797 ns   ; GPIO[19]  ; loopBackCheck:loopBackGPIO12GPIO020|not_ok_o  ; FX2_CLK  ;
+; N/A   ; None         ; 5.678 ns   ; ATLAS_C20 ; loopBackCheck:loopBackGPIO02ATLASC20|not_ok_o ; FX2_CLK  ;
+; N/A   ; None         ; 5.669 ns   ; ATLAS_C22 ; loopBackCheck:loopBackA22C22|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 5.583 ns   ; ATLAS_A27 ; loopBackCheck:loopBackGPIO04ATLASA27|not_ok_o ; FX2_CLK  ;
+; N/A   ; None         ; 5.565 ns   ; ATLAS_C18 ; loopBackCheck:loopBackA18C18|not_ok_o         ; FX2_CLK  ;
+; N/A   ; None         ; 5.305 ns   ; ATLAS_C19 ; loopBackCheck:loopBackA19C19|not_ok_o         ; FX2_CLK  ;
++-------+--------------+------------+-----------+-----------------------------------------------+----------+
 
 
 +-----------------------------------------------------------------------------------------------------+
@@ -328,64 +344,96 @@ applicable agreement for further details.
 +-------+--------------+------------+---------------------------------------+------------+------------+
 ; Slack ; Required tco ; Actual tco ; From                                  ; To         ; From Clock ;
 +-------+--------------+------------+---------------------------------------+------------+------------+
-; N/A   ; None         ; 10.655 ns  ; rs232_xmit:Ozy_rs232_xmit|xmit_o      ; FPGA_TXD   ; FX2_CLK    ;
-; N/A   ; None         ; 9.385 ns   ; leds[0]                               ; DEBUG_LED0 ; FX2_CLK    ;
-; N/A   ; None         ; 9.365 ns   ; clock_count[0]                        ; ATLAS_A02  ; FX2_CLK    ;
-; N/A   ; None         ; 9.354 ns   ; clock_count[2]                        ; ATLAS_A11  ; FX2_CLK    ;
-; N/A   ; None         ; 9.271 ns   ; clock_count[3]                        ; ATLAS_A05  ; FX2_CLK    ;
-; N/A   ; None         ; 9.245 ns   ; clock_count[2]                        ; ATLAS_A24  ; FX2_CLK    ;
-; N/A   ; None         ; 9.115 ns   ; leds[1]                               ; DEBUG_LED1 ; FX2_CLK    ;
-; N/A   ; None         ; 9.094 ns   ; loopBackCheck:loopBackA02C02|not_ok_o ; DEBUG_LED2 ; FX2_CLK    ;
-; N/A   ; None         ; 8.931 ns   ; clock_count[2]                        ; ATLAS_A04  ; FX2_CLK    ;
-; N/A   ; None         ; 8.924 ns   ; clock_count[3]                        ; ATLAS_A25  ; FX2_CLK    ;
-; N/A   ; None         ; 8.916 ns   ; loopBackCheck:loopBackA03C03|not_ok_o ; DEBUG_LED3 ; FX2_CLK    ;
-; N/A   ; None         ; 8.895 ns   ; clock_count[3]                        ; ATLAS_A12  ; FX2_CLK    ;
-; N/A   ; None         ; 8.883 ns   ; clock_count[1]                        ; ATLAS_A03  ; FX2_CLK    ;
-; N/A   ; None         ; 8.871 ns   ; clock_count[5]                        ; ATLAS_A07  ; FX2_CLK    ;
-; N/A   ; None         ; 8.861 ns   ; clock_count[0]                        ; ATLAS_A09  ; FX2_CLK    ;
-; N/A   ; None         ; 8.846 ns   ; clock_count[2]                        ; ATLAS_A18  ; FX2_CLK    ;
-; N/A   ; None         ; 8.840 ns   ; clock_count[1]                        ; ATLAS_A10  ; FX2_CLK    ;
-; N/A   ; None         ; 8.814 ns   ; clock_count[6]                        ; ATLAS_A08  ; FX2_CLK    ;
-; N/A   ; None         ; 8.779 ns   ; clock_count[0]                        ; ATLAS_A22  ; FX2_CLK    ;
-; N/A   ; None         ; 8.502 ns   ; clock_count[3]                        ; ATLAS_A19  ; FX2_CLK    ;
-; N/A   ; None         ; 8.446 ns   ; clock_count[6]                        ; ATLAS_A15  ; FX2_CLK    ;
-; N/A   ; None         ; 8.430 ns   ; clock_count[0]                        ; ATLAS_A16  ; FX2_CLK    ;
-; N/A   ; None         ; 8.424 ns   ; clock_count[5]                        ; ATLAS_A14  ; FX2_CLK    ;
-; N/A   ; None         ; 8.410 ns   ; clock_count[1]                        ; ATLAS_A23  ; FX2_CLK    ;
-; N/A   ; None         ; 8.395 ns   ; clock_count[4]                        ; ATLAS_A06  ; FX2_CLK    ;
-; N/A   ; None         ; 8.371 ns   ; clock_count[4]                        ; ATLAS_A13  ; FX2_CLK    ;
-; N/A   ; None         ; 8.002 ns   ; clock_count[1]                        ; ATLAS_A17  ; FX2_CLK    ;
+; N/A   ; None         ; 10.198 ns  ; clock_count[1]                        ; ATLAS_A03  ; FX2_CLK    ;
+; N/A   ; None         ; 10.148 ns  ; clock_count[1]                        ; ATLAS_A10  ; FX2_CLK    ;
+; N/A   ; None         ; 10.106 ns  ; clock_count[4]                        ; GPIO[0]    ; FX2_CLK    ;
+; N/A   ; None         ; 9.792 ns   ; clock_count[2]                        ; ATLAS_A04  ; FX2_CLK    ;
+; N/A   ; None         ; 9.632 ns   ; leds[0]                               ; DEBUG_LED0 ; FX2_CLK    ;
+; N/A   ; None         ; 9.546 ns   ; clock_count[0]                        ; ATLAS_A22  ; FX2_CLK    ;
+; N/A   ; None         ; 9.427 ns   ; clock_count[2]                        ; GPIO[2]    ; FX2_CLK    ;
+; N/A   ; None         ; 9.361 ns   ; clock_count[4]                        ; GPIO[4]    ; FX2_CLK    ;
+; N/A   ; None         ; 9.353 ns   ; clock_count[2]                        ; ATLAS_A24  ; FX2_CLK    ;
+; N/A   ; None         ; 9.347 ns   ; clock_count[2]                        ; ATLAS_A18  ; FX2_CLK    ;
+; N/A   ; None         ; 9.324 ns   ; clock_count[1]                        ; ATLAS_A17  ; FX2_CLK    ;
+; N/A   ; None         ; 9.316 ns   ; clock_count[2]                        ; ATLAS_A11  ; FX2_CLK    ;
+; N/A   ; None         ; 9.312 ns   ; clock_count[3]                        ; ATLAS_A19  ; FX2_CLK    ;
+; N/A   ; None         ; 9.283 ns   ; clock_count[1]                        ; GPIO[1]    ; FX2_CLK    ;
+; N/A   ; None         ; 9.271 ns   ; clock_count[0]                        ; ATLAS_A02  ; FX2_CLK    ;
+; N/A   ; None         ; 9.227 ns   ; clock_count[3]                        ; ATLAS_A12  ; FX2_CLK    ;
+; N/A   ; None         ; 9.161 ns   ; clock_count[5]                        ; GPIO[5]    ; FX2_CLK    ;
+; N/A   ; None         ; 9.096 ns   ; loopBackCheck:loopBackA02C02|not_ok_o ; DEBUG_LED2 ; FX2_CLK    ;
+; N/A   ; None         ; 9.046 ns   ; clock_count[3]                        ; GPIO[3]    ; FX2_CLK    ;
+; N/A   ; None         ; 9.012 ns   ; clock_count[1]                        ; GPIO[8]    ; FX2_CLK    ;
+; N/A   ; None         ; 8.987 ns   ; clock_count[6]                        ; GPIO[6]    ; FX2_CLK    ;
+; N/A   ; None         ; 8.950 ns   ; clock_count[3]                        ; ATLAS_A25  ; FX2_CLK    ;
+; N/A   ; None         ; 8.864 ns   ; clock_count[1]                        ; ATLAS_A23  ; FX2_CLK    ;
+; N/A   ; None         ; 8.860 ns   ; clock_count[0]                        ; ATLAS_A09  ; FX2_CLK    ;
+; N/A   ; None         ; 8.859 ns   ; clock_count[3]                        ; ATLAS_A05  ; FX2_CLK    ;
+; N/A   ; None         ; 8.855 ns   ; clock_count[6]                        ; ATLAS_A15  ; FX2_CLK    ;
+; N/A   ; None         ; 8.834 ns   ; clock_count[4]                        ; ATLAS_A06  ; FX2_CLK    ;
+; N/A   ; None         ; 8.833 ns   ; clock_count[0]                        ; ATLAS_A16  ; FX2_CLK    ;
+; N/A   ; None         ; 8.801 ns   ; loopBackCheck:loopBackA03C03|not_ok_o ; DEBUG_LED3 ; FX2_CLK    ;
+; N/A   ; None         ; 8.719 ns   ; leds[1]                               ; DEBUG_LED1 ; FX2_CLK    ;
+; N/A   ; None         ; 8.597 ns   ; clock_count[6]                        ; GPIO[14]   ; FX2_CLK    ;
+; N/A   ; None         ; 8.585 ns   ; rs232_xmit:Ozy_rs232_xmit|xmit_o      ; FPGA_TXD   ; FX2_CLK    ;
+; N/A   ; None         ; 8.446 ns   ; clock_count[5]                        ; ATLAS_A07  ; FX2_CLK    ;
+; N/A   ; None         ; 8.410 ns   ; clock_count[4]                        ; ATLAS_A13  ; FX2_CLK    ;
+; N/A   ; None         ; 8.398 ns   ; clock_count[2]                        ; GPIO[10]   ; FX2_CLK    ;
+; N/A   ; None         ; 8.395 ns   ; clock_count[6]                        ; ATLAS_A08  ; FX2_CLK    ;
+; N/A   ; None         ; 8.391 ns   ; clock_count[5]                        ; ATLAS_A14  ; FX2_CLK    ;
+; N/A   ; None         ; 8.314 ns   ; clock_count[3]                        ; GPIO[11]   ; FX2_CLK    ;
+; N/A   ; None         ; 8.248 ns   ; clock_count[5]                        ; GPIO[15]   ; FX2_CLK    ;
+; N/A   ; None         ; 8.226 ns   ; clock_count[5]                        ; GPIO[9]    ; FX2_CLK    ;
+; N/A   ; None         ; 7.885 ns   ; clock_count[0]                        ; GPIO[7]    ; FX2_CLK    ;
+; N/A   ; None         ; 7.875 ns   ; clock_count[5]                        ; GPIO[13]   ; FX2_CLK    ;
+; N/A   ; None         ; 7.860 ns   ; clock_count[4]                        ; GPIO[12]   ; FX2_CLK    ;
 +-------+--------------+------------+---------------------------------------+------------+------------+
 
 
-+--------------------------------------------------------------------------------------------------------+
-; th                                                                                                     ;
-+---------------+-------------+-----------+-----------+---------------------------------------+----------+
-; Minimum Slack ; Required th ; Actual th ; From      ; To                                    ; To Clock ;
-+---------------+-------------+-----------+-----------+---------------------------------------+----------+
-; N/A           ; None        ; -4.845 ns ; ATLAS_C14 ; loopBackCheck:loopBackA14C14|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -5.250 ns ; ATLAS_C15 ; loopBackCheck:loopBackA15C15|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -5.258 ns ; ATLAS_C17 ; loopBackCheck:loopBackA17C17|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -5.574 ns ; ATLAS_C18 ; loopBackCheck:loopBackA18C18|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -5.599 ns ; ATLAS_C04 ; loopBackCheck:loopBackA04C04|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -5.619 ns ; ATLAS_C10 ; loopBackCheck:loopBackA10C10|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -5.622 ns ; ATLAS_C13 ; loopBackCheck:loopBackA13C13|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -5.686 ns ; ATLAS_C19 ; loopBackCheck:loopBackA19C19|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -5.868 ns ; ATLAS_C12 ; loopBackCheck:loopBackA12C12|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -5.884 ns ; ATLAS_C09 ; loopBackCheck:loopBackA09C09|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -5.892 ns ; ATLAS_C03 ; loopBackCheck:loopBackA03C03|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -5.935 ns ; ATLAS_C06 ; loopBackCheck:loopBackA06C06|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -6.069 ns ; ATLAS_C16 ; loopBackCheck:loopBackA16C16|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -6.115 ns ; ATLAS_C11 ; loopBackCheck:loopBackA11C11|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -6.346 ns ; ATLAS_C24 ; loopBackCheck:loopBackA24C24|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -6.429 ns ; ATLAS_C25 ; loopBackCheck:loopBackA25C25|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -6.543 ns ; ATLAS_C02 ; loopBackCheck:loopBackA02C02|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -6.667 ns ; ATLAS_C05 ; loopBackCheck:loopBackA05C05|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -6.688 ns ; ATLAS_C23 ; loopBackCheck:loopBackA23C23|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -6.781 ns ; ATLAS_C08 ; loopBackCheck:loopBackA08C08|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -6.988 ns ; ATLAS_C07 ; loopBackCheck:loopBackA07C07|not_ok_o ; FX2_CLK  ;
-; N/A           ; None        ; -7.039 ns ; ATLAS_C22 ; loopBackCheck:loopBackA22C22|not_ok_o ; FX2_CLK  ;
-+---------------+-------------+-----------+-----------+---------------------------------------+----------+
++----------------------------------------------------------------------------------------------------------------+
+; th                                                                                                             ;
++---------------+-------------+-----------+-----------+-----------------------------------------------+----------+
+; Minimum Slack ; Required th ; Actual th ; From      ; To                                            ; To Clock ;
++---------------+-------------+-----------+-----------+-----------------------------------------------+----------+
+; N/A           ; None        ; -5.039 ns ; ATLAS_C19 ; loopBackCheck:loopBackA19C19|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -5.299 ns ; ATLAS_C18 ; loopBackCheck:loopBackA18C18|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -5.317 ns ; ATLAS_A27 ; loopBackCheck:loopBackGPIO04ATLASA27|not_ok_o ; FX2_CLK  ;
+; N/A           ; None        ; -5.403 ns ; ATLAS_C22 ; loopBackCheck:loopBackA22C22|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -5.412 ns ; ATLAS_C20 ; loopBackCheck:loopBackGPIO02ATLASC20|not_ok_o ; FX2_CLK  ;
+; N/A           ; None        ; -5.531 ns ; GPIO[19]  ; loopBackCheck:loopBackGPIO12GPIO020|not_ok_o  ; FX2_CLK  ;
+; N/A           ; None        ; -5.532 ns ; ATLAS_C17 ; loopBackCheck:loopBackA17C17|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -5.569 ns ; ATLAS_C14 ; loopBackCheck:loopBackA14C14|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -5.632 ns ; GPIO[18]  ; loopBackCheck:loopBackGPIO11GPIO019|not_ok_o  ; FX2_CLK  ;
+; N/A           ; None        ; -5.674 ns ; ATLAS_C25 ; loopBackCheck:loopBackA25C25|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -5.719 ns ; GPIO[21]  ; loopBackCheck:loopBackGPIO14GPIO022|not_ok_o  ; FX2_CLK  ;
+; N/A           ; None        ; -5.746 ns ; ATLAS_C16 ; loopBackCheck:loopBackA16C16|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -5.750 ns ; ATLAS_A31 ; loopBackCheck:loopBackGPIO06ATLASA31|not_ok_o ; FX2_CLK  ;
+; N/A           ; None        ; -5.828 ns ; ATLAS_C09 ; loopBackCheck:loopBackA09C09|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -5.873 ns ; ATLAS_C15 ; loopBackCheck:loopBackA15C15|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -5.912 ns ; ATLAS_C29 ; loopBackCheck:loopBackGPIO08ATLASC29|not_ok_o ; FX2_CLK  ;
+; N/A           ; None        ; -5.917 ns ; ATLAS_C11 ; loopBackCheck:loopBackA11C11|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -5.989 ns ; GPIO[23]  ; loopBackCheck:loopBackGPIO16GPIO024|not_ok_o  ; FX2_CLK  ;
+; N/A           ; None        ; -6.013 ns ; GPIO[17]  ; loopBackCheck:loopBackGPIO10GPIO018|not_ok_o  ; FX2_CLK  ;
+; N/A           ; None        ; -6.027 ns ; GPIO[16]  ; loopBackCheck:loopBackGPIO01GPIO017|not_ok_o  ; FX2_CLK  ;
+; N/A           ; None        ; -6.045 ns ; GPIO[20]  ; loopBackCheck:loopBackGPIO13GPIO021|not_ok_o  ; FX2_CLK  ;
+; N/A           ; None        ; -6.083 ns ; GPIO[22]  ; loopBackCheck:loopBackGPIO15GPIO023|not_ok_o  ; FX2_CLK  ;
+; N/A           ; None        ; -6.172 ns ; ATLAS_C23 ; loopBackCheck:loopBackA23C23|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -6.182 ns ; ATLAS_C21 ; loopBackCheck:loopBackGPIO03ATLASC21|not_ok_o ; FX2_CLK  ;
+; N/A           ; None        ; -6.233 ns ; ATLAS_C31 ; loopBackCheck:loopBackGPIO09ATLASC31|not_ok_o ; FX2_CLK  ;
+; N/A           ; None        ; -6.244 ns ; ATLAS_C13 ; loopBackCheck:loopBackA13C13|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -6.247 ns ; ATLAS_C24 ; loopBackCheck:loopBackA24C24|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -6.255 ns ; ATLAS_C27 ; loopBackCheck:loopBackGPIO07ATLASC27|not_ok_o ; FX2_CLK  ;
+; N/A           ; None        ; -6.277 ns ; ATLAS_C03 ; loopBackCheck:loopBackA03C03|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -6.293 ns ; ATLAS_C06 ; loopBackCheck:loopBackA06C06|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -6.299 ns ; ATLAS_C12 ; loopBackCheck:loopBackA12C12|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -6.342 ns ; ATLAS_A29 ; loopBackCheck:loopBackGPIO05ATLASA29|not_ok_o ; FX2_CLK  ;
+; N/A           ; None        ; -6.412 ns ; ATLAS_C05 ; loopBackCheck:loopBackA05C05|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -6.523 ns ; ATLAS_C02 ; loopBackCheck:loopBackA02C02|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -6.531 ns ; ATLAS_C10 ; loopBackCheck:loopBackA10C10|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -6.569 ns ; ATLAS_C04 ; loopBackCheck:loopBackA04C04|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -6.609 ns ; ATLAS_C07 ; loopBackCheck:loopBackA07C07|not_ok_o         ; FX2_CLK  ;
+; N/A           ; None        ; -7.211 ns ; ATLAS_C08 ; loopBackCheck:loopBackA08C08|not_ok_o         ; FX2_CLK  ;
++---------------+-------------+-----------+-----------+-----------------------------------------------+----------+
 
 
 +--------------------------+
@@ -394,84 +442,91 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Classic Timing Analyzer
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Tue Mar 13 18:54:28 2007
+    Info: Processing started: Sun Mar 18 14:34:43 2007
 Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off WrapTest -c WrapTest --timing_analysis_only
 Warning: Found pins functioning as undefined clocks and/or memory enables
     Info: Assuming node "FX2_CLK" is an undefined clock
-Info: Clock "FX2_CLK" has Internal fmax of 78.37 MHz between source register "loopBackCheck:loopBackA04C04|not_ok_o" and destination register "test_loop_state.01101" (period= 12.76 ns)
-    Info: + Longest register to register delay is 6.085 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X24_Y13_N29; Fanout = 2; REG Node = 'loopBackCheck:loopBackA04C04|not_ok_o'
-        Info: 2: + IC(1.175 ns) + CELL(0.206 ns) = 1.381 ns; Loc. = LCCOMB_X24_Y10_N22; Fanout = 1; COMB Node = 'Mux0~346'
-        Info: 3: + IC(0.362 ns) + CELL(0.206 ns) = 1.949 ns; Loc. = LCCOMB_X24_Y10_N4; Fanout = 1; COMB Node = 'Mux0~347'
-        Info: 4: + IC(0.365 ns) + CELL(0.370 ns) = 2.684 ns; Loc. = LCCOMB_X24_Y10_N28; Fanout = 1; COMB Node = 'Mux0~350'
-        Info: 5: + IC(0.367 ns) + CELL(0.206 ns) = 3.257 ns; Loc. = LCCOMB_X24_Y10_N0; Fanout = 1; COMB Node = 'Mux0~353'
-        Info: 6: + IC(0.367 ns) + CELL(0.206 ns) = 3.830 ns; Loc. = LCCOMB_X24_Y10_N2; Fanout = 4; COMB Node = 'Mux0~358'
-        Info: 7: + IC(1.777 ns) + CELL(0.370 ns) = 5.977 ns; Loc. = LCCOMB_X25_Y9_N8; Fanout = 1; COMB Node = 'Selector31~84'
-        Info: 8: + IC(0.000 ns) + CELL(0.108 ns) = 6.085 ns; Loc. = LCFF_X25_Y9_N9; Fanout = 6; REG Node = 'test_loop_state.01101'
-        Info: Total cell delay = 1.672 ns ( 27.48 % )
-        Info: Total interconnect delay = 4.413 ns ( 72.52 % )
-    Info: - Smallest clock skew is -0.031 ns
-        Info: + Shortest clock path from clock "FX2_CLK" to destination register is 2.818 ns
+Info: Clock "FX2_CLK" has Internal fmax of 71.61 MHz between source register "loopBackCheck:loopBackA25C25|not_ok_o" and destination register "pass_count[7]" (period= 13.964 ns)
+    Info: + Longest register to register delay is 6.701 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X22_Y4_N17; Fanout = 2; REG Node = 'loopBackCheck:loopBackA25C25|not_ok_o'
+        Info: 2: + IC(0.464 ns) + CELL(0.650 ns) = 1.114 ns; Loc. = LCCOMB_X22_Y4_N6; Fanout = 1; COMB Node = 'Mux0~468'
+        Info: 3: + IC(0.373 ns) + CELL(0.206 ns) = 1.693 ns; Loc. = LCCOMB_X22_Y4_N20; Fanout = 1; COMB Node = 'Mux0~469'
+        Info: 4: + IC(1.113 ns) + CELL(0.366 ns) = 3.172 ns; Loc. = LCCOMB_X23_Y7_N24; Fanout = 1; COMB Node = 'Mux0~470'
+        Info: 5: + IC(0.374 ns) + CELL(0.370 ns) = 3.916 ns; Loc. = LCCOMB_X23_Y7_N18; Fanout = 2; COMB Node = 'Mux0~481'
+        Info: 6: + IC(0.368 ns) + CELL(0.206 ns) = 4.490 ns; Loc. = LCCOMB_X23_Y7_N28; Fanout = 3; COMB Node = 'Mux0~486'
+        Info: 7: + IC(0.381 ns) + CELL(0.596 ns) = 5.467 ns; Loc. = LCCOMB_X23_Y7_N2; Fanout = 2; COMB Node = 'pass_count[0]~382'
+        Info: 8: + IC(0.000 ns) + CELL(0.086 ns) = 5.553 ns; Loc. = LCCOMB_X23_Y7_N4; Fanout = 2; COMB Node = 'pass_count[1]~383'
+        Info: 9: + IC(0.000 ns) + CELL(0.086 ns) = 5.639 ns; Loc. = LCCOMB_X23_Y7_N6; Fanout = 2; COMB Node = 'pass_count[2]~385'
+        Info: 10: + IC(0.000 ns) + CELL(0.086 ns) = 5.725 ns; Loc. = LCCOMB_X23_Y7_N8; Fanout = 2; COMB Node = 'pass_count[3]~386'
+        Info: 11: + IC(0.000 ns) + CELL(0.086 ns) = 5.811 ns; Loc. = LCCOMB_X23_Y7_N10; Fanout = 2; COMB Node = 'pass_count[4]~387'
+        Info: 12: + IC(0.000 ns) + CELL(0.086 ns) = 5.897 ns; Loc. = LCCOMB_X23_Y7_N12; Fanout = 2; COMB Node = 'pass_count[5]~388'
+        Info: 13: + IC(0.000 ns) + CELL(0.190 ns) = 6.087 ns; Loc. = LCCOMB_X23_Y7_N14; Fanout = 1; COMB Node = 'pass_count[6]~389'
+        Info: 14: + IC(0.000 ns) + CELL(0.506 ns) = 6.593 ns; Loc. = LCCOMB_X23_Y7_N16; Fanout = 1; COMB Node = 'pass_count[7]~373'
+        Info: 15: + IC(0.000 ns) + CELL(0.108 ns) = 6.701 ns; Loc. = LCFF_X23_Y7_N17; Fanout = 2; REG Node = 'pass_count[7]'
+        Info: Total cell delay = 3.628 ns ( 54.14 % )
+        Info: Total interconnect delay = 3.073 ns ( 45.86 % )
+    Info: - Smallest clock skew is -0.017 ns
+        Info: + Shortest clock path from clock "FX2_CLK" to destination register is 2.843 ns
             Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'FX2_CLK'
-            Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 295; COMB Node = 'FX2_CLK~clkctrl'
-            Info: 3: + IC(0.873 ns) + CELL(0.666 ns) = 2.818 ns; Loc. = LCFF_X25_Y9_N9; Fanout = 6; REG Node = 'test_loop_state.01101'
-            Info: Total cell delay = 1.806 ns ( 64.09 % )
-            Info: Total interconnect delay = 1.012 ns ( 35.91 % )
-        Info: - Longest clock path from clock "FX2_CLK" to source register is 2.849 ns
+            Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 378; COMB Node = 'FX2_CLK~clkctrl'
+            Info: 3: + IC(0.898 ns) + CELL(0.666 ns) = 2.843 ns; Loc. = LCFF_X23_Y7_N17; Fanout = 2; REG Node = 'pass_count[7]'
+            Info: Total cell delay = 1.806 ns ( 63.52 % )
+            Info: Total interconnect delay = 1.037 ns ( 36.48 % )
+        Info: - Longest clock path from clock "FX2_CLK" to source register is 2.860 ns
             Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'FX2_CLK'
-            Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 295; COMB Node = 'FX2_CLK~clkctrl'
-            Info: 3: + IC(0.904 ns) + CELL(0.666 ns) = 2.849 ns; Loc. = LCFF_X24_Y13_N29; Fanout = 2; REG Node = 'loopBackCheck:loopBackA04C04|not_ok_o'
-            Info: Total cell delay = 1.806 ns ( 63.39 % )
-            Info: Total interconnect delay = 1.043 ns ( 36.61 % )
+            Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 378; COMB Node = 'FX2_CLK~clkctrl'
+            Info: 3: + IC(0.915 ns) + CELL(0.666 ns) = 2.860 ns; Loc. = LCFF_X22_Y4_N17; Fanout = 2; REG Node = 'loopBackCheck:loopBackA25C25|not_ok_o'
+            Info: Total cell delay = 1.806 ns ( 63.15 % )
+            Info: Total interconnect delay = 1.054 ns ( 36.85 % )
     Info: + Micro clock to output delay of source is 0.304 ns
     Info: + Micro setup delay of destination is -0.040 ns
     Info: Delay path is controlled by inverted clocks -- if clock duty cycle is 50, fmax is divided by two
-Info: tsu for register "loopBackCheck:loopBackA22C22|not_ok_o" (data pin = "ATLAS_C22", clock pin = "FX2_CLK") is 7.305 ns
-    Info: + Longest pin to register delay is 10.178 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.964 ns) = 0.964 ns; Loc. = PIN_182; Fanout = 1; PIN Node = 'ATLAS_C22'
-        Info: 2: + IC(6.836 ns) + CELL(0.206 ns) = 8.006 ns; Loc. = LCCOMB_X23_Y7_N4; Fanout = 1; COMB Node = 'loopBackCheck:loopBackA22C22|always0~0'
-        Info: 3: + IC(1.448 ns) + CELL(0.616 ns) = 10.070 ns; Loc. = LCCOMB_X24_Y11_N28; Fanout = 1; COMB Node = 'loopBackCheck:loopBackA22C22|not_ok_o~33'
-        Info: 4: + IC(0.000 ns) + CELL(0.108 ns) = 10.178 ns; Loc. = LCFF_X24_Y11_N29; Fanout = 2; REG Node = 'loopBackCheck:loopBackA22C22|not_ok_o'
-        Info: Total cell delay = 1.894 ns ( 18.61 % )
-        Info: Total interconnect delay = 8.284 ns ( 81.39 % )
+Info: tsu for register "loopBackCheck:loopBackA08C08|not_ok_o" (data pin = "ATLAS_C08", clock pin = "FX2_CLK") is 7.477 ns
+    Info: + Longest pin to register delay is 10.372 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.994 ns) = 0.994 ns; Loc. = PIN_162; Fanout = 1; PIN Node = 'ATLAS_C08'
+        Info: 2: + IC(7.314 ns) + CELL(0.647 ns) = 8.955 ns; Loc. = LCCOMB_X23_Y8_N20; Fanout = 1; COMB Node = 'loopBackCheck:loopBackA08C08|always0~0'
+        Info: 3: + IC(1.103 ns) + CELL(0.206 ns) = 10.264 ns; Loc. = LCCOMB_X22_Y5_N4; Fanout = 1; COMB Node = 'loopBackCheck:loopBackA08C08|not_ok_o~33'
+        Info: 4: + IC(0.000 ns) + CELL(0.108 ns) = 10.372 ns; Loc. = LCFF_X22_Y5_N5; Fanout = 2; REG Node = 'loopBackCheck:loopBackA08C08|not_ok_o'
+        Info: Total cell delay = 1.955 ns ( 18.85 % )
+        Info: Total interconnect delay = 8.417 ns ( 81.15 % )
     Info: + Micro setup delay of destination is -0.040 ns
-    Info: - Shortest clock path from clock "FX2_CLK" to destination register is 2.833 ns
+    Info: - Shortest clock path from clock "FX2_CLK" to destination register is 2.855 ns
         Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'FX2_CLK'
-        Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 295; COMB Node = 'FX2_CLK~clkctrl'
-        Info: 3: + IC(0.888 ns) + CELL(0.666 ns) = 2.833 ns; Loc. = LCFF_X24_Y11_N29; Fanout = 2; REG Node = 'loopBackCheck:loopBackA22C22|not_ok_o'
-        Info: Total cell delay = 1.806 ns ( 63.75 % )
-        Info: Total interconnect delay = 1.027 ns ( 36.25 % )
-Info: tco from clock "FX2_CLK" to destination pin "FPGA_TXD" through register "rs232_xmit:Ozy_rs232_xmit|xmit_o" is 10.655 ns
-    Info: + Longest clock path from clock "FX2_CLK" to source register is 2.837 ns
+        Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 378; COMB Node = 'FX2_CLK~clkctrl'
+        Info: 3: + IC(0.910 ns) + CELL(0.666 ns) = 2.855 ns; Loc. = LCFF_X22_Y5_N5; Fanout = 2; REG Node = 'loopBackCheck:loopBackA08C08|not_ok_o'
+        Info: Total cell delay = 1.806 ns ( 63.26 % )
+        Info: Total interconnect delay = 1.049 ns ( 36.74 % )
+Info: tco from clock "FX2_CLK" to destination pin "ATLAS_A03" through register "clock_count[1]" is 10.198 ns
+    Info: + Longest clock path from clock "FX2_CLK" to source register is 2.836 ns
         Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'FX2_CLK'
-        Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 295; COMB Node = 'FX2_CLK~clkctrl'
-        Info: 3: + IC(0.892 ns) + CELL(0.666 ns) = 2.837 ns; Loc. = LCFF_X12_Y11_N17; Fanout = 2; REG Node = 'rs232_xmit:Ozy_rs232_xmit|xmit_o'
-        Info: Total cell delay = 1.806 ns ( 63.66 % )
-        Info: Total interconnect delay = 1.031 ns ( 36.34 % )
+        Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 378; COMB Node = 'FX2_CLK~clkctrl'
+        Info: 3: + IC(0.891 ns) + CELL(0.666 ns) = 2.836 ns; Loc. = LCFF_X25_Y8_N11; Fanout = 27; REG Node = 'clock_count[1]'
+        Info: Total cell delay = 1.806 ns ( 63.68 % )
+        Info: Total interconnect delay = 1.030 ns ( 36.32 % )
     Info: + Micro clock to output delay of source is 0.304 ns
-    Info: + Longest register to pin delay is 7.514 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X12_Y11_N17; Fanout = 2; REG Node = 'rs232_xmit:Ozy_rs232_xmit|xmit_o'
-        Info: 2: + IC(4.218 ns) + CELL(3.296 ns) = 7.514 ns; Loc. = PIN_102; Fanout = 0; PIN Node = 'FPGA_TXD'
-        Info: Total cell delay = 3.296 ns ( 43.86 % )
-        Info: Total interconnect delay = 4.218 ns ( 56.14 % )
-Info: th for register "loopBackCheck:loopBackA14C14|not_ok_o" (data pin = "ATLAS_C14", clock pin = "FX2_CLK") is -4.845 ns
-    Info: + Longest clock path from clock "FX2_CLK" to destination register is 2.861 ns
+    Info: + Longest register to pin delay is 7.058 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X25_Y8_N11; Fanout = 27; REG Node = 'clock_count[1]'
+        Info: 2: + IC(3.952 ns) + CELL(3.106 ns) = 7.058 ns; Loc. = PIN_146; Fanout = 0; PIN Node = 'ATLAS_A03'
+        Info: Total cell delay = 3.106 ns ( 44.01 % )
+        Info: Total interconnect delay = 3.952 ns ( 55.99 % )
+Info: th for register "loopBackCheck:loopBackA19C19|not_ok_o" (data pin = "ATLAS_C19", clock pin = "FX2_CLK") is -5.039 ns
+    Info: + Longest clock path from clock "FX2_CLK" to destination register is 2.850 ns
         Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'FX2_CLK'
-        Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 295; COMB Node = 'FX2_CLK~clkctrl'
-        Info: 3: + IC(0.916 ns) + CELL(0.666 ns) = 2.861 ns; Loc. = LCFF_X28_Y14_N21; Fanout = 2; REG Node = 'loopBackCheck:loopBackA14C14|not_ok_o'
-        Info: Total cell delay = 1.806 ns ( 63.12 % )
-        Info: Total interconnect delay = 1.055 ns ( 36.88 % )
+        Info: 2: + IC(0.139 ns) + CELL(0.000 ns) = 1.279 ns; Loc. = CLKCTRL_G2; Fanout = 378; COMB Node = 'FX2_CLK~clkctrl'
+        Info: 3: + IC(0.905 ns) + CELL(0.666 ns) = 2.850 ns; Loc. = LCFF_X22_Y6_N1; Fanout = 2; REG Node = 'loopBackCheck:loopBackA19C19|not_ok_o'
+        Info: Total cell delay = 1.806 ns ( 63.37 % )
+        Info: Total interconnect delay = 1.044 ns ( 36.63 % )
     Info: + Micro hold delay of destination is 0.306 ns
-    Info: - Shortest pin to register delay is 8.012 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.984 ns) = 0.984 ns; Loc. = PIN_170; Fanout = 1; PIN Node = 'ATLAS_C14'
-        Info: 2: + IC(6.138 ns) + CELL(0.206 ns) = 7.328 ns; Loc. = LCCOMB_X28_Y14_N28; Fanout = 1; COMB Node = 'loopBackCheck:loopBackA14C14|always0~0'
-        Info: 3: + IC(0.370 ns) + CELL(0.206 ns) = 7.904 ns; Loc. = LCCOMB_X28_Y14_N20; Fanout = 1; COMB Node = 'loopBackCheck:loopBackA14C14|not_ok_o~33'
-        Info: 4: + IC(0.000 ns) + CELL(0.108 ns) = 8.012 ns; Loc. = LCFF_X28_Y14_N21; Fanout = 2; REG Node = 'loopBackCheck:loopBackA14C14|not_ok_o'
-        Info: Total cell delay = 1.504 ns ( 18.77 % )
-        Info: Total interconnect delay = 6.508 ns ( 81.23 % )
+    Info: - Shortest pin to register delay is 8.195 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.974 ns) = 0.974 ns; Loc. = PIN_179; Fanout = 1; PIN Node = 'ATLAS_C19'
+        Info: 2: + IC(6.333 ns) + CELL(0.206 ns) = 7.513 ns; Loc. = LCCOMB_X22_Y6_N18; Fanout = 1; COMB Node = 'loopBackCheck:loopBackA19C19|always0~0'
+        Info: 3: + IC(0.368 ns) + CELL(0.206 ns) = 8.087 ns; Loc. = LCCOMB_X22_Y6_N0; Fanout = 1; COMB Node = 'loopBackCheck:loopBackA19C19|not_ok_o~33'
+        Info: 4: + IC(0.000 ns) + CELL(0.108 ns) = 8.195 ns; Loc. = LCFF_X22_Y6_N1; Fanout = 2; REG Node = 'loopBackCheck:loopBackA19C19|not_ok_o'
+        Info: Total cell delay = 1.494 ns ( 18.23 % )
+        Info: Total interconnect delay = 6.701 ns ( 81.77 % )
 Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 1 warning
-    Info: Allocated 102 megabytes of memory during processing
-    Info: Processing ended: Tue Mar 13 18:54:31 2007
+    Info: Allocated 103 megabytes of memory during processing
+    Info: Processing ended: Sun Mar 18 14:34:46 2007
     Info: Elapsed time: 00:00:03
 
 

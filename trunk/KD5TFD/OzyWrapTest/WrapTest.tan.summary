@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 7.305 ns
-From           : ATLAS_C22
-To             : loopBackCheck:loopBackA22C22|not_ok_o
+Actual Time    : 7.477 ns
+From           : ATLAS_C08
+To             : loopBackCheck:loopBackA08C08|not_ok_o
 From Clock     : --
 To Clock       : FX2_CLK
 Failed Paths   : 0
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 10.655 ns
-From           : rs232_xmit:Ozy_rs232_xmit|xmit_o
-To             : FPGA_TXD
+Actual Time    : 10.198 ns
+From           : clock_count[1]
+To             : ATLAS_A03
 From Clock     : FX2_CLK
 To Clock       : --
 Failed Paths   : 0
@@ -25,9 +25,9 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -4.845 ns
-From           : ATLAS_C14
-To             : loopBackCheck:loopBackA14C14|not_ok_o
+Actual Time    : -5.039 ns
+From           : ATLAS_C19
+To             : loopBackCheck:loopBackA19C19|not_ok_o
 From Clock     : --
 To Clock       : FX2_CLK
 Failed Paths   : 0
@@ -35,9 +35,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'FX2_CLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 78.37 MHz ( period = 12.760 ns )
-From           : loopBackCheck:loopBackA04C04|not_ok_o
-To             : test_loop_state.01101
+Actual Time    : 71.61 MHz ( period = 13.964 ns )
+From           : loopBackCheck:loopBackA25C25|not_ok_o
+To             : pass_count[7]
 From Clock     : FX2_CLK
 To Clock       : FX2_CLK
 Failed Paths   : 0

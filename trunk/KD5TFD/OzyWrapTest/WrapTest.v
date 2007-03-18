@@ -26,6 +26,7 @@ module WrapTest(
         ATLAS_C04, ATLAS_C05, ATLAS_C06, ATLAS_C07, ATLAS_C08, ATLAS_C09, ATLAS_C10, ATLAS_C11,
         ATLAS_C12, ATLAS_C13, ATLAS_C14, ATLAS_C15, ATLAS_C16, ATLAS_C17, ATLAS_C18, ATLAS_C19,
         ATLAS_C22, ATLAS_C23, ATLAS_C24, ATLAS_C25,
+	    ATLAS_C20, ATLAS_C21, ATLAS_A27, ATLAS_A29, ATLAS_A31, ATLAS_C27, ATLAS_C29, ATLAS_C31,
    		FPGA_TXD
 		);
 		
@@ -109,10 +110,14 @@ input ATLAS_C24;
 input ATLAS_C25;
 
 
-
-
-
-
+input ATLAS_C20;
+input ATLAS_C21;
+input ATLAS_A27;
+input ATLAS_A29;
+input ATLAS_A31;
+input ATLAS_C27;
+input ATLAS_C29;
+input ATLAS_C31;
 
 
 
@@ -124,10 +129,8 @@ reg[24:0] clock_count;
 
 assign DEBUG_LED0 = ~leds[0]; 		
 assign DEBUG_LED1 = ~leds[1]; 		
-// assign DEBUG_LED2 = ~leds[2]; 		
-// assign DEBUG_LED3 = ~leds[3]; 		
-
- 
+assign GPIO_nIOE = 0;  // enable GPIO output driver 
+	 
 
 wire ATLAS_A02 = clock_count[00];   // 6
 wire ATLAS_A03 = clock_count[01];   // 3
@@ -153,13 +156,35 @@ wire ATLAS_A23 = clock_count[01];
 wire ATLAS_A24 = clock_count[02];
 wire ATLAS_A25 = clock_count[03];
 
-reg[21:0] loopback_reset; 
-wire[21:0] loopback_result; 
+
+
+// note -- these are 0 indexed -- they are 1 indexed on the schematics 
+assign GPIO[00] = ~clock_count[04];
+assign GPIO[09] = ~clock_count[05];
+assign GPIO[10] = clock_count[02];
+assign GPIO[11] = clock_count[03];
+assign GPIO[12] = clock_count[04];
+assign GPIO[13] = clock_count[05];
+assign GPIO[14] = clock_count[06];
+assign GPIO[15] = ~clock_count[05];
+assign GPIO[01] = ~clock_count[01];
+assign GPIO[02] = ~clock_count[02];
+assign GPIO[03] = ~clock_count[03];
+assign GPIO[04] = ~clock_count[04];
+assign GPIO[05] = ~clock_count[05];
+assign GPIO[06] = ~clock_count[06];
+assign GPIO[07] = clock_count[00];
+assign GPIO[08] = clock_count[01];
+
+
+
+reg[37:0] loopback_reset; 
+wire[37:0] loopback_result; 
 
 assign DEBUG_LED2 = ~loopback_result[0];
 assign DEBUG_LED3 = ~loopback_result[1];
 
-// instantiate two loopback checkers 
+
 
 loopBackCheck loopBackA02C02( .ref_sig_i(ATLAS_A02), .check_sig_i(ATLAS_C02), .not_ok_o(loopback_result[00]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[00]) );
 loopBackCheck loopBackA03C03( .ref_sig_i(ATLAS_A03), .check_sig_i(ATLAS_C03), .not_ok_o(loopback_result[01]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[01]) );
@@ -184,6 +209,27 @@ loopBackCheck loopBackA22C22( .ref_sig_i(ATLAS_A22), .check_sig_i(ATLAS_C22), .n
 loopBackCheck loopBackA23C23( .ref_sig_i(ATLAS_A23), .check_sig_i(ATLAS_C23), .not_ok_o(loopback_result[19]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[19]) );
 loopBackCheck loopBackA24C24( .ref_sig_i(ATLAS_A24), .check_sig_i(ATLAS_C24), .not_ok_o(loopback_result[20]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[20]) );
 loopBackCheck loopBackA25C25( .ref_sig_i(ATLAS_A25), .check_sig_i(ATLAS_C25), .not_ok_o(loopback_result[21]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[21]) );
+
+
+
+
+loopBackCheck loopBackGPIO01GPIO017( .ref_sig_i(GPIO[00]), .check_sig_i(GPIO[16]), .not_ok_o(loopback_result[22]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[22]) );
+loopBackCheck loopBackGPIO10GPIO018( .ref_sig_i(GPIO[09]), .check_sig_i(GPIO[17]), .not_ok_o(loopback_result[23]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[23]) );
+loopBackCheck loopBackGPIO11GPIO019( .ref_sig_i(GPIO[10]), .check_sig_i(GPIO[18]), .not_ok_o(loopback_result[24]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[24]) );
+loopBackCheck loopBackGPIO12GPIO020( .ref_sig_i(GPIO[11]), .check_sig_i(GPIO[19]), .not_ok_o(loopback_result[25]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[25]) );
+loopBackCheck loopBackGPIO13GPIO021( .ref_sig_i(GPIO[12]), .check_sig_i(GPIO[20]), .not_ok_o(loopback_result[26]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[26]) );
+loopBackCheck loopBackGPIO14GPIO022( .ref_sig_i(GPIO[13]), .check_sig_i(GPIO[21]), .not_ok_o(loopback_result[27]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[27]) );
+loopBackCheck loopBackGPIO15GPIO023( .ref_sig_i(GPIO[14]), .check_sig_i(GPIO[22]), .not_ok_o(loopback_result[28]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[28]) );
+loopBackCheck loopBackGPIO16GPIO024( .ref_sig_i(GPIO[15]), .check_sig_i(GPIO[23]), .not_ok_o(loopback_result[29]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[29]) );
+
+loopBackCheck loopBackGPIO02ATLASC20( .ref_sig_i(GPIO[01]), .check_sig_i(ATLAS_C20), .not_ok_o(loopback_result[30]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[30]) );
+loopBackCheck loopBackGPIO03ATLASC21( .ref_sig_i(GPIO[02]), .check_sig_i(ATLAS_C21), .not_ok_o(loopback_result[31]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[31]) );
+loopBackCheck loopBackGPIO04ATLASA27( .ref_sig_i(GPIO[03]), .check_sig_i(ATLAS_A27), .not_ok_o(loopback_result[32]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[32]) );
+loopBackCheck loopBackGPIO05ATLASA29( .ref_sig_i(GPIO[04]), .check_sig_i(ATLAS_A29), .not_ok_o(loopback_result[33]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[33]) );
+loopBackCheck loopBackGPIO06ATLASA31( .ref_sig_i(GPIO[05]), .check_sig_i(ATLAS_A31), .not_ok_o(loopback_result[34]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[34]) );
+loopBackCheck loopBackGPIO07ATLASC27( .ref_sig_i(GPIO[06]), .check_sig_i(ATLAS_C27), .not_ok_o(loopback_result[35]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[35]) );
+loopBackCheck loopBackGPIO08ATLASC29( .ref_sig_i(GPIO[07]), .check_sig_i(ATLAS_C29), .not_ok_o(loopback_result[36]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[36]) );
+loopBackCheck loopBackGPIO09ATLASC31( .ref_sig_i(GPIO[08]), .check_sig_i(ATLAS_C31), .not_ok_o(loopback_result[37]), .master_clock_i(FX2_CLK), .reset_i(loopback_reset[37]) );
 
 
 
@@ -242,7 +288,7 @@ endfunction
 reg [7:0] test_circ_idx; 
 reg [4:0] test_loop_state; 
 reg [4:0] post_xmit_state; 
-reg [15:0] idle_counter; 
+reg [32:0] idle_counter; 
 reg [7:0] char_to_xmit; 
 reg [15:0] rs232_delay_count; 
 reg [7:0] pass_count; 
@@ -253,7 +299,7 @@ always @ ( posedge FX2_CLK )
 begin 
 	case ( test_loop_state ) 
 		0: begin  // init -- reset all loopbacks 
-            loopback_reset <= 1; 
+            loopback_reset <= {38{1'b1}}; 
 			test_circ_idx <= 0; 
 			test_loop_state <= 1; 
 		end
@@ -265,7 +311,7 @@ begin
 		end 
 		
 		2: begin 
-			if ( idle_counter >= 50000 ) begin // idle state 
+			if ( idle_counter >= 316000 ) begin // idle state 
 				idle_counter <= 0;  // prep for next time 
 				test_loop_state <= 3; // get out of idle state 		
 			end 
@@ -287,12 +333,12 @@ begin
 		end 
 		
 		4: begin  // circuit failed 
-			char_to_xmit = 70;  // 'F'
+			char_to_xmit <= 70;  // 'F'
 			test_loop_state <= 6; 
 		end 
 		
 		5: begin  // circuit passed 
-			char_to_xmit = 80;  // 'P'
+			char_to_xmit <= 80;  // 'P'
 			test_loop_state <= 6; 
 		end 
 		
@@ -314,7 +360,7 @@ begin
 		end 
 		
 		9: begin  // space transmitted -- xmit circ number  -- hi nibble first 
-			char_to_xmit = NibbleToChar(test_circ_idx[7:4]); 
+			char_to_xmit <= NibbleToChar(test_circ_idx[7:4]); 
 			post_xmit_state <= 11; 
 			rs232_write_strobe <= 0; 
 			test_loop_state <= 8;  
@@ -327,13 +373,13 @@ begin
 		end 
 		
 		11: begin // send low nibble of circ number 
-			char_to_xmit = NibbleToChar(test_circ_idx[3:0]); 
+			char_to_xmit <= NibbleToChar(test_circ_idx[3:0]); 
 			post_xmit_state <= 12;  // send line feed 
 			test_loop_state <= 8;  			
 		end 
 		
 		12: begin  // send lf char 
-			char_to_xmit = 10;   // 10 == line feed 
+			char_to_xmit <= 13;   // 10 == line feed, 13==cr
 			post_xmit_state <= 13; 
 			test_loop_state <= 8;  // send char 
 		end 
@@ -345,13 +391,13 @@ begin
 		
 		14: begin  // all done printing mesaage - see if we're at end of loop and if all passed print msg - else go on to next circ 
 			loopback_reset[test_circ_idx] <= 0; 
-			if ( test_circ_idx == 21 ) begin  // are we at end of list?? reset to 0
+			if ( test_circ_idx == 37 ) begin  // are we at end of list?? reset to 0
 				test_circ_idx <= 0;  
-				if ( pass_count == 22 ) begin  // did all circuits pass? 
+				if ( pass_count == 38 ) begin  // did all circuits pass? 
 					test_loop_state <= 16;  // go print 'All Pass!" message 
 				end 
 				else begin
-					test_loop_state <= 2; // we had fails on this loop - just go back to the top 
+					test_loop_state <= 27; // we had fails on this loop - print a new line and  go back to the top 
 				end
 				pass_count <= 0; 
 			end 
@@ -426,14 +472,21 @@ begin
 		end 				
 		
 		25: begin  // print "All Pass!" message 
-			char_to_xmit <= 10; // LF
+			char_to_xmit <= 13; // LF==10  CR==13
 			test_loop_state <= 8; 
 			post_xmit_state <= 26; 
 		end 					
 		
 		26: begin  // "All Pass!" message printed - reset loop and restart 
-			test_loop_state <= 2;  
-		end 					
+			test_loop_state <= 27;  
+		end
+			
+	    27: begin  // print a new line char and go to idle state 
+			char_to_xmit <= 13; 
+			test_loop_state <=8; 
+			post_xmit_state <= 2; 
+		end 
+
 		
 		
 	endcase 

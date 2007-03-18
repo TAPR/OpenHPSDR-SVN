@@ -29,35 +29,51 @@ DEBUG_LED0 <= leds[0].DB_MAX_OUTPUT_PORT_TYPE
 DEBUG_LED1 <= leds[1].DB_MAX_OUTPUT_PORT_TYPE
 DEBUG_LED2 <= loopBackCheck:loopBackA02C02.not_ok_o
 DEBUG_LED3 <= loopBackCheck:loopBackA03C03.not_ok_o
-FX2_CLK => FX2_CLK~0.IN23
+FX2_CLK => FX2_CLK~0.IN39
 SPI_SCK => ~NO_FANOUT~
 SPI_SI => ~NO_FANOUT~
 SPI_SO <= <UNC>
 SPI_CS => ~NO_FANOUT~
-GPIO[0] <= <UNC>
-GPIO[1] <= <UNC>
-GPIO[2] <= <UNC>
-GPIO[3] <= <UNC>
-GPIO[4] <= <UNC>
-GPIO[5] <= <UNC>
-GPIO[6] <= <UNC>
-GPIO[7] <= <UNC>
-GPIO[8] <= <UNC>
-GPIO[9] <= <UNC>
-GPIO[10] <= <UNC>
-GPIO[11] <= <UNC>
-GPIO[12] <= <UNC>
-GPIO[13] <= <UNC>
-GPIO[14] <= <UNC>
-GPIO[15] <= <UNC>
-GPIO[16] <= <UNC>
-GPIO[17] <= <UNC>
-GPIO[18] <= <UNC>
-GPIO[19] <= <UNC>
-GPIO[20] <= <UNC>
-GPIO[21] <= <UNC>
-GPIO[22] <= <UNC>
-GPIO[23] <= <UNC>
+GPIO[0] <= comb~1
+GPIO[0] <= loopBackCheck:loopBackGPIO01GPIO017.ref_sig_i
+GPIO[1] <= comb~2
+GPIO[1] <= loopBackCheck:loopBackGPIO02ATLASC20.ref_sig_i
+GPIO[2] <= comb~3
+GPIO[2] <= loopBackCheck:loopBackGPIO03ATLASC21.ref_sig_i
+GPIO[3] <= comb~4
+GPIO[3] <= loopBackCheck:loopBackGPIO04ATLASA27.ref_sig_i
+GPIO[4] <= comb~5
+GPIO[4] <= loopBackCheck:loopBackGPIO05ATLASA29.ref_sig_i
+GPIO[5] <= comb~6
+GPIO[5] <= loopBackCheck:loopBackGPIO06ATLASA31.ref_sig_i
+GPIO[6] <= comb~7
+GPIO[6] <= loopBackCheck:loopBackGPIO07ATLASC27.ref_sig_i
+GPIO[7] <= GPIO~29
+GPIO[7] <= loopBackCheck:loopBackGPIO08ATLASC29.ref_sig_i
+GPIO[8] <= GPIO~30
+GPIO[8] <= loopBackCheck:loopBackGPIO09ATLASC31.ref_sig_i
+GPIO[9] <= comb~8
+GPIO[9] <= loopBackCheck:loopBackGPIO10GPIO018.ref_sig_i
+GPIO[10] <= GPIO~24
+GPIO[10] <= loopBackCheck:loopBackGPIO11GPIO019.ref_sig_i
+GPIO[11] <= GPIO~25
+GPIO[11] <= loopBackCheck:loopBackGPIO12GPIO020.ref_sig_i
+GPIO[12] <= GPIO~26
+GPIO[12] <= loopBackCheck:loopBackGPIO13GPIO021.ref_sig_i
+GPIO[13] <= GPIO~27
+GPIO[13] <= loopBackCheck:loopBackGPIO14GPIO022.ref_sig_i
+GPIO[14] <= GPIO~28
+GPIO[14] <= loopBackCheck:loopBackGPIO15GPIO023.ref_sig_i
+GPIO[15] <= comb~9
+GPIO[15] <= loopBackCheck:loopBackGPIO16GPIO024.ref_sig_i
+GPIO[16] <= loopBackCheck:loopBackGPIO01GPIO017.check_sig_i
+GPIO[17] <= loopBackCheck:loopBackGPIO10GPIO018.check_sig_i
+GPIO[18] <= loopBackCheck:loopBackGPIO11GPIO019.check_sig_i
+GPIO[19] <= loopBackCheck:loopBackGPIO12GPIO020.check_sig_i
+GPIO[20] <= loopBackCheck:loopBackGPIO13GPIO021.check_sig_i
+GPIO[21] <= loopBackCheck:loopBackGPIO14GPIO022.check_sig_i
+GPIO[22] <= loopBackCheck:loopBackGPIO15GPIO023.check_sig_i
+GPIO[23] <= loopBackCheck:loopBackGPIO16GPIO024.check_sig_i
 GPIO_nIOE <= <GND>
 ATLAS_A02 <= ATLAS_A22~0.DB_MAX_OUTPUT_PORT_TYPE
 ATLAS_A03 <= ATLAS_A23~0.DB_MAX_OUTPUT_PORT_TYPE
@@ -103,6 +119,14 @@ ATLAS_C22 => ATLAS_C22~0.IN1
 ATLAS_C23 => ATLAS_C23~0.IN1
 ATLAS_C24 => ATLAS_C24~0.IN1
 ATLAS_C25 => ATLAS_C25~0.IN1
+ATLAS_C20 => ATLAS_C20~0.IN1
+ATLAS_C21 => ATLAS_C21~0.IN1
+ATLAS_A27 => ATLAS_A27~0.IN1
+ATLAS_A29 => ATLAS_A29~0.IN1
+ATLAS_A31 => ATLAS_A31~0.IN1
+ATLAS_C27 => ATLAS_C27~0.IN1
+ATLAS_C29 => ATLAS_C29~0.IN1
+ATLAS_C31 => ATLAS_C31~0.IN1
 FPGA_TXD <= rs232_xmit:Ozy_rs232_xmit.xmit_o
 
 
@@ -401,6 +425,230 @@ reset_i => last_ref_sig.ENA
 
 
 |WrapTest|loopBackCheck:loopBackA25C25
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO01GPIO017
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO10GPIO018
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO11GPIO019
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO12GPIO020
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO13GPIO021
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO14GPIO022
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO15GPIO023
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO16GPIO024
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO02ATLASC20
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO03ATLASC21
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO04ATLASA27
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO05ATLASA29
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO06ATLASA31
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO07ATLASC27
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO08ATLASC29
+ref_sig_i => always0~0.IN0
+ref_sig_i => always0~1.IN1
+ref_sig_i => last_ref_sig~0.DATAA
+check_sig_i => always0~0.IN1
+not_ok_o <= not_ok_o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+master_clock_i => armed.CLK
+master_clock_i => last_ref_sig.CLK
+master_clock_i => not_ok_o~reg0.CLK
+reset_i => not_ok_o~2.OUTPUTSELECT
+reset_i => armed~2.OUTPUTSELECT
+reset_i => last_ref_sig.ENA
+
+
+|WrapTest|loopBackCheck:loopBackGPIO09ATLASC31
 ref_sig_i => always0~0.IN0
 ref_sig_i => always0~1.IN1
 ref_sig_i => last_ref_sig~0.DATAA
