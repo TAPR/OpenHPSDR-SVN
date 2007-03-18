@@ -62,6 +62,22 @@ loopBackCheck:loopBackA22C22
 loopBackCheck:loopBackA23C23
 loopBackCheck:loopBackA24C24
 loopBackCheck:loopBackA25C25
+loopBackCheck:loopBackGPIO01GPIO017
+loopBackCheck:loopBackGPIO10GPIO018
+loopBackCheck:loopBackGPIO11GPIO019
+loopBackCheck:loopBackGPIO12GPIO020
+loopBackCheck:loopBackGPIO13GPIO021
+loopBackCheck:loopBackGPIO14GPIO022
+loopBackCheck:loopBackGPIO15GPIO023
+loopBackCheck:loopBackGPIO16GPIO024
+loopBackCheck:loopBackGPIO02ATLASC20
+loopBackCheck:loopBackGPIO03ATLASC21
+loopBackCheck:loopBackGPIO04ATLASA27
+loopBackCheck:loopBackGPIO05ATLASA29
+loopBackCheck:loopBackGPIO06ATLASA31
+loopBackCheck:loopBackGPIO07ATLASC27
+loopBackCheck:loopBackGPIO08ATLASC29
+loopBackCheck:loopBackGPIO09ATLASC31
 }
 # end
 # entity
@@ -761,7 +777,7 @@ ON
 # case_sensitive
 # source_file
 WrapTest.v
-de4813c648c81f868cf5805be3ebbd49
+a57636d2c78b613a79a4cbaddaf83fa
 7
 # internal_option {
 AUTO_RESOURCE_SHARING

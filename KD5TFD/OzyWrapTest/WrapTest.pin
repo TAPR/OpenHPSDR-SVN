@@ -159,9 +159,9 @@ GPIO[23]                     : 99        : bidir  : 3.3-V LVTTL       :         
 GND                          : 100       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 101       :        :                   :         : 4         :                
 FPGA_TXD                     : 102       : output : 3.3-V LVTTL       :         : 4         : Y              
-RESERVED_INPUT               : 103       :        :                   :         : 4         :                
-RESERVED_INPUT               : 104       :        :                   :         : 4         :                
-RESERVED_INPUT               : 105       :        :                   :         : 3         :                
+ATLAS_A31                    : 103       : input  : 3.3-V LVTTL       :         : 4         : Y              
+ATLAS_A29                    : 104       : input  : 3.3-V LVTTL       :         : 4         : Y              
+ATLAS_A27                    : 105       : input  : 3.3-V LVTTL       :         : 3         : Y              
 ATLAS_A25                    : 106       : output : 3.3-V LVTTL       :         : 3         : Y              
 ~LVDS54n/INIT_DONE~ / RESERVED : 107       : output : 3.3-V LVTTL       :         : 3         : N              
 DEBUG_LED3                   : 108       : output : 3.3-V LVTTL       :         : 3         : Y              
@@ -236,8 +236,8 @@ ATLAS_C18                    : 176       : input  : 3.3-V LVTTL       :         
 GND                          : 177       : gnd    :                   :         :           :                
 VCCINT                       : 178       : power  :                   : 1.2V    :           :                
 ATLAS_C19                    : 179       : input  : 3.3-V LVTTL       :         : 2         : Y              
-RESERVED_INPUT               : 180       :        :                   :         : 2         :                
-RESERVED_INPUT               : 181       :        :                   :         : 2         :                
+ATLAS_C20                    : 180       : input  : 3.3-V LVTTL       :         : 2         : Y              
+ATLAS_C21                    : 181       : input  : 3.3-V LVTTL       :         : 2         : Y              
 ATLAS_C22                    : 182       : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 183       : power  :                   : 3.3V    : 2         :                
 GND                          : 184       : gnd    :                   :         :           :                
@@ -245,10 +245,10 @@ ATLAS_C23                    : 185       : input  : 3.3-V LVTTL       :         
 GND                          : 186       : gnd    :                   :         :           :                
 ATLAS_C24                    : 187       : input  : 3.3-V LVTTL       :         : 2         : Y              
 ATLAS_C25                    : 188       : input  : 3.3-V LVTTL       :         : 2         : Y              
-RESERVED_INPUT               : 189       :        :                   :         : 2         :                
+ATLAS_C27                    : 189       : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCINT                       : 190       : power  :                   : 1.2V    :           :                
-RESERVED_INPUT               : 191       :        :                   :         : 2         :                
-RESERVED_INPUT               : 192       :        :                   :         : 2         :                
+ATLAS_C29                    : 191       : input  : 3.3-V LVTTL       :         : 2         : Y              
+ATLAS_C31                    : 192       : input  : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 193       :        :                   :         : 2         :                
 VCCIO2                       : 194       : power  :                   : 3.3V    : 2         :                
 RESERVED_INPUT               : 195       :        :                   :         : 2         :                

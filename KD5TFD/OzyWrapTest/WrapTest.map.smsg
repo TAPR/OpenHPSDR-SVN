@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Tue Mar 13 18:53:16 2007
+    Info: Processing started: Fri Mar 16 12:09:34 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off WrapTest -c WrapTest
 Info: Found 1 design units, including 1 entities, in source file rs232_tx_fifo.v
     Info: Found entity 1: rs232_tx_fifo
@@ -12,21 +12,21 @@ Info: Found 1 design units, including 1 entities, in source file loopBackChecker
 Info: Found 1 design units, including 1 entities, in source file rs232_xmit.v
     Info: Found entity 1: rs232_xmit
 Info: Elaborating entity "WrapTest" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(193): truncated value with size 32 to match size of target (17)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(211): truncated value with size 32 to match size of target (25)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(273): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(242): truncated value with size 32 to match size of target (17)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(260): truncated value with size 32 to match size of target (25)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(322): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(334): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(282): truncated value with size 32 to match size of target (8)
 Warning (10230): Verilog HDL assignment warning at WrapTest.v(285): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(233): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(236): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(359): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at WrapTest.v(369): truncated value with size 32 to match size of target (16)
-Warning (10034): Output port "SLWR" at WrapTest.v(39) has no driver
-Warning (10034): Output port "SLRD" at WrapTest.v(40) has no driver
-Warning (10034): Output port "SLOE" at WrapTest.v(41) has no driver
-Warning (10034): Output port "PKEND" at WrapTest.v(42) has no driver
-Warning (10034): Output port "FIFO_ADR[1]" at WrapTest.v(43) has no driver
-Warning (10034): Output port "FIFO_ADR[0]" at WrapTest.v(43) has no driver
-Warning (10034): Output port "GPIO_nIOE" at WrapTest.v(61) has no driver
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(408): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at WrapTest.v(418): truncated value with size 32 to match size of target (16)
+Warning (10034): Output port "SLWR" at WrapTest.v(40) has no driver
+Warning (10034): Output port "SLRD" at WrapTest.v(41) has no driver
+Warning (10034): Output port "SLOE" at WrapTest.v(42) has no driver
+Warning (10034): Output port "PKEND" at WrapTest.v(43) has no driver
+Warning (10034): Output port "FIFO_ADR[1]" at WrapTest.v(44) has no driver
+Warning (10034): Output port "FIFO_ADR[0]" at WrapTest.v(44) has no driver
+Warning (10034): Output port "GPIO_nIOE" at WrapTest.v(62) has no driver
 Info: Elaborating entity "loopBackCheck" for hierarchy "loopBackCheck:loopBackA02C02"
 Info: Elaborating entity "rs232_xmit" for hierarchy "rs232_xmit:Ozy_rs232_xmit"
 Warning (10230): Verilog HDL assignment warning at rs232_xmit.v(115): truncated value with size 32 to match size of target (4)
@@ -190,22 +190,6 @@ Warning: The bidir "FX2_FD[14]" has no source; inserted an always disabled tri-s
 Warning: The bidir "FX2_FD[15]" has no source; inserted an always disabled tri-state buffer.
 Warning: The bidir "SPI_SO" has no source; inserted an always disabled tri-state buffer.
 Warning: The bidir "GPIO[0]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[1]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[2]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[3]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[4]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[5]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[6]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[7]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[8]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[9]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[10]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[11]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[12]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[13]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[14]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[15]" has no source; inserted an always disabled tri-state buffer.
-Warning: The bidir "GPIO[16]" has no source; inserted an always disabled tri-state buffer.
 Warning: The bidir "GPIO[17]" has no source; inserted an always disabled tri-state buffer.
 Warning: The bidir "GPIO[18]" has no source; inserted an always disabled tri-state buffer.
 Warning: The bidir "GPIO[19]" has no source; inserted an always disabled tri-state buffer.
@@ -213,6 +197,56 @@ Warning: The bidir "GPIO[20]" has no source; inserted an always disabled tri-sta
 Warning: The bidir "GPIO[21]" has no source; inserted an always disabled tri-state buffer.
 Warning: The bidir "GPIO[22]" has no source; inserted an always disabled tri-state buffer.
 Warning: The bidir "GPIO[23]" has no source; inserted an always disabled tri-state buffer.
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[1]~15 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[2]~14 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[3]~13 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[4]~12 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[5]~11 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[6]~10 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[7]~9 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[8]~8 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[9]~7 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[10]~6 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[11]~5 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[12]~4 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[13]~3 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[14]~2 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[15]~1 that it feeds
+Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[16]~0 that it feeds
+Info: One or more bidirs are fed by always enabled tri-state buffers
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[1]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[2]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[3]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[4]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[5]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[6]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[7]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[8]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[9]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[10]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[11]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[12]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[13]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[14]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[15]" is moved to its source
+    Info: Fan-out of permanently enabled tri-state buffer feeding bidir "GPIO[16]" is moved to its source
+Warning: TRI or OPNDRN buffers permanently enabled
+    Warning: Node "GPIO[1]~41"
+    Warning: Node "GPIO[2]~42"
+    Warning: Node "GPIO[3]~43"
+    Warning: Node "GPIO[4]~44"
+    Warning: Node "GPIO[5]~45"
+    Warning: Node "GPIO[6]~46"
+    Warning: Node "GPIO[7]~47"
+    Warning: Node "GPIO[8]~48"
+    Warning: Node "GPIO[9]~49"
+    Warning: Node "GPIO[10]~50"
+    Warning: Node "GPIO[11]~51"
+    Warning: Node "GPIO[12]~52"
+    Warning: Node "GPIO[13]~53"
+    Warning: Node "GPIO[14]~54"
+    Warning: Node "GPIO[15]~55"
+    Warning: Node "GPIO[16]~56"
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "SLWR" stuck at GND
     Warning: Pin "SLRD" stuck at GND
@@ -233,13 +267,13 @@ Info: 11 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "post_xmit_state~9" lost all its fanouts during netlist optimizations.
     Info: Register "post_xmit_state~10" lost all its fanouts during netlist optimizations.
     Info: Register "post_xmit_state~11" lost all its fanouts during netlist optimizations.
-Info: Implemented 647 device resources after synthesis - the final resource count might be different
-    Info: Implemented 30 input pins
+Info: Implemented 792 device resources after synthesis - the final resource count might be different
+    Info: Implemented 38 input pins
     Info: Implemented 34 output pins
     Info: Implemented 82 bidirectional pins
-    Info: Implemented 493 logic cells
+    Info: Implemented 630 logic cells
     Info: Implemented 8 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 69 warnings
-    Info: Allocated 130 megabytes of memory during processing
-    Info: Processing ended: Tue Mar 13 18:53:37 2007
-    Info: Elapsed time: 00:00:21
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 86 warnings
+    Info: Allocated 131 megabytes of memory during processing
+    Info: Processing ended: Fri Mar 16 12:10:03 2007
+    Info: Elapsed time: 00:00:29
