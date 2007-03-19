@@ -10,8 +10,8 @@
 	is valid at the positive edge of the LT2208 100MHz clock.
 	
 	The data is processed by a CORDIC NCO to produce I and Q
-	outputs.  These are decimated by 512 in a CIC filter to 
-	give output data at ~192kHz to feed to the FX2 and hence via 
+	outputs.  These are decimated by 640 in a CIC filter to 
+	give output data at ~195kHz to feed to the FX2 and hence via 
 	the USB to PowerSDR.
 	
 	The data is sent in the Janus format vis:-
@@ -33,7 +33,8 @@
 	23 Dec  2006 - Added debug code for PWM testing
 	27 Dec  2006 - PWM working 
 	14 Jan  2007 - Modified sync code and NCO frequency read
-	14 Jan  2007 - Added dc offset removal  
+	20 Jan  2007 - Added dc offset removal at output of CIC 
+	19 Mar  2007 - Modified to run from 125MHz clock
 		
 	
 */
@@ -134,7 +135,7 @@ module Mercury(clock, ADC,IFCLK, FX2_FD,FIFO_ADR, SLRD, SLWR, SLOE, FLAGA, FLAGC
 		 FPGA_GPIO12, FPGA_GPIO13, FPGA_GPIO14, FPGA_GPIO15, FPGA_GPIO16);
 
 input [15:0]ADC;			// samples from LT2208
-input clock;				// 100MHz clock from LT2208
+input clock;				// 125MHz clock from LT2208
 input IFCLK;				// 48MHz clock from FX2
 inout  [15:0] FX2_FD;		// bidirectional FIFO data to/from the FX2
 //output  [15:0] FX2_FD;	// bidirectional FIFO data to/from the FX2 
@@ -229,7 +230,7 @@ assign temp_ADC = ADC;
 
 //wire [15:0]ADC_no_dc;
 
-//dc_offset_correct dc_offset_correct_adc(.clk(!clock),.clken(clk_enable),.data_in(temp_ADC),.data_out(ADC_no_dc),.dc_level_out());
+//dc_offset_correct dc_offset_correct_adc(.clk(clock),.clken(clk_enable),.data_in(ADC),.data_out(ADC_no_dc),.dc_level_out());
 
 
 //////////////////////////////////////////////////////////////
@@ -245,7 +246,7 @@ reg PWM_clock;
 reg [10:0]PWM_count;
 always @ (posedge clock)
 begin
-	if (PWM_count == 1023) // divide 100MHz clock by 1024 to give 48.828kHz
+	if (PWM_count == 1279) // divide 125MHz clock by 2560 to give 48.828kHz 
 		begin
 		PWM_clock <= ~PWM_clock;
 		PWM_count <= 0;
@@ -253,7 +254,7 @@ begin
 	else PWM_count <= PWM_count + 11'b1;
 end
 
-// sync frequecy change to 100MHz clock
+// sync frequecy change to 125MHz clock
 reg [31:0]sync_frequency;
 
 always @ (posedge clock)
@@ -276,20 +277,18 @@ wire [15:0]i_out;
 wire [15:0]q_out;
 wire [15:0]temp_ADC;
 
-	//parameter FREQ = 32'h40000000;  //~25MHz  i.e. FREQ /(100e6/2^32)
-	//parameter FREQ = 32'h24538EF3; // 14.190MHz
+	
+	//parameter FREQ = 32'h1D0FA58F; // 14.190MHz
 	wire	[31:0] phase;
 	reg [31:0]frequency;
 	
-	//assign frequency = 32'h24538EF3; // 14.190MHz
+	//assign frequency = 32'h1D0FA58F; // 14.190MHz
 
 	// The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
 	phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
 
 	// The cordic takes I and Q in along with the top 16 bits of the phase dword.  The I and Q out are freq shifted
 	cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(16'd0),.Qin(temp_ADC),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
-
-
 
 
 ///////////////////////////////////////////////////////////////
@@ -301,7 +300,7 @@ wire [15:0]temp_ADC;
 
 // -------------------------------------------------------------
 //
-// Module: filter_14
+// Module: filter_20
 //
 // HDL Code Generation Options:
 //
@@ -316,7 +315,7 @@ wire [15:0]temp_ADC;
 // Discrete-Time FIR Multirate Filter (real)
 // -----------------------------------------
 // Filter Structure        : Cascaded Integrator-Comb Decimator
-// Decimation Factor       : 512
+// Decimation Factor       : 640
 // Differential Delay      : 1
 // Number of Sections      : 4
 // Stable                  : Yes
@@ -331,8 +330,20 @@ wire ce_out_i;				// narrow pulse when data available
 wire ce_out_q;				// narrow pulse when data available
 
 
-filter_14 cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(i_out),.filter_out(cic_out_i),.ce_out(ce_out_i));
-filter_14 cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(q_out),.filter_out(cic_out_q),.ce_out(ce_out_q));
+filter_20 cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(i_out),.filter_out(cic_out_i),.ce_out(ce_out_i));
+filter_20 cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(q_out),.filter_out(cic_out_q),.ce_out(ce_out_q));
+
+//////////////////////////////////////////////////////////////////////
+//
+//		Remove DC offset from CIC output 
+//
+//////////////////////////////////////////////////////////////////////
+
+wire [23:0]i_no_dc;
+wire [23:0]q_no_dc;
+
+dc_offset_correct dc_offset_correct_i(.clk(clock),.clken(clk_enable),.data_in(cic_out_i),.data_out(i_no_dc),.dc_level_out());
+dc_offset_correct dc_offset_correct_q(.clk(clock),.clken(clk_enable),.data_in(cic_out_q),.data_out(q_no_dc),.dc_level_out());
 
 
 //////////////////////////////////////////////////////////////////////
@@ -341,8 +352,8 @@ filter_14 cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter
 //
 //////////////////////////////////////////////////////////////////////
 
-// since we are decimating by 512 we can use a slower clock for reading
-// the A/D, say 12.5MHz
+// since we are decimating by 640 we can use a slower clock for reading
+// the A/D, say 15.625MHz
 
 reg clock_8;
 reg [4:0]clock_count;
@@ -398,17 +409,17 @@ case (AD_state)
 		AD_state <= AD_state + 1'b1;
 		end		
 5'd5:	begin
-		register <= cic_out_i[23:8];			// first 16 bits of I
+		register <= i_no_dc[23:8];			// first 16 bits of I
 		strobe <= 1'b1;
 		AD_state <= AD_state + 1'b1;
 		end
 5'd6:	begin
-		register <= {cic_out_i[7:0], cic_out_q[23:16]};	// last 8 bits of I and first 8 of Q			  		
+		register <= {i_no_dc[7:0], q_no_dc[23:16]};	// last 8 bits of I and first 8 of Q			  		
 		strobe <= 1'b1; 
 		AD_state <= AD_state + 1'b1;
 		end
 5'd7:	begin
-		register <= cic_out_q[15:0];			// send Q data
+		register <= q_no_dc[15:0];			// send Q data
 		strobe <= 1'b1; 
 		AD_state <= AD_state + 1'b1;
 		end
