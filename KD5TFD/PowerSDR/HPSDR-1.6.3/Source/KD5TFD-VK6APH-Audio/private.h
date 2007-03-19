@@ -48,12 +48,13 @@ extern DttSP_EXP void DelPolyPhaseFIRF (/*ResSt*/ void * resst);
 
 // PowerSDR interface routines 
 // extern KD5TFDVK6APHAUDIO_API int StartAudio(int block_size); 
-extern KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata), int sample_bits);
+extern KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata), int sample_bits, int no_send);
+       
 extern KD5TFDVK6APHAUDIO_API void StopAudio(void); 
 extern KD5TFDVK6APHAUDIO_API int GetDotDashBits(void); 
 extern KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmitbit);  // bit xmitbit ==0, recv mode, != 0, xmit mode
 extern KD5TFDVK6APHAUDIO_API int GetDiagData(int *a, int count); 
-extern KD5TFDVK6APHAUDIO_API void SetVFOfreq(int f);
+extern KD5TFDVK6APHAUDIO_API void SetVFOfreq(double f);
 
 #if 0 
 extern KD5TFDVK6APHAUDIO_API int StartAudio_4port(int samples_per_block, int (__stdcall *callback)(void *inp, void *outp, int framcount, void *timeinfop, int flags, void *userdata));
