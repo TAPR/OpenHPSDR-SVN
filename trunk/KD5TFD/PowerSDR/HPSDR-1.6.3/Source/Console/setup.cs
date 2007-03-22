@@ -3689,6 +3689,7 @@ namespace PowerSDR
 			this.grpAudioCard.TabIndex = 37;
 			this.grpAudioCard.TabStop = false;
 			this.grpAudioCard.Text = "Sound Card Selection";
+			this.grpAudioCard.Enter += new System.EventHandler(this.grpAudioCard_Enter);
 			// 
 			// comboAudioSoundCard
 			// 
@@ -16436,7 +16437,7 @@ namespace PowerSDR
 
 				case SoundCard.JANUS_OZY: 
 					grpAudioDetails1.Enabled = false;
-					grpAudioVolts1.Visible = false;
+					grpAudioVolts1.Visible = true;
 					udAudioVoltage1.Value = 0.98M;
 					if(!comboAudioSampleRate1.Items.Contains(96000))
 						comboAudioSampleRate1.Items.Add(96000);
@@ -19660,6 +19661,11 @@ namespace PowerSDR
 									MessageBoxIcon.Error);
 				chkBoxJanusOzyControl.Checked = false;
 			}
+		}
+
+		private void grpAudioCard_Enter(object sender, System.EventArgs e)
+		{
+		
 		}
 	}
 
