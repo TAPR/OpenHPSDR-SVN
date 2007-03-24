@@ -1,5 +1,5 @@
 Partition Merge report for WrapTest
-Sun Mar 18 14:33:55 2007
+Sat Mar 24 11:38:37 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -38,15 +38,15 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Partition Merge Summary                                                      ;
 +------------------------------------+-----------------------------------------+
-; Partition Merge Status             ; Successful - Sun Mar 18 14:33:55 2007   ;
+; Partition Merge Status             ; Successful - Sat Mar 24 11:38:37 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; WrapTest                                ;
 ; Top-level Entity Name              ; WrapTest                                ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 651                                     ;
-;     Total combinational functions  ; 651                                     ;
-;     Dedicated logic registers      ; 354                                     ;
-; Total registers                    ; 354                                     ;
+; Total logic elements               ; 692                                     ;
+;     Total combinational functions  ; 692                                     ;
+;     Dedicated logic registers      ; 368                                     ;
+; Total registers                    ; 368                                     ;
 ; Total pins                         ; 113                                     ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 128                                     ;
@@ -69,7 +69,7 @@ applicable agreement for further details.
 +----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
 ; Partition Name ; Total combinational functions ; normal mode ; arithmetic mode ; Total registers ; Input Ports ; Output Ports ; Registered Input Ports ; Registered Output Ports ; Unconnected Input Ports ; Unconnected Output Ports ; Driven Ground Input Ports ; Driven VCC Input Ports ; Partition Contents ;
 +----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
-; Top            ; 662                           ; 553         ; 109             ; 354             ; 38          ; 75           ; 0                      ; 16                      ; N/A                     ; N/A                      ; N/A                       ; N/A                    ;                    ;
+; Top            ; 703                           ; 587         ; 116             ; 368             ; 38          ; 75           ; 0                      ; 16                      ; N/A                     ; N/A                      ; N/A                       ; N/A                    ;                    ;
 +----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
 
 
@@ -78,28 +78,28 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 651     ;
+; Estimated Total logic elements              ; 692     ;
 ;                                             ;         ;
-; Total combinational functions               ; 651     ;
+; Total combinational functions               ; 692     ;
 ; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 364     ;
-;     -- 3 input functions                    ; 43      ;
-;     -- <=2 input functions                  ; 244     ;
+;     -- 4 input functions                    ; 380     ;
+;     -- 3 input functions                    ; 54      ;
+;     -- <=2 input functions                  ; 258     ;
 ;                                             ;         ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 542     ;
-;     -- arithmetic mode                      ; 109     ;
+;     -- normal mode                          ; 576     ;
+;     -- arithmetic mode                      ; 116     ;
 ;                                             ;         ;
-; Total registers                             ; 354     ;
-;     -- Dedicated logic registers            ; 354     ;
+; Total registers                             ; 368     ;
+;     -- Dedicated logic registers            ; 368     ;
 ;     -- I/O registers                        ; 0       ;
 ;                                             ;         ;
 ; I/O pins                                    ; 113     ;
 ; Total memory bits                           ; 128     ;
 ; Maximum fan-out node                        ; FX2_CLK ;
-; Maximum fan-out                             ; 362     ;
-; Total fan-out                               ; 3080    ;
-; Average fan-out                             ; 2.74    ;
+; Maximum fan-out                             ; 376     ;
+; Total fan-out                               ; 3248    ;
+; Average fan-out                             ; 2.75    ;
 +---------------------------------------------+---------+
 
 
@@ -118,7 +118,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Partition Merge
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Mar 18 14:33:53 2007
+    Info: Processing started: Sat Mar 24 11:38:35 2007
 Info: Command: quartus_cdb --read_settings_files=off --write_settings_files=off WrapTest -c WrapTest --merge=on
 Info: Using synthesis netlist for partition "Top"
 Info: Netlist merging resolved 1 partition(s) out of the 1 partition(s) found
@@ -132,7 +132,7 @@ Warning: Design contains 7 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "SPI_CS"
 Info: Quartus II Partition Merge was successful. 0 errors, 8 warnings
     Info: Allocated 96 megabytes of memory during processing
-    Info: Processing ended: Sun Mar 18 14:33:55 2007
+    Info: Processing ended: Sat Mar 24 11:38:37 2007
     Info: Elapsed time: 00:00:02
 
 

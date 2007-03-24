@@ -292,6 +292,7 @@ reg [32:0] idle_counter;
 reg [7:0] char_to_xmit; 
 reg [15:0] rs232_delay_count; 
 reg [7:0] pass_count; 
+reg [7:0] loop_counter; 
 
 //  state machine for the loopback tester 
 
@@ -308,11 +309,12 @@ begin
 			loopback_reset <= 0; 
 			test_loop_state <= 2; 
 			idle_counter <= 0; 
+			loop_counter <= 0; 
 		end 
 		
 		2: begin 
 			if ( idle_counter >= 316000 ) begin // idle state 
-				idle_counter <= 0;  // prep for next time 
+				idle_counter <= 0;  // prep for next time  
 				test_loop_state <= 3; // get out of idle state 		
 			end 
 			else begin  // count not met yet -- stay here 
@@ -393,6 +395,7 @@ begin
 			loopback_reset[test_circ_idx] <= 0; 
 			if ( test_circ_idx == 37 ) begin  // are we at end of list?? reset to 0
 				test_circ_idx <= 0;  
+				loop_counter <= loop_counter + 1; 
 				if ( pass_count == 38 ) begin  // did all circuits pass? 
 					test_loop_state <= 16;  // go print 'All Pass!" message 
 				end 
@@ -468,7 +471,7 @@ begin
 		24: begin  // print "All Pass!" message 
 			char_to_xmit <= 33; // !
 			test_loop_state <= 8; 
-			post_xmit_state <= 25; 
+			post_xmit_state <= 28; 
 		end 				
 		
 		25: begin  // print "All Pass!" message 
@@ -486,9 +489,24 @@ begin
 			test_loop_state <=8; 
 			post_xmit_state <= 2; 
 		end 
-
 		
+		28: begin // printing "All Pass! nn" message - space before nn 
+			char_to_xmit <= 32;  // ' '
+			test_loop_state <= 8; 
+			post_xmit_state <= 29; 
+		end
 		
+		29: begin  // print hi nibble of loop count 
+			char_to_xmit <= NibbleToChar(loop_counter[7:4]); 
+			test_loop_state <= 8; 
+			post_xmit_state <= 30; 
+		end 
+		
+		30: begin  // print lo nibble of loop count 
+			char_to_xmit <= NibbleToChar(loop_counter[3:0]); 
+			test_loop_state <= 8; 
+			post_xmit_state <= 25;  // go print line end 
+		end 				
 	endcase 
 	
 end // module 
