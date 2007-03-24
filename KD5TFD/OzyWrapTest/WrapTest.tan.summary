@@ -5,7 +5,7 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 7.477 ns
+Actual Time    : 7.110 ns
 From           : ATLAS_C08
 To             : loopBackCheck:loopBackA08C08|not_ok_o
 From Clock     : --
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 10.198 ns
-From           : clock_count[1]
-To             : ATLAS_A03
+Actual Time    : 10.764 ns
+From           : clock_count[0]
+To             : ATLAS_A02
 From Clock     : FX2_CLK
 To Clock       : --
 Failed Paths   : 0
@@ -25,9 +25,9 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -5.039 ns
-From           : ATLAS_C19
-To             : loopBackCheck:loopBackA19C19|not_ok_o
+Actual Time    : -5.376 ns
+From           : GPIO[17]
+To             : loopBackCheck:loopBackGPIO10GPIO018|not_ok_o
 From Clock     : --
 To Clock       : FX2_CLK
 Failed Paths   : 0
@@ -35,8 +35,8 @@ Failed Paths   : 0
 Type           : Clock Setup: 'FX2_CLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 71.61 MHz ( period = 13.964 ns )
-From           : loopBackCheck:loopBackA25C25|not_ok_o
+Actual Time    : 67.52 MHz ( period = 14.810 ns )
+From           : loopBackCheck:loopBackA24C24|not_ok_o
 To             : pass_count[7]
 From Clock     : FX2_CLK
 To Clock       : FX2_CLK
