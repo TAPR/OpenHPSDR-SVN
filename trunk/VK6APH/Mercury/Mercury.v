@@ -35,6 +35,7 @@
 	14 Jan  2007 - Modified sync code and NCO frequency read
 	20 Jan  2007 - Added dc offset removal at output of CIC 
 	19 Mar  2007 - Modified to run from 125MHz clock
+	25 Mar  2007 - Modified to use Harmon CORDIC
 		
 	
 */
@@ -288,7 +289,20 @@ wire [15:0]temp_ADC;
 	phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
 
 	// The cordic takes I and Q in along with the top 16 bits of the phase dword.  The I and Q out are freq shifted
-	cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(16'd0),.Qin(temp_ADC),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
+	//cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(16'd0),.Qin(temp_ADC),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
+
+/*
+ * CORDIC Rotator by Darrell Harmon KI4MVK
+ * 16 bit real input, 18 bit I/Q output, gain = 3.2934
+ * 20 bit phase input, scale: pi radians = 2^19
+ * SFDR appears to be > 105 dB
+ * Can be used for sin/cos or vector rotation
+ * Fully pipelined, latency of 17 cycles
+ */
+
+cordic_16  cordic (.in(temp_ADC),.iout(i_out),.qout(q_out),.ain(phase[31:12]),.clk(clock));
+
+
 
 
 ///////////////////////////////////////////////////////////////
@@ -353,7 +367,7 @@ dc_offset_correct dc_offset_correct_q(.clk(clock),.clken(clk_enable),.data_in(ci
 //////////////////////////////////////////////////////////////////////
 
 // since we are decimating by 640 we can use a slower clock for reading
-// the A/D, say 15.625MHz
+// the A/D, say 7.8MHz
 
 reg clock_8;
 reg [4:0]clock_count;
