@@ -30,7 +30,10 @@
 void
 putchar(char c)
 {
-	HPSDR_LED_REG ^= bmLED0;
+	// HPSDR_LED_REG ^= bmLED0;
+	if ( c == '\n' ) {
+		c = '\r'; 
+	}
     while(!TI);
     TI=0;
     SBUF0 = c;
