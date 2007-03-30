@@ -262,23 +262,20 @@ main_loop (void)
  */
 void
 isr_tick (void) interrupt
-{
-#if 0 
-	static unsigned char	count = 1;
-	static unsigned char tchar = 'a';  
+{ 
+	static unsigned char	count = 1;  
   	if (--count == 0)
   		{
-    		count = 50;
-#if 0     		
+    		count = 50;     		
     		HPSDR_LED_REG ^= bmLED0;
-#else 
-			putchar(tchar); 
-			if ( tchar == 'z' ) {
-				tchar = 'a';  
-			} 
-#endif     		
-		}
-#endif 		
+    		if ( HPSDR_LED_REG & bmLED0 ) {
+    			HPSDR_LED_REG &= ~bmLED1;  
+    		}
+    		else {
+    			HPSDR_LED_REG |= bmLED1; 
+    		} 
+    		// HPSDR_LED_REG ^= bmLED1;     		
+		} 		
   clear_timer_irq ();
 }
 
