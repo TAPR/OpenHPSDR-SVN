@@ -1,0 +1,34 @@
+-myuxi
+-Y
+-v 0x2000
+-w 0x2000
+-b HOME = 0x0000
+-b XSEG = 0x2000
+-b ISEG = 0x0080
+-b BSEG = 0x0000
+-b USBDESCSEG = 0xE000
+-k f:\sdcc\lib
+-k f:\sdcc\bin\..\lib\small
+-l mcs51
+-l libsdcc
+-l libint
+-l liblong
+-l libfloat
+./Initial/src/asm/vectors.rel
+./Initial/src/asm/_startup.rel
+./Initial/src/asm/usb_descriptors_X1.rel
+./Initial/src/lib/delay.rel
+./Initial/src/lib/fx2utils.rel
+./Initial/src/lib/i2c.rel
+./Initial/src/lib/isr.rel
+./Initial/src/lib/spi.rel
+./Initial/src/lib/timer.rel
+./Initial/src/lib/usb_common.rel
+./Initial/src/board_specific.rel
+./Initial/src/eeprom_io.rel
+./Initial/src/fpga_load.rel
+./Initial/src/hpsdr_common.rel
+./Initial/src/hpsdr_main.rel
+./Initial/src/sdr1kctl.rel
+
+-e
