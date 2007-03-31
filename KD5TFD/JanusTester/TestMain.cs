@@ -25,7 +25,7 @@ namespace JanusTester
 		public static float[] save_buf_l2 = new float[BlockSize]; 
 
 
-		public static readonly int[] TestFreqs = { 200, 1000, 3000, 9000, 12000, 18000, 22000 }; 
+		public static readonly int[] TestFreqs = { 200, 500, 1000, 3000, 6000, 9000, 12000, 15000, 18000, 22000 }; 
 
 		[STAThread]
 		static void Main(string[] args)
@@ -34,35 +34,40 @@ namespace JanusTester
 			p.PriorityClass = ProcessPriorityClass.RealTime;
 
 			System.Console.WriteLine("Janus Tester"); 
+			System.Console.WriteLine("Connect Line Out to IQ In, PWM Out to Mic In"); 
+			System.Console.WriteLine("Press enter when ready"); 
+			System.Console.ReadLine();
 			do  
 			{ 
-				for ( int j = 0; j < TestFreqs.Length; j++ ) 
+				for ( int j = 0; j <  TestFreqs.Length ; j++ ) 
 				{ 
 					float ampl = 1.0F; 
-					for ( int i = 0; i < 10; i++ ) 
+					for ( int i = 0; i < 5; i++ ) 
 					{ 
-						doTest(48000, TestFreqs[j], ampl); 
+						doTest(48000, TestFreqs[j], ampl, "LOIQ"); 
+						ampl -= 0.1F; 
+					}				
+#if true 
+					ampl = 1.0F; 
+					for ( int i = 0; i < 5; i++ ) 
+					{ 
+						doTest(96000, TestFreqs[j], ampl, "LOIQ"); 
 						ampl -= 0.1F; 
 					}				
 					ampl = 1.0F; 
-					for ( int i = 0; i < 10; i++ ) 
+					for ( int i = 0; i < 5; i++ ) 
 					{ 
-						doTest(96000, TestFreqs[j], ampl); 
+						doTest(192000, TestFreqs[j], ampl, "LOIQ"); 
 						ampl -= 0.1F; 
 					}				
-					ampl = 1.0F; 
-					for ( int i = 0; i < 10; i++ ) 
-					{ 
-						doTest(192000, TestFreqs[j], ampl); 
-						ampl -= 0.1F; 
-					}				
+#endif
 				}
 			} while ( false ); 
 		}
 
 		public static readonly double VppToRmsConversionFactor = (Math.Sqrt(2.0)/4.0); 
 
-		public static void doTest(int sample_rate, int freq, float amplitude_scale) 
+		public static void doTest(int sample_rate, int freq, float amplitude_scale, string testphase) 
 		{ 
 			SampleRate = sample_rate; 
 			OscFreq = freq; 
@@ -72,7 +77,7 @@ namespace JanusTester
 			System.Console.WriteLine("-----------------------------------------------------"); 
 			System.Console.WriteLine("Sample Rate: " + SampleRate + " Freq: " + OscFreq + " Amplitude: " + AmplitudeScale); 
 			TFDAPHaudio.StartAudio(SampleRate, BlockSize, CallBack, 24, 0); 			
-			while ( CallbackCount < 100 ) 
+			while ( CallbackCount < 10 ) 
 			{
 				Thread.Sleep(10); 
 			}
@@ -111,24 +116,25 @@ namespace JanusTester
 
 
 			float freq_l2 = getFreqFromBuf(save_buf_l2, BlockSize, SampleRate); 
-			float rms_l2 = getRmsFromBuf(save_buf_l1, BlockSize); 
-			float max_l2 = getMaxFromBuf(save_buf_l1, BlockSize); 
-			float min_l2 = getMinFromBuf(save_buf_l1, BlockSize); 
+			float rms_l2 = getRmsFromBuf(save_buf_l2, BlockSize); 
+			float max_l2 = getMaxFromBuf(save_buf_l2, BlockSize); 
+			float min_l2 = getMinFromBuf(save_buf_l2, BlockSize); 
 			float vpp_l2 = max_l2 - min_l2; 
 			float rms_frompp_l2 = (float)(VppToRmsConversionFactor * vpp_l2); 
 			System.Console.WriteLine("freq left2: "  + freq_l2); 
 			System.Console.WriteLine("freq % diff left: " + percentDiff((float)OscFreq, freq_l2) );
 			System.Console.WriteLine("RMS left2: " + rms_l2 ); 
-			System.Console.WriteLine("Max left2: " + max_l1 ); 
-			System.Console.WriteLine("Min left2: " + min_l1 ); 
+			System.Console.WriteLine("Max left2: " + max_l2 ); 
+			System.Console.WriteLine("Min left2: " + min_l2 ); 
 			System.Console.WriteLine("RMS from Vpp left2: " + rms_frompp_l2); 
 
-			System.Console.Write("Result: "); 
+			System.Console.Write("Result: " + testphase + " "); 
 			System.Console.Write(sample_rate + "," + freq + "," + amplitude_scale + ","); 
 			System.Console.Write(freq_l1 + "," +  freq_r1 + "," + freq_l2 + ","); 
-			System.Console.WriteLine(rms_l1 + "," + rms_r1 + "," + rms_l2);
-				
-			
+			System.Console.Write(rms_l1 + "," + rms_r1 + "," + rms_l2 + ",");
+			System.Console.Write(max_l1 + "," + max_r1 + "," + min_l1 + "," + min_r1 + "," + min_l2 + "," + max_l2 + ","); 
+			System.Console.WriteLine(rms_frompp_l1 + "," + rms_frompp_r1 + "," + rms_frompp_l2); 
+							
 		} 
 
 		public static float percentDiff(float nominal, float measured) 
@@ -269,7 +275,7 @@ namespace JanusTester
 			float* out_l_ptr2 = (float *)array_ptr[2];
 			float* out_r_ptr2 = (float *)array_ptr[3];
 
-			if ( CallbackCount == 50 )  // is this the frame we want to look at  
+			if ( CallbackCount == 7 )  // is this the frame we want to look at  
 			{ 
 				for ( int j = 0; j < frameCount; j++ ) 
 				{
@@ -284,8 +290,17 @@ namespace JanusTester
 			for ( int i = 0; i < frameCount; i++ ) 
 			{ 
 				out_r_ptr1[i] = -out_l_ptr1[i];
-				out_r_ptr2[i] = (float)(0.0286 * out_l_ptr1[i]);
+				out_r_ptr2[i] = out_r_ptr1[i]; 
+				out_l_ptr2[i] = out_l_ptr1[i]; 
+				out_l_ptr1[i] *= 0.02F; 
+				out_r_ptr1[i] *= 0.02F; 
+#if false 
+				out_r_ptr1[i] = 0; 
+				out_l_ptr1[i] = 0; 
+
+				out_r_ptr2[i] = 0; // (float)(/* 0.0286 * */ out_l_ptr1[i]);  
 				out_l_ptr2[i] = out_r_ptr2[i]; 
+#endif 
 			} 
 			return 0;
 		}
