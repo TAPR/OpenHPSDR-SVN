@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 6.919 ns
+Actual Time    : 5.825 ns
 From           : FLAGC
-To             : SLWR~reg0
+To             : state_FX[0]
 From Clock     : --
 To Clock       : IFCLK
 Failed Paths   : 0
@@ -15,7 +15,7 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 15.759 ns
+Actual Time    : 14.820 ns
 From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_jk6:wrptr_gp|counter_ffa[3]
 To             : FPGA_GPIO7
 From Clock     : IFCLK
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.538 ns
+Actual Time    : 11.541 ns
 From           : FLAGA
 To             : DEBUG_LED3
 From Clock     : --
@@ -35,39 +35,39 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -4.338 ns
-From           : FX2_FD[7]
-To             : Rx_register[15]
+Actual Time    : -3.863 ns
+From           : FLAGC
+To             : SLEN
 From Clock     : --
 To Clock       : IFCLK
 Failed Paths   : 0
 
-Type           : Clock Setup: 'clock'
-Slack          : -0.714 ns
-Required Time  : 100.00 MHz ( period = 10.000 ns )
-Actual Time    : 87.50 MHz ( period = 11.428 ns )
-From           : cic_q[0]
-To             : cicint:cic_Q|input_register[0]
-From Clock     : clock
-To Clock       : clock
-Failed Paths   : 16
-
 Type           : Clock Setup: 'clock_8'
-Slack          : -0.400 ns
+Slack          : -0.472 ns
 Required Time  : 6.25 MHz ( period = 160.000 ns )
 Actual Time    : N/A
 From           : PWM_clock
-To             : Q_PWM[11]
+To             : I_PWM[2]
 From Clock     : clock
 To Clock       : clock_8
-Failed Paths   : 1
+Failed Paths   : 38
+
+Type           : Clock Setup: 'clock'
+Slack          : 0.935 ns
+Required Time  : 100.00 MHz ( period = 10.000 ns )
+Actual Time    : N/A
+From           : strobe
+To             : data_flag
+From Clock     : clock_8
+To Clock       : clock
+Failed Paths   : 0
 
 Type           : Clock Setup: 'IFCLK'
-Slack          : 2.015 ns
+Slack          : 2.599 ns
 Required Time  : 100.00 MHz ( period = 10.000 ns )
-Actual Time    : 125.23 MHz ( period = 7.985 ns )
+Actual Time    : 135.12 MHz ( period = 7.401 ns )
 From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_graycounter_jk6:wrptr_gp|counter_ffa[3]
-To             : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ram_block6a5~portb_address_reg11
+To             : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ram_block6a9~portb_address_reg11
 From Clock     : IFCLK
 To Clock       : IFCLK
 Failed Paths   : 0
@@ -110,7 +110,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 17
+Failed Paths   : 38
 
 --------------------------------------------------------------------------------------
 
