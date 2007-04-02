@@ -1,10 +1,10 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Jan 18 21:36:24 2007
+    Info: Processing started: Mon Apr 02 20:25:23 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
-Info: Found 1 design units, including 1 entities, in source file adder.v
-    Info: Found entity 1: adder
+Info: Found 1 design units, including 1 entities, in source file FM_adder.v
+    Info: Found entity 1: FM_adder
 Info: Found 1 design units, including 1 entities, in source file cicint.v
     Info: Found entity 1: cicint
 Info: Found 1 design units, including 1 entities, in source file HB.v
@@ -26,15 +26,17 @@ Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
 Info: Found 1 design units, including 1 entities, in source file Mercury.v
     Info: Found entity 1: Mercury
 Info: Elaborating entity "Mercury" for the top level hierarchy
-Warning (10858): Verilog HDL warning at Mercury.v(215): object sync_Rx_used used but never assigned
-Warning (10030): Net "sync_Rx_used[11]" at Mercury.v(215) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[10]" at Mercury.v(215) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[9]" at Mercury.v(215) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[8]" at Mercury.v(215) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[7]" at Mercury.v(215) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[6]" at Mercury.v(215) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[5]" at Mercury.v(215) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[4]" at Mercury.v(215) has no driver or initial value, using a default initial value 0
+Warning (10858): Verilog HDL warning at Mercury.v(222): object sync_Rx_used used but never assigned
+Warning (10036): Verilog HDL or VHDL warning at Mercury.v(790): object "I_Data" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Mercury.v(791): object "Q_Data" assigned a value but never read
+Warning (10030): Net "sync_Rx_used[11]" at Mercury.v(222) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[10]" at Mercury.v(222) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[9]" at Mercury.v(222) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[8]" at Mercury.v(222) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[7]" at Mercury.v(222) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[6]" at Mercury.v(222) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[5]" at Mercury.v(222) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[4]" at Mercury.v(222) has no driver or initial value, using a default initial value 0
 Info: Elaborating entity "cicint" for hierarchy "cicint:cic_I"
 Warning (10230): Verilog HDL assignment warning at cicint.v(190): truncated value with size 32 to match size of target (11)
 Warning (10230): Verilog HDL assignment warning at cicint.v(196): truncated value with size 32 to match size of target (1)
@@ -52,14 +54,6 @@ Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_s
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage9"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage10"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage11"
-Info: Elaborating entity "adder" for hierarchy "adder:add_IQ"
-Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/parallel_add.tdf
-    Info: Found entity 1: parallel_add
-Info: Elaborating entity "parallel_add" for hierarchy "adder:add_IQ|parallel_add:parallel_add_component"
-Info: Elaborated megafunction instantiation "adder:add_IQ|parallel_add:parallel_add_component"
-Info: Found 1 design units, including 1 entities, in source file db/par_add_rje.tdf
-    Info: Found entity 1: par_add_rje
-Info: Elaborating entity "par_add_rje" for hierarchy "adder:add_IQ|parallel_add:parallel_add_component|par_add_rje:auto_generated"
 Info: Elaborating entity "Rx_fifo" for hierarchy "Rx_fifo:Rx_fifo"
 Warning: Entity "dcfifo" obtained from "C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf" instead of from Quartus II megafunction library
 Warning: Using design file ../Mercury/megafunctions/dcfifo.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
@@ -184,29 +178,15 @@ Info: Power-up level of register "rx_avail[5]" is not specified -- using power-u
 Warning: Reduced register "rx_avail[5]" with stuck data_in port to stuck value VCC
 Info: Power-up level of register "rx_avail[4]" is not specified -- using power-up level of High to minimize register
 Warning: Reduced register "rx_avail[4]" with stuck data_in port to stuck value VCC
-Warning: Reduced register "cordic:rx_cordic|Istage0[16]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[15]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[14]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[13]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[12]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[11]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[10]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[9]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[8]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "cordic:rx_cordic|Istage0[17]" with stuck data_in port to stuck value GND
 Info: Duplicate registers merged to single register
     Info: Duplicate register "cicint:cic_Q|diff1[15]" merged to single register "cicint:cic_Q|diff1[16]"
     Info: Duplicate register "cicint:cic_Q|diff2[16]" merged to single register "cicint:cic_Q|diff2[17]"
     Info: Duplicate register "cicint:cic_Q|diff3[17]" merged to single register "cicint:cic_Q|diff3[18]"
     Info: Duplicate register "cicint:cic_Q|diff4[18]" merged to single register "cicint:cic_Q|diff4[19]"
+    Info: Duplicate register "cicint:cic_I|diff1[15]" merged to single register "cicint:cic_I|diff1[16]"
+    Info: Duplicate register "cicint:cic_I|diff2[16]" merged to single register "cicint:cic_I|diff2[17]"
+    Info: Duplicate register "cicint:cic_I|diff3[17]" merged to single register "cicint:cic_I|diff3[18]"
+    Info: Duplicate register "cicint:cic_I|diff4[18]" merged to single register "cicint:cic_I|diff4[19]"
 Info: Duplicate registers merged to single register
     Info: Duplicate register "cicint:cic_I|cur_count[9]" merged to single register "cicint:cic_Q|cur_count[9]"
     Info: Duplicate register "cicint:cic_I|cur_count[8]" merged to single register "cicint:cic_Q|cur_count[8]"
@@ -242,15 +222,14 @@ Info: Duplicate registers merged to single register
 Info: Duplicate registers merged to single register
     Info: Duplicate register "clock_count[2]" merged to single register "PWM_count[2]"
 Info: Duplicate registers merged to single register
+    Info: Duplicate register "cordic:rx_cordic|Istage0[17]" merged to single register "cordic:rx_cordic|Istage0[16]"
     Info: Duplicate register "cordic:rx_cordic|Qstage0[17]" merged to single register "cordic:rx_cordic|Qstage0[16]"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[17]" merged to single register "cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[16]"
 Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_add_sub.tdf
     Info: Found entity 1: lpm_add_sub
-Info: Elaborated megafunction instantiation "cordic:rx_cordic|cordic_stage:cordic_stage10|lpm_add_sub:Add2"
+Info: Elaborated megafunction instantiation "cordic:rx_cordic|cordic_stage:cordic_stage10|lpm_add_sub:Add1"
 Info: Found 1 design units, including 1 entities, in source file db/add_sub_rjg.tdf
     Info: Found entity 1: add_sub_rjg
-Info: Elaborated megafunction instantiation "cordic:rx_cordic|cordic_stage:cordic_stage9|lpm_add_sub:Add2"
+Info: Elaborated megafunction instantiation "cordic:rx_cordic|cordic_stage:cordic_stage9|lpm_add_sub:Add1"
 Info: Found 1 design units, including 1 entities, in source file db/add_sub_sjg.tdf
     Info: Found entity 1: add_sub_sjg
 Warning: Output pins are stuck at VCC or GND
@@ -293,7 +272,7 @@ Info: 38 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/ws_brp/dffe7a[11]" lost all its fanouts during netlist optimizations.
     Info: Register "Rx_fifo/dcfifo_component/auto_generated/ws_bwp/dffe9a[12]" lost all its fanouts during netlist optimizations.
     Info: Register "Rx_fifo/dcfifo_component/auto_generated/ws_brp/dffe9a[12]" lost all its fanouts during netlist optimizations.
-    Info: Register "rx_cordic/cordic_stage10/Qout[17]" lost all its fanouts during netlist optimizations.
+    Info: Register "rx_cordic/cordic_stage10/Iout[17]" lost all its fanouts during netlist optimizations.
     Info: Register "synced_Rx_used[0]" lost all its fanouts during netlist optimizations.
     Info: Register "synced_Rx_used[1]" lost all its fanouts during netlist optimizations.
     Info: Register "synced_Rx_used[2]" lost all its fanouts during netlist optimizations.
@@ -316,13 +295,13 @@ Warning: Design contains 16 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "ADC[13]"
     Warning: No output dependent on input pin "ADC[14]"
     Warning: No output dependent on input pin "ADC[15]"
-Info: Implemented 2227 device resources after synthesis - the final resource count might be different
+Info: Implemented 2738 device resources after synthesis - the final resource count might be different
     Info: Implemented 20 input pins
-    Info: Implemented 40 output pins
+    Info: Implemented 41 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 2119 logic cells
+    Info: Implemented 2629 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 79 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 63 warnings
     Info: Allocated 140 megabytes of memory during processing
-    Info: Processing ended: Thu Jan 18 21:37:01 2007
-    Info: Elapsed time: 00:00:37
+    Info: Processing ended: Mon Apr 02 20:26:06 2007
+    Info: Elapsed time: 00:00:43

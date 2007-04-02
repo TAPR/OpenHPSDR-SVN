@@ -1,4 +1,4 @@
-// V0.0 14th January 2007
+// V0.6 9th February 2007
 //
 // Copyright 2007 Phil Harman VK6APH
 //
@@ -33,13 +33,13 @@
 
 /* 	This program interfaces the AD9744 ADC to PowerSDR over USB.
 	The data to the AD9744  is in 14 bit parallel format and 
-	is sent at the positive edge of the LT2208 100MHz clock.
+	is sent at the negative edge of the LT2208 100MHz clock.
 	
 	The ~48kHz I and Q data from PowerSDR is interpolated by 2048 in a CIC to 
 	give a data rate of 100MHz. 
 	
 	The data is processed by a CORDIC NCO to produce I and Q
-	outputs.  These are then added together to remove the unwanted sideband
+	outputs.  These are then subtracted to remove the unwanted sideband
 	and passed to the AD9744.
 	
 	In order to use PowerSDR dummy data at ~48kHz is sent via the FX2.
@@ -51,8 +51,13 @@
 	Change log:
 	
 	11 Jan  2007 - Started transmitter code
-	13 Jan  2007 - first code working 
-	18 Jan  2007 - started AM testing  
+	13 Jan  2007 - first code working
+	21 Jan  2007 - SSB version working
+	22 Jan  2007 - Start of ERR version 
+	4  Feb  2007 - Moved to AD9744 DAC
+	9  Feb  2007 - Testing completed, Penelope started
+	26 Mar  2007 - Modified to use 125MHz clock 
+	 2 Apr  2007 - Removed adder on output of CORDIC  
 		
 	
 */
@@ -89,20 +94,21 @@
 //		Q_PWM_out		C21			181
 
 //    DAC
-//		D13		XX		A15			128
-//		D12		XX		A14			133
-//		D11		XX		A13			134
-//		D10		XX		A12			135
-//		D9		XX		A11			137
-//		D8		XX		A10			138
-//		D7		XX		A9			139
-//		D6		XX		A8			141
-//		D5		XX		A7			142
-//		D4		XX		A6			143
-//		D3		XX		A5			144
-//		D2		XX		A4			145
-//		D1		XX		A3			146
-//		D0		XX		A2			147
+//		D13		1		A2			147
+//		D12		2		A3			146
+//		D11		3		A4			145
+//		D10		4		A5			144
+//		D9		5		A6			143
+//		D8		6		A7			142
+//		D7		7		A8			141
+//		D6		8		A9			139
+//		D5		9		A10			138
+//		D4		10		A11			137
+//		D3		11		A12			135
+//		D2		12		A13			134
+//		D1		13		A14			133
+//		D0		14		A15			128
+//		Clock   28		A16         127
 
 
 
@@ -165,13 +171,13 @@
 
 
 module Mercury(clock, ADC,IFCLK, FX2_FD,FIFO_ADR, SLRD, SLWR, SLOE, FLAGA, FLAGC, PKEND,
-	   DEBUG_LED0,DEBUG_LED1, DEBUG_LED2, DEBUG_LED3,DAC,
+	   DEBUG_LED0,DEBUG_LED1, DEBUG_LED2, DEBUG_LED3,DAC,DAC_CLOCK,
 		 FPGA_GPIO1, FPGA_GPIO2, FPGA_GPIO3, FPGA_GPIO4, FPGA_GPIO5, FPGA_GPIO6,
 		 FPGA_GPIO7, FPGA_GPIO8, FPGA_GPIO9, FPGA_GPIO10, FPGA_GPIO11,
 		 FPGA_GPIO12, FPGA_GPIO13, FPGA_GPIO14, FPGA_GPIO15, FPGA_GPIO16);
 
 input [15:0]ADC;			// samples from LT2208
-input clock;				// 100MHz clock from LT2208
+input clock;				// 125MHz clock from LT2208
 input IFCLK;				// 48MHz clock from FX2
 inout  [15:0] FX2_FD;		// bidirectional FIFO data to/from the FX2
 //output  [15:0] FX2_FD;	// bidirectional FIFO data to/from the FX2 
@@ -203,7 +209,8 @@ output FPGA_GPIO13;
 output FPGA_GPIO14;	
 output FPGA_GPIO15;	
 output FPGA_GPIO16;
-output [13:0]DAC; 
+output [13:0]DAC;
+output DAC_CLOCK; 
 
 
 
@@ -263,7 +270,7 @@ reg PWM_clock;
 reg [10:0]PWM_count;
 always @ (posedge clock)
 begin
-	if (PWM_count == 1023) // divide 100MHz clock by 1024 to give 48.828kHz
+	if (PWM_count == 1079) // divide 125MHz clock by 1280 to give 48.828kHz
 		begin
 		PWM_clock <= ~PWM_clock;
 		PWM_count <= 0;
@@ -271,7 +278,7 @@ begin
 	else PWM_count <= PWM_count + 11'b1;
 end
 
-// sync frequecy change to 100MHz clock
+// sync frequecy change to 125MHz clock
 reg [31:0]sync_frequency;
 
 always @ (posedge clock)
@@ -279,27 +286,29 @@ begin
 	sync_frequency <= frequency;
 end
 
+// send data to DAC on negative edge of 125MHz clock
 
-// latch I & Q data into  CIC when ce_out_x goes low. Use negative edge 
-// to ensure that data is stable.
+assign DAC_CLOCK = ~clock;
+
+
+// latch I & Q data into  CIC when ce_out_x goes high. 
 
 reg [15:0]cic_i;
 reg [15:0]cic_q;
 
-always @ (negedge ce_out_i)
+always @ (posedge ce_out_i)
 begin
 	cic_i <= I_PWM;
 end 
 
-always @ (negedge ce_out_q)
+always @ (posedge ce_out_q)
 begin
-	cic_q <= Q_PWM + 16'h4000;
+	cic_q <= Q_PWM;
 end 
 	
-
 ////////////////////////////////////////////////////////////////
 //
-//  Interpolating CIC filter  2048 
+//  Interpolating CIC filter  R = 2560 N = 5
 //
 ////////////////////////////////////////////////////////////////
 
@@ -336,15 +345,22 @@ wire [16:0]i_temp;
 // The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
 phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
 
-// The cordic takes I and Q in along with the top 16 bits of the phase dword.  The I and Q out are freq shifted
-cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(16'd0),.Qin(cic_out_q),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
+// The cordic takes I and Q in along with the top 15 bits of the phase dword.  The I and Q out are freq shifted
+cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(cic_out_i),.Qin(cic_out_q),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
 
-// add the I and Q outputs from the CORDIC to cancel the unwanted sideband and send to the AD97544 DAC
+/* 
+	We can use either the I or Q output from the CORDIC directly to drive the DAC.
 
-wire [16:0]DAC_temp;
-adder add_IQ(.data0x(i_out),.data1x(q_out),.result(DAC_temp));
-//assign DAC[13:0] = DAC_temp[16:3] + 14'h2000;  // add Vcc/2 so that zero in gives half rail out 
-assign DAC[13:0] = q_out[15:2] + 14'h2000;  // add Vcc/2 so that zero in gives half rail out 
+   	exp(jw) = cos(w) + j sin(w)
+
+	When multplying two complex sinusoids f1 and f2, you get only f1+f2, no
+	difference frequency.
+
+  		Z = exp(j*f1) * exp(j*f2) = exp(j*(f1+f2))
+    	  = cos(f1 + f2) + j sin(f1 + f2)
+*/
+
+assign DAC[13:0] = i_out[15:2];  // use q_out if 90 degree phase shift required by EER Tx etc
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -769,7 +785,7 @@ end
 //
 /////////////////////////////////////////////////////////////////
 
-// This runs off the 100MHz clock to simplify the LPF requirements.
+// This runs off the 125MHz clock to simplify the LPF requirements.
 
 reg [15:0] I_Data;
 reg [15:0] Q_Data;
@@ -779,10 +795,10 @@ reg [16:0] I_PWM_accumulator;
 reg [16:0] Q_PWM_accumulator;
 
 
-always @(negedge clock)
+always @(posedge clock)
 begin
-        I_Data_in <= I_Data + 16'h8000;         // so that 0 in gives 50:50 mark/space
-        Q_Data_in <= Q_Data + 16'h8000;
+        I_Data_in <= I_PWM + 16'h8000;         // so that 0 in gives 50:50 mark/space
+        Q_Data_in <= Q_PWM + 16'h8000;
         I_PWM_accumulator <= I_PWM_accumulator[15:0] + I_Data_in;
         Q_PWM_accumulator <= Q_PWM_accumulator[15:0] + Q_Data_in;
 

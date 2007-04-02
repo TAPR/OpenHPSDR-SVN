@@ -116,22 +116,23 @@ set_instance_assignment -name CLOCK_SETTINGS 6MHz -to clock_8
 set_global_assignment -name BASED_ON_CLOCK_SETTINGS ADC_clock -section_id "Rx fifo"
 set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 8 -section_id "Rx fifo"
 set_instance_assignment -name CLOCK_SETTINGS "Rx fifo" -to Rx_clock
-set_location_assignment PIN_128 -to DAC[13]
-set_location_assignment PIN_133 -to DAC[12]
-set_location_assignment PIN_134 -to DAC[11]
-set_location_assignment PIN_135 -to DAC[10]
-set_location_assignment PIN_137 -to DAC[9]
-set_location_assignment PIN_138 -to DAC[8]
-set_location_assignment PIN_139 -to DAC[7]
-set_location_assignment PIN_141 -to DAC[6]
-set_location_assignment PIN_142 -to DAC[5]
-set_location_assignment PIN_143 -to DAC[4]
-set_location_assignment PIN_144 -to DAC[3]
-set_location_assignment PIN_145 -to DAC[2]
-set_location_assignment PIN_146 -to DAC[1]
-set_location_assignment PIN_147 -to DAC[0]
+set_location_assignment PIN_147 -to DAC[13]
+set_location_assignment PIN_146 -to DAC[12]
+set_location_assignment PIN_145 -to DAC[11]
+set_location_assignment PIN_144 -to DAC[10]
+set_location_assignment PIN_143 -to DAC[9]
+set_location_assignment PIN_142 -to DAC[8]
+set_location_assignment PIN_141 -to DAC[7]
+set_location_assignment PIN_139 -to DAC[6]
+set_location_assignment PIN_138 -to DAC[5]
+set_location_assignment PIN_137 -to DAC[4]
+set_location_assignment PIN_135 -to DAC[3]
+set_location_assignment PIN_134 -to DAC[2]
+set_location_assignment PIN_133 -to DAC[1]
+set_location_assignment PIN_128 -to DAC[0]
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
-set_global_assignment -name VERILOG_FILE adder.v
+set_location_assignment PIN_127 -to DAC_CLOCK
+set_global_assignment -name VERILOG_FILE FM_adder.v
 set_global_assignment -name VERILOG_FILE cicint.v
 set_global_assignment -name VERILOG_FILE HB.v
 set_global_assignment -name VERILOG_FILE test_filter.v

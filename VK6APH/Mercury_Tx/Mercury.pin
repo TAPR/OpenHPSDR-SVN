@@ -183,27 +183,27 @@ CONF_DONE                    : 123       :        :                   :         
 GND                          : 124       : gnd    :                   :         :           :                
 MSEL1                        : 125       :        :                   :         : 3         :                
 MSEL0                        : 126       :        :                   :         : 3         :                
-RESERVED_INPUT               : 127       :        :                   :         : 3         :                
-DAC[13]                      : 128       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC_CLOCK                    : 127       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[0]                       : 128       : output : 3.3-V LVTTL       :         : 3         : Y              
 GND+                         : 129       :        :                   :         : 3         :                
 GND+                         : 130       :        :                   :         : 3         :                
 GND+                         : 131       :        :                   :         : 3         :                
 GND+                         : 132       :        :                   :         : 3         :                
-DAC[12]                      : 133       : output : 3.3-V LVTTL       :         : 3         : Y              
-DAC[11]                      : 134       : output : 3.3-V LVTTL       :         : 3         : Y              
-DAC[10]                      : 135       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[1]                       : 133       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[2]                       : 134       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[3]                       : 135       : output : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 136       : power  :                   : 3.3V    : 3         :                
-DAC[9]                       : 137       : output : 3.3-V LVTTL       :         : 3         : Y              
-DAC[8]                       : 138       : output : 3.3-V LVTTL       :         : 3         : Y              
-DAC[7]                       : 139       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[4]                       : 137       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[5]                       : 138       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[6]                       : 139       : output : 3.3-V LVTTL       :         : 3         : Y              
 GND                          : 140       : gnd    :                   :         :           :                
-DAC[6]                       : 141       : output : 3.3-V LVTTL       :         : 3         : Y              
-DAC[5]                       : 142       : output : 3.3-V LVTTL       :         : 3         : Y              
-DAC[4]                       : 143       : output : 3.3-V LVTTL       :         : 3         : Y              
-DAC[3]                       : 144       : output : 3.3-V LVTTL       :         : 3         : Y              
-DAC[2]                       : 145       : output : 3.3-V LVTTL       :         : 3         : Y              
-DAC[1]                       : 146       : output : 3.3-V LVTTL       :         : 3         : Y              
-DAC[0]                       : 147       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[7]                       : 141       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[8]                       : 142       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[9]                       : 143       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[10]                      : 144       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[11]                      : 145       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[12]                      : 146       : output : 3.3-V LVTTL       :         : 3         : Y              
+DAC[13]                      : 147       : output : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
 ADC[0]                       : 149       : input  : 3.3-V LVTTL       :         : 3         : Y              
 ADC[1]                       : 150       : input  : 3.3-V LVTTL       :         : 3         : Y              
