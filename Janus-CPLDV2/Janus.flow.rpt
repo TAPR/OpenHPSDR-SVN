@@ -1,5 +1,5 @@
 Flow report for Janus
-Wed Feb 28 19:57:50 2007
+Fri Apr 06 20:55:25 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -37,14 +37,14 @@ applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; Flow Summary                                                      ;
 +-------------------------+-----------------------------------------+
-; Flow Status             ; Successful - Wed Feb 28 19:57:50 2007   ;
+; Flow Status             ; Successful - Fri Apr 06 20:55:25 2007   ;
 ; Quartus II Version      ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name           ; Janus                                   ;
 ; Top-level Entity Name   ; Janus                                   ;
 ; Family                  ; MAX II                                  ;
 ; Device                  ; EPM240T100C5                            ;
 ; Timing Models           ; Final                                   ;
-; Met timing requirements ; No                                      ;
+; Met timing requirements ; Yes                                     ;
 ; Total logic elements    ; 195 / 240 ( 81 % )                      ;
 ; Total pins              ; 47 / 80 ( 59 % )                        ;
 ; Total virtual pins      ; 0                                       ;
@@ -57,7 +57,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 02/28/2007 19:57:26 ;
+; Start date & time ; 04/06/2007 20:55:08 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Janus               ;
 +-------------------+---------------------+
@@ -75,11 +75,11 @@ applicable agreement for further details.
 +-------------------------+--------------+
 ; Module Name             ; Elapsed Time ;
 +-------------------------+--------------+
-; Analysis & Synthesis    ; 00:00:04     ;
-; Fitter                  ; 00:00:06     ;
-; Assembler               ; 00:00:06     ;
-; Classic Timing Analyzer ; 00:00:02     ;
-; Total                   ; 00:00:18     ;
+; Analysis & Synthesis    ; 00:00:03     ;
+; Fitter                  ; 00:00:03     ;
+; Assembler               ; 00:00:05     ;
+; Classic Timing Analyzer ; 00:00:01     ;
+; Total                   ; 00:00:12     ;
 +-------------------------+--------------+
 
 
