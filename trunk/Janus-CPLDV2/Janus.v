@@ -60,6 +60,7 @@
 //  22 February 2007 - Added CLK_MCLK input that is used clock the AD5394A and TLV320AIC23B
 //  23 February 2007 - Removed clock doubler due to noise in audio output 
 //  28 February 2007 - Changed PTT to be logic 1 if active and high Z if not
+//	 6 April    2007 - Changed AK5394A to run in Slave mode 
 //
 //
 //  IMPORTANT: AK5394A nRST is connected to AK_reset input. Unless this is connected to 
@@ -84,13 +85,13 @@ module Janus(
    	input  FSYNC,
    	output HPF,
    	output IPWM,
-   	input  LRCLK,
+   	output LRCLK,
    	output MCLK,
    	output nCS,
    	output nRST,
    	input  PTT,
    	output QPWM,	// Q data out
-   	input  SCLK,	// I data out
+   	output SCLK,	
   	input  SDOUT,
    	output SMODE1,
    	output SMODE2,
@@ -101,8 +102,8 @@ module Janus(
 	input  CLK_48MHZ,	// 48MHz clock from FX2 for PWM 
 	input  IQOUT,	// I and Q data in I2S format 
 	output C5,		// 12.288MHz clock to Atlas bus
-	output C6,		// SCLK
-	output C7,		// LRCLK
+	input  C6,		// SCLK (BCLK)
+	input  C7,		// LRCLK
 	input  C8,  	// CBCLK
 	input  C9,		// CLRCIN/CLRCOUT
 	output C10,		// SDOUT
@@ -259,8 +260,10 @@ assign QPWM = Q_accumulator[16];
 
 // Atlas outputs
 assign C5 = CLK_12MHZ;		
-assign C6 = SCLK; 			// is actually BCLK
-assign C7 = LRCLK;
+//assign C6 = SCLK; 			// is actually BCLK
+//assign C7 = LRCLK;
+assign SCLK = C6;
+assign LRCLK = C7;
 assign C10 = SDOUT; 
 assign C11 = CDOUT;
 assign C15 = (PTT == 0) ? 1'b1 : 1'bz; // PTT is 1 if active and high Z if not
@@ -277,8 +280,8 @@ assign DFS1 = C14; 			// set AK speed
 // AK5394A pins
 assign MCLK = CLK_MCLK; 	// Master clock from Ozy
 assign HPF = 1'b1; 			// HPF in AK on
-assign SMODE1 = 1'b1; 		// Master mode, I2S
-assign SMODE2 = 1'b1; 		// Master mode, I2S
+assign SMODE1 = 1'b0; 		// Slave mode, I2S
+assign SMODE2 = 1'b1; 		// Slave mode, I2S
 assign ZCAL = 1'b1;			// Calibrate AK from A/D inputs
 
 // LTV320 pins
