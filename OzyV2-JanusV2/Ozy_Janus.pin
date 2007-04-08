@@ -216,8 +216,8 @@ GND_PLL2                     : 156       : gnd    :                   :         
 VCCA_PLL2                    : 157       : power  :                   : 1.2V    :           :                
 GNDA_PLL2                    : 158       : gnd    :                   :         :           :                
 GND                          : 159       : gnd    :                   :         :           :                
-BCLK                         : 160       : input  : 3.3-V LVTTL       :         : 2         : Y              
-LRCLK                        : 161       : input  : 3.3-V LVTTL       :         : 2         : Y              
+BCLK                         : 160       : output : 3.3-V LVTTL       :         : 2         : Y              
+LRCLK                        : 161       : output : 3.3-V LVTTL       :         : 2         : Y              
 CBCLK                        : 162       : output : 3.3-V LVTTL       :         : 2         : Y              
 CLRCLK                       : 163       : output : 3.3-V LVTTL       :         : 2         : Y              
 DOUT                         : 164       : input  : 3.3-V LVTTL       :         : 2         : Y              

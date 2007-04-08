@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Fri Mar 09 22:32:41 2007
+Sun Apr 08 16:29:55 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -17,48 +17,49 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
   9. State Machine - |Ozy_Janus|CCstate
  10. State Machine - |Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state
  11. State Machine - |Ozy_Janus|I2SAudioOut:I2SAO|TLV_state
- 12. Registers Removed During Synthesis
- 13. General Register Statistics
- 14. Multiplexer Restructuring Statistics (Restructuring Performed)
- 15. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 16. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated
- 17. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram
- 18. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
- 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg
- 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg|dffpipe_s98:dffpipe7
- 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_brp
- 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_bwp
- 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp
- 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_d09:dffpipe10
- 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg
- 26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg|dffpipe_t98:dffpipe12
- 27. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_brp
- 28. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_bwp
- 29. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp
- 30. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp|dffpipe_e09:dffpipe14
- 31. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated
- 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram
- 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3
- 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp
- 36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5
- 37. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_brp
- 38. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_bwp
- 39. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp
- 40. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe9
- 41. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs
- 42. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port0reg
- 43. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port1reg
- 44. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port2reg
- 45. Parameter Settings for User Entity Instance: clocks:clocks|lpm_counter:lpm_counter_component
- 46. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 47. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 48. Parameter Settings for User Entity Instance: debounce:de_PTT
- 49. Parameter Settings for User Entity Instance: debounce:de_dot
- 50. Parameter Settings for User Entity Instance: debounce:de_dash
- 51. dcfifo Parameter Settings by Entity Instance
- 52. Analysis & Synthesis Messages
- 53. Analysis & Synthesis Suppressed Messages
+ 12. User-Specified and Inferred Latches
+ 13. Registers Removed During Synthesis
+ 14. General Register Statistics
+ 15. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 16. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+ 17. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated
+ 18. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram
+ 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
+ 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg
+ 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg|dffpipe_s98:dffpipe7
+ 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_brp
+ 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_bwp
+ 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp
+ 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_d09:dffpipe10
+ 26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg
+ 27. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg|dffpipe_t98:dffpipe12
+ 28. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_brp
+ 29. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_bwp
+ 30. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp
+ 31. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp|dffpipe_e09:dffpipe14
+ 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated
+ 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram
+ 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3
+ 36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp
+ 37. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5
+ 38. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_brp
+ 39. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_bwp
+ 40. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp
+ 41. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe9
+ 42. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs
+ 43. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port0reg
+ 44. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port1reg
+ 45. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port2reg
+ 46. Parameter Settings for User Entity Instance: clocks:clocks|lpm_counter:lpm_counter_component
+ 47. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+ 48. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 49. Parameter Settings for User Entity Instance: debounce:de_PTT
+ 50. Parameter Settings for User Entity Instance: debounce:de_dot
+ 51. Parameter Settings for User Entity Instance: debounce:de_dash
+ 52. dcfifo Parameter Settings by Entity Instance
+ 53. Analysis & Synthesis Messages
+ 54. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -84,15 +85,15 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Mar 09 22:32:41 2007   ;
+; Analysis & Synthesis Status        ; Successful - Sun Apr 08 16:29:55 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 781                                     ;
-;     Total combinational functions  ; 687                                     ;
-;     Dedicated logic registers      ; 781                                     ;
-; Total registers                    ; 781                                     ;
+; Total logic elements               ; 813                                     ;
+;     Total combinational functions  ; 723                                     ;
+;     Dedicated logic registers      ; 813                                     ;
+; Total registers                    ; 813                                     ;
 ; Total pins                         ; 76                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304                                  ;
@@ -163,101 +164,101 @@ applicable agreement for further details.
 +--------------------------------------------------------------------+--------------------+--------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                    ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                          ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------+
-; RegisterX.v                      ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/RegisterX.v               ;
-; SPI_REGS.v                       ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/SPI_REGS.v                ;
-; gpio_control.v                   ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/gpio_control.v            ;
-; Tx_fifo.v                        ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Tx_fifo.v                 ;
-; clocks.v                         ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/clocks.v                  ;
-; debounce.v                       ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/debounce.v                ;
-; DigAudioOut48k16bI2S.v           ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/DigAudioOut48k16bI2S.v    ;
-; Ozy_Janus.v                      ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Ozy_Janus.v               ;
-; Rx_fifo.v                        ; yes             ; User Verilog HDL File        ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Rx_fifo.v                 ;
-; lpm_counter.tdf                  ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/lpm_counter.tdf                   ;
-; lpm_constant.inc                 ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/lpm_constant.inc                  ;
-; lpm_decode.inc                   ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/lpm_decode.inc                    ;
-; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/lpm_add_sub.inc                   ;
-; cmpconst.inc                     ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/cmpconst.inc                      ;
-; lpm_compare.inc                  ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/lpm_compare.inc                   ;
-; lpm_counter.inc                  ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/lpm_counter.inc                   ;
-; dffeea.inc                       ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/dffeea.inc                        ;
-; alt_synch_counter.inc            ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/alt_synch_counter.inc             ;
-; alt_synch_counter_f.inc          ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/alt_synch_counter_f.inc           ;
-; alt_counter_f10ke.inc            ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/alt_counter_f10ke.inc             ;
-; alt_counter_stratix.inc          ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/alt_counter_stratix.inc           ;
-; aglobal61.inc                    ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/aglobal61.inc                     ;
-; db/cntr_skh.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/cntr_skh.tdf           ;
-; dcfifo.tdf                       ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/dcfifo.tdf                        ;
-; altdpram.inc                     ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/altdpram.inc                      ;
-; a_graycounter.inc                ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/a_graycounter.inc                 ;
-; a_fefifo.inc                     ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/a_fefifo.inc                      ;
-; a_gray2bin.inc                   ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/a_gray2bin.inc                    ;
-; dffpipe.inc                      ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/dffpipe.inc                       ;
-; alt_sync_fifo.inc                ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/alt_sync_fifo.inc                 ;
-; altsyncram_fifo.inc              ; yes             ; Megafunction                 ; g:/altera/quartus61/quartus/libraries/megafunctions/altsyncram_fifo.inc               ;
-; db/dcfifo_6bf1.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/dcfifo_6bf1.tdf        ;
-; db/a_gray2bin_ndb.tdf            ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/a_gray2bin_ndb.tdf     ;
-; db/a_graycounter_r96.tdf         ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/a_graycounter_r96.tdf  ;
-; db/a_graycounter_kk6.tdf         ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/a_graycounter_kk6.tdf  ;
-; db/a_graycounter_jk6.tdf         ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/a_graycounter_jk6.tdf  ;
-; db/altsyncram_vpu.tdf            ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/altsyncram_vpu.tdf     ;
-; db/altsyncram_aec1.tdf           ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/altsyncram_aec1.tdf    ;
-; db/alt_synch_pipe_297.tdf        ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/alt_synch_pipe_297.tdf ;
-; db/dffpipe_s98.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/dffpipe_s98.tdf        ;
-; db/dffpipe_c09.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/dffpipe_c09.tdf        ;
-; db/alt_synch_pipe_iv7.tdf        ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/alt_synch_pipe_iv7.tdf ;
-; db/dffpipe_d09.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/dffpipe_d09.tdf        ;
-; db/alt_synch_pipe_397.tdf        ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/alt_synch_pipe_397.tdf ;
-; db/dffpipe_t98.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/dffpipe_t98.tdf        ;
-; db/alt_synch_pipe_jv7.tdf        ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/alt_synch_pipe_jv7.tdf ;
-; db/dffpipe_e09.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/dffpipe_e09.tdf        ;
-; db/dcfifo_jic1.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/dcfifo_jic1.tdf        ;
-; db/a_gray2bin_mdb.tdf            ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/a_gray2bin_mdb.tdf     ;
-; db/a_graycounter_q96.tdf         ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/a_graycounter_q96.tdf  ;
-; db/a_graycounter_lk6.tdf         ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/a_graycounter_lk6.tdf  ;
-; db/a_graycounter_ik6.tdf         ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/a_graycounter_ik6.tdf  ;
-; db/altsyncram_tpu.tdf            ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/altsyncram_tpu.tdf     ;
-; db/altsyncram_8ec1.tdf           ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/altsyncram_8ec1.tdf    ;
-; db/alt_synch_pipe_kv7.tdf        ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/alt_synch_pipe_kv7.tdf ;
-; db/dffpipe_f09.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/dffpipe_f09.tdf        ;
-; db/dffpipe_b09.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/dffpipe_b09.tdf        ;
-; db/alt_synch_pipe_lv7.tdf        ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/alt_synch_pipe_lv7.tdf ;
-; db/dffpipe_g09.tdf               ; yes             ; Auto-Generated Megafunction  ; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/db/dffpipe_g09.tdf        ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                   ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                         ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
+; RegisterX.v                      ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/RegisterX.v                             ;
+; SPI_REGS.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/SPI_REGS.v                              ;
+; gpio_control.v                   ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/gpio_control.v                          ;
+; Tx_fifo.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/Tx_fifo.v                               ;
+; clocks.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/clocks.v                                ;
+; debounce.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/debounce.v                              ;
+; DigAudioOut48k16bI2S.v           ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/DigAudioOut48k16bI2S.v                  ;
+; Ozy_Janus.v                      ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.v                             ;
+; Rx_fifo.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/Rx_fifo.v                               ;
+; lpm_counter.tdf                  ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_counter.tdf         ;
+; lpm_constant.inc                 ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_constant.inc        ;
+; lpm_decode.inc                   ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_decode.inc          ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_add_sub.inc         ;
+; cmpconst.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/cmpconst.inc            ;
+; lpm_compare.inc                  ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_compare.inc         ;
+; lpm_counter.inc                  ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_counter.inc         ;
+; dffeea.inc                       ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/dffeea.inc              ;
+; alt_synch_counter.inc            ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/alt_synch_counter.inc   ;
+; alt_synch_counter_f.inc          ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/alt_synch_counter_f.inc ;
+; alt_counter_f10ke.inc            ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/alt_counter_f10ke.inc   ;
+; alt_counter_stratix.inc          ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/alt_counter_stratix.inc ;
+; aglobal61.inc                    ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/aglobal61.inc           ;
+; db/cntr_skh.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/cntr_skh.tdf                         ;
+; dcfifo.tdf                       ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/dcfifo.tdf              ;
+; altdpram.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/altdpram.inc            ;
+; a_graycounter.inc                ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/a_graycounter.inc       ;
+; a_fefifo.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/a_fefifo.inc            ;
+; a_gray2bin.inc                   ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/a_gray2bin.inc          ;
+; dffpipe.inc                      ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/dffpipe.inc             ;
+; alt_sync_fifo.inc                ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/alt_sync_fifo.inc       ;
+; altsyncram_fifo.inc              ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/altsyncram_fifo.inc     ;
+; db/dcfifo_6bf1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dcfifo_6bf1.tdf                      ;
+; db/a_gray2bin_ndb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/a_gray2bin_ndb.tdf                   ;
+; db/a_graycounter_r96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/a_graycounter_r96.tdf                ;
+; db/a_graycounter_kk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/a_graycounter_kk6.tdf                ;
+; db/a_graycounter_jk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/a_graycounter_jk6.tdf                ;
+; db/altsyncram_vpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/altsyncram_vpu.tdf                   ;
+; db/altsyncram_aec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/altsyncram_aec1.tdf                  ;
+; db/alt_synch_pipe_297.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_297.tdf               ;
+; db/dffpipe_s98.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_s98.tdf                      ;
+; db/dffpipe_c09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_c09.tdf                      ;
+; db/alt_synch_pipe_iv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_iv7.tdf               ;
+; db/dffpipe_d09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_d09.tdf                      ;
+; db/alt_synch_pipe_397.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_397.tdf               ;
+; db/dffpipe_t98.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_t98.tdf                      ;
+; db/alt_synch_pipe_jv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_jv7.tdf               ;
+; db/dffpipe_e09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_e09.tdf                      ;
+; db/dcfifo_jic1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dcfifo_jic1.tdf                      ;
+; db/a_gray2bin_mdb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/a_gray2bin_mdb.tdf                   ;
+; db/a_graycounter_q96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/a_graycounter_q96.tdf                ;
+; db/a_graycounter_lk6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/a_graycounter_lk6.tdf                ;
+; db/a_graycounter_ik6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/a_graycounter_ik6.tdf                ;
+; db/altsyncram_tpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/altsyncram_tpu.tdf                   ;
+; db/altsyncram_8ec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/altsyncram_8ec1.tdf                  ;
+; db/alt_synch_pipe_kv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_kv7.tdf               ;
+; db/dffpipe_f09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_f09.tdf                      ;
+; db/dffpipe_b09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_b09.tdf                      ;
+; db/alt_synch_pipe_lv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_lv7.tdf               ;
+; db/dffpipe_g09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_g09.tdf                      ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 
 
-+-----------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary         ;
-+---------------------------------------------+-------+
-; Resource                                    ; Usage ;
-+---------------------------------------------+-------+
-; Estimated Total logic elements              ; 781   ;
-;                                             ;       ;
-; Total combinational functions               ; 687   ;
-; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 281   ;
-;     -- 3 input functions                    ; 175   ;
-;     -- <=2 input functions                  ; 231   ;
-;                                             ;       ;
-; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 467   ;
-;     -- arithmetic mode                      ; 220   ;
-;                                             ;       ;
-; Total registers                             ; 781   ;
-;     -- Dedicated logic registers            ; 781   ;
-;     -- I/O registers                        ; 0     ;
-;                                             ;       ;
-; I/O pins                                    ; 76    ;
-; Total memory bits                           ; 98304 ;
-; Maximum fan-out node                        ; BCLK  ;
-; Maximum fan-out                             ; 375   ;
-; Total fan-out                               ; 5089  ;
-; Average fan-out                             ; 3.23  ;
-+---------------------------------------------+-------+
++--------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary            ;
++---------------------------------------------+----------+
+; Resource                                    ; Usage    ;
++---------------------------------------------+----------+
+; Estimated Total logic elements              ; 813      ;
+;                                             ;          ;
+; Total combinational functions               ; 723      ;
+; Logic element usage by number of LUT inputs ;          ;
+;     -- 4 input functions                    ; 282      ;
+;     -- 3 input functions                    ; 203      ;
+;     -- <=2 input functions                  ; 238      ;
+;                                             ;          ;
+; Logic elements by mode                      ;          ;
+;     -- normal mode                          ; 503      ;
+;     -- arithmetic mode                      ; 220      ;
+;                                             ;          ;
+; Total registers                             ; 813      ;
+;     -- Dedicated logic registers            ; 813      ;
+;     -- I/O registers                        ; 0        ;
+;                                             ;          ;
+; I/O pins                                    ; 76       ;
+; Total memory bits                           ; 98304    ;
+; Maximum fan-out node                        ; BCLK~102 ;
+; Maximum fan-out                             ; 408      ;
+; Total fan-out                               ; 5290     ;
+; Average fan-out                             ; 3.22     ;
++---------------------------------------------+----------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -265,12 +266,12 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-; |Ozy_Janus                                    ; 687 (367)         ; 781 (369)    ; 98304       ; 0            ; 0       ; 0         ; 76   ; 0            ; |Ozy_Janus                                                                                                                        ;
+; |Ozy_Janus                                    ; 723 (404)         ; 813 (401)    ; 98304       ; 0            ; 0       ; 0         ; 76   ; 0            ; |Ozy_Janus                                                                                                                        ;
 ;    |I2SAudioOut:I2SAO|                        ; 34 (34)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ;
 ;    |I2SAudioOut:I2SIQO|                       ; 22 (22)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SIQO                                                                                                     ;
-;    |Rx_fifo:Rx_fifo|                          ; 97 (0)            ; 130 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ;
-;       |dcfifo:dcfifo_component|               ; 97 (0)            ; 130 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
-;          |dcfifo_6bf1:auto_generated|         ; 97 (22)           ; 130 (28)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated                                                     ;
+;    |Rx_fifo:Rx_fifo|                          ; 96 (0)            ; 130 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ;
+;       |dcfifo:dcfifo_component|               ; 96 (0)            ; 130 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
+;          |dcfifo_6bf1:auto_generated|         ; 96 (21)           ; 130 (28)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated                                                     ;
 ;             |a_gray2bin_ndb:rdptr_g_gray2bin| ; 12 (12)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin                     ;
 ;             |a_gray2bin_ndb:rs_dgwp_gray2bin| ; 12 (12)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_gray2bin_ndb:rs_dgwp_gray2bin                     ;
 ;             |a_gray2bin_ndb:wrptr_g_gray2bin| ; 11 (11)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|a_gray2bin_ndb:wrptr_g_gray2bin                     ;
@@ -387,6 +388,48 @@ Encoding Type:  One-Hot
 +---------------+---------------+---------------+---------------+---------------+---------------+
 
 
++----------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                ;
++-----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
++-----------------------------------------------------+---------------------+------------------------+
+; frequency[26]                                       ; Equal1              ; yes                    ;
+; frequency[25]                                       ; Equal1              ; yes                    ;
+; frequency[24]                                       ; Equal1              ; yes                    ;
+; frequency[27]                                       ; Equal1              ; yes                    ;
+; frequency[29]                                       ; Equal1              ; yes                    ;
+; frequency[30]                                       ; Equal1              ; yes                    ;
+; frequency[28]                                       ; Equal1              ; yes                    ;
+; frequency[31]                                       ; Equal1              ; yes                    ;
+; frequency[22]                                       ; Equal1              ; yes                    ;
+; frequency[21]                                       ; Equal1              ; yes                    ;
+; frequency[20]                                       ; Equal1              ; yes                    ;
+; frequency[23]                                       ; Equal1              ; yes                    ;
+; frequency[14]                                       ; Equal1              ; yes                    ;
+; frequency[10]                                       ; Equal1              ; yes                    ;
+; frequency[6]                                        ; Equal1              ; yes                    ;
+; frequency[18]                                       ; Equal1              ; yes                    ;
+; frequency[9]                                        ; Equal1              ; yes                    ;
+; frequency[13]                                       ; Equal1              ; yes                    ;
+; frequency[5]                                        ; Equal1              ; yes                    ;
+; frequency[17]                                       ; Equal1              ; yes                    ;
+; frequency[8]                                        ; Equal1              ; yes                    ;
+; frequency[12]                                       ; Equal1              ; yes                    ;
+; frequency[4]                                        ; Equal1              ; yes                    ;
+; frequency[16]                                       ; Equal1              ; yes                    ;
+; frequency[15]                                       ; Equal1              ; yes                    ;
+; frequency[11]                                       ; Equal1              ; yes                    ;
+; frequency[7]                                        ; Equal1              ; yes                    ;
+; frequency[19]                                       ; Equal1              ; yes                    ;
+; frequency[0]                                        ; Equal1              ; yes                    ;
+; frequency[1]                                        ; Equal1              ; yes                    ;
+; frequency[2]                                        ; Equal1              ; yes                    ;
+; frequency[3]                                        ; Equal1              ; yes                    ;
+; Number of user-specified and inferred latches = 32  ;                     ;                        ;
++-----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
 +------------------------------------------------------------------------------------------------------------+
 ; Registers Removed During Synthesis                                                                         ;
 +-------------------------------------------------------------------+----------------------------------------+
@@ -474,12 +517,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 781   ;
+; Total registers                              ; 813   ;
 ; Number of registers using Synchronous Clear  ; 84    ;
 ; Number of registers using Synchronous Load   ; 9     ;
 ; Number of registers using Asynchronous Clear ; 37    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 349   ;
+; Number of registers using Clock Enable       ; 381   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -489,16 +532,17 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[6]                                         ;
-; 4:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|CCcount[0]                                              ;
-; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Ozy_Janus|FIFO_ADR[0]~reg0                                        ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Ozy_Janus|DFS1~reg0                                               ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[2]                                         ;
+; 4:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|CCcount[6]                                              ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Ozy_Janus|FIFO_ADR[1]~reg0                                        ;
 ; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|byte_count[2]                                           ;
 ; 128:1              ; 4 bits    ; 340 LEs       ; 32 LEs               ; 308 LEs                ; Yes        ; |Ozy_Janus|AD_state[2]                                             ;
-; 8:1                ; 9 bits    ; 45 LEs        ; 9 LEs                ; 36 LEs                 ; Yes        ; |Ozy_Janus|sync_count[1]                                           ;
-; 66:1               ; 7 bits    ; 308 LEs       ; 21 LEs               ; 287 LEs                ; Yes        ; |Ozy_Janus|gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[4] ;
+; 8:1                ; 9 bits    ; 45 LEs        ; 9 LEs                ; 36 LEs                 ; Yes        ; |Ozy_Janus|sync_count[6]                                           ;
+; 66:1               ; 7 bits    ; 308 LEs       ; 21 LEs               ; 287 LEs                ; Yes        ; |Ozy_Janus|gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[6] ;
 ; 71:1               ; 8 bits    ; 376 LEs       ; 24 LEs               ; 352 LEs                ; Yes        ; |Ozy_Janus|register[8]                                             ;
-; 72:1               ; 5 bits    ; 240 LEs       ; 20 LEs               ; 220 LEs                ; Yes        ; |Ozy_Janus|register[2]                                             ;
-; 72:1               ; 2 bits    ; 96 LEs        ; 6 LEs                ; 90 LEs                 ; Yes        ; |Ozy_Janus|register[1]                                             ;
+; 72:1               ; 5 bits    ; 240 LEs       ; 20 LEs               ; 220 LEs                ; Yes        ; |Ozy_Janus|register[3]                                             ;
+; 72:1               ; 2 bits    ; 96 LEs        ; 6 LEs                ; 90 LEs                 ; Yes        ; |Ozy_Janus|register[0]                                             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 
 
@@ -939,7 +983,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Fri Mar 09 22:31:59 2007
+    Info: Processing started: Sun Apr 08 16:29:31 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file RegisterX.v
     Info: Found entity 1: RegisterX
@@ -960,9 +1004,38 @@ Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(902): object "Rx_control_1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(903): object "Rx_control_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(904): object "Rx_control_3" assigned a value but never read
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[31]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[30]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[29]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[28]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[27]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[26]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[25]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[24]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[23]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[22]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[21]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[20]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[19]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[18]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[17]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[16]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[15]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[14]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[13]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[12]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[11]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[10]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[9]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[8]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[7]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[6]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[5]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[4]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[3]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[2]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[1]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[0]"
 Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
 Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(46): conditional expression evaluates to a constant
 Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(47): conditional expression evaluates to a constant
@@ -972,7 +1045,7 @@ Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port1reg"
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port2reg"
 Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
-Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus61/quartus/libraries/megafunctions/lpm_counter.tdf
+Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
     Info: Found entity 1: lpm_counter
 Info: Elaborating entity "lpm_counter" for hierarchy "clocks:clocks|lpm_counter:lpm_counter_component"
 Info: Elaborated megafunction instantiation "clocks:clocks|lpm_counter:lpm_counter_component"
@@ -980,7 +1053,7 @@ Info: Found 1 design units, including 1 entities, in source file db/cntr_skh.tdf
     Info: Found entity 1: cntr_skh
 Info: Elaborating entity "cntr_skh" for hierarchy "clocks:clocks|lpm_counter:lpm_counter_component|cntr_skh:auto_generated"
 Info: Elaborating entity "Rx_fifo" for hierarchy "Rx_fifo:Rx_fifo"
-Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus61/quartus/libraries/megafunctions/dcfifo.tdf
+Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/dcfifo.tdf
     Info: Found entity 1: dcfifo
 Info: Elaborating entity "dcfifo" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
 Info: Elaborated megafunction instantiation "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
@@ -1266,21 +1339,21 @@ Info: 49 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1225 device resources after synthesis - the final resource count might be different
-    Info: Implemented 14 input pins
-    Info: Implemented 21 output pins
+Info: Implemented 1291 device resources after synthesis - the final resource count might be different
+    Info: Implemented 12 input pins
+    Info: Implemented 23 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1117 logic cells
+    Info: Implemented 1183 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 62 warnings
-    Info: Allocated 135 megabytes of memory during processing
-    Info: Processing ended: Fri Mar 09 22:32:41 2007
-    Info: Elapsed time: 00:00:42
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 59 warnings
+    Info: Allocated 136 megabytes of memory during processing
+    Info: Processing ended: Sun Apr 08 16:29:55 2007
+    Info: Elapsed time: 00:00:24
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Ozy_Janus.map.smsg.
+The suppressed messages can be found in C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.map.smsg.
 
 

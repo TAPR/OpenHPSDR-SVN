@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Fri Mar 09 22:31:59 2007
+    Info: Processing started: Sun Apr 08 16:29:31 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file RegisterX.v
     Info: Found entity 1: RegisterX
@@ -22,9 +22,38 @@ Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(902): object "Rx_control_1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(903): object "Rx_control_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(904): object "Rx_control_3" assigned a value but never read
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[31]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[30]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[29]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[28]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[27]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[26]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[25]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[24]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[23]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[22]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[21]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[20]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[19]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[18]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[17]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[16]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[15]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[14]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[13]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[12]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[11]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[10]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[9]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[8]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[7]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[6]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[5]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[4]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[3]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[2]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[1]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[0]"
 Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
 Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(46): conditional expression evaluates to a constant
 Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(47): conditional expression evaluates to a constant
@@ -34,7 +63,7 @@ Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port1reg"
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port2reg"
 Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
-Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus61/quartus/libraries/megafunctions/lpm_counter.tdf
+Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
     Info: Found entity 1: lpm_counter
 Info: Elaborating entity "lpm_counter" for hierarchy "clocks:clocks|lpm_counter:lpm_counter_component"
 Info: Elaborated megafunction instantiation "clocks:clocks|lpm_counter:lpm_counter_component"
@@ -42,7 +71,7 @@ Info: Found 1 design units, including 1 entities, in source file db/cntr_skh.tdf
     Info: Found entity 1: cntr_skh
 Info: Elaborating entity "cntr_skh" for hierarchy "clocks:clocks|lpm_counter:lpm_counter_component|cntr_skh:auto_generated"
 Info: Elaborating entity "Rx_fifo" for hierarchy "Rx_fifo:Rx_fifo"
-Info: Found 1 design units, including 1 entities, in source file g:/altera/quartus61/quartus/libraries/megafunctions/dcfifo.tdf
+Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/dcfifo.tdf
     Info: Found entity 1: dcfifo
 Info: Elaborating entity "dcfifo" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
 Info: Elaborated megafunction instantiation "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
@@ -328,13 +357,13 @@ Info: 49 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1225 device resources after synthesis - the final resource count might be different
-    Info: Implemented 14 input pins
-    Info: Implemented 21 output pins
+Info: Implemented 1291 device resources after synthesis - the final resource count might be different
+    Info: Implemented 12 input pins
+    Info: Implemented 23 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1117 logic cells
+    Info: Implemented 1183 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 62 warnings
-    Info: Allocated 135 megabytes of memory during processing
-    Info: Processing ended: Fri Mar 09 22:32:41 2007
-    Info: Elapsed time: 00:00:42
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 59 warnings
+    Info: Allocated 136 megabytes of memory during processing
+    Info: Processing ended: Sun Apr 08 16:29:55 2007
+    Info: Elapsed time: 00:00:24

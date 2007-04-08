@@ -1,4 +1,4 @@
-// V1.60 4th March  2007
+// V1.70 8th April 2007
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -147,6 +147,8 @@
 //				Added CLK_MCLK to Atlas for Janus - 22 Feb 2007
 //				Added Command and Control data for Penelope and Mercury - 4th March 2007
 //				Added SPI control of GPIO lines for SDR 1K Control - 4th March 2007 (kd5tfd) 
+//				Changed Command and Control to decode Rx_contol_n  - 7th April 2007
+//				Changed AK5394A to run in Slave mode - 8th April 2007
 //				
 //
 ////////////////////////////////////////////////////////////
@@ -164,6 +166,7 @@
 //   CLK_48MHZ           	- Atlas C3  - pin 150 - 48MHz clock to PWM DACs
 //   LROUT		           	- Atlas C4  - pin 151 - L/R audio in I2S format
 //   CLK_12MHZ   	 		- Atlas C5  - pin 152 - 12.288MHz clock from Janus
+//	 PCLK_12MHZ				- Atlas A5  - pin xxx - 12.5MHz clock from Mercury or Penelope 
 //   BCLK                   - Atlas C6  - pin 160 - AK5394A (SCLK)
 //   LRCLK                  - Atlas C7  - pin 161 - AK5394A
 //   CBCLK                  - Atlas C8  - pin 162 - TLV320
@@ -265,7 +268,8 @@ module Ozy_Janus(
 input CLK_12MHZ;               // From Janus board 12.288MHz
 input IFCLK;                   // FX2 IFCLOCK - 48MHz
 output CLK_MCLK; 			   // Master Clock  to Altas for Janus 
-input BCLK, DOUT, LRCLK;
+input  DOUT;
+output BCLK, LRCLK;
 inout  [15:0] FX2_FD;           // bidirectional FIFO data to/from the FX2
 //output  [15:0] FX2_FD;        // bidirectional FIFO data to/from the FX2
                                 // ***** use this so simulation works
@@ -286,12 +290,10 @@ output CDIN;                    // Rx data to TLV320AIC23B
 output LROUT;					// Left  and Right audio data in I2S format to Atlas
 input CDOUT;                    // A/D data from TLV320AIC23B
 input PTT_in;                   // PTT active high
-// input dot;                      // CW dot key, active low
-// input dash;                     // CW dash key, active low
 output DFS0,DFS1;               // speed control for AK5394A
 output AK_reset;                // reset for AK5394A
-wire DFS0;
-wire DFS1;
+wire DFS0;						// used to set AK5394A speed
+wire DFS1;						// ditto 
 output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
 output CC;						// Command and Control data to Atlas bus 
 
@@ -305,10 +307,10 @@ input 				SPI_CS;         // FPGA chip select from FX2
 inout [23:0]		GPIO;			// OZY GPIO lines
 output 				GPIO_nIOE;      // enable GPIO driver chips 
 
-wire dot;
-wire dash; 
+wire dot;							// CW dot key, active low
+wire dash; 							// CW dash key, active low
 
-assign dot = GPIO[22];   // alias dot and dash to appropriate GPIO lines 
+assign dot = GPIO[22];   			// alias dot and dash to appropriate GPIO lines 
 assign dash = GPIO[21]; 
 
 assign GPIO_nIOE = 0; 
@@ -321,8 +323,6 @@ gpio_control gpio_controlSDR(.FX2_CLK(FX2_CLK),
 							 .CS(SPI_CS), 
 							 .GPIO(GPIO)
 							 );
-
-
 /*
 
 ****** THIS NEEDS UPDATING TO AGREE WITH PHIL C's TERMS ********
@@ -403,14 +403,14 @@ end
 //
 //////////////////////////////////////////////////////////////
 
-/*      The following code provides CBCLK and CLRCLK clocks as required for the TLV320
-        and PWM D/A converters since these always operate at 48kHz.
+/*      The following code provides clocks as required for the TLV320, AK539A
+        and PWM D/A converters. The former always operate at 48kHz.
         Note the phase relationship required betweeen LRCLK and BCLK.
         LRCLK must change state on the negative edge of BCLK.
 */
 
 // divide  CLK_MCLK (12.288MHz) to give clocks for the TLV320 etc
-// using Altera Megafunction
+// using Altera Megafunction 
 
 wire [7:0]clock_out;
 wire CBCLK;
@@ -418,39 +418,44 @@ wire CLRCLK;
 
 clocks clocks(CLK_MCLK, clock_out);
 
-assign CBCLK = clock_out[1] ;           // 3.072MHz
-assign CLRCLK = clock_out[7];           // 48kHz
+assign CBCLK = clock_out[1] ;           // 3.072MHz for TLV320 and PWM 
+assign BCLK_96_48 = clock_out[0]; 		// 6.144MHz for AK5394A on 48/96kHz
+assign BCLK_192   = CLK_MCLK; 			// 12.288MHz for AK5394A on 192kHz
+assign CLRCLK = clock_out[7];           // for TLV320 at 48kHz
+assign LRCLK_48 = clock_out[7]; 		// for AK5394A at 48kHz
+assign LRCLK_96 = clock_out[6];			// for AK5394A at 96kHz
+assign LRCLK_192 = clock_out[5];		// for AK5394A at 192kHz
+
 assign CLK_48MHZ = IFCLK; 				// 48MHz clock to PWM DAC on Janus
 
-// the Master Clock (CLK_MCLK) will come from Janus unless a Mercury or Penelope board
-// is being used then it will come from the Atlas bus on C17
-// For now force use of Janus 12.288MHz clock
-
-assign CLK_MCLK = CLK_12MHZ; 			// CLK_MCLK to Atlas for Janus
-
+/* 
+		Select AK5394A clocks dependant on speed settings. The pseudo code is as follows:
 		
-	
-//////////////////////////////////////////////////////////////
-//
-//      Decode A/D speed
-//
-//////////////////////////////////////////////////////////////
-/*
-        The speed the AK5394A runs at, either 192k,96k or 48k is set by
-        the PC by decoding C1 when C0[7:1] are all zero. C1 decodes as
-        follows:
-
-        C1 = 8'bxxxx_xx00  - 48kHz
-        C1 = 8'bxxxx_xx01  - 96kHz
-        C1 = 8'bxxxx_xx10  - 192kHz
-
-        The speed change should only be enabled when have_sync is true.
-        When reseting the AK5394A force to 48kHz.
-
+		if (reset or speed = 48k) 
+			BCLK = BCLK_48_96
+			LRCLK = LRCLK_48
+		else if (speed = 96k)
+			BCLK = BCLK_48_96
+			LRCLK = LRCLK_96
+		else
+			BCLK = BCLK_192
+			LRCLK = LRCLK_192
+		
+		NOTE: clock phases are inverted in some cases!
 */
 
-assign {DFS1,DFS0} = (AK_reset && have_sync) ? SpeedBits[1:0] : 2'b0;
+assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : ~BCLK_96_48; 
+assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? ~LRCLK_48 : ((DFS0 == 1 && DFS1 == 0 )? ~LRCLK_96 : LRCLK_192);
 
+
+// the 12MHz ADC/DAC clock  will come from Janus (12.288MHz)  on Atlas C5  as CLK_12MHZ unless a Mercury or Penelope board
+// is being used then it will come from the Atlas bus (12.5MHz) on A5 as PCLK_10MHZ. The signal CLK_select
+// will determine which clock to use. 
+
+// assign CLK_MCLK = CLK_select ? CLK_12MHZ : PCLK_12MHZ;
+
+// For now force use of Janus 12.288MHz clock
+assign CLK_MCLK = CLK_12MHZ; 			// CLK_MCLK to Atlas C17
 
 //////////////////////////////////////////////////////////////
 //
@@ -459,7 +464,7 @@ assign {DFS1,DFS0} = (AK_reset && have_sync) ? SpeedBits[1:0] : 2'b0;
 //////////////////////////////////////////////////////////////
 
 /*
-        Add code here to decode C0-C5.
+        Add code here to decode Rx_control_0....Rx_control_4.
         Only decode when  have_sync is true otherwise set safe values.
 
 */
@@ -467,7 +472,39 @@ assign {DFS1,DFS0} = (AK_reset && have_sync) ? SpeedBits[1:0] : 2'b0;
 // decode PTT from PowerSDR. Held in Rx_control_0[0]
 
 wire PTT_out;
-assign PTT_out = have_sync ? Rx_control_0[0] : 1'b0;
+assign PTT_out = have_sync ? Rx_control_0[0] : 1'b0;  // Turn PTT off if sync lost
+
+// decode AK5394A speed 
+/*
+        The speed the AK5394A runs at, either 192k,96k or 48k is set by
+        the PC by decoding Rx_control_1 when Rx_control_0[7:1] are all zero. Rx_control_1 decodes as
+        follows:
+
+        Rx_control_1 = 8'bxxxx_xx00  - 48kHz
+        Rx_control_1 = 8'bxxxx_xx01  - 96kHz
+        Rx_control_1 = 8'bxxxx_xx10  - 192kHz
+
+*/
+
+// Can only change  AK5394A speed on posedge BCLK - I found out the hard way!
+
+always @ (posedge BCLK)
+begin
+	if (!AK_reset)							// force speed to 48Khz on AK reset
+		{DFS1,DFS0} <= 2'b00;
+	else if (Rx_control_0[7:1] == 7'h00)
+		{DFS1,DFS0} <= Rx_control_1[1:0];
+end
+
+// decode frequency for Mercury and Penelope 
+/*
+		The current frequency is set by the PC by decoding 
+		Rx_control_1... Rx_control_4 when Rx_control_0[7:1] = 7'b0000_001
+*/
+
+assign frequency = (Rx_control_0[7:1] == 7'b0000_001)? {Rx_control_1, Rx_control_2, Rx_control_3, Rx_control_4} : frequency;
+
+		 
 
 
 //////////////////////////////////////////////////////////////
@@ -703,7 +740,7 @@ wire write_full;                 // high when tx side of fifo is full
 wire [11:0] Rx_used;             // how many bytes in FX2 side Rx fifo
 wire [11:0] Rx_used_rdside;  	 // read side count
 
-Rx_fifo Rx_fifo(.wrclk (SLRD),.rdreq (fifo_enable),.rdclk (BCLK),.wrreq (1'b1),
+Rx_fifo Rx_fifo(.wrclk (SLRD),.rdreq (fifo_enable),.rdclk (BCLK),.wrreq (1'b1), 
                 .data (Rx_register),.q (Rx_data), .wrfull (write_full),.wrusedw(Rx_used),
                 .rdusedw(Rx_used_rdside)
                 );
@@ -714,7 +751,7 @@ Rx_fifo Rx_fifo(.wrclk (SLRD),.rdreq (fifo_enable),.rdclk (BCLK),.wrreq (1'b1),
 //
 //////////////////////////////////////////////////////////////
 
-Tx_fifo         Tx_fifo(.wrclk (BCLK),.rdreq (1'b1),.rdclk (Tx_read_clock),.wrreq (data_flag),
+Tx_fifo         Tx_fifo(.wrclk (BCLK),.rdreq (1'b1),.rdclk (Tx_read_clock),.wrreq (data_flag), 
                                 .data (register),.rdempty (Tx_rdempty), .wrempty (Tx_write_empty),
                                 .wrfull (),.q (Tx_register), .wrusedw(write_used));
 
@@ -898,6 +935,11 @@ reg [15:0] Q_Data;
 reg fifo_enable;                        // controls reading of dual clock fifo
 reg [11:0] synced_Rx_used;              // how may bytes in FX2 side Rx fifos synced to BCLK
 reg [6:0] byte_count;                   // counts number of times round loop
+reg [7:0] temp_Rx_control_0;            // temp storage for control data    
+reg [7:0] temp_Rx_control_1;                
+reg [7:0] temp_Rx_control_2;                
+reg [7:0] temp_Rx_control_3; 
+reg [7:0] temp_Rx_control_4;                
 reg [7:0] Rx_control_0;                 // control C0 from PC, MOX active if bit 0 set
 reg [7:0] Rx_control_1;                 // control C1 from PC, decode bits 1,0 for A/D speed setting
 reg [7:0] Rx_control_2;                 // control C2 from PC
@@ -961,7 +1003,7 @@ case(state_PWM)
 // state 4 - look for sync again - if true continue else start again
   4: begin
                 if (Rx_data[15:8] == 8'h7F)begin
-                        Rx_control_0 <= Rx_data[7:0];                   // We have sync so get Rx_control_0
+                        temp_Rx_control_0 <= Rx_data[7:0];                   // We have sync so get Rx_control_0
                         have_sync <= 1'b1;                              // toggle sync LED.
                         state_PWM <= 5;
                 end
@@ -969,25 +1011,14 @@ case(state_PWM)
          end
 // state 5 - get Rx_control_1 & Rx_control_2
   5: begin
-                Rx_control_1 <= Rx_data[15:8];
-                Rx_control_2 <= Rx_data[7:0];
-				if ( Rx_control_0[7:1] == 7'h00  ) begin   //set speed bits register if Rx0 indicates speed in Rx1
-					SpeedBits[1:0] <= Rx_data[9:8]; 
-				end 
-				if (Rx_control_0[7:1] == 7'b0000_001)	   // get frequency if Rx0 is valid 
-				begin
-				frequency[31:16]<= Rx_data;	
-				end
+                temp_Rx_control_1 <= Rx_data[15:8];
+                temp_Rx_control_2 <= Rx_data[7:0];
                 state_PWM <= 6;
         end
 // state 6 - get Rx_control_3 & Rx_control_4
   6: begin
-                Rx_control_3 <= Rx_data[15:8];
-                Rx_control_4 <= Rx_data[7:0];
-				if (Rx_control_0[7:1] == 7'b0000_001)	  // get balance of frequency
-				begin
-				frequency[15:0]<= Rx_data;	
-				end
+                temp_Rx_control_3 <= Rx_data[15:8];
+                temp_Rx_control_4 <= Rx_data[7:0];
                 state_PWM <= 7;
                 end
 // state 7 - get Left audio
@@ -1011,20 +1042,23 @@ case(state_PWM)
                 Q_PWM <= Rx_data;
                 state_PWM <= 11;
                 end
-// state 11 - check that LRCLK is low
+// state 11 - check that CLRCLK is high
   11: begin
                 fifo_enable <= 1'b0;                                    // disable read of Rx_FIFO whilst we wait
-                if (CLRCLK) state_PWM <= 11;                            // wait for A/D LRCLK to go low so we are in sync
+                if (!CLRCLK) state_PWM <= 11;                            // wait for A/D LRCLK to go low so we are in sync
             else state_PWM <= 12;
            end
-// state 12 - wait for positive edge of LRCLK
+// state 12 - wait for negative edge of CLRCLK then latch all control data at the same time
   12: begin
-                if (CLRCLK)                                             // wait for A/D LRCLK to go high so we are in sync
+                if (!CLRCLK)                                             // wait for A/D CLRCLK to go low so we are in sync
                 begin
                         byte_count <= byte_count + 1'b1;
-                        //I_Data[15:0] <=  I_PWM[15:0];                 // set up I D/A data
-                        //Q_Data[15:0] <=  Q_PWM[15:0];                 // set up Q D/A data
-                        state_PWM <= 13;
+						Rx_control_0 <= temp_Rx_control_0;
+						Rx_control_1 <= temp_Rx_control_1;
+						Rx_control_2 <= temp_Rx_control_2;
+						Rx_control_3 <= temp_Rx_control_3;
+						Rx_control_4 <= temp_Rx_control_4;
+					    state_PWM <= 13;
                 end
                 else state_PWM <= 12;
           end
@@ -1057,7 +1091,7 @@ end
 	
 	<1 bit PTT><4 bits address><32 bits frequency><4 bits band><7 bits OC><1 bit mode> 
 	
-	for a total of 49 bits. Frequency format is the DDC data word i.e. FREQ/2^32/Clock and 
+	for a total of 49 bits. Frequency format is the DDC data word i.e. FREQ x 2^32/Clock and 
 	OC is the open collector data on Penelope. The band data decodes as follows:
 	
 	0000 160m
@@ -1090,7 +1124,7 @@ wire [3:0] CC_address;			// C&C address, fixed at 0 for now
 wire [3:0] band;				// current band, decodes as above
 wire [6:0] OC;					// Open Collector outputs on Penelope board 
 wire mode;						// Mode, 0 for I and Q, 1 for phase and envelope
-reg  [31:0]frequency;
+wire  [31:0]frequency;
 
 
 // dummy data for testing
@@ -1193,12 +1227,14 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
-assign DEBUG_LED0 = ~write_full;            // LED D0 on when Rx fifo is full.
-assign DEBUG_LED1 = ~EP6_ready;             // LED D1 on when we can write to EP6
+//assign DEBUG_LED0 = ~write_full;            // LED D0 on when Rx fifo is full.
+//assign DEBUG_LED1 = ~EP6_ready;             // LED D1 on when we can write to EP6
 assign DEBUG_LED2 = ~have_sync;             // LED D2 toggles each time we get sync
 //assign DEBUG_LED3 = ~EP2_has_data;          // LED D3 on when EP2 has data 
 assign DEBUG_LED3 = ~PTT_out;          
 
+assign DEBUG_LED0 = ~DFS0;            
+assign DEBUG_LED1 = ~DFS1;             
 
 endmodule
 
