@@ -1,5 +1,5 @@
 Assembler report for Ozy_Janus
-Fri Mar 09 22:36:00 2007
+Sun Apr 08 16:31:52 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -10,9 +10,9 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Ozy_Janus.sof
-  6. Assembler Device Options: E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Ozy_Janus.pof
-  7. Assembler Device Options: E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Ozy_Janus.rbf
+  5. Assembler Device Options: C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.sof
+  6. Assembler Device Options: C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.pof
+  7. Assembler Device Options: C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.rbf
   8. Assembler Messages
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Fri Mar 09 22:36:00 2007 ;
+; Assembler Status      ; Successful - Sun Apr 08 16:31:52 2007 ;
 ; Revision Name         ; Ozy_Janus                             ;
 ; Top-level Entity Name ; Ozy_Janus                             ;
 ; Family                ; Cyclone II                            ;
@@ -77,48 +77,48 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+----------+---------------+
 
 
-+---------------------------------------------------------------------------+
-; Assembler Generated Files                                                 ;
-+---------------------------------------------------------------------------+
-; File Name                                                                 ;
-+---------------------------------------------------------------------------+
-; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Ozy_Janus.sof ;
-; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Ozy_Janus.pof ;
-; E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Ozy_Janus.rbf ;
-+---------------------------------------------------------------------------+
++--------------------------------------------+
+; Assembler Generated Files                  ;
++--------------------------------------------+
+; File Name                                  ;
++--------------------------------------------+
+; C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.sof ;
+; C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.pof ;
+; C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.rbf ;
++--------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------+
-; Assembler Device Options: E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Ozy_Janus.sof ;
-+----------------+------------------------------------------------------------------------------------+
-; Option         ; Setting                                                                            ;
-+----------------+------------------------------------------------------------------------------------+
-; Device         ; EP2C8Q208C8                                                                        ;
-; JTAG usercode  ; 0xFFFFFFFF                                                                         ;
-; Checksum       ; 0x0017C665                                                                         ;
-+----------------+------------------------------------------------------------------------------------+
++----------------------------------------------------------------------+
+; Assembler Device Options: C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.sof ;
++----------------+-----------------------------------------------------+
+; Option         ; Setting                                             ;
++----------------+-----------------------------------------------------+
+; Device         ; EP2C8Q208C8                                         ;
+; JTAG usercode  ; 0xFFFFFFFF                                          ;
+; Checksum       ; 0x0018B71D                                          ;
++----------------+-----------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------+
-; Assembler Device Options: E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Ozy_Janus.pof ;
-+--------------------+--------------------------------------------------------------------------------+
-; Option             ; Setting                                                                        ;
-+--------------------+--------------------------------------------------------------------------------+
-; Device             ; EPCS4                                                                          ;
-; JTAG usercode      ; 0x00000000                                                                     ;
-; Checksum           ; 0x06D9B910                                                                     ;
-; Compression Ratio  ; 2                                                                              ;
-+--------------------+--------------------------------------------------------------------------------+
++----------------------------------------------------------------------+
+; Assembler Device Options: C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.pof ;
++--------------------+-------------------------------------------------+
+; Option             ; Setting                                         ;
++--------------------+-------------------------------------------------+
+; Device             ; EPCS4                                           ;
+; JTAG usercode      ; 0x00000000                                      ;
+; Checksum           ; 0x06DAD9A7                                      ;
+; Compression Ratio  ; 2                                               ;
++--------------------+-------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------+
-; Assembler Device Options: E:/wjt/radio/projects/Ozy/FPGA/OzyV2-JanusV2-SVN-Live-Mar04/Ozy_Janus.rbf ;
-+---------------------+-------------------------------------------------------------------------------+
-; Option              ; Setting                                                                       ;
-+---------------------+-------------------------------------------------------------------------------+
-; Raw Binary File     ;                                                                               ;
-;  Compression Ratio  ; 2                                                                             ;
-+---------------------+-------------------------------------------------------------------------------+
++----------------------------------------------------------------------+
+; Assembler Device Options: C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.rbf ;
++---------------------+------------------------------------------------+
+; Option              ; Setting                                        ;
++---------------------+------------------------------------------------+
+; Raw Binary File     ;                                                ;
+;  Compression Ratio  ; 2                                              ;
++---------------------+------------------------------------------------+
 
 
 +--------------------+
@@ -127,13 +127,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Fri Mar 09 22:35:43 2007
+    Info: Processing started: Sun Apr 08 16:31:44 2007
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Allocated 128 megabytes of memory during processing
-    Info: Processing ended: Fri Mar 09 22:36:00 2007
-    Info: Elapsed time: 00:00:17
+    Info: Processing ended: Sun Apr 08 16:31:52 2007
+    Info: Elapsed time: 00:00:08
 
 
