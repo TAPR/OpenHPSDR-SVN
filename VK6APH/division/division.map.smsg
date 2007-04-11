@@ -1,0 +1,15 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Tue Apr 10 13:00:48 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off division -c division
+Warning (10227): Verilog HDL Port Declaration warning at division.v(8): data type declaration for "band" declares packed dimensions but the port declaration declaration does not
+Info (10151): Verilog HDL Declaration information at division.v(12): "band" is declared here
+Error (10170): Verilog HDL syntax error at division.v(31) near text "=" File: C:/HPSDR/trunk/VK6APH/division/division.v Line: 31
+Error (10170): Verilog HDL syntax error at division.v(38) near text "<";  expecting "<=", or "=" File: C:/HPSDR/trunk/VK6APH/division/division.v Line: 38
+Error (10112): Ignored design unit "division" at division.v(4) due to previous errors File: C:/HPSDR/trunk/VK6APH/division/division.v Line: 4
+Info: Found 0 design units, including 0 entities, in source file division.v
+Error: Quartus II Analysis & Synthesis was unsuccessful. 3 errors, 1 warning
+    Info: Allocated 116 megabytes of memory during processing
+    Error: Processing ended: Tue Apr 10 13:00:48 2007
+    Error: Elapsed time: 00:00:00
