@@ -1,5 +1,5 @@
 Assembler report for division
-Wed Apr 11 13:34:19 2007
+Wed Apr 11 20:52:52 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -39,11 +39,11 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Wed Apr 11 13:34:19 2007 ;
+; Assembler Status      ; Successful - Wed Apr 11 20:52:52 2007 ;
 ; Revision Name         ; division                              ;
 ; Top-level Entity Name ; division                              ;
-; Family                ; Stratix II                            ;
-; Device                ; EP2S15F672I4                          ;
+; Family                ; Cyclone II                            ;
+; Device                ; EP2C8Q208C8                           ;
 +-----------------------+---------------------------------------+
 
 
@@ -72,7 +72,7 @@ applicable agreement for further details.
 ; Hexadecimal Output File count direction                                        ; Up       ; Up            ;
 ; Release clears before tri-states                                               ; Off      ; Off           ;
 ; Auto-restart configuration after error                                         ; On       ; On            ;
-; Maintain Compatibility with All Stratix II MRAM Versions                       ; Off      ; Off           ;
+; Maintain Compatibility with All Cyclone II M4K Versions                        ; On       ; On            ;
 ; Use smart compilation                                                          ; Off      ; Off           ;
 +--------------------------------------------------------------------------------+----------+---------------+
 
@@ -93,9 +93,9 @@ applicable agreement for further details.
 +----------------+------------------------------------------------------+
 ; Option         ; Setting                                              ;
 +----------------+------------------------------------------------------+
-; Device         ; EP2S15F672I4                                         ;
+; Device         ; EP2C8Q208C8                                          ;
 ; JTAG usercode  ; 0xFFFFFFFF                                           ;
-; Checksum       ; 0x0028D012                                           ;
+; Checksum       ; 0x000DB347                                           ;
 +----------------+------------------------------------------------------+
 
 
@@ -104,9 +104,9 @@ applicable agreement for further details.
 +--------------------+--------------------------------------------------+
 ; Option             ; Setting                                          ;
 +--------------------+--------------------------------------------------+
-; Device             ; EPC16                                            ;
-; JTAG usercode      ; 0xFFFFFFFF                                       ;
-; Checksum           ; 0x1EF1ADAF                                       ;
+; Device             ; EPCS4                                            ;
+; JTAG usercode      ; 0x00000000                                       ;
+; Checksum           ; 0x06EC7D6A                                       ;
 ; Compression Ratio  ; 3                                                ;
 +--------------------+--------------------------------------------------+
 
@@ -127,13 +127,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Wed Apr 11 13:34:08 2007
+    Info: Processing started: Wed Apr 11 20:52:44 2007
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off division -c division
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Allocated 151 megabytes of memory during processing
-    Info: Processing ended: Wed Apr 11 13:34:19 2007
-    Info: Elapsed time: 00:00:11
+    Info: Allocated 125 megabytes of memory during processing
+    Info: Processing ended: Wed Apr 11 20:52:52 2007
+    Info: Elapsed time: 00:00:08
 
 

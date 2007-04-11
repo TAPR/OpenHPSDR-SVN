@@ -17,7 +17,17 @@ module division(quotient,ready,dividend,divider,clk);
 
    
 //   wire [63:0]   quotient = qr[63:0];
-   wire [19:0]   quotient = qr[31:12];  // take top 20 bits for CORDIC
+//   wire [19:0]   quotient = qr[31:12];  // take top 20 bits for CORDIC
+
+   reg [19:0] quotient;
+
+   always @ (negedge clk)
+   begin
+		if (ready)
+			quotient <= qr[31:12];
+   		else 
+			quotient <= quotient;
+	end
 
 
 
@@ -40,7 +50,7 @@ module division(quotient,ready,dividend,divider,clk);
         if( diff[32] )
           qr = {qr[94:0],1'd0};      // negative so use qr shifted left, result = 0
         else
-          qr = {diff[32:0],qr[62:0],1'd1}; // positive so use  diff shifted left, result = 1
+          qr = {diff[31:0],qr[62:0],1'd1}; // positive so use  diff shifted left, result = 1
         
         bits = bits - 1'b1;
 

@@ -23,8 +23,8 @@
 # and any changes you make may be lost or overwritten.
 
 
-set_global_assignment -name DEVICE EP2S15F672I4
-set_global_assignment -name FAMILY "Stratix II"
+set_global_assignment -name DEVICE EP2C8Q208C8
+set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name TOP_LEVEL_ENTITY division
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 6.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "09:53:56  APRIL 10, 2007"
@@ -40,5 +40,7 @@ set_global_assignment -name VERILOG_FILE division.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE ../../../../altera/61/division.vwf
 set_global_assignment -name VECTOR_WAVEFORM_FILE division.vwf
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE division.vwf
-set_global_assignment -name ENABLE_ADVANCED_IO_TIMING OFF
-set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS OUTPUT DRIVING AN UNSPECIFIED SIGNAL"
+set_global_assignment -name FMAX_REQUIREMENT "12.5 MHz"
+set_global_assignment -name FMAX_REQUIREMENT "12.5 MHz" -section_id "Mercury clock"
+set_instance_assignment -name CLOCK_SETTINGS "Mercury clock" -to clk
