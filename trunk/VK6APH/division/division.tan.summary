@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 6.897 ns
-From           : divider[0]
-To             : qr[74]
+Actual Time    : 11.231 ns
+From           : divider[1]
+To             : qr[85]
 From Clock     : --
 To Clock       : clk
 Failed Paths   : 0
@@ -15,8 +15,8 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 9.087 ns
-From           : bits[6]
+Actual Time    : 11.183 ns
+From           : bits[3]
 To             : ready
 From Clock     : clk
 To Clock       : --
@@ -25,19 +25,29 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -2.832 ns
-From           : dividend[1]
-To             : qr[33]
+Actual Time    : 0.708 ns
+From           : dividend[14]
+To             : qr[46]
 From Clock     : --
 To Clock       : clk
 Failed Paths   : 0
 
 Type           : Clock Setup: 'clk'
-Slack          : N/A
-Required Time  : None
-Actual Time    : 233.26 MHz ( period = 4.287 ns )
-From           : qr[69]
-To             : qr[74]
+Slack          : 34.207 ns
+Required Time  : 12.50 MHz ( period = 80.000 ns )
+Actual Time    : 86.31 MHz ( period = 11.586 ns )
+From           : bits[3]
+To             : quotient[19]~reg0
+From Clock     : clk
+To Clock       : clk
+Failed Paths   : 0
+
+Type           : Clock Hold: 'clk'
+Slack          : 0.739 ns
+Required Time  : 12.50 MHz ( period = 80.000 ns )
+Actual Time    : N/A
+From           : qr[6]
+To             : qr[7]
 From Clock     : clk
 To Clock       : clk
 Failed Paths   : 0
