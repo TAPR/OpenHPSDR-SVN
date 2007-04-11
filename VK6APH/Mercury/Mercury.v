@@ -36,6 +36,8 @@
 	20 Jan  2007 - Added dc offset removal at output of CIC 
 	19 Mar  2007 - Modified to run from 125MHz clock
 	25 Mar  2007 - Modified to use Harmon CORDIC
+	26 Mar  2007 - Modified to use 18 bits from CORDIC into CIC filter
+	11 Apr  2007 - Modified to use frequency in Hz from PowerSDR
 		
 	
 */
@@ -215,7 +217,14 @@ always @ (posedge clock) begin
 	end
 end 
 
-assign temp_ADC = ADC;
+//assign temp_ADC = ADC;
+// sync ADC data to 125MHz clock 
+
+always @ (posedge clock)
+begin
+temp_ADC <= ADC;
+end
+
 
 // A Digital Output Randomizer is fitted to the LT2208. This complements bits 15 to 1 if 
 // bit 0 is 1. This helps to reduce any pickup by the A/D input of the digital outputs. 
@@ -238,7 +247,6 @@ assign temp_ADC = ADC;
 //
 //		CLOCKS
 //
-//
 //////////////////////////////////////////////////////////////
 
 // Generate ~48kHz clock for PWM ADC
@@ -252,36 +260,72 @@ begin
 		PWM_clock <= ~PWM_clock;
 		PWM_count <= 0;
 		end
-	else PWM_count <= PWM_count + 11'b1;
+	else PWM_count <= PWM_count + 1'b1;
 end
+
+// Generate PCLK_12MHZ for Atlas bus
+
+reg PCLK_12MHZ;
+reg PCLK_count;
+always @ (posedge clock)
+begin
+	if (PCLK_count == 4)  // divide 125MHz clock by 10 to give 12.5MHz
+		begin
+		PCLK_12MHZ <= ~PCLK_12MHZ;
+		PCLK_count <= 0;
+		end
+	else PCLK_count <= PCLK_count + 1'b1;
+end
+		
+
+
+//////////////////////////////////////////////////////////////
+//
+//		Convert frquency to phase  
+//
+//////////////////////////////////////////////////////////////
+
+/*	
+	Calculates  frequency * 2^32 /125e6
+	Each calculation takes ~ 6uS @ 12.5MHz
+
+*/
+
+wire [31:0]freq;
+wire ready;
+always @ (posedge ready)
+begin
+	frequency <= frequency_HZ;
+end 
+
+ division division(.quotient(freq),.ready(ready),.dividend(frequency),.divider(32'd125000000),.clk(PCLK_12MHZ));
+
 
 // sync frequecy change to 125MHz clock
 reg [31:0]sync_frequency;
-
 always @ (posedge clock)
 begin
-	sync_frequency <= frequency;
+	sync_frequency <= freq;
 end
 
 //////////////////////////////////////////////////////////////
 //
 //		CORDIC NCO 
 //
-//
 //////////////////////////////////////////////////////////////
 
-//Code rotates A/D input at set frequency  and produces I & Q /
+//Code rotates A/D input at set frequency  and produces I & Q 
 
 // IMPORTANT: set Iin to be 16'd0 since we only have a single input 
 
-wire [15:0]i_out;
-wire [15:0]q_out;
-wire [15:0]temp_ADC;
+wire [17:0]i_out;
+wire [17:0]q_out;
+//wire [15:0]temp_ADC;
+reg  [15:0]temp_ADC;
 
 	
-	//parameter FREQ = 32'h1D0FA58F; // 14.190MHz
-	wire	[31:0] phase;
-	reg [31:0]frequency;
+wire	[31:0] phase;
+reg [31:0]frequency;
 	
 	//assign frequency = 32'h1D0FA58F; // 14.190MHz
 
@@ -309,34 +353,14 @@ cordic_16  cordic (.in(temp_ADC),.iout(i_out),.qout(q_out),.ain(phase[31:12]),.c
 //
 //		CIC Filter - designed using MatLab
 //
-//
 ///////////////////////////////////////////////////////////////
 
 // -------------------------------------------------------------
 //
-// Module: filter_20
-//
-// HDL Code Generation Options:
-//
-// TargetLanguage: Verilog
-// Name: filter_14
-// TargetDirectory: C:\DOCUME~1\phil\LOCALS~1\Temp\tp124049\hdlsrc
-// SerialPartition: -1
-// CastBeforeSum: On
-//
-// Filter Settings:
-//
-// Discrete-Time FIR Multirate Filter (real)
-// -----------------------------------------
-// Filter Structure        : Cascaded Integrator-Comb Decimator
-// Decimation Factor       : 640
-// Differential Delay      : 1
-// Number of Sections      : 4
-// Stable                  : Yes
-// Linear Phase            : Yes (Type 1)
-//
-// Input                   : s16,15
-// Output                  : s24,-13                : s24,-21
+// Module: filter_21
+// 18 bit input, 24 bit output
+// decimate by 640 
+
 
 wire [23:0]cic_out_i;
 wire [23:0]cic_out_q;
@@ -344,8 +368,8 @@ wire ce_out_i;				// narrow pulse when data available
 wire ce_out_q;				// narrow pulse when data available
 
 
-filter_20 cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(i_out),.filter_out(cic_out_i),.ce_out(ce_out_i));
-filter_20 cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(q_out),.filter_out(cic_out_q),.ce_out(ce_out_q));
+filter_21 cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(i_out),.filter_out(cic_out_i),.ce_out(ce_out_i));
+filter_21 cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(q_out),.filter_out(cic_out_q),.ce_out(ce_out_q));
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -702,6 +726,7 @@ reg [7:0] Rx_control_3;                 // control C3 from PC
 reg [7:0] Rx_control_4;                 // control C4 from PC
 reg [8:0]sync_count;
 reg have_sync;                          // high when we have sync
+reg [31:0] frequency_HZ;					// frqenency in HZ from PowerSDR
 
 
 always @ (negedge clock_8)
@@ -735,7 +760,7 @@ case(state_PWM)
   2: begin
 		if (Rx_control_0[7:1] == 7'b0000_001)
 		begin
-			frequency[31:16]<= Rx_data;	
+			frequency_HZ[31:16]<= Rx_data;	
 		end
         state_PWM <= 3;
      end
@@ -743,7 +768,7 @@ case(state_PWM)
   3: begin
 		if (Rx_control_0[7:1] == 7'b0000_001)
 		begin
-			frequency[15:0]<= Rx_data;	
+			frequency_HZ[15:0]<= Rx_data;	
 		end
         state_PWM <= 4;
 	end
