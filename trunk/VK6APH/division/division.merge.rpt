@@ -1,0 +1,131 @@
+Partition Merge report for division
+Wed Apr 11 13:33:56 2007
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Partition Merge Summary
+  3. Partition Merge Netlist Types Used
+  4. Partition Merge Partition Statistics
+  5. Partition Merge Resource Usage Summary
+  6. Partition Merge Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------+
+; Partition Merge Summary                                                 ;
++-------------------------------+-----------------------------------------+
+; Partition Merge Status        ; Successful - Wed Apr 11 13:33:56 2007   ;
+; Quartus II Version            ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
+; Revision Name                 ; division                                ;
+; Top-level Entity Name         ; division                                ;
+; Family                        ; Stratix II                              ;
+; Logic utilization             ; N/A                                     ;
+;     Combinational ALUTs       ; 76                                      ;
+;     Dedicated logic registers ; 104                                     ;
+; Total registers               ; 104                                     ;
+; Total pins                    ; 86                                      ;
+; Total virtual pins            ; 0                                       ;
+; Total block memory bits       ; 0                                       ;
+; DSP block 9-bit elements      ; 0                                       ;
+; Total PLLs                    ; 0                                       ;
+; Total DLLs                    ; 0                                       ;
++-------------------------------+-----------------------------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Partition Merge Netlist Types Used                                                    ;
++----------------+------------------------+------------------------+--------------------+
+; Partition Name ; Netlist Type Used      ; Netlist Type Requested ; Partition Contents ;
++----------------+------------------------+------------------------+--------------------+
+; Top            ; Post-Synthesis Netlist ; Post-Synthesis Netlist ;                    ;
++----------------+------------------------+------------------------+--------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Partition Merge Partition Statistics                                                                                                                                                                                                                                                                            ;
++----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
+; Partition Name ; Total combinational functions ; normal mode ; arithmetic mode ; Total registers ; Input Ports ; Output Ports ; Registered Input Ports ; Registered Output Ports ; Unconnected Input Ports ; Unconnected Output Ports ; Driven Ground Input Ports ; Driven VCC Input Ports ; Partition Contents ;
++----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
+; Top            ; 77                            ; 36          ; 8               ; 104             ; 65          ; 21           ; 33                     ; 20                      ; N/A                     ; N/A                      ; N/A                       ; N/A                    ;                    ;
++----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
+
+
++----------------------------------------------------------+
+; Partition Merge Resource Usage Summary                   ;
++-----------------------------------------------+----------+
+; Resource                                      ; Usage    ;
++-----------------------------------------------+----------+
+; Estimated ALUTs Used                          ; 76       ;
+; Dedicated logic registers                     ; 104      ;
+;                                               ;          ;
+; Estimated ALUTs Unavailable                   ; 1        ;
+;                                               ;          ;
+; Total combinational functions                 ; 76       ;
+; Combinational ALUT usage by number of inputs  ;          ;
+;     -- 7 input functions                      ; 0        ;
+;     -- 6 input functions                      ; 0        ;
+;     -- 5 input functions                      ; 1        ;
+;     -- 4 input functions                      ; 1        ;
+;     -- <=3 input functions                    ; 74       ;
+;                                               ;          ;
+; Combinational ALUTs by mode                   ;          ;
+;     -- normal mode                            ; 35       ;
+;     -- extended LUT mode                      ; 0        ;
+;     -- arithmetic mode                        ; 8        ;
+;     -- shared arithmetic mode                 ; 33       ;
+;                                               ;          ;
+; Estimated ALUT/register pairs used            ; 104      ;
+;                                               ;          ;
+; Total registers                               ; 104      ;
+;     -- Dedicated logic registers              ; 104      ;
+;     -- I/O registers                          ; 0        ;
+;                                               ;          ;
+; Estimated ALMs:  partially or completely used ; 52       ;
+;                                               ;          ;
+; I/O pins                                      ; 86       ;
+; Maximum fan-out node                          ; WideNor0 ;
+; Maximum fan-out                               ; 104      ;
+; Total fan-out                                 ; 582      ;
+; Average fan-out                               ; 2.19     ;
++-----------------------------------------------+----------+
+
+
++--------------------------+
+; Partition Merge Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Partition Merge
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Wed Apr 11 13:33:56 2007
+Info: Command: quartus_cdb --read_settings_files=off --write_settings_files=off division -c division --merge=on
+Info: Using synthesis netlist for partition "Top"
+Info: Netlist merging resolved 1 partition(s) out of the 1 partition(s) found
+Info: Quartus II Partition Merge was successful. 0 errors, 0 warnings
+    Info: Allocated 95 megabytes of memory during processing
+    Info: Processing ended: Wed Apr 11 13:33:56 2007
+    Info: Elapsed time: 00:00:00
+
+

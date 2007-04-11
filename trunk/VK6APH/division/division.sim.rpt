@@ -1,0 +1,700 @@
+Simulator report for division
+Wed Apr 11 13:34:30 2007
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. Coverage Summary
+  6. Complete 1/0-Value Coverage
+  7. Missing 1-Value Coverage
+  8. Missing 0-Value Coverage
+  9. Simulator INI Usage
+ 10. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------+
+; Simulator Summary                          ;
++-----------------------------+--------------+
+; Type                        ; Value        ;
++-----------------------------+--------------+
+; Simulation Start Time       ; 0 ps         ;
+; Simulation End Time         ; 10.0 us      ;
+; Simulation Netlist Size     ; 303 nodes    ;
+; Simulation Coverage         ;      64.71 % ;
+; Total Number of Transitions ; 7433         ;
+; Simulation Breakpoints      ; 0            ;
+; Family                      ; Stratix II   ;
+; Device                      ; EP2S15F672I4 ;
++-----------------------------+--------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                        ;
++--------------------------------------------------------------------------------------------+--------------+---------------+
+; Option                                                                                     ; Setting      ; Default Value ;
++--------------------------------------------------------------------------------------------+--------------+---------------+
+; Simulation mode                                                                            ; Timing       ; Timing        ;
+; Start time                                                                                 ; 0 ns         ; 0 ns          ;
+; Simulation results format                                                                  ; CVWF         ;               ;
+; Vector input source                                                                        ; division.vwf ;               ;
+; Add pins automatically to simulation output waveforms                                      ; Off          ; On            ;
+; Check outputs                                                                              ; Off          ; Off           ;
+; Report simulation coverage                                                                 ; On           ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On           ; On            ;
+; Display missing 1-value coverage report                                                    ; On           ; On            ;
+; Display missing 0-value coverage report                                                    ; On           ; On            ;
+; Detect setup and hold time violations                                                      ; Off          ; Off           ;
+; Detect glitches                                                                            ; Off          ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off          ; Off           ;
+; Generate Signal Activity File                                                              ; Off          ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off          ; Off           ;
+; Group bus channels in simulation results                                                   ; Off          ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On           ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE   ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off          ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off          ;               ;
+; Glitch Filtering                                                                           ; Off          ; Off           ;
++--------------------------------------------------------------------------------------------+--------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II to view the waveform report data.
+
+
++--------------------------------------------------------------------+
+; Coverage Summary                                                   ;
++-----------------------------------------------------+--------------+
+; Type                                                ; Value        ;
++-----------------------------------------------------+--------------+
+; Total coverage as a percentage                      ;      64.71 % ;
+; Total nodes checked                                 ; 303          ;
+; Total output ports checked                          ; 374          ;
+; Total output ports with complete 1/0-value coverage ; 242          ;
+; Total output ports with no 1/0-value coverage       ; 132          ;
+; Total output ports with no 1-value coverage         ; 132          ;
+; Total output ports with no 0-value coverage         ; 132          ;
++-----------------------------------------------------+--------------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                  ;
++-----------------------------+-----------------------------+------------------+
+; Node Name                   ; Output Port Name            ; Output Port Type ;
++-----------------------------+-----------------------------+------------------+
+; |division|qr[12]            ; |division|qr[12]            ; regout           ;
+; |division|qr[13]            ; |division|qr[13]            ; regout           ;
+; |division|qr[14]            ; |division|qr[14]            ; regout           ;
+; |division|qr[15]            ; |division|qr[15]            ; regout           ;
+; |division|qr[16]            ; |division|qr[16]            ; regout           ;
+; |division|qr[17]            ; |division|qr[17]            ; regout           ;
+; |division|qr[18]            ; |division|qr[18]            ; regout           ;
+; |division|qr[19]            ; |division|qr[19]            ; regout           ;
+; |division|qr[20]            ; |division|qr[20]            ; regout           ;
+; |division|qr[21]            ; |division|qr[21]            ; regout           ;
+; |division|qr[22]            ; |division|qr[22]            ; regout           ;
+; |division|qr[23]            ; |division|qr[23]            ; regout           ;
+; |division|qr[24]            ; |division|qr[24]            ; regout           ;
+; |division|qr[25]            ; |division|qr[25]            ; regout           ;
+; |division|qr[26]            ; |division|qr[26]            ; regout           ;
+; |division|qr[27]            ; |division|qr[27]            ; regout           ;
+; |division|qr[28]            ; |division|qr[28]            ; regout           ;
+; |division|bits[4]           ; |division|bits[4]           ; regout           ;
+; |division|bits[0]           ; |division|bits[0]           ; regout           ;
+; |division|bits[3]           ; |division|bits[3]           ; regout           ;
+; |division|bits[2]           ; |division|bits[2]           ; regout           ;
+; |division|bits[1]           ; |division|bits[1]           ; regout           ;
+; |division|bits[5]           ; |division|bits[5]           ; regout           ;
+; |division|qr[11]            ; |division|qr[11]            ; regout           ;
+; |division|Add1~129          ; |division|Add1~129          ; sumout           ;
+; |division|Add1~129          ; |division|Add1~130          ; cout             ;
+; |division|Add1~133          ; |division|Add1~133          ; sumout           ;
+; |division|Add1~133          ; |division|Add1~134          ; cout             ;
+; |division|Add1~137          ; |division|Add1~137          ; sumout           ;
+; |division|Add1~137          ; |division|Add1~138          ; cout             ;
+; |division|Add1~141          ; |division|Add1~141          ; sumout           ;
+; |division|Add1~141          ; |division|Add1~142          ; cout             ;
+; |division|Add1~145          ; |division|Add1~145          ; sumout           ;
+; |division|Add1~145          ; |division|Add1~146          ; cout             ;
+; |division|Add1~149          ; |division|Add1~149          ; sumout           ;
+; |division|Add1~149          ; |division|Add1~150          ; cout             ;
+; |division|Add1~153          ; |division|Add1~153          ; sumout           ;
+; |division|Add1~153          ; |division|Add1~154          ; cout             ;
+; |division|Add1~157          ; |division|Add1~157          ; sumout           ;
+; |division|qr[10]            ; |division|qr[10]            ; regout           ;
+; |division|qr[9]             ; |division|qr[9]             ; regout           ;
+; |division|qr[8]             ; |division|qr[8]             ; regout           ;
+; |division|qr[7]             ; |division|qr[7]             ; regout           ;
+; |division|qr[6]             ; |division|qr[6]             ; regout           ;
+; |division|qr[5]             ; |division|qr[5]             ; regout           ;
+; |division|qr[4]             ; |division|qr[4]             ; regout           ;
+; |division|qr[3]             ; |division|qr[3]             ; regout           ;
+; |division|qr[2]             ; |division|qr[2]             ; regout           ;
+; |division|qr[1]             ; |division|qr[1]             ; regout           ;
+; |division|qr[0]             ; |division|qr[0]             ; regout           ;
+; |division|qr[90]            ; |division|qr[90]            ; regout           ;
+; |division|qr[89]            ; |division|qr[89]            ; regout           ;
+; |division|qr[88]            ; |division|qr[88]            ; regout           ;
+; |division|qr[87]            ; |division|qr[87]            ; regout           ;
+; |division|qr[86]            ; |division|qr[86]            ; regout           ;
+; |division|qr[85]            ; |division|qr[85]            ; regout           ;
+; |division|qr[84]            ; |division|qr[84]            ; regout           ;
+; |division|qr[83]            ; |division|qr[83]            ; regout           ;
+; |division|qr[82]            ; |division|qr[82]            ; regout           ;
+; |division|qr[81]            ; |division|qr[81]            ; regout           ;
+; |division|qr[80]            ; |division|qr[80]            ; regout           ;
+; |division|qr[79]            ; |division|qr[79]            ; regout           ;
+; |division|qr[78]            ; |division|qr[78]            ; regout           ;
+; |division|qr[77]            ; |division|qr[77]            ; regout           ;
+; |division|qr[76]            ; |division|qr[76]            ; regout           ;
+; |division|qr[75]            ; |division|qr[75]            ; regout           ;
+; |division|qr[74]            ; |division|qr[74]            ; regout           ;
+; |division|qr[73]            ; |division|qr[73]            ; regout           ;
+; |division|qr[72]            ; |division|qr[72]            ; regout           ;
+; |division|qr[71]            ; |division|qr[71]            ; regout           ;
+; |division|qr[70]            ; |division|qr[70]            ; regout           ;
+; |division|qr[69]            ; |division|qr[69]            ; regout           ;
+; |division|qr[68]            ; |division|qr[68]            ; regout           ;
+; |division|qr[67]            ; |division|qr[67]            ; regout           ;
+; |division|qr[66]            ; |division|qr[66]            ; regout           ;
+; |division|qr[65]            ; |division|qr[65]            ; regout           ;
+; |division|qr[64]            ; |division|qr[64]            ; regout           ;
+; |division|qr[63]            ; |division|qr[63]            ; regout           ;
+; |division|Add0~473          ; |division|Add0~473          ; sumout           ;
+; |division|Add0~477          ; |division|Add0~477          ; sumout           ;
+; |division|Add0~477          ; |division|Add0~478          ; cout             ;
+; |division|Add0~477          ; |division|Add0~479          ; shareout         ;
+; |division|Add0~481          ; |division|Add0~481          ; sumout           ;
+; |division|Add0~481          ; |division|Add0~482          ; cout             ;
+; |division|Add0~481          ; |division|Add0~483          ; shareout         ;
+; |division|Add0~485          ; |division|Add0~485          ; sumout           ;
+; |division|Add0~485          ; |division|Add0~486          ; cout             ;
+; |division|Add0~485          ; |division|Add0~487          ; shareout         ;
+; |division|Add0~489          ; |division|Add0~489          ; sumout           ;
+; |division|Add0~489          ; |division|Add0~490          ; cout             ;
+; |division|Add0~489          ; |division|Add0~491          ; shareout         ;
+; |division|Add0~493          ; |division|Add0~493          ; sumout           ;
+; |division|Add0~493          ; |division|Add0~494          ; cout             ;
+; |division|Add0~493          ; |division|Add0~495          ; shareout         ;
+; |division|Add0~497          ; |division|Add0~497          ; sumout           ;
+; |division|Add0~497          ; |division|Add0~498          ; cout             ;
+; |division|Add0~501          ; |division|Add0~501          ; sumout           ;
+; |division|Add0~501          ; |division|Add0~502          ; cout             ;
+; |division|Add0~501          ; |division|Add0~503          ; shareout         ;
+; |division|Add0~505          ; |division|Add0~505          ; sumout           ;
+; |division|Add0~505          ; |division|Add0~506          ; cout             ;
+; |division|Add0~509          ; |division|Add0~509          ; sumout           ;
+; |division|Add0~509          ; |division|Add0~510          ; cout             ;
+; |division|Add0~509          ; |division|Add0~511          ; shareout         ;
+; |division|Add0~513          ; |division|Add0~513          ; sumout           ;
+; |division|Add0~513          ; |division|Add0~514          ; cout             ;
+; |division|Add0~513          ; |division|Add0~515          ; shareout         ;
+; |division|Add0~517          ; |division|Add0~517          ; sumout           ;
+; |division|Add0~517          ; |division|Add0~518          ; cout             ;
+; |division|Add0~521          ; |division|Add0~521          ; sumout           ;
+; |division|Add0~521          ; |division|Add0~522          ; cout             ;
+; |division|Add0~525          ; |division|Add0~525          ; sumout           ;
+; |division|Add0~525          ; |division|Add0~526          ; cout             ;
+; |division|Add0~525          ; |division|Add0~527          ; shareout         ;
+; |division|Add0~529          ; |division|Add0~529          ; sumout           ;
+; |division|Add0~529          ; |division|Add0~530          ; cout             ;
+; |division|Add0~533          ; |division|Add0~533          ; sumout           ;
+; |division|Add0~533          ; |division|Add0~534          ; cout             ;
+; |division|Add0~533          ; |division|Add0~535          ; shareout         ;
+; |division|Add0~537          ; |division|Add0~537          ; sumout           ;
+; |division|Add0~537          ; |division|Add0~538          ; cout             ;
+; |division|Add0~541          ; |division|Add0~541          ; sumout           ;
+; |division|Add0~541          ; |division|Add0~542          ; cout             ;
+; |division|Add0~545          ; |division|Add0~545          ; sumout           ;
+; |division|Add0~545          ; |division|Add0~546          ; cout             ;
+; |division|Add0~545          ; |division|Add0~547          ; shareout         ;
+; |division|Add0~549          ; |division|Add0~549          ; sumout           ;
+; |division|Add0~549          ; |division|Add0~550          ; cout             ;
+; |division|Add0~549          ; |division|Add0~551          ; shareout         ;
+; |division|Add0~553          ; |division|Add0~553          ; sumout           ;
+; |division|Add0~553          ; |division|Add0~554          ; cout             ;
+; |division|Add0~557          ; |division|Add0~557          ; sumout           ;
+; |division|Add0~557          ; |division|Add0~558          ; cout             ;
+; |division|Add0~561          ; |division|Add0~561          ; sumout           ;
+; |division|Add0~561          ; |division|Add0~562          ; cout             ;
+; |division|Add0~565          ; |division|Add0~565          ; sumout           ;
+; |division|Add0~565          ; |division|Add0~566          ; cout             ;
+; |division|Add0~565          ; |division|Add0~567          ; shareout         ;
+; |division|Add0~569          ; |division|Add0~569          ; sumout           ;
+; |division|Add0~569          ; |division|Add0~570          ; cout             ;
+; |division|Add0~573          ; |division|Add0~573          ; sumout           ;
+; |division|Add0~573          ; |division|Add0~574          ; cout             ;
+; |division|Add0~577          ; |division|Add0~577          ; sumout           ;
+; |division|Add0~577          ; |division|Add0~578          ; cout             ;
+; |division|Add0~581          ; |division|Add0~581          ; sumout           ;
+; |division|Add0~581          ; |division|Add0~582          ; cout             ;
+; |division|Add0~581          ; |division|Add0~583          ; shareout         ;
+; |division|Add0~585          ; |division|Add0~585          ; sumout           ;
+; |division|Add0~585          ; |division|Add0~586          ; cout             ;
+; |division|Add0~589          ; |division|Add0~589          ; sumout           ;
+; |division|Add0~589          ; |division|Add0~590          ; cout             ;
+; |division|Add0~593          ; |division|Add0~593          ; sumout           ;
+; |division|Add0~593          ; |division|Add0~594          ; cout             ;
+; |division|Add0~597          ; |division|Add0~597          ; sumout           ;
+; |division|Add0~597          ; |division|Add0~598          ; cout             ;
+; |division|Add0~601          ; |division|Add0~601          ; sumout           ;
+; |division|qr[62]            ; |division|qr[62]            ; regout           ;
+; |division|qr[61]            ; |division|qr[61]            ; regout           ;
+; |division|qr[60]            ; |division|qr[60]            ; regout           ;
+; |division|qr[59]            ; |division|qr[59]            ; regout           ;
+; |division|qr[58]            ; |division|qr[58]            ; regout           ;
+; |division|qr[57]            ; |division|qr[57]            ; regout           ;
+; |division|qr[56]            ; |division|qr[56]            ; regout           ;
+; |division|qr[55]            ; |division|qr[55]            ; regout           ;
+; |division|qr[54]            ; |division|qr[54]            ; regout           ;
+; |division|qr[53]            ; |division|qr[53]            ; regout           ;
+; |division|qr[52]            ; |division|qr[52]            ; regout           ;
+; |division|qr[51]            ; |division|qr[51]            ; regout           ;
+; |division|qr[50]            ; |division|qr[50]            ; regout           ;
+; |division|qr[49]            ; |division|qr[49]            ; regout           ;
+; |division|qr[48]            ; |division|qr[48]            ; regout           ;
+; |division|qr[47]            ; |division|qr[47]            ; regout           ;
+; |division|qr[46]            ; |division|qr[46]            ; regout           ;
+; |division|qr[45]            ; |division|qr[45]            ; regout           ;
+; |division|qr[44]            ; |division|qr[44]            ; regout           ;
+; |division|qr[43]            ; |division|qr[43]            ; regout           ;
+; |division|qr[42]            ; |division|qr[42]            ; regout           ;
+; |division|qr[41]            ; |division|qr[41]            ; regout           ;
+; |division|qr[40]            ; |division|qr[40]            ; regout           ;
+; |division|qr[39]            ; |division|qr[39]            ; regout           ;
+; |division|qr[38]            ; |division|qr[38]            ; regout           ;
+; |division|qr[37]            ; |division|qr[37]            ; regout           ;
+; |division|qr[36]            ; |division|qr[36]            ; regout           ;
+; |division|bits[6]           ; |division|bits[6]           ; regout           ;
+; |division|WideNor0~21       ; |division|WideNor0~21       ; combout          ;
+; |division|WideNor0          ; |division|WideNor0          ; combout          ;
+; |division|qr~715            ; |division|qr~715            ; combout          ;
+; |division|qr~717            ; |division|qr~717            ; combout          ;
+; |division|qr~718            ; |division|qr~718            ; combout          ;
+; |division|qr~719            ; |division|qr~719            ; combout          ;
+; |division|qr~720            ; |division|qr~720            ; combout          ;
+; |division|qr~721            ; |division|qr~721            ; combout          ;
+; |division|qr~722            ; |division|qr~722            ; combout          ;
+; |division|qr~723            ; |division|qr~723            ; combout          ;
+; |division|qr~724            ; |division|qr~724            ; combout          ;
+; |division|qr~725            ; |division|qr~725            ; combout          ;
+; |division|qr~726            ; |division|qr~726            ; combout          ;
+; |division|qr~727            ; |division|qr~727            ; combout          ;
+; |division|qr~728            ; |division|qr~728            ; combout          ;
+; |division|qr~729            ; |division|qr~729            ; combout          ;
+; |division|qr~730            ; |division|qr~730            ; combout          ;
+; |division|qr~731            ; |division|qr~731            ; combout          ;
+; |division|qr~732            ; |division|qr~732            ; combout          ;
+; |division|qr~733            ; |division|qr~733            ; combout          ;
+; |division|qr~734            ; |division|qr~734            ; combout          ;
+; |division|qr~735            ; |division|qr~735            ; combout          ;
+; |division|qr~736            ; |division|qr~736            ; combout          ;
+; |division|qr~737            ; |division|qr~737            ; combout          ;
+; |division|qr~738            ; |division|qr~738            ; combout          ;
+; |division|qr~739            ; |division|qr~739            ; combout          ;
+; |division|qr~740            ; |division|qr~740            ; combout          ;
+; |division|qr~741            ; |division|qr~741            ; combout          ;
+; |division|qr~742            ; |division|qr~742            ; combout          ;
+; |division|qr~743            ; |division|qr~743            ; combout          ;
+; |division|qr~744            ; |division|qr~744            ; combout          ;
+; |division|qr~745            ; |division|qr~745            ; combout          ;
+; |division|qr~746            ; |division|qr~746            ; combout          ;
+; |division|Add0~601_wirecell ; |division|Add0~601_wirecell ; combout          ;
+; |division|quotient[0]       ; |division|quotient[0]       ; padio            ;
+; |division|quotient[1]       ; |division|quotient[1]       ; padio            ;
+; |division|quotient[2]       ; |division|quotient[2]       ; padio            ;
+; |division|quotient[3]       ; |division|quotient[3]       ; padio            ;
+; |division|quotient[4]       ; |division|quotient[4]       ; padio            ;
+; |division|quotient[5]       ; |division|quotient[5]       ; padio            ;
+; |division|quotient[6]       ; |division|quotient[6]       ; padio            ;
+; |division|quotient[7]       ; |division|quotient[7]       ; padio            ;
+; |division|quotient[8]       ; |division|quotient[8]       ; padio            ;
+; |division|quotient[9]       ; |division|quotient[9]       ; padio            ;
+; |division|quotient[10]      ; |division|quotient[10]      ; padio            ;
+; |division|quotient[11]      ; |division|quotient[11]      ; padio            ;
+; |division|quotient[12]      ; |division|quotient[12]      ; padio            ;
+; |division|quotient[13]      ; |division|quotient[13]      ; padio            ;
+; |division|quotient[14]      ; |division|quotient[14]      ; padio            ;
+; |division|quotient[15]      ; |division|quotient[15]      ; padio            ;
+; |division|quotient[16]      ; |division|quotient[16]      ; padio            ;
+; |division|ready             ; |division|ready             ; padio            ;
+; |division|clk               ; |division|clk               ; combout          ;
+; |division|clk~clkctrl       ; |division|clk~clkctrl       ; outclk           ;
+; |division|qr[12]~feeder     ; |division|qr[12]~feeder     ; combout          ;
+; |division|qr[11]~feeder     ; |division|qr[11]~feeder     ; combout          ;
+; |division|qr[10]~feeder     ; |division|qr[10]~feeder     ; combout          ;
+; |division|qr[9]~feeder      ; |division|qr[9]~feeder      ; combout          ;
++-----------------------------+-----------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++----------------------------------------------------------------------+
+; Missing 1-Value Coverage                                             ;
++-------------------------+-------------------------+------------------+
+; Node Name               ; Output Port Name        ; Output Port Type ;
++-------------------------+-------------------------+------------------+
+; |division|qr[29]        ; |division|qr[29]        ; regout           ;
+; |division|qr[30]        ; |division|qr[30]        ; regout           ;
+; |division|qr[31]        ; |division|qr[31]        ; regout           ;
+; |division|bits[7]       ; |division|bits[7]       ; regout           ;
+; |division|qr[95]        ; |division|qr[95]        ; regout           ;
+; |division|qr[94]        ; |division|qr[94]        ; regout           ;
+; |division|qr[93]        ; |division|qr[93]        ; regout           ;
+; |division|qr[92]        ; |division|qr[92]        ; regout           ;
+; |division|qr[91]        ; |division|qr[91]        ; regout           ;
+; |division|Add0~473      ; |division|Add0~474      ; cout             ;
+; |division|Add0~473      ; |division|Add0~475      ; shareout         ;
+; |division|Add0~497      ; |division|Add0~499      ; shareout         ;
+; |division|Add0~505      ; |division|Add0~507      ; shareout         ;
+; |division|Add0~517      ; |division|Add0~519      ; shareout         ;
+; |division|Add0~521      ; |division|Add0~523      ; shareout         ;
+; |division|Add0~529      ; |division|Add0~531      ; shareout         ;
+; |division|Add0~537      ; |division|Add0~539      ; shareout         ;
+; |division|Add0~541      ; |division|Add0~543      ; shareout         ;
+; |division|Add0~553      ; |division|Add0~555      ; shareout         ;
+; |division|Add0~557      ; |division|Add0~559      ; shareout         ;
+; |division|Add0~561      ; |division|Add0~563      ; shareout         ;
+; |division|Add0~569      ; |division|Add0~571      ; shareout         ;
+; |division|Add0~573      ; |division|Add0~575      ; shareout         ;
+; |division|Add0~577      ; |division|Add0~579      ; shareout         ;
+; |division|Add0~585      ; |division|Add0~587      ; shareout         ;
+; |division|Add0~589      ; |division|Add0~591      ; shareout         ;
+; |division|Add0~593      ; |division|Add0~595      ; shareout         ;
+; |division|Add0~597      ; |division|Add0~599      ; shareout         ;
+; |division|qr[35]        ; |division|qr[35]        ; regout           ;
+; |division|qr[34]        ; |division|qr[34]        ; regout           ;
+; |division|qr[33]        ; |division|qr[33]        ; regout           ;
+; |division|qr[32]        ; |division|qr[32]        ; regout           ;
+; |division|qr~716        ; |division|qr~716        ; combout          ;
+; |division|quotient[17]  ; |division|quotient[17]  ; padio            ;
+; |division|quotient[18]  ; |division|quotient[18]  ; padio            ;
+; |division|quotient[19]  ; |division|quotient[19]  ; padio            ;
+; |division|divider[31]   ; |division|divider[31]   ; combout          ;
+; |division|divider[30]   ; |division|divider[30]   ; combout          ;
+; |division|divider[29]   ; |division|divider[29]   ; combout          ;
+; |division|divider[28]   ; |division|divider[28]   ; combout          ;
+; |division|divider[27]   ; |division|divider[27]   ; combout          ;
+; |division|divider[26]   ; |division|divider[26]   ; combout          ;
+; |division|divider[25]   ; |division|divider[25]   ; combout          ;
+; |division|divider[24]   ; |division|divider[24]   ; combout          ;
+; |division|divider[23]   ; |division|divider[23]   ; combout          ;
+; |division|divider[22]   ; |division|divider[22]   ; combout          ;
+; |division|divider[21]   ; |division|divider[21]   ; combout          ;
+; |division|divider[20]   ; |division|divider[20]   ; combout          ;
+; |division|divider[19]   ; |division|divider[19]   ; combout          ;
+; |division|divider[18]   ; |division|divider[18]   ; combout          ;
+; |division|divider[17]   ; |division|divider[17]   ; combout          ;
+; |division|divider[16]   ; |division|divider[16]   ; combout          ;
+; |division|divider[15]   ; |division|divider[15]   ; combout          ;
+; |division|divider[14]   ; |division|divider[14]   ; combout          ;
+; |division|divider[13]   ; |division|divider[13]   ; combout          ;
+; |division|divider[12]   ; |division|divider[12]   ; combout          ;
+; |division|divider[11]   ; |division|divider[11]   ; combout          ;
+; |division|divider[10]   ; |division|divider[10]   ; combout          ;
+; |division|divider[9]    ; |division|divider[9]    ; combout          ;
+; |division|divider[8]    ; |division|divider[8]    ; combout          ;
+; |division|divider[7]    ; |division|divider[7]    ; combout          ;
+; |division|divider[6]    ; |division|divider[6]    ; combout          ;
+; |division|divider[5]    ; |division|divider[5]    ; combout          ;
+; |division|divider[4]    ; |division|divider[4]    ; combout          ;
+; |division|divider[3]    ; |division|divider[3]    ; combout          ;
+; |division|divider[2]    ; |division|divider[2]    ; combout          ;
+; |division|divider[1]    ; |division|divider[1]    ; combout          ;
+; |division|divider[0]    ; |division|divider[0]    ; combout          ;
+; |division|dividend[31]  ; |division|dividend[31]  ; combout          ;
+; |division|dividend[30]  ; |division|dividend[30]  ; combout          ;
+; |division|dividend[29]  ; |division|dividend[29]  ; combout          ;
+; |division|dividend[28]  ; |division|dividend[28]  ; combout          ;
+; |division|dividend[27]  ; |division|dividend[27]  ; combout          ;
+; |division|dividend[26]  ; |division|dividend[26]  ; combout          ;
+; |division|dividend[25]  ; |division|dividend[25]  ; combout          ;
+; |division|dividend[24]  ; |division|dividend[24]  ; combout          ;
+; |division|dividend[23]  ; |division|dividend[23]  ; combout          ;
+; |division|dividend[22]  ; |division|dividend[22]  ; combout          ;
+; |division|dividend[21]  ; |division|dividend[21]  ; combout          ;
+; |division|dividend[20]  ; |division|dividend[20]  ; combout          ;
+; |division|dividend[19]  ; |division|dividend[19]  ; combout          ;
+; |division|dividend[18]  ; |division|dividend[18]  ; combout          ;
+; |division|dividend[17]  ; |division|dividend[17]  ; combout          ;
+; |division|dividend[16]  ; |division|dividend[16]  ; combout          ;
+; |division|dividend[15]  ; |division|dividend[15]  ; combout          ;
+; |division|dividend[14]  ; |division|dividend[14]  ; combout          ;
+; |division|dividend[13]  ; |division|dividend[13]  ; combout          ;
+; |division|dividend[12]  ; |division|dividend[12]  ; combout          ;
+; |division|dividend[11]  ; |division|dividend[11]  ; combout          ;
+; |division|dividend[10]  ; |division|dividend[10]  ; combout          ;
+; |division|dividend[9]   ; |division|dividend[9]   ; combout          ;
+; |division|dividend[8]   ; |division|dividend[8]   ; combout          ;
+; |division|dividend[7]   ; |division|dividend[7]   ; combout          ;
+; |division|dividend[6]   ; |division|dividend[6]   ; combout          ;
+; |division|dividend[5]   ; |division|dividend[5]   ; combout          ;
+; |division|dividend[4]   ; |division|dividend[4]   ; combout          ;
+; |division|dividend[3]   ; |division|dividend[3]   ; combout          ;
+; |division|dividend[2]   ; |division|dividend[2]   ; combout          ;
+; |division|dividend[1]   ; |division|dividend[1]   ; combout          ;
+; |division|dividend[0]   ; |division|dividend[0]   ; combout          ;
+; |division|qr[63]~feeder ; |division|qr[63]~feeder ; combout          ;
+; |division|qr[62]~feeder ; |division|qr[62]~feeder ; combout          ;
+; |division|qr[61]~feeder ; |division|qr[61]~feeder ; combout          ;
+; |division|qr[60]~feeder ; |division|qr[60]~feeder ; combout          ;
+; |division|qr[59]~feeder ; |division|qr[59]~feeder ; combout          ;
+; |division|qr[58]~feeder ; |division|qr[58]~feeder ; combout          ;
+; |division|qr[57]~feeder ; |division|qr[57]~feeder ; combout          ;
+; |division|qr[56]~feeder ; |division|qr[56]~feeder ; combout          ;
+; |division|qr[55]~feeder ; |division|qr[55]~feeder ; combout          ;
+; |division|qr[54]~feeder ; |division|qr[54]~feeder ; combout          ;
+; |division|qr[53]~feeder ; |division|qr[53]~feeder ; combout          ;
+; |division|qr[52]~feeder ; |division|qr[52]~feeder ; combout          ;
+; |division|qr[51]~feeder ; |division|qr[51]~feeder ; combout          ;
+; |division|qr[50]~feeder ; |division|qr[50]~feeder ; combout          ;
+; |division|qr[49]~feeder ; |division|qr[49]~feeder ; combout          ;
+; |division|qr[48]~feeder ; |division|qr[48]~feeder ; combout          ;
+; |division|qr[47]~feeder ; |division|qr[47]~feeder ; combout          ;
+; |division|qr[46]~feeder ; |division|qr[46]~feeder ; combout          ;
+; |division|qr[45]~feeder ; |division|qr[45]~feeder ; combout          ;
+; |division|qr[44]~feeder ; |division|qr[44]~feeder ; combout          ;
+; |division|qr[43]~feeder ; |division|qr[43]~feeder ; combout          ;
+; |division|qr[42]~feeder ; |division|qr[42]~feeder ; combout          ;
+; |division|qr[41]~feeder ; |division|qr[41]~feeder ; combout          ;
+; |division|qr[40]~feeder ; |division|qr[40]~feeder ; combout          ;
+; |division|qr[39]~feeder ; |division|qr[39]~feeder ; combout          ;
+; |division|qr[38]~feeder ; |division|qr[38]~feeder ; combout          ;
+; |division|qr[37]~feeder ; |division|qr[37]~feeder ; combout          ;
+; |division|qr[36]~feeder ; |division|qr[36]~feeder ; combout          ;
+; |division|qr[35]~feeder ; |division|qr[35]~feeder ; combout          ;
+; |division|qr[34]~feeder ; |division|qr[34]~feeder ; combout          ;
+; |division|qr[33]~feeder ; |division|qr[33]~feeder ; combout          ;
+; |division|qr[32]~feeder ; |division|qr[32]~feeder ; combout          ;
++-------------------------+-------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++----------------------------------------------------------------------+
+; Missing 0-Value Coverage                                             ;
++-------------------------+-------------------------+------------------+
+; Node Name               ; Output Port Name        ; Output Port Type ;
++-------------------------+-------------------------+------------------+
+; |division|qr[29]        ; |division|qr[29]        ; regout           ;
+; |division|qr[30]        ; |division|qr[30]        ; regout           ;
+; |division|qr[31]        ; |division|qr[31]        ; regout           ;
+; |division|bits[7]       ; |division|bits[7]       ; regout           ;
+; |division|qr[95]        ; |division|qr[95]        ; regout           ;
+; |division|qr[94]        ; |division|qr[94]        ; regout           ;
+; |division|qr[93]        ; |division|qr[93]        ; regout           ;
+; |division|qr[92]        ; |division|qr[92]        ; regout           ;
+; |division|qr[91]        ; |division|qr[91]        ; regout           ;
+; |division|Add0~473      ; |division|Add0~474      ; cout             ;
+; |division|Add0~473      ; |division|Add0~475      ; shareout         ;
+; |division|Add0~497      ; |division|Add0~499      ; shareout         ;
+; |division|Add0~505      ; |division|Add0~507      ; shareout         ;
+; |division|Add0~517      ; |division|Add0~519      ; shareout         ;
+; |division|Add0~521      ; |division|Add0~523      ; shareout         ;
+; |division|Add0~529      ; |division|Add0~531      ; shareout         ;
+; |division|Add0~537      ; |division|Add0~539      ; shareout         ;
+; |division|Add0~541      ; |division|Add0~543      ; shareout         ;
+; |division|Add0~553      ; |division|Add0~555      ; shareout         ;
+; |division|Add0~557      ; |division|Add0~559      ; shareout         ;
+; |division|Add0~561      ; |division|Add0~563      ; shareout         ;
+; |division|Add0~569      ; |division|Add0~571      ; shareout         ;
+; |division|Add0~573      ; |division|Add0~575      ; shareout         ;
+; |division|Add0~577      ; |division|Add0~579      ; shareout         ;
+; |division|Add0~585      ; |division|Add0~587      ; shareout         ;
+; |division|Add0~589      ; |division|Add0~591      ; shareout         ;
+; |division|Add0~593      ; |division|Add0~595      ; shareout         ;
+; |division|Add0~597      ; |division|Add0~599      ; shareout         ;
+; |division|qr[35]        ; |division|qr[35]        ; regout           ;
+; |division|qr[34]        ; |division|qr[34]        ; regout           ;
+; |division|qr[33]        ; |division|qr[33]        ; regout           ;
+; |division|qr[32]        ; |division|qr[32]        ; regout           ;
+; |division|qr~716        ; |division|qr~716        ; combout          ;
+; |division|quotient[17]  ; |division|quotient[17]  ; padio            ;
+; |division|quotient[18]  ; |division|quotient[18]  ; padio            ;
+; |division|quotient[19]  ; |division|quotient[19]  ; padio            ;
+; |division|divider[31]   ; |division|divider[31]   ; combout          ;
+; |division|divider[30]   ; |division|divider[30]   ; combout          ;
+; |division|divider[29]   ; |division|divider[29]   ; combout          ;
+; |division|divider[28]   ; |division|divider[28]   ; combout          ;
+; |division|divider[27]   ; |division|divider[27]   ; combout          ;
+; |division|divider[26]   ; |division|divider[26]   ; combout          ;
+; |division|divider[25]   ; |division|divider[25]   ; combout          ;
+; |division|divider[24]   ; |division|divider[24]   ; combout          ;
+; |division|divider[23]   ; |division|divider[23]   ; combout          ;
+; |division|divider[22]   ; |division|divider[22]   ; combout          ;
+; |division|divider[21]   ; |division|divider[21]   ; combout          ;
+; |division|divider[20]   ; |division|divider[20]   ; combout          ;
+; |division|divider[19]   ; |division|divider[19]   ; combout          ;
+; |division|divider[18]   ; |division|divider[18]   ; combout          ;
+; |division|divider[17]   ; |division|divider[17]   ; combout          ;
+; |division|divider[16]   ; |division|divider[16]   ; combout          ;
+; |division|divider[15]   ; |division|divider[15]   ; combout          ;
+; |division|divider[14]   ; |division|divider[14]   ; combout          ;
+; |division|divider[13]   ; |division|divider[13]   ; combout          ;
+; |division|divider[12]   ; |division|divider[12]   ; combout          ;
+; |division|divider[11]   ; |division|divider[11]   ; combout          ;
+; |division|divider[10]   ; |division|divider[10]   ; combout          ;
+; |division|divider[9]    ; |division|divider[9]    ; combout          ;
+; |division|divider[8]    ; |division|divider[8]    ; combout          ;
+; |division|divider[7]    ; |division|divider[7]    ; combout          ;
+; |division|divider[6]    ; |division|divider[6]    ; combout          ;
+; |division|divider[5]    ; |division|divider[5]    ; combout          ;
+; |division|divider[4]    ; |division|divider[4]    ; combout          ;
+; |division|divider[3]    ; |division|divider[3]    ; combout          ;
+; |division|divider[2]    ; |division|divider[2]    ; combout          ;
+; |division|divider[1]    ; |division|divider[1]    ; combout          ;
+; |division|divider[0]    ; |division|divider[0]    ; combout          ;
+; |division|dividend[31]  ; |division|dividend[31]  ; combout          ;
+; |division|dividend[30]  ; |division|dividend[30]  ; combout          ;
+; |division|dividend[29]  ; |division|dividend[29]  ; combout          ;
+; |division|dividend[28]  ; |division|dividend[28]  ; combout          ;
+; |division|dividend[27]  ; |division|dividend[27]  ; combout          ;
+; |division|dividend[26]  ; |division|dividend[26]  ; combout          ;
+; |division|dividend[25]  ; |division|dividend[25]  ; combout          ;
+; |division|dividend[24]  ; |division|dividend[24]  ; combout          ;
+; |division|dividend[23]  ; |division|dividend[23]  ; combout          ;
+; |division|dividend[22]  ; |division|dividend[22]  ; combout          ;
+; |division|dividend[21]  ; |division|dividend[21]  ; combout          ;
+; |division|dividend[20]  ; |division|dividend[20]  ; combout          ;
+; |division|dividend[19]  ; |division|dividend[19]  ; combout          ;
+; |division|dividend[18]  ; |division|dividend[18]  ; combout          ;
+; |division|dividend[17]  ; |division|dividend[17]  ; combout          ;
+; |division|dividend[16]  ; |division|dividend[16]  ; combout          ;
+; |division|dividend[15]  ; |division|dividend[15]  ; combout          ;
+; |division|dividend[14]  ; |division|dividend[14]  ; combout          ;
+; |division|dividend[13]  ; |division|dividend[13]  ; combout          ;
+; |division|dividend[12]  ; |division|dividend[12]  ; combout          ;
+; |division|dividend[11]  ; |division|dividend[11]  ; combout          ;
+; |division|dividend[10]  ; |division|dividend[10]  ; combout          ;
+; |division|dividend[9]   ; |division|dividend[9]   ; combout          ;
+; |division|dividend[8]   ; |division|dividend[8]   ; combout          ;
+; |division|dividend[7]   ; |division|dividend[7]   ; combout          ;
+; |division|dividend[6]   ; |division|dividend[6]   ; combout          ;
+; |division|dividend[5]   ; |division|dividend[5]   ; combout          ;
+; |division|dividend[4]   ; |division|dividend[4]   ; combout          ;
+; |division|dividend[3]   ; |division|dividend[3]   ; combout          ;
+; |division|dividend[2]   ; |division|dividend[2]   ; combout          ;
+; |division|dividend[1]   ; |division|dividend[1]   ; combout          ;
+; |division|dividend[0]   ; |division|dividend[0]   ; combout          ;
+; |division|qr[63]~feeder ; |division|qr[63]~feeder ; combout          ;
+; |division|qr[62]~feeder ; |division|qr[62]~feeder ; combout          ;
+; |division|qr[61]~feeder ; |division|qr[61]~feeder ; combout          ;
+; |division|qr[60]~feeder ; |division|qr[60]~feeder ; combout          ;
+; |division|qr[59]~feeder ; |division|qr[59]~feeder ; combout          ;
+; |division|qr[58]~feeder ; |division|qr[58]~feeder ; combout          ;
+; |division|qr[57]~feeder ; |division|qr[57]~feeder ; combout          ;
+; |division|qr[56]~feeder ; |division|qr[56]~feeder ; combout          ;
+; |division|qr[55]~feeder ; |division|qr[55]~feeder ; combout          ;
+; |division|qr[54]~feeder ; |division|qr[54]~feeder ; combout          ;
+; |division|qr[53]~feeder ; |division|qr[53]~feeder ; combout          ;
+; |division|qr[52]~feeder ; |division|qr[52]~feeder ; combout          ;
+; |division|qr[51]~feeder ; |division|qr[51]~feeder ; combout          ;
+; |division|qr[50]~feeder ; |division|qr[50]~feeder ; combout          ;
+; |division|qr[49]~feeder ; |division|qr[49]~feeder ; combout          ;
+; |division|qr[48]~feeder ; |division|qr[48]~feeder ; combout          ;
+; |division|qr[47]~feeder ; |division|qr[47]~feeder ; combout          ;
+; |division|qr[46]~feeder ; |division|qr[46]~feeder ; combout          ;
+; |division|qr[45]~feeder ; |division|qr[45]~feeder ; combout          ;
+; |division|qr[44]~feeder ; |division|qr[44]~feeder ; combout          ;
+; |division|qr[43]~feeder ; |division|qr[43]~feeder ; combout          ;
+; |division|qr[42]~feeder ; |division|qr[42]~feeder ; combout          ;
+; |division|qr[41]~feeder ; |division|qr[41]~feeder ; combout          ;
+; |division|qr[40]~feeder ; |division|qr[40]~feeder ; combout          ;
+; |division|qr[39]~feeder ; |division|qr[39]~feeder ; combout          ;
+; |division|qr[38]~feeder ; |division|qr[38]~feeder ; combout          ;
+; |division|qr[37]~feeder ; |division|qr[37]~feeder ; combout          ;
+; |division|qr[36]~feeder ; |division|qr[36]~feeder ; combout          ;
+; |division|qr[35]~feeder ; |division|qr[35]~feeder ; combout          ;
+; |division|qr[34]~feeder ; |division|qr[34]~feeder ; combout          ;
+; |division|qr[33]~feeder ; |division|qr[33]~feeder ; combout          ;
+; |division|qr[32]~feeder ; |division|qr[32]~feeder ; combout          ;
++-------------------------+-------------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II Simulator
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Wed Apr 11 13:34:29 2007
+Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off division -c division
+Info: Using vector source file "C:/HPSDR/trunk/VK6APH/division/division.vwf"
+Warning: Ignored node in vector source file. Can't find corresponding node name "start" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[32]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[33]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[34]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[35]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[36]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[37]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[38]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[39]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[40]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[41]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[42]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[43]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[44]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[45]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[46]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[47]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[48]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[49]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[50]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[51]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[52]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[53]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[54]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[55]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[56]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[57]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[58]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[59]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[60]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[61]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[62]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "dividend[63]" in design.
+Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
+    Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
+Info: Simulation partitioned into 1 sub-simulations
+Info: Simulation coverage is      64.71 %
+Info: Number of transitions in simulation is 7433
+Info: Quartus II Simulator was successful. 0 errors, 33 warnings
+    Info: Allocated 88 megabytes of memory during processing
+    Info: Processing ended: Wed Apr 11 13:34:30 2007
+    Info: Elapsed time: 00:00:01
+
+
