@@ -4,6 +4,8 @@
 *
 ************************************************************/
 
+// (C) Phil Harman VK6APH 2006,2007
+
 
 /* 	This program interfaces the LT2208 to PowerSDR over USB.
 	The data from the LT2208 is in 16 bit parallel format and 
@@ -38,6 +40,7 @@
 	25 Mar  2007 - Modified to use Harmon CORDIC
 	26 Mar  2007 - Modified to use 18 bits from CORDIC into CIC filter
 	11 Apr  2007 - Modified to use frequency in Hz from PowerSDR
+	12 Apr  2007 - Added band decoder from frequency
 		
 	
 */
@@ -281,24 +284,24 @@ end
 
 //////////////////////////////////////////////////////////////
 //
-//		Convert frquency to phase  
+//		Convert frequency to phase word 
 //
 //////////////////////////////////////////////////////////////
 
 /*	
-	Calculates  frequency * 2^32 /125e6
-	Each calculation takes ~ 6uS @ 12.5MHz
+	Calculates  (frequency * 2^32) /125e6
+	Each calculation takes ~ 0.6uS @ 125MHz
 
 */
 
 wire [31:0]freq;
 wire ready;
-always @ (posedge ready)
+always @ (posedge ready)		// strobe frequecy when ready is set
 begin
-	frequency <= frequency_HZ;
+	frequency <= frequency_HZ;	// frequecy_HZ is current frequency in Hz e.g. 14,195,000Hz
 end 
 
- division division(.quotient(freq),.ready(ready),.dividend(frequency),.divider(32'd125000000),.clk(PCLK_12MHZ));
+ division division_DDS(.quotient(freq),.ready(ready),.dividend(frequency),.divider(32'd125000000),.clk(clock));
 
 
 // sync frequecy change to 125MHz clock
@@ -307,6 +310,81 @@ always @ (posedge clock)
 begin
 	sync_frequency <= freq;
 end
+
+//////////////////////////////////////////////////////////////
+//
+//		Band Decoder
+//
+//////////////////////////////////////////////////////////////
+
+/*
+	Divides the current frequency in Hz by 10e5. This results in the following values per band
+	
+	1.8MHz	= 18
+	3.5MHz	= 35
+	.....
+	30MHz	= 300
+	55MHz 	= 550
+	
+	0000 160m
+	0001 80m
+	0010 60m
+	0011 40m
+	0100 30m
+	0101 20m
+	0110 17m
+	0111 15m
+	1000 12m
+	1001 10m
+	1010 6m
+	
+	
+*/
+
+	
+	reg [3:0]band;
+	wire [9:0]temp;
+	
+	assign temp = frequency_HZ/100000; // check size of LEs
+/*	
+	always @ (posedge PWM_clock)
+	begin
+	case (temp)
+	18,19:						band <= 4'b0000;
+	35,36,37,38,39,40: 			band <= 4'b0001;
+	54:							band <= 4'b0010;
+	70:							band <= 4'b0011;
+	100,101:					band <= 4'b0100;
+	140,141,142,143:			band <= 4'b0101;
+	180,181:					band <= 4'b0110;
+	210,211,212,213,214:		band <= 4'b0111;
+	248,249:					band <= 4'b1000;
+	280,290:					band <= 4'b1001;
+	500,510,520,530,540,550:	band <= 4'b1010;
+	default:					band <= 4'b1111; // not a valid ham band
+	endcase
+	end 
+*/	
+	always @ (posedge PWM_clock)
+	begin 
+		if 		(temp >= 18 && temp <= 19) band <= 4'b0000;
+		else if (temp >= 35 && temp <= 40) band <= 4'b0001;
+		else if (temp >= 53 && temp <= 54) band <= 4'b0010;
+		else if (temp >= 70 && temp <= 72) band <= 4'b0011;
+		else if (temp >=100 && temp <=101) band <= 4'b0100; 
+		else if (temp >=140 && temp <=143) band <= 4'b0101;
+		else if (temp >=180 && temp <=181) band <= 4'b0110;
+		else if (temp >=210 && temp <=214) band <= 4'b0111;
+		else if (temp >=248 && temp <=249) band <= 4'b1000;
+		else if (temp >=280 && temp <=297) band <= 4'b1001;
+		else if (temp >=500 && temp <=550) band <= 4'b1010;
+		else band <= 4'b1111; 								// not a valid ham band
+	end 
+		
+	// TODO: allow for 11kHz IF !!!! 	
+
+
+
 
 //////////////////////////////////////////////////////////////
 //
@@ -493,7 +571,7 @@ end
 
 
 // extend the lenght of the ce_out_i pulse so that A/D code has time to see it 
-reg [3:0]pulse;
+reg [2:0]pulse;
 
 always @ (negedge clock)
 begin
@@ -880,11 +958,16 @@ assign Q_PWM_out = Q_PWM_accumulator[16];
 
 
 // LEDs for testing
-
+/*
 assign DEBUG_LED0 = ~have_sync; 	// LED 0 on when we have sync	
 assign DEBUG_LED1 = ~EP6_ready;		// LED D3 on when we can write to EP6
 assign DEBUG_LED2 = ~data_ready;    // LED on when LT2208 has data 
 assign DEBUG_LED3 = ~EP2_has_data;  // LED on when we receive data 
+*/
+assign DEBUG_LED0 = ~band[0]; 	
+assign DEBUG_LED1 = ~band[1];		
+assign DEBUG_LED2 = ~band[2];    
+assign DEBUG_LED3 = ~band[3];  
 
 // Debug pins
 

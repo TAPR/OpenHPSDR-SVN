@@ -7,25 +7,18 @@ module division(quotient,ready,dividend,divider,clk);
    input [31:0]  dividend; // frequency 
    input [31:0]  divider;  // 125MHz
    input         clk;
-   output        quotient;
+   output [31:0] quotient;
    output        ready;
 
    reg [95:0]    qr;
    reg [33:0]    diff;
+   reg [31:0]    quotient;
 
-
-
-
-   
-//   wire [63:0]   quotient = qr[63:0];
-//   wire [19:0]   quotient = qr[31:12];  // take top 20 bits for CORDIC
-
-   reg [19:0] quotient;
 
    always @ (negedge clk)
    begin
 		if (ready)
-			quotient <= qr[31:12];
+			quotient <= qr[31:0];
    		else 
 			quotient <= quotient;
 	end
