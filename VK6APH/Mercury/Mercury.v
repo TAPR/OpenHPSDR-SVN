@@ -291,6 +291,7 @@ end
 /*	
 	Calculates  (frequency * 2^32) /125e6
 	Each calculation takes ~ 0.6uS @ 125MHz
+	This method is quite fast enough and uses much lower LEs than a Megafunction
 
 */
 
@@ -326,62 +327,53 @@ end
 	30MHz	= 300
 	55MHz 	= 550
 	
-	0000 160m
-	0001 80m
-	0010 60m
-	0011 40m
-	0100 30m
-	0101 20m
-	0110 17m
-	0111 15m
-	1000 12m
-	1001 10m
-	1010 6m
+	Each band is then decoded and the appropriate LPF selected as follows
 	
+	160m 	band = 0000
+	 80m	band = 0001
+	 60m	band = 0010
+	 40m	band = 0011
+	 30m	band = 0100
+	 20m	band = 0101
+	 17m	band = 0110
+	 15m	band = 0111
+	 12m	band = 1000
+	 10m	band = 1001
+	 6m		band = 1010
 	
+	NOTE: When used with PowerSDR we need to add the IF frequency.
 */
 
 	
-	reg [3:0]band;
-	wire [9:0]temp;
+reg [3:0]band;
+wire [9:0]temp;
+reg [31:0]freq_IF;
+wire ready2;
+
+always @ (posedge ready2)		// strobe frequecy when ready is set
+begin
+	freq_IF <= (frequency_HZ + 32'd12000);	// frequecy_HZ is current frequency in Hz e.g. 14,195,000Hz
+end	
+//	calculate (frequency_HZ + 12000)/100000
 	
-	assign temp = frequency_HZ/100000; // check size of LEs
-/*	
-	always @ (posedge PWM_clock)
-	begin
-	case (temp)
-	18,19:						band <= 4'b0000;
-	35,36,37,38,39,40: 			band <= 4'b0001;
-	54:							band <= 4'b0010;
-	70:							band <= 4'b0011;
-	100,101:					band <= 4'b0100;
-	140,141,142,143:			band <= 4'b0101;
-	180,181:					band <= 4'b0110;
-	210,211,212,213,214:		band <= 4'b0111;
-	248,249:					band <= 4'b1000;
-	280,290:					band <= 4'b1001;
-	500,510,520,530,540,550:	band <= 4'b1010;
-	default:					band <= 4'b1111; // not a valid ham band
-	endcase
-	end 
-*/	
+	divide divide_freq(.quotient(temp),.ready(ready2),.dividend(freq_IF),.divider(32'd100000),.clk(clock));
+
+// Select highest LPF dependant on frequency in use
+		
 	always @ (posedge PWM_clock)
 	begin 
-		if 		(temp >= 18 && temp <= 19) band <= 4'b0000;
-		else if (temp >= 35 && temp <= 40) band <= 4'b0001;
-		else if (temp >= 53 && temp <= 54) band <= 4'b0010;
-		else if (temp >= 70 && temp <= 72) band <= 4'b0011;
-		else if (temp >=100 && temp <=101) band <= 4'b0100; 
-		else if (temp >=140 && temp <=143) band <= 4'b0101;
-		else if (temp >=180 && temp <=181) band <= 4'b0110;
-		else if (temp >=210 && temp <=214) band <= 4'b0111;
-		else if (temp >=248 && temp <=249) band <= 4'b1000;
-		else if (temp >=280 && temp <=297) band <= 4'b1001;
-		else if (temp >=500 && temp <=550) band <= 4'b1010;
-		else band <= 4'b1111; 								// not a valid ham band
-	end 
-		
-	// TODO: allow for 11kHz IF !!!! 	
+		if 		(temp > 297) band <= 4'b1010;	// > 10m so use 6m LPF
+		else if (temp > 249) band <= 4'b1001;	// > 12m so use 10m LPF
+		else if (temp > 214) band <= 4'b1000;  	// > 15m so use 12m LPF
+		else if (temp > 181) band <= 4'b0111;  	// > 17m so use 15m LPF
+		else if (temp > 143) band <= 4'b0110;  	// > 20m so use 17m LPF
+		else if (temp > 101) band <= 4'b0101;	// > 30m so use 20m LPF
+		else if (temp > 72)  band <= 4'b0100;  	// > 40m so use 30m LPF  
+		else if (temp > 54)  band <= 4'b0011;  	// > 60m so use 40m LPF
+		else if (temp > 40)  band <= 4'b0010;  	// > 80m so use 60m LPF
+		else if (temp > 19)  band <= 4'b0001;  	// > 160m so use 80m LPF  
+		else band <= 4'b0000; 					// < 2MHz so use 160m LPF
+	end 	
 
 
 
@@ -964,6 +956,7 @@ assign DEBUG_LED1 = ~EP6_ready;		// LED D3 on when we can write to EP6
 assign DEBUG_LED2 = ~data_ready;    // LED on when LT2208 has data 
 assign DEBUG_LED3 = ~EP2_has_data;  // LED on when we receive data 
 */
+
 assign DEBUG_LED0 = ~band[0]; 	
 assign DEBUG_LED1 = ~band[1];		
 assign DEBUG_LED2 = ~band[2];    
