@@ -17,7 +17,7 @@ module division(quotient,ready,dividend,divider,clk);
 
    always @ (negedge clk)
    begin
-		if (ready)
+		if (ready)					// get result when ready 
 			quotient <= qr[31:0];
    		else 
 			quotient <= quotient;
