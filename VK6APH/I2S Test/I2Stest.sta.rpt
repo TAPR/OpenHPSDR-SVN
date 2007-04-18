@@ -1,0 +1,263 @@
+TimeQuest Timing Analyzer report for I2Stest
+Wed Apr 18 10:42:07 2007
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. TimeQuest Timing Analyzer Summary
+  3. Clocks
+  4. Fmax Summary
+  5. Setup Summary
+  6. Hold Summary
+  7. Minimum Pulse Width
+  8. Setup Transfers
+  9. Hold Transfers
+ 10. Unconstrained Paths
+ 11. TimeQuest Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------+
+; TimeQuest Timing Analyzer Summary                                    ;
++--------------------+-------------------------------------------------+
+; Quartus II Version ; Version 6.1 Build 201 11/27/2006 SJ Web Edition ;
+; Revision Name      ; I2Stest                                         ;
+; Device Family      ; Cyclone II                                      ;
+; Device Name        ; EP2C5Q208C8                                     ;
+; Timing Models      ; Final                                           ;
+; Delay Model        ; Slow Model                                      ;
+; Rise/Fall Delays   ; Unavailable                                     ;
++--------------------+-------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                               ;
++------------+------+--------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-----------+
+; Clock Name ; Type ; Period ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets   ;
++------------+------+--------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-----------+
+; CBCLK      ; Base ; 1.000  ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { CBCLK } ;
++------------+------+--------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-----------+
+
+
++-------------------------+
+; Fmax Summary            ;
++------------+------------+
+; Fmax (MHz) ; Clock Name ;
++------------+------------+
+; 223.31     ; CBCLK      ;
++------------+------------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
+
+
++--------------------------------+
+; Setup Summary                  ;
++-------+--------+---------------+
+; Clock ; Slack  ; End Point TNS ;
++-------+--------+---------------+
+; CBCLK ; -3.478 ; -132.909      ;
++-------+--------+---------------+
+
+
++-------------------------------+
+; Hold Summary                  ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; CBCLK ; 0.499 ; 0.000         ;
++-------+-------+---------------+
+
+
++-------------------------------------------------------------------------------------------+
+; Minimum Pulse Width                                                                       ;
++--------+--------------+----------------+-------+-------+------------+---------------------+
+; Slack  ; Actual Width ; Required Width ; Pulse ; Clock ; Clock Edge ; Target              ;
++--------+--------------+----------------+-------+-------+------------+---------------------+
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; CCstate.0100        ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; CCstate.0100        ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; counter[0]          ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; counter[0]          ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; CCstate.0010        ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; CCstate.0010        ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; CCstate.0001        ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; CCstate.0001        ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; CCstate.0011        ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; CCstate.0011        ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[0]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[0]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; counter[3]          ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; counter[3]          ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; counter[2]          ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; counter[2]          ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; counter[4]          ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; counter[4]          ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; CCstate.0000        ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; CCstate.0000        ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; counter[1]          ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; counter[1]          ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; Rx_state.010        ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; Rx_state.010        ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Fall       ; DIN~reg0            ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Fall       ; DIN~reg0            ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[3]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[3]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[4]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[4]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; Rx_counter[1]       ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; Rx_counter[1]       ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; Rx_counter[0]       ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; Rx_counter[0]       ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; Rx_counter[3]       ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; Rx_counter[3]       ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; Rx_counter[2]       ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; Rx_counter[2]       ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; Rx_state.001        ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; Rx_state.001        ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[2]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[2]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; Rx_state.100        ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; Rx_state.100        ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; Rx_state.011        ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; Rx_state.011        ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; Rx_state.000        ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; Rx_state.000        ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[1]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[1]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[10]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[10]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[7]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[7]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[5]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[5]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[6]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[6]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[2]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[2]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[8]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[8]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[9]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[9]~reg0   ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[9]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[9]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[10]~reg0 ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[10]~reg0 ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[11]~reg0 ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[11]~reg0 ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[11]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[11]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[12]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[12]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[13]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[13]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[14]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[14]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_left[15]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_left[15]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[0]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[0]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[1]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[1]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[3]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[3]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[4]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[4]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[5]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[5]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[6]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[6]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[7]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[7]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[8]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[8]~reg0  ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[12]~reg0 ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[12]~reg0 ;
+; -0.742 ; 0.500        ; 1.242          ; High  ; CBCLK ; Rise       ; data_right[13]~reg0 ;
+; -0.742 ; 0.500        ; 1.242          ; Low   ; CBCLK ; Rise       ; data_right[13]~reg0 ;
++--------+--------------+----------------+-------+-------+------------+---------------------+
+
+
++-------------------------------------------------------------------+
+; Setup Transfers                                                   ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; CBCLK      ; CBCLK    ; 409      ; 32       ; 4        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+
+
++-------------------------------------------------------------------+
+; Hold Transfers                                                    ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; CBCLK      ; CBCLK    ; 409      ; 32       ; 4        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+
+
++------------------------------------------------+
+; Unconstrained Paths                            ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 1     ; 1    ;
+; Unconstrained Input Port Paths  ; 19    ; 19   ;
+; Unconstrained Output Ports      ; 33    ; 33   ;
+; Unconstrained Output Port Paths ; 33    ; 33   ;
++---------------------------------+-------+------+
+
+
++------------------------------------+
+; TimeQuest Timing Analyzer Messages ;
++------------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II TimeQuest Timing Analyzer
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Wed Apr 18 10:42:06 2007
+Info: Command: quartus_sta I2Stest -c I2Stest
+Info: qsta_default_script.tcl version: 23.0.1.4
+Warning: Found USE_TIMEQUEST_TIMING_ANALYZER=OFF. The TimeQuest Timing Analyzer is not the default Timing Analysis Tool during full compilation.
+Critical Warning: SDC file not found: 'I2Stest.sdc'
+Info: No base clocks found in the design. Calling "derive_clocks -period 1.0"
+Info: Deriving Clocks
+    Info: create_clock -period 1.000 -waveform {0.000 0.500} -name CBCLK CBCLK
+Info: Worst-case setup slack is -3.478
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:    -3.478      -132.909 CBCLK 
+Info: Worst-case hold slack is 0.499
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:     0.499         0.000 CBCLK 
+Info: No recovery paths to report
+Info: No removal paths to report
+Info: Design is not fully constrained for setup requirements
+Info: Design is not fully constrained for hold requirements
+Info: Quartus II TimeQuest Timing Analyzer was successful. 0 errors, 2 warnings
+    Info: Allocated 101 megabytes of memory during processing
+    Info: Processing ended: Wed Apr 18 10:42:07 2007
+    Info: Elapsed time: 00:00:01
+
+

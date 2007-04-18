@@ -1,0 +1,20 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Wed Apr 18 11:16:56 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off I2Stest -c I2Stest
+Info: Found 1 design units, including 1 entities, in source file DigAudioOut48k16bI2S.v
+    Info: Found entity 1: I2SAudioOut
+Info: Found 1 design units, including 1 entities, in source file I2Stest.v
+    Info: Found entity 1: I2Stest
+Error (10158): Verilog HDL Module Declaration error at I2Stest.v(5): port "CBCLK" is not declared as port File: C:/HPSDR/trunk/VK6APH/I2S Test/I2Stest.v Line: 5
+Error (10158): Verilog HDL Module Declaration error at I2Stest.v(5): port "CLRCLK" is not declared as port File: C:/HPSDR/trunk/VK6APH/I2S Test/I2Stest.v Line: 5
+Error (10158): Verilog HDL Module Declaration error at I2Stest.v(5): port "DIN" is not declared as port File: C:/HPSDR/trunk/VK6APH/I2S Test/I2Stest.v Line: 5
+Error (10161): Verilog HDL error at I2Stest.v(5): object "data_left" is not declared File: C:/HPSDR/trunk/VK6APH/I2S Test/I2Stest.v Line: 5
+Error (10161): Verilog HDL error at I2Stest.v(5): object "data_right" is not declared File: C:/HPSDR/trunk/VK6APH/I2S Test/I2Stest.v Line: 5
+Error (10161): Verilog HDL error at I2Stest.v(89): object "data_left" is not declared File: C:/HPSDR/trunk/VK6APH/I2S Test/I2Stest.v Line: 89
+Error (10161): Verilog HDL error at I2Stest.v(104): object "data_right" is not declared File: C:/HPSDR/trunk/VK6APH/I2S Test/I2Stest.v Line: 104
+Error: Quartus II Analysis & Synthesis was unsuccessful. 7 errors, 0 warnings
+    Info: Allocated 116 megabytes of memory during processing
+    Error: Processing ended: Wed Apr 18 11:16:58 2007
+    Error: Elapsed time: 00:00:02
