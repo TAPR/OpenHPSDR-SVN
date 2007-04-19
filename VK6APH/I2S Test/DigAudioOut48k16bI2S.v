@@ -7,7 +7,7 @@
 // following a falling  edge on lrclk_i.  Simiarily the MSB of the right sample will be available on 
 // the second rising edge of bclk_i following the rising edge of lrclk_i.
 
-// NOTE: the data to send is latched on the positive edge of lrclk
+// NOTE: the data to be sent is latched on the positive edge of lrclk
 
 // Notation used: 
 // _i indicates an input signal to a module 

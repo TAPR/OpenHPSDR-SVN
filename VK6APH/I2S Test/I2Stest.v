@@ -12,6 +12,8 @@ output reg DIN;
 output reg [15:0] data_left;
 output reg [15:0] data_right;
 
+// NOTE: the data to be sent is latched on the positive edge of lrclk
+
 // use new module for Tx
 
 I2SAudioOut I2SAudioOut(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(16'h8F50), .right_sample_i(16'h8F50), .outbit_o(DIN));
@@ -70,7 +72,7 @@ begin
 end
 */
 
-
+/*
 // Rx code 
 // NOTE: Data out should be latched on the negative edge of CLRCLK 
 
@@ -127,7 +129,50 @@ begin
 //	if (Rx_counter == 0)begin
 	data_left <= temp_data_left;
 	data_right <= temp_data_right;
+//	end
 end
+
+*/
+
+// Alternative code for Rx
+
+reg [5:0]TX_state;
+reg [15:0] Tx_q;
+
+always @ (posedge CBCLK)
+begin
+    Tx_q[15:0] <= {Tx_q[14:0], DIN};            // shift current TLV320 data left and add next bit
+case (TX_state)
+0:   begin
+     if(!CLRCLK) TX_state <= 5'd0;               // loop until CLRCLK is high
+     else TX_state <= TX_state + 1'b1;
+     end
+1:   begin
+     if(CLRCLK) TX_state <= 5'd1;         		// loop until CLRCLK is low
+     else TX_state <= TX_state + 1'b1;
+     end
+// next state is number of bits  + previous state + 1 i.e. 16 + 1 + 1 = 18
+18:  begin
+     data_left <= Tx_q;                         // TLV320 (microphone or line in)data
+     TX_state <= TX_state + 1'b1;         		// state = 0 if stop here     
+     end
+19:	 begin
+	 if(!CLRCLK) TX_state <= 19;				// wait for CLRCLK to go high 
+	 else TX_state <= TX_state + 1'b1;
+	 end
+// next state is number of bits + previous state + 1 i.e. 16 + 1 + 19 = 36				
+36:  begin		
+	 data_right <= Tx_q;
+	 TX_state <= 5'd0;         			    	// done so loop again
+     end
+
+default:TX_state <= TX_state + 1'b1;
+endcase
+end
+
+
+
+
 
 endmodule
 
