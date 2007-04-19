@@ -1,5 +1,5 @@
 Analysis & Synthesis report for I2Stest
-Wed Apr 18 12:13:21 2007
+Thu Apr 19 14:56:04 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -12,12 +12,11 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
   4. Analysis & Synthesis Source Files Read
   5. Analysis & Synthesis Resource Usage Summary
   6. Analysis & Synthesis Resource Utilization by Entity
-  7. State Machine - |I2Stest|Rx_state
-  8. State Machine - |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state
-  9. Registers Removed During Synthesis
- 10. General Register Statistics
- 11. Multiplexer Restructuring Statistics (Restructuring Performed)
- 12. Analysis & Synthesis Messages
+  7. State Machine - |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Analysis & Synthesis Messages
 
 
 
@@ -43,14 +42,14 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Apr 18 12:13:21 2007   ;
+; Analysis & Synthesis Status        ; Successful - Thu Apr 19 14:56:04 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; I2Stest                                 ;
 ; Top-level Entity Name              ; I2Stest                                 ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 83                                      ;
-;     Total combinational functions  ; 76                                      ;
-;     Dedicated logic registers      ; 83                                      ;
+; Total logic elements               ; 64                                      ;
+;     Total combinational functions  ; 34                                      ;
+;     Dedicated logic registers      ; 64                                      ;
 ; Total registers                    ; N/A until Partition Merge               ;
 ; Total pins                         ; N/A until Partition Merge               ;
 ; Total virtual pins                 ; N/A until Partition Merge               ;
@@ -137,27 +136,27 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 83    ;
+; Estimated Total logic elements              ; 64    ;
 ;                                             ;       ;
-; Total combinational functions               ; 76    ;
+; Total combinational functions               ; 34    ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 66    ;
-;     -- 3 input functions                    ; 2     ;
-;     -- <=2 input functions                  ; 8     ;
+;     -- 4 input functions                    ; 23    ;
+;     -- 3 input functions                    ; 8     ;
+;     -- <=2 input functions                  ; 3     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 76    ;
+;     -- normal mode                          ; 34    ;
 ;     -- arithmetic mode                      ; 0     ;
 ;                                             ;       ;
-; Total registers                             ; 83    ;
-;     -- Dedicated logic registers            ; 83    ;
+; Total registers                             ; 64    ;
+;     -- Dedicated logic registers            ; 64    ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
 ; I/O pins                                    ; 0     ;
 ; Maximum fan-out node                        ; CBCLK ;
-; Maximum fan-out                             ; 51    ;
-; Total fan-out                               ; 487   ;
-; Average fan-out                             ; 2.51  ;
+; Maximum fan-out                             ; 64    ;
+; Total fan-out                               ; 315   ;
+; Average fan-out                             ; 2.37  ;
 +---------------------------------------------+-------+
 
 
@@ -166,24 +165,10 @@ applicable agreement for further details.
 +------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------+
 ; Compilation Hierarchy Node   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name              ;
 +------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------+
-; |I2Stest                     ; 76 (61)           ; 83 (73)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |I2Stest                         ;
+; |I2Stest                     ; 34 (19)           ; 64 (54)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |I2Stest                         ;
 ;    |I2SAudioOut:I2SAudioOut| ; 15 (15)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |I2Stest|I2SAudioOut:I2SAudioOut ;
 +------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-Encoding Type:  One-Hot
-+-----------------------------------------------------------------------------------------+
-; State Machine - |I2Stest|Rx_state                                                       ;
-+--------------+--------------+--------------+--------------+--------------+--------------+
-; Name         ; Rx_state.001 ; Rx_state.010 ; Rx_state.011 ; Rx_state.000 ; Rx_state.100 ;
-+--------------+--------------+--------------+--------------+--------------+--------------+
-; Rx_state.000 ; 0            ; 0            ; 0            ; 0            ; 0            ;
-; Rx_state.011 ; 0            ; 0            ; 1            ; 1            ; 0            ;
-; Rx_state.010 ; 0            ; 1            ; 0            ; 1            ; 0            ;
-; Rx_state.100 ; 0            ; 0            ; 0            ; 1            ; 1            ;
-; Rx_state.001 ; 1            ; 0            ; 0            ; 1            ; 0            ;
-+--------------+--------------+--------------+--------------+--------------+--------------+
 
 
 Encoding Type:  One-Hot
@@ -221,27 +206,25 @@ Encoding Type:  One-Hot
 ; I2SAudioOut/local_right_sample[2]      ; Stuck at GND due to stuck port data_in ;
 ; I2SAudioOut/local_right_sample[1]      ; Stuck at GND due to stuck port data_in ;
 ; I2SAudioOut/local_right_sample[0]      ; Stuck at GND due to stuck port data_in ;
-; I2SAudioOut/data[9]                    ; Merged with I2SAudioOut/data[15]       ;
 ; I2SAudioOut/data[11]                   ; Merged with I2SAudioOut/data[15]       ;
-; I2SAudioOut/data[10]                   ; Merged with I2SAudioOut/data[15]       ;
-; I2SAudioOut/data[8]                    ; Merged with I2SAudioOut/data[15]       ;
-; I2SAudioOut/data[4]                    ; Merged with I2SAudioOut/data[15]       ;
 ; I2SAudioOut/data[6]                    ; Merged with I2SAudioOut/data[15]       ;
-; I2SAudioOut/data[1]                    ; Merged with I2SAudioOut/data[14]       ;
-; I2SAudioOut/data[3]                    ; Merged with I2SAudioOut/data[14]       ;
-; I2SAudioOut/data[0]                    ; Merged with I2SAudioOut/data[14]       ;
-; I2SAudioOut/data[7]                    ; Merged with I2SAudioOut/data[14]       ;
-; I2SAudioOut/data[12]                   ; Merged with I2SAudioOut/data[14]       ;
-; I2SAudioOut/data[2]                    ; Merged with I2SAudioOut/data[14]       ;
-; I2SAudioOut/data[13]                   ; Merged with I2SAudioOut/data[14]       ;
+; I2SAudioOut/data[4]                    ; Merged with I2SAudioOut/data[15]       ;
+; I2SAudioOut/data[10]                   ; Merged with I2SAudioOut/data[15]       ;
+; I2SAudioOut/data[9]                    ; Merged with I2SAudioOut/data[15]       ;
+; I2SAudioOut/data[8]                    ; Merged with I2SAudioOut/data[15]       ;
 ; I2SAudioOut/data[5]                    ; Merged with I2SAudioOut/data[14]       ;
+; I2SAudioOut/data[13]                   ; Merged with I2SAudioOut/data[14]       ;
+; I2SAudioOut/data[3]                    ; Merged with I2SAudioOut/data[14]       ;
+; I2SAudioOut/data[1]                    ; Merged with I2SAudioOut/data[14]       ;
+; I2SAudioOut/data[0]                    ; Merged with I2SAudioOut/data[14]       ;
+; I2SAudioOut/data[2]                    ; Merged with I2SAudioOut/data[14]       ;
+; I2SAudioOut/data[12]                   ; Merged with I2SAudioOut/data[14]       ;
+; I2SAudioOut/data[7]                    ; Merged with I2SAudioOut/data[14]       ;
 ; I2SAudioOut/data[14]                   ; Stuck at GND due to stuck port data_in ;
 ; I2SAudioOut/data[15]                   ; Stuck at VCC due to stuck port data_in ;
-; Rx_state~7                             ; Lost fanout                            ;
-; Rx_state~8                             ; Lost fanout                            ;
 ; I2SAudioOut/TLV_state~7                ; Lost fanout                            ;
 ; I2SAudioOut/TLV_state~8                ; Lost fanout                            ;
-; Total Number of Removed Registers = 36 ;                                        ;
+; Total Number of Removed Registers = 34 ;                                        ;
 +----------------------------------------+----------------------------------------+
 
 
@@ -250,12 +233,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 83    ;
-; Number of registers using Synchronous Clear  ; 2     ;
+; Total registers                              ; 64    ;
+; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 32    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -265,7 +248,6 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                    ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
-; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |I2Stest|Rx_counter[3]                        ;
 ; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
 
@@ -276,7 +258,7 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Wed Apr 18 12:13:19 2007
+    Info: Processing started: Thu Apr 19 14:56:03 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off I2Stest -c I2Stest
 Info: Found 1 design units, including 1 entities, in source file DigAudioOut48k16bI2S.v
     Info: Found entity 1: I2SAudioOut
@@ -308,38 +290,24 @@ Warning: Reduced register "I2SAudioOut:I2SAudioOut|local_right_sample[2]" with s
 Warning: Reduced register "I2SAudioOut:I2SAudioOut|local_right_sample[1]" with stuck data_in port to stuck value GND
 Warning: Reduced register "I2SAudioOut:I2SAudioOut|local_right_sample[0]" with stuck data_in port to stuck value GND
 Info: Duplicate registers merged to single register
-    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[9]" merged to single register "I2SAudioOut:I2SAudioOut|data[15]"
     Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[11]" merged to single register "I2SAudioOut:I2SAudioOut|data[15]"
-    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[10]" merged to single register "I2SAudioOut:I2SAudioOut|data[15]"
-    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[8]" merged to single register "I2SAudioOut:I2SAudioOut|data[15]"
-    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[4]" merged to single register "I2SAudioOut:I2SAudioOut|data[15]"
     Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[6]" merged to single register "I2SAudioOut:I2SAudioOut|data[15]"
-    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[1]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
-    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[3]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
-    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[0]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
-    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[7]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
-    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[12]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
-    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[2]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
-    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[13]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
+    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[4]" merged to single register "I2SAudioOut:I2SAudioOut|data[15]"
+    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[10]" merged to single register "I2SAudioOut:I2SAudioOut|data[15]"
+    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[9]" merged to single register "I2SAudioOut:I2SAudioOut|data[15]"
+    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[8]" merged to single register "I2SAudioOut:I2SAudioOut|data[15]"
     Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[5]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
+    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[13]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
+    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[3]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
+    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[1]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
+    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[0]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
+    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[2]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
+    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[12]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
+    Info: Duplicate register "I2SAudioOut:I2SAudioOut|data[7]" merged to single register "I2SAudioOut:I2SAudioOut|data[14]"
 Warning: Reduced register "I2SAudioOut:I2SAudioOut|data[14]" with stuck data_in port to stuck value GND
 Info: Power-up level of register "I2SAudioOut:I2SAudioOut|data[15]" is not specified -- using power-up level of High to minimize register
 Warning: Reduced register "I2SAudioOut:I2SAudioOut|data[15]" with stuck data_in port to stuck value VCC
-Info: State machine "|I2Stest|Rx_state" contains 5 states
 Info: State machine "|I2Stest|I2SAudioOut:I2SAudioOut|TLV_state" contains 5 states
-Info: Selected Auto state machine encoding method for state machine "|I2Stest|Rx_state"
-Info: Encoding result for state machine "|I2Stest|Rx_state"
-    Info: Completed encoding using 5 state bits
-        Info: Encoded state bit "Rx_state.001"
-        Info: Encoded state bit "Rx_state.010"
-        Info: Encoded state bit "Rx_state.011"
-        Info: Encoded state bit "Rx_state.000"
-        Info: Encoded state bit "Rx_state.100"
-    Info: State "|I2Stest|Rx_state.000" uses code string "00000"
-    Info: State "|I2Stest|Rx_state.011" uses code string "00110"
-    Info: State "|I2Stest|Rx_state.010" uses code string "01010"
-    Info: State "|I2Stest|Rx_state.100" uses code string "00011"
-    Info: State "|I2Stest|Rx_state.001" uses code string "10010"
 Info: Selected Auto state machine encoding method for state machine "|I2Stest|I2SAudioOut:I2SAudioOut|TLV_state"
 Info: Encoding result for state machine "|I2Stest|I2SAudioOut:I2SAudioOut|TLV_state"
     Info: Completed encoding using 5 state bits
@@ -353,18 +321,16 @@ Info: Encoding result for state machine "|I2Stest|I2SAudioOut:I2SAudioOut|TLV_st
     Info: State "|I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.010" uses code string "01010"
     Info: State "|I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.001" uses code string "10010"
     Info: State "|I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.100" uses code string "00011"
-Info: 4 registers lost all their fanouts during netlist optimizations. The first 4 are displayed below.
-    Info: Register "Rx_state~7" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_state~8" lost all its fanouts during netlist optimizations.
+Info: 2 registers lost all their fanouts during netlist optimizations. The first 2 are displayed below.
     Info: Register "I2SAudioOut/TLV_state~7" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAudioOut/TLV_state~8" lost all its fanouts during netlist optimizations.
-Info: Implemented 147 device resources after synthesis - the final resource count might be different
+Info: Implemented 119 device resources after synthesis - the final resource count might be different
     Info: Implemented 2 input pins
     Info: Implemented 33 output pins
-    Info: Implemented 112 logic cells
+    Info: Implemented 84 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 18 warnings
     Info: Allocated 124 megabytes of memory during processing
-    Info: Processing ended: Wed Apr 18 12:13:21 2007
-    Info: Elapsed time: 00:00:02
+    Info: Processing ended: Thu Apr 19 14:56:04 2007
+    Info: Elapsed time: 00:00:01
 
 

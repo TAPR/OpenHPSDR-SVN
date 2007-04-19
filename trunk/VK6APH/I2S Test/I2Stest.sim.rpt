@@ -1,5 +1,5 @@
 Simulator report for I2Stest
-Wed Apr 18 12:13:49 2007
+Thu Apr 19 15:01:48 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -45,9 +45,9 @@ applicable agreement for further details.
 +-----------------------------+--------------+
 ; Simulation Start Time       ; 0 ps         ;
 ; Simulation End Time         ; 500.0 us     ;
-; Simulation Netlist Size     ; 223 nodes    ;
-; Simulation Coverage         ;      41.26 % ;
-; Total Number of Transitions ; 26220        ;
+; Simulation Netlist Size     ; 169 nodes    ;
+; Simulation Coverage         ;      62.13 % ;
+; Total Number of Transitions ; 40960        ;
 ; Simulation Breakpoints      ; 0            ;
 ; Family                      ; Cyclone II   ;
 ; Device                      ; EP2C5Q208C8  ;
@@ -95,338 +95,246 @@ Please use Quartus II to view the waveform report data.
 +-----------------------------------------------------+--------------+
 ; Type                                                ; Value        ;
 +-----------------------------------------------------+--------------+
-; Total coverage as a percentage                      ;      41.26 % ;
-; Total nodes checked                                 ; 223          ;
-; Total output ports checked                          ; 223          ;
-; Total output ports with complete 1/0-value coverage ; 92           ;
-; Total output ports with no 1/0-value coverage       ; 74           ;
-; Total output ports with no 1-value coverage         ; 74           ;
-; Total output ports with no 0-value coverage         ; 131          ;
+; Total coverage as a percentage                      ;      62.13 % ;
+; Total nodes checked                                 ; 169          ;
+; Total output ports checked                          ; 169          ;
+; Total output ports with complete 1/0-value coverage ; 105          ;
+; Total output ports with no 1/0-value coverage       ; 36           ;
+; Total output ports with no 1-value coverage         ; 36           ;
+; Total output ports with no 0-value coverage         ; 64           ;
 +-----------------------------------------------------+--------------+
 
 
 The following table displays output ports that toggle between 1 and 0 during simulation.
-+--------------------------------------------------------------------------------------------------------------------------+
-; Complete 1/0-Value Coverage                                                                                              ;
-+---------------------------------------------------+---------------------------------------------------+------------------+
-; Node Name                                         ; Output Port Name                                  ; Output Port Type ;
-+---------------------------------------------------+---------------------------------------------------+------------------+
-; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.001    ; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.001    ; regout           ;
-; |I2Stest|Rx_state.001                             ; |I2Stest|Rx_state.001                             ; regout           ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|outbit_o         ; |I2Stest|I2SAudioOut:I2SAudioOut|outbit_o         ; regout           ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]     ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]     ; regout           ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[1]     ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[1]     ; regout           ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[2]     ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[2]     ; regout           ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]     ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]     ; regout           ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|Mux0~28          ; |I2Stest|I2SAudioOut:I2SAudioOut|Mux0~28          ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.100    ; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.100    ; regout           ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.010    ; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.010    ; regout           ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]~899 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]~899 ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~110       ; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~110       ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.011    ; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.011    ; regout           ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~900 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~900 ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~901 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~901 ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]~902 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]~902 ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~903 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~903 ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[1]~904 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[1]~904 ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~111       ; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~111       ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[2]~905 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[2]~905 ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~112       ; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~112       ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~906 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~906 ; combout          ;
-; |I2Stest|Rx_counter[0]                            ; |I2Stest|Rx_counter[0]                            ; regout           ;
-; |I2Stest|Rx_counter[1]                            ; |I2Stest|Rx_counter[1]                            ; regout           ;
-; |I2Stest|Rx_counter[2]                            ; |I2Stest|Rx_counter[2]                            ; regout           ;
-; |I2Stest|Rx_counter[3]                            ; |I2Stest|Rx_counter[3]                            ; regout           ;
-; |I2Stest|Decoder0~320                             ; |I2Stest|Decoder0~320                             ; combout          ;
-; |I2Stest|Rx_state.010                             ; |I2Stest|Rx_state.010                             ; regout           ;
-; |I2Stest|temp_data_left[0]~977                    ; |I2Stest|temp_data_left[0]~977                    ; combout          ;
-; |I2Stest|Decoder0~321                             ; |I2Stest|Decoder0~321                             ; combout          ;
-; |I2Stest|Decoder0~322                             ; |I2Stest|Decoder0~322                             ; combout          ;
-; |I2Stest|temp_data_left[2]~979                    ; |I2Stest|temp_data_left[2]~979                    ; combout          ;
-; |I2Stest|Decoder0~323                             ; |I2Stest|Decoder0~323                             ; combout          ;
-; |I2Stest|temp_data_left[3]~980                    ; |I2Stest|temp_data_left[3]~980                    ; combout          ;
-; |I2Stest|Decoder0~324                             ; |I2Stest|Decoder0~324                             ; combout          ;
-; |I2Stest|temp_data_left[4]~981                    ; |I2Stest|temp_data_left[4]~981                    ; combout          ;
-; |I2Stest|Decoder0~325                             ; |I2Stest|Decoder0~325                             ; combout          ;
-; |I2Stest|temp_data_left[5]~982                    ; |I2Stest|temp_data_left[5]~982                    ; combout          ;
-; |I2Stest|Decoder0~326                             ; |I2Stest|Decoder0~326                             ; combout          ;
-; |I2Stest|temp_data_left[6]~983                    ; |I2Stest|temp_data_left[6]~983                    ; combout          ;
-; |I2Stest|Decoder0~327                             ; |I2Stest|Decoder0~327                             ; combout          ;
-; |I2Stest|temp_data_left[7]~984                    ; |I2Stest|temp_data_left[7]~984                    ; combout          ;
-; |I2Stest|Decoder0~328                             ; |I2Stest|Decoder0~328                             ; combout          ;
-; |I2Stest|temp_data_left[8]~985                    ; |I2Stest|temp_data_left[8]~985                    ; combout          ;
-; |I2Stest|Decoder0~329                             ; |I2Stest|Decoder0~329                             ; combout          ;
-; |I2Stest|temp_data_left[9]~986                    ; |I2Stest|temp_data_left[9]~986                    ; combout          ;
-; |I2Stest|Decoder0~330                             ; |I2Stest|Decoder0~330                             ; combout          ;
-; |I2Stest|Decoder0~331                             ; |I2Stest|Decoder0~331                             ; combout          ;
-; |I2Stest|temp_data_left[11]~988                   ; |I2Stest|temp_data_left[11]~988                   ; combout          ;
-; |I2Stest|Decoder0~332                             ; |I2Stest|Decoder0~332                             ; combout          ;
-; |I2Stest|Decoder0~333                             ; |I2Stest|Decoder0~333                             ; combout          ;
-; |I2Stest|Decoder0~334                             ; |I2Stest|Decoder0~334                             ; combout          ;
-; |I2Stest|temp_data_left[14]~991                   ; |I2Stest|temp_data_left[14]~991                   ; combout          ;
-; |I2Stest|Decoder0~335                             ; |I2Stest|Decoder0~335                             ; combout          ;
-; |I2Stest|temp_data_left[15]~992                   ; |I2Stest|temp_data_left[15]~992                   ; combout          ;
-; |I2Stest|Rx_state.100                             ; |I2Stest|Rx_state.100                             ; regout           ;
-; |I2Stest|temp_data_right[0]~977                   ; |I2Stest|temp_data_right[0]~977                   ; combout          ;
-; |I2Stest|temp_data_right[2]~979                   ; |I2Stest|temp_data_right[2]~979                   ; combout          ;
-; |I2Stest|temp_data_right[3]~980                   ; |I2Stest|temp_data_right[3]~980                   ; combout          ;
-; |I2Stest|temp_data_right[4]~981                   ; |I2Stest|temp_data_right[4]~981                   ; combout          ;
-; |I2Stest|temp_data_right[5]~982                   ; |I2Stest|temp_data_right[5]~982                   ; combout          ;
-; |I2Stest|temp_data_right[6]~983                   ; |I2Stest|temp_data_right[6]~983                   ; combout          ;
-; |I2Stest|temp_data_right[7]~984                   ; |I2Stest|temp_data_right[7]~984                   ; combout          ;
-; |I2Stest|temp_data_right[8]~985                   ; |I2Stest|temp_data_right[8]~985                   ; combout          ;
-; |I2Stest|temp_data_right[9]~986                   ; |I2Stest|temp_data_right[9]~986                   ; combout          ;
-; |I2Stest|temp_data_right[11]~988                  ; |I2Stest|temp_data_right[11]~988                  ; combout          ;
-; |I2Stest|temp_data_right[14]~991                  ; |I2Stest|temp_data_right[14]~991                  ; combout          ;
-; |I2Stest|temp_data_right[15]~992                  ; |I2Stest|temp_data_right[15]~992                  ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|Selector1~13     ; |I2Stest|I2SAudioOut:I2SAudioOut|Selector1~13     ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.000    ; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.000    ; regout           ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|WideOr3~1        ; |I2Stest|I2SAudioOut:I2SAudioOut|WideOr3~1        ; combout          ;
-; |I2Stest|Rx_counter[0]~882                        ; |I2Stest|Rx_counter[0]~882                        ; combout          ;
-; |I2Stest|Rx_counter[3]~883                        ; |I2Stest|Rx_counter[3]~883                        ; combout          ;
-; |I2Stest|Rx_state.011                             ; |I2Stest|Rx_state.011                             ; regout           ;
-; |I2Stest|Rx_counter[3]~884                        ; |I2Stest|Rx_counter[3]~884                        ; combout          ;
-; |I2Stest|Rx_counter[0]~885                        ; |I2Stest|Rx_counter[0]~885                        ; combout          ;
-; |I2Stest|Rx_counter[3]~886                        ; |I2Stest|Rx_counter[3]~886                        ; combout          ;
-; |I2Stest|Rx_counter[1]~887                        ; |I2Stest|Rx_counter[1]~887                        ; combout          ;
-; |I2Stest|Equal0~103                               ; |I2Stest|Equal0~103                               ; combout          ;
-; |I2Stest|Rx_counter[2]~888                        ; |I2Stest|Rx_counter[2]~888                        ; combout          ;
-; |I2Stest|Equal0~104                               ; |I2Stest|Equal0~104                               ; combout          ;
-; |I2Stest|Rx_counter[3]~889                        ; |I2Stest|Rx_counter[3]~889                        ; combout          ;
-; |I2Stest|I2SAudioOut:I2SAudioOut|Selector4~18     ; |I2Stest|I2SAudioOut:I2SAudioOut|Selector4~18     ; combout          ;
-; |I2Stest|Rx_state.000                             ; |I2Stest|Rx_state.000                             ; regout           ;
-; |I2Stest|WideOr4~1                                ; |I2Stest|WideOr4~1                                ; combout          ;
-; |I2Stest|Selector1~13                             ; |I2Stest|Selector1~13                             ; combout          ;
-; |I2Stest|Selector3~18                             ; |I2Stest|Selector3~18                             ; combout          ;
-; |I2Stest|DIN                                      ; |I2Stest|DIN                                      ; padio            ;
-; |I2Stest|CBCLK                                    ; |I2Stest|CBCLK                                    ; combout          ;
-; |I2Stest|CLRCLK                                   ; |I2Stest|CLRCLK                                   ; combout          ;
-; |I2Stest|CLRCLK~clkctrl                           ; |I2Stest|CLRCLK~clkctrl                           ; outclk           ;
-; |I2Stest|CBCLK~clkctrl                            ; |I2Stest|CBCLK~clkctrl                            ; outclk           ;
-+---------------------------------------------------+---------------------------------------------------+------------------+
++----------------------------------------------------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                                                                ;
++----------------------------------------------------+----------------------------------------------------+------------------+
+; Node Name                                          ; Output Port Name                                   ; Output Port Type ;
++----------------------------------------------------+----------------------------------------------------+------------------+
+; |I2Stest|I2SAudioOut:I2SAudioOut|outbit_o          ; |I2Stest|I2SAudioOut:I2SAudioOut|outbit_o          ; regout           ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]      ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]      ; regout           ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[1]      ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[1]      ; regout           ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[2]      ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[2]      ; regout           ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]      ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]      ; regout           ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|Mux0~28           ; |I2Stest|I2SAudioOut:I2SAudioOut|Mux0~28           ; combout          ;
+; |I2Stest|Tx_q[0]                                   ; |I2Stest|Tx_q[0]                                   ; regout           ;
+; |I2Stest|TX_state[3]                               ; |I2Stest|TX_state[3]                               ; regout           ;
+; |I2Stest|TX_state[5]                               ; |I2Stest|TX_state[5]                               ; regout           ;
+; |I2Stest|TX_state[2]                               ; |I2Stest|TX_state[2]                               ; regout           ;
+; |I2Stest|Decoder0~269                              ; |I2Stest|Decoder0~269                              ; combout          ;
+; |I2Stest|TX_state[4]                               ; |I2Stest|TX_state[4]                               ; regout           ;
+; |I2Stest|TX_state[1]                               ; |I2Stest|TX_state[1]                               ; regout           ;
+; |I2Stest|TX_state[0]                               ; |I2Stest|TX_state[0]                               ; regout           ;
+; |I2Stest|Decoder0~270                              ; |I2Stest|Decoder0~270                              ; combout          ;
+; |I2Stest|Tx_q[1]                                   ; |I2Stest|Tx_q[1]                                   ; regout           ;
+; |I2Stest|Tx_q[2]                                   ; |I2Stest|Tx_q[2]                                   ; regout           ;
+; |I2Stest|Tx_q[3]                                   ; |I2Stest|Tx_q[3]                                   ; regout           ;
+; |I2Stest|Tx_q[4]                                   ; |I2Stest|Tx_q[4]                                   ; regout           ;
+; |I2Stest|Tx_q[5]                                   ; |I2Stest|Tx_q[5]                                   ; regout           ;
+; |I2Stest|Tx_q[6]                                   ; |I2Stest|Tx_q[6]                                   ; regout           ;
+; |I2Stest|Tx_q[7]                                   ; |I2Stest|Tx_q[7]                                   ; regout           ;
+; |I2Stest|Tx_q[8]                                   ; |I2Stest|Tx_q[8]                                   ; regout           ;
+; |I2Stest|Tx_q[9]                                   ; |I2Stest|Tx_q[9]                                   ; regout           ;
+; |I2Stest|Tx_q[10]                                  ; |I2Stest|Tx_q[10]                                  ; regout           ;
+; |I2Stest|Tx_q[11]                                  ; |I2Stest|Tx_q[11]                                  ; regout           ;
+; |I2Stest|Tx_q[12]                                  ; |I2Stest|Tx_q[12]                                  ; regout           ;
+; |I2Stest|Tx_q[13]                                  ; |I2Stest|Tx_q[13]                                  ; regout           ;
+; |I2Stest|Tx_q[14]                                  ; |I2Stest|Tx_q[14]                                  ; regout           ;
+; |I2Stest|Tx_q[15]                                  ; |I2Stest|Tx_q[15]                                  ; regout           ;
+; |I2Stest|Selector1~320                             ; |I2Stest|Selector1~320                             ; combout          ;
+; |I2Stest|Decoder0~271                              ; |I2Stest|Decoder0~271                              ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.100     ; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.100     ; regout           ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.010     ; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.010     ; regout           ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]~1171 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]~1171 ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~110        ; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~110        ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.011     ; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.011     ; regout           ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~1172 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~1172 ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.001     ; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.001     ; regout           ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~1173 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~1173 ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]~1174 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[0]~1174 ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~1175 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~1175 ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[1]~1176 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[1]~1176 ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~111        ; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~111        ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[2]~1177 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[2]~1177 ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~112        ; |I2Stest|I2SAudioOut:I2SAudioOut|Equal0~112        ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~1178 ; |I2Stest|I2SAudioOut:I2SAudioOut|bit_count[3]~1178 ; combout          ;
+; |I2Stest|Selector0~43                              ; |I2Stest|Selector0~43                              ; combout          ;
+; |I2Stest|Decoder0~272                              ; |I2Stest|Decoder0~272                              ; combout          ;
+; |I2Stest|WideOr0~278                               ; |I2Stest|WideOr0~278                               ; combout          ;
+; |I2Stest|TX_state~145                              ; |I2Stest|TX_state~145                              ; combout          ;
+; |I2Stest|Add0~194                                  ; |I2Stest|Add0~194                                  ; combout          ;
+; |I2Stest|TX_state~146                              ; |I2Stest|TX_state~146                              ; combout          ;
+; |I2Stest|Selector1~321                             ; |I2Stest|Selector1~321                             ; combout          ;
+; |I2Stest|Selector1~322                             ; |I2Stest|Selector1~322                             ; combout          ;
+; |I2Stest|Selector1~323                             ; |I2Stest|Selector1~323                             ; combout          ;
+; |I2Stest|TX_state[4]~147                           ; |I2Stest|TX_state[4]~147                           ; combout          ;
+; |I2Stest|Selector2~276                             ; |I2Stest|Selector2~276                             ; combout          ;
+; |I2Stest|Selector2~277                             ; |I2Stest|Selector2~277                             ; combout          ;
+; |I2Stest|Selector3~446                             ; |I2Stest|Selector3~446                             ; combout          ;
+; |I2Stest|Selector3~447                             ; |I2Stest|Selector3~447                             ; combout          ;
+; |I2Stest|Selector3~448                             ; |I2Stest|Selector3~448                             ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|Selector1~13      ; |I2Stest|I2SAudioOut:I2SAudioOut|Selector1~13      ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.000     ; |I2Stest|I2SAudioOut:I2SAudioOut|TLV_state.000     ; regout           ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|Selector3~20      ; |I2Stest|I2SAudioOut:I2SAudioOut|Selector3~20      ; combout          ;
+; |I2Stest|I2SAudioOut:I2SAudioOut|Selector4~18      ; |I2Stest|I2SAudioOut:I2SAudioOut|Selector4~18      ; combout          ;
+; |I2Stest|DIN                                       ; |I2Stest|DIN                                       ; padio            ;
+; |I2Stest|CBCLK                                     ; |I2Stest|CBCLK                                     ; combout          ;
+; |I2Stest|CLRCLK                                    ; |I2Stest|CLRCLK                                    ; combout          ;
+; |I2Stest|CBCLK~clkctrl                             ; |I2Stest|CBCLK~clkctrl                             ; outclk           ;
+; |I2Stest|Tx_q[0]~feeder                            ; |I2Stest|Tx_q[0]~feeder                            ; combout          ;
+; |I2Stest|data_left[0]~reg0feeder                   ; |I2Stest|data_left[0]~reg0feeder                   ; combout          ;
+; |I2Stest|data_right[1]~reg0feeder                  ; |I2Stest|data_right[1]~reg0feeder                  ; combout          ;
+; |I2Stest|Tx_q[2]~feeder                            ; |I2Stest|Tx_q[2]~feeder                            ; combout          ;
+; |I2Stest|data_left[1]~reg0feeder                   ; |I2Stest|data_left[1]~reg0feeder                   ; combout          ;
+; |I2Stest|data_left[2]~reg0feeder                   ; |I2Stest|data_left[2]~reg0feeder                   ; combout          ;
+; |I2Stest|data_right[3]~reg0feeder                  ; |I2Stest|data_right[3]~reg0feeder                  ; combout          ;
+; |I2Stest|Tx_q[4]~feeder                            ; |I2Stest|Tx_q[4]~feeder                            ; combout          ;
+; |I2Stest|data_left[3]~reg0feeder                   ; |I2Stest|data_left[3]~reg0feeder                   ; combout          ;
+; |I2Stest|data_right[4]~reg0feeder                  ; |I2Stest|data_right[4]~reg0feeder                  ; combout          ;
+; |I2Stest|Tx_q[5]~feeder                            ; |I2Stest|Tx_q[5]~feeder                            ; combout          ;
+; |I2Stest|data_left[4]~reg0feeder                   ; |I2Stest|data_left[4]~reg0feeder                   ; combout          ;
+; |I2Stest|data_right[5]~reg0feeder                  ; |I2Stest|data_right[5]~reg0feeder                  ; combout          ;
+; |I2Stest|Tx_q[6]~feeder                            ; |I2Stest|Tx_q[6]~feeder                            ; combout          ;
+; |I2Stest|data_left[5]~reg0feeder                   ; |I2Stest|data_left[5]~reg0feeder                   ; combout          ;
+; |I2Stest|data_left[6]~reg0feeder                   ; |I2Stest|data_left[6]~reg0feeder                   ; combout          ;
+; |I2Stest|data_left[7]~reg0feeder                   ; |I2Stest|data_left[7]~reg0feeder                   ; combout          ;
+; |I2Stest|Tx_q[8]~feeder                            ; |I2Stest|Tx_q[8]~feeder                            ; combout          ;
+; |I2Stest|data_right[8]~reg0feeder                  ; |I2Stest|data_right[8]~reg0feeder                  ; combout          ;
+; |I2Stest|Tx_q[9]~feeder                            ; |I2Stest|Tx_q[9]~feeder                            ; combout          ;
+; |I2Stest|data_left[8]~reg0feeder                   ; |I2Stest|data_left[8]~reg0feeder                   ; combout          ;
+; |I2Stest|data_right[9]~reg0feeder                  ; |I2Stest|data_right[9]~reg0feeder                  ; combout          ;
+; |I2Stest|data_right[10]~reg0feeder                 ; |I2Stest|data_right[10]~reg0feeder                 ; combout          ;
+; |I2Stest|data_left[11]~reg0feeder                  ; |I2Stest|data_left[11]~reg0feeder                  ; combout          ;
+; |I2Stest|Tx_q[12]~feeder                           ; |I2Stest|Tx_q[12]~feeder                           ; combout          ;
+; |I2Stest|data_right[11]~reg0feeder                 ; |I2Stest|data_right[11]~reg0feeder                 ; combout          ;
+; |I2Stest|data_left[12]~reg0feeder                  ; |I2Stest|data_left[12]~reg0feeder                  ; combout          ;
+; |I2Stest|Tx_q[13]~feeder                           ; |I2Stest|Tx_q[13]~feeder                           ; combout          ;
+; |I2Stest|data_right[12]~reg0feeder                 ; |I2Stest|data_right[12]~reg0feeder                 ; combout          ;
+; |I2Stest|data_right[13]~reg0feeder                 ; |I2Stest|data_right[13]~reg0feeder                 ; combout          ;
+; |I2Stest|data_left[14]~reg0feeder                  ; |I2Stest|data_left[14]~reg0feeder                  ; combout          ;
+; |I2Stest|Tx_q[15]~feeder                           ; |I2Stest|Tx_q[15]~feeder                           ; combout          ;
+; |I2Stest|data_right[14]~reg0feeder                 ; |I2Stest|data_right[14]~reg0feeder                 ; combout          ;
+; |I2Stest|data_left[15]~reg0feeder                  ; |I2Stest|data_left[15]~reg0feeder                  ; combout          ;
+; |I2Stest|data_right[15]~reg0feeder                 ; |I2Stest|data_right[15]~reg0feeder                 ; combout          ;
++----------------------------------------------------+----------------------------------------------------+------------------+
 
 
 The following table displays output ports that do not toggle to 1 during simulation.
-+--------------------------------------------------------------------------------------------+
-; Missing 1-Value Coverage                                                                   ;
-+------------------------------------+------------------------------------+------------------+
-; Node Name                          ; Output Port Name                   ; Output Port Type ;
-+------------------------------------+------------------------------------+------------------+
-; |I2Stest|data_left[0]~reg0         ; |I2Stest|data_left[0]~reg0         ; regout           ;
-; |I2Stest|data_left[1]~reg0         ; |I2Stest|data_left[1]~reg0         ; regout           ;
-; |I2Stest|data_left[2]~reg0         ; |I2Stest|data_left[2]~reg0         ; regout           ;
-; |I2Stest|data_left[3]~reg0         ; |I2Stest|data_left[3]~reg0         ; regout           ;
-; |I2Stest|data_left[5]~reg0         ; |I2Stest|data_left[5]~reg0         ; regout           ;
-; |I2Stest|data_left[7]~reg0         ; |I2Stest|data_left[7]~reg0         ; regout           ;
-; |I2Stest|data_left[12]~reg0        ; |I2Stest|data_left[12]~reg0        ; regout           ;
-; |I2Stest|data_left[13]~reg0        ; |I2Stest|data_left[13]~reg0        ; regout           ;
-; |I2Stest|data_left[14]~reg0        ; |I2Stest|data_left[14]~reg0        ; regout           ;
-; |I2Stest|data_right[0]~reg0        ; |I2Stest|data_right[0]~reg0        ; regout           ;
-; |I2Stest|data_right[1]~reg0        ; |I2Stest|data_right[1]~reg0        ; regout           ;
-; |I2Stest|data_right[2]~reg0        ; |I2Stest|data_right[2]~reg0        ; regout           ;
-; |I2Stest|data_right[3]~reg0        ; |I2Stest|data_right[3]~reg0        ; regout           ;
-; |I2Stest|data_right[5]~reg0        ; |I2Stest|data_right[5]~reg0        ; regout           ;
-; |I2Stest|data_right[7]~reg0        ; |I2Stest|data_right[7]~reg0        ; regout           ;
-; |I2Stest|data_right[12]~reg0       ; |I2Stest|data_right[12]~reg0       ; regout           ;
-; |I2Stest|data_right[13]~reg0       ; |I2Stest|data_right[13]~reg0       ; regout           ;
-; |I2Stest|data_right[14]~reg0       ; |I2Stest|data_right[14]~reg0       ; regout           ;
-; |I2Stest|temp_data_left[0]         ; |I2Stest|temp_data_left[0]         ; regout           ;
-; |I2Stest|temp_data_left[1]         ; |I2Stest|temp_data_left[1]         ; regout           ;
-; |I2Stest|temp_data_left[2]         ; |I2Stest|temp_data_left[2]         ; regout           ;
-; |I2Stest|temp_data_left[3]         ; |I2Stest|temp_data_left[3]         ; regout           ;
-; |I2Stest|temp_data_left[5]         ; |I2Stest|temp_data_left[5]         ; regout           ;
-; |I2Stest|temp_data_left[7]         ; |I2Stest|temp_data_left[7]         ; regout           ;
-; |I2Stest|temp_data_left[12]        ; |I2Stest|temp_data_left[12]        ; regout           ;
-; |I2Stest|temp_data_left[13]        ; |I2Stest|temp_data_left[13]        ; regout           ;
-; |I2Stest|temp_data_left[14]        ; |I2Stest|temp_data_left[14]        ; regout           ;
-; |I2Stest|temp_data_right[0]        ; |I2Stest|temp_data_right[0]        ; regout           ;
-; |I2Stest|temp_data_right[1]        ; |I2Stest|temp_data_right[1]        ; regout           ;
-; |I2Stest|temp_data_right[2]        ; |I2Stest|temp_data_right[2]        ; regout           ;
-; |I2Stest|temp_data_right[3]        ; |I2Stest|temp_data_right[3]        ; regout           ;
-; |I2Stest|temp_data_right[5]        ; |I2Stest|temp_data_right[5]        ; regout           ;
-; |I2Stest|temp_data_right[7]        ; |I2Stest|temp_data_right[7]        ; regout           ;
-; |I2Stest|temp_data_right[12]       ; |I2Stest|temp_data_right[12]       ; regout           ;
-; |I2Stest|temp_data_right[13]       ; |I2Stest|temp_data_right[13]       ; regout           ;
-; |I2Stest|temp_data_right[14]       ; |I2Stest|temp_data_right[14]       ; regout           ;
-; |I2Stest|temp_data_left[1]~978     ; |I2Stest|temp_data_left[1]~978     ; combout          ;
-; |I2Stest|temp_data_left[12]~989    ; |I2Stest|temp_data_left[12]~989    ; combout          ;
-; |I2Stest|temp_data_left[13]~990    ; |I2Stest|temp_data_left[13]~990    ; combout          ;
-; |I2Stest|temp_data_right[1]~978    ; |I2Stest|temp_data_right[1]~978    ; combout          ;
-; |I2Stest|temp_data_right[12]~989   ; |I2Stest|temp_data_right[12]~989   ; combout          ;
-; |I2Stest|temp_data_right[13]~990   ; |I2Stest|temp_data_right[13]~990   ; combout          ;
-; |I2Stest|data_left[0]              ; |I2Stest|data_left[0]              ; padio            ;
-; |I2Stest|data_left[1]              ; |I2Stest|data_left[1]              ; padio            ;
-; |I2Stest|data_left[2]              ; |I2Stest|data_left[2]              ; padio            ;
-; |I2Stest|data_left[3]              ; |I2Stest|data_left[3]              ; padio            ;
-; |I2Stest|data_left[5]              ; |I2Stest|data_left[5]              ; padio            ;
-; |I2Stest|data_left[7]              ; |I2Stest|data_left[7]              ; padio            ;
-; |I2Stest|data_left[12]             ; |I2Stest|data_left[12]             ; padio            ;
-; |I2Stest|data_left[13]             ; |I2Stest|data_left[13]             ; padio            ;
-; |I2Stest|data_left[14]             ; |I2Stest|data_left[14]             ; padio            ;
-; |I2Stest|data_right[0]             ; |I2Stest|data_right[0]             ; padio            ;
-; |I2Stest|data_right[1]             ; |I2Stest|data_right[1]             ; padio            ;
-; |I2Stest|data_right[2]             ; |I2Stest|data_right[2]             ; padio            ;
-; |I2Stest|data_right[3]             ; |I2Stest|data_right[3]             ; padio            ;
-; |I2Stest|data_right[5]             ; |I2Stest|data_right[5]             ; padio            ;
-; |I2Stest|data_right[7]             ; |I2Stest|data_right[7]             ; padio            ;
-; |I2Stest|data_right[12]            ; |I2Stest|data_right[12]            ; padio            ;
-; |I2Stest|data_right[13]            ; |I2Stest|data_right[13]            ; padio            ;
-; |I2Stest|data_right[14]            ; |I2Stest|data_right[14]            ; padio            ;
-; |I2Stest|data_left[0]~reg0feeder   ; |I2Stest|data_left[0]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[1]~reg0feeder   ; |I2Stest|data_left[1]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[2]~reg0feeder   ; |I2Stest|data_left[2]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[3]~reg0feeder   ; |I2Stest|data_left[3]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[5]~reg0feeder   ; |I2Stest|data_left[5]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[12]~reg0feeder  ; |I2Stest|data_left[12]~reg0feeder  ; combout          ;
-; |I2Stest|data_left[13]~reg0feeder  ; |I2Stest|data_left[13]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[0]~reg0feeder  ; |I2Stest|data_right[0]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[1]~reg0feeder  ; |I2Stest|data_right[1]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[3]~reg0feeder  ; |I2Stest|data_right[3]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[5]~reg0feeder  ; |I2Stest|data_right[5]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[7]~reg0feeder  ; |I2Stest|data_right[7]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[12]~reg0feeder ; |I2Stest|data_right[12]~reg0feeder ; combout          ;
-; |I2Stest|data_right[13]~reg0feeder ; |I2Stest|data_right[13]~reg0feeder ; combout          ;
-+------------------------------------+------------------------------------+------------------+
++--------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                       ;
++------------------------------+------------------------------+------------------+
+; Node Name                    ; Output Port Name             ; Output Port Type ;
++------------------------------+------------------------------+------------------+
+; |I2Stest|data_left[0]~reg0   ; |I2Stest|data_left[0]~reg0   ; regout           ;
+; |I2Stest|data_left[1]~reg0   ; |I2Stest|data_left[1]~reg0   ; regout           ;
+; |I2Stest|data_left[2]~reg0   ; |I2Stest|data_left[2]~reg0   ; regout           ;
+; |I2Stest|data_left[3]~reg0   ; |I2Stest|data_left[3]~reg0   ; regout           ;
+; |I2Stest|data_left[5]~reg0   ; |I2Stest|data_left[5]~reg0   ; regout           ;
+; |I2Stest|data_left[7]~reg0   ; |I2Stest|data_left[7]~reg0   ; regout           ;
+; |I2Stest|data_left[12]~reg0  ; |I2Stest|data_left[12]~reg0  ; regout           ;
+; |I2Stest|data_left[13]~reg0  ; |I2Stest|data_left[13]~reg0  ; regout           ;
+; |I2Stest|data_left[14]~reg0  ; |I2Stest|data_left[14]~reg0  ; regout           ;
+; |I2Stest|data_right[0]~reg0  ; |I2Stest|data_right[0]~reg0  ; regout           ;
+; |I2Stest|data_right[1]~reg0  ; |I2Stest|data_right[1]~reg0  ; regout           ;
+; |I2Stest|data_right[2]~reg0  ; |I2Stest|data_right[2]~reg0  ; regout           ;
+; |I2Stest|data_right[3]~reg0  ; |I2Stest|data_right[3]~reg0  ; regout           ;
+; |I2Stest|data_right[5]~reg0  ; |I2Stest|data_right[5]~reg0  ; regout           ;
+; |I2Stest|data_right[7]~reg0  ; |I2Stest|data_right[7]~reg0  ; regout           ;
+; |I2Stest|data_right[12]~reg0 ; |I2Stest|data_right[12]~reg0 ; regout           ;
+; |I2Stest|data_right[13]~reg0 ; |I2Stest|data_right[13]~reg0 ; regout           ;
+; |I2Stest|data_right[14]~reg0 ; |I2Stest|data_right[14]~reg0 ; regout           ;
+; |I2Stest|data_left[0]        ; |I2Stest|data_left[0]        ; padio            ;
+; |I2Stest|data_left[1]        ; |I2Stest|data_left[1]        ; padio            ;
+; |I2Stest|data_left[2]        ; |I2Stest|data_left[2]        ; padio            ;
+; |I2Stest|data_left[3]        ; |I2Stest|data_left[3]        ; padio            ;
+; |I2Stest|data_left[5]        ; |I2Stest|data_left[5]        ; padio            ;
+; |I2Stest|data_left[7]        ; |I2Stest|data_left[7]        ; padio            ;
+; |I2Stest|data_left[12]       ; |I2Stest|data_left[12]       ; padio            ;
+; |I2Stest|data_left[13]       ; |I2Stest|data_left[13]       ; padio            ;
+; |I2Stest|data_left[14]       ; |I2Stest|data_left[14]       ; padio            ;
+; |I2Stest|data_right[0]       ; |I2Stest|data_right[0]       ; padio            ;
+; |I2Stest|data_right[1]       ; |I2Stest|data_right[1]       ; padio            ;
+; |I2Stest|data_right[2]       ; |I2Stest|data_right[2]       ; padio            ;
+; |I2Stest|data_right[3]       ; |I2Stest|data_right[3]       ; padio            ;
+; |I2Stest|data_right[5]       ; |I2Stest|data_right[5]       ; padio            ;
+; |I2Stest|data_right[7]       ; |I2Stest|data_right[7]       ; padio            ;
+; |I2Stest|data_right[12]      ; |I2Stest|data_right[12]      ; padio            ;
+; |I2Stest|data_right[13]      ; |I2Stest|data_right[13]      ; padio            ;
+; |I2Stest|data_right[14]      ; |I2Stest|data_right[14]      ; padio            ;
++------------------------------+------------------------------+------------------+
 
 
 The following table displays output ports that do not toggle to 0 during simulation.
-+--------------------------------------------------------------------------------------------+
-; Missing 0-Value Coverage                                                                   ;
-+------------------------------------+------------------------------------+------------------+
-; Node Name                          ; Output Port Name                   ; Output Port Type ;
-+------------------------------------+------------------------------------+------------------+
-; |I2Stest|data_left[0]~reg0         ; |I2Stest|data_left[0]~reg0         ; regout           ;
-; |I2Stest|data_left[1]~reg0         ; |I2Stest|data_left[1]~reg0         ; regout           ;
-; |I2Stest|data_left[2]~reg0         ; |I2Stest|data_left[2]~reg0         ; regout           ;
-; |I2Stest|data_left[3]~reg0         ; |I2Stest|data_left[3]~reg0         ; regout           ;
-; |I2Stest|data_left[4]~reg0         ; |I2Stest|data_left[4]~reg0         ; regout           ;
-; |I2Stest|data_left[5]~reg0         ; |I2Stest|data_left[5]~reg0         ; regout           ;
-; |I2Stest|data_left[6]~reg0         ; |I2Stest|data_left[6]~reg0         ; regout           ;
-; |I2Stest|data_left[7]~reg0         ; |I2Stest|data_left[7]~reg0         ; regout           ;
-; |I2Stest|data_left[8]~reg0         ; |I2Stest|data_left[8]~reg0         ; regout           ;
-; |I2Stest|data_left[9]~reg0         ; |I2Stest|data_left[9]~reg0         ; regout           ;
-; |I2Stest|data_left[10]~reg0        ; |I2Stest|data_left[10]~reg0        ; regout           ;
-; |I2Stest|data_left[11]~reg0        ; |I2Stest|data_left[11]~reg0        ; regout           ;
-; |I2Stest|data_left[12]~reg0        ; |I2Stest|data_left[12]~reg0        ; regout           ;
-; |I2Stest|data_left[13]~reg0        ; |I2Stest|data_left[13]~reg0        ; regout           ;
-; |I2Stest|data_left[14]~reg0        ; |I2Stest|data_left[14]~reg0        ; regout           ;
-; |I2Stest|data_left[15]~reg0        ; |I2Stest|data_left[15]~reg0        ; regout           ;
-; |I2Stest|data_right[0]~reg0        ; |I2Stest|data_right[0]~reg0        ; regout           ;
-; |I2Stest|data_right[1]~reg0        ; |I2Stest|data_right[1]~reg0        ; regout           ;
-; |I2Stest|data_right[2]~reg0        ; |I2Stest|data_right[2]~reg0        ; regout           ;
-; |I2Stest|data_right[3]~reg0        ; |I2Stest|data_right[3]~reg0        ; regout           ;
-; |I2Stest|data_right[4]~reg0        ; |I2Stest|data_right[4]~reg0        ; regout           ;
-; |I2Stest|data_right[5]~reg0        ; |I2Stest|data_right[5]~reg0        ; regout           ;
-; |I2Stest|data_right[6]~reg0        ; |I2Stest|data_right[6]~reg0        ; regout           ;
-; |I2Stest|data_right[7]~reg0        ; |I2Stest|data_right[7]~reg0        ; regout           ;
-; |I2Stest|data_right[8]~reg0        ; |I2Stest|data_right[8]~reg0        ; regout           ;
-; |I2Stest|data_right[9]~reg0        ; |I2Stest|data_right[9]~reg0        ; regout           ;
-; |I2Stest|data_right[10]~reg0       ; |I2Stest|data_right[10]~reg0       ; regout           ;
-; |I2Stest|data_right[11]~reg0       ; |I2Stest|data_right[11]~reg0       ; regout           ;
-; |I2Stest|data_right[12]~reg0       ; |I2Stest|data_right[12]~reg0       ; regout           ;
-; |I2Stest|data_right[13]~reg0       ; |I2Stest|data_right[13]~reg0       ; regout           ;
-; |I2Stest|data_right[14]~reg0       ; |I2Stest|data_right[14]~reg0       ; regout           ;
-; |I2Stest|data_right[15]~reg0       ; |I2Stest|data_right[15]~reg0       ; regout           ;
-; |I2Stest|temp_data_left[0]         ; |I2Stest|temp_data_left[0]         ; regout           ;
-; |I2Stest|temp_data_left[1]         ; |I2Stest|temp_data_left[1]         ; regout           ;
-; |I2Stest|temp_data_left[2]         ; |I2Stest|temp_data_left[2]         ; regout           ;
-; |I2Stest|temp_data_left[3]         ; |I2Stest|temp_data_left[3]         ; regout           ;
-; |I2Stest|temp_data_left[4]         ; |I2Stest|temp_data_left[4]         ; regout           ;
-; |I2Stest|temp_data_left[5]         ; |I2Stest|temp_data_left[5]         ; regout           ;
-; |I2Stest|temp_data_left[6]         ; |I2Stest|temp_data_left[6]         ; regout           ;
-; |I2Stest|temp_data_left[7]         ; |I2Stest|temp_data_left[7]         ; regout           ;
-; |I2Stest|temp_data_left[8]         ; |I2Stest|temp_data_left[8]         ; regout           ;
-; |I2Stest|temp_data_left[9]         ; |I2Stest|temp_data_left[9]         ; regout           ;
-; |I2Stest|temp_data_left[10]        ; |I2Stest|temp_data_left[10]        ; regout           ;
-; |I2Stest|temp_data_left[11]        ; |I2Stest|temp_data_left[11]        ; regout           ;
-; |I2Stest|temp_data_left[12]        ; |I2Stest|temp_data_left[12]        ; regout           ;
-; |I2Stest|temp_data_left[13]        ; |I2Stest|temp_data_left[13]        ; regout           ;
-; |I2Stest|temp_data_left[14]        ; |I2Stest|temp_data_left[14]        ; regout           ;
-; |I2Stest|temp_data_left[15]        ; |I2Stest|temp_data_left[15]        ; regout           ;
-; |I2Stest|temp_data_right[0]        ; |I2Stest|temp_data_right[0]        ; regout           ;
-; |I2Stest|temp_data_right[1]        ; |I2Stest|temp_data_right[1]        ; regout           ;
-; |I2Stest|temp_data_right[2]        ; |I2Stest|temp_data_right[2]        ; regout           ;
-; |I2Stest|temp_data_right[3]        ; |I2Stest|temp_data_right[3]        ; regout           ;
-; |I2Stest|temp_data_right[4]        ; |I2Stest|temp_data_right[4]        ; regout           ;
-; |I2Stest|temp_data_right[5]        ; |I2Stest|temp_data_right[5]        ; regout           ;
-; |I2Stest|temp_data_right[6]        ; |I2Stest|temp_data_right[6]        ; regout           ;
-; |I2Stest|temp_data_right[7]        ; |I2Stest|temp_data_right[7]        ; regout           ;
-; |I2Stest|temp_data_right[8]        ; |I2Stest|temp_data_right[8]        ; regout           ;
-; |I2Stest|temp_data_right[9]        ; |I2Stest|temp_data_right[9]        ; regout           ;
-; |I2Stest|temp_data_right[10]       ; |I2Stest|temp_data_right[10]       ; regout           ;
-; |I2Stest|temp_data_right[11]       ; |I2Stest|temp_data_right[11]       ; regout           ;
-; |I2Stest|temp_data_right[12]       ; |I2Stest|temp_data_right[12]       ; regout           ;
-; |I2Stest|temp_data_right[13]       ; |I2Stest|temp_data_right[13]       ; regout           ;
-; |I2Stest|temp_data_right[14]       ; |I2Stest|temp_data_right[14]       ; regout           ;
-; |I2Stest|temp_data_right[15]       ; |I2Stest|temp_data_right[15]       ; regout           ;
-; |I2Stest|temp_data_left[1]~978     ; |I2Stest|temp_data_left[1]~978     ; combout          ;
-; |I2Stest|temp_data_left[10]~987    ; |I2Stest|temp_data_left[10]~987    ; combout          ;
-; |I2Stest|temp_data_left[12]~989    ; |I2Stest|temp_data_left[12]~989    ; combout          ;
-; |I2Stest|temp_data_left[13]~990    ; |I2Stest|temp_data_left[13]~990    ; combout          ;
-; |I2Stest|temp_data_right[1]~978    ; |I2Stest|temp_data_right[1]~978    ; combout          ;
-; |I2Stest|temp_data_right[10]~987   ; |I2Stest|temp_data_right[10]~987   ; combout          ;
-; |I2Stest|temp_data_right[12]~989   ; |I2Stest|temp_data_right[12]~989   ; combout          ;
-; |I2Stest|temp_data_right[13]~990   ; |I2Stest|temp_data_right[13]~990   ; combout          ;
-; |I2Stest|data_left[0]              ; |I2Stest|data_left[0]              ; padio            ;
-; |I2Stest|data_left[1]              ; |I2Stest|data_left[1]              ; padio            ;
-; |I2Stest|data_left[2]              ; |I2Stest|data_left[2]              ; padio            ;
-; |I2Stest|data_left[3]              ; |I2Stest|data_left[3]              ; padio            ;
-; |I2Stest|data_left[4]              ; |I2Stest|data_left[4]              ; padio            ;
-; |I2Stest|data_left[5]              ; |I2Stest|data_left[5]              ; padio            ;
-; |I2Stest|data_left[6]              ; |I2Stest|data_left[6]              ; padio            ;
-; |I2Stest|data_left[7]              ; |I2Stest|data_left[7]              ; padio            ;
-; |I2Stest|data_left[8]              ; |I2Stest|data_left[8]              ; padio            ;
-; |I2Stest|data_left[9]              ; |I2Stest|data_left[9]              ; padio            ;
-; |I2Stest|data_left[10]             ; |I2Stest|data_left[10]             ; padio            ;
-; |I2Stest|data_left[11]             ; |I2Stest|data_left[11]             ; padio            ;
-; |I2Stest|data_left[12]             ; |I2Stest|data_left[12]             ; padio            ;
-; |I2Stest|data_left[13]             ; |I2Stest|data_left[13]             ; padio            ;
-; |I2Stest|data_left[14]             ; |I2Stest|data_left[14]             ; padio            ;
-; |I2Stest|data_left[15]             ; |I2Stest|data_left[15]             ; padio            ;
-; |I2Stest|data_right[0]             ; |I2Stest|data_right[0]             ; padio            ;
-; |I2Stest|data_right[1]             ; |I2Stest|data_right[1]             ; padio            ;
-; |I2Stest|data_right[2]             ; |I2Stest|data_right[2]             ; padio            ;
-; |I2Stest|data_right[3]             ; |I2Stest|data_right[3]             ; padio            ;
-; |I2Stest|data_right[4]             ; |I2Stest|data_right[4]             ; padio            ;
-; |I2Stest|data_right[5]             ; |I2Stest|data_right[5]             ; padio            ;
-; |I2Stest|data_right[6]             ; |I2Stest|data_right[6]             ; padio            ;
-; |I2Stest|data_right[7]             ; |I2Stest|data_right[7]             ; padio            ;
-; |I2Stest|data_right[8]             ; |I2Stest|data_right[8]             ; padio            ;
-; |I2Stest|data_right[9]             ; |I2Stest|data_right[9]             ; padio            ;
-; |I2Stest|data_right[10]            ; |I2Stest|data_right[10]            ; padio            ;
-; |I2Stest|data_right[11]            ; |I2Stest|data_right[11]            ; padio            ;
-; |I2Stest|data_right[12]            ; |I2Stest|data_right[12]            ; padio            ;
-; |I2Stest|data_right[13]            ; |I2Stest|data_right[13]            ; padio            ;
-; |I2Stest|data_right[14]            ; |I2Stest|data_right[14]            ; padio            ;
-; |I2Stest|data_right[15]            ; |I2Stest|data_right[15]            ; padio            ;
-; |I2Stest|data_left[0]~reg0feeder   ; |I2Stest|data_left[0]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[1]~reg0feeder   ; |I2Stest|data_left[1]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[2]~reg0feeder   ; |I2Stest|data_left[2]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[3]~reg0feeder   ; |I2Stest|data_left[3]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[5]~reg0feeder   ; |I2Stest|data_left[5]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[6]~reg0feeder   ; |I2Stest|data_left[6]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[8]~reg0feeder   ; |I2Stest|data_left[8]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[9]~reg0feeder   ; |I2Stest|data_left[9]~reg0feeder   ; combout          ;
-; |I2Stest|data_left[10]~reg0feeder  ; |I2Stest|data_left[10]~reg0feeder  ; combout          ;
-; |I2Stest|data_left[11]~reg0feeder  ; |I2Stest|data_left[11]~reg0feeder  ; combout          ;
-; |I2Stest|data_left[12]~reg0feeder  ; |I2Stest|data_left[12]~reg0feeder  ; combout          ;
-; |I2Stest|data_left[13]~reg0feeder  ; |I2Stest|data_left[13]~reg0feeder  ; combout          ;
-; |I2Stest|data_left[15]~reg0feeder  ; |I2Stest|data_left[15]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[0]~reg0feeder  ; |I2Stest|data_right[0]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[1]~reg0feeder  ; |I2Stest|data_right[1]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[3]~reg0feeder  ; |I2Stest|data_right[3]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[4]~reg0feeder  ; |I2Stest|data_right[4]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[5]~reg0feeder  ; |I2Stest|data_right[5]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[6]~reg0feeder  ; |I2Stest|data_right[6]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[7]~reg0feeder  ; |I2Stest|data_right[7]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[8]~reg0feeder  ; |I2Stest|data_right[8]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[9]~reg0feeder  ; |I2Stest|data_right[9]~reg0feeder  ; combout          ;
-; |I2Stest|data_right[10]~reg0feeder ; |I2Stest|data_right[10]~reg0feeder ; combout          ;
-; |I2Stest|data_right[11]~reg0feeder ; |I2Stest|data_right[11]~reg0feeder ; combout          ;
-; |I2Stest|data_right[12]~reg0feeder ; |I2Stest|data_right[12]~reg0feeder ; combout          ;
-; |I2Stest|data_right[13]~reg0feeder ; |I2Stest|data_right[13]~reg0feeder ; combout          ;
-; |I2Stest|data_right[15]~reg0feeder ; |I2Stest|data_right[15]~reg0feeder ; combout          ;
-+------------------------------------+------------------------------------+------------------+
++--------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                       ;
++------------------------------+------------------------------+------------------+
+; Node Name                    ; Output Port Name             ; Output Port Type ;
++------------------------------+------------------------------+------------------+
+; |I2Stest|data_left[0]~reg0   ; |I2Stest|data_left[0]~reg0   ; regout           ;
+; |I2Stest|data_left[1]~reg0   ; |I2Stest|data_left[1]~reg0   ; regout           ;
+; |I2Stest|data_left[2]~reg0   ; |I2Stest|data_left[2]~reg0   ; regout           ;
+; |I2Stest|data_left[3]~reg0   ; |I2Stest|data_left[3]~reg0   ; regout           ;
+; |I2Stest|data_left[4]~reg0   ; |I2Stest|data_left[4]~reg0   ; regout           ;
+; |I2Stest|data_left[5]~reg0   ; |I2Stest|data_left[5]~reg0   ; regout           ;
+; |I2Stest|data_left[6]~reg0   ; |I2Stest|data_left[6]~reg0   ; regout           ;
+; |I2Stest|data_left[7]~reg0   ; |I2Stest|data_left[7]~reg0   ; regout           ;
+; |I2Stest|data_left[8]~reg0   ; |I2Stest|data_left[8]~reg0   ; regout           ;
+; |I2Stest|data_left[9]~reg0   ; |I2Stest|data_left[9]~reg0   ; regout           ;
+; |I2Stest|data_left[10]~reg0  ; |I2Stest|data_left[10]~reg0  ; regout           ;
+; |I2Stest|data_left[11]~reg0  ; |I2Stest|data_left[11]~reg0  ; regout           ;
+; |I2Stest|data_left[12]~reg0  ; |I2Stest|data_left[12]~reg0  ; regout           ;
+; |I2Stest|data_left[13]~reg0  ; |I2Stest|data_left[13]~reg0  ; regout           ;
+; |I2Stest|data_left[14]~reg0  ; |I2Stest|data_left[14]~reg0  ; regout           ;
+; |I2Stest|data_left[15]~reg0  ; |I2Stest|data_left[15]~reg0  ; regout           ;
+; |I2Stest|data_right[0]~reg0  ; |I2Stest|data_right[0]~reg0  ; regout           ;
+; |I2Stest|data_right[1]~reg0  ; |I2Stest|data_right[1]~reg0  ; regout           ;
+; |I2Stest|data_right[2]~reg0  ; |I2Stest|data_right[2]~reg0  ; regout           ;
+; |I2Stest|data_right[3]~reg0  ; |I2Stest|data_right[3]~reg0  ; regout           ;
+; |I2Stest|data_right[4]~reg0  ; |I2Stest|data_right[4]~reg0  ; regout           ;
+; |I2Stest|data_right[5]~reg0  ; |I2Stest|data_right[5]~reg0  ; regout           ;
+; |I2Stest|data_right[6]~reg0  ; |I2Stest|data_right[6]~reg0  ; regout           ;
+; |I2Stest|data_right[7]~reg0  ; |I2Stest|data_right[7]~reg0  ; regout           ;
+; |I2Stest|data_right[8]~reg0  ; |I2Stest|data_right[8]~reg0  ; regout           ;
+; |I2Stest|data_right[9]~reg0  ; |I2Stest|data_right[9]~reg0  ; regout           ;
+; |I2Stest|data_right[10]~reg0 ; |I2Stest|data_right[10]~reg0 ; regout           ;
+; |I2Stest|data_right[11]~reg0 ; |I2Stest|data_right[11]~reg0 ; regout           ;
+; |I2Stest|data_right[12]~reg0 ; |I2Stest|data_right[12]~reg0 ; regout           ;
+; |I2Stest|data_right[13]~reg0 ; |I2Stest|data_right[13]~reg0 ; regout           ;
+; |I2Stest|data_right[14]~reg0 ; |I2Stest|data_right[14]~reg0 ; regout           ;
+; |I2Stest|data_right[15]~reg0 ; |I2Stest|data_right[15]~reg0 ; regout           ;
+; |I2Stest|data_left[0]        ; |I2Stest|data_left[0]        ; padio            ;
+; |I2Stest|data_left[1]        ; |I2Stest|data_left[1]        ; padio            ;
+; |I2Stest|data_left[2]        ; |I2Stest|data_left[2]        ; padio            ;
+; |I2Stest|data_left[3]        ; |I2Stest|data_left[3]        ; padio            ;
+; |I2Stest|data_left[4]        ; |I2Stest|data_left[4]        ; padio            ;
+; |I2Stest|data_left[5]        ; |I2Stest|data_left[5]        ; padio            ;
+; |I2Stest|data_left[6]        ; |I2Stest|data_left[6]        ; padio            ;
+; |I2Stest|data_left[7]        ; |I2Stest|data_left[7]        ; padio            ;
+; |I2Stest|data_left[8]        ; |I2Stest|data_left[8]        ; padio            ;
+; |I2Stest|data_left[9]        ; |I2Stest|data_left[9]        ; padio            ;
+; |I2Stest|data_left[10]       ; |I2Stest|data_left[10]       ; padio            ;
+; |I2Stest|data_left[11]       ; |I2Stest|data_left[11]       ; padio            ;
+; |I2Stest|data_left[12]       ; |I2Stest|data_left[12]       ; padio            ;
+; |I2Stest|data_left[13]       ; |I2Stest|data_left[13]       ; padio            ;
+; |I2Stest|data_left[14]       ; |I2Stest|data_left[14]       ; padio            ;
+; |I2Stest|data_left[15]       ; |I2Stest|data_left[15]       ; padio            ;
+; |I2Stest|data_right[0]       ; |I2Stest|data_right[0]       ; padio            ;
+; |I2Stest|data_right[1]       ; |I2Stest|data_right[1]       ; padio            ;
+; |I2Stest|data_right[2]       ; |I2Stest|data_right[2]       ; padio            ;
+; |I2Stest|data_right[3]       ; |I2Stest|data_right[3]       ; padio            ;
+; |I2Stest|data_right[4]       ; |I2Stest|data_right[4]       ; padio            ;
+; |I2Stest|data_right[5]       ; |I2Stest|data_right[5]       ; padio            ;
+; |I2Stest|data_right[6]       ; |I2Stest|data_right[6]       ; padio            ;
+; |I2Stest|data_right[7]       ; |I2Stest|data_right[7]       ; padio            ;
+; |I2Stest|data_right[8]       ; |I2Stest|data_right[8]       ; padio            ;
+; |I2Stest|data_right[9]       ; |I2Stest|data_right[9]       ; padio            ;
+; |I2Stest|data_right[10]      ; |I2Stest|data_right[10]      ; padio            ;
+; |I2Stest|data_right[11]      ; |I2Stest|data_right[11]      ; padio            ;
+; |I2Stest|data_right[12]      ; |I2Stest|data_right[12]      ; padio            ;
+; |I2Stest|data_right[13]      ; |I2Stest|data_right[13]      ; padio            ;
+; |I2Stest|data_right[14]      ; |I2Stest|data_right[14]      ; padio            ;
+; |I2Stest|data_right[15]      ; |I2Stest|data_right[15]      ; padio            ;
++------------------------------+------------------------------+------------------+
 
 
 +---------------------+
@@ -442,7 +350,7 @@ The following table displays output ports that do not toggle to 0 during simulat
 Info: *******************************************************************
 Info: Running Quartus II Simulator
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Wed Apr 18 12:13:47 2007
+    Info: Processing started: Thu Apr 19 15:01:46 2007
 Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off I2Stest -c I2Stest
 Info: Using vector source file "C:/HPSDR/trunk/VK6APH/I2S Test/I2Stest.vwf"
 Warning: Ignored node in vector source file. Can't find corresponding node name "counter[4]" in design.
@@ -451,14 +359,50 @@ Warning: Ignored node in vector source file. Can't find corresponding node name 
 Warning: Ignored node in vector source file. Can't find corresponding node name "counter[1]" in design.
 Warning: Ignored node in vector source file. Can't find corresponding node name "counter[0]" in design.
 Warning: Ignored node in vector source file. Can't find corresponding node name "CCstate" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "Rx_counter[3]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "Rx_counter[2]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "Rx_counter[1]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "Rx_counter[0]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[15]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[14]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[13]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[12]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[11]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[10]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[9]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[8]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[7]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[6]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[5]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[4]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[3]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[2]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[1]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_left[0]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[15]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[14]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[13]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[12]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[11]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[10]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[9]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[8]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[7]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[6]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[5]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[4]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[3]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[2]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[1]" in design.
+Warning: Ignored node in vector source file. Can't find corresponding node name "temp_data_right[0]" in design.
 Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
     Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
 Info: Simulation partitioned into 1 sub-simulations
-Info: Simulation coverage is      41.26 %
-Info: Number of transitions in simulation is 26220
-Info: Quartus II Simulator was successful. 0 errors, 6 warnings
+Info: Simulation coverage is      62.13 %
+Info: Number of transitions in simulation is 40960
+Info: Quartus II Simulator was successful. 0 errors, 42 warnings
     Info: Allocated 88 megabytes of memory during processing
-    Info: Processing ended: Wed Apr 18 12:13:49 2007
-    Info: Elapsed time: 00:00:02
+    Info: Processing ended: Thu Apr 19 15:01:47 2007
+    Info: Elapsed time: 00:00:01
 
 
