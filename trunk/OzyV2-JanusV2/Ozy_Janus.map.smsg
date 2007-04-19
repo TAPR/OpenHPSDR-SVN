@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Apr 08 16:29:31 2007
+    Info: Processing started: Thu Apr 19 20:53:48 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file RegisterX.v
     Info: Found entity 1: RegisterX
@@ -22,38 +22,38 @@ Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[31]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[30]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[29]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[28]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[27]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[26]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[25]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[24]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[23]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[22]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[21]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[20]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[19]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[18]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[17]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[16]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[15]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[14]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[13]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[12]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[11]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[10]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[9]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[8]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[7]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[6]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[5]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[4]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[3]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[2]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[1]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(505): inferred latch for "frequency[0]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[31]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[30]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[29]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[28]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[27]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[26]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[25]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[24]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[23]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[22]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[21]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[20]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[19]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[18]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[17]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[16]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[15]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[14]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[13]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[12]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[11]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[10]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[9]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[8]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[7]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[6]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[5]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[4]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[3]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[2]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[1]"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[0]"
 Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
 Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(46): conditional expression evaluates to a constant
 Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(47): conditional expression evaluates to a constant
@@ -164,31 +164,6 @@ Info: Found 1 design units, including 1 entities, in source file db/dffpipe_g09.
 Info: Elaborating entity "dffpipe_g09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe9"
 Info: Elaborating entity "I2SAudioOut" for hierarchy "I2SAudioOut:I2SAO"
 Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
-Warning: Reduced register "CCdata[47]" with stuck data_in port to stuck value GND
-Info: Power-up level of register "CCdata[46]" is not specified -- using power-up level of High to minimize register
-Warning: Reduced register "CCdata[46]" with stuck data_in port to stuck value VCC
-Info: Power-up level of register "CCdata[45]" is not specified -- using power-up level of High to minimize register
-Warning: Reduced register "CCdata[45]" with stuck data_in port to stuck value VCC
-Warning: Reduced register "CCdata[44]" with stuck data_in port to stuck value GND
-Info: Power-up level of register "CCdata[11]" is not specified -- using power-up level of High to minimize register
-Warning: Reduced register "CCdata[11]" with stuck data_in port to stuck value VCC
-Info: Power-up level of register "CCdata[10]" is not specified -- using power-up level of High to minimize register
-Warning: Reduced register "CCdata[10]" with stuck data_in port to stuck value VCC
-Warning: Reduced register "CCdata[9]" with stuck data_in port to stuck value GND
-Warning: Reduced register "CCdata[8]" with stuck data_in port to stuck value GND
-Info: Power-up level of register "CCdata[7]" is not specified -- using power-up level of High to minimize register
-Warning: Reduced register "CCdata[7]" with stuck data_in port to stuck value VCC
-Info: Power-up level of register "CCdata[6]" is not specified -- using power-up level of High to minimize register
-Warning: Reduced register "CCdata[6]" with stuck data_in port to stuck value VCC
-Warning: Reduced register "CCdata[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "CCdata[4]" with stuck data_in port to stuck value GND
-Info: Power-up level of register "CCdata[3]" is not specified -- using power-up level of High to minimize register
-Warning: Reduced register "CCdata[3]" with stuck data_in port to stuck value VCC
-Info: Power-up level of register "CCdata[2]" is not specified -- using power-up level of High to minimize register
-Warning: Reduced register "CCdata[2]" with stuck data_in port to stuck value VCC
-Info: Power-up level of register "CCdata[1]" is not specified -- using power-up level of High to minimize register
-Warning: Reduced register "CCdata[1]" with stuck data_in port to stuck value VCC
-Warning: Reduced register "CCdata[0]" with stuck data_in port to stuck value GND
 Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
 Info: State machine "|Ozy_Janus|state_PWM" contains 14 states
 Info: State machine "|Ozy_Janus|CCstate" contains 3 states
@@ -265,8 +240,7 @@ Info: Duplicate registers merged to single register
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[2]" merged to single register "I2SAudioOut:I2SAO|bit_count[2]"
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[1]" merged to single register "I2SAudioOut:I2SAO|bit_count[1]"
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[0]" merged to single register "I2SAudioOut:I2SAO|bit_count[0]"
-    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.100" merged to single register "I2SAudioOut:I2SAO|TLV_state.100"
-    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.010" merged to single register "I2SAudioOut:I2SAO|TLV_state.010"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.011" merged to single register "I2SAudioOut:I2SAO|TLV_state.011"
     Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.000" merged to single register "I2SAudioOut:I2SAO|TLV_state.000"
 Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[0]~23 that it feeds
 Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[1]~22 that it feeds
@@ -305,7 +279,7 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "PKEND" stuck at VCC
     Warning: Pin "FIFO_ADR[0]" stuck at GND
     Warning: Pin "GPIO_nIOE" stuck at GND
-Info: 49 registers lost all their fanouts during netlist optimizations. The first 49 are displayed below.
+Info: 51 registers lost all their fanouts during netlist optimizations. The first 51 are displayed below.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/p0addr" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
@@ -353,17 +327,19 @@ Info: 49 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state~8" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~7" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~8" lost all its fanouts during netlist optimizations.
-    Info: Register "I2SIQO/TLV_state.011" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state.100" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state.010" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
+    Info: Register "CCstate.00" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1291 device resources after synthesis - the final resource count might be different
+Info: Implemented 1237 device resources after synthesis - the final resource count might be different
     Info: Implemented 12 input pins
     Info: Implemented 23 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1183 logic cells
+    Info: Implemented 1129 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 59 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 43 warnings
     Info: Allocated 136 megabytes of memory during processing
-    Info: Processing ended: Sun Apr 08 16:29:55 2007
-    Info: Elapsed time: 00:00:24
+    Info: Processing ended: Thu Apr 19 20:54:13 2007
+    Info: Elapsed time: 00:00:25

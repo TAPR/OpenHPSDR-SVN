@@ -1,4 +1,4 @@
-// V1.70 8th April 2007
+// V1.90 19th April 2007
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -23,7 +23,7 @@
 //
 // Full duplex Ozy interface for AK5394A  and TI TLV320AIC23B A/D converters
 //
-// The AK5394A is in master mode and the TLV320 is in slave  mode  and obtains all its clocks from this code.
+// The AK5394A and the TLV320 are both in slave  mode  and obtains all their clocks from this code.
 //
 //
 // Sends 192/96/48k 24 bit A/D data and 48k/16 bit mic/line data  via FIFO 4 and receives 48k/16 bit L/R and I/Q data.
@@ -108,14 +108,13 @@
 // 	The C&C encoder broadcasts data over the Atlas bus C20 for
 //	use by other cards e.g. Mercury and Penelope.  The data is in 
 //	I2S format with the clock being CBLCK and the start of each frame
-//	being indicated using the positive edge of CLRCLK.
+//	being indicated using the negative edge of CLRCLK.
 //	
 //	The data fomat is as follows:
 //	
 //	<1 bit PTT><4 bits address><32 bits frequency><4 bits band><7 bits OC><1 bit mode> 
 //	
-//	for a total of 49 bits. Frequency format is the DDC data word i.e. FREQ/2^32/Clock and 
-//	OC is the open collector data on Penelope
+//	for a total of 49 bits. Frequency is in Hz and OC is the open collector data on Penelope
 //
 //
 //
@@ -149,6 +148,9 @@
 //				Added SPI control of GPIO lines for SDR 1K Control - 4th March 2007 (kd5tfd) 
 //				Changed Command and Control to decode Rx_contol_n  - 7th April 2007
 //				Changed AK5394A to run in Slave mode - 8th April 2007
+//				Modified I2S Tx to remove potential race condition - 18th April 2007
+//				Modified C&C I2S encoder to remove potential  race condition - 18 April 2007
+//				Modified Mix I2S receiver to use latest form of I2S receiver - 19 April 2007
 //				
 //
 ////////////////////////////////////////////////////////////
@@ -403,8 +405,8 @@ end
 //
 //////////////////////////////////////////////////////////////
 
-/*      The following code provides clocks as required for the TLV320, AK539A
-        and PWM D/A converters. The former always operate at 48kHz.
+/*      The following code provides clocks as required for the TLV320, 
+        PWM D/A converters and AK539A. The first two  always operate at 48kHz.
         Note the phase relationship required betweeen LRCLK and BCLK.
         LRCLK must change state on the negative edge of BCLK.
 */
@@ -446,7 +448,6 @@ assign CLK_48MHZ = IFCLK; 				// 48MHz clock to PWM DAC on Janus
 
 assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : ~BCLK_96_48; 
 assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? ~LRCLK_48 : ((DFS0 == 1 && DFS1 == 0 )? ~LRCLK_96 : LRCLK_192);
-
 
 // the 12MHz ADC/DAC clock  will come from Janus (12.288MHz)  on Atlas C5  as CLK_12MHZ unless a Mercury or Penelope board
 // is being used then it will come from the Atlas bus (12.5MHz) on A5 as PCLK_10MHZ. The signal CLK_select
@@ -653,7 +654,6 @@ case (AD_state)                                                 // see if sync i
                 strobe <= 1'b1;
                 AD_state <= AD_state + 1'b1;
                 end
-
 6'd56:  begin
                 register <= Tx_data;                            // send microphone or line in data to Tx FIFO
                 strobe <= 1'b1;
@@ -676,26 +676,33 @@ end
 
 /*      Since the TLV320 always runs at 48k we need a separate
         routine to read its data. TLV320 is in I2S mode.
+		Read mic data on negative edge of CLRCLK. Data can be read
+		any time after case 18 i.e. on negative or positive edge of CLRCLK. 
+		
+		This is an alternative I2S decoder that is rather elegant in its simplicity
 */
 
 reg [4:0]TX_state;
 
 always @ (posedge CBCLK)
 begin
-                Tx_q[15:0] <= {Tx_q[14:0], CDOUT};              // shift current TLV320 data left and add next bit
+ Tx_q[15:0] <= {Tx_q[14:0], CDOUT};              		// shift current TLV320 data left and add next bit
 case (TX_state)
 5'd0:   begin
-                if(CLRCLK) TX_state <= 5'd0;                    // loop until CLRCLK is low
-                else TX_state <= 5'd1;
-                end
+        if(CLRCLK) TX_state <= 5'd1;                    // loop until CLRCLK is high
+        else TX_state <= 5'd0;
+        end
 5'd1:   begin
-                if(CLRCLK) TX_state <= TX_state + 1'b1;         // loop until CLRCLK is high
-                else TX_state <= 5'd1;
-                end
+        if(!CLRCLK) TX_state <= TX_state + 1'b1;         // loop until CLRCLK is low
+        else TX_state <= 5'd1;
+        end
+// next state # is calculated by adding (# bits + last state + 1) i.e. 16 + 1 + 1 = 18
 5'd18:  begin
-                Tx_data <= Tx_q;                                // TLV320 (microphone or line in)data
-                TX_state <= 5'd0;                               // done so loop again
-                end
+        Tx_data <= Tx_q;                                // TLV320 (microphone or mono line in)data
+        TX_state <= 5'd0;                               // done so loop again
+        end
+// For stereo line in add code here to wait for CLRCLK to go high then read 16 bits of data 
+
 default:TX_state <= TX_state + 1'b1;
 endcase
 end
@@ -750,6 +757,7 @@ Rx_fifo Rx_fifo(.wrclk (SLRD),.rdreq (fifo_enable),.rdclk (BCLK),.wrreq (1'b1),
 //     Tx_fifo - 2048 words - Altera Megafunction
 //
 //////////////////////////////////////////////////////////////
+
 
 Tx_fifo         Tx_fifo(.wrclk (BCLK),.rdreq (1'b1),.rdclk (Tx_read_clock),.wrreq (data_flag), 
                                 .data (register),.rdempty (Tx_rdempty), .wrempty (Tx_write_empty),
@@ -892,12 +900,13 @@ assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
         sleeps for 512 bytes (256 words) and then looks for the sync sequence again. If located
         it contiunes, if not it restarts.
 
-        Whilst sync is being detected,or restarted, then all logic outputs are set to safe values.
+        Whilst sync is being detected,or restarted, then all logic outputs are set to safe values by 
+		monitoring the state of have_sync.
 
         After successfully finding sync it  reads the next 5 bytes
         which are control bytes C0-C4. The next word is the Left audio and the following the
         Right audio which are sent to the TLV320 D/A converters.
-    	The next worid is the  I data and the following the Q data.
+    	The next word is the  I data and the following the Q data.
     	The I and Q data is sent to individual 16 bit PWM D/A converters.
 
         The words sent to the D/A converters must be sent at the sample rate
@@ -951,7 +960,7 @@ reg [8:0]sync_count;
 reg have_sync;                          // high when we have sync
 
 
-always @ (negedge BCLK)
+always @ (negedge BCLK) // use negedge so that data from FIFO has time to stabilise since read on posedge 
 begin
         synced_Rx_used <= Rx_used;      // sync Rx_used to BCLK since this runs of FX2 clock
 case(state_PWM)
@@ -1003,8 +1012,8 @@ case(state_PWM)
 // state 4 - look for sync again - if true continue else start again
   4: begin
                 if (Rx_data[15:8] == 8'h7F)begin
-                        temp_Rx_control_0 <= Rx_data[7:0];                   // We have sync so get Rx_control_0
-                        have_sync <= 1'b1;                              // toggle sync LED.
+                        temp_Rx_control_0 <= Rx_data[7:0];            	// We have sync so get Rx_control_0
+                        have_sync <= 1'b1;                           	// Set have_sync active
                         state_PWM <= 5;
                 end
                 else state_PWM <= 0;
@@ -1044,13 +1053,13 @@ case(state_PWM)
                 end
 // state 11 - check that CLRCLK is high
   11: begin
-                fifo_enable <= 1'b0;                                    // disable read of Rx_FIFO whilst we wait
-                if (!CLRCLK) state_PWM <= 11;                            // wait for A/D LRCLK to go low so we are in sync
+                fifo_enable <= 1'b0;                  // disable read of Rx_FIFO whilst we wait
+                if (!CLRCLK) state_PWM <= 11;         // wait for A/D LRCLK to go low so we are in sync
             else state_PWM <= 12;
            end
 // state 12 - wait for negative edge of CLRCLK then latch all control data at the same time
   12: begin
-                if (!CLRCLK)                                             // wait for A/D CLRCLK to go low so we are in sync
+                if (!CLRCLK)                                 // wait for A/D CLRCLK to go low so we are in sync
                 begin
                         byte_count <= byte_count + 1'b1;
 						Rx_control_0 <= temp_Rx_control_0;
@@ -1085,7 +1094,7 @@ end
 	The C&C encoder broadcasts data over the Atlas bus C20 for
 	use by other cards e.g. Mercury and Penelope.  The data is in 
 	I2S format with the clock being CBLCK and the start of each frame
-	being indicated using the positive edge of CLRCLK.
+	being indicated using the negative edge of CLRCLK.
 	
 	The data fomat is as follows:
 	
@@ -1117,7 +1126,7 @@ end
 
 */
 
-reg [48:0]CCdata;
+wire [48:0]CCdata;
 reg [6:0] CCcount;
 reg CC;							// C&C data out to Atlas bus 
 wire [3:0] CC_address;			// C&C address, fixed at 0 for now 
@@ -1135,42 +1144,44 @@ assign OC = 7'b1100111;
 assign mode = 1'b0;
 //assign frequency = 32'hF0F0F0F0;
 
+assign 	CCdata = {PTT_out, CC_address, frequency, band, OC, mode}; // concatenate data to send 
 
-// sync data to CLRCLK
-
-always @ (posedge CLRCLK)
-begin
-	CCdata <= {PTT_out, CC_address, frequency, band, OC, mode}; // concatenate data to send 
-end
-
-// send data to Atlas bus in I2S format
+// send C&C data to Atlas bus in I2S format
 
 reg [1:0]CCstate;
 
-always @ (negedge CBCLK)
+always @ (posedge CBCLK)
 begin	
 case(CCstate)
 0:	begin
-	if (CLRCLK == 0)begin			// loop until CLRCLK is low 
-		 CCstate <= 1;
-		 CCcount <= 6'd49;			// reset counter
-	end 	
+	if (CLRCLK)	 CCstate <= 1;		// loop until CLRCLK is high
 	else CCstate <= 0;
 	end
-1:	begin
-	if(CLRCLK)CCstate <= 2;			// loop until CLRCLK is high
-	else CCstate <= 1;
-	end 
+	
+1:	if (CLRCLK)	CCstate <= 1;		// wait until it goes low - this is first CBCLK after negedge of CLRCLK
+	else begin
+	CCcount <= 48; 					// need to have data available for Rx on next CBCLK
+	CCstate <= 2;
+	end
+	
 2:	begin
-	CC <= CCdata[CCcount];			// shift data out to Altas bus MSB first
-	CCcount <= CCcount - 1'b1;
 	if (CCcount == 0) CCstate <= 0;
-	else CCstate <= 2;
+	else begin
+	CCcount <= CCcount - 1'b1;
+	CCstate <= 2;
+	end
 	end 
 	
 default: CCstate <= 0;
 endcase
 end 
+
+// I2S data must be available on the 2nd positive edge of CBCLK after the CLRCLK transition
+always @ (negedge CBCLK)
+begin
+	CC <= CCdata[CCcount];			// shift data out to Altas bus MSB first
+end
+
 
 ///////////////////////////////////////////////////////////////
 //
