@@ -1,0 +1,379 @@
+Simulator report for PennyTestImage
+Sat Apr 14 16:28:58 2007
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. Coverage Summary
+  6. Complete 1/0-Value Coverage
+  7. Missing 1-Value Coverage
+  8. Missing 0-Value Coverage
+  9. Simulator INI Usage
+ 10. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------+
+; Simulator Summary                          ;
++-----------------------------+--------------+
+; Type                        ; Value        ;
++-----------------------------+--------------+
+; Simulation Start Time       ; 0 ps         ;
+; Simulation End Time         ; 1.0 ms       ;
+; Simulation Netlist Size     ; 124 nodes    ;
+; Simulation Coverage         ;      52.00 % ;
+; Total Number of Transitions ; 1856913      ;
+; Simulation Breakpoints      ; 0            ;
+; Family                      ; Cyclone II   ;
+; Device                      ; EP2C8Q208C8  ;
++-----------------------------+--------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                      ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+; Option                                                                                     ; Setting    ; Default Value ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+; Simulation mode                                                                            ; Timing     ; Timing        ;
+; Start time                                                                                 ; 0 ns       ; 0 ns          ;
+; Simulation results format                                                                  ; CVWF       ;               ;
+; Add pins automatically to simulation output waveforms                                      ; On         ; On            ;
+; Check outputs                                                                              ; Off        ; Off           ;
+; Report simulation coverage                                                                 ; On         ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On         ; On            ;
+; Display missing 1-value coverage report                                                    ; On         ; On            ;
+; Display missing 0-value coverage report                                                    ; On         ; On            ;
+; Detect setup and hold time violations                                                      ; Off        ; Off           ;
+; Detect glitches                                                                            ; Off        ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off        ; Off           ;
+; Generate Signal Activity File                                                              ; Off        ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off        ; Off           ;
+; Group bus channels in simulation results                                                   ; Off        ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On         ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off        ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off        ;               ;
+; Glitch Filtering                                                                           ; Off        ; Off           ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II to view the waveform report data.
+
+
++--------------------------------------------------------------------+
+; Coverage Summary                                                   ;
++-----------------------------------------------------+--------------+
+; Type                                                ; Value        ;
++-----------------------------------------------------+--------------+
+; Total coverage as a percentage                      ;      52.00 % ;
+; Total nodes checked                                 ; 124          ;
+; Total output ports checked                          ; 150          ;
+; Total output ports with complete 1/0-value coverage ; 78           ;
+; Total output ports with no 1/0-value coverage       ; 69           ;
+; Total output ports with no 1-value coverage         ; 69           ;
+; Total output ports with no 0-value coverage         ; 72           ;
++-----------------------------------------------------+--------------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++------------------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                              ;
++-----------------------------------+-----------------------------------+------------------+
+; Node Name                         ; Output Port Name                  ; Output Port Type ;
++-----------------------------------+-----------------------------------+------------------+
+; |PennyTestImage|clock_reg[6]      ; |PennyTestImage|clock_reg[6]      ; regout           ;
+; |PennyTestImage|clock_reg[7]      ; |PennyTestImage|clock_reg[7]      ; regout           ;
+; |PennyTestImage|clock_reg[8]      ; |PennyTestImage|clock_reg[8]      ; regout           ;
+; |PennyTestImage|clock_reg[9]      ; |PennyTestImage|clock_reg[9]      ; regout           ;
+; |PennyTestImage|clock_reg[10]     ; |PennyTestImage|clock_reg[10]     ; regout           ;
+; |PennyTestImage|clock_reg[11]     ; |PennyTestImage|clock_reg[11]     ; regout           ;
+; |PennyTestImage|clock_reg[12]     ; |PennyTestImage|clock_reg[12]     ; regout           ;
+; |PennyTestImage|clock_reg[13]     ; |PennyTestImage|clock_reg[13]     ; regout           ;
+; |PennyTestImage|clock_reg[14]     ; |PennyTestImage|clock_reg[14]     ; regout           ;
+; |PennyTestImage|clock_reg[15]     ; |PennyTestImage|clock_reg[15]     ; regout           ;
+; |PennyTestImage|clock_reg[5]      ; |PennyTestImage|clock_reg[5]      ; regout           ;
+; |PennyTestImage|clock_reg[4]      ; |PennyTestImage|clock_reg[4]      ; regout           ;
+; |PennyTestImage|clock_reg[3]      ; |PennyTestImage|clock_reg[3]      ; regout           ;
+; |PennyTestImage|clock_reg[2]      ; |PennyTestImage|clock_reg[2]      ; regout           ;
+; |PennyTestImage|clock_reg[1]      ; |PennyTestImage|clock_reg[1]      ; regout           ;
+; |PennyTestImage|clock_reg[1]~135  ; |PennyTestImage|clock_reg[1]~135  ; combout          ;
+; |PennyTestImage|clock_reg[1]~135  ; |PennyTestImage|clock_reg[1]~137  ; cout             ;
+; |PennyTestImage|clock_reg[2]~134  ; |PennyTestImage|clock_reg[2]~134  ; combout          ;
+; |PennyTestImage|clock_reg[2]~134  ; |PennyTestImage|clock_reg[2]~138  ; cout             ;
+; |PennyTestImage|clock_reg[3]~133  ; |PennyTestImage|clock_reg[3]~133  ; combout          ;
+; |PennyTestImage|clock_reg[3]~133  ; |PennyTestImage|clock_reg[3]~139  ; cout             ;
+; |PennyTestImage|clock_reg[4]~132  ; |PennyTestImage|clock_reg[4]~132  ; combout          ;
+; |PennyTestImage|clock_reg[4]~132  ; |PennyTestImage|clock_reg[4]~140  ; cout             ;
+; |PennyTestImage|clock_reg[5]~131  ; |PennyTestImage|clock_reg[5]~131  ; combout          ;
+; |PennyTestImage|clock_reg[5]~131  ; |PennyTestImage|clock_reg[5]~141  ; cout             ;
+; |PennyTestImage|clock_reg[6]~110  ; |PennyTestImage|clock_reg[6]~110  ; combout          ;
+; |PennyTestImage|clock_reg[6]~110  ; |PennyTestImage|clock_reg[6]~142  ; cout             ;
+; |PennyTestImage|clock_reg[7]~111  ; |PennyTestImage|clock_reg[7]~111  ; combout          ;
+; |PennyTestImage|clock_reg[7]~111  ; |PennyTestImage|clock_reg[7]~143  ; cout             ;
+; |PennyTestImage|clock_reg[8]~112  ; |PennyTestImage|clock_reg[8]~112  ; combout          ;
+; |PennyTestImage|clock_reg[8]~112  ; |PennyTestImage|clock_reg[8]~144  ; cout             ;
+; |PennyTestImage|clock_reg[9]~113  ; |PennyTestImage|clock_reg[9]~113  ; combout          ;
+; |PennyTestImage|clock_reg[9]~113  ; |PennyTestImage|clock_reg[9]~145  ; cout             ;
+; |PennyTestImage|clock_reg[10]~114 ; |PennyTestImage|clock_reg[10]~114 ; combout          ;
+; |PennyTestImage|clock_reg[10]~114 ; |PennyTestImage|clock_reg[10]~146 ; cout             ;
+; |PennyTestImage|clock_reg[11]~115 ; |PennyTestImage|clock_reg[11]~115 ; combout          ;
+; |PennyTestImage|clock_reg[11]~115 ; |PennyTestImage|clock_reg[11]~147 ; cout             ;
+; |PennyTestImage|clock_reg[12]~116 ; |PennyTestImage|clock_reg[12]~116 ; combout          ;
+; |PennyTestImage|clock_reg[12]~116 ; |PennyTestImage|clock_reg[12]~148 ; cout             ;
+; |PennyTestImage|clock_reg[13]~117 ; |PennyTestImage|clock_reg[13]~117 ; combout          ;
+; |PennyTestImage|clock_reg[13]~117 ; |PennyTestImage|clock_reg[13]~149 ; cout             ;
+; |PennyTestImage|clock_reg[14]~118 ; |PennyTestImage|clock_reg[14]~118 ; combout          ;
+; |PennyTestImage|clock_reg[14]~118 ; |PennyTestImage|clock_reg[14]~150 ; cout             ;
+; |PennyTestImage|clock_reg[15]~119 ; |PennyTestImage|clock_reg[15]~119 ; combout          ;
+; |PennyTestImage|clock_reg[15]~119 ; |PennyTestImage|clock_reg[15]~151 ; cout             ;
+; |PennyTestImage|clock_reg[16]~120 ; |PennyTestImage|clock_reg[16]~120 ; combout          ;
+; |PennyTestImage|clock_reg[16]~120 ; |PennyTestImage|clock_reg[16]~152 ; cout             ;
+; |PennyTestImage|clock_reg[17]~121 ; |PennyTestImage|clock_reg[17]~121 ; combout          ;
+; |PennyTestImage|clock_reg[0]      ; |PennyTestImage|clock_reg[0]      ; regout           ;
+; |PennyTestImage|clock_reg[0]~164  ; |PennyTestImage|clock_reg[0]~164  ; combout          ;
+; |PennyTestImage|A2                ; |PennyTestImage|A2                ; padio            ;
+; |PennyTestImage|A3                ; |PennyTestImage|A3                ; padio            ;
+; |PennyTestImage|A4                ; |PennyTestImage|A4                ; padio            ;
+; |PennyTestImage|A5                ; |PennyTestImage|A5                ; padio            ;
+; |PennyTestImage|A6                ; |PennyTestImage|A6                ; padio            ;
+; |PennyTestImage|A7                ; |PennyTestImage|A7                ; padio            ;
+; |PennyTestImage|A8                ; |PennyTestImage|A8                ; padio            ;
+; |PennyTestImage|A9                ; |PennyTestImage|A9                ; padio            ;
+; |PennyTestImage|A10               ; |PennyTestImage|A10               ; padio            ;
+; |PennyTestImage|A11               ; |PennyTestImage|A11               ; padio            ;
+; |PennyTestImage|C12               ; |PennyTestImage|C12               ; padio            ;
+; |PennyTestImage|C13               ; |PennyTestImage|C13               ; padio            ;
+; |PennyTestImage|C14               ; |PennyTestImage|C14               ; padio            ;
+; |PennyTestImage|C15               ; |PennyTestImage|C15               ; padio            ;
+; |PennyTestImage|C16               ; |PennyTestImage|C16               ; padio            ;
+; |PennyTestImage|C17               ; |PennyTestImage|C17               ; padio            ;
+; |PennyTestImage|C19               ; |PennyTestImage|C19               ; padio            ;
+; |PennyTestImage|C20               ; |PennyTestImage|C20               ; padio            ;
+; |PennyTestImage|C21               ; |PennyTestImage|C21               ; padio            ;
+; |PennyTestImage|C22               ; |PennyTestImage|C22               ; padio            ;
+; |PennyTestImage|C23               ; |PennyTestImage|C23               ; padio            ;
+; |PennyTestImage|C24               ; |PennyTestImage|C24               ; padio            ;
+; |PennyTestImage|C25               ; |PennyTestImage|C25               ; padio            ;
+; |PennyTestImage|C27               ; |PennyTestImage|C27               ; padio            ;
+; |PennyTestImage|C29               ; |PennyTestImage|C29               ; padio            ;
+; |PennyTestImage|C31               ; |PennyTestImage|C31               ; padio            ;
+; |PennyTestImage|_125MHZ           ; |PennyTestImage|_125MHZ           ; combout          ;
+; |PennyTestImage|_125MHZ~clkctrl   ; |PennyTestImage|_125MHZ~clkctrl   ; outclk           ;
++-----------------------------------+-----------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++------------------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                                 ;
++-----------------------------------+-----------------------------------+------------------+
+; Node Name                         ; Output Port Name                  ; Output Port Type ;
++-----------------------------------+-----------------------------------+------------------+
+; |PennyTestImage|clock_reg[17]     ; |PennyTestImage|clock_reg[17]     ; regout           ;
+; |PennyTestImage|clock_reg[18]     ; |PennyTestImage|clock_reg[18]     ; regout           ;
+; |PennyTestImage|clock_reg[19]     ; |PennyTestImage|clock_reg[19]     ; regout           ;
+; |PennyTestImage|clock_reg[20]     ; |PennyTestImage|clock_reg[20]     ; regout           ;
+; |PennyTestImage|clock_reg[21]     ; |PennyTestImage|clock_reg[21]     ; regout           ;
+; |PennyTestImage|clock_reg[22]     ; |PennyTestImage|clock_reg[22]     ; regout           ;
+; |PennyTestImage|clock_reg[23]     ; |PennyTestImage|clock_reg[23]     ; regout           ;
+; |PennyTestImage|clock_reg[24]     ; |PennyTestImage|clock_reg[24]     ; regout           ;
+; |PennyTestImage|clock_reg[25]     ; |PennyTestImage|clock_reg[25]     ; regout           ;
+; |PennyTestImage|clock_reg[26]     ; |PennyTestImage|clock_reg[26]     ; regout           ;
+; |PennyTestImage|clock_reg[27]     ; |PennyTestImage|clock_reg[27]     ; regout           ;
+; |PennyTestImage|clock_reg[17]~121 ; |PennyTestImage|clock_reg[17]~153 ; cout             ;
+; |PennyTestImage|clock_reg[18]~122 ; |PennyTestImage|clock_reg[18]~122 ; combout          ;
+; |PennyTestImage|clock_reg[18]~122 ; |PennyTestImage|clock_reg[18]~154 ; cout             ;
+; |PennyTestImage|clock_reg[19]~123 ; |PennyTestImage|clock_reg[19]~123 ; combout          ;
+; |PennyTestImage|clock_reg[19]~123 ; |PennyTestImage|clock_reg[19]~155 ; cout             ;
+; |PennyTestImage|clock_reg[20]~124 ; |PennyTestImage|clock_reg[20]~124 ; combout          ;
+; |PennyTestImage|clock_reg[20]~124 ; |PennyTestImage|clock_reg[20]~156 ; cout             ;
+; |PennyTestImage|clock_reg[21]~125 ; |PennyTestImage|clock_reg[21]~125 ; combout          ;
+; |PennyTestImage|clock_reg[21]~125 ; |PennyTestImage|clock_reg[21]~157 ; cout             ;
+; |PennyTestImage|clock_reg[22]~126 ; |PennyTestImage|clock_reg[22]~126 ; combout          ;
+; |PennyTestImage|clock_reg[22]~126 ; |PennyTestImage|clock_reg[22]~158 ; cout             ;
+; |PennyTestImage|clock_reg[23]~127 ; |PennyTestImage|clock_reg[23]~127 ; combout          ;
+; |PennyTestImage|clock_reg[23]~127 ; |PennyTestImage|clock_reg[23]~159 ; cout             ;
+; |PennyTestImage|clock_reg[24]~128 ; |PennyTestImage|clock_reg[24]~128 ; combout          ;
+; |PennyTestImage|clock_reg[24]~128 ; |PennyTestImage|clock_reg[24]~160 ; cout             ;
+; |PennyTestImage|clock_reg[25]~129 ; |PennyTestImage|clock_reg[25]~129 ; combout          ;
+; |PennyTestImage|clock_reg[25]~129 ; |PennyTestImage|clock_reg[25]~161 ; cout             ;
+; |PennyTestImage|clock_reg[26]~130 ; |PennyTestImage|clock_reg[26]~130 ; combout          ;
+; |PennyTestImage|clock_reg[26]~130 ; |PennyTestImage|clock_reg[26]~162 ; cout             ;
+; |PennyTestImage|clock_reg[27]~136 ; |PennyTestImage|clock_reg[27]~136 ; combout          ;
+; |PennyTestImage|A13               ; |PennyTestImage|A13               ; padio            ;
+; |PennyTestImage|A14               ; |PennyTestImage|A14               ; padio            ;
+; |PennyTestImage|A15               ; |PennyTestImage|A15               ; padio            ;
+; |PennyTestImage|A16               ; |PennyTestImage|A16               ; padio            ;
+; |PennyTestImage|A17               ; |PennyTestImage|A17               ; padio            ;
+; |PennyTestImage|A18               ; |PennyTestImage|A18               ; padio            ;
+; |PennyTestImage|A19               ; |PennyTestImage|A19               ; padio            ;
+; |PennyTestImage|A20               ; |PennyTestImage|A20               ; padio            ;
+; |PennyTestImage|A21               ; |PennyTestImage|A21               ; padio            ;
+; |PennyTestImage|A22               ; |PennyTestImage|A22               ; padio            ;
+; |PennyTestImage|A31               ; |PennyTestImage|A31               ; padio            ;
+; |PennyTestImage|C2                ; |PennyTestImage|C2                ; padio            ;
+; |PennyTestImage|C3                ; |PennyTestImage|C3                ; padio            ;
+; |PennyTestImage|C4                ; |PennyTestImage|C4                ; padio            ;
+; |PennyTestImage|C5                ; |PennyTestImage|C5                ; padio            ;
+; |PennyTestImage|C6                ; |PennyTestImage|C6                ; padio            ;
+; |PennyTestImage|C7                ; |PennyTestImage|C7                ; padio            ;
+; |PennyTestImage|C8                ; |PennyTestImage|C8                ; padio            ;
+; |PennyTestImage|C9                ; |PennyTestImage|C9                ; padio            ;
+; |PennyTestImage|C10               ; |PennyTestImage|C10               ; padio            ;
+; |PennyTestImage|C18               ; |PennyTestImage|C18               ; padio            ;
+; |PennyTestImage|LED1              ; |PennyTestImage|LED1              ; padio            ;
+; |PennyTestImage|LED2              ; |PennyTestImage|LED2              ; padio            ;
+; |PennyTestImage|LED3              ; |PennyTestImage|LED3              ; padio            ;
+; |PennyTestImage|LED4              ; |PennyTestImage|LED4              ; padio            ;
+; |PennyTestImage|LED5              ; |PennyTestImage|LED5              ; padio            ;
+; |PennyTestImage|LED6              ; |PennyTestImage|LED6              ; padio            ;
+; |PennyTestImage|LED7              ; |PennyTestImage|LED7              ; padio            ;
+; |PennyTestImage|LED8              ; |PennyTestImage|LED8              ; padio            ;
+; |PennyTestImage|FPGA_PTT          ; |PennyTestImage|FPGA_PTT          ; padio            ;
+; |PennyTestImage|USROUT0           ; |PennyTestImage|USROUT0           ; padio            ;
+; |PennyTestImage|USROUT1           ; |PennyTestImage|USROUT1           ; padio            ;
+; |PennyTestImage|USROUT2           ; |PennyTestImage|USROUT2           ; padio            ;
+; |PennyTestImage|USROUT3           ; |PennyTestImage|USROUT3           ; padio            ;
+; |PennyTestImage|USROUT4           ; |PennyTestImage|USROUT4           ; padio            ;
+; |PennyTestImage|USROUT5           ; |PennyTestImage|USROUT5           ; padio            ;
+; |PennyTestImage|USROUT6           ; |PennyTestImage|USROUT6           ; padio            ;
+; |PennyTestImage|FPGA_PLL          ; |PennyTestImage|FPGA_PLL          ; padio            ;
++-----------------------------------+-----------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++------------------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                                 ;
++-----------------------------------+-----------------------------------+------------------+
+; Node Name                         ; Output Port Name                  ; Output Port Type ;
++-----------------------------------+-----------------------------------+------------------+
+; |PennyTestImage|clock_reg[16]     ; |PennyTestImage|clock_reg[16]     ; regout           ;
+; |PennyTestImage|clock_reg[17]     ; |PennyTestImage|clock_reg[17]     ; regout           ;
+; |PennyTestImage|clock_reg[18]     ; |PennyTestImage|clock_reg[18]     ; regout           ;
+; |PennyTestImage|clock_reg[19]     ; |PennyTestImage|clock_reg[19]     ; regout           ;
+; |PennyTestImage|clock_reg[20]     ; |PennyTestImage|clock_reg[20]     ; regout           ;
+; |PennyTestImage|clock_reg[21]     ; |PennyTestImage|clock_reg[21]     ; regout           ;
+; |PennyTestImage|clock_reg[22]     ; |PennyTestImage|clock_reg[22]     ; regout           ;
+; |PennyTestImage|clock_reg[23]     ; |PennyTestImage|clock_reg[23]     ; regout           ;
+; |PennyTestImage|clock_reg[24]     ; |PennyTestImage|clock_reg[24]     ; regout           ;
+; |PennyTestImage|clock_reg[25]     ; |PennyTestImage|clock_reg[25]     ; regout           ;
+; |PennyTestImage|clock_reg[26]     ; |PennyTestImage|clock_reg[26]     ; regout           ;
+; |PennyTestImage|clock_reg[27]     ; |PennyTestImage|clock_reg[27]     ; regout           ;
+; |PennyTestImage|clock_reg[17]~121 ; |PennyTestImage|clock_reg[17]~153 ; cout             ;
+; |PennyTestImage|clock_reg[18]~122 ; |PennyTestImage|clock_reg[18]~122 ; combout          ;
+; |PennyTestImage|clock_reg[18]~122 ; |PennyTestImage|clock_reg[18]~154 ; cout             ;
+; |PennyTestImage|clock_reg[19]~123 ; |PennyTestImage|clock_reg[19]~123 ; combout          ;
+; |PennyTestImage|clock_reg[19]~123 ; |PennyTestImage|clock_reg[19]~155 ; cout             ;
+; |PennyTestImage|clock_reg[20]~124 ; |PennyTestImage|clock_reg[20]~124 ; combout          ;
+; |PennyTestImage|clock_reg[20]~124 ; |PennyTestImage|clock_reg[20]~156 ; cout             ;
+; |PennyTestImage|clock_reg[21]~125 ; |PennyTestImage|clock_reg[21]~125 ; combout          ;
+; |PennyTestImage|clock_reg[21]~125 ; |PennyTestImage|clock_reg[21]~157 ; cout             ;
+; |PennyTestImage|clock_reg[22]~126 ; |PennyTestImage|clock_reg[22]~126 ; combout          ;
+; |PennyTestImage|clock_reg[22]~126 ; |PennyTestImage|clock_reg[22]~158 ; cout             ;
+; |PennyTestImage|clock_reg[23]~127 ; |PennyTestImage|clock_reg[23]~127 ; combout          ;
+; |PennyTestImage|clock_reg[23]~127 ; |PennyTestImage|clock_reg[23]~159 ; cout             ;
+; |PennyTestImage|clock_reg[24]~128 ; |PennyTestImage|clock_reg[24]~128 ; combout          ;
+; |PennyTestImage|clock_reg[24]~128 ; |PennyTestImage|clock_reg[24]~160 ; cout             ;
+; |PennyTestImage|clock_reg[25]~129 ; |PennyTestImage|clock_reg[25]~129 ; combout          ;
+; |PennyTestImage|clock_reg[25]~129 ; |PennyTestImage|clock_reg[25]~161 ; cout             ;
+; |PennyTestImage|clock_reg[26]~130 ; |PennyTestImage|clock_reg[26]~130 ; combout          ;
+; |PennyTestImage|clock_reg[26]~130 ; |PennyTestImage|clock_reg[26]~162 ; cout             ;
+; |PennyTestImage|clock_reg[27]~136 ; |PennyTestImage|clock_reg[27]~136 ; combout          ;
+; |PennyTestImage|A12               ; |PennyTestImage|A12               ; padio            ;
+; |PennyTestImage|A13               ; |PennyTestImage|A13               ; padio            ;
+; |PennyTestImage|A14               ; |PennyTestImage|A14               ; padio            ;
+; |PennyTestImage|A15               ; |PennyTestImage|A15               ; padio            ;
+; |PennyTestImage|A16               ; |PennyTestImage|A16               ; padio            ;
+; |PennyTestImage|A17               ; |PennyTestImage|A17               ; padio            ;
+; |PennyTestImage|A18               ; |PennyTestImage|A18               ; padio            ;
+; |PennyTestImage|A19               ; |PennyTestImage|A19               ; padio            ;
+; |PennyTestImage|A20               ; |PennyTestImage|A20               ; padio            ;
+; |PennyTestImage|A21               ; |PennyTestImage|A21               ; padio            ;
+; |PennyTestImage|A22               ; |PennyTestImage|A22               ; padio            ;
+; |PennyTestImage|A31               ; |PennyTestImage|A31               ; padio            ;
+; |PennyTestImage|C2                ; |PennyTestImage|C2                ; padio            ;
+; |PennyTestImage|C3                ; |PennyTestImage|C3                ; padio            ;
+; |PennyTestImage|C4                ; |PennyTestImage|C4                ; padio            ;
+; |PennyTestImage|C5                ; |PennyTestImage|C5                ; padio            ;
+; |PennyTestImage|C6                ; |PennyTestImage|C6                ; padio            ;
+; |PennyTestImage|C7                ; |PennyTestImage|C7                ; padio            ;
+; |PennyTestImage|C8                ; |PennyTestImage|C8                ; padio            ;
+; |PennyTestImage|C9                ; |PennyTestImage|C9                ; padio            ;
+; |PennyTestImage|C10               ; |PennyTestImage|C10               ; padio            ;
+; |PennyTestImage|C11               ; |PennyTestImage|C11               ; padio            ;
+; |PennyTestImage|C18               ; |PennyTestImage|C18               ; padio            ;
+; |PennyTestImage|LED1              ; |PennyTestImage|LED1              ; padio            ;
+; |PennyTestImage|LED2              ; |PennyTestImage|LED2              ; padio            ;
+; |PennyTestImage|LED3              ; |PennyTestImage|LED3              ; padio            ;
+; |PennyTestImage|LED4              ; |PennyTestImage|LED4              ; padio            ;
+; |PennyTestImage|LED5              ; |PennyTestImage|LED5              ; padio            ;
+; |PennyTestImage|LED6              ; |PennyTestImage|LED6              ; padio            ;
+; |PennyTestImage|LED7              ; |PennyTestImage|LED7              ; padio            ;
+; |PennyTestImage|LED8              ; |PennyTestImage|LED8              ; padio            ;
+; |PennyTestImage|FPGA_PTT          ; |PennyTestImage|FPGA_PTT          ; padio            ;
+; |PennyTestImage|USROUT0           ; |PennyTestImage|USROUT0           ; padio            ;
+; |PennyTestImage|USROUT1           ; |PennyTestImage|USROUT1           ; padio            ;
+; |PennyTestImage|USROUT2           ; |PennyTestImage|USROUT2           ; padio            ;
+; |PennyTestImage|USROUT3           ; |PennyTestImage|USROUT3           ; padio            ;
+; |PennyTestImage|USROUT4           ; |PennyTestImage|USROUT4           ; padio            ;
+; |PennyTestImage|USROUT5           ; |PennyTestImage|USROUT5           ; padio            ;
+; |PennyTestImage|USROUT6           ; |PennyTestImage|USROUT6           ; padio            ;
+; |PennyTestImage|FPGA_PLL          ; |PennyTestImage|FPGA_PLL          ; padio            ;
++-----------------------------------+-----------------------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II Simulator
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Sat Apr 14 16:28:37 2007
+Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off PennyTestImage -c PennyTestImage
+Info: Using vector source file "C:/HPSDR/trunk/VK6APH/PennyFPGAtest/PennyTestImage.vwf"
+Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
+    Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
+Info: Simulation partitioned into 1 sub-simulations
+Info: Simulation coverage is      52.00 %
+Info: Number of transitions in simulation is 1856913
+Info: Quartus II Simulator was successful. 0 errors, 0 warnings
+    Info: Allocated 88 megabytes of memory during processing
+    Info: Processing ended: Sat Apr 14 16:28:58 2007
+    Info: Elapsed time: 00:00:21
+
+

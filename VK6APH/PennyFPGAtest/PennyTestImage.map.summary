@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Sat Apr 14 16:54:11 2007
+Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
+Revision Name : PennyTestImage
+Top-level Entity Name : PennyTestImage
+Family : Cyclone II
+Total logic elements : 29
+    Total combinational functions : 29
+    Dedicated logic registers : 28
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total memory bits : N/A until Partition Merge
+Embedded Multiplier 9-bit elements : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge
