@@ -1,15 +1,15 @@
-Fitter Status : Successful - Sat Apr 14 16:54:20 2007
+Fitter Status : Successful - Wed Apr 25 21:51:46 2007
 Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
 Revision Name : PennyTestImage
 Top-level Entity Name : PennyTestImage
 Family : Cyclone II
 Device : EP2C8Q208C8
 Timing Models : Final
-Total logic elements : 28 / 8,256 ( < 1 % )
-    Total combinational functions : 28 / 8,256 ( < 1 % )
-    Dedicated logic registers : 28 / 8,256 ( < 1 % )
-Total registers : 28
-Total pins : 67 / 138 ( 49 % )
+Total logic elements : 0 / 8,256 ( 0 % )
+    Total combinational functions : 0 / 8,256 ( 0 % )
+    Dedicated logic registers : 0 / 8,256 ( 0 % )
+Total registers : 0
+Total pins : 18 / 138 ( 13 % )
 Total virtual pins : 0
 Total memory bits : 0 / 165,888 ( 0 % )
 Embedded Multiplier 9-bit elements : 0 / 36 ( 0 % )
