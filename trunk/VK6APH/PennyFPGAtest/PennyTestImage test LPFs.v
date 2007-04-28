@@ -29,12 +29,13 @@ module PennyTestImage(
 	output _80MLPF,
 	output n80MLPF,
 	output _30MLPF,
-	output n30MLPF 
+	output n30MLPF,
+	output LED1 
 
 	); 
 
        
-	assign TXRX  = 1'b1;		// select Rx
+	assign TXRX  = 0;		// select Tx
 	assign nTXRX = !TXRX;
 	assign _60MLPF = 0;		
 	assign n60MLPF = !_60MLPF;
@@ -42,16 +43,19 @@ module PennyTestImage(
 	assign n20MLPF = !_20MLPF;
 	assign _40MLPF = 0;
 	assign n40MLPF = !_40MLPF;
-	assign _10MLPF = 1'b1;		// select 10m LPF 
+	assign _10MLPF = 0;		// select 10m LPF 
 	assign n10MLPF = !_10MLPF;
 	assign _160MLPF = 0;
 	assign n160MLPF = !_160MLPF;
-	assign _6MLPF = 0;
+	assign _6MLPF = 0;			
 	assign n6MLPF = !_6MLPF;
 	assign _80MLPF = 0;
 	assign n80MLPF = !_80MLPF;
 	assign _30MLPF = 0;
 	assign n30MLPF = !_30MLPF;
+	
+// so we can see code is loaded
+	assign LED1 = 0;
 
 
 endmodule

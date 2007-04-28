@@ -259,7 +259,7 @@ _60MLPF                      : 199       : output : 3.3-V LVTTL       :         
 RESERVED_INPUT               : 200       :        :                   :         : 2         :                
 RESERVED_INPUT               : 201       :        :                   :         : 2         :                
 VCCIO2                       : 202       : power  :                   : 3.3V    : 2         :                
-RESERVED_INPUT               : 203       :        :                   :         : 2         :                
+LED1                         : 203       : output : 3.3-V LVTTL       :         : 2         : Y              
 GND                          : 204       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 205       :        :                   :         : 2         :                
 RESERVED_INPUT               : 206       :        :                   :         : 2         :                
