@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PennyTestImage
-Wed Apr 25 21:51:37 2007
+Thu Apr 26 21:40:10 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Apr 25 21:51:37 2007   ;
+; Analysis & Synthesis Status        ; Successful - Thu Apr 26 21:40:10 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; PennyTestImage                          ;
 ; Top-level Entity Name              ; PennyTestImage                          ;
@@ -118,13 +118,13 @@ applicable agreement for further details.
 +--------------------------------------------------------------------+--------------------+--------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                             ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                         ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------+
-; PennyTestImage.v                 ; yes             ; User Verilog HDL File  ; C:/HPSDR/trunk/VK6APH/PennyFPGAtest/PennyTestImage.v ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                       ;
++----------------------------------+-----------------+------------------------+----------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                   ;
++----------------------------------+-----------------+------------------------+----------------------------------------------------------------+
+; PennyTestImage test LPFs.v       ; yes             ; User Verilog HDL File  ; C:/HPSDR/trunk/VK6APH/PennyFPGAtest/PennyTestImage test LPFs.v ;
++----------------------------------+-----------------+------------------------+----------------------------------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -149,9 +149,9 @@ applicable agreement for further details.
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
 ; I/O pins                                    ; 0     ;
-; Maximum fan-out node                        ; ~VCC  ;
-; Maximum fan-out                             ; 9     ;
-; Total fan-out                               ; 18    ;
+; Maximum fan-out node                        ; ~GND  ;
+; Maximum fan-out                             ; 10    ;
+; Total fan-out                               ; 19    ;
 ; Average fan-out                             ; 0.90  ;
 +---------------------------------------------+-------+
 
@@ -187,22 +187,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Wed Apr 25 21:51:36 2007
+    Info: Processing started: Thu Apr 26 21:40:09 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PennyTestImage -c PennyTestImage
-Info: Found 1 design units, including 1 entities, in source file PennyTestImage.v
+Info: Found 1 design units, including 1 entities, in source file PennyTestImage test LPFs.v
     Info: Found entity 1: PennyTestImage
 Info: Elaborating entity "PennyTestImage" for the top level hierarchy
 Warning: Output pins are stuck at VCC or GND
-    Warning: Pin "TXRX" stuck at VCC
-    Warning: Pin "nTXRX" stuck at GND
+    Warning: Pin "TXRX" stuck at GND
+    Warning: Pin "nTXRX" stuck at VCC
     Warning: Pin "_60MLPF" stuck at GND
     Warning: Pin "n60MLPF" stuck at VCC
     Warning: Pin "_20MLPF" stuck at GND
     Warning: Pin "n20MLPF" stuck at VCC
     Warning: Pin "_40MLPF" stuck at GND
     Warning: Pin "n40MLPF" stuck at VCC
-    Warning: Pin "_10MLPF" stuck at VCC
-    Warning: Pin "n10MLPF" stuck at GND
+    Warning: Pin "_10MLPF" stuck at GND
+    Warning: Pin "n10MLPF" stuck at VCC
     Warning: Pin "_160MLPF" stuck at GND
     Warning: Pin "n160MLPF" stuck at VCC
     Warning: Pin "_6MLPF" stuck at GND
@@ -211,13 +211,14 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "n80MLPF" stuck at VCC
     Warning: Pin "_30MLPF" stuck at GND
     Warning: Pin "n30MLPF" stuck at VCC
-Info: Implemented 20 device resources after synthesis - the final resource count might be different
+    Warning: Pin "LED1" stuck at GND
+Info: Implemented 21 device resources after synthesis - the final resource count might be different
     Info: Implemented 0 input pins
-    Info: Implemented 18 output pins
+    Info: Implemented 19 output pins
     Info: Implemented 2 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 19 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 20 warnings
     Info: Allocated 117 megabytes of memory during processing
-    Info: Processing ended: Wed Apr 25 21:51:37 2007
+    Info: Processing ended: Thu Apr 26 21:40:10 2007
     Info: Elapsed time: 00:00:01
 
 

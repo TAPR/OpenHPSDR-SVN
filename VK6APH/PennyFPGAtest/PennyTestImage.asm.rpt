@@ -1,5 +1,5 @@
 Assembler report for PennyTestImage
-Wed Apr 25 21:51:55 2007
+Thu Apr 26 21:40:28 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Wed Apr 25 21:51:55 2007 ;
+; Assembler Status      ; Successful - Thu Apr 26 21:40:28 2007 ;
 ; Revision Name         ; PennyTestImage                        ;
 ; Top-level Entity Name ; PennyTestImage                        ;
 ; Family                ; Cyclone II                            ;
@@ -93,7 +93,7 @@ applicable agreement for further details.
 +----------------+-----------------------------------------------------------------+
 ; Device         ; EP2C8Q208C8                                                     ;
 ; JTAG usercode  ; 0xFFFFFFFF                                                      ;
-; Checksum       ; 0x000BF7E1                                                      ;
+; Checksum       ; 0x000BF921                                                      ;
 +----------------+-----------------------------------------------------------------+
 
 
@@ -104,7 +104,7 @@ applicable agreement for further details.
 +--------------------+-------------------------------------------------------------+
 ; Device             ; EPCS4                                                       ;
 ; JTAG usercode      ; 0x00000000                                                  ;
-; Checksum           ; 0x06F07294                                                  ;
+; Checksum           ; 0x06F08970                                                  ;
 ; Compression Ratio  ; 3                                                           ;
 +--------------------+-------------------------------------------------------------+
 
@@ -115,13 +115,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Wed Apr 25 21:51:48 2007
+    Info: Processing started: Thu Apr 26 21:40:21 2007
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off PennyTestImage -c PennyTestImage
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Allocated 125 megabytes of memory during processing
-    Info: Processing ended: Wed Apr 25 21:51:55 2007
+    Info: Processing ended: Thu Apr 26 21:40:28 2007
     Info: Elapsed time: 00:00:07
 
 

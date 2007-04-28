@@ -1,5 +1,5 @@
 Flow report for PennyTestImage
-Wed Apr 25 21:51:57 2007
+Thu Apr 26 21:40:31 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Wed Apr 25 21:51:57 2007   ;
+; Flow Status                        ; Successful - Thu Apr 26 21:40:31 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; PennyTestImage                          ;
 ; Top-level Entity Name              ; PennyTestImage                          ;
@@ -49,7 +49,7 @@ applicable agreement for further details.
 ;     Total combinational functions  ; 0 / 8,256 ( 0 % )                       ;
 ;     Dedicated logic registers      ; 0 / 8,256 ( 0 % )                       ;
 ; Total registers                    ; 0                                       ;
-; Total pins                         ; 18 / 138 ( 13 % )                       ;
+; Total pins                         ; 19 / 138 ( 14 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 0 / 165,888 ( 0 % )                     ;
 ; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                          ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/25/2007 21:51:37 ;
+; Start date & time ; 04/26/2007 21:40:10 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; PennyTestImage      ;
 +-------------------+---------------------+
@@ -87,8 +87,8 @@ applicable agreement for further details.
 ; Partition Merge         ; 00:00:00     ;
 ; Fitter                  ; 00:00:06     ;
 ; Assembler               ; 00:00:07     ;
-; Classic Timing Analyzer ; 00:00:00     ;
-; Total                   ; 00:00:14     ;
+; Classic Timing Analyzer ; 00:00:01     ;
+; Total                   ; 00:00:15     ;
 +-------------------------+--------------+
 
 
