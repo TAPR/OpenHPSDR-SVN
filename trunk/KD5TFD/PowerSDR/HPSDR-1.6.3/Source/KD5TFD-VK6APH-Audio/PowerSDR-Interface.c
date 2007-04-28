@@ -282,7 +282,8 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
 
 
 KD5TFDVK6APHAUDIO_API void SetVFOfreq(double ff) { 	
-	ff = (1000000.0  * ff * 4294967296.0) / ( 125.0 * 1000000);  // 1Mhz * (f in mhz) * (2**32) / (125 mhz) 
+	// ff = (1000000.0  * ff * 4294967296.0) / ( 125.0 * 1000000);  // 1Mhz * (f in mhz) * (2**32) / (125 mhz) 
+    ff = (1000000.0 *ff); // VK6APH - send frequecy in Hz, conversion to phase now done in FPGA 11 April 2007
 	VFOfreq = (int)ff; 
 	return; 
 }
