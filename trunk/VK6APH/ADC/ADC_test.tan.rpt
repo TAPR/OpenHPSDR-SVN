@@ -1,0 +1,432 @@
+Classic Timing Analyzer report for ADC_test
+Tue May 01 13:50:24 2007
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Clock Setup: 'clock'
+  6. Clock Hold: 'clock'
+  7. tsu
+  8. tco
+  9. th
+ 10. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                                                                       ;
++------------------------------+------------------------------------------+---------------+------------------------------------------------+--------------+--------------+------------+----------+--------------+
+; Type                         ; Slack                                    ; Required Time ; Actual Time                                    ; From         ; To           ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+------------------------------------------+---------------+------------------------------------------------+--------------+--------------+------------+----------+--------------+
+; Worst-case tsu               ; N/A                                      ; None          ; 2.396 ns                                       ; MISO         ; temp_AIN5[9] ; --         ; clock    ; 0            ;
+; Worst-case tco               ; N/A                                      ; None          ; 10.876 ns                                      ; AIN5[0]~reg0 ; AIN5[0]      ; clock      ; --       ; 0            ;
+; Worst-case th                ; N/A                                      ; None          ; -1.340 ns                                      ; MISO         ; temp_AIN5[8] ; --         ; clock    ; 0            ;
+; Clock Setup: 'clock'         ; N/A                                      ; None          ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[2]   ; MOSI~reg0    ; clock      ; clock    ; 0            ;
+; Clock Hold: 'clock'          ; Not operational: Clock Skew > Data Delay ; None          ; N/A                                            ; bit_cnt[3]   ; temp_AIN5[8] ; clock      ; clock    ; 69           ;
+; Total number of failed paths ;                                          ;               ;                                                ;              ;              ;            ;          ; 69           ;
++------------------------------+------------------------------------------+---------------+------------------------------------------------+--------------+--------------+------------+----------+--------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                ; Setting            ; From ; To ; Entity Name ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                           ; EP2C5Q208C8        ;      ;    ;             ;
+; Timing Models                                         ; Final              ;      ;    ;             ;
+; Default hold multicycle                               ; Same as Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains             ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                        ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                      ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                 ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements               ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                      ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                  ; Off                ;      ;    ;             ;
+; Number of source nodes to report per destination node ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                 ; 10                 ;      ;    ;             ;
+; Number of paths to report                             ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                          ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                            ; Off                ;      ;    ;             ;
++-------------------------------------------------------+--------------------+------+----+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                             ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type     ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset ; Phase offset ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; clock           ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'clock'                                                                                                                                                                               ;
++-------+------------------------------------------------+---------------+---------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack ; Actual fmax (period)                           ; From          ; To            ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-------+------------------------------------------------+---------------+---------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[2]    ; MOSI~reg0     ; clock      ; clock    ; None                        ; None                      ; 2.401 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[1]    ; bit_cnt[2]    ; clock      ; clock    ; None                        ; None                      ; 2.363 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[0]    ; bit_cnt[2]    ; clock      ; clock    ; None                        ; None                      ; 2.339 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[0]    ; bit_cnt[0]    ; clock      ; clock    ; None                        ; None                      ; 2.338 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[0]    ; bit_cnt[1]    ; clock      ; clock    ; None                        ; None                      ; 2.337 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[0]    ; ADC.001       ; clock      ; clock    ; None                        ; None                      ; 2.203 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[0]    ; ADC.000       ; clock      ; clock    ; None                        ; None                      ; 2.203 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.000       ; bit_cnt[2]    ; clock      ; clock    ; None                        ; None                      ; 2.179 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.000       ; bit_cnt[0]    ; clock      ; clock    ; None                        ; None                      ; 2.178 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.000       ; bit_cnt[1]    ; clock      ; clock    ; None                        ; None                      ; 2.177 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[1]    ; MOSI~reg0     ; clock      ; clock    ; None                        ; None                      ; 2.164 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[2]    ; bit_cnt[2]    ; clock      ; clock    ; None                        ; None                      ; 2.155 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[2]    ; bit_cnt[0]    ; clock      ; clock    ; None                        ; None                      ; 2.154 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[2]    ; bit_cnt[1]    ; clock      ; clock    ; None                        ; None                      ; 2.153 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[3]    ; MOSI~reg0     ; clock      ; clock    ; None                        ; None                      ; 2.023 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[2]    ; ADC.001       ; clock      ; clock    ; None                        ; None                      ; 2.019 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[2]    ; ADC.000       ; clock      ; clock    ; None                        ; None                      ; 2.019 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[1]    ; bit_cnt[0]    ; clock      ; clock    ; None                        ; None                      ; 1.993 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[1]    ; bit_cnt[1]    ; clock      ; clock    ; None                        ; None                      ; 1.992 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.001       ; MOSI~reg0     ; clock      ; clock    ; None                        ; None                      ; 1.977 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[0]    ; MOSI~reg0     ; clock      ; clock    ; None                        ; None                      ; 1.962 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[3]    ; ADC.001       ; clock      ; clock    ; None                        ; None                      ; 1.878 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[1]    ; ADC.001       ; clock      ; clock    ; None                        ; None                      ; 1.858 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[1]    ; ADC.000       ; clock      ; clock    ; None                        ; None                      ; 1.858 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[3]    ; bit_cnt[2]    ; clock      ; clock    ; None                        ; None                      ; 1.848 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[3]    ; bit_cnt[0]    ; clock      ; clock    ; None                        ; None                      ; 1.847 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[3]    ; bit_cnt[1]    ; clock      ; clock    ; None                        ; None                      ; 1.846 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.100       ; bit_cnt[3]    ; clock      ; clock    ; None                        ; None                      ; 1.826 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.100       ; bit_cnt[1]    ; clock      ; clock    ; None                        ; None                      ; 1.826 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[0]    ; bit_cnt[3]    ; clock      ; clock    ; None                        ; None                      ; 1.727 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.000       ; bit_cnt[3]    ; clock      ; clock    ; None                        ; None                      ; 1.572 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.100       ; bit_cnt[2]    ; clock      ; clock    ; None                        ; None                      ; 1.544 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[2]    ; bit_cnt[3]    ; clock      ; clock    ; None                        ; None                      ; 1.543 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.100       ; bit_cnt[0]    ; clock      ; clock    ; None                        ; None                      ; 1.538 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[3]    ; ADC.000       ; clock      ; clock    ; None                        ; None                      ; 1.517 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[10] ; AIN5[10]~reg0 ; clock      ; clock    ; None                        ; None                      ; 1.389 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[1]    ; bit_cnt[3]    ; clock      ; clock    ; None                        ; None                      ; 1.382 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[11] ; AIN5[11]~reg0 ; clock      ; clock    ; None                        ; None                      ; 1.377 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.001       ; nCS~reg0      ; clock      ; clock    ; None                        ; None                      ; 1.181 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.000       ; ADC.001       ; clock      ; clock    ; None                        ; None                      ; 1.157 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.011       ; SCLK~reg0     ; clock      ; clock    ; None                        ; None                      ; 1.134 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.011       ; ADC.100       ; clock      ; clock    ; None                        ; None                      ; 1.131 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.100       ; ADC.000       ; clock      ; clock    ; None                        ; None                      ; 1.082 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.100       ; ADC.001       ; clock      ; clock    ; None                        ; None                      ; 1.080 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[4]  ; AIN5[4]~reg0  ; clock      ; clock    ; None                        ; None                      ; 1.048 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[6]  ; AIN5[6]~reg0  ; clock      ; clock    ; None                        ; None                      ; 1.048 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[8]  ; AIN5[8]~reg0  ; clock      ; clock    ; None                        ; None                      ; 1.048 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[2]  ; AIN5[2]~reg0  ; clock      ; clock    ; None                        ; None                      ; 1.047 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[7]  ; AIN5[7]~reg0  ; clock      ; clock    ; None                        ; None                      ; 1.046 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[1]  ; AIN5[1]~reg0  ; clock      ; clock    ; None                        ; None                      ; 1.045 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[5]  ; AIN5[5]~reg0  ; clock      ; clock    ; None                        ; None                      ; 1.045 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[9]  ; AIN5[9]~reg0  ; clock      ; clock    ; None                        ; None                      ; 1.044 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[0]  ; AIN5[0]~reg0  ; clock      ; clock    ; None                        ; None                      ; 1.043 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[3]  ; AIN5[3]~reg0  ; clock      ; clock    ; None                        ; None                      ; 0.952 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.001       ; ADC.010       ; clock      ; clock    ; None                        ; None                      ; 0.913 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.000       ; nCS~reg0      ; clock      ; clock    ; None                        ; None                      ; 0.768 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.010       ; SCLK~reg0     ; clock      ; clock    ; None                        ; None                      ; 0.760 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; ADC.010       ; ADC.011       ; clock      ; clock    ; None                        ; None                      ; 0.759 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; SCLK~reg0     ; SCLK~reg0     ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[3]    ; bit_cnt[3]    ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; nCS~reg0      ; nCS~reg0      ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; MOSI~reg0     ; MOSI~reg0     ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[0]  ; temp_AIN5[0]  ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[1]  ; temp_AIN5[1]  ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[2]  ; temp_AIN5[2]  ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[3]  ; temp_AIN5[3]  ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[4]  ; temp_AIN5[4]  ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[5]  ; temp_AIN5[5]  ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[6]  ; temp_AIN5[6]  ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[7]  ; temp_AIN5[7]  ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[8]  ; temp_AIN5[8]  ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[9]  ; temp_AIN5[9]  ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[10] ; temp_AIN5[10] ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; temp_AIN5[11] ; temp_AIN5[11] ; clock      ; clock    ; None                        ; None                      ; 0.501 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[2]    ; AIN5[9]~reg0  ; clock      ; clock    ; None                        ; None                      ; 2.940 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[2]    ; AIN5[10]~reg0 ; clock      ; clock    ; None                        ; None                      ; 2.940 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[2]    ; AIN5[11]~reg0 ; clock      ; clock    ; None                        ; None                      ; 2.940 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[3]    ; AIN5[9]~reg0  ; clock      ; clock    ; None                        ; None                      ; 2.795 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[3]    ; AIN5[10]~reg0 ; clock      ; clock    ; None                        ; None                      ; 2.795 ns                ;
+; N/A   ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; bit_cnt[3]    ; AIN5[11]~reg0 ; clock      ; clock    ; None                        ; None                      ; 2.795 ns                ;
++-------+------------------------------------------------+---------------+---------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Hold: 'clock'                                                                                                                                                                ;
++------------------------------------------+------------+---------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; Minimum Slack                            ; From       ; To            ; From Clock ; To Clock ; Required Hold Relationship ; Required Shortest P2P Time ; Actual Shortest P2P Time ;
++------------------------------------------+------------+---------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[8]  ; clock      ; clock    ; None                       ; None                       ; 1.765 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[6]  ; clock      ; clock    ; None                       ; None                       ; 1.791 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[11] ; clock      ; clock    ; None                       ; None                       ; 1.814 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[10] ; clock      ; clock    ; None                       ; None                       ; 1.819 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[4]  ; clock      ; clock    ; None                       ; None                       ; 1.826 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[8]  ; clock      ; clock    ; None                       ; None                       ; 1.923 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[6]  ; clock      ; clock    ; None                       ; None                       ; 1.959 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[11] ; clock      ; clock    ; None                       ; None                       ; 1.983 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[10] ; clock      ; clock    ; None                       ; None                       ; 1.986 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[4]  ; clock      ; clock    ; None                       ; None                       ; 1.988 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[8]  ; clock      ; clock    ; None                       ; None                       ; 2.040 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[1]  ; clock      ; clock    ; None                       ; None                       ; 2.042 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[5]  ; clock      ; clock    ; None                       ; None                       ; 2.060 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[7]  ; clock      ; clock    ; None                       ; None                       ; 2.062 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[0]  ; clock      ; clock    ; None                       ; None                       ; 2.064 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[2]  ; clock      ; clock    ; None                       ; None                       ; 2.065 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[3]  ; clock      ; clock    ; None                       ; None                       ; 2.067 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[9]  ; clock      ; clock    ; None                       ; None                       ; 2.078 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[4]  ; clock      ; clock    ; None                       ; None                       ; 2.157 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[0]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.158 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[1]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.158 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[2]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.158 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[3]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.158 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[4]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.158 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[5]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.158 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[6]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.158 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[7]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.158 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[8]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.158 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[10] ; clock      ; clock    ; None                       ; None                       ; 2.183 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[11] ; clock      ; clock    ; None                       ; None                       ; 2.190 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[9]  ; clock      ; clock    ; None                       ; None                       ; 2.201 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[1] ; temp_AIN5[6]  ; clock      ; clock    ; None                       ; None                       ; 2.208 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[1]  ; clock      ; clock    ; None                       ; None                       ; 2.254 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[3]  ; clock      ; clock    ; None                       ; None                       ; 2.264 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[7]  ; clock      ; clock    ; None                       ; None                       ; 2.265 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[5]  ; clock      ; clock    ; None                       ; None                       ; 2.268 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[0]  ; clock      ; clock    ; None                       ; None                       ; 2.269 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[2]  ; clock      ; clock    ; None                       ; None                       ; 2.269 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; AIN5[0]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.303 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; AIN5[1]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.303 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; AIN5[2]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.303 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; AIN5[3]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.303 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; AIN5[4]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.303 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; AIN5[5]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.303 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; AIN5[6]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.303 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; AIN5[7]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.303 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; AIN5[8]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.303 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[3]  ; clock      ; clock    ; None                       ; None                       ; 2.309 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[2]  ; clock      ; clock    ; None                       ; None                       ; 2.311 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[9]  ; clock      ; clock    ; None                       ; None                       ; 2.328 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[1]  ; clock      ; clock    ; None                       ; None                       ; 2.332 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[2]  ; clock      ; clock    ; None                       ; None                       ; 2.343 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[0]  ; clock      ; clock    ; None                       ; None                       ; 2.345 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[3]  ; clock      ; clock    ; None                       ; None                       ; 2.353 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[7]  ; clock      ; clock    ; None                       ; None                       ; 2.358 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[1]  ; clock      ; clock    ; None                       ; None                       ; 2.369 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[8]  ; clock      ; clock    ; None                       ; None                       ; 2.381 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[0]  ; clock      ; clock    ; None                       ; None                       ; 2.390 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; temp_AIN5[5]  ; clock      ; clock    ; None                       ; None                       ; 2.402 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[7]  ; clock      ; clock    ; None                       ; None                       ; 2.425 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[11] ; clock      ; clock    ; None                       ; None                       ; 2.442 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[10] ; clock      ; clock    ; None                       ; None                       ; 2.444 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[5]  ; clock      ; clock    ; None                       ; None                       ; 2.459 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[0] ; temp_AIN5[9]  ; clock      ; clock    ; None                       ; None                       ; 2.484 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[6]  ; clock      ; clock    ; None                       ; None                       ; 2.565 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[2] ; temp_AIN5[4]  ; clock      ; clock    ; None                       ; None                       ; 2.595 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[9]~reg0  ; clock      ; clock    ; None                       ; None                       ; 2.795 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[10]~reg0 ; clock      ; clock    ; None                       ; None                       ; 2.795 ns                 ;
+; Not operational: Clock Skew > Data Delay ; bit_cnt[3] ; AIN5[11]~reg0 ; clock      ; clock    ; None                       ; None                       ; 2.795 ns                 ;
++------------------------------------------+------------+---------------+------------+----------+----------------------------+----------------------------+--------------------------+
+
+
++---------------------------------------------------------------------+
+; tsu                                                                 ;
++-------+--------------+------------+------+---------------+----------+
+; Slack ; Required tsu ; Actual tsu ; From ; To            ; To Clock ;
++-------+--------------+------------+------+---------------+----------+
+; N/A   ; None         ; 2.396 ns   ; MISO ; temp_AIN5[3]  ; clock    ;
+; N/A   ; None         ; 2.396 ns   ; MISO ; temp_AIN5[5]  ; clock    ;
+; N/A   ; None         ; 2.396 ns   ; MISO ; temp_AIN5[9]  ; clock    ;
+; N/A   ; None         ; 2.395 ns   ; MISO ; temp_AIN5[2]  ; clock    ;
+; N/A   ; None         ; 2.394 ns   ; MISO ; temp_AIN5[0]  ; clock    ;
+; N/A   ; None         ; 2.394 ns   ; MISO ; temp_AIN5[1]  ; clock    ;
+; N/A   ; None         ; 2.392 ns   ; MISO ; temp_AIN5[7]  ; clock    ;
+; N/A   ; None         ; 1.610 ns   ; MISO ; temp_AIN5[11] ; clock    ;
+; N/A   ; None         ; 1.608 ns   ; MISO ; temp_AIN5[4]  ; clock    ;
+; N/A   ; None         ; 1.607 ns   ; MISO ; temp_AIN5[6]  ; clock    ;
+; N/A   ; None         ; 1.607 ns   ; MISO ; temp_AIN5[10] ; clock    ;
+; N/A   ; None         ; 1.606 ns   ; MISO ; temp_AIN5[8]  ; clock    ;
++-------+--------------+------------+------+---------------+----------+
+
+
++---------------------------------------------------------------------------+
+; tco                                                                       ;
++-------+--------------+------------+---------------+----------+------------+
+; Slack ; Required tco ; Actual tco ; From          ; To       ; From Clock ;
++-------+--------------+------------+---------------+----------+------------+
+; N/A   ; None         ; 10.876 ns  ; AIN5[0]~reg0  ; AIN5[0]  ; clock      ;
+; N/A   ; None         ; 10.666 ns  ; AIN5[11]~reg0 ; AIN5[11] ; clock      ;
+; N/A   ; None         ; 10.646 ns  ; AIN5[2]~reg0  ; AIN5[2]  ; clock      ;
+; N/A   ; None         ; 10.630 ns  ; AIN5[5]~reg0  ; AIN5[5]  ; clock      ;
+; N/A   ; None         ; 10.602 ns  ; AIN5[9]~reg0  ; AIN5[9]  ; clock      ;
+; N/A   ; None         ; 10.569 ns  ; AIN5[3]~reg0  ; AIN5[3]  ; clock      ;
+; N/A   ; None         ; 10.561 ns  ; AIN5[7]~reg0  ; AIN5[7]  ; clock      ;
+; N/A   ; None         ; 10.556 ns  ; AIN5[1]~reg0  ; AIN5[1]  ; clock      ;
+; N/A   ; None         ; 10.555 ns  ; AIN5[6]~reg0  ; AIN5[6]  ; clock      ;
+; N/A   ; None         ; 10.544 ns  ; AIN5[8]~reg0  ; AIN5[8]  ; clock      ;
+; N/A   ; None         ; 10.523 ns  ; AIN5[10]~reg0 ; AIN5[10] ; clock      ;
+; N/A   ; None         ; 10.155 ns  ; AIN5[4]~reg0  ; AIN5[4]  ; clock      ;
+; N/A   ; None         ; 7.967 ns   ; SCLK~reg0     ; SCLK     ; clock      ;
+; N/A   ; None         ; 7.612 ns   ; nCS~reg0      ; nCS      ; clock      ;
+; N/A   ; None         ; 7.604 ns   ; MOSI~reg0     ; MOSI     ; clock      ;
++-------+--------------+------------+---------------+----------+------------+
+
+
++---------------------------------------------------------------------------+
+; th                                                                        ;
++---------------+-------------+-----------+------+---------------+----------+
+; Minimum Slack ; Required th ; Actual th ; From ; To            ; To Clock ;
++---------------+-------------+-----------+------+---------------+----------+
+; N/A           ; None        ; -1.340 ns ; MISO ; temp_AIN5[8]  ; clock    ;
+; N/A           ; None        ; -1.341 ns ; MISO ; temp_AIN5[6]  ; clock    ;
+; N/A           ; None        ; -1.341 ns ; MISO ; temp_AIN5[10] ; clock    ;
+; N/A           ; None        ; -1.342 ns ; MISO ; temp_AIN5[4]  ; clock    ;
+; N/A           ; None        ; -1.344 ns ; MISO ; temp_AIN5[11] ; clock    ;
+; N/A           ; None        ; -2.126 ns ; MISO ; temp_AIN5[7]  ; clock    ;
+; N/A           ; None        ; -2.128 ns ; MISO ; temp_AIN5[0]  ; clock    ;
+; N/A           ; None        ; -2.128 ns ; MISO ; temp_AIN5[1]  ; clock    ;
+; N/A           ; None        ; -2.129 ns ; MISO ; temp_AIN5[2]  ; clock    ;
+; N/A           ; None        ; -2.130 ns ; MISO ; temp_AIN5[3]  ; clock    ;
+; N/A           ; None        ; -2.130 ns ; MISO ; temp_AIN5[5]  ; clock    ;
+; N/A           ; None        ; -2.130 ns ; MISO ; temp_AIN5[9]  ; clock    ;
++---------------+-------------+-----------+------+---------------+----------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Classic Timing Analyzer
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Tue May 01 13:50:23 2007
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off ADC_test -c ADC_test --timing_analysis_only
+Warning: Found pins functioning as undefined clocks and/or memory enables
+    Info: Assuming node "clock" is an undefined clock
+Warning: Found 1 node(s) in clock paths which may be acting as ripple and/or gated clocks -- node(s) analyzed as buffer(s) resulting in clock skew
+    Info: Detected ripple clock "SCLK~reg0" as buffer
+Info: Clock "clock" Internal fmax is restricted to 340.02 MHz between source register "bit_cnt[2]" and destination register "MOSI~reg0"
+    Info: fmax restricted to clock pin edge rate 2.941 ns. Expand message to see actual delay path.
+        Info: + Longest register to register delay is 2.401 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X5_Y6_N9; Fanout = 16; REG Node = 'bit_cnt[2]'
+            Info: 2: + IC(1.118 ns) + CELL(0.604 ns) = 1.722 ns; Loc. = LCCOMB_X3_Y6_N30; Fanout = 1; COMB Node = 'MOSI~23'
+            Info: 3: + IC(0.365 ns) + CELL(0.206 ns) = 2.293 ns; Loc. = LCCOMB_X3_Y6_N20; Fanout = 1; COMB Node = 'MOSI~24'
+            Info: 4: + IC(0.000 ns) + CELL(0.108 ns) = 2.401 ns; Loc. = LCFF_X3_Y6_N21; Fanout = 2; REG Node = 'MOSI~reg0'
+            Info: Total cell delay = 0.918 ns ( 38.23 % )
+            Info: Total interconnect delay = 1.483 ns ( 61.77 % )
+        Info: - Smallest clock skew is -0.002 ns
+            Info: + Shortest clock path from clock "clock" to destination register is 2.760 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'clock'
+                Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 12; COMB Node = 'clock~clkctrl'
+                Info: 3: + IC(0.811 ns) + CELL(0.666 ns) = 2.760 ns; Loc. = LCFF_X3_Y6_N21; Fanout = 2; REG Node = 'MOSI~reg0'
+                Info: Total cell delay = 1.806 ns ( 65.43 % )
+                Info: Total interconnect delay = 0.954 ns ( 34.57 % )
+            Info: - Longest clock path from clock "clock" to source register is 2.762 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'clock'
+                Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 12; COMB Node = 'clock~clkctrl'
+                Info: 3: + IC(0.813 ns) + CELL(0.666 ns) = 2.762 ns; Loc. = LCFF_X5_Y6_N9; Fanout = 16; REG Node = 'bit_cnt[2]'
+                Info: Total cell delay = 1.806 ns ( 65.39 % )
+                Info: Total interconnect delay = 0.956 ns ( 34.61 % )
+        Info: + Micro clock to output delay of source is 0.304 ns
+        Info: + Micro setup delay of destination is -0.040 ns
+Warning: Circuit may not operate. Detected 69 non-operational path(s) clocked by clock "clock" with clock skew larger than data delay. See Compilation Report for details.
+Info: Found hold time violation between source  pin or register "bit_cnt[3]" and destination pin or register "temp_AIN5[8]" for clock "clock" (Hold time is 1.175 ns)
+    Info: + Largest clock skew is 2.938 ns
+        Info: + Longest clock path from clock "clock" to destination register is 5.700 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'clock'
+            Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 12; COMB Node = 'clock~clkctrl'
+            Info: 3: + IC(0.812 ns) + CELL(0.970 ns) = 3.065 ns; Loc. = LCFF_X4_Y6_N9; Fanout = 3; REG Node = 'SCLK~reg0'
+            Info: 4: + IC(1.156 ns) + CELL(0.000 ns) = 4.221 ns; Loc. = CLKCTRL_G1; Fanout = 24; COMB Node = 'SCLK~reg0clkctrl'
+            Info: 5: + IC(0.813 ns) + CELL(0.666 ns) = 5.700 ns; Loc. = LCFF_X5_Y6_N7; Fanout = 2; REG Node = 'temp_AIN5[8]'
+            Info: Total cell delay = 2.776 ns ( 48.70 % )
+            Info: Total interconnect delay = 2.924 ns ( 51.30 % )
+        Info: - Shortest clock path from clock "clock" to source register is 2.762 ns
+            Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'clock'
+            Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 12; COMB Node = 'clock~clkctrl'
+            Info: 3: + IC(0.813 ns) + CELL(0.666 ns) = 2.762 ns; Loc. = LCFF_X5_Y6_N19; Fanout = 18; REG Node = 'bit_cnt[3]'
+            Info: Total cell delay = 1.806 ns ( 65.39 % )
+            Info: Total interconnect delay = 0.956 ns ( 34.61 % )
+    Info: - Micro clock to output delay of source is 0.304 ns
+    Info: - Shortest register to register delay is 1.765 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X5_Y6_N19; Fanout = 18; REG Node = 'bit_cnt[3]'
+        Info: 2: + IC(0.504 ns) + CELL(0.206 ns) = 0.710 ns; Loc. = LCCOMB_X5_Y6_N0; Fanout = 1; COMB Node = 'Decoder0~205'
+        Info: 3: + IC(0.358 ns) + CELL(0.589 ns) = 1.657 ns; Loc. = LCCOMB_X5_Y6_N6; Fanout = 1; COMB Node = 'temp_AIN5[8]~116'
+        Info: 4: + IC(0.000 ns) + CELL(0.108 ns) = 1.765 ns; Loc. = LCFF_X5_Y6_N7; Fanout = 2; REG Node = 'temp_AIN5[8]'
+        Info: Total cell delay = 0.903 ns ( 51.16 % )
+        Info: Total interconnect delay = 0.862 ns ( 48.84 % )
+    Info: + Micro hold delay of destination is 0.306 ns
+    Info: Delay path is controlled by inverted clocks -- if clock duty cycle is 50, fmax is divided by two
+Info: tsu for register "temp_AIN5[3]" (data pin = "MISO", clock pin = "clock") is 2.396 ns
+    Info: + Longest pin to register delay is 8.134 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.984 ns) = 0.984 ns; Loc. = PIN_198; Fanout = 12; PIN Node = 'MISO'
+        Info: 2: + IC(6.418 ns) + CELL(0.624 ns) = 8.026 ns; Loc. = LCCOMB_X3_Y6_N14; Fanout = 1; COMB Node = 'temp_AIN5[3]~111'
+        Info: 3: + IC(0.000 ns) + CELL(0.108 ns) = 8.134 ns; Loc. = LCFF_X3_Y6_N15; Fanout = 2; REG Node = 'temp_AIN5[3]'
+        Info: Total cell delay = 1.716 ns ( 21.10 % )
+        Info: Total interconnect delay = 6.418 ns ( 78.90 % )
+    Info: + Micro setup delay of destination is -0.040 ns
+    Info: - Shortest clock path from clock "clock" to destination register is 5.698 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'clock'
+        Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 12; COMB Node = 'clock~clkctrl'
+        Info: 3: + IC(0.812 ns) + CELL(0.970 ns) = 3.065 ns; Loc. = LCFF_X4_Y6_N9; Fanout = 3; REG Node = 'SCLK~reg0'
+        Info: 4: + IC(1.156 ns) + CELL(0.000 ns) = 4.221 ns; Loc. = CLKCTRL_G1; Fanout = 24; COMB Node = 'SCLK~reg0clkctrl'
+        Info: 5: + IC(0.811 ns) + CELL(0.666 ns) = 5.698 ns; Loc. = LCFF_X3_Y6_N15; Fanout = 2; REG Node = 'temp_AIN5[3]'
+        Info: Total cell delay = 2.776 ns ( 48.72 % )
+        Info: Total interconnect delay = 2.922 ns ( 51.28 % )
+Info: tco from clock "clock" to destination pin "AIN5[0]" through register "AIN5[0]~reg0" is 10.876 ns
+    Info: + Longest clock path from clock "clock" to source register is 5.699 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'clock'
+        Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 12; COMB Node = 'clock~clkctrl'
+        Info: 3: + IC(0.812 ns) + CELL(0.970 ns) = 3.065 ns; Loc. = LCFF_X4_Y6_N9; Fanout = 3; REG Node = 'SCLK~reg0'
+        Info: 4: + IC(1.156 ns) + CELL(0.000 ns) = 4.221 ns; Loc. = CLKCTRL_G1; Fanout = 24; COMB Node = 'SCLK~reg0clkctrl'
+        Info: 5: + IC(0.812 ns) + CELL(0.666 ns) = 5.699 ns; Loc. = LCFF_X4_Y6_N29; Fanout = 1; REG Node = 'AIN5[0]~reg0'
+        Info: Total cell delay = 2.776 ns ( 48.71 % )
+        Info: Total interconnect delay = 2.923 ns ( 51.29 % )
+    Info: + Micro clock to output delay of source is 0.304 ns
+    Info: + Longest register to pin delay is 4.873 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X4_Y6_N29; Fanout = 1; REG Node = 'AIN5[0]~reg0'
+        Info: 2: + IC(1.767 ns) + CELL(3.106 ns) = 4.873 ns; Loc. = PIN_13; Fanout = 0; PIN Node = 'AIN5[0]'
+        Info: Total cell delay = 3.106 ns ( 63.74 % )
+        Info: Total interconnect delay = 1.767 ns ( 36.26 % )
+Info: th for register "temp_AIN5[8]" (data pin = "MISO", clock pin = "clock") is -1.340 ns
+    Info: + Longest clock path from clock "clock" to destination register is 5.700 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.140 ns) = 1.140 ns; Loc. = PIN_23; Fanout = 1; CLK Node = 'clock'
+        Info: 2: + IC(0.143 ns) + CELL(0.000 ns) = 1.283 ns; Loc. = CLKCTRL_G2; Fanout = 12; COMB Node = 'clock~clkctrl'
+        Info: 3: + IC(0.812 ns) + CELL(0.970 ns) = 3.065 ns; Loc. = LCFF_X4_Y6_N9; Fanout = 3; REG Node = 'SCLK~reg0'
+        Info: 4: + IC(1.156 ns) + CELL(0.000 ns) = 4.221 ns; Loc. = CLKCTRL_G1; Fanout = 24; COMB Node = 'SCLK~reg0clkctrl'
+        Info: 5: + IC(0.813 ns) + CELL(0.666 ns) = 5.700 ns; Loc. = LCFF_X5_Y6_N7; Fanout = 2; REG Node = 'temp_AIN5[8]'
+        Info: Total cell delay = 2.776 ns ( 48.70 % )
+        Info: Total interconnect delay = 2.924 ns ( 51.30 % )
+    Info: + Micro hold delay of destination is 0.306 ns
+    Info: - Shortest pin to register delay is 7.346 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.984 ns) = 0.984 ns; Loc. = PIN_198; Fanout = 12; PIN Node = 'MISO'
+        Info: 2: + IC(6.048 ns) + CELL(0.206 ns) = 7.238 ns; Loc. = LCCOMB_X5_Y6_N6; Fanout = 1; COMB Node = 'temp_AIN5[8]~116'
+        Info: 3: + IC(0.000 ns) + CELL(0.108 ns) = 7.346 ns; Loc. = LCFF_X5_Y6_N7; Fanout = 2; REG Node = 'temp_AIN5[8]'
+        Info: Total cell delay = 1.298 ns ( 17.67 % )
+        Info: Total interconnect delay = 6.048 ns ( 82.33 % )
+Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 3 warnings
+    Info: Allocated 99 megabytes of memory during processing
+    Info: Processing ended: Tue May 01 13:50:24 2007
+    Info: Elapsed time: 00:00:01
+
+

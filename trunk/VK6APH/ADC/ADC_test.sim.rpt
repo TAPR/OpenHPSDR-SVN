@@ -1,0 +1,278 @@
+Simulator report for ADC_test
+Tue May 01 13:50:47 2007
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. Coverage Summary
+  6. Complete 1/0-Value Coverage
+  7. Missing 1-Value Coverage
+  8. Missing 0-Value Coverage
+  9. Simulator INI Usage
+ 10. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------+
+; Simulator Summary                          ;
++-----------------------------+--------------+
+; Type                        ; Value        ;
++-----------------------------+--------------+
+; Simulation Start Time       ; 0 ps         ;
+; Simulation End Time         ; 15.0 us      ;
+; Simulation Netlist Size     ; 106 nodes    ;
+; Simulation Coverage         ;      69.81 % ;
+; Total Number of Transitions ; 3201         ;
+; Simulation Breakpoints      ; 0            ;
+; Family                      ; Cyclone II   ;
+; Device                      ; EP2C5Q208C8  ;
++-----------------------------+--------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                      ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+; Option                                                                                     ; Setting    ; Default Value ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+; Simulation mode                                                                            ; Timing     ; Timing        ;
+; Start time                                                                                 ; 0 ns       ; 0 ns          ;
+; Simulation results format                                                                  ; CVWF       ;               ;
+; Add pins automatically to simulation output waveforms                                      ; On         ; On            ;
+; Check outputs                                                                              ; Off        ; Off           ;
+; Report simulation coverage                                                                 ; On         ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On         ; On            ;
+; Display missing 1-value coverage report                                                    ; On         ; On            ;
+; Display missing 0-value coverage report                                                    ; On         ; On            ;
+; Detect setup and hold time violations                                                      ; Off        ; Off           ;
+; Detect glitches                                                                            ; Off        ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off        ; Off           ;
+; Generate Signal Activity File                                                              ; Off        ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off        ; Off           ;
+; Group bus channels in simulation results                                                   ; Off        ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On         ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off        ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off        ;               ;
+; Glitch Filtering                                                                           ; Off        ; Off           ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II to view the waveform report data.
+
+
++--------------------------------------------------------------------+
+; Coverage Summary                                                   ;
++-----------------------------------------------------+--------------+
+; Type                                                ; Value        ;
++-----------------------------------------------------+--------------+
+; Total coverage as a percentage                      ;      69.81 % ;
+; Total nodes checked                                 ; 106          ;
+; Total output ports checked                          ; 106          ;
+; Total output ports with complete 1/0-value coverage ; 74           ;
+; Total output ports with no 1/0-value coverage       ; 12           ;
+; Total output ports with no 1-value coverage         ; 12           ;
+; Total output ports with no 0-value coverage         ; 32           ;
++-----------------------------------------------------+--------------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++----------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                      ;
++-------------------------------+-------------------------------+------------------+
+; Node Name                     ; Output Port Name              ; Output Port Type ;
++-------------------------------+-------------------------------+------------------+
+; |ADC_test|SCLK~reg0           ; |ADC_test|SCLK~reg0           ; regout           ;
+; |ADC_test|nCS~reg0            ; |ADC_test|nCS~reg0            ; regout           ;
+; |ADC_test|MOSI~reg0           ; |ADC_test|MOSI~reg0           ; regout           ;
+; |ADC_test|AIN5[4]~reg0        ; |ADC_test|AIN5[4]~reg0        ; regout           ;
+; |ADC_test|AIN5[5]~reg0        ; |ADC_test|AIN5[5]~reg0        ; regout           ;
+; |ADC_test|AIN5[9]~reg0        ; |ADC_test|AIN5[9]~reg0        ; regout           ;
+; |ADC_test|ADC.010             ; |ADC_test|ADC.010             ; regout           ;
+; |ADC_test|ADC.011             ; |ADC_test|ADC.011             ; regout           ;
+; |ADC_test|Selector6~8         ; |ADC_test|Selector6~8         ; combout          ;
+; |ADC_test|ADC.001             ; |ADC_test|ADC.001             ; regout           ;
+; |ADC_test|ADC.000             ; |ADC_test|ADC.000             ; regout           ;
+; |ADC_test|Selector0~8         ; |ADC_test|Selector0~8         ; combout          ;
+; |ADC_test|bit_cnt[0]          ; |ADC_test|bit_cnt[0]          ; regout           ;
+; |ADC_test|bit_cnt[3]          ; |ADC_test|bit_cnt[3]          ; regout           ;
+; |ADC_test|bit_cnt[2]          ; |ADC_test|bit_cnt[2]          ; regout           ;
+; |ADC_test|bit_cnt[1]          ; |ADC_test|bit_cnt[1]          ; regout           ;
+; |ADC_test|MOSI~23             ; |ADC_test|MOSI~23             ; combout          ;
+; |ADC_test|MOSI~24             ; |ADC_test|MOSI~24             ; combout          ;
+; |ADC_test|LessThan0~40        ; |ADC_test|LessThan0~40        ; combout          ;
+; |ADC_test|temp_AIN5[4]        ; |ADC_test|temp_AIN5[4]        ; regout           ;
+; |ADC_test|temp_AIN5[5]        ; |ADC_test|temp_AIN5[5]        ; regout           ;
+; |ADC_test|temp_AIN5[7]        ; |ADC_test|temp_AIN5[7]        ; regout           ;
+; |ADC_test|temp_AIN5[9]        ; |ADC_test|temp_AIN5[9]        ; regout           ;
+; |ADC_test|temp_AIN5[10]       ; |ADC_test|temp_AIN5[10]       ; regout           ;
+; |ADC_test|ADC.100             ; |ADC_test|ADC.100             ; regout           ;
+; |ADC_test|ADC~43              ; |ADC_test|ADC~43              ; combout          ;
+; |ADC_test|Selector5~23        ; |ADC_test|Selector5~23        ; combout          ;
+; |ADC_test|ADC~44              ; |ADC_test|ADC~44              ; combout          ;
+; |ADC_test|bit_cnt[3]~701      ; |ADC_test|bit_cnt[3]~701      ; combout          ;
+; |ADC_test|bit_cnt[0]~702      ; |ADC_test|bit_cnt[0]~702      ; combout          ;
+; |ADC_test|bit_cnt[3]~703      ; |ADC_test|bit_cnt[3]~703      ; combout          ;
+; |ADC_test|Add0~105            ; |ADC_test|Add0~105            ; combout          ;
+; |ADC_test|bit_cnt[2]~704      ; |ADC_test|bit_cnt[2]~704      ; combout          ;
+; |ADC_test|bit_cnt[1]~705      ; |ADC_test|bit_cnt[1]~705      ; combout          ;
+; |ADC_test|Decoder0~197        ; |ADC_test|Decoder0~197        ; combout          ;
+; |ADC_test|temp_AIN5[0]~108    ; |ADC_test|temp_AIN5[0]~108    ; combout          ;
+; |ADC_test|Decoder0~198        ; |ADC_test|Decoder0~198        ; combout          ;
+; |ADC_test|temp_AIN5[1]~109    ; |ADC_test|temp_AIN5[1]~109    ; combout          ;
+; |ADC_test|Decoder0~199        ; |ADC_test|Decoder0~199        ; combout          ;
+; |ADC_test|temp_AIN5[2]~110    ; |ADC_test|temp_AIN5[2]~110    ; combout          ;
+; |ADC_test|Decoder0~200        ; |ADC_test|Decoder0~200        ; combout          ;
+; |ADC_test|temp_AIN5[3]~111    ; |ADC_test|temp_AIN5[3]~111    ; combout          ;
+; |ADC_test|Decoder0~201        ; |ADC_test|Decoder0~201        ; combout          ;
+; |ADC_test|temp_AIN5[4]~112    ; |ADC_test|temp_AIN5[4]~112    ; combout          ;
+; |ADC_test|Decoder0~202        ; |ADC_test|Decoder0~202        ; combout          ;
+; |ADC_test|temp_AIN5[5]~113    ; |ADC_test|temp_AIN5[5]~113    ; combout          ;
+; |ADC_test|Decoder0~203        ; |ADC_test|Decoder0~203        ; combout          ;
+; |ADC_test|temp_AIN5[6]~114    ; |ADC_test|temp_AIN5[6]~114    ; combout          ;
+; |ADC_test|Decoder0~204        ; |ADC_test|Decoder0~204        ; combout          ;
+; |ADC_test|temp_AIN5[7]~115    ; |ADC_test|temp_AIN5[7]~115    ; combout          ;
+; |ADC_test|Decoder0~205        ; |ADC_test|Decoder0~205        ; combout          ;
+; |ADC_test|temp_AIN5[8]~116    ; |ADC_test|temp_AIN5[8]~116    ; combout          ;
+; |ADC_test|Decoder0~206        ; |ADC_test|Decoder0~206        ; combout          ;
+; |ADC_test|temp_AIN5[9]~117    ; |ADC_test|temp_AIN5[9]~117    ; combout          ;
+; |ADC_test|Decoder0~207        ; |ADC_test|Decoder0~207        ; combout          ;
+; |ADC_test|temp_AIN5[10]~118   ; |ADC_test|temp_AIN5[10]~118   ; combout          ;
+; |ADC_test|Decoder0~208        ; |ADC_test|Decoder0~208        ; combout          ;
+; |ADC_test|temp_AIN5[11]~119   ; |ADC_test|temp_AIN5[11]~119   ; combout          ;
+; |ADC_test|SCLK                ; |ADC_test|SCLK                ; padio            ;
+; |ADC_test|nCS                 ; |ADC_test|nCS                 ; padio            ;
+; |ADC_test|MOSI                ; |ADC_test|MOSI                ; padio            ;
+; |ADC_test|AIN5[4]             ; |ADC_test|AIN5[4]             ; padio            ;
+; |ADC_test|AIN5[5]             ; |ADC_test|AIN5[5]             ; padio            ;
+; |ADC_test|AIN5[9]             ; |ADC_test|AIN5[9]             ; padio            ;
+; |ADC_test|clock               ; |ADC_test|clock               ; combout          ;
+; |ADC_test|MISO                ; |ADC_test|MISO                ; combout          ;
+; |ADC_test|SCLK~reg0clkctrl    ; |ADC_test|SCLK~reg0clkctrl    ; outclk           ;
+; |ADC_test|clock~clkctrl       ; |ADC_test|clock~clkctrl       ; outclk           ;
+; |ADC_test|ADC.011~feeder      ; |ADC_test|ADC.011~feeder      ; combout          ;
+; |ADC_test|AIN5[4]~reg0feeder  ; |ADC_test|AIN5[4]~reg0feeder  ; combout          ;
+; |ADC_test|AIN5[5]~reg0feeder  ; |ADC_test|AIN5[5]~reg0feeder  ; combout          ;
+; |ADC_test|AIN5[7]~reg0feeder  ; |ADC_test|AIN5[7]~reg0feeder  ; combout          ;
+; |ADC_test|AIN5[9]~reg0feeder  ; |ADC_test|AIN5[9]~reg0feeder  ; combout          ;
+; |ADC_test|AIN5[10]~reg0feeder ; |ADC_test|AIN5[10]~reg0feeder ; combout          ;
++-------------------------------+-------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++--------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                       ;
++------------------------------+------------------------------+------------------+
+; Node Name                    ; Output Port Name             ; Output Port Type ;
++------------------------------+------------------------------+------------------+
+; |ADC_test|AIN5[0]~reg0       ; |ADC_test|AIN5[0]~reg0       ; regout           ;
+; |ADC_test|AIN5[2]~reg0       ; |ADC_test|AIN5[2]~reg0       ; regout           ;
+; |ADC_test|AIN5[6]~reg0       ; |ADC_test|AIN5[6]~reg0       ; regout           ;
+; |ADC_test|AIN5[8]~reg0       ; |ADC_test|AIN5[8]~reg0       ; regout           ;
+; |ADC_test|temp_AIN5[0]       ; |ADC_test|temp_AIN5[0]       ; regout           ;
+; |ADC_test|temp_AIN5[2]       ; |ADC_test|temp_AIN5[2]       ; regout           ;
+; |ADC_test|AIN5[0]            ; |ADC_test|AIN5[0]            ; padio            ;
+; |ADC_test|AIN5[2]            ; |ADC_test|AIN5[2]            ; padio            ;
+; |ADC_test|AIN5[6]            ; |ADC_test|AIN5[6]            ; padio            ;
+; |ADC_test|AIN5[8]            ; |ADC_test|AIN5[8]            ; padio            ;
+; |ADC_test|AIN5[0]~reg0feeder ; |ADC_test|AIN5[0]~reg0feeder ; combout          ;
+; |ADC_test|AIN5[2]~reg0feeder ; |ADC_test|AIN5[2]~reg0feeder ; combout          ;
++------------------------------+------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++----------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                         ;
++-------------------------------+-------------------------------+------------------+
+; Node Name                     ; Output Port Name              ; Output Port Type ;
++-------------------------------+-------------------------------+------------------+
+; |ADC_test|AIN5[0]~reg0        ; |ADC_test|AIN5[0]~reg0        ; regout           ;
+; |ADC_test|AIN5[1]~reg0        ; |ADC_test|AIN5[1]~reg0        ; regout           ;
+; |ADC_test|AIN5[2]~reg0        ; |ADC_test|AIN5[2]~reg0        ; regout           ;
+; |ADC_test|AIN5[3]~reg0        ; |ADC_test|AIN5[3]~reg0        ; regout           ;
+; |ADC_test|AIN5[6]~reg0        ; |ADC_test|AIN5[6]~reg0        ; regout           ;
+; |ADC_test|AIN5[7]~reg0        ; |ADC_test|AIN5[7]~reg0        ; regout           ;
+; |ADC_test|AIN5[8]~reg0        ; |ADC_test|AIN5[8]~reg0        ; regout           ;
+; |ADC_test|AIN5[10]~reg0       ; |ADC_test|AIN5[10]~reg0       ; regout           ;
+; |ADC_test|AIN5[11]~reg0       ; |ADC_test|AIN5[11]~reg0       ; regout           ;
+; |ADC_test|temp_AIN5[0]        ; |ADC_test|temp_AIN5[0]        ; regout           ;
+; |ADC_test|temp_AIN5[1]        ; |ADC_test|temp_AIN5[1]        ; regout           ;
+; |ADC_test|temp_AIN5[2]        ; |ADC_test|temp_AIN5[2]        ; regout           ;
+; |ADC_test|temp_AIN5[3]        ; |ADC_test|temp_AIN5[3]        ; regout           ;
+; |ADC_test|temp_AIN5[6]        ; |ADC_test|temp_AIN5[6]        ; regout           ;
+; |ADC_test|temp_AIN5[8]        ; |ADC_test|temp_AIN5[8]        ; regout           ;
+; |ADC_test|temp_AIN5[11]       ; |ADC_test|temp_AIN5[11]       ; regout           ;
+; |ADC_test|AIN5[0]             ; |ADC_test|AIN5[0]             ; padio            ;
+; |ADC_test|AIN5[1]             ; |ADC_test|AIN5[1]             ; padio            ;
+; |ADC_test|AIN5[2]             ; |ADC_test|AIN5[2]             ; padio            ;
+; |ADC_test|AIN5[3]             ; |ADC_test|AIN5[3]             ; padio            ;
+; |ADC_test|AIN5[6]             ; |ADC_test|AIN5[6]             ; padio            ;
+; |ADC_test|AIN5[7]             ; |ADC_test|AIN5[7]             ; padio            ;
+; |ADC_test|AIN5[8]             ; |ADC_test|AIN5[8]             ; padio            ;
+; |ADC_test|AIN5[10]            ; |ADC_test|AIN5[10]            ; padio            ;
+; |ADC_test|AIN5[11]            ; |ADC_test|AIN5[11]            ; padio            ;
+; |ADC_test|AIN5[0]~reg0feeder  ; |ADC_test|AIN5[0]~reg0feeder  ; combout          ;
+; |ADC_test|AIN5[1]~reg0feeder  ; |ADC_test|AIN5[1]~reg0feeder  ; combout          ;
+; |ADC_test|AIN5[2]~reg0feeder  ; |ADC_test|AIN5[2]~reg0feeder  ; combout          ;
+; |ADC_test|AIN5[3]~reg0feeder  ; |ADC_test|AIN5[3]~reg0feeder  ; combout          ;
+; |ADC_test|AIN5[6]~reg0feeder  ; |ADC_test|AIN5[6]~reg0feeder  ; combout          ;
+; |ADC_test|AIN5[8]~reg0feeder  ; |ADC_test|AIN5[8]~reg0feeder  ; combout          ;
+; |ADC_test|AIN5[11]~reg0feeder ; |ADC_test|AIN5[11]~reg0feeder ; combout          ;
++-------------------------------+-------------------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II Simulator
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Tue May 01 13:50:45 2007
+Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off ADC_test -c ADC_test
+Info: Using vector source file "C:/HPSDR/trunk/VK6APH/ADC/ADC_test.vwf"
+Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
+    Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
+Info: Simulation partitioned into 1 sub-simulations
+Info: Simulation coverage is      69.81 %
+Info: Number of transitions in simulation is 3201
+Info: Quartus II Simulator was successful. 0 errors, 0 warnings
+    Info: Allocated 87 megabytes of memory during processing
+    Info: Processing ended: Tue May 01 13:50:46 2007
+    Info: Elapsed time: 00:00:01
+
+
