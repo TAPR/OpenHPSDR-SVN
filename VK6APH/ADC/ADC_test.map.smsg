@@ -1,0 +1,33 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Tue May 01 13:50:08 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ADC_test -c ADC_test
+Info: Found 1 design units, including 1 entities, in source file ADC_test.v
+    Info: Found entity 1: ADC_test
+Info: Elaborating entity "ADC_test" for the top level hierarchy
+Info: State machine "|ADC_test|ADC" contains 5 states
+Info: Selected Auto state machine encoding method for state machine "|ADC_test|ADC"
+Info: Encoding result for state machine "|ADC_test|ADC"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "ADC.001"
+        Info: Encoded state bit "ADC.010"
+        Info: Encoded state bit "ADC.011"
+        Info: Encoded state bit "ADC.000"
+        Info: Encoded state bit "ADC.100"
+    Info: State "|ADC_test|ADC.000" uses code string "00000"
+    Info: State "|ADC_test|ADC.011" uses code string "00110"
+    Info: State "|ADC_test|ADC.010" uses code string "01010"
+    Info: State "|ADC_test|ADC.100" uses code string "00011"
+    Info: State "|ADC_test|ADC.001" uses code string "10010"
+Info: 2 registers lost all their fanouts during netlist optimizations. The first 2 are displayed below.
+    Info: Register "ADC~8" lost all its fanouts during netlist optimizations.
+    Info: Register "ADC~9" lost all its fanouts during netlist optimizations.
+Info: Implemented 70 device resources after synthesis - the final resource count might be different
+    Info: Implemented 2 input pins
+    Info: Implemented 15 output pins
+    Info: Implemented 53 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 0 warnings
+    Info: Allocated 124 megabytes of memory during processing
+    Info: Processing ended: Tue May 01 13:50:09 2007
+    Info: Elapsed time: 00:00:01

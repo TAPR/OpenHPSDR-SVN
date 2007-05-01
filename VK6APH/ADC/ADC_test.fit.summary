@@ -1,0 +1,16 @@
+Fitter Status : Successful - Tue May 01 13:50:15 2007
+Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
+Revision Name : ADC_test
+Top-level Entity Name : ADC_test
+Family : Cyclone II
+Device : EP2C5Q208C8
+Timing Models : Final
+Total logic elements : 52 / 4,608 ( 1 % )
+    Total combinational functions : 38 / 4,608 ( < 1 % )
+    Dedicated logic registers : 36 / 4,608 ( < 1 % )
+Total registers : 36
+Total pins : 17 / 142 ( 12 % )
+Total virtual pins : 0
+Total memory bits : 0 / 119,808 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 26 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )
