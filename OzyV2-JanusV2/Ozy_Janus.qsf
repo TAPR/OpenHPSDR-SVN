@@ -109,16 +109,6 @@ set_instance_assignment -name CLOCK_SETTINGS "CLRCLK to TLV320" -to CLRCLK
 set_instance_assignment -name CLOCK_SETTINGS CLK_12MHZ -to CLK_12MHZ
 set_location_assignment PIN_175 -to CLK_MCLK
 set_location_assignment PIN_180 -to CC
-set_global_assignment -name VERILOG_FILE RegisterX.v
-set_global_assignment -name VERILOG_FILE SPI_REGS.v
-set_global_assignment -name VERILOG_FILE gpio_control.v
-set_global_assignment -name VERILOG_FILE Tx_fifo.v
-set_global_assignment -name VECTOR_WAVEFORM_FILE Duplex.vwf
-set_global_assignment -name VERILOG_FILE clocks.v
-set_global_assignment -name VERILOG_FILE debounce.v
-set_global_assignment -name VERILOG_FILE DigAudioOut48k16bI2S.v
-set_global_assignment -name VERILOG_FILE Ozy_Janus.v
-set_global_assignment -name VERILOG_FILE Rx_fifo.v
 set_location_assignment PIN_23 -to FX2_CLK
 set_location_assignment PIN_67 -to GPIO[0]
 set_location_assignment PIN_68 -to GPIO[1]
@@ -149,3 +139,17 @@ set_location_assignment PIN_15 -to SPI_SCK
 set_location_assignment PIN_14 -to SPI_SI
 set_location_assignment PIN_12 -to SPI_SO
 set_location_assignment PIN_41 -to GPIO_nIOE
+set_location_assignment PIN_144 -to PCLK_12MHZ
+set_global_assignment -name VERILOG_FILE RegisterX.v
+set_global_assignment -name VERILOG_FILE SPI_REGS.v
+set_global_assignment -name VERILOG_FILE gpio_control.v
+set_global_assignment -name VERILOG_FILE Tx_fifo.v
+set_global_assignment -name VECTOR_WAVEFORM_FILE Duplex.vwf
+set_global_assignment -name VERILOG_FILE clocks.v
+set_global_assignment -name VERILOG_FILE debounce.v
+set_global_assignment -name VERILOG_FILE DigAudioOut48k16bI2S.v
+set_global_assignment -name VERILOG_FILE Ozy_Janus.v
+set_global_assignment -name VERILOG_FILE Rx_fifo.v
+set_global_assignment -name FMAX_REQUIREMENT "12.5 MHz" -section_id PCLK_12MHZ
+set_instance_assignment -name CLOCK_SETTINGS PCLK_12MHZ -to PCLK_12MHZ
+set_location_assignment PIN_147 -to A2

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Thu Apr 19 20:54:13 2007
+Sat Apr 28 19:07:11 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -17,49 +17,48 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
   9. State Machine - |Ozy_Janus|CCstate
  10. State Machine - |Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state
  11. State Machine - |Ozy_Janus|I2SAudioOut:I2SAO|TLV_state
- 12. User-Specified and Inferred Latches
- 13. Registers Removed During Synthesis
- 14. General Register Statistics
- 15. Multiplexer Restructuring Statistics (Restructuring Performed)
- 16. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 17. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated
- 18. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram
- 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
- 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg
- 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg|dffpipe_s98:dffpipe7
- 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_brp
- 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_bwp
- 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp
- 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_d09:dffpipe10
- 26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg
- 27. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg|dffpipe_t98:dffpipe12
- 28. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_brp
- 29. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_bwp
- 30. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp
- 31. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp|dffpipe_e09:dffpipe14
- 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated
- 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram
- 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3
- 36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp
- 37. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5
- 38. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_brp
- 39. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_bwp
- 40. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp
- 41. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe9
- 42. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs
- 43. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port0reg
- 44. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port1reg
- 45. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port2reg
- 46. Parameter Settings for User Entity Instance: clocks:clocks|lpm_counter:lpm_counter_component
- 47. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 48. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 49. Parameter Settings for User Entity Instance: debounce:de_PTT
- 50. Parameter Settings for User Entity Instance: debounce:de_dot
- 51. Parameter Settings for User Entity Instance: debounce:de_dash
- 52. dcfifo Parameter Settings by Entity Instance
- 53. Analysis & Synthesis Messages
- 54. Analysis & Synthesis Suppressed Messages
+ 12. Registers Removed During Synthesis
+ 13. General Register Statistics
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+ 16. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated
+ 17. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram
+ 18. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
+ 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg
+ 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_297:rdfull_reg|dffpipe_s98:dffpipe7
+ 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_brp
+ 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:rs_bwp
+ 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp
+ 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_d09:dffpipe10
+ 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg
+ 26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_397:wrempty_reg|dffpipe_t98:dffpipe12
+ 27. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_brp
+ 28. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|dffpipe_c09:ws_bwp
+ 29. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp
+ 30. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|alt_synch_pipe_jv7:ws_dgrp|dffpipe_e09:dffpipe14
+ 31. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated
+ 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram
+ 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3
+ 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp
+ 36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5
+ 37. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_brp
+ 38. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|dffpipe_b09:ws_bwp
+ 39. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp
+ 40. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_jic1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe9
+ 41. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs
+ 42. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port0reg
+ 43. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port1reg
+ 44. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port2reg
+ 45. Parameter Settings for User Entity Instance: clocks:clocks|lpm_counter:lpm_counter_component
+ 46. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+ 47. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 48. Parameter Settings for User Entity Instance: debounce:de_PTT
+ 49. Parameter Settings for User Entity Instance: debounce:de_dot
+ 50. Parameter Settings for User Entity Instance: debounce:de_dash
+ 51. dcfifo Parameter Settings by Entity Instance
+ 52. Analysis & Synthesis Messages
+ 53. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -85,16 +84,16 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Apr 19 20:54:13 2007   ;
+; Analysis & Synthesis Status        ; Successful - Sat Apr 28 19:07:11 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 779                                     ;
-;     Total combinational functions  ; 731                                     ;
-;     Dedicated logic registers      ; 779                                     ;
-; Total registers                    ; 779                                     ;
-; Total pins                         ; 76                                      ;
+; Total logic elements               ; 814                                     ;
+;     Total combinational functions  ; 699                                     ;
+;     Dedicated logic registers      ; 814                                     ;
+; Total registers                    ; 814                                     ;
+; Total pins                         ; 78                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304                                  ;
 ; Embedded Multiplier 9-bit elements ; 0                                       ;
@@ -231,34 +230,34 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 
 
-+--------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary            ;
-+---------------------------------------------+----------+
-; Resource                                    ; Usage    ;
-+---------------------------------------------+----------+
-; Estimated Total logic elements              ; 779      ;
-;                                             ;          ;
-; Total combinational functions               ; 731      ;
-; Logic element usage by number of LUT inputs ;          ;
-;     -- 4 input functions                    ; 264      ;
-;     -- 3 input functions                    ; 231      ;
-;     -- <=2 input functions                  ; 236      ;
-;                                             ;          ;
-; Logic elements by mode                      ;          ;
-;     -- normal mode                          ; 511      ;
-;     -- arithmetic mode                      ; 220      ;
-;                                             ;          ;
-; Total registers                             ; 779      ;
-;     -- Dedicated logic registers            ; 779      ;
-;     -- I/O registers                        ; 0        ;
-;                                             ;          ;
-; I/O pins                                    ; 76       ;
-; Total memory bits                           ; 98304    ;
-; Maximum fan-out node                        ; BCLK~102 ;
-; Maximum fan-out                             ; 408      ;
-; Total fan-out                               ; 5228     ;
-; Average fan-out                             ; 3.23     ;
-+---------------------------------------------+----------+
++----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary              ;
++---------------------------------------------+------------+
+; Resource                                    ; Usage      ;
++---------------------------------------------+------------+
+; Estimated Total logic elements              ; 814        ;
+;                                             ;            ;
+; Total combinational functions               ; 699        ;
+; Logic element usage by number of LUT inputs ;            ;
+;     -- 4 input functions                    ; 264        ;
+;     -- 3 input functions                    ; 200        ;
+;     -- <=2 input functions                  ; 235        ;
+;                                             ;            ;
+; Logic elements by mode                      ;            ;
+;     -- normal mode                          ; 479        ;
+;     -- arithmetic mode                      ; 220        ;
+;                                             ;            ;
+; Total registers                             ; 814        ;
+;     -- Dedicated logic registers            ; 814        ;
+;     -- I/O registers                        ; 0          ;
+;                                             ;            ;
+; I/O pins                                    ; 78         ;
+; Total memory bits                           ; 98304      ;
+; Maximum fan-out node                        ; CLK_MCLK~9 ;
+; Maximum fan-out                             ; 303        ;
+; Total fan-out                               ; 5235       ;
+; Average fan-out                             ; 3.23       ;
++---------------------------------------------+------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -266,7 +265,7 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-; |Ozy_Janus                                    ; 731 (400)         ; 779 (367)    ; 98304       ; 0            ; 0       ; 0         ; 76   ; 0            ; |Ozy_Janus                                                                                                                        ;
+; |Ozy_Janus                                    ; 699 (368)         ; 814 (402)    ; 98304       ; 0            ; 0       ; 0         ; 78   ; 0            ; |Ozy_Janus                                                                                                                        ;
 ;    |I2SAudioOut:I2SAO|                        ; 42 (42)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ;
 ;    |I2SAudioOut:I2SIQO|                       ; 26 (26)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SIQO                                                                                                     ;
 ;    |Rx_fifo:Rx_fifo|                          ; 96 (0)            ; 130 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ;
@@ -388,48 +387,6 @@ Encoding Type:  One-Hot
 +---------------+---------------+---------------+---------------+---------------+---------------+
 
 
-+----------------------------------------------------------------------------------------------------+
-; User-Specified and Inferred Latches                                                                ;
-+-----------------------------------------------------+---------------------+------------------------+
-; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
-+-----------------------------------------------------+---------------------+------------------------+
-; frequency[26]                                       ; Equal1              ; yes                    ;
-; frequency[25]                                       ; Equal1              ; yes                    ;
-; frequency[24]                                       ; Equal1              ; yes                    ;
-; frequency[27]                                       ; Equal1              ; yes                    ;
-; frequency[29]                                       ; Equal1              ; yes                    ;
-; frequency[30]                                       ; Equal1              ; yes                    ;
-; frequency[28]                                       ; Equal1              ; yes                    ;
-; frequency[31]                                       ; Equal1              ; yes                    ;
-; frequency[22]                                       ; Equal1              ; yes                    ;
-; frequency[21]                                       ; Equal1              ; yes                    ;
-; frequency[20]                                       ; Equal1              ; yes                    ;
-; frequency[23]                                       ; Equal1              ; yes                    ;
-; frequency[14]                                       ; Equal1              ; yes                    ;
-; frequency[10]                                       ; Equal1              ; yes                    ;
-; frequency[6]                                        ; Equal1              ; yes                    ;
-; frequency[18]                                       ; Equal1              ; yes                    ;
-; frequency[9]                                        ; Equal1              ; yes                    ;
-; frequency[13]                                       ; Equal1              ; yes                    ;
-; frequency[5]                                        ; Equal1              ; yes                    ;
-; frequency[17]                                       ; Equal1              ; yes                    ;
-; frequency[8]                                        ; Equal1              ; yes                    ;
-; frequency[12]                                       ; Equal1              ; yes                    ;
-; frequency[4]                                        ; Equal1              ; yes                    ;
-; frequency[16]                                       ; Equal1              ; yes                    ;
-; frequency[15]                                       ; Equal1              ; yes                    ;
-; frequency[11]                                       ; Equal1              ; yes                    ;
-; frequency[7]                                        ; Equal1              ; yes                    ;
-; frequency[19]                                       ; Equal1              ; yes                    ;
-; frequency[0]                                        ; Equal1              ; yes                    ;
-; frequency[1]                                        ; Equal1              ; yes                    ;
-; frequency[2]                                        ; Equal1              ; yes                    ;
-; frequency[3]                                        ; Equal1              ; yes                    ;
-; Number of user-specified and inferred latches = 32  ;                     ;                        ;
-+-----------------------------------------------------+---------------------+------------------------+
-Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
-
-
 +------------------------------------------------------------------------------------------------------------+
 ; Registers Removed During Synthesis                                                                         ;
 +-------------------------------------------------------------------+----------------------------------------+
@@ -502,12 +459,12 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 779   ;
+; Total registers                              ; 814   ;
 ; Number of registers using Synchronous Clear  ; 84    ;
 ; Number of registers using Synchronous Load   ; 9     ;
 ; Number of registers using Asynchronous Clear ; 37    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 377   ;
+; Number of registers using Clock Enable       ; 409   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -517,11 +474,10 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Ozy_Janus|DFS1~reg0                                               ;
 ; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[4]                                         ;
 ; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|CCcount[6]                                              ;
-; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Ozy_Janus|FIFO_ADR[0]~reg0                                        ;
-; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|byte_count[3]                                           ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Ozy_Janus|FIFO_ADR[1]~reg0                                        ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|byte_count[0]                                           ;
 ; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|data[11]                             ;
 ; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|data[5]                               ;
 ; 128:1              ; 4 bits    ; 340 LEs       ; 32 LEs               ; 308 LEs                ; Yes        ; |Ozy_Janus|AD_state[5]                                             ;
@@ -972,7 +928,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Apr 19 20:53:48 2007
+    Info: Processing started: Sat Apr 28 19:05:43 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file RegisterX.v
     Info: Found entity 1: RegisterX
@@ -993,38 +949,6 @@ Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[31]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[30]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[29]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[28]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[27]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[26]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[25]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[24]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[23]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[22]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[21]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[20]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[19]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[18]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[17]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[16]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[15]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[14]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[13]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[12]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[11]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[10]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[9]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[8]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[7]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[6]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[5]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[4]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[3]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[2]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[1]"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(506): inferred latch for "frequency[0]"
 Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
 Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(46): conditional expression evaluates to a constant
 Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(47): conditional expression evaluates to a constant
@@ -1304,16 +1228,16 @@ Info: 51 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "CCstate.00" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1237 device resources after synthesis - the final resource count might be different
-    Info: Implemented 12 input pins
+Info: Implemented 1241 device resources after synthesis - the final resource count might be different
+    Info: Implemented 14 input pins
     Info: Implemented 23 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1129 logic cells
+    Info: Implemented 1131 logic cells
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 43 warnings
     Info: Allocated 136 megabytes of memory during processing
-    Info: Processing ended: Thu Apr 19 20:54:13 2007
-    Info: Elapsed time: 00:00:25
+    Info: Processing ended: Sat Apr 28 19:07:11 2007
+    Info: Elapsed time: 00:01:28
 
 
 +------------------------------------------+

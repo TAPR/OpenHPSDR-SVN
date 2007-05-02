@@ -1,4 +1,4 @@
-// V1.90 19th April 2007
+// V1.91 28th April 2007
 //
 // Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -151,6 +151,8 @@
 //				Modified I2S Tx to remove potential race condition - 18th April 2007
 //				Modified C&C I2S encoder to remove potential  race condition - 18 April 2007
 //				Modified Mix I2S receiver to use latest form of I2S receiver - 19 April 2007
+//				Modifed to take 12.5MHz clock from Penelope on Atlas A5 - 28 April 2007
+//				Added temporary logic level from Atlas A2 to force clocks from Penny - 28 April 2007
 //				
 //
 ////////////////////////////////////////////////////////////
@@ -168,7 +170,7 @@
 //   CLK_48MHZ           	- Atlas C3  - pin 150 - 48MHz clock to PWM DACs
 //   LROUT		           	- Atlas C4  - pin 151 - L/R audio in I2S format
 //   CLK_12MHZ   	 		- Atlas C5  - pin 152 - 12.288MHz clock from Janus
-//	 PCLK_12MHZ				- Atlas A5  - pin xxx - 12.5MHz clock from Mercury or Penelope 
+//	 PCLK_12MHZ				- Atlas A5  - pin 144 - 12.5MHz clock from Mercury or Penelope 
 //   BCLK                   - Atlas C6  - pin 160 - AK5394A (SCLK)
 //   LRCLK                  - Atlas C7  - pin 161 - AK5394A
 //   CBCLK                  - Atlas C8  - pin 162 - TLV320
@@ -184,8 +186,8 @@
 //
 //   DB9 - pin connections
 //
-//   dot                     - Atlas       pin 97  - PTT/dot key - DB9 pin 7
-//   dash                    - Atlas       pin 96  - dash key    - DB9 pin 6
+//   dash                    - Atlas       pin 97  - dash key    - DB9 pin 6
+//   dot                     - Atlas       pin 96  - PTT/dot key - DB9 pin 7
 //
 //
 //       FX2 pin    to   FPGA pin connections
@@ -261,13 +263,14 @@
 module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
         CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
-		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC,
+		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC, PCLK_12MHZ, A2,
 		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE
 		);
 		
 
 
 input CLK_12MHZ;               // From Janus board 12.288MHz
+input PCLK_12MHZ; 			   // Alternative 12.5MHz clock from Penelope or Mercury
 input IFCLK;                   // FX2 IFCLOCK - 48MHz
 output CLK_MCLK; 			   // Master Clock  to Altas for Janus 
 input  DOUT;
@@ -298,6 +301,7 @@ wire DFS0;						// used to set AK5394A speed
 wire DFS1;						// ditto 
 output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
 output CC;						// Command and Control data to Atlas bus 
+input  A2;						// From Penelope, used to select which clock to use 
 
 
 // interface lines for GPIO control 
@@ -446,17 +450,24 @@ assign CLK_48MHZ = IFCLK; 				// 48MHz clock to PWM DAC on Janus
 		NOTE: clock phases are inverted in some cases!
 */
 
-assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : ~BCLK_96_48; 
-assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? ~LRCLK_48 : ((DFS0 == 1 && DFS1 == 0 )? ~LRCLK_96 : LRCLK_192);
+//assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : ~BCLK_96_48; 
+//assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? ~LRCLK_48 : ((DFS0 == 1 && DFS1 == 0 )? ~LRCLK_96 : LRCLK_192);
+
+assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : BCLK_96_48; 
+assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? LRCLK_48 : ((DFS0 == 1 && DFS1 == 0 )? LRCLK_96 : LRCLK_192);
+
 
 // the 12MHz ADC/DAC clock  will come from Janus (12.288MHz)  on Atlas C5  as CLK_12MHZ unless a Mercury or Penelope board
 // is being used then it will come from the Atlas bus (12.5MHz) on A5 as PCLK_10MHZ. The signal CLK_select
 // will determine which clock to use. 
 
-// assign CLK_MCLK = CLK_select ? CLK_12MHZ : PCLK_12MHZ;
+// the next line is tempory until we have C&C for  Penelope from PowerSDR
 
-// For now force use of Janus 12.288MHz clock
-assign CLK_MCLK = CLK_12MHZ; 			// CLK_MCLK to Atlas C17
+assign CLK_select = ~A2;  // If A2 on Atlas is high from Penelope then select her 12.5MHz clock  
+
+assign CLK_MCLK = CLK_select ? CLK_12MHZ : PCLK_12MHZ;
+
+
 
 //////////////////////////////////////////////////////////////
 //
@@ -472,8 +483,8 @@ assign CLK_MCLK = CLK_12MHZ; 			// CLK_MCLK to Atlas C17
 
 // decode PTT from PowerSDR. Held in Rx_control_0[0]
 
-wire PTT_out;
-assign PTT_out = have_sync ? Rx_control_0[0] : 1'b0;  // Turn PTT off if sync lost
+reg  PTT_out;
+// assign PTT_out = have_sync ? Rx_control_0[0] : 1'b0;  // Turn PTT off if sync lost
 
 // decode AK5394A speed 
 /*
@@ -493,8 +504,7 @@ always @ (posedge BCLK)
 begin
 	if (!AK_reset)							// force speed to 48Khz on AK reset
 		{DFS1,DFS0} <= 2'b00;
-	else if (Rx_control_0[7:1] == 7'h00)
-		{DFS1,DFS0} <= Rx_control_1[1:0];
+	else {DFS1,DFS0} <= Speed;
 end
 
 // decode frequency for Mercury and Penelope 
@@ -503,9 +513,20 @@ end
 		Rx_control_1... Rx_control_4 when Rx_control_0[7:1] = 7'b0000_001
 */
 
-assign frequency = (Rx_control_0[7:1] == 7'b0000_001)? {Rx_control_1, Rx_control_2, Rx_control_3, Rx_control_4} : frequency;
+//assign frequency = (Rx_control_0[7:1] == 7'b0000_001)? {Rx_control_1, Rx_control_2, Rx_control_3, Rx_control_4} : frequency;
+reg [1:0] Speed;
 
-		 
+always @ (negedge CLRCLK)
+begin 
+	if (Rx_control_0[0] && have_sync) PTT_out <= 1'b1; 	// decode PTT
+	else PTT_out <= 0;
+	if (Rx_control_0[7:1] == 7'b0000_001)				// decode frequency 
+		frequency <= {Rx_control_1, Rx_control_2, Rx_control_3, Rx_control_4};
+	else frequency <= frequency;
+	if (Rx_control_0[7:1] == 7'h00)						// decode speed
+		Speed <= Rx_control_1[1:0];
+	else Speed <= Speed;
+end		 
 
 
 //////////////////////////////////////////////////////////////
@@ -747,7 +768,7 @@ wire write_full;                 // high when tx side of fifo is full
 wire [11:0] Rx_used;             // how many bytes in FX2 side Rx fifo
 wire [11:0] Rx_used_rdside;  	 // read side count
 
-Rx_fifo Rx_fifo(.wrclk (SLRD),.rdreq (fifo_enable),.rdclk (BCLK),.wrreq (1'b1), 
+Rx_fifo Rx_fifo(.wrclk (SLRD),.rdreq (fifo_enable),.rdclk (!CLK_MCLK),.wrreq (1'b1), // .rdclk (BCLK)
                 .data (Rx_register),.q (Rx_data), .wrfull (write_full),.wrusedw(Rx_used),
                 .rdusedw(Rx_used_rdside)
                 );
@@ -960,7 +981,7 @@ reg [8:0]sync_count;
 reg have_sync;                          // high when we have sync
 
 
-always @ (negedge BCLK) // use negedge so that data from FIFO has time to stabilise since read on posedge 
+always @ (posedge CLK_MCLK) // use negedge so that data from FIFO has time to stabilise since read on posedge 
 begin
         synced_Rx_used <= Rx_used;      // sync Rx_used to BCLK since this runs of FX2 clock
 case(state_PWM)
@@ -1133,7 +1154,7 @@ wire [3:0] CC_address;			// C&C address, fixed at 0 for now
 wire [3:0] band;				// current band, decodes as above
 wire [6:0] OC;					// Open Collector outputs on Penelope board 
 wire mode;						// Mode, 0 for I and Q, 1 for phase and envelope
-wire  [31:0]frequency;
+reg [31:0]frequency;
 
 
 // dummy data for testing

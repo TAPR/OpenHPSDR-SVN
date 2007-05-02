@@ -200,10 +200,10 @@ GND                          : 140       : gnd    :                   :         
 RESERVED_INPUT               : 141       :        :                   :         : 3         :                
 RESERVED_INPUT               : 142       :        :                   :         : 3         :                
 RESERVED_INPUT               : 143       :        :                   :         : 3         :                
-RESERVED_INPUT               : 144       :        :                   :         : 3         :                
+PCLK_12MHZ                   : 144       : input  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 145       :        :                   :         : 3         :                
 RESERVED_INPUT               : 146       :        :                   :         : 3         :                
-RESERVED_INPUT               : 147       :        :                   :         : 3         :                
+A2                           : 147       : input  : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
 AK_reset                     : 149       : output : 3.3-V LVTTL       :         : 3         : Y              
 CLK_48MHZ                    : 150       : output : 3.3-V LVTTL       :         : 3         : Y              
