@@ -1,0 +1,105 @@
+Flow report for ALC
+Fri May 04 14:30:23 2007
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow Log
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------+
+; Flow Summary                                                                 ;
++------------------------------------+-----------------------------------------+
+; Flow Status                        ; Successful - Fri May 04 14:30:22 2007   ;
+; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
+; Revision Name                      ; ALC                                     ;
+; Top-level Entity Name              ; ALC                                     ;
+; Family                             ; Cyclone II                              ;
+; Device                             ; EP2C8Q208C8                             ;
+; Timing Models                      ; Final                                   ;
+; Met timing requirements            ; Yes                                     ;
+; Total logic elements               ; 632 / 8,256 ( 8 % )                     ;
+;     Total combinational functions  ; 632 / 8,256 ( 8 % )                     ;
+;     Dedicated logic registers      ; 0 / 8,256 ( 0 % )                       ;
+; Total registers                    ; 0                                       ;
+; Total pins                         ; 48 / 138 ( 35 % )                       ;
+; Total virtual pins                 ; 0                                       ;
+; Total memory bits                  ; 0 / 165,888 ( 0 % )                     ;
+; Embedded Multiplier 9-bit elements ; 4 / 36 ( 11 % )                         ;
+; Total PLLs                         ; 0 / 2 ( 0 % )                           ;
++------------------------------------+-----------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 05/04/2007 14:29:54 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; ALC                 ;
++-------------------+---------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                       ;
++------------------------+----------------------------------------------------+---------------+-------------+------------+
+; Assignment Name        ; Value                                              ; Default Value ; Entity Name ; Section Id ;
++------------------------+----------------------------------------------------+---------------+-------------+------------+
+; PARTITION_NETLIST_TYPE ; SOURCE                                             ; --            ; --          ; Top        ;
+; USER_LIBRARIES         ; C:/FPGA/Mercury/megafunctions/;C:/FPGA/Mercury/db/ ; --            ; --          ; --         ;
++------------------------+----------------------------------------------------+---------------+-------------+------------+
+
+
++----------------------------------------+
+; Flow Elapsed Time                      ;
++-------------------------+--------------+
+; Module Name             ; Elapsed Time ;
++-------------------------+--------------+
+; Analysis & Synthesis    ; 00:00:07     ;
+; Partition Merge         ; 00:00:00     ;
+; Fitter                  ; 00:00:07     ;
+; Assembler               ; 00:00:07     ;
+; Classic Timing Analyzer ; 00:00:01     ;
+; Total                   ; 00:00:22     ;
++-------------------------+--------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off ALC -c ALC
+quartus_cdb --read_settings_files=off --write_settings_files=off ALC -c ALC --merge=on
+quartus_fit --read_settings_files=off --write_settings_files=off ALC -c ALC
+quartus_asm --read_settings_files=off --write_settings_files=off ALC -c ALC
+quartus_tan --read_settings_files=off --write_settings_files=off ALC -c ALC --timing_analysis_only
+
+
+
