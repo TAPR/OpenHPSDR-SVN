@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Fri May 04 14:30:01 2007
+Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
+Revision Name : ALC
+Top-level Entity Name : ALC
+Family : Cyclone II
+Total logic elements : 632
+    Total combinational functions : 632
+    Dedicated logic registers : 0
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total memory bits : N/A until Partition Merge
+Embedded Multiplier 9-bit elements : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge

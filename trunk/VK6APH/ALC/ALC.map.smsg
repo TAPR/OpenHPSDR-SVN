@@ -1,0 +1,13 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Fri May 04 09:23:38 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALC -c ALC
+Error (10170): Verilog HDL syntax error at ALC.v(12) near text "output";  expecting ";", or "," File: C:/HPSDR/trunk/VK6APH/ALC/ALC.v Line: 12
+Error (10170): Verilog HDL syntax error at ALC.v(19) near text "000";  expecting an identifier, or "{" File: C:/HPSDR/trunk/VK6APH/ALC/ALC.v Line: 19
+Error (10112): Ignored design unit "ALC" at ALC.v(5) due to previous errors File: C:/HPSDR/trunk/VK6APH/ALC/ALC.v Line: 5
+Info: Found 0 design units, including 0 entities, in source file ALC.v
+Error: Quartus II Analysis & Synthesis was unsuccessful. 3 errors, 0 warnings
+    Info: Allocated 115 megabytes of memory during processing
+    Error: Processing ended: Fri May 04 09:23:39 2007
+    Error: Elapsed time: 00:00:01
