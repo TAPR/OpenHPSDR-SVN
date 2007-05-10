@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Wed Apr 11 14:04:17 2007
+Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
+Revision Name : WrapTest
+Top-level Entity Name : WrapTest
+Family : Cyclone II
+Total logic elements : 644
+    Total combinational functions : 644
+    Dedicated logic registers : 326
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total memory bits : N/A until Partition Merge
+Embedded Multiplier 9-bit elements : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge

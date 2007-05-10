@@ -1,0 +1,192 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Tue Apr 03 17:35:14 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off WrapTest -c WrapTest
+Info: Found 1 design units, including 1 entities, in source file rs232_tx_fifo.v
+    Info: Found entity 1: rs232_tx_fifo
+Info: Found 1 design units, including 1 entities, in source file WrapTest.v
+    Info: Found entity 1: WrapTest
+Info: Found 1 design units, including 1 entities, in source file loopBackChecker.v
+    Info: Found entity 1: loopBackCheck
+Info: Found 1 design units, including 1 entities, in source file rs232_xmit.v
+    Info: Found entity 1: rs232_xmit
+Info: Elaborating entity "WrapTest" for the top level hierarchy
+Warning (10037): Verilog HDL or VHDL warning at WrapTest.v(291): conditional expression evaluates to a constant
+Warning (10037): Verilog HDL or VHDL warning at WrapTest.v(307): conditional expression evaluates to a constant
+Info: Elaborating entity "rs232_xmit" for hierarchy "rs232_xmit:Ozy_rs232_xmit"
+Info: Elaborating entity "rs232_tx_fifo" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo"
+Info: Found 1 design units, including 1 entities, in source file ../../../../../../../altera/61/quartus/libraries/megafunctions/scfifo.tdf
+    Info: Found entity 1: scfifo
+Info: Elaborating entity "scfifo" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component"
+Info: Elaborated megafunction instantiation "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/scfifo_cdv.tdf
+    Info: Found entity 1: scfifo_cdv
+Info: Elaborating entity "scfifo_cdv" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_dpfifo_jjv.tdf
+    Info: Found entity 1: a_dpfifo_jjv
+Info: Elaborating entity "a_dpfifo_jjv" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo"
+Info: Found 1 design units, including 1 entities, in source file db/a_fefifo_76e.tdf
+    Info: Found entity 1: a_fefifo_76e
+Info: Elaborating entity "a_fefifo_76e" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_pj7.tdf
+    Info: Found entity 1: cntr_pj7
+Info: Elaborating entity "cntr_pj7" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|a_fefifo_76e:fifo_state|cntr_pj7:count_usedw"
+Info: Found 1 design units, including 1 entities, in source file db/dpram_1it.tdf
+    Info: Found entity 1: dpram_1it
+Info: Elaborating entity "dpram_1it" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_0sj1.tdf
+    Info: Found entity 1: altsyncram_0sj1
+Info: Elaborating entity "altsyncram_0sj1" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_djb.tdf
+    Info: Found entity 1: cntr_djb
+Info: Elaborating entity "cntr_djb" for hierarchy "rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|cntr_djb:rd_ptr_count"
+Warning: Reduced register "char_to_xmit[7]" with stuck data_in port to stuck value GND
+Warning: Reduced register "rs232_xmit_reg[7]" with stuck data_in port to stuck value GND
+Warning: Reduced register "rs232_xmit:Ozy_rs232_xmit|data_in_holding[7]" with stuck data_in port to stuck value GND
+Info: State machine "|WrapTest|test_loop_state" contains 28 states
+Info: State machine "|WrapTest|post_xmit_state" contains 16 states
+Info: State machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state" contains 3 states
+Info: State machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state" contains 3 states
+Info: Selected Auto state machine encoding method for state machine "|WrapTest|test_loop_state"
+Info: Encoding result for state machine "|WrapTest|test_loop_state"
+    Info: Completed encoding using 28 state bits
+        Info: Encoded state bit "test_loop_state.00001"
+        Info: Encoded state bit "test_loop_state.11010"
+        Info: Encoded state bit "test_loop_state.00010"
+        Info: Encoded state bit "test_loop_state.00011"
+        Info: Encoded state bit "test_loop_state.00100"
+        Info: Encoded state bit "test_loop_state.01101"
+        Info: Encoded state bit "test_loop_state.00110"
+        Info: Encoded state bit "test_loop_state.00101"
+        Info: Encoded state bit "test_loop_state.01000"
+        Info: Encoded state bit "test_loop_state.00111"
+        Info: Encoded state bit "test_loop_state.01010"
+        Info: Encoded state bit "test_loop_state.01001"
+        Info: Encoded state bit "test_loop_state.01111"
+        Info: Encoded state bit "test_loop_state.01011"
+        Info: Encoded state bit "test_loop_state.01100"
+        Info: Encoded state bit "test_loop_state.01110"
+        Info: Encoded state bit "test_loop_state.10000"
+        Info: Encoded state bit "test_loop_state.11011"
+        Info: Encoded state bit "test_loop_state.10001"
+        Info: Encoded state bit "test_loop_state.10010"
+        Info: Encoded state bit "test_loop_state.10011"
+        Info: Encoded state bit "test_loop_state.10100"
+        Info: Encoded state bit "test_loop_state.10101"
+        Info: Encoded state bit "test_loop_state.10110"
+        Info: Encoded state bit "test_loop_state.10111"
+        Info: Encoded state bit "test_loop_state.11000"
+        Info: Encoded state bit "test_loop_state.11001"
+        Info: Encoded state bit "test_loop_state.00000"
+    Info: State "|WrapTest|test_loop_state.00000" uses code string "0000000000000000000000000000"
+    Info: State "|WrapTest|test_loop_state.11001" uses code string "0000000000000000000000000011"
+    Info: State "|WrapTest|test_loop_state.11000" uses code string "0000000000000000000000000101"
+    Info: State "|WrapTest|test_loop_state.10111" uses code string "0000000000000000000000001001"
+    Info: State "|WrapTest|test_loop_state.10110" uses code string "0000000000000000000000010001"
+    Info: State "|WrapTest|test_loop_state.10101" uses code string "0000000000000000000000100001"
+    Info: State "|WrapTest|test_loop_state.10100" uses code string "0000000000000000000001000001"
+    Info: State "|WrapTest|test_loop_state.10011" uses code string "0000000000000000000010000001"
+    Info: State "|WrapTest|test_loop_state.10010" uses code string "0000000000000000000100000001"
+    Info: State "|WrapTest|test_loop_state.10001" uses code string "0000000000000000001000000001"
+    Info: State "|WrapTest|test_loop_state.11011" uses code string "0000000000000000010000000001"
+    Info: State "|WrapTest|test_loop_state.10000" uses code string "0000000000000000100000000001"
+    Info: State "|WrapTest|test_loop_state.01110" uses code string "0000000000000001000000000001"
+    Info: State "|WrapTest|test_loop_state.01100" uses code string "0000000000000010000000000001"
+    Info: State "|WrapTest|test_loop_state.01011" uses code string "0000000000000100000000000001"
+    Info: State "|WrapTest|test_loop_state.01111" uses code string "0000000000001000000000000001"
+    Info: State "|WrapTest|test_loop_state.01001" uses code string "0000000000010000000000000001"
+    Info: State "|WrapTest|test_loop_state.01010" uses code string "0000000000100000000000000001"
+    Info: State "|WrapTest|test_loop_state.00111" uses code string "0000000001000000000000000001"
+    Info: State "|WrapTest|test_loop_state.01000" uses code string "0000000010000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00101" uses code string "0000000100000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00110" uses code string "0000001000000000000000000001"
+    Info: State "|WrapTest|test_loop_state.01101" uses code string "0000010000000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00100" uses code string "0000100000000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00011" uses code string "0001000000000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00010" uses code string "0010000000000000000000000001"
+    Info: State "|WrapTest|test_loop_state.11010" uses code string "0100000000000000000000000001"
+    Info: State "|WrapTest|test_loop_state.00001" uses code string "1000000000000000000000000001"
+Info: Selected Auto state machine encoding method for state machine "|WrapTest|post_xmit_state"
+Info: Encoding result for state machine "|WrapTest|post_xmit_state"
+    Info: Completed encoding using 16 state bits
+        Info: Encoded state bit "post_xmit_state.00111"
+        Info: Encoded state bit "post_xmit_state.01001"
+        Info: Encoded state bit "post_xmit_state.01011"
+        Info: Encoded state bit "post_xmit_state.01100"
+        Info: Encoded state bit "post_xmit_state.01101"
+        Info: Encoded state bit "post_xmit_state.10001"
+        Info: Encoded state bit "post_xmit_state.10010"
+        Info: Encoded state bit "post_xmit_state.10011"
+        Info: Encoded state bit "post_xmit_state.10100"
+        Info: Encoded state bit "post_xmit_state.10101"
+        Info: Encoded state bit "post_xmit_state.10110"
+        Info: Encoded state bit "post_xmit_state.10111"
+        Info: Encoded state bit "post_xmit_state.11000"
+        Info: Encoded state bit "post_xmit_state.11001"
+        Info: Encoded state bit "post_xmit_state.11010"
+        Info: Encoded state bit "post_xmit_state.00010"
+    Info: State "|WrapTest|post_xmit_state.00010" uses code string "0000000000000000"
+    Info: State "|WrapTest|post_xmit_state.11010" uses code string "0000000000000011"
+    Info: State "|WrapTest|post_xmit_state.11001" uses code string "0000000000000101"
+    Info: State "|WrapTest|post_xmit_state.11000" uses code string "0000000000001001"
+    Info: State "|WrapTest|post_xmit_state.10111" uses code string "0000000000010001"
+    Info: State "|WrapTest|post_xmit_state.10110" uses code string "0000000000100001"
+    Info: State "|WrapTest|post_xmit_state.10101" uses code string "0000000001000001"
+    Info: State "|WrapTest|post_xmit_state.10100" uses code string "0000000010000001"
+    Info: State "|WrapTest|post_xmit_state.10011" uses code string "0000000100000001"
+    Info: State "|WrapTest|post_xmit_state.10010" uses code string "0000001000000001"
+    Info: State "|WrapTest|post_xmit_state.10001" uses code string "0000010000000001"
+    Info: State "|WrapTest|post_xmit_state.01101" uses code string "0000100000000001"
+    Info: State "|WrapTest|post_xmit_state.01100" uses code string "0001000000000001"
+    Info: State "|WrapTest|post_xmit_state.01011" uses code string "0010000000000001"
+    Info: State "|WrapTest|post_xmit_state.01001" uses code string "0100000000000001"
+    Info: State "|WrapTest|post_xmit_state.00111" uses code string "1000000000000001"
+Info: Selected Auto state machine encoding method for state machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state"
+Info: Encoding result for state machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state"
+    Info: Completed encoding using 3 state bits
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|input_state.00"
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|input_state.10"
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|input_state.01"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state.00" uses code string "000"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state.10" uses code string "110"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|input_state.01" uses code string "101"
+Info: Selected Auto state machine encoding method for state machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state"
+Info: Encoding result for state machine "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state"
+    Info: Completed encoding using 3 state bits
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|output_state.00"
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|output_state.10"
+        Info: Encoded state bit "rs232_xmit:Ozy_rs232_xmit|output_state.01"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state.00" uses code string "000"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state.10" uses code string "110"
+    Info: State "|WrapTest|rs232_xmit:Ozy_rs232_xmit|output_state.01" uses code string "101"
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "SLWR" stuck at GND
+    Warning: Pin "SLRD" stuck at GND
+    Warning: Pin "SLOE" stuck at GND
+    Warning: Pin "PKEND" stuck at GND
+    Warning: Pin "FIFO_ADR[0]" stuck at GND
+    Warning: Pin "FIFO_ADR[1]" stuck at GND
+    Warning: Pin "GPIO_nIOE" stuck at GND
+Info: 11 registers lost all their fanouts during netlist optimizations. The first 11 are displayed below.
+    Info: Register "test_loop_state.00101" lost all its fanouts during netlist optimizations.
+    Info: Register "test_loop_state~76" lost all its fanouts during netlist optimizations.
+    Info: Register "test_loop_state~77" lost all its fanouts during netlist optimizations.
+    Info: Register "test_loop_state~78" lost all its fanouts during netlist optimizations.
+    Info: Register "test_loop_state~79" lost all its fanouts during netlist optimizations.
+    Info: Register "test_loop_state~80" lost all its fanouts during netlist optimizations.
+    Info: Register "post_xmit_state~25" lost all its fanouts during netlist optimizations.
+    Info: Register "post_xmit_state~26" lost all its fanouts during netlist optimizations.
+    Info: Register "post_xmit_state~27" lost all its fanouts during netlist optimizations.
+    Info: Register "post_xmit_state~28" lost all its fanouts during netlist optimizations.
+    Info: Register "post_xmit_state~29" lost all its fanouts during netlist optimizations.
+Info: Implemented 793 device resources after synthesis - the final resource count might be different
+    Info: Implemented 46 input pins
+    Info: Implemented 50 output pins
+    Info: Implemented 34 bidirectional pins
+    Info: Implemented 655 logic cells
+    Info: Implemented 8 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 13 warnings
+    Info: Allocated 131 megabytes of memory during processing
+    Info: Processing ended: Tue Apr 03 17:35:22 2007
+    Info: Elapsed time: 00:00:08

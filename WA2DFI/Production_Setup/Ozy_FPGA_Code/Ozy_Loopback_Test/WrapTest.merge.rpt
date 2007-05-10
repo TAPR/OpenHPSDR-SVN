@@ -1,0 +1,157 @@
+Partition Merge report for WrapTest
+Wed Apr 11 14:04:20 2007
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Partition Merge Summary
+  3. Partition Merge Netlist Types Used
+  4. Partition Merge Partition Statistics
+  5. Partition Merge Resource Usage Summary
+  6. Partition Merge RAM Summary
+  7. Partition Merge Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------+
+; Partition Merge Summary                                                      ;
++------------------------------------+-----------------------------------------+
+; Partition Merge Status             ; Successful - Wed Apr 11 14:04:20 2007   ;
+; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
+; Revision Name                      ; WrapTest                                ;
+; Top-level Entity Name              ; WrapTest                                ;
+; Family                             ; Cyclone II                              ;
+; Total logic elements               ; 640                                     ;
+;     Total combinational functions  ; 640                                     ;
+;     Dedicated logic registers      ; 326                                     ;
+; Total registers                    ; 326                                     ;
+; Total pins                         ; 116                                     ;
+; Total virtual pins                 ; 0                                       ;
+; Total memory bits                  ; 128                                     ;
+; Embedded Multiplier 9-bit elements ; 0                                       ;
+; Total PLLs                         ; 0                                       ;
++------------------------------------+-----------------------------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Partition Merge Netlist Types Used                                                    ;
++----------------+------------------------+------------------------+--------------------+
+; Partition Name ; Netlist Type Used      ; Netlist Type Requested ; Partition Contents ;
++----------------+------------------------+------------------------+--------------------+
+; Top            ; Post-Synthesis Netlist ; Post-Synthesis Netlist ;                    ;
++----------------+------------------------+------------------------+--------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Partition Merge Partition Statistics                                                                                                                                                                                                                                                                            ;
++----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
+; Partition Name ; Total combinational functions ; normal mode ; arithmetic mode ; Total registers ; Input Ports ; Output Ports ; Registered Input Ports ; Registered Output Ports ; Unconnected Input Ports ; Unconnected Output Ports ; Driven Ground Input Ports ; Driven VCC Input Ports ; Partition Contents ;
++----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
+; Top            ; 644                           ; 528         ; 116             ; 326             ; 65          ; 51           ; 0                      ; 39                      ; N/A                     ; N/A                      ; N/A                       ; N/A                    ;                    ;
++----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
+
+
++-------------------------------------------------------+
+; Partition Merge Resource Usage Summary                ;
++---------------------------------------------+---------+
+; Resource                                    ; Usage   ;
++---------------------------------------------+---------+
+; Estimated Total logic elements              ; 640     ;
+;                                             ;         ;
+; Total combinational functions               ; 640     ;
+; Logic element usage by number of LUT inputs ;         ;
+;     -- 4 input functions                    ; 338     ;
+;     -- 3 input functions                    ; 118     ;
+;     -- <=2 input functions                  ; 184     ;
+;                                             ;         ;
+; Logic elements by mode                      ;         ;
+;     -- normal mode                          ; 524     ;
+;     -- arithmetic mode                      ; 116     ;
+;                                             ;         ;
+; Total registers                             ; 326     ;
+;     -- Dedicated logic registers            ; 326     ;
+;     -- I/O registers                        ; 0       ;
+;                                             ;         ;
+; I/O pins                                    ; 116     ;
+; Total memory bits                           ; 128     ;
+; Maximum fan-out node                        ; FX2_CLK ;
+; Maximum fan-out                             ; 334     ;
+; Total fan-out                               ; 3108    ;
+; Average fan-out                             ; 2.85    ;
++---------------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Partition Merge RAM Summary                                                                                                                                                                                                                                                        ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; Name                                                                                                                                                                           ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF  ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; rs232_xmit:Ozy_rs232_xmit|rs232_tx_fifo:tx_fifo|scfifo:scfifo_component|scfifo_cdv:auto_generated|a_dpfifo_jjv:dpfifo|dpram_1it:FIFOram|altsyncram_0sj1:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 16           ; 8            ; 16           ; 8            ; 128  ; None ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+
+
++--------------------------+
+; Partition Merge Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Partition Merge
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Wed Apr 11 14:04:19 2007
+Info: Command: quartus_cdb --read_settings_files=off --write_settings_files=off WrapTest -c WrapTest --merge=on
+Info: Using synthesis netlist for partition "Top"
+Info: Netlist merging resolved 1 partition(s) out of the 1 partition(s) found
+Warning: Design contains 26 input pin(s) that do not drive logic
+    Warning: No output dependent on input pin "IFCLK"
+    Warning: No output dependent on input pin "FX2_FD[0]"
+    Warning: No output dependent on input pin "FX2_FD[1]"
+    Warning: No output dependent on input pin "FX2_FD[2]"
+    Warning: No output dependent on input pin "FX2_FD[3]"
+    Warning: No output dependent on input pin "FX2_FD[4]"
+    Warning: No output dependent on input pin "FX2_FD[5]"
+    Warning: No output dependent on input pin "FX2_FD[6]"
+    Warning: No output dependent on input pin "FX2_FD[7]"
+    Warning: No output dependent on input pin "FX2_FD[8]"
+    Warning: No output dependent on input pin "FX2_FD[9]"
+    Warning: No output dependent on input pin "FX2_FD[10]"
+    Warning: No output dependent on input pin "FX2_FD[11]"
+    Warning: No output dependent on input pin "FX2_FD[12]"
+    Warning: No output dependent on input pin "FX2_FD[13]"
+    Warning: No output dependent on input pin "FX2_FD[14]"
+    Warning: No output dependent on input pin "FX2_FD[15]"
+    Warning: No output dependent on input pin "FLAGA"
+    Warning: No output dependent on input pin "FLAGB"
+    Warning: No output dependent on input pin "FLAGC"
+    Warning: No output dependent on input pin "SPI_SCK"
+    Warning: No output dependent on input pin "SPI_SI"
+    Warning: No output dependent on input pin "SPI_CS"
+    Warning: No output dependent on input pin "ATLAS_A20"
+    Warning: No output dependent on input pin "ATLAS_A21"
+    Warning: No output dependent on input pin "FPGA_RXD"
+Info: Quartus II Partition Merge was successful. 0 errors, 27 warnings
+    Info: Allocated 96 megabytes of memory during processing
+    Info: Processing ended: Wed Apr 11 14:04:20 2007
+    Info: Elapsed time: 00:00:01
+
+
