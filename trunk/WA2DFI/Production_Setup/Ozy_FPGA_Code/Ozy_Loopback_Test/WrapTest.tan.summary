@@ -1,0 +1,66 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 7.517 ns
+From           : ATLAS_C24
+To             : loopback_result[1]
+From Clock     : --
+To Clock       : FX2_CLK
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 9.988 ns
+From           : atlas_vec[0]
+To             : ATLAS_A25
+From Clock     : FX2_CLK
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -5.165 ns
+From           : ATLAS_C12
+To             : loopback_result[11]
+From Clock     : --
+To Clock       : FX2_CLK
+Failed Paths   : 0
+
+Type           : Clock Setup: 'FX2_CLK'
+Slack          : 11.345 ns
+Required Time  : 48.00 MHz ( period = 20.833 ns )
+Actual Time    : 105.40 MHz ( period = 9.488 ns )
+From           : test_circ_idx[0]
+To             : pass_count[7]
+From Clock     : FX2_CLK
+To Clock       : FX2_CLK
+Failed Paths   : 0
+
+Type           : Clock Hold: 'FX2_CLK'
+Slack          : 0.499 ns
+Required Time  : 48.00 MHz ( period = 20.833 ns )
+Actual Time    : N/A
+From           : rs232_xmit:Ozy_rs232_xmit|xmit_o
+To             : rs232_xmit:Ozy_rs232_xmit|xmit_o
+From Clock     : FX2_CLK
+To Clock       : FX2_CLK
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+
