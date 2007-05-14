@@ -1,0 +1,53 @@
+# Copyright (C) 1991-2006 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#		my_cic_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name DEVICE EP2C5Q208C8
+set_global_assignment -name FAMILY "Cyclone II"
+set_global_assignment -name TOP_LEVEL_ENTITY my_cic
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 6.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "14:45:13  MAY 14, 2007"
+set_global_assignment -name LAST_QUARTUS_VERSION 6.1
+set_global_assignment -name USER_LIBRARIES "C:/FPGA/Mercury/megafunctions/;C:/FPGA/Mercury/db/"
+set_instance_assignment -name PARTITION_HIERARCHY no_file_for_top_partition -to | -section_id Top
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name FMAX_REQUIREMENT "125 MHz"
+set_global_assignment -name FMAX_REQUIREMENT "125 MHz" -section_id clk
+set_instance_assignment -name CLOCK_SETTINGS clk -to clk
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS clk -section_id cken
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 10 -section_id cken
+set_instance_assignment -name CLOCK_SETTINGS cken -to cken
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name VERILOG_FILE cic_10_1_3.v
+set_global_assignment -name VERILOG_FILE cic_4_1_8.v
+set_global_assignment -name VERILOG_FILE cic_8_1_5.v
+set_global_assignment -name VERILOG_FILE my_cic.v
+set_global_assignment -name VECTOR_WAVEFORM_FILE my_cic.vwf
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS clk -section_id cken2
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 80 -section_id cken2
+set_instance_assignment -name CLOCK_SETTINGS cken2 -to cken2
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS clk -section_id cken3
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 320 -section_id cken3
+set_instance_assignment -name CLOCK_SETTINGS cken3 -to cken3

@@ -1,0 +1,126 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 8.603 ns
+From           : in[1]
+To             : cic_10_1_3:cic_1|integrator_34:int1|out[33]
+From Clock     : --
+To Clock       : clk
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 8.797 ns
+From           : cic_4_1_8:cic_3|out[16]
+To             : out[16]
+From Clock     : cken2
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -3.900 ns
+From           : in[17]
+To             : cic_10_1_3:cic_1|integrator_34:int1|out[33]
+From Clock     : --
+To Clock       : clk
+Failed Paths   : 0
+
+Type           : Clock Setup: 'clk'
+Slack          : 1.701 ns
+Required Time  : 125.00 MHz ( period = 8.000 ns )
+Actual Time    : 158.76 MHz ( period = 6.299 ns )
+From           : cic_10_1_3:cic_1|integrator_34:int2|out[3]
+To             : cic_10_1_3:cic_1|integrator_34:int3|out[33]
+From Clock     : clk
+To Clock       : clk
+Failed Paths   : 0
+
+Type           : Clock Setup: 'cken'
+Slack          : 2.052 ns
+Required Time  : 12.50 MHz ( period = 80.000 ns )
+Actual Time    : N/A
+From           : cic_10_1_3:cic_1|out[15]
+To             : cic_8_1_5:cic_2|integrator_39:int1|out[38]
+From Clock     : clk
+To Clock       : cken
+Failed Paths   : 0
+
+Type           : Clock Setup: 'cken2'
+Slack          : 72.415 ns
+Required Time  : 1.56 MHz ( period = 640.000 ns )
+Actual Time    : N/A
+From           : cic_8_1_5:cic_2|out[3]
+To             : cic_4_1_8:cic_3|integrator_40:int1|out[39]
+From Clock     : cken
+To Clock       : cken2
+Failed Paths   : 0
+
+Type           : Clock Setup: 'cken3'
+Slack          : 633.990 ns
+Required Time  : 0.39 MHz ( period = 2560.000 ns )
+Actual Time    : N/A
+From           : cic_4_1_8:cic_3|integrator_40:int8|out[0]
+To             : cic_4_1_8:cic_3|comb_40_cken:comb1|out[39]
+From Clock     : cken2
+To Clock       : cken3
+Failed Paths   : 0
+
+Type           : Clock Hold: 'cken'
+Slack          : 0.740 ns
+Required Time  : 12.50 MHz ( period = 80.000 ns )
+Actual Time    : N/A
+From           : cic_8_1_5:cic_2|integrator_39:int1|out[38]
+To             : cic_8_1_5:cic_2|integrator_39:int1|out[38]
+From Clock     : cken
+To Clock       : cken
+Failed Paths   : 0
+
+Type           : Clock Hold: 'cken3'
+Slack          : 0.746 ns
+Required Time  : 0.39 MHz ( period = 2560.000 ns )
+Actual Time    : N/A
+From           : cic_4_1_8:cic_3|comb_40_cken:comb8|temp[39]
+To             : cic_4_1_8:cic_3|comb_40_cken:comb8|out[39]
+From Clock     : cken3
+To Clock       : cken3
+Failed Paths   : 0
+
+Type           : Clock Hold: 'cken2'
+Slack          : 0.750 ns
+Required Time  : 1.56 MHz ( period = 640.000 ns )
+Actual Time    : N/A
+From           : cic_8_1_5:cic_2|integrator_39:int5|out[33]
+To             : cic_8_1_5:cic_2|comb_39_cken:comb1|temp[33]
+From Clock     : cken
+To Clock       : cken2
+Failed Paths   : 0
+
+Type           : Clock Hold: 'clk'
+Slack          : 1.040 ns
+Required Time  : 125.00 MHz ( period = 8.000 ns )
+Actual Time    : N/A
+From           : cic_10_1_3:cic_1|integrator_34:int2|out[33]
+To             : cic_10_1_3:cic_1|integrator_34:int2|out[33]
+From Clock     : clk
+To Clock       : clk
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+

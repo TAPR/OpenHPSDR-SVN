@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Mon May 14 16:46:20 2007
+Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
+Revision Name : my_cic
+Top-level Entity Name : my_cic
+Family : Cyclone II
+Total logic elements : 1,842
+    Total combinational functions : 1,194
+    Dedicated logic registers : 1,842
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total memory bits : N/A until Partition Merge
+Embedded Multiplier 9-bit elements : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge
