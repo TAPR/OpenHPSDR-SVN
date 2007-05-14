@@ -1,0 +1,16 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Mon May 14 15:48:03 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off my_cic -c my_cic
+Warning (10227): Verilog HDL Port Declaration warning at my_cic.v(6): data type declaration for "in" declares packed dimensions but the port declaration declaration does not
+Info (10151): Verilog HDL Declaration information at my_cic.v(9): "in" is declared here
+Warning (10227): Verilog HDL Port Declaration warning at my_cic.v(7): data type declaration for "out" declares packed dimensions but the port declaration declaration does not
+Info (10151): Verilog HDL Declaration information at my_cic.v(10): "out" is declared here
+Error (10170): Verilog HDL syntax error at my_cic.v(54) near text ".";  expecting ";", or "," File: C:/HPSDR/trunk/VK6APH/my_cic/my_cic.v Line: 54
+Error (10112): Ignored design unit "cic_8_1_5" at my_cic.v(49) due to previous errors File: C:/HPSDR/trunk/VK6APH/my_cic/my_cic.v Line: 49
+Info: Found 0 design units, including 0 entities, in source file my_cic.v
+Error: Quartus II Analysis & Synthesis was unsuccessful. 2 errors, 2 warnings
+    Info: Allocated 117 megabytes of memory during processing
+    Error: Processing ended: Mon May 14 15:48:03 2007
+    Error: Elapsed time: 00:00:00
