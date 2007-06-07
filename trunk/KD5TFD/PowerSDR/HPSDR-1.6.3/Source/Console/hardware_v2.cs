@@ -877,10 +877,10 @@ namespace PowerSDR
 				
 					
 					Console c = Console.getConsole(); 
-					if ( c != null ) 
-					{ 
-						System.Console.WriteLine("DDSTune: " + c.TuningWordToFreq(value).ToString("f6")); 
-					}
+					//if ( c != null ) 
+					//{ 
+					//	System.Console.WriteLine("DDSTune: " + c.TuningWordToFreq(value).ToString("f6")); 
+					//}
 					if (c != null && c.label_DDStune != null ) 
 					{ 
 						double dds_tune = c.TuningWordToFreq(dds_tuning_word);	// = dds_tuning_word * c.DDSClockCorrection / Math.Pow(2,48);
@@ -1053,7 +1053,20 @@ namespace PowerSDR
 			DDSWrite(BYPASS_SINC, 0x20);
 		}
 
+#if false
+		private void DDSWrite(byte data, byte addr) 
+		{
+			long start_ticks = DateTime.Now.Ticks; 
+			zzDDSWrite(data, addr); 
+			long stop_tick = DateTime.Now.Ticks; 
+			long delta_tick = stop_tick - start_ticks; 
+			System.Console.WriteLine("DDSWrite ticks: " + delta_tick); 
+		}
+
+	    private void zzDDSWrite(byte data, byte addr)
+#else 
 		private void DDSWrite(byte data, byte addr)
+#endif
 		{
 			if ( ozy_control ) 
 			{
