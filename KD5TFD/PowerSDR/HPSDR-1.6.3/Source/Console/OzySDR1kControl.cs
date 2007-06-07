@@ -242,8 +242,8 @@ namespace PowerSDR
 				null, 
 				0,
 				1000);
-			Thread.Sleep(10); 
-			System.Console.WriteLine("dds_write: addr:" + addr + " data: " + data + " rc: " + rc); 
+			// Thread.Sleep(10); 
+			// System.Console.WriteLine("dds_write: addr:" + addr + " data: " + data + " rc: " + rc); 
 			return rc;
 		} 
 
