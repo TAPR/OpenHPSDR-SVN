@@ -1,0 +1,45 @@
+This is the initial release. I was requested to publish a snapshot
+of the Epi code so here it is. It isn't bullet proof yet.  I've only
+just got the basic test case going.
+
+I2C_slave needs some work - the i2c_slave_model need work - 
+and may even now have issues in the current configuration.
+The documentation is only 2/3 done.  Most of the tasks for 
+moving data over the I2C aren't working yet -likely due to 
+the I2C_slave or i2c_slave_model being busted.
+
+This basic test case 
+1) Programs the I2C_master for the internal clock rate of epi.
+2) Loads the Status_ctl micro-code.
+3) A button gets pushed (receive_in has a bit change).
+4) A message is sent by the I2C master.
+
+Yet to be tested.
+1) All functional variants of the microcode.
+2) All of the I2C tasks - Burst transfers, and reads 
+3) Writes to the extra control bits in EPI like cross_point_out.
+
+What does work.
+1) Writes to the i2c_master from the i2c_slave.
+2) Writes to the status_mcode from the i2c_slave.
+3) STatus_ctl is doing Wishbone Master cycles to i2c_master
+4) Status_ctl is executing microcode from status_mcode correctly.
+
+I'm using the CVER GPL'd verilog simulator from Pragmatic C corp
+to run simulations under Linux.
+
+To run:
+
+./run single_val.tst
+
+A VCD file is created called bench.vcd of the entire simulation 
+if you want to look at waveforms. I've removed that from the 
+download cause it's too big. See the verilog.log to see what 
+the simulation looks like right now.
+
+I've included two documents in the release:
+I2C_master_spec.doc - Opencores I2C master
+epi_cpld_v0.1.odt   - First generation doc for Epi code
+                      ODT is OpenOffice Writer Format
+                      You can get OpenOffice for ANY platform!
+

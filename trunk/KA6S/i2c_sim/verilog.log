@@ -1,0 +1,66 @@
+GPLCVER_2.11a of 07/05/05 (Linux-elf).
+Copyright (c) 1991-2005 Pragmatic C Software Corp.
+  All Rights reserved.  Licensed under the GNU General Public License (GPL).
+  See the 'COPYING' file for details.  NO WARRANTY provided.
+Today is Sat May 19 18:51:23 2007.
+Compiling source file "deglitch2.v"
+Compiling source file "deglitch.v"
+Compiling source file "epi_ctl_regs.v"
+Compiling source file "epi.v"
+Compiling source file "i2c_master_bit_ctrl.v"
+Compiling source file "i2c_master_byte_ctrl.v"
+Compiling source file "i2c_master_defines.v"
+Compiling source file "i2c_master_top.v"
+Compiling source file "i2c_slave_model.v"
+Compiling source file "i2c_slave_v5.v"
+Compiling source file "i2c_tb.v"
+Compiling source file "spi_slave_model.v"
+Compiling source file "status_ctl.v"
+Compiling source file "status_mcode.v"
+Compiling source file "timescale.v"
+Compiling source file "wb_arb_mux.v"
+Compiling source file "wb_master_model.v"
+**i2c_tb.v(567) WARN** [3108] output port out (pos. 2) of instance at **i2c_tb.v(555) has highconn driver(s), value of out in delay may differ from simulators using port collapsing - use +change_port_type for compatibility
+**i2c_tb.v(567) WARN** [3108] output port out (pos. 2) of instance at **i2c_tb.v(556) has highconn driver(s), value of out in delay may differ from simulators using port collapsing - use +change_port_type for compatibility
+**i2c_tb.v(567) WARN** [3108] output port out (pos. 2) of instance at **i2c_tb.v(557) has highconn driver(s), value of out in delay may differ from simulators using port collapsing - use +change_port_type for compatibility
+**i2c_tb.v(567) WARN** [3108] output port out (pos. 2) of instance at **i2c_tb.v(558) has highconn driver(s), value of out in delay may differ from simulators using port collapsing - use +change_port_type for compatibility
+Highest level modules:
+tst_bench_top
+spi_slave_model
+
+
+status:                    0 Testbench started
+
+
+
+INFO: WISHBONE MASTER MODEL INSTANTIATED (tst_bench_top.u0)
+
+DEBUG i2c_slave; stop condition detected at                  300
+status:                  500 done reset
+status:                 8600 programmed registers
+status:                12600 verified registers
+status:                15600 core enabled
+WR_SINGLE: Slv_adr=11, WB_AD=40, Data=c8
+WR_SINGLE: Slv_adr=11, WB_AD=41, Data=00
+WR_SINGLE: Slv_adr=11, WB_AD=42, Data=80
+WR_SINGLE: Slv_adr=11, WB_AD=00, Data=30
+WR_SINGLE: Slv_adr=11, WB_AD=01, Data=03
+WR_SINGLE: Slv_adr=11, WB_AD=02, Data=90
+WR_SINGLE: Slv_adr=11, WB_AD=03, Data=04
+WR_SINGLE: Slv_adr=11, WB_AD=04, Data=02
+WR_SINGLE: Slv_adr=11, WB_AD=05, Data=24
+WR_SINGLE: Slv_adr=11, WB_AD=06, Data=00
+WR_SINGLE: Slv_adr=11, WB_AD=07, Data=0b
+WR_SINGLE: Slv_adr=11, WB_AD=08, Data=50
+WR_SINGLE: Slv_adr=11, WB_AD=09, Data=04
+WR_SINGLE: Slv_adr=11, WB_AD=0a, Data=02
+WR_SINGLE: Slv_adr=11, WB_AD=0b, Data=a4
+DEBUG i2c_slave; start condition detected at            468109600
+DEBUG i2c_slave; command byte received (write) at            476583800
+DEBUG i2c_slave; address received. adr=55, ack=1
+DEBUG i2c_slave; stop condition detected at            487682600
+
+
+status:            492421600 Testbench done
+Halted at location **testcase.tst(66) time 4924216000 ps from call to $finish.
+  There were 0 error(s), 4 warning(s), and 232963 inform(s).
