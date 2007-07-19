@@ -39,8 +39,10 @@ def write_pins (csv_file, qsf_file):
   return 0
 
 
+# open CSV file which describes pin assignments
 csv_file = open (sys.argv[1], "rb")
 
 # open qsf file in append mode
 qsf_file = open (sys.argv[2], "a") 
 
+write_pins (csv_file, qsf_file)
