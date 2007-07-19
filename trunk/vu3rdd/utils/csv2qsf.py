@@ -1,10 +1,10 @@
 #!/usr/bin/python
 #
-# Copyright 2006 Free Software Foundation, Inc.
+# Copyright 2007 Free Software Foundation, Inc.
 # 
 # Author: Ramakrishnan Muthukrishnan <vu3rdd@gmail.com>
 # 
-# GNU Radio is free software; you can redistribute it and/or modify
+# This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2, or (at your option)
 # any later version.
@@ -23,13 +23,24 @@
 # and generates the qsf file. Also scans the project directory and adds
 # verilog files 
 # 
-
+# usage: csv2qsf csv_file qsf_file
+#
 import csv
+import sys
 
-# open the CSV file containing pin assignments
-reader = csv.reader (open ("blinkity.csv", "rb"))
+def write_pins (csv_file, qsf_file):
+  # open the CSV file containing pin assignments
+  reader = csv.reader (csv_file)
 
-# print equiv QSF PIN assignment lines
-for c1, c2 in reader:
-  print "set_location_assignment " + c2 + " -to " + c1
+  # print equiv QSF PIN assignment lines
+  for c1, c2 in reader:
+    qsf_file.write ("set_location_assignment " + c2 + " -to " + c1)
+
+  return 0
+
+
+csv_file = open (sys.argv[1], "rb")
+
+# open qsf file in append mode
+qsf_file = open (sys.argv[2], "a") 
 
