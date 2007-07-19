@@ -34,12 +34,12 @@ def write_pins (csv_file, qsf_file):
 
   # print equiv QSF PIN assignment lines
   for c1, c2 in reader:
-    qsf_file.write ("set_location_assignment " + c2 + " -to " + c1)
+    qsf_file.write ("set_location_assignment " + c2 + " -to " + c1 + "\n")
 
   return 0
 
 
-if __name == '__main__':
+if __name__ == '__main__':
   # open CSV file which describes pin assignments
   csv_file = open (sys.argv[1], "rb")
 
