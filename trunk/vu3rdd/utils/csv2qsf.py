@@ -32,6 +32,9 @@ def write_pins (csv_file, qsf_file):
   # open the CSV file containing pin assignments
   reader = csv.reader (csv_file)
 
+  qsf_file.write ("\n")
+  qsf_file.write ("\n" + "# " + "PIN Assignments start here" + "\n")
+
   # print equiv QSF PIN assignment lines
   for c1, c2 in reader:
     qsf_file.write ("set_location_assignment " + c2 + " -to " + c1 + "\n")
