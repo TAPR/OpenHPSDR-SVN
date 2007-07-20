@@ -49,4 +49,10 @@ if __name__ == '__main__':
   # open qsf file in append mode
   qsf_file = open (sys.argv[2], "a") 
 
+  # 1. find out what verilog files to add into the project.
+  # 2. enable init_done pin
+  # 3. enable generate_rbf
+  # 4. What else ?
+
+  # append to the QSF file
   write_pins (csv_file, qsf_file)
