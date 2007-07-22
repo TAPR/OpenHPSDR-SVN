@@ -350,6 +350,46 @@ unsigned char SDR1k_Control_Read_Status(const xdata unsigned char *bufp, unsigne
 	return rc; 
 }
 
+ 
+unsigned char SDR1k_Control_Read_Version(const xdata unsigned char *bufp, unsigned char buflen) {
+	unsigned char rc; 
+	unsigned char bbuf[3]; 
+	unsigned char *srcp; 
+	xdata unsigned char *destp;
+	int i;
+	unsigned char ver_string[] = "20070722";   
+	
+#if 0 
+	putstr("read_version\n-->");
+	putstr(ver_string); 
+	putstr("<--\n"); 
+#endif
+ 
+	srcp = ver_string; 
+	destp = (xdata unsigned char *)bufp; 
+	while ( *srcp != 0 ) {
+		*destp = *srcp; 
+		++destp; 
+		++srcp; 
+	} 
+ 	
+	return 1;
+	 
+	 
+	
+#if 0 	
+	putstr("read_status rc=0x");  
+	byteToHex(rc, bbuf);  
+	putstr(bbuf); 
+	putstr(" data=0x"); 
+	byteToHex(bufp[0], bbuf); 
+	putstr(bbuf); 
+	putstr("\n");
+#endif
+	 
+}
+
+
 // returns 1 on success, 0 on failure 
 //
 // wValueL = command 
@@ -363,6 +403,10 @@ unsigned char SDR1k_ControlIn(unsigned char wValueH, unsigned char wValueL,
 		case SDR1KCTRL_READ_STATUS: 
 			return SDR1k_Control_Read_Status(bufp, buflen);
 			break;  
+			
+        case SDR1KCTRL_READ_VERSION: 
+			return SDR1k_Control_Read_Version(bufp, buflen);
+			break;
 				
 		default:
 			putstr("Sdr1k_ControlIn: not implementd!\n"); 

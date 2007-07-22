@@ -90,7 +90,8 @@
 #define SDR1KCTRL_DDS_RESET 0x3   // no parms 
 #define SDR1KCTRL_DDS_WRITE 0x4   // wIndexH - register to set, wIndexL - value to set it to 
 #define SDR1KCTRL_SR_LOAD 0x5
-#define SDR1KCTRL_READ_STATUS 0x6 // read status port      
+#define SDR1KCTRL_READ_STATUS 0x6 // read status port
+#define SDR1KCTRL_READ_VERSION 0x7 // read status port      
 #endif 
 
 
