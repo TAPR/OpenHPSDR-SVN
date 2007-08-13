@@ -1,5 +1,5 @@
 Flow report for Ozy_Janus
-Sat Apr 28 19:10:10 2007
+Mon Aug 13 20:44:02 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Sat Apr 28 19:10:09 2007   ;
+; Flow Status                        ; Successful - Mon Aug 13 20:44:01 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/28/2007 19:05:45 ;
+; Start date & time ; 08/13/2007 20:41:42 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Ozy_Janus           ;
 +-------------------+---------------------+
@@ -88,11 +88,11 @@ applicable agreement for further details.
 +-------------------------+--------------+
 ; Module Name             ; Elapsed Time ;
 +-------------------------+--------------+
-; Analysis & Synthesis    ; 00:01:28     ;
-; Fitter                  ; 00:02:37     ;
-; Assembler               ; 00:00:08     ;
+; Analysis & Synthesis    ; 00:00:24     ;
+; Fitter                  ; 00:01:35     ;
+; Assembler               ; 00:00:07     ;
 ; Classic Timing Analyzer ; 00:00:03     ;
-; Total                   ; 00:04:16     ;
+; Total                   ; 00:02:09     ;
 +-------------------------+--------------+
 
 
