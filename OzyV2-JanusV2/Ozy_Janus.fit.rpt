@@ -1,5 +1,5 @@
 Fitter report for Ozy_Janus
-Sat Apr 28 19:09:53 2007
+Mon Aug 13 20:43:42 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Fitter Summary                                                               ;
 +------------------------------------+-----------------------------------------+
-; Fitter Status                      ; Successful - Sat Apr 28 19:09:53 2007   ;
+; Fitter Status                      ; Successful - Mon Aug 13 20:43:42 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
@@ -1218,9 +1218,9 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; LEs in Long Chains - Fit Attempt 1                               ; 82                     ;
 ; LABs with Chains - Fit Attempt 1                                 ; 25                     ;
 ; LABs with Multiple Chains - Fit Attempt 1                        ; 0                      ;
-; Time - Fit Attempt 1                                             ; 7                      ;
-; Time in tsm_dat.dll - Fit Attempt 1                              ; 0.016                  ;
-; Time in tsm_tan.dll - Fit Attempt 1                              ; 1.391                  ;
+; Time - Fit Attempt 1                                             ; 4                      ;
+; Time in tsm_dat.dll - Fit Attempt 1                              ; 0.015                  ;
+; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.687                  ;
 +------------------------------------------------------------------+------------------------+
 
 
@@ -1236,9 +1236,9 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; Late Wire Use - Fit Attempt 1        ; 6      ;
 ; Late Slack - Fit Attempt 1           ; 11651  ;
 ; Peak Regional Wire - Fit Attempt 1   ; 0.000  ;
-; Time - Fit Attempt 1                 ; 80     ;
-; Time in fit_fsyn.dll - Fit Attempt 1 ; 42.360 ;
-; Time in tsm_tan.dll - Fit Attempt 1  ; 26.331 ;
+; Time - Fit Attempt 1                 ; 50     ;
+; Time in fit_fsyn.dll - Fit Attempt 1 ; 29.282 ;
+; Time in tsm_tan.dll - Fit Attempt 1  ; 16.194 ;
 +--------------------------------------+--------+
 
 
@@ -1253,8 +1253,8 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; Mid Slack - Fit Attempt 1           ; -485  ;
 ; Late Slack - Fit Attempt 1          ; -475  ;
 ; Late Wire Use - Fit Attempt 1       ; 7     ;
-; Time - Fit Attempt 1                ; 13    ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 9.391 ;
+; Time - Fit Attempt 1                ; 11    ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 8.002 ;
 +-------------------------------------+-------+
 
 
@@ -1264,7 +1264,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sat Apr 28 19:07:16 2007
+    Info: Processing started: Mon Aug 13 20:42:07 2007
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Selected device EP2C8Q208C8 for design "Ozy_Janus"
 Info: Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
@@ -1347,12 +1347,12 @@ Info: Starting physical synthesis algorithm register retiming
 Info: Physical synthesis algorithm register retiming complete: estimated slack improvement of 0 ps
 Info: Starting physical synthesis algorithm combinational resynthesis 1
 Info: Physical synthesis algorithm combinational resynthesis 1 complete: estimated slack improvement of 0 ps
-Info: Physical synthesis optimizations complete: elapsed time is 00:00:34
+Info: Physical synthesis optimizations complete: elapsed time is 00:00:16
 Warning: Ignored locations or region assignments to the following nodes
     Warning: Node "I_test" is assigned to location or region, but does not exist in design
     Warning: Node "Q_test" is assigned to location or region, but does not exist in design
 Info: Fitter placement preparation operations beginning
-Info: Fitter placement preparation operations ending: elapsed time is 00:00:07
+Info: Fitter placement preparation operations ending: elapsed time is 00:00:04
 Info: Fitter placement operations beginning
 Info: Starting physical synthesis optimizations
 Info: Starting physical synthesis algorithm automatic asynchronous signal pipelining
@@ -1364,9 +1364,9 @@ Info: Starting physical synthesis algorithm combinational resynthesis 1
 Info: Physical synthesis algorithm combinational resynthesis 1 complete: estimated slack improvement of 3 ps
 Info: Starting physical synthesis algorithm logic and register replication
 Info: Physical synthesis algorithm logic and register replication complete: estimated slack improvement of 0 ps
-Info: Physical synthesis optimizations complete: elapsed time is 00:00:42
+Info: Physical synthesis optimizations complete: elapsed time is 00:00:29
 Info: Fitter placement was successful
-Info: Fitter placement operations ending: elapsed time is 00:01:20
+Info: Fitter placement operations ending: elapsed time is 00:00:50
 Info: Estimated most critical path is register to memory delay of 2.610 ns
     Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X10_Y12; Fanout = 1; REG Node = 'Rx_register[1]'
     Info: 2: + IC(2.480 ns) + CELL(0.130 ns) = 2.610 ns; Loc. = M4K_X27_Y9; Fanout = 1; MEM Node = 'Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6bf1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ram_block6a1~portb_datain_reg0'
@@ -1375,7 +1375,7 @@ Info: Estimated most critical path is register to memory delay of 2.610 ns
 Info: Fitter routing operations beginning
 Info: Average interconnect usage is 6% of the available device resources. Peak interconnect usage is 14%
     Info: The peak interconnect region extends from location X11_Y10 to location X22_Y19
-Info: Fitter routing operations ending: elapsed time is 00:00:13
+Info: Fitter routing operations ending: elapsed time is 00:00:11
 Info: Started post-fitting delay annotation
 Warning: Found 64 output pins without output pin load capacitance assignment
     Info: Pin "SLWR" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
@@ -1503,7 +1503,7 @@ Info: Following groups of pins have the same output enable
         Info: Type bidirectional pin SPI_SO uses the 3.3-V LVTTL I/O standard
 Info: Quartus II Fitter was successful. 0 errors, 6 warnings
     Info: Allocated 183 megabytes of memory during processing
-    Info: Processing ended: Sat Apr 28 19:09:53 2007
-    Info: Elapsed time: 00:02:37
+    Info: Processing ended: Mon Aug 13 20:43:42 2007
+    Info: Elapsed time: 00:01:35
 
 

@@ -1,6 +1,6 @@
-// V1.91 28th April 2007
+// V1.92 13th August 2007
 //
-// Copyright 2006  Bill Tracey KD5TFD and Phil Harman VK6APH
+// Copyright 2006,2007  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
 //  HPSDR - High Performance Software Defined Radio
 //
@@ -153,6 +153,7 @@
 //				Modified Mix I2S receiver to use latest form of I2S receiver - 19 April 2007
 //				Modifed to take 12.5MHz clock from Penelope on Atlas A5 - 28 April 2007
 //				Added temporary logic level from Atlas A2 to force clocks from Penny - 28 April 2007
+//				Test code to auto detect that Penny clock is on Atlas bus - 13 August 2007
 //				
 //
 ////////////////////////////////////////////////////////////
@@ -450,18 +451,28 @@ assign CLK_48MHZ = IFCLK; 				// 48MHz clock to PWM DAC on Janus
 		NOTE: clock phases are inverted in some cases!
 */
 
-//assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : ~BCLK_96_48; 
-//assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? ~LRCLK_48 : ((DFS0 == 1 && DFS1 == 0 )? ~LRCLK_96 : LRCLK_192);
-
 assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : BCLK_96_48; 
 assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? LRCLK_48 : ((DFS0 == 1 && DFS1 == 0 )? LRCLK_96 : LRCLK_192);
 
 
 // the 12MHz ADC/DAC clock  will come from Janus (12.288MHz)  on Atlas C5  as CLK_12MHZ unless a Mercury or Penelope board
-// is being used then it will come from the Atlas bus (12.5MHz) on A5 as PCLK_10MHZ. The signal CLK_select
+// is being used then it will come from the Atlas bus (12.5MHz) on A5 as PCLK_12MHZ. The signal CLK_select
 // will determine which clock to use. 
 
-// the next line is tempory until we have C&C for  Penelope from PowerSDR
+// the following code is tempory until we have C&C for  Penelope from PowerSDR
+
+// Check if the PCLK_12MHZ clock from Penelope is present, if so use this for the ADC/DAC clock.
+
+/*
+reg [6:0]clock_check;
+reg CLK_select;
+always @ (posedge PCLK_12MHZ)
+begin
+	if(clock_check > 99)		// check that we have 100 clock pulses before setting the flag
+		CLK_select <= 1'b1;	// set flag
+	else clock_check <= clock_check + 1'b1;
+end 	
+*/
 
 assign CLK_select = ~A2;  // If A2 on Atlas is high from Penelope then select her 12.5MHz clock  
 
