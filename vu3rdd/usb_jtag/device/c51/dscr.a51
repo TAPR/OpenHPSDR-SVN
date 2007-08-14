@@ -4,6 +4,7 @@
 ;;; USB Descriptor(s)
 ;;;-----------------------------------------------------------------------------
 ;;; Copyright 2005..2007 Kolja Waschk, ixo.de
+;;; Modified by LAP for FPGA4U project, Jan 2007. lap.epfl.ch
 ;;;-----------------------------------------------------------------------------
 ;;; Code based on USRP2 firmware (GNU Radio Project), version 3.0.2,
 ;;; Copyright 2003 Free Software Foundation, Inc.
@@ -22,8 +23,8 @@
 
         .module usb_descriptors
 
-        VID              = 0x16C0         ; Vendor ID 0x16C0  
-        PID              = 0x06AD         ; Product ID 0x06AD 
+        VID              = 0x09FB         ; Changed by LAP to match Altera VID
+        PID              = 0x6001         ; Changed by LAP to match Altera USBBlaster PID 
         VERSION          = 0x0004         ; Product Version (4 indicates *BM device) 
         USB_VER          = 0x0110         ; Support USB version 1.10 
         USB_ATTR         = 0x80           ; Bus powered, not self-powered, no remote wakeup
@@ -268,12 +269,10 @@ str0_end:
 _str1::
 str1:   .db        str1_end - str1
         .db        DSCR_STRING
-        .db        'i, 0            ; 16-bit unicode
-        .db        'x, 0
-        .db        'o, 0
-        .db        '., 0
-        .db        'd, 0
-        .db        'e, 0
+        .db        'E, 0            ; 16-bit unicode
+        .db        'P, 0
+        .db        'F, 0
+        .db        'L, 0
 str1_end:
 
         SI_PRODUCT = 2
@@ -285,13 +284,13 @@ str2:   .db        str2_end - str2
         .db        'S, 0
         .db        'B, 0
         .db        '-, 0
-        .db        'J, 0
-        .db        'T, 0
-        .db        'A, 0
-        .db        'G, 0
-        .db        '-, 0
-        .db        'I, 0
-        .db        'F, 0
+        .db        'B, 0
+        .db        'l, 0
+        .db        'a, 0
+        .db        's, 0
+        .db        't, 0
+        .db        'e, 0
+        .db        'r, 0
 str2_end:
 
         SI_SERIAL = 3
