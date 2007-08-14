@@ -28,29 +28,29 @@
 
 //-----------------------------------------------------------------------------
 
-/* JTAG TCK, AS/PS DCLK */
-
-sbit at 0x92          TCK; /* Port B.2 */
-#define bmTCKOE       bmBIT2
-#define SetTCK(x)     do{TCK=(x);}while(0)
-
 /* JTAG TDI, AS ASDI, PS DATA0 */
 
 sbit at 0x90          TDI; /* Port B.0 */
 #define bmTDIOE       bmBIT0
 #define SetTDI(x)     do{TDI=(x);}while(0)
 
-/* JTAG TMS, AS/PS nCONFIG */
-
-sbit at 0x93          TMS; /* Port B.3 */
-#define bmTMSOE       bmBIT3
-#define SetTMS(x)     do{TMS=(x);}while(0)
-
 /* JTAG TDO, AS/PS CONF_DONE */
 
 sbit at 0x91          TDO; /* Port B.1 */
 #define bmTDOOE       bmBIT1
 #define GetTDO(x)     TDO
+
+/* JTAG TCK, AS/PS DCLK */
+
+sbit at 0x92          TCK; /* Port B.2 */
+#define bmTCKOE       bmBIT2
+#define SetTCK(x)     do{TCK=(x);}while(0)
+
+/* JTAG TMS, AS/PS nCONFIG */
+
+sbit at 0x93          TMS; /* Port B.3 */
+#define bmTMSOE       bmBIT3
+#define SetTMS(x)     do{TMS=(x);}while(0)
 
 //-----------------------------------------------------------------------------
 
