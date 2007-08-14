@@ -141,9 +141,9 @@ void ProgIO_Init(void)
   IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE;
 
   // power on the onboard FPGA and all other VCCs, de-assert RESETN
-  IOE = 0x1F;
-  OEE = 0x1F;
-  mdelay(500); // wait for supply to come up
+  //IOE = 0x1F;
+  //OEE = 0x1F;
+  //mdelay(500); // wait for supply to come up
 
   // TDO input, others output
   OEB =(OEB&~bmPROGINOE) | bmPROGOUTOE;
