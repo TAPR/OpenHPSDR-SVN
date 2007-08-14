@@ -22,9 +22,9 @@
 
 //-----------------------------------------------------------------------------
 
-#define HAVE_PS_MODE 0
-#define HAVE_AS_MODE 0
-#define HAVE_OE_LED  0
+//#define HAVE_PS_MODE 0
+//#define HAVE_AS_MODE 0
+//#define HAVE_OE_LED  0
 
 //-----------------------------------------------------------------------------
 
@@ -146,7 +146,7 @@ void ProgIO_Init(void)
   mdelay(500); // wait for supply to come up
 
   // TDO input, others output
-  OEC=(OEC&~bmPROGINOE) | bmPROGOUTOE;
+  OEB =(OEB&~bmPROGINOE) | bmPROGOUTOE;
 }
 
 void ProgIO_Set_State(unsigned char d)
