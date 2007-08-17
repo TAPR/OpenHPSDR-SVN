@@ -2,6 +2,16 @@
 Timing Analyzer Summary
 --------------------------------------------------------------------------------------
 
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 7.361 ns
+From           : counter[24]
+To             : LED0
+From Clock     : IFCLK
+To Clock       : --
+Failed Paths   : 0
+
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
@@ -10,6 +20,26 @@ From           : B2
 To             : A24
 From Clock     : --
 To Clock       : --
+Failed Paths   : 0
+
+Type           : Clock Setup: 'IFCLK'
+Slack          : 16.679 ns
+Required Time  : 48.00 MHz ( period = 20.833 ns )
+Actual Time    : 240.73 MHz ( period = 4.154 ns )
+From           : counter[0]
+To             : counter[24]
+From Clock     : IFCLK
+To Clock       : IFCLK
+Failed Paths   : 0
+
+Type           : Clock Hold: 'IFCLK'
+Slack          : 0.499 ns
+Required Time  : 48.00 MHz ( period = 20.833 ns )
+Actual Time    : N/A
+From           : counter[0]
+To             : counter[0]
+From Clock     : IFCLK
+To Clock       : IFCLK
 Failed Paths   : 0
 
 Type           : Total number of failed paths

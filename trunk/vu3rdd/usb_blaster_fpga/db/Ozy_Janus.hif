@@ -1,4 +1,4 @@
-Version 7.1 Build 156 04/30/2007 SJ Web Edition
+Version 7.1 Build 178 06/25/2007 Service Pack 1 SJ Web Edition
 11
 853
 OFF
@@ -33,7 +33,7 @@ ON
 # case_sensitive
 # source_file
 usb_blaster.v
-55a0313d50f8f57ebb5f4aa8eefdfc2b
+e7bd7c7dd15b4d63a4f682a5ec343d
 7
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -51,7 +51,7 @@ OFF
 |
 }
 # lmf
-c:|altera|71|quartus|lmf|
+..|..|..|..|altera|71sp1|quartus|lmf|
 d41d8cd98f0b24e980998ecf8427e
 # macro_sequence
 

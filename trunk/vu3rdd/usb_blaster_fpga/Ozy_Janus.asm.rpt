@@ -1,6 +1,6 @@
 Assembler report for Ozy_Janus
-Wed Aug 15 12:51:53 2007
-Quartus II Version 7.1 Build 156 04/30/2007 SJ Web Edition
+Fri Aug 17 15:20:33 2007
+Quartus II Version 7.1 Build 178 06/25/2007 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -10,9 +10,9 @@ Quartus II Version 7.1 Build 156 04/30/2007 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: E:/hpsdr/repos_sdr_hpsdr/trunk/vu3rdd/usb_blaster_fpga_copy/Ozy_Janus.sof
-  6. Assembler Device Options: E:/hpsdr/repos_sdr_hpsdr/trunk/vu3rdd/usb_blaster_fpga_copy/Ozy_Janus.pof
-  7. Assembler Device Options: E:/hpsdr/repos_sdr_hpsdr/trunk/vu3rdd/usb_blaster_fpga_copy/Ozy_Janus.rbf
+  5. Assembler Device Options: C:/HPSDR/trunk/vu3rdd/usb_blaster_fpga/Ozy_Janus.sof
+  6. Assembler Device Options: C:/HPSDR/trunk/vu3rdd/usb_blaster_fpga/Ozy_Janus.pof
+  7. Assembler Device Options: C:/HPSDR/trunk/vu3rdd/usb_blaster_fpga/Ozy_Janus.rbf
   8. Assembler Messages
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Wed Aug 15 12:51:53 2007 ;
+; Assembler Status      ; Successful - Fri Aug 17 15:20:33 2007 ;
 ; Revision Name         ; Ozy_Janus                             ;
 ; Top-level Entity Name ; usb_blaster_emulation                 ;
 ; Family                ; Cyclone II                            ;
@@ -78,48 +78,48 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+---------------------------------------------------------------------------+
-; Assembler Generated Files                                                 ;
-+---------------------------------------------------------------------------+
-; File Name                                                                 ;
-+---------------------------------------------------------------------------+
-; E:/hpsdr/repos_sdr_hpsdr/trunk/vu3rdd/usb_blaster_fpga_copy/Ozy_Janus.sof ;
-; E:/hpsdr/repos_sdr_hpsdr/trunk/vu3rdd/usb_blaster_fpga_copy/Ozy_Janus.pof ;
-; E:/hpsdr/repos_sdr_hpsdr/trunk/vu3rdd/usb_blaster_fpga_copy/Ozy_Janus.rbf ;
-+---------------------------------------------------------------------------+
++------------------------------------------------------+
+; Assembler Generated Files                            ;
++------------------------------------------------------+
+; File Name                                            ;
++------------------------------------------------------+
+; C:/HPSDR/trunk/vu3rdd/usb_blaster_fpga/Ozy_Janus.sof ;
+; C:/HPSDR/trunk/vu3rdd/usb_blaster_fpga/Ozy_Janus.pof ;
+; C:/HPSDR/trunk/vu3rdd/usb_blaster_fpga/Ozy_Janus.rbf ;
++------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------+
-; Assembler Device Options: E:/hpsdr/repos_sdr_hpsdr/trunk/vu3rdd/usb_blaster_fpga_copy/Ozy_Janus.sof ;
-+----------------+------------------------------------------------------------------------------------+
-; Option         ; Setting                                                                            ;
-+----------------+------------------------------------------------------------------------------------+
-; Device         ; EP2C8Q208C8                                                                        ;
-; JTAG usercode  ; 0xFFFFFFFF                                                                         ;
-; Checksum       ; 0x000BF13E                                                                         ;
-+----------------+------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------+
+; Assembler Device Options: C:/HPSDR/trunk/vu3rdd/usb_blaster_fpga/Ozy_Janus.sof ;
++----------------+---------------------------------------------------------------+
+; Option         ; Setting                                                       ;
++----------------+---------------------------------------------------------------+
+; Device         ; EP2C8Q208C8                                                   ;
+; JTAG usercode  ; 0xFFFFFFFF                                                    ;
+; Checksum       ; 0x000C1182                                                    ;
++----------------+---------------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------+
-; Assembler Device Options: E:/hpsdr/repos_sdr_hpsdr/trunk/vu3rdd/usb_blaster_fpga_copy/Ozy_Janus.pof ;
-+--------------------+--------------------------------------------------------------------------------+
-; Option             ; Setting                                                                        ;
-+--------------------+--------------------------------------------------------------------------------+
-; Device             ; EPCS4                                                                          ;
-; JTAG usercode      ; 0x00000000                                                                     ;
-; Checksum           ; 0x06F060D8                                                                     ;
-; Compression Ratio  ; 3                                                                              ;
-+--------------------+--------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------+
+; Assembler Device Options: C:/HPSDR/trunk/vu3rdd/usb_blaster_fpga/Ozy_Janus.pof ;
++--------------------+-----------------------------------------------------------+
+; Option             ; Setting                                                   ;
++--------------------+-----------------------------------------------------------+
+; Device             ; EPCS4                                                     ;
+; JTAG usercode      ; 0x00000000                                                ;
+; Checksum           ; 0x06EFE101                                                ;
+; Compression Ratio  ; 3                                                         ;
++--------------------+-----------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------+
-; Assembler Device Options: E:/hpsdr/repos_sdr_hpsdr/trunk/vu3rdd/usb_blaster_fpga_copy/Ozy_Janus.rbf ;
-+---------------------+-------------------------------------------------------------------------------+
-; Option              ; Setting                                                                       ;
-+---------------------+-------------------------------------------------------------------------------+
-; Raw Binary File     ;                                                                               ;
-;  Compression Ratio  ; 3                                                                             ;
-+---------------------+-------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------+
+; Assembler Device Options: C:/HPSDR/trunk/vu3rdd/usb_blaster_fpga/Ozy_Janus.rbf ;
++---------------------+----------------------------------------------------------+
+; Option              ; Setting                                                  ;
++---------------------+----------------------------------------------------------+
+; Raw Binary File     ;                                                          ;
+;  Compression Ratio  ; 3                                                        ;
++---------------------+----------------------------------------------------------+
 
 
 +--------------------+
@@ -127,14 +127,14 @@ applicable agreement for further details.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus II Assembler
-    Info: Version 7.1 Build 156 04/30/2007 SJ Web Edition
-    Info: Processing started: Wed Aug 15 12:51:47 2007
+    Info: Version 7.1 Build 178 06/25/2007 Service Pack 1 SJ Web Edition
+    Info: Processing started: Fri Aug 17 15:20:27 2007
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off usb_blaster -c Ozy_Janus
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Allocated 136 megabytes of memory during processing
-    Info: Processing ended: Wed Aug 15 12:51:53 2007
-    Info: Elapsed time: 00:00:06
+    Info: Processing ended: Fri Aug 17 15:20:34 2007
+    Info: Elapsed time: 00:00:07
 
 
