@@ -1,11 +1,37 @@
 |usb_blaster_emulation
+IFCLK => counter[24].CLK
+IFCLK => counter[23].CLK
+IFCLK => counter[22].CLK
+IFCLK => counter[21].CLK
+IFCLK => counter[20].CLK
+IFCLK => counter[19].CLK
+IFCLK => counter[18].CLK
+IFCLK => counter[17].CLK
+IFCLK => counter[16].CLK
+IFCLK => counter[15].CLK
+IFCLK => counter[14].CLK
+IFCLK => counter[13].CLK
+IFCLK => counter[12].CLK
+IFCLK => counter[11].CLK
+IFCLK => counter[10].CLK
+IFCLK => counter[9].CLK
+IFCLK => counter[8].CLK
+IFCLK => counter[7].CLK
+IFCLK => counter[6].CLK
+IFCLK => counter[5].CLK
+IFCLK => counter[4].CLK
+IFCLK => counter[3].CLK
+IFCLK => counter[2].CLK
+IFCLK => counter[1].CLK
+IFCLK => counter[0].CLK
 B0 => A29.DATAIN
-B1 => A27.DATAIN
+B1 <= A27.DB_MAX_OUTPUT_PORT_TYPE
 B2 => A24.DATAIN
 B3 => A23.DATAIN
 A23 <= B3.DB_MAX_OUTPUT_PORT_TYPE
 A24 <= B2.DB_MAX_OUTPUT_PORT_TYPE
-A27 <= B1.DB_MAX_OUTPUT_PORT_TYPE
+A27 => B1.DATAIN
 A29 <= B0.DB_MAX_OUTPUT_PORT_TYPE
+LED0 <= counter[24].DB_MAX_OUTPUT_PORT_TYPE
 
 

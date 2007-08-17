@@ -22,6 +22,8 @@
 
  ---------------------------------------------------------------------------------
  -- NC            : No Connect. This pin has no internal connection to the device.
+ -- DNU           : Do Not Use. This pin MUST NOT be connected.
+ -- VCCPGM        : Dedicated power pin for configuration, which MUST be connected to 1.8V, 2.5V or 3.0V depending on the needs of the configuration device.
  -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (1.2V).
  -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
  --                 of its bank.
@@ -43,9 +45,12 @@
  --					This pin should be connected to GND. It may also be connected  to a
  --					valid signal  on the board  (low, high, or toggling)  if that signal
  --					is required for a different revision of the design.
- -- GND*          : Unused  I/O  pin.   This pin can either be left unconnected or
- --           	    connected to GND.  Connecting this pin to GND will improve the
- --           	    device's immunity to noise.
+ -- GND*          : Unused  I/O  pin.   For transceiver I/O banks (Bank 13, 14, 15, 16 and 17),
+ --           	    connect each pin marked GND* either individually through a 10 kohm resistor
+ --           	    to GND or tie all pins together and connect through a single 10 kohm resistor
+ --           	    to GND.
+ --           	    For non-transceiver I/O banks, connect each pin marked GND* directly to GND
+ --           	    or leave it unconnected.
  -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
  -- RESERVED_INPUT    : Pin is tri-stated and should be connected to the board.
  -- RESERVED_INPUT_WITH_WEAK_PULLUP    : Pin is tri-stated with internal weak pull-up resistor.
@@ -53,7 +58,7 @@
  -- RESERVED_OUTPUT_DRIVEN_HIGH        : Pin is output driven high.
  ---------------------------------------------------------------------------------
 
-Quartus II Version 7.1 Build 156 04/30/2007 SJ Web Edition
+Quartus II Version 7.1 Build 178 06/25/2007 Service Pack 1 SJ Web Edition
 CHIP  "Ozy_Janus"  ASSIGNED TO AN: EP2C8Q208C8
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
@@ -61,7 +66,7 @@ Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage 
 ~ASDO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 1         : input  : 3.3-V LVTTL       :         : 1         : N              
 ~nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 2         : input  : 3.3-V LVTTL       :         : 1         : N              
 RESERVED_INPUT               : 3         :        :                   :         : 1         :                
-RESERVED_INPUT               : 4         :        :                   :         : 1         :                
+LED0                         : 4         : output : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 5         :        :                   :         : 1         :                
 RESERVED_INPUT               : 6         :        :                   :         : 1         :                
 VCCIO1                       : 7         : power  :                   : 3.3V    : 1         :                
@@ -81,7 +86,7 @@ DATA0                        : 20        : input  :                   :         
 DCLK                         : 21        :        :                   :         : 1         :                
 nCE                          : 22        :        :                   :         : 1         :                
 GND+                         : 23        :        :                   :         : 1         :                
-GND+                         : 24        :        :                   :         : 1         :                
+IFCLK                        : 24        : input  : 3.3-V LVTTL       :         : 1         : Y              
 GND                          : 25        : gnd    :                   :         :           :                
 nCONFIG                      : 26        :        :                   :         : 1         :                
 GND+                         : 27        :        :                   :         : 1         :                
@@ -114,7 +119,7 @@ VCCA_PLL1                    : 53        : power  :                   : 1.2V    
 GNDA_PLL1                    : 54        : gnd    :                   :         :           :                
 GND                          : 55        : gnd    :                   :         :           :                
 B0                           : 56        : input  : 3.3-V LVTTL       :         : 4         : Y              
-B1                           : 57        : input  : 3.3-V LVTTL       :         : 4         : Y              
+B1                           : 57        : output : 3.3-V LVTTL       :         : 4         : Y              
 B2                           : 58        : input  : 3.3-V LVTTL       :         : 4         : Y              
 B3                           : 59        : input  : 3.3-V LVTTL       :         : 4         : Y              
 RESERVED_INPUT               : 60        :        :                   :         : 4         :                
@@ -162,7 +167,7 @@ RESERVED_INPUT               : 101       :        :                   :         
 RESERVED_INPUT               : 102       :        :                   :         : 4         :                
 RESERVED_INPUT               : 103       :        :                   :         : 4         :                
 A29                          : 104       : output : 3.3-V LVTTL       :         : 4         : Y              
-A27                          : 105       : output : 3.3-V LVTTL       :         : 3         : Y              
+A27                          : 105       : input  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 106       :        :                   :         : 3         :                
 ~LVDS54n/INIT_DONE~ / RESERVED : 107       : output : 3.3-V LVTTL       :         : 3         : N              
 RESERVED_INPUT               : 108       :        :                   :         : 3         :                

@@ -28,7 +28,7 @@
 # ========================
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:29:17  JULY 22, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION 7.1
+set_global_assignment -name LAST_QUARTUS_VERSION "7.1 SP1"
 
 # Pin & Location Assignments
 # ==========================
@@ -175,3 +175,5 @@ set_global_assignment -name VECTOR_INPUT_SOURCE "C:\\HPDSDR\\trunk\\VK6APH\\Ozy_
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY no_file_for_top_partition -to | -section_id Top
 set_global_assignment -name VERILOG_FILE usb_blaster.v
+set_location_assignment PIN_24 -to IFCLK
+set_location_assignment PIN_4 -to LED0
