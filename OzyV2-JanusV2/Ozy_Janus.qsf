@@ -153,3 +153,6 @@ set_global_assignment -name VERILOG_FILE Rx_fifo.v
 set_global_assignment -name FMAX_REQUIREMENT "12.5 MHz" -section_id PCLK_12MHZ
 set_instance_assignment -name CLOCK_SETTINGS PCLK_12MHZ -to PCLK_12MHZ
 set_location_assignment PIN_147 -to A2
+set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
+set_global_assignment -name MUX_RESTRUCTURE OFF
+set_global_assignment -name OPTIMIZE_FAST_CORNER_TIMING ON
