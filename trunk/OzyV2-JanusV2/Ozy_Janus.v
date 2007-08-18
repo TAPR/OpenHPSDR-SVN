@@ -161,17 +161,17 @@
 
 //////////////////////////////////////////////////////////////
 //
-//              Quartus Notes
+//              Quartus V7.1 Notes
 //
 //////////////////////////////////////////////////////////////
 
 /*
 	In order to get this code to compile without timing errors under
-	Quartus V7.1 I needed to use the following settings
+	Quartus V7.1 I needed to use the following settings:
+	
 	- Analysis and Synthesis Settings\Power Up Dont Care [not checked]
-	- Analysis and Synthesis Settings\More Settings...
-		- Restructure Multiplexers  [OFF]
-		- Optimise fast corner timing [ON]
+	- Analysis and Synthesis Settings\Restructure Multiplexers  [OFF]
+	- Fitter Settings\Optimise fast-corner timing [ON]
 	
 */
 
