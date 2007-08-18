@@ -1,4 +1,4 @@
-// V1.92 13th August 2007
+// V1.93 15th August 2007
 //
 // Copyright 2006,2007  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -118,7 +118,7 @@
 //
 //
 //
-// Built with Quartus II v6.1 Build 201
+// Built with Quartus II v7.1 Build 178
 //
 // Change log:  Ported from Duplex.v - 22 July 2006
 //              Code comments updated - 23 July 2006
@@ -154,9 +154,26 @@
 //				Modifed to take 12.5MHz clock from Penelope on Atlas A5 - 28 April 2007
 //				Added temporary logic level from Atlas A2 to force clocks from Penny - 28 April 2007
 //				Test code to auto detect that Penny clock is on Atlas bus - 13 August 2007
+//				Minor chages to enable Quartus V7.1 to be used - 15th August 2007
 //				
 //
 ////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+//
+//              Quartus Notes
+//
+//////////////////////////////////////////////////////////////
+
+/*
+	In order to get this code to compile without timing errors under
+	Quartus V7.1 I needed to use the following settings
+	- Analysis and Synthesis Settings\Power Up Dont Care [not checked]
+	- Analysis and Synthesis Settings\More Settings...
+		- Restructure Multiplexers  [OFF]
+		- Optimise fast corner timing [ON]
+	
+*/
 
 
 //////////////////////////////////////////////////////////////
@@ -294,12 +311,12 @@ output DEBUG_LED3;
 output CBCLK, CLRCLK;           // Clocks to TLV320AIC23B
 output CDIN;                    // Rx data to TLV320AIC23B
 output LROUT;					// Left  and Right audio data in I2S format to Atlas
-input CDOUT;                    // A/D data from TLV320AIC23B
-input PTT_in;                   // PTT active high
+input  CDOUT;                    // A/D data from TLV320AIC23B
+input  PTT_in;                   // PTT active high
 output DFS0,DFS1;               // speed control for AK5394A
 output AK_reset;                // reset for AK5394A
-wire DFS0;						// used to set AK5394A speed
-wire DFS1;						// ditto 
+reg    DFS0;					// used to set AK5394A speed
+reg    DFS1;					// ditto 
 output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
 output CC;						// Command and Control data to Atlas bus 
 input  A2;						// From Penelope, used to select which clock to use 
@@ -447,8 +464,6 @@ assign CLK_48MHZ = IFCLK; 				// 48MHz clock to PWM DAC on Janus
 		else
 			BCLK = BCLK_192
 			LRCLK = LRCLK_192
-		
-		NOTE: clock phases are inverted in some cases!
 */
 
 assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : BCLK_96_48; 
@@ -487,45 +502,27 @@ assign CLK_MCLK = CLK_select ? CLK_12MHZ : PCLK_12MHZ;
 //////////////////////////////////////////////////////////////
 
 /*
-        Add code here to decode Rx_control_0....Rx_control_4.
-        Only decode when  have_sync is true otherwise set safe values.
+	Add code here to decode Rx_control_0....Rx_control_4.
+    Only decode when  have_sync is true otherwise set safe values.
 
+	Decode frequency (for Mercury and Penelope), PTT and Speed 
+
+	The current frequency is set by the PC by decoding 
+	Rx_control_1... Rx_control_4 when Rx_control_0[7:1] = 7'b0000_001
+		
+	The speed the AK5394A runs at, either 192k,96k or 48k is set by
+    the PC by decoding Rx_control_1 when Rx_control_0[7:1] are all zero. Rx_control_1 decodes as
+    follows:
+
+    Rx_control_1 = 8'bxxxx_xx00  - 48kHz
+    Rx_control_1 = 8'bxxxx_xx01  - 96kHz
+    Rx_control_1 = 8'bxxxx_xx10  - 192kHz
+
+	Decode PTT from PowerSDR. Held in Rx_control_0[0]
 */
 
-// decode PTT from PowerSDR. Held in Rx_control_0[0]
-
-reg  PTT_out;
-// assign PTT_out = have_sync ? Rx_control_0[0] : 1'b0;  // Turn PTT off if sync lost
-
-// decode AK5394A speed 
-/*
-        The speed the AK5394A runs at, either 192k,96k or 48k is set by
-        the PC by decoding Rx_control_1 when Rx_control_0[7:1] are all zero. Rx_control_1 decodes as
-        follows:
-
-        Rx_control_1 = 8'bxxxx_xx00  - 48kHz
-        Rx_control_1 = 8'bxxxx_xx01  - 96kHz
-        Rx_control_1 = 8'bxxxx_xx10  - 192kHz
-
-*/
-
-// Can only change  AK5394A speed on posedge BCLK - I found out the hard way!
-
-always @ (posedge BCLK)
-begin
-	if (!AK_reset)							// force speed to 48Khz on AK reset
-		{DFS1,DFS0} <= 2'b00;
-	else {DFS1,DFS0} <= Speed;
-end
-
-// decode frequency for Mercury and Penelope 
-/*
-		The current frequency is set by the PC by decoding 
-		Rx_control_1... Rx_control_4 when Rx_control_0[7:1] = 7'b0000_001
-*/
-
-//assign frequency = (Rx_control_0[7:1] == 7'b0000_001)? {Rx_control_1, Rx_control_2, Rx_control_3, Rx_control_4} : frequency;
 reg [1:0] Speed;
+reg  PTT_out;
 
 always @ (negedge CLRCLK)
 begin 
@@ -537,7 +534,16 @@ begin
 	if (Rx_control_0[7:1] == 7'h00)						// decode speed
 		Speed <= Rx_control_1[1:0];
 	else Speed <= Speed;
-end		 
+end		
+
+// Set speed of AK5394A, can only change  AK5394A speed on posedge BCLK - I found out the hard way!
+
+always @ (posedge BCLK)
+begin
+	if (!AK_reset)							// force speed to 48Khz on AK reset
+		{DFS1,DFS0} <= 2'b00;
+	else {DFS1,DFS0} <= Speed;
+end 
 
 
 //////////////////////////////////////////////////////////////
