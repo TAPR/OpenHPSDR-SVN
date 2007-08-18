@@ -1,5 +1,5 @@
 Assembler report for PennyTestImage
-Thu Apr 26 21:40:28 2007
+Sat Jul 21 19:23:27 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -10,8 +10,8 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/HPSDR/trunk/VK6APH/PennyFPGAtest/PennyTestImage.sof
-  6. Assembler Device Options: C:/HPSDR/trunk/VK6APH/PennyFPGAtest/PennyTestImage.pof
+  5. Assembler Device Options: C:/HPSDR/trunk/VK6APH/PennyFPGAtestV2/PennyTestImage.sof
+  6. Assembler Device Options: C:/HPSDR/trunk/VK6APH/PennyFPGAtestV2/PennyTestImage.pof
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Thu Apr 26 21:40:28 2007 ;
+; Assembler Status      ; Successful - Sat Jul 21 19:23:27 2007 ;
 ; Revision Name         ; PennyTestImage                        ;
 ; Top-level Entity Name ; PennyTestImage                        ;
 ; Family                ; Cyclone II                            ;
@@ -76,37 +76,37 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+----------+---------------+
 
 
-+--------------------------------------------------------+
-; Assembler Generated Files                              ;
-+--------------------------------------------------------+
-; File Name                                              ;
-+--------------------------------------------------------+
-; C:/HPSDR/trunk/VK6APH/PennyFPGAtest/PennyTestImage.sof ;
-; C:/HPSDR/trunk/VK6APH/PennyFPGAtest/PennyTestImage.pof ;
-+--------------------------------------------------------+
++----------------------------------------------------------+
+; Assembler Generated Files                                ;
++----------------------------------------------------------+
+; File Name                                                ;
++----------------------------------------------------------+
+; C:/HPSDR/trunk/VK6APH/PennyFPGAtestV2/PennyTestImage.sof ;
+; C:/HPSDR/trunk/VK6APH/PennyFPGAtestV2/PennyTestImage.pof ;
++----------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------+
-; Assembler Device Options: C:/HPSDR/trunk/VK6APH/PennyFPGAtest/PennyTestImage.sof ;
-+----------------+-----------------------------------------------------------------+
-; Option         ; Setting                                                         ;
-+----------------+-----------------------------------------------------------------+
-; Device         ; EP2C8Q208C8                                                     ;
-; JTAG usercode  ; 0xFFFFFFFF                                                      ;
-; Checksum       ; 0x000BF921                                                      ;
-+----------------+-----------------------------------------------------------------+
++------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/HPSDR/trunk/VK6APH/PennyFPGAtestV2/PennyTestImage.sof ;
++----------------+-------------------------------------------------------------------+
+; Option         ; Setting                                                           ;
++----------------+-------------------------------------------------------------------+
+; Device         ; EP2C8Q208C8                                                       ;
+; JTAG usercode  ; 0xFFFFFFFF                                                        ;
+; Checksum       ; 0x000CF10B                                                        ;
++----------------+-------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------+
-; Assembler Device Options: C:/HPSDR/trunk/VK6APH/PennyFPGAtest/PennyTestImage.pof ;
-+--------------------+-------------------------------------------------------------+
-; Option             ; Setting                                                     ;
-+--------------------+-------------------------------------------------------------+
-; Device             ; EPCS4                                                       ;
-; JTAG usercode      ; 0x00000000                                                  ;
-; Checksum           ; 0x06F08970                                                  ;
-; Compression Ratio  ; 3                                                           ;
-+--------------------+-------------------------------------------------------------+
++------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/HPSDR/trunk/VK6APH/PennyFPGAtestV2/PennyTestImage.pof ;
++--------------------+---------------------------------------------------------------+
+; Option             ; Setting                                                       ;
++--------------------+---------------------------------------------------------------+
+; Device             ; EPCS4                                                         ;
+; JTAG usercode      ; 0x00000000                                                    ;
+; Checksum           ; 0x06EFA36C                                                    ;
+; Compression Ratio  ; 3                                                             ;
++--------------------+---------------------------------------------------------------+
 
 
 +--------------------+
@@ -115,13 +115,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Apr 26 21:40:21 2007
+    Info: Processing started: Sat Jul 21 19:23:20 2007
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off PennyTestImage -c PennyTestImage
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Allocated 125 megabytes of memory during processing
-    Info: Processing ended: Thu Apr 26 21:40:28 2007
+    Info: Processing ended: Sat Jul 21 19:23:27 2007
     Info: Elapsed time: 00:00:07
 
 
