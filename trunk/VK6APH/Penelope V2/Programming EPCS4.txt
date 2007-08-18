@@ -1,0 +1,22 @@
+**** HOw to program EPCS4 and boot FPGA from it *****
+
+In Device and Pin options select 'Active Serial (can use Configuration Device)'
+
+In Configuration Device select 'EPCS4'
+
+In Programmer select Mode: 'Active Serial Programming'
+
+In file select 'Penelope.pof'
+
+In device select 'EPCS4'
+
+Check Program/Configure and Verify for both lines
+
+Set Jumpers on FPGA board to Active Serial
+
+Program!
+
+
+
+
+
