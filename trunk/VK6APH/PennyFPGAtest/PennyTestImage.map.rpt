@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PennyTestImage
-Thu Apr 26 21:40:10 2007
+Sat Jul 21 19:23:10 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -39,14 +39,14 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Apr 26 21:40:10 2007   ;
+; Analysis & Synthesis Status        ; Successful - Sat Jul 21 19:23:10 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; PennyTestImage                          ;
 ; Top-level Entity Name              ; PennyTestImage                          ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 2                                       ;
-;     Total combinational functions  ; 2                                       ;
-;     Dedicated logic registers      ; 0                                       ;
+; Total logic elements               ; 28                                      ;
+;     Total combinational functions  ; 28                                      ;
+;     Dedicated logic registers      ; 28                                      ;
 ; Total registers                    ; N/A until Partition Merge               ;
 ; Total pins                         ; N/A until Partition Merge               ;
 ; Total virtual pins                 ; N/A until Partition Merge               ;
@@ -118,42 +118,42 @@ applicable agreement for further details.
 +--------------------------------------------------------------------+--------------------+--------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                       ;
-+----------------------------------+-----------------+------------------------+----------------------------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                   ;
-+----------------------------------+-----------------+------------------------+----------------------------------------------------------------+
-; PennyTestImage test LPFs.v       ; yes             ; User Verilog HDL File  ; C:/HPSDR/trunk/VK6APH/PennyFPGAtest/PennyTestImage test LPFs.v ;
-+----------------------------------+-----------------+------------------------+----------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                               ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                           ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------+
+; PennyTestImage.v                 ; yes             ; User Verilog HDL File  ; C:/HPSDR/trunk/VK6APH/PennyFPGAtestV2/PennyTestImage.v ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------+
 
 
-+-----------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary         ;
-+---------------------------------------------+-------+
-; Resource                                    ; Usage ;
-+---------------------------------------------+-------+
-; Estimated Total logic elements              ; 2     ;
-;                                             ;       ;
-; Total combinational functions               ; 2     ;
-; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 0     ;
-;     -- 3 input functions                    ; 0     ;
-;     -- <=2 input functions                  ; 2     ;
-;                                             ;       ;
-; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 2     ;
-;     -- arithmetic mode                      ; 0     ;
-;                                             ;       ;
-; Total registers                             ; 0     ;
-;     -- Dedicated logic registers            ; 0     ;
-;     -- I/O registers                        ; 0     ;
-;                                             ;       ;
-; I/O pins                                    ; 0     ;
-; Maximum fan-out node                        ; ~GND  ;
-; Maximum fan-out                             ; 10    ;
-; Total fan-out                               ; 19    ;
-; Average fan-out                             ; 0.90  ;
-+---------------------------------------------+-------+
++-------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary           ;
++---------------------------------------------+---------+
+; Resource                                    ; Usage   ;
++---------------------------------------------+---------+
+; Estimated Total logic elements              ; 28      ;
+;                                             ;         ;
+; Total combinational functions               ; 28      ;
+; Logic element usage by number of LUT inputs ;         ;
+;     -- 4 input functions                    ; 0       ;
+;     -- 3 input functions                    ; 1       ;
+;     -- <=2 input functions                  ; 27      ;
+;                                             ;         ;
+; Logic elements by mode                      ;         ;
+;     -- normal mode                          ; 2       ;
+;     -- arithmetic mode                      ; 26      ;
+;                                             ;         ;
+; Total registers                             ; 28      ;
+;     -- Dedicated logic registers            ; 28      ;
+;     -- I/O registers                        ; 0       ;
+;                                             ;         ;
+; I/O pins                                    ; 0       ;
+; Maximum fan-out node                        ; _125MHZ ;
+; Maximum fan-out                             ; 28      ;
+; Total fan-out                               ; 209     ;
+; Average fan-out                             ; 1.34    ;
++---------------------------------------------+---------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -161,7 +161,7 @@ applicable agreement for further details.
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+
-; |PennyTestImage            ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |PennyTestImage     ;
+; |PennyTestImage            ; 28 (28)           ; 28 (28)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |PennyTestImage     ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -171,7 +171,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 0     ;
+; Total registers                              ; 28    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
@@ -187,38 +187,18 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Apr 26 21:40:09 2007
+    Info: Processing started: Sat Jul 21 19:23:09 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PennyTestImage -c PennyTestImage
-Info: Found 1 design units, including 1 entities, in source file PennyTestImage test LPFs.v
+Info: Found 1 design units, including 1 entities, in source file PennyTestImage.v
     Info: Found entity 1: PennyTestImage
 Info: Elaborating entity "PennyTestImage" for the top level hierarchy
-Warning: Output pins are stuck at VCC or GND
-    Warning: Pin "TXRX" stuck at GND
-    Warning: Pin "nTXRX" stuck at VCC
-    Warning: Pin "_60MLPF" stuck at GND
-    Warning: Pin "n60MLPF" stuck at VCC
-    Warning: Pin "_20MLPF" stuck at GND
-    Warning: Pin "n20MLPF" stuck at VCC
-    Warning: Pin "_40MLPF" stuck at GND
-    Warning: Pin "n40MLPF" stuck at VCC
-    Warning: Pin "_10MLPF" stuck at GND
-    Warning: Pin "n10MLPF" stuck at VCC
-    Warning: Pin "_160MLPF" stuck at GND
-    Warning: Pin "n160MLPF" stuck at VCC
-    Warning: Pin "_6MLPF" stuck at GND
-    Warning: Pin "n6MLPF" stuck at VCC
-    Warning: Pin "_80MLPF" stuck at GND
-    Warning: Pin "n80MLPF" stuck at VCC
-    Warning: Pin "_30MLPF" stuck at GND
-    Warning: Pin "n30MLPF" stuck at VCC
-    Warning: Pin "LED1" stuck at GND
-Info: Implemented 21 device resources after synthesis - the final resource count might be different
-    Info: Implemented 0 input pins
-    Info: Implemented 19 output pins
-    Info: Implemented 2 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 20 warnings
+Info: Implemented 128 device resources after synthesis - the final resource count might be different
+    Info: Implemented 2 input pins
+    Info: Implemented 98 output pins
+    Info: Implemented 28 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 0 warnings
     Info: Allocated 117 megabytes of memory during processing
-    Info: Processing ended: Thu Apr 26 21:40:10 2007
+    Info: Processing ended: Sat Jul 21 19:23:10 2007
     Info: Elapsed time: 00:00:01
 
 

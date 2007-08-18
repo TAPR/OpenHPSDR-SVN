@@ -1,17 +1,17 @@
 //
-// Copyright (c) Bill Tracey 2006 (bill@ewjt.com) Phil Harman 2007 VK6APH 
+// Copyright (c) Bill Tracey KD5TFD  2006 (bill@ewjt.com) Phil Harman 2007 VK6APH (pvharman@arach.net.au)
 //
-// Simple test load for the Penny FPGA -- takes in a clock, divides it down via a register and feeds it out to all the FPGA pins so one can
-// validate board wiring.
+// Simple test program for the Penny FPGA -- takes in a clock, divides it down via a register and 
+// feeds it out to all the FPGA pins so one can validate board wiring.
 
-// This version uses the 10MHz clock source.
+// Select either the 10MHz or 125MHz clock source.
 
-// WARNING: Since this code test all FPGA pins and sets them as outputs make sure no other devices are loaded
+// WARNING: Since this code tests all FPGA pins and sets them as outputs make sure no other devices are loaded
 // on the PCB before running this code. 
 
 
 module PennyTestImage(
-   	//input  _125MHZ,
+   	input  _125MHZ,
 	input  _10MHZ,
 	output A2,
 	output A3,
@@ -67,14 +67,12 @@ module PennyTestImage(
 	output C27,
 	output C29,
 	output C31,
-	output LED1,
 	output LED2,
 	output LED3,
 	output LED4,
 	output LED5,
 	output LED6,
 	output LED7,
-	output LED8,
 	output FPGA_PTT,
 	output USROUT0,
 	output USROUT1,
@@ -99,9 +97,6 @@ module PennyTestImage(
 	output DACD11,
 	output DACD12,
 	output DACD13,
-	output DRVR,
-	output TXRX,
-	output nTXRX,
 	output MOSI,
 	output SSCK,
 	output CMODE,
@@ -118,22 +113,6 @@ module PennyTestImage(
 	output PWM0,
 	output PWM1,
 	output PWM2,
-	output _60MLPF,
-	output n60MLPF,
-	output _20MLPF,
-	output n20MLPF,
-	output _40MLPF,
-	output n40MLPF,
-	output _10MLPF,
-	output n10MLPF,
-	output _160MLPF,
-	output n160MLPF,
-	output _6MLPF,
-	output n6MLPF,
-	output _80MLPF,
-	output n80MLPF,
-	output _30MLPF,
-	output n30MLPF,
 	output LVDSCLK,
 	output nLVDSRXE,
 	output LVDSTXE 
@@ -174,8 +153,8 @@ module PennyTestImage(
 
 reg [27:0] clock_reg;
 
-//always @ ( posedge  _125MHZ ) begin
-always @ ( posedge  _10MHZ ) begin
+always @ ( posedge  _125MHZ ) begin
+//always @ ( posedge  _10MHZ ) begin
         clock_reg <= clock_reg + 1'b1;
 end
 
@@ -233,14 +212,12 @@ end
 	assign C27 = clock_reg[18];
 	assign C29 = clock_reg[19];
 	assign C31 = clock_reg[20];
-	assign LED1 = clock_reg[19];
 	assign LED2 = clock_reg[20];
 	assign LED3 = clock_reg[21];
 	assign LED4 = clock_reg[22];
 	assign LED5 = clock_reg[23];
 	assign LED6 = clock_reg[24];
 	assign LED7 = clock_reg[25];
-	assign LED8 = clock_reg[26];
 	assign FPGA_PTT = clock_reg[23];
 	assign USROUT0 = clock_reg[22];
 	assign USROUT1 = clock_reg[21];
@@ -265,9 +242,6 @@ end
 	assign DACD11 = clock_reg[3];
 	assign DACD12 = clock_reg[2];
 	assign DACD13 = clock_reg[2];
-	assign DRVR	 = clock_reg[2];
-	assign TXRX  = clock_reg[2];
-	assign nTXRX = clock_reg[4];
 	assign MOSI = clock_reg[2];
 	assign SSCK = clock_reg[2];
 	assign CMODE = clock_reg[2];
@@ -284,22 +258,6 @@ end
 	assign PWM0 = clock_reg[2];
 	assign PWM1 = clock_reg[2];
 	assign PWM2 = clock_reg[2];
-	assign _60MLPF = clock_reg[2];
-	assign n60MLPF = clock_reg[4];
-	assign _20MLPF = clock_reg[2];
-	assign n20MLPF = clock_reg[4];
-	assign _40MLPF = clock_reg[2];
-	assign n40MLPF = clock_reg[4];
-	assign _10MLPF = clock_reg[2];
-	assign n10MLPF = clock_reg[4];
-	assign _160MLPF = clock_reg[2];
-	assign n160MLPF = clock_reg[4];
-	assign _6MLPF = clock_reg[2];
-	assign n6MLPF = clock_reg[4];
-	assign _80MLPF = clock_reg[2];
-	assign n80MLPF = clock_reg[4];
-	assign _30MLPF = clock_reg[2];
-	assign n30MLPF = clock_reg[4];
 	assign LVDSCLK = clock_reg[2];
 	assign nLVDSRXE = clock_reg[2];
 	assign LVDSTXE = clock_reg[2];
