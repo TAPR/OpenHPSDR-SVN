@@ -1,0 +1,22 @@
+
+State Machine - |Penelope|IQ_state
+Name IQ_state.001 IQ_state.010 IQ_state.011 IQ_state.000 IQ_state.100 
+IQ_state.000 0 0 0 0 0 
+IQ_state.011 0 0 1 1 0 
+IQ_state.010 0 1 0 1 0 
+IQ_state.001 1 0 0 1 0 
+IQ_state.100 0 0 0 1 1 
+
+State Machine - |Penelope|CC_state
+Name CC_state.00 CC_state.10 CC_state.01 
+CC_state.00 0 0 0 
+CC_state.01 1 0 1 
+CC_state.10 1 1 0 
+
+State Machine - |Penelope|ADC:ADC_SPI|ADC
+Name ADC.001 ADC.010 ADC.011 ADC.000 ADC.100 
+ADC.000 0 0 0 0 0 
+ADC.011 0 0 1 1 0 
+ADC.010 0 1 0 1 0 
+ADC.100 0 0 0 1 1 
+ADC.001 1 0 0 1 0 

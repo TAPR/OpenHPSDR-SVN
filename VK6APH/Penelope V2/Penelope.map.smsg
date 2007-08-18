@@ -1,0 +1,242 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Tue Jul 17 20:31:47 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
+Info: Found 1 design units, including 1 entities, in source file ALC.v
+    Info: Found entity 1: ALC
+Info: Found 1 design units, including 1 entities, in source file ADC.v
+    Info: Found entity 1: ADC
+Info: Found 1 design units, including 1 entities, in source file division.v
+    Info: Found entity 1: division
+Warning: Entity "divide" obtained from "C:/HPSDR/trunk/VK6APH/Penelope V2/divide.v" instead of from Quartus II megafunction library
+Info: Found 1 design units, including 1 entities, in source file divide.v
+    Info: Found entity 1: divide
+Info: Found 1 design units, including 1 entities, in source file phase_accumulator.v
+    Info: Found entity 1: phase_accumulator
+Info: Found 1 design units, including 1 entities, in source file cicint.v
+    Info: Found entity 1: cicint
+Info: Found 1 design units, including 1 entities, in source file cordic.v
+    Info: Found entity 1: cordic
+Info: Found 1 design units, including 1 entities, in source file cordic_stage.v
+    Info: Found entity 1: cordic_stage
+Info: Found 1 design units, including 1 entities, in source file Penelope.v
+    Info: Found entity 1: Penelope
+Info: Elaborating entity "Penelope" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(614): object "Address" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(617): object "OC" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(618): object "Mode" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(436): object "LED8" assigned a value but never read
+Info: Elaborating entity "ADC" for hierarchy "ADC:ADC_SPI"
+Info: Elaborating entity "division" for hierarchy "division:division_DDS"
+Info: Elaborating entity "ALC" for hierarchy "ALC:ALC_I"
+Warning (10230): Verilog HDL assignment warning at ALC.v(22): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at ALC.v(26): truncated value with size 32 to match size of target (16)
+Info: Elaborating entity "cicint" for hierarchy "cicint:cic_I"
+Warning (10230): Verilog HDL assignment warning at cicint.v(190): truncated value with size 32 to match size of target (11)
+Warning (10230): Verilog HDL assignment warning at cicint.v(196): truncated value with size 32 to match size of target (1)
+Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
+Info: Elaborating entity "cordic" for hierarchy "cordic:rx_cordic"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage0"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage1"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage2"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage3"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage4"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage5"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage6"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage7"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage8"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage9"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage10"
+Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage11"
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage11" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage10" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage9" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage8" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage7" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage6" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage5" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage4" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage3" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage2" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage1" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage0" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Warning: Reduced register "tdata[15]" with stuck data_in port to stuck value GND
+Warning: Reduced register "tdata[14]" with stuck data_in port to stuck value GND
+Warning: Reduced register "tdata[13]" with stuck data_in port to stuck value GND
+Warning: Reduced register "tdata[8]" with stuck data_in port to stuck value GND
+Warning: Reduced register "tdata[7]" with stuck data_in port to stuck value GND
+Warning: Reduced register "tdata[6]" with stuck data_in port to stuck value GND
+Warning: Reduced register "tdata[5]" with stuck data_in port to stuck value GND
+Warning: Reduced register "tdata[3]" with stuck data_in port to stuck value GND
+Warning: Reduced register "TLV[3]" with stuck data_in port to stuck value GND
+Warning: Reduced register "TLV_data[15]" with stuck data_in port to stuck value GND
+Warning: Reduced register "TLV_data[14]" with stuck data_in port to stuck value GND
+Warning: Reduced register "TLV_data[13]" with stuck data_in port to stuck value GND
+Warning: Reduced register "TLV_data[8]" with stuck data_in port to stuck value GND
+Warning: Reduced register "TLV_data[7]" with stuck data_in port to stuck value GND
+Warning: Reduced register "TLV_data[6]" with stuck data_in port to stuck value GND
+Warning: Reduced register "TLV_data[5]" with stuck data_in port to stuck value GND
+Warning: Reduced register "TLV_data[3]" with stuck data_in port to stuck value GND
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "PWM2_Data_in[15]" merged to single register "PWM0_Data_in[15]"
+    Info: Duplicate register "PWM2_Data_in[14]" merged to single register "PWM0_Data_in[14]"
+    Info: Duplicate register "PWM2_Data_in[13]" merged to single register "PWM0_Data_in[13]"
+    Info: Duplicate register "PWM2_Data_in[12]" merged to single register "PWM0_Data_in[12]"
+    Info: Duplicate register "PWM2_Data_in[11]" merged to single register "PWM0_Data_in[11]"
+    Info: Duplicate register "PWM2_Data_in[10]" merged to single register "PWM0_Data_in[10]"
+    Info: Duplicate register "PWM2_Data_in[9]" merged to single register "PWM0_Data_in[9]"
+    Info: Duplicate register "PWM2_Data_in[8]" merged to single register "PWM0_Data_in[8]"
+    Info: Duplicate register "PWM2_Data_in[7]" merged to single register "PWM0_Data_in[7]"
+    Info: Duplicate register "PWM2_Data_in[6]" merged to single register "PWM0_Data_in[6]"
+    Info: Duplicate register "PWM2_Data_in[5]" merged to single register "PWM0_Data_in[5]"
+    Info: Duplicate register "PWM2_Data_in[4]" merged to single register "PWM0_Data_in[4]"
+    Info: Duplicate register "PWM2_Data_in[3]" merged to single register "PWM0_Data_in[3]"
+    Info: Duplicate register "PWM2_Data_in[2]" merged to single register "PWM0_Data_in[2]"
+    Info: Duplicate register "PWM2_Data_in[1]" merged to single register "PWM0_Data_in[1]"
+    Info: Duplicate register "PWM2_Data_in[0]" merged to single register "PWM0_Data_in[0]"
+    Info: Duplicate register "cicint:cic_Q|diff1[15]" merged to single register "cicint:cic_Q|diff1[16]"
+    Info: Duplicate register "cicint:cic_Q|diff2[16]" merged to single register "cicint:cic_Q|diff2[17]"
+    Info: Duplicate register "cicint:cic_Q|diff3[17]" merged to single register "cicint:cic_Q|diff3[18]"
+    Info: Duplicate register "cicint:cic_Q|diff4[18]" merged to single register "cicint:cic_Q|diff4[19]"
+    Info: Duplicate register "cicint:cic_I|diff1[15]" merged to single register "cicint:cic_I|diff1[16]"
+    Info: Duplicate register "cicint:cic_I|diff2[16]" merged to single register "cicint:cic_I|diff2[17]"
+    Info: Duplicate register "cicint:cic_I|diff3[17]" merged to single register "cicint:cic_I|diff3[18]"
+    Info: Duplicate register "cicint:cic_I|diff4[18]" merged to single register "cicint:cic_I|diff4[19]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cicint:cic_I|cur_count[9]" merged to single register "cicint:cic_Q|cur_count[9]"
+    Info: Duplicate register "cicint:cic_I|cur_count[8]" merged to single register "cicint:cic_Q|cur_count[8]"
+    Info: Duplicate register "cicint:cic_I|cur_count[7]" merged to single register "cicint:cic_Q|cur_count[7]"
+    Info: Duplicate register "cicint:cic_I|cur_count[6]" merged to single register "cicint:cic_Q|cur_count[6]"
+    Info: Duplicate register "cicint:cic_I|cur_count[5]" merged to single register "cicint:cic_Q|cur_count[5]"
+    Info: Duplicate register "cicint:cic_I|cur_count[4]" merged to single register "cicint:cic_Q|cur_count[4]"
+    Info: Duplicate register "cicint:cic_I|cur_count[3]" merged to single register "cicint:cic_Q|cur_count[3]"
+    Info: Duplicate register "cicint:cic_I|cur_count[2]" merged to single register "cicint:cic_Q|cur_count[2]"
+    Info: Duplicate register "cicint:cic_I|cur_count[1]" merged to single register "cicint:cic_Q|cur_count[1]"
+    Info: Duplicate register "cicint:cic_I|cur_count[0]" merged to single register "cicint:cic_Q|cur_count[0]"
+    Info: Duplicate register "cicint:cic_I|ce_out_reg" merged to single register "cicint:cic_Q|ce_out_reg"
+    Info: Duplicate register "cicint:cic_I|cur_count[10]" merged to single register "cicint:cic_Q|cur_count[10]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "tdata[2]" merged to single register "tdata[4]"
+    Info: Duplicate register "TLV_data[2]" merged to single register "TLV_data[4]"
+    Info: Duplicate register "PWM2_accumulator[0]" merged to single register "PWM0_accumulator[0]"
+    Info: Duplicate register "PWM2_accumulator[1]" merged to single register "PWM0_accumulator[1]"
+    Info: Duplicate register "PWM2_accumulator[2]" merged to single register "PWM0_accumulator[2]"
+    Info: Duplicate register "PWM2_accumulator[3]" merged to single register "PWM0_accumulator[3]"
+    Info: Duplicate register "PWM2_accumulator[4]" merged to single register "PWM0_accumulator[4]"
+    Info: Duplicate register "PWM2_accumulator[5]" merged to single register "PWM0_accumulator[5]"
+    Info: Duplicate register "PWM2_accumulator[6]" merged to single register "PWM0_accumulator[6]"
+    Info: Duplicate register "PWM2_accumulator[7]" merged to single register "PWM0_accumulator[7]"
+    Info: Duplicate register "PWM2_accumulator[8]" merged to single register "PWM0_accumulator[8]"
+    Info: Duplicate register "PWM2_accumulator[9]" merged to single register "PWM0_accumulator[9]"
+    Info: Duplicate register "PWM2_accumulator[10]" merged to single register "PWM0_accumulator[10]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "PWM2_accumulator[11]" merged to single register "PWM0_accumulator[11]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "PWM2_accumulator[12]" merged to single register "PWM0_accumulator[12]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "PWM2_accumulator[13]" merged to single register "PWM0_accumulator[13]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "PWM2_accumulator[14]" merged to single register "PWM0_accumulator[14]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "PWM2_accumulator[15]" merged to single register "PWM0_accumulator[15]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "PWM2_accumulator[16]" merged to single register "PWM0_accumulator[16]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cordic:rx_cordic|Qstage0[16]" merged to single register "cordic:rx_cordic|Qstage0[17]"
+    Info: Duplicate register "cordic:rx_cordic|Istage0[17]" merged to single register "cordic:rx_cordic|Istage0[16]"
+Info: State machine "|Penelope|IQ_state" contains 5 states
+Info: State machine "|Penelope|CC_state" contains 3 states
+Info: State machine "|Penelope|ADC:ADC_SPI|ADC" contains 5 states
+Info: Selected Auto state machine encoding method for state machine "|Penelope|IQ_state"
+Info: Encoding result for state machine "|Penelope|IQ_state"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "IQ_state.001"
+        Info: Encoded state bit "IQ_state.010"
+        Info: Encoded state bit "IQ_state.011"
+        Info: Encoded state bit "IQ_state.000"
+        Info: Encoded state bit "IQ_state.100"
+    Info: State "|Penelope|IQ_state.000" uses code string "00000"
+    Info: State "|Penelope|IQ_state.011" uses code string "00110"
+    Info: State "|Penelope|IQ_state.010" uses code string "01010"
+    Info: State "|Penelope|IQ_state.001" uses code string "10010"
+    Info: State "|Penelope|IQ_state.100" uses code string "00011"
+Info: Selected Auto state machine encoding method for state machine "|Penelope|CC_state"
+Info: Encoding result for state machine "|Penelope|CC_state"
+    Info: Completed encoding using 3 state bits
+        Info: Encoded state bit "CC_state.00"
+        Info: Encoded state bit "CC_state.10"
+        Info: Encoded state bit "CC_state.01"
+    Info: State "|Penelope|CC_state.00" uses code string "000"
+    Info: State "|Penelope|CC_state.01" uses code string "101"
+    Info: State "|Penelope|CC_state.10" uses code string "110"
+Info: Selected Auto state machine encoding method for state machine "|Penelope|ADC:ADC_SPI|ADC"
+Info: Encoding result for state machine "|Penelope|ADC:ADC_SPI|ADC"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "ADC:ADC_SPI|ADC.001"
+        Info: Encoded state bit "ADC:ADC_SPI|ADC.010"
+        Info: Encoded state bit "ADC:ADC_SPI|ADC.011"
+        Info: Encoded state bit "ADC:ADC_SPI|ADC.000"
+        Info: Encoded state bit "ADC:ADC_SPI|ADC.100"
+    Info: State "|Penelope|ADC:ADC_SPI|ADC.000" uses code string "00000"
+    Info: State "|Penelope|ADC:ADC_SPI|ADC.011" uses code string "00110"
+    Info: State "|Penelope|ADC:ADC_SPI|ADC.010" uses code string "01010"
+    Info: State "|Penelope|ADC:ADC_SPI|ADC.100" uses code string "00011"
+    Info: State "|Penelope|ADC:ADC_SPI|ADC.001" uses code string "10010"
+Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_divide.tdf
+    Info: Found entity 1: lpm_divide
+Info: Elaborated megafunction instantiation "ALC:ALC_I|lpm_divide:Div0"
+Info: Found 1 design units, including 1 entities, in source file db/lpm_divide_vfm.tdf
+    Info: Found entity 1: lpm_divide_vfm
+Info: Found 1 design units, including 1 entities, in source file db/sign_div_unsign_9nh.tdf
+    Info: Found entity 1: sign_div_unsign_9nh
+Info: Found 1 design units, including 1 entities, in source file db/alt_u_div_k5f.tdf
+    Info: Found entity 1: alt_u_div_k5f
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_lkc.tdf
+    Info: Found entity 1: add_sub_lkc
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_mkc.tdf
+    Info: Found entity 1: add_sub_mkc
+Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_mult.tdf
+    Info: Found entity 1: lpm_mult
+Info: Elaborated megafunction instantiation "ALC:ALC_I|lpm_mult:Mult0"
+Info: Found 1 design units, including 1 entities, in source file db/mult_dv01.tdf
+    Info: Found entity 1: mult_dv01
+Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_add_sub.tdf
+    Info: Found entity 1: lpm_add_sub
+Info: Elaborated megafunction instantiation "cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1"
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_sjg.tdf
+    Info: Found entity 1: add_sub_sjg
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "A2" stuck at VCC
+    Warning: Pin "LED1" stuck at VCC
+    Warning: Pin "LED6" stuck at GND
+    Warning: Pin "LED7" stuck at VCC
+    Warning: Pin "USEROUT0" stuck at GND
+    Warning: Pin "USEROUT1" stuck at GND
+    Warning: Pin "USEROUT2" stuck at GND
+    Warning: Pin "USEROUT3" stuck at GND
+    Warning: Pin "USEROUT4" stuck at GND
+    Warning: Pin "USEROUT5" stuck at GND
+    Warning: Pin "USEROUT6" stuck at GND
+    Warning: Pin "nLVDSRXE" stuck at GND
+    Warning: Pin "LVDSTXE" stuck at VCC
+    Warning: Pin "CMODE" stuck at VCC
+Info: 6 registers lost all their fanouts during netlist optimizations. The first 6 are displayed below.
+    Info: Register "rx_cordic/cordic_stage10/Iout[17]" lost all its fanouts during netlist optimizations.
+    Info: Register "IQ_state~7" lost all its fanouts during netlist optimizations.
+    Info: Register "IQ_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "ADC_SPI/ADC~8" lost all its fanouts during netlist optimizations.
+    Info: Register "ADC_SPI/ADC~9" lost all its fanouts during netlist optimizations.
+    Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
+Info: Found the following redundant logic cells in design
+    Info: Logic cell "ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider|add_sub_15_result_int[0]~62"
+Info: Implemented 3444 device resources after synthesis - the final resource count might be different
+    Info: Implemented 12 input pins
+    Info: Implemented 53 output pins
+    Info: Implemented 2 bidirectional pins
+    Info: Implemented 3369 logic cells
+    Info: Implemented 8 DSP elements
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 53 warnings
+    Info: Allocated 142 megabytes of memory during processing
+    Info: Processing ended: Tue Jul 17 20:32:54 2007
+    Info: Elapsed time: 00:01:07
