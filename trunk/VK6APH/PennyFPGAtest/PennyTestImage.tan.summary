@@ -5,21 +5,21 @@ Timing Analyzer Summary
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.804 ns
+Actual Time    : 12.499 ns
 From           : clock_reg[20]
-To             : C31
-From Clock     : _125MHZ
+To             : A22
+From Clock     : _10MHZ
 To Clock       : --
 Failed Paths   : 0
 
-Type           : Clock Setup: '_125MHZ'
+Type           : Clock Setup: '_10MHZ'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 226.81 MHz ( period = 4.409 ns )
+Actual Time    : 226.50 MHz ( period = 4.415 ns )
 From           : clock_reg[1]
 To             : clock_reg[27]
-From Clock     : _125MHZ
-To Clock       : _125MHZ
+From Clock     : _10MHZ
+To Clock       : _10MHZ
 Failed Paths   : 0
 
 Type           : Total number of failed paths

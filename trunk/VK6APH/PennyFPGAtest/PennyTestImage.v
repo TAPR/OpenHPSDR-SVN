@@ -115,7 +115,8 @@ module PennyTestImage(
 	output PWM2,
 	output LVDSCLK,
 	output nLVDSRXE,
-	output LVDSTXE 
+	output LVDSTXE,
+	output nCS 
 
 	); 
 
@@ -153,9 +154,9 @@ module PennyTestImage(
 
 reg [27:0] clock_reg;
 
-always @ ( posedge  _125MHZ ) begin
-//always @ ( posedge  _10MHZ ) begin
-        clock_reg <= clock_reg + 1'b1;
+//always @ ( posedge  _125MHZ ) begin
+always @ ( posedge _10MHZ ) begin
+   clock_reg <= clock_reg + 1'b1;
 end
 
 	assign A2 = clock_reg[0];
@@ -261,5 +262,6 @@ end
 	assign LVDSCLK = clock_reg[2];
 	assign nLVDSRXE = clock_reg[2];
 	assign LVDSTXE = clock_reg[2];
+	assign nCS = clock_reg[2];
 
 endmodule
