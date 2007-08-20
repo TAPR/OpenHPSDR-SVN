@@ -1,5 +1,5 @@
-Fitter Status : Successful - Sat Jul 21 19:23:18 2007
-Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
+Fitter Status : Successful - Mon Aug 20 21:49:15 2007
+Quartus II Version : 7.1 Build 178 06/25/2007 SP 1 SJ Web Edition
 Revision Name : PennyTestImage
 Top-level Entity Name : PennyTestImage
 Family : Cyclone II
@@ -9,7 +9,7 @@ Total logic elements : 28 / 8,256 ( < 1 % )
     Total combinational functions : 28 / 8,256 ( < 1 % )
     Dedicated logic registers : 28 / 8,256 ( < 1 % )
 Total registers : 28
-Total pins : 100 / 138 ( 72 % )
+Total pins : 101 / 138 ( 73 % )
 Total virtual pins : 0
 Total memory bits : 0 / 165,888 ( 0 % )
 Embedded Multiplier 9-bit elements : 0 / 36 ( 0 % )
