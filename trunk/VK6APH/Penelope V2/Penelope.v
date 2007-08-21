@@ -89,7 +89,6 @@ module Penelope(
 				input  C9, 			// CLRCLK from Atlas bus
 				input  C12,			// CDIN (I&Q) from Atlas bus
 				input  C17, 		// CLK_MCLK from Atlas bus
-				output LED1,
 				output LED2,
 				output LED3,
 				output LED4,
@@ -120,7 +119,6 @@ module Penelope(
 				output CLRCOUT,
 				output CMCLK,		// 12.5MHz CLK_MCLK from Atlas C17
 				input  CC, 			// Command & Control data from Ozy C12
-				output LROUT,		// Rx audio from Atlas C4
 				output ADCMOSI,
 				output ADCCLK,
 				input  ADCMISO,
