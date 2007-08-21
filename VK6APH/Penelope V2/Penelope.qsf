@@ -120,3 +120,5 @@ set_global_assignment -name VERILOG_FILE cordic.v
 set_global_assignment -name VERILOG_FILE cordic_stage.v
 set_global_assignment -name VERILOG_FILE Penelope.v
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_location_assignment PIN_70 -to CC
