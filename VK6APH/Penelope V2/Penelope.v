@@ -68,7 +68,8 @@
 //		C17		CLK_MCLK	12.5MHz master clock to Atlas bus
 //		C11		CDOUT		I2S mic data to Ozy
 //		C8		CBCLK		~3MHZ clock from Atlas via Ozy
-//		C9		CLRCLK		48.8kHz clock from Atlas via Ozy	
+//		C9		CLRCLK		48.8kHz clock from Atlas via Ozy
+//		C4      LRCLK 		LR Rx Audio from Atlas via Ozy 	
 //		C20		CC			Command and Control data from Ozy       
 //		A2      +3.3v		Indicates Penelope is present on Altas bus
 //
@@ -117,6 +118,7 @@ module Penelope(
 				output CBCLK,
 				output CLRCIN,
 				output CLRCOUT,
+				output LROUT,		// LR Rx audio from Atlas C4
 				output CMCLK,		// 12.5MHz CLK_MCLK from Atlas C17
 				input  CC, 			// Command & Control data from Ozy C12
 				output ADCMOSI,
@@ -443,7 +445,7 @@ assign set_level = 16'h9999; // corresponds to 0.9999 i.e. unity gain
 
 //light LED when input level > set_level
 
-assign LED7 = (AIN5 > set_level) ? 1'b0 : 1'b1;
+//assign LED7 = (AIN5 > set_level) ? 1'b0 : 1'b1;
 
 assign gain = (set_level - AIN5);
 
@@ -727,11 +729,13 @@ assign FPGA_PLL = ref_2_5M ^ osc_2_5M;
 
 // LEDs for testing				PCB LED Marking
 
-assign LED6 = 0;				// LED6 ON 
-assign LED5 = ~AIN5[11];		// LED5 - 2 bar gragh showing signal level
-assign LED4 = ~AIN5[10]; 		// LED4
-assign LED3 = ~AIN5[9]; 		// LED3
-assign LED2 = ~AIN5[8]; 		// LED2		
+assign LED7 = 0;				// LED7 ON so we can see code has loaded OK 
+ 
+assign LED6 = ~AIN5[11];		// LED6 -  bar gragh showing signal level
+assign LED5 = ~AIN5[10]; 		// LED5
+assign LED4 = ~AIN5[9]; 		// LED4
+assign LED3 = ~AIN5[8]; 		// LED3
+assign LED2 = ~AIN5[7];			// LED2 		
 
 
 // User outputs TODO: Map these to OC
