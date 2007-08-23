@@ -218,7 +218,7 @@ GNDA_PLL2                    : 158       : gnd    :                   :         
 GND                          : 159       : gnd    :                   :         :           :                
 CDOUT                        : 160       : input  : 3.3-V LVTTL       :         : 2         : Y              
 CLRCIN                       : 161       : output : 3.3-V LVTTL       :         : 2         : Y              
-RESERVED_INPUT               : 162       :        :                   :         : 2         :                
+LROUT                        : 162       : output : 3.3-V LVTTL       :         : 2         : Y              
 CBCLK                        : 163       : output : 3.3-V LVTTL       :         : 2         : Y              
 CMCLK                        : 164       : output : 3.3-V LVTTL       :         : 2         : Y              
 SSCK                         : 165       : output : 3.3-V LVTTL       :         : 2         : Y              
