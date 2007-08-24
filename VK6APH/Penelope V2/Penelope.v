@@ -1,4 +1,4 @@
-// V1.0 17th July 2007
+// V1.1 24th August 2007
 //
 // Copyright 2007 Phil Harman VK6APH
 //
@@ -50,6 +50,7 @@
 	Change log:
 	
 	17 Jul  2007 - Modified V1 code to commence this version
+	24 Aug  2007 - Added RF output bar graph on LEDs
 	
 	
 	
@@ -670,7 +671,7 @@ assign  FPGA_PTT = PTT_out;		   // turn PTT FET Q3 on when Txing
 
 /* 
 	Divide the 10MHz reference and 125MHz clock to give 2.5MHz signals.
-	Apply these to an EXOR phase detector. If the 10NHz reference is not
+	Apply these to an EXOR phase detector. If the 10MHz reference is not
 	present the EXOR output will be a 2.5MHz square wave. When passed through 
 	the loop filter this will provide a dc level of (3.3/2)v which will
 	set the 125MHz VCXO to its nominal frequency.
@@ -730,13 +731,14 @@ assign FPGA_PLL = ref_2_5M ^ osc_2_5M;
 // LEDs for testing				PCB LED Marking
 
 assign LED7 = 0;				// LED7 ON so we can see code has loaded OK 
- 
-assign LED6 = ~AIN5[11];		// LED6 -  bar gragh showing signal level
-assign LED5 = ~AIN5[10]; 		// LED5
-assign LED4 = ~AIN5[9]; 		// LED4
-assign LED3 = ~AIN5[8]; 		// LED3
-assign LED2 = ~AIN5[7];			// LED2 		
 
+// Bar graph for power output - 50mW = 1295
+
+assign LED2 = (AIN5 > 250)?  1'b0 : 1'b1;  // 0.1W = 1831
+assign LED3 = (AIN5 > 500)? 1'b0 : 1'b1;  // 0.2W = 2590
+assign LED4 = (AIN5 > 1000)? 1'b0 : 1'b1;  // 0.3W = 3172
+assign LED5 = (AIN5 > 2000)? 1'b0 : 1'b1;  // 0.4W = 3663
+assign LED6 = (AIN5 > 3000)? 1'b0 : 1'b1;  // 0.5W = 4096
 
 // User outputs TODO: Map these to OC
 assign USEROUT0 = 0;
