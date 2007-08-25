@@ -5,7 +5,7 @@
 //  HPSDR - High Performance Software Defined Radio
 //
 //
-//  ADC module
+//  ADC module for driving ADC78H90 
 //
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -22,11 +22,11 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA// SCI inteface to ADC78H90 
 
-// Penelope uses inputs AIN1 to AIN5
-// SCLK can run at 8MHz max and is = clock/4 
-// Note: AINx data can be latched using nCS
+//  Penelope uses inputs AIN1 to AIN5
+//  SCLK can run at 8MHz max and is = clock/4 
+//  Note: AINx data can be latched using nCS
 
-// for testing just use AIN5 the Forward Power sensor value
+//  for now just use AIN5 the Forward Power sensor value
 
 module ADC(clock, SCLK, nCS, MISO, MOSI, AIN5);
 
@@ -47,6 +47,8 @@ reg  [11:0] AIN5; 		// reg holds VFWD volts
 reg [11:0] temp_AIN5;	// 
 
 assign data = 16'b0010_0000_0000_0000; // address of AIN5
+
+// NOTE: this code generates the SCLK clock for the ADC
 
 always @ (posedge clock)
 begin

@@ -1,9 +1,0 @@
-<?xml version="1.0" ?>
-<LOG_ROOT>
-	<PROJECT NAME="Penelope">
-		<CBX_INST_ENTRY INSTANCE_NAME="|Penelope|ALC:ALC_I|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_vfm.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Penelope|ALC:ALC_I|lpm_mult:Mult0" CBX_FILE_NAME="mult_dv01.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Penelope|ALC:ALC_Q|lpm_mult:Mult0" CBX_FILE_NAME="mult_dv01.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Penelope|cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1" CBX_FILE_NAME="add_sub_sjg.tdf"/>
-	</PROJECT>
-</LOG_ROOT>
