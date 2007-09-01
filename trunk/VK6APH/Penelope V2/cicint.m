@@ -1,15 +1,15 @@
 %Create CIC Interpolating Filter
-%Create a 5-stage CIC Interpolator with interpolation factor of 2048.
-%The input and output wordlengths are set to 14. 
+%Create a 5-stage CIC Interpolator with interpolation factor of 2560.
+%The input and output wordlengths are set to 16. 
 
-Fs = 100e6;  % Sampling rate 100 MHz
-R = 2048; % interpolation value
+Fs = 125e6;  % Sampling rate 125 MHz
+R = 2560; % interpolation value
 M = 1; % differential delay
 N = 5; % number of sections
-IWL = 14; % number of bits in input data
-OWL = 14; % number of bits in output data
+IWL = 16; % number of bits in input data
+OWL = 16; % number of bits in output data
 
-Frequency = 100e6;
+Frequency = 125e6;
 
 hcic = mfilt.cicinterp(R, M, N, IWL, OWL);
 hcic.inputfraclength = 0;

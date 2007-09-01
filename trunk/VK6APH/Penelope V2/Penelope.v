@@ -1,4 +1,4 @@
-// V1.1 24th August 2007
+// V1.2  1st September 2007
 //
 // Copyright 2007 Phil Harman VK6APH
 //
@@ -29,7 +29,7 @@
 	The data to the AD9744  is in 14 bit parallel format and 
 	is sent at the negative edge of the 125MHz clock.
 	
-	The ~48kHz I and Q data from PowerSDR is interpolated by 2048 in a CIC filter to 
+	The ~48kHz I and Q data from PowerSDR is interpolated by 2560 in a CIC filter to 
 	give a data rate of 125MHz. The I and Q data in I2S format is taken from the 
 	Atlas bus. 
 	
@@ -51,6 +51,8 @@
 	
 	17 Jul  2007 - Modified V1 code to commence this version
 	24 Aug  2007 - Added RF output bar graph on LEDs
+	31 Aug  2007 - Changed CIC to interpolate by 2560 for use with 125MHz clock
+	 1 Sep  2007 - Added gain after CORDIC so we can drive to 1/2W on 6m
 	
 	
 	
@@ -477,7 +479,7 @@ end
 
 ////////////////////////////////////////////////////////////////
 //
-//  Interpolating CIC filter  R = 2048 N = 5
+//  Interpolating CIC filter  R = 2560  N = 5
 //
 ////////////////////////////////////////////////////////////////
 
@@ -528,8 +530,13 @@ cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(cic_out_i),.Qin(cic_out_q)
     	  = cos(f1 + f2) + j sin(f1 + f2)
 */
 
-assign DAC[13:0] = i_out[15:2];  // use q_out if 90 degree phase shift required by EER Tx etc
+// add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This may not be
+// necessary when we replace the USRP CORDIC with Darrell's since his has more gain. 
+// ALC needs fixing with this gain module in place. 
+// Current gain is x4, a hack using left shifts. 
 
+//assign DAC[13:0] = {i_out[15], i_out[13:1]};  // use q_out if 90 degree phase shift required by EER Tx etc
+assign DAC[13:0] = {i_out[15], i_out[12:0]};  // use q_out if 90 degree phase shift required by EER Tx etc
 
 /////////////////////////////////////////////////////////////////
 //

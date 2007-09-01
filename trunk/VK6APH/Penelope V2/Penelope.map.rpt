@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Penelope
-Fri Aug 24 21:49:31 2007
+Sat Sep 01 11:50:23 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -68,14 +68,14 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Aug 24 21:49:31 2007   ;
+; Analysis & Synthesis Status        ; Successful - Sat Sep 01 11:50:23 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                ;
 ; Top-level Entity Name              ; Penelope                                ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 2,892                                   ;
-;     Total combinational functions  ; 2,892                                   ;
-;     Dedicated logic registers      ; 2,010                                   ;
+; Total logic elements               ; 2,931                                   ;
+;     Total combinational functions  ; 2,931                                   ;
+;     Dedicated logic registers      ; 1,833                                   ;
 ; Total registers                    ; N/A until Partition Merge               ;
 ; Total pins                         ; N/A until Partition Merge               ;
 ; Total virtual pins                 ; N/A until Partition Merge               ;
@@ -189,28 +189,28 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 2,892   ;
+; Estimated Total logic elements              ; 2,931   ;
 ;                                             ;         ;
-; Total combinational functions               ; 2892    ;
+; Total combinational functions               ; 2931    ;
 ; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 350     ;
-;     -- 3 input functions                    ; 1560    ;
-;     -- <=2 input functions                  ; 982     ;
+;     -- 4 input functions                    ; 316     ;
+;     -- 3 input functions                    ; 1599    ;
+;     -- <=2 input functions                  ; 1016    ;
 ;                                             ;         ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 1260    ;
-;     -- arithmetic mode                      ; 1632    ;
+;     -- normal mode                          ; 1273    ;
+;     -- arithmetic mode                      ; 1658    ;
 ;                                             ;         ;
-; Total registers                             ; 2010    ;
-;     -- Dedicated logic registers            ; 2010    ;
+; Total registers                             ; 1833    ;
+;     -- Dedicated logic registers            ; 1833    ;
 ;     -- I/O registers                        ; 0       ;
 ;                                             ;         ;
 ; I/O pins                                    ; 1       ;
 ; Embedded Multiplier 9-bit elements          ; 8       ;
 ; Maximum fan-out node                        ; _125MHZ ;
-; Maximum fan-out                             ; 1733    ;
-; Total fan-out                               ; 14081   ;
-; Average fan-out                             ; 2.83    ;
+; Maximum fan-out                             ; 1556    ;
+; Total fan-out                               ; 13411   ;
+; Average fan-out                             ; 2.77    ;
 +---------------------------------------------+---------+
 
 
@@ -219,7 +219,7 @@ applicable agreement for further details.
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                  ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                 ;
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+
-; |Penelope                                   ; 2892 (265)        ; 2010 (364)   ; 0           ; 8            ; 0       ; 4         ; 1    ; 0            ; |Penelope                                                                                                           ;
+; |Penelope                                   ; 2931 (265)        ; 1833 (364)   ; 0           ; 8            ; 0       ; 4         ; 1    ; 0            ; |Penelope                                                                                                           ;
 ;    |ADC:ADC_SPI|                            ; 38 (38)           ; 36 (36)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ADC:ADC_SPI                                                                                               ;
 ;    |ALC:ALC_I|                              ; 670 (48)          ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I                                                                                                 ;
 ;       |lpm_divide:Div0|                     ; 592 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0                                                                                 ;
@@ -231,14 +231,14 @@ applicable agreement for further details.
 ;    |ALC:ALC_Q|                              ; 78 (48)           ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_Q                                                                                                 ;
 ;       |lpm_mult:Mult0|                      ; 30 (0)            ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_Q|lpm_mult:Mult0                                                                                  ;
 ;          |mult_dv01:auto_generated|         ; 30 (30)           ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_Q|lpm_mult:Mult0|mult_dv01:auto_generated                                                         ;
-;    |cicint:cic_I|                           ; 314 (314)         ; 416 (416)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cicint:cic_I                                                                                              ;
-;    |cicint:cic_Q|                           ; 329 (329)         ; 428 (428)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cicint:cic_Q                                                                                              ;
-;    |cordic:rx_cordic|                       ; 1025 (52)         ; 598 (49)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic                                                                                          ;
+;    |cicint:cic_I|                           ; 336 (336)         ; 327 (327)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cicint:cic_I                                                                                              ;
+;    |cicint:cic_Q|                           ; 323 (323)         ; 340 (340)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cicint:cic_Q                                                                                              ;
+;    |cordic:rx_cordic|                       ; 1048 (52)         ; 598 (49)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic                                                                                          ;
 ;       |cordic_stage:cordic_stage0|          ; 89 (17)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage0                                                               ;
 ;          |lpm_add_sub:Add1|                 ; 72 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1                                              ;
 ;             |add_sub_sjg:auto_generated|    ; 72 (72)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1|add_sub_sjg:auto_generated                   ;
 ;       |cordic_stage:cordic_stage10|         ; 69 (69)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage10                                                              ;
-;       |cordic_stage:cordic_stage11|         ; 25 (25)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage11                                                              ;
+;       |cordic_stage:cordic_stage11|         ; 48 (48)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage11                                                              ;
 ;       |cordic_stage:cordic_stage1|          ; 113 (113)         ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage1                                                               ;
 ;       |cordic_stage:cordic_stage2|          ; 85 (85)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage2                                                               ;
 ;       |cordic_stage:cordic_stage3|          ; 83 (83)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage3                                                               ;
@@ -359,6 +359,7 @@ Encoding Type:  One-Hot
 ; cic_I/diff2[16]                        ; Merged with cic_I/diff2[17]            ;
 ; cic_I/diff3[17]                        ; Merged with cic_I/diff3[18]            ;
 ; cic_I/diff4[18]                        ; Merged with cic_I/diff4[19]            ;
+; cic_I/cur_count[10]                    ; Merged with cic_Q/cur_count[10]        ;
 ; cic_I/cur_count[9]                     ; Merged with cic_Q/cur_count[9]         ;
 ; cic_I/cur_count[8]                     ; Merged with cic_Q/cur_count[8]         ;
 ; cic_I/cur_count[7]                     ; Merged with cic_Q/cur_count[7]         ;
@@ -370,7 +371,7 @@ Encoding Type:  One-Hot
 ; cic_I/cur_count[1]                     ; Merged with cic_Q/cur_count[1]         ;
 ; cic_I/cur_count[0]                     ; Merged with cic_Q/cur_count[0]         ;
 ; cic_I/ce_out_reg                       ; Merged with cic_Q/ce_out_reg           ;
-; cic_I/cur_count[10]                    ; Merged with cic_Q/cur_count[10]        ;
+; cic_I/cur_count[11]                    ; Merged with cic_Q/cur_count[11]        ;
 ; tdata[2]                               ; Merged with tdata[4]                   ;
 ; TLV_data[2]                            ; Merged with TLV_data[4]                ;
 ; PWM2_accumulator[0]                    ; Merged with PWM0_accumulator[0]        ;
@@ -397,7 +398,7 @@ Encoding Type:  One-Hot
 ; ADC_SPI/ADC~8                          ; Lost fanout                            ;
 ; ADC_SPI/ADC~9                          ; Lost fanout                            ;
 ; CC_state.00                            ; Lost fanout                            ;
-; Total Number of Removed Registers = 80 ;                                        ;
+; Total Number of Removed Registers = 81 ;                                        ;
 +----------------------------------------+----------------------------------------+
 
 
@@ -406,12 +407,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 2010  ;
+; Total registers                              ; 1833  ;
 ; Number of registers using Synchronous Clear  ; 624   ;
 ; Number of registers using Synchronous Load   ; 6     ;
-; Number of registers using Asynchronous Clear ; 844   ;
+; Number of registers using Asynchronous Clear ; 667   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 475   ;
+; Number of registers using Clock Enable       ; 287   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -421,14 +422,15 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------+
-; 3:1                ; 26 bits   ; 52 LEs        ; 52 LEs               ; 0 LEs                  ; Yes        ; |Penelope|division:division_DDS|qr[95]                          ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|Qstage0[4]                           ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage9|PHout[14] ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage5|PHout[8]  ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[13] ;
-; 3:1                ; 38 bits   ; 76 LEs        ; 76 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage0|Iout[4]   ;
-; 8:1                ; 7 bits    ; 35 LEs        ; 28 LEs               ; 7 LEs                  ; Yes        ; |Penelope|tdata[12]                                             ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|ADC:ADC_SPI|bit_cnt[3]                                ;
+; 3:1                ; 26 bits   ; 52 LEs        ; 52 LEs               ; 0 LEs                  ; Yes        ; |Penelope|division:division_DDS|qr[70]                          ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|Qstage0[10]                          ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage11|Iout[4]  ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage9|PHout[7]  ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage5|PHout[7]  ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[10] ;
+; 3:1                ; 38 bits   ; 76 LEs        ; 76 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[2]   ;
+; 8:1                ; 7 bits    ; 35 LEs        ; 28 LEs               ; 7 LEs                  ; Yes        ; |Penelope|tdata[11]                                             ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|ADC:ADC_SPI|bit_cnt[0]                                ;
 ; 9:1                ; 4 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |Penelope|bit_cnt[3]                                            ;
 ; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Penelope|bits[0]                                               ;
 ; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Penelope|bit_count[0]                                          ;
@@ -807,7 +809,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Fri Aug 24 21:48:22 2007
+    Info: Processing started: Sat Sep 01 11:49:10 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
 Info: Found 1 design units, including 1 entities, in source file ALC.v
     Info: Found entity 1: ALC
@@ -826,17 +828,17 @@ Info: Found 1 design units, including 1 entities, in source file cordic_stage.v
 Info: Found 1 design units, including 1 entities, in source file Penelope.v
     Info: Found entity 1: Penelope
 Info: Elaborating entity "Penelope" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(627): object "Address" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(630): object "OC" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(631): object "Mode" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(634): object "Address" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(637): object "OC" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(638): object "Mode" assigned a value but never read
 Info: Elaborating entity "ADC" for hierarchy "ADC:ADC_SPI"
 Info: Elaborating entity "division" for hierarchy "division:division_DDS"
 Info: Elaborating entity "ALC" for hierarchy "ALC:ALC_I"
 Warning (10230): Verilog HDL assignment warning at ALC.v(45): truncated value with size 32 to match size of target (16)
 Warning (10230): Verilog HDL assignment warning at ALC.v(49): truncated value with size 32 to match size of target (16)
 Info: Elaborating entity "cicint" for hierarchy "cicint:cic_I"
-Warning (10230): Verilog HDL assignment warning at cicint.v(190): truncated value with size 32 to match size of target (11)
-Warning (10230): Verilog HDL assignment warning at cicint.v(196): truncated value with size 32 to match size of target (1)
+Warning (10230): Verilog HDL assignment warning at cicint.v(182): truncated value with size 32 to match size of target (12)
+Warning (10230): Verilog HDL assignment warning at cicint.v(188): truncated value with size 32 to match size of target (1)
 Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
 Info: Elaborating entity "cordic" for hierarchy "cordic:rx_cordic"
 Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage0"
@@ -906,6 +908,7 @@ Info: Duplicate registers merged to single register
     Info: Duplicate register "cicint:cic_I|diff3[17]" merged to single register "cicint:cic_I|diff3[18]"
     Info: Duplicate register "cicint:cic_I|diff4[18]" merged to single register "cicint:cic_I|diff4[19]"
 Info: Duplicate registers merged to single register
+    Info: Duplicate register "cicint:cic_I|cur_count[10]" merged to single register "cicint:cic_Q|cur_count[10]"
     Info: Duplicate register "cicint:cic_I|cur_count[9]" merged to single register "cicint:cic_Q|cur_count[9]"
     Info: Duplicate register "cicint:cic_I|cur_count[8]" merged to single register "cicint:cic_Q|cur_count[8]"
     Info: Duplicate register "cicint:cic_I|cur_count[7]" merged to single register "cicint:cic_Q|cur_count[7]"
@@ -917,7 +920,7 @@ Info: Duplicate registers merged to single register
     Info: Duplicate register "cicint:cic_I|cur_count[1]" merged to single register "cicint:cic_Q|cur_count[1]"
     Info: Duplicate register "cicint:cic_I|cur_count[0]" merged to single register "cicint:cic_Q|cur_count[0]"
     Info: Duplicate register "cicint:cic_I|ce_out_reg" merged to single register "cicint:cic_Q|ce_out_reg"
-    Info: Duplicate register "cicint:cic_I|cur_count[10]" merged to single register "cicint:cic_Q|cur_count[10]"
+    Info: Duplicate register "cicint:cic_I|cur_count[11]" merged to single register "cicint:cic_Q|cur_count[11]"
 Info: Duplicate registers merged to single register
     Info: Duplicate register "tdata[2]" merged to single register "tdata[4]"
     Info: Duplicate register "TLV_data[2]" merged to single register "TLV_data[4]"
@@ -1030,16 +1033,16 @@ Info: 6 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
 Info: Found the following redundant logic cells in design
     Info: Logic cell "ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider|add_sub_15_result_int[0]~62"
-Info: Implemented 3461 device resources after synthesis - the final resource count might be different
+Info: Implemented 3500 device resources after synthesis - the final resource count might be different
     Info: Implemented 12 input pins
     Info: Implemented 52 output pins
     Info: Implemented 2 bidirectional pins
-    Info: Implemented 3387 logic cells
+    Info: Implemented 3426 logic cells
     Info: Implemented 8 DSP elements
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 49 warnings
     Info: Allocated 142 megabytes of memory during processing
-    Info: Processing ended: Fri Aug 24 21:49:31 2007
-    Info: Elapsed time: 00:01:09
+    Info: Processing ended: Sat Sep 01 11:50:23 2007
+    Info: Elapsed time: 00:01:13
 
 
 +------------------------------------------+
