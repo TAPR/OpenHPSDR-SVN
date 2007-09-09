@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Penelope
-Sat Sep 01 11:50:23 2007
+Sun Sep 09 20:36:22 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -22,27 +22,14 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
  14. Parameter Settings for User Entity Instance: cicint:cic_I
  15. Parameter Settings for User Entity Instance: cicint:cic_Q
  16. Parameter Settings for User Entity Instance: phase_accumulator:rx_phase_accumulator
- 17. Parameter Settings for User Entity Instance: cordic:rx_cordic
- 18. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0
- 19. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage1
- 20. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage2
- 21. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage3
- 22. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage4
- 23. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage5
- 24. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage6
- 25. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage7
- 26. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage8
- 27. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage9
- 28. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage10
- 29. Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage11
- 30. Parameter Settings for Inferred Entity Instance: ALC:ALC_I|lpm_divide:Div0
- 31. Parameter Settings for Inferred Entity Instance: ALC:ALC_I|lpm_mult:Mult0
- 32. Parameter Settings for Inferred Entity Instance: ALC:ALC_Q|lpm_mult:Mult0
- 33. Parameter Settings for Inferred Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1
- 34. Parameter Settings for Inferred Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1
- 35. lpm_mult Parameter Settings by Entity Instance
- 36. Analysis & Synthesis Messages
- 37. Analysis & Synthesis Suppressed Messages
+ 17. Parameter Settings for Inferred Entity Instance: ALC:ALC_I|lpm_divide:Div0
+ 18. Parameter Settings for Inferred Entity Instance: ALC:ALC_I|lpm_mult:Mult0
+ 19. Parameter Settings for Inferred Entity Instance: ALC:ALC_Q|lpm_mult:Mult0
+ 20. Parameter Settings for Inferred Entity Instance: cordic_16:tx_cordic|lpm_add_sub:Add4
+ 21. Parameter Settings for Inferred Entity Instance: cordic_16:tx_cordic|lpm_add_sub:Add4
+ 22. lpm_mult Parameter Settings by Entity Instance
+ 23. Analysis & Synthesis Messages
+ 24. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -68,14 +55,14 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Sep 01 11:50:23 2007   ;
+; Analysis & Synthesis Status        ; Successful - Sun Sep 09 20:36:22 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                ;
 ; Top-level Entity Name              ; Penelope                                ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 2,931                                   ;
-;     Total combinational functions  ; 2,931                                   ;
-;     Dedicated logic registers      ; 1,833                                   ;
+; Total logic elements               ; 3,158                                   ;
+;     Total combinational functions  ; 3,158                                   ;
+;     Dedicated logic registers      ; 2,116                                   ;
 ; Total registers                    ; N/A until Partition Merge               ;
 ; Total pins                         ; N/A until Partition Merge               ;
 ; Total virtual pins                 ; N/A until Partition Merge               ;
@@ -152,13 +139,12 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                         ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
+; cordic.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/cordic.v                           ;
 ; ALC.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/ALC.v                              ;
 ; ADC.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/ADC.v                              ;
 ; division.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/division.v                         ;
 ; phase_accumulator.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/phase_accumulator.v                ;
 ; cicint.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/cicint.v                           ;
-; cordic.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/cordic.v                           ;
-; cordic_stage.v                   ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/cordic_stage.v                     ;
 ; Penelope.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/Penelope.v                         ;
 ; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_divide.tdf          ;
 ; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/abs_divider.inc         ;
@@ -180,7 +166,7 @@ applicable agreement for further details.
 ; look_add.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/look_add.inc            ;
 ; alt_stratix_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/alt_stratix_add_sub.inc ;
 ; alt_mercury_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/alt_mercury_add_sub.inc ;
-; db/add_sub_sjg.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/add_sub_sjg.tdf                 ;
+; db/add_sub_rjg.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/add_sub_rjg.tdf                 ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 
 
@@ -189,28 +175,28 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 2,931   ;
+; Estimated Total logic elements              ; 3,158   ;
 ;                                             ;         ;
-; Total combinational functions               ; 2931    ;
+; Total combinational functions               ; 3158    ;
 ; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 316     ;
-;     -- 3 input functions                    ; 1599    ;
-;     -- <=2 input functions                  ; 1016    ;
+;     -- 4 input functions                    ; 314     ;
+;     -- 3 input functions                    ; 1836    ;
+;     -- <=2 input functions                  ; 1008    ;
 ;                                             ;         ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 1273    ;
-;     -- arithmetic mode                      ; 1658    ;
+;     -- normal mode                          ; 1240    ;
+;     -- arithmetic mode                      ; 1918    ;
 ;                                             ;         ;
-; Total registers                             ; 1833    ;
-;     -- Dedicated logic registers            ; 1833    ;
+; Total registers                             ; 2116    ;
+;     -- Dedicated logic registers            ; 2116    ;
 ;     -- I/O registers                        ; 0       ;
 ;                                             ;         ;
 ; I/O pins                                    ; 1       ;
 ; Embedded Multiplier 9-bit elements          ; 8       ;
 ; Maximum fan-out node                        ; _125MHZ ;
-; Maximum fan-out                             ; 1556    ;
-; Total fan-out                               ; 13411   ;
-; Average fan-out                             ; 2.77    ;
+; Maximum fan-out                             ; 1839    ;
+; Total fan-out                               ; 14296   ;
+; Average fan-out                             ; 2.67    ;
 +---------------------------------------------+---------+
 
 
@@ -219,13 +205,13 @@ applicable agreement for further details.
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                  ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                 ;
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+
-; |Penelope                                   ; 2931 (265)        ; 1833 (364)   ; 0           ; 8            ; 0       ; 4         ; 1    ; 0            ; |Penelope                                                                                                           ;
+; |Penelope                                   ; 3158 (268)        ; 2116 (364)   ; 0           ; 8            ; 0       ; 4         ; 1    ; 0            ; |Penelope                                                                                                           ;
 ;    |ADC:ADC_SPI|                            ; 38 (38)           ; 36 (36)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ADC:ADC_SPI                                                                                               ;
-;    |ALC:ALC_I|                              ; 670 (48)          ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I                                                                                                 ;
-;       |lpm_divide:Div0|                     ; 592 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0                                                                                 ;
-;          |lpm_divide_vfm:auto_generated|    ; 592 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated                                                   ;
-;             |sign_div_unsign_9nh:divider|   ; 592 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider                       ;
-;                |alt_u_div_k5f:divider|      ; 592 (592)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider ;
+;    |ALC:ALC_I|                              ; 665 (48)          ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I                                                                                                 ;
+;       |lpm_divide:Div0|                     ; 587 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0                                                                                 ;
+;          |lpm_divide_vfm:auto_generated|    ; 587 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated                                                   ;
+;             |sign_div_unsign_9nh:divider|   ; 587 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider                       ;
+;                |alt_u_div_k5f:divider|      ; 587 (587)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider ;
 ;       |lpm_mult:Mult0|                      ; 30 (0)            ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_mult:Mult0                                                                                  ;
 ;          |mult_dv01:auto_generated|         ; 30 (30)           ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_mult:Mult0|mult_dv01:auto_generated                                                         ;
 ;    |ALC:ALC_Q|                              ; 78 (48)           ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_Q                                                                                                 ;
@@ -233,21 +219,9 @@ applicable agreement for further details.
 ;          |mult_dv01:auto_generated|         ; 30 (30)           ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_Q|lpm_mult:Mult0|mult_dv01:auto_generated                                                         ;
 ;    |cicint:cic_I|                           ; 336 (336)         ; 327 (327)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cicint:cic_I                                                                                              ;
 ;    |cicint:cic_Q|                           ; 323 (323)         ; 340 (340)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cicint:cic_Q                                                                                              ;
-;    |cordic:rx_cordic|                       ; 1048 (52)         ; 598 (49)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic                                                                                          ;
-;       |cordic_stage:cordic_stage0|          ; 89 (17)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage0                                                               ;
-;          |lpm_add_sub:Add1|                 ; 72 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1                                              ;
-;             |add_sub_sjg:auto_generated|    ; 72 (72)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1|add_sub_sjg:auto_generated                   ;
-;       |cordic_stage:cordic_stage10|         ; 69 (69)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage10                                                              ;
-;       |cordic_stage:cordic_stage11|         ; 48 (48)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage11                                                              ;
-;       |cordic_stage:cordic_stage1|          ; 113 (113)         ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage1                                                               ;
-;       |cordic_stage:cordic_stage2|          ; 85 (85)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage2                                                               ;
-;       |cordic_stage:cordic_stage3|          ; 83 (83)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage3                                                               ;
-;       |cordic_stage:cordic_stage4|          ; 81 (81)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage4                                                               ;
-;       |cordic_stage:cordic_stage5|          ; 106 (106)         ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage5                                                               ;
-;       |cordic_stage:cordic_stage6|          ; 77 (77)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage6                                                               ;
-;       |cordic_stage:cordic_stage7|          ; 75 (75)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage7                                                               ;
-;       |cordic_stage:cordic_stage8|          ; 73 (73)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage8                                                               ;
-;       |cordic_stage:cordic_stage9|          ; 97 (97)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage9                                                               ;
+;    |cordic_16:tx_cordic|                    ; 1277 (1243)       ; 881 (881)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic_16:tx_cordic                                                                                       ;
+;       |lpm_add_sub:Add4|                    ; 34 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic_16:tx_cordic|lpm_add_sub:Add4                                                                      ;
+;          |add_sub_rjg:auto_generated|       ; 34 (34)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic_16:tx_cordic|lpm_add_sub:Add4|add_sub_rjg:auto_generated                                           ;
 ;    |division:division_DDS|                  ; 141 (141)         ; 136 (136)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|division:division_DDS                                                                                     ;
 ;    |phase_accumulator:rx_phase_accumulator| ; 32 (32)           ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|phase_accumulator:rx_phase_accumulator                                                                    ;
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+
@@ -334,7 +308,18 @@ Encoding Type:  One-Hot
 ; TLV_data[6]                            ; Stuck at GND due to stuck port data_in ;
 ; TLV_data[5]                            ; Stuck at GND due to stuck port data_in ;
 ; TLV_data[3]                            ; Stuck at GND due to stuck port data_in ;
-; rx_cordic/cordic_stage10/Iout[17]      ; Lost fanout                            ;
+; tx_cordic/i0[2]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/i0[1]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/i0[0]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/q0[2]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/q0[1]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/q0[0]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/i1[0]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/q1[0]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/i1[1]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/q1[1]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/i2[0]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/q2[0]                        ; Stuck at GND due to stuck port data_in ;
 ; PWM2_Data_in[15]                       ; Merged with PWM0_Data_in[15]           ;
 ; PWM2_Data_in[14]                       ; Merged with PWM0_Data_in[14]           ;
 ; PWM2_Data_in[13]                       ; Merged with PWM0_Data_in[13]           ;
@@ -372,6 +357,10 @@ Encoding Type:  One-Hot
 ; cic_I/cur_count[0]                     ; Merged with cic_Q/cur_count[0]         ;
 ; cic_I/ce_out_reg                       ; Merged with cic_Q/ce_out_reg           ;
 ; cic_I/cur_count[11]                    ; Merged with cic_Q/cur_count[11]        ;
+; tx_cordic/i1[2]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/q1[2]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/i2[1]                        ; Stuck at GND due to stuck port data_in ;
+; tx_cordic/q2[1]                        ; Stuck at GND due to stuck port data_in ;
 ; tdata[2]                               ; Merged with tdata[4]                   ;
 ; TLV_data[2]                            ; Merged with TLV_data[4]                ;
 ; PWM2_accumulator[0]                    ; Merged with PWM0_accumulator[0]        ;
@@ -391,14 +380,12 @@ Encoding Type:  One-Hot
 ; PWM2_accumulator[14]                   ; Merged with PWM0_accumulator[14]       ;
 ; PWM2_accumulator[15]                   ; Merged with PWM0_accumulator[15]       ;
 ; PWM2_accumulator[16]                   ; Merged with PWM0_accumulator[16]       ;
-; rx_cordic/Qstage0[16]                  ; Merged with rx_cordic/Qstage0[17]      ;
-; rx_cordic/Istage0[17]                  ; Merged with rx_cordic/Istage0[16]      ;
 ; IQ_state~7                             ; Lost fanout                            ;
 ; IQ_state~8                             ; Lost fanout                            ;
 ; ADC_SPI/ADC~8                          ; Lost fanout                            ;
 ; ADC_SPI/ADC~9                          ; Lost fanout                            ;
 ; CC_state.00                            ; Lost fanout                            ;
-; Total Number of Removed Registers = 81 ;                                        ;
+; Total Number of Removed Registers = 94 ;                                        ;
 +----------------------------------------+----------------------------------------+
 
 
@@ -407,9 +394,9 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1833  ;
-; Number of registers using Synchronous Clear  ; 624   ;
-; Number of registers using Synchronous Load   ; 6     ;
+; Total registers                              ; 2116  ;
+; Number of registers using Synchronous Clear  ; 59    ;
+; Number of registers using Synchronous Load   ; 96    ;
 ; Number of registers using Asynchronous Clear ; 667   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 287   ;
@@ -417,25 +404,18 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                      ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------+
-; 3:1                ; 26 bits   ; 52 LEs        ; 52 LEs               ; 0 LEs                  ; Yes        ; |Penelope|division:division_DDS|qr[70]                          ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|Qstage0[10]                          ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage11|Iout[4]  ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage9|PHout[7]  ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage5|PHout[7]  ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage1|PHout[10] ;
-; 3:1                ; 38 bits   ; 76 LEs        ; 76 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cordic:rx_cordic|cordic_stage:cordic_stage0|Qout[2]   ;
-; 8:1                ; 7 bits    ; 35 LEs        ; 28 LEs               ; 7 LEs                  ; Yes        ; |Penelope|tdata[11]                                             ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|ADC:ADC_SPI|bit_cnt[0]                                ;
-; 9:1                ; 4 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |Penelope|bit_cnt[3]                                            ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Penelope|bits[0]                                               ;
-; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Penelope|bit_count[0]                                          ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |Penelope|cordic:rx_cordic|Istage0~38                           ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------+
+; 3:1                ; 26 bits   ; 52 LEs        ; 52 LEs               ; 0 LEs                  ; Yes        ; |Penelope|division:division_DDS|qr[75] ;
+; 8:1                ; 7 bits    ; 35 LEs        ; 28 LEs               ; 7 LEs                  ; Yes        ; |Penelope|tdata[11]                    ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|ADC:ADC_SPI|bit_cnt[0]       ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |Penelope|bit_cnt[3]                   ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Penelope|bits[0]                      ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Penelope|bit_count[2]                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------+
 
 
 +-----------------------------------------------------------+
@@ -465,161 +445,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+------------------------------------------------------------+
 ; RESOLUTION     ; 32    ; Signed Integer                                             ;
 +----------------+-------+------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+---------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic ;
-+----------------+-------+--------------------------------------+
-; Parameter Name ; Value ; Type                                 ;
-+----------------+-------+--------------------------------------+
-; CORDIC_WIDTH   ; 16    ; Signed Integer                       ;
-; PHASE_WIDTH    ; 16    ; Signed Integer                       ;
-+----------------+-------+--------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0 ;
-+----------------+-------+-----------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                            ;
-+----------------+-------+-----------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                  ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                  ;
-; SHIFT          ; 0     ; Signed Integer                                                  ;
-+----------------+-------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage1 ;
-+----------------+-------+-----------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                            ;
-+----------------+-------+-----------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                  ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                  ;
-; SHIFT          ; 1     ; Signed Integer                                                  ;
-+----------------+-------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage2 ;
-+----------------+-------+-----------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                            ;
-+----------------+-------+-----------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                  ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                  ;
-; SHIFT          ; 2     ; Signed Integer                                                  ;
-+----------------+-------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage3 ;
-+----------------+-------+-----------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                            ;
-+----------------+-------+-----------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                  ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                  ;
-; SHIFT          ; 3     ; Signed Integer                                                  ;
-+----------------+-------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage4 ;
-+----------------+-------+-----------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                            ;
-+----------------+-------+-----------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                  ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                  ;
-; SHIFT          ; 4     ; Signed Integer                                                  ;
-+----------------+-------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage5 ;
-+----------------+-------+-----------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                            ;
-+----------------+-------+-----------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                  ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                  ;
-; SHIFT          ; 5     ; Signed Integer                                                  ;
-+----------------+-------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage6 ;
-+----------------+-------+-----------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                            ;
-+----------------+-------+-----------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                  ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                  ;
-; SHIFT          ; 6     ; Signed Integer                                                  ;
-+----------------+-------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage7 ;
-+----------------+-------+-----------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                            ;
-+----------------+-------+-----------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                  ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                  ;
-; SHIFT          ; 7     ; Signed Integer                                                  ;
-+----------------+-------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage8 ;
-+----------------+-------+-----------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                            ;
-+----------------+-------+-----------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                  ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                  ;
-; SHIFT          ; 8     ; Signed Integer                                                  ;
-+----------------+-------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage9 ;
-+----------------+-------+-----------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                            ;
-+----------------+-------+-----------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                  ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                  ;
-; SHIFT          ; 9     ; Signed Integer                                                  ;
-+----------------+-------+-----------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage10 ;
-+----------------+-------+------------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                             ;
-+----------------+-------+------------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                   ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                   ;
-; SHIFT          ; 10    ; Signed Integer                                                   ;
-+----------------+-------+------------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage11 ;
-+----------------+-------+------------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                             ;
-+----------------+-------+------------------------------------------------------------------+
-; CORDIC_WIDTH   ; 18    ; Signed Integer                                                   ;
-; PHASE_WIDTH    ; 15    ; Signed Integer                                                   ;
-; SHIFT          ; 11    ; Signed Integer                                                   ;
-+----------------+-------+------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -716,59 +541,59 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+---------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1 ;
-+------------------------+-------------+------------------------------------------------------------------------+
-; Parameter Name         ; Value       ; Type                                                                   ;
-+------------------------+-------------+------------------------------------------------------------------------+
-; LPM_WIDTH              ; 18          ; Untyped                                                                ;
-; LPM_REPRESENTATION     ; UNSIGNED    ; Untyped                                                                ;
-; LPM_DIRECTION          ; DEFAULT     ; Untyped                                                                ;
-; ONE_INPUT_IS_CONSTANT  ; NO          ; Untyped                                                                ;
-; LPM_PIPELINE           ; 0           ; Untyped                                                                ;
-; MAXIMIZE_SPEED         ; 5           ; Untyped                                                                ;
-; REGISTERED_AT_END      ; 0           ; Untyped                                                                ;
-; OPTIMIZE_FOR_SPEED     ; 5           ; Untyped                                                                ;
-; USE_CS_BUFFERS         ; 1           ; Untyped                                                                ;
-; CARRY_CHAIN            ; MANUAL      ; Untyped                                                                ;
-; CARRY_CHAIN_LENGTH     ; 48          ; CARRY_CHAIN_LENGTH                                                     ;
-; DEVICE_FAMILY          ; Cyclone II  ; Untyped                                                                ;
-; USE_WYS                ; OFF         ; Untyped                                                                ;
-; STYLE                  ; FAST        ; Untyped                                                                ;
-; CBXI_PARAMETER         ; add_sub_sjg ; Untyped                                                                ;
-; AUTO_CARRY_CHAINS      ; ON          ; AUTO_CARRY                                                             ;
-; IGNORE_CARRY_BUFFERS   ; OFF         ; IGNORE_CARRY                                                           ;
-; AUTO_CASCADE_CHAINS    ; ON          ; AUTO_CASCADE                                                           ;
-; IGNORE_CASCADE_BUFFERS ; OFF         ; IGNORE_CASCADE                                                         ;
-+------------------------+-------------+------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: cordic_16:tx_cordic|lpm_add_sub:Add4 ;
++------------------------+-------------+------------------------------------------------+
+; Parameter Name         ; Value       ; Type                                           ;
++------------------------+-------------+------------------------------------------------+
+; LPM_WIDTH              ; 17          ; Untyped                                        ;
+; LPM_REPRESENTATION     ; UNSIGNED    ; Untyped                                        ;
+; LPM_DIRECTION          ; DEFAULT     ; Untyped                                        ;
+; ONE_INPUT_IS_CONSTANT  ; NO          ; Untyped                                        ;
+; LPM_PIPELINE           ; 0           ; Untyped                                        ;
+; MAXIMIZE_SPEED         ; 5           ; Untyped                                        ;
+; REGISTERED_AT_END      ; 0           ; Untyped                                        ;
+; OPTIMIZE_FOR_SPEED     ; 5           ; Untyped                                        ;
+; USE_CS_BUFFERS         ; 1           ; Untyped                                        ;
+; CARRY_CHAIN            ; MANUAL      ; Untyped                                        ;
+; CARRY_CHAIN_LENGTH     ; 48          ; CARRY_CHAIN_LENGTH                             ;
+; DEVICE_FAMILY          ; Cyclone II  ; Untyped                                        ;
+; USE_WYS                ; OFF         ; Untyped                                        ;
+; STYLE                  ; FAST        ; Untyped                                        ;
+; CBXI_PARAMETER         ; add_sub_rjg ; Untyped                                        ;
+; AUTO_CARRY_CHAINS      ; ON          ; AUTO_CARRY                                     ;
+; IGNORE_CARRY_BUFFERS   ; OFF         ; IGNORE_CARRY                                   ;
+; AUTO_CASCADE_CHAINS    ; ON          ; AUTO_CASCADE                                   ;
+; IGNORE_CASCADE_BUFFERS ; OFF         ; IGNORE_CASCADE                                 ;
++------------------------+-------------+------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+---------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1 ;
-+------------------------+-------------+------------------------------------------------------------------------+
-; Parameter Name         ; Value       ; Type                                                                   ;
-+------------------------+-------------+------------------------------------------------------------------------+
-; LPM_WIDTH              ; 18          ; Untyped                                                                ;
-; LPM_REPRESENTATION     ; UNSIGNED    ; Untyped                                                                ;
-; LPM_DIRECTION          ; DEFAULT     ; Untyped                                                                ;
-; ONE_INPUT_IS_CONSTANT  ; NO          ; Untyped                                                                ;
-; LPM_PIPELINE           ; 0           ; Untyped                                                                ;
-; MAXIMIZE_SPEED         ; 5           ; Untyped                                                                ;
-; REGISTERED_AT_END      ; 0           ; Untyped                                                                ;
-; OPTIMIZE_FOR_SPEED     ; 5           ; Untyped                                                                ;
-; USE_CS_BUFFERS         ; 1           ; Untyped                                                                ;
-; CARRY_CHAIN            ; MANUAL      ; Untyped                                                                ;
-; CARRY_CHAIN_LENGTH     ; 48          ; CARRY_CHAIN_LENGTH                                                     ;
-; DEVICE_FAMILY          ; Cyclone II  ; Untyped                                                                ;
-; USE_WYS                ; OFF         ; Untyped                                                                ;
-; STYLE                  ; FAST        ; Untyped                                                                ;
-; CBXI_PARAMETER         ; add_sub_sjg ; Untyped                                                                ;
-; AUTO_CARRY_CHAINS      ; ON          ; AUTO_CARRY                                                             ;
-; IGNORE_CARRY_BUFFERS   ; OFF         ; IGNORE_CARRY                                                           ;
-; AUTO_CASCADE_CHAINS    ; ON          ; AUTO_CASCADE                                                           ;
-; IGNORE_CASCADE_BUFFERS ; OFF         ; IGNORE_CASCADE                                                         ;
-+------------------------+-------------+------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: cordic_16:tx_cordic|lpm_add_sub:Add4 ;
++------------------------+-------------+------------------------------------------------+
+; Parameter Name         ; Value       ; Type                                           ;
++------------------------+-------------+------------------------------------------------+
+; LPM_WIDTH              ; 17          ; Untyped                                        ;
+; LPM_REPRESENTATION     ; UNSIGNED    ; Untyped                                        ;
+; LPM_DIRECTION          ; DEFAULT     ; Untyped                                        ;
+; ONE_INPUT_IS_CONSTANT  ; NO          ; Untyped                                        ;
+; LPM_PIPELINE           ; 0           ; Untyped                                        ;
+; MAXIMIZE_SPEED         ; 5           ; Untyped                                        ;
+; REGISTERED_AT_END      ; 0           ; Untyped                                        ;
+; OPTIMIZE_FOR_SPEED     ; 5           ; Untyped                                        ;
+; USE_CS_BUFFERS         ; 1           ; Untyped                                        ;
+; CARRY_CHAIN            ; MANUAL      ; Untyped                                        ;
+; CARRY_CHAIN_LENGTH     ; 48          ; CARRY_CHAIN_LENGTH                             ;
+; DEVICE_FAMILY          ; Cyclone II  ; Untyped                                        ;
+; USE_WYS                ; OFF         ; Untyped                                        ;
+; STYLE                  ; FAST        ; Untyped                                        ;
+; CBXI_PARAMETER         ; add_sub_rjg ; Untyped                                        ;
+; AUTO_CARRY_CHAINS      ; ON          ; AUTO_CARRY                                     ;
+; IGNORE_CARRY_BUFFERS   ; OFF         ; IGNORE_CARRY                                   ;
+; AUTO_CASCADE_CHAINS    ; ON          ; AUTO_CASCADE                                   ;
+; IGNORE_CASCADE_BUFFERS ; OFF         ; IGNORE_CASCADE                                 ;
++------------------------+-------------+------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -809,8 +634,10 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sat Sep 01 11:49:10 2007
+    Info: Processing started: Sun Sep 09 20:35:17 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
+Info: Found 1 design units, including 1 entities, in source file cordic.v
+    Info: Found entity 1: cordic_16
 Info: Found 1 design units, including 1 entities, in source file ALC.v
     Info: Found entity 1: ALC
 Info: Found 1 design units, including 1 entities, in source file ADC.v
@@ -821,16 +648,14 @@ Info: Found 1 design units, including 1 entities, in source file phase_accumulat
     Info: Found entity 1: phase_accumulator
 Info: Found 1 design units, including 1 entities, in source file cicint.v
     Info: Found entity 1: cicint
-Info: Found 1 design units, including 1 entities, in source file cordic.v
-    Info: Found entity 1: cordic
 Info: Found 1 design units, including 1 entities, in source file cordic_stage.v
     Info: Found entity 1: cordic_stage
 Info: Found 1 design units, including 1 entities, in source file Penelope.v
     Info: Found entity 1: Penelope
 Info: Elaborating entity "Penelope" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(634): object "Address" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(637): object "OC" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(638): object "Mode" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(633): object "Address" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(636): object "OC" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(637): object "Mode" assigned a value but never read
 Info: Elaborating entity "ADC" for hierarchy "ADC:ADC_SPI"
 Info: Elaborating entity "division" for hierarchy "division:division_DDS"
 Info: Elaborating entity "ALC" for hierarchy "ALC:ALC_I"
@@ -840,31 +665,7 @@ Info: Elaborating entity "cicint" for hierarchy "cicint:cic_I"
 Warning (10230): Verilog HDL assignment warning at cicint.v(182): truncated value with size 32 to match size of target (12)
 Warning (10230): Verilog HDL assignment warning at cicint.v(188): truncated value with size 32 to match size of target (1)
 Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
-Info: Elaborating entity "cordic" for hierarchy "cordic:rx_cordic"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage0"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage1"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage2"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage3"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage4"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage5"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage6"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage7"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage8"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage9"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage10"
-Info: Elaborating entity "cordic_stage" for hierarchy "cordic:rx_cordic|cordic_stage:cordic_stage11"
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage11" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage10" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage9" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage8" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage7" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage6" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage5" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage4" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage3" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage2" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage1" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
-Warning: Port "ordered port 5" on the entity instantiation of "cordic_stage0" is connected to a signal of width 16. The formal width of the signal in the module is 15.  Extra bits will be ignored.
+Info: Elaborating entity "cordic_16" for hierarchy "cordic_16:tx_cordic"
 Warning: Reduced register "tdata[15]" with stuck data_in port to stuck value GND
 Warning: Reduced register "tdata[14]" with stuck data_in port to stuck value GND
 Warning: Reduced register "tdata[13]" with stuck data_in port to stuck value GND
@@ -882,6 +683,18 @@ Warning: Reduced register "TLV_data[7]" with stuck data_in port to stuck value G
 Warning: Reduced register "TLV_data[6]" with stuck data_in port to stuck value GND
 Warning: Reduced register "TLV_data[5]" with stuck data_in port to stuck value GND
 Warning: Reduced register "TLV_data[3]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|i0[2]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|i0[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|i0[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|q0[2]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|q0[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|q0[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|i1[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|q1[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|i1[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|q1[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|i2[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|q2[0]" with stuck data_in port to stuck value GND
 Info: Duplicate registers merged to single register
     Info: Duplicate register "PWM2_Data_in[15]" merged to single register "PWM0_Data_in[15]"
     Info: Duplicate register "PWM2_Data_in[14]" merged to single register "PWM0_Data_in[14]"
@@ -921,6 +734,10 @@ Info: Duplicate registers merged to single register
     Info: Duplicate register "cicint:cic_I|cur_count[0]" merged to single register "cicint:cic_Q|cur_count[0]"
     Info: Duplicate register "cicint:cic_I|ce_out_reg" merged to single register "cicint:cic_Q|ce_out_reg"
     Info: Duplicate register "cicint:cic_I|cur_count[11]" merged to single register "cicint:cic_Q|cur_count[11]"
+Warning: Reduced register "cordic_16:tx_cordic|i1[2]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|q1[2]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|i2[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "cordic_16:tx_cordic|q2[1]" with stuck data_in port to stuck value GND
 Info: Duplicate registers merged to single register
     Info: Duplicate register "tdata[2]" merged to single register "tdata[4]"
     Info: Duplicate register "TLV_data[2]" merged to single register "TLV_data[4]"
@@ -947,9 +764,6 @@ Info: Duplicate registers merged to single register
     Info: Duplicate register "PWM2_accumulator[15]" merged to single register "PWM0_accumulator[15]"
 Info: Duplicate registers merged to single register
     Info: Duplicate register "PWM2_accumulator[16]" merged to single register "PWM0_accumulator[16]"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "cordic:rx_cordic|Qstage0[16]" merged to single register "cordic:rx_cordic|Qstage0[17]"
-    Info: Duplicate register "cordic:rx_cordic|Istage0[17]" merged to single register "cordic:rx_cordic|Istage0[16]"
 Info: State machine "|Penelope|IQ_state" contains 5 states
 Info: State machine "|Penelope|CC_state" contains 3 states
 Info: State machine "|Penelope|ADC:ADC_SPI|ADC" contains 5 states
@@ -1008,9 +822,9 @@ Info: Found 1 design units, including 1 entities, in source file db/mult_dv01.td
     Info: Found entity 1: mult_dv01
 Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_add_sub.tdf
     Info: Found entity 1: lpm_add_sub
-Info: Elaborated megafunction instantiation "cordic:rx_cordic|cordic_stage:cordic_stage0|lpm_add_sub:Add1"
-Info: Found 1 design units, including 1 entities, in source file db/add_sub_sjg.tdf
-    Info: Found entity 1: add_sub_sjg
+Info: Elaborated megafunction instantiation "cordic_16:tx_cordic|lpm_add_sub:Add4"
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_rjg.tdf
+    Info: Found entity 1: add_sub_rjg
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "A2" stuck at VCC
     Warning: Pin "LED7" stuck at GND
@@ -1024,25 +838,22 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "nLVDSRXE" stuck at GND
     Warning: Pin "LVDSTXE" stuck at VCC
     Warning: Pin "CMODE" stuck at VCC
-Info: 6 registers lost all their fanouts during netlist optimizations. The first 6 are displayed below.
-    Info: Register "rx_cordic/cordic_stage10/Iout[17]" lost all its fanouts during netlist optimizations.
+Info: 5 registers lost all their fanouts during netlist optimizations. The first 5 are displayed below.
     Info: Register "IQ_state~7" lost all its fanouts during netlist optimizations.
     Info: Register "IQ_state~8" lost all its fanouts during netlist optimizations.
     Info: Register "ADC_SPI/ADC~8" lost all its fanouts during netlist optimizations.
     Info: Register "ADC_SPI/ADC~9" lost all its fanouts during netlist optimizations.
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
-Info: Found the following redundant logic cells in design
-    Info: Logic cell "ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider|add_sub_15_result_int[0]~62"
-Info: Implemented 3500 device resources after synthesis - the final resource count might be different
+Info: Implemented 3780 device resources after synthesis - the final resource count might be different
     Info: Implemented 12 input pins
     Info: Implemented 52 output pins
     Info: Implemented 2 bidirectional pins
-    Info: Implemented 3426 logic cells
+    Info: Implemented 3706 logic cells
     Info: Implemented 8 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 49 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 53 warnings
     Info: Allocated 142 megabytes of memory during processing
-    Info: Processing ended: Sat Sep 01 11:50:23 2007
-    Info: Elapsed time: 00:01:13
+    Info: Processing ended: Sun Sep 09 20:36:22 2007
+    Info: Elapsed time: 00:01:05
 
 
 +------------------------------------------+

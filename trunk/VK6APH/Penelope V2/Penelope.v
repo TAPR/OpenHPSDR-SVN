@@ -1,4 +1,4 @@
-// V1.2  1st September 2007
+// V1.4  9th  September 2007
 //
 // Copyright 2007 Phil Harman VK6APH
 //
@@ -53,6 +53,8 @@
 	24 Aug  2007 - Added RF output bar graph on LEDs
 	31 Aug  2007 - Changed CIC to interpolate by 2560 for use with 125MHz clock
 	 1 Sep  2007 - Added gain after CORDIC so we can drive to 1/2W on 6m
+	 3 Sept 2007 - Using alternative CORDIC
+	 9 Sept 2007 - Finalised gain to compensate for loss through CIC and added ALC code. 
 	
 	
 	
@@ -287,8 +289,6 @@ begin
 	else CMCLK_counter <= CMCLK_counter + 3'b1;
 end
 
-
-
 // send CLRCLK to TLV320 and I2S decoder
 
 assign CLRCIN  = C9;		// C9 on Altas bus is CLRCLK 
@@ -446,11 +446,9 @@ wire [15:0]gain;
 
 assign set_level = 16'h9999; // corresponds to 0.9999 i.e. unity gain
 
-//light LED when input level > set_level
+wire [15:0]ALC_level = {3'd0,AIN5,1'd0}; // gain for ALC signal 
 
-//assign LED7 = (AIN5 > set_level) ? 1'b0 : 1'b1;
-
-assign gain = (set_level - AIN5);
+assign gain = (set_level - ALC_level);
 
 // use this to turn ALC off
 
@@ -469,11 +467,13 @@ reg [15:0]cic_q;
 
 always @ (posedge ce_out_i)
 begin
+	//cic_i <= I_sync_data; // no ALC
 	cic_i <= ALC_i;
 end 
 
 always @ (posedge ce_out_q)
 begin
+	//cic_q <= Q_sync_data;	// no ALC
 	cic_q <= ALC_q;
 end 
 
@@ -500,8 +500,8 @@ cicint cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in
 
 //Code rotates input at set frequency  and produces I & Q /
 
-wire [15:0]i_out;
-wire [15:0]q_out;
+wire [17:0]i_out; 
+wire [17:0]q_out; 
 wire [15:0]temp_ADC;
 wire [31:0] phase;
 reg  [31:0]frequency;
@@ -516,7 +516,8 @@ wire [16:0]i_temp;
 phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
 
 // The cordic takes I and Q in along with the top 15 bits of the phase dword.  The I and Q out are freq shifted
-cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(cic_out_i),.Qin(cic_out_q),.PHin(phase[31:16]),.Iout(i_out),.Qout(q_out),.PHout());
+cordic_16 tx_cordic(.i_in(cic_out_i),.q_in(cic_out_q),.iout(i_out),.qout(q_out),.ain(phase[31:12]),.clk(clock));
+
 
 /* 
 	We can use either the I or Q output from the CORDIC directly to drive the DAC.
@@ -530,13 +531,11 @@ cordic rx_cordic(.clk(clock),.reset(~clk_enable),.Iin(cic_out_i),.Qin(cic_out_q)
     	  = cos(f1 + f2) + j sin(f1 + f2)
 */
 
-// add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This may not be
-// necessary when we replace the USRP CORDIC with Darrell's since his has more gain. 
-// ALC needs fixing with this gain module in place. 
-// Current gain is x4, a hack using left shifts. 
+// Add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This is necessary since the 
+// interpolating CIC has a loss because it does not interpolate by 2^n. 
+// Gain is x4, using left shifts. 
 
-//assign DAC[13:0] = {i_out[15], i_out[13:1]};  // use q_out if 90 degree phase shift required by EER Tx etc
-assign DAC[13:0] = {i_out[15], i_out[12:0]};  // use q_out if 90 degree phase shift required by EER Tx etc
+assign DAC[13:0] = {i_out[17], i_out[14:2]}; 	// use q_out if 90 degree phase shift required by EER Tx etc
 
 /////////////////////////////////////////////////////////////////
 //
