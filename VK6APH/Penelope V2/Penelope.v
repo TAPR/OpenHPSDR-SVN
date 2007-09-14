@@ -1,4 +1,4 @@
-// V1.4  9th  September 2007
+// V1.5  14th  September 2007
 //
 // Copyright 2007 Phil Harman VK6APH
 //
@@ -55,6 +55,7 @@
 	 1 Sep  2007 - Added gain after CORDIC so we can drive to 1/2W on 6m
 	 3 Sept 2007 - Using alternative CORDIC
 	 9 Sept 2007 - Finalised gain to compensate for loss through CIC and added ALC code. 
+	14 Sept 2007 - Minor tweaks to gain distrubution
 	
 	
 	
@@ -62,6 +63,8 @@
 	
 	- add ext_ref to C&C commands to enable external 10MHz reference
 	- add code to enable internal 10MHz reference to appear on Atlas bus
+	- add code to enable selection of 125MHz clock  on board or from Mercury
+	- set up TLV320 via I2C rather than SPI  
 		
 	
 */
@@ -437,7 +440,7 @@ assign PWM2_Data = ALC_i;
 	With no RF output the gain is set to 1 (actually 0.9999). When RF is produced this is
 	converted into a DC level, linearized and fed to a 12 bit ADC. The output of the ADC is 
 	then subtracted from the gain, hence as the RF output increase the gain reduces which
-	in the asemtote is a preset level that corresponds to 0.5W of RF output.
+	in the asemtote is a preset level that corresponds to ~0.5W of RF output.
 */
 wire [15:0]set_level;
 wire [15:0]ALC_i;
@@ -446,12 +449,11 @@ wire [15:0]gain;
 
 assign set_level = 16'h9999; // corresponds to 0.9999 i.e. unity gain
 
-wire [15:0]ALC_level = {3'd0,AIN5,1'd0}; // gain for ALC signal 
+wire [15:0]ALC_level = {4'd0,AIN5}; // gain for ALC signal 
 
 assign gain = (set_level - ALC_level);
 
 // use this to turn ALC off
-
 // assign gain = set_level;
 
 // multiply I & Q by gain 
@@ -467,13 +469,11 @@ reg [15:0]cic_q;
 
 always @ (posedge ce_out_i)
 begin
-	//cic_i <= I_sync_data; // no ALC
 	cic_i <= ALC_i;
 end 
 
 always @ (posedge ce_out_q)
 begin
-	//cic_q <= Q_sync_data;	// no ALC
 	cic_q <= ALC_q;
 end 
 
@@ -509,9 +509,6 @@ reg  [31:0]frequency;
 wire [16:0]q_temp;
 wire [16:0]i_temp;
 
-	
-//assign sync_frequency = 32'h1D0FA58F; // 14.190MHz i.e. FREQ /(125e6/2^32)
-
 // The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
 phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
 
@@ -533,9 +530,9 @@ cordic_16 tx_cordic(.i_in(cic_out_i),.q_in(cic_out_q),.iout(i_out),.qout(q_out),
 
 // Add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This is necessary since the 
 // interpolating CIC has a loss because it does not interpolate by 2^n. 
-// Gain is x4, using left shifts. 
 
-assign DAC[13:0] = {i_out[17], i_out[14:2]}; 	// use q_out if 90 degree phase shift required by EER Tx etc
+assign DAC[13:0] = {i_out[17], i_out[15:3]}; 	// use q_out if 90 degree phase shift required by EER Tx etc
+
 
 /////////////////////////////////////////////////////////////////
 //
@@ -579,7 +576,7 @@ assign PWM2 = PWM2_accumulator[16];
 
 /*
 
-	The C&C encoder broadcasts data over the Atlas bus C20 for
+	The C&C encoder in Ozy broadcasts data over the Atlas bus (C20) for
 	use by other cards e.g. Mercury and Penelope.  The data is in 
 	I2S format with the clock being CBLCK and the start of each frame
 	being indicated using the negative edge of CLRCLK.
@@ -746,14 +743,14 @@ assign LED4 = (AIN5 > 1000)? 1'b0 : 1'b1;  // 0.3W = 3172
 assign LED5 = (AIN5 > 2000)? 1'b0 : 1'b1;  // 0.4W = 3663
 assign LED6 = (AIN5 > 3000)? 1'b0 : 1'b1;  // 0.5W = 4096
 
-// User outputs TODO: Map these to OC
-assign USEROUT0 = 0;
-assign USEROUT1 = 0;
-assign USEROUT2 = 0;
-assign USEROUT3 = 0;
-assign USEROUT4 = 0;
-assign USEROUT5 = 0;
-assign USEROUT6 = 0;
+// User open collector outputs 
+assign USEROUT0 = OC[0];
+assign USEROUT1 = OC[1];
+assign USEROUT2 = OC[2];
+assign USEROUT3 = OC[3];
+assign USEROUT4 = OC[4];
+assign USEROUT5 = OC[5];
+assign USEROUT6 = OC[6];
 
 
 endmodule 

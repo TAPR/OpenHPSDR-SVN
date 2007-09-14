@@ -23,12 +23,16 @@
 /*
  *	  Basic CORDIC function
  *
- *    if P(n) = P(n-1) + arctan(1/2^n)
+ *    if phase < target 
+ *
+ *     P(n) = P(n-1) + arctan(1/2^n)
  *	
  *	  (sin)   I(n) = I(n-1) - Q(n-1)/2^n
  *    (cos)   Q(n) = Q(n-1) + I(n-1)/2^n
  *
- *    if P(n) = P(n-1) - arctan(1/2^n)
+ *    if phase > target 
+ *
+ *     P(n) = P(n-1) - arctan(1/2^n)
  *
  *	  (sin)   I(n) = I(n-1) + Q(n-1)/2^n
  *    (cos)   Q(n) = Q(n-1) - I(n-1)/2^n
