@@ -2,6 +2,7 @@
  *  
  * Copyright (C) 2007 Bill Tracey, KD5TFD  
  * Copyright (C) 2006 Philip A. Covington, N8VB
+ * Copyright (C) 2007 Bob Campbell, VK4XV 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -104,6 +105,37 @@ int HPSDR_LoadFPGA(usb_dev_handle *devh, char *rbf_fnamep) {
 } 
 
 
+
+ int HPSDR_Write_I2C(usb_dev_handle *devh, int i2c_addr, char byte[], int length)
+
+
+       {
+		int i = 0;
+            if (length < 1 || length > MAX_EP0_PACKETSIZE)
+                return 0;
+            else
+		{
+                int ret = usb_control_msg(
+                    devh,
+                    VENDOR_REQ_TYPE_OUT,
+                    VENDOR_REQ_I2C_WRITE,
+                    i2c_addr,
+                    0,
+                    byte,
+                    length,
+                    USB_TIMEOUT_MSECS
+                    );
+#if 0
+		printf(" IC2 Add-0x%02x ", i2c_addr);
+		for (i=0; i< length; i++)
+		{ printf(" Byte= 0x%02x", byte[i]); }
+		printf("\n");		
+#endif
+                if (ret > 0)
+                    return ret;
+                else
+                    return 0;		}
+	}
 
 
 
