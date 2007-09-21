@@ -123,3 +123,4 @@ set_global_assignment -name VERILOG_FILE phase_accumulator.v
 set_global_assignment -name VERILOG_FILE cicint.v
 set_global_assignment -name VERILOG_FILE cordic_stage.v
 set_global_assignment -name VERILOG_FILE Penelope.v
+set_location_assignment PIN_96 -to C11

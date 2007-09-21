@@ -56,6 +56,7 @@
 	 3 Sept 2007 - Using alternative CORDIC
 	 9 Sept 2007 - Finalised gain to compensate for loss through CIC and added ALC code. 
 	14 Sept 2007 - Minor tweaks to gain distrubution
+	21 Sept 2007 - Temp fix to reverse sidebands bug
 	
 	
 	
@@ -74,7 +75,7 @@
 //		Pin 	Signal 		Function
 //		C12		CDIN		I2S format I&Q data from Ozy
 //		C17		CLK_MCLK	12.5MHz master clock to Atlas bus
-//		C11		CDOUT		I2S mic data to Ozy
+//		A11		CDOUT		I2S mic data to Ozy
 //		C8		CBCLK		~3MHZ clock from Atlas via Ozy
 //		C9		CLRCLK		48.8kHz clock from Atlas via Ozy
 //		C4      LRCLK 		LR Rx Audio from Atlas via Ozy 	
@@ -92,7 +93,8 @@ module Penelope(
 				output  LVDSCLK,  	// 125MHz to LVDS driver
 				output A2,			// set high to force Ozy to use clock on A5
 				output A5, 			// PCLK_12MHZ (12.5MHz) to Atlas bus
-				output A11,			// CDOUT (Mic) to Atlas bus
+				output C11,			// CDOUT (Mic) to Atlas bus  ***** was A11
+				output A11,
 				input  C4, 			// LROUT (Rx audio) from Atlas bus
 				input  C8,			// CBLCK from Atlas bus
 				input  C9, 			// CLRCLK from Atlas bus
@@ -142,7 +144,7 @@ module Penelope(
 
 // link through FPGA where required
 
-assign A11 = CDOUT;
+assign C11 = CDOUT;			// ***** was A11, use for testing 
 assign CBCLK = C8;
 assign CLK_MCLK = C17;
 assign A5 = PCLK_12MHZ; 
@@ -213,7 +215,7 @@ load <= load + 3'b1;			// select next data word to send
 case (load)
 3'd0: tdata <= 16'h1E00;		// data to load into TLV320
 3'd1: tdata <= 16'h1201;
-3'd2: tdata <= 16'h0815;
+3'd2: tdata <= 16'h0815;        // 14 = mic boost off, 15 = on
 3'd3: tdata <= 16'h0C00;
 3'd4: tdata <= 16'h0E02;
 3'd5: tdata <= 16'h1000;
@@ -488,8 +490,8 @@ wire [15:0]cic_out_q;
 wire ce_out_i;				// narrow pulse when data required
 wire ce_out_q;				// narrow pulse when data required
 
-cicint cic_I( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_i),.filter_out(cic_out_i),.ce_out(ce_out_i));
-cicint cic_Q( .clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_q),.filter_out(cic_out_q),.ce_out(ce_out_q));
+cicint cic_I(.clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_i),.filter_out(cic_out_i),.ce_out(ce_out_i));
+cicint cic_Q(.clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_q),.filter_out(cic_out_q),.ce_out(ce_out_q));
 
 
 //////////////////////////////////////////////////////////////
@@ -513,8 +515,8 @@ wire [16:0]i_temp;
 phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
 
 // The cordic takes I and Q in along with the top 15 bits of the phase dword.  The I and Q out are freq shifted
-cordic_16 tx_cordic(.i_in(cic_out_i),.q_in(cic_out_q),.iout(i_out),.qout(q_out),.ain(phase[31:12]),.clk(clock));
-
+cordic_16 tx_cordic(.i_in(cic_out_q),.q_in(cic_out_i),.iout(i_out),.qout(q_out),.ain(phase[31:12]),.clk(clock));
+// NOTE:  I and Q inputs reversed to give correct sideband out - FIX THIS 
 
 /* 
 	We can use either the I or Q output from the CORDIC directly to drive the DAC.
