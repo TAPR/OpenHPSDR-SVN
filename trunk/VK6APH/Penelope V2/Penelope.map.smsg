@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Fri Sep 14 20:14:20 2007
+    Info: Processing started: Fri Sep 21 21:52:50 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
 Info: Found 1 design units, including 1 entities, in source file cordic.v
     Info: Found entity 1: cordic_16
@@ -20,8 +20,9 @@ Info: Found 1 design units, including 1 entities, in source file cordic_stage.v
 Info: Found 1 design units, including 1 entities, in source file Penelope.v
     Info: Found entity 1: Penelope
 Info: Elaborating entity "Penelope" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(630): object "Address" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(634): object "Mode" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(631): object "Address" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(635): object "Mode" assigned a value but never read
+Warning (10034): Output port "A11" at Penelope.v(96) has no driver
 Info: Elaborating entity "ADC" for hierarchy "ADC:ADC_SPI"
 Info: Elaborating entity "division" for hierarchy "division:division_DDS"
 Info: Elaborating entity "ALC" for hierarchy "ALC:ALC_I"
@@ -193,6 +194,7 @@ Info: Found 1 design units, including 1 entities, in source file db/add_sub_rjg.
     Info: Found entity 1: add_sub_rjg
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "A2" stuck at VCC
+    Warning: Pin "A11" stuck at GND
     Warning: Pin "LED7" stuck at GND
     Warning: Pin "nLVDSRXE" stuck at GND
     Warning: Pin "LVDSTXE" stuck at VCC
@@ -205,13 +207,13 @@ Info: 5 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
 Info: Found the following redundant logic cells in design
     Info: Logic cell "ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider|add_sub_15_result_int[0]~62"
-Info: Implemented 3795 device resources after synthesis - the final resource count might be different
+Info: Implemented 3796 device resources after synthesis - the final resource count might be different
     Info: Implemented 12 input pins
-    Info: Implemented 52 output pins
+    Info: Implemented 53 output pins
     Info: Implemented 2 bidirectional pins
     Info: Implemented 3721 logic cells
     Info: Implemented 8 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 45 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 47 warnings
     Info: Allocated 142 megabytes of memory during processing
-    Info: Processing ended: Fri Sep 14 20:15:30 2007
-    Info: Elapsed time: 00:01:10
+    Info: Processing ended: Fri Sep 21 21:53:58 2007
+    Info: Elapsed time: 00:01:08

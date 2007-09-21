@@ -152,7 +152,7 @@ RESERVED_INPUT               : 92        :        :                   :         
 GND                          : 93        : gnd    :                   :         :           :                
 C12                          : 94        : input  : 3.3-V LVTTL       :         : 4         : Y              
 RESERVED_INPUT               : 95        :        :                   :         : 4         :                
-RESERVED_INPUT               : 96        :        :                   :         : 4         :                
+C11                          : 96        : output : 3.3-V LVTTL       :         : 4         : Y              
 A11                          : 97        : output : 3.3-V LVTTL       :         : 4         : Y              
 VCCIO4                       : 98        : power  :                   : 3.3V    : 4         :                
 RESERVED_INPUT               : 99        :        :                   :         : 4         :                
