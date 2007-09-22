@@ -79,12 +79,10 @@ set_location_assignment PIN_134 -to FPGA_PTT
 set_location_assignment PIN_197 -to FPGA_PLL
 set_location_assignment PIN_198 -to LVDSCLK
 set_location_assignment PIN_199 -to LVDSTXE
-set_location_assignment PIN_168 -to MOSI
 set_location_assignment PIN_171 -to PTT
 set_location_assignment PIN_149 -to PWM0
 set_location_assignment PIN_150 -to PWM1
 set_location_assignment PIN_151 -to PWM2
-set_location_assignment PIN_165 -to SSCK
 set_location_assignment PIN_143 -to USEROUT0
 set_location_assignment PIN_142 -to USEROUT1
 set_location_assignment PIN_141 -to USEROUT2

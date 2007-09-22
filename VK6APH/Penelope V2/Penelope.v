@@ -57,6 +57,8 @@
 	 9 Sept 2007 - Finalised gain to compensate for loss through CIC and added ALC code. 
 	14 Sept 2007 - Minor tweaks to gain distrubution
 	21 Sept 2007 - Temp fix to reverse sidebands bug
+	22 Sept 2007 - Added fast attach, slow decay ALC
+	22 Sept 2007 - TLV320 now set up via I2C
 	
 	
 	
@@ -93,8 +95,8 @@ module Penelope(
 				output  LVDSCLK,  	// 125MHz to LVDS driver
 				output A2,			// set high to force Ozy to use clock on A5
 				output A5, 			// PCLK_12MHZ (12.5MHz) to Atlas bus
-				output C11,			// CDOUT (Mic) to Atlas bus  ***** was A11
-				output A11,
+				output C11,			// CDOUT (Mic) to Atlas bus ***** TEMP FOR TESTING
+				output A11,			// CDOUT (Mic) to Atlas bus
 				input  C4, 			// LROUT (Rx audio) from Atlas bus
 				input  C8,			// CBLCK from Atlas bus
 				input  C9, 			// CLRCLK from Atlas bus
@@ -120,9 +122,7 @@ module Penelope(
 				output FPGA_PLL,
 				input  PTT,			// PTT from mic connector or DB25 pin 1
 				inout  PTT_in,		// PTT on Atlas bus - C15
-				output reg MOSI,
-				output reg SSCK,
-				output reg nCS,
+				output nCS,
 				output CMODE,
 				input  CDOUT,		// Mic or Line In out to Atlas Bus
 				output CBCLK,
@@ -152,6 +152,8 @@ assign LROUT =  C4;			// Rx audio (actually CDIN on TLV320)
 assign CDIN =  C12;     	// I&Q from Atlas bus
 assign ext_10MHZ = _10MHZ; 	// 10MHz TCXO to C16 on Atlas bus 
 assign A2 = 1'b1;			// force high so that Ozy uses PCLK_12MHZ as its master clock
+assign CMODE = 1'b0;		// Set to 0 for I2C mode
+assign nCS = 1'b1; 			// I2C address is 0x1B
 
 wire clock;
 //assign clock = _125MHZLVDS; // use this when using external LVDS clock 
@@ -179,99 +181,6 @@ always @ (posedge clock) begin
 		reset_count <= reset_count + 1'b1;
 	end
 end 
-
-
-//////////////////////////////////////////////////////////////
-//
-// 		Set up TLV320 using SPI 
-//
-/////////////////////////////////////////////////////////////
-
-/* Data to send to TLV320 is 
-
- 	1E 00 - Reset chip
- 	12 01 - set digital interface active
- 	08 15 - D/A on, mic input, mic 20dB boost
-   (08 14 - ditto but no mic boost)
- 	0C 00 - All chip power on
- 	0E 02 - Slave, 16 bit, I2S
- 	10 00 - 48k, Normal mode
- 	0A 00 - turn D/A mute off
-
-*/
-
-reg index;
-reg [15:0]tdata;
-reg [2:0]load;
-reg [3:0]TLV;
-reg [15:0] TLV_data;
-reg [3:0] bit_cnt;
-
-// Set up TLV320 data to send 
-
-always @ (posedge index)		
-begin
-load <= load + 3'b1;			// select next data word to send
-case (load)
-3'd0: tdata <= 16'h1E00;		// data to load into TLV320
-3'd1: tdata <= 16'h1201;
-3'd2: tdata <= 16'h0815;        // 14 = mic boost off, 15 = on
-3'd3: tdata <= 16'h0C00;
-3'd4: tdata <= 16'h0E02;
-3'd5: tdata <= 16'h1000;
-3'd6: tdata <= 16'h0A00;
-default: load <= 0;
-endcase
-end
-
-// State machine to send data to TLV320 via SPI interface
-
-assign CMODE = 1'b1;		// Set to 1 for SPI mode
-
-always @ (posedge CMCLK)	// use 12.5MHz clock for SPI
-begin
-case (TLV)
-4'd0: begin
-         nCS <= 1'b1;                   // set TLV320 CS high
-         bit_cnt <= 4'd15;             	// set starting bit count to 15
-         index <= ~index;               // load next data to send
-         TLV <= TLV + 4'b1;
-      end
- 4'd1: begin
-         nCS <= 1'b0;                   // start data transfer with nCS low
-         TLV_data <= tdata;
-         MOSI <= TLV_data[bit_cnt];    	// set data up
-         TLV <= TLV + 4'b1;
-       end
- 4'd2: begin
-         SSCK <= 1'b1;                  // clock data into TLV320
-         TLV <= TLV + 4'b1;
-       end
- 4'd3: begin
-         SSCK <= 1'b0;                  // reset clock
-         TLV <= TLV + 4'b1;
-       end
- 4'd4: begin
-          if(bit_cnt == 0) begin   		// word transfer is complete, check for any more
-            index <= ~index;
-            TLV <= 4'd5;
-          end
-          else begin
-            bit_cnt <= bit_cnt - 1'b1;
-            TLV <= 4'b1;                   // go round again
-          end
-       end                                 // end transfer
- 4'd5: begin
-         if (load == 7)begin               // stop when all data sent
-            TLV <= 4'd5;                   // hang out here forever
-            nCS <= 1'b1;                   // set CS high
-         end
-         else TLV <= 0;                    // else get next data
-       end
- default: TLV <= 0;
- endcase
- end
-
 
 //////////////////////////////////////////////////////////////
 //
@@ -428,13 +337,45 @@ end
 
 assign PWM0_Data = ALC_i;
 assign PWM1_Data = ALC_q;
-assign PWM2_Data = ALC_i;
+assign PWM2_Data = {1'b0,ALC_out[20:6]}; // PWM2 has ALC volts for testing
 
 ////////////////////////////////////////////////////////////////
 //
 //  ALC
 //
 ////////////////////////////////////////////////////////////////
+
+// The flowing code provides fast attack and slow decay for the 
+// ALC voltage. The output from the ALC ADC is compared with its
+// previous sample. If higher,or the same,the new value is used.
+// If lower then the previous value is used but decremented by 1 each 
+// time through the loop. This provides a (linear) slow decay of
+// approximately 2 seconds. Extend ALC input to 21 bits to 
+// get sufficient delay. 
+
+reg [20:0]ALC_out;
+reg [20:0]ALC_in;
+reg [20:0]previous;
+reg ALC;
+
+always @ (posedge ADCCLK)
+begin
+ALC_in <= {AIN5,9'd0};					// extend 12 to 21 bits
+case (ALC)
+0:  begin
+	ALC <= 1'b1;
+	if(ALC_in >= previous)
+		ALC_out <= ALC_in;				// use current sample
+	else
+		ALC_out <= previous - 1'b1;  	// use previous sample
+	end
+1:  begin
+	previous <= ALC_out;				// save previous sample
+	ALC <= 1'b0;
+	end 
+endcase
+end
+
 
 /*
 	The Automatic Level Control (ALC) works as follows. The I and Q samples are multipled 
@@ -451,8 +392,7 @@ wire [15:0]gain;
 
 assign set_level = 16'h9999; // corresponds to 0.9999 i.e. unity gain
 
-wire [15:0]ALC_level = {4'd0,AIN5}; // gain for ALC signal 
-
+wire [15:0]ALC_level = {3'd0,ALC_out[20:8]}; // gain for ALC signal 
 assign gain = (set_level - ALC_level);
 
 // use this to turn ALC off
@@ -531,7 +471,7 @@ cordic_16 tx_cordic(.i_in(cic_out_q),.q_in(cic_out_i),.iout(i_out),.qout(q_out),
 */
 
 // Add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This is necessary since the 
-// interpolating CIC has a loss because it does not interpolate by 2^n. 
+// interpolating CIC has a loss since it does not interpolate by 2^n. 
 
 assign DAC[13:0] = {i_out[17], i_out[15:3]}; 	// use q_out if 90 degree phase shift required by EER Tx etc
 
@@ -568,6 +508,7 @@ end
 assign PWM0 = PWM0_accumulator[16];       // send to PWM LPFs for now 
 assign PWM1 = PWM1_accumulator[16]; 
 assign PWM2 = PWM2_accumulator[16]; 
+
 
 
 ///////////////////////////////////////////////////////////
@@ -737,13 +678,12 @@ assign FPGA_PLL = ref_2_5M ^ osc_2_5M;
 
 assign LED7 = 0;				// LED7 ON so we can see code has loaded OK 
 
-// Bar graph for power output - 50mW = 1295
-
-assign LED2 = (AIN5 > 250)?  1'b0 : 1'b1;  // 0.1W = 1831
-assign LED3 = (AIN5 > 500)? 1'b0 : 1'b1;  // 0.2W = 2590
-assign LED4 = (AIN5 > 1000)? 1'b0 : 1'b1;  // 0.3W = 3172
-assign LED5 = (AIN5 > 2000)? 1'b0 : 1'b1;  // 0.4W = 3663
-assign LED6 = (AIN5 > 3000)? 1'b0 : 1'b1;  // 0.5W = 4096
+// Bar graph for power output 
+assign LED2 = (AIN5 > 250)?  1'b0 : 1'b1;  
+assign LED3 = (AIN5 > 500)? 1'b0 : 1'b1;  
+assign LED4 = (AIN5 > 1000)? 1'b0 : 1'b1;  
+assign LED5 = (AIN5 > 2000)? 1'b0 : 1'b1;  
+assign LED6 = (AIN5 > 3000)? 1'b0 : 1'b1;  
 
 // User open collector outputs 
 assign USEROUT0 = OC[0];

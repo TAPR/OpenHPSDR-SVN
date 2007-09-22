@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Fri Sep 21 21:52:50 2007
+    Info: Processing started: Sat Sep 22 17:36:43 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
 Info: Found 1 design units, including 1 entities, in source file cordic.v
     Info: Found entity 1: cordic_16
@@ -20,9 +20,9 @@ Info: Found 1 design units, including 1 entities, in source file cordic_stage.v
 Info: Found 1 design units, including 1 entities, in source file Penelope.v
     Info: Found entity 1: Penelope
 Info: Elaborating entity "Penelope" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(631): object "Address" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(635): object "Mode" assigned a value but never read
-Warning (10034): Output port "A11" at Penelope.v(96) has no driver
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(573): object "Address" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(577): object "Mode" assigned a value but never read
+Warning (10034): Output port "A11" at Penelope.v(99) has no driver
 Info: Elaborating entity "ADC" for hierarchy "ADC:ADC_SPI"
 Info: Elaborating entity "division" for hierarchy "division:division_DDS"
 Info: Elaborating entity "ALC" for hierarchy "ALC:ALC_I"
@@ -33,29 +33,23 @@ Warning (10230): Verilog HDL assignment warning at cicint.v(182): truncated valu
 Warning (10230): Verilog HDL assignment warning at cicint.v(188): truncated value with size 32 to match size of target (1)
 Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
 Info: Elaborating entity "cordic_16" for hierarchy "cordic_16:tx_cordic"
-Warning: Reduced register "tdata[15]" with stuck data_in port to stuck value GND
-Warning: Reduced register "tdata[14]" with stuck data_in port to stuck value GND
-Warning: Reduced register "tdata[13]" with stuck data_in port to stuck value GND
-Warning: Reduced register "tdata[8]" with stuck data_in port to stuck value GND
-Warning: Reduced register "tdata[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "tdata[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "tdata[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "tdata[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "TLV[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "TLV_data[15]" with stuck data_in port to stuck value GND
-Warning: Reduced register "TLV_data[14]" with stuck data_in port to stuck value GND
-Warning: Reduced register "TLV_data[13]" with stuck data_in port to stuck value GND
-Warning: Reduced register "TLV_data[8]" with stuck data_in port to stuck value GND
-Warning: Reduced register "TLV_data[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "TLV_data[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "TLV_data[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "TLV_data[3]" with stuck data_in port to stuck value GND
+Warning: Reduced register "ALC_in[8]" with stuck data_in port to stuck value GND
+Warning: Reduced register "ALC_in[7]" with stuck data_in port to stuck value GND
+Warning: Reduced register "ALC_in[6]" with stuck data_in port to stuck value GND
+Warning: Reduced register "ALC_in[5]" with stuck data_in port to stuck value GND
+Warning: Reduced register "ALC_in[4]" with stuck data_in port to stuck value GND
+Warning: Reduced register "ALC_in[3]" with stuck data_in port to stuck value GND
+Warning: Reduced register "ALC_in[2]" with stuck data_in port to stuck value GND
+Warning: Reduced register "ALC_in[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "ALC_in[0]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|i0[2]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|i0[1]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|i0[0]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|q0[2]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|q0[1]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|q0[0]" with stuck data_in port to stuck value GND
+Info: Power-up level of register "PWM2_Data_in[15]" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "PWM2_Data_in[15]" with stuck data_in port to stuck value VCC
 Warning: Reduced register "cordic_16:tx_cordic|i1[0]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|q1[0]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|i1[1]" with stuck data_in port to stuck value GND
@@ -63,22 +57,6 @@ Warning: Reduced register "cordic_16:tx_cordic|q1[1]" with stuck data_in port to
 Warning: Reduced register "cordic_16:tx_cordic|i2[0]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|q2[0]" with stuck data_in port to stuck value GND
 Info: Duplicate registers merged to single register
-    Info: Duplicate register "PWM2_Data_in[15]" merged to single register "PWM0_Data_in[15]"
-    Info: Duplicate register "PWM2_Data_in[14]" merged to single register "PWM0_Data_in[14]"
-    Info: Duplicate register "PWM2_Data_in[13]" merged to single register "PWM0_Data_in[13]"
-    Info: Duplicate register "PWM2_Data_in[12]" merged to single register "PWM0_Data_in[12]"
-    Info: Duplicate register "PWM2_Data_in[11]" merged to single register "PWM0_Data_in[11]"
-    Info: Duplicate register "PWM2_Data_in[10]" merged to single register "PWM0_Data_in[10]"
-    Info: Duplicate register "PWM2_Data_in[9]" merged to single register "PWM0_Data_in[9]"
-    Info: Duplicate register "PWM2_Data_in[8]" merged to single register "PWM0_Data_in[8]"
-    Info: Duplicate register "PWM2_Data_in[7]" merged to single register "PWM0_Data_in[7]"
-    Info: Duplicate register "PWM2_Data_in[6]" merged to single register "PWM0_Data_in[6]"
-    Info: Duplicate register "PWM2_Data_in[5]" merged to single register "PWM0_Data_in[5]"
-    Info: Duplicate register "PWM2_Data_in[4]" merged to single register "PWM0_Data_in[4]"
-    Info: Duplicate register "PWM2_Data_in[3]" merged to single register "PWM0_Data_in[3]"
-    Info: Duplicate register "PWM2_Data_in[2]" merged to single register "PWM0_Data_in[2]"
-    Info: Duplicate register "PWM2_Data_in[1]" merged to single register "PWM0_Data_in[1]"
-    Info: Duplicate register "PWM2_Data_in[0]" merged to single register "PWM0_Data_in[0]"
     Info: Duplicate register "cicint:cic_Q|diff1[15]" merged to single register "cicint:cic_Q|diff1[16]"
     Info: Duplicate register "cicint:cic_Q|diff2[16]" merged to single register "cicint:cic_Q|diff2[17]"
     Info: Duplicate register "cicint:cic_Q|diff3[17]" merged to single register "cicint:cic_Q|diff3[18]"
@@ -105,32 +83,6 @@ Warning: Reduced register "cordic_16:tx_cordic|i1[2]" with stuck data_in port to
 Warning: Reduced register "cordic_16:tx_cordic|q1[2]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|i2[1]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|q2[1]" with stuck data_in port to stuck value GND
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "tdata[2]" merged to single register "tdata[4]"
-    Info: Duplicate register "TLV_data[2]" merged to single register "TLV_data[4]"
-    Info: Duplicate register "PWM2_accumulator[0]" merged to single register "PWM0_accumulator[0]"
-    Info: Duplicate register "PWM2_accumulator[1]" merged to single register "PWM0_accumulator[1]"
-    Info: Duplicate register "PWM2_accumulator[2]" merged to single register "PWM0_accumulator[2]"
-    Info: Duplicate register "PWM2_accumulator[3]" merged to single register "PWM0_accumulator[3]"
-    Info: Duplicate register "PWM2_accumulator[4]" merged to single register "PWM0_accumulator[4]"
-    Info: Duplicate register "PWM2_accumulator[5]" merged to single register "PWM0_accumulator[5]"
-    Info: Duplicate register "PWM2_accumulator[6]" merged to single register "PWM0_accumulator[6]"
-    Info: Duplicate register "PWM2_accumulator[7]" merged to single register "PWM0_accumulator[7]"
-    Info: Duplicate register "PWM2_accumulator[8]" merged to single register "PWM0_accumulator[8]"
-    Info: Duplicate register "PWM2_accumulator[9]" merged to single register "PWM0_accumulator[9]"
-    Info: Duplicate register "PWM2_accumulator[10]" merged to single register "PWM0_accumulator[10]"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "PWM2_accumulator[11]" merged to single register "PWM0_accumulator[11]"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "PWM2_accumulator[12]" merged to single register "PWM0_accumulator[12]"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "PWM2_accumulator[13]" merged to single register "PWM0_accumulator[13]"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "PWM2_accumulator[14]" merged to single register "PWM0_accumulator[14]"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "PWM2_accumulator[15]" merged to single register "PWM0_accumulator[15]"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "PWM2_accumulator[16]" merged to single register "PWM0_accumulator[16]"
 Info: State machine "|Penelope|IQ_state" contains 5 states
 Info: State machine "|Penelope|CC_state" contains 3 states
 Info: State machine "|Penelope|ADC:ADC_SPI|ADC" contains 5 states
@@ -169,6 +121,7 @@ Info: Encoding result for state machine "|Penelope|ADC:ADC_SPI|ADC"
     Info: State "|Penelope|ADC:ADC_SPI|ADC.010" uses code string "01010"
     Info: State "|Penelope|ADC:ADC_SPI|ADC.100" uses code string "00011"
     Info: State "|Penelope|ADC:ADC_SPI|ADC.001" uses code string "10010"
+Warning: Resynthesizing Cyclone or Stratix WYSIWYG primitives into Cyclone II WYSIWYG primitives; however, resynthesized WYSIWYG primitives may not produce optimal compilation results.
 Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_divide.tdf
     Info: Found entity 1: lpm_divide
 Info: Elaborated megafunction instantiation "ALC:ALC_I|lpm_divide:Div0"
@@ -198,7 +151,8 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "LED7" stuck at GND
     Warning: Pin "nLVDSRXE" stuck at GND
     Warning: Pin "LVDSTXE" stuck at VCC
-    Warning: Pin "CMODE" stuck at VCC
+    Warning: Pin "nCS" stuck at VCC
+    Warning: Pin "CMODE" stuck at GND
 Info: 5 registers lost all their fanouts during netlist optimizations. The first 5 are displayed below.
     Info: Register "IQ_state~7" lost all its fanouts during netlist optimizations.
     Info: Register "IQ_state~8" lost all its fanouts during netlist optimizations.
@@ -207,13 +161,13 @@ Info: 5 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
 Info: Found the following redundant logic cells in design
     Info: Logic cell "ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider|add_sub_15_result_int[0]~62"
-Info: Implemented 3796 device resources after synthesis - the final resource count might be different
+Info: Implemented 3866 device resources after synthesis - the final resource count might be different
     Info: Implemented 12 input pins
-    Info: Implemented 53 output pins
+    Info: Implemented 51 output pins
     Info: Implemented 2 bidirectional pins
-    Info: Implemented 3721 logic cells
+    Info: Implemented 3793 logic cells
     Info: Implemented 8 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 47 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 42 warnings
     Info: Allocated 142 megabytes of memory during processing
-    Info: Processing ended: Fri Sep 21 21:53:58 2007
-    Info: Elapsed time: 00:01:08
+    Info: Processing ended: Sat Sep 22 17:37:47 2007
+    Info: Elapsed time: 00:01:04
