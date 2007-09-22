@@ -1,5 +1,5 @@
 Partition Merge report for Penelope
-Fri Sep 21 21:54:01 2007
+Sat Sep 22 17:37:51 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -38,16 +38,16 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Partition Merge Summary                                                      ;
 +------------------------------------+-----------------------------------------+
-; Partition Merge Status             ; Successful - Fri Sep 21 21:54:01 2007   ;
+; Partition Merge Status             ; Successful - Sat Sep 22 17:37:51 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                ;
 ; Top-level Entity Name              ; Penelope                                ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 3,159                                   ;
-;     Total combinational functions  ; 3,159                                   ;
-;     Dedicated logic registers      ; 2,130                                   ;
-; Total registers                    ; 2130                                    ;
-; Total pins                         ; 66                                      ;
+; Total logic elements               ; 3,191                                   ;
+;     Total combinational functions  ; 3,191                                   ;
+;     Dedicated logic registers      ; 2,189                                   ;
+; Total registers                    ; 2189                                    ;
+; Total pins                         ; 64                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 0                                       ;
 ; Embedded Multiplier 9-bit elements ; 8                                       ;
@@ -69,7 +69,7 @@ applicable agreement for further details.
 +----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
 ; Partition Name ; Total combinational functions ; normal mode ; arithmetic mode ; Total registers ; Input Ports ; Output Ports ; Registered Input Ports ; Registered Output Ports ; Unconnected Input Ports ; Unconnected Output Ports ; Driven Ground Input Ports ; Driven VCC Input Ports ; Partition Contents ;
 +----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
-; Top            ; 3166                          ; 1250        ; 1916            ; 2130            ; 12          ; 54           ; 0                      ; 32                      ; N/A                     ; N/A                      ; N/A                       ; N/A                    ;                    ;
+; Top            ; 3198                          ; 1228        ; 1970            ; 2189            ; 12          ; 52           ; 0                      ; 29                      ; N/A                     ; N/A                      ; N/A                       ; N/A                    ;                    ;
 +----------------+-------------------------------+-------------+-----------------+-----------------+-------------+--------------+------------------------+-------------------------+-------------------------+--------------------------+---------------------------+------------------------+--------------------+
 
 
@@ -78,27 +78,27 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 3,159   ;
+; Estimated Total logic elements              ; 3,191   ;
 ;                                             ;         ;
-; Total combinational functions               ; 3159    ;
+; Total combinational functions               ; 3191    ;
 ; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 327     ;
-;     -- 3 input functions                    ; 1837    ;
-;     -- <=2 input functions                  ; 995     ;
+;     -- 4 input functions                    ; 316     ;
+;     -- 3 input functions                    ; 1849    ;
+;     -- <=2 input functions                  ; 1026    ;
 ;                                             ;         ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 1243    ;
-;     -- arithmetic mode                      ; 1916    ;
+;     -- normal mode                          ; 1221    ;
+;     -- arithmetic mode                      ; 1970    ;
 ;                                             ;         ;
-; Total registers                             ; 2130    ;
-;     -- Dedicated logic registers            ; 2130    ;
+; Total registers                             ; 2189    ;
+;     -- Dedicated logic registers            ; 2189    ;
 ;     -- I/O registers                        ; 0       ;
 ;                                             ;         ;
-; I/O pins                                    ; 66      ;
+; I/O pins                                    ; 64      ;
 ; Embedded Multiplier 9-bit elements          ; 8       ;
 ; Maximum fan-out node                        ; _125MHZ ;
-; Maximum fan-out                             ; 1839    ;
-; Total fan-out                               ; 14353   ;
+; Maximum fan-out                             ; 1871    ;
+; Total fan-out                               ; 14590   ;
 ; Average fan-out                             ; 2.68    ;
 +---------------------------------------------+---------+
 
@@ -127,7 +127,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 Info: *******************************************************************
 Info: Running Quartus II Partition Merge
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Fri Sep 21 21:54:00 2007
+    Info: Processing started: Sat Sep 22 17:37:50 2007
 Info: Command: quartus_cdb --read_settings_files=off --write_settings_files=off Penelope -c Penelope --merge=on
 Info: Using synthesis netlist for partition "Top"
 Info: Netlist merging resolved 1 partition(s) out of the 1 partition(s) found
@@ -135,7 +135,7 @@ Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "_125MHZLVDS"
 Info: Quartus II Partition Merge was successful. 0 errors, 2 warnings
     Info: Allocated 99 megabytes of memory during processing
-    Info: Processing ended: Fri Sep 21 21:54:01 2007
+    Info: Processing ended: Sat Sep 22 17:37:51 2007
     Info: Elapsed time: 00:00:01
 
 

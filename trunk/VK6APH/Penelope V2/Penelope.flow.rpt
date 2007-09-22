@@ -1,5 +1,5 @@
 Flow report for Penelope
-Fri Sep 21 21:56:52 2007
+Sat Sep 22 17:41:04 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Fri Sep 21 21:56:52 2007   ;
+; Flow Status                        ; Successful - Sat Sep 22 17:41:03 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                ;
 ; Top-level Entity Name              ; Penelope                                ;
@@ -45,11 +45,11 @@ applicable agreement for further details.
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
 ; Met timing requirements            ; No                                      ;
-; Total logic elements               ; 3,478 / 8,256 ( 42 % )                  ;
-;     Total combinational functions  ; 3,159 / 8,256 ( 38 % )                  ;
-;     Dedicated logic registers      ; 2,130 / 8,256 ( 26 % )                  ;
-; Total registers                    ; 2130                                    ;
-; Total pins                         ; 66 / 138 ( 48 % )                       ;
+; Total logic elements               ; 3,551 / 8,256 ( 43 % )                  ;
+;     Total combinational functions  ; 3,191 / 8,256 ( 39 % )                  ;
+;     Dedicated logic registers      ; 2,189 / 8,256 ( 27 % )                  ;
+; Total registers                    ; 2189                                    ;
+; Total pins                         ; 64 / 138 ( 46 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 0 / 165,888 ( 0 % )                     ;
 ; Embedded Multiplier 9-bit elements ; 8 / 36 ( 22 % )                         ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/21/2007 21:52:51 ;
+; Start date & time ; 09/22/2007 17:36:44 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Penelope            ;
 +-------------------+---------------------+
@@ -84,12 +84,12 @@ applicable agreement for further details.
 +-------------------------+--------------+
 ; Module Name             ; Elapsed Time ;
 +-------------------------+--------------+
-; Analysis & Synthesis    ; 00:01:08     ;
+; Analysis & Synthesis    ; 00:01:05     ;
 ; Partition Merge         ; 00:00:01     ;
-; Fitter                  ; 00:02:29     ;
-; Assembler               ; 00:00:08     ;
+; Fitter                  ; 00:02:47     ;
+; Assembler               ; 00:00:09     ;
 ; Classic Timing Analyzer ; 00:00:06     ;
-; Total                   ; 00:03:52     ;
+; Total                   ; 00:04:08     ;
 +-------------------------+--------------+
 
 

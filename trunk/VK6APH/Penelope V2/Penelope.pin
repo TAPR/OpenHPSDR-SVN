@@ -221,10 +221,10 @@ CLRCIN                       : 161       : output : 3.3-V LVTTL       :         
 LROUT                        : 162       : output : 3.3-V LVTTL       :         : 2         : Y              
 CBCLK                        : 163       : output : 3.3-V LVTTL       :         : 2         : Y              
 CMCLK                        : 164       : output : 3.3-V LVTTL       :         : 2         : Y              
-SSCK                         : 165       : output : 3.3-V LVTTL       :         : 2         : Y              
+RESERVED_INPUT               : 165       :        :                   :         : 2         :                
 VCCIO2                       : 166       : power  :                   : 3.3V    : 2         :                
 GND                          : 167       : gnd    :                   :         :           :                
-MOSI                         : 168       : output : 3.3-V LVTTL       :         : 2         : Y              
+RESERVED_INPUT               : 168       :        :                   :         : 2         :                
 CMODE                        : 169       : output : 3.3-V LVTTL       :         : 2         : Y              
 nCS                          : 170       : output : 3.3-V LVTTL       :         : 2         : Y              
 PTT                          : 171       : input  : 3.3-V LVTTL       :         : 2         : Y              

@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 6.876 ns
+Actual Time    : 7.570 ns
 From           : C9
-To             : bit_count[1]
+To             : bit_count[0]
 From Clock     : --
 To Clock       : C8
 Failed Paths   : 0
@@ -15,7 +15,7 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 17.999 ns
+Actual Time    : 18.019 ns
 From           : ADC:ADC_SPI|AIN5[1]
 To             : LED5
 From Clock     : C8
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.382 ns
+Actual Time    : 11.380 ns
 From           : C4
 To             : LROUT
 From Clock     : --
@@ -35,9 +35,9 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -1.352 ns
+Actual Time    : -0.840 ns
 From           : ADCMISO
-To             : ADC:ADC_SPI|temp_AIN5[9]
+To             : ADC:ADC_SPI|temp_AIN5[2]
 From Clock     : --
 To Clock       : C8
 Failed Paths   : 0
@@ -46,37 +46,27 @@ Type           : Clock Setup: '_125MHZ'
 Slack          : -6.220 ns
 Required Time  : 125.00 MHz ( period = 8.000 ns )
 Actual Time    : 70.32 MHz ( period = 14.220 ns )
-From           : cicint:cic_Q|diff1[0]
-To             : cicint:cic_Q|section_out6[19]
+From           : cicint:cic_I|diff1[0]
+To             : cicint:cic_I|section_out6[19]
 From Clock     : _125MHZ
 To Clock       : _125MHZ
-Failed Paths   : 2508
-
-Type           : Clock Setup: 'C17'
-Slack          : 1.134 ns
-Required Time  : 125.00 MHz ( period = 8.000 ns )
-Actual Time    : 145.65 MHz ( period = 6.866 ns )
-From           : load[1]
-To             : TLV[2]
-From Clock     : C17
-To Clock       : C17
-Failed Paths   : 0
+Failed Paths   : 2426
 
 Type           : Clock Setup: 'C8'
-Slack          : 2.835 ns
+Slack          : 0.574 ns
 Required Time  : 125.00 MHz ( period = 8.000 ns )
-Actual Time    : 193.61 MHz ( period = 5.165 ns )
-From           : bit_count[0]
-To             : bit_count[1]
+Actual Time    : 134.66 MHz ( period = 7.426 ns )
+From           : previous[3]
+To             : ALC_out[3]
 From Clock     : C8
 To Clock       : C8
 Failed Paths   : 0
 
 Type           : Clock Setup: '_10MHZ'
-Slack          : 98.215 ns
+Slack          : 98.486 ns
 Required Time  : 10.00 MHz ( period = 100.000 ns )
 Actual Time    : Restricted to 340.02 MHz ( period = 2.941 ns )
-From           : ref_count[0]
+From           : ref_count[2]
 To             : ref_2_5M
 From Clock     : _10MHZ
 To Clock       : _10MHZ
@@ -96,8 +86,8 @@ Type           : Clock Hold: '_10MHZ'
 Slack          : 0.499 ns
 Required Time  : 10.00 MHz ( period = 100.000 ns )
 Actual Time    : N/A
-From           : ref_count[2]
-To             : ref_count[2]
+From           : ref_count[1]
+To             : ref_count[1]
 From Clock     : _10MHZ
 To Clock       : _10MHZ
 Failed Paths   : 0
@@ -112,16 +102,6 @@ From Clock     : C8
 To Clock       : C8
 Failed Paths   : 0
 
-Type           : Clock Hold: 'C17'
-Slack          : 0.499 ns
-Required Time  : 125.00 MHz ( period = 8.000 ns )
-Actual Time    : N/A
-From           : nCS~reg0
-To             : nCS~reg0
-From Clock     : C17
-To Clock       : C17
-Failed Paths   : 0
-
 Type           : Total number of failed paths
 Slack          : 
 Required Time  : 
@@ -130,7 +110,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 2508
+Failed Paths   : 2426
 
 --------------------------------------------------------------------------------------
 
