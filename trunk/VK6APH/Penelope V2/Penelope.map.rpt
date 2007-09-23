@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Penelope
-Sat Sep 22 17:37:48 2007
+Sun Sep 23 15:29:09 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -55,13 +55,13 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Sep 22 17:37:48 2007   ;
+; Analysis & Synthesis Status        ; Successful - Sun Sep 23 15:29:09 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                ;
 ; Top-level Entity Name              ; Penelope                                ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 3,198                                   ;
-;     Total combinational functions  ; 3,198                                   ;
+; Total logic elements               ; 3,211                                   ;
+;     Total combinational functions  ; 3,211                                   ;
 ;     Dedicated logic registers      ; 2,189                                   ;
 ; Total registers                    ; N/A until Partition Merge               ;
 ; Total pins                         ; N/A until Partition Merge               ;
@@ -175,17 +175,17 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 3,198   ;
+; Estimated Total logic elements              ; 3,211   ;
 ;                                             ;         ;
-; Total combinational functions               ; 3198    ;
+; Total combinational functions               ; 3211    ;
 ; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 316     ;
-;     -- 3 input functions                    ; 1849    ;
-;     -- <=2 input functions                  ; 1033    ;
+;     -- 4 input functions                    ; 315     ;
+;     -- 3 input functions                    ; 1860    ;
+;     -- <=2 input functions                  ; 1036    ;
 ;                                             ;         ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 1228    ;
-;     -- arithmetic mode                      ; 1970    ;
+;     -- normal mode                          ; 1229    ;
+;     -- arithmetic mode                      ; 1982    ;
 ;                                             ;         ;
 ; Total registers                             ; 2189    ;
 ;     -- Dedicated logic registers            ; 2189    ;
@@ -195,7 +195,7 @@ applicable agreement for further details.
 ; Embedded Multiplier 9-bit elements          ; 8       ;
 ; Maximum fan-out node                        ; _125MHZ ;
 ; Maximum fan-out                             ; 1871    ;
-; Total fan-out                               ; 14604   ;
+; Total fan-out                               ; 14637   ;
 ; Average fan-out                             ; 2.67    ;
 +---------------------------------------------+---------+
 
@@ -205,13 +205,13 @@ applicable agreement for further details.
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                  ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                 ;
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+
-; |Penelope                                   ; 3198 (293)        ; 2189 (437)   ; 0           ; 8            ; 0       ; 4         ; 1    ; 0            ; |Penelope                                                                                                           ;
+; |Penelope                                   ; 3211 (307)        ; 2189 (437)   ; 0           ; 8            ; 0       ; 4         ; 1    ; 0            ; |Penelope                                                                                                           ;
 ;    |ADC:ADC_SPI|                            ; 38 (38)           ; 36 (36)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ADC:ADC_SPI                                                                                               ;
-;    |ALC:ALC_I|                              ; 680 (48)          ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I                                                                                                 ;
-;       |lpm_divide:Div0|                     ; 602 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0                                                                                 ;
-;          |lpm_divide_vfm:auto_generated|    ; 602 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated                                                   ;
-;             |sign_div_unsign_9nh:divider|   ; 602 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider                       ;
-;                |alt_u_div_k5f:divider|      ; 602 (602)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider ;
+;    |ALC:ALC_I|                              ; 679 (48)          ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I                                                                                                 ;
+;       |lpm_divide:Div0|                     ; 601 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0                                                                                 ;
+;          |lpm_divide_vfm:auto_generated|    ; 601 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated                                                   ;
+;             |sign_div_unsign_9nh:divider|   ; 601 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider                       ;
+;                |alt_u_div_k5f:divider|      ; 601 (601)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider ;
 ;       |lpm_mult:Mult0|                      ; 30 (0)            ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_mult:Mult0                                                                                  ;
 ;          |mult_dv01:auto_generated|         ; 30 (30)           ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_mult:Mult0|mult_dv01:auto_generated                                                         ;
 ;    |ALC:ALC_Q|                              ; 78 (48)           ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_Q                                                                                                 ;
@@ -590,7 +590,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sat Sep 22 17:36:43 2007
+    Info: Processing started: Sun Sep 23 15:28:10 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
 Info: Found 1 design units, including 1 entities, in source file cordic.v
     Info: Found entity 1: cordic_16
@@ -749,17 +749,17 @@ Info: 5 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "ADC_SPI/ADC~9" lost all its fanouts during netlist optimizations.
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
 Info: Found the following redundant logic cells in design
-    Info: Logic cell "ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider|add_sub_15_result_int[0]~62"
-Info: Implemented 3866 device resources after synthesis - the final resource count might be different
+    Info: Logic cell "gain[0]~62"
+Info: Implemented 3879 device resources after synthesis - the final resource count might be different
     Info: Implemented 12 input pins
     Info: Implemented 51 output pins
     Info: Implemented 2 bidirectional pins
-    Info: Implemented 3793 logic cells
+    Info: Implemented 3806 logic cells
     Info: Implemented 8 DSP elements
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 42 warnings
     Info: Allocated 142 megabytes of memory during processing
-    Info: Processing ended: Sat Sep 22 17:37:47 2007
-    Info: Elapsed time: 00:01:04
+    Info: Processing ended: Sun Sep 23 15:29:09 2007
+    Info: Elapsed time: 00:00:59
 
 
 +------------------------------------------+

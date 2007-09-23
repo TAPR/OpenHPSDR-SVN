@@ -392,7 +392,7 @@ wire [15:0]gain;
 
 assign set_level = 16'h9999; // corresponds to 0.9999 i.e. unity gain
 
-wire [15:0]ALC_level = {3'd0,ALC_out[20:8]}; // gain for ALC signal 
+wire [15:0]ALC_level = ({4'd0,ALC_out[20:9]} +  {5'd0,ALC_out[20:10]}); // gain for ALC signal (x1.5)
 assign gain = (set_level - ALC_level);
 
 // use this to turn ALC off

@@ -1,12 +1,12 @@
-Fitter Status : Successful - Sat Sep 22 17:40:40 2007
+Fitter Status : Successful - Sun Sep 23 15:31:42 2007
 Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
 Revision Name : Penelope
 Top-level Entity Name : Penelope
 Family : Cyclone II
 Device : EP2C8Q208C8
 Timing Models : Final
-Total logic elements : 3,551 / 8,256 ( 43 % )
-    Total combinational functions : 3,191 / 8,256 ( 39 % )
+Total logic elements : 3,553 / 8,256 ( 43 % )
+    Total combinational functions : 3,204 / 8,256 ( 39 % )
     Dedicated logic registers : 2,189 / 8,256 ( 27 % )
 Total registers : 2189
 Total pins : 64 / 138 ( 46 % )
