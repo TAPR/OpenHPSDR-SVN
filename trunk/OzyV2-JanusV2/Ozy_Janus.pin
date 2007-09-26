@@ -193,7 +193,7 @@ RESERVED_INPUT               : 133       :        :                   :         
 RESERVED_INPUT               : 134       :        :                   :         : 3         :                
 RESERVED_INPUT               : 135       :        :                   :         : 3         :                
 VCCIO3                       : 136       : power  :                   : 3.3V    : 3         :                
-RESERVED_INPUT               : 137       :        :                   :         : 3         :                
+CDOUT_P                      : 137       : input  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 138       :        :                   :         : 3         :                
 RESERVED_INPUT               : 139       :        :                   :         : 3         :                
 GND                          : 140       : gnd    :                   :         :           :                
@@ -203,7 +203,7 @@ RESERVED_INPUT               : 143       :        :                   :         
 PCLK_12MHZ                   : 144       : input  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 145       :        :                   :         : 3         :                
 RESERVED_INPUT               : 146       :        :                   :         : 3         :                
-A2                           : 147       : input  : 3.3-V LVTTL       :         : 3         : Y              
+RESERVED_INPUT               : 147       :        :                   :         : 3         :                
 VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
 AK_reset                     : 149       : output : 3.3-V LVTTL       :         : 3         : Y              
 CLK_48MHZ                    : 150       : output : 3.3-V LVTTL       :         : 3         : Y              
@@ -244,8 +244,8 @@ GND                          : 184       : gnd    :                   :         
 RESERVED_INPUT               : 185       :        :                   :         : 2         :                
 GND                          : 186       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 187       :        :                   :         : 2         :                
-RESERVED_INPUT               : 188       :        :                   :         : 2         :                
-RESERVED_INPUT               : 189       :        :                   :         : 2         :                
+A3                           : 188       : output : 3.3-V LVTTL       :         : 2         : N              
+A2                           : 189       : output : 3.3-V LVTTL       :         : 2         : N              
 VCCINT                       : 190       : power  :                   : 1.2V    :           :                
 RESERVED_INPUT               : 191       :        :                   :         : 2         :                
 RESERVED_INPUT               : 192       :        :                   :         : 2         :                
