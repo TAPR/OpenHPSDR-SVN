@@ -1,4 +1,4 @@
-// V1.2 21st September 2007
+// V1.3 26th September 2007
 //
 // Copyright 2006,2007  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -157,7 +157,9 @@
 //				Test code to auto detect that Penny clock is on Atlas bus - 13 August 2007
 //				Minor chages to enable Quartus V7.1 to be used - 15th August 2007
 //				Moved C&C decoder prior to FIFO so we can detect clock sources and speed changes - 14th Sept 2007
-//				General code tidy up and revised comments - 21 Sept 2007				
+//				General code tidy up and revised comments - 21 Sept 2007
+//				Added clock and microphone selction control from PowerSDR - 26th Sept 2007
+//				Added CLK_12MHZ or PCLK_12MHZ selection control from PowerSDR - 26 Sept 2007				
 //
 ////////////////////////////////////////////////////////////
 
@@ -196,7 +198,8 @@
 //   CBCLK                  - Atlas C8  - pin 162 - TLV320
 //   CLRCLK                 - Atlas C9  - pin 163 - TLV320
 //   DOUT                   - Atlas C10 - pin 164 - AK5394A
-//   CDOUT                  - Atlas C11 - pin 165 - TLV320
+//   CDOUT                  - Atlas C11 - pin 165 - Mic from TLV320 on Janus 
+//	 CDOUT_P				- Atlas A11 - pin 137 - Mic for TLV320 on Penelope
 //   CDIN                   - Atlas C12 - pin 168 - TLV320 (I and Q audio)
 //   DFS0                   - Atlas C13 - pin 169 - AK5394A speed setting
 //   DFS1                   - Atlas C14 - pin 170 - AK5394A speed setting
@@ -282,9 +285,9 @@
 
 module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
-        CBCLK, CLRCLK, CDOUT, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
-		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC, PCLK_12MHZ, A2,
-		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE
+        CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
+		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC, PCLK_12MHZ, 
+		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, A2, A3
 		);
 		
 
@@ -321,7 +324,13 @@ reg    DFS0;					// used to set AK5394A speed
 reg    DFS1;					// ditto 
 output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
 output CC;						// Command and Control data to Atlas bus 
-input  A2;						// From Penelope, used to select which clock to use 
+input  CDOUT_P;					// Mic data from Penelope
+
+output A2; 
+output A3;
+
+assign A3 = CLRCLK;
+assign A2 = CLRCLK;
 
 
 // interface lines for GPIO control 
@@ -474,26 +483,11 @@ assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? LRCLK_48 : ((DFS0 == 1 &&
 
 // the 12MHz ADC/DAC clock  will come from Janus (12.288MHz)  on Atlas C5  as CLK_12MHZ unless a Mercury or
 // Penelope board is being used then it will come from the Atlas bus (12.5MHz) on A5 as PCLK_12MHZ.
-// The signal CLK_select will determine which clock to use. 
+// The flag  conf will determine which clock to use. 
 
-// the following code is tempory until we have C&C for Penelope & Mercury from PowerSDR
+// select Janus (12.288MHz) or Penelope/Mercury (12.5MHz)  master clock depending on configuration
 
-// Check if the PCLK_12MHZ clock from Penelope is present, if so use this for the ADC/DAC clock.
-
-/*
-reg [6:0]clock_check;
-reg CLK_select;
-always @ (posedge PCLK_12MHZ)
-begin
-	if(clock_check > 99)		// check that we have 100 clock pulses before setting the flag
-		CLK_select <= 1'b1;	// set flag
-	else clock_check <= clock_check + 1'b1;
-end 	
-*/
-
-assign CLK_select = A2;  // If A2 on Atlas is high from Penelope then select her 12.5MHz clock  
-
-assign CLK_MCLK = CLK_select ? PCLK_12MHZ : CLK_12MHZ;
+assign CLK_MCLK = (conf == 2'b00) ? CLK_12MHZ : PCLK_12MHZ;
 
 //////////////////////////////////////////////////////////////
 //
@@ -681,7 +675,11 @@ reg [4:0]TX_state;
 
 always @ (posedge CBCLK)
 begin
- Tx_q[15:0] <= {Tx_q[14:0], CDOUT};              		// shift current TLV320 data left and add next bit
+// select microphone source depending on mic setting
+begin
+	if (mic) Tx_q[15:0] <= {Tx_q[14:0], CDOUT_P};			// shift Penelope mic data one data left and add next bit
+	else Tx_q[15:0] <= {Tx_q[14:0], CDOUT}; 				// mic data from Janus
+end           	
 case (TX_state)
 5'd0:   begin
         if(CLRCLK) TX_state <= 5'd1;                    // loop until CLRCLK is high
@@ -962,17 +960,49 @@ assign have_sync = (got_sync & (Rx_used > 3)) ? 1'b1 : 1'b0;
     Rx_control_1 = 8'bxxxx_xx01  - 96kHz
     Rx_control_1 = 8'bxxxx_xx10  - 192kHz
 
-	Decode PTT from PowerSDR. Held in Rx_control_0[0]
+	Decode PTT from PowerSDR. Held in Rx_control_0[0] as follows
+	
+	0 = PTT inactive
+	1 = PTT active
+	
+	Decode clock sources, when Rx_control_0[7:1] = 0,  Rx_control_1[4:2] indicates the following
+	
+	x00  = 10MHz reference from Atlas bus ie Gibraltar
+	x01  = 10MHz reference from Penelope
+	x10  = 10MHz reference from Mercury
+	0xx  = 125MHz source from Penelope 
+	1xx  = 125MHz source from Mercury 
+	
+	Decode configuration, when Rx_control_0[7:1] = 0, Rx_control_1[6:5] indicates the following
+	
+	00 = No Tx Rx boards
+	01 = Penelope fitted
+	10 = Mercury fitted
+	11 = Both Penelope and Mercury fitted
+	
+	Decode microphone source, when Rx_control_0[7:1] = 0, Rx_control_1[7] indicates the following
+	
+	0 = microphone source is Janus
+	1 = microphone source is Janus
+
+	
 */
 
 reg [1:0] Speed;
 wire  PTT_out;
+reg [3:0]clock_s;
+reg mic;
+reg [1:0]conf;
 
 always @ (posedge SLRD)
 begin 
 if(state_sync == 4)begin 								// Need to ensure that C&C data is stable 
-    if (Rx_control_0[7:1] == 7'b0000_000)
-		    Speed = {Rx_control_1[1], Rx_control_1[0]}; // decode speed 
+    if (Rx_control_0[7:1] == 7'b0000_000)begin
+		    Speed <= {Rx_control_1[1], Rx_control_1[0]}; // decode speed 
+			clock_s[3:0] <= {1'b0,Rx_control_1[4:2]};	// decode clock source
+			conf <= Rx_control_1[6:5];					// decode configuration
+			mic <= Rx_control_1[7];						// decode microphone source
+			end
 	if (Rx_control_0[7:1] == 7'b0000_001)				// decode frequency 
 		frequency <= {Rx_control_1, Rx_control_2, Rx_control_3, Rx_control_4};
 	else frequency <= frequency;
@@ -1083,11 +1113,12 @@ end
 	for a total of 49 bits. Frequency format is the DDC data word i.e. FREQ x 2^32/Clock and 
 	OC is the open collector data on Penelope. The clock source decodes as follows:
 	
-	xx00  = 10MHz reference from Atlas bus ie Gibraltar
-	xx01  = 10MHz reference from Mercury
-	xx10  = 10MHz reference from Penelope
+	0x00  = 10MHz reference from Atlas bus ie Gibraltar
+	0x01  = 10MHz reference from Penelope
+	0x10  = 10MHz reference from Mercury
+	00xx  = 125MHz source from Penelope 
 	01xx  = 125MHz source from Mercury
-	10xx  = 125MHz source from Penelope 
+
 		
 	For future expansion the four bit address enables specific C&C data to be send to individual boards.
 	For the present for use with Mercury and Penelope the address is ignored. 
@@ -1099,18 +1130,15 @@ wire [48:0]CCdata;
 reg [6:0] CCcount;
 reg CC;							// C&C data out to Atlas bus 
 wire [3:0] CC_address;			// C&C address, fixed at 0 for now 
-wire [3:0] clock_s;				// clocks, decodes as above
 wire [6:0] OC;					// Open Collector outputs on Penelope board 
-wire mode;						// Mode, 0 for I and Q, 1 for phase and envelope
 reg [31:0]frequency;
-
+wire mode;
 
 // dummy data for testing
 
 assign CC_address = 4'b0110;
-assign clock_s = 4'b1100;
 assign OC = 7'b1100111;
-assign mode = 1'b0;
+assign mode = 0;
 
 assign 	CCdata = {PTT_out, CC_address, frequency, clock_s, OC, mode}; // concatenate data to send 
 
@@ -1206,10 +1234,17 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
-assign DEBUG_LED0 = ~DFS0;            
-assign DEBUG_LED1 = ~DFS1;  
-assign DEBUG_LED2 = ~PTT_out;             
-assign DEBUG_LED3 = ~have_sync;  
+//assign DEBUG_LED0 = ~DFS0;            
+//assign DEBUG_LED1 = ~DFS1;  
+//assign DEBUG_LED2 = ~PTT_out;             
+//assign DEBUG_LED3 = ~have_sync;  
+
+assign DEBUG_LED0 = ~clock_s[0];
+assign DEBUG_LED1 = ~clock_s[1];
+assign DEBUG_LED2 = ~clock_s[2];
+assign DEBUG_LED3 = ~mic;
+
+
 
 endmodule
 

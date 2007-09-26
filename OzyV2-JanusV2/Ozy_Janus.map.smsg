@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Fri Sep 21 19:57:48 2007
+    Info: Processing started: Wed Sep 26 22:07:08 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file RegisterX.v
     Info: Found entity 1: RegisterX
@@ -150,6 +150,7 @@ Warning: Reduced register "Tx_control_4[3]" with stuck data_in port to stuck val
 Warning: Reduced register "Tx_control_4[2]" with stuck data_in port to stuck value GND
 Warning: Reduced register "Tx_control_4[1]" with stuck data_in port to stuck value GND
 Warning: Reduced register "Tx_control_4[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "clock_s[3]" with stuck data_in port to stuck value GND
 Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
 Info: State machine "|Ozy_Janus|state_sync" contains 5 states
 Info: State machine "|Ozy_Janus|state_PWM" contains 6 states
@@ -313,13 +314,13 @@ Info: 47 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1250 device resources after synthesis - the final resource count might be different
+Info: Implemented 1261 device resources after synthesis - the final resource count might be different
     Info: Implemented 14 input pins
-    Info: Implemented 23 output pins
+    Info: Implemented 25 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1140 logic cells
+    Info: Implemented 1149 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 73 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 74 warnings
     Info: Allocated 136 megabytes of memory during processing
-    Info: Processing ended: Fri Sep 21 19:58:16 2007
-    Info: Elapsed time: 00:00:28
+    Info: Processing ended: Wed Sep 26 22:07:37 2007
+    Info: Elapsed time: 00:00:29
