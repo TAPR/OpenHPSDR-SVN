@@ -138,7 +138,7 @@ GND                          : 78        : gnd    :                   :         
 VCCINT                       : 79        : power  :                   : 1.2V    :           :                
 C17                          : 80        : input  : 3.3-V LVTTL       :         : 4         : Y              
 RESERVED_INPUT               : 81        :        :                   :         : 4         :                
-ext_10MHZ                    : 82        : output : 3.3-V LVTTL       :         : 4         : Y              
+ext_10MHZ                    : 82        : bidir  : 3.3-V LVTTL       :         : 4         : Y              
 VCCIO4                       : 83        : power  :                   : 3.3V    : 4         :                
 RESERVED_INPUT               : 84        :        :                   :         : 4         :                
 GND                          : 85        : gnd    :                   :         :           :                
@@ -152,7 +152,7 @@ RESERVED_INPUT               : 92        :        :                   :         
 GND                          : 93        : gnd    :                   :         :           :                
 C12                          : 94        : input  : 3.3-V LVTTL       :         : 4         : Y              
 RESERVED_INPUT               : 95        :        :                   :         : 4         :                
-C11                          : 96        : output : 3.3-V LVTTL       :         : 4         : Y              
+RESERVED_INPUT               : 96        :        :                   :         : 4         :                
 A11                          : 97        : output : 3.3-V LVTTL       :         : 4         : Y              
 VCCIO4                       : 98        : power  :                   : 3.3V    : 4         :                
 RESERVED_INPUT               : 99        :        :                   :         : 4         :                
@@ -189,7 +189,7 @@ GND+                         : 129       :        :                   :         
 GND+                         : 130       :        :                   :         : 3         :                
 _10MHZ                       : 131       : input  : 3.3-V LVTTL       :         : 3         : Y              
 _125MHZ                      : 132       : input  : 3.3-V LVTTL       :         : 3         : Y              
-A2                           : 133       : output : 3.3-V LVTTL       :         : 3         : Y              
+RESERVED_INPUT               : 133       :        :                   :         : 3         :                
 FPGA_PTT                     : 134       : output : 3.3-V LVTTL       :         : 3         : Y              
 USEROUT6                     : 135       : output : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 136       : power  :                   : 3.3V    : 3         :                

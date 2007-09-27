@@ -1,4 +1,4 @@
-// V1.5  14th  September 2007
+// V1.6  23rd September 2007
 //
 // Copyright 2007 Phil Harman VK6APH
 //
@@ -59,6 +59,9 @@
 	21 Sept 2007 - Temp fix to reverse sidebands bug
 	22 Sept 2007 - Added fast attach, slow decay ALC
 	22 Sept 2007 - TLV320 now set up via I2C
+	23 Sept 2007 - Reduced ALC gain from 2 to 1.5 to increase power out to 0.5w
+	23 Sept 2007 - Added clock selection code
+	26 Sept 2007 - Moved CDOUT back to Altas bus A11
 	
 	
 	
@@ -67,7 +70,6 @@
 	- add ext_ref to C&C commands to enable external 10MHz reference
 	- add code to enable internal 10MHz reference to appear on Atlas bus
 	- add code to enable selection of 125MHz clock  on board or from Mercury
-	- set up TLV320 via I2C rather than SPI  
 		
 	
 */
@@ -77,7 +79,7 @@
 //		Pin 	Signal 		Function
 //		C12		CDIN		I2S format I&Q data from Ozy
 //		C17		CLK_MCLK	12.5MHz master clock to Atlas bus
-//		A11		CDOUT		I2S mic data to Ozy
+//		A11		CDOUT_P		I2S mic data to Ozy
 //		C8		CBCLK		~3MHZ clock from Atlas via Ozy
 //		C9		CLRCLK		48.8kHz clock from Atlas via Ozy
 //		C4      LRCLK 		LR Rx Audio from Atlas via Ozy 	
@@ -89,14 +91,12 @@
 
 module Penelope(
 				input   _10MHZ,
-				output  ext_10MHZ, 	// 10MHz reference to Atlas pin C16
+				inout   ext_10MHZ, 	// 10MHz reference to Atlas pin C16
 				input   _125MHZ,
 				input   _125MHZLVDS,
 				output  LVDSCLK,  	// 125MHz to LVDS driver
-				output A2,			// set high to force Ozy to use clock on A5
 				output A5, 			// PCLK_12MHZ (12.5MHz) to Atlas bus
-				output C11,			// CDOUT (Mic) to Atlas bus ***** TEMP FOR TESTING
-				output A11,			// CDOUT (Mic) to Atlas bus
+				output A11,			// CDOUT_P (Mic) to Atlas bus 
 				input  C4, 			// LROUT (Rx audio) from Atlas bus
 				input  C8,			// CBLCK from Atlas bus
 				input  C9, 			// CLRCLK from Atlas bus
@@ -144,20 +144,16 @@ module Penelope(
 
 // link through FPGA where required
 
-assign C11 = CDOUT;			// ***** was A11, use for testing 
+assign A11 = CDOUT;			// ***** was A11, use for testing 
 assign CBCLK = C8;
 assign CLK_MCLK = C17;
 assign A5 = PCLK_12MHZ; 
 assign LROUT =  C4;			// Rx audio (actually CDIN on TLV320) 
 assign CDIN =  C12;     	// I&Q from Atlas bus
-assign ext_10MHZ = _10MHZ; 	// 10MHz TCXO to C16 on Atlas bus 
-assign A2 = 1'b1;			// force high so that Ozy uses PCLK_12MHZ as its master clock
+//assign ext_10MHZ = _10MHZ; 	// 10MHz TCXO to C16 on Atlas bus 
 assign CMODE = 1'b0;		// Set to 0 for I2C mode
 assign nCS = 1'b1; 			// I2C address is 0x1B
 
-wire clock;
-//assign clock = _125MHZLVDS; // use this when using external LVDS clock 
-assign clock = _125MHZ;
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -215,9 +211,31 @@ assign CMCLK = CLK_MCLK;
 
 // set up LVDS Driver
 
-assign nLVDSRXE = 1'b0;		// enable LVDS receiver
-assign LVDSTXE	= 1'b1; 	// enable LVDS transmitter
-assign LVDSCLK = _125MHZ;   // if fitted send local clock  to LVDS transmitter
+//assign nLVDSRXE = 1'b0;		// enable LVDS receiver
+//assign LVDSTXE	= 1'b1; 	// enable LVDS transmitter
+//assign LVDSCLK = _125MHZ;   // if fitted send local clock  to LVDS transmitter
+
+wire clock;
+
+// Select 125MHz source. If source_125MHZ set then use Penelope's 125MHz clock and send to LVDS
+// Otherwise get external clock from LVDS
+
+//assign clock = source_125MHZ ? _125MHZ : _125MHZLVDS; // clock is either on board or external via LVDS
+assign nLVDSRXE = source_125MHZ ? 1'b1 : 1'b0; // enable LVDS receiver if clock is external
+assign LVDSTXE = source_125MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if  Penny is the source 
+assign LVDSCLK = source_125MHZ ? _125MHZ : 1'b0; // send 125MHz clock to LVDS if Penny is the source
+
+
+
+assign clock = _125MHZ;
+
+
+// select 10MHz reference source. If ref_ext is set use Penelope's 10MHz ref and send to Atlas C16
+
+wire reference;
+
+assign reference = ref_ext ? _10MHZ : ext_10MHZ ; 
+assign ext_10MHz = ref_ext ? _10MHZ : 1'bz ; 		// C16 is bidirectional so set high Z if input. 
 
 // send data to DAC on negative edge of 125MHz clock
 
@@ -392,7 +410,7 @@ wire [15:0]gain;
 
 assign set_level = 16'h9999; // corresponds to 0.9999 i.e. unity gain
 
-wire [15:0]ALC_level = ({4'd0,ALC_out[20:9]} +  {5'd0,ALC_out[20:10]}); // gain for ALC signal (x1.5)
+wire [15:0]ALC_level = ({4'd0,ALC_out[20:9]} +  {5'd0,ALC_out[20:10]}); // gain for ALC signal (x1.5) 
 assign gain = (set_level - ALC_level);
 
 // use this to turn ALC off
@@ -526,13 +544,18 @@ assign PWM2 = PWM2_accumulator[16];
 	
 	The data format is as follows:
 	
-	<[48]PTT><[47:44]address><[43:12]frequency><[11:8]band><[7:1]OC><[0]mode> 
+	<[48]PTT><[47:44]address><[43:12]frequency><[11:8]clock_select><[7:1]OC><[0]Mode> 
 	
 	for a total of 49 bits. Frequency is in Hz and 32 bit binary format and 
 	OC is the open collector data on Penelope.
 	
-	TODO: add ext_ref to enable selection of exteral 10MHZ reference
-	TODO: add ref_ext to enable internal 10MHz ref on Atlas C16
+	The clock source decodes as follows:
+	
+	0x00  = 10MHz reference from Atlas bus ie Gibraltar
+	0x01  = 10MHz reference from Penelope
+	0x10  = 10MHz reference from Mercury
+	00xx  = 125MHz source from Penelope 
+	01xx  = 125MHz source from Mercury 
 	
 */
 
@@ -569,14 +592,15 @@ end
 
 // decode C & C data into variables and sync to 48kHz LR clock
 
+
+
 reg PTT_out;			// PTT to Penelope
 reg [3:0]Address;		// Address in C&C header, set to 0 for now
 reg [31:0]frequency_HZ;	// frequency control bits for CORDIC
-reg [3:0]band;			// Frequency band to use
+reg [3:0]clock_select;	// 10MHz and 125MHz clock selection
 reg [6:0]OC;			// Open Collector outputs data
-reg Mode; 				// Mode, I&Q or phase & magnitude
-//reg ext_ref;			// Set when external 10MHz reference selected
-//reg ref_ext;			// Set when internal 10MHz reference sent to Atlas C16
+wire ref_ext;			// Set when internal 10MHz reference sent to Atlas C16
+wire source_125MHZ;		// Set when internal 125MHz source is used and sent to LVDS
 
 always @ (negedge CLRCLK)  
 begin 
@@ -586,12 +610,15 @@ begin
 	// check address match here in the future - ignore for now
 	frequency_HZ <= CCdata[43:12];
 	//frequency_HZ = 32'h1D0FA58F; // force 14.190MHz i.e. FREQ /(125e6/2^32) for testing 
-	//band <= CCdata[11:8];     // not used since filters seperate from Penelope 
+	clock_select <= CCdata[11:8];     // not used since filters seperate from Penelope 
 	OC <= CCdata[7:1];
-	Mode <= CCdata[0];
-	//ext_ref <= CCdata[x];
-	//ref_ext <= CCdata[x];
 end
+
+assign ref_ext = clock_select[0] ? 1'b1 :1'b0; // if set use internally and send to C16 else get from C16
+assign source_125MHZ = clock_select[2] ? 1'b0 : 1'b1; // if set use internally and send to LVDS else
+													  // get from LVDS 
+
+
 
 ///////////////////////////////////////////////////////////
 //
@@ -624,14 +651,7 @@ assign  FPGA_PTT = PTT_out;		   // turn PTT FET Q3 on when Txing
 	The selection of the internal or external 10MHz reference for the PLL
 	is made using  ext_ref.
 	
-	TODO: if ref_out is set then send 10MHz reference to Atlas pin C16.
-	
 */
-
-wire reference;
-wire ext_ref = 1'b0;  // force internal reference 
-
-assign reference = ext_ref ? ext_10MHZ : _10MHZ;
 
 // divide 10MHz reference clock by 4 to give 2.5MHz
 
@@ -676,14 +696,16 @@ assign FPGA_PLL = ref_2_5M ^ osc_2_5M;
 
 // LEDs for testing				PCB LED Marking
 
-assign LED7 = 0;				// LED7 ON so we can see code has loaded OK 
-
 // Bar graph for power output 
-assign LED2 = (AIN5 > 250)?  1'b0 : 1'b1;  
-assign LED3 = (AIN5 > 500)? 1'b0 : 1'b1;  
+//assign LED2 = (AIN5 > 250)?  1'b0 : 1'b1;  
+//assign LED3 = (AIN5 > 500)? 1'b0 : 1'b1; 
+assign LED2 = ~ref_ext;
+assign LED3 = ~source_125MHZ; 
 assign LED4 = (AIN5 > 1000)? 1'b0 : 1'b1;  
 assign LED5 = (AIN5 > 2000)? 1'b0 : 1'b1;  
 assign LED6 = (AIN5 > 3000)? 1'b0 : 1'b1;  
+
+assign LED7 = 0;				// LED7 ON so we can see code has loaded OK 
 
 // User open collector outputs 
 assign USEROUT0 = OC[0];
