@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Sep 23 15:28:10 2007
+    Info: Processing started: Thu Sep 27 21:59:05 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
 Info: Found 1 design units, including 1 entities, in source file cordic.v
     Info: Found entity 1: cordic_16
@@ -20,9 +20,8 @@ Info: Found 1 design units, including 1 entities, in source file cordic_stage.v
 Info: Found 1 design units, including 1 entities, in source file Penelope.v
     Info: Found entity 1: Penelope
 Info: Elaborating entity "Penelope" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(573): object "Address" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(577): object "Mode" assigned a value but never read
-Warning (10034): Output port "A11" at Penelope.v(99) has no driver
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(598): object "Address" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(238): object "ext_10MHz" assigned a value but never read
 Info: Elaborating entity "ADC" for hierarchy "ADC:ADC_SPI"
 Info: Elaborating entity "division" for hierarchy "division:division_DDS"
 Info: Elaborating entity "ALC" for hierarchy "ALC:ALC_I"
@@ -145,12 +144,9 @@ Info: Found 1 design units, including 1 entities, in source file ../../../../alt
 Info: Elaborated megafunction instantiation "cordic_16:tx_cordic|lpm_add_sub:Add4"
 Info: Found 1 design units, including 1 entities, in source file db/add_sub_rjg.tdf
     Info: Found entity 1: add_sub_rjg
+Warning: The bidir "ext_10MHZ" has no source; inserted an always disabled tri-state buffer.
 Warning: Output pins are stuck at VCC or GND
-    Warning: Pin "A2" stuck at VCC
-    Warning: Pin "A11" stuck at GND
     Warning: Pin "LED7" stuck at GND
-    Warning: Pin "nLVDSRXE" stuck at GND
-    Warning: Pin "LVDSTXE" stuck at VCC
     Warning: Pin "nCS" stuck at VCC
     Warning: Pin "CMODE" stuck at GND
 Info: 5 registers lost all their fanouts during netlist optimizations. The first 5 are displayed below.
@@ -161,13 +157,13 @@ Info: 5 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
 Info: Found the following redundant logic cells in design
     Info: Logic cell "gain[0]~62"
-Info: Implemented 3879 device resources after synthesis - the final resource count might be different
+Info: Implemented 3883 device resources after synthesis - the final resource count might be different
     Info: Implemented 12 input pins
-    Info: Implemented 51 output pins
-    Info: Implemented 2 bidirectional pins
-    Info: Implemented 3806 logic cells
+    Info: Implemented 48 output pins
+    Info: Implemented 4 bidirectional pins
+    Info: Implemented 3811 logic cells
     Info: Implemented 8 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 42 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 38 warnings
     Info: Allocated 142 megabytes of memory during processing
-    Info: Processing ended: Sun Sep 23 15:29:09 2007
-    Info: Elapsed time: 00:00:59
+    Info: Processing ended: Thu Sep 27 21:59:58 2007
+    Info: Elapsed time: 00:00:53

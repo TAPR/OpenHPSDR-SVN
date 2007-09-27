@@ -100,7 +100,6 @@ set_global_assignment -name FMAX_REQUIREMENT "3.125 MHz" -section_id BCLK
 set_global_assignment -name BASED_ON_CLOCK_SETTINGS BCLK -section_id CLRCLK
 set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 64 -section_id CLRCLK
 set_instance_assignment -name CLOCK_SETTINGS CLRCLK -to C9
-set_location_assignment PIN_133 -to A2
 set_location_assignment PIN_116 -to C4
 set_location_assignment PIN_94 -to C12
 set_location_assignment PIN_208 -to LED2
