@@ -287,7 +287,7 @@ module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
         CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
 		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC, PCLK_12MHZ, 
-		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, A2, A3
+		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE,
 		);
 		
 
@@ -325,13 +325,6 @@ reg    DFS1;					// ditto
 output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
 output CC;						// Command and Control data to Atlas bus 
 input  CDOUT_P;					// Mic data from Penelope
-
-output A2; 
-output A3;
-
-assign A3 = CLRCLK;
-assign A2 = CLRCLK;
-
 
 // interface lines for GPIO control 
 input 				FX2_CLK;		// master system clock from FX2 
@@ -487,7 +480,9 @@ assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? LRCLK_48 : ((DFS0 == 1 &&
 
 // select Janus (12.288MHz) or Penelope/Mercury (12.5MHz)  master clock depending on configuration
 
-assign CLK_MCLK = (conf == 2'b00) ? CLK_12MHZ : PCLK_12MHZ;
+//assign CLK_MCLK = (conf == 2'b00) ? CLK_12MHZ : PCLK_12MHZ;
+assign CLK_MCLK = PCLK_12MHZ;
+
 
 //////////////////////////////////////////////////////////////
 //
@@ -1234,17 +1229,10 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
-//assign DEBUG_LED0 = ~DFS0;            
-//assign DEBUG_LED1 = ~DFS1;  
-//assign DEBUG_LED2 = ~PTT_out;             
-//assign DEBUG_LED3 = ~have_sync;  
-
-assign DEBUG_LED0 = ~clock_s[0];
-assign DEBUG_LED1 = ~clock_s[1];
-assign DEBUG_LED2 = ~clock_s[2];
-assign DEBUG_LED3 = ~mic;
-
-
+assign DEBUG_LED0 = ~DFS0;            
+assign DEBUG_LED1 = ~DFS1; 
+assign DEBUG_LED2 = ~PTT_out;             
+assign DEBUG_LED3 = ~have_sync;  
 
 endmodule
 

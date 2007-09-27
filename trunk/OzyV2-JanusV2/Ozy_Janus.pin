@@ -244,8 +244,8 @@ GND                          : 184       : gnd    :                   :         
 RESERVED_INPUT               : 185       :        :                   :         : 2         :                
 GND                          : 186       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 187       :        :                   :         : 2         :                
-A3                           : 188       : output : 3.3-V LVTTL       :         : 2         : N              
-A2                           : 189       : output : 3.3-V LVTTL       :         : 2         : N              
+RESERVED_INPUT               : 188       :        :                   :         : 2         :                
+RESERVED_INPUT               : 189       :        :                   :         : 2         :                
 VCCINT                       : 190       : power  :                   : 1.2V    :           :                
 RESERVED_INPUT               : 191       :        :                   :         : 2         :                
 RESERVED_INPUT               : 192       :        :                   :         : 2         :                
