@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Sep 27 21:46:17 2007
+    Info: Processing started: Fri Sep 28 22:05:12 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file RegisterX.v
     Info: Found entity 1: RegisterX
@@ -17,13 +17,11 @@ Info: Found 1 design units, including 1 entities, in source file debounce.v
     Info: Found entity 1: debounce
 Info: Found 1 design units, including 1 entities, in source file DigAudioOut48k16bI2S.v
     Info: Found entity 1: I2SAudioOut
-Warning (10238): Verilog Module Declaration warning at Ozy_Janus.v(291): ignored anonymous port(s) indicated by duplicate or dangling comma(s) in the port list for module "Ozy_Janus"
 Info: Found 1 design units, including 1 entities, in source file Ozy_Janus.v
     Info: Found entity 1: Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(990): object "conf" assigned a value but never read
 Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
 Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(46): conditional expression evaluates to a constant
 Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(47): conditional expression evaluates to a constant
@@ -265,6 +263,7 @@ Warning: TRI or OPNDRN buffers permanently enabled
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "PKEND" stuck at VCC
     Warning: Pin "FIFO_ADR[0]" stuck at GND
+    Warning: Pin "DEBUG_LED1" stuck at VCC
     Warning: Pin "GPIO_nIOE" stuck at GND
 Info: 47 registers lost all their fanouts during netlist optimizations. The first 47 are displayed below.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/p0addr" lost all its fanouts during netlist optimizations.
@@ -314,16 +313,15 @@ Info: 47 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state.100" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.010" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
-Warning: Design contains 2 input pin(s) that do not drive logic
-    Warning: No output dependent on input pin "CLK_12MHZ"
+Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1265 device resources after synthesis - the final resource count might be different
+Info: Implemented 1325 device resources after synthesis - the final resource count might be different
     Info: Implemented 14 input pins
     Info: Implemented 23 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1155 logic cells
+    Info: Implemented 1215 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 77 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 75 warnings
     Info: Allocated 136 megabytes of memory during processing
-    Info: Processing ended: Thu Sep 27 21:46:43 2007
-    Info: Elapsed time: 00:00:26
+    Info: Processing ended: Fri Sep 28 22:05:42 2007
+    Info: Elapsed time: 00:00:30
