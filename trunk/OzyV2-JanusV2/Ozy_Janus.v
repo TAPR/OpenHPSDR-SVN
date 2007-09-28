@@ -1,4 +1,4 @@
-// V1.3 26th September 2007
+// V1.4 28th September 2007
 //
 // Copyright 2006,2007  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -159,7 +159,9 @@
 //				Moved C&C decoder prior to FIFO so we can detect clock sources and speed changes - 14th Sept 2007
 //				General code tidy up and revised comments - 21 Sept 2007
 //				Added clock and microphone selction control from PowerSDR - 26th Sept 2007
-//				Added CLK_12MHZ or PCLK_12MHZ selection control from PowerSDR - 26 Sept 2007				
+//				Added CLK_12MHZ or PCLK_12MHZ selection control from PowerSDR - 26 Sept 2007
+//				Added test for CLK_12MHZ or PCLK_12MHZ present and default to FX2/4 clock if not - 28 Sept 2007			
+//				If clock selection error flash DEBUG_LED0 and inhibit Tx - 28 Sept 2007
 //
 ////////////////////////////////////////////////////////////
 
@@ -287,7 +289,7 @@ module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
         CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
 		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC, PCLK_12MHZ, 
-		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE,
+		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE
 		);
 		
 
@@ -437,7 +439,7 @@ end
         LRCLK must change state on the negative edge of BCLK.
 */
 
-// divide  CLK_MCLK (12.288MHz) to give clocks for the TLV320 etc
+// divide  CLK_MCLK (12.288MHz or 12.5MHz) to give clocks for the TLV320 etc
 // using Altera Megafunction 
 
 wire [7:0]clock_out;
@@ -474,14 +476,98 @@ assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : BCLK_96_48;
 assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? LRCLK_48 : ((DFS0 == 1 && DFS1 == 0 )? LRCLK_96 : LRCLK_192);
 
 
-// the 12MHz ADC/DAC clock  will come from Janus (12.288MHz)  on Atlas C5  as CLK_12MHZ unless a Mercury or
-// Penelope board is being used then it will come from the Atlas bus (12.5MHz) on A5 as PCLK_12MHZ.
-// The flag  conf will determine which clock to use. 
+// Divide 48MHz IFCLK by 4 for use as CLK_MCLK
+reg IFCLK_4;
+reg IF_count;
+always @ (posedge IFCLK)
+begin
+	if (IF_count == 1)begin
+		IFCLK_4 = ~IFCLK_4;
+		IF_count <= 0;
+		end
+	else
+		IF_count <= IF_count + 1'b1;
+end 
+		
 
-// select Janus (12.288MHz) or Penelope/Mercury (12.5MHz)  master clock depending on configuration
+/*
 
-//assign CLK_MCLK = (conf == 2'b00) ? CLK_12MHZ : PCLK_12MHZ;
-assign CLK_MCLK = PCLK_12MHZ;
+ 	The 12MHz ADC/DAC clock  will come from Janus (12.288MHz)  on Atlas C5  as CLK_12MHZ unless a Mercury or
+ 	Penelope board is being used then it will come from the Atlas bus (12.5MHz) on A5 as PCLK_12MHZ.
+ 	
+ 	Clocks provided by Janus, Penelope or Mercury are determined by the conf setting. This is received by
+ 	these boards via the C&C over the Atlas bus. Hence we must have a valid CLK_MCLK present in order
+ 	to determing what clock source to use. Before slecting an alernative clock source we need to
+ 	confirm that it is present since selecting a nonexistant source would cause the system to hang.
+	To present this should a clock be selected that is not present then the 12MHz IFCLK_4 clock is used instead.
+	
+ 	We check that the clock sources are present by getting them to increment a counter to 2000. 
+ 	Once the count is reached we set a flag.
+ 
+ 	Should a selected source not be present then DEBUG_LED0 is flashed rapidly to indicate an error 
+ 	condition and Tx is inhibited.
+
+*/
+
+// Check if  PCLK_12MHZ clock from Penelope or Mercury is present, if so set a flag.
+
+reg [10:0]pclock_check;
+reg PCLK_OK;
+always @ (posedge PCLK_12MHZ)
+begin
+	if(pclock_check > 2000)		// check that we have 2000 clock pulses before setting the flag
+		PCLK_OK <= 1'b1;		// set Penny/Mercury flag
+	else pclock_check <= pclock_check + 1'b1;
+end 
+
+// Check if CLK_12MHz clock from Janus is present, if so set a flag.
+
+reg [10:0]jclock_check;
+reg JCLK_OK;
+always @ (posedge CLK_12MHZ)
+begin
+	if(jclock_check > 2000)		// check that we have 2000 clock pulses before setting the flag
+		JCLK_OK <= 1'b1;		// set Janus flag
+	else jclock_check <= jclock_check + 1'b1;
+end 
+	
+/*
+
+	Select Janus (12.288MHz) or Penelope/Mercury (12.5MHz)  master clock depending on configuration
+	set via PowerSDR  (i.e. conf).
+	If selected clock is not present default to 12MHz IFCLK_4 clock and inhibit PTT.
+
+	conf decodes as follows:
+	
+	00 = No Tx Rx boards
+	01 = Penelope fitted
+	10 = Mercury fitted
+	11 = Both Penelope and Mercury fitted
+	
+*/
+
+assign CLK_MCLK = (conf > 0 & PCLK_OK) ? PCLK_12MHZ : (conf == 0 & JCLK_OK ? CLK_12MHZ : IFCLK_4);
+
+// Flash LED0 to indicate we have a clock selection error
+
+wire clock_error;
+assign clock_error = (conf > 0 & PCLK_OK) ? 1'b0 : (conf == 0 & JCLK_OK ? 1'b0 : 1'b1);
+
+reg[19:0]error_count;
+reg DEBUG_LED0;
+always @ (posedge IFCLK_4)
+begin
+	if (clock_error) begin
+		if (error_count > 1000000)begin
+			error_count <= 0;
+			DEBUG_LED0 <= ~DEBUG_LED0;			// error so flash LED
+		end else 
+			error_count <= error_count + 1'b1;
+		end
+	else begin	DEBUG_LED0 <= 1'b1;				// no error so LED off 
+	end
+end 
+			
 
 
 //////////////////////////////////////////////////////////////
@@ -1118,6 +1204,7 @@ end
 	For future expansion the four bit address enables specific C&C data to be send to individual boards.
 	For the present for use with Mercury and Penelope the address is ignored. 
 
+	NOTE: PTT_out is inhibited if clock_error is set
 
 */
 
@@ -1135,7 +1222,7 @@ assign CC_address = 4'b0110;
 assign OC = 7'b1100111;
 assign mode = 0;
 
-assign 	CCdata = {PTT_out, CC_address, frequency, clock_s, OC, mode}; // concatenate data to send 
+assign 	CCdata = {(PTT_out & !clock_error), CC_address, frequency, clock_s, OC, mode}; // concatenate data to send 
 
 // send C&C data to Atlas bus in I2S format
 
@@ -1229,10 +1316,12 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
-assign DEBUG_LED0 = ~DFS0;            
-assign DEBUG_LED1 = ~DFS1; 
-assign DEBUG_LED2 = ~PTT_out;             
-assign DEBUG_LED3 = ~have_sync;  
+// DEBUG_LED0 when flashing indicates clock selection error
+assign DEBUG_LED1 = 1'b1;
+assign DEBUG_LED2 = ~PTT_out; 
+assign DEBUG_LED3 = ~have_sync; 
+  
+ 
 
 endmodule
 
