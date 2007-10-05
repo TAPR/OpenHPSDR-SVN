@@ -1,4 +1,4 @@
-// V1.6  23rd September 2007
+// V1.7  29th September 2007
 //
 // Copyright 2007 Phil Harman VK6APH
 //
@@ -62,14 +62,14 @@
 	23 Sept 2007 - Reduced ALC gain from 2 to 1.5 to increase power out to 0.5w
 	23 Sept 2007 - Added clock selection code
 	26 Sept 2007 - Moved CDOUT back to Altas bus A11
+	29 Sept 2007 - Only send PCLK_MCLK to bus if 125MHz clock selected as master so can share with Mercury
+	 1 Oct  2007 - Added receive 125MHz clock from LVDS
+	 2 Oct  2007 - Changed CORDIC output to stage 15 to reduce noise floor.
 	
 	
 	
 	TO DO:
-	
-	- add ext_ref to C&C commands to enable external 10MHz reference
-	- add code to enable internal 10MHz reference to appear on Atlas bus
-	- add code to enable selection of 125MHz clock  on board or from Mercury
+	- inhibit RF output if PTT_out not active
 		
 	
 */
@@ -84,7 +84,6 @@
 //		C9		CLRCLK		48.8kHz clock from Atlas via Ozy
 //		C4      LRCLK 		LR Rx Audio from Atlas via Ozy 	
 //		C20		CC			Command and Control data from Ozy       
-//		A2      +3.3v		Indicates Penelope is present on Altas bus
 //
 ////////////////////////////////////////////////////////////
 
@@ -95,7 +94,7 @@ module Penelope(
 				input   _125MHZ,
 				input   _125MHZLVDS,
 				output  LVDSCLK,  	// 125MHz to LVDS driver
-				output A5, 			// PCLK_12MHZ (12.5MHz) to Atlas bus
+				inout A5, 			// PCLK_12MHZ (12.5MHz) to Atlas bus - tri state
 				output A11,			// CDOUT_P (Mic) to Atlas bus 
 				input  C4, 			// LROUT (Rx audio) from Atlas bus
 				input  C8,			// CBLCK from Atlas bus
@@ -144,13 +143,11 @@ module Penelope(
 
 // link through FPGA where required
 
-assign A11 = CDOUT;			// ***** was A11, use for testing 
+assign A11 = CDOUT;			// 
 assign CBCLK = C8;
 assign CLK_MCLK = C17;
-assign A5 = PCLK_12MHZ; 
 assign LROUT =  C4;			// Rx audio (actually CDIN on TLV320) 
 assign CDIN =  C12;     	// I&Q from Atlas bus
-//assign ext_10MHZ = _10MHZ; 	// 10MHz TCXO to C16 on Atlas bus 
 assign CMODE = 1'b0;		// Set to 0 for I2C mode
 assign nCS = 1'b1; 			// I2C address is 0x1B
 
@@ -209,33 +206,29 @@ assign CLRCLK  = C9;
 
 assign CMCLK = CLK_MCLK; 
 
-// set up LVDS Driver
-
-//assign nLVDSRXE = 1'b0;		// enable LVDS receiver
-//assign LVDSTXE	= 1'b1; 	// enable LVDS transmitter
-//assign LVDSCLK = _125MHZ;   // if fitted send local clock  to LVDS transmitter
-
-wire clock;
-
 // Select 125MHz source. If source_125MHZ set then use Penelope's 125MHz clock and send to LVDS
 // Otherwise get external clock from LVDS
 
-//assign clock = source_125MHZ ? _125MHZ : _125MHZLVDS; // clock is either on board or external via LVDS
+wire clock;
+
+assign clock = source_125MHZ ? _125MHZ : _125MHZLVDS; // clock is either on board or external via LVDS
 assign nLVDSRXE = source_125MHZ ? 1'b1 : 1'b0; // enable LVDS receiver if clock is external
 assign LVDSTXE = source_125MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if  Penny is the source 
 assign LVDSCLK = source_125MHZ ? _125MHZ : 1'b0; // send 125MHz clock to LVDS if Penny is the source
 
+//assign clock = _125MHZ;
 
+// send PCLK_12MHZ to Atlas A5 if source_125MHZ set else set A5 high Z
 
-assign clock = _125MHZ;
-
+assign A5 = source_125MHZ ? PCLK_12MHZ : 1'bZ; 
 
 // select 10MHz reference source. If ref_ext is set use Penelope's 10MHz ref and send to Atlas C16
 
 wire reference;
 
 assign reference = ref_ext ? _10MHZ : ext_10MHZ ; 
-assign ext_10MHz = ref_ext ? _10MHZ : 1'bz ; 		// C16 is bidirectional so set high Z if input. 
+assign ext_10MHZ = ref_ext ? _10MHZ : 1'bZ ; 		// C16 is bidirectional so set high Z if input. 
+
 
 // send data to DAC on negative edge of 125MHz clock
 
@@ -354,7 +347,8 @@ end
 // ******  for testing send I&Q data  to PWM DACs ******
 
 assign PWM0_Data = ALC_i;
-assign PWM1_Data = ALC_q;
+//assign PWM1_Data = ALC_q;
+assign PWM1_Data = {1'b0,AIN5,3'd0}; // PWM1 has RF output envelope. 
 assign PWM2_Data = {1'b0,ALC_out[20:6]}; // PWM2 has ALC volts for testing
 
 ////////////////////////////////////////////////////////////////
@@ -469,11 +463,18 @@ reg  [31:0]frequency;
 wire [16:0]q_temp;
 wire [16:0]i_temp;
 
+// set 125MHz/8 = 15.625MHz = 32'h20000000
+
 // The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
 phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
 
+
 // The cordic takes I and Q in along with the top 15 bits of the phase dword.  The I and Q out are freq shifted
+//cordic_16 tx_cordic(.i_in({cic_out_q[15],cic_out_q[13:0],1'b0}),.q_in({cic_out_i[15],cic_out_i[13:0],1'b0}),.iout(i_out),.qout(q_out),.ain(phase[31:12]),.clk(clock));
 cordic_16 tx_cordic(.i_in(cic_out_q),.q_in(cic_out_i),.iout(i_out),.qout(q_out),.ain(phase[31:12]),.clk(clock));
+//cordic_16 tx_cordic(.i_in({cic_out_q[14:0],1'b0}),.q_in({cic_out_i[14:0],1'b0}),.iout(i_out),.qout(q_out),.ain(phase[31:12]),.clk(clock));
+
+
 // NOTE:  I and Q inputs reversed to give correct sideband out - FIX THIS 
 
 /* 
@@ -491,8 +492,9 @@ cordic_16 tx_cordic(.i_in(cic_out_q),.q_in(cic_out_i),.iout(i_out),.qout(q_out),
 // Add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This is necessary since the 
 // interpolating CIC has a loss since it does not interpolate by 2^n. 
 
-assign DAC[13:0] = {i_out[17], i_out[15:3]}; 	// use q_out if 90 degree phase shift required by EER Tx etc
 
+assign DAC[13:0] = {i_out[17], i_out[15:3]}; 	// use q_out if 90 degree phase shift required by EER Tx etc
+												
 
 /////////////////////////////////////////////////////////////////
 //
@@ -696,11 +698,12 @@ assign FPGA_PLL = ref_2_5M ^ osc_2_5M;
 
 // LEDs for testing				PCB LED Marking
 
+assign LED2 = ~ref_ext;
+assign LED3 = ~source_125MHZ; 
+
 // Bar graph for power output 
 //assign LED2 = (AIN5 > 250)?  1'b0 : 1'b1;  
 //assign LED3 = (AIN5 > 500)? 1'b0 : 1'b1; 
-assign LED2 = ~ref_ext;
-assign LED3 = ~source_125MHZ; 
 assign LED4 = (AIN5 > 1000)? 1'b0 : 1'b1;  
 assign LED5 = (AIN5 > 2000)? 1'b0 : 1'b1;  
 assign LED6 = (AIN5 > 3000)? 1'b0 : 1'b1;  
