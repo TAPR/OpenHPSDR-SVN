@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Penelope
-Thu Sep 27 21:59:58 2007
+Fri Oct 05 21:36:33 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -25,11 +25,9 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
  17. Parameter Settings for Inferred Entity Instance: ALC:ALC_I|lpm_divide:Div0
  18. Parameter Settings for Inferred Entity Instance: ALC:ALC_I|lpm_mult:Mult0
  19. Parameter Settings for Inferred Entity Instance: ALC:ALC_Q|lpm_mult:Mult0
- 20. Parameter Settings for Inferred Entity Instance: cordic_16:tx_cordic|lpm_add_sub:Add4
- 21. Parameter Settings for Inferred Entity Instance: cordic_16:tx_cordic|lpm_add_sub:Add4
- 22. lpm_mult Parameter Settings by Entity Instance
- 23. Analysis & Synthesis Messages
- 24. Analysis & Synthesis Suppressed Messages
+ 20. lpm_mult Parameter Settings by Entity Instance
+ 21. Analysis & Synthesis Messages
+ 22. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -55,14 +53,14 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Sep 27 21:59:58 2007   ;
+; Analysis & Synthesis Status        ; Successful - Fri Oct 05 21:36:33 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                ;
 ; Top-level Entity Name              ; Penelope                                ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 3,214                                   ;
-;     Total combinational functions  ; 3,214                                   ;
-;     Dedicated logic registers      ; 2,193                                   ;
+; Total logic elements               ; 3,077                                   ;
+;     Total combinational functions  ; 3,077                                   ;
+;     Dedicated logic registers      ; 2,089                                   ;
 ; Total registers                    ; N/A until Partition Merge               ;
 ; Total pins                         ; N/A until Partition Merge               ;
 ; Total virtual pins                 ; N/A until Partition Merge               ;
@@ -134,70 +132,64 @@ applicable agreement for further details.
 +--------------------------------------------------------------------+--------------------+--------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                   ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                         ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
-; cordic.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/cordic.v                           ;
-; ALC.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/ALC.v                              ;
-; ADC.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/ADC.v                              ;
-; division.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/division.v                         ;
-; phase_accumulator.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/phase_accumulator.v                ;
-; cicint.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/cicint.v                           ;
-; Penelope.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/Penelope.v                         ;
-; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_divide.tdf          ;
-; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/abs_divider.inc         ;
-; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/sign_div_unsign.inc     ;
-; aglobal61.inc                    ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/aglobal61.inc           ;
-; db/lpm_divide_vfm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/lpm_divide_vfm.tdf              ;
-; db/sign_div_unsign_9nh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/sign_div_unsign_9nh.tdf         ;
-; db/alt_u_div_k5f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/alt_u_div_k5f.tdf               ;
-; db/add_sub_lkc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/add_sub_lkc.tdf                 ;
-; db/add_sub_mkc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/add_sub_mkc.tdf                 ;
-; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_mult.tdf            ;
-; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_add_sub.inc         ;
-; multcore.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/multcore.inc            ;
-; bypassff.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/bypassff.inc            ;
-; altshift.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/altshift.inc            ;
-; db/mult_dv01.tdf                 ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/mult_dv01.tdf                   ;
-; lpm_add_sub.tdf                  ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_add_sub.tdf         ;
-; addcore.inc                      ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/addcore.inc             ;
-; look_add.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/look_add.inc            ;
-; alt_stratix_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/alt_stratix_add_sub.inc ;
-; alt_mercury_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/alt_mercury_add_sub.inc ;
-; db/add_sub_rjg.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/add_sub_rjg.tdf                 ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                               ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                     ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+
+; cordic.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/cordic.v                       ;
+; ALC.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/ALC.v                          ;
+; ADC.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/ADC.v                          ;
+; division.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/division.v                     ;
+; phase_accumulator.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/phase_accumulator.v            ;
+; cicint.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/cicint.v                       ;
+; Penelope.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/VK6APH/Penelope V2/Penelope.v                     ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_divide.tdf      ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/abs_divider.inc     ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/sign_div_unsign.inc ;
+; aglobal61.inc                    ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/aglobal61.inc       ;
+; db/lpm_divide_vfm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/lpm_divide_vfm.tdf          ;
+; db/sign_div_unsign_9nh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/sign_div_unsign_9nh.tdf     ;
+; db/alt_u_div_k5f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/alt_u_div_k5f.tdf           ;
+; db/add_sub_lkc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/add_sub_lkc.tdf             ;
+; db/add_sub_mkc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/add_sub_mkc.tdf             ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_mult.tdf        ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/lpm_add_sub.inc     ;
+; multcore.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/multcore.inc        ;
+; bypassff.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/bypassff.inc        ;
+; altshift.inc                     ; yes             ; Megafunction                 ; c:/altera/61/quartus/libraries/megafunctions/altshift.inc        ;
+; db/mult_dv01.tdf                 ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/VK6APH/Penelope V2/db/mult_dv01.tdf               ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+
 
 
-+-------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary           ;
-+---------------------------------------------+---------+
-; Resource                                    ; Usage   ;
-+---------------------------------------------+---------+
-; Estimated Total logic elements              ; 3,214   ;
-;                                             ;         ;
-; Total combinational functions               ; 3214    ;
-; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 312     ;
-;     -- 3 input functions                    ; 1864    ;
-;     -- <=2 input functions                  ; 1038    ;
-;                                             ;         ;
-; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 1232    ;
-;     -- arithmetic mode                      ; 1982    ;
-;                                             ;         ;
-; Total registers                             ; 2193    ;
-;     -- Dedicated logic registers            ; 2193    ;
-;     -- I/O registers                        ; 0       ;
-;                                             ;         ;
-; I/O pins                                    ; 2       ;
-; Embedded Multiplier 9-bit elements          ; 8       ;
-; Maximum fan-out node                        ; _125MHZ ;
-; Maximum fan-out                             ; 1871    ;
-; Total fan-out                               ; 14647   ;
-; Average fan-out                             ; 2.67    ;
-+---------------------------------------------+---------+
++--------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary            ;
++---------------------------------------------+----------+
+; Resource                                    ; Usage    ;
++---------------------------------------------+----------+
+; Estimated Total logic elements              ; 3,077    ;
+;                                             ;          ;
+; Total combinational functions               ; 3077     ;
+; Logic element usage by number of LUT inputs ;          ;
+;     -- 4 input functions                    ; 312      ;
+;     -- 3 input functions                    ; 1819     ;
+;     -- <=2 input functions                  ; 946      ;
+;                                             ;          ;
+; Logic elements by mode                      ;          ;
+;     -- normal mode                          ; 1168     ;
+;     -- arithmetic mode                      ; 1909     ;
+;                                             ;          ;
+; Total registers                             ; 2089     ;
+;     -- Dedicated logic registers            ; 2089     ;
+;     -- I/O registers                        ; 0        ;
+;                                             ;          ;
+; I/O pins                                    ; 3        ;
+; Embedded Multiplier 9-bit elements          ; 8        ;
+; Maximum fan-out node                        ; clock~11 ;
+; Maximum fan-out                             ; 1759     ;
+; Total fan-out                               ; 14190    ;
+; Average fan-out                             ; 2.71     ;
++---------------------------------------------+----------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -205,7 +197,7 @@ applicable agreement for further details.
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                  ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                 ;
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+
-; |Penelope                                   ; 3214 (310)        ; 2193 (441)   ; 0           ; 8            ; 0       ; 4         ; 2    ; 0            ; |Penelope                                                                                                           ;
+; |Penelope                                   ; 3077 (323)        ; 2089 (434)   ; 0           ; 8            ; 0       ; 4         ; 3    ; 0            ; |Penelope                                                                                                           ;
 ;    |ADC:ADC_SPI|                            ; 38 (38)           ; 36 (36)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ADC:ADC_SPI                                                                                               ;
 ;    |ALC:ALC_I|                              ; 679 (48)          ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I                                                                                                 ;
 ;       |lpm_divide:Div0|                     ; 601 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0                                                                                 ;
@@ -214,14 +206,12 @@ applicable agreement for further details.
 ;                |alt_u_div_k5f:divider|      ; 601 (601)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider ;
 ;       |lpm_mult:Mult0|                      ; 30 (0)            ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_mult:Mult0                                                                                  ;
 ;          |mult_dv01:auto_generated|         ; 30 (30)           ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_mult:Mult0|mult_dv01:auto_generated                                                         ;
-;    |ALC:ALC_Q|                              ; 78 (48)           ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_Q                                                                                                 ;
+;    |ALC:ALC_Q|                              ; 62 (32)           ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_Q                                                                                                 ;
 ;       |lpm_mult:Mult0|                      ; 30 (0)            ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_Q|lpm_mult:Mult0                                                                                  ;
 ;          |mult_dv01:auto_generated|         ; 30 (30)           ; 0 (0)        ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |Penelope|ALC:ALC_Q|lpm_mult:Mult0|mult_dv01:auto_generated                                                         ;
 ;    |cicint:cic_I|                           ; 340 (340)         ; 327 (327)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cicint:cic_I                                                                                              ;
 ;    |cicint:cic_Q|                           ; 319 (319)         ; 340 (340)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cicint:cic_Q                                                                                              ;
-;    |cordic_16:tx_cordic|                    ; 1277 (1243)       ; 881 (881)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic_16:tx_cordic                                                                                       ;
-;       |lpm_add_sub:Add4|                    ; 34 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic_16:tx_cordic|lpm_add_sub:Add4                                                                      ;
-;          |add_sub_rjg:auto_generated|       ; 34 (34)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic_16:tx_cordic|lpm_add_sub:Add4|add_sub_rjg:auto_generated                                           ;
+;    |cordic_16:tx_cordic|                    ; 1143 (1143)       ; 784 (784)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic_16:tx_cordic                                                                                       ;
 ;    |division:division_DDS|                  ; 141 (141)         ; 136 (136)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|division:division_DDS                                                                                     ;
 ;    |phase_accumulator:rx_phase_accumulator| ; 32 (32)           ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|phase_accumulator:rx_phase_accumulator                                                                    ;
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+
@@ -300,12 +290,16 @@ Encoding Type:  One-Hot
 ; ALC_in[2]                              ; Stuck at GND due to stuck port data_in ;
 ; ALC_in[1]                              ; Stuck at GND due to stuck port data_in ;
 ; ALC_in[0]                              ; Stuck at GND due to stuck port data_in ;
+; PWM1_Data_in[2]                        ; Stuck at GND due to stuck port data_in ;
+; PWM1_Data_in[1]                        ; Stuck at GND due to stuck port data_in ;
+; PWM1_Data_in[0]                        ; Stuck at GND due to stuck port data_in ;
 ; tx_cordic/i0[2]                        ; Stuck at GND due to stuck port data_in ;
 ; tx_cordic/i0[1]                        ; Stuck at GND due to stuck port data_in ;
 ; tx_cordic/i0[0]                        ; Stuck at GND due to stuck port data_in ;
 ; tx_cordic/q0[2]                        ; Stuck at GND due to stuck port data_in ;
 ; tx_cordic/q0[1]                        ; Stuck at GND due to stuck port data_in ;
 ; tx_cordic/q0[0]                        ; Stuck at GND due to stuck port data_in ;
+; PWM1_Data_in[15]                       ; Stuck at VCC due to stuck port data_in ;
 ; PWM2_Data_in[15]                       ; Stuck at VCC due to stuck port data_in ;
 ; tx_cordic/i1[0]                        ; Stuck at GND due to stuck port data_in ;
 ; tx_cordic/q1[0]                        ; Stuck at GND due to stuck port data_in ;
@@ -313,6 +307,8 @@ Encoding Type:  One-Hot
 ; tx_cordic/q1[1]                        ; Stuck at GND due to stuck port data_in ;
 ; tx_cordic/i2[0]                        ; Stuck at GND due to stuck port data_in ;
 ; tx_cordic/q2[0]                        ; Stuck at GND due to stuck port data_in ;
+; PWM1_accumulator[0]                    ; Merged with PWM1_accumulator[2]        ;
+; PWM1_accumulator[1]                    ; Merged with PWM1_accumulator[2]        ;
 ; cic_Q/diff1[15]                        ; Merged with cic_Q/diff1[16]            ;
 ; cic_Q/diff2[16]                        ; Merged with cic_Q/diff2[17]            ;
 ; cic_Q/diff3[17]                        ; Merged with cic_Q/diff3[18]            ;
@@ -321,6 +317,7 @@ Encoding Type:  One-Hot
 ; cic_I/diff2[16]                        ; Merged with cic_I/diff2[17]            ;
 ; cic_I/diff3[17]                        ; Merged with cic_I/diff3[18]            ;
 ; cic_I/diff4[18]                        ; Merged with cic_I/diff4[19]            ;
+; PWM1_accumulator[2]                    ; Stuck at GND due to stuck port data_in ;
 ; cic_I/cur_count[10]                    ; Merged with cic_Q/cur_count[10]        ;
 ; cic_I/cur_count[9]                     ; Merged with cic_Q/cur_count[9]         ;
 ; cic_I/cur_count[8]                     ; Merged with cic_Q/cur_count[8]         ;
@@ -343,7 +340,7 @@ Encoding Type:  One-Hot
 ; ADC_SPI/ADC~8                          ; Lost fanout                            ;
 ; ADC_SPI/ADC~9                          ; Lost fanout                            ;
 ; CC_state.00                            ; Lost fanout                            ;
-; Total Number of Removed Registers = 52 ;                                        ;
+; Total Number of Removed Registers = 59 ;                                        ;
 +----------------------------------------+----------------------------------------+
 
 
@@ -352,9 +349,9 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 2193  ;
+; Total registers                              ; 2089  ;
 ; Number of registers using Synchronous Clear  ; 59    ;
-; Number of registers using Synchronous Load   ; 117   ;
+; Number of registers using Synchronous Load   ; 148   ;
 ; Number of registers using Asynchronous Clear ; 667   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 314   ;
@@ -367,10 +364,10 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------+
-; 3:1                ; 26 bits   ; 52 LEs        ; 52 LEs               ; 0 LEs                  ; Yes        ; |Penelope|division:division_DDS|qr[70] ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|ADC:ADC_SPI|bit_cnt[0]       ;
+; 3:1                ; 26 bits   ; 52 LEs        ; 52 LEs               ; 0 LEs                  ; Yes        ; |Penelope|division:division_DDS|qr[79] ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|ADC:ADC_SPI|bit_cnt[2]       ;
 ; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Penelope|bits[0]                      ;
-; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Penelope|bit_count[0]                 ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Penelope|bit_count[3]                 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------+
 
 
@@ -497,62 +494,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+---------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: cordic_16:tx_cordic|lpm_add_sub:Add4 ;
-+------------------------+-------------+------------------------------------------------+
-; Parameter Name         ; Value       ; Type                                           ;
-+------------------------+-------------+------------------------------------------------+
-; LPM_WIDTH              ; 17          ; Untyped                                        ;
-; LPM_REPRESENTATION     ; UNSIGNED    ; Untyped                                        ;
-; LPM_DIRECTION          ; DEFAULT     ; Untyped                                        ;
-; ONE_INPUT_IS_CONSTANT  ; NO          ; Untyped                                        ;
-; LPM_PIPELINE           ; 0           ; Untyped                                        ;
-; MAXIMIZE_SPEED         ; 5           ; Untyped                                        ;
-; REGISTERED_AT_END      ; 0           ; Untyped                                        ;
-; OPTIMIZE_FOR_SPEED     ; 5           ; Untyped                                        ;
-; USE_CS_BUFFERS         ; 1           ; Untyped                                        ;
-; CARRY_CHAIN            ; MANUAL      ; Untyped                                        ;
-; CARRY_CHAIN_LENGTH     ; 48          ; CARRY_CHAIN_LENGTH                             ;
-; DEVICE_FAMILY          ; Cyclone II  ; Untyped                                        ;
-; USE_WYS                ; OFF         ; Untyped                                        ;
-; STYLE                  ; FAST        ; Untyped                                        ;
-; CBXI_PARAMETER         ; add_sub_rjg ; Untyped                                        ;
-; AUTO_CARRY_CHAINS      ; ON          ; AUTO_CARRY                                     ;
-; IGNORE_CARRY_BUFFERS   ; OFF         ; IGNORE_CARRY                                   ;
-; AUTO_CASCADE_CHAINS    ; ON          ; AUTO_CASCADE                                   ;
-; IGNORE_CASCADE_BUFFERS ; OFF         ; IGNORE_CASCADE                                 ;
-+------------------------+-------------+------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+---------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: cordic_16:tx_cordic|lpm_add_sub:Add4 ;
-+------------------------+-------------+------------------------------------------------+
-; Parameter Name         ; Value       ; Type                                           ;
-+------------------------+-------------+------------------------------------------------+
-; LPM_WIDTH              ; 17          ; Untyped                                        ;
-; LPM_REPRESENTATION     ; UNSIGNED    ; Untyped                                        ;
-; LPM_DIRECTION          ; DEFAULT     ; Untyped                                        ;
-; ONE_INPUT_IS_CONSTANT  ; NO          ; Untyped                                        ;
-; LPM_PIPELINE           ; 0           ; Untyped                                        ;
-; MAXIMIZE_SPEED         ; 5           ; Untyped                                        ;
-; REGISTERED_AT_END      ; 0           ; Untyped                                        ;
-; OPTIMIZE_FOR_SPEED     ; 5           ; Untyped                                        ;
-; USE_CS_BUFFERS         ; 1           ; Untyped                                        ;
-; CARRY_CHAIN            ; MANUAL      ; Untyped                                        ;
-; CARRY_CHAIN_LENGTH     ; 48          ; CARRY_CHAIN_LENGTH                             ;
-; DEVICE_FAMILY          ; Cyclone II  ; Untyped                                        ;
-; USE_WYS                ; OFF         ; Untyped                                        ;
-; STYLE                  ; FAST        ; Untyped                                        ;
-; CBXI_PARAMETER         ; add_sub_rjg ; Untyped                                        ;
-; AUTO_CARRY_CHAINS      ; ON          ; AUTO_CARRY                                     ;
-; IGNORE_CARRY_BUFFERS   ; OFF         ; IGNORE_CARRY                                   ;
-; AUTO_CASCADE_CHAINS    ; ON          ; AUTO_CASCADE                                   ;
-; IGNORE_CASCADE_BUFFERS ; OFF         ; IGNORE_CASCADE                                 ;
-+------------------------+-------------+------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
 +------------------------------------------------------------------+
 ; lpm_mult Parameter Settings by Entity Instance                   ;
 +---------------------------------------+--------------------------+
@@ -590,7 +531,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Thu Sep 27 21:59:05 2007
+    Info: Processing started: Fri Oct 05 21:35:42 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
 Info: Found 1 design units, including 1 entities, in source file cordic.v
     Info: Found entity 1: cordic_16
@@ -609,8 +550,7 @@ Info: Found 1 design units, including 1 entities, in source file cordic_stage.v
 Info: Found 1 design units, including 1 entities, in source file Penelope.v
     Info: Found entity 1: Penelope
 Info: Elaborating entity "Penelope" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(598): object "Address" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(238): object "ext_10MHz" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(600): object "Address" assigned a value but never read
 Info: Elaborating entity "ADC" for hierarchy "ADC:ADC_SPI"
 Info: Elaborating entity "division" for hierarchy "division:division_DDS"
 Info: Elaborating entity "ALC" for hierarchy "ALC:ALC_I"
@@ -621,6 +561,7 @@ Warning (10230): Verilog HDL assignment warning at cicint.v(182): truncated valu
 Warning (10230): Verilog HDL assignment warning at cicint.v(188): truncated value with size 32 to match size of target (1)
 Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
 Info: Elaborating entity "cordic_16" for hierarchy "cordic_16:tx_cordic"
+Warning (10036): Verilog HDL or VHDL warning at cordic.v(73): object "a15" assigned a value but never read
 Warning: Reduced register "ALC_in[8]" with stuck data_in port to stuck value GND
 Warning: Reduced register "ALC_in[7]" with stuck data_in port to stuck value GND
 Warning: Reduced register "ALC_in[6]" with stuck data_in port to stuck value GND
@@ -630,12 +571,17 @@ Warning: Reduced register "ALC_in[3]" with stuck data_in port to stuck value GND
 Warning: Reduced register "ALC_in[2]" with stuck data_in port to stuck value GND
 Warning: Reduced register "ALC_in[1]" with stuck data_in port to stuck value GND
 Warning: Reduced register "ALC_in[0]" with stuck data_in port to stuck value GND
+Warning: Reduced register "PWM1_Data_in[2]" with stuck data_in port to stuck value GND
+Warning: Reduced register "PWM1_Data_in[1]" with stuck data_in port to stuck value GND
+Warning: Reduced register "PWM1_Data_in[0]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|i0[2]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|i0[1]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|i0[0]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|q0[2]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|q0[1]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|q0[0]" with stuck data_in port to stuck value GND
+Info: Power-up level of register "PWM1_Data_in[15]" is not specified -- using power-up level of High to minimize register
+Warning: Reduced register "PWM1_Data_in[15]" with stuck data_in port to stuck value VCC
 Info: Power-up level of register "PWM2_Data_in[15]" is not specified -- using power-up level of High to minimize register
 Warning: Reduced register "PWM2_Data_in[15]" with stuck data_in port to stuck value VCC
 Warning: Reduced register "cordic_16:tx_cordic|i1[0]" with stuck data_in port to stuck value GND
@@ -645,6 +591,8 @@ Warning: Reduced register "cordic_16:tx_cordic|q1[1]" with stuck data_in port to
 Warning: Reduced register "cordic_16:tx_cordic|i2[0]" with stuck data_in port to stuck value GND
 Warning: Reduced register "cordic_16:tx_cordic|q2[0]" with stuck data_in port to stuck value GND
 Info: Duplicate registers merged to single register
+    Info: Duplicate register "PWM1_accumulator[0]" merged to single register "PWM1_accumulator[2]"
+    Info: Duplicate register "PWM1_accumulator[1]" merged to single register "PWM1_accumulator[2]"
     Info: Duplicate register "cicint:cic_Q|diff1[15]" merged to single register "cicint:cic_Q|diff1[16]"
     Info: Duplicate register "cicint:cic_Q|diff2[16]" merged to single register "cicint:cic_Q|diff2[17]"
     Info: Duplicate register "cicint:cic_Q|diff3[17]" merged to single register "cicint:cic_Q|diff3[18]"
@@ -653,6 +601,7 @@ Info: Duplicate registers merged to single register
     Info: Duplicate register "cicint:cic_I|diff2[16]" merged to single register "cicint:cic_I|diff2[17]"
     Info: Duplicate register "cicint:cic_I|diff3[17]" merged to single register "cicint:cic_I|diff3[18]"
     Info: Duplicate register "cicint:cic_I|diff4[18]" merged to single register "cicint:cic_I|diff4[19]"
+Warning: Reduced register "PWM1_accumulator[2]" with stuck data_in port to stuck value GND
 Info: Duplicate registers merged to single register
     Info: Duplicate register "cicint:cic_I|cur_count[10]" merged to single register "cicint:cic_Q|cur_count[10]"
     Info: Duplicate register "cicint:cic_I|cur_count[9]" merged to single register "cicint:cic_Q|cur_count[9]"
@@ -728,12 +677,6 @@ Info: Found 1 design units, including 1 entities, in source file ../../../../alt
 Info: Elaborated megafunction instantiation "ALC:ALC_I|lpm_mult:Mult0"
 Info: Found 1 design units, including 1 entities, in source file db/mult_dv01.tdf
     Info: Found entity 1: mult_dv01
-Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_add_sub.tdf
-    Info: Found entity 1: lpm_add_sub
-Info: Elaborated megafunction instantiation "cordic_16:tx_cordic|lpm_add_sub:Add4"
-Info: Found 1 design units, including 1 entities, in source file db/add_sub_rjg.tdf
-    Info: Found entity 1: add_sub_rjg
-Warning: The bidir "ext_10MHZ" has no source; inserted an always disabled tri-state buffer.
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "LED7" stuck at GND
     Warning: Pin "nCS" stuck at VCC
@@ -746,16 +689,16 @@ Info: 5 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
 Info: Found the following redundant logic cells in design
     Info: Logic cell "gain[0]~62"
-Info: Implemented 3883 device resources after synthesis - the final resource count might be different
+Info: Implemented 3741 device resources after synthesis - the final resource count might be different
     Info: Implemented 12 input pins
-    Info: Implemented 48 output pins
-    Info: Implemented 4 bidirectional pins
-    Info: Implemented 3811 logic cells
+    Info: Implemented 47 output pins
+    Info: Implemented 6 bidirectional pins
+    Info: Implemented 3668 logic cells
     Info: Implemented 8 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 38 warnings
-    Info: Allocated 142 megabytes of memory during processing
-    Info: Processing ended: Thu Sep 27 21:59:58 2007
-    Info: Elapsed time: 00:00:53
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 42 warnings
+    Info: Allocated 141 megabytes of memory during processing
+    Info: Processing ended: Fri Oct 05 21:36:33 2007
+    Info: Elapsed time: 00:00:51
 
 
 +------------------------------------------+

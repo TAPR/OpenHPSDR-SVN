@@ -171,7 +171,7 @@ GND                          : 111       : gnd    :                   :         
 RESERVED_INPUT               : 112       :        :                   :         : 3         :                
 RESERVED_INPUT               : 113       :        :                   :         : 3         :                
 RESERVED_INPUT               : 114       :        :                   :         : 3         :                
-A5                           : 115       : output : 3.3-V LVTTL       :         : 3         : Y              
+A5                           : 115       : bidir  : 3.3-V LVTTL       :         : 3         : Y              
 C4                           : 116       : input  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 117       :        :                   :         : 3         :                
 RESERVED_INPUT               : 118       :        :                   :         : 3         :                
