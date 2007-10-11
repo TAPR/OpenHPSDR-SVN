@@ -1,5 +1,5 @@
 Flow report for Penelope
-Fri Oct 05 21:39:27 2007
+Thu Oct 11 19:52:44 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Fri Oct 05 21:39:26 2007   ;
+; Flow Status                        ; Successful - Thu Oct 11 19:52:43 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                ;
 ; Top-level Entity Name              ; Penelope                                ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/05/2007 21:35:43 ;
+; Start date & time ; 10/11/2007 19:48:59 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Penelope            ;
 +-------------------+---------------------+
@@ -88,8 +88,8 @@ applicable agreement for further details.
 ; Partition Merge         ; 00:00:01     ;
 ; Fitter                  ; 00:02:27     ;
 ; Assembler               ; 00:00:08     ;
-; Classic Timing Analyzer ; 00:00:07     ;
-; Total                   ; 00:03:34     ;
+; Classic Timing Analyzer ; 00:00:06     ;
+; Total                   ; 00:03:33     ;
 +-------------------------+--------------+
 
 
