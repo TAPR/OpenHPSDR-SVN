@@ -95,7 +95,7 @@ end
 always @ (negedge SCLK)
 begin
 if (bit_cnt > 11)				// start capturing data at bit counter = 11
-	AIN5 = temp_AIN5;			// latch data when not shifting
+	AIN5 <= temp_AIN5;			// latch data when not shifting
 else 
 	temp_AIN5[bit_cnt] <= MISO; // capture incoming data
 end 

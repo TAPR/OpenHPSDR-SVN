@@ -122,3 +122,4 @@ set_global_assignment -name VERILOG_FILE cordic_stage.v
 set_global_assignment -name VERILOG_FILE Penelope.v
 set_location_assignment PIN_96 -to C11
 set_location_assignment PIN_68 -to C21
+set_global_assignment -name MESSAGE_SUPPRESSION_RULE_FILE Penelope.srf
