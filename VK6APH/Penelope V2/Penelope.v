@@ -140,7 +140,9 @@ module Penelope(
 				output FPGA_PTT		// controls PTT FET Q3
 				);
 				
-
+wire CLK_MCLK;
+wire CDIN;
+wire CLRCLK;
 // link through FPGA where required
 
 assign A11 = CDOUT;			// 
