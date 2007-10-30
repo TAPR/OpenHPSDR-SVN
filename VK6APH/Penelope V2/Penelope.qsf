@@ -74,10 +74,8 @@ set_location_assignment PIN_189 -to DAC[10]
 set_location_assignment PIN_191 -to DAC[11]
 set_location_assignment PIN_192 -to DAC[12]
 set_location_assignment PIN_193 -to DAC[13]
-set_location_assignment PIN_195 -to DACCLK
 set_location_assignment PIN_134 -to FPGA_PTT
 set_location_assignment PIN_197 -to FPGA_PLL
-set_location_assignment PIN_198 -to LVDSCLK
 set_location_assignment PIN_199 -to LVDSTXE
 set_location_assignment PIN_171 -to PTT
 set_location_assignment PIN_149 -to PWM0
