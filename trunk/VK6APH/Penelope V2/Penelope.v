@@ -64,7 +64,8 @@
 	26 Sept 2007 - Moved CDOUT back to Altas bus A11
 	29 Sept 2007 - Only send PCLK_MCLK to bus if 125MHz clock selected as master so can share with Mercury
 	 1 Oct  2007 - Added receive 125MHz clock from LVDS
-	 2 Oct  2007 - Changed CORDIC output to stage 15 to reduce noise floor.
+	 2 Oct  2007 - Changed CORDIC output to stage 14 to reduce noise floor.
+	29 Oct  2007 - Modified hardware so that 125MHz clock feeds DAC and LVDS Tx directly.
 	
 	
 	
@@ -92,8 +93,8 @@ module Penelope(
 				input   _10MHZ,
 				inout   ext_10MHZ, 	// 10MHz reference to Atlas pin C16
 				input   _125MHZ,
-				input   _125MHZLVDS,
-				output  LVDSCLK,  	// 125MHz to LVDS driver
+				input   _125MHZLVDS, // *** keep for now to allow testing from Mercury clock 
+				//output  LVDSCLK,  	// 125MHz to LVDS driver
 				inout A5, 			// PCLK_12MHZ (12.5MHz) to Atlas bus - tri state
 				output A11,			// CDOUT_P (Mic) to Atlas bus 
 				input  C4, 			// LROUT (Rx audio) from Atlas bus
@@ -114,8 +115,8 @@ module Penelope(
 				output USEROUT4,
 				output USEROUT5,
 				output USEROUT6,
-				output DACCLK,
-				output [13:0]DAC,
+				//output DACCLK,
+				output wire [13:0]DAC,
 				output nLVDSRXE,
 				output LVDSTXE,
 				output FPGA_PLL,
@@ -213,12 +214,11 @@ assign CMCLK = CLK_MCLK;
 
 wire clock;
 
-assign clock = source_125MHZ ? _125MHZ : _125MHZLVDS; // clock is either on board or external via LVDS
+assign clock = source_125MHZ ? ~_125MHZ : ~_125MHZLVDS; // clock is either on board or external via LVDS
 assign nLVDSRXE = source_125MHZ ? 1'b1 : 1'b0; // enable LVDS receiver if clock is external
 assign LVDSTXE = source_125MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if  Penny is the source 
-assign LVDSCLK = source_125MHZ ? _125MHZ : 1'b0; // send 125MHz clock to LVDS if Penny is the source
 
-//assign clock = _125MHZ;
+
 
 // send PCLK_12MHZ to Atlas A5 if source_125MHZ set else set A5 high Z
 
@@ -231,10 +231,6 @@ wire reference;
 assign reference = ref_ext ? _10MHZ : ext_10MHZ ; 
 assign ext_10MHZ = ref_ext ? _10MHZ : 1'bZ ; 		// C16 is bidirectional so set high Z if input. 
 
-
-// send data to DAC on negative edge of 125MHz clock
-
-assign DACCLK = ~clock;
 
 //////////////////////////////////////////////////////////////
 //
@@ -361,7 +357,7 @@ assign PWM2_Data = {1'b0,ALC_out[20:6]}; // PWM2 has ALC volts for testing
 
 // The flowing code provides fast attack and slow decay for the 
 // ALC voltage. The output from the ALC ADC is compared with its
-// previous sample. If higher,or the same,the new value is used.
+// previous sample. If higher, or the same, the new value is used.
 // If lower then the previous value is used but decremented by 1 each 
 // time through the loop. This provides a (linear) slow decay of
 // approximately 2 seconds. Extend ALC input to 21 bits to 
@@ -406,7 +402,9 @@ wire [15:0]gain;
 
 assign set_level = 16'h9999; // corresponds to 0.9999 i.e. unity gain
 
-wire [15:0]ALC_level = ({4'd0,ALC_out[20:9]} +  {5'd0,ALC_out[20:10]}); // gain for ALC signal (x1.5) 
+//wire [15:0]ALC_level = ({4'd0,ALC_out[20:9]} +  {5'd0,ALC_out[20:10]}); // gain for ALC signal (x1.5) 
+wire [15:0]ALC_level = {5'd0,ALC_out[20:10]}; // gain for ALC signal (x0.5) 
+
 assign gain = (set_level - ALC_level);
 
 // use this to turn ALC off
@@ -444,8 +442,8 @@ wire [15:0]cic_out_q;
 wire ce_out_i;				// narrow pulse when data required
 wire ce_out_q;				// narrow pulse when data required
 
-cicint cic_I(.clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_i),.filter_out(cic_out_i),.ce_out(ce_out_i));
-cicint cic_Q(.clk(clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_q),.filter_out(cic_out_q),.ce_out(ce_out_q));
+cicint cic_I(.clk(~clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_i),.filter_out(cic_out_i),.ce_out(ce_out_i));
+cicint cic_Q(.clk(~clock),.clk_enable(clk_enable),.reset(~clk_enable),.filter_in(cic_q),.filter_out(cic_out_q),.ce_out(ce_out_q));
 
 
 //////////////////////////////////////////////////////////////
@@ -494,9 +492,49 @@ cordic_16 tx_cordic(.i_in(cic_out_q),.q_in(cic_out_i),.iout(i_out),.qout(q_out),
 // Add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This is necessary since the 
 // interpolating CIC has a loss since it does not interpolate by 2^n. 
 
+// sync DAC data to positive edge of clock, DAC is being clocked directly from the 125MHz clock or via LVDS
 
-assign DAC[13:0] = {i_out[17], i_out[15:3]}; 	// use q_out if 90 degree phase shift required by EER Tx etc
-												
+//always @ (posedge clock)
+//begin
+assign 	DAC[13:0] = {i_out[17], i_out[15:3]}; 	// use q_out if 90 degree phase shift required by EER Tx etc
+//end
+
+
+
+/*
+// test  code send 25MHz to ADC
+reg [2:0]test;
+reg [13:0]temp_DAC;
+
+always @ (posedge clock)
+begin 
+case (test)
+0:	begin
+	temp_DAC <= 0;
+	test <= 1;
+	end
+1:  begin
+	temp_DAC <= 8191;
+	test <= 2;
+	end
+2:  begin
+	temp_DAC <= 0;
+	test <= 3;
+	end
+3:  begin
+	temp_DAC <= -8191;
+	test <= 4;
+	end
+4:  begin
+	temp_DAC <= 0;
+	test <= 0;
+	end
+endcase
+end 												
+
+assign DAC = temp_DAC;
+
+*/
 
 /////////////////////////////////////////////////////////////////
 //

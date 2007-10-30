@@ -251,10 +251,10 @@ DAC[11]                      : 191       : output : 3.3-V LVTTL       :         
 DAC[12]                      : 192       : output : 3.3-V LVTTL       :         : 2         : Y              
 DAC[13]                      : 193       : output : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 194       : power  :                   : 3.3V    : 2         :                
-DACCLK                       : 195       : output : 3.3-V LVTTL       :         : 2         : Y              
+RESERVED_INPUT               : 195       :        :                   :         : 2         :                
 GND                          : 196       : gnd    :                   :         :           :                
 FPGA_PLL                     : 197       : output : 3.3-V LVTTL       :         : 2         : Y              
-LVDSCLK                      : 198       : output : 3.3-V LVTTL       :         : 2         : Y              
+RESERVED_INPUT               : 198       :        :                   :         : 2         :                
 LVDSTXE                      : 199       : output : 3.3-V LVTTL       :         : 2         : Y              
 nLVDSRXE                     : 200       : output : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 201       :        :                   :         : 2         :                
