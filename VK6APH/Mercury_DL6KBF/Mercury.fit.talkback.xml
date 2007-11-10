@@ -1,0 +1,1822 @@
+
+<!--
+This XML file (created on Tue Aug 15 16:42:47 2006) contains limited information
+from the compilation of logic designs using Quartus II software (BUT NOT THE
+LOGIC DESIGN FILES) that will be transmitted to Altera Corporation through
+operation of the "TalkBack" feature.  To enable/disable this feature, run
+qtb_install.exe located in your quartus/bin folder.  For more information, go
+to www.altera.com/products/software/download/dnl-download_license.html
+-->
+<talkback>
+<ver>6.0</ver>
+<schema>quartus_version_6.0_build_202.xsd</schema>
+<license>
+	<host_id>0013d3f4cf33</host_id>
+	<t_guard>T000092992</t_guard>
+	<nic_id>0013d3f4cf33</nic_id>
+	<cdrive_id>d86310c5</cdrive_id>
+</license>
+<tool>
+	<name>Quartus II</name>
+	<version>6.0</version>
+	<build>Build 202</build>
+	<service_pack_label>1</service_pack_label>
+	<binary_type>32</binary_type>
+	<module>quartus_fit</module>
+	<edition>Web Edition</edition>
+	<eval>Licensed</eval>
+	<compilation_end_time>Tue Aug 15 16:42:47 2006</compilation_end_time>
+</tool>
+<machine>
+	<os>Windows XP</os>
+	<cpu>
+		<proc_count>1</proc_count>
+		<cpu_freq units="MHz">2193</cpu_freq>
+	</cpu>
+	<ram units="MB">960</ram>
+</machine>
+<project>C:/FPGA/Mercury/Mercury</project>
+<revision>Mercury</revision>
+<compilation_summary>
+	<flow_status>Successful - Tue Aug 15 16:42:47 2006</flow_status>
+	<quartus_ii_version>6.0 Build 202 06/20/2006 SP 1 SJ Web Edition</quartus_ii_version>
+	<revision_name>Mercury</revision_name>
+	<top_level_entity_name>Mercury</top_level_entity_name>
+	<family>Cyclone II</family>
+	<device>EP2C5Q208C8</device>
+	<timing_models>Final</timing_models>
+	<met_timing_requirements>N/A</met_timing_requirements>
+	<total_logic_elements>658 / 4,608 ( 14 % )</total_logic_elements>
+	<total_registers>573</total_registers>
+	<total_pins>52 / 142 ( 37 % )</total_pins>
+	<total_virtual_pins>0</total_virtual_pins>
+	<total_memory_bits>32,768 / 119,808 ( 27 % )</total_memory_bits>
+	<embedded_multiplier_9_bit_elements>0 / 26 ( 0 % )</embedded_multiplier_9_bit_elements>
+	<total_plls>0 / 2 ( 0 % )</total_plls>
+</compilation_summary>
+<resource_usage_summary>
+	<rsc name="Total logic elements" util="14" max=" 4608 " type="int">658 </rsc>
+	<rsc name="-- Combinational with no register" type="int">85</rsc>
+	<rsc name="-- Register only" type="int">88</rsc>
+	<rsc name="-- Combinational with a register" type="int">485</rsc>
+	<rsc name="Logic element usage by number of LUT inputs" type="text"></rsc>
+	<rsc name="-- 4 input functions" type="int">72</rsc>
+	<rsc name="-- 3 input functions" type="int">388</rsc>
+	<rsc name="-- &lt;=2 input functions" type="int">110</rsc>
+	<rsc name="-- Register only" type="int">88</rsc>
+	<rsc name="Logic elements by mode" type="text"></rsc>
+	<rsc name="-- normal mode" type="int">175</rsc>
+	<rsc name="-- arithmetic mode" type="int">395</rsc>
+	<rsc name="Total registers" util="12" max=" 4608 " type="int">573 </rsc>
+	<rsc name="Total LABs" util="17" max=" 288 " type="int">50 </rsc>
+	<rsc name="User inserted logic elements" type="int">0</rsc>
+	<rsc name="Virtual pins" type="int">0</rsc>
+	<rsc name="I/O pins" util="37" max=" 142 " type="int">52 </rsc>
+	<rsc name="-- Clock pins" util="25" max=" 4 " type="int">1 </rsc>
+	<rsc name="Global signals" type="int">6</rsc>
+	<rsc name="M4Ks" util="31" max=" 26 " type="int">8 </rsc>
+	<rsc name="Total memory bits" util="27" max=" 119808 " type="int">32768 </rsc>
+	<rsc name="Total RAM block bits" util="31" max=" 119808 " type="int">36864 </rsc>
+	<rsc name="Embedded Multiplier 9-bit elements" util="0" max=" 26 " type="int">0 </rsc>
+	<rsc name="PLLs" util="0" max=" 2 " type="int">0 </rsc>
+	<rsc name="Global clocks" util="75" max=" 8 " type="int">6 </rsc>
+	<rsc name="Maximum fan-out node" type="text">clock</rsc>
+	<rsc name="Maximum fan-out" type="int">460</rsc>
+	<rsc name="Highest non-global fan-out signal" type="text">clock</rsc>
+	<rsc name="Highest non-global fan-out" type="int">460</rsc>
+	<rsc name="Total fan-out" type="int">3750</rsc>
+	<rsc name="Average fan-out" type="float">2.95</rsc>
+</resource_usage_summary>
+<control_signals>
+	<row>
+		<name>clock</name>
+		<location>PIN_118</location>
+		<fan_out>460</fan_out>
+		<usage>Clock</usage>
+		<global>no</global>
+	</row>
+	<row>
+		<name>Tx_read_clock</name>
+		<location>LCFF_X3_Y11_N23</location>
+		<fan_out>34</fan_out>
+		<usage>Clock</usage>
+		<global>yes</global>
+		<global_resource_used>Global clock</global_resource_used>
+		<global_line_name>GCLK0</global_line_name>
+	</row>
+	<row>
+		<name>clock_8</name>
+		<location>LCFF_X13_Y5_N1</location>
+		<fan_out>29</fan_out>
+		<usage>Clock</usage>
+		<global>yes</global>
+		<global_resource_used>Global clock</global_resource_used>
+		<global_line_name>GCLK3</global_line_name>
+	</row>
+	<row>
+		<name>data_flag</name>
+		<location>LCFF_X27_Y7_N7</location>
+		<fan_out>56</fan_out>
+		<usage>Async. clear, Clock</usage>
+		<global>yes</global>
+		<global_resource_used>Global clock</global_resource_used>
+		<global_line_name>GCLK5</global_line_name>
+	</row>
+	<row>
+		<name>IFCLK</name>
+		<location>PIN_24</location>
+		<fan_out>11</fan_out>
+		<usage>Clock</usage>
+		<global>yes</global>
+		<global_resource_used>Global clock</global_resource_used>
+		<global_line_name>GCLK2</global_line_name>
+	</row>
+	<row>
+		<name>Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_f2c1:auto_generated|rdaclr</name>
+		<location>LCFF_X27_Y8_N17</location>
+		<fan_out>13</fan_out>
+		<usage>Async. clear</usage>
+		<global>yes</global>
+		<global_resource_used>Global clock</global_resource_used>
+		<global_line_name>GCLK4</global_line_name>
+	</row>
+	<row>
+		<name>clk_enable</name>
+		<location>LCFF_X13_Y8_N11</location>
+		<fan_out>390</fan_out>
+		<usage>Async. clear</usage>
+		<global>yes</global>
+		<global_resource_used>Global clock</global_resource_used>
+		<global_line_name>GCLK1</global_line_name>
+	</row>
+</control_signals>
+<non_global_high_fan_out_signals>
+	<row>
+		<name>FIFO_ADR[1]~reg0</name>
+		<fan_out>3</fan_out>
+	</row>
+	<row>
+		<name>SLRD~reg0</name>
+		<fan_out>2</fan_out>
+	</row>
+	<row>
+		<name>SLWR~reg0</name>
+		<fan_out>2</fan_out>
+	</row>
+	<row>
+		<name>SLOE~reg0</name>
+		<fan_out>4</fan_out>
+	</row>
+	<row>
+		<name>filter:cic_I|ce_out_reg</name>
+		<fan_out>1</fan_out>
+	</row>
+	<row>
+		<name>state_FX[0]</name>
+		<fan_out>14</fan_out>
+	</row>
+	<row>
+		<name>state_FX[1]</name>
+		<fan_out>13</fan_out>
+	</row>
+	<row>
+		<name>state_FX[3]</name>
+		<fan_out>10</fan_out>
+	</row>
+	<row>
+		<name>state_FX[2]</name>
+		<fan_out>11</fan_out>
+	</row>
+	<row>
+		<name>syncd_write_used[10]</name>
+		<fan_out>4</fan_out>
+	</row>
+</non_global_high_fan_out_signals>
+<ram_summary>
+	<row>
+		<name>Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_f2c1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram4|ALTSYNCRAM</name>
+		<type>AUTO</type>
+		<mode>True Dual Port</mode>
+		<port_a_depth>2048</port_a_depth>
+		<port_a_width>16</port_a_width>
+		<port_b_depth>2048</port_b_depth>
+		<port_b_width>16</port_b_width>
+		<port_a_input_registers>yes</port_a_input_registers>
+		<port_a_output_registers>yes</port_a_output_registers>
+		<port_b_input_registers>yes</port_b_input_registers>
+		<port_b_output_registers>no</port_b_output_registers>
+		<size>32768</size>
+		<m4ks>8</m4ks>
+		<mif>None</mif>
+		<location>M4K_X23_Y6, M4K_X11_Y6, M4K_X11_Y7, M4K_X11_Y9, M4K_X23_Y9, M4K_X23_Y8, M4K_X23_Y7, M4K_X11_Y8</location>
+	</row>
+</ram_summary>
+<interconnect_usage_summary>
+	<rsc name="Local interconnects" util="7" max=" 4608 " type="int">342 </rsc>
+	<rsc name="Block interconnects" util="6" max=" 15666 " type="int">1011 </rsc>
+	<rsc name="R4 interconnects" util="5" max=" 13328 " type="int">732 </rsc>
+	<rsc name="R24 interconnects" util="3" max=" 652 " type="int">21 </rsc>
+	<rsc name="C4 interconnects" util="5" max=" 11424 " type="int">565 </rsc>
+	<rsc name="C16 interconnects" util="1" max=" 812 " type="int">4 </rsc>
+	<rsc name="Global clocks" util="75" max=" 8 " type="int">6 </rsc>
+	<rsc name="Direct links" util="1" max=" 15666 " type="int">187 </rsc>
+</interconnect_usage_summary>
+<mep_data>
+	<command_line>quartus_fit --read_settings_files=off --write_settings_files=off Mercury -c Mercury</command_line>
+</mep_data>
+<software_data>
+	<smart_recompile>off</smart_recompile>
+</software_data>
+<messages>
+	<warning>Warning: Following 8 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results</warning>
+	<warning>Warning: Found 30 output pins without output pin load capacitance assignment</warning>
+	<info>Info: Quartus II Fitter was successful. 0 errors, 2 warnings</info>
+	<info>Info: Elapsed time: 00:00:11</info>
+	<info>Info: Processing ended: Tue Aug 15 16:42:47 2006</info>
+	<info>Info: Following groups of pins have the same output enable</info>
+	<info>Info: Following pins have the same output enable: SLEN</info>
+</messages>
+<fitter_settings>
+	<row>
+		<option>Device</option>
+		<setting>EP2C5Q208C8</setting>
+	</row>
+	<row>
+		<option>Use smart compilation</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Router Timing Optimization Level</option>
+		<setting>Normal</setting>
+		<default_value>Normal</default_value>
+	</row>
+	<row>
+		<option>Placement Effort Multiplier</option>
+		<setting>1.0</setting>
+		<default_value>1.0</default_value>
+	</row>
+	<row>
+		<option>Router Effort Multiplier</option>
+		<setting>1.0</setting>
+		<default_value>1.0</default_value>
+	</row>
+	<row>
+		<option>Optimize Hold Timing</option>
+		<setting>IO Paths and Minimum TPD Paths</setting>
+		<default_value>IO Paths and Minimum TPD Paths</default_value>
+	</row>
+	<row>
+		<option>Optimize Fast-Corner Timing</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>PowerPlay Power Optimization</option>
+		<setting>Normal compilation</setting>
+		<default_value>Normal compilation</default_value>
+	</row>
+	<row>
+		<option>Optimize Timing</option>
+		<setting>Normal compilation</setting>
+		<default_value>Normal compilation</default_value>
+	</row>
+	<row>
+		<option>Optimize IOC Register Placement for Timing</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Limit to One Fitting Attempt</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Final Placement Optimizations</option>
+		<setting>Automatically</setting>
+		<default_value>Automatically</default_value>
+	</row>
+	<row>
+		<option>Fitter Aggressive Routability Optimizations</option>
+		<setting>Automatically</setting>
+		<default_value>Automatically</default_value>
+	</row>
+	<row>
+		<option>Fitter Initial Placement Seed</option>
+		<setting>1</setting>
+		<default_value>1</default_value>
+	</row>
+	<row>
+		<option>PCI I/O</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Weak Pull-Up Resistor</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Enable Bus-Hold Circuitry</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Auto Global Memory Control Signals</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Auto Packed Registers -- Stratix II/Cyclone II</option>
+		<setting>Auto</setting>
+		<default_value>Auto</default_value>
+	</row>
+	<row>
+		<option>Auto Delay Chains</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Merge PLLs</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Ignore PLL Mode When Merging PLLs</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+	<row>
+		<option>Fitter Effort</option>
+		<setting>Auto Fit</setting>
+		<default_value>Auto Fit</default_value>
+	</row>
+	<row>
+		<option>Physical Synthesis Effort Level</option>
+		<setting>Normal</setting>
+		<default_value>Normal</default_value>
+	</row>
+	<row>
+		<option>Auto Global Clock</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Auto Global Register Control Signals</option>
+		<setting>On</setting>
+		<default_value>On</default_value>
+	</row>
+	<row>
+		<option>Always Enable Input Buffers</option>
+		<setting>Off</setting>
+		<default_value>Off</default_value>
+	</row>
+</fitter_settings>
+<fitter_device_options>
+	<row>
+		<option>Enable user-supplied start-up clock (CLKUSR)</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Enable device-wide reset (DEV_CLRn)</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Enable device-wide output enable (DEV_OE)</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Enable INIT_DONE output</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Configuration scheme</option>
+		<setting>Active Serial</setting>
+	</row>
+	<row>
+		<option>Error detection CRC</option>
+		<setting>Off</setting>
+	</row>
+	<row>
+		<option>Reserve nCEO pin after configuration</option>
+		<setting>As output driving ground</setting>
+	</row>
+	<row>
+		<option>Reserve ASDO pin after configuration.</option>
+		<setting>As input tri-stated</setting>
+	</row>
+	<row>
+		<option>Reserve all unused pins</option>
+		<setting>As input tri-stated</setting>
+	</row>
+	<row>
+		<option>Base pin-out file on sameframe device</option>
+		<setting>Off</setting>
+	</row>
+</fitter_device_options>
+<input_pins>
+	<row>
+		<name>ADC[0]</name>
+		<pin__>147</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>16</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[10]</name>
+		<pin__>135</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>9</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[11]</name>
+		<pin__>134</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>8</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[12]</name>
+		<pin__>133</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>8</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[13]</name>
+		<pin__>128</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>6</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[14]</name>
+		<pin__>127</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>6</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[15]</name>
+		<pin__>120</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>5</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[1]</name>
+		<pin__>146</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[2]</name>
+		<pin__>145</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[3]</name>
+		<pin__>144</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>3</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[4]</name>
+		<pin__>143</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>10</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[5]</name>
+		<pin__>142</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>10</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[6]</name>
+		<pin__>141</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>10</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[7]</name>
+		<pin__>139</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>10</y_coordinate>
+		<cell_number>3</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[8]</name>
+		<pin__>138</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>9</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>ADC[9]</name>
+		<pin__>137</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>9</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>FLAGA</name>
+		<pin__>198</pin__>
+		<i_o_bank>2</i_o_bank>
+		<x_coordinate>5</x_coordinate>
+		<y_coordinate>14</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>3</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>FLAGB</name>
+		<pin__>197</pin__>
+		<i_o_bank>2</i_o_bank>
+		<x_coordinate>5</x_coordinate>
+		<y_coordinate>14</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>FLAGC</name>
+		<pin__>5</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>13</y_coordinate>
+		<cell_number>4</cell_number>
+		<combinational_fan_out>6</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>FX2_CLK</name>
+		<pin__>23</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>6</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>IFCLK</name>
+		<pin__>24</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>6</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>1</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+	<row>
+		<name>clock</name>
+		<pin__>118</pin__>
+		<i_o_bank>3</i_o_bank>
+		<x_coordinate>28</x_coordinate>
+		<y_coordinate>5</y_coordinate>
+		<cell_number>3</cell_number>
+		<combinational_fan_out>460</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+	</row>
+</input_pins>
+<output_pins>
+	<row>
+		<name>FIFO_ADR[0]</name>
+		<pin__>11</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>12</y_coordinate>
+		<cell_number>3</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FIFO_ADR[1]</name>
+		<pin__>10</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>12</y_coordinate>
+		<cell_number>2</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>LED[0]</name>
+		<pin__>67</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>7</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>2</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>LED[1]</name>
+		<pin__>68</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>7</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>LED[2]</name>
+		<pin__>69</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>7</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>LED[3]</name>
+		<pin__>70</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>9</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>LED[4]</name>
+		<pin__>72</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>9</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>LED[5]</name>
+		<pin__>74</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>12</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>LED[6]</name>
+		<pin__>75</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>12</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>LED[7]</name>
+		<pin__>76</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>14</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>PKEND</name>
+		<pin__>8</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>12</y_coordinate>
+		<cell_number>1</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>SLOE</name>
+		<pin__>13</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>11</y_coordinate>
+		<cell_number>1</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>SLRD</name>
+		<pin__>30</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>5</y_coordinate>
+		<cell_number>0</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>SLWR</name>
+		<pin__>31</pin__>
+		<i_o_bank>1</i_o_bank>
+		<x_coordinate>0</x_coordinate>
+		<y_coordinate>5</y_coordinate>
+		<cell_number>1</cell_number>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<tri_primitive>no</tri_primitive>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+</output_pins>
+<bidir_pins>
+	<row>
+		<name>FX2_FD[0]</name>
+		<pin__>56</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>1</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[10]</name>
+		<pin__>206</pin__>
+		<i_o_bank>2</i_o_bank>
+		<x_coordinate>1</x_coordinate>
+		<y_coordinate>14</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[11]</name>
+		<pin__>205</pin__>
+		<i_o_bank>2</i_o_bank>
+		<x_coordinate>1</x_coordinate>
+		<y_coordinate>14</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[12]</name>
+		<pin__>203</pin__>
+		<i_o_bank>2</i_o_bank>
+		<x_coordinate>3</x_coordinate>
+		<y_coordinate>14</y_coordinate>
+		<cell_number>3</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[13]</name>
+		<pin__>201</pin__>
+		<i_o_bank>2</i_o_bank>
+		<x_coordinate>3</x_coordinate>
+		<y_coordinate>14</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[14]</name>
+		<pin__>200</pin__>
+		<i_o_bank>2</i_o_bank>
+		<x_coordinate>3</x_coordinate>
+		<y_coordinate>14</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[15]</name>
+		<pin__>199</pin__>
+		<i_o_bank>2</i_o_bank>
+		<x_coordinate>3</x_coordinate>
+		<y_coordinate>14</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[1]</name>
+		<pin__>57</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>1</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[2]</name>
+		<pin__>58</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>1</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[3]</name>
+		<pin__>59</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>3</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[4]</name>
+		<pin__>60</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>3</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[5]</name>
+		<pin__>61</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>3</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[6]</name>
+		<pin__>63</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>5</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>1</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[7]</name>
+		<pin__>64</pin__>
+		<i_o_bank>4</i_o_bank>
+		<x_coordinate>5</x_coordinate>
+		<y_coordinate>0</y_coordinate>
+		<cell_number>0</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[8]</name>
+		<pin__>208</pin__>
+		<i_o_bank>2</i_o_bank>
+		<x_coordinate>1</x_coordinate>
+		<y_coordinate>14</y_coordinate>
+		<cell_number>3</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+	<row>
+		<name>FX2_FD[9]</name>
+		<pin__>207</pin__>
+		<i_o_bank>2</i_o_bank>
+		<x_coordinate>1</x_coordinate>
+		<y_coordinate>14</y_coordinate>
+		<cell_number>2</cell_number>
+		<combinational_fan_out>0</combinational_fan_out>
+		<registered_fan_out>0</registered_fan_out>
+		<global>no</global>
+		<input_register>no</input_register>
+		<output_register>no</output_register>
+		<output_enable_register>no</output_enable_register>
+		<power_up_high>no</power_up_high>
+		<pci_i_o_enabled>no</pci_i_o_enabled>
+		<open_drain>no</open_drain>
+		<bus_hold>no</bus_hold>
+		<weak_pull_up>Off</weak_pull_up>
+		<i_o_standard>LVTTL</i_o_standard>
+		<current_strength>24mA</current_strength>
+		<termination>Off</termination>
+		<location_assigned_by>User</location_assigned_by>
+		<load units="pF">0</load>
+	</row>
+</bidir_pins>
+<i_o_bank_usage>
+	<row>
+		<i_o_bank>1</i_o_bank>
+		<usage>11 / 34 ( 32 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+	<row>
+		<i_o_bank>2</i_o_bank>
+		<usage>10 / 35 ( 29 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+	<row>
+		<i_o_bank>3</i_o_bank>
+		<usage>18 / 37 ( 49 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+	<row>
+		<i_o_bank>4</i_o_bank>
+		<usage>16 / 36 ( 44 % )</usage>
+		<vccio_voltage>3.3V</vccio_voltage>
+	</row>
+</i_o_bank_usage>
+<advanced_data___general>
+	<row>
+		<name>Status Code</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Desired User Slack</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Fit Attempts</name>
+		<value>1</value>
+	</row>
+</advanced_data___general>
+<advanced_data___placement_preparation>
+	<row>
+		<name>Auto Fit Point 1 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Mid Wire Use - Fit Attempt 1</name>
+		<value>9</value>
+	</row>
+	<row>
+		<name>Mid Slack - Fit Attempt 1</name>
+		<value>-10797</value>
+	</row>
+	<row>
+		<name>Internal Atom Count - Fit Attempt 1</name>
+		<value>1143</value>
+	</row>
+	<row>
+		<name>LE/ALM Count - Fit Attempt 1</name>
+		<value>659</value>
+	</row>
+	<row>
+		<name>LAB Count - Fit Attempt 1</name>
+		<value>51</value>
+	</row>
+	<row>
+		<name>Outputs per Lab - Fit Attempt 1</name>
+		<value>10.961</value>
+	</row>
+	<row>
+		<name>Inputs per LAB - Fit Attempt 1</name>
+		<value>13.569</value>
+	</row>
+	<row>
+		<name>Global Inputs per LAB - Fit Attempt 1</name>
+		<value>1.098</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;non-global clock + sync load&apos; - Fit Attempt 1</name>
+		<value>0:16;1:30;2:5</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;non-global controls&apos; - Fit Attempt 1</name>
+		<value>0:14;1:21;2:7;3:9</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;non-global + aclr&apos; - Fit Attempt 1</name>
+		<value>0:12;1:5;2:19;3:9;4:6</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;global non-clock non-aclr&apos; - Fit Attempt 1</name>
+		<value>0:51</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;global controls&apos; - Fit Attempt 1</name>
+		<value>0:4;1:38;2:9</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;deterministic LABSMUXA/LABXMUXB&apos; - Fit Attempt 1</name>
+		<value>0:15;1:34;2:2</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;deterministic LABSMUXC/LABXMUXD&apos; - Fit Attempt 1</name>
+		<value>0:14;1:32;2:3;3:2</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;clock / ce pair constraint&apos; - Fit Attempt 1</name>
+		<value>0:1;1:36;2:14</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;aclr constraint&apos; - Fit Attempt 1</name>
+		<value>0:1;1:35;2:15</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;true sload_sclear pair&apos; - Fit Attempt 1</name>
+		<value>0:41;1:10</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;constant sload_sclear pair&apos; - Fit Attempt 1</name>
+		<value>0:49;1:2</value>
+	</row>
+	<row>
+		<name>LAB Constraint &apos;has placement constraint&apos; - Fit Attempt 1</name>
+		<value>0:23;1:28</value>
+	</row>
+	<row>
+		<name>LEs in Chains - Fit Attempt 1</name>
+		<value>416</value>
+	</row>
+	<row>
+		<name>LEs in Long Chains - Fit Attempt 1</name>
+		<value>322</value>
+	</row>
+	<row>
+		<name>LABs with Chains - Fit Attempt 1</name>
+		<value>36</value>
+	</row>
+	<row>
+		<name>LABs with Multiple Chains - Fit Attempt 1</name>
+		<value>1</value>
+	</row>
+	<row>
+		<name>Time - Fit Attempt 1</name>
+		<value>0</value>
+	</row>
+	<row>
+		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
+		<value>0.093</value>
+	</row>
+</advanced_data___placement_preparation>
+<advanced_data___placement>
+	<row>
+		<name>Auto Fit Point 2 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Early Wire Use - Fit Attempt 1</name>
+		<value>2</value>
+	</row>
+	<row>
+		<name>Early Slack - Fit Attempt 1</name>
+		<value>-9607</value>
+	</row>
+	<row>
+		<name>Auto Fit Point 3 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Auto Fit Point 4 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Mid Wire Use - Fit Attempt 1</name>
+		<value>5</value>
+	</row>
+	<row>
+		<name>Mid Slack - Fit Attempt 1</name>
+		<value>-9600</value>
+	</row>
+	<row>
+		<name>Late Wire Use - Fit Attempt 1</name>
+		<value>5</value>
+	</row>
+	<row>
+		<name>Late Slack - Fit Attempt 1</name>
+		<value>-9600</value>
+	</row>
+	<row>
+		<name>Auto Fit Point 5 - Fit Attempt 1</name>
+		<value>ff</value>
+	</row>
+	<row>
+		<name>Time - Fit Attempt 1</name>
+		<value>1</value>
+	</row>
+	<row>
+		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
+		<value>0.251</value>
+	</row>
+</advanced_data___placement>
+<advanced_data___routing>
+	<row>
+		<name>Early Slack - Fit Attempt 1</name>
+		<value>-8247</value>
+	</row>
+	<row>
+		<name>Early Wire Use - Fit Attempt 1</name>
+		<value>5</value>
+	</row>
+	<row>
+		<name>Peak Regional Wire - Fit Attempt 1</name>
+		<value>5</value>
+	</row>
+	<row>
+		<name>Mid Slack - Fit Attempt 1</name>
+		<value>-8435</value>
+	</row>
+	<row>
+		<name>Late Slack - Fit Attempt 1</name>
+		<value>-8435</value>
+	</row>
+	<row>
+		<name>Late Slack - Fit Attempt 1</name>
+		<value>-8435</value>
+	</row>
+	<row>
+		<name>Late Wire Use - Fit Attempt 1</name>
+		<value>6</value>
+	</row>
+	<row>
+		<name>Time - Fit Attempt 1</name>
+		<value>1</value>
+	</row>
+	<row>
+		<name>Time in tsm_tan.dll - Fit Attempt 1</name>
+		<value>0.922</value>
+	</row>
+</advanced_data___routing>
+<files>
+	<top>C:/FPGA/Mercury/Mercury.v</top>
+	<extensions>
+		<ext filename="none">1</ext>
+		<ext ext_name="v">20</ext>
+		<ext ext_name="vwf">1</ext>
+		<ext ext_name="tdf">14</ext>
+		<ext ext_name="inc">11</ext>
+		<ext ext_name="lst">1</ext>
+	</extensions>
+	<sub_files>
+		<sub_file>C:/FPGA/Mercury/ram16.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/sign_extend.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/ram32_2sum.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/ram16_2sum.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/ram16_2port.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/multiply.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/mult.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/mac.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/halfband_decim.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/coeff_rom.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/coeff_ram.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/cic_interp.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/cic_decim.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/acc.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/phase_accumulator.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/cordic_stage.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/cordic.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/filter.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/Tx_fifo.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/Mercury.v</sub_file>
+		<sub_file>C:/FPGA/Mercury/Mercury.vwf</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/dcfifo.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/lpm_counter.inc</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/lpm_add_sub.inc</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/altdpram.inc</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/a_graycounter.inc</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/a_fefifo.inc</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/a_gray2bin.inc</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/dffpipe.inc</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/alt_sync_fifo.inc</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/lpm_compare.inc</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/altsyncram_fifo.inc</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/aglobal51.inc</sub_file>
+		<sub_file>C:/FPGA/Mercury/megafunctions/cbx.lst</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/dcfifo_f2c1.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/a_gray2bin_mdb.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/a_graycounter_q96.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/a_graycounter_jk6.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/a_graycounter_ik6.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/altsyncram_tpu.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/altsyncram_8ec1.tdf</sub_file>
+		<sub_file>none</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/alt_synch_pipe_hv7.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/dffpipe_b09.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/alt_synch_pipe_297.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/dffpipe_s98.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/alt_synch_pipe_iv7.tdf</sub_file>
+		<sub_file>C:/FPGA/Mercury/db/dffpipe_c09.tdf</sub_file>
+	</sub_files>
+</files>
+<architecture>
+	<family>Cyclone II</family>
+	<auto_device>OFF</auto_device>
+	<device>EP2C5Q208C8</device>
+</architecture>
+<pkg_io>
+	<pin_std count="55">LVTTL</pin_std>
+</pkg_io>
+</talkback>
