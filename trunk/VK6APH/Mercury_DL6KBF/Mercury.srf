@@ -1,0 +1,2 @@
+{ "Warning" "WCDB_SGATE_CDB_WARN_TRIVIAL_REG" "Tx_control_4\[3\] data_in GND " "Warning: Reduced register \"*\" with stuck * port to stuck value *" {  } { { "MercuryII.v" "" { Text "C:/HPSDR/trunk/VK6APH/Mercury 20 pin single brd/MercuryII.v" 332 -1 0 } }  } 0 0 "Reduced register \"%1!s!\" with stuck %2!s! port to stuck value %3!s!" 1 1}
+{ "Warning" "WDAT_NO_LOADING_SPECIFIED_ONE_OR_MORE_PINS" "33 " "Warning: Found * output pins without output pin load capacitance assignment" {  } {  } 0 0 "Found %1!d! output pins without output pin load capacitance assignment" 1 1}
