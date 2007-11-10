@@ -1,0 +1,419 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Sat Nov 10 10:43:13 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
+Info: Found 1 design units, including 1 entities, in source file SPI.v
+    Info: Found entity 1: SPI
+Info: Found 1 design units, including 1 entities, in source file LPF_select.v
+    Info: Found entity 1: LPF_select
+Info: Found 1 design units, including 1 entities, in source file cordic_VK6APH.v
+    Info: Found entity 1: cordic_VK6APH
+Info: Found 1 design units, including 1 entities, in source file debounce.v
+    Info: Found entity 1: debounce
+Info: Found 1 design units, including 1 entities, in source file clocks.v
+    Info: Found entity 1: clocks
+Info: Found 1 design units, including 1 entities, in source file MercuryII.v
+    Info: Found entity 1: Mercury
+Info: Found 1 design units, including 1 entities, in source file DigAudioOut48k16bI2S.v
+    Info: Found entity 1: I2SAudioOut
+Info: Found 1 design units, including 1 entities, in source file dc_offset_correct_new.v
+    Info: Found entity 1: dc_offset_correct_new
+Info: Found 1 design units, including 1 entities, in source file cic_10_1_3_nofraction.v
+    Info: Found entity 1: cic_10_1_3_nofraction
+Info: Found 1 design units, including 1 entities, in source file cic_4_1_8_nofraction.v
+    Info: Found entity 1: cic_4_1_8_nofraction
+Info: Found 1 design units, including 1 entities, in source file cic_8_1_5_nofraction.v
+    Info: Found entity 1: cic_8_1_5_nofraction
+Info: Found 1 design units, including 1 entities, in source file mac.v
+    Info: Found entity 1: MAC
+Info: Found 1 design units, including 1 entities, in source file FIR_top.v
+    Info: Found entity 1: FIR_top
+Info: Found 1 design units, including 1 entities, in source file cbuffer_top.v
+    Info: Found entity 1: cbuffer_top
+Info: Found 1 design units, including 1 entities, in source file cROM.v
+    Info: Found entity 1: cROM
+Info: Found 1 design units, including 1 entities, in source file cROM_Sequencer.v
+    Info: Found entity 1: cROM_Sequencer
+Warning: Entity "divide" obtained from "C:/HPSDR/trunk/VK6APH/Mercury_DL6KBF/divide.v" instead of from Quartus II megafunction library
+Info: Found 1 design units, including 1 entities, in source file divide.v
+    Info: Found entity 1: divide
+Info: Found 1 design units, including 1 entities, in source file division.v
+    Info: Found entity 1: division
+Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
+    Info: Found entity 1: Rx_fifo
+Info: Found 1 design units, including 1 entities, in source file phase_accumulator.v
+    Info: Found entity 1: phase_accumulator
+Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
+    Info: Found entity 1: Tx_fifo
+Info: Elaborating entity "Mercury" for the top level hierarchy
+Warning (10858): Verilog HDL warning at MercuryII.v(117): object sync_Rx_used used but never assigned
+Warning (10030): Net "sync_Rx_used[11]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[10]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[9]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[8]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[7]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[6]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[5]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[4]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
+Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
+Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
+    Info: Found entity 1: lpm_counter
+Info: Elaborating entity "lpm_counter" for hierarchy "clocks:clocks|lpm_counter:lpm_counter_component"
+Info: Elaborated megafunction instantiation "clocks:clocks|lpm_counter:lpm_counter_component"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_skh.tdf
+    Info: Found entity 1: cntr_skh
+Info: Elaborating entity "cntr_skh" for hierarchy "clocks:clocks|lpm_counter:lpm_counter_component|cntr_skh:auto_generated"
+Info: Elaborating entity "division" for hierarchy "division:division_DDS"
+Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
+Info: Elaborating entity "cordic_VK6APH" for hierarchy "cordic_VK6APH:cordic"
+Info: Elaborating entity "cic_10_1_3_nofraction" for hierarchy "cic_10_1_3_nofraction:cic_I_1"
+Warning (10230): Verilog HDL assignment warning at cic_10_1_3_nofraction.v(151): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at cic_10_1_3_nofraction.v(157): truncated value with size 32 to match size of target (1)
+Info: Elaborating entity "cic_8_1_5_nofraction" for hierarchy "cic_8_1_5_nofraction:cic_I_2"
+Warning (10230): Verilog HDL assignment warning at cic_8_1_5_nofraction.v(191): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at cic_8_1_5_nofraction.v(197): truncated value with size 32 to match size of target (1)
+Info: Elaborating entity "cic_4_1_8_nofraction" for hierarchy "cic_4_1_8_nofraction:cic_I_3"
+Warning (10230): Verilog HDL assignment warning at cic_4_1_8_nofraction.v(246): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at cic_4_1_8_nofraction.v(252): truncated value with size 32 to match size of target (1)
+Info: Elaborating entity "FIR_top" for hierarchy "FIR_top:FIR"
+Warning (10230): Verilog HDL assignment warning at FIR_top.v(144): truncated value with size 32 to match size of target (9)
+Warning (10230): Verilog HDL assignment warning at FIR_top.v(154): truncated value with size 32 to match size of target (9)
+Info: Elaborating entity "cbuffer_top" for hierarchy "FIR_top:FIR|cbuffer_top:cbuffer_inst"
+Warning (10230): Verilog HDL assignment warning at cbuffer_top.v(61): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at cbuffer_top.v(64): truncated value with size 32 to match size of target (8)
+Info: Elaborating entity "cROM_Sequencer" for hierarchy "FIR_top:FIR|cROM_Sequencer:cROM_seq_inst"
+Warning (10230): Verilog HDL assignment warning at cROM_Sequencer.v(50): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at cROM_Sequencer.v(52): truncated value with size 32 to match size of target (8)
+Info: Elaborating entity "cROM" for hierarchy "FIR_top:FIR|cROM_Sequencer:cROM_seq_inst|cROM:cROM_inst"
+Info: Elaborating entity "MAC" for hierarchy "FIR_top:FIR|MAC:MAC_inst_I"
+Info: Elaborating entity "dc_offset_correct_new" for hierarchy "dc_offset_correct_new:dc_offset_correct_i"
+Info: Elaborating entity "Rx_fifo" for hierarchy "Rx_fifo:Rx_fifo"
+Warning: Entity "dcfifo" obtained from "C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf" instead of from Quartus II megafunction library
+Warning: Using design file ../Mercury/megafunctions/dcfifo.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info: Found entity 1: dcfifo
+Info: Elaborating entity "dcfifo" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_6ae1.tdf
+    Info: Found entity 1: dcfifo_6ae1
+Info: Elaborating entity "dcfifo_6ae1" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_ndb.tdf
+    Info: Found entity 1: a_gray2bin_ndb
+Info: Elaborating entity "a_gray2bin_ndb" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_r96.tdf
+    Info: Found entity 1: a_graycounter_r96
+Info: Elaborating entity "a_graycounter_r96" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|a_graycounter_r96:rdptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_kk6.tdf
+    Info: Found entity 1: a_graycounter_kk6
+Info: Elaborating entity "a_graycounter_kk6" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|a_graycounter_kk6:wrptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_lk6.tdf
+    Info: Found entity 1: a_graycounter_lk6
+Info: Elaborating entity "a_graycounter_lk6" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|a_graycounter_lk6:wrptr_gp"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_vpu.tdf
+    Info: Found entity 1: altsyncram_vpu
+Info: Elaborating entity "altsyncram_vpu" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|altsyncram_vpu:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_aec1.tdf
+    Info: Found entity 1: altsyncram_aec1
+Info: Elaborating entity "altsyncram_aec1" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_d09.tdf
+    Info: Found entity 1: dffpipe_d09
+Info: Elaborating entity "dffpipe_d09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|dffpipe_d09:rs_brp"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_lv7.tdf
+    Info: Found entity 1: alt_synch_pipe_lv7
+Info: Elaborating entity "alt_synch_pipe_lv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_lv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_g09.tdf
+    Info: Found entity 1: dffpipe_g09
+Info: Elaborating entity "dffpipe_g09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_lv7:rs_dgwp|dffpipe_g09:dffpipe3"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_mv7.tdf
+    Info: Found entity 1: alt_synch_pipe_mv7
+Info: Elaborating entity "alt_synch_pipe_mv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_mv7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_h09.tdf
+    Info: Found entity 1: dffpipe_h09
+Info: Elaborating entity "dffpipe_h09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_mv7:ws_dgrp|dffpipe_h09:dffpipe6"
+Info: Elaborating entity "Tx_fifo" for hierarchy "Tx_fifo:Tx_fifo"
+Warning: Ignoring archived or saved clear box file dcfifo_f2c1.tdf for hierarchy |Mercury|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component, because it has different set of parameters than the current elaboration.
+Info: Elaborating entity "dcfifo" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_ege1.tdf
+    Info: Found entity 1: dcfifo_ege1
+Info: Elaborating entity "dcfifo_ege1" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_mdb.tdf
+    Info: Found entity 1: a_gray2bin_mdb
+Info: Elaborating entity "a_gray2bin_mdb" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|a_gray2bin_mdb:wrptr_g_gray2bin"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_q96.tdf
+    Info: Found entity 1: a_graycounter_q96
+Info: Elaborating entity "a_graycounter_q96" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|a_graycounter_q96:rdptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_jk6.tdf
+    Info: Found entity 1: a_graycounter_jk6
+Info: Elaborating entity "a_graycounter_jk6" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|a_graycounter_jk6:wrptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_ik6.tdf
+    Info: Found entity 1: a_graycounter_ik6
+Info: Elaborating entity "a_graycounter_ik6" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|a_graycounter_ik6:wrptr_gp"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_tpu.tdf
+    Info: Found entity 1: altsyncram_tpu
+Info: Elaborating entity "altsyncram_tpu" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|altsyncram_tpu:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_8ec1.tdf
+    Info: Found entity 1: altsyncram_8ec1
+Info: Elaborating entity "altsyncram_8ec1" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram2"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_nv7.tdf
+    Info: Found entity 1: alt_synch_pipe_nv7
+Info: Elaborating entity "alt_synch_pipe_nv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_nv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_i09.tdf
+    Info: Found entity 1: dffpipe_i09
+Info: Elaborating entity "dffpipe_i09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_nv7:rs_dgwp|dffpipe_i09:dffpipe4"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_b09.tdf
+    Info: Found entity 1: dffpipe_b09
+Info: Elaborating entity "dffpipe_b09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|dffpipe_b09:ws_brp"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_ov7.tdf
+    Info: Found entity 1: alt_synch_pipe_ov7
+Info: Elaborating entity "alt_synch_pipe_ov7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_ov7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_j09.tdf
+    Info: Found entity 1: dffpipe_j09
+Info: Elaborating entity "dffpipe_j09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_ov7:ws_dgrp|dffpipe_j09:dffpipe8"
+Info: Elaborating entity "LPF_select" for hierarchy "LPF_select:Alex_LPF_select"
+Info: Elaborating entity "SPI" for hierarchy "SPI:Alex_SPI_Tx"
+Info: Elaborating entity "I2SAudioOut" for hierarchy "I2SAudioOut:I2SAO"
+Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
+Info: Power-up level of register "SPI:Alex_SPI_Tx|previous_Alex_data[12]" is not specified -- using power-up level of High to minimize register
+Info: Power-up level of register "SPI:Alex_SPI_Tx|previous_Alex_data[7]" is not specified -- using power-up level of High to minimize register
+Info: Power-up level of register "rx_avail[11]" is not specified -- using power-up level of High to minimize register
+Info: Power-up level of register "rx_avail[10]" is not specified -- using power-up level of High to minimize register
+Info: Power-up level of register "rx_avail[9]" is not specified -- using power-up level of High to minimize register
+Info: Power-up level of register "rx_avail[8]" is not specified -- using power-up level of High to minimize register
+Info: Power-up level of register "rx_avail[7]" is not specified -- using power-up level of High to minimize register
+Info: Power-up level of register "rx_avail[6]" is not specified -- using power-up level of High to minimize register
+Info: Power-up level of register "rx_avail[5]" is not specified -- using power-up level of High to minimize register
+Info: Power-up level of register "rx_avail[4]" is not specified -- using power-up level of High to minimize register
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[3]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[4]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cic_10_1_3_nofraction:cic_I_1|cur_count[2]" merged to single register "cic_10_1_3_nofraction:cic_Q_1|cur_count[2]"
+    Info: Duplicate register "cic_10_1_3_nofraction:cic_I_1|cur_count[1]" merged to single register "cic_10_1_3_nofraction:cic_Q_1|cur_count[1]"
+    Info: Duplicate register "cic_10_1_3_nofraction:cic_I_1|cur_count[0]" merged to single register "cic_10_1_3_nofraction:cic_Q_1|cur_count[0]"
+    Info: Duplicate register "cic_10_1_3_nofraction:cic_I_1|ce_out_reg" merged to single register "cic_10_1_3_nofraction:cic_Q_1|ce_out_reg"
+    Info: Duplicate register "cic_10_1_3_nofraction:cic_I_1|cur_count[3]" merged to single register "cic_10_1_3_nofraction:cic_Q_1|cur_count[3]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "FIR_top:FIR|mac_wren" merged to single register "FIR_top:FIR|buff_rden"
+    Info: Duplicate register "cordic_VK6APH:cordic|q1[3]" merged to single register "cordic_VK6APH:cordic|i1[3]"
+    Info: Duplicate register "cordic_VK6APH:cordic|q2[2]" merged to single register "cordic_VK6APH:cordic|i2[2]"
+    Info: Duplicate register "cordic_VK6APH:cordic|q3[0]" merged to single register "cordic_VK6APH:cordic|i3[0]"
+Warning: Created node "FIR_top:FIR|cbuffer_top:cbuffer_inst|mem~0" as a RAM by generating altsyncram megafunction to implement register logic with M512/M-LAB, M4K/M9K, or M-RAM/M144K memory block. Pass-through logic has been added.
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "FIR_top:FIR|cbuffer_top:cbuffer_inst|mem~5" merged to single register "FIR_top:FIR|cbuffer_top:cbuffer_inst|rd_pointer[0]"
+    Info: Duplicate register "FIR_top:FIR|cbuffer_top:cbuffer_inst|mem~8" merged to single register "FIR_top:FIR|cbuffer_top:cbuffer_inst|rd_pointer[1]"
+    Info: Duplicate register "FIR_top:FIR|cbuffer_top:cbuffer_inst|mem~11" merged to single register "FIR_top:FIR|cbuffer_top:cbuffer_inst|rd_pointer[2]"
+    Info: Duplicate register "FIR_top:FIR|cbuffer_top:cbuffer_inst|mem~14" merged to single register "FIR_top:FIR|cbuffer_top:cbuffer_inst|rd_pointer[3]"
+    Info: Duplicate register "FIR_top:FIR|cbuffer_top:cbuffer_inst|mem~17" merged to single register "FIR_top:FIR|cbuffer_top:cbuffer_inst|rd_pointer[4]"
+    Info: Duplicate register "FIR_top:FIR|cbuffer_top:cbuffer_inst|mem~20" merged to single register "FIR_top:FIR|cbuffer_top:cbuffer_inst|rd_pointer[5]"
+    Info: Duplicate register "FIR_top:FIR|cbuffer_top:cbuffer_inst|mem~23" merged to single register "FIR_top:FIR|cbuffer_top:cbuffer_inst|rd_pointer[6]"
+    Info: Duplicate register "FIR_top:FIR|cbuffer_top:cbuffer_inst|mem~26" merged to single register "FIR_top:FIR|cbuffer_top:cbuffer_inst|rd_pointer[7]"
+    Info: Duplicate register "cic_8_1_5_nofraction:cic_Q_2|cur_count[0]" merged to single register "cic_8_1_5_nofraction:cic_I_2|cur_count[0]"
+    Info: Duplicate register "FIR_top:FIR|cROM_Sequencer:cROM_seq_inst|cROM:cROM_inst|data[22]" merged to single register "FIR_top:FIR|cROM_Sequencer:cROM_seq_inst|cROM:cROM_inst|data[23]"
+    Info: Duplicate register "cic_8_1_5_nofraction:cic_Q_2|cur_count[1]" merged to single register "cic_8_1_5_nofraction:cic_I_2|cur_count[1]"
+    Info: Duplicate register "cic_8_1_5_nofraction:cic_Q_2|cur_count[2]" merged to single register "cic_8_1_5_nofraction:cic_I_2|cur_count[2]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cic_8_1_5_nofraction:cic_Q_2|int_delay_pipe[0]" merged to single register "cic_8_1_5_nofraction:cic_I_2|int_delay_pipe[0]"
+    Info: Duplicate register "cic_8_1_5_nofraction:cic_Q_2|int_delay_pipe[1]" merged to single register "cic_8_1_5_nofraction:cic_I_2|int_delay_pipe[1]"
+    Info: Duplicate register "cic_8_1_5_nofraction:cic_Q_2|int_delay_pipe[2]" merged to single register "cic_8_1_5_nofraction:cic_I_2|int_delay_pipe[2]"
+    Info: Duplicate register "cic_8_1_5_nofraction:cic_Q_2|int_delay_pipe[3]" merged to single register "cic_8_1_5_nofraction:cic_I_2|int_delay_pipe[3]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "FIR_top:FIR|MAC:MAC_inst_I|mult_temp[46]" merged to single register "FIR_top:FIR|MAC:MAC_inst_I|mult_temp[47]"
+    Info: Duplicate register "FIR_top:FIR|MAC:MAC_inst_Q|mult_temp[46]" merged to single register "FIR_top:FIR|MAC:MAC_inst_Q|mult_temp[47]"
+Info: State machine "|Mercury|state_sync" contains 5 states
+Info: State machine "|Mercury|state_PWM" contains 6 states
+Info: State machine "|Mercury|CCstate" contains 3 states
+Info: State machine "|Mercury|I2SAudioOut:I2SIQO|TLV_state" contains 5 states
+Info: State machine "|Mercury|I2SAudioOut:I2SAO|TLV_state" contains 5 states
+Info: State machine "|Mercury|SPI:Alex_SPI_Tx|spi_state" contains 6 states
+Info: State machine "|Mercury|FIR_top:FIR|state" contains 5 states
+Info: Selected Auto state machine encoding method for state machine "|Mercury|state_sync"
+Info: Encoding result for state machine "|Mercury|state_sync"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "state_sync.0001"
+        Info: Encoded state bit "state_sync.0010"
+        Info: Encoded state bit "state_sync.0011"
+        Info: Encoded state bit "state_sync.0000"
+        Info: Encoded state bit "state_sync.0100"
+    Info: State "|Mercury|state_sync.0000" uses code string "00000"
+    Info: State "|Mercury|state_sync.0011" uses code string "00110"
+    Info: State "|Mercury|state_sync.0010" uses code string "01010"
+    Info: State "|Mercury|state_sync.0100" uses code string "00011"
+    Info: State "|Mercury|state_sync.0001" uses code string "10010"
+Info: Selected Auto state machine encoding method for state machine "|Mercury|state_PWM"
+Info: Encoding result for state machine "|Mercury|state_PWM"
+    Info: Completed encoding using 6 state bits
+        Info: Encoded state bit "state_PWM.00101"
+        Info: Encoded state bit "state_PWM.00001"
+        Info: Encoded state bit "state_PWM.00010"
+        Info: Encoded state bit "state_PWM.00011"
+        Info: Encoded state bit "state_PWM.00100"
+        Info: Encoded state bit "state_PWM.00000"
+    Info: State "|Mercury|state_PWM.00000" uses code string "000000"
+    Info: State "|Mercury|state_PWM.00100" uses code string "000011"
+    Info: State "|Mercury|state_PWM.00011" uses code string "000101"
+    Info: State "|Mercury|state_PWM.00010" uses code string "001001"
+    Info: State "|Mercury|state_PWM.00001" uses code string "010001"
+    Info: State "|Mercury|state_PWM.00101" uses code string "100001"
+Info: Selected Auto state machine encoding method for state machine "|Mercury|CCstate"
+Info: Encoding result for state machine "|Mercury|CCstate"
+    Info: Completed encoding using 3 state bits
+        Info: Encoded state bit "CCstate.00"
+        Info: Encoded state bit "CCstate.10"
+        Info: Encoded state bit "CCstate.01"
+    Info: State "|Mercury|CCstate.00" uses code string "000"
+    Info: State "|Mercury|CCstate.10" uses code string "110"
+    Info: State "|Mercury|CCstate.01" uses code string "101"
+Info: Selected Auto state machine encoding method for state machine "|Mercury|I2SAudioOut:I2SIQO|TLV_state"
+Info: Encoding result for state machine "|Mercury|I2SAudioOut:I2SIQO|TLV_state"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.001"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.010"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.011"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.000"
+        Info: Encoded state bit "I2SAudioOut:I2SIQO|TLV_state.100"
+    Info: State "|Mercury|I2SAudioOut:I2SIQO|TLV_state.000" uses code string "00000"
+    Info: State "|Mercury|I2SAudioOut:I2SIQO|TLV_state.011" uses code string "00110"
+    Info: State "|Mercury|I2SAudioOut:I2SIQO|TLV_state.010" uses code string "01010"
+    Info: State "|Mercury|I2SAudioOut:I2SIQO|TLV_state.001" uses code string "10010"
+    Info: State "|Mercury|I2SAudioOut:I2SIQO|TLV_state.100" uses code string "00011"
+Info: Selected Auto state machine encoding method for state machine "|Mercury|I2SAudioOut:I2SAO|TLV_state"
+Info: Encoding result for state machine "|Mercury|I2SAudioOut:I2SAO|TLV_state"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "I2SAudioOut:I2SAO|TLV_state.001"
+        Info: Encoded state bit "I2SAudioOut:I2SAO|TLV_state.010"
+        Info: Encoded state bit "I2SAudioOut:I2SAO|TLV_state.011"
+        Info: Encoded state bit "I2SAudioOut:I2SAO|TLV_state.000"
+        Info: Encoded state bit "I2SAudioOut:I2SAO|TLV_state.100"
+    Info: State "|Mercury|I2SAudioOut:I2SAO|TLV_state.000" uses code string "00000"
+    Info: State "|Mercury|I2SAudioOut:I2SAO|TLV_state.011" uses code string "00110"
+    Info: State "|Mercury|I2SAudioOut:I2SAO|TLV_state.010" uses code string "01010"
+    Info: State "|Mercury|I2SAudioOut:I2SAO|TLV_state.001" uses code string "10010"
+    Info: State "|Mercury|I2SAudioOut:I2SAO|TLV_state.100" uses code string "00011"
+Info: Selected Auto state machine encoding method for state machine "|Mercury|SPI:Alex_SPI_Tx|spi_state"
+Info: Encoding result for state machine "|Mercury|SPI:Alex_SPI_Tx|spi_state"
+    Info: Completed encoding using 6 state bits
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.001"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.101"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.010"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.011"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.100"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.000"
+    Info: State "|Mercury|SPI:Alex_SPI_Tx|spi_state.000" uses code string "000000"
+    Info: State "|Mercury|SPI:Alex_SPI_Tx|spi_state.100" uses code string "000011"
+    Info: State "|Mercury|SPI:Alex_SPI_Tx|spi_state.011" uses code string "000101"
+    Info: State "|Mercury|SPI:Alex_SPI_Tx|spi_state.010" uses code string "001001"
+    Info: State "|Mercury|SPI:Alex_SPI_Tx|spi_state.101" uses code string "010001"
+    Info: State "|Mercury|SPI:Alex_SPI_Tx|spi_state.001" uses code string "100001"
+Info: Selected Auto state machine encoding method for state machine "|Mercury|FIR_top:FIR|state"
+Info: Encoding result for state machine "|Mercury|FIR_top:FIR|state"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "FIR_top:FIR|state.BEGIN_MAC"
+        Info: Encoded state bit "FIR_top:FIR|state.DO_MAC"
+        Info: Encoded state bit "FIR_top:FIR|state.ACCUM_OUT"
+        Info: Encoded state bit "FIR_top:FIR|state.IDLE_STATE"
+        Info: Encoded state bit "FIR_top:FIR|state.STROBE_OUT"
+    Info: State "|Mercury|FIR_top:FIR|state.IDLE_STATE" uses code string "00000"
+    Info: State "|Mercury|FIR_top:FIR|state.ACCUM_OUT" uses code string "00110"
+    Info: State "|Mercury|FIR_top:FIR|state.DO_MAC" uses code string "01010"
+    Info: State "|Mercury|FIR_top:FIR|state.BEGIN_MAC" uses code string "10010"
+    Info: State "|Mercury|FIR_top:FIR|state.STROBE_OUT" uses code string "00011"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[3]" merged to single register "I2SAudioOut:I2SAO|bit_count[3]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[2]" merged to single register "I2SAudioOut:I2SAO|bit_count[2]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[1]" merged to single register "I2SAudioOut:I2SAO|bit_count[1]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[0]" merged to single register "I2SAudioOut:I2SAO|bit_count[0]"
+    Info: Duplicate register "cic_8_1_5_nofraction:cic_Q_2|ce_out_reg" merged to single register "cic_8_1_5_nofraction:cic_I_2|ce_out_reg"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.000" merged to single register "I2SAudioOut:I2SAO|TLV_state.000"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.011" merged to single register "I2SAudioOut:I2SAO|TLV_state.011"
+    Info: Duplicate register "cic_4_1_8_nofraction:cic_Q_3|cur_count[0]" merged to single register "cic_4_1_8_nofraction:cic_I_3|cur_count[0]"
+    Info: Duplicate register "cic_4_1_8_nofraction:cic_Q_3|cur_count[1]" merged to single register "cic_4_1_8_nofraction:cic_I_3|cur_count[1]"
+Info: Inferred 1 megafunctions from design logic
+    Info: Inferred altsyncram megafunction (NUMWORDS_A=256, WIDTH_A=48) from the following design logic: "FIR_top:FIR|cbuffer_top:cbuffer_inst|mem~0"
+Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/altsyncram.tdf
+    Info: Found entity 1: altsyncram
+Info: Elaborated megafunction instantiation "FIR_top:FIR|cbuffer_top:cbuffer_inst|altsyncram:mem_rtl_0"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_5ti1.tdf
+    Info: Found entity 1: altsyncram_5ti1
+Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_mult.tdf
+    Info: Found entity 1: lpm_mult
+Info: Elaborated megafunction instantiation "FIR_top:FIR|MAC:MAC_inst_Q|lpm_mult:Mult0"
+Info: Found 1 design units, including 1 entities, in source file db/mult_8o01.tdf
+    Info: Found entity 1: mult_8o01
+Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_add_sub.tdf
+    Info: Found entity 1: lpm_add_sub
+Info: Elaborated megafunction instantiation "cordic_VK6APH:cordic|lpm_add_sub:Add97"
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_ljg.tdf
+    Info: Found entity 1: add_sub_ljg
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "PKEND" stuck at VCC
+    Warning: Pin "FIFO_ADR[0]" stuck at GND
+Info: 60 registers lost all their fanouts during netlist optimizations. The first 60 are displayed below.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/p0addr" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[9]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[8]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[7]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[6]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[5]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[4]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[3]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/parity_ff" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[9]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[8]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[7]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[6]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[5]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[4]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[3]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/parity_ff" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/ws_bwp/dffe7a[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo/dcfifo_component/auto_generated/ws_brp/dffe7a[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/rs_bwp/dffe9a[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo/dcfifo_component/auto_generated/rs_brp/dffe9a[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "cic_Q_1/int_delay_pipe[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "cic_Q_1/int_delay_pipe[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "FIR/cROM_seq_inst/cROM_inst/data[23]" lost all its fanouts during netlist optimizations.
+    Info: Register "state_sync~10" lost all its fanouts during netlist optimizations.
+    Info: Register "state_sync~11" lost all its fanouts during netlist optimizations.
+    Info: Register "state_sync~13" lost all its fanouts during netlist optimizations.
+    Info: Register "state_PWM~10" lost all its fanouts during netlist optimizations.
+    Info: Register "state_PWM~11" lost all its fanouts during netlist optimizations.
+    Info: Register "state_PWM~12" lost all its fanouts during netlist optimizations.
+    Info: Register "state_PWM~13" lost all its fanouts during netlist optimizations.
+    Info: Register "state_PWM~14" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state~7" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SAO/TLV_state~7" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SAO/TLV_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~9" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~10" lost all its fanouts during netlist optimizations.
+    Info: Register "FIR/state~16" lost all its fanouts during netlist optimizations.
+    Info: Register "FIR/state~17" lost all its fanouts during netlist optimizations.
+    Info: Register "FIR/state~19" lost all its fanouts during netlist optimizations.
+    Info: Register "FIR/state~20" lost all its fanouts during netlist optimizations.
+    Info: Register "FIR/state~21" lost all its fanouts during netlist optimizations.
+    Info: Register "FIR/state~22" lost all its fanouts during netlist optimizations.
+    Info: Register "FIR/state~23" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state.100" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state.010" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
+Info: Implemented 7096 device resources after synthesis - the final resource count might be different
+    Info: Implemented 24 input pins
+    Info: Implemented 20 output pins
+    Info: Implemented 16 bidirectional pins
+    Info: Implemented 6942 logic cells
+    Info: Implemented 80 RAM segments
+    Info: Implemented 14 DSP elements
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 29 warnings
+    Info: Allocated 157 megabytes of memory during processing
+    Info: Processing ended: Sat Nov 10 10:45:23 2007
+    Info: Elapsed time: 00:02:10
