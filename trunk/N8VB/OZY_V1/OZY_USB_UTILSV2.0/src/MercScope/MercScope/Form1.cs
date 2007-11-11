@@ -17,7 +17,7 @@ namespace MercScope
     {
         Rectangle scoperect;
         Random rnd;
-        const int bsize = 2048;
+        const int bsize = 2048 * 2;
         byte[] adcbuf = new byte[bsize];
         const int isize = 512;
         int[] ivalbuf = new int[isize];
@@ -142,10 +142,10 @@ namespace MercScope
             if (!read_adc(ref adcbuf))
                 return;
                         
-            for (int i = 0, j = 0; i < adcbuf.Length; i += 4, j++)
+            for (int i = 0, j = 0; i < adcbuf.Length; i += 8, j++)
             {
-                ivalbuf[j] = (int)BitConverter.ToInt16(adcbuf, i);                
-                qvalbuf[j] = (int)BitConverter.ToInt16(adcbuf, i + 2);                
+                ivalbuf[j] = (int)BitConverter.ToInt32(adcbuf, i);                
+                qvalbuf[j] = (int)BitConverter.ToInt32(adcbuf, i + 4);                
             }
 
             int maxval = 0;
@@ -309,12 +309,14 @@ namespace MercScope
 
         private void start_adc()
         {
+        	int ret;
+        	
             hdev = USB.InitFindAndOpenDevice(0xfffe, 0x00ff);
-            libUSB_Interface.usb_set_configuration(hdev, 1);
-            libUSB_Interface.usb_claim_interface(hdev, 0);
-            libUSB_Interface.usb_set_altinterface(hdev, 0);
-            libUSB_Interface.usb_clear_halt(hdev, 0x02);
-            libUSB_Interface.usb_clear_halt(hdev, 0x86);            
+            ret = libUSB_Interface.usb_set_configuration(hdev, 1);
+            ret = libUSB_Interface.usb_claim_interface(hdev, 0);
+            ret = libUSB_Interface.usb_set_altinterface(hdev, 0);
+            ret = libUSB_Interface.usb_clear_halt(hdev, 0x02);
+            ret = libUSB_Interface.usb_clear_halt(hdev, 0x86);            
         }
 
         private void stop_adc()
