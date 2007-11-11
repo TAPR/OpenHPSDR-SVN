@@ -35,7 +35,7 @@ namespace HPSDR_USB_LIB_V1
         public const int VENDOR_REQ_QF_CMD_READ = 0xA9;
 
         /* Vendor Out Commands */
-        public const int VENDOR_REQ_SET_LED = 0x01;     // wValueL {0,255}
+        public const int VENDOR_REQ_MULTI_WRITE = 0x01;     // wValueL {0,255}
         public const int VENDOR_REQ_FPGA_LOAD = 0x02;
         public const int FL_BEGIN = 0;	                // wIndexL: begin fpga programming cycle.  stalls if trouble.
         public const int FL_XFER = 1;	                // wIndexL: xfer up to 64 bytes of data
@@ -63,7 +63,7 @@ namespace HPSDR_USB_LIB_V1
             }
 
             // Turn on LED 1 to indicate FPGA programming has started
-            Set_LED(hdev, 1, true);
+            //Set_LED(hdev, 1, true);
 
             Console.WriteLine("TS:" + DateTime.Now);
 
@@ -140,7 +140,7 @@ namespace HPSDR_USB_LIB_V1
 
             Console.WriteLine("TS:" + DateTime.Now + " FL_END");
             // turn off LED 1 to indicate successful FPGA Load
-            Set_LED(hdev, 1, false);
+            //Set_LED(hdev, 1, false);
             return true;
         }
 
@@ -153,7 +153,7 @@ namespace HPSDR_USB_LIB_V1
             }
 
             // Turn on LED 1 to indicate FPGA programming has started
-            Set_LED(hdev, 1, true);
+            //(hdev, 1, true);
 
             Console.WriteLine("TS:" + DateTime.Now);
 
@@ -230,7 +230,7 @@ namespace HPSDR_USB_LIB_V1
 
             Console.WriteLine("TS:" + DateTime.Now + " FL_END");
             // turn off LED 1 to indicate successful FPGA Load
-            Set_LED(hdev, 1, false);
+            //(hdev, 1, false);
             return true;
         }
 
@@ -481,6 +481,32 @@ namespace HPSDR_USB_LIB_V1
             }
         }
 
+         static public bool Write_Multibus(IntPtr hdev, byte address, byte data)
+        {
+            Console.WriteLine("addr: " + address.ToString("X") 
+         	                  + " data: " + data.ToString("X"));
+
+            int wVal = (data << 8) + address;
+            
+            Console.WriteLine("wValue: " + wVal.ToString("X"));
+                        
+            int ret = libUSB_Interface.usb_control_msg(
+                    hdev,
+                   	VENDOR_REQ_TYPE_OUT,
+                    VENDOR_REQ_MULTI_WRITE,
+                    wVal,
+                    0,
+                    null,
+                    0,
+                    1000
+                   	 );
+                if (ret > 0)
+                    return true;
+                else
+                    return false;
+            
+        }
+         
         static public bool Write_QF_CMD(IntPtr hdev, byte op_code, byte address, ref byte[] buffer)
         {
             Console.WriteLine("op_code: " + op_code.ToString("X")
@@ -512,62 +538,62 @@ namespace HPSDR_USB_LIB_V1
             }
         }
 
-        static public bool Set_LED(IntPtr hdev, int which, bool on)
-        {
-            if (on)
-            {
-                int ret = libUSB_Interface.usb_control_msg(
-                    hdev,
-                    VENDOR_REQ_TYPE_OUT,
-                    VENDOR_REQ_SET_LED,
-                    1,
-                    which,
-                    new byte[0],
-                    0,
-                    1000
-                    );
-                if (ret < 0)
-                    return false;
-                else
-                    return true;
-            }
-            else
-            {
-                int ret = libUSB_Interface.usb_control_msg(
-                    hdev,
-                    VENDOR_REQ_TYPE_OUT,
-                    VENDOR_REQ_SET_LED,
-                    0,
-                    which,
-                    new byte[0],
-                    0,
-                    1000
-                    );
-                if (ret < 0)
-                    return false;
-                else
-                    return true;
-            }            
-        }
+//        static public bool Set_LED(IntPtr hdev, int which, bool on)
+//        {
+//            if (on)
+//            {
+//                int ret = libUSB_Interface.usb_control_msg(
+//                    hdev,
+//                    VENDOR_REQ_TYPE_OUT,
+//                    VENDOR_REQ_SET_LED,
+//                    1,
+//                    which,
+//                    new byte[0],
+//                    0,
+//                    1000
+//                    );
+//                if (ret < 0)
+//                    return false;
+//                else
+//                    return true;
+//            }
+//            else
+//            {
+//                int ret = libUSB_Interface.usb_control_msg(
+//                    hdev,
+//                    VENDOR_REQ_TYPE_OUT,
+//                    VENDOR_REQ_SET_LED,
+//                    0,
+//                    which,
+//                    new byte[0],
+//                    0,
+//                    1000
+//                    );
+//                if (ret < 0)
+//                    return false;
+//                else
+//                    return true;
+//            }            
+//        }
 
-        static public bool Set_LED_Register ( IntPtr hdev, byte value )
-        {                 
-            int ret = libUSB_Interface.usb_control_msg (
-                hdev,
-                VENDOR_REQ_TYPE_OUT,
-                VENDOR_REQ_SET_LED,
-                value,
-                0,
-                new byte [ 0 ],
-                0,
-                1000
-                );
-            if ( ret < 0 )
-                return false;
-            else
-                return true;
-                        
-        }
+//        static public bool Set_LED_Register ( IntPtr hdev, byte value )
+//        {                 
+//            int ret = libUSB_Interface.usb_control_msg (
+//                hdev,
+//                VENDOR_REQ_TYPE_OUT,
+//                VENDOR_REQ_SET_LED,
+//                value,
+//                0,
+//                new byte [ 0 ],
+//                0,
+//                1000
+//                );
+//            if ( ret < 0 )
+//                return false;
+//            else
+//                return true;
+//                        
+//        }
 
         static public bool Set_Passthrough ( IntPtr hdev, int vendor_cmd, int wValue, int wIndex, byte[] buffer )
         {
