@@ -208,7 +208,7 @@ VCCIO3                       : 148       : power  :                   : 3.3V    
 RESERVED_INPUT               : 149       :        :                   :         : 3         :                
 RESERVED_INPUT               : 150       :        :                   :         : 3         :                
 LROUT                        : 151       : output : 3.3-V LVTTL       :         : 3         : Y              
-PCLK_12MHZ                   : 152       : output : 3.3-V LVTTL       :         : 3         : Y              
+RESERVED_INPUT               : 152       :        :                   :         : 3         :                
 GND                          : 153       : gnd    :                   :         :           :                
 GND_PLL2                     : 154       : gnd    :                   :         :           :                
 VCCD_PLL2                    : 155       : power  :                   : 1.2V    :           :                

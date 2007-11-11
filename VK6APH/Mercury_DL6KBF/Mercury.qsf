@@ -99,7 +99,6 @@ set_global_assignment -name OPTIMIZE_FAST_CORNER_TIMING ON
 set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING "EXTRA EFFORT"
 set_instance_assignment -name CLOCK_SETTINGS clock -to clock
 set_location_assignment PIN_130 -to FPGA_CLK6IN
-set_location_assignment PIN_152 -to PCLK_12MHZ
 set_location_assignment PIN_171 -to PTT_in
 set_location_assignment PIN_180 -to CC
 set_location_assignment PIN_162 -to CBCLK

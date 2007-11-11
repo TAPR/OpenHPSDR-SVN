@@ -67,13 +67,17 @@
 	1		18		2			68
 	0		17		3			69
 	
+	11 Nov 2007
+	
+	removed PCLK_12MHZ from Atlas C5 to prevent clash with same clock from Janus 
+	
 */
 	
 
 module Mercury(ADC,
         IFCLK, FX2_FD, FLAGA, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, 
         CBCLK, CLRCLK, CDOUT_P, CDIN, LROUT, PTT_in, DEBUG_LED0, dot, dash,
-		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3,CLK_MCLK, CC, FPGA_CLK6IN, PCLK_12MHZ,
+		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3,CLK_MCLK, CC, FPGA_CLK6IN, // PCLK_12MHZ,
 		SPI_data, SPI_clock, Tx_load_strobe);
 		
 
@@ -99,7 +103,7 @@ output LROUT;			  		// Left  and Right audio data in I2S format to Atlas
 input  PTT_in;                   // PTT active high
 output CC;						// Command and Control data to Atlas bus 
 input  CDOUT_P;					// Mic data from Penelope
-output PCLK_12MHZ; 				// 12.5MHz out to Atlas C5
+//output PCLK_12MHZ; 				// 12.5MHz out to Atlas C5
 input  dot;						// dot and PTT input from J8
 input  dash;					// dash input from J8
 wire dot;						// CW dot key, active low
