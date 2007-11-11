@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sat Nov 10 10:43:13 2007
+    Info: Processing started: Sun Nov 11 11:23:06 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
 Info: Found 1 design units, including 1 entities, in source file SPI.v
     Info: Found entity 1: SPI
@@ -47,15 +47,15 @@ Info: Found 1 design units, including 1 entities, in source file phase_accumulat
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
     Info: Found entity 1: Tx_fifo
 Info: Elaborating entity "Mercury" for the top level hierarchy
-Warning (10858): Verilog HDL warning at MercuryII.v(117): object sync_Rx_used used but never assigned
-Warning (10030): Net "sync_Rx_used[11]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[10]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[9]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[8]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[7]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[6]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[5]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[4]" at MercuryII.v(117) has no driver or initial value, using a default initial value 0
+Warning (10858): Verilog HDL warning at MercuryII.v(121): object sync_Rx_used used but never assigned
+Warning (10030): Net "sync_Rx_used[11]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[10]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[9]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[8]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[7]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[6]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[5]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[4]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
 Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
 Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
     Info: Found entity 1: lpm_counter
@@ -406,14 +406,14 @@ Info: 60 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state.100" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.010" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
-Info: Implemented 7096 device resources after synthesis - the final resource count might be different
+Info: Implemented 7095 device resources after synthesis - the final resource count might be different
     Info: Implemented 24 input pins
-    Info: Implemented 20 output pins
+    Info: Implemented 19 output pins
     Info: Implemented 16 bidirectional pins
     Info: Implemented 6942 logic cells
     Info: Implemented 80 RAM segments
     Info: Implemented 14 DSP elements
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 29 warnings
-    Info: Allocated 157 megabytes of memory during processing
-    Info: Processing ended: Sat Nov 10 10:45:23 2007
-    Info: Elapsed time: 00:02:10
+    Info: Allocated 156 megabytes of memory during processing
+    Info: Processing ended: Sun Nov 11 11:25:14 2007
+    Info: Elapsed time: 00:02:08
