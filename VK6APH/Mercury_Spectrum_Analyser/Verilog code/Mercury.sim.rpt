@@ -1,0 +1,334 @@
+Simulator report for Mercury
+Sun Nov 11 22:03:11 2007
+Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ALTSYNCRAM
+  6. Coverage Summary
+  7. Complete 1/0-Value Coverage
+  8. Missing 1-Value Coverage
+  9. Missing 0-Value Coverage
+ 10. Simulator INI Usage
+ 11. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2006 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------+
+; Simulator Summary                          ;
++-----------------------------+--------------+
+; Type                        ; Value        ;
++-----------------------------+--------------+
+; Simulation Start Time       ; 0 ps         ;
+; Simulation End Time         ; 700.0 ns     ;
+; Simulation Netlist Size     ; 122 nodes    ;
+; Simulation Coverage         ;      53.91 % ;
+; Total Number of Transitions ; 978          ;
+; Simulation Breakpoints      ; 0            ;
+; Family                      ; Cyclone II   ;
+; Device                      ; EP2C8Q208C8  ;
++-----------------------------+--------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                       ;
++--------------------------------------------------------------------------------------------+-------------+---------------+
+; Option                                                                                     ; Setting     ; Default Value ;
++--------------------------------------------------------------------------------------------+-------------+---------------+
+; Simulation mode                                                                            ; Timing      ; Timing        ;
+; Start time                                                                                 ; 0 ns        ; 0 ns          ;
+; Simulation results format                                                                  ; CVWF        ;               ;
+; Vector input source                                                                        ; Mercury.vwf ;               ;
+; Add pins automatically to simulation output waveforms                                      ; Off         ; On            ;
+; Check outputs                                                                              ; Off         ; Off           ;
+; Report simulation coverage                                                                 ; On          ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On          ; On            ;
+; Display missing 1-value coverage report                                                    ; On          ; On            ;
+; Display missing 0-value coverage report                                                    ; On          ; On            ;
+; Detect setup and hold time violations                                                      ; Off         ; Off           ;
+; Detect glitches                                                                            ; Off         ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off         ; Off           ;
+; Generate Signal Activity File                                                              ; Off         ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off         ; Off           ;
+; Group bus channels in simulation results                                                   ; Off         ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On          ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE  ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off         ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off         ;               ;
+; Glitch Filtering                                                                           ; Off         ; Off           ;
++--------------------------------------------------------------------------------------------+-------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II to view the waveform report data.
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ALTSYNCRAM ;
++---------------------------------------------------------------------------------------------------------------------------------------+
+Memory report data cannot be output to ASCII.
+Please use Quartus II to view the memory report data.
+
+
++--------------------------------------------------------------------+
+; Coverage Summary                                                   ;
++-----------------------------------------------------+--------------+
+; Type                                                ; Value        ;
++-----------------------------------------------------+--------------+
+; Total coverage as a percentage                      ;      53.91 % ;
+; Total nodes checked                                 ; 122          ;
+; Total output ports checked                          ; 115          ;
+; Total output ports with complete 1/0-value coverage ; 62           ;
+; Total output ports with no 1/0-value coverage       ; 19           ;
+; Total output ports with no 1-value coverage         ; 31           ;
+; Total output ports with no 0-value coverage         ; 41           ;
++-----------------------------------------------------+--------------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                                                                                                                                                                                                                                      ;
++------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                                                                ; Output Port Name                                                                                                                   ; Output Port Type ;
++------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+------------------+
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a9  ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[9]  ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a10 ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[10] ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a11 ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[11] ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a0  ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[0]  ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a1  ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[1]  ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a2  ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[2]  ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a3  ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[3]  ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a4  ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[4]  ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a5  ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[5]  ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a6  ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[6]  ; portadataout0    ;
+; |MercSpec|SLWR~reg0                                                                                                                      ; |MercSpec|SLWR~reg0                                                                                                                ; regout           ;
+; |MercSpec|address[0]                                                                                                                     ; |MercSpec|address[0]                                                                                                               ; regout           ;
+; |MercSpec|address[1]                                                                                                                     ; |MercSpec|address[1]                                                                                                               ; regout           ;
+; |MercSpec|address[2]                                                                                                                     ; |MercSpec|address[2]                                                                                                               ; regout           ;
+; |MercSpec|address[3]                                                                                                                     ; |MercSpec|address[3]                                                                                                               ; regout           ;
+; |MercSpec|state_FX[1]                                                                                                                    ; |MercSpec|state_FX[1]                                                                                                              ; regout           ;
+; |MercSpec|state_FX[0]                                                                                                                    ; |MercSpec|state_FX[0]                                                                                                              ; regout           ;
+; |MercSpec|Mux2~88                                                                                                                        ; |MercSpec|Mux2~88                                                                                                                  ; combout          ;
+; |MercSpec|address[0]~428                                                                                                                 ; |MercSpec|address[0]~428                                                                                                           ; combout          ;
+; |MercSpec|Add0~148                                                                                                                       ; |MercSpec|Add0~148                                                                                                                 ; combout          ;
+; |MercSpec|Add0~148                                                                                                                       ; |MercSpec|Add0~149                                                                                                                 ; cout             ;
+; |MercSpec|Add0~150                                                                                                                       ; |MercSpec|Add0~150                                                                                                                 ; combout          ;
+; |MercSpec|Add0~150                                                                                                                       ; |MercSpec|Add0~151                                                                                                                 ; cout             ;
+; |MercSpec|Add0~152                                                                                                                       ; |MercSpec|Add0~152                                                                                                                 ; combout          ;
+; |MercSpec|Add0~154                                                                                                                       ; |MercSpec|Add0~154                                                                                                                 ; combout          ;
+; |MercSpec|Add0~156                                                                                                                       ; |MercSpec|Add0~156                                                                                                                 ; combout          ;
+; |MercSpec|Add0~158                                                                                                                       ; |MercSpec|Add0~158                                                                                                                 ; combout          ;
+; |MercSpec|Add0~160                                                                                                                       ; |MercSpec|Add0~160                                                                                                                 ; combout          ;
+; |MercSpec|Add0~162                                                                                                                       ; |MercSpec|Add0~162                                                                                                                 ; combout          ;
+; |MercSpec|Add0~164                                                                                                                       ; |MercSpec|Add0~164                                                                                                                 ; combout          ;
+; |MercSpec|Add0~166                                                                                                                       ; |MercSpec|Add0~166                                                                                                                 ; combout          ;
+; |MercSpec|Add0~168                                                                                                                       ; |MercSpec|Add0~168                                                                                                                 ; combout          ;
+; |MercSpec|Mux0~13                                                                                                                        ; |MercSpec|Mux0~13                                                                                                                  ; combout          ;
+; |MercSpec|address[0]~429                                                                                                                 ; |MercSpec|address[0]~429                                                                                                           ; combout          ;
+; |MercSpec|address[1]~430                                                                                                                 ; |MercSpec|address[1]~430                                                                                                           ; combout          ;
+; |MercSpec|address[2]~431                                                                                                                 ; |MercSpec|address[2]~431                                                                                                           ; combout          ;
+; |MercSpec|address[3]~432                                                                                                                 ; |MercSpec|address[3]~432                                                                                                           ; combout          ;
+; |MercSpec|address[6]~435                                                                                                                 ; |MercSpec|address[6]~435                                                                                                           ; combout          ;
+; |MercSpec|address[7]~436                                                                                                                 ; |MercSpec|address[7]~436                                                                                                           ; combout          ;
+; |MercSpec|address[8]~437                                                                                                                 ; |MercSpec|address[8]~437                                                                                                           ; combout          ;
+; |MercSpec|address[9]~438                                                                                                                 ; |MercSpec|address[9]~438                                                                                                           ; combout          ;
+; |MercSpec|address[10]~439                                                                                                                ; |MercSpec|address[10]~439                                                                                                          ; combout          ;
+; |MercSpec|IFCLK                                                                                                                          ; |MercSpec|IFCLK                                                                                                                    ; combout          ;
+; |MercSpec|FPGA_CLK6IN                                                                                                                    ; |MercSpec|FPGA_CLK6IN                                                                                                              ; combout          ;
+; |MercSpec|FX2_FD[1]                                                                                                                      ; |MercSpec|FX2_FD[1]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[2]                                                                                                                      ; |MercSpec|FX2_FD[2]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[3]                                                                                                                      ; |MercSpec|FX2_FD[3]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[8]                                                                                                                      ; |MercSpec|FX2_FD[8]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[9]                                                                                                                      ; |MercSpec|FX2_FD[9]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[10]                                                                                                                     ; |MercSpec|FX2_FD[10]                                                                                                               ; padio            ;
+; |MercSpec|FX2_FD[11]                                                                                                                     ; |MercSpec|FX2_FD[11]                                                                                                               ; padio            ;
+; |MercSpec|FX2_FD[12]                                                                                                                     ; |MercSpec|FX2_FD[12]                                                                                                               ; padio            ;
+; |MercSpec|FX2_FD[13]                                                                                                                     ; |MercSpec|FX2_FD[13]                                                                                                               ; padio            ;
+; |MercSpec|FX2_FD[14]                                                                                                                     ; |MercSpec|FX2_FD[14]                                                                                                               ; padio            ;
+; |MercSpec|SLWR                                                                                                                           ; |MercSpec|SLWR                                                                                                                     ; padio            ;
+; |MercSpec|address[0]~_wirecell                                                                                                           ; |MercSpec|address[0]~_wirecell                                                                                                     ; combout          ;
+; |MercSpec|address[1]~_wirecell                                                                                                           ; |MercSpec|address[1]~_wirecell                                                                                                     ; combout          ;
+; |MercSpec|address[2]~_wirecell                                                                                                           ; |MercSpec|address[2]~_wirecell                                                                                                     ; combout          ;
+; |MercSpec|address[3]~_wirecell                                                                                                           ; |MercSpec|address[3]~_wirecell                                                                                                     ; combout          ;
+; |MercSpec|IFCLK~clkctrl                                                                                                                  ; |MercSpec|IFCLK~clkctrl                                                                                                            ; outclk           ;
+; |MercSpec|FPGA_CLK6IN~clkctrl                                                                                                            ; |MercSpec|FPGA_CLK6IN~clkctrl                                                                                                      ; outclk           ;
+; |MercSpec|address[8]~feeder                                                                                                              ; |MercSpec|address[8]~feeder                                                                                                        ; combout          ;
++------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                                                                                                                                                                                                                                         ;
++------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                                                                ; Output Port Name                                                                                                                   ; Output Port Type ;
++------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+------------------+
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a13 ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[13] ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a14 ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[14] ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a15 ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[15] ; portadataout0    ;
+; |MercSpec|Add0~152                                                                                                                       ; |MercSpec|Add0~153                                                                                                                 ; cout             ;
+; |MercSpec|Add0~156                                                                                                                       ; |MercSpec|Add0~157                                                                                                                 ; cout             ;
+; |MercSpec|Add0~160                                                                                                                       ; |MercSpec|Add0~161                                                                                                                 ; cout             ;
+; |MercSpec|Add0~164                                                                                                                       ; |MercSpec|Add0~165                                                                                                                 ; cout             ;
+; |MercSpec|address[4]~433                                                                                                                 ; |MercSpec|address[4]~433                                                                                                           ; combout          ;
+; |MercSpec|address[5]~434                                                                                                                 ; |MercSpec|address[5]~434                                                                                                           ; combout          ;
+; |MercSpec|address[11]~440                                                                                                                ; |MercSpec|address[11]~440                                                                                                          ; combout          ;
+; |MercSpec|~GND                                                                                                                           ; |MercSpec|~GND                                                                                                                     ; combout          ;
+; |MercSpec|FLAGC                                                                                                                          ; |MercSpec|FLAGC                                                                                                                    ; combout          ;
+; |MercSpec|FX2_FD[5]                                                                                                                      ; |MercSpec|FX2_FD[5]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[6]                                                                                                                      ; |MercSpec|FX2_FD[6]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[7]                                                                                                                      ; |MercSpec|FX2_FD[7]                                                                                                                ; padio            ;
+; |MercSpec|PKEND                                                                                                                          ; |MercSpec|PKEND                                                                                                                    ; padio            ;
+; |MercSpec|FIFO_ADR[0]                                                                                                                    ; |MercSpec|FIFO_ADR[0]                                                                                                              ; padio            ;
+; |MercSpec|DEBUG_LED0                                                                                                                     ; |MercSpec|DEBUG_LED0                                                                                                               ; padio            ;
+; |MercSpec|DEBUG_LED1                                                                                                                     ; |MercSpec|DEBUG_LED1                                                                                                               ; padio            ;
+; |MercSpec|DEBUG_LED2                                                                                                                     ; |MercSpec|DEBUG_LED2                                                                                                               ; padio            ;
+; |MercSpec|DEBUG_LED3                                                                                                                     ; |MercSpec|DEBUG_LED3                                                                                                               ; padio            ;
+; |MercSpec|address[10]~_wirecell                                                                                                          ; |MercSpec|address[10]~_wirecell                                                                                                    ; combout          ;
+; |MercSpec|address[11]~_wirecell                                                                                                          ; |MercSpec|address[11]~_wirecell                                                                                                    ; combout          ;
+; |MercSpec|address[4]~_wirecell                                                                                                           ; |MercSpec|address[4]~_wirecell                                                                                                     ; combout          ;
+; |MercSpec|address[5]~_wirecell                                                                                                           ; |MercSpec|address[5]~_wirecell                                                                                                     ; combout          ;
+; |MercSpec|address[6]~_wirecell                                                                                                           ; |MercSpec|address[6]~_wirecell                                                                                                     ; combout          ;
+; |MercSpec|address[7]~_wirecell                                                                                                           ; |MercSpec|address[7]~_wirecell                                                                                                     ; combout          ;
+; |MercSpec|address[8]~_wirecell                                                                                                           ; |MercSpec|address[8]~_wirecell                                                                                                     ; combout          ;
+; |MercSpec|address[9]~_wirecell                                                                                                           ; |MercSpec|address[9]~_wirecell                                                                                                     ; combout          ;
+; |MercSpec|address[5]~feeder                                                                                                              ; |MercSpec|address[5]~feeder                                                                                                        ; combout          ;
+; |MercSpec|SLRD~reg0feeder                                                                                                                ; |MercSpec|SLRD~reg0feeder                                                                                                          ; combout          ;
++------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                                                                                                                                                                                                                                         ;
++------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                                                                ; Output Port Name                                                                                                                   ; Output Port Type ;
++------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+------------------+
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a8  ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[8]  ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a12 ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[12] ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a13 ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[13] ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a14 ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[14] ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a15 ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[15] ; portadataout0    ;
+; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a7  ; |MercSpec|RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[7]  ; portadataout0    ;
+; |MercSpec|SLRD~reg0                                                                                                                      ; |MercSpec|SLRD~reg0                                                                                                                ; regout           ;
+; |MercSpec|address[4]                                                                                                                     ; |MercSpec|address[4]                                                                                                               ; regout           ;
+; |MercSpec|address[5]                                                                                                                     ; |MercSpec|address[5]                                                                                                               ; regout           ;
+; |MercSpec|address[6]                                                                                                                     ; |MercSpec|address[6]                                                                                                               ; regout           ;
+; |MercSpec|address[7]                                                                                                                     ; |MercSpec|address[7]                                                                                                               ; regout           ;
+; |MercSpec|address[8]                                                                                                                     ; |MercSpec|address[8]                                                                                                               ; regout           ;
+; |MercSpec|address[9]                                                                                                                     ; |MercSpec|address[9]                                                                                                               ; regout           ;
+; |MercSpec|address[10]                                                                                                                    ; |MercSpec|address[10]                                                                                                              ; regout           ;
+; |MercSpec|address[11]                                                                                                                    ; |MercSpec|address[11]                                                                                                              ; regout           ;
+; |MercSpec|Add0~154                                                                                                                       ; |MercSpec|Add0~155                                                                                                                 ; cout             ;
+; |MercSpec|Add0~158                                                                                                                       ; |MercSpec|Add0~159                                                                                                                 ; cout             ;
+; |MercSpec|Add0~162                                                                                                                       ; |MercSpec|Add0~163                                                                                                                 ; cout             ;
+; |MercSpec|Add0~166                                                                                                                       ; |MercSpec|Add0~167                                                                                                                 ; cout             ;
+; |MercSpec|address[4]~433                                                                                                                 ; |MercSpec|address[4]~433                                                                                                           ; combout          ;
+; |MercSpec|address[5]~434                                                                                                                 ; |MercSpec|address[5]~434                                                                                                           ; combout          ;
+; |MercSpec|address[11]~440                                                                                                                ; |MercSpec|address[11]~440                                                                                                          ; combout          ;
+; |MercSpec|~GND                                                                                                                           ; |MercSpec|~GND                                                                                                                     ; combout          ;
+; |MercSpec|FLAGC                                                                                                                          ; |MercSpec|FLAGC                                                                                                                    ; combout          ;
+; |MercSpec|FX2_FD[0]                                                                                                                      ; |MercSpec|FX2_FD[0]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[4]                                                                                                                      ; |MercSpec|FX2_FD[4]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[5]                                                                                                                      ; |MercSpec|FX2_FD[5]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[6]                                                                                                                      ; |MercSpec|FX2_FD[6]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[7]                                                                                                                      ; |MercSpec|FX2_FD[7]                                                                                                                ; padio            ;
+; |MercSpec|FX2_FD[15]                                                                                                                     ; |MercSpec|FX2_FD[15]                                                                                                               ; padio            ;
+; |MercSpec|SLRD                                                                                                                           ; |MercSpec|SLRD                                                                                                                     ; padio            ;
+; |MercSpec|SLOE                                                                                                                           ; |MercSpec|SLOE                                                                                                                     ; padio            ;
+; |MercSpec|PKEND                                                                                                                          ; |MercSpec|PKEND                                                                                                                    ; padio            ;
+; |MercSpec|FIFO_ADR[0]                                                                                                                    ; |MercSpec|FIFO_ADR[0]                                                                                                              ; padio            ;
+; |MercSpec|FIFO_ADR[1]                                                                                                                    ; |MercSpec|FIFO_ADR[1]                                                                                                              ; padio            ;
+; |MercSpec|DEBUG_LED0                                                                                                                     ; |MercSpec|DEBUG_LED0                                                                                                               ; padio            ;
+; |MercSpec|DEBUG_LED1                                                                                                                     ; |MercSpec|DEBUG_LED1                                                                                                               ; padio            ;
+; |MercSpec|DEBUG_LED2                                                                                                                     ; |MercSpec|DEBUG_LED2                                                                                                               ; padio            ;
+; |MercSpec|DEBUG_LED3                                                                                                                     ; |MercSpec|DEBUG_LED3                                                                                                               ; padio            ;
+; |MercSpec|address[5]~feeder                                                                                                              ; |MercSpec|address[5]~feeder                                                                                                        ; combout          ;
+; |MercSpec|SLRD~reg0feeder                                                                                                                ; |MercSpec|SLRD~reg0feeder                                                                                                          ; combout          ;
++------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II Simulator
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Sun Nov 11 22:03:10 2007
+Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off Mercury -c Mercury
+Info: Using vector source file "C:/HPSDR/trunk/VK6APH/Mercury_Spectrum_Analyser/Verilog code/Mercury.vwf"
+Warning: Ignored node in vector source file. Can't find corresponding node name "SLEN" in design.
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[0]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[1]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[2]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[3]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[4]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[5]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[6]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[7]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[8]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[9]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[10]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[11]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[12]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[13]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[14]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|ADC[15]"
+Warning: Can't find signal in vector source file for input pin "|MercSpec|FLAGA"
+Info: Inverted registers were found during simulation
+    Info: Register: |MercSpec|address[0]
+    Info: Register: |MercSpec|address[1]
+    Info: Register: |MercSpec|address[2]
+    Info: Register: |MercSpec|address[3]
+    Info: Register: |MercSpec|address[4]
+    Info: Register: |MercSpec|address[5]
+    Info: Register: |MercSpec|address[6]
+    Info: Register: |MercSpec|address[7]
+    Info: Register: |MercSpec|address[8]
+    Info: Register: |MercSpec|address[9]
+    Info: Register: |MercSpec|address[10]
+    Info: Register: |MercSpec|address[11]
+Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
+    Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
+Info: Simulation partitioned into 1 sub-simulations
+Info: Simulation coverage is      53.91 %
+Info: Number of transitions in simulation is 978
+Info: Quartus II Simulator was successful. 0 errors, 18 warnings
+    Info: Allocated 90 megabytes of memory during processing
+    Info: Processing ended: Sun Nov 11 22:03:11 2007
+    Info: Elapsed time: 00:00:01
+
+
