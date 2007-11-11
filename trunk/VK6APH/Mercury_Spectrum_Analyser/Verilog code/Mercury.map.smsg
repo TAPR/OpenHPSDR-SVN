@@ -1,0 +1,64 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Sun Nov 11 22:02:37 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
+Info: Found 1 design units, including 1 entities, in source file RAM_4096_dualport.v
+    Info: Found entity 1: RAM_4096_dualport
+Info: Found 1 design units, including 1 entities, in source file ROM_4096.v
+    Info: Found entity 1: ROM_4096
+Info: Found 1 design units, including 1 entities, in source file RAM_4096.v
+    Info: Found entity 1: RAM_4096
+Info: Found 1 design units, including 1 entities, in source file MercSpec.v
+    Info: Found entity 1: MercSpec
+Info: Elaborating entity "MercSpec" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at MercSpec.v(53): object "SLEN" assigned a value but never read
+Info: Elaborating entity "RAM_4096_dualport" for hierarchy "RAM_4096_dualport:RAM"
+Info: Found 1 design units, including 1 entities, in source file ../../../../../altera/61/quartus/libraries/megafunctions/altsyncram.tdf
+    Info: Found entity 1: altsyncram
+Info: Elaborating entity "altsyncram" for hierarchy "RAM_4096_dualport:RAM|altsyncram:altsyncram_component"
+Info: Elaborated megafunction instantiation "RAM_4096_dualport:RAM|altsyncram:altsyncram_component"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_rkr1.tdf
+    Info: Found entity 1: altsyncram_rkr1
+Info: Elaborating entity "altsyncram_rkr1" for hierarchy "RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_nsu1.tdf
+    Info: Found entity 1: altsyncram_nsu1
+Info: Elaborating entity "altsyncram_nsu1" for hierarchy "RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1"
+Warning: Port "data" on the entity instantiation of "RAM" is connected to a signal of width 1. The formal width of the signal in the module is 16.  Extra bits will be driven by GND.
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "SLOE~reg0" merged to single register "FIFO_ADR[1]~reg0"
+    Info: Duplicate register "FIFO_ADR[1]~reg0" merged to single register "SLRD~reg0"
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "PKEND" stuck at VCC
+    Warning: Pin "FIFO_ADR[0]" stuck at GND
+    Warning: Pin "DEBUG_LED0" stuck at GND
+    Warning: Pin "DEBUG_LED1" stuck at GND
+    Warning: Pin "DEBUG_LED2" stuck at GND
+    Warning: Pin "DEBUG_LED3" stuck at GND
+Warning: Design contains 17 input pin(s) that do not drive logic
+    Warning: No output dependent on input pin "ADC[0]"
+    Warning: No output dependent on input pin "ADC[1]"
+    Warning: No output dependent on input pin "ADC[2]"
+    Warning: No output dependent on input pin "ADC[3]"
+    Warning: No output dependent on input pin "ADC[4]"
+    Warning: No output dependent on input pin "ADC[5]"
+    Warning: No output dependent on input pin "ADC[6]"
+    Warning: No output dependent on input pin "ADC[7]"
+    Warning: No output dependent on input pin "ADC[8]"
+    Warning: No output dependent on input pin "ADC[9]"
+    Warning: No output dependent on input pin "ADC[10]"
+    Warning: No output dependent on input pin "ADC[11]"
+    Warning: No output dependent on input pin "ADC[12]"
+    Warning: No output dependent on input pin "ADC[13]"
+    Warning: No output dependent on input pin "ADC[14]"
+    Warning: No output dependent on input pin "ADC[15]"
+    Warning: No output dependent on input pin "FLAGA"
+Info: Implemented 103 device resources after synthesis - the final resource count might be different
+    Info: Implemented 20 input pins
+    Info: Implemented 26 output pins
+    Info: Implemented 41 logic cells
+    Info: Implemented 16 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 27 warnings
+    Info: Allocated 128 megabytes of memory during processing
+    Info: Processing ended: Sun Nov 11 22:02:39 2007
+    Info: Elapsed time: 00:00:02

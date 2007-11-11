@@ -1,0 +1,201 @@
+Quartus II Archive log --	C:/HPSDR/trunk/VK6APH/Mercury/Mercury.qarlog
+
+Archive:	C:/HPSDR/trunk/VK6APH/Mercury/Mercury.qar
+Date:		Sun May 27 20:39:44 2007
+Quartus II		6.1 Build 201 11/27/2006 SJ Web Edition
+
+	=========== Files Selected: ===========
+C:/HPSDR/trunk/VK6APH/Mercury/1 Jan working  Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/11 April before divider Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/11 May  strobe and ce signed & DC  Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/13 May Basic build  Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/14 Jan V2 working  Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/17th Feb before new CORDIC  Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/20 Jan working before  DC offset test  Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/24 March  Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/24 May WIP Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/25 March before Harmon CORDIC  Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/26th March before 18 bit CORDIC  Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/6 May before FIR  Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/7 May not working Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/Basic test Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/FIR_top.v
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.asm.rpt
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.asm.talkback.xml
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.done
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.dpf
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.fit.eqn
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.fit.rpt
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.fit.summary
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.fit.talkback.xml
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.flow.rpt
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.gui.talkback.xml
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.map.eqn
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.map.rpt
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.map.smsg
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.map.summary
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.map.talkback.xml
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.pin
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.pof
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.qarlog
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.qsf
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.quartus.talkback.xml
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.qws
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.rbf
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.sim.rpt
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.sim.talkback.xml
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.sof
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.tan.rpt
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.tan.summary
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.tan.talkback.xml
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.v
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury.vwf
+C:/HPSDR/trunk/VK6APH/Mercury/Mercury_assignment_defaults.qdf
+C:/HPSDR/trunk/VK6APH/Mercury/N8VB CORDIC_NCO_TOP.v
+C:/HPSDR/trunk/VK6APH/Mercury/N8VB cordic.v
+C:/HPSDR/trunk/VK6APH/Mercury/N8VB cordic_stage.v
+C:/HPSDR/trunk/VK6APH/Mercury/QSR1 fpga_top.v
+C:/HPSDR/trunk/VK6APH/Mercury/Rx_fifo.v
+C:/HPSDR/trunk/VK6APH/Mercury/Steve Wilson hpsdr_cordic.v
+C:/HPSDR/trunk/VK6APH/Mercury/Tx_fifo.v
+C:/HPSDR/trunk/VK6APH/Mercury/assignment_defaults.qdf
+C:/HPSDR/trunk/VK6APH/Mercury/cROM.v
+C:/HPSDR/trunk/VK6APH/Mercury/cROM_Sequencer.v
+C:/HPSDR/trunk/VK6APH/Mercury/cbuffer_top.v
+C:/HPSDR/trunk/VK6APH/Mercury/cic_10_1_3.v
+C:/HPSDR/trunk/VK6APH/Mercury/cic_10_1_3_nofraction.v
+C:/HPSDR/trunk/VK6APH/Mercury/cic_4_1_8.v
+C:/HPSDR/trunk/VK6APH/Mercury/cic_4_1_8_nofraction.v
+C:/HPSDR/trunk/VK6APH/Mercury/cic_640_1_4.v
+C:/HPSDR/trunk/VK6APH/Mercury/cic_640_1_4_nf.v
+C:/HPSDR/trunk/VK6APH/Mercury/cic_640_1_5.v
+C:/HPSDR/trunk/VK6APH/Mercury/cic_640_1_6.v
+C:/HPSDR/trunk/VK6APH/Mercury/cic_640_1_7.v
+C:/HPSDR/trunk/VK6APH/Mercury/cic_8_1_5.v
+C:/HPSDR/trunk/VK6APH/Mercury/cic_8_1_5_nofraction.v
+C:/HPSDR/trunk/VK6APH/Mercury/cordic_16.v
+C:/HPSDR/trunk/VK6APH/Mercury/db/Mercury.cbx.xml
+C:/HPSDR/trunk/VK6APH/Mercury/db/Mercury.qpf
+C:/HPSDR/trunk/VK6APH/Mercury/db/Mercury.sim.vwf
+C:/HPSDR/trunk/VK6APH/Mercury/db/Mercury0.rtl.mif
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_fefifo_b0d.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_fefifo_g0d.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_gray2bin_36b.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_gray2bin_mdb.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_gray2bin_ndb.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_graycounter_726.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_graycounter_ik6.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_graycounter_jk6.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_graycounter_kk6.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_graycounter_lk6.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_graycounter_q96.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/a_graycounter_r96.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_l4h.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_ljg.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_lkc.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_mkc.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_n4h.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_njg.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_p4h.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_ppg.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_pvb.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_qjg.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_r4h.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_rpg.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_s4h.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_sjg.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_tbf.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_tpg.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/add_sub_vbf.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/alt_synch_pipe_1e8.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/alt_synch_pipe_297.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/alt_synch_pipe_2e8.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/alt_synch_pipe_397.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/alt_synch_pipe_497.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/alt_synch_pipe_hv7.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/alt_synch_pipe_iv7.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/alt_synch_pipe_jv7.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/alt_synch_pipe_kv7.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/alt_u_div_u5f.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/altsyncram_5fb1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/altsyncram_5ti1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/altsyncram_8ec1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/altsyncram_aec1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/altsyncram_hpi1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/altsyncram_mmu.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/altsyncram_rof1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/altsyncram_tpu.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/altsyncram_uia1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/altsyncram_vpu.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/altsyncram_vsi1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/cntr_j08.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dcfifo_6bf1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dcfifo_f2c1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dcfifo_ijb1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dcfifo_ld61.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dcfifo_rhc1.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dffpipe_b09.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dffpipe_c09.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dffpipe_d09.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dffpipe_e09.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dffpipe_f09.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dffpipe_pe9.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dffpipe_re9.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dffpipe_s98.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dffpipe_se9.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dffpipe_t98.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dffpipe_u98.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dpram_fvr.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/dpram_ipm.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/lpm_divide_6gm.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/lpm_divide_sms.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/mult_7o01.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/mult_8o01.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/mult_gm01.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/db/rom0_cROM_337f69.hdl.mif
+C:/HPSDR/trunk/VK6APH/Mercury/db/sign_div_unsign_gnh.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/dc_offset_correct_16.v
+C:/HPSDR/trunk/VK6APH/Mercury/dc_offset_correct_18.v
+C:/HPSDR/trunk/VK6APH/Mercury/dc_offset_correct_24.v
+C:/HPSDR/trunk/VK6APH/Mercury/divide.v
+C:/HPSDR/trunk/VK6APH/Mercury/division.v
+C:/HPSDR/trunk/VK6APH/Mercury/filter_20.v
+C:/HPSDR/trunk/VK6APH/Mercury/filter_21.v
+C:/HPSDR/trunk/VK6APH/Mercury/filter_22.v
+C:/HPSDR/trunk/VK6APH/Mercury/mac.v
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_fefifo.inc
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_gray2bin.inc
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_graycounter.inc
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/aglobal51.inc
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/alt_sync_fifo.inc
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altdpram.inc
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altsyncram_fifo.inc
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/cbx.lst
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dffpipe.inc
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_add_sub.inc
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_compare.inc
+C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_counter.inc
+C:/HPSDR/trunk/VK6APH/Mercury/phase_accumulator.v
+c:/altera/61/quartus/libraries/megafunctions/a_rdenreg.inc
+c:/altera/61/quartus/libraries/megafunctions/addcore.inc
+c:/altera/61/quartus/libraries/megafunctions/aglobal61.inc
+c:/altera/61/quartus/libraries/megafunctions/alt_mercury_add_sub.inc
+c:/altera/61/quartus/libraries/megafunctions/alt_stratix_add_sub.inc
+c:/altera/61/quartus/libraries/megafunctions/altqpram.inc
+c:/altera/61/quartus/libraries/megafunctions/altram.inc
+c:/altera/61/quartus/libraries/megafunctions/altrom.inc
+c:/altera/61/quartus/libraries/megafunctions/altshift.inc
+c:/altera/61/quartus/libraries/megafunctions/altsyncram.tdf
+c:/altera/61/quartus/libraries/megafunctions/bypassff.inc
+c:/altera/61/quartus/libraries/megafunctions/look_add.inc
+c:/altera/61/quartus/libraries/megafunctions/lpm_add_sub.tdf
+c:/altera/61/quartus/libraries/megafunctions/lpm_decode.inc
+c:/altera/61/quartus/libraries/megafunctions/lpm_mult.tdf
+c:/altera/61/quartus/libraries/megafunctions/lpm_mux.inc
+c:/altera/61/quartus/libraries/megafunctions/multcore.inc
+c:/altera/61/quartus/libraries/megafunctions/stratix_ram_block.inc
+	======= Total: 190 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
