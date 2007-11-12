@@ -309,35 +309,44 @@ namespace MercScope
 
         private void start_adc()
         {
-            hdev = USB.InitFindAndOpenDevice(0xfffe, 0x00ff);
-            libUSB_Interface.usb_set_configuration(hdev, 1);
-            libUSB_Interface.usb_claim_interface(hdev, 0);
-            libUSB_Interface.usb_set_altinterface(hdev, 0);
-            libUSB_Interface.usb_clear_halt(hdev, 0x02);
-            libUSB_Interface.usb_clear_halt(hdev, 0x86);            
+            //hdev = USB.InitFindAndOpenDevice(0xfffe, 0x00ff);
+            //libUSB_Interface.usb_set_configuration(hdev, 1);
+            //libUSB_Interface.usb_claim_interface(hdev, 0);
+            //libUSB_Interface.usb_set_altinterface(hdev, 0);
+            //libUSB_Interface.usb_clear_halt(hdev, 0x02);
+            //libUSB_Interface.usb_clear_halt(hdev, 0x86);            
         }
 
         private void stop_adc()
         {
-            libUSB_Interface.usb_release_interface(hdev, 0);
-            libUSB_Interface.usb_close(hdev);            
+            //libUSB_Interface.usb_release_interface(hdev, 0);
+            //libUSB_Interface.usb_close(hdev);            
         }
 
         private bool read_adc(ref byte[] rbuf)
         {
             if (checkBox2.Checked)
             {
-                rnd.NextBytes(rbuf);
+                //rnd.NextBytes(rbuf);
+                // generate sine wave with added noise
+                int x;
+                for (x = 0; x < 2048; x++)
+                {
+                    double sinewave = 118 * Math.Sin(x * 10 * Math.PI / 180); // sine wave +/- 118 peak 
+                    double noise = (double) rnd.Next(10); // noise with a peak value of 10
+                    double signal = sinewave + noise;     // add signal to the noise 
+                    rbuf[x] = (byte)signal;
+                }
+        
                 return true;
             }
             else
             {
-
-                int ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf, 500);
-                if (ret != rbuf.Length)
-                    return false;
-                else
-                    return true;
+                //int ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf, 500);
+                //if (ret != rbuf.Length)
+                //    return false;
+                //else
+                return true;
             }
         }
         
@@ -431,7 +440,6 @@ namespace MercScope
                 listBox1.Items.Add(buf[i]);
             }
         }
-
 
     }
 }
