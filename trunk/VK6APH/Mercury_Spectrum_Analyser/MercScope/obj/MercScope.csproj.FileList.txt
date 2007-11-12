@@ -17,7 +17,6 @@ obj\Debug\MercScope.pdb
 bin\Debug\HPSDR_USB_LIB_V1.pdb
 bin\Release\HPSDR_USB_LIB_V1.dll
 bin\Release\HPSDR_USB_LIB_V1.pdb
-bin\Debug\HPSDR_USB_LIB_V1.dll
 bin\Release\SharpDSP2.0.dll
 bin\Release\SharpDSP2.0.pdb
 bin\Debug\SharpDSP2.0.pdb
