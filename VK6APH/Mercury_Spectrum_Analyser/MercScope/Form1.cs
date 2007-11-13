@@ -17,7 +17,7 @@ namespace MercScope
     {
         Rectangle scoperect;
         Random rnd;
-        const int bsize = 2048;
+        const int bsize = 2048; 
         byte[] adcbuf = new byte[bsize];
         const int isize = 512;
         int[] ivalbuf = new int[isize];
@@ -26,6 +26,7 @@ namespace MercScope
         IntPtr hdev = IntPtr.Zero;
         bool adcon = false;
         PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.BLACKMAN4_WINDOW);
+        //PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.BLACKMANHARRIS_WINDOW);
         IQCorrection iqcor = new IQCorrection(512);
 
         public Form1()
@@ -323,30 +324,48 @@ namespace MercScope
             //libUSB_Interface.usb_close(hdev);            
         }
 
+
+        double phase_angle = 0; 
+        
         private bool read_adc(ref byte[] rbuf)
         {
-            if (checkBox2.Checked)
+            if (checkBox2.Checked) 
             {
-                //rnd.NextBytes(rbuf);
-                // generate sine wave with added noise
-                int x;
-                for (x = 0; x < 2048; x++)
+                rnd.NextBytes(rbuf);
+                
+                for (int j = 0; j < rbuf.Length; j += 4)
                 {
-                    double sinewave = 118 * Math.Sin(x * 10 * Math.PI / 180); // sine wave +/- 118 peak 
-                    double noise = (double) rnd.Next(10); // noise with a peak value of 10
-                    double signal = sinewave + noise;     // add signal to the noise 
-                    rbuf[x] = (byte)signal;
-                }
-        
+                    double i; 
+                    double q; 
+                    short i16; 
+                    short q16;                     
+                    byte[] tbuf; 
+                    i = Math.Sin(phase_angle); 
+                    q = Math.Cos(phase_angle); 
+                    phase_angle += 1.12513; 
+                    i16 = (short)(32767.0 * i);
+                    q16 = (short)-(32767.0 * q);       
+                    //q16 = 0; 
+                    tbuf = BitConverter.GetBytes(i16);
+                    byte noise_bits = (byte)(rbuf[j] & 0xf); 
+                    //noise_bits = 0; 
+                    rbuf[j] = (byte)(tbuf[0] ^ noise_bits);
+                    rbuf[j + 1] = tbuf[1];
+                    tbuf = BitConverter.GetBytes(q16);
+                    rbuf[j + 2] = (byte)(tbuf[0] ^ noise_bits);
+                    rbuf[j + 3] = tbuf[1]; 
+
+                } 
                 return true;
             }
             else
             {
+
                 //int ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf, 500);
                 //if (ret != rbuf.Length)
                 //    return false;
                 //else
-                return true;
+                    return true;
             }
         }
         
@@ -440,6 +459,7 @@ namespace MercScope
                 listBox1.Items.Add(buf[i]);
             }
         }
+
 
     }
 }
