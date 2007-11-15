@@ -23,6 +23,7 @@ namespace MercScope
         int[] ivalbuf = new int[isize];
         const int qsize = 512;
         int[] qvalbuf = new int[qsize];
+        double[] ADC_sample = new double[bsize];
         IntPtr hdev = IntPtr.Zero;
         bool adcon = false;
         PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.BLACKMAN4_WINDOW);
@@ -325,7 +326,8 @@ namespace MercScope
         }
 
 
-        double phase_angle = 0; 
+        double phase_angle = 0;
+        double sample = 0;
         
         private bool read_adc(ref byte[] rbuf)
         {
@@ -333,8 +335,40 @@ namespace MercScope
             {
                 rnd.NextBytes(rbuf);
                 
+                //phase_angle = rnd.Next();
+                //Console.WriteLine("phase angle = {0}", phase_angle);
+                
                 for (int j = 0; j < rbuf.Length; j += 4)
                 {
+                    double i;
+                    double q;
+                    short i16;
+                    short q16;
+                    byte[] tbuf;
+                    
+                    //create 10 cycles of a sine wave as the ADC value
+                    ADC_sample[j] = Math.Sin(sample + 0.0368);
+
+                    // multiply each sample by sin and cos to give a complex result
+                    i = ADC_sample[j] * Math.Sin(phase_angle);
+                    q = ADC_sample[j] * Math.Cos(phase_angle);
+                    //phase_angle += 1.12513;
+                    phase_angle -= 2;
+                    i16 = (short)(32767.0 * i);
+                    q16 = (short)-(32767.0 * q);
+                    //q16 = 0; 
+                    tbuf = BitConverter.GetBytes(i16);
+                    byte noise_bits = (byte)(rbuf[j] & 0xf);
+                    //noise_bits = 0; 
+                    rbuf[j] = (byte)(tbuf[0] ^ noise_bits);
+                    rbuf[j + 1] = tbuf[1];
+                    tbuf = BitConverter.GetBytes(q16);
+                    rbuf[j + 2] = (byte)(tbuf[0] ^ noise_bits);
+                    rbuf[j + 3] = tbuf[1]; 
+                    
+                    
+                    
+                    /*
                     double i; 
                     double q; 
                     short i16; 
@@ -342,7 +376,8 @@ namespace MercScope
                     byte[] tbuf; 
                     i = Math.Sin(phase_angle); 
                     q = Math.Cos(phase_angle); 
-                    phase_angle += 1.12513; 
+                    //phase_angle += 1.12513;
+                    phase_angle += 1.12513;
                     i16 = (short)(32767.0 * i);
                     q16 = (short)-(32767.0 * q);       
                     //q16 = 0; 
@@ -354,6 +389,7 @@ namespace MercScope
                     tbuf = BitConverter.GetBytes(q16);
                     rbuf[j + 2] = (byte)(tbuf[0] ^ noise_bits);
                     rbuf[j + 3] = tbuf[1]; 
+                     */
 
                 } 
                 return true;
