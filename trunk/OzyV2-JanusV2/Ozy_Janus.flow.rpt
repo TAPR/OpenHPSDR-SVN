@@ -1,5 +1,5 @@
 Flow report for Ozy_Janus
-Fri Sep 28 22:09:19 2007
+Mon Oct 29 21:01:55 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Fri Sep 28 22:09:19 2007   ;
+; Flow Status                        ; Successful - Mon Oct 29 21:01:54 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
@@ -45,11 +45,11 @@ applicable agreement for further details.
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
 ; Met timing requirements            ; No                                      ;
-; Total logic elements               ; 1,277 / 8,256 ( 15 % )                  ;
-;     Total combinational functions  ; 830 / 8,256 ( 10 % )                    ;
-;     Dedicated logic registers      ; 830 / 8,256 ( 10 % )                    ;
-; Total registers                    ; 830                                     ;
-; Total pins                         ; 78 / 138 ( 57 % )                       ;
+; Total logic elements               ; 1,376 / 8,256 ( 17 % )                  ;
+;     Total combinational functions  ; 897 / 8,256 ( 11 % )                    ;
+;     Dedicated logic registers      ; 826 / 8,256 ( 10 % )                    ;
+; Total registers                    ; 826                                     ;
+; Total pins                         ; 81 / 138 ( 59 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304 / 165,888 ( 59 % )               ;
 ; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                          ;
@@ -62,28 +62,29 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/28/2007 22:05:12 ;
+; Start date & time ; 10/29/2007 20:55:50 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Ozy_Janus           ;
 +-------------------+---------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                             ;
-+---------------------------------------------------+--------------+--------------------------------+-------------+------------+
-; Assignment Name                                   ; Value        ; Default Value                  ; Entity Name ; Section Id ;
-+---------------------------------------------------+--------------+--------------------------------+-------------+------------+
-; ALLOW_POWER_UP_DONT_CARE                          ; Off          ; On                             ; --          ; --         ;
-; FITTER_EFFORT                                     ; Standard Fit ; Auto Fit                       ; --          ; --         ;
-; FMAX_REQUIREMENT                                  ; 48 MHz       ; --                             ; --          ; --         ;
-; MUX_RESTRUCTURE                                   ; Off          ; Auto                           ; --          ; --         ;
-; OPTIMIZE_FAST_CORNER_TIMING                       ; On           ; Off                            ; --          ; --         ;
-; OPTIMIZE_HOLD_TIMING                              ; All paths    ; IO Paths and Minimum TPD Paths ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ; On           ; Off                            ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_COMBO_LOGIC                    ; On           ; Off                            ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION           ; On           ; Off                            ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_REGISTER_RETIMING              ; On           ; Off                            ; --          ; --         ;
-+---------------------------------------------------+--------------+--------------------------------+-------------+------------+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                              ;
++---------------------------------------------------+---------------+--------------------------------+-------------+------------+
+; Assignment Name                                   ; Value         ; Default Value                  ; Entity Name ; Section Id ;
++---------------------------------------------------+---------------+--------------------------------+-------------+------------+
+; ALLOW_POWER_UP_DONT_CARE                          ; Off           ; On                             ; --          ; --         ;
+; FITTER_EFFORT                                     ; Standard Fit  ; Auto Fit                       ; --          ; --         ;
+; FMAX_REQUIREMENT                                  ; 48 MHz        ; --                             ; --          ; --         ;
+; MESSAGE_SUPPRESSION_RULE_FILE                     ; Ozy_Janus.srf ; --                             ; --          ; --         ;
+; MUX_RESTRUCTURE                                   ; Off           ; Auto                           ; --          ; --         ;
+; OPTIMIZE_FAST_CORNER_TIMING                       ; On            ; Off                            ; --          ; --         ;
+; OPTIMIZE_HOLD_TIMING                              ; All paths     ; IO Paths and Minimum TPD Paths ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ; On            ; Off                            ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC                    ; On            ; Off                            ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION           ; On            ; Off                            ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING              ; On            ; Off                            ; --          ; --         ;
++---------------------------------------------------+---------------+--------------------------------+-------------+------------+
 
 
 +----------------------------------------+
@@ -91,11 +92,11 @@ applicable agreement for further details.
 +-------------------------+--------------+
 ; Module Name             ; Elapsed Time ;
 +-------------------------+--------------+
-; Analysis & Synthesis    ; 00:00:30     ;
-; Fitter                  ; 00:03:17     ;
+; Analysis & Synthesis    ; 00:00:57     ;
+; Fitter                  ; 00:04:46     ;
 ; Assembler               ; 00:00:08     ;
-; Classic Timing Analyzer ; 00:00:05     ;
-; Total                   ; 00:04:00     ;
+; Classic Timing Analyzer ; 00:00:04     ;
+; Total                   ; 00:05:55     ;
 +-------------------------+--------------+
 
 

@@ -161,7 +161,9 @@
 //				Added clock and microphone selction control from PowerSDR - 26th Sept 2007
 //				Added CLK_12MHZ or PCLK_12MHZ selection control from PowerSDR - 26 Sept 2007
 //				Added test for CLK_12MHZ or PCLK_12MHZ present and default to FX2/4 clock if not - 28 Sept 2007			
-//				If clock selection error flash DEBUG_LED0 and inhibit Tx - 28 Sept 2007
+//				If configuration error flash DEBUG_LED0 and inhibit Tx - 28 Sept 2007
+//				Force C5 as PCLK_12MHz for testing, see line 555 - 28 Oct 2007
+//				Add LPF decoder and SPI interface for Alex control - 3 Nov 2007
 //
 ////////////////////////////////////////////////////////////
 
@@ -289,7 +291,7 @@ module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
         CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
 		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC, PCLK_12MHZ, 
-		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE
+		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, SPI_data, SPI_clock, Tx_load_strobe
 		);
 		
 
@@ -327,6 +329,9 @@ reg    DFS1;					// ditto
 output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
 output CC;						// Command and Control data to Atlas bus 
 input  CDOUT_P;					// Mic data from Penelope
+output SPI_data;				// SPI data to Alex
+output SPI_clock;				// SPI clock to Alex
+output Tx_load_strobe;			// SPI Tx data load strobe to Alex
 
 // interface lines for GPIO control 
 input 				FX2_CLK;		// master system clock from FX2 
@@ -482,7 +487,7 @@ reg IF_count;
 always @ (posedge IFCLK)
 begin
 	if (IF_count == 1)begin
-		IFCLK_4 = ~IFCLK_4;
+		IFCLK_4 <= ~IFCLK_4;
 		IF_count <= 0;
 		end
 	else
@@ -545,6 +550,10 @@ end
 	11 = Both Penelope and Mercury fitted
 	
 */
+
+//temp test code - force use of CLK_12MHz
+
+//assign CLK_MCLK = CLK_12MHZ; // force clock from Mercury for testing 
 
 assign CLK_MCLK = (conf > 0 & PCLK_OK) ? PCLK_12MHZ : (conf == 0 & JCLK_OK ? CLK_12MHZ : IFCLK_4);
 
@@ -1259,6 +1268,49 @@ always @ (negedge CBCLK)
 begin
 	CC <= CCdata[CCcount];			// shift data out to Altas bus MSB first
 end
+
+//////////////////////////////////////////////////////////////
+//
+//		Alex Tx Band Decoder & LPF selection
+//
+//////////////////////////////////////////////////////////////
+
+wire [6:0]LPF;
+
+LPF_select Alex_LPF_select(.frequency(frequency), .LPF(LPF));
+
+//////////////////////////////////////////////////////////////
+//
+//		Alex SPI interface
+//
+//////////////////////////////////////////////////////////////
+
+// Assign dummy data where values not currently set
+
+wire yellow_led = 1'b1; 	
+wire ANT1 = 1'b1;			// select antenna 1 for now
+wire ANT2 = 1'b0;
+wire ANT3 = 1'b0;
+wire red_led;
+wire TR_relay;
+wire [15:0]Alex_Tx_data;
+
+
+wire SPI_data;
+wire SPI_clock;
+wire Tx_load_strobe;
+
+// define and concatinate the data to send to Alex via SPI
+
+assign red_led = PTT_out; 		// turn red led on when we Tx
+assign TR_relay = PTT_out;		// turn on TR relay when PTT active
+
+assign Alex_Tx_data = {3'b000,yellow_led,LPF[6:3],ANT1,ANT2,ANT3,TR_relay,red_led,LPF[2:0]};
+
+SPI   Alex_SPI_Tx(.Alex_data(Alex_Tx_data), .SPI_data(SPI_data),
+				  .SPI_clock(SPI_clock), .Tx_load_strobe(Tx_load_strobe),.spi_clock(CBCLK));
+
+
 
 
 ///////////////////////////////////////////////////////////////

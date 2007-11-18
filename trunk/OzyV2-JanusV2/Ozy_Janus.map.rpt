@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Fri Sep 28 22:05:42 2007
+Mon Oct 29 20:56:47 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -18,42 +18,43 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
  10. State Machine - |Ozy_Janus|CCstate
  11. State Machine - |Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state
  12. State Machine - |Ozy_Janus|I2SAudioOut:I2SAO|TLV_state
- 13. Registers Removed During Synthesis
- 14. General Register Statistics
- 15. Multiplexer Restructuring Statistics (No Restructuring Performed)
- 16. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 17. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated
- 18. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|altsyncram_vpu:fifo_ram
- 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram3
- 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|dffpipe_c09:rs_brp
- 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|dffpipe_c09:rs_bwp
- 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_ov7:rs_dgwp
- 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe3
- 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_pv7:ws_dgrp
- 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_pv7:ws_dgrp|dffpipe_k09:dffpipe6
- 26. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 27. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated
- 28. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|altsyncram_tpu:fifo_ram
- 29. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram2
- 30. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_kv7:rs_dgwp
- 31. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe4
- 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|dffpipe_b09:ws_brp
- 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|dffpipe_b09:ws_bwp
- 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_lv7:ws_dgrp
- 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe8
- 36. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs
- 37. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port0reg
- 38. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port1reg
- 39. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port2reg
- 40. Parameter Settings for User Entity Instance: clocks:clocks|lpm_counter:lpm_counter_component
- 41. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 42. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 43. Parameter Settings for User Entity Instance: debounce:de_PTT
- 44. Parameter Settings for User Entity Instance: debounce:de_dot
- 45. Parameter Settings for User Entity Instance: debounce:de_dash
- 46. dcfifo Parameter Settings by Entity Instance
- 47. Analysis & Synthesis Messages
- 48. Analysis & Synthesis Suppressed Messages
+ 13. State Machine - |Ozy_Janus|SPI:Alex_SPI_Tx|spi_state
+ 14. Registers Removed During Synthesis
+ 15. General Register Statistics
+ 16. Multiplexer Restructuring Statistics (No Restructuring Performed)
+ 17. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+ 18. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated
+ 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|altsyncram_vpu:fifo_ram
+ 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram3
+ 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|dffpipe_c09:rs_brp
+ 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|dffpipe_c09:rs_bwp
+ 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_ov7:rs_dgwp
+ 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe3
+ 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_pv7:ws_dgrp
+ 26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_pv7:ws_dgrp|dffpipe_k09:dffpipe6
+ 27. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 28. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated
+ 29. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|altsyncram_tpu:fifo_ram
+ 30. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram2
+ 31. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_kv7:rs_dgwp
+ 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe4
+ 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|dffpipe_b09:ws_brp
+ 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|dffpipe_b09:ws_bwp
+ 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_lv7:ws_dgrp
+ 36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe8
+ 37. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs
+ 38. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port0reg
+ 39. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port1reg
+ 40. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port2reg
+ 41. Parameter Settings for User Entity Instance: clocks:clocks|lpm_counter:lpm_counter_component
+ 42. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+ 43. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 44. Parameter Settings for User Entity Instance: debounce:de_PTT
+ 45. Parameter Settings for User Entity Instance: debounce:de_dot
+ 46. Parameter Settings for User Entity Instance: debounce:de_dash
+ 47. dcfifo Parameter Settings by Entity Instance
+ 48. Analysis & Synthesis Messages
+ 49. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -79,16 +80,16 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Sep 28 22:05:42 2007   ;
+; Analysis & Synthesis Status        ; Successful - Mon Oct 29 20:56:47 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 811                                     ;
-;     Total combinational functions  ; 778                                     ;
-;     Dedicated logic registers      ; 811                                     ;
-; Total registers                    ; 811                                     ;
-; Total pins                         ; 78                                      ;
+; Total logic elements               ; 862                                     ;
+;     Total combinational functions  ; 862                                     ;
+;     Dedicated logic registers      ; 833                                     ;
+; Total registers                    ; 833                                     ;
+; Total pins                         ; 81                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304                                  ;
 ; Embedded Multiplier 9-bit elements ; 0                                       ;
@@ -163,6 +164,8 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                         ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
+; SPI.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/SPI.v                                   ;
+; LPF_select.v                     ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/LPF_select.v                            ;
 ; RegisterX.v                      ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/RegisterX.v                             ;
 ; SPI_REGS.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/SPI_REGS.v                              ;
 ; gpio_control.v                   ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/gpio_control.v                          ;
@@ -226,28 +229,28 @@ applicable agreement for further details.
 +---------------------------------------------+--------------+
 ; Resource                                    ; Usage        ;
 +---------------------------------------------+--------------+
-; Estimated Total logic elements              ; 811          ;
+; Estimated Total logic elements              ; 862          ;
 ;                                             ;              ;
-; Total combinational functions               ; 778          ;
+; Total combinational functions               ; 862          ;
 ; Logic element usage by number of LUT inputs ;              ;
-;     -- 4 input functions                    ; 342          ;
-;     -- 3 input functions                    ; 185          ;
-;     -- <=2 input functions                  ; 251          ;
+;     -- 4 input functions                    ; 384          ;
+;     -- 3 input functions                    ; 218          ;
+;     -- <=2 input functions                  ; 260          ;
 ;                                             ;              ;
 ; Logic elements by mode                      ;              ;
-;     -- normal mode                          ; 550          ;
-;     -- arithmetic mode                      ; 228          ;
+;     -- normal mode                          ; 631          ;
+;     -- arithmetic mode                      ; 231          ;
 ;                                             ;              ;
-; Total registers                             ; 811          ;
-;     -- Dedicated logic registers            ; 811          ;
+; Total registers                             ; 833          ;
+;     -- Dedicated logic registers            ; 833          ;
 ;     -- I/O registers                        ; 0            ;
 ;                                             ;              ;
-; I/O pins                                    ; 78           ;
+; I/O pins                                    ; 81           ;
 ; Total memory bits                           ; 98304        ;
-; Maximum fan-out node                        ; CLK_MCLK~248 ;
+; Maximum fan-out node                        ; CLK_MCLK~259 ;
 ; Maximum fan-out                             ; 203          ;
-; Total fan-out                               ; 5517         ;
-; Average fan-out                             ; 3.25         ;
+; Total fan-out                               ; 5864         ;
+; Average fan-out                             ; 3.24         ;
 +---------------------------------------------+--------------+
 
 
@@ -256,9 +259,10 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-; |Ozy_Janus                                    ; 778 (457)         ; 811 (397)    ; 98304       ; 0            ; 0       ; 0         ; 78   ; 0            ; |Ozy_Janus                                                                                                                        ;
+; |Ozy_Janus                                    ; 862 (449)         ; 833 (397)    ; 98304       ; 0            ; 0       ; 0         ; 81   ; 0            ; |Ozy_Janus                                                                                                                        ;
 ;    |I2SAudioOut:I2SAO|                        ; 45 (45)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ;
 ;    |I2SAudioOut:I2SIQO|                       ; 26 (26)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SIQO                                                                                                     ;
+;    |LPF_select:Alex_LPF_select|               ; 66 (66)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|LPF_select:Alex_LPF_select                                                                                             ;
 ;    |Rx_fifo:Rx_fifo|                          ; 85 (0)            ; 132 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|               ; 85 (0)            ; 132 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
 ;          |dcfifo_6ae1:auto_generated|         ; 85 (33)           ; 132 (28)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated                                                     ;
@@ -274,6 +278,7 @@ applicable agreement for further details.
 ;                |altsyncram_aec1:altsyncram3|  ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram3 ;
 ;             |dffpipe_c09:rs_brp|              ; 0 (0)             ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|dffpipe_c09:rs_brp                                  ;
 ;             |dffpipe_c09:rs_bwp|              ; 0 (0)             ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|dffpipe_c09:rs_bwp                                  ;
+;    |SPI:Alex_SPI_Tx|                          ; 26 (26)           ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|SPI:Alex_SPI_Tx                                                                                                        ;
 ;    |Tx_fifo:Tx_fifo|                          ; 49 (0)            ; 85 (0)       ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|               ; 49 (0)            ; 85 (0)       ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component                                                                                ;
 ;          |dcfifo_ege1:auto_generated|         ; 49 (1)            ; 85 (13)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated                                                     ;
@@ -380,98 +385,123 @@ Encoding Type:  One-Hot
 +---------------+---------------+---------------+---------------+---------------+---------------+
 
 
-+------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                         ;
-+-------------------------------------------------------------------+----------------------------------------+
-; Register name                                                     ; Reason for Removal                     ;
-+-------------------------------------------------------------------+----------------------------------------+
-; Tx_control_0[7]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_0[6]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_0[5]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_0[4]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_0[3]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_0[2]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_1[7]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_1[6]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_1[5]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_1[4]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_1[3]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_1[2]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_1[1]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_1[0]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_2[7]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_2[6]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_2[5]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_2[4]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_2[3]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_2[2]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_2[1]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_2[0]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_4[7]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_4[6]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_4[5]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_4[4]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_4[3]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_4[2]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_4[1]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_control_4[0]                                                   ; Stuck at GND due to stuck port data_in ;
-; Tx_fifo/dcfifo_component/auto_generated/p0addr                    ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11] ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10] ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[9]  ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[8]  ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[7]  ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[6]  ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[5]  ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[4]  ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[3]  ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[2]  ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[1]  ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[0]  ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/parity_ff       ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[12] ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11] ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10] ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[9]  ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[8]  ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[7]  ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[6]  ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[5]  ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[4]  ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[3]  ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[2]  ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[1]  ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[0]  ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/parity_ff       ; Lost fanout                            ;
-; clock_s[3]                                                        ; Stuck at GND due to stuck port data_in ;
-; Tx_fifo/dcfifo_component/auto_generated/ws_bwp/dffe7a[11]         ; Lost fanout                            ;
-; Tx_fifo/dcfifo_component/auto_generated/ws_brp/dffe7a[11]         ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/rs_bwp/dffe5a[12]         ; Lost fanout                            ;
-; Rx_fifo/dcfifo_component/auto_generated/rs_brp/dffe5a[12]         ; Lost fanout                            ;
-; FIFO_ADR[0]~reg0                                                  ; Stuck at GND due to stuck port data_in ;
-; state_sync~10                                                     ; Lost fanout                            ;
-; state_sync~11                                                     ; Lost fanout                            ;
-; state_sync~13                                                     ; Lost fanout                            ;
-; state_PWM~10                                                      ; Lost fanout                            ;
-; state_PWM~11                                                      ; Lost fanout                            ;
-; state_PWM~12                                                      ; Lost fanout                            ;
-; state_PWM~13                                                      ; Lost fanout                            ;
-; state_PWM~14                                                      ; Lost fanout                            ;
-; I2SIQO/TLV_state~7                                                ; Lost fanout                            ;
-; I2SIQO/TLV_state~8                                                ; Lost fanout                            ;
-; I2SAO/TLV_state~7                                                 ; Lost fanout                            ;
-; I2SAO/TLV_state~8                                                 ; Lost fanout                            ;
-; I2SIQO/TLV_state.100                                              ; Lost fanout                            ;
-; I2SIQO/TLV_state.010                                              ; Lost fanout                            ;
-; I2SIQO/TLV_state.001                                              ; Lost fanout                            ;
-; I2SIQO/bit_count[3]                                               ; Merged with I2SAO/bit_count[3]         ;
-; I2SIQO/bit_count[2]                                               ; Merged with I2SAO/bit_count[2]         ;
-; I2SIQO/bit_count[1]                                               ; Merged with I2SAO/bit_count[1]         ;
-; I2SIQO/bit_count[0]                                               ; Merged with I2SAO/bit_count[0]         ;
-; I2SIQO/TLV_state.000                                              ; Merged with I2SAO/TLV_state.000        ;
-; I2SIQO/TLV_state.011                                              ; Merged with I2SAO/TLV_state.011        ;
-; Total Number of Removed Registers = 85                            ;                                        ;
-+-------------------------------------------------------------------+----------------------------------------+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------+
+; State Machine - |Ozy_Janus|SPI:Alex_SPI_Tx|spi_state                                                          ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; Name          ; spi_state.001 ; spi_state.101 ; spi_state.010 ; spi_state.011 ; spi_state.100 ; spi_state.000 ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; spi_state.000 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ;
+; spi_state.100 ; 0             ; 0             ; 0             ; 0             ; 1             ; 1             ;
+; spi_state.011 ; 0             ; 0             ; 0             ; 1             ; 0             ; 1             ;
+; spi_state.010 ; 0             ; 0             ; 1             ; 0             ; 0             ; 1             ;
+; spi_state.101 ; 0             ; 1             ; 0             ; 0             ; 0             ; 1             ;
+; spi_state.001 ; 1             ; 0             ; 0             ; 0             ; 0             ; 1             ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                 ;
++-------------------------------------------------------------------+------------------------------------------------+
+; Register name                                                     ; Reason for Removal                             ;
++-------------------------------------------------------------------+------------------------------------------------+
+; Tx_control_0[7]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_0[6]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_0[5]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_0[4]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_0[3]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_0[2]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_1[7]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_1[6]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_1[5]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_1[4]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_1[3]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_1[2]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_1[1]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_1[0]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_2[7]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_2[6]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_2[5]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_2[4]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_2[3]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_2[2]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_2[1]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_2[0]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_4[7]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_4[6]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_4[5]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_4[4]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_4[3]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_4[2]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_4[1]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Tx_control_4[0]                                                   ; Stuck at GND due to stuck port data_in         ;
+; Alex_SPI_Tx/previous_Alex_data[15]                                ; Stuck at GND due to stuck port data_in         ;
+; Alex_SPI_Tx/previous_Alex_data[14]                                ; Stuck at GND due to stuck port data_in         ;
+; Alex_SPI_Tx/previous_Alex_data[13]                                ; Stuck at GND due to stuck port data_in         ;
+; Alex_SPI_Tx/previous_Alex_data[6]                                 ; Stuck at GND due to stuck port data_in         ;
+; Alex_SPI_Tx/previous_Alex_data[5]                                 ; Stuck at GND due to stuck port data_in         ;
+; Tx_fifo/dcfifo_component/auto_generated/p0addr                    ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11] ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10] ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[9]  ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[8]  ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[7]  ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[6]  ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[5]  ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[4]  ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[3]  ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[2]  ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[1]  ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[0]  ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/parity_ff       ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[12] ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11] ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10] ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[9]  ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[8]  ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[7]  ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[6]  ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[5]  ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[4]  ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[3]  ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[2]  ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[1]  ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[0]  ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/wrptr_g1p/parity_ff       ; Lost fanout                                    ;
+; clock_s[3]                                                        ; Stuck at GND due to stuck port data_in         ;
+; Tx_fifo/dcfifo_component/auto_generated/ws_bwp/dffe7a[11]         ; Lost fanout                                    ;
+; Tx_fifo/dcfifo_component/auto_generated/ws_brp/dffe7a[11]         ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/rs_bwp/dffe5a[12]         ; Lost fanout                                    ;
+; Rx_fifo/dcfifo_component/auto_generated/rs_brp/dffe5a[12]         ; Lost fanout                                    ;
+; Alex_SPI_Tx/previous_Alex_data[7]                                 ; Merged with Alex_SPI_Tx/previous_Alex_data[12] ;
+; Alex_SPI_Tx/previous_Alex_data[3]                                 ; Merged with Alex_SPI_Tx/previous_Alex_data[4]  ;
+; FIFO_ADR[0]~reg0                                                  ; Stuck at GND due to stuck port data_in         ;
+; state_sync~10                                                     ; Lost fanout                                    ;
+; state_sync~11                                                     ; Lost fanout                                    ;
+; state_sync~13                                                     ; Lost fanout                                    ;
+; state_PWM~10                                                      ; Lost fanout                                    ;
+; state_PWM~11                                                      ; Lost fanout                                    ;
+; state_PWM~12                                                      ; Lost fanout                                    ;
+; state_PWM~13                                                      ; Lost fanout                                    ;
+; state_PWM~14                                                      ; Lost fanout                                    ;
+; I2SIQO/TLV_state~7                                                ; Lost fanout                                    ;
+; I2SIQO/TLV_state~8                                                ; Lost fanout                                    ;
+; I2SAO/TLV_state~7                                                 ; Lost fanout                                    ;
+; I2SAO/TLV_state~8                                                 ; Lost fanout                                    ;
+; Alex_SPI_Tx/spi_state~8                                           ; Lost fanout                                    ;
+; Alex_SPI_Tx/spi_state~9                                           ; Lost fanout                                    ;
+; Alex_SPI_Tx/spi_state~10                                          ; Lost fanout                                    ;
+; I2SIQO/TLV_state.100                                              ; Lost fanout                                    ;
+; I2SIQO/TLV_state.010                                              ; Lost fanout                                    ;
+; I2SIQO/TLV_state.001                                              ; Lost fanout                                    ;
+; I2SIQO/bit_count[3]                                               ; Merged with I2SAO/bit_count[3]                 ;
+; I2SIQO/bit_count[2]                                               ; Merged with I2SAO/bit_count[2]                 ;
+; I2SIQO/bit_count[1]                                               ; Merged with I2SAO/bit_count[1]                 ;
+; I2SIQO/bit_count[0]                                               ; Merged with I2SAO/bit_count[0]                 ;
+; I2SIQO/TLV_state.000                                              ; Merged with I2SAO/TLV_state.000                ;
+; I2SIQO/TLV_state.011                                              ; Merged with I2SAO/TLV_state.011                ;
+; Total Number of Removed Registers = 95                            ;                                                ;
++-------------------------------------------------------------------+------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -479,12 +509,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 811   ;
-; Number of registers using Synchronous Clear  ; 86    ;
+; Total registers                              ; 833   ;
+; Number of registers using Synchronous Clear  ; 90    ;
 ; Number of registers using Synchronous Load   ; 8     ;
 ; Number of registers using Asynchronous Clear ; 37    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 396   ;
+; Number of registers using Clock Enable       ; 409   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -494,18 +524,20 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[2]                                         ;
-; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|CCcount[0]                                              ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[0]                                         ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Ozy_Janus|SPI:Alex_SPI_Tx|data_count[1]                           ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|CCcount[4]                                              ;
 ; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Ozy_Janus|FIFO_ADR[1]~reg0                                        ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|data[14]                             ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|data[8]                               ;
-; 128:1              ; 4 bits    ; 340 LEs       ; 32 LEs               ; 308 LEs                ; Yes        ; |Ozy_Janus|AD_state[2]                                             ;
-; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|bit_count[2]                         ;
-; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|bit_count[2]                          ;
-; 66:1               ; 7 bits    ; 308 LEs       ; 21 LEs               ; 287 LEs                ; Yes        ; |Ozy_Janus|gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[2] ;
-; 128:1              ; 5 bits    ; 425 LEs       ; 10 LEs               ; 415 LEs                ; Yes        ; |Ozy_Janus|register[5]                                             ;
-; 130:1              ; 7 bits    ; 602 LEs       ; 28 LEs               ; 574 LEs                ; Yes        ; |Ozy_Janus|register[8]                                             ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|data[13]                             ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|data[9]                               ;
+; 128:1              ; 4 bits    ; 340 LEs       ; 32 LEs               ; 308 LEs                ; Yes        ; |Ozy_Janus|AD_state[5]                                             ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|bit_count[3]                         ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|bit_count[3]                          ;
+; 66:1               ; 7 bits    ; 308 LEs       ; 21 LEs               ; 287 LEs                ; Yes        ; |Ozy_Janus|gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[6] ;
+; 128:1              ; 5 bits    ; 425 LEs       ; 10 LEs               ; 415 LEs                ; Yes        ; |Ozy_Janus|register[4]                                             ;
+; 130:1              ; 7 bits    ; 602 LEs       ; 28 LEs               ; 574 LEs                ; Yes        ; |Ozy_Janus|register[14]                                            ;
 ; 130:1              ; 2 bits    ; 172 LEs       ; 6 LEs                ; 166 LEs                ; Yes        ; |Ozy_Janus|register[1]                                             ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Ozy_Janus|LPF_select:Alex_LPF_select|LPF[4]                       ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 
 
@@ -889,8 +921,12 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Fri Sep 28 22:05:12 2007
+    Info: Processing started: Mon Oct 29 20:55:50 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
+Info: Found 1 design units, including 1 entities, in source file SPI.v
+    Info: Found entity 1: SPI
+Info: Found 1 design units, including 1 entities, in source file LPF_select.v
+    Info: Found entity 1: LPF_select
 Info: Found 1 design units, including 1 entities, in source file RegisterX.v
     Info: Found entity 1: RegisterX
 Info: Found 1 design units, including 1 entities, in source file SPI_REGS.v
@@ -911,9 +947,6 @@ Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
 Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
-Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(46): conditional expression evaluates to a constant
-Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(47): conditional expression evaluates to a constant
-Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(48): conditional expression evaluates to a constant
 Info: Elaborating entity "SPI_REGS" for hierarchy "gpio_control:gpio_controlSDR|SPI_REGS:spi_regs"
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port0reg"
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port1reg"
@@ -1006,45 +1039,19 @@ Info: Elaborating entity "alt_synch_pipe_lv7" for hierarchy "Tx_fifo:Tx_fifo|dcf
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_g09.tdf
     Info: Found entity 1: dffpipe_g09
 Info: Elaborating entity "dffpipe_g09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe8"
+Info: Elaborating entity "LPF_select" for hierarchy "LPF_select:Alex_LPF_select"
+Info: Elaborating entity "SPI" for hierarchy "SPI:Alex_SPI_Tx"
 Info: Elaborating entity "I2SAudioOut" for hierarchy "I2SAudioOut:I2SAO"
 Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
-Warning: Reduced register "Tx_control_0[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_0[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_0[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_0[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_0[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_0[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "clock_s[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[7]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[12]"
+    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[3]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[4]"
 Info: State machine "|Ozy_Janus|state_sync" contains 5 states
 Info: State machine "|Ozy_Janus|state_PWM" contains 6 states
 Info: State machine "|Ozy_Janus|CCstate" contains 3 states
 Info: State machine "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state" contains 5 states
 Info: State machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state" contains 5 states
+Info: State machine "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state" contains 6 states
 Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|state_sync"
 Info: Encoding result for state machine "|Ozy_Janus|state_sync"
     Info: Completed encoding using 5 state bits
@@ -1108,6 +1115,21 @@ Info: Encoding result for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.010" uses code string "01010"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.001" uses code string "10010"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.100" uses code string "00011"
+Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state"
+Info: Encoding result for state machine "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state"
+    Info: Completed encoding using 6 state bits
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.001"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.101"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.010"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.011"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.100"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.000"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.000" uses code string "000000"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.100" uses code string "000011"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.011" uses code string "000101"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.010" uses code string "001001"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.101" uses code string "010001"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.001" uses code string "100001"
 Info: Duplicate registers merged to single register
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[3]" merged to single register "I2SAudioOut:I2SAO|bit_count[3]"
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[2]" merged to single register "I2SAudioOut:I2SAO|bit_count[2]"
@@ -1115,22 +1137,6 @@ Info: Duplicate registers merged to single register
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[0]" merged to single register "I2SAudioOut:I2SAO|bit_count[0]"
     Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.000" merged to single register "I2SAudioOut:I2SAO|TLV_state.000"
     Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.011" merged to single register "I2SAudioOut:I2SAO|TLV_state.011"
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[0]~23 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[1]~22 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[2]~21 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[3]~20 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[4]~19 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[5]~18 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[6]~17 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[7]~16 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[8]~15 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[9]~14 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[10]~13 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[11]~12 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[12]~11 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[13]~10 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[14]~9 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[15]~8 that it feeds
 Warning: TRI or OPNDRN buffers permanently enabled
     Warning: Node "GPIO[0]~24"
     Warning: Node "GPIO[1]~25"
@@ -1153,7 +1159,7 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "FIFO_ADR[0]" stuck at GND
     Warning: Pin "DEBUG_LED1" stuck at VCC
     Warning: Pin "GPIO_nIOE" stuck at GND
-Info: 47 registers lost all their fanouts during netlist optimizations. The first 47 are displayed below.
+Info: 50 registers lost all their fanouts during netlist optimizations. The first 50 are displayed below.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/p0addr" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
@@ -1198,21 +1204,24 @@ Info: 47 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state~8" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~7" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~9" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~10" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.100" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.010" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1325 device resources after synthesis - the final resource count might be different
+Info: Implemented 1424 device resources after synthesis - the final resource count might be different
     Info: Implemented 14 input pins
-    Info: Implemented 23 output pins
+    Info: Implemented 26 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1215 logic cells
+    Info: Implemented 1311 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 75 warnings
-    Info: Allocated 136 megabytes of memory during processing
-    Info: Processing ended: Fri Sep 28 22:05:42 2007
-    Info: Elapsed time: 00:00:30
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 24 warnings
+    Info: Allocated 137 megabytes of memory during processing
+    Info: Processing ended: Mon Oct 29 20:56:47 2007
+    Info: Elapsed time: 00:00:57
 
 
 +------------------------------------------+
