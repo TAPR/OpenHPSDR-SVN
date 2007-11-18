@@ -1,8 +1,12 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Fri Sep 28 22:05:12 2007
+    Info: Processing started: Mon Oct 29 20:55:50 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
+Info: Found 1 design units, including 1 entities, in source file SPI.v
+    Info: Found entity 1: SPI
+Info: Found 1 design units, including 1 entities, in source file LPF_select.v
+    Info: Found entity 1: LPF_select
 Info: Found 1 design units, including 1 entities, in source file RegisterX.v
     Info: Found entity 1: RegisterX
 Info: Found 1 design units, including 1 entities, in source file SPI_REGS.v
@@ -23,9 +27,6 @@ Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
 Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
-Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(46): conditional expression evaluates to a constant
-Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(47): conditional expression evaluates to a constant
-Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(48): conditional expression evaluates to a constant
 Info: Elaborating entity "SPI_REGS" for hierarchy "gpio_control:gpio_controlSDR|SPI_REGS:spi_regs"
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port0reg"
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port1reg"
@@ -118,45 +119,19 @@ Info: Elaborating entity "alt_synch_pipe_lv7" for hierarchy "Tx_fifo:Tx_fifo|dcf
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_g09.tdf
     Info: Found entity 1: dffpipe_g09
 Info: Elaborating entity "dffpipe_g09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe8"
+Info: Elaborating entity "LPF_select" for hierarchy "LPF_select:Alex_LPF_select"
+Info: Elaborating entity "SPI" for hierarchy "SPI:Alex_SPI_Tx"
 Info: Elaborating entity "I2SAudioOut" for hierarchy "I2SAudioOut:I2SAO"
 Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
-Warning: Reduced register "Tx_control_0[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_0[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_0[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_0[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_0[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_0[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_1[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_2[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[7]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[6]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[5]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[4]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[2]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[1]" with stuck data_in port to stuck value GND
-Warning: Reduced register "Tx_control_4[0]" with stuck data_in port to stuck value GND
-Warning: Reduced register "clock_s[3]" with stuck data_in port to stuck value GND
-Warning: Reduced register "FIFO_ADR[0]~reg0" with stuck data_in port to stuck value GND
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[7]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[12]"
+    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[3]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[4]"
 Info: State machine "|Ozy_Janus|state_sync" contains 5 states
 Info: State machine "|Ozy_Janus|state_PWM" contains 6 states
 Info: State machine "|Ozy_Janus|CCstate" contains 3 states
 Info: State machine "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state" contains 5 states
 Info: State machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state" contains 5 states
+Info: State machine "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state" contains 6 states
 Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|state_sync"
 Info: Encoding result for state machine "|Ozy_Janus|state_sync"
     Info: Completed encoding using 5 state bits
@@ -220,6 +195,21 @@ Info: Encoding result for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.010" uses code string "01010"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.001" uses code string "10010"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.100" uses code string "00011"
+Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state"
+Info: Encoding result for state machine "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state"
+    Info: Completed encoding using 6 state bits
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.001"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.101"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.010"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.011"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.100"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.000"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.000" uses code string "000000"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.100" uses code string "000011"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.011" uses code string "000101"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.010" uses code string "001001"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.101" uses code string "010001"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.001" uses code string "100001"
 Info: Duplicate registers merged to single register
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[3]" merged to single register "I2SAudioOut:I2SAO|bit_count[3]"
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[2]" merged to single register "I2SAudioOut:I2SAO|bit_count[2]"
@@ -227,22 +217,6 @@ Info: Duplicate registers merged to single register
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[0]" merged to single register "I2SAudioOut:I2SAO|bit_count[0]"
     Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.000" merged to single register "I2SAudioOut:I2SAO|TLV_state.000"
     Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.011" merged to single register "I2SAudioOut:I2SAO|TLV_state.011"
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[0]~23 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[1]~22 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[2]~21 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[3]~20 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[4]~19 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[5]~18 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[6]~17 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[7]~16 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[8]~15 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[9]~14 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[10]~13 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[11]~12 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[12]~11 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[13]~10 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[14]~9 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[15]~8 that it feeds
 Warning: TRI or OPNDRN buffers permanently enabled
     Warning: Node "GPIO[0]~24"
     Warning: Node "GPIO[1]~25"
@@ -265,7 +239,7 @@ Warning: Output pins are stuck at VCC or GND
     Warning: Pin "FIFO_ADR[0]" stuck at GND
     Warning: Pin "DEBUG_LED1" stuck at VCC
     Warning: Pin "GPIO_nIOE" stuck at GND
-Info: 47 registers lost all their fanouts during netlist optimizations. The first 47 are displayed below.
+Info: 50 registers lost all their fanouts during netlist optimizations. The first 50 are displayed below.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/p0addr" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
@@ -310,18 +284,21 @@ Info: 47 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state~8" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~7" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~9" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~10" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.100" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.010" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1325 device resources after synthesis - the final resource count might be different
+Info: Implemented 1424 device resources after synthesis - the final resource count might be different
     Info: Implemented 14 input pins
-    Info: Implemented 23 output pins
+    Info: Implemented 26 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1215 logic cells
+    Info: Implemented 1311 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 75 warnings
-    Info: Allocated 136 megabytes of memory during processing
-    Info: Processing ended: Fri Sep 28 22:05:42 2007
-    Info: Elapsed time: 00:00:30
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 24 warnings
+    Info: Allocated 137 megabytes of memory during processing
+    Info: Processing ended: Mon Oct 29 20:56:47 2007
+    Info: Elapsed time: 00:00:57

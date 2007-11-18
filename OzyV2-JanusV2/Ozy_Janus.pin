@@ -237,13 +237,13 @@ GND                          : 177       : gnd    :                   :         
 VCCINT                       : 178       : power  :                   : 1.2V    :           :                
 RESERVED_INPUT               : 179       :        :                   :         : 2         :                
 CC                           : 180       : output : 3.3-V LVTTL       :         : 2         : Y              
-RESERVED_INPUT               : 181       :        :                   :         : 2         :                
-RESERVED_INPUT               : 182       :        :                   :         : 2         :                
+SPI_data                     : 181       : output : 3.3-V LVTTL       :         : 2         : Y              
+SPI_clock                    : 182       : output : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 183       : power  :                   : 3.3V    : 2         :                
 GND                          : 184       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 185       :        :                   :         : 2         :                
 GND                          : 186       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 187       :        :                   :         : 2         :                
+Tx_load_strobe               : 187       : output : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 188       :        :                   :         : 2         :                
 RESERVED_INPUT               : 189       :        :                   :         : 2         :                
 VCCINT                       : 190       : power  :                   : 1.2V    :           :                
