@@ -291,8 +291,8 @@ module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
         CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
 		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC, PCLK_12MHZ, 
-		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, SPI_data, SPI_clock, Tx_load_strobe
-		);
+		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, SPI_data, SPI_clock, Tx_load_strobe,
+		Rx_load_strobe);
 		
 
 
@@ -313,15 +313,15 @@ output SLRD;
 output SLOE;
 output PKEND;
 output [1:0] FIFO_ADR;
-output DEBUG_LED0;               // LEDs on OZY board
+output DEBUG_LED0;              // LEDs on OZY board
 output DEBUG_LED1;
 output DEBUG_LED2;
 output DEBUG_LED3;
 output CBCLK, CLRCLK;           // Clocks to TLV320AIC23B
 output CDIN;                    // Rx data to TLV320AIC23B
 output LROUT;					// Left  and Right audio data in I2S format to Atlas
-input  CDOUT;                    // A/D data from TLV320AIC23B
-input  PTT_in;                   // PTT active high
+input  CDOUT;                   // A/D data from TLV320AIC23B
+input  PTT_in;                  // PTT active high
 output DFS0,DFS1;               // speed control for AK5394A
 output AK_reset;                // reset for AK5394A
 reg    DFS0;					// used to set AK5394A speed
@@ -332,6 +332,7 @@ input  CDOUT_P;					// Mic data from Penelope
 output SPI_data;				// SPI data to Alex
 output SPI_clock;				// SPI clock to Alex
 output Tx_load_strobe;			// SPI Tx data load strobe to Alex
+output Rx_load_strobe;			// SPI Rx data load strobe to Alex
 
 // interface lines for GPIO control 
 input 				FX2_CLK;		// master system clock from FX2 
@@ -1276,8 +1277,10 @@ end
 //////////////////////////////////////////////////////////////
 
 wire [6:0]LPF;
+wire [5:0]select_HPF;
 
-LPF_select Alex_LPF_select(.frequency(frequency), .LPF(LPF));
+//LPF_select Alex_LPF_select(.frequency(frequency), .LPF(LPF));
+HPF_select Alex_HPF_select(.frequency(frequency), .HPF(select_HPF));
 
 //////////////////////////////////////////////////////////////
 //
@@ -1285,30 +1288,64 @@ LPF_select Alex_LPF_select(.frequency(frequency), .LPF(LPF));
 //
 //////////////////////////////////////////////////////////////
 
-// Assign dummy data where values not currently set
+// Assign dummy Tx data where values not currently set
 
-wire yellow_led = 1'b1; 	
+wire Tx_yellow_led = 1'b1; 	
 wire ANT1 = 1'b1;			// select antenna 1 for now
 wire ANT2 = 1'b0;
 wire ANT3 = 1'b0;
 wire red_led;
 wire TR_relay;
 wire [15:0]Alex_Tx_data;
+wire [15:0]Alex_Rx_data;
+
+// Assign dummy Rx data where values are not currenly set
+
+wire Rx_yellow_led = 1'b1;
+wire _6m_preamp = 1'b0;
+wire _10dB_atten = 1'b0;
+wire _20dB_atten = 1'b0;
+wire Transverter = 1'b0;
+wire Rx_2_in = 1'b0;
+wire Rx_1_in = 1'b0;
+wire Rx_1_out = 1'b0;
 
 
 wire SPI_data;
 wire SPI_clock;
 wire Tx_load_strobe;
+wire Rx_load_strobe;
 
-// define and concatinate the data to send to Alex via SPI
+// define and concatinate the Tx data to send to Alex via SPI
 
-assign red_led = PTT_out; 		// turn red led on when we Tx
+assign Tx_red_led = PTT_out; 	// turn red led on when we Tx
 assign TR_relay = PTT_out;		// turn on TR relay when PTT active
 
-assign Alex_Tx_data = {3'b000,yellow_led,LPF[6:3],ANT1,ANT2,ANT3,TR_relay,red_led,LPF[2:0]};
+assign Alex_Tx_data = {3'b000,Tx_yellow_led,LPF[6:3],ANT1,ANT2,ANT3,TR_relay,Tx_red_led,LPF[2:0]};
 
-SPI   Alex_SPI_Tx(.Alex_data(Alex_Tx_data), .SPI_data(SPI_data),
-				  .SPI_clock(SPI_clock), .Tx_load_strobe(Tx_load_strobe),.spi_clock(CBCLK));
+// define and concatinate the Rx data to send to Alex via SPI
+
+assign Rx_red_led = PTT_out;	// turn red led on when we Tx
+
+// if 6m preamp selected disconnect all  filters and attenuators
+wire [5:0]HPF;
+
+assign HPF = _6m_preamp ? 6'd0 : select_HPF; 
+assign _10_atten = _6m_preamp ? 1'b0 : _10_atten; // don't select attenuators if 6m preamp on
+assign _20_atten = _6m_preamp ? 1'b0 : _20_atten; 
+
+assign Alex_Rx_data = {Rx_red_led,HPF[5:3],_6m_preamp,HPF[2:0],_10dB_atten,_20dB_atten,Transverter,
+					   Rx_2_in,Rx_1_in,Rx_1_out,1'b0,Rx_yellow_led};
+						
+// concatinate Tx and Rx data and send to SPI interface
+
+wire [31:0]Alex_data;
+
+assign Alex_data = {Alex_Tx_data,Alex_Rx_data};
+
+SPI   Alex_SPI_Tx(.Alex_data(Alex_data), .SPI_data(SPI_data),
+				  .SPI_clock(SPI_clock), .Tx_load_strobe(Tx_load_strobe),
+				  .Rx_load_strobe(Rx_load_strobe),.spi_clock(CBCLK));
 
 
 
