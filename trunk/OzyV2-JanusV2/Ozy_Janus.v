@@ -1279,7 +1279,7 @@ end
 wire [6:0]LPF;
 wire [5:0]select_HPF;
 
-//LPF_select Alex_LPF_select(.frequency(frequency), .LPF(LPF));
+LPF_select Alex_LPF_select(.frequency(frequency), .LPF(LPF));
 HPF_select Alex_HPF_select(.frequency(frequency), .HPF(select_HPF));
 
 //////////////////////////////////////////////////////////////
@@ -1321,7 +1321,8 @@ wire Rx_load_strobe;
 assign Tx_red_led = PTT_out; 	// turn red led on when we Tx
 assign TR_relay = PTT_out;		// turn on TR relay when PTT active
 
-assign Alex_Tx_data = {3'b000,Tx_yellow_led,LPF[6:3],ANT1,ANT2,ANT3,TR_relay,Tx_red_led,LPF[2:0]};
+//assign Alex_Tx_data = {3'b000,Tx_yellow_led,LPF[6:3],ANT1,ANT2,ANT3,TR_relay,Tx_red_led,LPF[2:0]};
+assign Alex_Tx_data = {LPF[2:0],Tx_red_led,TR_relay,ANT3,ANT2,ANT1,LPF[6:3],Tx_yellow_led,3'b000};
 
 // define and concatinate the Rx data to send to Alex via SPI
 
@@ -1341,7 +1342,9 @@ assign Alex_Rx_data = {Rx_red_led,HPF[5:3],_6m_preamp,HPF[2:0],_10dB_atten,_20dB
 
 wire [31:0]Alex_data;
 
-assign Alex_data = {Alex_Tx_data,Alex_Rx_data};
+assign Alex_data[31:0] = {Alex_Tx_data[15:0],Alex_Rx_data[15:0]};
+
+
 
 SPI   Alex_SPI_Tx(.Alex_data(Alex_data), .SPI_data(SPI_data),
 				  .SPI_clock(SPI_clock), .Tx_load_strobe(Tx_load_strobe),

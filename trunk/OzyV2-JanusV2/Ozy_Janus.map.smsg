@@ -1,11 +1,12 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Mon Nov 19 13:38:48 2007
+    Info: Processing started: Mon Nov 19 22:20:12 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file SPI.v
     Info: Found entity 1: SPI
-Warning: Can't analyze file -- file C:/HPSDR/trunk/OzyV2-JanusV2/LPF_select.v is missing
+Info: Found 1 design units, including 1 entities, in source file LPF_select.v
+    Info: Found entity 1: LPF_select
 Info: Found 1 design units, including 1 entities, in source file RegisterX.v
     Info: Found entity 1: RegisterX
 Info: Found 1 design units, including 1 entities, in source file SPI_REGS.v
@@ -27,20 +28,10 @@ Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
 Info: Found 1 design units, including 1 entities, in source file HPF_select.v
     Info: Found entity 1: HPF_select
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Warning (10858): Verilog HDL warning at Ozy_Janus.v(1279): object LPF used but never assigned
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1334): inferred latch for "_10_atten"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1335): inferred latch for "_20_atten"
-Warning (10030): Net "LPF[6]" at Ozy_Janus.v(1279) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "LPF[5]" at Ozy_Janus.v(1279) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "LPF[4]" at Ozy_Janus.v(1279) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "LPF[3]" at Ozy_Janus.v(1279) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "LPF[2]" at Ozy_Janus.v(1279) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "LPF[1]" at Ozy_Janus.v(1279) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "LPF[0]" at Ozy_Janus.v(1279) has no driver or initial value, using a default initial value 0
+Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(1300): object "Alex_Rx_data" assigned a value but never read
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1335): inferred latch for "_10_atten"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1336): inferred latch for "_20_atten"
 Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
-Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(46): conditional expression evaluates to a constant
-Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(47): conditional expression evaluates to a constant
-Warning (10037): Verilog HDL or VHDL warning at gpio_control.v(48): conditional expression evaluates to a constant
 Info: Elaborating entity "SPI_REGS" for hierarchy "gpio_control:gpio_controlSDR|SPI_REGS:spi_regs"
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port0reg"
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port1reg"
@@ -82,18 +73,18 @@ Info: Elaborating entity "altsyncram_aec1" for hierarchy "Rx_fifo:Rx_fifo|dcfifo
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_c09.tdf
     Info: Found entity 1: dffpipe_c09
 Info: Elaborating entity "dffpipe_c09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|dffpipe_c09:rs_brp"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_jv7.tdf
-    Info: Found entity 1: alt_synch_pipe_jv7
-Info: Elaborating entity "alt_synch_pipe_jv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_jv7:rs_dgwp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_d09.tdf
-    Info: Found entity 1: dffpipe_d09
-Info: Elaborating entity "dffpipe_d09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe6"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_kv7.tdf
-    Info: Found entity 1: alt_synch_pipe_kv7
-Info: Elaborating entity "alt_synch_pipe_kv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_kv7:ws_dgrp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_e09.tdf
-    Info: Found entity 1: dffpipe_e09
-Info: Elaborating entity "dffpipe_e09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_ov7.tdf
+    Info: Found entity 1: alt_synch_pipe_ov7
+Info: Elaborating entity "alt_synch_pipe_ov7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_ov7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_j09.tdf
+    Info: Found entity 1: dffpipe_j09
+Info: Elaborating entity "dffpipe_j09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_ov7:rs_dgwp|dffpipe_j09:dffpipe3"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_pv7.tdf
+    Info: Found entity 1: alt_synch_pipe_pv7
+Info: Elaborating entity "alt_synch_pipe_pv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_pv7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_k09.tdf
+    Info: Found entity 1: dffpipe_k09
+Info: Elaborating entity "dffpipe_k09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_6ae1:auto_generated|alt_synch_pipe_pv7:ws_dgrp|dffpipe_k09:dffpipe6"
 Info: Elaborating entity "Tx_fifo" for hierarchy "Tx_fifo:Tx_fifo"
 Info: Elaborating entity "dcfifo" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component"
 Info: Elaborated megafunction instantiation "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component"
@@ -118,12 +109,12 @@ Info: Elaborating entity "altsyncram_tpu" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:
 Info: Found 1 design units, including 1 entities, in source file db/altsyncram_8ec1.tdf
     Info: Found entity 1: altsyncram_8ec1
 Info: Elaborating entity "altsyncram_8ec1" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram2"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_iv7.tdf
-    Info: Found entity 1: alt_synch_pipe_iv7
-Info: Elaborating entity "alt_synch_pipe_iv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_iv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_kv7.tdf
+    Info: Found entity 1: alt_synch_pipe_kv7
+Info: Elaborating entity "alt_synch_pipe_kv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_kv7:rs_dgwp"
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_f09.tdf
     Info: Found entity 1: dffpipe_f09
-Info: Elaborating entity "dffpipe_f09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_f09:dffpipe4"
+Info: Elaborating entity "dffpipe_f09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe4"
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_b09.tdf
     Info: Found entity 1: dffpipe_b09
 Info: Elaborating entity "dffpipe_b09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|dffpipe_b09:ws_brp"
@@ -133,21 +124,18 @@ Info: Elaborating entity "alt_synch_pipe_lv7" for hierarchy "Tx_fifo:Tx_fifo|dcf
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_g09.tdf
     Info: Found entity 1: dffpipe_g09
 Info: Elaborating entity "dffpipe_g09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_ege1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe8"
+Info: Elaborating entity "LPF_select" for hierarchy "LPF_select:Alex_LPF_select"
 Info: Elaborating entity "HPF_select" for hierarchy "HPF_select:Alex_HPF_select"
 Info: Elaborating entity "SPI" for hierarchy "SPI:Alex_SPI_Tx"
+Warning (10036): Verilog HDL or VHDL warning at SPI.v(92): object "previous_Alex_data" assigned a value but never read
 Info: Elaborating entity "I2SAudioOut" for hierarchy "I2SAudioOut:I2SAO"
 Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
-Info: Duplicate registers merged to single register
-    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[0]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[23]"
-    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[23]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[28]"
-    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[15]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[20]"
-    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[19]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[20]"
 Info: State machine "|Ozy_Janus|state_sync" contains 5 states
 Info: State machine "|Ozy_Janus|state_PWM" contains 6 states
 Info: State machine "|Ozy_Janus|CCstate" contains 3 states
 Info: State machine "|Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state" contains 5 states
 Info: State machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state" contains 5 states
-Info: State machine "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state" contains 11 states
+Info: State machine "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state" contains 7 states
 Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|state_sync"
 Info: Encoding result for state machine "|Ozy_Janus|state_sync"
     Info: Completed encoding using 5 state bits
@@ -213,29 +201,21 @@ Info: Encoding result for state machine "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state"
     Info: State "|Ozy_Janus|I2SAudioOut:I2SAO|TLV_state.100" uses code string "00011"
 Info: Selected Auto state machine encoding method for state machine "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state"
 Info: Encoding result for state machine "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state"
-    Info: Completed encoding using 11 state bits
+    Info: Completed encoding using 7 state bits
         Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.0001"
-        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.1010"
+        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.0110"
         Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.0010"
         Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.0011"
         Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.0100"
         Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.0101"
-        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.0110"
-        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.0111"
-        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.1000"
-        Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.1001"
         Info: Encoded state bit "SPI:Alex_SPI_Tx|spi_state.0000"
-    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0000" uses code string "00000000000"
-    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.1001" uses code string "00000000011"
-    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.1000" uses code string "00000000101"
-    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0111" uses code string "00000001001"
-    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0110" uses code string "00000010001"
-    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0101" uses code string "00000100001"
-    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0100" uses code string "00001000001"
-    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0011" uses code string "00010000001"
-    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0010" uses code string "00100000001"
-    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.1010" uses code string "01000000001"
-    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0001" uses code string "10000000001"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0000" uses code string "0000000"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0101" uses code string "0000011"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0100" uses code string "0000101"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0011" uses code string "0001001"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0010" uses code string "0010001"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0110" uses code string "0100001"
+    Info: State "|Ozy_Janus|SPI:Alex_SPI_Tx|spi_state.0001" uses code string "1000001"
 Info: Duplicate registers merged to single register
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[3]" merged to single register "I2SAudioOut:I2SAO|bit_count[3]"
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[2]" merged to single register "I2SAudioOut:I2SAO|bit_count[2]"
@@ -243,22 +223,6 @@ Info: Duplicate registers merged to single register
     Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[0]" merged to single register "I2SAudioOut:I2SAO|bit_count[0]"
     Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.000" merged to single register "I2SAudioOut:I2SAO|TLV_state.000"
     Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.011" merged to single register "I2SAudioOut:I2SAO|TLV_state.011"
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[0]~23 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[1]~22 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[2]~21 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[3]~20 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[4]~19 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[5]~18 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[6]~17 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[7]~16 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[8]~15 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[9]~14 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[10]~13 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[11]~12 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[12]~11 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[13]~10 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[14]~9 that it feeds
-Warning: Inserted an always-enabled tri-state buffer between logic and the tri-state bus GPIO[15]~8 that it feeds
 Warning: TRI or OPNDRN buffers permanently enabled
     Warning: Node "GPIO[0]~24"
     Warning: Node "GPIO[1]~25"
@@ -326,20 +290,22 @@ Info: 51 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state~8" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~7" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~8" lost all its fanouts during netlist optimizations.
-    Info: Register "Alex_SPI_Tx/spi_state~9" lost all its fanouts during netlist optimizations.
-    Info: Register "Alex_SPI_Tx/spi_state~10" lost all its fanouts during netlist optimizations.
-    Info: Register "Alex_SPI_Tx/spi_state~11" lost all its fanouts during netlist optimizations.
-    Info: Register "Alex_SPI_Tx/spi_state~12" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~13" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~14" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~15" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~16" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.100" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.010" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
-Info: Implemented 1468 device resources after synthesis - the final resource count might be different
+Warning: Design contains 1 input pin(s) that do not drive logic
+    Warning: No output dependent on input pin "FLAGB"
+Info: Implemented 1412 device resources after synthesis - the final resource count might be different
     Info: Implemented 14 input pins
     Info: Implemented 27 output pins
-    Info: Implemented 82 bidirectional pins
-    Info: Implemented 1313 logic cells
+    Info: Implemented 41 bidirectional pins
+    Info: Implemented 1298 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 50 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 26 warnings
     Info: Allocated 137 megabytes of memory during processing
-    Info: Processing ended: Mon Nov 19 13:39:33 2007
-    Info: Elapsed time: 00:00:45
+    Info: Processing ended: Mon Nov 19 22:20:51 2007
+    Info: Elapsed time: 00:00:39
