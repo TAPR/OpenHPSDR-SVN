@@ -96,11 +96,11 @@ always @ (posedge spi_clock)
 begin
 case (spi_state)
 0:	begin
-		if (Alex_data != previous_Alex_data)begin
+		//if (Alex_data != previous_Alex_data)begin
 			data_count <= 31;			// set starting bit count to 31
 			spi_state <= 1;
-		end
-		else spi_state <= 0; 			// wait for Alex data to change
+		//end
+		//else spi_state <= 0; 			// wait for Alex data to change
 	end		
 1:	begin
 	SPI_data <= Alex_data[data_count];	// set up data to send
@@ -119,36 +119,18 @@ case (spi_state)
 			Tx_load_strobe <= 1'b1; 	// strobe Tx data
 			spi_state <= 5;
 		end
+		else if(data_count == 0) begin
+			Rx_load_strobe <= 1'b1;
+			spi_state <= 6;
+		end 
 		else spi_state  <= 1;  			// go round again
 	data_count <= data_count - 1'b1;
 	end
 5:	begin
 	Tx_load_strobe <= 1'b0;				// reset Tx strobe
-	previous_Alex_data <= Alex_data; 	// save current data 
-	spi_state <= 6;						// reset for next run
+	spi_state <= 1;						// now do Rx data
 	end
-// repeat for Rx data
 6:	begin
-	SPI_data <= Alex_data[data_count];	// set up data to send
-	spi_state <= 7;
-	end
-7:	begin
-	SPI_clock <= 1'b1;					// set clock high
-	spi_state <= 8;
-	end
-8:	begin
-	SPI_clock <= 1'b0;					// set clock low
-	spi_state <= 9;
-	end
-9:	begin
-		if (data_count == 0)begin		// transfer complete
-			Rx_load_strobe <= 1'b1; 	// strobe Rx data
-			spi_state <= 10;
-		end
-		else spi_state  <= 6;  			// go round again
-	data_count <= data_count - 1'b1;
-	end
-10:	begin
 	Rx_load_strobe <= 1'b0;				// reset Rx strobe
 	previous_Alex_data <= Alex_data; 	// save current data 
 	spi_state <= 0;						// reset for next run
