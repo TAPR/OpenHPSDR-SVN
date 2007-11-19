@@ -144,6 +144,10 @@ set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
 set_global_assignment -name MUX_RESTRUCTURE OFF
 set_global_assignment -name OPTIMIZE_FAST_CORNER_TIMING ON
 set_location_assignment PIN_137 -to CDOUT_P
+set_location_assignment PIN_182 -to SPI_clock
+set_location_assignment PIN_181 -to SPI_data
+set_location_assignment PIN_187 -to Tx_load_strobe
+set_global_assignment -name MESSAGE_SUPPRESSION_RULE_FILE Ozy_Janus.srf
 set_global_assignment -name VERILOG_FILE SPI.v
 set_global_assignment -name VERILOG_FILE LPF_select.v
 set_global_assignment -name VERILOG_FILE RegisterX.v
@@ -156,7 +160,7 @@ set_global_assignment -name VERILOG_FILE debounce.v
 set_global_assignment -name VERILOG_FILE DigAudioOut48k16bI2S.v
 set_global_assignment -name VERILOG_FILE Ozy_Janus.v
 set_global_assignment -name VERILOG_FILE Rx_fifo.v
-set_location_assignment PIN_182 -to SPI_clock
-set_location_assignment PIN_181 -to SPI_data
-set_location_assignment PIN_187 -to Tx_load_strobe
-set_global_assignment -name MESSAGE_SUPPRESSION_RULE_FILE Ozy_Janus.srf
+set_global_assignment -name VERILOG_FILE HPF_select.v
+set_instance_assignment -name PARTITION_HIERARCHY no_file_for_top_partition -to | -section_id Top
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_location_assignment PIN_185 -to Rx_load_strobe

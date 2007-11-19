@@ -1,5 +1,5 @@
 Flow report for Ozy_Janus
-Mon Oct 29 21:01:55 2007
+Mon Nov 19 13:42:51 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Mon Oct 29 21:01:54 2007   ;
+; Flow Status                        ; Successful - Mon Nov 19 13:42:50 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
@@ -45,11 +45,11 @@ applicable agreement for further details.
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
 ; Met timing requirements            ; No                                      ;
-; Total logic elements               ; 1,376 / 8,256 ( 17 % )                  ;
-;     Total combinational functions  ; 897 / 8,256 ( 11 % )                    ;
-;     Dedicated logic registers      ; 826 / 8,256 ( 10 % )                    ;
-; Total registers                    ; 826                                     ;
-; Total pins                         ; 81 / 138 ( 59 % )                       ;
+; Total logic elements               ; 1,373 / 8,256 ( 17 % )                  ;
+;     Total combinational functions  ; 901 / 8,256 ( 11 % )                    ;
+;     Dedicated logic registers      ; 861 / 8,256 ( 10 % )                    ;
+; Total registers                    ; 861                                     ;
+; Total pins                         ; 82 / 138 ( 59 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304 / 165,888 ( 59 % )               ;
 ; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                          ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/29/2007 20:55:50 ;
+; Start date & time ; 11/19/2007 13:38:50 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Ozy_Janus           ;
 +-------------------+---------------------+
@@ -80,6 +80,7 @@ applicable agreement for further details.
 ; MUX_RESTRUCTURE                                   ; Off           ; Auto                           ; --          ; --         ;
 ; OPTIMIZE_FAST_CORNER_TIMING                       ; On            ; Off                            ; --          ; --         ;
 ; OPTIMIZE_HOLD_TIMING                              ; All paths     ; IO Paths and Minimum TPD Paths ; --          ; --         ;
+; PARTITION_NETLIST_TYPE                            ; SOURCE        ; --                             ; --          ; Top        ;
 ; PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ; On            ; Off                            ; --          ; --         ;
 ; PHYSICAL_SYNTHESIS_COMBO_LOGIC                    ; On            ; Off                            ; --          ; --         ;
 ; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION           ; On            ; Off                            ; --          ; --         ;
@@ -92,11 +93,12 @@ applicable agreement for further details.
 +-------------------------+--------------+
 ; Module Name             ; Elapsed Time ;
 +-------------------------+--------------+
-; Analysis & Synthesis    ; 00:00:57     ;
-; Fitter                  ; 00:04:46     ;
-; Assembler               ; 00:00:08     ;
-; Classic Timing Analyzer ; 00:00:04     ;
-; Total                   ; 00:05:55     ;
+; Analysis & Synthesis    ; 00:00:46     ;
+; Partition Merge         ; 00:00:01     ;
+; Fitter                  ; 00:02:41     ;
+; Assembler               ; 00:00:09     ;
+; Classic Timing Analyzer ; 00:00:03     ;
+; Total                   ; 00:03:40     ;
 +-------------------------+--------------+
 
 
@@ -104,6 +106,7 @@ applicable agreement for further details.
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
+quartus_cdb --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus --merge=on
 quartus_fit --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 quartus_asm --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 quartus_tan --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus --timing_analysis_only

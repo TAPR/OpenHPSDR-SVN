@@ -241,7 +241,7 @@ SPI_data                     : 181       : output : 3.3-V LVTTL       :         
 SPI_clock                    : 182       : output : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 183       : power  :                   : 3.3V    : 2         :                
 GND                          : 184       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 185       :        :                   :         : 2         :                
+Rx_load_strobe               : 185       : output : 3.3-V LVTTL       :         : 2         : Y              
 GND                          : 186       : gnd    :                   :         :           :                
 Tx_load_strobe               : 187       : output : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 188       :        :                   :         : 2         :                
