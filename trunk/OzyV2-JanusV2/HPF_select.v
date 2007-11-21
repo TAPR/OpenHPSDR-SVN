@@ -21,8 +21,23 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+//////////////////////////////////////////////////////////////
+//
+//		Alex Band Decoder & HPF selection
+//
+//////////////////////////////////////////////////////////////
+/*
+	
+	Each band is  decoded and the appropriate HPF selected as follows
+	
+	Bypass 	  	HPF = 6'b100000
+	20MHz	  	HPF = 6'b010000
+	13MHz	  	HPF = 6'b001000
+	9.5MHz  	HPF = 6'b000100
+    6.5MHz  	HPF = 6'b000010
+	1.5MHz  	HPF = 6'b000001
 
-// selects HPF based on frequency in use.
+*/
 
 module HPF_select(frequency,HPF);
 
@@ -31,11 +46,11 @@ output reg [5:0]HPF;
 
 always @ (frequency)
 begin
-if 		(frequency <  1500000) HPF <= 6'b00_0001; 	// bypass
-else if	(frequency <  6500000) HPF <= 6'b10_0000;	// 1.5MHz HPF	
-else if (frequency <  9500000) HPF <= 6'b01_0000;	// 6.5MHz HPF
-else if (frequency < 13000000) HPF <= 6'b00_1000;	// 9.5MHz HPF
-else if (frequency < 20000000) HPF <= 6'b00_0100;	// 13MHz HPF
-else    					   HPF <= 6'b00_0010;	// 20MHz HPF
+if 		(frequency <  1500000) HPF <= 6'b100000; 	// bypass
+else if	(frequency <  6500000) HPF <= 6'b000001;	// 1.5MHz HPF	
+else if (frequency <  9500000) HPF <= 6'b000010;	// 6.5MHz HPF
+else if (frequency < 13000000) HPF <= 6'b000100;	// 9.5MHz HPF
+else if (frequency < 20000000) HPF <= 6'b001000;	// 13MHz HPF
+else    					   HPF <= 6'b010000;	// 20MHz HPF
 end
 endmodule

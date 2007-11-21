@@ -32,12 +32,12 @@
 	Each band is  decoded and the appropriate LPF selected as follows
 	
 	160m 	  	LPF = 7'b0001000
-	 80m	  	LPF = 7'b0010000
-	60/40m  	LPF = 7'b0100000
-	30/20m  	LPF = 7'b1000000
-    17/15m  	LPF = 7'b0000001
-	12/10m  	LPF = 7'b0000010
-	 6m	  		LPF = 7'b0000100
+	 80m	  	LPF = 7'b0000100
+	60/40m  	LPF = 7'b0000010
+	30/20m  	LPF = 7'b0000001
+    17/15m  	LPF = 7'b1000000
+	12/10m  	LPF = 7'b0100000
+	 6m	  		LPF = 7'b0010000
 */
 
 module LPF_select(frequency, LPF);
@@ -50,12 +50,12 @@ output reg [6:0]LPF;
 		
 always @ (frequency)  
 begin 
-	if  	(frequency > 29700000) LPF <= 7'b0000100;	// > 10m so use 6m LPF
-	else if (frequency > 21450000) LPF <= 7'b0000010;  	// > 15m so use 12/10m LPF
-	else if (frequency > 14350000) LPF <= 7'b0000001;  	// > 20m so use 17/15m LPF
-	else if (frequency > 7300000)  LPF <= 7'b1000000;  	// > 40m so use 30/20m LPF  
-	else if (frequency > 4000000)  LPF <= 7'b0100000;  	// > 80m so use 60/40m LPF
-	else if (frequency > 2000000)  LPF <= 7'b0010000;  	// > 160m so use 80m LPF  
+	if  	(frequency > 29700000) LPF <= 7'b0010000;	// > 10m so use 6m LPF
+	else if (frequency > 21450000) LPF <= 7'b0100000;  	// > 15m so use 12/10m LPF
+	else if (frequency > 14350000) LPF <= 7'b1000000;  	// > 20m so use 17/15m LPF
+	else if (frequency > 7300000)  LPF <= 7'b0000001;  	// > 40m so use 30/20m LPF  
+	else if (frequency > 4000000)  LPF <= 7'b0000010;  	// > 80m so use 60/40m LPF
+	else if (frequency > 2000000)  LPF <= 7'b0000100;  	// > 160m so use 80m LPF  
 	else 						   LPF <= 7'b0001000; 	// < 2MHz so use 160m LPF
 end 
 
