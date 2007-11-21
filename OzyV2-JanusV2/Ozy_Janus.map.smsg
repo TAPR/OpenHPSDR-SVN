@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Mon Nov 19 22:20:12 2007
+    Info: Processing started: Wed Nov 21 22:12:22 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file SPI.v
     Info: Found entity 1: SPI
@@ -28,7 +28,6 @@ Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
 Info: Found 1 design units, including 1 entities, in source file HPF_select.v
     Info: Found entity 1: HPF_select
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Ozy_Janus.v(1300): object "Alex_Rx_data" assigned a value but never read
 Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1335): inferred latch for "_10_atten"
 Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1336): inferred latch for "_20_atten"
 Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
@@ -127,9 +126,14 @@ Info: Elaborating entity "dffpipe_g09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcf
 Info: Elaborating entity "LPF_select" for hierarchy "LPF_select:Alex_LPF_select"
 Info: Elaborating entity "HPF_select" for hierarchy "HPF_select:Alex_HPF_select"
 Info: Elaborating entity "SPI" for hierarchy "SPI:Alex_SPI_Tx"
-Warning (10036): Verilog HDL or VHDL warning at SPI.v(92): object "previous_Alex_data" assigned a value but never read
 Info: Elaborating entity "I2SAudioOut" for hierarchy "I2SAudioOut:I2SAO"
 Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[4]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[15]"
+    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[15]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[19]"
+    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[19]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[24]"
+    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[0]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[28]"
+    Info: Duplicate register "SPI:Alex_SPI_Tx|previous_Alex_data[27]" merged to single register "SPI:Alex_SPI_Tx|previous_Alex_data[28]"
 Info: State machine "|Ozy_Janus|state_sync" contains 5 states
 Info: State machine "|Ozy_Janus|state_PWM" contains 6 states
 Info: State machine "|Ozy_Janus|CCstate" contains 3 states
@@ -290,22 +294,22 @@ Info: 51 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state~8" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~7" lost all its fanouts during netlist optimizations.
     Info: Register "I2SAO/TLV_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "Alex_SPI_Tx/spi_state~12" lost all its fanouts during netlist optimizations.
     Info: Register "Alex_SPI_Tx/spi_state~13" lost all its fanouts during netlist optimizations.
     Info: Register "Alex_SPI_Tx/spi_state~14" lost all its fanouts during netlist optimizations.
     Info: Register "Alex_SPI_Tx/spi_state~15" lost all its fanouts during netlist optimizations.
-    Info: Register "Alex_SPI_Tx/spi_state~16" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.100" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.010" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1412 device resources after synthesis - the final resource count might be different
+Info: Implemented 1427 device resources after synthesis - the final resource count might be different
     Info: Implemented 14 input pins
     Info: Implemented 27 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1298 logic cells
+    Info: Implemented 1313 logic cells
     Info: Implemented 32 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 26 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 24 warnings
     Info: Allocated 137 megabytes of memory during processing
-    Info: Processing ended: Mon Nov 19 22:20:51 2007
-    Info: Elapsed time: 00:00:39
+    Info: Processing ended: Wed Nov 21 22:12:54 2007
+    Info: Elapsed time: 00:00:32

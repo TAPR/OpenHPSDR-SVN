@@ -1,4 +1,4 @@
-// V1.4 28th September 2007
+// V1.5 21st November 2007
 //
 // Copyright 2006,2007  Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -164,6 +164,7 @@
 //				If configuration error flash DEBUG_LED0 and inhibit Tx - 28 Sept 2007
 //				Force C5 as PCLK_12MHz for testing, see line 555 - 28 Oct 2007
 //				Add LPF decoder and SPI interface for Alex control - 3 Nov 2007
+//				Added HPF decoder and SPI interface for Alex control - 21 Nov 2007
 //
 ////////////////////////////////////////////////////////////
 
@@ -1302,7 +1303,7 @@ wire [15:0]Alex_Rx_data;
 // Assign dummy Rx data where values are not currenly set
 
 wire Rx_yellow_led = 1'b1;
-wire _6m_preamp = 1'b0;
+wire _6m_preamp = 1'b1;
 wire _10dB_atten = 1'b0;
 wire _20dB_atten = 1'b0;
 wire Transverter = 1'b0;
@@ -1321,8 +1322,7 @@ wire Rx_load_strobe;
 assign Tx_red_led = PTT_out; 	// turn red led on when we Tx
 assign TR_relay = PTT_out;		// turn on TR relay when PTT active
 
-//assign Alex_Tx_data = {3'b000,Tx_yellow_led,LPF[6:3],ANT1,ANT2,ANT3,TR_relay,Tx_red_led,LPF[2:0]};
-assign Alex_Tx_data = {LPF[2:0],Tx_red_led,TR_relay,ANT3,ANT2,ANT1,LPF[6:3],Tx_yellow_led,3'b000};
+assign Alex_Tx_data = {LPF[6:4],Tx_red_led,TR_relay,ANT3,ANT2,ANT1,LPF[3:0],Tx_yellow_led,3'b000};
 
 // define and concatinate the Rx data to send to Alex via SPI
 
@@ -1335,16 +1335,14 @@ assign HPF = _6m_preamp ? 6'd0 : select_HPF;
 assign _10_atten = _6m_preamp ? 1'b0 : _10_atten; // don't select attenuators if 6m preamp on
 assign _20_atten = _6m_preamp ? 1'b0 : _20_atten; 
 
-assign Alex_Rx_data = {Rx_red_led,HPF[5:3],_6m_preamp,HPF[2:0],_10dB_atten,_20dB_atten,Transverter,
-					   Rx_2_in,Rx_1_in,Rx_1_out,1'b0,Rx_yellow_led};
+assign Alex_Rx_data = {Rx_yellow_led,1'b0,Rx_1_out,Rx_1_in,Rx_2_in,Transverter,_20dB_atten,_10dB_atten,
+					   HPF[5:3],_6m_preamp,HPF[2:0],Rx_red_led};
 						
 // concatinate Tx and Rx data and send to SPI interface
 
 wire [31:0]Alex_data;
 
 assign Alex_data[31:0] = {Alex_Tx_data[15:0],Alex_Rx_data[15:0]};
-
-
 
 SPI   Alex_SPI_Tx(.Alex_data(Alex_data), .SPI_data(SPI_data),
 				  .SPI_clock(SPI_clock), .Tx_load_strobe(Tx_load_strobe),
