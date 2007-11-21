@@ -348,7 +348,6 @@ namespace DataDecoder
             set.Device0 = Dev0.Text;
             set.Save();                     // save new Device0 to system settings
         }
-        
         // Device 0 Drop Down open - re-load cboDevice combo box
         private void Dev0_DropDown(object sender, EventArgs e)
         {
@@ -357,7 +356,7 @@ namespace DataDecoder
             cboDevice.Items.Add("Device 1");
             cboDevice.Items.Add("Device 2");
         }
-        // Load Decoder Data File
+        // Select Device 0 Decoder Data File
         private void btnFile0_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "xml files|*.xml";
@@ -420,7 +419,6 @@ namespace DataDecoder
         // The LPT port changed
         private void grpLPT_CheckedChanged(object sender, EventArgs e)
         {
-
             if (sender == rbNone)
             { OutParallelPort(LPTnum,0); LPTnum = 0; set.lptPort = "NONE"; }
             else if (sender == rb1)
@@ -473,7 +471,7 @@ namespace DataDecoder
                 set.Save();
             }
         }
-        // BCD Device enabled condition changed
+        // LPT Device enabled condition changed
         private void chkDevice_CheckedChanged(object sender, EventArgs e)
         {
             if (chkDevice.Checked == true)
@@ -487,7 +485,6 @@ namespace DataDecoder
                 set.Save(); 
             }
         }
-
 
         #endregion Form Events
 
