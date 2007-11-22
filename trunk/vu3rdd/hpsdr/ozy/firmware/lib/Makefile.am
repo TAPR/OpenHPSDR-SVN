@@ -36,7 +36,7 @@ EXTRA_DIST =            \
 
 
 DEFINES=-DSDR1K_CONTROL
-INCLUDES=-I$(top_srcdir)/include
+INCLUDES=-I$(top_srcdir)/ozy/firmware/include
 
 # with EA = 0, the FX2 implements a portion of the 8051 "external memory"
 # on chip.  This memory is mapped like this:

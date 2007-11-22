@@ -59,7 +59,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-subdir = src
+subdir = ozy/firmware/src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/fusb_tech.m4 \
@@ -197,7 +197,7 @@ EXTRA_DIST = \
 	vectors.a51		
 
 DEFINES = -DSDR1K_CONTROL
-INCLUDES = -I$(top_srcdir)/include
+INCLUDES = -I$(top_srcdir)/ozy/firmware/include
 
 # with EA = 0, the FX2 implements a portion of the 8051 "external memory"
 # on chip.  This memory is mapped like this:
@@ -273,9 +273,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  ozy/firmware/src/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  src/Makefile
+	  $(AUTOMAKE) --gnu  ozy/firmware/src/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
