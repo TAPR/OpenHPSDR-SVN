@@ -31,3 +31,16 @@ C:\dvlp\DDUtil\Source\obj\Debug\ResolveAssemblyReference.cache
 C:\dvlp\DDUtil\Source\obj\Debug\DataDecoder.Setup.resources
 C:\dvlp\DDUtil\Source\obj\Debug\DataDecoder.Properties.Resources.resources
 C:\dvlp\DDUtil\Source\obj\Debug\DataDecoder.csproj.GenerateResource.Cache
+C:\dvlp\DDUtil\Source\bin\Release\DataDecoder.exe.config
+C:\dvlp\DDUtil\Source\bin\Release\DataDecoder.exe
+C:\dvlp\DDUtil\Source\bin\Release\DataDecoder.pdb
+C:\dvlp\DDUtil\Source\bin\Release\CATSerialPorts.dll
+C:\dvlp\DDUtil\Source\obj\Release\ResolveAssemblyReference.cache
+C:\dvlp\DDUtil\Source\obj\Release\DataDecoder.Setup.resources
+C:\dvlp\DDUtil\Source\obj\Release\DataDecoder.Properties.Resources.resources
+C:\dvlp\DDUtil\Source\obj\Release\DataDecoder.csproj.GenerateResource.Cache
+C:\dvlp\DDUtil\Source\obj\Release\DataDecoder.exe
+C:\dvlp\DDUtil\Source\obj\Release\DataDecoder.pdb
+C:\dvlp\DDUtil\bin\Release\DataDecoder.exe.config
+C:\dvlp\DDUtil\bin\Release\DataDecoder.exe
+C:\dvlp\DDUtil\bin\Release\DataDecoder.pdb

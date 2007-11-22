@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDecoder", "DataDecoder.csproj", "{BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DDUtil_Setup", "..\DDUtil_Setup\DDUtil_Setup.vdproj", "{A2E69331-3AB8-454F-8AD0-75D166BAA39D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,8 @@ Global
 		{BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2E69331-3AB8-454F-8AD0-75D166BAA39D}.Debug|Any CPU.ActiveCfg = Debug
+		{A2E69331-3AB8-454F-8AD0-75D166BAA39D}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

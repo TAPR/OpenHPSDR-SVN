@@ -403,7 +403,7 @@ namespace DataDecoder
         // call the help file
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            Process.Start("..\\..\\Docs\\HelpDecoder.htm");
+            Process.Start("HelpDecoder.htm");
         }
         // program closing
         private void Setup_FormClosing(object sender, FormClosedEventArgs e)
