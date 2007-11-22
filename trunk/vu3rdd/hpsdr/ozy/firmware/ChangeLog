@@ -1,0 +1,6 @@
+2007-11-21  Ramakrishnan Muthukrishnan <vu3rdd@gmail.com>
+
+	* Intial trial to get the FX2 firmware code for Ozy build on
+	GNU/Linux. All the source code reused from KD5TFD's Ozy
+	firmware code. The auto* files are modified from the GNURadio
+	USRP code.
