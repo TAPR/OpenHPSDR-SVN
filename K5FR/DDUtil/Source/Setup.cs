@@ -392,7 +392,9 @@ namespace DataDecoder
                 fileName = txtFile0.Text;
                 File.Delete(fileName);
                 ds.WriteXml(fileName);
-                
+                set.DataFile = fileName;
+                set.Save();
+                GetBandData(fileName);              
             }
             catch (Exception ex)
             {

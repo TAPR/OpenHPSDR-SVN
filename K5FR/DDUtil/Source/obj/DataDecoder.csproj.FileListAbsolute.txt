@@ -44,3 +44,12 @@ C:\dvlp\DDUtil\Source\obj\Release\DataDecoder.pdb
 C:\dvlp\DDUtil\bin\Release\DataDecoder.exe.config
 C:\dvlp\DDUtil\bin\Release\DataDecoder.exe
 C:\dvlp\DDUtil\bin\Release\DataDecoder.pdb
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\bin\Release\DataDecoder.exe.config
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.exe
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.pdb
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\bin\Release\DataDecoder.exe
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\bin\Release\DataDecoder.pdb
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.Setup.resources
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.Properties.Resources.resources
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.csproj.GenerateResource.Cache
