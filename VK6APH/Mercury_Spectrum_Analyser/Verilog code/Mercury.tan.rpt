@@ -1,5 +1,5 @@
 Classic Timing Analyzer report for Mercury
-Sun Nov 11 22:03:05 2007
+Sun Nov 11 22:28:00 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -638,7 +638,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Classic Timing Analyzer
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Nov 11 22:03:04 2007
+    Info: Processing started: Sun Nov 11 22:27:59 2007
 Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off Mercury -c Mercury --timing_analysis_only
 Warning: Found pins functioning as undefined clocks and/or memory enables
     Info: Assuming node "FPGA_CLK6IN" is an undefined clock
@@ -807,7 +807,7 @@ Info: th for register "state_FX[0]" (data pin = "FLAGC", clock pin = "IFCLK") is
 Info: All timing requirements were met for slow timing model timing analysis. See Report window for more details.
 Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 1 warning
     Info: Allocated 100 megabytes of memory during processing
-    Info: Processing ended: Sun Nov 11 22:03:04 2007
-    Info: Elapsed time: 00:00:00
+    Info: Processing ended: Sun Nov 11 22:28:00 2007
+    Info: Elapsed time: 00:00:01
 
 

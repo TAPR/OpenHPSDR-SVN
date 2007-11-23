@@ -1,5 +1,5 @@
 Fitter report for Mercury
-Sun Nov 11 22:02:53 2007
+Sun Nov 11 22:27:48 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -61,7 +61,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Fitter Summary                                                               ;
 +------------------------------------+-----------------------------------------+
-; Fitter Status                      ; Successful - Sun Nov 11 22:02:53 2007   ;
+; Fitter Status                      ; Successful - Sun Nov 11 22:27:48 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; MercSpec                                ;
@@ -875,7 +875,8 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; LABs with Chains - Fit Attempt 1                                 ; 1           ;
 ; LABs with Multiple Chains - Fit Attempt 1                        ; 0           ;
 ; Time - Fit Attempt 1                                             ; 0           ;
-; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.032       ;
+; Time in tsm_dat.dll - Fit Attempt 1                              ; 0.015       ;
+; Time in tsm_tan.dll - Fit Attempt 1                              ; 0.031       ;
 +------------------------------------------------------------------+-------------+
 
 
@@ -892,7 +893,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; Late Slack - Fit Attempt 1          ; 4744  ;
 ; Peak Regional Wire - Fit Attempt 1  ; 0.000 ;
 ; Time - Fit Attempt 1                ; 2     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.517 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.533 ;
 +-------------------------------------+-------+
 
 
@@ -908,7 +909,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 ; Late Slack - Fit Attempt 1          ; -82   ;
 ; Late Wire Use - Fit Attempt 1       ; 1     ;
 ; Time - Fit Attempt 1                ; 1     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.468 ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.515 ;
 +-------------------------------------+-------+
 
 
@@ -918,7 +919,7 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Nov 11 22:02:41 2007
+    Info: Processing started: Sun Nov 11 22:27:36 2007
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off Mercury -c Mercury
 Info: Selected device EP2C8Q208C8 for design "Mercury"
 Info: Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
@@ -976,7 +977,7 @@ Warning: Following 6 pins have nothing, GND, or VCC driving datain port -- chang
     Info: Pin DEBUG_LED3 has GND driving its datain port
 Info: Quartus II Fitter was successful. 0 errors, 1 warning
     Info: Allocated 175 megabytes of memory during processing
-    Info: Processing ended: Sun Nov 11 22:02:53 2007
+    Info: Processing ended: Sun Nov 11 22:27:48 2007
     Info: Elapsed time: 00:00:12
 
 

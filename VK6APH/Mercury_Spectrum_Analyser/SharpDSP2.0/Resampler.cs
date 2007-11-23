@@ -22,7 +22,7 @@ namespace SharpDSP
 		private int filter_memory_buffer_index;
 		private SharpDSP.FilterDesigner filter_des = new FilterDesigner();
 		private double[] taps;
-		private int num_taps = 0;
+		private int num_taps = 512;
 		private double[] filter_memory;
 		private int mask;
 		private int filter_phase = 0;
@@ -58,7 +58,7 @@ namespace SharpDSP
 				{
 					for (int k=filter_phase; k<num_taps; k+=interpolation_factor)
 					{
-						output_data[j] = filter_memory[j] * taps[k];
+						output_data[j] = (float)(filter_memory[j] * taps[k]);
 						j = (j+mask) & mask;
 					}
 					output_data[j] *= (float)interpolation_factor;
