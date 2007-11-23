@@ -100,7 +100,5 @@ set_instance_assignment -name CLOCK_SETTINGS IFCLK -to IFCLK
 set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE Mercury.vwf
 set_global_assignment -name VERILOG_FILE RAM_4096_dualport.v
-set_global_assignment -name VERILOG_FILE ROM_4096.v
-set_global_assignment -name VERILOG_FILE RAM_4096.v
 set_global_assignment -name VERILOG_FILE MercSpec.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE Mercury.vwf

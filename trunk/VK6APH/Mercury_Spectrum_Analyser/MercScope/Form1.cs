@@ -17,7 +17,7 @@ namespace MercScope
     {
         Rectangle scoperect;
         Random rnd;
-        const int bsize = 2048; 
+        const int bsize = 1024;
         byte[] adcbuf = new byte[bsize];
         const int isize = 512;
         int[] ivalbuf = new int[isize];
@@ -28,7 +28,8 @@ namespace MercScope
         bool adcon = false;
         PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.BLACKMAN4_WINDOW);
         //PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.BLACKMANHARRIS_WINDOW);
-        IQCorrection iqcor = new IQCorrection(512);
+        Resampler r = new Resampler();
+       
 
         public Form1()
         {
@@ -53,11 +54,7 @@ namespace MercScope
             scoperect = pictureBox1.ClientRectangle;
             timer1.Interval = 10;
             timer1.Enabled = true;
-            hScrollBar2.Maximum = (int)(Int32.MaxValue - 1);
-            hScrollBar2.Minimum = 0;
-            hScrollBar2.SmallChange = (int)Int32.MaxValue / 100000;
-            hScrollBar2.LargeChange = (int)Int32.MaxValue / 10000;            
-        }
+       }
 
         private void DrawGrid(Graphics g)
         {
@@ -141,116 +138,48 @@ namespace MercScope
             int xtpos = hScrollBar1.Value;
             int xDraw = xtpos;
 
-            if (!read_adc(ref adcbuf))
+            if (!read_adc(ref adcbuf)) // check we have ADC data, if not return
                 return;
-                        
-            for (int i = 0, j = 0; i < adcbuf.Length; i += 4, j++)
+
+            int[] int_adcbuf = new int[isize];
+
+            // convert adc samples from bytes to int (32 bits)
+            for (int i = 0, j = 0; i < adcbuf.Length; i += 2, j++)
             {
-                ivalbuf[j] = (int)BitConverter.ToInt16(adcbuf, i);                
-                qvalbuf[j] = (int)BitConverter.ToInt16(adcbuf, i + 2);                
+                int_adcbuf[j] = (int)BitConverter.ToInt16(adcbuf, i);
+                //ivalbuf[j] = int_adcbuf[j]; // display adc samples on screen
             }
 
-            int maxval = 0;
-            foreach (int val in ivalbuf)
+            // convert adc samples from int to double 
+            double[] d_adc = new double[isize];
+            DataConvert.IntToDouble(int_adcbuf, (int)Math.Pow(2,15), ref d_adc);
+
+            // create arrays to hold the I&Q values from the complex mixer
+            double[] d_i_b = new double[isize]; // ?? was [isize * 2 ]why double ??
+            double[] d_q_b = new double[isize];
+
+            // multiply  real input by sin & cos to create I&Q
+            for (int i = 0; i < isize; i++)
             {
-                if (val > maxval)
-                    maxval = val;
+                d_i_b[i] = d_adc[i] * Math.Sin(phase_angle);
+                d_q_b[i] = d_adc[i] * Math.Cos(phase_angle);
+                phase_angle += (0.0368 * 10);  // this is the local oscillator
             }
 
-            txtMax.Text = maxval.ToString();
+            // Pass I&Q samples through FIR LPF
 
-            int minval = 0;
-            foreach (int val in ivalbuf)
-            {
-                if (val < minval)
-                    minval = val;
-            }
+            // FIR(ref d_i_b, ref d_q_b);
 
-            txtMin.Text = minval.ToString();
-
-            int Qmaxval = 0;
-            foreach (int val in qvalbuf)
-            {
-                if (val > Qmaxval)
-                    Qmaxval = val;
-            }
-
-            txtQMax.Text = Qmaxval.ToString();
-
-            int Qminval = 0;
-            foreach (int val in qvalbuf)
-            {
-                if (val < Qminval)
-                    Qminval = val;
-            }
-
-            txtQMin.Text = Qminval.ToString();
-
-            double[] d_i = new double[ivalbuf.Length];
-            double[] d_q = new double[qvalbuf.Length];
-            
-            DataConvert.IntToDouble(ivalbuf, (int)Math.Pow(2,15), ref d_i);
-            DataConvert.IntToDouble(qvalbuf, (int)Math.Pow(2, 15), ref d_q);
-
-            //Gains gain;
-            //gain.IQGainValue = (double)hscrollGain.Value / 10;
-            //gain.IQPhaseValue = (double)hscrollPhase.Value / 10;
-
-            //iqcor.DoIQCorrection(ref d_i, ref d_q, gain);
-
-            double[] d_i_b = new double[ivalbuf.Length * 2];
-            double[] d_q_b = new double[qvalbuf.Length * 2];
-
-            for (int i = 0; i < ivalbuf.Length; i++)
-            {
-                d_i_b[i] = d_i[i];
-                d_q_b[i] = d_q[i];
-            }
+            DataConvert.DoubleToInt(d_i_b, 30000, ref ivalbuf); // display I channel on 'scope
+            DataConvert.DoubleToInt(d_q_b, 30000, ref qvalbuf); // display Q channel on 'scope
 
             double[] ps_result = new double[d_i_b.Length];
 
             ps.PowerSpectrumSignal(ref d_i_b, ref d_q_b, ref ps_result);
 
-            double PSminval = 0;
-            foreach (double val in ps_result)
-            {
-                if (val < PSminval)
-                    PSminval = val;
-            }
-
-            txtPSMin.Text = PSminval.ToString("E");
-
-            double PSmaxval = double.MinValue;
-            foreach (double val in ps_result)
-            {
-                if (val > PSmaxval)
-                    PSmaxval = val;
-            }
-
-            txtPSMax.Text = PSmaxval.ToString("E");
-
             int[] ps_result_int = new int[ps_result.Length];
             
             DataConvert.DoubleToInt(ps_result, 32768, ref ps_result_int);
-                       
-            int Pminval = 0;
-            foreach (int val in ps_result_int)
-            {
-                if (val < Pminval)
-                    Pminval = val;
-            }
-
-            txtPMin.Text = Pminval.ToString();
-
-            int Pmaxval = int.MinValue;
-            foreach (int val in ps_result_int)
-            {
-                if (val > Pmaxval)
-                    Pmaxval = val;
-            }
-
-            txtPMax.Text = Pmaxval.ToString();
-
             DataConvert.ScaleInt(-500, ref ps_result_int);
             DataConvert.ScaleInt(-1, ref ivalbuf);
             DataConvert.ScaleInt(-1, ref qvalbuf);
@@ -275,7 +204,7 @@ namespace MercScope
                 if (xlast != -1)
                 {
                     // scale the x-value based on the TimeScale control
-                    // translate the x-position by the x-position congrol
+                    // translate the x-position by the x-position control
                     if (xtscale > 1)
                         xDraw = xpos * xtscale + xtpos * xtscale;
                     else
@@ -327,70 +256,29 @@ namespace MercScope
 
 
         double phase_angle = 0;
-        double sample = 0;
-        
+      
         private bool read_adc(ref byte[] rbuf)
         {
             if (checkBox2.Checked) 
             {
-                rnd.NextBytes(rbuf);
-                
-                //phase_angle = rnd.Next();
-                //Console.WriteLine("phase angle = {0}", phase_angle);
-                
-                for (int j = 0; j < rbuf.Length; j += 4)
-                {
-                    double i;
-                    double q;
-                    short i16;
-                    short q16;
-                    byte[] tbuf;
-                    
-                    //create 10 cycles of a sine wave as the ADC value
-                    ADC_sample[j] = Math.Sin(sample + 0.0368);
+                // Fill rbuf with 10 samples (i.e. 12.5MHz when sampling at 125MHz)
+                // of a  16 bit sine wave to simulate input from Mercury. 
+                // Add some noise for extra realism!
 
-                    // multiply each sample by sin and cos to give a complex result
-                    i = ADC_sample[j] * Math.Sin(phase_angle);
-                    q = ADC_sample[j] * Math.Cos(phase_angle);
-                    //phase_angle += 1.12513;
-                    phase_angle -= 2;
-                    i16 = (short)(32767.0 * i);
-                    q16 = (short)-(32767.0 * q);
-                    //q16 = 0; 
-                    tbuf = BitConverter.GetBytes(i16);
-                    byte noise_bits = (byte)(rbuf[j] & 0xf);
-                    //noise_bits = 0; 
-                    rbuf[j] = (byte)(tbuf[0] ^ noise_bits);
-                    rbuf[j + 1] = tbuf[1];
-                    tbuf = BitConverter.GetBytes(q16);
-                    rbuf[j + 2] = (byte)(tbuf[0] ^ noise_bits);
-                    rbuf[j + 3] = tbuf[1]; 
-                    
-                    
-                    
-                    /*
+                rnd.NextBytes(rbuf);
+                for (int j = 0; j < rbuf.Length; j += 2) // rbuf.Length = 1024
+                {  
                     double i; 
-                    double q; 
-                    short i16; 
-                    short q16;                     
+                    short i16;
                     byte[] tbuf; 
                     i = Math.Sin(phase_angle); 
-                    q = Math.Cos(phase_angle); 
-                    //phase_angle += 1.12513;
-                    phase_angle += 1.12513;
+                    phase_angle += 0.0368;
                     i16 = (short)(32767.0 * i);
-                    q16 = (short)-(32767.0 * q);       
-                    //q16 = 0; 
                     tbuf = BitConverter.GetBytes(i16);
                     byte noise_bits = (byte)(rbuf[j] & 0xf); 
                     //noise_bits = 0; 
                     rbuf[j] = (byte)(tbuf[0] ^ noise_bits);
                     rbuf[j + 1] = tbuf[1];
-                    tbuf = BitConverter.GetBytes(q16);
-                    rbuf[j + 2] = (byte)(tbuf[0] ^ noise_bits);
-                    rbuf[j + 3] = tbuf[1]; 
-                     */
-
                 } 
                 return true;
             }
@@ -417,85 +305,10 @@ namespace MercScope
             pictureBox1.Invalidate();
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            timer2.Enabled = false;
-            listBox1.Items.Add("Starting ADC...");
-            //start_adc();
-            listBox1.Items.Add("ADC running...");
-        }
-
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             stop_adc();
         }
-
-        private void hScrollBar2_Scroll(object sender, ScrollEventArgs e)
-        {
-            byte[] buf = BitConverter.GetBytes(hScrollBar2.Value); // gets 4 bytes
-            byte[] tempbuf = new byte[4];
-
-            if (buf.Length < 4) return;
-
-            // put bytes in proper order MSB to LSB
-            for (int i = 0; i < buf.Length; i++)
-            {
-                tempbuf[buf.Length - 1 - i] = buf[i];
-            }
-
-            buf = tempbuf;
-
-            textBox1.Text = ((((float)hScrollBar2.Value * (float)100))/(float)Math.Pow(2,32)).ToString();
-            textBox2.Text = buf[0].ToString("X2") 
-                            + ":" + buf[1].ToString("X2") 
-                            + ":" + buf[2].ToString("X2") 
-                            + ":" + buf[3].ToString("X2");
-            
-            // send to OZY register 0x01, 32 bits
-            if (hdev != IntPtr.Zero)
-                OZY.Write_SPI(hdev, 0, 0x01, OZY.SPI_EN_FPGA, (OZY.SPI_FMT_MSB | OZY.SPI_FMT_HDR_1), buf);
-        }
-
-        private void btnSendSR_Click(object sender, EventArgs e)
-        {
-            int cmd = Convert.ToInt32(txtSR.Text);
-            byte[] buf = BitConverter.GetBytes(cmd);
-
-            byte[] tempbuf = new byte[4];
-
-            if (buf.Length < 4) return;
-
-            // put bytes in proper order MSB to LSB
-            for (int i = 0; i < buf.Length; i++)
-            {
-                tempbuf[buf.Length - 1 - i] = buf[i];
-            }
-
-            for (int i = 0; i < buf.Length; i++)
-            {
-                listBox1.Items.Add(buf[i]);
-            }
-
-            buf = tempbuf;
-            // send to OZY register 0x02, 32 bits
-            if (hdev != IntPtr.Zero)
-                OZY.Write_SPI(hdev, 0, 0x02, OZY.SPI_EN_FPGA, (OZY.SPI_FMT_MSB | OZY.SPI_FMT_HDR_1), buf);            
-            
-        }
-
-        private void btnRd_Click(object sender, EventArgs e)
-        {
-            byte[] buf = new byte[4];
-
-            if (hdev != IntPtr.Zero)
-                OZY.Read_SPI(hdev, 0, 0x02, OZY.SPI_EN_FPGA, (OZY.SPI_FMT_MSB | OZY.SPI_FMT_HDR_1), ref buf);
-
-            for (int i = 0; i < buf.Length; i++)
-            {
-                listBox1.Items.Add(buf[i]);
-            }
-        }
-
-
     }
 }
+

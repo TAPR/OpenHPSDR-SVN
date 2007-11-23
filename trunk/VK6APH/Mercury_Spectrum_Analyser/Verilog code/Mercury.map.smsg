@@ -1,14 +1,10 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Nov 11 22:02:37 2007
+    Info: Processing started: Sun Nov 11 22:27:32 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
 Info: Found 1 design units, including 1 entities, in source file RAM_4096_dualport.v
     Info: Found entity 1: RAM_4096_dualport
-Info: Found 1 design units, including 1 entities, in source file ROM_4096.v
-    Info: Found entity 1: ROM_4096
-Info: Found 1 design units, including 1 entities, in source file RAM_4096.v
-    Info: Found entity 1: RAM_4096
 Info: Found 1 design units, including 1 entities, in source file MercSpec.v
     Info: Found entity 1: MercSpec
 Info: Elaborating entity "MercSpec" for the top level hierarchy
@@ -60,5 +56,5 @@ Info: Implemented 103 device resources after synthesis - the final resource coun
     Info: Implemented 16 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 27 warnings
     Info: Allocated 128 megabytes of memory during processing
-    Info: Processing ended: Sun Nov 11 22:02:39 2007
+    Info: Processing ended: Sun Nov 11 22:27:34 2007
     Info: Elapsed time: 00:00:02

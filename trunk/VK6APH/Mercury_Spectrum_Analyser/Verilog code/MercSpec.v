@@ -79,7 +79,7 @@ RAM_4096_dualport RAM(.data(temp_ADC),.rdaddress(address),.rdclock(IFCLK),.wradd
 wire EP6_ready = FLAGC; 		// high when we can write to EP6
 reg run ;
 
-always @ (negedge IFCLK) 
+always @ (negedge IFCLK) // posedge looks cleaner on the simulation
 begin
 SLOE <= 1'b1;
 SLRD <= 1'b1;

@@ -1,5 +1,5 @@
 Assembler report for Mercury
-Sun Nov 11 22:03:02 2007
+Sun Nov 11 22:27:58 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Nov 11 22:03:02 2007 ;
+; Assembler Status      ; Successful - Sun Nov 11 22:27:58 2007 ;
 ; Revision Name         ; Mercury                               ;
 ; Top-level Entity Name ; MercSpec                              ;
 ; Family                ; Cyclone II                            ;
@@ -127,7 +127,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Nov 11 22:02:54 2007
+    Info: Processing started: Sun Nov 11 22:27:50 2007
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Mercury -c Mercury
 Info: Fitter is using the Classic Timing Analyzer
 Info: Detected fmax, tsu, tco, and/or tpd requirements -- optimizing circuit to achieve only the specified requirements
@@ -137,7 +137,7 @@ Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Allocated 127 megabytes of memory during processing
-    Info: Processing ended: Sun Nov 11 22:03:02 2007
+    Info: Processing ended: Sun Nov 11 22:27:58 2007
     Info: Elapsed time: 00:00:08
 
 
