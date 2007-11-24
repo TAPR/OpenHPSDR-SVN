@@ -43,20 +43,20 @@
  */
 #define	HW_REV_OFFSET		  5
 
-#define	bRequestType	SETUPDAT[0]
-#define	bRequest	    SETUPDAT[1]
-#define	wValueL			SETUPDAT[2]
-#define	wValueH			SETUPDAT[3]
-#define	wIndexL			SETUPDAT[4]
-#define	wIndexH		    SETUPDAT[5]
-#define	wLengthL	    SETUPDAT[6]
-#define	wLengthH	    SETUPDAT[7]
+#define	bRequestType	          SETUPDAT[0]
+#define	bRequest	          SETUPDAT[1]
+#define	wValueL			  SETUPDAT[2]
+#define	wValueH			  SETUPDAT[3]
+#define	wIndexL			  SETUPDAT[4]
+#define	wIndexH		          SETUPDAT[5]
+#define	wLengthL	          SETUPDAT[6]
+#define	wLengthH	          SETUPDAT[7]
 
 static void
 get_ep0_data (void)
 {
-	EP0BCL = 0;			// arm EP0 for OUT xfer.  This sets the busy bit
-  	while (EP0CS & bmEPBUSY);	// wait for busy to clear
+  EP0BCL = 0;			// arm EP0 for OUT xfer.  This sets the busy bit
+  while (EP0CS & bmEPBUSY);	// wait for busy to clear
 }
 
 /*
@@ -70,173 +70,171 @@ unsigned char app_vendor_OUT_cmd(void)
 {
 	
 #if 0 	
-	char dbuf[3]; 
-	putstr("vendor out: req=0x"); 
-	byteToHex(bRequest, dbuf); 
-	putstr(dbuf); 
-	putstr(" wValueL=0x"); 
-	byteToHex(wValueL, dbuf); 
-	putstr(dbuf); 
-	putstr("\n"); 
+  char dbuf[3]; 
+  putstr("vendor out: req=0x"); 
+  byteToHex(bRequest, dbuf); 
+  putstr(dbuf); 
+  putstr(" wValueL=0x"); 
+  byteToHex(wValueL, dbuf); 
+  putstr(dbuf); 
+  putstr("\n"); 
 #endif 	  
-
-	switch (bRequest)
-		{
-
-			case VRQ_SET_LED:
-
-		  		switch (wIndexL)
-					{
-						case 0:
-							set_led_0 (wValueL);
-							break;
-
-                        case 1:
-							set_led_1 (wValueL);
-							break;
-
-                        default:
-							return 0;
-		  			}
-		  		break;
-
-			case VRQ_FPGA_LOAD:
-
-				switch (wIndexL)			// sub-command
-					{
-						case FL_BEGIN:
-							return fpga_load_begin ();
-
-                        case FL_XFER:
-							get_ep0_data ();
-							return fpga_load_xfer (EP0BUF, EP0BCL);
-
-                        case FL_END:
-							return fpga_load_end ();
-
-  						default:
-							return 0;
-  					}
-  				break;
-
-			case VRQ_I2C_WRITE:
-
-				get_ep0_data ();
-				if (!i2c_write (wValueL, EP0BUF, EP0BCL))
-					return 0;
-				break;
-
-			case VRQ_SPI_WRITE:
-
-				get_ep0_data ();
-		  		if (!spi_write (wValueH, wValueL, wIndexH, wIndexL, EP0BUF, EP0BCL))
-					return 0;
-		  		break;
-
-            case VRQ_I2C_SPEED_SET:
-                if (wValueL == 1)
-                    I2CTL |= bm400KHZ;
-                else
-                    I2CTL &= ~bm400KHZ;
-                break;
-                
+  
+  switch (bRequest)
+  {
+    
+  case VRQ_SET_LED:
+    
+    switch (wIndexL)
+    {
+    case 0:
+      set_led_0 (wValueL);
+      break;
+      
+    case 1:
+      set_led_1 (wValueL);
+      break;
+      
+    default:
+      return 0;
+    }
+    break;
+    
+  case VRQ_FPGA_LOAD:
+    
+    switch (wIndexL)			// sub-command
+    {
+    case FL_BEGIN:
+      return fpga_load_begin ();
+      
+    case FL_XFER:
+      get_ep0_data ();
+      return fpga_load_xfer (EP0BUF, EP0BCL);
+      
+    case FL_END:
+      return fpga_load_end ();
+      
+    default:
+      return 0;
+    }
+    break;
+    
+  case VRQ_I2C_WRITE:
+    
+    get_ep0_data ();
+    if (!i2c_write (wValueL, EP0BUF, EP0BCL))
+      return 0;
+    break;
+    
+  case VRQ_SPI_WRITE:
+    
+    get_ep0_data ();
+    if (!spi_write (wValueH, wValueL, wIndexH, wIndexL, EP0BUF, EP0BCL))
+      return 0;
+    break;
+    
+  case VRQ_I2C_SPEED_SET:
+    if (wValueL == 1)
+      I2CTL |= bm400KHZ;
+    else
+      I2CTL &= ~bm400KHZ;
+    break;
+    
 #ifdef SDR1K_CONTROL                 
-            case VRQ_SDR1K_CTL:
-	            // get_ep0_data (); -- no data for these 
+  case VRQ_SDR1K_CTL:
+    // get_ep0_data (); -- no data for these 
 #if 0              
-				putstr("pre wValueL=0x"); 
-				byteToHex(wValueL, dbuf); 
-				putstr(dbuf); 
-				putstr("\n"); 
+    putstr("pre wValueL=0x"); 
+    byteToHex(wValueL, dbuf); 
+    putstr(dbuf); 
+    putstr("\n"); 
 #endif 	  
-            
-                         
-        		if (!SDR1k_ControlOut(wValueH, wValueL, wIndexH, wIndexL, EP0BUF, EP0BCL)) {
-        			return 0;  
-        		} 		 
-            	break;
+    
+    
+    if (!SDR1k_ControlOut(wValueH, wValueL, wIndexH, wIndexL, EP0BUF, EP0BCL)) {
+      return 0;  
+    } 		 
+    break;
 #endif               
-              
-
-            case VRQ_CPU_SPEED_SET:
-                if (wValueL == 0)
-                    CPUCS = bmCLKOE; // 12 MHz
-                else if (wValueL == 1)
-                    CPUCS = bmCLKSPD0 | bmCLKOE; // 24 MHz
-                else
-                    CPUCS = bmCLKSPD1 | bmCLKOE; // 48 MHz
-                break;
-
-			default:
-		  		return 0;
-	 }
-	return 1;
+    
+    
+  case VRQ_CPU_SPEED_SET:
+    if (wValueL == 0)
+      CPUCS = bmCLKOE; // 12 MHz
+    else if (wValueL == 1)
+      CPUCS = bmCLKSPD0 | bmCLKOE; // 24 MHz
+    else
+      CPUCS = bmCLKSPD1 | bmCLKOE; // 48 MHz
+    break;
+    
+  default:
+    return 0;
+  }
+  return 1;
 }
 
 unsigned char app_vendor_IN_cmd(void)
 {
-	switch (bRequest)
-		{
-			case VRQ_I2C_READ:
-                if (!i2c_read (wValueL, EP0BUF, wLengthL))
-                    return 0;
-                EP0BCH = 0;
-                EP0BCL = wLengthL;
-                break;
-
-			case VRQ_SPI_READ:
-  				if (!spi_read (wValueH, wValueL, wIndexH, wIndexL, EP0BUF, wLengthL))
-					return 0;
-                EP0BCH = 0;
-                EP0BCL = wLengthL;
-                break;
-                
+  switch (bRequest)
+  {
+  case VRQ_I2C_READ:
+    if (!i2c_read (wValueL, EP0BUF, wLengthL))
+      return 0;
+    EP0BCH = 0;
+    EP0BCL = wLengthL;
+    break;
+    
+  case VRQ_SPI_READ:
+    if (!spi_read (wValueH, wValueL, wIndexH, wIndexL, EP0BUF, wLengthL))
+      return 0;
+    EP0BCH = 0;
+    EP0BCL = wLengthL;
+    break;
+    
 #ifdef SDR1K_CONTROL                 
-	        case VRQ_SDR1K_CTL:
+  case VRQ_SDR1K_CTL:
 #if 0 	        
-    	        putstr("VRQ_SDR1K_CTL \n");
+    putstr("VRQ_SDR1K_CTL \n");
 #endif     	        
-	 	          
-        		if (!SDR1k_ControlIn(wValueH, wValueL, wIndexH, wIndexL, EP0BUF, wLengthL) ) {
-        			putstr("sdr1kin error bailout\n"); 
-        			return 0; 
-        		}
-        		EP0BCH = 0;
-                EP0BCL = wLengthL;
-                break;        		                	 		 
-            	
+    
+    if (!SDR1k_ControlIn(wValueH, wValueL, wIndexH, wIndexL, EP0BUF, wLengthL) ) {
+      putstr("sdr1kin error bailout\n"); 
+      return 0; 
+    }
+    EP0BCH = 0;
+    EP0BCL = wLengthL;
+    break;        		                	 		 
+    
 #endif               
-              
-            case VRQ_EEPROM_TYPE_READ:
-                EP0BUF[0] = I2CS & bmID; // 16 = 2 byte, 8 = 1 byte
-                EP0BCH = 0;
-                EP0BCL = 1;
-                break;
-
-            case VRQ_I2C_SPEED_READ:
-                EP0BUF[0] = I2CTL & bm400KHZ; // 0 = 100 kHz, 1 = 400 kHz
-                EP0BCH = 0;
-                EP0BCL = 1;
-                break;
-
-            default:
-		      		return 0;
-		}
-	return 1;
+    
+  case VRQ_EEPROM_TYPE_READ:
+    EP0BUF[0] = I2CS & bmID; // 16 = 2 byte, 8 = 1 byte
+    EP0BCH = 0;
+    EP0BCL = 1;
+    break;
+    
+  case VRQ_I2C_SPEED_READ:
+    EP0BUF[0] = I2CTL & bm400KHZ; // 0 = 100 kHz, 1 = 400 kHz
+    EP0BCH = 0;
+    EP0BCL = 1;
+    break;
+    
+  default:
+    return 0;
+  }
+  return 1;
 }
 
 unsigned char
 app_vendor_cmd (void)
 {
-	
-	
-	
-	if (bRequestType == VRT_VENDOR_IN)
-		return app_vendor_IN_cmd();
-  	else if (bRequestType == VRT_VENDOR_OUT)
-		return app_vendor_OUT_cmd();
-	else
-        return 0;    // invalid bRequestType
+  
+  if (bRequestType == VRT_VENDOR_IN)
+    return app_vendor_IN_cmd();
+  else if (bRequestType == VRT_VENDOR_OUT)
+    return app_vendor_OUT_cmd();
+  else
+    return 0;    // invalid bRequestType
 }
 
 static void
@@ -244,14 +242,14 @@ main_loop (void)
 {
 
   while (1)
-  	{
-    		if (usb_setup_packet_avail ())
-      			usb_handle_setup_packet ();
+  {
+    if (usb_setup_packet_avail ())
+      usb_handle_setup_packet ();
 #if 0       			
-            else
-                putchar('.');
+    else
+      putchar('.');
 #endif                 
-  	}
+  }
 }
 
 
@@ -263,19 +261,19 @@ main_loop (void)
 void
 isr_tick (void) interrupt
 { 
-	static unsigned char	count = 1;  
-  	if (--count == 0)
-  		{
-    		count = 50;     		
-    		HPSDR_LED_REG ^= bmLED0;
-    		if ( HPSDR_LED_REG & bmLED0 ) {
-    			HPSDR_LED_REG &= ~bmLED1;  
-    		}
-    		else {
-    			HPSDR_LED_REG |= bmLED1; 
-    		} 
-    		// HPSDR_LED_REG ^= bmLED1;     		
-		} 		
+  static unsigned char	count = 1;  
+  if (--count == 0)
+    {
+      count = 50;     		
+      HPSDR_LED_REG ^= bmLED0;
+      if ( HPSDR_LED_REG & bmLED0 ) {
+	HPSDR_LED_REG &= ~bmLED1;  
+      }
+      else {
+	HPSDR_LED_REG |= bmLED1; 
+      } 
+      // HPSDR_LED_REG ^= bmLED1;     		
+    } 		
   clear_timer_irq ();
 }
 
@@ -286,14 +284,14 @@ isr_tick (void) interrupt
 void
 patch_usb_descriptors(void)
 {
-	static xdata unsigned char hw_rev;
-	static xdata unsigned char serial_no[8];
-
-	eeprom_read(I2C_ADDR_BOOT, HW_REV_OFFSET, &hw_rev, 1);	// LSB of device id
-
-	usb_desc_hw_rev_binary_patch_location_0[0] = hw_rev;
-	usb_desc_hw_rev_binary_patch_location_1[0] = hw_rev;
-	usb_desc_hw_rev_ascii_patch_location_0[0] = hw_rev + '0';     // FIXME if we get > 9
+  static xdata unsigned char hw_rev;
+  static xdata unsigned char serial_no[8];
+  
+  eeprom_read(I2C_ADDR_BOOT, HW_REV_OFFSET, &hw_rev, 1);	// LSB of device id
+  
+  usb_desc_hw_rev_binary_patch_location_0[0] = hw_rev;
+  usb_desc_hw_rev_binary_patch_location_1[0] = hw_rev;
+  usb_desc_hw_rev_ascii_patch_location_0[0] = hw_rev + '0';     // FIXME if we get > 9
 }
 
 /*
@@ -306,32 +304,32 @@ patch_usb_descriptors(void)
 void
 main (void)
 {
-    init_hpsdr();
-     
-
-  	set_led_0 (1);
-  	set_led_1 (0);
-
-  	EA = 0;		// disable all interrupts
-
-  	patch_usb_descriptors();
-
-  	setup_autovectors ();
-  	usb_install_handlers ();
-  	hook_timer_tick ((unsigned short) isr_tick);
-
-  	EIEX4 = 1;	// disable INT4 FIXME
-  	EA = 1;			// global interrupt enable
-
-  	fx2_renumerate ();	// simulates disconnect / reconnect
-
-	
-	putstr("\n\nHPSDR Ozy Firmware. ");
-	putstr(__DATE__); 
-	putstr(" "); 
-	putstr(__TIME__);
-	putstr("\nCopyright 2003, 2004, 2006, 2007 Phil Covington (N8VB), Bill Tracey (KD5TFD),\nand Free Software Foundataion, Inc.\n\n");
-	putstr("This code is licensed under the GNU General Public License Version 2\n\n");   
-	 	  
-  	main_loop ();
+  init_hpsdr();
+  
+  
+  set_led_0 (1);
+  set_led_1 (0);
+  
+  EA = 0;		// disable all interrupts
+  
+  patch_usb_descriptors();
+  
+  setup_autovectors ();
+  usb_install_handlers ();
+  hook_timer_tick ((unsigned short) isr_tick);
+  
+  EIEX4 = 1;	// disable INT4 FIXME
+  EA = 1;			// global interrupt enable
+  
+  fx2_renumerate ();	// simulates disconnect / reconnect
+  
+  
+  putstr("\n\nHPSDR Ozy Firmware. ");
+  putstr(__DATE__); 
+  putstr(" "); 
+  putstr(__TIME__);
+  putstr("\nCopyright 2003, 2004, 2006, 2007 Phil Covington (N8VB), Bill Tracey (KD5TFD),\nand Free Software Foundataion, Inc.\n\n");
+  putstr("This code is licensed under the GNU General Public License Version 2\n\n");   
+  
+  main_loop ();
 }
