@@ -22,4 +22,8 @@ AC_DEFUN([HPSDR_OZY_CHECKS],
 	HPSDR_LIBUSB([],[passed=no;AC_MSG_RESULT([Unable to configure USB dependency.])])
 	HPSDR_SET_FUSB_TECHNIQUE([],[passed=no;AC_MSG_RESULT([Unable to set fast USB technique.])])
 	HPSDR_SDCC([2.4.0],[],[passed=no;AC_MSG_RESULT([Unable to find firmware compiler.])])
+
+	AC_CONFIG_FILES([ \
+            ozy/host/lib/std_paths.h \
+        ])
 ])
