@@ -40,6 +40,7 @@ noinst_HEADERS =		\
 	hpsdr_common.h          \
 	hpsdr_config.h          \
 	hpsdr_globals.h         \
+	hpsdr_ids.h             \
 	hpsdr_i2c_addr.h        \
 	hpsdr_interfaces.h      \
 	hpsdr_rev1_regs.h       \
