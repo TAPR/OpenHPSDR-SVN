@@ -2,6 +2,7 @@
 <html>
 	<head>
 <title>DDUtil Online help</title>
+<meta name="description" content="Data Decoder Utility for Flex Radios">
 <link rel="stylesheet" type="text/css" href="coua.css">
 	</head>
 	<body>
@@ -49,7 +50,7 @@ created from scratch or modified from the sample provided and then saved with
 an appropriate user name. All file modification may be 
 accomplished within the program or may be done in any XML file 
 editor of the users choice. But, unless the user is familiar with XML file 
-editing it is recommended that file modification be confined to <b>DDUtil</b> 
+editing it is recommended that XML file modification be confined to <b>DDUtil</b> 
 until proficiency is obtained. <p>The initial release is designed for the Flex 
 family of radios including the SDR-1000 and Flex5000 series, but may well be 
 extended to other radios in the future.<h2><u><font color="#800080"><a name="Instructions"></a>
@@ -60,7 +61,7 @@ Setup</font></u></h2>
 	following form will be displayed.<br>
 	<br>
 	&nbsp;&nbsp;&nbsp;
-	<img border="0" src="DDUtilPorts.JPG" width="536" height="459">&nbsp; </li>
+	<img border="0" src="DDUtilPorts.jpg" >&nbsp; </li>
 	<li>
 	<p style="margin-top: 3px; margin-bottom: 6px"><b>Ports Setup</b><ul>
 	<li>
@@ -75,7 +76,7 @@ Setup</font></u></h2>
 		logger port you will use. This will be one of a virtual serial port pair like 
 		N8VB's VCOM utility provides. See this Flex Knowledge Base 
 		<a href="http://kb.flex-radio.com/Article.aspx?id=10068">article</a> dealing with setting up virtual serial ports. In the example 
-	above the logger is set to COM4 and <b>DDUtil </b>is set to COM5.</li>
+	above the Radio Control port is set to COM4 and <b>DDUtil </b>is set to COM5. </li>
 	<li>
 	<p style="margin-top: 3px; margin-bottom: 6px">Set the Cat Polling 
 		Interval. This defaults to 1000 which equates to 1 second. Lower numbers 
@@ -83,9 +84,10 @@ Setup</font></u></h2>
 		be a satisfactory interval.</li>
 	<li>
 	<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Parallel Port</b> 
-		group, optionally, select the 
-		parallel port you will use. Usually LPT1, but may be any  
-		parallel port including USB to parallel port adapters.</li>
+		group, optionally, select the parallel port you will use. Usually LPT1, 
+	but may be any parallel port including USB to parallel port adapters<b>.</b><p style="margin-top: 3px; margin-bottom: 6px">
+	<b>Note:</b>&nbsp; You can get help <a href="#ports">here</a> finding 
+	parallel port numbers.</li>
 	<li>In the <b>Data Signals</b> group, select the device you want to use as a 
 	decode file source. In order to make this selection you will have to go to 
 	one or more of the device tabs and setup a source. See the following section 
@@ -100,7 +102,7 @@ Setup</font></u></h2>
 	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Selecting 
 	the Device tab at the top of the form will display the following form.</p>
 	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<img border="0" src="DDUtilDevice.JPG" width="536" height="459">&nbsp; </p>
+	<img border="0" src="DDUtilDevice.JPG">&nbsp; </p>
 <blockquote>
 	<p style="margin-top: 3px; margin-bottom: 6px">This page of the setup 
 		form is for configuring the BCD data file. This file is needed to set 
@@ -145,7 +147,7 @@ Setup</font></u></h2>
 		input into the data grid.</p></li>
 			<li>
 			<p style="margin-top: 3px; margin-bottom: 6px"><b>File Name | Re-Load</b> 
-		= Will re-load the displayed file. This is intended give the ability of 
+		= Will re-load the displayed file. This is intended to allow 
 		salvaging a file that has been edited and the user decides to abandon it 
 		due to errors or ?.</p></li>
 			<li>
@@ -169,7 +171,7 @@ from session to session.</p>
 <ul>
 	<li><b>Hardware Setup</b><p>The following information is required to connect 
 	<b>DDUtil </b>&nbsp;to your 
-device(s).<ul>
+	device.<ul>
 		<li>What kind of device do you want to control (amplifier, antenna 
 		switch, etc.).</li>
 		<li>Is the device RS-232 or BCD driven.</li>
@@ -179,7 +181,8 @@ device(s).<ul>
 			<li>Know the BCD scheme (what codes do what) See the manufactures 
 			user manual for this.</li>
 			<li>Build a cable configured to fit your hardware setup (DB25M to 
-			your device input port). See the hardware drawings for more 
+			your device input port). See the cable
+		<a href="Cables.pdf">drawing</a> for example 
 			information.</li>
 		</ul>
 		</li>
@@ -188,7 +191,7 @@ device(s).<ul>
 </ul>
 <ul>
 	<li><b>Program Operation</b> - The following operations assume the proper 
-	setups have been performed on the Ports and Device tab(s).<ul>
+	setups have been performed on the Ports and Device tabs.<ul>
 		<li> <b>DDUtil</b> as stand-alone.<ul>
 			<li>Start <b>PowerSDR</b>, start <b>DDUtil</b>.</li>
 			<li>If all is setup correctly you should see the frequency and VFO A in the header bar as [7,033.83] (VFO A/B). If instead you see 
@@ -212,11 +215,18 @@ device(s).<ul>
 			mode.</li>
 		</ul>
 		</li>
-		<li><u><font color="#FF0000"><b>Important Notice:</b></font></u><ul>
+		<li><u><font color="#FF0000"><b>Important Notices:</b></font></u><ul>
+		<li>Parallel ports can come up in any configuration when the pc is 
+		booted up. My pc defaults to 4 (00000100) which equates to 30 meters 
+		when it boots up. You could quite easily have your BCD device set to the 
+		wrong band if caution is not exercised.<p>It is a good policy to <b>not</b> turn on your BCD device until after
+		<b>DDUtil</b> is up and running as the program will configure the port 
+		based on what <b>transmit</b> frequency it receives from <b>PowerSDR</b>.</li>
 		<li>In it's current state <b>PowerSDR</b> has a timer that will not allow 
 		devices to connect to the CAT port if <b>PowerSDR</b> has been running for 3 
 		minutes or more without a CAT connection. So if it fails to connect 
-		(displays [not connected] in the title bar) close <b>PowerSDR</b> and restart it.</li>
+		(displays [not connected] in the title bar) close <b>PowerSDR</b> and restart it. 
+		This will reset the CAT timer and <b>DDUtil</b> should now connect.</li>
 	</ul>
 		</li>
 	</ul>
@@ -235,26 +245,40 @@ device(s).<ul>
 			control lines. My Quadra uses four (4). It is entirely conceivable 
 			that two (2) BCD devices could be run off of one (1) port. Hook 
 			device 1 to port pins 2-5 and device 2 to pins 6-9. Set up the data 
-			file for say 20 meters using (14100, 85) instead of (14100, 5)and it 
+			file for say 20 meters using (14100, 85) instead of (14100, 5) and it 
 			will produce 01010101 instead of 00000101 at the parallel port which 
 			is a binary 5 for each device.</li>
 		</ul>
 		</li>
-		<li><b>Hardware Setup</b><ul>
+		<li><b>Inter-Connecting Cables</b><ul>
 		<li>Serial (RS-232) cables can be either purchased or fabricated by the 
 		user as dictated by the device to be controlled.</li>
 		<li>Parallel port cables will have to be fabricated by the user for the 
 		particular hardware setup. I have prepared a sample cable
 		<a href="Cables.pdf">drawing</a> as part of this package to 
 		serve as a guide.</li>
+		<li>If you would like to see how this concept works without setting up a 
+		binary device you can build a small
+		<a href="LEDs.pdf">LED</a> array that can connect to your parallel port.</li>
 	</ul>
 		</li>
+		<li><a name="ports"><b>&nbsp;f</b></a><b>Port Locator</b><p>If you don't know what ports 
+		are installed on your pc the following procedure will tell you.<ul>
+		<li>From the Start button select Control Panel</li>
+		<li>Select System</li>
+		<li>Select Hardware</li>
+		<li>Select Device Manager</li>
+		<li>Expand the Ports entry</li>
+	</ul>
+		<p>All your hardware  ports will be listed 
+		there.<p>
+		<img border="0" src="PortsFind.JPG"></li>
 	</ul>
 	</li>
 </ul>
 <h2><u><font color="#800080"><a name="How"></a>How it works</font></font></u></h2>
 <p><u><b>General</b></u></p>
-<p>The need for this software extends the users ability to control ancillary 
+<p>This software extends the users ability to control ancillary 
 frequency sensitive devices such as:</p>
 <ul>
 	<li>Linear Power amplifiers with automatic band switching capabilities.</li>
