@@ -32,20 +32,20 @@
 /*  Port A (bit addressable): */
 
 #define HPSDR_PA		IOA		// Port A
-#define HPSDR_PA_OE	OEA		// Port A direction register
+#define HPSDR_PA_OE	        OEA		// Port A direction register
 
-#define bmPA_S_CLK					bmBIT0		// SPI serial clock
+#define bmPA_S_CLK		bmBIT0		// SPI serial clock
 #define bmPA_S_DATA_TO_PERIPH	bmBIT1		// SPI SDI (peripheral rel name)
-#define bmPA_FIFO_SLOE				bmBIT2		// FIFO SLOE line
-#define bmPA_S_DATA_FROM_PERIPH	 bmBIT3		// SPI SDO (peripheral rel name)
-#define bmPA_FIFO_ADR0				bmBIT4		// FIFO Address line 0
-#define bmPA_FIFO_ADR1				bmBIT5		// FIFO Address line 1
-#define bmPA_FIFO_PKTEND			bmBIT6		// FIFO Packet End
-#define bmPA_FIFO_SLCS				bmBIT7		// FIFO SLCS line
+#define bmPA_FIFO_SLOE		bmBIT2		// FIFO SLOE line
+#define bmPA_S_DATA_FROM_PERIPH	bmBIT3		// SPI SDO (peripheral rel name)
+#define bmPA_FIFO_ADR0		bmBIT4		// FIFO Address line 0
+#define bmPA_FIFO_ADR1		bmBIT5		// FIFO Address line 1
+#define bmPA_FIFO_PKTEND	bmBIT6		// FIFO Packet End
+#define bmPA_FIFO_SLCS		bmBIT7		// FIFO SLCS line
 
-sbit at 0x80+0 bitS_CLK;		// 0x80 is the bit address of PORT A
-sbit at 0x80+1 bitS_OUT;		// out from FX2 point of view
-sbit at 0x80+3 bitS_IN;			// in from FX2 point of view
+sbit at 0x80+0 bitS_CLK;		        // 0x80 is the bit address of PORT A
+sbit at 0x80+1 bitS_OUT;		        // out from FX2 point of view
+sbit at 0x80+3 bitS_IN;			        // in from FX2 point of view
 
 
 /* all outputs except S_DATA_FROM_PERIPH, FX2_2, FX2_3 */
@@ -66,24 +66,24 @@ sbit at 0x80+3 bitS_IN;			// in from FX2 point of view
 #define HPSDR_ALTERA_CONFIG	HPSDR_PC
 
 #define bmALTERA_DATA0		bmBIT0
-#define bmALTERA_NCONFIG		bmBIT1
-#define bmALTERA_DCLK			bmBIT2
+#define bmALTERA_NCONFIG	bmBIT1
+#define bmALTERA_DCLK		bmBIT2
 #define bmALTERA_CONF_DONE	bmBIT3
-#define bmALTERA_NSTATUS		bmBIT4
-#define bmALTERA_NCE			bmBIT5
-#define bmPC_LED0				bmBIT6		// active low
-#define bmPC_LED1				bmBIT7		// active low
+#define bmALTERA_NSTATUS	bmBIT4
+#define bmALTERA_NCE		bmBIT5
+#define bmPC_LED0		bmBIT6		// active low
+#define bmPC_LED1		bmBIT7		// active low
 
 sbit at 0xA0+0 bitALTERA_DATA0;		// 0xA0 is the bit address of PORT C
 sbit at 0xA0+2 bitALTERA_DCLK;
 
 
 #define bmALTERA_BITS	(bmALTERA_DATA0 			\
-				 | bmALTERA_NCONFIG	 				\
-				 | bmALTERA_DCLK 					\
-				 | bmALTERA_CONF_DONE				\
-				 | bmALTERA_NSTATUS | bmALTERA_NCE	\
-				 )
+			 | bmALTERA_NCONFIG	 				\
+			 | bmALTERA_DCLK 					\
+			 | bmALTERA_CONF_DONE				\
+			 | bmALTERA_NSTATUS | bmALTERA_NCE	\
+			 )
 
 #define bmPORT_C_OUTPUTS	(bmALTERA_DATA0 		\
 				 | bmALTERA_NCONFIG					\
