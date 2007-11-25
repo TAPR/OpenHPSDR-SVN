@@ -41,9 +41,9 @@
 
 #include <string>
 
-static const int USRP_HASH_SIZE = 16;
+static const int HPSDR_HASH_SIZE = 16;
 
-enum ozy_load_status_t { OLS_ERROR = 0, OLS_OK, OLS_ALREADY_LOADED };
+enum hpsdr_load_status_t { HLS_ERROR = 0, HLS_OK, HLS_ALREADY_LOADED };
 
 struct usb_dev_handle;
 struct usb_device;

@@ -54,8 +54,8 @@ static const int FIRMWARE_HASH_SLOT	= 0;
 static const int FPGA_HASH_SLOT 	= 1;
 
 static const int hash_slot_addr[2] = {
-  USRP_HASH_SLOT_0_ADDR,
-  USRP_HASH_SLOT_1_ADDR
+  HPSDR_HASH_SLOT_0_ADDR,
+  HPSDR_HASH_SLOT_1_ADDR
 };
 
 static char *default_firmware_filename = "std.ihx";
@@ -348,7 +348,7 @@ reset_cpu (struct usb_dev_handle *udh, bool reset_p)
 
 static bool
 _hpsdr_load_firmware (struct usb_dev_handle *udh, const char *filename,
-		     unsigned char hash[USRP_HASH_SIZE])
+		      unsigned char hash[HPSDR_HASH_SIZE])
 {
   FILE	*f = fopen (filename, "ra");
   if (f == 0){
@@ -411,8 +411,8 @@ _hpsdr_load_firmware (struct usb_dev_handle *udh, const char *filename,
   // the cpu out of reset.  When it comes out of reset it
   // may renumerate which will invalidate udh.
 
-  if (!usrp_set_hash (udh, FIRMWARE_HASH_SLOT, hash))
-    fprintf (stderr, "usrp: failed to write firmware hash slot\n");
+  if (!hpsdr_set_hash (udh, FIRMWARE_HASH_SLOT, hash))
+    fprintf (stderr, "hpsdr: failed to write firmware hash slot\n");
 
   if (!reset_cpu (udh, false))		// take CPU out of reset
     goto fail;
@@ -426,7 +426,7 @@ _hpsdr_load_firmware (struct usb_dev_handle *udh, const char *filename,
 }
 
 // ----------------------------------------------------------------
-// write vendor extension command to USRP
+// write vendor extension command to Ozy
 
 static int
 write_cmd (struct usb_dev_handle *udh,
@@ -450,8 +450,8 @@ write_cmd (struct usb_dev_handle *udh,
 // load fpga
 
 static bool
-_usrp_load_fpga (struct usb_dev_handle *udh, const char *filename,
-		 unsigned char hash[USRP_HASH_SIZE])
+_hpsdr_load_fpga (struct usb_dev_handle *udh, const char *filename,
+		  unsigned char hash[HPSDR_HASH_SIZE])
 {
   bool ok = true;
 
@@ -464,11 +464,11 @@ _usrp_load_fpga (struct usb_dev_handle *udh, const char *filename,
   unsigned char buf[MAX_EP0_PKTSIZE];	// 64 is max size of EP0 packet on FX2
   int n;
 
-  usrp_set_led (udh, 1, 1);		// led 1 on
+  hpsdr_set_led (udh, 1, 1);		// led 1 on
 
 
-  // reset FPGA (and on rev1 both AD9862's, thus killing clock)
-  usrp_set_fpga_reset (udh, 1);		// hold fpga in reset
+  // reset FPGA 
+  //hpsdr_set_fpga_reset (udh, 1);		// hold fpga in reset
 
   if (write_cmd (udh, VRQ_FPGA_LOAD, 0, FL_BEGIN, 0, 0) != 0)
     goto fail;
@@ -483,17 +483,13 @@ _usrp_load_fpga (struct usb_dev_handle *udh, const char *filename,
   
   fclose (fp);
 
-  if (!usrp_set_hash (udh, FPGA_HASH_SLOT, hash))
-    fprintf (stderr, "usrp: failed to write fpga hash slot\n");
+  if (!hpsdr_set_hash (udh, FPGA_HASH_SLOT, hash))
+    fprintf (stderr, "ozy: failed to write fpga hash slot\n");
 
-  // On the rev1 USRP, the {tx,rx}_{enable,reset} bits are
-  // controlled over the serial bus, and hence aren't observed until
-  // we've got a good fpga bitstream loaded.
+  //hpsdr_set_fpga_reset (udh, 0);		// fpga out of master reset
 
-  usrp_set_fpga_reset (udh, 0);		// fpga out of master reset
-
+#if 0 // not supported by Ozy fpga/firmware at the moment
   // now these commands will work
-  
   ok &= usrp_set_fpga_tx_enable (udh, 0);
   ok &= usrp_set_fpga_rx_enable (udh, 0);
 
@@ -504,7 +500,9 @@ _usrp_load_fpga (struct usb_dev_handle *udh, const char *filename,
 
   if (!ok)
     fprintf (stderr, "usrp: failed to reset tx and/or rx path\n");
+#endif
 
+#if 0
   // Manually reset all regs except master control to zero.
   // FIXME may want to remove this when we rework FPGA reset strategy.
   // In the mean while, this gets us reproducible behavior.
@@ -513,22 +511,48 @@ _usrp_load_fpga (struct usb_dev_handle *udh, const char *filename,
       continue;
     usrp_write_fpga_reg(udh, i, 0);
   }
+#endif
 
-  power_down_9862s (udh);		// on the rev1, power these down!
-  usrp_set_led (udh, 1, 0);		// led 1 off
-
+  hpsdr_set_led (udh, 1, 0);		// led 1 off
   return true;
 
  fail:
-  power_down_9862s (udh);		// on the rev1, power these down!
+
   fclose (fp);
   return false;
 }
 
 // ----------------------------------------------------------------
 
+/* A note on Ozy LEDs.
+ * There are 12 LEDs on Ozy. Let us call them D0 to D11. To turn
+ * ON an LED, one has to make the corresponding pin active LOW.
+ * The LEDs and their corresponding pins are listed below. Out of
+ * 12 LEDs, 1 is powerON LED, 6 are connected to FX2 pins and 5 are
+ * connected to the FPGA. So here goes the list.
+ *
+ * D0  - DEBUG_LED0           - FPGA Pin 4
+ * D1  - DEBUG_LED1           - FPGA Pin 33
+ * D2  - DEBUG_LED2           - FPGA Pin 34
+ * D3  - DEBUG_LED3           - FPGA Pin 108
+ * D4  - PE0/T0OUT            - FX2  Pin 108
+ * D5  - PE1/T1OUT            - FX2  Pin 109
+ * D6  - PE2/T2OUT            - FX2  Pin 110
+ * D7  - PE3/RXD0OUT          - FX2  Pin 111
+ * D8  - PC6                  - FX2  Pin 78  (port C.6)
+ * D9  - PC7                  - FX2  Pin 79  (port C.7)
+ * D10 - FPGA_INIT_DONE       - FPGA Pin 107
+ * D11 - ground               - ON on PowerON
+ *
+ * FX2 Port C is bit addressible. FX2 Port E is not bit addressible.
+ * The set_led0 and set_led1 implemented in the current FX2 firmware
+ * can only set and reset D8 and D9. 
+ *
+ * FIXME: Get the LEDs connected to Port E to work too.
+ */
+
 bool 
-usrp_set_led (struct usb_dev_handle *udh, int which, bool on)
+hpsdr_set_led (struct usb_dev_handle *udh, int which, bool on)
 {
   int r = write_cmd (udh, VRQ_SET_LED, on, which, 0, 0);
 
@@ -536,137 +560,49 @@ usrp_set_led (struct usb_dev_handle *udh, int which, bool on)
 }
 
 bool
-usrp_set_hash (struct usb_dev_handle *udh, int which,
-	       const unsigned char hash[USRP_HASH_SIZE])
+hpsdr_set_hash (struct usb_dev_handle *udh, int which,
+		const unsigned char hash[HPSDR_HASH_SIZE])
 {
   which &= 1;
   
   // we use the Cypress firmware down load command to jam it in.
   int r = usb_control_msg (udh, 0x40, 0xa0, hash_slot_addr[which], 0,
-			   (char *) hash, USRP_HASH_SIZE, 1000);
-  return r == USRP_HASH_SIZE;
+			   (char *) hash, HPSDR_HASH_SIZE, 1000);
+  return r == HPSDR_HASH_SIZE;
 }
 
 bool
-usrp_get_hash (struct usb_dev_handle *udh, int which, 
-	       unsigned char hash[USRP_HASH_SIZE])
+hpsdr_get_hash (struct usb_dev_handle *udh, int which, 
+		unsigned char hash[HPSDR_HASH_SIZE])
 {
   which &= 1;
   
   // we use the Cypress firmware upload command to fetch it.
   int r = usb_control_msg (udh, 0xc0, 0xa0, hash_slot_addr[which], 0,
-			   (char *) hash, USRP_HASH_SIZE, 1000);
-  return r == USRP_HASH_SIZE;
+			   (char *) hash, HPSDR_HASH_SIZE, 1000);
+  return r == HPSDR_HASH_SIZE;
 }
 
 static bool
-usrp_set_switch (struct usb_dev_handle *udh, int cmd_byte, bool on)
+hpsdr_set_switch (struct usb_dev_handle *udh, int cmd_byte, bool on)
 {
   return write_cmd (udh, cmd_byte, on, 0, 0, 0) == 0;
 }
 
-
-static bool
-usrp1_fpga_write (struct usb_dev_handle *udh,
-		  int regno, int value)
-{
-  // on the rev1 usrp, we use the generic spi_write interface
-
-  unsigned char buf[4];
-
-  buf[0] = (value >> 24) & 0xff;	// MSB first
-  buf[1] = (value >> 16) & 0xff;
-  buf[2] = (value >>  8) & 0xff;
-  buf[3] = (value >>  0) & 0xff;
-  
-  return usrp_spi_write (udh, 0x00 | (regno & 0x7f),
-			 SPI_ENABLE_FPGA,
-			 SPI_FMT_MSB | SPI_FMT_HDR_1,
-			 buf, sizeof (buf));
-}
-
-static bool
-usrp1_fpga_read (struct usb_dev_handle *udh,
-		 int regno, int *value)
-{
-  *value = 0;
-  unsigned char buf[4];
-
-  bool ok = usrp_spi_read (udh, 0x80 | (regno & 0x7f),
-			   SPI_ENABLE_FPGA,
-			   SPI_FMT_MSB | SPI_FMT_HDR_1,
-			   buf, sizeof (buf));
-
-  if (ok)
-    *value = (buf[0] << 24) | (buf[1] << 16) | (buf[2] << 8) | buf[3];
-
-  return ok;
-}
-
-
-bool
-usrp_write_fpga_reg (struct usb_dev_handle *udh, int reg, int value)
-{
-  switch (usrp_hw_rev (dev_handle_to_dev (udh))){
-  case 0:			// not supported ;)
-    abort();	
-
-  default:
-    return usrp1_fpga_write (udh, reg, value);
-  }
-}
-
-bool
-usrp_read_fpga_reg (struct usb_dev_handle *udh, int reg, int *value)
-{
-  switch (usrp_hw_rev (dev_handle_to_dev (udh))){
-  case 0:		// not supported ;)
-    abort();
-    
-  default:
-    return usrp1_fpga_read (udh, reg, value);
-  }
-}
-
 bool 
-usrp_set_fpga_reset (struct usb_dev_handle *udh, bool on)
+hpsdr_set_fpga_reset (struct usb_dev_handle *udh, bool on)
 {
-  return usrp_set_switch (udh, VRQ_FPGA_SET_RESET, on);
+  return hpsdr_set_switch (udh, VRQ_FPGA_SET_RESET, on);
 }
-
-bool 
-usrp_set_fpga_tx_enable (struct usb_dev_handle *udh, bool on)
-{
-  return usrp_set_switch (udh, VRQ_FPGA_SET_TX_ENABLE, on);
-}
-
-bool 
-usrp_set_fpga_rx_enable (struct usb_dev_handle *udh, bool on)
-{
-  return usrp_set_switch (udh, VRQ_FPGA_SET_RX_ENABLE, on);
-}
-
-bool 
-usrp_set_fpga_tx_reset (struct usb_dev_handle *udh, bool on)
-{
-  return usrp_set_switch (udh, VRQ_FPGA_SET_TX_RESET, on);
-}
-
-bool 
-usrp_set_fpga_rx_reset (struct usb_dev_handle *udh, bool on)
-{
-  return usrp_set_switch (udh, VRQ_FPGA_SET_RX_RESET, on);
-}
-
 
 // ----------------------------------------------------------------
 // conditional load stuff
 
 static bool
-compute_hash (const char *filename, unsigned char hash[USRP_HASH_SIZE])
+compute_hash (const char *filename, unsigned char hash[HPSDR_HASH_SIZE])
 {
-  assert (USRP_HASH_SIZE == 16);
-  memset (hash, 0, USRP_HASH_SIZE);
+  assert (HPSDR_HASH_SIZE == 16);
+  memset (hash, 0, HPSDR_HASH_SIZE);
 
   FILE *fp = fopen (filename, "rb");
   if (fp == 0){
@@ -679,71 +615,71 @@ compute_hash (const char *filename, unsigned char hash[USRP_HASH_SIZE])
   return r == 0;
 }
 
-static usrp_load_status_t
-usrp_conditionally_load_something (struct usb_dev_handle *udh,
+static hpsdr_load_status_t
+hpsdr_conditionally_load_something (struct usb_dev_handle *udh,
 				   const char *filename,
 				   bool force,
 				   int slot,
 				   bool loader (struct usb_dev_handle *,
 						const char *,
-						unsigned char [USRP_HASH_SIZE]))
+						unsigned char [HPSDR_HASH_SIZE]))
 {
-  unsigned char file_hash[USRP_HASH_SIZE];
-  unsigned char usrp_hash[USRP_HASH_SIZE];
+  unsigned char file_hash[HPSDR_HASH_SIZE];
+  unsigned char hpsdr_hash[HPSDR_HASH_SIZE];
   
   if (access (filename, R_OK) != 0){
     perror (filename);
-    return ULS_ERROR;
+    return HLS_ERROR;
   }
 
   if (!compute_hash (filename, file_hash))
-    return ULS_ERROR;
+    return HLS_ERROR;
 
   if (!force
-      && usrp_get_hash (udh, slot, usrp_hash)
-      && memcmp (file_hash, usrp_hash, USRP_HASH_SIZE) == 0)
-    return ULS_ALREADY_LOADED;
+      && hpsdr_get_hash (udh, slot, hpsdr_hash)
+      && memcmp (file_hash, hpsdr_hash, HPSDR_HASH_SIZE) == 0)
+    return HLS_ALREADY_LOADED;
 
   bool r = loader (udh, filename, file_hash);
 
   if (!r)
-    return ULS_ERROR;
+    return HLS_ERROR;
 
-  return ULS_OK;
+  return HLS_OK;
 }
 
-usrp_load_status_t
-usrp_load_firmware (struct usb_dev_handle *udh,
-		    const char *filename,
-		    bool force)
+hpsdr_load_status_t
+hpsdr_load_firmware (struct usb_dev_handle *udh,
+		     const char *filename,
+		     bool force)
 {
-  return usrp_conditionally_load_something (udh, filename, force,
-					    FIRMWARE_HASH_SLOT,
-					    _usrp_load_firmware);
+  return hpsdr_conditionally_load_something (udh, filename, force,
+					     FIRMWARE_HASH_SLOT,
+					     _hpsdr_load_firmware);
 }
 
-usrp_load_status_t
-usrp_load_fpga (struct usb_dev_handle *udh,
-		const char *filename,
-		bool force)
+hpsdr_load_status_t
+hpsdr_load_fpga (struct usb_dev_handle *udh,
+		 const char *filename,
+		 bool force)
 {
-  return usrp_conditionally_load_something (udh, filename, force,
-					    FPGA_HASH_SLOT,
-					    _usrp_load_fpga);
+  return hpsdr_conditionally_load_something (udh, filename, force,
+					     FPGA_HASH_SLOT,
+					     _hpsdr_load_fpga);
 }
 
 static usb_dev_handle *
 open_nth_cmd_interface (int nth)
 {
-  struct usb_device *udev = usrp_find_device (nth);
+  struct usb_device *udev = hpsdr_find_device (nth);
   if (udev == 0){
-    fprintf (stderr, "usrp: failed to find usrp[%d]\n", nth);
+    fprintf (stderr, "hpsdr: failed to find ozy[%d]\n", nth);
     return 0;
   }
 
   struct usb_dev_handle *udh;
 
-  udh = usrp_open_cmd_interface (udev);
+  udh = hpsdr_open_cmd_interface (udev);
   if (udh == 0){
     // FIXME this could be because somebody else has it open.
     // We should delay and retry...
@@ -783,22 +719,22 @@ mdelay (int millisecs)
   return our_nanosleep (&ts);
 }
 
-usrp_load_status_t
-usrp_load_firmware_nth (int nth, const char *filename, bool force){
+hpsdr_load_status_t
+hpsdr_load_firmware_nth (int nth, const char *filename, bool force){
   struct usb_dev_handle *udh = open_nth_cmd_interface (nth);
   if (udh == 0)
-    return ULS_ERROR;
+    return HLS_ERROR;
 
-  usrp_load_status_t s = usrp_load_firmware (udh, filename, force);
-  usrp_close_interface (udh);
+  hpsdr_load_status_t s = hpsdr_load_firmware (udh, filename, force);
+  hpsdr_close_interface (udh);
 
   switch (s){
 
-  case ULS_ALREADY_LOADED:		// nothing changed...
-    return ULS_ALREADY_LOADED;
+  case HLS_ALREADY_LOADED:		// nothing changed...
+    return HLS_ALREADY_LOADED;
     break;
 
-  case ULS_OK:
+  case HLS_OK:
     // we loaded firmware successfully.
 
     // It's highly likely that the board will renumerate (simulate a
@@ -815,60 +751,60 @@ usrp_load_firmware_nth (int nth, const char *filename, bool force){
     usb_find_busses ();		// rescan busses and devices
     usb_find_devices ();
 
-    return ULS_OK;
+    return HLS_OK;
 
   default:
-  case ULS_ERROR:		// some kind of problem
-    return ULS_ERROR;
+  case HLS_ERROR:		// some kind of problem
+    return HLS_ERROR;
   }
 }
 
 static void
-load_status_msg (usrp_load_status_t s, const char *type, const char *filename)
+load_status_msg (hpsdr_load_status_t s, const char *type, const char *filename)
 {
-  char *e = getenv("USRP_VERBOSE");
+  char *e = getenv("HPSDR_VERBOSE");
   bool verbose = e != 0;
   
   switch (s){
-  case ULS_ERROR:
-    fprintf (stderr, "usrp: failed to load %s %s.\n", type, filename);
+  case HLS_ERROR:
+    fprintf (stderr, "hpsdr: failed to load %s %s.\n", type, filename);
     break;
     
-  case ULS_ALREADY_LOADED:
+  case HLS_ALREADY_LOADED:
     if (verbose)
-      fprintf (stderr, "usrp: %s %s already loaded.\n", type, filename);
+      fprintf (stderr, "hpsdr: %s %s already loaded.\n", type, filename);
     break;
 
-  case ULS_OK:
+  case HLS_OK:
     if (verbose)
-      fprintf (stderr, "usrp: %s %s loaded successfully.\n", type, filename);
+      fprintf (stderr, "hpsdr: %s %s loaded successfully.\n", type, filename);
     break;
   }
 }
 
 bool
-usrp_load_standard_bits (int nth, bool force,
-			 const std::string fpga_filename,
-			 const std::string firmware_filename)
+hpsdr_load_standard_bits (int nth, bool force,
+			  const std::string fpga_filename,
+			  const std::string firmware_filename)
 {
-  usrp_load_status_t 	s;
+  hpsdr_load_status_t 	s;
   const char		*filename;
   const char		*proto_filename;
   int hw_rev;
 
   // first, figure out what hardware rev we're dealing with
   {
-    struct usb_device *udev = usrp_find_device (nth);
+    struct usb_device *udev = hpsdr_find_device (nth);
     if (udev == 0){
-      fprintf (stderr, "usrp: failed to find usrp[%d]\n", nth);
+      fprintf (stderr, "hpsdr: failed to find ozy[%d]\n", nth);
       return false;
     }
-    hw_rev = usrp_hw_rev (udev);
+    hw_rev = hpsdr_hw_rev (udev);
   }
 
   // start by loading the firmware
 
-  proto_filename = get_proto_filename(firmware_filename, "USRP_FIRMWARE",
+  proto_filename = get_proto_filename(firmware_filename, "HPSDR_FIRMWARE",
 				      default_firmware_filename);
   filename = find_file(proto_filename, hw_rev);
   if (filename == 0){
@@ -876,19 +812,19 @@ usrp_load_standard_bits (int nth, bool force,
     return false;
   }
 
-  s = usrp_load_firmware_nth (nth, filename, force);
+  s = hpsdr_load_firmware_nth (nth, filename, force);
   load_status_msg (s, "firmware", filename);
 
-  if (s == ULS_ERROR)
+  if (s == HLS_ERROR)
     return false;
 
   // if we actually loaded firmware, we must reload fpga ...
-  if (s == ULS_OK)
+  if (s == HLS_OK)
     force = true;
 
   // now move on to the fpga configuration bitstream
 
-  proto_filename = get_proto_filename(fpga_filename, "USRP_FPGA",
+  proto_filename = get_proto_filename(fpga_filename, "HPSDR_FPGA",
 				      default_fpga_filename);
   filename = find_file (proto_filename, hw_rev);
   if (filename == 0){
@@ -900,18 +836,20 @@ usrp_load_standard_bits (int nth, bool force,
   if (udh == 0)
     return false;
   
-  s = usrp_load_fpga (udh, filename, force);
-  usrp_close_interface (udh);
+  s = hpsdr_load_fpga (udh, filename, force);
+  hpsdr_close_interface (udh);
   load_status_msg (s, "fpga bitstream", filename);
 
-  if (s == ULS_ERROR)
+  if (s == HLS_ERROR)
     return false;
 
   return true;
 }
 
+#if 0
+
 bool
-_usrp_get_status (struct usb_dev_handle *udh, int which, bool *trouble)
+_hpsdr_get_status (struct usb_dev_handle *udh, int which, bool *trouble)
 {
   unsigned char	status;
   *trouble = true;
@@ -923,6 +861,7 @@ _usrp_get_status (struct usb_dev_handle *udh, int which, bool *trouble)
   *trouble = status;
   return true;
 }
+
 
 bool
 usrp_check_rx_overrun (struct usb_dev_handle *udh, bool *overrun_p)
@@ -936,10 +875,11 @@ usrp_check_tx_underrun (struct usb_dev_handle *udh, bool *underrun_p)
   return _usrp_get_status (udh, GS_TX_UNDERRUN, underrun_p);
 }
 
+#endif
 
 bool
-usrp_i2c_write (struct usb_dev_handle *udh, int i2c_addr,
-		const void *buf, int len)
+hpsdr_i2c_write (struct usb_dev_handle *udh, int i2c_addr,
+		 const void *buf, int len)
 {
   if (len < 1 || len > MAX_EP0_PKTSIZE)
     return false;
@@ -1048,25 +988,6 @@ usrp_9862_write_many_all (struct usb_dev_handle *udh,
   result  = usrp_9862_write_many (udh, 0, buf, len);
   result &= usrp_9862_write_many (udh, 1, buf, len);
   return result;
-}
-
-static void
-power_down_9862s (struct usb_dev_handle *udh)
-{
-  static const unsigned char regs[] = {
-    REG_RX_PWR_DN,	0x01,			// everything
-    REG_TX_PWR_DN,	0x0f,			// pwr dn digital and analog_both
-    REG_TX_MODULATOR,	0x00			// coarse & fine modulators disabled
-  };
-
-  switch (usrp_hw_rev (dev_handle_to_dev (udh))){
-  case 0:
-    break;
-
-  default:
-    usrp_9862_write_many_all (udh, regs, sizeof (regs));
-    break;
-  }
 }
 
 
