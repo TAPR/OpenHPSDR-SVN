@@ -3,7 +3,7 @@
   <bandmulti>
     <band>
       <freq>1800</freq>
-      <data>3</data>
+      <data>1</data>
     </band>
     <band>
       <freq>1900</freq>
@@ -15,7 +15,7 @@
     </band>
     <band>
       <freq>3500</freq>
-      <data>1</data>
+      <data>2</data>
     </band>
     <band>
       <freq>3600</freq>

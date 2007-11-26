@@ -441,7 +441,6 @@ namespace DataDecoder
         {
             try
             {
-//                Settings set = Settings.Default;
                 pollTimer.Enabled = false;
                 pollInt = Convert.ToDouble(txtInv.Text);
                 set.portInv = txtInv.Text;

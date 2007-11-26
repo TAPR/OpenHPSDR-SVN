@@ -1,11 +1,19 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-	<head>
+<head>
 <title>DDUtil Online help</title>
 <meta name="description" content="Data Decoder Utility for Flex Radios">
 <link rel="stylesheet" type="text/css" href="coua.css">
-	</head>
-	<body>
+<script language="JavaScript">
+	function doExpand(paraNum,arrowNum)
+	{
+		//expand the paragraph and rotate the arrow; collapse and rotate it back
+		if (paraNum.style.display=="none"){paraNum.style.display="";arrowNum.src="arrowdn.gif"}
+		else{paraNum.style.display="none";arrowNum.src="arrowrt.gif"}
+	}
+</script>
+</head>
+<body>
 	
 <h1 align="center"><font size="5" color="#CC0000">DDUtil Online Help</font></h1>
 <p align="center"><font size="2">A Data Decoding Utility for Flex Radios</font></p>
@@ -262,7 +270,7 @@ from session to session.</p>
 		<a href="LEDs.pdf">LED</a> array that can connect to your parallel port.</li>
 	</ul>
 		</li>
-		<li><a name="ports"><b>&nbsp;f</b></a><b>Port Locator</b><p>If you don't know what ports 
+		<li><a name="ports"></a><b>Port Locator</b><p>If you don't know what ports 
 		are installed on your pc the following procedure will tell you.<ul>
 		<li>From the Start button select Control Panel</li>
 		<li>Select System</li>
