@@ -29,6 +29,7 @@ namespace DataDecoder
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setup));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPorts = new System.Windows.Forms.TabPage();
             this.grpBox1 = new System.Windows.Forms.GroupBox();
@@ -73,6 +74,9 @@ namespace DataDecoder
             this.AccPort = new System.IO.Ports.SerialPort(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.LogPort = new System.IO.Ports.SerialPort(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpBox1.SuspendLayout();
@@ -84,6 +88,7 @@ namespace DataDecoder
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
             this.tabDev1.SuspendLayout();
             this.tabDev2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -92,7 +97,7 @@ namespace DataDecoder
             this.tabControl.Controls.Add(this.tabDev0);
             this.tabControl.Controls.Add(this.tabDev1);
             this.tabControl.Controls.Add(this.tabDev2);
-            this.tabControl.Location = new System.Drawing.Point(3, 3);
+            this.tabControl.Location = new System.Drawing.Point(5, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(423, 348);
@@ -129,12 +134,11 @@ namespace DataDecoder
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(215, 51);
+            this.label11.Location = new System.Drawing.Point(214, 51);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(62, 13);
+            this.label11.Size = new System.Drawing.Size(81, 32);
             this.label11.TabIndex = 14;
-            this.label11.Text = "Logger Port";
+            this.label11.Text = "Radio Control Port";
             // 
             // cboLogPort
             // 
@@ -143,7 +147,7 @@ namespace DataDecoder
             this.cboLogPort.Name = "cboLogPort";
             this.cboLogPort.Size = new System.Drawing.Size(85, 21);
             this.cboLogPort.TabIndex = 13;
-            this.toolTip1.SetToolTip(this.cboLogPort, "Select Passive Listener Port");
+            this.toolTip1.SetToolTip(this.cboLogPort, "Select Auxillary Radio Control Port (HRD, MixW, DXLab)");
             this.cboLogPort.SelectedIndexChanged += new System.EventHandler(this.cboLogPort_SelectedIndexChanged);
             // 
             // label6
@@ -168,7 +172,7 @@ namespace DataDecoder
             // 
             this.label5.Location = new System.Drawing.Point(109, 51);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 32);
+            this.label5.Size = new System.Drawing.Size(85, 32);
             this.label5.TabIndex = 3;
             this.label5.Text = "Passive Listener Port";
             // 
@@ -179,17 +183,16 @@ namespace DataDecoder
             this.cboSerAcc.Name = "cboSerAcc";
             this.cboSerAcc.Size = new System.Drawing.Size(85, 21);
             this.cboSerAcc.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.cboSerAcc, "Select Passive Listener Port");
+            this.toolTip1.SetToolTip(this.cboSerAcc, "Select Passive Listener Port (your hardware serial port)");
             this.cboSerAcc.SelectedIndexChanged += new System.EventHandler(this.cboSerAcc_SelectionChangeCommitted);
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(8, 50);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.Size = new System.Drawing.Size(69, 33);
             this.label3.TabIndex = 1;
-            this.label3.Text = "CAT Port";
+            this.label3.Text = "Radio CAT Port";
             // 
             // cboCAT
             // 
@@ -198,7 +201,7 @@ namespace DataDecoder
             this.cboCAT.Name = "cboCAT";
             this.cboCAT.Size = new System.Drawing.Size(85, 21);
             this.cboCAT.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.cboCAT, "Select CAT Serial Port");
+            this.toolTip1.SetToolTip(this.cboCAT, "Select Radio CAT Serial Port");
             this.cboCAT.SelectedIndexChanged += new System.EventHandler(this.cboCAT_SelectedIndexChanged);
             // 
             // grpBox2
@@ -346,7 +349,7 @@ namespace DataDecoder
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(54, 22);
             this.txtTitle.TabIndex = 10;
-            this.toolTip1.SetToolTip(this.txtTitle, "Decimal number of selected port.");
+            this.toolTip1.SetToolTip(this.txtTitle, "Decimal number of selected port (ignore)");
             // 
             // tabDev0
             // 
@@ -447,6 +450,7 @@ namespace DataDecoder
             this.chkDev0.Size = new System.Drawing.Size(65, 17);
             this.chkDev0.TabIndex = 44;
             this.chkDev0.Text = "Enabled";
+            this.toolTip1.SetToolTip(this.chkDev0, "Check to enable this device");
             this.chkDev0.UseVisualStyleBackColor = true;
             this.chkDev0.CheckedChanged += new System.EventHandler(this.chkDev0_CheckedChanged);
             // 
@@ -512,11 +516,12 @@ namespace DataDecoder
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(354, 357);
+            this.button1.Location = new System.Drawing.Point(342, 357);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(57, 23);
             this.button1.TabIndex = 64;
             this.button1.Text = "Help";
+            this.toolTip1.SetToolTip(this.button1, "A help file for DDUtil");
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.btnHelp_Click);
             // 
@@ -536,15 +541,42 @@ namespace DataDecoder
             // 
             this.LogPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.OnReceive);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 48);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
+            this.toolStripMenuItem1.Text = "Restore Form Size";
+            this.toolStripMenuItem1.ToolTipText = "Restore form to full size";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(172, 22);
+            this.toolStripMenuItem2.Text = "Shrink Form Size";
+            this.toolStripMenuItem2.ToolTipText = "Shrink form to title bar only";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 385);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(434, 386);
+            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Setup";
             this.Text = "DDUtil";
+            this.toolTip1.SetToolTip(this, "Right-Click for Options");
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Setup_FormClosing);
             this.tabControl.ResumeLayout(false);
             this.tabPorts.ResumeLayout(false);
@@ -565,6 +597,7 @@ namespace DataDecoder
             this.tabDev1.PerformLayout();
             this.tabDev2.ResumeLayout(false);
             this.tabDev2.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -615,6 +648,9 @@ namespace DataDecoder
         private System.IO.Ports.SerialPort LogPort;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cboLogPort;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
 
     }
 }

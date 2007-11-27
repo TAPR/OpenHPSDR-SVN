@@ -120,9 +120,6 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>236, 17</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>236, 17</value>
-  </metadata>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -132,4 +129,30 @@
   <metadata name="LogPort.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>328, 17</value>
   </metadata>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>417, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAIAICAQAAAABADoAgAAJgAAABAQEAAAAAQAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAAAC
+        AAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwACAgIAAAAD/AAD/
+        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAiIiIiIiIiIiIiAAAAAAAAI93d3d3d3d3d3gAAAAAAACPd3d3d3d3d3d4
+        AAAAAAAAj3d3d3d3d3d3eAAAAAAAAI93d3d3d3d3d3gAAACIgACPfMx3zMd3zHd4AACId4gAj3x3x8d8
+        fHfHeAAAj/dwd498d8fHfHx3x3gAAI//eAiPfHfHx3x8d8d4AAAI/3AAj3x3x8d8fHfHeAAAAIiAAI98
+        zHfMx3x3x3gAAAAAAACPd3d3d3d3d3d4AAAAAAAAj3d3d3d3d3d3eAAAAAAAAI93d3d3d3d3d3gAAAAA
+        AACP///////////4AAAAAAAAiIiIiIiIiIiIiAAAAAAAAAAACAAAAAgAAAAAAAAAAAAAAAhwAAAIcAAA
+        AAAAAAAAAAAAgAAAAIAAAAAAAAAAAAAACAgAAAgIAAAAAAAAAAAACHd4gAh3eIAAAAAAAAAAAAj/d4AI
+        /3eAAAAAAAAAAAAI//eACP/3gAAAAAAAAAAAAI/3AACP9wAAAAAAAAAAAAAHdwAAB3cAAAAA////////
+        /////////////////////////wAAB/8AAAf/AAAH/wAAB/8AAAfHAAAHgwAABwAAAAcAAAAHAAAAB4MA
+        AAfHAAAH/wAAB/8AAAf/AAAH/wAAB/8AAAf/+vr///j4///4+P//8HB//+AgP//gID//4CA///Bwf//4
+        +P8oAAAAEAAAACAAAAABAAQAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAA
+        AACAAIAAgIAAAMDAwACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAALew
+        JyAAAAAAe3BycAAAAAC3sCcgAAAAgAAAAAAAAI9wl5DGwAAAj3B5cGxgcHCPcJeQxsAPAI9wAAAAAHBw
+        j3d3d3gAAACP////8AAAAIiIiIiAAAAAAAAAAAAAAAAABwcAAAAAAAAA8AAAAAAAAAcHAAAA/gAAAP4A
+        AAD+AAAA/gAAAPAAAADwAAAA8AAAABAAAAAAAAAAEAMAAPADAADwAwAA/38AAP4/AAD+PwAA/j8AAA==
+</value>
+  </data>
 </root>
