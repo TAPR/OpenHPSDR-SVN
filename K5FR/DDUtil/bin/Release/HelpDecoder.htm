@@ -17,7 +17,7 @@
 	
 <h1 align="center"><font size="5" color="#CC0000">DDUtil Online Help</font></h1>
 <p align="center"><font size="2">A Data Decoding Utility for Flex Radios</font></p>
-<p align="center"><font size="2" color="#0000FF">(Author K5FR)</font></p>
+<p align="center"><font size="2" color="#0000FF">(Steve Nance - K5FR)</font></p>
 <p align="center">&nbsp;</p>
 The <b>Data Decoder</b> <b>Utility</b> <b>(DDUtil) </b>enables you to</font>:<ul>
 	<li>Send transmit frequency data to RS-232 passive listener devices such as 
@@ -36,6 +36,7 @@ The <b>Data Decoder</b> <b>Utility</b> <b>(DDUtil) </b>enables you to</font>:<ul
 
 
 <p><a href="#Intro">Introduction</a></font></p>
+<p><a href="#Install">Install</a></p>
 <p><a href="#Instructions">Setup</a></font></p>
 <p><a href="#Scenario">Usage</font></a></p>
 <p><a href="#How">How it Works</a></font></p>
@@ -47,21 +48,38 @@ frequency sensitive devices such as linear amplifiers, antenna controllers (Step
 antenna tuners, antenna band switchers, etc. <b>DDUtil</b> may be used in 
 a stand-alone mode or with a radio control program such as DXLab Commander, Ham 
 Radio Deluxe, Mix2W or any other radio control program that can use standard 
-Kenwood CAT commands for communication with <b>PowerSDR</b>. <b>DDUtil</b> 
+Kenwood CAT commands for communication with <b>PowerSDR</b>. 
+<p><b>DDUtil</b> 
 automatically senses when a radio control program is trying to communicate with 
-<b>PowerSDR</b> and modifies it's mode of operation to allow for this, no user 
-intervention is required. See the <a href="#How">&quot;How it Works&quot;</a> section for 
-a more detailed description of program operation.<p>An XML file is used to 
-provide the decoding reference data needed for the BCD output. A sample file is 
+<b>PowerSDR</b> and modifies it's mode of operation requiring no user 
+intervention. See the <a href="#How">&quot;How it Works&quot;</a> section for 
+a more detailed description of program design.<p>An XML file is used to 
+provide the reference data needed for the BCD output data. A sample file is 
 included with the distribution files to serve as a guide. This file may be 
 created from scratch or modified from the sample provided and then saved with 
 an appropriate user name. All file modification may be 
 accomplished within the program or may be done in any XML file 
 editor of the users choice. But, unless the user is familiar with XML file 
 editing it is recommended that XML file modification be confined to <b>DDUtil</b> 
-until proficiency is obtained. <p>The initial release is designed for the Flex 
+until proficiency is obtained. Please note that this file requires a specific 
+format see the <b>'BCD Data File Format'</b> topic in <a href="#Other">Other Topics</a> for details.<p>The initial release is designed for the Flex 
 family of radios including the SDR-1000 and Flex5000 series, but may well be 
-extended to other radios in the future.<h2><u><font color="#800080"><a name="Instructions"></a>
+extended to other radios in the future.<h2><u><font color="#800080">
+<a name="Install"></a>Installation</font></u></h2>
+<p><u><b>Prerequisites:</b></u>&nbsp;&nbsp;&nbsp; </p>
+<p><b>DDUtil</b> requires 
+Microsoft .NET 2.0 in order to function. The setup file will automatically guide 
+you through this installation if your pc doesn't have it. Just follow the 
+prompts and select x86 when it asks you which one you want to download.</p>
+<p>Execute the file Setup.exe. Follow the prompts, accept the defaults and you 
+should get a Icon on your desktop like this one.
+<img border="0" src="DDUtilicon.JPG" width="32" height="32"> </p>
+<p>Additionally, there is an entry in your pc's programs group for DDUtil should 
+the desktop icon be lost This can be reached by selecting Start\All 
+Programs\DDUtil</p>
+<p>Be advised that <b>DDUtil</b> must be uninstalled before updating to a newer 
+version. The installer will tell you also.</p>
+<h2><u><font color="#800080"><a name="Instructions"></a>
 Setup</font></u></h2>
 <ul>
 	<li>
@@ -74,17 +92,24 @@ Setup</font></u></h2>
 	<p style="margin-top: 3px; margin-bottom: 6px"><b>Ports Setup</b><ul>
 	<li>
 	<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Serial Ports</b> group 
-		select the CAT port you will use to talk to your radio.</li>
+		select from the drop down box the CAT port you will use to talk to your radio. 
+	This will be one of a virtual port pair like N8VB's VCOM utility provides. 
+	See this Flex Knowledge Base 
+		<a href="http://kb.flex-radio.com/Article.aspx?id=10068">article</a> 
+	dealing with setting up virtual serial ports.</li>
 	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select the 
+	<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select from the 
+	drop down box the 
 		passive listener port you will use. Usually COM1, but may be any RS-232 
 		compliant serial port connected to your pc including USB to serial adapters.</li>
 	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select the 
-		logger port you will use. This will be one of a virtual serial port pair like 
-		N8VB's VCOM utility provides. See this Flex Knowledge Base 
-		<a href="http://kb.flex-radio.com/Article.aspx?id=10068">article</a> dealing with setting up virtual serial ports. In the example 
-	above the Radio Control port is set to COM4 and <b>DDUtil </b>is set to COM5. </li>
+	<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select from the 
+	drop down box the radio control/logger port you will use. This will be one 
+	of a virtual serial port pair like N8VB's VCOM utility provides. In the example 
+	above the Radio Control program (HRD, etc.) port is set to COM4 and <b>DDUtil </b>is set to COM5. 
+	<p style="margin-top: 3px; margin-bottom: 6px"><u><b>Note:</b></u> in the 
+	setup section of the Radio Control Program set the radio type to <b>Kenwood</b>, 
+	the speed parity and stop bits don't matter on virtual serial ports.</li>
 	<li>
 	<p style="margin-top: 3px; margin-bottom: 6px">Set the Cat Polling 
 		Interval. This defaults to 1000 which equates to 1 second. Lower numbers 
@@ -95,9 +120,9 @@ Setup</font></u></h2>
 		group, optionally, select the parallel port you will use. Usually LPT1, 
 	but may be any parallel port including USB to parallel port adapters<b>.</b><p style="margin-top: 3px; margin-bottom: 6px">
 	<b>Note:</b>&nbsp; You can get help <a href="#ports">here</a> finding 
-	parallel port numbers.</li>
+	out if you have any parallel ports and what their numbers are.</li>
 	<li>In the <b>Data Signals</b> group, select the device you want to use as a 
-	decode file source. In order to make this selection you will have to go to 
+	file source for the BCD data. In order to make this selection you will have to go to 
 	one or more of the device tabs and setup a source. See the following section 
 	for advice on this.</ol></li>
 	</ul>
@@ -108,14 +133,14 @@ Setup</font></u></h2>
 	</li>
 	</ul>
 	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Selecting 
-	the Device tab at the top of the form will display the following form.</p>
+	the first of the Device tabs at the top of the form will display the following form.</p>
 	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<img border="0" src="DDUtilDevice.JPG">&nbsp; </p>
 <blockquote>
 	<p style="margin-top: 3px; margin-bottom: 6px">This page of the setup 
 		form is for configuring the BCD data file. This file is needed to set 
 	the parallel port BCD codes for your frequency dependent device and will 
-	vary according to the device's function. The following is an example of the 
+	vary according to the device's configuration and design criteria. The following is an example of the 
 	codes required for a Yaesu Quadra amplifier to automatically switch bands as 
 	<b>PowerSDR</b> changes frequency.</p>
 	<ul>
@@ -132,7 +157,7 @@ Setup</font></u></h2>
 	<ul>
 		<li>
 		<p style="margin-top: 3px; margin-bottom: 6px">This page is pretty self 
-	explanatory, but here is a description of the controls functions.</p>
+	explanatory, here is a description of the controls functions.</p>
 		<ul>
 			<li>
 			<p style="margin-top: 3px; margin-bottom: 6px"><b>Device Name</b> = Give 
@@ -217,13 +242,32 @@ from session to session.</p>
 			A) in the title bar of <b>DDUtil</b> and your radio 
 			control/logging program should show it has control of <b>PowerSDR</b>. 
 			</li>
-			<li><b>Note:</b>
-			<p>The <b>[RC]</b> stands for Radio Control program is in use. If 
+			<li><u><b>Note:</b></u> The <b>[RC]</b> stands for Radio Control program is in use. If 
 			the [RC] is not in the title bar the program is in <b>Stand-Alone</b> 
 			mode.</li>
 		</ul>
 		</li>
-		<li><u><font color="#FF0000"><b>Important Notices:</b></font></u><ul>
+		<li>Tool Tips (description of control function) are available for all controls by 
+		hovering the mouse over the control momentarily.</li>
+		<li>Once setup <b>DDUtil</b> can be either 
+		be minimized or reduced to a minimal size for normal operation. Shrinking is 
+		accomplished by <b>right</b> clicking anywhere on the form (except the 
+		title bar)&nbsp; where a 
+		menu will appear 
+		giving the options of <b>Shrink </b>&amp; <b>Restore</b>. Additionally 
+		the borders of the form may be resized as desired.</li>
+	</ul>
+	<p>&nbsp;&nbsp;&nbsp;
+	<img border="0" src="ShrinkMenu.JPG" width="173" height="48"></p>
+	<p>&nbsp;</li>
+	<li><u><font color="#FF0000"><b>Important Notices Please Read</b></font></u><ul>
+		<li>When connecting to a amplifier remember that Flex radios
+		<font color="#FF0000"><u><b>DO NOT</b></u></font> have any
+		<font color="#FF0000"><b>ALC</b></font> control circuitry, 
+		<font color="#800000"><b><i>yet!</i></b></font> It is up 
+		to the operator to make sure the drive power level is adjusted properly 
+		in <b>PowerSDR</b> or the amp may be over driven which could result in 
+		distortion and/or the amp being damaged.</li>
 		<li>Parallel ports can come up in any configuration when the pc is 
 		booted up. My pc defaults to 4 (00000100) which equates to 30 meters 
 		when it boots up. You could quite easily have your BCD device set to the 
@@ -235,14 +279,11 @@ from session to session.</p>
 		minutes or more without a CAT connection. So if it fails to connect 
 		(displays [not connected] in the title bar) close <b>PowerSDR</b> and restart it. 
 		This will reset the CAT timer and <b>DDUtil</b> should now connect.</li>
-	</ul>
-		</li>
-	</ul>
-	</li>
+	</ul></li>
 	<li><b><a name="Other"></a>Other Topics</b><ul>
 		<li><b>BCD Data File Format</b><ul>
 		<li>The BCD data file has a specific format that must be adhered to. The 
-		frequency must be in multiples of 100 khz (7000, 7100, 7200) due to the 
+		frequency must be in multiples of 100 kHz (7000, 7100, 7200) due to the 
 		way the BCD look up algorithm is constructed. The data itself can be any 
 		decimal number from 0 - 255. An example setting 14,100 would be freq = 
 		14100, data= 5 which equates to binary 00000101. </li>
@@ -267,7 +308,10 @@ from session to session.</p>
 		serve as a guide.</li>
 		<li>If you would like to see how this concept works without setting up a 
 		binary device you can build a small
-		<a href="LEDs.pdf">LED</a> array that can connect to your parallel port.</li>
+		<a href="LEDs.pdf">LED</a> array that can connect to your parallel port 
+		and show the binary code being sent.</li>
+		You can watch the LEDs 
+		change as the frequency changes.
 	</ul>
 		</li>
 		<li><a name="ports"></a><b>Port Locator</b><p>If you don't know what ports 
@@ -341,7 +385,6 @@ describe these events.</p>
 		<li>Disable the <b>PowerSDR</b> polling timer which disables querying of the 
 		radio for frequency data as this is now done by the logger program</li>
 		<li>Set Log flag to true</li>
-		<li>Return</li>
 	</ul>
 	</li>
 	<li><b>Logger Port Polling Timer Elapsed</b> 
@@ -352,7 +395,6 @@ describe these events.</p>
 		<li>Set radio poll timer to enabled</li>
 		<li>Set the log flag to false</li>
 		<li>Reset the logger polling timer (10 seconds)</li>
-		<li>Return</li>
 	</ul>
 	</li>
 	<li><b>Radio Port Polling Timer Elapsed</b> 
@@ -365,7 +407,6 @@ describe these events.</p>
 		<li>If yes, send formatted frequency data to the selected passive 
 		listener serial port and call BCD decoding routine to process and output 
 		the BCD data on the selected parallel port</li>
-		<li>Return</li>
 	</ul>
 	</li>
 </ul>
@@ -382,8 +423,7 @@ FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
 details.</p>
 </font><font SIZE="2" COLOR="#008000"></font><font SIZE="2">
 <p>You should have received a copy of the GNU General Public License along with 
-this program; If not, see <a href="http://www.gnu.org/licenses/">
-http://www.gnu.org/licenses/</a></p>
+this program; If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a></p>
 </font><font SIZE="2" COLOR="#008000"></font><font SIZE="2">
 <p>You may contact the author via email at: k5fr@arrl.net</p>
 </font>

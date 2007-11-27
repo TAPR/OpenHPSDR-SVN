@@ -24,6 +24,7 @@ using System;
 using System.Collections;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Text;
@@ -50,7 +51,7 @@ namespace DataDecoder
         string fileName = "BandData.xml";
         string[] ports;
         string OutBuffer;
-        string ver = "0.2 Beta";
+        string ver = "1.0.0 Beta";
         string vfo = "";
         System.Timers.Timer pollTimer;
         System.Timers.Timer logTimer;
@@ -863,5 +864,21 @@ namespace DataDecoder
             }
         }
         #endregion Timer Events 
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(442,34);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(442, 420);
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(442, 57);
+        }
+
     }
 }
