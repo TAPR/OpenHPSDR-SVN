@@ -138,6 +138,8 @@ namespace MercScope
             int xtpos = hScrollBar1.Value;
             int xDraw = xtpos;
 
+            float lo_phase_angle = 0;
+
             if (!read_adc(ref adcbuf)) // check we have ADC data, if not return
                 return;
 
@@ -161,17 +163,43 @@ namespace MercScope
             // multiply  real input by sin & cos to create I&Q
             for (int i = 0; i < isize; i++)
             {
-                d_i_b[i] = d_adc[i] * Math.Sin(phase_angle);
-                d_q_b[i] = d_adc[i] * Math.Cos(phase_angle);
-                phase_angle += (0.0368 * 10);  // this is the local oscillator
+                d_i_b[i] = d_adc[i] * Math.Sin(lo_phase_angle);
+                d_q_b[i] = d_adc[i] * Math.Cos(lo_phase_angle);
+                lo_phase_angle += (1.5F);  // this is the local oscillator
             }
 
             // Pass I&Q samples through FIR LPF
 
-            // FIR(ref d_i_b, ref d_q_b);
+            float[] input_data_i = new float[isize];
+            float[] input_data_q = new float[isize];
 
-            DataConvert.DoubleToInt(d_i_b, 30000, ref ivalbuf); // display I channel on 'scope
-            DataConvert.DoubleToInt(d_q_b, 30000, ref qvalbuf); // display Q channel on 'scope
+            float[] output_data_i = new float [isize];
+            float[] output_data_q = new float [isize];
+
+            //convert double to float
+            for (int i = 0; i < isize; i++)
+            {
+                input_data_i[i] = (float) d_i_b[i];
+                input_data_q[i] = (float)d_q_b[i];
+            }
+
+            // apply FIR LPF
+            r.Resample(ref input_data_i, ref output_data_i); // I data
+            r.Resample(ref input_data_q, ref output_data_q); // Q data
+
+            // convert float to double
+            double[] out_data_i = new double[isize];
+            double[] out_data_q = new double[isize];
+
+            for (int i = 0; i < isize; i++)
+            {
+                out_data_i[i] = (double)output_data_i[i];
+                out_data_q[i] = (double)output_data_q[i];
+            }
+
+
+            DataConvert.DoubleToInt(out_data_i, 30000, ref ivalbuf); // display I channel on 'scope
+            DataConvert.DoubleToInt(out_data_q, 30000, ref qvalbuf); // display Q channel on 'scope
 
             double[] ps_result = new double[d_i_b.Length];
 
@@ -272,7 +300,8 @@ namespace MercScope
                     short i16;
                     byte[] tbuf; 
                     i = Math.Sin(phase_angle); 
-                    phase_angle += 0.0368;
+                    //phase_angle += 0.0368;
+                    phase_angle += 0.5;
                     i16 = (short)(32767.0 * i);
                     tbuf = BitConverter.GetBytes(i16);
                     byte noise_bits = (byte)(rbuf[j] & 0xf); 

@@ -38,7 +38,7 @@ namespace SharpDSP
 			
 			filter_des.MakeFirLowpass(0.45f, 
 			                          interpolation_factor, 
-			                          SharpDSP.WindowType.HANNING_WINDOW, 
+			                          SharpDSP.WindowType.RECTANGULAR_WINDOW, 
 			                          ref taps, 
 			                          taps.Length);
 			
@@ -58,7 +58,7 @@ namespace SharpDSP
 				{
 					for (int k=filter_phase; k<num_taps; k+=interpolation_factor)
 					{
-						output_data[j] = (float)(filter_memory[j] * taps[k]);
+						output_data[j] += (float)(filter_memory[j] * taps[k]);
 						j = (j+mask) & mask;
 					}
 					output_data[j] *= (float)interpolation_factor;
