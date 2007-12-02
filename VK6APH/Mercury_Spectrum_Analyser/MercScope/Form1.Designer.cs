@@ -49,6 +49,7 @@ namespace MercScope
             this.chkSpec = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
             this.nudSpecScale = new System.Windows.Forms.NumericUpDown();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -296,6 +297,11 @@ namespace MercScope
             0,
             0});
             // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 1000;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -356,6 +362,7 @@ namespace MercScope
         private System.Windows.Forms.CheckBox chkSpec;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.NumericUpDown nudSpecScale;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

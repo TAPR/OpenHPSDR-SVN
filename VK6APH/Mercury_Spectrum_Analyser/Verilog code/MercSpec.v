@@ -17,7 +17,8 @@
 	
 	Start coding based on Mercury II code
 	Load RAM from file with 12 cycles of sine wave and send continously to FX2.
-	This simulates 12.5MHz sine wave when sampling at 125MHz
+	This simulates 12.5MHz sine wave when sampling at 125MHz.
+	Runs off IFCLK.
 	
 
 */
