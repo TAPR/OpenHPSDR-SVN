@@ -166,5 +166,17 @@ namespace DataDecoder.Properties {
                 this["Dev0Enab"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        public string lptNum {
+            get {
+                return ((string)(this["lptNum"]));
+            }
+            set {
+                this["lptNum"] = value;
+            }
+        }
     }
 }

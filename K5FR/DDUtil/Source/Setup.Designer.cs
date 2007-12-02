@@ -42,18 +42,20 @@ namespace DataDecoder
             this.label3 = new System.Windows.Forms.Label();
             this.cboCAT = new System.Windows.Forms.ComboBox();
             this.grpBox2 = new System.Windows.Forms.GroupBox();
+            this.btnPortNum = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cboDevice = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chkDevice = new System.Windows.Forms.CheckBox();
             this.grpLPT = new System.Windows.Forms.GroupBox();
+            this.rbOther = new System.Windows.Forms.RadioButton();
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.rb4 = new System.Windows.Forms.RadioButton();
             this.rb2 = new System.Windows.Forms.RadioButton();
             this.rbNone = new System.Windows.Forms.RadioButton();
             this.rb3 = new System.Windows.Forms.RadioButton();
-            this.txtTitle = new System.Windows.Forms.TextBox();
+            this.txtPort = new System.Windows.Forms.TextBox();
             this.tabDev0 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSave0 = new System.Windows.Forms.Button();
@@ -77,6 +79,7 @@ namespace DataDecoder
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblPortBtn = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpBox1.SuspendLayout();
@@ -206,16 +209,29 @@ namespace DataDecoder
             // 
             // grpBox2
             // 
+            this.grpBox2.Controls.Add(this.lblPortBtn);
+            this.grpBox2.Controls.Add(this.btnPortNum);
             this.grpBox2.Controls.Add(this.label7);
             this.grpBox2.Controls.Add(this.groupBox5);
             this.grpBox2.Controls.Add(this.grpLPT);
-            this.grpBox2.Controls.Add(this.txtTitle);
+            this.grpBox2.Controls.Add(this.txtPort);
             this.grpBox2.Location = new System.Drawing.Point(11, 110);
             this.grpBox2.Name = "grpBox2";
             this.grpBox2.Size = new System.Drawing.Size(381, 192);
             this.grpBox2.TabIndex = 18;
             this.grpBox2.TabStop = false;
             this.grpBox2.Text = "Parallel Port";
+            // 
+            // btnPortNum
+            // 
+            this.btnPortNum.BackColor = System.Drawing.Color.Transparent;
+            this.btnPortNum.Location = new System.Drawing.Point(85, 148);
+            this.btnPortNum.Name = "btnPortNum";
+            this.btnPortNum.Size = new System.Drawing.Size(19, 19);
+            this.btnPortNum.TabIndex = 29;
+            this.toolTip1.SetToolTip(this.btnPortNum, "Press to save non-standard port number");
+            this.btnPortNum.UseVisualStyleBackColor = false;
+            this.btnPortNum.Click += new System.EventHandler(this.btnPortNum_Click);
             // 
             // label7
             // 
@@ -272,6 +288,7 @@ namespace DataDecoder
             // 
             // grpLPT
             // 
+            this.grpLPT.Controls.Add(this.rbOther);
             this.grpLPT.Controls.Add(this.rb1);
             this.grpLPT.Controls.Add(this.rb4);
             this.grpLPT.Controls.Add(this.rb2);
@@ -284,6 +301,17 @@ namespace DataDecoder
             this.grpLPT.TabStop = false;
             this.grpLPT.Text = "Selector";
             this.toolTip1.SetToolTip(this.grpLPT, "Select Parallel Port");
+            // 
+            // rbOther
+            // 
+            this.rbOther.AutoSize = true;
+            this.rbOther.Location = new System.Drawing.Point(63, 20);
+            this.rbOther.Name = "rbOther";
+            this.rbOther.Size = new System.Drawing.Size(51, 17);
+            this.rbOther.TabIndex = 27;
+            this.rbOther.Text = "Other";
+            this.rbOther.UseVisualStyleBackColor = true;
+            this.rbOther.CheckedChanged += new System.EventHandler(this.grpLPT_CheckedChanged);
             // 
             // rb1
             // 
@@ -341,15 +369,17 @@ namespace DataDecoder
             this.rb3.UseVisualStyleBackColor = true;
             this.rb3.CheckedChanged += new System.EventHandler(this.grpLPT_CheckedChanged);
             // 
-            // txtTitle
+            // txtPort
             // 
-            this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.HideSelection = false;
-            this.txtTitle.Location = new System.Drawing.Point(7, 145);
-            this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(54, 22);
-            this.txtTitle.TabIndex = 10;
-            this.toolTip1.SetToolTip(this.txtTitle, "Decimal number of selected port (ignore)");
+            this.txtPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPort.HideSelection = false;
+            this.txtPort.Location = new System.Drawing.Point(7, 145);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(54, 22);
+            this.txtPort.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.txtPort, "Decimal number of selected port. You can change this to any number (see help file" +
+                    ").");
+            this.txtPort.TextChanged += new System.EventHandler(this.txtPort_TextChanged);
             // 
             // tabDev0
             // 
@@ -565,6 +595,16 @@ namespace DataDecoder
             this.toolStripMenuItem2.ToolTipText = "Shrink form to title bar only";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
+            // lblPortBtn
+            // 
+            this.lblPortBtn.AutoSize = true;
+            this.lblPortBtn.Location = new System.Drawing.Point(110, 152);
+            this.lblPortBtn.Name = "lblPortBtn";
+            this.lblPortBtn.Size = new System.Drawing.Size(132, 13);
+            this.lblPortBtn.TabIndex = 30;
+            this.lblPortBtn.Text = "Press to save port address";
+            this.lblPortBtn.Visible = false;
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -634,7 +674,7 @@ namespace DataDecoder
         private System.Windows.Forms.Button btnFile0;
         private System.Windows.Forms.ComboBox cboSerAcc;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtTitle;
+        private System.Windows.Forms.TextBox txtPort;
         private System.IO.Ports.SerialPort AccPort;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtInv;
@@ -651,6 +691,9 @@ namespace DataDecoder
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.RadioButton rbOther;
+        private System.Windows.Forms.Button btnPortNum;
+        private System.Windows.Forms.Label lblPortBtn;
 
     }
 }
