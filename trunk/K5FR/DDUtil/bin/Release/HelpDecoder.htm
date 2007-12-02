@@ -66,19 +66,21 @@ format see the <b>'BCD Data File Format'</b> topic in <a href="#Other">Other Top
 family of radios including the SDR-1000 and Flex5000 series, but may well be 
 extended to other radios in the future.<h2><u><font color="#800080">
 <a name="Install"></a>Installation</font></u></h2>
-<p><u><b>Prerequisites:</b></u>&nbsp;&nbsp;&nbsp; </p>
-<p><b>DDUtil</b> requires 
-Microsoft .NET 2.0 in order to function. The setup file will automatically guide 
+<ul>
+	<li><u><b>Prerequisites:</b></u><b>&nbsp;&nbsp;&nbsp; DDUtil</b> requires 
+Microsoft .NET 2.0 in order to load and function. The setup file will automatically guide 
 you through this installation if your pc doesn't have it. Just follow the 
-prompts and select x86 when it asks you which one you want to download.</p>
-<p>Execute the file Setup.exe. Follow the prompts, accept the defaults and you 
+prompts and select x86 when it asks you which one you want to download.</li>
+	<li>Execute the file <b>'Setup.exe'</b>, follow the prompts, accept the defaults and you 
 should get a Icon on your desktop like this one.
-<img border="0" src="DDUtilicon.JPG" width="32" height="32"> </p>
-<p>Additionally, there is an entry in your pc's programs group for DDUtil should 
+	<img border="0" src="DDUtilicon.JPG" width="32" height="32"> </li>
+	<li>Additionally, there is an entry in your pc's <b>Programs</b> group for
+	<b>DDUtil</b> should 
 the desktop icon be lost This can be reached by selecting Start\All 
-Programs\DDUtil</p>
-<p>Be advised that <b>DDUtil</b> must be uninstalled before updating to a newer 
-version. The installer will tell you also.</p>
+Programs\DDUtil</li>
+	<li>Be advised that <b>DDUtil</b> must be uninstalled before updating to a newer 
+version. The installer will tell you also.</li>
+</ul>
 <h2><u><font color="#800080"><a name="Instructions"></a>
 Setup</font></u></h2>
 <ul>
@@ -89,10 +91,10 @@ Setup</font></u></h2>
 	&nbsp;&nbsp;&nbsp;
 	<img border="0" src="DDUtilPorts.jpg" >&nbsp; </li>
 	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px"><b>Ports Setup</b><ul>
+	<p style="margin-top: 3px; margin-bottom: 6px"><b>Ports Setup Tab</b><ul>
 	<li>
 	<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Serial Ports</b> group 
-		select from the drop down box the CAT port you will use to talk to your radio. 
+		select the <b>CAT Port</b> you will use to talk to your radio. 
 	This will be one of a virtual port pair like N8VB's VCOM utility provides. 
 	See this Flex Knowledge Base 
 		<a href="http://kb.flex-radio.com/Article.aspx?id=10068">article</a> 
@@ -100,27 +102,38 @@ Setup</font></u></h2>
 	<li>
 	<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select from the 
 	drop down box the 
-		passive listener port you will use. Usually COM1, but may be any RS-232 
+		<b>Passive Listener Port</b> you will use. Usually COM1, but may be any RS-232 
 		compliant serial port connected to your pc including USB to serial adapters.</li>
 	<li>
 	<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select from the 
-	drop down box the radio control/logger port you will use. This will be one 
+	drop down box the <b>Radio Control Port</b> you will use. This will be one 
 	of a virtual serial port pair like N8VB's VCOM utility provides. In the example 
 	above the Radio Control program (HRD, etc.) port is set to COM4 and <b>DDUtil </b>is set to COM5. 
 	<p style="margin-top: 3px; margin-bottom: 6px"><u><b>Note:</b></u> in the 
 	setup section of the Radio Control Program set the radio type to <b>Kenwood</b>, 
 	the speed parity and stop bits don't matter on virtual serial ports.</li>
 	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px">Set the Cat Polling 
-		Interval. This defaults to 1000 which equates to 1 second. Lower numbers 
+	<p style="margin-top: 3px; margin-bottom: 6px">Set the <b>Cat Polling 
+	Interval</b>. This defaults to 1000 which equates to 1 second. Lower numbers 
 	speed up the polling time, but increase CPU utilization so caution should be exercised when setting this number. 1000 has proven to 
 		be a satisfactory interval.</li>
 	<li>
 	<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Parallel Port</b> 
 		group, optionally, select the parallel port you will use. Usually LPT1, 
-	but may be any parallel port including USB to parallel port adapters<b>.</b><p style="margin-top: 3px; margin-bottom: 6px">
-	<b>Note:</b>&nbsp; You can get help <a href="#ports">here</a> finding 
+	but may be any parallel port including USB to parallel port adapters may be 
+	used.<ul>
+	<li>
+	<p style="margin-top: 3px; margin-bottom: 6px">If your not sure what your 
+	port numbers are you can get help <a href="#ports">here</a> finding 
 	out if you have any parallel ports and what their numbers are.</li>
+	<li>
+	<p style="margin-top: 3px; margin-bottom: 6px">If you are using an <b>add-on 
+	board</b> or <b>USB to Parallel adapter</b> for your parallel port the port 
+	address will have to be entered manually. Click <a href="PortAddr.htm">here</a> 
+	for a guide on how-to find the address for your non-standard parallel port 
+	and enter it into <b>DDUtil</b>.</li>
+	</ul>
+		</li>
 	<li>In the <b>Data Signals</b> group, select the device you want to use as a 
 	file source for the BCD data. In order to make this selection you will have to go to 
 	one or more of the device tabs and setup a source. See the following section 
@@ -182,7 +195,7 @@ Setup</font></u></h2>
 			<p style="margin-top: 3px; margin-bottom: 6px"><b>File Name | Re-Load</b> 
 		= Will re-load the displayed file. This is intended to allow 
 		salvaging a file that has been edited and the user decides to abandon it 
-		due to errors or ?.</p></li>
+		due to errors or whatever.</p></li>
 			<li>
 			<p style="margin-top: 3px; margin-bottom: 6px"><b>File Name | Save</b> = 
 		After creating or editing a file in the data grid pressing this button 
@@ -249,7 +262,7 @@ from session to session.</p>
 		</li>
 		<li>Tool Tips (description of control function) are available for all controls by 
 		hovering the mouse over the control momentarily.</li>
-		<li>Once setup <b>DDUtil</b> can be either 
+		<li>Once setup, <b>DDUtil</b> can either 
 		be minimized or reduced to a minimal size for normal operation. Shrinking is 
 		accomplished by <b>right</b> clicking anywhere on the form (except the 
 		title bar)&nbsp; where a 
@@ -321,6 +334,8 @@ from session to session.</p>
 		<li>Select Hardware</li>
 		<li>Select Device Manager</li>
 		<li>Expand the Ports entry</li>
+		<li>If you are using a non-standard parallel port (non-motherboard port), this <a href="DDUtilPortAddr.htm">link</a> will help 
+		you get the port address you will need.</li>
 	</ul>
 		<p>All your hardware  ports will be listed 
 		there.<p>
@@ -346,15 +361,16 @@ frequency sensitive devices such as:</p>
 	acknowledge any communication from the down stream devices it services. It 
 	is a one way communication only. Hence, they are referred to as Passive 
 	Listeners.</li>
-	<li>It was also desired to be able to use <b>DDUtil</b> with other radio 
+	<li>It was also desired to use <b>DDUtil</b> with other radio 
 	control programs simultaneously. Since most users run a logging program or 
 	other radio control program, this was considered to be a very high priority.</li>
 	<li>Use all current technologies, if appropriate, in the software design. 
 	These include XML files, XPATH, Regular Expressions and Threading, to list a 
-	few. Development was accomplished in the Microsoft Visual Studio 2005 IDE.</li>
+	few. Development was accomplished in the Microsoft Visual Studio 2005 Integrated Development Environment 
+	(IDE).</li>
 </ul>
 <p><u><b>Program Flow</b></u></p>
-<p>Upon opening the following events occur:</p>
+<p>Upon program opening the following events occur:</p>
 <ul>
 	<li>Setup variables</li>
 	<li>Restore saved values to form controls</li>
@@ -382,7 +398,7 @@ describe these events.</p>
 		<li>This indicates CAT data has arrived from the logger/radio control 
 		program</li>
 		<li>Forward the command on to <b>PowerSDR</b> CAT port</li>
-		<li>Disable the <b>PowerSDR</b> polling timer which disables querying of the 
+		<li>Disable the <b>PowerSDR</b> polling timer, which stops<b> DDUtil </b>querying the 
 		radio for frequency data as this is now done by the logger program</li>
 		<li>Set Log flag to true</li>
 	</ul>
@@ -412,10 +428,10 @@ describe these events.</p>
 </ul>
 <h2><u><font color="#800080"><a name="Legal"></a>Legal</font></u></h2>
 <font SIZE="2">
-<p>&nbsp;Copyright (C) 2007 Steve Nance (K5FR)</p>
+<p>Copyright (C) 2007 Steve Nance (K5FR)</p>
 <p>This program is free software; you can redistribute it and/or modify it under 
 the terms of the GNU General Public License as published by the Free Software 
-Foundation; either version 3 of the License, or (at your option) any later 
+Foundation; either version 2 of the License, or (at your option) any later 
 version. </p>
 <p>This program is distributed in the hope that it will be useful,&nbsp; but 
 WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 

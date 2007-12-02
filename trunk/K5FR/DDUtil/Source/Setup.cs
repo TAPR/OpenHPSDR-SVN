@@ -46,8 +46,10 @@ namespace DataDecoder
         Hashtable flist = new Hashtable();
         Settings set = Settings.Default;
         bool logFlag = false;
-        int LPTnum = 0;     // decimal number of selected LPT port
-        double pollInt = 0;    // CAT port interval timer uses txtInv text box
+        int keyValue = 0;
+        int LastKeyValue;
+        int LPTnum = 0;         // decimal number of selected LPT port
+        double pollInt = 0;     // CAT port interval timer uses txtInv text box
         string fileName = "BandData.xml";
         string[] ports;
         string OutBuffer;
@@ -201,10 +203,17 @@ namespace DataDecoder
                 {
                     rbNone.Checked = true; LPTnum = 0; DefaultLPT = str;
                 }
+                else if (str == "Other")
+                {
+                    rbOther.Checked = true; LPTnum = Convert.ToInt32(set.lptNum);
+                    txtPort.Text = set.lptNum; DefaultLPT = str;
+                }
                 else
                 {
                     rbNone.Checked = true; LPTnum = 0; DefaultLPT = "NONE"; chkDevice.Checked = false;
                 }
+                btnPortNum.BackColor = Color.Transparent;
+                lblPortBtn.Visible = false;
             }
             catch
             {
@@ -226,8 +235,13 @@ namespace DataDecoder
         {
             if (chkDevice.Checked == true)
             {
+                //if (num != LastKeyValue)
+                //{
                 PortAccess.Output(port, num);
+                //    LastKeyValue = num;
+                //}
             }
+            
             else
             {
                 PortAccess.Output(port, 0);
@@ -290,7 +304,6 @@ namespace DataDecoder
         #region Helper Methods
         
         // Lookup freq data in hash table & output to LPT port
-        int keyValue;
         private void LookUp(string freq)
         {
             if (flist.ContainsKey(freq))
@@ -310,7 +323,7 @@ namespace DataDecoder
             // InvokeRequired compares the thread ID of the
             // calling thread to the thread ID of the creating thread.
             // If these threads are different, it returns true.
-            if (this.txtTitle.InvokeRequired)
+            if (this.txtPort.InvokeRequired)
             {
                 SetTitleCallback d = new SetTitleCallback(SetTitle);
                 this.Invoke(d, new object[] { text });
@@ -423,20 +436,39 @@ namespace DataDecoder
         private void grpLPT_CheckedChanged(object sender, EventArgs e)
         {
             if (sender == rbNone)
-            { OutParallelPort(LPTnum,0); LPTnum = 0; set.lptPort = "NONE"; }
+            { OutParallelPort(LPTnum, 0); LPTnum = 0; set.lptPort = "NONE";
+            txtPort.Text = LPTnum.ToString(); set.Save();}
+            else if (sender == rbOther)
+            { txtPort.Text = ""; set.lptPort = "Other"; set.Save(); }
             else if (sender == rb1)
-            { LPTnum = 888; set.lptPort = "LPT1"; }
+            { LPTnum = 888; set.lptPort = "LPT1"; txtPort.Text = LPTnum.ToString(); set.Save(); }
             else if (sender == rb2)
-            { LPTnum = 632; set.lptPort = "LPT2"; }
+            { LPTnum = 632; set.lptPort = "LPT2"; txtPort.Text = LPTnum.ToString(); set.Save(); }
             else if (sender == rb3)
-            { LPTnum = 636; set.lptPort = "LPT3"; }
+            { LPTnum = 636; set.lptPort = "LPT3"; txtPort.Text = LPTnum.ToString(); set.Save(); }
             else if (sender == rb4)
-            { LPTnum = 620; set.lptPort = "LPT4"; }
+            { LPTnum = 620; set.lptPort = "LPT4"; txtPort.Text = LPTnum.ToString(); set.Save(); }
             else
-            { LPTnum = 0; set.lptPort = "NONE"; }
-            this.txtTitle.Text = LPTnum.ToString();
-            set.Save();     // save new LPT port to system settings
+            { LPTnum = 0; set.lptPort = "NONE"; txtPort.Text = LPTnum.ToString(); set.Save(); }           
         }
+        // Port number changed
+        private void txtPort_TextChanged(object sender, EventArgs e)
+        {
+            if (rbOther.Checked == true)
+            { btnPortNum.BackColor = Color.Orchid; lblPortBtn.Visible = true; }
+            else
+            { btnPortNum.BackColor = Color.Transparent; lblPortBtn.Visible = false;}
+        }
+
+        private void btnPortNum_Click(object sender, EventArgs e)
+        {
+            LPTnum = Convert.ToInt32(txtPort.Text);
+            set.lptNum = LPTnum.ToString();
+            set.Save();
+            btnPortNum.BackColor = Color.Transparent;
+            lblPortBtn.Visible = false;
+        }
+
         // CAT port timer interval changed
         private void txtInv_TextChanged(object sender, EventArgs e)
         {
@@ -487,7 +519,15 @@ namespace DataDecoder
                 set.Save(); 
             }
         }
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(442, 420);
+        }
 
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(442, 57);
+        }
         #endregion Form Events
 
         #region Serial Port Events
@@ -864,21 +904,5 @@ namespace DataDecoder
             }
         }
         #endregion Timer Events 
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Size = new Size(442,34);
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.Size = new Size(442, 420);
-        }
-
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            this.Size = new Size(442, 57);
-        }
-
     }
 }

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDecoder", "DataDecoder.csproj", "{BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DDUtil_Setup", "..\DDUtil_Setup\DDUtil_Setup.vdproj", "{A2E69331-3AB8-454F-8AD0-75D166BAA39D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651} = {BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
