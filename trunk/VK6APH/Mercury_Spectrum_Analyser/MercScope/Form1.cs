@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-//using HPSDR_USB_LIB_V1_1;
+using HPSDR_USB_LIB_V1;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -37,7 +37,7 @@ namespace MercScope
         {
             InitializeComponent();
             rnd = new Random();
-            //start_adc();
+            start_adc();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -274,18 +274,18 @@ namespace MercScope
 
         private void start_adc()
         {
-            //hdev = USB.InitFindAndOpenDevice(0xfffe, 0x00ff);
-            //libUSB_Interface.usb_set_configuration(hdev, 1);
-            //libUSB_Interface.usb_claim_interface(hdev, 0);
-            //libUSB_Interface.usb_set_altinterface(hdev, 0);
-            //libUSB_Interface.usb_clear_halt(hdev, 0x02);
-            //libUSB_Interface.usb_clear_halt(hdev, 0x86);            
+            hdev = USB.InitFindAndOpenDevice(0xfffe, 0x00ff);
+            libUSB_Interface.usb_set_configuration(hdev, 1);
+            libUSB_Interface.usb_claim_interface(hdev, 0);
+            libUSB_Interface.usb_set_altinterface(hdev, 0);
+            libUSB_Interface.usb_clear_halt(hdev, 0x02);
+            libUSB_Interface.usb_clear_halt(hdev, 0x86);            
         }
 
         private void stop_adc()
         {
-            //libUSB_Interface.usb_release_interface(hdev, 0);
-            //libUSB_Interface.usb_close(hdev);            
+            libUSB_Interface.usb_release_interface(hdev, 0);
+            libUSB_Interface.usb_close(hdev);            
         }
 
 
