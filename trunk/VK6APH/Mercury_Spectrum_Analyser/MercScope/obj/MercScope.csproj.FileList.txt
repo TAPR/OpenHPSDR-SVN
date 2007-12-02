@@ -14,6 +14,6 @@ obj\Debug\MercScope.Properties.Resources.resources
 obj\Debug\MercScope.csproj.GenerateResource.Cache
 obj\Debug\MercScope.exe
 obj\Debug\MercScope.pdb
-bin\Debug\HPSDR_USB_LIB_V1.pdb
 bin\Debug\SharpDSP2.0.pdb
 bin\Release\SharpDSP2.0.pdb
+bin\Release\HPSDR_USB_LIB_V1.1.dll

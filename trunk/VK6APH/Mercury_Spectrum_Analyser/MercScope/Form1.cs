@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using HPSDR_USB_LIB_V1;
+//using HPSDR_USB_LIB_V1_1;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -26,15 +26,18 @@ namespace MercScope
         double[] ADC_sample = new double[bsize];
         IntPtr hdev = IntPtr.Zero;
         bool adcon = false;
-        PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.BLACKMAN4_WINDOW);
-        //PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.BLACKMANHARRIS_WINDOW);
-        Resampler r = new Resampler();
+        //PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.BLACKMAN4_WINDOW);
+        PowerSpectrum ps = new PowerSpectrum(isize * 2, WindowType.BLACKMANHARRIS_WINDOW);
+        static readonly float cutoff_f = 0.1f;  // corner frequecy  = cutoff_f * clock
+        Resampler r_i = new Resampler(cutoff_f);
+        Resampler r_q = new Resampler(cutoff_f);
        
 
         public Form1()
         {
             InitializeComponent();
             rnd = new Random();
+            //start_adc();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -148,24 +151,23 @@ namespace MercScope
             // convert adc samples from bytes to int (32 bits)
             for (int i = 0, j = 0; i < adcbuf.Length; i += 2, j++)
             {
-                int_adcbuf[j] = (int)BitConverter.ToInt16(adcbuf, i);
+                int_adcbuf[j] =(int)BitConverter.ToInt16(adcbuf, i);
                 //ivalbuf[j] = int_adcbuf[j]; // display adc samples on screen
             }
-
             // convert adc samples from int to double 
             double[] d_adc = new double[isize];
             DataConvert.IntToDouble(int_adcbuf, (int)Math.Pow(2,15), ref d_adc);
 
             // create arrays to hold the I&Q values from the complex mixer
-            double[] d_i_b = new double[isize]; // ?? was [isize * 2 ]why double ??
+            double[] d_i_b = new double[isize]; 
             double[] d_q_b = new double[isize];
 
             // multiply  real input by sin & cos to create I&Q
             for (int i = 0; i < isize; i++)
             {
                 d_i_b[i] = d_adc[i] * Math.Sin(lo_phase_angle);
-                d_q_b[i] = d_adc[i] * Math.Cos(lo_phase_angle);
-                lo_phase_angle += (1.5F);  // this is the local oscillator
+                d_q_b[i] = d_adc[i]  *Math.Cos(lo_phase_angle);
+                lo_phase_angle += 0.6F;  // this is the local oscillator, frequecy = angle * clock/2pi
             }
 
             // Pass I&Q samples through FIR LPF
@@ -173,19 +175,21 @@ namespace MercScope
             float[] input_data_i = new float[isize];
             float[] input_data_q = new float[isize];
 
-            float[] output_data_i = new float [isize];
-            float[] output_data_q = new float [isize];
+            float[] output_data_i = new float[isize];
+            float[] output_data_q = new float[isize];
 
             //convert double to float
             for (int i = 0; i < isize; i++)
             {
-                input_data_i[i] = (float) d_i_b[i];
+                input_data_i[i] = (float)d_i_b[i]; 
                 input_data_q[i] = (float)d_q_b[i];
             }
 
             // apply FIR LPF
-            r.Resample(ref input_data_i, ref output_data_i); // I data
-            r.Resample(ref input_data_q, ref output_data_q); // Q data
+
+            r_i.doFilter(ref input_data_i, ref output_data_i); // I data
+            r_q.doFilter(ref input_data_q, ref output_data_q); // Q data
+
 
             // convert float to double
             double[] out_data_i = new double[isize];
@@ -198,12 +202,14 @@ namespace MercScope
             }
 
 
-            DataConvert.DoubleToInt(out_data_i, 30000, ref ivalbuf); // display I channel on 'scope
-            DataConvert.DoubleToInt(out_data_q, 30000, ref qvalbuf); // display Q channel on 'scope
+            DataConvert.DoubleToInt(out_data_i, 32768, ref ivalbuf); // I channel on 'scope has FIR output
+            DataConvert.DoubleToInt(d_i_b, 32768, ref qvalbuf); // Q channel on 'scope has FIR input 
+            // DataConvert.DoubleToInt(out_data_q, 30000, ref qvalbuf); // display Q channel on 'scope
 
             double[] ps_result = new double[d_i_b.Length];
 
-            ps.PowerSpectrumSignal(ref d_i_b, ref d_q_b, ref ps_result);
+            ps.PowerSpectrumSignal(ref d_i_b, ref d_q_b, ref ps_result);  // I & Q before LPF 
+            //ps.PowerSpectrumSignal(ref out_data_i, ref out_data_q, ref ps_result);
 
             int[] ps_result_int = new int[ps_result.Length];
             
@@ -301,14 +307,14 @@ namespace MercScope
                     byte[] tbuf; 
                     i = Math.Sin(phase_angle); 
                     //phase_angle += 0.0368;
-                    phase_angle += 0.5;
+                    phase_angle += 0.5;  
                     i16 = (short)(32767.0 * i);
                     tbuf = BitConverter.GetBytes(i16);
                     byte noise_bits = (byte)(rbuf[j] & 0xf); 
                     //noise_bits = 0; 
                     rbuf[j] = (byte)(tbuf[0] ^ noise_bits);
                     rbuf[j + 1] = tbuf[1];
-                } 
+                }
                 return true;
             }
             else
@@ -334,9 +340,15 @@ namespace MercScope
             pictureBox1.Invalidate();
         }
 
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            timer2.Enabled = false;
+           // start_adc();
+        }
+
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            stop_adc();
+            //stop_adc();
         }
     }
 }
