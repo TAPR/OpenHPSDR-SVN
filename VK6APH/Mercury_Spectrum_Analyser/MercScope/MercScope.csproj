@@ -28,10 +28,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HPSDR_USB_LIB_V1_1, Version=1.0.2832.16255, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\HPSDR_USB_LIB_V1_1.dll</HintPath>
-    </Reference>
+    <Reference Include="HPSDR_USB_LIB_V1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="SharpDSP2.0, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\..\..\Documents and Settings\Phil C\My Documents\Visual Studio 2005\Projects\SharpDSP2.0\SharpDSP2.0\bin\Release\SharpDSP2.0.dll</HintPath>
