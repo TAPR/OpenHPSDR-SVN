@@ -823,9 +823,9 @@ hpsdr_load_standard_bits (int nth, bool force,
     force = true;
 
   // now move on to the fpga configuration bitstream
-
   proto_filename = get_proto_filename(fpga_filename, "HPSDR_FPGA",
 				      default_fpga_filename);
+
   filename = find_file (proto_filename, hw_rev);
   if (filename == 0){
     fprintf (stderr, "Can't find fpga bitstream: %s\n", proto_filename);
@@ -890,8 +890,8 @@ hpsdr_i2c_write (struct usb_dev_handle *udh, int i2c_addr,
 
 
 bool
-usrp_i2c_read (struct usb_dev_handle *udh, int i2c_addr,
-	       void *buf, int len)
+hpsdr_i2c_read (struct usb_dev_handle *udh, int i2c_addr,
+		void *buf, int len)
 {
   if (len < 1 || len > MAX_EP0_PKTSIZE)
     return false;
@@ -901,9 +901,9 @@ usrp_i2c_read (struct usb_dev_handle *udh, int i2c_addr,
 }
 
 bool
-usrp_spi_write (struct usb_dev_handle *udh,
-		int optional_header, int enables, int format,
-		const void *buf, int len)
+hpsdr_spi_write (struct usb_dev_handle *udh,
+		 int optional_header, int enables, int format,
+		 const void *buf, int len)
 {
   if (len < 0 || len > MAX_EP0_PKTSIZE)
     return false;
@@ -916,9 +916,9 @@ usrp_spi_write (struct usb_dev_handle *udh,
 
 
 bool
-usrp_spi_read (struct usb_dev_handle *udh,
-	       int optional_header, int enables, int format,
-	       void *buf, int len)
+hpsdr_spi_read (struct usb_dev_handle *udh,
+		int optional_header, int enables, int format,
+		void *buf, int len)
 {
   if (len < 0 || len > MAX_EP0_PKTSIZE)
     return false;
