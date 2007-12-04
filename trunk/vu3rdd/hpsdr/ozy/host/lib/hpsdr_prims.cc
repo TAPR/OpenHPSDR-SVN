@@ -943,6 +943,15 @@ hpsdr_aic23b_read (struct usb_dev_handle *udh, int which_codec,
   // TBD
 }
 
+bool
+hpsdr_aic23b_write_many (struct usb_dev_handle *udh,
+			 int which_codec,
+			 const unsigned char *buf,
+			 int len)
+{
+  // TBD
+}
+
 #if 0
 
 bool
@@ -973,7 +982,6 @@ usrp_9862_read (struct usb_dev_handle *udh, int which_codec,
 			value, 1);
 }
 
-#endif
 
 bool
 usrp_9862_write_many (struct usb_dev_handle *udh,
@@ -995,18 +1003,7 @@ usrp_9862_write_many (struct usb_dev_handle *udh,
   return result;
 }
 
-
-bool
-usrp_9862_write_many_all (struct usb_dev_handle *udh,
-			   const unsigned char *buf, int len)
-{
-  // FIXME handle 2/2 and 4/4 versions
-
-  bool result;
-  result  = usrp_9862_write_many (udh, 0, buf, len);
-  result &= usrp_9862_write_many (udh, 1, buf, len);
-  return result;
-}
+#endif
 
 
 
