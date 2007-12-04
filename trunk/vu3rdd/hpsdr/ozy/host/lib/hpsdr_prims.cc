@@ -930,6 +930,22 @@ hpsdr_spi_read (struct usb_dev_handle *udh,
 }
 
 bool
+hpsdr_aic23b_write (struct usb_dev_handle *udh, int which_codec,
+		    int regno, int value)
+{
+  // TBD
+}
+
+bool
+hpsdr_aic23b_read (struct usb_dev_handle *udh, int which_codec,
+		   int regno, unsigned char *value)
+{
+  // TBD
+}
+
+#if 0
+
+bool
 usrp_9862_write (struct usb_dev_handle *udh, int which_codec,
 		 int regno, int value)
 {
@@ -956,6 +972,8 @@ usrp_9862_read (struct usb_dev_handle *udh, int which_codec,
 			SPI_FMT_MSB | SPI_FMT_HDR_1,
 			value, 1);
 }
+
+#endif
 
 bool
 usrp_9862_write_many (struct usb_dev_handle *udh,
