@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 8.528 ns
+Actual Time    : 5.841 ns
 From           : FLAGC
-To             : address[8]
+To             : SLWR~reg0
 From Clock     : --
 To Clock       : IFCLK
 Failed Paths   : 0
@@ -15,17 +15,27 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 10.948 ns
-From           : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[3]
-To             : FX2_FD[11]
+Actual Time    : 10.786 ns
+From           : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|q_a[8]
+To             : FX2_FD[8]
 From Clock     : IFCLK
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case tpd
+Slack          : N/A
+Required Time  : None
+Actual Time    : 9.758 ns
+From           : FLAGC
+To             : DEBUG_LED0
+From Clock     : --
 To Clock       : --
 Failed Paths   : 0
 
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -5.770 ns
+Actual Time    : -5.096 ns
 From           : FLAGC
 To             : state_FX[0]
 From Clock     : --
@@ -36,18 +46,18 @@ Type           : Clock Setup: 'FPGA_CLK6IN'
 Slack          : 4.744 ns
 Required Time  : 125.00 MHz ( period = 8.000 ns )
 Actual Time    : Restricted to 163.03 MHz ( period = 6.134 ns )
-From           : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a7~portb_datain_reg0
-To             : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a7~portb_memory_reg0
+From           : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a15~portb_datain_reg0
+To             : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a15~portb_memory_reg0
 From Clock     : FPGA_CLK6IN
 To Clock       : FPGA_CLK6IN
 Failed Paths   : 0
 
 Type           : Clock Setup: 'IFCLK'
-Slack          : 6.559 ns
+Slack          : 15.086 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 129.60 MHz ( period = 7.716 ns )
+Actual Time    : Restricted to 163.03 MHz ( period = 6.134 ns )
 From           : address[5]
-To             : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a13~porta_address_reg5
+To             : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a2~porta_address_reg5
 From Clock     : IFCLK
 To Clock       : IFCLK
 Failed Paths   : 0
@@ -66,8 +76,8 @@ Type           : Clock Hold: 'FPGA_CLK6IN'
 Slack          : 2.943 ns
 Required Time  : 125.00 MHz ( period = 8.000 ns )
 Actual Time    : N/A
-From           : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a7~portb_datain_reg0
-To             : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a7~portb_memory_reg0
+From           : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a15~portb_datain_reg0
+To             : RAM_4096_dualport:RAM|altsyncram:altsyncram_component|altsyncram_rkr1:auto_generated|altsyncram_nsu1:altsyncram1|ram_block2a15~portb_memory_reg0
 From Clock     : FPGA_CLK6IN
 To Clock       : FPGA_CLK6IN
 Failed Paths   : 0

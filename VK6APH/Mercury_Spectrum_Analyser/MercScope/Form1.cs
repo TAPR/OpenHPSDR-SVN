@@ -120,6 +120,8 @@ namespace MercScope
             }                                    
         }
 
+        float lo_phase_angle = 0;
+
         private void RefreshScope(Graphics g)
         {
             int xmax = 512; // number of sample points
@@ -141,18 +143,16 @@ namespace MercScope
             int xtpos = hScrollBar1.Value;
             int xDraw = xtpos;
 
-            float lo_phase_angle = 0;
-
             if (!read_adc(ref adcbuf)) // check we have ADC data, if not return
                 return;
 
             int[] int_adcbuf = new int[isize];
 
-            // convert adc samples from bytes to int (32 bits)
+            // convert adc samples from bytes to int (16 bits)
             for (int i = 0, j = 0; i < adcbuf.Length; i += 2, j++)
             {
                 int_adcbuf[j] =(int)BitConverter.ToInt16(adcbuf, i);
-                //ivalbuf[j] = int_adcbuf[j]; // display adc samples on screen
+                ivalbuf[j] = int_adcbuf[j]; // display adc samples on screen
             }
             // convert adc samples from int to double 
             double[] d_adc = new double[isize];
@@ -166,7 +166,7 @@ namespace MercScope
             for (int i = 0; i < isize; i++)
             {
                 d_i_b[i] = d_adc[i] * Math.Sin(lo_phase_angle);
-                d_q_b[i] = d_adc[i]  *Math.Cos(lo_phase_angle);
+                d_q_b[i] = d_adc[i] * Math.Cos(lo_phase_angle);
                 lo_phase_angle += 0.6F;  // this is the local oscillator, frequecy = angle * clock/2pi
             }
 
@@ -202,14 +202,14 @@ namespace MercScope
             }
 
 
-            DataConvert.DoubleToInt(out_data_i, 32768, ref ivalbuf); // I channel on 'scope has FIR output
+            //DataConvert.DoubleToInt(out_data_i, 32768, ref ivalbuf); // I channel on 'scope has FIR output
             DataConvert.DoubleToInt(d_i_b, 32768, ref qvalbuf); // Q channel on 'scope has FIR input 
             // DataConvert.DoubleToInt(out_data_q, 30000, ref qvalbuf); // display Q channel on 'scope
 
             double[] ps_result = new double[d_i_b.Length];
 
-            ps.PowerSpectrumSignal(ref d_i_b, ref d_q_b, ref ps_result);  // I & Q before LPF 
-            //ps.PowerSpectrumSignal(ref out_data_i, ref out_data_q, ref ps_result);
+            //ps.PowerSpectrumSignal(ref d_i_b, ref d_q_b, ref ps_result);  // I & Q before LPF 
+            ps.PowerSpectrumSignal(ref out_data_i, ref out_data_q, ref ps_result);
 
             int[] ps_result_int = new int[ps_result.Length];
             
@@ -274,18 +274,18 @@ namespace MercScope
 
         private void start_adc()
         {
-            hdev = USB.InitFindAndOpenDevice(0xfffe, 0x00ff);
-            libUSB_Interface.usb_set_configuration(hdev, 1);
-            libUSB_Interface.usb_claim_interface(hdev, 0);
-            libUSB_Interface.usb_set_altinterface(hdev, 0);
-            libUSB_Interface.usb_clear_halt(hdev, 0x02);
-            libUSB_Interface.usb_clear_halt(hdev, 0x86);            
+            //hdev = USB.InitFindAndOpenDevice(0xfffe, 0x0007);
+            //libUSB_Interface.usb_set_configuration(hdev, 1);
+            //libUSB_Interface.usb_claim_interface(hdev, 0);
+            //libUSB_Interface.usb_set_altinterface(hdev, 0);
+            //libUSB_Interface.usb_clear_halt(hdev, 0x02);
+            //libUSB_Interface.usb_clear_halt(hdev, 0x86);            
         }
 
         private void stop_adc()
         {
-            libUSB_Interface.usb_release_interface(hdev, 0);
-            libUSB_Interface.usb_close(hdev);            
+            //libUSB_Interface.usb_release_interface(hdev, 0);
+            //libUSB_Interface.usb_close(hdev);            
         }
 
 

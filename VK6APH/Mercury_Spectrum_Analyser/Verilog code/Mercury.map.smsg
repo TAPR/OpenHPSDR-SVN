@@ -1,14 +1,13 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Nov 11 22:27:32 2007
+    Info: Processing started: Wed Dec 05 20:02:01 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
 Info: Found 1 design units, including 1 entities, in source file RAM_4096_dualport.v
     Info: Found entity 1: RAM_4096_dualport
 Info: Found 1 design units, including 1 entities, in source file MercSpec.v
     Info: Found entity 1: MercSpec
 Info: Elaborating entity "MercSpec" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at MercSpec.v(53): object "SLEN" assigned a value but never read
 Info: Elaborating entity "RAM_4096_dualport" for hierarchy "RAM_4096_dualport:RAM"
 Info: Found 1 design units, including 1 entities, in source file ../../../../../altera/61/quartus/libraries/megafunctions/altsyncram.tdf
     Info: Found entity 1: altsyncram
@@ -27,7 +26,6 @@ Info: Duplicate registers merged to single register
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "PKEND" stuck at VCC
     Warning: Pin "FIFO_ADR[0]" stuck at GND
-    Warning: Pin "DEBUG_LED0" stuck at GND
     Warning: Pin "DEBUG_LED1" stuck at GND
     Warning: Pin "DEBUG_LED2" stuck at GND
     Warning: Pin "DEBUG_LED3" stuck at GND
@@ -54,7 +52,7 @@ Info: Implemented 103 device resources after synthesis - the final resource coun
     Info: Implemented 26 output pins
     Info: Implemented 41 logic cells
     Info: Implemented 16 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 27 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 25 warnings
     Info: Allocated 128 megabytes of memory during processing
-    Info: Processing ended: Sun Nov 11 22:27:34 2007
-    Info: Elapsed time: 00:00:02
+    Info: Processing ended: Wed Dec 05 20:02:02 2007
+    Info: Elapsed time: 00:00:01
