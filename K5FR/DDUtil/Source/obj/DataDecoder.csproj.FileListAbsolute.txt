@@ -53,3 +53,7 @@ C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\ResolveA
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.Setup.resources
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.Properties.Resources.resources
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.csproj.GenerateResource.Cache
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\bin\Release\DataDecoder.exe.manifest
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\bin\Release\DataDecoder.application
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.exe.manifest
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.application

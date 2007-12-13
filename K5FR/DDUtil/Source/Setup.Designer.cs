@@ -42,6 +42,7 @@ namespace DataDecoder
             this.label3 = new System.Windows.Forms.Label();
             this.cboCAT = new System.Windows.Forms.ComboBox();
             this.grpBox2 = new System.Windows.Forms.GroupBox();
+            this.lblPortBtn = new System.Windows.Forms.Label();
             this.btnPortNum = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -79,7 +80,6 @@ namespace DataDecoder
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblPortBtn = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpBox1.SuspendLayout();
@@ -221,6 +221,16 @@ namespace DataDecoder
             this.grpBox2.TabIndex = 18;
             this.grpBox2.TabStop = false;
             this.grpBox2.Text = "Parallel Port";
+            // 
+            // lblPortBtn
+            // 
+            this.lblPortBtn.AutoSize = true;
+            this.lblPortBtn.Location = new System.Drawing.Point(110, 152);
+            this.lblPortBtn.Name = "lblPortBtn";
+            this.lblPortBtn.Size = new System.Drawing.Size(132, 13);
+            this.lblPortBtn.TabIndex = 30;
+            this.lblPortBtn.Text = "Press to save port address";
+            this.lblPortBtn.Visible = false;
             // 
             // btnPortNum
             // 
@@ -594,16 +604,6 @@ namespace DataDecoder
             this.toolStripMenuItem2.Text = "Shrink Form Size";
             this.toolStripMenuItem2.ToolTipText = "Shrink form to title bar only";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
-            // lblPortBtn
-            // 
-            this.lblPortBtn.AutoSize = true;
-            this.lblPortBtn.Location = new System.Drawing.Point(110, 152);
-            this.lblPortBtn.Name = "lblPortBtn";
-            this.lblPortBtn.Size = new System.Drawing.Size(132, 13);
-            this.lblPortBtn.TabIndex = 30;
-            this.lblPortBtn.Text = "Press to save port address";
-            this.lblPortBtn.Visible = false;
             // 
             // Setup
             // 

@@ -71,13 +71,13 @@ extended to other radios in the future.<h2><u><font color="#800080">
 Microsoft .NET 2.0 in order to load and function. The setup file will automatically guide 
 you through this installation if your pc doesn't have it. Just follow the 
 prompts and select x86 when it asks you which one you want to download.</li>
-	<li>Execute the file <b>'Setup.exe'</b>, follow the prompts, accept the defaults and you 
+	<li>Execute the file <b>'DDUtil_Setup.msi'</b>, follow the prompts, accept the defaults and you 
 should get a Icon on your desktop like this one.
 	<img border="0" src="DDUtilicon.JPG" width="32" height="32"> </li>
 	<li>Additionally, there is an entry in your pc's <b>Programs</b> group for
 	<b>DDUtil</b> should 
-the desktop icon be lost This can be reached by selecting Start\All 
-Programs\DDUtil</li>
+the desktop icon be lost This can be reached by selecting Start/All 
+Programs/DDUtil</li>
 	<li>Be advised that <b>DDUtil</b> must be uninstalled before updating to a newer 
 version. The installer will tell you also.</li>
 </ul>
@@ -92,61 +92,87 @@ Setup</font></u></h2>
 	<img border="0" src="DDUtilPorts.jpg" >&nbsp; </li>
 	<li>
 	<p style="margin-top: 3px; margin-bottom: 6px"><b>Ports Setup Tab</b><ul>
-	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Serial Ports</b> group 
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Serial Ports</b><ul>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Serial Ports</b> group 
 		select the <b>CAT Port</b> you will use to talk to your radio. 
 	This will be one of a virtual port pair like N8VB's VCOM utility provides. 
-	See this Flex Knowledge Base 
-		<a href="http://kb.flex-radio.com/Article.aspx?id=10068">article</a> 
-	dealing with setting up virtual serial ports.</li>
-	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select from the 
+			<font color="#800080"><b><u>I</u>n this illustration PowerSDR is set 
+			to port 11 and DDUtil is set to port 10</b></font>. See this Flex Knowledge Base
+			<a href="http://kb.flex-radio.com/Article.aspx?id=10068">article</a> 
+			for how to setup virtual serial ports. </li>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select from the 
 	drop down box the 
 		<b>Passive Listener Port</b> you will use. Usually COM1, but may be any RS-232 
-		compliant serial port connected to your pc including USB to serial adapters.</li>
-	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select from the 
+		compliant <b>hardware</b> serial port connected to your pc including 
+			add-on cards or USB to serial adapters. </li>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select from the 
 	drop down box the <b>Radio Control Port</b> you will use. This will be one 
-	of a virtual serial port pair like N8VB's VCOM utility provides. In the example 
-	above the Radio Control program (HRD, etc.) port is set to COM4 and <b>DDUtil </b>is set to COM5. 
-	<p style="margin-top: 3px; margin-bottom: 6px"><u><b>Note:</b></u> in the 
+	of a virtual serial port pair like N8VB's VCOM utility provides. 
+			<font color="#800080"><b>In the example 
+	above the Radio Control program (HRD, etc.) port is set to COM4 and DDUtil is set to COM5</b></font>.
+			</li>
+		</ul>
+		<p style="margin-top: 3px; margin-bottom: 6px"><u><b>Serial Port Notes:<br>
+		<br>
+		</b></u>A typical VCOM ports setup for <b>DDUtil</b> could be:<u><b><br>
+		<br>
+		</b></u>Pair 10 &lt;-&gt; 11&nbsp;&nbsp;&nbsp; DDUtil CAT (10), PowerSDR CAT 
+		(11)<br>
+		<br>
+		Pair&nbsp;&nbsp; 4 &lt;-&gt; 5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HRD CAT (4), 
+		DDUtil Radio Control (5)<br>
+&nbsp;<ul>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px">In the 
 	setup section of the Radio Control Program set the radio type to <b>Kenwood</b>, 
 	the speed parity and stop bits don't matter on virtual serial ports.</li>
-	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px">Set the <b>Cat Polling 
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px">Set the <b>Cat Polling 
 	Interval</b>. This defaults to 1000 which equates to 1 second. Lower numbers 
 	speed up the polling time, but increase CPU utilization so caution should be exercised when setting this number. 1000 has proven to 
 		be a satisfactory interval.</li>
-	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Parallel Port</b> 
+		</ul>
+		</li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Parallel Port</b><ul>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Parallel Port</b> 
 		group, optionally, select the parallel port you will use. Usually LPT1, 
-	but may be any parallel port including USB to parallel port adapters may be 
-	used.<ul>
-	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px">If your not sure what your 
+	but may be any parallel port including add-on cards or USB to parallel port adapters.</li>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px">If your not sure what your 
 	port numbers are you can get help <a href="#ports">here</a> finding 
 	out if you have any parallel ports and what their numbers are.</li>
-	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px">If you are using an <b>add-on 
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px">If you are using an 
+			<b>add-on 
 	board</b> or <b>USB to Parallel adapter</b> for your parallel port the port 
 	address will have to be entered manually. Click <a href="PortAddr.htm">here</a> 
 	for a guide on how-to find the address for your non-standard parallel port 
 	and enter it into <b>DDUtil</b>.</li>
-	</ul>
+		</ul>
 		</li>
-	<li>In the <b>Data Signals</b> group, select the device you want to use as a 
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Data Signals</b><ul>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Data Signals</b> group, select the device you want to use as a 
 	file source for the BCD data. In order to make this selection you will have to go to 
 	one or more of the device tabs and setup a source. See the following section 
-	for advice on this.</ol></li>
+	for advice on this.</li>
+		</ul>
+		</li>
 	</ul>
 		</li>
 	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;</li>
-	<b>Device Tabs</b>
-	</li>
+	<p style="margin-top: 3px; margin-bottom: 6px"><b>Device Tabs</b> </li>
 	</ul>
 	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Selecting 
-	the first of the Device tabs at the top of the form will display the following form.</p>
+	the first of the Device tabs at the top of the form will display the following form.<br>
+&nbsp;</p>
 	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<img border="0" src="DDUtilDevice.JPG">&nbsp; </p>
 <blockquote>
@@ -359,8 +385,8 @@ frequency sensitive devices such as:</p>
 	frequency data, from <b>PowerSDR</b>, in the form of RS-232 serial data and/or BCD 
 	parallel data to passive listener devices. <b>DDUtil</b> does not receive or 
 	acknowledge any communication from the down stream devices it services. It 
-	is a one way communication only. Hence, they are referred to as Passive 
-	Listeners.</li>
+	is a one way communication only. Hence, they are referred to as <i>Passive 
+	Listeners</i>.</li>
 	<li>It was also desired to use <b>DDUtil</b> with other radio 
 	control programs simultaneously. Since most users run a logging program or 
 	other radio control program, this was considered to be a very high priority.</li>
@@ -441,7 +467,7 @@ details.</p>
 <p>You should have received a copy of the GNU General Public License along with 
 this program; If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a></p>
 </font><font SIZE="2" COLOR="#008000"></font><font SIZE="2">
-<p>You may contact the author via email at: k5fr@arrl.net</p>
+<p>You may contact the author via email at: steve@K5FR.com</p>
 </font>
 	
 	</body>

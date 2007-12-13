@@ -15,13 +15,19 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0AF663C3DA34AB5E85D92A669D8AC7C9"
-        "OwnerKey" = "8:_580B1E23ECFE46D287FF3F057368526B"
+        "MsmKey" = "8:_03364C34973A4081B10337C46D868966"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_0C348C97E0B14A579D36587B1B06E685"
+        "MsmKey" = "8:_17C780544C8A42C094567E07A25FECC0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_18EB67C226EF4A85BE961FBEE41435FA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -34,6 +40,18 @@
         "Entry"
         {
         "MsmKey" = "8:_31618AD51A3347509B9449BF04342B2E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_32C76AB8A7B142079362A7C5988079A1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_476533ABF5AF4E318FB25657545B2A09"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -63,7 +81,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7711258D772A448399DC942A4F99E251"
+        "MsmKey" = "8:_63FDAD992D504E50BDB7A93B1E806849"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6CD1078EF73A4ED3975056E5CB2191B5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -81,6 +105,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A57D8AC214E74CABA5A4DAA19A2EBFEE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A912827016E24B6196E0CA0232180EDC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -93,7 +123,31 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_BCA7A104E90D450F9C0F3F102E262759"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C154E657E80DB31B2B29F4F3A91E3185"
+        "OwnerKey" = "8:_580B1E23ECFE46D287FF3F057368526B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C5FDD01AF0F146F09D654318BB202FC2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C8C2B5CD06764D52965757BDD188ACA1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C8DBEE47C8344A54BECB56BC35421107"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -105,7 +159,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F13010645F694075B3C2DB6D4985520A"
+        "MsmKey" = "8:_E9793F658C1A4CB8A052E4DD6CB5893D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -118,7 +172,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0AF663C3DA34AB5E85D92A669D8AC7C9"
+        "OwnerKey" = "8:_C154E657E80DB31B2B29F4F3A91E3185"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -139,6 +193,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
         "Release"
         {
@@ -155,6 +220,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
     }
     "Deployable"
@@ -184,21 +260,10 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0AF663C3DA34AB5E85D92A669D8AC7C9"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_03364C34973A4081B10337C46D868966"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CATSerialPorts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_0AF663C3DA34AB5E85D92A669D8AC7C9"
-                    {
-                    "Name" = "8:CATSerialPorts.DLL"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CATSerialPorts.DLL"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\bin\\Release\\Port1.JPG"
+            "TargetName" = "8:Port1.JPG"
             "Tag" = "8:"
             "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
             "Condition" = "8:"
@@ -212,13 +277,33 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0C348C97E0B14A579D36587B1B06E685"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_17C780544C8A42C094567E07A25FECC0"
             {
-            "SourcePath" = "8:..\\bin\\Release\\DDUtilFlow.vsd"
-            "TargetName" = "8:DDUtilFlow.vsd"
+            "SourcePath" = "8:..\\bin\\Release\\PortsFind1.JPG"
+            "TargetName" = "8:PortsFind1.JPG"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_18EB67C226EF4A85BE961FBEE41435FA"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\DDUtilicon.JPG"
+            "TargetName" = "8:DDUtilicon.JPG"
             "Tag" = "8:"
             "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
             "Condition" = "8:"
@@ -259,6 +344,46 @@
             {
             "SourcePath" = "8:..\\bin\\Release\\xBandData.xml"
             "TargetName" = "8:xBandData.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_32C76AB8A7B142079362A7C5988079A1"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\LEDs.pdf"
+            "TargetName" = "8:LEDs.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_476533ABF5AF4E318FB25657545B2A09"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\Calc2.JPG"
+            "TargetName" = "8:Calc2.JPG"
             "Tag" = "8:"
             "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
             "Condition" = "8:"
@@ -366,10 +491,30 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7711258D772A448399DC942A4F99E251"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_63FDAD992D504E50BDB7A93B1E806849"
             {
-            "SourcePath" = "8:C:\\Documents and Settings\\Owner\\Desktop\\Icons\\help.ico"
-            "TargetName" = "8:help.ico"
+            "SourcePath" = "8:..\\bin\\Release\\DDUtilPorts1.JPG"
+            "TargetName" = "8:DDUtilPorts1.JPG"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6CD1078EF73A4ED3975056E5CB2191B5"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\Port2.JPG"
+            "TargetName" = "8:Port2.JPG"
             "Tag" = "8:"
             "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
             "Condition" = "8:"
@@ -426,6 +571,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A57D8AC214E74CABA5A4DAA19A2EBFEE"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\ShrinkMenu.JPG"
+            "TargetName" = "8:ShrinkMenu.JPG"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A912827016E24B6196E0CA0232180EDC"
             {
             "SourcePath" = "8:..\\bin\\Release\\config.xml"
@@ -466,10 +631,101 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BCA7A104E90D450F9C0F3F102E262759"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\PortAddr.htm"
+            "TargetName" = "8:PortAddr.htm"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C154E657E80DB31B2B29F4F3A91E3185"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CATSerialPorts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_C154E657E80DB31B2B29F4F3A91E3185"
+                    {
+                    "Name" = "8:CATSerialPorts.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CATSerialPorts.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C5FDD01AF0F146F09D654318BB202FC2"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\Calc1.JPG"
+            "TargetName" = "8:Calc1.JPG"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C8C2B5CD06764D52965757BDD188ACA1"
             {
             "SourcePath" = "8:..\\bin\\Release\\coua.css"
             "TargetName" = "8:coua.css"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C8DBEE47C8344A54BECB56BC35421107"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\help.ico"
+            "TargetName" = "8:help.ico"
             "Tag" = "8:"
             "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
             "Condition" = "8:"
@@ -506,10 +762,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F13010645F694075B3C2DB6D4985520A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E9793F658C1A4CB8A052E4DD6CB5893D"
             {
-            "SourcePath" = "8:..\\bin\\Release\\DDUtilFlow.pdf"
-            "TargetName" = "8:DDUtilFlow.pdf"
+            "SourcePath" = "8:..\\bin\\Release\\PortsFind.JPG"
+            "TargetName" = "8:PortsFind.JPG"
             "Tag" = "8:"
             "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
             "Condition" = "8:"
@@ -593,7 +849,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
         "ProductCode" = "8:{029CE14A-98A8-494B-B345-EF184F253BBF}"
-        "PackageCode" = "8:{4F636FDB-DB9D-4AE2-BEB0-0C8222D25527}"
+        "PackageCode" = "8:{C184A47A-40A6-45F4-B362-209167ADDD66}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -737,7 +993,7 @@
             "Target" = "8:_5E6F3BC456194907A0A1619E4D7DDDE9"
             "Folder" = "8:_C5C1E01B245E4AA2A008C7213DB3870D"
             "WorkingFolder" = "8:"
-            "Icon" = "8:_7711258D772A448399DC942A4F99E251"
+            "Icon" = "8:_C8DBEE47C8344A54BECB56BC35421107"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B579029AB1364468967207E95A0C4906"
