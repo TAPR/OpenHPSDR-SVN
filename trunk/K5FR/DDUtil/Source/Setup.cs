@@ -47,13 +47,13 @@ namespace DataDecoder
         Settings set = Settings.Default;
         bool logFlag = false;
         int keyValue = 0;
-        int LastKeyValue;
+//        int LastKeyValue;
         int LPTnum = 0;         // decimal number of selected LPT port
         double pollInt = 0;     // CAT port interval timer uses txtInv text box
         string fileName = "BandData.xml";
         string[] ports;
         string OutBuffer;
-        string ver = "1.0.0 Beta";
+        string ver = "1.0.1 Beta";
         string vfo = "";
         System.Timers.Timer pollTimer;
         System.Timers.Timer logTimer;
@@ -107,6 +107,12 @@ namespace DataDecoder
         #region Initialization
         public Setup()
         {
+            if (IsAppAlreadyRunning())
+            {
+                MessageBox.Show("Application is already Running!", "Operator Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+            }
             InitializeComponent();
             fileName = set.DataFile;
             txtFile0.Text = fileName;
@@ -333,6 +339,26 @@ namespace DataDecoder
                 this.Text = text;
             }
         }
+        public static bool IsAppAlreadyRunning()
+        {
+
+            bool isAlreadyRunning = false;
+            Process currentProcess = Process.GetCurrentProcess();
+            Process[] processes = Process.GetProcesses();
+            foreach (Process process in processes)
+            {
+                if (currentProcess.Id != process.Id)
+                {
+                    if (currentProcess.ProcessName.Substring(0,11) == process.ProcessName)
+                    {
+                        isAlreadyRunning = true;
+                        break;
+                    }
+                }
+            }
+            return isAlreadyRunning;
+        }
+
         #endregion Helper Methods
 
         #region Data Grid Events
@@ -904,5 +930,6 @@ namespace DataDecoder
             }
         }
         #endregion Timer Events 
+
     }
 }
