@@ -36,7 +36,6 @@ set_global_assignment -name FMAX_REQUIREMENT "125 MHz"
 set_global_assignment -name FMAX_REQUIREMENT "10 MHz" -section_id "10MHz clock"
 set_instance_assignment -name CLOCK_SETTINGS "10MHz clock" -to _10MHZ
 set_global_assignment -name FMAX_REQUIREMENT "125 MHz" -section_id "125MHz clock"
-set_instance_assignment -name CLOCK_SETTINGS "125MHz clock" -to _125MHZ
 set_global_assignment -name BASED_ON_CLOCK_SETTINGS "125MHz clock" -section_id MCLK
 set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 10 -section_id MCLK
 set_instance_assignment -name CLOCK_SETTINGS MCLK -to CMCLK
@@ -46,8 +45,6 @@ set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATE
 set_location_assignment PIN_163 -to CBCLK
 set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
 set_location_assignment PIN_131 -to _10MHZ
-set_location_assignment PIN_132 -to _125MHZ
-set_location_assignment PIN_28 -to _125MHZLVDS
 set_location_assignment PIN_115 -to A5
 set_location_assignment PIN_97 -to A11
 set_location_assignment PIN_145 -to ADCCLK
@@ -110,6 +107,10 @@ set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
 set_location_assignment PIN_70 -to CC
 set_location_assignment PIN_162 -to LROUT
+set_location_assignment PIN_96 -to C11
+set_location_assignment PIN_68 -to C21
+set_global_assignment -name MESSAGE_SUPPRESSION_RULE_FILE Penelope.srf
+set_global_assignment -name VERILOG_FILE oddClockDiv.v
 set_global_assignment -name VERILOG_FILE cordic.v
 set_global_assignment -name VERILOG_FILE ALC.v
 set_global_assignment -name VERILOG_FILE ADC.v
@@ -118,6 +119,6 @@ set_global_assignment -name VERILOG_FILE phase_accumulator.v
 set_global_assignment -name VERILOG_FILE cicint.v
 set_global_assignment -name VERILOG_FILE cordic_stage.v
 set_global_assignment -name VERILOG_FILE Penelope.v
-set_location_assignment PIN_96 -to C11
-set_location_assignment PIN_68 -to C21
-set_global_assignment -name MESSAGE_SUPPRESSION_RULE_FILE Penelope.srf
+set_instance_assignment -name CLOCK_SETTINGS "125MHz clock" -to _122MHZ
+set_location_assignment PIN_132 -to _122MHZ
+set_location_assignment PIN_28 -to _122MHZLVDS

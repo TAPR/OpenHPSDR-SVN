@@ -27,10 +27,10 @@
 /* 	
 	This program interfaces the AD9744 ADC to PowerSDR over USB.
 	The data to the AD9744  is in 14 bit parallel format and 
-	is sent at the negative edge of the 125MHz clock.
+	is sent at the negative edge of the 122.88MHz clock.
 	
 	The ~48kHz I and Q data from PowerSDR is interpolated by 2560 in a CIC filter to 
-	give a data rate of 125MHz. The I and Q data in I2S format is taken from the 
+	give a data rate of 122.88MHz. The I and Q data in I2S format is taken from the 
 	Atlas bus. 
 	
 	The data is processed by a CORDIC NCO and passed to the AD9744 DAC. 
@@ -66,6 +66,7 @@
 	 1 Oct  2007 - Added receive 125MHz clock from LVDS
 	 2 Oct  2007 - Changed CORDIC output to stage 14 to reduce noise floor.
 	29 Oct  2007 - Modified hardware so that 125MHz clock feeds DAC and LVDS Tx directly.
+	 9 Dec  2007 - Changed clock from 125MHz to 122.88MHz so this divides exactly to n*48kHz
 	
 	
 	
@@ -79,10 +80,10 @@
 //
 //		Pin 	Signal 		Function
 //		C12		CDIN		I2S format I&Q data from Ozy
-//		C17		CLK_MCLK	12.5MHz master clock to Atlas bus
+//		C17		CLK_MCLK	12.288MHz master clock to Atlas bus
 //		A11		CDOUT_P		I2S mic data to Ozy
 //		C8		CBCLK		~3MHZ clock from Atlas via Ozy
-//		C9		CLRCLK		48.8kHz clock from Atlas via Ozy
+//		C9		CLRCLK		48kHz clock from Atlas via Ozy
 //		C4      LRCLK 		LR Rx Audio from Atlas via Ozy 	
 //		C20		CC			Command and Control data from Ozy       
 //
@@ -92,10 +93,10 @@
 module Penelope(
 				input   _10MHZ,
 				inout   ext_10MHZ, 	// 10MHz reference to Atlas pin C16
-				input   _125MHZ,
-				input   _125MHZLVDS, // *** keep for now to allow testing from Mercury clock 
-				//output  LVDSCLK,  	// 125MHz to LVDS driver
-				inout A5, 			// PCLK_12MHZ (12.5MHz) to Atlas bus - tri state
+				input   _122MHZ,
+				input   _122MHZLVDS, // *** keep for now to allow testing from Mercury clock 
+				//output  LVDSCLK,  	// 122.88MHz to LVDS driver
+				inout A5, 			// PCLK_12MHZ (12.288MHz) to Atlas bus - tri state
 				output A11,			// CDOUT_P (Mic) to Atlas bus 
 				input  C4, 			// LROUT (Rx audio) from Atlas bus
 				input  C8,			// CBLCK from Atlas bus
@@ -129,7 +130,7 @@ module Penelope(
 				output CLRCIN,
 				output CLRCOUT,
 				output LROUT,		// LR Rx audio from Atlas C4
-				output CMCLK,		// 12.5MHz CLK_MCLK from Atlas C17
+				output CMCLK,		// 12.288MHz CLK_MCLK from Atlas C17
 				input  CC, 			// Command & Control data from Ozy C12
 				output ADCMOSI,
 				output ADCCLK,
@@ -191,7 +192,7 @@ reg [2:0] CMCLK_counter;
 reg PCLK_12MHZ;
 always @ (posedge clock)
 begin
-	if (CMCLK_counter == 4) // divide 125MHz clock by 10 to give 12.5MHz
+	if (CMCLK_counter == 4) // divide 122.88MHz clock by 10 to give 12.288MHz
 		begin
 		PCLK_12MHZ <= ~PCLK_12MHZ;
 		CMCLK_counter <= 0;
@@ -209,20 +210,20 @@ assign CLRCLK  = C9;
 
 assign CMCLK = CLK_MCLK; 
 
-// Select 125MHz source. If source_125MHZ set then use Penelope's 125MHz clock and send to LVDS
+// Select 122.88MHz source. If source_122MHZ set then use Penelope's 122.88MHz clock and send to LVDS
 // Otherwise get external clock from LVDS
 
 wire clock;
 
-assign clock = source_125MHZ ? ~_125MHZ : ~_125MHZLVDS; // clock is either on board or external via LVDS
-assign nLVDSRXE = source_125MHZ ? 1'b1 : 1'b0; // enable LVDS receiver if clock is external
-assign LVDSTXE = source_125MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if  Penny is the source 
+assign clock = source_122MHZ ? ~_122MHZ : ~_122MHZLVDS; // clock is either on board or external via LVDS
+assign nLVDSRXE = source_122MHZ ? 1'b1 : 1'b0; // enable LVDS receiver if clock is external
+assign LVDSTXE = source_122MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if  Penny is the source 
 
 
 
-// send PCLK_12MHZ to Atlas A5 if source_125MHZ set else set A5 high Z
+// send PCLK_12MHZ to Atlas A5 if source_122.88MHZ set else set A5 high Z
 
-assign A5 = source_125MHZ ? PCLK_12MHZ : 1'bZ; 
+assign A5 = source_122MHZ ? PCLK_12MHZ : 1'bZ; 
 
 // select 10MHz reference source. If ref_ext is set use Penelope's 10MHz ref and send to Atlas C16
 
@@ -251,8 +252,8 @@ ADC ADC_SPI(.clock(CBCLK), .SCLK(ADCCLK), .nCS(nADCCS), .MISO(ADCMISO), .MOSI(AD
 //////////////////////////////////////////////////////////////
 
 /*	
-	Calculates  (frequency * 2^32) /125e6
-	Each calculation takes ~ 0.6uS @ 125MHz
+	Calculates  (frequency * 2^32) /122.88e6
+	Each calculation takes ~ 0.6uS @ 122.88MHz
 	This method is quite fast enough and uses much fewer LEs than the divide Megafunction
 
 */
@@ -264,10 +265,10 @@ begin
 	frequency <= frequency_HZ;	// frequecy_HZ is current frequency in Hz e.g. 14,195,000Hz
 end 
 
- division division_DDS(.quotient(freq),.ready(ready),.dividend(frequency),.divider(32'd125000000),.clk(clock));
+ division division_DDS(.quotient(freq),.ready(ready),.dividend(frequency),.divider(32'd122880000),.clk(clock));
 
 
-// sync frequency change to 125MHz clock
+// sync frequency change to 122MHz clock
 reg [31:0]sync_frequency;
 always @ (posedge clock)
 begin
@@ -463,7 +464,6 @@ reg  [31:0]frequency;
 wire [16:0]q_temp;
 wire [16:0]i_temp;
 
-// set 125MHz/8 = 15.625MHz = 32'h20000000
 
 // The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
 phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequency(sync_frequency),.phase_out(phase));
@@ -492,7 +492,7 @@ cordic_16 tx_cordic(.i_in(cic_out_q),.q_in(cic_out_i),.iout(i_out),.qout(q_out),
 // Add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This is necessary since the 
 // interpolating CIC has a loss since it does not interpolate by 2^n. 
 
-// sync DAC data to positive edge of clock, DAC is being clocked directly from the 125MHz clock or via LVDS
+// sync DAC data to positive edge of clock, DAC is being clocked directly from the 122.88MHz clock or via LVDS
 
 //always @ (posedge clock)
 //begin
@@ -500,49 +500,13 @@ assign 	DAC[13:0] = {i_out[17], i_out[15:3]}; 	// use q_out if 90 degree phase s
 //end
 
 
-
-/*
-// test  code send 25MHz to ADC
-reg [2:0]test;
-reg [13:0]temp_DAC;
-
-always @ (posedge clock)
-begin 
-case (test)
-0:	begin
-	temp_DAC <= 0;
-	test <= 1;
-	end
-1:  begin
-	temp_DAC <= 8191;
-	test <= 2;
-	end
-2:  begin
-	temp_DAC <= 0;
-	test <= 3;
-	end
-3:  begin
-	temp_DAC <= -8191;
-	test <= 4;
-	end
-4:  begin
-	temp_DAC <= 0;
-	test <= 0;
-	end
-endcase
-end 												
-
-assign DAC = temp_DAC;
-
-*/
-
 /////////////////////////////////////////////////////////////////
 //
 // Single bit PWM 16 bit D/A converters
 //
 /////////////////////////////////////////////////////////////////
 
-// This runs off the 125MHz clock to provide adequate resolution.
+// This runs off the 122.88MHz clock to provide adequate resolution.
 
 wire [15:0] PWM0_Data;
 wire [15:0] PWM1_Data;
@@ -596,8 +560,8 @@ assign PWM2 = PWM2_accumulator[16];
 	0x00  = 10MHz reference from Atlas bus ie Gibraltar
 	0x01  = 10MHz reference from Penelope
 	0x10  = 10MHz reference from Mercury
-	00xx  = 125MHz source from Penelope 
-	01xx  = 125MHz source from Mercury 
+	00xx  = 122.88MHz source from Penelope 
+	01xx  = 122.88MHz source from Mercury 
 	
 */
 
@@ -639,10 +603,10 @@ end
 reg PTT_out;			// PTT to Penelope
 reg [3:0]Address;		// Address in C&C header, set to 0 for now
 reg [31:0]frequency_HZ;	// frequency control bits for CORDIC
-reg [3:0]clock_select;	// 10MHz and 125MHz clock selection
+reg [3:0]clock_select;	// 10MHz and 122.88MHz clock selection
 reg [6:0]OC;			// Open Collector outputs data
 wire ref_ext;			// Set when internal 10MHz reference sent to Atlas C16
-wire source_125MHZ;		// Set when internal 125MHz source is used and sent to LVDS
+wire source_122MHZ;		// Set when internal 122.88MHz source is used and sent to LVDS
 
 always @ (negedge CLRCLK)  
 begin 
@@ -651,13 +615,12 @@ begin
 	Address <= CCdata[47:44];
 	// check address match here in the future - ignore for now
 	frequency_HZ <= CCdata[43:12];
-	//frequency_HZ = 32'h1D0FA58F; // force 14.190MHz i.e. FREQ /(125e6/2^32) for testing 
 	clock_select <= CCdata[11:8];     // not used since filters seperate from Penelope 
 	OC <= CCdata[7:1];
 end
 
 assign ref_ext = clock_select[0] ? 1'b1 :1'b0; // if set use internally and send to C16 else get from C16
-assign source_125MHZ = clock_select[2] ? 1'b0 : 1'b1; // if set use internally and send to LVDS else
+assign source_122MHZ = clock_select[2] ? 1'b0 : 1'b1; // if set use internally and send to LVDS else
 													  // get from LVDS 
 
 
@@ -685,48 +648,39 @@ assign  FPGA_PTT = PTT_out;		   // turn PTT FET Q3 on when Txing
 ///////////////////////////////////////////////////////////
 
 /* 
-	Divide the 10MHz reference and 125MHz clock to give 2.5MHz signals.
+	Divide the 10MHz reference and 122.88MHz clock to give 80kHz signals.
 	Apply these to an EXOR phase detector. If the 10MHz reference is not
-	present the EXOR output will be a 2.5MHz square wave. When passed through 
+	present the EXOR output will be a 80kHz square wave. When passed through 
 	the loop filter this will provide a dc level of (3.3/2)v which will
-	set the 125MHz VCXO to its nominal frequency.
+	set the 122.88MHz VCXO to its nominal frequency.
 	The selection of the internal or external 10MHz reference for the PLL
 	is made using  ext_ref.
 	
 */
 
-// divide 10MHz reference clock by 4 to give 2.5MHz
+// div 10 MHz ref clock by 125 to get 80 khz 
 
-reg [2:0]ref_count;
-reg ref_2_5M;
-reg osc_2_5M;
+wire ref_80khz; 
+reg osc_80khz; 
 
-always @ (posedge reference)
-begin
-	if (ref_count == 1)
-	begin
-		ref_2_5M <= ~ref_2_5M;
-		ref_count <= 0;
-	end
-	else ref_count <= ref_count + 1'b1;
+oddClockDivider refClockDivider(reference, ref_80khz); 
+
+// Divide  122.88 MHz by 1536 to get 80 khz 
+reg [9:0] count_12288; 
+
+always @ ( posedge _122MHZ ) begin
+        if ( count_12288 == 767 ) begin
+                count_12288 <= 0;
+                osc_80khz <= ~osc_80khz; 
+        end
+        else begin
+                count_12288 <= 1 + count_12288;
+        end
 end
 
-// divide 125MHz  clock by 50 to give 2.5MHz
-
-reg [5:0]osc_count;
-
-always @ (posedge _125MHZ)
-begin
-	if (osc_count == 24)
-	begin
-		osc_2_5M <= ~osc_2_5M;
-		osc_count <= 0;
-	end 
-	else osc_count <= osc_count + 1'b1;
-end
 
 // Apply to EXOR phase detector 
-assign FPGA_PLL = ref_2_5M ^ osc_2_5M;
+assign FPGA_PLL = ref_80khz ^ osc_80khz; 
 
 
 /////////////////////////////////////////////////////////////////
@@ -739,7 +693,7 @@ assign FPGA_PLL = ref_2_5M ^ osc_2_5M;
 // LEDs for testing				PCB LED Marking
 
 assign LED2 = ~ref_ext;
-assign LED3 = ~source_125MHZ; 
+assign LED3 = ~source_122MHZ; 
 
 // Bar graph for power output 
 //assign LED2 = (AIN5 > 250)?  1'b0 : 1'b1;  
