@@ -1,8 +1,10 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Tue Oct 30 22:25:44 2007
+    Info: Processing started: Sun Dec 09 19:58:20 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
+Info: Found 1 design units, including 1 entities, in source file oddClockDiv.v
+    Info: Found entity 1: oddClockDivider
 Info: Found 1 design units, including 1 entities, in source file cordic.v
     Info: Found entity 1: cordic_16
 Info: Found 1 design units, including 1 entities, in source file ALC.v
@@ -21,6 +23,7 @@ Info: Found 1 design units, including 1 entities, in source file Penelope.v
     Info: Found entity 1: Penelope
 Info: Elaborating entity "Penelope" for the top level hierarchy
 Warning (10036): Verilog HDL or VHDL warning at Penelope.v(640): object "Address" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at Penelope.v(715): truncated value with size 32 to match size of target (10)
 Info: Elaborating entity "ADC" for hierarchy "ADC:ADC_SPI"
 Info: Elaborating entity "division" for hierarchy "division:division_DDS"
 Info: Elaborating entity "ALC" for hierarchy "ALC:ALC_I"
@@ -31,6 +34,10 @@ Warning (10230): Verilog HDL assignment warning at cicint.v(182): truncated valu
 Warning (10230): Verilog HDL assignment warning at cicint.v(188): truncated value with size 32 to match size of target (1)
 Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
 Info: Elaborating entity "cordic_16" for hierarchy "cordic_16:tx_cordic"
+Info: Elaborating entity "oddClockDivider" for hierarchy "oddClockDivider:refClockDivider"
+Warning (10230): Verilog HDL assignment warning at oddClockDiv.v(50): truncated value with size 32 to match size of target (7)
+Warning (10230): Verilog HDL assignment warning at oddClockDiv.v(60): truncated value with size 32 to match size of target (1)
+Warning (10230): Verilog HDL assignment warning at oddClockDiv.v(61): truncated value with size 32 to match size of target (1)
 Info: Power-up level of register "PWM1_Data_in[15]" is not specified -- using power-up level of High to minimize register
 Info: Power-up level of register "PWM2_Data_in[15]" is not specified -- using power-up level of High to minimize register
 Info: Duplicate registers merged to single register
@@ -123,13 +130,13 @@ Info: 5 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
 Info: Found the following redundant logic cells in design
     Info: Logic cell "ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider|add_sub_15_result_int[0]~62"
-Info: Implemented 3707 device resources after synthesis - the final resource count might be different
+Info: Implemented 3717 device resources after synthesis - the final resource count might be different
     Info: Implemented 12 input pins
     Info: Implemented 45 output pins
     Info: Implemented 6 bidirectional pins
-    Info: Implemented 3636 logic cells
+    Info: Implemented 3646 logic cells
     Info: Implemented 8 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 6 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
     Info: Allocated 141 megabytes of memory during processing
-    Info: Processing ended: Tue Oct 30 22:26:38 2007
+    Info: Processing ended: Sun Dec 09 19:59:14 2007
     Info: Elapsed time: 00:00:54

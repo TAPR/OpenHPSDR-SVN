@@ -84,7 +84,7 @@ GND+                         : 24        :        :                   :         
 GND                          : 25        : gnd    :                   :         :           :                
 nCONFIG                      : 26        :        :                   :         : 1         :                
 GND+                         : 27        :        :                   :         : 1         :                
-_125MHZLVDS                  : 28        : input  : 3.3-V LVTTL       :         : 1         : Y              
+_122MHZLVDS                  : 28        : input  : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 29        : power  :                   : 3.3V    : 1         :                
 RESERVED_INPUT               : 30        :        :                   :         : 1         :                
 RESERVED_INPUT               : 31        :        :                   :         : 1         :                
@@ -188,7 +188,7 @@ RESERVED_INPUT               : 128       :        :                   :         
 GND+                         : 129       :        :                   :         : 3         :                
 GND+                         : 130       :        :                   :         : 3         :                
 _10MHZ                       : 131       : input  : 3.3-V LVTTL       :         : 3         : Y              
-_125MHZ                      : 132       : input  : 3.3-V LVTTL       :         : 3         : Y              
+_122MHZ                      : 132       : input  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 133       :        :                   :         : 3         :                
 FPGA_PTT                     : 134       : output : 3.3-V LVTTL       :         : 3         : Y              
 USEROUT6                     : 135       : output : 3.3-V LVTTL       :         : 3         : Y              
