@@ -206,7 +206,7 @@ RESERVED_INPUT               : 146       :        :                   :         
 RESERVED_INPUT               : 147       :        :                   :         : 3         :                
 VCCIO3                       : 148       : power  :                   : 3.3V    : 3         :                
 RESERVED_INPUT               : 149       :        :                   :         : 3         :                
-RESERVED_INPUT               : 150       :        :                   :         : 3         :                
+CLK_48MHZ                    : 150       : output : 3.3-V LVTTL       :         : 3         : Y              
 LROUT                        : 151       : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 152       :        :                   :         : 3         :                
 GND                          : 153       : gnd    :                   :         :           :                

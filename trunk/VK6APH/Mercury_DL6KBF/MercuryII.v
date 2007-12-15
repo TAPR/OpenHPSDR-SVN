@@ -71,6 +71,11 @@
 	
 	removed PCLK_12MHZ from Atlas C5 to prevent clash with same clock from Janus 
 	
+	15 Dec 2007
+	
+	added C3 (48MHZ clock) and C12 (Rx audio) for Janus board
+	send Rx audio to both TLV320 and PWM DACs on Janus board
+	
 */
 	
 
@@ -78,7 +83,7 @@ module Mercury(ADC,
         IFCLK, FX2_FD, FLAGA, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, 
         CBCLK, CLRCLK, CDOUT_P, CDIN, LROUT, PTT_in, DEBUG_LED0, dot, dash,
 		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3,CLK_MCLK, CC, FPGA_CLK6IN, // PCLK_12MHZ,
-		SPI_data, SPI_clock, Tx_load_strobe);
+		SPI_data, SPI_clock, Tx_load_strobe, CLK_48MHZ);
 		
 
 input [15:0]ADC;				// samples from LT2208
@@ -111,6 +116,7 @@ wire dash; 						// CW dash key, active low
 output SPI_data;				// SPI data to Alex
 output SPI_clock;				// SPI clock to Alex
 output Tx_load_strobe;			// SPI Tx data load strobe to Alex
+output CLK_48MHZ;				// 48MHz clock for PWM DAC on Janus 
 
 
 wire PKEND;
@@ -211,6 +217,7 @@ assign LRCLK_192 = clock_out[5];		// for LT2208 at 192kHz
 assign BCLK  = BCLK_192; 
 assign CLK_MCLK =  PCLK_12MHZ;
 assign clock = FPGA_CLK6IN;
+assign CLK_48MHZ = IFCLK;				// 48MHz clock to Atlas C3 for Janus PWM DAC
 
 
 //////////////////////////////////////////////////////////////
@@ -963,9 +970,11 @@ SPI   Alex_SPI_Tx(.Alex_data(Alex_Tx_data), .SPI_data(SPI_data),
 //              Implements I2S format I and Q  out,
 //              16 bits, two channels  for TLV320AIC23B D/A converter and Penelope
 //
+//				***** NOTE: Rx audio is sent to TLV320 now not I and Q **********
+//
 ///////////////////////////////////////////////////////////////
 
-I2SAudioOut  I2SAO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(I_PWM), .right_sample_i(Q_PWM),.outbit_o(CDIN));
+I2SAudioOut  I2SAO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(Left_Data), .right_sample_i(Right_Data),.outbit_o(CDIN));
 
 ///////////////////////////////////////////////////////////////
 //
