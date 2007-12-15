@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Mercury
-Sun Nov 11 11:25:14 2007
+Sat Dec 15 10:14:15 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Web Edition
 
 
@@ -116,16 +116,16 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Nov 11 11:25:14 2007   ;
+; Analysis & Synthesis Status        ; Successful - Sat Dec 15 10:14:15 2007   ;
 ; Quartus II Version                 ; 6.1 Build 201 11/27/2006 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; Mercury                                 ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 5,441                                   ;
-;     Total combinational functions  ; 5,113                                   ;
-;     Dedicated logic registers      ; 5,441                                   ;
-; Total registers                    ; 5441                                    ;
-; Total pins                         ; 59                                      ;
+; Total logic elements               ; 5,376                                   ;
+;     Total combinational functions  ; 5,087                                   ;
+;     Dedicated logic registers      ; 5,376                                   ;
+; Total registers                    ; 5376                                    ;
+; Total pins                         ; 60                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 110,592                                 ;
 ; Embedded Multiplier 9-bit elements ; 14                                      ;
@@ -296,28 +296,28 @@ applicable agreement for further details.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimated Total logic elements              ; 5,441      ;
+; Estimated Total logic elements              ; 5,376      ;
 ;                                             ;            ;
-; Total combinational functions               ; 5113       ;
+; Total combinational functions               ; 5087       ;
 ; Logic element usage by number of LUT inputs ;            ;
-;     -- 4 input functions                    ; 915        ;
-;     -- 3 input functions                    ; 3421       ;
+;     -- 4 input functions                    ; 905        ;
+;     -- 3 input functions                    ; 3405       ;
 ;     -- <=2 input functions                  ; 777        ;
 ;                                             ;            ;
 ; Logic elements by mode                      ;            ;
-;     -- normal mode                          ; 1670       ;
+;     -- normal mode                          ; 1644       ;
 ;     -- arithmetic mode                      ; 3443       ;
 ;                                             ;            ;
-; Total registers                             ; 5441       ;
-;     -- Dedicated logic registers            ; 5441       ;
+; Total registers                             ; 5376       ;
+;     -- Dedicated logic registers            ; 5376       ;
 ;     -- I/O registers                        ; 0          ;
 ;                                             ;            ;
-; I/O pins                                    ; 59         ;
+; I/O pins                                    ; 60         ;
 ; Total memory bits                           ; 110592     ;
 ; Embedded Multiplier 9-bit elements          ; 14         ;
 ; Maximum fan-out node                        ; clk_enable ;
 ; Maximum fan-out                             ; 3197       ;
-; Total fan-out                               ; 34650      ;
+; Total fan-out                               ; 34369      ;
 ; Average fan-out                             ; 3.24       ;
 +---------------------------------------------+------------+
 
@@ -327,7 +327,7 @@ applicable agreement for further details.
 +------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------+
 ; Compilation Hierarchy Node                     ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                             ;
 +------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------+
-; |Mercury                                       ; 5113 (315)        ; 5441 (426)   ; 110592      ; 14           ; 2       ; 6         ; 59   ; 0            ; |Mercury                                                                                                                        ;
+; |Mercury                                       ; 5087 (315)        ; 5376 (394)   ; 110592      ; 14           ; 2       ; 6         ; 60   ; 0            ; |Mercury                                                                                                                        ;
 ;    |FIR_top:FIR|                               ; 839 (37)          ; 414 (21)     ; 12288       ; 14           ; 2       ; 6         ; 0    ; 0            ; |Mercury|FIR_top:FIR                                                                                                            ;
 ;       |MAC:MAC_inst_I|                         ; 115 (51)          ; 120 (120)    ; 0           ; 7            ; 1       ; 3         ; 0    ; 0            ; |Mercury|FIR_top:FIR|MAC:MAC_inst_I                                                                                             ;
 ;          |lpm_mult:Mult0|                      ; 64 (0)            ; 0 (0)        ; 0           ; 7            ; 1       ; 3         ; 0    ; 0            ; |Mercury|FIR_top:FIR|MAC:MAC_inst_I|lpm_mult:Mult0                                                                              ;
@@ -341,7 +341,6 @@ applicable agreement for further details.
 ;          |altsyncram:mem_rtl_0|                ; 0 (0)             ; 0 (0)        ; 12288       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|FIR_top:FIR|cbuffer_top:cbuffer_inst|altsyncram:mem_rtl_0                                                              ;
 ;             |altsyncram_5ti1:auto_generated|   ; 0 (0)             ; 0 (0)        ; 12288       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|FIR_top:FIR|cbuffer_top:cbuffer_inst|altsyncram:mem_rtl_0|altsyncram_5ti1:auto_generated                               ;
 ;    |I2SAudioOut:I2SAO|                         ; 46 (46)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|I2SAudioOut:I2SAO                                                                                                      ;
-;    |I2SAudioOut:I2SIQO|                        ; 26 (26)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|I2SAudioOut:I2SIQO                                                                                                     ;
 ;    |LPF_select:Alex_LPF_select|                ; 70 (70)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|LPF_select:Alex_LPF_select                                                                                             ;
 ;    |Rx_fifo:Rx_fifo|                           ; 85 (0)            ; 132 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|Rx_fifo:Rx_fifo                                                                                                        ;
 ;       |dcfifo:dcfifo_component|                ; 85 (0)            ; 132 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                ;
@@ -679,7 +678,7 @@ Encoding Type:  One-Hot
 ; FIR/cbuffer_inst/mem~11                                           ; Merged with FIR/cbuffer_inst/rd_pointer[2]    ;
 ; FIR/cbuffer_inst/mem~14                                           ; Merged with FIR/cbuffer_inst/rd_pointer[3]    ;
 ; FIR/cbuffer_inst/mem~17                                           ; Merged with FIR/cbuffer_inst/rd_pointer[4]    ;
-; Total Number of Removed Registers = 148                           ;                                               ;
+; Total Number of Removed Registers = 181                           ;                                               ;
 +-------------------------------------------------------------------+-----------------------------------------------+
 * Table truncated at 100 items. To change the number of removed registers reported, set the "Number of Removed Registers Reported" option under Assignments->Settings->Analysis and Synthesis Settings->More Settings
 
@@ -689,12 +688,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 5441  ;
+; Total registers                              ; 5376  ;
 ; Number of registers using Synchronous Clear  ; 441   ;
 ; Number of registers using Synchronous Load   ; 190   ;
 ; Number of registers using Asynchronous Clear ; 3083  ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 2370  ;
+; Number of registers using Clock Enable       ; 2306  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -2041,7 +2040,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Nov 11 11:23:06 2007
+    Info: Processing started: Sat Dec 15 10:11:58 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
 Info: Found 1 design units, including 1 entities, in source file SPI.v
     Info: Found entity 1: SPI
@@ -2087,15 +2086,17 @@ Info: Found 1 design units, including 1 entities, in source file phase_accumulat
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
     Info: Found entity 1: Tx_fifo
 Info: Elaborating entity "Mercury" for the top level hierarchy
-Warning (10858): Verilog HDL warning at MercuryII.v(121): object sync_Rx_used used but never assigned
-Warning (10030): Net "sync_Rx_used[11]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[10]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[9]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[8]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[7]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[6]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[5]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
-Warning (10030): Net "sync_Rx_used[4]" at MercuryII.v(121) has no driver or initial value, using a default initial value 0
+Warning (10858): Verilog HDL warning at MercuryII.v(127): object sync_Rx_used used but never assigned
+Warning (10036): Verilog HDL or VHDL warning at MercuryII.v(721): object "I_PWM" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at MercuryII.v(722): object "Q_PWM" assigned a value but never read
+Warning (10030): Net "sync_Rx_used[11]" at MercuryII.v(127) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[10]" at MercuryII.v(127) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[9]" at MercuryII.v(127) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[8]" at MercuryII.v(127) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[7]" at MercuryII.v(127) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[6]" at MercuryII.v(127) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[5]" at MercuryII.v(127) has no driver or initial value, using a default initial value 0
+Warning (10030): Net "sync_Rx_used[4]" at MercuryII.v(127) has no driver or initial value, using a default initial value 0
 Info: Elaborating entity "clocks" for hierarchy "clocks:clocks"
 Info: Found 1 design units, including 1 entities, in source file ../../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
     Info: Found entity 1: lpm_counter
@@ -2356,13 +2357,8 @@ Info: Encoding result for state machine "|Mercury|FIR_top:FIR|state"
     Info: State "|Mercury|FIR_top:FIR|state.BEGIN_MAC" uses code string "10010"
     Info: State "|Mercury|FIR_top:FIR|state.STROBE_OUT" uses code string "00011"
 Info: Duplicate registers merged to single register
-    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[3]" merged to single register "I2SAudioOut:I2SAO|bit_count[3]"
-    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[2]" merged to single register "I2SAudioOut:I2SAO|bit_count[2]"
-    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[1]" merged to single register "I2SAudioOut:I2SAO|bit_count[1]"
-    Info: Duplicate register "I2SAudioOut:I2SIQO|bit_count[0]" merged to single register "I2SAudioOut:I2SAO|bit_count[0]"
+    Info: Duplicate register "I2SAudioOut:I2SIQO|outbit_o" merged to single register "I2SAudioOut:I2SAO|outbit_o"
     Info: Duplicate register "cic_8_1_5_nofraction:cic_Q_2|ce_out_reg" merged to single register "cic_8_1_5_nofraction:cic_I_2|ce_out_reg"
-    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.000" merged to single register "I2SAudioOut:I2SAO|TLV_state.000"
-    Info: Duplicate register "I2SAudioOut:I2SIQO|TLV_state.011" merged to single register "I2SAudioOut:I2SAO|TLV_state.011"
     Info: Duplicate register "cic_4_1_8_nofraction:cic_Q_3|cur_count[0]" merged to single register "cic_4_1_8_nofraction:cic_I_3|cur_count[0]"
     Info: Duplicate register "cic_4_1_8_nofraction:cic_Q_3|cur_count[1]" merged to single register "cic_4_1_8_nofraction:cic_I_3|cur_count[1]"
 Info: Inferred 1 megafunctions from design logic
@@ -2385,7 +2381,7 @@ Info: Found 1 design units, including 1 entities, in source file db/add_sub_ljg.
 Warning: Output pins are stuck at VCC or GND
     Warning: Pin "PKEND" stuck at VCC
     Warning: Pin "FIFO_ADR[0]" stuck at GND
-Info: 60 registers lost all their fanouts during netlist optimizations. The first 60 are displayed below.
+Info: 98 registers lost all their fanouts during netlist optimizations. The first 98 are displayed below.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/p0addr" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[11]" lost all its fanouts during netlist optimizations.
     Info: Register "Tx_fifo/dcfifo_component/auto_generated/wrptr_g1p/counter_ffa[10]" lost all its fanouts during netlist optimizations.
@@ -2443,20 +2439,58 @@ Info: 60 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "FIR/state~21" lost all its fanouts during netlist optimizations.
     Info: Register "FIR/state~22" lost all its fanouts during netlist optimizations.
     Info: Register "FIR/state~23" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[15]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[15]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[14]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[14]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[13]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[13]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[10]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[10]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[9]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[9]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[8]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[8]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[7]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[7]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[6]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[6]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[5]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[5]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[4]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[4]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[3]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[3]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/local_right_sample[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/data[0]" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.100" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state.011" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/bit_count[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/bit_count[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/bit_count[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/bit_count[3]" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.010" lost all its fanouts during netlist optimizations.
+    Info: Register "I2SIQO/TLV_state.000" lost all its fanouts during netlist optimizations.
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
-Info: Implemented 7095 device resources after synthesis - the final resource count might be different
+Info: Implemented 7022 device resources after synthesis - the final resource count might be different
     Info: Implemented 24 input pins
-    Info: Implemented 19 output pins
+    Info: Implemented 20 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 6942 logic cells
+    Info: Implemented 6868 logic cells
     Info: Implemented 80 RAM segments
     Info: Implemented 14 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 29 warnings
-    Info: Allocated 156 megabytes of memory during processing
-    Info: Processing ended: Sun Nov 11 11:25:14 2007
-    Info: Elapsed time: 00:02:08
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 31 warnings
+    Info: Allocated 157 megabytes of memory during processing
+    Info: Processing ended: Sat Dec 15 10:14:15 2007
+    Info: Elapsed time: 00:02:17
 
 
 +------------------------------------------+
