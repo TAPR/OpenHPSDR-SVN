@@ -887,8 +887,10 @@ namespace DataDecoder
             }
             set.RadData = (int)cboRadData.SelectedIndex;
             set.Save();
+#if(DEBUG)
             Console.WriteLine(AccPort.BaudRate + " " + AccPort.DataBits + " " +
                               AccPort.Parity + " " + AccPort.StopBits);
+#endif
         }
 
         #endregion Serial Port Events
@@ -946,9 +948,8 @@ namespace DataDecoder
                             string temp = mystring.Substring(j, 2);
                             bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
 #if(DEBUG)
-#endif
                            Console.Write("{0:x2} ", bytes[i]);
-
+#endif
                             j += 2;
                         }
 #if(DEBUG)
