@@ -594,22 +594,23 @@ namespace DataDecoder
                 set.Save(); 
             }
         }
+        // Context Menu Item "Restore Form Size"
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.Size = new Size(442, 420);
+            this.Size = new Size(442, 406);
         }
-
+        // Context Menu Item "Shrink Form Size"
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             this.Size = new Size(442, 57);
         }
-
+        // Context Menu Item "About DDUtil"
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
             MessageBox.Show("DDUtil (C) 2007 Steve Nance (K5FR)", "About DDUtil",
                 MessageBoxButtons.OK, MessageBoxIcon.None);
         }
-
+        // Context Menu Item "Slave Radio Info"
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Info for selecting a Slave Radio Type\n\n" + 
@@ -622,11 +623,193 @@ namespace DataDecoder
                 "   All Icom radios, TenTec emulating Icom\n",
                 "Slave Radio Info", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
-
+        // CI-V Hex Address has changed
         private void txtRadNum_TextChanged(object sender, EventArgs e)
         {
             set.CIVaddr = txtRadNum.Text;
             set.Save();
+        }
+        // New Logger port was selected
+        private void cboLogPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LogPort.IsOpen) LogPort.Close();
+            LogPort.PortName = cboLogPort.SelectedItem.ToString();
+            try
+            {
+                LogPort.Open();
+            }
+            catch
+            {
+                MessageBox.Show("Serial port " + LogPort.PortName +
+                   " cannot be opened!", "Port Error",
+                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboLogPort.SelectedText = "";
+                return;
+            }
+            // save new port setting
+            string str = set.LogPort;
+            set.LogPort = cboLogPort.SelectedItem.ToString();
+            set.Save();
+        }
+
+        // new acc port was selected
+        private void cboSerAcc_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (AccPort.IsOpen) AccPort.Close();
+            AccPort.PortName = cboSerAcc.SelectedItem.ToString();
+            try
+            {
+//               if(AccPort.PortName != "None")
+                AccPort.Open();
+            }
+            catch
+            {
+                MessageBox.Show("Serial port " + AccPort.PortName +
+                   " cannot be opened!", "Port Error",
+                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboSerAcc.SelectedText = "";
+                this.Text = "CmdrSDR - Select serial port!";
+                return;
+            }
+            // save new port setting
+            string str = set.AccPort;
+            set.AccPort = cboSerAcc.SelectedItem.ToString();
+            set.Save();
+        }
+
+        // new radio port was selected
+        private void cboCAT_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (sp.isOpen) sp.Close();
+            sp.Name = cboCAT.SelectedItem.ToString();
+            try
+            {
+                sp.Open();
+            }
+            catch
+            {
+                MessageBox.Show("Serial port " + sp.Name +
+                   " cannot be opened!/n", "Port Error",
+                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboCAT.SelectedText = "";
+                return;
+            }
+            // save new port setting
+            string str = set.RadioPort;
+            set.RadioPort = cboCAT.SelectedItem.ToString();
+            set.Save();
+        }
+        // Follow radio check box has changed
+        private void cboFollow_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cboFollow.Checked == true)
+            {
+                cboRadio.Enabled = true;
+                set.followChk = true;
+            }
+            else
+            {
+                cboRadio.SelectedIndex = 0;
+                //                portmode = PortMode.None;
+                cboRadio.Enabled = false;
+                set.followChk = false;
+            }
+            set.Save();
+        }
+        // Follow Radio type has changed
+        private void cboRadio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            set.followRadio = (int)cboRadio.SelectedIndex;
+            set.Save();
+            switch (cboRadio.SelectedIndex)
+            {
+                case 0: // None
+                    //                    cboRadData.SelectedIndex = 0;
+                    portmode = PortMode.None;
+                    txtRadNum.Enabled = false;
+                    break;
+                case 1: // Kenwood
+                    portmode = PortMode.Kenwood;
+                    txtRadNum.Enabled = false;
+                    break;
+                case 2: // Yaesu Type I
+                    portmode = PortMode.YaesuTypeI;
+                    txtRadNum.Enabled = false;
+                    break;
+                case 3: // Yaesu Type II
+                    portmode = PortMode.YaesuTypeII;
+                    txtRadNum.Enabled = false;
+                    break;
+                case 4: // Icom
+                    portmode = PortMode.Icom;
+                    txtRadNum.Enabled = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        // Radio Data combo box has changed
+        private void cboRadData_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cboRadData.SelectedIndex)
+            {
+                case 0: // 9600 8N1
+                    AccPort.BaudRate = 9600;
+                    AccPort.DataBits = 8;
+                    AccPort.Parity = System.IO.Ports.Parity.None;
+                    AccPort.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 1: // 9600 8N2
+                    AccPort.BaudRate = 9600;
+                    AccPort.DataBits = 8;
+                    AccPort.Parity = System.IO.Ports.Parity.None;
+                    AccPort.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                case 2: // 4800 8N1
+                    AccPort.BaudRate = 4800;
+                    AccPort.DataBits = 8;
+                    AccPort.Parity = System.IO.Ports.Parity.None;
+                    AccPort.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 3: // 4800 8N2
+                    AccPort.BaudRate = 4800;
+                    AccPort.DataBits = 8;
+                    AccPort.Parity = System.IO.Ports.Parity.None;
+                    AccPort.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                case 4: // 2400 8N1
+                    AccPort.BaudRate = 2400;
+                    AccPort.DataBits = 8;
+                    AccPort.Parity = System.IO.Ports.Parity.None;
+                    AccPort.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 5: // 2400 8N2
+                    AccPort.BaudRate = 2400;
+                    AccPort.DataBits = 8;
+                    AccPort.Parity = System.IO.Ports.Parity.None;
+                    AccPort.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                case 6: // 1200 8N1
+                    AccPort.BaudRate = 1200;
+                    AccPort.DataBits = 8;
+                    AccPort.Parity = System.IO.Ports.Parity.None;
+                    AccPort.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 7: // 1200 8N2
+                    AccPort.BaudRate = 1200;
+                    AccPort.DataBits = 8;
+                    AccPort.Parity = System.IO.Ports.Parity.None;
+                    AccPort.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                default:
+                    break;
+            }
+            set.RadData = (int)cboRadData.SelectedIndex;
+            set.Save();
+#if(DEBUG)
+            Console.WriteLine(AccPort.BaudRate + " " + AccPort.DataBits + " " +
+                              AccPort.Parity + " " + AccPort.StopBits);
+#endif
         }
 
         #endregion Form Events
@@ -717,188 +900,12 @@ namespace DataDecoder
             logTimer.Enabled = true;
         }
 
-        // New Logger port was selected
-        private void cboLogPort_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (LogPort.IsOpen) LogPort.Close();
-            LogPort.PortName = cboLogPort.SelectedItem.ToString();
-            try
-            {
-                LogPort.Open();
-            }
-            catch
-            {
-                MessageBox.Show("Serial port " + LogPort.PortName +
-                   " cannot be opened!", "Port Error",
-                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboLogPort.SelectedText = "";
-                return;
-            }
-            // save new port setting
-            string str = set.LogPort;
-            set.LogPort = cboLogPort.SelectedItem.ToString();
-            set.Save();
-        }
-
-        // new acc port was selected
-        private void cboSerAcc_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            if (AccPort.IsOpen) AccPort.Close();
-            AccPort.PortName = cboSerAcc.SelectedItem.ToString();
-            try
-            {
- //               if(AccPort.PortName != "None")
-                AccPort.Open();
-            }
-            catch
-            {
-                MessageBox.Show("Serial port " + AccPort.PortName +
-                   " cannot be opened!", "Port Error",
-                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboSerAcc.SelectedText = "";
-                this.Text = "CmdrSDR - Select serial port!";
-                return;
-            }
-            // save new port setting
-            string str = set.AccPort;
-            set.AccPort = cboSerAcc.SelectedItem.ToString();
-            set.Save();
-        }
-
-        // new radio port was selected
-        private void cboCAT_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (sp.isOpen) sp.Close();
-            sp.Name = cboCAT.SelectedItem.ToString();
-            try
-            {
-                sp.Open();
-            }
-            catch
-            {
-                MessageBox.Show("Serial port " + sp.Name +
-                   " cannot be opened!/n", "Port Error",
-                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboCAT.SelectedText = "";
-                return;
-            }
-            // save new port setting
-            string str = set.RadioPort;
-            set.RadioPort = cboCAT.SelectedItem.ToString();
-            set.Save();
-        }
-        // Follow radio check box has changed
-        private void cboFollow_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cboFollow.Checked == true)
-            {
-                cboRadio.Enabled = true;
-                set.followChk = true;
-            }
-            else
-            {
-                cboRadio.SelectedIndex = 0;
-//                portmode = PortMode.None;
-                cboRadio.Enabled = false;
-                set.followChk = false;
-            }
-            set.Save();
-        }
-        // Follow Radio has changed
-        private void cboRadio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            set.followRadio = (int)cboRadio.SelectedIndex;
-            set.Save();
-            switch (cboRadio.SelectedIndex)
-            {
-                case 0: // None
-//                    cboRadData.SelectedIndex = 0;
-                    portmode = PortMode.None;
-                    txtRadNum.Enabled = false;
-                    break;
-                case 1: // Kenwood
-                    portmode = PortMode.Kenwood;
-                    txtRadNum.Enabled = false;
-                    break;
-                case 2: // Yaesu Type I
-                    portmode = PortMode.YaesuTypeI;
-                    txtRadNum.Enabled = false;
-                    break;
-                case 3: // Yaesu Type II
-                    portmode = PortMode.YaesuTypeII;
-                    txtRadNum.Enabled = false;
-                    break;
-                case 4: // Icom
-                    portmode = PortMode.Icom;
-                    txtRadNum.Enabled = true;
-                    break;
-                default: 
-                    break;
-            }
-        }
-        private void cboRadData_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (cboRadData.SelectedIndex)
-            {
-                case 0:
-                    AccPort.BaudRate = 9600;
-                    AccPort.DataBits = 8;
-                    AccPort.Parity = System.IO.Ports.Parity.None;
-                    AccPort.StopBits = System.IO.Ports.StopBits.One;
-                    break;
-                case 1:
-                    AccPort.BaudRate = 4800;
-                    AccPort.DataBits = 8;
-                    AccPort.Parity = System.IO.Ports.Parity.None;
-                    AccPort.StopBits = System.IO.Ports.StopBits.One;
-                    break;
-                case 2:
-                    AccPort.BaudRate = 4800;
-                    AccPort.DataBits = 8;
-                    AccPort.Parity = System.IO.Ports.Parity.None;
-                    AccPort.StopBits = System.IO.Ports.StopBits.Two;
-                    break;
-                case 3:
-                    AccPort.BaudRate = 2400;
-                    AccPort.DataBits = 8;
-                    AccPort.Parity = System.IO.Ports.Parity.None;
-                    AccPort.StopBits = System.IO.Ports.StopBits.One;
-                    break;
-                case 4:
-                    AccPort.BaudRate = 2400;
-                    AccPort.DataBits = 8;
-                    AccPort.Parity = System.IO.Ports.Parity.None;
-                    AccPort.StopBits = System.IO.Ports.StopBits.Two;
-                    break;
-                case 5:
-                    AccPort.BaudRate = 1200;
-                    AccPort.DataBits = 8;
-                    AccPort.Parity = System.IO.Ports.Parity.None;
-                    AccPort.StopBits = System.IO.Ports.StopBits.One;
-                    break;
-                case 6:
-                    AccPort.BaudRate = 1200;
-                    AccPort.DataBits = 8;
-                    AccPort.Parity = System.IO.Ports.Parity.None;
-                    AccPort.StopBits = System.IO.Ports.StopBits.Two;
-                    break;
-                default:
-                    break;
-            }
-            set.RadData = (int)cboRadData.SelectedIndex;
-            set.Save();
-#if(DEBUG)
-            Console.WriteLine(AccPort.BaudRate + " " + AccPort.DataBits + " " +
-                              AccPort.Parity + " " + AccPort.StopBits);
-#endif
-        }
-
         #endregion Serial Port Events
 
         #region Serial Port Methods
 
         /// <summary>
-        /// send data to the Passive Listener port
+        /// send radio specific frequency data to the Passive Listener port
         /// </summary>
         private void PortSend(string freq)
         {
@@ -909,7 +916,8 @@ namespace DataDecoder
                 string mystring = "";
                 int j;
                 switch (portmode)
-                {
+                {   // for a list of the radio types referenced below see 
+                    // toolStripMenuItem4_Click() event handeler
                     case PortMode.None:
                         AccPort.WriteLine("IF" + freq + ";");
                         // 14.234.56 Mhz = IF00014234560;
@@ -957,8 +965,8 @@ namespace DataDecoder
 #endif
                         AccPort.Write(bytes, 0, 5);
                         // 14.234.56 Mhz = 01 42 34 56 01
-//                        byte[] bytex = new byte[5] { 0x02, 0x00, 0x00, 0x00, 0x07 };
-//                        AccPort.Write(bytex, 0, 5);
+//                        byte[] mode = new byte[5] { 0x02, 0x00, 0x00, 0x00, 0x07 };
+//                        AccPort.Write(mode, 0, 5);
                         break;
                     case PortMode.Icom:
                         string preamble = "FE";

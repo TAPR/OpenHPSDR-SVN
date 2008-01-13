@@ -150,6 +150,7 @@ namespace DataDecoder
             this.cboRadData.FormattingEnabled = true;
             this.cboRadData.Items.AddRange(new object[] {
             "9600 8-N-1",
+            "9600 8-N-2",
             "4800 8-N-1",
             "4800 8-N-2",
             "2400 8-N-1",
@@ -625,7 +626,7 @@ namespace DataDecoder
             this.tabDev1.Controls.Add(this.label2);
             this.tabDev1.Location = new System.Drawing.Point(4, 22);
             this.tabDev1.Name = "tabDev1";
-            this.tabDev1.Size = new System.Drawing.Size(415, 333);
+            this.tabDev1.Size = new System.Drawing.Size(415, 309);
             this.tabDev1.TabIndex = 2;
             this.tabDev1.Text = "Device 1";
             this.tabDev1.UseVisualStyleBackColor = true;
@@ -646,7 +647,7 @@ namespace DataDecoder
             this.tabDev2.Controls.Add(this.label10);
             this.tabDev2.Location = new System.Drawing.Point(4, 22);
             this.tabDev2.Name = "tabDev2";
-            this.tabDev2.Size = new System.Drawing.Size(415, 333);
+            this.tabDev2.Size = new System.Drawing.Size(415, 309);
             this.tabDev2.TabIndex = 3;
             this.tabDev2.Text = "Device 2";
             this.tabDev2.UseVisualStyleBackColor = true;
@@ -705,7 +706,7 @@ namespace DataDecoder
             this.toolStripMenuItem4,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 92);
             // 
             // toolStripMenuItem1
             // 

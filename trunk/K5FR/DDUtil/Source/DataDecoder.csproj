@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DDU.ico" />
+    <Content Include="PowerSDR.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

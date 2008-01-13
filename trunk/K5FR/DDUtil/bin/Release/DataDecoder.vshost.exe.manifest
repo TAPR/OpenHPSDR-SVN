@@ -47,7 +47,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>8fy5/xT6j5SbsDpTw+GOIS9N8iA=</dsig:DigestValue>
+        <dsig:DigestValue>rxSD3hMS9XoIVrI14ibztFgCu1M=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -67,6 +67,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>n61gN5vLPOIPBAPa85IcfgV4szg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="PowerSDR.ico" size="2238">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>eI/A6fJCIJann1xWrTkWir0nG04=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
