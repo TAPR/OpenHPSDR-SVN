@@ -40,24 +40,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DataDecoder.exe" size="57344">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DataDecoder.exe" size="65536">
       <assemblyIdentity name="DataDecoder" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>rxSD3hMS9XoIVrI14ibztFgCu1M=</dsig:DigestValue>
+        <dsig:DigestValue>e9hy7RfWpw8No2QkzozeFXRJuL8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="DataDecoder.exe.config" size="2752">
+  <file name="DataDecoder.exe.config" size="3190">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>ELL6CKDToyuEete6AUiui0iE1RI=</dsig:DigestValue>
+      <dsig:DigestValue>VLnGkmSvCNCPx7tVQCLsFlHDiy8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="DDU.ico" size="1078">

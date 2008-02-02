@@ -67,10 +67,11 @@ namespace DataDecoder
         string fileName = "BandData.xml";
         string[] ports;
         string OutBuffer;
-        string ver = "1.1.0 Beta";
+        string ver = "1.3.0 Beta";
         string vfo = "";
         System.Timers.Timer pollTimer;
         System.Timers.Timer logTimer;
+        System.Timers.Timer lpTimer;
 
         #endregion Variables
 
@@ -104,6 +105,16 @@ namespace DataDecoder
         {
             get { return default_LogPort; }
             set { default_LogPort = value; }
+        }
+
+        /// <summary>
+        /// The default LP100 port
+        /// </summary>
+        private string default_LPport = "";
+        public string DefaultLPport
+        {
+            get { return default_LPport; }
+            set { default_LPport = value; }
         }
 
         /// <summary>
@@ -153,6 +164,12 @@ namespace DataDecoder
             logTimer.Interval = 10000;      // 10000 = 10 seconds
             logTimer.Enabled = true;
 
+            // setup LP100 Port Timer for a 200 ms interrupt
+            lpTimer = new System.Timers.Timer();
+            lpTimer.Elapsed += new System.Timers.ElapsedEventHandler(lpTimer_Elapsed);
+            lpTimer.Interval = 200;
+            lpTimer.Enabled = false;
+
             CreateSerialPort();
             GetPortNames();             // enumerate serial ports and load combo boxes
             str = set.CIVaddr;
@@ -164,45 +181,75 @@ namespace DataDecoder
             DefaultComRadio = str;
             SetDefaultComRadio();
             txtInv.Text = Convert.ToString(pollInt);
+            txtLPint.Text = Convert.ToString(set.LPint);
+            chkLPenab.Checked = set.LPenab;
+            txtProfLoc.Text = set.ProfLoc;
 
-            // set Acc Serial port to the last port used
+            // set Acc Serial (passive listener) port to the last port used
             str = set.AccPort;
-            cboSerAcc.Text = str;
-            cboRadio.SelectedIndex = set.followRadio;
-            cboFollow.Checked = set.followChk;
-            if (cboFollow.Checked == false) cboRadio.Enabled = false;
-            else cboRadio.Enabled = true;
-            if (AccPort.IsOpen) AccPort.Close();
-            try
-            {   // try to open the selected AccPort:
-                AccPort.PortName = str;
-                DefaultComAcc = str;
-                SetDefaultComAcc();
-            }
-            catch
-            {   // give a message, if the port is not available:
-                MessageBox.Show("Serial port " + AccPort.PortName +
-                   " cannot be opened!", "Port Error",
-                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboSerAcc.SelectedText = "";
+            if (str != "")
+            {
+                cboSerAcc.Text = str;
+                cboRadio.SelectedIndex = set.followRadio;
+                cboFollow.Checked = set.followChk;
+                if (cboFollow.Checked == false) cboRadio.Enabled = false;
+                else cboRadio.Enabled = true;
+                if (AccPort.IsOpen) AccPort.Close();
+                try
+                {   // try to open the selected AccPort:
+                    AccPort.PortName = str;
+                    DefaultComAcc = str;
+                    SetDefaultComAcc();
+                }
+                catch
+                {   // give a message, if the port is not available:
+                    MessageBox.Show("Serial port " + AccPort.PortName +
+                       " cannot be opened!", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboSerAcc.SelectedText = "";
+                }
             }
 
-            // set Logger Serial port to the last port used
+            // set Logger Serial (radio control) port to the last port used
             str = set.LogPort;
-            cboLogPort.Text = str;
-            if (LogPort.IsOpen) LogPort.Close();
-            try
-            {   // try to open the selected LogPort:
-                LogPort.PortName = str;
-                DefaultLogPort = str;
-                SetDefaultLogPort();
+            if (str != "")
+            {
+                cboLogPort.Text = str;
+                if (LogPort.IsOpen) LogPort.Close();
+                try
+                {   // try to open the selected LogPort:
+                    LogPort.PortName = str;
+                    DefaultLogPort = str;
+                    SetDefaultLogPort();
+                }
+                catch
+                {   // give a message, if the port is not available:
+                    MessageBox.Show("Serial port " + LogPort.PortName +
+                       " cannot be opened!", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboLogPort.SelectedText = "";
+                }
             }
-            catch
-            {   // give a message, if the port is not available:
-                MessageBox.Show("Serial port " + LogPort.PortName +
-                   " cannot be opened!", "Port Error",
-                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboLogPort.SelectedText = "";
+
+            // set LP100 Serial port to the last port used
+
+            if (set.LPportNum != "")
+            {
+                cboLPport.Text = set.LPportNum;
+                if (LPport.IsOpen) LPport.Close();
+                try
+                {   // try to open the selected LPport:
+                    LPport.PortName = set.LPportNum;
+                    DefaultLPport = set.LPportNum;
+                    SetDefaultLPport();
+                }
+                catch
+                {   // give a message, if the port is not available:
+                    MessageBox.Show("Serial port " + LPport.PortName +
+                       " cannot be opened!", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboLPport.SelectedText = "";
+                }
             }
 
             // set LPT port to last one used
@@ -250,6 +297,7 @@ namespace DataDecoder
             cboDevice.Items.Add(set.Device1);
             cboDevice.Items.Add(set.Device2);
             cboDevice.Text = set.Device;
+            lpTimer.Enabled = true;
         }
 
         #endregion Initialization
@@ -324,7 +372,34 @@ namespace DataDecoder
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-
+        // Write fwd Power reading to txt box
+        delegate void SetFwdCallback(string text);
+        private void SetFwd(string text)
+        {
+            if (this.txtFwd.InvokeRequired)
+            {
+                SetFwdCallback d = new SetFwdCallback(SetFwd);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtFwd.Text = text;
+            }
+        }
+        // Write SWR reading to txt box
+        delegate void SetSwrCallback(string text);
+        private void SetSwr(string text)
+        {
+            if (this.txtSWR.InvokeRequired)
+            {
+                SetSwrCallback d = new SetSwrCallback(SetSwr);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtSWR.Text = text;
+            }
+        }
         #endregion Methods
 
         #region Helper Methods
@@ -503,6 +578,7 @@ namespace DataDecoder
             logTimer.Enabled = false;
             PortAccess.Output(LPTnum, 0);
             LogPort.Close();
+            LPport.Close();
             sp.Close();
             AccPort.Close();
         }
@@ -597,12 +673,12 @@ namespace DataDecoder
         // Context Menu Item "Restore Form Size"
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.Size = new Size(442, 406);
+            this.Size = new Size(442, 400);
         }
         // Context Menu Item "Shrink Form Size"
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            this.Size = new Size(442, 57);
+            this.Size = new Size(442, 60);
         }
         // Context Menu Item "About DDUtil"
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -623,6 +699,29 @@ namespace DataDecoder
                 "   All Icom radios, TenTec emulating Icom\n",
                 "Slave Radio Info", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
+        // Context Menu Item LP-100
+        private void lP100ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "- Select the port the LP-100 is connected to.\n\n" +
+                "- Select the polling interval in MS. This needs to\n" +
+                "  be fairly fast or the readings will lag behind. \n" +
+                "  Try between 100 - 500 MS (200 is a good choice).\n\n" +
+                "- Check the Enable Check Box\n",
+                "LP-100 Setup Info", MessageBoxButtons.OK, MessageBoxIcon.None);
+        }
+        private void flexProfilerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "- Select the file location where Profiler is located.\n\n" +
+                "- Select the PF Open button to start the Profiler.\n\n" +
+                "- Close Profiler after saving profile.\n\n" +
+                "- Press the Re-Start button to activate DDUtil.\n", 
+                "Flex Profiler Setup & Operation", MessageBoxButtons.OK, MessageBoxIcon.None);
+        }
+
+
+
         // CI-V Hex Address has changed
         private void txtRadNum_TextChanged(object sender, EventArgs e)
         {
@@ -633,18 +732,21 @@ namespace DataDecoder
         private void cboLogPort_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (LogPort.IsOpen) LogPort.Close();
-            LogPort.PortName = cboLogPort.SelectedItem.ToString();
-            try
+            if (cboLogPort.SelectedItem.ToString() != "")
             {
-                LogPort.Open();
-            }
-            catch
-            {
-                MessageBox.Show("Serial port " + LogPort.PortName +
-                   " cannot be opened!", "Port Error",
-                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboLogPort.SelectedText = "";
-                return;
+                LogPort.PortName = cboLogPort.SelectedItem.ToString();
+                try
+                {
+                    LogPort.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("Serial port " + LogPort.PortName +
+                       " cannot be opened!", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboLogPort.SelectedText = "";
+                    return;
+                }
             }
             // save new port setting
             string str = set.LogPort;
@@ -656,20 +758,23 @@ namespace DataDecoder
         private void cboSerAcc_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (AccPort.IsOpen) AccPort.Close();
-            AccPort.PortName = cboSerAcc.SelectedItem.ToString();
-            try
+            if (cboSerAcc.SelectedItem.ToString() != "")
             {
-//               if(AccPort.PortName != "None")
-                AccPort.Open();
-            }
-            catch
-            {
-                MessageBox.Show("Serial port " + AccPort.PortName +
-                   " cannot be opened!", "Port Error",
-                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboSerAcc.SelectedText = "";
-                this.Text = "CmdrSDR - Select serial port!";
-                return;
+                AccPort.PortName = cboSerAcc.SelectedItem.ToString();
+                try
+                {
+                    //               if(AccPort.PortName != "None")
+                    AccPort.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("Serial port " + AccPort.PortName +
+                       " cannot be opened!", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboSerAcc.SelectedText = "";
+                    this.Text = "CmdrSDR - Select serial port!";
+                    return;
+                }
             }
             // save new port setting
             string str = set.AccPort;
@@ -811,6 +916,96 @@ namespace DataDecoder
                               AccPort.Parity + " " + AccPort.StopBits);
 #endif
         }
+        // LP port number has changed
+        private void cboLPport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LPport.IsOpen) LPport.Close();
+            if (cboLPport.SelectedItem.ToString() != "")
+            {
+                LPport.PortName = cboLPport.SelectedItem.ToString();
+                try
+                {
+                    LPport.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("Serial port " + LPport.PortName +
+                       " cannot be opened!/n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboLPport.SelectedText = "";
+                    return;
+                }
+            }
+            else
+            { 
+                lpTimer.Enabled = false; 
+            }
+            // save new port setting
+            set.LPportNum = cboLPport.SelectedItem.ToString();
+            set.Save();
+        }
+        // LP port timer interval has changed
+        private void txtLPint_TextChanged(object sender, EventArgs e)
+        {
+            set.LPint = txtLPint.Text;
+            set.Save(); 
+        }
+        // LP100 enabled check box has changed
+        private void chkLPenab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkLPenab.Checked)
+            {
+         //       lpTimer.Enabled = true;
+                set.LPenab = true; 
+            }
+            else
+            {
+                lpTimer.Enabled = false;
+                set.LPenab = false;
+            }
+            set.Save();
+        }
+        // Profiller button pressed
+        private void btnProfiler_Click(object sender, EventArgs e)
+        {
+            if (txtProfLoc.Text != "" && txtProfLoc.Text != null)
+            {
+                sp.Close();
+                Process.Start(txtProfLoc.Text);
+            }
+            else
+                MessageBox.Show("No location has been selected for the FlexProfiler.exe file.\n" +
+                    "Please select a file on the 'Other' tab and try again.", "File Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+        }
+        // Re-Start button was pressed
+        private void btnReStart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!sp.isOpen) sp.Open();
+            }
+            catch
+            {
+                MessageBox.Show("Did you perhaps forget to close Profiler?\n\n" +
+                    "If it is closed, Houston we have a problem.", "Oops!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        // Select Flex Profiler File Location
+        private void btnPFfile_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "exe files|*.exe";
+            openFileDialog1.Title = "Select Flex Profiler File"; 
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                txtProfLoc.Text = openFileDialog1.FileName;
+                set.ProfLoc = txtProfLoc.Text;
+                set.Save();
+            }
+        }
 
         #endregion Form Events
 
@@ -898,6 +1093,23 @@ namespace DataDecoder
             // send the data on to the radio 
             sp.Write(logMsg);               //pass log port msg to radio port
             logTimer.Enabled = true;
+        }
+
+        // LP100 port has received data
+        private void LPport_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkLPenab.Checked)
+            {
+                SerialPort LPportMsgs = (SerialPort)sender;
+                string LPportMsg = LPportMsgs.ReadExisting();
+                if (LPportMsg.Length == 43)
+                {
+                    string fwd = LPportMsg.Substring(1, 7);
+                    string swr = LPportMsg.Substring(LPportMsg.Length - 4, 4);
+                    SetFwd(fwd);
+                    SetSwr(swr);
+                }
+            }
         }
 
         #endregion Serial Port Events
@@ -1020,11 +1232,15 @@ namespace DataDecoder
                 cboCAT.Items.Add(port);
                 cboSerAcc.Items.Add(port);
                 cboLogPort.Items.Add(port);
+                cboLPport.Items.Add(port);
             }
             cboCAT.Sorted = true;
+            cboSerAcc.Items.Add("");
             cboSerAcc.Sorted = true;
-//            cboSerAcc.Items.Add("None");
+            cboLogPort.Items.Add("");
             cboLogPort.Sorted = true;
+            cboLPport.Items.Add("");
+            cboLPport.Sorted = true;
         }
 
         /// <summary>
@@ -1046,7 +1262,7 @@ namespace DataDecoder
         }
 
         /// <summary>
-        /// Opens the default Accessory port.
+        /// Opens the default Accessory (passive listener) port.
         /// </summary>
         private void SetDefaultComAcc()
         {
@@ -1064,7 +1280,25 @@ namespace DataDecoder
         }
 
         /// <summary>
-        /// Opens the default Logger port.
+        /// Opens the default LP100 port.
+        /// </summary>
+        private void SetDefaultLPport()
+        {
+            int n = cboSerAcc.Items.IndexOf(DefaultLPport);
+            if (n >= 0)
+            {
+                cboLPport.SelectedIndex = n;
+                LPport.Open();
+            }
+            else
+            {
+                MessageBox.Show("Default LP100 Port is not valid.  Please select a port from the list.");
+                cboLPport.SelectedIndex = 0;
+            }
+        }
+
+        /// <summary>
+        /// Opens the default Logger (adio control) port.
         /// </summary>
         private void SetDefaultLogPort()
         {
@@ -1076,7 +1310,7 @@ namespace DataDecoder
             }
             else
             {
-                MessageBox.Show("Default Logger Port is not valid." + 
+                MessageBox.Show("Default Radio Control Port is not valid." + 
                     "Please select a port from the list.");
                 cboLogPort.SelectedIndex = 0;
             }
@@ -1136,6 +1370,20 @@ namespace DataDecoder
             if (pollTimer.Enabled != true) pollTimer.Enabled = true;
             logFlag = false;
         }
+        // LP100 interval timer has elapsed
+        void lpTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (chkLPenab.Checked)
+            {
+   //             lpTimer.Enabled = true;
+                LPport.Write(";P?");
+            }
+            else
+            {
+                lpTimer.Enabled = false;
+            }
+        }
+
         // This event only fires if the logger is not active
         void pollTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
@@ -1197,6 +1445,7 @@ namespace DataDecoder
             }
         }
         #endregion Timer Events 
+
 
     }
 }

@@ -6,7 +6,7 @@
       <Value Profile="(Default)">COM1</Value>
     </Setting>
     <Setting Name="RadioPort" Type="System.String" Scope="User">
-      <Value Profile="(Default)">COM10</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="lptPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">LPT1</Value>
@@ -30,7 +30,7 @@
       <Value Profile="(Default)">BandData.xml</Value>
     </Setting>
     <Setting Name="LogPort" Type="System.String" Scope="User">
-      <Value Profile="(Default)">COM5</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DevEnab" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -52,6 +52,18 @@
     </Setting>
     <Setting Name="RadData" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LPportNum" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LPint" Type="System.String" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="LPenab" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProfLoc" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

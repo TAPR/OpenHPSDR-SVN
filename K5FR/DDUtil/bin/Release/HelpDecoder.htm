@@ -91,7 +91,7 @@ Setup</font></u></h2>
 	&nbsp;&nbsp;&nbsp;
 	<img border="0" src="DDUtilPorts.jpg" >&nbsp; </li>
 	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px"><b>Ports Setup Tab</b><ul>
+	<p style="margin-top: 3px; margin-bottom: 6px"><b>Ports Tab</b><ul>
 		<li>
 		<p style="margin-top: 3px; margin-bottom: 6px"><b>Serial Ports</b><ul>
 			<li>
@@ -197,7 +197,7 @@ Setup</font></u></h2>
 	</ul>
 		</li>
 	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px"><b>Device Tabs</b> </li>
+	<p style="margin-top: 3px; margin-bottom: 6px"><b>Device Tab</b></li>
 	</ul>
 	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Selecting 
 	the first of the Device tabs at the top of the form will display the following form.<br>
@@ -264,7 +264,71 @@ Setup</font></u></h2>
 		</ul></li>
 	</ul>
 </blockquote>
-	<h2><u><font color="#800080"><a name="Scenario"></a>Usage</font></u></h2>
+<ul>
+	<li>
+	<p style="margin-top: 3px; margin-bottom: 6px"><b>Other Tab</b></li>
+	</ul>
+	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Selecting 
+	this tab will display the following form.<br>
+&nbsp;</p>
+	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<img border="0" src="DDUtilOther.JPG">&nbsp;</p>
+<blockquote>
+	<p style="margin-top: 3px; margin-bottom: 6px">This page of the setup 
+		form is for configuring other options that can be used with <b>DDUtil</b> 
+	and include: </p>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>LP-100</b> <br>
+		<br>
+		If you own one of <a href="http://www.telepostinc.com/">Larry Phipps's</a> 
+		(N8LP) excellent <b>Peak Reading Digital Vector Wattmeter's</b> and have an 
+		additional serial port on your PC, this option may be useful for you. 
+		The forward and reverse power readings from the <b>LP-100</b> can be 
+		displayed at the bottom of the <b>DDUtil</b> form. This is useful as you 
+		won't have to look away from the monitor to see the wattmeter.<br>
+		<br>
+		The following controls will need to be set for this function to work.</p>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Enabled</b> = 
+		indicates you want the <b>LP-100</b> Forward and Reverse power readings 
+		to be displayed on the <b>DDUtil</b> form.</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Port</b> = Select the 
+		port number you have the <b>LP-100</b> attached to. Configure this port 
+		to match the <b>LP-100</b> serial requirements.</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Interval</b> = The 
+		interval in milliseconds (ms) <b>DDUtil</b> will use to poll the <b>
+		LP-100</b> for readings. This number needs to be fairly small or there 
+		will be a lag in readings from the <b>LP-100</b>. I have found a range 
+		of 80 - 200 ms to be suitable.</p></li>
+	</ul></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Flex Profiler<br>
+		<br>
+		</b>Bob Tracy's (K5KDN) fabulous <b>Flex Profiler</b> program can be 
+		opened without having to shut down <b>DDUtil</b>. Pressing the
+		<font color="#0000FF"><b>PF Open</b></font> button disables <b>DDUtil</b> 
+		from passing commands to <b>PowerSDR</b> and makes the CAT port 
+		available to <b>Flex Profiler</b>. When finished and after closing <b>
+		Flex Profiler</b>, pressing the <font color="#0000FF"><b>Re-Start</b></font> 
+		button will re-enable <b>DDUtil</b> to it's normal functionality.</p>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>File Location<br>
+		</b>The file location of the FlexProfiler.exe program must be set in 
+		order for <b>DDUtil</b> to know where this file resides. Press the &quot;<b>Select</b>&quot; 
+		button to browse for the file location.</p></li>
+	</ul></li>
+	</ul>
+	<p style="margin-top: 3px; margin-bottom: 6px"><u><b>Note:</b></u> 
+	Right-clicking the <b>DDUtil </b>background will cause a context
+	<a href="ShrinkMenu.JPG">menu</a> to display. Selecting the appropriate item 
+	in this menu will provide operational instructions.</p>
+</blockquote>
+<h2><u><font color="#800080"><a name="Scenario"></a>Usage</font></u></h2>
 <p>Using the <b>DDUtil</b> is straight forward and shouldn't require more than a 
 minimal amount of familiarization for the user to be comfortable with it's use. </p>
 <p>All control settings on the <b>DDUtil</b> forms are stored and remembered 
@@ -321,13 +385,12 @@ from session to session.</p>
 		be minimized or reduced to a minimal size for normal operation. Shrinking is 
 		accomplished by <b>right</b> clicking anywhere on the form (except the 
 		title bar)&nbsp; where a 
-		menu will appear 
+		<a href="ShrinkMenu.JPG">menu</a> will appear 
 		giving the options of <b>Shrink </b>&amp; <b>Restore</b>. Additionally 
 		the borders of the form may be resized as desired.</li>
 	</ul>
 	<p>&nbsp;&nbsp;&nbsp;
-	<img border="0" src="ShrinkMenu.JPG" width="173" height="96"></p>
-	<p>&nbsp;</li>
+	</p></li>
 	<li><u><font color="#FF0000"><b>Important Notices Please Read</b></font></u><ul>
 		<li>When connecting to a amplifier remember that Flex radios
 		<font color="#FF0000"><u><b>DO NOT</b></u></font> have any
