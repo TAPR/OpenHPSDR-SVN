@@ -37,7 +37,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string RadioPort {
             get {
                 return ((string)(this["RadioPort"]));
@@ -133,7 +133,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LogPort {
             get {
                 return ((string)(this["LogPort"]));
@@ -224,6 +224,54 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["RadData"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LPportNum {
+            get {
+                return ((string)(this["LPportNum"]));
+            }
+            set {
+                this["LPportNum"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public string LPint {
+            get {
+                return ((string)(this["LPint"]));
+            }
+            set {
+                this["LPint"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LPenab {
+            get {
+                return ((bool)(this["LPenab"]));
+            }
+            set {
+                this["LPenab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProfLoc {
+            get {
+                return ((string)(this["ProfLoc"]));
+            }
+            set {
+                this["ProfLoc"] = value;
             }
         }
     }

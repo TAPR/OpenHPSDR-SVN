@@ -171,6 +171,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_F1EEB4C2E59C4CE298B045FC3E326C0B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_580B1E23ECFE46D287FF3F057368526B"
         "MsmSig" = "8:_UNDEFINED"
@@ -813,6 +819,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F1EEB4C2E59C4CE298B045FC3E326C0B"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\DDUtilOther.JPG"
+            "TargetName" = "8:DDUtilOther.JPG"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -881,7 +907,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
         "ProductCode" = "8:{0DAA1B32-C775-41F3-870E-FD08DF3CAD30}"
-        "PackageCode" = "8:{C5BBF463-EF04-4EAF-A474-97A9252FD92E}"
+        "PackageCode" = "8:{314B0BD4-484A-4A79-AF3E-8A2FD4CAC091}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
