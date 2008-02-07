@@ -59,6 +59,7 @@ namespace DataDecoder
         Hashtable flist = new Hashtable();
         Settings set = Settings.Default;
         PortMode portmode;
+        Process process;
         bool logFlag = false;
         int keyValue = 0;
 //        int LastKeyValue;
@@ -67,7 +68,7 @@ namespace DataDecoder
         string fileName = "BandData.xml";
         string[] ports;
         string OutBuffer;
-        string ver = "1.3.0 Beta";
+        string ver = "1.3.2 Beta";
         string vfo = "";
         System.Timers.Timer pollTimer;
         System.Timers.Timer logTimer;
@@ -134,9 +135,8 @@ namespace DataDecoder
         {
             if (IsAppAlreadyRunning())
             {
-                MessageBox.Show("Application is already Running!", "Operator Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
+                Console.Beep();
             }
             InitializeComponent();
             fileName = set.DataFile;
@@ -182,7 +182,6 @@ namespace DataDecoder
             SetDefaultComRadio();
             txtInv.Text = Convert.ToString(pollInt);
             txtLPint.Text = Convert.ToString(set.LPint);
-            chkLPenab.Checked = set.LPenab;
             txtProfLoc.Text = set.ProfLoc;
 
             // set Acc Serial (passive listener) port to the last port used
@@ -230,9 +229,7 @@ namespace DataDecoder
                     cboLogPort.SelectedText = "";
                 }
             }
-
             // set LP100 Serial port to the last port used
-
             if (set.LPportNum != "")
             {
                 cboLPport.Text = set.LPportNum;
@@ -242,6 +239,7 @@ namespace DataDecoder
                     LPport.PortName = set.LPportNum;
                     DefaultLPport = set.LPportNum;
                     SetDefaultLPport();
+                    chkLPenab.Checked = set.LPenab;
                 }
                 catch
                 {   // give a message, if the port is not available:
@@ -251,39 +249,35 @@ namespace DataDecoder
                     cboLPport.SelectedText = "";
                 }
             }
-
             // set LPT port to last one used
             str = set.lptPort;
             try
             {
-                if (str == "LPT1")
+                switch (str)
                 {
-                    rb1.Checked = true; LPTnum = 888; DefaultLPT = str;
-                }
-                else if (str == "LPT2")
-                {
-                    rb2.Checked = true; LPTnum = 632; DefaultLPT = str;
-                }
-                else if (str == "LPT3")
-                {
-                    rb3.Checked = true; LPTnum = 636; DefaultLPT = str;
-                }
-                else if (str == "LPT4")
-                {
-                    rb4.Checked = true; LPTnum = 620; DefaultLPT = str;
-                }
-                else if (str == "None")
-                {
-                    rbNone.Checked = true; LPTnum = 0; DefaultLPT = str;
-                }
-                else if (str == "Other")
-                {
-                    rbOther.Checked = true; LPTnum = Convert.ToInt32(set.lptNum);
-                    txtPort.Text = set.lptNum; DefaultLPT = str;
-                }
-                else
-                {
-                    rbNone.Checked = true; LPTnum = 0; DefaultLPT = "NONE"; chkDevice.Checked = false;
+                    case "LPT1":
+                        rb1.Checked = true; LPTnum = 888; DefaultLPT = str; 
+                        break;
+                    case "LPT2":
+                        rb2.Checked = true; LPTnum = 632; DefaultLPT = str; 
+                        break;
+                    case "LPT3":
+                        rb3.Checked = true; LPTnum = 636; DefaultLPT = str; 
+                        break;
+                    case "LPT4":
+                        rb4.Checked = true; LPTnum = 620; DefaultLPT = str; 
+                        break;
+                    case "None":
+                        rbNone.Checked = true; LPTnum = 0; DefaultLPT = str; 
+                        break;
+                    case "Other":
+                        rbOther.Checked = true; LPTnum = Convert.ToInt32(set.lptNum);
+                        txtPort.Text = set.lptNum; DefaultLPT = str; 
+                        break;
+                    default:
+                        rbNone.Checked = true; LPTnum = 0; DefaultLPT = "NONE"; 
+                        chkDevice.Checked = false;
+                        break;
                 }
                 btnPortNum.BackColor = Color.Transparent;
                 lblPortBtn.Visible = false;
@@ -309,19 +303,13 @@ namespace DataDecoder
         {
             if (chkDevice.Checked == true)
             {
-                //if (num != LastKeyValue)
-                //{
                 PortAccess.Output(port, num);
-                //    LastKeyValue = num;
-                //}
             }
-            
             else
             {
                 PortAccess.Output(port, 0);
             }
         }
-        
         // Load Data File
         private void GetBandData(string fileName)
         {
@@ -436,8 +424,7 @@ namespace DataDecoder
         }
         public static bool IsAppAlreadyRunning()
         {
-
-            bool isAlreadyRunning = false;
+            bool IsRunning = false;
             Process currentProcess = Process.GetCurrentProcess();
             Process[] processes = Process.GetProcesses();
             foreach (Process process in processes)
@@ -446,42 +433,29 @@ namespace DataDecoder
                 {
                     if (currentProcess.ProcessName.Substring(0,11) == process.ProcessName)
                     {
-                        isAlreadyRunning = true;
+                        IsRunning = true;
                         break;
                     }
                 }
             }
-            return isAlreadyRunning;
+            return IsRunning;
         }
-
-        //public static string ReverseString(string oldString)
-        //{
-        //    string newString = "";
-        //    int lenText = oldString.Length;
-        //    for (int i = 1; i < lenText + 1; i++)
-        //    {
-        //        newString += oldString.Substring(lenText - i, 1);
-        //    }
-        //    return newString;
-        //}
-        //private byte[] StringToByteArray(string str)
-        //{
-        //    char[] chars = str.ToCharArray();
-        //    byte[] bytes = Array.ConvertAll(chars, new Converter<char, byte>(CharToByte));
-        //    return bytes;
-        //}
-        //private byte CharToByte(char ch) { return (byte)ch; }
-
-        //private string HexAsciiConvert(string hex)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    for (int i = 0; i <= hex.Length - 2; i += 2)
-        //    {
-        //        sb.Append(Convert.ToString(Convert.ToChar(Int32.Parse(hex.Substring(i, 2),
-        //        System.Globalization.NumberStyles.HexNumber))));
-        //    }
-        //    return sb.ToString();
-        //}
+        // See if Flex Profiler is running
+        public static bool IsFPRunning()
+        {
+            bool IsRunning = false;
+            string proc = "FlexProfiler";
+            Process[] processes = Process.GetProcessesByName(proc);
+            if (processes.Length > 0)
+            {
+                IsRunning = true;
+            }
+            else
+            {
+                IsRunning = false;
+            }             
+            return IsRunning;
+        }
 
         #endregion Helper Methods
 
@@ -505,20 +479,20 @@ namespace DataDecoder
 
         #region Form Events
 
-        // Device 0 name has been changed, change the device tab and save to settings
+        // Device name has been changed, change the device tab and save to settings
         private void Dev0_TextChanged(object sender, EventArgs e)
         {
             this.tabDev0.Text = Dev0.Text;
             set.Device0 = Dev0.Text;
             set.Save();                     // save new Device0 to system settings
         }
-        // Device 0 Drop Down open - re-load cboDevice combo box
+        // Device Drop Down open - re-load cboDevice combo box
         private void Dev0_DropDown(object sender, EventArgs e)
         {
             cboDevice.Items.Clear();
             cboDevice.Items.Add(Dev0.Text);
-            cboDevice.Items.Add("Device 1");
-            cboDevice.Items.Add("Device 2");
+//            cboDevice.Items.Add("Device 1");
+//            cboDevice.Items.Add("Device 2");
         }
         // Select Device 0 Decoder Data File
         private void btnFile0_Click(object sender, EventArgs e)
@@ -587,8 +561,10 @@ namespace DataDecoder
         private void grpLPT_CheckedChanged(object sender, EventArgs e)
         {
             if (sender == rbNone)
-            { OutParallelPort(LPTnum, 0); LPTnum = 0; set.lptPort = "NONE";
-            txtPort.Text = LPTnum.ToString(); set.Save();}
+            {
+                OutParallelPort(LPTnum, 0); LPTnum = 0; set.lptPort = "NONE";
+                txtPort.Text = LPTnum.ToString(); set.Save();
+            }
             else if (sender == rbOther)
             { txtPort.Text = ""; set.lptPort = "Other"; set.Save(); }
             else if (sender == rb1)
@@ -600,7 +576,7 @@ namespace DataDecoder
             else if (sender == rb4)
             { LPTnum = 620; set.lptPort = "LPT4"; txtPort.Text = LPTnum.ToString(); set.Save(); }
             else
-            { LPTnum = 0; set.lptPort = "NONE"; txtPort.Text = LPTnum.ToString(); set.Save(); }           
+            { LPTnum = 0; set.lptPort = "NONE"; txtPort.Text = LPTnum.ToString(); set.Save(); }
         }
         // Port number changed
         private void txtPort_TextChanged(object sender, EventArgs e)
@@ -610,7 +586,7 @@ namespace DataDecoder
             else
             { btnPortNum.BackColor = Color.Transparent; lblPortBtn.Visible = false;}
         }
-
+        // The press to Save Port Number button was pressed
         private void btnPortNum_Click(object sender, EventArgs e)
         {
             LPTnum = Convert.ToInt32(txtPort.Text);
@@ -619,7 +595,6 @@ namespace DataDecoder
             btnPortNum.BackColor = Color.Transparent;
             lblPortBtn.Visible = false;
         }
-
         // CAT port timer interval changed
         private void txtInv_TextChanged(object sender, EventArgs e)
         {
@@ -715,12 +690,10 @@ namespace DataDecoder
             MessageBox.Show(
                 "- Select the file location where Profiler is located.\n\n" +
                 "- Select the PF Open button to start the Profiler.\n\n" +
-                "- Close Profiler after saving profile.\n\n" +
+                "- Work with profiles.\n\n" +
                 "- Press the Re-Start button to activate DDUtil.\n", 
                 "Flex Profiler Setup & Operation", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
-
-
 
         // CI-V Hex Address has changed
         private void txtRadNum_TextChanged(object sender, EventArgs e)
@@ -763,7 +736,6 @@ namespace DataDecoder
                 AccPort.PortName = cboSerAcc.SelectedItem.ToString();
                 try
                 {
-                    //               if(AccPort.PortName != "None")
                     AccPort.Open();
                 }
                 catch
@@ -919,6 +891,7 @@ namespace DataDecoder
         // LP port number has changed
         private void cboLPport_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lpTimer.Enabled = false;
             if (LPport.IsOpen) LPport.Close();
             if (cboLPport.SelectedItem.ToString() != "")
             {
@@ -926,6 +899,7 @@ namespace DataDecoder
                 try
                 {
                     LPport.Open();
+                    lpTimer.Enabled = true;
                 }
                 catch
                 {
@@ -938,7 +912,8 @@ namespace DataDecoder
             }
             else
             { 
-                lpTimer.Enabled = false; 
+                lpTimer.Enabled = false;
+                chkLPenab.Checked = false;
             }
             // save new port setting
             set.LPportNum = cboLPport.SelectedItem.ToString();
@@ -950,32 +925,51 @@ namespace DataDecoder
             set.LPint = txtLPint.Text;
             set.Save(); 
         }
-        // LP100 enabled check box has changed
+        // LP enabled check box has changed
         private void chkLPenab_CheckedChanged(object sender, EventArgs e)
         {
             if (chkLPenab.Checked)
             {
-         //       lpTimer.Enabled = true;
-                set.LPenab = true; 
+                if (cboLPport.SelectedIndex > 0)
+                {
+                    lpTimer.Enabled = true;
+                    set.LPenab = true;
+                }
+                else
+                {
+                    MessageBox.Show("No port has been selected for the LP-100.\n\n" +
+                    "Please select a port number and try again.", "Port Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    chkLPenab.Checked = false;
+                }
             }
             else
             {
                 lpTimer.Enabled = false;
                 set.LPenab = false;
+                txtFwd.Text = "";
+                txtSWR.Text = "";
             }
             set.Save();
         }
-        // Profiller button pressed
+        // Profiller button was pressed
         private void btnProfiler_Click(object sender, EventArgs e)
         {
             if (txtProfLoc.Text != "" && txtProfLoc.Text != null)
             {
-                sp.Close();
-                Process.Start(txtProfLoc.Text);
+                try
+                {
+                    sp.Close();
+                    process = Process.Start(txtProfLoc.Text);
+                    this.Text = "Starting Profiler";
+                }
+                catch
+                { }
             }
             else
-                MessageBox.Show("No location has been selected for the FlexProfiler.exe file.\n" +
-                    "Please select a file on the 'Other' tab and try again.", "File Error",
+                MessageBox.Show("No location has been selected for the FlexProfiler.exe file.\n\n" +
+                    "Please select a file location on the 'Other' tab and try again.", "File Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
         }
@@ -984,17 +978,25 @@ namespace DataDecoder
         {
             try
             {
-                if (!sp.isOpen) sp.Open();
+                if (IsFPRunning())
+                {
+                    process.Kill();
+                    process.WaitForExit();
+                }
+                if (!sp.isOpen)
+                {
+                    sp.Open();
+                    this.Text = "DDUtil Re-Started";
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Did you perhaps forget to close Profiler?\n\n" +
-                    "If it is closed, Houston we have a problem.", "Oops!",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.ToString(), "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
-        // Select Flex Profiler File Location
+        // The Flex Profiler File Location Select button was pressed
         private void btnPFfile_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "exe files|*.exe";
@@ -1199,7 +1201,7 @@ namespace DataDecoder
 #if(DEBUG)
                         Console.WriteLine();
 #endif
-                        // // 14.234.56 Mhz = FE FE 1E E0 05 60 45 23 14 00 FD
+                        // 14.234.56 Mhz = FE FE 1E E0 05 60 45 23 14 00 FD
                         AccPort.Write(bytes, 0, 11);
                         break;
 
@@ -1375,7 +1377,6 @@ namespace DataDecoder
         {
             if (chkLPenab.Checked)
             {
-   //             lpTimer.Enabled = true;
                 LPport.Write(";P?");
             }
             else

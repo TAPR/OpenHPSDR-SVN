@@ -100,11 +100,11 @@ namespace DataDecoder
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.lP100ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flexProfilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.LPport = new System.IO.Ports.SerialPort(this.components);
             this.label10 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.flexProfilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpBox1.SuspendLayout();
@@ -125,7 +125,7 @@ namespace DataDecoder
             this.tabControl.Controls.Add(this.tabPorts);
             this.tabControl.Controls.Add(this.tabDev0);
             this.tabControl.Controls.Add(this.tabDev1);
-            this.tabControl.Location = new System.Drawing.Point(6, 3);
+            this.tabControl.Location = new System.Drawing.Point(0, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(423, 327);
@@ -134,6 +134,7 @@ namespace DataDecoder
             // 
             // tabPorts
             // 
+            this.tabPorts.BackColor = System.Drawing.SystemColors.Control;
             this.tabPorts.Controls.Add(this.label12);
             this.tabPorts.Controls.Add(this.cboRadData);
             this.tabPorts.Controls.Add(this.label9);
@@ -150,7 +151,6 @@ namespace DataDecoder
             this.tabPorts.TabIndex = 0;
             this.tabPorts.Text = "Ports";
             this.toolTip1.SetToolTip(this.tabPorts, "Right-Click for Options");
-            this.tabPorts.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
@@ -394,7 +394,7 @@ namespace DataDecoder
             this.cboDevice.Name = "cboDevice";
             this.cboDevice.Size = new System.Drawing.Size(116, 21);
             this.cboDevice.TabIndex = 22;
-            this.toolTip1.SetToolTip(this.cboDevice, "Select Device to use for LPT Data Port.");
+            this.toolTip1.SetToolTip(this.cboDevice, "Select Device to use for LPT Data Source.");
             this.cboDevice.SelectedIndexChanged += new System.EventHandler(this.cboDevice_SelectedIndexChanged);
             this.cboDevice.DropDown += new System.EventHandler(this.Dev0_DropDown);
             // 
@@ -526,7 +526,7 @@ namespace DataDecoder
             this.tabDev0.Padding = new System.Windows.Forms.Padding(3);
             this.tabDev0.Size = new System.Drawing.Size(415, 301);
             this.tabDev0.TabIndex = 1;
-            this.tabDev0.Text = "Device 0";
+            this.tabDev0.Text = "Device";
             this.toolTip1.SetToolTip(this.tabDev0, "Right-Click for Options");
             this.tabDev0.UseVisualStyleBackColor = true;
             // 
@@ -656,7 +656,7 @@ namespace DataDecoder
             this.groupBox3.Controls.Add(this.txtProfLoc);
             this.groupBox3.Location = new System.Drawing.Point(9, 145);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(403, 79);
+            this.groupBox3.Size = new System.Drawing.Size(403, 92);
             this.groupBox3.TabIndex = 61;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Flex Profiler";
@@ -664,7 +664,7 @@ namespace DataDecoder
             // 
             // btnPFfile
             // 
-            this.btnPFfile.Location = new System.Drawing.Point(158, 45);
+            this.btnPFfile.Location = new System.Drawing.Point(171, 63);
             this.btnPFfile.Name = "btnPFfile";
             this.btnPFfile.Size = new System.Drawing.Size(57, 23);
             this.btnPFfile.TabIndex = 60;
@@ -676,7 +676,7 @@ namespace DataDecoder
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(10, 42);
+            this.label15.Location = new System.Drawing.Point(10, 47);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(67, 13);
             this.label15.TabIndex = 59;
@@ -757,14 +757,15 @@ namespace DataDecoder
             // 
             this.button1.AutoSize = true;
             this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackColor = System.Drawing.SystemColors.Control;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(386, 337);
+            this.button1.Location = new System.Drawing.Point(381, 337);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(39, 23);
             this.button1.TabIndex = 64;
             this.button1.Text = "Help";
             this.toolTip1.SetToolTip(this.button1, "A help file for DDUtil");
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // openFileDialog1
@@ -849,7 +850,7 @@ namespace DataDecoder
             this.flexProfilerToolStripMenuItem,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 158);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 136);
             // 
             // toolStripMenuItem1
             // 
@@ -882,6 +883,13 @@ namespace DataDecoder
             this.lP100ToolStripMenuItem.Text = "LP-100";
             this.lP100ToolStripMenuItem.Click += new System.EventHandler(this.lP100ToolStripMenuItem_Click);
             // 
+            // flexProfilerToolStripMenuItem
+            // 
+            this.flexProfilerToolStripMenuItem.Name = "flexProfilerToolStripMenuItem";
+            this.flexProfilerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.flexProfilerToolStripMenuItem.Text = "Flex Profiler";
+            this.flexProfilerToolStripMenuItem.Click += new System.EventHandler(this.flexProfilerToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
@@ -911,19 +919,12 @@ namespace DataDecoder
             this.label14.TabIndex = 67;
             this.label14.Text = "SWR";
             // 
-            // flexProfilerToolStripMenuItem
-            // 
-            this.flexProfilerToolStripMenuItem.Name = "flexProfilerToolStripMenuItem";
-            this.flexProfilerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.flexProfilerToolStripMenuItem.Text = "Flex Profiler";
-            this.flexProfilerToolStripMenuItem.Click += new System.EventHandler(this.flexProfilerToolStripMenuItem_Click);
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(434, 366);
+            this.ClientSize = new System.Drawing.Size(422, 366);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.btnReStart);
             this.Controls.Add(this.tabControl);
