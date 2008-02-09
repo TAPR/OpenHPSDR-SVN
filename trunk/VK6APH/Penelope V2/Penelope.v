@@ -42,7 +42,7 @@
 	
 	The data format is as follows:
 	
-	<[48]PTT><[47:44]address><[43:12]frequency><[11:8]band><[7:1]OC><[0]mode> 
+	<[48]PTT><[47:44]address><[43:12]frequency><[11:8]clock_select><[7:1]OC><[0]Mode> 
 	
 	for a total of 49 bits. Frequency is in Hz and 32 bit binary format and 
 	OC is the open collector data on Penelope.
@@ -615,7 +615,7 @@ begin
 	Address <= CCdata[47:44];
 	// check address match here in the future - ignore for now
 	frequency_HZ <= CCdata[43:12];
-	clock_select <= CCdata[11:8];     // not used since filters seperate from Penelope 
+	clock_select <= CCdata[11:8];     
 	OC <= CCdata[7:1];
 end
 
