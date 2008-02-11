@@ -29,7 +29,7 @@
 	The data to the AD9744  is in 14 bit parallel format and 
 	is sent at the negative edge of the 122.88MHz clock.
 	
-	The ~48kHz I and Q data from PowerSDR is interpolated by 2560 in a CIC filter to 
+	The 48kHz I and Q data from PowerSDR is interpolated by 2560 in a CIC filter to 
 	give a data rate of 122.88MHz. The I and Q data in I2S format is taken from the 
 	Atlas bus. 
 	
@@ -619,7 +619,7 @@ begin
 	OC <= CCdata[7:1];
 end
 
-assign ref_ext = clock_select[0] ? 1'b1 :1'b0; // if set use internally and send to C16 else get from C16
+assign ref_ext = clock_select[0] ? 1'b1 :1'b0; // if set use internal 10MHz TCXO and send to C16 else get from C16
 assign source_122MHZ = clock_select[2] ? 1'b0 : 1'b1; // if set use internally and send to LVDS else
 													  // get from LVDS 
 
@@ -654,7 +654,7 @@ assign  FPGA_PTT = PTT_out;		   // turn PTT FET Q3 on when Txing
 	the loop filter this will provide a dc level of (3.3/2)v which will
 	set the 122.88MHz VCXO to its nominal frequency.
 	The selection of the internal or external 10MHz reference for the PLL
-	is made using  ext_ref.
+	is made using ref_ext.
 	
 */
 
