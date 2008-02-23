@@ -1,0 +1,2 @@
+Info: Can't read jar file "c:\altera\71sp1\quartus\sopc_builder\model\lib\jacl.jar"
+Info: Can't read jar file "c:\altera\71sp1\quartus\sopc_builder\model\lib\tcljava.jar"
