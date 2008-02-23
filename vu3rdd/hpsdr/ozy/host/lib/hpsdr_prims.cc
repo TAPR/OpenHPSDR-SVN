@@ -875,7 +875,7 @@ usrp_check_tx_underrun (struct usb_dev_handle *udh, bool *underrun_p)
   return _usrp_get_status (udh, GS_TX_UNDERRUN, underrun_p);
 }
 
-#endif
+#endif // of #if 0
 
 bool
 hpsdr_i2c_write (struct usb_dev_handle *udh, int i2c_addr,
@@ -1003,15 +1003,14 @@ usrp_9862_write_many (struct usb_dev_handle *udh,
   return result;
 }
 
-#endif
-
+#endif // end of #if 0
 
 
 static const int EEPROM_PAGESIZE = 16;
 
 bool
-usrp_eeprom_write (struct usb_dev_handle *udh, int i2c_addr,
-		   int eeprom_offset, const void *buf, int len)
+hpsdr_eeprom_write (struct usb_dev_handle *udh, int i2c_addr,
+		    int eeprom_offset, const void *buf, int len)
 {
   unsigned char cmd[2];
   const unsigned char *p = (unsigned char *) buf;
@@ -1025,7 +1024,7 @@ usrp_eeprom_write (struct usb_dev_handle *udh, int i2c_addr,
   while (len-- > 0){
     cmd[0] = eeprom_offset++;
     cmd[1] = *p++;
-    bool r = usrp_i2c_write (udh, i2c_addr, cmd, sizeof (cmd));
+    bool r = hpsdr_i2c_write (udh, i2c_addr, cmd, sizeof (cmd));
     mdelay (10);		// delay 10ms worst case write time
     if (!r)
       return false;
@@ -1035,8 +1034,8 @@ usrp_eeprom_write (struct usb_dev_handle *udh, int i2c_addr,
 }
 
 bool
-usrp_eeprom_read (struct usb_dev_handle *udh, int i2c_addr,
-		  int eeprom_offset, void *buf, int len)
+hpsdr_eeprom_read (struct usb_dev_handle *udh, int i2c_addr,
+		   int eeprom_offset, void *buf, int len)
 {
   unsigned char *p = (unsigned char *) buf;
 
@@ -1045,12 +1044,12 @@ usrp_eeprom_read (struct usb_dev_handle *udh, int i2c_addr,
 
   unsigned char cmd[1];
   cmd[0] = eeprom_offset;
-  if (!usrp_i2c_write (udh, i2c_addr, cmd, sizeof (cmd)))
+  if (!hpsdr_i2c_write (udh, i2c_addr, cmd, sizeof (cmd)))
     return false;
 
   while (len > 0){
     int n = std::min (len, MAX_EP0_PKTSIZE);
-    if (!usrp_i2c_read (udh, i2c_addr, p, n))
+    if (!hpsdr_i2c_read (udh, i2c_addr, p, n))
       return false;
     len -= n;
     p += n;
@@ -1196,6 +1195,8 @@ static int slot_to_i2c_addr (int slot)
   }
 }
 
+#if 0
+
 static void
 set_chksum (unsigned char *buf)
 {
@@ -1283,3 +1284,5 @@ usrp_serial_number(struct usb_dev_handle *udh)
 
   return buf;
 }
+
+#endif
