@@ -38,23 +38,23 @@
 unsigned char
 fpga_load_begin (void)
 {
-    unsigned char counter = 0;
+  unsigned char counter = 0;
 
-	HPSDR_ALTERA_CONFIG &= ~bmALTERA_BITS;		// clear all bits (NCONFIG low)
-  	udelay (40);					// wait 40 us
-  	HPSDR_ALTERA_CONFIG |= bmALTERA_NCONFIG;	// set NCONFIG high
-
-  	while ((HPSDR_ALTERA_CONFIG & bmALTERA_NSTATUS) == 0)
+  HPSDR_ALTERA_CONFIG &= ~bmALTERA_BITS;		// clear all bits (NCONFIG low)
+  udelay (40);					// wait 40 us
+  HPSDR_ALTERA_CONFIG |= bmALTERA_NCONFIG;	// set NCONFIG high
+  
+  while ((HPSDR_ALTERA_CONFIG & bmALTERA_NSTATUS) == 0)
+  {
+    counter++;
+    udelay(50);
+    if (counter  >= 255)
     {
-        counter++;
-        udelay(50);
-        if (counter  >= 255)
-        {
-            return 0;
-        }
-    } // wait for NSTATUS to go high
-  	// ready to xfer now
-  	return 1;
+      return 0;
+    }
+  } // wait for NSTATUS to go high
+  // ready to xfer now
+  return 1;
 }
 
 /*
