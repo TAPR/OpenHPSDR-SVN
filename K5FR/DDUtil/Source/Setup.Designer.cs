@@ -65,6 +65,7 @@ namespace DataDecoder
             this.rb3 = new System.Windows.Forms.RadioButton();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.tabDevice = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSave0 = new System.Windows.Forms.Button();
             this.btnReLoad0 = new System.Windows.Forms.Button();
@@ -112,6 +113,7 @@ namespace DataDecoder
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.lP100ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flexProfilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rCPPortsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.LPport = new System.IO.Ports.SerialPort(this.components);
             this.label10 = new System.Windows.Forms.Label();
@@ -119,8 +121,6 @@ namespace DataDecoder
             this.RCP2port = new System.IO.Ports.SerialPort(this.components);
             this.RCP3port = new System.IO.Ports.SerialPort(this.components);
             this.RCP4port = new System.IO.Ports.SerialPort(this.components);
-            this.label20 = new System.Windows.Forms.Label();
-            this.rCPPortsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpBox1.SuspendLayout();
@@ -236,7 +236,8 @@ namespace DataDecoder
             "Kenwood",
             "Yaesu Type 1",
             "Yaesu Type 2",
-            "Icom"});
+            "Icom",
+            "ICPW1"});
             this.cboRadio.Location = new System.Drawing.Point(107, 258);
             this.cboRadio.Name = "cboRadio";
             this.cboRadio.Size = new System.Drawing.Size(89, 21);
@@ -549,6 +550,16 @@ namespace DataDecoder
             this.tabDevice.Text = "Device";
             this.toolTip1.SetToolTip(this.tabDevice, "Right-Click for Options");
             this.tabDevice.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.Blue;
+            this.label20.Location = new System.Drawing.Point(27, 10);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(161, 24);
+            this.label20.TabIndex = 61;
+            this.label20.Text = "BCD Device Setup";
             // 
             // groupBox1
             // 
@@ -990,7 +1001,7 @@ namespace DataDecoder
             this.rCPPortsToolStripMenuItem,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 180);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 158);
             // 
             // toolStripMenuItem1
             // 
@@ -1029,6 +1040,13 @@ namespace DataDecoder
             this.flexProfilerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.flexProfilerToolStripMenuItem.Text = "Flex Profiler";
             this.flexProfilerToolStripMenuItem.Click += new System.EventHandler(this.flexProfilerToolStripMenuItem_Click);
+            // 
+            // rCPPortsToolStripMenuItem
+            // 
+            this.rCPPortsToolStripMenuItem.Name = "rCPPortsToolStripMenuItem";
+            this.rCPPortsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.rCPPortsToolStripMenuItem.Text = "RCP Ports";
+            this.rCPPortsToolStripMenuItem.Click += new System.EventHandler(this.rCPPortsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -1073,23 +1091,6 @@ namespace DataDecoder
             // 
             this.RCP4port.BaudRate = 38400;
             this.RCP4port.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RCP4port_DataReceived);
-            // 
-            // label20
-            // 
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.Blue;
-            this.label20.Location = new System.Drawing.Point(27, 10);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(161, 24);
-            this.label20.TabIndex = 61;
-            this.label20.Text = "BCD Device Setup";
-            // 
-            // rCPPortsToolStripMenuItem
-            // 
-            this.rCPPortsToolStripMenuItem.Name = "rCPPortsToolStripMenuItem";
-            this.rCPPortsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.rCPPortsToolStripMenuItem.Text = "RCP Ports";
-            this.rCPPortsToolStripMenuItem.Click += new System.EventHandler(this.rCPPortsToolStripMenuItem_Click);
             // 
             // Setup
             // 
