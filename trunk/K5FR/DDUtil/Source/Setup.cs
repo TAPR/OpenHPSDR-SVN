@@ -42,7 +42,7 @@ namespace DataDecoder
         #region Enums
 
         public enum PortMode
-        { None, Kenwood, YaesuTypeI, YaesuTypeII, Icom};
+        { None, Kenwood, YaesuTypeI, YaesuTypeII, Icom, ICPW1};
 
         public enum Parity 
         { Even, Mark, None, Odd, Space };
@@ -72,7 +72,7 @@ namespace DataDecoder
         string fileName = "BandData.xml";
         string[] ports;
         string OutBuffer;
-        string ver = "1.3.5 Beta";
+        string ver = "1.3.6 Beta";
         string vfo = "";
         System.Timers.Timer pollTimer;
         System.Timers.Timer logTimer;
@@ -944,6 +944,10 @@ namespace DataDecoder
                     portmode = PortMode.Icom;
                     txtRadNum.Enabled = true;
                     break;
+                case 5: // Icom IC-PW1
+                    portmode = PortMode.ICPW1;
+                    txtRadNum.Enabled = true;
+                    break;
                 default:
                     break;
             }
@@ -1473,6 +1477,7 @@ namespace DataDecoder
                         Console.WriteLine("IF" + freq + ";");
 #endif
                         break;
+
                     case PortMode.Kenwood:
                         AccPort.WriteLine("FA" + freq.Substring(3, 8) + ";");
                         // 14.234.56 Mhz = FA14234560;
@@ -1480,6 +1485,7 @@ namespace DataDecoder
                         Console.WriteLine("FA" + freq.Substring(3, 8) + ";");
 #endif
                         break;
+
                     case PortMode.YaesuTypeI:
                         mystring = "0A0" + freq.Substring(3, 7);
                         j = 8;
@@ -1496,6 +1502,7 @@ namespace DataDecoder
                         AccPort.Write(bytes, 0, 5);
                         // 14.234.56 Mhz = 56 34 42 01 0A
                         break;
+
                     case PortMode.YaesuTypeII:
                         mystring = "0" + freq.Substring(3, 7) + "01";
                         j = 0;
@@ -1516,6 +1523,7 @@ namespace DataDecoder
 //                        byte[] mode = new byte[5] { 0x02, 0x00, 0x00, 0x00, 0x07 };
 //                        AccPort.Write(mode, 0, 5);
                         break;
+
                     case PortMode.Icom:
                         string preamble = "FE";
                         string radNum = txtRadNum.Text;
@@ -1536,6 +1544,29 @@ namespace DataDecoder
                         Console.WriteLine();
 #endif
                         // 14.234.56 Mhz = FE FE 1E E0 05 60 45 23 14 00 FD
+                        AccPort.Write(bytes, 0, 11);
+                        break;
+
+                    case PortMode.ICPW1:
+                        preamble = "FE";
+                        radNum = txtRadNum.Text;
+                        EOM = "FD";
+                        ctrlAddr = "00";
+                        mystring = EOM + "00" + freq.Substring(3, 8) + ctrlAddr + radNum + "00" + preamble + preamble;
+                        j = 20;
+                        for (int i = 0; i < 11; i++)
+                        {
+                            string temp = mystring.Substring(j, 2);
+                            bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
+#if(DEBUG)
+                            Console.Write("{0:x2} ", bytes[i]);
+#endif
+                            j -= 2;
+                        }
+#if(DEBUG)
+                        Console.WriteLine();
+#endif
+                        // 14.234.56 Mhz = FE FE 00 nn 00 60 45 23 14 00 FD
                         AccPort.Write(bytes, 0, 11);
                         break;
 
