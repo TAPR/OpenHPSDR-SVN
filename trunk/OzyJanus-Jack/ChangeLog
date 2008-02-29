@@ -1,0 +1,10 @@
+Change Log for OzyJanusUtils
+
+2/Oct/2007	Initial release of GNU Build platform.
+		No longer need to be root to run initozy script.  Changed permissions.
+		Bob Vk4xv....
+
+17/Jan/2008	Alpha release of "ozyjack" the jack client for the Ozy Janus boards.
+		VERSION = "0.0.1"
+		Bob Vk4xv
+

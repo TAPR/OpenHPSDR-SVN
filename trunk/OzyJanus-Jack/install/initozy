@@ -1,0 +1,67 @@
+#!/bin/bash
+# Linux Script for initializing Ozy/Janus boards
+# Bob Vk4xv
+	VERSION="1.0.0"
+#
+# 
+# Init VID & PID
+#
+	VID="0xfffe"
+	PID="0x7"
+#
+# Set up required files
+#
+	FPGAFILE="Ozy_Janus.rbf"
+	FWFILE="ozyfw-sdr1k.hex"
+#	FWFILE="ozyfw.hex"
+#
+checkuser
+#
+./loadFW $VID $PID $FWFILE
+#
+sleep 2
+#
+./loadFPGA $VID $PID $FPGAFILE
+#
+#        1E 00 - Reset chip
+#        12 01 - set digital interface active
+#        08 15 - D/A on, mic input, mic 20dB boost
+#        08 14 - ditto but no mic boost
+#        0C 00 - All chip power on
+#        0E 02 - Slave, 16 bit, I2S
+#        10 00 - 48k, Normal mode
+#        0A 00 - turn D/A mute off
+#
+./write_i2c 0xfffe 0x7 0x1a 0x1e 0x00 0x00 2
+./write_i2c 0xfffe 0x7 0x1a 0x12 0x01 0x00 2
+./write_i2c 0xfffe 0x7 0x1a 0x08 0x15 0x00 2
+./write_i2c 0xfffe 0x7 0x1a 0x0c 0x00 0x00 2
+./write_i2c 0xfffe 0x7 0x1a 0x0e 0x02 0x00 2
+./write_i2c 0xfffe 0x7 0x1a 0x10 0x00 0x00 2
+./write_i2c 0xfffe 0x7 0x1a 0x0a 0x00 0x00 2
+
+#
+exit
+#
+#	Script routines 
+#
+checkuser() {
+		if [ $USER != "root" ]
+		then
+			warn; echo "**** You must be root to start initozy at the moment." ; norm
+			RETVAL=1
+			exit $RETVAL
+		else
+			RETVAL=0
+		fi
+		}
+warn () {
+		echo -en "\\033[1;31m"
+	   }
+
+norm () {
+		echo -en "\\033[0;39m"
+	   }
+
+
+
