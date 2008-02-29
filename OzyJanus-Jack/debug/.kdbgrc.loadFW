@@ -1,0 +1,34 @@
+[Breakpoint 0]
+Enabled=true
+File=../src/loadFW.c
+Line=144
+Temporary=false
+
+[Breakpoint 1]
+Enabled=true
+File=../src/loadFW.c
+Line=128
+Temporary=false
+
+[Breakpoint 2]
+Enabled=true
+File=../src/loadFW.c
+Line=120
+Temporary=false
+
+[General]
+DebuggerCmdStr=
+DriverName=GDB
+FileVersion=1
+OptionsSelected=
+ProgramArgs=
+TTYLevel=7
+WorkingDirectory=
+
+[Memory]
+ColumnWidths=80,0
+NumExprs=0
+
+[Watches]
+Expr0=i
+Expr1=argc

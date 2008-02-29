@@ -1,0 +1,49 @@
+[Breakpoint 0]
+Address=0x80489d4
+Enabled=true
+Temporary=false
+
+[Breakpoint 1]
+Address=0x8049529
+Enabled=true
+Temporary=false
+
+[Breakpoint 2]
+Address=0x804958a
+Enabled=true
+Temporary=false
+
+[Breakpoint 3]
+Address=0x8049547
+Enabled=true
+Temporary=false
+
+[General]
+DebuggerCmdStr=
+DriverName=GDB
+FileVersion=1
+OptionsSelected=
+ProgramArgs=0xfffe 0x7 0x1a 1
+TTYLevel=7
+WorkingDirectory=
+
+[Memory]
+ColumnWidths=188,0
+Expression1=byte
+Expression2=buf
+Expression3=0x804ada0
+Expression4=0x804ada0=0x0d
+Format1=19
+Format2=19
+Format3=19
+Format4=19
+NumExprs=4
+
+[Watches]
+Expr0=rc
+Expr1=i2c_addr
+Expr2=byte
+Expr3=length
+Expr4=PID
+Expr5=VID
+Expr6=byte[i]

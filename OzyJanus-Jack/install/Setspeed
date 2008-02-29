@@ -1,0 +1,45 @@
+#!/bin/bash
+# Linux Script for initializing Ozy/Janus boards
+# Bob Vk4xv
+
+# 48000
+
+set48()
+	{
+	# 48000
+	echo "Speed 48000"
+	/home/fc007/SdrTest/write_i2c 0xfffe 0x7 0x1a 0x10 0x00 0x00 2
+	exit
+	}
+# 96000
+
+set96()
+	{
+	echo "Speed 96000"
+	/home/fc007/SdrTest/write_i2c 0xfffe 0x7 0x1a 0x10 0x01 0x00 2
+	exit
+	}
+
+set192()
+	{
+	echo "Speed 192000"
+	/home/fc007/SdrTest/write_i2c 0xfffe 0x7 0x1a 0x10 0x02 0x00 2
+	exit
+	}
+
+case "$1" in
+48000)		# Set speed 48000
+		set48
+		;;
+96000)		# set speet 96000
+		set96
+		;;
+192000)		# Set speed 192000
+		set192
+		;;
+*)
+		echo $" Usage: $0 {Setspeed 48000 | 96000 | 192000 }"
+		exit 1
+esac
+exit 0
+

@@ -1,0 +1,90 @@
+
+This is a suit of programs that allow the use of the Ozy and Janus HPSDR boards in the Linux environment.
+
+To build just carry out the normal process :-
+
+./configure
+make
+sudo make install
+
+To remove the package 
+
+sudo make uninstall
+
+At present for testing and development the install directory will be into a directory "SdrTest" in the users
+ home directory.
+
+The package at this point is capable of initializing the Ozy Janus boards simply by changing to the SdtTest 
+directory and running the following console command.
+
+./initozy
+
+If this all runs without error then the boards are initalized.
+
+Before init only Led12 will be on.  After init is successful led 9/10 alternate and leds 8,7,6 & 5 are on.
+
+Bob  Vk4xv.
+
+17-Jan-2008
+The executable ozyjack is now included which is a jack client for Ozy/Janus.  This is an alpha release and 
+as such has a few issues.
+
+The speed of the hardware is set with a console script [ ./Setspeed 96000 ] This can only be done after
+ ./initozy has successfully run.
+
+./initozy initialises to 48000.
+
+I have been starting jackd using qjackctl while testing. Set up the starting of jackd using qjackctl setup.  
+Jackd is started using the dummy driver (Not alsa or oss) and selecting the sample rate and buffer size to 
+suit ozy speed.  Remember to start the transport rolling on the qjackctl window button.  
+
+You can then start ozy (./ozyjack [SAMPLE.RATE] [BUFFER.SIZE] ) the default speed is 48000.  You should then
+ see the Ozy Janus registered ports on the qjackctl patch panel.
+
+At this point you should see led3 on. (This is phill's vk6aph happy led or otherwise known as the sync led) 
+
+If you are testing at 48000 you can use the alsa driver (my on board sound only supports 48000) and in this
+ case after starting ozyjack you will be able to connect on the patch panel, the ozy mic to your speakers, 
+and your computer mic to the ozy mon output for testing.  If you are using higher speeds you must use the 
+dummy driver and then you should be able to connect the Oj_mic ports to the Oj_mon ports and be able to hear
+ the mic input on the monitor.
+
+The best way to shut ozyjack down is to stop the transport rolling in qjackctl.  This will make sure things
+ clean up.
+
+Having got jackd and ozyjack running to this stage you can then start sdr-core and one of the gui, make the
+ connections on the qjackctl patch panel and you should be running.
+
+Remember this is alpha code and it has pushed the boundaries of my programming ability.  There must be some
+ issues so I hope some of the more skilled amoung us can help with these and other issues as they arise.  
+
+Here are some of the known issues.
+
+(1) I have left a warning Bill put in his original loopback program about setting the thread priority.  
+	This has not been done because I done know enough about it at this stage.
+
+(2) I noticed some sync api in the jack software and the thought crossed my mind I may need it when running
+	 the dummy driver to somehow sync jack and ozy.  May be I have already done that with the state machine
+	 causing the callbacks to run in turn ???
+
+(3) I have not yet implemented the setting of ozyjack speed from the environment variable SDR_DEFRATE.  Not a 
+	problem but not yet done.
+
+(4) There seems to be a permissions problem in that setting root as owner and the sticky bit you cannot get 
+	ozyjack to register with jackd unless you use sudo ./ozyjack.  Qjackctl has been run from a root console
+	 [ qjackctl& ] while testing.  ???
+
+(5) It would be nice if instead of using the script "initozy" the OJ pair would be initialised when plugged into
+	 the usb port.  This is kernel module stuff and I don't know enough about it at this stage.
+
+Lots of work still to be done but at least I have heard 40Mx ssb and cw stations using OJ and my softrock on linux.
+	  There is a lot of redundant code but I am loath to remove it at this stage. 
+ 
+Finally I must thank Bill Kd5tfg for much of the code I have lifted from his PowerSDR project.  Also Phill Vk6aph
+	 for his help and also to Bob N4HY, and Frank AB2KT for their contribution of code lifted from the Dttsp 
+	project.  Without these people and their code I would have not got this far.  I still don't fully understand
+	 how some of it works.
+73's
+Bob Vk4xv
+
+
