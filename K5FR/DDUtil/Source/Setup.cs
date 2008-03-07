@@ -70,9 +70,10 @@ namespace DataDecoder
         int LPTnum = 0;         // decimal number of selected LPT port
         double pollInt = 0;     // CAT port interval timer uses txtInv text box
         string fileName = "BandData.xml";
+        string LastFreq;
         string[] ports;
         string OutBuffer;
-        string ver = "1.3.6 Beta";
+        string ver = "1.4.0 Beta";
         string vfo = "";
         System.Timers.Timer pollTimer;
         System.Timers.Timer logTimer;
@@ -91,7 +92,6 @@ namespace DataDecoder
             get { return default_ComRadio; }
             set { default_ComRadio = value; }
         }
-
         /// <summary>
         /// The default accessory serial port
         /// </summary>
@@ -101,9 +101,8 @@ namespace DataDecoder
             get { return default_ComAcc; }
             set { default_ComAcc = value; }
         }
-
         /// <summary>
-        /// The default Logger port
+        /// The default Logger (RCP1) port
         /// </summary>
         private string default_LogPort = "";
         public string DefaultLogPort
@@ -111,7 +110,6 @@ namespace DataDecoder
             get { return default_LogPort; }
             set { default_LogPort = value; }
         }
-
         /// <summary>
         /// The default LP100 port
         /// </summary>
@@ -121,7 +119,6 @@ namespace DataDecoder
             get { return default_LPport; }
             set { default_LPport = value; }
         }
-
         /// <summary>
         /// The default RCP2 port
         /// </summary>
@@ -131,7 +128,6 @@ namespace DataDecoder
             get { return default_rcp2; }
             set { default_rcp2 = value; }
         }
-
         /// <summary>
         /// The default RCP3 port
         /// </summary>
@@ -149,6 +145,15 @@ namespace DataDecoder
         {
             get { return default_RCP4; }
             set { default_RCP4 = value; }
+        }
+        /// <summary>
+        /// The default PW1 port
+        /// </summary>
+        private string default_PW1 = "";
+        public string DefaultPW1port
+        {
+            get { return default_PW1; }
+            set { default_PW1 = value; }
         }
         /// <summary>
         /// The default parallel port
@@ -240,7 +245,6 @@ namespace DataDecoder
                     cboSerAcc.SelectedText = "";
                 }
             }
-
             // set Logger Serial (radio control) port to the last port used
             str = set.LogPort;
             if (str != "")
@@ -288,7 +292,7 @@ namespace DataDecoder
                 if (RCP2port.IsOpen) RCP2port.Close();
                 try
                 {
-                    // try to open the selected LPport:
+                    // try to open the selected port:
                     RCP2port.PortName = set.cboRCP2;
                     DefaultRCP2port = set.cboRCP2;
                     SetDefaultRCP2port();
@@ -309,7 +313,7 @@ namespace DataDecoder
                 if (RCP3port.IsOpen) RCP3port.Close();
                 try
                 {
-                    // try to open the selected LPport:
+                    // try to open the selected port:
                     RCP3port.PortName = set.cboRCP3;
                     DefaultRCP3port = set.cboRCP3;
                     SetDefaultRCP3port();
@@ -330,7 +334,7 @@ namespace DataDecoder
                 if (RCP4port.IsOpen) RCP4port.Close();
                 try
                 {
-                    // try to open the selected LPport:
+                    // try to open the selected port:
                     RCP4port.PortName = set.cboRCP4;
                     DefaultRCP4port = set.cboRCP4;
                     SetDefaultRCP4port();
@@ -342,6 +346,25 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP4.SelectedText = "";
+                }
+            }
+            // Set PW1 serial port to last port used
+            if (set.cboPW1 != "")
+            {
+                cboPW1.Text = set.cboPW1;
+                if (PW1port.IsOpen) PW1port.Close();
+                try
+                {
+                    // try to open the selected port:
+                    PW1port.PortName = set.cboPW1;
+                    DefaultPW1port = set.cboPW1;
+                    SetDefaultPW1port();
+                    chkPW1.Checked = set.chkPW1;
+                    txtPW1ta.Text = set.txtPW1ta;
+                }
+                catch
+                {  
+                    cboPW1.SelectedText = "";
                 }
             }
             // set LPT port to last one used
@@ -390,6 +413,51 @@ namespace DataDecoder
         }
 
         #endregion Initialization
+
+        #region Delegates
+
+        // Write LP-100 fwd Power reading to txt box
+        delegate void SetFwdCallback(string text);
+        private void SetFwd(string text)
+        {
+            if (this.txtFwd.InvokeRequired)
+            {   SetFwdCallback d = new SetFwdCallback(SetFwd);
+                this.Invoke(d, new object[] { text });}
+            else
+                txtFwd.Text = text;
+        }
+        // Write LP-100 SWR reading to txt box
+        delegate void SetSwrCallback(string text);
+        private void SetSwr(string text)
+        {
+            if (this.txtSWR.InvokeRequired)
+            {   SetSwrCallback d = new SetSwrCallback(SetSwr);
+                this.Invoke(d, new object[] { text });}
+            else
+                txtSWR.Text = text;
+        }
+        // Write App Title caption
+        delegate void SetTitleCallback(string text);
+        private void SetTitle(string text)
+        {
+            if (this.txtPort.InvokeRequired)
+            {   SetTitleCallback d = new SetTitleCallback(SetTitle);
+                this.Invoke(d, new object[] { text });}
+            else
+                this.Text = text;
+        }
+        // Write IC-PW1 ra address
+        delegate void SetTextCallback(string text);
+        private void raSetText(string text)
+        {
+            if (this.txtPW1ra.InvokeRequired)
+            {   SetTextCallback d = new SetTextCallback(raSetText);
+                this.Invoke(d, new object[] { text });}
+            else
+                this.txtPW1ra.Text = text;
+        }
+
+        #endregion Delegates
 
         #region Methods
 
@@ -475,34 +543,7 @@ namespace DataDecoder
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-        // Write fwd Power reading to txt box
-        delegate void SetFwdCallback(string text);
-        private void SetFwd(string text)
-        {
-            if (this.txtFwd.InvokeRequired)
-            {
-                SetFwdCallback d = new SetFwdCallback(SetFwd);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                txtFwd.Text = text;
-            }
-        }
-        // Write SWR reading to txt box
-        delegate void SetSwrCallback(string text);
-        private void SetSwr(string text)
-        {
-            if (this.txtSWR.InvokeRequired)
-            {
-                SetSwrCallback d = new SetSwrCallback(SetSwr);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                txtSWR.Text = text;
-            }
-        }
+        
         // Lookup freq data in hash table & output to LPT port
         private void LookUp(string freq)
         {
@@ -515,22 +556,6 @@ namespace DataDecoder
             {
                 OutParallelPort(LPTnum, 0);     // if freq key not found, turn off port
                 keyValue = 0;
-            }
-        }
-        delegate void SetTitleCallback(string text);
-        private void SetTitle(string text)
-        {
-            // InvokeRequired compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (this.txtPort.InvokeRequired)
-            {
-                SetTitleCallback d = new SetTitleCallback(SetTitle);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                this.Text = text;
             }
         }
         public static bool IsAppAlreadyRunning()
@@ -689,7 +714,7 @@ namespace DataDecoder
             else
             { LPTnum = 0; set.lptPort = "NONE"; txtPort.Text = LPTnum.ToString(); set.Save(); }
         }
-        // Port number changed
+        // LPT Port number changed
         private void txtPort_TextChanged(object sender, EventArgs e)
         {
             if (rbOther.Checked == true)
@@ -697,7 +722,7 @@ namespace DataDecoder
             else
             { btnPortNum.BackColor = Color.Transparent; lblPortBtn.Visible = false;}
         }
-        // The press to Save Port Number button was pressed
+        // The Save LPTPort Number button was pressed
         private void btnPortNum_Click(object sender, EventArgs e)
         {
             LPTnum = Convert.ToInt32(txtPort.Text);
@@ -769,7 +794,7 @@ namespace DataDecoder
         // Context Menu Item "About DDUtil"
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("DDUtil (C) 2007 Steve Nance (K5FR)", "About DDUtil",
+            MessageBox.Show("DDUtil (C) 2007, 2008 Steve Nance (K5FR)", "About DDUtil",
                 MessageBoxButtons.OK, MessageBoxIcon.None);
         }
         // Context Menu Item "Slave Radio Info"
@@ -794,19 +819,31 @@ namespace DataDecoder
                 "- Select the polling interval in MS. This needs to\n" +
                 "  be fairly fast or the readings will lag behind. \n" +
                 "  Try between 100 - 500 MS (200 is a good choice).\n\n" +
-                "- Check the Enable Check Box\n",
+                "- Check the Enabled Check Box to complete setup.\n",
                 "LP-100 Setup Info", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
+        // Context Menu Item ICOM IC-PW1
+        private void iCOMICPW1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "- Select the port to which the IC-PW1 is attached.\n\n" +
+                "- Select the CI-V (ta) address for DDUtil. This address is\n" +
+                "  required to let the IC-PW1 know who is talking to it.\n" +
+                "  Use the programmed default of 33 (hex) if unknown.\n\n" +
+                "- Check the Enabled Check Box to complete the setup.\n",
+                "IC-PW1 Setup Info", MessageBoxButtons.OK, MessageBoxIcon.None);
+        }
+        // Context Menu Item Flex Profiler
         private void flexProfilerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                "- Select the file location where Profiler is located.\n\n" +
+                "- Select the file location where Profiler is installed.\n\n" +
                 "- Select the PF Open button to start the Profiler.\n\n" +
                 "- Work with profiles.\n\n" +
                 "- Press the Re-Start button to activate DDUtil.\n", 
                 "Flex Profiler Setup & Operation", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
-
+        // Context Menu Item RCP ports
         private void rCPPortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
@@ -814,7 +851,7 @@ namespace DataDecoder
                 "These ports are for programs that need to talk to the radio\n" +
                 "in order to change frequency, mode and other radio parameters.\n\n" +
                 "- Select the desired port from the drop-down list-box.\n\n" +
-                "- Check the enable check box to turn on a port.\n",
+                "- Check the Enabled check box to turn on a port.\n",
                 "RCP Port Setup", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
 
@@ -1065,7 +1102,7 @@ namespace DataDecoder
                 else
                 {
                     MessageBox.Show("No port has been selected for the LP-100.\n\n" +
-                    "Please select a port number and try again.", "Port Error",
+                    "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     chkLPenab.Checked = false;
@@ -1147,7 +1184,7 @@ namespace DataDecoder
                 else
                 {
                     MessageBox.Show("No port has been selected for this RCP.\n\n" +
-                    "Please select a port number and try again.", "Port Error",
+                    "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     chkRCP2.Checked = false;
@@ -1173,7 +1210,7 @@ namespace DataDecoder
                 else
                 {
                     MessageBox.Show("No port has been selected for this RCP.\n\n" +
-                    "Please select a port number and try again.", "Port Error",
+                    "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     chkRCP3.Checked = false;
@@ -1199,7 +1236,7 @@ namespace DataDecoder
                 else
                 {
                     MessageBox.Show("No port has been selected for this RCP.\n\n" +
-                    "Please select a port number and try again.", "Port Error",
+                    "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     chkRCP4.Checked = false;
@@ -1297,6 +1334,97 @@ namespace DataDecoder
             set.cboRCP4 = cboRCP4.SelectedItem.ToString();
             set.Save();
         }
+        // PW1 Enable Checkbox has changed
+        private void chkPW1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPW1.Checked)
+            {
+                if (cboPW1.SelectedIndex > 0)
+                {
+                    set.chkPW1 = true;
+                }
+                else
+                {
+                    MessageBox.Show("No port has been selected for PW1.\n\n" +
+                    "Please select a valid port number and try again.", "Port Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    chkPW1.Checked = false;
+                    set.chkPW1 = false;
+                }
+            }
+            else
+            {
+                set.chkPW1 = false;
+            }
+            set.Save();
+
+        }
+        // PW1 Port Number has changed
+        private void cboPW1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PW1port.IsOpen) PW1port.Close();
+            if (cboPW1.SelectedItem.ToString() != "")
+            {
+                PW1port.PortName = cboPW1.SelectedItem.ToString();
+                try
+                {
+                    PW1port.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("Serial port " + PW1port.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboPW1.SelectedText = "";
+                    return;
+                }
+            }
+            else
+            {
+                chkPW1.Checked = false;
+            }
+            // save new port setting
+            set.cboPW1 = cboPW1.SelectedItem.ToString();
+            set.Save();
+        }
+        // PW1ra CI-V address textbox has changed
+        private void txtPW1ra_TextChanged(object sender, EventArgs e)
+        {
+            set.txtPW1ra = txtPW1ra.Text;
+            set.Save();
+        }
+        // PW1ta CI-V address textbox has changed
+        private void txtPW1ta_TextChanged(object sender, EventArgs e)
+        {
+            set.txtPW1ta = txtPW1ta.Text;
+            set.Save();
+        }
+        // Test button was pressed
+        // simulate poll message from IC-PW1 to DDUtil for freq read
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+//            if (!TestPort.IsOpen)
+//            {
+//                TestPort.PortName = "COM18";
+//                TestPort.Open();
+//            }
+//            byte[] bytes = new byte[6];
+//            string preamble = "FE";
+//            string EOM = "FD";
+//            string mystring = EOM + "03" + "E0" + "33" + preamble + preamble;
+//            int j = 10;
+//            for (int i = 0; i < 6; i++)
+//            {
+//                string temp = mystring.Substring(j, 2);
+//                bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
+////                Console.Write("{0:x2} ", bytes[i]);
+//                j -= 2;
+//            }
+////            Console.WriteLine();
+//            // FE FE 33 54 03 FD
+//           TestPort.Write(bytes, 0, 6);
+        }
 
         #endregion Form Events
 
@@ -1316,7 +1444,7 @@ namespace DataDecoder
             {   //loop thru the buffer and find matches
                 OutBuffer = m.Value;
                 CommBuffer = CommBuffer.Replace(m.Value, "");			//remove the match from the buffer		
-                if (logFlag == true) // the logger is active
+                if (logFlag == true) // RCP1 is active
                 {
                     string title = "DDUtil " + ver;
                     string id = "";
@@ -1326,11 +1454,11 @@ namespace DataDecoder
                     string freq = "";
                     string freqLook = "";
 
-                    rawFreq = OutBuffer;
+//                    rawFreq = OutBuffer;
                     // send radio's CAT reply back to logger
                     LogPort.Write(OutBuffer);
 
-                    // send CAT reply to RCP2
+                    // send CAT reply back to RCP ports
                     if (chkRCP2.Checked) RCP2port.Write(OutBuffer);
                     if (chkRCP3.Checked) RCP3port.Write(OutBuffer);
                     if (chkRCP4.Checked) RCP4port.Write(OutBuffer);
@@ -1370,7 +1498,7 @@ namespace DataDecoder
                         freqLook = freqLook.TrimStart('0');
                         freqLook = freqLook.Substring(0, freqLook.Length - 2);
                         id = title + "  - [RC] [" + freq.Substring(0, 9) + "] (" + vfo + ")";
-                        LookUp(freqLook);   //decode freq data and output to port
+                        LookUp(freqLook);   //decode freq data and output to LPT port
                         this.SetTitle(id + "   " + keyValue);
                     }
                 }
@@ -1380,19 +1508,19 @@ namespace DataDecoder
         /// <summary>
         /// Process data from the Logger port
         /// </summary>
-        public delegate void SerialDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e);
-
-        // The logger is active
+        
+//        public delegate void SerialDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e);
+       
+        // The RCP1 port has received data
         protected void OnReceive(object sender, SerialDataReceivedEventArgs e)
         {
-            SerialPort logPortMsgs = (SerialPort)sender;    // send incoming messae to the radio
+            SerialPort logPortMsgs = (SerialPort)sender;    // send incoming message to the radio
             string logMsg = logPortMsgs.ReadExisting();
             logFlag = true;
             // send the data on to the radio 
             sp.Write(logMsg);               //pass log port msg to radio port
             logTimer.Enabled = true;
         }
-
         // LP100 port has received data
         private void LPport_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -1412,55 +1540,128 @@ namespace DataDecoder
         // RCP2 port has received data
         private void RCP2port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (RCP2port.BytesToRead >= 3)
+            if (chkRCP2.Checked)    // port must be enabled
             {
-                if (chkRCP2.Checked)    // port must be enabled
+                SerialPort RCP2portMsgs = (SerialPort)sender;
+                int len = RCP2portMsgs.BytesToRead;
+                for (int i = 0; i <= len; i++)
                 {
-                    SerialPort RCP2portMsgs = (SerialPort)sender;
                     string RCP2portMsg = RCP2portMsgs.ReadTo(";");
-//                    Console.WriteLine(RCP2portMsg);
+                    if (chkRCP2DisPol.Checked && RCP2portMsg.Length <= 2)
+                        break;
+//                    Console.WriteLine("RCP2 " + RCP2portMsg);
                     sp.Write(RCP2portMsg + ";");
-               }
+                }
             }
         }
         // RCP3 port has received data
         private void RCP3port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (RCP3port.BytesToRead >= 3)
+            if (chkRCP3.Checked)    // port must be enabled
             {
-                if (chkRCP3.Checked)
-                {
                     SerialPort RCP3portMsgs = (SerialPort)sender;
-                    string RCP3portMsg = RCP3portMsgs.ReadTo(";");
-//                    Console.WriteLine(RCP3portMsg);
-                    sp.Write(RCP3portMsg + ";");
-                }
+                    int len = RCP3portMsgs.BytesToRead;
+                    for (int i = 0; i <= len; i++)
+                    {
+                        string RCP3portMsg = RCP3portMsgs.ReadTo(";");
+                        if (chkRCP3DisPol.Checked && RCP3portMsg.Length <= 2)
+                            break;
+//                        Console.WriteLine("RCP3 " + RCP3portMsg);
+                        sp.Write(RCP3portMsg + ";");
+                    }
             }
         }
         // RCP4 port has received data
         private void RCP4port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (RCP4port.BytesToRead >= 3)
+            SerialPort RCP4portMsgs = (SerialPort)sender;
+            int len = RCP4portMsgs.BytesToRead;
+            for (int i = 0; i <= len; i++)
             {
-                if (chkRCP4.Checked)
-                {
-                    SerialPort RCP4portMsgs = (SerialPort)sender;
-                    string RCP4portMsg = RCP4portMsgs.ReadTo(";");
-//                    Console.WriteLine(RCP4portMsg);
-                    sp.Write(RCP4portMsg + ";");
+                string RCP4portMsg = RCP4portMsgs.ReadTo(";");
+                if (chkRCP4DisPol.Checked && RCP4portMsg.Length <= 2)
+                    break;
+//                Console.WriteLine("RCP4 " + RCP4portMsg);
+                sp.Write(RCP4portMsg + ";");
+            }
+        }
+        // PW1 port has received data (Query from IC-PW1)
+        // i.e. FE FE 54 33 03 FD
+        private void PW1port_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkPW1.Checked)
+            {
+                byte[] inBuf = new byte[6];     // input message buffer
+                byte[] bytes = new byte[11];    // output message buffer
+                string intemp = "";             // input message string
+                // read the port message
+                PW1port.Read(inBuf, 0, PW1port.BytesToRead);
+                if (inBuf.Length == 6)          // make sure it's a legit poll message
+                {   
+                    for (int i = 0; i <= 5; i ++)
+                    { // convert byte array to string
+                        intemp += inBuf[i].ToString("x2");
+                    }
+                    string ta = intemp.Substring(4, 2).ToUpper(); // DDUtil hex address
+                    string ra = intemp.Substring(6, 2).ToUpper(); // IC-PW1 hex address
+                    string cn = intemp.Substring(8, 2).ToUpper(); // command number
+                    string x = txtPW1ta.Text;
+                    if (ta == x && cn == "03")
+                    { // if poll target is DDUtil(33) and command(03) is to read frequency
+                        raSetText(ra);
+                        string preamble = "FE";
+                        string EOM = "FD";
+                        string mystring = EOM + LastFreq.Substring(1, 10) + cn + ta + ra + preamble + preamble;
+                        int j = 20;
+                        for (int i = 0; i < 11; i++)
+                        {
+                            string outtemp = mystring.Substring(j, 2);
+                            bytes[i] = byte.Parse(outtemp, NumberStyles.HexNumber);
+                            j -= 2;
+                        }
+                        // 14.234.56 Mhz = FE FE ra ta cn 60 45 23 14 00 FD
+                        PW1port.Write(bytes, 0, 11);
+                    }
                 }
             }
         }
-
         #endregion Serial Port Events
 
         #region Serial Port Methods
 
         /// <summary>
-        /// send radio specific frequency data to the Passive Listener port
+        /// send radio specific frequency data to the Passive Listener ports
         /// </summary>
         private void PortSend(string freq)
         {
+            LastFreq = freq;
+            // If enabled send freq data to IC-PW1 port
+            if (chkPW1.Checked && PW1port.IsOpen && !chkDisBcast.Checked)
+            {
+                try
+                {
+                    byte[] bytes = new byte[11];
+                    string preamble = "FE";
+                    string ta = txtPW1ta.Text;
+                    string ra = "00";
+                    string cn = "00";
+                    string EOM = "FD";
+                    string mystring = EOM + freq.Substring(1, 10) + cn + ta + ra + preamble + preamble;
+                    int j = 20;
+                    for (int i = 0; i < 11; i++)
+                    {
+                        string temp = mystring.Substring(j, 2);
+                        bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
+                        j -= 2;
+                    }
+                    // 14.234.56 Mhz = FE FE 00 nn 00 60 45 23 14 00 FD
+                    PW1port.Write(bytes, 0, 11);
+                }
+                catch 
+                {   // ignore misc errors and if ta is being changed by user
+                }
+            }
+
             if (AccPort.IsOpen)
             {
                 byte[] bytes = new byte[11];
@@ -1493,7 +1694,9 @@ namespace DataDecoder
                         {
                             string temp = mystring.Substring(j, 2);
                             bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
+#if(DEBUG)
                             Console.Write("{0:x2} ", bytes[i]);
+#endif                            
                             j -= 2;
                         }
 #if(DEBUG)
@@ -1569,14 +1772,13 @@ namespace DataDecoder
                         // 14.234.56 Mhz = FE FE 00 nn 00 60 45 23 14 00 FD
                         AccPort.Write(bytes, 0, 11);
                         break;
-
                 }
             }
-            else
-            {
-                MessageBox.Show("Serial port is closed!", "Port Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //else
+            //{
+            //    MessageBox.Show("The Accessory (PL) port is closed!", "AccPort Error",
+            //                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         /// <summary>
@@ -1603,6 +1805,7 @@ namespace DataDecoder
                 cboRCP2.Items.Add(port);
                 cboRCP3.Items.Add(port);
                 cboRCP4.Items.Add(port);
+                cboPW1.Items.Add(port);
             }
             cboCAT.Sorted = true;
             cboSerAcc.Items.Add("");
@@ -1617,6 +1820,8 @@ namespace DataDecoder
             cboRCP3.Sorted = true;
             cboRCP4.Items.Add("");
             cboRCP4.Sorted = true;
+            cboPW1.Items.Add("");
+            cboPW1.Sorted = true;
         }
 
         /// <summary>
@@ -1709,7 +1914,6 @@ namespace DataDecoder
                 cboLogPort.SelectedIndex = 0;
             }
         }
-
         /// <summary>
         /// Opens the default RCP4 (Radio control) port.
         /// </summary>
@@ -1728,7 +1932,24 @@ namespace DataDecoder
                 cboLogPort.SelectedIndex = 0;
             }
         }
-
+        /// <summary>
+        /// Opens the default PW1 (Radio control) port.
+        /// </summary>
+        private void SetDefaultPW1port()
+        {
+            int n = cboPW1.Items.IndexOf(DefaultPW1port);
+            if (n >= 0)
+            {
+                cboPW1.SelectedIndex = n;
+                PW1port.Open();
+            }
+            else
+            {
+                MessageBox.Show("Default PW1 Radio Control Port is not valid." +
+                    "Please select a port from the list.");
+                cboLogPort.SelectedIndex = 0;
+            }
+        }
         /// <summary>
         /// Opens the default Logger (Radio control) port.
         /// </summary>
@@ -1876,7 +2097,6 @@ namespace DataDecoder
             }
         }
         #endregion Timer Events 
-
 
     }
 }
