@@ -343,5 +343,52 @@ namespace DataDecoder.Properties {
                 this["chkRCP4"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool chkPW1 {
+            get {
+                return ((bool)(this["chkPW1"]));
+            }
+            set {
+                this["chkPW1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("33")]
+        public string cboPW1 {
+            get {
+                return ((string)(this["cboPW1"]));
+            }
+            set {
+                this["cboPW1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string txtPW1ra {
+            get {
+                return ((string)(this["txtPW1ra"]));
+            }
+            set {
+                this["txtPW1ra"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string txtPW1ta {
+            get {
+                return ((string)(this["txtPW1ta"]));
+            }
+            set {
+                this["txtPW1ta"] = value;
+            }
+        }
     }
 }

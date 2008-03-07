@@ -19,7 +19,10 @@
 <p align="center"><font size="2">A Data Decoding Utility for Flex Radios</font></p>
 <p align="center"><font size="2" color="#0000FF">(Steve Nance - K5FR)</font></p>
 <p align="center">&nbsp;</p>
-The <b>Data Decoder</b> <b>Utility</b> <b>(DDUtil) </b>enables you to</font>:<ul>
+<b>Notice:</b> The most up-to-date documentation is always at the
+<a href="http://k5fr.com/ddutilwiki/index.php">Wiki</a>, if you have a choice 
+use it. This file is being depreciated.<p>The <b>Data Decoder</b> <b>Utility</b> <b>(DDUtil) </b>enables you to</font>:</p>
+<ul>
 	<li>Send transmit frequency data to RS-232 passive listener devices such as 
 	SteppIR antenna controllers, linear amplifiers, antenna tuners and other 
 	similar devices. This data is provided on the pc's serial communication port 
@@ -83,6 +86,9 @@ version. The installer will tell you also.</li>
 </ul>
 <h2><u><font color="#800080"><a name="Instructions"></a>
 Setup</font></u></h2>
+<p>For a more in-depth discussion on setting up <b>DDUtil</b> see the
+<a href="http://k5fr.com/ddutilwiki/index.php?title=How_To">How-To</a> section 
+of the web site wiki.</p>
 <ul>
 	<li>
 	<p style="margin-top: 3px; margin-bottom: 6px">Open the utility and the 
@@ -91,7 +97,8 @@ Setup</font></u></h2>
 	&nbsp;&nbsp;&nbsp;
 	<img border="0" src="DDUtilPorts.jpg" >&nbsp; </li>
 	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px"><b>Ports Tab</b><ul>
+	<h2><span class="mw-headline">Ports Tab </span></h2>
+	<p>&nbsp;<ul>
 		<li>
 		<p style="margin-top: 3px; margin-bottom: 6px"><b>Serial Ports</b><ul>
 			<li>
@@ -197,7 +204,8 @@ Setup</font></u></h2>
 	</ul>
 		</li>
 	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px"><b>Device Tab</b></li>
+	<h2><span class="mw-headline">Device Tab </span></h2>
+</li>
 	</ul>
 	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Selecting 
 	the first of the Device tabs at the top of the form will display the following form.<br>
@@ -266,7 +274,63 @@ Setup</font></u></h2>
 </blockquote>
 <ul>
 	<li>
-	<p style="margin-top: 3px; margin-bottom: 6px"><b>Other Tab</b></li>
+	<h2><span class="mw-headline">RCP Tab </span></h2>
+	</li>
+</ul>
+<blockquote>
+	<p style="margin-top: 3px; margin-bottom: 6px">Selecting this tab will display 
+the following form. </p>
+</blockquote>
+<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<img border="0" src="DDUtilRCP.JPG">&nbsp; </p>
+<blockquote>
+	<p>This tab is for configuring and controlling the other <b>Radio Control Programs</b> 
+	(RCP) ports. <b>Radio Control Programs</b>&nbsp; are 
+	programs that communicate with the radio to exchange frequency and mode 
+	data. This is particularly useful for Telnet Spots and Digital programs that 
+	have the ability to control the radio on their own.</p>
+	<p><i><b><span style="color: red;">Warning!</span></b></i> </p>
+</blockquote>
+<blockquote>
+	<dl>
+		<dd><b>DO NOT</b> setup any of these ports without setting up the 
+		Master <b>RCP</b> program on the <b>Ports Tab</b> <i><u>
+		<font color="#FF0000"> <b>first</b></font></u></i>. <u>
+		<font color="#0000FF"><i><b>Instability 
+		will occur!</b></i></font></u></dd>
+	</dl>
+	<ul>
+		<li><b>Enabled</b> indicates the <b>RCP</b> is selected to communicate with 
+	the radio via the radio <b>CAT</b> port. Communication with the radio will 
+		not occur unless this control is selected. </li>
+		<li><b>Serial Port Selection Drop-Down Box</b>, immediately to the right of 
+	the <b>Enabled</b> check box, is used to select the virtual serial port the
+	<b>RCP</b> will use to communicate with the radio.
+		</li>
+		<li><b>Disable Polling</b> if selected will eliminate any polling for 
+		frequency, mode or any other radio status from this <b>RCP</b>. Any 
+		frequency or mode <b>SET</b>ing commands will be honored though. This 
+		control is intended to be used if there are slow response issues with 
+		the various <b>RCPs</b><p><font color="#800000"><u><b>Notes on Polling:</b></u></font>
+		</p>
+		<p>There are many factors that will influence whether or not you want to 
+		<b>Disable Polling</b> for a specific <b>RCP</b. The best thing to do is just 
+		try it and see if it helps the response. Some programs will not work 
+		properly without polling enabled (i.e., CWSkimmer). It all depends what
+		<b></b>. Many factors can influence performance depending on which programs are running and what their requirements are as 
+		related to polling. With as many as four <b>RCPs</b> running it's 
+		inevitable there will be duplicate polling commands flying around.
+		The whole purpose of this control is to be able to have some control 
+		over these duplicate commands.</li>
+	</ul>
+	<p>For a more in-depth discussion on setting up <b>DDUtil</b> see the
+	<a href="http://k5fr.com/ddutilwiki/index.php?title=How_To">How-To</a> 
+	section of the web site wiki.</p>
+</blockquote>
+<ul>
+	<li>
+	<h2><span class="mw-headline">Other Tab  </span></h2>
+</li>
 	</ul>
 	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Selecting 
 	this tab will display the following form.<br>
@@ -275,8 +339,39 @@ Setup</font></u></h2>
 	<img border="0" src="DDUtilOther.JPG">&nbsp;</p>
 <blockquote>
 	<p style="margin-top: 3px; margin-bottom: 6px">This page of the setup 
-		form is for configuring other options that can be used with <b>DDUtil</b> 
+		form is for configuring <b>Other</b> options that can be used with <b>DDUtil</b 
 	and include: </p>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>IC-PW1</b></p></li><br>
+		If you wish to have your <b>ICOM IC-PW1</b> linear amplifier follow the
+		<b>PowerSDR</b> automatically from band to band this control group is 
+		where you set it up.<p>You will need a CT-17 or some knock-off level 
+		converter. The following controls will need to be set for this function to work.<ul>
+		<li><b>Enabled</b> - indicates you wish to use this function.</li>
+		<li><b>Port</b> - Select the hardware port number you wish to use to 
+		connect your <b>IC-PW1 </b>via<b> a CI-V</b> level converter.</li>
+		<li><b>CI-V Address (ta)</b> - This is the hex address used by <b>DDUtil</b> 
+		during the communication with the <b>IC-PW1</b>. It is suggested that 
+		the default address of 33H be used, but any other address may be used.</li>
+		<li><b>CI-V Address (ra)</b> - This is the address of the <b>IC-PW1</b>.
+		<b>DDUtil</b> will automatically pick this address up when the <b>IC-PW1</b> 
+		polls <b>DDUtil</b>. No action is required on the user's part and the <b>
+		ra</b> box is shown for information purposes only.</li>
+
+	</ul>
+		<p>Additionally, The user will need to follow the procedure in the <b>
+		IC-PW1</b> owners manual to <b>&quot;Program the CI-V address&quot;</b>. This is 
+		normally for an exciter, but in this case it will be for<b> DDUtil</b>. 
+		whenever the <b>IC-PW1</b> enters this mode <b>DDUtil</b> will recognize 
+		the query and furnish the appropriate information back to the <b>IC-PW1</b>. 
+		This only takes a minute and only has to be done once, normally.<p>For a 
+		more in-depth discussion on setting up <b>DDUtil</b> see the
+		<a href="http://k5fr.com/ddutilwiki/index.php?title=How_To">How-To</a> 
+		section of the web site wiki.<br>
+
+	</ul>
+	<p style="margin-top: 3px; margin-bottom: 6px"><br></p>
 	<ul>
 		<li>
 		<p style="margin-top: 3px; margin-bottom: 6px"><b>LP-100</b> <br>
@@ -389,8 +484,14 @@ from session to session.</p>
 		giving the options of <b>Shrink </b>&amp; <b>Restore</b>. Additionally 
 		the borders of the form may be resized as desired.</li>
 	</ul>
-	<p>&nbsp;&nbsp;&nbsp;
-	</p></li>
+	</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp; For a more in-depth discussion on setting up <b>DDUtil</b> 
+see the <a href="http://k5fr.com/ddutilwiki/index.php?title=How_To">How-To</a> 
+section of the web site wiki. &nbsp;&nbsp;&nbsp;
+	</p>
+<p>&nbsp;</p>
+<ul>
 	<li><u><font color="#FF0000"><b>Important Notices Please Read</b></font></u><ul>
 		<li>When connecting to a amplifier remember that Flex radios
 		<font color="#FF0000"><u><b>DO NOT</b></u></font> have any

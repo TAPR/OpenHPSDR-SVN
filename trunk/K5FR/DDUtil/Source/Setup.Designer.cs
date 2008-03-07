@@ -77,6 +77,9 @@ namespace DataDecoder
             this.Dev0 = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
             this.tabRCP = new System.Windows.Forms.TabPage();
+            this.chkRCP4DisPol = new System.Windows.Forms.CheckBox();
+            this.chkRCP3DisPol = new System.Windows.Forms.CheckBox();
+            this.chkRCP2DisPol = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.cboRCP4 = new System.Windows.Forms.ComboBox();
@@ -88,6 +91,17 @@ namespace DataDecoder
             this.cboRCP2 = new System.Windows.Forms.ComboBox();
             this.chkRCP2 = new System.Windows.Forms.CheckBox();
             this.tabOther = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chkDisBcast = new System.Windows.Forms.CheckBox();
+            this.btnTest = new System.Windows.Forms.Button();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txtPW1ra = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.cboPW1 = new System.Windows.Forms.ComboBox();
+            this.txtPW1ta = new System.Windows.Forms.TextBox();
+            this.chkPW1 = new System.Windows.Forms.CheckBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnPFfile = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
@@ -111,8 +125,9 @@ namespace DataDecoder
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.lP100ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flexProfilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iCOMICPW1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lP100ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rCPPortsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.LPport = new System.IO.Ports.SerialPort(this.components);
@@ -121,6 +136,8 @@ namespace DataDecoder
             this.RCP2port = new System.IO.Ports.SerialPort(this.components);
             this.RCP3port = new System.IO.Ports.SerialPort(this.components);
             this.RCP4port = new System.IO.Ports.SerialPort(this.components);
+            this.PW1port = new System.IO.Ports.SerialPort(this.components);
+            this.TestPort = new System.IO.Ports.SerialPort(this.components);
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpBox1.SuspendLayout();
@@ -132,6 +149,7 @@ namespace DataDecoder
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
             this.tabRCP.SuspendLayout();
             this.tabOther.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -174,7 +192,7 @@ namespace DataDecoder
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(223, 282);
+            this.label12.Location = new System.Drawing.Point(228, 282);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(85, 13);
             this.label12.TabIndex = 29;
@@ -192,7 +210,7 @@ namespace DataDecoder
             "2400 8-N-2",
             "1200 8-N-1",
             "1200 8-N-2"});
-            this.cboRadData.Location = new System.Drawing.Point(222, 258);
+            this.cboRadData.Location = new System.Drawing.Point(227, 258);
             this.cboRadData.Name = "cboRadData";
             this.cboRadData.Size = new System.Drawing.Size(83, 21);
             this.cboRadData.TabIndex = 28;
@@ -202,7 +220,7 @@ namespace DataDecoder
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(336, 281);
+            this.label9.Location = new System.Drawing.Point(341, 281);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 13);
             this.label9.TabIndex = 27;
@@ -211,18 +229,18 @@ namespace DataDecoder
             // txtRadNum
             // 
             this.txtRadNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRadNum.Location = new System.Drawing.Point(339, 258);
+            this.txtRadNum.Location = new System.Drawing.Point(344, 258);
             this.txtRadNum.Name = "txtRadNum";
             this.txtRadNum.Size = new System.Drawing.Size(32, 20);
             this.txtRadNum.TabIndex = 15;
             this.txtRadNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtRadNum, "Icom CI-V Hex Address");
+            this.toolTip1.SetToolTip(this.txtRadNum, "CI-V Address");
             this.txtRadNum.TextChanged += new System.EventHandler(this.txtRadNum_TextChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(107, 282);
+            this.label8.Location = new System.Drawing.Point(112, 282);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(92, 13);
             this.label8.TabIndex = 26;
@@ -238,7 +256,7 @@ namespace DataDecoder
             "Yaesu Type 2",
             "Icom",
             "ICPW1"});
-            this.cboRadio.Location = new System.Drawing.Point(107, 258);
+            this.cboRadio.Location = new System.Drawing.Point(112, 258);
             this.cboRadio.Name = "cboRadio";
             this.cboRadio.Size = new System.Drawing.Size(89, 21);
             this.cboRadio.TabIndex = 26;
@@ -248,7 +266,7 @@ namespace DataDecoder
             // cboFollow
             // 
             this.cboFollow.AutoSize = true;
-            this.cboFollow.Location = new System.Drawing.Point(11, 262);
+            this.cboFollow.Location = new System.Drawing.Point(16, 262);
             this.cboFollow.Name = "cboFollow";
             this.cboFollow.Size = new System.Drawing.Size(82, 17);
             this.cboFollow.TabIndex = 26;
@@ -268,7 +286,8 @@ namespace DataDecoder
             this.grpBox1.Controls.Add(this.cboSerAcc);
             this.grpBox1.Controls.Add(this.label3);
             this.grpBox1.Controls.Add(this.cboCAT);
-            this.grpBox1.Location = new System.Drawing.Point(11, 14);
+            this.grpBox1.ForeColor = System.Drawing.Color.Maroon;
+            this.grpBox1.Location = new System.Drawing.Point(15, 14);
             this.grpBox1.Name = "grpBox1";
             this.grpBox1.Size = new System.Drawing.Size(381, 78);
             this.grpBox1.TabIndex = 19;
@@ -280,9 +299,10 @@ namespace DataDecoder
             // 
             this.label11.Location = new System.Drawing.Point(214, 44);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(81, 32);
+            this.label11.Size = new System.Drawing.Size(81, 21);
             this.label11.TabIndex = 14;
-            this.label11.Text = "Master Radio Control Port";
+            this.label11.Text = "Master RCP 1";
+            this.toolTip1.SetToolTip(this.label11, "Select Master RCP 1 Port");
             // 
             // cboLogPort
             // 
@@ -291,14 +311,14 @@ namespace DataDecoder
             this.cboLogPort.Name = "cboLogPort";
             this.cboLogPort.Size = new System.Drawing.Size(85, 21);
             this.cboLogPort.TabIndex = 13;
-            this.toolTip1.SetToolTip(this.cboLogPort, "Select Master Radio Control Port (HRD, MixW, DXLab)");
+            this.toolTip1.SetToolTip(this.cboLogPort, "Select Master RCP 1 Port");
             this.cboLogPort.SelectedIndexChanged += new System.EventHandler(this.cboLogPort_SelectedIndexChanged);
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(316, 44);
+            this.label6.Location = new System.Drawing.Point(314, 44);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 32);
+            this.label6.Size = new System.Drawing.Size(77, 32);
             this.label6.TabIndex = 12;
             this.label6.Text = "CAT Polling Interval";
             // 
@@ -314,11 +334,12 @@ namespace DataDecoder
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(109, 44);
+            this.label5.Location = new System.Drawing.Point(107, 44);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 32);
+            this.label5.Size = new System.Drawing.Size(96, 21);
             this.label5.TabIndex = 3;
-            this.label5.Text = "Passive Listener Port";
+            this.label5.Text = "Passive Listener";
+            this.toolTip1.SetToolTip(this.label5, "Select Passive Listener Port (A hardware serial port)");
             // 
             // cboSerAcc
             // 
@@ -327,16 +348,17 @@ namespace DataDecoder
             this.cboSerAcc.Name = "cboSerAcc";
             this.cboSerAcc.Size = new System.Drawing.Size(85, 21);
             this.cboSerAcc.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.cboSerAcc, "Select Passive Listener Port (your hardware serial port)");
+            this.toolTip1.SetToolTip(this.cboSerAcc, "Select Passive Listener Port (A hardware serial port)");
             this.cboSerAcc.SelectedIndexChanged += new System.EventHandler(this.cboSerAcc_SelectionChangeCommitted);
             // 
             // label3
             // 
             this.label3.Location = new System.Drawing.Point(8, 43);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 33);
+            this.label3.Size = new System.Drawing.Size(69, 22);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Radio CAT Port";
+            this.label3.Text = "Radio CAT";
+            this.toolTip1.SetToolTip(this.label3, "Select Radio CAT Serial Port");
             // 
             // cboCAT
             // 
@@ -356,7 +378,8 @@ namespace DataDecoder
             this.grpBox2.Controls.Add(this.groupBox5);
             this.grpBox2.Controls.Add(this.grpLPT);
             this.grpBox2.Controls.Add(this.txtPort);
-            this.grpBox2.Location = new System.Drawing.Point(11, 102);
+            this.grpBox2.ForeColor = System.Drawing.Color.Navy;
+            this.grpBox2.Location = new System.Drawing.Point(15, 102);
             this.grpBox2.Name = "grpBox2";
             this.grpBox2.Size = new System.Drawing.Size(381, 139);
             this.grpBox2.TabIndex = 18;
@@ -447,7 +470,7 @@ namespace DataDecoder
             this.grpLPT.Controls.Add(this.rb2);
             this.grpLPT.Controls.Add(this.rbNone);
             this.grpLPT.Controls.Add(this.rb3);
-            this.grpLPT.Location = new System.Drawing.Point(6, 23);
+            this.grpLPT.Location = new System.Drawing.Point(8, 23);
             this.grpLPT.Name = "grpLPT";
             this.grpLPT.Size = new System.Drawing.Size(122, 100);
             this.grpLPT.TabIndex = 0;
@@ -670,6 +693,9 @@ namespace DataDecoder
             // 
             // tabRCP
             // 
+            this.tabRCP.Controls.Add(this.chkRCP4DisPol);
+            this.tabRCP.Controls.Add(this.chkRCP3DisPol);
+            this.tabRCP.Controls.Add(this.chkRCP2DisPol);
             this.tabRCP.Controls.Add(this.label19);
             this.tabRCP.Controls.Add(this.label18);
             this.tabRCP.Controls.Add(this.cboRCP4);
@@ -687,6 +713,39 @@ namespace DataDecoder
             this.tabRCP.Text = "RCP";
             this.tabRCP.UseVisualStyleBackColor = true;
             // 
+            // chkRCP4DisPol
+            // 
+            this.chkRCP4DisPol.AutoSize = true;
+            this.chkRCP4DisPol.Location = new System.Drawing.Point(304, 118);
+            this.chkRCP4DisPol.Name = "chkRCP4DisPol";
+            this.chkRCP4DisPol.Size = new System.Drawing.Size(95, 17);
+            this.chkRCP4DisPol.TabIndex = 59;
+            this.chkRCP4DisPol.Text = "Disable Polling";
+            this.toolTip1.SetToolTip(this.chkRCP4DisPol, "Check to disable polling on this port");
+            this.chkRCP4DisPol.UseVisualStyleBackColor = true;
+            // 
+            // chkRCP3DisPol
+            // 
+            this.chkRCP3DisPol.AutoSize = true;
+            this.chkRCP3DisPol.Location = new System.Drawing.Point(304, 84);
+            this.chkRCP3DisPol.Name = "chkRCP3DisPol";
+            this.chkRCP3DisPol.Size = new System.Drawing.Size(95, 17);
+            this.chkRCP3DisPol.TabIndex = 58;
+            this.chkRCP3DisPol.Text = "Disable Polling";
+            this.toolTip1.SetToolTip(this.chkRCP3DisPol, "Check to disable polling on this port");
+            this.chkRCP3DisPol.UseVisualStyleBackColor = true;
+            // 
+            // chkRCP2DisPol
+            // 
+            this.chkRCP2DisPol.AutoSize = true;
+            this.chkRCP2DisPol.Location = new System.Drawing.Point(304, 51);
+            this.chkRCP2DisPol.Name = "chkRCP2DisPol";
+            this.chkRCP2DisPol.Size = new System.Drawing.Size(95, 17);
+            this.chkRCP2DisPol.TabIndex = 57;
+            this.chkRCP2DisPol.Text = "Disable Polling";
+            this.toolTip1.SetToolTip(this.chkRCP2DisPol, "Check to disable polling on this port");
+            this.chkRCP2DisPol.UseVisualStyleBackColor = true;
+            // 
             // label19
             // 
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -699,7 +758,7 @@ namespace DataDecoder
             // 
             // label18
             // 
-            this.label18.Location = new System.Drawing.Point(55, 121);
+            this.label18.Location = new System.Drawing.Point(14, 120);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(62, 15);
             this.label18.TabIndex = 55;
@@ -708,9 +767,9 @@ namespace DataDecoder
             // cboRCP4
             // 
             this.cboRCP4.FormattingEnabled = true;
-            this.cboRCP4.Location = new System.Drawing.Point(246, 115);
+            this.cboRCP4.Location = new System.Drawing.Point(197, 115);
             this.cboRCP4.Name = "cboRCP4";
-            this.cboRCP4.Size = new System.Drawing.Size(85, 21);
+            this.cboRCP4.Size = new System.Drawing.Size(75, 21);
             this.cboRCP4.TabIndex = 53;
             this.toolTip1.SetToolTip(this.cboRCP4, "Select port for Radio Control program");
             this.cboRCP4.SelectedIndexChanged += new System.EventHandler(this.cboRCP4_SelectedIndexChanged);
@@ -718,7 +777,7 @@ namespace DataDecoder
             // chkRCP4
             // 
             this.chkRCP4.AutoSize = true;
-            this.chkRCP4.Location = new System.Drawing.Point(149, 120);
+            this.chkRCP4.Location = new System.Drawing.Point(105, 118);
             this.chkRCP4.Name = "chkRCP4";
             this.chkRCP4.Size = new System.Drawing.Size(65, 17);
             this.chkRCP4.TabIndex = 54;
@@ -729,7 +788,7 @@ namespace DataDecoder
             // 
             // label16
             // 
-            this.label16.Location = new System.Drawing.Point(55, 87);
+            this.label16.Location = new System.Drawing.Point(14, 86);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(62, 15);
             this.label16.TabIndex = 52;
@@ -738,9 +797,9 @@ namespace DataDecoder
             // cboRCP3
             // 
             this.cboRCP3.FormattingEnabled = true;
-            this.cboRCP3.Location = new System.Drawing.Point(246, 81);
+            this.cboRCP3.Location = new System.Drawing.Point(197, 81);
             this.cboRCP3.Name = "cboRCP3";
-            this.cboRCP3.Size = new System.Drawing.Size(85, 21);
+            this.cboRCP3.Size = new System.Drawing.Size(75, 21);
             this.cboRCP3.TabIndex = 50;
             this.toolTip1.SetToolTip(this.cboRCP3, "Select port for Radio Control program");
             this.cboRCP3.SelectedIndexChanged += new System.EventHandler(this.cboRCP3_SelectedIndexChanged);
@@ -748,7 +807,7 @@ namespace DataDecoder
             // chkRCP3
             // 
             this.chkRCP3.AutoSize = true;
-            this.chkRCP3.Location = new System.Drawing.Point(149, 86);
+            this.chkRCP3.Location = new System.Drawing.Point(105, 84);
             this.chkRCP3.Name = "chkRCP3";
             this.chkRCP3.Size = new System.Drawing.Size(65, 17);
             this.chkRCP3.TabIndex = 51;
@@ -759,7 +818,7 @@ namespace DataDecoder
             // 
             // label17
             // 
-            this.label17.Location = new System.Drawing.Point(55, 52);
+            this.label17.Location = new System.Drawing.Point(14, 51);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(62, 15);
             this.label17.TabIndex = 49;
@@ -768,9 +827,9 @@ namespace DataDecoder
             // cboRCP2
             // 
             this.cboRCP2.FormattingEnabled = true;
-            this.cboRCP2.Location = new System.Drawing.Point(246, 46);
+            this.cboRCP2.Location = new System.Drawing.Point(197, 46);
             this.cboRCP2.Name = "cboRCP2";
-            this.cboRCP2.Size = new System.Drawing.Size(85, 21);
+            this.cboRCP2.Size = new System.Drawing.Size(75, 21);
             this.cboRCP2.TabIndex = 46;
             this.toolTip1.SetToolTip(this.cboRCP2, "Select port for Radio Control program");
             this.cboRCP2.SelectedIndexChanged += new System.EventHandler(this.cboRCP2_SelectedIndexChanged);
@@ -778,7 +837,7 @@ namespace DataDecoder
             // chkRCP2
             // 
             this.chkRCP2.AutoSize = true;
-            this.chkRCP2.Location = new System.Drawing.Point(149, 51);
+            this.chkRCP2.Location = new System.Drawing.Point(105, 49);
             this.chkRCP2.Name = "chkRCP2";
             this.chkRCP2.Size = new System.Drawing.Size(65, 17);
             this.chkRCP2.TabIndex = 48;
@@ -789,6 +848,7 @@ namespace DataDecoder
             // 
             // tabOther
             // 
+            this.tabOther.Controls.Add(this.groupBox4);
             this.tabOther.Controls.Add(this.groupBox3);
             this.tabOther.Controls.Add(this.groupBox2);
             this.tabOther.Location = new System.Drawing.Point(4, 22);
@@ -798,15 +858,140 @@ namespace DataDecoder
             this.tabOther.Text = "Other";
             this.tabOther.UseVisualStyleBackColor = true;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.chkDisBcast);
+            this.groupBox4.Controls.Add(this.btnTest);
+            this.groupBox4.Controls.Add(this.label24);
+            this.groupBox4.Controls.Add(this.txtPW1ra);
+            this.groupBox4.Controls.Add(this.label23);
+            this.groupBox4.Controls.Add(this.cboPW1);
+            this.groupBox4.Controls.Add(this.txtPW1ta);
+            this.groupBox4.Controls.Add(this.chkPW1);
+            this.groupBox4.Controls.Add(this.label21);
+            this.groupBox4.Controls.Add(this.label22);
+            this.groupBox4.ForeColor = System.Drawing.Color.Maroon;
+            this.groupBox4.Location = new System.Drawing.Point(7, 7);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(403, 83);
+            this.groupBox4.TabIndex = 48;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "IC-PW1";
+            // 
+            // chkDisBcast
+            // 
+            this.chkDisBcast.AutoSize = true;
+            this.chkDisBcast.Location = new System.Drawing.Point(17, 55);
+            this.chkDisBcast.Name = "chkDisBcast";
+            this.chkDisBcast.Size = new System.Drawing.Size(112, 17);
+            this.chkDisBcast.TabIndex = 50;
+            this.chkDisBcast.Text = "Disable Broadcast";
+            this.toolTip1.SetToolTip(this.chkDisBcast, "Check to disable frequency broadcast to PW1");
+            this.chkDisBcast.UseVisualStyleBackColor = true;
+            // 
+            // btnTest
+            // 
+            this.btnTest.AutoSize = true;
+            this.btnTest.Location = new System.Drawing.Point(359, 29);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(38, 23);
+            this.btnTest.TabIndex = 49;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Visible = false;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
+            // label24
+            // 
+            this.label24.Location = new System.Drawing.Point(271, 55);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(18, 15);
+            this.label24.TabIndex = 48;
+            this.label24.Text = "ra";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtPW1ra
+            // 
+            this.txtPW1ra.Enabled = false;
+            this.txtPW1ra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPW1ra.Location = new System.Drawing.Point(264, 29);
+            this.txtPW1ra.Name = "txtPW1ra";
+            this.txtPW1ra.Size = new System.Drawing.Size(32, 22);
+            this.txtPW1ra.TabIndex = 47;
+            this.txtPW1ra.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPW1ra, "CI-V Address for IC-PW1");
+            this.txtPW1ra.TextChanged += new System.EventHandler(this.txtPW1ra_TextChanged);
+            // 
+            // label23
+            // 
+            this.label23.Location = new System.Drawing.Point(324, 55);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(18, 15);
+            this.label23.TabIndex = 46;
+            this.label23.Text = "ta";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // cboPW1
+            // 
+            this.cboPW1.FormattingEnabled = true;
+            this.cboPW1.Location = new System.Drawing.Point(124, 29);
+            this.cboPW1.Name = "cboPW1";
+            this.cboPW1.Size = new System.Drawing.Size(63, 21);
+            this.cboPW1.TabIndex = 17;
+            this.toolTip1.SetToolTip(this.cboPW1, "Select Port for IC-PW1");
+            this.cboPW1.SelectedIndexChanged += new System.EventHandler(this.cboPW1_SelectedIndexChanged);
+            // 
+            // txtPW1ta
+            // 
+            this.txtPW1ta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPW1ta.Location = new System.Drawing.Point(316, 29);
+            this.txtPW1ta.Name = "txtPW1ta";
+            this.txtPW1ta.Size = new System.Drawing.Size(32, 22);
+            this.txtPW1ta.TabIndex = 15;
+            this.txtPW1ta.Text = "33";
+            this.txtPW1ta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPW1ta, "CI-V Address for DDUtil");
+            this.txtPW1ta.TextChanged += new System.EventHandler(this.txtPW1ta_TextChanged);
+            // 
+            // chkPW1
+            // 
+            this.chkPW1.AutoSize = true;
+            this.chkPW1.Location = new System.Drawing.Point(17, 32);
+            this.chkPW1.Name = "chkPW1";
+            this.chkPW1.Size = new System.Drawing.Size(65, 17);
+            this.chkPW1.TabIndex = 45;
+            this.chkPW1.Text = "Enabled";
+            this.toolTip1.SetToolTip(this.chkPW1, "Check to enable IC-PW1 Amplifier");
+            this.chkPW1.UseVisualStyleBackColor = true;
+            this.chkPW1.CheckedChanged += new System.EventHandler(this.chkPW1_CheckedChanged);
+            // 
+            // label21
+            // 
+            this.label21.Location = new System.Drawing.Point(264, 11);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(84, 15);
+            this.label21.TabIndex = 16;
+            this.label21.Text = "--- CI-V Addr ---";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label22
+            // 
+            this.label22.Location = new System.Drawing.Point(196, 32);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(30, 15);
+            this.label22.TabIndex = 18;
+            this.label22.Text = "Port";
+            // 
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox3.Controls.Add(this.btnPFfile);
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.txtProfLoc);
-            this.groupBox3.Location = new System.Drawing.Point(9, 145);
+            this.groupBox3.ForeColor = System.Drawing.Color.Navy;
+            this.groupBox3.Location = new System.Drawing.Point(7, 194);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(403, 92);
+            this.groupBox3.Size = new System.Drawing.Size(403, 95);
             this.groupBox3.TabIndex = 61;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Flex Profiler";
@@ -826,7 +1011,7 @@ namespace DataDecoder
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(10, 47);
+            this.label15.Location = new System.Drawing.Point(10, 54);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(67, 13);
             this.label15.TabIndex = 59;
@@ -834,7 +1019,7 @@ namespace DataDecoder
             // 
             // txtProfLoc
             // 
-            this.txtProfLoc.Location = new System.Drawing.Point(6, 19);
+            this.txtProfLoc.Location = new System.Drawing.Point(6, 26);
             this.txtProfLoc.Name = "txtProfLoc";
             this.txtProfLoc.Size = new System.Drawing.Size(391, 20);
             this.txtProfLoc.TabIndex = 58;
@@ -848,9 +1033,10 @@ namespace DataDecoder
             this.groupBox2.Controls.Add(this.chkLPenab);
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(9, 20);
+            this.groupBox2.ForeColor = System.Drawing.Color.DarkGreen;
+            this.groupBox2.Location = new System.Drawing.Point(7, 105);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(403, 81);
+            this.groupBox2.Size = new System.Drawing.Size(403, 78);
             this.groupBox2.TabIndex = 47;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LP-100";
@@ -858,9 +1044,9 @@ namespace DataDecoder
             // cboLPport
             // 
             this.cboLPport.FormattingEnabled = true;
-            this.cboLPport.Location = new System.Drawing.Point(114, 29);
+            this.cboLPport.Location = new System.Drawing.Point(124, 29);
             this.cboLPport.Name = "cboLPport";
-            this.cboLPport.Size = new System.Drawing.Size(85, 21);
+            this.cboLPport.Size = new System.Drawing.Size(63, 21);
             this.cboLPport.TabIndex = 17;
             this.toolTip1.SetToolTip(this.cboLPport, "Select Auxillary Radio Control Port (HRD, MixW, DXLab)");
             this.cboLPport.SelectedIndexChanged += new System.EventHandler(this.cboLPport_SelectedIndexChanged);
@@ -868,9 +1054,9 @@ namespace DataDecoder
             // txtLPint
             // 
             this.txtLPint.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLPint.Location = new System.Drawing.Point(244, 29);
+            this.txtLPint.Location = new System.Drawing.Point(264, 28);
             this.txtLPint.Name = "txtLPint";
-            this.txtLPint.Size = new System.Drawing.Size(55, 22);
+            this.txtLPint.Size = new System.Drawing.Size(44, 22);
             this.txtLPint.TabIndex = 15;
             this.toolTip1.SetToolTip(this.txtLPint, "Select CAT port polling interval (1000 = 1 secoond)");
             this.txtLPint.TextChanged += new System.EventHandler(this.txtLPint_TextChanged);
@@ -878,7 +1064,7 @@ namespace DataDecoder
             // chkLPenab
             // 
             this.chkLPenab.AutoSize = true;
-            this.chkLPenab.Location = new System.Drawing.Point(17, 34);
+            this.chkLPenab.Location = new System.Drawing.Point(17, 32);
             this.chkLPenab.Name = "chkLPenab";
             this.chkLPenab.Size = new System.Drawing.Size(65, 17);
             this.chkLPenab.TabIndex = 45;
@@ -889,7 +1075,7 @@ namespace DataDecoder
             // 
             // label13
             // 
-            this.label13.Location = new System.Drawing.Point(244, 54);
+            this.label13.Location = new System.Drawing.Point(317, 32);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(55, 15);
             this.label13.TabIndex = 16;
@@ -897,7 +1083,7 @@ namespace DataDecoder
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(113, 54);
+            this.label2.Location = new System.Drawing.Point(194, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 15);
             this.label2.TabIndex = 18;
@@ -996,12 +1182,13 @@ namespace DataDecoder
             this.toolStripMenuItem1,
             this.toolStripMenuItem2,
             this.toolStripMenuItem4,
-            this.lP100ToolStripMenuItem,
             this.flexProfilerToolStripMenuItem,
+            this.iCOMICPW1ToolStripMenuItem,
+            this.lP100ToolStripMenuItem,
             this.rCPPortsToolStripMenuItem,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 158);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 180);
             // 
             // toolStripMenuItem1
             // 
@@ -1027,19 +1214,26 @@ namespace DataDecoder
             this.toolStripMenuItem4.ToolTipText = "Info on choosing Slave Radio";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
-            // lP100ToolStripMenuItem
-            // 
-            this.lP100ToolStripMenuItem.Name = "lP100ToolStripMenuItem";
-            this.lP100ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.lP100ToolStripMenuItem.Text = "LP-100";
-            this.lP100ToolStripMenuItem.Click += new System.EventHandler(this.lP100ToolStripMenuItem_Click);
-            // 
             // flexProfilerToolStripMenuItem
             // 
             this.flexProfilerToolStripMenuItem.Name = "flexProfilerToolStripMenuItem";
             this.flexProfilerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.flexProfilerToolStripMenuItem.Text = "Flex Profiler";
             this.flexProfilerToolStripMenuItem.Click += new System.EventHandler(this.flexProfilerToolStripMenuItem_Click);
+            // 
+            // iCOMICPW1ToolStripMenuItem
+            // 
+            this.iCOMICPW1ToolStripMenuItem.Name = "iCOMICPW1ToolStripMenuItem";
+            this.iCOMICPW1ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.iCOMICPW1ToolStripMenuItem.Text = "ICOM IC-PW1";
+            this.iCOMICPW1ToolStripMenuItem.Click += new System.EventHandler(this.iCOMICPW1ToolStripMenuItem_Click);
+            // 
+            // lP100ToolStripMenuItem
+            // 
+            this.lP100ToolStripMenuItem.Name = "lP100ToolStripMenuItem";
+            this.lP100ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.lP100ToolStripMenuItem.Text = "LP-100";
+            this.lP100ToolStripMenuItem.Click += new System.EventHandler(this.lP100ToolStripMenuItem_Click);
             // 
             // rCPPortsToolStripMenuItem
             // 
@@ -1092,6 +1286,14 @@ namespace DataDecoder
             this.RCP4port.BaudRate = 38400;
             this.RCP4port.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RCP4port_DataReceived);
             // 
+            // PW1port
+            // 
+            this.PW1port.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.PW1port_DataReceived);
+            // 
+            // TestPort
+            // 
+            this.TestPort.PortName = "COM18";
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1131,6 +1333,8 @@ namespace DataDecoder
             this.tabRCP.ResumeLayout(false);
             this.tabRCP.PerformLayout();
             this.tabOther.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1234,6 +1438,23 @@ namespace DataDecoder
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ToolStripMenuItem rCPPortsToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ComboBox cboPW1;
+        private System.Windows.Forms.TextBox txtPW1ta;
+        private System.Windows.Forms.CheckBox chkPW1;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.CheckBox chkRCP4DisPol;
+        private System.Windows.Forms.CheckBox chkRCP3DisPol;
+        private System.Windows.Forms.CheckBox chkRCP2DisPol;
+        private System.IO.Ports.SerialPort PW1port;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox txtPW1ra;
+        private System.Windows.Forms.Button btnTest;
+        private System.IO.Ports.SerialPort TestPort;
+        private System.Windows.Forms.ToolStripMenuItem iCOMICPW1ToolStripMenuItem;
+        private System.Windows.Forms.CheckBox chkDisBcast;
 
     }
 }
