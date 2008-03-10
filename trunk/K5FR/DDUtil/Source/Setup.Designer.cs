@@ -888,6 +888,7 @@ namespace DataDecoder
             this.chkDisBcast.Text = "Disable Broadcast";
             this.toolTip1.SetToolTip(this.chkDisBcast, "Check to disable frequency broadcast to PW1");
             this.chkDisBcast.UseVisualStyleBackColor = true;
+            this.chkDisBcast.CheckedChanged += new System.EventHandler(this.chkDisBcast_CheckedChanged);
             // 
             // btnTest
             // 
@@ -967,9 +968,9 @@ namespace DataDecoder
             // 
             // label21
             // 
-            this.label21.Location = new System.Drawing.Point(264, 11);
+            this.label21.Location = new System.Drawing.Point(247, 11);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(84, 15);
+            this.label21.Size = new System.Drawing.Size(116, 15);
             this.label21.TabIndex = 16;
             this.label21.Text = "--- CI-V Addr ---";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

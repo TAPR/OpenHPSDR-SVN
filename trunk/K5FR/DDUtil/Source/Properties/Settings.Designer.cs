@@ -357,7 +357,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("33")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string cboPW1 {
             get {
                 return ((string)(this["cboPW1"]));
@@ -381,13 +381,24 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("33")]
         public string txtPW1ta {
             get {
                 return ((string)(this["txtPW1ta"]));
             }
             set {
                 this["txtPW1ta"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool chkPW1db {
+            get {
+                return ((bool)(this["chkPW1db"]));
+            }
+            set {
+                this["chkPW1db"] = value;
             }
         }
     }
