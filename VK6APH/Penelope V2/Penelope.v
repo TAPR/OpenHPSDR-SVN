@@ -67,6 +67,7 @@
 	 2 Oct  2007 - Changed CORDIC output to stage 14 to reduce noise floor.
 	29 Oct  2007 - Modified hardware so that 125MHz clock feeds DAC and LVDS Tx directly.
 	 9 Dec  2007 - Changed clock from 125MHz to 122.88MHz so this divides exactly to n*48kHz
+	11 Mar  2008 - Change clock selection to provide 12.288MHz to Atlas bus on A5 permanently 
 	
 	
 	
@@ -95,8 +96,7 @@ module Penelope(
 				inout   ext_10MHZ, 	// 10MHz reference to Atlas pin C16
 				input   _122MHZ,
 				input   _122MHZLVDS, // *** keep for now to allow testing from Mercury clock 
-				//output  LVDSCLK,  	// 122.88MHz to LVDS driver
-				inout A5, 			// PCLK_12MHZ (12.288MHz) to Atlas bus - tri state
+				output A5, 			// PCLK_12MHZ (12.288MHz) to Atlas bus
 				output A11,			// CDOUT_P (Mic) to Atlas bus 
 				input  C4, 			// LROUT (Rx audio) from Atlas bus
 				input  C8,			// CBLCK from Atlas bus
@@ -116,7 +116,6 @@ module Penelope(
 				output USEROUT4,
 				output USEROUT5,
 				output USEROUT6,
-				//output DACCLK,
 				output wire [13:0]DAC,
 				output nLVDSRXE,
 				output LVDSTXE,
@@ -153,7 +152,7 @@ assign CLK_MCLK = C17;
 assign LROUT =  C4;			// Rx audio (actually CDIN on TLV320) 
 assign CDIN =  C12;     	// I&Q from Atlas bus
 assign CMODE = 1'b0;		// Set to 0 for I2C mode
-assign nCS = 1'b1; 			// I2C address is 0x1B
+assign nCS = 1'b1; 			// I2C address of TLV320 is 0x1B
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -185,7 +184,7 @@ end
 //
 //////////////////////////////////////////////////////////////
 
-// Generate PCLK_12MHZ for Atlas bus
+// Generate PCLK_12MHZ for Atlas bus A5
 
 
 reg [2:0] CMCLK_counter;
@@ -200,9 +199,9 @@ begin
 	else CMCLK_counter <= CMCLK_counter + 3'b1;
 end
 
-// send CLRCLK to TLV320 and I2S decoder
+// send CLRCLK to TLV320, I2S and C&C decoders
 
-assign CLRCIN  = C9;		// C9 on Altas bus is CLRCLK 
+assign CLRCIN  = C9;		// C9 on Altas bus is CLRCLK (48KHz)
 assign CLRCOUT = C9;
 assign CLRCLK  = C9;
 
@@ -221,9 +220,9 @@ assign LVDSTXE = source_122MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if  Pe
 
 
 
-// send PCLK_12MHZ to Atlas A5 if source_122.88MHZ set else set A5 high Z
+// send PCLK_12MHZ to Atlas A5 
 
-assign A5 = source_122MHZ ? PCLK_12MHZ : 1'bZ; 
+assign A5 = PCLK_12MHZ; 
 
 // select 10MHz reference source. If ref_ext is set use Penelope's 10MHz ref and send to Atlas C16
 
@@ -470,9 +469,7 @@ phase_accumulator rx_phase_accumulator(.clk(clock),.reset(~clk_enable),.frequenc
 
 
 // The cordic takes I and Q in along with the top 15 bits of the phase dword.  The I and Q out are freq shifted
-//cordic_16 tx_cordic(.i_in({cic_out_q[15],cic_out_q[13:0],1'b0}),.q_in({cic_out_i[15],cic_out_i[13:0],1'b0}),.iout(i_out),.qout(q_out),.ain(phase[31:12]),.clk(clock));
 cordic_16 tx_cordic(.i_in(cic_out_q),.q_in(cic_out_i),.iout(i_out),.qout(q_out),.ain(phase[31:12]),.clk(clock));
-//cordic_16 tx_cordic(.i_in({cic_out_q[14:0],1'b0}),.q_in({cic_out_i[14:0],1'b0}),.iout(i_out),.qout(q_out),.ain(phase[31:12]),.clk(clock));
 
 
 // NOTE:  I and Q inputs reversed to give correct sideband out - FIX THIS 
@@ -492,12 +489,7 @@ cordic_16 tx_cordic(.i_in(cic_out_q),.q_in(cic_out_i),.iout(i_out),.qout(q_out),
 // Add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This is necessary since the 
 // interpolating CIC has a loss since it does not interpolate by 2^n. 
 
-// sync DAC data to positive edge of clock, DAC is being clocked directly from the 122.88MHz clock or via LVDS
-
-//always @ (posedge clock)
-//begin
 assign 	DAC[13:0] = {i_out[17], i_out[15:3]}; 	// use q_out if 90 degree phase shift required by EER Tx etc
-//end
 
 
 /////////////////////////////////////////////////////////////////
