@@ -401,5 +401,29 @@ namespace DataDecoder.Properties {
                 this["chkPW1db"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point MyLoc {
+            get {
+                return ((global::System.Drawing.Point)(this["MyLoc"]));
+            }
+            set {
+                this["MyLoc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("430, 424")]
+        public global::System.Drawing.Size MySize {
+            get {
+                return ((global::System.Drawing.Size)(this["MySize"]));
+            }
+            set {
+                this["MySize"] = value;
+            }
+        }
     }
 }

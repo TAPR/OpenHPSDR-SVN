@@ -1,7 +1,7 @@
 //=================================================================
 // Setup.cs
 //=================================================================
-// Copyright (C) 2007  Steve Nance
+// Copyright (C) 2007, 2008  Steve Nance - K5FR
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,11 +17,12 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //
-// You may contact the author via email at: k5fr@arrl.net
+// You may contact the author via email at: steve@k5fr.com
 //=================================================================
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -41,8 +42,10 @@ namespace DataDecoder
     {
         #region Enums
 
+        public enum SerialError
+        { Frame, Overrun, RXOver, RXParity, TXFull };
         public enum PortMode
-        { None, Kenwood, YaesuTypeI, YaesuTypeII, Icom, ICPW1};
+        { None, Kenwood, YaesuTypeI, YaesuTypeII, Icom, ICPW1 };
 
         public enum Parity 
         { Even, Mark, None, Odd, Space };
@@ -52,7 +55,6 @@ namespace DataDecoder
 
         public enum Ports
         { CAT, RCP1, RCP2, RCP3, RCP4 };
-
         #endregion Enums
 
         #region Variables
@@ -64,22 +66,19 @@ namespace DataDecoder
         Settings set = Settings.Default;
         PortMode portmode;
         Process process;
-//        Queue CatQue = new Queue();
         bool logFlag = false;
         int keyValue = 0;
         int LPTnum = 0;         // decimal number of selected LPT port
         double pollInt = 0;     // CAT port interval timer uses txtInv text box
         string fileName = "BandData.xml";
         string LastFreq = "";
-//        string mode = "";
         string[] ports;
         string OutBuffer = "";
-        string ver = "1.4.2 Beta";
+        string ver = "1.4.4 Beta";
         string vfo = "";
         System.Timers.Timer pollTimer;
         System.Timers.Timer logTimer;
         System.Timers.Timer lpTimer;
-
         #endregion Variables
 
         #region Properties
@@ -165,13 +164,13 @@ namespace DataDecoder
             get { return default_lpt; }
             set { default_lpt = value; }
         }
-
         #endregion Properties
     
         #region Initialization
+
         public Setup()
         {
-            if (IsAppAlreadyRunning())
+            if (IsAppAlreadyRunning())  // if the app is already don't start another one.
             {
                 Environment.Exit(0);
                 Console.Beep();
@@ -208,10 +207,10 @@ namespace DataDecoder
             lpTimer.Interval = 200;
             lpTimer.Enabled = false;
 
-     //setup pw1 test timer
+            /* setup pw1 test timer; to be removed after testing complete */
             pw1Timer = new System.Timers.Timer();
             pw1Timer.Elapsed += new System.Timers.ElapsedEventHandler(pw1Timer_Elapsed);
-            pw1Timer.Interval = 1000;  // 1000 = 1 second
+            pw1Timer.Interval = 2500;  // 1000 = 1 second
             pw1Timer.Enabled = false;
 
             CreateSerialPort();
@@ -414,12 +413,9 @@ namespace DataDecoder
             GetBandData(fileName);
             Dev0.Text = set.Device0;
             cboDevice.Items.Add(set.Device0);
-//            cboDevice.Items.Add(set.Device1);
-//            cboDevice.Items.Add(set.Device2);
             cboDevice.Text = set.Device;
             lpTimer.Enabled = true;
         }
-
         #endregion Initialization
 
         #region Delegates
@@ -464,32 +460,30 @@ namespace DataDecoder
             else
                 this.txtPW1ra.Text = text;
         }
-
         #endregion Delegates
 
         #region Methods
 
-        public string sMsg; // Message being built
-        public int ctr;     // Message length counter
+        //public string sMsg; // Message being built
+        //public int ctr;     // Message length counter
 
-        // Build string of commands from single commands
-        public bool Build(string msg)
-        {
-            if (msg.EndsWith(";"))
-            {
-                sMsg += ";";
-                ctr = 0;
-                return true;
-            }
-            else
-            {
-                sMsg += msg;
-                ctr += 1;
-                return false;
-            }
-        }
-
-        // output data to parallel port
+        //// Build string of commands from single commands
+        //public bool Build(string msg)
+        //{
+        //    if (msg.EndsWith(";"))
+        //    {
+        //        sMsg += ";";
+        //        ctr = 0;
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        sMsg += msg;
+        //        ctr += 1;
+        //        return false;
+        //    }
+        //}
+        //// output data to parallel port
         private void OutParallelPort(int port, int num)
         {
             if (chkDevice.Checked == true)
@@ -551,7 +545,6 @@ namespace DataDecoder
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-        
         // Lookup freq data in hash table & output to LPT port
         private void LookUp(string freq)
         {
@@ -585,7 +578,7 @@ namespace DataDecoder
             return IsRunning;
         }
         // See if Flex Profiler is running
-       public static bool IsFPRunning()
+        public static bool IsFPRunning()
         {
             bool IsRunning = false;
             string proc = "FlexProfiler";
@@ -600,10 +593,10 @@ namespace DataDecoder
             }             
             return IsRunning;
         }
-
         #endregion Methods
 
         #region Data Grid Events
+
         // A cell value changed in the data grid 
         private void dg1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -615,7 +608,6 @@ namespace DataDecoder
                 {
                     flist.Remove(dgData);
                     flist.Add(dgData, dg1.CurrentRow.Cells["data"].Value);
-
                 }
              }
          }
@@ -635,8 +627,6 @@ namespace DataDecoder
         {
             cboDevice.Items.Clear();
             cboDevice.Items.Add(Dev0.Text);
-//            cboDevice.Items.Add("Device 1");
-//            cboDevice.Items.Add("Device 2");
         }
         // Select Device 0 Decoder Data File
         private void btnFile0_Click(object sender, EventArgs e)
@@ -689,9 +679,18 @@ namespace DataDecoder
         {
             Process.Start("HelpDecoder.htm");
         }
+        // Form Load
+        private void Setup_Load(object sender, EventArgs e)
+        {
+            this.Size = set.MySize;
+            this.Location = set.MyLoc;
+        }
         // program closing
         private void Setup_FormClosing(object sender, FormClosedEventArgs e)
         {
+            set.MyLoc = this.Location;
+            set.MySize = this.Size;
+            set.Save();
             pollTimer.Enabled = false;
             logTimer.Enabled = false;
             PortAccess.Output(LPTnum, 0);
@@ -700,8 +699,7 @@ namespace DataDecoder
             sp.Close();
             AccPort.Close();
         }
-
-        // The LPT port changed
+        // The LPT port has changed
         private void grpLPT_CheckedChanged(object sender, EventArgs e)
         {
             if (sender == rbNone)
@@ -792,7 +790,7 @@ namespace DataDecoder
         // Context Menu Item "Restore Form Size"
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.Size = new Size(442, 400);
+            this.Size = new Size(442, 423);
         }
         // Context Menu Item "Shrink Form Size"
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
@@ -862,7 +860,6 @@ namespace DataDecoder
                 "- Check the Enabled check box to turn on a port.\n",
                 "RCP Port Setup", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
-
         // CI-V Hex Address has changed
         private void txtRadNum_TextChanged(object sender, EventArgs e)
         {
@@ -894,7 +891,6 @@ namespace DataDecoder
             set.LogPort = cboLogPort.SelectedItem.ToString();
             set.Save();
         }
-
         // new acc port was selected
         private void cboSerAcc_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -921,7 +917,6 @@ namespace DataDecoder
             set.AccPort = cboSerAcc.SelectedItem.ToString();
             set.Save();
         }
-
         // new radio port was selected
         private void cboCAT_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -969,7 +964,7 @@ namespace DataDecoder
             switch (cboRadio.SelectedIndex)
             {
                 case 0: // None
-                    //                    cboRadData.SelectedIndex = 0;
+//                    cboRadData.SelectedIndex = 0;
                     portmode = PortMode.None;
                     txtRadNum.Enabled = false;
                     break;
@@ -1055,10 +1050,6 @@ namespace DataDecoder
             }
             set.RadData = (int)cboRadData.SelectedIndex;
             set.Save();
-#if(DEBUG)
-            Console.WriteLine(AccPort.BaudRate + " " + AccPort.DataBits + " " +
-                              AccPort.Parity + " " + AccPort.StopBits);
-#endif
         }
         // LP port number has changed
         private void cboLPport_SelectedIndexChanged(object sender, EventArgs e)
@@ -1112,7 +1103,6 @@ namespace DataDecoder
                     MessageBox.Show("No port has been selected for the LP-100.\n\n" +
                     "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
                     chkLPenab.Checked = false;
                 }
             }
@@ -1143,7 +1133,6 @@ namespace DataDecoder
                 MessageBox.Show("No location has been selected for the FlexProfiler.exe file.\n\n" +
                     "Please select a file location on the 'Other' tab and try again.", "File Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
         }
         // Re-Start button was pressed
         private void btnReStart_Click(object sender, EventArgs e)
@@ -1167,7 +1156,6 @@ namespace DataDecoder
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-
         // The Flex Profiler File Location Select button was pressed
         private void btnPFfile_Click(object sender, EventArgs e)
         {
@@ -1408,7 +1396,6 @@ namespace DataDecoder
             set.txtPW1ta = txtPW1ta.Text;
             set.Save();
         }
-
         private void chkDisBcast_CheckedChanged(object sender, EventArgs e)
         {
             if (chkDisBcast.Checked) 
@@ -1418,7 +1405,6 @@ namespace DataDecoder
                 set.chkPW1db = false;
             set.Save();            
         }
-
         // Test button was pressed
         // simulate poll message from IC-PW1 to DDUtil for freq read
         System.Timers.Timer pw1Timer;
@@ -1432,7 +1418,6 @@ namespace DataDecoder
         }
         void pw1Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-
             if (!TestPort.IsOpen)
             {
                 TestPort.PortName = "COM18";
@@ -1453,7 +1438,7 @@ namespace DataDecoder
             //            Console.WriteLine();
             // FE FE 33 54 03 FD
             TestPort.Write(bytes, 0, 8);
-
+            Thread.Sleep(50);
             mystring = EOM + "04" + "54" + "33" + preamble + preamble + "80" + "EF";
             j = 14;
             for (int i = 0; i < 8; i++)
@@ -1467,9 +1452,27 @@ namespace DataDecoder
             // FE FE 33 54 03 FD
             TestPort.Write(bytes, 0, 8);
             if (pw1Timer.Enabled != true) pw1Timer.Enabled = true;
-
         }
-
+        private void dDutilHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("HelpDecoder.htm");
+        }
+        private void onLineHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://k5fr.com/ddutilwiki/index.php?title=Setup");
+        }
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://k5fr.com/ddutilwiki/index.php?title=Latest_Revision");
+        }
+        private void webSiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://k5fr.com/ddutilwiki/index.php");
+        }
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
         #endregion Form Events
 
         #region Serial Port Events
@@ -1488,56 +1491,27 @@ namespace DataDecoder
             {   //loop thru the buffer and find matches
                 OutBuffer = m.Value;
                 CommBuffer = CommBuffer.Replace(m.Value, "");			//remove the match from the buffer		
-                //if (logFlag == true) // RCP1 is active
-                //{
-                    string title = "DDUtil " + ver;
-                    string id = "";
-                    string logFreq = "";
-                    string regex = "(?<cat>\\w{2})(?<mz>\\d{5})(?<kz>\\d{3})(?<hz>\\d{2})";
-                    string mask = "${mz},${kz}.${hz}";
-                    string freq = "";
-                    string freqLook = "";
-
-                    // send radio's CAT reply back to logger
-                    LogPort.Write(OutBuffer);
-
-                    // send CAT reply back to RCP ports
-                    if (chkRCP2.Checked) RCP2port.Write(OutBuffer);
-                    if (chkRCP3.Checked) RCP3port.Write(OutBuffer);
-                    if (chkRCP4.Checked) RCP4port.Write(OutBuffer);
-
-                    rawFreq = OutBuffer;
-                    OutBuffer = "";
-                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "IF00")
-                    {
-                        sdrMode = rawFreq.Substring(rawFreq.Length - 9, 1);
-                        if (rawFreq.Substring(rawFreq.Length - 6, 1) == "0")
-                        {   // if xmit vfo is "A" then send passive listener commands now
-                            vfo = "VFO A";
-                            logFreq = rawFreq.Substring(2, 11);
-                            PortSend(logFreq);
-
-                            freq = Regex.Replace(rawFreq, regex, mask);
-                            freq = freq.TrimStart('0');
-                            freqLook = rawFreq.Substring(2, 8);
-                            freqLook = freqLook.TrimStart('0');
-                            freqLook = freqLook.Substring(0, freqLook.Length - 2);
-//142                            id = title + "  - [RC] [" + freq.Substring(0, 9) + "] (" + vfo + ")";
-                            if (logFlag == true) // RCP1 is active
-                                id = title + "  - [RC] [" + freq.Substring(0, 9) + "] (" + vfo + ")";
-                            else
-                                id = title + "  - [" + freq.Substring(0, 9) + "] (" + vfo + ")";
-                            
-                            LookUp(freqLook);   //decode freq data and output to port
-                            this.SetTitle(id + "   " + keyValue);
-                        }
-                        else // if not, set vfo to "B" and wait for next FB command to arrive
-                        {
-                            vfo = "VFO B";
-                        }
-                    }
-                    else if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "FB00" && vfo == "VFO B")
-                    {   // see if this is the right command for the B vfo
+                string title = "DDUtil " + ver;
+                string id = "";
+                string logFreq = "";
+                string regex = "(?<cat>\\w{2})(?<mz>\\d{5})(?<kz>\\d{3})(?<hz>\\d{2})";
+                string mask = "${mz},${kz}.${hz}";
+                string freq = "";
+                string freqLook = "";
+                // send radio's CAT reply back to logger
+                if(logFlag ==true) LogPort.Write(OutBuffer);
+                // send CAT reply back to RCP ports
+                if (chkRCP2.Checked) RCP2port.Write(OutBuffer);
+                if (chkRCP3.Checked) RCP3port.Write(OutBuffer);
+                if (chkRCP4.Checked) RCP4port.Write(OutBuffer);
+                rawFreq = OutBuffer;
+                OutBuffer = "";
+                if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "IF00")
+                {
+                    sdrMode = rawFreq.Substring(rawFreq.Length - 9, 1);
+                    if (rawFreq.Substring(rawFreq.Length - 6, 1) == "0")
+                    {   // if xmit vfo is "A" then send passive listener commands now
+                        vfo = "VFO A";
                         logFreq = rawFreq.Substring(2, 11);
                         PortSend(logFreq);
                         freq = Regex.Replace(rawFreq, regex, mask);
@@ -1545,18 +1519,37 @@ namespace DataDecoder
                         freqLook = rawFreq.Substring(2, 8);
                         freqLook = freqLook.TrimStart('0');
                         freqLook = freqLook.Substring(0, freqLook.Length - 2);
-//142                        id = title + "  - [RC] [" + freq.Substring(0, 9) + "] (" + vfo + ")";
                         if (logFlag == true) // RCP1 is active
                             id = title + "  - [RC] [" + freq.Substring(0, 9) + "] (" + vfo + ")";
                         else
                             id = title + "  - [" + freq.Substring(0, 9) + "] (" + vfo + ")";
-                        LookUp(freqLook);   //decode freq data and output to LPT port
+                            
+                        LookUp(freqLook);   //decode freq data and output to port
                         this.SetTitle(id + "   " + keyValue);
                     }
-//142                }
+                    else // if not, set vfo to "B" and wait for next FB command to arrive
+                    {
+                        vfo = "VFO B";
+                    }
+                }
+                else if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "FB00" && vfo == "VFO B")
+                {   // see if this is the right command for the B vfo
+                    logFreq = rawFreq.Substring(2, 11);
+                    PortSend(logFreq);
+                    freq = Regex.Replace(rawFreq, regex, mask);
+                    freq = freq.TrimStart('0');
+                    freqLook = rawFreq.Substring(2, 8);
+                    freqLook = freqLook.TrimStart('0');
+                    freqLook = freqLook.Substring(0, freqLook.Length - 2);
+                    if (logFlag == true) // RCP1 is active
+                        id = title + "  - [RC] [" + freq.Substring(0, 9) + "] (" + vfo + ")";
+                    else
+                        id = title + "  - [" + freq.Substring(0, 9) + "] (" + vfo + ")";
+                    LookUp(freqLook);   //decode freq data and output to LPT port
+                    this.SetTitle(id + "   " + keyValue);
+                }
             }
         }
-
         /// <summary>
         /// Process data from the RCP1 port
         /// </summary>      
@@ -1566,7 +1559,6 @@ namespace DataDecoder
             SerialPort logPortMsgs = (SerialPort)sender;    // send incoming message to the radio
             string logMsg = logPortMsgs.ReadExisting();
             logFlag = true;
-//142
             pollTimer.Enabled = false;
             // send the data on to the radio 
             sp.Write(logMsg);               //pass log port msg to radio port
@@ -1600,7 +1592,6 @@ namespace DataDecoder
                     string RCP2portMsg = RCP2portMsgs.ReadTo(";");
                     if (chkRCP2DisPol.Checked && RCP2portMsg.Length <= 2)
                         break;
-//                    Console.WriteLine("RCP2 " + RCP2portMsg);
                     sp.Write(RCP2portMsg + ";");
                 }
             }
@@ -1617,7 +1608,6 @@ namespace DataDecoder
                         string RCP3portMsg = RCP3portMsgs.ReadTo(";");
                         if (chkRCP3DisPol.Checked && RCP3portMsg.Length <= 2)
                             break;
-//                        Console.WriteLine("RCP3 " + RCP3portMsg);
                         sp.Write(RCP3portMsg + ";");
                     }
             }
@@ -1632,17 +1622,17 @@ namespace DataDecoder
                 string RCP4portMsg = RCP4portMsgs.ReadTo(";");
                 if (chkRCP4DisPol.Checked && RCP4portMsg.Length <= 2)
                     break;
-//                Console.WriteLine("RCP4 " + RCP4portMsg);
                 sp.Write(RCP4portMsg + ";");
             }
         }
-        // PW1 port has received data (Query from IC-PW1) i.e. FE FE 54 33 03 FD
+        // PW1 port has received data (Query from IC-PW1) i.e. FE FE 33 54 03 FD
         // Reply messages are hard coded as it can only be a request for freq. or mode
         private void PW1port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if (chkPW1.Checked)                 // If function is enabled proceed
             {
                 int len = PW1port.BytesToRead;  // How many bytes in port buffer
+                if (len < 6) return;            // ? is a valid command
                 byte[] inBuf = new byte[len];   // input message buffer
                 byte[] outBuf = new byte[11];   // output message buffer
                 string x = txtPW1ta.Text;       // get DDUtil address
@@ -1655,24 +1645,24 @@ namespace DataDecoder
                 PW1port.Read(inBuf, 0, len);
                 for (int i = 0; i <= len; i++)
                 {   // look for FE FE 33 sequence indicating message start.
-                    if (inBuf[i].ToString("x2").ToUpper() == "FE")      // ? 1st preamble
+                    if (inBuf[i].ToString("x2").ToUpper() == "FE")              // ? 1st preamble
                     {
-                        i++; // increment inBuf position counter
-                        if (inBuf[i].ToString("x2").ToUpper() == "FE")  // ? 2nd preamble
+                        i++; if (i == 0) return;
+                        if (inBuf[i].ToString("x2").ToUpper() == "FE")          // ? 2nd preamble
                         {
                             i++; // increment inBuf position counter
-                            if (inBuf[i].ToString("x2").ToUpper() == x) // ? DDUtil addr (33h)
+                            if (inBuf[i].ToString("x2").ToUpper() == x)         // ? DDUtil addr (33h)
                             {
                                 i++; // increment inBuf position counter
-                                ra = inBuf[i].ToString("x2").ToUpper();  // save caller addr
+                                ra = inBuf[i].ToString("x2").ToUpper();         // save caller addr
                                 i++;
-                                cn = inBuf[i].ToString("x2").ToUpper();  // save command
+                                cn = inBuf[i].ToString("x2").ToUpper();         // save command
                                 i++; // increment inBuf position counter
                                 if (inBuf[i].ToString("x2").ToUpper() == "FD")  // ? message end
                                 {
                                     i++; // increment inBuf position counter
-                                    if (cn == "03")     // Read Xcvr Frequency
-                                    {
+                                    if (cn == "03")     // is cmd to read Xcvr Frequency
+                                    {   // If yes, assemble reply and send to port
                                         raSetText(ra);
                                         string preamble = "FE";
                                         string EOM = "FD";
@@ -1689,24 +1679,24 @@ namespace DataDecoder
                                         // 14.234.56 Mhz = FE FE ra ta cn 60 45 23 14 00 FD
                                         PW1port.Write(outBuf, 0, 11);
                                     }
-                                    else if (cn == "04")    // Read Xcvr Mode
-                                    {
+                                    else if (cn == "04")    // is cmd to read Xcvr Mode
+                                    {   // If yes, assemble reply and send to port
                                         raSetText(ra);
                                         string preamble = "FE";
                                         string EOM = "FD";
                                         string mystring = "";
                                         string mode = "";
                                         switch (sdrMode)
-                                        {   // Lookup PW1 equivalent mode 
-                                            case "1": mode = "00"; break;
-                                            case "2": mode = "01"; break;
-                                            case "3": mode = "03"; break;
-                                            case "4": mode = "06"; break;
-                                            case "5": mode = "02"; break;
-                                            case "6": mode = "04"; break;
-                                            case "7": mode = "03"; break;
-                                            case "9": mode = "04"; break;
-                                            default:  mode = "01"; break;
+                                        {   // Lookup PW1 equivalent mode for SDR mode
+                                            case "1": mode = "00"; break;   // LSB
+                                            case "2": mode = "01"; break;   // USB
+                                            case "3": mode = "03"; break;   // CWU
+                                            case "4": mode = "06"; break;   // FMN
+                                            case "5": mode = "02"; break;   // AM
+                                            case "6": mode = "04"; break;   // RTTY (DIGL)
+                                            case "7": mode = "03"; break;   // CWL
+                                            case "9": mode = "04"; break;   // RTTY-R (DIGU)
+                                            default:  mode = "01"; break;   // USB
                                         }
                                         mystring = EOM + mode + "00" + cn + ta + ra + preamble + preamble;
                                         int j = 14;
@@ -1716,20 +1706,54 @@ namespace DataDecoder
                                             outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
                                             j -= 2;
                                         }
-                                        // FE FE ra ta cn 00 md FD
+                                        // Send mode FE FE ra ta cn 00 md FD
                                         PW1port.Write(outBuf, 0, 8);
                                     }
-                                    else break;
                                 }
-                                else break;
                             }
-                            else break;
                         }
-                        else break;
                     }
                 }
             }
         }
+        // PW1 serial port has incurred an error; ignore it!
+        private void PW1port_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        {
+            //string msg = "";
+            //switch ((int)e.EventType)
+            //{
+            //    case (int)SerialError.Frame:
+            //        msg = "The hardware detected a framing error.\n";
+            //        break;
+            //    case (int)SerialError.Overrun:
+            //        msg = "A character-buffer overrun has occurred.\n" +
+            //              "The next character is lost.\n";
+            //        break;
+            //    case (int)SerialError.RXOver:
+            //        msg = "An input buffer overflow has occurred.\n" +
+            //              "There is either no room in the input buffer,\n" +
+            //              "or a character was received after the end-of-file (EOF) character. \n";
+            //        break;
+            //    case (int)SerialError.RXParity:
+            //        msg = "The hardware detected a parity error.\n";
+            //        break;
+            //    case (int)SerialError.TXFull:
+            //        msg = "The application tried to transmit a character,\n" +
+            //              "but the output buffer was full.\n";
+            //        break;
+            //    default:
+            //        msg = "This is the default message and the error is unknown.\n";
+            //        break;
+            //}
+            //MessageBox.Show(e.EventType.ToString() + " is the error message number.\n\n" + msg,
+            //          "SerialPort Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+        // PL serial port has incurred an error; ignore it!
+        private void AccPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        { }
+        // LP-100 serial port has incurred an error; ignore it!
+        private void LPport_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        { }
         #endregion Serial Port Events
 
         #region Serial Port Methods
@@ -1766,7 +1790,6 @@ namespace DataDecoder
                 {   // ignore misc errors and if ta is being changed by user
                 }
             }
-
             if (AccPort.IsOpen)
             {
                 byte[] bytes = new byte[11];
@@ -1779,19 +1802,11 @@ namespace DataDecoder
                     case PortMode.None:
                         AccPort.WriteLine("IF" + freq + ";");
                         // 14.234.56 Mhz = IF00014234560;
-#if(DEBUG) 
-                        Console.WriteLine("IF" + freq + ";");
-#endif
                         break;
-
                     case PortMode.Kenwood:
                         AccPort.WriteLine("FA" + freq.Substring(3, 8) + ";");
                         // 14.234.56 Mhz = FA14234560;
-#if(DEBUG)
-                        Console.WriteLine("FA" + freq.Substring(3, 8) + ";");
-#endif
                         break;
-
                     case PortMode.YaesuTypeI:
                         mystring = "0A0" + freq.Substring(3, 7);
                         j = 8;
@@ -1799,18 +1814,11 @@ namespace DataDecoder
                         {
                             string temp = mystring.Substring(j, 2);
                             bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-#if(DEBUG)
-                            Console.Write("{0:x2} ", bytes[i]);
-#endif                            
                             j -= 2;
                         }
-#if(DEBUG)
-                        Console.WriteLine();
-#endif
                         AccPort.Write(bytes, 0, 5);
                         // 14.234.56 Mhz = 56 34 42 01 0A
                         break;
-
                     case PortMode.YaesuTypeII:
                         mystring = "0" + freq.Substring(3, 7) + "01";
                         j = 0;
@@ -1818,20 +1826,11 @@ namespace DataDecoder
                         {
                             string temp = mystring.Substring(j, 2);
                             bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-#if(DEBUG)
-                           Console.Write("{0:x2} ", bytes[i]);
-#endif
                             j += 2;
                         }
-#if(DEBUG)
-                        Console.WriteLine();
-#endif
                         AccPort.Write(bytes, 0, 5);
                         // 14.234.56 Mhz = 01 42 34 56 01
-//                        byte[] mode = new byte[5] { 0x02, 0x00, 0x00, 0x00, 0x07 };
-//                        AccPort.Write(mode, 0, 5);
                         break;
-
                     case PortMode.Icom:
                         string preamble = "FE";
                         string radNum = txtRadNum.Text;
@@ -1843,18 +1842,11 @@ namespace DataDecoder
                         {
                             string temp = mystring.Substring(j, 2);
                             bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-#if(DEBUG)
-                            Console.Write("{0:x2} ", bytes[i]);
-#endif
                             j -= 2;
                         }
-#if(DEBUG)
-                        Console.WriteLine();
-#endif
                         // 14.234.56 Mhz = FE FE 1E E0 05 60 45 23 14 00 FD
                         AccPort.Write(bytes, 0, 11);
                         break;
-
                     case PortMode.ICPW1:
                         preamble = "FE";
                         radNum = txtRadNum.Text;
@@ -1866,26 +1858,14 @@ namespace DataDecoder
                         {
                             string temp = mystring.Substring(j, 2);
                             bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-#if(DEBUG)
-                            Console.Write("{0:x2} ", bytes[i]);
-#endif
                             j -= 2;
                         }
-#if(DEBUG)
-                        Console.WriteLine();
-#endif
                         // 14.234.56 Mhz = FE FE 00 nn 00 60 45 23 14 00 FD
                         AccPort.Write(bytes, 0, 11);
                         break;
                 }
             }
-            //else
-            //{
-            //    MessageBox.Show("The Accessory (PL) port is closed!", "AccPort Error",
-            //                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
         }
-
         /// <summary>
         /// Creates a new serial port and rx data available event
         /// </summary>
@@ -1894,7 +1874,6 @@ namespace DataDecoder
             sp = new CATSerialPorts.CATSerialPort();
             sp.CATRxEvent += new CATSerialPorts.CATSerialPort.CATSerialRXEventHandler(sp_CATRxEvent);
         }
-
         /// <summary>
         /// Loads the list of available serial ports in the serial port combobox.
         /// </summary>
@@ -1928,7 +1907,6 @@ namespace DataDecoder
             cboPW1.Items.Add("");
             cboPW1.Sorted = true;
         }
-
         /// <summary>
         /// Opens the default CAT port.
         /// </summary>
@@ -1946,7 +1924,6 @@ namespace DataDecoder
                 cboCAT.SelectedIndex = 0;
             }
         }
-
         /// <summary>
         /// Opens the default Accessory (passive listener) port.
         /// </summary>
@@ -1964,7 +1941,6 @@ namespace DataDecoder
                 cboSerAcc.SelectedIndex = 0;
             }
         }
-
         /// <summary>
         /// Opens the default LP100 port.
         /// </summary>
@@ -2000,7 +1976,6 @@ namespace DataDecoder
                 cboLogPort.SelectedIndex = 0;
             }
         }
-
         /// <summary>
         /// Opens the default RCP3 (Radio control) port.
         /// </summary>
@@ -2073,7 +2048,6 @@ namespace DataDecoder
                 cboLogPort.SelectedIndex = 0;
             }
         }
-
         /// <summary>
         /// Opens the serial port name stored in the DefaultComRadio property.
         /// </summary>
@@ -2091,7 +2065,6 @@ namespace DataDecoder
                 MessageBox.Show(spex.Message);
             }
         }
-
         /// <summary>
         /// Writes the current CAT command to the radio serial port.
         /// The keep-alive timer is disabled and restarted for each
@@ -2114,7 +2087,6 @@ namespace DataDecoder
                 MessageBox.Show(ex.Message);
             }
         }
-
         #endregion Serial Port Methods
 
         #region Timer Events
@@ -2140,7 +2112,6 @@ namespace DataDecoder
                 lpTimer.Enabled = false;
             }
         }
-
         // This event only fires if the Radio Control Program (RCP) is not active
         void pollTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
@@ -2150,75 +2121,7 @@ namespace DataDecoder
                 sp.Write("IF;");
                 sp.Write("FB;");
             }
-//142 to end this sr
-            //string ans = "";
-            //string title = "DDUtil " + ver;
-            //string id = "";
-            //string rawFreq;
-            //string regex = "(?<cat>\\w{4})(?<mz>\\d{5})(?<kz>\\d{3})(?<hz>\\d{2})";
-            //string mask = "${mz},${kz}.${hz}";
-            //string freq = "";
-            //string vfo = "";
-            //string freqLook = "";
-
-            //if (logFlag != true)    // RCP not active
-            //{
-            //    WriteToPort("ZZSP;", 100);
-
-            //    sdrMode = "3";
-            //    ans = OutBuffer;
-            //    OutBuffer = "";
-            //    if (ans != "" && ans != null)
-            //    {
-            //        switch (ans)
-            //        {
-            //            //case "MD1;": sdrMode = ans.Substring(2, 1); break;
-            //            //case "MD2;": sdrMode = ans.Substring(2, 1); break;
-            //            //case "MD3;": sdrMode = ans.Substring(2, 1); break;
-            //            //case "MD4;": sdrMode = ans.Substring(2, 1); break;
-            //            //case "MD5;": sdrMode = ans.Substring(2, 1); break;
-            //            //case "MD6;": sdrMode = ans.Substring(2, 1); break;
-            //            //case "MD7;": sdrMode = ans.Substring(2, 1); break;
-            //            //case "MD9;": sdrMode = ans.Substring(2, 1); break;
-            //            case "ZZSP0;":
-            //                WriteToPort("ZZFA;", 100);
-            //                vfo = "VFO A";
-            //                break;
-            //            case "ZZSP1;":
-            //                WriteToPort("ZZFB;", 100);
-            //                vfo = "VFO B";
-            //                break;
-            //            default:
-            //                break;
-            //        }
-            //        rawFreq = OutBuffer;
-            //        if (rawFreq.Length == 16)
-            //        {
-            //            try
-            //            {
-            //                PortSend(rawFreq.Substring(4, 11));//send rs-232 data
-            //                freq = Regex.Replace(rawFreq, regex, mask);
-            //                freq = freq.TrimStart('0');
-            //                freqLook = rawFreq.Substring(4, 8);
-            //                freqLook = freqLook.TrimStart('0');
-            //                freqLook = freqLook.Substring(0, freqLook.Length - 2);
-            //                OutBuffer = "";
-            //                id = title + "  - [" + freq.Substring(0, 9) + "] (" + vfo + ")";
-            //                LookUp(freqLook);   //decode freq data and output to LPT port
-            //            }
-            //            catch
-            //            {// catch for unexpected CAT commands shorter than what we want
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        id = title + " - [not connected]";
-            //    }
-            //    this.SetTitle(id + "   " + keyValue);
-            //}
         }
         #endregion Timer Events 
-
     }
 }

@@ -98,5 +98,11 @@
     <Setting Name="chkPW1db" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="MyLoc" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="MySize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">430, 424</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
