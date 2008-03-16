@@ -213,7 +213,8 @@ assign CMCLK = CLK_MCLK;
 // Otherwise get external clock from LVDS
 
 wire clock;
-
+// ***** use next line for production boards *******
+// assign clock = ~_122MHZ; 
 assign clock = source_122MHZ ? ~_122MHZ : ~_122MHZLVDS; // clock is either on board or external via LVDS
 assign nLVDSRXE = source_122MHZ ? 1'b1 : 1'b0; // enable LVDS receiver if clock is external
 assign LVDSTXE = source_122MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if  Penny is the source 
@@ -683,6 +684,7 @@ assign FPGA_PLL = ref_80khz ^ osc_80khz;
 
 
 // LEDs for testing				PCB LED Marking
+// NOTE: LED1 is power on 
 
 assign LED2 = ~ref_ext;
 assign LED3 = ~source_122MHZ; 
