@@ -194,12 +194,12 @@ RESERVED_INPUT               : 134       :        :                   :         
 RESERVED_INPUT               : 135       :        :                   :         : 3         :                
 VCCIO3                       : 136       : power  :                   : 3.3V    : 3         :                
 CDOUT_P                      : 137       : input  : 3.3-V LVTTL       :         : 3         : Y              
-RESERVED_INPUT               : 138       :        :                   :         : 3         :                
+MDOUT                        : 138       : input  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 139       :        :                   :         : 3         :                
 GND                          : 140       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 141       :        :                   :         : 3         :                
 RESERVED_INPUT               : 142       :        :                   :         : 3         :                
-RESERVED_INPUT               : 143       :        :                   :         : 3         :                
+MCLK_12MHZ                   : 143       : input  : 3.3-V LVTTL       :         : 3         : Y              
 PCLK_12MHZ                   : 144       : input  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 145       :        :                   :         : 3         :                
 RESERVED_INPUT               : 146       :        :                   :         : 3         :                

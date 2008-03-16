@@ -1,6 +1,6 @@
-// V1.5 21st November 2007
+// V1.7 16 March 2008 
 //
-// Copyright 2006,2007  Bill Tracey KD5TFD and Phil Harman VK6APH
+// Copyright 2006,2007, 2008 Bill Tracey KD5TFD and Phil Harman VK6APH
 //
 //  HPSDR - High Performance Software Defined Radio
 //
@@ -113,7 +113,7 @@
 //	
 //	The data fomat is as follows:
 //	
-//	<1 bit PTT><4 bits address><32 bits frequency><4 bits band><7 bits OC><1 bit mode> 
+//	<1 bit PTT><4 bits address><32 bits frequency><4 bits clock_s><7 bits OC><1 bit mode> 
 //	
 //	for a total of 49 bits. Frequency is in Hz and OC is the open collector data on Penelope
 //
@@ -163,8 +163,12 @@
 //				Added test for CLK_12MHZ or PCLK_12MHZ present and default to FX2/4 clock if not - 28 Sept 2007			
 //				If configuration error flash DEBUG_LED0 and inhibit Tx - 28 Sept 2007
 //				Force C5 as PCLK_12MHz for testing, see line 555 - 28 Oct 2007
+//				CLK_12MHz or PCLK_12MHz slected via conf variable - 29 Oct 2007
 //				Add LPF decoder and SPI interface for Alex control - 3 Nov 2007
 //				Added HPF decoder and SPI interface for Alex control - 21 Nov 2007
+//				Added 12.288MHz clock from Mercury (MCLK_12MHZ)  on Atlas A6 - 12 March 2008
+// 				Added IQ select from either Janus (Atlas C10) or Mercury (Atlas A10) - 12 March 2008
+//				Added decode logic for clock source from either Janus, Penelope or Mercury - 16 March 2008
 //
 ////////////////////////////////////////////////////////////
 
@@ -197,12 +201,14 @@
 //   CLK_48MHZ           	- Atlas C3  - pin 150 - 48MHz clock to PWM DACs
 //   LROUT		           	- Atlas C4  - pin 151 - L/R audio in I2S format
 //   CLK_12MHZ   	 		- Atlas C5  - pin 152 - 12.288MHz clock from Janus
-//	 PCLK_12MHZ				- Atlas A5  - pin 144 - 12.5MHz clock from Mercury or Penelope 
+//	 PCLK_12MHZ				- Atlas A5  - pin 144 - 12.288MHz clock from Penelope
+//   MCLK_12MHZ				- Atlas A6	- pin 143 - 12.288MHz clock from Mercury  
 //   BCLK                   - Atlas C6  - pin 160 - AK5394A (SCLK)
 //   LRCLK                  - Atlas C7  - pin 161 - AK5394A
 //   CBCLK                  - Atlas C8  - pin 162 - TLV320
 //   CLRCLK                 - Atlas C9  - pin 163 - TLV320
 //   DOUT                   - Atlas C10 - pin 164 - AK5394A
+//	 MDOUT					- Atlas A10 - pin 138 - IQ from Mercury 
 //   CDOUT                  - Atlas C11 - pin 165 - Mic from TLV320 on Janus 
 //	 CDOUT_P				- Atlas A11 - pin 137 - Mic for TLV320 on Penelope
 //   CDIN                   - Atlas C12 - pin 168 - TLV320 (I and Q audio)
@@ -291,17 +297,19 @@
 module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
         CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
-		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC, PCLK_12MHZ, 
+		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC, PCLK_12MHZ, MCLK_12MHZ, MDOUT,
 		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, SPI_data, SPI_clock, Tx_load_strobe,
 		Rx_load_strobe);
 		
 
 
-input CLK_12MHZ;               // From Janus board 12.288MHz
-input PCLK_12MHZ; 			   // Alternative 12.5MHz clock from Penelope or Mercury
+input CLK_12MHZ;               // 12.288MHz clock from Janus
+input PCLK_12MHZ; 			   // 12.288MHz clock from Penelope
+input MCLK_12MHZ;			   // 12.288MHz clock from Mercury
 input IFCLK;                   // FX2 IFCLOCK - 48MHz
-output CLK_MCLK; 			   // Master Clock  to Altas for Janus 
-input  DOUT;
+output CLK_MCLK; 			   // Master Clock  to Altas for other boards
+input  DOUT;				   // Data from AK5394A
+input  MDOUT;				   // I&Q data from Mercury 
 output BCLK, LRCLK;
 inout  [15:0] FX2_FD;           // bidirectional FIFO data to/from the FX2
 //output  [15:0] FX2_FD;        // bidirectional FIFO data to/from the FX2
@@ -446,7 +454,7 @@ end
         LRCLK must change state on the negative edge of BCLK.
 */
 
-// divide  CLK_MCLK (12.288MHz or 12.5MHz) to give clocks for the TLV320 etc
+// divide  CLK_MCLK (12.288MHz) to give clocks for the TLV320 etc
 // using Altera Megafunction 
 
 wire [7:0]clock_out;
@@ -482,103 +490,61 @@ assign CLK_48MHZ = IFCLK; 				// 48MHz clock to PWM DAC on Janus
 assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : BCLK_96_48; 
 assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? LRCLK_48 : ((DFS0 == 1 && DFS1 == 0 )? LRCLK_96 : LRCLK_192);
 
-
-// Divide 48MHz IFCLK by 4 for use as CLK_MCLK
-reg IFCLK_4;
-reg IF_count;
-always @ (posedge IFCLK)
-begin
-	if (IF_count == 1)begin
-		IFCLK_4 <= ~IFCLK_4;
-		IF_count <= 0;
-		end
-	else
-		IF_count <= IF_count + 1'b1;
-end 
-		
-
-/*
+ /*
 
  	The 12MHz ADC/DAC clock  will come from Janus (12.288MHz)  on Atlas C5  as CLK_12MHZ unless a Mercury or
- 	Penelope board is being used then it will come from the Atlas bus (12.5MHz) on A5 as PCLK_12MHZ.
+ 	Penelope board is selected in which case it will come from the Atlas bus on A5 as PCLK_12MHZ from 
+	Penelope or A6 as MCLK_12MHZ from Mercury
  	
- 	Clocks provided by Janus, Penelope or Mercury are determined by the conf setting. This is received by
- 	these boards via the C&C over the Atlas bus. Hence we must have a valid CLK_MCLK present in order
- 	to determing what clock source to use. Before slecting an alernative clock source we need to
- 	confirm that it is present since selecting a nonexistant source would cause the system to hang.
-	To present this should a clock be selected that is not present then the 12MHz IFCLK_4 clock is used instead.
+ 	Which clock is used either Janus, Penelope or Mercury are determined by the conf and clock_s setting.
+	The clock selection is make in the PC and encoded in the C&C data. 
 	
- 	We check that the clock sources are present by getting them to increment a counter to 2000. 
- 	Once the count is reached we set a flag.
- 
- 	Should a selected source not be present then DEBUG_LED0 is flashed rapidly to indicate an error 
- 	condition and Tx is inhibited.
-
-*/
-
-// Check if  PCLK_12MHZ clock from Penelope or Mercury is present, if so set a flag.
-
-reg [10:0]pclock_check;
-reg PCLK_OK;
-always @ (posedge PCLK_12MHZ)
-begin
-	if(pclock_check > 2000)		// check that we have 2000 clock pulses before setting the flag
-		PCLK_OK <= 1'b1;		// set Penny/Mercury flag
-	else pclock_check <= pclock_check + 1'b1;
-end 
-
-// Check if CLK_12MHz clock from Janus is present, if so set a flag.
-
-reg [10:0]jclock_check;
-reg JCLK_OK;
-always @ (posedge CLK_12MHZ)
-begin
-	if(jclock_check > 2000)		// check that we have 2000 clock pulses before setting the flag
-		JCLK_OK <= 1'b1;		// set Janus flag
-	else jclock_check <= jclock_check + 1'b1;
-end 
-	
-/*
-
-	Select Janus (12.288MHz) or Penelope/Mercury (12.5MHz)  master clock depending on configuration
+	Select Janus,  Penelope or Mercury (12.288MHz)  master clock depending on configuration
 	set via PowerSDR  (i.e. conf).
-	If selected clock is not present default to 12MHz IFCLK_4 clock and inhibit PTT.
-
+	
 	conf decodes as follows:
 	
-	00 = No Tx Rx boards
-	01 = Penelope fitted
-	10 = Mercury fitted
-	11 = Both Penelope and Mercury fitted
+	00 =  Janus alone present 
+	01 =  Penelope present
+	10 =  Mercury present
+	11 =  Penelope and Mercury present 
+	
+	clock_s[2] decodes as follows:
+	
+	 0 = use 122.88MHz clock from Penelope (PCLK_12MHZ)
+	 1 = use 122.88MHz clock from Mercury  (MCLK_12MHZ)
+	
+	decoder logic is as follows:
+		if only Janus fitted use CLK_12MHz 
+		if other board fitted follow clock_s
 	
 */
 
-//temp test code - force use of CLK_12MHz
+// select CLK_MCLK depending on conf and clock_s settings 
+	
+assign CLK_MCLK = (conf == 2'h00) ? CLK_12MHZ : (clock_s[2] == 1'b0 ? PCLK_12MHZ : MCLK_12MHZ);
 
-//assign CLK_MCLK = CLK_12MHZ; // force clock from Mercury for testing 
 
-assign CLK_MCLK = (conf > 0 & PCLK_OK) ? PCLK_12MHZ : (conf == 0 & JCLK_OK ? CLK_12MHZ : IFCLK_4);
 
-// Flash LED0 to indicate we have a clock selection error
+//////////////////////////////////////////////////////////////
+//
+//      Select Janus or Mercury I&Q data to send to USB 
+//
+//////////////////////////////////////////////////////////////
 
-wire clock_error;
-assign clock_error = (conf > 0 & PCLK_OK) ? 1'b0 : (conf == 0 & JCLK_OK ? 1'b0 : 1'b1);
+/*
+	Uses the conf signal to select either I&Q data from Janus or Mercury.
+	Decodes as follows:
+	
+	conf	I&Q
+	0x		Janus
+	1x		Mercury
+	
+*/
 
-reg[19:0]error_count;
-reg DEBUG_LED0;
-always @ (posedge IFCLK_4)
-begin
-	if (clock_error) begin
-		if (error_count > 1000000)begin
-			error_count <= 0;
-			DEBUG_LED0 <= ~DEBUG_LED0;			// error so flash LED
-		end else 
-			error_count <= error_count + 1'b1;
-		end
-	else begin	DEBUG_LED0 <= 1'b1;				// no error so LED off 
-	end
-end 
-			
+wire select_DOUT;
+assign select_DOUT = conf[1] ? MDOUT : DOUT;  // select Janus or Mercury I&Q data 
+	
 
 
 //////////////////////////////////////////////////////////////
@@ -651,7 +617,7 @@ always @(posedge BCLK) begin
         last_lr <= sync_lr;
 end
 `else
-`define DOUTbit DOUT
+`define DOUTbit select_DOUT
 `endif
 
 reg [7:0] Tx_control_0;    // control 0 to PC
@@ -673,7 +639,7 @@ Tx_control_4 <= 8'd0;
 
 
 q[15:0] <= {q[14:0],`DOUTbit};                  // shift current AK5394A data left and add next bit
-Tx_fifo_enable <= 1'b0;                                 // reset Tx FIFO strobe
+Tx_fifo_enable <= 1'b0;                         // reset Tx FIFO strobe
 if (loop_counter == 63) loop_counter <= 0; 		// count how many times through the loop to
 case (AD_state)                                 // see if sync is to be sent
 6'd0:   begin
@@ -1037,7 +1003,7 @@ assign have_sync = (got_sync & (Rx_used > 3)) ? 1'b1 : 1'b0;
 
 /*
 	Decode Rx_control_0....Rx_control_4.
-    Only decode when  have_sync is true otherwise set safe values.
+    //Only decode when  have_sync is true otherwise set safe values.
 
 	Decode frequency (for Mercury and Penelope), PTT and Speed 
 
@@ -1062,8 +1028,8 @@ assign have_sync = (got_sync & (Rx_used > 3)) ? 1'b1 : 1'b0;
 	x00  = 10MHz reference from Atlas bus ie Gibraltar
 	x01  = 10MHz reference from Penelope
 	x10  = 10MHz reference from Mercury
-	0xx  = 125MHz source from Penelope 
-	1xx  = 125MHz source from Mercury 
+	0xx  = 122.88MHz source from Penelope 
+	1xx  = 122.88MHz source from Mercury 
 	
 	Decode configuration, when Rx_control_0[7:1] = 0, Rx_control_1[6:5] indicates the following
 	
@@ -1075,7 +1041,7 @@ assign have_sync = (got_sync & (Rx_used > 3)) ? 1'b1 : 1'b0;
 	Decode microphone source, when Rx_control_0[7:1] = 0, Rx_control_1[7] indicates the following
 	
 	0 = microphone source is Janus
-	1 = microphone source is Janus
+	1 = microphone source is Penelope
 
 	
 */
@@ -1208,14 +1174,13 @@ end
 	0x00  = 10MHz reference from Atlas bus ie Gibraltar
 	0x01  = 10MHz reference from Penelope
 	0x10  = 10MHz reference from Mercury
-	00xx  = 125MHz source from Penelope 
-	01xx  = 125MHz source from Mercury
+	00xx  = 122.88MHz source from Penelope 
+	01xx  = 122.88MHz source from Mercury
 
 		
 	For future expansion the four bit address enables specific C&C data to be send to individual boards.
 	For the present for use with Mercury and Penelope the address is ignored. 
 
-	NOTE: PTT_out is inhibited if clock_error is set
 
 */
 
@@ -1233,7 +1198,7 @@ assign CC_address = 4'b0110;
 assign OC = 7'b1100111;
 assign mode = 0;
 
-assign 	CCdata = {(PTT_out & !clock_error), CC_address, frequency, clock_s, OC, mode}; // concatenate data to send 
+assign 	CCdata = {PTT_out, CC_address, frequency, clock_s, OC, mode}; // concatenate data to send 
 
 // send C&C data to Atlas bus in I2S format
 
@@ -1406,10 +1371,10 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
-// DEBUG_LED0 when flashing indicates clock selection error
-assign DEBUG_LED1 = 1'b1;
-assign DEBUG_LED2 = ~PTT_out; 
-assign DEBUG_LED3 = ~have_sync; 
+assign DEBUG_LED0 = ~conf[0];	// display conf selection
+assign DEBUG_LED1 = ~conf[1];	// ditto 
+assign DEBUG_LED2 = ~PTT_out; 	// lights with PTT active 
+assign DEBUG_LED3 = ~have_sync; // lights when sync from PowerSDR detected 
   
  
 

@@ -164,3 +164,5 @@ set_global_assignment -name VERILOG_FILE DigAudioOut48k16bI2S.v
 set_global_assignment -name VERILOG_FILE Ozy_Janus.v
 set_global_assignment -name VERILOG_FILE Rx_fifo.v
 set_global_assignment -name VERILOG_FILE HPF_select.v
+set_location_assignment PIN_143 -to MCLK_12MHZ
+set_location_assignment PIN_138 -to MDOUT
