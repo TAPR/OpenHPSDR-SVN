@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Mar 16 20:48:18 2008
+    Info: Processing started: Tue Mar 18 21:27:26 2008
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file SPI.v
     Info: Found entity 1: SPI
@@ -28,8 +28,8 @@ Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
 Info: Found 1 design units, including 1 entities, in source file HPF_select.v
     Info: Found entity 1: HPF_select
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1300): inferred latch for "_10_atten"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1301): inferred latch for "_20_atten"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1316): inferred latch for "_10_atten"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1317): inferred latch for "_20_atten"
 Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
 Info: Elaborating entity "SPI_REGS" for hierarchy "gpio_control:gpio_controlSDR|SPI_REGS:spi_regs"
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port0reg"
@@ -310,5 +310,5 @@ Info: Implemented 1372 device resources after synthesis - the final resource cou
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 23 warnings
     Info: Allocated 137 megabytes of memory during processing
-    Info: Processing ended: Sun Mar 16 20:48:49 2008
+    Info: Processing ended: Tue Mar 18 21:27:57 2008
     Info: Elapsed time: 00:00:31

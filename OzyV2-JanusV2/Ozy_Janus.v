@@ -490,6 +490,20 @@ assign CLK_48MHZ = IFCLK; 				// 48MHz clock to PWM DAC on Janus
 assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : BCLK_96_48; 
 assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? LRCLK_48 : ((DFS0 == 1 && DFS1 == 0 )? LRCLK_96 : LRCLK_192);
 
+// Divide 48MHz IFCLK by 4 for use as CLK_MCLK
+reg IFCLK_4;
+reg IF_count;
+always @ (posedge IFCLK)
+begin
+	if (IF_count == 1)begin
+		IFCLK_4 <= ~IFCLK_4;
+		IF_count <= 0;
+		end
+	else
+		IF_count <= IF_count + 1'b1;
+end 
+
+
  /*
 
  	The 12MHz ADC/DAC clock  will come from Janus (12.288MHz)  on Atlas C5  as CLK_12MHZ unless a Mercury or
@@ -523,6 +537,7 @@ assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? LRCLK_48 : ((DFS0 == 1 &&
 // select CLK_MCLK depending on conf and clock_s settings 
 	
 assign CLK_MCLK = (conf == 2'h00) ? CLK_12MHZ : (clock_s[2] == 1'b0 ? PCLK_12MHZ : MCLK_12MHZ);
+//assign CLK_MCLK = (conf == 2'h00) ? IFCLK_4 : (clock_s[2] == 1'b0 ? PCLK_12MHZ : MCLK_12MHZ);
 
 
 
@@ -991,7 +1006,8 @@ end
 // PC via USB. We can use the fact that there will be data on the 
 // output side of the Rx FIFO if we are getting data from the PC.
 
-assign have_sync = (got_sync & (Rx_used > 3)) ? 1'b1 : 1'b0;
+assign have_sync = (got_sync && (Rx_used > 3)) ? 1'b1 : 1'b0; 
+
 
 
 
@@ -1371,7 +1387,7 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
-assign DEBUG_LED0 = ~conf[0];	// display conf selection
+assign DEBUG_LED0 = ~EP2_has_data;	// light if FX2 fifo has data available 
 assign DEBUG_LED1 = ~conf[1];	// ditto 
 assign DEBUG_LED2 = ~PTT_out; 	// lights with PTT active 
 assign DEBUG_LED3 = ~have_sync; // lights when sync from PowerSDR detected 
