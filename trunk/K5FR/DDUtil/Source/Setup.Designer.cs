@@ -264,8 +264,7 @@ namespace DataDecoder
             "Kenwood",
             "Yaesu Type 1",
             "Yaesu Type 2",
-            "Icom",
-            "ICPW1"});
+            "Icom"});
             this.cboRadio.Location = new System.Drawing.Point(112, 258);
             this.cboRadio.Name = "cboRadio";
             this.cboRadio.Size = new System.Drawing.Size(89, 21);
@@ -733,6 +732,7 @@ namespace DataDecoder
             this.chkRCP4DisPol.Text = "Disable Polling";
             this.toolTip1.SetToolTip(this.chkRCP4DisPol, "Check to disable polling on this port");
             this.chkRCP4DisPol.UseVisualStyleBackColor = true;
+            this.chkRCP4DisPol.CheckedChanged += new System.EventHandler(this.chkRCP4DisPol_CheckedChanged);
             // 
             // chkRCP3DisPol
             // 
@@ -744,6 +744,7 @@ namespace DataDecoder
             this.chkRCP3DisPol.Text = "Disable Polling";
             this.toolTip1.SetToolTip(this.chkRCP3DisPol, "Check to disable polling on this port");
             this.chkRCP3DisPol.UseVisualStyleBackColor = true;
+            this.chkRCP3DisPol.CheckedChanged += new System.EventHandler(this.chkRCP3DisPol_CheckedChanged);
             // 
             // chkRCP2DisPol
             // 
@@ -755,6 +756,7 @@ namespace DataDecoder
             this.chkRCP2DisPol.Text = "Disable Polling";
             this.toolTip1.SetToolTip(this.chkRCP2DisPol, "Check to disable polling on this port");
             this.chkRCP2DisPol.UseVisualStyleBackColor = true;
+            this.chkRCP2DisPol.CheckedChanged += new System.EventHandler(this.chkRCP2DisPol_CheckedChanged);
             // 
             // label19
             // 

@@ -45,7 +45,7 @@ namespace DataDecoder
         public enum SerialError
         { Frame, Overrun, RXOver, RXParity, TXFull };
         public enum PortMode
-        { None, Kenwood, YaesuTypeI, YaesuTypeII, Icom, ICPW1 };
+        { None, Kenwood, YaesuTypeI, YaesuTypeII, Icom};
 
         public enum Parity 
         { Even, Mark, None, Odd, Space };
@@ -74,7 +74,7 @@ namespace DataDecoder
         string LastFreq = "";
         string[] ports;
         string OutBuffer = "";
-        string ver = "1.4.4 Beta";
+        string ver = "1.4.8 Beta";
         string vfo = "";
         System.Timers.Timer pollTimer;
         System.Timers.Timer logTimer;
@@ -180,6 +180,9 @@ namespace DataDecoder
             txtFile0.Text = fileName;
             chkDevice.Checked = set.DevEnab;
             chkDev0.Checked = set.Dev0Enab;
+            chkRCP2DisPol.Checked = set.RCP2DisPol;
+            chkRCP3DisPol.Checked = set.RCP3DisPol;
+            chkRCP4DisPol.Checked = set.RCP4DisPol;
             PortAccess.Output(LPTnum, 0);
             
             // set port interval timer to saved value, if 0 default to 1000
@@ -984,10 +987,10 @@ namespace DataDecoder
                     portmode = PortMode.Icom;
                     txtRadNum.Enabled = true;
                     break;
-                case 5: // Icom IC-PW1
-                    portmode = PortMode.ICPW1;
-                    txtRadNum.Enabled = true;
-                    break;
+                //case 5: // Icom IC-PW1
+                //    portmode = PortMode.ICPW1;
+                //    txtRadNum.Enabled = true;
+                //    break;
                 default:
                     break;
             }
@@ -1396,62 +1399,37 @@ namespace DataDecoder
             set.txtPW1ta = txtPW1ta.Text;
             set.Save();
         }
+        // The PW1 Disable Broadcast check box has changed.
         private void chkDisBcast_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkDisBcast.Checked) 
-                set.chkPW1db = true;
+            if (chkDisBcast.Checked) set.chkPW1db = true;
             
-            else 
-                set.chkPW1db = false;
+            else set.chkPW1db = false;
             set.Save();            
         }
-        // Test button was pressed
-        // simulate poll message from IC-PW1 to DDUtil for freq read
-        System.Timers.Timer pw1Timer;
-        private void btnTest_Click(object sender, EventArgs e)
+        // The RCP2 Disable Polling check box has changed
+        private void chkRCP2DisPol_CheckedChanged(object sender, EventArgs e)
         {
-            // toggle the timer on & off
-            if (!pw1Timer.Enabled)
-            { pw1Timer.Enabled = true; btnTest.BackColor = Color.Yellow; }
-            else
-            { pw1Timer.Enabled = false; btnTest.BackColor = Color.Empty; }
+            if (chkRCP2DisPol.Checked) set.RCP2DisPol = true;
+
+            else set.RCP2DisPol = false;
+            set.Save();
         }
-        void pw1Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        // The RCP3 Disable Polling check box has changed
+        private void chkRCP3DisPol_CheckedChanged(object sender, EventArgs e)
         {
-            if (!TestPort.IsOpen)
-            {
-                TestPort.PortName = "COM18";
-                TestPort.Open();
-            }
-            byte[] bytes = new byte[8];
-            string preamble = "FE";
-            string EOM = "FD";
-            string mystring = EOM + "03" + "54" + "33" + preamble + preamble + "DD" + "FF";
-            int j = 14;
-            for (int i = 0; i < 8; i++)
-            {
-                string temp = mystring.Substring(j, 2);
-                bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-                //                Console.Write("{0:x2} ", bytes[i]);
-                j -= 2;
-            }
-            //            Console.WriteLine();
-            // FE FE 33 54 03 FD
-            TestPort.Write(bytes, 0, 8);
-            Thread.Sleep(50);
-            mystring = EOM + "04" + "54" + "33" + preamble + preamble + "80" + "EF";
-            j = 14;
-            for (int i = 0; i < 8; i++)
-            {
-                string temp = mystring.Substring(j, 2);
-                bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-                //                Console.Write("{0:x2} ", bytes[i]);
-                j -= 2;
-            }
-            //            Console.WriteLine();
-            // FE FE 33 54 03 FD
-            TestPort.Write(bytes, 0, 8);
-            if (pw1Timer.Enabled != true) pw1Timer.Enabled = true;
+            if (chkRCP3DisPol.Checked) set.RCP3DisPol = true;
+
+            else set.RCP3DisPol = false;
+            set.Save();
+        }
+        // The RCP4 Disable Polling check box has changed
+        private void chkRCP4DisPol_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRCP4DisPol.Checked) set.RCP4DisPol = true;
+
+            else set.RCP4DisPol = false;
+            set.Save();
         }
         private void dDutilHelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1500,7 +1478,7 @@ namespace DataDecoder
                 string freqLook = "";
                 // send radio's CAT reply back to logger
                 if(logFlag ==true) LogPort.Write(OutBuffer);
-                // send CAT reply back to RCP ports
+                // send CAT reply back to RCP port
                 if (chkRCP2.Checked) RCP2port.Write(OutBuffer);
                 if (chkRCP3.Checked) RCP3port.Write(OutBuffer);
                 if (chkRCP4.Checked) RCP4port.Write(OutBuffer);
@@ -1562,6 +1540,7 @@ namespace DataDecoder
             pollTimer.Enabled = false;
             // send the data on to the radio 
             sp.Write(logMsg);               //pass log port msg to radio port
+            Thread.Sleep(50);
             logTimer.Enabled = true;
         }
         // LP100 port has received data
@@ -1585,14 +1564,23 @@ namespace DataDecoder
         {
             if (chkRCP2.Checked)    // port must be enabled
             {
-                SerialPort RCP2portMsgs = (SerialPort)sender;
-                int len = RCP2portMsgs.BytesToRead;
-                for (int i = 0; i <= len; i++)
+                try
                 {
-                    string RCP2portMsg = RCP2portMsgs.ReadTo(";");
-                    if (chkRCP2DisPol.Checked && RCP2portMsg.Length <= 2)
-                        break;
-                    sp.Write(RCP2portMsg + ";");
+                    SerialPort RCP2portMsgs = (SerialPort)sender;
+                    int len = RCP2portMsgs.BytesToRead;
+                    for (int i = 0; i <= len; i++)
+                    {
+                        string RCP2portMsg = RCP2portMsgs.ReadTo(";");
+                        if (chkRCP2DisPol.Checked && RCP2portMsg.Length <= 2)
+                            break;
+                        sp.Write(RCP2portMsg + ";");
+                        Thread.Sleep(50);
+                    }
+                }
+                catch
+                {
+//                    MessageBox.Show(e.EventType.ToString() + " is the error message number.\n\n",
+//                      "SerialPort Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }
@@ -1601,6 +1589,8 @@ namespace DataDecoder
         {
             if (chkRCP3.Checked)    // port must be enabled
             {
+                try
+                {
                     SerialPort RCP3portMsgs = (SerialPort)sender;
                     int len = RCP3portMsgs.BytesToRead;
                     for (int i = 0; i <= len; i++)
@@ -1609,145 +1599,138 @@ namespace DataDecoder
                         if (chkRCP3DisPol.Checked && RCP3portMsg.Length <= 2)
                             break;
                         sp.Write(RCP3portMsg + ";");
+                        Thread.Sleep(50);
                     }
+                }
+                catch
+                { }
             }
         }
         // RCP4 port has received data
         private void RCP4port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            SerialPort RCP4portMsgs = (SerialPort)sender;
-            int len = RCP4portMsgs.BytesToRead;
-            for (int i = 0; i <= len; i++)
+            if (chkRCP4.Checked)    // port must be enabled
             {
-                string RCP4portMsg = RCP4portMsgs.ReadTo(";");
-                if (chkRCP4DisPol.Checked && RCP4portMsg.Length <= 2)
-                    break;
-                sp.Write(RCP4portMsg + ";");
+                try
+                {
+                    SerialPort RCP4portMsgs = (SerialPort)sender;
+                    int len = RCP4portMsgs.BytesToRead;
+                    for (int i = 0; i <= len; i++)
+                    {
+                        string RCP4portMsg = RCP4portMsgs.ReadTo(";");
+                        if (chkRCP4DisPol.Checked && RCP4portMsg.Length <= 2)
+                            break;
+                        sp.Write(RCP4portMsg + ";");
+                        Thread.Sleep(50);
+                    }
+            }
+                catch
+                { }
             }
         }
-        // PW1 port has received data (Query from IC-PW1) i.e. FE FE 33 54 03 FD
+        // PW1 port has received data (Query from IC-PW1) i.e. FE FE 33 54 [03/04] FD
         // Reply messages are hard coded as it can only be a request for freq. or mode
         private void PW1port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if (chkPW1.Checked)                 // If function is enabled proceed
             {
-                int len = PW1port.BytesToRead;  // How many bytes in port buffer
-                if (len < 6) return;            // ? is a valid command
-                byte[] inBuf = new byte[len];   // input message buffer
-                byte[] outBuf = new byte[11];   // output message buffer
-                string x = txtPW1ta.Text;       // get DDUtil address
-                string cn = "";                 // save command from caller
-                string ra = "";                 // save caller address
-                string ta = txtPW1ta.Text;      // get DDUtil address
+                try
+                {
+                    int len = PW1port.BytesToRead;  // How many bytes in port buffer
+                    if (len < 6) return;            // ? is a valid command
+                    byte[] inBuf = new byte[len];   // input message buffer
+                    byte[] outBuf = new byte[11];   // output message buffer
+                    string x = txtPW1ta.Text;       // get DDUtil address
+                    string cn = "";                 // save command from caller
+                    string ra = "";                 // save caller address
+                    string ta = txtPW1ta.Text;      // get DDUtil address
 
-                // read the port message buffer; may be more than one command sequence
-                // so for loop may could be needed
-                PW1port.Read(inBuf, 0, len);
-                for (int i = 0; i <= len; i++)
-                {   // look for FE FE 33 sequence indicating message start.
-                    if (inBuf[i].ToString("x2").ToUpper() == "FE")              // ? 1st preamble
-                    {
-                        i++; if (i == 0) return;
-                        if (inBuf[i].ToString("x2").ToUpper() == "FE")          // ? 2nd preamble
+                    // read the port message buffer; may be more than one command sequence
+                    // so for loop may could be needed
+                    PW1port.Read(inBuf, 0, len);
+                    for (int i = 0; i <= len; i++)
+                    {   // look for FE FE 33 sequence indicating message start.
+                        if (inBuf[i].ToString("x2").ToUpper() == "FE")              // ? 1st preamble
                         {
-                            i++; // increment inBuf position counter
-                            if (inBuf[i].ToString("x2").ToUpper() == x)         // ? DDUtil addr (33h)
+                            i++; if (i == 0) return;
+                            if (inBuf[i].ToString("x2").ToUpper() == "FE")          // ? 2nd preamble
                             {
                                 i++; // increment inBuf position counter
-                                ra = inBuf[i].ToString("x2").ToUpper();         // save caller addr
-                                i++;
-                                cn = inBuf[i].ToString("x2").ToUpper();         // save command
-                                i++; // increment inBuf position counter
-                                if (inBuf[i].ToString("x2").ToUpper() == "FD")  // ? message end
+                                if (inBuf[i].ToString("x2").ToUpper() == x)         // ? DDUtil addr (33h)
                                 {
                                     i++; // increment inBuf position counter
-                                    if (cn == "03")     // is cmd to read Xcvr Frequency
-                                    {   // If yes, assemble reply and send to port
-                                        raSetText(ra);
-                                        string preamble = "FE";
-                                        string EOM = "FD";
-                                        string mystring = "";
-                                        mystring = EOM + LastFreq.Substring(1, 10) +
-                                                    cn + ta + ra + preamble + preamble;
-                                        int j = 20;
-                                        for (int k = 0; k < 11; k++)
-                                        {
-                                            string outtemp = mystring.Substring(j, 2);
-                                            outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
-                                            j -= 2;
+                                    ra = inBuf[i].ToString("x2").ToUpper();         // save caller addr
+                                    i++;
+                                    cn = inBuf[i].ToString("x2").ToUpper();         // save command
+                                    i++; // increment inBuf position counter
+                                    if (inBuf[i].ToString("x2").ToUpper() == "FD")  // ? message end
+                                    {
+                                        i++; // increment inBuf position counter
+                                        if (cn == "03")     // is cmd to read Xcvr Frequency
+                                        {   // If yes, assemble reply and send to port
+                                            raSetText(ra);
+                                            string preamble = "FE";
+                                            string EOM = "FD";
+                                            string mystring = "";
+                                            mystring = EOM + LastFreq.Substring(1, 10) +
+                                                        cn + ta + ra + preamble + preamble;
+                                            int j = 20;
+                                            for (int k = 0; k < 11; k++)
+                                            {
+                                                string outtemp = mystring.Substring(j, 2);
+                                                outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
+                                                j -= 2;
+                                            }
+                                            // send freq read reply for 
+                                            // 14.234.56 Mhz = [FE FE ra ta cn 60 45 23 14 00 FD]
+                                            PW1port.Write(outBuf, 0, 11);
                                         }
-                                        // 14.234.56 Mhz = FE FE ra ta cn 60 45 23 14 00 FD
-                                        PW1port.Write(outBuf, 0, 11);
-                                    }
-                                    else if (cn == "04")    // is cmd to read Xcvr Mode
-                                    {   // If yes, assemble reply and send to port
-                                        raSetText(ra);
-                                        string preamble = "FE";
-                                        string EOM = "FD";
-                                        string mystring = "";
-                                        string mode = "";
-                                        switch (sdrMode)
-                                        {   // Lookup PW1 equivalent mode for SDR mode
-                                            case "1": mode = "00"; break;   // LSB
-                                            case "2": mode = "01"; break;   // USB
-                                            case "3": mode = "03"; break;   // CWU
-                                            case "4": mode = "06"; break;   // FMN
-                                            case "5": mode = "02"; break;   // AM
-                                            case "6": mode = "04"; break;   // RTTY (DIGL)
-                                            case "7": mode = "03"; break;   // CWL
-                                            case "9": mode = "04"; break;   // RTTY-R (DIGU)
-                                            default:  mode = "01"; break;   // USB
+                                        else if (cn == "04")    // is cmd to read Xcvr Mode
+                                        {   // If yes, assemble reply and send to port
+                                            raSetText(ra);
+                                            string preamble = "FE";
+                                            string EOM = "FD";
+                                            string mystring = "";
+                                            string mode = "";
+                                            switch (sdrMode)
+                                            {   // Lookup PW1 equivalent mode for SDR mode
+                                                case "1": mode = "00"; break;   // LSB
+                                                case "2": mode = "01"; break;   // USB
+                                                case "3": mode = "03"; break;   // CWU
+                                                case "4": mode = "06"; break;   // FMN
+                                                case "5": mode = "02"; break;   // AM
+                                                case "6": mode = "04"; break;   // RTTY (DIGL)
+                                                case "7": mode = "03"; break;   // CWL
+                                                case "9": mode = "04"; break;   // RTTY-R (DIGU)
+                                                default : mode = "01"; break;   // USB
+                                            }
+                                            mystring = EOM + mode + "00" + cn + ta + ra + preamble + preamble;
+                                            int j = 14;
+                                            for (int k = 0; k < 8; k++)
+                                            {
+                                                string outtemp = mystring.Substring(j, 2);
+                                                outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
+                                                j -= 2;
+                                            }
+                                            // Send mode command [FE FE ra ta cn 00 md FD]
+                                            PW1port.Write(outBuf, 0, 8);
                                         }
-                                        mystring = EOM + mode + "00" + cn + ta + ra + preamble + preamble;
-                                        int j = 14;
-                                        for (int k = 0; k < 8; k++)
-                                        {
-                                            string outtemp = mystring.Substring(j, 2);
-                                            outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
-                                            j -= 2;
-                                        }
-                                        // Send mode FE FE ra ta cn 00 md FD
-                                        PW1port.Write(outBuf, 0, 8);
                                     }
                                 }
                             }
                         }
                     }
                 }
+                catch
+                {
+                    // Take no action, errors here are from re-broadcst messages on the port
+                    // and fragmented data results.
+                }
             }
         }
         // PW1 serial port has incurred an error; ignore it!
         private void PW1port_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
-        {
-            //string msg = "";
-            //switch ((int)e.EventType)
-            //{
-            //    case (int)SerialError.Frame:
-            //        msg = "The hardware detected a framing error.\n";
-            //        break;
-            //    case (int)SerialError.Overrun:
-            //        msg = "A character-buffer overrun has occurred.\n" +
-            //              "The next character is lost.\n";
-            //        break;
-            //    case (int)SerialError.RXOver:
-            //        msg = "An input buffer overflow has occurred.\n" +
-            //              "There is either no room in the input buffer,\n" +
-            //              "or a character was received after the end-of-file (EOF) character. \n";
-            //        break;
-            //    case (int)SerialError.RXParity:
-            //        msg = "The hardware detected a parity error.\n";
-            //        break;
-            //    case (int)SerialError.TXFull:
-            //        msg = "The application tried to transmit a character,\n" +
-            //              "but the output buffer was full.\n";
-            //        break;
-            //    default:
-            //        msg = "This is the default message and the error is unknown.\n";
-            //        break;
-            //}
-            //MessageBox.Show(e.EventType.ToString() + " is the error message number.\n\n" + msg,
-            //          "SerialPort Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
+        {}
         // PL serial port has incurred an error; ignore it!
         private void AccPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         { }
@@ -1845,22 +1828,6 @@ namespace DataDecoder
                             j -= 2;
                         }
                         // 14.234.56 Mhz = FE FE 1E E0 05 60 45 23 14 00 FD
-                        AccPort.Write(bytes, 0, 11);
-                        break;
-                    case PortMode.ICPW1:
-                        preamble = "FE";
-                        radNum = txtRadNum.Text;
-                        EOM = "FD";
-                        ctrlAddr = "00";
-                        mystring = EOM + "00" + freq.Substring(3, 8) + ctrlAddr + radNum + "00" + preamble + preamble;
-                        j = 20;
-                        for (int i = 0; i < 11; i++)
-                        {
-                            string temp = mystring.Substring(j, 2);
-                            bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-                            j -= 2;
-                        }
-                        // 14.234.56 Mhz = FE FE 00 nn 00 60 45 23 14 00 FD
                         AccPort.Write(bytes, 0, 11);
                         break;
                 }
@@ -2119,9 +2086,65 @@ namespace DataDecoder
             {
                 logTimer.Enabled = false;
                 sp.Write("IF;");
+                Thread.Sleep(100);
                 sp.Write("FB;");
+                Thread.Sleep(100);
             }
         }
         #endregion Timer Events 
+
+        #region PW1 Test Routines
+
+        // The PW1 Test button was pressed
+        // simulate poll message from IC-PW1 to DDUtil for freq read
+        // Note that additional code to initialize the PW1Timer is in 
+        // the Setup() routine 
+        System.Timers.Timer pw1Timer;
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            // toggle the timer on & off
+            if (!pw1Timer.Enabled)
+            { pw1Timer.Enabled = true; btnTest.BackColor = Color.Yellow; }
+            else
+            { pw1Timer.Enabled = false; btnTest.BackColor = Color.Empty; }
+        }
+        void pw1Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (!TestPort.IsOpen)
+            {
+                TestPort.PortName = "COM18";
+                TestPort.Open();
+            }
+            byte[] bytes = new byte[8];
+            string preamble = "FE";
+            string EOM = "FD";
+            string mystring = EOM + "03" + "54" + "33" + preamble + preamble + "DD" + "FF";
+            int j = 14;
+            for (int i = 0; i < 8; i++)
+            {
+                string temp = mystring.Substring(j, 2);
+                bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
+                //                Console.Write("{0:x2} ", bytes[i]);
+                j -= 2;
+            }
+            //            Console.WriteLine();
+            // FE FE 33 54 03 FD
+            TestPort.Write(bytes, 0, 8);
+            Thread.Sleep(50);
+            mystring = EOM + "04" + "54" + "33" + preamble + preamble + "80" + "EF";
+            j = 14;
+            for (int i = 0; i < 8; i++)
+            {
+                string temp = mystring.Substring(j, 2);
+                bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
+                //                Console.Write("{0:x2} ", bytes[i]);
+                j -= 2;
+            }
+            //            Console.WriteLine();
+            // FE FE 33 54 03 FD
+            TestPort.Write(bytes, 0, 8);
+            if (pw1Timer.Enabled != true) pw1Timer.Enabled = true;
+        }
+        #endregion PW1 Test Routines
     }
 }

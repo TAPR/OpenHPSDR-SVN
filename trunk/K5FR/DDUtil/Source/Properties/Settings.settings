@@ -104,5 +104,14 @@
     <Setting Name="MySize" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">430, 424</Value>
     </Setting>
+    <Setting Name="RCP2DisPol" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RCP3DisPol" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RCP4DisPol" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
