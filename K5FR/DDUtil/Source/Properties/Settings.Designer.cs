@@ -425,5 +425,41 @@ namespace DataDecoder.Properties {
                 this["MySize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RCP2DisPol {
+            get {
+                return ((bool)(this["RCP2DisPol"]));
+            }
+            set {
+                this["RCP2DisPol"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RCP3DisPol {
+            get {
+                return ((bool)(this["RCP3DisPol"]));
+            }
+            set {
+                this["RCP3DisPol"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RCP4DisPol {
+            get {
+                return ((bool)(this["RCP4DisPol"]));
+            }
+            set {
+                this["RCP4DisPol"] = value;
+            }
+        }
     }
 }

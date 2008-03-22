@@ -9,7 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataDecoder</RootNamespace>
     <AssemblyName>DataDecoder</AssemblyName>
-    <ApplicationIcon>DDU.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <ManifestCertificateThumbprint>13D0FC2AEBC7F55AF0728AA6593BBD8B314D910E</ManifestCertificateThumbprint>
     <ManifestKeyFile>DataDecoder_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
@@ -93,10 +94,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DDU.ico" />
-    <Content Include="PowerSDR.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
