@@ -141,6 +141,9 @@ namespace DataDecoder
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enableErrorLoggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dDutilHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onLineHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -325,9 +328,9 @@ namespace DataDecoder
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(314, 44);
+            this.label6.Location = new System.Drawing.Point(312, 44);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 32);
+            this.label6.Size = new System.Drawing.Size(67, 32);
             this.label6.TabIndex = 12;
             this.label6.Text = "CAT Polling Interval";
             // 
@@ -399,7 +402,7 @@ namespace DataDecoder
             // lblPortBtn
             // 
             this.lblPortBtn.AutoSize = true;
-            this.lblPortBtn.Location = new System.Drawing.Point(247, 100);
+            this.lblPortBtn.Location = new System.Drawing.Point(247, 99);
             this.lblPortBtn.Name = "lblPortBtn";
             this.lblPortBtn.Size = new System.Drawing.Size(132, 13);
             this.lblPortBtn.TabIndex = 30;
@@ -766,7 +769,7 @@ namespace DataDecoder
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(200, 24);
             this.label19.TabIndex = 56;
-            this.label19.Text = "Rado Control Programs";
+            this.label19.Text = "Radio Control Programs";
             // 
             // label18
             // 
@@ -1313,6 +1316,7 @@ namespace DataDecoder
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.toolsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -1325,15 +1329,40 @@ namespace DataDecoder
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enableErrorLoggingToolStripMenuItem,
+            this.openErrorLogToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // enableErrorLoggingToolStripMenuItem
+            // 
+            this.enableErrorLoggingToolStripMenuItem.Name = "enableErrorLoggingToolStripMenuItem";
+            this.enableErrorLoggingToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.enableErrorLoggingToolStripMenuItem.Text = "Enable Error Logging";
+            this.enableErrorLoggingToolStripMenuItem.Click += new System.EventHandler(this.enableErrorLoggingToolStripMenuItem_Click);
+            // 
+            // openErrorLogToolStripMenuItem
+            // 
+            this.openErrorLogToolStripMenuItem.Name = "openErrorLogToolStripMenuItem";
+            this.openErrorLogToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.openErrorLogToolStripMenuItem.Text = "Open Error Log";
+            this.openErrorLogToolStripMenuItem.Click += new System.EventHandler(this.openErrorLogToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -1558,6 +1587,9 @@ namespace DataDecoder
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem onLineHelpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enableErrorLoggingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openErrorLogToolStripMenuItem;
 
     }
 }

@@ -461,5 +461,17 @@ namespace DataDecoder.Properties {
                 this["RCP4DisPol"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ErrorLog {
+            get {
+                return ((bool)(this["ErrorLog"]));
+            }
+            set {
+                this["ErrorLog"] = value;
+            }
+        }
     }
 }
