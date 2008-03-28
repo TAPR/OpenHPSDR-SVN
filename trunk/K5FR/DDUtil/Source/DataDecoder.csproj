@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorLog.cs" />
     <Compile Include="PortInterop.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Setup.cs">
