@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Sun Apr 06 11:54:36 2008
+Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
+Revision Name : Penelope
+Top-level Entity Name : Penelope
+Family : Cyclone II
+Total logic elements : 3,055
+    Total combinational functions : 3,055
+    Dedicated logic registers : 2,099
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total memory bits : N/A until Partition Merge
+Embedded Multiplier 9-bit elements : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge

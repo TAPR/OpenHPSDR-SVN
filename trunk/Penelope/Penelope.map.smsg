@@ -1,0 +1,139 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Sun Apr 06 11:53:44 2008
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
+Info: Found 1 design units, including 1 entities, in source file oddClockDiv.v
+    Info: Found entity 1: oddClockDivider
+Info: Found 1 design units, including 1 entities, in source file cordic.v
+    Info: Found entity 1: cordic_16
+Info: Found 1 design units, including 1 entities, in source file ALC.v
+    Info: Found entity 1: ALC
+Info: Found 1 design units, including 1 entities, in source file ADC.v
+    Info: Found entity 1: ADC
+Info: Found 1 design units, including 1 entities, in source file division.v
+    Info: Found entity 1: division
+Info: Found 1 design units, including 1 entities, in source file phase_accumulator.v
+    Info: Found entity 1: phase_accumulator
+Info: Found 1 design units, including 1 entities, in source file cicint.v
+    Info: Found entity 1: cicint
+Info: Found 1 design units, including 1 entities, in source file Penelope.v
+    Info: Found entity 1: Penelope
+Info: Elaborating entity "Penelope" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(580): object "Address" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at Penelope.v(653): truncated value with size 32 to match size of target (10)
+Info: Elaborating entity "ADC" for hierarchy "ADC:ADC_SPI"
+Info: Elaborating entity "division" for hierarchy "division:division_DDS"
+Info: Elaborating entity "ALC" for hierarchy "ALC:ALC_I"
+Warning (10230): Verilog HDL assignment warning at ALC.v(45): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at ALC.v(49): truncated value with size 32 to match size of target (16)
+Info: Elaborating entity "cicint" for hierarchy "cicint:cic_I"
+Warning (10230): Verilog HDL assignment warning at cicint.v(182): truncated value with size 32 to match size of target (12)
+Warning (10230): Verilog HDL assignment warning at cicint.v(188): truncated value with size 32 to match size of target (1)
+Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
+Info: Elaborating entity "cordic_16" for hierarchy "cordic_16:tx_cordic"
+Info: Elaborating entity "oddClockDivider" for hierarchy "oddClockDivider:refClockDivider"
+Warning (10230): Verilog HDL assignment warning at oddClockDiv.v(50): truncated value with size 32 to match size of target (7)
+Warning (10230): Verilog HDL assignment warning at oddClockDiv.v(60): truncated value with size 32 to match size of target (1)
+Warning (10230): Verilog HDL assignment warning at oddClockDiv.v(61): truncated value with size 32 to match size of target (1)
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "PWM2_Data_in[15]" merged to single register "PWM1_Data_in[15]"
+    Info: Duplicate register "PWM1_accumulator[0]" merged to single register "PWM1_accumulator[2]"
+    Info: Duplicate register "PWM1_accumulator[1]" merged to single register "PWM1_accumulator[2]"
+    Info: Duplicate register "cicint:cic_Q|diff1[15]" merged to single register "cicint:cic_Q|diff1[16]"
+    Info: Duplicate register "cicint:cic_Q|diff2[16]" merged to single register "cicint:cic_Q|diff2[17]"
+    Info: Duplicate register "cicint:cic_Q|diff3[17]" merged to single register "cicint:cic_Q|diff3[18]"
+    Info: Duplicate register "cicint:cic_Q|diff4[18]" merged to single register "cicint:cic_Q|diff4[19]"
+    Info: Duplicate register "cicint:cic_I|diff1[15]" merged to single register "cicint:cic_I|diff1[16]"
+    Info: Duplicate register "cicint:cic_I|diff2[16]" merged to single register "cicint:cic_I|diff2[17]"
+    Info: Duplicate register "cicint:cic_I|diff3[17]" merged to single register "cicint:cic_I|diff3[18]"
+    Info: Duplicate register "cicint:cic_I|diff4[18]" merged to single register "cicint:cic_I|diff4[19]"
+Info: Duplicate registers merged to single register
+    Info: Duplicate register "cicint:cic_I|cur_count[10]" merged to single register "cicint:cic_Q|cur_count[10]"
+    Info: Duplicate register "cicint:cic_I|cur_count[9]" merged to single register "cicint:cic_Q|cur_count[9]"
+    Info: Duplicate register "cicint:cic_I|cur_count[8]" merged to single register "cicint:cic_Q|cur_count[8]"
+    Info: Duplicate register "cicint:cic_I|cur_count[7]" merged to single register "cicint:cic_Q|cur_count[7]"
+    Info: Duplicate register "cicint:cic_I|cur_count[6]" merged to single register "cicint:cic_Q|cur_count[6]"
+    Info: Duplicate register "cicint:cic_I|cur_count[5]" merged to single register "cicint:cic_Q|cur_count[5]"
+    Info: Duplicate register "cicint:cic_I|cur_count[4]" merged to single register "cicint:cic_Q|cur_count[4]"
+    Info: Duplicate register "cicint:cic_I|cur_count[3]" merged to single register "cicint:cic_Q|cur_count[3]"
+    Info: Duplicate register "cicint:cic_I|cur_count[2]" merged to single register "cicint:cic_Q|cur_count[2]"
+    Info: Duplicate register "cicint:cic_I|cur_count[1]" merged to single register "cicint:cic_Q|cur_count[1]"
+    Info: Duplicate register "cicint:cic_I|cur_count[0]" merged to single register "cicint:cic_Q|cur_count[0]"
+    Info: Duplicate register "cicint:cic_I|ce_out_reg" merged to single register "cicint:cic_Q|ce_out_reg"
+    Info: Duplicate register "cicint:cic_I|cur_count[11]" merged to single register "cicint:cic_Q|cur_count[11]"
+Info: State machine "|Penelope|IQ_state" contains 5 states
+Info: State machine "|Penelope|CC_state" contains 3 states
+Info: State machine "|Penelope|ADC:ADC_SPI|ADC" contains 5 states
+Info: Selected Auto state machine encoding method for state machine "|Penelope|IQ_state"
+Info: Encoding result for state machine "|Penelope|IQ_state"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "IQ_state.001"
+        Info: Encoded state bit "IQ_state.010"
+        Info: Encoded state bit "IQ_state.011"
+        Info: Encoded state bit "IQ_state.000"
+        Info: Encoded state bit "IQ_state.100"
+    Info: State "|Penelope|IQ_state.000" uses code string "00000"
+    Info: State "|Penelope|IQ_state.011" uses code string "00110"
+    Info: State "|Penelope|IQ_state.010" uses code string "01010"
+    Info: State "|Penelope|IQ_state.001" uses code string "10010"
+    Info: State "|Penelope|IQ_state.100" uses code string "00011"
+Info: Selected Auto state machine encoding method for state machine "|Penelope|CC_state"
+Info: Encoding result for state machine "|Penelope|CC_state"
+    Info: Completed encoding using 3 state bits
+        Info: Encoded state bit "CC_state.00"
+        Info: Encoded state bit "CC_state.10"
+        Info: Encoded state bit "CC_state.01"
+    Info: State "|Penelope|CC_state.00" uses code string "000"
+    Info: State "|Penelope|CC_state.01" uses code string "101"
+    Info: State "|Penelope|CC_state.10" uses code string "110"
+Info: Selected Auto state machine encoding method for state machine "|Penelope|ADC:ADC_SPI|ADC"
+Info: Encoding result for state machine "|Penelope|ADC:ADC_SPI|ADC"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "ADC:ADC_SPI|ADC.001"
+        Info: Encoded state bit "ADC:ADC_SPI|ADC.010"
+        Info: Encoded state bit "ADC:ADC_SPI|ADC.011"
+        Info: Encoded state bit "ADC:ADC_SPI|ADC.000"
+        Info: Encoded state bit "ADC:ADC_SPI|ADC.100"
+    Info: State "|Penelope|ADC:ADC_SPI|ADC.000" uses code string "00000"
+    Info: State "|Penelope|ADC:ADC_SPI|ADC.011" uses code string "00110"
+    Info: State "|Penelope|ADC:ADC_SPI|ADC.010" uses code string "01010"
+    Info: State "|Penelope|ADC:ADC_SPI|ADC.100" uses code string "00011"
+    Info: State "|Penelope|ADC:ADC_SPI|ADC.001" uses code string "10010"
+Warning: Resynthesizing Cyclone or Stratix WYSIWYG primitives into Cyclone II WYSIWYG primitives; however, resynthesized WYSIWYG primitives may not produce optimal compilation results.
+Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/lpm_divide.tdf
+    Info: Found entity 1: lpm_divide
+Info: Elaborated megafunction instantiation "ALC:ALC_I|lpm_divide:Div0"
+Info: Found 1 design units, including 1 entities, in source file db/lpm_divide_vfm.tdf
+    Info: Found entity 1: lpm_divide_vfm
+Info: Found 1 design units, including 1 entities, in source file db/sign_div_unsign_9nh.tdf
+    Info: Found entity 1: sign_div_unsign_9nh
+Info: Found 1 design units, including 1 entities, in source file db/alt_u_div_k5f.tdf
+    Info: Found entity 1: alt_u_div_k5f
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_lkc.tdf
+    Info: Found entity 1: add_sub_lkc
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_mkc.tdf
+    Info: Found entity 1: add_sub_mkc
+Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/lpm_mult.tdf
+    Info: Found entity 1: lpm_mult
+Info: Elaborated megafunction instantiation "ALC:ALC_I|lpm_mult:Mult0"
+Info: Found 1 design units, including 1 entities, in source file db/mult_dv01.tdf
+    Info: Found entity 1: mult_dv01
+Info: 5 registers lost all their fanouts during netlist optimizations. The first 5 are displayed below.
+    Info: Register "IQ_state~7" lost all its fanouts during netlist optimizations.
+    Info: Register "IQ_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "ADC_SPI/ADC~8" lost all its fanouts during netlist optimizations.
+    Info: Register "ADC_SPI/ADC~9" lost all its fanouts during netlist optimizations.
+    Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
+Info: Found the following redundant logic cells in design
+    Info: Logic cell "ALC:ALC_I|lpm_divide:Div0|lpm_divide_vfm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_k5f:divider|add_sub_15_result_int[0]~62"
+Info: Implemented 3716 device resources after synthesis - the final resource count might be different
+    Info: Implemented 11 input pins
+    Info: Implemented 46 output pins
+    Info: Implemented 4 bidirectional pins
+    Info: Implemented 3647 logic cells
+    Info: Implemented 8 DSP elements
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
+    Info: Allocated 141 megabytes of memory during processing
+    Info: Processing ended: Sun Apr 06 11:54:35 2008
+    Info: Elapsed time: 00:00:51
