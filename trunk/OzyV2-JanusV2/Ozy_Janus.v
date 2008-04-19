@@ -169,7 +169,8 @@
 //				Added 12.288MHz clock from Mercury (MCLK_12MHZ)  on Atlas A6 - 12 March 2008
 // 				Added IQ select from either Janus (Atlas C10) or Mercury (Atlas A10) - 12 March 2008
 //				Added decode logic for clock source from either Janus, Penelope or Mercury - 16 March 2008
-//				Special test version - force clocks from Mercury - 17 April 2008 
+//				Special test version - force clocks from Mercury - 17 April 2008
+//				Test code removed - now standard version - 19 April 2008 
 //
 ////////////////////////////////////////////////////////////
 
@@ -537,11 +538,11 @@ end
 
 // select CLK_MCLK depending on conf and clock_s settings 
 	
-//assign CLK_MCLK = (conf == 2'h00) ? CLK_12MHZ : (clock_s[2] == 1'b0 ? PCLK_12MHZ : MCLK_12MHZ);
+assign CLK_MCLK = (conf == 2'h00) ? CLK_12MHZ : (clock_s[2] == 1'b0 ? PCLK_12MHZ : MCLK_12MHZ);
 //assign CLK_MCLK = (conf == 2'h00) ? IFCLK_4 : (clock_s[2] == 1'b0 ? PCLK_12MHZ : MCLK_12MHZ);
 
 // ***** force clock to come from Mercury 
-assign CLK_MCLK = MCLK_12MHZ; 
+//assign CLK_MCLK = MCLK_12MHZ; 
 
 
 
@@ -562,10 +563,10 @@ assign CLK_MCLK = MCLK_12MHZ;
 */
 
 wire select_DOUT;
-//assign select_DOUT = conf[1] ? MDOUT : DOUT;  // select Janus or Mercury I&Q data 
+assign select_DOUT = conf[1] ? MDOUT : DOUT;  // select Janus or Mercury I&Q data 
 
 // ***** force I/Q data to come from Mercury 
-assign select_DOUT = MDOUT; 
+//assign select_DOUT = MDOUT; 
 	
 
 
