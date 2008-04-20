@@ -1109,6 +1109,8 @@ wire  PTT_out;
 reg [3:0]clock_s;
 reg mic;
 reg [1:0]conf;
+reg [6:0]OC; // open collectors on Penelope
+reg mode;	 // normal or Class E PA operation 
 
 always @ (posedge SLRD)
 begin 
@@ -1118,6 +1120,8 @@ if(state_sync == 4)begin 								// Need to ensure that C&C data is stable
 			clock_s[3:0] <= {1'b0,Rx_control_1[4:2]};	// decode clock source
 			conf <= Rx_control_1[6:5];					// decode configuration
 			mic <= Rx_control_1[7];						// decode microphone source
+			OC <= Rx_control_2[7:1];					// decode open collectors on Penelope
+			mode <= Rx_control_2[0];					// decode mode, normal or Class E PA
 			end
 	if (Rx_control_0[7:1] == 7'b0000_001)				// decode frequency 
 		frequency <= {Rx_control_1, Rx_control_2, Rx_control_3, Rx_control_4};
@@ -1246,15 +1250,11 @@ wire [48:0]CCdata;
 reg [6:0] CCcount;
 reg CC;							// C&C data out to Atlas bus 
 wire [3:0] CC_address;			// C&C address, fixed at 0 for now 
-wire [6:0] OC;					// Open Collector outputs on Penelope board 
 reg [31:0]frequency;
-wire mode;
 
-// dummy data for testing
 
+// dummy address data for now 
 assign CC_address = 4'b0110;
-assign OC = 7'b1100111;
-assign mode = 0;
 
 assign 	CCdata = {PTT_out, CC_address, frequency, clock_s, OC, mode}; // concatenate data to send 
 

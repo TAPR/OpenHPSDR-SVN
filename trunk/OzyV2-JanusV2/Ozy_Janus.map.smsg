@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Apr 20 18:48:51 2008
+    Info: Processing started: Sun Apr 20 19:33:58 2008
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file SPI.v
     Info: Found entity 1: SPI
@@ -302,13 +302,13 @@ Info: 51 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1418 device resources after synthesis - the final resource count might be different
+Info: Implemented 1432 device resources after synthesis - the final resource count might be different
     Info: Implemented 16 input pins
     Info: Implemented 27 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1302 logic cells
+    Info: Implemented 1316 logic cells
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 23 warnings
     Info: Allocated 137 megabytes of memory during processing
-    Info: Processing ended: Sun Apr 20 18:49:23 2008
-    Info: Elapsed time: 00:00:32
+    Info: Processing ended: Sun Apr 20 19:34:28 2008
+    Info: Elapsed time: 00:00:30
