@@ -1,4 +1,4 @@
-// V1.7 16 March 2008 
+// V1.8 20 April  2008 
 //
 // Copyright 2006,2007, 2008 Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -170,7 +170,8 @@
 // 				Added IQ select from either Janus (Atlas C10) or Mercury (Atlas A10) - 12 March 2008
 //				Added decode logic for clock source from either Janus, Penelope or Mercury - 16 March 2008
 //				Special test version - force clocks from Mercury - 17 April 2008
-//				Test code removed - now standard version - 19 April 2008 
+//				Test code removed - now standard version - 19 April 2008
+//				Added check for 12.288MHz clock present, error LED if not and use IFCLK/4 instead - 20 April 2008 
 //
 ////////////////////////////////////////////////////////////
 
@@ -492,7 +493,7 @@ assign CLK_48MHZ = IFCLK; 				// 48MHz clock to PWM DAC on Janus
 assign BCLK  = (AK_reset && (DFS0 == 0 && DFS1 == 1))? BCLK_192 : BCLK_96_48; 
 assign LRCLK = (!AK_reset || DFS0 == 0 && DFS1 == 0) ? LRCLK_48 : ((DFS0 == 1 && DFS1 == 0 )? LRCLK_96 : LRCLK_192);
 
-// Divide 48MHz IFCLK by 4 for use as CLK_MCLK
+// Divide 48MHz IFCLK by 4 for use as CLK_MCLK if Janus clock missing
 reg IFCLK_4;
 reg IF_count;
 always @ (posedge IFCLK)
@@ -512,7 +513,7 @@ end
  	Penelope board is selected in which case it will come from the Atlas bus on A5 as PCLK_12MHZ from 
 	Penelope or A6 as MCLK_12MHZ from Mercury
  	
- 	Which clock is used either Janus, Penelope or Mercury are determined by the conf and clock_s setting.
+ 	Which clock is used either Janus, Penelope or Mercury is determined by the conf and clock_s setting.
 	The clock selection is make in the PC and encoded in the C&C data. 
 	
 	Select Janus,  Penelope or Mercury (12.288MHz)  master clock depending on configuration
@@ -533,17 +534,50 @@ end
 	decoder logic is as follows:
 		if only Janus fitted use CLK_12MHz 
 		if other board fitted follow clock_s
+		
+	If the clock from Janus is selected but not present then default to IFCLK/4 so we can still 
+	send data to the PC. Flash LED0 to indicate a clock error.
 	
 */
 
+// Check if CLK_12MHz clock from Janus is present, if so set a flag.
+
+reg [10:0]jclock_check;
+reg JCLK_OK;
+always @ (posedge CLK_12MHZ)
+begin
+	if(jclock_check > 2000)		// check that we have 2000 clock pulses before setting the flag
+		JCLK_OK <= 1'b1;		// set Janus flag
+	else jclock_check <= jclock_check + 1'b1;
+end 
+
+
+
 // select CLK_MCLK depending on conf and clock_s settings 
 	
-assign CLK_MCLK = (conf == 2'h00) ? CLK_12MHZ : (clock_s[2] == 1'b0 ? PCLK_12MHZ : MCLK_12MHZ);
-//assign CLK_MCLK = (conf == 2'h00) ? IFCLK_4 : (clock_s[2] == 1'b0 ? PCLK_12MHZ : MCLK_12MHZ);
+//assign CLK_MCLK = (JCLK_OK & conf == 2'h00) ? CLK_12MHZ : (clock_s[2] == 1'b0 ? PCLK_12MHZ : (clock_s[2] == 1'b1 ? MCLK_12MHZ : IFCLK_4));
 
-// ***** force clock to come from Mercury 
-//assign CLK_MCLK = MCLK_12MHZ; 
+assign CLK_MCLK = (conf > 0 )? (clock_s[2] == 1'b0 ? PCLK_12MHZ : MCLK_12MHZ) : (JCLK_OK ? CLK_12MHZ :IFCLK_4);
 
+// Flash LED0 to indicate we have a clock selection error
+
+wire clock_error;
+assign clock_error = conf > 0  ? 1'b0 : (JCLK_OK ? 1'b0 : 1'b1);
+
+reg[19:0]error_count;
+reg DEBUG_LED0;
+always @ (posedge IFCLK_4)
+begin
+	if (clock_error) begin
+		if (error_count > 1000000)begin
+			error_count <= 0;
+			DEBUG_LED0 <= ~DEBUG_LED0;			// error so flash LED
+		end else 
+			error_count <= error_count + 1'b1;
+		end
+	else begin	DEBUG_LED0 <= 1'b1;				// no error so LED off 
+	end
+end 
 
 
 //////////////////////////////////////////////////////////////
@@ -1395,8 +1429,8 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
-assign DEBUG_LED0 = ~EP2_has_data;	// light if FX2 fifo has data available 
-assign DEBUG_LED1 = ~conf[1];	// ditto 
+// DEBUG_LED0 - flashes if Janus clock selected but not present
+assign DEBUG_LED1 = ~conf[1];	// test config setting  
 assign DEBUG_LED2 = ~PTT_out; 	// lights with PTT active 
 assign DEBUG_LED3 = ~have_sync; // lights when sync from PowerSDR detected 
   
