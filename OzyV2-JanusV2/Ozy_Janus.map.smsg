@@ -1,7 +1,7 @@
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
-    Info: Processing started: Sun Apr 20 19:33:58 2008
+    Info: Processing started: Mon Apr 21 20:31:03 2008
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file SPI.v
     Info: Found entity 1: SPI
@@ -27,9 +27,13 @@ Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Found 1 design units, including 1 entities, in source file HPF_select.v
     Info: Found entity 1: HPF_select
+Info: Found 1 design units, including 1 entities, in source file clock_det.v
+    Info: Found entity 1: clock_det
+Info: Found 1 design units, including 1 entities, in source file flash.v
+    Info: Found entity 1: flash
 Info: Elaborating entity "Ozy_Janus" for the top level hierarchy
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1358): inferred latch for "_10_atten"
-Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1359): inferred latch for "_20_atten"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1365): inferred latch for "_10_atten"
+Info (10041): Verilog HDL or VHDL info at Ozy_Janus.v(1366): inferred latch for "_20_atten"
 Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
 Info: Elaborating entity "SPI_REGS" for hierarchy "gpio_control:gpio_controlSDR|SPI_REGS:spi_regs"
 Info: Elaborating entity "RegisterX" for hierarchy "gpio_control:gpio_controlSDR|RegisterX:port0reg"
@@ -43,6 +47,8 @@ Info: Elaborated megafunction instantiation "clocks:clocks|lpm_counter:lpm_count
 Info: Found 1 design units, including 1 entities, in source file db/cntr_skh.tdf
     Info: Found entity 1: cntr_skh
 Info: Elaborating entity "cntr_skh" for hierarchy "clocks:clocks|lpm_counter:lpm_counter_component|cntr_skh:auto_generated"
+Info: Elaborating entity "clock_det" for hierarchy "clock_det:janus_clock"
+Info: Elaborating entity "flash" for hierarchy "flash:flash_LED"
 Info: Elaborating entity "Rx_fifo" for hierarchy "Rx_fifo:Rx_fifo"
 Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/dcfifo.tdf
     Info: Found entity 1: dcfifo
@@ -302,13 +308,13 @@ Info: 51 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SIQO/TLV_state.001" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning: No output dependent on input pin "FLAGB"
-Info: Implemented 1432 device resources after synthesis - the final resource count might be different
+Info: Implemented 1465 device resources after synthesis - the final resource count might be different
     Info: Implemented 16 input pins
     Info: Implemented 27 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1316 logic cells
+    Info: Implemented 1349 logic cells
     Info: Implemented 32 RAM segments
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 23 warnings
     Info: Allocated 137 megabytes of memory during processing
-    Info: Processing ended: Sun Apr 20 19:34:28 2008
+    Info: Processing ended: Mon Apr 21 20:31:33 2008
     Info: Elapsed time: 00:00:30

@@ -1,4 +1,4 @@
-// V1.8 20 April  2008 
+// V1.8 21 April  2008 
 //
 // Copyright 2006,2007, 2008 Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -171,7 +171,8 @@
 //				Added decode logic for clock source from either Janus, Penelope or Mercury - 16 March 2008
 //				Special test version - force clocks from Mercury - 17 April 2008
 //				Test code removed - now standard version - 19 April 2008
-//				Added check for 12.288MHz clock present, error LED if not and use IFCLK/4 instead - 20 April 2008 
+//				Added check for all 12.288MHz clocks, error LED flash if not present and use IFCLK/4 - 21 April 2008
+//
 //
 ////////////////////////////////////////////////////////////
 
@@ -509,7 +510,7 @@ end
 
  /*
 
- 	The 12MHz ADC/DAC clock  will come from Janus (12.288MHz)  on Atlas C5  as CLK_12MHZ unless a Mercury or
+ 	The 12.288MHz ADC/DAC clock  will come from Janus on Atlas C5  as CLK_12MHZ unless a Mercury or
  	Penelope board is selected in which case it will come from the Atlas bus on A5 as PCLK_12MHZ from 
 	Penelope or A6 as MCLK_12MHZ from Mercury
  	
@@ -535,49 +536,38 @@ end
 		if only Janus fitted use CLK_12MHz 
 		if other board fitted follow clock_s
 		
-	If the clock from Janus is selected but not present then default to IFCLK/4 so we can still 
-	send data to the PC. Flash LED0 to indicate a clock error.
+	If a clock is selected but not detected then default to IFCLK/4 so we can still 
+	send sync data to the PC. Flash LED0 to indicate a clock error.
 	
 */
 
 // Check if CLK_12MHz clock from Janus is present, if so set a flag.
+clock_det janus_clock(.clock(CLK_12MHZ),.flag(JCLK_OK));
 
-reg [10:0]jclock_check;
-reg JCLK_OK;
-always @ (posedge CLK_12MHZ)
-begin
-	if(jclock_check > 2000)		// check that we have 2000 clock pulses before setting the flag
-		JCLK_OK <= 1'b1;		// set Janus flag
-	else jclock_check <= jclock_check + 1'b1;
-end 
+// Check if  PCLK_12MHZ clock from Penelope is present, if so set a flag.
+clock_det penny_clock(.clock(PCLK_12MHZ),.flag(PCLK_OK));
 
+// Check if  MCLK_12MHZ clock from Mercury is present, if so set a flag.
+clock_det mercury_clock(.clock(MCLK_12MHZ),.flag(MCLK_OK));
 
-
-// select CLK_MCLK depending on conf and clock_s settings 
-	
-//assign CLK_MCLK = (JCLK_OK & conf == 2'h00) ? CLK_12MHZ : (clock_s[2] == 1'b0 ? PCLK_12MHZ : (clock_s[2] == 1'b1 ? MCLK_12MHZ : IFCLK_4));
-
-assign CLK_MCLK = (conf > 0 )? (clock_s[2] == 1'b0 ? PCLK_12MHZ : MCLK_12MHZ) : (JCLK_OK ? CLK_12MHZ :IFCLK_4);
-
-// Flash LED0 to indicate we have a clock selection error
+// select CLK_MCLK depending on conf, clock_s settings and valid clocks.
+// If a clock is selected that does not have a valid flag then  
+// IFCLK_4 is selected and the clock_error flag is set 
 
 wire clock_error;
-assign clock_error = conf > 0  ? 1'b0 : (JCLK_OK ? 1'b0 : 1'b1);
+assign CLK_MCLK = (conf == 0 & JCLK_OK)			 ? CLK_12MHZ  :
+				   conf == 0 					 ? IFCLK_4    :
+				  (clock_s[2] == 1'b0 & PCLK_OK) ? PCLK_12MHZ :
+				  (clock_s[2] == 1'b1 & MCLK_OK) ? MCLK_12MHZ : IFCLK_4;
 
-reg[19:0]error_count;
-reg DEBUG_LED0;
-always @ (posedge IFCLK_4)
-begin
-	if (clock_error) begin
-		if (error_count > 1000000)begin
-			error_count <= 0;
-			DEBUG_LED0 <= ~DEBUG_LED0;			// error so flash LED
-		end else 
-			error_count <= error_count + 1'b1;
-		end
-	else begin	DEBUG_LED0 <= 1'b1;				// no error so LED off 
-	end
-end 
+// set clock_error if we have selected IFCLK_4
+
+assign clock_error = (CLK_MCLK == IFCLK_4) ? 1'b1 : 1'b0;
+
+				
+// Flash LED0 to indicate we have a clock selection error
+
+flash flash_LED(.clock(IFCLK_4),.flag(clock_error),.LED(DEBUG_LED0));
 
 
 //////////////////////////////////////////////////////////////
@@ -598,11 +588,6 @@ end
 
 wire select_DOUT;
 assign select_DOUT = conf[1] ? MDOUT : DOUT;  // select Janus or Mercury I&Q data 
-
-// ***** force I/Q data to come from Mercury 
-//assign select_DOUT = MDOUT; 
-	
-
 
 //////////////////////////////////////////////////////////////
 //
