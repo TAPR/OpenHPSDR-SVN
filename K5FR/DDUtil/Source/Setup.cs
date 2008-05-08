@@ -22,13 +22,14 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
+using System.Data.OleDb;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
+using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -42,6 +43,9 @@ namespace DataDecoder
     public partial class Setup : Form
     {
         #region Enums
+
+        public enum RotorMod
+        { AlphaSpid, GreenHeron, Hygain, M2R2800PA, M2R2800PX, Prosistel, Yaesu };
 
         public enum SerialError
         { Frame, Overrun, RXOver, RXParity, TXFull };
@@ -72,6 +76,7 @@ namespace DataDecoder
         Hashtable flist = new Hashtable();
         Settings set = Settings.Default;
         PortMode portmode;
+        RotorMod rotormod;
         Process process;
         private TempFormat temp_format = TempFormat.Celsius;
         private bool closing = false;
@@ -81,6 +86,8 @@ namespace DataDecoder
         int keyValue = 0;
         int LPTnum = 0;         // decimal number of selected LPT port
         int iSleep = 0;         // Thread.Sleep var
+        int StepCtr = 0;        // reps counter
+        int reps = 7;           // how many times to test the SteppIR port
         double pollInt = 0;     // CAT port interval timer uses txtInv text box
         double temp = 26.4;
         string fileName = Application.StartupPath + "\\BandData.xml";
@@ -88,13 +95,14 @@ namespace DataDecoder
         string LastFreq = "";
         string[] ports;
         string OutBuffer = "";
-        public static string ver = "1.5.5";
+        public static string ver = "1.5.6";
         public static int errCtr = 0;
         string vfo = "";
         System.Timers.Timer pollTimer;
         System.Timers.Timer logTimer;
         System.Timers.Timer lpTimer;
         System.Timers.Timer tempTimer;
+        System.Timers.Timer StepTimer;
         #endregion Variables
 
         #region Properties
@@ -134,6 +142,15 @@ namespace DataDecoder
         {
             get { return default_LPport; }
             set { default_LPport = value; }
+        }
+        /// <summary>
+        /// The default SteppIR port
+        /// </summary>
+        private string default_StepPort = "";
+        public string DefaultStepPort
+        {
+            get { return default_StepPort; }
+            set { default_StepPort = value; }
         }
         /// <summary>
         /// The default RCP2 port
@@ -253,8 +270,15 @@ namespace DataDecoder
             pw1Timer.Interval = 2500;  // 1000 = 1 second
             pw1Timer.Enabled = false;
 
+            // setup SteppIR Data Timer
+            StepTimer = new System.Timers.Timer();
+            StepTimer.Elapsed += new System.Timers.ElapsedEventHandler(StepTimer_Elapsed);
+            StepTimer.Interval = Convert.ToDouble(set.StepInv);
+            StepTimer.Enabled = false;
+
             CreateSerialPort();
             GetPortNames();             // enumerate serial ports and load combo boxes
+            InitRotor();
             str = set.CIVaddr;
             txtRadNum.Text = str;
             cboRadData.SelectedIndex = set.RadData;
@@ -330,6 +354,28 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboLPport.SelectedText = "";
+                }
+            }
+            // set StepData Serial port to the last port used
+            if (set.StepPortNum != "")
+            {
+                cboStep.Text = set.StepPortNum;
+                if (StepData.IsOpen) StepData.Close();
+                try
+                {   // try to open the selected StepPort:
+                    StepData.PortName = set.StepPortNum;
+                    DefaultStepPort = set.StepPortNum;
+                    SetDefaultStepPort();
+                    chkStep.Checked = set.StepEnab;
+                    txtStepInv.Text = set.StepInv;
+                    cboStepCom.SelectedIndex = set.StepCom;
+                }
+                catch
+                {
+                    MessageBox.Show("Serial port " + StepData.PortName +
+                       " cannot be opened!", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboStep.SelectedText = "";
                 }
             }
             // Set RCP2 serial port to last port used
@@ -466,16 +512,18 @@ namespace DataDecoder
             Dev0.Text = set.Device0;
             cboDevice.Items.Add(set.Device0);
             cboDevice.Text = set.Device;
-            lpTimer.Enabled = true;
+
+            if (chkLPenab.Checked) lpTimer.Enabled = true;
+            else lpTimer.Enabled = false;
 
             logTimer.Enabled = true;
             pollTimer.Enabled = true;
             tempTimer.Enabled = true;
 
-            logTimer.Enabled = true;
-            pollTimer.Enabled = true;
+            //if (chkStep.Checked) StepTimer.Enabled = true;
+            //else StepTimer.Enabled = false;
 
-        }
+        }// Setup
         #endregion Initialization
 
         #region Data Grid Events
@@ -499,7 +547,19 @@ namespace DataDecoder
 
         #region Delegates
 
-        // Write App Title caption
+        // Show/Hide "Antenna Moving" caption
+        delegate void AntCallback(bool bCmd);
+        private void ShowAnt(bool bCmd)
+        {
+            if (this.lblAnt.InvokeRequired)
+            {
+                AntCallback d = new AntCallback(ShowAnt);
+                this.Invoke(d, new object[] { bCmd });
+            }
+            else
+                this.lblAnt.Visible = bCmd;
+        }
+        // Set Title Bar caption
         delegate void SetTitleCallback(string text);
         private void SetTitle(string text)
         {
@@ -596,7 +656,7 @@ namespace DataDecoder
 
         #region Form Events
 
-        // Tempature text box has been changed
+        // Tempature text box has been clicked
         private void txtTemp_Click(object sender, EventArgs e)
         {
             switch (temp_format)
@@ -692,8 +752,36 @@ namespace DataDecoder
             closing = false;
             this.Size = set.MySize;
             this.Location = set.MyLoc;
+            tabControl.SelectedIndex = set.TabOpen;
+            cboPrefix.SelectedIndex = RandomNumber(0, 300);
         }
-        // program closing
+        // Create a random nnumber between min and max
+        private int RandomNumber(int min, int max)
+        {
+            Random random = new Random();
+            return random.Next(min, max);
+        }
+
+
+        // program is about to close
+        private void Setup_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            closing = true;
+            if (bMacChg)
+            {
+                DialogResult result;
+                result = MessageBox.Show(this,
+                    "Are you sure you want to exit?\n\n" +
+                    "Macro data has been changed and not saved!\n\n" +
+                    "If you want to save your work press NO and\n" +
+                    "return to the Macro tab and save your work.",
+                    "Macro Data UnSaved", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button2);
+                if (result == DialogResult.No) e.Cancel = true;
+            }
+        }
+        // program is closed, lets cleanup
         private void Setup_FormClosing(object sender, FormClosedEventArgs e)
         {
             try
@@ -701,6 +789,7 @@ namespace DataDecoder
                 closing = true;
                 set.MyLoc = this.Location;
                 set.MySize = this.Size;
+                set.TabOpen = tabControl.SelectedIndex;
                 set.Save();
                 pollTimer.Enabled = false;
                 logTimer.Enabled = false;
@@ -1024,10 +1113,9 @@ namespace DataDecoder
             set.LPportNum = cboLPport.SelectedItem.ToString();
             set.Save();
         }
-        // LP port timer interval has changed
+        // LP timer interval has changed
         private void txtLPint_TextChanged(object sender, EventArgs e)
         {
-
             try
             {
                 set.LPint = txtLPint.Text;
@@ -1061,6 +1149,76 @@ namespace DataDecoder
                 txtSWR.Text = "";
             }
             set.Save();
+        }
+        // SteppIR enabled check box has changed
+        private void chkStep_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkStep.Checked)
+            {
+                if (cboStep.SelectedIndex > 0)
+                {
+ //                   StepTimer.Enabled = true;
+                    set.StepEnab = true;
+                }
+                else
+                {
+                    MessageBox.Show("No port has been selected for the SteppIR.\n\n" +
+                    "Please select a valid port number and try again.", "Port Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    chkStep.Checked = false;
+                }
+            }
+            else
+            {
+ //               StepTimer.Enabled = false;
+                set.StepEnab = false;
+            }
+            set.Save();
+        }
+        // SteppIR Port Number hsa changed
+        private void cboStep_SelectedIndexChanged(object sender, EventArgs e)
+        {
+//            StepTimer.Enabled = false;
+            if (StepData.IsOpen) StepData.Close();
+            if (cboStep.SelectedItem.ToString() != "")
+            {
+                StepData.PortName = cboStep.SelectedItem.ToString();
+                try
+                {
+                    StepData.Open();
+//                    StepTimer.Enabled = true;
+                }
+                catch
+                {
+                    MessageBox.Show("Serial port " + StepData.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboStep.SelectedText = "";
+                    chkStep.Checked = false;
+                    return;
+                }
+            }
+            else
+            {
+//                StepTimer.Enabled = false;
+                chkStep.Checked = false;
+            }
+            // save new port setting
+            set.StepPortNum = cboStep.SelectedItem.ToString();
+            set.Save();
+        }
+        // SteppIR timer interval has changed
+        private void txtStepInv_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+//                StepTimer.Enabled = false;
+                StepTimer.Interval = Convert.ToDouble(txtStepInv.Text);
+                set.StepInv = txtStepInv.Text;
+                set.Save();
+//                StepTimer.Enabled = true;
+            }
+            catch { }
         }
         // Profiller button was pressed
         private void btnProfiler_Click(object sender, EventArgs e)
@@ -1427,6 +1585,66 @@ namespace DataDecoder
             {   set.RCPtext = txtRCP.Text; set.Save(); }
             catch { }
         }
+        // the SteppIR Port Com setting has changed
+        private void cboStepCom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cboStepCom.SelectedIndex)
+            {
+                case 0: // 9600 8N1
+                    StepData.BaudRate = 9600;
+                    StepData.DataBits = 8;
+                    StepData.Parity = System.IO.Ports.Parity.None;
+                    StepData.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 1: // 9600 8N2
+                    StepData.BaudRate = 9600;
+                    StepData.DataBits = 8;
+                    StepData.Parity = System.IO.Ports.Parity.None;
+                    StepData.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                case 2: // 4800 8N1
+                    StepData.BaudRate = 4800;
+                    StepData.DataBits = 8;
+                    StepData.Parity = System.IO.Ports.Parity.None;
+                    StepData.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 3: // 4800 8N2
+                    StepData.BaudRate = 4800;
+                    StepData.DataBits = 8;
+                    StepData.Parity = System.IO.Ports.Parity.None;
+                    StepData.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                case 4: // 2400 8N1
+                    StepData.BaudRate = 2400;
+                    StepData.DataBits = 8;
+                    StepData.Parity = System.IO.Ports.Parity.None;
+                    StepData.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 5: // 2400 8N2
+                    StepData.BaudRate = 2400;
+                    StepData.DataBits = 8;
+                    StepData.Parity = System.IO.Ports.Parity.None;
+                    StepData.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                case 6: // 1200 8N1
+                    StepData.BaudRate = 1200;
+                    StepData.DataBits = 8;
+                    StepData.Parity = System.IO.Ports.Parity.None;
+                    StepData.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 7: // 1200 8N2
+                    StepData.BaudRate = 1200;
+                    StepData.DataBits = 8;
+                    StepData.Parity = System.IO.Ports.Parity.None;
+                    StepData.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                default:
+                    break;
+            }
+            set.StepCom = (int)cboStepCom.SelectedIndex;
+            set.Save();
+        }
+
         #endregion Form Events
 
         #region Macro Routines
@@ -1446,8 +1664,10 @@ namespace DataDecoder
         /// <summary>
         /// A Data Grid cell value changed, change the button text.
         /// </summary>
+        bool bMacChg;
         private void dgm_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            bMacChg = true;
             string dgmData = dgm.CurrentRow.Cells["Button"].Value.ToString();
             if (dgmData != null)
             {
@@ -1477,21 +1697,22 @@ namespace DataDecoder
         {
             try
             {
-                // Write out the Macro Data from the grid to the XML file
-                dgm.DataSource = dsm;
-                dgm.DataMember = ("macro");
                 if (txtMacFile.Text == null || txtMacFile.Text == "")
                 {
                     MessageBox.Show("Please enter a name for the file", "File Name Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
+                // Write out the Macro Data from the grid to the XML file
+                dgm.DataSource = dsm;
+                dgm.DataMember = ("macro");
                 MacFileName = txtMacFile.Text;
                 File.Delete(MacFileName);
                 dsm.WriteXml(MacFileName);
                 set.MacDataFile = MacFileName;
                 set.Save();
                 GetMacData(MacFileName);
+                bMacChg = false;
             }
             catch (Exception ex)
             {
@@ -1536,24 +1757,28 @@ namespace DataDecoder
             }
         }
         /// <summary>
+        /// 
         /// Processes the commands associated with a macro key, calls ParseBuffer()
         /// </summary>
         /// <param name="button"> index of the button that was pressed</param>
         private void ProcessMacroButton(int button)
         {
-            try
+            if (StepCtr == 0 && xOn == "0")
             {
-                if (dgm.Rows[button-1].Cells[1].Value.ToString() == "")
+                try
                 {
-                    throw new NullReferenceException();
+                    if (dgm.Rows[button - 1].Cells[1].Value.ToString() == "")
+                    {
+                        throw new NullReferenceException();
+                    }
+                    string cmds = dgm.Rows[button - 1].Cells[1].Value.ToString();
+                    ParseBuffer(cmds);
                 }
-                string cmds = dgm.Rows[button - 1].Cells[1].Value.ToString();
-                ParseBuffer(cmds);
-            }
-            catch (NullReferenceException)
-            {
-                int btn  = button + 1;
-                MessageBox.Show("There are no commands setup for Macro " + button);
+                catch (NullReferenceException)
+                {
+                    int btn = button + 1;
+                    MessageBox.Show("There are no commands setup for Macro " + button);
+                }
             }
         }
         // Macro button #1 was pressed
@@ -1729,9 +1954,10 @@ namespace DataDecoder
         {
             set.MyLoc = this.Location;
             set.MySize = this.Size;
+            set.TabOpen = tabControl.SelectedIndex;
             set.Save();
             closing = true;
-            Environment.Exit(0);
+            this.Close();
         }
         // Main Menu|Tools|Enable Error Log
         private void enableErrorLoggingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1783,7 +2009,6 @@ namespace DataDecoder
         {
             this.Size = new Size(430, 445);
         }
-
         // Context Menu|Shrink Form Size
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
@@ -1792,8 +2017,8 @@ namespace DataDecoder
         // Context Menu|About DDUtil
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("DDUtil (C) 2007, 2008 Steve Nance (K5FR)", "About DDUtil",
-                MessageBoxButtons.OK, MessageBoxIcon.None);
+            AboutBox about = new AboutBox();
+            about.Show();
         }
         // Context Menu|Slave Radio Info
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
@@ -1861,6 +2086,18 @@ namespace DataDecoder
                 "- Select the desired port from the drop-down list-box.\n\n" +
                 "- Check the Enabled check box to turn on a port.\n",
                 "RCP Port Setup", MessageBoxButtons.OK, MessageBoxIcon.None);
+        }
+
+        private void rotorControlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "Setup procedure for using the Rotor Control feature.\n\n" +
+                "- Select the Rotor Model and Speed (if applicable)\n\n" + 
+                "- Select the desired Serial Port for your rotor.\n\n" +
+                "- Select the Serial Port Comm data that matches your rotor.\n\n" +
+                "- Check the Enabled check box to turn on a port.\n\n" +
+                "- Enter your Latitude and Longitude for you location.\n",
+                "Rotor Setup", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
         #endregion Menu Events
 
@@ -1999,6 +2236,546 @@ namespace DataDecoder
         }
         #endregion Methods
 
+        #region Rotor Control
+
+        #region Rotor Events
+
+        // The Short Path Rotor button has been pressed
+        string rtrSpd = "";
+        private void btnSP_Click(object sender, EventArgs e)
+        {
+            if (chkRotorEnab.Checked)
+            { lblSP.Text = txtSP.Text; lblLP.Text = "SP"; TurnRotor(txtSP.Text); }
+        }
+        // The Long Path Rotor button has been pressed
+        private void btnLP_Click(object sender, EventArgs e)
+        {
+            if (chkRotorEnab.Checked)
+            { lblSP.Text = txtLP.Text; lblLP.Text = "LP"; TurnRotor(txtLP.Text); }
+        }
+        // The home latitude has changes
+        private void txtLat_TextChanged(object sender, EventArgs e)
+        {
+            set.Latitude = txtLat.Text;
+            set.Save();
+        }
+        // The home longitude has changes
+        private void txtLong_TextChanged(object sender, EventArgs e)
+        {
+            set.Longitude = txtLong.Text;
+            set.Save();
+        }
+        // The home grid has changes
+        private void txtGrid_TextChanged(object sender, EventArgs e)
+        {
+            set.Grid = txtGrid.Text;
+            set.Save();
+        }
+        // The Rotor Port number has changed
+        private void cboRotorPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (RotorPort.IsOpen) RotorPort.Close();
+            if (cboRotorPort.SelectedItem.ToString() != "")
+            {
+                RotorPort.PortName = cboRotorPort.SelectedItem.ToString();
+                try
+                {
+                    RotorPort.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("Serial port " + RotorPort.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboRotorPort.SelectedText = "";
+                    chkRotorEnab.Checked = false;
+                    return;
+                }
+            }
+            else
+            {
+                chkRotorEnab.Checked = false;
+            }
+            // save new port setting
+            set.RotorPort = cboRotorPort.SelectedIndex;
+            set.Save();
+        }
+        // The Rotor port com parameters have changed
+        private void cboRotorCom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cboRotorCom.SelectedIndex)
+            {
+                case 0: // 9600 8N1
+                    RotorPort.BaudRate = 9600;
+                    RotorPort.DataBits = 8;
+                    RotorPort.Parity = System.IO.Ports.Parity.None;
+                    RotorPort.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 1: // 9600 8N2
+                    RotorPort.BaudRate = 9600;
+                    RotorPort.DataBits = 8;
+                    RotorPort.Parity = System.IO.Ports.Parity.None;
+                    RotorPort.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                case 2: // 4800 8N1
+                    RotorPort.BaudRate = 4800;
+                    RotorPort.DataBits = 8;
+                    RotorPort.Parity = System.IO.Ports.Parity.None;
+                    RotorPort.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 3: // 4800 8N2
+                    RotorPort.BaudRate = 4800;
+                    RotorPort.DataBits = 8;
+                    RotorPort.Parity = System.IO.Ports.Parity.None;
+                    RotorPort.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                case 4: // 2400 8N1
+                    RotorPort.BaudRate = 2400;
+                    RotorPort.DataBits = 8;
+                    RotorPort.Parity = System.IO.Ports.Parity.None;
+                    RotorPort.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 5: // 2400 8N2
+                    RotorPort.BaudRate = 2400;
+                    RotorPort.DataBits = 8;
+                    RotorPort.Parity = System.IO.Ports.Parity.None;
+                    RotorPort.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                case 6: // 1200 8N1
+                    RotorPort.BaudRate = 1200;
+                    RotorPort.DataBits = 8;
+                    RotorPort.Parity = System.IO.Ports.Parity.None;
+                    RotorPort.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 7: // 1200 8N2
+                    RotorPort.BaudRate = 1200;
+                    RotorPort.DataBits = 8;
+                    RotorPort.Parity = System.IO.Ports.Parity.None;
+                    RotorPort.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                default:
+                    break;
+            }
+            set.RotorCom = (int)cboRotorCom.SelectedIndex;
+            set.Save();
+        }
+        // The Enable Rotor Check Box has changed
+        private void chkRotorEnab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRotorEnab.Checked)
+            {
+                btnSP.Enabled = true;
+                btnLP.Enabled = true;
+                if (cboRotorPort.SelectedIndex > 0)
+                {
+                    set.RotorEnab = true;
+                }
+                else
+                {
+                    MessageBox.Show("No port has been selected for the Rotor.\n\n" +
+                    "Please select a valid port number and try again.", "Port Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    chkRotorEnab.Checked = false;
+                }
+            }
+            else
+            {
+                set.RotorEnab = false;
+                btnSP.Enabled = false;
+                btnLP.Enabled = false;
+            }
+            set.Save();
+        }
+        // the Rotor Model selection has changed
+        private void grpModel_CheckedChanged(object sender, EventArgs e)
+        {
+                 if (rbRtrMod1.Checked) 
+                 { 
+                     set.rotorModel = 0; 
+                     rotormod = RotorMod.AlphaSpid;
+                     grpSpeed.Visible = false;
+                 }
+                 else if (rbRtrMod2.Checked)
+                 {
+                     set.rotorModel = 1;
+                     rotormod = RotorMod.GreenHeron;
+                     grpSpeed.Visible = false;
+                 }
+                 else if (rbRtrMod3.Checked) 
+                 { 
+                     set.rotorModel = 2; 
+                     rotormod = RotorMod.Hygain;
+                     grpSpeed.Visible = false;
+                 }
+                 else if (rbRtrMod4.Checked)
+                 {
+                     set.rotorModel = 3; 
+                     rotormod = RotorMod.M2R2800PA;
+                     grpSpeed.Visible = true;
+                 }
+                 else if (rbRtrMod5.Checked)
+                 {
+                     set.rotorModel = 4; 
+                     rotormod = RotorMod.M2R2800PX;
+                     grpSpeed.Visible = true;
+                 }
+                 else if (rbRtrMod6.Checked) 
+                 { 
+                     set.rotorModel = 5; 
+                     rotormod = RotorMod.Prosistel;
+                     grpSpeed.Visible = false;
+                 }
+                 else if (rbRtrMod7.Checked)
+                 {
+                     set.rotorModel = 6; rotormod = RotorMod.Yaesu;
+                     grpSpeed.Visible = true;
+                 }
+            set.Save();
+        }
+        // the rotor speed selection has changed
+        private void grpSpeed_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender == rbRtrSpd1) { set.RotorSpeed = 0; rtrSpd = "1"; }
+            else if (sender == rbRtrSpd2) { set.RotorSpeed = 1; rtrSpd = "5"; }
+            else if (sender == rbRtrSpd3) { set.RotorSpeed = 2; rtrSpd = "9"; }
+            else return;
+            set.Save();
+            if (rotormod == RotorMod.M2R2800PA) RotorPort.Write("S" + rtrSpd + "\r");
+            if (rotormod == RotorMod.M2R2800PX) RotorPort.Write("S" + rtrSpd + "\r");
+            if (rotormod == RotorMod.Yaesu) RotorPort.Write("X" + rtrSpd + "\r");
+        }
+        // *** Prefix Combo Box Events ***
+        string pre = "";
+        private void cboPrefix_SelectedIndexChanged(object sender, EventArgs e)
+        { GetPrefix(); }
+
+        private void cboPrefix_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            { GetPrefix(); pre = ""; }
+        }
+        private void cboPrefix_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            pre += e.KeyChar;
+            if (pre == "\r" || pre == "") { pre = ""; goto Done; }
+            string SQL = "SELECT * FROM DX WHERE DXCCPrefix LIKE '" + 
+                            pre + "%' ORDER BY DXCCprefix";
+            GetDXCC(SQL);
+        Done: e.Handled = true; cboPrefix.Focus();
+        }
+        private void cboPrefix_Click(object sender, EventArgs e)
+        { cboPrefix.DroppedDown = true; pre = ""; }
+
+        private void cboPrefix_Enter(object sender, EventArgs e)
+        { pre = ""; }
+
+        private void cboPrefix_Leave(object sender, EventArgs e)
+        { GetPrefix(); pre = ""; }
+
+        // *** Entity Combo Box Events ***
+        string ent = "";
+        private void cboEntity_SelectedIndexChanged(object sender, EventArgs e)
+        { GetEntity(); }
+
+        private void cboEntity_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            { GetEntity(); ent = ""; }
+        }
+        private void cboEntity_KeyPress(object sender, KeyPressEventArgs e)
+        { 
+            ent += e.KeyChar;
+            if (ent == "\r" || ent == "") { ent = ""; goto Done; }
+            string SQL = "SELECT * FROM DX WHERE DXCCName LIKE '" + 
+                            ent + "%' ORDER BY DXCCName";
+            GetDXCC(SQL);
+        Done: e.Handled = true; cboEntity.Focus();
+        }
+        private void cboEntity_Click(object sender, EventArgs e)
+        { cboEntity.DroppedDown = true; ent = ""; }
+
+        private void cboEntity_Enter(object sender, EventArgs e)
+        { pre = ""; }
+
+        private void cboEntity_Leave(object sender, EventArgs e)
+        { GetEntity(); ent = ""; }
+        // The Country Code has changed, go look it up
+        private void txtCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string SQL = "SELECT * FROM DX WHERE CountryCode = " +
+                            Convert.ToInt32(txtCode.Text);
+                txtCode.Text = "";
+                GetDXCC(SQL);
+            }
+        }
+        private void txtDxIOTA_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string SQL = "SELECT * FROM DX WHERE IOTA = '" +
+                            txtDxIOTA.Text + "'";
+                txtDxIOTA.Text = "";
+                GetDXCC(SQL);
+            }
+        }
+        // The distance box was double-clicked, get the reverse distance
+        private void txtDxDist_DoubleClick(object sender, EventArgs e)
+        {
+            txtDxDist.Text = (24902 - Convert.ToInt32(txtDxDist.Text)).ToString();
+            if (txtDxDist.ForeColor == Color.Blue) txtDxDist.ForeColor = Color.Firebrick;
+            else txtDxDist.ForeColor = Color.Blue;
+        }
+
+       #endregion Rotor Events
+
+        #region Rotor Methods
+
+        // Turn the rotor
+        private void TurnRotor(string heading)
+        {
+            switch (rotormod)
+            {
+                case RotorMod.AlphaSpid:
+                    int circle = 360;
+                    int bearing = Convert.ToInt32(heading);
+                    bearing = bearing + circle;
+                    RotorPort.Write("W" + bearing.ToString() + "0\x01     / ");
+                    break;
+                case RotorMod.GreenHeron:
+                    RotorPort.Write("AP1" + heading + ";");
+                    break;
+                case RotorMod.Hygain:
+                    RotorPort.Write("AP1" + heading + ";");
+                    RotorPort.Write("AM1;");
+                    break;
+                case RotorMod.M2R2800PA:
+                    RotorPort.Write("S\r");
+                    RotorPort.Write(heading + "\r");
+                    break;
+                case RotorMod.M2R2800PX:
+                    RotorPort.Write("A" + heading + "\r");
+                    break;
+                case RotorMod.Prosistel:
+                    RotorPort.Write("\x02\x41\x47" + heading + "\r");
+                    break;
+                case RotorMod.Yaesu:
+                    RotorPort.Write("M" + heading + "\r");
+                    break;
+                default: break;
+            }
+        }
+        // Get DXCC data from the database
+        private void GetDXCC(string SQL)
+        {
+            //SqlConnection conn = new SqlConnection(source);
+            //SqlDataAdapter da = new SqlDataAdapter(select, conn);
+            //DataSet ds = new DataSet();
+            //da.Fill(ds, "DX");
+            //string source = "server=(local); integrated security=SSPI; database=DXCC";
+            //string select = "SELECT * FROM DX";
+            
+            OleDbConnection conn = new OleDbConnection(
+                "provider = microsoft.jet.oledb.4.0;data source = DDUtil.mdb;");
+            OleDbCommand thisCommand = new OleDbCommand(SQL, conn);
+            conn.Open();
+            OleDbDataReader thisReader = thisCommand.ExecuteReader();
+
+            try
+            {
+                int i = 1;
+                while (thisReader.Read() && i > 0)
+                {
+                    try
+                    {
+                        // Write values to text boxes
+                        cboPrefix.Text = thisReader.GetValue(0).ToString();
+                        txtCode.Text = thisReader.GetValue(1).ToString();
+                        cboEntity.Text = thisReader.GetValue(2).ToString();
+                        txtRegion.Text = thisReader.GetValue(3).ToString();
+                        txtDxCont.Text = thisReader.GetValue(4).ToString();
+                        txtDxCQ.Text = thisReader.GetValue(5).ToString();
+                        txtDxITU.Text = thisReader.GetValue(6).ToString();
+                        txtDxIOTA.Text = thisReader.GetValue(7).ToString();
+
+                        // Calc and display the time at dx station
+                        DateTime dt = DateTime.Now;
+                        TimeZone localZone = TimeZone.CurrentTimeZone;
+                        DateTime currentUTC = localZone.ToUniversalTime(dt);
+                        TimeSpan currentOffset = localZone.GetUtcOffset(dt);
+                        string off = currentOffset.ToString();
+                        off = off.Substring(0, 3);
+                        double LocalOffset = Math.Abs(Convert.ToDouble(off));
+                        double DxOffset = Math.Abs(Convert.ToDouble(thisReader.GetValue(8).ToString()));
+                        double DxOffsetRaw = Convert.ToDouble(thisReader.GetValue(8).ToString());
+                        if (Math.Sign(DxOffsetRaw) < 0)
+                        {
+                            lblDxTime.Text = dt.AddHours(DxOffset +
+                                LocalOffset).ToString() + " Local Time";
+                            txtDxTime.Text = "UTC+" + DxOffset;
+                        }
+                        else
+                        {
+                            lblDxTime.Text = dt.AddHours((DxOffsetRaw - (DxOffsetRaw * 2)) +
+                                LocalOffset).ToString() + " Local Time";
+                            txtDxTime.Text = "UTC-" + DxOffset;
+                        }
+                        if (thisReader.GetValue(8).ToString() == "0")
+                            txtDxTime.Text = "UTC";
+
+                        // Format and display the dx station's latitude and longitude
+                        string lat = thisReader.GetValue(9).ToString();
+                        decimal dLat = Convert.ToDecimal(lat);
+                        lat = Math.Round(dLat).ToString();
+                        if (lat.Substring(0, 1) == "-") txtDxLat.Text = lat.TrimStart('-') + " 0' S";
+                        else txtDxLat.Text = lat + " 0' N";
+
+                        string lon = thisReader.GetValue(10).ToString();
+                        decimal dLon = Convert.ToDecimal(lon);
+                        lon = Math.Round(dLon).ToString();
+                        if (lon.Substring(0, 1) == "-") txtDxLong.Text = lon.TrimStart('-') + " 0' W";
+                        else txtDxLong.Text = lon + " 0' E";
+
+                        // Calc and display the distance to the dx station
+                        txtDxDist.ForeColor = Color.Firebrick;
+                        txtDxDist.Text = Dist(Convert.ToDouble(txtLat.Text), 
+                            Convert.ToDouble(txtLong.Text),
+                            Convert.ToDouble(lat), Convert.ToDouble(lon)).ToString();
+
+                        // Calc the bearing
+                        double lat1rad = Convert.ToDouble(txtLat.Text) * Math.PI / 180;
+                        double lon1rad = Convert.ToDouble(txtLong.Text) * Math.PI / 180;
+                        double lat2rad = Convert.ToDouble(lat) * Math.PI / 180;
+                        double lon2rad = Convert.ToDouble(lon) * Math.PI / 180;
+                        double bearing = 0.0;
+
+                        if (Math.Sin(lon1rad - lon2rad) < 0)
+                            bearing = Math.Acos((Math.Sin(lat2rad) - Math.Sin(lat1rad) *
+                                      Math.Cos(distrad)) / (Math.Sin(distrad) * Math.Cos(lat1rad)));
+                        else
+                            bearing = 2 * Math.PI - Math.Acos((Math.Sin(lat2rad) - Math.Sin(lat1rad) *
+                                       Math.Cos(distrad)) / (Math.Sin(distrad) * Math.Cos(lat1rad)));
+                        bearing = bearing * (180 / Math.PI);
+                        txtSP.Text = Convert.ToInt32(bearing).ToString();
+                        if (bearing < 180)
+                            txtLP.Text = Convert.ToInt32(bearing + 180).ToString();
+                        else
+                            txtLP.Text = Convert.ToInt32(bearing - 180).ToString();
+                    }
+                    catch (Exception e)
+                    { MessageBox.Show(e.Message + "\n\n" +
+                        "This error is generally due to latitude or\n" +
+                        "longitude not being input on the Setup form\n\n" + 
+                        "Please correct and try again.", "Data Error"); }
+                    i = 0;
+                }
+            }
+            catch (OleDbException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        // Calc DX Station Distance, returns staute miles
+        double distrad = 0.0;
+        private int Dist(double lat1, double lon1, double lat2, double lon2)
+        {
+            double lat1rad = lat1 * Math.PI / 180;
+            double lon1rad = lon1 * Math.PI / 180;
+            double lat2rad = lat2 * Math.PI / 180;
+            double lon2rad = lon2 * Math.PI / 180;
+            distrad = Math.Acos(Math.Sin(lat1rad)*Math.Sin(lat2rad)+
+                Math.Cos(lat1rad)*Math.Cos(lat2rad)*Math.Cos(lon2rad-lon1rad));
+
+            int naut = Convert.ToInt32(distrad *(180*60/Math.PI));
+            return Convert.ToInt32(naut * 1.15);
+        }
+        // Get DXCC info for this Prefix
+        private void GetPrefix()
+        {
+            string SQL = "SELECT DXCCPrefix, CountryCode, DXCCName, Location, " +
+                "Continent, CQZone, ITUZone, IOTA, TimeZone, Latitude, Longitude " +
+                "FROM DX WHERE DXCCPrefix = '" + cboPrefix.Text + "'";
+            GetDXCC(SQL);
+//            cboPrefix.Focus();
+        }
+        // Get DXCC info for this Entity
+        private void GetEntity()
+        {
+            string SQL = "SELECT DXCCPrefix, CountryCode, DXCCName, Location, " +
+                "Continent, CQZone, ITUZone, IOTA, TimeZone, Latitude, Longitude " +
+                "FROM DX WHERE DXCCName = '" + cboEntity.Text + "'";
+            GetDXCC(SQL);
+//            cboEntity.Focus();
+        }
+        #endregion Rotor Methods
+
+        #region Rotor Setup
+
+        //  Initialize Rotor settings and controls (called from Setup())
+        private void InitRotor()
+        {   //Load DX Prefix and Entity controls from Database
+            OleDbConnection conn = new OleDbConnection(
+             "provider = microsoft.jet.oledb.4.0;data source = DDUtil.mdb;");
+            OleDbCommand thisCommand = new OleDbCommand(
+                "SELECT DISTINCT DXCCPrefix, DXCCName FROM DX " + 
+                "GROUP BY DXCCPrefix, DXCCName, TimeZone " +
+                "HAVING TimeZone Is Not Null", conn);
+
+            conn.Open();
+            OleDbDataReader thisReader = thisCommand.ExecuteReader();
+            cboPrefix.Items.Add("");
+            cboEntity.Items.Add("");
+            while (thisReader.Read())
+            {
+                cboPrefix.Items.Add(thisReader.GetValue(0).ToString());
+                cboEntity.Items.Add(thisReader.GetValue(1).ToString());
+                cboEntity.Sorted = true;
+            }
+                conn.Close();
+            // Load saved settings
+            txtLat.Text = set.Latitude;
+            txtLong.Text = set.Longitude;
+            txtGrid.Text = set.Grid;
+            cboRotorPort.SelectedIndex = set.RotorPort;
+            cboRotorCom.SelectedIndex = set.RotorCom;
+            chkRotorEnab.Checked = set.RotorEnab;
+            switch (set.RotorSpeed)
+            {
+                case 0: rbRtrSpd1.Checked = true; break;
+                case 1: rbRtrSpd2.Checked = true; break;
+                case 2: rbRtrSpd3.Checked = true; break;
+                default: break;
+            }
+            switch (set.rotorModel)
+            {
+                case 0: rbRtrMod1.Checked = true; break;  // Alpha Spid
+                case 1: rbRtrMod2.Checked = true; break;  // Green Heron
+                case 2: rbRtrMod3.Checked = true; break;  // HyGain
+                case 3: rbRtrMod4.Checked = true;         // M2RC2900A-P
+                    RotorPort.Write("S" + rtrSpd + "\r");
+                    break;
+                case 4: rbRtrMod5.Checked = true;         // M2RC2900AX
+                    RotorPort.Write("S" + rtrSpd + "\r");
+                    break;
+                case 5: rbRtrMod6.Checked = true;         // Prosistel
+                    RotorPort.Write("\x02\x41WENA_PWM=1\r");
+                    break;
+                case 6: rbRtrMod7.Checked = true;         // Yaesu
+                    RotorPort.Write("X" + rtrSpd + "\r");
+                    break;
+                default: break;
+            }
+        }
+
+        #endregion Rotor Setup
+
+        #endregion Rotor Control
+
         #region Serial Port Events
 
         /// <summary>
@@ -2007,6 +2784,8 @@ namespace DataDecoder
         string CommBuffer = "";
         string rawFreq = "";
         string sdrMode = "";
+        string xOn = "";            // 1 = xmit on, 0 = xmit off
+        string lastFreq = "";       // freq from last CATRxEvent
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
             try
@@ -2071,6 +2850,7 @@ namespace DataDecoder
                     // start checking for specific cat responses
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "IF00")
                     {   // DDUtil or RCP IF; query
+                        xOn = rawFreq.Substring(rawFreq.Length - 10, 1);
                         sdrMode = rawFreq.Substring(rawFreq.Length - 9, 1);
                         if (rawFreq.Substring(rawFreq.Length - 6, 1) == "0")
                         {   // if xmit vfo is "A" then send passive listener commands now
@@ -2092,13 +2872,6 @@ namespace DataDecoder
                         sdrMode = rawFreq.Substring(2, 1);
                         return;
                     }
-                    //else if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTS")
-                    //{   // this is a Temp cmd, write it to the temp window
-                    //    temp = Convert.ToDouble(rawFreq.Substring(4, 5));
-                    //    WriteTemp();
-                    //    //Console.WriteLine(tempTimer.Interval.ToString());
-                    //    return;
-                    //}
                     else return;
                 SendData:
                     switch (sdrMode)
@@ -2114,7 +2887,18 @@ namespace DataDecoder
                         default: mode = "xxx"; break;
                     }
                     logFreq = rawFreq.Substring(2, 11);
-                    PortSend(logFreq);
+                    PortSend(logFreq);  // send freq. to PLs
+                    // If SteppIR enabled check for activity
+                    if (chkStep.Checked)
+                    {   // see if freq has changed
+                        if (String.Compare(lastFreq, logFreq) != 0)
+                        {   // yes go poll SteppIR controller
+                            WriteToPort("?A\r", iSleep);
+                            StepTimer.Enabled = true;
+                            StepCtr = reps; // counter to allow for delay
+                        }   // see StepData_DataReceived() for return
+                    }
+                    lastFreq = logFreq; // save this freq
                     freq = Regex.Replace(rawFreq, regex, mask);
                     freq = freq.TrimStart('0');
                     freqLook = rawFreq.Substring(2, 8);
@@ -2127,15 +2911,15 @@ namespace DataDecoder
                     LookUp(freqLook);   //decode freq data and output to LPT port
                     this.SetTitle(id);
                     this.SetDigit(keyValue.ToString());
-                }//endFor
-            }//endTry
+                }//For
+            }//Try
             catch (Exception ex)
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
                 if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-            }//endCatch
-        }//endCATRxEvent
+            }
+        }//CATRxEvent
 
         // The RCP1 port has received data
         string sBuf1 = "";
@@ -2381,15 +3165,40 @@ namespace DataDecoder
                 }
             }
         }
-        // PW1 serial port has incurred an error; ignore it!
-        private void PW1port_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
-        { }
-        // PL serial port has incurred an error; ignore it!
-        private void AccPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
-        { }
-        // LP-100 serial port has incurred an error; ignore it!
-        private void LPport_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
-        { }
+        // The SteppIR Data Port has received data
+        private void StepData_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort StepMsgs = (SerialPort)sender;
+            string StepMsg = StepMsgs.ReadExisting();
+            if (StepMsg.Length == 11)
+            {
+                string ans = StepMsg.Substring(6, 1);
+                if (ans == "\0")
+                {
+                    WriteToPort("ZZTI0;", iSleep);
+                    StepCtr -= 1; // decrement the reps counter
+                    if (StepCtr == 0)
+                    {
+                        StepTimer.Enabled = false;
+                        ShowAnt(false);
+                    }
+                }
+                else
+                {
+                    WriteToPort("ZZTI1;", iSleep);
+                    ShowAnt(true);
+                }
+            }
+        }
+        //// PW1 serial port has incurred an error; ignore it!
+        //private void PW1port_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        //{ }
+        //// PL serial port has incurred an error; ignore it!
+        //private void AccPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        //{ }
+        //// LP-100 serial port has incurred an error; ignore it!
+        //private void LPport_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        //{ }
         #endregion Serial Port Events
 
         #region Serial Port Methods
@@ -2399,6 +3208,32 @@ namespace DataDecoder
         /// </summary>
         private void PortSend(string freq)
         {
+            try
+            {   // If SteppIR is selected and the freq. has changed
+                // send new freq. data to it x reps 
+                if (chkStep.Checked && StepCtr != 0)
+                {
+                    byte[] bytes = new byte[11];
+                    string decimalNumber = freq.Substring(3, 7);
+                    int number = int.Parse(decimalNumber);
+                    string hex = number.ToString("x6");
+                    string strOut = "404100" + hex + "000031300D";
+                    int j = 0;
+                    for (int i = 0; i < 11; i++)
+                    {
+                        string x = strOut.Substring(j, 2);
+                        bytes[i] = byte.Parse(x, NumberStyles.HexNumber);
+                        j += 2;
+                    }
+                    StepData.Write(bytes, 0, 11);
+                }
+            }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+            }
             LastFreq = freq;
             // If enabled send freq data to IC-PW1 port
             if (chkPW1.Checked && PW1port.IsOpen && !chkDisBcast.Checked)
@@ -2515,6 +3350,8 @@ namespace DataDecoder
                 cboRCP3.Items.Add(port);
                 cboRCP4.Items.Add(port);
                 cboPW1.Items.Add(port);
+                cboStep.Items.Add(port);
+                cboRotorPort.Items.Add(port);
             }
             cboCAT.Sorted = true;
             cboSerAcc.Items.Add("");
@@ -2531,6 +3368,11 @@ namespace DataDecoder
             cboRCP4.Sorted = true;
             cboPW1.Items.Add("");
             cboPW1.Sorted = true;
+            cboStep.Items.Add("");
+            cboStep.Sorted = true;
+            cboRotorPort.Items.Add("");
+            cboRotorPort.Sorted = true;
+
         }
         /// <summary>
         /// Opens the default CAT port.
@@ -2571,7 +3413,7 @@ namespace DataDecoder
         /// </summary>
         private void SetDefaultLPport()
         {
-            int n = cboSerAcc.Items.IndexOf(DefaultLPport);
+            int n = cboLPport.Items.IndexOf(DefaultLPport);
             if (n >= 0)
             {
                 cboLPport.SelectedIndex = n;
@@ -2581,6 +3423,23 @@ namespace DataDecoder
             {
                 MessageBox.Show("Default LP100 Port is not valid.  Please select a port from the list.");
                 cboLPport.SelectedIndex = 0;
+            }
+        }
+        /// <summary>
+        /// Opens the default SteppIR port.
+        /// </summary>
+        private void SetDefaultStepPort()
+        {
+            int n = cboStep.Items.IndexOf(DefaultStepPort);
+            if (n >= 0)
+            {
+                cboStep.SelectedIndex = n;
+                StepData.Open();
+            }
+            else
+            {
+                MessageBox.Show("Default SteppIR Port is not valid.  Please select a port from the list.");
+                cboStep.SelectedIndex = 0;
             }
         }
         /// <summary>
@@ -2706,10 +3565,10 @@ namespace DataDecoder
         {
             try
             {
-                pollTimer.Enabled = false;
+   //             pollTimer.Enabled = false;
                 sp.Write(cmd);
                 Thread.Sleep(sleep);
-                pollTimer.Enabled = true;
+   //             pollTimer.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -2778,9 +3637,17 @@ namespace DataDecoder
             }
             catch { }
         }
+        void StepTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                StepData.Write("?A\r");
+            }
+            catch { }
+        }
         #endregion Timer Events
 
-        #region PW1 Test Routines
+        #region Test Routines
 
         // The PW1 Test button was pressed
         // simulate poll message from IC-PW1 to DDUtil for freq read
@@ -2833,7 +3700,7 @@ namespace DataDecoder
             TestPort.Write(bytes, 0, 8);
             if (pw1Timer.Enabled != true) pw1Timer.Enabled = true;
         }
-        #endregion PW1 Test Routines
+        #endregion Test Routines
 
     }
 }

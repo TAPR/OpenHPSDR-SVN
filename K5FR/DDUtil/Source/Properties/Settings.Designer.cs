@@ -560,13 +560,169 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("RCP1 Commander\r\nRCP2 DXBase\r\nRCP3 MixW\r\nRCP4 WriteLog")]
+        [global::System.Configuration.DefaultSettingValueAttribute("RCP1 - Commander\r\nRCP2 - DXBase\r\nRCP3 - MixW\r\nRCP4 - WriteLog")]
         public string RCPtext {
             get {
                 return ((string)(this["RCPtext"]));
             }
             set {
                 this["RCPtext"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string StepPortNum {
+            get {
+                return ((string)(this["StepPortNum"]));
+            }
+            set {
+                this["StepPortNum"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool StepEnab {
+            get {
+                return ((bool)(this["StepEnab"]));
+            }
+            set {
+                this["StepEnab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public string StepInv {
+            get {
+                return ((string)(this["StepInv"]));
+            }
+            set {
+                this["StepInv"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int StepCom {
+            get {
+                return ((int)(this["StepCom"]));
+            }
+            set {
+                this["StepCom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Latitude {
+            get {
+                return ((string)(this["Latitude"]));
+            }
+            set {
+                this["Latitude"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Longitude {
+            get {
+                return ((string)(this["Longitude"]));
+            }
+            set {
+                this["Longitude"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Grid {
+            get {
+                return ((string)(this["Grid"]));
+            }
+            set {
+                this["Grid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RotorEnab {
+            get {
+                return ((bool)(this["RotorEnab"]));
+            }
+            set {
+                this["RotorEnab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int rotorModel {
+            get {
+                return ((int)(this["rotorModel"]));
+            }
+            set {
+                this["rotorModel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RotorSpeed {
+            get {
+                return ((int)(this["RotorSpeed"]));
+            }
+            set {
+                this["RotorSpeed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RotorCom {
+            get {
+                return ((int)(this["RotorCom"]));
+            }
+            set {
+                this["RotorCom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RotorPort {
+            get {
+                return ((int)(this["RotorPort"]));
+            }
+            set {
+                this["RotorPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int TabOpen {
+            get {
+                return ((int)(this["TabOpen"]));
+            }
+            set {
+                this["TabOpen"] = value;
             }
         }
     }

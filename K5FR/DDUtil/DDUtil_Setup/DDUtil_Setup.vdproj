@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0C348C97E0B14A579D36587B1B06E685"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_0F7366B4EB404D32BCBA6652F1E78326"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -58,6 +52,12 @@
         "Entry"
         {
         "MsmKey" = "8:_4813254816004B46B5BDCA8741ED54EC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4835A00C9FC34F6B94A99D126AC26BF5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -315,26 +315,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0C348C97E0B14A579D36587B1B06E685"
-            {
-            "SourcePath" = "8:..\\bin\\Release\\DDUtilFlow.vsd"
-            "TargetName" = "8:DDUtilFlow.vsd"
-            "Tag" = "8:"
-            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0F7366B4EB404D32BCBA6652F1E78326"
             {
             "SourcePath" = "8:..\\bin\\Release\\Port1.JPG"
@@ -439,6 +419,26 @@
             {
             "SourcePath" = "8:..\\bin\\Release\\DDU.ico"
             "TargetName" = "8:DDU.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4835A00C9FC34F6B94A99D126AC26BF5"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\DDUtil.mdb"
+            "TargetName" = "8:DDUtil.mdb"
             "Tag" = "8:"
             "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
             "Condition" = "8:"
@@ -984,14 +984,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{A5942FF7-9EC3-46BD-AE03-39EED08747E3}"
-        "PackageCode" = "8:{72A727A1-25C2-4162-BAAC-7537245F2AC5}"
+        "ProductCode" = "8:{A557AB68-BAC0-4A1B-840F-0B6260A0B7D5}"
+        "PackageCode" = "8:{90694202-92E9-43D5-BD65-53AD9F7B6036}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.5.507"
+        "ProductVersion" = "8:1.5.607"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1134,7 +1134,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B579029AB1364468967207E95A0C4906"
             {
-            "Name" = "8:DDUtil v 1.5.5"
+            "Name" = "8:DDUtil v 1.5.6"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
