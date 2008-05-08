@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DataDecoder")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("DDUtil")]
+[assembly: AssemblyDescription("Flex Data Decoder Utility")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DataDecoder")]
-[assembly: AssemblyCopyright("Copyright ©  2007")]
+[assembly: AssemblyProduct("DDUtil")]
+[assembly: AssemblyCopyright("Copyright © Steve Nance 2007, 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

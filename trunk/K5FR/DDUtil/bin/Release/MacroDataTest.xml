@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
 <macroData>
   <macro>
-    <Button>20 Last</Button>
+    <Button>20 Mtrs</Button>
     <Command>ZZBS020;</Command>
   </macro>
   <macro>
@@ -10,7 +10,7 @@
   </macro>
   <macro>
     <Button>20 CW</Button>
-    <Command>ZZFA00014010000;ZZMD04;ZZPC100;ZZMT00;ZZWE1;</Command>
+    <Command>ZZFA00014010000;ZZMD04;ZZPC100;ZZMT00;</Command>
   </macro>
   <macro>
     <Button>20 PSK</Button>
@@ -25,23 +25,26 @@
     <Command>ZZFA00003980000;ZZMD06;ZZPC050;ZZFI04;ZZMT02;ZZTP02;</Command>
   </macro>
   <macro>
-    <Button>40 Rag</Button>
-    <Command>ZZFA00007250000;ZZMD00;ZZPC100;ZZMT02;ZZWE1;ZZPT13;</Command>
+    <Button>40 CW</Button>
+    <Command>ZZFA00007020000;ZZMD04;ZZPC100;ZZMT00;</Command>
   </macro>
   <macro>
-    <Button>30 PSK</Button>
-    <Command>ZZFA00010125000;ZZMD07;ZZPC100;ZZMT02;ZZWF1;</Command>
+    <Button>30 CW</Button>
+    <Command>ZZFA00010125000;ZZMD04;ZZPC100;ZZMT00;</Command>
   </macro>
   <macro>
     <Button>Macro 9</Button>
   </macro>
   <macro>
-    <Button>Macro 10</Button>
+    <Button>15 Mtrs</Button>
+    <Command>ZZBS015;</Command>
   </macro>
   <macro>
-    <Button>Macro 11</Button>
+    <Button>12 Mtrs</Button>
+    <Command>ZZBS012;</Command>
   </macro>
   <macro>
-    <Button>Macro 12</Button>
+    <Button>FR Net</Button>
+    <Command>FA00014319000;ZZMD01;PC100;ZZMT02;ZZWE1;ZZTP13;</Command>
   </macro>
 </macroData>
