@@ -404,30 +404,6 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
-        public global::System.Drawing.Point MyLoc {
-            get {
-                return ((global::System.Drawing.Point)(this["MyLoc"]));
-            }
-            set {
-                this["MyLoc"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("430, 424")]
-        public global::System.Drawing.Size MySize {
-            get {
-                return ((global::System.Drawing.Size)(this["MySize"]));
-            }
-            set {
-                this["MySize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool RCP2DisPol {
             get {
@@ -620,7 +596,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("40.00")]
         public string Latitude {
             get {
                 return ((string)(this["Latitude"]));
@@ -632,7 +608,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-95.00")]
         public string Longitude {
             get {
                 return ((string)(this["Longitude"]));
@@ -668,7 +644,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int rotorModel {
             get {
                 return ((int)(this["rotorModel"]));
@@ -723,6 +699,90 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["TabOpen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RCP1RotorPort {
+            get {
+                return ((int)(this["RCP1RotorPort"]));
+            }
+            set {
+                this["RCP1RotorPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RCP2RotorPort {
+            get {
+                return ((int)(this["RCP2RotorPort"]));
+            }
+            set {
+                this["RCP2RotorPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RCP3RotorPort {
+            get {
+                return ((int)(this["RCP3RotorPort"]));
+            }
+            set {
+                this["RCP3RotorPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RCP4RotorPort {
+            get {
+                return ((int)(this["RCP4RotorPort"]));
+            }
+            set {
+                this["RCP4RotorPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WindowGeometry {
+            get {
+                return ((string)(this["WindowGeometry"]));
+            }
+            set {
+                this["WindowGeometry"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Call {
+            get {
+                return ((string)(this["Call"]));
+            }
+            set {
+                this["Call"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ToolTips {
+            get {
+                return ((bool)(this["ToolTips"]));
+            }
+            set {
+                this["ToolTips"] = value;
             }
         }
     }

@@ -41,6 +41,8 @@ namespace DataDecoder
             this.cboRadio = new System.Windows.Forms.ComboBox();
             this.cboFollow = new System.Windows.Forms.CheckBox();
             this.grpBox1 = new System.Windows.Forms.GroupBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.cboRCP1Rotor = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cboLogPort = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -84,9 +86,9 @@ namespace DataDecoder
             this.label16 = new System.Windows.Forms.Label();
             this.label66 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cboRCP4Rotor = new System.Windows.Forms.ComboBox();
+            this.cboRCP3Rotor = new System.Windows.Forms.ComboBox();
+            this.cboRCP2Rotor = new System.Windows.Forms.ComboBox();
             this.label40 = new System.Windows.Forms.Label();
             this.chkRCP2 = new System.Windows.Forms.CheckBox();
             this.txtRCP = new System.Windows.Forms.TextBox();
@@ -111,9 +113,7 @@ namespace DataDecoder
             this.chkStep = new System.Windows.Forms.CheckBox();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
             this.lblSleep = new System.Windows.Forms.Label();
-            this.txtSleep = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.chkDisBcast = new System.Windows.Forms.CheckBox();
             this.btnTest = new System.Windows.Forms.Button();
@@ -129,6 +129,7 @@ namespace DataDecoder
             this.btnPFfile = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.txtProfLoc = new System.Windows.Forms.TextBox();
+            this.txtSleep = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cboLPport = new System.Windows.Forms.ComboBox();
             this.txtLPint = new System.Windows.Forms.TextBox();
@@ -168,6 +169,13 @@ namespace DataDecoder
             this.btnMacro2 = new System.Windows.Forms.Button();
             this.btnMacro1 = new System.Windows.Forms.Button();
             this.tabRotor = new System.Windows.Forms.TabPage();
+            this.grpStepCtrl = new System.Windows.Forms.GroupBox();
+            this.rb34 = new System.Windows.Forms.RadioButton();
+            this.rbBiDir = new System.Windows.Forms.RadioButton();
+            this.rb180 = new System.Windows.Forms.RadioButton();
+            this.rbFwd = new System.Windows.Forms.RadioButton();
+            this.btnCalib = new System.Windows.Forms.Button();
+            this.btnHome = new System.Windows.Forms.Button();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.lblDxTime = new System.Windows.Forms.Label();
             this.txtDxIOTA = new System.Windows.Forms.TextBox();
@@ -205,6 +213,7 @@ namespace DataDecoder
             this.btnLP = new System.Windows.Forms.Button();
             this.txtSP = new System.Windows.Forms.TextBox();
             this.tabSetup = new System.Windows.Forms.TabPage();
+            this.chkTips = new System.Windows.Forms.CheckBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.label50 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
@@ -224,6 +233,8 @@ namespace DataDecoder
             this.rbRtrMod2 = new System.Windows.Forms.RadioButton();
             this.rbRtrMod1 = new System.Windows.Forms.RadioButton();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.txtCall = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.txtGrid = new System.Windows.Forms.TextBox();
             this.txtLat = new System.Windows.Forms.TextBox();
             this.label44 = new System.Windows.Forms.Label();
@@ -238,6 +249,7 @@ namespace DataDecoder
             this.btnProfiler = new System.Windows.Forms.Button();
             this.btnReStart = new System.Windows.Forms.Button();
             this.txtTemp = new System.Windows.Forms.TextBox();
+            this.lblAnt = new System.Windows.Forms.Label();
             this.LogPort = new System.IO.Ports.SerialPort(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -273,7 +285,6 @@ namespace DataDecoder
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.StatusBar = new System.Windows.Forms.ToolStripStatusLabel();
             this.StepData = new System.IO.Ports.SerialPort(this.components);
-            this.lblAnt = new System.Windows.Forms.Label();
             this.radioButton10 = new System.Windows.Forms.RadioButton();
             this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.radioButton12 = new System.Windows.Forms.RadioButton();
@@ -281,6 +292,10 @@ namespace DataDecoder
             this.radioButton14 = new System.Windows.Forms.RadioButton();
             this.radioButton15 = new System.Windows.Forms.RadioButton();
             this.RotorPort = new System.IO.Ports.SerialPort(this.components);
+            this.RCP1Rotor = new System.IO.Ports.SerialPort(this.components);
+            this.RCP2Rotor = new System.IO.Ports.SerialPort(this.components);
+            this.RCP3Rotor = new System.IO.Ports.SerialPort(this.components);
+            this.RCP4Rotor = new System.IO.Ports.SerialPort(this.components);
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpBox1.SuspendLayout();
@@ -301,6 +316,7 @@ namespace DataDecoder
             this.grpMacro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgm)).BeginInit();
             this.tabRotor.SuspendLayout();
+            this.grpStepCtrl.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -323,7 +339,7 @@ namespace DataDecoder
             this.tabControl.Controls.Add(this.tabMacro);
             this.tabControl.Controls.Add(this.tabRotor);
             this.tabControl.Controls.Add(this.tabSetup);
-            this.tabControl.Location = new System.Drawing.Point(0, 26);
+            this.tabControl.Location = new System.Drawing.Point(5, 26);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(423, 329);
@@ -332,7 +348,7 @@ namespace DataDecoder
             // 
             // tabPorts
             // 
-            this.tabPorts.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPorts.BackColor = System.Drawing.Color.Transparent;
             this.tabPorts.Controls.Add(this.label12);
             this.tabPorts.Controls.Add(this.cboRadData);
             this.tabPorts.Controls.Add(this.label9);
@@ -354,7 +370,7 @@ namespace DataDecoder
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(226, 282);
+            this.label12.Location = new System.Drawing.Point(226, 275);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(85, 13);
             this.label12.TabIndex = 29;
@@ -372,7 +388,7 @@ namespace DataDecoder
             "2400 8-N-2",
             "1200 8-N-1",
             "1200 8-N-2"});
-            this.cboRadData.Location = new System.Drawing.Point(227, 258);
+            this.cboRadData.Location = new System.Drawing.Point(227, 252);
             this.cboRadData.Name = "cboRadData";
             this.cboRadData.Size = new System.Drawing.Size(83, 21);
             this.cboRadData.TabIndex = 28;
@@ -382,7 +398,7 @@ namespace DataDecoder
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(336, 281);
+            this.label9.Location = new System.Drawing.Point(336, 274);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 13);
             this.label9.TabIndex = 27;
@@ -391,7 +407,7 @@ namespace DataDecoder
             // txtRadNum
             // 
             this.txtRadNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRadNum.Location = new System.Drawing.Point(344, 258);
+            this.txtRadNum.Location = new System.Drawing.Point(344, 252);
             this.txtRadNum.Name = "txtRadNum";
             this.txtRadNum.Size = new System.Drawing.Size(32, 20);
             this.txtRadNum.TabIndex = 15;
@@ -402,7 +418,7 @@ namespace DataDecoder
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(109, 282);
+            this.label8.Location = new System.Drawing.Point(109, 275);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(92, 13);
             this.label8.TabIndex = 26;
@@ -417,7 +433,7 @@ namespace DataDecoder
             "Yaesu Type 1",
             "Yaesu Type 2",
             "Icom"});
-            this.cboRadio.Location = new System.Drawing.Point(112, 258);
+            this.cboRadio.Location = new System.Drawing.Point(112, 252);
             this.cboRadio.Name = "cboRadio";
             this.cboRadio.Size = new System.Drawing.Size(89, 21);
             this.cboRadio.TabIndex = 26;
@@ -427,7 +443,7 @@ namespace DataDecoder
             // cboFollow
             // 
             this.cboFollow.AutoSize = true;
-            this.cboFollow.Location = new System.Drawing.Point(16, 262);
+            this.cboFollow.Location = new System.Drawing.Point(16, 256);
             this.cboFollow.Name = "cboFollow";
             this.cboFollow.Size = new System.Drawing.Size(82, 17);
             this.cboFollow.TabIndex = 26;
@@ -439,6 +455,8 @@ namespace DataDecoder
             // 
             // grpBox1
             // 
+            this.grpBox1.Controls.Add(this.label46);
+            this.grpBox1.Controls.Add(this.cboRCP1Rotor);
             this.grpBox1.Controls.Add(this.label11);
             this.grpBox1.Controls.Add(this.cboLogPort);
             this.grpBox1.Controls.Add(this.label6);
@@ -449,81 +467,105 @@ namespace DataDecoder
             this.grpBox1.Controls.Add(this.cboCAT);
             this.grpBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpBox1.ForeColor = System.Drawing.Color.DarkRed;
-            this.grpBox1.Location = new System.Drawing.Point(15, 14);
+            this.grpBox1.Location = new System.Drawing.Point(15, 15);
             this.grpBox1.Name = "grpBox1";
-            this.grpBox1.Size = new System.Drawing.Size(381, 78);
+            this.grpBox1.Size = new System.Drawing.Size(381, 65);
             this.grpBox1.TabIndex = 19;
             this.grpBox1.TabStop = false;
             this.grpBox1.Text = "Serial Ports";
             this.toolTip1.SetToolTip(this.grpBox1, "Right-Click for Options");
             // 
+            // label46
+            // 
+            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label46.Location = new System.Drawing.Point(307, 40);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(67, 15);
+            this.label46.TabIndex = 16;
+            this.label46.Text = "RCP1 Rotor";
+            this.toolTip1.SetToolTip(this.label46, "Select Master RCP1 Rotor Port");
+            // 
+            // cboRCP1Rotor
+            // 
+            this.cboRCP1Rotor.Enabled = false;
+            this.cboRCP1Rotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboRCP1Rotor.FormattingEnabled = true;
+            this.cboRCP1Rotor.Location = new System.Drawing.Point(306, 19);
+            this.cboRCP1Rotor.Name = "cboRCP1Rotor";
+            this.cboRCP1Rotor.Size = new System.Drawing.Size(65, 21);
+            this.cboRCP1Rotor.TabIndex = 15;
+            this.toolTip1.SetToolTip(this.cboRCP1Rotor, "Radio Control Program 1 Rotor Port");
+            this.cboRCP1Rotor.SelectedIndexChanged += new System.EventHandler(this.cboRCP1Rotor_SelectedIndexChanged);
+            // 
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label11.Location = new System.Drawing.Point(214, 44);
+            this.label11.Location = new System.Drawing.Point(230, 40);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(81, 21);
+            this.label11.Size = new System.Drawing.Size(62, 15);
             this.label11.TabIndex = 14;
-            this.label11.Text = "Master RCP 1";
-            this.toolTip1.SetToolTip(this.label11, "Select Master RCP 1 Port");
+            this.label11.Text = "RCP1 CAT";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.label11, "Select Master RCP1 CAT Port");
             // 
             // cboLogPort
             // 
             this.cboLogPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboLogPort.FormattingEnabled = true;
-            this.cboLogPort.Location = new System.Drawing.Point(215, 19);
+            this.cboLogPort.Location = new System.Drawing.Point(230, 19);
             this.cboLogPort.Name = "cboLogPort";
-            this.cboLogPort.Size = new System.Drawing.Size(85, 21);
+            this.cboLogPort.Size = new System.Drawing.Size(65, 21);
             this.cboLogPort.TabIndex = 13;
-            this.toolTip1.SetToolTip(this.cboLogPort, "Select Master RCP 1 Port");
+            this.toolTip1.SetToolTip(this.cboLogPort, "Radio Control Program 1 CAT Port");
             this.cboLogPort.SelectedIndexChanged += new System.EventHandler(this.cboLogPort_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label6.Location = new System.Drawing.Point(312, 44);
+            this.label6.Location = new System.Drawing.Point(170, 40);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 32);
+            this.label6.Size = new System.Drawing.Size(50, 15);
             this.label6.TabIndex = 12;
-            this.label6.Text = "CAT Polling Interval";
+            this.label6.Text = "Poll Intvl";
             // 
             // txtInv
             // 
             this.txtInv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInv.Location = new System.Drawing.Point(316, 19);
+            this.txtInv.Location = new System.Drawing.Point(170, 20);
             this.txtInv.Name = "txtInv";
-            this.txtInv.Size = new System.Drawing.Size(55, 20);
+            this.txtInv.Size = new System.Drawing.Size(45, 20);
             this.txtInv.TabIndex = 11;
-            this.toolTip1.SetToolTip(this.txtInv, "Select CAT port polling interval (1000 = 1 secoond)");
+            this.txtInv.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtInv, "Radio CAT polling interval (with DDUtil only running)");
             this.txtInv.TextChanged += new System.EventHandler(this.txtInv_TextChanged);
             // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label5.Location = new System.Drawing.Point(107, 44);
+            this.label5.Location = new System.Drawing.Point(88, 40);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(96, 21);
+            this.label5.Size = new System.Drawing.Size(62, 15);
             this.label5.TabIndex = 3;
-            this.label5.Text = "Passive Listener";
+            this.label5.Text = "Pass Listen";
             this.toolTip1.SetToolTip(this.label5, "Select Passive Listener Port (A hardware serial port)");
             // 
             // cboSerAcc
             // 
             this.cboSerAcc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboSerAcc.FormattingEnabled = true;
-            this.cboSerAcc.Location = new System.Drawing.Point(109, 19);
+            this.cboSerAcc.Location = new System.Drawing.Point(90, 19);
             this.cboSerAcc.Name = "cboSerAcc";
-            this.cboSerAcc.Size = new System.Drawing.Size(85, 21);
+            this.cboSerAcc.Size = new System.Drawing.Size(65, 21);
             this.cboSerAcc.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.cboSerAcc, "Select Passive Listener Port (A hardware serial port)");
+            this.toolTip1.SetToolTip(this.cboSerAcc, "Select Passive Listener Port (must be hardware serial port)");
             this.cboSerAcc.SelectedIndexChanged += new System.EventHandler(this.cboSerAcc_SelectionChangeCommitted);
             // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label3.Location = new System.Drawing.Point(8, 43);
+            this.label3.Location = new System.Drawing.Point(8, 40);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 22);
+            this.label3.Size = new System.Drawing.Size(62, 15);
             this.label3.TabIndex = 1;
             this.label3.Text = "Radio CAT";
             this.toolTip1.SetToolTip(this.label3, "Select Radio CAT Serial Port");
@@ -532,11 +574,11 @@ namespace DataDecoder
             // 
             this.cboCAT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboCAT.FormattingEnabled = true;
-            this.cboCAT.Location = new System.Drawing.Point(7, 19);
+            this.cboCAT.Location = new System.Drawing.Point(10, 19);
             this.cboCAT.Name = "cboCAT";
-            this.cboCAT.Size = new System.Drawing.Size(85, 21);
+            this.cboCAT.Size = new System.Drawing.Size(65, 21);
             this.cboCAT.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.cboCAT, "Select Radio CAT Serial Port");
+            this.toolTip1.SetToolTip(this.cboCAT, "Radio CAT Serial Port (virtual)");
             this.cboCAT.SelectedIndexChanged += new System.EventHandler(this.cboCAT_SelectedIndexChanged);
             // 
             // grpBox2
@@ -549,7 +591,7 @@ namespace DataDecoder
             this.grpBox2.Controls.Add(this.txtPort);
             this.grpBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.grpBox2.ForeColor = System.Drawing.Color.Navy;
-            this.grpBox2.Location = new System.Drawing.Point(15, 102);
+            this.grpBox2.Location = new System.Drawing.Point(15, 95);
             this.grpBox2.Name = "grpBox2";
             this.grpBox2.Size = new System.Drawing.Size(381, 139);
             this.grpBox2.TabIndex = 18;
@@ -584,7 +626,7 @@ namespace DataDecoder
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(145, 117);
+            this.label7.Location = new System.Drawing.Point(145, 114);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(66, 13);
             this.label7.TabIndex = 28;
@@ -909,9 +951,9 @@ namespace DataDecoder
             this.groupBox7.Controls.Add(this.label16);
             this.groupBox7.Controls.Add(this.label66);
             this.groupBox7.Controls.Add(this.label65);
-            this.groupBox7.Controls.Add(this.comboBox3);
-            this.groupBox7.Controls.Add(this.comboBox2);
-            this.groupBox7.Controls.Add(this.comboBox1);
+            this.groupBox7.Controls.Add(this.cboRCP4Rotor);
+            this.groupBox7.Controls.Add(this.cboRCP3Rotor);
+            this.groupBox7.Controls.Add(this.cboRCP2Rotor);
             this.groupBox7.Controls.Add(this.label40);
             this.groupBox7.Controls.Add(this.chkRCP2);
             this.groupBox7.Controls.Add(this.txtRCP);
@@ -944,7 +986,7 @@ namespace DataDecoder
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(35, 13);
             this.label18.TabIndex = 74;
-            this.label18.Text = "RCP2";
+            this.label18.Text = "RCP4";
             // 
             // label16
             // 
@@ -954,66 +996,65 @@ namespace DataDecoder
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(35, 13);
             this.label16.TabIndex = 73;
-            this.label16.Text = "RCP2";
+            this.label16.Text = "RCP3";
             // 
             // label66
             // 
             this.label66.AutoSize = true;
             this.label66.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label66.Location = new System.Drawing.Point(330, 21);
+            this.label66.Location = new System.Drawing.Point(315, 21);
             this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(55, 13);
+            this.label66.Size = new System.Drawing.Size(80, 13);
             this.label66.TabIndex = 72;
-            this.label66.Text = "Rotor Port";
+            this.label66.Text = "RCP Rotor Port";
             this.label66.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label66.Visible = false;
             // 
             // label65
             // 
             this.label65.AutoSize = true;
             this.label65.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label65.Location = new System.Drawing.Point(125, 21);
+            this.label65.Location = new System.Drawing.Point(115, 21);
             this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(51, 13);
+            this.label65.Size = new System.Drawing.Size(75, 13);
             this.label65.TabIndex = 71;
-            this.label65.Text = "RCP Port";
+            this.label65.Text = "RCP CAT Port";
             this.label65.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // comboBox3
+            // cboRCP4Rotor
             // 
-            this.comboBox3.Enabled = false;
-            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(330, 109);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(63, 21);
-            this.comboBox3.TabIndex = 67;
-            this.toolTip1.SetToolTip(this.comboBox3, "Select port for Radio Control program");
-            this.comboBox3.Visible = false;
+            this.cboRCP4Rotor.Enabled = false;
+            this.cboRCP4Rotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboRCP4Rotor.FormattingEnabled = true;
+            this.cboRCP4Rotor.Location = new System.Drawing.Point(325, 109);
+            this.cboRCP4Rotor.Name = "cboRCP4Rotor";
+            this.cboRCP4Rotor.Size = new System.Drawing.Size(63, 21);
+            this.cboRCP4Rotor.TabIndex = 67;
+            this.toolTip1.SetToolTip(this.cboRCP4Rotor, "Rotor Port for RCP 4");
+            this.cboRCP4Rotor.SelectedIndexChanged += new System.EventHandler(this.cboRCP4Rotor_SelectedIndexChanged);
             // 
-            // comboBox2
+            // cboRCP3Rotor
             // 
-            this.comboBox2.Enabled = false;
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(330, 72);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(63, 21);
-            this.comboBox2.TabIndex = 66;
-            this.toolTip1.SetToolTip(this.comboBox2, "Select port for Radio Control program");
-            this.comboBox2.Visible = false;
+            this.cboRCP3Rotor.Enabled = false;
+            this.cboRCP3Rotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboRCP3Rotor.FormattingEnabled = true;
+            this.cboRCP3Rotor.Location = new System.Drawing.Point(325, 72);
+            this.cboRCP3Rotor.Name = "cboRCP3Rotor";
+            this.cboRCP3Rotor.Size = new System.Drawing.Size(63, 21);
+            this.cboRCP3Rotor.TabIndex = 66;
+            this.toolTip1.SetToolTip(this.cboRCP3Rotor, "Rotor Port for RCP 3");
+            this.cboRCP3Rotor.SelectedIndexChanged += new System.EventHandler(this.cboRCP3Rotor_SelectedIndexChanged);
             // 
-            // comboBox1
+            // cboRCP2Rotor
             // 
-            this.comboBox1.Enabled = false;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(330, 37);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(63, 21);
-            this.comboBox1.TabIndex = 65;
-            this.toolTip1.SetToolTip(this.comboBox1, "Select port for Radio Control program");
-            this.comboBox1.Visible = false;
+            this.cboRCP2Rotor.Enabled = false;
+            this.cboRCP2Rotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboRCP2Rotor.FormattingEnabled = true;
+            this.cboRCP2Rotor.Location = new System.Drawing.Point(325, 37);
+            this.cboRCP2Rotor.Name = "cboRCP2Rotor";
+            this.cboRCP2Rotor.Size = new System.Drawing.Size(63, 21);
+            this.cboRCP2Rotor.TabIndex = 65;
+            this.toolTip1.SetToolTip(this.cboRCP2Rotor, "Rotor Port for RCP 2");
+            this.cboRCP2Rotor.SelectedIndexChanged += new System.EventHandler(this.cboRCP2Rotor_SelectedIndexChanged);
             // 
             // label40
             // 
@@ -1034,7 +1075,7 @@ namespace DataDecoder
             this.chkRCP2.Size = new System.Drawing.Size(65, 17);
             this.chkRCP2.TabIndex = 48;
             this.chkRCP2.Text = "Enabled";
-            this.toolTip1.SetToolTip(this.chkRCP2, "Check to enable this port");
+            this.toolTip1.SetToolTip(this.chkRCP2, "Check to enable RCP 2");
             this.chkRCP2.UseVisualStyleBackColor = true;
             this.chkRCP2.CheckedChanged += new System.EventHandler(this.chkRCP2_CheckedChanged);
             // 
@@ -1058,7 +1099,7 @@ namespace DataDecoder
             this.cboRCP2.Name = "cboRCP2";
             this.cboRCP2.Size = new System.Drawing.Size(63, 21);
             this.cboRCP2.TabIndex = 46;
-            this.toolTip1.SetToolTip(this.cboRCP2, "Select port for Radio Control program");
+            this.toolTip1.SetToolTip(this.cboRCP2, "RCP2 CAT Port");
             this.cboRCP2.SelectedIndexChanged += new System.EventHandler(this.cboRCP2_SelectedIndexChanged);
             // 
             // chkRCP4IF
@@ -1106,7 +1147,7 @@ namespace DataDecoder
             this.chkRCP3.Size = new System.Drawing.Size(65, 17);
             this.chkRCP3.TabIndex = 51;
             this.chkRCP3.Text = "Enabled";
-            this.toolTip1.SetToolTip(this.chkRCP3, "Check to enable this port");
+            this.toolTip1.SetToolTip(this.chkRCP3, "Check to enable RCP 3");
             this.chkRCP3.UseVisualStyleBackColor = true;
             this.chkRCP3.CheckedChanged += new System.EventHandler(this.chkRCP3_CheckedChanged);
             // 
@@ -1131,7 +1172,7 @@ namespace DataDecoder
             this.cboRCP3.Name = "cboRCP3";
             this.cboRCP3.Size = new System.Drawing.Size(63, 21);
             this.cboRCP3.TabIndex = 50;
-            this.toolTip1.SetToolTip(this.cboRCP3, "Select port for Radio Control program");
+            this.toolTip1.SetToolTip(this.cboRCP3, "RCP 3 CAT Port");
             this.cboRCP3.SelectedIndexChanged += new System.EventHandler(this.cboRCP3_SelectedIndexChanged);
             // 
             // chkRCP4DisPol
@@ -1143,7 +1184,7 @@ namespace DataDecoder
             this.chkRCP4DisPol.Size = new System.Drawing.Size(61, 17);
             this.chkRCP4DisPol.TabIndex = 59;
             this.chkRCP4DisPol.Text = "Dis Poll";
-            this.toolTip1.SetToolTip(this.chkRCP4DisPol, "Check to disable polling on this port");
+            this.toolTip1.SetToolTip(this.chkRCP4DisPol, "Check to disable polling for RCP 4");
             this.chkRCP4DisPol.UseVisualStyleBackColor = true;
             this.chkRCP4DisPol.CheckedChanged += new System.EventHandler(this.chkRCP4DisPol_CheckedChanged);
             // 
@@ -1156,7 +1197,7 @@ namespace DataDecoder
             this.chkRCP4.Size = new System.Drawing.Size(65, 17);
             this.chkRCP4.TabIndex = 54;
             this.chkRCP4.Text = "Enabled";
-            this.toolTip1.SetToolTip(this.chkRCP4, "Check to enable this port");
+            this.toolTip1.SetToolTip(this.chkRCP4, "Check to enable RCP 4");
             this.chkRCP4.UseVisualStyleBackColor = true;
             this.chkRCP4.CheckedChanged += new System.EventHandler(this.chkRCP4_CheckedChanged);
             // 
@@ -1169,7 +1210,7 @@ namespace DataDecoder
             this.chkRCP3DisPol.Size = new System.Drawing.Size(61, 17);
             this.chkRCP3DisPol.TabIndex = 58;
             this.chkRCP3DisPol.Text = "Dis Poll";
-            this.toolTip1.SetToolTip(this.chkRCP3DisPol, "Check to disable polling on this port");
+            this.toolTip1.SetToolTip(this.chkRCP3DisPol, "Check to disable polling for RCP 3");
             this.chkRCP3DisPol.UseVisualStyleBackColor = true;
             this.chkRCP3DisPol.CheckedChanged += new System.EventHandler(this.chkRCP3DisPol_CheckedChanged);
             // 
@@ -1181,7 +1222,7 @@ namespace DataDecoder
             this.cboRCP4.Name = "cboRCP4";
             this.cboRCP4.Size = new System.Drawing.Size(63, 21);
             this.cboRCP4.TabIndex = 53;
-            this.toolTip1.SetToolTip(this.cboRCP4, "Select port for Radio Control program");
+            this.toolTip1.SetToolTip(this.cboRCP4, "RCP 4 CAT Port");
             this.cboRCP4.SelectedIndexChanged += new System.EventHandler(this.cboRCP4_SelectedIndexChanged);
             // 
             // chkRCP2DisPol
@@ -1193,19 +1234,19 @@ namespace DataDecoder
             this.chkRCP2DisPol.Size = new System.Drawing.Size(61, 17);
             this.chkRCP2DisPol.TabIndex = 57;
             this.chkRCP2DisPol.Text = "Dis Poll";
-            this.toolTip1.SetToolTip(this.chkRCP2DisPol, "Check to disable polling on this port");
+            this.toolTip1.SetToolTip(this.chkRCP2DisPol, "Check to disable polling for RCP 2");
             this.chkRCP2DisPol.UseVisualStyleBackColor = true;
             this.chkRCP2DisPol.CheckedChanged += new System.EventHandler(this.chkRCP2DisPol_CheckedChanged);
             // 
             // tabOther
             // 
             this.tabOther.Controls.Add(this.groupBox6);
-            this.tabOther.Controls.Add(this.label25);
             this.tabOther.Controls.Add(this.lblSleep);
-            this.tabOther.Controls.Add(this.txtSleep);
             this.tabOther.Controls.Add(this.groupBox4);
             this.tabOther.Controls.Add(this.groupBox3);
+            this.tabOther.Controls.Add(this.txtSleep);
             this.tabOther.Controls.Add(this.groupBox2);
+            this.tabOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabOther.Location = new System.Drawing.Point(4, 22);
             this.tabOther.Name = "tabOther";
             this.tabOther.Size = new System.Drawing.Size(415, 303);
@@ -1224,10 +1265,10 @@ namespace DataDecoder
             this.groupBox6.Controls.Add(this.label41);
             this.groupBox6.Controls.Add(this.label42);
             this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.groupBox6.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox6.Location = new System.Drawing.Point(186, 96);
+            this.groupBox6.ForeColor = System.Drawing.Color.Navy;
+            this.groupBox6.Location = new System.Drawing.Point(265, 95);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(178, 86);
+            this.groupBox6.Size = new System.Drawing.Size(145, 94);
             this.groupBox6.TabIndex = 48;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "SteppIR";
@@ -1235,7 +1276,7 @@ namespace DataDecoder
             // label19
             // 
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(88, 67);
+            this.label19.Location = new System.Drawing.Point(75, 50);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(39, 15);
             this.label19.TabIndex = 47;
@@ -1254,7 +1295,7 @@ namespace DataDecoder
             "2400 8-N-2",
             "1200 8-N-1",
             "1200 8-N-2"});
-            this.cboStepCom.Location = new System.Drawing.Point(74, 43);
+            this.cboStepCom.Location = new System.Drawing.Point(57, 66);
             this.cboStepCom.Name = "cboStepCom";
             this.cboStepCom.Size = new System.Drawing.Size(81, 21);
             this.cboStepCom.TabIndex = 46;
@@ -1265,7 +1306,7 @@ namespace DataDecoder
             // 
             this.cboStep.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboStep.FormattingEnabled = true;
-            this.cboStep.Location = new System.Drawing.Point(74, 13);
+            this.cboStep.Location = new System.Drawing.Point(74, 25);
             this.cboStep.Name = "cboStep";
             this.cboStep.Size = new System.Drawing.Size(63, 21);
             this.cboStep.TabIndex = 17;
@@ -1275,7 +1316,7 @@ namespace DataDecoder
             // txtStepInv
             // 
             this.txtStepInv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStepInv.Location = new System.Drawing.Point(9, 42);
+            this.txtStepInv.Location = new System.Drawing.Point(9, 66);
             this.txtStepInv.Name = "txtStepInv";
             this.txtStepInv.Size = new System.Drawing.Size(36, 20);
             this.txtStepInv.TabIndex = 15;
@@ -1299,50 +1340,30 @@ namespace DataDecoder
             // label41
             // 
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(7, 67);
+            this.label41.Location = new System.Drawing.Point(6, 51);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(49, 15);
+            this.label41.Size = new System.Drawing.Size(45, 15);
             this.label41.TabIndex = 16;
             this.label41.Text = "Interval";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label42
             // 
             this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.Location = new System.Drawing.Point(138, 16);
+            this.label42.Location = new System.Drawing.Point(85, 10);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(29, 18);
+            this.label42.Size = new System.Drawing.Size(29, 16);
             this.label42.TabIndex = 18;
             this.label42.Text = "Port";
             // 
-            // label25
-            // 
-            this.label25.Location = new System.Drawing.Point(370, 112);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(40, 18);
-            this.label25.TabIndex = 63;
-            this.label25.Text = "Temp";
-            this.label25.Visible = false;
-            // 
             // lblSleep
             // 
-            this.lblSleep.Location = new System.Drawing.Point(372, 164);
+            this.lblSleep.Location = new System.Drawing.Point(344, 59);
             this.lblSleep.Name = "lblSleep";
-            this.lblSleep.Size = new System.Drawing.Size(40, 18);
+            this.lblSleep.Size = new System.Drawing.Size(35, 18);
             this.lblSleep.TabIndex = 51;
             this.lblSleep.Text = "Sleep";
             this.lblSleep.Visible = false;
-            // 
-            // txtSleep
-            // 
-            this.txtSleep.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSleep.Location = new System.Drawing.Point(372, 135);
-            this.txtSleep.Name = "txtSleep";
-            this.txtSleep.Size = new System.Drawing.Size(32, 22);
-            this.txtSleep.TabIndex = 51;
-            this.txtSleep.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtSleep, "Danger Will Robinson! If you don\'t know what this is for don\'t change it.");
-            this.txtSleep.Visible = false;
-            this.txtSleep.TextChanged += new System.EventHandler(this.txtSleep_TextChanged);
             // 
             // groupBox4
             // 
@@ -1360,7 +1381,7 @@ namespace DataDecoder
             this.groupBox4.ForeColor = System.Drawing.Color.Firebrick;
             this.groupBox4.Location = new System.Drawing.Point(7, 7);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(403, 83);
+            this.groupBox4.Size = new System.Drawing.Size(303, 83);
             this.groupBox4.TabIndex = 48;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "IC-PW1";
@@ -1382,7 +1403,7 @@ namespace DataDecoder
             // 
             this.btnTest.AutoSize = true;
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTest.Location = new System.Drawing.Point(359, 29);
+            this.btnTest.Location = new System.Drawing.Point(145, 55);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(42, 23);
             this.btnTest.TabIndex = 49;
@@ -1394,7 +1415,7 @@ namespace DataDecoder
             // label24
             // 
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(271, 55);
+            this.label24.Location = new System.Drawing.Point(205, 50);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(18, 15);
             this.label24.TabIndex = 48;
@@ -1405,7 +1426,7 @@ namespace DataDecoder
             // 
             this.txtPW1ra.Enabled = false;
             this.txtPW1ra.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPW1ra.Location = new System.Drawing.Point(264, 29);
+            this.txtPW1ra.Location = new System.Drawing.Point(198, 24);
             this.txtPW1ra.Name = "txtPW1ra";
             this.txtPW1ra.Size = new System.Drawing.Size(32, 20);
             this.txtPW1ra.TabIndex = 47;
@@ -1416,7 +1437,7 @@ namespace DataDecoder
             // label23
             // 
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(324, 55);
+            this.label23.Location = new System.Drawing.Point(258, 50);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(18, 15);
             this.label23.TabIndex = 46;
@@ -1427,7 +1448,7 @@ namespace DataDecoder
             // 
             this.cboPW1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboPW1.FormattingEnabled = true;
-            this.cboPW1.Location = new System.Drawing.Point(124, 29);
+            this.cboPW1.Location = new System.Drawing.Point(90, 25);
             this.cboPW1.Name = "cboPW1";
             this.cboPW1.Size = new System.Drawing.Size(63, 21);
             this.cboPW1.TabIndex = 17;
@@ -1437,7 +1458,7 @@ namespace DataDecoder
             // txtPW1ta
             // 
             this.txtPW1ta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPW1ta.Location = new System.Drawing.Point(316, 29);
+            this.txtPW1ta.Location = new System.Drawing.Point(250, 24);
             this.txtPW1ta.Name = "txtPW1ta";
             this.txtPW1ta.Size = new System.Drawing.Size(32, 20);
             this.txtPW1ta.TabIndex = 15;
@@ -1450,7 +1471,7 @@ namespace DataDecoder
             // 
             this.chkPW1.AutoSize = true;
             this.chkPW1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPW1.Location = new System.Drawing.Point(17, 32);
+            this.chkPW1.Location = new System.Drawing.Point(17, 25);
             this.chkPW1.Name = "chkPW1";
             this.chkPW1.Size = new System.Drawing.Size(65, 17);
             this.chkPW1.TabIndex = 45;
@@ -1462,9 +1483,9 @@ namespace DataDecoder
             // label21
             // 
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(247, 11);
+            this.label21.Location = new System.Drawing.Point(200, 6);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(116, 15);
+            this.label21.Size = new System.Drawing.Size(84, 15);
             this.label21.TabIndex = 16;
             this.label21.Text = "--- CI-V Addr ---";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1472,7 +1493,7 @@ namespace DataDecoder
             // label22
             // 
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(196, 32);
+            this.label22.Location = new System.Drawing.Point(155, 28);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(30, 15);
             this.label22.TabIndex = 18;
@@ -1480,7 +1501,7 @@ namespace DataDecoder
             // 
             // groupBox3
             // 
-            this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.Controls.Add(this.btnPFfile);
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.txtProfLoc);
@@ -1523,8 +1544,20 @@ namespace DataDecoder
             this.txtProfLoc.Name = "txtProfLoc";
             this.txtProfLoc.Size = new System.Drawing.Size(391, 20);
             this.txtProfLoc.TabIndex = 58;
-            this.toolTip1.SetToolTip(this.txtProfLoc, "Data file to use for this device.");
+            this.toolTip1.SetToolTip(this.txtProfLoc, "Flex Profiler data file & location to use for this device.");
             this.txtProfLoc.WordWrap = false;
+            // 
+            // txtSleep
+            // 
+            this.txtSleep.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSleep.Location = new System.Drawing.Point(345, 30);
+            this.txtSleep.Name = "txtSleep";
+            this.txtSleep.Size = new System.Drawing.Size(32, 22);
+            this.txtSleep.TabIndex = 51;
+            this.txtSleep.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtSleep, "Danger Will Robinson! If you don\'t know what this is for don\'t change it.");
+            this.txtSleep.Visible = false;
+            this.txtSleep.TextChanged += new System.EventHandler(this.txtSleep_TextChanged);
             // 
             // groupBox2
             // 
@@ -1537,7 +1570,7 @@ namespace DataDecoder
             this.groupBox2.ForeColor = System.Drawing.Color.Green;
             this.groupBox2.Location = new System.Drawing.Point(7, 96);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(172, 87);
+            this.groupBox2.Size = new System.Drawing.Size(143, 87);
             this.groupBox2.TabIndex = 47;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LP-100";
@@ -1546,17 +1579,17 @@ namespace DataDecoder
             // 
             this.cboLPport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboLPport.FormattingEnabled = true;
-            this.cboLPport.Location = new System.Drawing.Point(74, 13);
+            this.cboLPport.Location = new System.Drawing.Point(10, 60);
             this.cboLPport.Name = "cboLPport";
-            this.cboLPport.Size = new System.Drawing.Size(63, 21);
+            this.cboLPport.Size = new System.Drawing.Size(65, 21);
             this.cboLPport.TabIndex = 17;
-            this.toolTip1.SetToolTip(this.cboLPport, "Select Auxillary Radio Control Port (HRD, MixW, DXLab)");
+            this.toolTip1.SetToolTip(this.cboLPport, "Select LP-100 serial port.");
             this.cboLPport.SelectedIndexChanged += new System.EventHandler(this.cboLPport_SelectedIndexChanged);
             // 
             // txtLPint
             // 
             this.txtLPint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLPint.Location = new System.Drawing.Point(74, 46);
+            this.txtLPint.Location = new System.Drawing.Point(90, 60);
             this.txtLPint.Name = "txtLPint";
             this.txtLPint.Size = new System.Drawing.Size(44, 20);
             this.txtLPint.TabIndex = 15;
@@ -1567,7 +1600,7 @@ namespace DataDecoder
             // 
             this.chkLPenab.AutoSize = true;
             this.chkLPenab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLPenab.Location = new System.Drawing.Point(9, 30);
+            this.chkLPenab.Location = new System.Drawing.Point(10, 20);
             this.chkLPenab.Name = "chkLPenab";
             this.chkLPenab.Size = new System.Drawing.Size(65, 17);
             this.chkLPenab.TabIndex = 45;
@@ -1579,7 +1612,7 @@ namespace DataDecoder
             // label13
             // 
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(119, 50);
+            this.label13.Location = new System.Drawing.Point(90, 45);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(49, 15);
             this.label13.TabIndex = 16;
@@ -1588,9 +1621,9 @@ namespace DataDecoder
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(138, 16);
+            this.label2.Location = new System.Drawing.Point(20, 45);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 18);
+            this.label2.Size = new System.Drawing.Size(29, 15);
             this.label2.TabIndex = 18;
             this.label2.Text = "Port";
             // 
@@ -1635,11 +1668,11 @@ namespace DataDecoder
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.Color.Firebrick;
-            this.label34.Location = new System.Drawing.Point(358, 227);
+            this.label34.Location = new System.Drawing.Point(365, 225);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(45, 12);
+            this.label34.Size = new System.Drawing.Size(24, 12);
             this.label34.TabIndex = 98;
-            this.label34.Text = "Shift F1";
+            this.label34.Text = "F12";
             // 
             // label35
             // 
@@ -1650,7 +1683,7 @@ namespace DataDecoder
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(24, 12);
             this.label35.TabIndex = 97;
-            this.label35.Text = "F12";
+            this.label35.Text = "F11";
             // 
             // label36
             // 
@@ -1661,18 +1694,18 @@ namespace DataDecoder
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(24, 12);
             this.label36.TabIndex = 96;
-            this.label36.Text = "F11";
+            this.label36.Text = "F10";
             // 
             // label37
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.Firebrick;
-            this.label37.Location = new System.Drawing.Point(159, 226);
+            this.label37.Location = new System.Drawing.Point(165, 226);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(24, 12);
+            this.label37.Size = new System.Drawing.Size(18, 12);
             this.label37.TabIndex = 95;
-            this.label37.Text = "F10";
+            this.label37.Text = "F9";
             // 
             // label38
             // 
@@ -1683,7 +1716,7 @@ namespace DataDecoder
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(18, 12);
             this.label38.TabIndex = 94;
-            this.label38.Text = "F9";
+            this.label38.Text = "F8";
             // 
             // label39
             // 
@@ -1694,7 +1727,7 @@ namespace DataDecoder
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(18, 12);
             this.label39.TabIndex = 93;
-            this.label39.Text = "F8";
+            this.label39.Text = "F7";
             // 
             // btnMacro12
             // 
@@ -1793,14 +1826,14 @@ namespace DataDecoder
             // 
             // grpMacro
             // 
-            this.grpMacro.BackColor = System.Drawing.SystemColors.Control;
+            this.grpMacro.BackColor = System.Drawing.Color.Transparent;
             this.grpMacro.Controls.Add(this.btnMacSelect);
             this.grpMacro.Controls.Add(this.btnMacSave);
             this.grpMacro.Controls.Add(this.btnMacReLoad);
             this.grpMacro.Controls.Add(this.label26);
             this.grpMacro.Controls.Add(this.txtMacFile);
             this.grpMacro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpMacro.ForeColor = System.Drawing.Color.Blue;
+            this.grpMacro.ForeColor = System.Drawing.Color.Navy;
             this.grpMacro.Location = new System.Drawing.Point(8, 158);
             this.grpMacro.Name = "grpMacro";
             this.grpMacro.Size = new System.Drawing.Size(369, 64);
@@ -1811,13 +1844,14 @@ namespace DataDecoder
             // btnMacSelect
             // 
             this.btnMacSelect.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnMacSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMacSelect.ForeColor = System.Drawing.Color.Blue;
             this.btnMacSelect.Location = new System.Drawing.Point(95, 39);
             this.btnMacSelect.Name = "btnMacSelect";
             this.btnMacSelect.Size = new System.Drawing.Size(55, 19);
             this.btnMacSelect.TabIndex = 60;
             this.btnMacSelect.Text = "Select";
+            this.toolTip1.SetToolTip(this.btnMacSelect, "Select Macro Data File to load");
             this.btnMacSelect.UseVisualStyleBackColor = true;
             this.btnMacSelect.Click += new System.EventHandler(this.btnMacSelect_Click);
             // 
@@ -1826,13 +1860,14 @@ namespace DataDecoder
             this.btnMacSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnMacSave.BackColor = System.Drawing.SystemColors.Control;
             this.btnMacSave.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnMacSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMacSave.ForeColor = System.Drawing.Color.Blue;
             this.btnMacSave.Location = new System.Drawing.Point(252, 39);
             this.btnMacSave.Name = "btnMacSave";
             this.btnMacSave.Size = new System.Drawing.Size(55, 19);
             this.btnMacSave.TabIndex = 79;
             this.btnMacSave.Text = "Save";
+            this.toolTip1.SetToolTip(this.btnMacSave, "Press to save Macro Data File shown in Data File window.");
             this.btnMacSave.UseVisualStyleBackColor = false;
             this.btnMacSave.Click += new System.EventHandler(this.btnMacSave_Click);
             // 
@@ -1841,13 +1876,14 @@ namespace DataDecoder
             this.btnMacReLoad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnMacReLoad.BackColor = System.Drawing.SystemColors.Control;
             this.btnMacReLoad.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnMacReLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacReLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMacReLoad.ForeColor = System.Drawing.Color.Blue;
             this.btnMacReLoad.Location = new System.Drawing.Point(171, 39);
             this.btnMacReLoad.Name = "btnMacReLoad";
             this.btnMacReLoad.Size = new System.Drawing.Size(55, 19);
             this.btnMacReLoad.TabIndex = 80;
             this.btnMacReLoad.Text = "ReLoad";
+            this.toolTip1.SetToolTip(this.btnMacReLoad, "Re-Load Macro Data File last loaded.");
             this.btnMacReLoad.UseVisualStyleBackColor = false;
             this.btnMacReLoad.Click += new System.EventHandler(this.btnMacReLoad_Click);
             // 
@@ -1869,6 +1905,7 @@ namespace DataDecoder
             this.txtMacFile.Name = "txtMacFile";
             this.txtMacFile.Size = new System.Drawing.Size(357, 20);
             this.txtMacFile.TabIndex = 58;
+            this.toolTip1.SetToolTip(this.txtMacFile, "Macro Dat File name and location");
             this.txtMacFile.WordWrap = false;
             // 
             // dgm
@@ -1898,7 +1935,7 @@ namespace DataDecoder
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(18, 12);
             this.label33.TabIndex = 86;
-            this.label33.Text = "F7";
+            this.label33.Text = "F6";
             // 
             // label32
             // 
@@ -1909,7 +1946,7 @@ namespace DataDecoder
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(18, 12);
             this.label32.TabIndex = 85;
-            this.label32.Text = "F6";
+            this.label32.Text = "F5";
             // 
             // label31
             // 
@@ -1920,7 +1957,7 @@ namespace DataDecoder
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(18, 12);
             this.label31.TabIndex = 84;
-            this.label31.Text = "F5";
+            this.label31.Text = "F4";
             // 
             // label30
             // 
@@ -1931,7 +1968,7 @@ namespace DataDecoder
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(18, 12);
             this.label30.TabIndex = 83;
-            this.label30.Text = "F4";
+            this.label30.Text = "F3";
             // 
             // label29
             // 
@@ -1942,7 +1979,7 @@ namespace DataDecoder
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(18, 12);
             this.label29.TabIndex = 82;
-            this.label29.Text = "F3";
+            this.label29.Text = "F2";
             // 
             // label28
             // 
@@ -1953,7 +1990,7 @@ namespace DataDecoder
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(18, 12);
             this.label28.TabIndex = 81;
-            this.label28.Text = "F2";
+            this.label28.Text = "F1";
             // 
             // btnMacro6
             // 
@@ -2052,6 +2089,7 @@ namespace DataDecoder
             // 
             // tabRotor
             // 
+            this.tabRotor.Controls.Add(this.grpStepCtrl);
             this.tabRotor.Controls.Add(this.groupBox11);
             this.tabRotor.Controls.Add(this.groupBox9);
             this.tabRotor.Controls.Add(this.groupBox8);
@@ -2061,6 +2099,127 @@ namespace DataDecoder
             this.tabRotor.TabIndex = 5;
             this.tabRotor.Text = "Rotor";
             this.tabRotor.UseVisualStyleBackColor = true;
+            // 
+            // grpStepCtrl
+            // 
+            this.grpStepCtrl.Controls.Add(this.rb34);
+            this.grpStepCtrl.Controls.Add(this.rbBiDir);
+            this.grpStepCtrl.Controls.Add(this.rb180);
+            this.grpStepCtrl.Controls.Add(this.rbFwd);
+            this.grpStepCtrl.Controls.Add(this.btnCalib);
+            this.grpStepCtrl.Controls.Add(this.btnHome);
+            this.grpStepCtrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.grpStepCtrl.ForeColor = System.Drawing.Color.Blue;
+            this.grpStepCtrl.Location = new System.Drawing.Point(5, 245);
+            this.grpStepCtrl.Name = "grpStepCtrl";
+            this.grpStepCtrl.Size = new System.Drawing.Size(405, 50);
+            this.grpStepCtrl.TabIndex = 13;
+            this.grpStepCtrl.TabStop = false;
+            this.grpStepCtrl.Text = "SteppIR Control";
+            // 
+            // rb34
+            // 
+            this.rb34.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rb34.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rb34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rb34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rb34.ForeColor = System.Drawing.Color.Navy;
+            this.rb34.Location = new System.Drawing.Point(190, 20);
+            this.rb34.Name = "rb34";
+            this.rb34.Size = new System.Drawing.Size(41, 17);
+            this.rb34.TabIndex = 102;
+            this.rb34.Text = "3/4";
+            this.toolTip1.SetToolTip(this.rb34, "Select to put vertical in 3/4 wavelength mode (15 & 10  meters only)");
+            this.rb34.UseVisualStyleBackColor = true;
+            this.rb34.CheckedChanged += new System.EventHandler(this.rb34_CheckedChanged);
+            // 
+            // rbBiDir
+            // 
+            this.rbBiDir.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbBiDir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbBiDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbBiDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbBiDir.ForeColor = System.Drawing.Color.Navy;
+            this.rbBiDir.Location = new System.Drawing.Point(130, 20);
+            this.rbBiDir.Name = "rbBiDir";
+            this.rbBiDir.Size = new System.Drawing.Size(45, 17);
+            this.rbBiDir.TabIndex = 101;
+            this.rbBiDir.Text = "<-->";
+            this.toolTip1.SetToolTip(this.rbBiDir, "Select to put yagi in bi-directional mode");
+            this.rbBiDir.UseVisualStyleBackColor = true;
+            this.rbBiDir.CheckedChanged += new System.EventHandler(this.rbBiDir_CheckedChanged);
+            // 
+            // rb180
+            // 
+            this.rb180.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rb180.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rb180.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rb180.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rb180.ForeColor = System.Drawing.Color.Navy;
+            this.rb180.Location = new System.Drawing.Point(70, 20);
+            this.rb180.Name = "rb180";
+            this.rb180.Size = new System.Drawing.Size(42, 17);
+            this.rb180.TabIndex = 100;
+            this.rb180.Text = "180";
+            this.toolTip1.SetToolTip(this.rb180, "Select to put yagi in 180 mode (reverse)");
+            this.rb180.UseVisualStyleBackColor = true;
+            this.rb180.CheckedChanged += new System.EventHandler(this.rb180_CheckedChanged);
+            // 
+            // rbFwd
+            // 
+            this.rbFwd.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbFwd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbFwd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbFwd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbFwd.ForeColor = System.Drawing.Color.Navy;
+            this.rbFwd.Location = new System.Drawing.Point(10, 20);
+            this.rbFwd.Name = "rbFwd";
+            this.rbFwd.Size = new System.Drawing.Size(44, 17);
+            this.rbFwd.TabIndex = 99;
+            this.rbFwd.Text = "Fwd";
+            this.toolTip1.SetToolTip(this.rbFwd, "Select to put yagi in forward mode");
+            this.rbFwd.UseVisualStyleBackColor = true;
+            this.rbFwd.CheckedChanged += new System.EventHandler(this.rbFwd_CheckedChanged);
+            // 
+            // btnCalib
+            // 
+            this.btnCalib.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCalib.BackColor = System.Drawing.SystemColors.Control;
+            this.btnCalib.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCalib.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnCalib.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnCalib.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCalib.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalib.ForeColor = System.Drawing.Color.Navy;
+            this.btnCalib.Location = new System.Drawing.Point(330, 15);
+            this.btnCalib.Name = "btnCalib";
+            this.btnCalib.Size = new System.Drawing.Size(55, 23);
+            this.btnCalib.TabIndex = 98;
+            this.btnCalib.Text = "Calibrate";
+            this.btnCalib.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnCalib, "Calibrate antenna elements (home & return).");
+            this.btnCalib.UseVisualStyleBackColor = false;
+            this.btnCalib.Click += new System.EventHandler(this.btnCalib_Click);
+            // 
+            // btnHome
+            // 
+            this.btnHome.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnHome.BackColor = System.Drawing.SystemColors.Control;
+            this.btnHome.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnHome.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHome.ForeColor = System.Drawing.Color.Navy;
+            this.btnHome.Location = new System.Drawing.Point(260, 15);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(55, 23);
+            this.btnHome.TabIndex = 97;
+            this.btnHome.Text = "Home";
+            this.btnHome.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnHome, "Retract the antenna elements (Home).");
+            this.btnHome.UseVisualStyleBackColor = false;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // groupBox11
             // 
@@ -2083,9 +2242,9 @@ namespace DataDecoder
             this.groupBox11.Controls.Add(this.txtDxDist);
             this.groupBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox11.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox11.Location = new System.Drawing.Point(10, 125);
+            this.groupBox11.Location = new System.Drawing.Point(5, 125);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(400, 110);
+            this.groupBox11.Size = new System.Drawing.Size(405, 110);
             this.groupBox11.TabIndex = 12;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Location Data";
@@ -2300,9 +2459,9 @@ namespace DataDecoder
             this.groupBox9.Controls.Add(this.txtCode);
             this.groupBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox9.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox9.Location = new System.Drawing.Point(10, 10);
+            this.groupBox9.Location = new System.Drawing.Point(5, 10);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(304, 105);
+            this.groupBox9.Size = new System.Drawing.Size(310, 105);
             this.groupBox9.TabIndex = 11;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "DXCC Data";
@@ -2321,9 +2480,9 @@ namespace DataDecoder
             // txtRegion
             // 
             this.txtRegion.ForeColor = System.Drawing.Color.Firebrick;
-            this.txtRegion.Location = new System.Drawing.Point(5, 60);
+            this.txtRegion.Location = new System.Drawing.Point(10, 60);
             this.txtRegion.Name = "txtRegion";
-            this.txtRegion.Size = new System.Drawing.Size(295, 20);
+            this.txtRegion.Size = new System.Drawing.Size(285, 20);
             this.txtRegion.TabIndex = 13;
             this.toolTip1.SetToolTip(this.txtRegion, "Country region");
             // 
@@ -2331,10 +2490,10 @@ namespace DataDecoder
             // 
             this.cboEntity.ForeColor = System.Drawing.Color.Firebrick;
             this.cboEntity.FormattingEnabled = true;
-            this.cboEntity.Location = new System.Drawing.Point(80, 17);
+            this.cboEntity.Location = new System.Drawing.Point(85, 17);
             this.cboEntity.MaxDropDownItems = 15;
             this.cboEntity.Name = "cboEntity";
-            this.cboEntity.Size = new System.Drawing.Size(180, 21);
+            this.cboEntity.Size = new System.Drawing.Size(175, 21);
             this.cboEntity.TabIndex = 12;
             this.toolTip1.SetToolTip(this.cboEntity, "DX station Entity");
             this.cboEntity.SelectedIndexChanged += new System.EventHandler(this.cboEntity_SelectedIndexChanged);
@@ -2348,7 +2507,7 @@ namespace DataDecoder
             // 
             this.cboPrefix.ForeColor = System.Drawing.Color.Firebrick;
             this.cboPrefix.FormattingEnabled = true;
-            this.cboPrefix.Location = new System.Drawing.Point(5, 17);
+            this.cboPrefix.Location = new System.Drawing.Point(10, 17);
             this.cboPrefix.MaxDropDownItems = 15;
             this.cboPrefix.Name = "cboPrefix";
             this.cboPrefix.Size = new System.Drawing.Size(70, 21);
@@ -2430,7 +2589,7 @@ namespace DataDecoder
             // 
             // lblLP
             // 
-            this.lblLP.ForeColor = System.Drawing.Color.Sienna;
+            this.lblLP.ForeColor = System.Drawing.Color.Green;
             this.lblLP.Location = new System.Drawing.Point(53, 80);
             this.lblLP.Name = "lblLP";
             this.lblLP.Size = new System.Drawing.Size(28, 13);
@@ -2464,7 +2623,7 @@ namespace DataDecoder
             // 
             // lblSP
             // 
-            this.lblSP.ForeColor = System.Drawing.Color.Sienna;
+            this.lblSP.ForeColor = System.Drawing.Color.Green;
             this.lblSP.Location = new System.Drawing.Point(11, 80);
             this.lblSP.Name = "lblSP";
             this.lblSP.Size = new System.Drawing.Size(28, 13);
@@ -2474,6 +2633,7 @@ namespace DataDecoder
             // 
             // btnSP
             // 
+            this.btnSP.Enabled = false;
             this.btnSP.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSP.ForeColor = System.Drawing.Color.Blue;
             this.btnSP.Location = new System.Drawing.Point(8, 55);
@@ -2499,6 +2659,7 @@ namespace DataDecoder
             // 
             // btnLP
             // 
+            this.btnLP.Enabled = false;
             this.btnLP.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLP.ForeColor = System.Drawing.Color.Blue;
             this.btnLP.Location = new System.Drawing.Point(50, 55);
@@ -2521,9 +2682,11 @@ namespace DataDecoder
             this.txtSP.TabIndex = 3;
             this.txtSP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtSP, "Short path bearing to prefix");
+            this.txtSP.TextChanged += new System.EventHandler(this.txtSP_TextChanged);
             // 
             // tabSetup
             // 
+            this.tabSetup.Controls.Add(this.chkTips);
             this.tabSetup.Controls.Add(this.groupBox10);
             this.tabSetup.Controls.Add(this.groupBox14);
             this.tabSetup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
@@ -2533,6 +2696,20 @@ namespace DataDecoder
             this.tabSetup.TabIndex = 6;
             this.tabSetup.Text = "Setup";
             this.tabSetup.UseVisualStyleBackColor = true;
+            // 
+            // chkTips
+            // 
+            this.chkTips.AutoSize = true;
+            this.chkTips.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkTips.ForeColor = System.Drawing.Color.Navy;
+            this.chkTips.Location = new System.Drawing.Point(330, 238);
+            this.chkTips.Name = "chkTips";
+            this.chkTips.Size = new System.Drawing.Size(79, 17);
+            this.chkTips.TabIndex = 33;
+            this.chkTips.Text = "Tool Tips";
+            this.toolTip1.SetToolTip(this.chkTips, "Select to enable Tool Tips when cursor hovers over a control.");
+            this.chkTips.UseVisualStyleBackColor = true;
+            this.chkTips.CheckedChanged += new System.EventHandler(this.chkTips_CheckedChanged);
             // 
             // groupBox10
             // 
@@ -2545,9 +2722,9 @@ namespace DataDecoder
             this.groupBox10.Controls.Add(this.grpModel);
             this.groupBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.groupBox10.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox10.Location = new System.Drawing.Point(17, 13);
+            this.groupBox10.Location = new System.Drawing.Point(10, 13);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(230, 232);
+            this.groupBox10.Size = new System.Drawing.Size(395, 202);
             this.groupBox10.TabIndex = 29;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Rotor Setup";
@@ -2557,7 +2734,7 @@ namespace DataDecoder
             this.label50.AutoSize = true;
             this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label50.ForeColor = System.Drawing.Color.Navy;
-            this.label50.Location = new System.Drawing.Point(142, 90);
+            this.label50.Location = new System.Drawing.Point(10, 115);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(71, 13);
             this.label50.TabIndex = 32;
@@ -2568,7 +2745,7 @@ namespace DataDecoder
             this.label49.AutoSize = true;
             this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label49.ForeColor = System.Drawing.Color.Navy;
-            this.label49.Location = new System.Drawing.Point(142, 47);
+            this.label49.Location = new System.Drawing.Point(10, 70);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(66, 13);
             this.label49.TabIndex = 31;
@@ -2589,9 +2766,9 @@ namespace DataDecoder
             "2400 8-N-2",
             "1200 8-N-1",
             "1200 8-N-2"});
-            this.cboRotorCom.Location = new System.Drawing.Point(135, 67);
+            this.cboRotorCom.Location = new System.Drawing.Point(10, 90);
             this.cboRotorCom.Name = "cboRotorCom";
-            this.cboRotorCom.Size = new System.Drawing.Size(88, 21);
+            this.cboRotorCom.Size = new System.Drawing.Size(93, 21);
             this.cboRotorCom.TabIndex = 30;
             this.toolTip1.SetToolTip(this.cboRotorCom, "Rotor port serial com parameters");
             this.cboRotorCom.SelectedIndexChanged += new System.EventHandler(this.cboRotorCom_SelectedIndexChanged);
@@ -2602,9 +2779,9 @@ namespace DataDecoder
             this.cboRotorPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboRotorPort.ForeColor = System.Drawing.Color.Firebrick;
             this.cboRotorPort.FormattingEnabled = true;
-            this.cboRotorPort.Location = new System.Drawing.Point(137, 23);
+            this.cboRotorPort.Location = new System.Drawing.Point(10, 50);
             this.cboRotorPort.Name = "cboRotorPort";
-            this.cboRotorPort.Size = new System.Drawing.Size(80, 21);
+            this.cboRotorPort.Size = new System.Drawing.Size(71, 21);
             this.cboRotorPort.TabIndex = 29;
             this.toolTip1.SetToolTip(this.cboRotorPort, "Rotor serial port (hdwe)");
             this.cboRotorPort.SelectedIndexChanged += new System.EventHandler(this.cboRotorPort_SelectedIndexChanged);
@@ -2616,9 +2793,9 @@ namespace DataDecoder
             this.grpSpeed.Controls.Add(this.rbRtrSpd1);
             this.grpSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpSpeed.ForeColor = System.Drawing.Color.Blue;
-            this.grpSpeed.Location = new System.Drawing.Point(142, 115);
+            this.grpSpeed.Location = new System.Drawing.Point(10, 140);
             this.grpSpeed.Name = "grpSpeed";
-            this.grpSpeed.Size = new System.Drawing.Size(67, 86);
+            this.grpSpeed.Size = new System.Drawing.Size(170, 45);
             this.grpSpeed.TabIndex = 14;
             this.grpSpeed.TabStop = false;
             this.grpSpeed.Text = "Speed";
@@ -2627,7 +2804,7 @@ namespace DataDecoder
             // 
             this.rbRtrSpd3.AutoSize = true;
             this.rbRtrSpd3.ForeColor = System.Drawing.Color.Navy;
-            this.rbRtrSpd3.Location = new System.Drawing.Point(10, 59);
+            this.rbRtrSpd3.Location = new System.Drawing.Point(115, 20);
             this.rbRtrSpd3.Name = "rbRtrSpd3";
             this.rbRtrSpd3.Size = new System.Drawing.Size(49, 17);
             this.rbRtrSpd3.TabIndex = 2;
@@ -2641,7 +2818,7 @@ namespace DataDecoder
             // 
             this.rbRtrSpd2.AutoSize = true;
             this.rbRtrSpd2.ForeColor = System.Drawing.Color.Navy;
-            this.rbRtrSpd2.Location = new System.Drawing.Point(10, 40);
+            this.rbRtrSpd2.Location = new System.Drawing.Point(65, 20);
             this.rbRtrSpd2.Name = "rbRtrSpd2";
             this.rbRtrSpd2.Size = new System.Drawing.Size(49, 17);
             this.rbRtrSpd2.TabIndex = 1;
@@ -2670,7 +2847,7 @@ namespace DataDecoder
             this.chkRotorEnab.AutoSize = true;
             this.chkRotorEnab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkRotorEnab.ForeColor = System.Drawing.Color.Navy;
-            this.chkRotorEnab.Location = new System.Drawing.Point(9, 25);
+            this.chkRotorEnab.Location = new System.Drawing.Point(10, 24);
             this.chkRotorEnab.Name = "chkRotorEnab";
             this.chkRotorEnab.Size = new System.Drawing.Size(65, 17);
             this.chkRotorEnab.TabIndex = 28;
@@ -2690,9 +2867,9 @@ namespace DataDecoder
             this.grpModel.Controls.Add(this.rbRtrMod1);
             this.grpModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpModel.ForeColor = System.Drawing.Color.Blue;
-            this.grpModel.Location = new System.Drawing.Point(6, 53);
+            this.grpModel.Location = new System.Drawing.Point(185, 15);
             this.grpModel.Name = "grpModel";
-            this.grpModel.Size = new System.Drawing.Size(119, 167);
+            this.grpModel.Size = new System.Drawing.Size(125, 170);
             this.grpModel.TabIndex = 13;
             this.grpModel.TabStop = false;
             this.grpModel.Text = "Model";
@@ -2797,6 +2974,8 @@ namespace DataDecoder
             // 
             // groupBox14
             // 
+            this.groupBox14.Controls.Add(this.txtCall);
+            this.groupBox14.Controls.Add(this.label25);
             this.groupBox14.Controls.Add(this.txtGrid);
             this.groupBox14.Controls.Add(this.txtLat);
             this.groupBox14.Controls.Add(this.label44);
@@ -2805,19 +2984,41 @@ namespace DataDecoder
             this.groupBox14.Controls.Add(this.txtLong);
             this.groupBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.groupBox14.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox14.Location = new System.Drawing.Point(285, 15);
+            this.groupBox14.Location = new System.Drawing.Point(10, 225);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(90, 150);
+            this.groupBox14.Size = new System.Drawing.Size(305, 70);
             this.groupBox14.TabIndex = 27;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Station Info";
             // 
+            // txtCall
+            // 
+            this.txtCall.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtCall.ForeColor = System.Drawing.Color.Firebrick;
+            this.txtCall.Location = new System.Drawing.Point(10, 25);
+            this.txtCall.Name = "txtCall";
+            this.txtCall.Size = new System.Drawing.Size(67, 20);
+            this.txtCall.TabIndex = 29;
+            this.txtCall.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtCall, "Home Station Call Sign");
+            this.txtCall.TextChanged += new System.EventHandler(this.txtCall_TextChanged);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.ForeColor = System.Drawing.Color.Navy;
+            this.label25.Location = new System.Drawing.Point(10, 45);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(57, 13);
+            this.label25.TabIndex = 30;
+            this.label25.Text = "Call Sign";
+            // 
             // txtGrid
             // 
             this.txtGrid.ForeColor = System.Drawing.Color.Firebrick;
-            this.txtGrid.Location = new System.Drawing.Point(10, 117);
+            this.txtGrid.Location = new System.Drawing.Point(235, 25);
             this.txtGrid.Name = "txtGrid";
-            this.txtGrid.Size = new System.Drawing.Size(67, 20);
+            this.txtGrid.Size = new System.Drawing.Size(60, 20);
             this.txtGrid.TabIndex = 27;
             this.txtGrid.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtGrid, "Home station grid square");
@@ -2826,7 +3027,7 @@ namespace DataDecoder
             // txtLat
             // 
             this.txtLat.ForeColor = System.Drawing.Color.Firebrick;
-            this.txtLat.Location = new System.Drawing.Point(10, 38);
+            this.txtLat.Location = new System.Drawing.Point(85, 25);
             this.txtLat.Name = "txtLat";
             this.txtLat.Size = new System.Drawing.Size(67, 20);
             this.txtLat.TabIndex = 23;
@@ -2838,7 +3039,7 @@ namespace DataDecoder
             // 
             this.label44.AutoSize = true;
             this.label44.ForeColor = System.Drawing.Color.Navy;
-            this.label44.Location = new System.Drawing.Point(12, 103);
+            this.label44.Location = new System.Drawing.Point(235, 45);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(30, 13);
             this.label44.TabIndex = 28;
@@ -2848,7 +3049,7 @@ namespace DataDecoder
             // 
             this.label51.AutoSize = true;
             this.label51.ForeColor = System.Drawing.Color.Navy;
-            this.label51.Location = new System.Drawing.Point(11, 23);
+            this.label51.Location = new System.Drawing.Point(85, 45);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(53, 13);
             this.label51.TabIndex = 25;
@@ -2858,7 +3059,7 @@ namespace DataDecoder
             // 
             this.label52.AutoSize = true;
             this.label52.ForeColor = System.Drawing.Color.Navy;
-            this.label52.Location = new System.Drawing.Point(11, 63);
+            this.label52.Location = new System.Drawing.Point(160, 45);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(63, 13);
             this.label52.TabIndex = 26;
@@ -2867,7 +3068,7 @@ namespace DataDecoder
             // txtLong
             // 
             this.txtLong.ForeColor = System.Drawing.Color.Firebrick;
-            this.txtLong.Location = new System.Drawing.Point(10, 78);
+            this.txtLong.Location = new System.Drawing.Point(160, 25);
             this.txtLong.Name = "txtLong";
             this.txtLong.Size = new System.Drawing.Size(67, 20);
             this.txtLong.TabIndex = 24;
@@ -2946,7 +3147,7 @@ namespace DataDecoder
             // txtTemp
             // 
             this.txtTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTemp.Location = new System.Drawing.Point(348, 362);
+            this.txtTemp.Location = new System.Drawing.Point(354, 362);
             this.txtTemp.Name = "txtTemp";
             this.txtTemp.Size = new System.Drawing.Size(62, 22);
             this.txtTemp.TabIndex = 62;
@@ -2954,6 +3155,20 @@ namespace DataDecoder
             this.txtTemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtTemp, "Flex-5000 PA Temp, click to change from C to F");
             this.txtTemp.Click += new System.EventHandler(this.txtTemp_Click);
+            // 
+            // lblAnt
+            // 
+            this.lblAnt.AutoSize = true;
+            this.lblAnt.BackColor = System.Drawing.SystemColors.Control;
+            this.lblAnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAnt.ForeColor = System.Drawing.Color.Red;
+            this.lblAnt.Location = new System.Drawing.Point(305, 394);
+            this.lblAnt.Name = "lblAnt";
+            this.lblAnt.Size = new System.Drawing.Size(100, 16);
+            this.lblAnt.TabIndex = 73;
+            this.lblAnt.Text = "Xmit Inhibited";
+            this.toolTip1.SetToolTip(this.lblAnt, "Illuminated when antenna is adjusting");
+            this.lblAnt.Visible = false;
             // 
             // LogPort
             // 
@@ -3235,19 +3450,6 @@ namespace DataDecoder
             this.StepData.WriteTimeout = 500;
             this.StepData.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.StepData_DataReceived);
             // 
-            // lblAnt
-            // 
-            this.lblAnt.AutoSize = true;
-            this.lblAnt.BackColor = System.Drawing.SystemColors.Control;
-            this.lblAnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAnt.ForeColor = System.Drawing.Color.Red;
-            this.lblAnt.Location = new System.Drawing.Point(317, 394);
-            this.lblAnt.Name = "lblAnt";
-            this.lblAnt.Size = new System.Drawing.Size(82, 16);
-            this.lblAnt.TabIndex = 73;
-            this.lblAnt.Text = "Xmit Inhibit";
-            this.lblAnt.Visible = false;
-            // 
             // radioButton10
             // 
             this.radioButton10.AutoSize = true;
@@ -3319,6 +3521,30 @@ namespace DataDecoder
             this.RotorPort.ReadTimeout = 500;
             this.RotorPort.WriteTimeout = 500;
             // 
+            // RCP1Rotor
+            // 
+            this.RCP1Rotor.ReadTimeout = 500;
+            this.RCP1Rotor.WriteTimeout = 500;
+            this.RCP1Rotor.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RCP1Rotor_DataReceived);
+            // 
+            // RCP2Rotor
+            // 
+            this.RCP2Rotor.ReadTimeout = 500;
+            this.RCP2Rotor.WriteTimeout = 500;
+            this.RCP2Rotor.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RCP2Rotor_DataReceived);
+            // 
+            // RCP3Rotor
+            // 
+            this.RCP3Rotor.ReadTimeout = 500;
+            this.RCP3Rotor.WriteTimeout = 500;
+            this.RCP3Rotor.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RCP3Rotor_DataReceived);
+            // 
+            // RCP4Rotor
+            // 
+            this.RCP4Rotor.ReadTimeout = 500;
+            this.RCP4Rotor.WriteTimeout = 500;
+            this.RCP4Rotor.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RCP4Rotor_DataReceived);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3383,6 +3609,7 @@ namespace DataDecoder
             this.grpMacro.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgm)).EndInit();
             this.tabRotor.ResumeLayout(false);
+            this.grpStepCtrl.ResumeLayout(false);
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             this.groupBox9.ResumeLayout(false);
@@ -3390,6 +3617,7 @@ namespace DataDecoder
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.tabSetup.ResumeLayout(false);
+            this.tabSetup.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.grpSpeed.ResumeLayout(false);
@@ -3530,7 +3758,6 @@ namespace DataDecoder
         private System.Windows.Forms.Label lblBCD;
         private System.Windows.Forms.Label lblSleep;
         private System.Windows.Forms.TextBox txtSleep;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox txtTemp;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel StatusBar;
@@ -3653,14 +3880,30 @@ namespace DataDecoder
         private System.Windows.Forms.TextBox txtRegion;
         private System.Windows.Forms.Label lblLP;
         private System.Windows.Forms.RadioButton rbRtrMod7;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboRCP4Rotor;
+        private System.Windows.Forms.ComboBox cboRCP3Rotor;
+        private System.Windows.Forms.ComboBox cboRCP2Rotor;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label66;
         private System.Windows.Forms.Label label65;
         private System.Windows.Forms.ToolStripMenuItem rotorControlToolStripMenuItem;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.ComboBox cboRCP1Rotor;
+        private System.IO.Ports.SerialPort RCP1Rotor;
+        private System.IO.Ports.SerialPort RCP2Rotor;
+        private System.IO.Ports.SerialPort RCP3Rotor;
+        private System.IO.Ports.SerialPort RCP4Rotor;
+        private System.Windows.Forms.GroupBox grpStepCtrl;
+        private System.Windows.Forms.RadioButton rb34;
+        private System.Windows.Forms.RadioButton rbBiDir;
+        private System.Windows.Forms.RadioButton rb180;
+        private System.Windows.Forms.RadioButton rbFwd;
+        private System.Windows.Forms.Button btnCalib;
+        private System.Windows.Forms.Button btnHome;
+        private System.Windows.Forms.TextBox txtCall;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.CheckBox chkTips;
 
     }
 }
