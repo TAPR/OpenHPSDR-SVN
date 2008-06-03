@@ -11,14 +11,14 @@
     <deploymentProvider codebase="http://www.k5fr.com/AppDeploy/DataDecoder.application" />
   </deployment>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="DataDecoder.exe.manifest" size="3981">
+    <dependentAssembly dependencyType="install" codebase="DataDecoder.exe.manifest" size="4880">
       <assemblyIdentity name="DataDecoder.exe" version="1.5.2.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>cA0AmD1dUK+qqcvdINjokT0FFJU=</dsig:DigestValue>
+        <dsig:DigestValue>8/+mM3rcuf1NSWloE+rhjXKzVCQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
