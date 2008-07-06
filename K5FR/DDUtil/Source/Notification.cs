@@ -32,7 +32,9 @@ namespace DataDecoder
 
         #region Event handler
         public static string notiMsg;
+        public static bool useAudio;
         SoundPlayer myPlayer = new System.Media.SoundPlayer();
+
         private void Notification_Load(object sender, System.EventArgs e)
         {
             int screenWidth = Screen.PrimaryScreen.WorkingArea.Width;
@@ -41,8 +43,11 @@ namespace DataDecoder
             this.Top = (screenHeight - this.Height)-25;
             label1.Text = notiMsg;
             timer1.Enabled = true;
-            myPlayer.SoundLocation = "Alert.wav";
-            myPlayer.Play();
+            if (useAudio)
+            {
+                myPlayer.SoundLocation = "Alert.wav";
+                myPlayer.Play();
+            }
         }
         // linger timer fired
         private void timer1_Tick(object sender, System.EventArgs e)
@@ -66,7 +71,7 @@ namespace DataDecoder
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(225)))));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Blue;
             this.label1.Location = new System.Drawing.Point(0, 0);

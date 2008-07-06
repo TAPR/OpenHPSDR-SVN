@@ -797,5 +797,89 @@ namespace DataDecoder.Properties {
                 this["slaveMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WnEnab {
+            get {
+                return ((bool)(this["WnEnab"]));
+            }
+            set {
+                this["WnEnab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int WnCoupler {
+            get {
+                return ((int)(this["WnCoupler"]));
+            }
+            set {
+                this["WnCoupler"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AudioOn {
+            get {
+                return ((bool)(this["AudioOn"]));
+            }
+            set {
+                this["AudioOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int s1Type {
+            get {
+                return ((int)(this["s1Type"]));
+            }
+            set {
+                this["s1Type"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int s2Type {
+            get {
+                return ((int)(this["s2Type"]));
+            }
+            set {
+                this["s2Type"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int s3Type {
+            get {
+                return ((int)(this["s3Type"]));
+            }
+            set {
+                this["s3Type"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int s4Type {
+            get {
+                return ((int)(this["s4Type"]));
+            }
+            set {
+                this["s4Type"] = value;
+            }
+        }
     }
 }
