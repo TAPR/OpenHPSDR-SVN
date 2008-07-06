@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.Diagnostics;
@@ -30,6 +31,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -38,11 +40,13 @@ using System.Xml.XPath;
 using DataDecoder.Properties;
 using Logger;
 using TransDlg;
+using FT_HANDLE = System.UInt32;
 
 namespace DataDecoder
 {
     public partial class Setup : Form
     {
+
         #region Enums
 
         public enum RotorMod
@@ -95,9 +99,8 @@ namespace DataDecoder
         string MacFileName = Application.StartupPath + "\\MacroData.xml";
         string LastFreq = "";
         string LastMode = "";
-        string[] ports;
         string OutBuffer = "";
-        public static string ver = "1.5.8";
+        public static string ver = "1.5.9";
         public static int errCtr = 0;
         public static int x;    // screen pos left
         public static int y;    // screen pos right
@@ -111,6 +114,11 @@ namespace DataDecoder
 
         #region Properties
 
+        public bool AudioOn
+        {
+            get { return chkAudio.Checked; }
+            set { chkAudio.Checked = value; }
+        }
         public bool RotorEnab
         {
             get { return chkRotorEnab.Checked; }
@@ -240,12 +248,8 @@ namespace DataDecoder
         #region Initialization
 
         public Setup()
-        {
-            if (IsAppAlreadyRunning())  // if the app is already don't start another one.
-            {
-                Environment.Exit(0);
-                Console.Beep();
-            }
+        {   // if the app is already running don't start another one.
+            if (IsAppAlreadyRunning()) Environment.Exit(0);
             InitializeComponent();
             GeometryFromString(set.WindowGeometry, this);
             chkDevice.Checked = set.DevEnab;
@@ -263,6 +267,9 @@ namespace DataDecoder
             chkTips.Checked = set.ToolTips;
             chkMode.Checked = set.slaveMode;
             txtCall.Text = set.Call;
+            chkAudio.Checked = set.AudioOn;
+            if (chkAudio.Checked) { Notification.useAudio = true; }
+            else { Notification.useAudio = false; }
             PortAccess.Output(LPTnum, 0);
             // setup error log parameters
             ErrorLog.LogFilePath = "ErrorLog.txt";
@@ -285,7 +292,7 @@ namespace DataDecoder
             pollTimer.Interval = pollInt;  // 1000 = 1 second
             pollTimer.Enabled = false;
 
-            // setup Log Port Timer for a 10 second interrupt
+            // setup Log Port Timer for a 5 second interrupt
             logTimer = new System.Timers.Timer();
             logTimer.Elapsed += new System.Timers.ElapsedEventHandler(logTimer_Elapsed);
             logTimer.Interval = 5000;      // 1000 = 1 seconds
@@ -297,7 +304,7 @@ namespace DataDecoder
             lpTimer.Interval = 200;
             lpTimer.Enabled = false;
 
-            // setup PA Temp Timer for a 1200 ms interrupt
+            // setup PA Temp Timer for a 1000 ms interrupt
             tempTimer = new System.Timers.Timer();
             tempTimer.Elapsed += new System.Timers.ElapsedEventHandler(tempTimer_Elapsed);
             if (pollInt >= 1000)
@@ -319,7 +326,7 @@ namespace DataDecoder
             StepTimer.Enabled = false;
 
             CreateSerialPort();
-            GetPortNames();             // enumerate serial ports and load combo boxes
+            GetPortNames(); // enumerate serial ports and load combo boxes
             InitRotor();
             str = set.CIVaddr;
             txtRadNum.Text = str;
@@ -333,18 +340,19 @@ namespace DataDecoder
             txtLPint.Text = Convert.ToString(set.LPint);
             txtProfLoc.Text = set.ProfLoc;
 
+            cboRadio.SelectedIndex = set.followRadio;
+            chkFollow.Checked = set.followChk;
+            if (chkFollow.Checked == false)
+            { cboRadio.Enabled = false; chkMode.Enabled = false; }
+            else
+            { cboRadio.Enabled = true; chkMode.Enabled = true; }
+
             // set Acc Serial (passive listener) port to the last port used
             str = set.AccPort;
             if (str != "")
             {
-                cboSerAcc.Text = str;
-                cboRadio.SelectedIndex = set.followRadio;
-                cboFollow.Checked = set.followChk;
-                if (cboFollow.Checked == false)
-                { cboRadio.Enabled = false; chkMode.Enabled = false; }
-                else
-                { cboRadio.Enabled = true; chkMode.Enabled = true; }
-                if (AccPort.IsOpen) AccPort.Close();
+               cboSerAcc.Text = str;
+               if (AccPort.IsOpen) AccPort.Close();
                 try
                 {   // try to open the selected AccPort:
                     AccPort.PortName = str;
@@ -538,7 +546,7 @@ namespace DataDecoder
                         chkDevice.Checked = false;
                         break;
                 }
-                btnPortNum.BackColor = Color.Transparent;
+                btnPortNum.Visible = false;
                 lblPortBtn.Visible = false;
             }
             catch (Exception ex)
@@ -556,6 +564,48 @@ namespace DataDecoder
             Dev0.Text = set.Device0;
             cboDevice.Items.Add(set.Device0);
             cboDevice.Text = set.Device;
+
+            // Setup the WN2 controls
+            chkWNEnab.Checked = set.WnEnab;
+            if (!chkWNEnab.Checked && !chkLPenab.Checked)
+                chkWNEnab_CheckedChanged(null, null);
+            sensor = set.WnCoupler;
+            s1Type = set.s1Type; s2Type = set.s2Type;
+            s3Type = set.s3Type; s4Type = set.s4Type;
+            // Restore the current sensor being used
+            switch (sensor)
+            {
+                case 1: rbWN1.Checked = true; sType = s1Type; break;
+                case 2: rbWN2.Checked = true; sType = s2Type; break;
+                case 3: rbWN3.Checked = true; sType = s3Type; break;
+                case 4: rbWN4.Checked = true; sType = s4Type; break;
+            }
+            // Restore the sensor type radio buttons
+            switch (s1Type)
+            {
+                case 1: rbC1Q.Checked = true; break;
+                case 2: rbC1H.Checked = true; break;
+                case 3: rbC1K.Checked = true; break;
+            }
+            switch (s2Type)
+            {
+                case 1: rbC2Q.Checked = true; break;
+                case 2: rbC2H.Checked = true; break;
+                case 3: rbC2K.Checked = true; break;
+            }
+            switch (s3Type)
+            {
+                case 1: rbC3Q.Checked = true; break;
+                case 2: rbC3H.Checked = true; break;
+                case 3: rbC3K.Checked = true; break;
+            }
+            switch (s4Type)
+            {
+                case 1: rbC4Q.Checked = true; break;
+                case 2: rbC4H.Checked = true; break;
+                case 3: rbC4K.Checked = true; break;
+            }
+            // WN Setup done
 
             if (chkLPenab.Checked) lpTimer.Enabled = true;
             else lpTimer.Enabled = false;
@@ -678,6 +728,51 @@ namespace DataDecoder
                     txtSWR.Text = text;
             }
         }
+        // Write LP-100 Alarm reading
+        delegate void SetAlarmCallback(string text);
+        private void SetAlarm(string text)
+        {
+            if (!closing)
+            {
+                if (this.lblAlarm.InvokeRequired)
+                {
+                    SetAlarmCallback d = new SetAlarmCallback(SetAlarm);
+                    this.Invoke(d, new object[] { text });
+                }
+                else
+                    lblAlarm.Text = text;
+            }
+        }
+        // Write LP-100 Peak reading
+        delegate void SetLPPeakCallback(string text);
+        private void SetLPPeak(string text)
+        {
+            if (!closing)
+            {
+                if (this.lblFast.InvokeRequired)
+                {
+                    SetLPPeakCallback d = new SetLPPeakCallback(SetLPPeak);
+                    this.Invoke(d, new object[] { text });
+                }
+                else
+                    lblFast.Text = text;
+            }
+        }
+        // Write LP-100 Power mode
+        delegate void SetPowerCallback(string text);
+        private void SetPower(string text)
+        {
+            if (!closing)
+            {
+                if (this.lblPower.InvokeRequired)
+                {
+                    SetPowerCallback d = new SetPowerCallback(SetPower);
+                    this.Invoke(d, new object[] { text });
+                }
+                else
+                    lblPower.Text = text;
+            }
+        }
         // Write BCD Digit
         delegate void SetDigitCallback(string text);
         private void SetDigit(string text)
@@ -697,6 +792,13 @@ namespace DataDecoder
 
         #region Form Events
 
+        // The AudoOn check box has been changed.
+        private void chkAudio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAudio.Checked) { set.AudioOn = true; Notification.useAudio = true; }
+            else { set.AudioOn = false; Notification.useAudio = false; }
+            set.Save();
+        }
         // The station call sign has changed
         private void txtCall_TextChanged(object sender, EventArgs e)
         {
@@ -811,13 +913,23 @@ namespace DataDecoder
         // Form Load
         private void Setup_Load(object sender, EventArgs e)
         {
-            closing = false;
-            tabControl.SelectedIndex = set.TabOpen;
-            cboPrefix.SelectedIndex = RandomNumber(0, 300);
-            cboRCP1Rotor.SelectedIndex = set.RCP1RotorPort;
-            cboRCP2Rotor.SelectedIndex = set.RCP2RotorPort;
-            cboRCP3Rotor.SelectedIndex = set.RCP3RotorPort;
-            cboRCP4Rotor.SelectedIndex = set.RCP4RotorPort;
+            try
+            {
+
+                closing = false;
+                tabControl.SelectedIndex = set.TabOpen;
+                cboPrefix.SelectedIndex = RandomNumber(0, 300);
+                cboRCP1Rotor.SelectedIndex = set.RCP1RotorPort;
+                cboRCP2Rotor.SelectedIndex = set.RCP2RotorPort;
+                cboRCP3Rotor.SelectedIndex = set.RCP3RotorPort;
+                cboRCP4Rotor.SelectedIndex = set.RCP4RotorPort;
+            }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+            }
         }
         // Create a random nnumber between min and max
         private int RandomNumber(int min, int max)
@@ -888,9 +1000,9 @@ namespace DataDecoder
         private void txtPort_TextChanged(object sender, EventArgs e)
         {
             if (rbOther.Checked == true)
-            { btnPortNum.BackColor = Color.Orchid; lblPortBtn.Visible = true; }
+            { lblPortBtn.Visible = true; btnPortNum.Visible = true;}
             else
-            { btnPortNum.BackColor = Color.Transparent; lblPortBtn.Visible = false; }
+              { btnPortNum.Visible = false; ; lblPortBtn.Visible = false; }
         }
         // The Save LPTPort Number button was pressed
         private void btnPortNum_Click(object sender, EventArgs e)
@@ -898,7 +1010,7 @@ namespace DataDecoder
             LPTnum = Convert.ToInt32(txtPort.Text);
             set.lptNum = LPTnum.ToString();
             set.Save();
-            btnPortNum.BackColor = Color.Transparent;
+            btnPortNum.Visible = false;
             lblPortBtn.Visible = false;
         }
         // CAT port timer interval changed
@@ -1080,8 +1192,9 @@ namespace DataDecoder
             set.RCP4RotorPort = cboRCP4Rotor.SelectedIndex;
             set.Save();
         }
-        // new acc port was selected
-        private void cboSerAcc_SelectionChangeCommitted(object sender, EventArgs e)
+        // new PL port was selected
+//        private void cboSerAcc_SelectionChangeCommitted(object sender, EventArgs e)
+        private void cboSerAcc_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AccPort.IsOpen) AccPort.Close();
             if (cboSerAcc.SelectedItem.ToString() != "")
@@ -1100,6 +1213,13 @@ namespace DataDecoder
                     return;
                 }
             }
+            else
+            {
+                chkFollow.Checked = false;  cboRadio.SelectedIndex = 0; 
+                cboRadio.Enabled = false; chkMode.Enabled = false;
+                set.followChk = false; set.Save();
+            }
+
             // save new port setting
             string str = set.AccPort;
             set.AccPort = cboSerAcc.SelectedItem.ToString();
@@ -1128,23 +1248,37 @@ namespace DataDecoder
             set.Save();
         }
         // Follow radio check box has changed
-        private void cboFollow_CheckedChanged(object sender, EventArgs e)
+        private void chkFollow_CheckedChanged(object sender, EventArgs e)
         {
-            if (cboFollow.Checked == true)
+            if (cboSerAcc.Text != "")
             {
-                cboRadio.Enabled = true;
-                chkMode.Enabled = true;
-                set.followChk = true;
+                if (chkFollow.Checked == true)
+                {
+                    cboRadio.Enabled = true;
+                    chkMode.Enabled = true;
+                    set.followChk = true;
+                    set.Save();
+                }
+                else
+                {
+                    chkFollow.Checked = false; cboRadio.SelectedIndex = 0;
+                    cboRadio.Enabled = false; chkMode.Enabled = false;
+                    set.followChk = false; set.Save();
+                }
             }
             else
             {
-                cboRadio.SelectedIndex = 0;
-                //                portmode = PortMode.None;
-                cboRadio.Enabled = false;
-                chkMode.Enabled = false;
-                set.followChk = false;
+                chkFollow.Checked = false; cboRadio.SelectedIndex = 0;
+                cboRadio.Enabled = false; chkMode.Enabled = false;
+                set.followChk = false; set.Save();
+
+                Notification alert = new Notification();
+                Notification.notiMsg =
+                "\r\rYou must assign a port number before the\r\r" +
+                    "Passive Listener device(s) will be usable.\r\r" +
+                    "Please assign a valid port and try again.";
+                alert.Show();
             }
-            set.Save();
         }
         // Follow Radio type has changed
         private void cboRadio_SelectedIndexChanged(object sender, EventArgs e)
@@ -1235,74 +1369,6 @@ namespace DataDecoder
                     break;
             }
             set.RadData = (int)cboRadData.SelectedIndex;
-            set.Save();
-        }
-        // LP port number has changed
-        private void cboLPport_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lpTimer.Enabled = false;
-            if (LPport.IsOpen) LPport.Close();
-            if (cboLPport.SelectedItem.ToString() != "")
-            {
-                LPport.PortName = cboLPport.SelectedItem.ToString();
-                try
-                {
-                    LPport.Open();
-                    lpTimer.Enabled = true;
-                }
-                catch
-                {
-                    MessageBox.Show("The LP-100 serial port " + LPport.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboLPport.SelectedText = "";
-                    return;
-                }
-            }
-            else
-            {
-                lpTimer.Enabled = false;
-                chkLPenab.Checked = false;
-            }
-            // save new port setting
-            set.LPportNum = cboLPport.SelectedItem.ToString();
-            set.Save();
-        }
-        // LP timer interval has changed
-        private void txtLPint_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                set.LPint = txtLPint.Text;
-                set.Save();
-            }
-            catch { }
-        }
-        // LP enabled check box has changed
-        private void chkLPenab_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkLPenab.Checked)
-            {
-                if (cboLPport.SelectedIndex > 0)
-                {
-                    lpTimer.Enabled = true;
-                    set.LPenab = true;
-                }
-                else
-                {
-                    MessageBox.Show("No port has been selected for the LP-100.\n\n" +
-                    "Please select a valid port number and try again.", "Port Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    chkLPenab.Checked = false;
-                }
-            }
-            else
-            {
-                lpTimer.Enabled = false;
-                set.LPenab = false;
-                txtFwd.Text = "";
-                txtSWR.Text = "";
-            }
             set.Save();
         }
         // Profiller button was pressed
@@ -1769,10 +1835,12 @@ namespace DataDecoder
             }
         }
         // See if a copy of DDUtil is already running
+        public static int myID;
         public static bool IsAppAlreadyRunning()
         {
             bool IsRunning = false;
             Process currentProcess = Process.GetCurrentProcess();
+            myID = currentProcess.Id;
             Process[] processes = Process.GetProcesses();
             foreach (Process process in processes)
             {
@@ -1823,6 +1891,145 @@ namespace DataDecoder
             }
         }
         #endregion Helper Methods
+
+        #region LP-100
+
+        // LP-100 Alarm set button was pressed
+        private void btnAlarm_Click(object sender, EventArgs e)
+        {
+            if (chkLPenab.Checked)
+                LPport.Write(";A?");
+        }
+        // LP-100 Fast button was pressed (toggles peak hold mode (fast/peak/hold))
+        private void btnFast_Click(object sender, EventArgs e)
+        {
+            if (chkLPenab.Checked)
+                LPport.Write(";F?");
+        }
+        // LP-100 Mode button was pressed
+        private void btnMode_Click(object sender, EventArgs e)
+        {
+            if (chkLPenab.Checked)
+                LPport.Write(";M?");
+        }
+        // LP100 interval timer has elapsed
+        void lpTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                if (chkLPenab.Checked)
+                    LPport.Write(";P?");
+                else
+                    lpTimer.Enabled = false;
+            }
+            catch { }
+        }
+        // LP100 port has received data
+        private void LPport_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkLPenab.Checked)
+            {
+                SerialPort LPportMsgs = (SerialPort)sender;
+                string LPportMsg = LPportMsgs.ReadExisting();
+                if (LPportMsg.Length == 43)
+                {
+                    string fwd = LPportMsg.Substring(1, 7);
+                    string alarm = LPportMsg.Substring(21, 1);
+                         if (alarm == "0") SetAlarm("Off");
+                    else if (alarm == "1") SetAlarm("1.5");
+                    else if (alarm == "2") SetAlarm("2.0");
+                    else if (alarm == "3") SetAlarm("2.5");
+                    else if (alarm == "4") SetAlarm("3.0");
+
+                    string peak = LPportMsg.Substring(32, 1);
+                         if (peak == "0") SetLPPeak("Fast");
+                    else if (peak == "1") SetLPPeak("Peak");
+                    else if (peak == "2") SetLPPeak("Tune");
+                    
+                    string power = LPportMsg.Substring(30, 1);
+                         if (power == "0") SetPower("Power: High");
+                    else if (power == "1") SetPower("Power: Mid");
+                    else if (power == "2") SetPower("Power: Low");
+
+                    string swr = LPportMsg.Substring(LPportMsg.Length - 4, 4);
+                    SetAvg(fwd);
+                    SetSwr(swr);
+                }
+            }
+        }
+        // LP port number has changed
+        private void cboLPport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lpTimer.Enabled = false;
+            if (LPport.IsOpen) LPport.Close();
+            if (cboLPport.SelectedItem.ToString() != "")
+            {
+                LPport.PortName = cboLPport.SelectedItem.ToString();
+                try
+                {
+                    LPport.Open();
+                    lpTimer.Enabled = true;
+                }
+                catch
+                {
+                    MessageBox.Show("The LP-100 serial port " + LPport.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboLPport.SelectedText = "";
+                    return;
+                }
+            }
+            else
+            {
+                lpTimer.Enabled = false;
+                chkLPenab.Checked = false;
+            }
+            // save new port setting
+            set.LPportNum = cboLPport.SelectedItem.ToString();
+            set.Save();
+        }
+        // LP timer interval has changed
+        private void txtLPint_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                set.LPint = txtLPint.Text;
+                set.Save();
+            }
+            catch { }
+        }
+        // LP enabled check box has changed
+        private void chkLPenab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkLPenab.Checked)
+            {
+                if (cboLPport.SelectedIndex > 0)
+                {
+                    lpTimer.Enabled = true; set.LPenab = true; chkWNEnab.Checked = false;
+                    set.WnEnab = false; lblAvg.Text = "Fwd";                    
+                    txtAvg.Enabled = true; txtSWR.Enabled = true;
+                    txtFwd.Visible = false; lblFwd.Visible = false;
+                }
+                else
+                {
+                    MessageBox.Show("No port has been selected for the LP-100.\n\n" +
+                    "Please select a valid port number and try again.", "Port Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    chkLPenab.Checked = false; lpTimer.Enabled = false; set.LPenab = false;
+                    txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
+                    txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
+                }
+            }
+            else
+            {
+                lpTimer.Enabled = false; set.LPenab = false;
+                txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
+                txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
+            }
+            set.Save();
+        }
+
+        #endregion LP-100
 
         #region Macro Routines
 
@@ -2246,7 +2453,7 @@ namespace DataDecoder
         // Context Menu|Restore Form Size
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.Size = new Size(430, 445);
+            this.Size = new Size(430, 450);
         }
         // Context Menu|Shrink Form Size
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
@@ -2319,7 +2526,7 @@ namespace DataDecoder
         private void rCPPortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                "Setup procedure for using the bi-directional RCP ports.\n\n" +
+                "Setup procedure for using the bi-directional RCP ports\n\n" +
                 "These ports are for programs that need to talk to the radio\n" +
                 "in order to change frequency, mode and other radio parameters.\n\n" +
                 "- Select the desired port from the drop-down list-box.\n\n" +
@@ -2330,14 +2537,27 @@ namespace DataDecoder
         private void rotorControlToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                "Setup procedure for using the Rotor Control feature.\n\n" +
+                "Setup procedure for using Rotor Control\n\n" +
                 "- Select the Rotor Model and Speed (if applicable)\n\n" + 
                 "- Select the desired Serial Port for your rotor.\n\n" +
                 "- Select the Serial Port Comm data that matches your rotor.\n\n" +
                 "- Check the Enabled check box to turn on a port.\n\n" +
-                "- Enter your Latitude and Longitude for you location.\n",
+                "- Enter your Latitude and Longitude for your location.\n",
                 "Rotor Setup", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
+
+        private void waveNodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "Setup procedure for using the WN2 watt meter\n\n" +
+                "- Select the Coupler and it's type you want to read.\n\n" +
+                "- If the hardware becomes inoperative, toggle the Enable check box.\n\n" +
+                "- If that fails, press the small purple button in the top right corner.\n\n"+
+                "- If that fails, toggle the power to the WN2.\n",
+                "WaveNode Operation", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+        }
+
         #endregion Menu Events
 
         #region Rotor Control
@@ -2640,6 +2860,42 @@ namespace DataDecoder
             txtDxDist.Text = (24902 - Convert.ToInt32(txtDxDist.Text)).ToString();
             if (txtDxDist.ForeColor == Color.Blue) txtDxDist.ForeColor = Color.Firebrick;
             else txtDxDist.ForeColor = Color.Blue;
+        }
+        // One of the rotor presets has been pressed
+        private void grpPreset_CheckChanged(object sender, EventArgs e)
+        {
+            if (rbPre1.Checked)
+            { txtSP.Text = rbPre1.Text; btnSP_Click(null, null); }
+            else if (rbPre2.Checked)
+            { txtSP.Text = rbPre2.Text; btnSP_Click(null, null); }
+            else if (rbPre3.Checked)
+            { txtSP.Text = rbPre3.Text; btnSP_Click(null, null); }
+            else if (rbPre4.Checked)
+            { txtSP.Text = rbPre4.Text; btnSP_Click(null, null); }
+            else if (rbPre5.Checked)
+            { txtSP.Text = rbPre5.Text; btnSP_Click(null, null); }
+            else if (rbPre6.Checked)
+            { txtSP.Text = rbPre6.Text; btnSP_Click(null, null); }
+            else if (rbPre7.Checked)
+            { txtSP.Text = rbPre7.Text; btnSP_Click(null, null); }
+            else if (rbPre8.Checked)
+            { txtSP.Text = rbPre8.Text; btnSP_Click(null, null); }
+            else if (rbPre9.Checked)
+            { txtSP.Text = rbPre9.Text; btnSP_Click(null, null); }
+            else if (rbPre10.Checked)
+            { txtSP.Text = rbPre10.Text; btnSP_Click(null, null); }
+            else if (rbPre11.Checked)
+            { txtSP.Text = rbPre11.Text; btnSP_Click(null, null); }
+            else if (rbPre12.Checked)
+            { txtSP.Text = rbPre12.Text; btnSP_Click(null, null); }
+            else if (rbPre13.Checked)
+            { txtSP.Text = rbPre13.Text; btnSP_Click(null, null); }
+            else if (rbPre14.Checked)
+            { txtSP.Text = rbPre14.Text; btnSP_Click(null, null); }
+            else if (rbPre15.Checked)
+            { txtSP.Text = rbPre15.Text; btnSP_Click(null, null); }
+            else if (rbPre16.Checked)
+            { txtSP.Text = rbPre16.Text; btnSP_Click(null, null); }
         }
 
        #endregion Rotor Events
@@ -3274,22 +3530,6 @@ namespace DataDecoder
                 }
             }
         }
-        // LP100 port has received data
-        private void LPport_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            if (chkLPenab.Checked)
-            {
-                SerialPort LPportMsgs = (SerialPort)sender;
-                string LPportMsg = LPportMsgs.ReadExisting();
-                if (LPportMsg.Length == 43)
-                {
-                    string fwd = LPportMsg.Substring(1, 7);
-                    string swr = LPportMsg.Substring(LPportMsg.Length - 4, 4);
-                    SetFwd(fwd);
-                    SetSwr(swr);
-                }
-            }
-        }
         // PW1 port has received data (Query from IC-PW1) i.e. FE FE 33 54 [03/04] FD
         // Reply messages are hard coded as it can only be a request for freq. or mode
         private void PW1port_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -3622,56 +3862,94 @@ namespace DataDecoder
             sp.WriteTimeout = 500;
             sp.ReadTimeout = 500;
         }
+        private ArrayList GetAvailCOMPorts()
+        {
+            ArrayList a = new ArrayList();
+            for (int i = 1; i < 34; i++)
+            {
+    //            SerialPorts.SerialPort sp = new SerialPorts.SerialPort();
+                sp.Name = "COM" + i.ToString();
+                try
+                {
+                    sp.Open();
+                    if (sp.isOpen)
+                    {
+                        a.Add(sp.Name);
+                        sp.Close();
+                    }
+                }
+                catch (Exception) { };
+            }
+            return a;
+        }
         /// <summary>
         /// Loads the list of available serial ports in the serial port combobox.
         /// </summary>
         private void GetPortNames()
         {
-            ports = SerialPort.GetPortNames();
-            foreach (string port in ports)
-            {
-                cboCAT.Items.Add(port);
-                cboSerAcc.Items.Add(port);
-                cboLogPort.Items.Add(port);
-                cboLPport.Items.Add(port);
-                cboRCP2.Items.Add(port);
-                cboRCP3.Items.Add(port);
-                cboRCP4.Items.Add(port);
-                cboPW1.Items.Add(port);
-                cboStep.Items.Add(port);
-                cboRotorPort.Items.Add(port);
-                cboRCP1Rotor.Items.Add(port);
-                cboRCP2Rotor.Items.Add(port);
-                cboRCP3Rotor.Items.Add(port);
-                cboRCP4Rotor.Items.Add(port);
+            ArrayList ports = GetAvailCOMPorts();
+
+//            ports = SerialPort.GetPortNames();
+            if (ports.Count > 0)
+            {   // make sure combo boxes are empty
+                cboSerAcc.Items.Clear();
+                cboLogPort.Items.Clear();
+                cboLPport.Items.Clear();
+                cboRCP2.Items.Clear();
+                cboRCP3.Items.Clear();
+                cboRCP4.Items.Clear();
+                cboPW1.Items.Clear();
+                cboStep.Items.Clear();
+                cboRotorPort.Items.Clear();
+                cboRCP1Rotor.Items.Clear();
+                cboRCP2Rotor.Items.Clear();
+                cboRCP3Rotor.Items.Clear();
+                cboRCP4Rotor.Items.Clear();
+                // Add empty entry to port combos
+                cboSerAcc.Items.Add("");
+                cboLogPort.Items.Add("");
+                cboLPport.Items.Add("");
+                cboRCP2.Items.Add("");
+                cboRCP3.Items.Add("");
+                cboRCP4.Items.Add("");
+                cboPW1.Items.Add("");
+                cboStep.Items.Add("");
+                cboRotorPort.Items.Add("");
+                cboRCP1Rotor.Items.Add("");
+                cboRCP2Rotor.Items.Add("");
+                cboRCP3Rotor.Items.Add("");
+                cboRCP4Rotor.Items.Add("");
+
+                foreach (string port in ports)
+                {   // load port combos with port names
+                    cboCAT.Items.Add(port);
+                    cboSerAcc.Items.Add(port);
+                    cboLogPort.Items.Add(port);
+                    cboLPport.Items.Add(port);
+                    cboRCP2.Items.Add(port);
+                    cboRCP3.Items.Add(port);
+                    cboRCP4.Items.Add(port);
+                    cboPW1.Items.Add(port);
+                    cboStep.Items.Add(port);
+                    cboRotorPort.Items.Add(port);
+                    cboRCP1Rotor.Items.Add(port);
+                    cboRCP2Rotor.Items.Add(port);
+                    cboRCP3Rotor.Items.Add(port);
+                    cboRCP4Rotor.Items.Add(port);
+                }
             }
-            cboCAT.Sorted = true;
-            cboSerAcc.Items.Add("");
-            cboSerAcc.Sorted = true;
-            cboLogPort.Items.Add("");
-            cboLogPort.Sorted = true;
-            cboLPport.Items.Add("");
-            cboLPport.Sorted = true;
-            cboRCP2.Items.Add("");
-            cboRCP2.Sorted = true;
-            cboRCP3.Items.Add("");
-            cboRCP3.Sorted = true;
-            cboRCP4.Items.Add("");
-            cboRCP4.Sorted = true;
-            cboPW1.Items.Add("");
-            cboPW1.Sorted = true;
-            cboStep.Items.Add("");
-            cboStep.Sorted = true;
-            cboRotorPort.Items.Add("");
-            cboRotorPort.Sorted = true; 
-            cboRCP1Rotor.Items.Add("");
-            cboRCP1Rotor.Sorted = true;
-            cboRCP2Rotor.Items.Add("");
-            cboRCP2Rotor.Sorted = true;
-            cboRCP3Rotor.Items.Add("");
-            cboRCP3Rotor.Sorted = true;
-            cboRCP4Rotor.Items.Add("");
-            cboRCP4Rotor.Sorted = true;
+            else
+            {
+                MessageBox.Show(
+                    "There are NO serial ports setup on this computer!\r\r" +
+                    "For this program to function there has to be at least one\r" +
+                    "pair of virtual serial ports so DDUtil can talk to PowerSDR.\r\r" +
+                    "Please try again after seting up at least one pair of ports!\r\r" + 
+                    "The program will now terminate as there is nothing to do.", 
+                    "Fatal Error!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+                Environment.Exit(0);
+            }
         }
         /// <summary>
         /// Opens the default CAT port.
@@ -3686,7 +3964,8 @@ namespace DataDecoder
             }
             else
             {
-                MessageBox.Show("Default Radio Port is not valid.  Please select a port from the list.");
+                MessageBox.Show("Default Radio Port is not valid." +
+                    "Please select a port from the list.");
                 cboCAT.SelectedIndex = 0;
             }
         }
@@ -4175,18 +4454,6 @@ namespace DataDecoder
             }
             catch { }
         }
-        // LP100 interval timer has elapsed
-        void lpTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            try
-            {
-                if (chkLPenab.Checked)
-                    LPport.Write(";P?");
-                else
-                    lpTimer.Enabled = false;
-            }
-            catch { }
-        }
         // This event only fires if the Radio Control Program (RCP) is not active
         void pollTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
@@ -4350,5 +4617,540 @@ namespace DataDecoder
         }
         #endregion Window Geometry
 
+        #region WaveNode
+
+        #region WaveNode ENUMS & Vars
+
+        enum FT_STATUS
+        {
+            FT_OK = 0,
+            FT_INVALID_HANDLE,
+            FT_DEVICE_NOT_FOUND,
+            FT_DEVICE_NOT_OPENED,
+            FT_IO_ERROR,
+            FT_INSUFFICIENT_RESOURCES,
+            FT_INVALID_PARAMETER,
+            FT_INVALID_BAUD_RATE,
+            FT_DEVICE_NOT_OPENED_FOR_ERASE,
+            FT_DEVICE_NOT_OPENED_FOR_WRITE,
+            FT_FAILED_TO_WRITE_DEVICE,
+            FT_EEPROM_READ_FAILED,
+            FT_EEPROM_WRITE_FAILED,
+            FT_EEPROM_ERASE_FAILED,
+            FT_EEPROM_NOT_PRESENT,
+            FT_EEPROM_NOT_PROGRAMMED,
+            FT_INVALID_ARGS,
+            FT_OTHER_ERROR
+        };
+        public const UInt32 FT_LIST_NUMBER_ONLY = 0x80000000;
+        public const UInt32 FT_LIST_BY_INDEX = 0x40000000;
+        public const UInt32 FT_LIST_ALL = 0x20000000;
+        public const UInt32 FT_OPEN_BY_SERIAL_NUMBER = 1;
+        public const UInt32 FT_OPEN_BY_DESCRIPTION = 2;
+        public const UInt32 FT_EVENT_RXCHAR = 1;
+
+        // Purge rx and tx buffers
+        public const byte FT_PURGE_RX = 1;
+        public const byte FT_PURGE_TX = 2;
+
+        // D2xx.dll constructors
+        [DllImport("FTD2XX.dll")]
+        static extern unsafe FT_STATUS FT_Close(FT_HANDLE ftHandle);
+        [DllImport("FTD2XX.dll")]
+        static extern unsafe FT_STATUS FT_CyclePort(FT_HANDLE ftHandle);
+        [DllImport("FTD2XX.dll")]// FT_ListDevices by number only
+        static extern unsafe FT_STATUS FT_ListDevices(void* pvArg1, void* pvArg2, UInt32 dwFlags);	
+        [DllImport("FTD2XX.dll")]// FT_ListDevcies by serial number or description by index only
+        static extern unsafe FT_STATUS FT_ListDevices(UInt32 pvArg1, void* pvArg2, UInt32 dwFlags);	
+        [DllImport("FTD2XX.dll")]
+        static extern unsafe FT_STATUS FT_Open(UInt32 uiPort, ref FT_HANDLE ftHandle);
+        [DllImport("FTD2XX.dll")]
+        static extern unsafe FT_STATUS FT_OpenEx(void* pvArg1, UInt32 dwFlags, ref FT_HANDLE ftHandle);
+        [DllImport("FTD2XX.dll")]
+        static extern unsafe FT_STATUS FT_Purge(FT_HANDLE ftHandle, UInt32 dwMask);
+        [DllImport("FTD2XX.dll")]
+        static extern unsafe FT_STATUS FT_Read(FT_HANDLE ftHandle, void* lpBuffer, 
+                               UInt32 dwBytesToRead, ref UInt32 lpdwBytesReturned);
+        [DllImport("FTD2XX.dll")]
+        static extern unsafe FT_STATUS FT_ResetDevice(FT_HANDLE ftHandle);
+        [DllImport("FTD2XX.dll")]
+        static extern unsafe FT_STATUS FT_ResetPort(FT_HANDLE ftHandle);
+        [DllImport("FTD2XX.dll")]
+        static extern unsafe FT_STATUS FT_Write(FT_HANDLE ftHandle, void* lpBuffer, 
+                                UInt32 dwBytesToRead, ref UInt32 lpdwBytesWritten);
+        int s = 0;
+        int sensor;
+        int sType;
+        int s1Type;
+        int s2Type;
+        int s3Type;
+        int s4Type;
+        protected UInt32 dwListDescFlags;
+        protected UInt32 m_hPort;
+
+        #endregion WaveNode ENUMS & Vars
+
+        #region Delegates
+
+        // Write Peak reading to txt box
+        delegate void SetPeakCallback(string text);
+        private void SetPeak(string text)
+        {
+            if (this.txtFwd.InvokeRequired)
+            {
+                SetPeakCallback d = new SetPeakCallback(SetPeak);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+                txtFwd.Text = text;
+        }
+        // Write Avg reading to txt box
+        delegate void SetAvgCallback(string text);
+        private void SetAvg(string text)
+        {
+            if (this.txtAvg.InvokeRequired)
+            {
+                SetAvgCallback d = new SetAvgCallback(SetAvg);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+                txtAvg.Text = text;
+        }
+        // Write SWR reading to txt box
+        delegate void SetSWRCallback(string text);
+        private void SetSWR(string text)
+        {
+            if (this.txtSWR.InvokeRequired)
+            {
+                SetSWRCallback d = new SetSWRCallback(SetSWR);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+                txtSWR.Text = text;
+        }
+        #endregion Delegates
+
+        #region WaveNode Methods
+
+        // Find all the FTDI USB devices
+        private unsafe bool FindDevice()
+        {
+            FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
+            UInt32 numDevs;
+            int i;
+            byte[] sDevName = new byte[64];
+            void* p1;
+
+            dwListDescFlags = FT_LIST_BY_INDEX | FT_OPEN_BY_SERIAL_NUMBER;
+            p1 = (void*)&numDevs;
+            ftStatus = FT_ListDevices(p1, null, FT_LIST_NUMBER_ONLY);
+            // Find all the FTDI devices
+            for (i = 0; i < numDevs; i++)
+            {
+                fixed (byte* pBuf = sDevName)
+                {
+                    // Enumerate the found devices. Note: if a device is in use it will
+                    // return an FT_INVALID_HANDLE error, so the error must be ignored
+                    ftStatus = FT_ListDevices((UInt32)i, pBuf, dwListDescFlags);
+                    if (ftStatus == FT_STATUS.FT_OK ||
+                        ftStatus == FT_STATUS.FT_INVALID_HANDLE)
+                    {
+                        System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
+                        string str = enc.GetString(sDevName, 0, sDevName.Length);
+                        if (str.Substring(0, 3) == "WNR")
+                        {   // Go open the device
+                            if (OpenDevice(str)) return true;
+                            else { return false; }
+                        }
+                        else
+                        {
+                            if (i == numDevs - 1)
+                            {   // if the WN2 is not found, throw a message.
+                                Notification alert = new Notification();
+                                Notification.notiMsg =
+                                    "\r\rThe WN2 could not be found.\r\r" +
+                                    "Please make sure it's USB line is\r\r" +
+                                    "connected and the unit is powerd up.\r\r";
+                                alert.Show();
+                                chkWNEnab.Checked = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error listing devices: " + Convert.ToString(ftStatus), "Error");
+                        return false;
+                    }
+                }
+            }
+            return false;
+        }
+        // Open the FTDI device found in FindDevice()
+        private unsafe bool OpenDevice(string dev)
+        {
+            UInt32 dwOpenFlag;
+            FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
+
+            if (m_hPort == 0)
+            {
+                dwOpenFlag = dwListDescFlags & ~FT_LIST_BY_INDEX;
+                dwOpenFlag = dwListDescFlags & ~FT_LIST_ALL;
+
+                System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
+                byte[] sDevName = enc.GetBytes(dev);
+                fixed (byte* pBuf = sDevName)
+                {
+                    ftStatus = FT_OpenEx(pBuf, dwOpenFlag, ref m_hPort);
+                    if (ftStatus == FT_STATUS.FT_OK)
+                    {
+//                        ftStatus = FT_ResetDevice(m_hPort);
+                        ftStatus = FT_Purge(m_hPort, FT_PURGE_RX | FT_PURGE_TX);
+                        s = 0;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error opening device: " + 
+                            Convert.ToString(ftStatus), "Error");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        // Read the WN2 into the USB buffer
+        List<float> samplePeak = new List<float>(12);
+        private unsafe void ReadBuffer()
+        {
+            byte[] usbReadBuf = new byte[64];
+            int[] adcBuf = new int[16];
+            float[] emcAvgBuf = new float[8];
+            float[] emcPeakBuf = new float[8];
+            UInt32 dwRet = 0;
+            FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
+
+            if (m_hPort == 0) return;
+            
+            fixed (byte* pBuf = usbReadBuf)
+            { ftStatus = FT_Read(m_hPort, pBuf, 64, ref dwRet); }
+
+            if (dwRet == 64)
+            {
+                // Check usb buffer for a good load
+                if (usbReadBuf[0] == 1 && usbReadBuf[61] == 0xff && usbReadBuf[62] == 0xf0)
+                {
+                    // Load USB Avg values to buffer
+                    for (int i = 1; i < 9; i++)
+                    {
+                        int usbMsb = usbReadBuf[2 * i] << 8;
+                        int MsbLsb = usbReadBuf[((2 * i) - 1)] | usbMsb;
+                        adcBuf[i - 1] = MsbLsb;
+                        emcAvgBuf[i - 1] = (float)MsbLsb; //(3.6 / 4048) * MsbLsb;
+                        if (sType == 1)      // sensor type = qrp
+                        {
+                            emcAvgBuf[i - 1] = emcAvgBuf[i - 1] * 10;
+                            emcAvgBuf[i - 1] = emcAvgBuf[i - 1] / 63;
+                        }
+                        else if (sType == 2) // sensor type = HF/UHF
+                        {
+                            emcAvgBuf[i - 1] = powerScaleCorrect(emcAvgBuf[i - 1]);
+                        }
+                        else if (sType == 3) // sensor type = 8K
+                        {
+                            emcAvgBuf[i - 1] = powerScaleCorrect_8K(emcAvgBuf[i - 1] * 2);
+                        }
+                    }
+                    // Load USB Peak values to buffer
+                    for (int i = 9; i < 17; i++)
+                    {
+                        int usbMsb = usbReadBuf[2 * i] << 8;
+                        int MsbLsb = usbReadBuf[((2 * i) - 1)] | usbMsb;
+                        adcBuf[i - 1] = MsbLsb; 
+                        emcPeakBuf[i - 9] = (float)MsbLsb;// (3.6 / 4048) * MsbLsb; // Peak fwd volts
+                        if (sType == 1)      // sensor type = qrp
+                        { 
+                            emcPeakBuf[i - 9] = emcPeakBuf[i - 9] * 10;
+                            emcPeakBuf[i - 9] = emcPeakBuf[i - 9] / 63; 
+                        }
+                        else if (sType == 2) // sensor type = HF/UHF
+                        {
+                            emcPeakBuf[i - 9] = powerScaleCorrect(emcPeakBuf[i - 9]);
+                        }
+                        else if (sType == 3) // sensor type = 8K
+                        {
+                            emcPeakBuf[i - 9] = powerScaleCorrect_8K(emcPeakBuf[i - 9] * 2);
+                        }
+                    }
+                    // Go post Power/SWR data to the display
+                    if (sensor == 1)
+                    {
+                        float aver2 = emcAvgBuf[0] * emcAvgBuf[0];
+                        float peak2 = emcPeakBuf[0] * emcPeakBuf[0];
+                        float emcFwd = emcPeakBuf[0];
+                        float emcRef = emcPeakBuf[1];
+                        PostDisplay(aver2, peak2, emcFwd, emcRef);
+                    }
+                    else if (sensor == 2)
+                    {
+                        float aver2 = emcAvgBuf[2] * emcAvgBuf[2];
+                        float peak2 = emcPeakBuf[2] * emcPeakBuf[2];
+                        float emcFwd = emcPeakBuf[2];
+                        float emcRef = emcPeakBuf[3];
+                        PostDisplay(aver2, peak2, emcFwd, emcRef);
+                    }
+                    else if (sensor == 3)
+                    {
+                        float aver2 = emcAvgBuf[4] * emcAvgBuf[4];
+                        float peak2 = emcPeakBuf[4] * emcPeakBuf[4];
+                        float emcFwd = emcPeakBuf[4];
+                        float emcRef = emcPeakBuf[5];
+                        PostDisplay(aver2, peak2, emcFwd, emcRef);
+                    }
+                    else if (sensor == 4)
+                    {
+                        float aver2 = emcAvgBuf[6] * emcAvgBuf[6];
+                        float peak2 = emcPeakBuf[6] * emcPeakBuf[6];
+                        float emcFwd = emcPeakBuf[6];
+                        float emcRef = emcPeakBuf[7];
+                        PostDisplay(aver2, peak2, emcFwd, emcRef);
+                    }
+                } // good data
+                //else
+                //{
+                //    // if bad data do nothing, wait for next packet
+                //}
+            } //dwRet==64
+        } // readThred
+
+        // Do the power and swr calculations and print them to the display
+        private void PostDisplay(float aver2, float peak2, float emcFwd, float emcRef)
+        {
+            float avg, power, swr = 0;
+            if (aver2 < 100) avg = aver2 / 670; else avg = aver2 / 6700;
+            if (peak2 < 100) power = peak2 / 670; else power = peak2 / 6700;
+            if (power < 1.00) power = 0;
+
+            //samplePeak.Insert(s, power); // save this sample
+            //s += 1; if (s > 12) s = 0;
+            
+            if (avg < 1) avg = 0;
+            emcRef = swrScaleCorrect(emcRef);
+            swr = (emcFwd + emcRef) / (emcFwd - emcRef);
+            if (power == 0) swr = 0;
+            //else 
+            //{
+                //power = FindMax();
+            //}
+            SetPeak(string.Format("{0:f1}", power));
+            SetAvg(string.Format("{0:f1}", avg));
+            SetSWR(string.Format("{0:f2}", swr));
+        }
+        // Find max sample
+        public float FindMax()
+        {
+            float max = float.MinValue;
+            for (int i = 0; i < 12; i++)
+            {
+                float val = samplePeak[i];
+                if (val > max)
+                    max = val;
+            }
+            return max;
+        }
+        // Function to compensate for low power levels (swr only)
+        float swrScaleCorrect(float refpowerin)
+        {
+            if (refpowerin <= 150)  //trips at about 2.4 watts
+            {
+                refpowerin = refpowerin * 13;  //multiply by 1.3
+                refpowerin = refpowerin / 10;
+            }
+            else if (refpowerin <= 300)   //trips at about 7 watts, 
+            {
+                refpowerin = refpowerin * 22;  //multiply by 1.15
+                refpowerin = refpowerin / 19;
+            }
+            return refpowerin;
+        }
+
+        float powerScaleCorrect(float powerin)
+        {
+            if (powerin >= 1000)   //trips at about 200 watts
+            {
+                powerin = powerin * 40;  //multiply by 40/41
+                powerin = powerin / 41;
+            }
+            if (powerin >= 2000)   //trips at about 200 watts
+            {
+                powerin = powerin * 60;  //multiply by 60/61
+                powerin = powerin / 61;
+            }
+            if (powerin <= 250)   //trips at about 7 watts
+            {
+                powerin = powerin * 11;  //multiply by 1.1
+                powerin = powerin / 10;
+            }
+            if (powerin <= 100)  //trips at about 2.4 watts
+            {
+                powerin = powerin * 12;  //multiply by 1.2
+                powerin = powerin / 10;
+            }
+            return powerin;
+        }
+        float powerScaleCorrect_8K(float powerin)
+        {
+            if (powerin >= 3000)   //trips at about 1100 watts
+            {
+                powerin = powerin * 80;  //multiply by 40/41
+                powerin = powerin / 81;
+            }
+            if (powerin >= 2200)   //trips at about 800 watts
+            {
+                powerin = powerin * 65;  //multiply by 70/71
+                powerin = powerin / 66;
+            }
+            if (powerin >= 1700)   //trips at about 400 watts
+            {
+                powerin = powerin * 40;  //multiply by 30/31
+                powerin = powerin / 41;
+            }
+            if (powerin >= 1200)   //trips at about 200 watts
+            {
+                powerin = powerin * 35;  //multiply by 30/31
+                powerin = powerin / 36;
+            }
+            if (powerin <= 250)   //trips at about 7 watts
+            {
+                powerin = powerin * 11;  //multiply by 1.1
+                powerin = powerin / 10;
+            }
+            if (powerin <= 100)  //trips at about 2.4 watts
+            {
+                powerin = powerin * 11;  //multiply by 1.1
+                powerin = powerin / 10;
+            }
+            return powerin;
+        }
+        // Called after one of the sensor types has changed.
+        private void SetSensorType()
+        {
+            switch (sensor)
+            {
+                case 1: sType = s1Type; break;
+                case 2: sType = s2Type; break;
+                case 3: sType = s3Type; break;
+                case 4: sType = s4Type; break;
+            }
+        }
+
+        #endregion WaveNode Methods
+
+        #region WaveNode Events
+
+        // The WN2 Enabled checkbox has changed
+        private void chkWNEnab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkWNEnab.Checked)
+            {
+                set.WnEnab = true; chkLPenab.Checked = false; set.LPenab = false;
+                lblFwd.Visible = true; txtFwd.Visible = true; txtAvg.Enabled = true;
+                txtSWR.Enabled = true; lblAvg.Text = "Avg"; txtFwd.Enabled = true;
+
+                if (FindDevice())           // Find the WN2 and open it
+                {
+                    WN2Timer.Enabled = true;   // Start the read timer;               
+                }
+                else
+                {
+                    WN2Timer.Enabled = false; set.WnEnab = false;
+                    txtFwd.Visible = false; lblFwd.Visible = false;
+                    txtAvg.Enabled = false; txtSWR.Enabled = false;
+                    txtAvg.Text = ""; txtSWR.Text = "";
+                }
+            }
+            else 
+            {
+                WN2Timer.Enabled = false; set.WnEnab = false;
+                FT_Close(m_hPort); m_hPort = 0;
+                txtFwd.Visible = false; lblFwd.Visible = false;
+                txtAvg.Enabled = false; txtSWR.Enabled = false;
+                txtAvg.Text = ""; txtSWR.Text = "";
+            }
+            set.Save();
+        }
+        // the read timer has fired
+        private void timer1_Tick(object sender, EventArgs e)
+        { ReadBuffer(); }
+
+        // The coupler selection has changed
+        private void grpWN2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbWN1.Checked)
+            { sensor = 1; sType = s1Type; set.WnCoupler = 1; }
+            else if (rbWN2.Checked)
+            { sensor = 2; sType = s2Type; set.WnCoupler = 2; }
+            else if (rbWN3.Checked)
+            { sensor = 3; sType = s3Type; set.WnCoupler = 3; }
+            else if (rbWN4.Checked)
+            { sensor = 4; sType = s4Type; set.WnCoupler = 4; }
+            set.Save();
+        }
+        // the #1 sensor type has changed
+        private void grpC1_CheckedChanged(object sender, EventArgs e)
+        {
+                 if (rbC1Q.Checked) { s1Type = 1; set.s1Type = 1; }
+            else if (rbC1H.Checked) { s1Type = 2; set.s1Type = 2; } 
+            else if (rbC1K.Checked) { s1Type = 3; set.s1Type = 3; }
+            SetSensorType(); set.Save();
+        }
+        // the #2 sensor type has changed
+        private void grpC2_CheckedChanged(object sender, EventArgs e)
+        {
+                 if (rbC2Q.Checked) { s2Type = 1; set.s2Type = 1; }
+            else if (rbC2H.Checked) { s2Type = 2; set.s2Type = 2; }
+            else if (rbC2K.Checked) { s2Type = 3; set.s2Type = 3; }
+            SetSensorType(); set.Save();
+        }
+        // the #3 sensor type has changed
+        private void grpC3_CheckedChanged(object sender, EventArgs e)
+        {
+                 if (rbC3Q.Checked) { s3Type = 1; set.s3Type = 1; }
+            else if (rbC3H.Checked) { s3Type = 2; set.s3Type = 2; }
+            else if (rbC3K.Checked) { s3Type = 3; set.s3Type = 3; }
+            set.Save();
+        }
+        // the #4 sensor type has changed
+        private void grpC4_CheckedChanged(object sender, EventArgs e)
+        {
+                 if (rbC4Q.Checked) { s4Type = 1; set.s4Type = 1; }
+            else if (rbC4H.Checked) { s4Type = 2; set.s4Type = 2; }
+            else if (rbC4K.Checked) { s4Type = 3; set.s4Type = 3; }
+            SetSensorType(); set.Save();
+        }
+        // the WN reset button has been pressed
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
+
+            ftStatus = FT_ResetDevice(m_hPort);
+            if (ftStatus == FT_STATUS.FT_OK) 
+                ftStatus = FT_CyclePort(m_hPort);
+            else goto Error;
+            if (ftStatus == FT_STATUS.FT_OK)
+            {
+                ftStatus = FT_Purge(m_hPort, FT_PURGE_RX | FT_PURGE_TX);
+                return;
+            }
+            Error:
+                Notification alert = new Notification();
+                Notification.notiMsg =
+                "\r\rThe WN2 could not be Reset.\r\r" +
+                "The only recourse is to toggle the power.";
+                alert.Show();
+                chkWNEnab.Checked = false;           
+        }
+
+        #endregion WaveNode Events
+
+        #endregion WaveNode
     }
 }

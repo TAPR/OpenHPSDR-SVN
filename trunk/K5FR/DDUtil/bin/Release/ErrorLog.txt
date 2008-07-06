@@ -1,0 +1,12 @@
+Source		: System.Windows.Forms
+Method		: MarshaledInvoke
+Date		: 4:04:55 PM
+Time		: 7/6/2008
+Computer	: K5FR-GW32
+Error		: Cannot access a disposed object.
+Object name: 'Setup'.
+Stack Trace	: at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at DataDecoder.Setup.SetDigit(String text) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\Setup.cs:line 785
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\Setup.cs:line 3275
+-------------------------------------------------------------------
