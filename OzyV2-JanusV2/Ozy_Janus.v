@@ -172,6 +172,15 @@
 //				Special test version - force clocks from Mercury - 17 April 2008
 //				Test code removed - now standard version - 19 April 2008
 //				Added check for all 12.288MHz clocks, error LED flash if not present and use IFCLK/4 - 21 April 2008
+//				Remove 48MHz clock from Atlas if Janus not selected - 25 May 2008
+//				Decode ADC settings, PGA, DITHER, RAND from PC - 25 May 2008
+//				Decode Alex attenuator setting from PC - 25 May 2008 
+//				Include above settings in C&C data stream - 25 May 2008
+//				Remove temp SPI interface to Alex via Atlas bus - 25 May 2008 
+//				15 June 2008 - moved to Quartus 8.0
+//							 - Added Alex relay control to C&C data
+//				 1 July 2008 - Added multiple test for C&C data before sending to Atlas bus
+//				 8 July 2008 - Removed above code since not required with slower Alex SPI clock
 //
 //
 ////////////////////////////////////////////////////////////
@@ -301,9 +310,8 @@
 module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
         CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
-		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CLK_MCLK, CC, PCLK_12MHZ, MCLK_12MHZ, MDOUT,
-		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, SPI_data, SPI_clock, Tx_load_strobe,
-		Rx_load_strobe);
+		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CC, PCLK_12MHZ, MCLK_12MHZ, MDOUT,
+		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, CLK_MCLK);
 		
 
 
@@ -342,10 +350,6 @@ reg    DFS1;					// ditto
 output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
 output CC;						// Command and Control data to Atlas bus 
 input  CDOUT_P;					// Mic data from Penelope
-output SPI_data;				// SPI data to Alex
-output SPI_clock;				// SPI clock to Alex
-output Tx_load_strobe;			// SPI Tx data load strobe to Alex
-output Rx_load_strobe;			// SPI Rx data load strobe to Alex
 
 // interface lines for GPIO control 
 input 				FX2_CLK;		// master system clock from FX2 
@@ -404,7 +408,7 @@ reg [15:0] register;            // AK5394A A/D uses this to send its data to Tx 
 reg [15:0] Tx_data;             // Tx mic audio from TLV320
 reg [6:0] loop_counter;         // counts number of times round loop
 reg [11:0] rx_avail;            // how much space is avail in the rx fifo
-reg Tx_fifo_enable;                     // set when we want to send data to the Tx FIFO
+reg Tx_fifo_enable;             // set when we want to send data to the Tx FIFO
 
 
 
@@ -467,6 +471,11 @@ wire CLRCLK;
 
 clocks clocks(CLK_MCLK, clock_out);
 
+wire BCLK_96_48;
+wire BCLK_192;
+wire LRCLK_48;
+wire LRCLK_96;
+wire LRCLK_192;
 assign CBCLK = clock_out[1] ;           // 3.072MHz for TLV320 and PWM 
 assign BCLK_96_48 = clock_out[0]; 		// 6.144MHz for AK5394A at 48/96kHz
 assign BCLK_192   = CLK_MCLK; 			// 12.288MHz for AK5394A at 192kHz
@@ -475,7 +484,9 @@ assign LRCLK_48 = clock_out[7]; 		// for AK5394A at 48kHz
 assign LRCLK_96 = clock_out[6];			// for AK5394A at 96kHz
 assign LRCLK_192 = clock_out[5];		// for AK5394A at 192kHz
 
-assign CLK_48MHZ = IFCLK; 				// 48MHz clock to PWM DAC on Janus
+// **** only send 48MHz clock to Atlas bus if Mercury not fitted to see effect on spurs
+// conf[1] = 1 if Mercury selected for Rx output
+assign CLK_48MHZ = conf[1] ? 1'b0 : IFCLK; 	// 48MHz clock to PWM DAC on Janus only if Mercury not slected
 
 /* 
 		Select AK5394A clocks dependant on speed settings. The pseudo code is as follows:
@@ -541,6 +552,10 @@ end
 	
 */
 
+wire JCLK_OK;
+wire PCLK_OK;
+wire MCLK_OK;
+
 // Check if CLK_12MHz clock from Janus is present, if so set a flag.
 clock_det janus_clock(.clock(CLK_12MHZ),.flag(JCLK_OK));
 
@@ -559,6 +574,7 @@ assign CLK_MCLK = (conf == 0 & JCLK_OK)			 ? CLK_12MHZ  :
 				   conf == 0 					 ? IFCLK_4    :
 				  (clock_s[2] == 1'b0 & PCLK_OK) ? PCLK_12MHZ :
 				  (clock_s[2] == 1'b1 & MCLK_OK) ? MCLK_12MHZ : IFCLK_4;
+
 
 // set clock_error if we have selected IFCLK_4
 
@@ -1085,7 +1101,37 @@ assign have_sync = (got_sync && (Rx_used > 3)) ? 1'b1 : 1'b0;
 	
 	0 = microphone source is Janus
 	1 = microphone source is Penelope
+	
+	Decode Attenuator settings on Alex, when Rx_control_0[7:1] = 0, Rx_control_3[1:0] indicates the following 
+	
+	00 = 0dB
+	01 = 10dB
+	10 = 20dB
+	11 = 30dB
+	
+	Decode ADC settings on Mercury, when Rx_control_0[7:1] = 0, Rx_control_3[4:2] indicates the following
+	
+	000 = Random, Dither, gain off
+	1xx = Random ON
+	x1x = Dither ON
+	xx1 = Gain ON 
+	
+	Decode Rx relay settigs on Alex, when Rx_control_0[7:1] = 0, Rx_control_3[6:5] indicates the following
+	
+	00 = None
+	01 = Rx 1
+	10 = Rx 2
+	11 = Transverter
+	
+	Decode Tx relay settigs on Alex, when Rx_control_0[7:1] = 0, Rx_control_4[1:0] indicates the following
+	
+	00 = Tx 1
+	01 = Tx 2
+	10 = Tx 3
+	
+	Decode Rx_1_out relay settigs on Alex, when Rx_control_0[7:1] = 0, Rx_control_3[7] indicates the following
 
+	1 = Rx_1_out on 
 	
 */
 
@@ -1094,8 +1140,15 @@ wire  PTT_out;
 reg [3:0]clock_s;
 reg mic;
 reg [1:0]conf;
-reg [6:0]OC; // open collectors on Penelope
-reg mode;	 // normal or Class E PA operation 
+reg [6:0]OC; 		// open collectors on Penelope
+reg mode;	 		// normal or Class E PA operation 
+reg RAND;    		// when set randomizer in ADC on Mercury on
+reg DITHER;	 		// when set dither in ADC on Mercury on
+reg PGA; 	 		// when set gain in ADC on Mercury set to 3dB else 0dB
+reg [1:0]ATTEN;	 	// decode attenuator setting on Alex
+reg [1:0]TX_relay;	// Tx relay setting on Alex
+reg Rout;			// Rx1 out on Alex
+reg [1:0]RX_relay;	// Rx relay setting on Alex 
 
 always @ (posedge SLRD)
 begin 
@@ -1107,6 +1160,13 @@ if(state_sync == 4)begin 								// Need to ensure that C&C data is stable
 			mic <= Rx_control_1[7];						// decode microphone source
 			OC <= Rx_control_2[7:1];					// decode open collectors on Penelope
 			mode <= Rx_control_2[0];					// decode mode, normal or Class E PA
+			ATTEN <= Rx_control_3[1:0];					// decode Alex attenuator setting 
+			RAND <= Rx_control_3[4];					// decode randomizer on or off
+			DITHER <= Rx_control_3[3];					// decode dither on or off
+			PGA <= Rx_control_3[2];						// decode ADC gain high or low
+			RX_relay <= Rx_control_3[6:5]; 				// decode Alex Rx relays
+			Rout <= Rx_control_3[7];					// decode Alex Rx_1_out relay
+			TX_relay <= Rx_control_4[1:0];				// decode Alex Tx Relays
 			end
 	if (Rx_control_0[7:1] == 7'b0000_001)				// decode frequency 
 		frequency <= {Rx_control_1, Rx_control_2, Rx_control_3, Rx_control_4};
@@ -1207,16 +1267,18 @@ end
 
 /*
 	The C&C encoder broadcasts data over the Atlas bus C20 for
-	use by other cards e.g. Mercury and Penelope.  The data is in 
+	use by other cards e.g. Mercury and Penelope.  The data is in pseudo
 	I2S format with the clock being CBLCK and the start of each frame
 	being indicated using the negative edge of CLRCLK.
 	
 	The data fomat is as follows:
 	
-	<1 bit PTT><4 bits address><32 bits frequency><4 bits clock_s><7 bits OC><1 bit mode> 
+	<1 bit PTT><4 bits address><32 bits frequency><4 bits clock_s><7 bits OC><1 bit mode>
+	<1 bit PGA><1 bit DITHER><1 bit RAND><2 bits ATTEN><2 bits Tx antenna><1 bit Rx out>
+	<2 bits Rx antenna> 
 	
-	for a total of 49 bits. Frequency format is the DDC data word i.e. FREQ x 2^32/Clock and 
-	OC is the open collector data on Penelope. The clock source decodes as follows:
+	for a total of 59 bits. Frequency is in Hz and 	OC is the open collector data on Penelope.
+	The clock source decodes as follows:
 	
 	0x00  = 10MHz reference from Atlas bus ie Gibraltar
 	0x01  = 10MHz reference from Penelope
@@ -1228,20 +1290,20 @@ end
 	For future expansion the four bit address enables specific C&C data to be send to individual boards.
 	For the present for use with Mercury and Penelope the address is ignored. 
 
-
 */
 
-wire [48:0]CCdata;
-reg [6:0] CCcount;
-reg CC;							// C&C data out to Atlas bus 
-wire [3:0] CC_address;			// C&C address, fixed at 0 for now 
-reg [31:0]frequency;
+wire [58:0]CCdata;				// current C&C data
+reg  [6:0] CCcount;
+reg  CC;						// C&C data out to Atlas bus 
+wire [3:0] CC_address;			// C&C address, fixed for now 
+reg  [31:0]frequency;
+reg  [2:0]same_count;
 
 
 // dummy address data for now 
 assign CC_address = 4'b0110;
 
-assign 	CCdata = {PTT_out, CC_address, frequency, clock_s, OC, mode}; // concatenate data to send 
+assign CCdata = {PTT_out,CC_address,frequency,clock_s,OC,mode,PGA,DITHER,RAND,ATTEN,TX_relay, Rout, RX_relay}; // concatenate data to send 
 
 // send C&C data to Atlas bus in I2S format
 
@@ -1250,14 +1312,12 @@ reg [1:0]CCstate;
 always @ (posedge CBCLK)
 begin	
 case(CCstate)
-0:	begin
-	if (CLRCLK)	 CCstate <= 1;		// loop until CLRCLK is high
+0:  if (CLRCLK)	 CCstate <= 1;		// loop until CLRCLK is high
 	else CCstate <= 0;
-	end
 	
 1:	if (CLRCLK)	CCstate <= 1;		// wait until it goes low - this is first CBCLK after negedge of CLRCLK
 	else begin
-	CCcount <= 48; 					// need to have data available for Rx on next CBCLK
+	CCcount <= 58; 					// need to have data available for Rx on next CBCLK
 	CCstate <= 2;
 	end
 	
@@ -1276,88 +1336,8 @@ end
 // I2S data must be available on the 2nd positive edge of CBCLK after the CLRCLK transition
 always @ (negedge CBCLK)
 begin
-	CC <= CCdata[CCcount];			// shift data out to Altas bus MSB first
+	CC <= CCdata[CCcount];			// shift data out to Atlas bus MSB first
 end
-
-//////////////////////////////////////////////////////////////
-//
-//		Alex Tx Band Decoder & LPF selection
-//
-//////////////////////////////////////////////////////////////
-
-wire [6:0]LPF;
-wire [5:0]select_HPF;
-
-LPF_select Alex_LPF_select(.frequency(frequency), .LPF(LPF));
-HPF_select Alex_HPF_select(.frequency(frequency), .HPF(select_HPF));
-
-//////////////////////////////////////////////////////////////
-//
-//		Alex SPI interface
-//
-//////////////////////////////////////////////////////////////
-
-// Assign dummy Tx data where values not currently set
-
-wire Tx_yellow_led = 1'b1; 	
-wire ANT1 = 1'b1;			// select antenna 1 for now
-wire ANT2 = 1'b0;
-wire ANT3 = 1'b0;
-wire red_led;
-wire TR_relay;
-wire [15:0]Alex_Tx_data;
-wire [15:0]Alex_Rx_data;
-
-// Assign dummy Rx data where values are not currenly set
-
-wire Rx_yellow_led = 1'b1;
-wire _6m_preamp = 1'b1;
-wire _10dB_atten = 1'b0;
-wire _20dB_atten = 1'b0;
-wire Transverter = 1'b0;
-wire Rx_2_in = 1'b0;
-wire Rx_1_in = 1'b0;
-wire Rx_1_out = 1'b0;
-
-
-wire SPI_data;
-wire SPI_clock;
-wire Tx_load_strobe;
-wire Rx_load_strobe;
-
-// define and concatinate the Tx data to send to Alex via SPI
-
-assign Tx_red_led = PTT_out; 	// turn red led on when we Tx
-assign TR_relay = PTT_out;		// turn on TR relay when PTT active
-
-assign Alex_Tx_data = {LPF[6:4],Tx_red_led,TR_relay,ANT3,ANT2,ANT1,LPF[3:0],Tx_yellow_led,3'b000};
-
-// define and concatinate the Rx data to send to Alex via SPI
-
-assign Rx_red_led = PTT_out;	// turn red led on when we Tx
-
-// if 6m preamp selected disconnect all  filters and attenuators
-wire [5:0]HPF;
-
-assign HPF = _6m_preamp ? 6'd0 : select_HPF; 
-assign _10_atten = _6m_preamp ? 1'b0 : _10_atten; // don't select attenuators if 6m preamp on
-assign _20_atten = _6m_preamp ? 1'b0 : _20_atten; 
-
-assign Alex_Rx_data = {Rx_yellow_led,1'b0,Rx_1_out,Rx_1_in,Rx_2_in,Transverter,_20dB_atten,_10dB_atten,
-					   HPF[5:3],_6m_preamp,HPF[2:0],Rx_red_led};
-						
-// concatinate Tx and Rx data and send to SPI interface
-
-wire [31:0]Alex_data;
-
-assign Alex_data[31:0] = {Alex_Tx_data[15:0],Alex_Rx_data[15:0]};
-
-SPI   Alex_SPI_Tx(.Alex_data(Alex_data), .SPI_data(SPI_data),
-				  .SPI_clock(SPI_clock), .Tx_load_strobe(Tx_load_strobe),
-				  .Rx_load_strobe(Rx_load_strobe),.spi_clock(CBCLK));
-
-
-
 
 ///////////////////////////////////////////////////////////////
 //
@@ -1414,12 +1394,13 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
-// DEBUG_LED0 - flashes if Janus clock selected but not present
+// DEBUG_LED0 - flashes if 12.288MHz Atlas clock selected but not present
+
 assign DEBUG_LED1 = ~conf[1];	// test config setting  
-assign DEBUG_LED2 = ~PTT_out; 	// lights with PTT active 
+assign DEBUG_LED2 = ~PTT_out; 	// lights with PTT active
 assign DEBUG_LED3 = ~have_sync; // lights when sync from PowerSDR detected 
-  
- 
+//assign DEBUG_LED1 = (Rx_control_0[7:1] == 0) ?  Rx_control_3[0] : DEBUG_LED1;
+//assign DEBUG_LED2 = (Rx_control_0[7:1] == 0) ?  Rx_control_3[1] : DEBUG_LED2;
 
 endmodule
 
