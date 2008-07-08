@@ -28,12 +28,12 @@ set_global_assignment -name DEVICE EP2C8Q208C8
 set_global_assignment -name TOP_LEVEL_ENTITY Ozy_Janus
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:29:17  JULY 22, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION 6.1
+set_global_assignment -name LAST_QUARTUS_VERSION 8.0
 set_global_assignment -name ADD_DEFAULT_PINS_TO_SIMULATION_OUTPUT_WAVEFORMS OFF
 set_global_assignment -name ENABLE_INIT_DONE_OUTPUT ON
 set_global_assignment -name GENERATE_RBF_FILE ON
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
-set_global_assignment -name STRATIX_DEVICE_IO_STANDARD LVTTL
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
 set_global_assignment -name VECTOR_INPUT_SOURCE "C:\\HPDSDR\\trunk\\VK6APH\\Ozy_Janus\\Ozy_Janus.vwf"
 set_instance_assignment -name CLOCK_SETTINGS "BCLK to AK5394A" -to BCLK
 set_global_assignment -name FMAX_REQUIREMENT "24 MHz" -section_id "FX2 Clock"
@@ -63,7 +63,6 @@ set_location_assignment PIN_203 -to FX2_FD[12]
 set_location_assignment PIN_201 -to FX2_FD[13]
 set_location_assignment PIN_200 -to FX2_FD[14]
 set_location_assignment PIN_199 -to FX2_FD[15]
-set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
 set_location_assignment PIN_24 -to IFCLK
 set_location_assignment PIN_198 -to FLAGA
 set_location_assignment PIN_197 -to FLAGB
@@ -105,7 +104,6 @@ set_global_assignment -name BASED_ON_CLOCK_SETTINGS CLK_12MHZ -section_id "CLRCL
 set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 256 -section_id "CLRCLK to TLV320"
 set_instance_assignment -name CLOCK_SETTINGS "CLRCLK to TLV320" -to CLRCLK
 set_instance_assignment -name CLOCK_SETTINGS CLK_12MHZ -to CLK_12MHZ
-set_location_assignment PIN_175 -to CLK_MCLK
 set_location_assignment PIN_180 -to CC
 set_location_assignment PIN_23 -to FX2_CLK
 set_location_assignment PIN_67 -to GPIO[0]
@@ -153,6 +151,9 @@ set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_location_assignment PIN_185 -to Rx_load_strobe
 set_location_assignment PIN_143 -to MCLK_12MHZ
 set_location_assignment PIN_138 -to MDOUT
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_location_assignment PIN_175 -to CLK_MCLK
 set_global_assignment -name VERILOG_FILE SPI.v
 set_global_assignment -name VERILOG_FILE LPF_select.v
 set_global_assignment -name VERILOG_FILE RegisterX.v
@@ -168,3 +169,5 @@ set_global_assignment -name VERILOG_FILE Rx_fifo.v
 set_global_assignment -name VERILOG_FILE HPF_select.v
 set_global_assignment -name VERILOG_FILE clock_det.v
 set_global_assignment -name VERILOG_FILE flash.v
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
