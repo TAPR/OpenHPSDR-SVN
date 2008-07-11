@@ -171,3 +171,11 @@ set_global_assignment -name VERILOG_FILE clock_det.v
 set_global_assignment -name VERILOG_FILE flash.v
 set_global_assignment -name USE_CONFIGURATION_DEVICE ON
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_location_assignment PIN_35 -to FX2_PE0
+set_location_assignment PIN_37 -to FX2_PE1
+set_location_assignment PIN_39 -to FX2_PE2
+set_location_assignment PIN_40 -to FX2_PE3
+set_location_assignment PIN_106 -to SDOBACK
+set_location_assignment PIN_110 -to TCK
+set_location_assignment PIN_105 -to TDO
+set_location_assignment PIN_112 -to TMS

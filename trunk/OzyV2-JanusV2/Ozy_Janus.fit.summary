@@ -1,15 +1,15 @@
-Fitter Status : Successful - Tue Jul 08 21:07:40 2008
+Fitter Status : Successful - Fri Jul 11 20:24:53 2008
 Quartus II Version : 8.0 Build 215 05/29/2008 SJ Web Edition
 Revision Name : Ozy_Janus
 Top-level Entity Name : Ozy_Janus
 Family : Cyclone II
 Device : EP2C8Q208C8
 Timing Models : Final
-Total logic elements : 1,206 / 8,256 ( 15 % )
-    Total combinational functions : 823 / 8,256 ( 10 % )
-    Dedicated logic registers : 852 / 8,256 ( 10 % )
-Total registers : 852
-Total pins : 80 / 138 ( 58 % )
+Total logic elements : 1,194 / 8,256 ( 14 % )
+    Total combinational functions : 817 / 8,256 ( 10 % )
+    Dedicated logic registers : 830 / 8,256 ( 10 % )
+Total registers : 830
+Total pins : 88 / 138 ( 64 % )
 Total virtual pins : 0
 Total memory bits : 98,304 / 165,888 ( 59 % )
 Embedded Multiplier 9-bit elements : 0 / 36 ( 0 % )
