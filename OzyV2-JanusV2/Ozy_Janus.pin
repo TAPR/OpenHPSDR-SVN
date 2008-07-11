@@ -103,12 +103,12 @@ SLWR                         : 31        : output : 3.3-V LVTTL       :         
 VCCINT                       : 32        : power  :                   : 1.2V    :           :                
 DEBUG_LED1                   : 33        : output : 3.3-V LVTTL       :         : 1         : Y              
 DEBUG_LED2                   : 34        : output : 3.3-V LVTTL       :         : 1         : Y              
-RESERVED_INPUT               : 35        :        :                   :         : 1         :                
+FX2_PE0                      : 35        : input  : 3.3-V LVTTL       :         : 1         : Y              
 GND                          : 36        : gnd    :                   :         :           :                
-RESERVED_INPUT               : 37        :        :                   :         : 1         :                
+FX2_PE1                      : 37        : output : 3.3-V LVTTL       :         : 1         : Y              
 GND                          : 38        : gnd    :                   :         :           :                
-RESERVED_INPUT               : 39        :        :                   :         : 1         :                
-RESERVED_INPUT               : 40        :        :                   :         : 1         :                
+FX2_PE2                      : 39        : input  : 3.3-V LVTTL       :         : 1         : Y              
+FX2_PE3                      : 40        : input  : 3.3-V LVTTL       :         : 1         : Y              
 GPIO_nIOE                    : 41        : output : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 42        : power  :                   : 3.3V    : 1         :                
 RESERVED_INPUT               : 43        :        :                   :         : 1         :                
@@ -173,14 +173,14 @@ RESERVED_INPUT               : 101       :        :                   :         
 RESERVED_INPUT               : 102       :        :                   :         : 4         :                
 RESERVED_INPUT               : 103       :        :                   :         : 4         :                
 RESERVED_INPUT               : 104       :        :                   :         : 4         :                
-RESERVED_INPUT               : 105       :        :                   :         : 3         :                
-RESERVED_INPUT               : 106       :        :                   :         : 3         :                
+TDO                          : 105       : output : 3.3-V LVTTL       :         : 3         : Y              
+SDOBACK                      : 106       : input  : 3.3-V LVTTL       :         : 3         : Y              
 ~LVDS54n/INIT_DONE~ / RESERVED_OUTPUT_OPEN_DRAIN : 107       : output : 3.3-V LVTTL       :         : 3         : N              
 DEBUG_LED3                   : 108       : output : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 109       : power  :                   : 3.3V    : 3         :                
-RESERVED_INPUT               : 110       :        :                   :         : 3         :                
+TCK                          : 110       : output : 3.3-V LVTTL       :         : 3         : Y              
 GND                          : 111       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 112       :        :                   :         : 3         :                
+TMS                          : 112       : output : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 113       :        :                   :         : 3         :                
 RESERVED_INPUT               : 114       :        :                   :         : 3         :                
 RESERVED_INPUT               : 115       :        :                   :         : 3         :                

@@ -1,4 +1,4 @@
-// V1.8 21 April  2008 
+// V1.9 11 July  2008 
 //
 // Copyright 2006,2007, 2008 Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -181,6 +181,7 @@
 //							 - Added Alex relay control to C&C data
 //				 1 July 2008 - Added multiple test for C&C data before sending to Atlas bus
 //				 8 July 2008 - Removed above code since not required with slower Alex SPI clock
+//				11 July 2008 - Added JTAG programming support 
 //
 //
 ////////////////////////////////////////////////////////////
@@ -198,6 +199,8 @@
 	- Analysis and Synthesis Settings\Power Up Dont Care [not checked]
 	- Analysis and Synthesis Settings\Restructure Multiplexers  [OFF]
 	- Fitter Settings\Optimise fast-corner timing [ON]
+	
+	Same setting for Quartus V8.0
 	
 */
 
@@ -311,7 +314,8 @@ module Ozy_Janus(
         IFCLK, CLK_12MHZ, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, BCLK, DOUT, LRCLK,
         CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
 		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CC, PCLK_12MHZ, MCLK_12MHZ, MDOUT,
-		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, CLK_MCLK);
+		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, CLK_MCLK,
+		FX2_PE0, FX2_PE1, FX2_PE2, FX2_PE3, TDO, SDOBACK, TCK, TMS);
 		
 
 
@@ -367,6 +371,22 @@ assign dot = GPIO[22];   			// alias dot and dash to appropriate GPIO lines
 assign dash = GPIO[21]; 
 
 assign GPIO_nIOE = 0; 
+
+// interface pins for JTAG programming via Atlas bus
+input  FX2_PE0;		// Port E on FX2
+output FX2_PE1;
+input  FX2_PE2;
+input  FX2_PE3;
+output TDO;			// A27 on Atlas 
+input  SDOBACK;		// A25 on Atlas
+output TCK;			// A24 on Atlas
+output TMS;			// A23 on Atlas
+
+// link JTAG pins through
+assign TMS = FX2_PE3;
+assign TCK = FX2_PE2;
+assign TDO = FX2_PE0;  // TDO on our slot ties to TDI on next slot  
+assign FX2_PE1 = SDOBACK;
 
 // instantiate gpio control block 
 gpio_control gpio_controlSDR(.FX2_CLK(FX2_CLK), 
