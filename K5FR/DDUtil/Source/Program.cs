@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace DataDecoder
@@ -12,6 +13,7 @@ namespace DataDecoder
         [STAThread]
         static void Main()
         {
+//            Debug.Assert(false);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Setup());

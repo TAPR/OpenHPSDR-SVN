@@ -13,7 +13,7 @@
     <ManifestCertificateThumbprint>13D0FC2AEBC7F55AF0728AA6593BBD8B314D910E</ManifestCertificateThumbprint>
     <ManifestKeyFile>DataDecoder_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>http://www.k5fr.com/AppDeploy/</PublishUrl>
     <Install>true</Install>
@@ -25,18 +25,21 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationVersion>1.5.2.%2a</ApplicationVersion>
+    <ApplicationVersion>1.6.0.%2a</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SignAssembly>false</SignAssembly>
+    <StartupObject>DataDecoder.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>..\bin\debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -69,6 +72,12 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="ErrorLog.cs" />
+    <Compile Include="Mini.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mini.Designer.cs">
+      <DependentUpon>Mini.cs</DependentUpon>
+    </Compile>
     <Compile Include="Notification.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +94,10 @@
     <EmbeddedResource Include="AboutBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mini.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Mini.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Notification.resx">
       <DependentUpon>Notification.cs</DependentUpon>

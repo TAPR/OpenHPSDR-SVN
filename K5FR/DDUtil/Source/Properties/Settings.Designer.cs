@@ -25,42 +25,6 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AccPort {
-            get {
-                return ((string)(this["AccPort"]));
-            }
-            set {
-                this["AccPort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string RadioPort {
-            get {
-                return ((string)(this["RadioPort"]));
-            }
-            set {
-                this["RadioPort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("LPT1")]
-        public string lptPort {
-            get {
-                return ((string)(this["lptPort"]));
-            }
-            set {
-                this["lptPort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("500")]
         public string portInv {
             get {
@@ -133,18 +97,6 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LogPort {
-            get {
-                return ((string)(this["LogPort"]));
-            }
-            set {
-                this["LogPort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool DevEnab {
             get {
@@ -164,18 +116,6 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["Dev0Enab"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public string lptNum {
-            get {
-                return ((string)(this["lptNum"]));
-            }
-            set {
-                this["lptNum"] = value;
             }
         }
         
@@ -229,18 +169,6 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LPportNum {
-            get {
-                return ((string)(this["LPportNum"]));
-            }
-            set {
-                this["LPportNum"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("200")]
         public string LPint {
             get {
@@ -277,42 +205,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string cboRCP2 {
-            get {
-                return ((string)(this["cboRCP2"]));
-            }
-            set {
-                this["cboRCP2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string cboRCP3 {
-            get {
-                return ((string)(this["cboRCP3"]));
-            }
-            set {
-                this["cboRCP3"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string cboRCP4 {
-            get {
-                return ((string)(this["cboRCP4"]));
-            }
-            set {
-                this["cboRCP4"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool chkRCP2 {
             get {
                 return ((bool)(this["chkRCP2"]));
@@ -324,6 +217,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool chkRCP3 {
             get {
                 return ((bool)(this["chkRCP3"]));
@@ -335,6 +229,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool chkRCP4 {
             get {
                 return ((bool)(this["chkRCP4"]));
@@ -346,24 +241,13 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool chkPW1 {
             get {
                 return ((bool)(this["chkPW1"]));
             }
             set {
                 this["chkPW1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string cboPW1 {
-            get {
-                return ((string)(this["cboPW1"]));
-            }
-            set {
-                this["cboPW1"] = value;
             }
         }
         
@@ -393,6 +277,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool chkPW1db {
             get {
                 return ((bool)(this["chkPW1db"]));
@@ -543,18 +428,6 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["RCPtext"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string StepPortNum {
-            get {
-                return ((string)(this["StepPortNum"]));
-            }
-            set {
-                this["StepPortNum"] = value;
             }
         }
         
@@ -879,6 +752,426 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["s4Type"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string miniGeo {
+            get {
+                return ((string)(this["miniGeo"]));
+            }
+            set {
+                this["miniGeo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int AccPort {
+            get {
+                return ((int)(this["AccPort"]));
+            }
+            set {
+                this["AccPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RadioPort {
+            get {
+                return ((int)(this["RadioPort"]));
+            }
+            set {
+                this["RadioPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LogPort {
+            get {
+                return ((int)(this["LogPort"]));
+            }
+            set {
+                this["LogPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string lptNum {
+            get {
+                return ((string)(this["lptNum"]));
+            }
+            set {
+                this["lptNum"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LPportNum {
+            get {
+                return ((int)(this["LPportNum"]));
+            }
+            set {
+                this["LPportNum"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cboRCP2 {
+            get {
+                return ((int)(this["cboRCP2"]));
+            }
+            set {
+                this["cboRCP2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cboRCP3 {
+            get {
+                return ((int)(this["cboRCP3"]));
+            }
+            set {
+                this["cboRCP3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cboRCP4 {
+            get {
+                return ((int)(this["cboRCP4"]));
+            }
+            set {
+                this["cboRCP4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int StepPortNum {
+            get {
+                return ((int)(this["StepPortNum"]));
+            }
+            set {
+                this["StepPortNum"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string lptPort {
+            get {
+                return ((string)(this["lptPort"]));
+            }
+            set {
+                this["lptPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cboPW1 {
+            get {
+                return ((int)(this["cboPW1"]));
+            }
+            set {
+                this["cboPW1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DogEnab {
+            get {
+                return ((bool)(this["DogEnab"]));
+            }
+            set {
+                this["DogEnab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string DogTime {
+            get {
+                return ((string)(this["DogTime"]));
+            }
+            set {
+                this["DogTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Drive160 {
+            get {
+                return ((string)(this["Drive160"]));
+            }
+            set {
+                this["Drive160"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Alc160 {
+            get {
+                return ((string)(this["Alc160"]));
+            }
+            set {
+                this["Alc160"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AlcEnab {
+            get {
+                return ((bool)(this["AlcEnab"]));
+            }
+            set {
+                this["AlcEnab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Alc80 {
+            get {
+                return ((string)(this["Alc80"]));
+            }
+            set {
+                this["Alc80"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Alc40 {
+            get {
+                return ((string)(this["Alc40"]));
+            }
+            set {
+                this["Alc40"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Alc30 {
+            get {
+                return ((string)(this["Alc30"]));
+            }
+            set {
+                this["Alc30"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Alc20 {
+            get {
+                return ((string)(this["Alc20"]));
+            }
+            set {
+                this["Alc20"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Alc17 {
+            get {
+                return ((string)(this["Alc17"]));
+            }
+            set {
+                this["Alc17"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Alc15 {
+            get {
+                return ((string)(this["Alc15"]));
+            }
+            set {
+                this["Alc15"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Alc12 {
+            get {
+                return ((string)(this["Alc12"]));
+            }
+            set {
+                this["Alc12"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Alc10 {
+            get {
+                return ((string)(this["Alc10"]));
+            }
+            set {
+                this["Alc10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Alc6 {
+            get {
+                return ((string)(this["Alc6"]));
+            }
+            set {
+                this["Alc6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Drive80 {
+            get {
+                return ((string)(this["Drive80"]));
+            }
+            set {
+                this["Drive80"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Drive40 {
+            get {
+                return ((string)(this["Drive40"]));
+            }
+            set {
+                this["Drive40"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Drive30 {
+            get {
+                return ((string)(this["Drive30"]));
+            }
+            set {
+                this["Drive30"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Drive20 {
+            get {
+                return ((string)(this["Drive20"]));
+            }
+            set {
+                this["Drive20"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Drive17 {
+            get {
+                return ((string)(this["Drive17"]));
+            }
+            set {
+                this["Drive17"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Drive15 {
+            get {
+                return ((string)(this["Drive15"]));
+            }
+            set {
+                this["Drive15"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Drive12 {
+            get {
+                return ((string)(this["Drive12"]));
+            }
+            set {
+                this["Drive12"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Drive10 {
+            get {
+                return ((string)(this["Drive10"]));
+            }
+            set {
+                this["Drive10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Drive6 {
+            get {
+                return ((string)(this["Drive6"]));
+            }
+            set {
+                this["Drive6"] = value;
             }
         }
     }

@@ -189,6 +189,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E43C872F6B814C54B2AFCD63C78BC8C1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F13010645F694075B3C2DB6D4985520A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -903,6 +909,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E43C872F6B814C54B2AFCD63C78BC8C1"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\ftd2xx.dll"
+            "TargetName" = "8:ftd2xx.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F13010645F694075B3C2DB6D4985520A"
             {
             "SourcePath" = "8:..\\bin\\Release\\DDUtilFlow.pdf"
@@ -1010,14 +1036,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{559A5A1A-F0BD-4268-A569-8531424B939D}"
-        "PackageCode" = "8:{EB2F4CFF-7BAA-4066-893A-7B835AE77890}"
+        "ProductCode" = "8:{614B2397-AD70-440F-8EDF-5C6A7BFAF4FD}"
+        "PackageCode" = "8:{56280409-4C37-462D-B11B-FF3AC811F085}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.5.915"
+        "ProductVersion" = "8:1.6.202"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1160,7 +1186,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B579029AB1364468967207E95A0C4906"
             {
-            "Name" = "8:DDUtil v 1.5.9"
+            "Name" = "8:DDUtil v 1.6.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
