@@ -50,3 +50,5 @@ C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Debug\DataDecode
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Debug\DataDecoder.application
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Debug\DataDecoder.exe
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Debug\DataDecoder.pdb
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.Mini.resources
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Debug\DataDecoder.Mini.resources

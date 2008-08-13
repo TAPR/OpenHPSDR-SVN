@@ -75,13 +75,14 @@ namespace DataDecoder
         #region Variables
 
         ASCIIEncoding AE = new ASCIIEncoding();
-        CATSerialPorts.CATSerialPort sp;
-        DataSet ds = new DataSet();
-        DataSet dsm = new DataSet();
+        public CATSerialPorts.CATSerialPort sp;
+        DataSet ds;//dsm = new DataSet();
+        DataSet dsm;// = new DataSet();
+        Mini mini;// = new Mini();
         Hashtable flist = new Hashtable();
         Settings set = Settings.Default;
         PortMode portmode;
-        RotorMod rotormod;
+        RotorMod rotormod;// = new RotorMod();
         Process process;
         private TempFormat temp_format = TempFormat.Celsius;
         private bool closing = false;
@@ -100,20 +101,29 @@ namespace DataDecoder
         string LastFreq = "";
         string LastMode = "";
         string OutBuffer = "";
-        public static string ver = "1.5.9";
-        public static int errCtr = 0;
-        public static int x;    // screen pos left
-        public static int y;    // screen pos right
+        string str = "";
         string vfo = "";
-        System.Timers.Timer pollTimer;
+        string band = "";
+        public static string ver = "1.6.2";
+        public static int errCtr = 0;
+        //public static int x;    // screen pos left
+        //public static int y;    // screen pos right
+        System.Timers.Timer alcTimer;
         System.Timers.Timer logTimer;
         System.Timers.Timer lpTimer;
-        System.Timers.Timer tempTimer;
+        System.Timers.Timer pollTimer;
         System.Timers.Timer StepTimer;
+        System.Timers.Timer tempTimer;
+        System.Timers.Timer WatchDog;
         #endregion Variables
 
         #region Properties
 
+        //public static string GoRotor
+        //{
+        //    set { RotorPort.Write(value); }
+        //}
+        
         public bool AudioOn
         {
             get { return chkAudio.Checked; }
@@ -251,6 +261,7 @@ namespace DataDecoder
         {   // if the app is already running don't start another one.
             if (IsAppAlreadyRunning()) Environment.Exit(0);
             InitializeComponent();
+            mini = new Mini();
             GeometryFromString(set.WindowGeometry, this);
             chkDevice.Checked = set.DevEnab;
             chkDev0.Checked = set.Dev0Enab;
@@ -264,13 +275,21 @@ namespace DataDecoder
             txtSleep.Text = set.Sleep;
             iSleep = Convert.ToInt32(set.Sleep);
             rbFwd.Checked = true;
+            mini.rbFwd.Checked = true;
             chkTips.Checked = set.ToolTips;
             chkMode.Checked = set.slaveMode;
+            
+            chkDog.Checked = set.DogEnab;
+            chkDog_CheckedChanged(null, null);
+
+            txtTimer.Text = set.DogTime;
             txtCall.Text = set.Call;
+            PortAccess.Output(LPTnum, 0);
+
             chkAudio.Checked = set.AudioOn;
             if (chkAudio.Checked) { Notification.useAudio = true; }
             else { Notification.useAudio = false; }
-            PortAccess.Output(LPTnum, 0);
+            
             // setup error log parameters
             ErrorLog.LogFilePath = "ErrorLog.txt";
             enableErrorLog = set.ErrorLog;
@@ -279,12 +298,9 @@ namespace DataDecoder
             else
                 enableErrorLoggingToolStripMenuItem.Checked = false;
 
-            //setup radio port timer for a 1 second interrupt
+            //setup radio port timer
             pollTimer = new System.Timers.Timer();
             pollTimer.Elapsed += new System.Timers.ElapsedEventHandler(pollTimer_Elapsed);
-
-            // set port interval timer to saved value, if 0 default to 1000
-            string str = "";
             str = set.portInv;
             txtInv.Text = str;
             pollInt = Convert.ToDouble(set.portInv);
@@ -298,10 +314,10 @@ namespace DataDecoder
             logTimer.Interval = 5000;      // 1000 = 1 seconds
             logTimer.Enabled = false;
 
-            // setup LP100 Port Timer for a 200 ms interrupt
+            // setup LP100 Port Timer
             lpTimer = new System.Timers.Timer();
             lpTimer.Elapsed += new System.Timers.ElapsedEventHandler(lpTimer_Elapsed);
-            lpTimer.Interval = 200;
+            lpTimer.Interval = Convert.ToDouble(set.LPint);
             lpTimer.Enabled = false;
 
             // setup PA Temp Timer for a 1000 ms interrupt
@@ -325,21 +341,32 @@ namespace DataDecoder
             StepTimer.Interval = Convert.ToDouble(set.StepInv);
             StepTimer.Enabled = false;
 
+            // setup SteppIR Data Timer
+            WatchDog = new System.Timers.Timer();
+            WatchDog.Elapsed += new System.Timers.ElapsedEventHandler(WatchDog_Elapsed);
+            WatchDog.Interval = Convert.ToDouble(set.DogTime)*60000;
+            WatchDog.Enabled = false;
+
             CreateSerialPort();
-            GetPortNames(); // enumerate serial ports and load combo boxes
+            GetPortNames();
+//            GetAvailCOMPorts();
+            
             InitRotor();
-            str = set.CIVaddr;
-            txtRadNum.Text = str;
+
+            txtRadNum.Text = set.CIVaddr;
             cboRadData.SelectedIndex = set.RadData;
+
             // set Radio Serial port to the last port used
-            str = set.RadioPort;
-            cboCAT.Text = str;
-            DefaultComRadio = str;
-            SetDefaultComRadio();
+            cboCAT.SelectedIndex = set.RadioPort;
+
             txtInv.Text = Convert.ToString(pollInt);
             txtLPint.Text = Convert.ToString(set.LPint);
             txtProfLoc.Text = set.ProfLoc;
+            mini.PFfile = set.ProfLoc;
 
+            // set Acc Serial (passive listener) port to the last port used
+            cboSerAcc.SelectedIndex = set.AccPort;
+            // set Follow Radio port
             cboRadio.SelectedIndex = set.followRadio;
             chkFollow.Checked = set.followChk;
             if (chkFollow.Checked == false)
@@ -347,175 +374,31 @@ namespace DataDecoder
             else
             { cboRadio.Enabled = true; chkMode.Enabled = true; }
 
-            // set Acc Serial (passive listener) port to the last port used
-            str = set.AccPort;
-            if (str != "")
-            {
-               cboSerAcc.Text = str;
-               if (AccPort.IsOpen) AccPort.Close();
-                try
-                {   // try to open the selected AccPort:
-                    AccPort.PortName = str;
-                    DefaultComAcc = str;
-                    SetDefaultComAcc();
-                }
-                catch
-                {
-                    // give a message, if the port is not available:
-                    MessageBox.Show("The Passive Listener serial port " + AccPort.PortName +
-                       " cannot be opened!", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboSerAcc.SelectedText = "";
-                }
-            }
             // set Logger Serial (radio control) port to the last port used
-            str = set.LogPort;
-            if (str != "")
-            {
-                cboLogPort.Text = str;
-                if (LogPort.IsOpen) LogPort.Close();
-                try
-                {   // try to open the selected LogPort:
-                    LogPort.PortName = str;
-                    DefaultLogPort = str;
-                    SetDefaultLogPort();
-                }
-                catch
-                {
-                    MessageBox.Show("The RCP1 serial port " + LogPort.PortName +
-                       " cannot be opened!", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboLogPort.SelectedText = "";
-                }
-            }
+            cboLogPort.SelectedIndex = set.LogPort;
             // set LP100 Serial port to the last port used
-            if (set.LPportNum != "")
-            {
-                cboLPport.Text = set.LPportNum;
-                if (LPport.IsOpen) LPport.Close();
-                try
-                {   // try to open the selected LPport:
-                    LPport.PortName = set.LPportNum;
-                    DefaultLPport = set.LPportNum;
-                    SetDefaultLPport();
-                    chkLPenab.Checked = set.LPenab;
-                }
-                catch
-                {
-                    MessageBox.Show("The LP-100 serial port " + LPport.PortName +
-                       " cannot be opened!", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboLPport.SelectedText = "";
-                }
-            }
+            cboLPport.SelectedIndex = set.LPportNum;
+            chkLPenab.Checked = set.LPenab;
             // set StepData Serial port to the last port used
-            if (set.StepPortNum != "")
-            {
-                cboStep.Text = set.StepPortNum;
-                if (StepData.IsOpen) StepData.Close();
-                try
-                {   // try to open the selected StepPort:
-                    StepData.PortName = set.StepPortNum;
-                    DefaultStepPort = set.StepPortNum;
-                    SetDefaultStepPort();
-                    chkStep.Checked = set.StepEnab;
-                    txtStepInv.Text = set.StepInv;
-                    cboStepCom.SelectedIndex = set.StepCom;
-                }
-                catch
-                {
-                    MessageBox.Show("The SteppIR serial port " + StepData.PortName +
-                       " cannot be opened!", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboStep.SelectedText = "";
-                }
-            }
+            cboStep.SelectedIndex = set.StepPortNum;
+            chkStep.Checked = set.StepEnab;
+            txtStepInv.Text = set.StepInv;
+            cboStepCom.SelectedIndex = set.StepCom;
             // Set RCP2 serial port to last port used
-            if (set.cboRCP2 != "")
-            {
-                cboRCP2.Text = set.cboRCP2;
-                if (RCP2port.IsOpen) RCP2port.Close();
-                try
-                {
-                    // try to open the selected port:
-                    RCP2port.PortName = set.cboRCP2;
-                    DefaultRCP2port = set.cboRCP2;
-                    SetDefaultRCP2port();
-                    chkRCP2.Checked = set.chkRCP2;
-                }
-                catch
-                {
-                    MessageBox.Show("The RCP2 serial port " + RCP2port.PortName +
-                       " cannot be opened!", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboRCP2.SelectedText = "";
-                }
-            }
+            cboRCP2.SelectedIndex = set.cboRCP2;
+            chkRCP2.Checked = set.chkRCP2;
             // Set RCP3 serial port to last port used
-            if (set.cboRCP3 != "")
-            {
-                cboRCP3.Text = set.cboRCP3;
-                if (RCP3port.IsOpen) RCP3port.Close();
-                try
-                {
-                    // try to open the selected port:
-                    RCP3port.PortName = set.cboRCP3;
-                    DefaultRCP3port = set.cboRCP3;
-                    SetDefaultRCP3port();
-                    chkRCP3.Checked = set.chkRCP3;
-                }
-                catch
-                {
-                    MessageBox.Show("The RCP3 serial port " + RCP3port.PortName +
-                       " cannot be opened!", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboRCP3.SelectedText = "";
-                }
-            }
+            cboRCP3.SelectedIndex = set.cboRCP3;
+            chkRCP3.Checked = set.chkRCP3;
             // Set RCP4 serial port to last port used
-            if (set.cboRCP4 != "")
-            {
-                cboRCP4.Text = set.cboRCP4;
-                if (RCP4port.IsOpen) RCP4port.Close();
-                try
-                {
-                    // try to open the selected port:
-                    RCP4port.PortName = set.cboRCP4;
-                    DefaultRCP4port = set.cboRCP4;
-                    SetDefaultRCP4port();
-                    chkRCP4.Checked = set.chkRCP4;
-                }
-                catch
-                {
-                    MessageBox.Show("The RCP4 serial port " + RCP4port.PortName +
-                       " cannot be opened!", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboRCP4.SelectedText = "";
-                }
-            }
+            cboRCP4.SelectedIndex = set.cboRCP4; 
+            chkRCP4.Checked = set.chkRCP4;
             // Set PW1 serial port to last port used
-            if (set.cboPW1 != "")
-            {
-                cboPW1.Text = set.cboPW1;
-                if (PW1port.IsOpen) PW1port.Close();
-                try
-                {
-                    // try to open the selected port:
-                    PW1port.PortName = set.cboPW1;
-                    DefaultPW1port = set.cboPW1;
-                    SetDefaultPW1port();
-                    chkPW1.Checked = set.chkPW1;
-                    chkDisBcast.Checked = set.chkPW1db;
-                    txtPW1ta.Text = set.txtPW1ta;
-                }
-                catch
-                {
-                    MessageBox.Show("The IC-PW1 serial port " + PW1port.PortName +
-                                    " cannot be opened!", "Port Error",
-                           MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboPW1.SelectedText = "";
-                }
-            }
+            cboPW1.SelectedIndex = set.cboPW1; 
+            chkPW1.Checked = set.chkPW1;
+            chkDisBcast.Checked = set.chkPW1db;
+            txtPW1ta.Text = set.txtPW1ta;
+
             // set LPT port to last one used
             str = set.lptPort;
             try
@@ -565,47 +448,8 @@ namespace DataDecoder
             cboDevice.Items.Add(set.Device0);
             cboDevice.Text = set.Device;
 
-            // Setup the WN2 controls
-            chkWNEnab.Checked = set.WnEnab;
-            if (!chkWNEnab.Checked && !chkLPenab.Checked)
-                chkWNEnab_CheckedChanged(null, null);
-            sensor = set.WnCoupler;
-            s1Type = set.s1Type; s2Type = set.s2Type;
-            s3Type = set.s3Type; s4Type = set.s4Type;
-            // Restore the current sensor being used
-            switch (sensor)
-            {
-                case 1: rbWN1.Checked = true; sType = s1Type; break;
-                case 2: rbWN2.Checked = true; sType = s2Type; break;
-                case 3: rbWN3.Checked = true; sType = s3Type; break;
-                case 4: rbWN4.Checked = true; sType = s4Type; break;
-            }
-            // Restore the sensor type radio buttons
-            switch (s1Type)
-            {
-                case 1: rbC1Q.Checked = true; break;
-                case 2: rbC1H.Checked = true; break;
-                case 3: rbC1K.Checked = true; break;
-            }
-            switch (s2Type)
-            {
-                case 1: rbC2Q.Checked = true; break;
-                case 2: rbC2H.Checked = true; break;
-                case 3: rbC2K.Checked = true; break;
-            }
-            switch (s3Type)
-            {
-                case 1: rbC3Q.Checked = true; break;
-                case 2: rbC3H.Checked = true; break;
-                case 3: rbC3K.Checked = true; break;
-            }
-            switch (s4Type)
-            {
-                case 1: rbC4Q.Checked = true; break;
-                case 2: rbC4H.Checked = true; break;
-                case 3: rbC4K.Checked = true; break;
-            }
-            // WN Setup done
+            WN2SetUp(); // setup the WN2
+            AlcSetUp(); // setup the ALC
 
             if (chkLPenab.Checked) lpTimer.Enabled = true;
             else lpTimer.Enabled = false;
@@ -664,6 +508,7 @@ namespace DataDecoder
                 else
                 {
                     this.Text = text;
+                    mini.Text = text;
                     this.StatusBar.Text = text;
                 }
             }
@@ -695,7 +540,7 @@ namespace DataDecoder
                     this.Invoke(d, new object[] { text });
                 }
                 else
-                    txtTemp.Text = text;
+                { txtTemp.Text = text; mini.txtTemp.Text = text; }
             }
         }
         // Write LP-100 fwd Power reading to txt box
@@ -874,6 +719,7 @@ namespace DataDecoder
             try
             {
                 // Write out the Band Data from the grid to the XML file
+                ds = new DataSet();
                 dg1.DataSource = ds;
                 dg1.DataMember = ("band");
                 if (txtFile0.Text == null || txtFile0.Text == "")
@@ -910,12 +756,18 @@ namespace DataDecoder
                 if (false == bReturnLog) MessageBox.Show("Unable to write to log");
             }
         }
+        // Create a random nnumber between min and max
+        public int RandomNumber(int min, int max)
+        {
+            Random random = new Random();
+            return random.Next(min, max);
+        }
         // Form Load
         private void Setup_Load(object sender, EventArgs e)
         {
             try
             {
-
+                mini = new Mini();
                 closing = false;
                 tabControl.SelectedIndex = set.TabOpen;
                 cboPrefix.SelectedIndex = RandomNumber(0, 300);
@@ -923,6 +775,7 @@ namespace DataDecoder
                 cboRCP2Rotor.SelectedIndex = set.RCP2RotorPort;
                 cboRCP3Rotor.SelectedIndex = set.RCP3RotorPort;
                 cboRCP4Rotor.SelectedIndex = set.RCP4RotorPort;
+
             }
             catch (Exception ex)
             {
@@ -931,16 +784,9 @@ namespace DataDecoder
                 if (false == bReturnLog) MessageBox.Show("Unable to write to log");
             }
         }
-        // Create a random nnumber between min and max
-        private int RandomNumber(int min, int max)
-        {
-            Random random = new Random();
-            return random.Next(min, max);
-        }
         // program is about to close
         private void Setup_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            closing = true;
             if (bMacChg)
             {
                 DialogResult result;
@@ -954,18 +800,24 @@ namespace DataDecoder
                     MessageBoxDefaultButton.Button2);
                 if (result == DialogResult.No) e.Cancel = true;
             }
+            closing = true;
+            pollTimer.Enabled = false;
+            logTimer.Enabled = false;
+            lpTimer.Enabled = false;
+            StepTimer.Enabled = false;
+            tempTimer.Enabled = false;
+            alcTimer.Enabled = false;
+            WatchDog.Enabled = false;
+            mini.Close();
         }
         // program is closed, lets cleanup
         private void Setup_FormClosing(object sender, FormClosedEventArgs e)
         {
             try
             {
-                closing = true;
                 set.WindowGeometry = GeometryToString(this);
                 set.TabOpen = tabControl.SelectedIndex;
                 set.Save();
-                pollTimer.Enabled = false;
-                logTimer.Enabled = false;
                 PortAccess.Output(LPTnum, 0);
             }
             catch (Exception ex)
@@ -1075,7 +927,7 @@ namespace DataDecoder
         private void cboLogPort_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (LogPort.IsOpen) LogPort.Close();
-            if (cboLogPort.SelectedItem.ToString() != "")
+            if (cboLogPort.SelectedIndex > 0)
             {
                 LogPort.PortName = cboLogPort.SelectedItem.ToString();
                 try
@@ -1092,15 +944,14 @@ namespace DataDecoder
                 }
             }
             // save new port setting
-            string str = set.LogPort;
-            set.LogPort = cboLogPort.SelectedItem.ToString();
+            set.LogPort = cboLogPort.SelectedIndex;
             set.Save();
         }
         // RCP1 Rotor Port has changed
         private void cboRCP1Rotor_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RCP1Rotor.IsOpen) RCP1Rotor.Close();
-            if (cboRCP1Rotor.SelectedItem.ToString() != "")
+            if (cboRCP1Rotor.SelectedIndex > 0)
             {
                 RCP1Rotor.PortName = cboRCP1Rotor.SelectedItem.ToString();
                 try
@@ -1124,7 +975,7 @@ namespace DataDecoder
         private void cboRCP2Rotor_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RCP2Rotor.IsOpen) RCP2Rotor.Close();
-            if (cboRCP2Rotor.SelectedItem.ToString() != "")
+            if (cboRCP2Rotor.SelectedIndex > 0)
             {
                 RCP2Rotor.PortName = cboRCP2Rotor.SelectedItem.ToString();
                 try
@@ -1148,7 +999,7 @@ namespace DataDecoder
         private void cboRCP3Rotor_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RCP3Rotor.IsOpen) RCP3Rotor.Close();
-            if (cboRCP3Rotor.SelectedItem.ToString() != "")
+            if (cboRCP3Rotor.SelectedIndex > 0)
             {
                 RCP3Rotor.PortName = cboRCP3Rotor.SelectedItem.ToString();
                 try
@@ -1172,7 +1023,7 @@ namespace DataDecoder
         private void cboRCP4Rotor_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RCP4Rotor.IsOpen) RCP4Rotor.Close();
-            if (cboRCP4Rotor.SelectedItem.ToString() != "")
+            if (cboRCP4Rotor.SelectedIndex > 0)
             {
                 RCP4Rotor.PortName = cboRCP4Rotor.SelectedItem.ToString();
                 try
@@ -1197,7 +1048,7 @@ namespace DataDecoder
         private void cboSerAcc_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AccPort.IsOpen) AccPort.Close();
-            if (cboSerAcc.SelectedItem.ToString() != "")
+            if (cboSerAcc.SelectedIndex >0)
             {
                 AccPort.PortName = cboSerAcc.SelectedItem.ToString();
                 try
@@ -1221,8 +1072,8 @@ namespace DataDecoder
             }
 
             // save new port setting
-            string str = set.AccPort;
-            set.AccPort = cboSerAcc.SelectedItem.ToString();
+//            string str = set.AccPort;
+            set.AccPort = cboSerAcc.SelectedIndex;
             set.Save();
         }
         // new radio port was selected
@@ -1243,14 +1094,14 @@ namespace DataDecoder
                 return;
             }
             // save new port setting
-            string str = set.RadioPort;
-            set.RadioPort = cboCAT.SelectedItem.ToString();
+//            string str = set.RadioPort;
+            set.RadioPort = cboCAT.SelectedIndex;
             set.Save();
         }
         // Follow radio check box has changed
         private void chkFollow_CheckedChanged(object sender, EventArgs e)
         {
-            if (cboSerAcc.Text != "")
+            if (cboSerAcc.SelectedIndex >0)
             {
                 if (chkFollow.Checked == true)
                 {
@@ -1381,6 +1232,7 @@ namespace DataDecoder
                     sp.Close();
                     process = Process.Start(txtProfLoc.Text);
                     this.Text = "Starting Profiler";
+                    mini.Text = "Starting Profiler";
                 }
                 catch (Exception ex)
                 {
@@ -1407,7 +1259,8 @@ namespace DataDecoder
                 if (!sp.isOpen)
                 {
                     sp.Open();
-                    this.Text = "DDUtil Re-Started";
+                    this.Text = "DDUtil Re-Starting";
+                    mini.Text = "DDUtil Re-Starting";
                 }
             }
             catch (Exception ex)
@@ -1425,6 +1278,7 @@ namespace DataDecoder
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 txtProfLoc.Text = openFileDialog1.FileName;
+                mini.PFfile = txtProfLoc.Text;
                 set.ProfLoc = txtProfLoc.Text;
                 set.Save();
             }
@@ -1511,7 +1365,7 @@ namespace DataDecoder
         private void cboRCP2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RCP2port.IsOpen) RCP2port.Close();
-            if (cboRCP2.SelectedItem.ToString() != "")
+            if (cboRCP2.SelectedIndex > 0)
             {
                 RCP2port.PortName = cboRCP2.SelectedItem.ToString();
                 try
@@ -1532,14 +1386,14 @@ namespace DataDecoder
                 chkRCP2.Checked = false;
             }
             // save new port setting
-            set.cboRCP2 = cboRCP2.SelectedItem.ToString();
+            set.cboRCP2 = cboRCP2.SelectedIndex;
             set.Save();
         }
         // RCP3 port number changed
         private void cboRCP3_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RCP3port.IsOpen) RCP3port.Close();
-            if (cboRCP3.SelectedItem.ToString() != "")
+            if (cboRCP3.SelectedIndex > 0)
             {
                 RCP3port.PortName = cboRCP3.SelectedItem.ToString();
                 try
@@ -1560,14 +1414,14 @@ namespace DataDecoder
                 chkRCP3.Checked = false;
             }
             // save new port setting
-            set.cboRCP3 = cboRCP3.SelectedItem.ToString();
+            set.cboRCP3 = cboRCP3.SelectedIndex;
             set.Save();
         }
         // RCP4 port number changed
         private void cboRCP4_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RCP4port.IsOpen) RCP4port.Close();
-            if (cboRCP4.SelectedItem.ToString() != "")
+            if (cboRCP4.SelectedIndex > 0)
             {
                 RCP4port.PortName = cboRCP4.SelectedItem.ToString();
                 try
@@ -1588,7 +1442,7 @@ namespace DataDecoder
                 chkRCP4.Checked = false;
             }
             // save new port setting
-            set.cboRCP4 = cboRCP4.SelectedItem.ToString();
+            set.cboRCP4 = cboRCP4.SelectedIndex;
             set.Save();
         }
         // PW1 Enable Checkbox has changed
@@ -1621,7 +1475,7 @@ namespace DataDecoder
         private void cboPW1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (PW1port.IsOpen) PW1port.Close();
-            if (cboPW1.SelectedItem.ToString() != "")
+            if (cboPW1.SelectedIndex > 0)
             {
                 PW1port.PortName = cboPW1.SelectedItem.ToString();
                 try
@@ -1642,7 +1496,7 @@ namespace DataDecoder
                 chkPW1.Checked = false;
             }
             // save new port setting
-            set.cboPW1 = cboPW1.SelectedItem.ToString();
+            set.cboPW1 = cboPW1.SelectedIndex;
             set.Save();
         }
         // PW1ra CI-V address textbox has changed
@@ -1757,6 +1611,12 @@ namespace DataDecoder
 
         #region Helper Methods
 
+        // Show the Mini window
+        private void ShowMini()
+        {
+            mini.Show(); WindowState = FormWindowState.Minimized;
+        }
+        // output data to the parallel port
         private void OutParallelPort(int port, int num)
         {
             if (chkDevice.Checked == true)
@@ -1774,6 +1634,7 @@ namespace DataDecoder
             try
             {
                 // Read in the Band Data from the XML file and display in datagrid
+                ds = new DataSet();
                 ds.Clear();
                 ds.ReadXml(fileName);
 
@@ -1876,10 +1737,26 @@ namespace DataDecoder
         {
 //            temp += 2; if (temp >= 110) temp = 40;
 
-            if (temp >= 50 && temp < 70) txtTemp.BackColor = Color.Yellow;
-            else if (temp >= 70 && temp < 80) txtTemp.BackColor = Color.Orange;
-            else if (temp >= 80) txtTemp.BackColor = Color.Red;
-            else txtTemp.BackColor = Color.LightGreen;
+            if (temp >= 50 && temp < 70)
+            { 
+                txtTemp.BackColor = Color.Yellow; 
+                mini.txtTemp.BackColor = Color.Yellow; 
+            }
+            else if (temp >= 70 && temp < 80)
+            { 
+                txtTemp.BackColor = Color.Orange; 
+                mini.txtTemp.BackColor = Color.Orange; 
+            }
+            else if (temp >= 80)
+            {
+                txtTemp.BackColor = Color.Red;
+                mini.txtTemp.BackColor = Color.Red;
+            }
+            else
+            {
+                txtTemp.BackColor = Color.LightGreen;
+                mini.txtTemp.BackColor = Color.LightGreen;
+            }
             switch (temp_format)
             {
                 case TempFormat.Celsius:
@@ -1925,35 +1802,48 @@ namespace DataDecoder
             catch { }
         }
         // LP100 port has received data
+        string sLPBuf = "";
         private void LPport_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if (chkLPenab.Checked)
             {
-                SerialPort LPportMsgs = (SerialPort)sender;
-                string LPportMsg = LPportMsgs.ReadExisting();
-                if (LPportMsg.Length == 43)
-                {
+                string LPportMsg = "";
+                byte[] data = new byte[LPport.BytesToRead];
+                LPport.Read(data, 0, data.Length);
+                sLPBuf += AE.GetString(data, 0, data.Length);
+                Regex rex = new Regex(@";.*?,.*?,.*?,.*?,.*?,.*?,.*?,.*?,.*?\d\d");
+                for (Match m = rex.Match(sLPBuf); m.Success; m = m.NextMatch())
+                {   //loop thru the buffer and find matches
+                    LPportMsg = m.Value;
+                    sLPBuf = sLPBuf.Replace(m.Value, "");//remove the match from the buffer
+
+
+
+                    //SerialPort LPportMsgs = (SerialPort)sender;
+                    //string LPportMsg = LPportMsgs.ReadExisting();
+                    //if (LPportMsg.Length == 43)
+                    //{
                     string fwd = LPportMsg.Substring(1, 7);
                     string alarm = LPportMsg.Substring(21, 1);
-                         if (alarm == "0") SetAlarm("Off");
+                    if (alarm == "0") SetAlarm("Off");
                     else if (alarm == "1") SetAlarm("1.5");
                     else if (alarm == "2") SetAlarm("2.0");
                     else if (alarm == "3") SetAlarm("2.5");
                     else if (alarm == "4") SetAlarm("3.0");
 
                     string peak = LPportMsg.Substring(32, 1);
-                         if (peak == "0") SetLPPeak("Fast");
+                    if (peak == "0") SetLPPeak("Fast");
                     else if (peak == "1") SetLPPeak("Peak");
                     else if (peak == "2") SetLPPeak("Tune");
-                    
+
                     string power = LPportMsg.Substring(30, 1);
-                         if (power == "0") SetPower("Power: High");
+                    if (power == "0") SetPower("Power: High");
                     else if (power == "1") SetPower("Power: Mid");
                     else if (power == "2") SetPower("Power: Low");
 
                     string swr = LPportMsg.Substring(LPportMsg.Length - 4, 4);
-                    SetAvg(fwd);
-                    SetSwr(swr);
+                    SetAvg(fwd); mini.SetAvg(fwd);
+                    SetSwr(swr); mini.SetSwr(swr);
                 }
             }
         }
@@ -1962,7 +1852,7 @@ namespace DataDecoder
         {
             lpTimer.Enabled = false;
             if (LPport.IsOpen) LPport.Close();
-            if (cboLPport.SelectedItem.ToString() != "")
+            if (cboLPport.SelectedIndex > 0)
             {
                 LPport.PortName = cboLPport.SelectedItem.ToString();
                 try
@@ -1985,7 +1875,7 @@ namespace DataDecoder
                 chkLPenab.Checked = false;
             }
             // save new port setting
-            set.LPportNum = cboLPport.SelectedItem.ToString();
+            set.LPportNum = cboLPport.SelectedIndex;
             set.Save();
         }
         // LP timer interval has changed
@@ -1993,6 +1883,7 @@ namespace DataDecoder
         {
             try
             {
+                lpTimer.Interval = Convert.ToDouble(txtLPint.Text);
                 set.LPint = txtLPint.Text;
                 set.Save();
             }
@@ -2008,7 +1899,9 @@ namespace DataDecoder
                     lpTimer.Enabled = true; set.LPenab = true; chkWNEnab.Checked = false;
                     set.WnEnab = false; lblAvg.Text = "Fwd";                    
                     txtAvg.Enabled = true; txtSWR.Enabled = true;
+                    mini.txtAvg.Enabled = true; mini.txtSWR.Enabled = true;
                     txtFwd.Visible = false; lblFwd.Visible = false;
+                    mini.txtFwd.Visible = false; mini.lblFwd.Visible = false;
                 }
                 else
                 {
@@ -2017,14 +1910,19 @@ namespace DataDecoder
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkLPenab.Checked = false; lpTimer.Enabled = false; set.LPenab = false;
                     txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
+                    mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
                     txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
+                    mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false; mini.txtSWR.Enabled = false;
                 }
             }
             else
             {
                 lpTimer.Enabled = false; set.LPenab = false;
                 txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
+                mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
                 txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
+                mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false; mini.txtSWR.Enabled = false;
+
             }
             set.Save();
         }
@@ -2088,6 +1986,7 @@ namespace DataDecoder
                     return;
                 }
                 // Write out the Macro Data from the grid to the XML file
+                dsm = new DataSet();
                 dgm.DataSource = dsm;
                 dgm.DataMember = ("macro");
                 MacFileName = txtMacFile.Text;
@@ -2264,6 +2163,7 @@ namespace DataDecoder
             try
             {
                 // Read in the Band Data from the XML file 
+                dsm = new DataSet(); 
                 dsm.Clear();
                 dsm.ReadXml(fileName);
                 dgm.DataSource = dsm;
@@ -2397,8 +2297,6 @@ namespace DataDecoder
         // Main Menu|File|Exit
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-//            set.MyLoc = this.Location;
-//            set.MySize = this.Size;
             set.WindowGeometry = GeometryToString(this);
             set.TabOpen = tabControl.SelectedIndex;
             set.Save();
@@ -2426,6 +2324,11 @@ namespace DataDecoder
         private void openErrorLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("ErrorLog.txt");
+        }
+        // Main Menu|Tools|Show Mini Window
+        private void showMiniWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowMini();
         }
         // Main Menu|Help|DDUtil Help
 
@@ -2591,7 +2494,7 @@ namespace DataDecoder
         private void cboRotorPort_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RotorPort.IsOpen) RotorPort.Close();
-            if (cboRotorPort.SelectedItem.ToString() != "")
+            if (cboRotorPort.SelectedIndex > 0)
             {
                 RotorPort.PortName = cboRotorPort.SelectedItem.ToString();
                 try
@@ -2715,7 +2618,8 @@ namespace DataDecoder
         string suffix = ""; // termination string for RCP1~4 Rotor_DataReceived() search
         private void grpModel_CheckedChanged(object sender, EventArgs e)
         {
-                 if (rbRtrMod1.Checked) 
+//            RotorMod rotormod = new RotorMod();   
+            if (rbRtrMod1.Checked) 
                  { 
                      set.rotorModel = 0; 
                      rotormod = RotorMod.AlphaSpid;
@@ -2768,6 +2672,7 @@ namespace DataDecoder
         // the rotor speed selection has changed
         private void grpSpeed_CheckedChanged(object sender, EventArgs e)
         {
+//            RotorMod rotormod = new RotorMod();
             if (sender == rbRtrSpd1) { set.RotorSpeed = 0; rtrSpd = "1"; }
             else if (sender == rbRtrSpd2) { set.RotorSpeed = 1; rtrSpd = "5"; }
             else if (sender == rbRtrSpd3) { set.RotorSpeed = 2; rtrSpd = "9"; }
@@ -2901,10 +2806,11 @@ namespace DataDecoder
        #endregion Rotor Events
 
         #region Rotor Methods
-
         // Turn the rotor
-        private void TurnRotor(string heading)
+        public void TurnRotor(string heading)
         {
+            RotorMod rotormod = new RotorMod();
+//            SerialPort port = new SerialPort(RotorPort);
             switch (rotormod)
             {
                 case RotorMod.AlphaSpid:
@@ -2914,9 +2820,11 @@ namespace DataDecoder
                     RotorPort.Write("W" + bearing.ToString() + "0\x01     / ");
                     break;
                 case RotorMod.GreenHeron:
-                    RotorPort.Write("AP1" + heading + ";");
+                    if (heading.Length < 3) heading = heading.PadLeft(3,'0');
+                    RotorPort.Write("AP1" + heading + "\r;");
                     break;
                 case RotorMod.Hygain:
+                    if (heading.Length < 3) heading = heading.PadLeft(3, '0');
                     RotorPort.Write("AP1" + heading + ";");
                     RotorPort.Write("AM1;");
                     break;
@@ -3114,21 +3022,25 @@ namespace DataDecoder
                 default: break;
             }
             switch (set.rotorModel)
-            {
+            {   // send rotor initialization if required
                 case 0: rbRtrMod1.Checked = true; break;  // Alpha Spid
                 case 1: rbRtrMod2.Checked = true; break;  // Green Heron
                 case 2: rbRtrMod3.Checked = true; break;  // HyGain
-                case 3: rbRtrMod4.Checked = true;         // M2RC2900A-P
+                case 3: rbRtrMod4.Checked = true;         // M2RC2800A-P
+                    if (cboRotorPort.SelectedIndex >0 && chkRotorEnab.Checked)
                     RotorPort.Write("S" + rtrSpd + "\r");
                     break;
-                case 4: rbRtrMod5.Checked = true;         // M2RC2900AX
-                    RotorPort.Write("S" + rtrSpd + "\r");
+                case 4: rbRtrMod5.Checked = true;         // M2RC2800AX
+                    if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
+                        RotorPort.Write("S" + rtrSpd + "\r");
                     break;
                 case 5: rbRtrMod6.Checked = true;         // Prosistel
-                    RotorPort.Write("\x02\x41WENA_PWM=1\r");
+                    if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
+                        RotorPort.Write("\x02\x41WENA_PWM=1\r");
                     break;
                 case 6: rbRtrMod7.Checked = true;         // Yaesu
-                    RotorPort.Write("X" + rtrSpd + "\r");
+                    if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
+                        RotorPort.Write("X" + rtrSpd + "\r");
                     break;
                 default: break;
             }
@@ -3176,6 +3088,10 @@ namespace DataDecoder
                         WriteTemp();
                         return;
                     }
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZBS")
+                    {
+                        band = rawFreq.Substring(4, 3);
+                    }
                     // send radio's CAT reply back to RCP1
                     if (logFlag == true && LogPort.IsOpen) LogPort.Write(rawFreq);
                     // send CAT reply back to RCPn port
@@ -3213,6 +3129,14 @@ namespace DataDecoder
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "IF00")
                     {   // DDUtil or RCP IF; query
                         xOn = rawFreq.Substring(rawFreq.Length - 10, 1);
+
+                        // if mox is on, start WD timer if enabled
+                        if (xOn == "1" && chkDog.Checked)
+                        {
+                            if (!WatchDog.Enabled) WatchDog.Start();                            
+                        }
+                        else  WatchDog.Stop();   
+
                         sdrMode = rawFreq.Substring(rawFreq.Length - 9, 1);
                         if (rawFreq.Substring(rawFreq.Length - 6, 1) == "0")
                         {   // if xmit vfo is "A" then send passive listener commands now
@@ -3855,43 +3779,26 @@ namespace DataDecoder
         /// <summary>
         /// Creates a new serial port and rx data available event
         /// </summary>
-        private void CreateSerialPort()
+        public void CreateSerialPort()
         {
             sp = new CATSerialPorts.CATSerialPort();
             sp.CATRxEvent += new CATSerialPorts.CATSerialPort.CATSerialRXEventHandler(sp_CATRxEvent);
             sp.WriteTimeout = 500;
             sp.ReadTimeout = 500;
         }
-        private ArrayList GetAvailCOMPorts()
-        {
-            ArrayList a = new ArrayList();
-            for (int i = 1; i < 34; i++)
-            {
-    //            SerialPorts.SerialPort sp = new SerialPorts.SerialPort();
-                sp.Name = "COM" + i.ToString();
-                try
-                {
-                    sp.Open();
-                    if (sp.isOpen)
-                    {
-                        a.Add(sp.Name);
-                        sp.Close();
-                    }
-                }
-                catch (Exception) { };
-            }
-            return a;
-        }
-        /// <summary>
-        /// Loads the list of available serial ports in the serial port combobox.
-        /// </summary>
         private void GetPortNames()
         {
-            ArrayList ports = GetAvailCOMPorts();
+            string [] ports = SerialPort.GetPortNames();
+            if (ports.Length > 0)
+            {
+                int[] port = new int[ports.Length];
+                for (int i=0; i < ports.Length; i++)
+                {   // strip the com off the port name
+                    port[i] = Convert.ToByte(ports[i].Substring(3, ports[i].Length - 3));
+                }
+                Array.Sort(port);   // Sort port numbers in order
 
-//            ports = SerialPort.GetPortNames();
-            if (ports.Count > 0)
-            {   // make sure combo boxes are empty
+                // make sure combo boxes are empty
                 cboSerAcc.Items.Clear();
                 cboLogPort.Items.Clear();
                 cboLPport.Items.Clear();
@@ -3920,22 +3827,23 @@ namespace DataDecoder
                 cboRCP3Rotor.Items.Add("");
                 cboRCP4Rotor.Items.Add("");
 
-                foreach (string port in ports)
-                {   // load port combos with port names
-                    cboCAT.Items.Add(port);
-                    cboSerAcc.Items.Add(port);
-                    cboLogPort.Items.Add(port);
-                    cboLPport.Items.Add(port);
-                    cboRCP2.Items.Add(port);
-                    cboRCP3.Items.Add(port);
-                    cboRCP4.Items.Add(port);
-                    cboPW1.Items.Add(port);
-                    cboStep.Items.Add(port);
-                    cboRotorPort.Items.Add(port);
-                    cboRCP1Rotor.Items.Add(port);
-                    cboRCP2Rotor.Items.Add(port);
-                    cboRCP3Rotor.Items.Add(port);
-                    cboRCP4Rotor.Items.Add(port);
+                for (int i = 0; i < port.Length; i++)
+                {   
+                    // load port combos with port names
+                    cboCAT.Items.Add("COM" + port[i]);
+                    cboSerAcc.Items.Add("COM" + port[i]);
+                    cboLogPort.Items.Add("COM" + port[i]);
+                    cboLPport.Items.Add("COM" + port[i]);
+                    cboRCP2.Items.Add("COM" + port[i]);
+                    cboRCP3.Items.Add("COM" + port[i]);
+                    cboRCP4.Items.Add("COM" + port[i]);
+                    cboPW1.Items.Add("COM" + port[i]);
+                    cboStep.Items.Add("COM" + port[i]);
+                    cboRotorPort.Items.Add("COM" + port[i]);
+                    cboRCP1Rotor.Items.Add("COM" + port[i]);
+                    cboRCP2Rotor.Items.Add("COM" + port[i]);
+                    cboRCP3Rotor.Items.Add("COM" + port[i]);
+                    cboRCP4Rotor.Items.Add("COM" + port[i]);
                 }
             }
             else
@@ -3960,7 +3868,7 @@ namespace DataDecoder
             if (n >= 0)
             {
                 cboCAT.SelectedIndex = n;
-                OpenSerialPort();
+                if (!sp.isOpen) OpenSerialPort();
             }
             else
             {
@@ -3968,23 +3876,26 @@ namespace DataDecoder
                     "Please select a port from the list.");
                 cboCAT.SelectedIndex = 0;
             }
+            
         }
         /// <summary>
         /// Opens the default Accessory (passive listener) port.
         /// </summary>
         private void SetDefaultComAcc()
         {
+
             int n = cboSerAcc.Items.IndexOf(DefaultComAcc);
             if (n >= 0)
             {
                 cboSerAcc.SelectedIndex = n;
-                AccPort.Open();
+                if (!AccPort.IsOpen) AccPort.Open();
             }
             else
             {
                 MessageBox.Show("Default Accessory Port is not valid.  Please select a port from the list.");
                 cboSerAcc.SelectedIndex = 0;
             }
+
         }
         /// <summary>
         /// Opens the default LP100 port.
@@ -3995,15 +3906,14 @@ namespace DataDecoder
             if (n >= 0)
             {
                 cboLPport.SelectedIndex = n;
-                LPport.Open();
+                if (!LPport.IsOpen) LPport.Open();
             }
             else
             {
                 MessageBox.Show("Default LP100 Port is not valid.  Please select a port from the list.");
                 cboLPport.SelectedIndex = 0;
             }
-        }
-        /// <summary>
+        }        /// <summary>
         /// Opens the default SteppIR port.
         /// </summary>
         private void SetDefaultStepPort()
@@ -4012,15 +3922,14 @@ namespace DataDecoder
             if (n >= 0)
             {
                 cboStep.SelectedIndex = n;
-                StepData.Open();
+                if (!StepData.IsOpen) StepData.Open();
             }
             else
             {
                 MessageBox.Show("Default SteppIR Port is not valid.  Please select a port from the list.");
                 cboStep.SelectedIndex = 0;
             }
-        }
-        /// <summary>
+        }        /// <summary>
         /// Opens the default RCP2 (Radio control) port.
         /// </summary>
         private void SetDefaultRCP2port()
@@ -4029,16 +3938,15 @@ namespace DataDecoder
             if (n >= 0)
             {
                 cboRCP2.SelectedIndex = n;
-                RCP2port.Open();
+                if (!RCP2port.IsOpen) RCP2port.Open();
             }
             else
             {
                 MessageBox.Show("Default RCP2 Radio Control Port is not valid." +
                     "Please select a port from the list.");
-                cboLogPort.SelectedIndex = 0;
+                cboRCP2.SelectedIndex = 0;
             }
-        }
-        /// <summary>
+        }        /// <summary>
         /// Opens the default RCP3 (Radio control) port.
         /// </summary>
         private void SetDefaultRCP3port()
@@ -4047,13 +3955,13 @@ namespace DataDecoder
             if (n >= 0)
             {
                 cboRCP3.SelectedIndex = n;
-                RCP3port.Open();
+                if (!RCP3port.IsOpen) RCP3port.Open();
             }
             else
             {
                 MessageBox.Show("Default RCP3 Radio Control Port is not valid." +
                                 "Please select a port from the list.");
-                cboLogPort.SelectedIndex = 0;
+                cboRCP3.SelectedIndex = 0;
             }
         }
         /// <summary>
@@ -4065,16 +3973,15 @@ namespace DataDecoder
             if (n >= 0)
             {
                 cboRCP4.SelectedIndex = n;
-                RCP4port.Open();
+                if (!RCP4port.IsOpen) RCP4port.Open();
             }
             else
             {
                 MessageBox.Show("Default RCP4 Radio Control Port is not valid." +
                                 "Please select a port from the list.");
-                cboLogPort.SelectedIndex = 0;
+                cboRCP4.SelectedIndex = 0;
             }
-        }
-        /// <summary>
+        }        /// <summary>
         /// Opens the default IC-PW1 port.
         /// </summary>
         private void SetDefaultPW1port()
@@ -4083,16 +3990,15 @@ namespace DataDecoder
             if (n >= 0)
             {
                 cboPW1.SelectedIndex = n;
-                PW1port.Open();
+                if (!PW1port.IsOpen) PW1port.Open();
             }
             else
             {
                 MessageBox.Show("Default PW1 Radio Control Port is not valid." +
                     "Please select a port from the list.");
-                cboLogPort.SelectedIndex = 0;
+                cboPW1.SelectedIndex = 0;
             }
-        }
-        /// <summary>
+        }        /// <summary>
         /// Opens the default Radio control port.
         /// </summary>
         private void SetDefaultLogPort()
@@ -4101,7 +4007,7 @@ namespace DataDecoder
             if (n >= 0)
             {
                 cboLogPort.SelectedIndex = n;
-                LogPort.Open();
+                if (!LogPort.IsOpen) LogPort.Open();
             }
             else
             {
@@ -4109,7 +4015,7 @@ namespace DataDecoder
                     "Please select a port from the list.");
                 cboLogPort.SelectedIndex = 0;
             }
-        }
+        }        
         /// <summary>
         /// Opens the CAT port name stored in the DefaultComRadio property.
         /// </summary>
@@ -4168,8 +4074,8 @@ namespace DataDecoder
                 StepData.Write("@A\0\0\0\0\0\0S0\r"); // Home the antenna
                 chkStep.Checked = false;
                 rbFwd.Checked = true;
-                x = this.Left;
-                y = this.Top;
+                //x = this.Left;
+                //y = this.Top;
                 Notification.notiMsg = 
                     "\rThe SteppIR Antenna elements are retracting.\r\r" +
                     "The SteppIR will NO longer follow PowerSDR.\r\r" +
@@ -4188,8 +4094,8 @@ namespace DataDecoder
             StepTimer.Enabled = true;
             StepCtr = reps; // counter to allow for delay
             bCal = true;
-            x = this.Left;
-            y = this.Top;
+            //x = this.Left;
+            //y = this.Top;
             Notification.notiMsg =
                 "\r\rPlease Standby the antenna is Calibrating\r\r\r" +
                 "This may take a few moments!";
@@ -4259,6 +4165,7 @@ namespace DataDecoder
         {
             if (rbFwd.Checked)
             {
+                mini.rbFwd.Checked = true;
                 bFwd = true; b180 = false; bBiDir = false; b34 = false;
                 if (lastFreq != "") StepPortMsg(lastFreq, "00", "31");
             }
@@ -4269,6 +4176,7 @@ namespace DataDecoder
         {
             if (rb180.Checked)
             {
+                mini.rb180.Checked = true;
                 bFwd = false; b180 = true; bBiDir = false; b34 = false;
                 if (lastFreq != "") StepPortMsg(lastFreq, "40", "31");
             }
@@ -4279,6 +4187,7 @@ namespace DataDecoder
         {
             if (rbBiDir.Checked)
             {
+                mini.rbBiDir.Checked = true;
                 bFwd = false; b180 = false; bBiDir = true; b34 = false;
                 if (lastFreq != "") StepPortMsg(lastFreq, "80", "31");
             }
@@ -4289,6 +4198,7 @@ namespace DataDecoder
         {
             if (rb34.Checked)
             {
+                mini.rb34.Checked = true;
                 bFwd = false; b180 = false; bBiDir = false; b34 = true;
                 if (lastFreq != "") StepPortMsg(lastFreq, "20", "31");
             }
@@ -4334,7 +4244,7 @@ namespace DataDecoder
         private void cboStep_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (StepData.IsOpen) StepData.Close();
-            if (cboStep.SelectedItem.ToString() != "")
+            if (cboStep.SelectedIndex > 0)
             {
                 StepData.PortName = cboStep.SelectedItem.ToString();
                 try
@@ -4355,7 +4265,7 @@ namespace DataDecoder
             {
                 chkStep.Checked = false;
             }
-            set.StepPortNum = cboStep.SelectedItem.ToString();
+            set.StepPortNum = cboStep.SelectedIndex;
             set.Save();
         }
         // SteppIR timer interval has changed
@@ -4474,6 +4384,7 @@ namespace DataDecoder
             try
             {
                 WriteToPort("ZZTS;", iSleep);
+                WriteToPort("ZZBS;", iSleep);
             }
             catch { }
         }
@@ -4617,6 +4528,48 @@ namespace DataDecoder
         }
         #endregion Window Geometry
 
+        #region WatchDog Timer
+
+        // the WatchDog timer has fired.
+        private void WatchDog_Elapsed(object sender, EventArgs e)
+        {
+            WriteToPort("ZZTI1;", iSleep); // kill the PTT/MOX
+            WatchDog.Enabled = false;
+            MessageBox.Show(
+                "        The transmit WatchDog timer has elapsed.\r\r" +
+                "You can change the time period in the Timer window \r" +
+                "on the Setup tab to a more suitable period if needed.\r\r" +
+                "Closing this window will reset the WatchDog timer.",
+                "Transmit Timer Elapsed");
+
+            WriteToPort("ZZTI0;", iSleep);  // turn the PTT/MOX back on.
+        }
+        // the WatchDog Enable check box has changed.
+        private void chkDog_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkDog.Checked) 
+            { set.DogEnab = true; txtTimer.Enabled = true; }
+            else 
+            { set.DogEnab = false; txtTimer.Enabled = false; }
+            set.Save();
+        }
+        // the WatchDog timer period has changed.
+        private void txtTimer_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int time = Convert.ToInt32(txtTimer.Text);
+                time = time * 60000;
+                WatchDog.Interval = time;
+                set.DogTime = txtTimer.Text;
+                set.Save();
+            }
+            catch
+            { }
+        }
+
+        #endregion WatchDog
+
         #region WaveNode
 
         #region WaveNode ENUMS & Vars
@@ -4730,6 +4683,124 @@ namespace DataDecoder
         }
         #endregion Delegates
 
+        #region WaveNode Events
+
+        // The WN2 Enabled checkbox has changed
+        private void chkWNEnab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkWNEnab.Checked)
+            {
+                set.WnEnab = true; chkLPenab.Checked = false; 
+                set.LPenab = false; lblFwd.Visible = true; 
+                txtFwd.Visible = true; txtAvg.Enabled = true;
+                mini.lblFwd.Visible = true; mini.txtFwd.Visible = true; 
+                mini.txtAvg.Enabled = true;
+                txtSWR.Enabled = true; lblAvg.Text = "Avg"; txtFwd.Enabled = true;
+                mini.txtSWR.Enabled = true; mini.lblAvg.Text = "Avg"; 
+                mini.txtFwd.Enabled = true;
+
+                if (FindDevice())           // Find the WN2 and open it
+                {
+                    WN2Timer.Enabled = true;   // Start the read timer;               
+                }
+                else
+                {
+                    WN2Timer.Enabled = false; set.WnEnab = false;
+                    txtFwd.Visible = false; lblFwd.Visible = false;
+                    mini.txtFwd.Visible = false; mini.lblFwd.Visible = false;
+                    txtAvg.Enabled = false; txtSWR.Enabled = false;
+                    txtAvg.Enabled = false; txtSWR.Enabled = false;
+                    mini.txtAvg.Text = ""; mini.txtSWR.Text = "";
+                    mini.txtAvg.Text = ""; mini.txtSWR.Text = "";
+                }
+            }
+            else 
+            {
+                WN2Timer.Enabled = false; set.WnEnab = false;
+                FT_Close(m_hPort); m_hPort = 0;
+                txtFwd.Visible = false; lblFwd.Visible = false;
+                mini.txtFwd.Visible = false; mini.lblFwd.Visible = false;
+                txtAvg.Enabled = false; txtSWR.Enabled = false;
+                mini.txtAvg.Enabled = false; mini.txtSWR.Enabled = false;
+                txtAvg.Text = ""; txtSWR.Text = "";
+                mini.txtAvg.Text = ""; mini.txtSWR.Text = "";
+            }
+            set.Save();
+        }
+        // the read timer has fired
+        private void timer1_Tick(object sender, EventArgs e)
+        { ReadBuffer(); }
+
+        // The coupler selection has changed
+        private void grpWN2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbWN1.Checked)
+            { sensor = 1; sType = s1Type; set.WnCoupler = 1; }
+            else if (rbWN2.Checked)
+            { sensor = 2; sType = s2Type; set.WnCoupler = 2; }
+            else if (rbWN3.Checked)
+            { sensor = 3; sType = s3Type; set.WnCoupler = 3; }
+            else if (rbWN4.Checked)
+            { sensor = 4; sType = s4Type; set.WnCoupler = 4; }
+            set.Save();
+        }
+        // the #1 sensor type has changed
+        private void grpC1_CheckedChanged(object sender, EventArgs e)
+        {
+                 if (rbC1Q.Checked) { s1Type = 1; set.s1Type = 1; }
+            else if (rbC1H.Checked) { s1Type = 2; set.s1Type = 2; } 
+            else if (rbC1K.Checked) { s1Type = 3; set.s1Type = 3; }
+            SetSensorType(); set.Save();
+        }
+        // the #2 sensor type has changed
+        private void grpC2_CheckedChanged(object sender, EventArgs e)
+        {
+                 if (rbC2Q.Checked) { s2Type = 1; set.s2Type = 1; }
+            else if (rbC2H.Checked) { s2Type = 2; set.s2Type = 2; }
+            else if (rbC2K.Checked) { s2Type = 3; set.s2Type = 3; }
+            SetSensorType(); set.Save();
+        }
+        // the #3 sensor type has changed
+        private void grpC3_CheckedChanged(object sender, EventArgs e)
+        {
+                 if (rbC3Q.Checked) { s3Type = 1; set.s3Type = 1; }
+            else if (rbC3H.Checked) { s3Type = 2; set.s3Type = 2; }
+            else if (rbC3K.Checked) { s3Type = 3; set.s3Type = 3; }
+            set.Save();
+        }
+        // the #4 sensor type has changed
+        private void grpC4_CheckedChanged(object sender, EventArgs e)
+        {
+                 if (rbC4Q.Checked) { s4Type = 1; set.s4Type = 1; }
+            else if (rbC4H.Checked) { s4Type = 2; set.s4Type = 2; }
+            else if (rbC4K.Checked) { s4Type = 3; set.s4Type = 3; }
+            SetSensorType(); set.Save();
+        }
+        // the WN reset button has been pressed
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
+
+            ftStatus = FT_ResetDevice(m_hPort);
+            if (ftStatus == FT_STATUS.FT_OK) 
+                ftStatus = FT_CyclePort(m_hPort);
+            else goto Error;
+            if (ftStatus == FT_STATUS.FT_OK)
+            {
+                ftStatus = FT_Purge(m_hPort, FT_PURGE_RX | FT_PURGE_TX);
+                return;
+            }
+            Error:
+                Notification alert = new Notification();
+                Notification.notiMsg =
+                "\r\rThe WN2 could not be Reset.\r\r" +
+                "The only recourse is to toggle the power.";
+                alert.Show();
+                chkWNEnab.Checked = false;           
+        }
+
+        #endregion WaveNode Events
+
         #region WaveNode Methods
 
         // Find all the FTDI USB devices
@@ -4757,7 +4828,7 @@ namespace DataDecoder
                     {
                         System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
                         string str = enc.GetString(sDevName, 0, sDevName.Length);
-                        if (str.Substring(0, 3) == "WNR")
+                        if (str.Substring(0, 2) == "WN")
                         {   // Go open the device
                             if (OpenDevice(str)) return true;
                             else { return false; }
@@ -4778,7 +4849,8 @@ namespace DataDecoder
                     }
                     else
                     {
-                        MessageBox.Show("Error listing devices: " + Convert.ToString(ftStatus), "Error");
+                        MessageBox.Show("Error listing devices: " + 
+                            Convert.ToString(ftStatus), "Error");
                         return false;
                     }
                 }
@@ -4941,8 +5013,11 @@ namespace DataDecoder
                 //power = FindMax();
             //}
             SetPeak(string.Format("{0:f1}", power));
+            mini.txtFwd.Text = (string.Format("{0:f1}", power));
             SetAvg(string.Format("{0:f1}", avg));
-            SetSWR(string.Format("{0:f2}", swr));
+            mini.txtAvg.Text = (string.Format("{0:f1}", avg));
+            SetSWR(string.Format("{0:f1}", swr));
+            mini.txtSWR.Text = (string.Format("{0:f1}", swr));
         }
         // Find max sample
         public float FindMax()
@@ -5044,113 +5119,495 @@ namespace DataDecoder
 
         #endregion WaveNode Methods
 
-        #region WaveNode Events
+        #region WaveNode Setup
 
-        // The WN2 Enabled checkbox has changed
-        private void chkWNEnab_CheckedChanged(object sender, EventArgs e)
+        private void WN2SetUp()
         {
-            if (chkWNEnab.Checked)
+            // Setup the WN2 controls
+            chkWNEnab.Checked = set.WnEnab;
+            if (!chkWNEnab.Checked && !chkLPenab.Checked)
+                chkWNEnab_CheckedChanged(null, null);
+            sensor = set.WnCoupler;
+            s1Type = set.s1Type; s2Type = set.s2Type;
+            s3Type = set.s3Type; s4Type = set.s4Type;
+            // Restore the current sensor being used
+            switch (sensor)
             {
-                set.WnEnab = true; chkLPenab.Checked = false; set.LPenab = false;
-                lblFwd.Visible = true; txtFwd.Visible = true; txtAvg.Enabled = true;
-                txtSWR.Enabled = true; lblAvg.Text = "Avg"; txtFwd.Enabled = true;
-
-                if (FindDevice())           // Find the WN2 and open it
-                {
-                    WN2Timer.Enabled = true;   // Start the read timer;               
-                }
-                else
-                {
-                    WN2Timer.Enabled = false; set.WnEnab = false;
-                    txtFwd.Visible = false; lblFwd.Visible = false;
-                    txtAvg.Enabled = false; txtSWR.Enabled = false;
-                    txtAvg.Text = ""; txtSWR.Text = "";
-                }
+                case 1: rbWN1.Checked = true; sType = s1Type; break;
+                case 2: rbWN2.Checked = true; sType = s2Type; break;
+                case 3: rbWN3.Checked = true; sType = s3Type; break;
+                case 4: rbWN4.Checked = true; sType = s4Type; break;
             }
-            else 
+            // Restore the sensor type radio buttons
+            switch (s1Type)
             {
-                WN2Timer.Enabled = false; set.WnEnab = false;
-                FT_Close(m_hPort); m_hPort = 0;
-                txtFwd.Visible = false; lblFwd.Visible = false;
-                txtAvg.Enabled = false; txtSWR.Enabled = false;
-                txtAvg.Text = ""; txtSWR.Text = "";
+                case 1: rbC1Q.Checked = true; break;
+                case 2: rbC1H.Checked = true; break;
+                case 3: rbC1K.Checked = true; break;
             }
-            set.Save();
-        }
-        // the read timer has fired
-        private void timer1_Tick(object sender, EventArgs e)
-        { ReadBuffer(); }
-
-        // The coupler selection has changed
-        private void grpWN2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbWN1.Checked)
-            { sensor = 1; sType = s1Type; set.WnCoupler = 1; }
-            else if (rbWN2.Checked)
-            { sensor = 2; sType = s2Type; set.WnCoupler = 2; }
-            else if (rbWN3.Checked)
-            { sensor = 3; sType = s3Type; set.WnCoupler = 3; }
-            else if (rbWN4.Checked)
-            { sensor = 4; sType = s4Type; set.WnCoupler = 4; }
-            set.Save();
-        }
-        // the #1 sensor type has changed
-        private void grpC1_CheckedChanged(object sender, EventArgs e)
-        {
-                 if (rbC1Q.Checked) { s1Type = 1; set.s1Type = 1; }
-            else if (rbC1H.Checked) { s1Type = 2; set.s1Type = 2; } 
-            else if (rbC1K.Checked) { s1Type = 3; set.s1Type = 3; }
-            SetSensorType(); set.Save();
-        }
-        // the #2 sensor type has changed
-        private void grpC2_CheckedChanged(object sender, EventArgs e)
-        {
-                 if (rbC2Q.Checked) { s2Type = 1; set.s2Type = 1; }
-            else if (rbC2H.Checked) { s2Type = 2; set.s2Type = 2; }
-            else if (rbC2K.Checked) { s2Type = 3; set.s2Type = 3; }
-            SetSensorType(); set.Save();
-        }
-        // the #3 sensor type has changed
-        private void grpC3_CheckedChanged(object sender, EventArgs e)
-        {
-                 if (rbC3Q.Checked) { s3Type = 1; set.s3Type = 1; }
-            else if (rbC3H.Checked) { s3Type = 2; set.s3Type = 2; }
-            else if (rbC3K.Checked) { s3Type = 3; set.s3Type = 3; }
-            set.Save();
-        }
-        // the #4 sensor type has changed
-        private void grpC4_CheckedChanged(object sender, EventArgs e)
-        {
-                 if (rbC4Q.Checked) { s4Type = 1; set.s4Type = 1; }
-            else if (rbC4H.Checked) { s4Type = 2; set.s4Type = 2; }
-            else if (rbC4K.Checked) { s4Type = 3; set.s4Type = 3; }
-            SetSensorType(); set.Save();
-        }
-        // the WN reset button has been pressed
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
-
-            ftStatus = FT_ResetDevice(m_hPort);
-            if (ftStatus == FT_STATUS.FT_OK) 
-                ftStatus = FT_CyclePort(m_hPort);
-            else goto Error;
-            if (ftStatus == FT_STATUS.FT_OK)
+            switch (s2Type)
             {
-                ftStatus = FT_Purge(m_hPort, FT_PURGE_RX | FT_PURGE_TX);
-                return;
+                case 1: rbC2Q.Checked = true; break;
+                case 2: rbC2H.Checked = true; break;
+                case 3: rbC2K.Checked = true; break;
             }
-            Error:
-                Notification alert = new Notification();
-                Notification.notiMsg =
-                "\r\rThe WN2 could not be Reset.\r\r" +
-                "The only recourse is to toggle the power.";
-                alert.Show();
-                chkWNEnab.Checked = false;           
+            switch (s3Type)
+            {
+                case 1: rbC3Q.Checked = true; break;
+                case 2: rbC3H.Checked = true; break;
+                case 3: rbC3K.Checked = true; break;
+            }
+            switch (s4Type)
+            {
+                case 1: rbC4Q.Checked = true; break;
+                case 2: rbC4H.Checked = true; break;
+                case 3: rbC4K.Checked = true; break;
+            }
         }
 
-        #endregion WaveNode Events
+        #endregion WaveNode Setup
 
         #endregion WaveNode
+
+        #region ALC
+
+        Double dAlc = 0;    // ALC cal std.
+        int iDrive = 0;     // cal drive watts
+
+        #region ALC Delegates
+
+        // Write ALC reading to txt box
+        delegate void SetALCCallback(string text);
+        private void SetALC(string text)
+        {
+            if (this.txtALC.InvokeRequired)
+            {
+                SetALCCallback d = new SetALCCallback(SetALC);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+                txtALC.Text = text;
+        }
+        // Write Drive reading to txt box
+        delegate void SetDriveCallback(string text);
+        private void SetDrive(string text)
+        {
+            if (this.txtDrive.InvokeRequired)
+            {
+                SetDriveCallback d = new SetDriveCallback(SetDrive);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+                txtDrive.Text = text;
+        }
+        #endregion ALC Delegates
+
+        #region ALC Events
+
+        private void alcTimer_Elapsed(object sender, EventArgs e)
+        {
+            double eDong;
+            if (xOn == "1" && chkAlcEnab.Checked)
+            {
+                eDong = ReadALC();  // get dong volts
+                if (eDong > dAlc)
+                {
+                    double alc = (eDong / dAlc) - 1;
+
+                         if (alc > .4) iDrive -= 5;
+                    else if (alc > .3) iDrive -= 4;
+                    else if (alc > .2) iDrive -= 3;
+                    else if (alc > .1) iDrive -= 2;
+                    else if (alc < .1) iDrive -= 1;
+
+                    WriteToPort("ZZPC" + iDrive.ToString().PadLeft(3, '0') + ";", iSleep);
+                }
+            }
+        }
+        // the Calibrate button was pressed
+        private void btnCal_Click(object sender, EventArgs e)
+        {
+            DialogResult result;
+            result = MessageBox.Show(
+            "You are about to initiate the ALC calibration routine for your\r" +
+            "linear amplifier. If this isn't what you intended exit now.\r\r" +
+            "Please check that the following preparations are observed.\r\r" +
+            "- The amplifier must be on and not in standby mode. \r" +
+            "- Make sure a antenna or dummy load is connected to the amp.\r" +
+            "This procedure puts the radio into transmit mode. Be observant\r\r" +
+            "and prepared to act in case of a hang-up or unusual operation.\r" +
+            "Pressing the Tune button on the PowerSDR Console will un-key the radio.\r\r" +
+            "Press the OK button to start the calibration procedure.",
+            "ALC Calibrate Procedure",
+            MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+
+            if (result != DialogResult.OK) return;
+
+            int calSleep = 300;
+            string band;
+            string freq;
+            WriteToPort("ZZSP0;", calSleep); // make sure radio not split
+
+            // Cal 160
+            if (chk160.Checked)
+            {
+                band = "160"; freq = "00001850000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc160 = txtALC.Text; set.Drive160 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 80
+            if (chk80.Checked)
+            {
+                band = "80"; freq = "00003550000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc80 = txtALC.Text; set.Drive80 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 40
+            if (chk40.Checked)
+            {
+                band = "40"; freq = "00007150000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc40 = txtALC.Text; set.Drive40 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 30
+            if (chk30.Checked)
+            {
+                band = "30"; freq = "00010125000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc30 = txtALC.Text; set.Drive30 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 20
+            if (chk20.Checked)
+            {
+                band = "20"; freq = "00014100000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc20 = txtALC.Text; set.Drive20 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 17
+            if (chk17.Checked)
+            {
+                band = "17"; freq = "00018075000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc17 = txtALC.Text; set.Drive17 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 15
+            if (chk15.Checked)
+            {
+                band = "15"; freq = "00021200000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc15 = txtALC.Text; set.Drive15 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 12
+            if (chk12.Checked)
+            {
+                band = "12"; freq = "00024900000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc12 = txtALC.Text; set.Drive12 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 10
+            if (chk10.Checked)
+            {
+                band = "10"; freq = "00029000000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc10 = txtALC.Text; set.Drive10 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 6
+            if (chk6.Checked)
+            {
+                band = "6"; freq = "00051250000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc6 = txtALC.Text; set.Drive6 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+
+            // Print calibration report
+            string msg = "";
+            if (chk160.Checked) msg +=
+            string.Format("160 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc160)) 
+            + "\tDrive= " + set.Drive160 + "\t\r";
+
+            if (chk80.Checked) msg +=
+            string.Format(" 80 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc80))
+            + "\tDrive= " + set.Drive80 + "\t\r";
+
+            if (chk40.Checked) msg +=
+            string.Format(" 40 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc80))
+            + "\tDrive= " + set.Drive80 + "\t\r";
+
+            if (chk30.Checked) msg +=
+            string.Format(" 30 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc30))
+            + "\tDrive= " + set.Drive30 + "\t\r";
+
+            if (chk20.Checked) msg +=
+            string.Format(" 20 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc20))
+            + "\tDrive= " + set.Drive20 + "\t\r";
+
+            if (chk17.Checked) msg +=
+            string.Format(" 17 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc17))
+            + "\tDrive= " + set.Drive17 + "\t\r";
+
+            if (chk15.Checked) msg +=
+            string.Format(" 15 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc15))
+            + "\tDrive= " + set.Drive15 + "\t\r";
+
+            if (chk12.Checked) msg +=
+            string.Format(" 12 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc12))
+            + "\tDrive= " + set.Drive12 + "\t\r";
+
+            if (chk10.Checked) msg +=
+            string.Format(" 10 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc10))
+            + "\tDrive= " + set.Drive10 + "\t\r";
+
+            if (chk6.Checked) msg +=
+            string.Format(" 6 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc6))
+            + "\tDrive= " + set.Drive6 + "\t\r";
+           
+            MessageBox.Show(msg,"ALC Calibration Report",
+            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+        Quit: return;
+        }
+
+        private bool CalSetup(string band, string freq, int sleep)
+        {
+            WriteToPort("ZZFA" + freq + ";", sleep); // set freq
+            DialogResult result;
+            result = MessageBox.Show(
+                "Please verify your amplifier is set to "+ band + " meters" + 
+                "\rand the controls properly adjusted for this band.", 
+                "ALC Calibrate Procedure", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK) return true;
+            return false;
+        }        
+
+        private bool CalFailed(string band)
+        {
+            DialogResult result;
+            result = MessageBox.Show(
+              "Calibration for " + band + " meters failed.\r\r" +
+              "Please make sure the amp is powered up, alc line\r" +
+              "is connected, not in stand-by then try again",
+              "Calibration Failed", MessageBoxButtons.OKCancel, 
+              MessageBoxIcon.Error);
+            if (result == DialogResult.OK) return true;
+            return false;
+
+        }        
+        // the Set button was pressed
+        private void btnSet_Click(object sender, EventArgs e)
+        {
+            if (band == "160")
+            { set.Drive160 = txtDrive.Text; set.Alc160 = txtALC.Text; }
+            else if (band == "080")
+            { set.Drive80 = txtDrive.Text; set.Alc80 = txtALC.Text; }
+            else if (band == "040")
+            { set.Drive40 = txtDrive.Text; set.Alc40 = txtALC.Text; }
+            else if (band == "030")
+            { set.Drive30 = txtDrive.Text; set.Alc30 = txtALC.Text; }
+            else if (band == "020")
+            { set.Drive20 = txtDrive.Text; set.Alc20 = txtALC.Text; }
+            else if (band == "017")
+            { set.Drive17 = txtDrive.Text; set.Alc17 = txtALC.Text; }
+            else if (band == "015")
+            { set.Drive15 = txtDrive.Text; set.Alc15 = txtALC.Text; }
+            else if (band == "012")
+            { set.Drive12 = txtDrive.Text; set.Alc12 = txtALC.Text; }
+            else if (band == "010")
+            { set.Drive10 = txtDrive.Text; set.Alc10 = txtALC.Text; }
+            else if (band == "006")
+            { set.Drive6 = txtDrive.Text; set.Alc6 = txtALC.Text; }
+            else
+            { MessageBox.Show("The save settings operation failed."); return; }
+            set.Save();
+            MessageBox.Show("The settings for " + band.TrimStart('0') + " meters were saved");
+        }
+        // the Enable ALC check box was changed
+        private void chkAlcEnab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAlcEnab.Checked)
+            {
+                set.AlcEnab = true; 
+                //dAlc = Convert.ToDouble(txtALC.Text);
+                //iDrive = Convert.ToInt16(txtDrive.Text);
+            }
+
+            else
+            {
+                alcTimer.Enabled = false;
+                set.AlcEnab = false;
+            }
+            
+            set.Save();
+        }
+        // the Check All button was pressed
+        private void btnChkAll_Click(object sender, EventArgs e)
+        {
+            chk160.Checked = true; chk80.Checked = true; chk40.Checked = true;
+            chk30.Checked = true; chk20.Checked = true; chk17.Checked = true; 
+            chk15.Checked = true; chk12.Checked = true;
+            chk10.Checked = true; chk6.Checked = true;
+        }
+        // the Clear All button was pressed
+        private void btnClrAll_Click(object sender, EventArgs e)
+        {
+            chk160.Checked = false; chk80.Checked = false; chk40.Checked = false; 
+            chk30.Checked = false; chk20.Checked = false; chk17.Checked = false; 
+            chk15.Checked = false; chk12.Checked = false; chk10.Checked = false; 
+            chk6.Checked = false;
+        }
+
+        #endregion ALC Events
+
+        #region ALC Methods
+
+        // run the amp calibration
+        private bool doCal()
+        {
+            int drive = 0;
+            double level = 0, lastLevel = 0;
+            test = 0;   // part of test code
+            WriteToPort("ZZTO000;", iSleep); // set tune pwr level to 0
+            WriteToPort("ZZTU1;", iSleep); // key rig
+            // step the power up in 5 watt steps until the alc voltage
+            // curve starts to flatten out.
+            for (int i = 10; i < 100; i +=5)
+            {
+                test++;
+                WriteToPort("ZZTO" + drive.ToString().PadLeft(3, '0') + ";", iSleep);
+                level = DummyAmp();  // get the alc volts for this drive level
+                if (level > lastLevel + .75)
+                {
+                    drive += 5;
+                    lastLevel = level;
+                }
+                else break;
+                    
+                SetDrive(drive.ToString());                               
+                SetALC(string.Format("{0:f2}",level));
+            }
+            // Set the PSDR drive level
+            WriteToPort("ZZTU0;", iSleep); // un-key rig
+            WriteToPort("ZZPC" + drive.ToString().PadLeft(3, '0') + ";", iSleep);
+            if (level > 0) return true;
+            return false;
+        }
+        // Read the ALC dongle
+        private double ReadALC()
+        {
+            double eDong = 0;
+
+            return eDong;
+        }
+
+        // get the alc settings for the amp
+        int test = 0;   // Test code!
+        private double DummyAmp()
+        {
+            double emc = 0;
+            double [] e = new double[10]; 
+            // average readings over a 10 sample period.
+            Random r = new Random(test);    // Test code!
+            for (int i = 0; i < 10; i++)
+            {
+                e[i] = (double)r.NextDouble() + test; // Test code!
+                Console.WriteLine(e[i]); // Test code!
+            }
+            if (test == 5) // Test code!
+                {emc = 4.75;} // Test code!
+            else // Test code!
+                {emc = Average(e);}
+            Console.WriteLine(emc + " Average"); // Test code!
+            return emc;
+            
+        }
+        public static double Average(Array array)
+        {
+            double average = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                average += (double)array.GetValue(i);
+            }
+            return average / array.Length;
+        }
+
+        #endregion ALC Methods
+
+        #region ALC Setup
+
+        private void AlcSetUp()
+        {
+            chkAlcEnab.Checked = set.AlcEnab;
+
+            // setup alc Read Timer for a 100 ms interrupt
+            alcTimer = new System.Timers.Timer();
+            alcTimer.Elapsed += new System.Timers.ElapsedEventHandler(alcTimer_Elapsed);
+            alcTimer.Interval = 100;      // 1000 = 1 second
+            alcTimer.Enabled = false;
+
+        }
+        #endregion ALC Setup
+
+        #endregion ALC
+
+
     }
 }
