@@ -349,8 +349,7 @@ namespace DataDecoder
 
             CreateSerialPort();
             GetPortNames();
-//            GetAvailCOMPorts();
-            
+
             InitRotor();
 
             txtRadNum.Text = set.CIVaddr;
@@ -457,7 +456,6 @@ namespace DataDecoder
             logTimer.Enabled = true;
             pollTimer.Enabled = true;
             tempTimer.Enabled = true;
-
         }// Setup
         #endregion Initialization
 
