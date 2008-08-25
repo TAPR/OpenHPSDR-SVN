@@ -12,7 +12,7 @@
     <ApplicationIcon>DDU.ico</ApplicationIcon>
     <ManifestCertificateThumbprint>13D0FC2AEBC7F55AF0728AA6593BBD8B314D910E</ManifestCertificateThumbprint>
     <ManifestKeyFile>DataDecoder_TemporaryKey.pfx</ManifestKeyFile>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
     <SignManifests>false</SignManifests>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>http://www.k5fr.com/AppDeploy/</PublishUrl>
@@ -29,6 +29,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <SignAssembly>false</SignAssembly>
     <StartupObject>DataDecoder.Program</StartupObject>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -122,6 +123,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <BaseApplicationManifest Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -144,24 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DDU.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="AxVSPortLib">
-      <Guid>{5BFD1F7E-4A0A-4DE1-9BA3-A9E71C22CCD7}</Guid>
-      <VersionMajor>6</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="VSPortLib">
-      <Guid>{5BFD1F7E-4A0A-4DE1-9BA3-A9E71C22CCD7}</Guid>
-      <VersionMajor>6</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
