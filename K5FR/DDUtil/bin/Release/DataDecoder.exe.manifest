@@ -59,7 +59,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>T05n5cDZQbN+ztdqwv+un/hEAkY=</dsig:DigestValue>
+        <dsig:DigestValue>RSFqSzWtDaKJUeqNNcNyKAVgfNo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -75,13 +75,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="DataDecoder.exe.config" size="12153">
+  <file name="DataDecoder.exe.config" size="12278">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>W+T8Iv9ChzeMAXW+a3CwgugEElk=</dsig:DigestValue>
+      <dsig:DigestValue>ICsUjt4ZfoEa/AzpnI4AXSFNUx0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="DDU.ico" size="1078">

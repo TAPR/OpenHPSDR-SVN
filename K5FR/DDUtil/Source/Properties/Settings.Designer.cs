@@ -1174,5 +1174,17 @@ namespace DataDecoder.Properties {
                 this["Drive6"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MiniTopMost {
+            get {
+                return ((bool)(this["MiniTopMost"]));
+            }
+            set {
+                this["MiniTopMost"] = value;
+            }
+        }
     }
 }

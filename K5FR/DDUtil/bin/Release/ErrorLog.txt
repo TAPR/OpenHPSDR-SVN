@@ -1,0 +1,40 @@
+Source		: System.Windows.Forms
+Method		: set_SelectedIndex
+Date		: 3:39:55 PM
+Time		: 8/24/2008
+Computer	: K5FR-GW32
+Error		: InvalidArgument=Value of '91' is not valid for 'SelectedIndex'.
+Parameter name: SelectedIndex
+Stack Trace	: at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   at DataDecoder.Setup.Setup_Load(Object sender, EventArgs e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\Setup.cs:line 772
+-------------------------------------------------------------------
+Source		: System.Windows.Forms
+Method		: set_SelectedIndex
+Date		: 3:40:43 PM
+Time		: 8/24/2008
+Computer	: K5FR-GW32
+Error		: InvalidArgument=Value of '168' is not valid for 'SelectedIndex'.
+Parameter name: SelectedIndex
+Stack Trace	: at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   at DataDecoder.Setup.Setup_Load(Object sender, EventArgs e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\Setup.cs:line 772
+-------------------------------------------------------------------
+Source		: System.Windows.Forms
+Method		: set_SelectedIndex
+Date		: 3:50:05 PM
+Time		: 8/24/2008
+Computer	: K5FR-GW32
+Error		: InvalidArgument=Value of '164' is not valid for 'SelectedIndex'.
+Parameter name: SelectedIndex
+Stack Trace	: at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   at DataDecoder.Setup.Setup_Load(Object sender, EventArgs e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\Setup.cs:line 772
+-------------------------------------------------------------------
+Source		: System.Windows.Forms
+Method		: set_SelectedIndex
+Date		: 7:16:55 PM
+Time		: 8/24/2008
+Computer	: K5FR-GW32
+Error		: InvalidArgument=Value of '231' is not valid for 'SelectedIndex'.
+Parameter name: SelectedIndex
+Stack Trace	: at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   at DataDecoder.Setup.Setup_Load(Object sender, EventArgs e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\Setup.cs:line 774
+-------------------------------------------------------------------
