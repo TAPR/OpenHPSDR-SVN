@@ -377,6 +377,8 @@ namespace DataDecoder
             this.RCP4Rotor = new System.IO.Ports.SerialPort(this.components);
             this.lblAvg = new System.Windows.Forms.Label();
             this.WN2Timer = new System.Windows.Forms.Timer(this.components);
+            this.chkModeChg = new System.Windows.Forms.CheckBox();
+            this.chkOnTop = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -3529,9 +3531,10 @@ namespace DataDecoder
             this.btnSP.TabIndex = 0;
             this.btnSP.Text = "SP";
             this.btnSP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnSP, "Press to turn the rotor to the short path heading");
+            this.toolTip1.SetToolTip(this.btnSP, "Click to turn rotor to short path heading (Ctrl+Click to stop rotor)");
             this.btnSP.UseVisualStyleBackColor = true;
             this.btnSP.Click += new System.EventHandler(this.btnSP_Click);
+            this.btnSP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnSP_KeyDown);
             // 
             // txtLP
             // 
@@ -3555,9 +3558,10 @@ namespace DataDecoder
             this.btnLP.TabIndex = 1;
             this.btnLP.Text = "LP";
             this.btnLP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnLP, "Press to turn the rotor to the long path heading");
+            this.toolTip1.SetToolTip(this.btnLP, "Click to turn rotor to long path heading (Ctrl+Click to stop rotor)");
             this.btnLP.UseVisualStyleBackColor = true;
             this.btnLP.Click += new System.EventHandler(this.btnLP_Click);
+            this.btnLP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnLP_KeyDown);
             // 
             // txtSP
             // 
@@ -3573,6 +3577,8 @@ namespace DataDecoder
             // 
             // tabSetup
             // 
+            this.tabSetup.Controls.Add(this.chkOnTop);
+            this.tabSetup.Controls.Add(this.chkModeChg);
             this.tabSetup.Controls.Add(this.chkAudio);
             this.tabSetup.Controls.Add(this.chkTips);
             this.tabSetup.Controls.Add(this.grpALC);
@@ -3592,7 +3598,7 @@ namespace DataDecoder
             this.chkAudio.AutoSize = true;
             this.chkAudio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAudio.ForeColor = System.Drawing.Color.Navy;
-            this.chkAudio.Location = new System.Drawing.Point(85, 275);
+            this.chkAudio.Location = new System.Drawing.Point(85, 265);
             this.chkAudio.Name = "chkAudio";
             this.chkAudio.Size = new System.Drawing.Size(70, 17);
             this.chkAudio.TabIndex = 34;
@@ -3606,7 +3612,7 @@ namespace DataDecoder
             this.chkTips.AutoSize = true;
             this.chkTips.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkTips.ForeColor = System.Drawing.Color.Navy;
-            this.chkTips.Location = new System.Drawing.Point(15, 275);
+            this.chkTips.Location = new System.Drawing.Point(10, 265);
             this.chkTips.Name = "chkTips";
             this.chkTips.Size = new System.Drawing.Size(70, 17);
             this.chkTips.TabIndex = 33;
@@ -3636,6 +3642,7 @@ namespace DataDecoder
             this.grpALC.Controls.Add(this.txtDrive);
             this.grpALC.Controls.Add(this.label64);
             this.grpALC.Controls.Add(this.chkAlcEnab);
+            this.grpALC.Enabled = false;
             this.grpALC.ForeColor = System.Drawing.Color.Blue;
             this.grpALC.Location = new System.Drawing.Point(155, 205);
             this.grpALC.Name = "grpALC";
@@ -4884,6 +4891,34 @@ namespace DataDecoder
             // 
             this.WN2Timer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // chkModeChg
+            // 
+            this.chkModeChg.AutoSize = true;
+            this.chkModeChg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkModeChg.ForeColor = System.Drawing.Color.Navy;
+            this.chkModeChg.Location = new System.Drawing.Point(10, 285);
+            this.chkModeChg.Name = "chkModeChg";
+            this.chkModeChg.Size = new System.Drawing.Size(75, 17);
+            this.chkModeChg.TabIndex = 79;
+            this.chkModeChg.Text = "Mode Chg";
+            this.toolTip1.SetToolTip(this.chkModeChg, "Select to enable Macro execution when Mode changes.");
+            this.chkModeChg.UseVisualStyleBackColor = true;
+            this.chkModeChg.CheckedChanged += new System.EventHandler(this.chkModeChg_CheckedChanged);
+            // 
+            // chkOnTop
+            // 
+            this.chkOnTop.AutoSize = true;
+            this.chkOnTop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkOnTop.ForeColor = System.Drawing.Color.Navy;
+            this.chkOnTop.Location = new System.Drawing.Point(85, 285);
+            this.chkOnTop.Name = "chkOnTop";
+            this.chkOnTop.Size = new System.Drawing.Size(62, 17);
+            this.chkOnTop.TabIndex = 88;
+            this.chkOnTop.Text = "On Top";
+            this.toolTip1.SetToolTip(this.chkOnTop, "When selected causes this window to be on top of all other windows.");
+            this.chkOnTop.UseVisualStyleBackColor = true;
+            this.chkOnTop.CheckedChanged += new System.EventHandler(this.chkOnTop_CheckedChanged);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5171,7 +5206,6 @@ namespace DataDecoder
         private System.Windows.Forms.Button btnLP;
         private System.Windows.Forms.Button btnSP;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Label lblSP;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label label47;
@@ -5342,6 +5376,9 @@ namespace DataDecoder
         public System.Windows.Forms.CheckBox chk17;
         public System.Windows.Forms.CheckBox chk80;
         public System.Windows.Forms.CheckBox chk6;
+        public System.Windows.Forms.Label lblSP;
+        private System.Windows.Forms.CheckBox chkModeChg;
+        private System.Windows.Forms.CheckBox chkOnTop;
 
     }
 }

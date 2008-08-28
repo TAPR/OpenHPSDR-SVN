@@ -34,15 +34,17 @@
   </macro>
   <macro>
     <Button>Macro 9</Button>
-    <Command />
   </macro>
   <macro>
-    <Button>Macro 10</Button>
+    <Button>Phone</Button>
+    <Command>ZZFI06;ZZMT02;ZZTP13;ZZPC050;</Command>
   </macro>
   <macro>
-    <Button>Macro 11</Button>
+    <Button>CW</Button>
+    <Command>ZZFI04;ZZMT00;ZZPC100;</Command>
   </macro>
   <macro>
-    <Button>Macro 12</Button>
+    <Button>Digital</Button>
+    <Command>ZZFI10;ZZMT02;ZZTP00;ZZPC075;</Command>
   </macro>
 </macroData>

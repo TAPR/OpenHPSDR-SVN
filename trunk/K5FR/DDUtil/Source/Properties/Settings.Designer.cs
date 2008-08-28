@@ -1186,5 +1186,29 @@ namespace DataDecoder.Properties {
                 this["MiniTopMost"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ModeChg {
+            get {
+                return ((bool)(this["ModeChg"]));
+            }
+            set {
+                this["ModeChg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MainOnTop {
+            get {
+                return ((bool)(this["MainOnTop"]));
+            }
+            set {
+                this["MainOnTop"] = value;
+            }
+        }
     }
 }

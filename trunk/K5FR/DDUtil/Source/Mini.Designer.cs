@@ -47,9 +47,9 @@ namespace DataDecoder
             this.rbFwd = new System.Windows.Forms.RadioButton();
             this.btnCalib = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
+            this.AOT = new System.Windows.Forms.CheckBox();
             this.grpStepCtrl = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.AOT = new System.Windows.Forms.CheckBox();
             this.grpStepCtrl.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +84,7 @@ namespace DataDecoder
             this.txtTemp.TabIndex = 77;
             this.txtTemp.Text = "Temp";
             this.txtTemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTemp, "F5000 PA Temp");
             // 
             // btnReStart
             // 
@@ -176,9 +177,10 @@ namespace DataDecoder
             this.btnSP.TabIndex = 0;
             this.btnSP.Text = "Go";
             this.btnSP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnSP, "Press to move rotor to heading");
+            this.toolTip1.SetToolTip(this.btnSP, "Click to turn rotor to heading (Ctrl+Click to stop rotor)");
             this.btnSP.UseVisualStyleBackColor = true;
             this.btnSP.Click += new System.EventHandler(this.btnSP_Click);
+            this.btnSP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnSP_KeyDown);
             // 
             // txtSP
             // 
@@ -205,6 +207,7 @@ namespace DataDecoder
             this.rb34.Text = "3/4";
             this.toolTip1.SetToolTip(this.rb34, "Select to put vertical in 3/4 wavelength mode (15 & 10  meters only)");
             this.rb34.UseVisualStyleBackColor = true;
+            this.rb34.CheckedChanged += new System.EventHandler(this.grpStepCtrl_CheckedChanged);
             // 
             // rbBiDir
             // 
@@ -220,6 +223,7 @@ namespace DataDecoder
             this.rbBiDir.Text = "<-->";
             this.toolTip1.SetToolTip(this.rbBiDir, "Select to put yagi in bi-directional mode");
             this.rbBiDir.UseVisualStyleBackColor = true;
+            this.rbBiDir.CheckedChanged += new System.EventHandler(this.grpStepCtrl_CheckedChanged);
             // 
             // rb180
             // 
@@ -235,6 +239,7 @@ namespace DataDecoder
             this.rb180.Text = "180";
             this.toolTip1.SetToolTip(this.rb180, "Select to put yagi in 180 mode (reverse)");
             this.rb180.UseVisualStyleBackColor = true;
+            this.rb180.CheckedChanged += new System.EventHandler(this.grpStepCtrl_CheckedChanged);
             // 
             // rbFwd
             // 
@@ -250,6 +255,7 @@ namespace DataDecoder
             this.rbFwd.Text = "Fwd";
             this.toolTip1.SetToolTip(this.rbFwd, "Select to put yagi in forward mode");
             this.rbFwd.UseVisualStyleBackColor = true;
+            this.rbFwd.CheckedChanged += new System.EventHandler(this.grpStepCtrl_CheckedChanged);
             // 
             // btnCalib
             // 
@@ -291,6 +297,18 @@ namespace DataDecoder
             this.btnHome.UseVisualStyleBackColor = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
+            // AOT
+            // 
+            this.AOT.AutoSize = true;
+            this.AOT.Location = new System.Drawing.Point(5, 80);
+            this.AOT.Name = "AOT";
+            this.AOT.Size = new System.Drawing.Size(62, 17);
+            this.AOT.TabIndex = 87;
+            this.AOT.Text = "On Top";
+            this.toolTip1.SetToolTip(this.AOT, "When selected causes this window to be on top of all other windows.");
+            this.AOT.UseVisualStyleBackColor = true;
+            this.AOT.CheckedChanged += new System.EventHandler(this.AOT_CheckedChanged);
+            // 
             // grpStepCtrl
             // 
             this.grpStepCtrl.Controls.Add(this.rb34);
@@ -320,18 +338,6 @@ namespace DataDecoder
             this.groupBox1.TabIndex = 86;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rotor";
-            // 
-            // AOT
-            // 
-            this.AOT.AutoSize = true;
-            this.AOT.Location = new System.Drawing.Point(5, 80);
-            this.AOT.Name = "AOT";
-            this.AOT.Size = new System.Drawing.Size(62, 17);
-            this.AOT.TabIndex = 87;
-            this.AOT.Text = "On Top";
-            this.toolTip1.SetToolTip(this.AOT, "When checked causes this window to be on top of all other windows.");
-            this.AOT.UseVisualStyleBackColor = true;
-            this.AOT.CheckedChanged += new System.EventHandler(this.AOT_CheckedChanged);
             // 
             // Mini
             // 
