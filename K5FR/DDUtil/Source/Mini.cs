@@ -1,13 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataDecoder.Properties;
-using Logger;
+//using Logger;
 
 
 namespace DataDecoder
@@ -15,19 +11,15 @@ namespace DataDecoder
     public partial class Mini : Form
     {
         #region Vars & Init
-//        Setup s = new Setup();
         Setup s;
         public bool init;
-        Process process;
         Settings set = Settings.Default;
         public string PFfile = "";
-        bool enableErrorLog = false;
 
-
-        public Mini()
+        public Mini(Setup setup)
         {
             InitializeComponent();
-            init = true;
+            s = setup;
         }
 
         #endregion Vars & Init
@@ -98,87 +90,53 @@ namespace DataDecoder
         #endregion Properties
 
         #region Form Events
-
+        // SteppIR Calibrate button was pressed
         private void btnCalib_Click(object sender, EventArgs e)
         {
-            NotImp();
+            s.btnCalib_Click(null, null);
         }
-
+        // SteppIR Home button was pressed
         private void btnHome_Click(object sender, EventArgs e)
         {
-            NotImp();
+            s.btnHome_Click(null, null);
         }
-
+        // Profiler button was pressed
         private void btnProfiler_Click(object sender, EventArgs e)
         {
-            NotImp();
-
-            //if (PFfile != "" && PFfile != null)
-            //{
-            //    try
-            //    {
-            //        s.sp.Close();
-            //        process = Process.Start(PFfile);
-            //        this.Text = "Starting Profiler";
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        bool bReturnLog = false;
-            //        bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-            //        if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-            //    }
-            //}
-            //else
-            //    MessageBox.Show("No location has been selected for the FlexProfiler.exe file.\n\n" +
-            //        "Please select a file location on the 'Other' tab and try again.", "File Error",
-            //        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            s.btnProfiler_Click(null, null);
         }
-
+        // Profiler Re start button was pressed
         private void btnReStart_Click(object sender, EventArgs e)
         {
-            NotImp();
-            
-            //try
-            //{
-            //    if (IsFPRunning())
-            //    {
-            //        process.Kill();
-            //        process.WaitForExit();
-            //    }
-            //    if (!s.sp.isOpen)
-            //    {
-            //        s.sp.Open();
-            //        this.Text = "DDUtil Re-Starting";
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    bool bReturnLog = false;
-            //    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-            //    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-            //}
+            s.btnReStart_Click(null, null);
         }
-        
+        // Rotor button was pressed
         public void btnSP_Click(object sender, EventArgs e)
         {
+            txtSP.Focus(); 
+            s.lblSP.Text = txtSP.Text;
             s.TurnRotor(txtSP.Text);            
         }
-        
+        // Stop the rotor if moving (Ctrl+SP button)
+        private void btnSP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            { txtSP.Focus(); s.RotorStop(); e.Handled = true; }
+        }
+        // form is closing
         private void Mini_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //Settings set = Settings.Default;
             set.miniGeo = DataDecoder.Setup.GeometryToString(this);
             e.Cancel = true;
             this.Hide();
         }
-        
+        // form load
         private void Mini_Load(object sender, EventArgs e)
         {
-  //          s = new Setup();
             AOT.Checked = set.MiniTopMost;
             DataDecoder.Setup.GeometryFromString(set.miniGeo, this);
         }
-
+        // the always on top chk box has changed
         private void AOT_CheckedChanged(object sender, EventArgs e)
         {
             if (AOT.Checked)
@@ -187,6 +145,19 @@ namespace DataDecoder
             { this.TopMost = false; set.MiniTopMost = false; }
             set.Save();
         }
+        // one of the SteppIR buttons has changed
+        private void grpStepCtrl_CheckedChanged(object sender, EventArgs e)
+        {
+            if (init)
+            {
+                if (sender == rbFwd) s.StepFwd = true;
+                else if (sender == rb180) s.StepRev = true;
+                else if (sender == rbBiDir) s.StepBI = true;
+                else if (sender == rb34) s.Step34 = true;
+            }
+            init = true;
+        }
+
         #endregion Form Events
 
         #region Methods
@@ -217,8 +188,6 @@ namespace DataDecoder
         }
         
         #endregion Methods
-
-
 
     }// end Mini
 }

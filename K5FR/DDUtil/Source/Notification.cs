@@ -71,7 +71,7 @@ namespace DataDecoder
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(225)))));
+            this.label1.BackColor = System.Drawing.SystemColors.Info;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Blue;
             this.label1.Location = new System.Drawing.Point(0, 0);
@@ -103,8 +103,10 @@ namespace DataDecoder
         }
 		#endregion
 
+        public Label label1;
+
         #region Designer generated variables
-        private System.Windows.Forms.Label label1;
+
         private System.Windows.Forms.Timer timer1;
         private System.ComponentModel.IContainer components;
         #endregion

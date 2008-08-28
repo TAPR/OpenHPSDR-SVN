@@ -37,7 +37,7 @@
     <Command>ZZFA00007005000;ZZMD04;ZZPC100;ZZMT00;</Command>
   </macro>
   <macro>
-    <Button>15 Mtrs</Button>
+    <Button>Phone</Button>
     <Command>ZZBS015;</Command>
   </macro>
   <macro>

@@ -1,14 +1,10 @@
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\bin\Release\DataDecoder.exe.config
-C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\bin\Release\DataDecoder.exe.manifest
-C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\bin\Release\DataDecoder.application
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\bin\Release\DataDecoder.exe
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\bin\Release\DataDecoder.pdb
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\ResolveAssemblyReference.cache
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.Setup.resources
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.Properties.Resources.resources
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.csproj.GenerateResource.Cache
-C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.exe.manifest
-C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.application
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.exe
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.pdb
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.AboutBox.resources
@@ -28,9 +24,6 @@ C:\Documents and Settings\Administrator\Desktop\Repos_DDUtil 1.5.6\Source\obj\Re
 C:\Documents and Settings\Administrator\Desktop\Repos_DDUtil 1.5.6\Source\obj\Release\DataDecoder.application
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.Notification.resources
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\TransDlg.TransDialog.resources
-C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\Interop.VSPortLib.dll
-C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\AxInterop.VSPortLib.dll
-C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Release\DataDecoder.csproj.ResolveComReference.cache
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\bin\debug\DataDecoder.exe.config
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil\Source\obj\Debug\Interop.VSPortLib.dll

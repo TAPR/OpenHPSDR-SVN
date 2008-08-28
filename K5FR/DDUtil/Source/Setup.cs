@@ -76,8 +76,8 @@ namespace DataDecoder
 
         ASCIIEncoding AE = new ASCIIEncoding();
         public CATSerialPorts.CATSerialPort sp;
-        DataSet ds;//dsm = new DataSet();
-        DataSet dsm;// = new DataSet();
+        DataSet ds = new DataSet();
+        DataSet dsm = new DataSet();
         Mini mini;// = new Mini();
         Hashtable flist = new Hashtable();
         Settings set = Settings.Default;
@@ -261,7 +261,7 @@ namespace DataDecoder
         {   // if the app is already running don't start another one.
             if (IsAppAlreadyRunning()) Environment.Exit(0);
             InitializeComponent();
-            mini = new Mini();
+            mini = new Mini(this);
             GeometryFromString(set.WindowGeometry, this);
             chkDevice.Checked = set.DevEnab;
             chkDev0.Checked = set.Dev0Enab;
@@ -278,6 +278,8 @@ namespace DataDecoder
             mini.rbFwd.Checked = true;
             chkTips.Checked = set.ToolTips;
             chkMode.Checked = set.slaveMode;
+            chkModeChg.Checked = set.ModeChg;
+            chkOnTop.Checked = set.MainOnTop;
             
             chkDog.Checked = set.DogEnab;
             chkDog_CheckedChanged(null, null);
@@ -765,7 +767,7 @@ namespace DataDecoder
         {
             try
             {
-                mini = new Mini();
+//                mini = new Mini();
                 closing = false;
                 tabControl.SelectedIndex = set.TabOpen;
                 cboPrefix.SelectedIndex = RandomNumber(0, 300);
@@ -1221,7 +1223,7 @@ namespace DataDecoder
             set.Save();
         }
         // Profiller button was pressed
-        private void btnProfiler_Click(object sender, EventArgs e)
+        public void btnProfiler_Click(object sender, EventArgs e)
         {
             if (txtProfLoc.Text != "" && txtProfLoc.Text != null)
             {
@@ -1245,7 +1247,7 @@ namespace DataDecoder
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
         // Re-Start button was pressed
-        private void btnReStart_Click(object sender, EventArgs e)
+        public void btnReStart_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1632,7 +1634,6 @@ namespace DataDecoder
             try
             {
                 // Read in the Band Data from the XML file and display in datagrid
-                ds = new DataSet();
                 ds.Clear();
                 ds.ReadXml(fileName);
 
@@ -1984,7 +1985,6 @@ namespace DataDecoder
                     return;
                 }
                 // Write out the Macro Data from the grid to the XML file
-                dsm = new DataSet();
                 dgm.DataSource = dsm;
                 dgm.DataMember = ("macro");
                 MacFileName = txtMacFile.Text;
@@ -2465,12 +2465,63 @@ namespace DataDecoder
 
         #region Rotor Events
 
+        // Stop the rotor if moving (Ctrl+LP button)
+        private void btnLP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control) { lblLP.Focus(); RotorStop(); e.Handled = true; }
+        }
+        // Stop the rotor if moving (Ctrl+SP button)
+        private void btnSP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control) { lblSP.Focus(); RotorStop(); }
+        }
+        // Stops the Rotor if turning
+        public void RotorStop()
+        {
+            float currentSize;
+            switch (rotormod)
+            {
+                case RotorMod.AlphaSpid:
+                    RotorPort.Write("\x57\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0f\x20");
+                    break;
+                case RotorMod.GreenHeron:
+                    RotorPort.Write("\x3B");   //";"
+                    break;
+                case RotorMod.Hygain:
+                    RotorPort.Write("\x3B");   //";"
+                    break;
+                case RotorMod.M2R2800PA:
+                    RotorPort.Write("\x53\r");  //"S,CR"
+                    break;
+                case RotorMod.M2R2800PX:
+                    RotorPort.Write("\x53\r");  //"S,CR"
+                    break;
+                case RotorMod.Prosistel:
+                    RotorPort.Write("\x02\x41\x47\x39\x37\x37\r");
+                    break;
+                case RotorMod.Yaesu:
+                    RotorPort.Write("\x53\r");  //"S,CR"
+                    break;
+                default: break;
+            }
+            Notification.notiMsg = "\r\rStopping Antenna Rotation!";
+            Notification alert = new Notification();
+            currentSize = alert.label1.Font.Size;
+            currentSize += 2.0F;
+            alert.label1.Font = new Font(alert.label1.Font.Name, currentSize,
+            alert.label1.Font.Style, alert.label1.Font.Unit);
+            alert.Show();
+
+        }
         // The Short Path Rotor button has been pressed
         string rtrSpd = "";
         private void btnSP_Click(object sender, EventArgs e)
         {
             if (chkRotorEnab.Checked)
-            { lblSP.Text = txtSP.Text; lblLP.Text = "SP"; TurnRotor(txtSP.Text); }
+            {
+                lblSP.Text = txtSP.Text; lblLP.Text = "SP";
+                TurnRotor(txtSP.Text); lblSP.Focus();
+            }
         }
         // The SP bearing window has changed, must be a manual entry.
         private void txtSP_TextChanged(object sender, EventArgs e)
@@ -2486,7 +2537,10 @@ namespace DataDecoder
         private void btnLP_Click(object sender, EventArgs e)
         {
             if (chkRotorEnab.Checked)
-            { lblSP.Text = txtLP.Text; lblLP.Text = "LP"; TurnRotor(txtLP.Text); }
+            {
+                lblSP.Text = txtLP.Text; lblLP.Text = "LP";
+                TurnRotor(txtLP.Text); lblLP.Focus();
+            }
         }
         // The Rotor Port number has changed
         private void cboRotorPort_SelectedIndexChanged(object sender, EventArgs e)
@@ -2608,7 +2662,6 @@ namespace DataDecoder
                 cboRCP2Rotor.Enabled = false;
                 cboRCP3Rotor.Enabled = false;
                 cboRCP4Rotor.Enabled = false;
-
             }
             set.Save();
         }
@@ -2617,54 +2670,54 @@ namespace DataDecoder
         private void grpModel_CheckedChanged(object sender, EventArgs e)
         {
 //            RotorMod rotormod = new RotorMod();   
-            if (rbRtrMod1.Checked) 
-                 { 
-                     set.rotorModel = 0; 
-                     rotormod = RotorMod.AlphaSpid;
-                     grpSpeed.Visible = false;
-                     suffix = "/ "; // 2F, 20
-                 }
-                 else if (rbRtrMod2.Checked)
-                 {
-                     set.rotorModel = 1;
-                     rotormod = RotorMod.GreenHeron;
-                     grpSpeed.Visible = false;
-                     suffix = ";";
-                 }
-                 else if (rbRtrMod3.Checked) 
-                 { 
-                     set.rotorModel = 2; 
-                     rotormod = RotorMod.Hygain;
-                     grpSpeed.Visible = false;
-                     suffix = ";";
-                 }
-                 else if (rbRtrMod4.Checked)
-                 {
-                     set.rotorModel = 3; 
-                     rotormod = RotorMod.M2R2800PA;
-                     grpSpeed.Visible = true;
-                     suffix = "\r";
-                 }
-                 else if (rbRtrMod5.Checked)
-                 {
-                     set.rotorModel = 4; 
-                     rotormod = RotorMod.M2R2800PX;
-                     grpSpeed.Visible = true;
-                     suffix = "\r";
-                 }
-                 else if (rbRtrMod6.Checked) 
-                 { 
-                     set.rotorModel = 5; 
-                     rotormod = RotorMod.Prosistel;
-                     grpSpeed.Visible = false;
-                     suffix = "\r";
-                 }
-                 else if (rbRtrMod7.Checked)
-                 {
-                     set.rotorModel = 6; rotormod = RotorMod.Yaesu;
-                     grpSpeed.Visible = true;
-                     suffix = "\r";
-                 }
+            if (rbRtrMod1.Checked)
+            {
+                set.rotorModel = 0;
+                rotormod = RotorMod.AlphaSpid;
+                grpSpeed.Visible = false;
+                suffix = "/ "; // 2F, 20
+            }
+            else if (rbRtrMod2.Checked)
+            {
+                set.rotorModel = 1;
+                rotormod = RotorMod.GreenHeron;
+                grpSpeed.Visible = false;
+                suffix = ";";
+            }
+            else if (rbRtrMod3.Checked)
+            {
+                set.rotorModel = 2;
+                rotormod = RotorMod.Hygain;
+                grpSpeed.Visible = false;
+                suffix = ";";
+            }
+            else if (rbRtrMod4.Checked)
+            {
+                set.rotorModel = 3;
+                rotormod = RotorMod.M2R2800PA;
+                grpSpeed.Visible = true;
+                suffix = "\r";
+            }
+            else if (rbRtrMod5.Checked)
+            {
+                set.rotorModel = 4;
+                rotormod = RotorMod.M2R2800PX;
+                grpSpeed.Visible = true;
+                suffix = "\r";
+            }
+            else if (rbRtrMod6.Checked)
+            {
+                set.rotorModel = 5;
+                rotormod = RotorMod.Prosistel;
+                grpSpeed.Visible = false;
+                suffix = "\r";
+            }
+            else if (rbRtrMod7.Checked)
+            {
+                set.rotorModel = 6; rotormod = RotorMod.Yaesu;
+                grpSpeed.Visible = true;
+                suffix = "\r";
+            }
             set.Save();
         }
         // the rotor speed selection has changed
@@ -2804,11 +2857,11 @@ namespace DataDecoder
        #endregion Rotor Events
 
         #region Rotor Methods
+
         // Turn the rotor
         public void TurnRotor(string heading)
         {
-            RotorMod rotormod = new RotorMod();
-//            SerialPort port = new SerialPort(RotorPort);
+            float currentSize;
             switch (rotormod)
             {
                 case RotorMod.AlphaSpid:
@@ -2841,6 +2894,14 @@ namespace DataDecoder
                     break;
                 default: break;
             }
+            Notification.notiMsg = "\r\rStarting Antenna Rotation!";
+            Notification alert = new Notification();
+            currentSize = alert.label1.Font.Size;
+            currentSize += 2.0F;
+            alert.label1.Font = new Font(alert.label1.Font.Name, currentSize,
+            alert.label1.Font.Style, alert.label1.Font.Unit);
+            alert.Show();
+
         }
         // Get DXCC data from the database
         private void GetDXCC(string SQL)
@@ -3182,7 +3243,26 @@ namespace DataDecoder
                             StepCtr = reps; // counter to allow for delay
                         }   // see StepData_DataReceived() for return
                     }
+                    // Execute macro if Mode Change is checked
+                    if (LastMode != sdrMode && chkModeChg.Checked)
+                    {
+//                        Thread.Sleep(1000);
+                        switch (sdrMode)
+                        {
+                            case "1": btnMacro10_Click(null, null); break;   // LSB
+                            case "2": btnMacro10_Click(null, null); break;   // USB
+                            case "3": btnMacro11_Click(null, null); break;   // CWU
+                            case "5": btnMacro10_Click(null, null); break;   // AM
+                            case "6": btnMacro12_Click(null, null); break;   // RTTY (DIGL)
+                            case "7": btnMacro11_Click(null, null); break;   // CWL
+                            case "9": btnMacro12_Click(null, null); break;   // RTTY-R (DIGU)
+                            default: break; 
+                        }
+                    }
+
+
                     lastFreq = logFreq; // save this freq
+                    LastMode = sdrMode; // save this mode
                     freq = Regex.Replace(rawFreq, regex, mask);
                     freq = freq.TrimStart('0');
                     freqLook = rawFreq.Substring(2, 8);
@@ -3633,7 +3713,7 @@ namespace DataDecoder
                         if (LastMode != sdrMode && chkMode.Checked)
                         {
                             Thread.Sleep(50);
-                            LastMode = sdrMode;
+                            // LastMode = sdrMode;
                             AccPort.WriteLine("MD" + sdrMode + ";");
                         }
                         break;
@@ -3654,7 +3734,7 @@ namespace DataDecoder
                         if (LastMode != sdrMode && chkMode.Checked)
                         {
                             Thread.Sleep(50);
-                            LastMode = sdrMode;
+                            // LastMode = sdrMode;
                             switch (sdrMode)
                             {   // Lookup Yaesu Type I equivalent mode
                                 case "1": mode = "00"; break;   // LSB
@@ -3696,7 +3776,7 @@ namespace DataDecoder
                         if (LastMode != sdrMode && chkMode.Checked)
                         {
                             Thread.Sleep(50);
-                            LastMode = sdrMode;
+                            // LastMode = sdrMode;
                             switch (sdrMode)
                             {   // Lookup Yaesu Type II equivalent mode
                                 case "1": mode = "00"; break;   // LSB
@@ -3743,7 +3823,7 @@ namespace DataDecoder
                         if (LastMode != sdrMode && chkMode.Checked)
                         {
                             Thread.Sleep(50);
-                            LastMode = sdrMode;
+                            // LastMode = sdrMode;
                             byte[] outBuf = new byte[8];
                             string cn = "06";
                             switch (sdrMode)
@@ -3773,7 +3853,7 @@ namespace DataDecoder
                         break;
                 }
             }
-        }
+        }// end PortSend
         /// <summary>
         /// Creates a new serial port and rx data available event
         /// </summary>
@@ -3856,7 +3936,7 @@ namespace DataDecoder
 
                 Environment.Exit(0);
             }
-        }
+        }// end GetPortNames
         /// <summary>
         /// Opens the default CAT port.
         /// </summary>
@@ -4065,7 +4145,7 @@ namespace DataDecoder
 
         // The Home SteppIR button was pressed
 //        public static string notiMsg;
-        private void btnHome_Click(object sender, EventArgs e)
+        public void btnHome_Click(object sender, EventArgs e)
         {
             if (chkStep.Checked)
             {
@@ -4084,7 +4164,7 @@ namespace DataDecoder
         }
         // The Calibrate SteppIR button was pressed
         bool bCal = false;
-        private void btnCalib_Click(object sender, EventArgs e)
+        public void btnCalib_Click(object sender, EventArgs e)
         {
             StepData.Write("@A\0\0\0\0\0\0V0\r");
             Thread.Sleep(100);
@@ -4163,6 +4243,7 @@ namespace DataDecoder
         {
             if (rbFwd.Checked)
             {
+                mini.init = false;
                 mini.rbFwd.Checked = true;
                 bFwd = true; b180 = false; bBiDir = false; b34 = false;
                 if (lastFreq != "") StepPortMsg(lastFreq, "00", "31");
@@ -4174,6 +4255,7 @@ namespace DataDecoder
         {
             if (rb180.Checked)
             {
+                mini.init = false;
                 mini.rb180.Checked = true;
                 bFwd = false; b180 = true; bBiDir = false; b34 = false;
                 if (lastFreq != "") StepPortMsg(lastFreq, "40", "31");
@@ -4185,6 +4267,7 @@ namespace DataDecoder
         {
             if (rbBiDir.Checked)
             {
+                mini.init = false;
                 mini.rbBiDir.Checked = true;
                 bFwd = false; b180 = false; bBiDir = true; b34 = false;
                 if (lastFreq != "") StepPortMsg(lastFreq, "80", "31");
@@ -4196,6 +4279,7 @@ namespace DataDecoder
         {
             if (rb34.Checked)
             {
+                mini.init = false;
                 mini.rb34.Checked = true;
                 bFwd = false; b180 = false; bBiDir = false; b34 = true;
                 if (lastFreq != "") StepPortMsg(lastFreq, "20", "31");
@@ -4629,7 +4713,7 @@ namespace DataDecoder
         [DllImport("FTD2XX.dll")]
         static extern unsafe FT_STATUS FT_Write(FT_HANDLE ftHandle, void* lpBuffer, 
                                 UInt32 dwBytesToRead, ref UInt32 lpdwBytesWritten);
-        int s = 0;
+//        int s = 0;
         int sensor;
         int sType;
         int s1Type;
@@ -4875,7 +4959,7 @@ namespace DataDecoder
                     {
 //                        ftStatus = FT_ResetDevice(m_hPort);
                         ftStatus = FT_Purge(m_hPort, FT_PURGE_RX | FT_PURGE_TX);
-                        s = 0;
+//                        s = 0;
                     }
                     else
                     {
@@ -5604,8 +5688,23 @@ namespace DataDecoder
         }
         #endregion ALC Setup
 
+        private void chkModeChg_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkModeChg.Checked) set.ModeChg = true;
+            else set.ModeChg = false;
+            set.Save();
+        }
+
         #endregion ALC
 
+        private void chkOnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkOnTop.Checked)
+            { this.TopMost = true; set.MainOnTop = true; }
+            else
+            { this.TopMost = false; set.MainOnTop = false; }
+            set.Save();
+        }
 
     }
 }
