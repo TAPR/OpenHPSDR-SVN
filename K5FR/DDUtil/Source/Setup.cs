@@ -3227,19 +3227,25 @@ namespace DataDecoder
                     string mode = "";
                     rawFreq = OutBuffer;
                     OutBuffer = "";
+
+                    /*** Write PA Temperature to window ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTS")
-                    {   // this is a Temp cmd, write it to the temp window
+                    {   
                         temp = Convert.ToDouble(rawFreq.Substring(4, 5));
                         WriteTemp();
                         return;
                     }
+
+                    /*** save the band setting ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZBS")
                     {
                         band = rawFreq.Substring(4, 3);
                     }
-                    // send radio's CAT reply back to RCP1
+
+                    /*** send radio's CAT reply back to RCP1 ***/
                     if (logFlag == true && LogPort.IsOpen) LogPort.Write(rawFreq);
-                    // send CAT reply back to RCPn port
+
+                    /*** send CAT reply back to RCPn port ***/
                     if (chkRCP2.Checked)    // RCP2 Enabled
                     {
                         if (!chkRCP2IF.Checked) // if unchecked send any command
@@ -3270,7 +3276,8 @@ namespace DataDecoder
                                 RCP4port.Write(rawFreq);
                         }
                     }
-                    // start checking for specific cat responses
+
+                    /*** start checking for specific cat responses ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "IF00")
                     {   // DDUtil or RCP IF; query
                         xOn = rawFreq.Substring(rawFreq.Length - 10, 1);
@@ -3371,7 +3378,7 @@ namespace DataDecoder
             }
         }//CATRxEvent
 
-        // The RCP1 CAT port has received data
+        // The RCP1 CAT port (logger) has received data
         string sBuf1 = "";
         protected void OnReceive(object sender, SerialDataReceivedEventArgs e)
         {
@@ -3435,96 +3442,6 @@ namespace DataDecoder
                 }
             }
         }
-        // RCP2 Rotor port has received data
-        string sRtr2Buf = "";
-        private void RCP2Rotor_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            if (chkRotorEnab.Checked)    // Rotor must be enabled
-            {
-                try
-                {
-                    string sCmd = "";
-                    SerialPort port = (SerialPort)sender;
-                    byte[] data = new byte[port.BytesToRead];
-                    port.Read(data, 0, data.Length);
-                    sRtr2Buf += AE.GetString(data, 0, data.Length);
-                    Regex rex = new Regex(".*?" + suffix);
-                    for (Match m = rex.Match(sRtr2Buf); m.Success; m = m.NextMatch())
-                    {   //loop thru the buffer and find matches
-                        sCmd = m.Value;
-                        sRtr2Buf = sRtr2Buf.Replace(m.Value, "");//remove the match from the buffer
-                        RotorPort.Write(sCmd);
-                        Thread.Sleep(50);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    bool bReturnLog = false;
-                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-                }
-            }
-        }
-        // RCP3 Rotor port has received data
-        string sRtr3Buf = "";
-        private void RCP3Rotor_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            if (chkRotorEnab.Checked)    // Rotor must be enabled
-            {
-                try
-                {
-                    string sCmd = "";
-                    SerialPort port = (SerialPort)sender;
-                    byte[] data = new byte[port.BytesToRead];
-                    port.Read(data, 0, data.Length);
-                    sRtr3Buf += AE.GetString(data, 0, data.Length);
-                    Regex rex = new Regex(".*?" + suffix);
-                    for (Match m = rex.Match(sRtr3Buf); m.Success; m = m.NextMatch())
-                    {   //loop thru the buffer and find matches
-                        sCmd = m.Value;
-                        sRtr3Buf = sRtr3Buf.Replace(m.Value, "");//remove the match from the buffer
-                        RotorPort.Write(sCmd);
-                        Thread.Sleep(50);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    bool bReturnLog = false;
-                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-                }
-            }
-        }
-        // RCP4 Rotor port has received data
-        string sRtr4Buf = "";
-        private void RCP4Rotor_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            if (chkRotorEnab.Checked)    // Rotor must be enabled
-            {
-                try
-                {
-                    string sCmd = "";
-                    SerialPort port = (SerialPort)sender;
-                    byte[] data = new byte[port.BytesToRead];
-                    port.Read(data, 0, data.Length);
-                    sRtr4Buf += AE.GetString(data, 0, data.Length);
-                    Regex rex = new Regex(".*?" + suffix);
-                    for (Match m = rex.Match(sRtr4Buf); m.Success; m = m.NextMatch())
-                    {   //loop thru the buffer and find matches
-                        sCmd = m.Value;
-                        sRtr4Buf = sRtr4Buf.Replace(m.Value, "");//remove the match from the buffer
-                        RotorPort.Write(sCmd);
-                        Thread.Sleep(50);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    bool bReturnLog = false;
-                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-                }
-            }
-        }
         // RCP2 CAT port has received
         string sBuf2 = "";
         private void RCP2port_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -3546,6 +3463,36 @@ namespace DataDecoder
                         if (chkRCP2DisPol.Checked && sCmd.Length <= 3)
                             break;
                         WriteToPort(sCmd, iSleep);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    bool bReturnLog = false;
+                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                }
+            }
+        }
+        // RCP2 Rotor port has received data
+        string sRtr2Buf = "";
+        private void RCP2Rotor_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkRotorEnab.Checked)    // Rotor must be enabled
+            {
+                try
+                {
+                    string sCmd = "";
+                    SerialPort port = (SerialPort)sender;
+                    byte[] data = new byte[port.BytesToRead];
+                    port.Read(data, 0, data.Length);
+                    sRtr2Buf += AE.GetString(data, 0, data.Length);
+                    Regex rex = new Regex(".*?" + suffix);
+                    for (Match m = rex.Match(sRtr2Buf); m.Success; m = m.NextMatch())
+                    {   //loop thru the buffer and find matches
+                        sCmd = m.Value;
+                        sRtr2Buf = sRtr2Buf.Replace(m.Value, "");//remove the match from the buffer
+                        RotorPort.Write(sCmd);
+                        Thread.Sleep(50);
                     }
                 }
                 catch (Exception ex)
@@ -3587,6 +3534,36 @@ namespace DataDecoder
                 }
             }
         }
+        // RCP3 Rotor port has received data
+        string sRtr3Buf = "";
+        private void RCP3Rotor_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkRotorEnab.Checked)    // Rotor must be enabled
+            {
+                try
+                {
+                    string sCmd = "";
+                    SerialPort port = (SerialPort)sender;
+                    byte[] data = new byte[port.BytesToRead];
+                    port.Read(data, 0, data.Length);
+                    sRtr3Buf += AE.GetString(data, 0, data.Length);
+                    Regex rex = new Regex(".*?" + suffix);
+                    for (Match m = rex.Match(sRtr3Buf); m.Success; m = m.NextMatch())
+                    {   //loop thru the buffer and find matches
+                        sCmd = m.Value;
+                        sRtr3Buf = sRtr3Buf.Replace(m.Value, "");//remove the match from the buffer
+                        RotorPort.Write(sCmd);
+                        Thread.Sleep(50);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    bool bReturnLog = false;
+                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                }
+            }
+        }
         // RCP4 CAT port has received data
         string sBuf4 = "";
         private void RCP4port_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -3608,6 +3585,36 @@ namespace DataDecoder
                         if (chkRCP2DisPol.Checked && sCmd.Length <= 3)
                             break;
                         WriteToPort(sCmd, iSleep);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    bool bReturnLog = false;
+                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                }
+            }
+        }
+        // RCP4 Rotor port has received data
+        string sRtr4Buf = "";
+        private void RCP4Rotor_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkRotorEnab.Checked)    // Rotor must be enabled
+            {
+                try
+                {
+                    string sCmd = "";
+                    SerialPort port = (SerialPort)sender;
+                    byte[] data = new byte[port.BytesToRead];
+                    port.Read(data, 0, data.Length);
+                    sRtr4Buf += AE.GetString(data, 0, data.Length);
+                    Regex rex = new Regex(".*?" + suffix);
+                    for (Match m = rex.Match(sRtr4Buf); m.Success; m = m.NextMatch())
+                    {   //loop thru the buffer and find matches
+                        sCmd = m.Value;
+                        sRtr4Buf = sRtr4Buf.Replace(m.Value, "");//remove the match from the buffer
+                        RotorPort.Write(sCmd);
+                        Thread.Sleep(50);
                     }
                 }
                 catch (Exception ex)
