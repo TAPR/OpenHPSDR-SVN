@@ -511,7 +511,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DataDecoder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:DataDecoder, Version=1.6.3.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_580B1E23ECFE46D287FF3F057368526B"
@@ -1036,14 +1036,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{AB2412E4-91EF-4552-90E0-FD3A654DADDC}"
-        "PackageCode" = "8:{AF99DE4A-2367-42AB-BCFF-CDC713FD9679}"
+        "ProductCode" = "8:{680F0716-67BA-45AC-9062-3929C9E99BC0}"
+        "PackageCode" = "8:{1966F245-9191-4EF7-B75C-1A1DC4EB585E}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.6.302"
+        "ProductVersion" = "8:1.6.303"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
