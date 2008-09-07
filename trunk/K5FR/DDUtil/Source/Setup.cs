@@ -3326,16 +3326,7 @@ namespace DataDecoder
                     }
                     logFreq = rawFreq.Substring(2, 11);
                     PortSend(logFreq);  // send freq. to PLs
-                    // If SteppIR enabled check for activity
-                    if (chkStep.Checked)
-                    {   // see if freq has changed
-                        if (String.Compare(lastFreq, logFreq) != 0)
-                        {   // yes go poll SteppIR controller
-                            StepData.Write("?A\r");
-                            StepTimer.Enabled = true;
-                            StepCtr = reps; // counter to allow for delay
-                        }   // see StepData_DataReceived() for return
-                    }
+
                     // Execute macro if Mode Change is checked
                     if (LastMode != sdrMode && chkModeChg.Checked)
                     {
@@ -3353,6 +3344,16 @@ namespace DataDecoder
                         }
                     }
 
+                    // If SteppIR enabled check for activity
+                    if (chkStep.Checked)
+                    {   // see if freq has changed
+                        if (String.Compare(lastFreq, logFreq) != 0)
+                        {   // yes go poll SteppIR controller
+                            StepData.Write("?A\r");
+                            StepTimer.Enabled = true;
+                            StepCtr = reps; // counter to allow for delay
+                        }   // see StepData_DataReceived() for return
+                    }
 
                     lastFreq = logFreq; // save this freq
                     LastMode = sdrMode; // save this mode
