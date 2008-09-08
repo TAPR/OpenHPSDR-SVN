@@ -368,56 +368,87 @@ namespace DataDecoder
             txtRadNum.Text = set.CIVaddr;
             cboRadData.SelectedIndex = set.RadData;
 
-            // set Radio Serial port to the last port used
-            cboCAT.SelectedIndex = set.RadioPort;
-
+            // set Radio Serial port to the last one used
+            try { cboCAT.SelectedIndex = set.RadioPort; }
+            catch { cboCAT.SelectedIndex = -1; BadPort("Radio CAT"); }
             txtInv.Text = Convert.ToString(pollInt);
-            txtLPint.Text = Convert.ToString(set.LPint);
+
             txtProfLoc.Text = set.ProfLoc;
             mini.PFfile = set.ProfLoc;
 
-            // set Acc Serial (passive listener) port to the last port used
-            cboSerAcc.SelectedIndex = set.AccPort;
+            // set Acc Serial (passive listener) port to the last one used
+            try { cboSerAcc.SelectedIndex = set.AccPort; }
+            catch { cboSerAcc.SelectedIndex = -1; BadPort("Passive Listener"); }
+
             // set Follow Radio port
-            cboRadio.SelectedIndex = set.followRadio;
+            try { cboRadio.SelectedIndex = set.followRadio; }
+            catch { cboRadio.SelectedIndex = -1; BadPort("Follow Radio"); }
+
             chkFollow.Checked = set.followChk;
             if (chkFollow.Checked == false)
             { cboRadio.Enabled = false; chkMode.Enabled = false; }
             else
             { cboRadio.Enabled = true; chkMode.Enabled = true; }
 
-            // set Logger Serial (radio control) port to the last port used
-            cboLogPort.SelectedIndex = set.LogPort;
-            // set LP100 Serial port to the last port used
-            cboLPport.SelectedIndex = set.LPportNum;
-            chkLPenab.Checked = set.LPenab;
+            // set Logger Serial (RCP1) port to the last one used
+            try { cboLogPort.SelectedIndex = set.LogPort; }
+            catch { cboLogPort.SelectedIndex = -1; BadPort("RCP1 CAT"); }
 
-            switch (set.rb100)
+            // set LP100 Serial port to the last one used
+            try { cboLPport.SelectedIndex = set.LPportNum; }
+            catch { cboLPport.SelectedIndex = -1; BadPort("LP-100"); }
+            txtLPint.Text = Convert.ToString(set.LPint);
+            chkLPenab.Checked = set.LPenab;
+            switch (set.rb100)  // which model?
             {
                 case 1: rb100.Checked = true; break;
                 case 2: rb100A.Checked = true; break;
                 default: break;
             }
 
-            // set StepData Serial port to the last port used
-            cboStep.SelectedIndex = set.StepPortNum;
+            // set SteppIR Data Serial port to the last one used
+            try { cboStep.SelectedIndex = set.StepPortNum; }
+            catch { cboStep.SelectedIndex = -1; BadPort("SteppIR Data"); }
             chkStep.Checked = set.StepEnab;
             txtStepInv.Text = set.StepInv;
             cboStepCom.SelectedIndex = set.StepCom;
-            // Set RCP2 serial port to last port used
-            cboRCP2.SelectedIndex = set.cboRCP2;
+
+            // Set RCP2 serial port to last one used
+            try { cboRCP2.SelectedIndex = set.cboRCP2; }
+            catch { cboRCP2.SelectedIndex = -1; BadPort("RCP2 CAT"); }
             chkRCP2.Checked = set.chkRCP2;
-            // Set RCP3 serial port to last port used
-            cboRCP3.SelectedIndex = set.cboRCP3;
+
+            // Set RCP3 serial port to last one used
+            try { cboRCP3.SelectedIndex = set.cboRCP3; }
+            catch { cboRCP3.SelectedIndex = -1; BadPort("RCP3 CAT"); }
             chkRCP3.Checked = set.chkRCP3;
-            // Set RCP4 serial port to last port used
-            cboRCP4.SelectedIndex = set.cboRCP4; 
+
+            // Set RCP4 serial port to last one used
+            try { cboRCP4.SelectedIndex = set.cboRCP4; }
+            catch { cboRCP4.SelectedIndex = -1; BadPort("RCP4 CAT"); }
             chkRCP4.Checked = set.chkRCP4;
+
             // Set PW1 serial port to last port used
-            cboPW1.SelectedIndex = set.cboPW1; 
+            try { cboPW1.SelectedIndex = set.cboPW1; }
+            catch { cboPW1.SelectedIndex = -1; BadPort("PW1 CAT"); }
             chkPW1.Checked = set.chkPW1;
             chkDisBcast.Checked = set.chkPW1db;
             txtPW1ta.Text = set.txtPW1ta;
+            // Set RCP1 Rotor port to last one used
+            try { cboRCP1Rotor.SelectedIndex = set.RCP1RotorPort; }
+            catch { cboRCP1Rotor.SelectedIndex = -1; BadPort("RCP1 Rotor"); }
+
+            // Set RCP2 Rotor port to last one used
+            try { cboRCP2Rotor.SelectedIndex = set.RCP2RotorPort; }
+            catch { cboRCP2Rotor.SelectedIndex = -1; BadPort("RCP2 Rotor"); }
+
+            // Set RCP3 Rotor port to last one used
+            try { cboRCP3Rotor.SelectedIndex = set.RCP3RotorPort; }
+            catch { cboRCP3Rotor.SelectedIndex = -1; BadPort("RCP3 Rotor"); }
+            
+            // Set RCP4 Rotor port to last one used
+            try { cboRCP4Rotor.SelectedIndex = set.RCP4RotorPort; }
+            catch { cboRCP4Rotor.SelectedIndex = -1; BadPort("RCP4 Rotor"); }
 
             mSplashScreen.SetProgress("Initializing Features", 0.8);
 
@@ -811,10 +842,10 @@ namespace DataDecoder
                 closing = false;
                 tabControl.SelectedIndex = set.TabOpen;
                 cboPrefix.SelectedIndex = RandomNumber(0, 300);
-                cboRCP1Rotor.SelectedIndex = set.RCP1RotorPort;
-                cboRCP2Rotor.SelectedIndex = set.RCP2RotorPort;
-                cboRCP3Rotor.SelectedIndex = set.RCP3RotorPort;
-                cboRCP4Rotor.SelectedIndex = set.RCP4RotorPort;
+                //cboRCP1Rotor.SelectedIndex = set.RCP1RotorPort;
+                //cboRCP2Rotor.SelectedIndex = set.RCP2RotorPort;
+                //cboRCP3Rotor.SelectedIndex = set.RCP3RotorPort;
+                //cboRCP4Rotor.SelectedIndex = set.RCP4RotorPort;
                 // Kill the splash screen
                 if (mSplashScreen != null) mSplashScreen.Hide();
 
@@ -1697,6 +1728,15 @@ namespace DataDecoder
 
         #region Helper Methods
 
+        void BadPort(string port)
+        {
+            Notification alert = new Notification();
+            Notification.notiMsg =
+            "The last used port for " + port + " could not be found!\r\r" +
+            "Port will be set to empty.\r";
+            alert.Show();
+        }
+
         // Show the Mini window
         private void ShowMini()
         {
@@ -1902,12 +1942,6 @@ namespace DataDecoder
                     LPportMsg = m.Value;
                     sLPBuf = sLPBuf.Replace(m.Value, "");//remove the match from the buffer
 
-
-
-                    //SerialPort LPportMsgs = (SerialPort)sender;
-                    //string LPportMsg = LPportMsgs.ReadExisting();
-                    //if (LPportMsg.Length == 43)
-                    //{
                     string fwd = LPportMsg.Substring(1, 7);
                     string alarm = LPportMsg.Substring(21, 1);
                     if (alarm == "0") SetAlarm("Off");
@@ -2590,14 +2624,13 @@ namespace DataDecoder
                     break;
                 default: break;
             }
-            Notification.notiMsg = "Stopping Antenna Rotation!";
+            Notification.notiMsg = "Stopping Antenna Rotation!\r";
             Notification alert = new Notification();
             currentSize = alert.label1.Font.Size;
             currentSize += 2.0F;
             alert.label1.Font = new Font(alert.label1.Font.Name, currentSize,
             alert.label1.Font.Style, alert.label1.Font.Unit);
             alert.Show();
-
         }
         // The Short Path Rotor button has been pressed
         string rtrSpd = "";
@@ -2980,7 +3013,7 @@ namespace DataDecoder
                     break;
                 default: break;
             }
-            Notification.notiMsg = "Starting Antenna Rotation!";
+            Notification.notiMsg = "Starting Antenna Rotation!\r";
             Notification alert = new Notification();
             currentSize = alert.label1.Font.Size;
             currentSize += 2.0F;
@@ -3156,7 +3189,8 @@ namespace DataDecoder
             txtLat.Text = set.Latitude;
             txtLong.Text = set.Longitude;
             txtGrid.Text = set.Grid;
-            cboRotorPort.SelectedIndex = set.RotorPort;
+            try { cboRotorPort.SelectedIndex = set.RotorPort; }
+            catch { cboRotorPort.SelectedIndex = -1; BadPort("Rotor"); }
             cboRotorCom.SelectedIndex = set.RotorCom;
             chkRotorEnab.Checked = set.RotorEnab;
             switch (set.RotorSpeed)
