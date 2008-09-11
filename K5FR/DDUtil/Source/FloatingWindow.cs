@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
+/* * * see CreateWindowOnly() to set window position * * */
+
 namespace Floater
 {
 	/// <summary>
@@ -283,7 +285,7 @@ namespace Floater
             {
                 nY = screen1.Bounds.Height - this._size.Height;
             }
-            this._location = new Point(nX, nY);
+            this._location = new Point(10, 10); // use (nX, nY) to center
             Size size1 = this._size;
             Point point1 = this._location;
             params1.X = nX;

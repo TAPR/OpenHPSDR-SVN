@@ -12,11 +12,10 @@ namespace Logger
 	/// </summary>
 	public class ErrorLog
 	{
- //       Setup setup = new Setup();
         protected static string strLogFilePath	= string.Empty;
 		private static StreamWriter sw			= null;
 		/// <summary>
-		/// Setting LogFile path. If the logfile path is null then it will update error info into LogFile.txt under
+		/// Setting LogFile path. If the logfile path is null then it will update error info into ErrorLog.txt under
 		/// application directory.
 		/// </summary>
 		public static string LogFilePath
@@ -161,8 +160,8 @@ private static bool GetValueFromXml(string strXmlPath)
 }
 
 /// <summary>
-/// If the LogFile path is empty then, it will write the log entry to LogFile.txt under application directory.
-/// If the LogFile.txt is not availble it will create it
+/// If the LogFile path is empty then, it will write the log entry to ErrorLog.txt under application directory.
+/// If the ErrorLog.txt is not availble it will create it
 /// If the Log File path is not empty but the file is not availble it will create it.
 /// </summary>
 /// <param name="objException"></param>
@@ -172,7 +171,7 @@ private static bool CustomErrorRoutine(Exception objException)
 	string strPathName	= string.Empty ;
 	if (strLogFilePath.Equals(string.Empty))
 	{
-		//Get Default log file path "LogFile.txt"
+		//Get Default log file path "ErrorLog.txt"
 		strPathName	= GetLogFilePath();
 	}
 	else
@@ -214,8 +213,8 @@ private static bool WriteErrorLog(string strPathName,Exception  objException)
 		sw = new StreamWriter(strPathName,true);
 		sw.WriteLine("Source		: " + objException.Source.ToString().Trim());  
 		sw.WriteLine("Method		: " + objException.TargetSite.Name.ToString());
-		sw.WriteLine("Date		: " + DateTime.Now.ToLongTimeString());
-		sw.WriteLine("Time		: " + DateTime.Now.ToShortDateString());
+		sw.WriteLine("Time		: " + DateTime.Now.ToLongTimeString());
+		sw.WriteLine("Date		: " + DateTime.Now.ToShortDateString());
 		sw.WriteLine("Computer	: " + Dns.GetHostName().ToString()); 
 		sw.WriteLine("Error		: " +  objException.Message.ToString().Trim());
 		sw.WriteLine("Stack Trace	: " + objException.StackTrace.ToString().Trim());  
@@ -244,7 +243,7 @@ private static string GetLogFilePath()
 		string baseDir =  AppDomain.CurrentDomain.BaseDirectory + AppDomain.CurrentDomain.RelativeSearchPath;      
 
 		// search the file below the current directory
-		string retFilePath = baseDir + "//" + "LogFile.txt";
+		string retFilePath = baseDir + "//" + "ErrorLog.txt";
 
 		// if exists, return the path
 		if (File.Exists(retFilePath) == true)
