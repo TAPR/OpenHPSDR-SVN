@@ -45,6 +45,6 @@
   </macro>
   <macro>
     <Button>Digital</Button>
-    <Command>ZZFI10;ZZMT02;ZZTP00;ZZPC050;</Command>
+    <Command>ZZFI10;ZZMT02;ZZTP00;ZZPC075;</Command>
   </macro>
 </macroData>

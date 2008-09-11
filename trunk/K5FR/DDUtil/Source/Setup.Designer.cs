@@ -158,6 +158,8 @@ namespace DataDecoder
             this.label15 = new System.Windows.Forms.Label();
             this.txtProfLoc = new System.Windows.Forms.TextBox();
             this.grpLP = new System.Windows.Forms.GroupBox();
+            this.rb100A = new System.Windows.Forms.RadioButton();
+            this.rb100 = new System.Windows.Forms.RadioButton();
             this.lblPower = new System.Windows.Forms.Label();
             this.lblFast = new System.Windows.Forms.Label();
             this.lblAlarm = new System.Windows.Forms.Label();
@@ -356,6 +358,7 @@ namespace DataDecoder
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableErrorLoggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showMiniWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dDutilHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -379,8 +382,6 @@ namespace DataDecoder
             this.RCP4Rotor = new System.IO.Ports.SerialPort(this.components);
             this.lblAvg = new System.Windows.Forms.Label();
             this.WN2Timer = new System.Windows.Forms.Timer(this.components);
-            this.rb100A = new System.Windows.Forms.RadioButton();
-            this.rb100 = new System.Windows.Forms.RadioButton();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -2080,6 +2081,38 @@ namespace DataDecoder
             this.grpLP.TabIndex = 47;
             this.grpLP.TabStop = false;
             this.grpLP.Text = "LP-100";
+            // 
+            // rb100A
+            // 
+            this.rb100A.AutoSize = true;
+            this.rb100A.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rb100A.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rb100A.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
+            this.rb100A.ForeColor = System.Drawing.Color.Navy;
+            this.rb100A.Location = new System.Drawing.Point(95, 99);
+            this.rb100A.Name = "rb100A";
+            this.rb100A.Size = new System.Drawing.Size(60, 16);
+            this.rb100A.TabIndex = 84;
+            this.rb100A.Text = "  LP100A";
+            this.toolTip1.SetToolTip(this.rb100A, "Selects coupler type");
+            this.rb100A.UseVisualStyleBackColor = true;
+            this.rb100A.CheckedChanged += new System.EventHandler(this.grpLP_CheckChanged);
+            // 
+            // rb100
+            // 
+            this.rb100.AutoSize = true;
+            this.rb100.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rb100.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rb100.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
+            this.rb100.ForeColor = System.Drawing.Color.Navy;
+            this.rb100.Location = new System.Drawing.Point(95, 82);
+            this.rb100.Name = "rb100";
+            this.rb100.Size = new System.Drawing.Size(53, 16);
+            this.rb100.TabIndex = 83;
+            this.rb100.Text = "  LP100";
+            this.toolTip1.SetToolTip(this.rb100, "Selects coupler type");
+            this.rb100.UseVisualStyleBackColor = true;
+            this.rb100.CheckedChanged += new System.EventHandler(this.grpLP_CheckChanged);
             // 
             // lblPower
             // 
@@ -4702,7 +4735,7 @@ namespace DataDecoder
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -4711,6 +4744,7 @@ namespace DataDecoder
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.enableErrorLoggingToolStripMenuItem,
             this.openErrorLogToolStripMenuItem,
+            this.clearErrorLogToolStripMenuItem,
             this.showMiniWindowToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -4729,6 +4763,13 @@ namespace DataDecoder
             this.openErrorLogToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.openErrorLogToolStripMenuItem.Text = "Open Error Log";
             this.openErrorLogToolStripMenuItem.Click += new System.EventHandler(this.openErrorLogToolStripMenuItem_Click);
+            // 
+            // clearErrorLogToolStripMenuItem
+            // 
+            this.clearErrorLogToolStripMenuItem.Name = "clearErrorLogToolStripMenuItem";
+            this.clearErrorLogToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.clearErrorLogToolStripMenuItem.Text = "Clear Error Log";
+            this.clearErrorLogToolStripMenuItem.Click += new System.EventHandler(this.clearErrorLogToolStripMenuItem_Click);
             // 
             // showMiniWindowToolStripMenuItem
             // 
@@ -4922,38 +4963,6 @@ namespace DataDecoder
             // WN2Timer
             // 
             this.WN2Timer.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // rb100A
-            // 
-            this.rb100A.AutoSize = true;
-            this.rb100A.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.rb100A.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.rb100A.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
-            this.rb100A.ForeColor = System.Drawing.Color.Navy;
-            this.rb100A.Location = new System.Drawing.Point(95, 99);
-            this.rb100A.Name = "rb100A";
-            this.rb100A.Size = new System.Drawing.Size(60, 16);
-            this.rb100A.TabIndex = 84;
-            this.rb100A.Text = "  LP100A";
-            this.toolTip1.SetToolTip(this.rb100A, "Selects coupler type");
-            this.rb100A.UseVisualStyleBackColor = true;
-            this.rb100A.CheckedChanged += new System.EventHandler(this.grpLP_CheckChanged);
-            // 
-            // rb100
-            // 
-            this.rb100.AutoSize = true;
-            this.rb100.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.rb100.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.rb100.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
-            this.rb100.ForeColor = System.Drawing.Color.Navy;
-            this.rb100.Location = new System.Drawing.Point(95, 82);
-            this.rb100.Name = "rb100";
-            this.rb100.Size = new System.Drawing.Size(53, 16);
-            this.rb100.TabIndex = 83;
-            this.rb100.Text = "  LP100";
-            this.toolTip1.SetToolTip(this.rb100, "Selects coupler type");
-            this.rb100.UseVisualStyleBackColor = true;
-            this.rb100.CheckedChanged += new System.EventHandler(this.grpLP_CheckChanged);
             // 
             // Setup
             // 
@@ -5417,6 +5426,7 @@ namespace DataDecoder
         private System.Windows.Forms.CheckBox chkOnTop;
         private System.Windows.Forms.RadioButton rb100A;
         private System.Windows.Forms.RadioButton rb100;
+        private System.Windows.Forms.ToolStripMenuItem clearErrorLogToolStripMenuItem;
 
     }
 }

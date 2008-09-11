@@ -484,6 +484,7 @@ namespace DataDecoder
                 }
                 btnPortNum.Visible = false;
                 lblPortBtn.Visible = false;
+//                throw new Exception("Put something here...");
             }
             catch (Exception ex)
             {
@@ -2441,8 +2442,16 @@ namespace DataDecoder
         // Main Menu|Tools|Open Error Log
         private void openErrorLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("ErrorLog.txt");
+            try { Process.Start("ErrorLog.txt"); }
+            catch { File.CreateText("ErrorLog.txt"); Process.Start("ErrorLog.txt"); }
         }
+        // Main Menu|Tools|Clear Error Log
+        private void clearErrorLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            File.Delete("ErrorLog.txt");
+            File.CreateText("ErrorLog.txt");
+        }
+
         // Main Menu|Tools|Show Mini Window
         private void showMiniWindowToolStripMenuItem_Click(object sender, EventArgs e)
         {
