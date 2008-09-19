@@ -321,6 +321,7 @@ namespace DataDecoder
             this.label51 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.txtLong = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.AccPort = new System.IO.Ports.SerialPort(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -364,6 +365,7 @@ namespace DataDecoder
             this.dDutilHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onLineHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setupWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.webSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -3550,9 +3552,9 @@ namespace DataDecoder
             // lblSP
             // 
             this.lblSP.ForeColor = System.Drawing.Color.Green;
-            this.lblSP.Location = new System.Drawing.Point(11, 80);
+            this.lblSP.Location = new System.Drawing.Point(5, 80);
             this.lblSP.Name = "lblSP";
-            this.lblSP.Size = new System.Drawing.Size(28, 13);
+            this.lblSP.Size = new System.Drawing.Size(40, 13);
             this.lblSP.TabIndex = 5;
             this.lblSP.Tag = "";
             this.lblSP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -4101,7 +4103,8 @@ namespace DataDecoder
             "2400 8-N-1",
             "2400 8-N-2",
             "1200 8-N-1",
-            "1200 8-N-2"});
+            "1200 8-N-2",
+            "600 8-N-1"});
             this.cboRotorCom.Location = new System.Drawing.Point(10, 90);
             this.cboRotorCom.Name = "cboRotorCom";
             this.cboRotorCom.Size = new System.Drawing.Size(93, 21);
@@ -4250,10 +4253,10 @@ namespace DataDecoder
             this.rbRtrMod5.ForeColor = System.Drawing.Color.Navy;
             this.rbRtrMod5.Location = new System.Drawing.Point(10, 100);
             this.rbRtrMod5.Name = "rbRtrMod5";
-            this.rbRtrMod5.Size = new System.Drawing.Size(93, 17);
+            this.rbRtrMod5.Size = new System.Drawing.Size(96, 17);
             this.rbRtrMod5.TabIndex = 4;
             this.rbRtrMod5.TabStop = true;
-            this.rbRtrMod5.Text = "M2RC2800PX";
+            this.rbRtrMod5.Text = "M2 RC2800PX";
             this.toolTip1.SetToolTip(this.rbRtrMod5, "Select to enable this Orion rotor");
             this.rbRtrMod5.UseVisualStyleBackColor = true;
             this.rbRtrMod5.CheckedChanged += new System.EventHandler(this.grpModel_CheckedChanged);
@@ -4265,10 +4268,10 @@ namespace DataDecoder
             this.rbRtrMod4.ForeColor = System.Drawing.Color.Navy;
             this.rbRtrMod4.Location = new System.Drawing.Point(10, 80);
             this.rbRtrMod4.Name = "rbRtrMod4";
-            this.rbRtrMod4.Size = new System.Drawing.Size(93, 17);
+            this.rbRtrMod4.Size = new System.Drawing.Size(96, 17);
             this.rbRtrMod4.TabIndex = 3;
             this.rbRtrMod4.TabStop = true;
-            this.rbRtrMod4.Text = "M2RC2800PA";
+            this.rbRtrMod4.Text = "M2 RC2800PA";
             this.toolTip1.SetToolTip(this.rbRtrMod4, "Select to enable this Orion rotor");
             this.rbRtrMod4.UseVisualStyleBackColor = true;
             this.rbRtrMod4.CheckedChanged += new System.EventHandler(this.grpModel_CheckedChanged);
@@ -4280,11 +4283,11 @@ namespace DataDecoder
             this.rbRtrMod3.ForeColor = System.Drawing.Color.Navy;
             this.rbRtrMod3.Location = new System.Drawing.Point(10, 60);
             this.rbRtrMod3.Name = "rbRtrMod3";
-            this.rbRtrMod3.Size = new System.Drawing.Size(60, 17);
+            this.rbRtrMod3.Size = new System.Drawing.Size(85, 17);
             this.rbRtrMod3.TabIndex = 2;
             this.rbRtrMod3.TabStop = true;
-            this.rbRtrMod3.Text = "HyGain";
-            this.toolTip1.SetToolTip(this.rbRtrMod3, "Select to enable HyGain rotors");
+            this.rbRtrMod3.Text = "HyGain / EZ";
+            this.toolTip1.SetToolTip(this.rbRtrMod3, "Select to enable HyGain DCU-1 or EZ rotor controllers.");
             this.rbRtrMod3.UseVisualStyleBackColor = true;
             this.rbRtrMod3.CheckedChanged += new System.EventHandler(this.grpModel_CheckedChanged);
             // 
@@ -4425,6 +4428,21 @@ namespace DataDecoder
             this.txtLong.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtLong, "Home station longitude");
             this.txtLong.TextChanged += new System.EventHandler(this.txtLong_TextChanged);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Blue;
+            this.button1.Location = new System.Drawing.Point(334, 1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(36, 19);
+            this.button1.TabIndex = 40;
+            this.button1.Text = "Test";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.button1, "Click to turn rotor to short path heading (Ctrl+Click to stop rotor)");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // openFileDialog1
             // 
@@ -4735,7 +4753,7 @@ namespace DataDecoder
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -4785,6 +4803,7 @@ namespace DataDecoder
             this.dDutilHelpToolStripMenuItem,
             this.onLineHelpToolStripMenuItem,
             this.checkForUpdatesToolStripMenuItem,
+            this.setupWizardToolStripMenuItem,
             this.webSiteToolStripMenuItem,
             this.aboutToolStripMenuItem1});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
@@ -4811,6 +4830,13 @@ namespace DataDecoder
             this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
+            // 
+            // setupWizardToolStripMenuItem
+            // 
+            this.setupWizardToolStripMenuItem.Name = "setupWizardToolStripMenuItem";
+            this.setupWizardToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.setupWizardToolStripMenuItem.Text = "Setup Wizard";
+            this.setupWizardToolStripMenuItem.Click += new System.EventHandler(this.setupWizardToolStripMenuItem_Click);
             // 
             // webSiteToolStripMenuItem
             // 
@@ -4923,6 +4949,7 @@ namespace DataDecoder
             this.RotorPort.ReadTimeout = 500;
             this.RotorPort.RtsEnable = true;
             this.RotorPort.WriteTimeout = 500;
+            this.RotorPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RotorPort_DataReceived);
             // 
             // RCP1Rotor
             // 
@@ -4971,6 +4998,7 @@ namespace DataDecoder
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(422, 414);
             this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblAnt);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lblAvg);
@@ -5247,7 +5275,6 @@ namespace DataDecoder
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TabPage tabRotor;
         private System.Windows.Forms.TextBox txtLP;
-        private System.Windows.Forms.TextBox txtSP;
         private System.Windows.Forms.Button btnLP;
         private System.Windows.Forms.Button btnSP;
         private System.Windows.Forms.GroupBox groupBox8;
@@ -5427,6 +5454,9 @@ namespace DataDecoder
         private System.Windows.Forms.RadioButton rb100A;
         private System.Windows.Forms.RadioButton rb100;
         private System.Windows.Forms.ToolStripMenuItem clearErrorLogToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.TextBox txtSP;
+        private System.Windows.Forms.ToolStripMenuItem setupWizardToolStripMenuItem;
 
     }
 }

@@ -107,7 +107,7 @@ namespace DataDecoder
         string str = "";
         string vfo = "";
         string band = "";
-        public static string ver = "1.6.3";
+        public static string ver = "1.6.4";
         public static int errCtr = 0;
         //public static int x;    // screen pos left
         //public static int y;    // screen pos right
@@ -540,6 +540,24 @@ namespace DataDecoder
 
         #region Delegates
 
+        // Update the Rotor SP window
+        delegate void SetRotorCallback(string text);
+        private void SetRotor(string text)
+        {
+            if (!closing)
+            {
+                if (this.lblSP.InvokeRequired)
+                {
+                    SetRotorCallback d = new SetRotorCallback(SetRotor);
+                    this.Invoke(d, new object[] { text });
+                }
+                else
+                {
+                    this.lblSP.Text = text;
+                    mini.txtSP.Text = text;
+                }
+            }
+        }
         // Show/Hide "Antenna Moving" caption
         delegate void AntCallback(bool bCmd);
         private void ShowAnt(bool bCmd)
@@ -843,10 +861,6 @@ namespace DataDecoder
                 closing = false;
                 tabControl.SelectedIndex = set.TabOpen;
                 cboPrefix.SelectedIndex = RandomNumber(0, 300);
-                //cboRCP1Rotor.SelectedIndex = set.RCP1RotorPort;
-                //cboRCP2Rotor.SelectedIndex = set.RCP2RotorPort;
-                //cboRCP3Rotor.SelectedIndex = set.RCP3RotorPort;
-                //cboRCP4Rotor.SelectedIndex = set.RCP4RotorPort;
                 // Kill the splash screen
                 if (mSplashScreen != null) mSplashScreen.Hide();
 
@@ -871,7 +885,10 @@ namespace DataDecoder
                 TextReader tr = new StreamReader(fileName);
                 string tempStr = tr.ReadLine();
                 tr.Close();
-                if (tempStr != ver) // display alert message if new ver avail
+                string newVer = tempStr.Substring(0, 1) + tempStr.Substring(2, 1) + tempStr.Substring(4, 1);
+                string oldVer = ver.Substring(0, 1) + ver.Substring(2, 1) + ver.Substring(4, 1);
+                // display alert message if new version is avail
+                if (Convert.ToInt32(newVer) > Convert.ToInt32(oldVer)) 
                 {
                     Notification alert = new Notification();
                     Notification.notiMsg =
@@ -879,7 +896,6 @@ namespace DataDecoder
                     "See Main form Help menu or web site for info.\r";
                     alert.Show();
                 }
-
             }
             catch
             {
@@ -903,6 +919,8 @@ namespace DataDecoder
                 if (result == DialogResult.No) e.Cancel = true;
             }
             closing = true;
+            if (sp.isOpen) sp.Close();
+            Thread.Sleep(500);
             pollTimer.Enabled = false;
             logTimer.Enabled = false;
             lpTimer.Enabled = false;
@@ -925,7 +943,6 @@ namespace DataDecoder
             if (RCP3Rotor.IsOpen) RCP3Rotor.Close();
             if (RCP4Rotor.IsOpen) RCP4Rotor.Close();
             if (RotorPort.IsOpen) RotorPort.Close();
-            if (sp.isOpen) sp.Close();
 
         }
         // program is closed, lets cleanup
@@ -2473,6 +2490,12 @@ namespace DataDecoder
         {
             Process.Start("http://k5fr.com/ddutilwiki/index.php?title=Latest_Revision");
         }
+        // Main Menu|Help|Setup Wizard
+        private void setupWizardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetupWiz wiz = new SetupWiz();
+            wiz.Show();
+        }
         // Main Menu|Help|Web Site
         private void webSiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2594,6 +2617,95 @@ namespace DataDecoder
 
         #region Rotor Events
 
+        // Test button simulates rotor models
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!TestPort.IsOpen) TestPort.Open();
+            TestPort.Write("A P= 123.1\n\r");
+        }
+        string sRtrBuf = "";
+        string lastPos = "";
+        private void RotorPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            string sCmd = "";
+            string regxVar;
+            if (rotormod == RotorMod.AlphaSpid) regxVar = @".*?\x20";
+            else if (rotormod == RotorMod.GreenHeron || rotormod == RotorMod.Hygain)
+                regxVar = ".*?;";
+            else if (rotormod == RotorMod.M2R2800PA || (rotormod == RotorMod.M2R2800PX))
+                regxVar = @".*?\n\r";
+            else if (rotormod == RotorMod.Yaesu) regxVar = @"\x2b0.*?\d\d\d";
+            else regxVar = "";
+            SerialPort port = (SerialPort)sender;
+            byte[] data = new byte[port.BytesToRead];
+            port.Read(data, 0, data.Length);
+            sRtrBuf += AE.GetString(data, 0, data.Length);
+            Regex rex = new Regex(regxVar);
+            //loop thru the buffer and find matches
+            for (Match m = rex.Match(sRtrBuf); m.Success; m = m.NextMatch())
+            {
+                sCmd = m.Value;
+                //remove the match from the buffer
+                sRtrBuf = sRtrBuf.Replace(m.Value, "");
+
+                switch (rotormod)
+                {   // see which rotor were using
+                    case RotorMod.AlphaSpid:
+                        sCmd = sCmd.Substring(1, 3);
+                        sCmd = Convert.ToString(Convert.ToInt32(sCmd) - 360);
+                        if (sCmd != lastPos)
+                        {
+                            RotorPort.Write("W0000000000\x1f ");//request position
+                            SetRotor(sCmd);         //print new heading
+                            lastPos = sCmd;         //save position
+                            RotorPort.Write("W0000000000\x1f ");//get last reading
+                        }
+                        break;
+                    case RotorMod.GreenHeron:
+                        // loose the ';'
+                        sCmd = sCmd.Substring(0, sCmd.Length - 1);
+                        if (sCmd != lastPos)
+                        {
+                            RotorPort.Write("BI1;"); //request position
+                            SetRotor(sCmd);          //print new heading
+                            lastPos = sCmd;          //save position
+                            RotorPort.Write("BI1;"); //get last reading
+                        }
+                        break;
+                    case RotorMod.Hygain:
+                        sCmd = sCmd.Substring(0, sCmd.Length - 1);
+                        if (sCmd != lastPos)
+                        {// if heading chgd, print new heading, 
+                            RotorPort.Write("AI1;"); //request position
+                            SetRotor(sCmd);
+                            lastPos = sCmd;
+                            RotorPort.Write("AI1;"); //get last reading
+                        }
+                        break;
+                    case RotorMod.M2R2800PA:
+                        SetRotor(sCmd.Substring(5, 5));
+                        break;
+                    case RotorMod.M2R2800PX:
+                        SetRotor(sCmd.Substring(5, 5));
+                        break;
+                    case RotorMod.Prosistel: //no position data avail
+                        break;
+                    case RotorMod.Yaesu:
+                        sCmd = sCmd.Substring(2, 3);
+                        if (sCmd != lastPos)
+                        {// if heading chgd, print new heading, 
+                            RotorPort.Write("C\r"); //request position
+                            SetRotor(sCmd);
+                            lastPos = sCmd;
+                            RotorPort.Write("C\r"); //get last reading
+                        }
+                        break;
+                    default: break;
+                }
+
+            }
+
+        }
         // Stop the rotor if moving (Ctrl+LP button)
         private void btnLP_KeyDown(object sender, KeyEventArgs e)
         {
@@ -2654,11 +2766,15 @@ namespace DataDecoder
         // The SP bearing window has changed, must be a manual entry.
         private void txtSP_TextChanged(object sender, EventArgs e)
         {
-            int bearing = Convert.ToInt32(txtSP.Text);
-            if (bearing < 180)
-                txtLP.Text = Convert.ToInt32(bearing + 180).ToString();
-            else
-                txtLP.Text = Convert.ToInt32(bearing - 180).ToString();
+            try
+            {
+                int bearing = Convert.ToInt32(txtSP.Text);
+                if (bearing < 180)
+                    txtLP.Text = Convert.ToInt32(bearing + 180).ToString();
+                else
+                    txtLP.Text = Convert.ToInt32(bearing - 180).ToString();
+            }
+            catch { }
         }
 
         // The Long Path Rotor button has been pressed
@@ -2752,6 +2868,12 @@ namespace DataDecoder
                     RotorPort.Parity = System.IO.Ports.Parity.None;
                     RotorPort.StopBits = System.IO.Ports.StopBits.Two;
                     break;
+                case 8: // 600 8N1
+                    RotorPort.BaudRate = 600;
+                    RotorPort.DataBits = 8;
+                    RotorPort.Parity = System.IO.Ports.Parity.None;
+                    RotorPort.StopBits = System.IO.Ports.StopBits.One;
+                    break;
                 default:
                     break;
             }
@@ -2794,16 +2916,16 @@ namespace DataDecoder
             set.Save();
         }
         // the Rotor Model selection has changed
-        string suffix = ""; // termination string for RCP1~4 Rotor_DataReceived() search
+        string suffix = ""; // termination string for Rotor models data out
         private void grpModel_CheckedChanged(object sender, EventArgs e)
         {
-//            RotorMod rotormod = new RotorMod();   
             if (rbRtrMod1.Checked)
             {
                 set.rotorModel = 0;
                 rotormod = RotorMod.AlphaSpid;
                 grpSpeed.Visible = false;
                 suffix = "/ "; // 2F, 20
+                RotorPort.Write("W0000000000\x1f ");
             }
             else if (rbRtrMod2.Checked)
             {
@@ -2811,6 +2933,7 @@ namespace DataDecoder
                 rotormod = RotorMod.GreenHeron;
                 grpSpeed.Visible = false;
                 suffix = ";";
+                RotorPort.Write("BI1;");
             }
             else if (rbRtrMod3.Checked)
             {
@@ -2818,6 +2941,7 @@ namespace DataDecoder
                 rotormod = RotorMod.Hygain;
                 grpSpeed.Visible = false;
                 suffix = ";";
+                RotorPort.Write("AI1;");
             }
             else if (rbRtrMod4.Checked)
             {
@@ -2825,6 +2949,7 @@ namespace DataDecoder
                 rotormod = RotorMod.M2R2800PA;
                 grpSpeed.Visible = true;
                 suffix = "\r";
+                RotorPort.Write("U\r");
             }
             else if (rbRtrMod5.Checked)
             {
@@ -2832,6 +2957,7 @@ namespace DataDecoder
                 rotormod = RotorMod.M2R2800PX;
                 grpSpeed.Visible = true;
                 suffix = "\r";
+                RotorPort.Write("U\r");
             }
             else if (rbRtrMod6.Checked)
             {
@@ -2845,6 +2971,7 @@ namespace DataDecoder
                 set.rotorModel = 6; rotormod = RotorMod.Yaesu;
                 grpSpeed.Visible = true;
                 suffix = "\r";
+                RotorPort.Write("C\r");
             }
             set.Save();
         }
@@ -2996,29 +3123,35 @@ namespace DataDecoder
                     int circle = 360;
                     int bearing = Convert.ToInt32(heading);
                     bearing = bearing + circle;
-                    RotorPort.Write("W" + bearing.ToString() + "0\x01     / ");
+                    RotorPort.Write("W" + bearing.ToString() + "0\x01     \x2f ");
+                    RotorPort.Write("W0000000000\x1f ");      // request position
                     break;
                 case RotorMod.GreenHeron:
                     if (heading.Length < 3) heading = heading.PadLeft(3,'0');
-                    RotorPort.Write("AP1" + heading + "\r;");
+                    RotorPort.Write("AP1" + heading + "\r;"); // start rotor
+                    RotorPort.Write("BI1;");                  // request position
                     break;
                 case RotorMod.Hygain:
                     if (heading.Length < 3) heading = heading.PadLeft(3, '0');
-                    RotorPort.Write("AP1" + heading + ";");
-                    RotorPort.Write("AM1;");
+                    RotorPort.Write("AP1" + heading + ";"); // set heading
+                    RotorPort.Write("AM1;");                // start rotor
+                    RotorPort.Write("AI1;");
                     break;
                 case RotorMod.M2R2800PA:
-                    RotorPort.Write("S\r");
-                    RotorPort.Write(heading + "\r");
+                    RotorPort.Write("S\r");                 // stop rotor
+                    RotorPort.Write(heading + "\r");        // start rotor
+                    RotorPort.Write("U\r");                 // request position
                     break;
                 case RotorMod.M2R2800PX:
-                    RotorPort.Write("A" + heading + "\r");
+                    RotorPort.Write("A" + heading + "\r");  // start rotor
+                    RotorPort.Write("U\r");                 // request position
                     break;
                 case RotorMod.Prosistel:
                     RotorPort.Write("\x02\x41\x47" + heading + "\r");
                     break;
                 case RotorMod.Yaesu:
-                    RotorPort.Write("M" + heading + "\r");
+                    RotorPort.Write("M" + heading + "\r");  // start rotor
+                    RotorPort.Write("C\r");                 // request position
                     break;
                 default: break;
             }

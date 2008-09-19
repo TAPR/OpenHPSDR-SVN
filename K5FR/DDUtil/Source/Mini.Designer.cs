@@ -171,7 +171,7 @@ namespace DataDecoder
             // 
             this.btnSP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSP.ForeColor = System.Drawing.Color.Blue;
-            this.btnSP.Location = new System.Drawing.Point(50, 15);
+            this.btnSP.Location = new System.Drawing.Point(55, 15);
             this.btnSP.Name = "btnSP";
             this.btnSP.Size = new System.Drawing.Size(36, 20);
             this.btnSP.TabIndex = 0;
@@ -186,12 +186,12 @@ namespace DataDecoder
             // 
             this.txtSP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSP.ForeColor = System.Drawing.Color.Firebrick;
-            this.txtSP.Location = new System.Drawing.Point(5, 15);
+            this.txtSP.Location = new System.Drawing.Point(2, 15);
             this.txtSP.Name = "txtSP";
-            this.txtSP.Size = new System.Drawing.Size(37, 20);
+            this.txtSP.Size = new System.Drawing.Size(45, 20);
             this.txtSP.TabIndex = 3;
             this.txtSP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtSP, "Enter Rotor Heading");
+            this.toolTip1.SetToolTip(this.txtSP, "Enter Rotor Heading in whole degrees.");
             // 
             // rb34
             // 
@@ -379,7 +379,6 @@ namespace DataDecoder
         private System.Windows.Forms.Label lblSWR;
         private System.Windows.Forms.Button btnProfiler;
         private System.Windows.Forms.Button btnSP;
-        private System.Windows.Forms.TextBox txtSP;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox grpStepCtrl;
         private System.Windows.Forms.Button btnCalib;
@@ -396,5 +395,6 @@ namespace DataDecoder
         public System.Windows.Forms.Label lblFwd;
         public System.Windows.Forms.Label lblAvg;
         private System.Windows.Forms.CheckBox AOT;
+        public System.Windows.Forms.TextBox txtSP;
     }
 }

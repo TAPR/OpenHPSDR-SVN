@@ -147,6 +147,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A7982B68E70CB82592A0B283140DF9A7"
+        "OwnerKey" = "8:_580B1E23ECFE46D287FF3F057368526B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_ACC698206E0149ECA2B52D0ED0AF40B6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -209,6 +215,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_580B1E23ECFE46D287FF3F057368526B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A7982B68E70CB82592A0B283140DF9A7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -758,6 +770,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A7982B68E70CB82592A0B283140DF9A7"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:WizardBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_A7982B68E70CB82592A0B283140DF9A7"
+                    {
+                    "Name" = "8:WizardBase.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:WizardBase.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ACC698206E0149ECA2B52D0ED0AF40B6"
             {
             "SourcePath" = "8:..\\bin\\Release\\DDUtilDevice.JPG"
@@ -1036,14 +1079,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{911815F4-9A4B-4BA4-8DAB-6809898CA850}"
-        "PackageCode" = "8:{63FF4BDF-D2FC-4AB1-A0BE-D5177F02A945}"
+        "ProductCode" = "8:{FDAC74EC-A216-4BE7-BAE0-81D052CD8964}"
+        "PackageCode" = "8:{FB61A633-385A-47C9-83E6-31C720BCB14F}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.6.304"
+        "ProductVersion" = "8:1.6.404"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1186,7 +1229,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B579029AB1364468967207E95A0C4906"
             {
-            "Name" = "8:DDUtil v 1.6.3"
+            "Name" = "8:DDUtil v 1.6.4"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
