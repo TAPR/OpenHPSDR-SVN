@@ -60,6 +60,27 @@ namespace DataDecoder.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap DDU {
+            get {
+                object obj = ResourceManager.GetObject("DDU", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap DDUtil_Logo {
+            get {
+                object obj = ResourceManager.GetObject("DDUtil_Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap DDUtilicon {
+            get {
+                object obj = ResourceManager.GetObject("DDUtilicon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap image_load_progress_texture {
             get {
                 object obj = ResourceManager.GetObject("image_load_progress_texture", resourceCulture);

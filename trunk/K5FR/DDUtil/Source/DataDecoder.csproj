@@ -62,9 +62,11 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WizardBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutBox.cs">
@@ -115,6 +117,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="SetupWiz.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SetupWiz.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TransDialog.resx">
       <DependentUpon>TransDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -135,6 +141,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SetupWiz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetupWiz.Designer.cs">
+      <DependentUpon>SetupWiz.cs</DependentUpon>
+    </Compile>
     <Compile Include="SplashScreen.cs" />
     <Compile Include="TransDialog.cs">
       <SubType>Form</SubType>
@@ -149,6 +161,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DDUtil_Logo.gif" />
+    <None Include="Resources\DDUtilicon.JPG" />
+    <None Include="Resources\DDU.ico" />
     <Content Include="Resources\image_load_progress_texture.png" />
     <Content Include="Resources\image_logo.png" />
   </ItemGroup>
