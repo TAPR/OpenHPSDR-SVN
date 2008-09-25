@@ -379,7 +379,6 @@ namespace DataDecoder
             this.clearErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showMiniWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dDutilHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onLineHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setupWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -4817,7 +4816,6 @@ namespace DataDecoder
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dDutilHelpToolStripMenuItem,
             this.onLineHelpToolStripMenuItem,
             this.checkForUpdatesToolStripMenuItem,
             this.setupWizardToolStripMenuItem,
@@ -4826,13 +4824,6 @@ namespace DataDecoder
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.aboutToolStripMenuItem.Text = "Help";
-            // 
-            // dDutilHelpToolStripMenuItem
-            // 
-            this.dDutilHelpToolStripMenuItem.Name = "dDutilHelpToolStripMenuItem";
-            this.dDutilHelpToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.dDutilHelpToolStripMenuItem.Text = "Local Help";
-            this.dDutilHelpToolStripMenuItem.Click += new System.EventHandler(this.dDutilHelpToolStripMenuItem_Click);
             // 
             // onLineHelpToolStripMenuItem
             // 
@@ -5225,7 +5216,6 @@ namespace DataDecoder
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dDutilHelpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem webSiteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
