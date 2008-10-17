@@ -101,7 +101,7 @@ namespace Floater
 		/// </summary>
 		public virtual void Show()
 		{
-            if(base.Handle == IntPtr.Zero) //if handle don't equal to zero - window was created and just hided
+            if (base.Handle == IntPtr.Zero) //if handle don't equal to zero - window was created and just hided
                 this.CreateWindowOnly();
             User32.ShowWindow(base.Handle, User32.SW_SHOWNOACTIVATE);
         }
@@ -157,9 +157,9 @@ namespace Floater
                     dwFlag = User32.AW_VER_POSITIVE;
                     break;
             }
-            if(base.Handle == IntPtr.Zero)
+            if (base.Handle == IntPtr.Zero)
                 this.CreateWindowOnly();
-            if((dwFlag & User32.AW_BLEND) != 0)
+            if ((dwFlag & User32.AW_BLEND) != 0)
                 this.AnimateWithBlend(true, time);
             else
                 User32.AnimateWindow(base.Handle, time, dwFlag);
@@ -182,7 +182,7 @@ namespace Floater
 		/// </summary>
         public virtual void Hide()
 		{
-            if(base.Handle == IntPtr.Zero)
+            if (base.Handle == IntPtr.Zero)
                 return;
             User32.ShowWindow(base.Handle, User32.SW_HIDE);
 			this.DestroyHandle();
@@ -194,7 +194,7 @@ namespace Floater
         /// <param name="time">Time, in milliseconds, for effect playing</param>
         public virtual void HideAnimate(AnimateMode mode, uint time)
         {
-            if(base.Handle == IntPtr.Zero)
+            if (base.Handle == IntPtr.Zero)
                 return;
             uint dwFlag = 0;
             switch(mode)
@@ -231,7 +231,7 @@ namespace Floater
                     break;
             }
             dwFlag |= User32.AW_HIDE;
-            if((dwFlag & User32.AW_BLEND) != 0)
+            if ((dwFlag & User32.AW_BLEND) != 0)
                 this.AnimateWithBlend(false, time);
             else
                 User32.AnimateWindow(base.Handle, time, dwFlag);
@@ -250,8 +250,8 @@ namespace Floater
         {
             byte originalAplha = this._alpha;
             byte p = (byte)(originalAplha / (time / 10));
-            if(p == 0) p++;
-            if(show)
+            if (p == 0) p++;
+            if (show)
             {
                 this._alpha = 0;
                 this.UpdateLayeredWindow();
@@ -261,11 +261,11 @@ namespace Floater
             {
                 this._alpha = i;
                 this.UpdateLayeredWindow();
-                if((show && i > originalAplha - p) || (!show && i < p))
+                if ((show && i > originalAplha - p) || (!show && i < p))
                     break;
             }
             this._alpha = originalAplha;
-            if(show)
+            if (show)
                 this.UpdateLayeredWindow();
         }
 
@@ -277,11 +277,11 @@ namespace Floater
             int nX = this._location.X;
             int nY = this._location.Y;
             Screen screen1 = Screen.FromHandle(base.Handle);
-            if((nX + this._size.Width) > screen1.Bounds.Width)
+            if ((nX + this._size.Width) > screen1.Bounds.Width)
             {
                 nX = screen1.Bounds.Width - this._size.Width;
             }
-            if((nY + this._size.Height) > screen1.Bounds.Height)
+            if ((nY + this._size.Height) > screen1.Bounds.Height)
             {
                 nY = screen1.Bounds.Height - this._size.Height;
             }
@@ -319,18 +319,18 @@ namespace Floater
                     this.PerformPaint(new PaintEventArgs(graphics2, rectangle1));
 				graphics1.DrawImageUnscaled(bitmap1, 0, 0);
 			}
-            if(isPaintMessage)
+            if (isPaintMessage)
 			    User32.EndPaint(m.HWnd, ref paintstruct1);
 		}
 
 		protected override void WndProc(ref Message m)
 		{
-            if(m.Msg == 15) // WM_PAINT
+            if (m.Msg == 15) // WM_PAINT
 			{
                 this.PerformWmPaint_WmPrintClient(ref m, true);
 				return;
 			}
-            else if(m.Msg == 0x318) // WM_PRINTCLIENT
+            else if (m.Msg == 0x318) // WM_PRINTCLIENT
             {
                 this.PerformWmPaint_WmPrintClient(ref m, false);
                 return;
@@ -399,7 +399,7 @@ namespace Floater
             get { return this._size; }
             set
             {
-                if(base.Handle != IntPtr.Zero)
+                if (base.Handle != IntPtr.Zero)
                 {
                     this.SetBoundsCore(this._location.X, this._location.Y, value.Width, value.Height);
                     RECT rect = new RECT();
