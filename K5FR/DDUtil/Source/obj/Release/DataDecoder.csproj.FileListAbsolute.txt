@@ -12,3 +12,4 @@ C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\obj\Release\Tra
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\obj\Release\DataDecoder.csproj.GenerateResource.Cache
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\obj\Release\DataDecoder.exe
 C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\obj\Release\DataDecoder.pdb
+C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\obj\Release\DataDecoder.WN2Matrix.resources

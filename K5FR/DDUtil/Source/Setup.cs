@@ -30,7 +30,6 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
-using System.Data.SqlClient;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -40,7 +39,6 @@ using System.Windows.Forms;
 using System.Xml.XPath;
 using DataDecoder.Properties;
 using Logger;
-using TransDlg;
 using FT_HANDLE = System.UInt32;
 
 namespace DataDecoder
@@ -75,12 +73,14 @@ namespace DataDecoder
 
         #region Variables
 
+        StreamWriter sw;
         private SplashScreen mSplashScreen;
         ASCIIEncoding AE = new ASCIIEncoding();
         public CATSerialPorts.CATSerialPort sp;
         DataSet ds = new DataSet();
         DataSet dsm = new DataSet();
         Mini mini;// = new Mini();
+        WN2Matrix wn;
         Hashtable flist = new Hashtable();
         Settings set = Settings.Default;
         PortMode portmode;
@@ -106,9 +106,10 @@ namespace DataDecoder
         string str = "";
         string vfo = "";
         string band = "";
-        public static string ver = "1.6.6";
+        public static string ver = Application.ProductVersion;
         public static int errCtr = 0;
         System.Timers.Timer alcTimer;
+        System.Timers.Timer AlphaTimer;
         System.Timers.Timer logTimer;
         System.Timers.Timer lpTimer;
         System.Timers.Timer pollTimer;
@@ -119,10 +120,26 @@ namespace DataDecoder
 
         #region Properties
 
-        //public static string GoRotor
-        //{
-        //    set { RotorPort.Write(value); }
-        //}
+        public bool WN1Enab
+        {
+            get { return rbWN1.Checked; }
+            set { rbWN1.Checked = value; }
+        }
+        public bool WN2Enab
+        {
+            get { return rbWN2.Checked; }
+            set { rbWN2.Checked = value; }
+        }
+        public bool WN3Enab
+        {
+            get { return rbWN3.Checked; }
+            set { rbWN3.Checked = value; }
+        }
+        public bool WN4Enab
+        {
+            get { return rbWN4.Checked; }
+            set { rbWN4.Checked = value; }
+        }
         
         public bool AudioOn
         {
@@ -265,6 +282,7 @@ namespace DataDecoder
             if (IsAppAlreadyRunning()) Environment.Exit(0);
             InitializeComponent();
             mini = new Mini(this);
+            wn = new WN2Matrix(this);
             mSplashScreen.SetProgress("Restoring Personal Settings", 0.2);
             GeometryFromString(set.WindowGeometry, this);
             chkDevice.Checked = set.DevEnab;
@@ -353,6 +371,14 @@ namespace DataDecoder
             WatchDog.Elapsed += new System.Timers.ElapsedEventHandler(WatchDog_Elapsed);
             WatchDog.Interval = Convert.ToDouble(set.DogTime)*60000;
             WatchDog.Enabled = false;
+
+            // setup Alpha Amp 
+            AlphaTimer = new System.Timers.Timer();
+            AlphaTimer.Elapsed += new System.Timers.ElapsedEventHandler(AlphaTimer_Elapsed);
+            AlphaTimer.Interval = Convert.ToDouble(set.AlphaInt);
+            AlphaTimer.Enabled = false;
+            txtAlphaInt.Text = set.AlphaInt;
+            cboAlphaBaud.SelectedIndex = set.AlphaBaud;
 
             CreateSerialPort();
             GetPortNames();
@@ -499,6 +525,8 @@ namespace DataDecoder
             Dev0.Text = set.Device0;
             cboDevice.Items.Add(set.Device0);
             cboDevice.Text = set.Device;
+            cboAlpha.SelectedIndex = set.AlphaPort;
+            chkAlpha.Checked = set.AlphaEnab;
 
             WN2SetUp(); // setup the WN2
             AlcSetUp(); // setup the ALC
@@ -510,6 +538,7 @@ namespace DataDecoder
             pollTimer.Enabled = true;
             tempTimer.Enabled = true;
             chkModeChg.Checked = set.ModeChg;
+             
 
             mSplashScreen.SetProgress("Loading Main Form", 1.0);
 
@@ -537,6 +566,54 @@ namespace DataDecoder
 
         #region Delegates
 
+        // Set rbWN1
+        delegate void SetWN1Callback(bool bCmd);
+        private void SetWN1(bool bCmd)
+        {
+            if (this.rbWN1.InvokeRequired)
+            {
+                SetWN1Callback d = new SetWN1Callback(SetWN1);
+                this.Invoke(d, new object[] { bCmd });
+            }
+            else
+                this.rbWN1.Checked = bCmd;
+        }
+        // Set rbWN2
+        delegate void SetWN2Callback(bool bCmd);
+        private void SetWN2(bool bCmd)
+        {
+            if (this.rbWN2.InvokeRequired)
+            {
+                SetWN2Callback d = new SetWN2Callback(SetWN2);
+                this.Invoke(d, new object[] { bCmd });
+            }
+            else
+                this.rbWN2.Checked = bCmd;
+        }
+        // Set rbWN3
+        delegate void SetWN3Callback(bool bCmd);
+        private void SetWN3(bool bCmd)
+        {
+            if (this.rbWN3.InvokeRequired)
+            {
+                SetWN3Callback d = new SetWN3Callback(SetWN3);
+                this.Invoke(d, new object[] { bCmd });
+            }
+            else
+                this.rbWN3.Checked = bCmd;
+        }
+        // Set rbWN4
+        delegate void SetWN4Callback(bool bCmd);
+        private void SetWN4(bool bCmd)
+        {
+            if (this.rbWN4.InvokeRequired)
+            {
+                SetWN4Callback d = new SetWN4Callback(SetWN4);
+                this.Invoke(d, new object[] { bCmd });
+            }
+            else
+                this.rbWN4.Checked = bCmd;
+        }
         // Update the Rotor SP window
         delegate void SetRotorCallback(string text);
         private void SetRotor(string text)
@@ -965,24 +1042,18 @@ namespace DataDecoder
                 tempTimer.Stop();
                 alcTimer.Stop();
                 WatchDog.Stop();
-                //mini.Close();
-                // Debug.WriteLine("   *** Timers Stopped ***");
+                mini.Close();
                 this.Text = "DDUtil Shutting Down";
-                //Thread.Sleep(3000);
                 if (sp.isOpen)
                 {   e.Cancel = true; p = 1;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
-                // Debug.WriteLine("   *** CAT port closed ***");
-
                 if (LPport.IsOpen)
                 {   e.Cancel = true; p = 2;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start(); 
                 }
-                // Debug.WriteLine("   *** LP port closed ***");
-
             }
             catch (Exception ex)
             {
@@ -1000,7 +1071,6 @@ namespace DataDecoder
                 {
                     case 1: sp.Close(); break;
                     case 2: LPport.Close(); break;
-
                 }
             }
             catch { }
@@ -1036,8 +1106,6 @@ namespace DataDecoder
                 if (RCP3Rotor.IsOpen) RCP3Rotor.Close();
                 if (RCP4Rotor.IsOpen) RCP4Rotor.Close();
                 if (RotorPort.IsOpen) RotorPort.Close();
-                // Debug.WriteLine("   *** All Ports closed ***");
-
             }
             catch (Exception ex)
             {
@@ -1664,7 +1732,7 @@ namespace DataDecoder
             set.cboRCP4 = cboRCP4.SelectedIndex;
             set.Save();
         }
-        // PW1 Enable Checkbox has changed
+        // PW1 Enable RadioButton has changed
         private void chkPW1_CheckedChanged(object sender, EventArgs e)
         {
             if (chkPW1.Checked)
@@ -1818,7 +1886,7 @@ namespace DataDecoder
             { toolTip1.Active = false;  set.ToolTips = false; }
             set.Save();
         }
-        // Slave mode checkbox has changed
+        // Slave mode RadioButton has changed
         private void chkMode_CheckedChanged(object sender, EventArgs e)
         {
             if (chkMode.Checked) set.slaveMode = true;
@@ -2020,11 +2088,8 @@ namespace DataDecoder
         void lpTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {            
             try
-            {
-                if (chkLPenab.Checked)
-                    LPport.Write(";P?");
-                else
-                    lpTimer.Enabled = false;
+            {   if (chkLPenab.Checked) LPport.Write(";P?");
+                else lpTimer.Enabled = false;
             }
             catch { }
         }
@@ -2699,14 +2764,8 @@ namespace DataDecoder
 
         #region Rotor Control
 
-          #region * Rotor Events *
+          #region # Rotor Events #
 
-        // Test button simulates rotor models
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (!TestPort.IsOpen) TestPort.Open();
-            TestPort.Write("A P= 123.1\n\r");
-        }
         string sRtrBuf = "";
         string lastPos = "";
         private void RotorPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -3198,7 +3257,7 @@ namespace DataDecoder
 
        #endregion Rotor Events
 
-          #region * Rotor Methods *
+          #region # Rotor Methods #
 
         // Turn the rotor
         public void TurnRotor(string heading)
@@ -3391,7 +3450,7 @@ namespace DataDecoder
         }
         #endregion Rotor Methods
 
-          #region * Rotor Setup *
+          #region # Rotor Setup #
 
         //  Initialize Rotor settings and controls (called from Setup())
         private void InitRotor()
@@ -3468,13 +3527,9 @@ namespace DataDecoder
         string sdrMode = "";
         string xOn = "";            // 1 = xmit on, 0 = xmit off
         string lastFreq = "";       // freq from last CATRxEvent
+        string lastBand = "";
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
-            //if (closing)
-            //{
-            //    pollTimer.Close(); sp.Close();
-            //    Console.WriteLine("*** CatRx port Elap while closing ***"); return;
-            //}
             try
             {   // put the port data in the comm buffer
                 CommBuffer += AE.GetString(e.buffer, 0, e.buffer.Length);
@@ -3503,12 +3558,96 @@ namespace DataDecoder
                         WriteTemp();
                         return;
                     }
-
                     /*** save the band setting ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZBS")
                     {
                         band = rawFreq.Substring(4, 3);
-                    }
+                        if (lastBand != band && wn.chkEnab.Checked)
+                        {
+                            lastBand = band;
+                            switch (band)
+                            {
+                                case "160": switch (wn.wn160)
+                                    {
+                                        case 1: SetWN1(true); break;
+                                        case 2: SetWN2(true); break;
+                                        case 3: SetWN3(true); break;
+                                        case 4: SetWN4(true); break;
+                                    } break;
+                                case "080": switch (wn.wn80)
+                                    {
+                                        case 1: SetWN1(true); break;
+                                        case 2: SetWN2(true); break;
+                                        case 3: SetWN3(true); break;
+                                        case 4: SetWN4(true); break;
+                                    } break;
+                                case "060": switch (wn.wn60)
+                                    {
+                                        case 1: SetWN1(true); break;
+                                        case 2: SetWN2(true); break;
+                                        case 3: SetWN3(true); break;
+                                        case 4: SetWN4(true); break;
+                                    } break;
+                                case "040": switch (wn.wn40)
+                                    {
+                                        case 1: SetWN1(true); break;
+                                        case 2: SetWN2(true); break;
+                                        case 3: SetWN3(true); break;
+                                        case 4: SetWN4(true); break;
+                                    } break;
+                                case "030": switch (wn.wn30)
+                                    {
+                                        case 1: SetWN1(true); break;
+                                        case 2: SetWN2(true); break;
+                                        case 3: SetWN3(true); break;
+                                        case 4: SetWN4(true); break;
+                                    } break;
+                                case "020": switch (wn.wn20)
+                                    {
+                                        case 1: SetWN1(true); break;
+                                        case 2: SetWN2(true); break;
+                                        case 3: SetWN3(true); break;
+                                        case 4: SetWN4(true); break;
+                                    } break;
+                                case "017": switch (wn.wn17)
+                                    {
+                                        case 1: SetWN1(true); break;
+                                        case 2: SetWN2(true); break;
+                                        case 3: SetWN3(true); break;
+                                        case 4: SetWN4(true); break;
+                                    } break;
+                                case "015": switch (wn.wn15)
+                                    {
+                                        case 1: SetWN1(true); break;
+                                        case 2: SetWN2(true); break;
+                                        case 3: SetWN3(true); break;
+                                        case 4: SetWN4(true); break;
+                                    } break;
+                                case "012": switch (wn.wn12)
+                                    {
+                                        case 1: SetWN1(true); break;
+                                        case 2: SetWN2(true); break;
+                                        case 3: SetWN3(true); break;
+                                        case 4: SetWN4(true); break;
+                                    } break;
+                                case "010": switch (wn.wn10)
+                                    {
+                                        case 1: SetWN1(true); break;
+                                        case 2: SetWN2(true); break;
+                                        case 3: SetWN3(true); break;
+                                        case 4: SetWN4(true); break;
+                                    } break;
+                                case "006": switch (wn.wn6)
+                                    {
+                                        case 1: SetWN1(true); break;
+                                        case 2: SetWN2(true); break;
+                                        case 3: SetWN3(true); break;
+                                        case 4: SetWN4(true); break;
+                                    } break;
+
+                            }//switch
+                        }// if band changed
+                    }// if ZZBS
 
                     /*** send radio's CAT reply back to RCP1 ***/
                     if (logFlag == true && LogPort.IsOpen) LogPort.Write(rawFreq);
@@ -3611,7 +3750,18 @@ namespace DataDecoder
                             default: break; 
                         }
                     }
-
+                    // If Alpha Amp is enabled send it the freq
+                    if (chkAlpha.Checked)
+                    {   // see if freq has changed
+                        int pos;
+                        if (String.Compare(lastFreq, logFreq) != 0)
+                        {   
+                            if (logFreq.TrimStart('0').Length-3 < 5) pos = 4;
+                            else pos = 5;
+                            AlphaPort.Write("FREQ " + 
+                                logFreq.TrimStart('0').Substring(0,pos) + "\r");
+                        }
+                    }
                     // If SteppIR enabled check for activity
                     if (chkStep.Checked)
                     {   // see if freq has changed
@@ -4257,6 +4407,7 @@ namespace DataDecoder
                 cboRCP2Rotor.Items.Clear();
                 cboRCP3Rotor.Items.Clear();
                 cboRCP4Rotor.Items.Clear();
+                cboAlpha.Items.Clear();
                 // Add empty entry to port combos
                 cboSerAcc.Items.Add("");
                 cboLogPort.Items.Add("");
@@ -4271,6 +4422,7 @@ namespace DataDecoder
                 cboRCP2Rotor.Items.Add("");
                 cboRCP3Rotor.Items.Add("");
                 cboRCP4Rotor.Items.Add("");
+                cboAlpha.Items.Add("");
 
                 for (int i = 0; i < port.Length; i++)
                 {   
@@ -4289,6 +4441,7 @@ namespace DataDecoder
                     cboRCP2Rotor.Items.Add("COM" + port[i]);
                     cboRCP3Rotor.Items.Add("COM" + port[i]);
                     cboRCP4Rotor.Items.Add("COM" + port[i]);
+                    cboAlpha.Items.Add("COM" + port[i]);
                 }
             }
             else
@@ -5023,7 +5176,7 @@ namespace DataDecoder
 
         #region WaveNode
 
-        #region WaveNode ENUMS & Vars
+             #region # WaveNode ENUMS & Vars #
 
         enum FT_STATUS
         {
@@ -5094,7 +5247,7 @@ namespace DataDecoder
 
         #endregion WaveNode ENUMS & Vars
 
-        #region Delegates
+             #region # Delegates #
 
         // Write Peak reading to txt box
         delegate void SetPeakCallback(string text);
@@ -5138,9 +5291,9 @@ namespace DataDecoder
         }
         #endregion Delegates
 
-        #region WaveNode Events
+             #region # WaveNode Events #
 
-        // The WN2 Enabled checkbox has changed
+        // The WN2 Enabled RadioButton has changed
         private void chkWNEnab_CheckedChanged(object sender, EventArgs e)
         {
             if (chkWNEnab.Checked)
@@ -5256,7 +5409,7 @@ namespace DataDecoder
 
         #endregion WaveNode Events
 
-        #region WaveNode Methods
+             #region # WaveNode Methods #
 
         // Find all the FTDI USB devices
         private unsafe bool FindDevice()
@@ -5574,7 +5727,7 @@ namespace DataDecoder
 
         #endregion WaveNode Methods
 
-        #region WaveNode Setup
+             #region # WaveNode Setup #
 
         private void WN2SetUp()
         {
@@ -6070,6 +6223,446 @@ namespace DataDecoder
         }
 
         #endregion ALC
+        
+        #region Alpha
+
+          #region # Delegates #
+
+        // Write to Pwr button
+        delegate void SetPwrCallback(string text);
+        public void SetPwr(string text)
+        {
+            if (this.btnPwr.InvokeRequired)
+            {
+                SetPwrCallback d = new SetPwrCallback(SetPwr);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { btnPwr.Text = text; mini.btnPwr.Text = text; }
+        }
+        // Write to Oper button
+        delegate void SetOperCallback(string text);
+        public void SetOper(string text)
+        {
+            if (this.btnOper.InvokeRequired)
+            {
+                SetOperCallback d = new SetOperCallback(SetOper);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { btnOper.Text = text; mini.btnOper.Text = text; }
+        }
+        // Write to Tune button
+        delegate void SetTuneCallback(string text);
+        public void SetTune(string text)
+        {
+            if (this.btnTune.InvokeRequired)
+            {
+                SetTuneCallback d = new SetTuneCallback(SetTune);
+                this.Invoke(d, new object[] { text });
+            }
+            else { btnTune.Text = text; mini.btnTune.Text = text; }
+        }
+        // Write to HV button
+        delegate void SetHVCallback(string text);
+        public void SetHV(string text)
+        {
+            if (this.btnHV.InvokeRequired)
+            {
+                SetHVCallback d = new SetHVCallback(SetHV);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { btnHV.Text = text; mini.btnHV.Text = text; }
+        }
+        // Write to Band window
+        delegate void SetBandCallback(string text);
+        public void SetBand(string text)
+        {
+            if (this.txtBand.InvokeRequired)
+            {
+                SetBandCallback d = new SetBandCallback(SetBand);
+                this.Invoke(d, new object[] { text });
+            }
+            else txtBand.Text = text;
+        }
+        // Write to Seg window
+        delegate void SetSegCallback(string text);
+        public void SetSeg(string text)
+        {
+            if (this.txtSeg.InvokeRequired)
+            {
+                SetSegCallback d = new SetSegCallback(SetSeg);
+                this.Invoke(d, new object[] { text });
+            }
+            else txtSeg.Text = text;
+        }
+        // Write to Msg window
+        delegate void SetMsgCallback(string text);
+        public void SetMsg(string text)
+        {
+            if (this.txtMsg.InvokeRequired)
+            {
+                SetMsgCallback d = new SetMsgCallback(SetMsg);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { txtMsg.Text = text; mini.txtMsg.Text = text; }
+        }
+        // Write to Freq window
+        delegate void SetFreqCallback(string text);
+        public void SetFreq(string text)
+        {
+            if (this.txtFreq.InvokeRequired)
+            {
+                SetFreqCallback d = new SetFreqCallback(SetFreq);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { txtFreq.Text = text; mini.txtMsg.Text = text; }
+        }
+        // Write to Tune window
+        delegate void SetpaTuneCallback(string text);
+        public void SetpaTune(string text)
+        {
+            if (this.txtTune.InvokeRequired)
+            {
+                SetpaTuneCallback d = new SetpaTuneCallback(SetpaTune);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { txtTune.Text = text; }
+        }
+        // Write to Load window
+        delegate void SetLoadCallback(string text);
+        public void SetLoad(string text)
+        {
+            if (this.txtLoad.InvokeRequired)
+            {
+                SetLoadCallback d = new SetLoadCallback(SetLoad);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { txtLoad.Text = text; }
+        }
+
+          #endregion Delegates
+
+          #region # Events #
+
+        // the Alpha enabled RadioButton has changed
+        private void chkAlpha_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cboAlpha.SelectedIndex > 0)
+            {
+                if (chkAlpha.Checked)
+                {
+                    btnPwr.Enabled = true; btnOper.Enabled = true;
+                    mini.btnPwr.Enabled = true; mini.btnOper.Enabled = true;
+                    btnTune.Enabled = true; btnHV.Enabled = true;
+                    mini.btnTune.Enabled = true; mini.btnHV.Enabled = true;
+                    btnSF.Enabled = true; btnHF.Enabled = true;
+                    mini.btnSF.Enabled = true; mini.btnHF.Enabled = true;
+                    txtMsg.Enabled = true; mini.txtMsg.Enabled = true;
+                    txtBand.Enabled = true; txtSeg.Enabled = true; txtFreq.Enabled = true;
+                    txtTune.Enabled = true; txtLoad.Enabled = true; 
+                    txtAlphaInt.Enabled = true; set.AlphaEnab = true; 
+                    AlphaTimer.Enabled = true;  set.Save();
+                    AlphaPort.Write("AC\r"); 
+                    AlphaPort.Write("EXT OFF\r"); 
+                    AlphaPort.Write("STAT\r");
+                    AlphaPort.Write("AUTOTUNE\r");
+                }
+                else
+                {
+                    btnPwr.Enabled = false; btnOper.Enabled = false;
+                    mini.btnPwr.Enabled = false; mini.btnOper.Enabled = false;
+                    btnTune.Enabled = false; btnHV.Enabled = false;
+                    mini.btnTune.Enabled = false; mini.btnHV.Enabled = false;
+                    btnSF.Enabled = false; btnHF.Enabled = false;
+                    mini.btnSF.Enabled = false; mini.btnHF.Enabled = false;
+                    txtMsg.Enabled = false; mini.txtMsg.Enabled = false;
+                    txtBand.Enabled = false; txtSeg.Enabled = false; txtFreq.Enabled = false;
+                    txtTune.Enabled = false; txtLoad.Enabled =  false;
+                    set.AlphaEnab = false; txtAlphaInt.Enabled = false; 
+                    AlphaTimer.Enabled = false; set.Save();
+                }
+            }
+            else 
+            {
+                btnPwr.Enabled = false; btnOper.Enabled = false;
+                mini.btnPwr.Enabled = false; mini.btnOper.Enabled = false;
+                btnTune.Enabled = false; btnHV.Enabled = false;
+                mini.btnTune.Enabled = false; mini.btnHV.Enabled = false;
+                btnSF.Enabled = false; btnHF.Enabled = false;
+                mini.btnSF.Enabled = false; mini.btnHF.Enabled = false;
+                txtMsg.Enabled = false; mini.txtMsg.Enabled = false;
+                txtBand.Enabled = false; txtSeg.Enabled = false;
+                txtTune.Enabled = false; txtLoad.Enabled = false;
+                txtAlphaInt.Enabled = false; AlphaTimer.Enabled = false;
+                txtFreq.Enabled = false; set.AlphaEnab = false; set.Save();
+                chkAlpha.Checked = false; 
+
+                Notification alert = new Notification();
+                Notification.notiMsg =
+                    "You must assign a port number before the\r\r" +
+                    "Alpha Amplifier can be enabled.\r\r" +
+                    "Please assign a valid port and try again.\r";
+                alert.Show();
+            }
+        }
+        // The baud rate selection has changed
+        private void cboAlphaBaud_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboAlphaBaud.SelectedItem.ToString() == "4800")
+            {   
+                AlphaPort.BaudRate = 4800; AlphaPort.DataBits = 8; 
+                AlphaPort.Parity = System.IO.Ports.Parity.None; 
+                AlphaPort.StopBits = System.IO.Ports.StopBits.One; 
+            }
+            if (cboAlphaBaud.SelectedItem.ToString() == "9600")
+            {
+                AlphaPort.BaudRate = 9600; AlphaPort.DataBits = 8;
+                AlphaPort.Parity = System.IO.Ports.Parity.None;
+                AlphaPort.StopBits = System.IO.Ports.StopBits.One;
+            }
+            set.AlphaBaud = cboAlphaBaud.SelectedIndex; set.Save();
+        }
+        // the serial port selection has changed
+        private void cboAlpha_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (AlphaPort.IsOpen) AlphaPort.Close();
+            if (cboAlpha.SelectedIndex > 0)
+            {
+                AlphaPort.PortName = cboAlpha.SelectedItem.ToString();
+                try
+                {
+                    AlphaPort.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The Alpha amplifier serial port " + AlphaPort.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboAlpha.SelectedText = "";
+                    chkAlpha.Checked = false;
+                    return;
+                }
+            }
+            else
+            {
+                chkAlpha.Checked = false;
+            }
+            set.AlphaPort = cboAlpha.SelectedIndex;
+            set.Save();
+        }
+        public string sf = "";          // Soft fault message
+        public string hf = "";          // Hard fault message
+        public string ac = "Off";       // Amp power (On/Off)
+        public string mode = "LOW";     // HV mode
+        public string state = "Off";    // Amp State (On/Off)
+        public string tune = "Off";     // State of autotune 
+        string sAlpha = "";             // Port buffer message
+        // a Message(s) from Amplifier HAS BEEN received
+        private void AlphaPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkAlpha.Checked)       // port must be enabled to receive data
+            {
+                try
+                {
+                    string sCmd = "";
+                    SerialPort port = (SerialPort)sender;
+                    byte[] data = new byte[port.BytesToRead];
+                    port.Read(data, 0, data.Length);
+                    sAlpha += AE.GetString(data, 0, data.Length);
+                    Regex rex = new Regex(@".*?\r\n"); 		
+                    for (Match m = rex.Match(sAlpha); m.Success; m = m.NextMatch())
+                    {   //loop thru the buffer and find matches
+                        sCmd = m.Value.Substring(0,m.Value.Length-2);
+                        sAlpha = sAlpha.Replace(m.Value, ""); //remove match from buffer
+
+                        if (sCmd.Contains("FACTORY MODE = ON"))
+                            AlphaPort.Write("EXT OFF\r");
+
+                        if (sCmd.Contains("AMPLIFIER IS OFF")) 
+                        {   SetPwr("Off"); btnPwr.BackColor = Color.Empty; 
+                            ac = "Off"; mini.btnPwr.BackColor = Color.Empty; }
+                        if (sCmd.Contains("AMPLIFIER IS ON"))
+                        {   SetPwr("On"); btnPwr.BackColor = Color.Lime; 
+                            ac = "On"; mini.btnPwr.BackColor = Color.Lime; }
+                        if (sCmd.Contains("AUTOTUNE ENABLED"))
+                        {   SetTune("Auto"); btnTune.BackColor = Color.Lime; 
+                            tune = "On"; mini.btnTune.BackColor = Color.Lime; }
+                        if (sCmd.Contains("AUTOTUNE DISABLED"))
+                        {   SetTune("Off"); btnTune.BackColor = Color.Yellow; 
+                            tune = "Off"; mini.btnTune.BackColor = Color.Yellow; }
+                        if (sCmd.Contains("MODE = HIGH"))
+                        {   SetHV("High"); btnHV.BackColor = Color.Lime; 
+                            mode = "High"; mini.btnHV.BackColor = Color.Lime; }
+                        if (sCmd.Contains("MODE = LOW"))
+                        {   SetHV("Low"); btnHV.BackColor = Color.Yellow; 
+                            mode = "Low"; mini.btnHV.BackColor = Color.Yellow; }
+                        if (sCmd.Contains("STATE = OFF"))
+                        {   SetOper("Off"); btnOper.BackColor = Color.Empty; 
+                            state = "Off"; mini.btnOper.BackColor = Color.Empty; }
+                        if (sCmd.Contains("STATE = WARMUP"))
+                        {   SetOper("Wait"); btnOper.BackColor = Color.Pink; 
+                            state = "Wait"; mini.btnOper.BackColor = Color.Pink; }
+                        if (sCmd.Contains("STATE = STANDBY"))
+                        {   SetOper("Stby"); btnOper.BackColor = Color.Yellow; 
+                            state = "Stby"; mini.btnOper.BackColor = Color.Yellow; }
+                        if (sCmd.Contains("STATE = OPERATE"))
+                        {   SetOper("Oper"); btnOper.BackColor = Color.Lime; 
+                            state = "Oper"; mini.btnOper.BackColor = Color.Lime; }
+
+                        string sb = ""; string sbx = "";
+                        if (sCmd.Contains("BAND"))
+                        {   sb = sCmd.Substring(7, 1);
+                            SetSeg(sCmd.Substring(22, 1)); 
+                        }
+                        switch (sb)
+                        {   case "1": SetBand("160"); break;
+                            case "2": SetBand("80"); break;
+                            case "3": SetBand("40"); break;
+                            case "4": SetBand("30"); break;
+                            case "5": SetBand("20"); break;
+                            case "6": SetBand("17"); break;
+                            case "7": SetBand("15"); break;
+                            case "8": SetBand("12"); break;
+                            case "9": SetBand("10"); break;
+                        }
+                        string regex = @"FREQUENCY\s=\s(\d+)(\d\d\d)";
+                        string mask = "$1.$2";
+
+                        if (sCmd.Contains("FREQUENCY"))
+                        {   sb = Regex.Replace(sCmd, regex, mask); 
+                            SetFreq(sb); 
+                        }
+                        if (sCmd.Contains("TUNE"))
+                        {
+                            sb = Regex.Match(sCmd, @"TUNE\s=\s\d+").ToString();
+                            sbx = Regex.Match(sb, @"\d+").ToString();
+                            SetpaTune(sbx);
+                        }
+                        if (sCmd.Contains("LOAD"))
+                        {
+                            sb = Regex.Match(sCmd, @"LOAD\s=\s\d+").ToString();
+                            sbx = Regex.Match(sb, @"\d+").ToString();
+                            SetLoad(sbx);
+                        }
+                        if (sCmd.Contains("SFAULT"))
+                        {   SetMsg(sCmd);
+                            //SetMsg("Soft Fault Warning: press SF button to view.");
+                            sf = sCmd; btnSF.BackColor = Color.Yellow;
+                            mini.btnSF.BackColor = Color.Yellow;
+                        }
+                        if (sCmd.Contains("HFAULT"))
+                        {   SetMsg(sCmd);
+                            //SetMsg("Hard Fault Warning: press HF button to view.");
+                            hf = sCmd; btnHF.BackColor = Color.Red;
+                            mini.btnHF.BackColor = Color.Red;
+                        }
+                        //if (enableErrorLog)
+                        //{
+                        //    sw = new StreamWriter("ErrorLog.txt", true);
+                        //    sw.WriteLine("sCmd    : " + sCmd);
+                        //    sw.WriteLine("ac      : " + ac + " : " + btnPwr.BackColor);
+                        //    sw.WriteLine("state   : " + state + " : " + btnOper.BackColor);
+                        //    sw.WriteLine("tune    : " + tune + " : " + btnTune.BackColor);
+                        //    sw.WriteLine("mode    : " + mode + " : " + btnHV.BackColor);
+                        //    sw.WriteLine("-------------------------------------------------------");
+                        //    sw.Flush();
+                        //    sw.Close();
+                        //}
+                    }
+                }
+                catch (Exception ex)
+                {
+                    bool bReturnLog = false;
+                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                }
+            }//if (chkAlpha.Checked)
+        }//AlphaPort_DataReceived
+
+        //the alpha power button was pressed
+        public void btnPwr_Click(object sender, EventArgs e)
+        {
+            if (ac == "Off") AlphaPort.Write("AC ON\r"); 
+            if (ac == "On") AlphaPort.Write("AC OFF\r");
+        }
+        // The Operate / Stand By button was pressed
+        public void btnOper_Click(object sender, EventArgs e)
+        {
+            if (ac == "On" && state != "Oper") AlphaPort.Write("OPER ON\r");
+            else AlphaPort.Write("OPER OFF\r");
+        }
+        // The Auto tune button was pressed.
+        public void btnTune_Click(object sender, EventArgs e)
+        {
+            if (ac == "On" && tune == "Off") AlphaPort.Write("AUTOTUNE ON\r");
+            else AlphaPort.Write("AUTOTUNE OFF\r");
+        }
+        // The High Voltage button was pressed
+        public void btnHV_Click(object sender, EventArgs e)
+        {
+            if (ac == "On" && mode == "Low") AlphaPort.Write("MODE HIGH\r");
+            else AlphaPort.Write("MODE LOW\r");
+        }
+        /*** The Alpha timer has elapsed ***/
+        void AlphaTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                if (chkAlpha.Enabled)
+                {
+                    AlphaPort.Write("STAT\r"); // Request ststus from amp
+                }
+                else AlphaTimer.Enabled = false;
+            }
+            catch { }
+        }
+        // The Alpha Timer interval has changed
+        private void txtAlphaInt_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                AlphaTimer.Interval = Convert.ToDouble(txtAlphaInt.Text);
+                set.AlphaInt = txtAlphaInt.Text;
+                set.Save();
+            }
+            catch { }
+        }
+        // The Soft Fault button has been pressed
+        public void btnSF_Click(object sender, EventArgs e)
+        {
+            AlphaPort.Write("SF\r");
+        }
+        // The Hard Fault button has been pressed
+        public void btnHF_Click(object sender, EventArgs e)
+        {
+            AlphaPort.Write("HF\r");
+        }
+        // The SF button label was double clicked
+        public void lblSF_DoubleClick(object sender, EventArgs e)
+        {
+            SetMsg(""); btnSF.BackColor = Color.Empty;
+            mini.btnSF.BackColor = Color.Empty;
+        }
+        // The HF button label was double clicked
+        public void lblHF_DoubleClick(object sender, EventArgs e)
+        {
+            SetMsg(""); btnHF.BackColor = Color.Empty;
+            mini.btnHF.BackColor = Color.Empty;
+        }
+            #endregion Events
+
+        private void btnSensor_Click(object sender, EventArgs e)
+        {
+            wn.Show();
+        }
+
+        #endregion Alpha
 
     }
 }

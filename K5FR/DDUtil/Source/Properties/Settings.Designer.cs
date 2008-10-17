@@ -1222,5 +1222,197 @@ namespace DataDecoder.Properties {
                 this["rb100"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AlphaEnab {
+            get {
+                return ((bool)(this["AlphaEnab"]));
+            }
+            set {
+                this["AlphaEnab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int AlphaPort {
+            get {
+                return ((int)(this["AlphaPort"]));
+            }
+            set {
+                this["AlphaPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60000")]
+        public string AlphaInt {
+            get {
+                return ((string)(this["AlphaInt"]));
+            }
+            set {
+                this["AlphaInt"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int AlphaBaud {
+            get {
+                return ((int)(this["AlphaBaud"]));
+            }
+            set {
+                this["AlphaBaud"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int bs160 {
+            get {
+                return ((int)(this["bs160"]));
+            }
+            set {
+                this["bs160"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long bs80 {
+            get {
+                return ((long)(this["bs80"]));
+            }
+            set {
+                this["bs80"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int bs60 {
+            get {
+                return ((int)(this["bs60"]));
+            }
+            set {
+                this["bs60"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int bs40 {
+            get {
+                return ((int)(this["bs40"]));
+            }
+            set {
+                this["bs40"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long bs30 {
+            get {
+                return ((long)(this["bs30"]));
+            }
+            set {
+                this["bs30"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int bs20 {
+            get {
+                return ((int)(this["bs20"]));
+            }
+            set {
+                this["bs20"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int bs17 {
+            get {
+                return ((int)(this["bs17"]));
+            }
+            set {
+                this["bs17"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int bs15 {
+            get {
+                return ((int)(this["bs15"]));
+            }
+            set {
+                this["bs15"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int bs12 {
+            get {
+                return ((int)(this["bs12"]));
+            }
+            set {
+                this["bs12"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int bs10 {
+            get {
+                return ((int)(this["bs10"]));
+            }
+            set {
+                this["bs10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int bs6 {
+            get {
+                return ((int)(this["bs6"]));
+            }
+            set {
+                this["bs6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnabMatrix {
+            get {
+                return ((bool)(this["EnabMatrix"]));
+            }
+            set {
+                this["EnabMatrix"] = value;
+            }
+        }
     }
 }

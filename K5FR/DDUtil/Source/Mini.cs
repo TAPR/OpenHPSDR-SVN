@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataDecoder.Properties;
@@ -131,6 +132,9 @@ namespace DataDecoder
             e.Cancel = true;
             this.Hide();
         }
+        private void Mini_FormClosing(object sender, FormClosedEventArgs e)
+        { }// dummy so other form closing event will work 
+
         // form load
         private void Mini_Load(object sender, EventArgs e)
         {
@@ -157,6 +161,46 @@ namespace DataDecoder
                 else if (sender == rb34) s.Step34 = true;
             }
             init = true;
+        }
+        //the alpha power button was pressed
+        private void btnPwr_Click(object sender, EventArgs e)
+        {
+            s.btnPwr_Click(null, null);
+        }
+        // The Operate / Stand By button was pressed
+        private void btnOper_Click(object sender, EventArgs e)
+        {
+            s.btnOper_Click(null, null);
+        }
+        // The Auto tune button was pressed.
+        private void btnTune_Click(object sender, EventArgs e)
+        {
+            s.btnTune_Click(null, null);
+        }
+        // The High Voltage button was pressed
+        private void btnHV_Click(object sender, EventArgs e)
+        {
+            s.btnHV_Click(null, null);
+        }
+        // The Soft Fault button has been pressed
+        private void btnSF_Click(object sender, EventArgs e)
+        {
+            s.btnSF_Click(null, null);
+        }
+        // The Hard Fault button has been pressed
+        private void btnHF_Click(object sender, EventArgs e)
+        {
+            s.btnHF_Click(null, null);
+        }
+        // The SF button label was double clicked
+        private void lblSF_DoubleClick(object sender, EventArgs e)
+        {
+            s.lblSF_DoubleClick(null, null);
+        }
+        // The HF button label was double clicked
+        private void lblHF_DoubleClick(object sender, EventArgs e)
+        {
+            s.lblHF_DoubleClick(null, null);
         }
 
         #endregion Form Events
@@ -189,6 +233,7 @@ namespace DataDecoder
         }
         
         #endregion Methods
+
 
     }// end Mini
 }
