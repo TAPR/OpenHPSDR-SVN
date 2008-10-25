@@ -371,6 +371,327 @@ namespace DataDecoder
             this.label51 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.txtLong = new System.Windows.Forms.TextBox();
+            this.tabExtCtrl = new System.Windows.Forms.TabPage();
+            this.label132 = new System.Windows.Forms.Label();
+            this.label131 = new System.Windows.Forms.Label();
+            this.chkPortB = new System.Windows.Forms.CheckBox();
+            this.btnClrPortB = new System.Windows.Forms.Button();
+            this.btnClrPortA = new System.Windows.Forms.Button();
+            this.grpPortB = new System.Windows.Forms.GroupBox();
+            this.cb15t4 = new System.Windows.Forms.CheckBox();
+            this.label105 = new System.Windows.Forms.Label();
+            this.cb15t7 = new System.Windows.Forms.CheckBox();
+            this.cb13t4 = new System.Windows.Forms.CheckBox();
+            this.cb15t6 = new System.Windows.Forms.CheckBox();
+            this.label107 = new System.Windows.Forms.Label();
+            this.cb15t5 = new System.Windows.Forms.CheckBox();
+            this.cb13t7 = new System.Windows.Forms.CheckBox();
+            this.cb15t3 = new System.Windows.Forms.CheckBox();
+            this.cb13t6 = new System.Windows.Forms.CheckBox();
+            this.cb15t2 = new System.Windows.Forms.CheckBox();
+            this.cb0t3 = new System.Windows.Forms.CheckBox();
+            this.cb15t1 = new System.Windows.Forms.CheckBox();
+            this.cb13t5 = new System.Windows.Forms.CheckBox();
+            this.cb15t0 = new System.Windows.Forms.CheckBox();
+            this.cb13t3 = new System.Windows.Forms.CheckBox();
+            this.label135 = new System.Windows.Forms.Label();
+            this.cb0t0 = new System.Windows.Forms.CheckBox();
+            this.label136 = new System.Windows.Forms.Label();
+            this.cb13t2 = new System.Windows.Forms.CheckBox();
+            this.cb14t0 = new System.Windows.Forms.CheckBox();
+            this.cb13t1 = new System.Windows.Forms.CheckBox();
+            this.cb14t1 = new System.Windows.Forms.CheckBox();
+            this.cb13t0 = new System.Windows.Forms.CheckBox();
+            this.cb14t2 = new System.Windows.Forms.CheckBox();
+            this.cb0t1 = new System.Windows.Forms.CheckBox();
+            this.cb14t3 = new System.Windows.Forms.CheckBox();
+            this.label108 = new System.Windows.Forms.Label();
+            this.cb14t4 = new System.Windows.Forms.CheckBox();
+            this.cb0t2 = new System.Windows.Forms.CheckBox();
+            this.cb14t5 = new System.Windows.Forms.CheckBox();
+            this.cb14t6 = new System.Windows.Forms.CheckBox();
+            this.cb0t4 = new System.Windows.Forms.CheckBox();
+            this.cb14t7 = new System.Windows.Forms.CheckBox();
+            this.cb0t5 = new System.Windows.Forms.CheckBox();
+            this.cb0t6 = new System.Windows.Forms.CheckBox();
+            this.cb0t7 = new System.Windows.Forms.CheckBox();
+            this.label109 = new System.Windows.Forms.Label();
+            this.cb12t0 = new System.Windows.Forms.CheckBox();
+            this.cb12t1 = new System.Windows.Forms.CheckBox();
+            this.cb12t2 = new System.Windows.Forms.CheckBox();
+            this.cb12t3 = new System.Windows.Forms.CheckBox();
+            this.cb12t4 = new System.Windows.Forms.CheckBox();
+            this.cb12t5 = new System.Windows.Forms.CheckBox();
+            this.cb12t6 = new System.Windows.Forms.CheckBox();
+            this.cb12t7 = new System.Windows.Forms.CheckBox();
+            this.label110 = new System.Windows.Forms.Label();
+            this.cb11t0 = new System.Windows.Forms.CheckBox();
+            this.cb11t1 = new System.Windows.Forms.CheckBox();
+            this.cb11t2 = new System.Windows.Forms.CheckBox();
+            this.cb11t3 = new System.Windows.Forms.CheckBox();
+            this.cb11t4 = new System.Windows.Forms.CheckBox();
+            this.cb11t5 = new System.Windows.Forms.CheckBox();
+            this.cb11t6 = new System.Windows.Forms.CheckBox();
+            this.cb11t7 = new System.Windows.Forms.CheckBox();
+            this.label111 = new System.Windows.Forms.Label();
+            this.cb10t0 = new System.Windows.Forms.CheckBox();
+            this.cb10t1 = new System.Windows.Forms.CheckBox();
+            this.cb10t2 = new System.Windows.Forms.CheckBox();
+            this.cb10t3 = new System.Windows.Forms.CheckBox();
+            this.cb10t4 = new System.Windows.Forms.CheckBox();
+            this.cb10t5 = new System.Windows.Forms.CheckBox();
+            this.cb10t6 = new System.Windows.Forms.CheckBox();
+            this.cb10t7 = new System.Windows.Forms.CheckBox();
+            this.label112 = new System.Windows.Forms.Label();
+            this.cb9t0 = new System.Windows.Forms.CheckBox();
+            this.cb9t1 = new System.Windows.Forms.CheckBox();
+            this.cb9t2 = new System.Windows.Forms.CheckBox();
+            this.cb9t3 = new System.Windows.Forms.CheckBox();
+            this.cb9t4 = new System.Windows.Forms.CheckBox();
+            this.cb9t5 = new System.Windows.Forms.CheckBox();
+            this.cb9t6 = new System.Windows.Forms.CheckBox();
+            this.cb9t7 = new System.Windows.Forms.CheckBox();
+            this.label113 = new System.Windows.Forms.Label();
+            this.cb8t0 = new System.Windows.Forms.CheckBox();
+            this.cb8t1 = new System.Windows.Forms.CheckBox();
+            this.cb8t2 = new System.Windows.Forms.CheckBox();
+            this.cb8t3 = new System.Windows.Forms.CheckBox();
+            this.cb8t4 = new System.Windows.Forms.CheckBox();
+            this.cb8t5 = new System.Windows.Forms.CheckBox();
+            this.cb8t6 = new System.Windows.Forms.CheckBox();
+            this.cb8t7 = new System.Windows.Forms.CheckBox();
+            this.label114 = new System.Windows.Forms.Label();
+            this.cb7t0 = new System.Windows.Forms.CheckBox();
+            this.cb7t1 = new System.Windows.Forms.CheckBox();
+            this.cb7t2 = new System.Windows.Forms.CheckBox();
+            this.cb7t3 = new System.Windows.Forms.CheckBox();
+            this.cb7t4 = new System.Windows.Forms.CheckBox();
+            this.cb7t5 = new System.Windows.Forms.CheckBox();
+            this.cb7t6 = new System.Windows.Forms.CheckBox();
+            this.cb7t7 = new System.Windows.Forms.CheckBox();
+            this.label115 = new System.Windows.Forms.Label();
+            this.cb6t0 = new System.Windows.Forms.CheckBox();
+            this.cb6t1 = new System.Windows.Forms.CheckBox();
+            this.cb6t2 = new System.Windows.Forms.CheckBox();
+            this.cb6t3 = new System.Windows.Forms.CheckBox();
+            this.cb6t4 = new System.Windows.Forms.CheckBox();
+            this.cb6t5 = new System.Windows.Forms.CheckBox();
+            this.cb6t6 = new System.Windows.Forms.CheckBox();
+            this.cb6t7 = new System.Windows.Forms.CheckBox();
+            this.label116 = new System.Windows.Forms.Label();
+            this.cb5t0 = new System.Windows.Forms.CheckBox();
+            this.cb5t1 = new System.Windows.Forms.CheckBox();
+            this.cb5t2 = new System.Windows.Forms.CheckBox();
+            this.cb5t3 = new System.Windows.Forms.CheckBox();
+            this.cb5t4 = new System.Windows.Forms.CheckBox();
+            this.cb5t5 = new System.Windows.Forms.CheckBox();
+            this.cb5t6 = new System.Windows.Forms.CheckBox();
+            this.cb5t7 = new System.Windows.Forms.CheckBox();
+            this.label117 = new System.Windows.Forms.Label();
+            this.cb4t0 = new System.Windows.Forms.CheckBox();
+            this.cb4t1 = new System.Windows.Forms.CheckBox();
+            this.cb4t2 = new System.Windows.Forms.CheckBox();
+            this.cb4t3 = new System.Windows.Forms.CheckBox();
+            this.cb4t4 = new System.Windows.Forms.CheckBox();
+            this.cb4t5 = new System.Windows.Forms.CheckBox();
+            this.cb4t6 = new System.Windows.Forms.CheckBox();
+            this.cb4t7 = new System.Windows.Forms.CheckBox();
+            this.label118 = new System.Windows.Forms.Label();
+            this.cb3t0 = new System.Windows.Forms.CheckBox();
+            this.cb3t1 = new System.Windows.Forms.CheckBox();
+            this.cb3t2 = new System.Windows.Forms.CheckBox();
+            this.cb3t3 = new System.Windows.Forms.CheckBox();
+            this.cb3t4 = new System.Windows.Forms.CheckBox();
+            this.cb3t5 = new System.Windows.Forms.CheckBox();
+            this.cb3t6 = new System.Windows.Forms.CheckBox();
+            this.cb3t7 = new System.Windows.Forms.CheckBox();
+            this.label119 = new System.Windows.Forms.Label();
+            this.cb2t0 = new System.Windows.Forms.CheckBox();
+            this.cb2t1 = new System.Windows.Forms.CheckBox();
+            this.cb2t2 = new System.Windows.Forms.CheckBox();
+            this.cb2t3 = new System.Windows.Forms.CheckBox();
+            this.cb2t4 = new System.Windows.Forms.CheckBox();
+            this.cb2t5 = new System.Windows.Forms.CheckBox();
+            this.cb2t6 = new System.Windows.Forms.CheckBox();
+            this.cb2t7 = new System.Windows.Forms.CheckBox();
+            this.label120 = new System.Windows.Forms.Label();
+            this.cb1t0 = new System.Windows.Forms.CheckBox();
+            this.cb1t1 = new System.Windows.Forms.CheckBox();
+            this.cb1t2 = new System.Windows.Forms.CheckBox();
+            this.cb1t3 = new System.Windows.Forms.CheckBox();
+            this.cb1t4 = new System.Windows.Forms.CheckBox();
+            this.cb1t5 = new System.Windows.Forms.CheckBox();
+            this.cb1t6 = new System.Windows.Forms.CheckBox();
+            this.cb1t7 = new System.Windows.Forms.CheckBox();
+            this.label121 = new System.Windows.Forms.Label();
+            this.label122 = new System.Windows.Forms.Label();
+            this.label123 = new System.Windows.Forms.Label();
+            this.label124 = new System.Windows.Forms.Label();
+            this.label125 = new System.Windows.Forms.Label();
+            this.label126 = new System.Windows.Forms.Label();
+            this.label127 = new System.Windows.Forms.Label();
+            this.label128 = new System.Windows.Forms.Label();
+            this.label130 = new System.Windows.Forms.Label();
+            this.grpPortA = new System.Windows.Forms.GroupBox();
+            this.cb15r4 = new System.Windows.Forms.CheckBox();
+            this.cb15r7 = new System.Windows.Forms.CheckBox();
+            this.cb15r6 = new System.Windows.Forms.CheckBox();
+            this.cb15r5 = new System.Windows.Forms.CheckBox();
+            this.cb15r3 = new System.Windows.Forms.CheckBox();
+            this.cb15r2 = new System.Windows.Forms.CheckBox();
+            this.cb15r1 = new System.Windows.Forms.CheckBox();
+            this.cb15r0 = new System.Windows.Forms.CheckBox();
+            this.label133 = new System.Windows.Forms.Label();
+            this.label134 = new System.Windows.Forms.Label();
+            this.cb14r0 = new System.Windows.Forms.CheckBox();
+            this.cb14r1 = new System.Windows.Forms.CheckBox();
+            this.cb14r2 = new System.Windows.Forms.CheckBox();
+            this.cb14r3 = new System.Windows.Forms.CheckBox();
+            this.cb14r4 = new System.Windows.Forms.CheckBox();
+            this.cb14r5 = new System.Windows.Forms.CheckBox();
+            this.cb14r6 = new System.Windows.Forms.CheckBox();
+            this.cb14r7 = new System.Windows.Forms.CheckBox();
+            this.label129 = new System.Windows.Forms.Label();
+            this.cb13r4 = new System.Windows.Forms.CheckBox();
+            this.label104 = new System.Windows.Forms.Label();
+            this.cb13r7 = new System.Windows.Forms.CheckBox();
+            this.cb13r6 = new System.Windows.Forms.CheckBox();
+            this.cb0r3 = new System.Windows.Forms.CheckBox();
+            this.cb13r5 = new System.Windows.Forms.CheckBox();
+            this.cb13r3 = new System.Windows.Forms.CheckBox();
+            this.cb0r0 = new System.Windows.Forms.CheckBox();
+            this.cb13r2 = new System.Windows.Forms.CheckBox();
+            this.cb13r1 = new System.Windows.Forms.CheckBox();
+            this.cb13r0 = new System.Windows.Forms.CheckBox();
+            this.cb0r1 = new System.Windows.Forms.CheckBox();
+            this.label102 = new System.Windows.Forms.Label();
+            this.cb0r2 = new System.Windows.Forms.CheckBox();
+            this.cb0r4 = new System.Windows.Forms.CheckBox();
+            this.cb0r5 = new System.Windows.Forms.CheckBox();
+            this.cb0r6 = new System.Windows.Forms.CheckBox();
+            this.cb0r7 = new System.Windows.Forms.CheckBox();
+            this.label101 = new System.Windows.Forms.Label();
+            this.cb12r0 = new System.Windows.Forms.CheckBox();
+            this.cb12r1 = new System.Windows.Forms.CheckBox();
+            this.cb12r2 = new System.Windows.Forms.CheckBox();
+            this.cb12r3 = new System.Windows.Forms.CheckBox();
+            this.cb12r4 = new System.Windows.Forms.CheckBox();
+            this.cb12r5 = new System.Windows.Forms.CheckBox();
+            this.cb12r6 = new System.Windows.Forms.CheckBox();
+            this.cb12r7 = new System.Windows.Forms.CheckBox();
+            this.label100 = new System.Windows.Forms.Label();
+            this.cb11r0 = new System.Windows.Forms.CheckBox();
+            this.cb11r1 = new System.Windows.Forms.CheckBox();
+            this.cb11r2 = new System.Windows.Forms.CheckBox();
+            this.cb11r3 = new System.Windows.Forms.CheckBox();
+            this.cb11r4 = new System.Windows.Forms.CheckBox();
+            this.cb11r5 = new System.Windows.Forms.CheckBox();
+            this.cb11r6 = new System.Windows.Forms.CheckBox();
+            this.cb11r7 = new System.Windows.Forms.CheckBox();
+            this.label99 = new System.Windows.Forms.Label();
+            this.cb10r0 = new System.Windows.Forms.CheckBox();
+            this.cb10r1 = new System.Windows.Forms.CheckBox();
+            this.cb10r2 = new System.Windows.Forms.CheckBox();
+            this.cb10r3 = new System.Windows.Forms.CheckBox();
+            this.cb10r4 = new System.Windows.Forms.CheckBox();
+            this.cb10r5 = new System.Windows.Forms.CheckBox();
+            this.cb10r6 = new System.Windows.Forms.CheckBox();
+            this.cb10r7 = new System.Windows.Forms.CheckBox();
+            this.label98 = new System.Windows.Forms.Label();
+            this.cb9r0 = new System.Windows.Forms.CheckBox();
+            this.cb9r1 = new System.Windows.Forms.CheckBox();
+            this.cb9r2 = new System.Windows.Forms.CheckBox();
+            this.cb9r3 = new System.Windows.Forms.CheckBox();
+            this.cb9r4 = new System.Windows.Forms.CheckBox();
+            this.cb9r5 = new System.Windows.Forms.CheckBox();
+            this.cb9r6 = new System.Windows.Forms.CheckBox();
+            this.cb9r7 = new System.Windows.Forms.CheckBox();
+            this.label97 = new System.Windows.Forms.Label();
+            this.cb8r0 = new System.Windows.Forms.CheckBox();
+            this.cb8r1 = new System.Windows.Forms.CheckBox();
+            this.cb8r2 = new System.Windows.Forms.CheckBox();
+            this.cb8r3 = new System.Windows.Forms.CheckBox();
+            this.cb8r4 = new System.Windows.Forms.CheckBox();
+            this.cb8r5 = new System.Windows.Forms.CheckBox();
+            this.cb8r6 = new System.Windows.Forms.CheckBox();
+            this.cb8r7 = new System.Windows.Forms.CheckBox();
+            this.label96 = new System.Windows.Forms.Label();
+            this.cb7r0 = new System.Windows.Forms.CheckBox();
+            this.cb7r1 = new System.Windows.Forms.CheckBox();
+            this.cb7r2 = new System.Windows.Forms.CheckBox();
+            this.cb7r3 = new System.Windows.Forms.CheckBox();
+            this.cb7r4 = new System.Windows.Forms.CheckBox();
+            this.cb7r5 = new System.Windows.Forms.CheckBox();
+            this.cb7r6 = new System.Windows.Forms.CheckBox();
+            this.cb7r7 = new System.Windows.Forms.CheckBox();
+            this.label95 = new System.Windows.Forms.Label();
+            this.cb6r0 = new System.Windows.Forms.CheckBox();
+            this.cb6r1 = new System.Windows.Forms.CheckBox();
+            this.cb6r2 = new System.Windows.Forms.CheckBox();
+            this.cb6r3 = new System.Windows.Forms.CheckBox();
+            this.cb6r4 = new System.Windows.Forms.CheckBox();
+            this.cb6r5 = new System.Windows.Forms.CheckBox();
+            this.cb6r6 = new System.Windows.Forms.CheckBox();
+            this.cb6r7 = new System.Windows.Forms.CheckBox();
+            this.label94 = new System.Windows.Forms.Label();
+            this.cb5r0 = new System.Windows.Forms.CheckBox();
+            this.cb5r1 = new System.Windows.Forms.CheckBox();
+            this.cb5r2 = new System.Windows.Forms.CheckBox();
+            this.cb5r3 = new System.Windows.Forms.CheckBox();
+            this.cb5r4 = new System.Windows.Forms.CheckBox();
+            this.cb5r5 = new System.Windows.Forms.CheckBox();
+            this.cb5r6 = new System.Windows.Forms.CheckBox();
+            this.cb5r7 = new System.Windows.Forms.CheckBox();
+            this.label93 = new System.Windows.Forms.Label();
+            this.cb4r0 = new System.Windows.Forms.CheckBox();
+            this.cb4r1 = new System.Windows.Forms.CheckBox();
+            this.cb4r2 = new System.Windows.Forms.CheckBox();
+            this.cb4r3 = new System.Windows.Forms.CheckBox();
+            this.cb4r4 = new System.Windows.Forms.CheckBox();
+            this.cb4r5 = new System.Windows.Forms.CheckBox();
+            this.cb4r6 = new System.Windows.Forms.CheckBox();
+            this.cb4r7 = new System.Windows.Forms.CheckBox();
+            this.label92 = new System.Windows.Forms.Label();
+            this.cb3r0 = new System.Windows.Forms.CheckBox();
+            this.cb3r1 = new System.Windows.Forms.CheckBox();
+            this.cb3r2 = new System.Windows.Forms.CheckBox();
+            this.cb3r3 = new System.Windows.Forms.CheckBox();
+            this.cb3r4 = new System.Windows.Forms.CheckBox();
+            this.cb3r5 = new System.Windows.Forms.CheckBox();
+            this.cb3r6 = new System.Windows.Forms.CheckBox();
+            this.cb3r7 = new System.Windows.Forms.CheckBox();
+            this.label91 = new System.Windows.Forms.Label();
+            this.cb2r0 = new System.Windows.Forms.CheckBox();
+            this.cb2r1 = new System.Windows.Forms.CheckBox();
+            this.cb2r2 = new System.Windows.Forms.CheckBox();
+            this.cb2r3 = new System.Windows.Forms.CheckBox();
+            this.cb2r4 = new System.Windows.Forms.CheckBox();
+            this.cb2r5 = new System.Windows.Forms.CheckBox();
+            this.cb2r6 = new System.Windows.Forms.CheckBox();
+            this.cb2r7 = new System.Windows.Forms.CheckBox();
+            this.label90 = new System.Windows.Forms.Label();
+            this.cb1r0 = new System.Windows.Forms.CheckBox();
+            this.cb1r1 = new System.Windows.Forms.CheckBox();
+            this.cb1r2 = new System.Windows.Forms.CheckBox();
+            this.cb1r3 = new System.Windows.Forms.CheckBox();
+            this.cb1r4 = new System.Windows.Forms.CheckBox();
+            this.cb1r5 = new System.Windows.Forms.CheckBox();
+            this.cb1r6 = new System.Windows.Forms.CheckBox();
+            this.cb1r7 = new System.Windows.Forms.CheckBox();
+            this.label89 = new System.Windows.Forms.Label();
+            this.label88 = new System.Windows.Forms.Label();
+            this.label87 = new System.Windows.Forms.Label();
+            this.label86 = new System.Windows.Forms.Label();
+            this.label85 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
+            this.label81 = new System.Windows.Forms.Label();
+            this.chkPortA = new System.Windows.Forms.CheckBox();
+            this.txtPortA = new System.Windows.Forms.TextBox();
+            this.label103 = new System.Windows.Forms.Label();
+            this.txtPortB = new System.Windows.Forms.TextBox();
+            this.label106 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.AccPort = new System.IO.Ports.SerialPort(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -433,6 +754,8 @@ namespace DataDecoder
             this.lblAvg = new System.Windows.Forms.Label();
             this.WN2Timer = new System.Windows.Forms.Timer(this.components);
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
+            this.lblVHF = new System.Windows.Forms.Label();
+            this.label137 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -473,6 +796,9 @@ namespace DataDecoder
             this.grpSpeed.SuspendLayout();
             this.grpModel.SuspendLayout();
             this.groupBox14.SuspendLayout();
+            this.tabExtCtrl.SuspendLayout();
+            this.grpPortB.SuspendLayout();
+            this.grpPortA.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -488,6 +814,7 @@ namespace DataDecoder
             this.tabControl.Controls.Add(this.tabMacro);
             this.tabControl.Controls.Add(this.tabRotor);
             this.tabControl.Controls.Add(this.tabSetup);
+            this.tabControl.Controls.Add(this.tabExtCtrl);
             this.tabControl.ItemSize = new System.Drawing.Size(42, 18);
             this.tabControl.Location = new System.Drawing.Point(0, 24);
             this.tabControl.Name = "tabControl";
@@ -4938,6 +5265,3816 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.txtLong, "Home station longitude");
             this.txtLong.TextChanged += new System.EventHandler(this.txtLong_TextChanged);
             // 
+            // tabExtCtrl
+            // 
+            this.tabExtCtrl.Controls.Add(this.label137);
+            this.tabExtCtrl.Controls.Add(this.lblVHF);
+            this.tabExtCtrl.Controls.Add(this.label132);
+            this.tabExtCtrl.Controls.Add(this.label131);
+            this.tabExtCtrl.Controls.Add(this.chkPortB);
+            this.tabExtCtrl.Controls.Add(this.btnClrPortB);
+            this.tabExtCtrl.Controls.Add(this.btnClrPortA);
+            this.tabExtCtrl.Controls.Add(this.grpPortB);
+            this.tabExtCtrl.Controls.Add(this.grpPortA);
+            this.tabExtCtrl.Controls.Add(this.chkPortA);
+            this.tabExtCtrl.Controls.Add(this.txtPortA);
+            this.tabExtCtrl.Controls.Add(this.label103);
+            this.tabExtCtrl.Controls.Add(this.txtPortB);
+            this.tabExtCtrl.Controls.Add(this.label106);
+            this.tabExtCtrl.Location = new System.Drawing.Point(4, 22);
+            this.tabExtCtrl.Name = "tabExtCtrl";
+            this.tabExtCtrl.Size = new System.Drawing.Size(417, 309);
+            this.tabExtCtrl.TabIndex = 8;
+            this.tabExtCtrl.Text = "ExtCtrl";
+            this.tabExtCtrl.UseVisualStyleBackColor = true;
+            // 
+            // label132
+            // 
+            this.label132.AutoSize = true;
+            this.label132.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label132.ForeColor = System.Drawing.Color.Blue;
+            this.label132.Location = new System.Drawing.Point(192, 30);
+            this.label132.Name = "label132";
+            this.label132.Size = new System.Drawing.Size(34, 13);
+            this.label132.TabIndex = 279;
+            this.label132.Text = "<-----";
+            // 
+            // label131
+            // 
+            this.label131.AutoSize = true;
+            this.label131.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label131.ForeColor = System.Drawing.Color.Blue;
+            this.label131.Location = new System.Drawing.Point(192, 197);
+            this.label131.Name = "label131";
+            this.label131.Size = new System.Drawing.Size(34, 13);
+            this.label131.TabIndex = 278;
+            this.label131.Text = "----->";
+            // 
+            // chkPortB
+            // 
+            this.chkPortB.AutoSize = true;
+            this.chkPortB.ForeColor = System.Drawing.Color.Navy;
+            this.chkPortB.Location = new System.Drawing.Point(182, 215);
+            this.chkPortB.Name = "chkPortB";
+            this.chkPortB.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkPortB.Size = new System.Drawing.Size(51, 17);
+            this.chkPortB.TabIndex = 277;
+            this.chkPortB.Text = "Enab";
+            this.chkPortB.UseVisualStyleBackColor = true;
+            this.chkPortB.CheckedChanged += new System.EventHandler(this.chkPortB_CheckedChanged);
+            // 
+            // btnClrPortB
+            // 
+            this.btnClrPortB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClrPortB.BackColor = System.Drawing.SystemColors.Control;
+            this.btnClrPortB.Enabled = false;
+            this.btnClrPortB.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnClrPortB.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClrPortB.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnClrPortB.Location = new System.Drawing.Point(191, 277);
+            this.btnClrPortB.Name = "btnClrPortB";
+            this.btnClrPortB.Size = new System.Drawing.Size(35, 19);
+            this.btnClrPortB.TabIndex = 276;
+            this.btnClrPortB.Text = "Clear";
+            this.toolTip1.SetToolTip(this.btnClrPortB, "Clears all Port B bits");
+            this.btnClrPortB.UseVisualStyleBackColor = false;
+            this.btnClrPortB.Click += new System.EventHandler(this.btnClrPortB_Click);
+            // 
+            // btnClrPortA
+            // 
+            this.btnClrPortA.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClrPortA.BackColor = System.Drawing.SystemColors.Control;
+            this.btnClrPortA.Enabled = false;
+            this.btnClrPortA.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnClrPortA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClrPortA.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnClrPortA.Location = new System.Drawing.Point(192, 110);
+            this.btnClrPortA.Name = "btnClrPortA";
+            this.btnClrPortA.Size = new System.Drawing.Size(35, 19);
+            this.btnClrPortA.TabIndex = 275;
+            this.btnClrPortA.Text = "Clear";
+            this.toolTip1.SetToolTip(this.btnClrPortA, "Clears all Port A bits");
+            this.btnClrPortA.UseVisualStyleBackColor = false;
+            this.btnClrPortA.Click += new System.EventHandler(this.btnClrPortA_Click);
+            // 
+            // grpPortB
+            // 
+            this.grpPortB.Controls.Add(this.cb15t4);
+            this.grpPortB.Controls.Add(this.label105);
+            this.grpPortB.Controls.Add(this.cb15t7);
+            this.grpPortB.Controls.Add(this.cb13t4);
+            this.grpPortB.Controls.Add(this.cb15t6);
+            this.grpPortB.Controls.Add(this.label107);
+            this.grpPortB.Controls.Add(this.cb15t5);
+            this.grpPortB.Controls.Add(this.cb13t7);
+            this.grpPortB.Controls.Add(this.cb15t3);
+            this.grpPortB.Controls.Add(this.cb13t6);
+            this.grpPortB.Controls.Add(this.cb15t2);
+            this.grpPortB.Controls.Add(this.cb0t3);
+            this.grpPortB.Controls.Add(this.cb15t1);
+            this.grpPortB.Controls.Add(this.cb13t5);
+            this.grpPortB.Controls.Add(this.cb15t0);
+            this.grpPortB.Controls.Add(this.cb13t3);
+            this.grpPortB.Controls.Add(this.label135);
+            this.grpPortB.Controls.Add(this.cb0t0);
+            this.grpPortB.Controls.Add(this.label136);
+            this.grpPortB.Controls.Add(this.cb13t2);
+            this.grpPortB.Controls.Add(this.cb14t0);
+            this.grpPortB.Controls.Add(this.cb13t1);
+            this.grpPortB.Controls.Add(this.cb14t1);
+            this.grpPortB.Controls.Add(this.cb13t0);
+            this.grpPortB.Controls.Add(this.cb14t2);
+            this.grpPortB.Controls.Add(this.cb0t1);
+            this.grpPortB.Controls.Add(this.cb14t3);
+            this.grpPortB.Controls.Add(this.label108);
+            this.grpPortB.Controls.Add(this.cb14t4);
+            this.grpPortB.Controls.Add(this.cb0t2);
+            this.grpPortB.Controls.Add(this.cb14t5);
+            this.grpPortB.Controls.Add(this.cb14t6);
+            this.grpPortB.Controls.Add(this.cb0t4);
+            this.grpPortB.Controls.Add(this.cb14t7);
+            this.grpPortB.Controls.Add(this.cb0t5);
+            this.grpPortB.Controls.Add(this.cb0t6);
+            this.grpPortB.Controls.Add(this.cb0t7);
+            this.grpPortB.Controls.Add(this.label109);
+            this.grpPortB.Controls.Add(this.cb12t0);
+            this.grpPortB.Controls.Add(this.cb12t1);
+            this.grpPortB.Controls.Add(this.cb12t2);
+            this.grpPortB.Controls.Add(this.cb12t3);
+            this.grpPortB.Controls.Add(this.cb12t4);
+            this.grpPortB.Controls.Add(this.cb12t5);
+            this.grpPortB.Controls.Add(this.cb12t6);
+            this.grpPortB.Controls.Add(this.cb12t7);
+            this.grpPortB.Controls.Add(this.label110);
+            this.grpPortB.Controls.Add(this.cb11t0);
+            this.grpPortB.Controls.Add(this.cb11t1);
+            this.grpPortB.Controls.Add(this.cb11t2);
+            this.grpPortB.Controls.Add(this.cb11t3);
+            this.grpPortB.Controls.Add(this.cb11t4);
+            this.grpPortB.Controls.Add(this.cb11t5);
+            this.grpPortB.Controls.Add(this.cb11t6);
+            this.grpPortB.Controls.Add(this.cb11t7);
+            this.grpPortB.Controls.Add(this.label111);
+            this.grpPortB.Controls.Add(this.cb10t0);
+            this.grpPortB.Controls.Add(this.cb10t1);
+            this.grpPortB.Controls.Add(this.cb10t2);
+            this.grpPortB.Controls.Add(this.cb10t3);
+            this.grpPortB.Controls.Add(this.cb10t4);
+            this.grpPortB.Controls.Add(this.cb10t5);
+            this.grpPortB.Controls.Add(this.cb10t6);
+            this.grpPortB.Controls.Add(this.cb10t7);
+            this.grpPortB.Controls.Add(this.label112);
+            this.grpPortB.Controls.Add(this.cb9t0);
+            this.grpPortB.Controls.Add(this.cb9t1);
+            this.grpPortB.Controls.Add(this.cb9t2);
+            this.grpPortB.Controls.Add(this.cb9t3);
+            this.grpPortB.Controls.Add(this.cb9t4);
+            this.grpPortB.Controls.Add(this.cb9t5);
+            this.grpPortB.Controls.Add(this.cb9t6);
+            this.grpPortB.Controls.Add(this.cb9t7);
+            this.grpPortB.Controls.Add(this.label113);
+            this.grpPortB.Controls.Add(this.cb8t0);
+            this.grpPortB.Controls.Add(this.cb8t1);
+            this.grpPortB.Controls.Add(this.cb8t2);
+            this.grpPortB.Controls.Add(this.cb8t3);
+            this.grpPortB.Controls.Add(this.cb8t4);
+            this.grpPortB.Controls.Add(this.cb8t5);
+            this.grpPortB.Controls.Add(this.cb8t6);
+            this.grpPortB.Controls.Add(this.cb8t7);
+            this.grpPortB.Controls.Add(this.label114);
+            this.grpPortB.Controls.Add(this.cb7t0);
+            this.grpPortB.Controls.Add(this.cb7t1);
+            this.grpPortB.Controls.Add(this.cb7t2);
+            this.grpPortB.Controls.Add(this.cb7t3);
+            this.grpPortB.Controls.Add(this.cb7t4);
+            this.grpPortB.Controls.Add(this.cb7t5);
+            this.grpPortB.Controls.Add(this.cb7t6);
+            this.grpPortB.Controls.Add(this.cb7t7);
+            this.grpPortB.Controls.Add(this.label115);
+            this.grpPortB.Controls.Add(this.cb6t0);
+            this.grpPortB.Controls.Add(this.cb6t1);
+            this.grpPortB.Controls.Add(this.cb6t2);
+            this.grpPortB.Controls.Add(this.cb6t3);
+            this.grpPortB.Controls.Add(this.cb6t4);
+            this.grpPortB.Controls.Add(this.cb6t5);
+            this.grpPortB.Controls.Add(this.cb6t6);
+            this.grpPortB.Controls.Add(this.cb6t7);
+            this.grpPortB.Controls.Add(this.label116);
+            this.grpPortB.Controls.Add(this.cb5t0);
+            this.grpPortB.Controls.Add(this.cb5t1);
+            this.grpPortB.Controls.Add(this.cb5t2);
+            this.grpPortB.Controls.Add(this.cb5t3);
+            this.grpPortB.Controls.Add(this.cb5t4);
+            this.grpPortB.Controls.Add(this.cb5t5);
+            this.grpPortB.Controls.Add(this.cb5t6);
+            this.grpPortB.Controls.Add(this.cb5t7);
+            this.grpPortB.Controls.Add(this.label117);
+            this.grpPortB.Controls.Add(this.cb4t0);
+            this.grpPortB.Controls.Add(this.cb4t1);
+            this.grpPortB.Controls.Add(this.cb4t2);
+            this.grpPortB.Controls.Add(this.cb4t3);
+            this.grpPortB.Controls.Add(this.cb4t4);
+            this.grpPortB.Controls.Add(this.cb4t5);
+            this.grpPortB.Controls.Add(this.cb4t6);
+            this.grpPortB.Controls.Add(this.cb4t7);
+            this.grpPortB.Controls.Add(this.label118);
+            this.grpPortB.Controls.Add(this.cb3t0);
+            this.grpPortB.Controls.Add(this.cb3t1);
+            this.grpPortB.Controls.Add(this.cb3t2);
+            this.grpPortB.Controls.Add(this.cb3t3);
+            this.grpPortB.Controls.Add(this.cb3t4);
+            this.grpPortB.Controls.Add(this.cb3t5);
+            this.grpPortB.Controls.Add(this.cb3t6);
+            this.grpPortB.Controls.Add(this.cb3t7);
+            this.grpPortB.Controls.Add(this.label119);
+            this.grpPortB.Controls.Add(this.cb2t0);
+            this.grpPortB.Controls.Add(this.cb2t1);
+            this.grpPortB.Controls.Add(this.cb2t2);
+            this.grpPortB.Controls.Add(this.cb2t3);
+            this.grpPortB.Controls.Add(this.cb2t4);
+            this.grpPortB.Controls.Add(this.cb2t5);
+            this.grpPortB.Controls.Add(this.cb2t6);
+            this.grpPortB.Controls.Add(this.cb2t7);
+            this.grpPortB.Controls.Add(this.label120);
+            this.grpPortB.Controls.Add(this.cb1t0);
+            this.grpPortB.Controls.Add(this.cb1t1);
+            this.grpPortB.Controls.Add(this.cb1t2);
+            this.grpPortB.Controls.Add(this.cb1t3);
+            this.grpPortB.Controls.Add(this.cb1t4);
+            this.grpPortB.Controls.Add(this.cb1t5);
+            this.grpPortB.Controls.Add(this.cb1t6);
+            this.grpPortB.Controls.Add(this.cb1t7);
+            this.grpPortB.Controls.Add(this.label121);
+            this.grpPortB.Controls.Add(this.label122);
+            this.grpPortB.Controls.Add(this.label123);
+            this.grpPortB.Controls.Add(this.label124);
+            this.grpPortB.Controls.Add(this.label125);
+            this.grpPortB.Controls.Add(this.label126);
+            this.grpPortB.Controls.Add(this.label127);
+            this.grpPortB.Controls.Add(this.label128);
+            this.grpPortB.Controls.Add(this.label130);
+            this.grpPortB.ForeColor = System.Drawing.Color.Blue;
+            this.grpPortB.Location = new System.Drawing.Point(239, 6);
+            this.grpPortB.Name = "grpPortB";
+            this.grpPortB.Size = new System.Drawing.Size(174, 292);
+            this.grpPortB.TabIndex = 1;
+            this.grpPortB.TabStop = false;
+            this.grpPortB.Text = "Port B";
+            // 
+            // cb15t4
+            // 
+            this.cb15t4.AutoSize = true;
+            this.cb15t4.Enabled = false;
+            this.cb15t4.Location = new System.Drawing.Point(89, 272);
+            this.cb15t4.Name = "cb15t4";
+            this.cb15t4.Size = new System.Drawing.Size(15, 14);
+            this.cb15t4.TabIndex = 169;
+            this.cb15t4.UseVisualStyleBackColor = true;
+            this.cb15t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label105
+            // 
+            this.label105.AutoSize = true;
+            this.label105.ForeColor = System.Drawing.Color.Firebrick;
+            this.label105.Location = new System.Drawing.Point(2, 24);
+            this.label105.Name = "label105";
+            this.label105.Size = new System.Drawing.Size(34, 13);
+            this.label105.TabIndex = 410;
+            this.label105.Text = "VHF+";
+            // 
+            // cb15t7
+            // 
+            this.cb15t7.AutoSize = true;
+            this.cb15t7.Enabled = false;
+            this.cb15t7.Location = new System.Drawing.Point(40, 272);
+            this.cb15t7.Name = "cb15t7";
+            this.cb15t7.Size = new System.Drawing.Size(15, 14);
+            this.cb15t7.TabIndex = 166;
+            this.cb15t7.UseVisualStyleBackColor = true;
+            this.cb15t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb13t4
+            // 
+            this.cb13t4.AutoSize = true;
+            this.cb13t4.Enabled = false;
+            this.cb13t4.Location = new System.Drawing.Point(89, 237);
+            this.cb13t4.Name = "cb13t4";
+            this.cb13t4.Size = new System.Drawing.Size(15, 14);
+            this.cb13t4.TabIndex = 403;
+            this.cb13t4.UseVisualStyleBackColor = true;
+            this.cb13t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb15t6
+            // 
+            this.cb15t6.AutoSize = true;
+            this.cb15t6.Enabled = false;
+            this.cb15t6.Location = new System.Drawing.Point(57, 272);
+            this.cb15t6.Name = "cb15t6";
+            this.cb15t6.Size = new System.Drawing.Size(15, 14);
+            this.cb15t6.TabIndex = 167;
+            this.cb15t6.UseVisualStyleBackColor = true;
+            this.cb15t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label107
+            // 
+            this.label107.AutoSize = true;
+            this.label107.ForeColor = System.Drawing.Color.Navy;
+            this.label107.Location = new System.Drawing.Point(39, 8);
+            this.label107.Name = "label107";
+            this.label107.Size = new System.Drawing.Size(130, 13);
+            this.label107.TabIndex = 409;
+            this.label107.Text = "- - - - - - - Port Bits - - - - - - -";
+            // 
+            // cb15t5
+            // 
+            this.cb15t5.AutoSize = true;
+            this.cb15t5.Enabled = false;
+            this.cb15t5.Location = new System.Drawing.Point(73, 272);
+            this.cb15t5.Name = "cb15t5";
+            this.cb15t5.Size = new System.Drawing.Size(15, 14);
+            this.cb15t5.TabIndex = 168;
+            this.cb15t5.UseVisualStyleBackColor = true;
+            this.cb15t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb13t7
+            // 
+            this.cb13t7.AutoSize = true;
+            this.cb13t7.Enabled = false;
+            this.cb13t7.Location = new System.Drawing.Point(40, 237);
+            this.cb13t7.Name = "cb13t7";
+            this.cb13t7.Size = new System.Drawing.Size(15, 14);
+            this.cb13t7.TabIndex = 400;
+            this.cb13t7.UseVisualStyleBackColor = true;
+            this.cb13t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb15t3
+            // 
+            this.cb15t3.AutoSize = true;
+            this.cb15t3.Enabled = false;
+            this.cb15t3.Location = new System.Drawing.Point(105, 272);
+            this.cb15t3.Name = "cb15t3";
+            this.cb15t3.Size = new System.Drawing.Size(15, 14);
+            this.cb15t3.TabIndex = 170;
+            this.cb15t3.UseVisualStyleBackColor = true;
+            this.cb15t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb13t6
+            // 
+            this.cb13t6.AutoSize = true;
+            this.cb13t6.Enabled = false;
+            this.cb13t6.Location = new System.Drawing.Point(57, 237);
+            this.cb13t6.Name = "cb13t6";
+            this.cb13t6.Size = new System.Drawing.Size(15, 14);
+            this.cb13t6.TabIndex = 401;
+            this.cb13t6.UseVisualStyleBackColor = true;
+            this.cb13t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb15t2
+            // 
+            this.cb15t2.AutoSize = true;
+            this.cb15t2.Enabled = false;
+            this.cb15t2.Location = new System.Drawing.Point(121, 272);
+            this.cb15t2.Name = "cb15t2";
+            this.cb15t2.Size = new System.Drawing.Size(15, 14);
+            this.cb15t2.TabIndex = 171;
+            this.cb15t2.UseVisualStyleBackColor = true;
+            this.cb15t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb0t3
+            // 
+            this.cb0t3.AutoSize = true;
+            this.cb0t3.Enabled = false;
+            this.cb0t3.Location = new System.Drawing.Point(105, 40);
+            this.cb0t3.Name = "cb0t3";
+            this.cb0t3.Size = new System.Drawing.Size(15, 14);
+            this.cb0t3.TabIndex = 278;
+            this.cb0t3.UseVisualStyleBackColor = true;
+            this.cb0t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb15t1
+            // 
+            this.cb15t1.AutoSize = true;
+            this.cb15t1.Enabled = false;
+            this.cb15t1.Location = new System.Drawing.Point(137, 272);
+            this.cb15t1.Name = "cb15t1";
+            this.cb15t1.Size = new System.Drawing.Size(15, 14);
+            this.cb15t1.TabIndex = 172;
+            this.cb15t1.UseVisualStyleBackColor = true;
+            this.cb15t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb13t5
+            // 
+            this.cb13t5.AutoSize = true;
+            this.cb13t5.Enabled = false;
+            this.cb13t5.Location = new System.Drawing.Point(73, 237);
+            this.cb13t5.Name = "cb13t5";
+            this.cb13t5.Size = new System.Drawing.Size(15, 14);
+            this.cb13t5.TabIndex = 402;
+            this.cb13t5.UseVisualStyleBackColor = true;
+            this.cb13t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb15t0
+            // 
+            this.cb15t0.AutoSize = true;
+            this.cb15t0.Enabled = false;
+            this.cb15t0.Location = new System.Drawing.Point(153, 272);
+            this.cb15t0.Name = "cb15t0";
+            this.cb15t0.Size = new System.Drawing.Size(15, 14);
+            this.cb15t0.TabIndex = 173;
+            this.cb15t0.UseVisualStyleBackColor = true;
+            this.cb15t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb13t3
+            // 
+            this.cb13t3.AutoSize = true;
+            this.cb13t3.Enabled = false;
+            this.cb13t3.Location = new System.Drawing.Point(105, 237);
+            this.cb13t3.Name = "cb13t3";
+            this.cb13t3.Size = new System.Drawing.Size(15, 14);
+            this.cb13t3.TabIndex = 404;
+            this.cb13t3.UseVisualStyleBackColor = true;
+            this.cb13t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label135
+            // 
+            this.label135.AutoSize = true;
+            this.label135.ForeColor = System.Drawing.Color.Green;
+            this.label135.Location = new System.Drawing.Point(7, 257);
+            this.label135.Name = "label135";
+            this.label135.Size = new System.Drawing.Size(27, 13);
+            this.label135.TabIndex = 174;
+            this.label135.Text = "HF6";
+            // 
+            // cb0t0
+            // 
+            this.cb0t0.AutoSize = true;
+            this.cb0t0.Enabled = false;
+            this.cb0t0.Location = new System.Drawing.Point(153, 40);
+            this.cb0t0.Name = "cb0t0";
+            this.cb0t0.Size = new System.Drawing.Size(15, 14);
+            this.cb0t0.TabIndex = 275;
+            this.cb0t0.UseVisualStyleBackColor = true;
+            this.cb0t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label136
+            // 
+            this.label136.AutoSize = true;
+            this.label136.ForeColor = System.Drawing.Color.Green;
+            this.label136.Location = new System.Drawing.Point(7, 272);
+            this.label136.Name = "label136";
+            this.label136.Size = new System.Drawing.Size(27, 13);
+            this.label136.TabIndex = 165;
+            this.label136.Text = "HF2";
+            // 
+            // cb13t2
+            // 
+            this.cb13t2.AutoSize = true;
+            this.cb13t2.Enabled = false;
+            this.cb13t2.Location = new System.Drawing.Point(121, 237);
+            this.cb13t2.Name = "cb13t2";
+            this.cb13t2.Size = new System.Drawing.Size(15, 14);
+            this.cb13t2.TabIndex = 405;
+            this.cb13t2.UseVisualStyleBackColor = true;
+            this.cb13t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb14t0
+            // 
+            this.cb14t0.AutoSize = true;
+            this.cb14t0.Enabled = false;
+            this.cb14t0.Location = new System.Drawing.Point(153, 257);
+            this.cb14t0.Name = "cb14t0";
+            this.cb14t0.Size = new System.Drawing.Size(15, 14);
+            this.cb14t0.TabIndex = 164;
+            this.cb14t0.UseVisualStyleBackColor = true;
+            this.cb14t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb13t1
+            // 
+            this.cb13t1.AutoSize = true;
+            this.cb13t1.Enabled = false;
+            this.cb13t1.Location = new System.Drawing.Point(137, 237);
+            this.cb13t1.Name = "cb13t1";
+            this.cb13t1.Size = new System.Drawing.Size(15, 14);
+            this.cb13t1.TabIndex = 406;
+            this.cb13t1.UseVisualStyleBackColor = true;
+            this.cb13t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb14t1
+            // 
+            this.cb14t1.AutoSize = true;
+            this.cb14t1.Enabled = false;
+            this.cb14t1.Location = new System.Drawing.Point(137, 257);
+            this.cb14t1.Name = "cb14t1";
+            this.cb14t1.Size = new System.Drawing.Size(15, 14);
+            this.cb14t1.TabIndex = 163;
+            this.cb14t1.UseVisualStyleBackColor = true;
+            this.cb14t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb13t0
+            // 
+            this.cb13t0.AutoSize = true;
+            this.cb13t0.Enabled = false;
+            this.cb13t0.Location = new System.Drawing.Point(153, 237);
+            this.cb13t0.Name = "cb13t0";
+            this.cb13t0.Size = new System.Drawing.Size(15, 14);
+            this.cb13t0.TabIndex = 407;
+            this.cb13t0.UseVisualStyleBackColor = true;
+            this.cb13t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb14t2
+            // 
+            this.cb14t2.AutoSize = true;
+            this.cb14t2.Enabled = false;
+            this.cb14t2.Location = new System.Drawing.Point(121, 257);
+            this.cb14t2.Name = "cb14t2";
+            this.cb14t2.Size = new System.Drawing.Size(15, 14);
+            this.cb14t2.TabIndex = 162;
+            this.cb14t2.UseVisualStyleBackColor = true;
+            this.cb14t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb0t1
+            // 
+            this.cb0t1.AutoSize = true;
+            this.cb0t1.Enabled = false;
+            this.cb0t1.Location = new System.Drawing.Point(137, 40);
+            this.cb0t1.Name = "cb0t1";
+            this.cb0t1.Size = new System.Drawing.Size(15, 14);
+            this.cb0t1.TabIndex = 276;
+            this.cb0t1.UseVisualStyleBackColor = true;
+            this.cb0t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb14t3
+            // 
+            this.cb14t3.AutoSize = true;
+            this.cb14t3.Enabled = false;
+            this.cb14t3.Location = new System.Drawing.Point(105, 257);
+            this.cb14t3.Name = "cb14t3";
+            this.cb14t3.Size = new System.Drawing.Size(15, 14);
+            this.cb14t3.TabIndex = 161;
+            this.cb14t3.UseVisualStyleBackColor = true;
+            this.cb14t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label108
+            // 
+            this.label108.AutoSize = true;
+            this.label108.ForeColor = System.Drawing.Color.Firebrick;
+            this.label108.Location = new System.Drawing.Point(7, 222);
+            this.label108.Name = "label108";
+            this.label108.Size = new System.Drawing.Size(19, 13);
+            this.label108.TabIndex = 408;
+            this.label108.Text = "12";
+            // 
+            // cb14t4
+            // 
+            this.cb14t4.AutoSize = true;
+            this.cb14t4.Enabled = false;
+            this.cb14t4.Location = new System.Drawing.Point(89, 257);
+            this.cb14t4.Name = "cb14t4";
+            this.cb14t4.Size = new System.Drawing.Size(15, 14);
+            this.cb14t4.TabIndex = 160;
+            this.cb14t4.UseVisualStyleBackColor = true;
+            this.cb14t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb0t2
+            // 
+            this.cb0t2.AutoSize = true;
+            this.cb0t2.Enabled = false;
+            this.cb0t2.Location = new System.Drawing.Point(121, 40);
+            this.cb0t2.Name = "cb0t2";
+            this.cb0t2.Size = new System.Drawing.Size(15, 14);
+            this.cb0t2.TabIndex = 277;
+            this.cb0t2.UseVisualStyleBackColor = true;
+            this.cb0t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb14t5
+            // 
+            this.cb14t5.AutoSize = true;
+            this.cb14t5.Enabled = false;
+            this.cb14t5.Location = new System.Drawing.Point(73, 257);
+            this.cb14t5.Name = "cb14t5";
+            this.cb14t5.Size = new System.Drawing.Size(15, 14);
+            this.cb14t5.TabIndex = 159;
+            this.cb14t5.UseVisualStyleBackColor = true;
+            this.cb14t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb14t6
+            // 
+            this.cb14t6.AutoSize = true;
+            this.cb14t6.Enabled = false;
+            this.cb14t6.Location = new System.Drawing.Point(57, 257);
+            this.cb14t6.Name = "cb14t6";
+            this.cb14t6.Size = new System.Drawing.Size(15, 14);
+            this.cb14t6.TabIndex = 158;
+            this.cb14t6.UseVisualStyleBackColor = true;
+            this.cb14t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb0t4
+            // 
+            this.cb0t4.AutoSize = true;
+            this.cb0t4.Enabled = false;
+            this.cb0t4.Location = new System.Drawing.Point(90, 40);
+            this.cb0t4.Name = "cb0t4";
+            this.cb0t4.Size = new System.Drawing.Size(15, 14);
+            this.cb0t4.TabIndex = 279;
+            this.cb0t4.UseVisualStyleBackColor = true;
+            this.cb0t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb14t7
+            // 
+            this.cb14t7.AutoSize = true;
+            this.cb14t7.Enabled = false;
+            this.cb14t7.Location = new System.Drawing.Point(40, 257);
+            this.cb14t7.Name = "cb14t7";
+            this.cb14t7.Size = new System.Drawing.Size(15, 14);
+            this.cb14t7.TabIndex = 157;
+            this.cb14t7.UseVisualStyleBackColor = true;
+            this.cb14t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb0t5
+            // 
+            this.cb0t5.AutoSize = true;
+            this.cb0t5.Enabled = false;
+            this.cb0t5.Location = new System.Drawing.Point(73, 40);
+            this.cb0t5.Name = "cb0t5";
+            this.cb0t5.Size = new System.Drawing.Size(15, 14);
+            this.cb0t5.TabIndex = 280;
+            this.cb0t5.UseVisualStyleBackColor = true;
+            this.cb0t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb0t6
+            // 
+            this.cb0t6.AutoSize = true;
+            this.cb0t6.Enabled = false;
+            this.cb0t6.Location = new System.Drawing.Point(57, 40);
+            this.cb0t6.Name = "cb0t6";
+            this.cb0t6.Size = new System.Drawing.Size(15, 14);
+            this.cb0t6.TabIndex = 281;
+            this.cb0t6.UseVisualStyleBackColor = true;
+            this.cb0t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb0t7
+            // 
+            this.cb0t7.AutoSize = true;
+            this.cb0t7.Enabled = false;
+            this.cb0t7.Location = new System.Drawing.Point(40, 40);
+            this.cb0t7.Name = "cb0t7";
+            this.cb0t7.Size = new System.Drawing.Size(15, 14);
+            this.cb0t7.TabIndex = 282;
+            this.cb0t7.UseVisualStyleBackColor = true;
+            this.cb0t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label109
+            // 
+            this.label109.AutoSize = true;
+            this.label109.ForeColor = System.Drawing.Color.Firebrick;
+            this.label109.Location = new System.Drawing.Point(7, 237);
+            this.label109.Name = "label109";
+            this.label109.Size = new System.Drawing.Size(19, 13);
+            this.label109.TabIndex = 399;
+            this.label109.Text = "13";
+            // 
+            // cb12t0
+            // 
+            this.cb12t0.AutoSize = true;
+            this.cb12t0.Enabled = false;
+            this.cb12t0.Location = new System.Drawing.Point(153, 222);
+            this.cb12t0.Name = "cb12t0";
+            this.cb12t0.Size = new System.Drawing.Size(15, 14);
+            this.cb12t0.TabIndex = 398;
+            this.cb12t0.UseVisualStyleBackColor = true;
+            this.cb12t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb12t1
+            // 
+            this.cb12t1.AutoSize = true;
+            this.cb12t1.Enabled = false;
+            this.cb12t1.Location = new System.Drawing.Point(137, 222);
+            this.cb12t1.Name = "cb12t1";
+            this.cb12t1.Size = new System.Drawing.Size(15, 14);
+            this.cb12t1.TabIndex = 397;
+            this.cb12t1.UseVisualStyleBackColor = true;
+            this.cb12t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb12t2
+            // 
+            this.cb12t2.AutoSize = true;
+            this.cb12t2.Enabled = false;
+            this.cb12t2.Location = new System.Drawing.Point(121, 222);
+            this.cb12t2.Name = "cb12t2";
+            this.cb12t2.Size = new System.Drawing.Size(15, 14);
+            this.cb12t2.TabIndex = 396;
+            this.cb12t2.UseVisualStyleBackColor = true;
+            this.cb12t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb12t3
+            // 
+            this.cb12t3.AutoSize = true;
+            this.cb12t3.Enabled = false;
+            this.cb12t3.Location = new System.Drawing.Point(105, 222);
+            this.cb12t3.Name = "cb12t3";
+            this.cb12t3.Size = new System.Drawing.Size(15, 14);
+            this.cb12t3.TabIndex = 395;
+            this.cb12t3.UseVisualStyleBackColor = true;
+            this.cb12t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb12t4
+            // 
+            this.cb12t4.AutoSize = true;
+            this.cb12t4.Enabled = false;
+            this.cb12t4.Location = new System.Drawing.Point(89, 222);
+            this.cb12t4.Name = "cb12t4";
+            this.cb12t4.Size = new System.Drawing.Size(15, 14);
+            this.cb12t4.TabIndex = 394;
+            this.cb12t4.UseVisualStyleBackColor = true;
+            this.cb12t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb12t5
+            // 
+            this.cb12t5.AutoSize = true;
+            this.cb12t5.Enabled = false;
+            this.cb12t5.Location = new System.Drawing.Point(73, 222);
+            this.cb12t5.Name = "cb12t5";
+            this.cb12t5.Size = new System.Drawing.Size(15, 14);
+            this.cb12t5.TabIndex = 393;
+            this.cb12t5.UseVisualStyleBackColor = true;
+            this.cb12t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb12t6
+            // 
+            this.cb12t6.AutoSize = true;
+            this.cb12t6.Enabled = false;
+            this.cb12t6.Location = new System.Drawing.Point(57, 222);
+            this.cb12t6.Name = "cb12t6";
+            this.cb12t6.Size = new System.Drawing.Size(15, 14);
+            this.cb12t6.TabIndex = 392;
+            this.cb12t6.UseVisualStyleBackColor = true;
+            this.cb12t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb12t7
+            // 
+            this.cb12t7.AutoSize = true;
+            this.cb12t7.Enabled = false;
+            this.cb12t7.Location = new System.Drawing.Point(40, 222);
+            this.cb12t7.Name = "cb12t7";
+            this.cb12t7.Size = new System.Drawing.Size(15, 14);
+            this.cb12t7.TabIndex = 391;
+            this.cb12t7.UseVisualStyleBackColor = true;
+            this.cb12t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label110
+            // 
+            this.label110.AutoSize = true;
+            this.label110.ForeColor = System.Drawing.Color.Firebrick;
+            this.label110.Location = new System.Drawing.Point(7, 207);
+            this.label110.Name = "label110";
+            this.label110.Size = new System.Drawing.Size(19, 13);
+            this.label110.TabIndex = 390;
+            this.label110.Text = "11";
+            // 
+            // cb11t0
+            // 
+            this.cb11t0.AutoSize = true;
+            this.cb11t0.Enabled = false;
+            this.cb11t0.Location = new System.Drawing.Point(153, 207);
+            this.cb11t0.Name = "cb11t0";
+            this.cb11t0.Size = new System.Drawing.Size(15, 14);
+            this.cb11t0.TabIndex = 389;
+            this.cb11t0.UseVisualStyleBackColor = true;
+            this.cb11t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb11t1
+            // 
+            this.cb11t1.AutoSize = true;
+            this.cb11t1.Enabled = false;
+            this.cb11t1.Location = new System.Drawing.Point(137, 207);
+            this.cb11t1.Name = "cb11t1";
+            this.cb11t1.Size = new System.Drawing.Size(15, 14);
+            this.cb11t1.TabIndex = 388;
+            this.cb11t1.UseVisualStyleBackColor = true;
+            this.cb11t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb11t2
+            // 
+            this.cb11t2.AutoSize = true;
+            this.cb11t2.Enabled = false;
+            this.cb11t2.Location = new System.Drawing.Point(121, 207);
+            this.cb11t2.Name = "cb11t2";
+            this.cb11t2.Size = new System.Drawing.Size(15, 14);
+            this.cb11t2.TabIndex = 387;
+            this.cb11t2.UseVisualStyleBackColor = true;
+            this.cb11t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb11t3
+            // 
+            this.cb11t3.AutoSize = true;
+            this.cb11t3.Enabled = false;
+            this.cb11t3.Location = new System.Drawing.Point(105, 207);
+            this.cb11t3.Name = "cb11t3";
+            this.cb11t3.Size = new System.Drawing.Size(15, 14);
+            this.cb11t3.TabIndex = 386;
+            this.cb11t3.UseVisualStyleBackColor = true;
+            this.cb11t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb11t4
+            // 
+            this.cb11t4.AutoSize = true;
+            this.cb11t4.Enabled = false;
+            this.cb11t4.Location = new System.Drawing.Point(89, 207);
+            this.cb11t4.Name = "cb11t4";
+            this.cb11t4.Size = new System.Drawing.Size(15, 14);
+            this.cb11t4.TabIndex = 385;
+            this.cb11t4.UseVisualStyleBackColor = true;
+            this.cb11t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb11t5
+            // 
+            this.cb11t5.AutoSize = true;
+            this.cb11t5.Enabled = false;
+            this.cb11t5.Location = new System.Drawing.Point(73, 207);
+            this.cb11t5.Name = "cb11t5";
+            this.cb11t5.Size = new System.Drawing.Size(15, 14);
+            this.cb11t5.TabIndex = 384;
+            this.cb11t5.UseVisualStyleBackColor = true;
+            this.cb11t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb11t6
+            // 
+            this.cb11t6.AutoSize = true;
+            this.cb11t6.Enabled = false;
+            this.cb11t6.Location = new System.Drawing.Point(57, 207);
+            this.cb11t6.Name = "cb11t6";
+            this.cb11t6.Size = new System.Drawing.Size(15, 14);
+            this.cb11t6.TabIndex = 383;
+            this.cb11t6.UseVisualStyleBackColor = true;
+            this.cb11t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb11t7
+            // 
+            this.cb11t7.AutoSize = true;
+            this.cb11t7.Enabled = false;
+            this.cb11t7.Location = new System.Drawing.Point(40, 207);
+            this.cb11t7.Name = "cb11t7";
+            this.cb11t7.Size = new System.Drawing.Size(15, 14);
+            this.cb11t7.TabIndex = 382;
+            this.cb11t7.UseVisualStyleBackColor = true;
+            this.cb11t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label111
+            // 
+            this.label111.AutoSize = true;
+            this.label111.ForeColor = System.Drawing.Color.Firebrick;
+            this.label111.Location = new System.Drawing.Point(7, 192);
+            this.label111.Name = "label111";
+            this.label111.Size = new System.Drawing.Size(19, 13);
+            this.label111.TabIndex = 381;
+            this.label111.Text = "10";
+            // 
+            // cb10t0
+            // 
+            this.cb10t0.AutoSize = true;
+            this.cb10t0.Enabled = false;
+            this.cb10t0.Location = new System.Drawing.Point(153, 192);
+            this.cb10t0.Name = "cb10t0";
+            this.cb10t0.Size = new System.Drawing.Size(15, 14);
+            this.cb10t0.TabIndex = 380;
+            this.cb10t0.UseVisualStyleBackColor = true;
+            this.cb10t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb10t1
+            // 
+            this.cb10t1.AutoSize = true;
+            this.cb10t1.Enabled = false;
+            this.cb10t1.Location = new System.Drawing.Point(137, 192);
+            this.cb10t1.Name = "cb10t1";
+            this.cb10t1.Size = new System.Drawing.Size(15, 14);
+            this.cb10t1.TabIndex = 379;
+            this.cb10t1.UseVisualStyleBackColor = true;
+            this.cb10t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb10t2
+            // 
+            this.cb10t2.AutoSize = true;
+            this.cb10t2.Enabled = false;
+            this.cb10t2.Location = new System.Drawing.Point(121, 192);
+            this.cb10t2.Name = "cb10t2";
+            this.cb10t2.Size = new System.Drawing.Size(15, 14);
+            this.cb10t2.TabIndex = 378;
+            this.cb10t2.UseVisualStyleBackColor = true;
+            this.cb10t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb10t3
+            // 
+            this.cb10t3.AutoSize = true;
+            this.cb10t3.Enabled = false;
+            this.cb10t3.Location = new System.Drawing.Point(105, 192);
+            this.cb10t3.Name = "cb10t3";
+            this.cb10t3.Size = new System.Drawing.Size(15, 14);
+            this.cb10t3.TabIndex = 377;
+            this.cb10t3.UseVisualStyleBackColor = true;
+            this.cb10t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb10t4
+            // 
+            this.cb10t4.AutoSize = true;
+            this.cb10t4.Enabled = false;
+            this.cb10t4.Location = new System.Drawing.Point(89, 192);
+            this.cb10t4.Name = "cb10t4";
+            this.cb10t4.Size = new System.Drawing.Size(15, 14);
+            this.cb10t4.TabIndex = 376;
+            this.cb10t4.UseVisualStyleBackColor = true;
+            this.cb10t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb10t5
+            // 
+            this.cb10t5.AutoSize = true;
+            this.cb10t5.Enabled = false;
+            this.cb10t5.Location = new System.Drawing.Point(73, 192);
+            this.cb10t5.Name = "cb10t5";
+            this.cb10t5.Size = new System.Drawing.Size(15, 14);
+            this.cb10t5.TabIndex = 375;
+            this.cb10t5.UseVisualStyleBackColor = true;
+            this.cb10t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb10t6
+            // 
+            this.cb10t6.AutoSize = true;
+            this.cb10t6.Enabled = false;
+            this.cb10t6.Location = new System.Drawing.Point(57, 192);
+            this.cb10t6.Name = "cb10t6";
+            this.cb10t6.Size = new System.Drawing.Size(15, 14);
+            this.cb10t6.TabIndex = 374;
+            this.cb10t6.UseVisualStyleBackColor = true;
+            this.cb10t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb10t7
+            // 
+            this.cb10t7.AutoSize = true;
+            this.cb10t7.Enabled = false;
+            this.cb10t7.Location = new System.Drawing.Point(40, 192);
+            this.cb10t7.Name = "cb10t7";
+            this.cb10t7.Size = new System.Drawing.Size(15, 14);
+            this.cb10t7.TabIndex = 373;
+            this.cb10t7.UseVisualStyleBackColor = true;
+            this.cb10t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label112
+            // 
+            this.label112.AutoSize = true;
+            this.label112.ForeColor = System.Drawing.Color.Firebrick;
+            this.label112.Location = new System.Drawing.Point(13, 177);
+            this.label112.Name = "label112";
+            this.label112.Size = new System.Drawing.Size(13, 13);
+            this.label112.TabIndex = 372;
+            this.label112.Text = "9";
+            // 
+            // cb9t0
+            // 
+            this.cb9t0.AutoSize = true;
+            this.cb9t0.Enabled = false;
+            this.cb9t0.Location = new System.Drawing.Point(153, 177);
+            this.cb9t0.Name = "cb9t0";
+            this.cb9t0.Size = new System.Drawing.Size(15, 14);
+            this.cb9t0.TabIndex = 371;
+            this.cb9t0.UseVisualStyleBackColor = true;
+            this.cb9t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb9t1
+            // 
+            this.cb9t1.AutoSize = true;
+            this.cb9t1.Enabled = false;
+            this.cb9t1.Location = new System.Drawing.Point(137, 177);
+            this.cb9t1.Name = "cb9t1";
+            this.cb9t1.Size = new System.Drawing.Size(15, 14);
+            this.cb9t1.TabIndex = 370;
+            this.cb9t1.UseVisualStyleBackColor = true;
+            this.cb9t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb9t2
+            // 
+            this.cb9t2.AutoSize = true;
+            this.cb9t2.Enabled = false;
+            this.cb9t2.Location = new System.Drawing.Point(121, 177);
+            this.cb9t2.Name = "cb9t2";
+            this.cb9t2.Size = new System.Drawing.Size(15, 14);
+            this.cb9t2.TabIndex = 369;
+            this.cb9t2.UseVisualStyleBackColor = true;
+            this.cb9t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb9t3
+            // 
+            this.cb9t3.AutoSize = true;
+            this.cb9t3.Enabled = false;
+            this.cb9t3.Location = new System.Drawing.Point(105, 177);
+            this.cb9t3.Name = "cb9t3";
+            this.cb9t3.Size = new System.Drawing.Size(15, 14);
+            this.cb9t3.TabIndex = 368;
+            this.cb9t3.UseVisualStyleBackColor = true;
+            this.cb9t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb9t4
+            // 
+            this.cb9t4.AutoSize = true;
+            this.cb9t4.Enabled = false;
+            this.cb9t4.Location = new System.Drawing.Point(89, 177);
+            this.cb9t4.Name = "cb9t4";
+            this.cb9t4.Size = new System.Drawing.Size(15, 14);
+            this.cb9t4.TabIndex = 367;
+            this.cb9t4.UseVisualStyleBackColor = true;
+            this.cb9t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb9t5
+            // 
+            this.cb9t5.AutoSize = true;
+            this.cb9t5.Enabled = false;
+            this.cb9t5.Location = new System.Drawing.Point(73, 177);
+            this.cb9t5.Name = "cb9t5";
+            this.cb9t5.Size = new System.Drawing.Size(15, 14);
+            this.cb9t5.TabIndex = 366;
+            this.cb9t5.UseVisualStyleBackColor = true;
+            this.cb9t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb9t6
+            // 
+            this.cb9t6.AutoSize = true;
+            this.cb9t6.Enabled = false;
+            this.cb9t6.Location = new System.Drawing.Point(57, 177);
+            this.cb9t6.Name = "cb9t6";
+            this.cb9t6.Size = new System.Drawing.Size(15, 14);
+            this.cb9t6.TabIndex = 365;
+            this.cb9t6.UseVisualStyleBackColor = true;
+            this.cb9t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb9t7
+            // 
+            this.cb9t7.AutoSize = true;
+            this.cb9t7.Enabled = false;
+            this.cb9t7.Location = new System.Drawing.Point(40, 177);
+            this.cb9t7.Name = "cb9t7";
+            this.cb9t7.Size = new System.Drawing.Size(15, 14);
+            this.cb9t7.TabIndex = 364;
+            this.cb9t7.UseVisualStyleBackColor = true;
+            this.cb9t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label113
+            // 
+            this.label113.AutoSize = true;
+            this.label113.ForeColor = System.Drawing.Color.Firebrick;
+            this.label113.Location = new System.Drawing.Point(13, 162);
+            this.label113.Name = "label113";
+            this.label113.Size = new System.Drawing.Size(13, 13);
+            this.label113.TabIndex = 363;
+            this.label113.Text = "8";
+            // 
+            // cb8t0
+            // 
+            this.cb8t0.AutoSize = true;
+            this.cb8t0.Enabled = false;
+            this.cb8t0.Location = new System.Drawing.Point(153, 162);
+            this.cb8t0.Name = "cb8t0";
+            this.cb8t0.Size = new System.Drawing.Size(15, 14);
+            this.cb8t0.TabIndex = 362;
+            this.cb8t0.UseVisualStyleBackColor = true;
+            this.cb8t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb8t1
+            // 
+            this.cb8t1.AutoSize = true;
+            this.cb8t1.Enabled = false;
+            this.cb8t1.Location = new System.Drawing.Point(137, 162);
+            this.cb8t1.Name = "cb8t1";
+            this.cb8t1.Size = new System.Drawing.Size(15, 14);
+            this.cb8t1.TabIndex = 361;
+            this.cb8t1.UseVisualStyleBackColor = true;
+            this.cb8t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb8t2
+            // 
+            this.cb8t2.AutoSize = true;
+            this.cb8t2.Enabled = false;
+            this.cb8t2.Location = new System.Drawing.Point(121, 162);
+            this.cb8t2.Name = "cb8t2";
+            this.cb8t2.Size = new System.Drawing.Size(15, 14);
+            this.cb8t2.TabIndex = 360;
+            this.cb8t2.UseVisualStyleBackColor = true;
+            this.cb8t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb8t3
+            // 
+            this.cb8t3.AutoSize = true;
+            this.cb8t3.Enabled = false;
+            this.cb8t3.Location = new System.Drawing.Point(105, 162);
+            this.cb8t3.Name = "cb8t3";
+            this.cb8t3.Size = new System.Drawing.Size(15, 14);
+            this.cb8t3.TabIndex = 359;
+            this.cb8t3.UseVisualStyleBackColor = true;
+            this.cb8t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb8t4
+            // 
+            this.cb8t4.AutoSize = true;
+            this.cb8t4.Enabled = false;
+            this.cb8t4.Location = new System.Drawing.Point(89, 162);
+            this.cb8t4.Name = "cb8t4";
+            this.cb8t4.Size = new System.Drawing.Size(15, 14);
+            this.cb8t4.TabIndex = 358;
+            this.cb8t4.UseVisualStyleBackColor = true;
+            this.cb8t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb8t5
+            // 
+            this.cb8t5.AutoSize = true;
+            this.cb8t5.Enabled = false;
+            this.cb8t5.Location = new System.Drawing.Point(73, 162);
+            this.cb8t5.Name = "cb8t5";
+            this.cb8t5.Size = new System.Drawing.Size(15, 14);
+            this.cb8t5.TabIndex = 357;
+            this.cb8t5.UseVisualStyleBackColor = true;
+            this.cb8t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb8t6
+            // 
+            this.cb8t6.AutoSize = true;
+            this.cb8t6.Enabled = false;
+            this.cb8t6.Location = new System.Drawing.Point(57, 162);
+            this.cb8t6.Name = "cb8t6";
+            this.cb8t6.Size = new System.Drawing.Size(15, 14);
+            this.cb8t6.TabIndex = 356;
+            this.cb8t6.UseVisualStyleBackColor = true;
+            this.cb8t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb8t7
+            // 
+            this.cb8t7.AutoSize = true;
+            this.cb8t7.Enabled = false;
+            this.cb8t7.Location = new System.Drawing.Point(40, 162);
+            this.cb8t7.Name = "cb8t7";
+            this.cb8t7.Size = new System.Drawing.Size(15, 14);
+            this.cb8t7.TabIndex = 355;
+            this.cb8t7.UseVisualStyleBackColor = true;
+            this.cb8t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label114
+            // 
+            this.label114.AutoSize = true;
+            this.label114.ForeColor = System.Drawing.Color.Firebrick;
+            this.label114.Location = new System.Drawing.Point(13, 147);
+            this.label114.Name = "label114";
+            this.label114.Size = new System.Drawing.Size(13, 13);
+            this.label114.TabIndex = 354;
+            this.label114.Text = "7";
+            // 
+            // cb7t0
+            // 
+            this.cb7t0.AutoSize = true;
+            this.cb7t0.Enabled = false;
+            this.cb7t0.Location = new System.Drawing.Point(153, 147);
+            this.cb7t0.Name = "cb7t0";
+            this.cb7t0.Size = new System.Drawing.Size(15, 14);
+            this.cb7t0.TabIndex = 353;
+            this.cb7t0.UseVisualStyleBackColor = true;
+            this.cb7t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb7t1
+            // 
+            this.cb7t1.AutoSize = true;
+            this.cb7t1.Enabled = false;
+            this.cb7t1.Location = new System.Drawing.Point(137, 147);
+            this.cb7t1.Name = "cb7t1";
+            this.cb7t1.Size = new System.Drawing.Size(15, 14);
+            this.cb7t1.TabIndex = 352;
+            this.cb7t1.UseVisualStyleBackColor = true;
+            this.cb7t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb7t2
+            // 
+            this.cb7t2.AutoSize = true;
+            this.cb7t2.Enabled = false;
+            this.cb7t2.Location = new System.Drawing.Point(121, 147);
+            this.cb7t2.Name = "cb7t2";
+            this.cb7t2.Size = new System.Drawing.Size(15, 14);
+            this.cb7t2.TabIndex = 351;
+            this.cb7t2.UseVisualStyleBackColor = true;
+            this.cb7t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb7t3
+            // 
+            this.cb7t3.AutoSize = true;
+            this.cb7t3.Enabled = false;
+            this.cb7t3.Location = new System.Drawing.Point(105, 147);
+            this.cb7t3.Name = "cb7t3";
+            this.cb7t3.Size = new System.Drawing.Size(15, 14);
+            this.cb7t3.TabIndex = 350;
+            this.cb7t3.UseVisualStyleBackColor = true;
+            this.cb7t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb7t4
+            // 
+            this.cb7t4.AutoSize = true;
+            this.cb7t4.Enabled = false;
+            this.cb7t4.Location = new System.Drawing.Point(89, 147);
+            this.cb7t4.Name = "cb7t4";
+            this.cb7t4.Size = new System.Drawing.Size(15, 14);
+            this.cb7t4.TabIndex = 349;
+            this.cb7t4.UseVisualStyleBackColor = true;
+            this.cb7t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb7t5
+            // 
+            this.cb7t5.AutoSize = true;
+            this.cb7t5.Enabled = false;
+            this.cb7t5.Location = new System.Drawing.Point(73, 147);
+            this.cb7t5.Name = "cb7t5";
+            this.cb7t5.Size = new System.Drawing.Size(15, 14);
+            this.cb7t5.TabIndex = 348;
+            this.cb7t5.UseVisualStyleBackColor = true;
+            this.cb7t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb7t6
+            // 
+            this.cb7t6.AutoSize = true;
+            this.cb7t6.Enabled = false;
+            this.cb7t6.Location = new System.Drawing.Point(57, 147);
+            this.cb7t6.Name = "cb7t6";
+            this.cb7t6.Size = new System.Drawing.Size(15, 14);
+            this.cb7t6.TabIndex = 347;
+            this.cb7t6.UseVisualStyleBackColor = true;
+            this.cb7t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb7t7
+            // 
+            this.cb7t7.AutoSize = true;
+            this.cb7t7.Enabled = false;
+            this.cb7t7.Location = new System.Drawing.Point(40, 147);
+            this.cb7t7.Name = "cb7t7";
+            this.cb7t7.Size = new System.Drawing.Size(15, 14);
+            this.cb7t7.TabIndex = 346;
+            this.cb7t7.UseVisualStyleBackColor = true;
+            this.cb7t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label115
+            // 
+            this.label115.AutoSize = true;
+            this.label115.ForeColor = System.Drawing.Color.Firebrick;
+            this.label115.Location = new System.Drawing.Point(13, 132);
+            this.label115.Name = "label115";
+            this.label115.Size = new System.Drawing.Size(13, 13);
+            this.label115.TabIndex = 345;
+            this.label115.Text = "6";
+            // 
+            // cb6t0
+            // 
+            this.cb6t0.AutoSize = true;
+            this.cb6t0.Enabled = false;
+            this.cb6t0.Location = new System.Drawing.Point(153, 132);
+            this.cb6t0.Name = "cb6t0";
+            this.cb6t0.Size = new System.Drawing.Size(15, 14);
+            this.cb6t0.TabIndex = 344;
+            this.cb6t0.UseVisualStyleBackColor = true;
+            this.cb6t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb6t1
+            // 
+            this.cb6t1.AutoSize = true;
+            this.cb6t1.Enabled = false;
+            this.cb6t1.Location = new System.Drawing.Point(137, 132);
+            this.cb6t1.Name = "cb6t1";
+            this.cb6t1.Size = new System.Drawing.Size(15, 14);
+            this.cb6t1.TabIndex = 343;
+            this.cb6t1.UseVisualStyleBackColor = true;
+            this.cb6t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb6t2
+            // 
+            this.cb6t2.AutoSize = true;
+            this.cb6t2.Enabled = false;
+            this.cb6t2.Location = new System.Drawing.Point(121, 132);
+            this.cb6t2.Name = "cb6t2";
+            this.cb6t2.Size = new System.Drawing.Size(15, 14);
+            this.cb6t2.TabIndex = 342;
+            this.cb6t2.UseVisualStyleBackColor = true;
+            this.cb6t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb6t3
+            // 
+            this.cb6t3.AutoSize = true;
+            this.cb6t3.Enabled = false;
+            this.cb6t3.Location = new System.Drawing.Point(105, 132);
+            this.cb6t3.Name = "cb6t3";
+            this.cb6t3.Size = new System.Drawing.Size(15, 14);
+            this.cb6t3.TabIndex = 341;
+            this.cb6t3.UseVisualStyleBackColor = true;
+            this.cb6t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb6t4
+            // 
+            this.cb6t4.AutoSize = true;
+            this.cb6t4.Enabled = false;
+            this.cb6t4.Location = new System.Drawing.Point(89, 132);
+            this.cb6t4.Name = "cb6t4";
+            this.cb6t4.Size = new System.Drawing.Size(15, 14);
+            this.cb6t4.TabIndex = 340;
+            this.cb6t4.UseVisualStyleBackColor = true;
+            this.cb6t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb6t5
+            // 
+            this.cb6t5.AutoSize = true;
+            this.cb6t5.Enabled = false;
+            this.cb6t5.Location = new System.Drawing.Point(73, 132);
+            this.cb6t5.Name = "cb6t5";
+            this.cb6t5.Size = new System.Drawing.Size(15, 14);
+            this.cb6t5.TabIndex = 339;
+            this.cb6t5.UseVisualStyleBackColor = true;
+            this.cb6t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb6t6
+            // 
+            this.cb6t6.AutoSize = true;
+            this.cb6t6.Enabled = false;
+            this.cb6t6.Location = new System.Drawing.Point(57, 132);
+            this.cb6t6.Name = "cb6t6";
+            this.cb6t6.Size = new System.Drawing.Size(15, 14);
+            this.cb6t6.TabIndex = 338;
+            this.cb6t6.UseVisualStyleBackColor = true;
+            this.cb6t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb6t7
+            // 
+            this.cb6t7.AutoSize = true;
+            this.cb6t7.Enabled = false;
+            this.cb6t7.Location = new System.Drawing.Point(40, 132);
+            this.cb6t7.Name = "cb6t7";
+            this.cb6t7.Size = new System.Drawing.Size(15, 14);
+            this.cb6t7.TabIndex = 337;
+            this.cb6t7.UseVisualStyleBackColor = true;
+            this.cb6t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label116
+            // 
+            this.label116.AutoSize = true;
+            this.label116.ForeColor = System.Drawing.Color.Firebrick;
+            this.label116.Location = new System.Drawing.Point(13, 118);
+            this.label116.Name = "label116";
+            this.label116.Size = new System.Drawing.Size(13, 13);
+            this.label116.TabIndex = 336;
+            this.label116.Text = "5";
+            // 
+            // cb5t0
+            // 
+            this.cb5t0.AutoSize = true;
+            this.cb5t0.Enabled = false;
+            this.cb5t0.Location = new System.Drawing.Point(153, 118);
+            this.cb5t0.Name = "cb5t0";
+            this.cb5t0.Size = new System.Drawing.Size(15, 14);
+            this.cb5t0.TabIndex = 335;
+            this.cb5t0.UseVisualStyleBackColor = true;
+            this.cb5t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb5t1
+            // 
+            this.cb5t1.AutoSize = true;
+            this.cb5t1.Enabled = false;
+            this.cb5t1.Location = new System.Drawing.Point(137, 118);
+            this.cb5t1.Name = "cb5t1";
+            this.cb5t1.Size = new System.Drawing.Size(15, 14);
+            this.cb5t1.TabIndex = 334;
+            this.cb5t1.UseVisualStyleBackColor = true;
+            this.cb5t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb5t2
+            // 
+            this.cb5t2.AutoSize = true;
+            this.cb5t2.Enabled = false;
+            this.cb5t2.Location = new System.Drawing.Point(121, 118);
+            this.cb5t2.Name = "cb5t2";
+            this.cb5t2.Size = new System.Drawing.Size(15, 14);
+            this.cb5t2.TabIndex = 333;
+            this.cb5t2.UseVisualStyleBackColor = true;
+            this.cb5t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb5t3
+            // 
+            this.cb5t3.AutoSize = true;
+            this.cb5t3.Enabled = false;
+            this.cb5t3.Location = new System.Drawing.Point(105, 118);
+            this.cb5t3.Name = "cb5t3";
+            this.cb5t3.Size = new System.Drawing.Size(15, 14);
+            this.cb5t3.TabIndex = 332;
+            this.cb5t3.UseVisualStyleBackColor = true;
+            this.cb5t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb5t4
+            // 
+            this.cb5t4.AutoSize = true;
+            this.cb5t4.Enabled = false;
+            this.cb5t4.Location = new System.Drawing.Point(89, 118);
+            this.cb5t4.Name = "cb5t4";
+            this.cb5t4.Size = new System.Drawing.Size(15, 14);
+            this.cb5t4.TabIndex = 331;
+            this.cb5t4.UseVisualStyleBackColor = true;
+            this.cb5t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb5t5
+            // 
+            this.cb5t5.AutoSize = true;
+            this.cb5t5.Enabled = false;
+            this.cb5t5.Location = new System.Drawing.Point(73, 118);
+            this.cb5t5.Name = "cb5t5";
+            this.cb5t5.Size = new System.Drawing.Size(15, 14);
+            this.cb5t5.TabIndex = 330;
+            this.cb5t5.UseVisualStyleBackColor = true;
+            this.cb5t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb5t6
+            // 
+            this.cb5t6.AutoSize = true;
+            this.cb5t6.Enabled = false;
+            this.cb5t6.Location = new System.Drawing.Point(57, 118);
+            this.cb5t6.Name = "cb5t6";
+            this.cb5t6.Size = new System.Drawing.Size(15, 14);
+            this.cb5t6.TabIndex = 329;
+            this.cb5t6.UseVisualStyleBackColor = true;
+            this.cb5t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb5t7
+            // 
+            this.cb5t7.AutoSize = true;
+            this.cb5t7.Enabled = false;
+            this.cb5t7.Location = new System.Drawing.Point(40, 118);
+            this.cb5t7.Name = "cb5t7";
+            this.cb5t7.Size = new System.Drawing.Size(15, 14);
+            this.cb5t7.TabIndex = 328;
+            this.cb5t7.UseVisualStyleBackColor = true;
+            this.cb5t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label117
+            // 
+            this.label117.AutoSize = true;
+            this.label117.ForeColor = System.Drawing.Color.Firebrick;
+            this.label117.Location = new System.Drawing.Point(13, 103);
+            this.label117.Name = "label117";
+            this.label117.Size = new System.Drawing.Size(13, 13);
+            this.label117.TabIndex = 327;
+            this.label117.Text = "4";
+            // 
+            // cb4t0
+            // 
+            this.cb4t0.AutoSize = true;
+            this.cb4t0.Enabled = false;
+            this.cb4t0.Location = new System.Drawing.Point(153, 103);
+            this.cb4t0.Name = "cb4t0";
+            this.cb4t0.Size = new System.Drawing.Size(15, 14);
+            this.cb4t0.TabIndex = 326;
+            this.cb4t0.UseVisualStyleBackColor = true;
+            this.cb4t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb4t1
+            // 
+            this.cb4t1.AutoSize = true;
+            this.cb4t1.Enabled = false;
+            this.cb4t1.Location = new System.Drawing.Point(137, 103);
+            this.cb4t1.Name = "cb4t1";
+            this.cb4t1.Size = new System.Drawing.Size(15, 14);
+            this.cb4t1.TabIndex = 325;
+            this.cb4t1.UseVisualStyleBackColor = true;
+            this.cb4t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb4t2
+            // 
+            this.cb4t2.AutoSize = true;
+            this.cb4t2.Enabled = false;
+            this.cb4t2.Location = new System.Drawing.Point(121, 103);
+            this.cb4t2.Name = "cb4t2";
+            this.cb4t2.Size = new System.Drawing.Size(15, 14);
+            this.cb4t2.TabIndex = 324;
+            this.cb4t2.UseVisualStyleBackColor = true;
+            this.cb4t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb4t3
+            // 
+            this.cb4t3.AutoSize = true;
+            this.cb4t3.Enabled = false;
+            this.cb4t3.Location = new System.Drawing.Point(105, 103);
+            this.cb4t3.Name = "cb4t3";
+            this.cb4t3.Size = new System.Drawing.Size(15, 14);
+            this.cb4t3.TabIndex = 323;
+            this.cb4t3.UseVisualStyleBackColor = true;
+            this.cb4t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb4t4
+            // 
+            this.cb4t4.AutoSize = true;
+            this.cb4t4.Enabled = false;
+            this.cb4t4.Location = new System.Drawing.Point(89, 103);
+            this.cb4t4.Name = "cb4t4";
+            this.cb4t4.Size = new System.Drawing.Size(15, 14);
+            this.cb4t4.TabIndex = 322;
+            this.cb4t4.UseVisualStyleBackColor = true;
+            this.cb4t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb4t5
+            // 
+            this.cb4t5.AutoSize = true;
+            this.cb4t5.Enabled = false;
+            this.cb4t5.Location = new System.Drawing.Point(73, 103);
+            this.cb4t5.Name = "cb4t5";
+            this.cb4t5.Size = new System.Drawing.Size(15, 14);
+            this.cb4t5.TabIndex = 321;
+            this.cb4t5.UseVisualStyleBackColor = true;
+            this.cb4t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb4t6
+            // 
+            this.cb4t6.AutoSize = true;
+            this.cb4t6.Enabled = false;
+            this.cb4t6.Location = new System.Drawing.Point(57, 103);
+            this.cb4t6.Name = "cb4t6";
+            this.cb4t6.Size = new System.Drawing.Size(15, 14);
+            this.cb4t6.TabIndex = 320;
+            this.cb4t6.UseVisualStyleBackColor = true;
+            this.cb4t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb4t7
+            // 
+            this.cb4t7.AutoSize = true;
+            this.cb4t7.Enabled = false;
+            this.cb4t7.Location = new System.Drawing.Point(40, 103);
+            this.cb4t7.Name = "cb4t7";
+            this.cb4t7.Size = new System.Drawing.Size(15, 14);
+            this.cb4t7.TabIndex = 319;
+            this.cb4t7.UseVisualStyleBackColor = true;
+            this.cb4t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label118
+            // 
+            this.label118.AutoSize = true;
+            this.label118.ForeColor = System.Drawing.Color.Firebrick;
+            this.label118.Location = new System.Drawing.Point(13, 87);
+            this.label118.Name = "label118";
+            this.label118.Size = new System.Drawing.Size(13, 13);
+            this.label118.TabIndex = 318;
+            this.label118.Text = "3";
+            // 
+            // cb3t0
+            // 
+            this.cb3t0.AutoSize = true;
+            this.cb3t0.Enabled = false;
+            this.cb3t0.Location = new System.Drawing.Point(153, 87);
+            this.cb3t0.Name = "cb3t0";
+            this.cb3t0.Size = new System.Drawing.Size(15, 14);
+            this.cb3t0.TabIndex = 317;
+            this.cb3t0.UseVisualStyleBackColor = true;
+            this.cb3t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb3t1
+            // 
+            this.cb3t1.AutoSize = true;
+            this.cb3t1.Enabled = false;
+            this.cb3t1.Location = new System.Drawing.Point(137, 87);
+            this.cb3t1.Name = "cb3t1";
+            this.cb3t1.Size = new System.Drawing.Size(15, 14);
+            this.cb3t1.TabIndex = 316;
+            this.cb3t1.UseVisualStyleBackColor = true;
+            this.cb3t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb3t2
+            // 
+            this.cb3t2.AutoSize = true;
+            this.cb3t2.Enabled = false;
+            this.cb3t2.Location = new System.Drawing.Point(121, 87);
+            this.cb3t2.Name = "cb3t2";
+            this.cb3t2.Size = new System.Drawing.Size(15, 14);
+            this.cb3t2.TabIndex = 315;
+            this.cb3t2.UseVisualStyleBackColor = true;
+            this.cb3t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb3t3
+            // 
+            this.cb3t3.AutoSize = true;
+            this.cb3t3.Enabled = false;
+            this.cb3t3.Location = new System.Drawing.Point(105, 87);
+            this.cb3t3.Name = "cb3t3";
+            this.cb3t3.Size = new System.Drawing.Size(15, 14);
+            this.cb3t3.TabIndex = 314;
+            this.cb3t3.UseVisualStyleBackColor = true;
+            this.cb3t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb3t4
+            // 
+            this.cb3t4.AutoSize = true;
+            this.cb3t4.Enabled = false;
+            this.cb3t4.Location = new System.Drawing.Point(89, 87);
+            this.cb3t4.Name = "cb3t4";
+            this.cb3t4.Size = new System.Drawing.Size(15, 14);
+            this.cb3t4.TabIndex = 313;
+            this.cb3t4.UseVisualStyleBackColor = true;
+            this.cb3t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb3t5
+            // 
+            this.cb3t5.AutoSize = true;
+            this.cb3t5.Enabled = false;
+            this.cb3t5.Location = new System.Drawing.Point(73, 87);
+            this.cb3t5.Name = "cb3t5";
+            this.cb3t5.Size = new System.Drawing.Size(15, 14);
+            this.cb3t5.TabIndex = 312;
+            this.cb3t5.UseVisualStyleBackColor = true;
+            this.cb3t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb3t6
+            // 
+            this.cb3t6.AutoSize = true;
+            this.cb3t6.Enabled = false;
+            this.cb3t6.Location = new System.Drawing.Point(57, 87);
+            this.cb3t6.Name = "cb3t6";
+            this.cb3t6.Size = new System.Drawing.Size(15, 14);
+            this.cb3t6.TabIndex = 311;
+            this.cb3t6.UseVisualStyleBackColor = true;
+            this.cb3t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb3t7
+            // 
+            this.cb3t7.AutoSize = true;
+            this.cb3t7.Enabled = false;
+            this.cb3t7.Location = new System.Drawing.Point(40, 87);
+            this.cb3t7.Name = "cb3t7";
+            this.cb3t7.Size = new System.Drawing.Size(15, 14);
+            this.cb3t7.TabIndex = 310;
+            this.cb3t7.UseVisualStyleBackColor = true;
+            this.cb3t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label119
+            // 
+            this.label119.AutoSize = true;
+            this.label119.ForeColor = System.Drawing.Color.Firebrick;
+            this.label119.Location = new System.Drawing.Point(13, 72);
+            this.label119.Name = "label119";
+            this.label119.Size = new System.Drawing.Size(13, 13);
+            this.label119.TabIndex = 309;
+            this.label119.Text = "2";
+            // 
+            // cb2t0
+            // 
+            this.cb2t0.AutoSize = true;
+            this.cb2t0.Enabled = false;
+            this.cb2t0.Location = new System.Drawing.Point(153, 72);
+            this.cb2t0.Name = "cb2t0";
+            this.cb2t0.Size = new System.Drawing.Size(15, 14);
+            this.cb2t0.TabIndex = 308;
+            this.cb2t0.UseVisualStyleBackColor = true;
+            this.cb2t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb2t1
+            // 
+            this.cb2t1.AutoSize = true;
+            this.cb2t1.Enabled = false;
+            this.cb2t1.Location = new System.Drawing.Point(137, 72);
+            this.cb2t1.Name = "cb2t1";
+            this.cb2t1.Size = new System.Drawing.Size(15, 14);
+            this.cb2t1.TabIndex = 307;
+            this.cb2t1.UseVisualStyleBackColor = true;
+            this.cb2t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb2t2
+            // 
+            this.cb2t2.AutoSize = true;
+            this.cb2t2.Enabled = false;
+            this.cb2t2.Location = new System.Drawing.Point(121, 72);
+            this.cb2t2.Name = "cb2t2";
+            this.cb2t2.Size = new System.Drawing.Size(15, 14);
+            this.cb2t2.TabIndex = 306;
+            this.cb2t2.UseVisualStyleBackColor = true;
+            this.cb2t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb2t3
+            // 
+            this.cb2t3.AutoSize = true;
+            this.cb2t3.Enabled = false;
+            this.cb2t3.Location = new System.Drawing.Point(105, 72);
+            this.cb2t3.Name = "cb2t3";
+            this.cb2t3.Size = new System.Drawing.Size(15, 14);
+            this.cb2t3.TabIndex = 305;
+            this.cb2t3.UseVisualStyleBackColor = true;
+            this.cb2t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb2t4
+            // 
+            this.cb2t4.AutoSize = true;
+            this.cb2t4.Enabled = false;
+            this.cb2t4.Location = new System.Drawing.Point(89, 72);
+            this.cb2t4.Name = "cb2t4";
+            this.cb2t4.Size = new System.Drawing.Size(15, 14);
+            this.cb2t4.TabIndex = 304;
+            this.cb2t4.UseVisualStyleBackColor = true;
+            this.cb2t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb2t5
+            // 
+            this.cb2t5.AutoSize = true;
+            this.cb2t5.Enabled = false;
+            this.cb2t5.Location = new System.Drawing.Point(73, 72);
+            this.cb2t5.Name = "cb2t5";
+            this.cb2t5.Size = new System.Drawing.Size(15, 14);
+            this.cb2t5.TabIndex = 303;
+            this.cb2t5.UseVisualStyleBackColor = true;
+            this.cb2t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb2t6
+            // 
+            this.cb2t6.AutoSize = true;
+            this.cb2t6.Enabled = false;
+            this.cb2t6.Location = new System.Drawing.Point(57, 72);
+            this.cb2t6.Name = "cb2t6";
+            this.cb2t6.Size = new System.Drawing.Size(15, 14);
+            this.cb2t6.TabIndex = 302;
+            this.cb2t6.UseVisualStyleBackColor = true;
+            this.cb2t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb2t7
+            // 
+            this.cb2t7.AutoSize = true;
+            this.cb2t7.Enabled = false;
+            this.cb2t7.Location = new System.Drawing.Point(40, 72);
+            this.cb2t7.Name = "cb2t7";
+            this.cb2t7.Size = new System.Drawing.Size(15, 14);
+            this.cb2t7.TabIndex = 301;
+            this.cb2t7.UseVisualStyleBackColor = true;
+            this.cb2t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label120
+            // 
+            this.label120.AutoSize = true;
+            this.label120.ForeColor = System.Drawing.Color.Firebrick;
+            this.label120.Location = new System.Drawing.Point(13, 56);
+            this.label120.Name = "label120";
+            this.label120.Size = new System.Drawing.Size(13, 13);
+            this.label120.TabIndex = 300;
+            this.label120.Text = "1";
+            // 
+            // cb1t0
+            // 
+            this.cb1t0.AutoSize = true;
+            this.cb1t0.Enabled = false;
+            this.cb1t0.Location = new System.Drawing.Point(153, 56);
+            this.cb1t0.Name = "cb1t0";
+            this.cb1t0.Size = new System.Drawing.Size(15, 14);
+            this.cb1t0.TabIndex = 299;
+            this.cb1t0.UseVisualStyleBackColor = true;
+            this.cb1t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb1t1
+            // 
+            this.cb1t1.AutoSize = true;
+            this.cb1t1.Enabled = false;
+            this.cb1t1.Location = new System.Drawing.Point(137, 56);
+            this.cb1t1.Name = "cb1t1";
+            this.cb1t1.Size = new System.Drawing.Size(15, 14);
+            this.cb1t1.TabIndex = 298;
+            this.cb1t1.UseVisualStyleBackColor = true;
+            this.cb1t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb1t2
+            // 
+            this.cb1t2.AutoSize = true;
+            this.cb1t2.Enabled = false;
+            this.cb1t2.Location = new System.Drawing.Point(121, 56);
+            this.cb1t2.Name = "cb1t2";
+            this.cb1t2.Size = new System.Drawing.Size(15, 14);
+            this.cb1t2.TabIndex = 297;
+            this.cb1t2.UseVisualStyleBackColor = true;
+            this.cb1t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb1t3
+            // 
+            this.cb1t3.AutoSize = true;
+            this.cb1t3.Enabled = false;
+            this.cb1t3.Location = new System.Drawing.Point(105, 56);
+            this.cb1t3.Name = "cb1t3";
+            this.cb1t3.Size = new System.Drawing.Size(15, 14);
+            this.cb1t3.TabIndex = 296;
+            this.cb1t3.UseVisualStyleBackColor = true;
+            this.cb1t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb1t4
+            // 
+            this.cb1t4.AutoSize = true;
+            this.cb1t4.Enabled = false;
+            this.cb1t4.Location = new System.Drawing.Point(89, 56);
+            this.cb1t4.Name = "cb1t4";
+            this.cb1t4.Size = new System.Drawing.Size(15, 14);
+            this.cb1t4.TabIndex = 295;
+            this.cb1t4.UseVisualStyleBackColor = true;
+            this.cb1t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb1t5
+            // 
+            this.cb1t5.AutoSize = true;
+            this.cb1t5.Enabled = false;
+            this.cb1t5.Location = new System.Drawing.Point(73, 56);
+            this.cb1t5.Name = "cb1t5";
+            this.cb1t5.Size = new System.Drawing.Size(15, 14);
+            this.cb1t5.TabIndex = 294;
+            this.cb1t5.UseVisualStyleBackColor = true;
+            this.cb1t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb1t6
+            // 
+            this.cb1t6.AutoSize = true;
+            this.cb1t6.Enabled = false;
+            this.cb1t6.Location = new System.Drawing.Point(57, 56);
+            this.cb1t6.Name = "cb1t6";
+            this.cb1t6.Size = new System.Drawing.Size(15, 14);
+            this.cb1t6.TabIndex = 293;
+            this.cb1t6.UseVisualStyleBackColor = true;
+            this.cb1t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // cb1t7
+            // 
+            this.cb1t7.AutoSize = true;
+            this.cb1t7.Enabled = false;
+            this.cb1t7.Location = new System.Drawing.Point(40, 56);
+            this.cb1t7.Name = "cb1t7";
+            this.cb1t7.Size = new System.Drawing.Size(15, 14);
+            this.cb1t7.TabIndex = 292;
+            this.cb1t7.UseVisualStyleBackColor = true;
+            this.cb1t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            // 
+            // label121
+            // 
+            this.label121.AutoSize = true;
+            this.label121.ForeColor = System.Drawing.Color.Navy;
+            this.label121.Location = new System.Drawing.Point(155, 24);
+            this.label121.Name = "label121";
+            this.label121.Size = new System.Drawing.Size(13, 13);
+            this.label121.TabIndex = 291;
+            this.label121.Text = "0";
+            // 
+            // label122
+            // 
+            this.label122.AutoSize = true;
+            this.label122.ForeColor = System.Drawing.Color.Navy;
+            this.label122.Location = new System.Drawing.Point(139, 24);
+            this.label122.Name = "label122";
+            this.label122.Size = new System.Drawing.Size(13, 13);
+            this.label122.TabIndex = 290;
+            this.label122.Text = "1";
+            // 
+            // label123
+            // 
+            this.label123.AutoSize = true;
+            this.label123.ForeColor = System.Drawing.Color.Navy;
+            this.label123.Location = new System.Drawing.Point(123, 24);
+            this.label123.Name = "label123";
+            this.label123.Size = new System.Drawing.Size(13, 13);
+            this.label123.TabIndex = 289;
+            this.label123.Text = "2";
+            // 
+            // label124
+            // 
+            this.label124.AutoSize = true;
+            this.label124.ForeColor = System.Drawing.Color.Navy;
+            this.label124.Location = new System.Drawing.Point(107, 24);
+            this.label124.Name = "label124";
+            this.label124.Size = new System.Drawing.Size(13, 13);
+            this.label124.TabIndex = 288;
+            this.label124.Text = "3";
+            // 
+            // label125
+            // 
+            this.label125.AutoSize = true;
+            this.label125.ForeColor = System.Drawing.Color.Navy;
+            this.label125.Location = new System.Drawing.Point(91, 24);
+            this.label125.Name = "label125";
+            this.label125.Size = new System.Drawing.Size(13, 13);
+            this.label125.TabIndex = 287;
+            this.label125.Text = "4";
+            // 
+            // label126
+            // 
+            this.label126.AutoSize = true;
+            this.label126.ForeColor = System.Drawing.Color.Navy;
+            this.label126.Location = new System.Drawing.Point(75, 24);
+            this.label126.Name = "label126";
+            this.label126.Size = new System.Drawing.Size(13, 13);
+            this.label126.TabIndex = 286;
+            this.label126.Text = "5";
+            // 
+            // label127
+            // 
+            this.label127.AutoSize = true;
+            this.label127.ForeColor = System.Drawing.Color.Navy;
+            this.label127.Location = new System.Drawing.Point(59, 24);
+            this.label127.Name = "label127";
+            this.label127.Size = new System.Drawing.Size(13, 13);
+            this.label127.TabIndex = 285;
+            this.label127.Text = "6";
+            // 
+            // label128
+            // 
+            this.label128.AutoSize = true;
+            this.label128.ForeColor = System.Drawing.Color.Navy;
+            this.label128.Location = new System.Drawing.Point(40, 24);
+            this.label128.Name = "label128";
+            this.label128.Size = new System.Drawing.Size(13, 13);
+            this.label128.TabIndex = 284;
+            this.label128.Text = "7";
+            // 
+            // label130
+            // 
+            this.label130.AutoSize = true;
+            this.label130.ForeColor = System.Drawing.Color.Firebrick;
+            this.label130.Location = new System.Drawing.Point(13, 40);
+            this.label130.Name = "label130";
+            this.label130.Size = new System.Drawing.Size(13, 13);
+            this.label130.TabIndex = 283;
+            this.label130.Text = "0";
+            // 
+            // grpPortA
+            // 
+            this.grpPortA.Controls.Add(this.cb15r4);
+            this.grpPortA.Controls.Add(this.cb15r7);
+            this.grpPortA.Controls.Add(this.cb15r6);
+            this.grpPortA.Controls.Add(this.cb15r5);
+            this.grpPortA.Controls.Add(this.cb15r3);
+            this.grpPortA.Controls.Add(this.cb15r2);
+            this.grpPortA.Controls.Add(this.cb15r1);
+            this.grpPortA.Controls.Add(this.cb15r0);
+            this.grpPortA.Controls.Add(this.label133);
+            this.grpPortA.Controls.Add(this.label134);
+            this.grpPortA.Controls.Add(this.cb14r0);
+            this.grpPortA.Controls.Add(this.cb14r1);
+            this.grpPortA.Controls.Add(this.cb14r2);
+            this.grpPortA.Controls.Add(this.cb14r3);
+            this.grpPortA.Controls.Add(this.cb14r4);
+            this.grpPortA.Controls.Add(this.cb14r5);
+            this.grpPortA.Controls.Add(this.cb14r6);
+            this.grpPortA.Controls.Add(this.cb14r7);
+            this.grpPortA.Controls.Add(this.label129);
+            this.grpPortA.Controls.Add(this.cb13r4);
+            this.grpPortA.Controls.Add(this.label104);
+            this.grpPortA.Controls.Add(this.cb13r7);
+            this.grpPortA.Controls.Add(this.cb13r6);
+            this.grpPortA.Controls.Add(this.cb0r3);
+            this.grpPortA.Controls.Add(this.cb13r5);
+            this.grpPortA.Controls.Add(this.cb13r3);
+            this.grpPortA.Controls.Add(this.cb0r0);
+            this.grpPortA.Controls.Add(this.cb13r2);
+            this.grpPortA.Controls.Add(this.cb13r1);
+            this.grpPortA.Controls.Add(this.cb13r0);
+            this.grpPortA.Controls.Add(this.cb0r1);
+            this.grpPortA.Controls.Add(this.label102);
+            this.grpPortA.Controls.Add(this.cb0r2);
+            this.grpPortA.Controls.Add(this.cb0r4);
+            this.grpPortA.Controls.Add(this.cb0r5);
+            this.grpPortA.Controls.Add(this.cb0r6);
+            this.grpPortA.Controls.Add(this.cb0r7);
+            this.grpPortA.Controls.Add(this.label101);
+            this.grpPortA.Controls.Add(this.cb12r0);
+            this.grpPortA.Controls.Add(this.cb12r1);
+            this.grpPortA.Controls.Add(this.cb12r2);
+            this.grpPortA.Controls.Add(this.cb12r3);
+            this.grpPortA.Controls.Add(this.cb12r4);
+            this.grpPortA.Controls.Add(this.cb12r5);
+            this.grpPortA.Controls.Add(this.cb12r6);
+            this.grpPortA.Controls.Add(this.cb12r7);
+            this.grpPortA.Controls.Add(this.label100);
+            this.grpPortA.Controls.Add(this.cb11r0);
+            this.grpPortA.Controls.Add(this.cb11r1);
+            this.grpPortA.Controls.Add(this.cb11r2);
+            this.grpPortA.Controls.Add(this.cb11r3);
+            this.grpPortA.Controls.Add(this.cb11r4);
+            this.grpPortA.Controls.Add(this.cb11r5);
+            this.grpPortA.Controls.Add(this.cb11r6);
+            this.grpPortA.Controls.Add(this.cb11r7);
+            this.grpPortA.Controls.Add(this.label99);
+            this.grpPortA.Controls.Add(this.cb10r0);
+            this.grpPortA.Controls.Add(this.cb10r1);
+            this.grpPortA.Controls.Add(this.cb10r2);
+            this.grpPortA.Controls.Add(this.cb10r3);
+            this.grpPortA.Controls.Add(this.cb10r4);
+            this.grpPortA.Controls.Add(this.cb10r5);
+            this.grpPortA.Controls.Add(this.cb10r6);
+            this.grpPortA.Controls.Add(this.cb10r7);
+            this.grpPortA.Controls.Add(this.label98);
+            this.grpPortA.Controls.Add(this.cb9r0);
+            this.grpPortA.Controls.Add(this.cb9r1);
+            this.grpPortA.Controls.Add(this.cb9r2);
+            this.grpPortA.Controls.Add(this.cb9r3);
+            this.grpPortA.Controls.Add(this.cb9r4);
+            this.grpPortA.Controls.Add(this.cb9r5);
+            this.grpPortA.Controls.Add(this.cb9r6);
+            this.grpPortA.Controls.Add(this.cb9r7);
+            this.grpPortA.Controls.Add(this.label97);
+            this.grpPortA.Controls.Add(this.cb8r0);
+            this.grpPortA.Controls.Add(this.cb8r1);
+            this.grpPortA.Controls.Add(this.cb8r2);
+            this.grpPortA.Controls.Add(this.cb8r3);
+            this.grpPortA.Controls.Add(this.cb8r4);
+            this.grpPortA.Controls.Add(this.cb8r5);
+            this.grpPortA.Controls.Add(this.cb8r6);
+            this.grpPortA.Controls.Add(this.cb8r7);
+            this.grpPortA.Controls.Add(this.label96);
+            this.grpPortA.Controls.Add(this.cb7r0);
+            this.grpPortA.Controls.Add(this.cb7r1);
+            this.grpPortA.Controls.Add(this.cb7r2);
+            this.grpPortA.Controls.Add(this.cb7r3);
+            this.grpPortA.Controls.Add(this.cb7r4);
+            this.grpPortA.Controls.Add(this.cb7r5);
+            this.grpPortA.Controls.Add(this.cb7r6);
+            this.grpPortA.Controls.Add(this.cb7r7);
+            this.grpPortA.Controls.Add(this.label95);
+            this.grpPortA.Controls.Add(this.cb6r0);
+            this.grpPortA.Controls.Add(this.cb6r1);
+            this.grpPortA.Controls.Add(this.cb6r2);
+            this.grpPortA.Controls.Add(this.cb6r3);
+            this.grpPortA.Controls.Add(this.cb6r4);
+            this.grpPortA.Controls.Add(this.cb6r5);
+            this.grpPortA.Controls.Add(this.cb6r6);
+            this.grpPortA.Controls.Add(this.cb6r7);
+            this.grpPortA.Controls.Add(this.label94);
+            this.grpPortA.Controls.Add(this.cb5r0);
+            this.grpPortA.Controls.Add(this.cb5r1);
+            this.grpPortA.Controls.Add(this.cb5r2);
+            this.grpPortA.Controls.Add(this.cb5r3);
+            this.grpPortA.Controls.Add(this.cb5r4);
+            this.grpPortA.Controls.Add(this.cb5r5);
+            this.grpPortA.Controls.Add(this.cb5r6);
+            this.grpPortA.Controls.Add(this.cb5r7);
+            this.grpPortA.Controls.Add(this.label93);
+            this.grpPortA.Controls.Add(this.cb4r0);
+            this.grpPortA.Controls.Add(this.cb4r1);
+            this.grpPortA.Controls.Add(this.cb4r2);
+            this.grpPortA.Controls.Add(this.cb4r3);
+            this.grpPortA.Controls.Add(this.cb4r4);
+            this.grpPortA.Controls.Add(this.cb4r5);
+            this.grpPortA.Controls.Add(this.cb4r6);
+            this.grpPortA.Controls.Add(this.cb4r7);
+            this.grpPortA.Controls.Add(this.label92);
+            this.grpPortA.Controls.Add(this.cb3r0);
+            this.grpPortA.Controls.Add(this.cb3r1);
+            this.grpPortA.Controls.Add(this.cb3r2);
+            this.grpPortA.Controls.Add(this.cb3r3);
+            this.grpPortA.Controls.Add(this.cb3r4);
+            this.grpPortA.Controls.Add(this.cb3r5);
+            this.grpPortA.Controls.Add(this.cb3r6);
+            this.grpPortA.Controls.Add(this.cb3r7);
+            this.grpPortA.Controls.Add(this.label91);
+            this.grpPortA.Controls.Add(this.cb2r0);
+            this.grpPortA.Controls.Add(this.cb2r1);
+            this.grpPortA.Controls.Add(this.cb2r2);
+            this.grpPortA.Controls.Add(this.cb2r3);
+            this.grpPortA.Controls.Add(this.cb2r4);
+            this.grpPortA.Controls.Add(this.cb2r5);
+            this.grpPortA.Controls.Add(this.cb2r6);
+            this.grpPortA.Controls.Add(this.cb2r7);
+            this.grpPortA.Controls.Add(this.label90);
+            this.grpPortA.Controls.Add(this.cb1r0);
+            this.grpPortA.Controls.Add(this.cb1r1);
+            this.grpPortA.Controls.Add(this.cb1r2);
+            this.grpPortA.Controls.Add(this.cb1r3);
+            this.grpPortA.Controls.Add(this.cb1r4);
+            this.grpPortA.Controls.Add(this.cb1r5);
+            this.grpPortA.Controls.Add(this.cb1r6);
+            this.grpPortA.Controls.Add(this.cb1r7);
+            this.grpPortA.Controls.Add(this.label89);
+            this.grpPortA.Controls.Add(this.label88);
+            this.grpPortA.Controls.Add(this.label87);
+            this.grpPortA.Controls.Add(this.label86);
+            this.grpPortA.Controls.Add(this.label85);
+            this.grpPortA.Controls.Add(this.label84);
+            this.grpPortA.Controls.Add(this.label83);
+            this.grpPortA.Controls.Add(this.label82);
+            this.grpPortA.Controls.Add(this.label81);
+            this.grpPortA.ForeColor = System.Drawing.Color.Blue;
+            this.grpPortA.Location = new System.Drawing.Point(5, 6);
+            this.grpPortA.Name = "grpPortA";
+            this.grpPortA.Size = new System.Drawing.Size(175, 292);
+            this.grpPortA.TabIndex = 0;
+            this.grpPortA.TabStop = false;
+            this.grpPortA.Text = "Port A";
+            // 
+            // cb15r4
+            // 
+            this.cb15r4.AutoSize = true;
+            this.cb15r4.Enabled = false;
+            this.cb15r4.Location = new System.Drawing.Point(90, 272);
+            this.cb15r4.Name = "cb15r4";
+            this.cb15r4.Size = new System.Drawing.Size(15, 14);
+            this.cb15r4.TabIndex = 151;
+            this.cb15r4.UseVisualStyleBackColor = true;
+            this.cb15r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb15r7
+            // 
+            this.cb15r7.AutoSize = true;
+            this.cb15r7.Enabled = false;
+            this.cb15r7.Location = new System.Drawing.Point(41, 272);
+            this.cb15r7.Name = "cb15r7";
+            this.cb15r7.Size = new System.Drawing.Size(15, 14);
+            this.cb15r7.TabIndex = 148;
+            this.cb15r7.UseVisualStyleBackColor = true;
+            this.cb15r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb15r6
+            // 
+            this.cb15r6.AutoSize = true;
+            this.cb15r6.Enabled = false;
+            this.cb15r6.Location = new System.Drawing.Point(58, 272);
+            this.cb15r6.Name = "cb15r6";
+            this.cb15r6.Size = new System.Drawing.Size(15, 14);
+            this.cb15r6.TabIndex = 149;
+            this.cb15r6.UseVisualStyleBackColor = true;
+            this.cb15r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb15r5
+            // 
+            this.cb15r5.AutoSize = true;
+            this.cb15r5.Enabled = false;
+            this.cb15r5.Location = new System.Drawing.Point(74, 272);
+            this.cb15r5.Name = "cb15r5";
+            this.cb15r5.Size = new System.Drawing.Size(15, 14);
+            this.cb15r5.TabIndex = 150;
+            this.cb15r5.UseVisualStyleBackColor = true;
+            this.cb15r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb15r3
+            // 
+            this.cb15r3.AutoSize = true;
+            this.cb15r3.Enabled = false;
+            this.cb15r3.Location = new System.Drawing.Point(106, 272);
+            this.cb15r3.Name = "cb15r3";
+            this.cb15r3.Size = new System.Drawing.Size(15, 14);
+            this.cb15r3.TabIndex = 152;
+            this.cb15r3.UseVisualStyleBackColor = true;
+            this.cb15r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb15r2
+            // 
+            this.cb15r2.AutoSize = true;
+            this.cb15r2.Enabled = false;
+            this.cb15r2.Location = new System.Drawing.Point(122, 272);
+            this.cb15r2.Name = "cb15r2";
+            this.cb15r2.Size = new System.Drawing.Size(15, 14);
+            this.cb15r2.TabIndex = 153;
+            this.cb15r2.UseVisualStyleBackColor = true;
+            this.cb15r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb15r1
+            // 
+            this.cb15r1.AutoSize = true;
+            this.cb15r1.Enabled = false;
+            this.cb15r1.Location = new System.Drawing.Point(138, 272);
+            this.cb15r1.Name = "cb15r1";
+            this.cb15r1.Size = new System.Drawing.Size(15, 14);
+            this.cb15r1.TabIndex = 154;
+            this.cb15r1.UseVisualStyleBackColor = true;
+            this.cb15r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb15r0
+            // 
+            this.cb15r0.AutoSize = true;
+            this.cb15r0.Enabled = false;
+            this.cb15r0.Location = new System.Drawing.Point(154, 272);
+            this.cb15r0.Name = "cb15r0";
+            this.cb15r0.Size = new System.Drawing.Size(15, 14);
+            this.cb15r0.TabIndex = 155;
+            this.cb15r0.UseVisualStyleBackColor = true;
+            this.cb15r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label133
+            // 
+            this.label133.AutoSize = true;
+            this.label133.ForeColor = System.Drawing.Color.Green;
+            this.label133.Location = new System.Drawing.Point(8, 257);
+            this.label133.Name = "label133";
+            this.label133.Size = new System.Drawing.Size(27, 13);
+            this.label133.TabIndex = 156;
+            this.label133.Text = "HF6";
+            // 
+            // label134
+            // 
+            this.label134.AutoSize = true;
+            this.label134.ForeColor = System.Drawing.Color.Green;
+            this.label134.Location = new System.Drawing.Point(8, 272);
+            this.label134.Name = "label134";
+            this.label134.Size = new System.Drawing.Size(27, 13);
+            this.label134.TabIndex = 147;
+            this.label134.Text = "HF2";
+            // 
+            // cb14r0
+            // 
+            this.cb14r0.AutoSize = true;
+            this.cb14r0.Enabled = false;
+            this.cb14r0.Location = new System.Drawing.Point(154, 257);
+            this.cb14r0.Name = "cb14r0";
+            this.cb14r0.Size = new System.Drawing.Size(15, 14);
+            this.cb14r0.TabIndex = 146;
+            this.cb14r0.UseVisualStyleBackColor = true;
+            this.cb14r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb14r1
+            // 
+            this.cb14r1.AutoSize = true;
+            this.cb14r1.Enabled = false;
+            this.cb14r1.Location = new System.Drawing.Point(138, 257);
+            this.cb14r1.Name = "cb14r1";
+            this.cb14r1.Size = new System.Drawing.Size(15, 14);
+            this.cb14r1.TabIndex = 145;
+            this.cb14r1.UseVisualStyleBackColor = true;
+            this.cb14r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb14r2
+            // 
+            this.cb14r2.AutoSize = true;
+            this.cb14r2.Enabled = false;
+            this.cb14r2.Location = new System.Drawing.Point(122, 257);
+            this.cb14r2.Name = "cb14r2";
+            this.cb14r2.Size = new System.Drawing.Size(15, 14);
+            this.cb14r2.TabIndex = 144;
+            this.cb14r2.UseVisualStyleBackColor = true;
+            this.cb14r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb14r3
+            // 
+            this.cb14r3.AutoSize = true;
+            this.cb14r3.Enabled = false;
+            this.cb14r3.Location = new System.Drawing.Point(106, 257);
+            this.cb14r3.Name = "cb14r3";
+            this.cb14r3.Size = new System.Drawing.Size(15, 14);
+            this.cb14r3.TabIndex = 143;
+            this.cb14r3.UseVisualStyleBackColor = true;
+            this.cb14r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb14r4
+            // 
+            this.cb14r4.AutoSize = true;
+            this.cb14r4.Enabled = false;
+            this.cb14r4.Location = new System.Drawing.Point(90, 257);
+            this.cb14r4.Name = "cb14r4";
+            this.cb14r4.Size = new System.Drawing.Size(15, 14);
+            this.cb14r4.TabIndex = 142;
+            this.cb14r4.UseVisualStyleBackColor = true;
+            this.cb14r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb14r5
+            // 
+            this.cb14r5.AutoSize = true;
+            this.cb14r5.Enabled = false;
+            this.cb14r5.Location = new System.Drawing.Point(74, 257);
+            this.cb14r5.Name = "cb14r5";
+            this.cb14r5.Size = new System.Drawing.Size(15, 14);
+            this.cb14r5.TabIndex = 141;
+            this.cb14r5.UseVisualStyleBackColor = true;
+            this.cb14r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb14r6
+            // 
+            this.cb14r6.AutoSize = true;
+            this.cb14r6.Enabled = false;
+            this.cb14r6.Location = new System.Drawing.Point(58, 257);
+            this.cb14r6.Name = "cb14r6";
+            this.cb14r6.Size = new System.Drawing.Size(15, 14);
+            this.cb14r6.TabIndex = 140;
+            this.cb14r6.UseVisualStyleBackColor = true;
+            this.cb14r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb14r7
+            // 
+            this.cb14r7.AutoSize = true;
+            this.cb14r7.Enabled = false;
+            this.cb14r7.Location = new System.Drawing.Point(41, 257);
+            this.cb14r7.Name = "cb14r7";
+            this.cb14r7.Size = new System.Drawing.Size(15, 14);
+            this.cb14r7.TabIndex = 139;
+            this.cb14r7.UseVisualStyleBackColor = true;
+            this.cb14r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label129
+            // 
+            this.label129.AutoSize = true;
+            this.label129.ForeColor = System.Drawing.Color.Firebrick;
+            this.label129.Location = new System.Drawing.Point(3, 24);
+            this.label129.Name = "label129";
+            this.label129.Size = new System.Drawing.Size(34, 13);
+            this.label129.TabIndex = 138;
+            this.label129.Text = "VHF+";
+            // 
+            // cb13r4
+            // 
+            this.cb13r4.AutoSize = true;
+            this.cb13r4.Enabled = false;
+            this.cb13r4.Location = new System.Drawing.Point(90, 237);
+            this.cb13r4.Name = "cb13r4";
+            this.cb13r4.Size = new System.Drawing.Size(15, 14);
+            this.cb13r4.TabIndex = 128;
+            this.cb13r4.UseVisualStyleBackColor = true;
+            this.cb13r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label104
+            // 
+            this.label104.AutoSize = true;
+            this.label104.ForeColor = System.Drawing.Color.Navy;
+            this.label104.Location = new System.Drawing.Point(40, 8);
+            this.label104.Name = "label104";
+            this.label104.Size = new System.Drawing.Size(130, 13);
+            this.label104.TabIndex = 137;
+            this.label104.Text = "- - - - - - - Port Bits - - - - - - -";
+            // 
+            // cb13r7
+            // 
+            this.cb13r7.AutoSize = true;
+            this.cb13r7.Enabled = false;
+            this.cb13r7.Location = new System.Drawing.Point(41, 237);
+            this.cb13r7.Name = "cb13r7";
+            this.cb13r7.Size = new System.Drawing.Size(15, 14);
+            this.cb13r7.TabIndex = 125;
+            this.cb13r7.UseVisualStyleBackColor = true;
+            this.cb13r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb13r6
+            // 
+            this.cb13r6.AutoSize = true;
+            this.cb13r6.Enabled = false;
+            this.cb13r6.Location = new System.Drawing.Point(58, 237);
+            this.cb13r6.Name = "cb13r6";
+            this.cb13r6.Size = new System.Drawing.Size(15, 14);
+            this.cb13r6.TabIndex = 126;
+            this.cb13r6.UseVisualStyleBackColor = true;
+            this.cb13r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb0r3
+            // 
+            this.cb0r3.AutoSize = true;
+            this.cb0r3.Enabled = false;
+            this.cb0r3.Location = new System.Drawing.Point(106, 40);
+            this.cb0r3.Name = "cb0r3";
+            this.cb0r3.Size = new System.Drawing.Size(15, 14);
+            this.cb0r3.TabIndex = 3;
+            this.cb0r3.UseVisualStyleBackColor = true;
+            this.cb0r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb13r5
+            // 
+            this.cb13r5.AutoSize = true;
+            this.cb13r5.Enabled = false;
+            this.cb13r5.Location = new System.Drawing.Point(74, 237);
+            this.cb13r5.Name = "cb13r5";
+            this.cb13r5.Size = new System.Drawing.Size(15, 14);
+            this.cb13r5.TabIndex = 127;
+            this.cb13r5.UseVisualStyleBackColor = true;
+            this.cb13r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb13r3
+            // 
+            this.cb13r3.AutoSize = true;
+            this.cb13r3.Enabled = false;
+            this.cb13r3.Location = new System.Drawing.Point(106, 237);
+            this.cb13r3.Name = "cb13r3";
+            this.cb13r3.Size = new System.Drawing.Size(15, 14);
+            this.cb13r3.TabIndex = 129;
+            this.cb13r3.UseVisualStyleBackColor = true;
+            this.cb13r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb0r0
+            // 
+            this.cb0r0.AutoSize = true;
+            this.cb0r0.Enabled = false;
+            this.cb0r0.Location = new System.Drawing.Point(154, 40);
+            this.cb0r0.Name = "cb0r0";
+            this.cb0r0.Size = new System.Drawing.Size(15, 14);
+            this.cb0r0.TabIndex = 0;
+            this.cb0r0.UseVisualStyleBackColor = true;
+            this.cb0r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb13r2
+            // 
+            this.cb13r2.AutoSize = true;
+            this.cb13r2.Enabled = false;
+            this.cb13r2.Location = new System.Drawing.Point(122, 237);
+            this.cb13r2.Name = "cb13r2";
+            this.cb13r2.Size = new System.Drawing.Size(15, 14);
+            this.cb13r2.TabIndex = 130;
+            this.cb13r2.UseVisualStyleBackColor = true;
+            this.cb13r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb13r1
+            // 
+            this.cb13r1.AutoSize = true;
+            this.cb13r1.Enabled = false;
+            this.cb13r1.Location = new System.Drawing.Point(138, 237);
+            this.cb13r1.Name = "cb13r1";
+            this.cb13r1.Size = new System.Drawing.Size(15, 14);
+            this.cb13r1.TabIndex = 131;
+            this.cb13r1.UseVisualStyleBackColor = true;
+            this.cb13r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb13r0
+            // 
+            this.cb13r0.AutoSize = true;
+            this.cb13r0.Enabled = false;
+            this.cb13r0.Location = new System.Drawing.Point(154, 237);
+            this.cb13r0.Name = "cb13r0";
+            this.cb13r0.Size = new System.Drawing.Size(15, 14);
+            this.cb13r0.TabIndex = 132;
+            this.cb13r0.UseVisualStyleBackColor = true;
+            this.cb13r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb0r1
+            // 
+            this.cb0r1.AutoSize = true;
+            this.cb0r1.Enabled = false;
+            this.cb0r1.Location = new System.Drawing.Point(138, 40);
+            this.cb0r1.Name = "cb0r1";
+            this.cb0r1.Size = new System.Drawing.Size(15, 14);
+            this.cb0r1.TabIndex = 1;
+            this.cb0r1.UseVisualStyleBackColor = true;
+            this.cb0r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label102
+            // 
+            this.label102.AutoSize = true;
+            this.label102.ForeColor = System.Drawing.Color.Firebrick;
+            this.label102.Location = new System.Drawing.Point(8, 222);
+            this.label102.Name = "label102";
+            this.label102.Size = new System.Drawing.Size(19, 13);
+            this.label102.TabIndex = 133;
+            this.label102.Text = "12";
+            // 
+            // cb0r2
+            // 
+            this.cb0r2.AutoSize = true;
+            this.cb0r2.Enabled = false;
+            this.cb0r2.Location = new System.Drawing.Point(122, 40);
+            this.cb0r2.Name = "cb0r2";
+            this.cb0r2.Size = new System.Drawing.Size(15, 14);
+            this.cb0r2.TabIndex = 2;
+            this.cb0r2.UseVisualStyleBackColor = true;
+            this.cb0r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb0r4
+            // 
+            this.cb0r4.AutoSize = true;
+            this.cb0r4.Enabled = false;
+            this.cb0r4.Location = new System.Drawing.Point(91, 40);
+            this.cb0r4.Name = "cb0r4";
+            this.cb0r4.Size = new System.Drawing.Size(15, 14);
+            this.cb0r4.TabIndex = 4;
+            this.cb0r4.UseVisualStyleBackColor = true;
+            this.cb0r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb0r5
+            // 
+            this.cb0r5.AutoSize = true;
+            this.cb0r5.Enabled = false;
+            this.cb0r5.Location = new System.Drawing.Point(74, 40);
+            this.cb0r5.Name = "cb0r5";
+            this.cb0r5.Size = new System.Drawing.Size(15, 14);
+            this.cb0r5.TabIndex = 5;
+            this.cb0r5.UseVisualStyleBackColor = true;
+            this.cb0r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb0r6
+            // 
+            this.cb0r6.AutoSize = true;
+            this.cb0r6.Enabled = false;
+            this.cb0r6.Location = new System.Drawing.Point(58, 40);
+            this.cb0r6.Name = "cb0r6";
+            this.cb0r6.Size = new System.Drawing.Size(15, 14);
+            this.cb0r6.TabIndex = 6;
+            this.cb0r6.UseVisualStyleBackColor = true;
+            this.cb0r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb0r7
+            // 
+            this.cb0r7.AutoSize = true;
+            this.cb0r7.Enabled = false;
+            this.cb0r7.Location = new System.Drawing.Point(41, 40);
+            this.cb0r7.Name = "cb0r7";
+            this.cb0r7.Size = new System.Drawing.Size(15, 14);
+            this.cb0r7.TabIndex = 7;
+            this.cb0r7.UseVisualStyleBackColor = true;
+            this.cb0r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label101
+            // 
+            this.label101.AutoSize = true;
+            this.label101.ForeColor = System.Drawing.Color.Firebrick;
+            this.label101.Location = new System.Drawing.Point(8, 237);
+            this.label101.Name = "label101";
+            this.label101.Size = new System.Drawing.Size(19, 13);
+            this.label101.TabIndex = 124;
+            this.label101.Text = "13";
+            // 
+            // cb12r0
+            // 
+            this.cb12r0.AutoSize = true;
+            this.cb12r0.Enabled = false;
+            this.cb12r0.Location = new System.Drawing.Point(154, 222);
+            this.cb12r0.Name = "cb12r0";
+            this.cb12r0.Size = new System.Drawing.Size(15, 14);
+            this.cb12r0.TabIndex = 123;
+            this.cb12r0.UseVisualStyleBackColor = true;
+            this.cb12r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb12r1
+            // 
+            this.cb12r1.AutoSize = true;
+            this.cb12r1.Enabled = false;
+            this.cb12r1.Location = new System.Drawing.Point(138, 222);
+            this.cb12r1.Name = "cb12r1";
+            this.cb12r1.Size = new System.Drawing.Size(15, 14);
+            this.cb12r1.TabIndex = 122;
+            this.cb12r1.UseVisualStyleBackColor = true;
+            this.cb12r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb12r2
+            // 
+            this.cb12r2.AutoSize = true;
+            this.cb12r2.Enabled = false;
+            this.cb12r2.Location = new System.Drawing.Point(122, 222);
+            this.cb12r2.Name = "cb12r2";
+            this.cb12r2.Size = new System.Drawing.Size(15, 14);
+            this.cb12r2.TabIndex = 121;
+            this.cb12r2.UseVisualStyleBackColor = true;
+            this.cb12r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb12r3
+            // 
+            this.cb12r3.AutoSize = true;
+            this.cb12r3.Enabled = false;
+            this.cb12r3.Location = new System.Drawing.Point(106, 222);
+            this.cb12r3.Name = "cb12r3";
+            this.cb12r3.Size = new System.Drawing.Size(15, 14);
+            this.cb12r3.TabIndex = 120;
+            this.cb12r3.UseVisualStyleBackColor = true;
+            this.cb12r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb12r4
+            // 
+            this.cb12r4.AutoSize = true;
+            this.cb12r4.Enabled = false;
+            this.cb12r4.Location = new System.Drawing.Point(90, 222);
+            this.cb12r4.Name = "cb12r4";
+            this.cb12r4.Size = new System.Drawing.Size(15, 14);
+            this.cb12r4.TabIndex = 119;
+            this.cb12r4.UseVisualStyleBackColor = true;
+            this.cb12r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb12r5
+            // 
+            this.cb12r5.AutoSize = true;
+            this.cb12r5.Enabled = false;
+            this.cb12r5.Location = new System.Drawing.Point(74, 222);
+            this.cb12r5.Name = "cb12r5";
+            this.cb12r5.Size = new System.Drawing.Size(15, 14);
+            this.cb12r5.TabIndex = 118;
+            this.cb12r5.UseVisualStyleBackColor = true;
+            this.cb12r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb12r6
+            // 
+            this.cb12r6.AutoSize = true;
+            this.cb12r6.Enabled = false;
+            this.cb12r6.Location = new System.Drawing.Point(58, 222);
+            this.cb12r6.Name = "cb12r6";
+            this.cb12r6.Size = new System.Drawing.Size(15, 14);
+            this.cb12r6.TabIndex = 117;
+            this.cb12r6.UseVisualStyleBackColor = true;
+            this.cb12r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb12r7
+            // 
+            this.cb12r7.AutoSize = true;
+            this.cb12r7.Enabled = false;
+            this.cb12r7.Location = new System.Drawing.Point(41, 222);
+            this.cb12r7.Name = "cb12r7";
+            this.cb12r7.Size = new System.Drawing.Size(15, 14);
+            this.cb12r7.TabIndex = 116;
+            this.cb12r7.UseVisualStyleBackColor = true;
+            this.cb12r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label100
+            // 
+            this.label100.AutoSize = true;
+            this.label100.ForeColor = System.Drawing.Color.Firebrick;
+            this.label100.Location = new System.Drawing.Point(8, 207);
+            this.label100.Name = "label100";
+            this.label100.Size = new System.Drawing.Size(19, 13);
+            this.label100.TabIndex = 115;
+            this.label100.Text = "11";
+            // 
+            // cb11r0
+            // 
+            this.cb11r0.AutoSize = true;
+            this.cb11r0.Enabled = false;
+            this.cb11r0.Location = new System.Drawing.Point(154, 207);
+            this.cb11r0.Name = "cb11r0";
+            this.cb11r0.Size = new System.Drawing.Size(15, 14);
+            this.cb11r0.TabIndex = 114;
+            this.cb11r0.UseVisualStyleBackColor = true;
+            this.cb11r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb11r1
+            // 
+            this.cb11r1.AutoSize = true;
+            this.cb11r1.Enabled = false;
+            this.cb11r1.Location = new System.Drawing.Point(138, 207);
+            this.cb11r1.Name = "cb11r1";
+            this.cb11r1.Size = new System.Drawing.Size(15, 14);
+            this.cb11r1.TabIndex = 113;
+            this.cb11r1.UseVisualStyleBackColor = true;
+            this.cb11r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb11r2
+            // 
+            this.cb11r2.AutoSize = true;
+            this.cb11r2.Enabled = false;
+            this.cb11r2.Location = new System.Drawing.Point(122, 207);
+            this.cb11r2.Name = "cb11r2";
+            this.cb11r2.Size = new System.Drawing.Size(15, 14);
+            this.cb11r2.TabIndex = 112;
+            this.cb11r2.UseVisualStyleBackColor = true;
+            this.cb11r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb11r3
+            // 
+            this.cb11r3.AutoSize = true;
+            this.cb11r3.Enabled = false;
+            this.cb11r3.Location = new System.Drawing.Point(106, 207);
+            this.cb11r3.Name = "cb11r3";
+            this.cb11r3.Size = new System.Drawing.Size(15, 14);
+            this.cb11r3.TabIndex = 111;
+            this.cb11r3.UseVisualStyleBackColor = true;
+            this.cb11r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb11r4
+            // 
+            this.cb11r4.AutoSize = true;
+            this.cb11r4.Enabled = false;
+            this.cb11r4.Location = new System.Drawing.Point(90, 207);
+            this.cb11r4.Name = "cb11r4";
+            this.cb11r4.Size = new System.Drawing.Size(15, 14);
+            this.cb11r4.TabIndex = 110;
+            this.cb11r4.UseVisualStyleBackColor = true;
+            this.cb11r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb11r5
+            // 
+            this.cb11r5.AutoSize = true;
+            this.cb11r5.Enabled = false;
+            this.cb11r5.Location = new System.Drawing.Point(74, 207);
+            this.cb11r5.Name = "cb11r5";
+            this.cb11r5.Size = new System.Drawing.Size(15, 14);
+            this.cb11r5.TabIndex = 109;
+            this.cb11r5.UseVisualStyleBackColor = true;
+            this.cb11r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb11r6
+            // 
+            this.cb11r6.AutoSize = true;
+            this.cb11r6.Enabled = false;
+            this.cb11r6.Location = new System.Drawing.Point(58, 207);
+            this.cb11r6.Name = "cb11r6";
+            this.cb11r6.Size = new System.Drawing.Size(15, 14);
+            this.cb11r6.TabIndex = 108;
+            this.cb11r6.UseVisualStyleBackColor = true;
+            this.cb11r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb11r7
+            // 
+            this.cb11r7.AutoSize = true;
+            this.cb11r7.Enabled = false;
+            this.cb11r7.Location = new System.Drawing.Point(41, 207);
+            this.cb11r7.Name = "cb11r7";
+            this.cb11r7.Size = new System.Drawing.Size(15, 14);
+            this.cb11r7.TabIndex = 107;
+            this.cb11r7.UseVisualStyleBackColor = true;
+            this.cb11r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label99
+            // 
+            this.label99.AutoSize = true;
+            this.label99.ForeColor = System.Drawing.Color.Firebrick;
+            this.label99.Location = new System.Drawing.Point(8, 192);
+            this.label99.Name = "label99";
+            this.label99.Size = new System.Drawing.Size(19, 13);
+            this.label99.TabIndex = 106;
+            this.label99.Text = "10";
+            // 
+            // cb10r0
+            // 
+            this.cb10r0.AutoSize = true;
+            this.cb10r0.Enabled = false;
+            this.cb10r0.Location = new System.Drawing.Point(154, 192);
+            this.cb10r0.Name = "cb10r0";
+            this.cb10r0.Size = new System.Drawing.Size(15, 14);
+            this.cb10r0.TabIndex = 105;
+            this.cb10r0.UseVisualStyleBackColor = true;
+            this.cb10r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb10r1
+            // 
+            this.cb10r1.AutoSize = true;
+            this.cb10r1.Enabled = false;
+            this.cb10r1.Location = new System.Drawing.Point(138, 192);
+            this.cb10r1.Name = "cb10r1";
+            this.cb10r1.Size = new System.Drawing.Size(15, 14);
+            this.cb10r1.TabIndex = 104;
+            this.cb10r1.UseVisualStyleBackColor = true;
+            this.cb10r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb10r2
+            // 
+            this.cb10r2.AutoSize = true;
+            this.cb10r2.Enabled = false;
+            this.cb10r2.Location = new System.Drawing.Point(122, 192);
+            this.cb10r2.Name = "cb10r2";
+            this.cb10r2.Size = new System.Drawing.Size(15, 14);
+            this.cb10r2.TabIndex = 103;
+            this.cb10r2.UseVisualStyleBackColor = true;
+            this.cb10r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb10r3
+            // 
+            this.cb10r3.AutoSize = true;
+            this.cb10r3.Enabled = false;
+            this.cb10r3.Location = new System.Drawing.Point(106, 192);
+            this.cb10r3.Name = "cb10r3";
+            this.cb10r3.Size = new System.Drawing.Size(15, 14);
+            this.cb10r3.TabIndex = 102;
+            this.cb10r3.UseVisualStyleBackColor = true;
+            this.cb10r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb10r4
+            // 
+            this.cb10r4.AutoSize = true;
+            this.cb10r4.Enabled = false;
+            this.cb10r4.Location = new System.Drawing.Point(90, 192);
+            this.cb10r4.Name = "cb10r4";
+            this.cb10r4.Size = new System.Drawing.Size(15, 14);
+            this.cb10r4.TabIndex = 101;
+            this.cb10r4.UseVisualStyleBackColor = true;
+            this.cb10r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb10r5
+            // 
+            this.cb10r5.AutoSize = true;
+            this.cb10r5.Enabled = false;
+            this.cb10r5.Location = new System.Drawing.Point(74, 192);
+            this.cb10r5.Name = "cb10r5";
+            this.cb10r5.Size = new System.Drawing.Size(15, 14);
+            this.cb10r5.TabIndex = 100;
+            this.cb10r5.UseVisualStyleBackColor = true;
+            this.cb10r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb10r6
+            // 
+            this.cb10r6.AutoSize = true;
+            this.cb10r6.Enabled = false;
+            this.cb10r6.Location = new System.Drawing.Point(58, 192);
+            this.cb10r6.Name = "cb10r6";
+            this.cb10r6.Size = new System.Drawing.Size(15, 14);
+            this.cb10r6.TabIndex = 99;
+            this.cb10r6.UseVisualStyleBackColor = true;
+            this.cb10r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb10r7
+            // 
+            this.cb10r7.AutoSize = true;
+            this.cb10r7.Enabled = false;
+            this.cb10r7.Location = new System.Drawing.Point(41, 192);
+            this.cb10r7.Name = "cb10r7";
+            this.cb10r7.Size = new System.Drawing.Size(15, 14);
+            this.cb10r7.TabIndex = 98;
+            this.cb10r7.UseVisualStyleBackColor = true;
+            this.cb10r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label98
+            // 
+            this.label98.AutoSize = true;
+            this.label98.ForeColor = System.Drawing.Color.Firebrick;
+            this.label98.Location = new System.Drawing.Point(14, 177);
+            this.label98.Name = "label98";
+            this.label98.Size = new System.Drawing.Size(13, 13);
+            this.label98.TabIndex = 97;
+            this.label98.Text = "9";
+            // 
+            // cb9r0
+            // 
+            this.cb9r0.AutoSize = true;
+            this.cb9r0.Enabled = false;
+            this.cb9r0.Location = new System.Drawing.Point(154, 177);
+            this.cb9r0.Name = "cb9r0";
+            this.cb9r0.Size = new System.Drawing.Size(15, 14);
+            this.cb9r0.TabIndex = 96;
+            this.cb9r0.UseVisualStyleBackColor = true;
+            this.cb9r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb9r1
+            // 
+            this.cb9r1.AutoSize = true;
+            this.cb9r1.Enabled = false;
+            this.cb9r1.Location = new System.Drawing.Point(138, 177);
+            this.cb9r1.Name = "cb9r1";
+            this.cb9r1.Size = new System.Drawing.Size(15, 14);
+            this.cb9r1.TabIndex = 95;
+            this.cb9r1.UseVisualStyleBackColor = true;
+            this.cb9r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb9r2
+            // 
+            this.cb9r2.AutoSize = true;
+            this.cb9r2.Enabled = false;
+            this.cb9r2.Location = new System.Drawing.Point(122, 177);
+            this.cb9r2.Name = "cb9r2";
+            this.cb9r2.Size = new System.Drawing.Size(15, 14);
+            this.cb9r2.TabIndex = 94;
+            this.cb9r2.UseVisualStyleBackColor = true;
+            this.cb9r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb9r3
+            // 
+            this.cb9r3.AutoSize = true;
+            this.cb9r3.Enabled = false;
+            this.cb9r3.Location = new System.Drawing.Point(106, 177);
+            this.cb9r3.Name = "cb9r3";
+            this.cb9r3.Size = new System.Drawing.Size(15, 14);
+            this.cb9r3.TabIndex = 93;
+            this.cb9r3.UseVisualStyleBackColor = true;
+            this.cb9r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb9r4
+            // 
+            this.cb9r4.AutoSize = true;
+            this.cb9r4.Enabled = false;
+            this.cb9r4.Location = new System.Drawing.Point(90, 177);
+            this.cb9r4.Name = "cb9r4";
+            this.cb9r4.Size = new System.Drawing.Size(15, 14);
+            this.cb9r4.TabIndex = 92;
+            this.cb9r4.UseVisualStyleBackColor = true;
+            this.cb9r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb9r5
+            // 
+            this.cb9r5.AutoSize = true;
+            this.cb9r5.Enabled = false;
+            this.cb9r5.Location = new System.Drawing.Point(74, 177);
+            this.cb9r5.Name = "cb9r5";
+            this.cb9r5.Size = new System.Drawing.Size(15, 14);
+            this.cb9r5.TabIndex = 91;
+            this.cb9r5.UseVisualStyleBackColor = true;
+            this.cb9r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb9r6
+            // 
+            this.cb9r6.AutoSize = true;
+            this.cb9r6.Enabled = false;
+            this.cb9r6.Location = new System.Drawing.Point(58, 177);
+            this.cb9r6.Name = "cb9r6";
+            this.cb9r6.Size = new System.Drawing.Size(15, 14);
+            this.cb9r6.TabIndex = 90;
+            this.cb9r6.UseVisualStyleBackColor = true;
+            this.cb9r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb9r7
+            // 
+            this.cb9r7.AutoSize = true;
+            this.cb9r7.Enabled = false;
+            this.cb9r7.Location = new System.Drawing.Point(41, 177);
+            this.cb9r7.Name = "cb9r7";
+            this.cb9r7.Size = new System.Drawing.Size(15, 14);
+            this.cb9r7.TabIndex = 89;
+            this.cb9r7.UseVisualStyleBackColor = true;
+            this.cb9r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label97
+            // 
+            this.label97.AutoSize = true;
+            this.label97.ForeColor = System.Drawing.Color.Firebrick;
+            this.label97.Location = new System.Drawing.Point(14, 162);
+            this.label97.Name = "label97";
+            this.label97.Size = new System.Drawing.Size(13, 13);
+            this.label97.TabIndex = 88;
+            this.label97.Text = "8";
+            // 
+            // cb8r0
+            // 
+            this.cb8r0.AutoSize = true;
+            this.cb8r0.Enabled = false;
+            this.cb8r0.Location = new System.Drawing.Point(154, 162);
+            this.cb8r0.Name = "cb8r0";
+            this.cb8r0.Size = new System.Drawing.Size(15, 14);
+            this.cb8r0.TabIndex = 87;
+            this.cb8r0.UseVisualStyleBackColor = true;
+            this.cb8r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb8r1
+            // 
+            this.cb8r1.AutoSize = true;
+            this.cb8r1.Enabled = false;
+            this.cb8r1.Location = new System.Drawing.Point(138, 162);
+            this.cb8r1.Name = "cb8r1";
+            this.cb8r1.Size = new System.Drawing.Size(15, 14);
+            this.cb8r1.TabIndex = 86;
+            this.cb8r1.UseVisualStyleBackColor = true;
+            this.cb8r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb8r2
+            // 
+            this.cb8r2.AutoSize = true;
+            this.cb8r2.Enabled = false;
+            this.cb8r2.Location = new System.Drawing.Point(122, 162);
+            this.cb8r2.Name = "cb8r2";
+            this.cb8r2.Size = new System.Drawing.Size(15, 14);
+            this.cb8r2.TabIndex = 85;
+            this.cb8r2.UseVisualStyleBackColor = true;
+            this.cb8r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb8r3
+            // 
+            this.cb8r3.AutoSize = true;
+            this.cb8r3.Enabled = false;
+            this.cb8r3.Location = new System.Drawing.Point(106, 162);
+            this.cb8r3.Name = "cb8r3";
+            this.cb8r3.Size = new System.Drawing.Size(15, 14);
+            this.cb8r3.TabIndex = 84;
+            this.cb8r3.UseVisualStyleBackColor = true;
+            this.cb8r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb8r4
+            // 
+            this.cb8r4.AutoSize = true;
+            this.cb8r4.Enabled = false;
+            this.cb8r4.Location = new System.Drawing.Point(90, 162);
+            this.cb8r4.Name = "cb8r4";
+            this.cb8r4.Size = new System.Drawing.Size(15, 14);
+            this.cb8r4.TabIndex = 83;
+            this.cb8r4.UseVisualStyleBackColor = true;
+            this.cb8r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb8r5
+            // 
+            this.cb8r5.AutoSize = true;
+            this.cb8r5.Enabled = false;
+            this.cb8r5.Location = new System.Drawing.Point(74, 162);
+            this.cb8r5.Name = "cb8r5";
+            this.cb8r5.Size = new System.Drawing.Size(15, 14);
+            this.cb8r5.TabIndex = 82;
+            this.cb8r5.UseVisualStyleBackColor = true;
+            this.cb8r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb8r6
+            // 
+            this.cb8r6.AutoSize = true;
+            this.cb8r6.Enabled = false;
+            this.cb8r6.Location = new System.Drawing.Point(58, 162);
+            this.cb8r6.Name = "cb8r6";
+            this.cb8r6.Size = new System.Drawing.Size(15, 14);
+            this.cb8r6.TabIndex = 81;
+            this.cb8r6.UseVisualStyleBackColor = true;
+            this.cb8r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb8r7
+            // 
+            this.cb8r7.AutoSize = true;
+            this.cb8r7.Enabled = false;
+            this.cb8r7.Location = new System.Drawing.Point(41, 162);
+            this.cb8r7.Name = "cb8r7";
+            this.cb8r7.Size = new System.Drawing.Size(15, 14);
+            this.cb8r7.TabIndex = 80;
+            this.cb8r7.UseVisualStyleBackColor = true;
+            this.cb8r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label96
+            // 
+            this.label96.AutoSize = true;
+            this.label96.ForeColor = System.Drawing.Color.Firebrick;
+            this.label96.Location = new System.Drawing.Point(14, 147);
+            this.label96.Name = "label96";
+            this.label96.Size = new System.Drawing.Size(13, 13);
+            this.label96.TabIndex = 79;
+            this.label96.Text = "7";
+            // 
+            // cb7r0
+            // 
+            this.cb7r0.AutoSize = true;
+            this.cb7r0.Enabled = false;
+            this.cb7r0.Location = new System.Drawing.Point(154, 147);
+            this.cb7r0.Name = "cb7r0";
+            this.cb7r0.Size = new System.Drawing.Size(15, 14);
+            this.cb7r0.TabIndex = 78;
+            this.cb7r0.UseVisualStyleBackColor = true;
+            this.cb7r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb7r1
+            // 
+            this.cb7r1.AutoSize = true;
+            this.cb7r1.Enabled = false;
+            this.cb7r1.Location = new System.Drawing.Point(138, 147);
+            this.cb7r1.Name = "cb7r1";
+            this.cb7r1.Size = new System.Drawing.Size(15, 14);
+            this.cb7r1.TabIndex = 77;
+            this.cb7r1.UseVisualStyleBackColor = true;
+            this.cb7r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb7r2
+            // 
+            this.cb7r2.AutoSize = true;
+            this.cb7r2.Enabled = false;
+            this.cb7r2.Location = new System.Drawing.Point(122, 147);
+            this.cb7r2.Name = "cb7r2";
+            this.cb7r2.Size = new System.Drawing.Size(15, 14);
+            this.cb7r2.TabIndex = 76;
+            this.cb7r2.UseVisualStyleBackColor = true;
+            this.cb7r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb7r3
+            // 
+            this.cb7r3.AutoSize = true;
+            this.cb7r3.Enabled = false;
+            this.cb7r3.Location = new System.Drawing.Point(106, 147);
+            this.cb7r3.Name = "cb7r3";
+            this.cb7r3.Size = new System.Drawing.Size(15, 14);
+            this.cb7r3.TabIndex = 75;
+            this.cb7r3.UseVisualStyleBackColor = true;
+            this.cb7r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb7r4
+            // 
+            this.cb7r4.AutoSize = true;
+            this.cb7r4.Enabled = false;
+            this.cb7r4.Location = new System.Drawing.Point(90, 147);
+            this.cb7r4.Name = "cb7r4";
+            this.cb7r4.Size = new System.Drawing.Size(15, 14);
+            this.cb7r4.TabIndex = 74;
+            this.cb7r4.UseVisualStyleBackColor = true;
+            this.cb7r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb7r5
+            // 
+            this.cb7r5.AutoSize = true;
+            this.cb7r5.Enabled = false;
+            this.cb7r5.Location = new System.Drawing.Point(74, 147);
+            this.cb7r5.Name = "cb7r5";
+            this.cb7r5.Size = new System.Drawing.Size(15, 14);
+            this.cb7r5.TabIndex = 73;
+            this.cb7r5.UseVisualStyleBackColor = true;
+            this.cb7r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb7r6
+            // 
+            this.cb7r6.AutoSize = true;
+            this.cb7r6.Enabled = false;
+            this.cb7r6.Location = new System.Drawing.Point(58, 147);
+            this.cb7r6.Name = "cb7r6";
+            this.cb7r6.Size = new System.Drawing.Size(15, 14);
+            this.cb7r6.TabIndex = 72;
+            this.cb7r6.UseVisualStyleBackColor = true;
+            this.cb7r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb7r7
+            // 
+            this.cb7r7.AutoSize = true;
+            this.cb7r7.Enabled = false;
+            this.cb7r7.Location = new System.Drawing.Point(41, 147);
+            this.cb7r7.Name = "cb7r7";
+            this.cb7r7.Size = new System.Drawing.Size(15, 14);
+            this.cb7r7.TabIndex = 71;
+            this.cb7r7.UseVisualStyleBackColor = true;
+            this.cb7r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label95
+            // 
+            this.label95.AutoSize = true;
+            this.label95.ForeColor = System.Drawing.Color.Firebrick;
+            this.label95.Location = new System.Drawing.Point(14, 132);
+            this.label95.Name = "label95";
+            this.label95.Size = new System.Drawing.Size(13, 13);
+            this.label95.TabIndex = 70;
+            this.label95.Text = "6";
+            // 
+            // cb6r0
+            // 
+            this.cb6r0.AutoSize = true;
+            this.cb6r0.Enabled = false;
+            this.cb6r0.Location = new System.Drawing.Point(154, 132);
+            this.cb6r0.Name = "cb6r0";
+            this.cb6r0.Size = new System.Drawing.Size(15, 14);
+            this.cb6r0.TabIndex = 69;
+            this.cb6r0.UseVisualStyleBackColor = true;
+            this.cb6r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb6r1
+            // 
+            this.cb6r1.AutoSize = true;
+            this.cb6r1.Enabled = false;
+            this.cb6r1.Location = new System.Drawing.Point(138, 132);
+            this.cb6r1.Name = "cb6r1";
+            this.cb6r1.Size = new System.Drawing.Size(15, 14);
+            this.cb6r1.TabIndex = 68;
+            this.cb6r1.UseVisualStyleBackColor = true;
+            this.cb6r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb6r2
+            // 
+            this.cb6r2.AutoSize = true;
+            this.cb6r2.Enabled = false;
+            this.cb6r2.Location = new System.Drawing.Point(122, 132);
+            this.cb6r2.Name = "cb6r2";
+            this.cb6r2.Size = new System.Drawing.Size(15, 14);
+            this.cb6r2.TabIndex = 67;
+            this.cb6r2.UseVisualStyleBackColor = true;
+            this.cb6r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb6r3
+            // 
+            this.cb6r3.AutoSize = true;
+            this.cb6r3.Enabled = false;
+            this.cb6r3.Location = new System.Drawing.Point(106, 132);
+            this.cb6r3.Name = "cb6r3";
+            this.cb6r3.Size = new System.Drawing.Size(15, 14);
+            this.cb6r3.TabIndex = 66;
+            this.cb6r3.UseVisualStyleBackColor = true;
+            this.cb6r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb6r4
+            // 
+            this.cb6r4.AutoSize = true;
+            this.cb6r4.Enabled = false;
+            this.cb6r4.Location = new System.Drawing.Point(90, 132);
+            this.cb6r4.Name = "cb6r4";
+            this.cb6r4.Size = new System.Drawing.Size(15, 14);
+            this.cb6r4.TabIndex = 65;
+            this.cb6r4.UseVisualStyleBackColor = true;
+            this.cb6r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb6r5
+            // 
+            this.cb6r5.AutoSize = true;
+            this.cb6r5.Enabled = false;
+            this.cb6r5.Location = new System.Drawing.Point(74, 132);
+            this.cb6r5.Name = "cb6r5";
+            this.cb6r5.Size = new System.Drawing.Size(15, 14);
+            this.cb6r5.TabIndex = 64;
+            this.cb6r5.UseVisualStyleBackColor = true;
+            this.cb6r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb6r6
+            // 
+            this.cb6r6.AutoSize = true;
+            this.cb6r6.Enabled = false;
+            this.cb6r6.Location = new System.Drawing.Point(58, 132);
+            this.cb6r6.Name = "cb6r6";
+            this.cb6r6.Size = new System.Drawing.Size(15, 14);
+            this.cb6r6.TabIndex = 63;
+            this.cb6r6.UseVisualStyleBackColor = true;
+            this.cb6r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb6r7
+            // 
+            this.cb6r7.AutoSize = true;
+            this.cb6r7.Enabled = false;
+            this.cb6r7.Location = new System.Drawing.Point(41, 132);
+            this.cb6r7.Name = "cb6r7";
+            this.cb6r7.Size = new System.Drawing.Size(15, 14);
+            this.cb6r7.TabIndex = 62;
+            this.cb6r7.UseVisualStyleBackColor = true;
+            this.cb6r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label94
+            // 
+            this.label94.AutoSize = true;
+            this.label94.ForeColor = System.Drawing.Color.Firebrick;
+            this.label94.Location = new System.Drawing.Point(14, 118);
+            this.label94.Name = "label94";
+            this.label94.Size = new System.Drawing.Size(13, 13);
+            this.label94.TabIndex = 61;
+            this.label94.Text = "5";
+            // 
+            // cb5r0
+            // 
+            this.cb5r0.AutoSize = true;
+            this.cb5r0.Enabled = false;
+            this.cb5r0.Location = new System.Drawing.Point(154, 118);
+            this.cb5r0.Name = "cb5r0";
+            this.cb5r0.Size = new System.Drawing.Size(15, 14);
+            this.cb5r0.TabIndex = 60;
+            this.cb5r0.UseVisualStyleBackColor = true;
+            this.cb5r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb5r1
+            // 
+            this.cb5r1.AutoSize = true;
+            this.cb5r1.Enabled = false;
+            this.cb5r1.Location = new System.Drawing.Point(138, 118);
+            this.cb5r1.Name = "cb5r1";
+            this.cb5r1.Size = new System.Drawing.Size(15, 14);
+            this.cb5r1.TabIndex = 59;
+            this.cb5r1.UseVisualStyleBackColor = true;
+            this.cb5r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb5r2
+            // 
+            this.cb5r2.AutoSize = true;
+            this.cb5r2.Enabled = false;
+            this.cb5r2.Location = new System.Drawing.Point(122, 118);
+            this.cb5r2.Name = "cb5r2";
+            this.cb5r2.Size = new System.Drawing.Size(15, 14);
+            this.cb5r2.TabIndex = 58;
+            this.cb5r2.UseVisualStyleBackColor = true;
+            this.cb5r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb5r3
+            // 
+            this.cb5r3.AutoSize = true;
+            this.cb5r3.Enabled = false;
+            this.cb5r3.Location = new System.Drawing.Point(106, 118);
+            this.cb5r3.Name = "cb5r3";
+            this.cb5r3.Size = new System.Drawing.Size(15, 14);
+            this.cb5r3.TabIndex = 57;
+            this.cb5r3.UseVisualStyleBackColor = true;
+            this.cb5r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb5r4
+            // 
+            this.cb5r4.AutoSize = true;
+            this.cb5r4.Enabled = false;
+            this.cb5r4.Location = new System.Drawing.Point(90, 118);
+            this.cb5r4.Name = "cb5r4";
+            this.cb5r4.Size = new System.Drawing.Size(15, 14);
+            this.cb5r4.TabIndex = 56;
+            this.cb5r4.UseVisualStyleBackColor = true;
+            this.cb5r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb5r5
+            // 
+            this.cb5r5.AutoSize = true;
+            this.cb5r5.Enabled = false;
+            this.cb5r5.Location = new System.Drawing.Point(74, 118);
+            this.cb5r5.Name = "cb5r5";
+            this.cb5r5.Size = new System.Drawing.Size(15, 14);
+            this.cb5r5.TabIndex = 55;
+            this.cb5r5.UseVisualStyleBackColor = true;
+            this.cb5r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb5r6
+            // 
+            this.cb5r6.AutoSize = true;
+            this.cb5r6.Enabled = false;
+            this.cb5r6.Location = new System.Drawing.Point(58, 118);
+            this.cb5r6.Name = "cb5r6";
+            this.cb5r6.Size = new System.Drawing.Size(15, 14);
+            this.cb5r6.TabIndex = 54;
+            this.cb5r6.UseVisualStyleBackColor = true;
+            this.cb5r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb5r7
+            // 
+            this.cb5r7.AutoSize = true;
+            this.cb5r7.Enabled = false;
+            this.cb5r7.Location = new System.Drawing.Point(41, 118);
+            this.cb5r7.Name = "cb5r7";
+            this.cb5r7.Size = new System.Drawing.Size(15, 14);
+            this.cb5r7.TabIndex = 53;
+            this.cb5r7.UseVisualStyleBackColor = true;
+            this.cb5r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label93
+            // 
+            this.label93.AutoSize = true;
+            this.label93.ForeColor = System.Drawing.Color.Firebrick;
+            this.label93.Location = new System.Drawing.Point(14, 103);
+            this.label93.Name = "label93";
+            this.label93.Size = new System.Drawing.Size(13, 13);
+            this.label93.TabIndex = 52;
+            this.label93.Text = "4";
+            // 
+            // cb4r0
+            // 
+            this.cb4r0.AutoSize = true;
+            this.cb4r0.Enabled = false;
+            this.cb4r0.Location = new System.Drawing.Point(154, 103);
+            this.cb4r0.Name = "cb4r0";
+            this.cb4r0.Size = new System.Drawing.Size(15, 14);
+            this.cb4r0.TabIndex = 51;
+            this.cb4r0.UseVisualStyleBackColor = true;
+            this.cb4r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb4r1
+            // 
+            this.cb4r1.AutoSize = true;
+            this.cb4r1.Enabled = false;
+            this.cb4r1.Location = new System.Drawing.Point(138, 103);
+            this.cb4r1.Name = "cb4r1";
+            this.cb4r1.Size = new System.Drawing.Size(15, 14);
+            this.cb4r1.TabIndex = 50;
+            this.cb4r1.UseVisualStyleBackColor = true;
+            this.cb4r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb4r2
+            // 
+            this.cb4r2.AutoSize = true;
+            this.cb4r2.Enabled = false;
+            this.cb4r2.Location = new System.Drawing.Point(122, 103);
+            this.cb4r2.Name = "cb4r2";
+            this.cb4r2.Size = new System.Drawing.Size(15, 14);
+            this.cb4r2.TabIndex = 49;
+            this.cb4r2.UseVisualStyleBackColor = true;
+            this.cb4r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb4r3
+            // 
+            this.cb4r3.AutoSize = true;
+            this.cb4r3.Enabled = false;
+            this.cb4r3.Location = new System.Drawing.Point(106, 103);
+            this.cb4r3.Name = "cb4r3";
+            this.cb4r3.Size = new System.Drawing.Size(15, 14);
+            this.cb4r3.TabIndex = 48;
+            this.cb4r3.UseVisualStyleBackColor = true;
+            this.cb4r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb4r4
+            // 
+            this.cb4r4.AutoSize = true;
+            this.cb4r4.Enabled = false;
+            this.cb4r4.Location = new System.Drawing.Point(90, 103);
+            this.cb4r4.Name = "cb4r4";
+            this.cb4r4.Size = new System.Drawing.Size(15, 14);
+            this.cb4r4.TabIndex = 47;
+            this.cb4r4.UseVisualStyleBackColor = true;
+            this.cb4r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb4r5
+            // 
+            this.cb4r5.AutoSize = true;
+            this.cb4r5.Enabled = false;
+            this.cb4r5.Location = new System.Drawing.Point(74, 103);
+            this.cb4r5.Name = "cb4r5";
+            this.cb4r5.Size = new System.Drawing.Size(15, 14);
+            this.cb4r5.TabIndex = 46;
+            this.cb4r5.UseVisualStyleBackColor = true;
+            this.cb4r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb4r6
+            // 
+            this.cb4r6.AutoSize = true;
+            this.cb4r6.Enabled = false;
+            this.cb4r6.Location = new System.Drawing.Point(58, 103);
+            this.cb4r6.Name = "cb4r6";
+            this.cb4r6.Size = new System.Drawing.Size(15, 14);
+            this.cb4r6.TabIndex = 45;
+            this.cb4r6.UseVisualStyleBackColor = true;
+            this.cb4r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb4r7
+            // 
+            this.cb4r7.AutoSize = true;
+            this.cb4r7.Enabled = false;
+            this.cb4r7.Location = new System.Drawing.Point(41, 103);
+            this.cb4r7.Name = "cb4r7";
+            this.cb4r7.Size = new System.Drawing.Size(15, 14);
+            this.cb4r7.TabIndex = 44;
+            this.cb4r7.UseVisualStyleBackColor = true;
+            this.cb4r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label92
+            // 
+            this.label92.AutoSize = true;
+            this.label92.ForeColor = System.Drawing.Color.Firebrick;
+            this.label92.Location = new System.Drawing.Point(14, 87);
+            this.label92.Name = "label92";
+            this.label92.Size = new System.Drawing.Size(13, 13);
+            this.label92.TabIndex = 43;
+            this.label92.Text = "3";
+            // 
+            // cb3r0
+            // 
+            this.cb3r0.AutoSize = true;
+            this.cb3r0.Enabled = false;
+            this.cb3r0.Location = new System.Drawing.Point(154, 87);
+            this.cb3r0.Name = "cb3r0";
+            this.cb3r0.Size = new System.Drawing.Size(15, 14);
+            this.cb3r0.TabIndex = 42;
+            this.cb3r0.UseVisualStyleBackColor = true;
+            this.cb3r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb3r1
+            // 
+            this.cb3r1.AutoSize = true;
+            this.cb3r1.Enabled = false;
+            this.cb3r1.Location = new System.Drawing.Point(138, 87);
+            this.cb3r1.Name = "cb3r1";
+            this.cb3r1.Size = new System.Drawing.Size(15, 14);
+            this.cb3r1.TabIndex = 41;
+            this.cb3r1.UseVisualStyleBackColor = true;
+            this.cb3r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb3r2
+            // 
+            this.cb3r2.AutoSize = true;
+            this.cb3r2.Enabled = false;
+            this.cb3r2.Location = new System.Drawing.Point(122, 87);
+            this.cb3r2.Name = "cb3r2";
+            this.cb3r2.Size = new System.Drawing.Size(15, 14);
+            this.cb3r2.TabIndex = 40;
+            this.cb3r2.UseVisualStyleBackColor = true;
+            this.cb3r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb3r3
+            // 
+            this.cb3r3.AutoSize = true;
+            this.cb3r3.Enabled = false;
+            this.cb3r3.Location = new System.Drawing.Point(106, 87);
+            this.cb3r3.Name = "cb3r3";
+            this.cb3r3.Size = new System.Drawing.Size(15, 14);
+            this.cb3r3.TabIndex = 39;
+            this.cb3r3.UseVisualStyleBackColor = true;
+            this.cb3r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb3r4
+            // 
+            this.cb3r4.AutoSize = true;
+            this.cb3r4.Enabled = false;
+            this.cb3r4.Location = new System.Drawing.Point(90, 87);
+            this.cb3r4.Name = "cb3r4";
+            this.cb3r4.Size = new System.Drawing.Size(15, 14);
+            this.cb3r4.TabIndex = 38;
+            this.cb3r4.UseVisualStyleBackColor = true;
+            this.cb3r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb3r5
+            // 
+            this.cb3r5.AutoSize = true;
+            this.cb3r5.Enabled = false;
+            this.cb3r5.Location = new System.Drawing.Point(74, 87);
+            this.cb3r5.Name = "cb3r5";
+            this.cb3r5.Size = new System.Drawing.Size(15, 14);
+            this.cb3r5.TabIndex = 37;
+            this.cb3r5.UseVisualStyleBackColor = true;
+            this.cb3r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb3r6
+            // 
+            this.cb3r6.AutoSize = true;
+            this.cb3r6.Enabled = false;
+            this.cb3r6.Location = new System.Drawing.Point(58, 87);
+            this.cb3r6.Name = "cb3r6";
+            this.cb3r6.Size = new System.Drawing.Size(15, 14);
+            this.cb3r6.TabIndex = 36;
+            this.cb3r6.UseVisualStyleBackColor = true;
+            this.cb3r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb3r7
+            // 
+            this.cb3r7.AutoSize = true;
+            this.cb3r7.Enabled = false;
+            this.cb3r7.Location = new System.Drawing.Point(41, 87);
+            this.cb3r7.Name = "cb3r7";
+            this.cb3r7.Size = new System.Drawing.Size(15, 14);
+            this.cb3r7.TabIndex = 35;
+            this.cb3r7.UseVisualStyleBackColor = true;
+            this.cb3r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label91
+            // 
+            this.label91.AutoSize = true;
+            this.label91.ForeColor = System.Drawing.Color.Firebrick;
+            this.label91.Location = new System.Drawing.Point(14, 72);
+            this.label91.Name = "label91";
+            this.label91.Size = new System.Drawing.Size(13, 13);
+            this.label91.TabIndex = 34;
+            this.label91.Text = "2";
+            // 
+            // cb2r0
+            // 
+            this.cb2r0.AutoSize = true;
+            this.cb2r0.Enabled = false;
+            this.cb2r0.Location = new System.Drawing.Point(154, 72);
+            this.cb2r0.Name = "cb2r0";
+            this.cb2r0.Size = new System.Drawing.Size(15, 14);
+            this.cb2r0.TabIndex = 33;
+            this.cb2r0.UseVisualStyleBackColor = true;
+            this.cb2r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb2r1
+            // 
+            this.cb2r1.AutoSize = true;
+            this.cb2r1.Enabled = false;
+            this.cb2r1.Location = new System.Drawing.Point(138, 72);
+            this.cb2r1.Name = "cb2r1";
+            this.cb2r1.Size = new System.Drawing.Size(15, 14);
+            this.cb2r1.TabIndex = 32;
+            this.cb2r1.UseVisualStyleBackColor = true;
+            this.cb2r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb2r2
+            // 
+            this.cb2r2.AutoSize = true;
+            this.cb2r2.Enabled = false;
+            this.cb2r2.Location = new System.Drawing.Point(122, 72);
+            this.cb2r2.Name = "cb2r2";
+            this.cb2r2.Size = new System.Drawing.Size(15, 14);
+            this.cb2r2.TabIndex = 31;
+            this.cb2r2.UseVisualStyleBackColor = true;
+            this.cb2r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb2r3
+            // 
+            this.cb2r3.AutoSize = true;
+            this.cb2r3.Enabled = false;
+            this.cb2r3.Location = new System.Drawing.Point(106, 72);
+            this.cb2r3.Name = "cb2r3";
+            this.cb2r3.Size = new System.Drawing.Size(15, 14);
+            this.cb2r3.TabIndex = 30;
+            this.cb2r3.UseVisualStyleBackColor = true;
+            this.cb2r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb2r4
+            // 
+            this.cb2r4.AutoSize = true;
+            this.cb2r4.Enabled = false;
+            this.cb2r4.Location = new System.Drawing.Point(90, 72);
+            this.cb2r4.Name = "cb2r4";
+            this.cb2r4.Size = new System.Drawing.Size(15, 14);
+            this.cb2r4.TabIndex = 29;
+            this.cb2r4.UseVisualStyleBackColor = true;
+            this.cb2r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb2r5
+            // 
+            this.cb2r5.AutoSize = true;
+            this.cb2r5.Enabled = false;
+            this.cb2r5.Location = new System.Drawing.Point(74, 72);
+            this.cb2r5.Name = "cb2r5";
+            this.cb2r5.Size = new System.Drawing.Size(15, 14);
+            this.cb2r5.TabIndex = 28;
+            this.cb2r5.UseVisualStyleBackColor = true;
+            this.cb2r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb2r6
+            // 
+            this.cb2r6.AutoSize = true;
+            this.cb2r6.Enabled = false;
+            this.cb2r6.Location = new System.Drawing.Point(58, 72);
+            this.cb2r6.Name = "cb2r6";
+            this.cb2r6.Size = new System.Drawing.Size(15, 14);
+            this.cb2r6.TabIndex = 27;
+            this.cb2r6.UseVisualStyleBackColor = true;
+            this.cb2r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb2r7
+            // 
+            this.cb2r7.AutoSize = true;
+            this.cb2r7.Enabled = false;
+            this.cb2r7.Location = new System.Drawing.Point(41, 72);
+            this.cb2r7.Name = "cb2r7";
+            this.cb2r7.Size = new System.Drawing.Size(15, 14);
+            this.cb2r7.TabIndex = 26;
+            this.cb2r7.UseVisualStyleBackColor = true;
+            this.cb2r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.ForeColor = System.Drawing.Color.Firebrick;
+            this.label90.Location = new System.Drawing.Point(14, 56);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(13, 13);
+            this.label90.TabIndex = 25;
+            this.label90.Text = "1";
+            // 
+            // cb1r0
+            // 
+            this.cb1r0.AutoSize = true;
+            this.cb1r0.Enabled = false;
+            this.cb1r0.Location = new System.Drawing.Point(154, 56);
+            this.cb1r0.Name = "cb1r0";
+            this.cb1r0.Size = new System.Drawing.Size(15, 14);
+            this.cb1r0.TabIndex = 24;
+            this.cb1r0.UseVisualStyleBackColor = true;
+            this.cb1r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb1r1
+            // 
+            this.cb1r1.AutoSize = true;
+            this.cb1r1.Enabled = false;
+            this.cb1r1.Location = new System.Drawing.Point(138, 56);
+            this.cb1r1.Name = "cb1r1";
+            this.cb1r1.Size = new System.Drawing.Size(15, 14);
+            this.cb1r1.TabIndex = 23;
+            this.cb1r1.UseVisualStyleBackColor = true;
+            this.cb1r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb1r2
+            // 
+            this.cb1r2.AutoSize = true;
+            this.cb1r2.Enabled = false;
+            this.cb1r2.Location = new System.Drawing.Point(122, 56);
+            this.cb1r2.Name = "cb1r2";
+            this.cb1r2.Size = new System.Drawing.Size(15, 14);
+            this.cb1r2.TabIndex = 22;
+            this.cb1r2.UseVisualStyleBackColor = true;
+            this.cb1r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb1r3
+            // 
+            this.cb1r3.AutoSize = true;
+            this.cb1r3.Enabled = false;
+            this.cb1r3.Location = new System.Drawing.Point(106, 56);
+            this.cb1r3.Name = "cb1r3";
+            this.cb1r3.Size = new System.Drawing.Size(15, 14);
+            this.cb1r3.TabIndex = 21;
+            this.cb1r3.UseVisualStyleBackColor = true;
+            this.cb1r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb1r4
+            // 
+            this.cb1r4.AutoSize = true;
+            this.cb1r4.Enabled = false;
+            this.cb1r4.Location = new System.Drawing.Point(90, 56);
+            this.cb1r4.Name = "cb1r4";
+            this.cb1r4.Size = new System.Drawing.Size(15, 14);
+            this.cb1r4.TabIndex = 20;
+            this.cb1r4.UseVisualStyleBackColor = true;
+            this.cb1r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb1r5
+            // 
+            this.cb1r5.AutoSize = true;
+            this.cb1r5.Enabled = false;
+            this.cb1r5.Location = new System.Drawing.Point(74, 56);
+            this.cb1r5.Name = "cb1r5";
+            this.cb1r5.Size = new System.Drawing.Size(15, 14);
+            this.cb1r5.TabIndex = 19;
+            this.cb1r5.UseVisualStyleBackColor = true;
+            this.cb1r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb1r6
+            // 
+            this.cb1r6.AutoSize = true;
+            this.cb1r6.Enabled = false;
+            this.cb1r6.Location = new System.Drawing.Point(58, 56);
+            this.cb1r6.Name = "cb1r6";
+            this.cb1r6.Size = new System.Drawing.Size(15, 14);
+            this.cb1r6.TabIndex = 18;
+            this.cb1r6.UseVisualStyleBackColor = true;
+            this.cb1r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // cb1r7
+            // 
+            this.cb1r7.AutoSize = true;
+            this.cb1r7.Enabled = false;
+            this.cb1r7.Location = new System.Drawing.Point(41, 56);
+            this.cb1r7.Name = "cb1r7";
+            this.cb1r7.Size = new System.Drawing.Size(15, 14);
+            this.cb1r7.TabIndex = 17;
+            this.cb1r7.UseVisualStyleBackColor = true;
+            this.cb1r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.ForeColor = System.Drawing.Color.Navy;
+            this.label89.Location = new System.Drawing.Point(156, 24);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(13, 13);
+            this.label89.TabIndex = 16;
+            this.label89.Text = "0";
+            // 
+            // label88
+            // 
+            this.label88.AutoSize = true;
+            this.label88.ForeColor = System.Drawing.Color.Navy;
+            this.label88.Location = new System.Drawing.Point(140, 24);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(13, 13);
+            this.label88.TabIndex = 15;
+            this.label88.Text = "1";
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.ForeColor = System.Drawing.Color.Navy;
+            this.label87.Location = new System.Drawing.Point(124, 24);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(13, 13);
+            this.label87.TabIndex = 14;
+            this.label87.Text = "2";
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.ForeColor = System.Drawing.Color.Navy;
+            this.label86.Location = new System.Drawing.Point(108, 24);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(13, 13);
+            this.label86.TabIndex = 13;
+            this.label86.Text = "3";
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.ForeColor = System.Drawing.Color.Navy;
+            this.label85.Location = new System.Drawing.Point(92, 24);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(13, 13);
+            this.label85.TabIndex = 12;
+            this.label85.Text = "4";
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.ForeColor = System.Drawing.Color.Navy;
+            this.label84.Location = new System.Drawing.Point(76, 24);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(13, 13);
+            this.label84.TabIndex = 11;
+            this.label84.Text = "5";
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.ForeColor = System.Drawing.Color.Navy;
+            this.label83.Location = new System.Drawing.Point(60, 24);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(13, 13);
+            this.label83.TabIndex = 10;
+            this.label83.Text = "6";
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.ForeColor = System.Drawing.Color.Navy;
+            this.label82.Location = new System.Drawing.Point(41, 24);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(13, 13);
+            this.label82.TabIndex = 9;
+            this.label82.Text = "7";
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.ForeColor = System.Drawing.Color.Firebrick;
+            this.label81.Location = new System.Drawing.Point(14, 40);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(13, 13);
+            this.label81.TabIndex = 8;
+            this.label81.Text = "0";
+            // 
+            // chkPortA
+            // 
+            this.chkPortA.AutoSize = true;
+            this.chkPortA.ForeColor = System.Drawing.Color.Navy;
+            this.chkPortA.Location = new System.Drawing.Point(184, 47);
+            this.chkPortA.Name = "chkPortA";
+            this.chkPortA.Size = new System.Drawing.Size(51, 17);
+            this.chkPortA.TabIndex = 2;
+            this.chkPortA.Text = "Enab";
+            this.chkPortA.UseVisualStyleBackColor = true;
+            this.chkPortA.CheckedChanged += new System.EventHandler(this.chkPortA_CheckedChanged);
+            // 
+            // txtPortA
+            // 
+            this.txtPortA.Enabled = false;
+            this.txtPortA.Location = new System.Drawing.Point(189, 82);
+            this.txtPortA.Name = "txtPortA";
+            this.txtPortA.Size = new System.Drawing.Size(40, 20);
+            this.txtPortA.TabIndex = 136;
+            this.txtPortA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPortA, "Enter the port address (decimal).");
+            this.txtPortA.TextChanged += new System.EventHandler(this.txtPortA_TextChanged);
+            // 
+            // label103
+            // 
+            this.label103.AutoSize = true;
+            this.label103.ForeColor = System.Drawing.Color.Navy;
+            this.label103.Location = new System.Drawing.Point(191, 66);
+            this.label103.Name = "label103";
+            this.label103.Size = new System.Drawing.Size(36, 13);
+            this.label103.TabIndex = 135;
+            this.label103.Text = "Port A";
+            // 
+            // txtPortB
+            // 
+            this.txtPortB.Enabled = false;
+            this.txtPortB.Location = new System.Drawing.Point(188, 251);
+            this.txtPortB.Name = "txtPortB";
+            this.txtPortB.Size = new System.Drawing.Size(40, 20);
+            this.txtPortB.TabIndex = 274;
+            this.txtPortB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPortB, "Enter the port address (decimal).");
+            this.txtPortB.TextChanged += new System.EventHandler(this.txtPortB_TextChanged);
+            // 
+            // label106
+            // 
+            this.label106.AutoSize = true;
+            this.label106.ForeColor = System.Drawing.Color.Navy;
+            this.label106.Location = new System.Drawing.Point(190, 235);
+            this.label106.Name = "label106";
+            this.label106.Size = new System.Drawing.Size(36, 13);
+            this.label106.TabIndex = 273;
+            this.label106.Text = "Port B";
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -5343,7 +9480,7 @@ namespace DataDecoder
             this.statusStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusBar});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 392);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 390);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(422, 22);
             this.statusStrip1.TabIndex = 71;
@@ -5484,12 +9621,34 @@ namespace DataDecoder
             this.AlphaPort.RtsEnable = true;
             this.AlphaPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.AlphaPort_DataReceived);
             // 
+            // lblVHF
+            // 
+            this.lblVHF.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblVHF.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblVHF.Location = new System.Drawing.Point(194, 163);
+            this.lblVHF.Name = "lblVHF";
+            this.lblVHF.Size = new System.Drawing.Size(30, 15);
+            this.lblVHF.TabIndex = 280;
+            this.lblVHF.Text = "- - -";
+            this.lblVHF.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.lblVHF, "Band Button selected");
+            // 
+            // label137
+            // 
+            this.label137.AutoSize = true;
+            this.label137.ForeColor = System.Drawing.Color.Navy;
+            this.label137.Location = new System.Drawing.Point(192, 148);
+            this.label137.Name = "label137";
+            this.label137.Size = new System.Drawing.Size(32, 13);
+            this.label137.TabIndex = 281;
+            this.label137.Text = "Band";
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(422, 414);
+            this.ClientSize = new System.Drawing.Size(422, 412);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.lblAnt);
             this.Controls.Add(this.statusStrip1);
@@ -5586,6 +9745,12 @@ namespace DataDecoder
             this.grpModel.PerformLayout();
             this.groupBox14.ResumeLayout(false);
             this.groupBox14.PerformLayout();
+            this.tabExtCtrl.ResumeLayout(false);
+            this.tabExtCtrl.PerformLayout();
+            this.grpPortB.ResumeLayout(false);
+            this.grpPortB.PerformLayout();
+            this.grpPortA.ResumeLayout(false);
+            this.grpPortA.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -5984,6 +10149,329 @@ namespace DataDecoder
         public RadioButton rbWN3;
         public RadioButton rbWN2;
         public RadioButton rbWN1;
+        private TabPage tabExtCtrl;
+        private GroupBox grpPortB;
+        private GroupBox grpPortA;
+        private CheckBox cb0r7;
+        private CheckBox cb0r6;
+        private CheckBox cb0r5;
+        private CheckBox cb0r4;
+        private CheckBox cb0r3;
+        private CheckBox cb0r2;
+        private CheckBox cb0r1;
+        private CheckBox cb0r0;
+        private Label label89;
+        private Label label88;
+        private Label label87;
+        private Label label86;
+        private Label label85;
+        private Label label84;
+        private Label label83;
+        private Label label82;
+        private Label label81;
+        private Label label100;
+        private CheckBox cb11r0;
+        private CheckBox cb11r1;
+        private CheckBox cb11r2;
+        private CheckBox cb11r3;
+        private CheckBox cb11r4;
+        private CheckBox cb11r5;
+        private CheckBox cb11r6;
+        private CheckBox cb11r7;
+        private Label label99;
+        private CheckBox cb10r0;
+        private CheckBox cb10r1;
+        private CheckBox cb10r2;
+        private CheckBox cb10r3;
+        private CheckBox cb10r4;
+        private CheckBox cb10r5;
+        private CheckBox cb10r6;
+        private CheckBox cb10r7;
+        private Label label98;
+        private CheckBox cb9r0;
+        private CheckBox cb9r1;
+        private CheckBox cb9r2;
+        private CheckBox cb9r3;
+        private CheckBox cb9r4;
+        private CheckBox cb9r5;
+        private CheckBox cb9r6;
+        private CheckBox cb9r7;
+        private Label label97;
+        private CheckBox cb8r0;
+        private CheckBox cb8r1;
+        private CheckBox cb8r2;
+        private CheckBox cb8r3;
+        private CheckBox cb8r4;
+        private CheckBox cb8r5;
+        private CheckBox cb8r6;
+        private CheckBox cb8r7;
+        private Label label96;
+        private CheckBox cb7r0;
+        private CheckBox cb7r1;
+        private CheckBox cb7r2;
+        private CheckBox cb7r3;
+        private CheckBox cb7r4;
+        private CheckBox cb7r5;
+        private CheckBox cb7r6;
+        private CheckBox cb7r7;
+        private Label label95;
+        private CheckBox cb6r0;
+        private CheckBox cb6r1;
+        private CheckBox cb6r2;
+        private CheckBox cb6r3;
+        private CheckBox cb6r4;
+        private CheckBox cb6r5;
+        private CheckBox cb6r6;
+        private CheckBox cb6r7;
+        private Label label94;
+        private CheckBox cb5r0;
+        private CheckBox cb5r1;
+        private CheckBox cb5r2;
+        private CheckBox cb5r3;
+        private CheckBox cb5r4;
+        private CheckBox cb5r5;
+        private CheckBox cb5r6;
+        private CheckBox cb5r7;
+        private Label label93;
+        private CheckBox cb4r0;
+        private CheckBox cb4r1;
+        private CheckBox cb4r2;
+        private CheckBox cb4r3;
+        private CheckBox cb4r4;
+        private CheckBox cb4r5;
+        private CheckBox cb4r6;
+        private CheckBox cb4r7;
+        private Label label92;
+        private CheckBox cb3r0;
+        private CheckBox cb3r1;
+        private CheckBox cb3r2;
+        private CheckBox cb3r3;
+        private CheckBox cb3r4;
+        private CheckBox cb3r5;
+        private CheckBox cb3r6;
+        private CheckBox cb3r7;
+        private Label label91;
+        private CheckBox cb2r0;
+        private CheckBox cb2r1;
+        private CheckBox cb2r2;
+        private CheckBox cb2r3;
+        private CheckBox cb2r4;
+        private CheckBox cb2r5;
+        private CheckBox cb2r6;
+        private CheckBox cb2r7;
+        private Label label90;
+        private CheckBox cb1r0;
+        private CheckBox cb1r1;
+        private CheckBox cb1r2;
+        private CheckBox cb1r3;
+        private CheckBox cb1r4;
+        private CheckBox cb1r5;
+        private CheckBox cb1r6;
+        private CheckBox cb1r7;
+        private Label label101;
+        private CheckBox cb12r0;
+        private CheckBox cb12r1;
+        private CheckBox cb12r2;
+        private CheckBox cb12r3;
+        private CheckBox cb12r4;
+        private CheckBox cb12r5;
+        private CheckBox cb12r6;
+        private CheckBox cb12r7;
+        private Label label103;
+        private Label label102;
+        private CheckBox cb13r0;
+        private CheckBox cb13r1;
+        private CheckBox cb13r2;
+        private CheckBox cb13r3;
+        private CheckBox cb13r4;
+        private CheckBox cb13r5;
+        private CheckBox cb13r6;
+        private CheckBox cb13r7;
+        private TextBox txtPortA;
+        private CheckBox chkPortA;
+        private Label label104;
+        private TextBox txtPortB;
+        private Label label106;
+        private Label label129;
+        private Label label105;
+        private CheckBox cb13t4;
+        private Label label107;
+        private CheckBox cb13t7;
+        private CheckBox cb13t6;
+        private CheckBox cb0t3;
+        private CheckBox cb13t5;
+        private CheckBox cb13t3;
+        private CheckBox cb0t0;
+        private CheckBox cb13t2;
+        private CheckBox cb13t1;
+        private CheckBox cb13t0;
+        private CheckBox cb0t1;
+        private Label label108;
+        private CheckBox cb0t2;
+        private CheckBox cb0t4;
+        private CheckBox cb0t5;
+        private CheckBox cb0t6;
+        private CheckBox cb0t7;
+        private Label label109;
+        private CheckBox cb12t0;
+        private CheckBox cb12t1;
+        private CheckBox cb12t2;
+        private CheckBox cb12t3;
+        private CheckBox cb12t4;
+        private CheckBox cb12t5;
+        private CheckBox cb12t6;
+        private CheckBox cb12t7;
+        private Label label110;
+        private CheckBox cb11t0;
+        private CheckBox cb11t1;
+        private CheckBox cb11t2;
+        private CheckBox cb11t3;
+        private CheckBox cb11t4;
+        private CheckBox cb11t5;
+        private CheckBox cb11t6;
+        private CheckBox cb11t7;
+        private Label label111;
+        private CheckBox cb10t0;
+        private CheckBox cb10t1;
+        private CheckBox cb10t2;
+        private CheckBox cb10t3;
+        private CheckBox cb10t4;
+        private CheckBox cb10t5;
+        private CheckBox cb10t6;
+        private CheckBox cb10t7;
+        private Label label112;
+        private CheckBox cb9t0;
+        private CheckBox cb9t1;
+        private CheckBox cb9t2;
+        private CheckBox cb9t3;
+        private CheckBox cb9t4;
+        private CheckBox cb9t5;
+        private CheckBox cb9t6;
+        private CheckBox cb9t7;
+        private Label label113;
+        private CheckBox cb8t0;
+        private CheckBox cb8t1;
+        private CheckBox cb8t2;
+        private CheckBox cb8t3;
+        private CheckBox cb8t4;
+        private CheckBox cb8t5;
+        private CheckBox cb8t6;
+        private CheckBox cb8t7;
+        private Label label114;
+        private CheckBox cb7t0;
+        private CheckBox cb7t1;
+        private CheckBox cb7t2;
+        private CheckBox cb7t3;
+        private CheckBox cb7t4;
+        private CheckBox cb7t5;
+        private CheckBox cb7t6;
+        private CheckBox cb7t7;
+        private Label label115;
+        private CheckBox cb6t0;
+        private CheckBox cb6t1;
+        private CheckBox cb6t2;
+        private CheckBox cb6t3;
+        private CheckBox cb6t4;
+        private CheckBox cb6t5;
+        private CheckBox cb6t6;
+        private CheckBox cb6t7;
+        private Label label116;
+        private CheckBox cb5t0;
+        private CheckBox cb5t1;
+        private CheckBox cb5t2;
+        private CheckBox cb5t3;
+        private CheckBox cb5t4;
+        private CheckBox cb5t5;
+        private CheckBox cb5t6;
+        private CheckBox cb5t7;
+        private Label label117;
+        private CheckBox cb4t0;
+        private CheckBox cb4t1;
+        private CheckBox cb4t2;
+        private CheckBox cb4t3;
+        private CheckBox cb4t4;
+        private CheckBox cb4t5;
+        private CheckBox cb4t6;
+        private CheckBox cb4t7;
+        private Label label118;
+        private CheckBox cb3t0;
+        private CheckBox cb3t1;
+        private CheckBox cb3t2;
+        private CheckBox cb3t3;
+        private CheckBox cb3t4;
+        private CheckBox cb3t5;
+        private CheckBox cb3t6;
+        private CheckBox cb3t7;
+        private Label label119;
+        private CheckBox cb2t0;
+        private CheckBox cb2t1;
+        private CheckBox cb2t2;
+        private CheckBox cb2t3;
+        private CheckBox cb2t4;
+        private CheckBox cb2t5;
+        private CheckBox cb2t6;
+        private CheckBox cb2t7;
+        private Label label120;
+        private CheckBox cb1t0;
+        private CheckBox cb1t1;
+        private CheckBox cb1t2;
+        private CheckBox cb1t3;
+        private CheckBox cb1t4;
+        private CheckBox cb1t5;
+        private CheckBox cb1t6;
+        private CheckBox cb1t7;
+        private Label label121;
+        private Label label122;
+        private Label label123;
+        private Label label124;
+        private Label label125;
+        private Label label126;
+        private Label label127;
+        private Label label128;
+        private Label label130;
+        private Button btnClrPortB;
+        private Button btnClrPortA;
+        private CheckBox chkPortB;
+        private Label label132;
+        private Label label131;
+        private CheckBox cb15t4;
+        private CheckBox cb15t7;
+        private CheckBox cb15t6;
+        private CheckBox cb15t5;
+        private CheckBox cb15t3;
+        private CheckBox cb15t2;
+        private CheckBox cb15t1;
+        private CheckBox cb15t0;
+        private Label label135;
+        private Label label136;
+        private CheckBox cb14t0;
+        private CheckBox cb14t1;
+        private CheckBox cb14t2;
+        private CheckBox cb14t3;
+        private CheckBox cb14t4;
+        private CheckBox cb14t5;
+        private CheckBox cb14t6;
+        private CheckBox cb14t7;
+        private CheckBox cb15r4;
+        private CheckBox cb15r7;
+        private CheckBox cb15r6;
+        private CheckBox cb15r5;
+        private CheckBox cb15r3;
+        private CheckBox cb15r2;
+        private CheckBox cb15r1;
+        private CheckBox cb15r0;
+        private Label label133;
+        private Label label134;
+        private CheckBox cb14r0;
+        private CheckBox cb14r1;
+        private CheckBox cb14r2;
+        private CheckBox cb14r3;
+        private CheckBox cb14r4;
+        private CheckBox cb14r5;
+        private CheckBox cb14r6;
+        private CheckBox cb14r7;
+        private Label lblVHF;
+        private Label label137;
 
     }
 }
