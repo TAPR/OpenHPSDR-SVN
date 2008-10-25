@@ -527,7 +527,12 @@ namespace DataDecoder
             cboDevice.Text = set.Device;
             cboAlpha.SelectedIndex = set.AlphaPort;
             chkAlpha.Checked = set.AlphaEnab;
-
+            chkPortA.Checked = set.chkPortA;
+            chkPortB.Checked = set.chkPortB; 
+            txtPortA.Text = set.aPortNum;
+            txtPortB.Text = set.bPortNum;
+            
+            X2SetUp();  // setup the X2 Matrix
             WN2SetUp(); // setup the WN2
             AlcSetUp(); // setup the ALC
 
@@ -1915,14 +1920,14 @@ namespace DataDecoder
         // output data to the parallel port
         private void OutParallelPort(int port, int num)
         {
-            if (chkDevice.Checked == true)
-            {
+            //if (chkDevice.Checked == true)
+            //{
                 PortAccess.Output(port, num);
-            }
-            else
-            {
-                PortAccess.Output(port, 0);
-            }
+            //}
+            //else
+            //{
+            //    PortAccess.Output(port, 0);
+            //}
         }
         // Load Data File
         private void GetBandData(string fileName)
@@ -1979,16 +1984,16 @@ namespace DataDecoder
         // Lookup freq data in hash table & output to LPT port
         private void LookUp(string freq)
         {
-            if (flist.ContainsKey(freq) && chkDevice.Checked)
+            if (flist.ContainsKey(freq))// && chkDevice.Checked)
             {
                 keyValue = Convert.ToInt16(flist[freq]);
                 OutParallelPort(LPTnum, keyValue);    // port number(decimal), value(decimal)
             }
-            else
-            {
-                OutParallelPort(LPTnum, 0);     // if freq key not found, turn off port
-                keyValue = 0;
-            }
+            //else
+            //{
+            //    OutParallelPort(LPTnum, 0);     // if freq key not found, turn off port
+            //    keyValue = 0;
+            //}
         }
         // See if a copy of DDUtil is already running
         public static int myID;
@@ -2030,8 +2035,6 @@ namespace DataDecoder
         // Display the PA Temp
         private void WriteTemp()
         {
-//            temp += 2; if (temp >= 110) temp = 40;
-
             if (temp >= 50 && temp < 70)
             { 
                 txtTemp.BackColor = Color.Yellow; 
@@ -3562,90 +3565,167 @@ namespace DataDecoder
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZBS")
                     {
                         band = rawFreq.Substring(4, 3);
-                        if (lastBand != band && wn.chkEnab.Checked)
+                        if (lastBand != band)
                         {
                             lastBand = band;
-                            switch (band)
+                            int aPort = Convert.ToInt32(set.aPortNum);
+                            int bPort = Convert.ToInt32(set.bPortNum);
+                            // if matrix enabled output to port
+                            if (chkPortA.Checked || chkPortB.Checked)
                             {
-                                case "160": switch (wn.wn160)
-                                    {
-                                        case 1: SetWN1(true); break;
-                                        case 2: SetWN2(true); break;
-                                        case 3: SetWN3(true); break;
-                                        case 4: SetWN4(true); break;
-                                    } break;
-                                case "080": switch (wn.wn80)
-                                    {
-                                        case 1: SetWN1(true); break;
-                                        case 2: SetWN2(true); break;
-                                        case 3: SetWN3(true); break;
-                                        case 4: SetWN4(true); break;
-                                    } break;
-                                case "060": switch (wn.wn60)
-                                    {
-                                        case 1: SetWN1(true); break;
-                                        case 2: SetWN2(true); break;
-                                        case 3: SetWN3(true); break;
-                                        case 4: SetWN4(true); break;
-                                    } break;
-                                case "040": switch (wn.wn40)
-                                    {
-                                        case 1: SetWN1(true); break;
-                                        case 2: SetWN2(true); break;
-                                        case 3: SetWN3(true); break;
-                                        case 4: SetWN4(true); break;
-                                    } break;
-                                case "030": switch (wn.wn30)
-                                    {
-                                        case 1: SetWN1(true); break;
-                                        case 2: SetWN2(true); break;
-                                        case 3: SetWN3(true); break;
-                                        case 4: SetWN4(true); break;
-                                    } break;
-                                case "020": switch (wn.wn20)
-                                    {
-                                        case 1: SetWN1(true); break;
-                                        case 2: SetWN2(true); break;
-                                        case 3: SetWN3(true); break;
-                                        case 4: SetWN4(true); break;
-                                    } break;
-                                case "017": switch (wn.wn17)
-                                    {
-                                        case 1: SetWN1(true); break;
-                                        case 2: SetWN2(true); break;
-                                        case 3: SetWN3(true); break;
-                                        case 4: SetWN4(true); break;
-                                    } break;
-                                case "015": switch (wn.wn15)
-                                    {
-                                        case 1: SetWN1(true); break;
-                                        case 2: SetWN2(true); break;
-                                        case 3: SetWN3(true); break;
-                                        case 4: SetWN4(true); break;
-                                    } break;
-                                case "012": switch (wn.wn12)
-                                    {
-                                        case 1: SetWN1(true); break;
-                                        case 2: SetWN2(true); break;
-                                        case 3: SetWN3(true); break;
-                                        case 4: SetWN4(true); break;
-                                    } break;
-                                case "010": switch (wn.wn10)
-                                    {
-                                        case 1: SetWN1(true); break;
-                                        case 2: SetWN2(true); break;
-                                        case 3: SetWN3(true); break;
-                                        case 4: SetWN4(true); break;
-                                    } break;
-                                case "006": switch (wn.wn6)
-                                    {
-                                        case 1: SetWN1(true); break;
-                                        case 2: SetWN2(true); break;
-                                        case 3: SetWN3(true); break;
-                                        case 4: SetWN4(true); break;
-                                    } break;
+                                switch (band)
+                                {
+                                    case "V00":
+                                        if(chkPortB.Checked) PortAccess.Output(bPort, x2b0);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a0);
+                                        SetVHF("0"); break;
+                                    case "V01":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b1);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a1);
+                                        SetVHF("1"); break;
+                                    case "V02":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b2);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a2);
+                                        SetVHF("2"); break;
+                                    case "V03":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b3);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a3);
+                                        SetVHF("3"); break;
+                                    case "V04":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b4);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a4);
+                                        SetVHF("4"); break;
+                                    case "V05":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b5);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a5);
+                                        SetVHF("5"); break;
+                                    case "V06":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b6);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a6);
+                                        SetVHF("6"); break;
+                                    case "V07":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b7);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a7);
+                                        SetVHF("7"); break;
+                                    case "V08":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b8);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a8);
+                                        SetVHF("8"); break;
+                                    case "V09":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b9);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a9);
+                                        SetVHF("9"); break;
+                                    case "V10":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b10);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a10);
+                                        SetVHF("10"); break;
+                                    case "V11":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b11);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a11);
+                                        SetVHF("11"); break;
+                                    case "V12":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b12);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a12);
+                                        SetVHF("12"); break;
+                                    case "V13":
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b13);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a13);
+                                        SetVHF("13"); break;
+                                    case "006": 
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b14);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a14);
+                                        SetVHF("HF6"); break;
+                                    case "002": 
+                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b15);
+                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a15);
+                                        SetVHF("HF2"); break;
+                                }
+                            }
+                            // If WN2 band sensor matrix enabled set correct sensor
+                            if (wn.chkEnab.Checked)
+                            {
+                                switch (band)
+                                {
+                                    case "160": switch (wn.wn160)
+                                        {
+                                            case 1: SetWN1(true); break;
+                                            case 2: SetWN2(true); break;
+                                            case 3: SetWN3(true); break;
+                                            case 4: SetWN4(true); break;
+                                        } break;
+                                    case "080": switch (wn.wn80)
+                                        {
+                                            case 1: SetWN1(true); break;
+                                            case 2: SetWN2(true); break;
+                                            case 3: SetWN3(true); break;
+                                            case 4: SetWN4(true); break;
+                                        } break;
+                                    case "060": switch (wn.wn60)
+                                        {
+                                            case 1: SetWN1(true); break;
+                                            case 2: SetWN2(true); break;
+                                            case 3: SetWN3(true); break;
+                                            case 4: SetWN4(true); break;
+                                        } break;
+                                    case "040": switch (wn.wn40)
+                                        {
+                                            case 1: SetWN1(true); break;
+                                            case 2: SetWN2(true); break;
+                                            case 3: SetWN3(true); break;
+                                            case 4: SetWN4(true); break;
+                                        } break;
+                                    case "030": switch (wn.wn30)
+                                        {
+                                            case 1: SetWN1(true); break;
+                                            case 2: SetWN2(true); break;
+                                            case 3: SetWN3(true); break;
+                                            case 4: SetWN4(true); break;
+                                        } break;
+                                    case "020": switch (wn.wn20)
+                                        {
+                                            case 1: SetWN1(true); break;
+                                            case 2: SetWN2(true); break;
+                                            case 3: SetWN3(true); break;
+                                            case 4: SetWN4(true); break;
+                                        } break;
+                                    case "017": switch (wn.wn17)
+                                        {
+                                            case 1: SetWN1(true); break;
+                                            case 2: SetWN2(true); break;
+                                            case 3: SetWN3(true); break;
+                                            case 4: SetWN4(true); break;
+                                        } break;
+                                    case "015": switch (wn.wn15)
+                                        {
+                                            case 1: SetWN1(true); break;
+                                            case 2: SetWN2(true); break;
+                                            case 3: SetWN3(true); break;
+                                            case 4: SetWN4(true); break;
+                                        } break;
+                                    case "012": switch (wn.wn12)
+                                        {
+                                            case 1: SetWN1(true); break;
+                                            case 2: SetWN2(true); break;
+                                            case 3: SetWN3(true); break;
+                                            case 4: SetWN4(true); break;
+                                        } break;
+                                    case "010": switch (wn.wn10)
+                                        {
+                                            case 1: SetWN1(true); break;
+                                            case 2: SetWN2(true); break;
+                                            case 3: SetWN3(true); break;
+                                            case 4: SetWN4(true); break;
+                                        } break;
+                                    case "006": switch (wn.wn6)
+                                        {
+                                            case 1: SetWN1(true); break;
+                                            case 2: SetWN2(true); break;
+                                            case 3: SetWN3(true); break;
+                                            case 4: SetWN4(true); break;
+                                        } break;
+                                }//switch
+                            }
 
-                            }//switch
                         }// if band changed
                     }// if ZZBS
 
@@ -3685,10 +3765,9 @@ namespace DataDecoder
                     }
 
                     /*** start checking for specific cat responses ***/
-                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "IF00")
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 2) == "IF")
                     {   // DDUtil or RCP IF; query
                         xOn = rawFreq.Substring(rawFreq.Length - 10, 1);
-
                         // if mox is on, start WD timer if enabled
                         if (xOn == "1" && chkDog.Checked)
                         {
@@ -3781,10 +3860,12 @@ namespace DataDecoder
                     freqLook = freqLook.TrimStart('0');
                     freqLook = freqLook.Substring(0, freqLook.Length - 2);
                     if (logFlag == true) // RCP1 is active
-                        id = title + " - " + freq.Substring(0, 9) + "  " + vfo + "  " + mode + "  RCP";
+                        id = title + " - " + freq.Substring(0, 9) +
+                            "  " + vfo + "  " + mode + "  RCP";
                     else
-                        id = title + " - " + freq.Substring(0, 9) + "  " + vfo + "  " + mode;
-                    LookUp(freqLook);   //decode freq data and output to LPT port
+                        id = title + " - " + freq.Substring(0, 9) +
+                            "  " + vfo + "  " + mode;
+                    if (chkDevice.Checked) LookUp(freqLook);//decode freq data and output to LPT port
                     this.SetTitle(id);
                     this.SetDigit(keyValue.ToString());
                 }//For
@@ -6664,5 +6745,609 @@ namespace DataDecoder
 
         #endregion Alpha
 
+    #region Matrix
+
+        #region # Declarations #
+
+        const int base10 = 10;
+        char[] cHexa = new char[] { 'A', 'B', 'C', 'D', 'E', 'F' };
+        
+        #endregion Declarations
+
+        #region # Delegates #
+
+        // Write to Pwr button
+        delegate void SetVHFCallback(string text);
+        public void SetVHF(string text)
+        {
+            if (this.lblVHF.InvokeRequired)
+            {
+                SetVHFCallback d = new SetVHFCallback(SetVHF);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { lblVHF.Text = text; }
+        }
+        #endregion # Delegates #
+
+        #region # Methods #
+
+        // Load the x2 matrix checkboxes from settings
+        void X2SetUp()
+        {
+            string bin = "";
+            //store the set rec vars as they will be overwritten during the load.
+            int s2a0 = set.x2a0, s2a1 = set.x2a1, s2a2 = set.x2a2, s2a3 = set.x2a3;
+            int s2a4 = set.x2a4, s2a5 = set.x2a5, s2a6 = set.x2a6, s2a7 = set.x2a7;
+            int s2a8 = set.x2a8, s2a9 = set.x2a9, s2a10 = set.x2a10, s2a11 = set.x2a11;
+            int s2a12 = set.x2a12, s2a13 = set.x2a13, s2a14 = set.x2a14, s2a15 = set.x2a15;
+            //store the set trans vars as they will be overwritten during the load.
+            int s2b0 = set.x2b0, s2b1 = set.x2b1, s2b2 = set.x2b2, s2b3 = set.x2b3;
+            int s2b4 = set.x2b4, s2b5 = set.x2b5, s2b6 = set.x2b6, s2b7 = set.x2b7;
+            int s2b8 = set.x2b8, s2b9 = set.x2b9, s2b10 = set.x2b10, s2b11 = set.x2b11;
+            int s2b12 = set.x2b12, s2b13 = set.x2b13, s2b14 = set.x2b14, s2b15 = set.x2b15;
+            // Load receive matrix
+            if (chkPortA.Checked)
+            {
+                bin = DecimalToBase(s2a0, 2);
+                LoadCheckBoxes(bin, "cb0r", grpPortA);
+                bin = DecimalToBase(s2a1, 2);
+                LoadCheckBoxes(bin, "cb1r", grpPortA);
+                bin = DecimalToBase(s2a2, 2);
+                LoadCheckBoxes(bin, "cb2r", grpPortA);
+                bin = DecimalToBase(s2a3, 2);
+                LoadCheckBoxes(bin, "cb3r", grpPortA);
+                bin = DecimalToBase(s2a4, 2);
+                LoadCheckBoxes(bin, "cb4r", grpPortA);
+                bin = DecimalToBase(s2a5, 2);
+                LoadCheckBoxes(bin, "cb5r", grpPortA);
+                bin = DecimalToBase(s2a6, 2);
+                LoadCheckBoxes(bin, "cb6r", grpPortA);
+                bin = DecimalToBase(s2a7, 2);
+                LoadCheckBoxes(bin, "cb7r", grpPortA);
+                bin = DecimalToBase(s2a8, 2);
+                LoadCheckBoxes(bin, "cb8r", grpPortA);
+                bin = DecimalToBase(s2a9, 2);
+                LoadCheckBoxes(bin, "cb9r", grpPortA);
+                bin = DecimalToBase(s2a10, 2);
+                LoadCheckBoxes(bin, "cb10r", grpPortA);
+                bin = DecimalToBase(s2a11, 2);
+                LoadCheckBoxes(bin, "cb11r", grpPortA);
+                bin = DecimalToBase(s2a12, 2);
+                LoadCheckBoxes(bin, "cb12r", grpPortA);
+                bin = DecimalToBase(s2a13, 2);
+                LoadCheckBoxes(bin, "cb13r", grpPortA);
+                bin = DecimalToBase(s2a14, 2);
+                LoadCheckBoxes(bin, "cb14r", grpPortA);
+                bin = DecimalToBase(s2a15, 2);
+                LoadCheckBoxes(bin, "cb15r", grpPortA);
+            }
+            // Load transmit matrix
+            if (chkPortB.Checked)
+            {
+                bin = DecimalToBase(s2b0, 2);
+                LoadCheckBoxes(bin, "cb0t", grpPortB);
+                bin = DecimalToBase(s2b1, 2);
+                LoadCheckBoxes(bin, "cb1t", grpPortB);
+                bin = DecimalToBase(s2b2, 2);
+                LoadCheckBoxes(bin, "cb2t", grpPortB);
+                bin = DecimalToBase(s2b3, 2);
+                LoadCheckBoxes(bin, "cb3t", grpPortB);
+                bin = DecimalToBase(s2b4, 2);
+                LoadCheckBoxes(bin, "cb4t", grpPortB);
+                bin = DecimalToBase(s2b5, 2);
+                LoadCheckBoxes(bin, "cb5t", grpPortB);
+                bin = DecimalToBase(s2b6, 2);
+                LoadCheckBoxes(bin, "cb6t", grpPortB);
+                bin = DecimalToBase(s2b7, 2);
+                LoadCheckBoxes(bin, "cb7t", grpPortB);
+                bin = DecimalToBase(s2b8, 2);
+                LoadCheckBoxes(bin, "cb8t", grpPortB);
+                bin = DecimalToBase(s2b9, 2);
+                LoadCheckBoxes(bin, "cb9t", grpPortB);
+                bin = DecimalToBase(s2b10, 2);
+                LoadCheckBoxes(bin, "cb10t", grpPortB);
+                bin = DecimalToBase(s2b11, 2);
+                LoadCheckBoxes(bin, "cb11t", grpPortB);
+                bin = DecimalToBase(s2b12, 2);
+                LoadCheckBoxes(bin, "cb12t", grpPortB);
+                bin = DecimalToBase(s2b13, 2);
+                LoadCheckBoxes(bin, "cb13t", grpPortB);
+                bin = DecimalToBase(s2b14, 2);
+                LoadCheckBoxes(bin, "cb14t", grpPortB);
+                bin = DecimalToBase(s2b15, 2);
+                LoadCheckBoxes(bin, "cb15t", grpPortB);
+            }
+        }
+        // load checkboxes
+        void LoadCheckBoxes(string bin, string cbBase, Control grp)
+        {
+            CheckBox cb;
+            int j = bin.Length;
+            for (int i = 0; i < bin.Length; i++)
+            {
+                foreach (Control c in grp.Controls)
+                {
+                    if (c.Name == cbBase + i)
+                    {
+                        j -= 1;
+                        if (bin.Substring(j, 1) == "1")
+                        {
+                            //str = cbBase + i.ToString();
+                            cb = (CheckBox)c;
+                            cb.Checked = true;
+                        }
+                    }
+                }
+            }
+        }
+        // decode binary string
+        string DecimalToBase(int iDec, int numbase)
+        {
+            string strBin = "";
+            int[] result = new int[32];
+            int MaxBit = 32;
+            for (; iDec > 0; iDec /= numbase)
+            {
+                int rem = iDec % numbase;
+                result[--MaxBit] = rem;
+            }
+            for (int i = 0; i < result.Length; i++)
+                if ((int)result.GetValue(i) >= base10)
+                    strBin += cHexa[(int)result.GetValue(i) % base10];
+                else
+                    strBin += result.GetValue(i);
+            strBin = strBin.TrimStart(new char[] { '0' });
+            return strBin;
+        }
+        #endregion Methods
+
+        #region # Events #
+
+            #region * grpPortA_CheckedChanged Events *
+
+        int x2a0 = 0, x2a1 = 0, x2a2 = 0, x2a3 = 0;
+        int x2a4 = 0, x2a5 = 0, x2a6 = 0, x2a7 = 0;
+        int x2a8 = 0, x2a9 = 0, x2a10 = 0, x2a11 = 0;
+        int x2a12 = 0, x2a13 = 0, x2a14 = 0, x2a15 = 0;
+
+        private void grpPortA_CheckedChanged(object sender, EventArgs e)
+        {
+            x2a0 = 0;
+            if (cb0r0.Checked) x2a0 += 1;
+            if (cb0r1.Checked) x2a0 += 2;
+            if (cb0r2.Checked) x2a0 += 4;
+            if (cb0r3.Checked) x2a0 += 8;
+            if (cb0r4.Checked) x2a0 += 16;
+            if (cb0r5.Checked) x2a0 += 32;
+            if (cb0r6.Checked) x2a0 += 64;
+            if (cb0r7.Checked) x2a0 += 128;
+            set.x2a0 = x2a0;
+            x2a1 = 0;
+            if (cb1r0.Checked) x2a1 += 1;
+            if (cb1r1.Checked) x2a1 += 2;
+            if (cb1r2.Checked) x2a1 += 4;
+            if (cb1r3.Checked) x2a1 += 8;
+            if (cb1r4.Checked) x2a1 += 16;
+            if (cb1r5.Checked) x2a1 += 32;
+            if (cb1r6.Checked) x2a1 += 64;
+            if (cb1r7.Checked) x2a1 += 128;
+            set.x2a1 = x2a1;
+            x2a2 = 0;
+            if (cb2r0.Checked) x2a2 += 1;
+            if (cb2r1.Checked) x2a2 += 2;
+            if (cb2r2.Checked) x2a2 += 4;
+            if (cb2r3.Checked) x2a2 += 8;
+            if (cb2r4.Checked) x2a2 += 16;
+            if (cb2r5.Checked) x2a2 += 32;
+            if (cb2r6.Checked) x2a2 += 64;
+            if (cb2r7.Checked) x2a2 += 128;
+            set.x2a2 = x2a2;
+            x2a3 = 0;
+            if (cb3r0.Checked) x2a3 += 1;
+            if (cb3r1.Checked) x2a3 += 2;
+            if (cb3r2.Checked) x2a3 += 4;
+            if (cb3r3.Checked) x2a3 += 8;
+            if (cb3r4.Checked) x2a3 += 16;
+            if (cb3r5.Checked) x2a3 += 32;
+            if (cb3r6.Checked) x2a3 += 64;
+            if (cb3r7.Checked) x2a3 += 128;
+            set.x2a3 = x2a3;
+            x2a4 = 0;
+            if (cb4r0.Checked) x2a4 += 1;
+            if (cb4r1.Checked) x2a4 += 2;
+            if (cb4r2.Checked) x2a4 += 4;
+            if (cb4r3.Checked) x2a4 += 8;
+            if (cb4r4.Checked) x2a4 += 16;
+            if (cb4r5.Checked) x2a4 += 32;
+            if (cb4r6.Checked) x2a4 += 64;
+            if (cb4r7.Checked) x2a4 += 128;
+            set.x2a4 = x2a4;
+            x2a5 = 0;
+            if (cb5r0.Checked) x2a5 += 1;
+            if (cb5r1.Checked) x2a5 += 2;
+            if (cb5r2.Checked) x2a5 += 4;
+            if (cb5r3.Checked) x2a5 += 8;
+            if (cb5r4.Checked) x2a5 += 16;
+            if (cb5r5.Checked) x2a5 += 32;
+            if (cb5r6.Checked) x2a5 += 64;
+            if (cb5r7.Checked) x2a5 += 128;
+            set.x2a5 = x2a5;
+            x2a6 = 0;
+            if (cb6r0.Checked) x2a6 += 1;
+            if (cb6r1.Checked) x2a6 += 2;
+            if (cb6r2.Checked) x2a6 += 4;
+            if (cb6r3.Checked) x2a6 += 8;
+            if (cb6r4.Checked) x2a6 += 16;
+            if (cb6r5.Checked) x2a6 += 32;
+            if (cb6r6.Checked) x2a6 += 64;
+            if (cb6r7.Checked) x2a6 += 128;
+            set.x2a6 = x2a6;
+            x2a7 = 0;
+            if (cb7r0.Checked) x2a7 += 1;
+            if (cb7r1.Checked) x2a7 += 2;
+            if (cb7r2.Checked) x2a7 += 4;
+            if (cb7r3.Checked) x2a7 += 8;
+            if (cb7r4.Checked) x2a7 += 16;
+            if (cb7r5.Checked) x2a7 += 32;
+            if (cb7r6.Checked) x2a7 += 64;
+            if (cb7r7.Checked) x2a7 += 128;
+            set.x2a7 = x2a7;
+            x2a8 = 0;
+            if (cb8r0.Checked) x2a8 += 1;
+            if (cb8r1.Checked) x2a8 += 2;
+            if (cb8r2.Checked) x2a8 += 4;
+            if (cb8r3.Checked) x2a8 += 8;
+            if (cb8r4.Checked) x2a8 += 16;
+            if (cb8r5.Checked) x2a8 += 32;
+            if (cb8r6.Checked) x2a8 += 64;
+            if (cb8r7.Checked) x2a8 += 128;
+            set.x2a8 = x2a8;
+            x2a9 = 0;
+            if (cb9r0.Checked) x2a9 += 1;
+            if (cb9r1.Checked) x2a9 += 2;
+            if (cb9r2.Checked) x2a9 += 4;
+            if (cb9r3.Checked) x2a9 += 8;
+            if (cb9r4.Checked) x2a9 += 16;
+            if (cb9r5.Checked) x2a9 += 32;
+            if (cb9r6.Checked) x2a9 += 64;
+            if (cb9r7.Checked) x2a9 += 128;
+            set.x2a9 = x2a9;
+            x2a10 = 0;
+            if (cb10r0.Checked) x2a10 += 1;
+            if (cb10r1.Checked) x2a10 += 2;
+            if (cb10r2.Checked) x2a10 += 4;
+            if (cb10r3.Checked) x2a10 += 8;
+            if (cb10r4.Checked) x2a10 += 16;
+            if (cb10r5.Checked) x2a10 += 32;
+            if (cb10r6.Checked) x2a10 += 64;
+            if (cb10r7.Checked) x2a10 += 128;
+            set.x2a10 = x2a10;
+            x2a11 = 0;
+            if (cb11r0.Checked) x2a11 += 1;
+            if (cb11r1.Checked) x2a11 += 2;
+            if (cb11r2.Checked) x2a11 += 4;
+            if (cb11r3.Checked) x2a11 += 8;
+            if (cb11r4.Checked) x2a11 += 16;
+            if (cb11r5.Checked) x2a11 += 32;
+            if (cb11r6.Checked) x2a11 += 64;
+            if (cb11r7.Checked) x2a11 += 128;
+            set.x2a11 = x2a11;
+            x2a12 = 0;
+            if (cb12r0.Checked) x2a12 += 1;
+            if (cb12r1.Checked) x2a12 += 2;
+            if (cb12r2.Checked) x2a12 += 4;
+            if (cb12r3.Checked) x2a12 += 8;
+            if (cb12r4.Checked) x2a12 += 16;
+            if (cb12r5.Checked) x2a12 += 32;
+            if (cb12r6.Checked) x2a12 += 64;
+            if (cb12r7.Checked) x2a12 += 128;
+            set.x2a12 = x2a12;
+            x2a13 = 0;
+            if (cb13r0.Checked) x2a13 += 1;
+            if (cb13r1.Checked) x2a13 += 2;
+            if (cb13r2.Checked) x2a13 += 4;
+            if (cb13r3.Checked) x2a13 += 8;
+            if (cb13r4.Checked) x2a13 += 16;
+            if (cb13r5.Checked) x2a13 += 32;
+            if (cb13r6.Checked) x2a13 += 64;
+            if (cb13r7.Checked) x2a13 += 128;
+            set.x2a13 = x2a13;
+            x2a14 = 0;
+            if (cb14r0.Checked) x2a14 += 1;
+            if (cb14r1.Checked) x2a14 += 2;
+            if (cb14r2.Checked) x2a14 += 4;
+            if (cb14r3.Checked) x2a14 += 8;
+            if (cb14r4.Checked) x2a14 += 16;
+            if (cb14r5.Checked) x2a14 += 32;
+            if (cb14r6.Checked) x2a14 += 64;
+            if (cb14r7.Checked) x2a14 += 128;
+            set.x2a14 = x2a14;
+            x2a15 = 0;
+            if (cb15r0.Checked) x2a15 += 1;
+            if (cb15r1.Checked) x2a15 += 2;
+            if (cb15r2.Checked) x2a15 += 4;
+            if (cb15r3.Checked) x2a15 += 8;
+            if (cb15r4.Checked) x2a15 += 16;
+            if (cb15r5.Checked) x2a15 += 32;
+            if (cb15r6.Checked) x2a15 += 64;
+            if (cb15r7.Checked) x2a15 += 128;
+            set.x2a15 = x2a15;
+            
+            set.Save();
+        }
+        #endregion * grpPortA_CheckedChanged Events *
+
+            #region * grpPortB_CheckedChanged Events *
+
+        int x2b0 = 0, x2b1 = 0, x2b2 = 0, x2b3 = 0;
+        int x2b4 = 0, x2b5 = 0, x2b6 = 0, x2b7 = 0;
+        int x2b8 = 0, x2b9 = 0, x2b10 = 0, x2b11 = 0;
+        int x2b12 = 0, x2b13 = 0, x2b14 = 0, x2b15 = 0;
+
+        private void grpPortB_CheckedChanged(object sender, EventArgs e)
+        {
+            x2b0 = 0;
+            if (cb0t0.Checked) x2b0 += 1;
+            if (cb0t1.Checked) x2b0 += 2;
+            if (cb0t2.Checked) x2b0 += 4;
+            if (cb0t3.Checked) x2b0 += 8;
+            if (cb0t4.Checked) x2b0 += 16;
+            if (cb0t5.Checked) x2b0 += 32;
+            if (cb0t6.Checked) x2b0 += 64;
+            if (cb0t7.Checked) x2b0 += 128;
+            set.x2b0 = x2b0;
+            x2b1 = 0;
+            if (cb1t0.Checked) x2b1 += 1;
+            if (cb1t1.Checked) x2b1 += 2;
+            if (cb1t2.Checked) x2b1 += 4;
+            if (cb1t3.Checked) x2b1 += 8;
+            if (cb1t4.Checked) x2b1 += 16;
+            if (cb1t5.Checked) x2b1 += 32;
+            if (cb1t6.Checked) x2b1 += 64;
+            if (cb1t7.Checked) x2b1 += 128;
+            set.x2b1 = x2b1;
+            x2b2 = 0;
+            if (cb2t0.Checked) x2b2 += 1;
+            if (cb2t1.Checked) x2b2 += 2;
+            if (cb2t2.Checked) x2b2 += 4;
+            if (cb2t3.Checked) x2b2 += 8;
+            if (cb2t4.Checked) x2b2 += 16;
+            if (cb2t5.Checked) x2b2 += 32;
+            if (cb2t6.Checked) x2b2 += 64;
+            if (cb2t7.Checked) x2b2 += 128;
+            set.x2b2 = x2b2;
+            x2b3 = 0;
+            if (cb3t0.Checked) x2b3 += 1;
+            if (cb3t1.Checked) x2b3 += 2;
+            if (cb3t2.Checked) x2b3 += 4;
+            if (cb3t3.Checked) x2b3 += 8;
+            if (cb3t4.Checked) x2b3 += 16;
+            if (cb3t5.Checked) x2b3 += 32;
+            if (cb3t6.Checked) x2b3 += 64;
+            if (cb3t7.Checked) x2b3 += 128;
+            set.x2b3 = x2b3;
+            x2b4 = 0;
+            if (cb4t0.Checked) x2b4 += 1;
+            if (cb4t1.Checked) x2b4 += 2;
+            if (cb4t2.Checked) x2b4 += 4;
+            if (cb4t3.Checked) x2b4 += 8;
+            if (cb4t4.Checked) x2b4 += 16;
+            if (cb4t5.Checked) x2b4 += 32;
+            if (cb4t6.Checked) x2b4 += 64;
+            if (cb4t7.Checked) x2b4 += 128;
+            set.x2b4 = x2b4;
+            x2b5 = 0;
+            if (cb5t0.Checked) x2b5 += 1;
+            if (cb5t1.Checked) x2b5 += 2;
+            if (cb5t2.Checked) x2b5 += 4;
+            if (cb5t3.Checked) x2b5 += 8;
+            if (cb5t4.Checked) x2b5 += 16;
+            if (cb5t5.Checked) x2b5 += 32;
+            if (cb5t6.Checked) x2b5 += 64;
+            if (cb5t7.Checked) x2b5 += 128;
+            set.x2b5 = x2b5;
+            x2b6 = 0;
+            if (cb6t0.Checked) x2b6 += 1;
+            if (cb6t1.Checked) x2b6 += 2;
+            if (cb6t2.Checked) x2b6 += 4;
+            if (cb6t3.Checked) x2b6 += 8;
+            if (cb6t4.Checked) x2b6 += 16;
+            if (cb6t5.Checked) x2b6 += 32;
+            if (cb6t6.Checked) x2b6 += 64;
+            if (cb6t7.Checked) x2b6 += 128;
+            set.x2b6 = x2b6;
+            x2b7 = 0;
+            if (cb7t0.Checked) x2b7 += 1;
+            if (cb7t1.Checked) x2b7 += 2;
+            if (cb7t2.Checked) x2b7 += 4;
+            if (cb7t3.Checked) x2b7 += 8;
+            if (cb7t4.Checked) x2b7 += 16;
+            if (cb7t5.Checked) x2b7 += 32;
+            if (cb7t6.Checked) x2b7 += 64;
+            if (cb7t7.Checked) x2b7 += 128;
+            set.x2b7 = x2b7;
+            x2b8 = 0;
+            if (cb8t0.Checked) x2b8 += 1;
+            if (cb8t1.Checked) x2b8 += 2;
+            if (cb8t2.Checked) x2b8 += 4;
+            if (cb8t3.Checked) x2b8 += 8;
+            if (cb8t4.Checked) x2b8 += 16;
+            if (cb8t5.Checked) x2b8 += 32;
+            if (cb8t6.Checked) x2b8 += 64;
+            if (cb8t7.Checked) x2b8 += 128;
+            set.x2b8 = x2b8;
+            x2b9 = 0;
+            if (cb9t0.Checked) x2b9 += 1;
+            if (cb9t1.Checked) x2b9 += 2;
+            if (cb9t2.Checked) x2b9 += 4;
+            if (cb9t3.Checked) x2b9 += 8;
+            if (cb9t4.Checked) x2b9 += 16;
+            if (cb9t5.Checked) x2b9 += 32;
+            if (cb9t6.Checked) x2b9 += 64;
+            if (cb9t7.Checked) x2b9 += 128;
+            set.x2b9 = x2b9;
+            x2b10 = 0;
+            if (cb10t0.Checked) x2b10 += 1;
+            if (cb10t1.Checked) x2b10 += 2;
+            if (cb10t2.Checked) x2b10 += 4;
+            if (cb10t3.Checked) x2b10 += 8;
+            if (cb10t4.Checked) x2b10 += 16;
+            if (cb10t5.Checked) x2b10 += 32;
+            if (cb10t6.Checked) x2b10 += 64;
+            if (cb10t7.Checked) x2b10 += 128;
+            set.x2b10 = x2b10;
+            x2b11 = 0;
+            if (cb11t0.Checked) x2b11 += 1;
+            if (cb11t1.Checked) x2b11 += 2;
+            if (cb11t2.Checked) x2b11 += 4;
+            if (cb11t3.Checked) x2b11 += 8;
+            if (cb11t4.Checked) x2b11 += 16;
+            if (cb11t5.Checked) x2b11 += 32;
+            if (cb11t6.Checked) x2b11 += 64;
+            if (cb11t7.Checked) x2b11 += 128;
+            set.x2b11 = x2b11;
+            x2b12 = 0;
+            if (cb12t0.Checked) x2b12 += 1;
+            if (cb12t1.Checked) x2b12 += 2;
+            if (cb12t2.Checked) x2b12 += 4;
+            if (cb12t3.Checked) x2b12 += 8;
+            if (cb12t4.Checked) x2b12 += 16;
+            if (cb12t5.Checked) x2b12 += 32;
+            if (cb12t6.Checked) x2b12 += 64;
+            if (cb12t7.Checked) x2b12 += 128;
+            set.x2b12 = x2b12;
+            x2b13 = 0;
+            if (cb13t0.Checked) x2b13 += 1;
+            if (cb13t1.Checked) x2b13 += 2;
+            if (cb13t2.Checked) x2b13 += 4;
+            if (cb13t3.Checked) x2b13 += 8;
+            if (cb13t4.Checked) x2b13 += 16;
+            if (cb13t5.Checked) x2b13 += 32;
+            if (cb13t6.Checked) x2b13 += 64;
+            if (cb13t7.Checked) x2b13 += 128;
+            set.x2b13 = x2b13;
+            x2b14 = 0;
+            if (cb14t0.Checked) x2b14 += 1;
+            if (cb14t1.Checked) x2b14 += 2;
+            if (cb14t2.Checked) x2b14 += 4;
+            if (cb14t3.Checked) x2b14 += 8;
+            if (cb14t4.Checked) x2b14 += 16;
+            if (cb14t5.Checked) x2b14 += 32;
+            if (cb14t6.Checked) x2b14 += 64;
+            if (cb14t7.Checked) x2b14 += 128;
+            set.x2b14 = x2b14;
+            x2b15 = 0;
+            if (cb15t0.Checked) x2b15 += 1;
+            if (cb15t1.Checked) x2b15 += 2;
+            if (cb15t2.Checked) x2b15 += 4;
+            if (cb15t3.Checked) x2b15 += 8;
+            if (cb15t4.Checked) x2b15 += 16;
+            if (cb15t5.Checked) x2b15 += 32;
+            if (cb15t6.Checked) x2b15 += 64;
+            if (cb15t7.Checked) x2b15 += 128;
+            set.x2b15 = x2b15;
+
+            set.Save();
+        }
+        #endregion * grpPortB_CheckedChanged Events *
+
+
+        // the Port A Enable checkbox has been changed
+        private void chkPortA_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPortA.Checked)
+            {
+                foreach (Control c in grpPortA.Controls)
+                {
+                    if (c.GetType() == typeof(CheckBox))
+                    { c.Enabled = true; }
+                    txtPortA.Enabled = true;
+                    btnClrPortA.Enabled = true;
+                    set.chkPortA = true;
+                    X2SetUp();
+                }
+            }
+            else
+            {
+                foreach (Control c in grpPortA.Controls)
+                {
+                    if (c.GetType() == typeof(CheckBox))
+                    { c.Enabled = false; }
+                }
+                txtPortA.Enabled = false;
+                btnClrPortA.Enabled = false;
+                set.chkPortA = false; 
+            }
+            set.Save();
+        }
+        // the Port B Enable checkbox has been changed
+        private void chkPortB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPortB.Checked)
+            {
+                foreach (Control c in grpPortB.Controls)
+                {
+                    if (c.GetType() == typeof(CheckBox))
+                    { c.Enabled = true; }
+                }
+                txtPortB.Enabled = true;
+                btnClrPortB.Enabled = true;
+                set.chkPortB = true;
+                X2SetUp();
+            }
+            else
+            {
+                foreach (Control c in grpPortB.Controls)
+                {
+                    if (c.GetType() == typeof(CheckBox))
+                    { c.Enabled = false; }
+                }
+                txtPortB.Enabled = false;
+                btnClrPortB.Enabled = false;
+                set.chkPortB = false;
+            }
+            set.Save();
+        }
+        // Port A has been changed
+        private void txtPortA_TextChanged(object sender, EventArgs e)
+        {
+            set.aPortNum = txtPortA.Text; set.Save();
+        }
+        // Port B has been changed
+        private void txtPortB_TextChanged(object sender, EventArgs e)
+        {
+            set.bPortNum = txtPortB.Text; set.Save();
+        }
+        // the Clear all receive bits button was pressed
+        private void btnClrPortA_Click(object sender, EventArgs e)
+        {
+            CheckBox cb;
+            foreach (Control c in grpPortA.Controls)
+            {
+                if (c.GetType() == typeof(CheckBox))
+                {
+                    cb = (CheckBox)c;
+                    cb.Checked = false;
+                }
+            }
+        }
+        // the Clear all transmit bits button was pressed
+        private void btnClrPortB_Click(object sender, EventArgs e)
+        {
+            CheckBox cb;
+            foreach (Control c in grpPortB.Controls)
+            {
+                if (c.GetType() == typeof(CheckBox))
+                {
+                    cb = (CheckBox)c;
+                    cb.Checked = false;
+                }
+            }
+        }
+
+        #endregion Events
+
+    #endregion Matrix
     }
 }
