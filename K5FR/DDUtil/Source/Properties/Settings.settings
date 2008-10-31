@@ -357,10 +357,10 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="aPortNum" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="bPortNum" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="x2a0" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -460,6 +460,12 @@ RCP4 - WriteLog</Value>
     </Setting>
     <Setting Name="x2b15" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="chkInvertA" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="chkInvertB" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
