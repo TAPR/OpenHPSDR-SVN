@@ -1429,7 +1429,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string aPortNum {
             get {
                 return ((string)(this["aPortNum"]));
@@ -1441,7 +1441,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string bPortNum {
             get {
                 return ((string)(this["bPortNum"]));
@@ -1844,6 +1844,30 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["x2b15"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkInvertA {
+            get {
+                return ((bool)(this["chkInvertA"]));
+            }
+            set {
+                this["chkInvertA"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkInvertB {
+            get {
+                return ((bool)(this["chkInvertB"]));
+            }
+            set {
+                this["chkInvertB"] = value;
             }
         }
     }

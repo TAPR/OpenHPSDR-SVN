@@ -372,6 +372,9 @@ namespace DataDecoder
             this.label52 = new System.Windows.Forms.Label();
             this.txtLong = new System.Windows.Forms.TextBox();
             this.tabExtCtrl = new System.Windows.Forms.TabPage();
+            this.chkInvertA = new System.Windows.Forms.CheckBox();
+            this.label137 = new System.Windows.Forms.Label();
+            this.lblVHF = new System.Windows.Forms.Label();
             this.label132 = new System.Windows.Forms.Label();
             this.label131 = new System.Windows.Forms.Label();
             this.chkPortB = new System.Windows.Forms.CheckBox();
@@ -754,8 +757,7 @@ namespace DataDecoder
             this.lblAvg = new System.Windows.Forms.Label();
             this.WN2Timer = new System.Windows.Forms.Timer(this.components);
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
-            this.lblVHF = new System.Windows.Forms.Label();
-            this.label137 = new System.Windows.Forms.Label();
+            this.chkInvertB = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -5267,6 +5269,8 @@ namespace DataDecoder
             // 
             // tabExtCtrl
             // 
+            this.tabExtCtrl.Controls.Add(this.chkInvertB);
+            this.tabExtCtrl.Controls.Add(this.chkInvertA);
             this.tabExtCtrl.Controls.Add(this.label137);
             this.tabExtCtrl.Controls.Add(this.lblVHF);
             this.tabExtCtrl.Controls.Add(this.label132);
@@ -5288,12 +5292,47 @@ namespace DataDecoder
             this.tabExtCtrl.Text = "ExtCtrl";
             this.tabExtCtrl.UseVisualStyleBackColor = true;
             // 
+            // chkInvertA
+            // 
+            this.chkInvertA.AutoSize = true;
+            this.chkInvertA.ForeColor = System.Drawing.Color.Maroon;
+            this.chkInvertA.Location = new System.Drawing.Point(184, 44);
+            this.chkInvertA.Name = "chkInvertA";
+            this.chkInvertA.Size = new System.Drawing.Size(53, 17);
+            this.chkInvertA.TabIndex = 282;
+            this.chkInvertA.Text = "Invert";
+            this.toolTip1.SetToolTip(this.chkInvertA, "Select if data is going to a device with inverted logic (K3TUF UCB)");
+            this.chkInvertA.UseVisualStyleBackColor = true;
+            this.chkInvertA.CheckedChanged += new System.EventHandler(this.chkInvertA_CheckedChanged);
+            // 
+            // label137
+            // 
+            this.label137.AutoSize = true;
+            this.label137.ForeColor = System.Drawing.Color.Navy;
+            this.label137.Location = new System.Drawing.Point(192, 138);
+            this.label137.Name = "label137";
+            this.label137.Size = new System.Drawing.Size(32, 13);
+            this.label137.TabIndex = 281;
+            this.label137.Text = "Band";
+            // 
+            // lblVHF
+            // 
+            this.lblVHF.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblVHF.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblVHF.Location = new System.Drawing.Point(194, 153);
+            this.lblVHF.Name = "lblVHF";
+            this.lblVHF.Size = new System.Drawing.Size(30, 15);
+            this.lblVHF.TabIndex = 280;
+            this.lblVHF.Text = "- - -";
+            this.lblVHF.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.lblVHF, "Band Button selected");
+            // 
             // label132
             // 
             this.label132.AutoSize = true;
             this.label132.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label132.ForeColor = System.Drawing.Color.Blue;
-            this.label132.Location = new System.Drawing.Point(192, 30);
+            this.label132.Location = new System.Drawing.Point(182, 10);
             this.label132.Name = "label132";
             this.label132.Size = new System.Drawing.Size(34, 13);
             this.label132.TabIndex = 279;
@@ -5304,7 +5343,7 @@ namespace DataDecoder
             this.label131.AutoSize = true;
             this.label131.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label131.ForeColor = System.Drawing.Color.Blue;
-            this.label131.Location = new System.Drawing.Point(192, 197);
+            this.label131.Location = new System.Drawing.Point(199, 181);
             this.label131.Name = "label131";
             this.label131.Size = new System.Drawing.Size(34, 13);
             this.label131.TabIndex = 278;
@@ -5314,7 +5353,7 @@ namespace DataDecoder
             // 
             this.chkPortB.AutoSize = true;
             this.chkPortB.ForeColor = System.Drawing.Color.Navy;
-            this.chkPortB.Location = new System.Drawing.Point(182, 215);
+            this.chkPortB.Location = new System.Drawing.Point(183, 199);
             this.chkPortB.Name = "chkPortB";
             this.chkPortB.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkPortB.Size = new System.Drawing.Size(51, 17);
@@ -5348,7 +5387,7 @@ namespace DataDecoder
             this.btnClrPortA.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnClrPortA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClrPortA.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClrPortA.Location = new System.Drawing.Point(192, 110);
+            this.btnClrPortA.Location = new System.Drawing.Point(192, 105);
             this.btnClrPortA.Name = "btnClrPortA";
             this.btnClrPortA.Size = new System.Drawing.Size(35, 19);
             this.btnClrPortA.TabIndex = 275;
@@ -9025,7 +9064,7 @@ namespace DataDecoder
             // 
             this.chkPortA.AutoSize = true;
             this.chkPortA.ForeColor = System.Drawing.Color.Navy;
-            this.chkPortA.Location = new System.Drawing.Point(184, 47);
+            this.chkPortA.Location = new System.Drawing.Point(184, 27);
             this.chkPortA.Name = "chkPortA";
             this.chkPortA.Size = new System.Drawing.Size(51, 17);
             this.chkPortA.TabIndex = 2;
@@ -9036,7 +9075,7 @@ namespace DataDecoder
             // txtPortA
             // 
             this.txtPortA.Enabled = false;
-            this.txtPortA.Location = new System.Drawing.Point(189, 82);
+            this.txtPortA.Location = new System.Drawing.Point(189, 80);
             this.txtPortA.Name = "txtPortA";
             this.txtPortA.Size = new System.Drawing.Size(40, 20);
             this.txtPortA.TabIndex = 136;
@@ -9048,7 +9087,7 @@ namespace DataDecoder
             // 
             this.label103.AutoSize = true;
             this.label103.ForeColor = System.Drawing.Color.Navy;
-            this.label103.Location = new System.Drawing.Point(191, 66);
+            this.label103.Location = new System.Drawing.Point(191, 64);
             this.label103.Name = "label103";
             this.label103.Size = new System.Drawing.Size(36, 13);
             this.label103.TabIndex = 135;
@@ -9621,27 +9660,19 @@ namespace DataDecoder
             this.AlphaPort.RtsEnable = true;
             this.AlphaPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.AlphaPort_DataReceived);
             // 
-            // lblVHF
+            // chkInvertB
             // 
-            this.lblVHF.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblVHF.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblVHF.Location = new System.Drawing.Point(194, 163);
-            this.lblVHF.Name = "lblVHF";
-            this.lblVHF.Size = new System.Drawing.Size(30, 15);
-            this.lblVHF.TabIndex = 280;
-            this.lblVHF.Text = "- - -";
-            this.lblVHF.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.lblVHF, "Band Button selected");
-            // 
-            // label137
-            // 
-            this.label137.AutoSize = true;
-            this.label137.ForeColor = System.Drawing.Color.Navy;
-            this.label137.Location = new System.Drawing.Point(192, 148);
-            this.label137.Name = "label137";
-            this.label137.Size = new System.Drawing.Size(32, 13);
-            this.label137.TabIndex = 281;
-            this.label137.Text = "Band";
+            this.chkInvertB.AutoSize = true;
+            this.chkInvertB.ForeColor = System.Drawing.Color.Maroon;
+            this.chkInvertB.Location = new System.Drawing.Point(181, 216);
+            this.chkInvertB.Name = "chkInvertB";
+            this.chkInvertB.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkInvertB.Size = new System.Drawing.Size(53, 17);
+            this.chkInvertB.TabIndex = 283;
+            this.chkInvertB.Text = "Invert";
+            this.toolTip1.SetToolTip(this.chkInvertB, "Select if data is going to a device with inverted logic (K3TUF UCB)");
+            this.chkInvertB.UseVisualStyleBackColor = true;
+            this.chkInvertB.CheckedChanged += new System.EventHandler(this.chkInvertB_CheckedChanged);
             // 
             // Setup
             // 
@@ -10472,6 +10503,8 @@ namespace DataDecoder
         private CheckBox cb14r7;
         private Label lblVHF;
         private Label label137;
+        private CheckBox chkInvertA;
+        private CheckBox chkInvertB;
 
     }
 }

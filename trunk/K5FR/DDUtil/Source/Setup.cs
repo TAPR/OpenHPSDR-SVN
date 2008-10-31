@@ -73,7 +73,6 @@ namespace DataDecoder
 
         #region Variables
 
-        StreamWriter sw;
         private SplashScreen mSplashScreen;
         ASCIIEncoding AE = new ASCIIEncoding();
         public CATSerialPorts.CATSerialPort sp;
@@ -527,10 +526,6 @@ namespace DataDecoder
             cboDevice.Text = set.Device;
             cboAlpha.SelectedIndex = set.AlphaPort;
             chkAlpha.Checked = set.AlphaEnab;
-            chkPortA.Checked = set.chkPortA;
-            chkPortB.Checked = set.chkPortB; 
-            txtPortA.Text = set.aPortNum;
-            txtPortB.Text = set.bPortNum;
             
             X2SetUp();  // setup the X2 Matrix
             WN2SetUp(); // setup the WN2
@@ -544,7 +539,6 @@ namespace DataDecoder
             tempTimer.Enabled = true;
             chkModeChg.Checked = set.ModeChg;
              
-
             mSplashScreen.SetProgress("Loading Main Form", 1.0);
 
         }// Setup
@@ -3568,80 +3562,78 @@ namespace DataDecoder
                         if (lastBand != band)
                         {
                             lastBand = band;
-                            int aPort = Convert.ToInt32(set.aPortNum);
-                            int bPort = Convert.ToInt32(set.bPortNum);
                             // if matrix enabled output to port
                             if (chkPortA.Checked || chkPortB.Checked)
                             {
                                 switch (band)
                                 {
                                     case "V00":
-                                        if(chkPortB.Checked) PortAccess.Output(bPort, x2b0);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a0);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b0);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a0);
                                         SetVHF("0"); break;
                                     case "V01":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b1);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a1);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b1);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a1);
                                         SetVHF("1"); break;
                                     case "V02":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b2);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a2);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b2);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a2);
                                         SetVHF("2"); break;
                                     case "V03":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b3);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a3);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b3);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a3);
                                         SetVHF("3"); break;
                                     case "V04":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b4);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a4);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b4);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a4);
                                         SetVHF("4"); break;
                                     case "V05":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b5);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a5);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b5);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a5);
                                         SetVHF("5"); break;
                                     case "V06":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b6);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a6);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b6);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a6);
                                         SetVHF("6"); break;
                                     case "V07":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b7);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a7);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b7);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a7);
                                         SetVHF("7"); break;
                                     case "V08":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b8);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a8);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b8);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a8);
                                         SetVHF("8"); break;
                                     case "V09":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b9);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a9);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b9);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a9);
                                         SetVHF("9"); break;
                                     case "V10":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b10);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a10);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b10);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a10);
                                         SetVHF("10"); break;
                                     case "V11":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b11);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a11);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b11);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a11);
                                         SetVHF("11"); break;
                                     case "V12":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b12);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a12);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b12);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a12);
                                         SetVHF("12"); break;
                                     case "V13":
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b13);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a13);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b13);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a13);
                                         SetVHF("13"); break;
                                     case "006": 
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b14);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a14);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b14);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a14);
                                         SetVHF("HF6"); break;
                                     case "002": 
-                                        if(chkPortB.Checked)PortAccess.Output(bPort, x2b15);
-                                        if(chkPortA.Checked) PortAccess.Output(aPort, x2a15);
+                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b15);
+                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a15);
                                         SetVHF("HF2"); break;
                                 }
                             }
-                            // If WN2 band sensor matrix enabled set correct sensor
+                            // If WN2 band sensor matrix enabled, set correct sensor
                             if (wn.chkEnab.Checked)
                             {
                                 switch (band)
@@ -3774,7 +3766,7 @@ namespace DataDecoder
                             if (!WatchDog.Enabled) WatchDog.Start();                            
                         }
                         else  WatchDog.Stop();   
-
+                        // what's split status
                         sdrMode = rawFreq.Substring(rawFreq.Length - 9, 1);
                         if (rawFreq.Substring(rawFreq.Length - 6, 1) == "0")
                         {   // if xmit vfo is "A" then send passive listener commands now
@@ -3816,7 +3808,6 @@ namespace DataDecoder
                     // Execute macro if Mode Change is checked
                     if (LastMode != sdrMode && chkModeChg.Checked)
                     {
-//                        Thread.Sleep(1000);
                         switch (sdrMode)
                         {
                             case "1": btnMacro10_Click(null, null); break;   // LSB
@@ -3865,7 +3856,8 @@ namespace DataDecoder
                     else
                         id = title + " - " + freq.Substring(0, 9) +
                             "  " + vfo + "  " + mode;
-                    if (chkDevice.Checked) LookUp(freqLook);//decode freq data and output to LPT port
+                    //decode freq data and output to LPT port
+                    if (chkDevice.Checked) LookUp(freqLook);
                     this.SetTitle(id);
                     this.SetDigit(keyValue.ToString());
                 }//For
@@ -6575,7 +6567,7 @@ namespace DataDecoder
                         {   SetTune("Auto"); btnTune.BackColor = Color.Lime; 
                             tune = "On"; mini.btnTune.BackColor = Color.Lime; }
                         if (sCmd.Contains("AUTOTUNE DISABLED"))
-                        {   SetTune("Off"); btnTune.BackColor = Color.Yellow; 
+                        {   SetTune("Man"); btnTune.BackColor = Color.Yellow; 
                             tune = "Off"; mini.btnTune.BackColor = Color.Yellow; }
                         if (sCmd.Contains("MODE = HIGH"))
                         {   SetHV("High"); btnHV.BackColor = Color.Lime; 
@@ -6736,27 +6728,27 @@ namespace DataDecoder
             SetMsg(""); btnHF.BackColor = Color.Empty;
             mini.btnHF.BackColor = Color.Empty;
         }
-            #endregion Events
-
         private void btnSensor_Click(object sender, EventArgs e)
         {
             wn.Show();
         }
 
+            #endregion Events  
+
         #endregion Alpha
 
-    #region Matrix
+        #region VHF+ Matrix
 
-        #region # Declarations #
+          #region # Declarations #
 
         const int base10 = 10;
         char[] cHexa = new char[] { 'A', 'B', 'C', 'D', 'E', 'F' };
         
-        #endregion Declarations
+          #endregion Declarations
 
-        #region # Delegates #
+          #region # Delegates #
 
-        // Write to Pwr button
+        // Write to band button
         delegate void SetVHFCallback(string text);
         public void SetVHF(string text)
         {
@@ -6768,14 +6760,37 @@ namespace DataDecoder
             else
             { lblVHF.Text = text; }
         }
-        #endregion # Delegates #
+          #endregion # Delegates #
 
-        #region # Methods #
+          #region # Methods #
 
-        // Load the x2 matrix checkboxes from settings
+        // Send data to parallel port A
+        void MatrixOutA(int port, int data)
+        {
+            if (chkInvertA.Checked) PortAccess.Output(port, 255 ^ data);
+            else PortAccess.Output(port, data);
+        }
+        // Send data to parallel port B
+        void MatrixOutB(int port, int data)
+        {
+            if (chkInvertB.Checked) PortAccess.Output(port, 255 ^ data);
+            else PortAccess.Output(port, data);
+        }
+        int aPort;
+        int bPort;
+        // Load the x2 matrix controls from settings
         void X2SetUp()
         {
             string bin = "";
+            chkPortA.Checked = set.chkPortA;
+            chkPortB.Checked = set.chkPortB;
+            txtPortA.Text = set.aPortNum;
+            txtPortB.Text = set.bPortNum;
+            chkInvertA.Checked = set.chkInvertA;
+            chkInvertB.Checked = set.chkInvertB;
+            aPort = Convert.ToInt32(set.aPortNum);
+            bPort = Convert.ToInt32(set.bPortNum);
+
             //store the set rec vars as they will be overwritten during the load.
             int s2a0 = set.x2a0, s2a1 = set.x2a1, s2a2 = set.x2a2, s2a3 = set.x2a3;
             int s2a4 = set.x2a4, s2a5 = set.x2a5, s2a6 = set.x2a6, s2a7 = set.x2a7;
@@ -6900,9 +6915,9 @@ namespace DataDecoder
             strBin = strBin.TrimStart(new char[] { '0' });
             return strBin;
         }
-        #endregion Methods
+          #endregion Methods
 
-        #region # Events #
+          #region # Events #
 
             #region * grpPortA_CheckedChanged Events *
 
@@ -7312,12 +7327,16 @@ namespace DataDecoder
         // Port A has been changed
         private void txtPortA_TextChanged(object sender, EventArgs e)
         {
+            if (txtPortA.Text == null || txtPortA.Text == "") txtPortA.Text = "0";
             set.aPortNum = txtPortA.Text; set.Save();
+            aPort = Convert.ToInt32(txtPortA.Text);
         }
         // Port B has been changed
         private void txtPortB_TextChanged(object sender, EventArgs e)
         {
+            if (txtPortB.Text == null || txtPortB.Text == "") txtPortB.Text = "0";
             set.bPortNum = txtPortB.Text; set.Save();
+            bPort = Convert.ToInt32(txtPortB.Text);
         }
         // the Clear all receive bits button was pressed
         private void btnClrPortA_Click(object sender, EventArgs e)
@@ -7345,9 +7364,23 @@ namespace DataDecoder
                 }
             }
         }
+        // the Port A invert checkbox has changed.
+        private void chkInvertA_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkInvertA.Checked) set.chkInvertA = true;
+            else set.chkInvertA = false;
+            set.Save();
+        }
+        // the Port B invert checkbox has changed.
+        private void chkInvertB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkInvertB.Checked) set.chkInvertB = true;
+            else set.chkInvertB = false;
+            set.Save();
+        }
 
-        #endregion Events
+          #endregion Events
 
-    #endregion Matrix
+        #endregion VHF+ Matrix
     }
 }
