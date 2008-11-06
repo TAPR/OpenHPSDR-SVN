@@ -1,0 +1,185 @@
+Classic Timing Analyzer report for Test1
+Thu Nov 06 21:25:06 2008
+Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Clock Setup: 'CLK_48MHZ'
+  6. tco
+  7. tpd
+  8. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2008 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                                     ;
++------------------------------+-------+---------------+------------------------------------------------+--------------+--------------+------------+-----------+--------------+
+; Type                         ; Slack ; Required Time ; Actual Time                                    ; From         ; To           ; From Clock ; To Clock  ; Failed Paths ;
++------------------------------+-------+---------------+------------------------------------------------+--------------+--------------+------------+-----------+--------------+
+; Worst-case tco               ; N/A   ; None          ; 11.404 ns                                      ; I_CLKRX~reg0 ; I_CLKRX      ; CLK_48MHZ  ; --        ; 0            ;
+; Worst-case tpd               ; N/A   ; None          ; 6.679 ns                                       ; PTT          ; RXOE2        ; --         ; --        ; 0            ;
+; Clock Setup: 'CLK_48MHZ'     ; N/A   ; None          ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; state.01     ; I_CLKRX~reg0 ; CLK_48MHZ  ; CLK_48MHZ ; 0            ;
+; Total number of failed paths ;       ;               ;                                                ;              ;              ;            ;           ; 0            ;
++------------------------------+-------+---------------+------------------------------------------------+--------------+--------------+------------+-----------+--------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                                           ;
++---------------------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                              ; Setting            ; From ; To ; Entity Name ;
++---------------------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                                         ; EPM240T100C5       ;      ;    ;             ;
+; Timing Models                                                       ; Final              ;      ;    ;             ;
+; Default hold multicycle                                             ; Same as Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains                           ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                              ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                                      ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                                    ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                               ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements                             ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                                    ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                                ; Off                ;      ;    ;             ;
+; Use TimeQuest Timing Analyzer                                       ; Off                ;      ;    ;             ;
+; Number of source nodes to report per destination node               ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                               ; 10                 ;      ;    ;             ;
+; Number of paths to report                                           ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                                        ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                              ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                                          ; Off                ;      ;    ;             ;
+; Perform Multicorner Analysis                                        ; Off                ;      ;    ;             ;
+; Reports the worst-case path for each clock domain and analysis      ; Off                ;      ;    ;             ;
+; Removes common clock path pessimism (CCPP) during slack computation ; Off                ;      ;    ;             ;
++---------------------------------------------------------------------+--------------------+------+----+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                             ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type     ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset ; Phase offset ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; CLK_48MHZ       ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'CLK_48MHZ'                                                                                                                                                                      ;
++-------+------------------------------------------------+----------+--------------+------------+-----------+-----------------------------+---------------------------+-------------------------+
+; Slack ; Actual fmax (period)                           ; From     ; To           ; From Clock ; To Clock  ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-------+------------------------------------------------+----------+--------------+------------+-----------+-----------------------------+---------------------------+-------------------------+
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; state.01 ; I_CLKRX~reg0 ; CLK_48MHZ  ; CLK_48MHZ ; None                        ; None                      ; 1.799 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; state.11 ; state.00     ; CLK_48MHZ  ; CLK_48MHZ ; None                        ; None                      ; 1.793 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; state.11 ; Q_CLKRX~reg0 ; CLK_48MHZ  ; CLK_48MHZ ; None                        ; None                      ; 1.792 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; state.00 ; Q_CLKRX~reg0 ; CLK_48MHZ  ; CLK_48MHZ ; None                        ; None                      ; 1.530 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; state.00 ; I_CLKRX~reg0 ; CLK_48MHZ  ; CLK_48MHZ ; None                        ; None                      ; 1.529 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; state.00 ; state.01     ; CLK_48MHZ  ; CLK_48MHZ ; None                        ; None                      ; 1.526 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; state.01 ; state.10     ; CLK_48MHZ  ; CLK_48MHZ ; None                        ; None                      ; 1.264 ns                ;
+; N/A   ; Restricted to 304.04 MHz ( period = 3.289 ns ) ; state.10 ; state.11     ; CLK_48MHZ  ; CLK_48MHZ ; None                        ; None                      ; 1.263 ns                ;
++-------+------------------------------------------------+----------+--------------+------------+-----------+-----------------------------+---------------------------+-------------------------+
+
+
++-------------------------------------------------------------------------+
+; tco                                                                     ;
++-------+--------------+------------+--------------+---------+------------+
+; Slack ; Required tco ; Actual tco ; From         ; To      ; From Clock ;
++-------+--------------+------------+--------------+---------+------------+
+; N/A   ; None         ; 11.404 ns  ; I_CLKRX~reg0 ; I_CLKRX ; CLK_48MHZ  ;
+; N/A   ; None         ; 11.342 ns  ; Q_CLKRX~reg0 ; Q_CLKRX ; CLK_48MHZ  ;
+; N/A   ; None         ; 10.948 ns  ; I_CLKRX~reg0 ; I_CLKTX ; CLK_48MHZ  ;
+; N/A   ; None         ; 10.834 ns  ; Q_CLKRX~reg0 ; Q_CLKTX ; CLK_48MHZ  ;
++-------+--------------+------------+--------------+---------+------------+
+
+
++------------------------------------------------------------+
+; tpd                                                        ;
++-------+-------------------+-----------------+------+-------+
+; Slack ; Required P2P Time ; Actual P2P Time ; From ; To    ;
++-------+-------------------+-----------------+------+-------+
+; N/A   ; None              ; 6.679 ns        ; PTT  ; RXOE2 ;
+; N/A   ; None              ; 6.236 ns        ; PTT  ; TXOE2 ;
+; N/A   ; None              ; 6.236 ns        ; PTT  ; TXOE1 ;
+; N/A   ; None              ; 6.236 ns        ; PTT  ; LED2  ;
+; N/A   ; None              ; 6.210 ns        ; PTT  ; RXOE1 ;
++-------+-------------------+-----------------+------+-------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Classic Timing Analyzer
+    Info: Version 8.0 Build 215 05/29/2008 SJ Web Edition
+    Info: Processing started: Thu Nov 06 21:25:06 2008
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off Phoenix -c Test1
+Info: Started post-fitting delay annotation
+Info: Delay annotation completed successfully
+Warning: Found pins functioning as undefined clocks and/or memory enables
+    Info: Assuming node "CLK_48MHZ" is an undefined clock
+Info: Clock "CLK_48MHZ" Internal fmax is restricted to 304.04 MHz between source register "state.01" and destination register "I_CLKRX~reg0"
+    Info: fmax restricted to clock pin edge rate 3.289 ns. Expand message to see actual delay path.
+        Info: + Longest register to register delay is 1.799 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC_X4_Y3_N5; Fanout = 2; REG Node = 'state.01'
+            Info: 2: + IC(0.995 ns) + CELL(0.804 ns) = 1.799 ns; Loc. = LC_X4_Y3_N3; Fanout = 2; REG Node = 'I_CLKRX~reg0'
+            Info: Total cell delay = 0.804 ns ( 44.69 % )
+            Info: Total interconnect delay = 0.995 ns ( 55.31 % )
+        Info: - Smallest clock skew is 0.000 ns
+            Info: + Shortest clock path from clock "CLK_48MHZ" to destination register is 6.183 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_82; Fanout = 6; CLK Node = 'CLK_48MHZ'
+                Info: 2: + IC(4.133 ns) + CELL(0.918 ns) = 6.183 ns; Loc. = LC_X4_Y3_N3; Fanout = 2; REG Node = 'I_CLKRX~reg0'
+                Info: Total cell delay = 2.050 ns ( 33.16 % )
+                Info: Total interconnect delay = 4.133 ns ( 66.84 % )
+            Info: - Longest clock path from clock "CLK_48MHZ" to source register is 6.183 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_82; Fanout = 6; CLK Node = 'CLK_48MHZ'
+                Info: 2: + IC(4.133 ns) + CELL(0.918 ns) = 6.183 ns; Loc. = LC_X4_Y3_N5; Fanout = 2; REG Node = 'state.01'
+                Info: Total cell delay = 2.050 ns ( 33.16 % )
+                Info: Total interconnect delay = 4.133 ns ( 66.84 % )
+        Info: + Micro clock to output delay of source is 0.376 ns
+        Info: + Micro setup delay of destination is 0.333 ns
+Info: tco from clock "CLK_48MHZ" to destination pin "I_CLKRX" through register "I_CLKRX~reg0" is 11.404 ns
+    Info: + Longest clock path from clock "CLK_48MHZ" to source register is 6.183 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_82; Fanout = 6; CLK Node = 'CLK_48MHZ'
+        Info: 2: + IC(4.133 ns) + CELL(0.918 ns) = 6.183 ns; Loc. = LC_X4_Y3_N3; Fanout = 2; REG Node = 'I_CLKRX~reg0'
+        Info: Total cell delay = 2.050 ns ( 33.16 % )
+        Info: Total interconnect delay = 4.133 ns ( 66.84 % )
+    Info: + Micro clock to output delay of source is 0.376 ns
+    Info: + Longest register to pin delay is 4.845 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC_X4_Y3_N3; Fanout = 2; REG Node = 'I_CLKRX~reg0'
+        Info: 2: + IC(2.523 ns) + CELL(2.322 ns) = 4.845 ns; Loc. = PIN_99; Fanout = 0; PIN Node = 'I_CLKRX'
+        Info: Total cell delay = 2.322 ns ( 47.93 % )
+        Info: Total interconnect delay = 2.523 ns ( 52.07 % )
+Info: Longest tpd from source pin "PTT" to destination pin "RXOE2" is 6.679 ns
+    Info: 1: + IC(0.000 ns) + CELL(1.132 ns) = 1.132 ns; Loc. = PIN_52; Fanout = 5; PIN Node = 'PTT'
+    Info: 2: + IC(3.225 ns) + CELL(2.322 ns) = 6.679 ns; Loc. = PIN_98; Fanout = 0; PIN Node = 'RXOE2'
+    Info: Total cell delay = 3.454 ns ( 51.71 % )
+    Info: Total interconnect delay = 3.225 ns ( 48.29 % )
+Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 119 megabytes
+    Info: Processing ended: Thu Nov 06 21:25:06 2008
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+
+
