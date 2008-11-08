@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Test1
-Thu Nov 06 21:25:02 2008
+Fri Nov 07 21:30:16 2008
 Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
 
 
@@ -12,10 +12,13 @@ Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
   4. Analysis & Synthesis Source Files Read
   5. Analysis & Synthesis Resource Usage Summary
   6. Analysis & Synthesis Resource Utilization by Entity
-  7. State Machine - |Test1|state
-  8. Registers Removed During Synthesis
-  9. General Register Statistics
- 10. Analysis & Synthesis Messages
+  7. State Machine - |Test1|CC_state
+  8. State Machine - |Test1|spi_state
+  9. State Machine - |Test1|state
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Analysis & Synthesis Messages
 
 
 
@@ -41,13 +44,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                          ;
 +-----------------------------+-----------------------------------------+
-; Analysis & Synthesis Status ; Successful - Thu Nov 06 21:25:02 2008   ;
+; Analysis & Synthesis Status ; Successful - Fri Nov 07 21:30:16 2008   ;
 ; Quartus II Version          ; 8.0 Build 215 05/29/2008 SJ Web Edition ;
 ; Revision Name               ; Test1                                   ;
 ; Top-level Entity Name       ; Test1                                   ;
 ; Family                      ; MAX II                                  ;
-; Total logic elements        ; 6                                       ;
-; Total pins                  ; 12                                      ;
+; Total logic elements        ; 41                                      ;
+; Total pins                  ; 19                                      ;
 ; Total virtual pins          ; 0                                       ;
 ; Total memory bits           ; 0                                       ;
 ; DSP block 9-bit elements    ; 0                                       ;
@@ -64,6 +67,7 @@ applicable agreement for further details.
 ; Device                                                       ; EPM240T100C5       ;                    ;
 ; Top-level entity name                                        ; Test1              ; Test1              ;
 ; Family name                                                  ; MAX II             ; Stratix II         ;
+; Power-Up Don't Care                                          ; Off                ; On                 ;
 ; Use Generated Physical Constraints File                      ; Off                ;                    ;
 ; Use smart compilation                                        ; Off                ; Off                ;
 ; Maximum processors allowed for parallel compilation          ; 1                  ; 1                  ;
@@ -83,7 +87,6 @@ applicable agreement for further details.
 ; Add Pass-Through Logic to Inferred RAMs                      ; On                 ; On                 ;
 ; Parallel Synthesis                                           ; Off                ; Off                ;
 ; NOT Gate Push-Back                                           ; On                 ; On                 ;
-; Power-Up Don't Care                                          ; On                 ; On                 ;
 ; Remove Redundant Logic Cells                                 ; Off                ; Off                ;
 ; Remove Duplicate Registers                                   ; On                 ; On                 ;
 ; Ignore CARRY Buffers                                         ; Off                ; Off                ;
@@ -130,38 +133,39 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------+-------------------------------------+
 
 
-+---------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary             ;
-+---------------------------------------------+-----------+
-; Resource                                    ; Usage     ;
-+---------------------------------------------+-----------+
-; Total logic elements                        ; 6         ;
-;     -- Combinational with no register       ; 0         ;
-;     -- Register only                        ; 2         ;
-;     -- Combinational with a register        ; 4         ;
-;                                             ;           ;
-; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 0         ;
-;     -- 3 input functions                    ; 0         ;
-;     -- 2 input functions                    ; 2         ;
-;     -- 1 input functions                    ; 2         ;
-;     -- 0 input functions                    ; 0         ;
-;                                             ;           ;
-; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 6         ;
-;     -- arithmetic mode                      ; 0         ;
-;     -- qfbk mode                            ; 0         ;
-;     -- register cascade mode                ; 0         ;
-;     -- synchronous clear/load mode          ; 0         ;
-;     -- asynchronous clear/load mode         ; 0         ;
-;                                             ;           ;
-; Total registers                             ; 6         ;
-; I/O pins                                    ; 12        ;
-; Maximum fan-out node                        ; CLK_48MHZ ;
-; Maximum fan-out                             ; 6         ;
-; Total fan-out                               ; 23        ;
-; Average fan-out                             ; 1.28      ;
-+---------------------------------------------+-----------+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Total logic elements                        ; 41    ;
+;     -- Combinational with no register       ; 11    ;
+;     -- Register only                        ; 7     ;
+;     -- Combinational with a register        ; 23    ;
+;                                             ;       ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 11    ;
+;     -- 3 input functions                    ; 6     ;
+;     -- 2 input functions                    ; 12    ;
+;     -- 1 input functions                    ; 4     ;
+;     -- 0 input functions                    ; 1     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 36    ;
+;     -- arithmetic mode                      ; 5     ;
+;     -- qfbk mode                            ; 0     ;
+;     -- register cascade mode                ; 0     ;
+;     -- synchronous clear/load mode          ; 6     ;
+;     -- asynchronous clear/load mode         ; 0     ;
+;                                             ;       ;
+; Total registers                             ; 30    ;
+; Total logic cells in carry chains           ; 6     ;
+; I/O pins                                    ; 19    ;
+; Maximum fan-out node                        ; CBCLK ;
+; Maximum fan-out                             ; 23    ;
+; Total fan-out                               ; 153   ;
+; Average fan-out                             ; 2.55  ;
++---------------------------------------------+-------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -169,9 +173,36 @@ applicable agreement for further details.
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
-; |Test1                     ; 6 (6)       ; 6            ; 0           ; 0            ; 0       ; 0         ; 0         ; 12   ; 0            ; 0 (0)        ; 2 (2)             ; 4 (4)            ; 0 (0)           ; 0 (0)      ; |Test1              ; work         ;
+; |Test1                     ; 41 (41)     ; 30           ; 0           ; 0            ; 0       ; 0         ; 0         ; 19   ; 0            ; 11 (11)      ; 7 (7)             ; 23 (23)          ; 6 (6)           ; 0 (0)      ; |Test1              ; work         ;
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------+
+; State Machine - |Test1|CC_state                       ;
++-------------+-------------+-------------+-------------+
+; Name        ; CC_state.00 ; CC_state.10 ; CC_state.01 ;
++-------------+-------------+-------------+-------------+
+; CC_state.00 ; 0           ; 0           ; 0           ;
+; CC_state.01 ; 1           ; 0           ; 1           ;
+; CC_state.10 ; 1           ; 1           ; 0           ;
++-------------+-------------+-------------+-------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------+
+; State Machine - |Test1|spi_state                                                                              ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; Name          ; spi_state.101 ; spi_state.100 ; spi_state.011 ; spi_state.010 ; spi_state.001 ; spi_state.000 ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; spi_state.000 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ;
+; spi_state.001 ; 0             ; 0             ; 0             ; 0             ; 1             ; 1             ;
+; spi_state.010 ; 0             ; 0             ; 0             ; 1             ; 0             ; 1             ;
+; spi_state.011 ; 0             ; 0             ; 1             ; 0             ; 0             ; 1             ;
+; spi_state.100 ; 0             ; 1             ; 0             ; 0             ; 0             ; 1             ;
+; spi_state.101 ; 1             ; 0             ; 0             ; 0             ; 0             ; 1             ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
 
 
 Encoding Type:  One-Hot
@@ -187,15 +218,30 @@ Encoding Type:  One-Hot
 +----------+----------+----------+----------+----------+
 
 
-+------------------------------------------------------------+
-; Registers Removed During Synthesis                         ;
-+---------------------------------------+--------------------+
-; Register name                         ; Reason for Removal ;
-+---------------------------------------+--------------------+
-; state~7                               ; Lost fanout        ;
-; state~8                               ; Lost fanout        ;
-; Total Number of Removed Registers = 2 ;                    ;
-+---------------------------------------+--------------------+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; previous_DAC_data[11]                  ; Stuck at GND due to stuck port data_in ;
+; previous_DAC_data[1]                   ; Merged with previous_DAC_data[2]       ;
+; previous_DAC_data[2]                   ; Merged with previous_DAC_data[3]       ;
+; previous_DAC_data[3]                   ; Merged with previous_DAC_data[4]       ;
+; previous_DAC_data[4]                   ; Merged with previous_DAC_data[5]       ;
+; previous_DAC_data[5]                   ; Merged with previous_DAC_data[6]       ;
+; previous_DAC_data[6]                   ; Merged with previous_DAC_data[7]       ;
+; previous_DAC_data[7]                   ; Merged with previous_DAC_data[8]       ;
+; previous_DAC_data[8]                   ; Merged with previous_DAC_data[9]       ;
+; previous_DAC_data[9]                   ; Merged with previous_DAC_data[10]      ;
+; previous_DAC_data[10]                  ; Merged with previous_DAC_data[0]       ;
+; spi_state~8                            ; Lost fanout                            ;
+; spi_state~9                            ; Lost fanout                            ;
+; spi_state~10                           ; Lost fanout                            ;
+; state~7                                ; Lost fanout                            ;
+; state~8                                ; Lost fanout                            ;
+; CC_state.00                            ; Lost fanout                            ;
+; Total Number of Removed Registers = 17 ;                                        ;
++----------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -203,14 +249,24 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 6     ;
+; Total registers                              ; 30    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Synchronous Load   ; 6     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 6     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Test1|bits[5]             ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Test1|data_count[3]       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 
 
 +-------------------------------+
@@ -219,12 +275,52 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.0 Build 215 05/29/2008 SJ Web Edition
-    Info: Processing started: Thu Nov 06 21:25:02 2008
+    Info: Processing started: Fri Nov 07 21:30:15 2008
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Phoenix -c Test1
+Info: Found 1 design units, including 1 entities, in source file division.v
+    Info: Found entity 1: division
 Info: Found 1 design units, including 1 entities, in source file Test1.v
     Info: Found entity 1: Test1
 Info: Elaborating entity "Test1" for the top level hierarchy
+Warning (14130): Reduced register "previous_DAC_data[11]" with stuck data_in port to stuck value GND
+Info: Duplicate registers merged to single register
+    Info (13350): Duplicate register "previous_DAC_data[1]" merged to single register "previous_DAC_data[2]"
+    Info (13350): Duplicate register "previous_DAC_data[2]" merged to single register "previous_DAC_data[3]"
+    Info (13350): Duplicate register "previous_DAC_data[3]" merged to single register "previous_DAC_data[4]"
+    Info (13350): Duplicate register "previous_DAC_data[4]" merged to single register "previous_DAC_data[5]"
+    Info (13350): Duplicate register "previous_DAC_data[5]" merged to single register "previous_DAC_data[6]"
+    Info (13350): Duplicate register "previous_DAC_data[6]" merged to single register "previous_DAC_data[7]"
+    Info (13350): Duplicate register "previous_DAC_data[7]" merged to single register "previous_DAC_data[8]"
+    Info (13350): Duplicate register "previous_DAC_data[8]" merged to single register "previous_DAC_data[9]"
+    Info (13350): Duplicate register "previous_DAC_data[9]" merged to single register "previous_DAC_data[10]"
+    Info (13350): Duplicate register "previous_DAC_data[10]" merged to single register "previous_DAC_data[0]"
+Info: State machine "|Test1|CC_state" contains 3 states
+Info: State machine "|Test1|spi_state" contains 6 states
 Info: State machine "|Test1|state" contains 4 states
+Info: Selected Auto state machine encoding method for state machine "|Test1|CC_state"
+Info: Encoding result for state machine "|Test1|CC_state"
+    Info: Completed encoding using 3 state bits
+        Info: Encoded state bit "CC_state.00"
+        Info: Encoded state bit "CC_state.10"
+        Info: Encoded state bit "CC_state.01"
+    Info: State "|Test1|CC_state.00" uses code string "000"
+    Info: State "|Test1|CC_state.01" uses code string "101"
+    Info: State "|Test1|CC_state.10" uses code string "110"
+Info: Selected Auto state machine encoding method for state machine "|Test1|spi_state"
+Info: Encoding result for state machine "|Test1|spi_state"
+    Info: Completed encoding using 6 state bits
+        Info: Encoded state bit "spi_state.101"
+        Info: Encoded state bit "spi_state.100"
+        Info: Encoded state bit "spi_state.011"
+        Info: Encoded state bit "spi_state.010"
+        Info: Encoded state bit "spi_state.001"
+        Info: Encoded state bit "spi_state.000"
+    Info: State "|Test1|spi_state.000" uses code string "000000"
+    Info: State "|Test1|spi_state.001" uses code string "000011"
+    Info: State "|Test1|spi_state.010" uses code string "000101"
+    Info: State "|Test1|spi_state.011" uses code string "001001"
+    Info: State "|Test1|spi_state.100" uses code string "010001"
+    Info: State "|Test1|spi_state.101" uses code string "100001"
 Info: Selected Auto state machine encoding method for state machine "|Test1|state"
 Info: Encoding result for state machine "|Test1|state"
     Info: Completed encoding using 4 state bits
@@ -236,19 +332,23 @@ Info: Encoding result for state machine "|Test1|state"
     Info: State "|Test1|state.01" uses code string "0011"
     Info: State "|Test1|state.10" uses code string "0101"
     Info: State "|Test1|state.11" uses code string "1001"
-Warning: Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LED1" is stuck at GND
-Info: 2 registers lost all their fanouts during netlist optimizations. The first 2 are displayed below.
+Info: 6 registers lost all their fanouts during netlist optimizations. The first 6 are displayed below.
+    Info: Register "spi_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "spi_state~9" lost all its fanouts during netlist optimizations.
+    Info: Register "spi_state~10" lost all its fanouts during netlist optimizations.
     Info: Register "state~7" lost all its fanouts during netlist optimizations.
     Info: Register "state~8" lost all its fanouts during netlist optimizations.
-Info: Implemented 18 device resources after synthesis - the final resource count might be different
-    Info: Implemented 2 input pins
-    Info: Implemented 10 output pins
-    Info: Implemented 6 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 149 megabytes
-    Info: Processing ended: Thu Nov 06 21:25:02 2008
-    Info: Elapsed time: 00:00:00
-    Info: Total CPU time (on all processors): 00:00:00
+    Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
+Warning: Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "DDS_CLK"
+Info: Implemented 60 device resources after synthesis - the final resource count might be different
+    Info: Implemented 6 input pins
+    Info: Implemented 13 output pins
+    Info: Implemented 41 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 156 megabytes
+    Info: Processing ended: Fri Nov 07 21:30:16 2008
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
 
 

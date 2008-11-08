@@ -1,5 +1,5 @@
 Flow report for Test1
-Thu Nov 06 21:25:06 2008
+Fri Nov 07 21:30:19 2008
 Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------+
 ; Flow Summary                                                       ;
 +--------------------------+-----------------------------------------+
-; Flow Status              ; Successful - Thu Nov 06 21:25:06 2008   ;
+; Flow Status              ; Successful - Fri Nov 07 21:30:19 2008   ;
 ; Quartus II Version       ; 8.0 Build 215 05/29/2008 SJ Web Edition ;
 ; Revision Name            ; Test1                                   ;
 ; Top-level Entity Name    ; Test1                                   ;
@@ -45,8 +45,8 @@ applicable agreement for further details.
 ; Device                   ; EPM240T100C5                            ;
 ; Timing Models            ; Final                                   ;
 ; Met timing requirements  ; Yes                                     ;
-; Total logic elements     ; 6 / 240 ( 3 % )                         ;
-; Total pins               ; 12 / 80 ( 15 % )                        ;
+; Total logic elements     ; 39 / 240 ( 16 % )                       ;
+; Total pins               ; 19 / 80 ( 24 % )                        ;
 ; Total virtual pins       ; 0                                       ;
 ; Total memory bits        ; 0                                       ;
 ; DSP block 9-bit elements ; 0                                       ;
@@ -61,7 +61,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/06/2008 21:25:02 ;
+; Start date & time ; 11/07/2008 21:30:15 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Test1               ;
 +-------------------+---------------------+
@@ -72,7 +72,8 @@ applicable agreement for further details.
 +---------------------------------------+------------------------------+---------------+-------------+------------+
 ; Assignment Name                       ; Value                        ; Default Value ; Entity Name ; Section Id ;
 +---------------------------------------+------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID                 ; 123483488765.122597430203220 ; --            ; --          ; --         ;
+; ALLOW_POWER_UP_DONT_CARE              ; Off                          ; On            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                 ; 123483488765.122606101503420 ; --            ; --          ; --         ;
 ; POWER_EXT_SUPPLY_VOLTAGE_TO_REGULATOR ; 3.3V                         ; --            ; --          ; --         ;
 ; USE_GENERATED_PHYSICAL_CONSTRAINTS    ; Off                          ; --            ; --          ; eda_palace ;
 +---------------------------------------+------------------------------+---------------+-------------+------------+
@@ -83,11 +84,11 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:00:00     ; 1.0                     ; 149 MB              ; 00:00:00                           ;
+; Analysis & Synthesis    ; 00:00:01     ; 1.0                     ; 156 MB              ; 00:00:00                           ;
 ; Fitter                  ; 00:00:00     ; 1.0                     ; 155 MB              ; 00:00:00                           ;
 ; Assembler               ; 00:00:00     ; 1.0                     ; 133 MB              ; 00:00:00                           ;
 ; Classic Timing Analyzer ; 00:00:00     ; 1.0                     ; 108 MB              ; 00:00:00                           ;
-; Total                   ; 00:00:00     ; --                      ; --                  ; 00:00:00                           ;
+; Total                   ; 00:00:01     ; --                      ; --                  ; 00:00:00                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

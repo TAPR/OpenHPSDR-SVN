@@ -33,7 +33,6 @@ set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id e
 set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 100
 set_global_assignment -name POWER_EXT_SUPPLY_VOLTAGE_TO_REGULATOR 3.3V
-set_global_assignment -name VERILOG_FILE Test1.v
 set_global_assignment -name AUTO_RESTART_CONFIGURATION OFF
 set_global_assignment -name USE_CONFIGURATION_DEVICE ON
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
@@ -52,3 +51,15 @@ set_location_assignment PIN_98 -to RXOE2
 set_location_assignment PIN_89 -to TXOE1
 set_location_assignment PIN_90 -to TXOE2
 set_location_assignment PIN_52 -to PTT
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS OUTPUT DRIVING AN UNSPECIFIED SIGNAL"
+set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
+set_location_assignment PIN_70 -to CBCLK
+set_location_assignment PIN_21 -to DCLK
+set_location_assignment PIN_20 -to DIN
+set_location_assignment PIN_19 -to DLD
+set_location_assignment PIN_40 -to CC
+set_location_assignment PIN_58 -to CLRCLK
+set_global_assignment -name VERILOG_FILE division.v
+set_global_assignment -name VERILOG_FILE Test1.v
+set_location_assignment PIN_38 -to phase_data
+set_location_assignment PIN_17 -to DDS_CLK
