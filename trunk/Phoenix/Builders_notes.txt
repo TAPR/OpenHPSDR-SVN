@@ -12,6 +12,22 @@ towards the edge of the board and D3 the reverse.
 
 At this stage all voltage regulators working and PSU LEDs alight
 
-7. -10 volt rail is a little high at -11.2v - perhaps adjust divider resitors
+7. -10 volt rail is a little high at -11.2v - perhaps adjust divider resistors
 8. CPLD loads OK - green LED on!
+9. Pads for T1,2,4,5,6 a little small but most likely OK for reflow soldering
+10. L13.14.15,16 pads too wide or parts too small - used small parts with wire links
+11. U12 is connected to the 3.3v rail but is a 5v part. 
+    I decided not to fit U12 since the 3.3v drive from the CPLD may not be sufficient.
+    Instead I fitted a potential divider (10k/10k) to the input of U27 so as to give 
+    3.3/2v at pin 3. One end of a 10k goes to pin 8 of U12, the junction to pin 7
+    and the other to pin 5. There maybe an 3.3v version of U12. 
+
+At this stage will receive at 12MHz !!
+Note to self - set input jumpers on Janus to take balanced input
+
+12. Track missing between pins 7 and 8 of U3 and C15
+
+
+
+
 
