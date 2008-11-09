@@ -7,3 +7,4 @@ the genius that came up with this idea!).
 3. Watch the LED orientations - I have  D1, D2, D4, D5 with the green band 
 towards the edge of the board and D3 the reverse.
 4. U10 does not appear to be the correct part - fitted one from my junk box.
+5. C60,61,13,14,15, 16 either pads too small or part too big. - replaced with smaller from junk box.
