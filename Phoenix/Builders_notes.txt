@@ -8,3 +8,10 @@ the genius that came up with this idea!).
 towards the edge of the board and D3 the reverse.
 4. U10 does not appear to be the correct part - fitted one from my junk box.
 5. C60,61,13,14,15, 16 either pads too small or part too big. - replaced with smaller from junk box.
+6. Link pins 1 and 5 of U5,7,8,9,20 else they shutdown - PCB needs modifying.
+
+At this stage all voltage regulators working and PSU LEDs alight
+
+7. -10 volt rail is a little high at -11.2v - perhaps adjust divider resitors
+8. CPLD loads OK - green LED on!
+
