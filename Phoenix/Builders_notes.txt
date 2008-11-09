@@ -1,0 +1,9 @@
+Things I've found so far in the build - Phil - VK6APH 
+
+1. Pads for LEDs are a little far apart.
+2. Markings on LEDs - Green and Yellow have the green band as cathode, Red 
+has green band for the anode (I hope there is a special place in hell for 
+the genius that came up with this idea!).
+3. Watch the LED orientations - I have  D1, D2, D4, D5 with the green band 
+towards the edge of the board and D3 the reverse.
+4. U10 does not appear to be the correct part - fitted one from my junk box.
