@@ -26,6 +26,8 @@ At this stage will receive at 12MHz !!
 Note to self - set input jumpers on Janus to take balanced input
 
 12. Track missing between pins 7 and 8 of U3 and C15
+13. C13,14,15,16 should be reversed.
+
 
 
 
