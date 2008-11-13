@@ -39,7 +39,7 @@ module Test1(
 			  
 //assign LED1 = 1'b0;  // turn Yellow Led on
 assign LED1 = AD9912_phase[0]; // temp to get phase word code to compile 
-assign LED2 = PTT;   // turn Green  Led on when PTT active 
+assign LED2 = !PTT;   // turn Green  Led on when PTT active 
 
 
 // This test code divides the 48MHz clock from 
@@ -217,6 +217,8 @@ assign RXOE2 = RXOE1;
 
 assign TXOE1 = ~RXOE1;
 assign TXOE2 = ~RXOE2;
+
+
 
 
 
