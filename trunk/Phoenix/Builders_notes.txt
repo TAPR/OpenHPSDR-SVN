@@ -27,6 +27,14 @@ Note to self - set input jumpers on Janus to take balanced input
 
 12. Track missing between pins 7 and 8 of U3 and C15
 13. C13,14,15,16 should be reversed.
+14. U2 pin connections are wrong, reverse connections to pins 2 & 3 and 5 & 6
+
+At this stage will transmit at 12MHz - need to use PTT on Janus to Tx - need to fix Ozy code.
+
+15. Balanced output connector on Phoenix is different to that used on Janus so
+    can't use Ethernet cable to link the two boards. 
+
+
 
 
 

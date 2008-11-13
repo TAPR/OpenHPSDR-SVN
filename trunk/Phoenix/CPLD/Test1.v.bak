@@ -39,7 +39,7 @@ module Test1(
 			  
 //assign LED1 = 1'b0;  // turn Yellow Led on
 assign LED1 = AD9912_phase[0]; // temp to get phase word code to compile 
-assign LED2 = PTT;   // turn Green  Led on when PTT active 
+assign LED2 = !PTT;   // turn Green  Led on when PTT active 
 
 
 // This test code divides the 48MHz clock from 
@@ -173,7 +173,7 @@ case(CC_state)
 		end
 	end
 2:	begin
-	phase_word[bits] <= phase_data;						// this is the second CBCLK after negedge of CLRCLK
+	phase_word[bits] <= phase_data;			// this is the second CBCLK after negedge of CLRCLK
 		if (bits == 0)CC_state <= 0; 		// done so restart
 		else begin
 		bits <= bits - 1'b1;
@@ -190,11 +190,6 @@ always @ (negedge CLRCLK)
 begin 
 	AD9912_phase <= phase_word[31:0];
 end
-
-
-
-
-
 
 
 //////////////////////////////////////////////////////////////
@@ -220,8 +215,11 @@ assign RXOE2 = RXOE1;
 
 // enable QSE when PTT active, chip is active low 
 
-assign TXOE1 = ~RXOE1;
-assign TXOE2 = ~RXOE2;
+//assign TXOE1 = ~RXOE1;
+//assign TXOE2 = ~RXOE2;
+
+assign TXOE1 = 1'b1;
+assign TXOE2 = 1'b0;
 
 
 
