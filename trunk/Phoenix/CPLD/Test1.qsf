@@ -57,7 +57,7 @@ set_location_assignment PIN_21 -to DCLK
 set_location_assignment PIN_20 -to DIN
 set_location_assignment PIN_19 -to DLD
 set_location_assignment PIN_40 -to CC
-set_location_assignment PIN_58 -to CLRCLK
+set_location_assignment PIN_68 -to CLRCLK
 set_global_assignment -name VERILOG_FILE division.v
 set_global_assignment -name VERILOG_FILE Test1.v
 set_location_assignment PIN_38 -to phase_data

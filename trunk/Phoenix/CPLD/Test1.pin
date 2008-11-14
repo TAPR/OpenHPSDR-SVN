@@ -83,7 +83,7 @@ VCCINT                       : 13        : power  :                   : 3.3V    
 RESERVED_INPUT               : 14        :        :                   :         : 1         :                
 RESERVED_INPUT               : 15        :        :                   :         : 1         :                
 RESERVED_INPUT               : 16        :        :                   :         : 1         :                
-DDS_CLK                      : 17        : input  : 3.3-V LVTTL       :         : 1         : Y              
+DDS_CLK                      : 17        : output : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 18        :        :                   :         : 1         :                
 DLD                          : 19        : output : 3.3-V LVTTL       :         : 1         : Y              
 DIN                          : 20        : output : 3.3-V LVTTL       :         : 1         : Y              
@@ -106,7 +106,7 @@ RESERVED_INPUT               : 36        :        :                   :         
 RESERVED_INPUT               : 37        :        :                   :         : 1         :                
 phase_data                   : 38        : input  : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 39        :        :                   :         : 1         :                
-RESERVED_INPUT               : 40        :        :                   :         : 1         :                
+CC                           : 40        : input  : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 41        :        :                   :         : 1         :                
 RESERVED_INPUT               : 42        :        :                   :         : 1         :                
 RESERVED_INPUT               : 43        :        :                   :         : 1         :                
@@ -124,7 +124,7 @@ RESERVED_INPUT               : 54        :        :                   :         
 RESERVED_INPUT               : 55        :        :                   :         : 2         :                
 RESERVED_INPUT               : 56        :        :                   :         : 2         :                
 RESERVED_INPUT               : 57        :        :                   :         : 2         :                
-CLRCLK                       : 58        : input  : 3.3-V LVTTL       :         : 2         : Y              
+RESERVED_INPUT               : 58        :        :                   :         : 2         :                
 VCCIO2                       : 59        : power  :                   : 3.3V    : 2         :                
 GNDIO                        : 60        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 61        :        :                   :         : 2         :                
@@ -134,7 +134,7 @@ RESERVED_INPUT               : 64        :        :                   :         
 GNDINT                       : 65        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 66        :        :                   :         : 2         :                
 RESERVED_INPUT               : 67        :        :                   :         : 2         :                
-RESERVED_INPUT               : 68        :        :                   :         : 2         :                
+CLRCLK                       : 68        : input  : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 69        :        :                   :         : 2         :                
 CBCLK                        : 70        : input  : 3.3-V LVTTL       :         : 2         : Y              
 RESERVED_INPUT               : 71        :        :                   :         : 2         :                
