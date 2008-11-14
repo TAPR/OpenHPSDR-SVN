@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 0.369 ns
-From           : phase_data
-To             : phase_word[0]
+Actual Time    : 0.217 ns
+From           : CC
+To             : CCdata[58]
 From Clock     : --
 To Clock       : CBCLK
 Failed Paths   : 0
@@ -15,17 +15,17 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.352 ns
-From           : I_CLKRX~reg0
-To             : I_CLKRX
-From Clock     : CLK_48MHZ
+Actual Time    : 11.765 ns
+From           : DLD~reg0
+To             : DLD
+From Clock     : CBCLK
 To Clock       : --
 Failed Paths   : 0
 
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 6.679 ns
+Actual Time    : 8.510 ns
 From           : PTT
 To             : RXOE2
 From Clock     : --
@@ -35,9 +35,9 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : 2.624 ns
+Actual Time    : 2.540 ns
 From           : CLRCLK
-To             : CC_state.10
+To             : CC_state.01
 From Clock     : --
 To Clock       : CBCLK
 Failed Paths   : 0
@@ -45,9 +45,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'CBCLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 172.18 MHz ( period = 5.808 ns )
+Actual Time    : 147.84 MHz ( period = 6.764 ns )
 From           : CC_state.10
-To             : phase_word[0]
+To             : CCdata[58]
 From Clock     : CBCLK
 To Clock       : CBCLK
 Failed Paths   : 0
