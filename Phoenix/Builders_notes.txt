@@ -12,7 +12,7 @@ towards the edge of the board and D3 the reverse.
 
 At this stage all voltage regulators working and PSU LEDs alight
 
-7. -10 volt rail is a little high at -11.2v - perhaps adjust divider resistors
+7. -10 volt rail is a little high at -11.2v - perhaps adjust divider resistors?
 8. CPLD loads OK - green LED on!
 9. Pads for T1,2,4,5,6 a little small but most likely OK for reflow soldering
 10. L13.14.15,16 pads too wide or parts too small - used small parts with wire links
@@ -29,10 +29,17 @@ Note to self - set input jumpers on Janus to take balanced input
 13. C13,14,15,16 should be reversed.
 14. U2 pin connections are wrong, reverse connections to pins 2 & 3 and 5 & 6
 
-At this stage will transmit at 12MHz - need to use PTT on Janus to Tx - need to fix Ozy code.
+At this stage will transmit at 12MHz - need to use PTT on Janus to Tx
+
+Added CPLD code so now will Tx from PowerSDR.
+
+When testing Tx fit LPF or waveform will look odd on 'scope.  
 
 15. Balanced output connector on Phoenix is different to that used on Janus so
     can't use Ethernet cable to link the two boards. 
+16. Pads on the ends of F2 a little far apart.
+17. Is the 3dB frequency of F2 correct? It's 320MHz whilst the highest DDS frequency
+    will be 4 x 55MHz = 220MHz. Perhaps a lower corner frequency
 
 
 
