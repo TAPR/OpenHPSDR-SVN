@@ -74,7 +74,7 @@ RESERVED_INPUT               : 4         :        :                   :         
 RESERVED_INPUT               : 5         :        :                   :         : 1         :                
 RESERVED_INPUT               : 6         :        :                   :         : 1         :                
 RESERVED_INPUT               : 7         :        :                   :         : 1         :                
-RESERVED_INPUT               : 8         :        :                   :         : 1         :                
+DDS_OUT                      : 8         : input  : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 9         : power  :                   : 3.3V    : 1         :                
 GNDIO                        : 10        : gnd    :                   :         :           :                
 GNDINT                       : 11        : gnd    :                   :         :           :                

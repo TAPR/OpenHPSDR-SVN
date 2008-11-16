@@ -10,13 +10,15 @@
 //	7  Nov 2008 - Added SPI interface to LTC1451 DAC
 //			    - Added AD9912 phase word decoder
 //	14 Nov 2008 - Added C&C PTT decode from C20 for testing
-//				- Added 48MHz clock to DDS_CLK for testing AD9912  
+//				- Added 48MHz clock to DDS_CLK for testing AD9912
+//  16 Nov 2008 - Added AD9912 test code at 14.195MHz   
 
 
 module Test1(
 			  output LED1,			// Yellow LED
 			  output LED2,			// Green LED
-			  output  DDS_CLK,		// 125MHz clock 
+			  output DDS_CLK,		// 125MHz clock 
+			  input  DDS_OUT, 		// Clock from AD9912
 			  input  CLK_48MHZ,
 			  input  CBCLK, 		// 3.072MHz clock from Atlas C8
 			  input  CLRCLK,		// 48kHz clock from Atlas C9
@@ -34,10 +36,10 @@ module Test1(
 			  output reg DIN,		// LTC1451 SPI interface 
 			  output reg DCLK,
 			  output reg DLD
-			  //output IO_UPD,		// AD9912 control signals 
-			  //output CSB,
-			  //output SDIO,
-			  //output SCLK			  
+			  //output reg IO_UPD,		// AD9912 control signals 
+			  //output reg CSB = 1,
+			  //output reg SDIO,
+			  //output reg SCLK			  
 			  );
 			  
 assign LED1 = 1'b0;  // turn Green Led on
@@ -47,13 +49,15 @@ assign LED2 = !PTT_out;   // turn Yellow  Led on when PTT active
 // temp link DDS_CLK to 48MHz clock from Atlas so can test AD9912 
 assign DDS_CLK = CLK_48MHZ;
 
+
 // This test code divides the 48MHz clock from 
 // the Atlas bus on C3 by 4 to produce two signals
 // in phase quadrature to drive the QSD & QSE
 
 reg [1:0]state;
 
-always @ (posedge CLK_48MHZ)
+//always @ (posedge CLK_48MHZ) // temp use 48MHz clock from Atlas for QSD/QSE clock
+always @ (posedge DDS_OUT)
 begin
 case (state)
 0:	begin
@@ -231,7 +235,126 @@ end
 //
 /////////////////////////////////////////////////////////////
 
-// to do 
+
+// test code using 48MHz Atlas clock x 20 = 960MHz 
+// and DDS out = 14.195MHz
+
+// send data to SDIO since in 3 wire mode
+
+/*
+reg [5:0]bit_count;
+reg [22:0]DDS_setup;
+reg [62:0]DDS_data;
+wire write = 1;
+reg W1;
+reg W0; 
+reg [3:0]AD9912;
+
+always @ (posedge CBCLK)
+begin 
+
+case (AD9912)
+
+0: 	begin 
+	bit_count <=  22;
+	AD9912 <= 1;
+	W1 <= 0; W0 <= 0;
+	DDS_setup <= {write,W1,W0,12'h0020,8'h08}; // set up register 0020
+	end 
+1:  begin
+	CSB <= 0; // AD9912 chip select low
+	SDIO <= DDS_setup[bit_count];
+	AD9912 <= 2;
+	end
+2:	begin
+	SCLK <= 1; // clock data into AD9912
+	AD9912 <= 3;
+	end
+3:  begin
+	SCLK <= 0;
+	if (bit_count == 0)begin
+		bit_count <= 22; 	// reset counter for next register
+		DDS_setup <= {write,W1,W0,12'h0022,8'h80}; // set up register 0022
+		AD9912 <= 4;		// done so do next register
+		end 
+	else begin	
+		bit_count <= bit_count - 1'b1;
+		AD9912 <= 1; 		// send next bit
+		end
+	end
+4:  begin
+	SDIO <= DDS_setup[bit_count];
+	AD9912 <= 5;
+	end
+5:	begin
+	SCLK <= 1; // clock data into AD9912
+	AD9912 <= 6;
+	end
+6:	begin
+	SCLK <= 0;
+	if (bit_count == 0)begin
+		bit_count <= 22; 	// reset counter for next register
+		W1 <= 1; W0 <= 1;   // AD9912 streaming mode
+		DDS_setup <= {write,W1,W0,12'h0010,8'h80}; // set up register 0010
+		AD9912 <= 7;		// done so do next register
+		end 
+	else begin
+		bit_count <= bit_count - 1'b1;
+		AD9912 <= 4; 		// send next bit
+		end
+	end
+7:	begin
+	SDIO <= DDS_setup[bit_count];
+	AD9912 <= 8;
+	end
+8:	begin
+	SCLK <= 1; // clock data into AD9912
+	AD9912 <= 9;
+	end
+9:	begin
+	SCLK <= 0;
+	if (bit_count == 0)begin
+		bit_count <= 62; 	// reset counter for next register
+		W1 <= 1; W0 <= 1;   // AD9912 streaming mode
+		DDS_data <= {write,W1,W0,12'h01AB,8'h0F,8'h24,8'h2E,8'h6B,8'hDC,8'h80}; // set up phase word 
+		AD9912 <= 10;		// done so do next register
+		end 
+	else begin
+		bit_count <= bit_count - 1'b1;
+		AD9912 <= 7; 		// send next bit
+		end
+	end
+10:  begin
+	SDIO <= DDS_data[bit_count];
+	AD9912 <= 11;
+	end
+11:	begin
+	SCLK <= 1; // clock data into AD9912
+	AD9912 <= 12;
+	end
+12:	begin
+	SCLK <= 0;
+	if (bit_count == 0)begin
+		CSB <= 1; 				// de-select AD9912
+		AD9912 <= 13; 
+		end
+	else begin
+		bit_count <= bit_count - 1'b1;
+		AD9912 <= 10;
+		end 
+	end
+13: begin
+	IO_UPD <= 1;
+	AD9912 <= 14;
+	end
+14: begin
+	IO_UPD <= 0;
+	AD9912 <= 0;  // loop for now
+	end	
+endcase
+end
+
+*/
 
 
 //////////////////////////////////////////////////////////////

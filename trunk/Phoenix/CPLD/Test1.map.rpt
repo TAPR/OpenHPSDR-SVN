@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Test1
-Fri Nov 14 21:05:37 2008
+Sun Nov 16 20:29:34 2008
 Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
 
 
@@ -44,13 +44,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                          ;
 +-----------------------------+-----------------------------------------+
-; Analysis & Synthesis Status ; Successful - Fri Nov 14 21:05:37 2008   ;
+; Analysis & Synthesis Status ; Successful - Sun Nov 16 20:29:34 2008   ;
 ; Quartus II Version          ; 8.0 Build 215 05/29/2008 SJ Web Edition ;
 ; Revision Name               ; Test1                                   ;
 ; Top-level Entity Name       ; Test1                                   ;
 ; Family                      ; MAX II                                  ;
 ; Total logic elements        ; 42                                      ;
-; Total pins                  ; 20                                      ;
+; Total pins                  ; 21                                      ;
 ; Total virtual pins          ; 0                                       ;
 ; Total memory bits           ; 0                                       ;
 ; DSP block 9-bit elements    ; 0                                       ;
@@ -160,11 +160,11 @@ applicable agreement for further details.
 ;                                             ;       ;
 ; Total registers                             ; 30    ;
 ; Total logic cells in carry chains           ; 6     ;
-; I/O pins                                    ; 20    ;
+; I/O pins                                    ; 21    ;
 ; Maximum fan-out node                        ; CBCLK ;
 ; Maximum fan-out                             ; 23    ;
 ; Total fan-out                               ; 157   ;
-; Average fan-out                             ; 2.53  ;
+; Average fan-out                             ; 2.49  ;
 +---------------------------------------------+-------+
 
 
@@ -173,7 +173,7 @@ applicable agreement for further details.
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
-; |Test1                     ; 42 (42)     ; 30           ; 0           ; 0            ; 0       ; 0         ; 0         ; 20   ; 0            ; 12 (12)      ; 7 (7)             ; 23 (23)          ; 6 (6)           ; 0 (0)      ; |Test1              ; work         ;
+; |Test1                     ; 42 (42)     ; 30           ; 0           ; 0            ; 0       ; 0         ; 0         ; 21   ; 0            ; 12 (12)      ; 7 (7)             ; 23 (23)          ; 6 (6)           ; 0 (0)      ; |Test1              ; work         ;
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -275,7 +275,7 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.0 Build 215 05/29/2008 SJ Web Edition
-    Info: Processing started: Fri Nov 14 21:05:36 2008
+    Info: Processing started: Sun Nov 16 20:29:34 2008
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Phoenix -c Test1
 Info: Found 1 design units, including 1 entities, in source file division.v
     Info: Found entity 1: division
@@ -343,14 +343,14 @@ Info: 6 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "phase_data"
-Info: Implemented 62 device resources after synthesis - the final resource count might be different
-    Info: Implemented 6 input pins
+Info: Implemented 63 device resources after synthesis - the final resource count might be different
+    Info: Implemented 7 input pins
     Info: Implemented 14 output pins
     Info: Implemented 42 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 5 warnings
     Info: Peak virtual memory: 156 megabytes
-    Info: Processing ended: Fri Nov 14 21:05:37 2008
+    Info: Processing ended: Sun Nov 16 20:29:35 2008
     Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:00
+    Info: Total CPU time (on all processors): 00:00:01
 
 
