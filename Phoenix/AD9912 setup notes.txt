@@ -1,0 +1,86 @@
+16 November 2008 - AD9912 setup notes - VK6APH 
+
+For initial testing we will use the 48MHz clock for the FX2 via the Atlas backplane 
+on pin C3 as the AD9912 clock.
+
+In order to use a ~1GHz clock the internal AD9912 PLL will need to multiply by
+
+1000/48 = 20.8 so use x20 which will result in a 960MHz clock.
+
+For testing the AD9912 status pins S1-S4 are all set to 0 via 10k pulldown resitors
+
+From the AD9912 data sheet the first 16 bits send to the AD9912 is an instruction word.
+
+The MSB determines if the following data is Read (high) or Write(low).
+The next two bits determine the number of Bytes that are transferred e.g.
+
+W1  W0  Bytes to transfer
+0   0   1
+0   1   2
+1   0   3
+1   1   Streaming mode
+
+the final 13 bits are the register address at which to begin the read or write operation.
+
+
+The default data format is MSB first which is what we will use. 
+In which case the the serial control port register decrements from the 
+address just written towards 0x0000 for multibyte I/O operations.
+
+Unused registers should not be skipped during multibyte operation.
+
+Hence data format is 
+
+<W/R><W1><W0><Address><Register (N) data><Register (N-1) data> etc
+
+Power on defaults
+
+Reg    Default Value
+0000   3 wire interface
+
+
+
+Hence registers that need setting 
+
+0010   0x80   Set *** as output 
+0020   0x08   PLL  - since 2 is added automatically giving 10 then auto x 2 giving 20.
+0022   0x80   VCO auto range.
+01A6 to 01AB 48 bits of tuning word LSB = 01A6
+
+
+Test data: with 960MHz clock and say 4 x 14.195MHz ouput
+
+output = 4x 14.195 = 56.78MHz
+
+hence phase word = (frequency * 2^48) /960e6
+                 = 56780000 * 2^48/960e6 = 0x0F242E6BDC80
+
+
+Hence test data is: 
+
+
+write = 1;
+W1 = 0;W0 = 0;
+
+DDS_setup = {write,W1,W0,12'h0010,8'h08}; // set up register 0010
+DDS_setup = {write,W1,W0,12'h0020,8'h08}; // set up register 0020
+DDS_setup = {write,W1,W0,12'h0022,8'h80}; // set up register 0022
+
+W1 = 1; W0 = 1;  // select streaming mode for frequency 
+
+dds_data = {write,W1,W0,12'h01AB,8'h0F,8'h24,8'h2E,8'h6B,8'hDC,8'h80}; // set up phase word 
+
+
+
+
+
+
+
+
+   
+
+
+
+ 
+
+
