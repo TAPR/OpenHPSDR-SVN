@@ -181,8 +181,9 @@
 //							 - Added Alex relay control to C&C data
 //				 1 July 2008 - Added multiple test for C&C data before sending to Atlas bus
 //				 8 July 2008 - Removed above code since not required with slower Alex SPI clock
-//				11 July 2008 - Added JTAG programming support 
-//
+//				11 July 2008 - Added JTAG programming support
+//				16 Nov  2008 - Set C&C address to 0x0000 ready for Pheonix support  
+//							 - Compiled with Quartus V8.0
 //
 ////////////////////////////////////////////////////////////
 
@@ -1320,8 +1321,8 @@ reg  [31:0]frequency;
 reg  [2:0]same_count;
 
 
-// dummy address data for now 
-assign CC_address = 4'b0110;
+//set address data to 0000, this will change when Pheonix is used
+assign CC_address = 4'b0000;
 
 assign CCdata = {PTT_out,CC_address,frequency,clock_s,OC,mode,PGA,DITHER,RAND,ATTEN,TX_relay, Rout, RX_relay}; // concatenate data to send 
 
