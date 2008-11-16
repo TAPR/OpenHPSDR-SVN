@@ -46,8 +46,19 @@ assign LED1 = 1'b0;  // turn Green Led on
 //assign LED1 = AD9912_phase[0]; // temp to get phase word code to compile 
 assign LED2 = !PTT_out;   // turn Yellow  Led on when PTT active 
 
+// divide 48MHz by 2 for testing AD9912 default mode
+
+reg CLK_25MHZ; 
+
+always @ (posedge CLK_48MHZ)
+begin
+	CLK_25MHZ = !CLK_25MHZ;
+end 
+
+
+
 // temp link DDS_CLK to 48MHz clock from Atlas so can test AD9912 
-assign DDS_CLK = CLK_48MHZ;
+assign DDS_CLK = CLK_25MHZ; //CLK_48MHZ;
 
 
 // This test code divides the 48MHz clock from 

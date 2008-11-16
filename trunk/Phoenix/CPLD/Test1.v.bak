@@ -241,6 +241,7 @@ end
 
 // send data to SDIO since in 3 wire mode
 
+/*
 reg [5:0]bit_count;
 reg [22:0]DDS_setup;
 reg [62:0]DDS_data;
@@ -353,7 +354,7 @@ case (AD9912)
 endcase
 end
 
-
+*/
 
 
 //////////////////////////////////////////////////////////////
