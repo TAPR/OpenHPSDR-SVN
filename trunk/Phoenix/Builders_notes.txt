@@ -33,7 +33,7 @@ At this stage will transmit at 12MHz - need to use PTT on Janus to Tx
 
 Added CPLD code so now will Tx from PowerSDR.
 
-When testing Tx fit LPF or waveform will look odd on 'scope.  
+When testing Tx fit LPF on output or waveform will look odd on 'scope.  
 
 15. Balanced output connector on Phoenix is different to that used on Janus so
     can't use Ethernet cable to link the two boards. 
@@ -41,7 +41,20 @@ When testing Tx fit LPF or waveform will look odd on 'scope.
 17. Is the 3dB frequency of F2 correct? It's 320MHz whilst the highest DDS frequency
     will be 4 x 55MHz = 220MHz. Perhaps a lower corner frequency
 
+Testing AD9912
 
+18. Set S1,S2 & S4 to 0 via R24,R29,R31 and S3 to 1 via R25. This enables the AD9912
+    to be tested without loading the CPLD by connecting a 48MHz sine wave clock to BUS_CLK. 
+    S3 = 1 also selects the AD9912 PLL which is need.
+19. Set AD9912 as above and check for a signal at about 100MHz at T5. 
+
+ 
+At this stage can load latest CPLD code and run Janus_Ozy and can set frequency of 
+AD9912!
+
+20. The AD9912 PLL does not lock correctly when run from the 48MHz clock from the CPLD.
+    PLacing a 1k in place of JP2 with a 100pf to ground at C42 cures this. It maybe
+    that the PLL loop is not correct for a PLL x 20 - will investigate.
 
 
 

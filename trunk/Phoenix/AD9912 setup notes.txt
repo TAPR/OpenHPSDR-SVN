@@ -7,7 +7,9 @@ In order to use a ~1GHz clock the internal AD9912 PLL will need to multiply by
 
 1000/48 = 20.8 so use x20 which will result in a 960MHz clock.
 
-For testing the AD9912 status pins S1-S4 are all set to 0 via 10k pulldown resitors
+For testing the AD9912 status pins S1-S4 are set to 0,0,1,0 via 10k resitors. This
+enables the AD9912 to be tested by just applying power and a 48MHZ clock. It also
+selects the internal PLL for use later on.
 
 From the AD9912 data sheet the first 16 bits send to the AD9912 is an instruction word.
 
@@ -41,11 +43,10 @@ Reg    Default Value
 
 
 Hence registers that need setting 
-
-0010   0x80   Set *** as output 
-0020   0x08   PLL  - since 2 is added automatically giving 10 then auto x 2 giving 20.
+ 
+0020   0x08   PLL  - set to 8 since 2 is added automatically giving 10 then auto x 2 giving 20.
 0022   0x80   VCO auto range.
-01A6 to 01AB 48 bits of tuning word LSB = 01A6
+01A6 to 01AB  48 bits of tuning word LSB = 01A6
 
 
 Test data: with 960MHz clock and say 4 x 14.195MHz ouput
@@ -56,19 +57,23 @@ hence phase word = (frequency * 2^48) /960e6
                  = 56780000 * 2^48/960e6 = 0x0F242E6BDC80
 
 
+for 1MHZ out of DDS 
+
+phase word = 1000000 * 2^48/960e6 = 0x004444444444
+
+
 Hence test data is: 
 
 
-write = 1;
+write = 0;
 W1 = 0;W0 = 0;
 
-DDS_setup = {write,W1,W0,12'h0010,8'h08}; // set up register 0010
-DDS_setup = {write,W1,W0,12'h0020,8'h08}; // set up register 0020
-DDS_setup = {write,W1,W0,12'h0022,8'h80}; // set up register 0022
+DDS_setup = {write,W1,W0,13'h0020,8'h08}; // set up register 0020
+DDS_setup = {write,W1,W0,13'h0022,8'h80}; // set up register 0022
 
 W1 = 1; W0 = 1;  // select streaming mode for frequency 
 
-dds_data = {write,W1,W0,12'h01AB,8'h0F,8'h24,8'h2E,8'h6B,8'hDC,8'h80}; // set up phase word 
+dds_data = {write,W1,W0,13'h01AB,8'h0F,8'h24,8'h2E,8'h6B,8'hDC,8'h80}; // set up phase word for 14.195MHz
 
 
 
