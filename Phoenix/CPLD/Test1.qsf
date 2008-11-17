@@ -67,3 +67,5 @@ set_location_assignment PIN_1 -to SCLK
 set_location_assignment PIN_2 -to SDIO
 set_location_assignment PIN_8 -to DDS_OUT
 set_location_assignment PIN_5 -to IO_UPD
+set_global_assignment -name ADD_DEFAULT_PINS_TO_SIMULATION_OUTPUT_WAVEFORMS OFF
+set_global_assignment -name VECTOR_WAVEFORM_FILE Test1.vwf
