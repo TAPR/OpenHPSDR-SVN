@@ -58,8 +58,6 @@ set_location_assignment PIN_20 -to DIN
 set_location_assignment PIN_19 -to DLD
 set_location_assignment PIN_40 -to CC
 set_location_assignment PIN_68 -to CLRCLK
-set_global_assignment -name VERILOG_FILE division.v
-set_global_assignment -name VERILOG_FILE Test1.v
 set_location_assignment PIN_38 -to phase_data
 set_location_assignment PIN_17 -to DDS_CLK
 set_location_assignment PIN_4 -to CSB
@@ -68,4 +66,5 @@ set_location_assignment PIN_2 -to SDIO
 set_location_assignment PIN_8 -to DDS_OUT
 set_location_assignment PIN_5 -to IO_UPD
 set_global_assignment -name ADD_DEFAULT_PINS_TO_SIMULATION_OUTPUT_WAVEFORMS OFF
+set_global_assignment -name VERILOG_FILE Test1.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE Test1.vwf

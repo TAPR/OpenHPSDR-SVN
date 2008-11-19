@@ -1,4 +1,4 @@
-// 6 Nov 2008 - Phil Harman VK6APH 
+// 19 Nov 2008 - Phil Harman VK6APH 
 // Test1 file for Phoenix CPLD 
 //
 //
@@ -11,7 +11,8 @@
 //			    - Added AD9912 phase word decoder
 //	14 Nov 2008 - Added C&C PTT decode from C20 for testing
 //				- Added 48MHz clock to DDS_CLK for testing AD9912
-//  16 Nov 2008 - Added AD9912 test code at 14.195MHz   
+//  16 Nov 2008 - Added AD9912 test code at 14.195MHz and 1MHz
+//  19 Nov 2008 - Added decode of Phoenix C&C data from Atlas C21  
 
 
 module Test1(
@@ -24,7 +25,7 @@ module Test1(
 			  input  CLRCLK,		// 48kHz clock from Atlas C9
 			  input  PTT,			// PTT from Atlas C15, active high
 			  input  phase_data,	// AD9912 phase data from Atlas C21
-			  input  CC,			// C&C data from C20 for testing
+			  input  CC,			// C&C data from C21 for testing
 			  output reg I_CLKRX,	// QSD I clock
 			  output reg Q_CLKRX,	// QSD Q clock
 			  output I_CLKTX,		// QSE I clock
@@ -42,9 +43,8 @@ module Test1(
 			  output reg SCLK			  
 			  );
 			  
-assign LED1 = 1'b0;  // turn Green Led on
-//assign LED1 = AD9912_phase[0]; // temp to get phase word code to compile 
-assign LED2 = !PTT_out;   // turn Yellow  Led on when PTT active 
+assign LED1 = 1'b0;  		// turn Green Led on
+assign LED2 = !PTT_out;   	// turn Yellow  Led on when PTT active 
 
 // divide 48MHz by 2 for testing AD9912 default mode
 
@@ -155,54 +155,28 @@ case (spi_state)
 endcase
 end
 
-//////////////////////////////////////////////////////////////
-//
-// 		Phase Word  receiver
-//
-/////////////////////////////////////////////////////////////
-
-/*
-
-	The Phase Word  encoder in Ozy broadcasts data over the Atlas bus (C21)**** 
-	the phase word used by the AD9912.  The data is in 
-	I2S format with the clock being CBLCK and the start of each frame
-	being indicated using the negative edge of CLRCLK.
-	
-	The data format is as follows:
-	
-	<[32]PTT><[31:0]phase_word> **** not yet implemented
-	use C&C on C20 for testing to give PTT signal
-	
-*/
-
-// to do
-
 ///////////////////////////////////////////////////////////
 //
-//    Command and Control Decoder 
+//    Phoenix Command and Control Decoder 
 //
 ///////////////////////////////////////////////////////////
 /*
 
-	The C&C encoder in Ozy broadcasts data over the Atlas bus (C20) for
-	use by other cards e.g. Mercury and Penelope.  The data is in 
-	I2S format with the clock being CBLCK and the start of each frame
+	The temporary Phoenix C&C encoder in Ozy broadcasts data over the Atlas bus (C21) for
+	use by Phoenix.  The data is in I2S format with the clock being CBLCK and the start of each frame
 	being indicated using the negative edge of CLRCLK.
 	
 	The data format is as follows:
 	
-	<[58]PTT><[57:54]address><[53:22]frequency><[21:18]clock_select><[17:11]OC><[10]Mode>
-	<[9]PGA><[8]DITHER><[7]RAND><[6:5]ATTEN><[4:3]TX_relay><[2]Rout><[1:0]RX_relay> 
+	<[32]PTT><[31:0]phase_word>
 	
-	for a total of 59 bits. Frequency is in Hz and 32 bit binary format and 
-	OC is the open collector data on Penelope. Mode is for a future Class E PA,
-	PGA, DITHER and RAND are ADC settings and ATTEN the attenuator on Alex
+	for a total of 33 bits. 
 	
 */
 
 reg [5:0] bits;     // how many bits clocked 
 reg [1:0]CC_state;
-reg [58:0] CCdata;	// 54 bits of C&C data
+reg [32:0] CCdata;	// 33 bits of C&C data
 
 always @(posedge CBCLK)  // use CBCLK  from Atlas C8 
 begin
@@ -214,7 +188,7 @@ case(CC_state)
 1:	begin
 		if (CLRCLK)	CC_state <= 1;			// loop until CLRCLK is low  
 		else begin
-		bits <= 6'd58;						
+		bits <= 6'd32;						
 		CC_state <= 2;
 		end
 	end
@@ -233,10 +207,12 @@ end
 // decode C & C data into variables and sync to 48kHz LR clock
 
 reg PTT_out;
+reg [47:0] phase_word;
 
 always @ (negedge CLRCLK)  
 begin 
-	PTT_out <= (CCdata[58]); 	// PTT from PC via USB 
+	PTT_out <= CCdata[32]; 	    			// PTT from PC via USB
+	phase_word <= {CCdata[31:0],16'h0000};	// 32 bit AD9912 phase word from Ozy extended to 48 bits 
 end
 
 
@@ -248,7 +224,7 @@ end
 
 
 // test code using 48MHz Atlas clock x 20 = 960MHz 
-// and DDS out = 14.195MHz
+// and DDS out = 14.195MHz or 1MHz.
 
 // send data to SDIO since in 3 wire mode
 
@@ -282,8 +258,9 @@ case (AD9912)
 	SCLK <= 0;
 	if (bit_count == 0)begin
 		bit_count <= 63; 			// reset counter for next register
-		//DDS_data <= {write,1'b1,1'b1,13'h01AB,8'h0F,8'h24,8'h2E,8'h6B,8'hDC,8'h80}; // set up phase word 
-		DDS_data <= {write,1'b1,1'b1,13'h01AB,8'h00,8'h44,8'h44,8'h44,8'h44,8'h44}; // set up phase word 
+		//DDS_data <= {write,1'b1,1'b1,13'h01AB,8'h0F,8'h24,8'h2E,8'h6B,8'hDC,8'h80}; // set up phase word for 14.195MHz
+		//DDS_data <= {write,1'b1,1'b1,13'h01AB,8'h00,8'h44,8'h44,8'h44,8'h44,8'h44}; // set up phase word for 1MHz
+		DDS_data <= {write,1'b1,1'b1,13'h01AB,phase_word}; // set up phase word from Ozy
 		AD9912 <= 4;				// done so do next register
 		end 
 	else begin
