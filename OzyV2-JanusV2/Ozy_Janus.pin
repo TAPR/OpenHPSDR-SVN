@@ -261,7 +261,7 @@ RESERVED_INPUT               : 189       :        :                   :         
 VCCINT                       : 190       : power  :                   : 1.2V    :           :                
 RESERVED_INPUT               : 191       :        :                   :         : 2         :                
 RESERVED_INPUT               : 192       :        :                   :         : 2         :                
-RESERVED_INPUT               : 193       :        :                   :         : 2         :                
+PCC                          : 193       : output : 3.3-V LVTTL       :         : 2         : N              
 VCCIO2                       : 194       : power  :                   : 3.3V    : 2         :                
 RESERVED_INPUT               : 195       :        :                   :         : 2         :                
 GND                          : 196       : gnd    :                   :         :           :                
