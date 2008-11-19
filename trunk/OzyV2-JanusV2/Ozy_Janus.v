@@ -1,10 +1,10 @@
-// V1.9 11 July  2008 
+// V1.10 19 November  2008 
 //
 // Copyright 2006,2007, 2008 Bill Tracey KD5TFD and Phil Harman VK6APH
 //
 //  HPSDR - High Performance Software Defined Radio
 //
-//  Janus to Ozy to Penelope interface.
+//  Ozy to Janus/Penelope/Mercury/Phoenix  interface.
 //
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -184,6 +184,8 @@
 //				11 July 2008 - Added JTAG programming support
 //				16 Nov  2008 - Set C&C address to 0x0000 ready for Pheonix support  
 //							 - Compiled with Quartus V8.0
+//				19 Nov  2008 - Added test code for Phoenix i.e. calculate phase word and 
+//							   send via Atlas bus C21
 //
 ////////////////////////////////////////////////////////////
 
@@ -316,7 +318,7 @@ module Ozy_Janus(
         CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
 		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CC, PCLK_12MHZ, MCLK_12MHZ, MDOUT,
 		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, CLK_MCLK,
-		FX2_PE0, FX2_PE1, FX2_PE2, FX2_PE3, TDO, SDOBACK, TCK, TMS);
+		FX2_PE0, FX2_PE1, FX2_PE2, FX2_PE3, TDO, SDOBACK, TCK, TMS, PCC);
 		
 
 
@@ -353,7 +355,8 @@ output AK_reset;                // reset for AK5394A
 reg    DFS0;					// used to set AK5394A speed
 reg    DFS1;					// ditto 
 output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
-output CC;						// Command and Control data to Atlas bus 
+output CC;						// Command and Control data to Atlas bus
+output PCC;						// Command & Control data for Phoenix to Atlas bus 
 input  CDOUT_P;					// Mic data from Penelope
 
 // interface lines for GPIO control 
@@ -1359,6 +1362,73 @@ always @ (negedge CBCLK)
 begin
 	CC <= CCdata[CCcount];			// shift data out to Atlas bus MSB first
 end
+
+//////////////////////////////////////////////////////////////
+//
+//		Convert frequency to phase word for Phoenix 
+//		since the CPLD on that board it too small to 
+//		do the calculation
+//
+//////////////////////////////////////////////////////////////
+
+/*	
+	Calculates  phase_word = (frequency * 2^32) /960e6  i.e. 48MHz clock x 20 in AD9912
+	Each calculation takes ~ 1.5uS @ 48MHz
+	This method is quite fast enough and uses much fewer LEs than a Megafunction.
+	
+*/
+
+wire [31:0]phase_word;
+reg  [31:0]freq;
+wire ready;
+always @ (posedge ready)		// strobe frequecy when ready is set
+begin
+	freq <= frequency;	// frequency is current frequency in Hz e.g. 14,195,000Hz
+end 
+
+division division_phoenix(.quotient(phase_word),.ready(ready),.dividend(freq),.divider(32'd960000000),.clk(IFCLK));
+
+///////////////////////////////////////////////////////////////
+//
+//  Implements tempory  Command & Control  encoder for Phoenix 
+//
+///////////////////////////////////////////////////////////////
+
+/*
+	The temp C&C encoder broadcasts data over the Atlas bus C21 for
+	use by Phoenix.  The data is in pseudo I2S format with the clock
+      being CBLCK and the start of each frame being indicated using the
+      negative edge of CLRCLK.
+
+	This tempory code will be used until Penelope is modified to detect the address field
+      contained in the C&C data at Atlas C20.
+	
+	The data format is as follows:
+	
+	<[32]PTT><[31:0]phase_word>
+	
+	for a total of 33 bits. 
+*/
+
+wire [32:0]phoenix_data;		// current phoenix C&C data
+reg  PCC;					// C&C data out to Atlas bus C21
+
+assign phoenix_data = {PTT_out,phase_word}; // concatenate data to send 
+
+// send Phoenix C&C data to Atlas bus in I2S format
+// Reuse the CCcount register from the main C&C encoder which runs from 58 to 0
+// Hence subtract 26 from this to give 32 to 0
+
+// I2S data must be available on the 2nd positive edge of CBCLK after the CLRCLK transition
+always @ (negedge CBCLK)
+begin
+	if (CCcount > 25) 
+	PCC <= phoenix_data[CCcount - 26];	// shift data out to Atlas bus MSB first
+end
+
+
+
+
 
 ///////////////////////////////////////////////////////////////
 //
