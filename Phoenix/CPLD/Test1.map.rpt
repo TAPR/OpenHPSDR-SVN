@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Test1
-Mon Nov 17 21:51:55 2008
+Wed Nov 19 16:39:02 2008
 Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
 
 
@@ -17,9 +17,10 @@ Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
   9. State Machine - |Test1|spi_state
  10. State Machine - |Test1|state
  11. Registers Removed During Synthesis
- 12. General Register Statistics
- 13. Multiplexer Restructuring Statistics (Restructuring Performed)
- 14. Analysis & Synthesis Messages
+ 12. Removed Registers Triggering Further Register Optimizations
+ 13. General Register Statistics
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Analysis & Synthesis Messages
 
 
 
@@ -45,12 +46,12 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                          ;
 +-----------------------------+-----------------------------------------+
-; Analysis & Synthesis Status ; Successful - Mon Nov 17 21:51:55 2008   ;
+; Analysis & Synthesis Status ; Successful - Wed Nov 19 16:39:02 2008   ;
 ; Quartus II Version          ; 8.0 Build 215 05/29/2008 SJ Web Edition ;
 ; Revision Name               ; Test1                                   ;
 ; Top-level Entity Name       ; Test1                                   ;
 ; Family                      ; MAX II                                  ;
-; Total logic elements        ; 80                                      ;
+; Total logic elements        ; 206                                     ;
 ; Total pins                  ; 25                                      ;
 ; Total virtual pins          ; 0                                       ;
 ; Total memory bits           ; 0                                       ;
@@ -139,33 +140,33 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total logic elements                        ; 80    ;
-;     -- Combinational with no register       ; 28    ;
-;     -- Register only                        ; 12    ;
-;     -- Combinational with a register        ; 40    ;
+; Total logic elements                        ; 206   ;
+;     -- Combinational with no register       ; 58    ;
+;     -- Register only                        ; 76    ;
+;     -- Combinational with a register        ; 72    ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 22    ;
-;     -- 3 input functions                    ; 16    ;
-;     -- 2 input functions                    ; 22    ;
+;     -- 4 input functions                    ; 77    ;
+;     -- 3 input functions                    ; 19    ;
+;     -- 2 input functions                    ; 25    ;
 ;     -- 1 input functions                    ; 7     ;
-;     -- 0 input functions                    ; 1     ;
+;     -- 0 input functions                    ; 2     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 70    ;
+;     -- normal mode                          ; 196   ;
 ;     -- arithmetic mode                      ; 10    ;
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
 ;     -- synchronous clear/load mode          ; 12    ;
 ;     -- asynchronous clear/load mode         ; 0     ;
 ;                                             ;       ;
-; Total registers                             ; 52    ;
+; Total registers                             ; 148   ;
 ; Total logic cells in carry chains           ; 12    ;
 ; I/O pins                                    ; 25    ;
 ; Maximum fan-out node                        ; CBCLK ;
-; Maximum fan-out                             ; 44    ;
-; Total fan-out                               ; 296   ;
-; Average fan-out                             ; 2.82  ;
+; Maximum fan-out                             ; 108   ;
+; Total fan-out                               ; 727   ;
+; Average fan-out                             ; 3.15  ;
 +---------------------------------------------+-------+
 
 
@@ -174,7 +175,7 @@ applicable agreement for further details.
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
-; |Test1                     ; 80 (80)     ; 52           ; 0           ; 0            ; 0       ; 0         ; 0         ; 25   ; 0            ; 28 (28)      ; 12 (12)           ; 40 (40)          ; 12 (12)         ; 0 (0)      ; |Test1              ; work         ;
+; |Test1                     ; 206 (206)   ; 148          ; 0           ; 0            ; 0       ; 0         ; 0         ; 25   ; 0            ; 58 (58)      ; 76 (76)           ; 72 (72)          ; 12 (12)         ; 0 (0)      ; |Test1              ; work         ;
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -237,56 +238,88 @@ Encoding Type:  One-Hot
 +----------+----------+----------+----------+----------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                                           ;
-+-----------------------------------------------------------------------------------------------------+----------------------------------------+
-; Register name                                                                                       ; Reason for Removal                     ;
-+-----------------------------------------------------------------------------------------------------+----------------------------------------+
-; DDS_setup[0..2,4..22,24,26..28,30..37,39]                                                           ; Stuck at GND due to stuck port data_in ;
-; previous_DAC_data[11]                                                                               ; Stuck at GND due to stuck port data_in ;
-; DDS_data[0..1,3..5,7..9,11..13,15..17,19..21,23..25,27..29,31..33,35..37,39..47,50,52,54,57..60,63] ; Stuck at GND due to stuck port data_in ;
-; previous_DAC_data[8]                                                                                ; Merged with previous_DAC_data[0]       ;
-; previous_DAC_data[0]                                                                                ; Merged with previous_DAC_data[7]       ;
-; previous_DAC_data[7]                                                                                ; Merged with previous_DAC_data[6]       ;
-; previous_DAC_data[6]                                                                                ; Merged with previous_DAC_data[5]       ;
-; previous_DAC_data[5]                                                                                ; Merged with previous_DAC_data[4]       ;
-; previous_DAC_data[4]                                                                                ; Merged with previous_DAC_data[3]       ;
-; previous_DAC_data[3]                                                                                ; Merged with previous_DAC_data[2]       ;
-; previous_DAC_data[2]                                                                                ; Merged with previous_DAC_data[1]       ;
-; previous_DAC_data[1]                                                                                ; Merged with previous_DAC_data[10]      ;
-; previous_DAC_data[10]                                                                               ; Merged with previous_DAC_data[9]       ;
-; DDS_setup[23]                                                                                       ; Merged with DDS_setup[25]              ;
-; DDS_setup[25]                                                                                       ; Merged with DDS_setup[29]              ;
-; DDS_setup[29]                                                                                       ; Merged with DDS_setup[38]              ;
-; DDS_setup[38]                                                                                       ; Merged with DDS_setup[3]               ;
-; DDS_data[2]                                                                                         ; Merged with DDS_data[6]                ;
-; DDS_data[6]                                                                                         ; Merged with DDS_data[10]               ;
-; DDS_data[10]                                                                                        ; Merged with DDS_data[14]               ;
-; DDS_data[14]                                                                                        ; Merged with DDS_data[18]               ;
-; DDS_data[18]                                                                                        ; Merged with DDS_data[22]               ;
-; DDS_data[22]                                                                                        ; Merged with DDS_data[26]               ;
-; DDS_data[26]                                                                                        ; Merged with DDS_data[30]               ;
-; DDS_data[30]                                                                                        ; Merged with DDS_data[34]               ;
-; DDS_data[34]                                                                                        ; Merged with DDS_data[38]               ;
-; DDS_data[38]                                                                                        ; Merged with DDS_data[48]               ;
-; DDS_data[48]                                                                                        ; Merged with DDS_data[49]               ;
-; DDS_data[49]                                                                                        ; Merged with DDS_data[51]               ;
-; DDS_data[51]                                                                                        ; Merged with DDS_data[53]               ;
-; DDS_data[53]                                                                                        ; Merged with DDS_data[55]               ;
-; DDS_data[55]                                                                                        ; Merged with DDS_data[56]               ;
-; DDS_data[56]                                                                                        ; Merged with DDS_data[61]               ;
-; DDS_data[61]                                                                                        ; Merged with DDS_data[62]               ;
-; AD9912~8                                                                                            ; Lost fanout                            ;
-; AD9912~9                                                                                            ; Lost fanout                            ;
-; AD9912~10                                                                                           ; Lost fanout                            ;
-; spi_state~8                                                                                         ; Lost fanout                            ;
-; spi_state~9                                                                                         ; Lost fanout                            ;
-; spi_state~10                                                                                        ; Lost fanout                            ;
-; state~7                                                                                             ; Lost fanout                            ;
-; state~8                                                                                             ; Lost fanout                            ;
-; CC_state.00                                                                                         ; Lost fanout                            ;
-; Total Number of Removed Registers = 122                                                             ;                                        ;
-+-----------------------------------------------------------------------------------------------------+----------------------------------------+
++------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                 ;
++-------------------------------------------+----------------------------------------+
+; Register name                             ; Reason for Removal                     ;
++-------------------------------------------+----------------------------------------+
+; phase_word[0]                             ; Stuck at GND due to stuck port data_in ;
+; DDS_setup[0..2,4..22,24,26..28,30..37,39] ; Stuck at GND due to stuck port data_in ;
+; phase_word[1..15]                         ; Stuck at GND due to stuck port data_in ;
+; previous_DAC_data[11]                     ; Stuck at GND due to stuck port data_in ;
+; DDS_data[0..15,50,52,54,57..60,63]        ; Stuck at GND due to stuck port data_in ;
+; previous_DAC_data[10]                     ; Merged with previous_DAC_data[9]       ;
+; previous_DAC_data[9]                      ; Merged with previous_DAC_data[8]       ;
+; previous_DAC_data[8]                      ; Merged with previous_DAC_data[7]       ;
+; previous_DAC_data[7]                      ; Merged with previous_DAC_data[6]       ;
+; previous_DAC_data[6]                      ; Merged with previous_DAC_data[5]       ;
+; previous_DAC_data[5]                      ; Merged with previous_DAC_data[4]       ;
+; previous_DAC_data[4]                      ; Merged with previous_DAC_data[3]       ;
+; previous_DAC_data[3]                      ; Merged with previous_DAC_data[2]       ;
+; previous_DAC_data[2]                      ; Merged with previous_DAC_data[1]       ;
+; previous_DAC_data[1]                      ; Merged with previous_DAC_data[0]       ;
+; DDS_setup[38]                             ; Merged with DDS_setup[29]              ;
+; DDS_setup[29]                             ; Merged with DDS_setup[25]              ;
+; DDS_setup[25]                             ; Merged with DDS_setup[23]              ;
+; DDS_setup[23]                             ; Merged with DDS_setup[3]               ;
+; DDS_data[62]                              ; Merged with DDS_data[61]               ;
+; DDS_data[61]                              ; Merged with DDS_data[56]               ;
+; DDS_data[56]                              ; Merged with DDS_data[55]               ;
+; DDS_data[55]                              ; Merged with DDS_data[53]               ;
+; DDS_data[53]                              ; Merged with DDS_data[51]               ;
+; DDS_data[51]                              ; Merged with DDS_data[49]               ;
+; DDS_data[49]                              ; Merged with DDS_data[48]               ;
+; AD9912~8                                  ; Lost fanout                            ;
+; AD9912~9                                  ; Lost fanout                            ;
+; AD9912~10                                 ; Lost fanout                            ;
+; spi_state~8                               ; Lost fanout                            ;
+; spi_state~9                               ; Lost fanout                            ;
+; spi_state~10                              ; Lost fanout                            ;
+; state~7                                   ; Lost fanout                            ;
+; state~8                                   ; Lost fanout                            ;
+; CC_state.00                               ; Lost fanout                            ;
+; Total Number of Removed Registers = 106   ;                                        ;
++-------------------------------------------+----------------------------------------+
+
+
++-------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                         ;
++----------------+---------------------------+----------------------------------------+
+; Register name  ; Reason for Removal        ; Registers Removed due to This Register ;
++----------------+---------------------------+----------------------------------------+
+; phase_word[0]  ; Stuck at GND              ; DDS_data[0]                            ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[1]  ; Stuck at GND              ; DDS_data[1]                            ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[2]  ; Stuck at GND              ; DDS_data[2]                            ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[3]  ; Stuck at GND              ; DDS_data[3]                            ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[4]  ; Stuck at GND              ; DDS_data[4]                            ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[5]  ; Stuck at GND              ; DDS_data[5]                            ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[6]  ; Stuck at GND              ; DDS_data[6]                            ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[7]  ; Stuck at GND              ; DDS_data[7]                            ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[8]  ; Stuck at GND              ; DDS_data[8]                            ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[9]  ; Stuck at GND              ; DDS_data[9]                            ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[10] ; Stuck at GND              ; DDS_data[10]                           ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[11] ; Stuck at GND              ; DDS_data[11]                           ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[12] ; Stuck at GND              ; DDS_data[12]                           ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[13] ; Stuck at GND              ; DDS_data[13]                           ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[14] ; Stuck at GND              ; DDS_data[14]                           ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[15] ; Stuck at GND              ; DDS_data[15]                           ;
+;                ; due to stuck port data_in ;                                        ;
++----------------+---------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -294,12 +327,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 52    ;
+; Total registers                              ; 148   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 12    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 12    ;
+; Number of registers using Clock Enable       ; 45    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -321,17 +354,16 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.0 Build 215 05/29/2008 SJ Web Edition
-    Info: Processing started: Mon Nov 17 21:51:54 2008
+    Info: Processing started: Wed Nov 19 16:38:56 2008
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Phoenix -c Test1
-Info: Found 1 design units, including 1 entities, in source file division.v
-    Info: Found entity 1: division
 Info: Found 1 design units, including 1 entities, in source file Test1.v
     Info: Found entity 1: Test1
 Info: Elaborating entity "Test1" for the top level hierarchy
-Warning (14130): Reduced register "DDS_setup[4]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[2]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[1]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[0]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_setup[0]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_setup[1]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_setup[2]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_setup[4]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_setup[5]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_setup[6]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_setup[7]" with stuck data_in port to stuck value GND
@@ -363,86 +395,69 @@ Warning (14130): Reduced register "DDS_setup[35]" with stuck data_in port to stu
 Warning (14130): Reduced register "DDS_setup[36]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_setup[37]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_setup[39]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[1]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[2]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[3]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[4]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[5]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[6]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[7]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[8]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[9]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[10]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[11]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[12]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[13]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[14]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[15]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "previous_DAC_data[11]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[63]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[60]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[59]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[58]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[57]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[54]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[52]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[50]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[47]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[46]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[45]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[44]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[43]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[42]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[41]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[40]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[39]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[37]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[36]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[35]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[33]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[32]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[31]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[29]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[28]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[27]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[25]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[24]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[23]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[21]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[20]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[19]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[17]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[16]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[15]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[14]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[13]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[12]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[11]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[10]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[9]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[8]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[7]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[6]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[5]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[4]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[3]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[2]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[1]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[0]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[50]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[52]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[54]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[57]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[58]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[59]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[60]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[63]" with stuck data_in port to stuck value GND
 Info: Duplicate registers merged to single register
-    Info (13350): Duplicate register "previous_DAC_data[8]" merged to single register "previous_DAC_data[0]"
-    Info (13350): Duplicate register "previous_DAC_data[0]" merged to single register "previous_DAC_data[7]"
+    Info (13350): Duplicate register "previous_DAC_data[10]" merged to single register "previous_DAC_data[9]"
+    Info (13350): Duplicate register "previous_DAC_data[9]" merged to single register "previous_DAC_data[8]"
+    Info (13350): Duplicate register "previous_DAC_data[8]" merged to single register "previous_DAC_data[7]"
     Info (13350): Duplicate register "previous_DAC_data[7]" merged to single register "previous_DAC_data[6]"
     Info (13350): Duplicate register "previous_DAC_data[6]" merged to single register "previous_DAC_data[5]"
     Info (13350): Duplicate register "previous_DAC_data[5]" merged to single register "previous_DAC_data[4]"
     Info (13350): Duplicate register "previous_DAC_data[4]" merged to single register "previous_DAC_data[3]"
     Info (13350): Duplicate register "previous_DAC_data[3]" merged to single register "previous_DAC_data[2]"
     Info (13350): Duplicate register "previous_DAC_data[2]" merged to single register "previous_DAC_data[1]"
-    Info (13350): Duplicate register "previous_DAC_data[1]" merged to single register "previous_DAC_data[10]"
-    Info (13350): Duplicate register "previous_DAC_data[10]" merged to single register "previous_DAC_data[9]"
-    Info (13350): Duplicate register "DDS_setup[23]" merged to single register "DDS_setup[25]"
-    Info (13350): Duplicate register "DDS_setup[25]" merged to single register "DDS_setup[29]"
-    Info (13350): Duplicate register "DDS_setup[29]" merged to single register "DDS_setup[38]"
-    Info (13350): Duplicate register "DDS_setup[38]" merged to single register "DDS_setup[3]"
+    Info (13350): Duplicate register "previous_DAC_data[1]" merged to single register "previous_DAC_data[0]"
+    Info (13350): Duplicate register "DDS_setup[38]" merged to single register "DDS_setup[29]"
+    Info (13350): Duplicate register "DDS_setup[29]" merged to single register "DDS_setup[25]"
+    Info (13350): Duplicate register "DDS_setup[25]" merged to single register "DDS_setup[23]"
+    Info (13350): Duplicate register "DDS_setup[23]" merged to single register "DDS_setup[3]"
 Info: Duplicate registers merged to single register
-    Info (13350): Duplicate register "DDS_data[2]" merged to single register "DDS_data[6]"
-    Info (13350): Duplicate register "DDS_data[6]" merged to single register "DDS_data[10]"
-    Info (13350): Duplicate register "DDS_data[10]" merged to single register "DDS_data[14]"
-    Info (13350): Duplicate register "DDS_data[14]" merged to single register "DDS_data[18]"
-    Info (13350): Duplicate register "DDS_data[18]" merged to single register "DDS_data[22]"
-    Info (13350): Duplicate register "DDS_data[22]" merged to single register "DDS_data[26]"
-    Info (13350): Duplicate register "DDS_data[26]" merged to single register "DDS_data[30]"
-    Info (13350): Duplicate register "DDS_data[30]" merged to single register "DDS_data[34]"
-    Info (13350): Duplicate register "DDS_data[34]" merged to single register "DDS_data[38]"
-    Info (13350): Duplicate register "DDS_data[38]" merged to single register "DDS_data[48]"
-    Info (13350): Duplicate register "DDS_data[48]" merged to single register "DDS_data[49]"
-    Info (13350): Duplicate register "DDS_data[49]" merged to single register "DDS_data[51]"
-    Info (13350): Duplicate register "DDS_data[51]" merged to single register "DDS_data[53]"
-    Info (13350): Duplicate register "DDS_data[53]" merged to single register "DDS_data[55]"
-    Info (13350): Duplicate register "DDS_data[55]" merged to single register "DDS_data[56]"
-    Info (13350): Duplicate register "DDS_data[56]" merged to single register "DDS_data[61]"
-    Info (13350): Duplicate register "DDS_data[61]" merged to single register "DDS_data[62]"
+    Info (13350): Duplicate register "DDS_data[62]" merged to single register "DDS_data[61]"
+    Info (13350): Duplicate register "DDS_data[61]" merged to single register "DDS_data[56]"
+    Info (13350): Duplicate register "DDS_data[56]" merged to single register "DDS_data[55]"
+    Info (13350): Duplicate register "DDS_data[55]" merged to single register "DDS_data[53]"
+    Info (13350): Duplicate register "DDS_data[53]" merged to single register "DDS_data[51]"
+    Info (13350): Duplicate register "DDS_data[51]" merged to single register "DDS_data[49]"
+    Info (13350): Duplicate register "DDS_data[49]" merged to single register "DDS_data[48]"
 Info: State machine "|Test1|AD9912" contains 9 states
 Info: State machine "|Test1|CC_state" contains 3 states
 Info: State machine "|Test1|spi_state" contains 6 states
@@ -517,14 +532,14 @@ Info: 9 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "phase_data"
-Info: Implemented 105 device resources after synthesis - the final resource count might be different
+Info: Implemented 231 device resources after synthesis - the final resource count might be different
     Info: Implemented 7 input pins
     Info: Implemented 18 output pins
-    Info: Implemented 80 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 86 warnings
+    Info: Implemented 206 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 80 warnings
     Info: Peak virtual memory: 157 megabytes
-    Info: Processing ended: Mon Nov 17 21:51:55 2008
-    Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Processing ended: Wed Nov 19 16:39:03 2008
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:02
 
 

@@ -1,5 +1,5 @@
 Flow report for Test1
-Mon Nov 17 21:52:00 2008
+Wed Nov 19 16:39:32 2008
 Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------+
 ; Flow Summary                                                       ;
 +--------------------------+-----------------------------------------+
-; Flow Status              ; Successful - Mon Nov 17 21:52:00 2008   ;
+; Flow Status              ; Successful - Wed Nov 19 16:39:32 2008   ;
 ; Quartus II Version       ; 8.0 Build 215 05/29/2008 SJ Web Edition ;
 ; Revision Name            ; Test1                                   ;
 ; Top-level Entity Name    ; Test1                                   ;
@@ -45,7 +45,7 @@ applicable agreement for further details.
 ; Device                   ; EPM240T100C5                            ;
 ; Timing Models            ; Final                                   ;
 ; Met timing requirements  ; Yes                                     ;
-; Total logic elements     ; 75 / 240 ( 31 % )                       ;
+; Total logic elements     ; 185 / 240 ( 77 % )                      ;
 ; Total pins               ; 25 / 80 ( 31 % )                        ;
 ; Total virtual pins       ; 0                                       ;
 ; Total memory bits        ; 0                                       ;
@@ -61,22 +61,22 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/17/2008 21:51:55 ;
+; Start date & time ; 11/19/2008 16:38:57 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Test1               ;
 +-------------------+---------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                ;
-+---------------------------------------+------------------------------+---------------+-------------+------------+
-; Assignment Name                       ; Value                        ; Default Value ; Entity Name ; Section Id ;
-+---------------------------------------+------------------------------+---------------+-------------+------------+
-; ALLOW_POWER_UP_DONT_CARE              ; Off                          ; On            ; --          ; --         ;
-; COMPILER_SIGNATURE_ID                 ; 123483488765.122692631501456 ; --            ; --          ; --         ;
-; POWER_EXT_SUPPLY_VOLTAGE_TO_REGULATOR ; 3.3V                         ; --            ; --          ; --         ;
-; USE_GENERATED_PHYSICAL_CONSTRAINTS    ; Off                          ; --            ; --          ; eda_palace ;
-+---------------------------------------+------------------------------+---------------+-------------+------------+
++----------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                               ;
++---------------------------------------+-----------------------------+---------------+-------------+------------+
+; Assignment Name                       ; Value                       ; Default Value ; Entity Name ; Section Id ;
++---------------------------------------+-----------------------------+---------------+-------------+------------+
+; ALLOW_POWER_UP_DONT_CARE              ; Off                         ; On            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                 ; 85160415027.122708033724248 ; --            ; --          ; --         ;
+; POWER_EXT_SUPPLY_VOLTAGE_TO_REGULATOR ; 3.3V                        ; --            ; --          ; --         ;
+; USE_GENERATED_PHYSICAL_CONSTRAINTS    ; Off                         ; --            ; --          ; eda_palace ;
++---------------------------------------+-----------------------------+---------------+-------------+------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------+
@@ -84,11 +84,11 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:00:01     ; 1.0                     ; 157 MB              ; 00:00:01                           ;
-; Fitter                  ; 00:00:00     ; 1.0                     ; 155 MB              ; 00:00:00                           ;
-; Assembler               ; 00:00:00     ; 1.0                     ; 133 MB              ; 00:00:00                           ;
-; Classic Timing Analyzer ; 00:00:00     ; 1.0                     ; 108 MB              ; 00:00:00                           ;
-; Total                   ; 00:00:01     ; --                      ; --                  ; 00:00:01                           ;
+; Analysis & Synthesis    ; 00:00:06     ; 1.0                     ; 157 MB              ; 00:00:02                           ;
+; Fitter                  ; 00:00:09     ; 1.0                     ; 155 MB              ; 00:00:01                           ;
+; Assembler               ; 00:00:02     ; 1.0                     ; 132 MB              ; 00:00:01                           ;
+; Classic Timing Analyzer ; 00:00:03     ; 1.0                     ; 108 MB              ; 00:00:01                           ;
+; Total                   ; 00:00:20     ; --                      ; --                  ; 00:00:05                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
