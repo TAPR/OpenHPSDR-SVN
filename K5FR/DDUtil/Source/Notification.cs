@@ -32,6 +32,7 @@ namespace DataDecoder
 
         #region Event handler
         public static string notiMsg;
+        public static int notiIntvl = 7000;
         public static bool useAudio;
         SoundPlayer myPlayer = new System.Media.SoundPlayer();
 
@@ -42,6 +43,7 @@ namespace DataDecoder
             this.Left =( screenWidth - this.Width)-25;
             this.Top = (screenHeight - this.Height)-25;
             label1.Text = notiMsg;
+            timer1.Interval = notiIntvl;
             timer1.Enabled = true;
             if (useAudio)
             {
