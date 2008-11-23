@@ -180,8 +180,8 @@ private static bool CustomErrorRoutine(Exception objException)
 		//If the log file path is not empty but the file is not available it will create it
 		if (false == File.Exists(strLogFilePath))
 		{
-			if (false == CheckDirectory(strLogFilePath))
-				return false;
+            //if (false == CheckDirectory(strLogFilePath))
+            //    return false;
 
 			FileStream fs = new FileStream(strLogFilePath,FileMode.OpenOrCreate, FileAccess.ReadWrite);
 			fs.Close();

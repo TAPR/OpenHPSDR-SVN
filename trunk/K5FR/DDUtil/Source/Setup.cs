@@ -526,10 +526,14 @@ namespace DataDecoder
             cboDevice.Text = set.Device;
             cboAlpha.SelectedIndex = set.AlphaPort;
             chkAlpha.Checked = set.AlphaEnab;
+            cboRepeatPort.SelectedIndex = set.RepeatPort;
+            chkRepeat.Checked = set.RepeatEnab;
+            numSplit.Value = set.SplitNum;
             
             X2SetUp();  // setup the X2 Matrix
             WN2SetUp(); // setup the WN2
             AlcSetUp(); // setup the ALC
+            PMSetup();  // setup the Power Master
 
             if (chkLPenab.Checked) lpTimer.Enabled = true;
             else lpTimer.Enabled = false;
@@ -1002,9 +1006,10 @@ namespace DataDecoder
                 if (Convert.ToInt32(newVer) > Convert.ToInt32(oldVer)) 
                 {
                     Notification alert = new Notification();
+                    Notification.notiIntvl = 7000;
                     Notification.notiMsg =
-                    "A new DDUtil version " + tempStr + " is available!\r\r" +
-                    "See Main form Help menu or web site for info.\r";
+                     "A new DDUtil version " + tempStr + " is available!\r\r" +
+                     "See Main form Help menu or web site for info.\r";
                     alert.Show();
                 }
             }
@@ -1410,6 +1415,7 @@ namespace DataDecoder
                 set.followChk = false; set.Save();
 
                 Notification alert = new Notification();
+                Notification.notiIntvl = 7000;
                 Notification.notiMsg =
                     "You must assign a port number before the\r\r" +
                     "Passive Listener device(s) will be usable.\r\r" +
@@ -1425,9 +1431,9 @@ namespace DataDecoder
             switch (cboRadio.SelectedIndex)
             {
                 case 0: // None
-                    //                    cboRadData.SelectedIndex = 0;
                     portmode = PortMode.None;
                     txtRadNum.Enabled = false;
+                    chkFollow.Checked = false;
                     break;
                 case 1: // Kenwood
                     portmode = PortMode.Kenwood;
@@ -1900,6 +1906,7 @@ namespace DataDecoder
         void BadPort(string port)
         {
             Notification alert = new Notification();
+            Notification.notiIntvl = 7000;
             Notification.notiMsg =
             "There was a problem initializing the last used port for " + port + ".\r\r" +
             "This port will be set to empty.\r";
@@ -2029,17 +2036,17 @@ namespace DataDecoder
         // Display the PA Temp
         private void WriteTemp()
         {
-            if (temp >= 50 && temp < 70)
+            if (temp >= 70 && temp < 80)
             { 
                 txtTemp.BackColor = Color.Yellow; 
                 mini.txtTemp.BackColor = Color.Yellow; 
             }
-            else if (temp >= 70 && temp < 80)
+            else if (temp >= 80 && temp < 90)
             { 
                 txtTemp.BackColor = Color.Orange; 
                 mini.txtTemp.BackColor = Color.Orange; 
             }
-            else if (temp >= 80)
+            else if (temp >= 90)
             {
                 txtTemp.BackColor = Color.Red;
                 mini.txtTemp.BackColor = Color.Red;
@@ -2180,7 +2187,7 @@ namespace DataDecoder
                 if (cboLPport.SelectedIndex > 0)
                 {
                     lpTimer.Enabled = true; set.LPenab = true; chkWNEnab.Checked = false;
-                    set.WnEnab = false; lblAvg.Text = "Fwd";                    
+                    chkPM.Checked = false; lblAvg.Text = "Fwd"; mini.lblAvg.Text = "Fwd";                   
                     txtAvg.Enabled = true; txtSWR.Enabled = true;
                     mini.txtAvg.Enabled = true; mini.txtSWR.Enabled = true;
                     txtFwd.Visible = false; lblFwd.Visible = false;
@@ -2410,6 +2417,8 @@ namespace DataDecoder
             { ProcessMacroButton(11); }
             else if (e.KeyCode == Keys.F12)
             { ProcessMacroButton(12); }
+            else if (e.Control && e.KeyCode == Keys.Oemtilde)
+            { btnSplit_Click(null, null); }
         }
         /// <summary>
         /// Adds macro number text to the row header
@@ -2565,6 +2574,7 @@ namespace DataDecoder
         private void malform(string pre)
         {
             Notification alert = new Notification();
+            Notification.notiIntvl = 7000;
             Notification.notiMsg =
                 "The command " + pre + " is not formed correctly or is not " + 
                 "a valid DDUtil macro command.\r\r" +
@@ -2886,8 +2896,9 @@ namespace DataDecoder
                     break;
                 default: break;
             }
-            Notification.notiMsg = "Stopping Antenna Rotation!\r";
             Notification alert = new Notification();
+            Notification.notiIntvl = 2000;
+            Notification.notiMsg = "Stopping Antenna Rotation!\r";
             currentSize = alert.label1.Font.Size;
             currentSize += 2.0F;
             alert.label1.Font = new Font(alert.label1.Font.Name, currentSize,
@@ -3298,8 +3309,9 @@ namespace DataDecoder
                     break;
                 default: break;
             }
-            Notification.notiMsg = "Starting Antenna Rotation!\r";
             Notification alert = new Notification();
+            Notification.notiIntvl = 2000;
+            Notification.notiMsg = "Starting Antenna Rotation!\r";
             currentSize = alert.label1.Font.Size;
             currentSize += 2.0F;
             alert.label1.Font = new Font(alert.label1.Font.Name, currentSize,
@@ -3338,20 +3350,23 @@ namespace DataDecoder
                         DateTime currentUTC = localZone.ToUniversalTime(dt);
                         TimeSpan currentOffset = localZone.GetUtcOffset(dt);
                         string off = currentOffset.ToString();
-                        off = off.Substring(0, 3);
+                        if (off.Substring(0,1) == "-") off = off.Substring(0, 3);
+                        else off = off.Substring(0, 2);
                         double LocalOffset = Math.Abs(Convert.ToDouble(off));
                         double DxOffset = Math.Abs(Convert.ToDouble(thisReader.GetValue(8).ToString()));
                         double DxOffsetRaw = Convert.ToDouble(thisReader.GetValue(8).ToString());
                         if (Math.Sign(DxOffsetRaw) < 0)
                         {
-                            lblDxTime.Text = dt.AddHours(DxOffset +
-                                LocalOffset).ToString() + " Local Time";
+                            lblDxTime.Text = dt.AddHours(DxOffset - LocalOffset).ToString()
+                                + " Local Time";
                             txtDxTime.Text = "UTC+" + DxOffset;
                         }
                         else
                         {
-                            lblDxTime.Text = dt.AddHours((DxOffsetRaw - (DxOffsetRaw * 2)) +
-                                LocalOffset).ToString() + " Local Time";
+                            lblDxTime.Text = dt.AddHours(-(DxOffset + LocalOffset)).ToString() +
+                                " Local Time";
+                            //lblDxTime.Text = dt.AddHours(-(DxOffsetRaw - (DxOffsetRaw * 2)) +
+                            //    LocalOffset).ToString() + " Local Time";
                             txtDxTime.Text = "UTC-" + DxOffset;
                         }
                         if (thisReader.GetValue(8).ToString() == "0")
@@ -3397,10 +3412,12 @@ namespace DataDecoder
                             txtLP.Text = Convert.ToInt32(bearing - 180).ToString();
                     }
                     catch (Exception e)
-                    { MessageBox.Show(e.Message + "\n\n" +
+                    { 
+                        MessageBox.Show(e.Data + e.Message + "\n\n" +
                         "This error is generally due to latitude or\n" +
                         "longitude not being input on the Setup form\n\n" + 
-                        "Please correct and try again.", "Data Error"); }
+                        "Please correct and try again.", "Data Error"); 
+                    }
                     i = 0;
                 }
             }
@@ -3548,6 +3565,9 @@ namespace DataDecoder
                     rawFreq = OutBuffer;
                     OutBuffer = "";
 
+                    /*** write port data to the Repeater port ***/
+                    if (chkRepeat.Checked) RepeatPort.Write(rawFreq);
+                    
                     /*** Write PA Temperature to window ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTS")
                     {   
@@ -3719,6 +3739,7 @@ namespace DataDecoder
                             }
 
                         }// if band changed
+                        return;
                     }// if ZZBS
 
                     /*** send radio's CAT reply back to RCP1 ***/
@@ -4291,23 +4312,24 @@ namespace DataDecoder
                 {   // for a list of the radio types referenced below see 
                     // toolStripMenuItem4_Click() event handeler
                     case PortMode.None:
-                        AccPort.WriteLine("IF" + freq + ";");
+                        AccPort.Write("IF" + freq + ";");
                         // 14.234.56 Mhz = IF00014234560;
                         break;
-                    case PortMode.Kenwood:
+                    case PortMode.Kenwood: // K2,K3,FT(9K,2K,950,450)
                         if (lastFreq != freq)
                         {
-                            AccPort.WriteLine("FA" + freq.Substring(3, 8) + ";");
-                            // 14.234.56 Mhz = FA14234560;
+//                            AccPort.Write("FA" + freq.Substring(3, 8) + ";");
+                            AccPort.Write("FA" + freq + ";");
+                            // 14.234.56 Mhz = FA00014234560;
                         }
                         if (LastMode != sdrMode && chkMode.Checked)
                         {
                             Thread.Sleep(50);
                             // LastMode = sdrMode;
-                            AccPort.WriteLine("MD" + sdrMode + ";");
+                            AccPort.Write("MD" + sdrMode + ";");
                         }
                         break;
-                    case PortMode.YaesuTypeI:
+                    case PortMode.YaesuTypeI: // FT1K - FT100
                         if (lastFreq != freq)
                         {
                             mystring = "0A0" + freq.Substring(3, 7);
@@ -4349,7 +4371,7 @@ namespace DataDecoder
                             // send mode  USB = 00 00 00 01 0C
                         }
                         break;
-                    case PortMode.YaesuTypeII:
+                    case PortMode.YaesuTypeII: //FT(897,857,847,817)
                         if (lastFreq != freq)
                         {
                             mystring = "0" + freq.Substring(3, 7) + "01";
@@ -4428,17 +4450,17 @@ namespace DataDecoder
                                 case "9": mode = "08"; break;   // RTTY-R (DIGU)
                                 default: mode = "01"; break;   // USB
                             }
-                            mystring = EOM + "00" + mode + cn + ctrlAddr +
+                            mystring = EOM + mode + cn + ctrlAddr +
                                        radNum + preamble + preamble;
-                            j = 14;
-                            for (int k = 0; k < 8; k++)
+                            j = 12;
+                            for (int k = 0; k < 7; k++)
                             {
                                 string outtemp = mystring.Substring(j, 2);
                                 outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
                                 j -= 2;
                             }
-                            // Send mode command [FE FE ra ta cn md pd FD]
-                            AccPort.Write(outBuf, 0, 8);
+                            // Send mode command [FE FE ra ta cn md FD]
+                            AccPort.Write(outBuf, 0, 7);
                         }
                         break;
                 }
@@ -4481,6 +4503,8 @@ namespace DataDecoder
                 cboRCP3Rotor.Items.Clear();
                 cboRCP4Rotor.Items.Clear();
                 cboAlpha.Items.Clear();
+                cboPMport.Items.Clear();
+                cboRepeatPort.Items.Clear();
                 // Add empty entry to port combos
                 cboSerAcc.Items.Add("");
                 cboLogPort.Items.Add("");
@@ -4496,6 +4520,8 @@ namespace DataDecoder
                 cboRCP3Rotor.Items.Add("");
                 cboRCP4Rotor.Items.Add("");
                 cboAlpha.Items.Add("");
+                cboPMport.Items.Add("");
+                cboRepeatPort.Items.Add("");
 
                 for (int i = 0; i < port.Length; i++)
                 {   
@@ -4515,6 +4541,8 @@ namespace DataDecoder
                     cboRCP3Rotor.Items.Add("COM" + port[i]);
                     cboRCP4Rotor.Items.Add("COM" + port[i]);
                     cboAlpha.Items.Add("COM" + port[i]);
+                    cboPMport.Items.Add("COM" + port[i]);
+                    cboRepeatPort.Items.Add("COM" + port[i]);
                 }
             }
             else
@@ -4747,11 +4775,12 @@ namespace DataDecoder
                 rbFwd.Checked = true;
                 //x = this.Left;
                 //y = this.Top;
+                Notification alert = new Notification();
+                Notification.notiIntvl = 7000;
                 Notification.notiMsg = 
                     "The SteppIR Antenna elements are retracting. " +
                     "The antenna will NO longer follow PowerSDR.\r\r" +
                     "See the 'Other' tab to Re-Enable operation\r";
-                Notification alert = new Notification();
                 alert.Show();
             }
         }
@@ -4767,10 +4796,11 @@ namespace DataDecoder
             bCal = true;
             //x = this.Left;
             //y = this.Top;
+            Notification alert = new Notification();
+            Notification.notiIntvl = 7000;
             Notification.notiMsg =
                 "Please Standby the antenna is Calibrating\r\r" +
                 "This may take a few moments!\r";
-            Notification alert = new Notification();
             alert.Show();
         }
         // Send port data to SteppIR controller
@@ -5084,11 +5114,8 @@ namespace DataDecoder
         }
         void pw1Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (!TestPort.IsOpen)
-            {
-                //                TestPort.PortName = "COM18";
-                //                TestPort.Open();
-            }
+            if (!TestPort.IsOpen) TestPort.Open();
+            
             byte[] bytes = new byte[8];
             string preamble = "FE";
             string EOM = "FD";
@@ -5372,7 +5399,7 @@ namespace DataDecoder
             if (chkWNEnab.Checked)
             {
                 set.WnEnab = true; chkLPenab.Checked = false; 
-                set.LPenab = false; lblFwd.Visible = true; 
+                chkPM.Checked = false; lblFwd.Visible = true; 
                 txtFwd.Visible = true; txtAvg.Enabled = true;
                 mini.lblFwd.Visible = true; mini.txtFwd.Visible = true; 
                 mini.txtAvg.Enabled = true;
@@ -5458,7 +5485,7 @@ namespace DataDecoder
             SetSensorType(); set.Save();
         }
         // the WN reset button has been pressed
-        private void btnReset_Click(object sender, EventArgs e)
+        private void btnWnReset_Click(object sender, EventArgs e)
         {
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
@@ -5472,8 +5499,9 @@ namespace DataDecoder
                 return;
             }
             Error:
-                Notification alert = new Notification();
-                Notification.notiMsg =
+            Notification alert = new Notification();
+            Notification.notiIntvl = 7000;
+            Notification.notiMsg =
                 "The WN2 could not be Reset.\r\r" +
                 "The only recourse is to toggle the power.\r";
                 alert.Show();
@@ -5519,6 +5547,7 @@ namespace DataDecoder
                             if (i == numDevs - 1)
                             {   // if the WN2 is not found, throw a message.
                                 Notification alert = new Notification();
+                                Notification.notiIntvl = 7000;
                                 Notification.notiMsg =
                                     "The WN2 watt meter could not be found.\r\r" +
                                     "Please make sure the USB line is connected " +
@@ -6477,6 +6506,7 @@ namespace DataDecoder
                 chkAlpha.Checked = false; 
 
                 Notification alert = new Notification();
+                Notification.notiIntvl = 7000;
                 Notification.notiMsg =
                     "You must assign a port number before the\r\r" +
                     "Alpha Amplifier can be enabled.\r\r" +
@@ -6635,18 +6665,6 @@ namespace DataDecoder
                             hf = sCmd; btnHF.BackColor = Color.Red;
                             mini.btnHF.BackColor = Color.Red;
                         }
-                        //if (enableErrorLog)
-                        //{
-                        //    sw = new StreamWriter("ErrorLog.txt", true);
-                        //    sw.WriteLine("sCmd    : " + sCmd);
-                        //    sw.WriteLine("ac      : " + ac + " : " + btnPwr.BackColor);
-                        //    sw.WriteLine("state   : " + state + " : " + btnOper.BackColor);
-                        //    sw.WriteLine("tune    : " + tune + " : " + btnTune.BackColor);
-                        //    sw.WriteLine("mode    : " + mode + " : " + btnHV.BackColor);
-                        //    sw.WriteLine("-------------------------------------------------------");
-                        //    sw.Flush();
-                        //    sw.Close();
-                        //}
                     }
                 }
                 catch (Exception ex)
@@ -6728,7 +6746,7 @@ namespace DataDecoder
             SetMsg(""); btnHF.BackColor = Color.Empty;
             mini.btnHF.BackColor = Color.Empty;
         }
-        private void btnSensor_Click(object sender, EventArgs e)
+        private void btnWnSensor_Click(object sender, EventArgs e)
         {
             wn.Show();
         }
@@ -7382,5 +7400,493 @@ namespace DataDecoder
           #endregion Events
 
         #endregion VHF+ Matrix
+
+        #region Power Master
+
+        #region CRC Table
+        static byte[] crc8revtab = new byte [256] {
+
+                        0x00, 0xB1, 0xD3, 0x62, 0x17, 0xA6, 0xC4, 0x75,
+                        0x2E, 0x9F, 0xFD, 0x4C, 0x39, 0x88, 0xEA, 0x5B,
+                        0x5C, 0xED, 0x8F, 0x3E, 0x4B, 0xFA, 0x98, 0x29,
+                        0x72, 0xC3, 0xA1, 0x10, 0x65, 0xD4, 0xB6, 0x07,
+                        0xB8, 0x09, 0x6B, 0xDA, 0xAF, 0x1E, 0x7C, 0xCD,
+                        0x96, 0x27, 0x45, 0xF4, 0x81, 0x30, 0x52, 0xE3,
+                        0xE4, 0x55, 0x37, 0x86, 0xF3, 0x42, 0x20, 0x91,
+                        0xCA, 0x7B, 0x19, 0xA8, 0xDD, 0x6C, 0x0E, 0xBF,
+                        0xC1, 0x70, 0x12, 0xA3, 0xD6, 0x67, 0x05, 0xB4,
+                        0xEF, 0x5E, 0x3C, 0x8D, 0xF8, 0x49, 0x2B, 0x9A,
+                        0x9D, 0x2C, 0x4E, 0xFF, 0x8A, 0x3B, 0x59, 0xE8,
+                        0xB3, 0x02, 0x60, 0xD1, 0xA4, 0x15, 0x77, 0xC6,
+                        0x79, 0xC8, 0xAA, 0x1B, 0x6E, 0xDF, 0xBD, 0x0C,
+                        0x57, 0xE6, 0x84, 0x35, 0x40, 0xF1, 0x93, 0x22,
+                        0x25, 0x94, 0xF6, 0x47, 0x32, 0x83, 0xE1, 0x50,
+                        0x0B, 0xBA, 0xD8, 0x69, 0x1C, 0xAD, 0xCF, 0x7E,
+                        0x33, 0x82, 0xE0, 0x51, 0x24, 0x95, 0xF7, 0x46,
+                        0x1D, 0xAC, 0xCE, 0x7F, 0x0A, 0xBB, 0xD9, 0x68,
+                        0x6F, 0xDE, 0xBC, 0x0D, 0x78, 0xC9, 0xAB, 0x1A,
+                        0x41, 0xF0, 0x92, 0x23, 0x56, 0xE7, 0x85, 0x34,
+                        0x8B, 0x3A, 0x58, 0xE9, 0x9C, 0x2D, 0x4F, 0xFE,
+                        0xA5, 0x14, 0x76, 0xC7, 0xB2, 0x03, 0x61, 0xD0,
+                        0xD7, 0x66, 0x04, 0xB5, 0xC0, 0x71, 0x13, 0xA2,
+                        0xF9, 0x48, 0x2A, 0x9B, 0xEE, 0x5F, 0x3D, 0x8C,
+                        0xF2, 0x43, 0x21, 0x90, 0xE5, 0x54, 0x36, 0x87,
+                        0xDC, 0x6D, 0x0F, 0xBE, 0xCB, 0x7A, 0x18, 0xA9,
+                        0xAE, 0x1F, 0x7D, 0xCC, 0xB9, 0x08, 0x6A, 0xDB,
+                        0x80, 0x31, 0x53, 0xE2, 0x97, 0x26, 0x44, 0xF5,
+                        0x4A, 0xFB, 0x99, 0x28, 0x5D, 0xEC, 0x8E, 0x3F,
+                        0x64, 0xD5, 0xB7, 0x06, 0x73, 0xC2, 0xA0, 0x11,
+                        0x16, 0xA7, 0xC5, 0x74, 0x01, 0xB0, 0xD2, 0x63,
+                        0x38, 0x89, 0xEB, 0x5A, 0x2F, 0x9E, 0xFC, 0x4D };
+        #endregion CRC Table
+
+        #region # Delegates #
+
+        // Write to Fwd Trim window
+        delegate void SetTrimFwdCallback(decimal num);
+        public void SetTrimFwd(decimal num)
+        {
+            if (this.numFwd.InvokeRequired)
+            {
+                SetTrimFwdCallback d = new SetTrimFwdCallback(SetTrimFwd);
+                this.Invoke(d, new object[] { num });
+            }
+            else
+            { numFwd.Value = num; }
+        }
+        // Write to Rev Trim window
+        delegate void SetTrimRevCallback(decimal num);
+        public void SetTrimRev(decimal num)
+        {
+            if (this.numRev.InvokeRequired)
+            {
+                SetTrimRevCallback d = new SetTrimRevCallback(SetTrimRev);
+                this.Invoke(d, new object[] { num });
+            }
+            else
+            { numRev.Value = num; }
+        }
+
+
+        #endregion Delegates
+
+        #region # Methods #
+
+        void PMSetup()
+        {
+            cboPMport.SelectedIndex = set.PMport;
+            chkPM.Checked = set.chkPM;
+            cboPMcom.SelectedIndex = set.PMcom;
+        }
+        // calc crc for inbuff and write cmd to port
+        void PMportWrite(byte[] inBuf)
+        {
+            byte stx = 02; byte etx = 03;
+            byte[] cBuf = new byte[2];                  // crc ascii buffer
+            byte crc = CRC8Fast(inBuf, inBuf.Length);   // get crc
+            string hcrc = crc.ToString("X");            // crc to hex
+            // save crc in ascii buffer
+            for (int i = 0; i < 2; i++)
+            {
+                int j = 0;
+                if (hcrc.Length == 1) { cBuf[0] = 0x30; i++; j = 0; }
+                else j = i;
+                if (hcrc.Substring(j, 1) == "A") { cBuf[i] = 0x41; continue; }
+                if (hcrc.Substring(j, 1) == "B") { cBuf[i] = 0x42; continue; }
+                if (hcrc.Substring(j, 1) == "C") { cBuf[i] = 0x43; continue; }
+                if (hcrc.Substring(j, 1) == "D") { cBuf[i] = 0x44; continue; }
+                if (hcrc.Substring(j, 1) == "E") { cBuf[i] = 0x45; continue; }
+                if (hcrc.Substring(j, 1) == "F") { cBuf[i] = 0x46; continue; }
+
+                int temp = Convert.ToInt32(hcrc.Substring(i, 1));
+                temp += 30;
+                cBuf[i] = byte.Parse(temp.ToString(), NumberStyles.HexNumber);
+            }
+            // assemble the output buffer
+            if (inBuf.Length == 1)
+            {
+                byte[] outbuf = { stx, inBuf[0], etx, cBuf[0], cBuf[1], 0x0d };
+                PMport.Write(outbuf, 0, 6);
+            }
+            else if (inBuf.Length == 2)
+            {
+                byte[] outbuf = { stx, inBuf[0], inBuf[1], etx, cBuf[0], cBuf[1], 0x0d };
+                PMport.Write(outbuf, 0, 7);
+            }
+            else if (inBuf.Length == 3)
+            {
+                byte[] outbuf = { stx, inBuf[0], inBuf[1], inBuf[2], etx, cBuf[0], cBuf[1], 0x0d };
+                PMport.Write(outbuf, 0, 8);
+            }
+            else if (inBuf.Length == 4)
+            {
+                byte[] outbuf = { stx, inBuf[0], inBuf[1], inBuf[2], inBuf[3], etx, cBuf[0], cBuf[1], 0x0d };
+                PMport.Write(outbuf, 0, 9);
+            }
+        }
+        // Calc CRC values for cmds sent to PM
+        public static byte CRC8Fast(byte[] buf, int len)
+        {
+            byte crc = 0;  /* prevent corruption with global variables */
+            for (int i = 0; i < len; i++)
+            {
+                crc = crc8revtab[crc ^ buf[i]];
+            }
+            return ((byte)~crc);   /* complimented CRC used to prevent string of 0's */
+        }
+
+        #endregion Methods
+
+        #region # Events #
+
+        string sPM = "";        // PM port buffer message
+        // a Message(s) from the PM has been received
+        private void PMport_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkPM.Checked)  // port must be enabled to receive data
+            {
+                try
+                {
+                    string fwd = ""; string swr = "";
+                    string sCmd = "";
+                    SerialPort port = (SerialPort)sender;
+                    byte[] data = new byte[port.BytesToRead];
+                    port.Read(data, 0, data.Length);
+                    sPM += AE.GetString(data, 0, data.Length);
+                    Regex rex = new Regex(@".*?\r\n");
+                    for (Match m = rex.Match(sPM); m.Success; m = m.NextMatch())
+                    {   //loop thru the buffer and find matches
+                        sCmd = m.Value.Substring(0, m.Value.Length - 1);
+                        sPM = sPM.Replace(m.Value, ""); //remove match from buffer
+
+                        if (sCmd.Substring(1, 1) == "D")
+                        {
+                            fwd = sCmd.Substring(3, 7); swr = sCmd.Substring(19, 5);
+                            SetAvg(Regex.Replace(fwd, @"\s*(\d+.\d)", "$1"));
+                            mini.SetAvg(Regex.Replace(fwd, @"\s*(\d+.\d)", "$1"));
+                            SetSWR(Regex.Replace(swr, @"\s*(\d+.\d{2})", "$1"));
+                            mini.SetSwr(Regex.Replace(swr, @"\s*(\d+.\d{2})", "$1"));
+                        }
+                        else if (sCmd.Substring(1, 1) == "T")
+                        { SetTrimFwd(Convert.ToDecimal(sCmd.Substring(2, 3))); }
+                        else if (sCmd.Substring(1, 1) == "t")
+                        { SetTrimRev(Convert.ToDecimal(sCmd.Substring(2, 3))); }
+                    }
+                }
+                catch 
+                { }
+            }
+        }
+        // The PM enable check box has changed
+        private void chkPM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPM.Checked)
+            {
+                if (cboPMport.SelectedIndex > 0)
+                {
+                    set.chkPM = true; chkWNEnab.Checked = false;
+                    lblAvg.Text = "Fwd"; chkLPenab.Checked = false;
+                    txtAvg.Enabled = true; txtSWR.Enabled = true;
+                    mini.txtAvg.Enabled = true; mini.txtSWR.Enabled = true;
+                    txtFwd.Visible = false; lblFwd.Visible = false;
+                    mini.txtFwd.Visible = false; mini.lblFwd.Visible = false;
+                    mini.lblAvg.Text = "Fwd"; 
+                    PMport.Write("\x02\x54\x3F\x03\x38\x45\r"); // Get fwd trim
+                    Thread.Sleep(150);
+                    PMport.Write("\x02\x74\x3F\x03\x37\x37\r"); // Get swr trim
+                    Thread.Sleep(150);
+                    PMport.Write("\x02\x44\x34\x03\x36\x36\r"); // Start data broadcast
+                    set.Save();
+                    if (set.StdNet == 1) rbStd.Checked = true;
+                    else if (set.StdNet == 2) rbNet.Checked = true;
+
+                }
+                else
+                {
+                    MessageBox.Show("No port has been selected for the Power Master.\n\n" +
+                    "Please select a valid port number and try again.", "Port Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    chkPM.Checked = false; set.chkPM = false; 
+                    txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
+                    mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
+                    txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
+                    mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false; 
+                    mini.txtSWR.Enabled = false;
+                    if (PMport.IsOpen)
+                    { PMport.Write("\x02\x44\x30\x03\x37\x31\r"); }// Stop data broadcast
+                    set.Save();
+                }
+            }
+            else
+            {
+                set.chkPM = false;
+                txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
+                mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
+                txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
+                mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false; 
+                mini.txtSWR.Enabled = false;
+                if (PMport.IsOpen)
+                { PMport.Write("\x02\x44\x30\x03\x37\x31\r"); }// Stop data broadcast
+                set.Save();
+            }
+        }
+        // The PM port has changed
+        private void cboPMport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PMport.IsOpen) PMport.Close();
+            if (cboPMport.SelectedIndex > 0)
+            {
+                PMport.PortName = cboPMport.SelectedItem.ToString();
+                try
+                {
+                    PMport.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The Power Master serial port " + PMport.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboPMport.SelectedText = "";
+                    chkPM.Checked = false;
+                    return;
+                }
+            }
+            else
+            {
+                chkPM.Checked = false;
+            }
+            set.PMport = cboPMport.SelectedIndex;
+            set.Save();
+        }
+        // The PM port comm setting has changed
+        private void cboPMcom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            set.PMcom = cboPMcom.SelectedIndex; set.Save();
+        }
+        // The Fwd Trim has changed
+        private void numFwd_ValueChanged(object sender, EventArgs e)
+        {
+            string fwd = numFwd.Value.ToString();
+            int ctr = fwd.Length;
+            byte[] inBuf = new byte[4];
+            inBuf[0] = 0x54; // "T"
+            switch (ctr)
+            {
+                case 1:
+                    inBuf[1] = 0x30; inBuf[2] = 0x30;
+                    inBuf[3] = byte.Parse("3"+fwd.Substring(0, 1), NumberStyles.HexNumber);
+                    break;
+
+                case 2:
+                    if (fwd.Substring(0, 1) == "-")
+                    {
+                        inBuf[1] = 0x2d; inBuf[2] = 0x30;
+                        inBuf[3] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
+                    }
+                    else
+                    {
+                        inBuf[1] = 0x30;
+                        inBuf[2] = byte.Parse("3" + fwd.Substring(0, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
+                    }
+                    break;
+
+                case 3:
+                    if (fwd.Substring(0, 1) == "-")
+                    {
+                        inBuf[1] = 0x2d;
+                        inBuf[2] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + fwd.Substring(2, 1), NumberStyles.HexNumber);
+                    }
+                    else
+                    {
+                        inBuf[1] = byte.Parse("3" + fwd.Substring(0, 1), NumberStyles.HexNumber);
+                        inBuf[2] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + fwd.Substring(2, 1), NumberStyles.HexNumber);
+                    }
+                    break;
+            }
+            PMportWrite(inBuf);
+        }
+        // The Swr Trim has changed
+        private void numRev_ValueChanged(object sender, EventArgs e)
+        {
+            string swr = numRev.Value.ToString();
+            int ctr = swr.Length;
+            byte[] inBuf = new byte[4];
+            inBuf[0] = 0x74; // "t"
+            switch (ctr)
+            {
+                case 1:
+                    inBuf[1] = 0x30; inBuf[2] = 0x30;
+                    inBuf[3] = byte.Parse("3" + swr.Substring(0, 1), NumberStyles.HexNumber);
+                    break;
+
+                case 2:
+                    if (swr.Substring(0, 1) == "-")
+                    {
+                        inBuf[1] = 0x2d; inBuf[2] = 0x30;
+                        inBuf[3] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
+                    }
+                    else
+                    {
+                        inBuf[1] = 0x30;
+                        inBuf[2] = byte.Parse("3" + swr.Substring(0, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
+                    }
+                    break;
+
+                case 3:
+                    if (swr.Substring(0, 1) == "-")
+                    {
+                        inBuf[1] = 0x2d;
+                        inBuf[2] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + swr.Substring(2, 1), NumberStyles.HexNumber);
+                    }
+                    else
+                    {
+                        inBuf[1] = byte.Parse("3" + swr.Substring(0, 1), NumberStyles.HexNumber);
+                        inBuf[2] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + swr.Substring(2, 1), NumberStyles.HexNumber);
+                    }
+                    break;
+            }
+            PMportWrite(inBuf);
+        }
+        // The PM Std/Net radio buttons have changed
+        private void grpNet_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbStd.Checked)
+            { PMport.Write("\x02\x64\x31\x03\x33\x39\r"); set.StdNet = 1; }
+
+            if (rbNet.Checked)
+            { PMport.Write("\x02\x64\x30\x03\x38\x38\r"); set.StdNet = 2; }
+
+            set.Save();
+        }
+        
+        #endregion Events
+
+        #endregion Power Master
+
+        #region Repeater
+
+        // The Misc Tab has been double clicked so toggle it's visibility
+        private void tabMisc_DoubleClick(object sender, EventArgs e)
+        {
+            if (grpRepeat.Visible) grpRepeat.Visible = false;
+            else grpRepeat.Visible = true;
+        }
+        // The Repeat Enable check box has changed
+        private void chkRepeat_CheckedChanged(object sender, EventArgs e)
+        {
+             if (chkRepeat.Checked)
+             {
+                 if (cboRepeatPort.SelectedIndex > 0)
+                 { 
+                     set.RepeatEnab = true; 
+                 }
+                 else
+                 {
+                     chkRepeat.Checked = false;
+                     MessageBox.Show("No port has been selected for the Repeater.\n\n" +
+                        "Please select a valid port number and try again.", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     set.RepeatEnab = false; 
+                 }
+            }
+            else
+            {
+                chkRepeat.Checked = false;
+                set.RepeatEnab = false; 
+            }
+            set.Save();
+        }
+        // The Repeat port index has changed
+        private void cboRepeatPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (RepeatPort.IsOpen) RepeatPort.Close();
+            if (cboRepeatPort.SelectedIndex > 0)
+            {
+                RepeatPort.PortName = cboRepeatPort.SelectedItem.ToString();
+                try
+                {
+                    RepeatPort.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The Repeater serial port " + RepeatPort.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboRepeatPort.SelectedText = "";
+                    chkRepeat.Checked = false;
+                    return;
+                }
+            }
+            else
+            {
+                chkRepeat.Checked = false;
+            }
+            set.RepeatPort = cboRepeatPort.SelectedIndex;
+            set.Save();
+        }
+        // RepeatPort has received data
+        string sRepeat = "";
+        private void RepeatPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkRepeat.Checked) // port must be enabled to accept data
+            {
+                try
+                {
+                    string sCmd = "";
+                    SerialPort port = (SerialPort)sender;
+                    byte[] data = new byte[port.BytesToRead];
+                    port.Read(data, 0, data.Length);
+                    sRepeat += AE.GetString(data, 0, data.Length);
+                    Regex rex = new Regex(".*?;");				//accept any string ending in ;		
+                    for (Match m = rex.Match(sRepeat); m.Success; m = m.NextMatch())
+                    {   //loop thru the buffer and find matches
+                        sCmd = m.Value;
+                        sRepeat = sRepeat.Replace(m.Value, ""); //remove the match from the buffer
+                        WriteToPort(sCmd, iSleep);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    bool bReturnLog = false;
+                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                }
+            }
+        }
+
+        #endregion Repeater
+
+        bool split = false;
+        private void btnSplit_Click(object sender, EventArgs e)
+        {
+            if (!split)
+            {
+                split = true;
+                WriteToPort("ZZVS0;", iSleep); // vfo A>B
+                int newfreq = Convert.ToInt32(lastFreq);
+                newfreq += ((int)numSplit.Value * 1000);
+                WriteToPort("ZZFB" + newfreq.ToString().PadLeft(11, '0') + ";", iSleep);
+                WriteToPort("ZZSP1;", iSleep); // turn split on
+                btnSplit.BackColor = Color.Yellow;
+            }
+            else
+            {
+                WriteToPort("ZZSP0;", iSleep); // turn split off
+                btnSplit.BackColor = Color.LightGray;
+                split = false;
+            }
+        }
+        private void numSplit_ValueChanged(object sender, EventArgs e)
+        {
+            set.SplitNum = numSplit.Value;
+            set.Save();
+        }
+
     }
 }

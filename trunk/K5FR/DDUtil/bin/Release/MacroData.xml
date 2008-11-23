@@ -25,15 +25,16 @@
     <Command>ZZFA00003980000;ZZMD06;ZZPC050;ZZFI04;ZZMT02;ZZTP02;</Command>
   </macro>
   <macro>
-    <Button>40 Rag</Button>
-    <Command>ZZFA00007250000;ZZMD00;ZZPC100;ZZMT02;ZZPT13;</Command>
+    <Button>Ant1</Button>
+    <Command>ZZOA0;</Command>
   </macro>
   <macro>
-    <Button>30 PSK</Button>
-    <Command>ZZFA00010125000;ZZMD07;ZZPC100;ZZMT02;</Command>
+    <Button>Rx1 In</Button>
+    <Command>ZZOA3;</Command>
   </macro>
   <macro>
-    <Button>Macro 9</Button>
+    <Button>Ant2</Button>
+    <Command>ZZOC1;</Command>
   </macro>
   <macro>
     <Button>Phone</Button>

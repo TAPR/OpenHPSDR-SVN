@@ -1870,5 +1870,89 @@ namespace DataDecoder.Properties {
                 this["chkInvertB"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkPM {
+            get {
+                return ((bool)(this["chkPM"]));
+            }
+            set {
+                this["chkPM"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int PMport {
+            get {
+                return ((int)(this["PMport"]));
+            }
+            set {
+                this["PMport"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int PMcom {
+            get {
+                return ((int)(this["PMcom"]));
+            }
+            set {
+                this["PMcom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int StdNet {
+            get {
+                return ((int)(this["StdNet"]));
+            }
+            set {
+                this["StdNet"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RepeatEnab {
+            get {
+                return ((bool)(this["RepeatEnab"]));
+            }
+            set {
+                this["RepeatEnab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int RepeatPort {
+            get {
+                return ((int)(this["RepeatPort"]));
+            }
+            set {
+                this["RepeatPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal SplitNum {
+            get {
+                return ((decimal)(this["SplitNum"]));
+            }
+            set {
+                this["SplitNum"] = value;
+            }
+        }
     }
 }
