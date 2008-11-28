@@ -1,5 +1,5 @@
 Flow report for Ozy_Janus
-Wed Nov 19 15:29:23 2008
+Fri Nov 28 20:09:08 2008
 Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Wed Nov 19 15:29:22 2008   ;
+; Flow Status                        ; Successful - Fri Nov 28 20:09:07 2008   ;
 ; Quartus II Version                 ; 8.0 Build 215 05/29/2008 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
@@ -45,10 +45,10 @@ applicable agreement for further details.
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
 ; Met timing requirements            ; No                                      ;
-; Total logic elements               ; 1,428 / 8,256 ( 17 % )                  ;
-;     Total combinational functions  ; 994 / 8,256 ( 12 % )                    ;
-;     Dedicated logic registers      ; 1,021 / 8,256 ( 12 % )                  ;
-; Total registers                    ; 1021                                    ;
+; Total logic elements               ; 1,415 / 8,256 ( 17 % )                  ;
+;     Total combinational functions  ; 992 / 8,256 ( 12 % )                    ;
+;     Dedicated logic registers      ; 1,022 / 8,256 ( 12 % )                  ;
+; Total registers                    ; 1022                                    ;
 ; Total pins                         ; 89 / 138 ( 64 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304 / 165,888 ( 59 % )               ;
@@ -62,32 +62,32 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/19/2008 15:24:14 ;
+; Start date & time ; 11/28/2008 20:08:09 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Ozy_Janus           ;
 +-------------------+---------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                            ;
-+---------------------------------------------------+-----------------------------+--------------------------------+-------------+------------+
-; Assignment Name                                   ; Value                       ; Default Value                  ; Entity Name ; Section Id ;
-+---------------------------------------------------+-----------------------------+--------------------------------+-------------+------------+
-; ALLOW_POWER_UP_DONT_CARE                          ; Off                         ; On                             ; --          ; --         ;
-; COMPILER_SIGNATURE_ID                             ; 85160415027.122707585417504 ; --                             ; --          ; --         ;
-; FITTER_EFFORT                                     ; Standard Fit                ; Auto Fit                       ; --          ; --         ;
-; FMAX_REQUIREMENT                                  ; 48 MHz                      ; --                             ; --          ; --         ;
-; MESSAGE_SUPPRESSION_RULE_FILE                     ; Ozy_Janus.srf               ; --                             ; --          ; --         ;
-; MUX_RESTRUCTURE                                   ; Off                         ; Auto                           ; --          ; --         ;
-; OPTIMIZE_FAST_CORNER_TIMING                       ; On                          ; Off                            ; --          ; --         ;
-; OPTIMIZE_HOLD_TIMING                              ; All paths                   ; IO Paths and Minimum TPD Paths ; --          ; --         ;
-; PARTITION_COLOR                                   ; 14622752                    ; --                             ; --          ; Top        ;
-; PARTITION_NETLIST_TYPE                            ; SOURCE                      ; --                             ; --          ; Top        ;
-; PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ; On                          ; Off                            ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_COMBO_LOGIC                    ; On                          ; Off                            ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION           ; On                          ; Off                            ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_REGISTER_RETIMING              ; On                          ; Off                            ; --          ; --         ;
-+---------------------------------------------------+-----------------------------+--------------------------------+-------------+------------+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                             ;
++---------------------------------------------------+------------------------------+--------------------------------+-------------+------------+
+; Assignment Name                                   ; Value                        ; Default Value                  ; Entity Name ; Section Id ;
++---------------------------------------------------+------------------------------+--------------------------------+-------------+------------+
+; ALLOW_POWER_UP_DONT_CARE                          ; Off                          ; On                             ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                             ; 123483488765.122787048902240 ; --                             ; --          ; --         ;
+; FITTER_EFFORT                                     ; Standard Fit                 ; Auto Fit                       ; --          ; --         ;
+; FMAX_REQUIREMENT                                  ; 48 MHz                       ; --                             ; --          ; --         ;
+; MESSAGE_SUPPRESSION_RULE_FILE                     ; Ozy_Janus.srf                ; --                             ; --          ; --         ;
+; MUX_RESTRUCTURE                                   ; Off                          ; Auto                           ; --          ; --         ;
+; OPTIMIZE_FAST_CORNER_TIMING                       ; On                           ; Off                            ; --          ; --         ;
+; OPTIMIZE_HOLD_TIMING                              ; All paths                    ; IO Paths and Minimum TPD Paths ; --          ; --         ;
+; PARTITION_COLOR                                   ; 14622752                     ; --                             ; --          ; Top        ;
+; PARTITION_NETLIST_TYPE                            ; SOURCE                       ; --                             ; --          ; Top        ;
+; PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ; On                           ; Off                            ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC                    ; On                           ; Off                            ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION           ; On                           ; Off                            ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING              ; On                           ; Off                            ; --          ; --         ;
++---------------------------------------------------+------------------------------+--------------------------------+-------------+------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------+
@@ -95,11 +95,11 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:02:24     ; 1.0                     ; 171 MB              ; 00:00:17                           ;
-; Fitter                  ; 00:01:48     ; 1.0                     ; 182 MB              ; 00:01:21                           ;
-; Assembler               ; 00:00:06     ; 1.0                     ; 154 MB              ; 00:00:02                           ;
-; Classic Timing Analyzer ; 00:00:07     ; 1.0                     ; 125 MB              ; 00:00:03                           ;
-; Total                   ; 00:04:25     ; --                      ; --                  ; 00:01:43                           ;
+; Analysis & Synthesis    ; 00:00:08     ; 1.0                     ; 170 MB              ; 00:00:08                           ;
+; Fitter                  ; 00:00:43     ; 1.0                     ; 205 MB              ; 00:00:43                           ;
+; Assembler               ; 00:00:01     ; 1.0                     ; 155 MB              ; 00:00:01                           ;
+; Classic Timing Analyzer ; 00:00:01     ; 1.0                     ; 137 MB              ; 00:00:01                           ;
+; Total                   ; 00:00:53     ; --                      ; --                  ; 00:00:53                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
