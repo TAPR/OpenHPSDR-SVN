@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 1.058 ns
-From           : CLRCLK
-To             : bits[3]
+Actual Time    : 0.942 ns
+From           : CC
+To             : CCdata[8]
 From Clock     : --
 To Clock       : CBCLK
 Failed Paths   : 0
@@ -15,19 +15,19 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.989 ns
-From           : IO_UPD~reg0
-To             : IO_UPD
-From Clock     : CBCLK
+Actual Time    : 12.373 ns
+From           : PTT_out
+To             : RXOE2
+From Clock     : CLRCLK
 To Clock       : --
 Failed Paths   : 0
 
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 8.716 ns
+Actual Time    : 9.202 ns
 From           : PTT
-To             : RXOE1
+To             : RXOE2
 From Clock     : --
 To Clock       : --
 Failed Paths   : 0
@@ -35,9 +35,9 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : 2.376 ns
+Actual Time    : 2.164 ns
 From           : CLRCLK
-To             : CC_state.01
+To             : CC_state.10
 From Clock     : --
 To Clock       : CBCLK
 Failed Paths   : 0
@@ -45,7 +45,7 @@ Failed Paths   : 0
 Type           : Clock Setup: 'CBCLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 85.04 MHz ( period = 11.759 ns )
+Actual Time    : 81.33 MHz ( period = 12.296 ns )
 From           : bit_count[3]
 To             : bit_count[4]
 From Clock     : CBCLK
@@ -60,16 +60,6 @@ From           : state.11
 To             : Q_CLKRX~reg0
 From Clock     : DDS_OUT
 To Clock       : DDS_OUT
-Failed Paths   : 0
-
-Type           : Clock Setup: 'CLK_48MHZ'
-Slack          : N/A
-Required Time  : None
-Actual Time    : Restricted to 304.04 MHz ( period = 3.289 ns )
-From           : CLK_25MHZ
-To             : CLK_25MHZ
-From Clock     : CLK_48MHZ
-To Clock       : CLK_48MHZ
 Failed Paths   : 0
 
 Type           : Total number of failed paths
