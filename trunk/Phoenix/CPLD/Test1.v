@@ -1,4 +1,4 @@
-// 19 Nov 2008 - Phil Harman VK6APH 
+// 28 Nov 2008 - Phil Harman VK6APH 
 // Test1 file for Phoenix CPLD 
 //
 //
@@ -12,7 +12,9 @@
 //	14 Nov 2008 - Added C&C PTT decode from C20 for testing
 //				- Added 48MHz clock to DDS_CLK for testing AD9912
 //  16 Nov 2008 - Added AD9912 test code at 14.195MHz and 1MHz
-//  19 Nov 2008 - Added decode of Phoenix C&C data from Atlas C21  
+//  19 Nov 2008 - Added decode of Phoenix C&C data from Atlas C21
+//  28 Nov 2008 - C&C decode working, DDS now feeds 90 degree clock divider
+//				  Drive AD9912 from 48MHz clock
 
 
 module Test1(
@@ -24,7 +26,6 @@ module Test1(
 			  input  CBCLK, 		// 3.072MHz clock from Atlas C8
 			  input  CLRCLK,		// 48kHz clock from Atlas C9
 			  input  PTT,			// PTT from Atlas C15, active high
-			  input  phase_data,	// AD9912 phase data from Atlas C21
 			  input  CC,			// C&C data from C21 for testing
 			  output reg I_CLKRX,	// QSD I clock
 			  output reg Q_CLKRX,	// QSD Q clock
@@ -46,28 +47,14 @@ module Test1(
 assign LED1 = 1'b0;  		// turn Green Led on
 assign LED2 = !PTT_out;   	// turn Yellow  Led on when PTT active 
 
-// divide 48MHz by 2 for testing AD9912 default mode
-
-reg CLK_25MHZ; 
-
-always @ (posedge CLK_48MHZ)
-begin
-	CLK_25MHZ = !CLK_25MHZ;
-end 
-
-
-
 // temp link DDS_CLK to 48MHz clock from Atlas so can test AD9912 
-assign DDS_CLK = CLK_25MHZ; //CLK_48MHZ;
+assign DDS_CLK = CLK_48MHZ;
 
 
-// This test code divides the 48MHz clock from 
-// the Atlas bus on C3 by 4 to produce two signals
+// This code divides the DDS clock from U23 by 4 to produce two signals
 // in phase quadrature to drive the QSD & QSE
 
 reg [1:0]state;
-
-//always @ (posedge CLK_48MHZ) // temp use 48MHz clock from Atlas for QSD/QSE clock
 always @ (posedge DDS_OUT)
 begin
 case (state)
@@ -205,6 +192,8 @@ endcase
 end
 
 // decode C & C data into variables and sync to 48kHz LR clock
+// Multiply phase_word by 4 to give a 4 x clock for the 90 degree
+// clock generator.
 
 reg PTT_out;
 reg [47:0] phase_word;
@@ -212,7 +201,7 @@ reg [47:0] phase_word;
 always @ (negedge CLRCLK)  
 begin 
 	PTT_out <= CCdata[32]; 	    			// PTT from PC via USB
-	phase_word <= {CCdata[31:0],16'h0000};	// 32 bit AD9912 phase word from Ozy extended to 48 bits 
+	phase_word <= {CCdata[29:0],18'h00000};	// 32 bit AD9912 phase word x 4 & extended to 48 bits 
 end
 
 
@@ -223,9 +212,7 @@ end
 /////////////////////////////////////////////////////////////
 
 
-// test code using 48MHz Atlas clock x 20 = 960MHz 
-// and DDS out = 14.195MHz or 1MHz.
-
+// Test code using 48MHz Atlas clock x 20 = 960MHz 
 // send data to SDIO since in 3 wire mode
 
 
@@ -258,8 +245,6 @@ case (AD9912)
 	SCLK <= 0;
 	if (bit_count == 0)begin
 		bit_count <= 63; 			// reset counter for next register
-		//DDS_data <= {write,1'b1,1'b1,13'h01AB,8'h0F,8'h24,8'h2E,8'h6B,8'hDC,8'h80}; // set up phase word for 14.195MHz
-		//DDS_data <= {write,1'b1,1'b1,13'h01AB,8'h00,8'h44,8'h44,8'h44,8'h44,8'h44}; // set up phase word for 1MHz
 		DDS_data <= {write,1'b1,1'b1,13'h01AB,phase_word}; // set up phase word from Ozy
 		AD9912 <= 4;				// done so do next register
 		end 
@@ -299,8 +284,6 @@ endcase
 end
 
 
-
-
 //////////////////////////////////////////////////////////////
 //
 // 		General IO
@@ -312,15 +295,9 @@ end
 assign RXOE1 = (PTT || PTT_out) ? 1'b1 : 1'b0; 
 assign RXOE2 = RXOE1; 
 
-
 // enable QSE when PTT active, chip is active low 
 
 assign TXOE1 = ~RXOE1;
 assign TXOE2 = ~RXOE2;
-
-
-
-
-
 
 endmodule

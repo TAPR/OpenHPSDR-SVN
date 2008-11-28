@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Wed Nov 19 16:39:02 2008
+Analysis & Synthesis Status : Successful - Fri Nov 28 22:01:28 2008
 Quartus II Version : 8.0 Build 215 05/29/2008 SJ Web Edition
 Revision Name : Test1
 Top-level Entity Name : Test1
 Family : MAX II
-Total logic elements : 206
-Total pins : 25
+Total logic elements : 199
+Total pins : 24
 Total virtual pins : 0
 Total memory bits : 0
 DSP block 9-bit elements : 0

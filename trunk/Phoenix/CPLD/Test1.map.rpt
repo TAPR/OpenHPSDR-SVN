@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Test1
-Wed Nov 19 16:39:02 2008
+Fri Nov 28 22:01:28 2008
 Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
 
 
@@ -46,13 +46,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                          ;
 +-----------------------------+-----------------------------------------+
-; Analysis & Synthesis Status ; Successful - Wed Nov 19 16:39:02 2008   ;
+; Analysis & Synthesis Status ; Successful - Fri Nov 28 22:01:28 2008   ;
 ; Quartus II Version          ; 8.0 Build 215 05/29/2008 SJ Web Edition ;
 ; Revision Name               ; Test1                                   ;
 ; Top-level Entity Name       ; Test1                                   ;
 ; Family                      ; MAX II                                  ;
-; Total logic elements        ; 206                                     ;
-; Total pins                  ; 25                                      ;
+; Total logic elements        ; 199                                     ;
+; Total pins                  ; 24                                      ;
 ; Total virtual pins          ; 0                                       ;
 ; Total memory bits           ; 0                                       ;
 ; DSP block 9-bit elements    ; 0                                       ;
@@ -140,33 +140,33 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total logic elements                        ; 206   ;
+; Total logic elements                        ; 199   ;
 ;     -- Combinational with no register       ; 58    ;
-;     -- Register only                        ; 76    ;
-;     -- Combinational with a register        ; 72    ;
+;     -- Register only                        ; 72    ;
+;     -- Combinational with a register        ; 69    ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 77    ;
-;     -- 3 input functions                    ; 19    ;
-;     -- 2 input functions                    ; 25    ;
-;     -- 1 input functions                    ; 7     ;
+;     -- 4 input functions                    ; 79    ;
+;     -- 3 input functions                    ; 10    ;
+;     -- 2 input functions                    ; 30    ;
+;     -- 1 input functions                    ; 6     ;
 ;     -- 0 input functions                    ; 2     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 196   ;
+;     -- normal mode                          ; 189   ;
 ;     -- arithmetic mode                      ; 10    ;
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
 ;     -- synchronous clear/load mode          ; 12    ;
 ;     -- asynchronous clear/load mode         ; 0     ;
 ;                                             ;       ;
-; Total registers                             ; 148   ;
+; Total registers                             ; 141   ;
 ; Total logic cells in carry chains           ; 12    ;
-; I/O pins                                    ; 25    ;
+; I/O pins                                    ; 24    ;
 ; Maximum fan-out node                        ; CBCLK ;
-; Maximum fan-out                             ; 108   ;
-; Total fan-out                               ; 727   ;
-; Average fan-out                             ; 3.15  ;
+; Maximum fan-out                             ; 104   ;
+; Total fan-out                               ; 704   ;
+; Average fan-out                             ; 3.16  ;
 +---------------------------------------------+-------+
 
 
@@ -175,7 +175,7 @@ applicable agreement for further details.
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
-; |Test1                     ; 206 (206)   ; 148          ; 0           ; 0            ; 0       ; 0         ; 0         ; 25   ; 0            ; 58 (58)      ; 76 (76)           ; 72 (72)          ; 12 (12)         ; 0 (0)      ; |Test1              ; work         ;
+; |Test1                     ; 199 (199)   ; 141          ; 0           ; 0            ; 0       ; 0         ; 0         ; 24   ; 0            ; 58 (58)      ; 72 (72)           ; 69 (69)          ; 12 (12)         ; 0 (0)      ; |Test1              ; work         ;
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -245,9 +245,9 @@ Encoding Type:  One-Hot
 +-------------------------------------------+----------------------------------------+
 ; phase_word[0]                             ; Stuck at GND due to stuck port data_in ;
 ; DDS_setup[0..2,4..22,24,26..28,30..37,39] ; Stuck at GND due to stuck port data_in ;
-; phase_word[1..15]                         ; Stuck at GND due to stuck port data_in ;
+; phase_word[1..17]                         ; Stuck at GND due to stuck port data_in ;
 ; previous_DAC_data[11]                     ; Stuck at GND due to stuck port data_in ;
-; DDS_data[0..15,50,52,54,57..60,63]        ; Stuck at GND due to stuck port data_in ;
+; DDS_data[0..17,50,52,54,57..60,63]        ; Stuck at GND due to stuck port data_in ;
 ; previous_DAC_data[10]                     ; Merged with previous_DAC_data[9]       ;
 ; previous_DAC_data[9]                      ; Merged with previous_DAC_data[8]       ;
 ; previous_DAC_data[8]                      ; Merged with previous_DAC_data[7]       ;
@@ -278,7 +278,7 @@ Encoding Type:  One-Hot
 ; state~7                                   ; Lost fanout                            ;
 ; state~8                                   ; Lost fanout                            ;
 ; CC_state.00                               ; Lost fanout                            ;
-; Total Number of Removed Registers = 106   ;                                        ;
+; Total Number of Removed Registers = 110   ;                                        ;
 +-------------------------------------------+----------------------------------------+
 
 
@@ -319,6 +319,10 @@ Encoding Type:  One-Hot
 ;                ; due to stuck port data_in ;                                        ;
 ; phase_word[15] ; Stuck at GND              ; DDS_data[15]                           ;
 ;                ; due to stuck port data_in ;                                        ;
+; phase_word[16] ; Stuck at GND              ; DDS_data[16]                           ;
+;                ; due to stuck port data_in ;                                        ;
+; phase_word[17] ; Stuck at GND              ; DDS_data[17]                           ;
+;                ; due to stuck port data_in ;                                        ;
 +----------------+---------------------------+----------------------------------------+
 
 
@@ -327,12 +331,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 148   ;
+; Total registers                              ; 141   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 12    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 45    ;
+; Number of registers using Clock Enable       ; 43    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -354,7 +358,7 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.0 Build 215 05/29/2008 SJ Web Edition
-    Info: Processing started: Wed Nov 19 16:38:56 2008
+    Info: Processing started: Fri Nov 28 22:01:27 2008
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Phoenix -c Test1
 Info: Found 1 design units, including 1 entities, in source file Test1.v
     Info: Found entity 1: Test1
@@ -410,7 +414,11 @@ Warning (14130): Reduced register "phase_word[12]" with stuck data_in port to st
 Warning (14130): Reduced register "phase_word[13]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "phase_word[14]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "phase_word[15]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[16]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "phase_word[17]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "previous_DAC_data[11]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[17]" with stuck data_in port to stuck value GND
+Warning (14130): Reduced register "DDS_data[16]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[15]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[14]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_data[13]" with stuck data_in port to stuck value GND
@@ -530,16 +538,14 @@ Info: 9 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "state~7" lost all its fanouts during netlist optimizations.
     Info: Register "state~8" lost all its fanouts during netlist optimizations.
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
-Warning: Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "phase_data"
-Info: Implemented 231 device resources after synthesis - the final resource count might be different
-    Info: Implemented 7 input pins
+Info: Implemented 223 device resources after synthesis - the final resource count might be different
+    Info: Implemented 6 input pins
     Info: Implemented 18 output pins
-    Info: Implemented 206 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 80 warnings
+    Info: Implemented 199 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 82 warnings
     Info: Peak virtual memory: 157 megabytes
-    Info: Processing ended: Wed Nov 19 16:39:03 2008
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: Processing ended: Fri Nov 28 22:01:28 2008
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
 
 

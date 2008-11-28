@@ -104,9 +104,9 @@ RESERVED_INPUT               : 34        :        :                   :         
 RESERVED_INPUT               : 35        :        :                   :         : 1         :                
 RESERVED_INPUT               : 36        :        :                   :         : 1         :                
 RESERVED_INPUT               : 37        :        :                   :         : 1         :                
-phase_data                   : 38        : input  : 3.3-V LVTTL       :         : 1         : Y              
+CC                           : 38        : input  : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 39        :        :                   :         : 1         :                
-CC                           : 40        : input  : 3.3-V LVTTL       :         : 1         : Y              
+RESERVED_INPUT               : 40        :        :                   :         : 1         :                
 RESERVED_INPUT               : 41        :        :                   :         : 1         :                
 RESERVED_INPUT               : 42        :        :                   :         : 1         :                
 RESERVED_INPUT               : 43        :        :                   :         : 1         :                

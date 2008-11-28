@@ -56,9 +56,8 @@ set_location_assignment PIN_70 -to CBCLK
 set_location_assignment PIN_21 -to DCLK
 set_location_assignment PIN_20 -to DIN
 set_location_assignment PIN_19 -to DLD
-set_location_assignment PIN_40 -to CC
+set_location_assignment PIN_38 -to CC
 set_location_assignment PIN_68 -to CLRCLK
-set_location_assignment PIN_38 -to phase_data
 set_location_assignment PIN_17 -to DDS_CLK
 set_location_assignment PIN_4 -to CSB
 set_location_assignment PIN_1 -to SCLK
