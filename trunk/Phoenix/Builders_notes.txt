@@ -56,6 +56,13 @@ AD9912!
     PLacing a 1k in place of JP2 with a 100pf to ground at C42 cures this. It maybe
     that the PLL loop is not correct for a PLL x 20 - will investigate.
 
+21. Use a 15pf cap for JP2 and PLL works OK. 48MHz drive is too high otherwise. Use C46 and 
+    C47 as per schematic.
+
+At this stage can set AD9912 frequecy (x4) from PowerSDR - use latest Ozy_Janus.rbf.
+
+
+
 
 
 
