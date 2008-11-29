@@ -591,6 +591,7 @@ namespace DataDecoder
             this.Load += new System.EventHandler(this.Mini_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Mini_FormClosing);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.Mini_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Mini_FormClosing);
             this.grpStepCtrl.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
