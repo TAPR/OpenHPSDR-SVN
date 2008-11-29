@@ -51,6 +51,7 @@ namespace DataDecoder
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPorts = new System.Windows.Forms.TabPage();
             this.grpSlave = new System.Windows.Forms.GroupBox();
+            this.chkSlaveDTR = new System.Windows.Forms.CheckBox();
             this.chkFollow = new System.Windows.Forms.CheckBox();
             this.chkMode = new System.Windows.Forms.CheckBox();
             this.cboRadio = new System.Windows.Forms.ComboBox();
@@ -240,18 +241,16 @@ namespace DataDecoder
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.tabMacro = new System.Windows.Forms.TabPage();
+            this.label146 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label143 = new System.Windows.Forms.Label();
+            this.label144 = new System.Windows.Forms.Label();
+            this.label145 = new System.Windows.Forms.Label();
+            this.btnMacro16 = new System.Windows.Forms.Button();
+            this.btnMacro15 = new System.Windows.Forms.Button();
+            this.btnMacro13 = new System.Windows.Forms.Button();
+            this.btnMacro14 = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.btnMacro12 = new System.Windows.Forms.Button();
-            this.btnMacro11 = new System.Windows.Forms.Button();
-            this.btnMacro10 = new System.Windows.Forms.Button();
-            this.btnMacro9 = new System.Windows.Forms.Button();
-            this.btnMacro8 = new System.Windows.Forms.Button();
-            this.btnMacro7 = new System.Windows.Forms.Button();
             this.grpMacro = new System.Windows.Forms.GroupBox();
             this.btnMacSelect = new System.Windows.Forms.Button();
             this.btnMacSave = new System.Windows.Forms.Button();
@@ -260,17 +259,27 @@ namespace DataDecoder
             this.txtMacFile = new System.Windows.Forms.TextBox();
             this.dgm = new System.Windows.Forms.DataGridView();
             this.label33 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.btnMacro6 = new System.Windows.Forms.Button();
+            this.label38 = new System.Windows.Forms.Label();
             this.btnMacro5 = new System.Windows.Forms.Button();
             this.btnMacro4 = new System.Windows.Forms.Button();
+            this.label39 = new System.Windows.Forms.Label();
             this.btnMacro3 = new System.Windows.Forms.Button();
             this.btnMacro2 = new System.Windows.Forms.Button();
+            this.btnMacro12 = new System.Windows.Forms.Button();
             this.btnMacro1 = new System.Windows.Forms.Button();
+            this.btnMacro7 = new System.Windows.Forms.Button();
+            this.btnMacro11 = new System.Windows.Forms.Button();
+            this.btnMacro8 = new System.Windows.Forms.Button();
+            this.btnMacro9 = new System.Windows.Forms.Button();
+            this.btnMacro10 = new System.Windows.Forms.Button();
             this.tabRotor = new System.Windows.Forms.TabPage();
             this.grpPreset = new System.Windows.Forms.GroupBox();
             this.rbPre16 = new System.Windows.Forms.RadioButton();
@@ -754,6 +763,7 @@ namespace DataDecoder
             this.openErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showMiniWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vSPManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onLineHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -779,6 +789,9 @@ namespace DataDecoder
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
             this.PMport = new System.IO.Ports.SerialPort(this.components);
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
+            this.chkSlaveRTS = new System.Windows.Forms.CheckBox();
+            this.chkPwRTS = new System.Windows.Forms.CheckBox();
+            this.chkPwDTR = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -845,11 +858,11 @@ namespace DataDecoder
             this.tabControl.Controls.Add(this.tabSetup);
             this.tabControl.Controls.Add(this.tabExtCtrl);
             this.tabControl.ItemSize = new System.Drawing.Size(42, 18);
-            this.tabControl.Location = new System.Drawing.Point(0, 24);
+            this.tabControl.Location = new System.Drawing.Point(-1, 24);
             this.tabControl.Name = "tabControl";
             this.tabControl.Padding = new System.Drawing.Point(4, 3);
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(425, 335);
+            this.tabControl.Size = new System.Drawing.Size(431, 335);
             this.tabControl.TabIndex = 31;
             this.toolTip1.SetToolTip(this.tabControl, "Right-Click for Options");
             // 
@@ -864,7 +877,7 @@ namespace DataDecoder
             this.tabPorts.Location = new System.Drawing.Point(4, 22);
             this.tabPorts.Name = "tabPorts";
             this.tabPorts.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPorts.Size = new System.Drawing.Size(417, 309);
+            this.tabPorts.Size = new System.Drawing.Size(423, 309);
             this.tabPorts.TabIndex = 0;
             this.tabPorts.Text = "Ports";
             this.toolTip1.SetToolTip(this.tabPorts, "Right-Click for Options");
@@ -872,6 +885,8 @@ namespace DataDecoder
             // 
             // grpSlave
             // 
+            this.grpSlave.Controls.Add(this.chkSlaveRTS);
+            this.grpSlave.Controls.Add(this.chkSlaveDTR);
             this.grpSlave.Controls.Add(this.chkFollow);
             this.grpSlave.Controls.Add(this.chkMode);
             this.grpSlave.Controls.Add(this.cboRadio);
@@ -882,12 +897,25 @@ namespace DataDecoder
             this.grpSlave.Controls.Add(this.label9);
             this.grpSlave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.grpSlave.ForeColor = System.Drawing.Color.Navy;
-            this.grpSlave.Location = new System.Drawing.Point(5, 235);
+            this.grpSlave.Location = new System.Drawing.Point(6, 235);
             this.grpSlave.Name = "grpSlave";
             this.grpSlave.Size = new System.Drawing.Size(405, 65);
             this.grpSlave.TabIndex = 31;
             this.grpSlave.TabStop = false;
             this.grpSlave.Text = "Slave Radio";
+            // 
+            // chkSlaveDTR
+            // 
+            this.chkSlaveDTR.AutoSize = true;
+            this.chkSlaveDTR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSlaveDTR.Location = new System.Drawing.Point(289, 20);
+            this.chkSlaveDTR.Name = "chkSlaveDTR";
+            this.chkSlaveDTR.Size = new System.Drawing.Size(49, 17);
+            this.chkSlaveDTR.TabIndex = 27;
+            this.chkSlaveDTR.Text = "DTR";
+            this.toolTip1.SetToolTip(this.chkSlaveDTR, "Select if your CI-V adapter requires power from the DTR line.");
+            this.chkSlaveDTR.UseVisualStyleBackColor = true;
+            this.chkSlaveDTR.CheckedChanged += new System.EventHandler(this.chkSlaveDTR_CheckedChanged);
             // 
             // chkFollow
             // 
@@ -928,7 +956,7 @@ namespace DataDecoder
             "Yaesu Type 1",
             "Yaesu Type 2",
             "Icom"});
-            this.cboRadio.Location = new System.Drawing.Point(105, 19);
+            this.cboRadio.Location = new System.Drawing.Point(99, 19);
             this.cboRadio.Name = "cboRadio";
             this.cboRadio.Size = new System.Drawing.Size(89, 21);
             this.cboRadio.TabIndex = 26;
@@ -940,7 +968,7 @@ namespace DataDecoder
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label12.ForeColor = System.Drawing.Color.Navy;
-            this.label12.Location = new System.Drawing.Point(216, 42);
+            this.label12.Location = new System.Drawing.Point(196, 42);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(85, 13);
             this.label12.TabIndex = 29;
@@ -951,7 +979,7 @@ namespace DataDecoder
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label8.ForeColor = System.Drawing.Color.Navy;
-            this.label8.Location = new System.Drawing.Point(99, 42);
+            this.label8.Location = new System.Drawing.Point(93, 42);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(92, 13);
             this.label8.TabIndex = 26;
@@ -970,7 +998,7 @@ namespace DataDecoder
             "2400 8-N-2",
             "1200 8-N-1",
             "1200 8-N-2"});
-            this.cboRadData.Location = new System.Drawing.Point(217, 19);
+            this.cboRadData.Location = new System.Drawing.Point(197, 19);
             this.cboRadData.Name = "cboRadData";
             this.cboRadData.Size = new System.Drawing.Size(83, 21);
             this.cboRadData.TabIndex = 28;
@@ -980,7 +1008,7 @@ namespace DataDecoder
             // txtRadNum
             // 
             this.txtRadNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRadNum.Location = new System.Drawing.Point(334, 19);
+            this.txtRadNum.Location = new System.Drawing.Point(352, 19);
             this.txtRadNum.Name = "txtRadNum";
             this.txtRadNum.Size = new System.Drawing.Size(32, 20);
             this.txtRadNum.TabIndex = 15;
@@ -993,7 +1021,7 @@ namespace DataDecoder
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label9.ForeColor = System.Drawing.Color.Navy;
-            this.label9.Location = new System.Drawing.Point(326, 41);
+            this.label9.Location = new System.Drawing.Point(344, 41);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 13);
             this.label9.TabIndex = 27;
@@ -1355,7 +1383,7 @@ namespace DataDecoder
             this.tabDevice.Location = new System.Drawing.Point(4, 22);
             this.tabDevice.Name = "tabDevice";
             this.tabDevice.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDevice.Size = new System.Drawing.Size(417, 309);
+            this.tabDevice.Size = new System.Drawing.Size(423, 309);
             this.tabDevice.TabIndex = 1;
             this.tabDevice.Text = "Device";
             this.toolTip1.SetToolTip(this.tabDevice, "Right-Click for Options");
@@ -1490,7 +1518,7 @@ namespace DataDecoder
             this.tabRCP.Controls.Add(this.groupBox7);
             this.tabRCP.Location = new System.Drawing.Point(4, 22);
             this.tabRCP.Name = "tabRCP";
-            this.tabRCP.Size = new System.Drawing.Size(417, 309);
+            this.tabRCP.Size = new System.Drawing.Size(423, 309);
             this.tabRCP.TabIndex = 3;
             this.tabRCP.Text = "RCP";
             this.tabRCP.UseVisualStyleBackColor = true;
@@ -1800,7 +1828,7 @@ namespace DataDecoder
             this.tabOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabOther.Location = new System.Drawing.Point(4, 22);
             this.tabOther.Name = "tabOther";
-            this.tabOther.Size = new System.Drawing.Size(417, 309);
+            this.tabOther.Size = new System.Drawing.Size(423, 309);
             this.tabOther.TabIndex = 2;
             this.tabOther.Text = "Other";
             this.tabOther.UseVisualStyleBackColor = true;
@@ -2760,11 +2788,12 @@ namespace DataDecoder
             // tabMisc
             // 
             this.tabMisc.Controls.Add(this.grpRepeat);
+            this.tabMisc.Controls.Add(this.btnTest);
             this.tabMisc.Controls.Add(this.grpAlpha);
             this.tabMisc.Controls.Add(this.groupBox4);
             this.tabMisc.Location = new System.Drawing.Point(4, 22);
             this.tabMisc.Name = "tabMisc";
-            this.tabMisc.Size = new System.Drawing.Size(417, 309);
+            this.tabMisc.Size = new System.Drawing.Size(423, 309);
             this.tabMisc.TabIndex = 7;
             this.tabMisc.Text = "Misc";
             this.tabMisc.UseVisualStyleBackColor = true;
@@ -3240,8 +3269,9 @@ namespace DataDecoder
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.chkPwRTS);
+            this.groupBox4.Controls.Add(this.chkPwDTR);
             this.groupBox4.Controls.Add(this.chkDisBcast);
-            this.groupBox4.Controls.Add(this.btnTest);
             this.groupBox4.Controls.Add(this.label24);
             this.groupBox4.Controls.Add(this.txtPW1ra);
             this.groupBox4.Controls.Add(this.label23);
@@ -3276,7 +3306,7 @@ namespace DataDecoder
             // 
             this.btnTest.AutoSize = true;
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTest.Location = new System.Drawing.Point(130, 70);
+            this.btnTest.Location = new System.Drawing.Point(75, 114);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(42, 23);
             this.btnTest.TabIndex = 49;
@@ -3288,7 +3318,7 @@ namespace DataDecoder
             // label24
             // 
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(105, 47);
+            this.label24.Location = new System.Drawing.Point(105, 45);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(18, 13);
             this.label24.TabIndex = 48;
@@ -3310,7 +3340,7 @@ namespace DataDecoder
             // label23
             // 
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(146, 47);
+            this.label23.Location = new System.Drawing.Point(146, 45);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(18, 13);
             this.label23.TabIndex = 46;
@@ -3374,200 +3404,177 @@ namespace DataDecoder
             // 
             // tabMacro
             // 
+            this.tabMacro.Controls.Add(this.label146);
+            this.tabMacro.Controls.Add(this.label29);
+            this.tabMacro.Controls.Add(this.label143);
+            this.tabMacro.Controls.Add(this.label144);
+            this.tabMacro.Controls.Add(this.label145);
+            this.tabMacro.Controls.Add(this.btnMacro16);
+            this.tabMacro.Controls.Add(this.btnMacro15);
+            this.tabMacro.Controls.Add(this.btnMacro13);
+            this.tabMacro.Controls.Add(this.btnMacro14);
             this.tabMacro.Controls.Add(this.label34);
-            this.tabMacro.Controls.Add(this.label35);
-            this.tabMacro.Controls.Add(this.label36);
-            this.tabMacro.Controls.Add(this.label37);
-            this.tabMacro.Controls.Add(this.label38);
-            this.tabMacro.Controls.Add(this.label39);
-            this.tabMacro.Controls.Add(this.btnMacro12);
-            this.tabMacro.Controls.Add(this.btnMacro11);
-            this.tabMacro.Controls.Add(this.btnMacro10);
-            this.tabMacro.Controls.Add(this.btnMacro9);
-            this.tabMacro.Controls.Add(this.btnMacro8);
-            this.tabMacro.Controls.Add(this.btnMacro7);
             this.tabMacro.Controls.Add(this.grpMacro);
             this.tabMacro.Controls.Add(this.dgm);
             this.tabMacro.Controls.Add(this.label33);
+            this.tabMacro.Controls.Add(this.label35);
             this.tabMacro.Controls.Add(this.label32);
             this.tabMacro.Controls.Add(this.label31);
+            this.tabMacro.Controls.Add(this.label36);
             this.tabMacro.Controls.Add(this.label30);
-            this.tabMacro.Controls.Add(this.label29);
+            this.tabMacro.Controls.Add(this.label37);
             this.tabMacro.Controls.Add(this.label28);
             this.tabMacro.Controls.Add(this.btnMacro6);
+            this.tabMacro.Controls.Add(this.label38);
             this.tabMacro.Controls.Add(this.btnMacro5);
             this.tabMacro.Controls.Add(this.btnMacro4);
+            this.tabMacro.Controls.Add(this.label39);
             this.tabMacro.Controls.Add(this.btnMacro3);
             this.tabMacro.Controls.Add(this.btnMacro2);
+            this.tabMacro.Controls.Add(this.btnMacro12);
             this.tabMacro.Controls.Add(this.btnMacro1);
+            this.tabMacro.Controls.Add(this.btnMacro7);
+            this.tabMacro.Controls.Add(this.btnMacro11);
+            this.tabMacro.Controls.Add(this.btnMacro8);
+            this.tabMacro.Controls.Add(this.btnMacro9);
+            this.tabMacro.Controls.Add(this.btnMacro10);
             this.tabMacro.Location = new System.Drawing.Point(4, 22);
             this.tabMacro.Name = "tabMacro";
-            this.tabMacro.Size = new System.Drawing.Size(417, 309);
+            this.tabMacro.Size = new System.Drawing.Size(423, 309);
             this.tabMacro.TabIndex = 4;
             this.tabMacro.Text = "Macro";
             this.tabMacro.UseVisualStyleBackColor = true;
             this.tabMacro.Click += new System.EventHandler(this.tabMacro_Click);
+            // 
+            // label146
+            // 
+            this.label146.AutoSize = true;
+            this.label146.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label146.ForeColor = System.Drawing.Color.Firebrick;
+            this.label146.Location = new System.Drawing.Point(70, 224);
+            this.label146.Name = "label146";
+            this.label146.Size = new System.Drawing.Size(18, 12);
+            this.label146.TabIndex = 107;
+            this.label146.Text = "F2";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.ForeColor = System.Drawing.Color.Firebrick;
+            this.label29.Location = new System.Drawing.Point(384, 267);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(24, 12);
+            this.label29.TabIndex = 106;
+            this.label29.Text = "^F4";
+            // 
+            // label143
+            // 
+            this.label143.AutoSize = true;
+            this.label143.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label143.ForeColor = System.Drawing.Color.Firebrick;
+            this.label143.Location = new System.Drawing.Point(332, 267);
+            this.label143.Name = "label143";
+            this.label143.Size = new System.Drawing.Size(24, 12);
+            this.label143.TabIndex = 105;
+            this.label143.Text = "^F3";
+            // 
+            // label144
+            // 
+            this.label144.AutoSize = true;
+            this.label144.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label144.ForeColor = System.Drawing.Color.Firebrick;
+            this.label144.Location = new System.Drawing.Point(278, 267);
+            this.label144.Name = "label144";
+            this.label144.Size = new System.Drawing.Size(24, 12);
+            this.label144.TabIndex = 104;
+            this.label144.Text = "^F2";
+            // 
+            // label145
+            // 
+            this.label145.AutoSize = true;
+            this.label145.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label145.ForeColor = System.Drawing.Color.Firebrick;
+            this.label145.Location = new System.Drawing.Point(224, 267);
+            this.label145.Name = "label145";
+            this.label145.Size = new System.Drawing.Size(24, 12);
+            this.label145.TabIndex = 103;
+            this.label145.Text = "^F1";
+            // 
+            // btnMacro16
+            // 
+            this.btnMacro16.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacro16.BackColor = System.Drawing.SystemColors.Control;
+            this.btnMacro16.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnMacro16.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacro16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnMacro16.Location = new System.Drawing.Point(373, 281);
+            this.btnMacro16.Name = "btnMacro16";
+            this.btnMacro16.Size = new System.Drawing.Size(49, 25);
+            this.btnMacro16.TabIndex = 102;
+            this.btnMacro16.Text = "M16";
+            this.toolTip1.SetToolTip(this.btnMacro16, "Executes the Macro Commands assigned to this button");
+            this.btnMacro16.UseVisualStyleBackColor = false;
+            this.btnMacro16.Click += new System.EventHandler(this.btnMacro16_Click);
+            // 
+            // btnMacro15
+            // 
+            this.btnMacro15.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacro15.BackColor = System.Drawing.SystemColors.Control;
+            this.btnMacro15.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnMacro15.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacro15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnMacro15.Location = new System.Drawing.Point(320, 281);
+            this.btnMacro15.Name = "btnMacro15";
+            this.btnMacro15.Size = new System.Drawing.Size(49, 25);
+            this.btnMacro15.TabIndex = 101;
+            this.btnMacro15.Text = "M15";
+            this.toolTip1.SetToolTip(this.btnMacro15, "Executes the Macro Commands assigned to this button");
+            this.btnMacro15.UseVisualStyleBackColor = false;
+            this.btnMacro15.Click += new System.EventHandler(this.btnMacro15_Click);
+            // 
+            // btnMacro13
+            // 
+            this.btnMacro13.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacro13.BackColor = System.Drawing.SystemColors.Control;
+            this.btnMacro13.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnMacro13.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacro13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnMacro13.Location = new System.Drawing.Point(212, 281);
+            this.btnMacro13.Name = "btnMacro13";
+            this.btnMacro13.Size = new System.Drawing.Size(49, 25);
+            this.btnMacro13.TabIndex = 99;
+            this.btnMacro13.Text = "M13";
+            this.toolTip1.SetToolTip(this.btnMacro13, "Executes the Macro Commands assigned to this button");
+            this.btnMacro13.UseVisualStyleBackColor = false;
+            this.btnMacro13.Click += new System.EventHandler(this.btnMacro13_Click);
+            // 
+            // btnMacro14
+            // 
+            this.btnMacro14.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacro14.BackColor = System.Drawing.SystemColors.Control;
+            this.btnMacro14.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnMacro14.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacro14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnMacro14.Location = new System.Drawing.Point(267, 281);
+            this.btnMacro14.Name = "btnMacro14";
+            this.btnMacro14.Size = new System.Drawing.Size(49, 25);
+            this.btnMacro14.TabIndex = 100;
+            this.btnMacro14.Text = "M14";
+            this.toolTip1.SetToolTip(this.btnMacro14, "Executes the Macro Commands assigned to this button");
+            this.btnMacro14.UseVisualStyleBackColor = false;
+            this.btnMacro14.Click += new System.EventHandler(this.btnMacro14_Click);
             // 
             // label34
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.Color.Firebrick;
-            this.label34.Location = new System.Drawing.Point(365, 225);
+            this.label34.Location = new System.Drawing.Point(173, 267);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(24, 12);
             this.label34.TabIndex = 98;
             this.label34.Text = "F12";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ForeColor = System.Drawing.Color.Firebrick;
-            this.label35.Location = new System.Drawing.Point(295, 226);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(24, 12);
-            this.label35.TabIndex = 97;
-            this.label35.Text = "F11";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.ForeColor = System.Drawing.Color.Firebrick;
-            this.label36.Location = new System.Drawing.Point(229, 226);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(24, 12);
-            this.label36.TabIndex = 96;
-            this.label36.Text = "F10";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.Firebrick;
-            this.label37.Location = new System.Drawing.Point(165, 226);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(18, 12);
-            this.label37.TabIndex = 95;
-            this.label37.Text = "F9";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.ForeColor = System.Drawing.Color.Firebrick;
-            this.label38.Location = new System.Drawing.Point(94, 226);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(18, 12);
-            this.label38.TabIndex = 94;
-            this.label38.Text = "F8";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.ForeColor = System.Drawing.Color.Firebrick;
-            this.label39.Location = new System.Drawing.Point(26, 226);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(18, 12);
-            this.label39.TabIndex = 93;
-            this.label39.Text = "F7";
-            // 
-            // btnMacro12
-            // 
-            this.btnMacro12.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMacro12.BackColor = System.Drawing.SystemColors.Control;
-            this.btnMacro12.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnMacro12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMacro12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnMacro12.Location = new System.Drawing.Point(346, 241);
-            this.btnMacro12.Name = "btnMacro12";
-            this.btnMacro12.Size = new System.Drawing.Size(65, 19);
-            this.btnMacro12.TabIndex = 92;
-            this.btnMacro12.Text = "Macro 12";
-            this.toolTip1.SetToolTip(this.btnMacro12, "Executes the Macro Commands assigned to this button");
-            this.btnMacro12.UseVisualStyleBackColor = false;
-            this.btnMacro12.Click += new System.EventHandler(this.btnMacro12_Click);
-            // 
-            // btnMacro11
-            // 
-            this.btnMacro11.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMacro11.BackColor = System.Drawing.SystemColors.Control;
-            this.btnMacro11.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnMacro11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMacro11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnMacro11.Location = new System.Drawing.Point(277, 241);
-            this.btnMacro11.Name = "btnMacro11";
-            this.btnMacro11.Size = new System.Drawing.Size(65, 19);
-            this.btnMacro11.TabIndex = 91;
-            this.btnMacro11.Text = "Macro 11";
-            this.toolTip1.SetToolTip(this.btnMacro11, "Executes the Macro Commands assigned to this button");
-            this.btnMacro11.UseVisualStyleBackColor = false;
-            this.btnMacro11.Click += new System.EventHandler(this.btnMacro11_Click);
-            // 
-            // btnMacro10
-            // 
-            this.btnMacro10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMacro10.BackColor = System.Drawing.SystemColors.Control;
-            this.btnMacro10.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnMacro10.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMacro10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnMacro10.Location = new System.Drawing.Point(209, 241);
-            this.btnMacro10.Name = "btnMacro10";
-            this.btnMacro10.Size = new System.Drawing.Size(65, 19);
-            this.btnMacro10.TabIndex = 90;
-            this.btnMacro10.Text = "Macro 10";
-            this.toolTip1.SetToolTip(this.btnMacro10, "Executes the Macro Commands assigned to this button");
-            this.btnMacro10.UseVisualStyleBackColor = false;
-            this.btnMacro10.Click += new System.EventHandler(this.btnMacro10_Click);
-            // 
-            // btnMacro9
-            // 
-            this.btnMacro9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMacro9.BackColor = System.Drawing.SystemColors.Control;
-            this.btnMacro9.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnMacro9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMacro9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnMacro9.Location = new System.Drawing.Point(141, 241);
-            this.btnMacro9.Name = "btnMacro9";
-            this.btnMacro9.Size = new System.Drawing.Size(65, 19);
-            this.btnMacro9.TabIndex = 89;
-            this.btnMacro9.Text = "Macro 9";
-            this.toolTip1.SetToolTip(this.btnMacro9, "Executes the Macro Commands assigned to this button");
-            this.btnMacro9.UseVisualStyleBackColor = false;
-            this.btnMacro9.Click += new System.EventHandler(this.btnMacro9_Click);
-            // 
-            // btnMacro8
-            // 
-            this.btnMacro8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMacro8.BackColor = System.Drawing.SystemColors.Control;
-            this.btnMacro8.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnMacro8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMacro8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnMacro8.Location = new System.Drawing.Point(74, 241);
-            this.btnMacro8.Name = "btnMacro8";
-            this.btnMacro8.Size = new System.Drawing.Size(65, 19);
-            this.btnMacro8.TabIndex = 88;
-            this.btnMacro8.Text = "Macro 8";
-            this.toolTip1.SetToolTip(this.btnMacro8, "Executes the Macro Commands assigned to this button");
-            this.btnMacro8.UseVisualStyleBackColor = false;
-            this.btnMacro8.Click += new System.EventHandler(this.btnMacro8_Click);
-            // 
-            // btnMacro7
-            // 
-            this.btnMacro7.BackColor = System.Drawing.SystemColors.Control;
-            this.btnMacro7.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnMacro7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMacro7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnMacro7.Location = new System.Drawing.Point(6, 241);
-            this.btnMacro7.Name = "btnMacro7";
-            this.btnMacro7.Size = new System.Drawing.Size(65, 19);
-            this.btnMacro7.TabIndex = 87;
-            this.btnMacro7.Text = "Macro 7";
-            this.toolTip1.SetToolTip(this.btnMacro7, "Executes the Macro Commands assigned to this button");
-            this.btnMacro7.UseVisualStyleBackColor = false;
-            this.btnMacro7.Click += new System.EventHandler(this.btnMacro7_Click);
             // 
             // grpMacro
             // 
@@ -3669,6 +3676,7 @@ namespace DataDecoder
             this.dgm.Size = new System.Drawing.Size(409, 151);
             this.dgm.TabIndex = 78;
             this.dgm.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgm_CellValueChanged);
+            this.dgm.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgm_MouseDoubleClick);
             this.dgm.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgm_RowPostPaint);
             // 
             // label33
@@ -3676,18 +3684,29 @@ namespace DataDecoder
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.ForeColor = System.Drawing.Color.Firebrick;
-            this.label33.Location = new System.Drawing.Point(373, 262);
+            this.label33.Location = new System.Drawing.Point(283, 224);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(18, 12);
             this.label33.TabIndex = 86;
             this.label33.Text = "F6";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.ForeColor = System.Drawing.Color.Firebrick;
+            this.label35.Location = new System.Drawing.Point(121, 267);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(24, 12);
+            this.label35.TabIndex = 97;
+            this.label35.Text = "F11";
             // 
             // label32
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.ForeColor = System.Drawing.Color.Firebrick;
-            this.label32.Location = new System.Drawing.Point(296, 262);
+            this.label32.Location = new System.Drawing.Point(229, 224);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(18, 12);
             this.label32.TabIndex = 85;
@@ -3698,40 +3717,51 @@ namespace DataDecoder
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label31.ForeColor = System.Drawing.Color.Firebrick;
-            this.label31.Location = new System.Drawing.Point(230, 262);
+            this.label31.Location = new System.Drawing.Point(177, 224);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(18, 12);
             this.label31.TabIndex = 84;
             this.label31.Text = "F4";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.ForeColor = System.Drawing.Color.Firebrick;
+            this.label36.Location = new System.Drawing.Point(68, 267);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(24, 12);
+            this.label36.TabIndex = 96;
+            this.label36.Text = "F10";
             // 
             // label30
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.Firebrick;
-            this.label30.Location = new System.Drawing.Point(160, 262);
+            this.label30.Location = new System.Drawing.Point(123, 224);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(18, 12);
             this.label30.TabIndex = 83;
             this.label30.Text = "F3";
             // 
-            // label29
+            // label37
             // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.ForeColor = System.Drawing.Color.Firebrick;
-            this.label29.Location = new System.Drawing.Point(95, 262);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(18, 12);
-            this.label29.TabIndex = 82;
-            this.label29.Text = "F2";
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ForeColor = System.Drawing.Color.Firebrick;
+            this.label37.Location = new System.Drawing.Point(15, 267);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(18, 12);
+            this.label37.TabIndex = 95;
+            this.label37.Text = "F9";
             // 
             // label28
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.Color.Firebrick;
-            this.label28.Location = new System.Drawing.Point(27, 262);
+            this.label28.Location = new System.Drawing.Point(16, 224);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(18, 12);
             this.label28.TabIndex = 81;
@@ -3744,14 +3774,25 @@ namespace DataDecoder
             this.btnMacro6.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnMacro6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMacro6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro6.Location = new System.Drawing.Point(347, 276);
+            this.btnMacro6.Location = new System.Drawing.Point(267, 238);
             this.btnMacro6.Name = "btnMacro6";
-            this.btnMacro6.Size = new System.Drawing.Size(65, 19);
+            this.btnMacro6.Size = new System.Drawing.Size(49, 25);
             this.btnMacro6.TabIndex = 77;
-            this.btnMacro6.Text = "Macro 6";
+            this.btnMacro6.Text = "M6";
             this.toolTip1.SetToolTip(this.btnMacro6, "Executes the Macro Commands assigned to this button");
             this.btnMacro6.UseVisualStyleBackColor = false;
             this.btnMacro6.Click += new System.EventHandler(this.btnMacro6_Click);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ForeColor = System.Drawing.Color.Firebrick;
+            this.label38.Location = new System.Drawing.Point(388, 224);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(18, 12);
+            this.label38.TabIndex = 94;
+            this.label38.Text = "F8";
             // 
             // btnMacro5
             // 
@@ -3760,11 +3801,11 @@ namespace DataDecoder
             this.btnMacro5.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnMacro5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMacro5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro5.Location = new System.Drawing.Point(278, 276);
+            this.btnMacro5.Location = new System.Drawing.Point(214, 238);
             this.btnMacro5.Name = "btnMacro5";
-            this.btnMacro5.Size = new System.Drawing.Size(65, 19);
+            this.btnMacro5.Size = new System.Drawing.Size(49, 25);
             this.btnMacro5.TabIndex = 76;
-            this.btnMacro5.Text = "Macro 5";
+            this.btnMacro5.Text = "M5";
             this.toolTip1.SetToolTip(this.btnMacro5, "Executes the Macro Commands assigned to this button");
             this.btnMacro5.UseVisualStyleBackColor = false;
             this.btnMacro5.Click += new System.EventHandler(this.btnMacro5_Click);
@@ -3776,14 +3817,25 @@ namespace DataDecoder
             this.btnMacro4.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnMacro4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMacro4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro4.Location = new System.Drawing.Point(210, 276);
+            this.btnMacro4.Location = new System.Drawing.Point(161, 238);
             this.btnMacro4.Name = "btnMacro4";
-            this.btnMacro4.Size = new System.Drawing.Size(65, 19);
+            this.btnMacro4.Size = new System.Drawing.Size(49, 25);
             this.btnMacro4.TabIndex = 75;
-            this.btnMacro4.Text = "Macro 4";
+            this.btnMacro4.Text = "M4";
             this.toolTip1.SetToolTip(this.btnMacro4, "Executes the Macro Commands assigned to this button");
             this.btnMacro4.UseVisualStyleBackColor = false;
             this.btnMacro4.Click += new System.EventHandler(this.btnMacro4_Click);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.ForeColor = System.Drawing.Color.Firebrick;
+            this.label39.Location = new System.Drawing.Point(335, 224);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(18, 12);
+            this.label39.TabIndex = 93;
+            this.label39.Text = "F7";
             // 
             // btnMacro3
             // 
@@ -3792,11 +3844,11 @@ namespace DataDecoder
             this.btnMacro3.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnMacro3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMacro3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro3.Location = new System.Drawing.Point(142, 276);
+            this.btnMacro3.Location = new System.Drawing.Point(108, 238);
             this.btnMacro3.Name = "btnMacro3";
-            this.btnMacro3.Size = new System.Drawing.Size(65, 19);
+            this.btnMacro3.Size = new System.Drawing.Size(49, 25);
             this.btnMacro3.TabIndex = 74;
-            this.btnMacro3.Text = "Macro 3";
+            this.btnMacro3.Text = "M3";
             this.toolTip1.SetToolTip(this.btnMacro3, "Executes the Macro Commands assigned to this button");
             this.btnMacro3.UseVisualStyleBackColor = false;
             this.btnMacro3.Click += new System.EventHandler(this.btnMacro3_Click);
@@ -3808,14 +3860,30 @@ namespace DataDecoder
             this.btnMacro2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnMacro2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMacro2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro2.Location = new System.Drawing.Point(75, 276);
+            this.btnMacro2.Location = new System.Drawing.Point(55, 238);
             this.btnMacro2.Name = "btnMacro2";
-            this.btnMacro2.Size = new System.Drawing.Size(65, 19);
+            this.btnMacro2.Size = new System.Drawing.Size(49, 25);
             this.btnMacro2.TabIndex = 73;
-            this.btnMacro2.Text = "Macro 2";
+            this.btnMacro2.Text = "M2";
             this.toolTip1.SetToolTip(this.btnMacro2, "Executes the Macro Commands assigned to this button");
             this.btnMacro2.UseVisualStyleBackColor = false;
             this.btnMacro2.Click += new System.EventHandler(this.btnMacro2_Click);
+            // 
+            // btnMacro12
+            // 
+            this.btnMacro12.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacro12.BackColor = System.Drawing.SystemColors.Control;
+            this.btnMacro12.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnMacro12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacro12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnMacro12.Location = new System.Drawing.Point(161, 281);
+            this.btnMacro12.Name = "btnMacro12";
+            this.btnMacro12.Size = new System.Drawing.Size(49, 25);
+            this.btnMacro12.TabIndex = 92;
+            this.btnMacro12.Text = "M12";
+            this.toolTip1.SetToolTip(this.btnMacro12, "Executes the Macro Commands assigned to this button");
+            this.btnMacro12.UseVisualStyleBackColor = false;
+            this.btnMacro12.Click += new System.EventHandler(this.btnMacro12_Click);
             // 
             // btnMacro1
             // 
@@ -3823,14 +3891,93 @@ namespace DataDecoder
             this.btnMacro1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnMacro1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMacro1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro1.Location = new System.Drawing.Point(7, 276);
+            this.btnMacro1.Location = new System.Drawing.Point(1, 238);
             this.btnMacro1.Name = "btnMacro1";
-            this.btnMacro1.Size = new System.Drawing.Size(65, 19);
+            this.btnMacro1.Size = new System.Drawing.Size(49, 25);
             this.btnMacro1.TabIndex = 72;
-            this.btnMacro1.Text = "Macro 1";
+            this.btnMacro1.Text = "M1";
             this.toolTip1.SetToolTip(this.btnMacro1, "Executes the Macro Commands assigned to this button");
             this.btnMacro1.UseVisualStyleBackColor = false;
             this.btnMacro1.Click += new System.EventHandler(this.btnMacro1_Click);
+            // 
+            // btnMacro7
+            // 
+            this.btnMacro7.BackColor = System.Drawing.SystemColors.Control;
+            this.btnMacro7.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnMacro7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacro7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnMacro7.Location = new System.Drawing.Point(320, 238);
+            this.btnMacro7.Name = "btnMacro7";
+            this.btnMacro7.Size = new System.Drawing.Size(49, 25);
+            this.btnMacro7.TabIndex = 87;
+            this.btnMacro7.Text = "M7";
+            this.toolTip1.SetToolTip(this.btnMacro7, "Executes the Macro Commands assigned to this button");
+            this.btnMacro7.UseVisualStyleBackColor = false;
+            this.btnMacro7.Click += new System.EventHandler(this.btnMacro7_Click);
+            // 
+            // btnMacro11
+            // 
+            this.btnMacro11.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacro11.BackColor = System.Drawing.SystemColors.Control;
+            this.btnMacro11.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnMacro11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacro11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnMacro11.Location = new System.Drawing.Point(108, 281);
+            this.btnMacro11.Name = "btnMacro11";
+            this.btnMacro11.Size = new System.Drawing.Size(49, 25);
+            this.btnMacro11.TabIndex = 91;
+            this.btnMacro11.Text = "M11";
+            this.toolTip1.SetToolTip(this.btnMacro11, "Executes the Macro Commands assigned to this button");
+            this.btnMacro11.UseVisualStyleBackColor = false;
+            this.btnMacro11.Click += new System.EventHandler(this.btnMacro11_Click);
+            // 
+            // btnMacro8
+            // 
+            this.btnMacro8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacro8.BackColor = System.Drawing.SystemColors.Control;
+            this.btnMacro8.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnMacro8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacro8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnMacro8.Location = new System.Drawing.Point(373, 238);
+            this.btnMacro8.Name = "btnMacro8";
+            this.btnMacro8.Size = new System.Drawing.Size(49, 25);
+            this.btnMacro8.TabIndex = 88;
+            this.btnMacro8.Text = "M8";
+            this.toolTip1.SetToolTip(this.btnMacro8, "Executes the Macro Commands assigned to this button");
+            this.btnMacro8.UseVisualStyleBackColor = false;
+            this.btnMacro8.Click += new System.EventHandler(this.btnMacro8_Click);
+            // 
+            // btnMacro9
+            // 
+            this.btnMacro9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacro9.BackColor = System.Drawing.SystemColors.Control;
+            this.btnMacro9.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnMacro9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacro9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnMacro9.Location = new System.Drawing.Point(0, 281);
+            this.btnMacro9.Name = "btnMacro9";
+            this.btnMacro9.Size = new System.Drawing.Size(49, 25);
+            this.btnMacro9.TabIndex = 89;
+            this.btnMacro9.Text = "M9";
+            this.toolTip1.SetToolTip(this.btnMacro9, "Executes the Macro Commands assigned to this button");
+            this.btnMacro9.UseVisualStyleBackColor = false;
+            this.btnMacro9.Click += new System.EventHandler(this.btnMacro9_Click);
+            // 
+            // btnMacro10
+            // 
+            this.btnMacro10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMacro10.BackColor = System.Drawing.SystemColors.Control;
+            this.btnMacro10.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnMacro10.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMacro10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnMacro10.Location = new System.Drawing.Point(55, 281);
+            this.btnMacro10.Name = "btnMacro10";
+            this.btnMacro10.Size = new System.Drawing.Size(49, 25);
+            this.btnMacro10.TabIndex = 90;
+            this.btnMacro10.Text = "M10";
+            this.toolTip1.SetToolTip(this.btnMacro10, "Executes the Macro Commands assigned to this button");
+            this.btnMacro10.UseVisualStyleBackColor = false;
+            this.btnMacro10.Click += new System.EventHandler(this.btnMacro10_Click);
             // 
             // tabRotor
             // 
@@ -3841,7 +3988,7 @@ namespace DataDecoder
             this.tabRotor.Controls.Add(this.groupBox8);
             this.tabRotor.Location = new System.Drawing.Point(4, 22);
             this.tabRotor.Name = "tabRotor";
-            this.tabRotor.Size = new System.Drawing.Size(417, 309);
+            this.tabRotor.Size = new System.Drawing.Size(423, 309);
             this.tabRotor.TabIndex = 5;
             this.tabRotor.Text = "Rotor";
             this.tabRotor.UseVisualStyleBackColor = true;
@@ -4728,7 +4875,7 @@ namespace DataDecoder
             this.tabSetup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabSetup.Location = new System.Drawing.Point(4, 22);
             this.tabSetup.Name = "tabSetup";
-            this.tabSetup.Size = new System.Drawing.Size(417, 309);
+            this.tabSetup.Size = new System.Drawing.Size(423, 309);
             this.tabSetup.TabIndex = 6;
             this.tabSetup.Text = "Setup";
             this.tabSetup.UseVisualStyleBackColor = true;
@@ -5550,7 +5697,7 @@ namespace DataDecoder
             this.tabExtCtrl.Controls.Add(this.label106);
             this.tabExtCtrl.Location = new System.Drawing.Point(4, 22);
             this.tabExtCtrl.Name = "tabExtCtrl";
-            this.tabExtCtrl.Size = new System.Drawing.Size(417, 309);
+            this.tabExtCtrl.Size = new System.Drawing.Size(423, 309);
             this.tabExtCtrl.TabIndex = 8;
             this.tabExtCtrl.Text = "ExtCtrl";
             this.tabExtCtrl.UseVisualStyleBackColor = true;
@@ -9484,10 +9631,10 @@ namespace DataDecoder
             // lblAnt
             // 
             this.lblAnt.AutoSize = true;
-            this.lblAnt.BackColor = System.Drawing.SystemColors.Control;
+            this.lblAnt.BackColor = System.Drawing.SystemColors.ControlLight;
             this.lblAnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAnt.ForeColor = System.Drawing.Color.Red;
-            this.lblAnt.Location = new System.Drawing.Point(300, 396);
+            this.lblAnt.Location = new System.Drawing.Point(281, 3);
             this.lblAnt.Name = "lblAnt";
             this.lblAnt.Size = new System.Drawing.Size(100, 16);
             this.lblAnt.TabIndex = 73;
@@ -9507,8 +9654,8 @@ namespace DataDecoder
             // 
             // btnSplit
             // 
-            this.btnSplit.BackColor = System.Drawing.Color.LightGray;
-            this.btnSplit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSplit.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSplit.Location = new System.Drawing.Point(354, 370);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(10, 10);
@@ -9708,13 +9855,14 @@ namespace DataDecoder
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Transparent;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(425, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(430, 24);
             this.menuStrip1.TabIndex = 70;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -9741,7 +9889,8 @@ namespace DataDecoder
             this.enableErrorLoggingToolStripMenuItem,
             this.openErrorLogToolStripMenuItem,
             this.clearErrorLogToolStripMenuItem,
-            this.showMiniWindowToolStripMenuItem});
+            this.showMiniWindowToolStripMenuItem,
+            this.vSPManagerToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -9774,6 +9923,12 @@ namespace DataDecoder
             this.showMiniWindowToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.showMiniWindowToolStripMenuItem.Text = "Show Mini Window";
             this.showMiniWindowToolStripMenuItem.Click += new System.EventHandler(this.showMiniWindowToolStripMenuItem_Click);
+            // 
+            // vSPManagerToolStripMenuItem
+            // 
+            this.vSPManagerToolStripMenuItem.Name = "vSPManagerToolStripMenuItem";
+            this.vSPManagerToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.vSPManagerToolStripMenuItem.Text = "VSP Manager";
             // 
             // aboutToolStripMenuItem
             // 
@@ -9827,9 +9982,9 @@ namespace DataDecoder
             this.statusStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusBar});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 390);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 389);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(425, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(430, 22);
             this.statusStrip1.TabIndex = 71;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -9983,17 +10138,56 @@ namespace DataDecoder
             this.RepeatPort.WriteTimeout = 500;
             this.RepeatPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RepeatPort_DataReceived);
             // 
+            // chkSlaveRTS
+            // 
+            this.chkSlaveRTS.AutoSize = true;
+            this.chkSlaveRTS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSlaveRTS.Location = new System.Drawing.Point(289, 37);
+            this.chkSlaveRTS.Name = "chkSlaveRTS";
+            this.chkSlaveRTS.Size = new System.Drawing.Size(48, 17);
+            this.chkSlaveRTS.TabIndex = 31;
+            this.chkSlaveRTS.Text = "RTS";
+            this.toolTip1.SetToolTip(this.chkSlaveRTS, "Select if your CI-V adapter requires power from the RTS line.");
+            this.chkSlaveRTS.UseVisualStyleBackColor = true;
+            this.chkSlaveRTS.CheckedChanged += new System.EventHandler(this.chkSlaveRTS_CheckedChanged);
+            // 
+            // chkPwRTS
+            // 
+            this.chkPwRTS.AutoSize = true;
+            this.chkPwRTS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkPwRTS.Location = new System.Drawing.Point(122, 77);
+            this.chkPwRTS.Name = "chkPwRTS";
+            this.chkPwRTS.Size = new System.Drawing.Size(48, 17);
+            this.chkPwRTS.TabIndex = 52;
+            this.chkPwRTS.Text = "RTS";
+            this.toolTip1.SetToolTip(this.chkPwRTS, "Select if your CI-V adapter requires power from the RTS line.");
+            this.chkPwRTS.UseVisualStyleBackColor = true;
+            this.chkPwRTS.CheckedChanged += new System.EventHandler(this.chkPwRTS_CheckedChanged);
+            // 
+            // chkPwDTR
+            // 
+            this.chkPwDTR.AutoSize = true;
+            this.chkPwDTR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkPwDTR.Location = new System.Drawing.Point(122, 60);
+            this.chkPwDTR.Name = "chkPwDTR";
+            this.chkPwDTR.Size = new System.Drawing.Size(49, 17);
+            this.chkPwDTR.TabIndex = 51;
+            this.chkPwDTR.Text = "DTR";
+            this.toolTip1.SetToolTip(this.chkPwDTR, "Select if your CI-V adapter requires power from the DTR line.");
+            this.chkPwDTR.UseVisualStyleBackColor = true;
+            this.chkPwDTR.CheckedChanged += new System.EventHandler(this.chkPwDTR_CheckedChanged);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(425, 412);
+            this.ClientSize = new System.Drawing.Size(430, 411);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.btnSplit);
             this.Controls.Add(this.numSplit);
-            this.Controls.Add(this.lblAnt);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.lblAnt);
             this.Controls.Add(this.lblAvg);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.txtAvg);
@@ -10061,6 +10255,7 @@ namespace DataDecoder
             this.grpLP.ResumeLayout(false);
             this.grpLP.PerformLayout();
             this.tabMisc.ResumeLayout(false);
+            this.tabMisc.PerformLayout();
             this.grpRepeat.ResumeLayout(false);
             this.grpRepeat.PerformLayout();
             this.grpAlpha.ResumeLayout(false);
@@ -10243,7 +10438,6 @@ namespace DataDecoder
         private System.Windows.Forms.Button btnMacro2;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label31;
@@ -10846,6 +11040,20 @@ namespace DataDecoder
         private System.IO.Ports.SerialPort RepeatPort;
         private NumericUpDown numSplit;
         private Button btnSplit;
+        private ToolStripMenuItem vSPManagerToolStripMenuItem;
+        private Label label29;
+        private Label label143;
+        private Label label144;
+        private Label label145;
+        private Button btnMacro16;
+        private Button btnMacro15;
+        private Button btnMacro13;
+        private Button btnMacro14;
+        private Label label146;
+        private CheckBox chkSlaveDTR;
+        private CheckBox chkSlaveRTS;
+        private CheckBox chkPwRTS;
+        private CheckBox chkPwDTR;
 
     }
 }

@@ -1954,5 +1954,53 @@ namespace DataDecoder.Properties {
                 this["SplitNum"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool slaveDTR {
+            get {
+                return ((bool)(this["slaveDTR"]));
+            }
+            set {
+                this["slaveDTR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool pwDTR {
+            get {
+                return ((bool)(this["pwDTR"]));
+            }
+            set {
+                this["pwDTR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool slaveRTS {
+            get {
+                return ((bool)(this["slaveRTS"]));
+            }
+            set {
+                this["slaveRTS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool pwRTS {
+            get {
+                return ((bool)(this["pwRTS"]));
+            }
+            set {
+                this["pwRTS"] = value;
+            }
+        }
     }
 }

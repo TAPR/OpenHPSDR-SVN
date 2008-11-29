@@ -1,0 +1,38 @@
+Source		: Microsoft JET Database Engine
+Method		: ExecuteCommandTextForSingleResult
+Time		: 12:56:50 PM
+Date		: 11/28/2008
+Computer	: K5FR-GW32
+Error		: No value given for one or more required parameters.
+Stack Trace	: at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object& executeResult)
+   at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object& executeResult)
+   at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult)
+   at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method)
+   at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.OleDb.OleDbCommand.ExecuteReader()
+   at DataDecoder.Setup.GetDXCC(String SQL) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 4764
+   at DataDecoder.Setup.GetPrefix() in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 4888
+   at DataDecoder.Setup.cboPrefix_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 4583
+   at System.Windows.Forms.ComboBox.OnSelectedIndexChanged(EventArgs e)
+   at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   at DataDecoder.Setup.Setup_Load(Object sender, EventArgs e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 1053
+-------------------------------------------------------------------
+Source		: Microsoft JET Database Engine
+Method		: ExecuteCommandTextForSingleResult
+Time		: 1:06:54 PM
+Date		: 11/28/2008
+Computer	: K5FR-GW32
+Error		: No value given for one or more required parameters.
+Stack Trace	: at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object& executeResult)
+   at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object& executeResult)
+   at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult)
+   at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method)
+   at System.Data.OleDb.OleDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.OleDb.OleDbCommand.ExecuteReader()
+   at DataDecoder.Setup.GetDXCC(String SQL) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 4764
+   at DataDecoder.Setup.GetPrefix() in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 4888
+   at DataDecoder.Setup.cboPrefix_SelectedIndexChanged(Object sender, EventArgs e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 4583
+   at System.Windows.Forms.ComboBox.OnSelectedIndexChanged(EventArgs e)
+   at System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   at DataDecoder.Setup.Setup_Load(Object sender, EventArgs e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 1053
+-------------------------------------------------------------------

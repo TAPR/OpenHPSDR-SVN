@@ -529,6 +529,10 @@ namespace DataDecoder
             cboRepeatPort.SelectedIndex = set.RepeatPort;
             chkRepeat.Checked = set.RepeatEnab;
             numSplit.Value = set.SplitNum;
+            chkSlaveDTR.Checked = set.slaveDTR;
+            chkSlaveRTS.Checked = set.slaveRTS;
+            chkPwDTR.Checked = set.pwDTR;
+            chkPwRTS.Checked = set.pwRTS;
             
             X2SetUp();  // setup the X2 Matrix
             WN2SetUp(); // setup the WN2
@@ -667,7 +671,9 @@ namespace DataDecoder
                 {
                     this.Text = text;
                     mini.Text = text;
-                    this.StatusBar.Text = text;
+                    if(!lblAnt.Visible) this.StatusBar.Text = text;
+                    else this.StatusBar.Text = text + 
+                        "               * * * Transmit Inhibited! * * *";
                 }
             }
         }
@@ -827,6 +833,75 @@ namespace DataDecoder
         #endregion Delegates
 
         #region Form Events
+
+        // The slaveDTR checkbox has changed
+        private void chkSlaveDTR_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSlaveDTR.Checked)
+            { AccPort.DtrEnable = true; set.slaveDTR = true; }
+            else
+            { AccPort.DtrEnable = false; set.slaveDTR = false; }
+            set.Save();
+        }
+        // The slaveRTS checkbox has changed
+        private void chkSlaveRTS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSlaveRTS.Checked)
+            { AccPort.RtsEnable = true; set.slaveRTS = true; }
+            else
+            { AccPort.RtsEnable = false; set.slaveRTS = false; }
+            set.Save();
+        }
+        // The pwDTR checkbox has changed
+        private void chkPwDTR_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPwDTR.Checked)
+            { PW1port.DtrEnable = true; set.pwDTR = true; }
+            else
+            { PW1port.DtrEnable = false; set.pwDTR = false; }
+            set.Save();
+        }
+        // The pwRTS checkbox has changed
+        private void chkPwRTS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPwRTS.Checked)
+            { PW1port.RtsEnable = true; set.pwRTS = true; }
+            else
+            { PW1port.RtsEnable = false; set.pwRTS = false; }
+            set.Save();
+        }
+
+        bool split = false;
+        // The Split button was pressed
+        private void btnSplit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!split)
+                {
+                    split = true;
+                    WriteToPort("ZZVS0;", iSleep); // vfo A>B
+                    int newfreq = Convert.ToInt32(lastFreq);
+                    newfreq += ((int)numSplit.Value * 1000);
+                    WriteToPort("ZZFB" + newfreq.ToString().PadLeft(11, '0') + ";", iSleep);
+                    WriteToPort("ZZSP1;", iSleep); // turn split on
+                    btnSplit.BackColor = Color.Yellow;
+                }
+                else
+                {
+                    WriteToPort("ZZSP0;", iSleep); // turn split off
+                    btnSplit.BackColor = Color.PaleTurquoise;
+                    split = false;
+                }
+            }
+            catch { }
+        }
+        // The Split up/down number box has changed
+        private void numSplit_ValueChanged(object sender, EventArgs e)
+        {
+            set.SplitNum = numSplit.Value;
+            set.Save();
+        }
         // The On-Top Check box was changed
         private void chkOnTop_CheckedChanged(object sender, EventArgs e)
         {
@@ -2068,6 +2143,882 @@ namespace DataDecoder
         }
         #endregion Helper Methods
 
+        #region ALC
+
+        Double dAlc = 0;    // ALC cal std.
+        int iDrive = 0;     // cal drive watts
+
+        #region ALC Delegates
+
+        // Write ALC reading to txt box
+        delegate void SetALCCallback(string text);
+        private void SetALC(string text)
+        {
+            if (this.txtALC.InvokeRequired)
+            {
+                SetALCCallback d = new SetALCCallback(SetALC);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+                txtALC.Text = text;
+        }
+        // Write Drive reading to txt box
+        delegate void SetDriveCallback(string text);
+        private void SetDrive(string text)
+        {
+            if (this.txtDrive.InvokeRequired)
+            {
+                SetDriveCallback d = new SetDriveCallback(SetDrive);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+                txtDrive.Text = text;
+        }
+        #endregion ALC Delegates
+
+        #region ALC Events
+
+        private void alcTimer_Elapsed(object sender, EventArgs e)
+        {
+            if (closing) { alcTimer.Close(); return; }
+            double eDong;
+            if (xOn == "1" && chkAlcEnab.Checked)
+            {
+                eDong = ReadALC();  // get dong volts
+                if (eDong > dAlc)
+                {
+                    double alc = (eDong / dAlc) - 1;
+
+                         if (alc > .4) iDrive -= 5;
+                    else if (alc > .3) iDrive -= 4;
+                    else if (alc > .2) iDrive -= 3;
+                    else if (alc > .1) iDrive -= 2;
+                    else if (alc < .1) iDrive -= 1;
+
+                    WriteToPort("ZZPC" + iDrive.ToString().PadLeft(3, '0') + ";", iSleep);
+                }
+            }
+        }
+        // the Calibrate button was pressed
+        private void btnCal_Click(object sender, EventArgs e)
+        {
+            DialogResult result;
+            result = MessageBox.Show(
+            "You are about to initiate the ALC calibration routine for your\r" +
+            "linear amplifier. If this isn't what you intended exit now.\r\r" +
+            "Please check that the following preparations are observed.\r\r" +
+            "- The amplifier must be on and not in standby mode. \r" +
+            "- Make sure a antenna or dummy load is connected to the amp.\r" +
+            "This procedure puts the radio into transmit mode. Be observant\r\r" +
+            "and prepared to act in case of a hang-up or unusual operation.\r" +
+            "Pressing the Tune button on the PowerSDR Console will un-key the radio.\r\r" +
+            "Press the OK button to start the calibration procedure.",
+            "ALC Calibrate Procedure",
+            MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+
+            if (result != DialogResult.OK) return;
+
+            int calSleep = 300;
+            string band;
+            string freq;
+            WriteToPort("ZZSP0;", calSleep); // make sure radio not split
+
+            // Cal 160
+            if (chk160.Checked)
+            {
+                band = "160"; freq = "00001850000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc160 = txtALC.Text; set.Drive160 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 80
+            if (chk80.Checked)
+            {
+                band = "80"; freq = "00003550000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc80 = txtALC.Text; set.Drive80 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 40
+            if (chk40.Checked)
+            {
+                band = "40"; freq = "00007150000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc40 = txtALC.Text; set.Drive40 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 30
+            if (chk30.Checked)
+            {
+                band = "30"; freq = "00010125000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc30 = txtALC.Text; set.Drive30 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 20
+            if (chk20.Checked)
+            {
+                band = "20"; freq = "00014100000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc20 = txtALC.Text; set.Drive20 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 17
+            if (chk17.Checked)
+            {
+                band = "17"; freq = "00018075000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc17 = txtALC.Text; set.Drive17 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 15
+            if (chk15.Checked)
+            {
+                band = "15"; freq = "00021200000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc15 = txtALC.Text; set.Drive15 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 12
+            if (chk12.Checked)
+            {
+                band = "12"; freq = "00024900000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc12 = txtALC.Text; set.Drive12 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 10
+            if (chk10.Checked)
+            {
+                band = "10"; freq = "00029000000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc10 = txtALC.Text; set.Drive10 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+            // Cal 6
+            if (chk6.Checked)
+            {
+                band = "6"; freq = "00051250000";
+                if (CalSetup(band, freq, calSleep))
+                {   // Set freq and send message
+                    if (doCal())        // run cal routine
+                    { set.Alc6 = txtALC.Text; set.Drive6 = txtDrive.Text; set.Save(); }
+                    else
+                    { if (!CalFailed(band)) goto Quit; }
+                }
+                else goto Quit;
+            }
+
+            // Print calibration report
+            string msg = "";
+            if (chk160.Checked) msg +=
+            string.Format("160 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc160)) 
+            + "\tDrive= " + set.Drive160 + "\t\r";
+
+            if (chk80.Checked) msg +=
+            string.Format(" 80 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc80))
+            + "\tDrive= " + set.Drive80 + "\t\r";
+
+            if (chk40.Checked) msg +=
+            string.Format(" 40 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc80))
+            + "\tDrive= " + set.Drive80 + "\t\r";
+
+            if (chk30.Checked) msg +=
+            string.Format(" 30 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc30))
+            + "\tDrive= " + set.Drive30 + "\t\r";
+
+            if (chk20.Checked) msg +=
+            string.Format(" 20 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc20))
+            + "\tDrive= " + set.Drive20 + "\t\r";
+
+            if (chk17.Checked) msg +=
+            string.Format(" 17 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc17))
+            + "\tDrive= " + set.Drive17 + "\t\r";
+
+            if (chk15.Checked) msg +=
+            string.Format(" 15 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc15))
+            + "\tDrive= " + set.Drive15 + "\t\r";
+
+            if (chk12.Checked) msg +=
+            string.Format(" 12 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc12))
+            + "\tDrive= " + set.Drive12 + "\t\r";
+
+            if (chk10.Checked) msg +=
+            string.Format(" 10 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc10))
+            + "\tDrive= " + set.Drive10 + "\t\r";
+
+            if (chk6.Checked) msg +=
+            string.Format(" 6 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc6))
+            + "\tDrive= " + set.Drive6 + "\t\r";
+           
+            MessageBox.Show(msg,"ALC Calibration Report",
+            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+        Quit: return;
+        }
+
+        private bool CalSetup(string band, string freq, int sleep)
+        {
+            WriteToPort("ZZFA" + freq + ";", sleep); // set freq
+            DialogResult result;
+            result = MessageBox.Show(
+                "Please verify your amplifier is set to "+ band + " meters" + 
+                "\rand the controls properly adjusted for this band.", 
+                "ALC Calibrate Procedure", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK) return true;
+            return false;
+        }        
+
+        private bool CalFailed(string band)
+        {
+            DialogResult result;
+            result = MessageBox.Show(
+              "Calibration for " + band + " meters failed.\r\r" +
+              "Please make sure the amp is powered up, alc line\r" +
+              "is connected, not in stand-by then try again",
+              "Calibration Failed", MessageBoxButtons.OKCancel, 
+              MessageBoxIcon.Error);
+            if (result == DialogResult.OK) return true;
+            return false;
+
+        }        
+        // the Set button was pressed
+        private void btnSet_Click(object sender, EventArgs e)
+        {
+            if (band == "160")
+            { set.Drive160 = txtDrive.Text; set.Alc160 = txtALC.Text; }
+            else if (band == "080")
+            { set.Drive80 = txtDrive.Text; set.Alc80 = txtALC.Text; }
+            else if (band == "040")
+            { set.Drive40 = txtDrive.Text; set.Alc40 = txtALC.Text; }
+            else if (band == "030")
+            { set.Drive30 = txtDrive.Text; set.Alc30 = txtALC.Text; }
+            else if (band == "020")
+            { set.Drive20 = txtDrive.Text; set.Alc20 = txtALC.Text; }
+            else if (band == "017")
+            { set.Drive17 = txtDrive.Text; set.Alc17 = txtALC.Text; }
+            else if (band == "015")
+            { set.Drive15 = txtDrive.Text; set.Alc15 = txtALC.Text; }
+            else if (band == "012")
+            { set.Drive12 = txtDrive.Text; set.Alc12 = txtALC.Text; }
+            else if (band == "010")
+            { set.Drive10 = txtDrive.Text; set.Alc10 = txtALC.Text; }
+            else if (band == "006")
+            { set.Drive6 = txtDrive.Text; set.Alc6 = txtALC.Text; }
+            else
+            { MessageBox.Show("The save settings operation failed."); return; }
+            set.Save();
+            MessageBox.Show("The settings for " + band.TrimStart('0') + " meters were saved");
+        }
+        // the Enable ALC check box was changed
+        private void chkAlcEnab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAlcEnab.Checked)
+            {
+                set.AlcEnab = true; 
+                //dAlc = Convert.ToDouble(txtALC.Text);
+                //iDrive = Convert.ToInt16(txtDrive.Text);
+            }
+
+            else
+            {
+                alcTimer.Enabled = false;
+                set.AlcEnab = false;
+            }
+            
+            set.Save();
+        }
+        // the Check All button was pressed
+        private void btnChkAll_Click(object sender, EventArgs e)
+        {
+            chk160.Checked = true; chk80.Checked = true; chk40.Checked = true;
+            chk30.Checked = true; chk20.Checked = true; chk17.Checked = true; 
+            chk15.Checked = true; chk12.Checked = true;
+            chk10.Checked = true; chk6.Checked = true;
+        }
+        // the Clear All button was pressed
+        private void btnClrAll_Click(object sender, EventArgs e)
+        {
+            chk160.Checked = false; chk80.Checked = false; chk40.Checked = false; 
+            chk30.Checked = false; chk20.Checked = false; chk17.Checked = false; 
+            chk15.Checked = false; chk12.Checked = false; chk10.Checked = false; 
+            chk6.Checked = false;
+        }
+
+        #endregion ALC Events
+
+        #region ALC Methods
+
+        // run the amp calibration
+        private bool doCal()
+        {
+            int drive = 0;
+            double level = 0, lastLevel = 0;
+            test = 0;   // part of test code
+            WriteToPort("ZZTO000;", iSleep); // set tune pwr level to 0
+            WriteToPort("ZZTU1;", iSleep); // key rig
+            // step the power up in 5 watt steps until the alc voltage
+            // curve starts to flatten out.
+            for (int i = 10; i < 100; i +=5)
+            {
+                test++;
+                WriteToPort("ZZTO" + drive.ToString().PadLeft(3, '0') + ";", iSleep);
+                level = DummyAmp();  // get the alc volts for this drive level
+                if (level > lastLevel + .75)
+                {
+                    drive += 5;
+                    lastLevel = level;
+                }
+                else break;
+                    
+                SetDrive(drive.ToString());                               
+                SetALC(string.Format("{0:f2}",level));
+            }
+            // Set the PSDR drive level
+            WriteToPort("ZZTU0;", iSleep); // un-key rig
+            WriteToPort("ZZPC" + drive.ToString().PadLeft(3, '0') + ";", iSleep);
+            if (level > 0) return true;
+            return false;
+        }
+        // Read the ALC dongle
+        private double ReadALC()
+        {
+            double eDong = 0;
+
+            return eDong;
+        }
+
+        // get the alc settings for the amp
+        int test = 0;   // Test code!
+        private double DummyAmp()
+        {
+            double emc = 0;
+            double [] e = new double[10]; 
+            // average readings over a 10 sample period.
+            Random r = new Random(test);    // Test code!
+            for (int i = 0; i < 10; i++)
+            {
+                e[i] = (double)r.NextDouble() + test; // Test code!
+                Console.WriteLine(e[i]); // Test code!
+            }
+            if (test == 5) // Test code!
+                {emc = 4.75;} // Test code!
+            else // Test code!
+                {emc = Average(e);}
+            Console.WriteLine(emc + " Average"); // Test code!
+            return emc;
+            
+        }
+        public static double Average(Array array)
+        {
+            double average = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                average += (double)array.GetValue(i);
+            }
+            return average / array.Length;
+        }
+
+        #endregion ALC Methods
+
+        #region ALC Setup
+
+        private void AlcSetUp()
+        {
+            chkAlcEnab.Checked = set.AlcEnab;
+
+            // setup alc Read Timer for a 100 ms interrupt
+            alcTimer = new System.Timers.Timer();
+            alcTimer.Elapsed += new System.Timers.ElapsedEventHandler(alcTimer_Elapsed);
+            alcTimer.Interval = 100;      // 1000 = 1 second
+            alcTimer.Enabled = false;
+
+        }
+        #endregion ALC Setup
+
+        private void chkModeChg_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkModeChg.Checked) set.ModeChg = true;
+            else set.ModeChg = false;
+            set.Save();
+        }
+
+        #endregion ALC
+        
+        #region Alpha
+
+          #region # Delegates #
+
+        // Write to Pwr button
+        delegate void SetPwrCallback(string text);
+        public void SetPwr(string text)
+        {
+            if (this.btnPwr.InvokeRequired)
+            {
+                SetPwrCallback d = new SetPwrCallback(SetPwr);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { btnPwr.Text = text; mini.btnPwr.Text = text; }
+        }
+        // Write to Oper button
+        delegate void SetOperCallback(string text);
+        public void SetOper(string text)
+        {
+            if (this.btnOper.InvokeRequired)
+            {
+                SetOperCallback d = new SetOperCallback(SetOper);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { btnOper.Text = text; mini.btnOper.Text = text; }
+        }
+        // Write to Tune button
+        delegate void SetTuneCallback(string text);
+        public void SetTune(string text)
+        {
+            if (this.btnTune.InvokeRequired)
+            {
+                SetTuneCallback d = new SetTuneCallback(SetTune);
+                this.Invoke(d, new object[] { text });
+            }
+            else { btnTune.Text = text; mini.btnTune.Text = text; }
+        }
+        // Write to HV button
+        delegate void SetHVCallback(string text);
+        public void SetHV(string text)
+        {
+            if (this.btnHV.InvokeRequired)
+            {
+                SetHVCallback d = new SetHVCallback(SetHV);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { btnHV.Text = text; mini.btnHV.Text = text; }
+        }
+        // Write to Band window
+        delegate void SetBandCallback(string text);
+        public void SetBand(string text)
+        {
+            if (this.txtBand.InvokeRequired)
+            {
+                SetBandCallback d = new SetBandCallback(SetBand);
+                this.Invoke(d, new object[] { text });
+            }
+            else txtBand.Text = text;
+        }
+        // Write to Seg window
+        delegate void SetSegCallback(string text);
+        public void SetSeg(string text)
+        {
+            if (this.txtSeg.InvokeRequired)
+            {
+                SetSegCallback d = new SetSegCallback(SetSeg);
+                this.Invoke(d, new object[] { text });
+            }
+            else txtSeg.Text = text;
+        }
+        // Write to Msg window
+        delegate void SetMsgCallback(string text);
+        public void SetMsg(string text)
+        {
+            if (this.txtMsg.InvokeRequired)
+            {
+                SetMsgCallback d = new SetMsgCallback(SetMsg);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { txtMsg.Text = text; mini.txtMsg.Text = text; }
+        }
+        // Write to Freq window
+        delegate void SetFreqCallback(string text);
+        public void SetFreq(string text)
+        {
+            if (this.txtFreq.InvokeRequired)
+            {
+                SetFreqCallback d = new SetFreqCallback(SetFreq);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { txtFreq.Text = text; mini.txtMsg.Text = text; }
+        }
+        // Write to Tune window
+        delegate void SetpaTuneCallback(string text);
+        public void SetpaTune(string text)
+        {
+            if (this.txtTune.InvokeRequired)
+            {
+                SetpaTuneCallback d = new SetpaTuneCallback(SetpaTune);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { txtTune.Text = text; }
+        }
+        // Write to Load window
+        delegate void SetLoadCallback(string text);
+        public void SetLoad(string text)
+        {
+            if (this.txtLoad.InvokeRequired)
+            {
+                SetLoadCallback d = new SetLoadCallback(SetLoad);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { txtLoad.Text = text; }
+        }
+
+          #endregion Delegates
+
+          #region # Events #
+
+        // the Alpha enabled RadioButton has changed
+        private void chkAlpha_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cboAlpha.SelectedIndex > 0)
+            {
+                if (chkAlpha.Checked)
+                {
+                    btnPwr.Enabled = true; btnOper.Enabled = true;
+                    mini.btnPwr.Enabled = true; mini.btnOper.Enabled = true;
+                    btnTune.Enabled = true; btnHV.Enabled = true;
+                    mini.btnTune.Enabled = true; mini.btnHV.Enabled = true;
+                    btnSF.Enabled = true; btnHF.Enabled = true;
+                    mini.btnSF.Enabled = true; mini.btnHF.Enabled = true;
+                    txtMsg.Enabled = true; mini.txtMsg.Enabled = true;
+                    txtBand.Enabled = true; txtSeg.Enabled = true; txtFreq.Enabled = true;
+                    txtTune.Enabled = true; txtLoad.Enabled = true; 
+                    txtAlphaInt.Enabled = true; set.AlphaEnab = true; 
+                    AlphaTimer.Enabled = true;  set.Save();
+                    AlphaPort.Write("AC\r"); 
+                    AlphaPort.Write("EXT OFF\r"); 
+                    AlphaPort.Write("STAT\r");
+                    AlphaPort.Write("AUTOTUNE\r");
+                }
+                else
+                {
+                    btnPwr.Enabled = false; btnOper.Enabled = false;
+                    mini.btnPwr.Enabled = false; mini.btnOper.Enabled = false;
+                    btnTune.Enabled = false; btnHV.Enabled = false;
+                    mini.btnTune.Enabled = false; mini.btnHV.Enabled = false;
+                    btnSF.Enabled = false; btnHF.Enabled = false;
+                    mini.btnSF.Enabled = false; mini.btnHF.Enabled = false;
+                    txtMsg.Enabled = false; mini.txtMsg.Enabled = false;
+                    txtBand.Enabled = false; txtSeg.Enabled = false; txtFreq.Enabled = false;
+                    txtTune.Enabled = false; txtLoad.Enabled =  false;
+                    set.AlphaEnab = false; txtAlphaInt.Enabled = false; 
+                    AlphaTimer.Enabled = false; set.Save();
+                }
+            }
+            else 
+            {
+                btnPwr.Enabled = false; btnOper.Enabled = false;
+                mini.btnPwr.Enabled = false; mini.btnOper.Enabled = false;
+                btnTune.Enabled = false; btnHV.Enabled = false;
+                mini.btnTune.Enabled = false; mini.btnHV.Enabled = false;
+                btnSF.Enabled = false; btnHF.Enabled = false;
+                mini.btnSF.Enabled = false; mini.btnHF.Enabled = false;
+                txtMsg.Enabled = false; mini.txtMsg.Enabled = false;
+                txtBand.Enabled = false; txtSeg.Enabled = false;
+                txtTune.Enabled = false; txtLoad.Enabled = false;
+                txtAlphaInt.Enabled = false; AlphaTimer.Enabled = false;
+                txtFreq.Enabled = false; set.AlphaEnab = false; set.Save();
+                chkAlpha.Checked = false; 
+
+                Notification alert = new Notification();
+                Notification.notiIntvl = 7000;
+                Notification.notiMsg =
+                    "You must assign a port number before the\r\r" +
+                    "Alpha Amplifier can be enabled.\r\r" +
+                    "Please assign a valid port and try again.\r";
+                alert.Show();
+            }
+        }
+        // The baud rate selection has changed
+        private void cboAlphaBaud_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboAlphaBaud.SelectedItem.ToString() == "4800")
+            {   
+                AlphaPort.BaudRate = 4800; AlphaPort.DataBits = 8; 
+                AlphaPort.Parity = System.IO.Ports.Parity.None; 
+                AlphaPort.StopBits = System.IO.Ports.StopBits.One; 
+            }
+            if (cboAlphaBaud.SelectedItem.ToString() == "9600")
+            {
+                AlphaPort.BaudRate = 9600; AlphaPort.DataBits = 8;
+                AlphaPort.Parity = System.IO.Ports.Parity.None;
+                AlphaPort.StopBits = System.IO.Ports.StopBits.One;
+            }
+            set.AlphaBaud = cboAlphaBaud.SelectedIndex; set.Save();
+        }
+        // the serial port selection has changed
+        private void cboAlpha_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (AlphaPort.IsOpen) AlphaPort.Close();
+            if (cboAlpha.SelectedIndex > 0)
+            {
+                AlphaPort.PortName = cboAlpha.SelectedItem.ToString();
+                try
+                {
+                    AlphaPort.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The Alpha amplifier serial port " + AlphaPort.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboAlpha.SelectedText = "";
+                    chkAlpha.Checked = false;
+                    return;
+                }
+            }
+            else
+            {
+                chkAlpha.Checked = false;
+            }
+            set.AlphaPort = cboAlpha.SelectedIndex;
+            set.Save();
+        }
+        public string sf = "";          // Soft fault message
+        public string hf = "";          // Hard fault message
+        public string ac = "Off";       // Amp power (On/Off)
+        public string mode = "LOW";     // HV mode
+        public string state = "Off";    // Amp State (On/Off)
+        public string tune = "Off";     // State of autotune 
+        string sAlpha = "";             // Port buffer message
+        // a Message(s) from Amplifier HAS BEEN received
+        private void AlphaPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkAlpha.Checked)       // port must be enabled to receive data
+            {
+                try
+                {
+                    string sCmd = "";
+                    SerialPort port = (SerialPort)sender;
+                    byte[] data = new byte[port.BytesToRead];
+                    port.Read(data, 0, data.Length);
+                    sAlpha += AE.GetString(data, 0, data.Length);
+                    Regex rex = new Regex(@".*?\r\n"); 		
+                    for (Match m = rex.Match(sAlpha); m.Success; m = m.NextMatch())
+                    {   //loop thru the buffer and find matches
+                        sCmd = m.Value.Substring(0,m.Value.Length-2);
+                        sAlpha = sAlpha.Replace(m.Value, ""); //remove match from buffer
+
+                        if (sCmd.Contains("FACTORY MODE = ON"))
+                            AlphaPort.Write("EXT OFF\r");
+
+                        if (sCmd.Contains("AMPLIFIER IS OFF")) 
+                        {   SetPwr("Off"); btnPwr.BackColor = Color.Empty; 
+                            ac = "Off"; mini.btnPwr.BackColor = Color.Empty; }
+                        if (sCmd.Contains("AMPLIFIER IS ON"))
+                        {   SetPwr("On"); btnPwr.BackColor = Color.Lime; 
+                            ac = "On"; mini.btnPwr.BackColor = Color.Lime; }
+                        if (sCmd.Contains("AUTOTUNE ENABLED"))
+                        {   SetTune("Auto"); btnTune.BackColor = Color.Lime; 
+                            tune = "On"; mini.btnTune.BackColor = Color.Lime; }
+                        if (sCmd.Contains("AUTOTUNE DISABLED"))
+                        {   SetTune("Man"); btnTune.BackColor = Color.Yellow; 
+                            tune = "Off"; mini.btnTune.BackColor = Color.Yellow; }
+                        if (sCmd.Contains("MODE = HIGH"))
+                        {   SetHV("High"); btnHV.BackColor = Color.Lime; 
+                            mode = "High"; mini.btnHV.BackColor = Color.Lime; }
+                        if (sCmd.Contains("MODE = LOW"))
+                        {   SetHV("Low"); btnHV.BackColor = Color.Yellow; 
+                            mode = "Low"; mini.btnHV.BackColor = Color.Yellow; }
+                        if (sCmd.Contains("STATE = OFF"))
+                        {   SetOper("Off"); btnOper.BackColor = Color.Empty; 
+                            state = "Off"; mini.btnOper.BackColor = Color.Empty; }
+                        if (sCmd.Contains("STATE = WARMUP"))
+                        {   SetOper("Wait"); btnOper.BackColor = Color.Pink; 
+                            state = "Wait"; mini.btnOper.BackColor = Color.Pink; }
+                        if (sCmd.Contains("STATE = STANDBY"))
+                        {   SetOper("Stby"); btnOper.BackColor = Color.Yellow; 
+                            state = "Stby"; mini.btnOper.BackColor = Color.Yellow; }
+                        if (sCmd.Contains("STATE = OPERATE"))
+                        {   SetOper("Oper"); btnOper.BackColor = Color.Lime; 
+                            state = "Oper"; mini.btnOper.BackColor = Color.Lime; }
+
+                        string sb = ""; string sbx = "";
+                        if (sCmd.Contains("BAND"))
+                        {   sb = sCmd.Substring(7, 1);
+                            SetSeg(sCmd.Substring(22, 1)); 
+                        }
+                        switch (sb)
+                        {   case "1": SetBand("160"); break;
+                            case "2": SetBand("80"); break;
+                            case "3": SetBand("40"); break;
+                            case "4": SetBand("30"); break;
+                            case "5": SetBand("20"); break;
+                            case "6": SetBand("17"); break;
+                            case "7": SetBand("15"); break;
+                            case "8": SetBand("12"); break;
+                            case "9": SetBand("10"); break;
+                        }
+                        string regex = @"FREQUENCY\s=\s(\d+)(\d\d\d)";
+                        string mask = "$1.$2";
+
+                        if (sCmd.Contains("FREQUENCY"))
+                        {   sb = Regex.Replace(sCmd, regex, mask); 
+                            SetFreq(sb); 
+                        }
+                        if (sCmd.Contains("TUNE"))
+                        {
+                            sb = Regex.Match(sCmd, @"TUNE\s=\s\d+").ToString();
+                            sbx = Regex.Match(sb, @"\d+").ToString();
+                            SetpaTune(sbx);
+                        }
+                        if (sCmd.Contains("LOAD"))
+                        {
+                            sb = Regex.Match(sCmd, @"LOAD\s=\s\d+").ToString();
+                            sbx = Regex.Match(sb, @"\d+").ToString();
+                            SetLoad(sbx);
+                        }
+                        if (sCmd.Contains("SFAULT"))
+                        {   SetMsg(sCmd);
+                            //SetMsg("Soft Fault Warning: press SF button to view.");
+                            sf = sCmd; btnSF.BackColor = Color.Yellow;
+                            mini.btnSF.BackColor = Color.Yellow;
+                        }
+                        if (sCmd.Contains("HFAULT"))
+                        {   SetMsg(sCmd);
+                            //SetMsg("Hard Fault Warning: press HF button to view.");
+                            hf = sCmd; btnHF.BackColor = Color.Red;
+                            mini.btnHF.BackColor = Color.Red;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    bool bReturnLog = false;
+                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                }
+            }//if (chkAlpha.Checked)
+        }//AlphaPort_DataReceived
+
+        //the alpha power button was pressed
+        public void btnPwr_Click(object sender, EventArgs e)
+        {
+            if (ac == "Off") AlphaPort.Write("AC ON\r"); 
+            if (ac == "On") AlphaPort.Write("AC OFF\r");
+        }
+        // The Operate / Stand By button was pressed
+        public void btnOper_Click(object sender, EventArgs e)
+        {
+            if (ac == "On" && state != "Oper") AlphaPort.Write("OPER ON\r");
+            else AlphaPort.Write("OPER OFF\r");
+        }
+        // The Auto tune button was pressed.
+        public void btnTune_Click(object sender, EventArgs e)
+        {
+            if (ac == "On" && tune == "Off") AlphaPort.Write("AUTOTUNE ON\r");
+            else AlphaPort.Write("AUTOTUNE OFF\r");
+        }
+        // The High Voltage button was pressed
+        public void btnHV_Click(object sender, EventArgs e)
+        {
+            if (ac == "On" && mode == "Low") AlphaPort.Write("MODE HIGH\r");
+            else AlphaPort.Write("MODE LOW\r");
+        }
+        /*** The Alpha timer has elapsed ***/
+        void AlphaTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                if (chkAlpha.Enabled)
+                {
+                    AlphaPort.Write("STAT\r"); // Request ststus from amp
+                }
+                else AlphaTimer.Enabled = false;
+            }
+            catch { }
+        }
+        // The Alpha Timer interval has changed
+        private void txtAlphaInt_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                AlphaTimer.Interval = Convert.ToDouble(txtAlphaInt.Text);
+                set.AlphaInt = txtAlphaInt.Text;
+                set.Save();
+            }
+            catch { }
+        }
+        // The Soft Fault button has been pressed
+        public void btnSF_Click(object sender, EventArgs e)
+        {
+            AlphaPort.Write("SF\r");
+        }
+        // The Hard Fault button has been pressed
+        public void btnHF_Click(object sender, EventArgs e)
+        {
+            AlphaPort.Write("HF\r");
+        }
+        // The SF button label was double clicked
+        public void lblSF_DoubleClick(object sender, EventArgs e)
+        {
+            SetMsg(""); btnSF.BackColor = Color.Empty;
+            mini.btnSF.BackColor = Color.Empty;
+        }
+        // The HF button label was double clicked
+        public void lblHF_DoubleClick(object sender, EventArgs e)
+        {
+            SetMsg(""); btnHF.BackColor = Color.Empty;
+            mini.btnHF.BackColor = Color.Empty;
+        }
+        private void btnWnSensor_Click(object sender, EventArgs e)
+        {
+            wn.Show();
+        }
+
+            #endregion Events  
+
+        #endregion Alpha
+
         #region LP-100
 
         // LP-100 Alarm set button was pressed
@@ -2221,11 +3172,15 @@ namespace DataDecoder
 
         #region Macro Routines
 
-        /**************** Macro Events ****************/
-        /// <summary>
-        /// Hides/Un-hides the macro editor and file dialog controls.
-        /// To use click in an open area of the Macro tab.
-        /// </summary>
+        #region# Macro Events #
+        // The control has been double-clicked
+        private void dgm_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (dgm.AllowUserToAddRows) dgm.AllowUserToAddRows = false;
+            else dgm.AllowUserToAddRows = true;
+        }
+        // Hides/Un-hides the macro editor and file dialog controls.
+        // To use click in an open area of the Macro tab.
         private void tabMacro_Click(object sender, EventArgs e)
         {
             if (dgm.Visible)
@@ -2257,14 +3212,20 @@ namespace DataDecoder
                     case 9: btnMacro10.Text = dgmData; break;
                     case 10: btnMacro11.Text = dgmData; break;
                     case 11: btnMacro12.Text = dgmData; break;
+                    case 12: btnMacro13.Text = dgmData; break;
+                    case 13: btnMacro14.Text = dgmData; break;
+                    case 14: btnMacro15.Text = dgmData; break;
+                    case 15: btnMacro16.Text = dgmData; break;
+                    case 16: btnMacro16.Text = dgmData; break;
+                    case 17: btnMacro16.Text = dgmData; break;
+                    case 18: btnMacro16.Text = dgmData; break;
+                    case 19: btnMacro16.Text = dgmData; break;
                     default: break;
                 }
             }
         }
-        /// <summary>
-        /// Saves the macro commands displayed in the grid to the file name selected 
-        /// in the File Name text box. If name is empty a file dialog is called.
-        /// </summary>
+        // Saves the macro commands displayed in the grid to the file name selected 
+        // in the File Name text box. If name is empty a file dialog is called.
         private void btnMacSave_Click(object sender, EventArgs e)
         {
             try
@@ -2293,19 +3254,15 @@ namespace DataDecoder
                 if (false == bReturnLog) MessageBox.Show("Unable to write to log");
             }
         }
-        /// <summary>
-        /// Re-Loads the currently open Macro File. Calls GetMacData()
-        /// The purpose of this function is to allow the user to recover 
-        /// from a goof if he hasn't saved the file yet.
-        /// </summary>
+        // Re-Loads the currently open Macro File. Calls GetMacData()
+        // The purpose of this function is to allow the user to recover 
+        // from a goof if he hasn't saved the file yet.
         private void btnMacReLoad_Click(object sender, EventArgs e)
         {
             GetMacData(MacFileName);
         }
-        /// <summary>
-        /// Opens file dialog to select the Macro Data file.
-        /// Calls GetMacData()
-        /// </summary>
+        // Opens file dialog to select the Macro Data file.
+        // Calls GetMacData()
         private void btnMacSelect_Click(object sender, EventArgs e)
         {
             try
@@ -2328,11 +3285,8 @@ namespace DataDecoder
                 if (false == bReturnLog) MessageBox.Show("Unable to write to log");
             }
         }
-        /// <summary>
-        /// If SDR not transmitting and SteppIR is not moving
-        /// Process the commands associated with a macro key, calls ParseBuffer()
-        /// </summary>
-        /// <param name="button"> index of the button that was pressed</param>
+        // If SDR not transmitting and SteppIR is not moving
+        // Process the commands associated with a macro key, calls ParseBuffer()
         private void ProcessMacroButton(int button)
         {
             if (StepCtr == 0 && xOn == "0")
@@ -2389,11 +3343,31 @@ namespace DataDecoder
         // Macro button #12 was pressed
         private void btnMacro12_Click(object sender, EventArgs e)
         { ProcessMacroButton(12); }
+        // Macro button #13 was pressed
+        private void btnMacro13_Click(object sender, EventArgs e)
+        { ProcessMacroButton(13); }
+        // Macro button #14 was pressed
+        private void btnMacro14_Click(object sender, EventArgs e)
+        { ProcessMacroButton(14); }
+        // Macro button #15 was pressed
+        private void btnMacro15_Click(object sender, EventArgs e)
+        { ProcessMacroButton(15); }
+        // Macro button #16 was pressed
+        private void btnMacro16_Click(object sender, EventArgs e)
+        { ProcessMacroButton(16); }
 
         // A key was pressed check for "F" key
         private void Setup_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1)
+            if (e.KeyCode == Keys.F1 && e.Modifiers == Keys.Shift)
+            { ProcessMacroButton(13); }
+            else if (e.KeyCode == Keys.F2 && e.Modifiers == Keys.Shift)
+            { ProcessMacroButton(14); }
+            else if (e.KeyCode == Keys.F3 && e.Modifiers == Keys.Shift)
+            { ProcessMacroButton(15); }
+            else if (e.KeyCode == Keys.F4 && e.Modifiers == Keys.Shift)
+            { ProcessMacroButton(16); }
+            else if (e.KeyCode == Keys.F1)
             { ProcessMacroButton(1); }
             else if (e.KeyCode == Keys.F2)
             { ProcessMacroButton(2); }
@@ -2420,10 +3394,7 @@ namespace DataDecoder
             else if (e.Control && e.KeyCode == Keys.Oemtilde)
             { btnSplit_Click(null, null); }
         }
-        /// <summary>
-        /// Adds macro number text to the row header
-        /// </summary>
-        /// <param name="button"> index of the button that was pressed</param>
+        // Adds macro number text to the row header
         public void dgm_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             string rowNum = (e.RowIndex + 1).ToString();
@@ -2443,12 +3414,12 @@ namespace DataDecoder
             e.Graphics.DrawString("M" + rowNum, this.Font, b, e.RowBounds.Location.X + 15,
                        e.RowBounds.Location.Y + ((e.RowBounds.Height - size.Height) / 2));
         }
-        /**************** Macro Methods ****************/
-        /// <summary>
-        /// Loads Macro Data File from disk and displays in datagrid, 
-        /// adds name from button cell to macro buttons
-        /// </summary>
-        /// <param name="fileName"> the file to be loaded</param>
+
+        #endregion# Macro Events #
+
+        #region# Macro Methods #
+        // Loads Macro Data File from disk and displays in datagrid, 
+        // adds name from button cell to macro buttons
         private void GetMacData(string fileName)
         {
             try
@@ -2479,6 +3450,10 @@ namespace DataDecoder
                             case 9: btnMacro10.Text = btnName; break;
                             case 10: btnMacro11.Text = btnName; break;
                             case 11: btnMacro12.Text = btnName; break;
+                            case 12: btnMacro13.Text = btnName; break;
+                            case 13: btnMacro14.Text = btnName; break;
+                            case 14: btnMacro15.Text = btnName; break;
+                            case 15: btnMacro16.Text = btnName; break;
                             default: break;
                         }
                     }
@@ -2486,17 +3461,14 @@ namespace DataDecoder
             }
             catch (Exception ex)
             {
-                bool bReturnLog = false;
-                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                //bool bReturnLog = false;
+                //bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                //if (false == bReturnLog) MessageBox.Show("Unable to write to log");
             }
         }
-        /// <summary>
-        /// Processes commands from the data grid, calls WriteToPort()
-        /// which sends commands to the radio. This routine includes a buffer
-        /// (queue)to hold multiple commands until the radio is ready.
-        /// </summary>
-        /// <param name="cmd"> string of commands to process</param>
+        // Processes commands from the data grid, calls WriteToPort()
+        // which sends commands to the radio. This routine includes a buffer
+        // (queue)to hold multiple commands until the radio is ready.
         private void ParseBuffer(string cmd)
         {
             try
@@ -2582,6 +3554,8 @@ namespace DataDecoder
             alert.Show();
         }
 
+        #endregion# Macro Methods #
+
         #endregion Macro Routines
 
         #region Menu Events
@@ -2662,12 +3636,12 @@ namespace DataDecoder
         // Context Menu|Restore Form Size
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.Size = new Size(430, 450);
+            this.Size = new Size(438, 445);
         }
         // Context Menu|Shrink Form Size
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            this.Size = new Size(430, 60);
+            this.Size = new Size(438, 60);
         }
         // Context Menu|About DDUtil
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -2768,6 +3742,467 @@ namespace DataDecoder
         }
 
         #endregion Menu Events
+
+        #region Power Master
+
+        #region CRC Table
+        static byte[] crc8revtab = new byte [256] {
+
+                        0x00, 0xB1, 0xD3, 0x62, 0x17, 0xA6, 0xC4, 0x75,
+                        0x2E, 0x9F, 0xFD, 0x4C, 0x39, 0x88, 0xEA, 0x5B,
+                        0x5C, 0xED, 0x8F, 0x3E, 0x4B, 0xFA, 0x98, 0x29,
+                        0x72, 0xC3, 0xA1, 0x10, 0x65, 0xD4, 0xB6, 0x07,
+                        0xB8, 0x09, 0x6B, 0xDA, 0xAF, 0x1E, 0x7C, 0xCD,
+                        0x96, 0x27, 0x45, 0xF4, 0x81, 0x30, 0x52, 0xE3,
+                        0xE4, 0x55, 0x37, 0x86, 0xF3, 0x42, 0x20, 0x91,
+                        0xCA, 0x7B, 0x19, 0xA8, 0xDD, 0x6C, 0x0E, 0xBF,
+                        0xC1, 0x70, 0x12, 0xA3, 0xD6, 0x67, 0x05, 0xB4,
+                        0xEF, 0x5E, 0x3C, 0x8D, 0xF8, 0x49, 0x2B, 0x9A,
+                        0x9D, 0x2C, 0x4E, 0xFF, 0x8A, 0x3B, 0x59, 0xE8,
+                        0xB3, 0x02, 0x60, 0xD1, 0xA4, 0x15, 0x77, 0xC6,
+                        0x79, 0xC8, 0xAA, 0x1B, 0x6E, 0xDF, 0xBD, 0x0C,
+                        0x57, 0xE6, 0x84, 0x35, 0x40, 0xF1, 0x93, 0x22,
+                        0x25, 0x94, 0xF6, 0x47, 0x32, 0x83, 0xE1, 0x50,
+                        0x0B, 0xBA, 0xD8, 0x69, 0x1C, 0xAD, 0xCF, 0x7E,
+                        0x33, 0x82, 0xE0, 0x51, 0x24, 0x95, 0xF7, 0x46,
+                        0x1D, 0xAC, 0xCE, 0x7F, 0x0A, 0xBB, 0xD9, 0x68,
+                        0x6F, 0xDE, 0xBC, 0x0D, 0x78, 0xC9, 0xAB, 0x1A,
+                        0x41, 0xF0, 0x92, 0x23, 0x56, 0xE7, 0x85, 0x34,
+                        0x8B, 0x3A, 0x58, 0xE9, 0x9C, 0x2D, 0x4F, 0xFE,
+                        0xA5, 0x14, 0x76, 0xC7, 0xB2, 0x03, 0x61, 0xD0,
+                        0xD7, 0x66, 0x04, 0xB5, 0xC0, 0x71, 0x13, 0xA2,
+                        0xF9, 0x48, 0x2A, 0x9B, 0xEE, 0x5F, 0x3D, 0x8C,
+                        0xF2, 0x43, 0x21, 0x90, 0xE5, 0x54, 0x36, 0x87,
+                        0xDC, 0x6D, 0x0F, 0xBE, 0xCB, 0x7A, 0x18, 0xA9,
+                        0xAE, 0x1F, 0x7D, 0xCC, 0xB9, 0x08, 0x6A, 0xDB,
+                        0x80, 0x31, 0x53, 0xE2, 0x97, 0x26, 0x44, 0xF5,
+                        0x4A, 0xFB, 0x99, 0x28, 0x5D, 0xEC, 0x8E, 0x3F,
+                        0x64, 0xD5, 0xB7, 0x06, 0x73, 0xC2, 0xA0, 0x11,
+                        0x16, 0xA7, 0xC5, 0x74, 0x01, 0xB0, 0xD2, 0x63,
+                        0x38, 0x89, 0xEB, 0x5A, 0x2F, 0x9E, 0xFC, 0x4D };
+        #endregion CRC Table
+
+        #region # Delegates #
+
+        // Write to Fwd Trim window
+        delegate void SetTrimFwdCallback(decimal num);
+        public void SetTrimFwd(decimal num)
+        {
+            if (this.numFwd.InvokeRequired)
+            {
+                SetTrimFwdCallback d = new SetTrimFwdCallback(SetTrimFwd);
+                this.Invoke(d, new object[] { num });
+            }
+            else
+            { numFwd.Value = num; }
+        }
+        // Write to Rev Trim window
+        delegate void SetTrimRevCallback(decimal num);
+        public void SetTrimRev(decimal num)
+        {
+            if (this.numRev.InvokeRequired)
+            {
+                SetTrimRevCallback d = new SetTrimRevCallback(SetTrimRev);
+                this.Invoke(d, new object[] { num });
+            }
+            else
+            { numRev.Value = num; }
+        }
+
+
+        #endregion Delegates
+
+        #region # Methods #
+
+        void PMSetup()
+        {
+            cboPMport.SelectedIndex = set.PMport;
+            chkPM.Checked = set.chkPM;
+            cboPMcom.SelectedIndex = set.PMcom;
+        }
+        // calc crc for inbuff and write cmd to port
+        void PMportWrite(byte[] inBuf)
+        {
+            byte stx = 02; byte etx = 03;
+            byte[] cBuf = new byte[2];                  // crc ascii buffer
+            byte crc = CRC8Fast(inBuf, inBuf.Length);   // get crc
+            string hcrc = crc.ToString("X");            // crc to hex
+            // save crc in ascii buffer
+            for (int i = 0; i < 2; i++)
+            {
+                int j = 0;
+                if (hcrc.Length == 1) { cBuf[0] = 0x30; i++; j = 0; }
+                else j = i;
+                if (hcrc.Substring(j, 1) == "A") { cBuf[i] = 0x41; continue; }
+                if (hcrc.Substring(j, 1) == "B") { cBuf[i] = 0x42; continue; }
+                if (hcrc.Substring(j, 1) == "C") { cBuf[i] = 0x43; continue; }
+                if (hcrc.Substring(j, 1) == "D") { cBuf[i] = 0x44; continue; }
+                if (hcrc.Substring(j, 1) == "E") { cBuf[i] = 0x45; continue; }
+                if (hcrc.Substring(j, 1) == "F") { cBuf[i] = 0x46; continue; }
+
+                int temp = Convert.ToInt32(hcrc.Substring(i, 1));
+                temp += 30;
+                cBuf[i] = byte.Parse(temp.ToString(), NumberStyles.HexNumber);
+            }
+            // assemble the output buffer
+            if (inBuf.Length == 1)
+            {
+                byte[] outbuf = { stx, inBuf[0], etx, cBuf[0], cBuf[1], 0x0d };
+                PMport.Write(outbuf, 0, 6);
+            }
+            else if (inBuf.Length == 2)
+            {
+                byte[] outbuf = { stx, inBuf[0], inBuf[1], etx, cBuf[0], cBuf[1], 0x0d };
+                PMport.Write(outbuf, 0, 7);
+            }
+            else if (inBuf.Length == 3)
+            {
+                byte[] outbuf = { stx, inBuf[0], inBuf[1], inBuf[2], etx, cBuf[0], cBuf[1], 0x0d };
+                PMport.Write(outbuf, 0, 8);
+            }
+            else if (inBuf.Length == 4)
+            {
+                byte[] outbuf = { stx, inBuf[0], inBuf[1], inBuf[2], inBuf[3], etx, cBuf[0], cBuf[1], 0x0d };
+                PMport.Write(outbuf, 0, 9);
+            }
+        }
+        // Calc CRC values for cmds sent to PM
+        public static byte CRC8Fast(byte[] buf, int len)
+        {
+            byte crc = 0;  /* prevent corruption with global variables */
+            for (int i = 0; i < len; i++)
+            {
+                crc = crc8revtab[crc ^ buf[i]];
+            }
+            return ((byte)~crc);   /* complimented CRC used to prevent string of 0's */
+        }
+
+        #endregion Methods
+
+        #region # Events #
+
+        string sPM = "";        // PM port buffer message
+        // a Message(s) from the PM has been received
+        private void PMport_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkPM.Checked)  // port must be enabled to receive data
+            {
+                try
+                {
+                    string fwd = ""; string swr = "";
+                    string sCmd = "";
+                    SerialPort port = (SerialPort)sender;
+                    byte[] data = new byte[port.BytesToRead];
+                    port.Read(data, 0, data.Length);
+                    sPM += AE.GetString(data, 0, data.Length);
+                    Regex rex = new Regex(@".*?\r\n");
+                    for (Match m = rex.Match(sPM); m.Success; m = m.NextMatch())
+                    {   //loop thru the buffer and find matches
+                        sCmd = m.Value.Substring(0, m.Value.Length - 1);
+                        sPM = sPM.Replace(m.Value, ""); //remove match from buffer
+
+                        if (sCmd.Substring(1, 1) == "D")
+                        {
+                            fwd = sCmd.Substring(3, 7); swr = sCmd.Substring(19, 5);
+                            SetAvg(Regex.Replace(fwd, @"\s*(\d+.\d)", "$1"));
+                            mini.SetAvg(Regex.Replace(fwd, @"\s*(\d+.\d)", "$1"));
+                            SetSWR(Regex.Replace(swr, @"\s*(\d+.\d{2})", "$1"));
+                            mini.SetSwr(Regex.Replace(swr, @"\s*(\d+.\d{2})", "$1"));
+                        }
+                        else if (sCmd.Substring(1, 1) == "T")
+                        { SetTrimFwd(Convert.ToDecimal(sCmd.Substring(2, 3))); }
+                        else if (sCmd.Substring(1, 1) == "t")
+                        { SetTrimRev(Convert.ToDecimal(sCmd.Substring(2, 3))); }
+                    }
+                }
+                catch 
+                { }
+            }
+        }
+        // The PM enable check box has changed
+        private void chkPM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPM.Checked)
+            {
+                if (cboPMport.SelectedIndex > 0)
+                {
+                    set.chkPM = true; chkWNEnab.Checked = false;
+                    lblAvg.Text = "Fwd"; chkLPenab.Checked = false;
+                    txtAvg.Enabled = true; txtSWR.Enabled = true;
+                    mini.txtAvg.Enabled = true; mini.txtSWR.Enabled = true;
+                    txtFwd.Visible = false; lblFwd.Visible = false;
+                    mini.txtFwd.Visible = false; mini.lblFwd.Visible = false;
+                    mini.lblAvg.Text = "Fwd"; 
+                    PMport.Write("\x02\x54\x3F\x03\x38\x45\r"); // Get fwd trim
+                    Thread.Sleep(150);
+                    PMport.Write("\x02\x74\x3F\x03\x37\x37\r"); // Get swr trim
+                    Thread.Sleep(150);
+                    PMport.Write("\x02\x44\x34\x03\x36\x36\r"); // Start data broadcast
+                    set.Save();
+                    if (set.StdNet == 1) rbStd.Checked = true;
+                    else if (set.StdNet == 2) rbNet.Checked = true;
+
+                }
+                else
+                {
+                    MessageBox.Show("No port has been selected for the Power Master.\n\n" +
+                    "Please select a valid port number and try again.", "Port Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    chkPM.Checked = false; set.chkPM = false; 
+                    txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
+                    mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
+                    txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
+                    mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false; 
+                    mini.txtSWR.Enabled = false;
+                    if (PMport.IsOpen)
+                    { PMport.Write("\x02\x44\x30\x03\x37\x31\r"); }// Stop data broadcast
+                    set.Save();
+                }
+            }
+            else
+            {
+                set.chkPM = false;
+                txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
+                mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
+                txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
+                mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false; 
+                mini.txtSWR.Enabled = false;
+                if (PMport.IsOpen)
+                { PMport.Write("\x02\x44\x30\x03\x37\x31\r"); }// Stop data broadcast
+                set.Save();
+            }
+        }
+        // The PM port has changed
+        private void cboPMport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PMport.IsOpen) PMport.Close();
+            if (cboPMport.SelectedIndex > 0)
+            {
+                PMport.PortName = cboPMport.SelectedItem.ToString();
+                try
+                {
+                    PMport.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The Power Master serial port " + PMport.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboPMport.SelectedText = "";
+                    chkPM.Checked = false;
+                    return;
+                }
+            }
+            else
+            {
+                chkPM.Checked = false;
+            }
+            set.PMport = cboPMport.SelectedIndex;
+            set.Save();
+        }
+        // The PM port comm setting has changed
+        private void cboPMcom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            set.PMcom = cboPMcom.SelectedIndex; set.Save();
+        }
+        // The Fwd Trim has changed
+        private void numFwd_ValueChanged(object sender, EventArgs e)
+        {
+            string fwd = numFwd.Value.ToString();
+            int ctr = fwd.Length;
+            byte[] inBuf = new byte[4];
+            inBuf[0] = 0x54; // "T"
+            switch (ctr)
+            {
+                case 1:
+                    inBuf[1] = 0x30; inBuf[2] = 0x30;
+                    inBuf[3] = byte.Parse("3"+fwd.Substring(0, 1), NumberStyles.HexNumber);
+                    break;
+
+                case 2:
+                    if (fwd.Substring(0, 1) == "-")
+                    {
+                        inBuf[1] = 0x2d; inBuf[2] = 0x30;
+                        inBuf[3] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
+                    }
+                    else
+                    {
+                        inBuf[1] = 0x30;
+                        inBuf[2] = byte.Parse("3" + fwd.Substring(0, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
+                    }
+                    break;
+
+                case 3:
+                    if (fwd.Substring(0, 1) == "-")
+                    {
+                        inBuf[1] = 0x2d;
+                        inBuf[2] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + fwd.Substring(2, 1), NumberStyles.HexNumber);
+                    }
+                    else
+                    {
+                        inBuf[1] = byte.Parse("3" + fwd.Substring(0, 1), NumberStyles.HexNumber);
+                        inBuf[2] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + fwd.Substring(2, 1), NumberStyles.HexNumber);
+                    }
+                    break;
+            }
+            PMportWrite(inBuf);
+        }
+        // The Swr Trim has changed
+        private void numRev_ValueChanged(object sender, EventArgs e)
+        {
+            string swr = numRev.Value.ToString();
+            int ctr = swr.Length;
+            byte[] inBuf = new byte[4];
+            inBuf[0] = 0x74; // "t"
+            switch (ctr)
+            {
+                case 1:
+                    inBuf[1] = 0x30; inBuf[2] = 0x30;
+                    inBuf[3] = byte.Parse("3" + swr.Substring(0, 1), NumberStyles.HexNumber);
+                    break;
+
+                case 2:
+                    if (swr.Substring(0, 1) == "-")
+                    {
+                        inBuf[1] = 0x2d; inBuf[2] = 0x30;
+                        inBuf[3] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
+                    }
+                    else
+                    {
+                        inBuf[1] = 0x30;
+                        inBuf[2] = byte.Parse("3" + swr.Substring(0, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
+                    }
+                    break;
+
+                case 3:
+                    if (swr.Substring(0, 1) == "-")
+                    {
+                        inBuf[1] = 0x2d;
+                        inBuf[2] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + swr.Substring(2, 1), NumberStyles.HexNumber);
+                    }
+                    else
+                    {
+                        inBuf[1] = byte.Parse("3" + swr.Substring(0, 1), NumberStyles.HexNumber);
+                        inBuf[2] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
+                        inBuf[3] = byte.Parse("3" + swr.Substring(2, 1), NumberStyles.HexNumber);
+                    }
+                    break;
+            }
+            PMportWrite(inBuf);
+        }
+        // The PM Std/Net radio buttons have changed
+        private void grpNet_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbStd.Checked)
+            { PMport.Write("\x02\x64\x31\x03\x33\x39\r"); set.StdNet = 1; }
+
+            if (rbNet.Checked)
+            { PMport.Write("\x02\x64\x30\x03\x38\x38\r"); set.StdNet = 2; }
+
+            set.Save();
+        }
+        
+        #endregion Events
+
+        #endregion Power Master
+
+        #region Repeater
+
+        // The Misc Tab has been double clicked so toggle it's visibility
+        private void tabMisc_DoubleClick(object sender, EventArgs e)
+        {
+            if (grpRepeat.Visible) grpRepeat.Visible = false;
+            else grpRepeat.Visible = true;
+        }
+        // The Repeat Enable check box has changed
+        private void chkRepeat_CheckedChanged(object sender, EventArgs e)
+        {
+             if (chkRepeat.Checked)
+             {
+                 if (cboRepeatPort.SelectedIndex > 0)
+                 { 
+                     set.RepeatEnab = true; 
+                 }
+                 else
+                 {
+                     chkRepeat.Checked = false;
+                     MessageBox.Show("No port has been selected for the Repeater.\n\n" +
+                        "Please select a valid port number and try again.", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     set.RepeatEnab = false; 
+                 }
+            }
+            else
+            {
+                chkRepeat.Checked = false;
+                set.RepeatEnab = false; 
+            }
+            set.Save();
+        }
+        // The Repeat port index has changed
+        private void cboRepeatPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (RepeatPort.IsOpen) RepeatPort.Close();
+            if (cboRepeatPort.SelectedIndex > 0)
+            {
+                RepeatPort.PortName = cboRepeatPort.SelectedItem.ToString();
+                try
+                {
+                    RepeatPort.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The Repeater serial port " + RepeatPort.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboRepeatPort.SelectedText = "";
+                    chkRepeat.Checked = false;
+                    return;
+                }
+            }
+            else
+            {
+                chkRepeat.Checked = false;
+            }
+            set.RepeatPort = cboRepeatPort.SelectedIndex;
+            set.Save();
+        }
+        // RepeatPort has received data
+        string sRepeat = "";
+        private void RepeatPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkRepeat.Checked) // port must be enabled to accept data
+            {
+                try
+                {
+                    string sCmd = "";
+                    SerialPort port = (SerialPort)sender;
+                    byte[] data = new byte[port.BytesToRead];
+                    port.Read(data, 0, data.Length);
+                    sRepeat += AE.GetString(data, 0, data.Length);
+                    Regex rex = new Regex(".*?;");				//accept any string ending in ;		
+                    for (Match m = rex.Match(sRepeat); m.Success; m = m.NextMatch())
+                    {   //loop thru the buffer and find matches
+                        sCmd = m.Value;
+                        sRepeat = sRepeat.Replace(m.Value, ""); //remove the match from the buffer
+                        WriteToPort(sCmd, iSleep);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    bool bReturnLog = false;
+                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                }
+            }
+        }
+
+        #endregion Repeater
 
         #region Rotor Control
 
@@ -3355,22 +4790,11 @@ namespace DataDecoder
                         double LocalOffset = Math.Abs(Convert.ToDouble(off));
                         double DxOffset = Math.Abs(Convert.ToDouble(thisReader.GetValue(8).ToString()));
                         double DxOffsetRaw = Convert.ToDouble(thisReader.GetValue(8).ToString());
-                        if (Math.Sign(DxOffsetRaw) < 0)
-                        {
-                            lblDxTime.Text = dt.AddHours(DxOffset - LocalOffset).ToString()
-                                + " Local Time";
-                            txtDxTime.Text = "UTC+" + DxOffset;
-                        }
-                        else
-                        {
-                            lblDxTime.Text = dt.AddHours(-(DxOffset + LocalOffset)).ToString() +
-                                " Local Time";
-                            //lblDxTime.Text = dt.AddHours(-(DxOffsetRaw - (DxOffsetRaw * 2)) +
-                            //    LocalOffset).ToString() + " Local Time";
-                            txtDxTime.Text = "UTC-" + DxOffset;
-                        }
-                        if (thisReader.GetValue(8).ToString() == "0")
-                            txtDxTime.Text = "UTC";
+
+                        lblDxTime.Text = currentUTC.AddHours(DxOffsetRaw).ToString();
+                        if (Math.Sign(DxOffsetRaw) < 0) txtDxTime.Text = "UTC-" + DxOffset;
+                        else if (Math.Sign(DxOffsetRaw) > 0) txtDxTime.Text = "UTC+" + DxOffset;
+                        else txtDxTime.Text = "UTC";
 
                         // Format and display the dx station's latitude and longitude
                         string lat = thisReader.GetValue(9).ToString();
@@ -3831,13 +5255,13 @@ namespace DataDecoder
                     {
                         switch (sdrMode)
                         {
-                            case "1": btnMacro10_Click(null, null); break;   // LSB
-                            case "2": btnMacro10_Click(null, null); break;   // USB
-                            case "3": btnMacro11_Click(null, null); break;   // CWU
-                            case "5": btnMacro10_Click(null, null); break;   // AM
-                            case "6": btnMacro12_Click(null, null); break;   // RTTY (DIGL)
-                            case "7": btnMacro11_Click(null, null); break;   // CWL
-                            case "9": btnMacro12_Click(null, null); break;   // RTTY-R (DIGU)
+                            case "1": ProcessMacroButton(18); break;   // LSB
+                            case "2": ProcessMacroButton(18); break;   // USB
+                            case "3": ProcessMacroButton(19); break;   // CWU
+                            case "5": ProcessMacroButton(17); break;   // AM
+                            case "6": ProcessMacroButton(20); break;   // RTTY (DIGL)
+                            case "7": ProcessMacroButton(19); break;   // CWL
+                            case "9": ProcessMacroButton(20); break;   // RTTY-R (DIGU)
                             default: break; 
                         }
                     }
@@ -5149,6 +6573,652 @@ namespace DataDecoder
         }
         #endregion Test Routines
 
+        #region VHF+ Matrix
+
+          #region # Declarations #
+
+        const int base10 = 10;
+        char[] cHexa = new char[] { 'A', 'B', 'C', 'D', 'E', 'F' };
+        
+          #endregion Declarations
+
+          #region # Delegates #
+
+        // Write to band button
+        delegate void SetVHFCallback(string text);
+        public void SetVHF(string text)
+        {
+            if (this.lblVHF.InvokeRequired)
+            {
+                SetVHFCallback d = new SetVHFCallback(SetVHF);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { lblVHF.Text = text; }
+        }
+          #endregion # Delegates #
+
+          #region # Methods #
+
+        // Send data to parallel port A
+        void MatrixOutA(int port, int data)
+        {
+            if (chkInvertA.Checked) PortAccess.Output(port, 255 ^ data);
+            else PortAccess.Output(port, data);
+        }
+        // Send data to parallel port B
+        void MatrixOutB(int port, int data)
+        {
+            if (chkInvertB.Checked) PortAccess.Output(port, 255 ^ data);
+            else PortAccess.Output(port, data);
+        }
+        int aPort;
+        int bPort;
+        // Load the x2 matrix controls from settings
+        void X2SetUp()
+        {
+            string bin = "";
+            chkPortA.Checked = set.chkPortA;
+            chkPortB.Checked = set.chkPortB;
+            txtPortA.Text = set.aPortNum;
+            txtPortB.Text = set.bPortNum;
+            chkInvertA.Checked = set.chkInvertA;
+            chkInvertB.Checked = set.chkInvertB;
+            aPort = Convert.ToInt32(set.aPortNum);
+            bPort = Convert.ToInt32(set.bPortNum);
+
+            //store the set rec vars as they will be overwritten during the load.
+            int s2a0 = set.x2a0, s2a1 = set.x2a1, s2a2 = set.x2a2, s2a3 = set.x2a3;
+            int s2a4 = set.x2a4, s2a5 = set.x2a5, s2a6 = set.x2a6, s2a7 = set.x2a7;
+            int s2a8 = set.x2a8, s2a9 = set.x2a9, s2a10 = set.x2a10, s2a11 = set.x2a11;
+            int s2a12 = set.x2a12, s2a13 = set.x2a13, s2a14 = set.x2a14, s2a15 = set.x2a15;
+            //store the set trans vars as they will be overwritten during the load.
+            int s2b0 = set.x2b0, s2b1 = set.x2b1, s2b2 = set.x2b2, s2b3 = set.x2b3;
+            int s2b4 = set.x2b4, s2b5 = set.x2b5, s2b6 = set.x2b6, s2b7 = set.x2b7;
+            int s2b8 = set.x2b8, s2b9 = set.x2b9, s2b10 = set.x2b10, s2b11 = set.x2b11;
+            int s2b12 = set.x2b12, s2b13 = set.x2b13, s2b14 = set.x2b14, s2b15 = set.x2b15;
+            // Load receive matrix
+            if (chkPortA.Checked)
+            {
+                bin = DecimalToBase(s2a0, 2);
+                LoadCheckBoxes(bin, "cb0r", grpPortA);
+                bin = DecimalToBase(s2a1, 2);
+                LoadCheckBoxes(bin, "cb1r", grpPortA);
+                bin = DecimalToBase(s2a2, 2);
+                LoadCheckBoxes(bin, "cb2r", grpPortA);
+                bin = DecimalToBase(s2a3, 2);
+                LoadCheckBoxes(bin, "cb3r", grpPortA);
+                bin = DecimalToBase(s2a4, 2);
+                LoadCheckBoxes(bin, "cb4r", grpPortA);
+                bin = DecimalToBase(s2a5, 2);
+                LoadCheckBoxes(bin, "cb5r", grpPortA);
+                bin = DecimalToBase(s2a6, 2);
+                LoadCheckBoxes(bin, "cb6r", grpPortA);
+                bin = DecimalToBase(s2a7, 2);
+                LoadCheckBoxes(bin, "cb7r", grpPortA);
+                bin = DecimalToBase(s2a8, 2);
+                LoadCheckBoxes(bin, "cb8r", grpPortA);
+                bin = DecimalToBase(s2a9, 2);
+                LoadCheckBoxes(bin, "cb9r", grpPortA);
+                bin = DecimalToBase(s2a10, 2);
+                LoadCheckBoxes(bin, "cb10r", grpPortA);
+                bin = DecimalToBase(s2a11, 2);
+                LoadCheckBoxes(bin, "cb11r", grpPortA);
+                bin = DecimalToBase(s2a12, 2);
+                LoadCheckBoxes(bin, "cb12r", grpPortA);
+                bin = DecimalToBase(s2a13, 2);
+                LoadCheckBoxes(bin, "cb13r", grpPortA);
+                bin = DecimalToBase(s2a14, 2);
+                LoadCheckBoxes(bin, "cb14r", grpPortA);
+                bin = DecimalToBase(s2a15, 2);
+                LoadCheckBoxes(bin, "cb15r", grpPortA);
+            }
+            // Load transmit matrix
+            if (chkPortB.Checked)
+            {
+                bin = DecimalToBase(s2b0, 2);
+                LoadCheckBoxes(bin, "cb0t", grpPortB);
+                bin = DecimalToBase(s2b1, 2);
+                LoadCheckBoxes(bin, "cb1t", grpPortB);
+                bin = DecimalToBase(s2b2, 2);
+                LoadCheckBoxes(bin, "cb2t", grpPortB);
+                bin = DecimalToBase(s2b3, 2);
+                LoadCheckBoxes(bin, "cb3t", grpPortB);
+                bin = DecimalToBase(s2b4, 2);
+                LoadCheckBoxes(bin, "cb4t", grpPortB);
+                bin = DecimalToBase(s2b5, 2);
+                LoadCheckBoxes(bin, "cb5t", grpPortB);
+                bin = DecimalToBase(s2b6, 2);
+                LoadCheckBoxes(bin, "cb6t", grpPortB);
+                bin = DecimalToBase(s2b7, 2);
+                LoadCheckBoxes(bin, "cb7t", grpPortB);
+                bin = DecimalToBase(s2b8, 2);
+                LoadCheckBoxes(bin, "cb8t", grpPortB);
+                bin = DecimalToBase(s2b9, 2);
+                LoadCheckBoxes(bin, "cb9t", grpPortB);
+                bin = DecimalToBase(s2b10, 2);
+                LoadCheckBoxes(bin, "cb10t", grpPortB);
+                bin = DecimalToBase(s2b11, 2);
+                LoadCheckBoxes(bin, "cb11t", grpPortB);
+                bin = DecimalToBase(s2b12, 2);
+                LoadCheckBoxes(bin, "cb12t", grpPortB);
+                bin = DecimalToBase(s2b13, 2);
+                LoadCheckBoxes(bin, "cb13t", grpPortB);
+                bin = DecimalToBase(s2b14, 2);
+                LoadCheckBoxes(bin, "cb14t", grpPortB);
+                bin = DecimalToBase(s2b15, 2);
+                LoadCheckBoxes(bin, "cb15t", grpPortB);
+            }
+        }
+        // load checkboxes
+        void LoadCheckBoxes(string bin, string cbBase, Control grp)
+        {
+            CheckBox cb;
+            int j = bin.Length;
+            for (int i = 0; i < bin.Length; i++)
+            {
+                foreach (Control c in grp.Controls)
+                {
+                    if (c.Name == cbBase + i)
+                    {
+                        j -= 1;
+                        if (bin.Substring(j, 1) == "1")
+                        {
+                            //str = cbBase + i.ToString();
+                            cb = (CheckBox)c;
+                            cb.Checked = true;
+                        }
+                    }
+                }
+            }
+        }
+        // decode binary string
+        string DecimalToBase(int iDec, int numbase)
+        {
+            string strBin = "";
+            int[] result = new int[32];
+            int MaxBit = 32;
+            for (; iDec > 0; iDec /= numbase)
+            {
+                int rem = iDec % numbase;
+                result[--MaxBit] = rem;
+            }
+            for (int i = 0; i < result.Length; i++)
+                if ((int)result.GetValue(i) >= base10)
+                    strBin += cHexa[(int)result.GetValue(i) % base10];
+                else
+                    strBin += result.GetValue(i);
+            strBin = strBin.TrimStart(new char[] { '0' });
+            return strBin;
+        }
+          #endregion Methods
+
+          #region # Events #
+
+            #region * grpPortA_CheckedChanged Events *
+
+        int x2a0 = 0, x2a1 = 0, x2a2 = 0, x2a3 = 0;
+        int x2a4 = 0, x2a5 = 0, x2a6 = 0, x2a7 = 0;
+        int x2a8 = 0, x2a9 = 0, x2a10 = 0, x2a11 = 0;
+        int x2a12 = 0, x2a13 = 0, x2a14 = 0, x2a15 = 0;
+
+        private void grpPortA_CheckedChanged(object sender, EventArgs e)
+        {
+            x2a0 = 0;
+            if (cb0r0.Checked) x2a0 += 1;
+            if (cb0r1.Checked) x2a0 += 2;
+            if (cb0r2.Checked) x2a0 += 4;
+            if (cb0r3.Checked) x2a0 += 8;
+            if (cb0r4.Checked) x2a0 += 16;
+            if (cb0r5.Checked) x2a0 += 32;
+            if (cb0r6.Checked) x2a0 += 64;
+            if (cb0r7.Checked) x2a0 += 128;
+            set.x2a0 = x2a0;
+            x2a1 = 0;
+            if (cb1r0.Checked) x2a1 += 1;
+            if (cb1r1.Checked) x2a1 += 2;
+            if (cb1r2.Checked) x2a1 += 4;
+            if (cb1r3.Checked) x2a1 += 8;
+            if (cb1r4.Checked) x2a1 += 16;
+            if (cb1r5.Checked) x2a1 += 32;
+            if (cb1r6.Checked) x2a1 += 64;
+            if (cb1r7.Checked) x2a1 += 128;
+            set.x2a1 = x2a1;
+            x2a2 = 0;
+            if (cb2r0.Checked) x2a2 += 1;
+            if (cb2r1.Checked) x2a2 += 2;
+            if (cb2r2.Checked) x2a2 += 4;
+            if (cb2r3.Checked) x2a2 += 8;
+            if (cb2r4.Checked) x2a2 += 16;
+            if (cb2r5.Checked) x2a2 += 32;
+            if (cb2r6.Checked) x2a2 += 64;
+            if (cb2r7.Checked) x2a2 += 128;
+            set.x2a2 = x2a2;
+            x2a3 = 0;
+            if (cb3r0.Checked) x2a3 += 1;
+            if (cb3r1.Checked) x2a3 += 2;
+            if (cb3r2.Checked) x2a3 += 4;
+            if (cb3r3.Checked) x2a3 += 8;
+            if (cb3r4.Checked) x2a3 += 16;
+            if (cb3r5.Checked) x2a3 += 32;
+            if (cb3r6.Checked) x2a3 += 64;
+            if (cb3r7.Checked) x2a3 += 128;
+            set.x2a3 = x2a3;
+            x2a4 = 0;
+            if (cb4r0.Checked) x2a4 += 1;
+            if (cb4r1.Checked) x2a4 += 2;
+            if (cb4r2.Checked) x2a4 += 4;
+            if (cb4r3.Checked) x2a4 += 8;
+            if (cb4r4.Checked) x2a4 += 16;
+            if (cb4r5.Checked) x2a4 += 32;
+            if (cb4r6.Checked) x2a4 += 64;
+            if (cb4r7.Checked) x2a4 += 128;
+            set.x2a4 = x2a4;
+            x2a5 = 0;
+            if (cb5r0.Checked) x2a5 += 1;
+            if (cb5r1.Checked) x2a5 += 2;
+            if (cb5r2.Checked) x2a5 += 4;
+            if (cb5r3.Checked) x2a5 += 8;
+            if (cb5r4.Checked) x2a5 += 16;
+            if (cb5r5.Checked) x2a5 += 32;
+            if (cb5r6.Checked) x2a5 += 64;
+            if (cb5r7.Checked) x2a5 += 128;
+            set.x2a5 = x2a5;
+            x2a6 = 0;
+            if (cb6r0.Checked) x2a6 += 1;
+            if (cb6r1.Checked) x2a6 += 2;
+            if (cb6r2.Checked) x2a6 += 4;
+            if (cb6r3.Checked) x2a6 += 8;
+            if (cb6r4.Checked) x2a6 += 16;
+            if (cb6r5.Checked) x2a6 += 32;
+            if (cb6r6.Checked) x2a6 += 64;
+            if (cb6r7.Checked) x2a6 += 128;
+            set.x2a6 = x2a6;
+            x2a7 = 0;
+            if (cb7r0.Checked) x2a7 += 1;
+            if (cb7r1.Checked) x2a7 += 2;
+            if (cb7r2.Checked) x2a7 += 4;
+            if (cb7r3.Checked) x2a7 += 8;
+            if (cb7r4.Checked) x2a7 += 16;
+            if (cb7r5.Checked) x2a7 += 32;
+            if (cb7r6.Checked) x2a7 += 64;
+            if (cb7r7.Checked) x2a7 += 128;
+            set.x2a7 = x2a7;
+            x2a8 = 0;
+            if (cb8r0.Checked) x2a8 += 1;
+            if (cb8r1.Checked) x2a8 += 2;
+            if (cb8r2.Checked) x2a8 += 4;
+            if (cb8r3.Checked) x2a8 += 8;
+            if (cb8r4.Checked) x2a8 += 16;
+            if (cb8r5.Checked) x2a8 += 32;
+            if (cb8r6.Checked) x2a8 += 64;
+            if (cb8r7.Checked) x2a8 += 128;
+            set.x2a8 = x2a8;
+            x2a9 = 0;
+            if (cb9r0.Checked) x2a9 += 1;
+            if (cb9r1.Checked) x2a9 += 2;
+            if (cb9r2.Checked) x2a9 += 4;
+            if (cb9r3.Checked) x2a9 += 8;
+            if (cb9r4.Checked) x2a9 += 16;
+            if (cb9r5.Checked) x2a9 += 32;
+            if (cb9r6.Checked) x2a9 += 64;
+            if (cb9r7.Checked) x2a9 += 128;
+            set.x2a9 = x2a9;
+            x2a10 = 0;
+            if (cb10r0.Checked) x2a10 += 1;
+            if (cb10r1.Checked) x2a10 += 2;
+            if (cb10r2.Checked) x2a10 += 4;
+            if (cb10r3.Checked) x2a10 += 8;
+            if (cb10r4.Checked) x2a10 += 16;
+            if (cb10r5.Checked) x2a10 += 32;
+            if (cb10r6.Checked) x2a10 += 64;
+            if (cb10r7.Checked) x2a10 += 128;
+            set.x2a10 = x2a10;
+            x2a11 = 0;
+            if (cb11r0.Checked) x2a11 += 1;
+            if (cb11r1.Checked) x2a11 += 2;
+            if (cb11r2.Checked) x2a11 += 4;
+            if (cb11r3.Checked) x2a11 += 8;
+            if (cb11r4.Checked) x2a11 += 16;
+            if (cb11r5.Checked) x2a11 += 32;
+            if (cb11r6.Checked) x2a11 += 64;
+            if (cb11r7.Checked) x2a11 += 128;
+            set.x2a11 = x2a11;
+            x2a12 = 0;
+            if (cb12r0.Checked) x2a12 += 1;
+            if (cb12r1.Checked) x2a12 += 2;
+            if (cb12r2.Checked) x2a12 += 4;
+            if (cb12r3.Checked) x2a12 += 8;
+            if (cb12r4.Checked) x2a12 += 16;
+            if (cb12r5.Checked) x2a12 += 32;
+            if (cb12r6.Checked) x2a12 += 64;
+            if (cb12r7.Checked) x2a12 += 128;
+            set.x2a12 = x2a12;
+            x2a13 = 0;
+            if (cb13r0.Checked) x2a13 += 1;
+            if (cb13r1.Checked) x2a13 += 2;
+            if (cb13r2.Checked) x2a13 += 4;
+            if (cb13r3.Checked) x2a13 += 8;
+            if (cb13r4.Checked) x2a13 += 16;
+            if (cb13r5.Checked) x2a13 += 32;
+            if (cb13r6.Checked) x2a13 += 64;
+            if (cb13r7.Checked) x2a13 += 128;
+            set.x2a13 = x2a13;
+            x2a14 = 0;
+            if (cb14r0.Checked) x2a14 += 1;
+            if (cb14r1.Checked) x2a14 += 2;
+            if (cb14r2.Checked) x2a14 += 4;
+            if (cb14r3.Checked) x2a14 += 8;
+            if (cb14r4.Checked) x2a14 += 16;
+            if (cb14r5.Checked) x2a14 += 32;
+            if (cb14r6.Checked) x2a14 += 64;
+            if (cb14r7.Checked) x2a14 += 128;
+            set.x2a14 = x2a14;
+            x2a15 = 0;
+            if (cb15r0.Checked) x2a15 += 1;
+            if (cb15r1.Checked) x2a15 += 2;
+            if (cb15r2.Checked) x2a15 += 4;
+            if (cb15r3.Checked) x2a15 += 8;
+            if (cb15r4.Checked) x2a15 += 16;
+            if (cb15r5.Checked) x2a15 += 32;
+            if (cb15r6.Checked) x2a15 += 64;
+            if (cb15r7.Checked) x2a15 += 128;
+            set.x2a15 = x2a15;
+            
+            set.Save();
+        }
+        #endregion * grpPortA_CheckedChanged Events *
+
+            #region * grpPortB_CheckedChanged Events *
+
+        int x2b0 = 0, x2b1 = 0, x2b2 = 0, x2b3 = 0;
+        int x2b4 = 0, x2b5 = 0, x2b6 = 0, x2b7 = 0;
+        int x2b8 = 0, x2b9 = 0, x2b10 = 0, x2b11 = 0;
+        int x2b12 = 0, x2b13 = 0, x2b14 = 0, x2b15 = 0;
+
+        private void grpPortB_CheckedChanged(object sender, EventArgs e)
+        {
+            x2b0 = 0;
+            if (cb0t0.Checked) x2b0 += 1;
+            if (cb0t1.Checked) x2b0 += 2;
+            if (cb0t2.Checked) x2b0 += 4;
+            if (cb0t3.Checked) x2b0 += 8;
+            if (cb0t4.Checked) x2b0 += 16;
+            if (cb0t5.Checked) x2b0 += 32;
+            if (cb0t6.Checked) x2b0 += 64;
+            if (cb0t7.Checked) x2b0 += 128;
+            set.x2b0 = x2b0;
+            x2b1 = 0;
+            if (cb1t0.Checked) x2b1 += 1;
+            if (cb1t1.Checked) x2b1 += 2;
+            if (cb1t2.Checked) x2b1 += 4;
+            if (cb1t3.Checked) x2b1 += 8;
+            if (cb1t4.Checked) x2b1 += 16;
+            if (cb1t5.Checked) x2b1 += 32;
+            if (cb1t6.Checked) x2b1 += 64;
+            if (cb1t7.Checked) x2b1 += 128;
+            set.x2b1 = x2b1;
+            x2b2 = 0;
+            if (cb2t0.Checked) x2b2 += 1;
+            if (cb2t1.Checked) x2b2 += 2;
+            if (cb2t2.Checked) x2b2 += 4;
+            if (cb2t3.Checked) x2b2 += 8;
+            if (cb2t4.Checked) x2b2 += 16;
+            if (cb2t5.Checked) x2b2 += 32;
+            if (cb2t6.Checked) x2b2 += 64;
+            if (cb2t7.Checked) x2b2 += 128;
+            set.x2b2 = x2b2;
+            x2b3 = 0;
+            if (cb3t0.Checked) x2b3 += 1;
+            if (cb3t1.Checked) x2b3 += 2;
+            if (cb3t2.Checked) x2b3 += 4;
+            if (cb3t3.Checked) x2b3 += 8;
+            if (cb3t4.Checked) x2b3 += 16;
+            if (cb3t5.Checked) x2b3 += 32;
+            if (cb3t6.Checked) x2b3 += 64;
+            if (cb3t7.Checked) x2b3 += 128;
+            set.x2b3 = x2b3;
+            x2b4 = 0;
+            if (cb4t0.Checked) x2b4 += 1;
+            if (cb4t1.Checked) x2b4 += 2;
+            if (cb4t2.Checked) x2b4 += 4;
+            if (cb4t3.Checked) x2b4 += 8;
+            if (cb4t4.Checked) x2b4 += 16;
+            if (cb4t5.Checked) x2b4 += 32;
+            if (cb4t6.Checked) x2b4 += 64;
+            if (cb4t7.Checked) x2b4 += 128;
+            set.x2b4 = x2b4;
+            x2b5 = 0;
+            if (cb5t0.Checked) x2b5 += 1;
+            if (cb5t1.Checked) x2b5 += 2;
+            if (cb5t2.Checked) x2b5 += 4;
+            if (cb5t3.Checked) x2b5 += 8;
+            if (cb5t4.Checked) x2b5 += 16;
+            if (cb5t5.Checked) x2b5 += 32;
+            if (cb5t6.Checked) x2b5 += 64;
+            if (cb5t7.Checked) x2b5 += 128;
+            set.x2b5 = x2b5;
+            x2b6 = 0;
+            if (cb6t0.Checked) x2b6 += 1;
+            if (cb6t1.Checked) x2b6 += 2;
+            if (cb6t2.Checked) x2b6 += 4;
+            if (cb6t3.Checked) x2b6 += 8;
+            if (cb6t4.Checked) x2b6 += 16;
+            if (cb6t5.Checked) x2b6 += 32;
+            if (cb6t6.Checked) x2b6 += 64;
+            if (cb6t7.Checked) x2b6 += 128;
+            set.x2b6 = x2b6;
+            x2b7 = 0;
+            if (cb7t0.Checked) x2b7 += 1;
+            if (cb7t1.Checked) x2b7 += 2;
+            if (cb7t2.Checked) x2b7 += 4;
+            if (cb7t3.Checked) x2b7 += 8;
+            if (cb7t4.Checked) x2b7 += 16;
+            if (cb7t5.Checked) x2b7 += 32;
+            if (cb7t6.Checked) x2b7 += 64;
+            if (cb7t7.Checked) x2b7 += 128;
+            set.x2b7 = x2b7;
+            x2b8 = 0;
+            if (cb8t0.Checked) x2b8 += 1;
+            if (cb8t1.Checked) x2b8 += 2;
+            if (cb8t2.Checked) x2b8 += 4;
+            if (cb8t3.Checked) x2b8 += 8;
+            if (cb8t4.Checked) x2b8 += 16;
+            if (cb8t5.Checked) x2b8 += 32;
+            if (cb8t6.Checked) x2b8 += 64;
+            if (cb8t7.Checked) x2b8 += 128;
+            set.x2b8 = x2b8;
+            x2b9 = 0;
+            if (cb9t0.Checked) x2b9 += 1;
+            if (cb9t1.Checked) x2b9 += 2;
+            if (cb9t2.Checked) x2b9 += 4;
+            if (cb9t3.Checked) x2b9 += 8;
+            if (cb9t4.Checked) x2b9 += 16;
+            if (cb9t5.Checked) x2b9 += 32;
+            if (cb9t6.Checked) x2b9 += 64;
+            if (cb9t7.Checked) x2b9 += 128;
+            set.x2b9 = x2b9;
+            x2b10 = 0;
+            if (cb10t0.Checked) x2b10 += 1;
+            if (cb10t1.Checked) x2b10 += 2;
+            if (cb10t2.Checked) x2b10 += 4;
+            if (cb10t3.Checked) x2b10 += 8;
+            if (cb10t4.Checked) x2b10 += 16;
+            if (cb10t5.Checked) x2b10 += 32;
+            if (cb10t6.Checked) x2b10 += 64;
+            if (cb10t7.Checked) x2b10 += 128;
+            set.x2b10 = x2b10;
+            x2b11 = 0;
+            if (cb11t0.Checked) x2b11 += 1;
+            if (cb11t1.Checked) x2b11 += 2;
+            if (cb11t2.Checked) x2b11 += 4;
+            if (cb11t3.Checked) x2b11 += 8;
+            if (cb11t4.Checked) x2b11 += 16;
+            if (cb11t5.Checked) x2b11 += 32;
+            if (cb11t6.Checked) x2b11 += 64;
+            if (cb11t7.Checked) x2b11 += 128;
+            set.x2b11 = x2b11;
+            x2b12 = 0;
+            if (cb12t0.Checked) x2b12 += 1;
+            if (cb12t1.Checked) x2b12 += 2;
+            if (cb12t2.Checked) x2b12 += 4;
+            if (cb12t3.Checked) x2b12 += 8;
+            if (cb12t4.Checked) x2b12 += 16;
+            if (cb12t5.Checked) x2b12 += 32;
+            if (cb12t6.Checked) x2b12 += 64;
+            if (cb12t7.Checked) x2b12 += 128;
+            set.x2b12 = x2b12;
+            x2b13 = 0;
+            if (cb13t0.Checked) x2b13 += 1;
+            if (cb13t1.Checked) x2b13 += 2;
+            if (cb13t2.Checked) x2b13 += 4;
+            if (cb13t3.Checked) x2b13 += 8;
+            if (cb13t4.Checked) x2b13 += 16;
+            if (cb13t5.Checked) x2b13 += 32;
+            if (cb13t6.Checked) x2b13 += 64;
+            if (cb13t7.Checked) x2b13 += 128;
+            set.x2b13 = x2b13;
+            x2b14 = 0;
+            if (cb14t0.Checked) x2b14 += 1;
+            if (cb14t1.Checked) x2b14 += 2;
+            if (cb14t2.Checked) x2b14 += 4;
+            if (cb14t3.Checked) x2b14 += 8;
+            if (cb14t4.Checked) x2b14 += 16;
+            if (cb14t5.Checked) x2b14 += 32;
+            if (cb14t6.Checked) x2b14 += 64;
+            if (cb14t7.Checked) x2b14 += 128;
+            set.x2b14 = x2b14;
+            x2b15 = 0;
+            if (cb15t0.Checked) x2b15 += 1;
+            if (cb15t1.Checked) x2b15 += 2;
+            if (cb15t2.Checked) x2b15 += 4;
+            if (cb15t3.Checked) x2b15 += 8;
+            if (cb15t4.Checked) x2b15 += 16;
+            if (cb15t5.Checked) x2b15 += 32;
+            if (cb15t6.Checked) x2b15 += 64;
+            if (cb15t7.Checked) x2b15 += 128;
+            set.x2b15 = x2b15;
+
+            set.Save();
+        }
+        #endregion * grpPortB_CheckedChanged Events *
+
+
+        // the Port A Enable checkbox has been changed
+        private void chkPortA_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPortA.Checked)
+            {
+                foreach (Control c in grpPortA.Controls)
+                {
+                    if (c.GetType() == typeof(CheckBox))
+                    { c.Enabled = true; }
+                    txtPortA.Enabled = true;
+                    btnClrPortA.Enabled = true;
+                    set.chkPortA = true;
+                    X2SetUp();
+                }
+            }
+            else
+            {
+                foreach (Control c in grpPortA.Controls)
+                {
+                    if (c.GetType() == typeof(CheckBox))
+                    { c.Enabled = false; }
+                }
+                txtPortA.Enabled = false;
+                btnClrPortA.Enabled = false;
+                set.chkPortA = false; 
+            }
+            set.Save();
+        }
+        // the Port B Enable checkbox has been changed
+        private void chkPortB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPortB.Checked)
+            {
+                foreach (Control c in grpPortB.Controls)
+                {
+                    if (c.GetType() == typeof(CheckBox))
+                    { c.Enabled = true; }
+                }
+                txtPortB.Enabled = true;
+                btnClrPortB.Enabled = true;
+                set.chkPortB = true;
+                X2SetUp();
+            }
+            else
+            {
+                foreach (Control c in grpPortB.Controls)
+                {
+                    if (c.GetType() == typeof(CheckBox))
+                    { c.Enabled = false; }
+                }
+                txtPortB.Enabled = false;
+                btnClrPortB.Enabled = false;
+                set.chkPortB = false;
+            }
+            set.Save();
+        }
+        // Port A has been changed
+        private void txtPortA_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPortA.Text == null || txtPortA.Text == "") txtPortA.Text = "0";
+            set.aPortNum = txtPortA.Text; set.Save();
+            aPort = Convert.ToInt32(txtPortA.Text);
+        }
+        // Port B has been changed
+        private void txtPortB_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPortB.Text == null || txtPortB.Text == "") txtPortB.Text = "0";
+            set.bPortNum = txtPortB.Text; set.Save();
+            bPort = Convert.ToInt32(txtPortB.Text);
+        }
+        // the Clear all receive bits button was pressed
+        private void btnClrPortA_Click(object sender, EventArgs e)
+        {
+            CheckBox cb;
+            foreach (Control c in grpPortA.Controls)
+            {
+                if (c.GetType() == typeof(CheckBox))
+                {
+                    cb = (CheckBox)c;
+                    cb.Checked = false;
+                }
+            }
+        }
+        // the Clear all transmit bits button was pressed
+        private void btnClrPortB_Click(object sender, EventArgs e)
+        {
+            CheckBox cb;
+            foreach (Control c in grpPortB.Controls)
+            {
+                if (c.GetType() == typeof(CheckBox))
+                {
+                    cb = (CheckBox)c;
+                    cb.Checked = false;
+                }
+            }
+        }
+        // the Port A invert checkbox has changed.
+        private void chkInvertA_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkInvertA.Checked) set.chkInvertA = true;
+            else set.chkInvertA = false;
+            set.Save();
+        }
+        // the Port B invert checkbox has changed.
+        private void chkInvertB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkInvertB.Checked) set.chkInvertB = true;
+            else set.chkInvertB = false;
+            set.Save();
+        }
+
+          #endregion Events
+
+        #endregion VHF+ Matrix
+
         #region Window Geometry
 
         /// <summary>
@@ -5878,2015 +7948,6 @@ namespace DataDecoder
         #endregion WaveNode Setup
 
         #endregion WaveNode
-
-        #region ALC
-
-        Double dAlc = 0;    // ALC cal std.
-        int iDrive = 0;     // cal drive watts
-
-        #region ALC Delegates
-
-        // Write ALC reading to txt box
-        delegate void SetALCCallback(string text);
-        private void SetALC(string text)
-        {
-            if (this.txtALC.InvokeRequired)
-            {
-                SetALCCallback d = new SetALCCallback(SetALC);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-                txtALC.Text = text;
-        }
-        // Write Drive reading to txt box
-        delegate void SetDriveCallback(string text);
-        private void SetDrive(string text)
-        {
-            if (this.txtDrive.InvokeRequired)
-            {
-                SetDriveCallback d = new SetDriveCallback(SetDrive);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-                txtDrive.Text = text;
-        }
-        #endregion ALC Delegates
-
-        #region ALC Events
-
-        private void alcTimer_Elapsed(object sender, EventArgs e)
-        {
-            if (closing) { alcTimer.Close(); return; }
-            double eDong;
-            if (xOn == "1" && chkAlcEnab.Checked)
-            {
-                eDong = ReadALC();  // get dong volts
-                if (eDong > dAlc)
-                {
-                    double alc = (eDong / dAlc) - 1;
-
-                         if (alc > .4) iDrive -= 5;
-                    else if (alc > .3) iDrive -= 4;
-                    else if (alc > .2) iDrive -= 3;
-                    else if (alc > .1) iDrive -= 2;
-                    else if (alc < .1) iDrive -= 1;
-
-                    WriteToPort("ZZPC" + iDrive.ToString().PadLeft(3, '0') + ";", iSleep);
-                }
-            }
-        }
-        // the Calibrate button was pressed
-        private void btnCal_Click(object sender, EventArgs e)
-        {
-            DialogResult result;
-            result = MessageBox.Show(
-            "You are about to initiate the ALC calibration routine for your\r" +
-            "linear amplifier. If this isn't what you intended exit now.\r\r" +
-            "Please check that the following preparations are observed.\r\r" +
-            "- The amplifier must be on and not in standby mode. \r" +
-            "- Make sure a antenna or dummy load is connected to the amp.\r" +
-            "This procedure puts the radio into transmit mode. Be observant\r\r" +
-            "and prepared to act in case of a hang-up or unusual operation.\r" +
-            "Pressing the Tune button on the PowerSDR Console will un-key the radio.\r\r" +
-            "Press the OK button to start the calibration procedure.",
-            "ALC Calibrate Procedure",
-            MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-
-            if (result != DialogResult.OK) return;
-
-            int calSleep = 300;
-            string band;
-            string freq;
-            WriteToPort("ZZSP0;", calSleep); // make sure radio not split
-
-            // Cal 160
-            if (chk160.Checked)
-            {
-                band = "160"; freq = "00001850000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc160 = txtALC.Text; set.Drive160 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 80
-            if (chk80.Checked)
-            {
-                band = "80"; freq = "00003550000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc80 = txtALC.Text; set.Drive80 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 40
-            if (chk40.Checked)
-            {
-                band = "40"; freq = "00007150000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc40 = txtALC.Text; set.Drive40 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 30
-            if (chk30.Checked)
-            {
-                band = "30"; freq = "00010125000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc30 = txtALC.Text; set.Drive30 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 20
-            if (chk20.Checked)
-            {
-                band = "20"; freq = "00014100000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc20 = txtALC.Text; set.Drive20 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 17
-            if (chk17.Checked)
-            {
-                band = "17"; freq = "00018075000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc17 = txtALC.Text; set.Drive17 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 15
-            if (chk15.Checked)
-            {
-                band = "15"; freq = "00021200000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc15 = txtALC.Text; set.Drive15 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 12
-            if (chk12.Checked)
-            {
-                band = "12"; freq = "00024900000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc12 = txtALC.Text; set.Drive12 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 10
-            if (chk10.Checked)
-            {
-                band = "10"; freq = "00029000000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc10 = txtALC.Text; set.Drive10 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 6
-            if (chk6.Checked)
-            {
-                band = "6"; freq = "00051250000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc6 = txtALC.Text; set.Drive6 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-
-            // Print calibration report
-            string msg = "";
-            if (chk160.Checked) msg +=
-            string.Format("160 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc160)) 
-            + "\tDrive= " + set.Drive160 + "\t\r";
-
-            if (chk80.Checked) msg +=
-            string.Format(" 80 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc80))
-            + "\tDrive= " + set.Drive80 + "\t\r";
-
-            if (chk40.Checked) msg +=
-            string.Format(" 40 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc80))
-            + "\tDrive= " + set.Drive80 + "\t\r";
-
-            if (chk30.Checked) msg +=
-            string.Format(" 30 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc30))
-            + "\tDrive= " + set.Drive30 + "\t\r";
-
-            if (chk20.Checked) msg +=
-            string.Format(" 20 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc20))
-            + "\tDrive= " + set.Drive20 + "\t\r";
-
-            if (chk17.Checked) msg +=
-            string.Format(" 17 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc17))
-            + "\tDrive= " + set.Drive17 + "\t\r";
-
-            if (chk15.Checked) msg +=
-            string.Format(" 15 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc15))
-            + "\tDrive= " + set.Drive15 + "\t\r";
-
-            if (chk12.Checked) msg +=
-            string.Format(" 12 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc12))
-            + "\tDrive= " + set.Drive12 + "\t\r";
-
-            if (chk10.Checked) msg +=
-            string.Format(" 10 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc10))
-            + "\tDrive= " + set.Drive10 + "\t\r";
-
-            if (chk6.Checked) msg +=
-            string.Format(" 6 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc6))
-            + "\tDrive= " + set.Drive6 + "\t\r";
-           
-            MessageBox.Show(msg,"ALC Calibration Report",
-            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-        Quit: return;
-        }
-
-        private bool CalSetup(string band, string freq, int sleep)
-        {
-            WriteToPort("ZZFA" + freq + ";", sleep); // set freq
-            DialogResult result;
-            result = MessageBox.Show(
-                "Please verify your amplifier is set to "+ band + " meters" + 
-                "\rand the controls properly adjusted for this band.", 
-                "ALC Calibrate Procedure", MessageBoxButtons.OKCancel);
-            if (result == DialogResult.OK) return true;
-            return false;
-        }        
-
-        private bool CalFailed(string band)
-        {
-            DialogResult result;
-            result = MessageBox.Show(
-              "Calibration for " + band + " meters failed.\r\r" +
-              "Please make sure the amp is powered up, alc line\r" +
-              "is connected, not in stand-by then try again",
-              "Calibration Failed", MessageBoxButtons.OKCancel, 
-              MessageBoxIcon.Error);
-            if (result == DialogResult.OK) return true;
-            return false;
-
-        }        
-        // the Set button was pressed
-        private void btnSet_Click(object sender, EventArgs e)
-        {
-            if (band == "160")
-            { set.Drive160 = txtDrive.Text; set.Alc160 = txtALC.Text; }
-            else if (band == "080")
-            { set.Drive80 = txtDrive.Text; set.Alc80 = txtALC.Text; }
-            else if (band == "040")
-            { set.Drive40 = txtDrive.Text; set.Alc40 = txtALC.Text; }
-            else if (band == "030")
-            { set.Drive30 = txtDrive.Text; set.Alc30 = txtALC.Text; }
-            else if (band == "020")
-            { set.Drive20 = txtDrive.Text; set.Alc20 = txtALC.Text; }
-            else if (band == "017")
-            { set.Drive17 = txtDrive.Text; set.Alc17 = txtALC.Text; }
-            else if (band == "015")
-            { set.Drive15 = txtDrive.Text; set.Alc15 = txtALC.Text; }
-            else if (band == "012")
-            { set.Drive12 = txtDrive.Text; set.Alc12 = txtALC.Text; }
-            else if (band == "010")
-            { set.Drive10 = txtDrive.Text; set.Alc10 = txtALC.Text; }
-            else if (band == "006")
-            { set.Drive6 = txtDrive.Text; set.Alc6 = txtALC.Text; }
-            else
-            { MessageBox.Show("The save settings operation failed."); return; }
-            set.Save();
-            MessageBox.Show("The settings for " + band.TrimStart('0') + " meters were saved");
-        }
-        // the Enable ALC check box was changed
-        private void chkAlcEnab_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAlcEnab.Checked)
-            {
-                set.AlcEnab = true; 
-                //dAlc = Convert.ToDouble(txtALC.Text);
-                //iDrive = Convert.ToInt16(txtDrive.Text);
-            }
-
-            else
-            {
-                alcTimer.Enabled = false;
-                set.AlcEnab = false;
-            }
-            
-            set.Save();
-        }
-        // the Check All button was pressed
-        private void btnChkAll_Click(object sender, EventArgs e)
-        {
-            chk160.Checked = true; chk80.Checked = true; chk40.Checked = true;
-            chk30.Checked = true; chk20.Checked = true; chk17.Checked = true; 
-            chk15.Checked = true; chk12.Checked = true;
-            chk10.Checked = true; chk6.Checked = true;
-        }
-        // the Clear All button was pressed
-        private void btnClrAll_Click(object sender, EventArgs e)
-        {
-            chk160.Checked = false; chk80.Checked = false; chk40.Checked = false; 
-            chk30.Checked = false; chk20.Checked = false; chk17.Checked = false; 
-            chk15.Checked = false; chk12.Checked = false; chk10.Checked = false; 
-            chk6.Checked = false;
-        }
-
-        #endregion ALC Events
-
-        #region ALC Methods
-
-        // run the amp calibration
-        private bool doCal()
-        {
-            int drive = 0;
-            double level = 0, lastLevel = 0;
-            test = 0;   // part of test code
-            WriteToPort("ZZTO000;", iSleep); // set tune pwr level to 0
-            WriteToPort("ZZTU1;", iSleep); // key rig
-            // step the power up in 5 watt steps until the alc voltage
-            // curve starts to flatten out.
-            for (int i = 10; i < 100; i +=5)
-            {
-                test++;
-                WriteToPort("ZZTO" + drive.ToString().PadLeft(3, '0') + ";", iSleep);
-                level = DummyAmp();  // get the alc volts for this drive level
-                if (level > lastLevel + .75)
-                {
-                    drive += 5;
-                    lastLevel = level;
-                }
-                else break;
-                    
-                SetDrive(drive.ToString());                               
-                SetALC(string.Format("{0:f2}",level));
-            }
-            // Set the PSDR drive level
-            WriteToPort("ZZTU0;", iSleep); // un-key rig
-            WriteToPort("ZZPC" + drive.ToString().PadLeft(3, '0') + ";", iSleep);
-            if (level > 0) return true;
-            return false;
-        }
-        // Read the ALC dongle
-        private double ReadALC()
-        {
-            double eDong = 0;
-
-            return eDong;
-        }
-
-        // get the alc settings for the amp
-        int test = 0;   // Test code!
-        private double DummyAmp()
-        {
-            double emc = 0;
-            double [] e = new double[10]; 
-            // average readings over a 10 sample period.
-            Random r = new Random(test);    // Test code!
-            for (int i = 0; i < 10; i++)
-            {
-                e[i] = (double)r.NextDouble() + test; // Test code!
-                Console.WriteLine(e[i]); // Test code!
-            }
-            if (test == 5) // Test code!
-                {emc = 4.75;} // Test code!
-            else // Test code!
-                {emc = Average(e);}
-            Console.WriteLine(emc + " Average"); // Test code!
-            return emc;
-            
-        }
-        public static double Average(Array array)
-        {
-            double average = 0;
-            for (int i = 0; i < array.Length; i++)
-            {
-                average += (double)array.GetValue(i);
-            }
-            return average / array.Length;
-        }
-
-        #endregion ALC Methods
-
-        #region ALC Setup
-
-        private void AlcSetUp()
-        {
-            chkAlcEnab.Checked = set.AlcEnab;
-
-            // setup alc Read Timer for a 100 ms interrupt
-            alcTimer = new System.Timers.Timer();
-            alcTimer.Elapsed += new System.Timers.ElapsedEventHandler(alcTimer_Elapsed);
-            alcTimer.Interval = 100;      // 1000 = 1 second
-            alcTimer.Enabled = false;
-
-        }
-        #endregion ALC Setup
-
-        private void chkModeChg_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkModeChg.Checked) set.ModeChg = true;
-            else set.ModeChg = false;
-            set.Save();
-        }
-
-        #endregion ALC
-        
-        #region Alpha
-
-          #region # Delegates #
-
-        // Write to Pwr button
-        delegate void SetPwrCallback(string text);
-        public void SetPwr(string text)
-        {
-            if (this.btnPwr.InvokeRequired)
-            {
-                SetPwrCallback d = new SetPwrCallback(SetPwr);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            { btnPwr.Text = text; mini.btnPwr.Text = text; }
-        }
-        // Write to Oper button
-        delegate void SetOperCallback(string text);
-        public void SetOper(string text)
-        {
-            if (this.btnOper.InvokeRequired)
-            {
-                SetOperCallback d = new SetOperCallback(SetOper);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            { btnOper.Text = text; mini.btnOper.Text = text; }
-        }
-        // Write to Tune button
-        delegate void SetTuneCallback(string text);
-        public void SetTune(string text)
-        {
-            if (this.btnTune.InvokeRequired)
-            {
-                SetTuneCallback d = new SetTuneCallback(SetTune);
-                this.Invoke(d, new object[] { text });
-            }
-            else { btnTune.Text = text; mini.btnTune.Text = text; }
-        }
-        // Write to HV button
-        delegate void SetHVCallback(string text);
-        public void SetHV(string text)
-        {
-            if (this.btnHV.InvokeRequired)
-            {
-                SetHVCallback d = new SetHVCallback(SetHV);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            { btnHV.Text = text; mini.btnHV.Text = text; }
-        }
-        // Write to Band window
-        delegate void SetBandCallback(string text);
-        public void SetBand(string text)
-        {
-            if (this.txtBand.InvokeRequired)
-            {
-                SetBandCallback d = new SetBandCallback(SetBand);
-                this.Invoke(d, new object[] { text });
-            }
-            else txtBand.Text = text;
-        }
-        // Write to Seg window
-        delegate void SetSegCallback(string text);
-        public void SetSeg(string text)
-        {
-            if (this.txtSeg.InvokeRequired)
-            {
-                SetSegCallback d = new SetSegCallback(SetSeg);
-                this.Invoke(d, new object[] { text });
-            }
-            else txtSeg.Text = text;
-        }
-        // Write to Msg window
-        delegate void SetMsgCallback(string text);
-        public void SetMsg(string text)
-        {
-            if (this.txtMsg.InvokeRequired)
-            {
-                SetMsgCallback d = new SetMsgCallback(SetMsg);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            { txtMsg.Text = text; mini.txtMsg.Text = text; }
-        }
-        // Write to Freq window
-        delegate void SetFreqCallback(string text);
-        public void SetFreq(string text)
-        {
-            if (this.txtFreq.InvokeRequired)
-            {
-                SetFreqCallback d = new SetFreqCallback(SetFreq);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            { txtFreq.Text = text; mini.txtMsg.Text = text; }
-        }
-        // Write to Tune window
-        delegate void SetpaTuneCallback(string text);
-        public void SetpaTune(string text)
-        {
-            if (this.txtTune.InvokeRequired)
-            {
-                SetpaTuneCallback d = new SetpaTuneCallback(SetpaTune);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            { txtTune.Text = text; }
-        }
-        // Write to Load window
-        delegate void SetLoadCallback(string text);
-        public void SetLoad(string text)
-        {
-            if (this.txtLoad.InvokeRequired)
-            {
-                SetLoadCallback d = new SetLoadCallback(SetLoad);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            { txtLoad.Text = text; }
-        }
-
-          #endregion Delegates
-
-          #region # Events #
-
-        // the Alpha enabled RadioButton has changed
-        private void chkAlpha_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cboAlpha.SelectedIndex > 0)
-            {
-                if (chkAlpha.Checked)
-                {
-                    btnPwr.Enabled = true; btnOper.Enabled = true;
-                    mini.btnPwr.Enabled = true; mini.btnOper.Enabled = true;
-                    btnTune.Enabled = true; btnHV.Enabled = true;
-                    mini.btnTune.Enabled = true; mini.btnHV.Enabled = true;
-                    btnSF.Enabled = true; btnHF.Enabled = true;
-                    mini.btnSF.Enabled = true; mini.btnHF.Enabled = true;
-                    txtMsg.Enabled = true; mini.txtMsg.Enabled = true;
-                    txtBand.Enabled = true; txtSeg.Enabled = true; txtFreq.Enabled = true;
-                    txtTune.Enabled = true; txtLoad.Enabled = true; 
-                    txtAlphaInt.Enabled = true; set.AlphaEnab = true; 
-                    AlphaTimer.Enabled = true;  set.Save();
-                    AlphaPort.Write("AC\r"); 
-                    AlphaPort.Write("EXT OFF\r"); 
-                    AlphaPort.Write("STAT\r");
-                    AlphaPort.Write("AUTOTUNE\r");
-                }
-                else
-                {
-                    btnPwr.Enabled = false; btnOper.Enabled = false;
-                    mini.btnPwr.Enabled = false; mini.btnOper.Enabled = false;
-                    btnTune.Enabled = false; btnHV.Enabled = false;
-                    mini.btnTune.Enabled = false; mini.btnHV.Enabled = false;
-                    btnSF.Enabled = false; btnHF.Enabled = false;
-                    mini.btnSF.Enabled = false; mini.btnHF.Enabled = false;
-                    txtMsg.Enabled = false; mini.txtMsg.Enabled = false;
-                    txtBand.Enabled = false; txtSeg.Enabled = false; txtFreq.Enabled = false;
-                    txtTune.Enabled = false; txtLoad.Enabled =  false;
-                    set.AlphaEnab = false; txtAlphaInt.Enabled = false; 
-                    AlphaTimer.Enabled = false; set.Save();
-                }
-            }
-            else 
-            {
-                btnPwr.Enabled = false; btnOper.Enabled = false;
-                mini.btnPwr.Enabled = false; mini.btnOper.Enabled = false;
-                btnTune.Enabled = false; btnHV.Enabled = false;
-                mini.btnTune.Enabled = false; mini.btnHV.Enabled = false;
-                btnSF.Enabled = false; btnHF.Enabled = false;
-                mini.btnSF.Enabled = false; mini.btnHF.Enabled = false;
-                txtMsg.Enabled = false; mini.txtMsg.Enabled = false;
-                txtBand.Enabled = false; txtSeg.Enabled = false;
-                txtTune.Enabled = false; txtLoad.Enabled = false;
-                txtAlphaInt.Enabled = false; AlphaTimer.Enabled = false;
-                txtFreq.Enabled = false; set.AlphaEnab = false; set.Save();
-                chkAlpha.Checked = false; 
-
-                Notification alert = new Notification();
-                Notification.notiIntvl = 7000;
-                Notification.notiMsg =
-                    "You must assign a port number before the\r\r" +
-                    "Alpha Amplifier can be enabled.\r\r" +
-                    "Please assign a valid port and try again.\r";
-                alert.Show();
-            }
-        }
-        // The baud rate selection has changed
-        private void cboAlphaBaud_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cboAlphaBaud.SelectedItem.ToString() == "4800")
-            {   
-                AlphaPort.BaudRate = 4800; AlphaPort.DataBits = 8; 
-                AlphaPort.Parity = System.IO.Ports.Parity.None; 
-                AlphaPort.StopBits = System.IO.Ports.StopBits.One; 
-            }
-            if (cboAlphaBaud.SelectedItem.ToString() == "9600")
-            {
-                AlphaPort.BaudRate = 9600; AlphaPort.DataBits = 8;
-                AlphaPort.Parity = System.IO.Ports.Parity.None;
-                AlphaPort.StopBits = System.IO.Ports.StopBits.One;
-            }
-            set.AlphaBaud = cboAlphaBaud.SelectedIndex; set.Save();
-        }
-        // the serial port selection has changed
-        private void cboAlpha_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (AlphaPort.IsOpen) AlphaPort.Close();
-            if (cboAlpha.SelectedIndex > 0)
-            {
-                AlphaPort.PortName = cboAlpha.SelectedItem.ToString();
-                try
-                {
-                    AlphaPort.Open();
-                }
-                catch
-                {
-                    MessageBox.Show("The Alpha amplifier serial port " + AlphaPort.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboAlpha.SelectedText = "";
-                    chkAlpha.Checked = false;
-                    return;
-                }
-            }
-            else
-            {
-                chkAlpha.Checked = false;
-            }
-            set.AlphaPort = cboAlpha.SelectedIndex;
-            set.Save();
-        }
-        public string sf = "";          // Soft fault message
-        public string hf = "";          // Hard fault message
-        public string ac = "Off";       // Amp power (On/Off)
-        public string mode = "LOW";     // HV mode
-        public string state = "Off";    // Amp State (On/Off)
-        public string tune = "Off";     // State of autotune 
-        string sAlpha = "";             // Port buffer message
-        // a Message(s) from Amplifier HAS BEEN received
-        private void AlphaPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            if (chkAlpha.Checked)       // port must be enabled to receive data
-            {
-                try
-                {
-                    string sCmd = "";
-                    SerialPort port = (SerialPort)sender;
-                    byte[] data = new byte[port.BytesToRead];
-                    port.Read(data, 0, data.Length);
-                    sAlpha += AE.GetString(data, 0, data.Length);
-                    Regex rex = new Regex(@".*?\r\n"); 		
-                    for (Match m = rex.Match(sAlpha); m.Success; m = m.NextMatch())
-                    {   //loop thru the buffer and find matches
-                        sCmd = m.Value.Substring(0,m.Value.Length-2);
-                        sAlpha = sAlpha.Replace(m.Value, ""); //remove match from buffer
-
-                        if (sCmd.Contains("FACTORY MODE = ON"))
-                            AlphaPort.Write("EXT OFF\r");
-
-                        if (sCmd.Contains("AMPLIFIER IS OFF")) 
-                        {   SetPwr("Off"); btnPwr.BackColor = Color.Empty; 
-                            ac = "Off"; mini.btnPwr.BackColor = Color.Empty; }
-                        if (sCmd.Contains("AMPLIFIER IS ON"))
-                        {   SetPwr("On"); btnPwr.BackColor = Color.Lime; 
-                            ac = "On"; mini.btnPwr.BackColor = Color.Lime; }
-                        if (sCmd.Contains("AUTOTUNE ENABLED"))
-                        {   SetTune("Auto"); btnTune.BackColor = Color.Lime; 
-                            tune = "On"; mini.btnTune.BackColor = Color.Lime; }
-                        if (sCmd.Contains("AUTOTUNE DISABLED"))
-                        {   SetTune("Man"); btnTune.BackColor = Color.Yellow; 
-                            tune = "Off"; mini.btnTune.BackColor = Color.Yellow; }
-                        if (sCmd.Contains("MODE = HIGH"))
-                        {   SetHV("High"); btnHV.BackColor = Color.Lime; 
-                            mode = "High"; mini.btnHV.BackColor = Color.Lime; }
-                        if (sCmd.Contains("MODE = LOW"))
-                        {   SetHV("Low"); btnHV.BackColor = Color.Yellow; 
-                            mode = "Low"; mini.btnHV.BackColor = Color.Yellow; }
-                        if (sCmd.Contains("STATE = OFF"))
-                        {   SetOper("Off"); btnOper.BackColor = Color.Empty; 
-                            state = "Off"; mini.btnOper.BackColor = Color.Empty; }
-                        if (sCmd.Contains("STATE = WARMUP"))
-                        {   SetOper("Wait"); btnOper.BackColor = Color.Pink; 
-                            state = "Wait"; mini.btnOper.BackColor = Color.Pink; }
-                        if (sCmd.Contains("STATE = STANDBY"))
-                        {   SetOper("Stby"); btnOper.BackColor = Color.Yellow; 
-                            state = "Stby"; mini.btnOper.BackColor = Color.Yellow; }
-                        if (sCmd.Contains("STATE = OPERATE"))
-                        {   SetOper("Oper"); btnOper.BackColor = Color.Lime; 
-                            state = "Oper"; mini.btnOper.BackColor = Color.Lime; }
-
-                        string sb = ""; string sbx = "";
-                        if (sCmd.Contains("BAND"))
-                        {   sb = sCmd.Substring(7, 1);
-                            SetSeg(sCmd.Substring(22, 1)); 
-                        }
-                        switch (sb)
-                        {   case "1": SetBand("160"); break;
-                            case "2": SetBand("80"); break;
-                            case "3": SetBand("40"); break;
-                            case "4": SetBand("30"); break;
-                            case "5": SetBand("20"); break;
-                            case "6": SetBand("17"); break;
-                            case "7": SetBand("15"); break;
-                            case "8": SetBand("12"); break;
-                            case "9": SetBand("10"); break;
-                        }
-                        string regex = @"FREQUENCY\s=\s(\d+)(\d\d\d)";
-                        string mask = "$1.$2";
-
-                        if (sCmd.Contains("FREQUENCY"))
-                        {   sb = Regex.Replace(sCmd, regex, mask); 
-                            SetFreq(sb); 
-                        }
-                        if (sCmd.Contains("TUNE"))
-                        {
-                            sb = Regex.Match(sCmd, @"TUNE\s=\s\d+").ToString();
-                            sbx = Regex.Match(sb, @"\d+").ToString();
-                            SetpaTune(sbx);
-                        }
-                        if (sCmd.Contains("LOAD"))
-                        {
-                            sb = Regex.Match(sCmd, @"LOAD\s=\s\d+").ToString();
-                            sbx = Regex.Match(sb, @"\d+").ToString();
-                            SetLoad(sbx);
-                        }
-                        if (sCmd.Contains("SFAULT"))
-                        {   SetMsg(sCmd);
-                            //SetMsg("Soft Fault Warning: press SF button to view.");
-                            sf = sCmd; btnSF.BackColor = Color.Yellow;
-                            mini.btnSF.BackColor = Color.Yellow;
-                        }
-                        if (sCmd.Contains("HFAULT"))
-                        {   SetMsg(sCmd);
-                            //SetMsg("Hard Fault Warning: press HF button to view.");
-                            hf = sCmd; btnHF.BackColor = Color.Red;
-                            mini.btnHF.BackColor = Color.Red;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    bool bReturnLog = false;
-                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-                }
-            }//if (chkAlpha.Checked)
-        }//AlphaPort_DataReceived
-
-        //the alpha power button was pressed
-        public void btnPwr_Click(object sender, EventArgs e)
-        {
-            if (ac == "Off") AlphaPort.Write("AC ON\r"); 
-            if (ac == "On") AlphaPort.Write("AC OFF\r");
-        }
-        // The Operate / Stand By button was pressed
-        public void btnOper_Click(object sender, EventArgs e)
-        {
-            if (ac == "On" && state != "Oper") AlphaPort.Write("OPER ON\r");
-            else AlphaPort.Write("OPER OFF\r");
-        }
-        // The Auto tune button was pressed.
-        public void btnTune_Click(object sender, EventArgs e)
-        {
-            if (ac == "On" && tune == "Off") AlphaPort.Write("AUTOTUNE ON\r");
-            else AlphaPort.Write("AUTOTUNE OFF\r");
-        }
-        // The High Voltage button was pressed
-        public void btnHV_Click(object sender, EventArgs e)
-        {
-            if (ac == "On" && mode == "Low") AlphaPort.Write("MODE HIGH\r");
-            else AlphaPort.Write("MODE LOW\r");
-        }
-        /*** The Alpha timer has elapsed ***/
-        void AlphaTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            try
-            {
-                if (chkAlpha.Enabled)
-                {
-                    AlphaPort.Write("STAT\r"); // Request ststus from amp
-                }
-                else AlphaTimer.Enabled = false;
-            }
-            catch { }
-        }
-        // The Alpha Timer interval has changed
-        private void txtAlphaInt_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                AlphaTimer.Interval = Convert.ToDouble(txtAlphaInt.Text);
-                set.AlphaInt = txtAlphaInt.Text;
-                set.Save();
-            }
-            catch { }
-        }
-        // The Soft Fault button has been pressed
-        public void btnSF_Click(object sender, EventArgs e)
-        {
-            AlphaPort.Write("SF\r");
-        }
-        // The Hard Fault button has been pressed
-        public void btnHF_Click(object sender, EventArgs e)
-        {
-            AlphaPort.Write("HF\r");
-        }
-        // The SF button label was double clicked
-        public void lblSF_DoubleClick(object sender, EventArgs e)
-        {
-            SetMsg(""); btnSF.BackColor = Color.Empty;
-            mini.btnSF.BackColor = Color.Empty;
-        }
-        // The HF button label was double clicked
-        public void lblHF_DoubleClick(object sender, EventArgs e)
-        {
-            SetMsg(""); btnHF.BackColor = Color.Empty;
-            mini.btnHF.BackColor = Color.Empty;
-        }
-        private void btnWnSensor_Click(object sender, EventArgs e)
-        {
-            wn.Show();
-        }
-
-            #endregion Events  
-
-        #endregion Alpha
-
-        #region VHF+ Matrix
-
-          #region # Declarations #
-
-        const int base10 = 10;
-        char[] cHexa = new char[] { 'A', 'B', 'C', 'D', 'E', 'F' };
-        
-          #endregion Declarations
-
-          #region # Delegates #
-
-        // Write to band button
-        delegate void SetVHFCallback(string text);
-        public void SetVHF(string text)
-        {
-            if (this.lblVHF.InvokeRequired)
-            {
-                SetVHFCallback d = new SetVHFCallback(SetVHF);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            { lblVHF.Text = text; }
-        }
-          #endregion # Delegates #
-
-          #region # Methods #
-
-        // Send data to parallel port A
-        void MatrixOutA(int port, int data)
-        {
-            if (chkInvertA.Checked) PortAccess.Output(port, 255 ^ data);
-            else PortAccess.Output(port, data);
-        }
-        // Send data to parallel port B
-        void MatrixOutB(int port, int data)
-        {
-            if (chkInvertB.Checked) PortAccess.Output(port, 255 ^ data);
-            else PortAccess.Output(port, data);
-        }
-        int aPort;
-        int bPort;
-        // Load the x2 matrix controls from settings
-        void X2SetUp()
-        {
-            string bin = "";
-            chkPortA.Checked = set.chkPortA;
-            chkPortB.Checked = set.chkPortB;
-            txtPortA.Text = set.aPortNum;
-            txtPortB.Text = set.bPortNum;
-            chkInvertA.Checked = set.chkInvertA;
-            chkInvertB.Checked = set.chkInvertB;
-            aPort = Convert.ToInt32(set.aPortNum);
-            bPort = Convert.ToInt32(set.bPortNum);
-
-            //store the set rec vars as they will be overwritten during the load.
-            int s2a0 = set.x2a0, s2a1 = set.x2a1, s2a2 = set.x2a2, s2a3 = set.x2a3;
-            int s2a4 = set.x2a4, s2a5 = set.x2a5, s2a6 = set.x2a6, s2a7 = set.x2a7;
-            int s2a8 = set.x2a8, s2a9 = set.x2a9, s2a10 = set.x2a10, s2a11 = set.x2a11;
-            int s2a12 = set.x2a12, s2a13 = set.x2a13, s2a14 = set.x2a14, s2a15 = set.x2a15;
-            //store the set trans vars as they will be overwritten during the load.
-            int s2b0 = set.x2b0, s2b1 = set.x2b1, s2b2 = set.x2b2, s2b3 = set.x2b3;
-            int s2b4 = set.x2b4, s2b5 = set.x2b5, s2b6 = set.x2b6, s2b7 = set.x2b7;
-            int s2b8 = set.x2b8, s2b9 = set.x2b9, s2b10 = set.x2b10, s2b11 = set.x2b11;
-            int s2b12 = set.x2b12, s2b13 = set.x2b13, s2b14 = set.x2b14, s2b15 = set.x2b15;
-            // Load receive matrix
-            if (chkPortA.Checked)
-            {
-                bin = DecimalToBase(s2a0, 2);
-                LoadCheckBoxes(bin, "cb0r", grpPortA);
-                bin = DecimalToBase(s2a1, 2);
-                LoadCheckBoxes(bin, "cb1r", grpPortA);
-                bin = DecimalToBase(s2a2, 2);
-                LoadCheckBoxes(bin, "cb2r", grpPortA);
-                bin = DecimalToBase(s2a3, 2);
-                LoadCheckBoxes(bin, "cb3r", grpPortA);
-                bin = DecimalToBase(s2a4, 2);
-                LoadCheckBoxes(bin, "cb4r", grpPortA);
-                bin = DecimalToBase(s2a5, 2);
-                LoadCheckBoxes(bin, "cb5r", grpPortA);
-                bin = DecimalToBase(s2a6, 2);
-                LoadCheckBoxes(bin, "cb6r", grpPortA);
-                bin = DecimalToBase(s2a7, 2);
-                LoadCheckBoxes(bin, "cb7r", grpPortA);
-                bin = DecimalToBase(s2a8, 2);
-                LoadCheckBoxes(bin, "cb8r", grpPortA);
-                bin = DecimalToBase(s2a9, 2);
-                LoadCheckBoxes(bin, "cb9r", grpPortA);
-                bin = DecimalToBase(s2a10, 2);
-                LoadCheckBoxes(bin, "cb10r", grpPortA);
-                bin = DecimalToBase(s2a11, 2);
-                LoadCheckBoxes(bin, "cb11r", grpPortA);
-                bin = DecimalToBase(s2a12, 2);
-                LoadCheckBoxes(bin, "cb12r", grpPortA);
-                bin = DecimalToBase(s2a13, 2);
-                LoadCheckBoxes(bin, "cb13r", grpPortA);
-                bin = DecimalToBase(s2a14, 2);
-                LoadCheckBoxes(bin, "cb14r", grpPortA);
-                bin = DecimalToBase(s2a15, 2);
-                LoadCheckBoxes(bin, "cb15r", grpPortA);
-            }
-            // Load transmit matrix
-            if (chkPortB.Checked)
-            {
-                bin = DecimalToBase(s2b0, 2);
-                LoadCheckBoxes(bin, "cb0t", grpPortB);
-                bin = DecimalToBase(s2b1, 2);
-                LoadCheckBoxes(bin, "cb1t", grpPortB);
-                bin = DecimalToBase(s2b2, 2);
-                LoadCheckBoxes(bin, "cb2t", grpPortB);
-                bin = DecimalToBase(s2b3, 2);
-                LoadCheckBoxes(bin, "cb3t", grpPortB);
-                bin = DecimalToBase(s2b4, 2);
-                LoadCheckBoxes(bin, "cb4t", grpPortB);
-                bin = DecimalToBase(s2b5, 2);
-                LoadCheckBoxes(bin, "cb5t", grpPortB);
-                bin = DecimalToBase(s2b6, 2);
-                LoadCheckBoxes(bin, "cb6t", grpPortB);
-                bin = DecimalToBase(s2b7, 2);
-                LoadCheckBoxes(bin, "cb7t", grpPortB);
-                bin = DecimalToBase(s2b8, 2);
-                LoadCheckBoxes(bin, "cb8t", grpPortB);
-                bin = DecimalToBase(s2b9, 2);
-                LoadCheckBoxes(bin, "cb9t", grpPortB);
-                bin = DecimalToBase(s2b10, 2);
-                LoadCheckBoxes(bin, "cb10t", grpPortB);
-                bin = DecimalToBase(s2b11, 2);
-                LoadCheckBoxes(bin, "cb11t", grpPortB);
-                bin = DecimalToBase(s2b12, 2);
-                LoadCheckBoxes(bin, "cb12t", grpPortB);
-                bin = DecimalToBase(s2b13, 2);
-                LoadCheckBoxes(bin, "cb13t", grpPortB);
-                bin = DecimalToBase(s2b14, 2);
-                LoadCheckBoxes(bin, "cb14t", grpPortB);
-                bin = DecimalToBase(s2b15, 2);
-                LoadCheckBoxes(bin, "cb15t", grpPortB);
-            }
-        }
-        // load checkboxes
-        void LoadCheckBoxes(string bin, string cbBase, Control grp)
-        {
-            CheckBox cb;
-            int j = bin.Length;
-            for (int i = 0; i < bin.Length; i++)
-            {
-                foreach (Control c in grp.Controls)
-                {
-                    if (c.Name == cbBase + i)
-                    {
-                        j -= 1;
-                        if (bin.Substring(j, 1) == "1")
-                        {
-                            //str = cbBase + i.ToString();
-                            cb = (CheckBox)c;
-                            cb.Checked = true;
-                        }
-                    }
-                }
-            }
-        }
-        // decode binary string
-        string DecimalToBase(int iDec, int numbase)
-        {
-            string strBin = "";
-            int[] result = new int[32];
-            int MaxBit = 32;
-            for (; iDec > 0; iDec /= numbase)
-            {
-                int rem = iDec % numbase;
-                result[--MaxBit] = rem;
-            }
-            for (int i = 0; i < result.Length; i++)
-                if ((int)result.GetValue(i) >= base10)
-                    strBin += cHexa[(int)result.GetValue(i) % base10];
-                else
-                    strBin += result.GetValue(i);
-            strBin = strBin.TrimStart(new char[] { '0' });
-            return strBin;
-        }
-          #endregion Methods
-
-          #region # Events #
-
-            #region * grpPortA_CheckedChanged Events *
-
-        int x2a0 = 0, x2a1 = 0, x2a2 = 0, x2a3 = 0;
-        int x2a4 = 0, x2a5 = 0, x2a6 = 0, x2a7 = 0;
-        int x2a8 = 0, x2a9 = 0, x2a10 = 0, x2a11 = 0;
-        int x2a12 = 0, x2a13 = 0, x2a14 = 0, x2a15 = 0;
-
-        private void grpPortA_CheckedChanged(object sender, EventArgs e)
-        {
-            x2a0 = 0;
-            if (cb0r0.Checked) x2a0 += 1;
-            if (cb0r1.Checked) x2a0 += 2;
-            if (cb0r2.Checked) x2a0 += 4;
-            if (cb0r3.Checked) x2a0 += 8;
-            if (cb0r4.Checked) x2a0 += 16;
-            if (cb0r5.Checked) x2a0 += 32;
-            if (cb0r6.Checked) x2a0 += 64;
-            if (cb0r7.Checked) x2a0 += 128;
-            set.x2a0 = x2a0;
-            x2a1 = 0;
-            if (cb1r0.Checked) x2a1 += 1;
-            if (cb1r1.Checked) x2a1 += 2;
-            if (cb1r2.Checked) x2a1 += 4;
-            if (cb1r3.Checked) x2a1 += 8;
-            if (cb1r4.Checked) x2a1 += 16;
-            if (cb1r5.Checked) x2a1 += 32;
-            if (cb1r6.Checked) x2a1 += 64;
-            if (cb1r7.Checked) x2a1 += 128;
-            set.x2a1 = x2a1;
-            x2a2 = 0;
-            if (cb2r0.Checked) x2a2 += 1;
-            if (cb2r1.Checked) x2a2 += 2;
-            if (cb2r2.Checked) x2a2 += 4;
-            if (cb2r3.Checked) x2a2 += 8;
-            if (cb2r4.Checked) x2a2 += 16;
-            if (cb2r5.Checked) x2a2 += 32;
-            if (cb2r6.Checked) x2a2 += 64;
-            if (cb2r7.Checked) x2a2 += 128;
-            set.x2a2 = x2a2;
-            x2a3 = 0;
-            if (cb3r0.Checked) x2a3 += 1;
-            if (cb3r1.Checked) x2a3 += 2;
-            if (cb3r2.Checked) x2a3 += 4;
-            if (cb3r3.Checked) x2a3 += 8;
-            if (cb3r4.Checked) x2a3 += 16;
-            if (cb3r5.Checked) x2a3 += 32;
-            if (cb3r6.Checked) x2a3 += 64;
-            if (cb3r7.Checked) x2a3 += 128;
-            set.x2a3 = x2a3;
-            x2a4 = 0;
-            if (cb4r0.Checked) x2a4 += 1;
-            if (cb4r1.Checked) x2a4 += 2;
-            if (cb4r2.Checked) x2a4 += 4;
-            if (cb4r3.Checked) x2a4 += 8;
-            if (cb4r4.Checked) x2a4 += 16;
-            if (cb4r5.Checked) x2a4 += 32;
-            if (cb4r6.Checked) x2a4 += 64;
-            if (cb4r7.Checked) x2a4 += 128;
-            set.x2a4 = x2a4;
-            x2a5 = 0;
-            if (cb5r0.Checked) x2a5 += 1;
-            if (cb5r1.Checked) x2a5 += 2;
-            if (cb5r2.Checked) x2a5 += 4;
-            if (cb5r3.Checked) x2a5 += 8;
-            if (cb5r4.Checked) x2a5 += 16;
-            if (cb5r5.Checked) x2a5 += 32;
-            if (cb5r6.Checked) x2a5 += 64;
-            if (cb5r7.Checked) x2a5 += 128;
-            set.x2a5 = x2a5;
-            x2a6 = 0;
-            if (cb6r0.Checked) x2a6 += 1;
-            if (cb6r1.Checked) x2a6 += 2;
-            if (cb6r2.Checked) x2a6 += 4;
-            if (cb6r3.Checked) x2a6 += 8;
-            if (cb6r4.Checked) x2a6 += 16;
-            if (cb6r5.Checked) x2a6 += 32;
-            if (cb6r6.Checked) x2a6 += 64;
-            if (cb6r7.Checked) x2a6 += 128;
-            set.x2a6 = x2a6;
-            x2a7 = 0;
-            if (cb7r0.Checked) x2a7 += 1;
-            if (cb7r1.Checked) x2a7 += 2;
-            if (cb7r2.Checked) x2a7 += 4;
-            if (cb7r3.Checked) x2a7 += 8;
-            if (cb7r4.Checked) x2a7 += 16;
-            if (cb7r5.Checked) x2a7 += 32;
-            if (cb7r6.Checked) x2a7 += 64;
-            if (cb7r7.Checked) x2a7 += 128;
-            set.x2a7 = x2a7;
-            x2a8 = 0;
-            if (cb8r0.Checked) x2a8 += 1;
-            if (cb8r1.Checked) x2a8 += 2;
-            if (cb8r2.Checked) x2a8 += 4;
-            if (cb8r3.Checked) x2a8 += 8;
-            if (cb8r4.Checked) x2a8 += 16;
-            if (cb8r5.Checked) x2a8 += 32;
-            if (cb8r6.Checked) x2a8 += 64;
-            if (cb8r7.Checked) x2a8 += 128;
-            set.x2a8 = x2a8;
-            x2a9 = 0;
-            if (cb9r0.Checked) x2a9 += 1;
-            if (cb9r1.Checked) x2a9 += 2;
-            if (cb9r2.Checked) x2a9 += 4;
-            if (cb9r3.Checked) x2a9 += 8;
-            if (cb9r4.Checked) x2a9 += 16;
-            if (cb9r5.Checked) x2a9 += 32;
-            if (cb9r6.Checked) x2a9 += 64;
-            if (cb9r7.Checked) x2a9 += 128;
-            set.x2a9 = x2a9;
-            x2a10 = 0;
-            if (cb10r0.Checked) x2a10 += 1;
-            if (cb10r1.Checked) x2a10 += 2;
-            if (cb10r2.Checked) x2a10 += 4;
-            if (cb10r3.Checked) x2a10 += 8;
-            if (cb10r4.Checked) x2a10 += 16;
-            if (cb10r5.Checked) x2a10 += 32;
-            if (cb10r6.Checked) x2a10 += 64;
-            if (cb10r7.Checked) x2a10 += 128;
-            set.x2a10 = x2a10;
-            x2a11 = 0;
-            if (cb11r0.Checked) x2a11 += 1;
-            if (cb11r1.Checked) x2a11 += 2;
-            if (cb11r2.Checked) x2a11 += 4;
-            if (cb11r3.Checked) x2a11 += 8;
-            if (cb11r4.Checked) x2a11 += 16;
-            if (cb11r5.Checked) x2a11 += 32;
-            if (cb11r6.Checked) x2a11 += 64;
-            if (cb11r7.Checked) x2a11 += 128;
-            set.x2a11 = x2a11;
-            x2a12 = 0;
-            if (cb12r0.Checked) x2a12 += 1;
-            if (cb12r1.Checked) x2a12 += 2;
-            if (cb12r2.Checked) x2a12 += 4;
-            if (cb12r3.Checked) x2a12 += 8;
-            if (cb12r4.Checked) x2a12 += 16;
-            if (cb12r5.Checked) x2a12 += 32;
-            if (cb12r6.Checked) x2a12 += 64;
-            if (cb12r7.Checked) x2a12 += 128;
-            set.x2a12 = x2a12;
-            x2a13 = 0;
-            if (cb13r0.Checked) x2a13 += 1;
-            if (cb13r1.Checked) x2a13 += 2;
-            if (cb13r2.Checked) x2a13 += 4;
-            if (cb13r3.Checked) x2a13 += 8;
-            if (cb13r4.Checked) x2a13 += 16;
-            if (cb13r5.Checked) x2a13 += 32;
-            if (cb13r6.Checked) x2a13 += 64;
-            if (cb13r7.Checked) x2a13 += 128;
-            set.x2a13 = x2a13;
-            x2a14 = 0;
-            if (cb14r0.Checked) x2a14 += 1;
-            if (cb14r1.Checked) x2a14 += 2;
-            if (cb14r2.Checked) x2a14 += 4;
-            if (cb14r3.Checked) x2a14 += 8;
-            if (cb14r4.Checked) x2a14 += 16;
-            if (cb14r5.Checked) x2a14 += 32;
-            if (cb14r6.Checked) x2a14 += 64;
-            if (cb14r7.Checked) x2a14 += 128;
-            set.x2a14 = x2a14;
-            x2a15 = 0;
-            if (cb15r0.Checked) x2a15 += 1;
-            if (cb15r1.Checked) x2a15 += 2;
-            if (cb15r2.Checked) x2a15 += 4;
-            if (cb15r3.Checked) x2a15 += 8;
-            if (cb15r4.Checked) x2a15 += 16;
-            if (cb15r5.Checked) x2a15 += 32;
-            if (cb15r6.Checked) x2a15 += 64;
-            if (cb15r7.Checked) x2a15 += 128;
-            set.x2a15 = x2a15;
-            
-            set.Save();
-        }
-        #endregion * grpPortA_CheckedChanged Events *
-
-            #region * grpPortB_CheckedChanged Events *
-
-        int x2b0 = 0, x2b1 = 0, x2b2 = 0, x2b3 = 0;
-        int x2b4 = 0, x2b5 = 0, x2b6 = 0, x2b7 = 0;
-        int x2b8 = 0, x2b9 = 0, x2b10 = 0, x2b11 = 0;
-        int x2b12 = 0, x2b13 = 0, x2b14 = 0, x2b15 = 0;
-
-        private void grpPortB_CheckedChanged(object sender, EventArgs e)
-        {
-            x2b0 = 0;
-            if (cb0t0.Checked) x2b0 += 1;
-            if (cb0t1.Checked) x2b0 += 2;
-            if (cb0t2.Checked) x2b0 += 4;
-            if (cb0t3.Checked) x2b0 += 8;
-            if (cb0t4.Checked) x2b0 += 16;
-            if (cb0t5.Checked) x2b0 += 32;
-            if (cb0t6.Checked) x2b0 += 64;
-            if (cb0t7.Checked) x2b0 += 128;
-            set.x2b0 = x2b0;
-            x2b1 = 0;
-            if (cb1t0.Checked) x2b1 += 1;
-            if (cb1t1.Checked) x2b1 += 2;
-            if (cb1t2.Checked) x2b1 += 4;
-            if (cb1t3.Checked) x2b1 += 8;
-            if (cb1t4.Checked) x2b1 += 16;
-            if (cb1t5.Checked) x2b1 += 32;
-            if (cb1t6.Checked) x2b1 += 64;
-            if (cb1t7.Checked) x2b1 += 128;
-            set.x2b1 = x2b1;
-            x2b2 = 0;
-            if (cb2t0.Checked) x2b2 += 1;
-            if (cb2t1.Checked) x2b2 += 2;
-            if (cb2t2.Checked) x2b2 += 4;
-            if (cb2t3.Checked) x2b2 += 8;
-            if (cb2t4.Checked) x2b2 += 16;
-            if (cb2t5.Checked) x2b2 += 32;
-            if (cb2t6.Checked) x2b2 += 64;
-            if (cb2t7.Checked) x2b2 += 128;
-            set.x2b2 = x2b2;
-            x2b3 = 0;
-            if (cb3t0.Checked) x2b3 += 1;
-            if (cb3t1.Checked) x2b3 += 2;
-            if (cb3t2.Checked) x2b3 += 4;
-            if (cb3t3.Checked) x2b3 += 8;
-            if (cb3t4.Checked) x2b3 += 16;
-            if (cb3t5.Checked) x2b3 += 32;
-            if (cb3t6.Checked) x2b3 += 64;
-            if (cb3t7.Checked) x2b3 += 128;
-            set.x2b3 = x2b3;
-            x2b4 = 0;
-            if (cb4t0.Checked) x2b4 += 1;
-            if (cb4t1.Checked) x2b4 += 2;
-            if (cb4t2.Checked) x2b4 += 4;
-            if (cb4t3.Checked) x2b4 += 8;
-            if (cb4t4.Checked) x2b4 += 16;
-            if (cb4t5.Checked) x2b4 += 32;
-            if (cb4t6.Checked) x2b4 += 64;
-            if (cb4t7.Checked) x2b4 += 128;
-            set.x2b4 = x2b4;
-            x2b5 = 0;
-            if (cb5t0.Checked) x2b5 += 1;
-            if (cb5t1.Checked) x2b5 += 2;
-            if (cb5t2.Checked) x2b5 += 4;
-            if (cb5t3.Checked) x2b5 += 8;
-            if (cb5t4.Checked) x2b5 += 16;
-            if (cb5t5.Checked) x2b5 += 32;
-            if (cb5t6.Checked) x2b5 += 64;
-            if (cb5t7.Checked) x2b5 += 128;
-            set.x2b5 = x2b5;
-            x2b6 = 0;
-            if (cb6t0.Checked) x2b6 += 1;
-            if (cb6t1.Checked) x2b6 += 2;
-            if (cb6t2.Checked) x2b6 += 4;
-            if (cb6t3.Checked) x2b6 += 8;
-            if (cb6t4.Checked) x2b6 += 16;
-            if (cb6t5.Checked) x2b6 += 32;
-            if (cb6t6.Checked) x2b6 += 64;
-            if (cb6t7.Checked) x2b6 += 128;
-            set.x2b6 = x2b6;
-            x2b7 = 0;
-            if (cb7t0.Checked) x2b7 += 1;
-            if (cb7t1.Checked) x2b7 += 2;
-            if (cb7t2.Checked) x2b7 += 4;
-            if (cb7t3.Checked) x2b7 += 8;
-            if (cb7t4.Checked) x2b7 += 16;
-            if (cb7t5.Checked) x2b7 += 32;
-            if (cb7t6.Checked) x2b7 += 64;
-            if (cb7t7.Checked) x2b7 += 128;
-            set.x2b7 = x2b7;
-            x2b8 = 0;
-            if (cb8t0.Checked) x2b8 += 1;
-            if (cb8t1.Checked) x2b8 += 2;
-            if (cb8t2.Checked) x2b8 += 4;
-            if (cb8t3.Checked) x2b8 += 8;
-            if (cb8t4.Checked) x2b8 += 16;
-            if (cb8t5.Checked) x2b8 += 32;
-            if (cb8t6.Checked) x2b8 += 64;
-            if (cb8t7.Checked) x2b8 += 128;
-            set.x2b8 = x2b8;
-            x2b9 = 0;
-            if (cb9t0.Checked) x2b9 += 1;
-            if (cb9t1.Checked) x2b9 += 2;
-            if (cb9t2.Checked) x2b9 += 4;
-            if (cb9t3.Checked) x2b9 += 8;
-            if (cb9t4.Checked) x2b9 += 16;
-            if (cb9t5.Checked) x2b9 += 32;
-            if (cb9t6.Checked) x2b9 += 64;
-            if (cb9t7.Checked) x2b9 += 128;
-            set.x2b9 = x2b9;
-            x2b10 = 0;
-            if (cb10t0.Checked) x2b10 += 1;
-            if (cb10t1.Checked) x2b10 += 2;
-            if (cb10t2.Checked) x2b10 += 4;
-            if (cb10t3.Checked) x2b10 += 8;
-            if (cb10t4.Checked) x2b10 += 16;
-            if (cb10t5.Checked) x2b10 += 32;
-            if (cb10t6.Checked) x2b10 += 64;
-            if (cb10t7.Checked) x2b10 += 128;
-            set.x2b10 = x2b10;
-            x2b11 = 0;
-            if (cb11t0.Checked) x2b11 += 1;
-            if (cb11t1.Checked) x2b11 += 2;
-            if (cb11t2.Checked) x2b11 += 4;
-            if (cb11t3.Checked) x2b11 += 8;
-            if (cb11t4.Checked) x2b11 += 16;
-            if (cb11t5.Checked) x2b11 += 32;
-            if (cb11t6.Checked) x2b11 += 64;
-            if (cb11t7.Checked) x2b11 += 128;
-            set.x2b11 = x2b11;
-            x2b12 = 0;
-            if (cb12t0.Checked) x2b12 += 1;
-            if (cb12t1.Checked) x2b12 += 2;
-            if (cb12t2.Checked) x2b12 += 4;
-            if (cb12t3.Checked) x2b12 += 8;
-            if (cb12t4.Checked) x2b12 += 16;
-            if (cb12t5.Checked) x2b12 += 32;
-            if (cb12t6.Checked) x2b12 += 64;
-            if (cb12t7.Checked) x2b12 += 128;
-            set.x2b12 = x2b12;
-            x2b13 = 0;
-            if (cb13t0.Checked) x2b13 += 1;
-            if (cb13t1.Checked) x2b13 += 2;
-            if (cb13t2.Checked) x2b13 += 4;
-            if (cb13t3.Checked) x2b13 += 8;
-            if (cb13t4.Checked) x2b13 += 16;
-            if (cb13t5.Checked) x2b13 += 32;
-            if (cb13t6.Checked) x2b13 += 64;
-            if (cb13t7.Checked) x2b13 += 128;
-            set.x2b13 = x2b13;
-            x2b14 = 0;
-            if (cb14t0.Checked) x2b14 += 1;
-            if (cb14t1.Checked) x2b14 += 2;
-            if (cb14t2.Checked) x2b14 += 4;
-            if (cb14t3.Checked) x2b14 += 8;
-            if (cb14t4.Checked) x2b14 += 16;
-            if (cb14t5.Checked) x2b14 += 32;
-            if (cb14t6.Checked) x2b14 += 64;
-            if (cb14t7.Checked) x2b14 += 128;
-            set.x2b14 = x2b14;
-            x2b15 = 0;
-            if (cb15t0.Checked) x2b15 += 1;
-            if (cb15t1.Checked) x2b15 += 2;
-            if (cb15t2.Checked) x2b15 += 4;
-            if (cb15t3.Checked) x2b15 += 8;
-            if (cb15t4.Checked) x2b15 += 16;
-            if (cb15t5.Checked) x2b15 += 32;
-            if (cb15t6.Checked) x2b15 += 64;
-            if (cb15t7.Checked) x2b15 += 128;
-            set.x2b15 = x2b15;
-
-            set.Save();
-        }
-        #endregion * grpPortB_CheckedChanged Events *
-
-
-        // the Port A Enable checkbox has been changed
-        private void chkPortA_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkPortA.Checked)
-            {
-                foreach (Control c in grpPortA.Controls)
-                {
-                    if (c.GetType() == typeof(CheckBox))
-                    { c.Enabled = true; }
-                    txtPortA.Enabled = true;
-                    btnClrPortA.Enabled = true;
-                    set.chkPortA = true;
-                    X2SetUp();
-                }
-            }
-            else
-            {
-                foreach (Control c in grpPortA.Controls)
-                {
-                    if (c.GetType() == typeof(CheckBox))
-                    { c.Enabled = false; }
-                }
-                txtPortA.Enabled = false;
-                btnClrPortA.Enabled = false;
-                set.chkPortA = false; 
-            }
-            set.Save();
-        }
-        // the Port B Enable checkbox has been changed
-        private void chkPortB_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkPortB.Checked)
-            {
-                foreach (Control c in grpPortB.Controls)
-                {
-                    if (c.GetType() == typeof(CheckBox))
-                    { c.Enabled = true; }
-                }
-                txtPortB.Enabled = true;
-                btnClrPortB.Enabled = true;
-                set.chkPortB = true;
-                X2SetUp();
-            }
-            else
-            {
-                foreach (Control c in grpPortB.Controls)
-                {
-                    if (c.GetType() == typeof(CheckBox))
-                    { c.Enabled = false; }
-                }
-                txtPortB.Enabled = false;
-                btnClrPortB.Enabled = false;
-                set.chkPortB = false;
-            }
-            set.Save();
-        }
-        // Port A has been changed
-        private void txtPortA_TextChanged(object sender, EventArgs e)
-        {
-            if (txtPortA.Text == null || txtPortA.Text == "") txtPortA.Text = "0";
-            set.aPortNum = txtPortA.Text; set.Save();
-            aPort = Convert.ToInt32(txtPortA.Text);
-        }
-        // Port B has been changed
-        private void txtPortB_TextChanged(object sender, EventArgs e)
-        {
-            if (txtPortB.Text == null || txtPortB.Text == "") txtPortB.Text = "0";
-            set.bPortNum = txtPortB.Text; set.Save();
-            bPort = Convert.ToInt32(txtPortB.Text);
-        }
-        // the Clear all receive bits button was pressed
-        private void btnClrPortA_Click(object sender, EventArgs e)
-        {
-            CheckBox cb;
-            foreach (Control c in grpPortA.Controls)
-            {
-                if (c.GetType() == typeof(CheckBox))
-                {
-                    cb = (CheckBox)c;
-                    cb.Checked = false;
-                }
-            }
-        }
-        // the Clear all transmit bits button was pressed
-        private void btnClrPortB_Click(object sender, EventArgs e)
-        {
-            CheckBox cb;
-            foreach (Control c in grpPortB.Controls)
-            {
-                if (c.GetType() == typeof(CheckBox))
-                {
-                    cb = (CheckBox)c;
-                    cb.Checked = false;
-                }
-            }
-        }
-        // the Port A invert checkbox has changed.
-        private void chkInvertA_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkInvertA.Checked) set.chkInvertA = true;
-            else set.chkInvertA = false;
-            set.Save();
-        }
-        // the Port B invert checkbox has changed.
-        private void chkInvertB_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkInvertB.Checked) set.chkInvertB = true;
-            else set.chkInvertB = false;
-            set.Save();
-        }
-
-          #endregion Events
-
-        #endregion VHF+ Matrix
-
-        #region Power Master
-
-        #region CRC Table
-        static byte[] crc8revtab = new byte [256] {
-
-                        0x00, 0xB1, 0xD3, 0x62, 0x17, 0xA6, 0xC4, 0x75,
-                        0x2E, 0x9F, 0xFD, 0x4C, 0x39, 0x88, 0xEA, 0x5B,
-                        0x5C, 0xED, 0x8F, 0x3E, 0x4B, 0xFA, 0x98, 0x29,
-                        0x72, 0xC3, 0xA1, 0x10, 0x65, 0xD4, 0xB6, 0x07,
-                        0xB8, 0x09, 0x6B, 0xDA, 0xAF, 0x1E, 0x7C, 0xCD,
-                        0x96, 0x27, 0x45, 0xF4, 0x81, 0x30, 0x52, 0xE3,
-                        0xE4, 0x55, 0x37, 0x86, 0xF3, 0x42, 0x20, 0x91,
-                        0xCA, 0x7B, 0x19, 0xA8, 0xDD, 0x6C, 0x0E, 0xBF,
-                        0xC1, 0x70, 0x12, 0xA3, 0xD6, 0x67, 0x05, 0xB4,
-                        0xEF, 0x5E, 0x3C, 0x8D, 0xF8, 0x49, 0x2B, 0x9A,
-                        0x9D, 0x2C, 0x4E, 0xFF, 0x8A, 0x3B, 0x59, 0xE8,
-                        0xB3, 0x02, 0x60, 0xD1, 0xA4, 0x15, 0x77, 0xC6,
-                        0x79, 0xC8, 0xAA, 0x1B, 0x6E, 0xDF, 0xBD, 0x0C,
-                        0x57, 0xE6, 0x84, 0x35, 0x40, 0xF1, 0x93, 0x22,
-                        0x25, 0x94, 0xF6, 0x47, 0x32, 0x83, 0xE1, 0x50,
-                        0x0B, 0xBA, 0xD8, 0x69, 0x1C, 0xAD, 0xCF, 0x7E,
-                        0x33, 0x82, 0xE0, 0x51, 0x24, 0x95, 0xF7, 0x46,
-                        0x1D, 0xAC, 0xCE, 0x7F, 0x0A, 0xBB, 0xD9, 0x68,
-                        0x6F, 0xDE, 0xBC, 0x0D, 0x78, 0xC9, 0xAB, 0x1A,
-                        0x41, 0xF0, 0x92, 0x23, 0x56, 0xE7, 0x85, 0x34,
-                        0x8B, 0x3A, 0x58, 0xE9, 0x9C, 0x2D, 0x4F, 0xFE,
-                        0xA5, 0x14, 0x76, 0xC7, 0xB2, 0x03, 0x61, 0xD0,
-                        0xD7, 0x66, 0x04, 0xB5, 0xC0, 0x71, 0x13, 0xA2,
-                        0xF9, 0x48, 0x2A, 0x9B, 0xEE, 0x5F, 0x3D, 0x8C,
-                        0xF2, 0x43, 0x21, 0x90, 0xE5, 0x54, 0x36, 0x87,
-                        0xDC, 0x6D, 0x0F, 0xBE, 0xCB, 0x7A, 0x18, 0xA9,
-                        0xAE, 0x1F, 0x7D, 0xCC, 0xB9, 0x08, 0x6A, 0xDB,
-                        0x80, 0x31, 0x53, 0xE2, 0x97, 0x26, 0x44, 0xF5,
-                        0x4A, 0xFB, 0x99, 0x28, 0x5D, 0xEC, 0x8E, 0x3F,
-                        0x64, 0xD5, 0xB7, 0x06, 0x73, 0xC2, 0xA0, 0x11,
-                        0x16, 0xA7, 0xC5, 0x74, 0x01, 0xB0, 0xD2, 0x63,
-                        0x38, 0x89, 0xEB, 0x5A, 0x2F, 0x9E, 0xFC, 0x4D };
-        #endregion CRC Table
-
-        #region # Delegates #
-
-        // Write to Fwd Trim window
-        delegate void SetTrimFwdCallback(decimal num);
-        public void SetTrimFwd(decimal num)
-        {
-            if (this.numFwd.InvokeRequired)
-            {
-                SetTrimFwdCallback d = new SetTrimFwdCallback(SetTrimFwd);
-                this.Invoke(d, new object[] { num });
-            }
-            else
-            { numFwd.Value = num; }
-        }
-        // Write to Rev Trim window
-        delegate void SetTrimRevCallback(decimal num);
-        public void SetTrimRev(decimal num)
-        {
-            if (this.numRev.InvokeRequired)
-            {
-                SetTrimRevCallback d = new SetTrimRevCallback(SetTrimRev);
-                this.Invoke(d, new object[] { num });
-            }
-            else
-            { numRev.Value = num; }
-        }
-
-
-        #endregion Delegates
-
-        #region # Methods #
-
-        void PMSetup()
-        {
-            cboPMport.SelectedIndex = set.PMport;
-            chkPM.Checked = set.chkPM;
-            cboPMcom.SelectedIndex = set.PMcom;
-        }
-        // calc crc for inbuff and write cmd to port
-        void PMportWrite(byte[] inBuf)
-        {
-            byte stx = 02; byte etx = 03;
-            byte[] cBuf = new byte[2];                  // crc ascii buffer
-            byte crc = CRC8Fast(inBuf, inBuf.Length);   // get crc
-            string hcrc = crc.ToString("X");            // crc to hex
-            // save crc in ascii buffer
-            for (int i = 0; i < 2; i++)
-            {
-                int j = 0;
-                if (hcrc.Length == 1) { cBuf[0] = 0x30; i++; j = 0; }
-                else j = i;
-                if (hcrc.Substring(j, 1) == "A") { cBuf[i] = 0x41; continue; }
-                if (hcrc.Substring(j, 1) == "B") { cBuf[i] = 0x42; continue; }
-                if (hcrc.Substring(j, 1) == "C") { cBuf[i] = 0x43; continue; }
-                if (hcrc.Substring(j, 1) == "D") { cBuf[i] = 0x44; continue; }
-                if (hcrc.Substring(j, 1) == "E") { cBuf[i] = 0x45; continue; }
-                if (hcrc.Substring(j, 1) == "F") { cBuf[i] = 0x46; continue; }
-
-                int temp = Convert.ToInt32(hcrc.Substring(i, 1));
-                temp += 30;
-                cBuf[i] = byte.Parse(temp.ToString(), NumberStyles.HexNumber);
-            }
-            // assemble the output buffer
-            if (inBuf.Length == 1)
-            {
-                byte[] outbuf = { stx, inBuf[0], etx, cBuf[0], cBuf[1], 0x0d };
-                PMport.Write(outbuf, 0, 6);
-            }
-            else if (inBuf.Length == 2)
-            {
-                byte[] outbuf = { stx, inBuf[0], inBuf[1], etx, cBuf[0], cBuf[1], 0x0d };
-                PMport.Write(outbuf, 0, 7);
-            }
-            else if (inBuf.Length == 3)
-            {
-                byte[] outbuf = { stx, inBuf[0], inBuf[1], inBuf[2], etx, cBuf[0], cBuf[1], 0x0d };
-                PMport.Write(outbuf, 0, 8);
-            }
-            else if (inBuf.Length == 4)
-            {
-                byte[] outbuf = { stx, inBuf[0], inBuf[1], inBuf[2], inBuf[3], etx, cBuf[0], cBuf[1], 0x0d };
-                PMport.Write(outbuf, 0, 9);
-            }
-        }
-        // Calc CRC values for cmds sent to PM
-        public static byte CRC8Fast(byte[] buf, int len)
-        {
-            byte crc = 0;  /* prevent corruption with global variables */
-            for (int i = 0; i < len; i++)
-            {
-                crc = crc8revtab[crc ^ buf[i]];
-            }
-            return ((byte)~crc);   /* complimented CRC used to prevent string of 0's */
-        }
-
-        #endregion Methods
-
-        #region # Events #
-
-        string sPM = "";        // PM port buffer message
-        // a Message(s) from the PM has been received
-        private void PMport_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            if (chkPM.Checked)  // port must be enabled to receive data
-            {
-                try
-                {
-                    string fwd = ""; string swr = "";
-                    string sCmd = "";
-                    SerialPort port = (SerialPort)sender;
-                    byte[] data = new byte[port.BytesToRead];
-                    port.Read(data, 0, data.Length);
-                    sPM += AE.GetString(data, 0, data.Length);
-                    Regex rex = new Regex(@".*?\r\n");
-                    for (Match m = rex.Match(sPM); m.Success; m = m.NextMatch())
-                    {   //loop thru the buffer and find matches
-                        sCmd = m.Value.Substring(0, m.Value.Length - 1);
-                        sPM = sPM.Replace(m.Value, ""); //remove match from buffer
-
-                        if (sCmd.Substring(1, 1) == "D")
-                        {
-                            fwd = sCmd.Substring(3, 7); swr = sCmd.Substring(19, 5);
-                            SetAvg(Regex.Replace(fwd, @"\s*(\d+.\d)", "$1"));
-                            mini.SetAvg(Regex.Replace(fwd, @"\s*(\d+.\d)", "$1"));
-                            SetSWR(Regex.Replace(swr, @"\s*(\d+.\d{2})", "$1"));
-                            mini.SetSwr(Regex.Replace(swr, @"\s*(\d+.\d{2})", "$1"));
-                        }
-                        else if (sCmd.Substring(1, 1) == "T")
-                        { SetTrimFwd(Convert.ToDecimal(sCmd.Substring(2, 3))); }
-                        else if (sCmd.Substring(1, 1) == "t")
-                        { SetTrimRev(Convert.ToDecimal(sCmd.Substring(2, 3))); }
-                    }
-                }
-                catch 
-                { }
-            }
-        }
-        // The PM enable check box has changed
-        private void chkPM_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkPM.Checked)
-            {
-                if (cboPMport.SelectedIndex > 0)
-                {
-                    set.chkPM = true; chkWNEnab.Checked = false;
-                    lblAvg.Text = "Fwd"; chkLPenab.Checked = false;
-                    txtAvg.Enabled = true; txtSWR.Enabled = true;
-                    mini.txtAvg.Enabled = true; mini.txtSWR.Enabled = true;
-                    txtFwd.Visible = false; lblFwd.Visible = false;
-                    mini.txtFwd.Visible = false; mini.lblFwd.Visible = false;
-                    mini.lblAvg.Text = "Fwd"; 
-                    PMport.Write("\x02\x54\x3F\x03\x38\x45\r"); // Get fwd trim
-                    Thread.Sleep(150);
-                    PMport.Write("\x02\x74\x3F\x03\x37\x37\r"); // Get swr trim
-                    Thread.Sleep(150);
-                    PMport.Write("\x02\x44\x34\x03\x36\x36\r"); // Start data broadcast
-                    set.Save();
-                    if (set.StdNet == 1) rbStd.Checked = true;
-                    else if (set.StdNet == 2) rbNet.Checked = true;
-
-                }
-                else
-                {
-                    MessageBox.Show("No port has been selected for the Power Master.\n\n" +
-                    "Please select a valid port number and try again.", "Port Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    chkPM.Checked = false; set.chkPM = false; 
-                    txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
-                    mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
-                    txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
-                    mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false; 
-                    mini.txtSWR.Enabled = false;
-                    if (PMport.IsOpen)
-                    { PMport.Write("\x02\x44\x30\x03\x37\x31\r"); }// Stop data broadcast
-                    set.Save();
-                }
-            }
-            else
-            {
-                set.chkPM = false;
-                txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
-                mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
-                txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
-                mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false; 
-                mini.txtSWR.Enabled = false;
-                if (PMport.IsOpen)
-                { PMport.Write("\x02\x44\x30\x03\x37\x31\r"); }// Stop data broadcast
-                set.Save();
-            }
-        }
-        // The PM port has changed
-        private void cboPMport_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (PMport.IsOpen) PMport.Close();
-            if (cboPMport.SelectedIndex > 0)
-            {
-                PMport.PortName = cboPMport.SelectedItem.ToString();
-                try
-                {
-                    PMport.Open();
-                }
-                catch
-                {
-                    MessageBox.Show("The Power Master serial port " + PMport.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboPMport.SelectedText = "";
-                    chkPM.Checked = false;
-                    return;
-                }
-            }
-            else
-            {
-                chkPM.Checked = false;
-            }
-            set.PMport = cboPMport.SelectedIndex;
-            set.Save();
-        }
-        // The PM port comm setting has changed
-        private void cboPMcom_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            set.PMcom = cboPMcom.SelectedIndex; set.Save();
-        }
-        // The Fwd Trim has changed
-        private void numFwd_ValueChanged(object sender, EventArgs e)
-        {
-            string fwd = numFwd.Value.ToString();
-            int ctr = fwd.Length;
-            byte[] inBuf = new byte[4];
-            inBuf[0] = 0x54; // "T"
-            switch (ctr)
-            {
-                case 1:
-                    inBuf[1] = 0x30; inBuf[2] = 0x30;
-                    inBuf[3] = byte.Parse("3"+fwd.Substring(0, 1), NumberStyles.HexNumber);
-                    break;
-
-                case 2:
-                    if (fwd.Substring(0, 1) == "-")
-                    {
-                        inBuf[1] = 0x2d; inBuf[2] = 0x30;
-                        inBuf[3] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
-                    }
-                    else
-                    {
-                        inBuf[1] = 0x30;
-                        inBuf[2] = byte.Parse("3" + fwd.Substring(0, 1), NumberStyles.HexNumber);
-                        inBuf[3] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
-                    }
-                    break;
-
-                case 3:
-                    if (fwd.Substring(0, 1) == "-")
-                    {
-                        inBuf[1] = 0x2d;
-                        inBuf[2] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
-                        inBuf[3] = byte.Parse("3" + fwd.Substring(2, 1), NumberStyles.HexNumber);
-                    }
-                    else
-                    {
-                        inBuf[1] = byte.Parse("3" + fwd.Substring(0, 1), NumberStyles.HexNumber);
-                        inBuf[2] = byte.Parse("3" + fwd.Substring(1, 1), NumberStyles.HexNumber);
-                        inBuf[3] = byte.Parse("3" + fwd.Substring(2, 1), NumberStyles.HexNumber);
-                    }
-                    break;
-            }
-            PMportWrite(inBuf);
-        }
-        // The Swr Trim has changed
-        private void numRev_ValueChanged(object sender, EventArgs e)
-        {
-            string swr = numRev.Value.ToString();
-            int ctr = swr.Length;
-            byte[] inBuf = new byte[4];
-            inBuf[0] = 0x74; // "t"
-            switch (ctr)
-            {
-                case 1:
-                    inBuf[1] = 0x30; inBuf[2] = 0x30;
-                    inBuf[3] = byte.Parse("3" + swr.Substring(0, 1), NumberStyles.HexNumber);
-                    break;
-
-                case 2:
-                    if (swr.Substring(0, 1) == "-")
-                    {
-                        inBuf[1] = 0x2d; inBuf[2] = 0x30;
-                        inBuf[3] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
-                    }
-                    else
-                    {
-                        inBuf[1] = 0x30;
-                        inBuf[2] = byte.Parse("3" + swr.Substring(0, 1), NumberStyles.HexNumber);
-                        inBuf[3] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
-                    }
-                    break;
-
-                case 3:
-                    if (swr.Substring(0, 1) == "-")
-                    {
-                        inBuf[1] = 0x2d;
-                        inBuf[2] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
-                        inBuf[3] = byte.Parse("3" + swr.Substring(2, 1), NumberStyles.HexNumber);
-                    }
-                    else
-                    {
-                        inBuf[1] = byte.Parse("3" + swr.Substring(0, 1), NumberStyles.HexNumber);
-                        inBuf[2] = byte.Parse("3" + swr.Substring(1, 1), NumberStyles.HexNumber);
-                        inBuf[3] = byte.Parse("3" + swr.Substring(2, 1), NumberStyles.HexNumber);
-                    }
-                    break;
-            }
-            PMportWrite(inBuf);
-        }
-        // The PM Std/Net radio buttons have changed
-        private void grpNet_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbStd.Checked)
-            { PMport.Write("\x02\x64\x31\x03\x33\x39\r"); set.StdNet = 1; }
-
-            if (rbNet.Checked)
-            { PMport.Write("\x02\x64\x30\x03\x38\x38\r"); set.StdNet = 2; }
-
-            set.Save();
-        }
-        
-        #endregion Events
-
-        #endregion Power Master
-
-        #region Repeater
-
-        // The Misc Tab has been double clicked so toggle it's visibility
-        private void tabMisc_DoubleClick(object sender, EventArgs e)
-        {
-            if (grpRepeat.Visible) grpRepeat.Visible = false;
-            else grpRepeat.Visible = true;
-        }
-        // The Repeat Enable check box has changed
-        private void chkRepeat_CheckedChanged(object sender, EventArgs e)
-        {
-             if (chkRepeat.Checked)
-             {
-                 if (cboRepeatPort.SelectedIndex > 0)
-                 { 
-                     set.RepeatEnab = true; 
-                 }
-                 else
-                 {
-                     chkRepeat.Checked = false;
-                     MessageBox.Show("No port has been selected for the Repeater.\n\n" +
-                        "Please select a valid port number and try again.", "Port Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                     set.RepeatEnab = false; 
-                 }
-            }
-            else
-            {
-                chkRepeat.Checked = false;
-                set.RepeatEnab = false; 
-            }
-            set.Save();
-        }
-        // The Repeat port index has changed
-        private void cboRepeatPort_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RepeatPort.IsOpen) RepeatPort.Close();
-            if (cboRepeatPort.SelectedIndex > 0)
-            {
-                RepeatPort.PortName = cboRepeatPort.SelectedItem.ToString();
-                try
-                {
-                    RepeatPort.Open();
-                }
-                catch
-                {
-                    MessageBox.Show("The Repeater serial port " + RepeatPort.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboRepeatPort.SelectedText = "";
-                    chkRepeat.Checked = false;
-                    return;
-                }
-            }
-            else
-            {
-                chkRepeat.Checked = false;
-            }
-            set.RepeatPort = cboRepeatPort.SelectedIndex;
-            set.Save();
-        }
-        // RepeatPort has received data
-        string sRepeat = "";
-        private void RepeatPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            if (chkRepeat.Checked) // port must be enabled to accept data
-            {
-                try
-                {
-                    string sCmd = "";
-                    SerialPort port = (SerialPort)sender;
-                    byte[] data = new byte[port.BytesToRead];
-                    port.Read(data, 0, data.Length);
-                    sRepeat += AE.GetString(data, 0, data.Length);
-                    Regex rex = new Regex(".*?;");				//accept any string ending in ;		
-                    for (Match m = rex.Match(sRepeat); m.Success; m = m.NextMatch())
-                    {   //loop thru the buffer and find matches
-                        sCmd = m.Value;
-                        sRepeat = sRepeat.Replace(m.Value, ""); //remove the match from the buffer
-                        WriteToPort(sCmd, iSleep);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    bool bReturnLog = false;
-                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-                }
-            }
-        }
-
-        #endregion Repeater
-
-        bool split = false;
-        private void btnSplit_Click(object sender, EventArgs e)
-        {
-            if (!split)
-            {
-                split = true;
-                WriteToPort("ZZVS0;", iSleep); // vfo A>B
-                int newfreq = Convert.ToInt32(lastFreq);
-                newfreq += ((int)numSplit.Value * 1000);
-                WriteToPort("ZZFB" + newfreq.ToString().PadLeft(11, '0') + ";", iSleep);
-                WriteToPort("ZZSP1;", iSleep); // turn split on
-                btnSplit.BackColor = Color.Yellow;
-            }
-            else
-            {
-                WriteToPort("ZZSP0;", iSleep); // turn split off
-                btnSplit.BackColor = Color.LightGray;
-                split = false;
-            }
-        }
-        private void numSplit_ValueChanged(object sender, EventArgs e)
-        {
-            set.SplitNum = numSplit.Value;
-            set.Save();
-        }
 
     }
 }

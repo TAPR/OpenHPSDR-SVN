@@ -34,6 +34,7 @@
   </macro>
   <macro>
     <Button>Macro 9</Button>
+    <Command>---</Command>
   </macro>
   <macro>
     <Button>Phone</Button>
