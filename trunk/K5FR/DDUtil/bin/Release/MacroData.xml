@@ -70,7 +70,7 @@
   </macro>
   <macro>
     <Button>SSB</Button>
-    <Command>ZZFI06;ZZMT02;ZZPC050;</Command>
+    <Command>ZZFI06;ZZMT02;ZZPC100;</Command>
   </macro>
   <macro>
     <Button>CW</Button>
@@ -78,6 +78,6 @@
   </macro>
   <macro>
     <Button>DIGI</Button>
-    <Command>ZZFI10;ZZMT02;ZZPC075;</Command>
+    <Command>ZZFI10;ZZMT02;ZZPC100;</Command>
   </macro>
 </macroData>

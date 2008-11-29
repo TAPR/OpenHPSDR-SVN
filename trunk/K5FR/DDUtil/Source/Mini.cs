@@ -133,7 +133,12 @@ namespace DataDecoder
             this.Hide();
         }
         private void Mini_FormClosing(object sender, FormClosedEventArgs e)
-        { }// dummy so other form closing event will work 
+        {
+        }
+        private void Mini_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            s.WindowState = FormWindowState.Normal;
+        }
 
         // form load
         private void Mini_Load(object sender, EventArgs e)
@@ -233,7 +238,6 @@ namespace DataDecoder
         }
         
         #endregion Methods
-
 
     }// end Mini
 }
