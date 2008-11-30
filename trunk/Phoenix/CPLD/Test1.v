@@ -15,6 +15,8 @@
 //  19 Nov 2008 - Added decode of Phoenix C&C data from Atlas C21
 //  28 Nov 2008 - C&C decode working, DDS now feeds 90 degree clock divider
 //				  Drive AD9912 from 48MHz clock
+//  30 Nov 2008 - Only send AD9912 data when frequency changes
+//				  Drive AD9912 from external clock
 
 
 module Test1(
@@ -31,10 +33,10 @@ module Test1(
 			  output reg Q_CLKRX,	// QSD Q clock
 			  output I_CLKTX,		// QSE I clock
 			  output Q_CLKTX,		// QSE Q clock
-			  output RXOE1,			// QSD enable 
-			  output RXOE2,
-			  output TXOE1,			// QSE enable 
-			  output TXOE2,
+			  output reg RXOE1,			// QSD enable 
+			  output reg RXOE2,
+			  output  TXOE1,			// QSE enable 
+			  output  TXOE2,
 			  output reg DIN,		// LTC1451 SPI interface 
 			  output reg DCLK,
 			  output reg DLD,
@@ -48,43 +50,59 @@ assign LED1 = 1'b0;  		// turn Green Led on
 assign LED2 = !PTT_out;   	// turn Yellow  Led on when PTT active 
 
 // temp link DDS_CLK to 48MHz clock from Atlas so can test AD9912 
-assign DDS_CLK = CLK_48MHZ;
+//assign DDS_CLK = CLK_48MHZ;
 
 
 // This code divides the DDS clock from U23 by 4 to produce two signals
 // in phase quadrature to drive the QSD & QSE
 
+
 reg [1:0]state;
+//always @ (posedge CLK_48MHZ)
 always @ (posedge DDS_OUT)
 begin
 case (state)
 0:	begin
 	I_CLKRX <= 1'b1;
-	Q_CLKRX <= 1'b0;
+	Q_CLKRX <= 1'b1;
+	RXOE1 <= 1'b0;
+	RXOE2 <= 1'b1;
 	state <= 1;
 	end 
 1:	begin
-	I_CLKRX <= 1'b1;
-	Q_CLKRX <= 1'b1;
+	RXOE1 <= 1'b1;
+	RXOE2 <= 1'b0;
 	state <= 2;
 	end 	
 2:	begin
 	I_CLKRX <= 1'b0;
-	Q_CLKRX <= 1'b1;
+	Q_CLKRX <= 1'b0;
+	RXOE1 <= 1'b0;
+	RXOE2 <= 1'b1;
 	state <= 3;
 	end 
 3:	begin
-	I_CLKRX <= 1'b0;
-	Q_CLKRX <= 1'b0;
+	RXOE1 <= 1'b1;
+	RXOE2 <= 1'b0;
 	state <= 0;
 	end 
 endcase
 end
 
+/*
+always @ (posedge DDS_OUT)
+begin
+	RXOE1 <= 1'b1;
+	RXOE2 <= 1'b1;
+end 
+*/
+
+
 // set the QSD and QSE drive signals equal for testing
 
-assign I_CLKTX = I_CLKRX;
-assign Q_CLKTX = Q_CLKRX;
+//assign I_CLKTX = I_CLKRX;
+//assign Q_CLKTX = Q_CLKRX;
+
 
 //////////////////////////////////////////////////////////////
 //
@@ -161,6 +179,7 @@ end
 	
 */
 
+
 reg [5:0] bits;     // how many bits clocked 
 reg [1:0]CC_state;
 reg [32:0] CCdata;	// 33 bits of C&C data
@@ -205,6 +224,7 @@ begin
 end
 
 
+
 //////////////////////////////////////////////////////////////
 //
 // 		AD9912 Interface
@@ -221,6 +241,7 @@ reg [39:0]DDS_setup;
 reg [63:0]DDS_data;
 wire write = 0;			// Write is active low
 
+reg [47:0] prev_phase_word;
 
 reg [3:0]AD9912;
 
@@ -265,7 +286,8 @@ case (AD9912)
 	SCLK <= 0;
 	if (bit_count == 0)begin
 		CSB <= 1'b1; 				// de-select AD9912
-		AD9912 <= 7; 
+		AD9912 <= 7;
+		prev_phase_word <= phase_word; 
 		end
 	else begin
 		bit_count <= bit_count - 1'b1;
@@ -276,12 +298,19 @@ case (AD9912)
 	IO_UPD <= 1;					// strobe I/O update pin 
 	AD9912 <= 8;
 	end
+// wait until new phase word is sent otherwise loop here
 8: begin
 	IO_UPD <= 0;
-	AD9912 <= 0;  					// loop for now
+	if (prev_phase_word == phase_word)
+		AD9912 <= 8;  					// loop until new phase word 
+	else begin
+		AD9912 <= 3; 				// have new phase word so send it
+		CSB <= 1'b0; 				// AD9912 chip select low
+		end
 	end	
 endcase
 end
+
 
 
 //////////////////////////////////////////////////////////////
@@ -292,12 +321,15 @@ end
 
 // enable QSD when PTT inactive, chip is active low
 
-assign RXOE1 = (PTT || PTT_out) ? 1'b1 : 1'b0; 
-assign RXOE2 = RXOE1; 
+//assign RXOE1 = (PTT || PTT_out) ? 1'b1 : 1'b0; 
+//assign RXOE2 = RXOE1; 
 
 // enable QSE when PTT active, chip is active low 
 
-assign TXOE1 = ~RXOE1;
-assign TXOE2 = ~RXOE2;
+//assign TXOE1 = ~RXOE1;
+//assign TXOE2 = ~RXOE2;
+
+assign TXOE1 = 1'b1;	// inhibit Tx for testing 
+assign TXOE2 = 1'b1;	// inhibit Tx for testing 
 
 endmodule
