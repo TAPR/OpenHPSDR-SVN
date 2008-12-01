@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 1.136 ns
+Actual Time    : 1.000 ns
 From           : CC
-To             : CCdata[24]
+To             : CCdata[9]
 From Clock     : --
 To Clock       : CBCLK
 Failed Paths   : 0
@@ -15,17 +15,27 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 12.124 ns
-From           : CSB~reg0
-To             : CSB
+Actual Time    : 12.098 ns
+From           : SDIO~reg0
+To             : SDIO
 From Clock     : CBCLK
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case tpd
+Slack          : N/A
+Required Time  : None
+Actual Time    : 8.104 ns
+From           : PTT
+To             : I_CLKTX
+From Clock     : --
 To Clock       : --
 Failed Paths   : 0
 
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : 2.795 ns
+Actual Time    : 2.884 ns
 From           : CLRCLK
 To             : CC_state.01
 From Clock     : --
@@ -35,7 +45,7 @@ Failed Paths   : 0
 Type           : Clock Setup: 'CBCLK'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 94.86 MHz ( period = 10.542 ns )
+Actual Time    : 91.95 MHz ( period = 10.875 ns )
 From           : bit_count[0]
 To             : SDIO~reg0
 From Clock     : CBCLK
@@ -45,9 +55,9 @@ Failed Paths   : 0
 Type           : Clock Setup: 'DDS_OUT'
 Slack          : N/A
 Required Time  : None
-Actual Time    : 282.81 MHz ( period = 3.536 ns )
+Actual Time    : Restricted to 304.04 MHz ( period = 3.289 ns )
 From           : state.10
-To             : RXOE1~reg0
+To             : RXOE2~reg0
 From Clock     : DDS_OUT
 To Clock       : DDS_OUT
 Failed Paths   : 0

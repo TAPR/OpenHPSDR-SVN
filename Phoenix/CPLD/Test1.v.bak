@@ -16,7 +16,8 @@
 //  28 Nov 2008 - C&C decode working, DDS now feeds 90 degree clock divider
 //				  Drive AD9912 from 48MHz clock
 //  30 Nov 2008 - Only send AD9912 data when frequency changes
-//				  Drive AD9912 from external clock
+//				  Drive AD9912 from external 48MHz clock
+//   1 Dec 2008 - Added QSE signals and control
 
 
 module Test1(
@@ -33,9 +34,9 @@ module Test1(
 			  output reg Q_CLKRX,	// QSD Q clock
 			  output I_CLKTX,		// QSE I clock
 			  output Q_CLKTX,		// QSE Q clock
-			  output reg RXOE1,			// QSD enable 
+			  output reg RXOE1,		// QSD enable 
 			  output reg RXOE2,
-			  output  TXOE1,			// QSE enable 
+			  output  TXOE1,		// QSE enable 
 			  output  TXOE2,
 			  output reg DIN,		// LTC1451 SPI interface 
 			  output reg DCLK,
@@ -50,7 +51,7 @@ assign LED1 = 1'b0;  		// turn Green Led on
 assign LED2 = !PTT_out;   	// turn Yellow  Led on when PTT active 
 
 // temp link DDS_CLK to 48MHz clock from Atlas so can test AD9912 
-assign DDS_CLK = CLK_48MHZ;
+//assign DDS_CLK = CLK_48MHZ;
 
 
 // This code divides the DDS clock from U23 by 4 to produce two signals
@@ -65,44 +66,29 @@ case (state)
 0:	begin
 	I_CLKRX <= 1'b1;
 	Q_CLKRX <= 1'b1;
-	RXOE1 <= 1'b0;
-	RXOE2 <= 1'b1;
+	RXOE1 <= 1'b1;
+	RXOE2 <= 1'b0;
 	state <= 1;
 	end 
 1:	begin
-	RXOE1 <= 1'b1;
-	RXOE2 <= 1'b0;
+	RXOE1 <= 1'b0;
+	RXOE2 <= 1'b1;
 	state <= 2;
 	end 	
 2:	begin
 	I_CLKRX <= 1'b0;
 	Q_CLKRX <= 1'b0;
-	RXOE1 <= 1'b0;
-	RXOE2 <= 1'b1;
+	RXOE1 <= 1'b1;
+	RXOE2 <= 1'b0;
 	state <= 3;
 	end 
 3:	begin
-	RXOE1 <= 1'b1;
-	RXOE2 <= 1'b0;
+	RXOE1 <= 1'b0;
+	RXOE2 <= 1'b1;
 	state <= 0;
 	end 
 endcase
 end
-
-/*
-always @ (posedge DDS_OUT)
-begin
-	RXOE1 <= 1'b1;
-	RXOE2 <= 1'b1;
-end 
-*/
-
-
-// set the QSD and QSE drive signals equal for testing
-
-//assign I_CLKTX = I_CLKRX;
-//assign Q_CLKTX = Q_CLKRX;
-
 
 //////////////////////////////////////////////////////////////
 //
@@ -312,24 +298,19 @@ endcase
 end
 
 
-
 //////////////////////////////////////////////////////////////
 //
-// 		General IO
+// 		QSE Control
 //
 /////////////////////////////////////////////////////////////
 
-// enable QSD when PTT inactive, chip is active low
 
-//assign RXOE1 = (PTT || PTT_out) ? 1'b1 : 1'b0; 
-//assign RXOE2 = RXOE1; 
+assign I_CLKTX = I_CLKRX;
+assign Q_CLKTX = Q_CLKRX;
 
-// enable QSE when PTT active, chip is active low 
+// enable QSE when PTT inactive else disable
 
-//assign TXOE1 = ~RXOE1;
-//assign TXOE2 = ~RXOE2;
-
-assign TXOE1 = 1'b1;	// inhibit Tx for testing 
-assign TXOE2 = 1'b1;	// inhibit Tx for testing 
+assign TXOE1 = (PTT || PTT_out) ? RXOE1 : 1'b1; 
+assign TXOE2 = (PTT || PTT_out) ? RXOE2 : 1'b1; 
 
 endmodule
