@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Test1
-Sun Nov 30 17:04:51 2008
+Mon Dec 01 22:01:46 2008
 Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
 
 
@@ -46,12 +46,12 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                          ;
 +-----------------------------+-----------------------------------------+
-; Analysis & Synthesis Status ; Successful - Sun Nov 30 17:04:51 2008   ;
+; Analysis & Synthesis Status ; Successful - Mon Dec 01 22:01:46 2008   ;
 ; Quartus II Version          ; 8.0 Build 215 05/29/2008 SJ Web Edition ;
 ; Revision Name               ; Test1                                   ;
 ; Top-level Entity Name       ; Test1                                   ;
 ; Family                      ; MAX II                                  ;
-; Total logic elements        ; 259                                     ;
+; Total logic elements        ; 262                                     ;
 ; Total pins                  ; 24                                      ;
 ; Total virtual pins          ; 0                                       ;
 ; Total memory bits           ; 0                                       ;
@@ -140,20 +140,20 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total logic elements                        ; 259   ;
-;     -- Combinational with no register       ; 87    ;
+; Total logic elements                        ; 262   ;
+;     -- Combinational with no register       ; 90    ;
 ;     -- Register only                        ; 102   ;
 ;     -- Combinational with a register        ; 70    ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
 ;     -- 4 input functions                    ; 98    ;
-;     -- 3 input functions                    ; 25    ;
+;     -- 3 input functions                    ; 28    ;
 ;     -- 2 input functions                    ; 25    ;
 ;     -- 1 input functions                    ; 6     ;
 ;     -- 0 input functions                    ; 3     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 249   ;
+;     -- normal mode                          ; 252   ;
 ;     -- arithmetic mode                      ; 10    ;
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
@@ -165,8 +165,8 @@ applicable agreement for further details.
 ; I/O pins                                    ; 24    ;
 ; Maximum fan-out node                        ; CBCLK ;
 ; Maximum fan-out                             ; 134   ;
-; Total fan-out                               ; 901   ;
-; Average fan-out                             ; 3.18  ;
+; Total fan-out                               ; 914   ;
+; Average fan-out                             ; 3.20  ;
 +---------------------------------------------+-------+
 
 
@@ -175,7 +175,7 @@ applicable agreement for further details.
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
-; |Test1                     ; 259 (259)   ; 172          ; 0           ; 0            ; 0       ; 0         ; 0         ; 24   ; 0            ; 87 (87)      ; 102 (102)         ; 70 (70)          ; 12 (12)         ; 0 (0)      ; |Test1              ; work         ;
+; |Test1                     ; 262 (262)   ; 172          ; 0           ; 0            ; 0       ; 0         ; 0         ; 24   ; 0            ; 90 (90)      ; 102 (102)         ; 70 (70)          ; 12 (12)         ; 0 (0)      ; |Test1              ; work         ;
 +----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -360,14 +360,12 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.0 Build 215 05/29/2008 SJ Web Edition
-    Info: Processing started: Sun Nov 30 17:04:50 2008
+    Info: Processing started: Mon Dec 01 22:01:44 2008
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Phoenix -c Test1
 Info: Found 1 design units, including 1 entities, in source file Test1.v
     Info: Found entity 1: Test1
 Info: Elaborating entity "Test1" for the top level hierarchy
-Warning (10034): Output port "DDS_CLK" at Test1.v(25) has no driver
-Warning (10034): Output port "I_CLKTX" at Test1.v(34) has no driver
-Warning (10034): Output port "Q_CLKTX" at Test1.v(35) has no driver
+Warning (10034): Output port "DDS_CLK" at Test1.v(26) has no driver
 Warning (14130): Reduced register "phase_word[0]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_setup[0]" with stuck data_in port to stuck value GND
 Warning (14130): Reduced register "DDS_setup[1]" with stuck data_in port to stuck value GND
@@ -553,10 +551,6 @@ Info: Encoding result for state machine "|Test1|state"
 Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "LED1" is stuck at GND
     Warning (13410): Pin "DDS_CLK" is stuck at GND
-    Warning (13410): Pin "I_CLKTX" is stuck at GND
-    Warning (13410): Pin "Q_CLKTX" is stuck at GND
-    Warning (13410): Pin "TXOE1" is stuck at VCC
-    Warning (13410): Pin "TXOE2" is stuck at VCC
 Info: 9 registers lost all their fanouts during netlist optimizations. The first 9 are displayed below.
     Info: Register "AD9912~8" lost all its fanouts during netlist optimizations.
     Info: Register "AD9912~9" lost all its fanouts during netlist optimizations.
@@ -567,17 +561,16 @@ Info: 9 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "state~7" lost all its fanouts during netlist optimizations.
     Info: Register "state~8" lost all its fanouts during netlist optimizations.
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
-Warning: Design contains 2 input pin(s) that do not drive logic
+Warning: Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "CLK_48MHZ"
-    Warning (15610): No output dependent on input pin "PTT"
-Info: Implemented 283 device resources after synthesis - the final resource count might be different
+Info: Implemented 286 device resources after synthesis - the final resource count might be different
     Info: Implemented 6 input pins
     Info: Implemented 18 output pins
-    Info: Implemented 259 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 111 warnings
+    Info: Implemented 262 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 104 warnings
     Info: Peak virtual memory: 157 megabytes
-    Info: Processing ended: Sun Nov 30 17:04:51 2008
-    Info: Elapsed time: 00:00:01
+    Info: Processing ended: Mon Dec 01 22:01:46 2008
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 
 
