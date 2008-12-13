@@ -27,4 +27,21 @@ SFL SFL_code(.noe_in(1'b0));
 
 Once you are able to correctly load the flash chip then this could be included in your Mercury code since it is tiny.
 
-Here are the steps to program the Mercury EPCS16 using a batch file - working on this at the moment!
+
+
+Here are the steps to program the Mercury EPCS16 using a batch file
+
+- Program the FX2 with USBblaster code as previously i.e. run usbblaster.bat.
+- Convert your Mercury.sof file to a Mercury.jic file.  See Altera AN370 page 11
+  as to how to do this.   The FPGA is an EP3C25 and the flash an EPCS16.
+- Convert the Mercury.jic file into a Mercury.jam file. See Altera AN370 page 19.
+- Run the following from the comand line; 
+  quartus_jli -a configure Mercury.jam -l 
+- Cycle power to Ozy and Mercury boards and Mercury will load from its flash memory.
+
+OR
+
+- The above can be run from Program-Mercury-EPCS16.bat in this directory if desired. 
+
+NOTE: YOu need to use quartus_jli from Quartus II V8.1 since this supports the Cyclone III devices.
+  
