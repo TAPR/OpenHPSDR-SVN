@@ -1,0 +1,52 @@
+# Copyright (C) 1991-2007 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#		usb_blaster_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name DEVICE EP2C8Q208C8
+set_global_assignment -name FAMILY "Cyclone II"
+set_global_assignment -name TOP_LEVEL_ENTITY usb_blaster
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "7.1 SP1"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "22:02:37  AUGUST 16, 2007"
+set_global_assignment -name LAST_QUARTUS_VERSION 6.1
+set_global_assignment -name USER_LIBRARIES "C:/HPDSDR/trunk/VK6APH/I2C new/db/;C:/FPGA/Mercury/megafunctions/;C:/FPGA/Mercury/db/"
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_instance_assignment -name PARTITION_HIERARCHY no_file_for_top_partition -to | -section_id Top
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name VERILOG_FILE usb_blaster.v
+set_global_assignment -name GENERATE_RBF_FILE ON
+set_location_assignment PIN_112 -to A23
+set_location_assignment PIN_110 -to A24
+set_location_assignment PIN_104 -to A29
+set_location_assignment PIN_56 -to B0
+set_location_assignment PIN_57 -to B1
+set_location_assignment PIN_58 -to B2
+set_location_assignment PIN_59 -to B3
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_location_assignment PIN_24 -to IFCLK
+set_location_assignment PIN_4 -to LED0
+set_global_assignment -name FMAX_REQUIREMENT "48 MHz"
+set_global_assignment -name FMAX_REQUIREMENT "48 MHz" -section_id IFCLK
+set_instance_assignment -name CLOCK_SETTINGS IFCLK -to IFCLK
+set_location_assignment PIN_106 -to A25
+set_location_assignment PIN_105 -to A27

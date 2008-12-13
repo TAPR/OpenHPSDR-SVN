@@ -1,0 +1,849 @@
+Index: configure.in
+===================================================================
+--- configure.in	(.../vendor/openocd)	(Revision 135)
++++ configure.in	(.../branches/openocd-usb_jtag)	(Revision 135)
+@@ -32,6 +32,14 @@
+   AS_HELP_STRING([--enable-ft2232_ftd2xx], [Enable building support for FT2232 based devices using the FTD2XX driver]), 
+   [build_ft2232_ftd2xx=$enableval], [build_ft2232_ftd2xx=no])
+  
++AC_ARG_ENABLE(usb_blaster_libftdi,
++  AS_HELP_STRING([--enable-usb_blaster_libftdi], [Enable building support for the Altera USB-Blaster using the libftdi driver]), 
++  [build_usb_blaster_libftdi=$enableval], [build_usb_blaster_libftdi=no])
++
++AC_ARG_ENABLE(usb_blaster_ftd2xx,
++  AS_HELP_STRING([--enable-usb_blaster_ftd2xx], [Enable building support for the Altera USB-Blaster using the FTD2XX driver]), 
++  [build_usb_blaster_ftd2xx=$enableval], [build_usb_blaster_ftd2xx=no])
++
+ AC_ARG_ENABLE(amtjtagaccel,
+   AS_HELP_STRING([--enable-amtjtagaccel], [Enable building the Amontec JTAG-Accelerator driver]), 
+   [build_amtjtagaccel=$enableval], [build_amtjtagaccel=no])
+@@ -141,6 +149,18 @@
+   AC_DEFINE(BUILD_FT2232_FTD2XX, 0, [0 if you don't want ftd2xx ft2232.])
+ fi
+ 
++if test $build_usb_blaster_libftdi = yes; then
++  AC_DEFINE(BUILD_USB_BLASTER_LIBFTDI, 1, [1 if you want libftdi usb_blaster.])
++else
++  AC_DEFINE(BUILD_USB_BLASTER_LIBFTDI, 0, [0 if you don't want libftdi usb_blaster.])
++fi
++
++if test $build_usb_blaster_ftd2xx = yes; then
++  AC_DEFINE(BUILD_USB_BLASTER_FTD2XX, 1, [1 if you want ftd2xx usb_blaster.])
++else
++  AC_DEFINE(BUILD_USB_BLASTER_FTD2XX, 0, [0 if you don't want ftd2xx usb_blaster.])
++fi
++
+ if test $build_amtjtagaccel = yes; then
+   AC_DEFINE(BUILD_AMTJTAGACCEL, 1, [1 if you want the Amontec JTAG-Accelerator driver.])
+ else
+@@ -163,6 +183,8 @@
+ AM_CONDITIONAL(BITBANG, test $build_bitbang = yes)
+ AM_CONDITIONAL(FT2232_LIBFTDI, test $build_ft2232_libftdi = yes)
+ AM_CONDITIONAL(FT2232_FTD2XX, test $build_ft2232_ftd2xx = yes)
++AM_CONDITIONAL(USB_BLASTER_LIBFTDI, test $build_usb_blaster_libftdi = yes)
++AM_CONDITIONAL(USB_BLASTER_FTD2XX, test $build_usb_blaster_ftd2xx = yes)
+ AM_CONDITIONAL(AMTJTAGACCEL, test $build_amtjtagaccel = yes)
+ AM_CONDITIONAL(GW16012, test $build_gw16012 = yes)
+ AM_CONDITIONAL(IS_CYGWIN, test $is_cygwin = yes)
+Index: src/jtag/jtag.c
+===================================================================
+--- src/jtag/jtag.c	(.../vendor/openocd)	(Revision 135)
++++ src/jtag/jtag.c	(.../branches/openocd-usb_jtag)	(Revision 135)
+@@ -136,6 +136,14 @@
+ 	extern jtag_interface_t ft2232_interface;
+ #endif
+ 
++#if BUILD_USB_BLASTER_FTD2XX == 1
++	extern jtag_interface_t usb_blaster_interface;
++#endif
++
++#if BUILD_USB_BLASTER_LIBFTDI == 1
++	extern jtag_interface_t usb_blaster_interface;
++#endif
++
+ #if BUILD_AMTJTAGACCEL == 1
+ 	extern jtag_interface_t amt_jtagaccel_interface;
+ #endif
+@@ -162,6 +170,12 @@
+ #if BUILD_FT2232_LIBFTDI == 1
+ 	&ft2232_interface,
+ #endif
++#if BUILD_USB_BLASTER_FTD2XX == 1
++	&usb_blaster_interface,
++#endif
++#if BUILD_USB_BLASTER_LIBFTDI == 1
++	&usb_blaster_interface,
++#endif
+ #if BUILD_AMTJTAGACCEL == 1
+ 	&amt_jtagaccel_interface,
+ #endif
+Index: src/jtag/usb_blaster.c
+===================================================================
+--- src/jtag/usb_blaster.c	(.../vendor/openocd)	(Revision 0)
++++ src/jtag/usb_blaster.c	(.../branches/openocd-usb_jtag)	(Revision 135)
+@@ -0,0 +1,706 @@
++/***************************************************************************
++ *                                                                         *
++ *   Copyright (C) 2006 Kolja Waschk                                       *
++ *   usbjtag@ixo.de                                                        *
++ *                                                                         *
++ *   Based on ft2232.c and bitbang.c,                                      *
++ *   Copyright (C) 2004,2006 by Dominic Rath                               *
++ *                                                                         *
++ *   This program is free software; you can redistribute it and/or modify  *
++ *   it under the terms of the GNU General Public License as published by  *
++ *   the Free Software Foundation; either version 2 of the License, or     *
++ *   (at your option) any later version.                                   *
++ *                                                                         *
++ *   This program is distributed in the hope that it will be useful,       *
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
++ *   GNU General Public License for more details.                          *
++ *                                                                         *
++ *   You should have received a copy of the GNU General Public License     *
++ *   along with this program; if not, write to the                         *
++ *   Free Software Foundation, Inc.,                                       *
++ *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
++ ***************************************************************************/
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
++#if IS_CYGWIN == 1
++#include "windows.h"
++#undef ERROR
++#endif
++
++#include "replacements.h"
++
++/* project specific includes */
++#include "log.h"
++#include "types.h"
++#include "jtag.h"
++#include "configuration.h"
++#include "time_support.h"
++
++/* system includes */
++#include <string.h>
++#include <stdlib.h>
++#include <unistd.h>
++
++/* USB_BLASTER access library includes */
++#if BUILD_USB_BLASTER_FTD2XX == 1
++#include <ftd2xx.h>
++#elif BUILD_USB_BLASTER_LIBFTDI == 1
++#include <ftdi.h>
++#endif
++
++#include <sys/time.h>
++#include <time.h>
++
++/* enable this to debug io latency
++ */
++#if 1
++#define _DEBUG_USB_IO_
++#endif
++
++/* enable this to debug communication
++ */
++#if 1
++#define _DEBUG_USB_COMMS_
++#endif
++
++int usb_blaster_execute_queue(void);
++
++void usb_blaster_blink(void);
++int usb_blaster_speed(int speed);
++int usb_blaster_register_commands(struct command_context_s *cmd_ctx);
++int usb_blaster_init(void);
++int usb_blaster_quit(void);
++
++int usb_blaster_handle_device_desc_command(struct command_context_s *cmd_ctx, char *cmd, char **args, int argc);
++int usb_blaster_handle_layout_command(struct command_context_s *cmd_ctx, char *cmd, char **args, int argc);
++int usb_blaster_handle_vid_pid_command(struct command_context_s *cmd_ctx, char *cmd, char **args, int argc);
++
++char *usb_blaster_device_desc = NULL;
++char *usb_blaster_layout = NULL;
++u16 usb_blaster_vid = 0x09fb; // Altera
++u16 usb_blaster_pid = 0x6001; // USB-Blaster
++
++#if BUILD_USB_BLASTER_FTD2XX == 1
++static FT_HANDLE ftdih = NULL;
++#elif BUILD_USB_BLASTER_LIBFTDI == 1
++static struct ftdi_context ftdic;
++#endif
++
++jtag_interface_t usb_blaster_interface = 
++{
++	
++	.name = "usb_blaster",
++	
++	.execute_queue = usb_blaster_execute_queue,
++	
++	.support_pathmove = 1,
++	
++	.speed = usb_blaster_speed,
++	.register_commands = usb_blaster_register_commands,
++	.init = usb_blaster_init,
++	.quit = usb_blaster_quit,
++};
++
++int usb_blaster_buf_write(u8 *buf, int size, u32* bytes_written)
++{
++#if BUILD_USB_BLASTER_FTD2XX == 1
++	FT_STATUS status;
++	DWORD dw_bytes_written;
++	
++#ifdef _DEBUG_JTAG_IO_
++	DEBUG("usb_blaster_buf_write %02X (%d)\n", buf[0], size);
++#endif
++	if ((status = FT_Write(ftdih, buf, size, &dw_bytes_written)) != FT_OK)
++	{
++		*bytes_written = dw_bytes_written;
++		ERROR("FT_Write returned: %i", status);
++		return ERROR_JTAG_DEVICE_ERROR;
++	}
++	else
++	{
++		*bytes_written = dw_bytes_written;
++		return ERROR_OK;	
++	}
++#elif BUILD_USB_BLASTER_LIBFTDI == 1
++	int retval;
++#ifdef _DEBUG_JTAG_IO_
++	DEBUG("usb_blaster_buf_write %02X (%d)\n", buf[0], size);
++#endif
++	if ((retval = ftdi_write_data(&ftdic, buf, size)) < 0)
++	{
++		*bytes_written = 0;
++		ERROR("ftdi_write_data: %s", ftdi_get_error_string(&ftdic));
++		return ERROR_JTAG_DEVICE_ERROR;
++	}
++	else
++	{
++		*bytes_written = retval;
++		return ERROR_OK;	
++	}
++#endif
++}
++
++int usb_blaster_buf_read(u8* buf, int size, u32* bytes_read)
++{
++#if BUILD_USB_BLASTER_FTD2XX == 1
++	DWORD dw_bytes_read;
++	FT_STATUS status;
++	if ((status = FT_Read(ftdih, buf, size, &dw_bytes_read)) != FT_OK)
++	{
++		*bytes_read = dw_bytes_read; 
++		ERROR("FT_Read returned: %i", status);
++		return ERROR_JTAG_DEVICE_ERROR;
++	}
++#ifdef _DEBUG_JTAG_IO_
++	DEBUG("usb_blaster_buf_read %02X (%d)\n", buf[0], dw_bytes_read);
++#endif
++	*bytes_read = dw_bytes_read; 
++	return ERROR_OK;	
++
++#elif BUILD_USB_BLASTER_LIBFTDI == 1
++	int retval;
++	int timeout = 100;
++	*bytes_read = 0;
++	
++	while ((*bytes_read < size) && timeout--)
++	{
++		if ((retval = ftdi_read_data(&ftdic, buf + *bytes_read, size - *bytes_read)) < 0)
++		{
++			*bytes_read = 0;
++			ERROR("ftdi_read_data: %s", ftdi_get_error_string(&ftdic));
++			return ERROR_JTAG_DEVICE_ERROR;
++		}
++		*bytes_read += retval;
++	}
++#ifdef _DEBUG_JTAG_IO_
++	DEBUG("usb_blaster_buf_read %02X (%d)\n", buf[0], *bytes_read);
++#endif
++	return ERROR_OK;	
++#endif
++}
++
++/* The following code doesn't fully utilize the possibilities of the USB-Blaster. It
++ * writes one byte per JTAG pin state change at a time; it doesn't even try to buffer
++ * data up to the maximum packet size of 64 bytes.
++ *
++ * Actually, the USB-Blaster offers a byte-shift mode to transmit up to 504 data bits
++ * (bidirectional) in a single USB packet. A header byte has to be sent as the first
++ * byte in a packet with the following meaning:
++ *
++ *   Bit 7 (0x80): Must be set to indicate byte-shift mode.
++ *   Bit 6 (0x40): If set, the USB-Blaster will also read data, not just write.
++ *   Bit 5..0:     Define the number N of following bytes
++ *
++ * All N following bytes will then be clocked out serially on TDI. If Bit 6 was set,
++ * it will afterwards return N bytes with TDO data read while clocking out the TDI data.
++ * LSB of the first byte after the header byte will appear first on TDI.
++ */
++
++/* Simple bit banging mode:
++ *
++ *   Bit 7 (0x80): Must be zero (see byte-shift mode above)
++ *   Bit 6 (0x40): If set, you will receive a byte indicating the state of TDO in return.
++ *   Bit 5 (0x20): Unknown; for now, set to one.
++ *   Bit 4 (0x10): TDI Output.
++ *   Bit 3 (0x08): Unknown; for now, set to one.
++ *   Bit 2 (0x04): Unknown; for now, set to one.
++ *   Bit 1 (0x02): TMS Output.
++ *   Bit 0 (0x01): TCK Output.
++ *
++ * For transmitting a single data bit, you need to write two bytes. Up to 64 bytes can be
++ * combined in a single USB packet (but this is not done in the code below). It isn't
++ * possible to read a data without transmitting data.
++ */
++
++#define TCK    0
++#define TMS    1
++#define TDI    4
++#define READ   6
++#define SHMODE 7
++#define OTHERS ((1<<2)|(1<<3)|(1<<5))
++
++void usb_blaster_write(int tck, int tms, int tdi)
++{
++	u8 buf[1];
++	u32 count;
++#ifdef _DEBUG_JTAG_IO_
++	DEBUG("---- usb_blaster_write(%d,%d,%d)\n", tck,tms,tdi);
++#endif
++	buf[0] = OTHERS | (tck?(1<<TCK):0) | (tms?(1<<TMS):0) | (tdi?(1<<TDI):0);
++	usb_blaster_buf_write(buf, 1, &count);
++}
++
++int usb_blaster_write_read(int tck, int tms, int tdi)
++{
++	u8 buf[1];
++	u32 count;
++#ifdef _DEBUG_JTAG_IO_
++	DEBUG("++++ usb_blaster_write_read(%d,%d,%d)\n", tck,tms,tdi);
++#endif
++	buf[0] = OTHERS | (tck?(1<<TCK):0) | (tms?(1<<TMS):0) | (tdi?(1<<TDI):0) | (1<<READ);
++	usb_blaster_buf_write(buf, 1, &count);
++	usb_blaster_buf_read(buf, 1, &count);
++	return (buf[0]&1);
++}
++
++int usb_blaster_speed(int speed)
++{
++#if BUILD_USB_BLASTER_FTD2XX == 1
++	DEBUG("TODO: usb_blaster_speed() isn't implemented for libftd2xx!");
++#elif BUILD_USB_BLASTER_LIBFTDI == 1
++	DEBUG("TODO: usb_blaster_speed() isn't optimally implemented!");
++	/* TODO: libftdi's ftdi_set_baudrate chokes on high rates, use lowlevel
++	 * usb function instead! And additionally allow user to throttle. */
++	if(ftdi_set_baudrate(&ftdic, 3000000/4)<0)
++	{
++		ERROR("Can't set baud rate to max: %s", ftdi_get_error_string(&ftdic));
++		return ERROR_JTAG_DEVICE_ERROR;
++	};
++#endif
++	
++	return ERROR_OK;
++}
++
++int usb_blaster_register_commands(struct command_context_s *cmd_ctx)
++{
++	register_command(cmd_ctx, NULL, "usb_blaster_device_desc", usb_blaster_handle_device_desc_command,
++		COMMAND_CONFIG, NULL);
++	register_command(cmd_ctx, NULL, "usb_blaster_vid_pid", usb_blaster_handle_vid_pid_command,
++					 COMMAND_CONFIG, NULL);
++	return ERROR_OK;
++}
++
++void usb_blaster_end_state(state)
++{
++	if (tap_move_map[state] != -1)
++		end_state = state;
++	else
++	{
++		ERROR("BUG: %i is not a valid end state", state);
++		exit(-1);
++	}
++}
++
++void usb_blaster_state_move(void) {
++	
++	int i=0, tms=0;
++	u8 tms_scan = TAP_MOVE(cur_state, end_state);
++	
++	for (i = 0; i < 7; i++)
++	{
++		tms = (tms_scan >> i) & 1;
++		usb_blaster_write(0, tms, 0);
++		usb_blaster_write(1, tms, 0);
++	}
++	usb_blaster_write(0, tms, 0);
++	
++	cur_state = end_state;
++}
++
++void usb_blaster_path_move(pathmove_command_t *cmd)
++{
++	int num_states = cmd->num_states;
++	int state_count;
++
++	state_count = 0;
++	while (num_states)
++	{
++		if (tap_transitions[cur_state].low == cmd->path[state_count])
++		{
++			usb_blaster_write(0, 0, 0);
++			usb_blaster_write(1, 0, 0);
++		}
++		else if (tap_transitions[cur_state].high == cmd->path[state_count])
++		{
++			usb_blaster_write(0, 1, 0);
++			usb_blaster_write(1, 1, 0);
++		}			
++		else
++		{
++			ERROR("BUG: %s -> %s isn't a valid TAP transition", tap_state_strings[cur_state], tap_state_strings[cmd->path[state_count]]);
++			exit(-1);
++		}
++		
++		cur_state = cmd->path[state_count];
++		state_count++;
++		num_states--;
++	}
++	
++	end_state = cur_state;
++}
++
++void usb_blaster_runtest(int num_cycles)
++{
++	int i;
++	
++	enum tap_state saved_end_state = end_state;
++	
++	/* only do a state_move when we're not already in RTI */
++	if (cur_state != TAP_RTI)
++	{
++		usb_blaster_end_state(TAP_RTI);
++		usb_blaster_state_move();
++	}
++	
++	/* execute num_cycles */
++	usb_blaster_write(0, 0, 0);
++	for (i = 0; i < num_cycles; i++)
++	{
++		usb_blaster_write(1, 0, 0);
++		usb_blaster_write(0, 0, 0);
++	}
++	
++	/* finish in end_state */
++	usb_blaster_end_state(saved_end_state);
++	if (cur_state != end_state)
++		usb_blaster_state_move();
++}
++
++void usb_blaster_scan(int ir_scan, enum scan_type type, u8 *buffer, int scan_size)
++{
++	enum tap_state saved_end_state = end_state;
++	int bit_cnt;
++	
++	if (ir_scan)
++		usb_blaster_end_state(TAP_SI);
++	else
++		usb_blaster_end_state(TAP_SD);
++
++	usb_blaster_state_move();
++	usb_blaster_end_state(saved_end_state);
++
++	for (bit_cnt = 0; bit_cnt < scan_size; bit_cnt++)
++	{
++		int	tms, tdi;
++
++		tms = (bit_cnt==scan_size-1) ? 1 : 0;
++
++		/* if we're just reading the scan, but don't care about the output
++		 * default to outputting 'low', this also makes valgrind traces more readable,
++		 * as it removes the dependency on an uninitialised value
++		 */ 
++
++		if (type != SCAN_IN)
++			tdi = (buffer[bit_cnt/8] >> (bit_cnt % 8)) & 0x1;
++		else
++			tdi = 0;
++
++		if (type == SCAN_OUT) /* Discard input */
++		{
++			usb_blaster_write(0, tms, tdi);
++			usb_blaster_write(1, tms, tdi);
++		}
++		else
++		{
++			int retbit;
++
++			usb_blaster_write(0, tms, tdi);
++			retbit = usb_blaster_write_read(1, tms, tdi);
++
++			if(retbit)
++				buffer[(bit_cnt)/8] |= 1 << ((bit_cnt) % 8);
++			else
++				buffer[(bit_cnt)/8] &= ~(1 << ((bit_cnt) % 8));
++		}
++	}
++	
++	/* Exit1 -> Pause */
++	usb_blaster_write(0, 0, 0);
++	usb_blaster_write(1, 0, 0);
++	
++	if (ir_scan)
++		cur_state = TAP_PI;
++	else
++		cur_state = TAP_PD;
++	
++	if (cur_state != end_state)
++		usb_blaster_state_move();
++}
++
++void usb_blaster_reset(int trst, int srst)
++{
++	DEBUG("TODO: usb_blaster_reset(%d,%d) isn't implemented!", trst, srst);
++}
++
++int usb_blaster_execute_queue()
++{
++	jtag_command_t *cmd = jtag_command_queue; /* currently processed command */
++	jtag_command_t *first_unsent = cmd;	/* next command that has to be sent */
++	u8 *buffer;
++	int scan_size;	/* size of IR or DR scan */
++	enum scan_type type;
++	int i;
++	int predicted_size = 0;
++	int require_send = 0;
++
++	usb_blaster_blink();
++
++	while (cmd)
++	{
++		switch(cmd->type)
++		{
++			case JTAG_END_STATE:
++#ifdef _DEBUG_JTAG_IO_
++				DEBUG("end_state: %i", cmd->cmd.end_state->end_state);
++#endif
++				if (cmd->cmd.end_state->end_state != -1)
++					usb_blaster_end_state(cmd->cmd.end_state->end_state);
++				break;
++			case JTAG_RESET:
++#ifdef _DEBUG_JTAG_IO_
++				DEBUG("reset trst: %i srst %i", cmd->cmd.reset->trst, cmd->cmd.reset->srst);
++#endif
++				if (cmd->cmd.reset->trst == 1)
++				{
++					cur_state = TAP_TLR;
++				}
++				usb_blaster_reset(cmd->cmd.reset->trst, cmd->cmd.reset->srst);
++				break;
++			case JTAG_RUNTEST:
++#ifdef _DEBUG_JTAG_IO_
++				DEBUG("runtest %i cycles, end in %i", cmd->cmd.runtest->num_cycles, cmd->cmd.runtest->end_state);
++#endif
++				if (cmd->cmd.runtest->end_state != -1)
++					usb_blaster_end_state(cmd->cmd.runtest->end_state);
++				usb_blaster_runtest(cmd->cmd.runtest->num_cycles);
++				break;
++			case JTAG_STATEMOVE:
++#ifdef _DEBUG_JTAG_IO_
++				DEBUG("statemove end in %i", cmd->cmd.statemove->end_state);
++#endif
++				if (cmd->cmd.statemove->end_state != -1)
++					usb_blaster_end_state(cmd->cmd.statemove->end_state);
++				usb_blaster_state_move();
++				break;
++			case JTAG_PATHMOVE:
++#ifdef _DEBUG_JTAG_IO_
++				DEBUG("pathmove: %i states, end in %i", cmd->cmd.pathmove->num_states, cmd->cmd.pathmove->path[cmd->cmd.pathmove->num_states - 1]);
++#endif
++				usb_blaster_path_move(cmd->cmd.pathmove);
++				break;
++			case JTAG_SCAN:
++#ifdef _DEBUG_JTAG_IO_
++				DEBUG("scan end in %i", cmd->cmd.scan->end_state);
++#endif
++				if (cmd->cmd.scan->end_state != -1)
++					usb_blaster_end_state(cmd->cmd.scan->end_state);
++				scan_size = jtag_build_buffer(cmd->cmd.scan, &buffer);
++				type = jtag_scan_type(cmd->cmd.scan);
++				usb_blaster_scan(cmd->cmd.scan->ir_scan, type, buffer, scan_size);
++				if (jtag_read_buffer(buffer, cmd->cmd.scan) != ERROR_OK)
++					return ERROR_JTAG_QUEUE_FAILED;
++				if (buffer)
++					free(buffer);
++				break;
++			case JTAG_SLEEP:
++#ifdef _DEBUG_JTAG_IO_
++				DEBUG("sleep", cmd->cmd.sleep->us);
++#endif
++				jtag_sleep(cmd->cmd.sleep->us);
++				break;
++			default:
++				ERROR("BUG: unknown JTAG command type encountered");
++				exit(-1);
++		}
++		cmd = cmd->next;
++	}
++	
++	return ERROR_OK;
++}
++
++int usb_blaster_init(void)
++{
++	u8 latency_timer;
++	u8 buf[1];
++	int retval;
++	u32 bytes_written;
++	
++#if BUILD_USB_BLASTER_FTD2XX == 1
++	FT_STATUS status;
++#endif
++
++#if BUILD_USB_BLASTER_FTD2XX == 1
++	DEBUG("'usb_blaster' interface using FTD2XX");
++#elif BUILD_USB_BLASTER_LIBFTDI == 1
++	DEBUG("'usb_blaster' interface using libftdi");
++#endif
++
++#if BUILD_USB_BLASTER_FTD2XX == 1
++	/* Open by device description */
++	if (usb_blaster_device_desc == NULL)
++	{
++		WARNING("no usb_blaster device description specified, using default 'USB-Blaster'");
++		usb_blaster_device_desc = "USB-Blaster";
++	}
++	
++#if IS_WIN32 == 0
++	/* Add non-standard Vid/Pid to the linux driver */
++	if ((status = FT_SetVIDPID(usb_blaster_vid, usb_blaster_pid)) != FT_OK)
++	{
++		WARNING("couldn't add %4.4x:%4.4x", usb_blaster_vid, usb_blaster_pid);
++	}
++#endif
++
++	if ((status = FT_OpenEx(usb_blaster_device_desc, FT_OPEN_BY_DESCRIPTION, &ftdih)) != FT_OK)
++	{
++		DWORD num_devices;
++		
++		ERROR("unable to open ftdi device: %i", status);
++		status = FT_ListDevices(&num_devices, NULL, FT_LIST_NUMBER_ONLY);
++		if (status == FT_OK)
++		{
++			char **desc_array = malloc(sizeof(char*) * (num_devices + 1));
++			int i;
++
++			for (i = 0; i < num_devices; i++)
++				desc_array[i] = malloc(64);
++			desc_array[num_devices] = NULL;
++
++			status = FT_ListDevices(desc_array, &num_devices, FT_LIST_ALL | FT_OPEN_BY_DESCRIPTION);
++
++			if (status == FT_OK)
++			{
++				ERROR("ListDevices: %d\n", num_devices);
++				for (i = 0; i < num_devices; i++)
++					ERROR("%i: %s", i, desc_array[i]);
++			}
++			
++			for (i = 0; i < num_devices; i++)
++				free(desc_array[i]);
++			free(desc_array);
++		}
++		else
++		{
++			printf("ListDevices: NONE\n");
++		}
++		return ERROR_JTAG_INIT_FAILED;
++	}
++
++	if ((status = FT_SetLatencyTimer(ftdih, 2)) != FT_OK)
++	{
++		ERROR("unable to set latency timer: %i", status);
++		return ERROR_JTAG_INIT_FAILED;
++	}
++	
++	if ((status = FT_GetLatencyTimer(ftdih, &latency_timer)) != FT_OK)
++	{
++		ERROR("unable to get latency timer: %i", status);
++		return ERROR_JTAG_INIT_FAILED;
++	}
++	else
++	{
++		DEBUG("current latency timer: %i", latency_timer);
++	}
++
++	if ((status = FT_SetBitMode(ftdih, 0x00, 0)) != FT_OK)
++	{
++		ERROR("unable to disable bit i/o mode: %i", status);
++		return ERROR_JTAG_INIT_FAILED;
++	}
++#elif BUILD_USB_BLASTER_LIBFTDI == 1
++	if (ftdi_init(&ftdic) < 0)
++		return ERROR_JTAG_INIT_FAILED;
++
++	/* context, vendor id, product id */
++	if (ftdi_usb_open(&ftdic, usb_blaster_vid, usb_blaster_pid) < 0)
++	{
++		ERROR("unable to open ftdi device: %s", ftdic.error_str);
++		return ERROR_JTAG_INIT_FAILED;
++	}
++
++	if (ftdi_usb_reset(&ftdic) < 0)
++	{
++		ERROR("unable to reset ftdi device");
++		return ERROR_JTAG_INIT_FAILED;
++	}
++
++	if (ftdi_set_latency_timer(&ftdic, 2) < 0)
++	{
++		ERROR("unable to set latency timer");
++		return ERROR_JTAG_INIT_FAILED;
++	}
++	
++	if (ftdi_get_latency_timer(&ftdic, &latency_timer) < 0)
++	{
++		ERROR("unable to get latency timer");
++		return ERROR_JTAG_INIT_FAILED;
++	}
++	else
++	{
++		DEBUG("current latency timer: %i", latency_timer);
++	}
++
++	ftdi_disable_bitbang(&ftdic);
++#endif	
++
++	usb_blaster_speed(jtag_speed);
++
++#if 0
++#if BUILD_USB_BLASTER_FTD2XX == 1
++	if ((status = FT_Purge(ftdih, FT_PURGE_RX | FT_PURGE_TX)) != FT_OK)
++	{
++		ERROR("error purging ftd2xx device: %i", status);
++		return ERROR_JTAG_INIT_FAILED;
++	}
++#elif BUILD_USB_BLASTER_LIBFTDI == 1
++	if (ftdi_usb_purge_buffers(&ftdic) < 0)
++	{
++		ERROR("ftdi_purge_buffers: %s", ftdic.error_str);
++		return ERROR_JTAG_INIT_FAILED;
++	}
++#endif	
++#endif
++
++	return ERROR_OK;
++}
++
++void usb_blaster_blink(void)
++{
++	DEBUG("TODO: usb_blaster_blink() isn't implemented!");
++}
++
++int usb_blaster_quit(void)
++{
++#if BUILD_USB_BLASTER_FTD2XX == 1
++	FT_STATUS status;
++
++	status = FT_Close(ftdih);
++#elif BUILD_USB_BLASTER_LIBFTDI == 1
++	ftdi_usb_close(&ftdic);
++	ftdi_deinit(&ftdic);
++#endif
++
++	return ERROR_OK;
++}
++
++int usb_blaster_handle_device_desc_command(struct command_context_s *cmd_ctx, char *cmd, char **args, int argc)
++{
++	if (argc == 1)
++	{
++		usb_blaster_device_desc = strdup(args[0]);
++	}
++	else
++	{
++		ERROR("expected exactly one argument to usb_blaster_device_desc <description>");
++	}
++	
++	return ERROR_OK;
++}
++
++int usb_blaster_handle_vid_pid_command(struct command_context_s *cmd_ctx, char *cmd, char **args, int argc)
++{
++	if (argc >= 2)
++	{
++		usb_blaster_vid = strtol(args[0], NULL, 0);
++		usb_blaster_pid = strtol(args[1], NULL, 0);
++	}
++	else
++	{
++		WARNING("incomplete usb_blaster_vid_pid configuration directive");
++	}
++	
++	return ERROR_OK;
++}
+Index: src/jtag/Makefile.am
+===================================================================
+--- src/jtag/Makefile.am	(.../vendor/openocd)	(Revision 135)
++++ src/jtag/Makefile.am	(.../branches/openocd-usb_jtag)	(Revision 135)
+@@ -35,6 +35,16 @@
+ endif
+ endif
+ 
++if USB_BLASTER_LIBFTDI
++USBBLASTERFILES = usb_blaster.c
++else
++if USB_BLASTER_FTD2XX
++USBBLASTERFILES = usb_blaster.c
++else
++USB_BLASTERFILES =
++endif
++endif
++
+ if AMTJTAGACCEL
+ AMTJTAGACCELFILES = amt_jtagaccel.c
+ else
+@@ -59,6 +69,6 @@
+ GW16012FILES =
+ endif
+ 
+-libjtag_a_SOURCES = jtag.c $(BITBANGFILES) $(PARPORTFILES) $(FT2232FILES) $(AMTJTAGACCELFILES) $(EP93XXFILES) $(AT91RM9200FILES) $(GW16012FILES)
++libjtag_a_SOURCES = jtag.c $(BITBANGFILES) $(PARPORTFILES) $(FT2232FILES) $(USBBLASTERFILES) $(AMTJTAGACCELFILES) $(EP93XXFILES) $(AT91RM9200FILES) $(GW16012FILES)
+ 
+ noinst_HEADERS = bitbang.h jtag.h
+Index: src/Makefile.am
+===================================================================
+--- src/Makefile.am	(.../vendor/openocd)	(Revision 135)
++++ src/Makefile.am	(.../branches/openocd-usb_jtag)	(Revision 135)
+@@ -19,8 +19,12 @@
+ if FT2232_LIBFTDI
+ FTDI2232LIB = -lftdi
+ else
++if USB_BLASTER_LIBFTDI
++FTDI2232LIB = -lftdi
++else
+ FTDI2232LIB =
+ endif
++endif
+ 
+ if IS_WIN32
+ if FTD2XXDIR
+@@ -35,8 +39,12 @@
+ if FT2232_FTD2XX
+ FTD2XXLIB = $(FTD2XXLDADD)
+ else
++if USB_BLASTER_FTD2XX
++FTD2XXLIB = $(FTD2XXLDADD)
++else
+ FTD2XXLIB =
+ endif
++endif
+ 
+ openocd_LDADD = $(top_builddir)/src/xsvf/libxsvf.a \
+ 	$(top_builddir)/src/target/libtarget.a $(top_builddir)/src/jtag/libjtag.a \
