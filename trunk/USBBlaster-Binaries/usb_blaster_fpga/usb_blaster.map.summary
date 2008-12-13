@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Fri Feb 22 21:25:53 2008
+Quartus II Version : 6.1 Build 201 11/27/2006 SJ Web Edition
+Revision Name : usb_blaster
+Top-level Entity Name : usb_blaster
+Family : Cyclone II
+Total logic elements : 25
+    Total combinational functions : 25
+    Dedicated logic registers : 25
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total memory bits : N/A until Partition Merge
+Embedded Multiplier 9-bit elements : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge

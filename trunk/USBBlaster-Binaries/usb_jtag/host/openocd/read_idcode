@@ -1,0 +1,7 @@
+scan
+var idcode 32
+endstate rti
+irscan 0 6
+drscan 0 idcode
+var idcode
+exit
