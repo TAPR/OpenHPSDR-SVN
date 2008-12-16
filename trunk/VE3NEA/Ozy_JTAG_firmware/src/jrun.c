@@ -12,6 +12,18 @@
 //The Initial Developer of the Original Code is Alex Shovkoplyas, VE3NEA.
 //Portions created by Alex Shovkoplyas are
 //Copyright (C) 2008 Alex Shovkoplyas. All Rights Reserved.
+//
+//
+//Alternatively, the contents of this file may be used under the terms
+//of the GPL V2 license (the  "GPL V2 License"), in which case the
+//provisions of GPL V2 License are applicable instead of those
+//above. If you wish to allow use of your version of this file only
+//under the terms of the GPL V2 License and not to allow others to use
+//your version of this file under the MPL, indicate your decision by
+//deleting the provisions above and replace them with the notice and
+//other provisions required by the GPL V2 License. If you do not delete
+//the provisions above, a recipient may use your version of this file
+//under either the MPL or the GPL V2 License
 //------------------------------------------------------------------------------
 
 #include "../include/jrun.h"
