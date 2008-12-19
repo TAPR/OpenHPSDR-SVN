@@ -1,0 +1,24 @@
+
+State Machine - |Mercury|CC_state
+Name CC_state.00 CC_state.10 CC_state.01 
+CC_state.00 0 0 0 
+CC_state.01 1 0 1 
+CC_state.10 1 1 0 
+
+State Machine - |Mercury|SPI:Alex_SPI_Tx|spi_state
+Name spi_state.0110 spi_state.0101 spi_state.0100 spi_state.0011 spi_state.0010 spi_state.0001 spi_state.0000 
+spi_state.0000 0 0 0 0 0 0 0 
+spi_state.0001 0 0 0 0 0 1 1 
+spi_state.0010 0 0 0 0 1 0 1 
+spi_state.0011 0 0 0 1 0 0 1 
+spi_state.0100 0 0 1 0 0 0 1 
+spi_state.0101 0 1 0 0 0 0 1 
+spi_state.0110 1 0 0 0 0 0 1 
+
+State Machine - |Mercury|I2SEncode:I2S|encode_state
+Name encode_state.011 encode_state.010 encode_state.001 encode_state.000 encode_state.100 
+encode_state.000 0 0 0 0 0 
+encode_state.001 0 0 1 1 0 
+encode_state.010 0 1 0 1 0 
+encode_state.011 1 0 0 1 0 
+encode_state.100 0 0 0 1 1 
