@@ -47,7 +47,7 @@ end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-  OpenDialog1.FileName := ExtractFilePath(ParamStr(0)) + 'Merc_fpga.rbf';
+  //OpenDialog1.FileName := ExtractFilePath(ParamStr(0)) + 'Merc_fpga.rbf';
   if not OpenDialog1.Execute then Exit;
 
   Label1.Caption := '';

@@ -7,6 +7,7 @@
 
 #define JR_ERR_OK 0
 #define JR_ERR_BROKEN_CHAIN   1
+#define JR_ERR_BROKEN_PATTERN 2
 
 
 

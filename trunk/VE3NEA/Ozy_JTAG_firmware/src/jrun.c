@@ -13,7 +13,6 @@
 //Portions created by Alex Shovkoplyas are
 //Copyright (C) 2008 Alex Shovkoplyas. All Rights Reserved.
 //
-//
 //Alternatively, the contents of this file may be used under the terms
 //of the GPL V2 license (the  "GPL V2 License"), in which case the
 //provisions of GPL V2 License are applicable instead of those
@@ -39,14 +38,17 @@
 #define JC_BYPASS        0x3FF
 
 
+//global vars
 int jr_dev_cnt = 0;
 int jr_dev_idx = 0;
 
+//local vars
 long jr_bytes_written;
 long jr_device_id;
-
+Word jr_recv_bits;
 //currently Cyclone II and III are supported. Set to 1 for (III) or 0 for (II)
 Byte jr_is_CycloneIII;
+
 
 
 
@@ -56,16 +58,6 @@ Byte jr_is_CycloneIII;
 //------------------------------------------------------------------------------
 //                       read/write functions
 //------------------------------------------------------------------------------
-
-//write error code to the FX2 EP0 buffer
-int jr_set_err(Byte err_code)
-{
-  EP0BUF[0] = err_code;
-  EP0BCH = 0;
-  EP0BCL = 1;
-  return 1;
-}
-
 
 //set TDO bit, with optional TMS, and stropbe it with TCK
 void jr_write_bit(BYTE signals)
@@ -104,7 +96,8 @@ void jr_write_bits(Word out_bits, Int8 count, Byte is_last)
 Word jr_rw_bits(Word out_bits, Int8 count)
 {
   Int8 i;
-  Byte signals, in_bits = 0;
+  Byte signals;
+  Word in_bits = 0;
 
 	for(i=0; i < count; i++)
 	{
@@ -115,76 +108,40 @@ Word jr_rw_bits(Word out_bits, Int8 count)
 }
 
 
+
+
+#define SEND_BIT   \
+    anl a, r2      \
+    mov	_IOE, a    \
+    orl a, r3      \
+    mov	_IOE, a
+
+#define SEND_NEXT_BIT \
+    mov a, r4         \
+    rr a              \
+    mov r4, a         \
+    SEND_BIT
+
+
 void jr_write_byte_fast(Byte out_byte)
 {
   (void) out_byte;
 
   _asm
-    mov r2, #0x01
-    mov r3, #0x04
+    mov r2, #1
+    mov r3, #4
     mov r4, dpl
 
     mov a, r4
-    anl a, r2
-    mov	_IOE, a
-    orl a, r3
-    mov	_IOE, a
+    SEND_BIT
 
-    mov a, r4
-    rr a
-    mov r4, a
-    anl a, r2
-    mov	_IOE, a
-    orl a, r3
-    mov	_IOE, a
-
-    mov a, r4
-    rr a
-    mov r4, a
-    anl a, r2
-    mov	_IOE, a
-    orl a, r3
-    mov	_IOE, a
-
-    mov a, r4
-    rr a
-    mov r4, a
-    anl a, r2
-    mov	_IOE, a
-    orl a, r3
-    mov	_IOE, a
-
-    mov a, r4
-    rr a
-    mov r4, a
-    anl a, r2
-    mov	_IOE, a
-    orl a, r3
-    mov	_IOE, a
-
-    mov a, r4
-    rr a
-    mov r4, a
-    anl a, r2
-    mov	_IOE, a
-    orl a, r3
-    mov	_IOE, a
-
-    mov a, r4
-    rr a
-    mov r4, a
-    anl a, r2
-    mov	_IOE, a
-    orl a, r3
-    mov	_IOE, a
-
-    mov a, r4
-    rr a
-    mov r4, a
-    anl a, r2
-    mov	_IOE, a
-    orl a, r3
-    mov	_IOE, a
+    SEND_NEXT_BIT
+    SEND_NEXT_BIT
+    SEND_NEXT_BIT
+    SEND_NEXT_BIT
+    SEND_NEXT_BIT
+    SEND_NEXT_BIT
+    SEND_NEXT_BIT
   _endasm;
 }
 
@@ -262,7 +219,6 @@ void jr_load_command(Word cmd, Int8 dev_idx)
 int jr_count_devices()
 {
   int i;
-  Word recv_bits;
 
   //load JC_BYPASS in all devices
 	jr_dev_cnt = MAX_DEVICE_COUNT;
@@ -277,17 +233,19 @@ int jr_count_devices()
 	//shift-in zeros to clear data registers in all devices
 	for(i=0; i < (MAX_DEVICE_COUNT * 32); i++) jr_write_bit(0);
 
-  //shift-in the probe pattern, shift-out recv_bits
-	recv_bits = jr_rw_bits(PROBE_PATTERN, 8 + MAX_DEVICE_COUNT);
+  //shift-in the probe pattern, shift-out jr_recv_bits
+  jr_recv_bits = 0;
+	jr_recv_bits = jr_rw_bits(PROBE_PATTERN, 16);//8 + MAX_DEVICE_COUNT);
 
-  //count LSB zeros in recv_bits
-	jr_dev_cnt = -1;
+  //count LSB zeros in jr_recv_bits
+	jr_dev_cnt = -JR_ERR_BROKEN_CHAIN;
 
 	for(i=0; i < MAX_DEVICE_COUNT; i++)
-    if (recv_bits & (1 << i)) {jr_dev_cnt = i; break;}
+    if (jr_recv_bits & (1 << i)) {jr_dev_cnt = i; break;}
+  if (jr_dev_cnt < 0) return 0;
 
   //validate result
-  if ((recv_bits >> jr_dev_cnt) != PROBE_PATTERN) jr_dev_cnt = -1;
+  if ((jr_recv_bits >> jr_dev_cnt) != PROBE_PATTERN) jr_dev_cnt = -JR_ERR_BROKEN_PATTERN;
   if (jr_dev_cnt >= 0) return 1; else return 0;
 }
 
@@ -367,7 +325,17 @@ int jr_list_devices()
   Int8 i, j;
 
   //get device count
-  if (!jr_count_devices()) return jr_set_err(JR_ERR_BROKEN_CHAIN);
+  if (!jr_count_devices())
+  {
+    EP0BUF[0] = -jr_dev_cnt;
+    EP0BUF[1] = jr_recv_bits;
+    EP0BUF[2] = jr_recv_bits >> 8;
+
+    EP0BCH = 0;
+    EP0BCL = 3;
+    return 1;
+  }
+
 
   //read device ID's
   jr_goto_ShiftDR();
