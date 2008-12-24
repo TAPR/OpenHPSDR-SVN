@@ -1,47 +1,38 @@
-Phil Harman - VK6APH - 13 December 2008
+Phil Harman - VK6APH - 24 December 2008
 
 
-The files in this directory enable an  HPSDR board connected to the Atlas bus to 
-have its CPLD/ Flash chip  programmed. Run the relevant batch file to program
-the required CPLD or Flash chip.
+Here are the steps requried to progam the EPCS16 on the Mercury board.
 
-VERY IMPORTANT:  The board to be programed MUST be next to an Ozy board
-and closest to the powerconnector on the bus.The "Last JTAG" jumper
-must be in place on the last board i.e. that closest to the power connector.
-Only ONE Last JTAG jumper must be in place.
+1. Install EITHER the Altera Quartus II V8.1 application (1GB download!) OR the 
+   Quartus II Programmer application (only 80MB) from www.altera.com > Download.
+   Install in the default directory. We need to install one of these applications
+   in order to load the large number of DLLs requried to run the simple command line
+   program (quartus_jli.exe) later on - if there is a better way of doing this please share it!
 
+3. Fit a jumper to the last JTAG header on your Mercury board i.e. J****
 
+4. Plug just your Mercury and Ozy board into the Atlas bus. The Mercury board MUST
+   be closest to the power connector and the Ozy board in the next slot. 
 
-Here are the steps to program the Mercury EPCS16 via FX2/USBblaste under Quartus II.
+5. Run the batch file Program-Mercury-EPCS16.bat and look at the output, there should 
+   be no errors. 
 
-- Program the FX2 with USBblaster code as previously i.e. run usbblaster.bat.
-- Use the FX2/USBblaster to program the Mercury FPGA with Serial_Flash.sof.
-- Convert your Mercury.sof file to a Mercury.jic file.  See Altera AN370 page 11
-  as to how to do this.   The FPGA is an EP3C25 and the flash an EPCS16.
-- Use the FX2/USBblaster to program Mercury with Mercury.jic
-- Power cycle the Ozy and Mercury boards and Mercury will load from its flash memory.
+6. Power cycle the supply to the Atlas bus. If the EPCS16 has loaded correctly then the
+   right hand LEDs on the Mercury board will be flashing.
 
-I've attached the source for Serial_Flash.v. It's just the SFL Megafunction with this line in it
-
-SFL SFL_code(.noe_in(1'b0));
-
-Once you are able to correctly load the flash chip then this could be included in your Mercury code since it is tiny.
+7. Test Mercury with PowerSDR.
 
 
+This is how the process works.
 
-Here are the steps to program the Mercury EPCS16 using a batch file
+Firstly the FX2 is loaded with code to make it appear as an Altera USBblaster.
+We have previously  converted the usual Mercury.sof file into a Mercury.jic file ( see
+Altera application note AN370). We then convert this into a Mercury.jam file.
+We need a *.jam file since the command line programmer (quartus_jli.exe) will work
+with a USBblaster whereas non of the others I could find would. If you know of one
+then please share it!
 
-- Program the FX2 with USBblaster code as previously i.e. run usbblaster.bat.
-- Convert your Mercury.sof file to a Mercury.jic file.  See Altera AN370 page 11
-  as to how to do this.   The FPGA is an EP3C25 and the flash an EPCS16.
-- Convert the Mercury.jic file into a Mercury.jam file. See Altera AN370 page 19.
-- Run the following from the comand line; 
-  quartus_jli -a configure Mercury.jam -l 
-- Cycle power to Ozy and Mercury boards and Mercury will load from its flash memory.
+The Mercury.jam file first loads some code into the Mercury FPGA that connects
+it to the EPCS16 flash memory. We then use the FX2/USBblaster as a JTAG 
+programmer to write to the flash memory.
 
-OR
-
-- The above can be run from Program-Mercury-EPCS16.bat in this directory if desired. 
-
-NOTE: YOu need to use quartus_jli from Quartus II V8.1 since this supports the Cyclone III devices.
-  
