@@ -1,6 +1,6 @@
 Flow report for Ozy_Janus
-Fri Nov 28 20:09:08 2008
-Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
+Fri Dec 26 19:58:25 2008
+Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
 ---------------------
@@ -11,7 +11,8 @@ Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
   3. Flow Settings
   4. Flow Non-Default Global Settings
   5. Flow Elapsed Time
-  6. Flow Log
+  6. Flow OS Summary
+  7. Flow Log
 
 
 
@@ -37,18 +38,18 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Fri Nov 28 20:09:07 2008   ;
-; Quartus II Version                 ; 8.0 Build 215 05/29/2008 SJ Web Edition ;
+; Flow Status                        ; Successful - Fri Dec 26 19:58:25 2008   ;
+; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
 ; Family                             ; Cyclone II                              ;
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
 ; Met timing requirements            ; No                                      ;
-; Total logic elements               ; 1,415 / 8,256 ( 17 % )                  ;
-;     Total combinational functions  ; 992 / 8,256 ( 12 % )                    ;
-;     Dedicated logic registers      ; 1,022 / 8,256 ( 12 % )                  ;
-; Total registers                    ; 1022                                    ;
+; Total logic elements               ; 1,448 / 8,256 ( 18 % )                  ;
+;     Total combinational functions  ; 988 / 8,256 ( 12 % )                    ;
+;     Dedicated logic registers      ; 1,024 / 8,256 ( 12 % )                  ;
+; Total registers                    ; 1024                                    ;
 ; Total pins                         ; 89 / 138 ( 64 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304 / 165,888 ( 59 % )               ;
@@ -62,32 +63,33 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/28/2008 20:08:09 ;
+; Start date & time ; 12/26/2008 19:57:19 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Ozy_Janus           ;
 +-------------------+---------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                             ;
-+---------------------------------------------------+------------------------------+--------------------------------+-------------+------------+
-; Assignment Name                                   ; Value                        ; Default Value                  ; Entity Name ; Section Id ;
-+---------------------------------------------------+------------------------------+--------------------------------+-------------+------------+
-; ALLOW_POWER_UP_DONT_CARE                          ; Off                          ; On                             ; --          ; --         ;
-; COMPILER_SIGNATURE_ID                             ; 123483488765.122787048902240 ; --                             ; --          ; --         ;
-; FITTER_EFFORT                                     ; Standard Fit                 ; Auto Fit                       ; --          ; --         ;
-; FMAX_REQUIREMENT                                  ; 48 MHz                       ; --                             ; --          ; --         ;
-; MESSAGE_SUPPRESSION_RULE_FILE                     ; Ozy_Janus.srf                ; --                             ; --          ; --         ;
-; MUX_RESTRUCTURE                                   ; Off                          ; Auto                           ; --          ; --         ;
-; OPTIMIZE_FAST_CORNER_TIMING                       ; On                           ; Off                            ; --          ; --         ;
-; OPTIMIZE_HOLD_TIMING                              ; All paths                    ; IO Paths and Minimum TPD Paths ; --          ; --         ;
-; PARTITION_COLOR                                   ; 14622752                     ; --                             ; --          ; Top        ;
-; PARTITION_NETLIST_TYPE                            ; SOURCE                       ; --                             ; --          ; Top        ;
-; PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ; On                           ; Off                            ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_COMBO_LOGIC                    ; On                           ; Off                            ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION           ; On                           ; Off                            ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_REGISTER_RETIMING              ; On                           ; Off                            ; --          ; --         ;
-+---------------------------------------------------+------------------------------+--------------------------------+-------------+------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                           ;
++---------------------------------------------------+--------------------------------------------+--------------------------------+-------------+------------+
+; Assignment Name                                   ; Value                                      ; Default Value                  ; Entity Name ; Section Id ;
++---------------------------------------------------+--------------------------------------------+--------------------------------+-------------+------------+
+; ALLOW_POWER_UP_DONT_CARE                          ; Off                                        ; On                             ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                             ; 123483488765.123028903904944               ; --                             ; --          ; --         ;
+; FITTER_EFFORT                                     ; Standard Fit                               ; Auto Fit                       ; --          ; --         ;
+; FMAX_REQUIREMENT                                  ; 48 MHz                                     ; --                             ; --          ; --         ;
+; MESSAGE_SUPPRESSION_RULE_FILE                     ; Ozy_Janus.srf                              ; --                             ; --          ; --         ;
+; MISC_FILE                                         ; C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.dpf ; --                             ; --          ; --         ;
+; MUX_RESTRUCTURE                                   ; Off                                        ; Auto                           ; --          ; --         ;
+; OPTIMIZE_HOLD_TIMING                              ; All Paths                                  ; IO Paths and Minimum TPD Paths ; --          ; --         ;
+; OPTIMIZE_MULTI_CORNER_TIMING                      ; On                                         ; Off                            ; --          ; --         ;
+; PARTITION_COLOR                                   ; 14622752                                   ; --                             ; --          ; Top        ;
+; PARTITION_NETLIST_TYPE                            ; SOURCE                                     ; --                             ; --          ; Top        ;
+; PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ; On                                         ; Off                            ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC                    ; On                                         ; Off                            ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION           ; On                                         ; Off                            ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING              ; On                                         ; Off                            ; --          ; --         ;
++---------------------------------------------------+--------------------------------------------+--------------------------------+-------------+------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------+
@@ -95,12 +97,24 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:00:08     ; 1.0                     ; 170 MB              ; 00:00:08                           ;
-; Fitter                  ; 00:00:43     ; 1.0                     ; 205 MB              ; 00:00:43                           ;
-; Assembler               ; 00:00:01     ; 1.0                     ; 155 MB              ; 00:00:01                           ;
-; Classic Timing Analyzer ; 00:00:01     ; 1.0                     ; 137 MB              ; 00:00:01                           ;
-; Total                   ; 00:00:53     ; --                      ; --                  ; 00:00:53                           ;
+; Analysis & Synthesis    ; 00:00:09     ; 1.0                     ; 178 MB              ; 00:00:09                           ;
+; Fitter                  ; 00:00:49     ; 1.0                     ; 213 MB              ; 00:00:47                           ;
+; Assembler               ; 00:00:02     ; 1.0                     ; 162 MB              ; 00:00:02                           ;
+; Classic Timing Analyzer ; 00:00:01     ; 1.0                     ; 141 MB              ; 00:00:02                           ;
+; Total                   ; 00:01:01     ; --                      ; --                  ; 00:01:00                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                       ;
++-------------------------+------------------+------------+------------+----------------+
+; Module Name             ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
++-------------------------+------------------+------------+------------+----------------+
+; Analysis & Synthesis    ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Fitter                  ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Assembler               ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Classic Timing Analyzer ; phil             ; Windows XP ; 5.1        ; i686           ;
++-------------------------+------------------+------------+------------+----------------+
 
 
 ------------
