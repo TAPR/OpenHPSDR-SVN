@@ -23,7 +23,6 @@
  ---------------------------------------------------------------------------------
  -- NC            : No Connect. This pin has no internal connection to the device.
  -- DNU           : Do Not Use. This pin MUST NOT be connected.
- -- VCCPGM        : Dedicated power pin for configuration, which MUST be connected to 1.8V, 2.5V or 3.0V depending on the needs of the configuration device.
  -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (1.2V).
  -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
  --                 of its bank.
@@ -64,7 +63,7 @@
  -- Pin directions (input, output or bidir) are based on device operating in user mode.
  ---------------------------------------------------------------------------------
 
-Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
+Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 CHIP  "Ozy_Janus"  ASSIGNED TO AN: EP2C8Q208C8
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
@@ -172,8 +171,8 @@ GND                          : 100       : gnd    :                   :         
 RESERVED_INPUT               : 101       :        :                   :         : 4         :                
 RESERVED_INPUT               : 102       :        :                   :         : 4         :                
 RESERVED_INPUT               : 103       :        :                   :         : 4         :                
-RESERVED_INPUT               : 104       :        :                   :         : 4         :                
-TDO                          : 105       : output : 3.3-V LVTTL       :         : 3         : Y              
+TDI                          : 104       : output : 3.3-V LVTTL       :         : 4         : Y              
+RESERVED_INPUT               : 105       :        :                   :         : 3         :                
 SDOBACK                      : 106       : input  : 3.3-V LVTTL       :         : 3         : Y              
 ~LVDS54n/INIT_DONE~ / RESERVED_OUTPUT_OPEN_DRAIN : 107       : output : 3.3-V LVTTL       :         : 3         : N              
 DEBUG_LED3                   : 108       : output : 3.3-V LVTTL       :         : 3         : Y              

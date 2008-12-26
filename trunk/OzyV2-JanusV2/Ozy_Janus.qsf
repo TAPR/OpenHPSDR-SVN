@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EP2C8Q208C8
 set_global_assignment -name TOP_LEVEL_ENTITY Ozy_Janus
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:29:17  JULY 22, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION 8.0
+set_global_assignment -name LAST_QUARTUS_VERSION 8.1
 set_global_assignment -name ADD_DEFAULT_PINS_TO_SIMULATION_OUTPUT_WAVEFORMS OFF
 set_global_assignment -name ENABLE_INIT_DONE_OUTPUT ON
 set_global_assignment -name GENERATE_RBF_FILE ON
@@ -178,3 +178,5 @@ set_global_assignment -name VERILOG_FILE HPF_select.v
 set_global_assignment -name VERILOG_FILE clock_det.v
 set_global_assignment -name VERILOG_FILE flash.v
 set_location_assignment PIN_181 -to PCC
+set_location_assignment PIN_104 -to TDI
+set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.dpf"

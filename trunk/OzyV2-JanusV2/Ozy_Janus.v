@@ -1,4 +1,4 @@
-// V1.10 19 November  2008 
+// V1.20 26th December 2008 
 //
 // Copyright 2006,2007, 2008 Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -186,6 +186,8 @@
 //							 - Compiled with Quartus V8.0
 //				19 Nov  2008 - Added test code for Phoenix i.e. calculate phase word and 
 //							   send via Atlas bus C21
+//				26 Dec  2008 - V1.20 release 
+//			    
 //
 ////////////////////////////////////////////////////////////
 
@@ -318,7 +320,7 @@ module Ozy_Janus(
         CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
 		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CC, PCLK_12MHZ, MCLK_12MHZ, MDOUT,
 		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, CLK_MCLK,
-		FX2_PE0, FX2_PE1, FX2_PE2, FX2_PE3, TDO, SDOBACK, TCK, TMS, PCC);
+		FX2_PE0, FX2_PE1, FX2_PE2, FX2_PE3,SDOBACK,TDI,TCK, TMS, PCC);
 		
 
 
@@ -377,11 +379,11 @@ assign dash = GPIO[21];
 assign GPIO_nIOE = 0; 
 
 // interface pins for JTAG programming via Atlas bus
-input  FX2_PE0;		// Port E on FX2
+input  FX2_PE0;		// Port B on FX2
 output FX2_PE1;
 input  FX2_PE2;
 input  FX2_PE3;
-output TDO;			// A27 on Atlas 
+output TDI;			// A29 on Atlas
 input  SDOBACK;		// A25 on Atlas
 output TCK;			// A24 on Atlas
 output TMS;			// A23 on Atlas
@@ -389,8 +391,11 @@ output TMS;			// A23 on Atlas
 // link JTAG pins through
 assign TMS = FX2_PE3;
 assign TCK = FX2_PE2;
-assign TDO = FX2_PE0;  // TDO on our slot ties to TDI on next slot  
+assign TDI = FX2_PE0;
 assign FX2_PE1 = SDOBACK;
+
+
+
 
 // instantiate gpio control block 
 gpio_control gpio_controlSDR(.FX2_CLK(FX2_CLK), 
@@ -508,8 +513,7 @@ assign LRCLK_48 = clock_out[7]; 		// for AK5394A at 48kHz
 assign LRCLK_96 = clock_out[6];			// for AK5394A at 96kHz
 assign LRCLK_192 = clock_out[5];		// for AK5394A at 192kHz
 
-// **** only send 48MHz clock to Atlas bus if Mercury not fitted to see effect on spurs
-// conf[1] = 1 if Mercury selected for Rx output
+
 assign CLK_48MHZ = conf[1] ? 1'b0 : IFCLK; 	// 48MHz clock to PWM DAC on Janus only if Mercury not slected
 
 /* 
@@ -1440,6 +1444,8 @@ end
 
 I2SAudioOut  I2SAO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(I_PWM), .right_sample_i(Q_PWM),.outbit_o(CDIN));
 
+
+
 ///////////////////////////////////////////////////////////////
 //
 //              Implements I2S format Left and Right audio out,
@@ -1490,8 +1496,7 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 assign DEBUG_LED1 = ~conf[1];	// test config setting  
 assign DEBUG_LED2 = ~PTT_out; 	// lights with PTT active
 assign DEBUG_LED3 = ~have_sync; // lights when sync from PowerSDR detected 
-//assign DEBUG_LED1 = (Rx_control_0[7:1] == 0) ?  Rx_control_3[0] : DEBUG_LED1;
-//assign DEBUG_LED2 = (Rx_control_0[7:1] == 0) ?  Rx_control_3[1] : DEBUG_LED2;
+
 
 endmodule
 

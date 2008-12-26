@@ -5,7 +5,7 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 8.887 ns
+Actual Time    : 9.019 ns
 From           : GPIO[22]
 To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[6]
 From Clock     : --
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 25.082 ns
-From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|op_1~243_OTERM29
-To             : DEBUG_LED2
+Actual Time    : 23.721 ns
+From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|op_1~175_OTERM27
+To             : DEBUG_LED3
 From Clock     : IFCLK
 To Clock       : --
 Failed Paths   : 0
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.842 ns
+Actual Time    : 11.685 ns
 From           : MCLK_12MHZ
 To             : CLK_MCLK
 From Clock     : --
@@ -35,7 +35,7 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : 5.338 ns
+Actual Time    : 5.110 ns
 From           : CDOUT_P
 To             : Tx_q[0]
 From Clock     : --
@@ -43,39 +43,39 @@ To Clock       : IFCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'IFCLK'
-Slack          : 0.382 ns
+Slack          : -0.503 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 49.83 MHz ( period = 20.068 ns )
-From           : CCcount[3]
+Actual Time    : 45.79 MHz ( period = 21.838 ns )
+From           : CCcount[3]~_Duplicate_115
 To             : PCC~reg0
 From Clock     : IFCLK
 To Clock       : IFCLK
-Failed Paths   : 0
+Failed Paths   : 2
 
 Type           : Clock Setup: 'MCLK_12MHZ'
-Slack          : 1.698 ns
+Slack          : 1.111 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 57.35 MHz ( period = 17.436 ns )
-From           : CCcount[3]
+Actual Time    : 53.73 MHz ( period = 18.610 ns )
+From           : CCcount[3]~_Duplicate_115
 To             : PCC~reg0
 From Clock     : MCLK_12MHZ
 To Clock       : MCLK_12MHZ
 Failed Paths   : 0
 
 Type           : Clock Setup: 'SPI_SCK'
-Slack          : 15.580 ns
+Slack          : 13.340 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 190.37 MHz ( period = 5.253 ns )
-From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|saddr[0]
-To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[4]
+Actual Time    : 133.46 MHz ( period = 7.493 ns )
+From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|saddr[1]
+To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[6]
 From Clock     : SPI_SCK
 To Clock       : SPI_SCK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'FX2_CLK'
-Slack          : 17.457 ns
+Slack          : 17.546 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 296.21 MHz ( period = 3.376 ns )
+Actual Time    : 304.23 MHz ( period = 3.287 ns )
 From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|CS_ph1
 To             : gpio_control:gpio_controlSDR|RegisterX:port1reg|OUT[0]
 From Clock     : FX2_CLK
@@ -83,64 +83,64 @@ To Clock       : FX2_CLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'CLK_12MHZ'
-Slack          : 31.427 ns
+Slack          : 30.507 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
-Actual Time    : 53.98 MHz ( period = 18.526 ns )
-From           : CCcount[3]
+Actual Time    : 49.10 MHz ( period = 20.366 ns )
+From           : CCcount[3]~_Duplicate_115
 To             : PCC~reg0
 From Clock     : CLK_12MHZ
 To Clock       : CLK_12MHZ
 Failed Paths   : 0
 
 Type           : Clock Setup: 'PCLK_12MHZ'
-Slack          : 31.683 ns
+Slack          : 30.868 ns
 Required Time  : 12.50 MHz ( period = 80.000 ns )
-Actual Time    : 60.12 MHz ( period = 16.634 ns )
-From           : CCcount[3]
+Actual Time    : 54.75 MHz ( period = 18.264 ns )
+From           : CCcount[3]~_Duplicate_115
 To             : PCC~reg0
 From Clock     : PCLK_12MHZ
 To Clock       : PCLK_12MHZ
 Failed Paths   : 0
 
 Type           : Clock Hold: 'IFCLK'
-Slack          : -4.610 ns
+Slack          : -8.757 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
-From           : AD_state[2]
-To             : AD_state[2]
+From           : division:division_phoenix|quotient[3]
+To             : PCC~reg0
 From Clock     : IFCLK
 To Clock       : IFCLK
-Failed Paths   : 233
+Failed Paths   : 1031
 
 Type           : Clock Hold: 'CLK_12MHZ'
-Slack          : -3.839 ns
+Slack          : -4.117 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
 Actual Time    : N/A
 From           : AD_state[2]
 To             : AD_state[2]
 From Clock     : CLK_12MHZ
 To Clock       : CLK_12MHZ
-Failed Paths   : 40
+Failed Paths   : 643
 
 Type           : Clock Hold: 'MCLK_12MHZ'
-Slack          : -3.294 ns
+Slack          : -3.239 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
 From           : AD_state[2]
 To             : AD_state[2]
 From Clock     : MCLK_12MHZ
 To Clock       : MCLK_12MHZ
-Failed Paths   : 39
+Failed Paths   : 485
 
 Type           : Clock Hold: 'PCLK_12MHZ'
-Slack          : -2.893 ns
+Slack          : -3.066 ns
 Required Time  : 12.50 MHz ( period = 80.000 ns )
 Actual Time    : N/A
 From           : AD_state[2]
 To             : AD_state[2]
 From Clock     : PCLK_12MHZ
 To Clock       : PCLK_12MHZ
-Failed Paths   : 39
+Failed Paths   : 465
 
 Type           : Clock Hold: 'SPI_SCK'
 Slack          : 0.499 ns
@@ -153,7 +153,7 @@ To Clock       : SPI_SCK
 Failed Paths   : 0
 
 Type           : Clock Hold: 'FX2_CLK'
-Slack          : 1.134 ns
+Slack          : 0.910 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
 From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|CS_ph1
@@ -170,7 +170,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 351
+Failed Paths   : 2626
 
 --------------------------------------------------------------------------------------
 
