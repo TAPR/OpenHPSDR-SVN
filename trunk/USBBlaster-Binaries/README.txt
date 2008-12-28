@@ -12,13 +12,33 @@ Here are the steps requried to progam the EPCS16 on the Mercury board.
    in order to load the large number of DLLs requried to run the simple command line
    programer (quartus_pgm.exe) - if there is a better way of doing this please share it!
 
+2. THE FIRST TIME YOU DO THIS DO THE FOLLOWING. SUBSEQUENTLY GOTO STEP 3.
+   
+   Connect just your Ozy board to the Atlas bus, connect the USB cable and power it on.
+
+   Run the file usbblaster.bat. This will load the code in the FX2 to make it appear 
+   to be an Altera USBblaster. 
+
+
+   Windows will detect a new USB device. You need to install the drivers for it.
+
+   See http://www.altera.com/literature/ug/ug_usb_blstr.pdf for driver installation instructions.
+
+   Check that the drivers have installed correctly by looking in 
+
+   Start\Control Panel\System\Hardware\Device Manager\Universal Serial Bus controllers
+   
+   there should be an entry marked  Altera USB-Blaster
+
+
 3. Fit a jumper to the last JTAG header on your Mercury board i.e. JP7
 
-4. Plug just your Mercury and Ozy board into the Atlas bus. The Mercury board MUST
-   be closest to the power connector and the Ozy board in the next slot. 
+4. Power off your Atlas board. Plug just your Mercury and Ozy board into the Atlas bus.
+   The Mercury board MUST be closest to the power connector and the Ozy board in the next slot.
+   Turn the power on to your Atlas bus.  
 
 5. Run the batch file Program-Mercury-EPCS16.bat and look at the output, there should 
-   be no errors. This will take approximately 1 minute. 
+   be no errors. It takes approximately 1 minute to load the EPCS16. 
 
 6. Power cycle the supply to the Atlas bus. If the EPCS16 has loaded correctly then the
    right hand LEDs on the Mercury board will be flashing.
