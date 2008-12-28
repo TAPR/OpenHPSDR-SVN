@@ -12,36 +12,46 @@ Only ONE Last JTAG jumper must be in place.
 
 
 
-Here are the steps to program the Mercury EPCS16 via FX2/USBblaste under Quartus II.
+Here are the steps to program the Mercury EPCS16 via FX2/USBblaster under Quartus II.
+
 
 - Program the FX2 with USBblaster code as previously i.e. run usbblaster.bat.
 - Use the FX2/USBblaster to program the Mercury FPGA with Serial_Flash.sof.
+
+OR
+
 - Convert your Mercury.sof file to a Mercury.jic file.  See Altera AN370 page 11
   as to how to do this.   The FPGA is an EP3C25 and the flash an EPCS16.
-- Use the FX2/USBblaster to program Mercury with Mercury.jic
-- Power cycle the Ozy and Mercury boards and Mercury will load from its flash memory.
-
-I've attached the source for Serial_Flash.v. It's just the SFL Megafunction with this line in it
-
-SFL SFL_code(.noe_in(1'b0));
-
-Once you are able to correctly load the flash chip then this could be included in your Mercury code since it is tiny.
+  Set up Quartus to program the flash chip using a *.jic file. Make sure you set the 
+  programming options.
+  Save the *.cdf file to the working directory then;
+- use quartus_pgm *.cdf to program the flash chip (can take a minute to do this)
+- Cycle power to Ozy and Mercury boards and Mercury will load from its flash memory.
 
 
 
 Here are the steps to program the Mercury EPCS16 using a batch file
 
-- Program the FX2 with USBblaster code as previously i.e. run usbblaster.bat.
-- Convert your Mercury.sof file to a Mercury.jic file.  See Altera AN370 page 11
-  as to how to do this.   The FPGA is an EP3C25 and the flash an EPCS16.
-- Convert the Mercury.jic file into a Mercury.jam file. See Altera AN370 page 19.
-- Run the following from the comand line; 
-  quartus_jli -a configure Mercury.jam -l 
-- Cycle power to Ozy and Mercury boards and Mercury will load from its flash memory.
+load_firmwareV1.1.exe  0xfffe  0x7 ozyfw-sdr1k.hex
+sleep 1000
+upload_fpgaV1.1.exe 0xfffe 0x7 usb_blaster.rbf
+sleep 1000
+load_firmwareV1.1.exe  0xfffe  0x7 std.hex
+
+// this has loaded the FX2 to make it look like a USBblaser and 
+// linked the FPGA pins to the flash memeory
+
+then 
+
+sleep 3000
+quartus_pgm mercury.cdf
+
+Which will program the flash 
+
 
 OR
 
 - The above can be run from Program-Mercury-EPCS16.bat in this directory if desired. 
 
-NOTE: YOu need to use quartus_jli from Quartus II V8.1 since this supports the Cyclone III devices.
+NOTE: YOu need to use quartus_pgm from Quartus II V8.1 since this supports the Cyclone III devices.
   
