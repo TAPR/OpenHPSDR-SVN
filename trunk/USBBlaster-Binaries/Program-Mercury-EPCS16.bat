@@ -1,8 +1,8 @@
 load_firmwareV1.1.exe  0xfffe  0x7 ozyfw-sdr1k.hex
-sleep 1000
+sleep 3000
 upload_fpgaV1.1.exe 0xfffe 0x7 usb_blaster.rbf
-sleep 1000
+sleep 3000
 load_firmwareV1.1.exe  0xfffe  0x7 std.hex
-sleep 2000
-quartus_jli -a configure Mercury.jam -l
+sleep 3000
+quartus_pgm mercury.cdf
 pause
