@@ -81,7 +81,6 @@ set_location_assignment PIN_139 -to CBCLK
 set_location_assignment PIN_70 -to CC
 set_location_assignment PIN_142 -to CDIN
 set_location_assignment PIN_209 -to CLKA
-set_location_assignment PIN_212 -to CLK_122P88MHZ
 set_location_assignment PIN_135 -to CMODE
 set_location_assignment PIN_22 -to DEBUG_LED0
 set_location_assignment PIN_21 -to DEBUG_LED1
