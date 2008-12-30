@@ -33,7 +33,7 @@ set_global_assignment -name ADD_DEFAULT_PINS_TO_SIMULATION_OUTPUT_WAVEFORMS OFF
 set_global_assignment -name VECTOR_INPUT_SOURCE Mercury.vwf
 set_global_assignment -name GENERATE_RBF_FILE ON
 set_global_assignment -name USER_LIBRARIES "C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/;C:/HPDSDR/trunk/VK6APH/Mercury/db/;C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/;C:/HPSDR/trunk/VK6APH/Mercury/db/;C:/FPGA/Mercury/megafunctions/;C:/FPGA/Mercury/db/"
-set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.0-V LVTTL"
 set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
 set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
 set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE SPEED
@@ -171,7 +171,10 @@ set_global_assignment -name VECTOR_WAVEFORM_FILE Mercury.vwf
 set_global_assignment -name QIP_FILE fir_shiftreg.qip
 set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/Mercury V2/Mercury.dpf"
 set_location_assignment PIN_113 -to A6
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to A6
-set_instance_assignment -name RESERVE_PIN "AS OUTPUT DRIVING AN UNSPECIFIED SIGNAL" -to A6
+set_instance_assignment -name IO_STANDARD "3.0-V LVTTL" -to A6
 set_instance_assignment -name OUTPUT_TERMINATION OFF -to A6
 set_instance_assignment -name OUTPUT_TERMINATION OFF -to ext_10MHZ
+set_instance_assignment -name CURRENT_STRENGTH_NEW 16MA -to ext_10MHZ
+set_instance_assignment -name PCI_IO OFF -to ext_10MHZ
+set_instance_assignment -name PCI_IO OFF -to A6
+set_instance_assignment -name CURRENT_STRENGTH_NEW 16MA -to A6
