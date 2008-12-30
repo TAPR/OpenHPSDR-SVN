@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Mercury
-Sun Dec 28 13:20:48 2008
+Tue Dec 30 21:33:01 2008
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -104,10 +104,11 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
  96. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component
  97. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component
  98. Parameter Settings for User Entity Instance: oddClockDivider:refClockDivider
- 99. altshift_taps Parameter Settings by Entity Instance
-100. lpm_mult Parameter Settings by Entity Instance
-101. Analysis & Synthesis Messages
-102. Analysis & Synthesis Suppressed Messages
+ 99. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
+100. altshift_taps Parameter Settings by Entity Instance
+101. lpm_mult Parameter Settings by Entity Instance
+102. Analysis & Synthesis Messages
+103. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -133,19 +134,19 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Dec 28 13:20:48 2008   ;
+; Analysis & Synthesis Status        ; Successful - Tue Dec 30 21:33:01 2008   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; Mercury                                 ;
 ; Family                             ; Cyclone III                             ;
-; Total logic elements               ; 6,804                                   ;
-;     Total combinational functions  ; 6,551                                   ;
-;     Dedicated logic registers      ; 6,804                                   ;
-; Total registers                    ; 6804                                    ;
+; Total logic elements               ; 6,713                                   ;
+;     Total combinational functions  ; 6,498                                   ;
+;     Dedicated logic registers      ; 6,713                                   ;
+; Total registers                    ; 6713                                    ;
 ; Total pins                         ; 65                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 18,844                                  ;
-; Embedded Multiplier 9-bit elements ; 14                                      ;
+; Embedded Multiplier 9-bit elements ; 22                                      ;
 ; Total PLLs                         ; 0                                       ;
 +------------------------------------+-----------------------------------------+
 
@@ -252,7 +253,6 @@ applicable agreement for further details.
 ; oddClockDiv.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/oddClockDiv.v                            ;
 ; I2S_Encoder_24bit.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/I2S_Encoder_24bit.v                      ;
 ; Mercury.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/Mercury.v                                ;
-; division.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/division.v                               ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altsyncram.tdf        ;
 ; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/stratix_ram_block.inc ;
 ; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_mux.inc           ;
@@ -278,6 +278,7 @@ applicable agreement for further details.
 ; bypassff.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/bypassff.inc          ;
 ; altshift.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altshift.inc          ;
 ; db/mult_djp.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/mult_djp.tdf                          ;
+; db/mult_4611.tdf                 ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/mult_4611.tdf                         ;
 +----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+
 
 
@@ -286,29 +287,29 @@ applicable agreement for further details.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimated Total logic elements              ; 6,804      ;
+; Estimated Total logic elements              ; 6,713      ;
 ;                                             ;            ;
-; Total combinational functions               ; 6551       ;
+; Total combinational functions               ; 6498       ;
 ; Logic element usage by number of LUT inputs ;            ;
-;     -- 4 input functions                    ; 425        ;
-;     -- 3 input functions                    ; 5182       ;
-;     -- <=2 input functions                  ; 944        ;
+;     -- 4 input functions                    ; 413        ;
+;     -- 3 input functions                    ; 5214       ;
+;     -- <=2 input functions                  ; 871        ;
 ;                                             ;            ;
 ; Logic elements by mode                      ;            ;
-;     -- normal mode                          ; 962        ;
-;     -- arithmetic mode                      ; 5589       ;
+;     -- normal mode                          ; 852        ;
+;     -- arithmetic mode                      ; 5646       ;
 ;                                             ;            ;
-; Total registers                             ; 6804       ;
-;     -- Dedicated logic registers            ; 6804       ;
+; Total registers                             ; 6713       ;
+;     -- Dedicated logic registers            ; 6713       ;
 ;     -- I/O registers                        ; 0          ;
 ;                                             ;            ;
 ; I/O pins                                    ; 65         ;
 ; Total memory bits                           ; 18844      ;
-; Embedded Multiplier 9-bit elements          ; 14         ;
+; Embedded Multiplier 9-bit elements          ; 22         ;
 ; Maximum fan-out node                        ; CLKA~input ;
-; Maximum fan-out                             ; 6608       ;
-; Total fan-out                               ; 40340      ;
-; Average fan-out                             ; 2.97       ;
+; Maximum fan-out                             ; 6536       ;
+; Total fan-out                               ; 40065      ;
+; Average fan-out                             ; 2.98       ;
 +---------------------------------------------+------------+
 
 
@@ -317,14 +318,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                             ; Library Name ;
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Mercury                                                     ; 6551 (265)        ; 6804 (247)   ; 18844       ; 14           ; 2       ; 6         ; 65   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
-;    |HPF_select:Alex_HPF_select|                              ; 52 (52)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|HPF_select:Alex_HPF_select                                                                                                                                             ; work         ;
+; |Mercury                                                     ; 6498 (293)        ; 6713 (270)   ; 18844       ; 22           ; 2       ; 10        ; 65   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
+;    |HPF_select:Alex_HPF_select|                              ; 50 (50)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|HPF_select:Alex_HPF_select                                                                                                                                             ; work         ;
 ;    |I2SEncode:I2S|                                           ; 69 (69)           ; 59 (59)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|I2SEncode:I2S                                                                                                                                                          ; work         ;
-;    |LPF_select:Alex_LPF_select|                              ; 83 (83)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|LPF_select:Alex_LPF_select                                                                                                                                             ; work         ;
-;    |SPI:Alex_SPI_Tx|                                         ; 64 (64)           ; 41 (41)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|SPI:Alex_SPI_Tx                                                                                                                                                        ; work         ;
-;    |division:division_DDS|                                   ; 124 (124)         ; 125 (125)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|division:division_DDS                                                                                                                                                  ; work         ;
+;    |LPF_select:Alex_LPF_select|                              ; 87 (87)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|LPF_select:Alex_LPF_select                                                                                                                                             ; work         ;
+;    |SPI:Alex_SPI_Tx|                                         ; 61 (61)           ; 41 (41)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|SPI:Alex_SPI_Tx                                                                                                                                                        ; work         ;
+;    |lpm_mult:Mult0|                                          ; 33 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Mercury|lpm_mult:Mult0                                                                                                                                                         ; work         ;
+;       |mult_4611:auto_generated|                             ; 33 (33)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Mercury|lpm_mult:Mult0|mult_4611:auto_generated                                                                                                                                ; work         ;
 ;    |oddClockDivider:refClockDivider|                         ; 20 (20)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|oddClockDivider:refClockDivider                                                                                                                                        ; work         ;
-;    |receiver:receiver_inst|                                  ; 5874 (0)          ; 6323 (0)     ; 18844       ; 14           ; 2       ; 6         ; 0    ; 0            ; |Mercury|receiver:receiver_inst                                                                                                                                                 ; work         ;
+;    |receiver:receiver_inst|                                  ; 5885 (0)          ; 6334 (0)     ; 18844       ; 14           ; 2       ; 6         ; 0    ; 0            ; |Mercury|receiver:receiver_inst                                                                                                                                                 ; work         ;
 ;       |cic:cic_inst_I2|                                      ; 1061 (71)         ; 1481 (16)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|cic:cic_inst_I2                                                                                                                                 ; work         ;
 ;          |cic_comb:cic_stages[0].cic_comb_inst|              ; 45 (45)           ; 90 (90)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[0].cic_comb_inst                                                                                            ; work         ;
 ;          |cic_comb:cic_stages[10].cic_comb_inst|             ; 45 (45)           ; 70 (70)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[10].cic_comb_inst                                                                                           ; work         ;
@@ -371,7 +373,7 @@ applicable agreement for further details.
 ;          |cic_integrator:cic_stages[7].cic_integrator_inst|  ; 45 (45)           ; 45 (45)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[7].cic_integrator_inst                                                                                ; work         ;
 ;          |cic_integrator:cic_stages[8].cic_integrator_inst|  ; 45 (45)           ; 45 (45)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[8].cic_integrator_inst                                                                                ; work         ;
 ;          |cic_integrator:cic_stages[9].cic_integrator_inst|  ; 45 (45)           ; 45 (45)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[9].cic_integrator_inst                                                                                ; work         ;
-;       |cordic:cordic_inst|                                   ; 1920 (1920)       ; 1039 (1039)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|cordic:cordic_inst                                                                                                                              ; work         ;
+;       |cordic:cordic_inst|                                   ; 1931 (1931)       ; 1050 (1050)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|cordic:cordic_inst                                                                                                                              ; work         ;
 ;       |fir:fir_inst_I|                                       ; 151 (33)          ; 203 (29)     ; 6350        ; 7            ; 1       ; 3         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|fir:fir_inst_I                                                                                                                                  ; work         ;
 ;          |fir_mac:fir_mac_inst|                              ; 106 (47)          ; 166 (47)     ; 0           ; 7            ; 1       ; 3         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst                                                                                                             ; work         ;
 ;             |mult_24Sx24S:mult_24Sx24S_inst|                 ; 59 (0)            ; 119 (0)      ; 0           ; 7            ; 1       ; 3         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst                                                                              ; work         ;
@@ -441,11 +443,11 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Statistic                             ; Number Used ;
 +---------------------------------------+-------------+
 ; Simple Multipliers (9-bit)            ; 2           ;
-; Simple Multipliers (18-bit)           ; 6           ;
+; Simple Multipliers (18-bit)           ; 10          ;
 ; Embedded Multiplier Blocks            ; --          ;
-; Embedded Multiplier 9-bit elements    ; 14          ;
+; Embedded Multiplier 9-bit elements    ; 22          ;
 ; Signed Embedded Multipliers           ; 2           ;
-; Unsigned Embedded Multipliers         ; 2           ;
+; Unsigned Embedded Multipliers         ; 6           ;
 ; Mixed Sign Embedded Multipliers       ; 4           ;
 ; Variable Sign Embedded Multipliers    ; 0           ;
 ; Dedicated Input Shift Register Chains ; 0           ;
@@ -500,11 +502,9 @@ Encoding Type:  One-Hot
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Register name                                                                                                                                         ; Reason for Removal                                                                                                                                                ;
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; PGA~reg0                                                                                                                                              ; Stuck at GND due to stuck port data_in                                                                                                                            ;
 ; TLV[3]                                                                                                                                                ; Stuck at GND due to stuck port data_in                                                                                                                            ;
-; tdata[3,5..8,13..15]                                                                                                                                  ; Stuck at GND due to stuck port data_in                                                                                                                            ;
 ; SPI:Alex_SPI_Tx|previous_Alex_data[7,16..18]                                                                                                          ; Stuck at GND due to stuck port data_in                                                                                                                            ;
-; TLV_data[3,5..8,13..15]                                                                                                                               ; Stuck at GND due to stuck port data_in                                                                                                                            ;
+; PGA~reg0                                                                                                                                              ; Stuck at GND due to stuck port data_in                                                                                                                            ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136 ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe138 ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136 ; Lost fanout                                                                                                                                                       ;
@@ -546,8 +546,6 @@ Encoding Type:  One-Hot
 ; receiver:receiver_inst|cordic:cordic_inst|X[2][0]                                                                                                     ; Stuck at GND due to stuck port data_in                                                                                                                            ;
 ; receiver:receiver_inst|cordic:cordic_inst|Y[2][1]                                                                                                     ; Stuck at GND due to stuck port data_in                                                                                                                            ;
 ; receiver:receiver_inst|cordic:cordic_inst|X[2][1]                                                                                                     ; Stuck at GND due to stuck port data_in                                                                                                                            ;
-; tdata[4]                                                                                                                                              ; Merged with tdata[2]                                                                                                                                              ;
-; TLV_data[4]                                                                                                                                           ; Merged with TLV_data[2]                                                                                                                                           ;
 ; SPI:Alex_SPI_Tx|spi_state~12                                                                                                                          ; Lost fanout                                                                                                                                                       ;
 ; SPI:Alex_SPI_Tx|spi_state~13                                                                                                                          ; Lost fanout                                                                                                                                                       ;
 ; SPI:Alex_SPI_Tx|spi_state~14                                                                                                                          ; Lost fanout                                                                                                                                                       ;
@@ -557,9 +555,10 @@ Encoding Type:  One-Hot
 ; counter[0]                                                                                                                                            ; Merged with count_12288[0]                                                                                                                                        ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133 ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133 ; Lost fanout                                                                                                                                                       ;
+; counter[26]                                                                                                                                           ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[47..55]                                                                           ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[47..55]                                                                           ; Lost fanout                                                                                                                                                       ;
-; Total Number of Removed Registers = 123                                                                                                               ;                                                                                                                                                                   ;
+; Total Number of Removed Registers = 106                                                                                                               ;                                                                                                                                                                   ;
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -580,22 +579,6 @@ Encoding Type:  One-Hot
 ;                                                   ; due to stuck port data_in ; receiver:receiver_inst|cordic:cordic_inst|X[1][1], ;
 ;                                                   ;                           ; receiver:receiver_inst|cordic:cordic_inst|X[1][2], ;
 ;                                                   ;                           ; receiver:receiver_inst|cordic:cordic_inst|X[1][3]  ;
-; tdata[3]                                          ; Stuck at GND              ; TLV_data[3]                                        ;
-;                                                   ; due to stuck port data_in ;                                                    ;
-; tdata[5]                                          ; Stuck at GND              ; TLV_data[5]                                        ;
-;                                                   ; due to stuck port data_in ;                                                    ;
-; tdata[6]                                          ; Stuck at GND              ; TLV_data[6]                                        ;
-;                                                   ; due to stuck port data_in ;                                                    ;
-; tdata[7]                                          ; Stuck at GND              ; TLV_data[7]                                        ;
-;                                                   ; due to stuck port data_in ;                                                    ;
-; tdata[8]                                          ; Stuck at GND              ; TLV_data[8]                                        ;
-;                                                   ; due to stuck port data_in ;                                                    ;
-; tdata[13]                                         ; Stuck at GND              ; TLV_data[13]                                       ;
-;                                                   ; due to stuck port data_in ;                                                    ;
-; tdata[14]                                         ; Stuck at GND              ; TLV_data[14]                                       ;
-;                                                   ; due to stuck port data_in ;                                                    ;
-; tdata[15]                                         ; Stuck at GND              ; TLV_data[15]                                       ;
-;                                                   ; due to stuck port data_in ;                                                    ;
 +---------------------------------------------------+---------------------------+----------------------------------------------------+
 
 
@@ -604,12 +587,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 6804  ;
-; Number of registers using Synchronous Clear  ; 136   ;
-; Number of registers using Synchronous Load   ; 911   ;
+; Total registers                              ; 6713  ;
+; Number of registers using Synchronous Clear  ; 120   ;
+; Number of registers using Synchronous Load   ; 903   ;
 ; Number of registers using Asynchronous Clear ; 238   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 4391  ;
+; Number of registers using Clock Enable       ; 4358  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -630,18 +613,16 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
-; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|out_data[15] ;
-; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][19]        ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|temp_ADC[6]                                               ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |Mercury|division:division_DDS|qr[86]                              ;
-; 8:1                ; 7 bits    ; 35 LEs        ; 28 LEs               ; 7 LEs                  ; Yes        ; |Mercury|tdata[10]                                                 ;
-; 9:1                ; 4 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |Mercury|bit_cnt[1]                                                ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|SPI:Alex_SPI_Tx|data_count[2]                             ;
+; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|out_data[16] ;
+; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][12]        ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|temp_ADC[14]                                              ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |Mercury|bit_cnt[3]                                                ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|SPI:Alex_SPI_Tx|data_count[1]                             ;
 ; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Mercury|bits[0]                                                   ;
 ; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|state[1]            ;
 ; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_Q|state[1]            ;
-; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[17]                                    ;
-; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|bit_count[3]                                ;
+; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[5]                                     ;
+; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|bit_count[1]                                ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
@@ -959,7 +940,8 @@ Encoding Type:  One-Hot
 ; Parameter Name ; Value ; Type                                                          ;
 +----------------+-------+---------------------------------------------------------------+
 ; IN_WIDTH       ; 16    ; Signed Integer                                                ;
-; EXTRA_BITS     ; 4     ; Signed Integer                                                ;
+; EXTRA_BITS     ; 5     ; Signed Integer                                                ;
+; OUT_WIDTH      ; 22    ; Signed Integer                                                ;
 +----------------+-------+---------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -1847,6 +1829,41 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0                    ;
++------------------------------------------------+-------------+---------------------+
+; Parameter Name                                 ; Value       ; Type                ;
++------------------------------------------------+-------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 32          ; Untyped             ;
+; LPM_WIDTHB                                     ; 31          ; Untyped             ;
+; LPM_WIDTHP                                     ; 63          ; Untyped             ;
+; LPM_WIDTHR                                     ; 63          ; Untyped             ;
+; LPM_WIDTHS                                     ; 1           ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped             ;
+; LPM_PIPELINE                                   ; 0           ; Untyped             ;
+; LATENCY                                        ; 0           ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO          ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; YES         ; Untyped             ;
+; USE_EAB                                        ; OFF         ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5           ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_4611   ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped             ;
++------------------------------------------------+-------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +-----------------------------------------------------------------------------------------------------------------------------------------+
 ; altshift_taps Parameter Settings by Entity Instance                                                                                     ;
 +----------------------------+------------------------------------------------------------------------------------------------------------+
@@ -1869,7 +1886,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 ; Name                                  ; Value                                                                                                                 ;
 +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-; Number of entity instances            ; 2                                                                                                                     ;
+; Number of entity instances            ; 3                                                                                                                     ;
 ; Entity Instance                       ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component ;
 ;     -- LPM_WIDTHA                     ; 24                                                                                                                    ;
 ;     -- LPM_WIDTHB                     ; 24                                                                                                                    ;
@@ -1892,6 +1909,17 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                                                                                                  ;
 ;     -- INPUT_A_FIXED_VALUE            ; Bx                                                                                                                    ;
 ;     -- INPUT_B_FIXED_VALUE            ; Bx                                                                                                                    ;
+; Entity Instance                       ; lpm_mult:Mult0                                                                                                        ;
+;     -- LPM_WIDTHA                     ; 32                                                                                                                    ;
+;     -- LPM_WIDTHB                     ; 31                                                                                                                    ;
+;     -- LPM_WIDTHP                     ; 63                                                                                                                    ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                                                                              ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                                                                                    ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                                                                                                                   ;
+;     -- USE_EAB                        ; OFF                                                                                                                   ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                                                                                                  ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                                                                                    ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                                                                                    ;
 +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 
 
@@ -1901,7 +1929,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Sun Dec 28 13:20:11 2008
+    Info: Processing started: Tue Dec 30 21:32:28 2008
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
 Info: Found 1 design units, including 1 entities, in source file mult_24Sx24S.v
     Info: Found entity 1: mult_24Sx24S
@@ -1946,7 +1974,6 @@ Info: Found 1 design units, including 1 entities, in source file mac.v
 Info: Found 1 design units, including 1 entities, in source file division.v
     Info: Found entity 1: division
 Info: Elaborating entity "Mercury" for the top level hierarchy
-Info: Elaborating entity "division" for hierarchy "division:division_DDS"
 Info: Elaborating entity "receiver" for hierarchy "receiver:receiver_inst"
 Info: Elaborating entity "cordic" for hierarchy "receiver:receiver_inst|cordic:cordic_inst"
 Info: Elaborating entity "varcic" for hierarchy "receiver:receiver_inst|varcic:varcic_inst_I1"
@@ -2023,13 +2050,31 @@ Warning: Clock multiplexers are found and protected
     Warning: Found clock multiplexer reference
 Info: Ignored 350 buffer(s)
     Info: Ignored 350 SOFT buffer(s)
+Info: Inferred 1 megafunctions from design logic
+    Info: Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0"
+Info: Elaborated megafunction instantiation "lpm_mult:Mult0"
+Info: Instantiated megafunction "lpm_mult:Mult0" with the following parameter:
+    Info: Parameter "LPM_WIDTHA" = "32"
+    Info: Parameter "LPM_WIDTHB" = "31"
+    Info: Parameter "LPM_WIDTHP" = "63"
+    Info: Parameter "LPM_WIDTHR" = "63"
+    Info: Parameter "LPM_WIDTHS" = "1"
+    Info: Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info: Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info: Parameter "INPUT_B_IS_CONSTANT" = "YES"
+    Info: Parameter "MAXIMIZE_SPEED" = "5"
+    Info: Parameter "DEDICATED_MULTIPLIER_CIRCUITRY" = "AUTO"
+Info: Found 1 design units, including 1 entities, in source file db/mult_4611.tdf
+    Info: Found entity 1: mult_4611
+Info: Ignored 168 buffer(s)
+    Info: Ignored 168 SOFT buffer(s)
 Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "CMODE" is stuck at VCC
     Warning (13410): Pin "SHDN" is stuck at GND
     Warning (13410): Pin "PGA" is stuck at GND
     Warning (13410): Pin "INIT_DONE" is stuck at GND
     Warning (13410): Pin "TEST3" is stuck at GND
-Info: 62 registers lost all their fanouts during netlist optimizations. The first 62 are displayed below.
+Info: 63 registers lost all their fanouts during netlist optimizations. The first 63 are displayed below.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe138" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136" lost all its fanouts during netlist optimizations.
@@ -2074,6 +2119,7 @@ Info: 62 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SEncode:I2S|encode_state~8" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133" lost all its fanouts during netlist optimizations.
+    Info: Register "counter[26]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[47]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[48]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[49]" lost all its fanouts during netlist optimizations.
@@ -2092,19 +2138,19 @@ Info: 62 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[53]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[54]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[55]" lost all its fanouts during netlist optimizations.
-Info: Implemented 8668 device resources after synthesis - the final resource count might be different
+Info: Implemented 8603 device resources after synthesis - the final resource count might be different
     Info: Implemented 28 input pins
     Info: Implemented 36 output pins
     Info: Implemented 1 bidirectional pins
-    Info: Implemented 8515 logic cells
+    Info: Implemented 8442 logic cells
     Info: Implemented 74 RAM segments
-    Info: Implemented 14 DSP elements
+    Info: Implemented 22 DSP elements
 Info: Generated suppressed messages file C:/HPSDR/trunk/Mercury V2/Mercury.map.smsg
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 8 warnings
     Info: Peak virtual memory: 199 megabytes
-    Info: Processing ended: Sun Dec 28 13:20:49 2008
-    Info: Elapsed time: 00:00:38
-    Info: Total CPU time (on all processors): 00:00:34
+    Info: Processing ended: Tue Dec 30 21:33:02 2008
+    Info: Elapsed time: 00:00:34
+    Info: Total CPU time (on all processors): 00:00:33
 
 
 +------------------------------------------+

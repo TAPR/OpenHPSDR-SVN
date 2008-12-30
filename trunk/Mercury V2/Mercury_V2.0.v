@@ -4,7 +4,7 @@
 *
 ************************************************************/
 
-// V2.1 30 December 2008 
+// V2.0 26 December 2008 
 
 // (C) Phil Harman VK6APH 2006,2007,2008
 
@@ -42,11 +42,18 @@
 	
 	23 Dec 2008 - Production release
 	23 Dec 2008 - Added code from Alex VE3NEA that provides 48/96/192KHz sampling
-	26 Dec 2008 - Working on pin drive issues
-	            - Changed CORDIC to wide_phase to give 1Hz steps
-	30 Dec 2008 - Changed pins to 3.0v LVTTL, set A6 and C16 to 16mA, no R, no PCI diode
-	            - added modifications by Kirk Weedman, KD7IRS.
-	            - released as V2.1
+	26 Dec 2008 - Working on pin drive issues, change A6 to 8mA ..... 
+	
+	It should be possible with the Pin Planner. I changed the drive from
+	8mA(default) to 8mA and after changing "Direction" from "Unknown" to "As
+	output driving an unspecified signal" (Right mouse click in the field
+	Direction and selecting Pin Properties) you can change the Slew Rate to 2.
+	
+	- set A6 to maximum current
+	- set A6 output termination to off
+	- set A6 to 8mA current 
+	- set  C16 to off
+	- set A6 to 25 ohms
 				
 	 
 */
@@ -71,72 +78,70 @@
 	
 module Mercury(
 
-input         OSC_10MHZ,  // 10MHz TCXO input 
-inout         ext_10MHZ,  // 10MHz reference to/from Atlas pin C16
-input         CLKA,       // 122.88MHz clock from LT2208
-input  [15:0] INA,        // samples from LT2208
-input         CC,         // Command & Control from Atlas C20
-output reg    ATTRLY,     // Antenna relay control
-output        A6,         // MCLK_12MHZ (12.288MHz) to Atlas bus A6
-input         C4,         // LROUT (Rx audio) from Atlas bus
-input         C8,         // CBLCK from Atlas bus
-input         C9,         // CLRCLK from Atlas bus
-input         C17,        // CLK_MCLK from Atlas bus
-output        MDOUT,      // I and Q out to Atlas bus on A10  
-input         BCLK,       // 12.288MHz from Atlas bus C6 for I2S encoder
-input         LRCLK,      // 192kHz from Atlas bus C7 for I2S encoder
-output        CDIN,       // Rx audio out to TLV320
-output        CBCLK,      // 3.072MHz BCLK from Atlas C8
-output        CLRCLK,     // 48KHz L/R clock from Atlas C9
-output        CLRCOUT,    // ditto 
-output        CMCLK,      // 12.288MHz master clock from Atlas C17
-output        CMODE,      // SPI interface to TLV320
-output reg    MOSI,       // SPI interface to TLV320
-output reg    SCLK,       // SPI interface to TLV320
-output reg    nCS,        // SPI interface to TLV320
-output        SPI_data,   // SPI data to Alex
-output        SPI_clock,  // SPI clock to Alex
-output        Tx_load_strobe,   // SPI Tx data load strobe to Alex
-output        Rx_load_strobe,   // SPI Rx data load strobe to Alex
-output        FPGA_PLL,   // PLL control volts to loop filter 
-output        LVDS_TXE,   // LVDS Tx enable
-output        LVDS_RXE_N, // LVDS Rx enable
-input         OVERFLOW,   // ADC overflow bit
-output reg    DITHER,     // ADC dither control bit
-output        SHDN,       // ADC shutdown bit
-output reg    PGA,        // ADC preamp gain
-output reg    RAND,       // ADC ramdonizer bit
-output        INIT_DONE,  // INIT_DONE LED 
-output        TEST0,      // Test point 
-output        TEST1,      // Test point
-output        TEST2,      // Test point
-output        TEST3,      // Test point
-output        DEBUG_LED0, // Debug LED
-output        DEBUG_LED1, // Debug LED
-output        DEBUG_LED2, // Debug LED
-output        DEBUG_LED3, // Debug LED
-output        DEBUG_LED4, // Debug LED
-output        DEBUG_LED5, // Debug LED
-output        DEBUG_LED6, // Debug LED
-output        DEBUG_LED7, // Debug LED
-input         DFS0, DFS1  // I/Q sampling rate selection
+input   OSC_10MHZ,			// 10MHz TCXO input 
+inout   ext_10MHZ, 			// 10MHz reference to/from Atlas pin C16
+input   CLKA,				// 122.88MHz clock from LT2208
+input [15:0]INA,			// samples from LT2208
+input  CC,					// Command & Control from Atlas C20
+output reg ATTRLY,			// Antenna relay control
+output A6, 					// MCLK_12MHZ (12.288MHz) to Atlas bus A6
+input  C4, 					// LROUT (Rx audio) from Atlas bus
+input  C8,					// CBLCK from Atlas bus
+input  C9, 					// CLRCLK from Atlas bus
+input  C17, 				// CLK_MCLK from Atlas bus
+output MDOUT,				// I and Q out to Atlas bus on A10  
+input  BCLK,				// 12.288MHz from Atlas bus C6 for I2S encoder
+input  LRCLK,				// 192kHz from Atlas bus C7 for I2S encoder
+output CDIN,				// Rx audio out to TLV320
+output CBCLK, 				// 3.072MHz BCLK from Atlas C8
+output CLRCLK, 				// 48KHz L/R clock from Atlas C9
+output CLRCOUT,				// ditto 
+output CMCLK, 				// 12.288MHz master clock from Atlas C17
+output CMODE,				// SPI interface to TLV320
+output reg MOSI,			// SPI interface to TLV320
+output reg SCLK,			// SPI interface to TLV320
+output reg nCS,				// SPI interface to TLV320
+output SPI_data,			// SPI data to Alex
+output SPI_clock,			// SPI clock to Alex
+output Tx_load_strobe,		// SPI Tx data load strobe to Alex
+output Rx_load_strobe,		// SPI Rx data load strobe to Alex
+output FPGA_PLL, 			// PLL control volts to loop filter 
+output LVDS_TXE,			// LVDS Tx enable
+output LVDS_RXE_N,			// LVDS Rx enable
+input  OVERFLOW,			// ADC overflow bit
+output reg DITHER,			// ADC dither control bit
+output SHDN,				// ADC shutdown bit
+output reg PGA, 			// ADC preamp gain
+output reg RAND, 			// ADC ramdonizer bit
+output INIT_DONE,			// INIT_DONE LED 
+output TEST0,				// Test point 
+output TEST1,				// Test point
+output TEST2,				// Test point
+output TEST3,				// Test point
+output DEBUG_LED0,			// Debug LED
+output DEBUG_LED1,			// Debug LED
+output DEBUG_LED2,			// Debug LED
+output DEBUG_LED3,			// Debug LED
+output DEBUG_LED4,			// Debug LED
+output DEBUG_LED5,			// Debug LED
+output DEBUG_LED6,			// Debug LED
+output DEBUG_LED7,	        // Debug LED
+
+input  DFS0, DFS1           // I/Q sampling rate selection
 );
 
 
-reg  [15:0] temp_ADC;
-reg         data_ready;   // set at end of decimation
-wire        clock;
+reg data_ready;				// set at end of decimation
 
 // Assign FPGA pass through connections
-assign CDIN       = C4;   // Rx audio data in I2S format to TLV320
-assign CLRCLK     = C9;   // 48kHz CLRLCK from Atlas C9
-assign CLRCOUT    = C9;   // ditto 
-assign CBCLK      = C8;   // 3.072MHz CBCLK from Atlas C8
-assign CMCLK      = C17;  // 12.288MHz CLK_MCLK from Atlas C17
+assign CDIN = C4;			// Rx audio data in I2S format to TLV320
+assign CLRCLK = C9;			// 48kHz CLRLCK from Atlas C9
+assign CLRCOUT = C9;		// ditto 
+assign CBCLK = C8;			// 3.072MHz CBCLK from Atlas C8
+assign CMCLK = C17;			// 12.288MHz CLK_MCLK from Atlas C17
 // enable LT2208 
-assign SHDN       = 1'b0;	// 0 = normal operation
-assign INIT_DONE  = 1'b0;	// turn INIT_DONE LED on
-assign clock      = CLKA;	// use clock out of LT2208 as master clock
+assign SHDN =  1'b0;		// 0 = normal operation
+assign INIT_DONE = 1'b0;	// turn INIT_DONE LED on 
 
 
 // A Digital Output Randomizer is fitted to the LT2208. This complements bits 15 to 1 if 
@@ -176,25 +181,28 @@ Data to send to TLV320 is
 
 */
 
-reg   [2:0] load;
-reg   [3:0] TLV;
-reg  [15:0] TLV_data;
-reg   [3:0] bit_cnt;
+reg index;
+reg [15:0]tdata;
+reg [2:0]load;
+reg [3:0]TLV;
+reg [15:0] TLV_data;
+reg [3:0] bit_cnt;
 
 // Set up TLV320 data to send 
-always @*	
+
+always @ (posedge index)		
 begin
-  case (load)
-  //3'd0: TLV_data = 16'h8889; // simulation test case
-  3'd0: TLV_data = 16'h1E00;  // data to load into TLV320
-  3'd1: TLV_data = 16'h1201;
-  3'd2: TLV_data = 16'h0814;		  // D/A on 
-  3'd3: TLV_data = 16'h0C00;
-  3'd4: TLV_data = 16'h0E02;
-  3'd5: TLV_data = 16'h1000;
-  3'd6: TLV_data = 16'h0A00;
-  default: TLV_data = 0;
-  endcase
+load <= load + 3'b1;			// select next data word to send
+case (load)
+3'd0: tdata <= 16'h1E00;		// data to load into TLV320
+3'd1: tdata <= 16'h1201;
+3'd2: tdata <= 16'h0814;		// D/A on 
+3'd3: tdata <= 16'h0C00;
+3'd4: tdata <= 16'h0E02;
+3'd5: tdata <= 16'h1000;
+3'd6: tdata <= 16'h0A00;
+default: load <= 0;
+endcase
 end
 
 // State machine to send data to TLV320 via SPI interface
@@ -204,57 +212,47 @@ assign CMODE = 1'b1;		// Set to 1 for SPI mode
 //always @ (posedge C17)		// use 12.288MHz clock for SPI
 always @ (posedge BCLK)		// use 12.288MHz BCLK clock for SPI
 begin
-  case (TLV)
-  4'd0:
-  begin
-    nCS <= 1'b1;        // set TLV320 CS high
-    bit_cnt <= 4'd15;   // set starting bit count to 15
-    TLV <= TLV + 4'b1;
-  end
-  4'd1:
-  begin
-    nCS <= 1'b0;                // start data transfer with nCS low
-    MOSI <= TLV_data[bit_cnt];  // set data up
-    TLV <= TLV + 4'b1;
-  end
-  4'd2:
-  begin
-    SCLK <= 1'b1;               // clock data into TLV320
-    TLV <= TLV + 4'b1;
-  end
-  4'd3:
-  begin
-    SCLK <= 1'b0;               // reset clock
-    TLV <= TLV + 4'b1;
-  end
-  4'd4:
-  begin
-    if (bit_cnt == 0) // word transfer is complete, check for any more
-      TLV <= 4'd5;
-    else
-    begin
-      bit_cnt <= bit_cnt - 1'b1;
-      TLV <= 4'b1;    // go round again
-    end
-  end
-
-  4'd5:
-  begin
-    if (load == 6)
-    begin                 // stop when all data sent
-      TLV <= 4'd5;        // hang out here forever
-      nCS <= 1'b1;        // set CS high
-    end
-    else
-    begin                 // stop when all data sent
-      TLV <= 0;           // else get next data
-      load <= load + 3'b1;  // select next data word to send
-    end
-  end
-  
-  default: TLV <= 0;
-  endcase
-end
+case (TLV)
+4'd0: begin
+         nCS <= 1'b1;                   // set TLV320 CS high
+         bit_cnt <= 4'd15;             	// set starting bit count to 15
+         index <= ~index;               // load next data to send
+         TLV <= TLV + 4'b1;
+      end
+ 4'd1: begin
+         nCS <= 1'b0;                   // start data transfer with nCS low
+         TLV_data <= tdata;
+         MOSI <= TLV_data[bit_cnt];    	// set data up
+         TLV <= TLV + 4'b1;
+       end
+ 4'd2: begin
+         SCLK <= 1'b1;                  // clock data into TLV320
+         TLV <= TLV + 4'b1;
+       end
+ 4'd3: begin
+         SCLK <= 1'b0;                  // reset clock
+         TLV <= TLV + 4'b1;
+       end
+ 4'd4: begin
+          if(bit_cnt == 0) begin   		// word transfer is complete, check for any more
+            index <= ~index;
+            TLV <= 4'd5;
+          end
+          else begin
+            bit_cnt <= bit_cnt - 1'b1;
+            TLV <= 4'b1;                   // go round again
+          end
+       end                                 // end transfer
+ 4'd5: begin
+         if (load == 7)begin               // stop when all data sent
+            TLV <= 4'd5;                   // hang out here forever
+            nCS <= 1'b1;                   // set CS high
+         end
+         else TLV <= 0;                    // else get next data
+       end
+ default: TLV <= 0;
+ endcase
+ end
 
 //////////////////////////////////////////////////////////////
 //
@@ -291,8 +289,10 @@ end
 
 // Select 122.88MHz source. If source_122MHZ set then use Penelope's 122.88MHz clock and send to LVDS
 // Otherwise get external clock from LVDS
-wire source_122MHZ;		// Set when internal 122.88MHz source is used and sent to LVDS
 
+wire clock;
+
+assign clock = CLKA;	// use clock out of LT2208 as master clock
 assign LVDS_RXE_N = source_122MHZ ? 1'b1 : 1'b0; // enable LVDS receiver if clock is external
 assign LVDS_TXE = source_122MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if  Mercury is the source 
 
@@ -301,8 +301,6 @@ assign A6 = MCLK_12MHZ;
 
 // select 10MHz reference source. If ref_ext is set use Mercury's 10MHz ref and send to Atlas C16
 wire reference;
-wire ref_ext;			// Set when internal 10MHz reference sent to Atlas C16
-
 assign reference = ref_ext ? OSC_10MHZ : ext_10MHZ ; 
 assign ext_10MHZ = ref_ext ? OSC_10MHZ : 1'bZ ; 		// C16 is bidirectional so set high Z if input. 
 
@@ -319,32 +317,30 @@ assign ext_10MHZ = ref_ext ? OSC_10MHZ : 1'bZ ; 		// C16 is bidirectional so set
 
 */
 
-reg  [31:0] frequency_HZ;   // frequency control bits for CORDIC
-reg  [31:0] frequency;      // frequency - CBCLK domain
-reg  [31:0] sync_frequency, sf0; // sync frequency change to 122MHz clock
-wire [63:0] result;
-
-localparam M2 = 32'd1172812403;  // B57 = 2^57.  B57/122880000 = M2
-
-assign result = frequency_HZ * M2; // B0 * B57 number = B57 number
-
-always @ (posedge CBCLK)   // save frequency
+wire [31:0]freq;
+wire ready;
+always @ (posedge ready)		// strobe frequecy when ready is set
 begin
-  frequency <= result[56:25]; // B57 -> B32 number since R is always >= 0
+	frequency <= frequency_HZ;	// frequecy_HZ is current frequency in Hz e.g. 14,195,000Hz
+end 
+
+division division_DDS(.quotient(freq),.ready(ready),.dividend(frequency),.divider(32'd122880000),.clk(clock));
+
+
+// sync frequecy change to 122.88MHz clock
+reg [31:0]sync_frequency;
+always @ (posedge clock)
+begin
+	sync_frequency <= freq;
 end
 
-always @ (posedge clock)   // save frequency when ready is set
-begin
-  {sync_frequency, sf0} <= {sf0, frequency};  // from CBCLK domain to clock domain
-end 
+reg  [15:0]temp_ADC;
+reg [31:0]frequency;
 
 
 //------------------------------------------------------------------------------
 //                 All DSP code is in the Receiver module
 //------------------------------------------------------------------------------
-wire [23:0] rx_out_data_I;
-wire [23:0] rx_out_data_Q;
-
 receiver receiver_inst(
   //control
   .clock(clock),
@@ -357,6 +353,10 @@ receiver receiver_inst(
   .out_data_I(rx_out_data_I),
   .out_data_Q(rx_out_data_Q)
   );
+
+
+wire [23:0] rx_out_data_I;
+wire [23:0] rx_out_data_Q;
 
 
 // I2S encoder to send I and Q data to Atlas on C10
@@ -395,8 +395,8 @@ I2SEncode  I2S(.LRCLK(LRCLK), .BCLK(BCLK), .left_sample(rx_out_data_I), .right_s
 	
 */
 
-reg  [5:0] bits;     // how many bits clocked 
-reg  [1:0] CC_state;
+reg [5:0] bits;     // how many bits clocked 
+reg [1:0]CC_state;
 reg [58:0] CCdata;	// 54 bits of C&C data
 
 always @(posedge CBCLK)  // use CBCLK  from Atlas C8 
@@ -427,38 +427,42 @@ end
 
 // decode C & C data into variables and sync to 48kHz LR clock
 
-reg         PTT_out;
-reg   [3:0] clock_select;	// 10MHz and 122.88MHz clock selection
-reg   [1:0] ATTEN;        // attenuator setting on Alex
-reg   [1:0] TX_relay;     // Tx relay setting on Alex
-reg         Rout;         // Rx1 out on Alex
-reg   [1:0] RX_relay;     // Rx relay setting on Alex
+reg PTT_out;
+reg [3:0]Address;		// Address in C&C header, set to 0 for now
+reg [31:0]frequency_HZ;	// frequency control bits for CORDIC
+reg [3:0]clock_select;	// 10MHz and 122.88MHz clock selection
+wire ref_ext;			// Set when internal 10MHz reference sent to Atlas C16
+wire source_122MHZ;		// Set when internal 122.88MHz source is used and sent to LVDS
+reg [1:0] ATTEN;		// attenuator setting on Alex
+reg [1:0]TX_relay;		// Tx relay setting on Alex
+reg Rout;				// Rx1 out on Alex
+reg [1:0]RX_relay;		// Rx relay setting on Alex
+//reg ATTRLY;			// Attenuator relay control
 
-always @(posedge CBCLK)
-begin
-  if ((CC_state == 1) && !CLRCLK) // negedge CLRCLK
-	begin
-    PTT_out     <= (CCdata[58]); 	// PTT from PC via USB 
-    if (CCdata[57:54] == 0)			// check that the C&C data address = 0
-    begin
-      frequency_HZ <= CCdata[53:22];
-      clock_select <= CCdata[21:18];     
-      //OC        <= CCdata[17:11];		// Penelope Open Collectors, not used by Mercury
-      PGA       <= 1'b0; 			    // 1 = gain of 1.5(3dB), 0 = gain of 1
-      ATTRLY    <=  ~CCdata[9];   // 1 = Attenuator on, 0 = Preamp on 
-      DITHER    <= CCdata[8];     // 1 = dither on
-      RAND      <= CCdata[7];     // 1 = randomizer on 
-      ATTEN     <= CCdata[6:5];   // Attenuator setting on Alex
-      TX_relay  <= CCdata[4:3];   // Tx relay selection on Alex
-      Rout      <= CCdata[2];     // Rx_1_out on Alex
-      RX_relay  <= CCdata[1:0];   // Rx relay selection on Alex
-    end
-  end
+always @ (negedge CLRCLK)  
+begin 
+	PTT_out <= (CCdata[58]); 	// PTT from PC via USB 
+	Address <= CCdata[57:54];
+	if(Address == 0)begin
+		frequency_HZ <= CCdata[53:22];
+		clock_select <= CCdata[21:18];     
+		//OC <= CCdata[17:11];		// Penelope Open Collectors, not used by Mercury
+		PGA    <= 1'b0; 			// 1 = gain of 1.5(3dB), 0 = gain of 1
+		ATTRLY <=  ~CCdata[9];		// 1 = Attenuator on, 0 = Preamp on 
+		DITHER <= CCdata[8];		// 1 = dither on
+		RAND   <=  CCdata[7];		// 1 = randomizer on 
+		ATTEN  <= CCdata[6:5];		// Attenuator setting on Alex
+		TX_relay <= CCdata[4:3];	// Tx relay selection on Alex
+		Rout <= CCdata[2];			// Rx_1_out on Alex
+		RX_relay <= CCdata[1:0];	// Rx relay selection on Alex
+		end	
 end
 
 assign ref_ext = clock_select[1]; 			// if set use internally and send to C16 else get from C16
 assign source_122MHZ = clock_select[2] ; 	// if set use internally and send to LVDS else
-											// get from LVDS
+											// get from LVDS 
+
+
 
 													
 //////////////////////////////////////////////////////////////
@@ -636,7 +640,7 @@ assign TEST3 = 1'b0;
 //------------------------------------------------------------------------------
 reg [26:0]counter;
 always @(posedge CLKA) counter = counter + 1'b1;
-assign {DEBUG_LED2,DEBUG_LED1} = counter[25:24];  // slower flash for this version!
+assign {DEBUG_LED2,DEBUG_LED1} = counter[26:25];
 
 
 endmodule 

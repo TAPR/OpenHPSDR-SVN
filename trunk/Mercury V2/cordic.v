@@ -31,18 +31,18 @@ module cordic(
   );
 
 
-parameter IN_WIDTH   = 16;
-parameter EXTRA_BITS = 4; //spur reduction 6 dB per bit
-
+parameter IN_WIDTH   = 16; //ADC bitwidth
+parameter EXTRA_BITS = 5;  //spur reduction 6 dB per bit
+parameter OUT_WIDTH = WR;  //22-bit output width
 
 //internal params
-localparam STG = IN_WIDTH + EXTRA_BITS - 1; //19 number of stages
-localparam WR =  IN_WIDTH + EXTRA_BITS + 2; //22 data regs
-localparam WZ =  IN_WIDTH + EXTRA_BITS;     //20 angle regs
-localparam WO =  WR;                        //22 output width
+localparam WR =  IN_WIDTH + EXTRA_BITS + 1; //22-bit data regs
+localparam WZ =  IN_WIDTH + EXTRA_BITS - 1; //20-bit angle regs
+localparam STG = IN_WIDTH + EXTRA_BITS - 2; //19 stages
+localparam WO = OUT_WIDTH;
 
-localparam WF = 32;   //NCO freq,  -Pi..Pi per clock cycle
-localparam WP = WZ+1; //NCO phase, 0..2*Pi
+localparam WF = 32; //NCO freq,  -Pi..Pi per clock cycle
+localparam WP = WF; //NCO phase, 0..2*Pi
 
 
 
@@ -118,8 +118,8 @@ reg signed [WZ-1:0] Z [0:STG-1];
 //------------------------------------------------------------------------------
 //                               stage 0
 //------------------------------------------------------------------------------
-//input sign-extended by 1 bit, zero-padded at the right
-wire signed [WR-1:0] in_data_ext = {in_data[IN_WIDTH-1], in_data, {(WR-IN_WIDTH-1){1'b0}}};
+//input word sign-extended by 1 bit, padded at the right with EXTRA_BITS of zeros
+wire signed [WR-1:0] in_data_ext = {in_data[IN_WIDTH-1], in_data, {EXTRA_BITS{1'b0}}};
 wire [1:0] quadrant = phase[WP-1:WP-2];
 
 
@@ -134,10 +134,10 @@ always @(posedge clock)
   endcase
 
   //subtract quadrant and Pi/4 from the angle
-  Z[0] <= {~phase[WZ-2], ~phase[WZ-2], phase[WZ-3:0]};
+  Z[0] <= {~phase[WP-3], ~phase[WP-3], phase[WP-4:WP-WZ-1]};
 
   //advance NCO
-  phase <= phase + frequency[WF-1:WF-WP];
+  phase <= phase + frequency;
   end
 
 
@@ -190,16 +190,29 @@ endgenerate
 //------------------------------------------------------------------------------
 //                                 output
 //------------------------------------------------------------------------------
-/*
-always @(posedge clock)
-  begin
-  out_data_I <= X[STG-1][WR-1 : WR-WO] + X[STG-1][WR-1-WO];
-  out_data_Q <= Y[STG-1][WR-1 : WR-WO] + Y[STG-1][WR-1-WO];
-  end
-*/
+generate
+  if (OUT_WIDTH == WR)
+    begin
+    assign out_data_I = X[STG-1];
+    assign out_data_Q = Y[STG-1];
+    end
+    
+  else
+    begin
+    reg signed [WO-1:0] rounded_I;
+    reg signed [WO-1:0] rounded_Q;
 
-assign out_data_I = X[STG-1];
-assign out_data_Q = Y[STG-1];
+    always @(posedge clock)
+      begin
+      rounded_I <= X[STG-1][WR-1 : WR-WO] + X[STG-1][WR-1-WO];
+      rounded_Q <= Y[STG-1][WR-1 : WR-WO] + Y[STG-1][WR-1-WO];
+      end
+      
+    assign out_data_I = rounded_I;
+    assign out_data_Q = rounded_Q;
+    end
+endgenerate
+
 
 
 endmodule

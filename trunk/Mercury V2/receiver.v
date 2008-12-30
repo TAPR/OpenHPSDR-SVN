@@ -42,13 +42,14 @@ module receiver(
 //------------------------------------------------------------------------------
 //                               cordic
 //------------------------------------------------------------------------------
-cordic cordic_inst(
-  .clock(clock),
-  .in_data(in_data),             //16 bit 
-  .frequency(frequency),         //32 bit
-  .out_data_I(cordic_outdata_I), //22 bit
-  .out_data_Q(cordic_outdata_Q)
-  );
+cordic 
+  cordic_inst(
+    .clock(clock),
+    .in_data(in_data),             //16 bit 
+    .frequency(frequency),         //32 bit
+    .out_data_I(cordic_outdata_I), //22 bit
+    .out_data_Q(cordic_outdata_Q)
+    );
 
 
 wire signed [21:0] cordic_outdata_I;
