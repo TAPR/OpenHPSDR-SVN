@@ -22,24 +22,21 @@ Boston, MA  02110-1301, USA.
 
 
 
-module cic_integrator(
-  input clock,
-  input strobe,
-
-  input signed [WIDTH-1:0] in_data,
-  output reg signed [WIDTH-1:0] out_data
-  );
-
+module cic_integrator( clock, strobe, in_data,  out_data );
 
 parameter WIDTH = 64;
 
+input clock;
+input strobe;
+input signed [WIDTH-1:0] in_data;
+output reg signed [WIDTH-1:0] out_data;
 
-initial out_data = 0;
+
+//initial out_data = 0; // this is NOT a valid RTL statement! Kirk Weedman KD7IRS
 
 
 always @(posedge clock)
   if (strobe) out_data <= out_data + in_data;
-
 
 
 endmodule

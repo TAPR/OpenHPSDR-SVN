@@ -23,20 +23,18 @@ Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
 Boston, MA  02110-1301, USA.
 */
 
-module cbuffer_top(
-
-input clk,
-input reset,
-input signed [DATA_WIDTH-1:0] data_in,
-input wren,
-input rden,
-output reg signed [DATA_WIDTH-1:0] data_out
-
-);
+module cbuffer_top( clk, reset, data_in, wren, rden, data_out );
 
 parameter DATA_WIDTH = 48;
 parameter ADDR_WIDTH = 8;
 parameter RAM_DEPTH = (1 << ADDR_WIDTH);
+
+input clk;
+input reset;
+input signed [DATA_WIDTH-1:0] data_in;
+input wren;
+input rden;
+output reg signed [DATA_WIDTH-1:0] data_out;
  
 reg [ADDR_WIDTH-1:0] wr_pointer;
 reg [ADDR_WIDTH-1:0] rd_pointer;

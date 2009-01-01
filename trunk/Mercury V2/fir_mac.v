@@ -32,10 +32,7 @@ module fir_mac(
   input signed [23:0] in_data_2,
   output reg signed [55:0] out_data
   );
-
-
-
-
+wire signed [47:0] product;
 
 always @(posedge clock)
   if (clear) out_data <= 0;
@@ -50,10 +47,5 @@ mult_24Sx24S mult_24Sx24S_inst(
   .datab (in_data_2),
   .result (product)
   );
-
-
-wire signed [47:0] product;
-
-
 
 endmodule

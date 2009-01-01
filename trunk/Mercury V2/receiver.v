@@ -35,35 +35,29 @@ module receiver(
   );
 
 
-
-
-
-
 //------------------------------------------------------------------------------
 //                               cordic
 //------------------------------------------------------------------------------
-cordic 
-  cordic_inst(
-    .clock(clock),
-    .in_data(in_data),             //16 bit 
-    .frequency(frequency),         //32 bit
-    .out_data_I(cordic_outdata_I), //22 bit
-    .out_data_Q(cordic_outdata_Q)
-    );
-
-
-wire signed [21:0] cordic_outdata_I;
-wire signed [21:0] cordic_outdata_Q;
-
-
-
-
+cordic cordic_inst(
+  .clock(clock),
+  .in_data(in_data),             //16 bit 
+  .frequency(frequency),         //32 bit
+  .out_data_I(cordic_outdata_I), //22 bit
+  .out_data_Q(cordic_outdata_Q)
+  );
 
 
 //------------------------------------------------------------------------------
 //                CIC decimator #1, decimation factor 80/160/320
 //------------------------------------------------------------------------------
 //I channel
+
+wire cic_outstrobe_1;
+wire signed [22:0] cic_outdata_I1;
+wire signed [22:0] cic_outdata_Q1;
+wire signed [21:0] cordic_outdata_I;
+wire signed [21:0] cordic_outdata_Q;
+
 varcic #(.STAGES(5), .DECIMATION(80), .IN_WIDTH(22), .ACC_WIDTH(64), .OUT_WIDTH(23))
   varcic_inst_I1(
     .clock(clock),
@@ -86,20 +80,14 @@ varcic #(.STAGES(5), .DECIMATION(80), .IN_WIDTH(22), .ACC_WIDTH(64), .OUT_WIDTH(
     .out_data(cic_outdata_Q1)
     );
 
-
-wire cic_outstrobe_1;
-wire signed [22:0] cic_outdata_I1;
-wire signed [22:0] cic_outdata_Q1;
-
-
-
-
-
-
 //------------------------------------------------------------------------------
 //                  CIC decimator #2, decimation factor 4
 //------------------------------------------------------------------------------
 //I channel
+wire cic_outstrobe_2;
+wire signed [23:0] cic_outdata_I2;
+wire signed [23:0] cic_outdata_Q2;
+
 cic #(.STAGES(11), .DECIMATION(4), .IN_WIDTH(23), .ACC_WIDTH(45), .OUT_WIDTH(24))
   cic_inst_I2(
     .clock(clock),
@@ -120,31 +108,16 @@ cic #(.STAGES(11), .DECIMATION(4), .IN_WIDTH(23), .ACC_WIDTH(45), .OUT_WIDTH(24)
     .out_data(cic_outdata_Q2)
     );
 
-
-wire cic_outstrobe_2;
-wire signed [23:0] cic_outdata_I2;
-wire signed [23:0] cic_outdata_Q2;
-
-
-
-
-
-
 //------------------------------------------------------------------------------
 //                     FIR coefficients and sequencing
 //------------------------------------------------------------------------------
+wire signed [23:0] fir_coeff;
+
 fir_coeffs fir_coeffs_inst(
   .clock(clock),
   .start(cic_outstrobe_2),
   .coeff(fir_coeff)
   );
-
-
-wire signed [23:0] fir_coeff;
-
-
-
-
 
 
 //------------------------------------------------------------------------------
