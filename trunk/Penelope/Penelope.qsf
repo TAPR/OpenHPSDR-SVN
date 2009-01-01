@@ -28,17 +28,13 @@ set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name TOP_LEVEL_ENTITY Penelope
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 6.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "14:58:14  FEBRUARY 17, 2007"
-set_global_assignment -name LAST_QUARTUS_VERSION 6.1
-set_global_assignment -name USER_LIBRARIES "C:/HPDSDR/trunk/VK6APH/I2C new/db/;C:/FPGA/Mercury/megafunctions/;C:/FPGA/Mercury/db/"
-set_instance_assignment -name PARTITION_HIERARCHY no_file_for_top_partition -to | -section_id Top
+set_global_assignment -name LAST_QUARTUS_VERSION 8.1
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name FMAX_REQUIREMENT "125 MHz"
+set_global_assignment -name FMAX_REQUIREMENT "123 MHz"
 set_global_assignment -name FMAX_REQUIREMENT "10 MHz" -section_id "10MHz clock"
 set_instance_assignment -name CLOCK_SETTINGS "10MHz clock" -to _10MHZ
-set_global_assignment -name FMAX_REQUIREMENT "125 MHz" -section_id "125MHz clock"
-set_global_assignment -name BASED_ON_CLOCK_SETTINGS "125MHz clock" -section_id MCLK
-set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 10 -section_id MCLK
-set_instance_assignment -name CLOCK_SETTINGS MCLK -to CMCLK
+set_global_assignment -name FMAX_REQUIREMENT "123 MHz" -section_id "125MHz clock"
 set_instance_assignment -name CLOCK_SETTINGS BCLK -to CBCLK
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
 set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
@@ -92,9 +88,6 @@ set_location_assignment PIN_82 -to ext_10MHZ
 set_location_assignment PIN_152 -to CLRCOUT
 set_location_assignment PIN_86 -to PTT_in
 set_global_assignment -name FMAX_REQUIREMENT "3.125 MHz" -section_id BCLK
-set_global_assignment -name BASED_ON_CLOCK_SETTINGS BCLK -section_id CLRCLK
-set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 64 -section_id CLRCLK
-set_instance_assignment -name CLOCK_SETTINGS CLRCLK -to C9
 set_location_assignment PIN_116 -to C4
 set_location_assignment PIN_94 -to C12
 set_location_assignment PIN_208 -to LED2
@@ -104,7 +97,6 @@ set_location_assignment PIN_203 -to LED5
 set_location_assignment PIN_107 -to LED6
 set_location_assignment PIN_108 -to LED7
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
-set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
 set_location_assignment PIN_70 -to CC
 set_location_assignment PIN_162 -to LROUT
 set_location_assignment PIN_96 -to C11
@@ -113,12 +105,43 @@ set_global_assignment -name MESSAGE_SUPPRESSION_RULE_FILE Penelope.srf
 set_instance_assignment -name CLOCK_SETTINGS "125MHz clock" -to _122MHZ
 set_location_assignment PIN_132 -to _122MHZ
 set_location_assignment PIN_28 -to _122MHZLVDS
+set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
+set_global_assignment -name PARTITION_COLOR 14622752 -section_id Top
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
+set_global_assignment -name NUMBER_OF_SOURCES_PER_DESTINATION_TO_REPORT 50
+set_global_assignment -name NUMBER_OF_PATHS_TO_REPORT 1000
+set_global_assignment -name NUMBER_OF_DESTINATION_TO_REPORT 50
+set_instance_assignment -name CLOCK_SETTINGS BCLK -to C8
+set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE BALANCED
+set_global_assignment -name SAFE_STATE_MACHINE OFF
+set_global_assignment -name REMOVE_REDUNDANT_LOGIC_CELLS ON
+set_global_assignment -name ADV_NETLIST_OPT_SYNTH_GATE_RETIME ON
+set_global_assignment -name ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP OFF
+set_instance_assignment -name MULTICYCLE 4 -from frequency_HZ -to sync_frequency
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_instance_assignment -name GLOBAL_SIGNAL "GLOBAL CLOCK" -from _122MHZ -to *
+set_instance_assignment -name GLOBAL_SIGNAL "GLOBAL CLOCK" -from C8 -to *
+set_instance_assignment -name GLOBAL_SIGNAL "GLOBAL CLOCK" -from reference -to *
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_global_assignment -name OPTIMIZE_HOLD_TIMING OFF
+set_global_assignment -name FITTER_EFFORT "AUTO FIT"
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT EXTRA
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to A5
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to A5
+set_global_assignment -name MISC_FILE "C:/Documents and Settings/Kirk Weedman/Desktop/HPSDR Verilog/Penelope/Penelope.dpf"
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR OFF -to A5
+set_instance_assignment -name CYCLONEII_TERMINATION OFF -to A5
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC_FOR_AREA OFF
+set_global_assignment -name PHYSICAL_SYNTHESIS_MAP_LOGIC_TO_MEMORY_FOR_AREA OFF
+set_global_assignment -name VERILOG_FILE ALC.v
 set_global_assignment -name VERILOG_FILE oddClockDiv.v
 set_global_assignment -name VERILOG_FILE cordic.v
-set_global_assignment -name VERILOG_FILE ALC.v
 set_global_assignment -name VERILOG_FILE ADC.v
-set_global_assignment -name VERILOG_FILE division.v
 set_global_assignment -name VERILOG_FILE phase_accumulator.v
 set_global_assignment -name VERILOG_FILE cicint.v
 set_global_assignment -name VERILOG_FILE Penelope.v
-set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF

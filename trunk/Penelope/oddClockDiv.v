@@ -1,5 +1,6 @@
 //
 // Copyright 2007 Bill Tracey, bill@ewjt.com, KD5TFD 
+// Modified by Kirk Weedman KD7IRS - Dec 21, 2008
 //	
 //  HPSDR - High Performance Software Defined Radio
 //
@@ -25,53 +26,28 @@
 // 
 //
 
-// module oddClockDivider(clk_i, clk_o, q1, q2); 
 module oddClockDivider(clk_i, clk_o); 
-input clk_i; 
+input  clk_i; 
 output clk_o; 
-// output q1;
-// output q2;
 
 wire clk_i; 
-wire clk_o; 
-// wire q1; 
-// wire q2; 
+reg  clk_o; 
 
 
-parameter DIVIDE_RATE = 125; 
-parameter COUNTER_WIDTH=7; 
+parameter DIVIDE_RATE   = 125; 
+parameter COUNTER_WIDTH = 7; 
 
 reg [(COUNTER_WIDTH-1):0] count; 
 
-always @ (posedge clk_i) begin
+always @ (posedge clk_i)
+begin
 
-	case ( count )
-		DIVIDE_RATE-1: count <= 0; 
-		default: count <= count + 1; 
-	endcase 				
+  if ( count == (DIVIDE_RATE-1))
+    count <= 0; 
+	else
+    count <= count + 1'b1; 
+	
+	clk_o <= (count < 63) ? 1'b0 : 1'b1;
 end 
-
-
-wire en_tff1; 
-wire en_tff2; 
-reg div1;
-reg div2; 
-
-assign en_tff1 = ( count == 0 ? 1 : 0 ) ; 
-assign en_tff2 = ( count ==  (((DIVIDE_RATE-1)/2)+1) ? 1 : 0 ); 
-
-
-// 
-always @ (posedge clk_i) begin
-	if ( en_tff1 == 1 ) div1 <= ~div1; 
-end 
-
-always @ (negedge clk_i) begin 
-	if ( en_tff2 == 1 ) div2 <= ~div2; 
-end 
-
-assign clk_o = div1 ^ div2;
-// assign q1 = div1; 
-// assign q2 = div2; 
 
 endmodule 
