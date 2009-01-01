@@ -47,6 +47,10 @@
 	30 Dec 2008 - Changed pins to 3.0v LVTTL, set A6 and C16 to 16mA, no R, no PCI diode
 	            - added modifications by Kirk Weedman, KD7IRS.
 	            - released as V2.1
+	 1 Jan 2008 - Used Kirk's oddClockDiv.
+			    - Tidy comments
+			    - Move the instantiation of certain variables up higher in the lines of
+			      code so that compilers like ModelSim won't produce errors
 				
 	 
 */
@@ -104,7 +108,7 @@ output        LVDS_RXE_N, // LVDS Rx enable
 input         OVERFLOW,   // ADC overflow bit
 output reg    DITHER,     // ADC dither control bit
 output        SHDN,       // ADC shutdown bit
-output reg    PGA,        // ADC preamp gain
+output        PGA,        // ADC preamp gain
 output reg    RAND,       // ADC ramdonizer bit
 output        INIT_DONE,  // INIT_DONE LED 
 output        TEST0,      // Test point 
@@ -137,6 +141,7 @@ assign CMCLK      = C17;  // 12.288MHz CLK_MCLK from Atlas C17
 assign SHDN       = 1'b0;	// 0 = normal operation
 assign INIT_DONE  = 1'b0;	// turn INIT_DONE LED on
 assign clock      = CLKA;	// use clock out of LT2208 as master clock
+assign PGA        = 1'b0; 	// 1 = gain of 1.5(3dB), 0 = gain of 1
 
 
 // A Digital Output Randomizer is fitted to the LT2208. This complements bits 15 to 1 if 
@@ -201,14 +206,13 @@ end
 
 assign CMODE = 1'b1;		// Set to 1 for SPI mode
 
-//always @ (posedge C17)		// use 12.288MHz clock for SPI
 always @ (posedge BCLK)		// use 12.288MHz BCLK clock for SPI
 begin
   case (TLV)
   4'd0:
   begin
-    nCS <= 1'b1;        // set TLV320 CS high
-    bit_cnt <= 4'd15;   // set starting bit count to 15
+    nCS <= 1'b1;        	// set TLV320 CS high
+    bit_cnt <= 4'd15;   	// set starting bit count to 15
     TLV <= TLV + 4'b1;
   end
   4'd1:
@@ -246,8 +250,8 @@ begin
       nCS <= 1'b1;        // set CS high
     end
     else
-    begin                 // stop when all data sent
-      TLV <= 0;           // else get next data
+    begin                 // else get next data	
+      TLV <= 0;           
       load <= load + 3'b1;  // select next data word to send
     end
   end
@@ -314,8 +318,6 @@ assign ext_10MHZ = ref_ext ? OSC_10MHZ : 1'bZ ; 		// C16 is bidirectional so set
 
 /*	
 	Calculates  (frequency * 2^32) /122.88e6
-	Each calculation takes ~ 0.6uS @ 122.88MHz
-	This method is quite fast enough and uses much lower LEs than a Megafunction
 
 */
 
@@ -333,7 +335,7 @@ begin
   frequency <= result[56:25]; // B57 -> B32 number since R is always >= 0
 end
 
-always @ (posedge clock)   // save frequency when ready is set
+always @ (posedge clock)   
 begin
   {sync_frequency, sf0} <= {sf0, frequency};  // from CBCLK domain to clock domain
 end 
@@ -444,7 +446,6 @@ begin
       frequency_HZ <= CCdata[53:22];
       clock_select <= CCdata[21:18];     
       //OC        <= CCdata[17:11];		// Penelope Open Collectors, not used by Mercury
-      PGA       <= 1'b0; 			    // 1 = gain of 1.5(3dB), 0 = gain of 1
       ATTRLY    <=  ~CCdata[9];   // 1 = Attenuator on, 0 = Preamp on 
       DITHER    <= CCdata[8];     // 1 = dither on
       RAND      <= CCdata[7];     // 1 = randomizer on 
@@ -636,7 +637,7 @@ assign TEST3 = 1'b0;
 //------------------------------------------------------------------------------
 reg [26:0]counter;
 always @(posedge CLKA) counter = counter + 1'b1;
-assign {DEBUG_LED2,DEBUG_LED1} = counter[25:24];  // slower flash for this version!
+assign {DEBUG_LED2,DEBUG_LED1} = counter[25:24];  // faster flash for this version!
 
 
 endmodule 

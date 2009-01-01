@@ -22,17 +22,7 @@ Boston, MA  02110-1301, USA.
 
 
 
-module varcic(
-  //00 = DECIMATION*4, 01 = DECIMATION*2, 10 = DECIMATION
-  input [1:0] extra_decimation, 
-  
-  input clock,
-  input in_strobe,  
-  output reg out_strobe,
-
-  input signed [IN_WIDTH-1:0] in_data,
-  output reg signed [OUT_WIDTH-1:0] out_data
-  );
+module varcic( extra_decimation, clock, in_strobe,  out_strobe, in_data, out_data );
 
 
   //design parameters
@@ -47,6 +37,15 @@ module varcic(
   parameter ACC_WIDTH = 64;
   parameter OUT_WIDTH = 27;
 
+  //00 = DECIMATION*4, 01 = DECIMATION*2, 10 = DECIMATION
+  input [1:0] extra_decimation;
+  
+  input clock;
+  input in_strobe;
+  output reg out_strobe;
+
+  input signed [IN_WIDTH-1:0] in_data;
+  output reg signed [OUT_WIDTH-1:0] out_data;
 
 
 

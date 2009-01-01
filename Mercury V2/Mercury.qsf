@@ -176,5 +176,5 @@ set_instance_assignment -name OUTPUT_TERMINATION OFF -to A6
 set_instance_assignment -name OUTPUT_TERMINATION OFF -to ext_10MHZ
 set_instance_assignment -name CURRENT_STRENGTH_NEW 16MA -to ext_10MHZ
 set_instance_assignment -name PCI_IO OFF -to ext_10MHZ
-set_instance_assignment -name PCI_IO OFF -to A6
+set_instance_assignment -name PCI_IO ON -to A6
 set_instance_assignment -name CURRENT_STRENGTH_NEW 16MA -to A6

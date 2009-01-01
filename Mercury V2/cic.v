@@ -22,32 +22,24 @@ Boston, MA  02110-1301, USA.
 
 
 
-module cic(
-  input clock,
-  input in_strobe,
-  output reg out_strobe,
+module cic( clock, in_strobe, out_strobe, in_data, out_data );
 
-  input signed [IN_WIDTH-1:0] in_data,
-  output signed [OUT_WIDTH-1:0] out_data
-  );
+//design parameters
+parameter STAGES = 3;
+parameter DECIMATION = 16;  
+parameter IN_WIDTH = 18;
 
+//computed parameters
+//ACC_WIDTH = IN_WIDTH + Ceil(STAGES * Log2(DECIMATION))
+//OUT_WIDTH = IN_WIDTH + Ceil(Log2(DECIMATION) / 2)
+parameter ACC_WIDTH = IN_WIDTH  + 12;
+parameter OUT_WIDTH = IN_WIDTH  + 2;
 
-  //design parameters
-  parameter STAGES = 3;
-  parameter DECIMATION = 16;  
-  parameter IN_WIDTH = 18;
-
-
-  //computed parameters
-  //ACC_WIDTH = IN_WIDTH + Ceil(STAGES * Log2(DECIMATION))
-  //OUT_WIDTH = IN_WIDTH + Ceil(Log2(DECIMATION) / 2)
-  parameter ACC_WIDTH = IN_WIDTH  + 12;
-  parameter OUT_WIDTH = IN_WIDTH  + 2;
-
-
-
-
-
+input clock;
+input in_strobe;
+output reg out_strobe;
+input signed [IN_WIDTH-1:0] in_data;
+output signed [OUT_WIDTH-1:0] out_data;
 
 //------------------------------------------------------------------------------
 //                               control

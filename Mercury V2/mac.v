@@ -23,19 +23,16 @@ Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
 Boston, MA  02110-1301, USA.
 */
 
-module MAC(
-
-input clk,
-input reset,
-input rden,
-input wren,
-input signed [WIDTH-1:0] data_in_M1,
-input signed [WIDTH-1:0] data_in_M2,
-output reg signed [(WIDTH * 2)-1:0] accum_out
-
-);
-
+module MAC(clk, reset, rden, wren, data_in_M1, data_in_M2, accum_out);
 parameter WIDTH = 24;
+
+input clk;
+input reset;
+input rden;
+input wren;
+input signed [WIDTH-1:0] data_in_M1;
+input signed [WIDTH-1:0] data_in_M2;
+output reg signed [(WIDTH * 2)-1:0] accum_out;
 
 reg signed [((WIDTH * 2)-1):0] mult_temp;
 reg signed [(WIDTH * 2):0] accum_temp;

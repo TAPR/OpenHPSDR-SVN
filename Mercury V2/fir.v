@@ -22,26 +22,27 @@ Boston, MA  02110-1301, USA.
 
 
 
-module fir(
-  input clock,
-  input start,
-  input signed [23:0] coeff,
-  input signed [23:0] in_data,
-  output reg signed [OUT_WIDTH-1:0] out_data,
-  output reg out_strobe
-  );
-
+module fir( clock, start, coeff, in_data, out_data, out_strobe );
 
 parameter OUT_WIDTH = 32;
 localparam MSB = 46;
 localparam LSB = MSB - OUT_WIDTH + 1;
+
+input clock;
+input start;
+input signed [23:0] coeff;
+input signed [23:0] in_data;
+output reg signed [OUT_WIDTH-1:0] out_data;
+output reg out_strobe;
 
 
 reg [2:0] state;
 reg shift;
 reg clear_mac;
 reg even_sample;
-
+wire last_sample;
+wire [23:0] shr_out;
+wire signed [55:0] mac_out;
 
 initial
   begin
@@ -98,10 +99,6 @@ always @(posedge clock)
     endcase
 
 
-
-
-
-
 //------------------------------------------------------------------------------
 //                    circular shift register 256 x 24 bit
 //------------------------------------------------------------------------------
@@ -115,15 +112,6 @@ fir_shiftreg fir_shiftreg_inst(
   .shiftout({last_sample, shr_out})
   );
 
-
-wire last_sample;
-wire [23:0] shr_out;
-
-
-
-
-
-
 //------------------------------------------------------------------------------
 //                        multiplier / accumulator
 //------------------------------------------------------------------------------
@@ -134,11 +122,5 @@ fir_mac fir_mac_inst(
   .in_data_2(coeff),
   .out_data(mac_out)
   );
-
-
-wire signed [55:0] mac_out;
-
-
-
 
 endmodule
