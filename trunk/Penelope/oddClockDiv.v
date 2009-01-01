@@ -1,5 +1,4 @@
 //
-// Copyright 2007 Bill Tracey, bill@ewjt.com, KD5TFD 
 // Modified by Kirk Weedman KD7IRS - Dec 21, 2008
 //	
 //  HPSDR - High Performance Software Defined Radio
@@ -20,11 +19,6 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-//
-// adapted from http://www.edn.com/archives/1997/081597/17di_01.htm#Listing%201
-// 
-//
 
 module oddClockDivider(clk_i, clk_o); 
 input  clk_i; 
