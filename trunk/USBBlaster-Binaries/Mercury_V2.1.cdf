@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP3C25) Path("C:/HPSDR/trunk/Mercury V2/") File("Mercury.jic") MfrSpec(OpMask(1) SEC_Device(EPCS16) Child_OpMask(1 1));
+		Device PartName(EP3C25) File("Mercury_v2.1.jic") MfrSpec(OpMask(1) SEC_Device(EPCS16) Child_OpMask(1 1));
 
 ChainEnd;
 
