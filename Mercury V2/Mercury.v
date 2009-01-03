@@ -4,7 +4,7 @@
 *
 ************************************************************/
 
-// V2.2 1 Jan 2009 
+// V2.1 30 December 2008 
 
 // (C) Phil Harman VK6APH 2006,2007,2008
 
@@ -47,10 +47,13 @@
 	30 Dec 2008 - Changed pins to 3.0v LVTTL, set A6 and C16 to 16mA, no R, no PCI diode
 	            - added modifications by Kirk Weedman, KD7IRS.
 	            - released as V2.1
-	 1 Jan 2008 - Used Kirk's oddClockDiv.
+	 1 Jan 2009 - Used Kirk's oddClockDiv.
 			    - Tidy comments
 			    - Move the instantiation of certain variables up higher in the lines of
 			      code so that compilers like ModelSim won't produce errors
+			    - release as V2.3
+     3 Jan 2009 - Fix Alex relay data not being sent correctly
+                - changed frequency to phase_word since that is correct term
 				
 	 
 */
@@ -322,8 +325,8 @@ assign ext_10MHZ = ref_ext ? OSC_10MHZ : 1'bZ ; 		// C16 is bidirectional so set
 */
 
 reg  [31:0] frequency_HZ;   // frequency control bits for CORDIC
-reg  [31:0] frequency;      // frequency - CBCLK domain
-reg  [31:0] sync_frequency, sf0; // sync frequency change to 122MHz clock
+reg  [31:0] phase_word;      // frequency - CBCLK domain
+reg  [31:0] sync_phase_word, sf0; // sync frequency change to 122MHz clock
 wire [63:0] result;
 
 localparam M2 = 32'd1172812403;  // B57 = 2^57.  B57/122880000 = M2
@@ -332,12 +335,12 @@ assign result = frequency_HZ * M2; // B0 * B57 number = B57 number
 
 always @ (posedge CBCLK)   // save frequency
 begin
-  frequency <= result[56:25]; // B57 -> B32 number since R is always >= 0
+  phase_word <= result[56:25]; // B57 -> B32 number since R is always >= 0
 end
 
 always @ (posedge clock)   
 begin
-  {sync_frequency, sf0} <= {sf0, frequency};  // from CBCLK domain to clock domain
+  {sync_phase_word, sf0} <= {sf0, phase_word};  // from CBCLK domain to clock domain
 end 
 
 
@@ -351,7 +354,7 @@ receiver receiver_inst(
   //control
   .clock(clock),
   .rate({DFS1, DFS0}), //00=48, 01=96, 10=192 kHz
-  .frequency(sync_frequency),
+  .frequency(sync_phase_word),
   .out_strobe(),
   //input
   .in_data(temp_ADC),
@@ -435,13 +438,15 @@ reg   [1:0] ATTEN;        // attenuator setting on Alex
 reg   [1:0] TX_relay;     // Tx relay setting on Alex
 reg         Rout;         // Rx1 out on Alex
 reg   [1:0] RX_relay;     // Rx relay setting on Alex
+localparam  ADDRESS = 4'b0; // Address for Mercury data 
 
-always @(posedge CBCLK)
+//always @(posedge CBCLK)
+always @ (negedge CLRCLK)
 begin
-  if ((CC_state == 1) && !CLRCLK) // negedge CLRCLK
-	begin
+  //if ((CC_state == 1) && !CLRCLK) // negedge CLRCLK
+//	begin
     PTT_out     <= (CCdata[58]); 	// PTT from PC via USB 
-    if (CCdata[57:54] == 0)			// check that the C&C data address = 0
+    if (CCdata[57:54] == ADDRESS)	// check that C&C data is for Mercury 
     begin
       frequency_HZ <= CCdata[53:22];
       clock_select <= CCdata[21:18];     
@@ -454,7 +459,7 @@ begin
       Rout      <= CCdata[2];     // Rx_1_out on Alex
       RX_relay  <= CCdata[1:0];   // Rx relay selection on Alex
     end
-  end
+  //end
 end
 
 assign ref_ext = clock_select[1]; 			// if set use internally and send to C16 else get from C16
@@ -476,7 +481,7 @@ wire [6:0]LPF;
 wire [5:0]select_HPF;
 wire [31:0]frequency_plus_IF; // add PowerSDR IF frequecy (9kHz) to current frequency
 
-assign frequency_plus_IF = frequency + 32'd9000; // add 9kHz IF offset 
+assign frequency_plus_IF = frequency_HZ + 32'd9000; // add 9kHz IF offset 
 
 LPF_select Alex_LPF_select(.frequency(frequency_plus_IF), .LPF(LPF));
 HPF_select Alex_HPF_select(.frequency(frequency_plus_IF), .HPF(select_HPF));
@@ -620,11 +625,20 @@ assign FPGA_PLL = ref_80khz ^ osc_80khz;
 assign DEBUG_LED0 = OVERFLOW; 		// LED 0 on when ADC Overflow	
 
 // check for correct Alex relay selection
+/*
 assign DEBUG_LED3 = TX_relay[0]; 
 assign DEBUG_LED4 = TX_relay[1];
 assign DEBUG_LED5 = RX_relay[0];
 assign DEBUG_LED6 = RX_relay[1];
 assign DEBUG_LED7 = Rout;
+*/
+
+assign DEBUG_LED3 = select_HPF[4]; 
+assign DEBUG_LED4 = select_HPF[3];
+assign DEBUG_LED5 = select_HPF[2];
+assign DEBUG_LED6 = select_HPF[1];
+assign DEBUG_LED7 = select_HPF[0];
+
 
 // Test pins
 assign TEST0 = osc_80khz; // 80kHz from 122.88MHz
