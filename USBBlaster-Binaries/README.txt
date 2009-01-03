@@ -5,7 +5,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board.
 
 1. Install the Quartus II Programmer application (80MB) from www.altera.com i.e.
 
-   https://www.altera.com/support/software/download/sof-download_center.html
+   https://www.altera.com/support/software/download/programming/quartus2/dnl-quartus2_programmer.jsp
 
    Install in the default directory. If you install in a different directory then edit
    Program-Mercury-EPCS16.bat to reflect the change. 
