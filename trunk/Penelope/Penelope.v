@@ -421,7 +421,7 @@ end
 // approximately 2 seconds. Extend ALC input to 21 bits to 
 // get sufficient delay. 
 localparam DEC_SEC = 2000;              // seconds*1000 => milliseconds
-localparam ATT_SEC = 100;               // seconds*1000 => milliseconds
+localparam ATT_SEC = 10;               // seconds*1000 => milliseconds
 localparam CLK_RATE = 12288000/4/1000;  // speed of CBCLK/1000 = clocks/second/1000
 localparam DECAY_RANGE = (DEC_SEC*CLK_RATE)>>16; // 2000 mS decay for full 16 bit range
 localparam ATTACK_RANGE = (ATT_SEC*CLK_RATE)>>16; // 100 mS attack for full 16 bit range
