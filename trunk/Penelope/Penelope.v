@@ -420,6 +420,34 @@ end
 // time through the loop. This provides a (linear) slow decay of
 // approximately 2 seconds. Extend ALC input to 21 bits to 
 // get sufficient delay. 
+
+/*
+
+	This is how the ALC works.  Its basically a low gain control loop . The 
+	inputs are a pre-set reference level (that determines the maximum RF 
+	output level) and the other is the output of an ADC/Integrator  that 
+	provides a voltage proportional to the RF envelope. The output is a 
+	gain value (1...0.0000).
+
+	In order to continuously measure the peak RF output a fast attack, slow 
+	decay integrator is used at the output of the ADC. This prevents the 
+	feedback voltage varying at speech rates and causing intermodulation 
+	distortion.
+
+	If the integrator voltage is < reference then do nothing since we have 
+	not reached the max RF output yet. If the integrator is > reference 
+	then reduce I and Q inputs to the DAC (by x gain) so that the max RF 
+	output is not exceeded.  Since the loop gain is low this will not be 
+	exact ( we are not trying to hold the output constant like in an AGC 
+	system) but the long term trend will be that the Integrator output = 
+	reference.
+
+	The higher the values of I and Q then the lower to gain needs to be.
+	
+*/
+
+
+
 localparam DEC_SEC = 2000;              // seconds*1000 => milliseconds
 localparam ATT_SEC = 10;               // seconds*1000 => milliseconds
 localparam CLK_RATE = 12288000/4/1000;  // speed of CBCLK/1000 = clocks/second/1000
