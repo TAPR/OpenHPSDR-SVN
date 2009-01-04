@@ -34,6 +34,8 @@ module receiver(
   output [23:0] out_data_Q
   );
 
+wire signed [21:0] cordic_outdata_I;
+wire signed [21:0] cordic_outdata_Q;
 
 //------------------------------------------------------------------------------
 //                               cordic
@@ -55,8 +57,6 @@ cordic cordic_inst(
 wire cic_outstrobe_1;
 wire signed [22:0] cic_outdata_I1;
 wire signed [22:0] cic_outdata_Q1;
-wire signed [21:0] cordic_outdata_I;
-wire signed [21:0] cordic_outdata_Q;
 
 varcic #(.STAGES(5), .DECIMATION(80), .IN_WIDTH(22), .ACC_WIDTH(64), .OUT_WIDTH(23))
   varcic_inst_I1(

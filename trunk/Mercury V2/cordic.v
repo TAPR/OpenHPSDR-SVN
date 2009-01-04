@@ -22,21 +22,14 @@ Boston, MA  02110-1301, USA.
 //------------------------------------------------------------------------------
 
 
-module cordic(
-  input clock,
-  input signed [WF-1:0] frequency,
-  input signed [IN_WIDTH-1:0] in_data,
-  output signed [WO-1:0] out_data_I,
-  output signed [WO-1:0] out_data_Q
-  );
-
+module cordic( clock, frequency, in_data, out_data_I, out_data_Q );
 
 parameter IN_WIDTH   = 16; //ADC bitwidth
 parameter EXTRA_BITS = 5;  //spur reduction 6 dB per bit
-parameter OUT_WIDTH = WR;  //22-bit output width
 
 //internal params
 localparam WR =  IN_WIDTH + EXTRA_BITS + 1; //22-bit data regs
+localparam OUT_WIDTH = WR;  //22-bit output width
 localparam WZ =  IN_WIDTH + EXTRA_BITS - 1; //20-bit angle regs
 localparam STG = IN_WIDTH + EXTRA_BITS - 2; //19 stages
 localparam WO = OUT_WIDTH;
@@ -44,6 +37,11 @@ localparam WO = OUT_WIDTH;
 localparam WF = 32; //NCO freq,  -Pi..Pi per clock cycle
 localparam WP = WF; //NCO phase, 0..2*Pi
 
+input clock;
+input signed [WF-1:0] frequency;
+input signed [IN_WIDTH-1:0] in_data;
+output signed [WO-1:0] out_data_I;
+output signed [WO-1:0] out_data_Q;
 
 
 
