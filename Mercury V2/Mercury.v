@@ -4,7 +4,7 @@
 *
 ************************************************************/
 
-// V2.1 30 December 2008 
+// V2.3 4 Jan 2009 
 
 // (C) Phil Harman VK6APH 2006,2007,2008
 
@@ -48,12 +48,12 @@
 	            - added modifications by Kirk Weedman, KD7IRS.
 	            - released as V2.1
 	 1 Jan 2009 - Used Kirk's oddClockDiv.
-			    - Tidy comments
-			    - Move the instantiation of certain variables up higher in the lines of
-			      code so that compilers like ModelSim won't produce errors
-			    - release as V2.3
+                - Tidy comments
+                - Move the instantiation of certain variables up higher in the lines of
+                  code so that compilers like ModelSim won't produce errors
      3 Jan 2009 - Fix Alex relay data not being sent correctly
                 - changed frequency to phase_word since that is correct term
+     4 Jan 209  - Code tidy by Kirk, KD7IRS, released as v2.3
 				
 	 
 */
@@ -132,7 +132,7 @@ input         DFS0, DFS1  // I/Q sampling rate selection
 
 reg  [15:0] temp_ADC;
 reg         data_ready;   // set at end of decimation
-wire        clock;
+wire        CLK_122MHz;
 
 // Assign FPGA pass through connections
 assign CDIN       = C4;   // Rx audio data in I2S format to TLV320
@@ -143,7 +143,7 @@ assign CMCLK      = C17;  // 12.288MHz CLK_MCLK from Atlas C17
 // enable LT2208 
 assign SHDN       = 1'b0;	// 0 = normal operation
 assign INIT_DONE  = 1'b0;	// turn INIT_DONE LED on
-assign clock      = CLKA;	// use clock out of LT2208 as master clock
+assign CLK_122MHz = CLKA;	// use clock out of LT2208 as master clock
 assign PGA        = 1'b0; 	// 1 = gain of 1.5(3dB), 0 = gain of 1
 
 
@@ -151,13 +151,17 @@ assign PGA        = 1'b0; 	// 1 = gain of 1.5(3dB), 0 = gain of 1
 // bit 0 is 1. This helps to reduce any pickup by the A/D input of the digital outputs. 
 // We need to de-ramdomize the LT2208 data if this is turned on. 
 
-always @ (posedge clock) 
+always @ (posedge CLK_122MHz) 
 begin 
-	if (RAND) begin									// RAND set so de-ramdomize
-		if (INA[0]) temp_ADC <= {~INA[15:1],INA[0]};
-		else temp_ADC <= INA;
-	end
-	else temp_ADC <= INA;							// not set so just copy data
+  if (RAND)
+  begin	// RAND set so de-ramdomize
+    if (INA[0])
+      temp_ADC <= {~INA[15:1],INA[0]};
+    else
+      temp_ADC <= INA;
+  end
+  else
+    temp_ADC <= INA;  // not set so just copy data
 end 
 
 //////////////////////////////////////////////////////////////
@@ -209,31 +213,43 @@ end
 
 assign CMODE = 1'b1;		// Set to 1 for SPI mode
 
-always @ (posedge BCLK)		// use 12.288MHz BCLK clock for SPI
+reg [23:0] tlv_timeout;
+
+always @ (posedge BCLK)		// use 12.288MHz BCLK for SPI
 begin
+  if (tlv_timeout != (200*12288))        // 200mS @BCLK = 12.288Mhz
+    tlv_timeout <= tlv_timeout + 1'd1;
+
   case (TLV)
   4'd0:
   begin
     nCS <= 1'b1;        	// set TLV320 CS high
     bit_cnt <= 4'd15;   	// set starting bit count to 15
-    TLV <= TLV + 4'b1;
+    if (tlv_timeout == (200*12288)) // wait for 200mS timeout
+      TLV <= 4'd1;
+    else
+      TLV <= 4'd0;
   end
+
   4'd1:
   begin
-    nCS <= 1'b0;                // start data transfer with nCS low
+    nCS  <= 1'b0;                // start data transfer with nCS low
     MOSI <= TLV_data[bit_cnt];  // set data up
-    TLV <= TLV + 4'b1;
+    TLV  <= 4'd2;
   end
+
   4'd2:
   begin
     SCLK <= 1'b1;               // clock data into TLV320
-    TLV <= TLV + 4'b1;
+    TLV  <= 4'd3;
   end
+
   4'd3:
   begin
     SCLK <= 1'b0;               // reset clock
-    TLV <= TLV + 4'b1;
+    TLV  <= 4'd4;
   end
+
   4'd4:
   begin
     if (bit_cnt == 0) // word transfer is complete, check for any more
@@ -241,7 +257,7 @@ begin
     else
     begin
       bit_cnt <= bit_cnt - 1'b1;
-      TLV <= 4'b1;    // go round again
+      TLV <= 4'd1;    // go round again
     end
   end
 
@@ -254,12 +270,12 @@ begin
     end
     else
     begin                 // else get next data	
-      TLV <= 0;           
+      TLV  <= 4'd0;           
       load <= load + 3'b1;  // select next data word to send
     end
   end
   
-  default: TLV <= 0;
+  default: TLV <= 4'd0;
   endcase
 end
 
@@ -271,17 +287,21 @@ end
 
 // Generate 122.88MHz/10 MCLK_12MHZ for Atlas bus
 
-reg MCLK_12MHZ;
-reg [2:0]MCLK_count;
-always @ (posedge clock)
+reg       MCLK_12MHZ;
+reg [2:0] MCLK_count;
+
+always @ (posedge CLK_122MHz)
 begin
-	if (MCLK_count == 4)  // divide 122.88MHz clock by 10 to give 12.288MHz
-		begin
-		MCLK_12MHZ <= ~MCLK_12MHZ;
-		MCLK_count <= 0;
-		end
-	else MCLK_count <= MCLK_count + 1'b1;
+  if (MCLK_count == 4)  // divide 122.88MHz clock by 10 to give 12.288MHz
+  begin
+    MCLK_12MHZ <= ~MCLK_12MHZ;
+    MCLK_count <= 0;
+  end
+  else
+    MCLK_count <= MCLK_count + 1'b1;
 end
+
+assign A6 = MCLK_12MHZ; // send MCLK_12MHZ to Atlas A6
 	
 // Generate CBCLK (3.072MHz)/4 for SPI interface
 	
@@ -289,22 +309,21 @@ reg SPI_clk;
 reg SPI_count;
 always @(posedge CBCLK)
 begin
-	if(SPI_count == 1)begin
-		SPI_clk <= ~SPI_clk;
-		SPI_count <=0;
-	end 
-	else SPI_count <= SPI_count + 1'b1;
+  if(SPI_count == 1)
+  begin
+    SPI_clk <= ~SPI_clk;
+    SPI_count <=0;
+  end 
+  else
+    SPI_count <= SPI_count + 1'b1;
 end	
 
 // Select 122.88MHz source. If source_122MHZ set then use Penelope's 122.88MHz clock and send to LVDS
 // Otherwise get external clock from LVDS
 wire source_122MHZ;		// Set when internal 122.88MHz source is used and sent to LVDS
 
-assign LVDS_RXE_N = source_122MHZ ? 1'b1 : 1'b0; // enable LVDS receiver if clock is external
-assign LVDS_TXE = source_122MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if  Mercury is the source 
-
-// send MCLK_12MHZ to Atlas A6 
-assign A6 = MCLK_12MHZ;
+assign LVDS_RXE_N = source_122MHZ ? 1'b1 : 1'b0;  // enable LVDS receiver if clock is external
+assign LVDS_TXE   = source_122MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if  Mercury is the source 
 
 // select 10MHz reference source. If ref_ext is set use Mercury's 10MHz ref and send to Atlas C16
 wire reference;
@@ -320,27 +339,27 @@ assign ext_10MHZ = ref_ext ? OSC_10MHZ : 1'bZ ; 		// C16 is bidirectional so set
 //////////////////////////////////////////////////////////////
 
 /*	
-	Calculates  (frequency * 2^32) /122.88e6
-
+	Calculates  ratio = fo/fs = frequency/122.88Mhz where frequency is in MHz
+	Each calculation should take no more than 1 CBCLK
 */
 
 reg  [31:0] frequency_HZ;   // frequency control bits for CORDIC
-reg  [31:0] phase_word;      // frequency - CBCLK domain
-reg  [31:0] sync_phase_word, sf0; // sync frequency change to 122MHz clock
-wire [63:0] result;
+reg  [31:0] phase_word;     // CBCLK domain
+reg  [31:0] sync_phase_word, spw0;
+wire [63:0] ratio;
 
 localparam M2 = 32'd1172812403;  // B57 = 2^57.  B57/122880000 = M2
 
-assign result = frequency_HZ * M2; // B0 * B57 number = B57 number
+assign ratio = frequency_HZ * M2; // B0 * B57 number = B57 number
 
-always @ (posedge CBCLK)   // save frequency
+always @ (posedge CBCLK)   // save phase word
 begin
-  phase_word <= result[56:25]; // B57 -> B32 number since R is always >= 0
+  phase_word <= ratio[56:25]; // B57 -> B32 number since R is always >= 0
 end
 
-always @ (posedge clock)   
+always @ (posedge CLK_122MHz)   
 begin
-  {sync_phase_word, sf0} <= {sf0, phase_word};  // from CBCLK domain to clock domain
+  {sync_phase_word, spw0} <= {spw0, phase_word};  // from CBCLK domain to clock domain
 end 
 
 
@@ -352,7 +371,7 @@ wire [23:0] rx_out_data_Q;
 
 receiver receiver_inst(
   //control
-  .clock(clock),
+  .clock(CLK_122MHz),
   .rate({DFS1, DFS0}), //00=48, 01=96, 10=192 kHz
   .frequency(sync_phase_word),
   .out_strobe(),
@@ -402,55 +421,70 @@ I2SEncode  I2S(.LRCLK(LRCLK), .BCLK(BCLK), .left_sample(rx_out_data_I), .right_s
 
 reg  [5:0] bits;     // how many bits clocked 
 reg  [1:0] CC_state;
-reg [58:0] CCdata;	// 54 bits of C&C data
+reg [58:0] CCdata;	// 59 bits of C&C data
 
 always @(posedge CBCLK)  // use CBCLK  from Atlas C8 
 begin
-case(CC_state)
-0:	begin
-	if (CLRCLK == 0)CC_state <= 0;			// loop until CLRLCK is high   
-	else CC_state <= 1;
-	end
-1:	begin
-		if (CLRCLK)	CC_state <= 1;			// loop until CLRCLK is low  
-		else begin
-		bits <= 6'd58;						
-		CC_state <= 2;
-		end
-	end
-2:	begin
-	CCdata[bits] <= CC;						// this is the second CBCLK after negedge of CLRCLK
-		if (bits == 0)CC_state <= 0; 		// done so restart
-		else begin
-		bits <= bits - 1'b1;
-		CC_state <= 2;  
-		end
-	end
-default: CC_state <= 0;
-endcase
+  case(CC_state)
+  0:
+  begin
+    if (CLRCLK == 0)
+      CC_state  <= 0;     // loop until CLRLCK is high   
+    else
+      CC_state  <= 1;
+  end
+
+  1:
+  begin
+    if (CLRCLK)
+      CC_state  <= 1;     // loop until CLRCLK is low  
+    else
+    begin
+      bits      <= 6'd58;						
+      CC_state  <= 2;
+    end
+  end
+
+  2:
+  begin
+    CCdata[bits] <= CC;   // this is the second CBCLK after negedge of CLRCLK
+    if (bits == 0)
+      CC_state  <= 0;      // done so restart
+    else
+    begin
+      bits      <= bits - 1'b1;
+      CC_state  <= 2;  
+    end
+  end
+
+  default:
+    CC_state <= 0;
+  endcase
 end
 
 // decode C & C data into variables and sync to 48kHz LR clock
 
 reg         PTT_out;
-reg   [3:0] clock_select;	// 10MHz and 122.88MHz clock selection
-reg   [1:0] ATTEN;        // attenuator setting on Alex
-reg   [1:0] TX_relay;     // Tx relay setting on Alex
-reg         Rout;         // Rx1 out on Alex
-reg   [1:0] RX_relay;     // Rx relay setting on Alex
-localparam  ADDRESS = 4'b0; // Address for Mercury data 
+reg   [3:0] clock_select;   // 10MHz and 122.88MHz clock selection
+reg   [1:0] ATTEN;          // attenuator setting on Alex
+reg   [1:0] TX_relay;       // Tx relay setting on Alex
+reg         Rout;           // Rx1 out on Alex
+reg   [1:0] RX_relay;       // Rx relay setting on Alex
+localparam  ADDRESS = 4'b0; // Address for Mercury data
 
-//always @(posedge CBCLK)
-always @ (negedge CLRCLK)
+//always @ (negedge CLRCLK)
+//begin
+
+always @(posedge CBCLK) // stay in same time domain as CCdata so timing analyzer can evaluate correctly
 begin
-  //if ((CC_state == 1) && !CLRCLK) // negedge CLRCLK
-//	begin
-    PTT_out     <= (CCdata[58]); 	// PTT from PC via USB 
-    if (CCdata[57:54] == ADDRESS)	// check that C&C data is for Mercury 
+  if ((CC_state == 1) && !CLRCLK) // "negedge CLRCLK" - 1st rising edge of CBCLK after CLRCLK goes low
+  begin                           // grab CCdata 1 CBCLK before it starts changing again
+    PTT_out     <= CCdata[58];    // PTT from PC via USB 
+    if (CCdata[57:54] == ADDRESS) // check that the C&C data is for Mercury
     begin
       frequency_HZ <= CCdata[53:22];
       clock_select <= CCdata[21:18];     
-      //OC        <= CCdata[17:11];		// Penelope Open Collectors, not used by Mercury
+      //OC        <= CCdata[17:11]; // Penelope Open Collectors, not used by Mercury
       ATTRLY    <=  ~CCdata[9];   // 1 = Attenuator on, 0 = Preamp on 
       DITHER    <= CCdata[8];     // 1 = dither on
       RAND      <= CCdata[7];     // 1 = randomizer on 
@@ -459,13 +493,11 @@ begin
       Rout      <= CCdata[2];     // Rx_1_out on Alex
       RX_relay  <= CCdata[1:0];   // Rx relay selection on Alex
     end
-  //end
+  end
 end
 
-assign ref_ext = clock_select[1]; 			// if set use internally and send to C16 else get from C16
-assign source_122MHZ = clock_select[2] ; 	// if set use internally and send to LVDS else
-											// get from LVDS
-
+assign ref_ext = clock_select[1];       // if set use internally and send to C16 else get from C16
+assign source_122MHZ = clock_select[2]; // if set use internally and send to LVDS else get from LVDS
 													
 //////////////////////////////////////////////////////////////
 //
@@ -548,8 +580,8 @@ wire _10dB_atten = ATTEN[0];
 wire _20dB_atten = ATTEN[1];
 
 // define and concatinate the Tx data to send to Alex via SPI
-assign Tx_red_led = PTT_out; 	// turn red led on when we Tx
-assign TR_relay = PTT_out;		// turn on TR relay when PTT active
+assign Tx_red_led = PTT_out; // turn red led on when we Tx
+assign TR_relay   = PTT_out; // turn on TR relay when PTT active
 
 assign Alex_Tx_data = {LPF[6:4],Tx_red_led,TR_relay,ANT3,ANT2,ANT1,LPF[3:0],Tx_yellow_led,3'b000};
 
@@ -560,21 +592,22 @@ assign Rx_red_led = PTT_out;	// turn red led on when we Tx
 assign _6m_preamp = (frequency_plus_IF > 50000000) ? 1'b1 : 1'b0;
 
 // if 6m preamp selected disconnect all filters 
-wire [5:0]HPF;
+wire [5:0] HPF;
 assign HPF = _6m_preamp ? 6'd0 : select_HPF; 
 
 // V3 Alex hardware
-assign Alex_Rx_data = {Rx_red_led,_10dB_atten ,_20dB_atten, HPF[5], Rx_1_out,Rx_1_in,Rx_2_in,Transverter,
-					   1'b0, HPF[4:2],_6m_preamp,HPF[1:0],Rx_yellow_led};
+assign Alex_Rx_data = {Rx_red_led,_10dB_atten ,_20dB_atten, HPF[5], Rx_1_out,Rx_1_in,Rx_2_in,
+                       Transverter, 1'b0, HPF[4:2],_6m_preamp,HPF[1:0],Rx_yellow_led};
 					   
 // concatinate Tx and Rx data and send to SPI interface. SPI interface only sends on a change of Alex_data.
 // All data is sent in about 120uS.
-wire [31:0]Alex_data;
-assign Alex_data[31:0] = {Alex_Tx_data[15:0],Alex_Rx_data[15:0]};
+wire [31:0] Alex_data;
 
-SPI   Alex_SPI_Tx(.Alex_data(Alex_data), .SPI_data(SPI_data),
-				  .SPI_clock(SPI_clock), .Tx_load_strobe(Tx_load_strobe),
-				  .Rx_load_strobe(Rx_load_strobe),.spi_clock(SPI_clk));												
+assign Alex_data = {Alex_Tx_data[15:0],Alex_Rx_data[15:0]};
+
+SPI Alex_SPI_Tx (.Alex_data(Alex_data), .SPI_data(SPI_data),
+                 .SPI_clock(SPI_clock), .Tx_load_strobe(Tx_load_strobe),
+                 .Rx_load_strobe(Rx_load_strobe),.spi_clock(SPI_clk));												
 													
 													
 ///////////////////////////////////////////////////////////
@@ -603,14 +636,15 @@ oddClockDivider refClockDivider(reference, ref_80khz);
 // Divide  122.88 MHz by 1536 to get 80 khz 
 reg [9:0] count_12288; 
 
-always @ (posedge clock) begin
-        if (count_12288 == 767) begin
-                count_12288 <= 0;
-                osc_80khz <= ~osc_80khz; 
-        end
-        else begin
-                count_12288 <= 1'b1 + count_12288;
-        end
+always @ (posedge CLK_122MHz)
+begin
+  if (count_12288 == 767)
+  begin
+    count_12288 <= 0;
+    osc_80khz   <= ~osc_80khz; 
+  end
+  else
+    count_12288 <= count_12288 + 1'b1;
 end
 
 // NOTE: If external reference is not available then phase detector 
@@ -622,22 +656,15 @@ assign FPGA_PLL = ref_80khz ^ osc_80khz;
 
 
 // LEDs for testing 0 = off, 1 = on
-assign DEBUG_LED0 = OVERFLOW; 		// LED 0 on when ADC Overflow	
+assign DEBUG_LED0 = OVERFLOW; 		// LED 0 on when ADC Overflow
 
 // check for correct Alex relay selection
-/*
+
 assign DEBUG_LED3 = TX_relay[0]; 
 assign DEBUG_LED4 = TX_relay[1];
 assign DEBUG_LED5 = RX_relay[0];
 assign DEBUG_LED6 = RX_relay[1];
 assign DEBUG_LED7 = Rout;
-*/
-
-assign DEBUG_LED3 = select_HPF[4]; 
-assign DEBUG_LED4 = select_HPF[3];
-assign DEBUG_LED5 = select_HPF[2];
-assign DEBUG_LED6 = select_HPF[1];
-assign DEBUG_LED7 = select_HPF[0];
 
 
 // Test pins

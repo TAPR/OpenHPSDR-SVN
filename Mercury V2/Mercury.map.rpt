@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Mercury
-Thu Jan 01 19:52:10 2009
+Sun Jan 04 15:17:37 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -15,100 +15,101 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
   7. Analysis & Synthesis RAM Summary
   8. Analysis & Synthesis DSP Block Usage Summary
   9. State Machine - |Mercury|CC_state
- 10. State Machine - |Mercury|SPI:Alex_SPI_Tx|spi_state
- 11. State Machine - |Mercury|I2SEncode:I2S|encode_state
- 12. Registers Removed During Synthesis
- 13. Removed Registers Triggering Further Register Optimizations
- 14. General Register Statistics
- 15. Inverted Register Statistics
- 16. Multiplexer Restructuring Statistics (No Restructuring Performed)
- 17. Source assignments for receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component|altsyncram_h2a1:auto_generated
- 18. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
- 19. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
- 20. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
- 21. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
- 22. Parameter Settings for User Entity Instance: receiver:receiver_inst|cordic:cordic_inst
- 23. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1
- 24. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[0].cic_integrator_inst
- 25. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[0].cic_comb_inst
- 26. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[1].cic_integrator_inst
- 27. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[1].cic_comb_inst
- 28. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[2].cic_integrator_inst
- 29. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[2].cic_comb_inst
- 30. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[3].cic_integrator_inst
- 31. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[3].cic_comb_inst
- 32. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[4].cic_integrator_inst
- 33. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[4].cic_comb_inst
- 34. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1
- 35. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[0].cic_integrator_inst
- 36. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[0].cic_comb_inst
- 37. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[1].cic_integrator_inst
- 38. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[1].cic_comb_inst
- 39. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[2].cic_integrator_inst
- 40. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[2].cic_comb_inst
- 41. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[3].cic_integrator_inst
- 42. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[3].cic_comb_inst
- 43. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[4].cic_integrator_inst
- 44. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[4].cic_comb_inst
- 45. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2
- 46. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[0].cic_integrator_inst
- 47. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[0].cic_comb_inst
- 48. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[1].cic_integrator_inst
- 49. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[1].cic_comb_inst
- 50. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[2].cic_integrator_inst
- 51. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[2].cic_comb_inst
- 52. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[3].cic_integrator_inst
- 53. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[3].cic_comb_inst
- 54. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[4].cic_integrator_inst
- 55. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[4].cic_comb_inst
- 56. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[5].cic_integrator_inst
- 57. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[5].cic_comb_inst
- 58. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[6].cic_integrator_inst
- 59. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[6].cic_comb_inst
- 60. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[7].cic_integrator_inst
- 61. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[7].cic_comb_inst
- 62. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[8].cic_integrator_inst
- 63. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[8].cic_comb_inst
- 64. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[9].cic_integrator_inst
- 65. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[9].cic_comb_inst
- 66. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[10].cic_integrator_inst
- 67. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[10].cic_comb_inst
- 68. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2
- 69. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[0].cic_integrator_inst
- 70. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[0].cic_comb_inst
- 71. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[1].cic_integrator_inst
- 72. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[1].cic_comb_inst
- 73. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[2].cic_integrator_inst
- 74. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[2].cic_comb_inst
- 75. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[3].cic_integrator_inst
- 76. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[3].cic_comb_inst
- 77. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[4].cic_integrator_inst
- 78. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[4].cic_comb_inst
- 79. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[5].cic_integrator_inst
- 80. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[5].cic_comb_inst
- 81. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[6].cic_integrator_inst
- 82. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[6].cic_comb_inst
- 83. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[7].cic_integrator_inst
- 84. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[7].cic_comb_inst
- 85. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[8].cic_integrator_inst
- 86. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[8].cic_comb_inst
- 87. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[9].cic_integrator_inst
- 88. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[9].cic_comb_inst
- 89. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[10].cic_integrator_inst
- 90. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[10].cic_comb_inst
- 91. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component
- 92. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I
- 93. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component
- 94. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component
- 95. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q
- 96. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component
- 97. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component
- 98. Parameter Settings for User Entity Instance: oddClockDivider:refClockDivider
- 99. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
-100. altshift_taps Parameter Settings by Entity Instance
-101. lpm_mult Parameter Settings by Entity Instance
-102. Analysis & Synthesis Messages
-103. Analysis & Synthesis Suppressed Messages
+ 10. State Machine - |Mercury|TLV
+ 11. State Machine - |Mercury|SPI:Alex_SPI_Tx|spi_state
+ 12. State Machine - |Mercury|I2SEncode:I2S|encode_state
+ 13. Registers Removed During Synthesis
+ 14. Removed Registers Triggering Further Register Optimizations
+ 15. General Register Statistics
+ 16. Inverted Register Statistics
+ 17. Multiplexer Restructuring Statistics (No Restructuring Performed)
+ 18. Source assignments for receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component|altsyncram_h2a1:auto_generated
+ 19. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
+ 20. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
+ 21. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
+ 22. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
+ 23. Parameter Settings for User Entity Instance: receiver:receiver_inst|cordic:cordic_inst
+ 24. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1
+ 25. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[0].cic_integrator_inst
+ 26. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[0].cic_comb_inst
+ 27. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[1].cic_integrator_inst
+ 28. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[1].cic_comb_inst
+ 29. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[2].cic_integrator_inst
+ 30. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[2].cic_comb_inst
+ 31. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[3].cic_integrator_inst
+ 32. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[3].cic_comb_inst
+ 33. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[4].cic_integrator_inst
+ 34. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[4].cic_comb_inst
+ 35. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1
+ 36. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[0].cic_integrator_inst
+ 37. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[0].cic_comb_inst
+ 38. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[1].cic_integrator_inst
+ 39. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[1].cic_comb_inst
+ 40. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[2].cic_integrator_inst
+ 41. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[2].cic_comb_inst
+ 42. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[3].cic_integrator_inst
+ 43. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[3].cic_comb_inst
+ 44. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[4].cic_integrator_inst
+ 45. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[4].cic_comb_inst
+ 46. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2
+ 47. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[0].cic_integrator_inst
+ 48. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[0].cic_comb_inst
+ 49. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[1].cic_integrator_inst
+ 50. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[1].cic_comb_inst
+ 51. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[2].cic_integrator_inst
+ 52. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[2].cic_comb_inst
+ 53. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[3].cic_integrator_inst
+ 54. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[3].cic_comb_inst
+ 55. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[4].cic_integrator_inst
+ 56. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[4].cic_comb_inst
+ 57. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[5].cic_integrator_inst
+ 58. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[5].cic_comb_inst
+ 59. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[6].cic_integrator_inst
+ 60. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[6].cic_comb_inst
+ 61. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[7].cic_integrator_inst
+ 62. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[7].cic_comb_inst
+ 63. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[8].cic_integrator_inst
+ 64. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[8].cic_comb_inst
+ 65. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[9].cic_integrator_inst
+ 66. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[9].cic_comb_inst
+ 67. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[10].cic_integrator_inst
+ 68. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[10].cic_comb_inst
+ 69. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2
+ 70. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[0].cic_integrator_inst
+ 71. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[0].cic_comb_inst
+ 72. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[1].cic_integrator_inst
+ 73. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[1].cic_comb_inst
+ 74. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[2].cic_integrator_inst
+ 75. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[2].cic_comb_inst
+ 76. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[3].cic_integrator_inst
+ 77. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[3].cic_comb_inst
+ 78. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[4].cic_integrator_inst
+ 79. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[4].cic_comb_inst
+ 80. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[5].cic_integrator_inst
+ 81. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[5].cic_comb_inst
+ 82. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[6].cic_integrator_inst
+ 83. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[6].cic_comb_inst
+ 84. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[7].cic_integrator_inst
+ 85. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[7].cic_comb_inst
+ 86. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[8].cic_integrator_inst
+ 87. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[8].cic_comb_inst
+ 88. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[9].cic_integrator_inst
+ 89. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[9].cic_comb_inst
+ 90. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[10].cic_integrator_inst
+ 91. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[10].cic_comb_inst
+ 92. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component
+ 93. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I
+ 94. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component
+ 95. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component
+ 96. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q
+ 97. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component
+ 98. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component
+ 99. Parameter Settings for User Entity Instance: oddClockDivider:refClockDivider
+100. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
+101. altshift_taps Parameter Settings by Entity Instance
+102. lpm_mult Parameter Settings by Entity Instance
+103. Analysis & Synthesis Messages
+104. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -134,15 +135,15 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Jan 01 19:52:10 2009   ;
+; Analysis & Synthesis Status        ; Successful - Sun Jan 04 15:17:37 2009   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; Mercury                                 ;
 ; Family                             ; Cyclone III                             ;
-; Total logic elements               ; 6,712                                   ;
-;     Total combinational functions  ; 6,495                                   ;
-;     Dedicated logic registers      ; 6,712                                   ;
-; Total registers                    ; 6712                                    ;
+; Total logic elements               ; 6,739                                   ;
+;     Total combinational functions  ; 6,525                                   ;
+;     Dedicated logic registers      ; 6,739                                   ;
+; Total registers                    ; 6739                                    ;
 ; Total pins                         ; 65                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 18,844                                  ;
@@ -287,20 +288,20 @@ applicable agreement for further details.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimated Total logic elements              ; 6,712      ;
+; Estimated Total logic elements              ; 6,739      ;
 ;                                             ;            ;
-; Total combinational functions               ; 6495       ;
+; Total combinational functions               ; 6525       ;
 ; Logic element usage by number of LUT inputs ;            ;
-;     -- 4 input functions                    ; 404        ;
-;     -- 3 input functions                    ; 5221       ;
-;     -- <=2 input functions                  ; 870        ;
+;     -- 4 input functions                    ; 414        ;
+;     -- 3 input functions                    ; 5219       ;
+;     -- <=2 input functions                  ; 892        ;
 ;                                             ;            ;
 ; Logic elements by mode                      ;            ;
-;     -- normal mode                          ; 849        ;
-;     -- arithmetic mode                      ; 5646       ;
+;     -- normal mode                          ; 857        ;
+;     -- arithmetic mode                      ; 5668       ;
 ;                                             ;            ;
-; Total registers                             ; 6712       ;
-;     -- Dedicated logic registers            ; 6712       ;
+; Total registers                             ; 6739       ;
+;     -- Dedicated logic registers            ; 6739       ;
 ;     -- I/O registers                        ; 0          ;
 ;                                             ;            ;
 ; I/O pins                                    ; 65         ;
@@ -308,7 +309,7 @@ applicable agreement for further details.
 ; Embedded Multiplier 9-bit elements          ; 22         ;
 ; Maximum fan-out node                        ; CLKA~input ;
 ; Maximum fan-out                             ; 6536       ;
-; Total fan-out                               ; 40046      ;
+; Total fan-out                               ; 40199      ;
 ; Average fan-out                             ; 2.98       ;
 +---------------------------------------------+------------+
 
@@ -318,7 +319,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                             ; Library Name ;
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Mercury                                                     ; 6495 (294)        ; 6712 (270)   ; 18844       ; 22           ; 2       ; 10        ; 65   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
+; |Mercury                                                     ; 6525 (324)        ; 6739 (297)   ; 18844       ; 22           ; 2       ; 10        ; 65   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
 ;    |HPF_select:Alex_HPF_select|                              ; 50 (50)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|HPF_select:Alex_HPF_select                                                                                                                                             ; work         ;
 ;    |I2SEncode:I2S|                                           ; 69 (69)           ; 59 (59)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|I2SEncode:I2S                                                                                                                                                          ; work         ;
 ;    |LPF_select:Alex_LPF_select|                              ; 87 (87)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|LPF_select:Alex_LPF_select                                                                                                                                             ; work         ;
@@ -468,6 +469,21 @@ Encoding Type:  One-Hot
 
 
 Encoding Type:  One-Hot
++----------------------------------------------------------------------------+
+; State Machine - |Mercury|TLV                                               ;
++----------+----------+----------+----------+----------+----------+----------+
+; Name     ; TLV.0101 ; TLV.0100 ; TLV.0011 ; TLV.0010 ; TLV.0001 ; TLV.0000 ;
++----------+----------+----------+----------+----------+----------+----------+
+; TLV.0000 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ;
+; TLV.0001 ; 0        ; 0        ; 0        ; 0        ; 1        ; 1        ;
+; TLV.0010 ; 0        ; 0        ; 0        ; 1        ; 0        ; 1        ;
+; TLV.0011 ; 0        ; 0        ; 1        ; 0        ; 0        ; 1        ;
+; TLV.0100 ; 0        ; 1        ; 0        ; 0        ; 0        ; 1        ;
+; TLV.0101 ; 1        ; 0        ; 0        ; 0        ; 0        ; 1        ;
++----------+----------+----------+----------+----------+----------+----------+
+
+
+Encoding Type:  One-Hot
 +---------------------------------------------------------------------------------------------------------------------------------------+
 ; State Machine - |Mercury|SPI:Alex_SPI_Tx|spi_state                                                                                    ;
 +----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+
@@ -502,7 +518,6 @@ Encoding Type:  One-Hot
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Register name                                                                                                                                         ; Reason for Removal                                                                                                                                                ;
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; TLV[3]                                                                                                                                                ; Stuck at GND due to stuck port data_in                                                                                                                            ;
 ; SPI:Alex_SPI_Tx|previous_Alex_data[7,16..18]                                                                                                          ; Stuck at GND due to stuck port data_in                                                                                                                            ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136 ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe138 ; Lost fanout                                                                                                                                                       ;
@@ -545,6 +560,10 @@ Encoding Type:  One-Hot
 ; receiver:receiver_inst|cordic:cordic_inst|X[2][0]                                                                                                     ; Stuck at GND due to stuck port data_in                                                                                                                            ;
 ; receiver:receiver_inst|cordic:cordic_inst|Y[2][1]                                                                                                     ; Stuck at GND due to stuck port data_in                                                                                                                            ;
 ; receiver:receiver_inst|cordic:cordic_inst|X[2][1]                                                                                                     ; Stuck at GND due to stuck port data_in                                                                                                                            ;
+; TLV~7                                                                                                                                                 ; Lost fanout                                                                                                                                                       ;
+; TLV~8                                                                                                                                                 ; Lost fanout                                                                                                                                                       ;
+; TLV~9                                                                                                                                                 ; Lost fanout                                                                                                                                                       ;
+; TLV~10                                                                                                                                                ; Lost fanout                                                                                                                                                       ;
 ; SPI:Alex_SPI_Tx|spi_state~12                                                                                                                          ; Lost fanout                                                                                                                                                       ;
 ; SPI:Alex_SPI_Tx|spi_state~13                                                                                                                          ; Lost fanout                                                                                                                                                       ;
 ; SPI:Alex_SPI_Tx|spi_state~14                                                                                                                          ; Lost fanout                                                                                                                                                       ;
@@ -557,7 +576,7 @@ Encoding Type:  One-Hot
 ; counter[26]                                                                                                                                           ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[47..55]                                                                           ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[47..55]                                                                           ; Lost fanout                                                                                                                                                       ;
-; Total Number of Removed Registers = 105                                                                                                               ;                                                                                                                                                                   ;
+; Total Number of Removed Registers = 108                                                                                                               ;                                                                                                                                                                   ;
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -586,12 +605,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 6712  ;
-; Number of registers using Synchronous Clear  ; 120   ;
+; Total registers                              ; 6739  ;
+; Number of registers using Synchronous Clear  ; 119   ;
 ; Number of registers using Synchronous Load   ; 903   ;
 ; Number of registers using Asynchronous Clear ; 238   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 4359  ;
+; Number of registers using Clock Enable       ; 4382  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -607,27 +626,27 @@ Encoding Type:  One-Hot
 +-------------------------------------------------+---------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (No Restructuring Performed)                                                                                                                ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
-; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|out_data[16] ;
-; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][12]        ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|temp_ADC[14]                                              ;
-; 9:1                ; 4 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |Mercury|bit_cnt[3]                                                ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|SPI:Alex_SPI_Tx|data_count[1]                             ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Mercury|bits[0]                                                   ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|state[1]            ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_Q|state[1]            ;
-; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[5]                                     ;
-; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|bit_count[1]                                ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|LPF_select:Alex_LPF_select|LPF[3]                         ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|Alex_data[2]                                              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (No Restructuring Performed)                                                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
+; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|out_data[1] ;
+; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][5]        ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|temp_ADC[3]                                              ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Mercury|bit_cnt[0]                                               ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|SPI:Alex_SPI_Tx|data_count[0]                            ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Mercury|bits[0]                                                  ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|state[1]           ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_Q|state[2]           ;
+; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[3]                                    ;
+; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|bit_count[0]                               ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0  ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0  ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|LPF_select:Alex_LPF_select|LPF[3]                        ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|Alex_data[2]                                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -940,7 +959,6 @@ Encoding Type:  One-Hot
 +----------------+-------+---------------------------------------------------------------+
 ; IN_WIDTH       ; 16    ; Signed Integer                                                ;
 ; EXTRA_BITS     ; 5     ; Signed Integer                                                ;
-; OUT_WIDTH      ; 22    ; Signed Integer                                                ;
 +----------------+-------+---------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -1928,7 +1946,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Thu Jan 01 19:51:34 2009
+    Info: Processing started: Sun Jan 04 15:17:03 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
 Info: Found 1 design units, including 1 entities, in source file mult_24Sx24S.v
     Info: Found entity 1: mult_24Sx24S
@@ -2073,7 +2091,7 @@ Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "PGA" is stuck at GND
     Warning (13410): Pin "INIT_DONE" is stuck at GND
     Warning (13410): Pin "TEST3" is stuck at GND
-Info: 63 registers lost all their fanouts during netlist optimizations. The first 63 are displayed below.
+Info: 67 registers lost all their fanouts during netlist optimizations. The first 67 are displayed below.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe138" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136" lost all its fanouts during netlist optimizations.
@@ -2110,6 +2128,10 @@ Info: 63 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[2]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[1]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[0]" lost all its fanouts during netlist optimizations.
+    Info: Register "TLV~7" lost all its fanouts during netlist optimizations.
+    Info: Register "TLV~8" lost all its fanouts during netlist optimizations.
+    Info: Register "TLV~9" lost all its fanouts during netlist optimizations.
+    Info: Register "TLV~10" lost all its fanouts during netlist optimizations.
     Info: Register "SPI:Alex_SPI_Tx|spi_state~12" lost all its fanouts during netlist optimizations.
     Info: Register "SPI:Alex_SPI_Tx|spi_state~13" lost all its fanouts during netlist optimizations.
     Info: Register "SPI:Alex_SPI_Tx|spi_state~14" lost all its fanouts during netlist optimizations.
@@ -2137,19 +2159,19 @@ Info: 63 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[53]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[54]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[55]" lost all its fanouts during netlist optimizations.
-Info: Implemented 8600 device resources after synthesis - the final resource count might be different
+Info: Implemented 8633 device resources after synthesis - the final resource count might be different
     Info: Implemented 28 input pins
     Info: Implemented 36 output pins
     Info: Implemented 1 bidirectional pins
-    Info: Implemented 8439 logic cells
+    Info: Implemented 8472 logic cells
     Info: Implemented 74 RAM segments
     Info: Implemented 22 DSP elements
 Info: Generated suppressed messages file C:/HPSDR/trunk/Mercury V2/Mercury.map.smsg
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 8 warnings
     Info: Peak virtual memory: 199 megabytes
-    Info: Processing ended: Thu Jan 01 19:52:10 2009
-    Info: Elapsed time: 00:00:36
-    Info: Total CPU time (on all processors): 00:00:35
+    Info: Processing ended: Sun Jan 04 15:17:37 2009
+    Info: Elapsed time: 00:00:34
+    Info: Total CPU time (on all processors): 00:00:33
 
 
 +------------------------------------------+
