@@ -35,18 +35,19 @@ ECHO "%Choice%" is not valid. Please try again.
 ECHO.
 GOTO Loop
 :ItemA
-c:\altera\81\qprogrammer\bin\quartus_pgm mercury_v1.cdf
+c:\altera\81\qprogrammer\bin\quartus_pgm -c USB-Blaster mercury_v1.cdf
 GOTO CONTINUE
 :ItemB
-c:\altera\81\qprogrammer\bin\quartus_pgm mercury_v2.1.cdf
+c:\altera\81\qprogrammer\bin\quartus_pgm -c USB-Blaster mercury_v2.1.cdf
 GOTO CONTINUE
 :ItemC
-c:\altera\81\qprogrammer\bin\quartus_pgm mercury_v2.2.cdf
+c:\altera\81\qprogrammer\bin\quartus_pgm -c USB-Blaster mercury_v2.2.cdf
 GOTO CONTINUE
 :ItemD
-c:\altera\81\qprogrammer\bin\quartus_pgm mercury_v2.3.cdf
+c:\altera\81\qprogrammer\bin\quartus_pgm -c USB-Blaster mercury_v2.3.cdf
 GOTO CONTINUE
 :CONTINUE
 PAUSE
 CLS
 :End
+
