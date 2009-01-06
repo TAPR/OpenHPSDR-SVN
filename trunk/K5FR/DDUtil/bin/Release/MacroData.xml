@@ -2,7 +2,7 @@
 <macroData>
   <macro>
     <Button>M1</Button>
-    <Command />
+    <Command>ZZPS1;</Command>
   </macro>
   <macro>
     <Button>20 RTTY</Button>
@@ -18,11 +18,11 @@
   </macro>
   <macro>
     <Button>IQ&gt; VAC</Button>
-    <Command>ZZVH1;ZZRS1;</Command>
+    <Command>ZZVH1;ZZRS1;ZZSR0;</Command>
   </macro>
   <macro>
     <Button>IQ&lt; VAC</Button>
-    <Command>ZZVH0;ZZRS0;</Command>
+    <Command>ZZVH0;ZZRS0;ZZSR1;</Command>
   </macro>
   <macro>
     <Button>Ant1</Button>
@@ -38,23 +38,23 @@
   </macro>
   <macro>
     <Button>M10</Button>
-    <Command />
+    <Command>ZZPS1;</Command>
   </macro>
   <macro>
     <Button>M11</Button>
-    <Command />
+    <Command>ZZPS0;</Command>
   </macro>
   <macro>
     <Button>M12</Button>
-    <Command />
+    <Command>DDMM;</Command>
   </macro>
   <macro>
     <Button>M13</Button>
-    <Command />
+    <Command>DDBL;</Command>
   </macro>
   <macro>
     <Button>M14</Button>
-    <Command />
+    <Command>DDCX;</Command>
   </macro>
   <macro>
     <Button>M15</Button>
@@ -70,14 +70,14 @@
   </macro>
   <macro>
     <Button>SSB</Button>
-    <Command>ZZFI06;ZZMT02;ZZPC100;</Command>
+    <Command>ZZFI06;ZZMT02;ZZPC050;</Command>
   </macro>
   <macro>
     <Button>CW</Button>
-    <Command>ZZFI05;ZZMT00;ZZPC100;</Command>
+    <Command>ZZFI05;ZZMT00;ZZPC050;</Command>
   </macro>
   <macro>
     <Button>DIGI</Button>
-    <Command>ZZFI10;ZZMT02;ZZPC100;</Command>
+    <Command>ZZFI10;ZZMT02;ZZPC050;</Command>
   </macro>
 </macroData>
