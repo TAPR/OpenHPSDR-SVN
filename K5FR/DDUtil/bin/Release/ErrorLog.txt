@@ -1,0 +1,22 @@
+Source		: System.Windows.Forms
+Method		: get_Handle
+Time		: 4:50:44 PM
+Date		: 1/5/2009
+Computer	: K5FR-GW32
+Error		: Cross-thread operation not valid: Control 'txtTune' accessed from a thread other than the thread it was created on.
+Stack Trace	: at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.OnEnabledChanged(EventArgs e)
+   at System.Windows.Forms.Control.set_Enabled(Boolean value)
+   at DataDecoder.Setup.DataAcom(String msg) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 8663
+-------------------------------------------------------------------
+Source		: System.Windows.Forms
+Method		: get_Handle
+Time		: 4:50:44 PM
+Date		: 1/5/2009
+Computer	: K5FR-GW32
+Error		: Cross-thread operation not valid: Control 'txtTune' accessed from a thread other than the thread it was created on.
+Stack Trace	: at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.OnEnabledChanged(EventArgs e)
+   at System.Windows.Forms.Control.set_Enabled(Boolean value)
+   at DataDecoder.Setup.DataAcom(String msg) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 8804
+-------------------------------------------------------------------

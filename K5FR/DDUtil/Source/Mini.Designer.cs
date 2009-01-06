@@ -61,7 +61,7 @@ namespace DataDecoder
             this.btnPwr = new System.Windows.Forms.Button();
             this.grpStepCtrl = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.grpAlpha = new System.Windows.Forms.GroupBox();
+            this.grpAmp = new System.Windows.Forms.GroupBox();
             this.lblHF = new System.Windows.Forms.Label();
             this.lblSF = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
@@ -69,7 +69,7 @@ namespace DataDecoder
             this.label73 = new System.Windows.Forms.Label();
             this.grpStepCtrl.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.grpAlpha.SuspendLayout();
+            this.grpAmp.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAvg
@@ -363,12 +363,13 @@ namespace DataDecoder
             // 
             this.txtMsg.BackColor = System.Drawing.SystemColors.Info;
             this.txtMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMsg.Location = new System.Drawing.Point(6, 54);
+            this.txtMsg.Location = new System.Drawing.Point(7, 54);
+            this.txtMsg.Multiline = true;
             this.txtMsg.Name = "txtMsg";
             this.txtMsg.ReadOnly = true;
+            this.txtMsg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtMsg.Size = new System.Drawing.Size(236, 20);
             this.txtMsg.TabIndex = 48;
-            this.txtMsg.Text = "Status and Fault messages displayed here.";
             this.txtMsg.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtMsg, "Displays Status and Fault messages.");
             // 
@@ -384,7 +385,7 @@ namespace DataDecoder
             this.btnHV.Name = "btnHV";
             this.btnHV.Size = new System.Drawing.Size(41, 22);
             this.btnHV.TabIndex = 39;
-            this.btnHV.Text = "Low";
+            this.btnHV.Text = "Off";
             this.toolTip1.SetToolTip(this.btnHV, "Press to toggle High/Low plate voltage .");
             this.btnHV.UseVisualStyleBackColor = false;
             this.btnHV.Click += new System.EventHandler(this.btnHV_Click);
@@ -401,7 +402,7 @@ namespace DataDecoder
             this.btnOper.Name = "btnOper";
             this.btnOper.Size = new System.Drawing.Size(41, 22);
             this.btnOper.TabIndex = 9;
-            this.btnOper.Text = "Stby";
+            this.btnOper.Text = "Off";
             this.toolTip1.SetToolTip(this.btnOper, "Press to toggle Operate/StandBy modes.");
             this.btnOper.UseVisualStyleBackColor = false;
             this.btnOper.Click += new System.EventHandler(this.btnOper_Click);
@@ -418,7 +419,7 @@ namespace DataDecoder
             this.btnTune.Name = "btnTune";
             this.btnTune.Size = new System.Drawing.Size(41, 22);
             this.btnTune.TabIndex = 8;
-            this.btnTune.Text = "Man";
+            this.btnTune.Text = "Off";
             this.toolTip1.SetToolTip(this.btnTune, "Press to toggle Autotune/Manual tuning modes.");
             this.btnTune.UseVisualStyleBackColor = false;
             this.btnTune.Click += new System.EventHandler(this.btnTune_Click);
@@ -482,29 +483,29 @@ namespace DataDecoder
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rotor";
             // 
-            // grpAlpha
+            // grpAmp
             // 
-            this.grpAlpha.Controls.Add(this.btnHF);
-            this.grpAlpha.Controls.Add(this.btnSF);
-            this.grpAlpha.Controls.Add(this.lblHF);
-            this.grpAlpha.Controls.Add(this.txtMsg);
-            this.grpAlpha.Controls.Add(this.lblSF);
-            this.grpAlpha.Controls.Add(this.btnHV);
-            this.grpAlpha.Controls.Add(this.label77);
-            this.grpAlpha.Controls.Add(this.label76);
-            this.grpAlpha.Controls.Add(this.label73);
-            this.grpAlpha.Controls.Add(this.btnOper);
-            this.grpAlpha.Controls.Add(this.btnTune);
-            this.grpAlpha.Controls.Add(this.label71);
-            this.grpAlpha.Controls.Add(this.btnPwr);
-            this.grpAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
-            this.grpAlpha.ForeColor = System.Drawing.Color.Blue;
-            this.grpAlpha.Location = new System.Drawing.Point(430, -2);
-            this.grpAlpha.Name = "grpAlpha";
-            this.grpAlpha.Size = new System.Drawing.Size(251, 80);
-            this.grpAlpha.TabIndex = 88;
-            this.grpAlpha.TabStop = false;
-            this.grpAlpha.Text = "Alpha 87A";
+            this.grpAmp.Controls.Add(this.btnHF);
+            this.grpAmp.Controls.Add(this.btnSF);
+            this.grpAmp.Controls.Add(this.lblHF);
+            this.grpAmp.Controls.Add(this.txtMsg);
+            this.grpAmp.Controls.Add(this.lblSF);
+            this.grpAmp.Controls.Add(this.btnHV);
+            this.grpAmp.Controls.Add(this.label77);
+            this.grpAmp.Controls.Add(this.label76);
+            this.grpAmp.Controls.Add(this.label73);
+            this.grpAmp.Controls.Add(this.btnOper);
+            this.grpAmp.Controls.Add(this.btnTune);
+            this.grpAmp.Controls.Add(this.label71);
+            this.grpAmp.Controls.Add(this.btnPwr);
+            this.grpAmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.grpAmp.ForeColor = System.Drawing.Color.Blue;
+            this.grpAmp.Location = new System.Drawing.Point(430, -2);
+            this.grpAmp.Name = "grpAmp";
+            this.grpAmp.Size = new System.Drawing.Size(251, 80);
+            this.grpAmp.TabIndex = 88;
+            this.grpAmp.TabStop = false;
+            this.grpAmp.Text = "Amplifier";
             // 
             // lblHF
             // 
@@ -567,8 +568,8 @@ namespace DataDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 77);
-            this.Controls.Add(this.grpAlpha);
+            this.ClientSize = new System.Drawing.Size(684, 100);
+            this.Controls.Add(this.grpAmp);
             this.Controls.Add(this.AOT);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpStepCtrl);
@@ -595,8 +596,8 @@ namespace DataDecoder
             this.grpStepCtrl.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.grpAlpha.ResumeLayout(false);
-            this.grpAlpha.PerformLayout();
+            this.grpAmp.ResumeLayout(false);
+            this.grpAmp.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -625,9 +626,6 @@ namespace DataDecoder
         public System.Windows.Forms.Label lblAvg;
         private System.Windows.Forms.CheckBox AOT;
         public System.Windows.Forms.TextBox txtSP;
-        private System.Windows.Forms.GroupBox grpAlpha;
-        private System.Windows.Forms.Label lblHF;
-        private System.Windows.Forms.Label lblSF;
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.Label label76;
         private System.Windows.Forms.Label label73;
@@ -639,5 +637,8 @@ namespace DataDecoder
         public System.Windows.Forms.Button btnOper;
         public System.Windows.Forms.Button btnTune;
         public System.Windows.Forms.Button btnPwr;
+        public System.Windows.Forms.GroupBox grpAmp;
+        public System.Windows.Forms.Label lblHF;
+        public System.Windows.Forms.Label lblSF;
     }
 }

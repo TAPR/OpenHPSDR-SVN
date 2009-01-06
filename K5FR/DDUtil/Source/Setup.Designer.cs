@@ -51,6 +51,7 @@ namespace DataDecoder
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPorts = new System.Windows.Forms.TabPage();
             this.grpSlave = new System.Windows.Forms.GroupBox();
+            this.chkSlaveRTS = new System.Windows.Forms.CheckBox();
             this.chkSlaveDTR = new System.Windows.Forms.CheckBox();
             this.chkFollow = new System.Windows.Forms.CheckBox();
             this.chkMode = new System.Windows.Forms.CheckBox();
@@ -195,14 +196,31 @@ namespace DataDecoder
             this.label2 = new System.Windows.Forms.Label();
             this.txtSleep = new System.Windows.Forms.TextBox();
             this.tabMisc = new System.Windows.Forms.TabPage();
+            this.grpAmpBand = new System.Windows.Forms.GroupBox();
+            this.btnInfo = new System.Windows.Forms.Button();
+            this.chkB80 = new System.Windows.Forms.CheckBox();
+            this.btnBandClear = new System.Windows.Forms.Button();
+            this.btnBandAll = new System.Windows.Forms.Button();
+            this.chkB160 = new System.Windows.Forms.CheckBox();
+            this.chkB30 = new System.Windows.Forms.CheckBox();
+            this.chkB17 = new System.Windows.Forms.CheckBox();
+            this.chkB40 = new System.Windows.Forms.CheckBox();
+            this.chkB10 = new System.Windows.Forms.CheckBox();
+            this.chkB12 = new System.Windows.Forms.CheckBox();
+            this.chkB20 = new System.Windows.Forms.CheckBox();
+            this.chkB15 = new System.Windows.Forms.CheckBox();
             this.grpRepeat = new System.Windows.Forms.GroupBox();
+            this.grpRmode = new System.Windows.Forms.GroupBox();
+            this.rbMHBD = new System.Windows.Forms.RadioButton();
+            this.rbAll = new System.Windows.Forms.RadioButton();
             this.cboRepeatPort = new System.Windows.Forms.ComboBox();
             this.chkRepeat = new System.Windows.Forms.CheckBox();
-            this.grpAlpha = new System.Windows.Forms.GroupBox();
-            this.label74 = new System.Windows.Forms.Label();
+            this.btnTest = new System.Windows.Forms.Button();
+            this.grpAmp = new System.Windows.Forms.GroupBox();
+            this.lblLoad = new System.Windows.Forms.Label();
             this.txtLoad = new System.Windows.Forms.TextBox();
             this.txtTune = new System.Windows.Forms.TextBox();
-            this.label79 = new System.Windows.Forms.Label();
+            this.lblTune = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
             this.txtFreq = new System.Windows.Forms.TextBox();
             this.label78 = new System.Windows.Forms.Label();
@@ -212,9 +230,10 @@ namespace DataDecoder
             this.lblHF = new System.Windows.Forms.Label();
             this.txtMsg = new System.Windows.Forms.TextBox();
             this.lblSF = new System.Windows.Forms.Label();
+            this.label74 = new System.Windows.Forms.Label();
             this.label69 = new System.Windows.Forms.Label();
             this.txtSeg = new System.Windows.Forms.TextBox();
-            this.label70 = new System.Windows.Forms.Label();
+            this.lblAmpInt = new System.Windows.Forms.Label();
             this.txtAlphaInt = new System.Windows.Forms.TextBox();
             this.btnHV = new System.Windows.Forms.Button();
             this.label77 = new System.Windows.Forms.Label();
@@ -222,16 +241,19 @@ namespace DataDecoder
             this.label75 = new System.Windows.Forms.Label();
             this.cboAlpha = new System.Windows.Forms.ComboBox();
             this.label73 = new System.Windows.Forms.Label();
+            this.label70 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
             this.btnOper = new System.Windows.Forms.Button();
             this.btnTune = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label71 = new System.Windows.Forms.Label();
             this.txtBand = new System.Windows.Forms.TextBox();
             this.chkAlpha = new System.Windows.Forms.CheckBox();
             this.btnPwr = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chkPwRTS = new System.Windows.Forms.CheckBox();
+            this.chkPwDTR = new System.Windows.Forms.CheckBox();
             this.chkDisBcast = new System.Windows.Forms.CheckBox();
-            this.btnTest = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
             this.txtPW1ra = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -758,6 +780,11 @@ namespace DataDecoder
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tubeAmpsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aCOM2000AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alpha9500ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableErrorLoggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -789,9 +816,9 @@ namespace DataDecoder
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
             this.PMport = new System.IO.Ports.SerialPort(this.components);
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
-            this.chkSlaveRTS = new System.Windows.Forms.CheckBox();
-            this.chkPwRTS = new System.Windows.Forms.CheckBox();
-            this.chkPwDTR = new System.Windows.Forms.CheckBox();
+            this.cboRepeatCom = new System.Windows.Forms.ComboBox();
+            this.label79 = new System.Windows.Forms.Label();
+            this.label147 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -818,8 +845,10 @@ namespace DataDecoder
             this.groupBox6.SuspendLayout();
             this.grpLP.SuspendLayout();
             this.tabMisc.SuspendLayout();
+            this.grpAmpBand.SuspendLayout();
             this.grpRepeat.SuspendLayout();
-            this.grpAlpha.SuspendLayout();
+            this.grpRmode.SuspendLayout();
+            this.grpAmp.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabMacro.SuspendLayout();
             this.grpMacro.SuspendLayout();
@@ -903,6 +932,19 @@ namespace DataDecoder
             this.grpSlave.TabIndex = 31;
             this.grpSlave.TabStop = false;
             this.grpSlave.Text = "Slave Radio";
+            // 
+            // chkSlaveRTS
+            // 
+            this.chkSlaveRTS.AutoSize = true;
+            this.chkSlaveRTS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSlaveRTS.Location = new System.Drawing.Point(289, 37);
+            this.chkSlaveRTS.Name = "chkSlaveRTS";
+            this.chkSlaveRTS.Size = new System.Drawing.Size(48, 17);
+            this.chkSlaveRTS.TabIndex = 31;
+            this.chkSlaveRTS.Text = "RTS";
+            this.toolTip1.SetToolTip(this.chkSlaveRTS, "Select if your CI-V adapter requires power from the RTS line.");
+            this.chkSlaveRTS.UseVisualStyleBackColor = true;
+            this.chkSlaveRTS.CheckedChanged += new System.EventHandler(this.chkSlaveRTS_CheckedChanged);
             // 
             // chkSlaveDTR
             // 
@@ -2787,9 +2829,10 @@ namespace DataDecoder
             // 
             // tabMisc
             // 
+            this.tabMisc.Controls.Add(this.grpAmpBand);
             this.tabMisc.Controls.Add(this.grpRepeat);
             this.tabMisc.Controls.Add(this.btnTest);
-            this.tabMisc.Controls.Add(this.grpAlpha);
+            this.tabMisc.Controls.Add(this.grpAmp);
             this.tabMisc.Controls.Add(this.groupBox4);
             this.tabMisc.Location = new System.Drawing.Point(4, 22);
             this.tabMisc.Name = "tabMisc";
@@ -2799,23 +2842,276 @@ namespace DataDecoder
             this.tabMisc.UseVisualStyleBackColor = true;
             this.tabMisc.DoubleClick += new System.EventHandler(this.tabMisc_DoubleClick);
             // 
+            // grpAmpBand
+            // 
+            this.grpAmpBand.Controls.Add(this.btnInfo);
+            this.grpAmpBand.Controls.Add(this.chkB80);
+            this.grpAmpBand.Controls.Add(this.btnBandClear);
+            this.grpAmpBand.Controls.Add(this.btnBandAll);
+            this.grpAmpBand.Controls.Add(this.chkB160);
+            this.grpAmpBand.Controls.Add(this.chkB30);
+            this.grpAmpBand.Controls.Add(this.chkB17);
+            this.grpAmpBand.Controls.Add(this.chkB40);
+            this.grpAmpBand.Controls.Add(this.chkB10);
+            this.grpAmpBand.Controls.Add(this.chkB12);
+            this.grpAmpBand.Controls.Add(this.chkB20);
+            this.grpAmpBand.Controls.Add(this.chkB15);
+            this.grpAmpBand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpAmpBand.ForeColor = System.Drawing.Color.Blue;
+            this.grpAmpBand.Location = new System.Drawing.Point(331, 164);
+            this.grpAmpBand.Name = "grpAmpBand";
+            this.grpAmpBand.Size = new System.Drawing.Size(93, 136);
+            this.grpAmpBand.TabIndex = 108;
+            this.grpAmpBand.TabStop = false;
+            this.grpAmpBand.Text = "Bands";
+            this.toolTip1.SetToolTip(this.grpAmpBand, "Select band(s) for Auto Tune procedure.");
+            this.grpAmpBand.Visible = false;
+            // 
+            // btnInfo
+            // 
+            this.btnInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnInfo.BackColor = System.Drawing.SystemColors.Control;
+            this.btnInfo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnInfo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Info;
+            this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F);
+            this.btnInfo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnInfo.Location = new System.Drawing.Point(54, 89);
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Size = new System.Drawing.Size(30, 15);
+            this.btnInfo.TabIndex = 107;
+            this.btnInfo.Text = "Info";
+            this.toolTip1.SetToolTip(this.btnInfo, "Press for instruction/cautions about using this feature.");
+            this.btnInfo.UseVisualStyleBackColor = false;
+            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
+            // 
+            // chkB80
+            // 
+            this.chkB80.AutoSize = true;
+            this.chkB80.BackColor = System.Drawing.SystemColors.Control;
+            this.chkB80.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkB80.ForeColor = System.Drawing.Color.Navy;
+            this.chkB80.Location = new System.Drawing.Point(53, 16);
+            this.chkB80.Name = "chkB80";
+            this.chkB80.Size = new System.Drawing.Size(38, 17);
+            this.chkB80.TabIndex = 98;
+            this.chkB80.Text = "80";
+            this.toolTip1.SetToolTip(this.chkB80, "Select to enable Auto Tune on this band.");
+            this.chkB80.UseVisualStyleBackColor = false;
+            // 
+            // btnBandClear
+            // 
+            this.btnBandClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBandClear.BackColor = System.Drawing.SystemColors.Control;
+            this.btnBandClear.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnBandClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBandClear.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnBandClear.Location = new System.Drawing.Point(49, 110);
+            this.btnBandClear.Name = "btnBandClear";
+            this.btnBandClear.Size = new System.Drawing.Size(40, 15);
+            this.btnBandClear.TabIndex = 105;
+            this.btnBandClear.Text = "Clr All";
+            this.toolTip1.SetToolTip(this.btnBandClear, "Clears all bands.");
+            this.btnBandClear.UseVisualStyleBackColor = false;
+            this.btnBandClear.Click += new System.EventHandler(this.btnBandClear_Click);
+            // 
+            // btnBandAll
+            // 
+            this.btnBandAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBandAll.BackColor = System.Drawing.SystemColors.Control;
+            this.btnBandAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnBandAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBandAll.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnBandAll.Location = new System.Drawing.Point(5, 110);
+            this.btnBandAll.Name = "btnBandAll";
+            this.btnBandAll.Size = new System.Drawing.Size(40, 15);
+            this.btnBandAll.TabIndex = 106;
+            this.btnBandAll.Text = "Chk All";
+            this.toolTip1.SetToolTip(this.btnBandAll, "Checks all bands.");
+            this.btnBandAll.UseVisualStyleBackColor = false;
+            this.btnBandAll.Click += new System.EventHandler(this.btnBandAll_Click);
+            // 
+            // chkB160
+            // 
+            this.chkB160.AutoSize = true;
+            this.chkB160.BackColor = System.Drawing.SystemColors.Control;
+            this.chkB160.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkB160.ForeColor = System.Drawing.Color.Navy;
+            this.chkB160.Location = new System.Drawing.Point(2, 16);
+            this.chkB160.Name = "chkB160";
+            this.chkB160.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkB160.Size = new System.Drawing.Size(44, 17);
+            this.chkB160.TabIndex = 96;
+            this.chkB160.Text = "160";
+            this.toolTip1.SetToolTip(this.chkB160, "Select to enable Auto Tune on this band.");
+            this.chkB160.UseVisualStyleBackColor = false;
+            // 
+            // chkB30
+            // 
+            this.chkB30.AutoSize = true;
+            this.chkB30.BackColor = System.Drawing.SystemColors.Control;
+            this.chkB30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkB30.ForeColor = System.Drawing.Color.Navy;
+            this.chkB30.Location = new System.Drawing.Point(53, 32);
+            this.chkB30.Name = "chkB30";
+            this.chkB30.Size = new System.Drawing.Size(38, 17);
+            this.chkB30.TabIndex = 103;
+            this.chkB30.Text = "30";
+            this.toolTip1.SetToolTip(this.chkB30, "Select to enable Auto Tune on this band.");
+            this.chkB30.UseVisualStyleBackColor = false;
+            // 
+            // chkB17
+            // 
+            this.chkB17.AutoSize = true;
+            this.chkB17.BackColor = System.Drawing.SystemColors.Control;
+            this.chkB17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkB17.ForeColor = System.Drawing.Color.Navy;
+            this.chkB17.Location = new System.Drawing.Point(53, 48);
+            this.chkB17.Name = "chkB17";
+            this.chkB17.Size = new System.Drawing.Size(38, 17);
+            this.chkB17.TabIndex = 99;
+            this.chkB17.Text = "17";
+            this.toolTip1.SetToolTip(this.chkB17, "Select to enable Auto Tune on this band.");
+            this.chkB17.UseVisualStyleBackColor = false;
+            // 
+            // chkB40
+            // 
+            this.chkB40.AutoSize = true;
+            this.chkB40.BackColor = System.Drawing.SystemColors.Control;
+            this.chkB40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkB40.ForeColor = System.Drawing.Color.Navy;
+            this.chkB40.Location = new System.Drawing.Point(8, 32);
+            this.chkB40.Name = "chkB40";
+            this.chkB40.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkB40.Size = new System.Drawing.Size(38, 17);
+            this.chkB40.TabIndex = 101;
+            this.chkB40.Text = "40";
+            this.toolTip1.SetToolTip(this.chkB40, "Select to enable Auto Tune on this band.");
+            this.chkB40.UseVisualStyleBackColor = false;
+            // 
+            // chkB10
+            // 
+            this.chkB10.AutoSize = true;
+            this.chkB10.BackColor = System.Drawing.SystemColors.Control;
+            this.chkB10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkB10.ForeColor = System.Drawing.Color.Navy;
+            this.chkB10.Location = new System.Drawing.Point(8, 80);
+            this.chkB10.Name = "chkB10";
+            this.chkB10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkB10.Size = new System.Drawing.Size(38, 17);
+            this.chkB10.TabIndex = 104;
+            this.chkB10.Text = "10";
+            this.toolTip1.SetToolTip(this.chkB10, "Select to enable Auto Tune on this band.");
+            this.chkB10.UseVisualStyleBackColor = false;
+            // 
+            // chkB12
+            // 
+            this.chkB12.AutoSize = true;
+            this.chkB12.BackColor = System.Drawing.SystemColors.Control;
+            this.chkB12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkB12.ForeColor = System.Drawing.Color.Navy;
+            this.chkB12.Location = new System.Drawing.Point(53, 64);
+            this.chkB12.Name = "chkB12";
+            this.chkB12.Size = new System.Drawing.Size(38, 17);
+            this.chkB12.TabIndex = 102;
+            this.chkB12.Text = "12";
+            this.toolTip1.SetToolTip(this.chkB12, "Select to enable Auto Tune on this band.");
+            this.chkB12.UseVisualStyleBackColor = false;
+            // 
+            // chkB20
+            // 
+            this.chkB20.AutoSize = true;
+            this.chkB20.BackColor = System.Drawing.SystemColors.Control;
+            this.chkB20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkB20.ForeColor = System.Drawing.Color.Navy;
+            this.chkB20.Location = new System.Drawing.Point(8, 48);
+            this.chkB20.Name = "chkB20";
+            this.chkB20.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkB20.Size = new System.Drawing.Size(38, 17);
+            this.chkB20.TabIndex = 97;
+            this.chkB20.Text = "20";
+            this.toolTip1.SetToolTip(this.chkB20, "Select to enable Auto Tune on this band.");
+            this.chkB20.UseVisualStyleBackColor = false;
+            // 
+            // chkB15
+            // 
+            this.chkB15.AutoSize = true;
+            this.chkB15.BackColor = System.Drawing.SystemColors.Control;
+            this.chkB15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkB15.ForeColor = System.Drawing.Color.Navy;
+            this.chkB15.Location = new System.Drawing.Point(8, 64);
+            this.chkB15.Name = "chkB15";
+            this.chkB15.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkB15.Size = new System.Drawing.Size(38, 17);
+            this.chkB15.TabIndex = 100;
+            this.chkB15.Text = "15";
+            this.toolTip1.SetToolTip(this.chkB15, "Select to enable Auto Tune on this band.");
+            this.chkB15.UseVisualStyleBackColor = false;
+            // 
             // grpRepeat
             // 
+            this.grpRepeat.Controls.Add(this.label79);
+            this.grpRepeat.Controls.Add(this.label147);
+            this.grpRepeat.Controls.Add(this.cboRepeatCom);
+            this.grpRepeat.Controls.Add(this.grpRmode);
             this.grpRepeat.Controls.Add(this.cboRepeatPort);
             this.grpRepeat.Controls.Add(this.chkRepeat);
-            this.grpRepeat.Location = new System.Drawing.Point(327, 8);
+            this.grpRepeat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpRepeat.ForeColor = System.Drawing.Color.Blue;
+            this.grpRepeat.Location = new System.Drawing.Point(275, 4);
             this.grpRepeat.Name = "grpRepeat";
-            this.grpRepeat.Size = new System.Drawing.Size(82, 72);
+            this.grpRepeat.Size = new System.Drawing.Size(149, 100);
             this.grpRepeat.TabIndex = 51;
             this.grpRepeat.TabStop = false;
             this.grpRepeat.Text = "Repeater";
-            this.grpRepeat.Visible = false;
+            // 
+            // grpRmode
+            // 
+            this.grpRmode.Controls.Add(this.rbMHBD);
+            this.grpRmode.Controls.Add(this.rbAll);
+            this.grpRmode.ForeColor = System.Drawing.Color.Navy;
+            this.grpRmode.Location = new System.Drawing.Point(9, 42);
+            this.grpRmode.Name = "grpRmode";
+            this.grpRmode.Size = new System.Drawing.Size(64, 45);
+            this.grpRmode.TabIndex = 66;
+            this.grpRmode.TabStop = false;
+            // 
+            // rbMHBD
+            // 
+            this.rbMHBD.AutoSize = true;
+            this.rbMHBD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbMHBD.ForeColor = System.Drawing.Color.Navy;
+            this.rbMHBD.Location = new System.Drawing.Point(4, 25);
+            this.rbMHBD.Name = "rbMHBD";
+            this.rbMHBD.Size = new System.Drawing.Size(56, 17);
+            this.rbMHBD.TabIndex = 68;
+            this.rbMHBD.Text = "IF only";
+            this.toolTip1.SetToolTip(this.rbMHBD, "Only \'IF\' commands are passed.");
+            this.rbMHBD.UseVisualStyleBackColor = true;
+            this.rbMHBD.CheckedChanged += new System.EventHandler(this.grpRmode_CheckedChanged);
+            // 
+            // rbAll
+            // 
+            this.rbAll.AutoSize = true;
+            this.rbAll.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbAll.ForeColor = System.Drawing.Color.Navy;
+            this.rbAll.Location = new System.Drawing.Point(4, 8);
+            this.rbAll.Name = "rbAll";
+            this.rbAll.Size = new System.Drawing.Size(36, 17);
+            this.rbAll.TabIndex = 67;
+            this.rbAll.Text = "All";
+            this.toolTip1.SetToolTip(this.rbAll, "All commands are reported.");
+            this.rbAll.UseVisualStyleBackColor = true;
+            this.rbAll.CheckedChanged += new System.EventHandler(this.grpRmode_CheckedChanged);
             // 
             // cboRepeatPort
             // 
             this.cboRepeatPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboRepeatPort.ForeColor = System.Drawing.Color.Navy;
             this.cboRepeatPort.FormattingEnabled = true;
-            this.cboRepeatPort.Location = new System.Drawing.Point(13, 38);
+            this.cboRepeatPort.Location = new System.Drawing.Point(81, 26);
             this.cboRepeatPort.Name = "cboRepeatPort";
             this.cboRepeatPort.Size = new System.Drawing.Size(63, 21);
             this.cboRepeatPort.TabIndex = 49;
@@ -2826,103 +3122,121 @@ namespace DataDecoder
             // 
             this.chkRepeat.AutoSize = true;
             this.chkRepeat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkRepeat.Location = new System.Drawing.Point(13, 18);
+            this.chkRepeat.ForeColor = System.Drawing.Color.Navy;
+            this.chkRepeat.Location = new System.Drawing.Point(13, 22);
             this.chkRepeat.Name = "chkRepeat";
-            this.chkRepeat.Size = new System.Drawing.Size(65, 17);
+            this.chkRepeat.Size = new System.Drawing.Size(59, 17);
             this.chkRepeat.TabIndex = 50;
-            this.chkRepeat.Text = "Enabled";
+            this.chkRepeat.Text = "Enable";
             this.toolTip1.SetToolTip(this.chkRepeat, "Check to enable the Repeater port.");
             this.chkRepeat.UseVisualStyleBackColor = true;
             this.chkRepeat.CheckedChanged += new System.EventHandler(this.chkRepeat_CheckedChanged);
             // 
-            // grpAlpha
+            // btnTest
             // 
-            this.grpAlpha.Controls.Add(this.label74);
-            this.grpAlpha.Controls.Add(this.txtLoad);
-            this.grpAlpha.Controls.Add(this.txtTune);
-            this.grpAlpha.Controls.Add(this.label79);
-            this.grpAlpha.Controls.Add(this.label80);
-            this.grpAlpha.Controls.Add(this.txtFreq);
-            this.grpAlpha.Controls.Add(this.label78);
-            this.grpAlpha.Controls.Add(this.cboAlphaBaud);
-            this.grpAlpha.Controls.Add(this.btnHF);
-            this.grpAlpha.Controls.Add(this.btnSF);
-            this.grpAlpha.Controls.Add(this.lblHF);
-            this.grpAlpha.Controls.Add(this.txtMsg);
-            this.grpAlpha.Controls.Add(this.lblSF);
-            this.grpAlpha.Controls.Add(this.label69);
-            this.grpAlpha.Controls.Add(this.txtSeg);
-            this.grpAlpha.Controls.Add(this.label70);
-            this.grpAlpha.Controls.Add(this.txtAlphaInt);
-            this.grpAlpha.Controls.Add(this.btnHV);
-            this.grpAlpha.Controls.Add(this.label77);
-            this.grpAlpha.Controls.Add(this.label76);
-            this.grpAlpha.Controls.Add(this.label75);
-            this.grpAlpha.Controls.Add(this.cboAlpha);
-            this.grpAlpha.Controls.Add(this.label73);
-            this.grpAlpha.Controls.Add(this.label72);
-            this.grpAlpha.Controls.Add(this.btnOper);
-            this.grpAlpha.Controls.Add(this.btnTune);
-            this.grpAlpha.Controls.Add(this.label71);
-            this.grpAlpha.Controls.Add(this.txtBand);
-            this.grpAlpha.Controls.Add(this.chkAlpha);
-            this.grpAlpha.Controls.Add(this.btnPwr);
-            this.grpAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpAlpha.ForeColor = System.Drawing.Color.Blue;
-            this.grpAlpha.Location = new System.Drawing.Point(7, 164);
-            this.grpAlpha.Name = "grpAlpha";
-            this.grpAlpha.Size = new System.Drawing.Size(321, 129);
-            this.grpAlpha.TabIndex = 0;
-            this.grpAlpha.TabStop = false;
-            this.grpAlpha.Text = "Alpha 87A";
+            this.btnTest.AutoSize = true;
+            this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTest.Location = new System.Drawing.Point(75, 114);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(42, 23);
+            this.btnTest.TabIndex = 49;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Visible = false;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
-            // label74
+            // grpAmp
             // 
-            this.label74.AutoSize = true;
-            this.label74.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
-            this.label74.ForeColor = System.Drawing.Color.Navy;
-            this.label74.Location = new System.Drawing.Point(284, 87);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(31, 13);
-            this.label74.TabIndex = 60;
-            this.label74.Text = "Load";
+            this.grpAmp.Controls.Add(this.lblLoad);
+            this.grpAmp.Controls.Add(this.txtLoad);
+            this.grpAmp.Controls.Add(this.txtTune);
+            this.grpAmp.Controls.Add(this.lblTune);
+            this.grpAmp.Controls.Add(this.label80);
+            this.grpAmp.Controls.Add(this.txtFreq);
+            this.grpAmp.Controls.Add(this.label78);
+            this.grpAmp.Controls.Add(this.cboAlphaBaud);
+            this.grpAmp.Controls.Add(this.btnHF);
+            this.grpAmp.Controls.Add(this.btnSF);
+            this.grpAmp.Controls.Add(this.lblHF);
+            this.grpAmp.Controls.Add(this.txtMsg);
+            this.grpAmp.Controls.Add(this.lblSF);
+            this.grpAmp.Controls.Add(this.label74);
+            this.grpAmp.Controls.Add(this.label69);
+            this.grpAmp.Controls.Add(this.txtSeg);
+            this.grpAmp.Controls.Add(this.lblAmpInt);
+            this.grpAmp.Controls.Add(this.txtAlphaInt);
+            this.grpAmp.Controls.Add(this.btnHV);
+            this.grpAmp.Controls.Add(this.label77);
+            this.grpAmp.Controls.Add(this.label76);
+            this.grpAmp.Controls.Add(this.label75);
+            this.grpAmp.Controls.Add(this.cboAlpha);
+            this.grpAmp.Controls.Add(this.label73);
+            this.grpAmp.Controls.Add(this.label70);
+            this.grpAmp.Controls.Add(this.label72);
+            this.grpAmp.Controls.Add(this.btnOper);
+            this.grpAmp.Controls.Add(this.btnTune);
+            this.grpAmp.Controls.Add(this.textBox1);
+            this.grpAmp.Controls.Add(this.label71);
+            this.grpAmp.Controls.Add(this.txtBand);
+            this.grpAmp.Controls.Add(this.chkAlpha);
+            this.grpAmp.Controls.Add(this.btnPwr);
+            this.grpAmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpAmp.ForeColor = System.Drawing.Color.Blue;
+            this.grpAmp.Location = new System.Drawing.Point(7, 164);
+            this.grpAmp.Name = "grpAmp";
+            this.grpAmp.Size = new System.Drawing.Size(320, 136);
+            this.grpAmp.TabIndex = 0;
+            this.grpAmp.TabStop = false;
+            this.grpAmp.Text = "Amplifier";
+            this.toolTip1.SetToolTip(this.grpAmp, "Select Amp from Options menu");
+            // 
+            // lblLoad
+            // 
+            this.lblLoad.AutoSize = true;
+            this.lblLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.lblLoad.ForeColor = System.Drawing.Color.Navy;
+            this.lblLoad.Location = new System.Drawing.Point(284, 91);
+            this.lblLoad.Name = "lblLoad";
+            this.lblLoad.Size = new System.Drawing.Size(31, 13);
+            this.lblLoad.TabIndex = 60;
+            this.lblLoad.Text = "Load";
             // 
             // txtLoad
             // 
             this.txtLoad.BackColor = System.Drawing.SystemColors.Info;
             this.txtLoad.Enabled = false;
             this.txtLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLoad.Location = new System.Drawing.Point(285, 102);
+            this.txtLoad.Location = new System.Drawing.Point(285, 106);
             this.txtLoad.Name = "txtLoad";
             this.txtLoad.ReadOnly = true;
             this.txtLoad.Size = new System.Drawing.Size(26, 20);
             this.txtLoad.TabIndex = 58;
             this.txtLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtLoad, "Amplifier Load setting");
+            this.txtLoad.DoubleClick += new System.EventHandler(this.txtLoad_DoubleClick);
             // 
             // txtTune
             // 
             this.txtTune.BackColor = System.Drawing.SystemColors.Info;
             this.txtTune.Enabled = false;
             this.txtTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTune.Location = new System.Drawing.Point(252, 102);
+            this.txtTune.Location = new System.Drawing.Point(252, 106);
             this.txtTune.Name = "txtTune";
-            this.txtTune.ReadOnly = true;
             this.txtTune.Size = new System.Drawing.Size(26, 20);
             this.txtTune.TabIndex = 57;
             this.txtTune.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtTune, "Amplifier Tune setting");
+            this.txtTune.DoubleClick += new System.EventHandler(this.txtTune_DoubleClick);
+            this.txtTune.TextChanged += new System.EventHandler(this.txtTune_TextChanged);
             // 
-            // label79
+            // lblTune
             // 
-            this.label79.AutoSize = true;
-            this.label79.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
-            this.label79.ForeColor = System.Drawing.Color.Navy;
-            this.label79.Location = new System.Drawing.Point(250, 87);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(30, 13);
-            this.label79.TabIndex = 59;
-            this.label79.Text = "Tune";
+            this.lblTune.AutoSize = true;
+            this.lblTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.lblTune.ForeColor = System.Drawing.Color.Navy;
+            this.lblTune.Location = new System.Drawing.Point(250, 91);
+            this.lblTune.Name = "lblTune";
+            this.lblTune.Size = new System.Drawing.Size(30, 13);
+            this.lblTune.TabIndex = 59;
+            this.lblTune.Text = "Tune";
             // 
             // label80
             // 
@@ -2966,6 +3280,7 @@ namespace DataDecoder
             this.cboAlphaBaud.ForeColor = System.Drawing.Color.Black;
             this.cboAlphaBaud.FormattingEnabled = true;
             this.cboAlphaBaud.Items.AddRange(new object[] {
+            "1200",
             "4800",
             "9600"});
             this.cboAlphaBaud.Location = new System.Drawing.Point(146, 25);
@@ -2983,11 +3298,10 @@ namespace DataDecoder
             this.btnHF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHF.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnHF.Location = new System.Drawing.Point(227, 67);
+            this.btnHF.Location = new System.Drawing.Point(227, 64);
             this.btnHF.Name = "btnHF";
             this.btnHF.Size = new System.Drawing.Size(15, 15);
             this.btnHF.TabIndex = 52;
-            this.toolTip1.SetToolTip(this.btnHF, "Press to display Hard Fault log (Double-Click button label to clear).");
             this.btnHF.UseVisualStyleBackColor = false;
             this.btnHF.Click += new System.EventHandler(this.btnHF_Click);
             // 
@@ -2999,11 +3313,10 @@ namespace DataDecoder
             this.btnSF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSF.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSF.Location = new System.Drawing.Point(206, 67);
+            this.btnSF.Location = new System.Drawing.Point(206, 64);
             this.btnSF.Name = "btnSF";
             this.btnSF.Size = new System.Drawing.Size(15, 15);
             this.btnSF.TabIndex = 51;
-            this.toolTip1.SetToolTip(this.btnSF, "Press to display Soft Fault log (Double-Click button label to clear).");
             this.btnSF.UseVisualStyleBackColor = false;
             this.btnSF.Click += new System.EventHandler(this.btnSF_Click);
             // 
@@ -3012,7 +3325,7 @@ namespace DataDecoder
             this.lblHF.AutoSize = true;
             this.lblHF.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHF.ForeColor = System.Drawing.Color.Navy;
-            this.lblHF.Location = new System.Drawing.Point(226, 49);
+            this.lblHF.Location = new System.Drawing.Point(226, 46);
             this.lblHF.Name = "lblHF";
             this.lblHF.Size = new System.Drawing.Size(18, 12);
             this.lblHF.TabIndex = 50;
@@ -3021,35 +3334,48 @@ namespace DataDecoder
             // 
             // txtMsg
             // 
-            this.txtMsg.BackColor = System.Drawing.SystemColors.Info;
-            this.txtMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMsg.Location = new System.Drawing.Point(6, 102);
+            this.txtMsg.BackColor = System.Drawing.Color.LightYellow;
+            this.txtMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.txtMsg.Location = new System.Drawing.Point(6, 85);
+            this.txtMsg.MaxLength = 1500;
+            this.txtMsg.Multiline = true;
             this.txtMsg.Name = "txtMsg";
             this.txtMsg.ReadOnly = true;
-            this.txtMsg.Size = new System.Drawing.Size(238, 20);
+            this.txtMsg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMsg.Size = new System.Drawing.Size(238, 46);
             this.txtMsg.TabIndex = 48;
-            this.txtMsg.Text = "Status and Fault messages displayed here.";
-            this.txtMsg.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtMsg, "Displays Status and Fault messages.");
+            this.txtMsg.DoubleClick += new System.EventHandler(this.txtMsg_DoubleClick);
             // 
             // lblSF
             // 
             this.lblSF.AutoSize = true;
             this.lblSF.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSF.ForeColor = System.Drawing.Color.Navy;
-            this.lblSF.Location = new System.Drawing.Point(205, 49);
+            this.lblSF.Location = new System.Drawing.Point(205, 46);
             this.lblSF.Name = "lblSF";
             this.lblSF.Size = new System.Drawing.Size(17, 12);
             this.lblSF.TabIndex = 47;
             this.lblSF.Text = "SF";
             this.lblSF.DoubleClick += new System.EventHandler(this.lblSF_DoubleClick);
             // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.label74.ForeColor = System.Drawing.Color.Navy;
+            this.label74.Location = new System.Drawing.Point(320, 45);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(26, 13);
+            this.label74.TabIndex = 46;
+            this.label74.Text = "Seg";
+            // 
             // label69
             // 
             this.label69.AutoSize = true;
             this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label69.ForeColor = System.Drawing.Color.Navy;
-            this.label69.Location = new System.Drawing.Point(285, 48);
+            this.label69.Location = new System.Drawing.Point(285, 45);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(26, 13);
             this.label69.TabIndex = 46;
@@ -3060,24 +3386,24 @@ namespace DataDecoder
             this.txtSeg.BackColor = System.Drawing.SystemColors.Info;
             this.txtSeg.Enabled = false;
             this.txtSeg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSeg.Location = new System.Drawing.Point(285, 66);
+            this.txtSeg.Location = new System.Drawing.Point(285, 63);
             this.txtSeg.Name = "txtSeg";
             this.txtSeg.ReadOnly = true;
             this.txtSeg.Size = new System.Drawing.Size(26, 20);
             this.txtSeg.TabIndex = 45;
             this.txtSeg.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtSeg, "Current Band segment");
+            this.toolTip1.SetToolTip(this.txtSeg, "Current Band segment used in amp");
             // 
-            // label70
+            // lblAmpInt
             // 
-            this.label70.AutoSize = true;
-            this.label70.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
-            this.label70.ForeColor = System.Drawing.Color.Navy;
-            this.label70.Location = new System.Drawing.Point(215, 11);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(42, 13);
-            this.label70.TabIndex = 42;
-            this.label70.Text = "Interval";
+            this.lblAmpInt.AutoSize = true;
+            this.lblAmpInt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.lblAmpInt.ForeColor = System.Drawing.Color.Navy;
+            this.lblAmpInt.Location = new System.Drawing.Point(215, 11);
+            this.lblAmpInt.Name = "lblAmpInt";
+            this.lblAmpInt.Size = new System.Drawing.Size(42, 13);
+            this.lblAmpInt.TabIndex = 42;
+            this.lblAmpInt.Text = "Interval";
             // 
             // txtAlphaInt
             // 
@@ -3089,7 +3415,6 @@ namespace DataDecoder
             this.txtAlphaInt.Size = new System.Drawing.Size(47, 20);
             this.txtAlphaInt.TabIndex = 41;
             this.txtAlphaInt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtAlphaInt, "Interval to poll amplifier for status (1000 = 1 sec.)");
             this.txtAlphaInt.TextChanged += new System.EventHandler(this.txtAlphaInt_TextChanged);
             // 
             // btnHV
@@ -3100,12 +3425,11 @@ namespace DataDecoder
             this.btnHV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHV.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnHV.Location = new System.Drawing.Point(157, 64);
+            this.btnHV.Location = new System.Drawing.Point(157, 61);
             this.btnHV.Name = "btnHV";
             this.btnHV.Size = new System.Drawing.Size(41, 22);
             this.btnHV.TabIndex = 39;
             this.btnHV.Text = "Off";
-            this.toolTip1.SetToolTip(this.btnHV, "Press to toggle plate voltage High/Low  .");
             this.btnHV.UseVisualStyleBackColor = false;
             this.btnHV.Click += new System.EventHandler(this.btnHV_Click);
             // 
@@ -3114,7 +3438,7 @@ namespace DataDecoder
             this.label77.AutoSize = true;
             this.label77.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label77.ForeColor = System.Drawing.Color.Navy;
-            this.label77.Location = new System.Drawing.Point(167, 49);
+            this.label77.Location = new System.Drawing.Point(167, 46);
             this.label77.Name = "label77";
             this.label77.Size = new System.Drawing.Size(21, 13);
             this.label77.TabIndex = 38;
@@ -3125,7 +3449,7 @@ namespace DataDecoder
             this.label76.AutoSize = true;
             this.label76.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label76.ForeColor = System.Drawing.Color.Navy;
-            this.label76.Location = new System.Drawing.Point(9, 49);
+            this.label76.Location = new System.Drawing.Point(9, 46);
             this.label76.Name = "label76";
             this.label76.Size = new System.Drawing.Size(37, 13);
             this.label76.TabIndex = 37;
@@ -3160,18 +3484,29 @@ namespace DataDecoder
             this.label73.AutoSize = true;
             this.label73.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label73.ForeColor = System.Drawing.Color.Navy;
-            this.label73.Location = new System.Drawing.Point(102, 49);
+            this.label73.Location = new System.Drawing.Point(102, 46);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(52, 13);
             this.label73.TabIndex = 11;
             this.label73.Text = "AutoTune";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.label70.ForeColor = System.Drawing.Color.Navy;
+            this.label70.Location = new System.Drawing.Point(284, 45);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(32, 13);
+            this.label70.TabIndex = 10;
+            this.label70.Text = "Band";
             // 
             // label72
             // 
             this.label72.AutoSize = true;
             this.label72.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label72.ForeColor = System.Drawing.Color.Navy;
-            this.label72.Location = new System.Drawing.Point(249, 48);
+            this.label72.Location = new System.Drawing.Point(249, 45);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(32, 13);
             this.label72.TabIndex = 10;
@@ -3185,7 +3520,7 @@ namespace DataDecoder
             this.btnOper.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOper.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOper.Location = new System.Drawing.Point(57, 64);
+            this.btnOper.Location = new System.Drawing.Point(57, 61);
             this.btnOper.Name = "btnOper";
             this.btnOper.Size = new System.Drawing.Size(41, 22);
             this.btnOper.TabIndex = 9;
@@ -3202,21 +3537,31 @@ namespace DataDecoder
             this.btnTune.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTune.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnTune.Location = new System.Drawing.Point(107, 64);
+            this.btnTune.Location = new System.Drawing.Point(107, 61);
             this.btnTune.Name = "btnTune";
             this.btnTune.Size = new System.Drawing.Size(41, 22);
             this.btnTune.TabIndex = 8;
             this.btnTune.Text = "Off";
-            this.toolTip1.SetToolTip(this.btnTune, "Press to toggle AutoTune function On/Off.");
             this.btnTune.UseVisualStyleBackColor = false;
             this.btnTune.Click += new System.EventHandler(this.btnTune_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Info;
+            this.textBox1.Enabled = false;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(287, 62);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(26, 20);
+            this.textBox1.TabIndex = 4;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label71
             // 
             this.label71.AutoSize = true;
             this.label71.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label71.ForeColor = System.Drawing.Color.Navy;
-            this.label71.Location = new System.Drawing.Point(55, 49);
+            this.label71.Location = new System.Drawing.Point(55, 46);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(45, 13);
             this.label71.TabIndex = 7;
@@ -3228,9 +3573,8 @@ namespace DataDecoder
             this.txtBand.BackColor = System.Drawing.SystemColors.Info;
             this.txtBand.Enabled = false;
             this.txtBand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBand.Location = new System.Drawing.Point(252, 65);
+            this.txtBand.Location = new System.Drawing.Point(252, 62);
             this.txtBand.Name = "txtBand";
-            this.txtBand.ReadOnly = true;
             this.txtBand.Size = new System.Drawing.Size(26, 20);
             this.txtBand.TabIndex = 4;
             this.txtBand.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -3246,7 +3590,7 @@ namespace DataDecoder
             this.chkAlpha.Size = new System.Drawing.Size(59, 17);
             this.chkAlpha.TabIndex = 1;
             this.chkAlpha.Text = "Enable";
-            this.toolTip1.SetToolTip(this.chkAlpha, "Select to enable Alpha amplifier support");
+            this.toolTip1.SetToolTip(this.chkAlpha, "Select to enable amplifier.");
             this.chkAlpha.UseVisualStyleBackColor = true;
             this.chkAlpha.CheckedChanged += new System.EventHandler(this.chkAlpha_CheckedChanged);
             // 
@@ -3256,9 +3600,9 @@ namespace DataDecoder
             this.btnPwr.Enabled = false;
             this.btnPwr.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
             this.btnPwr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPwr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPwr.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
             this.btnPwr.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnPwr.Location = new System.Drawing.Point(7, 64);
+            this.btnPwr.Location = new System.Drawing.Point(7, 61);
             this.btnPwr.Name = "btnPwr";
             this.btnPwr.Size = new System.Drawing.Size(41, 22);
             this.btnPwr.TabIndex = 0;
@@ -3282,12 +3626,38 @@ namespace DataDecoder
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.groupBox4.ForeColor = System.Drawing.Color.Firebrick;
-            this.groupBox4.Location = new System.Drawing.Point(8, 8);
+            this.groupBox4.Location = new System.Drawing.Point(8, 4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(183, 100);
             this.groupBox4.TabIndex = 48;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "IC-PW1";
+            // 
+            // chkPwRTS
+            // 
+            this.chkPwRTS.AutoSize = true;
+            this.chkPwRTS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkPwRTS.Location = new System.Drawing.Point(122, 77);
+            this.chkPwRTS.Name = "chkPwRTS";
+            this.chkPwRTS.Size = new System.Drawing.Size(48, 17);
+            this.chkPwRTS.TabIndex = 52;
+            this.chkPwRTS.Text = "RTS";
+            this.toolTip1.SetToolTip(this.chkPwRTS, "Select if your CI-V adapter requires power from the RTS line.");
+            this.chkPwRTS.UseVisualStyleBackColor = true;
+            this.chkPwRTS.CheckedChanged += new System.EventHandler(this.chkPwRTS_CheckedChanged);
+            // 
+            // chkPwDTR
+            // 
+            this.chkPwDTR.AutoSize = true;
+            this.chkPwDTR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkPwDTR.Location = new System.Drawing.Point(122, 60);
+            this.chkPwDTR.Name = "chkPwDTR";
+            this.chkPwDTR.Size = new System.Drawing.Size(49, 17);
+            this.chkPwDTR.TabIndex = 51;
+            this.chkPwDTR.Text = "DTR";
+            this.toolTip1.SetToolTip(this.chkPwDTR, "Select if your CI-V adapter requires power from the DTR line.");
+            this.chkPwDTR.UseVisualStyleBackColor = true;
+            this.chkPwDTR.CheckedChanged += new System.EventHandler(this.chkPwDTR_CheckedChanged);
             // 
             // chkDisBcast
             // 
@@ -3301,19 +3671,6 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.chkDisBcast, "Check to disable frequency broadcast to PW1");
             this.chkDisBcast.UseVisualStyleBackColor = true;
             this.chkDisBcast.CheckedChanged += new System.EventHandler(this.chkDisBcast_CheckedChanged);
-            // 
-            // btnTest
-            // 
-            this.btnTest.AutoSize = true;
-            this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTest.Location = new System.Drawing.Point(75, 114);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(42, 23);
-            this.btnTest.TabIndex = 49;
-            this.btnTest.Text = "Test";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Visible = false;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // label24
             // 
@@ -9632,13 +9989,13 @@ namespace DataDecoder
             // 
             this.lblAnt.AutoSize = true;
             this.lblAnt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.lblAnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAnt.ForeColor = System.Drawing.Color.Red;
-            this.lblAnt.Location = new System.Drawing.Point(281, 3);
+            this.lblAnt.Location = new System.Drawing.Point(251, 3);
             this.lblAnt.Name = "lblAnt";
-            this.lblAnt.Size = new System.Drawing.Size(100, 16);
+            this.lblAnt.Size = new System.Drawing.Size(141, 18);
             this.lblAnt.TabIndex = 73;
-            this.lblAnt.Text = "Xmit Inhibited";
+            this.lblAnt.Text = "Transmit Inhibited";
             this.toolTip1.SetToolTip(this.lblAnt, "Illuminated when antenna is adjusting");
             this.lblAnt.Visible = false;
             // 
@@ -9858,6 +10215,7 @@ namespace DataDecoder
             this.menuStrip1.BackColor = System.Drawing.Color.Transparent;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.optionsToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -9882,6 +10240,48 @@ namespace DataDecoder
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tubeAmpsToolStripMenuItem});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // tubeAmpsToolStripMenuItem
+            // 
+            this.tubeAmpsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aCOM2000AToolStripMenuItem,
+            this.alpToolStripMenuItem,
+            this.alpha9500ToolStripMenuItem});
+            this.tubeAmpsToolStripMenuItem.Name = "tubeAmpsToolStripMenuItem";
+            this.tubeAmpsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.tubeAmpsToolStripMenuItem.Text = "Tube Amps";
+            // 
+            // aCOM2000AToolStripMenuItem
+            // 
+            this.aCOM2000AToolStripMenuItem.Name = "aCOM2000AToolStripMenuItem";
+            this.aCOM2000AToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.aCOM2000AToolStripMenuItem.Text = "Acom2000A";
+            this.aCOM2000AToolStripMenuItem.ToolTipText = "Click to select this amp.";
+            this.aCOM2000AToolStripMenuItem.Click += new System.EventHandler(this.ACOM2K_Click);
+            // 
+            // alpToolStripMenuItem
+            // 
+            this.alpToolStripMenuItem.Name = "alpToolStripMenuItem";
+            this.alpToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.alpToolStripMenuItem.Text = "Alpha 87A";
+            this.alpToolStripMenuItem.ToolTipText = "Click to select this amp.";
+            this.alpToolStripMenuItem.Click += new System.EventHandler(this.Alpha87_Click);
+            // 
+            // alpha9500ToolStripMenuItem
+            // 
+            this.alpha9500ToolStripMenuItem.Name = "alpha9500ToolStripMenuItem";
+            this.alpha9500ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.alpha9500ToolStripMenuItem.Text = "Alpha 9500";
+            this.alpha9500ToolStripMenuItem.ToolTipText = "Click to select this amp.";
+            this.alpha9500ToolStripMenuItem.Click += new System.EventHandler(this.Alpha95_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -10138,44 +10538,43 @@ namespace DataDecoder
             this.RepeatPort.WriteTimeout = 500;
             this.RepeatPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RepeatPort_DataReceived);
             // 
-            // chkSlaveRTS
+            // cboRepeatCom
             // 
-            this.chkSlaveRTS.AutoSize = true;
-            this.chkSlaveRTS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkSlaveRTS.Location = new System.Drawing.Point(289, 37);
-            this.chkSlaveRTS.Name = "chkSlaveRTS";
-            this.chkSlaveRTS.Size = new System.Drawing.Size(48, 17);
-            this.chkSlaveRTS.TabIndex = 31;
-            this.chkSlaveRTS.Text = "RTS";
-            this.toolTip1.SetToolTip(this.chkSlaveRTS, "Select if your CI-V adapter requires power from the RTS line.");
-            this.chkSlaveRTS.UseVisualStyleBackColor = true;
-            this.chkSlaveRTS.CheckedChanged += new System.EventHandler(this.chkSlaveRTS_CheckedChanged);
+            this.cboRepeatCom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboRepeatCom.ForeColor = System.Drawing.Color.Navy;
+            this.cboRepeatCom.FormattingEnabled = true;
+            this.cboRepeatCom.Items.AddRange(new object[] {
+            "57600",
+            "38400",
+            "19200",
+            "9600"});
+            this.cboRepeatCom.Location = new System.Drawing.Point(81, 65);
+            this.cboRepeatCom.Name = "cboRepeatCom";
+            this.cboRepeatCom.Size = new System.Drawing.Size(63, 21);
+            this.cboRepeatCom.TabIndex = 67;
+            this.toolTip1.SetToolTip(this.cboRepeatCom, "Select Port Baud Rate");
+            this.cboRepeatCom.SelectedIndexChanged += new System.EventHandler(this.cboRepeatCom_SelectedIndexChanged);
             // 
-            // chkPwRTS
+            // label79
             // 
-            this.chkPwRTS.AutoSize = true;
-            this.chkPwRTS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkPwRTS.Location = new System.Drawing.Point(122, 77);
-            this.chkPwRTS.Name = "chkPwRTS";
-            this.chkPwRTS.Size = new System.Drawing.Size(48, 17);
-            this.chkPwRTS.TabIndex = 52;
-            this.chkPwRTS.Text = "RTS";
-            this.toolTip1.SetToolTip(this.chkPwRTS, "Select if your CI-V adapter requires power from the RTS line.");
-            this.chkPwRTS.UseVisualStyleBackColor = true;
-            this.chkPwRTS.CheckedChanged += new System.EventHandler(this.chkPwRTS_CheckedChanged);
+            this.label79.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label79.ForeColor = System.Drawing.Color.Navy;
+            this.label79.Location = new System.Drawing.Point(89, 50);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(38, 15);
+            this.label79.TabIndex = 69;
+            this.label79.Text = "Comm";
             // 
-            // chkPwDTR
+            // label147
             // 
-            this.chkPwDTR.AutoSize = true;
-            this.chkPwDTR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkPwDTR.Location = new System.Drawing.Point(122, 60);
-            this.chkPwDTR.Name = "chkPwDTR";
-            this.chkPwDTR.Size = new System.Drawing.Size(49, 17);
-            this.chkPwDTR.TabIndex = 51;
-            this.chkPwDTR.Text = "DTR";
-            this.toolTip1.SetToolTip(this.chkPwDTR, "Select if your CI-V adapter requires power from the DTR line.");
-            this.chkPwDTR.UseVisualStyleBackColor = true;
-            this.chkPwDTR.CheckedChanged += new System.EventHandler(this.chkPwDTR_CheckedChanged);
+            this.label147.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label147.ForeColor = System.Drawing.Color.Navy;
+            this.label147.Location = new System.Drawing.Point(88, 9);
+            this.label147.Name = "label147";
+            this.label147.Size = new System.Drawing.Size(30, 15);
+            this.label147.TabIndex = 68;
+            this.label147.Text = "Port";
+            this.label147.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Setup
             // 
@@ -10187,18 +10586,18 @@ namespace DataDecoder
             this.Controls.Add(this.btnSplit);
             this.Controls.Add(this.numSplit);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.lblAnt);
             this.Controls.Add(this.lblAvg);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.txtAvg);
             this.Controls.Add(this.txtTemp);
             this.Controls.Add(this.btnReStart);
+            this.Controls.Add(this.lblAnt);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.txtSWR);
             this.Controls.Add(this.lblSWR);
             this.Controls.Add(this.btnProfiler);
             this.Controls.Add(this.txtFwd);
             this.Controls.Add(this.lblFwd);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
@@ -10256,10 +10655,14 @@ namespace DataDecoder
             this.grpLP.PerformLayout();
             this.tabMisc.ResumeLayout(false);
             this.tabMisc.PerformLayout();
+            this.grpAmpBand.ResumeLayout(false);
+            this.grpAmpBand.PerformLayout();
             this.grpRepeat.ResumeLayout(false);
             this.grpRepeat.PerformLayout();
-            this.grpAlpha.ResumeLayout(false);
-            this.grpAlpha.PerformLayout();
+            this.grpRmode.ResumeLayout(false);
+            this.grpRmode.PerformLayout();
+            this.grpAmp.ResumeLayout(false);
+            this.grpAmp.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.tabMacro.ResumeLayout(false);
@@ -10657,7 +11060,7 @@ namespace DataDecoder
         public System.Windows.Forms.TextBox txtSP;
         private System.Windows.Forms.ToolStripMenuItem setupWizardToolStripMenuItem;
         private TabPage tabMisc;
-        private GroupBox grpAlpha;
+        private GroupBox grpAmp;
         private CheckBox chkAlpha;
         private TextBox txtBand;
         private Label label71;
@@ -10667,7 +11070,7 @@ namespace DataDecoder
         private ComboBox cboAlpha;
         private Label label76;
         private Label label77;
-        private Label label70;
+        private Label lblAmpInt;
         private TextBox txtAlphaInt;
         private Label lblSF;
         private Label label69;
@@ -10687,8 +11090,8 @@ namespace DataDecoder
         private TextBox txtFreq;
         private TextBox txtLoad;
         private TextBox txtTune;
-        private Label label74;
-        private Label label79;
+        private Label lblLoad;
+        private Label lblTune;
         private Button btnWnSensor;
         public RadioButton rbWN4;
         public RadioButton rbWN3;
@@ -11054,6 +11457,33 @@ namespace DataDecoder
         private CheckBox chkSlaveRTS;
         private CheckBox chkPwRTS;
         private CheckBox chkPwDTR;
+        private ToolStripMenuItem optionsToolStripMenuItem;
+        private ToolStripMenuItem tubeAmpsToolStripMenuItem;
+        private ToolStripMenuItem alpToolStripMenuItem;
+        private ToolStripMenuItem aCOM2000AToolStripMenuItem;
+        private ToolStripMenuItem alpha9500ToolStripMenuItem;
+        private GroupBox grpRmode;
+        private RadioButton rbMHBD;
+        private RadioButton rbAll;
+        private GroupBox grpAmpBand;
+        public CheckBox chkB80;
+        public CheckBox chkB160;
+        public CheckBox chkB30;
+        public CheckBox chkB40;
+        public CheckBox chkB17;
+        public CheckBox chkB20;
+        private Button btnBandAll;
+        private Button btnBandClear;
+        public CheckBox chkB10;
+        public CheckBox chkB12;
+        public CheckBox chkB15;
+        private Button btnInfo;
+        private Label label74;
+        private Label label70;
+        private TextBox textBox1;
+        private Label label79;
+        private Label label147;
+        private ComboBox cboRepeatCom;
 
     }
 }

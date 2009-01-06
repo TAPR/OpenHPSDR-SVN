@@ -134,6 +134,7 @@ namespace DataDecoder
         }
         private void Mini_FormClosing(object sender, FormClosedEventArgs e)
         {
+     //       this.Close();
         }
         private void Mini_FormClosing(object sender, FormClosingEventArgs e)
         {

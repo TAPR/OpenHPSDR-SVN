@@ -2002,5 +2002,53 @@ namespace DataDecoder.Properties {
                 this["pwRTS"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Amp {
+            get {
+                return ((int)(this["Amp"]));
+            }
+            set {
+                this["Amp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RptMode {
+            get {
+                return ((int)(this["RptMode"]));
+            }
+            set {
+                this["RptMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Temp {
+            get {
+                return ((int)(this["Temp"]));
+            }
+            set {
+                this["Temp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RepeatCom {
+            get {
+                return ((int)(this["RepeatCom"]));
+            }
+            set {
+                this["RepeatCom"] = value;
+            }
+        }
     }
 }
