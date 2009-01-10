@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Fri Dec 26 19:57:28 2008
+Sat Jan 10 20:06:18 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -87,15 +87,15 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Dec 26 19:57:28 2008   ;
+; Analysis & Synthesis Status        ; Successful - Sat Jan 10 20:06:18 2009   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 1,010                                   ;
-;     Total combinational functions  ; 969                                     ;
-;     Dedicated logic registers      ; 1,010                                   ;
-; Total registers                    ; 1010                                    ;
+; Total logic elements               ; 842                                     ;
+;     Total combinational functions  ; 815                                     ;
+;     Dedicated logic registers      ; 842                                     ;
+; Total registers                    ; 842                                     ;
 ; Total pins                         ; 89                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304                                  ;
@@ -185,7 +185,6 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                         ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
-; division.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/division.v                              ;
 ; RegisterX.v                      ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/RegisterX.v                             ;
 ; SPI_REGS.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/SPI_REGS.v                              ;
 ; gpio_control.v                   ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/gpio_control.v                          ;
@@ -249,34 +248,34 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 
 
-+-----------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary         ;
-+---------------------------------------------+-------+
-; Resource                                    ; Usage ;
-+---------------------------------------------+-------+
-; Estimated Total logic elements              ; 1,010 ;
-;                                             ;       ;
-; Total combinational functions               ; 969   ;
-; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 382   ;
-;     -- 3 input functions                    ; 248   ;
-;     -- <=2 input functions                  ; 339   ;
-;                                             ;       ;
-; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 705   ;
-;     -- arithmetic mode                      ; 264   ;
-;                                             ;       ;
-; Total registers                             ; 1010  ;
-;     -- Dedicated logic registers            ; 1010  ;
-;     -- I/O registers                        ; 0     ;
-;                                             ;       ;
-; I/O pins                                    ; 89    ;
-; Total memory bits                           ; 98304 ;
-; Maximum fan-out node                        ; IFCLK ;
-; Maximum fan-out                             ; 238   ;
-; Total fan-out                               ; 6646  ;
-; Average fan-out                             ; 3.16  ;
-+---------------------------------------------+-------+
++----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary              ;
++---------------------------------------------+------------+
+; Resource                                    ; Usage      ;
++---------------------------------------------+------------+
+; Estimated Total logic elements              ; 842        ;
+;                                             ;            ;
+; Total combinational functions               ; 815        ;
+; Logic element usage by number of LUT inputs ;            ;
+;     -- 4 input functions                    ; 351        ;
+;     -- 3 input functions                    ; 201        ;
+;     -- <=2 input functions                  ; 263        ;
+;                                             ;            ;
+; Logic elements by mode                      ;            ;
+;     -- normal mode                          ; 578        ;
+;     -- arithmetic mode                      ; 237        ;
+;                                             ;            ;
+; Total registers                             ; 842        ;
+;     -- Dedicated logic registers            ; 842        ;
+;     -- I/O registers                        ; 0          ;
+;                                             ;            ;
+; I/O pins                                    ; 89         ;
+; Total memory bits                           ; 98304      ;
+; Maximum fan-out node                        ; CLK_MCLK~6 ;
+; Maximum fan-out                             ; 205        ;
+; Total fan-out                               ; 5829       ;
+; Average fan-out                             ; 3.28       ;
++---------------------------------------------+------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -284,7 +283,7 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ; Library Name ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Ozy_Janus                                    ; 969 (444)         ; 1010 (403)   ; 98304       ; 0            ; 0       ; 0         ; 89   ; 0            ; |Ozy_Janus                                                                                                                        ; work         ;
+; |Ozy_Janus                                    ; 815 (418)         ; 842 (371)    ; 98304       ; 0            ; 0       ; 0         ; 89   ; 0            ; |Ozy_Janus                                                                                                                        ; work         ;
 ;    |I2SAudioOut:I2SAO|                        ; 45 (45)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ; work         ;
 ;    |I2SAudioOut:I2SIQO|                       ; 26 (26)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SIQO                                                                                                     ; work         ;
 ;    |Rx_fifo:Rx_fifo|                          ; 85 (0)            ; 132 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ; work         ;
@@ -328,7 +327,6 @@ applicable agreement for further details.
 ;    |debounce:de_PTT|                          ; 21 (21)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|debounce:de_PTT                                                                                                        ; work         ;
 ;    |debounce:de_dash|                         ; 21 (21)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|debounce:de_dash                                                                                                       ; work         ;
 ;    |debounce:de_dot|                          ; 21 (21)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|debounce:de_dot                                                                                                        ; work         ;
-;    |division:division_phoenix|                ; 128 (128)         ; 136 (136)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|division:division_phoenix                                                                                              ; work         ;
 ;    |flash:flash_LED|                          ; 28 (28)           ; 21 (21)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|flash:flash_LED                                                                                                        ; work         ;
 ;    |gpio_control:gpio_controlSDR|             ; 45 (0)            ; 42 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|gpio_control:gpio_controlSDR                                                                                           ; work         ;
 ;       |RegisterX:port0reg|                    ; 1 (1)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|gpio_control:gpio_controlSDR|RegisterX:port0reg                                                                        ; work         ;
@@ -434,7 +432,7 @@ Encoding Type:  One-Hot
 +--------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 ; Tx_control_4[0..7]                                                                                           ; Stuck at GND due to stuck port data_in      ;
 ; Tx_control_2[0..7]                                                                                           ; Stuck at GND due to stuck port data_in      ;
-; Tx_control_1[0..7]                                                                                           ; Stuck at GND due to stuck port data_in      ;
+; Tx_control_1[1..7]                                                                                           ; Stuck at GND due to stuck port data_in      ;
 ; Tx_control_0[2..7]                                                                                           ; Stuck at GND due to stuck port data_in      ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|p0addr                                    ; Lost fanout                                 ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|a_graycounter_h2c:wrptr_g1p|counter_ffa0  ; Lost fanout                                 ;
@@ -491,7 +489,7 @@ Encoding Type:  One-Hot
 ; I2SAudioOut:I2SIQO|bit_count[0]                                                                              ; Merged with I2SAudioOut:I2SAO|bit_count[0]  ;
 ; I2SAudioOut:I2SIQO|TLV_state.000                                                                             ; Merged with I2SAudioOut:I2SAO|TLV_state.000 ;
 ; I2SAudioOut:I2SIQO|TLV_state.011                                                                             ; Merged with I2SAudioOut:I2SAO|TLV_state.011 ;
-; Total Number of Removed Registers = 85                                                                       ;                                             ;
+; Total Number of Removed Registers = 84                                                                       ;                                             ;
 +--------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 
 
@@ -500,12 +498,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1010  ;
-; Number of registers using Synchronous Clear  ; 106   ;
-; Number of registers using Synchronous Load   ; 73    ;
+; Total registers                              ; 842   ;
+; Number of registers using Synchronous Clear  ; 86    ;
+; Number of registers using Synchronous Load   ; 65    ;
 ; Number of registers using Asynchronous Clear ; 37    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 456   ;
+; Number of registers using Clock Enable       ; 424   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -515,21 +513,20 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
-; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; Yes        ; |Ozy_Janus|division:division_phoenix|qr[89]                        ;
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[5]                                         ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_dot|count[3]                                ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_PTT|count[10]                               ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_dash|count[7]                               ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[4]                                         ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_dot|count[0]                                ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_PTT|count[2]                                ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_dash|count[16]                              ;
 ; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|CCcount[1]                                              ;
 ; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Ozy_Janus|FIFO_ADR[1]~reg0                                        ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|data[1]                              ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|data[12]                              ;
-; 128:1              ; 4 bits    ; 340 LEs       ; 32 LEs               ; 308 LEs                ; Yes        ; |Ozy_Janus|AD_state[5]                                             ;
-; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|bit_count[0]                         ;
-; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|bit_count[3]                          ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|data[0]                              ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|data[6]                               ;
+; 128:1              ; 4 bits    ; 340 LEs       ; 32 LEs               ; 308 LEs                ; Yes        ; |Ozy_Janus|AD_state[2]                                             ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|bit_count[3]                         ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|bit_count[1]                          ;
 ; 66:1               ; 7 bits    ; 308 LEs       ; 21 LEs               ; 287 LEs                ; Yes        ; |Ozy_Janus|gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[6] ;
-; 128:1              ; 5 bits    ; 425 LEs       ; 10 LEs               ; 415 LEs                ; Yes        ; |Ozy_Janus|register[5]                                             ;
-; 130:1              ; 7 bits    ; 602 LEs       ; 28 LEs               ; 574 LEs                ; Yes        ; |Ozy_Janus|register[10]                                            ;
+; 128:1              ; 5 bits    ; 425 LEs       ; 10 LEs               ; 415 LEs                ; Yes        ; |Ozy_Janus|register[2]                                             ;
+; 130:1              ; 6 bits    ; 516 LEs       ; 24 LEs               ; 492 LEs                ; Yes        ; |Ozy_Janus|register[9]                                             ;
 ; 130:1              ; 2 bits    ; 172 LEs       ; 6 LEs                ; 166 LEs                ; Yes        ; |Ozy_Janus|register[0]                                             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 
@@ -994,7 +991,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Fri Dec 26 19:57:19 2008
+    Info: Processing started: Sat Jan 10 20:06:08 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file division.v
     Info: Found entity 1: division
@@ -1158,7 +1155,6 @@ Info: Elaborating entity "dffpipe_g09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcf
 Info: Found 1 design units, including 1 entities, in source file db/cmpr_736.tdf
     Info: Found entity 1: cmpr_736
 Info: Elaborating entity "cmpr_736" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|cmpr_736:rdempty_eq_comp"
-Info: Elaborating entity "division" for hierarchy "division:division_phoenix"
 Info: Elaborating entity "I2SAudioOut" for hierarchy "I2SAudioOut:I2SAO"
 Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
 Warning: Clock multiplexers are found and protected
@@ -1255,16 +1251,16 @@ Info: 47 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SAudioOut:I2SIQO|TLV_state.100" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "FLAGB"
-Info: Implemented 1608 device resources after synthesis - the final resource count might be different
-    Info: Implemented 20 input pins
-    Info: Implemented 28 output pins
+Info: Implemented 1391 device resources after synthesis - the final resource count might be different
+    Info: Implemented 21 input pins
+    Info: Implemented 27 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1487 logic cells
+    Info: Implemented 1270 logic cells
     Info: Implemented 32 RAM segments
 Info: Generated suppressed messages file C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.map.smsg
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 46 warnings
-    Info: Peak virtual memory: 178 megabytes
-    Info: Processing ended: Fri Dec 26 19:57:29 2008
+    Info: Peak virtual memory: 177 megabytes
+    Info: Processing ended: Sat Jan 10 20:06:18 2009
     Info: Elapsed time: 00:00:10
     Info: Total CPU time (on all processors): 00:00:09
 
