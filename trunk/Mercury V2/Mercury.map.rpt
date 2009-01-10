@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Mercury
-Sun Jan 04 15:17:37 2009
+Sat Jan 10 15:11:46 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -15,101 +15,113 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
   7. Analysis & Synthesis RAM Summary
   8. Analysis & Synthesis DSP Block Usage Summary
   9. State Machine - |Mercury|CC_state
- 10. State Machine - |Mercury|TLV
- 11. State Machine - |Mercury|SPI:Alex_SPI_Tx|spi_state
- 12. State Machine - |Mercury|I2SEncode:I2S|encode_state
- 13. Registers Removed During Synthesis
- 14. Removed Registers Triggering Further Register Optimizations
- 15. General Register Statistics
- 16. Inverted Register Statistics
- 17. Multiplexer Restructuring Statistics (No Restructuring Performed)
- 18. Source assignments for receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component|altsyncram_h2a1:auto_generated
- 19. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
- 20. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
- 21. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
- 22. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
- 23. Parameter Settings for User Entity Instance: receiver:receiver_inst|cordic:cordic_inst
- 24. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1
- 25. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[0].cic_integrator_inst
- 26. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[0].cic_comb_inst
- 27. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[1].cic_integrator_inst
- 28. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[1].cic_comb_inst
- 29. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[2].cic_integrator_inst
- 30. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[2].cic_comb_inst
- 31. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[3].cic_integrator_inst
- 32. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[3].cic_comb_inst
- 33. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[4].cic_integrator_inst
- 34. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[4].cic_comb_inst
- 35. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1
- 36. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[0].cic_integrator_inst
- 37. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[0].cic_comb_inst
- 38. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[1].cic_integrator_inst
- 39. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[1].cic_comb_inst
- 40. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[2].cic_integrator_inst
- 41. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[2].cic_comb_inst
- 42. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[3].cic_integrator_inst
- 43. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[3].cic_comb_inst
- 44. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[4].cic_integrator_inst
- 45. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[4].cic_comb_inst
- 46. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2
- 47. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[0].cic_integrator_inst
- 48. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[0].cic_comb_inst
- 49. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[1].cic_integrator_inst
- 50. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[1].cic_comb_inst
- 51. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[2].cic_integrator_inst
- 52. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[2].cic_comb_inst
- 53. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[3].cic_integrator_inst
- 54. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[3].cic_comb_inst
- 55. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[4].cic_integrator_inst
- 56. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[4].cic_comb_inst
- 57. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[5].cic_integrator_inst
- 58. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[5].cic_comb_inst
- 59. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[6].cic_integrator_inst
- 60. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[6].cic_comb_inst
- 61. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[7].cic_integrator_inst
- 62. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[7].cic_comb_inst
- 63. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[8].cic_integrator_inst
- 64. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[8].cic_comb_inst
- 65. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[9].cic_integrator_inst
- 66. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[9].cic_comb_inst
- 67. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[10].cic_integrator_inst
- 68. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[10].cic_comb_inst
- 69. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2
- 70. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[0].cic_integrator_inst
- 71. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[0].cic_comb_inst
- 72. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[1].cic_integrator_inst
- 73. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[1].cic_comb_inst
- 74. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[2].cic_integrator_inst
- 75. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[2].cic_comb_inst
- 76. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[3].cic_integrator_inst
- 77. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[3].cic_comb_inst
- 78. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[4].cic_integrator_inst
- 79. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[4].cic_comb_inst
- 80. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[5].cic_integrator_inst
- 81. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[5].cic_comb_inst
- 82. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[6].cic_integrator_inst
- 83. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[6].cic_comb_inst
- 84. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[7].cic_integrator_inst
- 85. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[7].cic_comb_inst
- 86. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[8].cic_integrator_inst
- 87. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[8].cic_comb_inst
- 88. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[9].cic_integrator_inst
- 89. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[9].cic_comb_inst
- 90. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[10].cic_integrator_inst
- 91. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[10].cic_comb_inst
- 92. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component
- 93. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I
- 94. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component
- 95. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component
- 96. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q
- 97. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component
- 98. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component
- 99. Parameter Settings for User Entity Instance: oddClockDivider:refClockDivider
-100. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
-101. altshift_taps Parameter Settings by Entity Instance
-102. lpm_mult Parameter Settings by Entity Instance
-103. Analysis & Synthesis Messages
-104. Analysis & Synthesis Suppressed Messages
+ 10. State Machine - |Mercury|spec_send
+ 11. State Machine - |Mercury|TLV
+ 12. State Machine - |Mercury|SPI:Alex_SPI_Tx|spi_state
+ 13. State Machine - |Mercury|I2SEncode:I2S|encode_state
+ 14. Registers Removed During Synthesis
+ 15. Removed Registers Triggering Further Register Optimizations
+ 16. General Register Statistics
+ 17. Inverted Register Statistics
+ 18. Multiplexer Restructuring Statistics (No Restructuring Performed)
+ 19. Source assignments for receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component|altsyncram_h2a1:auto_generated
+ 20. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
+ 21. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
+ 22. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
+ 23. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
+ 24. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component
+ 25. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated
+ 26. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p
+ 27. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p
+ 28. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp
+ 29. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram
+ 30. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp
+ 31. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe6
+ 32. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp
+ 33. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9
+ 34. Parameter Settings for User Entity Instance: receiver:receiver_inst|cordic:cordic_inst
+ 35. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1
+ 36. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[0].cic_integrator_inst
+ 37. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[0].cic_comb_inst
+ 38. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[1].cic_integrator_inst
+ 39. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[1].cic_comb_inst
+ 40. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[2].cic_integrator_inst
+ 41. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[2].cic_comb_inst
+ 42. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[3].cic_integrator_inst
+ 43. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[3].cic_comb_inst
+ 44. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[4].cic_integrator_inst
+ 45. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[4].cic_comb_inst
+ 46. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1
+ 47. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[0].cic_integrator_inst
+ 48. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[0].cic_comb_inst
+ 49. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[1].cic_integrator_inst
+ 50. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[1].cic_comb_inst
+ 51. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[2].cic_integrator_inst
+ 52. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[2].cic_comb_inst
+ 53. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[3].cic_integrator_inst
+ 54. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[3].cic_comb_inst
+ 55. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[4].cic_integrator_inst
+ 56. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[4].cic_comb_inst
+ 57. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2
+ 58. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[0].cic_integrator_inst
+ 59. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[0].cic_comb_inst
+ 60. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[1].cic_integrator_inst
+ 61. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[1].cic_comb_inst
+ 62. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[2].cic_integrator_inst
+ 63. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[2].cic_comb_inst
+ 64. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[3].cic_integrator_inst
+ 65. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[3].cic_comb_inst
+ 66. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[4].cic_integrator_inst
+ 67. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[4].cic_comb_inst
+ 68. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[5].cic_integrator_inst
+ 69. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[5].cic_comb_inst
+ 70. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[6].cic_integrator_inst
+ 71. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[6].cic_comb_inst
+ 72. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[7].cic_integrator_inst
+ 73. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[7].cic_comb_inst
+ 74. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[8].cic_integrator_inst
+ 75. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[8].cic_comb_inst
+ 76. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[9].cic_integrator_inst
+ 77. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[9].cic_comb_inst
+ 78. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_integrator:cic_stages[10].cic_integrator_inst
+ 79. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[10].cic_comb_inst
+ 80. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2
+ 81. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[0].cic_integrator_inst
+ 82. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[0].cic_comb_inst
+ 83. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[1].cic_integrator_inst
+ 84. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[1].cic_comb_inst
+ 85. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[2].cic_integrator_inst
+ 86. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[2].cic_comb_inst
+ 87. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[3].cic_integrator_inst
+ 88. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[3].cic_comb_inst
+ 89. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[4].cic_integrator_inst
+ 90. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[4].cic_comb_inst
+ 91. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[5].cic_integrator_inst
+ 92. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[5].cic_comb_inst
+ 93. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[6].cic_integrator_inst
+ 94. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[6].cic_comb_inst
+ 95. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[7].cic_integrator_inst
+ 96. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[7].cic_comb_inst
+ 97. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[8].cic_integrator_inst
+ 98. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[8].cic_comb_inst
+ 99. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[9].cic_integrator_inst
+100. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[9].cic_comb_inst
+101. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[10].cic_integrator_inst
+102. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_Q2|cic_comb:cic_stages[10].cic_comb_inst
+103. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component
+104. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I
+105. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component
+106. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component
+107. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q
+108. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component
+109. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component
+110. Parameter Settings for User Entity Instance: spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component
+111. Parameter Settings for User Entity Instance: oddClockDivider:refClockDivider
+112. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
+113. altshift_taps Parameter Settings by Entity Instance
+114. lpm_mult Parameter Settings by Entity Instance
+115. Analysis & Synthesis Messages
+116. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -135,18 +147,18 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Jan 04 15:17:37 2009   ;
+; Analysis & Synthesis Status        ; Successful - Sat Jan 10 15:11:46 2009   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; Mercury                                 ;
 ; Family                             ; Cyclone III                             ;
-; Total logic elements               ; 6,739                                   ;
-;     Total combinational functions  ; 6,525                                   ;
-;     Dedicated logic registers      ; 6,739                                   ;
-; Total registers                    ; 6739                                    ;
-; Total pins                         ; 65                                      ;
+; Total logic elements               ; 6,886                                   ;
+;     Total combinational functions  ; 6,638                                   ;
+;     Dedicated logic registers      ; 6,886                                   ;
+; Total registers                    ; 6886                                    ;
+; Total pins                         ; 67                                      ;
 ; Total virtual pins                 ; 0                                       ;
-; Total memory bits                  ; 18,844                                  ;
+; Total memory bits                  ; 84,380                                  ;
 ; Embedded Multiplier 9-bit elements ; 22                                      ;
 ; Total PLLs                         ; 0                                       ;
 +------------------------------------+-----------------------------------------+
@@ -231,56 +243,76 @@ applicable agreement for further details.
 +----------------------------------------------------------------+--------------------+--------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                 ;
-+----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                       ;
-+----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+
-; mult_24Sx24S.v                   ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/Mercury V2/mult_24Sx24S.v                           ;
-; receiver.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/receiver.v                               ;
-; fir_mac.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/fir_mac.v                                ;
-; fir_shiftreg.v                   ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/Mercury V2/fir_shiftreg.v                           ;
-; fir.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/fir.v                                    ;
-; fir_coeffs.v                     ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/fir_coeffs.v                             ;
-; fir_coeffs_rom.v                 ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/Mercury V2/fir_coeffs_rom.v                         ;
-; varcic.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/varcic.v                                 ;
-; cic_integrator.v                 ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/cic_integrator.v                         ;
-; cic.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/cic.v                                    ;
-; cic_comb.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/cic_comb.v                               ;
-; cordic.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/cordic.v                                 ;
-; SPI.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/SPI.v                                    ;
-; LPF_select.v                     ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/LPF_select.v                             ;
-; HPF_select.v                     ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/HPF_select.v                             ;
-; oddClockDiv.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/oddClockDiv.v                            ;
-; I2S_Encoder_24bit.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/I2S_Encoder_24bit.v                      ;
-; Mercury.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/Mercury.v                                ;
-; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altsyncram.tdf        ;
-; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/stratix_ram_block.inc ;
-; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_mux.inc           ;
-; lpm_decode.inc                   ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_decode.inc        ;
-; aglobal81.inc                    ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/aglobal81.inc         ;
-; a_rdenreg.inc                    ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/a_rdenreg.inc         ;
-; altrom.inc                       ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altrom.inc            ;
-; altram.inc                       ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altram.inc            ;
-; altdpram.inc                     ; yes             ; Megafunction                 ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altdpram.inc           ;
-; altqpram.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altqpram.inc          ;
-; db/altsyncram_h2a1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_h2a1.tdf                   ;
-; altshift_taps.tdf                ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altshift_taps.tdf     ;
-; lpm_counter.inc                  ; yes             ; Megafunction                 ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_counter.inc        ;
-; lpm_compare.inc                  ; yes             ; Megafunction                 ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_compare.inc        ;
-; lpm_constant.inc                 ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_constant.inc      ;
-; db/shift_taps_ils.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/shift_taps_ils.tdf                    ;
-; db/altsyncram_qka1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_qka1.tdf                   ;
-; db/cntr_brf.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/cntr_brf.tdf                          ;
-; db/cmpr_lfc.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/cmpr_lfc.tdf                          ;
-; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_mult.tdf          ;
-; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_add_sub.inc        ;
-; multcore.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/multcore.inc          ;
-; bypassff.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/bypassff.inc          ;
-; altshift.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altshift.inc          ;
-; db/mult_djp.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/mult_djp.tdf                          ;
-; db/mult_4611.tdf                 ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/mult_4611.tdf                         ;
-+----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                           ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                       ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------+
+; spectrum_FIFO.v                  ; yes             ; User Wizard-Generated File             ; C:/HPSDR/trunk/Mercury V2/spectrum_FIFO.v                          ;
+; mult_24Sx24S.v                   ; yes             ; User Wizard-Generated File             ; C:/HPSDR/trunk/Mercury V2/mult_24Sx24S.v                           ;
+; receiver.v                       ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/receiver.v                               ;
+; fir_mac.v                        ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/fir_mac.v                                ;
+; fir_shiftreg.v                   ; yes             ; User Wizard-Generated File             ; C:/HPSDR/trunk/Mercury V2/fir_shiftreg.v                           ;
+; fir.v                            ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/fir.v                                    ;
+; fir_coeffs.v                     ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/fir_coeffs.v                             ;
+; fir_coeffs_rom.v                 ; yes             ; User Wizard-Generated File             ; C:/HPSDR/trunk/Mercury V2/fir_coeffs_rom.v                         ;
+; varcic.v                         ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/varcic.v                                 ;
+; cic_integrator.v                 ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/cic_integrator.v                         ;
+; cic.v                            ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/cic.v                                    ;
+; cic_comb.v                       ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/cic_comb.v                               ;
+; cordic.v                         ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/cordic.v                                 ;
+; SPI.v                            ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/SPI.v                                    ;
+; LPF_select.v                     ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/LPF_select.v                             ;
+; HPF_select.v                     ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/HPF_select.v                             ;
+; oddClockDiv.v                    ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/oddClockDiv.v                            ;
+; I2S_Encoder_24bit.v              ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/I2S_Encoder_24bit.v                      ;
+; Mercury.v                        ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/Mercury.v                                ;
+; altsyncram.tdf                   ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altsyncram.tdf        ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/stratix_ram_block.inc ;
+; lpm_mux.inc                      ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/lpm_mux.inc           ;
+; lpm_decode.inc                   ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/lpm_decode.inc        ;
+; aglobal81.inc                    ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/aglobal81.inc         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/a_rdenreg.inc         ;
+; altrom.inc                       ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altrom.inc            ;
+; altram.inc                       ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altram.inc            ;
+; altdpram.inc                     ; yes             ; Megafunction                           ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altdpram.inc           ;
+; altqpram.inc                     ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altqpram.inc          ;
+; db/altsyncram_h2a1.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_h2a1.tdf                   ;
+; fir_coeffs_rom.hex               ; yes             ; Auto-Found Memory Initialization File  ; C:/HPSDR/trunk/Mercury V2/fir_coeffs_rom.hex                       ;
+; altshift_taps.tdf                ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altshift_taps.tdf     ;
+; lpm_counter.inc                  ; yes             ; Megafunction                           ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_counter.inc        ;
+; lpm_compare.inc                  ; yes             ; Megafunction                           ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_compare.inc        ;
+; lpm_constant.inc                 ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/lpm_constant.inc      ;
+; db/shift_taps_ils.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/shift_taps_ils.tdf                    ;
+; db/altsyncram_qka1.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_qka1.tdf                   ;
+; db/cntr_brf.tdf                  ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/cntr_brf.tdf                          ;
+; db/cmpr_lfc.tdf                  ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/cmpr_lfc.tdf                          ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/lpm_mult.tdf          ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                           ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_add_sub.inc        ;
+; multcore.inc                     ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/multcore.inc          ;
+; bypassff.inc                     ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/bypassff.inc          ;
+; altshift.inc                     ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altshift.inc          ;
+; db/mult_djp.tdf                  ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/mult_djp.tdf                          ;
+; dcfifo.tdf                       ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf             ;
+; a_graycounter.inc                ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_graycounter.inc      ;
+; a_fefifo.inc                     ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_fefifo.inc           ;
+; a_gray2bin.inc                   ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_gray2bin.inc         ;
+; dffpipe.inc                      ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dffpipe.inc            ;
+; alt_sync_fifo.inc                ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/alt_sync_fifo.inc      ;
+; altsyncram_fifo.inc              ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altsyncram_fifo.inc    ;
+; aglobal51.inc                    ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/aglobal51.inc          ;
+; db/dcfifo_tnf1.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/dcfifo_tnf1.tdf                       ;
+; db/a_graycounter_tn6.tdf         ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_tn6.tdf                 ;
+; db/a_graycounter_p5c.tdf         ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_p5c.tdf                 ;
+; db/a_graycounter_o5c.tdf         ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_o5c.tdf                 ;
+; db/altsyncram_8tu.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_8tu.tdf                    ;
+; db/alt_synch_pipe_jv7.tdf        ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/alt_synch_pipe_jv7.tdf                ;
+; db/dffpipe_d09.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/dffpipe_d09.tdf                       ;
+; db/alt_synch_pipe_kv7.tdf        ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/alt_synch_pipe_kv7.tdf                ;
+; db/dffpipe_e09.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/dffpipe_e09.tdf                       ;
+; db/cmpr_h66.tdf                  ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/cmpr_h66.tdf                          ;
+; db/mult_4611.tdf                 ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/mult_4611.tdf                         ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------+
 
 
 +----------------------------------------------------------+
@@ -288,29 +320,29 @@ applicable agreement for further details.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimated Total logic elements              ; 6,739      ;
+; Estimated Total logic elements              ; 6,886      ;
 ;                                             ;            ;
-; Total combinational functions               ; 6525       ;
+; Total combinational functions               ; 6638       ;
 ; Logic element usage by number of LUT inputs ;            ;
-;     -- 4 input functions                    ; 414        ;
-;     -- 3 input functions                    ; 5219       ;
-;     -- <=2 input functions                  ; 892        ;
+;     -- 4 input functions                    ; 453        ;
+;     -- 3 input functions                    ; 5255       ;
+;     -- <=2 input functions                  ; 930        ;
 ;                                             ;            ;
 ; Logic elements by mode                      ;            ;
-;     -- normal mode                          ; 857        ;
-;     -- arithmetic mode                      ; 5668       ;
+;     -- normal mode                          ; 919        ;
+;     -- arithmetic mode                      ; 5719       ;
 ;                                             ;            ;
-; Total registers                             ; 6739       ;
-;     -- Dedicated logic registers            ; 6739       ;
+; Total registers                             ; 6886       ;
+;     -- Dedicated logic registers            ; 6886       ;
 ;     -- I/O registers                        ; 0          ;
 ;                                             ;            ;
-; I/O pins                                    ; 65         ;
-; Total memory bits                           ; 18844      ;
+; I/O pins                                    ; 67         ;
+; Total memory bits                           ; 84380      ;
 ; Embedded Multiplier 9-bit elements          ; 22         ;
 ; Maximum fan-out node                        ; CLKA~input ;
-; Maximum fan-out                             ; 6536       ;
-; Total fan-out                               ; 40199      ;
-; Average fan-out                             ; 2.98       ;
+; Maximum fan-out                             ; 6635       ;
+; Total fan-out                               ; 41337      ;
+; Average fan-out                             ; 3.00       ;
 +---------------------------------------------+------------+
 
 
@@ -319,10 +351,10 @@ applicable agreement for further details.
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                             ; Library Name ;
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Mercury                                                     ; 6525 (324)        ; 6739 (297)   ; 18844       ; 22           ; 2       ; 10        ; 65   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
-;    |HPF_select:Alex_HPF_select|                              ; 50 (50)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|HPF_select:Alex_HPF_select                                                                                                                                             ; work         ;
+; |Mercury                                                     ; 6638 (387)        ; 6886 (338)   ; 84380       ; 22           ; 2       ; 10        ; 67   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
+;    |HPF_select:Alex_HPF_select|                              ; 44 (44)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|HPF_select:Alex_HPF_select                                                                                                                                             ; work         ;
 ;    |I2SEncode:I2S|                                           ; 69 (69)           ; 59 (59)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|I2SEncode:I2S                                                                                                                                                          ; work         ;
-;    |LPF_select:Alex_LPF_select|                              ; 87 (87)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|LPF_select:Alex_LPF_select                                                                                                                                             ; work         ;
+;    |LPF_select:Alex_LPF_select|                              ; 89 (89)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|LPF_select:Alex_LPF_select                                                                                                                                             ; work         ;
 ;    |SPI:Alex_SPI_Tx|                                         ; 61 (61)           ; 41 (41)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|SPI:Alex_SPI_Tx                                                                                                                                                        ; work         ;
 ;    |lpm_mult:Mult0|                                          ; 33 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Mercury|lpm_mult:Mult0                                                                                                                                                         ; work         ;
 ;       |mult_4611:auto_generated|                             ; 33 (33)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Mercury|lpm_mult:Mult0|mult_4611:auto_generated                                                                                                                                ; work         ;
@@ -423,19 +455,33 @@ applicable agreement for further details.
 ;          |cic_integrator:cic_stages[2].cic_integrator_inst|  ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[2].cic_integrator_inst                                                                          ; work         ;
 ;          |cic_integrator:cic_stages[3].cic_integrator_inst|  ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[3].cic_integrator_inst                                                                          ; work         ;
 ;          |cic_integrator:cic_stages[4].cic_integrator_inst|  ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[4].cic_integrator_inst                                                                          ; work         ;
+;    |spectrum_FIFO:inst_spectrum_FIFO|                        ; 54 (0)            ; 106 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO                                                                                                                                       ; work         ;
+;       |dcfifo:dcfifo_component|                              ; 54 (0)            ; 106 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component                                                                                                               ; work         ;
+;          |dcfifo_tnf1:auto_generated|                        ; 54 (5)            ; 106 (26)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated                                                                                    ; work         ;
+;             |a_graycounter_o5c:wrptr_gp|                     ; 14 (14)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp                                                         ; work         ;
+;             |a_graycounter_tn6:rdptr_g1p|                    ; 17 (17)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p                                                        ; work         ;
+;             |alt_synch_pipe_jv7:rs_dgwp|                     ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp                                                         ; work         ;
+;                |dffpipe_d09:dffpipe6|                        ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe6                                    ; work         ;
+;             |alt_synch_pipe_kv7:ws_dgrp|                     ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp                                                         ; work         ;
+;                |dffpipe_e09:dffpipe9|                        ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9                                    ; work         ;
+;             |altsyncram_8tu:fifo_ram|                        ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram                                                            ; work         ;
+;             |cmpr_h66:rdempty_eq_comp|                       ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:rdempty_eq_comp                                                           ; work         ;
+;             |cmpr_h66:wrempty_eq_comp|                       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:wrempty_eq_comp                                                           ; work         ;
+;             |cmpr_h66:wrfull_eq_comp|                        ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:wrfull_eq_comp                                                            ; work         ;
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis RAM Summary                                                                                                                                                                                                                                                                  ;
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+--------------------+
-; Name                                                                                                                                                                            ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF                ;
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+--------------------+
-; receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 254          ; 25           ; 254          ; 25           ; 6350 ; None               ;
-; receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 254          ; 25           ; 254          ; 25           ; 6350 ; None               ;
-; receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component|altsyncram_h2a1:auto_generated|ALTSYNCRAM                  ; AUTO ; ROM              ; 256          ; 24           ; --           ; --           ; 6144 ; fir_coeffs_rom.hex ;
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+--------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                                                                                   ;
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+--------------------+
+; Name                                                                                                                                                                            ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF                ;
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+--------------------+
+; receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 254          ; 25           ; 254          ; 25           ; 6350  ; None               ;
+; receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 254          ; 25           ; 254          ; 25           ; 6350  ; None               ;
+; receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component|altsyncram_h2a1:auto_generated|ALTSYNCRAM                  ; AUTO ; ROM              ; 256          ; 24           ; --           ; --           ; 6144  ; fir_coeffs_rom.hex ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram|ALTSYNCRAM                                                          ; AUTO ; Simple Dual Port ; 4096         ; 16           ; 4096         ; 16           ; 65536 ; None               ;
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+--------------------+
 
 
 +-----------------------------------------------------+
@@ -466,6 +512,18 @@ Encoding Type:  One-Hot
 ; CC_state.01 ; 1           ; 0           ; 1           ;
 ; CC_state.10 ; 1           ; 1           ; 0           ;
 +-------------+-------------+-------------+-------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------+
+; State Machine - |Mercury|spec_send                        ;
++--------------+--------------+--------------+--------------+
+; Name         ; spec_send.00 ; spec_send.10 ; spec_send.01 ;
++--------------+--------------+--------------+--------------+
+; spec_send.00 ; 0            ; 0            ; 0            ;
+; spec_send.01 ; 1            ; 0            ; 1            ;
+; spec_send.10 ; 1            ; 1            ; 0            ;
++--------------+--------------+--------------+--------------+
 
 
 Encoding Type:  One-Hot
@@ -519,6 +577,20 @@ Encoding Type:  One-Hot
 ; Register name                                                                                                                                         ; Reason for Removal                                                                                                                                                ;
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; SPI:Alex_SPI_Tx|previous_Alex_data[7,16..18]                                                                                                          ; Stuck at GND due to stuck port data_in                                                                                                                            ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa0                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa1                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa2                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa3                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa4                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa5                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa6                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa7                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa8                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa9                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa10                         ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa11                         ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa12                         ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|parity_ff                             ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136 ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe138 ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136 ; Lost fanout                                                                                                                                                       ;
@@ -576,7 +648,7 @@ Encoding Type:  One-Hot
 ; counter[26]                                                                                                                                           ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[47..55]                                                                           ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[47..55]                                                                           ; Lost fanout                                                                                                                                                       ;
-; Total Number of Removed Registers = 108                                                                                                               ;                                                                                                                                                                   ;
+; Total Number of Removed Registers = 122                                                                                                               ;                                                                                                                                                                   ;
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -605,48 +677,52 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 6739  ;
+; Total registers                              ; 6886  ;
 ; Number of registers using Synchronous Clear  ; 119   ;
 ; Number of registers using Synchronous Load   ; 903   ;
-; Number of registers using Asynchronous Clear ; 238   ;
+; Number of registers using Asynchronous Clear ; 239   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 4382  ;
+; Number of registers using Clock Enable       ; 4426  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+-----------------------------------------------------------+
-; Inverted Register Statistics                              ;
-+-------------------------------------------------+---------+
-; Inverted Register                               ; Fan out ;
-+-------------------------------------------------+---------+
-; receiver:receiver_inst|fir:fir_inst_I|clear_mac ; 171     ;
-; receiver:receiver_inst|fir:fir_inst_Q|clear_mac ; 171     ;
-; Total number of inverted registers = 2          ;         ;
-+-------------------------------------------------+---------+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Inverted Register Statistics                                                                                                           ;
++------------------------------------------------------------------------------------------------------------------------------+---------+
+; Inverted Register                                                                                                            ; Fan out ;
++------------------------------------------------------------------------------------------------------------------------------+---------+
+; ADC_OVERFLOW~reg0                                                                                                            ; 1       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p|counter_ffa0 ; 4       ;
+; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p|parity_ff    ; 1       ;
+; receiver:receiver_inst|fir:fir_inst_I|clear_mac                                                                              ; 171     ;
+; receiver:receiver_inst|fir:fir_inst_Q|clear_mac                                                                              ; 171     ;
+; Total number of inverted registers = 5                                                                                       ;         ;
++------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (No Restructuring Performed)                                                                                                               ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
-; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|out_data[1] ;
-; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][5]        ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|temp_ADC[3]                                              ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Mercury|bit_cnt[0]                                               ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|SPI:Alex_SPI_Tx|data_count[0]                            ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Mercury|bits[0]                                                  ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|state[1]           ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_Q|state[2]           ;
-; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[3]                                    ;
-; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|bit_count[0]                               ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0  ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0  ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0  ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|LPF_select:Alex_LPF_select|LPF[3]                        ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|Alex_data[2]                                             ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (No Restructuring Performed)                                                                                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
+; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|out_data[18] ;
+; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][17]        ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|temp_ADC[14]                                              ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Mercury|bit_cnt[3]                                                ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|SPI:Alex_SPI_Tx|data_count[3]                             ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Mercury|bits[3]                                                   ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Mercury|spec_data_count[0]                                        ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|state[1]            ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_Q|state[1]            ;
+; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[9]                                     ;
+; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|bit_count[4]                                ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|LPF_select:Alex_LPF_select|LPF[3]                         ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|Alex_data[2]                                              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -950,6 +1026,107 @@ Encoding Type:  One-Hot
 ; POWER_UP_LEVEL ; LOW   ; -    ; dffe98                                                                                                                               ;
 ; POWER_UP_LEVEL ; LOW   ; -    ; dffe99                                                                                                                               ;
 +----------------+-------+------+--------------------------------------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------+
+; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component ;
++---------------------------------+-------+------+--------------------------------+
+; Assignment                      ; Value ; From ; To                             ;
++---------------------------------+-------+------+--------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                              ;
++---------------------------------+-------+------+--------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated                                                       ;
++---------------------------------+-----------------------------------------------------------------------------------+-----------------+--------------------------+
+; Assignment                      ; Value                                                                             ; From            ; To                       ;
++---------------------------------+-----------------------------------------------------------------------------------+-----------------+--------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF                                                                               ; -               ; -                        ;
+; REMOVE_DUPLICATE_REGISTERS      ; OFF                                                                               ; -               ; -                        ;
+; SUPPRESS_DA_RULE_INTERNAL       ; d101                                                                              ; -               ; -                        ;
+; SUPPRESS_DA_RULE_INTERNAL       ; d102                                                                              ; -               ; -                        ;
+; SUPPRESS_DA_RULE_INTERNAL       ; s102                                                                              ; -               ; -                        ;
+; CUT                             ; ON                                                                                ; rdptr_g         ; ws_dgrp|dffpipe9|dffe10a ;
+; SDC_STATEMENT                   ; set_false_path -from *rdptr_g* -to *ws_dgrp|dffpipe_e09:dffpipe9|dffe10a*         ; -               ; -                        ;
+; CUT                             ; ON                                                                                ; delayed_wrptr_g ; rs_dgwp|dffpipe6|dffe7a  ;
+; SDC_STATEMENT                   ; set_false_path -from *delayed_wrptr_g* -to *rs_dgwp|dffpipe_d09:dffpipe6|dffe7a*  ; -               ; -                        ;
++---------------------------------+-----------------------------------------------------------------------------------+-----------------+--------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p ;
++----------------+-------+------+--------------------------------------------------------------------------------------------------------+
+; Assignment     ; Value ; From ; To                                                                                                     ;
++----------------+-------+------+--------------------------------------------------------------------------------------------------------+
+; POWER_UP_LEVEL ; HIGH  ; -    ; counter_ffa0                                                                                           ;
+; POWER_UP_LEVEL ; HIGH  ; -    ; parity_ff                                                                                              ;
++----------------+-------+------+--------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p ;
++---------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; Assignment                ; Value ; From ; To                                                                                          ;
++---------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; SUPPRESS_DA_RULE_INTERNAL ; s102  ; -    ; -                                                                                           ;
+; POWER_UP_LEVEL            ; HIGH  ; -    ; counter_ffa0                                                                                ;
+; POWER_UP_LEVEL            ; HIGH  ; -    ; parity_ff                                                                                   ;
++---------------------------+-------+------+---------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp ;
++---------------------------+-------+------+--------------------------------------------------------------------------------------------+
+; Assignment                ; Value ; From ; To                                                                                         ;
++---------------------------+-------+------+--------------------------------------------------------------------------------------------+
+; SUPPRESS_DA_RULE_INTERNAL ; s102  ; -    ; -                                                                                          ;
++---------------------------+-------+------+--------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram ;
++---------------------------------+--------------------+------+----------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                   ;
++---------------------------------+--------------------+------+----------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                    ;
++---------------------------------+--------------------+------+----------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp ;
++-----------------------+-------+------+------------------------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                                             ;
++-----------------------+-------+------+------------------------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                              ;
++-----------------------+-------+------+------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe6 ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                                        ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                                         ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp ;
++-----------------------+-------+------+------------------------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                                             ;
++-----------------------+-------+------+------------------------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                              ;
++-----------------------+-------+------+------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9 ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                                        ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                                         ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------+
@@ -1835,6 +2012,34 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component ;
++-------------------------+-------------+---------------------------------------------------------------+
+; Parameter Name          ; Value       ; Type                                                          ;
++-------------------------+-------------+---------------------------------------------------------------+
+; AUTO_CARRY_CHAINS       ; ON          ; AUTO_CARRY                                                    ;
+; IGNORE_CARRY_BUFFERS    ; OFF         ; IGNORE_CARRY                                                  ;
+; AUTO_CASCADE_CHAINS     ; ON          ; AUTO_CASCADE                                                  ;
+; IGNORE_CASCADE_BUFFERS  ; OFF         ; IGNORE_CASCADE                                                ;
+; LPM_WIDTH               ; 16          ; Signed Integer                                                ;
+; LPM_NUMWORDS            ; 4096        ; Signed Integer                                                ;
+; LPM_WIDTHU              ; 12          ; Signed Integer                                                ;
+; LPM_SHOWAHEAD           ; OFF         ; Untyped                                                       ;
+; UNDERFLOW_CHECKING      ; ON          ; Untyped                                                       ;
+; OVERFLOW_CHECKING       ; ON          ; Untyped                                                       ;
+; USE_EAB                 ; ON          ; Untyped                                                       ;
+; ADD_RAM_OUTPUT_REGISTER ; OFF         ; Untyped                                                       ;
+; DELAY_RDUSEDW           ; 1           ; Untyped                                                       ;
+; DELAY_WRUSEDW           ; 1           ; Untyped                                                       ;
+; RDSYNC_DELAYPIPE        ; 4           ; Signed Integer                                                ;
+; WRSYNC_DELAYPIPE        ; 4           ; Signed Integer                                                ;
+; CLOCKS_ARE_SYNCHRONIZED ; FALSE       ; Untyped                                                       ;
+; DEVICE_FAMILY           ; Cyclone III ; Untyped                                                       ;
+; CBXI_PARAMETER          ; dcfifo_tnf1 ; Untyped                                                       ;
++-------------------------+-------------+---------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +------------------------------------------------------------------------------+
 ; Parameter Settings for User Entity Instance: oddClockDivider:refClockDivider ;
 +----------------+-------+-----------------------------------------------------+
@@ -1946,8 +2151,12 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Sun Jan 04 15:17:03 2009
+    Info: Processing started: Sat Jan 10 15:11:09 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
+Info: Found 1 design units, including 1 entities, in source file cbuffer_top.v
+    Info: Found entity 1: cbuffer_top
+Info: Found 1 design units, including 1 entities, in source file spectrum_FIFO.v
+    Info: Found entity 1: spectrum_FIFO
 Info: Found 1 design units, including 1 entities, in source file mult_24Sx24S.v
     Info: Found entity 1: mult_24Sx24S
 Info: Found 1 design units, including 1 entities, in source file receiver.v
@@ -2059,6 +2268,41 @@ Info: Found 1 design units, including 1 entities, in source file db/mult_djp.tdf
     Info: Found entity 1: mult_djp
 Info: Elaborating entity "mult_djp" for hierarchy "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated"
 Info: Elaborating entity "I2SEncode" for hierarchy "I2SEncode:I2S"
+Info: Elaborating entity "spectrum_FIFO" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO"
+Warning: Entity "dcfifo" obtained from "C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf" instead of from Quartus II megafunction library
+Warning: Using design file ../VK6APH/Mercury/megafunctions/dcfifo.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info: Found entity 1: dcfifo
+Info: Elaborating entity "dcfifo" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_tnf1.tdf
+    Info: Found entity 1: dcfifo_tnf1
+Info: Elaborating entity "dcfifo_tnf1" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_tn6.tdf
+    Info: Found entity 1: a_graycounter_tn6
+Info: Elaborating entity "a_graycounter_tn6" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_p5c.tdf
+    Info: Found entity 1: a_graycounter_p5c
+Info: Elaborating entity "a_graycounter_p5c" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_o5c.tdf
+    Info: Found entity 1: a_graycounter_o5c
+Info: Elaborating entity "a_graycounter_o5c" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_8tu.tdf
+    Info: Found entity 1: altsyncram_8tu
+Info: Elaborating entity "altsyncram_8tu" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_jv7.tdf
+    Info: Found entity 1: alt_synch_pipe_jv7
+Info: Elaborating entity "alt_synch_pipe_jv7" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_d09.tdf
+    Info: Found entity 1: dffpipe_d09
+Info: Elaborating entity "dffpipe_d09" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe6"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_kv7.tdf
+    Info: Found entity 1: alt_synch_pipe_kv7
+Info: Elaborating entity "alt_synch_pipe_kv7" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_e09.tdf
+    Info: Found entity 1: dffpipe_e09
+Info: Elaborating entity "dffpipe_e09" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9"
+Info: Found 1 design units, including 1 entities, in source file db/cmpr_h66.tdf
+    Info: Found entity 1: cmpr_h66
+Info: Elaborating entity "cmpr_h66" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:rdempty_eq_comp"
 Info: Elaborating entity "LPF_select" for hierarchy "LPF_select:Alex_LPF_select"
 Info: Elaborating entity "HPF_select" for hierarchy "HPF_select:Alex_HPF_select"
 Info: Elaborating entity "SPI" for hierarchy "SPI:Alex_SPI_Tx"
@@ -2085,13 +2329,29 @@ Info: Found 1 design units, including 1 entities, in source file db/mult_4611.td
     Info: Found entity 1: mult_4611
 Info: Ignored 168 buffer(s)
     Info: Ignored 168 SOFT buffer(s)
+Info: Registers with preset signals will power-up high
+Info: DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "CMODE" is stuck at VCC
     Warning (13410): Pin "SHDN" is stuck at GND
     Warning (13410): Pin "PGA" is stuck at GND
     Warning (13410): Pin "INIT_DONE" is stuck at GND
     Warning (13410): Pin "TEST3" is stuck at GND
-Info: 67 registers lost all their fanouts during netlist optimizations. The first 67 are displayed below.
+Info: 81 registers lost all their fanouts during netlist optimizations. The first 81 are displayed below.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa0" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa1" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa2" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa3" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa4" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa5" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa6" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa7" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa8" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa9" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa10" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa11" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa12" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|parity_ff" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe138" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136" lost all its fanouts during netlist optimizations.
@@ -2159,19 +2419,19 @@ Info: 67 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[53]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[54]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[55]" lost all its fanouts during netlist optimizations.
-Info: Implemented 8633 device resources after synthesis - the final resource count might be different
+Info: Implemented 8843 device resources after synthesis - the final resource count might be different
     Info: Implemented 28 input pins
-    Info: Implemented 36 output pins
+    Info: Implemented 38 output pins
     Info: Implemented 1 bidirectional pins
-    Info: Implemented 8472 logic cells
-    Info: Implemented 74 RAM segments
+    Info: Implemented 8664 logic cells
+    Info: Implemented 90 RAM segments
     Info: Implemented 22 DSP elements
 Info: Generated suppressed messages file C:/HPSDR/trunk/Mercury V2/Mercury.map.smsg
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 8 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
     Info: Peak virtual memory: 199 megabytes
-    Info: Processing ended: Sun Jan 04 15:17:37 2009
-    Info: Elapsed time: 00:00:34
-    Info: Total CPU time (on all processors): 00:00:33
+    Info: Processing ended: Sat Jan 10 15:11:46 2009
+    Info: Elapsed time: 00:00:37
+    Info: Total CPU time (on all processors): 00:00:37
 
 
 +------------------------------------------+
