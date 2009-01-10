@@ -147,7 +147,7 @@ RESERVED_INPUT               : 72        :        :                   :         
 RESERVED_INPUT               : 73        :        :                   :         : 3         :                
 VCCINT                       : 74        : power  :                   : 1.2V    :           :                
 GND                          : 75        : gnd    :                   :         :           :                
-RESERVED_INPUT               : 76        :        :                   :         : 3         :                
+ADC_OVERFLOW                 : 76        : output : 3.0-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 77        : power  :                   : 3.0V    : 3         :                
 RESERVED_INPUT               : 78        :        :                   :         : 3         :                
 GND                          : 79        : gnd    :                   :         :           :                
@@ -166,7 +166,7 @@ GND+                         : 91        :        :                   :         
 GND+                         : 92        :        :                   :         : 4         :                
 RESERVED_INPUT               : 93        :        :                   :         : 4         :                
 DFS0                         : 94        : input  : 3.0-V LVTTL       :         : 4         : Y              
-RESERVED_INPUT               : 95        :        :                   :         : 4         :                
+spectrum                     : 95        : output : 3.0-V LVTTL       :         : 4         : Y              
 VCCIO4                       : 96        : power  :                   : 3.0V    : 4         :                
 GND                          : 97        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 98        :        :                   :         : 4         :                

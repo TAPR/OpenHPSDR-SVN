@@ -4,7 +4,7 @@
 *
 ************************************************************/
 
-// V2.3 4 Jan 2009 
+// V2.4 10 Jan 2009 
 
 // (C) Phil Harman VK6APH 2006,2007,2008
 
@@ -44,7 +44,7 @@
 	23 Dec 2008 - Added code from Alex VE3NEA that provides 48/96/192KHz sampling
 	26 Dec 2008 - Working on pin drive issues
 	            - Changed CORDIC to wide_phase to give 1Hz steps
-	30 Dec 2008 - Changed pins to 3.0v LVTTL, set A6 and C16 to 16mA, no R, no PCI diode
+	30 Dec 2008 - Changed pins to 3.0v LVTTL, set A6 and C16 to 16mA, no R, no PCI diode, output termination off
 	            - added modifications by Kirk Weedman, KD7IRS.
 	            - released as V2.1
 	 1 Jan 2009 - Used Kirk's oddClockDiv.
@@ -53,7 +53,13 @@
                   code so that compilers like ModelSim won't produce errors
      3 Jan 2009 - Fix Alex relay data not being sent correctly
                 - changed frequency to phase_word since that is correct term
-     4 Jan 209  - Code tidy by Kirk, KD7IRS, released as v2.3
+     4 Jan 2009 - Code tidy by Kirk, KD7IRS, released as v2.3
+     5 Jan 2009 - Added spectrum data to A12
+     9 Jan 2009 - Change A10 to 16mA, no R, no PCI diode, output termination off 
+			    - Added ADC overflow bit on C18
+    10 Jan 2009 - Changed spectrum data to 0,1,2....4095 for testing
+				- Released as V2.4
+                 
 				
 	 
 */
@@ -126,12 +132,13 @@ output        DEBUG_LED4, // Debug LED
 output        DEBUG_LED5, // Debug LED
 output        DEBUG_LED6, // Debug LED
 output        DEBUG_LED7, // Debug LED
-input         DFS0, DFS1  // I/Q sampling rate selection
+input         DFS0, DFS1, // I/Q sampling rate selection
+output reg	  spectrum,	  // ADC samples for bandscope A12
+output reg    ADC_OVERFLOW // set when ADC overflows C18
 );
 
 
 reg  [15:0] temp_ADC;
-reg         data_ready;   // set at end of decimation
 wire        CLK_122MHz;
 
 // Assign FPGA pass through connections
@@ -318,7 +325,7 @@ begin
     SPI_count <= SPI_count + 1'b1;
 end	
 
-// Select 122.88MHz source. If source_122MHZ set then use Penelope's 122.88MHz clock and send to LVDS
+// Select 122.88MHz source. If source_122MHZ set then use Mercury's 122.88MHz clock and send to LVDS
 // Otherwise get external clock from LVDS
 wire source_122MHZ;		// Set when internal 122.88MHz source is used and sent to LVDS
 
@@ -386,6 +393,143 @@ receiver receiver_inst(
 // I2S encoder to send I and Q data to Atlas on C10
 
 I2SEncode  I2S(.LRCLK(LRCLK), .BCLK(BCLK), .left_sample(rx_out_data_I), .right_sample(rx_out_data_Q), .outbit(MDOUT)); 
+
+
+///////////////////////////////////////////////////////////
+//
+//   ADC Overload detect and flag set
+//
+///////////////////////////////////////////////////////////
+
+// count the number of times the ADC Overflow bit is set and if > a setpoint 
+// set a flag. This will be sent to PowerSDR via Ozy.
+
+localparam  SETPOINT = 100;
+reg [15:0]OF_count;
+reg OF_flag_set;
+reg OF_flag;
+
+always @ (posedge  CLK_122MHz)
+begin
+	if (OVERFLOW) begin
+		if (OF_count == SETPOINT) begin
+			OF_flag_set <= 1'b1;
+			OF_count <= 0;
+		end 
+		else begin
+			OF_count <= OF_count + 1'b1;
+			OF_flag_set <= 1'b0;
+		end
+	end 
+	else OF_flag_set <= 1'b0; 
+end
+ 
+ 
+// set/reset  ADC_OVERFLOW latch 
+always @ (posedge OF_flag_set or posedge LRCLK)
+begin
+	if (OF_flag_set) ADC_OVERFLOW <= 1'b1;
+	else if (LRCLK) ADC_OVERFLOW <= 1'b0;
+end 
+	
+
+
+
+//////////////////////////////////////////////////////////////
+//
+//		Spectrum data capture
+//
+//////////////////////////////////////////////////////////////
+
+// Load consecutive ADC samples into FIFO until it is full, 4096 words.
+// Wait until all data has been sent and then repeat.
+
+// for testing fill FIFO with 0,1,2....4095
+
+reg [11:0]test_count;
+
+always @ (negedge CLK_122MHz) 
+begin
+if (wrempty)begin
+	wrreq <= 1'b1;	// enable FIFO write
+	test_count <= test_count + 1'b1;
+	end 
+	else if (wrfull)wrreq <= 1'b0;		// disable FIFO write
+end	
+
+	
+// 16 x 4096 data FIFO
+reg rdreq; reg wrreq; wire wrfull; wire [15:0]q; wire wrempty;
+//spectrum_FIFO inst_spectrum_FIFO(.data(temp_ADC),.rdclk(~BCLK),.rdreq(rdreq),.wrclk(CLK_122MHz),.wrreq(wrreq),.q(q),.wrempty(wrempty),.wrfull(wrfull));
+
+spectrum_FIFO inst_spectrum_FIFO(.data({4'b0,test_count}),.rdclk(~BCLK),.rdreq(rdreq),.wrclk(CLK_122MHz),.wrreq(wrreq),.q(q),.wrempty(wrempty),.wrfull(wrfull));
+
+
+// read data from spectrum_FIFO using BCLK and LRCLK, send data using I2S format over Atlas bus to Ozy
+// read data using first BCLK after negative edge of LRCLK
+
+reg spec_state;
+always @(posedge BCLK)  
+begin
+  case(spec_state)
+  0:
+  begin
+	if (LRCLK == 0)
+      spec_state  <= 0;     // loop until CLRLCK is high   
+    else
+      spec_state  <= 1;
+  end
+
+  1:
+  begin
+    if (CLRCLK)
+      spec_state  <= 1;     // loop until CLRCLK is low  
+    else
+    begin
+      rdreq <= 1;						
+      spec_state  <= 0;
+    end
+  end
+  default:
+    spec_state <= 0;
+  endcase
+end
+
+
+// Send spectrum data to Ozy using I2S format on negative edge of LRCLK
+
+reg [1:0]spec_send;
+reg [3:0]spec_data_count;
+
+always @ (posedge BCLK)
+begin	
+case(spec_send)
+0:  if (LRCLK)	 spec_send <= 1;	// loop until LRCLK is high
+	else spec_send <= 0;
+	
+1:	if (LRCLK)	spec_send <= 1;		// wait until it goes low - this is first BCLK after negedge of LRCLK
+	else begin
+		spec_data_count <= 15; 		// need to have data available for Ozy on next BCLK
+		spec_send <= 2;
+	end
+	
+2:	begin
+	if (spec_data_count == 0) spec_send <= 0;
+	else begin
+		spec_data_count <= spec_data_count - 1'b1;
+		spec_send <= 2;
+	end
+	end 
+	
+default: spec_send <= 0;
+endcase
+end 
+
+// I2S data must be available on the 2nd positive edge of CBCLK after the CLRCLK transition
+always @ (negedge BCLK)
+begin
+	if (spec_send == 2)	spectrum <= q[spec_data_count];		// shift data out to Atlas bus MSB first
+end
 
 
 ///////////////////////////////////////////////////////////
