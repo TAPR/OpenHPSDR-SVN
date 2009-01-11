@@ -210,6 +210,9 @@ namespace DataDecoder
             this.chkB20 = new System.Windows.Forms.CheckBox();
             this.chkB15 = new System.Windows.Forms.CheckBox();
             this.grpRepeat = new System.Windows.Forms.GroupBox();
+            this.label79 = new System.Windows.Forms.Label();
+            this.label147 = new System.Windows.Forms.Label();
+            this.cboRepeatCom = new System.Windows.Forms.ComboBox();
             this.grpRmode = new System.Windows.Forms.GroupBox();
             this.rbMHBD = new System.Windows.Forms.RadioButton();
             this.rbAll = new System.Windows.Forms.RadioButton();
@@ -217,6 +220,8 @@ namespace DataDecoder
             this.chkRepeat = new System.Windows.Forms.CheckBox();
             this.btnTest = new System.Windows.Forms.Button();
             this.grpAmp = new System.Windows.Forms.GroupBox();
+            this.btnDrive = new System.Windows.Forms.Button();
+            this.label148 = new System.Windows.Forms.Label();
             this.lblLoad = new System.Windows.Forms.Label();
             this.txtLoad = new System.Windows.Forms.TextBox();
             this.txtTune = new System.Windows.Forms.TextBox();
@@ -816,9 +821,6 @@ namespace DataDecoder
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
             this.PMport = new System.IO.Ports.SerialPort(this.components);
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
-            this.cboRepeatCom = new System.Windows.Forms.ComboBox();
-            this.label79 = new System.Windows.Forms.Label();
-            this.label147 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -2547,14 +2549,15 @@ namespace DataDecoder
             this.cboStepCom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboStepCom.FormattingEnabled = true;
             this.cboStepCom.Items.AddRange(new object[] {
-            "9600 8-N-1",
-            "9600 8-N-2",
-            "4800 8-N-1",
-            "4800 8-N-2",
-            "2400 8-N-1",
-            "2400 8-N-2",
-            "1200 8-N-1",
-            "1200 8-N-2"});
+            "19200 8N1",
+            "9600 8N1",
+            "9600 8N2",
+            "4800 8N1",
+            "4800 8N2",
+            "2400 8N1",
+            "2400 8N2",
+            "1200 8N1",
+            "1200 8N2"});
             this.cboStepCom.Location = new System.Drawing.Point(75, 40);
             this.cboStepCom.Name = "cboStepCom";
             this.cboStepCom.Size = new System.Drawing.Size(81, 21);
@@ -3065,6 +3068,44 @@ namespace DataDecoder
             this.grpRepeat.TabStop = false;
             this.grpRepeat.Text = "Repeater";
             // 
+            // label79
+            // 
+            this.label79.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label79.ForeColor = System.Drawing.Color.Navy;
+            this.label79.Location = new System.Drawing.Point(89, 50);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(38, 15);
+            this.label79.TabIndex = 69;
+            this.label79.Text = "Comm";
+            // 
+            // label147
+            // 
+            this.label147.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label147.ForeColor = System.Drawing.Color.Navy;
+            this.label147.Location = new System.Drawing.Point(88, 9);
+            this.label147.Name = "label147";
+            this.label147.Size = new System.Drawing.Size(30, 15);
+            this.label147.TabIndex = 68;
+            this.label147.Text = "Port";
+            this.label147.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // cboRepeatCom
+            // 
+            this.cboRepeatCom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboRepeatCom.ForeColor = System.Drawing.Color.Navy;
+            this.cboRepeatCom.FormattingEnabled = true;
+            this.cboRepeatCom.Items.AddRange(new object[] {
+            "57600",
+            "38400",
+            "19200",
+            "9600"});
+            this.cboRepeatCom.Location = new System.Drawing.Point(81, 65);
+            this.cboRepeatCom.Name = "cboRepeatCom";
+            this.cboRepeatCom.Size = new System.Drawing.Size(63, 21);
+            this.cboRepeatCom.TabIndex = 67;
+            this.toolTip1.SetToolTip(this.cboRepeatCom, "Select Port Baud Rate");
+            this.cboRepeatCom.SelectedIndexChanged += new System.EventHandler(this.cboRepeatCom_SelectedIndexChanged);
+            // 
             // grpRmode
             // 
             this.grpRmode.Controls.Add(this.rbMHBD);
@@ -3147,6 +3188,8 @@ namespace DataDecoder
             // 
             // grpAmp
             // 
+            this.grpAmp.Controls.Add(this.btnDrive);
+            this.grpAmp.Controls.Add(this.label148);
             this.grpAmp.Controls.Add(this.lblLoad);
             this.grpAmp.Controls.Add(this.txtLoad);
             this.grpAmp.Controls.Add(this.txtTune);
@@ -3189,6 +3232,32 @@ namespace DataDecoder
             this.grpAmp.TabStop = false;
             this.grpAmp.Text = "Amplifier";
             this.toolTip1.SetToolTip(this.grpAmp, "Select Amp from Options menu");
+            // 
+            // btnDrive
+            // 
+            this.btnDrive.BackColor = System.Drawing.Color.Moccasin;
+            this.btnDrive.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
+            this.btnDrive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDrive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDrive.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnDrive.Location = new System.Drawing.Point(234, 64);
+            this.btnDrive.Name = "btnDrive";
+            this.btnDrive.Size = new System.Drawing.Size(12, 12);
+            this.btnDrive.TabIndex = 62;
+            this.toolTip1.SetToolTip(this.btnDrive, "Press to save drive level for this band.");
+            this.btnDrive.UseVisualStyleBackColor = false;
+            this.btnDrive.Click += new System.EventHandler(this.btnDrive_Click);
+            // 
+            // label148
+            // 
+            this.label148.AutoSize = true;
+            this.label148.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label148.ForeColor = System.Drawing.Color.Navy;
+            this.label148.Location = new System.Drawing.Point(232, 47);
+            this.label148.Name = "label148";
+            this.label148.Size = new System.Drawing.Size(18, 12);
+            this.label148.TabIndex = 61;
+            this.label148.Text = "SD";
             // 
             // lblLoad
             // 
@@ -3243,7 +3312,7 @@ namespace DataDecoder
             this.label80.AutoSize = true;
             this.label80.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label80.ForeColor = System.Drawing.Color.Navy;
-            this.label80.Location = new System.Drawing.Point(277, 12);
+            this.label80.Location = new System.Drawing.Point(278, 12);
             this.label80.Name = "label80";
             this.label80.Size = new System.Drawing.Size(28, 13);
             this.label80.TabIndex = 56;
@@ -3260,7 +3329,7 @@ namespace DataDecoder
             this.txtFreq.Size = new System.Drawing.Size(39, 20);
             this.txtFreq.TabIndex = 55;
             this.txtFreq.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtFreq, "Amp Frequency Setting in mHz.");
+            this.toolTip1.SetToolTip(this.txtFreq, "Amp Frequency Setting in MHz.");
             // 
             // label78
             // 
@@ -3298,10 +3367,11 @@ namespace DataDecoder
             this.btnHF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHF.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnHF.Location = new System.Drawing.Point(227, 64);
+            this.btnHF.Location = new System.Drawing.Point(218, 64);
             this.btnHF.Name = "btnHF";
-            this.btnHF.Size = new System.Drawing.Size(15, 15);
+            this.btnHF.Size = new System.Drawing.Size(12, 12);
             this.btnHF.TabIndex = 52;
+            this.toolTip1.SetToolTip(this.btnHF, "Press to display Hard Fault Log.");
             this.btnHF.UseVisualStyleBackColor = false;
             this.btnHF.Click += new System.EventHandler(this.btnHF_Click);
             // 
@@ -3313,10 +3383,11 @@ namespace DataDecoder
             this.btnSF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSF.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSF.Location = new System.Drawing.Point(206, 64);
+            this.btnSF.Location = new System.Drawing.Point(202, 64);
             this.btnSF.Name = "btnSF";
-            this.btnSF.Size = new System.Drawing.Size(15, 15);
+            this.btnSF.Size = new System.Drawing.Size(12, 12);
             this.btnSF.TabIndex = 51;
+            this.toolTip1.SetToolTip(this.btnSF, "Press to display Soft Fault Log.");
             this.btnSF.UseVisualStyleBackColor = false;
             this.btnSF.Click += new System.EventHandler(this.btnSF_Click);
             // 
@@ -3325,7 +3396,7 @@ namespace DataDecoder
             this.lblHF.AutoSize = true;
             this.lblHF.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHF.ForeColor = System.Drawing.Color.Navy;
-            this.lblHF.Location = new System.Drawing.Point(226, 46);
+            this.lblHF.Location = new System.Drawing.Point(216, 47);
             this.lblHF.Name = "lblHF";
             this.lblHF.Size = new System.Drawing.Size(18, 12);
             this.lblHF.TabIndex = 50;
@@ -3335,7 +3406,7 @@ namespace DataDecoder
             // txtMsg
             // 
             this.txtMsg.BackColor = System.Drawing.Color.LightYellow;
-            this.txtMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.txtMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.75F);
             this.txtMsg.Location = new System.Drawing.Point(6, 85);
             this.txtMsg.MaxLength = 1500;
             this.txtMsg.Multiline = true;
@@ -3352,7 +3423,7 @@ namespace DataDecoder
             this.lblSF.AutoSize = true;
             this.lblSF.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSF.ForeColor = System.Drawing.Color.Navy;
-            this.lblSF.Location = new System.Drawing.Point(205, 46);
+            this.lblSF.Location = new System.Drawing.Point(201, 47);
             this.lblSF.Name = "lblSF";
             this.lblSF.Size = new System.Drawing.Size(17, 12);
             this.lblSF.TabIndex = 47;
@@ -3425,7 +3496,7 @@ namespace DataDecoder
             this.btnHV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHV.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnHV.Location = new System.Drawing.Point(157, 61);
+            this.btnHV.Location = new System.Drawing.Point(156, 61);
             this.btnHV.Name = "btnHV";
             this.btnHV.Size = new System.Drawing.Size(41, 22);
             this.btnHV.TabIndex = 39;
@@ -3438,7 +3509,7 @@ namespace DataDecoder
             this.label77.AutoSize = true;
             this.label77.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label77.ForeColor = System.Drawing.Color.Navy;
-            this.label77.Location = new System.Drawing.Point(167, 46);
+            this.label77.Location = new System.Drawing.Point(166, 46);
             this.label77.Name = "label77";
             this.label77.Size = new System.Drawing.Size(21, 13);
             this.label77.TabIndex = 38;
@@ -3484,7 +3555,7 @@ namespace DataDecoder
             this.label73.AutoSize = true;
             this.label73.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label73.ForeColor = System.Drawing.Color.Navy;
-            this.label73.Location = new System.Drawing.Point(102, 46);
+            this.label73.Location = new System.Drawing.Point(101, 46);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(52, 13);
             this.label73.TabIndex = 11;
@@ -3520,7 +3591,7 @@ namespace DataDecoder
             this.btnOper.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOper.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOper.Location = new System.Drawing.Point(57, 61);
+            this.btnOper.Location = new System.Drawing.Point(56, 61);
             this.btnOper.Name = "btnOper";
             this.btnOper.Size = new System.Drawing.Size(41, 22);
             this.btnOper.TabIndex = 9;
@@ -3537,7 +3608,7 @@ namespace DataDecoder
             this.btnTune.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTune.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnTune.Location = new System.Drawing.Point(107, 61);
+            this.btnTune.Location = new System.Drawing.Point(106, 61);
             this.btnTune.Name = "btnTune";
             this.btnTune.Size = new System.Drawing.Size(41, 22);
             this.btnTune.TabIndex = 8;
@@ -3561,7 +3632,7 @@ namespace DataDecoder
             this.label71.AutoSize = true;
             this.label71.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label71.ForeColor = System.Drawing.Color.Navy;
-            this.label71.Location = new System.Drawing.Point(55, 46);
+            this.label71.Location = new System.Drawing.Point(54, 46);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(45, 13);
             this.label71.TabIndex = 7;
@@ -10013,9 +10084,9 @@ namespace DataDecoder
             // 
             this.btnSplit.BackColor = System.Drawing.Color.PaleTurquoise;
             this.btnSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSplit.Location = new System.Drawing.Point(354, 370);
+            this.btnSplit.Location = new System.Drawing.Point(353, 368);
             this.btnSplit.Name = "btnSplit";
-            this.btnSplit.Size = new System.Drawing.Size(10, 10);
+            this.btnSplit.Size = new System.Drawing.Size(12, 12);
             this.btnSplit.TabIndex = 77;
             this.toolTip1.SetToolTip(this.btnSplit, "Press to toggle Split mode w/vfo A>B +n kHz (ctrl+~)");
             this.btnSplit.UseVisualStyleBackColor = false;
@@ -10537,44 +10608,6 @@ namespace DataDecoder
             this.RepeatPort.ReadTimeout = 500;
             this.RepeatPort.WriteTimeout = 500;
             this.RepeatPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RepeatPort_DataReceived);
-            // 
-            // cboRepeatCom
-            // 
-            this.cboRepeatCom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboRepeatCom.ForeColor = System.Drawing.Color.Navy;
-            this.cboRepeatCom.FormattingEnabled = true;
-            this.cboRepeatCom.Items.AddRange(new object[] {
-            "57600",
-            "38400",
-            "19200",
-            "9600"});
-            this.cboRepeatCom.Location = new System.Drawing.Point(81, 65);
-            this.cboRepeatCom.Name = "cboRepeatCom";
-            this.cboRepeatCom.Size = new System.Drawing.Size(63, 21);
-            this.cboRepeatCom.TabIndex = 67;
-            this.toolTip1.SetToolTip(this.cboRepeatCom, "Select Port Baud Rate");
-            this.cboRepeatCom.SelectedIndexChanged += new System.EventHandler(this.cboRepeatCom_SelectedIndexChanged);
-            // 
-            // label79
-            // 
-            this.label79.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label79.ForeColor = System.Drawing.Color.Navy;
-            this.label79.Location = new System.Drawing.Point(89, 50);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(38, 15);
-            this.label79.TabIndex = 69;
-            this.label79.Text = "Comm";
-            // 
-            // label147
-            // 
-            this.label147.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label147.ForeColor = System.Drawing.Color.Navy;
-            this.label147.Location = new System.Drawing.Point(88, 9);
-            this.label147.Name = "label147";
-            this.label147.Size = new System.Drawing.Size(30, 15);
-            this.label147.TabIndex = 68;
-            this.label147.Text = "Port";
-            this.label147.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Setup
             // 
@@ -11484,6 +11517,8 @@ namespace DataDecoder
         private Label label79;
         private Label label147;
         private ComboBox cboRepeatCom;
+        public Button btnDrive;
+        private Label label148;
 
     }
 }

@@ -26,19 +26,19 @@
   </macro>
   <macro>
     <Button>Ant1</Button>
-    <Command>ZZOA0;</Command>
+    <Command>ZZOA1;</Command>
   </macro>
   <macro>
     <Button>Rx1</Button>
-    <Command>ZZOA3;</Command>
+    <Command>ZZOA4;</Command>
   </macro>
   <macro>
     <Button>Ant2</Button>
-    <Command>ZZOC1;</Command>
+    <Command>ZZOA2;</Command>
   </macro>
   <macro>
-    <Button>M10</Button>
-    <Command>ZZPS1;</Command>
+    <Button>Ant3</Button>
+    <Command>ZZOA3;</Command>
   </macro>
   <macro>
     <Button>M11</Button>

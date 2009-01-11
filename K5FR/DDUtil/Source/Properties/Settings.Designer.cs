@@ -2050,5 +2050,113 @@ namespace DataDecoder.Properties {
                 this["RepeatCom"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pwr1 {
+            get {
+                return ((string)(this["pwr1"]));
+            }
+            set {
+                this["pwr1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pwr2 {
+            get {
+                return ((string)(this["pwr2"]));
+            }
+            set {
+                this["pwr2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pwr3 {
+            get {
+                return ((string)(this["pwr3"]));
+            }
+            set {
+                this["pwr3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pwr4 {
+            get {
+                return ((string)(this["pwr4"]));
+            }
+            set {
+                this["pwr4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pwr5 {
+            get {
+                return ((string)(this["pwr5"]));
+            }
+            set {
+                this["pwr5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pwr6 {
+            get {
+                return ((string)(this["pwr6"]));
+            }
+            set {
+                this["pwr6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pwr7 {
+            get {
+                return ((string)(this["pwr7"]));
+            }
+            set {
+                this["pwr7"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pwr8 {
+            get {
+                return ((string)(this["pwr8"]));
+            }
+            set {
+                this["pwr8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pwr9 {
+            get {
+                return ((string)(this["pwr9"]));
+            }
+            set {
+                this["pwr9"] = value;
+            }
+        }
     }
 }

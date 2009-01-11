@@ -94,7 +94,7 @@ namespace DataDecoder
         int LPTnum = 0;         // decimal number of selected LPT port
         int iSleep = 0;         // Thread.Sleep var
         int StepCtr = 0;        // reps counter
-        int reps = 10;           // how many times to test the SteppIR port
+        int reps = 7;           // how many times to test the SteppIR port
         double pollInt = 0;     // CAT port interval timer uses txtInv text box
         double temp = 26.4;
         string fileName = Application.StartupPath + "\\BandData.xml";
@@ -2823,10 +2823,10 @@ namespace DataDecoder
                     if (Amp == 0) ACOM2K_Click(null, null);
                     if (Amp == 1)
                     {
-                        AlphaPort.Write("AC\r");
-                        AlphaPort.Write("EXT OFF\r");
-                        AlphaPort.Write("STAT\r");
-                        AlphaPort.Write("AUTOTUNE\r");
+                        if (AlphaPort.IsOpen) AlphaPort.Write("AC\r");
+                        if (AlphaPort.IsOpen) AlphaPort.Write("EXT OFF\r");
+                        if (AlphaPort.IsOpen) AlphaPort.Write("STAT\r");
+                        if (AlphaPort.IsOpen) AlphaPort.Write("AUTOTUNE\r");
                     }
                 }
                 else
@@ -2942,7 +2942,8 @@ namespace DataDecoder
                         byte[] data = new byte[port.BytesToRead];
                         port.Read(data, 0, data.Length);
                         for (int i = 0; i < data.Length; i++)
-                        {
+                        {   // if 8x or 90 msg received from ACOM chg to '*'
+                            // see DataAcom() routine for processing
                             if (data[i] > 127 && data[i] < 255) data[i] = 0x2A;
                         }
                         sAlpha += AE.GetString(data, 0, data.Length);
@@ -5216,12 +5217,7 @@ namespace DataDecoder
                             if (rawFreq.Length > 4 && rawFreq.Substring(0, 2) == "IF")
                             {
                                 RepeatPort.Write(rawFreq);
-                                //RepeatPort.Write("FA" + rawFreq.Substring(2, 11) + ";");
                             }
-                        //    if (rawFreq.Length > 4 && rawFreq.Substring(0, 2) == "FB")
-                        //    {
-                        //        RepeatPort.Write("FB" + rawFreq.Substring(2, 11) + ";");
-                        //    }
                         }
                     }
                     /*** Write PA Temperature to window ***/
@@ -5231,6 +5227,24 @@ namespace DataDecoder
                         WriteTemp();
                         return;
                     }
+                    /*** Save current Drive setting ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZPC")
+                    {
+                        switch (band)
+                        {
+                            case "160": set.pwr1 = rawFreq.Substring(5, 3); break;
+                            case "080": set.pwr2 = rawFreq.Substring(5, 3); break;
+                            case "040": set.pwr3 = rawFreq.Substring(5, 3); break;
+                            case "030": set.pwr4 = rawFreq.Substring(5, 3); break;
+                            case "020": set.pwr5 = rawFreq.Substring(5, 3); break;
+                            case "017": set.pwr6 = rawFreq.Substring(5, 3); break;
+                            case "015": set.pwr7 = rawFreq.Substring(5, 3); break;
+                            case "012": set.pwr8 = rawFreq.Substring(5, 3); break;
+                            case "010": set.pwr9 = rawFreq.Substring(5, 3); break;
+                        }//switch
+                        set.Save();
+                        return;
+                    }
                     /*** save the band setting ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZBS")
                     {
@@ -5238,6 +5252,23 @@ namespace DataDecoder
                         if (lastBand != band)
                         {
                             lastBand = band;
+                            
+                            if (state == "OPER")
+                            {   // if the amp is in Operate mode, get the stored power setting 
+                                // from the settings file and send to the radio.
+                                switch (band)
+                                {
+                                    case "160": WriteToPort("ZZPC" + set.pwr1 + ";", iSleep); break;
+                                    case "080": WriteToPort("ZZPC" + set.pwr2 + ";", iSleep); break;
+                                    case "040": WriteToPort("ZZPC" + set.pwr3 + ";", iSleep); break;
+                                    case "030": WriteToPort("ZZPC" + set.pwr4 + ";", iSleep); break;
+                                    case "020": WriteToPort("ZZPC" + set.pwr5 + ";", iSleep); break;
+                                    case "017": WriteToPort("ZZPC" + set.pwr6 + ";", iSleep); break;
+                                    case "015": WriteToPort("ZZPC" + set.pwr7 + ";", iSleep); break;
+                                    case "012": WriteToPort("ZZPC" + set.pwr8 + ";", iSleep); break;
+                                    case "010": WriteToPort("ZZPC" + set.pwr9 + ";", iSleep); break;
+                                }//switch
+                            }
                             // if matrix enabled output to port
                             if (chkPortA.Checked || chkPortB.Checked)
                             {
@@ -5531,8 +5562,15 @@ namespace DataDecoder
                                     byte[] b = {0x41, 0x71, 0x57, 0x32, 0x00, 0x00, 0x00};
                                     b[4] = byte.Parse(msb, NumberStyles.HexNumber);
                                     b[5] = byte.Parse(lsb, NumberStyles.HexNumber);
-                                    AlphaPort.Write(b, 0, 7);
-                                    AlphaPort.Write("AqF\0");
+                                    if (AlphaPort.IsOpen) AlphaPort.Write(b, 0, 7);
+                                    for (int k = 0; k < 10; k++)
+                                    {   // delay 1 sec for seg change.
+                                        Thread.Sleep(100);
+                                        Application.DoEvents();
+                                    }
+
+                                    if (AlphaPort.IsOpen) AlphaPort.Write("AqF\0");
+                                    Thread.Sleep(200);
                                 }
                             }
                             else if (Amp == 1)  // Alpha 87
@@ -6464,6 +6502,10 @@ namespace DataDecoder
             if (chkStep.Checked)
             {
                 StepData.Write("@A\0\0\0\0\0\0S0\r"); // Home the antenna
+                Thread.Sleep(100);
+                StepData.Write("?A\r");
+                StepTimer.Enabled = true;
+                StepCtr = reps; // counter to allow for delay
                 chkStep.Checked = false;
                 rbFwd.Checked = true;
                 //x = this.Left;
@@ -6516,40 +6558,54 @@ namespace DataDecoder
             StepData.Write(bytes, 0, 11);
         }      
         // The SteppIR Data Port has received data from timer query
+        string StepBufr="";
         private void StepData_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            SerialPort StepMsgs = (SerialPort)sender;
-            string StepMsg = StepMsgs.ReadExisting();
-            if (StepMsg.Length == 11)
+            string StepMsg = "";
+            SerialPort port = (SerialPort)sender;
+            byte[] data = new byte[port.BytesToRead];
+            port.Read(data, 0, data.Length);
+            StepBufr += AE.GetString(data, 0, data.Length);
+            Regex rex = new Regex(".*?\r");  //accept any string ending in "0x0D"		
+            //loop thru the buffer and find matches
+            for (Match m = rex.Match(StepBufr); m.Success; m = m.NextMatch())
             {
-                string ac = StepMsg.Substring(6, 1);
-                string dir = StepMsg.Substring(7, 1);
-                if (ac == "\0")
-                {   // antenna is NOT moving, but a freq update has been sent to the
-                    // controller that may cause movement. We are waiting for StepCtr
-                    // reps to see if it will start. See the Reps var for the delay count.
-                    WriteToPort("ZZTI0;", iSleep);
-                    StepCtr -= 1; // decrement the reps counter
-                    if (StepCtr == 0)
-                    {   // if 
-                        StepTimer.Enabled = false;
-                        ShowAnt(false);
+                StepMsg = m.Value;
+                // remove the match from the buffer if found
+                StepBufr = StepBufr.Replace(m.Value, "");
+                if (StepMsg.Length > 7)
+                {
+                    string ac = StepMsg.Substring(6, 1);
+                    string dir = StepMsg.Substring(7, 1);
+                    if (ac == "\0")
+                    {   // antenna is NOT moving, but a freq update has been sent to the
+                        // controller that may cause movement. We are waiting for StepCtr
+                        // reps to see if it will start. See the Reps var for the delay count.
+                        WriteToPort("ZZTI0;", iSleep);  // turn off transmit inhibit
+                        StepCtr -= 1; // decrement the reps counter
+                        if (StepCtr == 0)
+                        {   // if 
+                            StepTimer.Enabled = false;
+                            ShowAnt(false);
 
-                        if (bCal)
-                        {   // if the calibration is finished send freq data to the antenna
-                            StepPortMsg(lastFreq, "00", "52");
-                            Thread.Sleep(100);
-                            StepData.Write("?A\r");
-                            StepTimer.Enabled = true;
-                            StepCtr = reps; // counter to allow for delay
-                            bCal = false;
+                            if (bCal)
+                            {   // if the calibration is finished send freq data to the antenna
+                                StepPortMsg(lastFreq, "00", "52");
+                                Thread.Sleep(100);
+                                StepData.Write("?A\r");
+                                StepTimer.Enabled = true;
+                                StepCtr = reps; // counter to allow for delay
+                                bCal = false;
+                            }
                         }
                     }
-                }
-                else
-                {   // antenna is moving
-                    WriteToPort("ZZTI1;", iSleep);
-                    ShowAnt(true);
+
+
+                    else
+                    {   // antenna is moving
+                        WriteToPort("ZZTI1;", iSleep);  // turn on transmit inhibit
+                        ShowAnt(true);
+                    }
                 }
             }
         }
@@ -6562,7 +6618,14 @@ namespace DataDecoder
                 mini.init = false;
                 mini.rbFwd.Checked = true;
                 bFwd = true; b180 = false; bBiDir = false; b34 = false;
-                if (lastFreq != "") StepPortMsg(lastFreq, "00", "31");
+                if (lastFreq != "")
+                {
+                    StepPortMsg(lastFreq, "00", "31");
+                    Thread.Sleep(100);
+                    StepData.Write("?A\r");
+                    StepTimer.Enabled = true;
+                    StepCtr = reps; // counter to allow for delay
+                }
             }
         }
         // The 180 radio button was selected
@@ -6574,7 +6637,14 @@ namespace DataDecoder
                 mini.init = false;
                 mini.rb180.Checked = true;
                 bFwd = false; b180 = true; bBiDir = false; b34 = false;
-                if (lastFreq != "") StepPortMsg(lastFreq, "40", "31");
+                if (lastFreq != "") 
+                {
+                    StepPortMsg(lastFreq, "40", "31");
+                    Thread.Sleep(100);
+                    StepData.Write("?A\r");
+                    StepTimer.Enabled = true;
+                    StepCtr = reps; // counter to allow for delay
+                }
             }
         }
         // The Bi-Directional radio button was selected
@@ -6586,7 +6656,14 @@ namespace DataDecoder
                 mini.init = false;
                 mini.rbBiDir.Checked = true;
                 bFwd = false; b180 = false; bBiDir = true; b34 = false;
-                if (lastFreq != "") StepPortMsg(lastFreq, "80", "31");
+                if (lastFreq != "") 
+                {
+                    StepPortMsg(lastFreq, "80", "31");
+                    Thread.Sleep(100);
+                    StepData.Write("?A\r");
+                    StepTimer.Enabled = true;
+                    StepCtr = reps; // counter to allow for delay
+                }
             }
         }
         // The 3/4 wave length radio button was selected (vertical only)
@@ -6598,7 +6675,14 @@ namespace DataDecoder
                 mini.init = false;
                 mini.rb34.Checked = true;
                 bFwd = false; b180 = false; bBiDir = false; b34 = true;
-                if (lastFreq != "") StepPortMsg(lastFreq, "20", "31");
+                if (lastFreq != "") 
+                {
+                    StepPortMsg(lastFreq, "20", "31");
+                    Thread.Sleep(100);
+                    StepData.Write("?A\r");
+                    StepTimer.Enabled = true;
+                    StepCtr = reps; // counter to allow for delay
+                }
             }
         }
         // The interval timer has fired, send status request to controller
@@ -6683,49 +6767,55 @@ namespace DataDecoder
         {
             switch (cboStepCom.SelectedIndex)
             {
-                case 0: // 9600 8N1
+                case 0: // 19200 8N1
+                    StepData.BaudRate = 19200;
+                    StepData.DataBits = 8;
+                    StepData.Parity = System.IO.Ports.Parity.None;
+                    StepData.StopBits = System.IO.Ports.StopBits.One;
+                    break;
+                case 1: // 9600 8N1
                     StepData.BaudRate = 9600;
                     StepData.DataBits = 8;
                     StepData.Parity = System.IO.Ports.Parity.None;
                     StepData.StopBits = System.IO.Ports.StopBits.One;
                     break;
-                case 1: // 9600 8N2
+                case 2: // 9600 8N2
                     StepData.BaudRate = 9600;
                     StepData.DataBits = 8;
                     StepData.Parity = System.IO.Ports.Parity.None;
                     StepData.StopBits = System.IO.Ports.StopBits.Two;
                     break;
-                case 2: // 4800 8N1
+                case 3: // 4800 8N1
                     StepData.BaudRate = 4800;
                     StepData.DataBits = 8;
                     StepData.Parity = System.IO.Ports.Parity.None;
                     StepData.StopBits = System.IO.Ports.StopBits.One;
                     break;
-                case 3: // 4800 8N2
+                case 4: // 4800 8N2
                     StepData.BaudRate = 4800;
                     StepData.DataBits = 8;
                     StepData.Parity = System.IO.Ports.Parity.None;
                     StepData.StopBits = System.IO.Ports.StopBits.Two;
                     break;
-                case 4: // 2400 8N1
+                case 5: // 2400 8N1
                     StepData.BaudRate = 2400;
                     StepData.DataBits = 8;
                     StepData.Parity = System.IO.Ports.Parity.None;
                     StepData.StopBits = System.IO.Ports.StopBits.One;
                     break;
-                case 5: // 2400 8N2
+                case 6: // 2400 8N2
                     StepData.BaudRate = 2400;
                     StepData.DataBits = 8;
                     StepData.Parity = System.IO.Ports.Parity.None;
                     StepData.StopBits = System.IO.Ports.StopBits.Two;
                     break;
-                case 6: // 1200 8N1
+                case 7: // 1200 8N1
                     StepData.BaudRate = 1200;
                     StepData.DataBits = 8;
                     StepData.Parity = System.IO.Ports.Parity.None;
                     StepData.StopBits = System.IO.Ports.StopBits.One;
                     break;
-                case 7: // 1200 8N2
+                case 8: // 1200 8N2
                     StepData.BaudRate = 1200;
                     StepData.DataBits = 8;
                     StepData.Parity = System.IO.Ports.Parity.None;
@@ -8237,7 +8327,8 @@ namespace DataDecoder
         bool bAnt = false;      // ACU is up
         bool bBlink = false;    // message window 
 
-        int ctr = 0;
+        int ctr = 0;            // Auto tune reps counter
+        int bctr = 0;           // reps counter for Mw command
         double p1 = 0;
         int pTune = 15;         // watt value to send to F5K for Auto Tune proc
         string pwr = "000";
@@ -8392,6 +8483,28 @@ namespace DataDecoder
             }
             else txtAlphaInt.Text = text;
         }
+        // Enable/Disable Tune window
+        delegate void EnabTuneCallback(bool b);
+        public void EnabTune(bool b)
+        {
+            if (this.txtTune.InvokeRequired)
+            {
+                EnabTuneCallback d = new EnabTuneCallback(EnabTune);
+                this.Invoke(d, new object[] { b });
+            }
+            else txtTune.Enabled = b;
+        }
+        // Enable/Disable band group
+        delegate void EnabBandCallback(bool b);
+        public void EnabBand(bool b)
+        {
+            if (this.grpAmpBand.InvokeRequired)
+            {
+                EnabBandCallback d = new EnabBandCallback(EnabBand);
+                this.Invoke(d, new object[] { b });
+            }
+            else grpAmpBand.Enabled = b;
+        }
 
         #endregion Delegates
 
@@ -8413,11 +8526,13 @@ namespace DataDecoder
             lblAmpInt.Text = "Air Temp"; txtAlphaInt.Text = "0";
             lblTune.Text = "  Ant"; lblLoad.Text = "User";
             Amp = 0;
+            bAmp = false;
             set.Amp = 0; set.Save();
             AlphaTimer.Interval = 60000; // PC hear byte update timer
             AlphaTimer.Enabled = true;
             txtTune.ReadOnly = false;
             grpAmpBand.Visible = true;
+            SetpaTune("1"); EnabTune(false);
             btnHF.Visible = false; btnSF.Visible = false;
             lblHF.Visible = false; lblSF.Visible = false;
             mini.btnHF.Visible = false; mini.btnSF.Visible = false;
@@ -8441,7 +8556,13 @@ namespace DataDecoder
             if (Amp == 0 && bAnt)
             {
                 string ant = txtTune.Text;
-                AlphaPort.Write("AqW3" + ant + "\0");
+                if (AlphaPort.IsOpen) AlphaPort.Write("AqW3" + ant + "\0");
+                for (int k = 0; k < 5; k++)
+                {
+                    Thread.Sleep(100);
+                    Application.DoEvents();
+                }
+
             }
         }
         // The ant has changed send a command to the amp
@@ -8453,7 +8574,13 @@ namespace DataDecoder
                 if (ant < 9) ant += 1;
                 else ant = 0;
                 SetpaTune(ant.ToString());
-                AlphaPort.Write("AqW3" + ant + "\0");
+                if (AlphaPort.IsOpen) AlphaPort.Write("AqW3" + ant + "\0");
+                for (int k = 0; k < 5; k++)
+                {
+                    Thread.Sleep(100);
+                    Application.DoEvents();
+                }
+
             }
         }
         // The User window has been dbl-clicked
@@ -8461,7 +8588,8 @@ namespace DataDecoder
         {
             if (Amp == 0)
             {
-                AlphaPort.Write("AqJ1\0");
+                if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
+                Thread.Sleep(200);
             }
         }
         // the message window was dbl-clicked
@@ -8488,6 +8616,11 @@ namespace DataDecoder
         private void btnInfo_Click(object sender, EventArgs e)
         {
             Process.Start("http://k5fr.com/ddutilwiki/index.php?title=How_To#Setup_a_ACOM2000A_Linear_Amplifier");
+        }
+        // The save drive button was pressed.
+        private void btnDrive_Click(object sender, EventArgs e)
+        {
+            WriteToPort("ZZPC;", iSleep);
         }
 
           #endregion Events
@@ -8528,17 +8661,17 @@ namespace DataDecoder
             int iseg = int.Parse(sseg, NumberStyles.HexNumber);
             return iseg;
         }
-        // Process the data msg from the amp.
+        // Process command messages from the amp.
         void DataAcom(string msg)
         {
             try
             {
-                msg = msg.Replace("*", "");
+                msg = msg.Replace("*", ""); // '*' indicates a 8x, 90 msg, ignore it.
                 if (msg.Length > 3)
                 {
                     if (msg.Substring(1, 1) == "q") { return; } // my echo
-                    if (msg.Substring(0, 1) != "q") 
-                    {   // if not addressed to me repeat others messages
+                    if (msg.Substring(0, 2) == "QA") 
+                    {   // if message from amp to selector, repeat back to the network
                         int len = msg.Length;
                         byte[] bytes = new byte[len];
                         for (int i = 0; i < len; i++)
@@ -8555,7 +8688,8 @@ namespace DataDecoder
 //                            Console.Write("{0:x2} ", bytes[i]);
                         }
 //                        Console.WriteLine();
-                        AlphaPort.Write(bytes, 0, len);
+                        if (AlphaPort.IsOpen) { AlphaPort.Write(bytes, 0, len); }
+                        return;
                     } 
 
                     if (msg.Contains("A0")) // Power Off executed
@@ -8563,6 +8697,7 @@ namespace DataDecoder
                         SetMsg("Amp is shutting down!");
                         SetPwr("Off"); btnPwr.BackColor = Color.Empty;
                         ac = "Off"; mini.btnPwr.BackColor = Color.Empty;
+                        return;
                     }
                     if (msg.Contains("A1")) // Amp Filiments On, warming up
                     {
@@ -8574,16 +8709,11 @@ namespace DataDecoder
                         state = "Wait"; mini.btnOper.BackColor = Color.Pink;
                         SetHV("Off"); btnHV.BackColor = Color.Empty;
                         mode = "Off"; mini.btnHV.BackColor = Color.Empty;
+                        return;
                     }
                     if (msg.Contains("A2")) // Amp Warm up done, HV on
                     {
                         AlphaPort.DtrEnable = false; AlphaPort.RtsEnable = false;
-                        //bAmp = true;
-                        //AlphaPort.Write("AqJ0\0"); // turn off 8x, 9x & I msgs
-                        //AlphaPort.Write("AqMww\0"); // get screen volts ? Oper/Stby
-                        //AlphaPort.Write("QqQ\0"); // get ACU status
-                        //SetpaTune("1"); txtTune.Enabled = false;
-                        //lastFreq = ""; // force freq update
                         SetMsg("Amp is ready!");
                         SetPwr("On"); btnPwr.BackColor = Color.Lime;
                         ac = "On"; mini.btnPwr.BackColor = Color.Lime;
@@ -8594,6 +8724,7 @@ namespace DataDecoder
                         mini.btnTune.BackColor = Color.Azure;
                         SetHV("On"); btnHV.BackColor = Color.Lime;
                         mode = "High"; mini.btnHV.BackColor = Color.Lime;
+                        return;
                     }
                     if (msg.Contains("A3")) // Amp is Off, but cooling
                     {
@@ -8608,6 +8739,7 @@ namespace DataDecoder
                         mini.btnTune.BackColor = Color.Empty;
                         SetHV("Off"); btnHV.BackColor = Color.Empty;
                         mode = "Off"; mini.btnHV.BackColor = Color.Empty;
+                        return;
                     }
                     if (msg.Contains("A4")) // Amp is Off
                     {
@@ -8622,6 +8754,7 @@ namespace DataDecoder
                         mini.btnTune.BackColor = Color.Empty;
                         SetHV("Off"); btnHV.BackColor = Color.Empty;
                         mode = "Off"; mini.btnHV.BackColor = Color.Empty;
+                        return;
                     }
                     if (msg.Contains("AE")) // Error occurred
                     {
@@ -8630,7 +8763,7 @@ namespace DataDecoder
                         int pos = msg.LastIndexOf("AE") + 2;
                         int err = int.Parse(msg.Substring(pos, 2), NumberStyles.HexNumber);
                         string errDlg = ErrorDef[err, 0]; //get msg from table
-                        if (msg.Substring(pos + 2, 2) != "00")
+                        if (msg.Length >6) //(msg.Substring(pos + 2, 2) != "00")
                         {   // if msg has parameter process it
                             param = int.Parse(msg.Substring(5, 2), NumberStyles.HexNumber);
                             string calc = ErrorDef[err, 1];
@@ -8640,16 +8773,18 @@ namespace DataDecoder
                             string mask = "$1 " + result + " $2";
                             errDlg = Regex.Replace(errDlg, regx, mask);
                         }
-                        SetMsg("Error: " + msg.Substring(pos, 3).ToString() + ": " + errDlg);
+                        SetMsg("Error: " + msg.Substring(pos-1, 3).ToString() + ": " + errDlg);
                         txtMsg.BackColor = Color.Yellow;
                         blinkTimer.Enabled = true;
                         bBlink = true;
+                        return;
                     }
                     if (msg.Contains("AI")) // Tube Temp
                     {
                         int p = msg.LastIndexOf("I") + 1;
                         int temp = Convert.ToInt32(msg.Substring(p, 1)) * 10;
                         SetAtemp(temp.ToString() + " C");
+                        return;
                     }
                     if (msg.Contains("AL")) // Amp self broadcast
                     {
@@ -8657,10 +8792,11 @@ namespace DataDecoder
                         {
                             bAmp = true;
                             AlphaPort.DtrEnable = false; AlphaPort.RtsEnable = false;
-//                            AlphaPort.Write("AqJ0\0"); // Disable 8x, 9x, I msgs
-                            AlphaPort.Write("AqMww\0"); // get screen volts ? Oper/Stby
-                            AlphaPort.Write("QqQ\0"); // get ACU status
-                            SetpaTune("1"); txtTune.Enabled = false;
+                            if (AlphaPort.IsOpen) AlphaPort.Write("AqMww\0"); // get screen volts ? Oper/Stby
+                            Thread.Sleep(200);
+                            bctr = 0;
+                            if (AlphaPort.IsOpen) AlphaPort.Write("QqQ\0"); // get ACU status
+                            Thread.Sleep(200);
                             lastFreq = ""; // force freq update
                             SetPwr("On"); btnPwr.BackColor = Color.Lime;
                             ac = "On"; mini.btnPwr.BackColor = Color.Lime;
@@ -8670,13 +8806,15 @@ namespace DataDecoder
                             SetHV("On"); btnHV.BackColor = Color.Lime;
                             mode = "On"; mini.btnHV.BackColor = Color.Lime;
                         }
+                        return;
                     }
                     if (msg.Contains("AO")) // amp in Operate mode
                     {
                         SetOper("Oper"); btnOper.BackColor = Color.Lime;
                         state = "Oper"; mini.btnOper.BackColor = Color.Lime;
+                        return;
                     }
-                    if (msg.Contains("AP"))
+                    if (msg.Contains("AP")) // auto tune reply
                     {   // convert P digit to numeric so we can test it
                         int pos = msg.LastIndexOf("P") + 1;
                         double p = Convert.ToInt32(msg.Substring(pos, 1));
@@ -8685,42 +8823,62 @@ namespace DataDecoder
                             if (ctr == 0) //1st pass
                             {
                                 p1 = p; // save p num
-                                Thread.Sleep(1000); // let it settle for 1 sec
-                                AlphaPort.Write("AqP\0");
+                                for (int i = 0; i < 10; i++)
+                                {   // delay 1 sec
+                                    Thread.Sleep(100);
+                                    Application.DoEvents();
+                                }  
+                                if (AlphaPort.IsOpen) AlphaPort.Write("AqP\0");
+                                // re-send 'P' command
+                                Thread.Sleep(200);
                                 ctr += 1;
+                                return;
                             }
                             else if (ctr >= 1 && (p >= p1 - 1 && p <= p1 + 1))
-                            {   // if ctr >=2 and p = p1 +-1
-                                AlphaPort.Write("AqQ\0"); // start auto tune
-                                Console.WriteLine("P = " + p + ", P1 = " + p1 + ", ctr = " +
-                                    ctr + ", Freq = " + txtFreq.Text);
+                            {   // >= 2nd pass and drive is stable +/- 1
+                                if (AlphaPort.IsOpen)
+                                { AlphaPort.Write("AqQ\0"); } // start auto tune
+                                Thread.Sleep(200);
+                                return;
                             }
-                            else
+                            else 
                             {
                                 if (ctr <= 5)
-                                {
-                                    Thread.Sleep(1000);
-                                    AlphaPort.Write("AqP\0");
+                                {   // wait another sec and send 'P' command
+                                    for (int i = 0; i < 10; i++)
+                                    {
+                                        Thread.Sleep(100);
+                                        Application.DoEvents();
+                                    }
+                                    if (AlphaPort.IsOpen) AlphaPort.Write("AqP\0");
+                                    Thread.Sleep(200);
                                     ctr += 1;
+                                    return;
                                 }
                                 else
-                                {
+                                {   // had enough split
                                     WriteToPort("ZZTU0;", iSleep); //turn off tune
                                     tune = "Off";
+                                    return;
                                 }
                             }
                         }
                         else if (ctr < 6 && p < 5) // if to wait another 1/2 second
                         {
                             Thread.Sleep(500);
-                            AlphaPort.Write("AqP\0");
+                            if (AlphaPort.IsOpen) AlphaPort.Write("AqP\0");
+                            Thread.Sleep(200);
                             ctr += 1;
+                            return;
                         }
                         else  // kill the sequence after 5 loops and P < 5
                         {
                             WriteToPort("ZZTU0;", iSleep); //turn off tune
                             tune = "Off";
                             SetMsg("Auto Tune failed, P = " + p);
+                            if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
+                            Thread.Sleep(200);
+                            return;
                         }
                     }
                     if (msg.Contains("AQ")) // Autotune result message
@@ -8731,26 +8889,37 @@ namespace DataDecoder
                         switch (msg.Substring(pos, 1))
                         {
                             case "0": SetTune("Fail");
-                                SetMsg("Auto Tune Failure! " + txtFreq.Text + " mHz");
+                                SetMsg("Auto Tune Failure! " + txtFreq.Text + " MHz");
                                 break;
                             case "1": SetTune("OK");
-                                SetMsg("Auto Tune Succeeded " + txtFreq.Text + " mHz");
+                                SetMsg("Auto Tune Succeeded " + txtFreq.Text + " MHz");
                                 break;
                             case "2": SetTune("Error");
-                                SetMsg("Auto Tune Error! Drive Unstable " + txtFreq.Text + " mHz");
+                                SetMsg("Auto Tune Error! Drive Unstable " + txtFreq.Text + " MHz");
                                 break;
                             case "3": SetTune("Rdy");
-                                //SetMsg("Auto Tune Complete!");
                                 btnTune.BackColor = Color.Azure;
                                 mini.btnTune.BackColor = Color.Azure;
-                                ChkMoBands(); // go see if there are other bands to tune
+                                if (!bAnt) 
+                                    ChkMoBands(); // go see if there are other bands to tune
+                                else
+                                {
+                                    if (AlphaPort.IsOpen) AlphaPort.Write("AqS\0");
+                                    Thread.Sleep(1000);
+                                    if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
+                                    Thread.Sleep(200);
+                                    if (AlphaPort.IsOpen) AlphaPort.Write("AqO\0");
+                                    Thread.Sleep(1000);
+                                }
                                 break;
                         }
+                        return;
                     }
                     if (msg.Contains("AS")) // amp in Stand By mode
                     {
                         SetOper("Stby"); btnOper.BackColor = Color.Yellow;
                         state = "Stby"; mini.btnOper.BackColor = Color.Yellow;
+                        return;
                     }
                     if (msg.Contains("AW1")) // Seg/Ant/User/Band/
                     {   // 71 41 57 31 3A 33 31 31 33 0D (qAW1A3113
@@ -8780,6 +8949,7 @@ namespace DataDecoder
                             case "8": SetBand("12"); break;
                             case "9": SetBand("10"); break;
                         }
+                        return;
                     }
                     if (msg.Contains("Aw")) // Amp measurement reply (screen volts)
                     {
@@ -8789,20 +8959,28 @@ namespace DataDecoder
                         {
                             SetOper("Oper"); btnOper.BackColor = Color.Lime;
                             state = "Oper"; mini.btnOper.BackColor = Color.Lime;
-                            AlphaPort.Write("AqMM\0"); // turn off measuring
                         }
                         else
                         {
                             SetOper("Stby"); btnOper.BackColor = Color.Yellow;
                             state = "Stby"; mini.btnOper.BackColor = Color.Yellow;
-                            AlphaPort.Write("AqMM\0"); // turn off measuring
                         }
+                        bctr++;
+                        if (bctr > 3)   // let the measuring continue for 3 reps
+                        {   // then turn off measuring
+                            if (AlphaPort.IsOpen)
+                                if (AlphaPort.IsOpen) { AlphaPort.Write("AqMM\0"); }
+                            Thread.Sleep(200);
+                        } 
+                        return;
                     }
                     if (msg.Contains("qQZ")) // ACU is ready
                     {
                         bAnt = true;
-                        txtTune.Enabled = true;
+                        EnabTune(true);
+                        EnabBand(false);
                         SetMsg("Ant Ctrl Unit Ready");
+                        return;
                     }
                 }// end if msg.len >3
             }
@@ -8844,11 +9022,24 @@ namespace DataDecoder
             if (chkB12.Checked) auto[7] = 1; else auto[7] = 0;
             if (chkB10.Checked) auto[8] = 1; else auto[8] = 0;
 
-            AlphaPort.Write("AqO\0");           // make sure amp is in operate
+            if (AlphaPort.IsOpen) AlphaPort.Write("AqJ0\0");
+            Thread.Sleep(200);
+            if (AlphaPort.IsOpen) AlphaPort.Write("AqO\0");           // make sure amp is in operate
+            for (int i = 0; i < 10; i++)
+            {
+                Thread.Sleep(100);
+                Application.DoEvents();
+            } 
             sFreq = lastFreq;
             WriteToPort("ZZSP0;", iSleep);      // make sure split is off
             WriteToPort("ZZTO015;", iSleep);    // set drive to 15 watts
-            ChkMoBands();                       // go check what bands are set
+            if (bAnt)
+            {   // if antenna selector present only auto tune current band
+                WriteToPort("ZZTU1;", 500); // key radio, wait for 1/2 sec
+                if (AlphaPort.IsOpen) AlphaPort.Write("AqP\0");   // get drive setting from amp
+                Thread.Sleep(200);
+            }
+            else ChkMoBands();              // go check what bands are set
         }
         // see if any bands are set to auto tune
         void ChkMoBands()
@@ -8870,13 +9061,25 @@ namespace DataDecoder
                         case 8: WriteToPort("ZZBS010;", iSleep); break;
                     }
                     auto[i] = 0; // clear this band so it won't be run again
-                    ctr = 0;                    // start the loop counter at zero
-                    Thread.Sleep(2000);         // let the freq change settle
+                    ctr = 0;     // start the loop counter at zero
+                    for (int k = 0; k < 30; k++)
+                    { 
+                        Thread.Sleep(100);
+                        Application.DoEvents();
+                    }
+                    
                     WriteToPort("ZZTU1;", 500); // key radio, wait for 1/2 sec
-                    AlphaPort.Write("AqP\0");   // get drive setting from amp
+                    if (AlphaPort.IsOpen) AlphaPort.Write("AqP\0");   // get drive setting from amp
+                    Thread.Sleep(200);
                     return;                     // stop the loop & wait for 'P'
                 }
             }
+            if (AlphaPort.IsOpen) AlphaPort.Write("AqS\0");
+            Thread.Sleep(1000);
+            if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
+            Thread.Sleep(200);
+            if (AlphaPort.IsOpen) AlphaPort.Write("AqO\0");
+            Thread.Sleep(1000);
             WriteToPort("ZZFA" + sFreq + ";", iSleep);    // reset the radio freq
         }
           
