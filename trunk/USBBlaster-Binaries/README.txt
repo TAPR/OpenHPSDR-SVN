@@ -50,7 +50,9 @@ Here are the steps requried to progam the EPCS16 on the Mercury board.
 7. Remove the PowerSDR database file PowerSDR.mdb and allow PowerSDR to rebuild it when you
    next start it. Make a note of any important settings you want to keep. 
 
-8. Test Mercury with PowerSDR.
+8. Remove Power to the Atlas bus, restart your PC and load PowerSDR.
+
+9. Test Mercury with PowerSDR.
 
 
 This is how the process works.
