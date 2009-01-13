@@ -61,7 +61,7 @@
 				- Released as V2.4
 	12 Jan 2009 - Spectrum data now ADC samples
 				- Simplified ADC Overlow flag code 
-				- same release number 
+				- same release number
 				- Added software serial number on serno, C19 
                  
 				
@@ -453,7 +453,6 @@ case(spec_send)
 	end
 	
 2:	begin
-	
 	if (spec_data_count == 0)begin
 		rdreq <= 1'b0;
 		spec_send <= 0;
@@ -463,7 +462,6 @@ case(spec_send)
 		spec_send <= 2;
 	end
 	end 
-	
 
 default: spec_send <= 0;
 endcase

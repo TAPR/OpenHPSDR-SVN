@@ -186,3 +186,4 @@ set_global_assignment -name QIP_FILE fir_shiftreg.qip
 set_instance_assignment -name CURRENT_STRENGTH_NEW 16MA -to MDOUT
 set_instance_assignment -name PCI_IO ON -to MDOUT
 set_instance_assignment -name OUTPUT_TERMINATION OFF -to MDOUT
+set_location_assignment PIN_72 -to serno
