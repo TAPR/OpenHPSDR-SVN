@@ -1,5 +1,5 @@
 Flow report for Mercury
-Tue Jan 13 20:58:15 2009
+Tue Jan 13 22:04:30 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Tue Jan 13 20:58:15 2009   ;
+; Flow Status                        ; Successful - Tue Jan 13 22:04:29 2009   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; Mercury                                 ;
@@ -63,7 +63,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 01/13/2009 20:52:54 ;
+; Start date & time ; 01/13/2009 21:59:31 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Mercury             ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 ; Assignment Name                  ; Value                                                                                                                                                                                                              ; Default Value      ; Entity Name ; Section Id ;
 +----------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+-------------+------------+
 ; ALLOW_POWER_UP_DONT_CARE         ; Off                                                                                                                                                                                                                ; On                 ; --          ; --         ;
-; COMPILER_SIGNATURE_ID            ; 123483488765.123184757401512                                                                                                                                                                                       ; --                 ; --          ; --         ;
+; COMPILER_SIGNATURE_ID            ; 123483488765.123185157102024                                                                                                                                                                                       ; --                 ; --          ; --         ;
 ; CYCLONEII_OPTIMIZATION_TECHNIQUE ; Speed                                                                                                                                                                                                              ; Balanced           ; --          ; --         ;
 ; ENABLE_ADVANCED_IO_TIMING        ; On                                                                                                                                                                                                                 ; --                 ; --          ; --         ;
 ; FITTER_EFFORT                    ; Standard Fit                                                                                                                                                                                                       ; Auto Fit           ; --          ; --         ;
@@ -101,11 +101,11 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:00:38     ; 1.0                     ; 201 MB              ; 00:00:35                           ;
-; Fitter                  ; 00:04:21     ; 1.0                     ; 304 MB              ; 00:04:15                           ;
-; Assembler               ; 00:00:08     ; 1.0                     ; 208 MB              ; 00:00:08                           ;
-; Classic Timing Analyzer ; 00:00:08     ; 1.0                     ; 171 MB              ; 00:00:08                           ;
-; Total                   ; 00:05:15     ; --                      ; --                  ; 00:05:06                           ;
+; Analysis & Synthesis    ; 00:00:35     ; 1.0                     ; 201 MB              ; 00:00:34                           ;
+; Fitter                  ; 00:04:01     ; 1.0                     ; 305 MB              ; 00:04:01                           ;
+; Assembler               ; 00:00:07     ; 1.0                     ; 208 MB              ; 00:00:08                           ;
+; Classic Timing Analyzer ; 00:00:07     ; 1.0                     ; 172 MB              ; 00:00:08                           ;
+; Total                   ; 00:04:50     ; --                      ; --                  ; 00:04:51                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

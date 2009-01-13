@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 8.351 ns
+Actual Time    : 8.714 ns
 From           : DFS1
-To             : receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[11]
+To             : receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[13]
 From Clock     : --
 To Clock       : CLKA
 Failed Paths   : 0
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 14.106 ns
-From           : SPI:Alex_SPI_Tx|SPI_clock
-To             : SPI_clock
+Actual Time    : 14.327 ns
+From           : oddClockDivider:refClockDivider|clk_o
+To             : FPGA_PLL
 From Clock     : C8
 To Clock       : --
 Failed Paths   : 0
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 8.641 ns
+Actual Time    : 8.650 ns
 From           : C17
 To             : CMCLK
 From Clock     : --
@@ -35,35 +35,35 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -1.076 ns
-From           : LRCLK
-To             : spec_data_count[1]
+Actual Time    : -0.216 ns
+From           : CC
+To             : CCdata[46]
 From Clock     : --
-To Clock       : BCLK
+To Clock       : C8
 Failed Paths   : 0
 
 Type           : Clock Setup: 'CLKA'
-Slack          : 0.230 ns
+Slack          : 0.361 ns
 Required Time  : 122.88 MHz ( period = 8.138 ns )
-Actual Time    : 130.24 MHz ( period = 7.678 ns )
-From           : spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp|counter_ffa[7]
-To             : wrreq
+Actual Time    : 134.84 MHz ( period = 7.416 ns )
+From           : wrreq
+To             : spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp|counter_ffa[12]
 From Clock     : CLKA
 To Clock       : CLKA
 Failed Paths   : 0
 
 Type           : Clock Setup: 'BCLK'
-Slack          : 7.022 ns
+Slack          : 6.891 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
 Actual Time    : N/A
-From           : receiver:receiver_inst|fir:fir_inst_I|out_data[5]
-To             : I2SEncode:I2S|data[5]
+From           : receiver:receiver_inst|fir:fir_inst_I|out_data[17]
+To             : I2SEncode:I2S|data[17]
 From Clock     : CLKA
 To Clock       : BCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'OSC_10MHZ'
-Slack          : 96.964 ns
+Slack          : 96.223 ns
 Required Time  : 10.00 MHz ( period = 100.000 ns )
 Actual Time    : Restricted to 250.00 MHz ( period = 4.000 ns )
 From           : oddClockDivider:refClockDivider|count[0]
@@ -73,21 +73,21 @@ To Clock       : OSC_10MHZ
 Failed Paths   : 0
 
 Type           : Clock Setup: 'C8'
-Slack          : 299.292 ns
+Slack          : 281.218 ns
 Required Time  : 3.07 MHz ( period = 325.520 ns )
-Actual Time    : 38.13 MHz ( period = 26.228 ns )
-From           : frequency_HZ[25]~_Duplicate_2
-To             : SPI:Alex_SPI_Tx|SPI_data
+Actual Time    : 22.57 MHz ( period = 44.302 ns )
+From           : frequency_HZ[26]~_Duplicate_2
+To             : SPI:Alex_SPI_Tx|spi_state.0000
 From Clock     : C8
 To Clock       : C8
 Failed Paths   : 0
 
 Type           : Clock Hold: 'BCLK'
-Slack          : 0.282 ns
+Slack          : 0.413 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
 Actual Time    : N/A
-From           : receiver:receiver_inst|fir:fir_inst_I|out_data[4]
-To             : I2SEncode:I2S|data[4]
+From           : receiver:receiver_inst|fir:fir_inst_Q|out_data[13]
+To             : I2SEncode:I2S|local_right_sample[13]
 From Clock     : CLKA
 To Clock       : BCLK
 Failed Paths   : 0
@@ -113,7 +113,7 @@ To Clock       : CLKA
 Failed Paths   : 0
 
 Type           : Clock Hold: 'OSC_10MHZ'
-Slack          : 1.018 ns
+Slack          : 1.026 ns
 Required Time  : 10.00 MHz ( period = 100.000 ns )
 Actual Time    : N/A
 From           : oddClockDivider:refClockDivider|count[0]
