@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loadFW", "loadFW\loadFW.vcproj", "{C9882C23-D62C-4BFC-93DF-9D4D591778F0}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loadFPGA", "loadFPGA\loadFPGA.vcproj", "{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "writeI2C", "writeI2C\writeI2C.vcproj", "{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Debug.ActiveCfg = Debug|Win32
+		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Debug.Build.0 = Debug|Win32
+		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Release.ActiveCfg = Release|Win32
+		{C9882C23-D62C-4BFC-93DF-9D4D591778F0}.Release.Build.0 = Release|Win32
+		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Debug.ActiveCfg = Debug|Win32
+		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Debug.Build.0 = Debug|Win32
+		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Release.ActiveCfg = Release|Win32
+		{D43F6489-6B50-455D-B0EC-A3BF179EFC9D}.Release.Build.0 = Release|Win32
+		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Debug.ActiveCfg = Debug|Win32
+		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Debug.Build.0 = Debug|Win32
+		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Release.ActiveCfg = Release|Win32
+		{2B34DCF4-9953-4B9C-BDFF-E59AEC1A19E2}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
