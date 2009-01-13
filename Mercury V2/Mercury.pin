@@ -164,7 +164,7 @@ GND+                         : 89        :        :                   :         
 GND+                         : 90        :        :                   :         : 3         :                
 GND+                         : 91        :        :                   :         : 4         :                
 GND+                         : 92        :        :                   :         : 4         :                
-RESERVED_INPUT               : 93        :        :                   :         : 4         :                
+serno                        : 93        : bidir  : 3.0-V LVTTL       :         : 4         : N              
 DFS0                         : 94        : input  : 3.0-V LVTTL       :         : 4         : Y              
 spectrum                     : 95        : output : 3.0-V LVTTL       :         : 4         : Y              
 VCCIO4                       : 96        : power  :                   : 3.0V    : 4         :                
