@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Mercury
-Sat Jan 10 15:11:46 2009
+Tue Jan 13 20:53:31 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -147,16 +147,16 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Jan 10 15:11:46 2009   ;
+; Analysis & Synthesis Status        ; Successful - Tue Jan 13 20:53:31 2009   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; Mercury                                 ;
 ; Family                             ; Cyclone III                             ;
-; Total logic elements               ; 6,886                                   ;
-;     Total combinational functions  ; 6,638                                   ;
-;     Dedicated logic registers      ; 6,886                                   ;
-; Total registers                    ; 6886                                    ;
-; Total pins                         ; 67                                      ;
+; Total logic elements               ; 6,857                                   ;
+;     Total combinational functions  ; 6,601                                   ;
+;     Dedicated logic registers      ; 6,857                                   ;
+; Total registers                    ; 6857                                    ;
+; Total pins                         ; 68                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 84,380                                  ;
 ; Embedded Multiplier 9-bit elements ; 22                                      ;
@@ -243,76 +243,75 @@ applicable agreement for further details.
 +----------------------------------------------------------------+--------------------+--------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                           ;
-+----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                       ;
-+----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------+
-; spectrum_FIFO.v                  ; yes             ; User Wizard-Generated File             ; C:/HPSDR/trunk/Mercury V2/spectrum_FIFO.v                          ;
-; mult_24Sx24S.v                   ; yes             ; User Wizard-Generated File             ; C:/HPSDR/trunk/Mercury V2/mult_24Sx24S.v                           ;
-; receiver.v                       ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/receiver.v                               ;
-; fir_mac.v                        ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/fir_mac.v                                ;
-; fir_shiftreg.v                   ; yes             ; User Wizard-Generated File             ; C:/HPSDR/trunk/Mercury V2/fir_shiftreg.v                           ;
-; fir.v                            ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/fir.v                                    ;
-; fir_coeffs.v                     ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/fir_coeffs.v                             ;
-; fir_coeffs_rom.v                 ; yes             ; User Wizard-Generated File             ; C:/HPSDR/trunk/Mercury V2/fir_coeffs_rom.v                         ;
-; varcic.v                         ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/varcic.v                                 ;
-; cic_integrator.v                 ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/cic_integrator.v                         ;
-; cic.v                            ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/cic.v                                    ;
-; cic_comb.v                       ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/cic_comb.v                               ;
-; cordic.v                         ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/cordic.v                                 ;
-; SPI.v                            ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/SPI.v                                    ;
-; LPF_select.v                     ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/LPF_select.v                             ;
-; HPF_select.v                     ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/HPF_select.v                             ;
-; oddClockDiv.v                    ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/oddClockDiv.v                            ;
-; I2S_Encoder_24bit.v              ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/I2S_Encoder_24bit.v                      ;
-; Mercury.v                        ; yes             ; User Verilog HDL File                  ; C:/HPSDR/trunk/Mercury V2/Mercury.v                                ;
-; altsyncram.tdf                   ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altsyncram.tdf        ;
-; stratix_ram_block.inc            ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/stratix_ram_block.inc ;
-; lpm_mux.inc                      ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/lpm_mux.inc           ;
-; lpm_decode.inc                   ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/lpm_decode.inc        ;
-; aglobal81.inc                    ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/aglobal81.inc         ;
-; a_rdenreg.inc                    ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/a_rdenreg.inc         ;
-; altrom.inc                       ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altrom.inc            ;
-; altram.inc                       ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altram.inc            ;
-; altdpram.inc                     ; yes             ; Megafunction                           ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altdpram.inc           ;
-; altqpram.inc                     ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altqpram.inc          ;
-; db/altsyncram_h2a1.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_h2a1.tdf                   ;
-; fir_coeffs_rom.hex               ; yes             ; Auto-Found Memory Initialization File  ; C:/HPSDR/trunk/Mercury V2/fir_coeffs_rom.hex                       ;
-; altshift_taps.tdf                ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altshift_taps.tdf     ;
-; lpm_counter.inc                  ; yes             ; Megafunction                           ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_counter.inc        ;
-; lpm_compare.inc                  ; yes             ; Megafunction                           ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_compare.inc        ;
-; lpm_constant.inc                 ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/lpm_constant.inc      ;
-; db/shift_taps_ils.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/shift_taps_ils.tdf                    ;
-; db/altsyncram_qka1.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_qka1.tdf                   ;
-; db/cntr_brf.tdf                  ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/cntr_brf.tdf                          ;
-; db/cmpr_lfc.tdf                  ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/cmpr_lfc.tdf                          ;
-; lpm_mult.tdf                     ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/lpm_mult.tdf          ;
-; lpm_add_sub.inc                  ; yes             ; Megafunction                           ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_add_sub.inc        ;
-; multcore.inc                     ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/multcore.inc          ;
-; bypassff.inc                     ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/bypassff.inc          ;
-; altshift.inc                     ; yes             ; Megafunction                           ; c:/altera/81/quartus/libraries/megafunctions/altshift.inc          ;
-; db/mult_djp.tdf                  ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/mult_djp.tdf                          ;
-; dcfifo.tdf                       ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf             ;
-; a_graycounter.inc                ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_graycounter.inc      ;
-; a_fefifo.inc                     ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_fefifo.inc           ;
-; a_gray2bin.inc                   ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_gray2bin.inc         ;
-; dffpipe.inc                      ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dffpipe.inc            ;
-; alt_sync_fifo.inc                ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/alt_sync_fifo.inc      ;
-; altsyncram_fifo.inc              ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altsyncram_fifo.inc    ;
-; aglobal51.inc                    ; yes             ; Auto-Found AHDL File                   ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/aglobal51.inc          ;
-; db/dcfifo_tnf1.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/dcfifo_tnf1.tdf                       ;
-; db/a_graycounter_tn6.tdf         ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_tn6.tdf                 ;
-; db/a_graycounter_p5c.tdf         ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_p5c.tdf                 ;
-; db/a_graycounter_o5c.tdf         ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_o5c.tdf                 ;
-; db/altsyncram_8tu.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_8tu.tdf                    ;
-; db/alt_synch_pipe_jv7.tdf        ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/alt_synch_pipe_jv7.tdf                ;
-; db/dffpipe_d09.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/dffpipe_d09.tdf                       ;
-; db/alt_synch_pipe_kv7.tdf        ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/alt_synch_pipe_kv7.tdf                ;
-; db/dffpipe_e09.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/dffpipe_e09.tdf                       ;
-; db/cmpr_h66.tdf                  ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/cmpr_h66.tdf                          ;
-; db/mult_4611.tdf                 ; yes             ; Auto-Generated Megafunction            ; C:/HPSDR/trunk/Mercury V2/db/mult_4611.tdf                         ;
-+----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                 ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                       ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+
+; spectrum_FIFO.v                  ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/Mercury V2/spectrum_FIFO.v                          ;
+; mult_24Sx24S.v                   ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/Mercury V2/mult_24Sx24S.v                           ;
+; receiver.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/receiver.v                               ;
+; fir_mac.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/fir_mac.v                                ;
+; fir_shiftreg.v                   ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/Mercury V2/fir_shiftreg.v                           ;
+; fir.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/fir.v                                    ;
+; fir_coeffs.v                     ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/fir_coeffs.v                             ;
+; fir_coeffs_rom.v                 ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/Mercury V2/fir_coeffs_rom.v                         ;
+; varcic.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/varcic.v                                 ;
+; cic_integrator.v                 ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/cic_integrator.v                         ;
+; cic.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/cic.v                                    ;
+; cic_comb.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/cic_comb.v                               ;
+; cordic.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/cordic.v                                 ;
+; SPI.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/SPI.v                                    ;
+; LPF_select.v                     ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/LPF_select.v                             ;
+; HPF_select.v                     ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/HPF_select.v                             ;
+; oddClockDiv.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/oddClockDiv.v                            ;
+; I2S_Encoder_24bit.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/I2S_Encoder_24bit.v                      ;
+; Mercury.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/Mercury.v                                ;
+; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altsyncram.tdf        ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/stratix_ram_block.inc ;
+; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_mux.inc           ;
+; lpm_decode.inc                   ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_decode.inc        ;
+; aglobal81.inc                    ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/aglobal81.inc         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/a_rdenreg.inc         ;
+; altrom.inc                       ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altrom.inc            ;
+; altram.inc                       ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altram.inc            ;
+; altdpram.inc                     ; yes             ; Megafunction                 ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altdpram.inc           ;
+; altqpram.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altqpram.inc          ;
+; db/altsyncram_h2a1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_h2a1.tdf                   ;
+; altshift_taps.tdf                ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altshift_taps.tdf     ;
+; lpm_counter.inc                  ; yes             ; Megafunction                 ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_counter.inc        ;
+; lpm_compare.inc                  ; yes             ; Megafunction                 ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_compare.inc        ;
+; lpm_constant.inc                 ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_constant.inc      ;
+; db/shift_taps_ils.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/shift_taps_ils.tdf                    ;
+; db/altsyncram_qka1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_qka1.tdf                   ;
+; db/cntr_brf.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/cntr_brf.tdf                          ;
+; db/cmpr_lfc.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/cmpr_lfc.tdf                          ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_mult.tdf          ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/lpm_add_sub.inc        ;
+; multcore.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/multcore.inc          ;
+; bypassff.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/bypassff.inc          ;
+; altshift.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altshift.inc          ;
+; db/mult_djp.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/mult_djp.tdf                          ;
+; dcfifo.tdf                       ; yes             ; Auto-Found AHDL File         ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf             ;
+; a_graycounter.inc                ; yes             ; Auto-Found AHDL File         ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_graycounter.inc      ;
+; a_fefifo.inc                     ; yes             ; Auto-Found AHDL File         ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_fefifo.inc           ;
+; a_gray2bin.inc                   ; yes             ; Auto-Found AHDL File         ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/a_gray2bin.inc         ;
+; dffpipe.inc                      ; yes             ; Auto-Found AHDL File         ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dffpipe.inc            ;
+; alt_sync_fifo.inc                ; yes             ; Auto-Found AHDL File         ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/alt_sync_fifo.inc      ;
+; altsyncram_fifo.inc              ; yes             ; Auto-Found AHDL File         ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altsyncram_fifo.inc    ;
+; aglobal51.inc                    ; yes             ; Auto-Found AHDL File         ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/aglobal51.inc          ;
+; db/dcfifo_tnf1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/dcfifo_tnf1.tdf                       ;
+; db/a_graycounter_tn6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_tn6.tdf                 ;
+; db/a_graycounter_p5c.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_p5c.tdf                 ;
+; db/a_graycounter_o5c.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_o5c.tdf                 ;
+; db/altsyncram_8tu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_8tu.tdf                    ;
+; db/alt_synch_pipe_jv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/alt_synch_pipe_jv7.tdf                ;
+; db/dffpipe_d09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/dffpipe_d09.tdf                       ;
+; db/alt_synch_pipe_kv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/alt_synch_pipe_kv7.tdf                ;
+; db/dffpipe_e09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/dffpipe_e09.tdf                       ;
+; db/cmpr_h66.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/cmpr_h66.tdf                          ;
+; db/mult_4611.tdf                 ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/mult_4611.tdf                         ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+
 
 
 +----------------------------------------------------------+
@@ -320,28 +319,28 @@ applicable agreement for further details.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimated Total logic elements              ; 6,886      ;
+; Estimated Total logic elements              ; 6,857      ;
 ;                                             ;            ;
-; Total combinational functions               ; 6638       ;
+; Total combinational functions               ; 6601       ;
 ; Logic element usage by number of LUT inputs ;            ;
-;     -- 4 input functions                    ; 453        ;
-;     -- 3 input functions                    ; 5255       ;
-;     -- <=2 input functions                  ; 930        ;
+;     -- 4 input functions                    ; 450        ;
+;     -- 3 input functions                    ; 5251       ;
+;     -- <=2 input functions                  ; 900        ;
 ;                                             ;            ;
 ; Logic elements by mode                      ;            ;
-;     -- normal mode                          ; 919        ;
-;     -- arithmetic mode                      ; 5719       ;
+;     -- normal mode                          ; 907        ;
+;     -- arithmetic mode                      ; 5694       ;
 ;                                             ;            ;
-; Total registers                             ; 6886       ;
-;     -- Dedicated logic registers            ; 6886       ;
+; Total registers                             ; 6857       ;
+;     -- Dedicated logic registers            ; 6857       ;
 ;     -- I/O registers                        ; 0          ;
 ;                                             ;            ;
-; I/O pins                                    ; 67         ;
+; I/O pins                                    ; 68         ;
 ; Total memory bits                           ; 84380      ;
 ; Embedded Multiplier 9-bit elements          ; 22         ;
 ; Maximum fan-out node                        ; CLKA~input ;
-; Maximum fan-out                             ; 6635       ;
-; Total fan-out                               ; 41337      ;
+; Maximum fan-out                             ; 6606       ;
+; Total fan-out                               ; 41174      ;
 ; Average fan-out                             ; 3.00       ;
 +---------------------------------------------+------------+
 
@@ -351,7 +350,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                             ; Library Name ;
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Mercury                                                     ; 6638 (387)        ; 6886 (338)   ; 84380       ; 22           ; 2       ; 10        ; 67   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
+; |Mercury                                                     ; 6601 (351)        ; 6857 (309)   ; 84380       ; 22           ; 2       ; 10        ; 68   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
 ;    |HPF_select:Alex_HPF_select|                              ; 44 (44)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|HPF_select:Alex_HPF_select                                                                                                                                             ; work         ;
 ;    |I2SEncode:I2S|                                           ; 69 (69)           ; 59 (59)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|I2SEncode:I2S                                                                                                                                                          ; work         ;
 ;    |LPF_select:Alex_LPF_select|                              ; 89 (89)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|LPF_select:Alex_LPF_select                                                                                                                                             ; work         ;
@@ -455,9 +454,9 @@ applicable agreement for further details.
 ;          |cic_integrator:cic_stages[2].cic_integrator_inst|  ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[2].cic_integrator_inst                                                                          ; work         ;
 ;          |cic_integrator:cic_stages[3].cic_integrator_inst|  ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[3].cic_integrator_inst                                                                          ; work         ;
 ;          |cic_integrator:cic_stages[4].cic_integrator_inst|  ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[4].cic_integrator_inst                                                                          ; work         ;
-;    |spectrum_FIFO:inst_spectrum_FIFO|                        ; 54 (0)            ; 106 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO                                                                                                                                       ; work         ;
-;       |dcfifo:dcfifo_component|                              ; 54 (0)            ; 106 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component                                                                                                               ; work         ;
-;          |dcfifo_tnf1:auto_generated|                        ; 54 (5)            ; 106 (26)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated                                                                                    ; work         ;
+;    |spectrum_FIFO:inst_spectrum_FIFO|                        ; 53 (0)            ; 106 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO                                                                                                                                       ; work         ;
+;       |dcfifo:dcfifo_component|                              ; 53 (0)            ; 106 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component                                                                                                               ; work         ;
+;          |dcfifo_tnf1:auto_generated|                        ; 53 (5)            ; 106 (26)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated                                                                                    ; work         ;
 ;             |a_graycounter_o5c:wrptr_gp|                     ; 14 (14)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp                                                         ; work         ;
 ;             |a_graycounter_tn6:rdptr_g1p|                    ; 17 (17)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p                                                        ; work         ;
 ;             |alt_synch_pipe_jv7:rs_dgwp|                     ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp                                                         ; work         ;
@@ -466,8 +465,8 @@ applicable agreement for further details.
 ;                |dffpipe_e09:dffpipe9|                        ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9                                    ; work         ;
 ;             |altsyncram_8tu:fifo_ram|                        ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram                                                            ; work         ;
 ;             |cmpr_h66:rdempty_eq_comp|                       ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:rdempty_eq_comp                                                           ; work         ;
-;             |cmpr_h66:wrempty_eq_comp|                       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:wrempty_eq_comp                                                           ; work         ;
-;             |cmpr_h66:wrfull_eq_comp|                        ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:wrfull_eq_comp                                                            ; work         ;
+;             |cmpr_h66:wrempty_eq_comp|                       ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:wrempty_eq_comp                                                           ; work         ;
+;             |cmpr_h66:wrfull_eq_comp|                        ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:wrfull_eq_comp                                                            ; work         ;
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -677,12 +676,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 6886  ;
+; Total registers                              ; 6857  ;
 ; Number of registers using Synchronous Clear  ; 119   ;
 ; Number of registers using Synchronous Load   ; 903   ;
-; Number of registers using Asynchronous Clear ; 239   ;
+; Number of registers using Asynchronous Clear ; 238   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 4426  ;
+; Number of registers using Clock Enable       ; 4399  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -692,12 +691,11 @@ Encoding Type:  One-Hot
 +------------------------------------------------------------------------------------------------------------------------------+---------+
 ; Inverted Register                                                                                                            ; Fan out ;
 +------------------------------------------------------------------------------------------------------------------------------+---------+
-; ADC_OVERFLOW~reg0                                                                                                            ; 1       ;
 ; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p|counter_ffa0 ; 4       ;
 ; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p|parity_ff    ; 1       ;
 ; receiver:receiver_inst|fir:fir_inst_I|clear_mac                                                                              ; 171     ;
 ; receiver:receiver_inst|fir:fir_inst_Q|clear_mac                                                                              ; 171     ;
-; Total number of inverted registers = 5                                                                                       ;         ;
+; Total number of inverted registers = 4                                                                                       ;         ;
 +------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
@@ -706,16 +704,16 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
-; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|out_data[18] ;
-; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][17]        ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|temp_ADC[14]                                              ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Mercury|bit_cnt[3]                                                ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|SPI:Alex_SPI_Tx|data_count[3]                             ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Mercury|bits[3]                                                   ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Mercury|spec_data_count[0]                                        ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|state[1]            ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_Q|state[1]            ;
-; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[9]                                     ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|temp_ADC[2]                                               ;
+; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|out_data[17] ;
+; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][7]         ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Mercury|bit_cnt[1]                                                ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|SPI:Alex_SPI_Tx|data_count[4]                             ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Mercury|bits[5]                                                   ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Mercury|spec_data_count[3]                                        ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|state[2]            ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_Q|state[2]            ;
+; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[7]                                     ;
 ; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|bit_count[4]                                ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
@@ -2151,7 +2149,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Sat Jan 10 15:11:09 2009
+    Info: Processing started: Tue Jan 13 20:52:53 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
 Info: Found 1 design units, including 1 entities, in source file cbuffer_top.v
     Info: Found entity 1: cbuffer_top
@@ -2329,8 +2327,6 @@ Info: Found 1 design units, including 1 entities, in source file db/mult_4611.td
     Info: Found entity 1: mult_4611
 Info: Ignored 168 buffer(s)
     Info: Ignored 168 SOFT buffer(s)
-Info: Registers with preset signals will power-up high
-Info: DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "CMODE" is stuck at VCC
     Warning (13410): Pin "SHDN" is stuck at GND
@@ -2419,19 +2415,19 @@ Info: 81 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[53]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[54]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[55]" lost all its fanouts during netlist optimizations.
-Info: Implemented 8843 device resources after synthesis - the final resource count might be different
+Info: Implemented 8807 device resources after synthesis - the final resource count might be different
     Info: Implemented 28 input pins
     Info: Implemented 38 output pins
-    Info: Implemented 1 bidirectional pins
-    Info: Implemented 8664 logic cells
+    Info: Implemented 2 bidirectional pins
+    Info: Implemented 8627 logic cells
     Info: Implemented 90 RAM segments
     Info: Implemented 22 DSP elements
 Info: Generated suppressed messages file C:/HPSDR/trunk/Mercury V2/Mercury.map.smsg
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Peak virtual memory: 199 megabytes
-    Info: Processing ended: Sat Jan 10 15:11:46 2009
-    Info: Elapsed time: 00:00:37
-    Info: Total CPU time (on all processors): 00:00:37
+    Info: Peak virtual memory: 201 megabytes
+    Info: Processing ended: Tue Jan 13 20:53:31 2009
+    Info: Elapsed time: 00:00:38
+    Info: Total CPU time (on all processors): 00:00:36
 
 
 +------------------------------------------+

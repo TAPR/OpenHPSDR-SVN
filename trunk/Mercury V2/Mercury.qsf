@@ -183,3 +183,6 @@ set_global_assignment -name VERILOG_FILE mac.v
 set_global_assignment -name VERILOG_FILE division.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE Mercury.vwf
 set_global_assignment -name QIP_FILE fir_shiftreg.qip
+set_instance_assignment -name CURRENT_STRENGTH_NEW 16MA -to MDOUT
+set_instance_assignment -name PCI_IO ON -to MDOUT
+set_instance_assignment -name OUTPUT_TERMINATION OFF -to MDOUT

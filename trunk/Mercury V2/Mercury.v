@@ -4,7 +4,7 @@
 *
 ************************************************************/
 
-// V2.4 10 Jan 2009 
+// V2.4.1 12 Jan 2009 
 
 // (C) Phil Harman VK6APH 2006,2007,2008
 
@@ -59,6 +59,10 @@
 			    - Added ADC overflow bit on C18
     10 Jan 2009 - Changed spectrum data to 0,1,2....4095 for testing
 				- Released as V2.4
+	12 Jan 2009 - Spectrum data now ADC samples
+				- Simplified ADC Overlow flag code 
+				- same release number 
+				- Added software serial number on serno, C19 
                  
 				
 	 
@@ -134,9 +138,12 @@ output        DEBUG_LED6, // Debug LED
 output        DEBUG_LED7, // Debug LED
 input         DFS0, DFS1, // I/Q sampling rate selection
 output reg	  spectrum,	  // ADC samples for bandscope A12
-output reg    ADC_OVERFLOW // set when ADC overflows C18
+output reg    ADC_OVERFLOW, // set when ADC overflows C18
+inout  wire   serno         // serial # out to Atlas bus on C19
 );
 
+
+localparam SERIAL = 8'hAA;  // software version serial number - dummy for testing
 
 reg  [15:0] temp_ADC;
 wire        CLK_122MHz;
@@ -397,41 +404,12 @@ I2SEncode  I2S(.LRCLK(LRCLK), .BCLK(BCLK), .left_sample(rx_out_data_I), .right_s
 
 ///////////////////////////////////////////////////////////
 //
-//   ADC Overload detect and flag set
+//   ADC Overflow set
 //
 ///////////////////////////////////////////////////////////
 
-// count the number of times the ADC Overflow bit is set and if > a setpoint 
-// set a flag. This will be sent to PowerSDR via Ozy.
-
-localparam  SETPOINT = 100;
-reg [15:0]OF_count;
-reg OF_flag_set;
-reg OF_flag;
-
-always @ (posedge  CLK_122MHz)
-begin
-	if (OVERFLOW) begin
-		if (OF_count == SETPOINT) begin
-			OF_flag_set <= 1'b1;
-			OF_count <= 0;
-		end 
-		else begin
-			OF_count <= OF_count + 1'b1;
-			OF_flag_set <= 1'b0;
-		end
-	end 
-	else OF_flag_set <= 1'b0; 
-end
- 
- 
-// set/reset  ADC_OVERFLOW latch 
-always @ (posedge OF_flag_set or posedge LRCLK)
-begin
-	if (OF_flag_set) ADC_OVERFLOW <= 1'b1;
-	else if (LRCLK) ADC_OVERFLOW <= 1'b0;
-end 
-	
+always @ (posedge LRCLK)
+	 ADC_OVERFLOW <= OVERFLOW;
 
 
 
@@ -444,58 +422,18 @@ end
 // Load consecutive ADC samples into FIFO until it is full, 4096 words.
 // Wait until all data has been sent and then repeat.
 
-// for testing fill FIFO with 0,1,2....4095
-
-reg [11:0]test_count;
-
 always @ (negedge CLK_122MHz) 
 begin
-if (wrempty)begin
-	wrreq <= 1'b1;	// enable FIFO write
-	test_count <= test_count + 1'b1;
-	end 
-	else if (wrfull)wrreq <= 1'b0;		// disable FIFO write
+if (wrempty)wrreq <= 1'b1;	// enable FIFO write
+else if (wrfull)wrreq <= 1'b0;		// disable FIFO write
 end	
 
-	
 // 16 x 4096 data FIFO
 reg rdreq; reg wrreq; wire wrfull; wire [15:0]q; wire wrempty;
-//spectrum_FIFO inst_spectrum_FIFO(.data(temp_ADC),.rdclk(~BCLK),.rdreq(rdreq),.wrclk(CLK_122MHz),.wrreq(wrreq),.q(q),.wrempty(wrempty),.wrfull(wrfull));
-
-spectrum_FIFO inst_spectrum_FIFO(.data({4'b0,test_count}),.rdclk(~BCLK),.rdreq(rdreq),.wrclk(CLK_122MHz),.wrreq(wrreq),.q(q),.wrempty(wrempty),.wrfull(wrfull));
-
+spectrum_FIFO inst_spectrum_FIFO(.data(temp_ADC),.rdclk(~BCLK),.rdreq(rdreq),.wrclk(CLK_122MHz),.wrreq(wrreq),.q(q),.wrempty(wrempty),.wrfull(wrfull));
 
 // read data from spectrum_FIFO using BCLK and LRCLK, send data using I2S format over Atlas bus to Ozy
 // read data using first BCLK after negative edge of LRCLK
-
-reg spec_state;
-always @(posedge BCLK)  
-begin
-  case(spec_state)
-  0:
-  begin
-	if (LRCLK == 0)
-      spec_state  <= 0;     // loop until CLRLCK is high   
-    else
-      spec_state  <= 1;
-  end
-
-  1:
-  begin
-    if (CLRCLK)
-      spec_state  <= 1;     // loop until CLRCLK is low  
-    else
-    begin
-      rdreq <= 1;						
-      spec_state  <= 0;
-    end
-  end
-  default:
-    spec_state <= 0;
-  endcase
-end
-
-
 // Send spectrum data to Ozy using I2S format on negative edge of LRCLK
 
 reg [1:0]spec_send;
@@ -510,26 +448,47 @@ case(spec_send)
 1:	if (LRCLK)	spec_send <= 1;		// wait until it goes low - this is first BCLK after negedge of LRCLK
 	else begin
 		spec_data_count <= 15; 		// need to have data available for Ozy on next BCLK
+		 rdreq <= 1'b1;
 		spec_send <= 2;
 	end
 	
 2:	begin
-	if (spec_data_count == 0) spec_send <= 0;
+	
+	if (spec_data_count == 0)begin
+		rdreq <= 1'b0;
+		spec_send <= 0;
+	end
 	else begin
 		spec_data_count <= spec_data_count - 1'b1;
 		spec_send <= 2;
 	end
 	end 
 	
+
 default: spec_send <= 0;
 endcase
 end 
 
+///////////////////////////////////////////////////////////
+//
+//    Spectrum and Serial Number Encoder 
+//
+///////////////////////////////////////////////////////////
+
+// Sends current software serial # as an 8 bit value in I2S
+// format. Shares Spectrum data state machine and sends the
+// serial number as bits 7 to 0 of 16. Penny will use bits 15 to 8.
+
+reg serial_number;
 // I2S data must be available on the 2nd positive edge of CBCLK after the CLRCLK transition
 always @ (negedge BCLK)
 begin
 	if (spec_send == 2)	spectrum <= q[spec_data_count];		// shift data out to Atlas bus MSB first
+	if (spec_send == 2 && spec_data_count < 8)
+		serial_number <= SERIAL[spec_data_count];			// send serial number
 end
+
+assign serno = (spec_send == 2 && spec_data_count < 8) ? serial_number : 1'bz;  // serial # bus is high Z
 
 
 ///////////////////////////////////////////////////////////
