@@ -1,10 +1,10 @@
-// V1.10 10 January 2009 
+// V1.32 14 January 2009  
 //
-// Copyright 2006,2007, 2008, 2009 Bill Tracey KD5TFD and Phil Harman VK6APH
+// Copyright 2006,2007, 2008 Bill Tracey KD5TFD and Phil Harman VK6APH
 //
 //  HPSDR - High Performance Software Defined Radio
 //
-//  Janus to Ozy to Penelope interface.
+//  Ozy to Janus/Penelope/Mercury/Phoenix  interface.
 //
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -183,14 +183,25 @@
 //				 8 July 2008 - Removed above code since not required with slower Alex SPI clock
 //				11 July 2008 - Added JTAG programming support
 //				16 Nov  2008 - Set C&C address to 0x0000 ready for Pheonix support  
-//							 - Compiled with Quartus V8.1
-//				 9 Jan  2009 - Added ADC_OVERLOAD to C&C data 
+//							 - Compiled with Quartus V8.0
+//				19 Nov  2008 - Added test code for Phoenix i.e. calculate phase word and 
+//							   send via Atlas bus C21
+//				26 Dec  2008 - V1.20 release 
+
+//				6 Jan   2009 - Get spectrum data on Atlas A12 and send as mic data
+//							 - when on Rx add start flag in C1, bit  1  
+//				9 Jan  2009 - Added ADC_OVERLOAD to C&C data 
+//	           12 Jan  2009 - Added sofware serial numbers to C&C data
+//			   13 Jan  2009 - Special test version, no PTT reset on loss of sync
+//							- Removed rx_avail since no longer required by PC code
+//							- Moved serial numbers positions in C&C data
+//							- NOTE: VOX WILL NOT WORK WITH THIS VERSION   
 //
 ////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////
 //
-//              Quartus V7.1 Notes
+//              Quartus V7.1/8.0/8.1 Notes
 //
 //////////////////////////////////////////////////////////////
 
@@ -202,7 +213,7 @@
 	- Analysis and Synthesis Settings\Restructure Multiplexers  [OFF]
 	- Fitter Settings\Optimise fast-corner timing [ON]
 	
-	Same setting for Quartus V8.0
+	Same setting for Quartus V8.0 and V8.1
 	
 */
 
@@ -317,7 +328,7 @@ module Ozy_Janus(
         CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
 		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CC, PCLK_12MHZ, MCLK_12MHZ, MDOUT,
 		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, CLK_MCLK,
-		FX2_PE0, FX2_PE1, FX2_PE2, FX2_PE3, TDO, SDOBACK, TCK, TMS, ADC_OVERLOAD);
+		FX2_PE0, FX2_PE1, FX2_PE2, FX2_PE3,SDOBACK,TDO,TCK, TMS, spectrum_in, ADC_OVERLOAD, serno);
 		
 
 
@@ -354,10 +365,11 @@ output AK_reset;                // reset for AK5394A
 reg    DFS0;					// used to set AK5394A speed
 reg    DFS1;					// ditto 
 output CLK_48MHZ; 				// 48MHz clock to Janus for PWM DACs 
-output CC;						// Command and Control data to Atlas bus 
+output CC;						// Command and Control data to Atlas bus
 input  CDOUT_P;					// Mic data from Penelope
-input  ADC_OVERLOAD;				// ADC overload from Mercury C18
-
+input  spectrum_in;				// spectrum data from Mercury on A12
+input  ADC_OVERLOAD;			// ADC overload from Mercury C18
+input  serno;					// serial number of HPSDR boards software C19
 // interface lines for GPIO control 
 input 				FX2_CLK;		// master system clock from FX2 
 input 				SPI_SCK;		// SPI SCK from FX2
@@ -390,6 +402,9 @@ assign TMS = FX2_PE3;
 assign TCK = FX2_PE2;
 assign TDO = FX2_PE0;  // TDO on our slot ties to TDI on next slot  
 assign FX2_PE1 = SDOBACK;
+
+
+
 
 // instantiate gpio control block 
 gpio_control gpio_controlSDR(.FX2_CLK(FX2_CLK), 
@@ -430,7 +445,6 @@ reg data_flag;                  // set when data ready to send to Tx FIFO
 reg [15:0] register;            // AK5394A A/D uses this to send its data to Tx FIFO
 reg [15:0] Tx_data;             // Tx mic audio from TLV320
 reg [6:0] loop_counter;         // counts number of times round loop
-reg [11:0] rx_avail;            // how much space is avail in the rx fifo
 reg Tx_fifo_enable;             // set when we want to send data to the Tx FIFO
 
 
@@ -507,7 +521,7 @@ assign LRCLK_48 = clock_out[7]; 		// for AK5394A at 48kHz
 assign LRCLK_96 = clock_out[6];			// for AK5394A at 96kHz
 assign LRCLK_192 = clock_out[5];		// for AK5394A at 192kHz
 
-// **** only send 48MHz clock to Atlas bus if Mercury not fitted to see effect on spurs
+// Only send 48MHz clock to Atlas bus if Mercury not fitted 
 // conf[1] = 1 if Mercury selected for Rx output
 assign CLK_48MHZ = conf[1] ? 1'b0 : IFCLK; 	// 48MHz clock to PWM DAC on Janus only if Mercury not slected
 
@@ -628,6 +642,8 @@ flash flash_LED(.clock(IFCLK_4),.flag(clock_error),.LED(DEBUG_LED0));
 wire select_DOUT;
 assign select_DOUT = conf[1] ? MDOUT : DOUT;  // select Janus or Mercury I&Q data 
 
+
+
 //////////////////////////////////////////////////////////////
 //
 //      Read A/D converter, send sync and C&C to Tx FIFO
@@ -707,16 +723,17 @@ reg [7:0] Tx_control_2;    // control 2 to PC
 reg [7:0] Tx_control_3;    // control 3 to PC, number of words free in Rx FIFO
 reg [7:0] Tx_control_4;    // control 4 to PC
 
+reg [11:0] spectrum_count; // 0 to 4095 for number of spectrum samples
+reg spectrum_flag; 		   // set at start of block of spectrum samples
 
 always @ (posedge BCLK)
 // temp values until we use these control signals
 begin
-rx_avail <= 12'd4095 - Rx_used;  // determine how much room left in Rx FIFO
 Tx_control_0[7:2] <= 6'd0;
-Tx_control_1 <= {7'd0, ADC_OVERLOAD}; // ADC_OVERLOAD in bit 0
-Tx_control_2 <= 8'd0;
-Tx_control_3 <= rx_avail[11:4];
-Tx_control_4 <= 8'd0;
+Tx_control_1 <= {6'b0,spectrum_flag,ADC_OVERLOAD};// ADC_OVERLOAD in bit 0
+Tx_control_2 <= Merc_serialno;
+Tx_control_3 <= Penny_serialno;
+Tx_control_4 <= 8'b0;
 
 
 q[15:0] <= {q[14:0],`DOUTbit};                  // shift current AK5394A data left and add next bit
@@ -739,6 +756,8 @@ case (AD_state)                                 // see if sync is to be sent
        	AD_state <= AD_state + 1'b1;
         end
 6'd3:   begin  
+        if (spectrum_count == 0) spectrum_flag <= 1'b1;		// set start of spectrum block
+		else spectrum_flag <= 1'b0; 
         if(loop_counter == 0) begin             // send C&C bytes, this is C0
             register[15:8] <= 8'h7F;			// send rest of sync
         	register[7:0]  <= {Tx_control_0[7:2], ~clean_dash, (~clean_dot || clean_PTT_in)};
@@ -754,6 +773,7 @@ case (AD_state)                                 // see if sync is to be sent
       	AD_state <= AD_state + 1'b1;
         end
 6'd5:   begin 
+        spectrum_count <= spectrum_count + 1'b1; // increment spectrum block count
         if(loop_counter == 0)begin
         	register <= {Tx_control_3,Tx_control_4}; // C3 - number of bytes in Rx FIFO
 			Tx_fifo_enable <= 1'b1;
@@ -783,8 +803,11 @@ case (AD_state)                                 // see if sync is to be sent
         Tx_fifo_enable <= 1'b1;
         AD_state <= AD_state + 1'b1;
         end
+// If we are receiving then send spectrum data otherwise send mic data       
 6'd56:  begin
-        register <= Tx_data;                            // send microphone or line in data to Tx FIFO
+        if (PTT_out)
+			register <= Tx_data; 		// if PTT send microphone or line in data to Tx FIFO
+		else register <= spectrum;		// else send spectrum data
         Tx_fifo_enable <= 1'b1;
         AD_state <= AD_state + 1'b1;
         end
@@ -1197,7 +1220,9 @@ if(state_sync == 4)begin 								// Need to ensure that C&C data is stable
 	end
 end	
 
-assign PTT_out = (Rx_control_0[0] && have_sync) ? 1'b1 : 1'b0; // inhibit PTT if no sync
+//******** TEMP TEST - Don't inhibit PTT if sync lost **************
+//assign PTT_out = (Rx_control_0[0] && have_sync) ? 1'b1 : 1'b0; // inhibit PTT if no sync
+assign PTT_out = (Rx_control_0[0]) ? 1'b1 : 1'b0; // inhibit PTT if no sync
 
 // Set speed of AK5394A, can only change  AK5394A speed on posedge BCLK - I found out the hard way!
 
@@ -1362,6 +1387,163 @@ begin
 	CC <= CCdata[CCcount];			// shift data out to Atlas bus MSB first
 end
 
+//////////////////////////////////////////////////////////////
+//
+//		Convert frequency to phase word for Phoenix 
+//		since the CPLD on that board it too small to 
+//		do the calculation
+//
+//////////////////////////////////////////////////////////////
+
+/*	
+	Calculates  phase_word = (frequency * 2^32) /960e6  i.e. 48MHz clock x 20 in AD9912
+	Each calculation takes ~ 1.5uS @ 48MHz
+	This method is quite fast enough and uses much fewer LEs than a Megafunction.
+	
+*/
+
+wire [31:0]phase_word;
+reg  [31:0]freq;
+wire ready;
+always @ (posedge ready)		// strobe frequecy when ready is set
+begin
+	freq <= frequency;	// frequency is current frequency in Hz e.g. 14,195,000Hz
+end 
+
+division division_phoenix(.quotient(phase_word),.ready(ready),.dividend(freq),.divider(32'd960000000),.clk(IFCLK));
+
+///////////////////////////////////////////////////////////////
+//
+//  Implements tempory  Command & Control  encoder for Phoenix 
+//
+///////////////////////////////////////////////////////////////
+
+/*
+	The temp C&C encoder broadcasts data over the Atlas bus C21 for
+	use by Phoenix.  The data is in pseudo I2S format with the clock
+      being CBLCK and the start of each frame being indicated using the
+      negative edge of CLRCLK.
+
+	This tempory code will be used until Penelope is modified to detect the address field
+      contained in the C&C data at Atlas C20.
+	
+	The data format is as follows:
+	
+	<[32]PTT><[31:0]phase_word>
+	
+	for a total of 33 bits. 
+*/
+
+/*
+wire [32:0]phoenix_data;		// current phoenix C&C data
+reg  PCC;					// C&C data out to Atlas bus C21
+
+assign phoenix_data = {PTT_out,phase_word}; // concatenate data to send 
+
+// send Phoenix C&C data to Atlas bus in I2S format
+// Reuse the CCcount register from the main C&C encoder which runs from 58 to 0
+// Hence subtract 26 from this to give 32 to 0
+
+// I2S data must be available on the 2nd positive edge of CBCLK after the CLRCLK transition
+always @ (negedge CBCLK)
+begin
+	if (CCcount > 25) 
+	PCC <= phoenix_data[CCcount - 26];	// shift data out to Atlas bus MSB first
+end
+
+*/
+
+///////////////////////////////////////////////////////////////
+//
+//  Get spectrum data from Mercury on Atlas A12 
+//
+///////////////////////////////////////////////////////////////
+
+/*
+	Spectrum data is in I2S format, 16 bits following negative 
+	edge of LRCLK
+*/
+
+
+reg  [3:0] bits;     		// how many bits clocked 
+reg  [1:0] spectrum_state;
+reg [15:0] spectrum_data;	// 16 bits of spectrum data
+reg [15:0] spectrum; 
+
+
+always @(posedge BCLK)  // use BCLK  from Atlas C6 
+begin
+  case(spectrum_state)
+  0:
+  begin
+    if (LRCLK == 0)
+      spectrum_state  <= 0;     // loop until LRLCK is high   
+    else
+      spectrum_state  <= 1;
+  end
+
+  1:
+  begin
+    if (LRCLK)
+      spectrum_state  <= 1;     // loop until LRCLK is low  
+    else
+    begin
+      bits      <= 15;						
+      spectrum_state  <= 2;
+    end
+  end
+
+  2:
+  begin
+    spectrum_data[bits] <= spectrum_in;   // this is the second BCLK after negedge of LRCLK
+    if (bits == 0)
+      spectrum_state  <= 0;      // done so restart
+    else
+    begin
+      bits <= bits - 1'b1;
+      spectrum_state  <= 2;  
+    end
+  end
+
+  default:
+    spectrum_state <= 0;
+  endcase
+end
+
+// latch spectrum data on positive edge of LRCLK
+
+always @ (posedge LRCLK)
+	spectrum <= spectrum_data;
+	
+///////////////////////////////////////////////////////////////
+//
+//  Get Software serial numbers from cards on Atlas bus
+//
+///////////////////////////////////////////////////////////////	
+
+// share state machine from spectrum code 
+
+reg [7:0]temp_Merc_serialno;		// holds serial number of Mercury board sofware
+reg [7:0]Merc_serialno;
+reg [7:0]temp_Penny_serialno;
+reg [7:0]Penny_serialno;
+
+always @ (posedge BCLK)
+begin
+	if (spectrum_state == 2 && bits > 7)		// get Penelope serial #
+		temp_Penny_serialno[bits]  <= serno;
+	if (spectrum_state == 2 && bits < 8)		// get Mercury serial #
+		temp_Merc_serialno[bits]  <= serno;
+end 
+	
+// latch  serial numbers on positive edge of LRCLK
+
+always @ (posedge LRCLK)
+begin
+	Penny_serialno <= temp_Penny_serialno;
+	Merc_serialno <= temp_Merc_serialno;
+end
+
 ///////////////////////////////////////////////////////////////
 //
 //              Implements I2S format I and Q  out,
@@ -1369,8 +1551,8 @@ end
 //
 ///////////////////////////////////////////////////////////////
 
-
 I2SAudioOut  I2SAO(.lrclk_i(CLRCLK), .bclk_i(CBCLK), .left_sample_i(I_PWM), .right_sample_i(Q_PWM),.outbit_o(CDIN));
+
 
 ///////////////////////////////////////////////////////////////
 //
@@ -1419,11 +1601,10 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // DEBUG_LED0 - flashes if 12.288MHz Atlas clock selected but not present
 
-assign DEBUG_LED1 = ~conf[1];	// test config setting  
+assign DEBUG_LED1 = ~conf[1];	// test config setting 
 assign DEBUG_LED2 = ~PTT_out; 	// lights with PTT active
 assign DEBUG_LED3 = ~have_sync; // lights when sync from PowerSDR detected 
-//assign DEBUG_LED1 = (Rx_control_0[7:1] == 0) ?  Rx_control_3[0] : DEBUG_LED1;
-//assign DEBUG_LED2 = (Rx_control_0[7:1] == 0) ?  Rx_control_3[1] : DEBUG_LED2;
+
 
 endmodule
 

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Sat Jan 10 20:06:18 2009
+Wed Jan 14 20:16:28 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -13,55 +13,56 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
   5. Analysis & Synthesis Resource Usage Summary
   6. Analysis & Synthesis Resource Utilization by Entity
   7. Analysis & Synthesis RAM Summary
-  8. State Machine - |Ozy_Janus|CCstate
-  9. State Machine - |Ozy_Janus|state_PWM
- 10. State Machine - |Ozy_Janus|state_sync
- 11. State Machine - |Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state
- 12. State Machine - |Ozy_Janus|I2SAudioOut:I2SAO|TLV_state
- 13. Registers Protected by Synthesis
- 14. Registers Removed During Synthesis
- 15. General Register Statistics
- 16. Multiplexer Restructuring Statistics (No Restructuring Performed)
- 17. Source assignments for clocks:clocks|lpm_counter:lpm_counter_component
- 18. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated
- 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|a_graycounter_g2c:wrptr_g1p
- 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|a_graycounter_f2c:wrptr_gp
- 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|altsyncram_vpu:fifo_ram
- 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
- 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|dffpipe_c2e:rdaclr
- 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|dffpipe_c09:rs_brp
- 26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|dffpipe_c09:rs_bwp
- 27. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp
- 28. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp|dffpipe_h09:dffpipe9
- 29. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp
- 30. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp|dffpipe_i09:dffpipe12
- 31. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated
- 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|a_graycounter_h2c:wrptr_g1p
- 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|a_graycounter_e2c:wrptr_gp
- 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|altsyncram_tpu:fifo_ram
- 36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3
- 37. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|dffpipe_c2e:rdaclr
- 38. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_kv7:rs_dgwp
- 39. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5
- 40. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|dffpipe_b09:ws_brp
- 41. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|dffpipe_b09:ws_bwp
- 42. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_lv7:ws_dgrp
- 43. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe9
- 44. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs
- 45. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port0reg
- 46. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port1reg
- 47. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port2reg
- 48. Parameter Settings for User Entity Instance: clocks:clocks|lpm_counter:lpm_counter_component
- 49. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 50. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 51. Parameter Settings for User Entity Instance: debounce:de_PTT
- 52. Parameter Settings for User Entity Instance: debounce:de_dot
- 53. Parameter Settings for User Entity Instance: debounce:de_dash
- 54. dcfifo Parameter Settings by Entity Instance
- 55. Analysis & Synthesis Messages
- 56. Analysis & Synthesis Suppressed Messages
+  8. State Machine - |Ozy_Janus|spectrum_state
+  9. State Machine - |Ozy_Janus|CCstate
+ 10. State Machine - |Ozy_Janus|state_PWM
+ 11. State Machine - |Ozy_Janus|state_sync
+ 12. State Machine - |Ozy_Janus|I2SAudioOut:I2SIQO|TLV_state
+ 13. State Machine - |Ozy_Janus|I2SAudioOut:I2SAO|TLV_state
+ 14. Registers Protected by Synthesis
+ 15. Registers Removed During Synthesis
+ 16. General Register Statistics
+ 17. Multiplexer Restructuring Statistics (No Restructuring Performed)
+ 18. Source assignments for clocks:clocks|lpm_counter:lpm_counter_component
+ 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+ 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated
+ 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|a_graycounter_g2c:wrptr_g1p
+ 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|a_graycounter_f2c:wrptr_gp
+ 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|altsyncram_vpu:fifo_ram
+ 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
+ 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|dffpipe_c2e:rdaclr
+ 26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|dffpipe_c09:rs_brp
+ 27. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|dffpipe_c09:rs_bwp
+ 28. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp
+ 29. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp|dffpipe_h09:dffpipe9
+ 30. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp
+ 31. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp|dffpipe_i09:dffpipe12
+ 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated
+ 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|a_graycounter_h2c:wrptr_g1p
+ 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|a_graycounter_e2c:wrptr_gp
+ 36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|altsyncram_tpu:fifo_ram
+ 37. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3
+ 38. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|dffpipe_c2e:rdaclr
+ 39. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_kv7:rs_dgwp
+ 40. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5
+ 41. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|dffpipe_b09:ws_brp
+ 42. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|dffpipe_b09:ws_bwp
+ 43. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_lv7:ws_dgrp
+ 44. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_lv7:ws_dgrp|dffpipe_g09:dffpipe9
+ 45. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs
+ 46. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port0reg
+ 47. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port1reg
+ 48. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|RegisterX:port2reg
+ 49. Parameter Settings for User Entity Instance: clocks:clocks|lpm_counter:lpm_counter_component
+ 50. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+ 51. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 52. Parameter Settings for User Entity Instance: debounce:de_PTT
+ 53. Parameter Settings for User Entity Instance: debounce:de_dot
+ 54. Parameter Settings for User Entity Instance: debounce:de_dash
+ 55. dcfifo Parameter Settings by Entity Instance
+ 56. Analysis & Synthesis Messages
+ 57. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -87,16 +88,16 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Jan 10 20:06:18 2009   ;
+; Analysis & Synthesis Status        ; Successful - Wed Jan 14 20:16:28 2009   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 842                                     ;
-;     Total combinational functions  ; 815                                     ;
-;     Dedicated logic registers      ; 842                                     ;
-; Total registers                    ; 842                                     ;
-; Total pins                         ; 89                                      ;
+; Total logic elements               ; 929                                     ;
+;     Total combinational functions  ; 929                                     ;
+;     Dedicated logic registers      ; 927                                     ;
+; Total registers                    ; 927                                     ;
+; Total pins                         ; 91                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 98,304                                  ;
 ; Embedded Multiplier 9-bit elements ; 0                                       ;
@@ -185,6 +186,7 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                         ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
+; division.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/division.v                              ;
 ; RegisterX.v                      ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/RegisterX.v                             ;
 ; SPI_REGS.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/SPI_REGS.v                              ;
 ; gpio_control.v                   ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyV2-JanusV2/gpio_control.v                          ;
@@ -253,28 +255,28 @@ applicable agreement for further details.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimated Total logic elements              ; 842        ;
+; Estimated Total logic elements              ; 929        ;
 ;                                             ;            ;
-; Total combinational functions               ; 815        ;
+; Total combinational functions               ; 929        ;
 ; Logic element usage by number of LUT inputs ;            ;
-;     -- 4 input functions                    ; 351        ;
-;     -- 3 input functions                    ; 201        ;
-;     -- <=2 input functions                  ; 263        ;
+;     -- 4 input functions                    ; 412        ;
+;     -- 3 input functions                    ; 238        ;
+;     -- <=2 input functions                  ; 279        ;
 ;                                             ;            ;
 ; Logic elements by mode                      ;            ;
-;     -- normal mode                          ; 578        ;
-;     -- arithmetic mode                      ; 237        ;
+;     -- normal mode                          ; 682        ;
+;     -- arithmetic mode                      ; 247        ;
 ;                                             ;            ;
-; Total registers                             ; 842        ;
-;     -- Dedicated logic registers            ; 842        ;
+; Total registers                             ; 927        ;
+;     -- Dedicated logic registers            ; 927        ;
 ;     -- I/O registers                        ; 0          ;
 ;                                             ;            ;
-; I/O pins                                    ; 89         ;
+; I/O pins                                    ; 91         ;
 ; Total memory bits                           ; 98304      ;
 ; Maximum fan-out node                        ; CLK_MCLK~6 ;
 ; Maximum fan-out                             ; 205        ;
-; Total fan-out                               ; 5829       ;
-; Average fan-out                             ; 3.28       ;
+; Total fan-out                               ; 6408       ;
+; Average fan-out                             ; 3.24       ;
 +---------------------------------------------+------------+
 
 
@@ -283,7 +285,7 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ; Library Name ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Ozy_Janus                                    ; 815 (418)         ; 842 (371)    ; 98304       ; 0            ; 0       ; 0         ; 89   ; 0            ; |Ozy_Janus                                                                                                                        ; work         ;
+; |Ozy_Janus                                    ; 929 (532)         ; 927 (456)    ; 98304       ; 0            ; 0       ; 0         ; 91   ; 0            ; |Ozy_Janus                                                                                                                        ; work         ;
 ;    |I2SAudioOut:I2SAO|                        ; 45 (45)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ; work         ;
 ;    |I2SAudioOut:I2SIQO|                       ; 26 (26)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SIQO                                                                                                     ; work         ;
 ;    |Rx_fifo:Rx_fifo|                          ; 85 (0)            ; 132 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ; work         ;
@@ -344,6 +346,18 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ALTSYNCRAM ; AUTO ; True Dual Port ; 4096         ; 16           ; 4096         ; 16           ; 65536 ; None ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3|ALTSYNCRAM ; AUTO ; True Dual Port ; 2048         ; 16           ; 2048         ; 16           ; 32768 ; None ;
 +-----------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------+
+; State Machine - |Ozy_Janus|spectrum_state                                     ;
++-------------------+-------------------+-------------------+-------------------+
+; Name              ; spectrum_state.00 ; spectrum_state.10 ; spectrum_state.01 ;
++-------------------+-------------------+-------------------+-------------------+
+; spectrum_state.00 ; 0                 ; 0                 ; 0                 ;
+; spectrum_state.01 ; 1                 ; 0                 ; 1                 ;
+; spectrum_state.10 ; 1                 ; 1                 ; 0                 ;
++-------------------+-------------------+-------------------+-------------------+
 
 
 Encoding Type:  One-Hot
@@ -431,8 +445,7 @@ Encoding Type:  One-Hot
 ; Register name                                                                                                ; Reason for Removal                          ;
 +--------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 ; Tx_control_4[0..7]                                                                                           ; Stuck at GND due to stuck port data_in      ;
-; Tx_control_2[0..7]                                                                                           ; Stuck at GND due to stuck port data_in      ;
-; Tx_control_1[1..7]                                                                                           ; Stuck at GND due to stuck port data_in      ;
+; Tx_control_1[2..7]                                                                                           ; Stuck at GND due to stuck port data_in      ;
 ; Tx_control_0[2..7]                                                                                           ; Stuck at GND due to stuck port data_in      ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|p0addr                                    ; Lost fanout                                 ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|a_graycounter_h2c:wrptr_g1p|counter_ffa0  ; Lost fanout                                 ;
@@ -489,7 +502,7 @@ Encoding Type:  One-Hot
 ; I2SAudioOut:I2SIQO|bit_count[0]                                                                              ; Merged with I2SAudioOut:I2SAO|bit_count[0]  ;
 ; I2SAudioOut:I2SIQO|TLV_state.000                                                                             ; Merged with I2SAudioOut:I2SAO|TLV_state.000 ;
 ; I2SAudioOut:I2SIQO|TLV_state.011                                                                             ; Merged with I2SAudioOut:I2SAO|TLV_state.011 ;
-; Total Number of Removed Registers = 84                                                                       ;                                             ;
+; Total Number of Removed Registers = 75                                                                       ;                                             ;
 +--------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 
 
@@ -498,12 +511,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 842   ;
+; Total registers                              ; 927   ;
 ; Number of registers using Synchronous Clear  ; 86    ;
 ; Number of registers using Synchronous Load   ; 65    ;
 ; Number of registers using Asynchronous Clear ; 37    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 424   ;
+; Number of registers using Clock Enable       ; 439   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -513,21 +526,23 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[4]                                         ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[6]                                         ;
 ; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_dot|count[0]                                ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_PTT|count[2]                                ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_dash|count[16]                              ;
-; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|CCcount[1]                                              ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_PTT|count[3]                                ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_dash|count[12]                              ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Ozy_Janus|bits[3]                                                 ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|CCcount[0]                                              ;
 ; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Ozy_Janus|FIFO_ADR[1]~reg0                                        ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|data[0]                              ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|data[6]                               ;
-; 128:1              ; 4 bits    ; 340 LEs       ; 32 LEs               ; 308 LEs                ; Yes        ; |Ozy_Janus|AD_state[2]                                             ;
-; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|bit_count[3]                         ;
-; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|bit_count[1]                          ;
-; 66:1               ; 7 bits    ; 308 LEs       ; 21 LEs               ; 287 LEs                ; Yes        ; |Ozy_Janus|gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[6] ;
-; 128:1              ; 5 bits    ; 425 LEs       ; 10 LEs               ; 415 LEs                ; Yes        ; |Ozy_Janus|register[2]                                             ;
-; 130:1              ; 6 bits    ; 516 LEs       ; 24 LEs               ; 492 LEs                ; Yes        ; |Ozy_Janus|register[9]                                             ;
-; 130:1              ; 2 bits    ; 172 LEs       ; 6 LEs                ; 166 LEs                ; Yes        ; |Ozy_Janus|register[0]                                             ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|data[5]                              ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|data[4]                               ;
+; 128:1              ; 4 bits    ; 340 LEs       ; 32 LEs               ; 308 LEs                ; Yes        ; |Ozy_Janus|AD_state[4]                                             ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|bit_count[0]                         ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SAO|bit_count[3]                          ;
+; 66:1               ; 7 bits    ; 308 LEs       ; 21 LEs               ; 287 LEs                ; Yes        ; |Ozy_Janus|gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[2] ;
+; 131:1              ; 5 bits    ; 435 LEs       ; 20 LEs               ; 415 LEs                ; Yes        ; |Ozy_Janus|register[3]                                             ;
+; 131:1              ; 5 bits    ; 435 LEs       ; 20 LEs               ; 415 LEs                ; Yes        ; |Ozy_Janus|register[11]                                            ;
+; 131:1              ; 2 bits    ; 174 LEs       ; 8 LEs                ; 166 LEs                ; Yes        ; |Ozy_Janus|register[8]                                             ;
+; 133:1              ; 2 bits    ; 176 LEs       ; 8 LEs                ; 168 LEs                ; Yes        ; |Ozy_Janus|register[1]                                             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 
 
@@ -991,7 +1006,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Sat Jan 10 20:06:08 2009
+    Info: Processing started: Wed Jan 14 20:16:14 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file division.v
     Info: Found entity 1: division
@@ -1155,6 +1170,7 @@ Info: Elaborating entity "dffpipe_g09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcf
 Info: Found 1 design units, including 1 entities, in source file db/cmpr_736.tdf
     Info: Found entity 1: cmpr_736
 Info: Elaborating entity "cmpr_736" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|cmpr_736:rdempty_eq_comp"
+Info: Elaborating entity "division" for hierarchy "division:division_phoenix"
 Info: Elaborating entity "I2SAudioOut" for hierarchy "I2SAudioOut:I2SAO"
 Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
 Warning: Clock multiplexers are found and protected
@@ -1163,6 +1179,8 @@ Warning: Clock multiplexers are found and protected
     Warning: Found clock multiplexer CLK_MCLK~4
     Warning: Found clock multiplexer CLK_MCLK~3
     Warning: Found clock multiplexer BCLK~2
+    Warning: Found clock multiplexer LRCLK~4
+    Warning: Found clock multiplexer LRCLK~3
 Warning: The following nodes have both tri-state and non-tri-state drivers
     Warning: Inserted always-enabled tri-state buffer between "GPIO[0]" and its non-tri-state driver.
     Warning: Inserted always-enabled tri-state buffer between "GPIO[1]" and its non-tri-state driver.
@@ -1251,18 +1269,18 @@ Info: 47 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SAudioOut:I2SIQO|TLV_state.100" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "FLAGB"
-Info: Implemented 1391 device resources after synthesis - the final resource count might be different
-    Info: Implemented 21 input pins
+Info: Implemented 1548 device resources after synthesis - the final resource count might be different
+    Info: Implemented 23 input pins
     Info: Implemented 27 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1270 logic cells
+    Info: Implemented 1425 logic cells
     Info: Implemented 32 RAM segments
 Info: Generated suppressed messages file C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.map.smsg
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 46 warnings
-    Info: Peak virtual memory: 177 megabytes
-    Info: Processing ended: Sat Jan 10 20:06:18 2009
-    Info: Elapsed time: 00:00:10
-    Info: Total CPU time (on all processors): 00:00:09
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 48 warnings
+    Info: Peak virtual memory: 178 megabytes
+    Info: Processing ended: Wed Jan 14 20:16:28 2009
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:10
 
 
 +------------------------------------------+
