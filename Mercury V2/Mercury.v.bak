@@ -62,7 +62,8 @@
 	12 Jan 2009 - Spectrum data now ADC samples
 				- Simplified ADC Overlow flag code 
 				- same release number
-				- Added software serial number on serno, C19 
+				- Added software serial number on serno, C19
+	16 Jan 2009 - Try debounce 10MHz reference on C16 using 122.88MHz clock 
                  
 				
 	 
@@ -139,7 +140,7 @@ output        DEBUG_LED7, // Debug LED
 input         DFS0, DFS1, // I/Q sampling rate selection
 output reg	  spectrum,	  // ADC samples for bandscope A12
 output reg    ADC_OVERFLOW, // set when ADC overflows C18
-inout  wire   serno         // serial # out to Atlas bus on C19
+inout  reg    serno         // serial # out to Atlas bus on C19
 );
 
 
@@ -725,12 +726,29 @@ SPI Alex_SPI_Tx (.Alex_data(Alex_data), .SPI_data(SPI_data),
 	is made using ref_ext.
 */
 
-// div 10 MHz ref clock by 125 to get 80 khz 
+// div 10 MHz ref clock by 125 to get 80 khz
 
-wire ref_80khz; 
-reg osc_80khz; 
+//first debounce 10 MHz reference
 
-oddClockDivider refClockDivider(reference, ref_80khz); 
+parameter DBtime = 3;
+parameter Nbits = 3;
+
+reg [Nbits-1:0] count;
+reg xnew, Clean_10MHz;
+
+always @ (posedge CLK_122MHz)
+begin
+    if (reference != xnew) begin
+		xnew <= reference; count <=0;
+	end
+    else if (count == DBtime) Clean_10MHz <= xnew;
+    else count <= count + 1;
+end
+
+wire ref_80khz;
+reg osc_80khz;
+
+oddClockDivider refClockDivider(Clean_10MHz, ref_80khz);
 
 // Divide  122.88 MHz by 1536 to get 80 khz 
 reg [9:0] count_12288; 
@@ -752,6 +770,7 @@ end
 
 // Apply to EXOR phase detector 
 assign FPGA_PLL = ref_80khz ^ osc_80khz; 
+
 
 
 // LEDs for testing 0 = off, 1 = on
