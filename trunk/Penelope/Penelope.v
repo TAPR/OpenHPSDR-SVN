@@ -53,6 +53,7 @@
    5  Apr  2008 - Production code released
    30 Dec  2008 - Moved to Quartus V8.1
    1  Jan  2009 - Add Kirk, KD7IRS, mods plus comment and code tidy
+   13 Jan  2009 - Added software serial number to serno, Atlas C19
   
   
   
@@ -86,7 +87,7 @@ module Penelope (
         _10MHZ,ext_10MHZ,_122MHZ,A5,A11,C4,C8,C9,C12,C17,LED2,LED3,LED4,LED5,LED6,LED7,
         USEROUT0,USEROUT1,USEROUT2,USEROUT3,USEROUT4,USEROUT5,USEROUT6,DAC,nLVDSRXE,LVDSTXE,
         FPGA_PLL,PTT,PTT_in,nCS,CMODE,CDOUT,CBCLK,CLRCIN,CLRCOUT,LROUT,CMCLK,CC,
-        ADCMOSI,ADCCLK,ADCMISO,nADCCS,PWM0,PWM1,PWM2,FPGA_PTT
+        ADCMOSI,ADCCLK,ADCMISO,nADCCS,PWM0,PWM1,PWM2,FPGA_PTT,serno, BCLK, LRCLK
         );
 
 input  wire _10MHZ;
@@ -135,6 +136,9 @@ output wire PWM0;
 output wire PWM1;
 output wire PWM2;
 output wire FPGA_PTT;   // controls PTT FET Q3
+inout  reg  serno;      // serial # out to Atlas bus on C19
+input  wire BCLK;		// used by serial # 
+input  wire LRCLK; 		// used by serial #
 
         
 wire        CLK_MCLK;
@@ -153,6 +157,7 @@ assign CDIN     = C12;  // I&Q from Atlas bus
 assign CMODE    = 1'b0; // Set to 0 for I2C mode
 assign nCS      = 1'b1; // I2C address of TLV320 is 0x1B
 
+localparam SERIAL = 8'h55;  // software version serial number - dummy for testing
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -763,6 +768,50 @@ assign ref_ext        = clock_select[0];
 // if set use internally and send to LVDS else get from LVDS 
 assign source_122MHZ  = ~clock_select[2];
 
+
+///////////////////////////////////////////////////////////
+//
+//    Spectrum and Serial Number Encoder 
+//
+///////////////////////////////////////////////////////////
+
+// Sends current software serial # as an 8 bit value in I2S
+// format. Sends the serial number as bits 7 to 0.
+
+reg [1:0]serno_state;
+reg [2:0]serno_data_count;
+
+always @ (posedge BCLK)
+begin	
+case(serno_state)
+0:  if (LRCLK)	 serno_state <= 1;	// loop until LRCLK is high
+	else serno_state <= 0;
+	
+1:	if (LRCLK)	serno_state <= 1;	// wait until it goes low - this is first BCLK after negedge of LRCLK
+	else begin
+		serno_data_count <= 7; 		// need to have data available for Ozy on next BCLK
+		serno_state <= 2;
+	end
+	
+2:	if (serno_data_count == 0)
+		serno_state <= 0;
+	else begin
+		serno_data_count <= serno_data_count - 1'b1;
+		serno_state <= 2;
+	end
+	
+
+default: serno_state <= 0;
+endcase
+end 
+
+// serial number data must be available on the 2nd positive edge of BCLK after the LRCLK transition
+always @ (negedge BCLK)
+begin
+	if (serno_state == 2)
+		serno <= SERIAL[serno_data_count];	// format serial number
+	else serno <= 1'bz;						// serial # bus is high Z when not in use 
+end
 
 
 ///////////////////////////////////////////////////////////
