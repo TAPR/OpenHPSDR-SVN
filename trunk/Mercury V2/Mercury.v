@@ -139,7 +139,7 @@ output        DEBUG_LED7, // Debug LED
 input         DFS0, DFS1, // I/Q sampling rate selection
 output reg	  spectrum,	  // ADC samples for bandscope A12
 output reg    ADC_OVERFLOW, // set when ADC overflows C18
-inout  wire   serno         // serial # out to Atlas bus on C19
+inout  reg    serno         // serial # out to Atlas bus on C19
 );
 
 
@@ -477,16 +477,14 @@ end
 // format. Shares Spectrum data state machine and sends the
 // serial number as bits 7 to 0 of 16. Penny will use bits 15 to 8.
 
-reg serial_number;
 // I2S data must be available on the 2nd positive edge of CBCLK after the CLRCLK transition
 always @ (negedge BCLK)
 begin
 	if (spec_send == 2)	spectrum <= q[spec_data_count];		// shift data out to Atlas bus MSB first
 	if (spec_send == 2 && spec_data_count < 8)
-		serial_number <= SERIAL[spec_data_count];			// send serial number
+		 serno <= SERIAL[spec_data_count];			// send serial number
+	else serno <= 1'bz;								// serial # bus is high Z
 end
-
-assign serno = (spec_send == 2 && spec_data_count < 8) ? serial_number : 1'bz;  // serial # bus is high Z
 
 
 ///////////////////////////////////////////////////////////

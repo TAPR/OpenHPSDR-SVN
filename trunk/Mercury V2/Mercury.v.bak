@@ -61,7 +61,7 @@
 				- Released as V2.4
 	12 Jan 2009 - Spectrum data now ADC samples
 				- Simplified ADC Overlow flag code 
-				- same release number 
+				- same release number
 				- Added software serial number on serno, C19 
                  
 				
@@ -453,7 +453,6 @@ case(spec_send)
 	end
 	
 2:	begin
-	
 	if (spec_data_count == 0)begin
 		rdreq <= 1'b0;
 		spec_send <= 0;
@@ -463,7 +462,6 @@ case(spec_send)
 		spec_send <= 2;
 	end
 	end 
-	
 
 default: spec_send <= 0;
 endcase
@@ -479,16 +477,14 @@ end
 // format. Shares Spectrum data state machine and sends the
 // serial number as bits 7 to 0 of 16. Penny will use bits 15 to 8.
 
-reg serial_number;
 // I2S data must be available on the 2nd positive edge of CBCLK after the CLRCLK transition
 always @ (negedge BCLK)
 begin
 	if (spec_send == 2)	spectrum <= q[spec_data_count];		// shift data out to Atlas bus MSB first
 	if (spec_send == 2 && spec_data_count < 8)
-		serial_number <= SERIAL[spec_data_count];			// send serial number
+		 serno <= SERIAL[spec_data_count];			// send serial number
+	else serno <= 1'bz;								// serial # bus is high Z
 end
-
-assign serno = (spec_send == 2 && spec_data_count < 8) ? serial_number : 1'bz;  // serial # bus is high Z
 
 
 ///////////////////////////////////////////////////////////
