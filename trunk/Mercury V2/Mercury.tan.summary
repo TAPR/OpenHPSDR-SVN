@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 8.694 ns
-From           : DFS0
-To             : receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[5]
+Actual Time    : 8.225 ns
+From           : DFS1
+To             : receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[3]
 From Clock     : --
 To Clock       : CLKA
 Failed Paths   : 0
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 13.141 ns
-From           : SPI:Alex_SPI_Tx|Tx_load_strobe
-To             : Tx_load_strobe
+Actual Time    : 11.693 ns
+From           : SPI:Alex_SPI_Tx|Rx_load_strobe
+To             : Rx_load_strobe
 From Clock     : C8
 To Clock       : --
 Failed Paths   : 0
@@ -35,69 +35,59 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : 0.183 ns
-From           : C9
-To             : PTT_out
+Actual Time    : -0.671 ns
+From           : LRCLK
+To             : rdreq
 From Clock     : --
-To Clock       : C8
+To Clock       : BCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'CLKA'
-Slack          : 0.199 ns
+Slack          : 0.169 ns
 Required Time  : 122.88 MHz ( period = 8.138 ns )
-Actual Time    : 129.20 MHz ( period = 7.740 ns )
-From           : spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp|counter_ffa[6]
-To             : wrreq
+Actual Time    : 128.21 MHz ( period = 7.800 ns )
+From           : wrreq
+To             : spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp|counter_ffa[12]
 From Clock     : CLKA
 To Clock       : CLKA
 Failed Paths   : 0
 
 Type           : Clock Setup: 'BCLK'
-Slack          : 6.900 ns
+Slack          : 7.005 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
 Actual Time    : N/A
-From           : receiver:receiver_inst|fir:fir_inst_I|out_data[22]
-To             : I2SEncode:I2S|data[22]
+From           : receiver:receiver_inst|fir:fir_inst_I|out_data[7]
+To             : I2SEncode:I2S|data[7]
 From Clock     : CLKA
 To Clock       : BCLK
 Failed Paths   : 0
 
-Type           : Clock Setup: 'OSC_10MHZ'
-Slack          : 97.079 ns
-Required Time  : 10.00 MHz ( period = 100.000 ns )
-Actual Time    : Restricted to 250.00 MHz ( period = 4.000 ns )
-From           : oddClockDivider:refClockDivider|count[0]
-To             : oddClockDivider:refClockDivider|count[6]
-From Clock     : OSC_10MHZ
-To Clock       : OSC_10MHZ
-Failed Paths   : 0
-
 Type           : Clock Setup: 'C8'
-Slack          : 294.233 ns
+Slack          : 291.617 ns
 Required Time  : 3.07 MHz ( period = 325.520 ns )
-Actual Time    : 31.96 MHz ( period = 31.287 ns )
-From           : frequency_HZ[26]~_Duplicate_2
-To             : SPI:Alex_SPI_Tx|data_count[2]
+Actual Time    : 29.50 MHz ( period = 33.903 ns )
+From           : frequency_HZ[25]~_Duplicate_2
+To             : SPI:Alex_SPI_Tx|data_count[1]
 From Clock     : C8
 To Clock       : C8
 Failed Paths   : 0
 
 Type           : Clock Hold: 'BCLK'
-Slack          : 0.338 ns
+Slack          : 0.393 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
 Actual Time    : N/A
-From           : receiver:receiver_inst|fir:fir_inst_I|out_data[18]
-To             : I2SEncode:I2S|data[18]
+From           : receiver:receiver_inst|fir:fir_inst_Q|out_data[6]
+To             : I2SEncode:I2S|local_right_sample[6]
 From Clock     : CLKA
 To Clock       : BCLK
 Failed Paths   : 0
 
 Type           : Clock Hold: 'C8'
-Slack          : 0.646 ns
+Slack          : 0.454 ns
 Required Time  : 3.07 MHz ( period = 325.520 ns )
 Actual Time    : N/A
-From           : CCdata[8]
-To             : CCdata[8]
+From           : PTT_out
+To             : SPI:Alex_SPI_Tx|previous_Alex_data[15]
 From Clock     : C8
 To Clock       : C8
 Failed Paths   : 0
@@ -106,20 +96,10 @@ Type           : Clock Hold: 'CLKA'
 Slack          : 0.646 ns
 Required Time  : 122.88 MHz ( period = 8.138 ns )
 Actual Time    : N/A
-From           : osc_80khz
-To             : osc_80khz
+From           : count[0]
+To             : count[0]
 From Clock     : CLKA
 To Clock       : CLKA
-Failed Paths   : 0
-
-Type           : Clock Hold: 'OSC_10MHZ'
-Slack          : 1.021 ns
-Required Time  : 10.00 MHz ( period = 100.000 ns )
-Actual Time    : N/A
-From           : oddClockDivider:refClockDivider|count[0]
-To             : oddClockDivider:refClockDivider|clk_o
-From Clock     : OSC_10MHZ
-To Clock       : OSC_10MHZ
 Failed Paths   : 0
 
 Type           : Total number of failed paths
