@@ -141,7 +141,7 @@ CC                           : 70        : input  : 3.3-V LVTTL       :         
 VCCIO4                       : 71        : power  :                   : 3.3V    : 4         :                
 RESERVED_INPUT               : 72        :        :                   :         : 4         :                
 GND                          : 73        : gnd    :                   :         :           :                
-RESERVED_INPUT               : 74        :        :                   :         : 4         :                
+serno                        : 74        : bidir  : 3.3-V LVTTL       :         : 4         : Y              
 RESERVED_INPUT               : 75        :        :                   :         : 4         :                
 RESERVED_INPUT               : 76        :        :                   :         : 4         :                
 RESERVED_INPUT               : 77        :        :                   :         : 4         :                
@@ -173,13 +173,13 @@ C9                           : 102       : input  : 3.3-V LVTTL       :         
 RESERVED_INPUT               : 103       :        :                   :         : 4         :                
 C8                           : 104       : input  : 3.3-V LVTTL       :         : 4         : Y              
 RESERVED_INPUT               : 105       :        :                   :         : 3         :                
-RESERVED_INPUT               : 106       :        :                   :         : 3         :                
+LRCLK                        : 106       : input  : 3.3-V LVTTL       :         : 3         : Y              
 LED6                         : 107       : output : 3.3-V LVTTL       :         : 3         : Y              
 LED7                         : 108       : output : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 109       : power  :                   : 3.3V    : 3         :                
 RESERVED_INPUT               : 110       :        :                   :         : 3         :                
 GND                          : 111       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 112       :        :                   :         : 3         :                
+BCLK                         : 112       : input  : 3.3-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 113       :        :                   :         : 3         :                
 RESERVED_INPUT               : 114       :        :                   :         : 3         :                
 A5                           : 115       : output : 3.3-V LVTTL       :         : 3         : Y              

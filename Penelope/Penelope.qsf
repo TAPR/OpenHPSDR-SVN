@@ -145,3 +145,7 @@ set_global_assignment -name VERILOG_FILE ADC.v
 set_global_assignment -name VERILOG_FILE phase_accumulator.v
 set_global_assignment -name VERILOG_FILE cicint.v
 set_global_assignment -name VERILOG_FILE Penelope.v
+set_location_assignment PIN_74 -to serno
+set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/Penelope/Penelope.dpf"
+set_location_assignment PIN_112 -to BCLK
+set_location_assignment PIN_106 -to LRCLK
