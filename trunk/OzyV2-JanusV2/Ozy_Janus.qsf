@@ -181,3 +181,6 @@ set_location_assignment PIN_181 -to PCC
 set_location_assignment PIN_104 -to TDI
 set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.dpf"
 set_location_assignment PIN_176 -to ADC_OVERLOAD
+set_location_assignment PIN_141 -to test
+set_location_assignment PIN_179 -to serno
+set_location_assignment PIN_135 -to spectrum_in

@@ -775,7 +775,7 @@ case (AD_state)                                 // see if sync is to be sent
 6'd5:   begin 
         spectrum_count <= spectrum_count + 1'b1; // increment spectrum block count
         if(loop_counter == 0)begin
-        	register <= {Tx_control_3,Tx_control_4}; // C3 - number of bytes in Rx FIFO
+        	register <= {Tx_control_3,Tx_control_4}; 
 			Tx_fifo_enable <= 1'b1;
             end
         AD_state <= AD_state + 1'b1;
@@ -1455,13 +1455,15 @@ end
 
 ///////////////////////////////////////////////////////////////
 //
-//  Get spectrum data from Mercury on Atlas A12 
+//  Get spectrum data from Mercury on Atlas A12  and
+//  Software serial numbers from cards on Atlas C19
 //
 ///////////////////////////////////////////////////////////////
 
 /*
-	Spectrum data is in I2S format, 16 bits following negative 
-	edge of LRCLK
+	Data is in I2S format, 16 bits following negative 
+	edge of LRCLK. Penny serial number is in serno[15:8]
+	and Mercury is in serno[7:0]
 */
 
 
@@ -1469,9 +1471,13 @@ reg  [3:0] bits;     		// how many bits clocked
 reg  [1:0] spectrum_state;
 reg [15:0] spectrum_data;	// 16 bits of spectrum data
 reg [15:0] spectrum; 
+reg [7:0]  temp_Merc_serialno;	// holds serial number of Mercury board sofware
+reg [7:0]  Merc_serialno;
+reg [7:0]  temp_Penny_serialno; // holds serial number of Penny board sofware
+reg [7:0]  Penny_serialno;
 
 
-always @(posedge BCLK)  // use BCLK  from Atlas C6 
+always @(posedge BCLK)  
 begin
   case(spectrum_state)
   0:
@@ -1488,7 +1494,7 @@ begin
       spectrum_state  <= 1;     // loop until LRCLK is low  
     else
     begin
-      bits      <= 15;						
+      bits <= 15;						
       spectrum_state  <= 2;
     end
   end
@@ -1496,6 +1502,10 @@ begin
   2:
   begin
     spectrum_data[bits] <= spectrum_in;   // this is the second BCLK after negedge of LRCLK
+    if (bits > 7)		// get Penelope serial #
+		temp_Penny_serialno[bits]  <= serno;
+	if (bits < 8)		// get Mercury serial #
+		temp_Merc_serialno[bits]  <= serno;
     if (bits == 0)
       spectrum_state  <= 0;      // done so restart
     else
@@ -1510,39 +1520,15 @@ begin
   endcase
 end
 
-// latch spectrum data on positive edge of LRCLK
+// latch data on positive edge of LRCLK
 
 always @ (posedge LRCLK)
+begin
 	spectrum <= spectrum_data;
-	
-///////////////////////////////////////////////////////////////
-//
-//  Get Software serial numbers from cards on Atlas bus
-//
-///////////////////////////////////////////////////////////////	
-
-// share state machine from spectrum code 
-
-reg [7:0]temp_Merc_serialno;		// holds serial number of Mercury board sofware
-reg [7:0]Merc_serialno;
-reg [7:0]temp_Penny_serialno;
-reg [7:0]Penny_serialno;
-
-always @ (posedge BCLK)
-begin
-	if (spectrum_state == 2 && bits > 7)		// get Penelope serial #
-		temp_Penny_serialno[bits]  <= serno;
-	if (spectrum_state == 2 && bits < 8)		// get Mercury serial #
-		temp_Merc_serialno[bits]  <= serno;
-end 
-	
-// latch  serial numbers on positive edge of LRCLK
-
-always @ (posedge LRCLK)
-begin
 	Penny_serialno <= temp_Penny_serialno;
 	Merc_serialno <= temp_Merc_serialno;
 end
+	
 
 ///////////////////////////////////////////////////////////////
 //

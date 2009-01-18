@@ -202,7 +202,7 @@ GND+                         : 131       :        :                   :         
 GND+                         : 132       :        :                   :         : 3         :                
 RESERVED_INPUT               : 133       :        :                   :         : 3         :                
 RESERVED_INPUT               : 134       :        :                   :         : 3         :                
-RESERVED_INPUT               : 135       :        :                   :         : 3         :                
+spectrum_in                  : 135       : input  : 3.3-V LVTTL       :         : 3         : Y              
 VCCIO3                       : 136       : power  :                   : 3.3V    : 3         :                
 CDOUT_P                      : 137       : input  : 3.3-V LVTTL       :         : 3         : Y              
 MDOUT                        : 138       : input  : 3.3-V LVTTL       :         : 3         : Y              
@@ -240,15 +240,15 @@ DFS0                         : 169       : output : 3.3-V LVTTL       :         
 DFS1                         : 170       : output : 3.3-V LVTTL       :         : 2         : Y              
 PTT_in                       : 171       : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 172       : power  :                   : 3.3V    : 2         :                
-serno                        : 173       : input  : 3.3-V LVTTL       :         : 2         : N              
+RESERVED_INPUT               : 173       :        :                   :         : 2         :                
 GND                          : 174       : gnd    :                   :         :           :                
 CLK_MCLK                     : 175       : output : 3.3-V LVTTL       :         : 2         : Y              
 ADC_OVERLOAD                 : 176       : input  : 3.3-V LVTTL       :         : 2         : Y              
 GND                          : 177       : gnd    :                   :         :           :                
 VCCINT                       : 178       : power  :                   : 1.2V    :           :                
-RESERVED_INPUT               : 179       :        :                   :         : 2         :                
+serno                        : 179       : input  : 3.3-V LVTTL       :         : 2         : Y              
 CC                           : 180       : output : 3.3-V LVTTL       :         : 2         : Y              
-spectrum_in                  : 181       : input  : 3.3-V LVTTL       :         : 2         : N              
+RESERVED_INPUT               : 181       :        :                   :         : 2         :                
 RESERVED_INPUT               : 182       :        :                   :         : 2         :                
 VCCIO2                       : 183       : power  :                   : 3.3V    : 2         :                
 GND                          : 184       : gnd    :                   :         :           :                
