@@ -34,7 +34,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board.
    there should be an entry marked  Altera USB-Blaster
 
 
-3. Fit a jumper to the last JTAG header on your Mercury board i.e. JP7, bottom left of the board just above
+3. Fit a jumper to the header pins marked LAST JTAG JP7, bottom left of the board just above
    the Atlas connector. 
 
 4. Power off your Atlas board. Plug just your Mercury and Ozy board into the Atlas bus.
@@ -52,7 +52,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board.
 
 8. Remove Power to the Atlas bus, restart your PC and load PowerSDR.
 
-9. Test Mercury with PowerSDR.
+9. Test Mercury with PowerSDR. Recalibrate Frequency and Leve. 
 
 
 This is how the process works.
