@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Wed Jan 14 20:16:28 2009
+Sun Jan 18 16:39:07 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -33,10 +33,10 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
  25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|dffpipe_c2e:rdaclr
  26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|dffpipe_c09:rs_brp
  27. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|dffpipe_c09:rs_bwp
- 28. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp
- 29. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp|dffpipe_h09:dffpipe9
- 30. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp
- 31. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp|dffpipe_i09:dffpipe12
+ 28. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_jv7:rs_dgwp
+ 29. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9
+ 30. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_kv7:ws_dgrp
+ 31. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12
  32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
  33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated
  34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|a_graycounter_h2c:wrptr_g1p
@@ -44,8 +44,8 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
  36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|altsyncram_tpu:fifo_ram
  37. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3
  38. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|dffpipe_c2e:rdaclr
- 39. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_kv7:rs_dgwp
- 40. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5
+ 39. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_iv7:rs_dgwp
+ 40. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_f09:dffpipe5
  41. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|dffpipe_b09:ws_brp
  42. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|dffpipe_b09:ws_bwp
  43. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_lv7:ws_dgrp
@@ -88,13 +88,13 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Jan 14 20:16:28 2009   ;
+; Analysis & Synthesis Status        ; Successful - Sun Jan 18 16:39:07 2009   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 929                                     ;
-;     Total combinational functions  ; 929                                     ;
+; Total logic elements               ; 927                                     ;
+;     Total combinational functions  ; 923                                     ;
 ;     Dedicated logic registers      ; 927                                     ;
 ; Total registers                    ; 927                                     ;
 ; Total pins                         ; 91                                      ;
@@ -229,10 +229,10 @@ applicable agreement for further details.
 ; db/altsyncram_aec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/altsyncram_aec1.tdf                  ;
 ; db/dffpipe_c2e.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_c2e.tdf                      ;
 ; db/dffpipe_c09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_c09.tdf                      ;
-; db/alt_synch_pipe_mv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_mv7.tdf               ;
-; db/dffpipe_h09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_h09.tdf                      ;
-; db/alt_synch_pipe_nv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_nv7.tdf               ;
-; db/dffpipe_i09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_i09.tdf                      ;
+; db/alt_synch_pipe_jv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_jv7.tdf               ;
+; db/dffpipe_d09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_d09.tdf                      ;
+; db/alt_synch_pipe_kv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_kv7.tdf               ;
+; db/dffpipe_e09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_e09.tdf                      ;
 ; db/cmpr_836.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/cmpr_836.tdf                         ;
 ; db/dcfifo_h7j1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dcfifo_h7j1.tdf                      ;
 ; db/a_gray2bin_mdb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/a_gray2bin_mdb.tdf                   ;
@@ -241,7 +241,7 @@ applicable agreement for further details.
 ; db/a_graycounter_e2c.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/a_graycounter_e2c.tdf                ;
 ; db/altsyncram_tpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/altsyncram_tpu.tdf                   ;
 ; db/altsyncram_8ec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/altsyncram_8ec1.tdf                  ;
-; db/alt_synch_pipe_kv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_kv7.tdf               ;
+; db/alt_synch_pipe_iv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_iv7.tdf               ;
 ; db/dffpipe_f09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_f09.tdf                      ;
 ; db/dffpipe_b09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/dffpipe_b09.tdf                      ;
 ; db/alt_synch_pipe_lv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyV2-JanusV2/db/alt_synch_pipe_lv7.tdf               ;
@@ -255,16 +255,16 @@ applicable agreement for further details.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimated Total logic elements              ; 929        ;
+; Estimated Total logic elements              ; 927        ;
 ;                                             ;            ;
-; Total combinational functions               ; 929        ;
+; Total combinational functions               ; 923        ;
 ; Logic element usage by number of LUT inputs ;            ;
 ;     -- 4 input functions                    ; 412        ;
-;     -- 3 input functions                    ; 238        ;
-;     -- <=2 input functions                  ; 279        ;
+;     -- 3 input functions                    ; 235        ;
+;     -- <=2 input functions                  ; 276        ;
 ;                                             ;            ;
 ; Logic elements by mode                      ;            ;
-;     -- normal mode                          ; 682        ;
+;     -- normal mode                          ; 676        ;
 ;     -- arithmetic mode                      ; 247        ;
 ;                                             ;            ;
 ; Total registers                             ; 927        ;
@@ -275,7 +275,7 @@ applicable agreement for further details.
 ; Total memory bits                           ; 98304      ;
 ; Maximum fan-out node                        ; CLK_MCLK~6 ;
 ; Maximum fan-out                             ; 205        ;
-; Total fan-out                               ; 6408       ;
+; Total fan-out                               ; 6393       ;
 ; Average fan-out                             ; 3.24       ;
 +---------------------------------------------+------------+
 
@@ -285,7 +285,7 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ; Library Name ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Ozy_Janus                                    ; 929 (532)         ; 927 (456)    ; 98304       ; 0            ; 0       ; 0         ; 91   ; 0            ; |Ozy_Janus                                                                                                                        ; work         ;
+; |Ozy_Janus                                    ; 923 (526)         ; 927 (456)    ; 98304       ; 0            ; 0       ; 0         ; 91   ; 0            ; |Ozy_Janus                                                                                                                        ; work         ;
 ;    |I2SAudioOut:I2SAO|                        ; 45 (45)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                      ; work         ;
 ;    |I2SAudioOut:I2SIQO|                       ; 26 (26)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SIQO                                                                                                     ; work         ;
 ;    |Rx_fifo:Rx_fifo|                          ; 85 (0)            ; 132 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                        ; work         ;
@@ -295,10 +295,10 @@ applicable agreement for further details.
 ;             |a_gray2bin_ndb:rs_dgwp_gray2bin| ; 12 (12)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|a_gray2bin_ndb:rs_dgwp_gray2bin                     ; work         ;
 ;             |a_graycounter_f2c:wrptr_gp|      ; 14 (14)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|a_graycounter_f2c:wrptr_gp                          ; work         ;
 ;             |a_graycounter_r96:rdptr_g1p|     ; 14 (14)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|a_graycounter_r96:rdptr_g1p                         ; work         ;
-;             |alt_synch_pipe_mv7:rs_dgwp|      ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp                          ; work         ;
-;                |dffpipe_h09:dffpipe9|         ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp|dffpipe_h09:dffpipe9     ; work         ;
-;             |alt_synch_pipe_nv7:ws_dgrp|      ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp                          ; work         ;
-;                |dffpipe_i09:dffpipe12|        ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp|dffpipe_i09:dffpipe12    ; work         ;
+;             |alt_synch_pipe_jv7:rs_dgwp|      ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_jv7:rs_dgwp                          ; work         ;
+;                |dffpipe_d09:dffpipe9|         ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9     ; work         ;
+;             |alt_synch_pipe_kv7:ws_dgrp|      ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_kv7:ws_dgrp                          ; work         ;
+;                |dffpipe_e09:dffpipe12|        ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12    ; work         ;
 ;             |altsyncram_vpu:fifo_ram|         ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|altsyncram_vpu:fifo_ram                             ; work         ;
 ;                |altsyncram_aec1:altsyncram5|  ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5 ; work         ;
 ;             |cmpr_836:rdempty_eq_comp|        ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|cmpr_836:rdempty_eq_comp                            ; work         ;
@@ -530,7 +530,7 @@ Encoding Type:  One-Hot
 ; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_dot|count[0]                                ;
 ; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_PTT|count[3]                                ;
 ; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_dash|count[12]                              ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Ozy_Janus|bits[3]                                                 ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Ozy_Janus|bits[2]                                                 ;
 ; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Ozy_Janus|CCcount[0]                                              ;
 ; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Ozy_Janus|FIFO_ADR[1]~reg0                                        ;
 ; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |Ozy_Janus|I2SAudioOut:I2SIQO|data[5]                              ;
@@ -578,9 +578,9 @@ Encoding Type:  One-Hot
 ; SUPPRESS_DA_RULE_INTERNAL       ; s102                                                                               ; -               ; -                         ;
 ; POWER_UP_LEVEL                  ; LOW                                                                                ; -               ; p0addr                    ;
 ; CUT                             ; ON                                                                                 ; rdptr_g         ; ws_dgrp|dffpipe12|dffe13a ;
-; SDC_STATEMENT                   ; set_false_path -from *rdptr_g* -to *ws_dgrp|dffpipe_i09:dffpipe12|dffe13a*         ; -               ; -                         ;
+; SDC_STATEMENT                   ; set_false_path -from *rdptr_g* -to *ws_dgrp|dffpipe_e09:dffpipe12|dffe13a*         ; -               ; -                         ;
 ; CUT                             ; ON                                                                                 ; delayed_wrptr_g ; rs_dgwp|dffpipe9|dffe10a  ;
-; SDC_STATEMENT                   ; set_false_path -from *delayed_wrptr_g* -to *rs_dgwp|dffpipe_h09:dffpipe9|dffe10a*  ; -               ; -                         ;
+; SDC_STATEMENT                   ; set_false_path -from *delayed_wrptr_g* -to *rs_dgwp|dffpipe_d09:dffpipe9|dffe10a*  ; -               ; -                         ;
 +---------------------------------+------------------------------------------------------------------------------------+-----------------+---------------------------+
 
 
@@ -652,7 +652,7 @@ Encoding Type:  One-Hot
 
 
 +----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_jv7:rs_dgwp ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                            ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
@@ -661,7 +661,7 @@ Encoding Type:  One-Hot
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp|dffpipe_h09:dffpipe9 ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9 ;
 +---------------------------------+-------+------+------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                       ;
 +---------------------------------+-------+------+------------------------------------------------------------------------------------------+
@@ -670,7 +670,7 @@ Encoding Type:  One-Hot
 
 
 +----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_kv7:ws_dgrp ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                            ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
@@ -679,7 +679,7 @@ Encoding Type:  One-Hot
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp|dffpipe_i09:dffpipe12 ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12 ;
 +---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                        ;
 +---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
@@ -762,7 +762,7 @@ Encoding Type:  One-Hot
 
 
 +----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_kv7:rs_dgwp ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_iv7:rs_dgwp ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                            ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
@@ -771,7 +771,7 @@ Encoding Type:  One-Hot
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5 ;
+; Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_f09:dffpipe5 ;
 +---------------------------------+-------+------+------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                       ;
 +---------------------------------+-------+------+------------------------------------------------------------------------------------------+
@@ -1006,7 +1006,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Wed Jan 14 20:16:14 2009
+    Info: Processing started: Sun Jan 18 16:38:57 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file division.v
     Info: Found entity 1: division
@@ -1100,18 +1100,18 @@ Info: Elaborating entity "dffpipe_c2e" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcf
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_c09.tdf
     Info: Found entity 1: dffpipe_c09
 Info: Elaborating entity "dffpipe_c09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|dffpipe_c09:rs_brp"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_mv7.tdf
-    Info: Found entity 1: alt_synch_pipe_mv7
-Info: Elaborating entity "alt_synch_pipe_mv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_h09.tdf
-    Info: Found entity 1: dffpipe_h09
-Info: Elaborating entity "dffpipe_h09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_mv7:rs_dgwp|dffpipe_h09:dffpipe9"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_nv7.tdf
-    Info: Found entity 1: alt_synch_pipe_nv7
-Info: Elaborating entity "alt_synch_pipe_nv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_i09.tdf
-    Info: Found entity 1: dffpipe_i09
-Info: Elaborating entity "dffpipe_i09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_nv7:ws_dgrp|dffpipe_i09:dffpipe12"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_jv7.tdf
+    Info: Found entity 1: alt_synch_pipe_jv7
+Info: Elaborating entity "alt_synch_pipe_jv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_jv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_d09.tdf
+    Info: Found entity 1: dffpipe_d09
+Info: Elaborating entity "dffpipe_d09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_kv7.tdf
+    Info: Found entity 1: alt_synch_pipe_kv7
+Info: Elaborating entity "alt_synch_pipe_kv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_kv7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_e09.tdf
+    Info: Found entity 1: dffpipe_e09
+Info: Elaborating entity "dffpipe_e09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12"
 Info: Found 1 design units, including 1 entities, in source file db/cmpr_836.tdf
     Info: Found entity 1: cmpr_836
 Info: Elaborating entity "cmpr_836" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_91j1:auto_generated|cmpr_836:rdempty_eq_comp"
@@ -1152,12 +1152,12 @@ Info: Elaborating entity "altsyncram_tpu" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:
 Info: Found 1 design units, including 1 entities, in source file db/altsyncram_8ec1.tdf
     Info: Found entity 1: altsyncram_8ec1
 Info: Elaborating entity "altsyncram_8ec1" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|altsyncram_tpu:fifo_ram|altsyncram_8ec1:altsyncram3"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_kv7.tdf
-    Info: Found entity 1: alt_synch_pipe_kv7
-Info: Elaborating entity "alt_synch_pipe_kv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_kv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_iv7.tdf
+    Info: Found entity 1: alt_synch_pipe_iv7
+Info: Elaborating entity "alt_synch_pipe_iv7" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_iv7:rs_dgwp"
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_f09.tdf
     Info: Found entity 1: dffpipe_f09
-Info: Elaborating entity "dffpipe_f09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_kv7:rs_dgwp|dffpipe_f09:dffpipe5"
+Info: Elaborating entity "dffpipe_f09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|alt_synch_pipe_iv7:rs_dgwp|dffpipe_f09:dffpipe5"
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_b09.tdf
     Info: Found entity 1: dffpipe_b09
 Info: Elaborating entity "dffpipe_b09" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_h7j1:auto_generated|dffpipe_b09:ws_brp"
@@ -1269,17 +1269,17 @@ Info: 47 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SAudioOut:I2SIQO|TLV_state.100" lost all its fanouts during netlist optimizations.
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "FLAGB"
-Info: Implemented 1548 device resources after synthesis - the final resource count might be different
+Info: Implemented 1542 device resources after synthesis - the final resource count might be different
     Info: Implemented 23 input pins
     Info: Implemented 27 output pins
     Info: Implemented 41 bidirectional pins
-    Info: Implemented 1425 logic cells
+    Info: Implemented 1419 logic cells
     Info: Implemented 32 RAM segments
 Info: Generated suppressed messages file C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.map.smsg
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 48 warnings
     Info: Peak virtual memory: 178 megabytes
-    Info: Processing ended: Wed Jan 14 20:16:28 2009
-    Info: Elapsed time: 00:00:14
+    Info: Processing ended: Sun Jan 18 16:39:07 2009
+    Info: Elapsed time: 00:00:10
     Info: Total CPU time (on all processors): 00:00:10
 
 
