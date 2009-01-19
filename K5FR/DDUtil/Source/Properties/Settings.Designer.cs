@@ -2006,12 +2006,12 @@ namespace DataDecoder.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int Amp {
+        public int theAmp {
             get {
-                return ((int)(this["Amp"]));
+                return ((int)(this["theAmp"]));
             }
             set {
-                this["Amp"] = value;
+                this["theAmp"] = value;
             }
         }
         
@@ -2156,6 +2156,30 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["pwr9"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAutoDrv {
+            get {
+                return ((bool)(this["chkAutoDrv"]));
+            }
+            set {
+                this["chkAutoDrv"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("12")]
+        public decimal tune {
+            get {
+                return ((decimal)(this["tune"]));
+            }
+            set {
+                this["tune"] = value;
             }
         }
     }

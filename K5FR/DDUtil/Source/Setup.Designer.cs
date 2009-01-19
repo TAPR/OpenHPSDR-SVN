@@ -197,6 +197,8 @@ namespace DataDecoder
             this.txtSleep = new System.Windows.Forms.TextBox();
             this.tabMisc = new System.Windows.Forms.TabPage();
             this.grpAmpBand = new System.Windows.Forms.GroupBox();
+            this.label148 = new System.Windows.Forms.Label();
+            this.numDrive = new System.Windows.Forms.NumericUpDown();
             this.btnInfo = new System.Windows.Forms.Button();
             this.chkB80 = new System.Windows.Forms.CheckBox();
             this.btnBandClear = new System.Windows.Forms.Button();
@@ -214,16 +216,17 @@ namespace DataDecoder
             this.label147 = new System.Windows.Forms.Label();
             this.cboRepeatCom = new System.Windows.Forms.ComboBox();
             this.grpRmode = new System.Windows.Forms.GroupBox();
+            this.rbRptNone = new System.Windows.Forms.RadioButton();
             this.rbMHBD = new System.Windows.Forms.RadioButton();
             this.rbAll = new System.Windows.Forms.RadioButton();
             this.cboRepeatPort = new System.Windows.Forms.ComboBox();
             this.chkRepeat = new System.Windows.Forms.CheckBox();
             this.btnTest = new System.Windows.Forms.Button();
             this.grpAmp = new System.Windows.Forms.GroupBox();
-            this.btnDrive = new System.Windows.Forms.Button();
-            this.label148 = new System.Windows.Forms.Label();
+            this.chkAutoDrv = new System.Windows.Forms.CheckBox();
             this.lblLoad = new System.Windows.Forms.Label();
             this.txtLoad = new System.Windows.Forms.TextBox();
+            this.btnDrive = new System.Windows.Forms.Button();
             this.txtTune = new System.Windows.Forms.TextBox();
             this.lblTune = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
@@ -821,6 +824,20 @@ namespace DataDecoder
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
             this.PMport = new System.IO.Ports.SerialPort(this.components);
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
+            this.grpBCDover = new System.Windows.Forms.GroupBox();
+            this.chkOvride = new System.Windows.Forms.CheckBox();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.radioButton9 = new System.Windows.Forms.RadioButton();
+            this.rbOvr1 = new System.Windows.Forms.RadioButton();
+            this.radioButton18 = new System.Windows.Forms.RadioButton();
+            this.radioButton19 = new System.Windows.Forms.RadioButton();
+            this.radioButton20 = new System.Windows.Forms.RadioButton();
+            this.radioButton21 = new System.Windows.Forms.RadioButton();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -848,6 +865,7 @@ namespace DataDecoder
             this.grpLP.SuspendLayout();
             this.tabMisc.SuspendLayout();
             this.grpAmpBand.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDrive)).BeginInit();
             this.grpRepeat.SuspendLayout();
             this.grpRmode.SuspendLayout();
             this.grpAmp.SuspendLayout();
@@ -875,6 +893,7 @@ namespace DataDecoder
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.grpBCDover.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -1418,6 +1437,7 @@ namespace DataDecoder
             // 
             // tabDevice
             // 
+            this.tabDevice.Controls.Add(this.grpBCDover);
             this.tabDevice.Controls.Add(this.label20);
             this.tabDevice.Controls.Add(this.groupBox1);
             this.tabDevice.Controls.Add(this.dg1);
@@ -2837,6 +2857,7 @@ namespace DataDecoder
             this.tabMisc.Controls.Add(this.btnTest);
             this.tabMisc.Controls.Add(this.grpAmp);
             this.tabMisc.Controls.Add(this.groupBox4);
+            this.tabMisc.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
             this.tabMisc.Location = new System.Drawing.Point(4, 22);
             this.tabMisc.Name = "tabMisc";
             this.tabMisc.Size = new System.Drawing.Size(423, 309);
@@ -2847,6 +2868,8 @@ namespace DataDecoder
             // 
             // grpAmpBand
             // 
+            this.grpAmpBand.Controls.Add(this.label148);
+            this.grpAmpBand.Controls.Add(this.numDrive);
             this.grpAmpBand.Controls.Add(this.btnInfo);
             this.grpAmpBand.Controls.Add(this.chkB80);
             this.grpAmpBand.Controls.Add(this.btnBandClear);
@@ -2870,6 +2893,43 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.grpAmpBand, "Select band(s) for Auto Tune procedure.");
             this.grpAmpBand.Visible = false;
             // 
+            // label148
+            // 
+            this.label148.AutoSize = true;
+            this.label148.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.label148.ForeColor = System.Drawing.Color.Blue;
+            this.label148.Location = new System.Drawing.Point(53, 80);
+            this.label148.Name = "label148";
+            this.label148.Size = new System.Drawing.Size(30, 13);
+            this.label148.TabIndex = 64;
+            this.label148.Text = "Tune";
+            // 
+            // numDrive
+            // 
+            this.numDrive.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.75F);
+            this.numDrive.Location = new System.Drawing.Point(50, 93);
+            this.numDrive.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numDrive.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numDrive.Name = "numDrive";
+            this.numDrive.Size = new System.Drawing.Size(39, 19);
+            this.numDrive.TabIndex = 109;
+            this.numDrive.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.numDrive, "Select the PowerSDR Tune level.");
+            this.numDrive.Value = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.numDrive.ValueChanged += new System.EventHandler(this.numDrive_ValueChanged);
+            // 
             // btnInfo
             // 
             this.btnInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -2879,7 +2939,7 @@ namespace DataDecoder
             this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F);
             this.btnInfo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnInfo.Location = new System.Drawing.Point(54, 89);
+            this.btnInfo.Location = new System.Drawing.Point(10, 98);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Size = new System.Drawing.Size(30, 15);
             this.btnInfo.TabIndex = 107;
@@ -2909,7 +2969,7 @@ namespace DataDecoder
             this.btnBandClear.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnBandClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBandClear.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnBandClear.Location = new System.Drawing.Point(49, 110);
+            this.btnBandClear.Location = new System.Drawing.Point(49, 117);
             this.btnBandClear.Name = "btnBandClear";
             this.btnBandClear.Size = new System.Drawing.Size(40, 15);
             this.btnBandClear.TabIndex = 105;
@@ -2925,7 +2985,7 @@ namespace DataDecoder
             this.btnBandAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnBandAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBandAll.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnBandAll.Location = new System.Drawing.Point(5, 110);
+            this.btnBandAll.Location = new System.Drawing.Point(5, 117);
             this.btnBandAll.Name = "btnBandAll";
             this.btnBandAll.Size = new System.Drawing.Size(40, 15);
             this.btnBandAll.TabIndex = 106;
@@ -3063,7 +3123,7 @@ namespace DataDecoder
             this.grpRepeat.ForeColor = System.Drawing.Color.Blue;
             this.grpRepeat.Location = new System.Drawing.Point(275, 4);
             this.grpRepeat.Name = "grpRepeat";
-            this.grpRepeat.Size = new System.Drawing.Size(149, 100);
+            this.grpRepeat.Size = new System.Drawing.Size(149, 111);
             this.grpRepeat.TabIndex = 51;
             this.grpRepeat.TabStop = false;
             this.grpRepeat.Text = "Repeater";
@@ -3098,7 +3158,8 @@ namespace DataDecoder
             "57600",
             "38400",
             "19200",
-            "9600"});
+            "9600",
+            "4800"});
             this.cboRepeatCom.Location = new System.Drawing.Point(81, 65);
             this.cboRepeatCom.Name = "cboRepeatCom";
             this.cboRepeatCom.Size = new System.Drawing.Size(63, 21);
@@ -3108,26 +3169,40 @@ namespace DataDecoder
             // 
             // grpRmode
             // 
+            this.grpRmode.Controls.Add(this.rbRptNone);
             this.grpRmode.Controls.Add(this.rbMHBD);
             this.grpRmode.Controls.Add(this.rbAll);
             this.grpRmode.ForeColor = System.Drawing.Color.Navy;
             this.grpRmode.Location = new System.Drawing.Point(9, 42);
             this.grpRmode.Name = "grpRmode";
-            this.grpRmode.Size = new System.Drawing.Size(64, 45);
+            this.grpRmode.Size = new System.Drawing.Size(64, 62);
             this.grpRmode.TabIndex = 66;
             this.grpRmode.TabStop = false;
+            // 
+            // rbRptNone
+            // 
+            this.rbRptNone.AutoSize = true;
+            this.rbRptNone.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbRptNone.ForeColor = System.Drawing.Color.Navy;
+            this.rbRptNone.Location = new System.Drawing.Point(4, 40);
+            this.rbRptNone.Name = "rbRptNone";
+            this.rbRptNone.Size = new System.Drawing.Size(51, 17);
+            this.rbRptNone.TabIndex = 69;
+            this.rbRptNone.Text = "None";
+            this.toolTip1.SetToolTip(this.rbRptNone, "No Cat cmds are broadcast to this port.");
+            this.rbRptNone.UseVisualStyleBackColor = true;
             // 
             // rbMHBD
             // 
             this.rbMHBD.AutoSize = true;
             this.rbMHBD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbMHBD.ForeColor = System.Drawing.Color.Navy;
-            this.rbMHBD.Location = new System.Drawing.Point(4, 25);
+            this.rbMHBD.Location = new System.Drawing.Point(4, 24);
             this.rbMHBD.Name = "rbMHBD";
             this.rbMHBD.Size = new System.Drawing.Size(56, 17);
             this.rbMHBD.TabIndex = 68;
             this.rbMHBD.Text = "IF only";
-            this.toolTip1.SetToolTip(this.rbMHBD, "Only \'IF\' commands are passed.");
+            this.toolTip1.SetToolTip(this.rbMHBD, "Only \'IF\' CAT cmds are passed.");
             this.rbMHBD.UseVisualStyleBackColor = true;
             this.rbMHBD.CheckedChanged += new System.EventHandler(this.grpRmode_CheckedChanged);
             // 
@@ -3188,10 +3263,10 @@ namespace DataDecoder
             // 
             // grpAmp
             // 
-            this.grpAmp.Controls.Add(this.btnDrive);
-            this.grpAmp.Controls.Add(this.label148);
+            this.grpAmp.Controls.Add(this.chkAutoDrv);
             this.grpAmp.Controls.Add(this.lblLoad);
             this.grpAmp.Controls.Add(this.txtLoad);
+            this.grpAmp.Controls.Add(this.btnDrive);
             this.grpAmp.Controls.Add(this.txtTune);
             this.grpAmp.Controls.Add(this.lblTune);
             this.grpAmp.Controls.Add(this.label80);
@@ -3233,31 +3308,18 @@ namespace DataDecoder
             this.grpAmp.Text = "Amplifier";
             this.toolTip1.SetToolTip(this.grpAmp, "Select Amp from Options menu");
             // 
-            // btnDrive
+            // chkAutoDrv
             // 
-            this.btnDrive.BackColor = System.Drawing.Color.Moccasin;
-            this.btnDrive.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
-            this.btnDrive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDrive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDrive.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDrive.Location = new System.Drawing.Point(234, 64);
-            this.btnDrive.Name = "btnDrive";
-            this.btnDrive.Size = new System.Drawing.Size(12, 12);
-            this.btnDrive.TabIndex = 62;
-            this.toolTip1.SetToolTip(this.btnDrive, "Press to save drive level for this band.");
-            this.btnDrive.UseVisualStyleBackColor = false;
-            this.btnDrive.Click += new System.EventHandler(this.btnDrive_Click);
-            // 
-            // label148
-            // 
-            this.label148.AutoSize = true;
-            this.label148.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label148.ForeColor = System.Drawing.Color.Navy;
-            this.label148.Location = new System.Drawing.Point(232, 47);
-            this.label148.Name = "label148";
-            this.label148.Size = new System.Drawing.Size(18, 12);
-            this.label148.TabIndex = 61;
-            this.label148.Text = "SD";
+            this.chkAutoDrv.AutoSize = true;
+            this.chkAutoDrv.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAutoDrv.ForeColor = System.Drawing.Color.Navy;
+            this.chkAutoDrv.Location = new System.Drawing.Point(201, 51);
+            this.chkAutoDrv.Name = "chkAutoDrv";
+            this.chkAutoDrv.Size = new System.Drawing.Size(15, 14);
+            this.chkAutoDrv.TabIndex = 63;
+            this.toolTip1.SetToolTip(this.chkAutoDrv, "Select to enable Auto Drive Level setting when in Operate.");
+            this.chkAutoDrv.UseVisualStyleBackColor = true;
+            this.chkAutoDrv.CheckedChanged += new System.EventHandler(this.chkAutoDrv_CheckedChanged);
             // 
             // lblLoad
             // 
@@ -3282,6 +3344,21 @@ namespace DataDecoder
             this.txtLoad.TabIndex = 58;
             this.txtLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtLoad.DoubleClick += new System.EventHandler(this.txtLoad_DoubleClick);
+            // 
+            // btnDrive
+            // 
+            this.btnDrive.BackColor = System.Drawing.Color.Moccasin;
+            this.btnDrive.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
+            this.btnDrive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDrive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDrive.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnDrive.Location = new System.Drawing.Point(202, 67);
+            this.btnDrive.Name = "btnDrive";
+            this.btnDrive.Size = new System.Drawing.Size(12, 12);
+            this.btnDrive.TabIndex = 62;
+            this.toolTip1.SetToolTip(this.btnDrive, "Press to save drive level for this band.");
+            this.btnDrive.UseVisualStyleBackColor = false;
+            this.btnDrive.Click += new System.EventHandler(this.btnDrive_Click);
             // 
             // txtTune
             // 
@@ -3367,7 +3444,7 @@ namespace DataDecoder
             this.btnHF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHF.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnHF.Location = new System.Drawing.Point(218, 64);
+            this.btnHF.Location = new System.Drawing.Point(236, 67);
             this.btnHF.Name = "btnHF";
             this.btnHF.Size = new System.Drawing.Size(12, 12);
             this.btnHF.TabIndex = 52;
@@ -3383,7 +3460,7 @@ namespace DataDecoder
             this.btnSF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSF.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSF.Location = new System.Drawing.Point(202, 64);
+            this.btnSF.Location = new System.Drawing.Point(219, 67);
             this.btnSF.Name = "btnSF";
             this.btnSF.Size = new System.Drawing.Size(12, 12);
             this.btnSF.TabIndex = 51;
@@ -3396,7 +3473,7 @@ namespace DataDecoder
             this.lblHF.AutoSize = true;
             this.lblHF.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHF.ForeColor = System.Drawing.Color.Navy;
-            this.lblHF.Location = new System.Drawing.Point(216, 47);
+            this.lblHF.Location = new System.Drawing.Point(234, 51);
             this.lblHF.Name = "lblHF";
             this.lblHF.Size = new System.Drawing.Size(18, 12);
             this.lblHF.TabIndex = 50;
@@ -3423,7 +3500,7 @@ namespace DataDecoder
             this.lblSF.AutoSize = true;
             this.lblSF.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSF.ForeColor = System.Drawing.Color.Navy;
-            this.lblSF.Location = new System.Drawing.Point(201, 47);
+            this.lblSF.Location = new System.Drawing.Point(218, 51);
             this.lblSF.Name = "lblSF";
             this.lblSF.Size = new System.Drawing.Size(17, 12);
             this.lblSF.TabIndex = 47;
@@ -10609,6 +10686,209 @@ namespace DataDecoder
             this.RepeatPort.WriteTimeout = 500;
             this.RepeatPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RepeatPort_DataReceived);
             // 
+            // grpBCDover
+            // 
+            this.grpBCDover.Controls.Add(this.radioButton18);
+            this.grpBCDover.Controls.Add(this.radioButton19);
+            this.grpBCDover.Controls.Add(this.radioButton20);
+            this.grpBCDover.Controls.Add(this.radioButton21);
+            this.grpBCDover.Controls.Add(this.radioButton3);
+            this.grpBCDover.Controls.Add(this.radioButton4);
+            this.grpBCDover.Controls.Add(this.radioButton5);
+            this.grpBCDover.Controls.Add(this.radioButton6);
+            this.grpBCDover.Controls.Add(this.radioButton7);
+            this.grpBCDover.Controls.Add(this.radioButton8);
+            this.grpBCDover.Controls.Add(this.radioButton9);
+            this.grpBCDover.Controls.Add(this.rbOvr1);
+            this.grpBCDover.Controls.Add(this.chkOvride);
+            this.grpBCDover.Location = new System.Drawing.Point(6, 106);
+            this.grpBCDover.Name = "grpBCDover";
+            this.grpBCDover.Size = new System.Drawing.Size(195, 100);
+            this.grpBCDover.TabIndex = 62;
+            this.grpBCDover.TabStop = false;
+            this.grpBCDover.Text = "Manual Control";
+            this.grpBCDover.Enter += new System.EventHandler(this.groupBox12_Enter);
+            // 
+            // chkOvride
+            // 
+            this.chkOvride.AutoSize = true;
+            this.chkOvride.Location = new System.Drawing.Point(6, 19);
+            this.chkOvride.Name = "chkOvride";
+            this.chkOvride.Size = new System.Drawing.Size(66, 17);
+            this.chkOvride.TabIndex = 63;
+            this.chkOvride.Text = "Override";
+            this.toolTip1.SetToolTip(this.chkOvride, "Check to override auto frequency setting BCD device.");
+            this.chkOvride.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.radioButton3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radioButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.radioButton3.ForeColor = System.Drawing.Color.Navy;
+            this.radioButton3.Location = new System.Drawing.Point(157, 55);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(44, 17);
+            this.radioButton3.TabIndex = 120;
+            this.radioButton3.Text = "8";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.radioButton4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radioButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.radioButton4.ForeColor = System.Drawing.Color.Navy;
+            this.radioButton4.Location = new System.Drawing.Point(157, 38);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(44, 17);
+            this.radioButton4.TabIndex = 119;
+            this.radioButton4.Text = "4";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.radioButton5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radioButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.radioButton5.ForeColor = System.Drawing.Color.Navy;
+            this.radioButton5.Location = new System.Drawing.Point(107, 55);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(44, 17);
+            this.radioButton5.TabIndex = 118;
+            this.radioButton5.Text = "7";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.radioButton6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radioButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.radioButton6.ForeColor = System.Drawing.Color.Navy;
+            this.radioButton6.Location = new System.Drawing.Point(107, 38);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(44, 17);
+            this.radioButton6.TabIndex = 117;
+            this.radioButton6.Text = "3";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.radioButton7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radioButton7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.radioButton7.ForeColor = System.Drawing.Color.Navy;
+            this.radioButton7.Location = new System.Drawing.Point(57, 55);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(44, 17);
+            this.radioButton7.TabIndex = 116;
+            this.radioButton7.Text = "6";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
+            // 
+            // radioButton8
+            // 
+            this.radioButton8.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.radioButton8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radioButton8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.radioButton8.ForeColor = System.Drawing.Color.Navy;
+            this.radioButton8.Location = new System.Drawing.Point(57, 38);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(44, 17);
+            this.radioButton8.TabIndex = 115;
+            this.radioButton8.Text = "2";
+            this.radioButton8.UseVisualStyleBackColor = true;
+            // 
+            // radioButton9
+            // 
+            this.radioButton9.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.radioButton9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radioButton9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.radioButton9.ForeColor = System.Drawing.Color.Navy;
+            this.radioButton9.Location = new System.Drawing.Point(7, 55);
+            this.radioButton9.Name = "radioButton9";
+            this.radioButton9.Size = new System.Drawing.Size(44, 17);
+            this.radioButton9.TabIndex = 114;
+            this.radioButton9.Text = "5";
+            this.radioButton9.UseVisualStyleBackColor = true;
+            // 
+            // rbOvr1
+            // 
+            this.rbOvr1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr1.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr1.Location = new System.Drawing.Point(7, 38);
+            this.rbOvr1.Name = "rbOvr1";
+            this.rbOvr1.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr1.TabIndex = 113;
+            this.rbOvr1.Text = "1";
+            this.rbOvr1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton18
+            // 
+            this.radioButton18.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.radioButton18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radioButton18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.radioButton18.ForeColor = System.Drawing.Color.Navy;
+            this.radioButton18.Location = new System.Drawing.Point(157, 73);
+            this.radioButton18.Name = "radioButton18";
+            this.radioButton18.Size = new System.Drawing.Size(44, 17);
+            this.radioButton18.TabIndex = 126;
+            this.radioButton18.Text = "12";
+            this.radioButton18.UseVisualStyleBackColor = true;
+            // 
+            // radioButton19
+            // 
+            this.radioButton19.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.radioButton19.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radioButton19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.radioButton19.ForeColor = System.Drawing.Color.Navy;
+            this.radioButton19.Location = new System.Drawing.Point(107, 73);
+            this.radioButton19.Name = "radioButton19";
+            this.radioButton19.Size = new System.Drawing.Size(44, 17);
+            this.radioButton19.TabIndex = 125;
+            this.radioButton19.Text = "11";
+            this.radioButton19.UseVisualStyleBackColor = true;
+            // 
+            // radioButton20
+            // 
+            this.radioButton20.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.radioButton20.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radioButton20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.radioButton20.ForeColor = System.Drawing.Color.Navy;
+            this.radioButton20.Location = new System.Drawing.Point(57, 73);
+            this.radioButton20.Name = "radioButton20";
+            this.radioButton20.Size = new System.Drawing.Size(44, 17);
+            this.radioButton20.TabIndex = 124;
+            this.radioButton20.Text = "10";
+            this.radioButton20.UseVisualStyleBackColor = true;
+            // 
+            // radioButton21
+            // 
+            this.radioButton21.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.radioButton21.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radioButton21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.radioButton21.ForeColor = System.Drawing.Color.Navy;
+            this.radioButton21.Location = new System.Drawing.Point(7, 73);
+            this.radioButton21.Name = "radioButton21";
+            this.radioButton21.Size = new System.Drawing.Size(44, 17);
+            this.radioButton21.TabIndex = 123;
+            this.radioButton21.Text = "9";
+            this.radioButton21.UseVisualStyleBackColor = true;
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -10690,6 +10970,7 @@ namespace DataDecoder
             this.tabMisc.PerformLayout();
             this.grpAmpBand.ResumeLayout(false);
             this.grpAmpBand.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDrive)).EndInit();
             this.grpRepeat.ResumeLayout(false);
             this.grpRepeat.PerformLayout();
             this.grpRmode.ResumeLayout(false);
@@ -10738,6 +11019,8 @@ namespace DataDecoder
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.grpBCDover.ResumeLayout(false);
+            this.grpBCDover.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -11518,7 +11801,24 @@ namespace DataDecoder
         private Label label147;
         private ComboBox cboRepeatCom;
         public Button btnDrive;
+        private CheckBox chkAutoDrv;
+        private RadioButton rbRptNone;
+        private NumericUpDown numDrive;
         private Label label148;
+        private GroupBox grpBCDover;
+        private CheckBox chkOvride;
+        private RadioButton radioButton18;
+        private RadioButton radioButton19;
+        private RadioButton radioButton20;
+        private RadioButton radioButton21;
+        private RadioButton radioButton3;
+        private RadioButton radioButton4;
+        private RadioButton radioButton5;
+        private RadioButton radioButton6;
+        private RadioButton radioButton7;
+        private RadioButton radioButton8;
+        private RadioButton radioButton9;
+        private RadioButton rbOvr1;
 
     }
 }

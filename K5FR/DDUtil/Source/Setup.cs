@@ -109,10 +109,12 @@ namespace DataDecoder
         public static int errCtr = 0;
         System.Timers.Timer alcTimer;
         System.Timers.Timer AlphaTimer;
+        System.Timers.Timer AtTimer;
         System.Timers.Timer blinkTimer; 
         System.Timers.Timer logTimer;
         System.Timers.Timer lpTimer;
         System.Timers.Timer pollTimer;
+        System.Timers.Timer RtrReps;
         System.Timers.Timer StepTimer;
         System.Timers.Timer tempTimer;
         System.Timers.Timer WatchDog;
@@ -339,17 +341,29 @@ namespace DataDecoder
             logTimer.Interval = 5000;      // 1000 = 1 seconds
             logTimer.Enabled = false;
 
-            // setup Blink Timer for a 1 second interrupt
+            // setup ACOM Blink Timer for a 1 second interrupt
             blinkTimer = new System.Timers.Timer();
             blinkTimer.Elapsed += new System.Timers.ElapsedEventHandler(blinkTimer_Elapsed);
             blinkTimer.Interval = 1000;      // 1000 = 1 seconds
             blinkTimer.Enabled = false;
+
+            // setup ACOM Auto Tune Timer for a 5 second interrupt
+            AtTimer = new System.Timers.Timer();
+            AtTimer.Elapsed += new System.Timers.ElapsedEventHandler(AtTimer_Elapsed);
+            AtTimer.Interval = 5000;      // 1000 = 1 seconds
+            AtTimer.Enabled = false;
 
             // setup LP100 Port Timer
             lpTimer = new System.Timers.Timer();
             lpTimer.Elapsed += new System.Timers.ElapsedEventHandler(lpTimer_Elapsed);
             lpTimer.Interval = Convert.ToDouble(set.LPint);
             lpTimer.Enabled = false;
+
+            // setup RtrReps Timer
+            RtrReps = new System.Timers.Timer();
+            RtrReps.Elapsed += new System.Timers.ElapsedEventHandler(RtrReps_Elapsed);
+            RtrReps.Interval = 500;
+            RtrReps.Enabled = false;
 
             // setup PA Temp Timer for a 1000 ms interrupt
             tempTimer = new System.Timers.Timer();
@@ -541,9 +555,9 @@ namespace DataDecoder
             chkPwDTR.Checked = set.pwDTR;
             chkPwRTS.Checked = set.pwRTS;
 
-            switch (set.Amp)
+            switch (set.theAmp)
             {
-                case 0: ACOM2K_Click(null,null); break;
+                case 0: ACOM2K_Click(null, null); break;
                 case 1: Alpha87_Click(null, null); break;
                 case 2: Alpha95_Click(null, null); break;
             }
@@ -1110,7 +1124,7 @@ namespace DataDecoder
             }
         }
         // program is about to close
-        int p = 0;
+        int y = 0;
         private void Setup_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (bMacChg)
@@ -1130,6 +1144,7 @@ namespace DataDecoder
             {
                 // // Debug.WriteLine("   *** Starting Form Close ***");
                 closing = true;
+                AtTimer.Stop();
                 blinkTimer.Stop();
                 lpTimer.Stop();
                 pollTimer.Stop();
@@ -1143,36 +1158,36 @@ namespace DataDecoder
                 mini.Close();
                 this.Text = "DDUtil Shutting Down";
                 if (sp.isOpen)
-                {   e.Cancel = true; p = 1;
+                {   e.Cancel = true; y = 1;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
                 if (LPport.IsOpen)
-                {   e.Cancel = true; p = 2;
+                {   e.Cancel = true; y = 2;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start(); 
                 }
                 if (AccPort.IsOpen)
                 {
-                    e.Cancel = true; p = 3;
+                    e.Cancel = true; y = 3;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
                 if (AlphaPort.IsOpen)
                 {
-                    e.Cancel = true; p = 4;
+                    e.Cancel = true; y = 4;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
                 if (PMport.IsOpen)
                 {
-                    e.Cancel = true; p = 5;
+                    e.Cancel = true; y = 5;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
                 if (LogPort.IsOpen)
                 {
-                    e.Cancel = true; p = 6;
+                    e.Cancel = true; y = 6;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
@@ -1189,7 +1204,7 @@ namespace DataDecoder
         {
             try
             {
-                switch (p)
+                switch (y)
                 {
                     case 1: sp.Close(); break;
                     case 2: LPport.Close(); break;
@@ -2820,14 +2835,16 @@ namespace DataDecoder
                     txtAlphaInt.Enabled = true; set.AlphaEnab = true; set.Save();
                     AlphaTimer.Enabled = true;
                     grpAmpBand.Enabled = true;
-                    if (Amp == 0) ACOM2K_Click(null, null);
-                    if (Amp == 1)
+                    if (set.theAmp == 0) ACOM2K_Click(null, null);
+                    if (set.theAmp == 1)
                     {
                         if (AlphaPort.IsOpen) AlphaPort.Write("AC\r");
                         if (AlphaPort.IsOpen) AlphaPort.Write("EXT OFF\r");
                         if (AlphaPort.IsOpen) AlphaPort.Write("STAT\r");
                         if (AlphaPort.IsOpen) AlphaPort.Write("AUTOTUNE\r");
                     }
+                    if (set.theAmp == 2)
+                    { }
                 }
                 else
                 {
@@ -3185,7 +3202,8 @@ namespace DataDecoder
         {
             if (Amp == 1)
             {
-                SetMsg(""); btnSF.BackColor = Color.Empty;
+                //SetMsg(""); 
+                btnSF.BackColor = Color.Empty;
                 mini.btnSF.BackColor = Color.Empty;
             }
         }
@@ -3194,7 +3212,8 @@ namespace DataDecoder
         {
             if (Amp == 1)
             {
-                SetMsg(""); btnHF.BackColor = Color.Empty;
+                //SetMsg(""); 
+                btnHF.BackColor = Color.Empty;
                 mini.btnHF.BackColor = Color.Empty;
             }
         }
@@ -3690,19 +3709,19 @@ namespace DataDecoder
             switch (pre)
             {
                 case "AM": byte[] a = { 0xFE, 0xFE, 0xE0, 0x64, 0x07, 0x00, 0xFD };
-                    AccPort.Write(a, 0, 7); break;
+                    RepeatPort.Write(a, 0, 7); break;
 
                 case "MM": byte[] b = { 0xFE, 0xFE, 0xE0, 0x64, 0x07, 0x01, 0xFD };
-                    AccPort.Write(b, 0, 7); break;
+                    RepeatPort.Write(b, 0, 7); break;
 
                 case "BM": byte[] c = { 0xFE, 0xFE, 0xE0, 0x64, 0x07, 0x02, 0xFD };
-                    AccPort.Write(c, 0, 7); break;
+                    RepeatPort.Write(c, 0, 7); break;
 
                 case "CX": byte[] d = { 0xFE, 0xFE, 0xE0, 0x64, 0x08, 0x00, 0xFD };
-                    AccPort.Write(d, 0, 7); break;
+                    RepeatPort.Write(d, 0, 7); break;
 
                 case "BL": byte[] e = { 0xFE, 0xFE, 0xE0, 0x64, 0x08, 0x10, 0xFD };
-                    AccPort.Write(e, 0, 7); break;
+                    RepeatPort.Write(e, 0, 7); break;
 
                 case "FW":  // Set SteppIR to Forward Mode
                     rbFwd.Checked = true; break;
@@ -4324,6 +4343,7 @@ namespace DataDecoder
         {
             if (rbAll.Checked) { set.RptMode = 0; }
             else if (rbMHBD.Checked) { set.RptMode = 1; }
+            else if (rbRptNone.Checked) { set.RptMode = 2; }
             set.Save();
         }
         // The Misc Tab has been double clicked so toggle it's visibility
@@ -4345,6 +4365,7 @@ namespace DataDecoder
                      {
                          case 0: rbAll.Checked = true; break;
                          case 1: rbMHBD.Checked = true; break;
+                         case 2: rbRptNone.Checked = true; break;
                      }
                  }
                  else
@@ -4427,8 +4448,20 @@ namespace DataDecoder
 
           #region # Rotor Events #
 
+        // the rotor reps timer has elasped
+        private void RtrReps_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (posCtr != 0)
+            { RotorPort.Write(rtrCmd); posCtr -= 1; }
+            else
+            { RtrReps.Enabled = false; }
+        }
+
+        string rtrCmd = "";
         string sRtrBuf = "";
         string lastPos = "";
+        int posCtr = 0;
+        const int posReps = 10;
         private void RotorPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string sCmd = "";
@@ -4461,9 +4494,11 @@ namespace DataDecoder
                         if (sCmd != lastPos)
                         {
                             RotorPort.Write("W0000000000\x1f ");//request position
-                            SetRotor(sCmd);         //print new heading
-                            lastPos = sCmd;         //save position
-                            RotorPort.Write("W0000000000\x1f ");//get last reading
+                            SetRotor(sCmd);                 //print new heading
+                            lastPos = sCmd;                 //save position
+                            rtrCmd = "W0000000000\x1f ";    // save new heading cmd
+                            posCtr = posReps;               // # reps to run timer
+                            RtrReps.Enabled = true;         // enable reps timer
                         }
                         break;
                     case RotorMod.GreenHeron:
@@ -4474,7 +4509,9 @@ namespace DataDecoder
                             RotorPort.Write("BI1;"); //request position
                             SetRotor(sCmd);          //print new heading
                             lastPos = sCmd;          //save position
-                            RotorPort.Write("BI1;"); //get last reading
+                            rtrCmd = "BI1;";
+                            posCtr = posReps;
+                            RtrReps.Enabled = true;
                         }
                         break;
                     case RotorMod.Hygain:
@@ -4484,7 +4521,9 @@ namespace DataDecoder
                             RotorPort.Write("AI1;"); //request position
                             SetRotor(sCmd);
                             lastPos = sCmd;
-                            RotorPort.Write("AI1;"); //get last reading
+                            rtrCmd = "AI1;";
+                            posCtr = posReps;
+                            RtrReps.Enabled = true;
                         }
                         break;
                     case RotorMod.M2R2800PA:
@@ -4502,7 +4541,9 @@ namespace DataDecoder
                             RotorPort.Write("C\r"); //request position
                             SetRotor(sCmd);
                             lastPos = sCmd;
-                            RotorPort.Write("C\r"); //get last reading
+                            rtrCmd = "C\r";
+                            posCtr = posReps;
+                            RtrReps.Enabled = true;
                         }
                         break;
                     default: break;
@@ -4932,18 +4973,27 @@ namespace DataDecoder
                     int bearing = Convert.ToInt32(heading);
                     bearing = bearing + circle;
                     RotorPort.Write("W" + bearing.ToString() + "0\x01     \x2f ");
-                    RotorPort.Write("W0000000000\x1f ");      // request position
+                    RotorPort.Write("W0000000000\x1f ");    // request position
+                    rtrCmd = "W0000000000\x1f ";            // save new position cmd
+                    posCtr = posReps;
+                    RtrReps.Enabled = true;
                     break;
                 case RotorMod.GreenHeron:
                     if (heading.Length < 3) heading = heading.PadLeft(3,'0');
                     RotorPort.Write("AP1" + heading + "\r;"); // start rotor
                     RotorPort.Write("BI1;");                  // request position
+                    rtrCmd = "BI1;";
+                    posCtr = posReps;
+                    RtrReps.Enabled = true;
                     break;
                 case RotorMod.Hygain:
                     if (heading.Length < 3) heading = heading.PadLeft(3, '0');
                     RotorPort.Write("AP1" + heading + ";"); // set heading
                     RotorPort.Write("AM1;");                // start rotor
                     RotorPort.Write("AI1;");
+                    rtrCmd = "AI1;";
+                    posCtr = posReps;
+                    RtrReps.Enabled = true;
                     break;
                 case RotorMod.M2R2800PA:
                     RotorPort.Write("S\r");                 // stop rotor
@@ -4960,6 +5010,9 @@ namespace DataDecoder
                 case RotorMod.Yaesu:
                     RotorPort.Write("M" + heading + "\r");  // start rotor
                     RotorPort.Write("C\r");                 // request position
+                    rtrCmd = "C\r;";
+                    posCtr = posReps;
+                    RtrReps.Enabled = true;
                     break;
                 default: break;
             }
@@ -5227,20 +5280,20 @@ namespace DataDecoder
                         WriteTemp();
                         return;
                     }
-                    /*** Save current Drive setting ***/
+                    /*** Save current Drive setting by band ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZPC")
                     {
                         switch (band)
                         {
-                            case "160": set.pwr1 = rawFreq.Substring(5, 3); break;
-                            case "080": set.pwr2 = rawFreq.Substring(5, 3); break;
-                            case "040": set.pwr3 = rawFreq.Substring(5, 3); break;
-                            case "030": set.pwr4 = rawFreq.Substring(5, 3); break;
-                            case "020": set.pwr5 = rawFreq.Substring(5, 3); break;
-                            case "017": set.pwr6 = rawFreq.Substring(5, 3); break;
-                            case "015": set.pwr7 = rawFreq.Substring(5, 3); break;
-                            case "012": set.pwr8 = rawFreq.Substring(5, 3); break;
-                            case "010": set.pwr9 = rawFreq.Substring(5, 3); break;
+                            case "160": set.pwr1 = rawFreq.Substring(4, 3); break;
+                            case "080": set.pwr2 = rawFreq.Substring(4, 3); break;
+                            case "040": set.pwr3 = rawFreq.Substring(4, 3); break;
+                            case "030": set.pwr4 = rawFreq.Substring(4, 3); break;
+                            case "020": set.pwr5 = rawFreq.Substring(4, 3); break;
+                            case "017": set.pwr6 = rawFreq.Substring(4, 3); break;
+                            case "015": set.pwr7 = rawFreq.Substring(4, 3); break;
+                            case "012": set.pwr8 = rawFreq.Substring(4, 3); break;
+                            case "010": set.pwr9 = rawFreq.Substring(4, 3); break;
                         }//switch
                         set.Save();
                         return;
@@ -5253,7 +5306,7 @@ namespace DataDecoder
                         {
                             lastBand = band;
                             
-                            if (state == "OPER")
+                            if (state == "Oper" && chkAutoDrv.Checked)
                             {   // if the amp is in Operate mode, get the stored power setting 
                                 // from the settings file and send to the radio.
                                 switch (band)
@@ -5267,7 +5320,7 @@ namespace DataDecoder
                                     case "015": WriteToPort("ZZPC" + set.pwr7 + ";", iSleep); break;
                                     case "012": WriteToPort("ZZPC" + set.pwr8 + ";", iSleep); break;
                                     case "010": WriteToPort("ZZPC" + set.pwr9 + ";", iSleep); break;
-                                }//switch
+                                }
                             }
                             // if matrix enabled output to port
                             if (chkPortA.Checked || chkPortB.Checked)
@@ -8330,8 +8383,9 @@ namespace DataDecoder
         int ctr = 0;            // Auto tune reps counter
         int bctr = 0;           // reps counter for Mw command
         double p1 = 0;
-        int pTune = 15;         // watt value to send to F5K for Auto Tune proc
-        string pwr = "000";
+        double p = 0;
+        int fp = 0;             // final value returned from "P" command
+        bool ADenab = false;
         string sFreq = "";
 
           #endregion Vars
@@ -8505,6 +8559,17 @@ namespace DataDecoder
             }
             else grpAmpBand.Enabled = b;
         }
+        // Enable/Disable Auto Drive Enable checkbox
+        delegate void EnabADCallback(bool b);
+        public void EnabAD(bool b)
+        {
+            if (this.chkAutoDrv.InvokeRequired)
+            {
+                EnabADCallback d = new EnabADCallback(EnabAD);
+                this.Invoke(d, new object[] { b });
+            }
+            else chkAutoDrv.Checked = b;
+        }
 
         #endregion Delegates
 
@@ -8520,6 +8585,8 @@ namespace DataDecoder
             grpAmp.Text = "ACOM 2000A";
             mini.grpAmp.Text = "ACOM 2000A";
             cboAlphaBaud.SelectedIndex = set.AlphaBaud;
+            chkAutoDrv.Checked = set.chkAutoDrv;
+            numDrive.Value = set.tune;
             cboAlphaBaud.SelectedIndex = 0;
             AlphaPort.DtrEnable = false;
             AlphaPort.RtsEnable = false;
@@ -8527,7 +8594,7 @@ namespace DataDecoder
             lblTune.Text = "  Ant"; lblLoad.Text = "User";
             Amp = 0;
             bAmp = false;
-            set.Amp = 0; set.Save();
+            set.theAmp = 0; set.Save();
             AlphaTimer.Interval = 60000; // PC hear byte update timer
             AlphaTimer.Enabled = true;
             txtTune.ReadOnly = false;
@@ -8588,8 +8655,8 @@ namespace DataDecoder
         {
             if (Amp == 0)
             {
-                if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
-                Thread.Sleep(200);
+                //if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
+                //Thread.Sleep(200);
             }
         }
         // the message window was dbl-clicked
@@ -8621,6 +8688,29 @@ namespace DataDecoder
         private void btnDrive_Click(object sender, EventArgs e)
         {
             WriteToPort("ZZPC;", iSleep);
+        }
+        // the Auto Drive checkbox has changed.
+        private void chkAutoDrv_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAutoDrv.Checked)
+            {set.chkAutoDrv = true;}
+            else {set.chkAutoDrv = false;}
+            set.Save();
+        }
+        // the drive level has changed
+        private void numDrive_ValueChanged(object sender, EventArgs e)
+        {
+            set.tune = numDrive.Value;
+            set.Save();
+        }
+        // the AT timer has elasped, amp not responding
+        void AtTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            WriteToPort("ZZTU0;", iSleep); //turn off tune
+            tune = "Off";
+            SetTune("abort");
+            SetMsg("Auto Tune Aborted, Toggle Enable to reset.");
+            AtTimer.Stop();
         }
 
           #endregion Events
@@ -8763,7 +8853,7 @@ namespace DataDecoder
                         int pos = msg.LastIndexOf("AE") + 2;
                         int err = int.Parse(msg.Substring(pos, 2), NumberStyles.HexNumber);
                         string errDlg = ErrorDef[err, 0]; //get msg from table
-                        if (msg.Length >6) //(msg.Substring(pos + 2, 2) != "00")
+                        if (msg.Length >6) 
                         {   // if msg has parameter process it
                             param = int.Parse(msg.Substring(5, 2), NumberStyles.HexNumber);
                             string calc = ErrorDef[err, 1];
@@ -8788,7 +8878,7 @@ namespace DataDecoder
                     }
                     if (msg.Contains("AL")) // Amp self broadcast
                     {
-                        if (!bAmp) // setup the sw for amp condition
+                        if (!bAmp) // if 1st pass do initialization
                         {
                             bAmp = true;
                             AlphaPort.DtrEnable = false; AlphaPort.RtsEnable = false;
@@ -8812,12 +8902,28 @@ namespace DataDecoder
                     {
                         SetOper("Oper"); btnOper.BackColor = Color.Lime;
                         state = "Oper"; mini.btnOper.BackColor = Color.Lime;
+                        if (chkAutoDrv.Checked)
+                        {
+                            switch (band)
+                            {
+                                case "160": WriteToPort("ZZPC" + set.pwr1 + ";", iSleep); break;
+                                case "080": WriteToPort("ZZPC" + set.pwr2 + ";", iSleep); break;
+                                case "040": WriteToPort("ZZPC" + set.pwr3 + ";", iSleep); break;
+                                case "030": WriteToPort("ZZPC" + set.pwr4 + ";", iSleep); break;
+                                case "020": WriteToPort("ZZPC" + set.pwr5 + ";", iSleep); break;
+                                case "017": WriteToPort("ZZPC" + set.pwr6 + ";", iSleep); break;
+                                case "015": WriteToPort("ZZPC" + set.pwr7 + ";", iSleep); break;
+                                case "012": WriteToPort("ZZPC" + set.pwr8 + ";", iSleep); break;
+                                case "010": WriteToPort("ZZPC" + set.pwr9 + ";", iSleep); break;
+                            }
+                        }
                         return;
                     }
                     if (msg.Contains("AP")) // auto tune reply
                     {   // convert P digit to numeric so we can test it
                         int pos = msg.LastIndexOf("P") + 1;
-                        double p = Convert.ToInt32(msg.Substring(pos, 1));
+                        p = Convert.ToInt32(msg.Substring(pos, 1));
+                        fp = Convert.ToInt32(p);
                         if (p > 4 && p < 9)
                         {
                             if (ctr == 0) //1st pass
@@ -8876,26 +8982,27 @@ namespace DataDecoder
                             WriteToPort("ZZTU0;", iSleep); //turn off tune
                             tune = "Off";
                             SetMsg("Auto Tune failed, P = " + p);
-                            if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
-                            Thread.Sleep(200);
+                            //if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
+                            //Thread.Sleep(200);
                             return;
                         }
                     }
                     if (msg.Contains("AQ")) // Autotune result message
                     {
                         WriteToPort("ZZTU0;", iSleep); //turn off tune
+                        AtTimer.Stop();
                         tune = "Off";
                         int pos = msg.LastIndexOf("Q") + 1;
                         switch (msg.Substring(pos, 1))
                         {
                             case "0": SetTune("Fail");
-                                SetMsg("Auto Tune Failure! " + txtFreq.Text + " MHz");
+                                SetMsg("Auto Tune Failure! (P" + p + ") " + txtFreq.Text + " MHz");
                                 break;
                             case "1": SetTune("OK");
-                                SetMsg("Auto Tune Succeeded " + txtFreq.Text + " MHz");
+                                SetMsg("Auto Tune Succeeded (P" + p + ") " + txtFreq.Text + " MHz");
                                 break;
                             case "2": SetTune("Error");
-                                SetMsg("Auto Tune Error! Drive Unstable " + txtFreq.Text + " MHz");
+                                SetMsg("Auto Tune Error! Drive Unstable (P" + p + ") " + txtFreq.Text + " MHz");
                                 break;
                             case "3": SetTune("Rdy");
                                 btnTune.BackColor = Color.Azure;
@@ -8906,8 +9013,8 @@ namespace DataDecoder
                                 {
                                     if (AlphaPort.IsOpen) AlphaPort.Write("AqS\0");
                                     Thread.Sleep(1000);
-                                    if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
-                                    Thread.Sleep(200);
+                                    //if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
+                                    //Thread.Sleep(200);
                                     if (AlphaPort.IsOpen) AlphaPort.Write("AqO\0");
                                     Thread.Sleep(1000);
                                 }
@@ -9011,20 +9118,48 @@ namespace DataDecoder
             MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
 
             if (result != DialogResult.OK) { return; }
+            bool oneBand = false;
             // read the bands matrix and setup array
-            if (chkB160.Checked) auto[0] = 1; else auto[0] = 0;
-            if (chkB80.Checked) auto[1] = 1; else auto[1] = 0;
-            if (chkB40.Checked) auto[2] = 1; else auto[2] = 0;
-            if (chkB30.Checked) auto[3] = 1; else auto[3] = 0;
-            if (chkB20.Checked) auto[4] = 1; else auto[4] = 0;
-            if (chkB17.Checked) auto[5] = 1; else auto[5] = 0;
-            if (chkB15.Checked) auto[6] = 1; else auto[6] = 0;
-            if (chkB12.Checked) auto[7] = 1; else auto[7] = 0;
-            if (chkB10.Checked) auto[8] = 1; else auto[8] = 0;
+            if (chkB160.Checked)
+            { auto[0] = 1; oneBand = true; }
+            else auto[0] = 0;
+            if (chkB80.Checked)
+            { auto[1] = 1; oneBand = true; }
+            else auto[1] = 0;
+            if (chkB40.Checked)
+            { auto[2] = 1; oneBand = true; }
+            else auto[2] = 0;
+            if (chkB30.Checked)
+            { auto[3] = 1; oneBand = true; }
+            else auto[3] = 0;
+            if (chkB20.Checked)
+            { auto[4] = 1; oneBand = true; }
+            else auto[4] = 0;
+            if (chkB17.Checked)
+            { auto[5] = 1; oneBand = true; }
+            else auto[5] = 0;
+            if (chkB15.Checked)
+            { auto[6] = 1; oneBand = true; }
+            else auto[6] = 0;
+            if (chkB12.Checked)
+            { auto[7] = 1; oneBand = true; }
+            else auto[7] = 0;
+            if (chkB10.Checked)
+            { auto[8] = 1; oneBand = true; }
+            else auto[8] = 0;
 
-            if (AlphaPort.IsOpen) AlphaPort.Write("AqJ0\0");
-            Thread.Sleep(200);
-            if (AlphaPort.IsOpen) AlphaPort.Write("AqO\0");           // make sure amp is in operate
+            if (!oneBand)
+            {
+                MessageBox.Show("To run the Auto Tune procedure, at\r" +
+                    "least one (1) band must be checked", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            ADenab = chkAutoDrv.Checked; // save Enable Auto Drive check box
+            EnabAD(false);
+            //if (AlphaPort.IsOpen) AlphaPort.Write("AqJ0\0");
+            //Thread.Sleep(200);
+            if (AlphaPort.IsOpen) AlphaPort.Write("AqO\0"); // make sure amp is in operate
             for (int i = 0; i < 10; i++)
             {
                 Thread.Sleep(100);
@@ -9032,14 +9167,17 @@ namespace DataDecoder
             } 
             sFreq = lastFreq;
             WriteToPort("ZZSP0;", iSleep);      // make sure split is off
-            WriteToPort("ZZTO015;", iSleep);    // set drive to 15 watts
-            if (bAnt)
-            {   // if antenna selector present only auto tune current band
-                WriteToPort("ZZTU1;", 500); // key radio, wait for 1/2 sec
+            WriteToPort("ZZTO0" + numDrive.Value.ToString() + ";", iSleep);    // set PSDR tune level
+            if (bAnt) // if antenna selector present, only tune current band
+            {
+                SetTune("wait");
+                btnTune.BackColor = Color.Pink;
+                AtTimer.Enabled = true;         //start fail safe timer
+                WriteToPort("ZZTU1;", 500);     // key radio, wait for 1/2 sec
                 if (AlphaPort.IsOpen) AlphaPort.Write("AqP\0");   // get drive setting from amp
                 Thread.Sleep(200);
             }
-            else ChkMoBands();              // go check what bands are set
+            else ChkMoBands();                  // go check what bands are set
         }
         // see if any bands are set to auto tune
         void ChkMoBands()
@@ -9048,39 +9186,42 @@ namespace DataDecoder
             {   // iterate the auto array for bands that are set 0=no, 1=yes
                 if (auto[i] == 1)
                 {
+                    SetTune("wait");
+                    btnTune.BackColor = Color.Pink;
                     switch (i)
                     {
-                        case 0: WriteToPort("ZZBS160;", iSleep); break;
-                        case 1: WriteToPort("ZZBS080;", iSleep); break;
-                        case 2: WriteToPort("ZZBS040;", iSleep); break;
-                        case 3: WriteToPort("ZZBS030;", iSleep); break;
-                        case 4: WriteToPort("ZZBS020;", iSleep); break;
-                        case 5: WriteToPort("ZZBS017;", iSleep); break;
-                        case 6: WriteToPort("ZZBS015;", iSleep); break;
-                        case 7: WriteToPort("ZZBS012;", iSleep); break;
-                        case 8: WriteToPort("ZZBS010;", iSleep); break;
+                        case 0: if (band != "160") { WriteToPort("ZZBS160;", iSleep); } break;
+                        case 1: if (band != "080") { WriteToPort("ZZBS080;", iSleep); } break;
+                        case 2: if (band != "040") { WriteToPort("ZZBS040;", iSleep); } break;
+                        case 3: if (band != "030") { WriteToPort("ZZBS030;", iSleep); } break;
+                        case 4: if (band != "020") { WriteToPort("ZZBS020;", iSleep); } break;
+                        case 5: if (band != "017") { WriteToPort("ZZBS017;", iSleep); } break;
+                        case 6: if (band != "015") { WriteToPort("ZZBS015;", iSleep); } break;
+                        case 7: if (band != "012") { WriteToPort("ZZBS012;", iSleep); } break;
+                        case 8: if (band != "010") { WriteToPort("ZZBS010;", iSleep); } break;
                     }
                     auto[i] = 0; // clear this band so it won't be run again
                     ctr = 0;     // start the loop counter at zero
                     for (int k = 0; k < 30; k++)
-                    { 
+                    {   // Delay for k * 100 ms.
                         Thread.Sleep(100);
                         Application.DoEvents();
                     }
-                    
+                    AtTimer.Enabled = true; //start fail safe timer
                     WriteToPort("ZZTU1;", 500); // key radio, wait for 1/2 sec
                     if (AlphaPort.IsOpen) AlphaPort.Write("AqP\0");   // get drive setting from amp
                     Thread.Sleep(200);
-                    return;                     // stop the loop & wait for 'P'
+                    return;                     // stop the loop & wait for 'P' setting
                 }
             }
             if (AlphaPort.IsOpen) AlphaPort.Write("AqS\0");
             Thread.Sleep(1000);
-            if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
-            Thread.Sleep(200);
+            //if (AlphaPort.IsOpen) AlphaPort.Write("AqJ1\0");
+            //Thread.Sleep(200);
             if (AlphaPort.IsOpen) AlphaPort.Write("AqO\0");
             Thread.Sleep(1000);
             WriteToPort("ZZFA" + sFreq + ";", iSleep);    // reset the radio freq
+            EnabAD(ADenab); // restore Enable Auto Drive check box from var
         }
           
           #endregion # Methods #
@@ -9102,7 +9243,8 @@ namespace DataDecoder
             lblAmpInt.Text = "Interval";
             lblTune.Text = "Tune"; lblLoad.Text = "Load";
             Amp = 1;
-            set.Amp = 1; set.Save();
+            set.theAmp = 1; set.Save();
+            chkAutoDrv.Checked = set.chkAutoDrv;
             txtAlphaInt.Text = "60000";
             AlphaTimer.Enabled = true;
             grpAmpBand.Visible = false;
@@ -9142,7 +9284,7 @@ namespace DataDecoder
             AlphaPort.RtsEnable = true;
             lblAmpInt.Text = "Interval";
             Amp = 2;
-            set.Amp = 2; set.Save();
+            set.theAmp = 2; set.Save();
         }
 
           #endregion Events
@@ -9154,7 +9296,17 @@ namespace DataDecoder
         }
         #endregion Methods
 
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion Alpha 9500
+
+        private void groupBox12_Enter(object sender, EventArgs e)
+        {
+
+        }
 
     }
 }
