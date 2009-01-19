@@ -500,7 +500,7 @@ RCP4 - WriteLog</Value>
     <Setting Name="pwRTS" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Amp" Type="System.Int32" Scope="User">
+    <Setting Name="theAmp" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="RptMode" Type="System.Int32" Scope="User">
@@ -538,6 +538,12 @@ RCP4 - WriteLog</Value>
     </Setting>
     <Setting Name="pwr9" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="chkAutoDrv" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="tune" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">12</Value>
     </Setting>
   </Settings>
 </SettingsFile>
