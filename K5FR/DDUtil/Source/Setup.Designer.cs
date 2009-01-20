@@ -90,6 +90,20 @@ namespace DataDecoder
             this.rb3 = new System.Windows.Forms.RadioButton();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.tabDevice = new System.Windows.Forms.TabPage();
+            this.grpBCDover = new System.Windows.Forms.GroupBox();
+            this.rbOvr12 = new System.Windows.Forms.RadioButton();
+            this.rbOvr11 = new System.Windows.Forms.RadioButton();
+            this.rbOvr10 = new System.Windows.Forms.RadioButton();
+            this.rbOvr9 = new System.Windows.Forms.RadioButton();
+            this.rbOvr8 = new System.Windows.Forms.RadioButton();
+            this.rbOvr4 = new System.Windows.Forms.RadioButton();
+            this.rbOvr7 = new System.Windows.Forms.RadioButton();
+            this.rbOvr3 = new System.Windows.Forms.RadioButton();
+            this.rbOvr6 = new System.Windows.Forms.RadioButton();
+            this.rbOvr2 = new System.Windows.Forms.RadioButton();
+            this.rbOvr5 = new System.Windows.Forms.RadioButton();
+            this.rbOvr1 = new System.Windows.Forms.RadioButton();
+            this.chkOvride = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSave0 = new System.Windows.Forms.Button();
@@ -824,20 +838,6 @@ namespace DataDecoder
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
             this.PMport = new System.IO.Ports.SerialPort(this.components);
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
-            this.grpBCDover = new System.Windows.Forms.GroupBox();
-            this.chkOvride = new System.Windows.Forms.CheckBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.rbOvr1 = new System.Windows.Forms.RadioButton();
-            this.radioButton18 = new System.Windows.Forms.RadioButton();
-            this.radioButton19 = new System.Windows.Forms.RadioButton();
-            this.radioButton20 = new System.Windows.Forms.RadioButton();
-            this.radioButton21 = new System.Windows.Forms.RadioButton();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -846,6 +846,7 @@ namespace DataDecoder
             this.groupBox5.SuspendLayout();
             this.grpLPT.SuspendLayout();
             this.tabDevice.SuspendLayout();
+            this.grpBCDover.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
             this.tabRCP.SuspendLayout();
@@ -893,7 +894,6 @@ namespace DataDecoder
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.grpBCDover.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -1452,6 +1452,226 @@ namespace DataDecoder
             this.tabDevice.Text = "Device";
             this.toolTip1.SetToolTip(this.tabDevice, "Right-Click for Options");
             this.tabDevice.UseVisualStyleBackColor = true;
+            // 
+            // grpBCDover
+            // 
+            this.grpBCDover.Controls.Add(this.rbOvr12);
+            this.grpBCDover.Controls.Add(this.rbOvr11);
+            this.grpBCDover.Controls.Add(this.rbOvr10);
+            this.grpBCDover.Controls.Add(this.rbOvr9);
+            this.grpBCDover.Controls.Add(this.rbOvr8);
+            this.grpBCDover.Controls.Add(this.rbOvr4);
+            this.grpBCDover.Controls.Add(this.rbOvr7);
+            this.grpBCDover.Controls.Add(this.rbOvr3);
+            this.grpBCDover.Controls.Add(this.rbOvr6);
+            this.grpBCDover.Controls.Add(this.rbOvr2);
+            this.grpBCDover.Controls.Add(this.rbOvr5);
+            this.grpBCDover.Controls.Add(this.rbOvr1);
+            this.grpBCDover.Controls.Add(this.chkOvride);
+            this.grpBCDover.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpBCDover.ForeColor = System.Drawing.Color.Firebrick;
+            this.grpBCDover.Location = new System.Drawing.Point(6, 106);
+            this.grpBCDover.Name = "grpBCDover";
+            this.grpBCDover.Size = new System.Drawing.Size(167, 100);
+            this.grpBCDover.TabIndex = 62;
+            this.grpBCDover.TabStop = false;
+            this.grpBCDover.Text = "Manual Control";
+            this.toolTip1.SetToolTip(this.grpBCDover, "Select Override then press one of the RB for that digit to be sent to the LPT por" +
+                    "t.");
+            // 
+            // rbOvr12
+            // 
+            this.rbOvr12.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr12.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr12.Location = new System.Drawing.Point(117, 73);
+            this.rbOvr12.Name = "rbOvr12";
+            this.rbOvr12.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr12.TabIndex = 126;
+            this.rbOvr12.Text = "12";
+            this.rbOvr12.UseVisualStyleBackColor = true;
+            this.rbOvr12.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // rbOvr11
+            // 
+            this.rbOvr11.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr11.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr11.Location = new System.Drawing.Point(80, 73);
+            this.rbOvr11.Name = "rbOvr11";
+            this.rbOvr11.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr11.TabIndex = 125;
+            this.rbOvr11.Text = "11";
+            this.rbOvr11.UseVisualStyleBackColor = true;
+            this.rbOvr11.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // rbOvr10
+            // 
+            this.rbOvr10.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr10.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr10.Location = new System.Drawing.Point(41, 73);
+            this.rbOvr10.Name = "rbOvr10";
+            this.rbOvr10.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr10.TabIndex = 124;
+            this.rbOvr10.Text = "10";
+            this.rbOvr10.UseVisualStyleBackColor = true;
+            this.rbOvr10.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // rbOvr9
+            // 
+            this.rbOvr9.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr9.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr9.Location = new System.Drawing.Point(7, 73);
+            this.rbOvr9.Name = "rbOvr9";
+            this.rbOvr9.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr9.TabIndex = 123;
+            this.rbOvr9.Text = "9";
+            this.rbOvr9.UseVisualStyleBackColor = true;
+            this.rbOvr9.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // rbOvr8
+            // 
+            this.rbOvr8.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr8.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr8.Location = new System.Drawing.Point(117, 55);
+            this.rbOvr8.Name = "rbOvr8";
+            this.rbOvr8.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr8.TabIndex = 120;
+            this.rbOvr8.Text = "8";
+            this.rbOvr8.UseVisualStyleBackColor = true;
+            this.rbOvr8.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // rbOvr4
+            // 
+            this.rbOvr4.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr4.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr4.Location = new System.Drawing.Point(117, 38);
+            this.rbOvr4.Name = "rbOvr4";
+            this.rbOvr4.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr4.TabIndex = 119;
+            this.rbOvr4.Text = "4";
+            this.rbOvr4.UseVisualStyleBackColor = true;
+            this.rbOvr4.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // rbOvr7
+            // 
+            this.rbOvr7.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr7.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr7.Location = new System.Drawing.Point(80, 55);
+            this.rbOvr7.Name = "rbOvr7";
+            this.rbOvr7.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr7.TabIndex = 118;
+            this.rbOvr7.Text = "7";
+            this.rbOvr7.UseVisualStyleBackColor = true;
+            this.rbOvr7.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // rbOvr3
+            // 
+            this.rbOvr3.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr3.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr3.Location = new System.Drawing.Point(80, 38);
+            this.rbOvr3.Name = "rbOvr3";
+            this.rbOvr3.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr3.TabIndex = 117;
+            this.rbOvr3.Text = "3";
+            this.rbOvr3.UseVisualStyleBackColor = true;
+            this.rbOvr3.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // rbOvr6
+            // 
+            this.rbOvr6.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr6.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr6.Location = new System.Drawing.Point(41, 55);
+            this.rbOvr6.Name = "rbOvr6";
+            this.rbOvr6.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr6.TabIndex = 116;
+            this.rbOvr6.Text = "6";
+            this.rbOvr6.UseVisualStyleBackColor = true;
+            this.rbOvr6.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // rbOvr2
+            // 
+            this.rbOvr2.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr2.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr2.Location = new System.Drawing.Point(41, 38);
+            this.rbOvr2.Name = "rbOvr2";
+            this.rbOvr2.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr2.TabIndex = 115;
+            this.rbOvr2.Text = "2";
+            this.rbOvr2.UseVisualStyleBackColor = true;
+            this.rbOvr2.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // rbOvr5
+            // 
+            this.rbOvr5.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr5.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr5.Location = new System.Drawing.Point(7, 55);
+            this.rbOvr5.Name = "rbOvr5";
+            this.rbOvr5.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr5.TabIndex = 114;
+            this.rbOvr5.Text = "5";
+            this.rbOvr5.UseVisualStyleBackColor = true;
+            this.rbOvr5.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // rbOvr1
+            // 
+            this.rbOvr1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
+            this.rbOvr1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbOvr1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbOvr1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbOvr1.ForeColor = System.Drawing.Color.Navy;
+            this.rbOvr1.Location = new System.Drawing.Point(7, 38);
+            this.rbOvr1.Name = "rbOvr1";
+            this.rbOvr1.Size = new System.Drawing.Size(44, 17);
+            this.rbOvr1.TabIndex = 113;
+            this.rbOvr1.Text = "1";
+            this.rbOvr1.UseVisualStyleBackColor = true;
+            this.rbOvr1.CheckedChanged += new System.EventHandler(this.grpBCDover_CheckChanged);
+            // 
+            // chkOvride
+            // 
+            this.chkOvride.AutoSize = true;
+            this.chkOvride.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkOvride.ForeColor = System.Drawing.Color.Navy;
+            this.chkOvride.Location = new System.Drawing.Point(6, 19);
+            this.chkOvride.Name = "chkOvride";
+            this.chkOvride.Size = new System.Drawing.Size(74, 17);
+            this.chkOvride.TabIndex = 63;
+            this.chkOvride.Text = "Override";
+            this.toolTip1.SetToolTip(this.chkOvride, "Check to override auto frequency setting BCD device.");
+            this.chkOvride.UseVisualStyleBackColor = true;
+            this.chkOvride.CheckedChanged += new System.EventHandler(this.chkOvride_CheckedChanged);
             // 
             // label20
             // 
@@ -10686,209 +10906,6 @@ namespace DataDecoder
             this.RepeatPort.WriteTimeout = 500;
             this.RepeatPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RepeatPort_DataReceived);
             // 
-            // grpBCDover
-            // 
-            this.grpBCDover.Controls.Add(this.radioButton18);
-            this.grpBCDover.Controls.Add(this.radioButton19);
-            this.grpBCDover.Controls.Add(this.radioButton20);
-            this.grpBCDover.Controls.Add(this.radioButton21);
-            this.grpBCDover.Controls.Add(this.radioButton3);
-            this.grpBCDover.Controls.Add(this.radioButton4);
-            this.grpBCDover.Controls.Add(this.radioButton5);
-            this.grpBCDover.Controls.Add(this.radioButton6);
-            this.grpBCDover.Controls.Add(this.radioButton7);
-            this.grpBCDover.Controls.Add(this.radioButton8);
-            this.grpBCDover.Controls.Add(this.radioButton9);
-            this.grpBCDover.Controls.Add(this.rbOvr1);
-            this.grpBCDover.Controls.Add(this.chkOvride);
-            this.grpBCDover.Location = new System.Drawing.Point(6, 106);
-            this.grpBCDover.Name = "grpBCDover";
-            this.grpBCDover.Size = new System.Drawing.Size(195, 100);
-            this.grpBCDover.TabIndex = 62;
-            this.grpBCDover.TabStop = false;
-            this.grpBCDover.Text = "Manual Control";
-            this.grpBCDover.Enter += new System.EventHandler(this.groupBox12_Enter);
-            // 
-            // chkOvride
-            // 
-            this.chkOvride.AutoSize = true;
-            this.chkOvride.Location = new System.Drawing.Point(6, 19);
-            this.chkOvride.Name = "chkOvride";
-            this.chkOvride.Size = new System.Drawing.Size(66, 17);
-            this.chkOvride.TabIndex = 63;
-            this.chkOvride.Text = "Override";
-            this.toolTip1.SetToolTip(this.chkOvride, "Check to override auto frequency setting BCD device.");
-            this.chkOvride.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.radioButton3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radioButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.radioButton3.ForeColor = System.Drawing.Color.Navy;
-            this.radioButton3.Location = new System.Drawing.Point(157, 55);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(44, 17);
-            this.radioButton3.TabIndex = 120;
-            this.radioButton3.Text = "8";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.radioButton4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radioButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.radioButton4.ForeColor = System.Drawing.Color.Navy;
-            this.radioButton4.Location = new System.Drawing.Point(157, 38);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(44, 17);
-            this.radioButton4.TabIndex = 119;
-            this.radioButton4.Text = "4";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.radioButton5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radioButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.radioButton5.ForeColor = System.Drawing.Color.Navy;
-            this.radioButton5.Location = new System.Drawing.Point(107, 55);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(44, 17);
-            this.radioButton5.TabIndex = 118;
-            this.radioButton5.Text = "7";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            // 
-            // radioButton6
-            // 
-            this.radioButton6.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.radioButton6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radioButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.radioButton6.ForeColor = System.Drawing.Color.Navy;
-            this.radioButton6.Location = new System.Drawing.Point(107, 38);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(44, 17);
-            this.radioButton6.TabIndex = 117;
-            this.radioButton6.Text = "3";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            // 
-            // radioButton7
-            // 
-            this.radioButton7.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.radioButton7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radioButton7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.radioButton7.ForeColor = System.Drawing.Color.Navy;
-            this.radioButton7.Location = new System.Drawing.Point(57, 55);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(44, 17);
-            this.radioButton7.TabIndex = 116;
-            this.radioButton7.Text = "6";
-            this.radioButton7.UseVisualStyleBackColor = true;
-            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
-            // 
-            // radioButton8
-            // 
-            this.radioButton8.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.radioButton8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radioButton8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.radioButton8.ForeColor = System.Drawing.Color.Navy;
-            this.radioButton8.Location = new System.Drawing.Point(57, 38);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(44, 17);
-            this.radioButton8.TabIndex = 115;
-            this.radioButton8.Text = "2";
-            this.radioButton8.UseVisualStyleBackColor = true;
-            // 
-            // radioButton9
-            // 
-            this.radioButton9.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.radioButton9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radioButton9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.radioButton9.ForeColor = System.Drawing.Color.Navy;
-            this.radioButton9.Location = new System.Drawing.Point(7, 55);
-            this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(44, 17);
-            this.radioButton9.TabIndex = 114;
-            this.radioButton9.Text = "5";
-            this.radioButton9.UseVisualStyleBackColor = true;
-            // 
-            // rbOvr1
-            // 
-            this.rbOvr1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.rbOvr1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.rbOvr1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbOvr1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.rbOvr1.ForeColor = System.Drawing.Color.Navy;
-            this.rbOvr1.Location = new System.Drawing.Point(7, 38);
-            this.rbOvr1.Name = "rbOvr1";
-            this.rbOvr1.Size = new System.Drawing.Size(44, 17);
-            this.rbOvr1.TabIndex = 113;
-            this.rbOvr1.Text = "1";
-            this.rbOvr1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton18
-            // 
-            this.radioButton18.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.radioButton18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radioButton18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.radioButton18.ForeColor = System.Drawing.Color.Navy;
-            this.radioButton18.Location = new System.Drawing.Point(157, 73);
-            this.radioButton18.Name = "radioButton18";
-            this.radioButton18.Size = new System.Drawing.Size(44, 17);
-            this.radioButton18.TabIndex = 126;
-            this.radioButton18.Text = "12";
-            this.radioButton18.UseVisualStyleBackColor = true;
-            // 
-            // radioButton19
-            // 
-            this.radioButton19.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.radioButton19.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radioButton19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.radioButton19.ForeColor = System.Drawing.Color.Navy;
-            this.radioButton19.Location = new System.Drawing.Point(107, 73);
-            this.radioButton19.Name = "radioButton19";
-            this.radioButton19.Size = new System.Drawing.Size(44, 17);
-            this.radioButton19.TabIndex = 125;
-            this.radioButton19.Text = "11";
-            this.radioButton19.UseVisualStyleBackColor = true;
-            // 
-            // radioButton20
-            // 
-            this.radioButton20.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.radioButton20.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radioButton20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.radioButton20.ForeColor = System.Drawing.Color.Navy;
-            this.radioButton20.Location = new System.Drawing.Point(57, 73);
-            this.radioButton20.Name = "radioButton20";
-            this.radioButton20.Size = new System.Drawing.Size(44, 17);
-            this.radioButton20.TabIndex = 124;
-            this.radioButton20.Text = "10";
-            this.radioButton20.UseVisualStyleBackColor = true;
-            // 
-            // radioButton21
-            // 
-            this.radioButton21.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-            this.radioButton21.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radioButton21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.radioButton21.ForeColor = System.Drawing.Color.Navy;
-            this.radioButton21.Location = new System.Drawing.Point(7, 73);
-            this.radioButton21.Name = "radioButton21";
-            this.radioButton21.Size = new System.Drawing.Size(44, 17);
-            this.radioButton21.TabIndex = 123;
-            this.radioButton21.Text = "9";
-            this.radioButton21.UseVisualStyleBackColor = true;
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -10936,6 +10953,8 @@ namespace DataDecoder
             this.grpLPT.PerformLayout();
             this.tabDevice.ResumeLayout(false);
             this.tabDevice.PerformLayout();
+            this.grpBCDover.ResumeLayout(false);
+            this.grpBCDover.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).EndInit();
@@ -11019,8 +11038,6 @@ namespace DataDecoder
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.grpBCDover.ResumeLayout(false);
-            this.grpBCDover.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -11807,17 +11824,17 @@ namespace DataDecoder
         private Label label148;
         private GroupBox grpBCDover;
         private CheckBox chkOvride;
-        private RadioButton radioButton18;
-        private RadioButton radioButton19;
-        private RadioButton radioButton20;
-        private RadioButton radioButton21;
-        private RadioButton radioButton3;
-        private RadioButton radioButton4;
-        private RadioButton radioButton5;
-        private RadioButton radioButton6;
-        private RadioButton radioButton7;
-        private RadioButton radioButton8;
-        private RadioButton radioButton9;
+        private RadioButton rbOvr12;
+        private RadioButton rbOvr11;
+        private RadioButton rbOvr10;
+        private RadioButton rbOvr9;
+        private RadioButton rbOvr8;
+        private RadioButton rbOvr4;
+        private RadioButton rbOvr7;
+        private RadioButton rbOvr3;
+        private RadioButton rbOvr6;
+        private RadioButton rbOvr2;
+        private RadioButton rbOvr5;
         private RadioButton rbOvr1;
 
     }
