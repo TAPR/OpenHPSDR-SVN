@@ -1,6 +1,6 @@
-// V1.0  5th April 2008
+// V2.0  20 Jan 2009 
 //
-// Copyright 2007 Phil Harman VK6APH
+// Copyright 2007, 2007, 2008, 2009 Phil Harman VK6APH
 // Modified by Kirk Weedman KD7IRS - Dec 26, 2008
 //
 //  HPSDR - High Performance Software Defined Radio
@@ -54,6 +54,8 @@
    30 Dec  2008 - Moved to Quartus V8.1
    1  Jan  2009 - Add Kirk, KD7IRS, mods plus comment and code tidy
    13 Jan  2009 - Added software serial number to serno, Atlas C19
+   19 Jan  2009 - Added ALC_in to serno data at posedge LRCLK
+   20 Jan  2009 - Changed set_level to 0.7 = 0.7 * 65536 = 45875 = 16'hB333. 
   
   
   
@@ -524,7 +526,8 @@ reg  [15:0] ix1;
 reg  [15:0] ix0;
 
 // unsigned => 0.9999 i.e. ~unity gain = (B16-1) = 2^16 - 1 = 65535 
-assign set_level = {16{1'b1}};
+//assign set_level = {16{1'b1}};  
+assign set_level = 16'hB333;
 
 assign ALC_level = {5'd0,ALC_out[15:5]}; // unsigned gain for ALC signal
 
@@ -771,15 +774,17 @@ assign source_122MHZ  = ~clock_select[2];
 
 ///////////////////////////////////////////////////////////
 //
-//    Spectrum and Serial Number Encoder 
+//    Serial Number & Power out Encoder 
 //
 ///////////////////////////////////////////////////////////
 
 // Sends current software serial # as an 8 bit value in I2S
-// format. Sends the serial number as bits 7 to 0.
+// format. Sends the serial number as bits 7 to 0 on 
+// negative edge of LRCLK. 
+// Sends ALC as 12 bits on positive edge of LRCLK
 
-reg [1:0]serno_state;
-reg [2:0]serno_data_count;
+reg [2:0]serno_state;
+reg [3:0]serno_data_count;
 
 always @ (posedge BCLK)
 begin	
@@ -794,12 +799,24 @@ case(serno_state)
 	end
 	
 2:	if (serno_data_count == 0)
-		serno_state <= 0;
+		serno_state <= 3;
 	else begin
 		serno_data_count <= serno_data_count - 1'b1;
 		serno_state <= 2;
 	end
 	
+3:	if (!LRCLK) serno_state <= 3;	// loop until LRCLK goes high
+	else begin
+		serno_data_count <= 11;
+		serno_state <= 4;
+	end 
+	
+4: if (serno_data_count == 0)
+		serno_state <= 0;
+	else begin
+		serno_data_count <= serno_data_count - 1'b1;
+		serno_state <= 4;
+	end
 
 default: serno_state <= 0;
 endcase
@@ -810,6 +827,8 @@ always @ (negedge BCLK)
 begin
 	if (serno_state == 2)
 		serno <= SERIAL[serno_data_count];	// format serial number
+	else if (serno_state == 4)
+		serno <= ALC_in[serno_data_count + 4];  // bits [15:4] are ALC 
 	else serno <= 1'bz;						// serial # bus is high Z when not in use 
 end
 

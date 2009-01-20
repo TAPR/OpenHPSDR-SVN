@@ -5,19 +5,19 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 6.066 ns
-From           : C9
-To             : Q_sync_data[14]
+Actual Time    : 6.875 ns
+From           : LRCLK
+To             : serno_data_count[1]
 From Clock     : --
-To Clock       : C8
+To Clock       : BCLK
 Failed Paths   : 0
 
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 16.138 ns
+Actual Time    : 15.226 ns
 From           : ADC:ADC_SPI|AIN5[9]
-To             : LED5
+To             : LED4
 From Clock     : C8
 To Clock       : --
 Failed Paths   : 0
@@ -35,7 +35,7 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -2.748 ns
+Actual Time    : -2.744 ns
 From           : ADCMISO
 To             : ADC:ADC_SPI|temp_AIN5[0]
 From Clock     : --
@@ -43,9 +43,9 @@ To Clock       : C8
 Failed Paths   : 0
 
 Type           : Clock Setup: '_122MHZ'
-Slack          : 0.070 ns
+Slack          : 0.106 ns
 Required Time  : 123.00 MHz ( period = 8.130 ns )
-Actual Time    : 124.07 MHz ( period = 8.060 ns )
+Actual Time    : 124.63 MHz ( period = 8.024 ns )
 From           : cicint:cic_Q|section_out9[0]
 To             : cicint:cic_Q|section_out10[61]
 From Clock     : _122MHZ
@@ -53,19 +53,19 @@ To Clock       : _122MHZ
 Failed Paths   : 0
 
 Type           : Clock Setup: 'BCLK'
-Slack          : 3.019 ns
+Slack          : 0.743 ns
 Required Time  : 123.00 MHz ( period = 8.130 ns )
-Actual Time    : Restricted to 360.10 MHz ( period = 2.777 ns )
-From           : serno_state.10
-To             : serno~en
+Actual Time    : 150.51 MHz ( period = 6.644 ns )
+From           : serno_data_count[0]
+To             : serno~reg0
 From Clock     : BCLK
 To Clock       : BCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: '_10MHZ'
-Slack          : 96.582 ns
+Slack          : 96.581 ns
 Required Time  : 10.00 MHz ( period = 100.000 ns )
-Actual Time    : 292.57 MHz ( period = 3.418 ns )
+Actual Time    : 292.48 MHz ( period = 3.419 ns )
 From           : oddClockDivider:refClockDivider|count[2]
 To             : oddClockDivider:refClockDivider|count[4]
 From Clock     : _10MHZ
@@ -73,9 +73,9 @@ To Clock       : _10MHZ
 Failed Paths   : 0
 
 Type           : Clock Setup: 'C8'
-Slack          : 305.147 ns
+Slack          : 304.449 ns
 Required Time  : 3.13 MHz ( period = 320.000 ns )
-Actual Time    : 67.33 MHz ( period = 14.853 ns )
+Actual Time    : 64.30 MHz ( period = 15.551 ns )
 From           : Q_sync_data[0]
 To             : qx0[15]
 From Clock     : C8
@@ -116,8 +116,8 @@ Type           : Clock Hold: 'BCLK'
 Slack          : 0.499 ns
 Required Time  : 123.00 MHz ( period = 8.130 ns )
 Actual Time    : N/A
-From           : serno_data_count[1]
-To             : serno_data_count[1]
+From           : serno_state.000
+To             : serno_state.000
 From Clock     : BCLK
 To Clock       : BCLK
 Failed Paths   : 0
