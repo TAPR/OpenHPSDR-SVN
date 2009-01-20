@@ -1322,6 +1322,7 @@ namespace DataDecoder
         {
             if (chkDev0.Checked == true)
             {
+                chkOvride.Checked = false;
                 set.Dev0Enab = true;
                 set.Save();
             }
@@ -5663,7 +5664,7 @@ namespace DataDecoder
                         id = title + " - " + freq.Substring(0, 9) +
                             "  " + vfo + "  " + mode;
                     //decode freq data and output to LPT port
-                    if (chkDevice.Checked) LookUp(freqLook);
+                    if (chkDevice.Checked && chkDev0.Checked) LookUp(freqLook);
                     this.SetTitle(id);
                     this.SetDigit(keyValue.ToString());
                 }//For
@@ -9296,17 +9297,38 @@ namespace DataDecoder
         }
         #endregion Methods
 
-        private void radioButton7_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         #endregion Alpha 9500
 
-        private void groupBox12_Enter(object sender, EventArgs e)
+
+        private void chkOvride_CheckedChanged(object sender, EventArgs e)
         {
+            if (chkOvride.Checked)
+            {
+                chkDev0.Checked = false;
+            }
+            else
+            {
+                chkDev0.Checked = true;
+            }
+        }
+        // one of the Manual Override radio buttons has changed
+        private void grpBCDover_CheckChanged(object sender, EventArgs e)
+        {
+                 if (rbOvr1.Checked) { OutParallelPort(LPTnum, 1); }
+            else if (rbOvr2.Checked) { OutParallelPort(LPTnum, 2); }
+            else if (rbOvr3.Checked) { OutParallelPort(LPTnum, 3); }
+            else if (rbOvr4.Checked) { OutParallelPort(LPTnum, 4); }
+            else if (rbOvr5.Checked) { OutParallelPort(LPTnum, 5); }
+            else if (rbOvr6.Checked) { OutParallelPort(LPTnum, 6); }
+            else if (rbOvr7.Checked) { OutParallelPort(LPTnum, 7); }
+            else if (rbOvr8.Checked) { OutParallelPort(LPTnum, 8); }
+            else if (rbOvr9.Checked) { OutParallelPort(LPTnum, 9); }
+            else if (rbOvr10.Checked) { OutParallelPort(LPTnum, 10); }
+            else if (rbOvr11.Checked) { OutParallelPort(LPTnum, 11); }
+            else if (rbOvr12.Checked) { OutParallelPort(LPTnum, 12); }
 
         }
+
 
     }
 }
