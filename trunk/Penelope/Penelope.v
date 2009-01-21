@@ -55,7 +55,7 @@
    1  Jan  2009 - Add Kirk, KD7IRS, mods plus comment and code tidy
    13 Jan  2009 - Added software serial number to serno, Atlas C19
    19 Jan  2009 - Added ALC_in to serno data at posedge LRCLK
-   20 Jan  2009 - Changed set_level to 0.7 = 0.7 * 65536 = 45875 = 16'hB333. 
+   20 Jan  2009 - Changed set_level to 0.8 = 0.8 * 65536 = 52428 = 16'hCCCC. 
   
   
   
@@ -526,8 +526,7 @@ reg  [15:0] ix1;
 reg  [15:0] ix0;
 
 // unsigned => 0.9999 i.e. ~unity gain = (B16-1) = 2^16 - 1 = 65535 
-//assign set_level = {16{1'b1}};  
-assign set_level = 16'hB333;
+assign set_level = 16'hCCCC;
 
 assign ALC_level = {5'd0,ALC_out[15:5]}; // unsigned gain for ALC signal
 
