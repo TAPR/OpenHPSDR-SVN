@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Tue Jan 20 21:24:11 2009
+Analysis & Synthesis Status : Successful - Wed Jan 21 20:12:08 2009
 Quartus II Version : 8.1 Build 163 10/28/2008 SJ Web Edition
 Revision Name : Penelope
 Top-level Entity Name : Penelope
 Family : Cyclone II
-Total logic elements : 2,323
-    Total combinational functions : 2,323
+Total logic elements : 2,324
+    Total combinational functions : 2,324
     Dedicated logic registers : 2,000
 Total registers : 2000
 Total pins : 62
