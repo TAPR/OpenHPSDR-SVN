@@ -1,8 +1,8 @@
 <?xml version="1.0" standalone="yes"?>
 <macroData>
   <macro>
-    <Button>M1</Button>
-    <Command>ZZPS1;</Command>
+    <Button>Test</Button>
+    <Command>DDLF;</Command>
   </macro>
   <macro>
     <Button>20 RTTY</Button>
@@ -45,24 +45,24 @@
     <Command>ZZPS0;</Command>
   </macro>
   <macro>
-    <Button>M12</Button>
+    <Button>Auto</Button>
+    <Command>DDAM;</Command>
+  </macro>
+  <macro>
+    <Button>Manual</Button>
     <Command>DDMM;</Command>
   </macro>
   <macro>
-    <Button>M13</Button>
-    <Command>DDBL;</Command>
+    <Button>Bypass</Button>
+    <Command>DDBM;</Command>
   </macro>
   <macro>
-    <Button>M14</Button>
+    <Button>Coax</Button>
     <Command>DDCX;</Command>
   </macro>
   <macro>
-    <Button>M15</Button>
-    <Command />
-  </macro>
-  <macro>
-    <Button>M16</Button>
-    <Command />
+    <Button>Balanced</Button>
+    <Command>DDBL;</Command>
   </macro>
   <macro>
     <Button>AM</Button>
