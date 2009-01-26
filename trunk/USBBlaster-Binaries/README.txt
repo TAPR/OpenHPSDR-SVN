@@ -34,8 +34,8 @@ Here are the steps requried to progam the EPCS16 on the Mercury board.
    there should be an entry marked  Altera USB-Blaster
 
 
-3. Fit a jumper to the header pins marked LAST JTAG JP7, bottom left of the board just above
-   the Atlas connector. 
+3. On your Mercury board, fit a jumper to the header pins marked 
+   LAST JTAG JP7 at bottom left of the board just above  the Atlas connector. 
 
 4. Power off your Atlas board. Plug just your Mercury and Ozy board into the Atlas bus.
    The Mercury board MUST be closest to the power connector and the Ozy board in the NEXT slot.
