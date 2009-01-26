@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="ErrorLog.cs" />
     <Compile Include="FloatingWindow.cs" />
+    <Compile Include="Maidenhead.cs" />
     <Compile Include="MathParser.cs" />
     <Compile Include="Mini.cs">
       <SubType>Form</SubType>
