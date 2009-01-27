@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="51">
+  <logicalFolder name="root" displayName="root" projectFiles="true">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>command_thread.h</itemPath>
+      <itemPath>global.h</itemPath>
+      <itemPath>jack_buffers.h</itemPath>
+      <itemPath>jack_ringbuffer.h</itemPath>
+      <itemPath>ozy.h</itemPath>
+      <itemPath>ozy_buffers.h</itemPath>
+      <itemPath>ozy_client.h</itemPath>
+      <itemPath>ozy_ringbuffer.h</itemPath>
+      <itemPath>ozy_to_jack.h</itemPath>
+      <itemPath>ozyio.h</itemPath>
+      <itemPath>spectrum_buffers.h</itemPath>
+      <itemPath>spectrum_thread.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>command_thread.c</itemPath>
+      <itemPath>jack_buffers.c</itemPath>
+      <itemPath>jack_client.c</itemPath>
+      <itemPath>jack_ringbuffer.c</itemPath>
+      <itemPath>jack_to_ozy.c</itemPath>
+      <itemPath>main.c</itemPath>
+      <itemPath>ozy_buffers.c</itemPath>
+      <itemPath>ozy_client.c</itemPath>
+      <itemPath>ozy_ringbuffer.c</itemPath>
+      <itemPath>ozy_to_jack.c</itemPath>
+      <itemPath>ozyio.c</itemPath>
+      <itemPath>spectrum_buffers.c</itemPath>
+      <itemPath>spectrum_thread.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <compilerSet>GNU|GNU</compilerSet>
+        <platform>2</platform>
+      </toolsSet>
+      <compileType>
+        <cCompilerTool>
+          <developmentMode>5</developmentMode>
+        </cCompilerTool>
+        <ccCompilerTool>
+          <developmentMode>5</developmentMode>
+        </ccCompilerTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>usb</linkerLibLibItem>
+            <linkerLibLibItem>jack</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="command_thread.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="command_thread.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="global.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="jack_buffers.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="jack_buffers.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="jack_client.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="jack_ringbuffer.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="jack_ringbuffer.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="jack_to_ozy.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="main.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozy.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="ozy_buffers.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozy_buffers.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="ozy_client.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozy_client.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="ozy_ringbuffer.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozy_ringbuffer.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="ozy_to_jack.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozy_to_jack.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="ozyio.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozyio.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="spectrum_buffers.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="spectrum_buffers.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="spectrum_thread.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="spectrum_thread.h">
+        <itemTool>3</itemTool>
+      </item>
+    </conf>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <compilerSet>GNU|GNU</compilerSet>
+        <platform>2</platform>
+      </toolsSet>
+      <compileType>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>jack</linkerLibLibItem>
+            <linkerLibLibItem>usb</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="command_thread.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="command_thread.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="global.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="jack_buffers.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="jack_buffers.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="jack_client.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="jack_ringbuffer.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="jack_ringbuffer.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="jack_to_ozy.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="main.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozy.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="ozy_buffers.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozy_buffers.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="ozy_client.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozy_client.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="ozy_ringbuffer.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozy_ringbuffer.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="ozy_to_jack.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozy_to_jack.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="ozyio.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="ozyio.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="spectrum_buffers.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="spectrum_buffers.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="spectrum_thread.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="spectrum_thread.h">
+        <itemTool>3</itemTool>
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
