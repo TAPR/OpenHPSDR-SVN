@@ -20,7 +20,7 @@
 #include "ozy_to_jack.h"
 
 #define USE_EP6
-#define USE_EP4
+//#define USE_EP4
 
 /*
  * 
