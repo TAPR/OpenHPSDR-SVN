@@ -16,7 +16,7 @@
 #include "ozy_client.h"
 #include "spectrum_buffers.h"
 
-//#define USE_SYNC
+#define USE_SYNC
 
 /*
  * OZY sends 512 byte frames
