@@ -52,7 +52,9 @@ Here are the steps requried to progam the EPCS16 on the Mercury board.
 
 8. Remove Power to the Atlas bus, restart your PC and load PowerSDR.
 
-9. Test Mercury with PowerSDR. Recalibrate Frequency and Leve. 
+9. Test Mercury with PowerSDR. Recalibrate Frequency and Level. 
+
+NOTE: The jumper inserted at step 3 can be left in place for now. 
 
 
 This is how the process works.

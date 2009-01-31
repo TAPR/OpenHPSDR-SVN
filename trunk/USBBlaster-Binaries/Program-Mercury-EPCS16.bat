@@ -19,6 +19,7 @@ ECHO B. Program using Mercury_v2.1
 ECHO C. Program using Mercury_v2.2
 ECHO D. Program using Mercury_v2.3
 ECHO E. Program using Mercury_v2.4
+ECHO F. Program using Mercury_v2.5
 ECHO Q. Quit
 ECHO.      
 SET Choice=
@@ -32,6 +33,7 @@ IF /I '%Choice%'=='B' GOTO ItemB
 IF /I '%Choice%'=='C' GOTO ItemC
 IF /I '%Choice%'=='D' GOTO ItemD
 IF /I '%Choice%'=='E' GOTO ItemE
+IF /I '%Choice%'=='F' GOTO ItemF
 IF /I '%Choice%'=='Q' GOTO End
 ECHO "%Choice%" is not valid. Please try again.
 ECHO.
@@ -50,6 +52,9 @@ c:\altera\81\qprogrammer\bin\quartus_pgm -c USB-Blaster mercury_v2.3.cdf
 GOTO CONTINUE
 :ItemE
 c:\altera\81\qprogrammer\bin\quartus_pgm -c USB-Blaster mercury_v2.4.cdf
+GOTO CONTINUE
+:ItemF
+c:\altera\81\qprogrammer\bin\quartus_pgm -c USB-Blaster mercury_v2.5.cdf
 GOTO CONTINUE
 :CONTINUE
 PAUSE
